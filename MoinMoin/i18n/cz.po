@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Direction: ltr\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "Záložní obsah této stránky již není podporován a nebude zahrnut ve "
@@ -135,26 +135,9 @@ msgstr "[Šablona %s nenalezena]"
 msgid "[You may not read %s]"
 msgstr "[Nemůžete číst %s]"
 
-msgid "Skip to preview"
-msgstr "Přeskočit k náhledu"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[aktuální velikost stránky '''%(size)d''' bytů]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Popište %s zde..."
-
-msgid "Optional comment about this change"
-msgstr "Nepovinný komentář k této změně"
-
-msgid "<No addition>"
-msgstr "<Žádná kategorie>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Zařadit tuto stránku do kategorie %(category)s"
 
 msgid "Check Spelling"
 msgstr "Zkontrolovat pravopis"
@@ -179,6 +162,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Náhled"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Komentář"
+
+msgid "<No addition>"
+msgstr "<Žádná kategorie>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "Minimální změna"
@@ -292,6 +289,10 @@ msgid "You cannot save empty pages."
 msgstr ""
 "Prázdné stránky nelze ukládat\n"
 "!"
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "Nemáte oprávnění editovat tuto stránku!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -408,6 +409,73 @@ msgstr "Náhled"
 msgid "Up"
 msgstr "Nahoru"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Otevřít editor dvojklikem"
+
+msgid "Remember last page visited"
+msgstr "Pamatovat si naposledy navštívenou stránku"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Zobrazit otazníček u neexistujících odkazů"
+
+msgid "Show page trail"
+msgstr "Zobrazit stopu stránek"
+
+msgid "Show icon toolbar"
+msgstr "Zobrazit lištu s ikonami"
+
+msgid "Show top/bottom links in headings"
+msgstr "Zobrazit u Nadpisů odkazy nahoru/dolu"
+
+msgid "Show fancy diffs"
+msgstr "Zobrazit rozdíly pestře"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Vkládat mezery do zobrazovaných Wiki Jmen"
+
+msgid "Remember login information"
+msgstr "Zapamatuj si mne"
+
+msgid "Subscribe to trivial changes"
+msgstr "Odebírat při minimálních změnách"
+
+msgid "Disable this account forever"
+msgstr "Zablokovat navždy tento účet"
+
+msgid "Name"
+msgstr "Jméno"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Použijte JmenoPrijmeni)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Password repeat"
+msgstr "Opakovat heslo"
+
+msgid "(Only when changing passwords)"
+msgstr "(Jen při změně hesla)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "User CSS URL"
+msgstr "Uživatelské CSS URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Při nevyužití uživatelského CSS zanechte prázdné)"
+
+msgid "Editor size"
+msgstr "Velikost editoru"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -445,42 +513,6 @@ msgstr "nález"
 
 msgid "matches"
 msgstr "nálezů"
-
-msgid "Open editor on double click"
-msgstr "Otevřít editor dvojklikem"
-
-msgid "Remember last page visited"
-msgstr "Pamatovat si naposledy navštívenou stránku"
-
-msgid "Show fancy links"
-msgstr "Zobrazit pestré odkazy"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Zobrazit otazníček u neexistujících odkazů"
-
-msgid "Show page trail"
-msgstr "Zobrazit stopu stránek"
-
-msgid "Show icon toolbar"
-msgstr "Zobrazit lištu s ikonami"
-
-msgid "Show top/bottom links in headings"
-msgstr "Zobrazit u Nadpisů odkazy nahoru/dolu"
-
-msgid "Show fancy diffs"
-msgstr "Zobrazit rozdíly pestře"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Vkládat mezery do zobrazovaných Wiki Jmen"
-
-msgid "Remember login information"
-msgstr "Zapamatuj si mne"
-
-msgid "Subscribe to trivial changes"
-msgstr "Odebírat při minimálních změnách"
-
-msgid "Disable this account forever"
-msgstr "Zablokovat navždy tento účet"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Koláček byl smazán. Nyní jste odhlášeni."
@@ -520,6 +552,10 @@ msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Nebyl nalezen žádný účet, který by odpovídal zadané emailové adrese '%(email)"
 "s'!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -574,47 +610,27 @@ msgstr "Předvoleno"
 msgid "<Browser setting>"
 msgstr "<Nastavení prohlížeče>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Uložit"
 
 msgid "Logout"
 msgstr "Odhlásit"
 
-msgid "Create Profile"
-msgstr "Vytvořit profil"
-
-msgid "Mail me my account data"
-msgstr "Zašli mi má data k účtu"
-
-msgid "Name"
-msgstr "Jméno"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Použijte JmenoPrijmeni)"
-
-msgid "Password"
-msgstr "Heslo"
-
-msgid "Password repeat"
-msgstr "Opakovat heslo"
-
-msgid "(Only when changing passwords)"
-msgstr "(Jen při změně hesla)"
-
-msgid "Email"
-msgstr "Email"
-
 msgid "Preferred theme"
 msgstr "Oblíbené téma"
 
-msgid "User CSS URL"
-msgstr "Uživatelské CSS URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "NastaveniUzivatele"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Při nevyužití uživatelského CSS zanechte prázdné)"
-
-msgid "Editor size"
-msgstr "Velikost editoru"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Časová zóna"
@@ -642,6 +658,12 @@ msgstr "Tento seznam nefunguje, dokud nezadáte platnou emailovou adresu!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Odebírání wiki stránek (jeden platný výtisk na řádku)"
+
+msgid "Create Profile"
+msgstr "Vytvořit profil"
+
+msgid "Mail me my account data"
+msgstr "Zašli mi má data k účtu"
 
 msgid "No older revisions available!"
 msgstr "Starší verze nejsou k dispozici!"
@@ -760,6 +782,21 @@ msgstr "Počty zásahů a editací stránky"
 msgid "You are not allowed to revert this page!"
 msgstr "Nemáte právo vracet změny na této stránce!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
+"pravem hornim rohu a vytvořte si ho."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "Váš odběr této stránky byl zrušen."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Váš odběr této stránky byl zrušen."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nemůžete odebírat stránky, ke kterým nemáte právo čtení."
 
@@ -769,13 +806,6 @@ msgid ""
 msgstr ""
 "Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, který "
 "může emaily povolit nebo odstranit ikonu Odebírat."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
-"pravem hornim rohu a vytvořte si ho."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1147,6 +1177,18 @@ msgid ""
 msgstr "Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. "
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Upload nové přílohy \"%(filename)s\" hochladen"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Vytvořit nový obrázek \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Editace obrázku %(filename)s"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Neplatný argument include: \"%s\"!"
 
@@ -1240,18 +1282,6 @@ msgstr "**Překročen maximální počet povolených includes**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Nemohu najít odkazovanou stránku: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Vytvořit nový obrázek \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Upload nové přílohy \"%(filename)s\" hochladen"
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Editace obrázku %(filename)s"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1376,6 +1406,14 @@ msgstr "Text"
 msgid "Titles"
 msgstr "Stránky"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Pohotové odkazy"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Pohotové odkazy"
+
 msgid "More Actions:"
 msgstr "Další akce:"
 
@@ -1405,6 +1443,13 @@ msgstr "Proveď!"
 
 msgid "Show Parent"
 msgstr "Předek"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "Editace"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Neměnná stránka"
@@ -1531,6 +1576,21 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Přeskočit k náhledu"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[aktuální velikost stránky '''%(size)d''' bytů]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Nepovinný komentář k této změně"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Zařadit tuto stránku do kategorie %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Zobrazit pestré odkazy"
 
 #~ msgid "Save as"
 #~ msgstr "Uložit jako"

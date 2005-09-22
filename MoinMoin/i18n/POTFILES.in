@@ -70,10 +70,6 @@ stats/useragents.py
 
 support/BasicAuthTransport.py
 support/cgitb.py
-support/optik/errors.py
-support/optik/help.py
-support/optik/option.py
-support/optik/option_parser.py
 support/thfcgi.py
 
 theme/__init__.py

@@ -1040,7 +1040,7 @@ class Page:
                 # (which should be a short reason why the page is deprecated)
                 msg = '%s<strong>%s</strong><br>%s' % (
                     self.formatter.smiley('/!\\'),
-                    _('The backupped content of this page is deprecated and will not be included in search results!'),
+                    _('The backed up content of this page is deprecated and will not be included in search results!'),
                     msg)
 
                 revisions = self.getRevList()

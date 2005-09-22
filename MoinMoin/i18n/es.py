@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''¡El resplado del contenido de la página ha caducado y no se incluirá en los resultados de la búsqueda!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Versión %(rev)d de fecha %(date)s''',
@@ -70,18 +70,8 @@ Mira las diferencias de %(difflink)s para ver qué ha cambiado.''',
 '''[Template (Plantilla) %s no encontrado]''',
 '''[You may not read %s]''':
 '''[No posees permisos para leer %s]''',
-'''Skip to preview''':
-'''Saltar a Vista Previa''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[tamaño actual de la página es \'\'\'%(size)d\'\'\' bytes]''',
 '''Describe %s here.''':
 '''Escribe una descripción de %s aquí.''',
-'''Optional comment about this change''':
-'''Comentario opcional acerca de este cambio''',
-'''<No addition>''':
-'''<No añadir>''',
-'''Make this page belong to category %(category)s''':
-'''Incorporar esta página a la categoría %(category)s''',
 '''Check Spelling''':
 '''Corregir ortografía''',
 '''Save Changes''':
@@ -94,6 +84,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus cambios.''',
 '''Preview''':
 '''Vista Previa''',
+'''<No addition>''':
+'''<No añadir>''',
 '''Trivial change''':
 '''Cambio trivial''',
 '''Remove trailing whitespace from each line''':
@@ -227,6 +219,44 @@ Para abandonar el editor, presiona el botón Cancelar.''',
 '''Ver''',
 '''Up''':
 '''Arriba''',
+'''Open editor on double click''':
+'''Abrir el editor con doble click''',
+'''Remember last page visited''':
+'''Recordar la última página visitada''',
+'''Show question mark for non-existing pagelinks''':
+'''Mostrar signo de interrogación en enlaces a páginas inexistentes''',
+'''Show page trail''':
+'''Mostrar últimas páginas visitadas''',
+'''Show icon toolbar''':
+'''Mostrar íconos de la barra de herramientas''',
+'''Show top/bottom links in headings''':
+'''Mostrar enlaces a arriba/abajo en las cabeceras''',
+'''Show fancy diffs''':
+'''Mostrar differencias adornadas''',
+'''Add spaces to displayed wiki names''':
+'''Añadir espacios entre los nombres de wiki mostrados''',
+'''Remember login information''':
+'''Recordar tu información de ingreso''',
+'''Subscribe to trivial changes''':
+'''Actualizarme de todos los cambios de contenido''',
+'''Disable this account forever''':
+'''Desactivar esta cuenta para siempre''',
+'''Name''':
+'''Nombre''',
+'''Password''':
+'''Contraseña''',
+'''Password repeat''':
+'''Repetir Contraseña''',
+'''(Only when changing passwords)''':
+'''(Sólo cuando cambies tu contraseña)''',
+'''Email''':
+'''e-Mail''',
+'''User CSS URL''':
+'''URL de CSS del usuario''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Déjalo vacío para deactivar el CSS del usuario)''',
+'''Editor size''':
+'''Tamaño del Editor''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -249,30 +279,6 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
-'''Open editor on double click''':
-'''Abrir el editor con doble click''',
-'''Remember last page visited''':
-'''Recordar la última página visitada''',
-'''Show fancy links''':
-'''Mostrar enlaces adornados''',
-'''Show question mark for non-existing pagelinks''':
-'''Mostrar signo de interrogación en enlaces a páginas inexistentes''',
-'''Show page trail''':
-'''Mostrar últimas páginas visitadas''',
-'''Show icon toolbar''':
-'''Mostrar íconos de la barra de herramientas''',
-'''Show top/bottom links in headings''':
-'''Mostrar enlaces a arriba/abajo en las cabeceras''',
-'''Show fancy diffs''':
-'''Mostrar differencias adornadas''',
-'''Add spaces to displayed wiki names''':
-'''Añadir espacios entre los nombres de wiki mostrados''',
-'''Remember login information''':
-'''Recordar tu información de ingreso''',
-'''Subscribe to trivial changes''':
-'''Actualizarme de todos los cambios de contenido''',
-'''Disable this account forever''':
-'''Desactivar esta cuenta para siempre''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie borrada. Has salido del sistema.''',
 '''This wiki is not enabled for mail processing.
@@ -317,30 +323,8 @@ Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
 '''Guardar''',
 '''Logout''':
 '''Salir''',
-'''Create Profile''':
-'''Crear Perfil de Usuario''',
-'''Mail me my account data''':
-'''Envíame los datos de mi cuenta ''',
-'''Name''':
-'''Nombre''',
-'''(Use FirstnameLastname)''':
-'''(Usa NombreApellido)''',
-'''Password''':
-'''Contraseña''',
-'''Password repeat''':
-'''Repetir Contraseña''',
-'''(Only when changing passwords)''':
-'''(Sólo cuando cambies tu contraseña)''',
-'''Email''':
-'''e-Mail''',
 '''Preferred theme''':
 '''Tema preferido''',
-'''User CSS URL''':
-'''URL de CSS del usuario''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Déjalo vacío para deactivar el CSS del usuario)''',
-'''Editor size''':
-'''Tamaño del Editor''',
 '''Time zone''':
 '''Zona horaria''',
 '''Your time is''':
@@ -359,6 +343,10 @@ Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
 '''¡Esta lista no funciona, salvo que introduzcas una dirección válida de e-mail!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Páginas wiki suscritas (una expr. reg. por línea)''',
+'''Create Profile''':
+'''Crear Perfil de Usuario''',
+'''Mail me my account data''':
+'''Envíame los datos de mi cuenta ''',
 '''No older revisions available!''':
 '''¡No hay revisiones anteriores disponibles!''',
 '''Diff for "%s"''':
@@ -431,12 +419,12 @@ Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
 '''Hits y ediciones de la página''',
 '''You are not allowed to revert this page!''':
 '''¡No tienes permisos para volver a una versión anterior de esta página!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Aún no has creado un perfil de usuario. Selecciona UserPreferences en la esquina superior derecha para crear un perfil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No tienes permisos para  suscribirte a una página que no puedes ver.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Este wiki no tiene activado el procesamiento de e-mails. Contacta el propietario del wiki. Es el quien puede habilitar e-mails o eliminar el ícono de "Suscripción"''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Aún no has creado un perfil de usuario. Selecciona UserPreferences en la esquina superior derecha para crear un perfil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''No has introducido una dirección e-mail en tu perfil. Selecciona tu nombre  en la esquina superior derecha (UserPreferences) e introduce una dirección válida de e-mail.''',
 '''Your subscribtion to this page has been removed.''':
@@ -638,6 +626,12 @@ Intenta con un nombre distinto.''',
 '''Lista completa de enlaces para "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''No es posible crear una página sin nombre. Por favor, otorga un nombre a la página.''',
+'''Upload new attachment "%(filename)s"''':
+'''Subir nuevo adjunto "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Crear nuevo dibujo "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Editar dibujo %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Argumentos include no válidos "%s"!''',
 '''Nothing found for "%s"!''':
@@ -694,12 +688,6 @@ Intenta con un nombre distinto.''',
 '''**Excedido el número máximo de \'includes\' permitidos''',
 '''**Could not find the referenced page: %s**''':
 '''**No se encontró la página referenciada: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Crear nuevo dibujo "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Subir nuevo adjunto "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Editar dibujo %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Esperaba "%(wanted)s" después de "%(key)s", he encontrado "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Záložní obsah této stránky již není podporován a nebude zahrnut ve výsledcích hledání!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Verze %(rev)d ze dne %(date)s''',
@@ -70,18 +70,8 @@ Můžete se také podívat na rozdíly %(difflink)s.''',
 '''[Šablona %s nenalezena]''',
 '''[You may not read %s]''':
 '''[Nemůžete číst %s]''',
-'''Skip to preview''':
-'''Přeskočit k náhledu''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[aktuální velikost stránky \'\'\'%(size)d\'\'\' bytů]''',
 '''Describe %s here.''':
 '''Popište %s zde...''',
-'''Optional comment about this change''':
-'''Nepovinný komentář k této změně''',
-'''<No addition>''':
-'''<Žádná kategorie>''',
-'''Make this page belong to category %(category)s''':
-'''Zařadit tuto stránku do kategorie %(category)s''',
 '''Check Spelling''':
 '''Zkontrolovat pravopis''',
 '''Save Changes''':
@@ -94,6 +84,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše změny se neuloží.''',
 '''Preview''':
 '''Náhled''',
+'''<No addition>''':
+'''<Žádná kategorie>''',
 '''Trivial change''':
 '''Minimální změna''',
 '''Remove trailing whitespace from each line''':
@@ -223,6 +215,44 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Náhled''',
 '''Up''':
 '''Nahoru''',
+'''Open editor on double click''':
+'''Otevřít editor dvojklikem''',
+'''Remember last page visited''':
+'''Pamatovat si naposledy navštívenou stránku''',
+'''Show question mark for non-existing pagelinks''':
+'''Zobrazit otazníček u neexistujících odkazů''',
+'''Show page trail''':
+'''Zobrazit stopu stránek''',
+'''Show icon toolbar''':
+'''Zobrazit lištu s ikonami''',
+'''Show top/bottom links in headings''':
+'''Zobrazit u Nadpisů odkazy nahoru/dolu''',
+'''Show fancy diffs''':
+'''Zobrazit rozdíly pestře''',
+'''Add spaces to displayed wiki names''':
+'''Vkládat mezery do zobrazovaných Wiki Jmen''',
+'''Remember login information''':
+'''Zapamatuj si mne''',
+'''Subscribe to trivial changes''':
+'''Odebírat při minimálních změnách''',
+'''Disable this account forever''':
+'''Zablokovat navždy tento účet''',
+'''Name''':
+'''Jméno''',
+'''Password''':
+'''Heslo''',
+'''Password repeat''':
+'''Opakovat heslo''',
+'''(Only when changing passwords)''':
+'''(Jen při změně hesla)''',
+'''Email''':
+'''Email''',
+'''User CSS URL''':
+'''Uživatelské CSS URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Při nevyužití uživatelského CSS zanechte prázdné)''',
+'''Editor size''':
+'''Velikost editoru''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -244,30 +274,6 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''nález''',
 '''matches''':
 '''nálezů''',
-'''Open editor on double click''':
-'''Otevřít editor dvojklikem''',
-'''Remember last page visited''':
-'''Pamatovat si naposledy navštívenou stránku''',
-'''Show fancy links''':
-'''Zobrazit pestré odkazy''',
-'''Show question mark for non-existing pagelinks''':
-'''Zobrazit otazníček u neexistujících odkazů''',
-'''Show page trail''':
-'''Zobrazit stopu stránek''',
-'''Show icon toolbar''':
-'''Zobrazit lištu s ikonami''',
-'''Show top/bottom links in headings''':
-'''Zobrazit u Nadpisů odkazy nahoru/dolu''',
-'''Show fancy diffs''':
-'''Zobrazit rozdíly pestře''',
-'''Add spaces to displayed wiki names''':
-'''Vkládat mezery do zobrazovaných Wiki Jmen''',
-'''Remember login information''':
-'''Zapamatuj si mne''',
-'''Subscribe to trivial changes''':
-'''Odebírat při minimálních změnách''',
-'''Disable this account forever''':
-'''Zablokovat navždy tento účet''',
 '''Cookie deleted. You are now logged out.''':
 '''Koláček byl smazán. Nyní jste odhlášeni.''',
 '''This wiki is not enabled for mail processing.
@@ -312,30 +318,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Uložit''',
 '''Logout''':
 '''Odhlásit''',
-'''Create Profile''':
-'''Vytvořit profil''',
-'''Mail me my account data''':
-'''Zašli mi má data k účtu''',
-'''Name''':
-'''Jméno''',
-'''(Use FirstnameLastname)''':
-'''(Použijte JmenoPrijmeni)''',
-'''Password''':
-'''Heslo''',
-'''Password repeat''':
-'''Opakovat heslo''',
-'''(Only when changing passwords)''':
-'''(Jen při změně hesla)''',
-'''Email''':
-'''Email''',
 '''Preferred theme''':
 '''Oblíbené téma''',
-'''User CSS URL''':
-'''Uživatelské CSS URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Při nevyužití uživatelského CSS zanechte prázdné)''',
-'''Editor size''':
-'''Velikost editoru''',
 '''Time zone''':
 '''Časová zóna''',
 '''Your time is''':
@@ -354,6 +338,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Tento seznam nefunguje, dokud nezadáte platnou emailovou adresu!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Odebírání wiki stránek (jeden platný výtisk na řádku)''',
+'''Create Profile''':
+'''Vytvořit profil''',
+'''Mail me my account data''':
+'''Zašli mi má data k účtu''',
 '''No older revisions available!''':
 '''Starší verze nejsou k dispozici!''',
 '''Diff for "%s"''':
@@ -426,12 +414,12 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Počty zásahů a editací stránky''',
 '''You are not allowed to revert this page!''':
 '''Nemáte právo vracet změny na této stránce!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v pravem hornim rohu a vytvořte si ho.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nemůžete odebírat stránky, ke kterým nemáte právo čtení.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, který může emaily povolit nebo odstranit ikonu Odebírat.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v pravem hornim rohu a vytvořte si ho.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Nezadal jste svou emailovou adresu ve Všem profilu. Zadejte své jméno v (NastaveniUzivatele) v pravém horním rohu a vložte platnou emilovou adresu.''',
 '''Your subscribtion to this page has been removed.''':
@@ -630,6 +618,12 @@ Zkuste jiné jméno.''',
 '''Všechny stránky, které se odkazují na: "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
+'''Upload new attachment "%(filename)s"''':
+'''Upload nové přílohy "%(filename)s" hochladen''',
+'''Create new drawing "%(filename)s"''':
+'''Vytvořit nový obrázek "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Editace obrázku %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Neplatný argument include: "%s"!''',
 '''Nothing found for "%s"!''':
@@ -686,12 +680,6 @@ Zkuste jiné jméno.''',
 '''**Překročen maximální počet povolených includes**''',
 '''**Could not find the referenced page: %s**''':
 '''**Nemohu najít odkazovanou stránku: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Vytvořit nový obrázek "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Upload nové přílohy "%(filename)s" hochladen''',
-'''Edit drawing %(filename)s''':
-'''Editace obrázku %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Očekáváno "%(wanted)s" po "%(key)s", získáno "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

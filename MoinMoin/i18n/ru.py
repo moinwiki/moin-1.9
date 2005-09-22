@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Сохраненная версия страницы устарела и не войдет в результаты поиска!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Версия %(rev)d от %(date)s''',
@@ -32,7 +32,7 @@ macro call.-~
 '''You are not allowed to view this page.''':
 '''Вам не разрешено просматривать эту страницу.''',
 '''DeleteCache''':
-'''СтеретьКэш''',
+'''СтеретьКеш''',
 '''(cached %s)''':
 '''(запомнен %s)''',
 '''You are not allowed to edit this page.''':
@@ -71,18 +71,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[Заготовка %s не найдена]''',
 '''[You may not read %s]''':
 '''[Вам нельзя читать %s]''',
-'''Skip to preview''':
-'''Пролистать до макета''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[размер страницы \'\'\'%(size)d\'\'\' байт]''',
 '''Describe %s here.''':
 '''Опишите %s.''',
-'''Optional comment about this change''':
-'''Можете прокомментировать эти изменения''',
-'''<No addition>''':
-'''<Не добавлять>''',
-'''Make this page belong to category %(category)s''':
-'''Добавить эту страницу в категорию %(category)s''',
 '''Check Spelling''':
 '''Проверить правописание''',
 '''Save Changes''':
@@ -95,6 +85,14 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Если вы с этим не согласны, нажмите \'\'\'%(cancel_button_text)s\'\'\' для отмены своих изменений.''',
 '''Preview''':
 '''Показать макет''',
+'''GUI Mode''':
+'''Графический редактор''',
+'''Comment:''':
+'''Комментарий:''',
+'''<No addition>''':
+'''<Не добавлять>''',
+'''Add to: %(category)s''':
+'''Добавить в: %(category)s''',
 '''Trivial change''':
 '''Малое изменение''',
 '''Remove trailing whitespace from each line''':
@@ -161,6 +159,8 @@ The following page has been changed by %(editor)s:
 '''Вам нельзя исправлять эту страницу!''',
 '''You cannot save empty pages.''':
 '''Нельзя записать пустую страницу.''',
+'''You already saved this page!''':
+'''Вы уже запомнили эту страницу!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -226,6 +226,50 @@ To leave the editor, press the Cancel button.''':
 '''Показ''',
 '''Up''':
 '''Наверх''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Показывать мой почтовый адрес (вместо домашней страницы) в информации об авторе''',
+'''Open editor on double click''':
+'''Открывать редактор по двойному клику''',
+'''Remember last page visited''':
+'''Запомнить последнюю открытую страницу''',
+'''Show question mark for non-existing pagelinks''':
+'''Показывать ? для незаполненных страниц''',
+'''Show page trail''':
+'''Показывать список просмотренных страниц''',
+'''Show icon toolbar''':
+'''Показывать строку иконок''',
+'''Show top/bottom links in headings''':
+'''Показывать ссылки вверх/вниз в заголовках''',
+'''Show fancy diffs''':
+'''Показывать красивые различия''',
+'''Add spaces to displayed wiki names''':
+'''Разделять вик-имена пробелами''',
+'''Remember login information''':
+'''Запомнить меня''',
+'''Subscribe to trivial changes''':
+'''Подписаться на малые исправления''',
+'''Disable this account forever''':
+'''Забыть меня навсегда''',
+'''Name''':
+'''Полное имя''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(используйте Имя\'\'\'\'\'\'Фамилия)''',
+'''Alias-Name''':
+'''Короткое имя''',
+'''Password''':
+'''Пароль''',
+'''Password repeat''':
+'''Пароль снова''',
+'''(Only when changing passwords)''':
+'''(Только при изменении пароля)''',
+'''Email''':
+'''Почтовый адрес''',
+'''User CSS URL''':
+'''Использовать CSS из URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Оставьте пустым для использования системной CSS)''',
+'''Editor size''':
+'''Размер окна редактирования''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -247,30 +291,6 @@ space between words. Group page name is not allowed.''':
 '''совпадение''',
 '''matches''':
 '''совпадений''',
-'''Open editor on double click''':
-'''Открывать редактор по двойному клику''',
-'''Remember last page visited''':
-'''Запомнить последнюю открытую страницу''',
-'''Show fancy links''':
-'''Показывать красивые ссылки''',
-'''Show question mark for non-existing pagelinks''':
-'''Показывать ? для незаполненных страниц''',
-'''Show page trail''':
-'''Показывать список просмотренных страниц''',
-'''Show icon toolbar''':
-'''Показывать строку иконок''',
-'''Show top/bottom links in headings''':
-'''Показывать ссылки вверх/вниз в заголовках''',
-'''Show fancy diffs''':
-'''Показывать красивые различия''',
-'''Add spaces to displayed wiki names''':
-'''Разделять вик-имена пробелами''',
-'''Remember login information''':
-'''Запомнить меня''',
-'''Subscribe to trivial changes''':
-'''Подписаться на малые исправления''',
-'''Disable this account forever''':
-'''Забыть меня навсегда''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie стерты. Вы вышли.''',
 '''This wiki is not enabled for mail processing.
@@ -337,34 +357,20 @@ URL для входа: %s/?action=userform&uid=%s
 '''По умолчанию''',
 '''<Browser setting>''':
 '''<Настройки броузера>''',
+'''the one preferred''':
+'''предпочтительно''',
+'''free choice''':
+'''по выбору''',
 '''Save''':
 '''Записать''',
 '''Logout''':
 '''Выйти''',
-'''Create Profile''':
-'''Создать настройки''',
-'''Mail me my account data''':
-'''Отправить мне настройки почтой''',
-'''Name''':
-'''Имя''',
-'''(Use FirstnameLastname)''':
-'''(используйте ИмяФамилия)''',
-'''Password''':
-'''Пароль''',
-'''Password repeat''':
-'''Пароль снова''',
-'''(Only when changing passwords)''':
-'''(Только при изменении пароля)''',
-'''Email''':
-'''Почтовый адрес''',
 '''Preferred theme''':
 '''Предпочитаемый стиль''',
-'''User CSS URL''':
-'''Использовать CSS из URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Оставьте пустым для использования системной CSS)''',
-'''Editor size''':
-'''Размер окна редактирования''',
+'''Editor Preference''':
+'''Настройки редактора''',
+'''Editor shown on UI''':
+'''Показывать графический редактор''',
 '''Time zone''':
 '''Часовой пояс''',
 '''Your time is''':
@@ -383,6 +389,10 @@ URL для входа: %s/?action=userform&uid=%s
 '''Этот список работает только при правильном почтовом адресе!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Список подписки на страницы вики (один образец на строчку)''',
+'''Create Profile''':
+'''Создать настройки''',
+'''Mail me my account data''':
+'''Отправить мне настройки почтой''',
 '''No older revisions available!''':
 '''Нет более старых версий!''',
 '''Diff for "%s"''':
@@ -455,12 +465,14 @@ URL для входа: %s/?action=userform&uid=%s
 '''Запросы и исправления страниц''',
 '''You are not allowed to revert this page!''':
 '''Вы не можете восстанавливать из архива эту страницу!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем углу для их создания.''',
+'''Your quicklink to this page has been removed.''':
+'''Ваша ссылка на эту страницу удалена.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Вы не можете подписаться на страницу которую вам нельзя читать.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку или убрать кнопку "Подписка".''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем углу для их создания.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''В ВашихНастройках не указан почтовый адрес. Нажмите на свое имя в правом верхнем углу и введите правильный почтовый адрес.''',
 '''Your subscribtion to this page has been removed.''':
@@ -671,6 +683,12 @@ Try a different name.''':
 '''Полный список ссылок для "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Не могу создать страницу без имени. Укажите имя страницы.''',
+'''Upload new attachment "%(filename)s"''':
+'''Приложить "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Нарисовать "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Изменить рисунок %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Неправильные аргументы для include "%s"!''',
 '''Nothing found for "%s"!''':
@@ -727,12 +745,6 @@ Try a different name.''':
 '''**Превышено максимальное число вставок include**''',
 '''**Could not find the referenced page: %s**''':
 '''**Не могу найти страницу по ссылке: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Нарисовать "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Приложить "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Изменить рисунок %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Нужно "%(wanted)s" после "%(key)s", а не "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -807,6 +819,10 @@ red=edit''':
 '''По тексту''',
 '''Titles''':
 '''По заголовкам''',
+'''Remove from Quicklinks''':
+'''Убрать из закладок''',
+'''Add to Quicklinks''':
+'''Добавить в закладки''',
 '''More Actions:''':
 '''Другие действия:''',
 '''Show Raw Text''':
@@ -827,6 +843,10 @@ red=edit''':
 '''Выполняй!''',
 '''Show Parent''':
 '''Показать обложку''',
+'''Edit (Text)''':
+'''Исправить (Текст)''',
+'''Edit (GUI)''':
+'''Исправить (Графически)''',
 '''Immutable Page''':
 '''Неизменяемая страница''',
 '''Show Changes''':

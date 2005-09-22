@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Tämän sivun varmuuskopioitu sisältö on vanhentunut eikä sitä sisällytetä hakutuloksiin!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Versio %(rev)d päivätty %(date)s''',
@@ -70,18 +70,8 @@ Katso muutoksia %(difflink)s nähdäksesi mitä on muutettu.''',
 '''[Templaattia %s ei löytynyt]''',
 '''[You may not read %s]''':
 '''[Et saa lukea sivua %s]''',
-'''Skip to preview''':
-'''Vieritä esikatseluversioon''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[sivun tämänhetkinen koko \'\'\'%(size)d\'\'\' tavua]''',
 '''Describe %s here.''':
 '''Kuvaile %s tässä.''',
-'''Optional comment about this change''':
-'''Vapaaehtoinen kuvaus tästä muutoksesta''',
-'''<No addition>''':
-'''<ei lisäystä>''',
-'''Make this page belong to category %(category)s''':
-'''Merkitse tämä sivu kuulumaan kategoriaan %(category)s''',
 '''Check Spelling''':
 '''Oikolue''',
 '''Save Changes''':
@@ -94,6 +84,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muutoksesi.''',
 '''Preview''':
 '''Esikatsele''',
+'''<No addition>''':
+'''<ei lisäystä>''',
 '''Trivial change''':
 '''Vähäinen muutos''',
 '''Remove trailing whitespace from each line''':
@@ -228,6 +220,44 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''Näytä''',
 '''Up''':
 '''Ylös''',
+'''Open editor on double click''':
+'''Siirry muokkaukseen kaksoisnapsautuksella''',
+'''Remember last page visited''':
+'''Muista viimeisin sivu''',
+'''Show question mark for non-existing pagelinks''':
+'''Näytä kysymysmerkki puuttuvien sivujen linkeissä''',
+'''Show page trail''':
+'''Näytä sivupolku''',
+'''Show icon toolbar''':
+'''Näytä kuvakepalkki''',
+'''Show top/bottom links in headings''':
+'''Näytä Alkuun- ja Loppuun-linkit otsikoissa''',
+'''Show fancy diffs''':
+'''Näytä erot hienosti''',
+'''Add spaces to displayed wiki names''':
+'''Lisää välilyönnit wikinimiin näytettäessä''',
+'''Remember login information''':
+'''Muista kirjautumistiedot''',
+'''Subscribe to trivial changes''':
+'''Tilaa vähäisetkin muutokset''',
+'''Disable this account forever''':
+'''Sulje tämä käyttäjätunnus pysyvästi''',
+'''Name''':
+'''Nimi''',
+'''Password''':
+'''Salasana''',
+'''Password repeat''':
+'''Salasana uudestaan''',
+'''(Only when changing passwords)''':
+'''(varmistukseksi salasanaa valittaessa)''',
+'''Email''':
+'''Sähköpostiosoite''',
+'''User CSS URL''':
+'''Käyttäjän CSS:n URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(jätä tyhjäksi poistaaksesi käytöstä)''',
+'''Editor size''':
+'''Muokkauskentässä rivejä''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -250,30 +280,6 @@ sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''osuma''',
 '''matches''':
 '''osumaa''',
-'''Open editor on double click''':
-'''Siirry muokkaukseen kaksoisnapsautuksella''',
-'''Remember last page visited''':
-'''Muista viimeisin sivu''',
-'''Show fancy links''':
-'''Näytä linkit hienosti''',
-'''Show question mark for non-existing pagelinks''':
-'''Näytä kysymysmerkki puuttuvien sivujen linkeissä''',
-'''Show page trail''':
-'''Näytä sivupolku''',
-'''Show icon toolbar''':
-'''Näytä kuvakepalkki''',
-'''Show top/bottom links in headings''':
-'''Näytä Alkuun- ja Loppuun-linkit otsikoissa''',
-'''Show fancy diffs''':
-'''Näytä erot hienosti''',
-'''Add spaces to displayed wiki names''':
-'''Lisää välilyönnit wikinimiin näytettäessä''',
-'''Remember login information''':
-'''Muista kirjautumistiedot''',
-'''Subscribe to trivial changes''':
-'''Tilaa vähäisetkin muutokset''',
-'''Disable this account forever''':
-'''Sulje tämä käyttäjätunnus pysyvästi''',
 '''Cookie deleted. You are now logged out.''':
 '''Eväste poistettu. Olet kirjautunut ulos.''',
 '''This wiki is not enabled for mail processing.
@@ -318,30 +324,8 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Tallenna''',
 '''Logout''':
 '''Kirjaudu ulos ''',
-'''Create Profile''':
-'''Luo profiili''',
-'''Mail me my account data''':
-'''Sähköpostita minulle käyttäjätietoni''',
-'''Name''':
-'''Nimi''',
-'''(Use FirstnameLastname)''':
-'''(muodossa EtunimiSukunimi)''',
-'''Password''':
-'''Salasana''',
-'''Password repeat''':
-'''Salasana uudestaan''',
-'''(Only when changing passwords)''':
-'''(varmistukseksi salasanaa valittaessa)''',
-'''Email''':
-'''Sähköpostiosoite''',
 '''Preferred theme''':
 '''Suosikkiulkoasu''',
-'''User CSS URL''':
-'''Käyttäjän CSS:n URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(jätä tyhjäksi poistaaksesi käytöstä)''',
-'''Editor size''':
-'''Muokkauskentässä rivejä''',
 '''Time zone''':
 '''Aikavyöhyke''',
 '''Your time is''':
@@ -360,6 +344,10 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Tämä lista ei toimi, ellet ole antanut kelpoa sähköpostiosoitetta!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Tilatut wikisivut (yksi regex per rivi)''',
+'''Create Profile''':
+'''Luo profiili''',
+'''Mail me my account data''':
+'''Sähköpostita minulle käyttäjätietoni''',
 '''No older revisions available!''':
 '''Ei vanhempia versioita saatavilla!''',
 '''Diff for "%s"''':
@@ -432,12 +420,12 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sivun katselut ja muokkaukset''',
 '''You are not allowed to revert this page!''':
 '''Sinulla ei ole oikeutta palauttaa tätä sivua!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta yläkulmasta luodaksesi tiedot.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sinulla ei ole oikeutta tilata sivua jota et voi lukea.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta yläkulmasta luodaksesi tiedot.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Käyttäjätiedoissasi ei ole sähköpostiosoitetta. Valitse nimesi (KäyttäjäAsetukset) oikeasta yläkulmasta ja syötä kelvollinen sähköpostiosoite.''',
 '''Your subscribtion to this page has been removed.''':
@@ -639,6 +627,12 @@ Kokeile eri nimeä.''',
 '''Täysi linkkilista haulle "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi.''',
+'''Upload new attachment "%(filename)s"''':
+'''Lähetä uusi liitetiedosto "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Luo uusi piirros "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Muokkaa piirrosta %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Kelvottomat sisällytysargumentit "%s"!''',
 '''Nothing found for "%s"!''':
@@ -695,12 +689,6 @@ Kokeile eri nimeä.''',
 '''**Sisällytysten maksimimäärä ylitetty**''',
 '''**Could not find the referenced page: %s**''':
 '''**Viitattua sivua ei löydy: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Luo uusi piirros "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Lähetä uusi liitetiedosto "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Muokkaa piirrosta %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Odotettiin "%(wanted)s" "%(key)s":n jälkeen, saatiin "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

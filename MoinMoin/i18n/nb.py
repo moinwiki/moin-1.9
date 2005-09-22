@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': False,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Det tidligere innholdet av denne siden er foreldet og vil ikke bli tatt med i søkeresultater!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Versjon %(rev)d per %(date)s''',
@@ -66,18 +66,8 @@ Se på endringene pr. %(difflink)s for å se hva som er blitt forandret.''',
 '''[Mal %s ikke funnet]''',
 '''[You may not read %s]''':
 '''[Du har ikke tillatelse til å lese %s]''',
-'''Skip to preview''':
-'''Skift til forhåndsvisning''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[nåværende sidestørrelse \'\'\'%(size)d\'\'\' byte]''',
 '''Describe %s here.''':
 '''Beskriv %s her.''',
-'''Optional comment about this change''':
-'''Kommentar til denne redigeringen (valgfri)''',
-'''<No addition>''':
-'''<Ingen tilføyelser>''',
-'''Make this page belong to category %(category)s''':
-'''La denne siden tilhøre kategorien %(category)s''',
 '''Check Spelling''':
 '''Stavekontroll''',
 '''Save Changes''':
@@ -90,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Hvis du ikke ønsker dette, trykk på \'\'\'%(cancel_button_text)s\'\'\' for å tilbakestille dine endringer.''',
 '''Preview''':
 '''Forhåndsvisning''',
+'''<No addition>''':
+'''<Ingen tilføyelser>''',
 '''Trivial change''':
 '''Mindre oppdatering''',
 '''Remove trailing whitespace from each line''':
@@ -221,6 +213,44 @@ Trykk på Avbryt hvis du ikke vil redigere.''',
 '''Vis''',
 '''Up''':
 '''Opp''',
+'''Open editor on double click''':
+'''Dobbeltklikk åpner redigeringsvindu''',
+'''Remember last page visited''':
+'''Husk sist besøkte side''',
+'''Show question mark for non-existing pagelinks''':
+'''Vis spørsmålstegn ved lenker til ikke-eksisterende sider''',
+'''Show page trail''':
+'''Vis sist besøkte sider''',
+'''Show icon toolbar''':
+'''Vis ikon-panel''',
+'''Show top/bottom links in headings''':
+'''Vis topp-/bunnlenker i overskrifter''',
+'''Show fancy diffs''':
+'''Vis endringer detaljert''',
+'''Add spaces to displayed wiki names''':
+'''Legg til mellomrom ved visning av wiki-navn''',
+'''Remember login information''':
+'''Husk påloggingsinformasjon''',
+'''Subscribe to trivial changes''':
+'''Abonner på mindre endringer''',
+'''Disable this account forever''':
+'''Slett denne brukerprofilen permanent''',
+'''Name''':
+'''Navn''',
+'''Password''':
+'''Passord''',
+'''Password repeat''':
+'''Gjenta passord''',
+'''(Only when changing passwords)''':
+'''(Bare ved endring av passord)''',
+'''Email''':
+'''E-postadresse''',
+'''User CSS URL''':
+'''URL til bruker-CSS''',
+'''(Leave it empty for disabling user CSS)''':
+'''(La det stå tomt for å slå av bruker-CSS)''',
+'''Editor size''':
+'''Størrelse på redigeringsvindu''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -243,30 +273,6 @@ mellom ordene. Gruppenavn er ikke tillatt.''',
 '''resultat''',
 '''matches''':
 '''resultater''',
-'''Open editor on double click''':
-'''Dobbeltklikk åpner redigeringsvindu''',
-'''Remember last page visited''':
-'''Husk sist besøkte side''',
-'''Show fancy links''':
-'''Vis smarte lenker''',
-'''Show question mark for non-existing pagelinks''':
-'''Vis spørsmålstegn ved lenker til ikke-eksisterende sider''',
-'''Show page trail''':
-'''Vis sist besøkte sider''',
-'''Show icon toolbar''':
-'''Vis ikon-panel''',
-'''Show top/bottom links in headings''':
-'''Vis topp-/bunnlenker i overskrifter''',
-'''Show fancy diffs''':
-'''Vis endringer detaljert''',
-'''Add spaces to displayed wiki names''':
-'''Legg til mellomrom ved visning av wiki-navn''',
-'''Remember login information''':
-'''Husk påloggingsinformasjon''',
-'''Subscribe to trivial changes''':
-'''Abonner på mindre endringer''',
-'''Disable this account forever''':
-'''Slett denne brukerprofilen permanent''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie slettet. Du er nå logget ut.''',
 '''This wiki is not enabled for mail processing.
@@ -312,30 +318,8 @@ e-post eller fjerne Abonner-knappen.''',
 '''Lagre''',
 '''Logout''':
 '''Logg ut''',
-'''Create Profile''':
-'''Opprett brukerprofil''',
-'''Mail me my account data''':
-'''Send meg e-post med min påloggingsinformasjon''',
-'''Name''':
-'''Navn''',
-'''(Use FirstnameLastname)''':
-'''(Bruk FornavnEtternavn)''',
-'''Password''':
-'''Passord''',
-'''Password repeat''':
-'''Gjenta passord''',
-'''(Only when changing passwords)''':
-'''(Bare ved endring av passord)''',
-'''Email''':
-'''E-postadresse''',
 '''Preferred theme''':
 '''Ønsket utseende''',
-'''User CSS URL''':
-'''URL til bruker-CSS''',
-'''(Leave it empty for disabling user CSS)''':
-'''(La det stå tomt for å slå av bruker-CSS)''',
-'''Editor size''':
-'''Størrelse på redigeringsvindu''',
 '''Time zone''':
 '''Tidssone''',
 '''Your time is''':
@@ -354,6 +338,10 @@ e-post eller fjerne Abonner-knappen.''',
 '''Denne listen fungerer bare dersom du har angitt korrekt e-postadresse!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Abonnerte wiki-sider (et regulært uttrykk (regex) pr. linje)''',
+'''Create Profile''':
+'''Opprett brukerprofil''',
+'''Mail me my account data''':
+'''Send meg e-post med min påloggingsinformasjon''',
 '''No older revisions available!''':
 '''Ingen eldre utgaver tilgjengelig!''',
 '''Diff for "%s"''':
@@ -426,14 +414,14 @@ e-post eller fjerne Abonner-knappen.''',
 '''Sidebesøk og -redigeringer''',
 '''You are not allowed to revert this page!''':
 '''Du har ikke tillatelse til å tilbakestille denne siden!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Du har ikke opprettet en brukerprofil ennå. Velg BrukerProfil øverst til høyre for å opprette en brukerprofil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har ikke tillatelse til å abonnere på en side du ikke kan lese!''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Denne wikien har ikke aktivert e-posthåndtering.
 Kontakt eieren av wikien, som enten kan aktivere
 e-post eller fjerne "Abonner"-knappen.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Du har ikke opprettet en brukerprofil ennå. Velg BrukerProfil øverst til høyre for å opprette en brukerprofil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Du har ikke oppgitt en e-postadresse i din brukerprofil. Velg ditt navn (BrukerProfil) øverst til høyre og angi en gyldig e-postadresse.''',
 '''Your subscribtion to this page has been removed.''':
@@ -636,6 +624,12 @@ Prøv igjen med et annet navn.''',
 '''Fullstendig liste over lenker for "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke opprette en ny side uten navn. Oppgi navn på siden.''',
+'''Upload new attachment "%(filename)s"''':
+'''Last opp nytt vedlegg "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Opprett ny tegning "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Endre tegningen "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''Feil include-argumenter "%s"!''',
 '''Nothing found for "%s"!''':
@@ -688,12 +682,6 @@ Prøv igjen med et annet navn.''',
 '''Last ned XML-eksporten av denne wikien''',
 '''No wanted pages in this wiki.''':
 '''Ingen ønskede sider i denne wikien.''',
-'''Create new drawing "%(filename)s"''':
-'''Opprett ny tegning "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Last opp nytt vedlegg "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Endre tegningen "%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Forventet "%(wanted)s" etter "%(key)s", fikk "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

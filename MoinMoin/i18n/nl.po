@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "De reservekopie van de inhoud van deze pagina is achterhaald, en wordt niet "
@@ -138,26 +138,9 @@ msgstr "[Sjabloon %s niet gevonden]"
 msgid "[You may not read %s]"
 msgstr "[Je mag niet lezen %s]"
 
-msgid "Skip to preview"
-msgstr "Direct naar proeflezing"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[huidige paginagrootte '''%(size)d''' bytes]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Omschrijf %s hier."
-
-msgid "Optional comment about this change"
-msgstr "Eventueel commentaar over deze wijziging"
-
-msgid "<No addition>"
-msgstr "<Geen toevoeging>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Plaats deze pagina onder categorie %(category)s"
 
 msgid "Check Spelling"
 msgstr "Spellingscontrole"
@@ -182,6 +165,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Proeflezing"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Commentaar"
+
+msgid "<No addition>"
+msgstr "<Geen toevoeging>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "Triviale wijziging"
@@ -291,6 +288,10 @@ msgstr "U hebt geen toestemming voor het bewerken van deze pagina!"
 
 msgid "You cannot save empty pages."
 msgstr "U kunt een lege pagina niet opslaan."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "U hebt geen toestemming voor het bewerken van deze pagina!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -414,6 +415,73 @@ msgstr "Bekijken"
 msgid "Up"
 msgstr "Omhoog"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Editor openen bij dubbelklik"
+
+msgid "Remember last page visited"
+msgstr "De laatstbezochte pagina onthouden"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Vraagteken tonen voor verwijzingen naar niet-bestaande pagina's"
+
+msgid "Show page trail"
+msgstr "Paginaspoor tonen"
+
+msgid "Show icon toolbar"
+msgstr "Pictogrammenwerkbalk tonen"
+
+msgid "Show top/bottom links in headings"
+msgstr "Verwijzingen naar begin/einde in koppen tonen"
+
+msgid "Show fancy diffs"
+msgstr "Mooie verschillenoverzichten tonen"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Spaties toevoegen aan getoonde wikinamen"
+
+msgid "Remember login information"
+msgstr "Aanmeldinformatie onthouden"
+
+msgid "Subscribe to trivial changes"
+msgstr "Abonneren op triviale wijzigingen"
+
+msgid "Disable this account forever"
+msgstr "Dit account permanent uitschakelen."
+
+msgid "Name"
+msgstr "Naam"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Gebruik VoornaamAchternaam)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Password repeat"
+msgstr "Wachtwoord herhalen"
+
+msgid "(Only when changing passwords)"
+msgstr "(Alleen bij veranderen van wachtwoord)"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "User CSS URL"
+msgstr "URL van CSS van gebruiker"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Leeglaten om geen CSS van gebruiker toe te passen)"
+
+msgid "Editor size"
+msgstr "Grootte van de editor"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -453,42 +521,6 @@ msgstr " overeenkomst"
 msgid "matches"
 msgstr " overeenkomsten"
 
-msgid "Open editor on double click"
-msgstr "Editor openen bij dubbelklik"
-
-msgid "Remember last page visited"
-msgstr "De laatstbezochte pagina onthouden"
-
-msgid "Show fancy links"
-msgstr "Mooie verwijzingen tonen"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Vraagteken tonen voor verwijzingen naar niet-bestaande pagina's"
-
-msgid "Show page trail"
-msgstr "Paginaspoor tonen"
-
-msgid "Show icon toolbar"
-msgstr "Pictogrammenwerkbalk tonen"
-
-msgid "Show top/bottom links in headings"
-msgstr "Verwijzingen naar begin/einde in koppen tonen"
-
-msgid "Show fancy diffs"
-msgstr "Mooie verschillenoverzichten tonen"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Spaties toevoegen aan getoonde wikinamen"
-
-msgid "Remember login information"
-msgstr "Aanmeldinformatie onthouden"
-
-msgid "Subscribe to trivial changes"
-msgstr "Abonneren op triviale wijzigingen"
-
-msgid "Disable this account forever"
-msgstr "Dit account permanent uitschakelen."
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Cookie verwijderd. U bent nu uitgelogd."
 
@@ -527,6 +559,10 @@ msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Geen account gevonden dat overeenkomt met het opgegeven e-mailadres '%(email)"
 "s'!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -581,47 +617,27 @@ msgstr "Standaard"
 msgid "<Browser setting>"
 msgstr "<Browserinstelling>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Opslaan"
 
 msgid "Logout"
 msgstr "Uitloggen"
 
-msgid "Create Profile"
-msgstr "Profiel aanmaken"
-
-msgid "Mail me my account data"
-msgstr "Stuur me mijn accountgegevens per e-mail"
-
-msgid "Name"
-msgstr "Naam"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Gebruik VoornaamAchternaam)"
-
-msgid "Password"
-msgstr "Wachtwoord"
-
-msgid "Password repeat"
-msgstr "Wachtwoord herhalen"
-
-msgid "(Only when changing passwords)"
-msgstr "(Alleen bij veranderen van wachtwoord)"
-
-msgid "Email"
-msgstr "E-mail"
-
 msgid "Preferred theme"
 msgstr "Verkozen opmaak"
 
-msgid "User CSS URL"
-msgstr "URL van CSS van gebruiker"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "GebruikersVoorkeuren"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Leeglaten om geen CSS van gebruiker toe te passen)"
-
-msgid "Editor size"
-msgstr "Grootte van de editor"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Tijdzone"
@@ -649,6 +665,12 @@ msgstr "Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Geabonneerde wikipagina's (één reguliere expressie per regel)"
+
+msgid "Create Profile"
+msgstr "Profiel aanmaken"
+
+msgid "Mail me my account data"
+msgstr "Stuur me mijn accountgegevens per e-mail"
 
 msgid "No older revisions available!"
 msgstr "Geen oudere versies aanwezig!"
@@ -767,6 +789,21 @@ msgstr "Aantal raadplegingen en bewerkingen"
 msgid "You are not allowed to revert this page!"
 msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in "
+"de hoek rechtsboven voor het aanmaken van een profiel."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 "U hebt geen toestemming zich te abonneren op een pagina die u niet kunt "
@@ -779,13 +816,6 @@ msgstr ""
 "Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op "
 "met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail "
 "opstarten, of het pictogram \"Abonneren\" verwijderen."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in "
-"de hoek rechtsboven voor het aanmaken van een profiel."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1168,6 +1198,18 @@ msgstr ""
 "Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op."
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Nieuwe tekening maken \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Tekening bewerken \"%(filename)s\""
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
 
@@ -1261,18 +1303,6 @@ msgstr "**Maximum aantal toegestane includes overschreden**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Nieuwe tekening maken \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Tekening bewerken \"%(filename)s\""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1397,6 +1427,14 @@ msgstr "Tekst"
 msgid "Titles"
 msgstr "Titels"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Snelkoppelingen"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Snelkoppelingen"
+
 msgid "More Actions:"
 msgstr "Meer acties:"
 
@@ -1426,6 +1464,13 @@ msgstr "Uitvoeren"
 
 msgid "Show Parent"
 msgstr "Bovenliggende tonen"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "TekstBewerken"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Vastliggende pagina"
@@ -1552,6 +1597,21 @@ msgstr "PaginaHernoemen"
 
 msgid "SpellCheck"
 msgstr "Spellingscontrole"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Direct naar proeflezing"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[huidige paginagrootte '''%(size)d''' bytes]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Eventueel commentaar over deze wijziging"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Plaats deze pagina onder categorie %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Mooie verwijzingen tonen"
 
 #~ msgid "Save as"
 #~ msgstr "Opslaan als"

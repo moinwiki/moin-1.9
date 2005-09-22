@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "Rezervne kopije ove stranice su zastarele i neće biti uključene u rezultate "
@@ -137,26 +137,9 @@ msgstr "[Šablon %s nije pronađen]"
 msgid "[You may not read %s]"
 msgstr "[Vi ne možete da čitate %s]"
 
-msgid "Skip to preview"
-msgstr "Preskočite radi uvida"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[trenutna veličina stranice je '''%(size)d'' bajtova]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Opišite %s ovde."
-
-msgid "Optional comment about this change"
-msgstr "Doadtni komentar o izmeni ove stranice."
-
-msgid "<No addition>"
-msgstr "<Nema dodataka>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Smestiti ovu stranicu u kategoriju %(category)s"
 
 msgid "Check Spelling"
 msgstr "Provera pravopisa"
@@ -181,6 +164,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Predgled"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Napomena"
+
+msgid "<No addition>"
+msgstr "<Nema dodataka>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 #, fuzzy
 msgid "Trivial change"
@@ -276,6 +273,10 @@ msgstr "Vama nije dozvoljeno da obrađujete ovu stranicu!"
 
 msgid "You cannot save empty pages."
 msgstr "Prazne stranice se ne mogu snimiti."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "Vama nije dozvoljeno da obrađujete ovu stranicu!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -394,6 +395,73 @@ msgstr "Videti"
 msgid "Up"
 msgstr "Gore"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Otvoriti editor sa duplim klikom"
+
+msgid "Remember last page visited"
+msgstr "Zapamtiti poslednje posećene stranice"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Pokazivati znak pitanja za nepostojeće linkove"
+
+msgid "Show page trail"
+msgstr "Pokazivati tragove stranica"
+
+msgid "Show icon toolbar"
+msgstr "Pokazivati lajsnu sa ikonicama"
+
+msgid "Show top/bottom links in headings"
+msgstr "Pokazivati vrh/dno linkove u poglavljima"
+
+msgid "Show fancy diffs"
+msgstr "Pokazivati ulepšane razlike"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Dodati blankove u prikazanim viki imenima"
+
+msgid "Remember login information"
+msgstr "Zapamtiti lozinku zauvek"
+
+msgid "Subscribe to trivial changes"
+msgstr "Pretpisati se na SVE izmene"
+
+msgid "Disable this account forever"
+msgstr "Deaktivirati ovaj nalog zauvek"
+
+msgid "Name"
+msgstr "Ime"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Koristite ImePrezime)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Password repeat"
+msgstr "ponovi lozinku"
+
+msgid "(Only when changing passwords)"
+msgstr "(Samo kad menjate lozinku)"
+
+msgid "Email"
+msgstr "Mejl adresa"
+
+msgid "User CSS URL"
+msgstr "CSS URL korisnika"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Ostavite prazno ako nećete CSS)"
+
+msgid "Editor size"
+msgstr "Veličina editora"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -428,42 +496,6 @@ msgstr "pronađen"
 
 msgid "matches"
 msgstr "pronađenih"
-
-msgid "Open editor on double click"
-msgstr "Otvoriti editor sa duplim klikom"
-
-msgid "Remember last page visited"
-msgstr "Zapamtiti poslednje posećene stranice"
-
-msgid "Show fancy links"
-msgstr "Pokazivati ulepšane linkove"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Pokazivati znak pitanja za nepostojeće linkove"
-
-msgid "Show page trail"
-msgstr "Pokazivati tragove stranica"
-
-msgid "Show icon toolbar"
-msgstr "Pokazivati lajsnu sa ikonicama"
-
-msgid "Show top/bottom links in headings"
-msgstr "Pokazivati vrh/dno linkove u poglavljima"
-
-msgid "Show fancy diffs"
-msgstr "Pokazivati ulepšane razlike"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Dodati blankove u prikazanim viki imenima"
-
-msgid "Remember login information"
-msgstr "Zapamtiti lozinku zauvek"
-
-msgid "Subscribe to trivial changes"
-msgstr "Pretpisati se na SVE izmene"
-
-msgid "Disable this account forever"
-msgstr "Deaktivirati ovaj nalog zauvek"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Kolačić izbrisan. Vi ste sada odjavljeni iz sistema"
@@ -503,6 +535,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Nalog koji odgovara datoj mejl adresi , '%(email)s' , ne postoji!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -556,47 +592,27 @@ msgstr "Standard"
 msgid "<Browser setting>"
 msgstr "<postavke Brauzera>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Snimiti"
 
 msgid "Logout"
 msgstr "Izlogovati se"
 
-msgid "Create Profile"
-msgstr "stvoriti profil"
-
-msgid "Mail me my account data"
-msgstr "poslati mi moje podatke putem mejla"
-
-msgid "Name"
-msgstr "Ime"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Koristite ImePrezime)"
-
-msgid "Password"
-msgstr "Lozinka"
-
-msgid "Password repeat"
-msgstr "ponovi lozinku"
-
-msgid "(Only when changing passwords)"
-msgstr "(Samo kad menjate lozinku)"
-
-msgid "Email"
-msgstr "Mejl adresa"
-
 msgid "Preferred theme"
 msgstr "Omiljena tema"
 
-msgid "User CSS URL"
-msgstr "CSS URL korisnika"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "KorisničkePostavke"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Ostavite prazno ako nećete CSS)"
-
-msgid "Editor size"
-msgstr "Veličina editora"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Vremenska zona"
@@ -624,6 +640,12 @@ msgstr "Ova lista ne funkcioniše ako niste ukucali pravilnu mejl adresu!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Pretpisane viki stranice (jedan regularni izraz u redu)"
+
+msgid "Create Profile"
+msgstr "stvoriti profil"
+
+msgid "Mail me my account data"
+msgstr "poslati mi moje podatke putem mejla"
 
 msgid "No older revisions available!"
 msgstr "Prethodne revizije ne postoje!"
@@ -742,6 +764,21 @@ msgstr "Broj poziva i izmena stranica"
 msgid "You are not allowed to revert this page!"
 msgstr "Vama nije dozvoljeno da povratite ovu stranicu!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Još nemate korisnički profil. Izaberite MojePostavke u gornjem desnom uglu "
+"da kreirate profil."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "Niko se nije pretpisao na ovu stranicu, mejl nije poslat."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Niko se nije pretpisao na ovu stranicu, mejl nije poslat."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Ne možete se pretpisati na stranicu koju ne možete čitati."
 
@@ -752,13 +789,6 @@ msgstr ""
 "Ovaj viki nije aktiviran za obradu mejlova. Kontaktirajte vlasnika ovog "
 "vikija, koji ili može da uključi mejl opcije, ili da skloni \"Pretpisati\" "
 "icon."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Još nemate korisnički profil. Izaberite MojePostavke u gornjem desnom uglu "
-"da kreirate profil."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1134,6 +1164,18 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Dodati novi prilog \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Stvoriti novi crtež \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Obraditi crtež %(filename)s"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Nevažeći include-argumenti: \"%s\"!"
 
@@ -1227,18 +1269,6 @@ msgstr ""
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr ""
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Stvoriti novi crtež \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Dodati novi prilog \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Obraditi crtež %(filename)s"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1369,6 +1399,14 @@ msgid "Titles"
 msgstr "IndeksNaslova"
 
 #, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Linkovi"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Linkovi"
+
+#, fuzzy
 msgid "More Actions:"
 msgstr "Akcije"
 
@@ -1406,6 +1444,13 @@ msgstr ""
 #, fuzzy
 msgid "Show Parent"
 msgstr "PokažiTekst"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "IzmeniTekst"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 #, fuzzy
 msgid "Immutable Page"
@@ -1533,6 +1578,21 @@ msgstr "PreimenitiStranicu"
 
 msgid "SpellCheck"
 msgstr "ProveraPravopisa"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Preskočite radi uvida"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[trenutna veličina stranice je '''%(size)d'' bajtova]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Doadtni komentar o izmeni ove stranice."
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Smestiti ovu stranicu u kategoriju %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Pokazivati ulepšane linkove"
 
 #~ msgid "Save as"
 #~ msgstr "Snimi kao"

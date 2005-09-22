@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "이 글의 백업된 본문은 사용되지 않으며 검색 결과에 포함되지 않습니다!"
 
@@ -132,26 +132,9 @@ msgstr "[글틀 %s를 찾을 수 없음]"
 msgid "[You may not read %s]"
 msgstr "[%s는 읽을 수 없음]"
 
-msgid "Skip to preview"
-msgstr "미리보기로 건너띔"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[현재 글 크기 '''%(size)d''' 바이트]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "%s에 대해 써주세요."
-
-msgid "Optional comment about this change"
-msgstr "이번 변경 사항에 대한 코멘트"
-
-msgid "<No addition>"
-msgstr "<추가 않음>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "%(category)s로 분류"
 
 msgid "Check Spelling"
 msgstr "철자 검사"
@@ -176,6 +159,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "미리보기"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "코멘트"
+
+msgid "<No addition>"
+msgstr "<추가 않음>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "사소한 변경"
@@ -284,6 +281,10 @@ msgstr "이 글을 고칠 권한이 없습니다!"
 
 msgid "You cannot save empty pages."
 msgstr "빈 글은 저장할 수 없습니다."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "이 글을 고칠 권한이 없습니다!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -400,6 +401,73 @@ msgstr "보기"
 msgid "Up"
 msgstr "위로"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "더블 클릭해서 글 고치기로 들어감"
+
+msgid "Remember last page visited"
+msgstr "마지막 방문을 기억해둠"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "존재하지 않는 글 링크 옆에 물음표 표시"
+
+msgid "Show page trail"
+msgstr "글보기 발자국 표시"
+
+msgid "Show icon toolbar"
+msgstr "아이콘 툴바 표시"
+
+msgid "Show top/bottom links in headings"
+msgstr "표제들 옆에 맨위/맨아래 링크 표시"
+
+msgid "Show fancy diffs"
+msgstr "꾸며진 diff 표시"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "위키네임에 스페이스를 넣어서 표시"
+
+msgid "Remember login information"
+msgstr "로그인 정보를 기억함"
+
+msgid "Subscribe to trivial changes"
+msgstr "사소한 변경사항도 감시"
+
+msgid "Disable this account forever"
+msgstr "이 계정을 더 이상 사용하지 않음"
+
+msgid "Name"
+msgstr "이름"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(HongGildong식)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "패스워드"
+
+msgid "Password repeat"
+msgstr "패스워드 (확인)"
+
+msgid "(Only when changing passwords)"
+msgstr "(패스워드 변경시)"
+
+msgid "Email"
+msgstr "메일"
+
+msgid "User CSS URL"
+msgstr "CSS URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(CSS를 사용하지 않으려면 \"None\")"
+
+msgid "Editor size"
+msgstr "편집기 크기"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -438,42 +506,6 @@ msgstr " 개 포함"
 msgid "matches"
 msgstr " 개 포함"
 
-msgid "Open editor on double click"
-msgstr "더블 클릭해서 글 고치기로 들어감"
-
-msgid "Remember last page visited"
-msgstr "마지막 방문을 기억해둠"
-
-msgid "Show fancy links"
-msgstr "꾸며진 링크 표시"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "존재하지 않는 글 링크 옆에 물음표 표시"
-
-msgid "Show page trail"
-msgstr "글보기 발자국 표시"
-
-msgid "Show icon toolbar"
-msgstr "아이콘 툴바 표시"
-
-msgid "Show top/bottom links in headings"
-msgstr "표제들 옆에 맨위/맨아래 링크 표시"
-
-msgid "Show fancy diffs"
-msgstr "꾸며진 diff 표시"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "위키네임에 스페이스를 넣어서 표시"
-
-msgid "Remember login information"
-msgstr "로그인 정보를 기억함"
-
-msgid "Subscribe to trivial changes"
-msgstr "사소한 변경사항도 감시"
-
-msgid "Disable this account forever"
-msgstr "이 계정을 더 이상 사용하지 않음"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "쿠키가 지워졌습니다. 로그아웃 되었습니다."
 
@@ -510,6 +542,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "메일 주소가 '%(email)s'로 되어있는 계정이 없습니다!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -564,47 +600,27 @@ msgstr "기본값"
 msgid "<Browser setting>"
 msgstr "<브라우저 설정>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "저장"
 
 msgid "Logout"
 msgstr "로그아웃"
 
-msgid "Create Profile"
-msgstr "사용자 등록"
-
-msgid "Mail me my account data"
-msgstr "비밀번호 되찾기"
-
-msgid "Name"
-msgstr "이름"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(HongGildong식)"
-
-msgid "Password"
-msgstr "패스워드"
-
-msgid "Password repeat"
-msgstr "패스워드 (확인)"
-
-msgid "(Only when changing passwords)"
-msgstr "(패스워드 변경시)"
-
-msgid "Email"
-msgstr "메일"
-
 msgid "Preferred theme"
 msgstr "좋아하는 테마"
 
-msgid "User CSS URL"
-msgstr "CSS URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "사용자설정"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(CSS를 사용하지 않으려면 \"None\")"
-
-msgid "Editor size"
-msgstr "편집기 크기"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "시간대"
@@ -632,6 +648,12 @@ msgstr "메일 알림은 올바른 올바른 주소를 입력하지 않으면 �
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "메일 알림을 받는 글들 (한 줄에 정규식 하나씩)"
+
+msgid "Create Profile"
+msgstr "사용자 등록"
+
+msgid "Mail me my account data"
+msgstr "비밀번호 되찾기"
 
 msgid "No older revisions available!"
 msgstr "옛 버전이 저장되어 있지 않습니다!"
@@ -750,6 +772,21 @@ msgstr "Page hits and edits"
 msgid "You are not allowed to revert this page!"
 msgstr "이 글을 되돌릴 권한이 없습니다!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러"
+"서 사용자 계정을 만들어 주세요."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "이 글을 더 이상 감시하지 않습니다."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "이 글을 더 이상 감시하지 않습니다."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "글을 감시하기 위해서는 읽기 권한이 필요합니다."
 
@@ -759,13 +796,6 @@ msgid ""
 msgstr ""
 "이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 위키 관리자에게 연락하여 메"
 "일을 쓸 수 있도록 하거나, \"Subscribe\" 아이콘을 지워달라고 하세요."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러"
-"서 사용자 계정을 만들어 주세요."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1140,6 +1170,18 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "새 첨부 \"%(filename)s\"를 업로드"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "새 그림 \"%(filename)s\" 그리기"
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "그림 \"%(filename)s\" 손질하기"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "\"%s\"는 잘못된 인자입니다!"
 
@@ -1233,18 +1275,6 @@ msgstr ""
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr ""
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "새 그림 \"%(filename)s\" 그리기"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "새 첨부 \"%(filename)s\"를 업로드"
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "그림 \"%(filename)s\" 손질하기"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1374,6 +1404,14 @@ msgstr "내용"
 msgid "Titles"
 msgstr "제목"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "빨리가기메뉴"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "빨리가기메뉴"
+
 msgid "More Actions:"
 msgstr "다른 작업:"
 
@@ -1404,6 +1442,13 @@ msgstr "확인"
 
 msgid "Show Parent"
 msgstr "상위 글 보기"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "글 고치기"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "못 고치는 글"
@@ -1528,6 +1573,21 @@ msgstr "이름바꿈"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#~ msgid "Skip to preview"
+#~ msgstr "미리보기로 건너띔"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[현재 글 크기 '''%(size)d''' 바이트]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "이번 변경 사항에 대한 코멘트"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "%(category)s로 분류"
+
+#~ msgid "Show fancy links"
+#~ msgstr "꾸며진 링크 표시"
 
 #~ msgid "Save as"
 #~ msgstr "저장 이름"

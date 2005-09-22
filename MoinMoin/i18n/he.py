@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''גרסאות הגיבוי של הדף לא יכללו בתוצאות החיפוש''',
 '''Revision %(rev)d as of %(date)s''':
 '''גרסא %(rev)d מתאריך %(date)s''',
@@ -256,8 +256,6 @@ space between words. Group page name is not allowed.''':
 '''התחבר''',
 ''' %s and try again.''':
 ''' %s ונסה שוב.''',
-'''Can\'t work out query''':
-'''לא מסוגל לבצע שאילתה''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d תוצאות מתוך בערך %(pages)d דפים.''',
 '''%.2f seconds''':
@@ -274,20 +272,6 @@ Contact the owner of the wiki, who can enable email.''':
 .פנה למנהל המערכת.''',
 '''Please provide a valid email address!''':
 '''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''מישהו ביקש לשלוח אליך את פרטי המשתמש.
-
-אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.
-
-לאחר התחברות, מומלץ להחליף את הסיסמא.
-''',
 '''Login Name: %s
 
 Login Password: %s
@@ -302,6 +286,20 @@ Login URL: %s/?action=userform&uid=%s
 ''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''מישהו ביקש לשלוח אליך את פרטי המשתמש.
+
+אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.
+
+לאחר התחברות, מומלץ להחליף את הסיסמא.
+''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] פרטי המשתמש שלך''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':

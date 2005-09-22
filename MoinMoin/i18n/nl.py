@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''De reservekopie van de inhoud van deze pagina is achterhaald, en wordt niet opgenomen in zoekresultaten!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Versie %(rev)d zoals vanaf %(date)s''',
@@ -70,18 +70,8 @@ Kijk eerst naar de verschillen van %(difflink)s om te zien wat er is veranderd.'
 '''[Sjabloon %s niet gevonden]''',
 '''[You may not read %s]''':
 '''[Je mag niet lezen %s]''',
-'''Skip to preview''':
-'''Direct naar proeflezing''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[huidige paginagrootte \'\'\'%(size)d\'\'\' bytes]''',
 '''Describe %s here.''':
 '''Omschrijf %s hier.''',
-'''Optional comment about this change''':
-'''Eventueel commentaar over deze wijziging''',
-'''<No addition>''':
-'''<Geen toevoeging>''',
-'''Make this page belong to category %(category)s''':
-'''Plaats deze pagina onder categorie %(category)s''',
 '''Check Spelling''':
 '''Spellingscontrole''',
 '''Save Changes''':
@@ -94,6 +84,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Als u dat niet wilt, klik \'\'\'%(cancel_button_text)s\'\'\' om u veranderingen te annuleren.''',
 '''Preview''':
 '''Proeflezing''',
+'''<No addition>''':
+'''<Geen toevoeging>''',
 '''Trivial change''':
 '''Triviale wijziging''',
 '''Remove trailing whitespace from each line''':
@@ -227,6 +219,44 @@ Klik op Annuleren om de bewerking te staken.''',
 '''Bekijken''',
 '''Up''':
 '''Omhoog''',
+'''Open editor on double click''':
+'''Editor openen bij dubbelklik''',
+'''Remember last page visited''':
+'''De laatstbezochte pagina onthouden''',
+'''Show question mark for non-existing pagelinks''':
+'''Vraagteken tonen voor verwijzingen naar niet-bestaande pagina\'s''',
+'''Show page trail''':
+'''Paginaspoor tonen''',
+'''Show icon toolbar''':
+'''Pictogrammenwerkbalk tonen''',
+'''Show top/bottom links in headings''':
+'''Verwijzingen naar begin/einde in koppen tonen''',
+'''Show fancy diffs''':
+'''Mooie verschillenoverzichten tonen''',
+'''Add spaces to displayed wiki names''':
+'''Spaties toevoegen aan getoonde wikinamen''',
+'''Remember login information''':
+'''Aanmeldinformatie onthouden''',
+'''Subscribe to trivial changes''':
+'''Abonneren op triviale wijzigingen''',
+'''Disable this account forever''':
+'''Dit account permanent uitschakelen.''',
+'''Name''':
+'''Naam''',
+'''Password''':
+'''Wachtwoord''',
+'''Password repeat''':
+'''Wachtwoord herhalen''',
+'''(Only when changing passwords)''':
+'''(Alleen bij veranderen van wachtwoord)''',
+'''Email''':
+'''E-mail''',
+'''User CSS URL''':
+'''URL van CSS van gebruiker''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Leeglaten om geen CSS van gebruiker toe te passen)''',
+'''Editor size''':
+'''Grootte van de editor''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -249,30 +279,6 @@ spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 ''' overeenkomst''',
 '''matches''':
 ''' overeenkomsten''',
-'''Open editor on double click''':
-'''Editor openen bij dubbelklik''',
-'''Remember last page visited''':
-'''De laatstbezochte pagina onthouden''',
-'''Show fancy links''':
-'''Mooie verwijzingen tonen''',
-'''Show question mark for non-existing pagelinks''':
-'''Vraagteken tonen voor verwijzingen naar niet-bestaande pagina\'s''',
-'''Show page trail''':
-'''Paginaspoor tonen''',
-'''Show icon toolbar''':
-'''Pictogrammenwerkbalk tonen''',
-'''Show top/bottom links in headings''':
-'''Verwijzingen naar begin/einde in koppen tonen''',
-'''Show fancy diffs''':
-'''Mooie verschillenoverzichten tonen''',
-'''Add spaces to displayed wiki names''':
-'''Spaties toevoegen aan getoonde wikinamen''',
-'''Remember login information''':
-'''Aanmeldinformatie onthouden''',
-'''Subscribe to trivial changes''':
-'''Abonneren op triviale wijzigingen''',
-'''Disable this account forever''':
-'''Dit account permanent uitschakelen.''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie verwijderd. U bent nu uitgelogd.''',
 '''This wiki is not enabled for mail processing.
@@ -317,30 +323,8 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Opslaan''',
 '''Logout''':
 '''Uitloggen''',
-'''Create Profile''':
-'''Profiel aanmaken''',
-'''Mail me my account data''':
-'''Stuur me mijn accountgegevens per e-mail''',
-'''Name''':
-'''Naam''',
-'''(Use FirstnameLastname)''':
-'''(Gebruik VoornaamAchternaam)''',
-'''Password''':
-'''Wachtwoord''',
-'''Password repeat''':
-'''Wachtwoord herhalen''',
-'''(Only when changing passwords)''':
-'''(Alleen bij veranderen van wachtwoord)''',
-'''Email''':
-'''E-mail''',
 '''Preferred theme''':
 '''Verkozen opmaak''',
-'''User CSS URL''':
-'''URL van CSS van gebruiker''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Leeglaten om geen CSS van gebruiker toe te passen)''',
-'''Editor size''':
-'''Grootte van de editor''',
 '''Time zone''':
 '''Tijdzone''',
 '''Your time is''':
@@ -359,6 +343,10 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Geabonneerde wikipagina\'s (één reguliere expressie per regel)''',
+'''Create Profile''':
+'''Profiel aanmaken''',
+'''Mail me my account data''':
+'''Stuur me mijn accountgegevens per e-mail''',
 '''No older revisions available!''':
 '''Geen oudere versies aanwezig!''',
 '''Diff for "%s"''':
@@ -431,12 +419,12 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Aantal raadplegingen en bewerkingen''',
 '''You are not allowed to revert this page!''':
 '''U hebt geen toestemming om deze pagina terug te zetten!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in de hoek rechtsboven voor het aanmaken van een profiel.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''U hebt geen toestemming zich te abonneren op een pagina die u niet kunt lezen.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail opstarten, of het pictogram "Abonneren" verwijderen.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in de hoek rechtsboven voor het aanmaken van een profiel.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''U hebt geen e-mailadres opgegeven in u profiel. Kies u naam (UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres.''',
 '''Your subscribtion to this page has been removed.''':
@@ -638,6 +626,12 @@ Probeer een andere naam.''',
 '''Volledige verwijzingenlijst voor "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
+'''Upload new attachment "%(filename)s"''':
+'''Verstuur een nieuwe bijlage "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Nieuwe tekening maken "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Tekening bewerken "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''Ongeldige argumenten voor invoegen "%s"!''',
 '''Nothing found for "%s"!''':
@@ -694,12 +688,6 @@ Probeer een andere naam.''',
 '''**Maximum aantal toegestane includes overschreden**''',
 '''**Could not find the referenced page: %s**''':
 '''**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Nieuwe tekening maken "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Verstuur een nieuwe bijlage "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Tekening bewerken "%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Er werd "%(wanted)s" na "%(key)s" verwacht, er kwam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

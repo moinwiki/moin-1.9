@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Nội dung lưu của trang này đã lạc hậu và sẽ không được hiển thị trong kết quả tìm kiếm!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Phiên bản %(rev)d ngày %(date)s''',
@@ -65,18 +65,8 @@ Sau đó bạn có thể thêm vào những thay đổi của bạn.''',
 '''[Không tìm thấy mẫu %s]''',
 '''[You may not read %s]''':
 '''[Bạn không thể xem %s]''',
-'''Skip to preview''':
-'''Xem qua''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[kích thước trang hiện tại \'\'\'%(size)d\'\'\' bytes]''',
 '''Describe %s here.''':
 '''Diễn giải %s ở đây.''',
-'''Optional comment about this change''':
-'''Chú thích (nếu có)''',
-'''<No addition>''':
-'''<Không thêm>''',
-'''Make this page belong to category %(category)s''':
-'''Đưa trang này vào mục %(category)s''',
 '''Check Spelling''':
 '''Kiểm tra chính tả''',
 '''Save Changes''':
@@ -89,6 +79,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Nếu bạn không muốn vậy, nhấn \'\'\'%(cancel_button_text)s\'\'\' để huỷ bỏ các thay đổi.''',
 '''Preview''':
 '''Xem qua''',
+'''<No addition>''':
+'''<Không thêm>''',
 '''Trivial change''':
 '''Thay đổi nhỏ nhặt''',
 '''Remove trailing whitespace from each line''':
@@ -215,6 +207,44 @@ To leave the editor, press the Cancel button.''':
 '''Xem''',
 '''Up''':
 '''Trên''',
+'''Open editor on double click''':
+'''Mở khung soạn thảo khi nhấp chuột 2 lần''',
+'''Remember last page visited''':
+'''Nhớ trang cuối''',
+'''Show question mark for non-existing pagelinks''':
+'''Hiện dấu chấm hỏi cho các trang không tồn tại''',
+'''Show page trail''':
+'''Hiện vệt trang (page trail)''',
+'''Show icon toolbar''':
+'''Hiện thanh công cụ''',
+'''Show top/bottom links in headings''':
+'''Hiện các liên kết về đầu và về cuối trang ở các tiêu đề''',
+'''Show fancy diffs''':
+'''Hiện diff đẹp''',
+'''Add spaces to displayed wiki names''':
+'''Thêm khoảng trống để hiển thị các tên wiki (Wiki Names)''',
+'''Remember login information''':
+'''Nhớ thông tin đăng nhập''',
+'''Subscribe to trivial changes''':
+'''Đăng ký vào các thay đổi nhỏ nhặt''',
+'''Disable this account forever''':
+'''Huỷ bỏ account này''',
+'''Name''':
+'''Tên''',
+'''Password''':
+'''Mật khẩu''',
+'''Password repeat''':
+'''Lập lại mật khẩu''',
+'''(Only when changing passwords)''':
+'''(Chỉ khi nào đổi mật khẩu)''',
+'''Email''':
+'''Thư điện tử''',
+'''User CSS URL''':
+'''CSS URL riêng''',
+'''(Leave it empty for disabling user CSS)''':
+'''(để trống nếu không dùng CSS)''',
+'''Editor size''':
+'''Kích thước khung soạn thảo''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -236,30 +266,6 @@ Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng khô
 '''phù hợp''',
 '''matches''':
 '''phù hợp''',
-'''Open editor on double click''':
-'''Mở khung soạn thảo khi nhấp chuột 2 lần''',
-'''Remember last page visited''':
-'''Nhớ trang cuối''',
-'''Show fancy links''':
-'''Hiện liên kết đẹp''',
-'''Show question mark for non-existing pagelinks''':
-'''Hiện dấu chấm hỏi cho các trang không tồn tại''',
-'''Show page trail''':
-'''Hiện vệt trang (page trail)''',
-'''Show icon toolbar''':
-'''Hiện thanh công cụ''',
-'''Show top/bottom links in headings''':
-'''Hiện các liên kết về đầu và về cuối trang ở các tiêu đề''',
-'''Show fancy diffs''':
-'''Hiện diff đẹp''',
-'''Add spaces to displayed wiki names''':
-'''Thêm khoảng trống để hiển thị các tên wiki (Wiki Names)''',
-'''Remember login information''':
-'''Nhớ thông tin đăng nhập''',
-'''Subscribe to trivial changes''':
-'''Đăng ký vào các thay đổi nhỏ nhặt''',
-'''Disable this account forever''':
-'''Huỷ bỏ account này''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống.''',
 '''This wiki is not enabled for mail processing.
@@ -303,30 +309,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Lưu''',
 '''Logout''':
 '''Thoát''',
-'''Create Profile''':
-'''Tạo Profile''',
-'''Mail me my account data''':
-'''Gửi cho tôi thông tin về account cá nhân''',
-'''Name''':
-'''Tên''',
-'''(Use FirstnameLastname)''':
-'''(Dùng HọĐệmTên, và khong bo dau, hoặc dùng FirstnameLastname với tên tiếng Anh)''',
-'''Password''':
-'''Mật khẩu''',
-'''Password repeat''':
-'''Lập lại mật khẩu''',
-'''(Only when changing passwords)''':
-'''(Chỉ khi nào đổi mật khẩu)''',
-'''Email''':
-'''Thư điện tử''',
 '''Preferred theme''':
 '''Theme mặc định''',
-'''User CSS URL''':
-'''CSS URL riêng''',
-'''(Leave it empty for disabling user CSS)''':
-'''(để trống nếu không dùng CSS)''',
-'''Editor size''':
-'''Kích thước khung soạn thảo''',
 '''Time zone''':
 '''Múi giờ''',
 '''Your time is''':
@@ -345,6 +329,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''Danh sách này không hoạt động cho đến khi bạn nhập vào địa chỉ thư hợp lệ!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Các trang đã đăng ký (một regex trong một dòng)''',
+'''Create Profile''':
+'''Tạo Profile''',
+'''Mail me my account data''':
+'''Gửi cho tôi thông tin về account cá nhân''',
 '''No older revisions available!''':
 '''Không có phiên bản cũ hơn!''',
 '''Diff for "%s"''':
@@ -415,12 +403,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Số lần xem và sửa''',
 '''You are not allowed to revert this page!''':
 '''Bạn không thể hoàn nguyên phiên bản cũ của trang này!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Bạn chưa có profile. Nhấn vào Sở thích cá nhân ở góc phải trên để tạo một profile.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Bạn không thể đăng ký vào trang mà bạn không thể xem.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Wiki này không hỗ trợ việc soạn thư. Mong bạn thông báo cho chủ wiki, người mà có thể bật chức năng này lên, hay là bỏ đi biểu tượng "Đăng ký".''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Bạn chưa có profile. Nhấn vào Sở thích cá nhân ở góc phải trên để tạo một profile.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Bạn chưa nhập địa chỉ thư điện tử. Nhấn vào tên bạn (Sở thích cá nhân) ở góc phải trên để nhập vào một địa chỉ thư điện tử hợp lệ.''',
 '''Your subscribtion to this page has been removed.''':
@@ -619,6 +607,12 @@ Vui lòng dùng tên khác.''',
 '''Tìm nội dung: "%s"''',
 '''Full Link List for "%s"''':
 '''Danh sách liên kết đầy đủ trong "%s"''',
+'''Upload new attachment "%(filename)s"''':
+'''Tải lên file "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Tạo bản vẽ "%(filename)s" mới''',
+'''Edit drawing %(filename)s''':
+'''Sửa bản vẽ "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''Không hiểu tham số "%s"!''',
 '''Nothing found for "%s"!''':
@@ -671,12 +665,6 @@ Vui lòng dùng tên khác.''',
 '''Tải về theo dạng XML của trang này''',
 '''No wanted pages in this wiki.''':
 '''Không có trang cần tạo trong wiki này.''',
-'''Create new drawing "%(filename)s"''':
-'''Tạo bản vẽ "%(filename)s" mới''',
-'''Upload new attachment "%(filename)s"''':
-'''Tải lên file "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Sửa bản vẽ "%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Dự đoán "%(wanted)s" theo sau "%(key)s", nhưng lại là "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''建議您不要使用本頁的備份內容，備份不會出現在搜尋結果中!''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s 修訂第 %(rev)d 版''',
@@ -66,18 +66,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[找不到範本 %s ]''',
 '''[You may not read %s]''':
 '''[你不能閱讀 %s]''',
-'''Skip to preview''':
-'''跳至預覽''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[本頁目前大小 \'\'\'%(size)d\'\'\' 位元組]''',
 '''Describe %s here.''':
 '''在這裡加入關於 %s 的內容.''',
-'''Optional comment about this change''':
-'''本次編輯備註:''',
-'''<No addition>''':
-'''<不變>''',
-'''Make this page belong to category %(category)s''':
-'''將本頁劃入類別 %(category)s''',
 '''Check Spelling''':
 '''拼字檢查''',
 '''Save Changes''':
@@ -90,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 如果你不同意的話, 請按 \'\'\'%(cancel_button_text)s\'\'\' 以放棄本次編輯.''',
 '''Preview''':
 '''預覽''',
+'''<No addition>''':
+'''<不變>''',
 '''Trivial change''':
 '''只改了極少部份''',
 '''Remove trailing whitespace from each line''':
@@ -215,6 +207,44 @@ To leave the editor, press the Cancel button.''':
 '''觀看''',
 '''Up''':
 '''上層''',
+'''Open editor on double click''':
+'''點兩下就打開編輯器''',
+'''Remember last page visited''':
+'''記住上次看的最後一頁''',
+'''Show question mark for non-existing pagelinks''':
+'''不存在的頁面連結前打上問號''',
+'''Show page trail''':
+'''顯示頁面軌跡記錄''',
+'''Show icon toolbar''':
+'''顯示圖示工具列''',
+'''Show top/bottom links in headings''':
+'''在標題中顯示頁首/頁尾連結''',
+'''Show fancy diffs''':
+'''顯示易懂的版本比較''',
+'''Add spaces to displayed wiki names''':
+'''在顯示wiki名稱時加上空格''',
+'''Remember login information''':
+'''永遠記住登入資訊''',
+'''Subscribe to trivial changes''':
+'''訂閱的頁面即使只改了極少部份也要寄信通知''',
+'''Disable this account forever''':
+'''永遠停用本帳號''',
+'''Name''':
+'''名稱''',
+'''Password''':
+'''密碼''',
+'''Password repeat''':
+'''核對密碼''',
+'''(Only when changing passwords)''':
+'''(變更密碼才要重覆輸入)''',
+'''Email''':
+'''Email''',
+'''User CSS URL''':
+'''自訂 CSS 的 URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(空白表示不要自訂 CSS)''',
+'''Editor size''':
+'''編輯器大小''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -237,30 +267,6 @@ space between words. Group page name is not allowed.''':
 '''筆''',
 '''matches''':
 '''筆''',
-'''Open editor on double click''':
-'''點兩下就打開編輯器''',
-'''Remember last page visited''':
-'''記住上次看的最後一頁''',
-'''Show fancy links''':
-'''在連結前顯示小圖示''',
-'''Show question mark for non-existing pagelinks''':
-'''不存在的頁面連結前打上問號''',
-'''Show page trail''':
-'''顯示頁面軌跡記錄''',
-'''Show icon toolbar''':
-'''顯示圖示工具列''',
-'''Show top/bottom links in headings''':
-'''在標題中顯示頁首/頁尾連結''',
-'''Show fancy diffs''':
-'''顯示易懂的版本比較''',
-'''Add spaces to displayed wiki names''':
-'''在顯示wiki名稱時加上空格''',
-'''Remember login information''':
-'''永遠記住登入資訊''',
-'''Subscribe to trivial changes''':
-'''訂閱的頁面即使只改了極少部份也要寄信通知''',
-'''Disable this account forever''':
-'''永遠停用本帳號''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie 已經刪除. 你登出了.''',
 '''This wiki is not enabled for mail processing.
@@ -305,30 +311,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''存檔''',
 '''Logout''':
 '''登出''',
-'''Create Profile''':
-'''新使用者註冊''',
-'''Mail me my account data''':
-'''把帳號資料寄給我 ''',
-'''Name''':
-'''名稱''',
-'''(Use FirstnameLastname)''':
-'''(請用 XingMing)''',
-'''Password''':
-'''密碼''',
-'''Password repeat''':
-'''核對密碼''',
-'''(Only when changing passwords)''':
-'''(變更密碼才要重覆輸入)''',
-'''Email''':
-'''Email''',
 '''Preferred theme''':
 '''佈景主題''',
-'''User CSS URL''':
-'''自訂 CSS 的 URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(空白表示不要自訂 CSS)''',
-'''Editor size''':
-'''編輯器大小''',
 '''Time zone''':
 '''時區''',
 '''Your time is''':
@@ -347,6 +331,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''請提供正確的 email 地址，才收得到你訂閱的頁面!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''訂閱的 wiki 頁面 (每行一個正規表達式)''',
+'''Create Profile''':
+'''新使用者註冊''',
+'''Mail me my account data''':
+'''把帳號資料寄給我 ''',
 '''No older revisions available!''':
 '''沒有舊版!''',
 '''Diff for "%s"''':
@@ -417,12 +405,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''本頁人氣和編輯次數''',
 '''You are not allowed to revert this page!''':
 '''你不能把本頁恢復成舊版!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''你不能訂閱不能閱讀的頁面.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''本 wiki 不支援郵寄工作, 請連絡管理員, 以便他決定要啟動郵寄功能, 或是乾脆去掉「訂閱」圖示.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''你註冊的時候沒有提供 email 地址. 請在右上角點一下你的名字(或是「使用者設定」) 並提供合法的 email 地址.''',
 '''Your subscribtion to this page has been removed.''':
@@ -621,6 +609,12 @@ Try a different name.''':
 '''全文檢索: "%s"''',
 '''Full Link List for "%s"''':
 '''連向 "%s" 的頁面列表''',
+'''Upload new attachment "%(filename)s"''':
+'''上傳新附件 "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''建立新圖 "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''編輯圖片 "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''錯誤的插入參數 "%s"!''',
 '''Nothing found for "%s"!''':
@@ -673,12 +667,6 @@ Try a different name.''':
 '''匯出並下載本 wiki (XML 格式)''',
 '''No wanted pages in this wiki.''':
 '''本 wiki 沒有未定義的頁面.''',
-'''Create new drawing "%(filename)s"''':
-'''建立新圖 "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''上傳新附件 "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''編輯圖片 "%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s" 後面應該接 "%(wanted)s", 但卻接著 "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

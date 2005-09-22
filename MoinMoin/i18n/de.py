@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Der Inhalt der letzten Sicherungskopie ist veraltet und wird von der Volltextsuche ignoriert!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Revision %(rev)d vom %(date)s''',
@@ -72,18 +72,8 @@ Schauen Sie sich auch die Differenz von %(difflink)s an, um zu sehen, was geänd
 '''[Vorlage %s nicht gefunden]''',
 '''[You may not read %s]''':
 '''[Sie dürfen %s nicht lesen]''',
-'''Skip to preview''':
-'''Zur Vorschau springen''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[aktuelle Seitengröße \'\'\'%(size)d\'\'\' Bytes]''',
 '''Describe %s here.''':
 '''%s hier beschreiben...''',
-'''Optional comment about this change''':
-'''Optionaler Kommentar zu dieser Änderung''',
-'''<No addition>''':
-'''<Keine Änderung>''',
-'''Make this page belong to category %(category)s''':
-'''Diese Seite zur folgenden Kategorie hinzufügen: %(category)s''',
 '''Check Spelling''':
 '''Rechtschreibung prüfen''',
 '''Save Changes''':
@@ -96,6 +86,14 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', um Ihre Änderungen zu verwerfen.''',
 '''Preview''':
 '''Vorschau anzeigen''',
+'''GUI Mode''':
+'''GUI-Modus''',
+'''Comment:''':
+'''Kommentar:''',
+'''<No addition>''':
+'''<Keine Änderung>''',
+'''Add to: %(category)s''':
+'''Zu %(category)s hinzufuegen:''',
 '''Trivial change''':
 '''Triviale Änderung''',
 '''Remove trailing whitespace from each line''':
@@ -162,6 +160,8 @@ Die folgende Seite wurde durch %(editor)s verändert:
 '''Sie dürfen diese Seite nicht editieren!''',
 '''You cannot save empty pages.''':
 '''Leere Seiten können nicht gespeichert werden!''',
+'''You already saved this page!''':
+'''Sie haben diese Seite bereits gesichert!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -229,6 +229,50 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Anzeigen''',
 '''Up''':
 '''Hoch''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Verfoeffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
+'''Open editor on double click''':
+'''Editor per Doppelklick öffnen''',
+'''Remember last page visited''':
+'''Zuletzt besuchte Seite merken''',
+'''Show question mark for non-existing pagelinks''':
+'''Verweise auf unbekannte Seiten mit Fragezeichen markieren''',
+'''Show page trail''':
+'''Kürzlich besuchte Seiten anzeigen (Verlauf)''',
+'''Show icon toolbar''':
+'''Werkzeugleiste mit Bildsymbolen anzeigen''',
+'''Show top/bottom links in headings''':
+'''Verweise zum Anfang und Ende der Seite in Überschriften anzeigen''',
+'''Show fancy diffs''':
+'''Unterschiede farbig markiert anzeigen''',
+'''Add spaces to displayed wiki names''':
+'''Angezeigte Wikinamen mit Leerzeichen trennen''',
+'''Remember login information''':
+'''Speichere Login-Informationen''',
+'''Subscribe to trivial changes''':
+'''Triviale Änderungen abonnieren''',
+'''Disable this account forever''':
+'''Dieses Benutzerkonto für immer deaktivieren''',
+'''Name''':
+'''Name''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Vorname\'\'\'\'\'\'Nachname verwenden)''',
+'''Alias-Name''':
+'''Alias-Name''',
+'''Password''':
+'''Passwort''',
+'''Password repeat''':
+'''Passwort wiederholen''',
+'''(Only when changing passwords)''':
+'''(Nur bei Passwort-Änderung)''',
+'''Email''':
+'''E-Mail''',
+'''User CSS URL''':
+'''Benutzer CSS URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''Leer lassen, um benutzerdefiniertes CSS auszuschalten)''',
+'''Editor size''':
+'''Größe des Texteingabefelds''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -251,30 +295,6 @@ Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 '''Treffer''',
 '''matches''':
 '''Treffer''',
-'''Open editor on double click''':
-'''Editor per Doppelklick öffnen''',
-'''Remember last page visited''':
-'''Zuletzt besuchte Seite merken''',
-'''Show fancy links''':
-'''Verweisindikatoren anzeigen''',
-'''Show question mark for non-existing pagelinks''':
-'''Verweise auf unbekannte Seiten mit Fragezeichen markieren''',
-'''Show page trail''':
-'''Kürzlich besuchte Seiten anzeigen (Verlauf)''',
-'''Show icon toolbar''':
-'''Werkzeugleiste mit Bildsymbolen anzeigen''',
-'''Show top/bottom links in headings''':
-'''Verweise zum Anfang und Ende der Seite in Überschriften anzeigen''',
-'''Show fancy diffs''':
-'''Unterschiede farbig markiert anzeigen''',
-'''Add spaces to displayed wiki names''':
-'''Angezeigte Wikinamen mit Leerzeichen trennen''',
-'''Remember login information''':
-'''Speichere Login-Informationen''',
-'''Subscribe to trivial changes''':
-'''Triviale Änderungen abonnieren''',
-'''Disable this account forever''':
-'''Dieses Benutzerkonto für immer deaktivieren''',
 '''Cookie deleted. You are now logged out.''':
 '''Das "Cookie" wurde gelöscht. Sie sind jetzt abgemeldet.''',
 '''This wiki is not enabled for mail processing.
@@ -291,7 +311,7 @@ for that).
 
 After successfully logging in, it is of course a good idea to set a new and known password.
 ''':
-'''Jemand hat angefordert, Ihre Accountdaten an diese email-Adresse zu senden.
+'''Jemand hat angefordert, Ihre Accountdaten an diese E-Mail-Adresse zu senden.
 
 Wenn Sie Ihr Passwort vergessen haben, benutzen Sie bitte die Daten unten und
 geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des Wikisein (benutzen Sie kopieren und einfügen dazu).
@@ -312,6 +332,8 @@ Anmelde-URL: %s/?action=userform&uid=%s
 ''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Ihre Wiki-Acount-Daten''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzernamen und Passwort ein.''',
 '''Missing password. Please enter user name and password.''':
@@ -342,34 +364,20 @@ Anmelde-URL: %s/?action=userform&uid=%s
 '''Standardeinstellung''',
 '''<Browser setting>''':
 '''<Browsereinstellung>''',
+'''the one preferred''':
+'''der Bevorzugte''',
+'''free choice''':
+'''Freie Auswahl''',
 '''Save''':
 '''Speichern''',
 '''Logout''':
 '''Abmelden''',
-'''Create Profile''':
-'''Benutzer anlegen''',
-'''Mail me my account data''':
-'''Email mit den Zugangsdaten senden''',
-'''Name''':
-'''Name''',
-'''(Use FirstnameLastname)''':
-'''(VornameNachname verwenden)''',
-'''Password''':
-'''Passwort''',
-'''Password repeat''':
-'''Passwort wiederholen''',
-'''(Only when changing passwords)''':
-'''(Nur bei Passwort-Änderung)''',
-'''Email''':
-'''E-Mail''',
 '''Preferred theme''':
 '''Bevorzugter Stil''',
-'''User CSS URL''':
-'''Benutzer CSS URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Leer lassen, um benutzerdefiniertes CSS auszuschalten)''',
-'''Editor size''':
-'''Größe des Texteingabefelds''',
+'''Editor Preference''':
+'''Bevorzugter Editor''',
+'''Editor shown on UI''':
+'''Angezeigter Editor''',
 '''Time zone''':
 '''Zeitzone''',
 '''Your time is''':
@@ -388,6 +396,10 @@ Anmelde-URL: %s/?action=userform&uid=%s
 '''Änderungsnachrichten werden nur versandt, wenn eine gültige E-Mail-Adresse eingegeben wurde!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Abonnierte Wiki-Seiten (ein regulärer Ausdruck pro Zeile)''',
+'''Create Profile''':
+'''Benutzer anlegen''',
+'''Mail me my account data''':
+'''E-Mail mit den Zugangsdaten senden''',
 '''No older revisions available!''':
 '''Es sind keine älteren Versionen dieser Seite verfügbar!''',
 '''Diff for "%s"''':
@@ -460,12 +472,16 @@ Anmelde-URL: %s/?action=userform&uid=%s
 '''Seitenzugriffe und Änderungen''',
 '''You are not allowed to revert this page!''':
 '''Sie dürfen diese Seite nicht restaurieren!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in der oberen rechten Ecke, um ein Profil anzulegen.''',
+'''Your quicklink to this page has been removed.''':
+'''Ihr Expressverweis für diese Seite wurde entfernt.''',
+'''A quicklink to this page has been added for you.''':
+'''Ein Expressverweis für diese Seite wurde hinzugefuegt.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet. Bitte kontaktieren Sie den Eigentümer des Wiki, der dann entweder die Mailfunktionen einschalten oder das "Abonnieren"-Symbol entfernen kann.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in der oberen rechten Ecke, um ein Profil anzulegen.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Sie haben keine E-Mail-Adresse in Ihrem Profil eingegeben. Wählen Sie Ihren Namen (BenutzerEinstellungen) in der rechten oberen Ecke an und geben Sie eine gültige E-Mail-Adresse ein.''',
 '''Your subscribtion to this page has been removed.''':
@@ -676,6 +692,12 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Liste aller Seitenverweise für "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen Seitennamen an.''',
+'''Upload new attachment "%(filename)s"''':
+'''Neuen Dateianhang "%(filename)s" hochladen''',
+'''Create new drawing "%(filename)s"''':
+'''Neue Zeichnung "%(filename)s" anlegen''',
+'''Edit drawing %(filename)s''':
+'''Zeichnung %(filename)s bearbeiten''',
 '''Invalid include arguments "%s"!''':
 '''Ungültige "Include"-Argumente: "%s"!''',
 '''Nothing found for "%s"!''':
@@ -732,12 +754,6 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''**Maximale Anzahl erlaubter Includesi überschritten**''',
 '''**Could not find the referenced page: %s**''':
 '''**Konnte die referenzierte Seite nicht finden: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Neue Zeichnung "%(filename)s" anlegen''',
-'''Upload new attachment "%(filename)s"''':
-'''Neuen Dateianhang "%(filename)s" hochladen''',
-'''Edit drawing %(filename)s''':
-'''Zeichnung %(filename)s bearbeiten''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Erwartete "%(wanted)s" nach "%(key)s", bekam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -812,6 +828,10 @@ rot=Änderungen''',
 '''Text''',
 '''Titles''':
 '''Titel''',
+'''Remove from Quicklinks''':
+'''Aus Expressverweisen entfernen''',
+'''Add to Quicklinks''':
+'''Zu Expressverweisen hinzufuegen''',
 '''More Actions:''':
 '''Weitere Aktionen:''',
 '''Show Raw Text''':
@@ -832,6 +852,10 @@ rot=Änderungen''',
 '''Los!''',
 '''Show Parent''':
 '''Übergeordnete Seite anzeigen''',
+'''Edit (Text)''':
+'''Editieren (Text)''',
+'''Edit (GUI)''':
+'''Editieren (GUI)''',
 '''Immutable Page''':
 '''Geschützte Seite''',
 '''Show Changes''':
