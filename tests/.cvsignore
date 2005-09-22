@@ -1,0 +1,4 @@
+*.pyc
+{arch}
+.arch-ids
+

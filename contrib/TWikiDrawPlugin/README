@@ -1,0 +1,18 @@
+
+TWikiDrawPlugin Sources
+-----------------------
+
+NOTE: You don't need to compile this, a precompiled applet can be found in
+      wiki/htdocs/applets/TWikiDrawPlugin
+
+This is a modified source tree of TWikiDrawPlugin of 29 Jan 2003 - 21:47
+adding:
+
+ - basename argument
+ - indexed PNG support
+ - xhtml conform image maps
+ - corrects object stacking order for the map
+
+References:
+ - Original site: http://twiki.org/cgi-bin/view/Plugins/TWikiDrawPlugin
+ - Moin changes: http://moinmoin.wikiwikiweb.de/OliverGraf/TWikiDrawPlugin
