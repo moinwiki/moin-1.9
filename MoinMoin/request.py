@@ -1379,17 +1379,11 @@ class RequestCGI(RequestBase):
         except error.FatalError, err:
             self.fail(err)
             
-    def open_logs_late(self):
+    def open_logs(self):
         # create log file for catching stderr output
         if not self.opened_logs:
             sys.stderr = open(os.path.join(self.cfg.data_dir, 'error.log'), 'at')
             self.opened_logs = 1
-
-    def open_logs(self):
-        # create log file for catching stderr output
-        sys.stderr = open('/org/moin_tw/moin--arcelor--1.3/server/data/error.log', 'at')
-        sys.stderr.write("Log opened\n")
-        self.opened_logs = 1
 
     def read(self, n=None):
         """ Read from input stream.
