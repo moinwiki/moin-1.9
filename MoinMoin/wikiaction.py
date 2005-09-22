@@ -840,7 +840,7 @@ def do_format(pagename, request):
         mimetype = "text/plain"
         from formatter.text_plain import Formatter
 
-    if mimetype.find("xml") != -1:
+    if "xml" in mimetype:
         mimetype = "text/xml"
     request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
 
