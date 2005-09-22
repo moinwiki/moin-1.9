@@ -1,7 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version moin--enterprise--1.3--patch-XXX:
+Version moin--main--1.5--patch-1:
     * Requirements changed to require Python >= 2.3. We recommend that you use
       the latest Python release you can get. The reason we dropped 2.2.2
       support is because no developer or tester uses this old version any more,
@@ -142,14 +142,7 @@ Version moin--enterprise--1.3--patch-XXX:
       that should fix quite some IE bugs and annoyances (on Win32).
       * for enabling IE7, use cfg.hacks = { 'ie7': True }
 
-
-Version 1.4:
-    We used that version number for an internal and early development version
-    for what will be called moin 2.0 at some time in the future.
-    There will never be a 1.4.x release.
-
-
-Trunk 1.3
+Merged from moin--main--1.3:
 
 Fixes:
 
@@ -202,7 +195,12 @@ New Features:
     * Add support for running behind proxy out of the box with out
       manual url mapping.
       See HelpOnConfiguration/IntegratingWithApache
-    
+
+Version 1.4:
+    We used that version number for an internal and early development version
+    for what will be called moin 2.0 at some time in the future.
+    There will never be a 1.4.x release.
+
 
 Version 1.3.5 (2005-08-04, Revision moin--main--1.3--patch-883)
 
