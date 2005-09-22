@@ -221,15 +221,15 @@ class User:
                     pass # Should never happen
 
         #self.edit_cols = 80
-        self.tz_offset = int(float(self._cfg.tz_offset) * 3600) # XXX 'tz_offset': (???, True)
-        self.language = "" # XXX 'language': ('', True)
-        self.date_fmt = "" # XXX 'date_fmt': ('', True)
-        self.datetime_fmt = "" # XXX 'datetime_fmt': ('', True)
-        self.quicklinks = [] # XXX 'quicklinks': ([], True)
-        self.subscribed_pages = [] # XXX 'subscribed_pages': ([], True)
-        self.theme_name = self._cfg.theme_default # XXX 'theme_name': ("modern", True)
-        self.editor_default = self._cfg.editor_default # XXX 'editor_default': ('text', True)
-        self.editor_ui = self._cfg.editor_ui # XXX 'editor_ui': ('both', True)
+        self.tz_offset = int(float(self._cfg.tz_offset) * 3600)
+        self.language = ""
+        self.date_fmt = ""
+        self.datetime_fmt = ""
+        self.quicklinks = []
+        self.subscribed_pages = []
+        self.theme_name = self._cfg.theme_default
+        self.editor_default = self._cfg.editor_default
+        self.editor_ui = self._cfg.editor_ui
         self.last_saved = str(time.time())
         
         # attrs not saved to profile
