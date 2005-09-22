@@ -8,7 +8,7 @@
 
 import re, os, sys
 from MoinMoin import error
-from MoinMoin.auth import *
+import MoinMoin.auth as authmodule
 
 _url_re = None
 config = {}
@@ -167,7 +167,7 @@ class DefaultConfig:
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage']
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
-    auth = [moin_cookie]
+    auth = [authmodule.moin_cookie]
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
