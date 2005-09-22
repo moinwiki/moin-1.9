@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Det tidligere indhold af denne side er forældet og vil ikke blive inkluderet i søgeresultater!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Version %(rev)d per %(date)s''',
@@ -69,18 +69,8 @@ Kig på ændringerne pr. %(difflink)s for at se hvad der er blevet ændret.''',
 '''[Skabelon %s ikke fundet]''',
 '''[You may not read %s]''':
 '''[Du har ikke lov til at læse %s]''',
-'''Skip to preview''':
-'''Skift til forhåndsvisning''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[nuværende sidestørrelse \'\'\'%(size)d\'\'\' bytes]''',
 '''Describe %s here.''':
 '''Beskriv %s her.''',
-'''Optional comment about this change''':
-'''Kommentar til denne ændring (valgfri)''',
-'''<No addition>''':
-'''<Ingen tilføjelser>''',
-'''Make this page belong to category %(category)s''':
-'''Lad denne side tilhøre kategorien %(category)s''',
 '''Check Spelling''':
 '''Stavekontrol''',
 '''Save Changes''':
@@ -93,6 +83,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·at annullere dine ændringer.''',
 '''Preview''':
 '''Forhåndsvis''',
+'''<No addition>''':
+'''<Ingen tilføjelser>''',
 '''Trivial change''':
 '''Simpel ændring''',
 '''Remove trailing whitespace from each line''':
@@ -223,6 +215,44 @@ Tryk Annullér hvis du ikke vil redigére.''',
 '''Vis''',
 '''Up''':
 '''Op''',
+'''Open editor on double click''':
+'''Åbn redigeringsvindue ved at dobbeltklikke''',
+'''Remember last page visited''':
+'''Husk senest besøgte side''',
+'''Show question mark for non-existing pagelinks''':
+'''Vis spørgsmålstegn ved links til ikke-eksisterende sider''',
+'''Show page trail''':
+'''Vis senest besøgte sider''',
+'''Show icon toolbar''':
+'''Vis knap-panel''',
+'''Show top/bottom links in headings''':
+'''Vis top-/bund-links i header''',
+'''Show fancy diffs''':
+'''Vis detaljerede forskelle''',
+'''Add spaces to displayed wiki names''':
+'''Tilføj mellemrum i viste wiki-navne''',
+'''Remember login information''':
+'''Husk adgangsinformationer''',
+'''Subscribe to trivial changes''':
+'''Abonnér på simple rettelser''',
+'''Disable this account forever''':
+'''Luk denne brugerprofil permanent''',
+'''Name''':
+'''Navn''',
+'''Password''':
+'''Adgangskode''',
+'''Password repeat''':
+'''Adgangskode gentaget''',
+'''(Only when changing passwords)''':
+'''(Kun ved ændring af adgangskode)''',
+'''Email''':
+'''Email-adresse''',
+'''User CSS URL''':
+'''Personlig CSS URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Lad det stå blankt for at slå bruger-CSS fra)''',
+'''Editor size''':
+'''Størrelse på redigeringsvindue''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -245,30 +275,6 @@ mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
 '''resultat''',
 '''matches''':
 '''resultater''',
-'''Open editor on double click''':
-'''Åbn redigeringsvindue ved at dobbeltklikke''',
-'''Remember last page visited''':
-'''Husk senest besøgte side''',
-'''Show fancy links''':
-'''Vis smarte links''',
-'''Show question mark for non-existing pagelinks''':
-'''Vis spørgsmålstegn ved links til ikke-eksisterende sider''',
-'''Show page trail''':
-'''Vis senest besøgte sider''',
-'''Show icon toolbar''':
-'''Vis knap-panel''',
-'''Show top/bottom links in headings''':
-'''Vis top-/bund-links i header''',
-'''Show fancy diffs''':
-'''Vis detaljerede forskelle''',
-'''Add spaces to displayed wiki names''':
-'''Tilføj mellemrum i viste wiki-navne''',
-'''Remember login information''':
-'''Husk adgangsinformationer''',
-'''Subscribe to trivial changes''':
-'''Abonnér på simple rettelser''',
-'''Disable this account forever''':
-'''Luk denne brugerprofil permanent''',
 '''Cookie deleted. You are now logged out.''':
 '''Infokage slettet. Du er nu logget ud.''',
 '''This wiki is not enabled for mail processing.
@@ -313,30 +319,8 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Gem''',
 '''Logout''':
 '''Log ud''',
-'''Create Profile''':
-'''Opret brugerprofil''',
-'''Mail me my account data''':
-'''Send mig en email med mine adgangsoplysninger''',
-'''Name''':
-'''Navn''',
-'''(Use FirstnameLastname)''':
-'''(Brug FornavnEfternavn)''',
-'''Password''':
-'''Adgangskode''',
-'''Password repeat''':
-'''Adgangskode gentaget''',
-'''(Only when changing passwords)''':
-'''(Kun ved ændring af adgangskode)''',
-'''Email''':
-'''Email-adresse''',
 '''Preferred theme''':
 '''Ønsket tema''',
-'''User CSS URL''':
-'''Personlig CSS URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Lad det stå blankt for at slå bruger-CSS fra)''',
-'''Editor size''':
-'''Størrelse på redigeringsvindue''',
 '''Time zone''':
 '''Tidszone''',
 '''Your time is''':
@@ -355,6 +339,10 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Denne liste fungerer ikke, medmindre du har angivet en korrekt email-adresse!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Registrerede wiki-sider (ét regulært udtryk (regex) pr. linje)''',
+'''Create Profile''':
+'''Opret brugerprofil''',
+'''Mail me my account data''':
+'''Send mig en email med mine adgangsoplysninger''',
 '''No older revisions available!''':
 '''Ingen ældre udgaver tilgængelig!''',
 '''Diff for "%s"''':
@@ -427,12 +415,12 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Sidebesøg og -redigeringer''',
 '''You are not allowed to revert this page!''':
 '''Du har ikke lov til at tilbageføre denne side!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste højre hjørne for at oprette en brugerprofil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har ikke lov til at abonnere på en side du ikke kan læse!''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af wiki\'en, som kan enten aktivere email eller fjerne Abonnér-ikonet.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste højre hjørne for at oprette en brugerprofil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Du har ikke angivet en email-adresse i din brugerprofil. Vælg dit navn (BrugerProfil) i øverste højre hjørne og angiv en gyldig email-adresse.''',
 '''Your subscribtion to this page has been removed.''':
@@ -633,6 +621,12 @@ Prøv et andet navn.''',
 '''Fuld liste over links for "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn.''',
+'''Upload new attachment "%(filename)s"''':
+'''Læg ny vedhæftet fil "%(filename)s" op''',
+'''Create new drawing "%(filename)s"''':
+'''Opret ny tegning "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Redigér tegningen "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''Forkerte include-argumenter "%s"!''',
 '''Nothing found for "%s"!''':
@@ -689,12 +683,6 @@ Prøv et andet navn.''',
 '''**Maksimum antal tilladte inkluderinger overskredet**''',
 '''**Could not find the referenced page: %s**''':
 '''**Kunne ikke finde den henviste side: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Opret ny tegning "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Læg ny vedhæftet fil "%(filename)s" op''',
-'''Edit drawing %(filename)s''':
-'''Redigér tegningen "%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Forventede "%(wanted)s"·efter·"%(key)s",·fik "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

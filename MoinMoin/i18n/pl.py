@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Kopia zapasowa zawartości tej strony jest nieważna i nie będzie włączona do rezultatów przeszukiwania''',
 '''Revision %(rev)d as of %(date)s''':
 '''Wersja %(rev)d z %(date)s''',
@@ -66,18 +66,8 @@ Obejrzyj %(difflink)s aby stwierdzić, co zostało zmienione.''',
 '''[Szablon %s nie znaleziony]''',
 '''[You may not read %s]''':
 '''[Nie można czytać %s]''',
-'''Skip to preview''':
-'''Pomiń aby zobaczyć podgląd''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[Rozmiar bieżącej strony \'\'\'%(size)d\'\'\' bajtów]''',
 '''Describe %s here.''':
 '''Opisz %s tutaj.''',
-'''Optional comment about this change''':
-'''Opcjonalny komentarz dotyczący niniejszej zmiany''',
-'''<No addition>''':
-'''<Bez dodania>''',
-'''Make this page belong to category %(category)s''':
-'''Przypisz tę stronę do kategorii %(category)s''',
 '''Check Spelling''':
 '''Sprawdź pisownię''',
 '''Save Changes''':
@@ -90,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygnować z wprowadzenia zmian.''',
 '''Preview''':
 '''Podgląd''',
+'''<No addition>''':
+'''<Bez dodania>''',
 '''Trivial change''':
 '''Drobna zmiana''',
 '''Remove trailing whitespace from each line''':
@@ -217,6 +209,44 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''Zobacz''',
 '''Up''':
 '''Góra''',
+'''Open editor on double click''':
+'''Otwórz edytor podwójnym kliknięciem''',
+'''Remember last page visited''':
+'''Zapamiętaj ostatnią odwiedzoną stronę''',
+'''Show question mark for non-existing pagelinks''':
+'''Pokaż znaki zapytania dla nieistniejących jeszcze stron''',
+'''Show page trail''':
+'''Pokaż ślad strony''',
+'''Show icon toolbar''':
+'''Pokaż pasek narzędziowy''',
+'''Show top/bottom links in headings''':
+'''Pokaż górne/dolne odnośniki w nagłówkach''',
+'''Show fancy diffs''':
+'''Pokaż ozdobne różnice''',
+'''Add spaces to displayed wiki names''':
+'''Dodaj spacje do wyświetlanych nazw wiki''',
+'''Remember login information''':
+'''Zapamiętaj informacje o czytelniku''',
+'''Subscribe to trivial changes''':
+'''Zasubksrybuj drobne zmiany''',
+'''Disable this account forever''':
+'''Wyłącz to konto na zawsze''',
+'''Name''':
+'''Nazwa''',
+'''Password''':
+'''Hasło''',
+'''Password repeat''':
+'''Powtórz hasło''',
+'''(Only when changing passwords)''':
+'''(Tylko podczas zmiany hasła)''',
+'''Email''':
+'''Email''',
+'''User CSS URL''':
+'''Podaj odnośnik do pliku CSS''',
+'''(Leave it empty for disabling user CSS)''':
+'''(pozostaw pole puste, aby wyłączyć CSS użytkownika)''',
+'''Editor size''':
+'''Rozmiar edytora''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -239,30 +269,6 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''porównanie''',
 '''matches''':
 '''porówniania''',
-'''Open editor on double click''':
-'''Otwórz edytor podwójnym kliknięciem''',
-'''Remember last page visited''':
-'''Zapamiętaj ostatnią odwiedzoną stronę''',
-'''Show fancy links''':
-'''Pokaż ozdobne odnośniki''',
-'''Show question mark for non-existing pagelinks''':
-'''Pokaż znaki zapytania dla nieistniejących jeszcze stron''',
-'''Show page trail''':
-'''Pokaż ślad strony''',
-'''Show icon toolbar''':
-'''Pokaż pasek narzędziowy''',
-'''Show top/bottom links in headings''':
-'''Pokaż górne/dolne odnośniki w nagłówkach''',
-'''Show fancy diffs''':
-'''Pokaż ozdobne różnice''',
-'''Add spaces to displayed wiki names''':
-'''Dodaj spacje do wyświetlanych nazw wiki''',
-'''Remember login information''':
-'''Zapamiętaj informacje o czytelniku''',
-'''Subscribe to trivial changes''':
-'''Zasubksrybuj drobne zmiany''',
-'''Disable this account forever''':
-'''Wyłącz to konto na zawsze''',
 '''Cookie deleted. You are now logged out.''':
 '''Ciasteczko skasowane. Wylogowano.''',
 '''This wiki is not enabled for mail processing.
@@ -307,30 +313,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Zachowaj''',
 '''Logout''':
 '''Wyjdź''',
-'''Create Profile''':
-'''Utwórz profil''',
-'''Mail me my account data''':
-'''Prześlij do mnie moje dane''',
-'''Name''':
-'''Nazwa''',
-'''(Use FirstnameLastname)''':
-'''(Użyj postaci ImięNazwisko''',
-'''Password''':
-'''Hasło''',
-'''Password repeat''':
-'''Powtórz hasło''',
-'''(Only when changing passwords)''':
-'''(Tylko podczas zmiany hasła)''',
-'''Email''':
-'''Email''',
 '''Preferred theme''':
 '''Ulubiony wystrój''',
-'''User CSS URL''':
-'''Podaj odnośnik do pliku CSS''',
-'''(Leave it empty for disabling user CSS)''':
-'''(pozostaw pole puste, aby wyłączyć CSS użytkownika)''',
-'''Editor size''':
-'''Rozmiar edytora''',
 '''Time zone''':
 '''Strefa czasowa''',
 '''Your time is''':
@@ -349,6 +333,10 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Ta lista nie działa, dopóki nie podasz prawidłowego adresu poczty elektronicznej!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Zasubskrybowane strony wiki (jedno wyrażenie regularne w linii)''',
+'''Create Profile''':
+'''Utwórz profil''',
+'''Mail me my account data''':
+'''Prześlij do mnie moje dane''',
 '''No older revisions available!''':
 '''Nie ma starszych wersji!''',
 '''Diff for "%s"''':
@@ -419,12 +407,12 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Ilość odsłon i edycji''',
 '''You are not allowed to revert this page!''':
 '''Nie możesz przywracać tej strony!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nie możesz subskrybować strony, której nie możesz przeczytać.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. Skontaktuj się z właścicielem, aby je uruchomił, albo usuń ikonę "Subskrybuj".''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz (PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres.''',
 '''Your subscribtion to this page has been removed.''':
@@ -625,6 +613,12 @@ Spróbuj innej nazwy.''',
 '''Przeszukiwanie pełnotekstowe: "%s"''',
 '''Full Link List for "%s"''':
 '''Pełna lista odnośników dla "%s"''',
+'''Upload new attachment "%(filename)s"''':
+'''Wgraj nowy załącznik "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Utwórz nowy rysunek "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Edytuj rysunek %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Nieprawidłowe argumenty "%s"!''',
 '''Nothing found for "%s"!''':
@@ -677,12 +671,6 @@ Spróbuj innej nazwy.''',
 '''Zgraj wersję XML tego wiki''',
 '''No wanted pages in this wiki.''':
 '''Brak poszukiwanych stron w tym wiki.''',
-'''Create new drawing "%(filename)s"''':
-'''Utwórz nowy rysunek "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Wgraj nowy załącznik "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Edytuj rysunek %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Spodziewane "%(wanted)s" po "%(key)s", otrzymano "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

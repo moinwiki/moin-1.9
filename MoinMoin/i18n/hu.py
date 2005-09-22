@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''A lap elmentett tartalma elavult, s ezért nem szerepel majd a keresések eredményében!''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(rev)d. módosítás, dátum: %(date)s''',
@@ -73,18 +73,8 @@ A változásokat megtekintheti a(z) %(difflink)s különbségeinek oldalán.''',
 '''[A(z) %s minta nem található]''',
 '''[You may not read %s]''':
 '''[A(z) %s minta nem olvasható]''',
-'''Skip to preview''':
-'''Ugrás a nézethez''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[lapméret \'\'\'%(size)d\'\'\' byte]''',
 '''Describe %s here.''':
 '''Itt írjon a(z) %s-ról/ről''',
-'''Optional comment about this change''':
-'''A változtatáshoz tartozó megjegyzés (nem kötelező)''',
-'''<No addition>''':
-'''<Nincs kiegészítés>''',
-'''Make this page belong to category %(category)s''':
-'''Ez a lap tartozzon a(z) %(category)s kategóriához''',
 '''Check Spelling''':
 '''Helyesírás ellenőrzése''',
 '''Save Changes''':
@@ -97,6 +87,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Ha nem ezt kívánja, akkor a \'\'\'%(cancel_button_text)s\'\'\' gombot nyomja meg.''',
 '''Preview''':
 '''Nézet''',
+'''<No addition>''':
+'''<Nincs kiegészítés>''',
 '''Trivial change''':
 '''Lényegtelen változtatás''',
 '''Remove trailing whitespace from each line''':
@@ -222,6 +214,44 @@ To leave the editor, press the Cancel button.''':
 '''Nézet''',
 '''Up''':
 '''Fel''',
+'''Open editor on double click''':
+'''Kettős kattintásra nyíljon meg a szerkesztő''',
+'''Remember last page visited''':
+'''A legutóbbi meglátogatott lap megjegyzése''',
+'''Show question mark for non-existing pagelinks''':
+'''A nemlétező kapcsoknál (linkeknél) kérdőjel megjelenítése''',
+'''Show page trail''':
+'''Lapnyomok megjelenítése''',
+'''Show icon toolbar''':
+'''Ikon-eszközsáv megjelenítése''',
+'''Show top/bottom links in headings''':
+'''Felülre/alulra mutató kapcsok (linkek) megjelenítése a címeknél''',
+'''Show fancy diffs''':
+'''A különbségek díszes megjelenítése''',
+'''Add spaces to displayed wiki names''':
+'''Szóközök hozzáadása a wiki-nevekhez''',
+'''Remember login information''':
+'''A belépési adatok megjegyzése''',
+'''Subscribe to trivial changes''':
+'''Előfizetés a lényegtelen változásokra''',
+'''Disable this account forever''':
+'''Tiltsuk le ezt a felhasználói azonosítót örökre''',
+'''Name''':
+'''Név''',
+'''Password''':
+'''Jelszó''',
+'''Password repeat''':
+'''Jelszó mégegyszer''',
+'''(Only when changing passwords)''':
+'''(Csak jelszóváltoztatásnál)''',
+'''Email''':
+'''E-levél''',
+'''User CSS URL''':
+'''A felhasználói CSS URL-je''',
+'''(Leave it empty for disabling user CSS)''':
+'''(A felhasználói CSS letiltásához hagyja üresen)''',
+'''Editor size''':
+'''Szerkesztő mérete''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -244,30 +274,6 @@ egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlap
 '''találat''',
 '''matches''':
 '''találatok''',
-'''Open editor on double click''':
-'''Kettős kattintásra nyíljon meg a szerkesztő''',
-'''Remember last page visited''':
-'''A legutóbbi meglátogatott lap megjegyzése''',
-'''Show fancy links''':
-'''Díszes kapcsok (linkek) megjelenítése''',
-'''Show question mark for non-existing pagelinks''':
-'''A nemlétező kapcsoknál (linkeknél) kérdőjel megjelenítése''',
-'''Show page trail''':
-'''Lapnyomok megjelenítése''',
-'''Show icon toolbar''':
-'''Ikon-eszközsáv megjelenítése''',
-'''Show top/bottom links in headings''':
-'''Felülre/alulra mutató kapcsok (linkek) megjelenítése a címeknél''',
-'''Show fancy diffs''':
-'''A különbségek díszes megjelenítése''',
-'''Add spaces to displayed wiki names''':
-'''Szóközök hozzáadása a wiki-nevekhez''',
-'''Remember login information''':
-'''A belépési adatok megjegyzése''',
-'''Subscribe to trivial changes''':
-'''Előfizetés a lényegtelen változásokra''',
-'''Disable this account forever''':
-'''Tiltsuk le ezt a felhasználói azonosítót örökre''',
 '''Cookie deleted. You are now logged out.''':
 '''A sütit letöröltük. Ön kilépett.''',
 '''This wiki is not enabled for mail processing.
@@ -326,30 +332,8 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Mentés''',
 '''Logout''':
 '''Kilépés''',
-'''Create Profile''':
-'''Profil létrehozása''',
-'''Mail me my account data''':
-'''Kérem a felhasználói adataim elküldését levélben''',
-'''Name''':
-'''Név''',
-'''(Use FirstnameLastname)''':
-'''(Használja a VezetéknévKeresztnév formát)''',
-'''Password''':
-'''Jelszó''',
-'''Password repeat''':
-'''Jelszó mégegyszer''',
-'''(Only when changing passwords)''':
-'''(Csak jelszóváltoztatásnál)''',
-'''Email''':
-'''E-levél''',
 '''Preferred theme''':
 '''Kedvenc téma''',
-'''User CSS URL''':
-'''A felhasználói CSS URL-je''',
-'''(Leave it empty for disabling user CSS)''':
-'''(A felhasználói CSS letiltásához hagyja üresen)''',
-'''Editor size''':
-'''Szerkesztő mérete''',
 '''Time zone''':
 '''Időzóna''',
 '''Your time is''':
@@ -368,6 +352,10 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Ez a lista csak akkor működik, ha megadta a levélcímét!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Az előfizetett wiki-lapok (soronként egy reguláris kifejezés)''',
+'''Create Profile''':
+'''Profil létrehozása''',
+'''Mail me my account data''':
+'''Kérem a felhasználói adataim elküldését levélben''',
 '''No older revisions available!''':
 '''Nincsenek régebbi módosítások!''',
 '''Diff for "%s"''':
@@ -440,12 +428,12 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''A lap találatainak és szerkesztéseinek száma''',
 '''You are not allowed to revert this page!''':
 '''Nem állíthatja vissza ezt a lapot!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Még nem hozott létre felhasználói profilt. Kérjük válassza az oldal jobb fölső sarkában található FelhasználóiBeállítások-at a profil létrehozásához''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nem fizethet elő olyan lapra, amelyet nem olvashat.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Még nem hozott létre felhasználói profilt. Kérjük válassza az oldal jobb fölső sarkában található FelhasználóiBeállítások-at a profil létrehozásához''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Még nem adott meg levélcímet a profiljában. Kérjük kattintson a nevére a lap jobb fölső sarkán (FelhasználóiBeállítások), és írja be a címét.''',
 '''Your subscribtion to this page has been removed.''':
@@ -648,6 +636,12 @@ Próbáljon más nevet adni a lapnak.''',
 '''Teljes kapocslista (link-lista), minta: "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!''',
+'''Upload new attachment "%(filename)s"''':
+'''A(z) "%(filename)s" melléklet feltöltése''',
+'''Create new drawing "%(filename)s"''':
+'''"%(filename)s" nevű új rajz készítése''',
+'''Edit drawing %(filename)s''':
+'''A(z) %(filename)s nevű rajz szerkesztése''',
 '''Invalid include arguments "%s"!''':
 '''Érvénytelen include-paraméter: "%s"''',
 '''Nothing found for "%s"!''':
@@ -704,12 +698,6 @@ Próbáljon más nevet adni a lapnak.''',
 '''Az beágyazott dokumentumok (include-ok) száma több, mint amennyi engedélyezett**''',
 '''**Could not find the referenced page: %s**''':
 '''**A hivatkozott lap (%s) nem található**''',
-'''Create new drawing "%(filename)s"''':
-'''"%(filename)s" nevű új rajz készítése''',
-'''Upload new attachment "%(filename)s"''':
-'''A(z) "%(filename)s" melléklet feltöltése''',
-'''Edit drawing %(filename)s''':
-'''A(z) %(filename)s nevű rajz szerkesztése''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(wanted)s" helyett "%(token)s" szerepel "%(key)s" után''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

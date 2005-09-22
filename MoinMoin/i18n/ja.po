@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
-"PO-Revision-Date: 2005-07-29 09:57+0900\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"PO-Revision-Date: 2005-08-10 10:45+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "このページは\"deprecated\"であるため、検索結果には含まれません。"
 
@@ -132,26 +132,9 @@ msgstr "[テンプレート%sが見つかりません]"
 msgid "[You may not read %s]"
 msgstr "[%sを読む権限がありません]"
 
-msgid "Skip to preview"
-msgstr "プレビューへ移動"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[現在のページサイズ: '''%(size)d'''バイト]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "%sについて、ここに記述してください。"
-
-msgid "Optional comment about this change"
-msgstr "この修正についてのコメント(省略可)"
-
-msgid "<No addition>"
-msgstr "<追加無し>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "このページをカテゴリー「%(category)s」に分類"
 
 msgid "Check Spelling"
 msgstr "スペルチェック"
@@ -176,6 +159,19 @@ msgstr ""
 
 msgid "Preview"
 msgstr "プレビュー"
+
+msgid "GUI Mode"
+msgstr "GUIモード"
+
+msgid "Comment:"
+msgstr "コメント:"
+
+msgid "<No addition>"
+msgstr "<追加無し>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "%(category)sに追加"
 
 msgid "Trivial change"
 msgstr "ささいな変更"
@@ -289,6 +285,9 @@ msgstr "このページを削除する権限がありません。"
 
 msgid "You cannot save empty pages."
 msgstr "空のページは保存できません。"
+
+msgid "You already saved this page!"
+msgstr "既にこのページを保存済みです。"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -406,6 +405,72 @@ msgstr "表示"
 msgid "Up"
 msgstr "親ページへ"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "作成者の情報として(Wikiホームページではなく)メールアドレスを載せる"
+
+msgid "Open editor on double click"
+msgstr "ダブルクリックでエディタを開く"
+
+msgid "Remember last page visited"
+msgstr "最後に訪れたページを記憶する"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "存在しないページへのリンクには\"?\"を表示する"
+
+msgid "Show page trail"
+msgstr "訪れたページの履歴を表示する"
+
+msgid "Show icon toolbar"
+msgstr "アイコンツールバーを表示する"
+
+msgid "Show top/bottom links in headings"
+msgstr "表題に先頭/末尾へのリンクを表示する"
+
+msgid "Show fancy diffs"
+msgstr "差分を飾り付きで表示する"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Wiki名を空白付きで表示する"
+
+msgid "Remember login information"
+msgstr "ログインの情報を保持"
+
+msgid "Subscribe to trivial changes"
+msgstr "ささいな変更の通知も受ける"
+
+msgid "Disable this account forever"
+msgstr "このアカウントを無効にする"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Firstname''''''Lastname 形式)"
+
+msgid "Alias-Name"
+msgstr "別名"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Password repeat"
+msgstr "パスワード(もう一度)"
+
+msgid "(Only when changing passwords)"
+msgstr "(パスワード変更時のみ)"
+
+msgid "Email"
+msgstr "メールアドレス"
+
+msgid "User CSS URL"
+msgstr "CSSのURL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(CSSを無効にするには空にする)"
+
+msgid "Editor size"
+msgstr "エディタのサイズ"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -443,42 +508,6 @@ msgstr "箇所一致"
 
 msgid "matches"
 msgstr "箇所一致"
-
-msgid "Open editor on double click"
-msgstr "ダブルクリックでエディタを開く"
-
-msgid "Remember last page visited"
-msgstr "最後に訪れたページを記憶する"
-
-msgid "Show fancy links"
-msgstr "リンクを飾り付きで表示する"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "存在しないページへのリンクには\"?\"を表示する"
-
-msgid "Show page trail"
-msgstr "訪れたページの履歴を表示する"
-
-msgid "Show icon toolbar"
-msgstr "アイコンツールバーを表示する"
-
-msgid "Show top/bottom links in headings"
-msgstr "表題に先頭/末尾へのリンクを表示する"
-
-msgid "Show fancy diffs"
-msgstr "差分を飾り付きで表示する"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "wiki nameを空白付きで表示する"
-
-msgid "Remember login information"
-msgstr "ログインの情報を保持"
-
-msgid "Subscribe to trivial changes"
-msgstr "ささいな変更の通知も受ける"
-
-msgid "Disable this account forever"
-msgstr "このアカウントを無効にする"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "クッキーが削除されました。ログアウト完了。"
@@ -529,6 +558,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] アカウント情報"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -582,47 +615,26 @@ msgstr "デフォルト"
 msgid "<Browser setting>"
 msgstr "<ブラウザの設定>"
 
+msgid "the one preferred"
+msgstr "お好み"
+
+msgid "free choice"
+msgstr "自由選択"
+
 msgid "Save"
 msgstr "保存"
 
 msgid "Logout"
 msgstr "ログアウト"
 
-msgid "Create Profile"
-msgstr "プロファイル作成"
-
-msgid "Mail me my account data"
-msgstr "アカウント情報をメールする"
-
-msgid "Name"
-msgstr "名前"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(FirstnameLastname 形式)"
-
-msgid "Password"
-msgstr "パスワード"
-
-msgid "Password repeat"
-msgstr "パスワード(もう一度)"
-
-msgid "(Only when changing passwords)"
-msgstr "(パスワード変更時のみ)"
-
-msgid "Email"
-msgstr "メールアドレス"
-
 msgid "Preferred theme"
 msgstr "テーマ"
 
-msgid "User CSS URL"
-msgstr "CSSのURL"
+msgid "Editor Preference"
+msgstr "エディタの好み"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(CSSを無効にするには空にする)"
-
-msgid "Editor size"
-msgstr "エディタのサイズ"
+msgid "Editor shown on UI"
+msgstr "UIで表示されるエディタ"
 
 msgid "Time zone"
 msgstr "タイムゾーン"
@@ -650,6 +662,12 @@ msgstr "このリストは、有効なメールアドレスを入力しなけれ
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "購読中のwikiページ[[BR]](1行あたりひとつの正規表現)"
+
+msgid "Create Profile"
+msgstr "プロファイル作成"
+
+msgid "Mail me my account data"
+msgstr "アカウント情報をメールする"
 
 msgid "No older revisions available!"
 msgstr "古いリビジョンはありません。"
@@ -768,6 +786,19 @@ msgstr "ページの参照と更新"
 msgid "You are not allowed to revert this page!"
 msgstr "このページを前のバージョンに戻す権限がありません。"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、"
+"プロファイルを作成してください。"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "このページへのクイックリンクを削除しました。"
+
+msgid "A quicklink to this page has been added for you."
+msgstr "このページへのクイックリンクを追加しました。"
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "読む権限がないページを購読することはできません。"
 
@@ -777,13 +808,6 @@ msgid ""
 msgstr ""
 "このwikiではメールが利用できません。メールを利用できるようにするか、\"購読"
 "\"アイコンを無効にするよう、管理者に問い合わせてください。"
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、"
-"プロファイルを作成してください。"
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1160,6 +1184,18 @@ msgstr ""
 "名前の無いページを作成することはできません。ページ名を指定してください。"
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "添付ファイル\"%(filename)s\"のアップロード"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "drawing\"%(filename)s\"の新規作成"
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "drawing\"%(filename)s\"を編集"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "引数\"%s\"が不正です。"
 
@@ -1253,18 +1289,6 @@ msgstr "**インクルードの許容数を越えました**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**参照されたページ(%s)が見つかりませんでした**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "drawing\"%(filename)s\"の新規作成"
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "添付ファイル\"%(filename)s\"のアップロード"
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "drawing\"%(filename)s\"を編集"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1389,6 +1413,12 @@ msgstr "テキスト"
 msgid "Titles"
 msgstr "タイトル"
 
+msgid "Remove from Quicklinks"
+msgstr "クイックリンクから削除"
+
+msgid "Add to Quicklinks"
+msgstr "クイックリンクに追加"
+
 msgid "More Actions:"
 msgstr "その他のアクション:"
 
@@ -1418,6 +1448,12 @@ msgstr "実行"
 
 msgid "Show Parent"
 msgstr "親ページの表示"
+
+msgid "Edit (Text)"
+msgstr "編集(テキストモード)"
+
+msgid "Edit (GUI)"
+msgstr "編集(GUIモード)"
 
 msgid "Immutable Page"
 msgstr "編集不可のページ"
@@ -1545,6 +1581,21 @@ msgstr "ページ名変更"
 msgid "SpellCheck"
 msgstr "スペルチェック"
 
+#~ msgid "Skip to preview"
+#~ msgstr "プレビューへ移動"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[現在のページサイズ: '''%(size)d'''バイト]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "この修正についてのコメント(省略可)"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "このページをカテゴリー「%(category)s」に分類"
+
+#~ msgid "Show fancy links"
+#~ msgstr "リンクを飾り付きで表示する"
+
 #~ msgid "Save as"
 #~ msgstr "保存するファイル名を指定"
 
@@ -1646,9 +1697,6 @@ msgstr "スペルチェック"
 
 #~ msgid "Please enter your name like that: FirstnameLastname"
 #~ msgstr "名前は\"FirstnameLastname\"のように入力してください。"
-
-#~ msgid "You are already subscribed to this page."
-#~ msgstr "既にこのページを購読中です。"
 
 #~ msgid "Number of backup versions"
 #~ msgstr "バックアップバージョン数"

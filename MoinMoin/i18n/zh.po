@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "建议您不再使用此页的备份内容, 备份将不会出现在搜索结果中!"
 
@@ -132,26 +132,9 @@ msgstr "[未找到模板 %s]"
 msgid "[You may not read %s]"
 msgstr "[您不可以阅读 %s]"
 
-msgid "Skip to preview"
-msgstr "转至预览"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[此页占'''%(size)d'''字节]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "在这里详述 %s."
-
-msgid "Optional comment about this change"
-msgstr "此页备注(可选)"
-
-msgid "<No addition>"
-msgstr "<不加>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "将此页加入类别\"%(category)s\""
 
 msgid "Check Spelling"
 msgstr "拼写检查"
@@ -174,6 +157,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "预览"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "备注"
+
+msgid "<No addition>"
+msgstr "<不加>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "小修改"
@@ -282,6 +279,10 @@ msgstr "您无权编辑此页!"
 
 msgid "You cannot save empty pages."
 msgstr "不能保存空白网页."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "您无权编辑此页!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -393,6 +394,73 @@ msgstr "刷新"
 msgid "Up"
 msgstr "上层"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "双击打开编辑器"
+
+msgid "Remember last page visited"
+msgstr "记住上次访问的最后一页"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "不存在的网页链接显示问号"
+
+msgid "Show page trail"
+msgstr "显示网页访问历史"
+
+msgid "Show icon toolbar"
+msgstr "显示图标工具条"
+
+msgid "Show top/bottom links in headings"
+msgstr "在页眉中显示页首/页尾链接"
+
+msgid "Show fancy diffs"
+msgstr "显示精细的版本比较"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "给显示的维基名加空格"
+
+msgid "Remember login information"
+msgstr "保存登录信息"
+
+msgid "Subscribe to trivial changes"
+msgstr "订阅细小改动"
+
+msgid "Disable this account forever"
+msgstr "永久停用此帐户"
+
+msgid "Name"
+msgstr "用户名"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(请用FirstnameLastname, 或者汉语拼音XingMing)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Password repeat"
+msgstr "重复密码"
+
+msgid "(Only when changing passwords)"
+msgstr "(只在改变密码时)"
+
+msgid "Email"
+msgstr "电子邮件"
+
+msgid "User CSS URL"
+msgstr "自选CSS的URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(空白表示不用自选的CSS)"
+
+msgid "Editor size"
+msgstr "编辑器大小"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -431,42 +499,6 @@ msgstr "次匹配"
 msgid "matches"
 msgstr "次匹配"
 
-msgid "Open editor on double click"
-msgstr "双击打开编辑器"
-
-msgid "Remember last page visited"
-msgstr "记住上次访问的最后一页"
-
-msgid "Show fancy links"
-msgstr "显示精巧链接"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "不存在的网页链接显示问号"
-
-msgid "Show page trail"
-msgstr "显示网页访问历史"
-
-msgid "Show icon toolbar"
-msgstr "显示图标工具条"
-
-msgid "Show top/bottom links in headings"
-msgstr "在页眉中显示页首/页尾链接"
-
-msgid "Show fancy diffs"
-msgstr "显示精细的版本比较"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "给显示的维基名加空格"
-
-msgid "Remember login information"
-msgstr "保存登录信息"
-
-msgid "Subscribe to trivial changes"
-msgstr "订阅细小改动"
-
-msgid "Disable this account forever"
-msgstr "永久停用此帐户"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Cookie已经删除. 您已登出."
 
@@ -501,6 +533,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到用'%(email)s'登记的帐户!!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -552,47 +588,27 @@ msgstr "缺省"
 msgid "<Browser setting>"
 msgstr "<根据浏览器设置>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
 msgid "Logout"
 msgstr "登出"
 
-msgid "Create Profile"
-msgstr "新用户注册"
-
-msgid "Mail me my account data"
-msgstr "把帐号资料寄给我"
-
-msgid "Name"
-msgstr "用户名"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(请用FirstnameLastname, 或者汉语拼音XingMing)"
-
-msgid "Password"
-msgstr "密码"
-
-msgid "Password repeat"
-msgstr "重复密码"
-
-msgid "(Only when changing passwords)"
-msgstr "(只在改变密码时)"
-
-msgid "Email"
-msgstr "电子邮件"
-
 msgid "Preferred theme"
 msgstr "主题"
 
-msgid "User CSS URL"
-msgstr "自选CSS的URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "用户设置"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(空白表示不用自选的CSS)"
-
-msgid "Editor size"
-msgstr "编辑器大小"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "时区"
@@ -620,6 +636,12 @@ msgstr "请输入一个有效的电子邮件地址, 否则本订阅列表不起�
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "订阅的维基网页(每行一个正规表达式)"
+
+msgid "Create Profile"
+msgstr "新用户注册"
+
+msgid "Mail me my account data"
+msgstr "把帐号资料寄给我"
 
 msgid "No older revisions available!"
 msgstr "没有旧版"
@@ -738,6 +760,19 @@ msgstr "网页点击次数和编辑次数"
 msgid "You are not allowed to revert this page!"
 msgstr "您不可以把此页恢复成旧版!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr "您还没注册. 请点右上角的\"用户设置\"并注册."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "您终止了订阅此页."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "您终止了订阅此页."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "您不能订阅无权阅读的网页!"
 
@@ -747,11 +782,6 @@ msgid ""
 msgstr ""
 "本维基不支持邮件处理, 请联系管理员, 以便他决定是否要启动邮寄功能,或是干脆去掉"
 "「订阅」图示."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr "您还没注册. 请点右上角的\"用户设置\"并注册."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1118,6 +1148,18 @@ msgid ""
 msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "上载新附件\"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "创建新图片\"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "编辑图片\"%(filename)s\""
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "无效的include参数\"%s\"!"
 
@@ -1211,18 +1253,6 @@ msgstr "**太多的包含(include)**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**未能找到引用的网页: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "创建新图片\"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "上载新附件\"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "编辑图片\"%(filename)s\""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1347,6 +1377,14 @@ msgstr "正文"
 msgid "Titles"
 msgstr "标题"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "快捷链接"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "快捷链接"
+
 msgid "More Actions:"
 msgstr "更多操作"
 
@@ -1376,6 +1414,13 @@ msgstr "执行"
 
 msgid "Show Parent"
 msgstr "显示上层"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "编辑正文"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "只读网页"
@@ -1500,6 +1545,21 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Skip to preview"
+#~ msgstr "转至预览"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[此页占'''%(size)d'''字节]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "此页备注(可选)"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "将此页加入类别\"%(category)s\""
+
+#~ msgid "Show fancy links"
+#~ msgstr "显示精巧链接"
 
 #~ msgid "Save as"
 #~ msgstr "另存为"

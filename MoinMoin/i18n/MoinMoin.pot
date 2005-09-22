@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-22 22:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 
@@ -416,9 +416,6 @@ msgstr ""
 msgid " %s and try again."
 msgstr ""
 
-msgid "Can't work out query"
-msgstr ""
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr ""
@@ -444,17 +441,6 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr ""
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -466,6 +452,17 @@ msgstr ""
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
 msgstr ""
 
 #, python-format
@@ -506,6 +503,9 @@ msgid ""
 msgstr ""
 
 msgid "This email already belongs to somebody else."
+msgstr ""
+
+msgid "User account created!"
 msgstr ""
 
 #, python-format
@@ -1375,6 +1375,9 @@ msgstr ""
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr ""
+
+msgid "Mail not sent"
 msgstr ""
 
 msgid "Mail sent OK"

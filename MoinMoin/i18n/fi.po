@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "Tämän sivun varmuuskopioitu sisältö on vanhentunut eikä sitä sisällytetä "
@@ -132,26 +132,9 @@ msgstr "[Templaattia %s ei löytynyt]"
 msgid "[You may not read %s]"
 msgstr "[Et saa lukea sivua %s]"
 
-msgid "Skip to preview"
-msgstr "Vieritä esikatseluversioon"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[sivun tämänhetkinen koko '''%(size)d''' tavua]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Kuvaile %s tässä."
-
-msgid "Optional comment about this change"
-msgstr "Vapaaehtoinen kuvaus tästä muutoksesta"
-
-msgid "<No addition>"
-msgstr "<ei lisäystä>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Merkitse tämä sivu kuulumaan kategoriaan %(category)s"
 
 msgid "Check Spelling"
 msgstr "Oikolue"
@@ -176,6 +159,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Esikatsele"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Kuvaus"
+
+msgid "<No addition>"
+msgstr "<ei lisäystä>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "Vähäinen muutos"
@@ -287,6 +284,10 @@ msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
 
 msgid "You cannot save empty pages."
 msgstr "Tyhjää sivua ei voi tallentaa."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -407,6 +408,73 @@ msgstr "Näytä"
 msgid "Up"
 msgstr "Ylös"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Siirry muokkaukseen kaksoisnapsautuksella"
+
+msgid "Remember last page visited"
+msgstr "Muista viimeisin sivu"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Näytä kysymysmerkki puuttuvien sivujen linkeissä"
+
+msgid "Show page trail"
+msgstr "Näytä sivupolku"
+
+msgid "Show icon toolbar"
+msgstr "Näytä kuvakepalkki"
+
+msgid "Show top/bottom links in headings"
+msgstr "Näytä Alkuun- ja Loppuun-linkit otsikoissa"
+
+msgid "Show fancy diffs"
+msgstr "Näytä erot hienosti"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Lisää välilyönnit wikinimiin näytettäessä"
+
+msgid "Remember login information"
+msgstr "Muista kirjautumistiedot"
+
+msgid "Subscribe to trivial changes"
+msgstr "Tilaa vähäisetkin muutokset"
+
+msgid "Disable this account forever"
+msgstr "Sulje tämä käyttäjätunnus pysyvästi"
+
+msgid "Name"
+msgstr "Nimi"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(muodossa EtunimiSukunimi)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Salasana"
+
+msgid "Password repeat"
+msgstr "Salasana uudestaan"
+
+msgid "(Only when changing passwords)"
+msgstr "(varmistukseksi salasanaa valittaessa)"
+
+msgid "Email"
+msgstr "Sähköpostiosoite"
+
+msgid "User CSS URL"
+msgstr "Käyttäjän CSS:n URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(jätä tyhjäksi poistaaksesi käytöstä)"
+
+msgid "Editor size"
+msgstr "Muokkauskentässä rivejä"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -445,42 +513,6 @@ msgstr "osuma"
 msgid "matches"
 msgstr "osumaa"
 
-msgid "Open editor on double click"
-msgstr "Siirry muokkaukseen kaksoisnapsautuksella"
-
-msgid "Remember last page visited"
-msgstr "Muista viimeisin sivu"
-
-msgid "Show fancy links"
-msgstr "Näytä linkit hienosti"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Näytä kysymysmerkki puuttuvien sivujen linkeissä"
-
-msgid "Show page trail"
-msgstr "Näytä sivupolku"
-
-msgid "Show icon toolbar"
-msgstr "Näytä kuvakepalkki"
-
-msgid "Show top/bottom links in headings"
-msgstr "Näytä Alkuun- ja Loppuun-linkit otsikoissa"
-
-msgid "Show fancy diffs"
-msgstr "Näytä erot hienosti"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Lisää välilyönnit wikinimiin näytettäessä"
-
-msgid "Remember login information"
-msgstr "Muista kirjautumistiedot"
-
-msgid "Subscribe to trivial changes"
-msgstr "Tilaa vähäisetkin muutokset"
-
-msgid "Disable this account forever"
-msgstr "Sulje tämä käyttäjätunnus pysyvästi"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Eväste poistettu. Olet kirjautunut ulos."
 
@@ -517,6 +549,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Sähköpostiosoitetta '%(email)s' vastaavaa käyttäjää ei löytynyt!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -569,47 +605,27 @@ msgstr "oletusarvo"
 msgid "<Browser setting>"
 msgstr "<selaimen asetus>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Tallenna"
 
 msgid "Logout"
 msgstr "Kirjaudu ulos "
 
-msgid "Create Profile"
-msgstr "Luo profiili"
-
-msgid "Mail me my account data"
-msgstr "Sähköpostita minulle käyttäjätietoni"
-
-msgid "Name"
-msgstr "Nimi"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(muodossa EtunimiSukunimi)"
-
-msgid "Password"
-msgstr "Salasana"
-
-msgid "Password repeat"
-msgstr "Salasana uudestaan"
-
-msgid "(Only when changing passwords)"
-msgstr "(varmistukseksi salasanaa valittaessa)"
-
-msgid "Email"
-msgstr "Sähköpostiosoite"
-
 msgid "Preferred theme"
 msgstr "Suosikkiulkoasu"
 
-msgid "User CSS URL"
-msgstr "Käyttäjän CSS:n URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "KäyttäjäAsetukset"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(jätä tyhjäksi poistaaksesi käytöstä)"
-
-msgid "Editor size"
-msgstr "Muokkauskentässä rivejä"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Aikavyöhyke"
@@ -637,6 +653,12 @@ msgstr "Tämä lista ei toimi, ellet ole antanut kelpoa sähköpostiosoitetta!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Tilatut wikisivut (yksi regex per rivi)"
+
+msgid "Create Profile"
+msgstr "Luo profiili"
+
+msgid "Mail me my account data"
+msgstr "Sähköpostita minulle käyttäjätietoni"
 
 msgid "No older revisions available!"
 msgstr "Ei vanhempia versioita saatavilla!"
@@ -755,6 +777,21 @@ msgstr "Sivun katselut ja muokkaukset"
 msgid "You are not allowed to revert this page!"
 msgstr "Sinulla ei ole oikeutta palauttaa tätä sivua!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta "
+"yläkulmasta luodaksesi tiedot."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "Tilauksesi tälle sivulle on poistettu."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Tilauksesi tälle sivulle on poistettu."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sinulla ei ole oikeutta tilata sivua jota et voi lukea."
 
@@ -764,13 +801,6 @@ msgid ""
 msgstr ""
 "Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin "
 "omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta "
-"yläkulmasta luodaksesi tiedot."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1152,6 +1182,18 @@ msgid ""
 msgstr "Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi."
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Lähetä uusi liitetiedosto \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Luo uusi piirros \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Muokkaa piirrosta %(filename)s"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
 
@@ -1245,18 +1287,6 @@ msgstr "**Sisällytysten maksimimäärä ylitetty**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Viitattua sivua ei löydy: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Luo uusi piirros \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Lähetä uusi liitetiedosto \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Muokkaa piirrosta %(filename)s"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1381,6 +1411,14 @@ msgstr "Teksteistä"
 msgid "Titles"
 msgstr "Nimistä"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Pikalinkit"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Pikalinkit"
+
 msgid "More Actions:"
 msgstr "Lisää toimintoja:"
 
@@ -1410,6 +1448,13 @@ msgstr "Tee"
 
 msgid "Show Parent"
 msgstr "Näytä yläsivu"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "MuokkaaTekstiä"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Suojattu sivu"
@@ -1537,6 +1582,21 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Vieritä esikatseluversioon"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[sivun tämänhetkinen koko '''%(size)d''' tavua]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Vapaaehtoinen kuvaus tästä muutoksesta"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Merkitse tämä sivu kuulumaan kategoriaan %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Näytä linkit hienosti"
 
 #~ msgid "Save as"
 #~ msgstr "Tallenna nimellä"

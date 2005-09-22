@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2004-11-29 05:38+0800\n"
 "Last-Translator: Lin Zhemin <ljm@ljm.idv.tw>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "建議您不要使用本頁的備份內容，備份不會出現在搜尋結果中!"
 
@@ -132,26 +132,9 @@ msgstr "[找不到範本 %s ]"
 msgid "[You may not read %s]"
 msgstr "[你不能閱讀 %s]"
 
-msgid "Skip to preview"
-msgstr "跳至預覽"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[本頁目前大小 '''%(size)d''' 位元組]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "在這裡加入關於 %s 的內容."
-
-msgid "Optional comment about this change"
-msgstr "本次編輯備註:"
-
-msgid "<No addition>"
-msgstr "<不變>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "將本頁劃入類別 %(category)s"
 
 msgid "Check Spelling"
 msgstr "拼字檢查"
@@ -175,6 +158,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "預覽"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "註解"
+
+msgid "<No addition>"
+msgstr "<不變>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "只改了極少部份"
@@ -281,6 +278,10 @@ msgstr "你不可以編輯本頁!"
 
 msgid "You cannot save empty pages."
 msgstr "你不能儲存空白頁."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "您已經訂閱本頁了."
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -392,6 +393,73 @@ msgstr "觀看"
 msgid "Up"
 msgstr "上層"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "點兩下就打開編輯器"
+
+msgid "Remember last page visited"
+msgstr "記住上次看的最後一頁"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "不存在的頁面連結前打上問號"
+
+msgid "Show page trail"
+msgstr "顯示頁面軌跡記錄"
+
+msgid "Show icon toolbar"
+msgstr "顯示圖示工具列"
+
+msgid "Show top/bottom links in headings"
+msgstr "在標題中顯示頁首/頁尾連結"
+
+msgid "Show fancy diffs"
+msgstr "顯示易懂的版本比較"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "在顯示wiki名稱時加上空格"
+
+msgid "Remember login information"
+msgstr "永遠記住登入資訊"
+
+msgid "Subscribe to trivial changes"
+msgstr "訂閱的頁面即使只改了極少部份也要寄信通知"
+
+msgid "Disable this account forever"
+msgstr "永遠停用本帳號"
+
+msgid "Name"
+msgstr "名稱"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(請用 XingMing)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "密碼"
+
+msgid "Password repeat"
+msgstr "核對密碼"
+
+msgid "(Only when changing passwords)"
+msgstr "(變更密碼才要重覆輸入)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "User CSS URL"
+msgstr "自訂 CSS 的 URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(空白表示不要自訂 CSS)"
+
+msgid "Editor size"
+msgstr "編輯器大小"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -430,42 +498,6 @@ msgstr "筆"
 msgid "matches"
 msgstr "筆"
 
-msgid "Open editor on double click"
-msgstr "點兩下就打開編輯器"
-
-msgid "Remember last page visited"
-msgstr "記住上次看的最後一頁"
-
-msgid "Show fancy links"
-msgstr "在連結前顯示小圖示"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "不存在的頁面連結前打上問號"
-
-msgid "Show page trail"
-msgstr "顯示頁面軌跡記錄"
-
-msgid "Show icon toolbar"
-msgstr "顯示圖示工具列"
-
-msgid "Show top/bottom links in headings"
-msgstr "在標題中顯示頁首/頁尾連結"
-
-msgid "Show fancy diffs"
-msgstr "顯示易懂的版本比較"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "在顯示wiki名稱時加上空格"
-
-msgid "Remember login information"
-msgstr "永遠記住登入資訊"
-
-msgid "Subscribe to trivial changes"
-msgstr "訂閱的頁面即使只改了極少部份也要寄信通知"
-
-msgid "Disable this account forever"
-msgstr "永遠停用本帳號"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Cookie 已經刪除. 你登出了."
 
@@ -502,6 +534,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到登記為 '%(email)s' 的帳戶!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -552,47 +588,27 @@ msgstr "預設值"
 msgid "<Browser setting>"
 msgstr "<依瀏覽器設定>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "存檔"
 
 msgid "Logout"
 msgstr "登出"
 
-msgid "Create Profile"
-msgstr "新使用者註冊"
-
-msgid "Mail me my account data"
-msgstr "把帳號資料寄給我 "
-
-msgid "Name"
-msgstr "名稱"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(請用 XingMing)"
-
-msgid "Password"
-msgstr "密碼"
-
-msgid "Password repeat"
-msgstr "核對密碼"
-
-msgid "(Only when changing passwords)"
-msgstr "(變更密碼才要重覆輸入)"
-
-msgid "Email"
-msgstr "Email"
-
 msgid "Preferred theme"
 msgstr "佈景主題"
 
-msgid "User CSS URL"
-msgstr "自訂 CSS 的 URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "使用者設定"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(空白表示不要自訂 CSS)"
-
-msgid "Editor size"
-msgstr "編輯器大小"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "時區"
@@ -620,6 +636,12 @@ msgstr "請提供正確的 email 地址，才收得到你訂閱的頁面!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "訂閱的 wiki 頁面 (每行一個正規表達式)"
+
+msgid "Create Profile"
+msgstr "新使用者註冊"
+
+msgid "Mail me my account data"
+msgstr "把帳號資料寄給我 "
 
 msgid "No older revisions available!"
 msgstr "沒有舊版!"
@@ -738,6 +760,19 @@ msgstr "本頁人氣和編輯次數"
 msgid "You are not allowed to revert this page!"
 msgstr "你不能把本頁恢復成舊版!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr "你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "本頁已取消訂閱."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "本頁已取消訂閱."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱不能閱讀的頁面."
 
@@ -747,11 +782,6 @@ msgid ""
 msgstr ""
 "本 wiki 不支援郵寄工作, 請連絡管理員, 以便他決定要啟動郵寄功能, 或是乾脆去掉"
 "「訂閱」圖示."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr "你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1120,6 +1150,18 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "上傳新附件 \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "建立新圖 \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "編輯圖片 \"%(filename)s\""
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "錯誤的插入參數 \"%s\"!"
 
@@ -1213,18 +1255,6 @@ msgstr ""
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr ""
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "建立新圖 \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "上傳新附件 \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "編輯圖片 \"%(filename)s\""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1349,6 +1379,14 @@ msgstr "內文"
 msgid "Titles"
 msgstr "標題"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "快速連結"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "快速連結"
+
 msgid "More Actions:"
 msgstr "其他功能:"
 
@@ -1379,6 +1417,13 @@ msgstr "執行"
 
 msgid "Show Parent"
 msgstr "顯示上一層"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "編輯本頁"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "本頁不可更改"
@@ -1504,6 +1549,21 @@ msgstr "重新命名"
 msgid "SpellCheck"
 msgstr "拼字檢查"
 
+#~ msgid "Skip to preview"
+#~ msgstr "跳至預覽"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[本頁目前大小 '''%(size)d''' 位元組]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "本次編輯備註:"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "將本頁劃入類別 %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "在連結前顯示小圖示"
+
 #~ msgid "Save as"
 #~ msgstr "另存新檔"
 
@@ -1590,9 +1650,6 @@ msgstr "拼字檢查"
 
 #~ msgid "Please enter your name like that: FirstnameLastname"
 #~ msgstr "請輸入像這樣的名稱: XingMing"
-
-#~ msgid "You are already subscribed to this page."
-#~ msgstr "您已經訂閱本頁了."
 
 #~ msgid "Number of backup versions"
 #~ msgstr "備份版本數"

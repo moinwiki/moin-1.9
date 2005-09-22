@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "La copia di backup di questa pagina è deprecata e pertanto non verrà inclusa "
@@ -137,26 +137,9 @@ msgstr "[Il modello %s non è stato trovato]"
 msgid "[You may not read %s]"
 msgstr "[Potresti non aver letto %s]"
 
-msgid "Skip to preview"
-msgstr "Salta all'anteprima"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[dimensione attuale:'''%(size)d''' byte]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Inserisci una descrizione per %s"
-
-msgid "Optional comment about this change"
-msgstr "Commento facoltativo alle modifiche apportate"
-
-msgid "<No addition>"
-msgstr "<nessuna>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Associa questa pagina alla categoria %(category)s"
 
 msgid "Check Spelling"
 msgstr "Controllo ortografico"
@@ -181,6 +164,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Anteprima"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Commento"
+
+msgid "<No addition>"
+msgstr "<nessuna>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "Cambiamento banale"
@@ -288,6 +285,10 @@ msgstr "Non sei autorizzato a modificare questa pagina!"
 
 msgid "You cannot save empty pages."
 msgstr "Non puoi salvare pagine vuote."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "Non sei autorizzato a modificare questa pagina!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -413,6 +414,73 @@ msgstr "mostra"
 msgid "Up"
 msgstr "Su"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Con un doppio click, apri l'editor"
+
+msgid "Remember last page visited"
+msgstr "Ricorda l'ultima pagina visitata"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Mostra un punto di domanda al posto dei collegamenti non esistenti"
+
+msgid "Show page trail"
+msgstr "Mostra il piè di pagina"
+
+msgid "Show icon toolbar"
+msgstr "Mostra la barra con le icone"
+
+msgid "Show top/bottom links in headings"
+msgstr "Mostra i link inizio/fine nelle intestazioni"
+
+msgid "Show fancy diffs"
+msgstr "Evidenzia le differenze"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Aggiungi uno spazio tra le singole parole dei nomi wiki"
+
+msgid "Remember login information"
+msgstr "Ricorda le mie informazioni di login"
+
+msgid "Subscribe to trivial changes"
+msgstr "Sottoscrivi per i cambiamenti banali"
+
+msgid "Disable this account forever"
+msgstr "Disabilita questa utenza per sempre"
+
+msgid "Name"
+msgstr "Nome"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Usa la forma NomeCognome)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Password repeat"
+msgstr "Ripeti la password"
+
+msgid "(Only when changing passwords)"
+msgstr "(Solo quando si modifica la password)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "User CSS URL"
+msgstr "URL del CSS"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Lascia vuoto per disabilitare il CSS)"
+
+msgid "Editor size"
+msgstr "Dimensione dell'editor"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -451,42 +519,6 @@ msgstr "corrispondenza"
 msgid "matches"
 msgstr "corrispondenze"
 
-msgid "Open editor on double click"
-msgstr "Con un doppio click, apri l'editor"
-
-msgid "Remember last page visited"
-msgstr "Ricorda l'ultima pagina visitata"
-
-msgid "Show fancy links"
-msgstr "Enfatizza i collegamenti esterni"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Mostra un punto di domanda al posto dei collegamenti non esistenti"
-
-msgid "Show page trail"
-msgstr "Mostra il piè di pagina"
-
-msgid "Show icon toolbar"
-msgstr "Mostra la barra con le icone"
-
-msgid "Show top/bottom links in headings"
-msgstr "Mostra i link inizio/fine nelle intestazioni"
-
-msgid "Show fancy diffs"
-msgstr "Evidenzia le differenze"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Aggiungi uno spazio tra le singole parole dei nomi wiki"
-
-msgid "Remember login information"
-msgstr "Ricorda le mie informazioni di login"
-
-msgid "Subscribe to trivial changes"
-msgstr "Sottoscrivi per i cambiamenti banali"
-
-msgid "Disable this account forever"
-msgstr "Disabilita questa utenza per sempre"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Il Cookie è stato cancellato! Sei stato disconnesso."
 
@@ -524,6 +556,10 @@ msgstr ""
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Non ho trovato nessuna corrispondenza per l'indirizzo email '%(email)s'!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -577,47 +613,27 @@ msgstr "Prestabilito"
 msgid "<Browser setting>"
 msgstr "<Impostazioni del browser>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Salva"
 
 msgid "Logout"
 msgstr "Logout"
 
-msgid "Create Profile"
-msgstr "Crea il Profilo"
-
-msgid "Mail me my account data"
-msgstr "Spediscimi via email i miei dati"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Usa la forma NomeCognome)"
-
-msgid "Password"
-msgstr "Password"
-
-msgid "Password repeat"
-msgstr "Ripeti la password"
-
-msgid "(Only when changing passwords)"
-msgstr "(Solo quando si modifica la password)"
-
-msgid "Email"
-msgstr "Email"
-
 msgid "Preferred theme"
 msgstr "Tema preferito"
 
-msgid "User CSS URL"
-msgstr "URL del CSS"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "PreferenzeUtente"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Lascia vuoto per disabilitare il CSS)"
-
-msgid "Editor size"
-msgstr "Dimensione dell'editor"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Fuso orario"
@@ -647,6 +663,12 @@ msgstr ""
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Abbonato alle pagine (una espressione regolare per riga)"
+
+msgid "Create Profile"
+msgstr "Crea il Profilo"
+
+msgid "Mail me my account data"
+msgstr "Spediscimi via email i miei dati"
 
 msgid "No older revisions available!"
 msgstr "Non ci sono revisioni precedenti!"
@@ -765,6 +787,21 @@ msgstr "Richieste e modifiche alla pagina"
 msgid "You are not allowed to revert this page!"
 msgstr "Non sei autorizzato a ripristinare questa pagina!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Non hai ancora creato un profilo utente. Seleziona UserPreferences "
+"nell'angolo in alto a destra per creare un profilo."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Non ti è consentito abbonarti a pagine che non puoi leggere."
 
@@ -774,13 +811,6 @@ msgid ""
 msgstr ""
 "Questo wiki non è abilitato ad usare la mail. Contatta il gestore del wiki, "
 "o chi può abilitare la mail, oppure togli l'icona \"Subscribe\"."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Non hai ancora creato un profilo utente. Seleziona UserPreferences "
-"nell'angolo in alto a destra per creare un profilo."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1162,6 +1192,18 @@ msgstr ""
 "pagina"
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Carica nuovo allegato \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Crea un nuovo disegno \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Crea un nuovo disegno \"%(filename)s\""
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Argomento per \"Include\" non valido: \"%s\"!"
 
@@ -1257,18 +1299,6 @@ msgstr "**Superato il limite massimo di inclusioni consentite**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Impossibile trovare la pagina referenziata: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Crea un nuovo disegno \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Carica nuovo allegato \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Crea un nuovo disegno \"%(filename)s\""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1393,6 +1423,14 @@ msgstr "Testo"
 msgid "Titles"
 msgstr "Titoli"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Collegamenti rapidi"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Collegamenti rapidi"
+
 msgid "More Actions:"
 msgstr "Altre Azioni:"
 
@@ -1422,6 +1460,13 @@ msgstr "Vai"
 
 msgid "Show Parent"
 msgstr "Mostra la pagina padre"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "ModificaIlTesto"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Pagina non alterabile"
@@ -1547,6 +1592,21 @@ msgstr "RinominaPagina"
 
 msgid "SpellCheck"
 msgstr "ControlloOrtografico"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Salta all'anteprima"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[dimensione attuale:'''%(size)d''' byte]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Commento facoltativo alle modifiche apportate"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Associa questa pagina alla categoria %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Enfatizza i collegamenti esterni"
 
 #~ msgid "Save as"
 #~ msgstr " Salva come"

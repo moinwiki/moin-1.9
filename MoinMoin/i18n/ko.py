@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''이 글의 백업된 본문은 사용되지 않으며 검색 결과에 포함되지 않습니다!''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s일에 수정된 %(rev)d 번째 판''',
@@ -66,18 +66,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[글틀 %s를 찾을 수 없음]''',
 '''[You may not read %s]''':
 '''[%s는 읽을 수 없음]''',
-'''Skip to preview''':
-'''미리보기로 건너띔''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[현재 글 크기 \'\'\'%(size)d\'\'\' 바이트]''',
 '''Describe %s here.''':
 '''%s에 대해 써주세요.''',
-'''Optional comment about this change''':
-'''이번 변경 사항에 대한 코멘트''',
-'''<No addition>''':
-'''<추가 않음>''',
-'''Make this page belong to category %(category)s''':
-'''%(category)s로 분류''',
 '''Check Spelling''':
 '''철자 검사''',
 '''Save Changes''':
@@ -90,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 동의하지 않는 경우에는 \'\'\'%(cancel_button_text)s\'\'\'을 눌러서 변경사항을 취소할 수 있습니다.''',
 '''Preview''':
 '''미리보기''',
+'''<No addition>''':
+'''<추가 않음>''',
 '''Trivial change''':
 '''사소한 변경''',
 '''Remove trailing whitespace from each line''':
@@ -217,6 +209,44 @@ To leave the editor, press the Cancel button.''':
 '''보기''',
 '''Up''':
 '''위로''',
+'''Open editor on double click''':
+'''더블 클릭해서 글 고치기로 들어감''',
+'''Remember last page visited''':
+'''마지막 방문을 기억해둠''',
+'''Show question mark for non-existing pagelinks''':
+'''존재하지 않는 글 링크 옆에 물음표 표시''',
+'''Show page trail''':
+'''글보기 발자국 표시''',
+'''Show icon toolbar''':
+'''아이콘 툴바 표시''',
+'''Show top/bottom links in headings''':
+'''표제들 옆에 맨위/맨아래 링크 표시''',
+'''Show fancy diffs''':
+'''꾸며진 diff 표시''',
+'''Add spaces to displayed wiki names''':
+'''위키네임에 스페이스를 넣어서 표시''',
+'''Remember login information''':
+'''로그인 정보를 기억함''',
+'''Subscribe to trivial changes''':
+'''사소한 변경사항도 감시''',
+'''Disable this account forever''':
+'''이 계정을 더 이상 사용하지 않음''',
+'''Name''':
+'''이름''',
+'''Password''':
+'''패스워드''',
+'''Password repeat''':
+'''패스워드 (확인)''',
+'''(Only when changing passwords)''':
+'''(패스워드 변경시)''',
+'''Email''':
+'''메일''',
+'''User CSS URL''':
+'''CSS URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(CSS를 사용하지 않으려면 "None")''',
+'''Editor size''':
+'''편집기 크기''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -239,30 +269,6 @@ space between words. Group page name is not allowed.''':
 ''' 개 포함''',
 '''matches''':
 ''' 개 포함''',
-'''Open editor on double click''':
-'''더블 클릭해서 글 고치기로 들어감''',
-'''Remember last page visited''':
-'''마지막 방문을 기억해둠''',
-'''Show fancy links''':
-'''꾸며진 링크 표시''',
-'''Show question mark for non-existing pagelinks''':
-'''존재하지 않는 글 링크 옆에 물음표 표시''',
-'''Show page trail''':
-'''글보기 발자국 표시''',
-'''Show icon toolbar''':
-'''아이콘 툴바 표시''',
-'''Show top/bottom links in headings''':
-'''표제들 옆에 맨위/맨아래 링크 표시''',
-'''Show fancy diffs''':
-'''꾸며진 diff 표시''',
-'''Add spaces to displayed wiki names''':
-'''위키네임에 스페이스를 넣어서 표시''',
-'''Remember login information''':
-'''로그인 정보를 기억함''',
-'''Subscribe to trivial changes''':
-'''사소한 변경사항도 감시''',
-'''Disable this account forever''':
-'''이 계정을 더 이상 사용하지 않음''',
 '''Cookie deleted. You are now logged out.''':
 '''쿠키가 지워졌습니다. 로그아웃 되었습니다.''',
 '''This wiki is not enabled for mail processing.
@@ -307,30 +313,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''저장''',
 '''Logout''':
 '''로그아웃''',
-'''Create Profile''':
-'''사용자 등록''',
-'''Mail me my account data''':
-'''비밀번호 되찾기''',
-'''Name''':
-'''이름''',
-'''(Use FirstnameLastname)''':
-'''(HongGildong식)''',
-'''Password''':
-'''패스워드''',
-'''Password repeat''':
-'''패스워드 (확인)''',
-'''(Only when changing passwords)''':
-'''(패스워드 변경시)''',
-'''Email''':
-'''메일''',
 '''Preferred theme''':
 '''좋아하는 테마''',
-'''User CSS URL''':
-'''CSS URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(CSS를 사용하지 않으려면 "None")''',
-'''Editor size''':
-'''편집기 크기''',
 '''Time zone''':
 '''시간대''',
 '''Your time is''':
@@ -349,6 +333,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''메일 알림을 받는 글들 (한 줄에 정규식 하나씩)''',
+'''Create Profile''':
+'''사용자 등록''',
+'''Mail me my account data''':
+'''비밀번호 되찾기''',
 '''No older revisions available!''':
 '''옛 버전이 저장되어 있지 않습니다!''',
 '''Diff for "%s"''':
@@ -419,12 +407,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Page hits and edits''',
 '''You are not allowed to revert this page!''':
 '''이 글을 되돌릴 권한이 없습니다!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러서 사용자 계정을 만들어 주세요.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''글을 감시하기 위해서는 읽기 권한이 필요합니다.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 위키 관리자에게 연락하여 메일을 쓸 수 있도록 하거나, "Subscribe" 아이콘을 지워달라고 하세요.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러서 사용자 계정을 만들어 주세요.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''사용자 정보에 메일 주소를 입력하지 않았습니다. 화면 오른쪽 위의 UserPreferences에 들어가서 이름을 입력하고 메일 주소를 바르게 입력해 주세요.''',
 '''Your subscribtion to this page has been removed.''':
@@ -621,6 +609,12 @@ Try a different name.''':
 '''내용 전체에서 찾음 : "%s"''',
 '''Full Link List for "%s"''':
 '''"%s"에 연결된 모든 글 목록''',
+'''Upload new attachment "%(filename)s"''':
+'''새 첨부 "%(filename)s"를 업로드''',
+'''Create new drawing "%(filename)s"''':
+'''새 그림 "%(filename)s" 그리기''',
+'''Edit drawing %(filename)s''':
+'''그림 "%(filename)s" 손질하기''',
 '''Invalid include arguments "%s"!''':
 '''"%s"는 잘못된 인자입니다!''',
 '''Nothing found for "%s"!''':
@@ -673,12 +667,6 @@ Try a different name.''':
 '''이 위키 전체를 XML로 반출''',
 '''No wanted pages in this wiki.''':
 '''이 위키에는 수배중인 글이 없습니다.''',
-'''Create new drawing "%(filename)s"''':
-'''새 그림 "%(filename)s" 그리기''',
-'''Upload new attachment "%(filename)s"''':
-'''새 첨부 "%(filename)s"를 업로드''',
-'''Edit drawing %(filename)s''':
-'''그림 "%(filename)s" 손질하기''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"뒤에는 "%(wanted)s"가 필요하지만 "%(token)s"가 발견되었습니다.''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

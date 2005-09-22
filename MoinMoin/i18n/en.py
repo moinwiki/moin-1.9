@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''The backed up content of this page is deprecated and will not be included in search results!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Revision %(rev)d as of %(date)s''',
@@ -286,8 +286,6 @@ space between words. Group page name is not allowed.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s and try again.''',
-'''Can\'t work out query''':
-'''Can\'t work out query''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d results of about %(pages)d pages.''',
 '''%.2f seconds''':
@@ -304,22 +302,6 @@ Contact the owner of the wiki, who can enable email.''':
 Contact the owner of the wiki, who can enable email.''',
 '''Please provide a valid email address!''':
 '''Please provide a valid email address!''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''',
 '''Login Name: %s
 
 Login Password: %s
@@ -334,6 +316,22 @@ Login URL: %s/?action=userform&uid=%s
 ''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Found no account matching the given email address \'%(email)s\'!''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Your wiki account data''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -358,6 +356,8 @@ Login URL: %s/?action=userform&uid=%s
 '''Please provide your email address. If you loose your login information, you can get it by email.''',
 '''This email already belongs to somebody else.''':
 '''This email already belongs to somebody else.''',
+'''User account created!''':
+'''User account created!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''The theme \'%(theme_name)s\' could not be loaded!''',
 '''User preferences saved!''':
@@ -888,6 +888,8 @@ red=edit''',
 '''Additions are marked like this.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''',
+'''Mail not sent''':
+'''Mail not sent''',
 '''Mail sent OK''':
 '''Mail sent OK''',
 '''FrontPage''':

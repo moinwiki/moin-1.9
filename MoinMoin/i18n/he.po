@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-22 22:38+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Language-in-English: Hebrew\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "גרסאות הגיבוי של הדף לא יכללו בתוצאות החיפוש"
 
@@ -467,9 +467,6 @@ msgstr "התחבר"
 msgid " %s and try again."
 msgstr " %s ונסה שוב."
 
-msgid "Can't work out query"
-msgstr "לא מסוגל לבצע שאילתה"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr "%(hits)d תוצאות מתוך בערך %(pages)d דפים."
@@ -497,22 +494,6 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "אנא רשום כתובת דואר אלקטרוני אמיתית."
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"מישהו ביקש לשלוח אליך את פרטי המשתמש.\n"
-"\n"
-"אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.\n"
-"\n"
-"לאחר התחברות, מומלץ להחליף את הסיסמא.\n"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -530,6 +511,22 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "לא נמצא משתמש עם כתובת הדואר האלקטרוני \"%(email)s\"."
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"מישהו ביקש לשלוח אליך את פרטי המשתמש.\n"
+"\n"
+"אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.\n"
+"\n"
+"לאחר התחברות, מומלץ להחליף את הסיסמא.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -571,6 +568,9 @@ msgstr ""
 
 msgid "This email already belongs to somebody else."
 msgstr "כתובת הדואר האלקטרוני הזאת שייכת למישהו אחר."
+
+msgid "User account created!"
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1464,6 +1464,10 @@ msgstr "הוספות מסומנות כך."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "החיבור לשרת הדואר \"%(server)s\" נכשל: %(reason)s"
 
+#, fuzzy
+msgid "Mail not sent"
+msgstr "דואר נשלח בהצלחה."
+
 msgid "Mail sent OK"
 msgstr "דואר נשלח בהצלחה."
 
@@ -1550,6 +1554,9 @@ msgstr "בדוק איות"
 
 #~ msgid "Make this page belong to category %(category)s"
 #~ msgstr "שייך את הדף לקטגוריה %(category)s"
+
+#~ msgid "Can't work out query"
+#~ msgstr "לא מסוגל לבצע שאילתה"
 
 #~ msgid "Show fancy links"
 #~ msgstr "הצג קישורים יפים"

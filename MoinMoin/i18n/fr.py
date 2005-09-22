@@ -4,13 +4,13 @@
 meta = {
   'language': 'Français',
   'elanguage': 'French',
-  'maintainer': 'JP Guerard <fevrier@tigreraye.org>',
+  'maintainer': 'ASCII-only here <fevrier@tigreraye.org>',
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Le contenu sauvegardé de cette page est obsolète et ne sera pas inclus dans les résultats d\'une recherche !''',
 '''Revision %(rev)d as of %(date)s''':
 '''Version %(rev)d à la date du %(date)s''',
@@ -72,18 +72,8 @@ Jetez un œil aux modifications de %(difflink)s pour voir ce qui a changé.''',
 '''[Le modèle %s n\'a pas été trouvé]''',
 '''[You may not read %s]''':
 '''[Vous n\'avez pas le droit de lire %s]''',
-'''Skip to preview''':
-'''Passer directement à l\'aperçu''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[taille de la page actuelle \'\'\'%(size)d\'\'\' octets]''',
 '''Describe %s here.''':
 '''Décrire ici « %s ».''',
-'''Optional comment about this change''':
-'''Commentaire optionnel sur cette modification''',
-'''<No addition>''':
-'''<Pas d\'ajout>''',
-'''Make this page belong to category %(category)s''':
-'''Classer cette page dans la catégorie %(category)s''',
 '''Check Spelling''':
 '''Vérifier l\'orthographe''',
 '''Save Changes''':
@@ -96,10 +86,18 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si vous ne le souhaitez pas, utilisez \'\'\'%(cancel_button_text)s\'\'\' pour annuler vos modifications.''',
 '''Preview''':
 '''Aperçu''',
+'''GUI Mode''':
+'''Mode graphique''',
+'''Comment:''':
+'''Commentaire :''',
+'''<No addition>''':
+'''<Pas d\'ajout>''',
+'''Add to: %(category)s''':
+'''Ajouter à : %(category)s''',
 '''Trivial change''':
 '''Modification mineure''',
 '''Remove trailing whitespace from each line''':
-'''Supprimer les espaces à la fin des lignes''',
+'''Supprimer les espaces en fin de ligne''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -161,6 +159,8 @@ La page suivante a été modifiée par %(editor)s :
 '''Vous n\'êtes pas autorisé à modifier cette page !''',
 '''You cannot save empty pages.''':
 '''Vous ne pouvez pas enregistrer de pages vides.''',
+'''You already saved this page!''':
+'''Vous avez déjà enregistré cette page !''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -226,6 +226,50 @@ Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
 '''Voir''',
 '''Up''':
 '''Haut''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''En information sur l\'auteur, indiquer mon adresse électronique au lieu de ma page wiki personnelle''',
+'''Open editor on double click''':
+'''Double-cliquer pour ouvrir l\'éditeur''',
+'''Remember last page visited''':
+'''Se souvenir de la dernière page visitée''',
+'''Show question mark for non-existing pagelinks''':
+'''Afficher un point d\'interrogation pour les liens vers des pages inexistantes''',
+'''Show page trail''':
+'''Voir le chemin suivi''',
+'''Show icon toolbar''':
+'''Voir la barre d\'icônes''',
+'''Show top/bottom links in headings''':
+'''Ajouter aux titres des liens vers les début et fin de page''',
+'''Show fancy diffs''':
+'''Affichage amélioré des modifications''',
+'''Add spaces to displayed wiki names''':
+'''Ajouter des espaces aux noms wiki affichés''',
+'''Remember login information''':
+'''Se souvenir de l\'identité de l\'utilisateur''',
+'''Subscribe to trivial changes''':
+'''S\'abonner aux modifications mineures''',
+'''Disable this account forever''':
+'''Désactiver ce compte pour toujours''',
+'''Name''':
+'''Nom''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Utilisez Prénom\'\'\'\'\'\'Nom)''',
+'''Alias-Name''':
+'''Pseudonyme''',
+'''Password''':
+'''Mot de passe''',
+'''Password repeat''':
+'''Répétez le mot de passe''',
+'''(Only when changing passwords)''':
+'''(Uniquement pour le modifier)''',
+'''Email''':
+'''Adresse électronique''',
+'''User CSS URL''':
+'''URL du style CSS personnel''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Laissez-la vide pour désactiver le style CSS personnel)''',
+'''Editor size''':
+'''Taille de l\'éditeur''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -249,30 +293,6 @@ Les noms des pages des groupes sont interdits.''',
 '''correspondance''',
 '''matches''':
 '''correspondances''',
-'''Open editor on double click''':
-'''Double-cliquer pour ouvrir l\'éditeur''',
-'''Remember last page visited''':
-'''Se souvenir de la dernière page visitée''',
-'''Show fancy links''':
-'''Affichage amélioré des liens''',
-'''Show question mark for non-existing pagelinks''':
-'''Afficher un point d\'interrogation pour les liens vers des pages inexistantes''',
-'''Show page trail''':
-'''Voir le chemin suivi''',
-'''Show icon toolbar''':
-'''Voir la barre d\'icônes''',
-'''Show top/bottom links in headings''':
-'''Ajouter aux titres des liens vers les début et fin de page''',
-'''Show fancy diffs''':
-'''Affichage amélioré des modifications''',
-'''Add spaces to displayed wiki names''':
-'''Ajouter des espaces aux noms wiki affichés''',
-'''Remember login information''':
-'''Se souvenir de l\'identité de l\'utilisateur''',
-'''Subscribe to trivial changes''':
-'''S\'abonner aux modifications mineures''',
-'''Disable this account forever''':
-'''Désactiver ce compte pour toujours''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie effacé. Vous êtes déconnecté.''',
 '''This wiki is not enabled for mail processing.
@@ -313,6 +333,8 @@ URL de connexion : %s/?action=userform&uid=%s
 ''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Aucun compte correspondant à l\'adresse « %(email)s » n\'a été trouvé !''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Vos identifiants de connexion au wiki''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nom d\'utilisateur inconnu : {{{"%s"}}}. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
 '''Missing password. Please enter user name and password.''':
@@ -340,37 +362,23 @@ URL de connexion : %s/?action=userform&uid=%s
 '''User preferences saved!''':
 '''Vos préférences utilisateur ont été enregistrées !''',
 '''Default''':
-'''Par défaut''',
+'''par défaut''',
 '''<Browser setting>''':
-'''<Langue du navigateur>''',
+'''<langue du navigateur>''',
+'''the one preferred''':
+'''votre préféré''',
+'''free choice''':
+'''au choix''',
 '''Save''':
 '''Enregistrer''',
 '''Logout''':
 '''Déconnexion''',
-'''Create Profile''':
-'''Créer un profil''',
-'''Mail me my account data''':
-'''Envoi par courrier électronique de mes identifiants de connexion''',
-'''Name''':
-'''Nom''',
-'''(Use FirstnameLastname)''':
-'''(Utilisez PrénomNom)''',
-'''Password''':
-'''Mot de passe''',
-'''Password repeat''':
-'''Répétez le mot de passe''',
-'''(Only when changing passwords)''':
-'''(Uniquement pour le modifier)''',
-'''Email''':
-'''Adresse électronique''',
 '''Preferred theme''':
 '''Thème préféré''',
-'''User CSS URL''':
-'''URL du style CSS personnel''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Laissez-la vide pour désactiver le style CSS personnel)''',
-'''Editor size''':
-'''Taille de l\'éditeur''',
+'''Editor Preference''':
+'''Éditeur préféré''',
+'''Editor shown on UI''':
+'''Éditeur proposé''',
 '''Time zone''':
 '''Fuseau horaire''',
 '''Your time is''':
@@ -389,6 +397,10 @@ URL de connexion : %s/?action=userform&uid=%s
 '''Cette liste ne marche pas, sauf si vous avez entré une adresse électronique valide !''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Abonnements (une expression rationnelle par ligne)''',
+'''Create Profile''':
+'''Créer un profil''',
+'''Mail me my account data''':
+'''Envoi par courrier électronique de mes identifiants de connexion''',
 '''No older revisions available!''':
 '''Il n\'y a pas de version antérieure.''',
 '''Diff for "%s"''':
@@ -461,12 +473,16 @@ URL de connexion : %s/?action=userform&uid=%s
 '''Nombre de connexions et d\'éditions''',
 '''You are not allowed to revert this page!''':
 '''Vous n\'êtes pas autorisé à restaurer une version antérieure de cette page !''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Vous n\'avez pas encore créé de profil utilisateur. Utilisez PréférencesUtilisateur dans le coin en haut à droite pour créer un profil.''',
+'''Your quicklink to this page has been removed.''':
+'''Votre lien rapide vers cette page a été supprimé.''',
+'''A quicklink to this page has been added for you.''':
+'''Un lien rapide vers cette page a été ajouté pour vous.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Vous n\'êtes pas autorisé à vous abonner à une page que vous ne pouvez pas lire.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''La gestion du courrier électronique n\'est pas activé sur ce wiki. Contactez le propriétaire de ce wiki, qui peut soit activer le courrier, soit retirer l\'icône « S\'abonner ».''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Vous n\'avez pas encore créé de profil utilisateur. Utilisez PréférencesUtilisateur dans le coin en haut à droite pour créer un profil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Vous n\'avez pas indiqué d\'adresse électronique dans votre profil. Cliquez sur votre nom (PréférencesUtilisateur) dans le coin en haut à droite et indiquez une adresse électronique valide.''',
 '''Your subscribtion to this page has been removed.''':
@@ -678,6 +694,12 @@ Essayez un autre nom.''',
 '''Liste de tout les liens pour « %s »''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossible de créer une page sans nom. Veuillez indiquer un nom de page.''',
+'''Upload new attachment "%(filename)s"''':
+'''Envoi d\'une nouvelle pièce jointe « %(filename)s »''',
+'''Create new drawing "%(filename)s"''':
+'''Création nouveau dessin « %(filename)s »''',
+'''Edit drawing %(filename)s''':
+'''Édition du dessin %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Les arguments du include ne sont pas valides : « %s » !''',
 '''Nothing found for "%s"!''':
@@ -734,12 +756,6 @@ Essayez un autre nom.''',
 '''**Vous avez dépassé le nombre maximal d\'inclusions autorisées**''',
 '''**Could not find the referenced page: %s**''':
 '''**Impossible de trouver la page indiquée : %s**''',
-'''Create new drawing "%(filename)s"''':
-'''Création nouveau dessin « %(filename)s »''',
-'''Upload new attachment "%(filename)s"''':
-'''Envoi d\'une nouvelle pièce jointe « %(filename)s »''',
-'''Edit drawing %(filename)s''':
-'''Édition du dessin %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''« %(wanted)s » était attendu après « %(key)s », mais « %(token)s » a été obtenu''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -809,11 +825,15 @@ rouge=modifications''',
 '''last modified %(time)s''':
 '''dernière modification %(time)s''',
 '''Search:''':
-'''Rechercher :''',
+'''Rechercher :''',
 '''Text''':
 '''Texte''',
 '''Titles''':
 '''Titres''',
+'''Remove from Quicklinks''':
+'''Supprimer des liens rapides''',
+'''Add to Quicklinks''':
+'''Ajouter aux liens rapides''',
 '''More Actions:''':
 '''Autres actions :''',
 '''Show Raw Text''':
@@ -834,6 +854,10 @@ rouge=modifications''',
 '''Exécuter''',
 '''Show Parent''':
 '''Page au-dessus''',
+'''Edit (Text)''':
+'''Éditer (mode texte)''',
+'''Edit (GUI)''':
+'''Éditer (mode graphique)''',
 '''Immutable Page''':
 '''Page immuable''',
 '''Show Changes''':

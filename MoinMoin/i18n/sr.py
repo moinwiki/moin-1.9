@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''Rezervne kopije ove stranice su zastarele i neće biti uključene u rezultate pretrage!''',
 '''Redirected from page "%(page)s"''':
 '''Prosleđeno sa stranice "%(page)s"''',
@@ -64,18 +64,8 @@ izmenilo.''',
 '''[Šablon %s nije pronađen]''',
 '''[You may not read %s]''':
 '''[Vi ne možete da čitate %s]''',
-'''Skip to preview''':
-'''Preskočite radi uvida''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[trenutna veličina stranice je \'\'\'%(size)d\'\' bajtova]''',
 '''Describe %s here.''':
 '''Opišite %s ovde.''',
-'''Optional comment about this change''':
-'''Doadtni komentar o izmeni ove stranice.''',
-'''<No addition>''':
-'''<Nema dodataka>''',
-'''Make this page belong to category %(category)s''':
-'''Smestiti ovu stranicu u kategoriju %(category)s''',
 '''Check Spelling''':
 '''Provera pravopisa''',
 '''Save Changes''':
@@ -88,6 +78,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Ako to ne želite, kliknite na \'\'\'%(cancel_button_text)s\'\'\' , da biste Vaše promene poništili.''',
 '''Preview''':
 '''Predgled''',
+'''<No addition>''':
+'''<Nema dodataka>''',
 '''Remove trailing whitespace from each line''':
 '''Skini blankove sa kraja svake linije''',
 '''Edit was cancelled.''':
@@ -202,20 +194,10 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Videti''',
 '''Up''':
 '''Gore''',
-'''Login''':
-'''Ulogovati se''',
-'''Can\'t work out query''':
-'''Ne mogu da obradim potragu''',
-'''match''':
-'''pronađen''',
-'''matches''':
-'''pronađenih''',
 '''Open editor on double click''':
 '''Otvoriti editor sa duplim klikom''',
 '''Remember last page visited''':
 '''Zapamtiti poslednje posećene stranice''',
-'''Show fancy links''':
-'''Pokazivati ulepšane linkove''',
 '''Show question mark for non-existing pagelinks''':
 '''Pokazivati znak pitanja za nepostojeće linkove''',
 '''Show page trail''':
@@ -234,6 +216,30 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Pretpisati se na SVE izmene''',
 '''Disable this account forever''':
 '''Deaktivirati ovaj nalog zauvek''',
+'''Name''':
+'''Ime''',
+'''Password''':
+'''Lozinka''',
+'''Password repeat''':
+'''ponovi lozinku''',
+'''(Only when changing passwords)''':
+'''(Samo kad menjate lozinku)''',
+'''Email''':
+'''Mejl adresa''',
+'''User CSS URL''':
+'''CSS URL korisnika''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Ostavite prazno ako nećete CSS)''',
+'''Editor size''':
+'''Veličina editora''',
+'''Login''':
+'''Ulogovati se''',
+'''Can\'t work out query''':
+'''Ne mogu da obradim potragu''',
+'''match''':
+'''pronađen''',
+'''matches''':
+'''pronađenih''',
 '''Cookie deleted. You are now logged out.''':
 '''Kolačić izbrisan. Vi ste sada odjavljeni iz sistema''',
 '''Please provide a valid email address!''':
@@ -258,30 +264,8 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Snimiti''',
 '''Logout''':
 '''Izlogovati se''',
-'''Create Profile''':
-'''stvoriti profil''',
-'''Mail me my account data''':
-'''poslati mi moje podatke putem mejla''',
-'''Name''':
-'''Ime''',
-'''(Use FirstnameLastname)''':
-'''(Koristite ImePrezime)''',
-'''Password''':
-'''Lozinka''',
-'''Password repeat''':
-'''ponovi lozinku''',
-'''(Only when changing passwords)''':
-'''(Samo kad menjate lozinku)''',
-'''Email''':
-'''Mejl adresa''',
 '''Preferred theme''':
 '''Omiljena tema''',
-'''User CSS URL''':
-'''CSS URL korisnika''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Ostavite prazno ako nećete CSS)''',
-'''Editor size''':
-'''Veličina editora''',
 '''Time zone''':
 '''Vremenska zona''',
 '''Your time is''':
@@ -300,6 +284,10 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Ova lista ne funkcioniše ako niste ukucali pravilnu mejl adresu!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Pretpisane viki stranice (jedan regularni izraz u redu)''',
+'''Create Profile''':
+'''stvoriti profil''',
+'''Mail me my account data''':
+'''poslati mi moje podatke putem mejla''',
 '''No older revisions available!''':
 '''Prethodne revizije ne postoje!''',
 '''Diff for "%s"''':
@@ -366,12 +354,12 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Broj poziva i izmena stranica''',
 '''You are not allowed to revert this page!''':
 '''Vama nije dozvoljeno da povratite ovu stranicu!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Još nemate korisnički profil. Izaberite MojePostavke u gornjem desnom uglu da kreirate profil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Ne možete se pretpisati na stranicu koju ne možete čitati.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Ovaj viki nije aktiviran za obradu mejlova. Kontaktirajte vlasnika ovog vikija, koji ili može da uključi mejl opcije, ili da skloni "Pretpisati" icon.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Još nemate korisnički profil. Izaberite MojePostavke u gornjem desnom uglu da kreirate profil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Niste ukucali mejl adresu u vaš profil. Izaberite vaše ime (MojePostavke) u gornjem desnom uglu i izaberite važeću mejl adresu. ''',
 '''Your subscribtion to this page has been removed.''':
@@ -543,6 +531,12 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Ne možete proveravati pravopis na stranici koju ne možete čitati.''',
 '''Full Link List for "%s"''':
 '''Lista svih linkova za "%s"''',
+'''Upload new attachment "%(filename)s"''':
+'''Dodati novi prilog "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Stvoriti novi crtež "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Obraditi crtež %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Nevažeći include-argumenti: "%s"!''',
 '''Nothing found for "%s"!''':
@@ -595,12 +589,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Skinuti XML eksport ovog vikija''',
 '''No wanted pages in this wiki.''':
 '''Nema željenih stranica u ovom vikiju.''',
-'''Create new drawing "%(filename)s"''':
-'''Stvoriti novi crtež "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Dodati novi prilog "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Obraditi crtež %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Očekivane "%(wanted)s" posle "%(key)s", dobi "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

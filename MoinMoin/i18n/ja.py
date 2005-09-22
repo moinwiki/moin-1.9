@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''このページは"deprecated"であるため、検索結果には含まれません。''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s時点のリビジョン%(rev)d''',
@@ -72,18 +72,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[テンプレート%sが見つかりません]''',
 '''[You may not read %s]''':
 '''[%sを読む権限がありません]''',
-'''Skip to preview''':
-'''プレビューへ移動''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[現在のページサイズ: \'\'\'%(size)d\'\'\'バイト]''',
 '''Describe %s here.''':
 '''%sについて、ここに記述してください。''',
-'''Optional comment about this change''':
-'''この修正についてのコメント(省略可)''',
-'''<No addition>''':
-'''<追加無し>''',
-'''Make this page belong to category %(category)s''':
-'''このページをカテゴリー「%(category)s」に分類''',
 '''Check Spelling''':
 '''スペルチェック''',
 '''Save Changes''':
@@ -96,6 +86,14 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 編集をキャンセルする場合には\'\'\'%(cancel_button_text)s\'\'\'をクリックしてください。''',
 '''Preview''':
 '''プレビュー''',
+'''GUI Mode''':
+'''GUIモード''',
+'''Comment:''':
+'''コメント:''',
+'''<No addition>''':
+'''<追加無し>''',
+'''Add to: %(category)s''':
+'''%(category)sに追加''',
 '''Trivial change''':
 '''ささいな変更''',
 '''Remove trailing whitespace from each line''':
@@ -163,6 +161,8 @@ The following page has been changed by %(editor)s:
 '''このページを削除する権限がありません。''',
 '''You cannot save empty pages.''':
 '''空のページは保存できません。''',
+'''You already saved this page!''':
+'''既にこのページを保存済みです。''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -230,6 +230,50 @@ To leave the editor, press the Cancel button.''':
 '''表示''',
 '''Up''':
 '''親ページへ''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''作成者の情報として(Wikiホームページではなく)メールアドレスを載せる''',
+'''Open editor on double click''':
+'''ダブルクリックでエディタを開く''',
+'''Remember last page visited''':
+'''最後に訪れたページを記憶する''',
+'''Show question mark for non-existing pagelinks''':
+'''存在しないページへのリンクには"?"を表示する''',
+'''Show page trail''':
+'''訪れたページの履歴を表示する''',
+'''Show icon toolbar''':
+'''アイコンツールバーを表示する''',
+'''Show top/bottom links in headings''':
+'''表題に先頭/末尾へのリンクを表示する''',
+'''Show fancy diffs''':
+'''差分を飾り付きで表示する''',
+'''Add spaces to displayed wiki names''':
+'''Wiki名を空白付きで表示する''',
+'''Remember login information''':
+'''ログインの情報を保持''',
+'''Subscribe to trivial changes''':
+'''ささいな変更の通知も受ける''',
+'''Disable this account forever''':
+'''このアカウントを無効にする''',
+'''Name''':
+'''名前''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Firstname\'\'\'\'\'\'Lastname 形式)''',
+'''Alias-Name''':
+'''別名''',
+'''Password''':
+'''パスワード''',
+'''Password repeat''':
+'''パスワード(もう一度)''',
+'''(Only when changing passwords)''':
+'''(パスワード変更時のみ)''',
+'''Email''':
+'''メールアドレス''',
+'''User CSS URL''':
+'''CSSのURL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(CSSを無効にするには空にする)''',
+'''Editor size''':
+'''エディタのサイズ''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -251,30 +295,6 @@ space between words. Group page name is not allowed.''':
 '''箇所一致''',
 '''matches''':
 '''箇所一致''',
-'''Open editor on double click''':
-'''ダブルクリックでエディタを開く''',
-'''Remember last page visited''':
-'''最後に訪れたページを記憶する''',
-'''Show fancy links''':
-'''リンクを飾り付きで表示する''',
-'''Show question mark for non-existing pagelinks''':
-'''存在しないページへのリンクには"?"を表示する''',
-'''Show page trail''':
-'''訪れたページの履歴を表示する''',
-'''Show icon toolbar''':
-'''アイコンツールバーを表示する''',
-'''Show top/bottom links in headings''':
-'''表題に先頭/末尾へのリンクを表示する''',
-'''Show fancy diffs''':
-'''差分を飾り付きで表示する''',
-'''Add spaces to displayed wiki names''':
-'''wiki nameを空白付きで表示する''',
-'''Remember login information''':
-'''ログインの情報を保持''',
-'''Subscribe to trivial changes''':
-'''ささいな変更の通知も受ける''',
-'''Disable this account forever''':
-'''このアカウントを無効にする''',
 '''Cookie deleted. You are now logged out.''':
 '''クッキーが削除されました。ログアウト完了。''',
 '''This wiki is not enabled for mail processing.
@@ -314,6 +334,8 @@ Login URL: %s/?action=userform&uid=%s
 ''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] アカウント情報''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
 '''Missing password. Please enter user name and password.''':
@@ -344,34 +366,20 @@ Login URL: %s/?action=userform&uid=%s
 '''デフォルト''',
 '''<Browser setting>''':
 '''<ブラウザの設定>''',
+'''the one preferred''':
+'''お好み''',
+'''free choice''':
+'''自由選択''',
 '''Save''':
 '''保存''',
 '''Logout''':
 '''ログアウト''',
-'''Create Profile''':
-'''プロファイル作成''',
-'''Mail me my account data''':
-'''アカウント情報をメールする''',
-'''Name''':
-'''名前''',
-'''(Use FirstnameLastname)''':
-'''(FirstnameLastname 形式)''',
-'''Password''':
-'''パスワード''',
-'''Password repeat''':
-'''パスワード(もう一度)''',
-'''(Only when changing passwords)''':
-'''(パスワード変更時のみ)''',
-'''Email''':
-'''メールアドレス''',
 '''Preferred theme''':
 '''テーマ''',
-'''User CSS URL''':
-'''CSSのURL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(CSSを無効にするには空にする)''',
-'''Editor size''':
-'''エディタのサイズ''',
+'''Editor Preference''':
+'''エディタの好み''',
+'''Editor shown on UI''':
+'''UIで表示されるエディタ''',
 '''Time zone''':
 '''タイムゾーン''',
 '''Your time is''':
@@ -390,6 +398,10 @@ Login URL: %s/?action=userform&uid=%s
 '''このリストは、有効なメールアドレスを入力しなければ利用できません。''',
 '''Subscribed wiki pages (one regex per line)''':
 '''購読中のwikiページ[[BR]](1行あたりひとつの正規表現)''',
+'''Create Profile''':
+'''プロファイル作成''',
+'''Mail me my account data''':
+'''アカウント情報をメールする''',
 '''No older revisions available!''':
 '''古いリビジョンはありません。''',
 '''Diff for "%s"''':
@@ -462,12 +474,16 @@ Login URL: %s/?action=userform&uid=%s
 '''ページの参照と更新''',
 '''You are not allowed to revert this page!''':
 '''このページを前のバージョンに戻す権限がありません。''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、プロファイルを作成してください。''',
+'''Your quicklink to this page has been removed.''':
+'''このページへのクイックリンクを削除しました。''',
+'''A quicklink to this page has been added for you.''':
+'''このページへのクイックリンクを追加しました。''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''読む権限がないページを購読することはできません。''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''このwikiではメールが利用できません。メールを利用できるようにするか、"購読"アイコンを無効にするよう、管理者に問い合わせてください。''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、プロファイルを作成してください。''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''プロファイルにメールアドレスが存在しません。UserPreferencesのページにてメールアドレスを登録してください。''',
 '''Your subscribtion to this page has been removed.''':
@@ -673,6 +689,12 @@ Try a different name.''':
 '''"%s"の全リンクリスト''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''名前の無いページを作成することはできません。ページ名を指定してください。''',
+'''Upload new attachment "%(filename)s"''':
+'''添付ファイル"%(filename)s"のアップロード''',
+'''Create new drawing "%(filename)s"''':
+'''drawing"%(filename)s"の新規作成''',
+'''Edit drawing %(filename)s''':
+'''drawing"%(filename)s"を編集''',
 '''Invalid include arguments "%s"!''':
 '''引数"%s"が不正です。''',
 '''Nothing found for "%s"!''':
@@ -729,12 +751,6 @@ Try a different name.''':
 '''**インクルードの許容数を越えました**''',
 '''**Could not find the referenced page: %s**''':
 '''**参照されたページ(%s)が見つかりませんでした**''',
-'''Create new drawing "%(filename)s"''':
-'''drawing"%(filename)s"の新規作成''',
-'''Upload new attachment "%(filename)s"''':
-'''添付ファイル"%(filename)s"のアップロード''',
-'''Edit drawing %(filename)s''':
-'''drawing"%(filename)s"を編集''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"の後には"%(wanted)s"が必要です("%(token)s"が指定されました)。''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -809,6 +825,10 @@ red=edit''':
 '''テキスト''',
 '''Titles''':
 '''タイトル''',
+'''Remove from Quicklinks''':
+'''クイックリンクから削除''',
+'''Add to Quicklinks''':
+'''クイックリンクに追加''',
 '''More Actions:''':
 '''その他のアクション:''',
 '''Show Raw Text''':
@@ -829,6 +849,10 @@ red=edit''':
 '''実行''',
 '''Show Parent''':
 '''親ページの表示''',
+'''Edit (Text)''':
+'''編集(テキストモード)''',
+'''Edit (GUI)''':
+'''編集(GUIモード)''',
 '''Immutable Page''':
 '''編集不可のページ''',
 '''Show Changes''':

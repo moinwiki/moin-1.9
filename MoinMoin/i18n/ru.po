@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
-"PO-Revision-Date: 2005-07-31 17:46-0700\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"PO-Revision-Date: 2005-08-15 19:46-0700\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr "Сохраненная версия страницы устарела и не войдет в результаты поиска!"
 
@@ -60,7 +60,7 @@ msgid "You are not allowed to view this page."
 msgstr "Вам не разрешено просматривать эту страницу."
 
 msgid "DeleteCache"
-msgstr "СтеретьКэш"
+msgstr "СтеретьКеш"
 
 #, python-format
 msgid "(cached %s)"
@@ -129,26 +129,9 @@ msgstr "[Заготовка %s не найдена]"
 msgid "[You may not read %s]"
 msgstr "[Вам нельзя читать %s]"
 
-msgid "Skip to preview"
-msgstr "Пролистать до макета"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[размер страницы '''%(size)d''' байт]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Опишите %s."
-
-msgid "Optional comment about this change"
-msgstr "Можете прокомментировать эти изменения"
-
-msgid "<No addition>"
-msgstr "<Не добавлять>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Добавить эту страницу в категорию %(category)s"
 
 msgid "Check Spelling"
 msgstr "Проверить правописание"
@@ -173,6 +156,19 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Показать макет"
+
+msgid "GUI Mode"
+msgstr "Графический редактор"
+
+msgid "Comment:"
+msgstr "Комментарий:"
+
+msgid "<No addition>"
+msgstr "<Не добавлять>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "Добавить в: %(category)s"
 
 msgid "Trivial change"
 msgstr "Малое изменение"
@@ -283,6 +279,9 @@ msgstr "Вам нельзя исправлять эту страницу!"
 
 msgid "You cannot save empty pages."
 msgstr "Нельзя записать пустую страницу."
+
+msgid "You already saved this page!"
+msgstr "Вы уже запомнили эту страницу!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -403,6 +402,72 @@ msgstr "Показ"
 msgid "Up"
 msgstr "Наверх"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "Показывать мой почтовый адрес (вместо домашней страницы) в информации об авторе"
+
+msgid "Open editor on double click"
+msgstr "Открывать редактор по двойному клику"
+
+msgid "Remember last page visited"
+msgstr "Запомнить последнюю открытую страницу"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Показывать ? для незаполненных страниц"
+
+msgid "Show page trail"
+msgstr "Показывать список просмотренных страниц"
+
+msgid "Show icon toolbar"
+msgstr "Показывать строку иконок"
+
+msgid "Show top/bottom links in headings"
+msgstr "Показывать ссылки вверх/вниз в заголовках"
+
+msgid "Show fancy diffs"
+msgstr "Показывать красивые различия"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Разделять вик-имена пробелами"
+
+msgid "Remember login information"
+msgstr "Запомнить меня"
+
+msgid "Subscribe to trivial changes"
+msgstr "Подписаться на малые исправления"
+
+msgid "Disable this account forever"
+msgstr "Забыть меня навсегда"
+
+msgid "Name"
+msgstr "Полное имя"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(используйте Имя''''''Фамилия)"
+
+msgid "Alias-Name"
+msgstr "Короткое имя"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password repeat"
+msgstr "Пароль снова"
+
+msgid "(Only when changing passwords)"
+msgstr "(Только при изменении пароля)"
+
+msgid "Email"
+msgstr "Почтовый адрес"
+
+msgid "User CSS URL"
+msgstr "Использовать CSS из URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Оставьте пустым для использования системной CSS)"
+
+msgid "Editor size"
+msgstr "Размер окна редактирования"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -440,42 +505,6 @@ msgstr "совпадение"
 
 msgid "matches"
 msgstr "совпадений"
-
-msgid "Open editor on double click"
-msgstr "Открывать редактор по двойному клику"
-
-msgid "Remember last page visited"
-msgstr "Запомнить последнюю открытую страницу"
-
-msgid "Show fancy links"
-msgstr "Показывать красивые ссылки"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Показывать ? для незаполненных страниц"
-
-msgid "Show page trail"
-msgstr "Показывать список просмотренных страниц"
-
-msgid "Show icon toolbar"
-msgstr "Показывать строку иконок"
-
-msgid "Show top/bottom links in headings"
-msgstr "Показывать ссылки вверх/вниз в заголовках"
-
-msgid "Show fancy diffs"
-msgstr "Показывать красивые различия"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Разделять вик-имена пробелами"
-
-msgid "Remember login information"
-msgstr "Запомнить меня"
-
-msgid "Subscribe to trivial changes"
-msgstr "Подписаться на малые исправления"
-
-msgid "Disable this account forever"
-msgstr "Забыть меня навсегда"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Cookie стерты. Вы вышли."
@@ -526,6 +555,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -580,47 +613,26 @@ msgstr "По умолчанию"
 msgid "<Browser setting>"
 msgstr "<Настройки броузера>"
 
+msgid "the one preferred"
+msgstr "предпочтительно"
+
+msgid "free choice"
+msgstr "по выбору"
+
 msgid "Save"
 msgstr "Записать"
 
 msgid "Logout"
 msgstr "Выйти"
 
-msgid "Create Profile"
-msgstr "Создать настройки"
-
-msgid "Mail me my account data"
-msgstr "Отправить мне настройки почтой"
-
-msgid "Name"
-msgstr "Имя"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(используйте ИмяФамилия)"
-
-msgid "Password"
-msgstr "Пароль"
-
-msgid "Password repeat"
-msgstr "Пароль снова"
-
-msgid "(Only when changing passwords)"
-msgstr "(Только при изменении пароля)"
-
-msgid "Email"
-msgstr "Почтовый адрес"
-
 msgid "Preferred theme"
 msgstr "Предпочитаемый стиль"
 
-msgid "User CSS URL"
-msgstr "Использовать CSS из URL"
+msgid "Editor Preference"
+msgstr "Настройки редактора"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Оставьте пустым для использования системной CSS)"
-
-msgid "Editor size"
-msgstr "Размер окна редактирования"
+msgid "Editor shown on UI"
+msgstr "Показывать графический редактор"
 
 msgid "Time zone"
 msgstr "Часовой пояс"
@@ -648,6 +660,12 @@ msgstr "Этот список работает только при правил�
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Список подписки на страницы вики (один образец на строчку)"
+
+msgid "Create Profile"
+msgstr "Создать настройки"
+
+msgid "Mail me my account data"
+msgstr "Отправить мне настройки почтой"
 
 msgid "No older revisions available!"
 msgstr "Нет более старых версий!"
@@ -766,6 +784,20 @@ msgstr "Запросы и исправления страниц"
 msgid "You are not allowed to revert this page!"
 msgstr "Вы не можете восстанавливать из архива эту страницу!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем "
+"углу для их создания."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Ваша ссылка на эту страницу удалена."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Вам добавлена ссылка на эту страницу."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Вы не можете подписаться на страницу которую вам нельзя читать."
 
@@ -775,13 +807,6 @@ msgid ""
 msgstr ""
 "В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
 "может разрешить отправку или убрать кнопку \"Подписка\"."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем "
-"углу для их создания."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1158,6 +1183,18 @@ msgid ""
 msgstr "Не могу создать страницу без имени. Укажите имя страницы."
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Приложить \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Нарисовать \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Изменить рисунок %(filename)s"
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Неправильные аргументы для include \"%s\"!"
 
@@ -1251,18 +1288,6 @@ msgstr "**Превышено максимальное число вставок 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Не могу найти страницу по ссылке: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Нарисовать \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Приложить \"%(filename)s\""
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Изменить рисунок %(filename)s"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1384,6 +1409,12 @@ msgstr "По тексту"
 msgid "Titles"
 msgstr "По заголовкам"
 
+msgid "Remove from Quicklinks"
+msgstr "Убрать из закладок"
+
+msgid "Add to Quicklinks"
+msgstr "Добавить в закладки"
+
 msgid "More Actions:"
 msgstr "Другие действия:"
 
@@ -1413,6 +1444,12 @@ msgstr "Выполняй!"
 
 msgid "Show Parent"
 msgstr "Показать обложку"
+
+msgid "Edit (Text)"
+msgstr "Исправить (Текст)"
+
+msgid "Edit (GUI)"
+msgstr "Исправить (Графически)"
 
 msgid "Immutable Page"
 msgstr "Неизменяемая страница"
@@ -1539,15 +1576,3 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
-
-#~ msgid "Save as"
-#~ msgstr "Записать в"
-
-#~ msgid "XSLT option disabled!"
-#~ msgstr "XSLT выключен!"
-
-#~ msgid "RefreshCache"
-#~ msgstr "ОбновитьКэш"
-
-#~ msgid "for this page (cached %(date)s)"
-#~ msgstr "этой страницы (кеширована %(date)s)"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-28 19:27+0200\n"
+"POT-Creation-Date: 2005-08-09 21:43+0200\n"
 "PO-Revision-Date: 2005-03-21 20:17+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 
 msgid ""
-"The backupped content of this page is deprecated and will not be included in "
+"The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
 "Det tidligere indhold af denne side er forældet og vil ikke blive inkluderet "
@@ -132,26 +132,9 @@ msgstr "[Skabelon %s ikke fundet]"
 msgid "[You may not read %s]"
 msgstr "[Du har ikke lov til at læse %s]"
 
-msgid "Skip to preview"
-msgstr "Skift til forhåndsvisning"
-
-#, python-format
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[nuværende sidestørrelse '''%(size)d''' bytes]"
-
 #, python-format
 msgid "Describe %s here."
 msgstr "Beskriv %s her."
-
-msgid "Optional comment about this change"
-msgstr "Kommentar til denne ændring (valgfri)"
-
-msgid "<No addition>"
-msgstr "<Ingen tilføjelser>"
-
-#, python-format
-msgid "Make this page belong to category %(category)s"
-msgstr "Lad denne side tilhøre kategorien %(category)s"
 
 msgid "Check Spelling"
 msgstr "Stavekontrol"
@@ -176,6 +159,20 @@ msgstr ""
 
 msgid "Preview"
 msgstr "Forhåndsvis"
+
+msgid "GUI Mode"
+msgstr ""
+
+#, fuzzy
+msgid "Comment:"
+msgstr "Kommentar"
+
+msgid "<No addition>"
+msgstr "<Ingen tilføjelser>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr ""
 
 msgid "Trivial change"
 msgstr "Simpel ændring"
@@ -287,6 +284,10 @@ msgstr "Du har ikke lov til at redigere denne side!"
 
 msgid "You cannot save empty pages."
 msgstr "Du kan ikke gemme tomme sider."
+
+#, fuzzy
+msgid "You already saved this page!"
+msgstr "Du har ikke lov til at redigere denne side!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -407,6 +408,73 @@ msgstr "Vis"
 msgid "Up"
 msgstr "Op"
 
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+
+msgid "Open editor on double click"
+msgstr "Åbn redigeringsvindue ved at dobbeltklikke"
+
+msgid "Remember last page visited"
+msgstr "Husk senest besøgte side"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Vis spørgsmålstegn ved links til ikke-eksisterende sider"
+
+msgid "Show page trail"
+msgstr "Vis senest besøgte sider"
+
+msgid "Show icon toolbar"
+msgstr "Vis knap-panel"
+
+msgid "Show top/bottom links in headings"
+msgstr "Vis top-/bund-links i header"
+
+msgid "Show fancy diffs"
+msgstr "Vis detaljerede forskelle"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Tilføj mellemrum i viste wiki-navne"
+
+msgid "Remember login information"
+msgstr "Husk adgangsinformationer"
+
+msgid "Subscribe to trivial changes"
+msgstr "Abonnér på simple rettelser"
+
+msgid "Disable this account forever"
+msgstr "Luk denne brugerprofil permanent"
+
+msgid "Name"
+msgstr "Navn"
+
+#, fuzzy
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Brug FornavnEfternavn)"
+
+msgid "Alias-Name"
+msgstr ""
+
+msgid "Password"
+msgstr "Adgangskode"
+
+msgid "Password repeat"
+msgstr "Adgangskode gentaget"
+
+msgid "(Only when changing passwords)"
+msgstr "(Kun ved ændring af adgangskode)"
+
+msgid "Email"
+msgstr "Email-adresse"
+
+msgid "User CSS URL"
+msgstr "Personlig CSS URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Lad det stå blankt for at slå bruger-CSS fra)"
+
+msgid "Editor size"
+msgstr "Størrelse på redigeringsvindue"
+
 #, python-format
 msgid ""
 "Invalid user name {{{'%s'}}}.\n"
@@ -445,42 +513,6 @@ msgstr "resultat"
 msgid "matches"
 msgstr "resultater"
 
-msgid "Open editor on double click"
-msgstr "Åbn redigeringsvindue ved at dobbeltklikke"
-
-msgid "Remember last page visited"
-msgstr "Husk senest besøgte side"
-
-msgid "Show fancy links"
-msgstr "Vis smarte links"
-
-msgid "Show question mark for non-existing pagelinks"
-msgstr "Vis spørgsmålstegn ved links til ikke-eksisterende sider"
-
-msgid "Show page trail"
-msgstr "Vis senest besøgte sider"
-
-msgid "Show icon toolbar"
-msgstr "Vis knap-panel"
-
-msgid "Show top/bottom links in headings"
-msgstr "Vis top-/bund-links i header"
-
-msgid "Show fancy diffs"
-msgstr "Vis detaljerede forskelle"
-
-msgid "Add spaces to displayed wiki names"
-msgstr "Tilføj mellemrum i viste wiki-navne"
-
-msgid "Remember login information"
-msgstr "Husk adgangsinformationer"
-
-msgid "Subscribe to trivial changes"
-msgstr "Abonnér på simple rettelser"
-
-msgid "Disable this account forever"
-msgstr "Luk denne brugerprofil permanent"
-
 msgid "Cookie deleted. You are now logged out."
 msgstr "Infokage slettet. Du er nu logget ud."
 
@@ -517,6 +549,10 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Ingen brugerprofil blev fundet med email-adressen '%(email)s'!"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -570,47 +606,27 @@ msgstr "Standard"
 msgid "<Browser setting>"
 msgstr "<Browser opsætning>"
 
+msgid "the one preferred"
+msgstr ""
+
+msgid "free choice"
+msgstr ""
+
 msgid "Save"
 msgstr "Gem"
 
 msgid "Logout"
 msgstr "Log ud"
 
-msgid "Create Profile"
-msgstr "Opret brugerprofil"
-
-msgid "Mail me my account data"
-msgstr "Send mig en email med mine adgangsoplysninger"
-
-msgid "Name"
-msgstr "Navn"
-
-msgid "(Use FirstnameLastname)"
-msgstr "(Brug FornavnEfternavn)"
-
-msgid "Password"
-msgstr "Adgangskode"
-
-msgid "Password repeat"
-msgstr "Adgangskode gentaget"
-
-msgid "(Only when changing passwords)"
-msgstr "(Kun ved ændring af adgangskode)"
-
-msgid "Email"
-msgstr "Email-adresse"
-
 msgid "Preferred theme"
 msgstr "Ønsket tema"
 
-msgid "User CSS URL"
-msgstr "Personlig CSS URL"
+#, fuzzy
+msgid "Editor Preference"
+msgstr "BrugerProfil"
 
-msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Lad det stå blankt for at slå bruger-CSS fra)"
-
-msgid "Editor size"
-msgstr "Størrelse på redigeringsvindue"
+msgid "Editor shown on UI"
+msgstr ""
 
 msgid "Time zone"
 msgstr "Tidszone"
@@ -639,6 +655,12 @@ msgstr ""
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Registrerede wiki-sider (ét regulært udtryk (regex) pr. linje)"
+
+msgid "Create Profile"
+msgstr "Opret brugerprofil"
+
+msgid "Mail me my account data"
+msgstr "Send mig en email med mine adgangsoplysninger"
 
 msgid "No older revisions available!"
 msgstr "Ingen ældre udgaver tilgængelig!"
@@ -757,6 +779,21 @@ msgstr "Sidebesøg og -redigeringer"
 msgid "You are not allowed to revert this page!"
 msgstr "Du har ikke lov til at tilbageføre denne side!"
 
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
+msgstr ""
+"Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste "
+"højre hjørne for at oprette en brugerprofil."
+
+#, fuzzy
+msgid "Your quicklink to this page has been removed."
+msgstr "Dit abonnement på denne side er blevet afmeldt."
+
+#, fuzzy
+msgid "A quicklink to this page has been added for you."
+msgstr "Dit abonnement på denne side er blevet afmeldt."
+
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du har ikke lov til at abonnere på en side du ikke kan læse!"
 
@@ -766,13 +803,6 @@ msgid ""
 msgstr ""
 "Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af wiki'en, "
 "som kan enten aktivere email eller fjerne Abonnér-ikonet."
-
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste "
-"højre hjørne for at oprette en brugerprofil."
 
 msgid ""
 "You didn't enter an email address in your profile. Select your name "
@@ -1152,6 +1182,18 @@ msgstr ""
 "Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn."
 
 #, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Læg ny vedhæftet fil \"%(filename)s\" op"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Opret ny tegning \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Redigér tegningen \"%(filename)s\""
+
+#, python-format
 msgid "Invalid include arguments \"%s\"!"
 msgstr "Forkerte include-argumenter \"%s\"!"
 
@@ -1245,18 +1287,6 @@ msgstr "**Maksimum antal tilladte inkluderinger overskredet**"
 #, python-format
 msgid "**Could not find the referenced page: %s**"
 msgstr "**Kunne ikke finde den henviste side: %s**"
-
-#, python-format
-msgid "Create new drawing \"%(filename)s\""
-msgstr "Opret ny tegning \"%(filename)s\""
-
-#, python-format
-msgid "Upload new attachment \"%(filename)s\""
-msgstr "Læg ny vedhæftet fil \"%(filename)s\" op"
-
-#, python-format
-msgid "Edit drawing %(filename)s"
-msgstr "Redigér tegningen \"%(filename)s\""
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1381,6 +1411,14 @@ msgstr "Tekst"
 msgid "Titles"
 msgstr "Titler"
 
+#, fuzzy
+msgid "Remove from Quicklinks"
+msgstr "Kvik-links"
+
+#, fuzzy
+msgid "Add to Quicklinks"
+msgstr "Kvik-links"
+
 msgid "More Actions:"
 msgstr "Flere Rutiner:"
 
@@ -1410,6 +1448,13 @@ msgstr "Anvend"
 
 msgid "Show Parent"
 msgstr "Vis \"forælder\" (siden denne stammer fra)"
+
+#, fuzzy
+msgid "Edit (Text)"
+msgstr "RedigérTekst"
+
+msgid "Edit (GUI)"
+msgstr ""
 
 msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"
@@ -1536,6 +1581,21 @@ msgstr "OmdøbSide"
 
 msgid "SpellCheck"
 msgstr "StaveKontrol"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Skift til forhåndsvisning"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[nuværende sidestørrelse '''%(size)d''' bytes]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Kommentar til denne ændring (valgfri)"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Lad denne side tilhøre kategorien %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Vis smarte links"
 
 #~ msgid "Save as"
 #~ msgstr "Gem som"

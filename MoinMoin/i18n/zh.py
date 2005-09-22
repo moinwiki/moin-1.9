@@ -10,7 +10,7 @@ meta = {
   'wikimarkup': True,
 }
 text = {
-'''The backupped content of this page is deprecated and will not be included in search results!''':
+'''The backed up content of this page is deprecated and will not be included in search results!''':
 '''建议您不再使用此页的备份内容, 备份将不会出现在搜索结果中!''',
 '''Revision %(rev)d as of %(date)s''':
 '''于%(date)s修订的的版本%(rev)d''',
@@ -70,18 +70,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[未找到模板 %s]''',
 '''[You may not read %s]''':
 '''[您不可以阅读 %s]''',
-'''Skip to preview''':
-'''转至预览''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[此页占\'\'\'%(size)d\'\'\'字节]''',
 '''Describe %s here.''':
 '''在这里详述 %s.''',
-'''Optional comment about this change''':
-'''此页备注(可选)''',
-'''<No addition>''':
-'''<不加>''',
-'''Make this page belong to category %(category)s''':
-'''将此页加入类别"%(category)s"''',
 '''Check Spelling''':
 '''拼写检查''',
 '''Save Changes''':
@@ -94,6 +84,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 如果你不同意, 按 \'\'\'%(cancel_button_text)s\'\'\' 取消您的修改.''',
 '''Preview''':
 '''预览''',
+'''<No addition>''':
+'''<不加>''',
 '''Trivial change''':
 '''小修改''',
 '''Remove trailing whitespace from each line''':
@@ -227,6 +219,44 @@ To leave the editor, press the Cancel button.''':
 '''刷新''',
 '''Up''':
 '''上层''',
+'''Open editor on double click''':
+'''双击打开编辑器''',
+'''Remember last page visited''':
+'''记住上次访问的最后一页''',
+'''Show question mark for non-existing pagelinks''':
+'''不存在的网页链接显示问号''',
+'''Show page trail''':
+'''显示网页访问历史''',
+'''Show icon toolbar''':
+'''显示图标工具条''',
+'''Show top/bottom links in headings''':
+'''在页眉中显示页首/页尾链接''',
+'''Show fancy diffs''':
+'''显示精细的版本比较''',
+'''Add spaces to displayed wiki names''':
+'''给显示的维基名加空格''',
+'''Remember login information''':
+'''保存登录信息''',
+'''Subscribe to trivial changes''':
+'''订阅细小改动''',
+'''Disable this account forever''':
+'''永久停用此帐户''',
+'''Name''':
+'''用户名''',
+'''Password''':
+'''密码''',
+'''Password repeat''':
+'''重复密码''',
+'''(Only when changing passwords)''':
+'''(只在改变密码时)''',
+'''Email''':
+'''电子邮件''',
+'''User CSS URL''':
+'''自选CSS的URL''',
+'''(Leave it empty for disabling user CSS)''':
+'''(空白表示不用自选的CSS)''',
+'''Editor size''':
+'''编辑器大小''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -249,30 +279,6 @@ space between words. Group page name is not allowed.''':
 '''次匹配''',
 '''matches''':
 '''次匹配''',
-'''Open editor on double click''':
-'''双击打开编辑器''',
-'''Remember last page visited''':
-'''记住上次访问的最后一页''',
-'''Show fancy links''':
-'''显示精巧链接''',
-'''Show question mark for non-existing pagelinks''':
-'''不存在的网页链接显示问号''',
-'''Show page trail''':
-'''显示网页访问历史''',
-'''Show icon toolbar''':
-'''显示图标工具条''',
-'''Show top/bottom links in headings''':
-'''在页眉中显示页首/页尾链接''',
-'''Show fancy diffs''':
-'''显示精细的版本比较''',
-'''Add spaces to displayed wiki names''':
-'''给显示的维基名加空格''',
-'''Remember login information''':
-'''保存登录信息''',
-'''Subscribe to trivial changes''':
-'''订阅细小改动''',
-'''Disable this account forever''':
-'''永久停用此帐户''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie已经删除. 您已登出.''',
 '''This wiki is not enabled for mail processing.
@@ -316,30 +322,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''保存''',
 '''Logout''':
 '''登出''',
-'''Create Profile''':
-'''新用户注册''',
-'''Mail me my account data''':
-'''把帐号资料寄给我''',
-'''Name''':
-'''用户名''',
-'''(Use FirstnameLastname)''':
-'''(请用FirstnameLastname, 或者汉语拼音XingMing)''',
-'''Password''':
-'''密码''',
-'''Password repeat''':
-'''重复密码''',
-'''(Only when changing passwords)''':
-'''(只在改变密码时)''',
-'''Email''':
-'''电子邮件''',
 '''Preferred theme''':
 '''主题''',
-'''User CSS URL''':
-'''自选CSS的URL''',
-'''(Leave it empty for disabling user CSS)''':
-'''(空白表示不用自选的CSS)''',
-'''Editor size''':
-'''编辑器大小''',
 '''Time zone''':
 '''时区''',
 '''Your time is''':
@@ -358,6 +342,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''请输入一个有效的电子邮件地址, 否则本订阅列表不起作用.''',
 '''Subscribed wiki pages (one regex per line)''':
 '''订阅的维基网页(每行一个正规表达式)''',
+'''Create Profile''':
+'''新用户注册''',
+'''Mail me my account data''':
+'''把帐号资料寄给我''',
 '''No older revisions available!''':
 '''没有旧版''',
 '''Diff for "%s"''':
@@ -430,12 +418,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''网页点击次数和编辑次数''',
 '''You are not allowed to revert this page!''':
 '''您不可以把此页恢复成旧版!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''您还没注册. 请点右上角的"用户设置"并注册.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''您不能订阅无权阅读的网页!''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''本维基不支持邮件处理, 请联系管理员, 以便他决定是否要启动邮寄功能,或是干脆去掉「订阅」图示.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''您还没注册. 请点右上角的"用户设置"并注册.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''您注册的时候没有提供电子邮件地址.请在右上角点一下你的名字(或是"用户设置", UserPreferences) 并提供合法的电子邮件地址.''',
 '''Your subscribtion to this page has been removed.''':
@@ -637,6 +625,12 @@ Try a different name.''':
 '''连向"%s"的网页''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''没有网页名就无法创建新网页. 请指定一个网页名.''',
+'''Upload new attachment "%(filename)s"''':
+'''上载新附件"%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''创建新图片"%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''编辑图片"%(filename)s"''',
 '''Invalid include arguments "%s"!''':
 '''无效的include参数"%s"!''',
 '''Nothing found for "%s"!''':
@@ -693,12 +687,6 @@ Try a different name.''':
 '''**太多的包含(include)**''',
 '''**Could not find the referenced page: %s**''':
 '''**未能找到引用的网页: %s**''',
-'''Create new drawing "%(filename)s"''':
-'''创建新图片"%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''上载新附件"%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''编辑图片"%(filename)s"''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"后面应该接"%(wanted)s", 但却接着"%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
