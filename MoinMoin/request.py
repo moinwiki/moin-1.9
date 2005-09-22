@@ -1877,9 +1877,6 @@ class RequestModPy(RequestBase):
                 values = [values]
             fixedResult = []
 
-            if not isinstance(values, list):
-                values = [values]
-            fixedResult = []
             for item in values:
                 # Remember filenames with a name hack
                 if hasattr(item, 'filename') and item.filename:
