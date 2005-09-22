@@ -8,7 +8,11 @@
 """
 
 import os, time, sys, cgi
-from cStringIO import StringIO
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+
 from MoinMoin import config, wikiutil, user, error
 from MoinMoin.util import MoinMoinNoFooter, IsWin9x
 import MoinMoin.error
@@ -622,7 +626,6 @@ class RequestBase(object):
 
     def redirectedOutput(self, function, *args, **kw):
         """ Redirect output during function, return redirected output """
-        import StringIO
         buffer = StringIO.StringIO()
         self.redirect(buffer)
         try:
@@ -2062,7 +2065,7 @@ class RequestWSGI(RequestBase):
             self.hasContentType = False
             
             self.stdin = env['wsgi.input']
-            self.stdout = StringIO()
+            self.stdout = StringIO.StringIO()
             
             self.status = '200 OK'
             self.headers = []
@@ -2088,7 +2091,7 @@ class RequestWSGI(RequestBase):
         self.stdout.write(self.encode(data))
     
     def reset_output(self):
-        self.stdout = StringIO()
+        self.stdout = StringIO.StringIO()
     
     def setHttpHeader(self, header):
         if type(header) is unicode:
