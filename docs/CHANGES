@@ -40,6 +40,7 @@ Version moin--main--1.5:
        of the interwiki map.
     * moved save/preview/... buttons to the top so that they can be easily reached
     * reduced edit_rows default to 20 lines
+    * Added support for edit by doubleclick in the diff view
 
     * Improved wiki farm support
      * make user files sharable between several wikis in a farm

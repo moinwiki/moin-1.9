@@ -106,7 +106,7 @@ def do_diff(pagename, request):
     request.setContentLanguage(request.lang)
 
     request.http_headers()
-    wikiutil.send_title(request, _('Diff for "%s"') % (pagename,), pagename=pagename)
+    wikiutil.send_title(request, _('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
   
     if (rev1>0 and rev2>0 and rev1>rev2) or (rev1==0 and rev2>0):
         rev1,rev2 = rev2,rev1
