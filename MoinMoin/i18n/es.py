@@ -2,9 +2,9 @@
 # Text translations for Spanish (es).
 # Automatically generated - DO NOT EDIT, edit es.po instead!
 meta = {
-  'language': 'Spanish',
-  'elanguage': 'Spanish',
-  'maintainer': 'Mauricio Hernandez Z <mhz.chile@gmail.com>',
+  'language': """Spanish""",
+  'elanguage': """Spanish""",
+  'maintainer': """Mauricio Hernandez Z <mhz.chile@gmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -269,8 +269,6 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''Ingresar''',
 ''' %s and try again.''':
 ''' %s e inténtalo nuevamente.''',
-'''Can\'t work out query''':
-'''No puedo procesar la solicitud''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d resultantes entre %(pages)d páginas revisadas.''',
 '''%.2f seconds''':
@@ -307,8 +305,6 @@ Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
 '''¡Las contraseñas no coinciden!''',
 '''Please specify a password!''':
 '''Por favor, provee una contraseña!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Por favor, provee una dirección e-mail. Si pierdes tu información de ingreso, puedes obtenerla vía e-mail.''',
 '''This email already belongs to somebody else.''':
 '''Esta dirección e-mail ya es usada por alguien más.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -770,14 +766,8 @@ rojo=editar''',
 '''Mostrar Mapa Del Sitio''',
 '''Do''':
 '''Hacer''',
-'''Show Parent''':
-'''Ir a Página superior''',
 '''Immutable Page''':
 '''Página inmutable''',
-'''Show Changes''':
-'''Mostrar cambios''',
-'''Get Info''':
-'''Obtener Información''',
 '''Show %s days.''':
 '''Mostrar %s días.''',
 '''EditText''':

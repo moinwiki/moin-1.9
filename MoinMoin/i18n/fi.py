@@ -2,9 +2,9 @@
 # Text translations for Suomi (fi).
 # Automatically generated - DO NOT EDIT, edit fi.po instead!
 meta = {
-  'language': 'Suomi',
-  'elanguage': 'Finnish',
-  'maintainer': 'Tuukka Hastrup <Tuukka.Hastrup@iki.fi>',
+  'language': """Suomi""",
+  'elanguage': """Finnish""",
+  'maintainer': """Tuukka Hastrup <Tuukka.Hastrup@iki.fi>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -270,8 +270,6 @@ sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''Kirjaudu sisään''',
 ''' %s and try again.''':
 ''' %s ja yritä uudelleen.''',
-'''Can\'t work out query''':
-'''Hakua ei voida suorittaa''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d tulosta %(pages)d sivusta.''',
 '''%.2f seconds''':
@@ -308,8 +306,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Salasanat eivät vastaa!''',
 '''Please specify a password!''':
 '''Mainitse salasana!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
 '''This email already belongs to somebody else.''':
 '''Tämä sähköposti kuuluu jo jollekin toiselle.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -771,14 +767,8 @@ red=edit''',
 '''Näytä paikallinen sivukartta''',
 '''Do''':
 '''Tee''',
-'''Show Parent''':
-'''Näytä yläsivu''',
 '''Immutable Page''':
 '''Suojattu sivu''',
-'''Show Changes''':
-'''Näytä muutokset''',
-'''Get Info''':
-'''Hae tiedot''',
 '''Show %s days.''':
 '''Näytä %s päivää.''',
 '''EditText''':

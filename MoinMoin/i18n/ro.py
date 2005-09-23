@@ -2,9 +2,9 @@
 # Text translations for Română (ro).
 # Automatically generated - DO NOT EDIT, edit ro.po instead!
 meta = {
-  'language': 'Română',
-  'elanguage': 'Romanian',
-  'maintainer': 'Ovidiu Sabou <ovidiu.sabou@gmail.com>',
+  'language': """Română""",
+  'elanguage': """Romanian""",
+  'maintainer': """Ovidiu Sabou <ovidiu.sabou@gmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -72,18 +72,8 @@ Uitaţi-vă la modificările paginii %(difflink)s pentru a vedea ce s-a schimbat
 '''[Şablonul %s nu a fost găsit]''',
 '''[You may not read %s]''':
 '''[Nu aveţi voie să citiţi %s]''',
-'''Skip to preview''':
-'''Salt la previzionare''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[dimensiunea curentă a paginii \'\'\'%(size)d\'\'\' octeţi]''',
 '''Describe %s here.''':
 '''Descrieţi %s aici.''',
-'''Optional comment about this change''':
-'''Comentariu opţional referitor această schimbare''',
-'''<No addition>''':
-'''<Fără adăugări>''',
-'''Make this page belong to category %(category)s''':
-'''Mutare în categoria %(category)s''',
 '''Check Spelling''':
 '''Verificare ortografie''',
 '''Save Changes''':
@@ -96,6 +86,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru anularea modificărilor.''',
 '''Preview''':
 '''Previzionare''',
+'''<No addition>''':
+'''<Fără adăugări>''',
 '''Trivial change''':
 '''Modificare minoră''',
 '''Remove trailing whitespace from each line''':
@@ -230,34 +222,10 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''Vizionare''',
 '''Up''':
 '''Sus''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Nume de utilizator invalid {{{\'%s\'}}}.
-Numele poate conţine orice caractere Unicode alfanumerice , cu un
-spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
-'''You are not allowed to do %s on this page.''':
-'''Pe această pagină nu puteţi face %s''',
-'''Login''':
-'''Login''',
-''' %s and try again.''':
-''' %s şi încercaţi din nou.''',
-'''Can\'t work out query''':
-'''Nu se poate executa interogarea''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d rezultate din %(pages)d pagini.''',
-'''%.2f seconds''':
-'''%.2f secunde''',
-'''match''':
-'''potrivire''',
-'''matches''':
-'''potriviri''',
 '''Open editor on double click''':
 '''Deschidere editor la dublu clic''',
 '''Remember last page visited''':
 '''Memorare ultima pagină vizitată''',
-'''Show fancy links''':
-'''Afişare legături decorate''',
 '''Show question mark for non-existing pagelinks''':
 '''Afişare semn de întebare pentru legăturile cu pagini inexistente''',
 '''Show page trail''':
@@ -276,6 +244,42 @@ spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''Înscriere la modificări minore''',
 '''Disable this account forever''':
 '''Dezactivare cont curent pentru totdeauna''',
+'''Name''':
+'''Nume''',
+'''Password''':
+'''Parolă''',
+'''Password repeat''':
+'''Repetare parolă''',
+'''(Only when changing passwords)''':
+'''(Doar la schimbarea parolelor)''',
+'''Email''':
+'''Email''',
+'''User CSS URL''':
+'''URL pentru CSS al utilizatorului''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Lăsaţi gol pentru a dezactiva CSS-ul utilizatorului)''',
+'''Editor size''':
+'''Dimensiunea editorului''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Nume de utilizator invalid {{{\'%s\'}}}.
+Numele poate conţine orice caractere Unicode alfanumerice , cu un
+spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
+'''You are not allowed to do %s on this page.''':
+'''Pe această pagină nu puteţi face %s''',
+'''Login''':
+'''Login''',
+''' %s and try again.''':
+''' %s şi încercaţi din nou.''',
+'''%(hits)d results out of %(pages)d pages.''':
+'''%(hits)d rezultate din %(pages)d pagini.''',
+'''%.2f seconds''':
+'''%.2f secunde''',
+'''match''':
+'''potrivire''',
+'''matches''':
+'''potriviri''',
 '''Cookie deleted. You are now logged out.''':
 '''Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă).''',
 '''This wiki is not enabled for mail processing.
@@ -284,6 +288,21 @@ Contact the owner of the wiki, who can enable email.''':
 Contactaţi deţinătorul wiki-ului, care poate activa email.''',
 '''Please provide a valid email address!''':
 '''Introduceţi o adresă de email validă!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Nume de înregistrare: %s
+
+Parola de înregistrare: %s
+
+URL de înregistrare: %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nu a fost găsit nici un cont care să se potrivească cu adresa
+de email \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -300,21 +319,6 @@ parolei(folosiţi copiere&lipire pentru aceasta).
 
 După înregistrarea cu succes, este recomandată modificarea parolei în una cunoscută.
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nume de înregistrare: %s
-
-Parola de înregistrare: %s
-
-URL de înregistrare: %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nu a fost găsit nici un cont care să se potrivească cu adresa
-de email \'%(email)s\'!''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Datele contului wiki al dumneavoastră''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -335,8 +339,6 @@ de email \'%(email)s\'!''',
 '''Parolele nu corespund!''',
 '''Please specify a password!''':
 '''Specificaţi o parolă!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Specificaţi adresa de email. Dacă pierdeţi informaţia de înregistrare, o puteţi obţine prin email.''',
 '''This email already belongs to somebody else.''':
 '''Această adresă de email este deţinută deja de altcineva.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -351,30 +353,8 @@ de email \'%(email)s\'!''',
 '''Salvare''',
 '''Logout''':
 '''Logout''',
-'''Create Profile''':
-'''Creează profil''',
-'''Mail me my account data''':
-'''Trimitere prin email datele contului''',
-'''Name''':
-'''Nume''',
-'''(Use FirstnameLastname)''':
-'''(Folosiţi PrimulnumeUltimulnume)''',
-'''Password''':
-'''Parolă''',
-'''Password repeat''':
-'''Repetare parolă''',
-'''(Only when changing passwords)''':
-'''(Doar la schimbarea parolelor)''',
-'''Email''':
-'''Email''',
 '''Preferred theme''':
 '''Tema dorită''',
-'''User CSS URL''':
-'''URL pentru CSS al utilizatorului''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Lăsaţi gol pentru a dezactiva CSS-ul utilizatorului)''',
-'''Editor size''':
-'''Dimensiunea editorului''',
 '''Time zone''':
 '''Fus orar''',
 '''Your time is''':
@@ -393,6 +373,10 @@ de email \'%(email)s\'!''',
 '''Această listă nu funcţionează până când introduceţi o adresă de email validă!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Înscris la următoarele pagini wiki(o expresie regulară per linie)''',
+'''Create Profile''':
+'''Creează profil''',
+'''Mail me my account data''':
+'''Trimitere prin email datele contului''',
 '''No older revisions available!''':
 '''Nici o revizie mai veche nu este disponibilă!''',
 '''Diff for "%s"''':
@@ -465,12 +449,12 @@ de email \'%(email)s\'!''',
 '''Accesări şi editări ale paginii''',
 '''You are not allowed to revert this page!''':
 '''Nu aveţi permisiunea de a modifica această pagină la o stare anterioară''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''Nu aţi creat un profil de utilizator încă. Selectaţi PreferinţeUtilizator în colţul din dreapta sus pentru a crea un profil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nu aveţi permisiunea de înscriere la o pagină pe care nu o puteţi citi.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
 '''Acest wiki nu permite mesajele email. Contactaţi deţinătorul wiki-ului, care poate ori să activeze email, ori să dezactiveze pictograma "Înscriere".''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Nu aţi creat un profil de utilizator încă. Selectaţi PreferinţeUtilizator în colţul din dreapta sus pentru a crea un profil.''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Nu aţi introdus o adresă de email în profilul dumneavoastră. Selectaţi numele dumneavoastră (PreferinţeUtilizator) în colţul din dreapta sus şi introduceţi o adresă de email validă.''',
 '''Your subscribtion to this page has been removed.''':
@@ -681,6 +665,12 @@ Try a different name.''':
 '''Lista Completă de Legături pentru "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele paginii.''',
+'''Upload new attachment "%(filename)s"''':
+'''Trimitere ataşament nou "%(filename)s"''',
+'''Create new drawing "%(filename)s"''':
+'''Creare desen nou "%(filename)s"''',
+'''Edit drawing %(filename)s''':
+'''Editare desen %(filename)s''',
 '''Invalid include arguments "%s"!''':
 '''Argumente de includere "%s" sunt invalide!''',
 '''Nothing found for "%s"!''':
@@ -737,12 +727,6 @@ Try a different name.''':
 '''**Numărul maxim de incluziuni acceptate a fost depăşit**''',
 '''**Could not find the referenced page: %s**''':
 '''**Pagina de referinţă %s nu a putut fi găsită**''',
-'''Create new drawing "%(filename)s"''':
-'''Creare desen nou "%(filename)s"''',
-'''Upload new attachment "%(filename)s"''':
-'''Trimitere ataşament nou "%(filename)s"''',
-'''Edit drawing %(filename)s''':
-'''Editare desen %(filename)s''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Trebuie "%(wanted)s" după "%(key)s", s-a primit "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -835,14 +819,8 @@ red=editare''',
 '''Afişare Hartă Locală Sit''',
 '''Do''':
 '''Executare''',
-'''Show Parent''':
-'''Afişare Părinte''',
 '''Immutable Page''':
 '''Pagină Imuabilă''',
-'''Show Changes''':
-'''Afişare Modificări''',
-'''Get Info''':
-'''Obţinere Informaţii''',
 '''Show %s days.''':
 '''Afişare %s zile.''',
 '''EditText''':

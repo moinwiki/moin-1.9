@@ -2,9 +2,9 @@
 # Text translations for Português (pt).
 # Automatically generated - DO NOT EDIT, edit pt.po instead!
 meta = {
-  'language': 'Português',
-  'elanguage': 'Portuguese',
-  'maintainer': 'Leonardo Gregianin',
+  'language': """Português""",
+  'elanguage': """Portuguese""",
+  'maintainer': """Leonardo Gregianin""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -269,8 +269,6 @@ de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o 
 '''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
-'''Can\'t work out query''':
-'''Não é possível processar a solicitação''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d acertos de um total de %(pages)d páginas procuradas.''',
 '''%.2f seconds''':
@@ -307,8 +305,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''As duas senhas não coincidem!''',
 '''Please specify a password!''':
 '''Por favor, especifique uma senha!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Por favor, especifique um e-mail. Se perder ou esquecer a informação de login, pode obtê-la via e-mail.''',
 '''This email already belongs to somebody else.''':
 '''Este endereço de e-mail já é utilizado por alguém.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -771,14 +767,8 @@ vermelho=editar''',
 '''Mostrar Mapa Do Site''',
 '''Do''':
 '''Fazer''',
-'''Show Parent''':
-'''Ir a Página Acima''',
 '''Immutable Page''':
 '''Página Imutável''',
-'''Show Changes''':
-'''Mostrar Mudanças''',
-'''Get Info''':
-'''Obter Informação''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
 '''EditText''':

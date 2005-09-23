@@ -2,9 +2,9 @@
 # Text translations for 简体中文 (zh).
 # Automatically generated - DO NOT EDIT, edit zh.po instead!
 meta = {
-  'language': '简体中文',
-  'elanguage': 'Simplified Chinese',
-  'maintainer': 'Jun Hu <j.hu@tue.nl>',
+  'language': """简体中文""",
+  'elanguage': """Simplified Chinese""",
+  'maintainer': """Jun Hu <j.hu@tue.nl>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -269,8 +269,6 @@ space between words. Group page name is not allowed.''':
 '''登录''',
 ''' %s and try again.''':
 '''%s后再试.''',
-'''Can\'t work out query''':
-'''无法完成查询''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''在%(pages)d页中找到%(hits)d个结果.''',
 '''%.2f seconds''':
@@ -306,8 +304,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''两次输入的密码不符!''',
 '''Please specify a password!''':
 '''请输入一个密码!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''请输入电子邮件地址. 否则您忘记名称或密码的时候, 就无法用电子邮件取回了.''',
 '''This email already belongs to somebody else.''':
 '''别人已经用这个电子邮件注册过了.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -769,14 +765,8 @@ red=edit''':
 '''本站地图''',
 '''Do''':
 '''执行''',
-'''Show Parent''':
-'''显示上层''',
 '''Immutable Page''':
 '''只读网页''',
-'''Show Changes''':
-'''显示改动''',
-'''Get Info''':
-'''信息''',
 '''Show %s days.''':
 '''显示%s天''',
 '''EditText''':

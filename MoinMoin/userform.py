@@ -207,7 +207,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # Require email if acl is enabled
             if not theuser.email:
-                return _("Please provide your email address. If you loose your"
+                return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
 
             # Email should be unique - see also MoinMoin/scripts/moin_usercheck.py
@@ -277,7 +277,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # Require email if acl is enabled
             if not theuser.email:
-                return _("Please provide your email address. If you loose your"
+                return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
 
             # Email should be unique - see also MoinMoin/scripts/moin_usercheck.py

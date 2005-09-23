@@ -2,9 +2,9 @@
 # Text translations for עברית (he).
 # Automatically generated - DO NOT EDIT, edit he.po instead!
 meta = {
-  'language': 'עברית',
-  'elanguage': 'Hebrew',
-  'maintainer': 'Nir Soffer <nirs@freeshell.org>',
+  'language': """עברית""",
+  'elanguage': """Hebrew""",
+  'maintainer': """Nir Soffer <nirs@freeshell.org>""",
   'encoding': 'utf-8',
   'direction': 'rtl',
   'wikimarkup': True,
@@ -320,8 +320,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''הסיסמאות לא תואמות.''',
 '''Please specify a password!''':
 '''אנא הכנס סיסמא.''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''אנא רשום את כתובת הדואל שלך. אם תאבד את פרטי המשתמש תוכל לקבל אותם לכתובת זו.''',
 '''This email already belongs to somebody else.''':
 '''כתובת הדואר האלקטרוני הזאת שייכת למישהו אחר.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':

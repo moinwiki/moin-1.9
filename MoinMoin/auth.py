@@ -30,7 +30,7 @@ def moin_cookie(request):
 	 WhoEver   geheim    false          basic      (twisted, doityourself pw check)
 	 WhoEver   None      true           basic/...  (apache)
 	 
-         thus, the server specific code would stay in request object implemenation.
+         thus, the server specific code would stay in request object implementation.
 """
 	 
 def http(request):

@@ -2,9 +2,9 @@
 # Text translations for Português do Brasil (pt_br).
 # Automatically generated - DO NOT EDIT, edit pt_br.po instead!
 meta = {
-  'language': 'Português do Brasil',
-  'elanguage': 'Brazillian Portuguese',
-  'maintainer': 'ASCII-only here <cerdiogenes@yahoo.com.br>',
+  'language': """Português do Brasil""",
+  'elanguage': """Brazillian Portuguese""",
+  'maintainer': """ASCII-only here <cerdiogenes@yahoo.com.br>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -285,8 +285,6 @@ entre as palavras. Nome de grupo de página não é permitido.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
-'''Can\'t work out query''':
-'''Não posso realizar a busca''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d páginas localizadas entre um total de %(pages)d páginas procuradas.''',
 '''%.2f seconds''':
@@ -303,6 +301,20 @@ Contact the owner of the wiki, who can enable email.''':
 Contate o administrador desta wiki para habilitar esta opção.''',
 '''Please provide a valid email address!''':
 '''Por favor, forneça um endereço de e-mail válido!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Usuário para Login: %s
+
+Senha para Login: %s
+
+URL do Login: %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Não foi encontrada nenhuma conta com o endereço \'%(email)s!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -319,20 +331,6 @@ para isto).
 
 Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Usuário para Login: %s
-
-Senha para Login: %s
-
-URL do Login: %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Não foi encontrada nenhuma conta com o endereço \'%(email)s!''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Seus dados da conta do wiki''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -353,8 +351,6 @@ URL do Login: %s/?action=userform&uid=%s
 '''As senhas não conferem!''',
 '''Please specify a password!''':
 '''Por favor, informe uma senha!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Por favor, informe um endereço de email. Se você perder sua informação de login, você não poderá recuperá-la por email.''',
 '''This email already belongs to somebody else.''':
 '''Este email já pertence a alguém cadastrado neste site.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -829,10 +825,6 @@ vermelho=editar''',
 '''Texto''',
 '''Titles''':
 '''Títulos''',
-'''Remove from Quicklinks''':
-'''Remover links rápidos''',
-'''Add to Quicklinks''':
-'''Adicionar links rápidos''',
 '''More Actions:''':
 '''Mais Ações:''',
 '''Show Raw Text''':
@@ -851,18 +843,12 @@ vermelho=editar''',
 '''Mostrar Mapa Local do Site''',
 '''Do''':
 '''Fazer''',
-'''Show Parent''':
-'''Mostrar Acima''',
 '''Edit (Text)''':
 '''Editar (Texto)''',
 '''Edit (GUI)''':
 '''Editar (GUI)''',
 '''Immutable Page''':
 '''Página Não Editável''',
-'''Show Changes''':
-'''Mostrar Alterações''',
-'''Get Info''':
-'''Obter Informações''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
 '''EditText''':

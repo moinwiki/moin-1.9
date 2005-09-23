@@ -2,9 +2,9 @@
 # Text translations for Dansk (da).
 # Automatically generated - DO NOT EDIT, edit da.po instead!
 meta = {
-  'language': 'Dansk',
-  'elanguage': 'Danish',
-  'maintainer': 'Jonas Smedegaard <dr@jones.dk>',
+  'language': """Dansk""",
+  'elanguage': """Danish""",
+  'maintainer': """Jonas Smedegaard <dr@jones.dk>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -265,8 +265,6 @@ mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
 '''Log ind''',
 ''' %s and try again.''':
 ''' %s og prøv igen.''',
-'''Can\'t work out query''':
-'''Kan ikke forstå forespørgslen''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d resultater ud af %(pages)d sider.''',
 '''%.2f seconds''':
@@ -303,8 +301,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Adgangskoderne er ikke ens!''',
 '''Please specify a password!''':
 '''Angiv venligst en adgangskode!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Oplys venligst din email-adresse. Hvis du mister dine adgangsoplysninger, kan du få dem tilsendt pr. email.''',
 '''This email already belongs to somebody else.''':
 '''Denne email-adresse tilhører en anden allerede.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -765,14 +761,8 @@ rød=redigér''',
 '''Vis lokal oversigt''',
 '''Do''':
 '''Anvend''',
-'''Show Parent''':
-'''Vis "forælder" (siden denne stammer fra)''',
 '''Immutable Page''':
 '''Ikke-redigérbar side''',
-'''Show Changes''':
-'''Vis ændringer''',
-'''Get Info''':
-'''Hent informationer''',
 '''Show %s days.''':
 '''Vis %s dage.''',
 '''EditText''':

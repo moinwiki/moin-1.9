@@ -2,9 +2,9 @@
 # Text translations for Nederlands (nl).
 # Automatically generated - DO NOT EDIT, edit nl.po instead!
 meta = {
-  'language': 'Nederlands',
-  'elanguage': 'Dutch',
-  'maintainer': 'Reinout van Schouwen <reinout@cs.vu.nl>',
+  'language': """Nederlands""",
+  'elanguage': """Dutch""",
+  'maintainer': """Reinout van Schouwen <reinout@cs.vu.nl>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -269,8 +269,6 @@ spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 '''Inloggen''',
 ''' %s and try again.''':
 ''' %s en probeer opnieuw''',
-'''Can\'t work out query''':
-'''Deze query kan niet beantwoord worden''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d resultaten in %(pages)d doorzochte pagina\'s .''',
 '''%.2f seconds''':
@@ -307,8 +305,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''De wachtwoorden komen niet overeen!''',
 '''Please specify a password!''':
 '''Geef een wachtwoord!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Geef uw e-mailadres op. Als u uw aanmeldgegevens verliest, kunt u deze per e-mail weer ontvangen.''',
 '''This email already belongs to somebody else.''':
 '''Dit e-mailadres behoort is al in gebruik.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -770,14 +766,8 @@ rood=bewerken''',
 '''Lokale wegwijzer tonen''',
 '''Do''':
 '''Uitvoeren''',
-'''Show Parent''':
-'''Bovenliggende tonen''',
 '''Immutable Page''':
 '''Vastliggende pagina''',
-'''Show Changes''':
-'''Wijzigingen tonen''',
-'''Get Info''':
-'''Informatie opzoeken''',
 '''Show %s days.''':
 '''Laat %s dagen zien.''',
 '''EditText''':

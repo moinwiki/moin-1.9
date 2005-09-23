@@ -2,9 +2,9 @@
 # Text translations for Tiếng Việt (vi).
 # Automatically generated - DO NOT EDIT, edit vi.po instead!
 meta = {
-  'language': 'Tiếng Việt',
-  'elanguage': 'Vietnamese',
-  'maintainer': 'Nam T. Nguyen <nnt@nntsoft.com>',
+  'language': """Tiếng Việt""",
+  'elanguage': """Vietnamese""",
+  'maintainer': """Nam T. Nguyen <nnt@nntsoft.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -256,8 +256,6 @@ Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng khô
 '''Đăng nhập''',
 ''' %s and try again.''':
 ''' %s và thử lại.''',
-'''Can\'t work out query''':
-'''Không thể thực hiện việc tìm kiếm''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''Tìm thấy %(hits)d trang trong tổng số %(pages)d trang.''',
 '''%.2f seconds''':
@@ -293,8 +291,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Mật khẩu không đúng!''',
 '''Please specify a password!''':
 '''Vui lòng cho biết mật khẩu!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Vui lòng cho biết địa chỉ thư điện tử. Nếu bạn mất thông tin đăng nhập, bạn có thể lấy lại nó qua thư điện tử.''',
 '''This email already belongs to somebody else.''':
 '''Địa chỉ thư điện tử này đã được đăng ký.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -731,14 +727,8 @@ red=edit''':
 '''Hiện bản đồ liên kết''',
 '''Do''':
 '''Làm''',
-'''Show Parent''':
-'''Hiện trang trên''',
 '''Immutable Page''':
 '''Trang không thể được thay đổi''',
-'''Show Changes''':
-'''Hiện các thay đổi''',
-'''Get Info''':
-'''Lấy thông tin''',
 '''Show %s days.''':
 '''Hiện %s ngày.''',
 '''EditText''':

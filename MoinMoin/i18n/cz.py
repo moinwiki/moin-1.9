@@ -310,8 +310,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Hesla nesouhlasí!''',
 '''Please specify a password!''':
 '''Zadejte prosím heslo!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Zadejte prosím Váš email. Pokud zapomenete Vaše přihlašovací informace, mohou Vám být na tento email zaslány.''',
 '''This email already belongs to somebody else.''':
 '''Tato emailová adresa patří již někomu jinému.''',
 '''User account created!''':

@@ -2,9 +2,9 @@
 # Text translations for Русский (ru).
 # Automatically generated - DO NOT EDIT, edit ru.po instead!
 meta = {
-  'language': 'Русский',
-  'elanguage': 'Russian',
-  'maintainer': 'Mike Rovner <mrovner@hotmail.com>',
+  'language': """Русский""",
+  'elanguage': """Russian""",
+  'maintainer': """Mike Rovner <mrovner@hotmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -281,8 +281,6 @@ space between words. Group page name is not allowed.''':
 '''Войти''',
 ''' %s and try again.''':
 ''' %s и попробуйте еще раз.''',
-'''Can\'t work out query''':
-'''Не могу выполнить запрос''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''Найдено %(hits)d из %(pages)d просмотренных страниц:''',
 '''%.2f seconds''':
@@ -298,6 +296,20 @@ Contact the owner of the wiki, who can enable email.''':
 '''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
 '''Please provide a valid email address!''':
 '''Пожалуйста укажите правильный почтовый адрес!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Имя: %s
+
+Пароль: %s
+
+URL для входа: %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -313,20 +325,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 
 После успешного входа в систему неплохо бы поменять пароль на ваш собственный.
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Имя: %s
-
-Пароль: %s
-
-URL для входа: %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Неизвестное имя пользователя: {{{"%s"}}}. Пожалуйста введите имя пользователя и пароль.''',
 '''Missing password. Please enter user name and password.''':
@@ -345,8 +343,6 @@ URL для входа: %s/?action=userform&uid=%s
 '''Пароли не совпадают!''',
 '''Please specify a password!''':
 '''Пожалуйста укажите пароль!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
 '''This email already belongs to somebody else.''':
 '''Это чужой адрес.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -819,10 +815,6 @@ red=edit''':
 '''По тексту''',
 '''Titles''':
 '''По заголовкам''',
-'''Remove from Quicklinks''':
-'''Убрать из закладок''',
-'''Add to Quicklinks''':
-'''Добавить в закладки''',
 '''More Actions:''':
 '''Другие действия:''',
 '''Show Raw Text''':
@@ -841,18 +833,12 @@ red=edit''':
 '''Карта окресностей''',
 '''Do''':
 '''Выполняй!''',
-'''Show Parent''':
-'''Показать обложку''',
 '''Edit (Text)''':
 '''Исправить (Текст)''',
 '''Edit (GUI)''':
 '''Исправить (Графически)''',
 '''Immutable Page''':
 '''Неизменяемая страница''',
-'''Show Changes''':
-'''Показать изменения''',
-'''Get Info''':
-'''Справка''',
 '''Show %s days.''':
 '''Показать изменения за %s дней.''',
 '''EditText''':

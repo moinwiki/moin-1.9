@@ -2,9 +2,9 @@
 # Text translations for Srpski (sr).
 # Automatically generated - DO NOT EDIT, edit sr.po instead!
 meta = {
-  'language': 'Srpski',
-  'elanguage': 'Serbian',
-  'maintainer': 'Thomas W. Horna <sarman@t-online.de>',
+  'language': """Srpski""",
+  'elanguage': """Serbian""",
+  'maintainer': """Thomas W. Horna <sarman@t-online.de>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -234,8 +234,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Veličina editora''',
 '''Login''':
 '''Ulogovati se''',
-'''Can\'t work out query''':
-'''Ne mogu da obradim potragu''',
 '''match''':
 '''pronađen''',
 '''matches''':

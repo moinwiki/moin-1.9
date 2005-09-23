@@ -606,7 +606,7 @@ msgid "Please specify a password!"
 msgstr "Bitte geben Sie ein Passwort an!"
 
 msgid ""
-"Please provide your email address. If you loose your login information, you "
+"Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
 "Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen "
