@@ -401,7 +401,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             'category': unicode(util.web.makeSelection('category', cat_pages)),
         })
 
-        if self.cfg.mail_smarthost:
+        if self.cfg.mail_enabled:
             self.request.write('''
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>
@@ -930,7 +930,7 @@ delete the changes of the other person, which is excessively rude!''
             self.clean_acl_cache()
   
             # send notification mails
-            if self.request.cfg.mail_smarthost:
+            if self.request.cfg.mail_enabled:
                 msg = msg + self._notifySubscribers(comment, trivial)
           
             if self.request.cfg.lupy_search:
