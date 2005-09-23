@@ -534,9 +534,7 @@ class Macro:
         if self.request.user.valid:
             # decode address and generate mailto: link
             email = decodeSpamSafeEmail(email)
-            icon = util.web.getLinkIcon(self.request, self.formatter, "mailto")
             result = (self.formatter.url(1, 'mailto:' + email, css='mailto', pretty_url=1, unescaped=1) +
-                      icon +
                       self.formatter.text(text or email) +
                       self.formatter.url(0))
         else:
