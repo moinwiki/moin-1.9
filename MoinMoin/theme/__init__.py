@@ -843,11 +843,7 @@ function actionsMenuInit(title) {
         _ = self.request.getText
         user = self.request.user
         if user.valid:
-            # user valid, get current page status
-            if user.isQuickLinkedTo([page.page_name]):
-                title = _("Remove from Quicklinks")
-            else:
-                title = _("Add to Quicklinks")
+            title = _("Quicklink")
             quotedname = wikiutil.quoteWikinameURL(page.page_name)
             link = wikiutil.link_tag(self.request, quotedname + 
                                      '?action=quicklink', title)
@@ -1033,7 +1029,7 @@ actionsMenuInit('%(label)s');
         # Parent page
         parent = page.getParentPage()
         if parent:
-           add(parent.link_to(request, _("Show Parent", formatted=False))) 
+           add(parent.link_to(request, _("Parent Page", formatted=False))) 
         
         # Page actions
         if page.isWritable() and request.user.may.write(page.page_name):
@@ -1049,10 +1045,13 @@ actionsMenuInit('%(label)s');
         else:
             add(_('Immutable Page', formatted=False))              
         
-        add(link(request, quotedname + '?action=diff',
-                 _('Show Changes', formatted=False)))
+        #This is kind of superfluous as RC and action=info contains this, too.
+        #And it showed only the "Last Change", so it was named wrong and
+        #bookmark on RC is superior.
+        #add(link(request, quotedname + '?action=diff',
+        #         _('Show Changes', formatted=False)))
         add(link(request, quotedname + '?action=info',
-                 _('Get Info', formatted=False)))
+                 _('Infos', formatted=False)))
         add(self.subscribeLink(page))
         add(self.quicklinkLink(page))
         add(self.actionsMenu(page))
