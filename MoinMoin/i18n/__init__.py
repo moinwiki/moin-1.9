@@ -199,6 +199,8 @@ def requestLanguage(request):
     available = wikiLanguages()
     for lang in browserLanguages(request):
         if available.has_key(lang):
+            if request.http_accept_language:
+                request.setHttpHeader('Vary: Accept-Language')
             return lang
     
     # Or return the wiki default language...

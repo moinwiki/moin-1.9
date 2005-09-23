@@ -7,9 +7,10 @@
 
     @license: GNU GPL, see COPYING for details.
 """
-import StringIO, re, os
+import StringIO, re, os, time
 from MoinMoin import wikixml, config, wikiutil, util
 from MoinMoin.logfile import editlog
+from MoinMoin.util.datetime import formathttpdate
 from MoinMoin.Page import Page
 from MoinMoin.wikixml.util import RssGenerator
 
@@ -59,6 +60,7 @@ def execute(pagename, request):
     logdata = []
     counter = 0
     pages = {}
+    lastmod = 0
     for line in log.reverse():
         if not request.user.may.read(line.pagename):
             continue
@@ -69,6 +71,10 @@ def execute(pagename, request):
         line.time = util.datetime.tmtuple(wikiutil.version2timestamp(line.ed_time_usecs)) # UTC
         logdata.append(line)
         pages[line.pagename] = None
+
+        if not lastmod:
+            lastmod = wikiutil.version2timestamp(line.ed_time_usecs)
+
         counter += 1
         if counter >= max_items:
             break
@@ -197,8 +203,20 @@ def execute(pagename, request):
     # end SAX stream
     handler.endDocument()
 
+    # generate an Expires header, using whatever setting the admin
+    # defined for suggested cache lifetime of the RecentChanges RSS doc
+    expires = formathttpdate(time.time() + cfg.rss_cache)
+
+    httpheaders = ["Content-Type: text/xml; charset=%s" % config.charset,
+                        "Expires: "+expires]
+
+    # use a correct Last-Modified header, set to whatever the mod date
+    # on the most recent page was; if there were no mods, don't send one
+    if lastmod:
+        httpheaders.append("Last-Modified: "+formathttpdate(lastmod))
+
     # send the generated XML document
-    request.http_headers(["Content-Type: text/xml; charset=%s" % config.charset] + request.nocache)
+    request.http_headers(httpheaders)
     request.write(out.getvalue())
     request.finish()
     request.no_closing_html_code = 1

@@ -263,6 +263,7 @@ class DefaultConfig:
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
         }
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
+    rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = 1
     show_section_numbers = 0

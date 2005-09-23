@@ -8,7 +8,8 @@
 
 # we guarantee that time is always imported!
 import time
-
+import re
+from email.Utils import formatdate
 
 def tmtuple(tmsecs=None):
     """ Return a time tuple.
@@ -19,4 +20,13 @@ def tmtuple(tmsecs=None):
     if -86400 <= tmsecs <= 86400: # if we are around 0, we maybe had
         tmsecs = 0                # 0 initially, so reset it to 0.
     return time.gmtime(tmsecs or time.time())
+
+def formathttpdate(tmsecs=None):
+    """ Return a HTTP date/time stamp as defined in
+        http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3 .
+    """
+    stamp = formatdate(tmsecs, False)
+    # replace non-standard "-0000" at end with http-mandated "GMT"
+    stamp = re.match('^(.*) [\-\+]0000$', stamp).group(1) + " GMT"
+    return stamp
 

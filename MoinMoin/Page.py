@@ -11,6 +11,7 @@ import StringIO, os, re, urllib, random, codecs
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
 from MoinMoin.util import filesys, web
+from MoinMoin.util.datetime import formathttpdate
 
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
@@ -1090,8 +1091,24 @@ class Page:
         page_exists = self.exists()
         if not content_only:
             # send the document leader
+
+            # need to inform caches that content changes
+            # based on cookie (even if we aren't sending one now)
+            request.setHttpHeader("Vary: Cookie")
+
+            # use "nocache" headers if we're using a method that
+            # is not simply "display", or if a user is logged in
+            # (which triggers personalisation features)
+
             if page_exists:
-                request.http_headers()
+                if not request.cacheable or request.user.valid:
+                    request.http_headers(request.nocache)
+                else:
+                    # use the correct last-modified value from the on-disk file
+                    # to ensure cacheability where supported
+                    request.http_headers(["Last-Modified: " +
+                         formathttpdate(os.path.getmtime(self._text_filename()))])
+
             else:
                 request.http_headers(['Status: 404 NOTFOUND'])
                 request.setResponseCode(404)

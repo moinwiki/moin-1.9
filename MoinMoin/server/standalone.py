@@ -37,12 +37,12 @@
 # Imports
 import os, sys, time, urllib, socket, errno, shutil
 import BaseHTTPServer, SimpleHTTPServer, SocketServer
-from email.Utils import formatdate
 
 # MoinMoin imports
 from MoinMoin import version
 from MoinMoin.server import Config, switchUID
 from MoinMoin.request import RequestStandAlone
+from MoinMoin.util.datetime import formathttpdate
 
 # Server globals
 httpd = None
@@ -371,7 +371,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.expires:
             now = time.time()
             expires = now + self.expires
-            self.send_header('Expires', formatdate(expires))
+            self.send_header('Expires', formathttpdate(expires))
         SimpleHTTPServer.SimpleHTTPRequestHandler.end_headers(self)
         
     def copyfile(self, source, outputfile):
