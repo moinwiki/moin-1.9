@@ -465,6 +465,7 @@ def do_show(pagename, request):
             rev = 0
         Page(request, pagename, rev=rev).send_page(request, count_hit=1)
     else:
+        request.cacheable = 1
         Page(request, pagename).send_page(request, count_hit=1)
 
 

@@ -90,6 +90,7 @@ class RequestBase(object):
               
         self.sent_headers = 0
         self.user_headers = []
+        self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.page = None
         self._dicts = None
         
