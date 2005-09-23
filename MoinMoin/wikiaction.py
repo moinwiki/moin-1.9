@@ -714,7 +714,7 @@ def do_subscribe(pagename, request):
         msg = _("You are not allowed to subscribe to a page you can't read.")
 
     # check config
-    elif not cfg.mail_smarthost:
+    elif not cfg.mail_enabled:
         msg = _('''This wiki is not enabled for mail processing. '''
                 '''Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''')
 

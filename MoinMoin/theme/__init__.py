@@ -858,7 +858,7 @@ function actionsMenuInit(title) {
         """
         _ = self.request.getText
         user = self.request.user
-        if self.cfg.mail_smarthost and user.valid:
+        if self.cfg.mail_enabled and user.valid:
             # Email enabled and user valid, get current page status
             if user.isSubscribedTo([page.page_name]):
                 title = _("Unsubscribe")

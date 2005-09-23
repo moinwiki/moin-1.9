@@ -426,6 +426,8 @@ class DefaultConfig:
         # list to cache lupy searcher objects
         self.lupy_searchers = []
 
+        # check if mail is possible and set flag:
+        self.mail_enabled = not (self.mail_smarthost is None and self.mail_sendmail is None)
 
     def _config_check(self):
         """ Check namespace and warn about unknown names

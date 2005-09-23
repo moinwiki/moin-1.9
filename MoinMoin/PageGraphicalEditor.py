@@ -320,7 +320,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.request.write(_('Add to: %(category)s') % {
             'category': unicode(util.web.makeSelection('category', cat_pages)),
         })
-        if self.cfg.mail_smarthost:
+        if self.cfg.mail_enabled:
             self.request.write('''
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>

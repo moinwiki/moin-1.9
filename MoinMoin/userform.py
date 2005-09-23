@@ -72,7 +72,7 @@ class UserSettingsHandler:
             return _("Cookie deleted. You are now logged out.")
     
         if form.has_key('account_sendmail'):
-            if not self.cfg.mail_smarthost:
+            if not self.cfg.mail_enabled:
                 return _("""This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.""")
             try:
@@ -559,7 +559,7 @@ class UserSettings:
             ], valign="top")
 
             # subscribed pages
-            if self.cfg.mail_smarthost:
+            if self.cfg.mail_enabled:
                 # Get list of subscribe pages, DO NOT sort! it should
                 # stay in the order the user entered it in his input
                 # box.
@@ -594,7 +594,7 @@ class UserSettings:
                     self.make_row(_(label),
                               [ html.INPUT(type=type, size=length, name=key, value=getattr(self.request.user, key)), ' ', _(textafter), ])
 
-        if self.cfg.mail_smarthost:
+        if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
 
         # Add buttons
