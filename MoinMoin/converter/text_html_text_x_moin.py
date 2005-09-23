@@ -7,6 +7,7 @@
 
 import xml.dom.minidom
 from xml.dom import Node
+from MoinMoin import config
 from MoinMoin import wikiutil
 import MoinMoin.error
 import re, urllib
@@ -835,14 +836,15 @@ class convert_tree(visitor):
 
 
 def parse(text):
-    text = '<?xml version="1.0"?>%s%s' % (dtd, text)
+    text = u'<?xml version="1.0"?>%s%s' % (dtd, text)
+    text = text.encode(config.charset)
     try:
         return xml.dom.minidom.parseString(text)
     except xml.parsers.expat.ExpatError, msg:
         raise MoinMoin.error.ConvertError('ExpatError: %s' % msg)
 
 def convert(request, text):
-    text = "<page>%s</page>" % text
+    text = u"<page>%s</page>" % text
     tree = parse(text)
     strip_whitespace().do(tree)
     strip_break().do(tree)
