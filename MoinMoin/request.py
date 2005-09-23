@@ -7,11 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, sys, cgi
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
+import os, time, sys, cgi, StringIO
 
 from MoinMoin import config, wikiutil, user, error
 from MoinMoin.util import MoinMoinNoFooter, IsWin9x
