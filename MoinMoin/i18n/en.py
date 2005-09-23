@@ -830,10 +830,8 @@ red=edit''',
 '''Text''',
 '''Titles''':
 '''Titles''',
-'''Remove from Quicklinks''':
-'''Remove from Quicklinks''',
-'''Add to Quicklinks''':
-'''Add to Quicklinks''',
+'''Quicklink''':
+'''Quicklink''',
 '''More Actions:''':
 '''More Actions:''',
 '''Show Raw Text''':
@@ -852,18 +850,16 @@ red=edit''',
 '''Show Local Site Map''',
 '''Do''':
 '''Do''',
-'''Show Parent''':
-'''Show Parent''',
+'''Parent Page''':
+'''Parent Page''',
 '''Edit (Text)''':
 '''Edit (Text)''',
 '''Edit (GUI)''':
 '''Edit (GUI)''',
 '''Immutable Page''':
 '''Immutable Page''',
-'''Show Changes''':
-'''Show Changes''',
-'''Get Info''':
-'''Get Info''',
+'''Infos''':
+'''Infos''',
 '''Show %s days.''':
 '''Show %s days.''',
 '''EditText''':

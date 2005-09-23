@@ -44,8 +44,8 @@ for lang in sys.argv[1:]:
     
     meta.update(locals())
 
-    outf = u"""'%(lang)s': (u'%(language)s', u'%(elanguage)s', '%(encoding)s', %(dir)d, '%(maintainer)s',),\n""" % meta
-    outw = u"""|| %(lang)s || %(language)s || TODO || %(maintainer)s ||\n""" % meta
+    outf = u''''%(lang)s': (u'%(language)s', u'%(elanguage)s', '%(encoding)s', %(dir)d, """%(maintainer)s""",),\n''' % meta
+    outw = u'''|| %(lang)s || %(language)s || TODO || %(maintainer)s ||\n''' % meta
     
     outfile.write(outf.encode('utf-8'))
     outwiki.write(outw.encode('utf-8'))

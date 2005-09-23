@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-22 22:38+0200\n"
+"POT-Creation-Date: 2005-09-23 17:17+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1293,10 +1293,7 @@ msgstr ""
 msgid "Titles"
 msgstr ""
 
-msgid "Remove from Quicklinks"
-msgstr ""
-
-msgid "Add to Quicklinks"
+msgid "Quicklink"
 msgstr ""
 
 msgid "More Actions:"
@@ -1326,7 +1323,7 @@ msgstr ""
 msgid "Do"
 msgstr ""
 
-msgid "Show Parent"
+msgid "Parent Page"
 msgstr ""
 
 msgid "Edit (Text)"
@@ -1338,10 +1335,7 @@ msgstr ""
 msgid "Immutable Page"
 msgstr ""
 
-msgid "Show Changes"
-msgstr ""
-
-msgid "Get Info"
+msgid "Infos"
 msgstr ""
 
 #, python-format
@@ -1461,4 +1455,3 @@ msgstr ""
 
 msgid "SpellCheck"
 msgstr ""
-

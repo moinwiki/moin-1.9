@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-22 22:38+0200\n"
+"POT-Creation-Date: 2005-09-23 17:17+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1371,11 +1371,7 @@ msgid "Titles"
 msgstr "כותרות"
 
 #, fuzzy
-msgid "Remove from Quicklinks"
-msgstr "סימניות"
-
-#, fuzzy
-msgid "Add to Quicklinks"
+msgid "Quicklink"
 msgstr "סימניות"
 
 msgid "More Actions:"
@@ -1405,8 +1401,9 @@ msgstr "מפת אתר מקומית"
 msgid "Do"
 msgstr "בצע"
 
-msgid "Show Parent"
-msgstr "הצג דף אב"
+#, fuzzy
+msgid "Parent Page"
+msgstr "פתיחה"
 
 #, fuzzy
 msgid "Edit (Text)"
@@ -1418,11 +1415,9 @@ msgstr ""
 msgid "Immutable Page"
 msgstr "דף נעול"
 
-msgid "Show Changes"
-msgstr "הצג שינויים"
-
-msgid "Get Info"
-msgstr "הצג פרטים"
+#, fuzzy
+msgid "Infos"
+msgstr "מידע"
 
 #, python-format
 msgid "Show %s days."
@@ -1542,6 +1537,23 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#, fuzzy
+#~ msgid "Remove from Quicklinks"
+#~ msgstr "סימניות"
+
+#, fuzzy
+#~ msgid "Add to Quicklinks"
+#~ msgstr "סימניות"
+
+#~ msgid "Show Parent"
+#~ msgstr "הצג דף אב"
+
+#~ msgid "Show Changes"
+#~ msgstr "הצג שינויים"
+
+#~ msgid "Get Info"
+#~ msgstr "הצג פרטים"
 
 #~ msgid "Skip to preview"
 #~ msgstr "תצוגה מקדימה"
