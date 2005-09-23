@@ -2,9 +2,9 @@
 # Text translations for English (en).
 # Automatically generated - DO NOT EDIT, edit en.po instead!
 meta = {
-  'language': 'English',
-  'elanguage': 'English',
-  'maintainer': 'Thomas Waldmann <tw-public@gmx.de>',
+  'language': """English""",
+  'elanguage': """English""",
+  'maintainer': """Thomas Waldmann <tw-public@gmx.de>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -352,8 +352,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Passwords don\'t match!''',
 '''Please specify a password!''':
 '''Please specify a password!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Please provide your email address. If you loose your login information, you can get it by email.''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Please provide your email address. If you lose your login information, you can get it by email.''',
 '''This email already belongs to somebody else.''':
 '''This email already belongs to somebody else.''',
 '''User account created!''':

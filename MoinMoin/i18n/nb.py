@@ -2,9 +2,9 @@
 # Text translations for Norsk Bokmål (nb).
 # Automatically generated - DO NOT EDIT, edit nb.po instead!
 meta = {
-  'language': 'Norsk Bokmål',
-  'elanguage': 'Norwegian Bokmal',
-  'maintainer': 'Joerg Cassens <jmt@cassens.org>',
+  'language': """Norsk Bokmål""",
+  'elanguage': """Norwegian Bokmal""",
+  'maintainer': """Joerg Cassens <jmt@cassens.org>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': False,
@@ -263,8 +263,6 @@ mellom ordene. Gruppenavn er ikke tillatt.''',
 '''Logg inn''',
 ''' %s and try again.''':
 ''' %s og prøv igjen.''',
-'''Can\'t work out query''':
-'''Forstår ikke spørsmålet''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d resultater ved søk i %(pages)d sider.''',
 '''%.2f seconds''':
@@ -302,8 +300,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''Passordene er ikke like!''',
 '''Please specify a password!''':
 '''Oppgi et passord!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Oppgi din e-postadresse. Hvis du mister din påloggingsinformasjon, kan du få den tilsendt på e-post.''',
 '''This email already belongs to somebody else.''':
 '''Denne e-postadressen tilhører en annen bruker.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -746,14 +742,8 @@ rød=rediger''',
 '''Vis lokal oversikt''',
 '''Do''':
 '''Utfør''',
-'''Show Parent''':
-'''Vis foreldreside''',
 '''Immutable Page''':
 '''Siden kan ikke endres''',
-'''Show Changes''':
-'''Vis endringer''',
-'''Get Info''':
-'''Hent info''',
 '''Show %s days.''':
 '''Vis %s dager.''',
 '''EditText''':

@@ -2,9 +2,9 @@
 # Text translations for Italiano (it).
 # Automatically generated - DO NOT EDIT, edit it.po instead!
 meta = {
-  'language': 'Italiano',
-  'elanguage': 'Italian',
-  'maintainer': 'gian paolo ciceri <gp.ciceri@acm.org>',
+  'language': """Italiano""",
+  'elanguage': """Italian""",
+  'maintainer': """gian paolo ciceri <gp.ciceri@acm.org>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -264,8 +264,6 @@ Il nome può contenere ogni carattere alfanumerico Unicode , con opzionale unosp
 '''Login''',
 ''' %s and try again.''':
 ''' %s e prova ancora.''',
-'''Can\'t work out query''':
-'''Non riesco a impostare la query di ricerca''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''Trovate %(hits)d corrispondenze nelle %(pages)d pagine consultate.''',
 '''%.2f seconds''':
@@ -301,8 +299,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Le password non coincidono!''',
 '''Please specify a password!''':
 '''Per favore specifica una password!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Per favore, inserisci il tuo indirizzo email: senza di esso non potrai riottenere i tuoi dati personali nel caso smarrissi la password.''',
 '''This email already belongs to somebody else.''':
 '''Questo indirizzo email è gia utilizzato da qualcun altro.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -766,14 +762,8 @@ rosso=Mod''',
 '''Mappa locale del sito''',
 '''Do''':
 '''Vai''',
-'''Show Parent''':
-'''Mostra la pagina padre''',
 '''Immutable Page''':
 '''Pagina non alterabile''',
-'''Show Changes''':
-'''Mostra le modifiche''',
-'''Get Info''':
-'''Informazioni''',
 '''Show %s days.''':
 '''Mostra %s giorni.''',
 '''EditText''':

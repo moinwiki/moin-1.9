@@ -2,9 +2,9 @@
 # Text translations for Magyar (hu).
 # Automatically generated - DO NOT EDIT, edit hu.po instead!
 meta = {
-  'language': 'Magyar',
-  'elanguage': 'Hungarian',
-  'maintainer': 'VOROSBARANYI Zoltan <http://vbzo.li/>',
+  'language': """Magyar""",
+  'elanguage': """Hungarian""",
+  'maintainer': """VOROSBARANYI Zoltan <http://vbzo.li/>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -264,8 +264,6 @@ egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlap
 '''Belépés''',
 ''' %s and try again.''':
 ''' %s, majd próbálja újra.''',
-'''Can\'t work out query''':
-'''Nem tudjuk a keresést végrehajtani''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(pages)d lapból %(hits)d találat''',
 '''%.2f seconds''':
@@ -281,6 +279,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
 '''Please provide a valid email address!''':
 '''Kérjük, hogy érvényes levélcímet adjon meg!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -296,8 +296,6 @@ a jelszó-mezőbe (legcélszerűbb ha bemásolja).
 
 Miután sikeresen belépett kérjük írja át a jelszót!
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
 '''Missing password. Please enter user name and password.''':
@@ -316,8 +314,6 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''A jelszavak nem egyeznek!''',
 '''Please specify a password!''':
 '''Kérjük adja meg a jelszót!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Kérjük adja meg a levélcímét. Erre a címre küldjük el majd a belépéshez szükséges adatait amennyiben elvesztené azokat.''',
 '''This email already belongs to somebody else.''':
 '''Ezt a levélcímet már más bejegyezte.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -790,14 +786,8 @@ piros=szerkesztés''',
 '''Helyi laptérkép megjelenítése''',
 '''Do''':
 '''Végrehajtás''',
-'''Show Parent''':
-'''Szülő megjelenítése''',
 '''Immutable Page''':
 '''Nem szerkeszthető lap''',
-'''Show Changes''':
-'''Változások megjelenítése''',
-'''Get Info''':
-'''Infó kérése''',
 '''Show %s days.''':
 '''%s nap megjelenítése''',
 '''EditText''':

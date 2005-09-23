@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-24 01:03+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -489,9 +489,6 @@ msgstr "로그인"
 msgid " %s and try again."
 msgstr " %s 하고 다시 시도하세요."
 
-msgid "Can't work out query"
-msgstr "퀴어리를 쓸 수 없습니다"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr "전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다."
@@ -519,17 +516,6 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "사용가능한 메일 주소를 써 주세요!"
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -542,6 +528,17 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "메일 주소가 '%(email)s'로 되어있는 계정이 없습니다!"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -577,8 +574,9 @@ msgstr "패스워드가 맞지 않습니다."
 msgid "Please specify a password!"
 msgstr "패스워드를 입력하세요!"
 
+#, fuzzy
 msgid ""
-"Please provide your email address. If you loose your login information, you "
+"Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
 "사용자명이나 비밀번호를 잊었을 때 쉽게 계정을 찾을 수 있도록 메일 주소를 반드"
@@ -586,6 +584,9 @@ msgstr ""
 
 msgid "This email already belongs to somebody else."
 msgstr "이 메일은 이미 다른 사람이 사용중입니다."
+
+msgid "User account created!"
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1405,11 +1406,7 @@ msgid "Titles"
 msgstr "제목"
 
 #, fuzzy
-msgid "Remove from Quicklinks"
-msgstr "빨리가기메뉴"
-
-#, fuzzy
-msgid "Add to Quicklinks"
+msgid "Quicklink"
 msgstr "빨리가기메뉴"
 
 msgid "More Actions:"
@@ -1440,8 +1437,9 @@ msgstr "사이트 맵 보기"
 msgid "Do"
 msgstr "확인"
 
-msgid "Show Parent"
-msgstr "상위 글 보기"
+#, fuzzy
+msgid "Parent Page"
+msgstr "대문"
 
 #, fuzzy
 msgid "Edit (Text)"
@@ -1453,10 +1451,8 @@ msgstr ""
 msgid "Immutable Page"
 msgstr "못 고치는 글"
 
-msgid "Show Changes"
-msgstr "변경내역 보기"
-
-msgid "Get Info"
+#, fuzzy
+msgid "Infos"
 msgstr "정보"
 
 #, python-format
@@ -1498,6 +1494,10 @@ msgstr "추가된 줄은 이렇게 표시됩니다."
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "메일 서버 '%(server)s'에 접속 실패: %(reason)s"
+
+#, fuzzy
+msgid "Mail not sent"
+msgstr "메일이 보내졌습니다"
 
 msgid "Mail sent OK"
 msgstr "메일이 보내졌습니다"
@@ -1573,6 +1573,26 @@ msgstr "이름바꿈"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#~ msgid "Can't work out query"
+#~ msgstr "퀴어리를 쓸 수 없습니다"
+
+#, fuzzy
+#~ msgid "Remove from Quicklinks"
+#~ msgstr "빨리가기메뉴"
+
+#, fuzzy
+#~ msgid "Add to Quicklinks"
+#~ msgstr "빨리가기메뉴"
+
+#~ msgid "Show Parent"
+#~ msgstr "상위 글 보기"
+
+#~ msgid "Show Changes"
+#~ msgstr "변경내역 보기"
+
+#~ msgid "Get Info"
+#~ msgstr "정보"
 
 #~ msgid "Skip to preview"
 #~ msgstr "미리보기로 건너띔"

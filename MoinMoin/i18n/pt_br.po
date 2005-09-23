@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-24 01:03+0200\n"
 "PO-Revision-Date: 2005-09-16 10:56 (UTC)\n"
 "Last-Translator: ASCII-only here <cerdiogenes@yahoo.com.br>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -80,7 +80,8 @@ msgid "Cannot edit old revisions!"
 msgstr "Não é possível editar revisões antigas!"
 
 msgid "The lock you held timed out, be prepared for editing conflicts!"
-msgstr "Seu tempo de edição se esgotou! Esteja preparado para editar conflitos!"
+msgstr ""
+"Seu tempo de edição se esgotou! Esteja preparado para editar conflitos!"
 
 msgid "Page name is too long, try shorter name."
 msgstr "Nome desta página é muito grande, tente um mais curto."
@@ -246,7 +247,6 @@ msgstr ""
 "%(comment)s\n"
 "\n"
 
-#, python-format
 msgid "New page:\n"
 msgstr "Nova página:\n"
 
@@ -412,7 +412,8 @@ msgid "Up"
 msgstr "Acima"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Publique meu email (não em minha homepage do wiki) nas informações do autor"
+msgstr ""
+"Publique meu email (não em minha homepage do wiki) nas informações do autor"
 
 msgid "Open editor on double click"
 msgstr "Abra o editor com um duplo clique"
@@ -499,9 +500,6 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s e tente novamente."
 
-msgid "Can't work out query"
-msgstr "Não posso realizar a busca"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr ""
@@ -530,24 +528,6 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "Por favor, forneça um endereço de e-mail válido!"
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Você solicitou submeter seus dados de conta a este endereço de email.\n"
-"\n"
-"Se você perder sua senha, por favor use os dados acima e somente entre com\n"
-"a senha COMO MOSTRADO no campo da senha do wiki (utilize copiar e colar\n"
-"para isto).\n"
-"\n"
-"Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.\n"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -565,6 +545,24 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Não foi encontrada nenhuma conta com o endereço '%(email)s!"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Você solicitou submeter seus dados de conta a este endereço de email.\n"
+"\n"
+"Se você perder sua senha, por favor use os dados acima e somente entre com\n"
+"a senha COMO MOSTRADO no campo da senha do wiki (utilize copiar e colar\n"
+"para isto).\n"
+"\n"
+"Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -600,8 +598,9 @@ msgstr "As senhas não conferem!"
 msgid "Please specify a password!"
 msgstr "Por favor, informe uma senha!"
 
+#, fuzzy
 msgid ""
-"Please provide your email address. If you loose your login information, you "
+"Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
 "Por favor, informe um endereço de email. Se você perder sua informação de "
@@ -609,6 +608,9 @@ msgstr ""
 
 msgid "This email already belongs to somebody else."
 msgstr "Este email já pertence a alguém cadastrado neste site."
+
+msgid "User account created!"
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -798,8 +800,8 @@ msgid ""
 "You didn't create a user profile yet. Select UserPreferences in the upper "
 "right corner to create a profile."
 msgstr ""
-"Você ainda não criou um perfil de usuário. Selecione PreferênciasDoUsuário no "
-"canto superior direito para criar um perfil."
+"Você ainda não criou um perfil de usuário. Selecione PreferênciasDoUsuário "
+"no canto superior direito para criar um perfil."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Sua subscrição a esta página foi removida."
@@ -1015,8 +1017,7 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Um upload nunca irá sobrescrever uma arquivo. Se existir um conflito "
-"quanto\n"
+"Um upload nunca irá sobrescrever uma arquivo. Se existir um conflito quanto\n"
 "ao nome, você será lembrado sobre o nome do arquivo que você deseja "
 "inserir.\n"
 "Por outro lado, se \"Renomear como\" for deixado em branco, o nome original "
@@ -1367,11 +1368,9 @@ msgstr "Gráficos não estão disponíveis!"
 msgid "Page Size Distribution"
 msgstr "Distribuição do Tamanho de Página"
 
-#, python-format
 msgid "page size upper bound [bytes]"
 msgstr "limite superior para o tamanho da página [bytes]"
 
-#, python-format
 msgid "# of pages of this size"
 msgstr "# páginas deste tamanho"
 
@@ -1434,11 +1433,9 @@ msgstr "Texto"
 msgid "Titles"
 msgstr "Títulos"
 
-msgid "Remove from Quicklinks"
-msgstr "Remover links rápidos"
-
-msgid "Add to Quicklinks"
-msgstr "Adicionar links rápidos"
+#, fuzzy
+msgid "Quicklink"
+msgstr "Links rápidos"
 
 msgid "More Actions:"
 msgstr "Mais Ações:"
@@ -1467,8 +1464,9 @@ msgstr "Mostrar Mapa Local do Site"
 msgid "Do"
 msgstr "Fazer"
 
-msgid "Show Parent"
-msgstr "Mostrar Acima"
+#, fuzzy
+msgid "Parent Page"
+msgstr "PáginaPrincipal"
 
 msgid "Edit (Text)"
 msgstr "Editar (Texto)"
@@ -1479,11 +1477,9 @@ msgstr "Editar (GUI)"
 msgid "Immutable Page"
 msgstr "Página Não Editável"
 
-msgid "Show Changes"
-msgstr "Mostrar Alterações"
-
-msgid "Get Info"
-msgstr "Obter Informações"
+#, fuzzy
+msgid "Infos"
+msgstr "Informações"
 
 #, python-format
 msgid "Show %s days."
@@ -1526,6 +1522,10 @@ msgstr "Adições são marcadas assim."
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Conexão ao servidor de correio '%(server)s' falhou: %(reason)s"
+
+#, fuzzy
+msgid "Mail not sent"
+msgstr "Mail enviado OK"
 
 msgid "Mail sent OK"
 msgstr "Mail enviado OK"
@@ -1601,6 +1601,24 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "Can't work out query"
+#~ msgstr "Não posso realizar a busca"
+
+#~ msgid "Remove from Quicklinks"
+#~ msgstr "Remover links rápidos"
+
+#~ msgid "Add to Quicklinks"
+#~ msgstr "Adicionar links rápidos"
+
+#~ msgid "Show Parent"
+#~ msgstr "Mostrar Acima"
+
+#~ msgid "Show Changes"
+#~ msgstr "Mostrar Alterações"
+
+#~ msgid "Get Info"
+#~ msgstr "Obter Informações"
 
 #~ msgid "Skip to preview"
 #~ msgstr "Vá para a previsão"

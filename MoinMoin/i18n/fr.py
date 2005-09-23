@@ -351,8 +351,6 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Les mots de passe ne correspondent pas !''',
 '''Please specify a password!''':
 '''Veuillez indiquer un mot de passe !''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Veuillez indiquer une adresse électronique valide. Si vous perdez vos identifiants de connexion, vous pourrez les récupérer par courrier électronique.''',
 '''This email already belongs to somebody else.''':
 '''Cet adresse électronique appartient déjà à quelqu\'un d\'autre.''',
 '''User account created!''':

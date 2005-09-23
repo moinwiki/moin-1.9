@@ -336,8 +336,6 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Paroles nesakrīt!''',
 '''Please specify a password!''':
 '''Lūdzu, norādiet paroli!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas informāciju, tā varēs tikt jums izsutīta pa e-pastu.''',
 '''This email already belongs to somebody else.''':
 '''Šāda e-pasta adrese jau kādam pieder.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':

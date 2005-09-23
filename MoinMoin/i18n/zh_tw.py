@@ -2,9 +2,9 @@
 # Text translations for 繁體中文 (zh_tw).
 # Automatically generated - DO NOT EDIT, edit zh_tw.po instead!
 meta = {
-  'language': '繁體中文',
-  'elanguage': 'Chinese/Taiwan',
-  'maintainer': 'Lin Zhemin <ljm@ljm.idv.tw>',
+  'language': """繁體中文""",
+  'elanguage': """Chinese/Taiwan""",
+  'maintainer': """Lin Zhemin <ljm@ljm.idv.tw>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -257,8 +257,6 @@ space between words. Group page name is not allowed.''':
 '''登入''',
 ''' %s and try again.''':
 ''' %s 後再試一次.''',
-'''Can\'t work out query''':
-'''無法查詢''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''在 %(pages)d 頁中找到 %(hits)d 頁.''',
 '''%.2f seconds''':
@@ -295,8 +293,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''兩次輸入的密碼不符!''',
 '''Please specify a password!''':
 '''請輸入密碼!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''請輸入 email 地址 - 不然你忘記名稱或密碼的時候, 就不能用 email 取回了.''',
 '''This email already belongs to somebody else.''':
 '''這個 email 地址是別人的.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -733,14 +729,8 @@ red=edit''':
 '''顯示連結地圖''',
 '''Do''':
 '''執行''',
-'''Show Parent''':
-'''顯示上一層''',
 '''Immutable Page''':
 '''本頁不可更改''',
-'''Show Changes''':
-'''顯示更動''',
-'''Get Info''':
-'''關於本頁''',
 '''Show %s days.''':
 '''顯示 %s 天.''',
 '''EditText''':

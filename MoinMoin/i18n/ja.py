@@ -2,9 +2,9 @@
 # Text translations for Japanese (ja).
 # Automatically generated - DO NOT EDIT, edit ja.po instead!
 meta = {
-  'language': 'Japanese',
-  'elanguage': 'Japanese',
-  'maintainer': 'Fujio Nobori <toh@fuji-climb.org>',
+  'language': """Japanese""",
+  'elanguage': """Japanese""",
+  'maintainer': """Fujio Nobori <toh@fuji-climb.org>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -285,8 +285,6 @@ space between words. Group page name is not allowed.''':
 '''ログイン''',
 ''' %s and try again.''':
 '''%sして、もう一度試してみてください。''',
-'''Can\'t work out query''':
-'''問い合わせを行うことができません。''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(pages)dページ中%(hits)d箇所一致しました。''',
 '''%.2f seconds''':
@@ -303,6 +301,20 @@ Contact the owner of the wiki, who can enable email.''':
 管理者に問い合わせてください。''',
 '''Please provide a valid email address!''':
 '''正しいメールアドレスを入力してください。''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''ログイン名: %s
+
+ログインパスワード: %s
+
+ログインURL: %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -320,20 +332,6 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 
 ログインに成功したあとは、新たにパスワードを設定し直すことをお勧めします。
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''ログイン名: %s
-
-ログインパスワード: %s
-
-ログインURL: %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] アカウント情報''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -354,8 +352,6 @@ Login URL: %s/?action=userform&uid=%s
 '''パスワードが一致していません。''',
 '''Please specify a password!''':
 '''パスワードを入力してください。''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''メールアドレスを入力してください。ログイン情報を忘れてしまった際、メールにてお知らせするために必要となります。''',
 '''This email already belongs to somebody else.''':
 '''このメールアドレスはすでに利用されています。''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -825,10 +821,6 @@ red=edit''':
 '''テキスト''',
 '''Titles''':
 '''タイトル''',
-'''Remove from Quicklinks''':
-'''クイックリンクから削除''',
-'''Add to Quicklinks''':
-'''クイックリンクに追加''',
 '''More Actions:''':
 '''その他のアクション:''',
 '''Show Raw Text''':
@@ -847,18 +839,12 @@ red=edit''':
 '''ローカルサイトマップの表示''',
 '''Do''':
 '''実行''',
-'''Show Parent''':
-'''親ページの表示''',
 '''Edit (Text)''':
 '''編集(テキストモード)''',
 '''Edit (GUI)''':
 '''編集(GUIモード)''',
 '''Immutable Page''':
 '''編集不可のページ''',
-'''Show Changes''':
-'''変更内容の表示''',
-'''Get Info''':
-'''情報の取得''',
 '''Show %s days.''':
 '''%s日表示''',
 '''EditText''':

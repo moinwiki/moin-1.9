@@ -2,9 +2,9 @@
 # Text translations for 한국어 (ko).
 # Automatically generated - DO NOT EDIT, edit ko.po instead!
 meta = {
-  'language': '한국어',
-  'elanguage': 'Korean',
-  'maintainer': 'Hye-Shik Chang <perky@FreeBSD.org>',
+  'language': """한국어""",
+  'elanguage': """Korean""",
+  'maintainer': """Hye-Shik Chang <perky@FreeBSD.org>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -259,8 +259,6 @@ space between words. Group page name is not allowed.''':
 '''로그인''',
 ''' %s and try again.''':
 ''' %s 하고 다시 시도하세요.''',
-'''Can\'t work out query''':
-'''퀴어리를 쓸 수 없습니다''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
 '''%.2f seconds''':
@@ -297,8 +295,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''패스워드가 맞지 않습니다.''',
 '''Please specify a password!''':
 '''패스워드를 입력하세요!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''사용자명이나 비밀번호를 잊었을 때 쉽게 계정을 찾을 수 있도록 메일 주소를 반드시 입력해 주세요.''',
 '''This email already belongs to somebody else.''':
 '''이 메일은 이미 다른 사람이 사용중입니다.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -731,14 +727,8 @@ red=edit''',
 '''사이트 맵 보기''',
 '''Do''':
 '''확인''',
-'''Show Parent''':
-'''상위 글 보기''',
 '''Immutable Page''':
 '''못 고치는 글''',
-'''Show Changes''':
-'''변경내역 보기''',
-'''Get Info''':
-'''정보''',
 '''Show %s days.''':
 '''변경사항 표시 (일): %s''',
 '''EditText''':

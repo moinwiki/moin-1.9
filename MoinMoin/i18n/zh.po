@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-24 01:03+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -482,9 +482,6 @@ msgstr "登录"
 msgid " %s and try again."
 msgstr "%s后再试."
 
-msgid "Can't work out query"
-msgstr "无法完成查询"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr "在%(pages)d页中找到%(hits)d个结果."
@@ -510,17 +507,6 @@ msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是�
 msgid "Please provide a valid email address!"
 msgstr "请提供一个有效的电子邮件地址!"
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -533,6 +519,17 @@ msgstr ""
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到用'%(email)s'登记的帐户!!"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -566,14 +563,18 @@ msgstr "两次输入的密码不符!"
 msgid "Please specify a password!"
 msgstr "请输入一个密码!"
 
+#, fuzzy
 msgid ""
-"Please provide your email address. If you loose your login information, you "
+"Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
 "请输入电子邮件地址. 否则您忘记名称或密码的时候, 就无法用电子邮件取回了."
 
 msgid "This email already belongs to somebody else."
 msgstr "别人已经用这个电子邮件注册过了."
+
+msgid "User account created!"
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1378,11 +1379,7 @@ msgid "Titles"
 msgstr "标题"
 
 #, fuzzy
-msgid "Remove from Quicklinks"
-msgstr "快捷链接"
-
-#, fuzzy
-msgid "Add to Quicklinks"
+msgid "Quicklink"
 msgstr "快捷链接"
 
 msgid "More Actions:"
@@ -1412,8 +1409,9 @@ msgstr "本站地图"
 msgid "Do"
 msgstr "执行"
 
-msgid "Show Parent"
-msgstr "显示上层"
+#, fuzzy
+msgid "Parent Page"
+msgstr "首页"
 
 #, fuzzy
 msgid "Edit (Text)"
@@ -1425,10 +1423,8 @@ msgstr ""
 msgid "Immutable Page"
 msgstr "只读网页"
 
-msgid "Show Changes"
-msgstr "显示改动"
-
-msgid "Get Info"
+#, fuzzy
+msgid "Infos"
 msgstr "信息"
 
 #, python-format
@@ -1470,6 +1466,10 @@ msgstr "加入的内容标记成这样."
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "无发连接到邮件服务器'%(server)s': %(reason)s"
+
+#, fuzzy
+msgid "Mail not sent"
+msgstr "邮件发送成功"
 
 msgid "Mail sent OK"
 msgstr "邮件发送成功"
@@ -1545,6 +1545,26 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Can't work out query"
+#~ msgstr "无法完成查询"
+
+#, fuzzy
+#~ msgid "Remove from Quicklinks"
+#~ msgstr "快捷链接"
+
+#, fuzzy
+#~ msgid "Add to Quicklinks"
+#~ msgstr "快捷链接"
+
+#~ msgid "Show Parent"
+#~ msgstr "显示上层"
+
+#~ msgid "Show Changes"
+#~ msgstr "显示改动"
+
+#~ msgid "Get Info"
+#~ msgstr "信息"
 
 #~ msgid "Skip to preview"
 #~ msgstr "转至预览"

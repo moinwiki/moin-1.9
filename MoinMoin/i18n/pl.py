@@ -2,9 +2,9 @@
 # Text translations for Polski (pl).
 # Automatically generated - DO NOT EDIT, edit pl.po instead!
 meta = {
-  'language': 'Polski',
-  'elanguage': 'Polish',
-  'maintainer': 'S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>',
+  'language': """Polski""",
+  'elanguage': """Polish""",
+  'maintainer': """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -259,8 +259,6 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s i spróbuj ponownie.''',
-'''Can\'t work out query''':
-'''Nie potrafię zadać pytania''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':
@@ -297,8 +295,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Hasła się nie zgadzają!''',
 '''Please specify a password!''':
 '''Podaj hasło!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
-'''Lepiej podaj swój adres poczty elektronicznej. Obecni jeżeli zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
 '''This email already belongs to somebody else.''':
 '''Ten adres poczty elektronicznej należy do kogoś innego.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -731,14 +727,8 @@ czerwony=edycja''',
 '''Pokaż mapę wiki''',
 '''Do''':
 '''Wykonaj''',
-'''Show Parent''':
-'''Pokaż nadrzędne''',
 '''Immutable Page''':
 '''Strona nie zmieniona''',
-'''Show Changes''':
-'''Pokaż zmiany''',
-'''Get Info''':
-'''Pobierz info''',
 '''Show %s days.''':
 '''Pokaż %s dni.''',
 '''EditText''':

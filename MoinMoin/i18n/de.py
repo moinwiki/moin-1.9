@@ -350,7 +350,7 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Die Passworte sind nicht gleich!''',
 '''Please specify a password!''':
 '''Bitte geben Sie ein Passwort an!''',
-'''Please provide your email address. If you loose your login information, you can get it by email.''':
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
 '''Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen verlieren können Sie sie per E-Mail wieder bekommen.''',
 '''This email already belongs to somebody else.''':
 '''Diese E-Mail-Adresse gehört bereits jemand anderem.''',
