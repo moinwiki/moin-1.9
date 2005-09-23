@@ -2,9 +2,9 @@
 # Text translations for Français (fr).
 # Automatically generated - DO NOT EDIT, edit fr.po instead!
 meta = {
-  'language': 'Français',
-  'elanguage': 'French',
-  'maintainer': 'ASCII-only here <fevrier@tigreraye.org>',
+  'language': """Français""",
+  'elanguage': """French""",
+  'maintainer': """J-P Gue'rard <fevrier@tigreraye.org>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -283,8 +283,6 @@ Les noms des pages des groupes sont interdits.''',
 '''Connexion''',
 ''' %s and try again.''':
 '''%s et essayez à nouveau.''',
-'''Can\'t work out query''':
-'''Impossible d\'évaluer la requête''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d pages trouvées parmi les %(pages)d pages.''',
 '''%.2f seconds''':
@@ -301,6 +299,20 @@ Contact the owner of the wiki, who can enable email.''':
 Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Please provide a valid email address!''':
 '''Veuillez fournir une adresse électronique valide !''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Nom : %s
+
+Mot de passe : %s
+
+URL de connexion : %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Aucun compte correspondant à l\'adresse « %(email)s » n\'a été trouvé !''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -319,20 +331,6 @@ du formulaire d\'identification du wiki (utilisez pour cela un copier-coller).
 Après vous être identifié avec succès, il vous est naturellement recommandé
 d\'enregistrer un nouveau mot de passe que vous connaissiez.
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nom : %s
-
-Mot de passe : %s
-
-URL de connexion : %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Aucun compte correspondant à l\'adresse « %(email)s » n\'a été trouvé !''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Vos identifiants de connexion au wiki''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -357,6 +355,8 @@ URL de connexion : %s/?action=userform&uid=%s
 '''Veuillez indiquer une adresse électronique valide. Si vous perdez vos identifiants de connexion, vous pourrez les récupérer par courrier électronique.''',
 '''This email already belongs to somebody else.''':
 '''Cet adresse électronique appartient déjà à quelqu\'un d\'autre.''',
+'''User account created!''':
+'''Compte utilisateur créé !''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Le thème « %(theme_name)s » n\'a pu être chargé !''',
 '''User preferences saved!''':
@@ -470,7 +470,7 @@ URL de connexion : %s/?action=userform&uid=%s
 '''Show chart "%(title)s"''':
 '''Voir le graphique « %(title)s »''',
 '''Page hits and edits''':
-'''Nombre de connexions et d\'éditions''',
+'''Nombre de consultations et d\'éditions''',
 '''You are not allowed to revert this page!''':
 '''Vous n\'êtes pas autorisé à restaurer une version antérieure de cette page !''',
 '''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
@@ -783,7 +783,7 @@ rouge=modifications''',
 '''date''':
 '''date''',
 '''# of hits''':
-'''Nombre d\'accès''',
+'''Nombre de consultations''',
 '''Charts are not available!''':
 '''Les graphiques ne sont pas disponibles !''',
 '''Page Size Distribution''':
@@ -830,10 +830,8 @@ rouge=modifications''',
 '''Texte''',
 '''Titles''':
 '''Titres''',
-'''Remove from Quicklinks''':
-'''Supprimer des liens rapides''',
-'''Add to Quicklinks''':
-'''Ajouter aux liens rapides''',
+'''Quicklink''':
+'''Lien rapide''',
 '''More Actions:''':
 '''Autres actions :''',
 '''Show Raw Text''':
@@ -852,17 +850,15 @@ rouge=modifications''',
 '''Carte locale du site''',
 '''Do''':
 '''Exécuter''',
-'''Show Parent''':
-'''Page au-dessus''',
+'''Parent Page''':
+'''Page supérieure''',
 '''Edit (Text)''':
 '''Éditer (mode texte)''',
 '''Edit (GUI)''':
 '''Éditer (mode graphique)''',
 '''Immutable Page''':
 '''Page immuable''',
-'''Show Changes''':
-'''Dernière modification''',
-'''Get Info''':
+'''Infos''':
 '''Informations''',
 '''Show %s days.''':
 '''Voir %s jours.''',
@@ -888,6 +884,8 @@ rouge=modifications''',
 '''Texte ajouté.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''La connexion au serveur de messagerie \'%(server)s\' a échouée : %(reason)s''',
+'''Mail not sent''':
+'''Courrier non envoyé''',
 '''Mail sent OK''':
 '''Courrier envoyé avec succès''',
 '''FrontPage''':

@@ -2,9 +2,9 @@
 # Text translations for Čeština (cz).
 # Automatically generated - DO NOT EDIT, edit cz.po instead!
 meta = {
-  'language': 'Čeština',
-  'elanguage': 'Czech',
-  'maintainer': 'Pavel Kosina <pkosina@seznam.cz>',
+  'language': """Čeština""",
+  'elanguage': """Czech""",
+  'maintainer': """Pavel Kosina <pkosina@seznam.cz>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -39,11 +39,13 @@ volání makra.-~
 '''You are not allowed to edit this page.''':
 '''Nemáte dovoleno editovat tuto stránku.''',
 '''Page is immutable!''':
-'''Tuto stránku je neměnná!''',
+'''Tato stránka je neměnná!''',
 '''Cannot edit old revisions!''':
 '''Staré verze se nedají editovat''',
 '''The lock you held timed out, be prepared for editing conflicts!''':
 '''Váš časový zámek vypršel, buďte připraveni na možné editační spory!''',
+'''Page name is too long, try shorter name.''':
+'''Název stránky je příliš dlouhý, zvolte kratší název.''',
 '''Edit "%(pagename)s"''':
 '''Editovat "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,6 +86,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše změny se neuloží.''',
 '''Preview''':
 '''Náhled''',
+'''GUI Mode''':
+'''GUI Mód''',
+'''Comment:''':
+'''Komentář:''',
 '''<No addition>''':
 '''<Žádná kategorie>''',
 '''Trivial change''':
@@ -153,6 +159,8 @@ Následující stránku změnil uživatel %(editor)s:
 '''You cannot save empty pages.''':
 '''Prázdné stránky nelze ukládat
 !''',
+'''You already saved this page!''':
+'''Stránka je již uložena!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -215,12 +223,14 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Náhled''',
 '''Up''':
 '''Nahoru''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publikovat email v infromací o autorovi (místo domovské wiki stránky)''',
 '''Open editor on double click''':
 '''Otevřít editor dvojklikem''',
 '''Remember last page visited''':
 '''Pamatovat si naposledy navštívenou stránku''',
 '''Show question mark for non-existing pagelinks''':
-'''Zobrazit otazníček u neexistujících odkazů''',
+'''Zobrazit otazník u neexistujících odkazů''',
 '''Show page trail''':
 '''Zobrazit stopu stránek''',
 '''Show icon toolbar''':
@@ -264,8 +274,6 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''Přihlášení''',
 ''' %s and try again.''':
 ''' %s a zkuste to znovu.''',
-'''Can\'t work out query''':
-'''Dotaz nedává smysl''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d nálezů na celkem %(pages)d stránkách.''',
 '''%.2f seconds''':
@@ -306,6 +314,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Zadejte prosím Váš email. Pokud zapomenete Vaše přihlašovací informace, mohou Vám být na tento email zaslány.''',
 '''This email already belongs to somebody else.''':
 '''Tato emailová adresa patří již někomu jinému.''',
+'''User account created!''':
+'''Uživatelský účet vytvořen!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nemohu nahrát téma \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -320,6 +330,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Odhlásit''',
 '''Preferred theme''':
 '''Oblíbené téma''',
+'''Editor Preference''':
+'''Nastavení Editoru''',
 '''Time zone''':
 '''Časová zóna''',
 '''Your time is''':
@@ -531,6 +543,8 @@ budete muset změnit jméno uploadovaného souboru.
 Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního souboru.''',
 '''File to upload''':
 '''Soubor k uploadu''',
+'''Rename to''':
+'''Přejmenovat stránku''',
 '''Upload''':
 '''Upload''',
 '''File attachments are not allowed in this wiki!''':
@@ -690,6 +704,10 @@ Zkuste jiné jméno.''',
 '''Očekávána hodnota barvy "%(arg)s" po "%(key)s"''',
 '''%(errortype)s processing error''':
 '''Chyba při zpracování "%(errortype)s"''',
+'''Views/day''':
+'''Počet zobrazení za den''',
+'''Edits/day''':
+'''Počet úprav za den''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(chart_title)s pro %(filterpage)s''',
 '''green=view
@@ -762,14 +780,14 @@ red=edit''':
 '''Mapa lokálního umístění''',
 '''Do''':
 '''Proveď!''',
-'''Show Parent''':
-'''Předek''',
+'''Parent Page''':
+'''Mateřská Stránka''',
+'''Edit (Text)''':
+'''Editace (Text)''',
+'''Edit (GUI)''':
+'''Editace (GUI)''',
 '''Immutable Page''':
 '''Neměnná stránka''',
-'''Show Changes''':
-'''Ukázat změny''',
-'''Get Info''':
-'''Další info''',
 '''Show %s days.''':
 '''Ukázat %s dní.''',
 '''EditText''':
@@ -794,6 +812,8 @@ red=edit''':
 '''Nové věci jsou označeny takto.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Spojení na poštovní server \'%(server)s\' se nezdařilo: %(reason)s''',
+'''Mail not sent''':
+'''Email NEbyl odeslán!''',
 '''Mail sent OK''':
 '''Email byl odeslán''',
 '''FrontPage''':

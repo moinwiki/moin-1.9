@@ -6,16 +6,16 @@
 #format gettext
 #language fr
 
+#
 # MoinMoin fr system text translation
-# Jean-Philippe Guérard, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: moin\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
-"PO-Revision-Date: 2005-08-29 21:47+0200\n"
-"Last-Translator: ASCII-only here <fevrier@tigreraye.org>\n"
+"POT-Creation-Date: 2005-09-23 17:17+0200\n"
+"PO-Revision-Date: 2005-09-23 17:50+0200\n"
+"Last-Translator: J-P Gue'rard <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -258,7 +258,8 @@ msgstr "Aucune différence n'a été trouvée !\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] Mise à jour %(trivial)sde « %(pagename)s » par %(username)s"
+msgstr ""
+"[%(sitename)s] Mise à jour %(trivial)sde « %(pagename)s » par %(username)s"
 
 msgid "Trivial "
 msgstr "mineure "
@@ -324,7 +325,8 @@ msgstr ""
 "Vous n'avez pas modifié le contenu de cette page, elle n'a pas été "
 "enregistrée !"
 
-msgid "You can't change ACLs on this page since you have no admin rights on it!"
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 "Vous ne pouvez pas modifier la liste de contrôle d'accès (ACL) de cette "
 "page, car vous n'en avez pas les droits d'administration !"
@@ -343,7 +345,8 @@ msgstr ""
 "et il vous a été accordé."
 
 #, python-format
-msgid "Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
 msgstr ""
 "Les autres utilisateurs ''ne'' pourront ''pas'' éditer cette page jusqu'au %"
 "(bumptime)s."
@@ -357,7 +360,8 @@ msgstr ""
 "êtes en train d'éditer cette page."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
+msgstr ""
+"Utilisez le bouton « Aperçu » pour prolonger la période de verrouillage."
 
 #, python-format
 msgid ""
@@ -416,7 +420,9 @@ msgid "Up"
 msgstr "Haut"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "En information sur l'auteur, indiquer mon adresse électronique au lieu de ma page wiki personnelle"
+msgstr ""
+"En information sur l'auteur, indiquer mon adresse électronique au lieu de ma "
+"page wiki personnelle"
 
 msgid "Open editor on double click"
 msgstr "Double-cliquer pour ouvrir l'éditeur"
@@ -425,7 +431,8 @@ msgid "Remember last page visited"
 msgstr "Se souvenir de la dernière page visitée"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "Afficher un point d'interrogation pour les liens vers des pages inexistantes"
+msgstr ""
+"Afficher un point d'interrogation pour les liens vers des pages inexistantes"
 
 msgid "Show page trail"
 msgstr "Voir le chemin suivi"
@@ -503,9 +510,6 @@ msgstr "Connexion"
 msgid " %s and try again."
 msgstr "%s et essayez à nouveau."
 
-msgid "Can't work out query"
-msgstr "Impossible d'évaluer la requête"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr "%(hits)d pages trouvées parmi les %(pages)d pages."
@@ -533,6 +537,24 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "Veuillez fournir une adresse électronique valide !"
 
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/?action=userform&uid=%s\n"
+msgstr ""
+"Nom : %s\n"
+"\n"
+"Mot de passe : %s\n"
+"\n"
+"URL de connexion : %s/?action=userform&uid=%s\n"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
+
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
 "\n"
@@ -554,24 +576,6 @@ msgstr ""
 "\n"
 "Après vous être identifié avec succès, il vous est naturellement recommandé\n"
 "d'enregistrer un nouveau mot de passe que vous connaissiez.\n"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/?action=userform&uid=%s\n"
-msgstr ""
-"Nom : %s\n"
-"\n"
-"Mot de passe : %s\n"
-"\n"
-"URL de connexion : %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -621,6 +625,9 @@ msgstr ""
 
 msgid "This email already belongs to somebody else."
 msgstr "Cet adresse électronique appartient déjà à quelqu'un d'autre."
+
+msgid "User account created!"
+msgstr "Compte utilisateur créé !"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -803,10 +810,11 @@ msgid "Show chart \"%(title)s\""
 msgstr "Voir le graphique « %(title)s »"
 
 msgid "Page hits and edits"
-msgstr "Nombre de connexions et d'éditions"
+msgstr "Nombre de consultations et d'éditions"
 
 msgid "You are not allowed to revert this page!"
-msgstr "Vous n'êtes pas autorisé à restaurer une version antérieure de cette page !"
+msgstr ""
+"Vous n'êtes pas autorisé à restaurer une version antérieure de cette page !"
 
 msgid ""
 "You didn't create a user profile yet. Select UserPreferences in the upper "
@@ -1074,7 +1082,8 @@ msgstr "Pièces jointes de « %(pagename)s »"
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "La pièce jointe « %(target)s » (nom distant '%(filename)s') existe déjà."
+msgstr ""
+"La pièce jointe « %(target)s » (nom distant '%(filename)s') existe déjà."
 
 #, python-format
 msgid ""
@@ -1093,7 +1102,8 @@ msgid "Attachment '%(filename)s'"
 msgstr "Pièce jointe « %(filename)s »"
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Type de fichier inconnu, impossible d'afficher son contenu dans la page."
+msgstr ""
+"Type de fichier inconnu, impossible d'afficher son contenu dans la page."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
@@ -1127,7 +1137,8 @@ msgstr "Aucune page n'est similaire à « %s » !"
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Une seule page similaire à « %s » trouvée, redirection vers cette page."
+msgstr ""
+"Une seule page similaire à « %s » trouvée, redirection vers cette page."
 
 #, python-format
 msgid "Pages like \"%s\""
@@ -1207,8 +1218,10 @@ msgstr "Recherche de « %s » dans les textes"
 msgid "Full Link List for \"%s\""
 msgstr "Liste de tout les liens pour « %s »"
 
-msgid "Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1368,7 +1381,7 @@ msgid "date"
 msgstr "date"
 
 msgid "# of hits"
-msgstr "Nombre d'accès"
+msgstr "Nombre de consultations"
 
 msgid "Charts are not available!"
 msgstr "Les graphiques ne sont pas disponibles !"
@@ -1444,11 +1457,8 @@ msgstr "Texte"
 msgid "Titles"
 msgstr "Titres"
 
-msgid "Remove from Quicklinks"
-msgstr "Supprimer des liens rapides"
-
-msgid "Add to Quicklinks"
-msgstr "Ajouter aux liens rapides"
+msgid "Quicklink"
+msgstr "Lien rapide"
 
 msgid "More Actions:"
 msgstr "Autres actions :"
@@ -1477,8 +1487,8 @@ msgstr "Carte locale du site"
 msgid "Do"
 msgstr "Exécuter"
 
-msgid "Show Parent"
-msgstr "Page au-dessus"
+msgid "Parent Page"
+msgstr "Page supérieure"
 
 msgid "Edit (Text)"
 msgstr "Éditer (mode texte)"
@@ -1489,10 +1499,7 @@ msgstr "Éditer (mode graphique)"
 msgid "Immutable Page"
 msgstr "Page immuable"
 
-msgid "Show Changes"
-msgstr "Dernière modification"
-
-msgid "Get Info"
+msgid "Infos"
 msgstr "Informations"
 
 #, python-format
@@ -1518,7 +1525,8 @@ msgid "User"
 msgstr "Utilisateur"
 
 #, python-format
-msgid "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
 "Désolé, impossible d'enregistrer la page car « %(content)s » n'est pas "
 "autorisé sur ce wiki."
@@ -1534,7 +1542,11 @@ msgstr "Texte ajouté."
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "La connexion au serveur de messagerie '%(server)s' a échouée : %(reason)s"
+msgstr ""
+"La connexion au serveur de messagerie '%(server)s' a échouée : %(reason)s"
+
+msgid "Mail not sent"
+msgstr "Courrier non envoyé"
 
 msgid "Mail sent OK"
 msgstr "Courrier envoyé avec succès"

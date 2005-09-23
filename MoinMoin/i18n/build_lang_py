@@ -93,9 +93,9 @@ def do(lang, infile, outfile):
 # Text translations for %(language)s (%(lang)s).
 # Automatically generated - DO NOT EDIT, edit %(lang)s.po instead!
 meta = {
-  'language': '%(language)s',
-  'elanguage': '%(elanguage)s',
-  'maintainer': '%(maintainer)s',
+  'language': """%(language)s""",
+  'elanguage': """%(elanguage)s""",
+  'maintainer': """%(maintainer)s""",
   'encoding': '%(encoding)s',
   'direction': '%(direction)s',
   'wikimarkup': %(wikimarkup)s,

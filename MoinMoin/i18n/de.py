@@ -2,9 +2,9 @@
 # Text translations for Deutsch (de).
 # Automatically generated - DO NOT EDIT, edit de.po instead!
 meta = {
-  'language': 'Deutsch',
-  'elanguage': 'German',
-  'maintainer': 'Thomas Waldmann <tw-public@gmx.de>',
+  'language': """Deutsch""",
+  'elanguage': """German""",
+  'maintainer': """Thomas Waldmann <tw-public@gmx.de>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -230,7 +230,7 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Up''':
 '''Hoch''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Verfoeffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
+'''Verföffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
 '''Open editor on double click''':
 '''Editor per Doppelklick öffnen''',
 '''Remember last page visited''':
@@ -285,8 +285,6 @@ Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 '''Anmelden''',
 ''' %s and try again.''':
 ''' %s und probieren Sie es noch einmal.''',
-'''Can\'t work out query''':
-'''Anfrage macht keinen Sinn''',
 '''%(hits)d results out of %(pages)d pages.''':
 '''%(hits)d Treffer in %(pages)d durchsuchten Seiten.''',
 '''%.2f seconds''':
@@ -303,6 +301,20 @@ Contact the owner of the wiki, who can enable email.''':
 Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschalten kann.''',
 '''Please provide a valid email address!''':
 '''Bitte eine gültige E-Mail-Adresse angeben!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Anmelde-Name: %s
+
+Anmelde-Passwort: %s
+
+Anmelde-URL: %s/?action=userform&uid=%s
+''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -318,20 +330,6 @@ geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des Wikisein (
 
 Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu.
 ''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Anmelde-Name: %s
-
-Anmelde-Passwort: %s
-
-Anmelde-URL: %s/?action=userform&uid=%s
-''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Ihre Wiki-Acount-Daten''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
@@ -356,6 +354,8 @@ Anmelde-URL: %s/?action=userform&uid=%s
 '''Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen verlieren können Sie sie per E-Mail wieder bekommen.''',
 '''This email already belongs to somebody else.''':
 '''Diese E-Mail-Adresse gehört bereits jemand anderem.''',
+'''User account created!''':
+'''Benutzerprofil angelegt!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Das Theme \'%(theme_name)s\' konnte nicht geladen werden!''',
 '''User preferences saved!''':
@@ -477,7 +477,7 @@ Anmelde-URL: %s/?action=userform&uid=%s
 '''Your quicklink to this page has been removed.''':
 '''Ihr Expressverweis für diese Seite wurde entfernt.''',
 '''A quicklink to this page has been added for you.''':
-'''Ein Expressverweis für diese Seite wurde hinzugefuegt.''',
+'''Ein Expressverweis für diese Seite wurde hinzugefügt.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
@@ -828,10 +828,8 @@ rot=Änderungen''',
 '''Text''',
 '''Titles''':
 '''Titel''',
-'''Remove from Quicklinks''':
-'''Aus Expressverweisen entfernen''',
-'''Add to Quicklinks''':
-'''Zu Expressverweisen hinzufuegen''',
+'''Quicklink''':
+'''Expressverweis''',
 '''More Actions:''':
 '''Weitere Aktionen:''',
 '''Show Raw Text''':
@@ -850,18 +848,16 @@ rot=Änderungen''',
 '''Übersichtskarte''',
 '''Do''':
 '''Los!''',
-'''Show Parent''':
-'''Übergeordnete Seite anzeigen''',
+'''Parent Page''':
+'''Übergeordnete Seite''',
 '''Edit (Text)''':
 '''Editieren (Text)''',
 '''Edit (GUI)''':
 '''Editieren (GUI)''',
 '''Immutable Page''':
 '''Geschützte Seite''',
-'''Show Changes''':
-'''Änderungen anzeigen''',
-'''Get Info''':
-'''Infos anzeigen''',
+'''Infos''':
+'''Infos''',
 '''Show %s days.''':
 '''%s Tage anzeigen.''',
 '''EditText''':
@@ -886,6 +882,8 @@ rot=Änderungen''',
 '''Hinzugefügter Text ist auf diese Art markiert.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Verbindung zum Mailserver \'%(server)s\' gestört: %(reason)s''',
+'''Mail not sent''':
+'''E-Mail wurde nicht versandt''',
 '''Mail sent OK''':
 '''E-Mail wurde erfolgreich versandt''',
 '''FrontPage''':

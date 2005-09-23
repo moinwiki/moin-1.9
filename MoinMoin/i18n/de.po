@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-09 21:43+0200\n"
+"POT-Creation-Date: 2005-09-23 17:17+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -414,7 +414,9 @@ msgid "Up"
 msgstr "Hoch"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Verfoeffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info"
+msgstr ""
+"Verföffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der "
+"Autoren-Info"
 
 msgid "Open editor on double click"
 msgstr "Editor per Doppelklick öffnen"
@@ -501,9 +503,6 @@ msgstr "Anmelden"
 msgid " %s and try again."
 msgstr " %s und probieren Sie es noch einmal."
 
-msgid "Can't work out query"
-msgstr "Anfrage macht keinen Sinn"
-
 #, python-format
 msgid "%(hits)d results out of %(pages)d pages."
 msgstr "%(hits)d Treffer in %(pages)d durchsuchten Seiten."
@@ -532,26 +531,6 @@ msgstr ""
 msgid "Please provide a valid email address!"
 msgstr "Bitte eine gültige E-Mail-Adresse angeben!"
 
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Jemand hat angefordert, Ihre Accountdaten an diese E-Mail-Adresse zu senden.\n"
-"\n"
-"Wenn Sie Ihr Passwort vergessen haben, benutzen Sie bitte die Daten unten "
-"und\n"
-"geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des "
-"Wikisein (benutzen Sie kopieren und einfügen dazu).\n"
-"\n"
-"Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort "
-"neu.\n"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -570,6 +549,27 @@ msgstr ""
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Es wurde kein Benutzerkonto mit der E-Mail-Adresse '%(email)s' gefunden!"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Jemand hat angefordert, Ihre Accountdaten an diese E-Mail-Adresse zu "
+"senden.\n"
+"\n"
+"Wenn Sie Ihr Passwort vergessen haben, benutzen Sie bitte die Daten unten "
+"und\n"
+"geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des "
+"Wikisein (benutzen Sie kopieren und einfügen dazu).\n"
+"\n"
+"Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort "
+"neu.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -614,6 +614,9 @@ msgstr ""
 
 msgid "This email already belongs to somebody else."
 msgstr "Diese E-Mail-Adresse gehört bereits jemand anderem."
+
+msgid "User account created!"
+msgstr "Benutzerprofil angelegt!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -812,7 +815,7 @@ msgid "Your quicklink to this page has been removed."
 msgstr "Ihr Expressverweis für diese Seite wurde entfernt."
 
 msgid "A quicklink to this page has been added for you."
-msgstr "Ein Expressverweis für diese Seite wurde hinzugefuegt."
+msgstr "Ein Expressverweis für diese Seite wurde hinzugefügt."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
@@ -1444,11 +1447,8 @@ msgstr "Text"
 msgid "Titles"
 msgstr "Titel"
 
-msgid "Remove from Quicklinks"
-msgstr "Aus Expressverweisen entfernen"
-
-msgid "Add to Quicklinks"
-msgstr "Zu Expressverweisen hinzufuegen"
+msgid "Quicklink"
+msgstr "Expressverweis"
 
 msgid "More Actions:"
 msgstr "Weitere Aktionen:"
@@ -1477,8 +1477,8 @@ msgstr "Übersichtskarte"
 msgid "Do"
 msgstr "Los!"
 
-msgid "Show Parent"
-msgstr "Übergeordnete Seite anzeigen"
+msgid "Parent Page"
+msgstr "Übergeordnete Seite"
 
 msgid "Edit (Text)"
 msgstr "Editieren (Text)"
@@ -1489,11 +1489,8 @@ msgstr "Editieren (GUI)"
 msgid "Immutable Page"
 msgstr "Geschützte Seite"
 
-msgid "Show Changes"
-msgstr "Änderungen anzeigen"
-
-msgid "Get Info"
-msgstr "Infos anzeigen"
+msgid "Infos"
+msgstr "Infos"
 
 #, python-format
 msgid "Show %s days."
@@ -1536,6 +1533,9 @@ msgstr "Hinzugefügter Text ist auf diese Art markiert."
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Verbindung zum Mailserver '%(server)s' gestört: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "E-Mail wurde nicht versandt"
 
 msgid "Mail sent OK"
 msgstr "E-Mail wurde erfolgreich versandt"
@@ -1611,4 +1611,3 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
-
