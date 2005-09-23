@@ -1,7 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version moin--main--1.5--patch-1:
+Version moin--main--1.5:
     * Requirements changed to require Python >= 2.3. We recommend that you use
       the latest Python release you can get. The reason we dropped 2.2.2
       support is because no developer or tester uses this old version any more,
@@ -125,11 +125,14 @@ Version moin--main--1.5--patch-1:
        pages. If you are not in the user_homewiki, you will get redirected
        there first.
 
-  Server support:
+  Other changes:
     * added WSGI server support, thanks to Anakim Border, see:
       wiki/server/moinwsgi.py (moin as WSGI app, uses the flup WSGI server,
                                see http://www.saddi.com/software/flup/)
       MoinMoin/server/wsgi.py (adaptor code)
+    * added a "Despam" action to make de-spamming a wiki easy (mass revert
+      bad changes done by a single author or bot). You need to be in
+      cfg.superuser to use it.
 
   Internal Changes:
     * request.formatter (html) is available for actions now
