@@ -242,7 +242,7 @@ textarea {
 #message p{
 	margin: 5px 0;
 	padding: 0;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 #message div.buttons {
@@ -276,6 +276,14 @@ textarea {
 	background-color: white;
 	margin: 0;
 	padding: 10px 30px 20px 30px;
+   
+   /* theses are some Firefox 1.5b1 specific extensions, see also the CSS3 draft.
+   -moz-column-width: 25em;
+   -moz-column-gap: 2em;
+   -moz-column-rule: solid black 0.3em;     --   doesn't work yet with 1.5b1!
+
+   TODO: make text/gui editor NOT use #page css, we don't want columns there!
+    */
 }
 
 /* We use here dumb css1 ids because of IE suckiness */
