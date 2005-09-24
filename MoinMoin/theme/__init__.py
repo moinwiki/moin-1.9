@@ -260,11 +260,15 @@ class ThemeBase:
         # try handling interwiki links
         try:
             interwiki, page = pagename.split(':', 1)
-            return (pagename,
-                    self.request.formatter.interwikilink(True, interwiki, page) +
-                    page +
-                    self.request.formatter.interwikilink(False)
-                    )
+            thiswiki = request.cfg.interwikiname
+            if interwiki == thiswiki:
+                pagename = page
+            else:
+                return (pagename,
+                        self.request.formatter.interwikilink(True, interwiki, page) +
+                        page +
+                        self.request.formatter.interwikilink(False)
+                        )
         
         except ValueError:
             pass
@@ -332,7 +336,7 @@ class ThemeBase:
         # Add user links to wiki links, eliminating duplicates.
         userlinks = request.user.getQuickLinks()
         for text in userlinks:
-            # Split text without localization, user know what she wants
+            # Split text without localization, user knows what he wants
             pagename, link = self.splitNavilink(text, localize=0)
             if not pagename in found:
                 cls = 'userlink'

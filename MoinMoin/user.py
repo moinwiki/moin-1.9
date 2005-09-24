@@ -668,27 +668,29 @@ class User:
         @param remove: unsubscribe pagename if set
         @type remove: bool
         @rtype: bool
-        @return: true, if page was NEWLY quicklinked.
+        @return: True, if quicklinks were added/removed.
         """
+        changed = False
+        if self._cfg.interwikiname:
+            iwpagename = "%s:%s" % (self._cfg.interwikiname, pagename)
+        else:
+            iwpagename = None
         if remove:
             if pagename in self.quicklinks:
                 self.quicklinks.remove(pagename)
-                return 1
-            
-        # check for our own interwiki name
-        if self._cfg.interwikiname:
-            pagename = "%s:%s" % (self._cfg.interwikiname, pagename)
-
-        if remove and (pagename in self.quicklinks):
-            self.quicklinks.remove(pagename)
-            return 1
-    
+                changed = True
+            if iwpagename in self.quicklinks:
+                self.quicklinks.remove(iwpagename)
+                changed = True
         else:
-            # add the interwiki name!
-            if pagename not in self.quicklinks:
-                self.quicklinks.append(pagename)
-                return 1
-        return 0
+            # add the interwiki name and remove non-interwiki name, if present!
+            if pagename in self.quicklinks:
+                self.quicklinks.remove(pagename)
+                changed = True
+            if iwpagename not in self.quicklinks:
+                self.quicklinks.append(iwpagename)
+                changed = True
+        return changed
 
     def subscribePage(self, pagename, remove=False):
         """ Subscribe or unsubscribe to a wiki page.
