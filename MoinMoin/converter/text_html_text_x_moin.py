@@ -150,10 +150,6 @@ class visitor(object):
         pass
 
 
-class strip_break(visitor):
-    pass
-
-
 class strip_whitespace(visitor):
     def do(self, tree):
         self.visit_node_list(tree.childNodes)
@@ -197,13 +193,13 @@ class convert_tree(visitor):
         while i < len(text):
             if text[i] is self.white_space:
                 if i == 0 or i == len(text)-1:
-                    text[0:0] = [" "] # del?
+                    text[0:0] = [" "] # del?            XXX this is either a bug or a missing comment - what does that mean? why 0:0?
                     i += 1
-                elif (text[i-1][-1] in (" ", "\n",) or
-                      text[i+1] is self.white_space or
-                      text[i+1] is self.new_line):
+                elif (text[i-1][-1] in (" ", "\n",) or  # last char of previous element is whitespace
+                      text[i+1][0] in (" ", "\n",)):    # or first char of next element is whitespace
                     del text[i]
-                elif text[i+1][0] in (" ", "\n",):
+                elif (text[i+1] is self.white_space or  # next element is white_space
+                      text[i+1] is self.new_line):      # or new_line
                     del text[i]
                 else:
                     text[i] = " "
@@ -215,7 +211,7 @@ class convert_tree(visitor):
                     text[i] = "\n"
                     i += 1
                 elif text[i-1][-1] == "\n" or (
-                      isinstance(text[i+1], str) and text[i+1][0] == "\n"):
+                      isinstance(text[i+1], str) and text[i+1][0] == "\n"): # XXX why do we need isinstance here, but not above?
                     del text[i]
                 else:
                     text[i] = "\n"
@@ -854,6 +850,5 @@ def convert(request, pagename, text):
     text = u"<page>%s</page>" % text
     tree = parse(text)
     strip_whitespace().do(tree)
-    strip_break().do(tree)
     return convert_tree(request, pagename).do(tree)
 
