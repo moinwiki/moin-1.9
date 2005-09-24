@@ -181,7 +181,7 @@ div.recentchanges table {
 }
 
 .rccomment {
-	width: 66%;
+	width: 50%;
 	color: gray;
 	font-size: 0.88em;
 }
