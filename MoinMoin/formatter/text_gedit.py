@@ -204,6 +204,7 @@ class Formatter(text_html.Formatter):
         return ''.join(result)    
 
     def comment(self, text):
+        text = text.rstrip() # workaround for growing amount of blanks at EOL
         return self.preformatted(1, attr={'class': 'comment'}) + text + self.preformatted(0)
 
     def underline(self, on):
