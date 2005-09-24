@@ -272,7 +272,6 @@ class Macro:
                 
         current_letter = None
         for name in pages:
-            letter = name[0].upper()
             letter = wikiutil.getUnicodeIndexGroup(name)
             if letter not in index_letters:
                 index_letters.append(letter)
