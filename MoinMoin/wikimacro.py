@@ -207,9 +207,17 @@ class Macro:
         return self.formatter.rawHTML(html)
 
     def _macro_WordIndex(self, args):
-        s = ''
+        _ = self._
+        allpages = int(self.form.get('allpages', [0])[0]) != 0
         # Get page list readable by current user
-        pages = self.request.rootpage.getPageList()
+        # Filter by isSystemPage if needed
+        if allpages:
+            # TODO: make this fast by caching full page list
+            pages = self.request.rootpage.getPageList()
+        else:
+            def filter(name):
+                return not wikiutil.isSystemPage(self.request, name)
+            pages = self.request.rootpage.getPageList(filter=filter)
         map = {}
         word_re = re.compile(u'[%s][%s]+' % (config.chars_upper, config.chars_lower), re.UNICODE)
         for name in pages:
@@ -223,14 +231,15 @@ class Macro:
         all_words = map.keys()
         all_words.sort()
         index_letters = []
-        last_letter = None
+        current_letter = None
         html = []
         for word in all_words:
-            letter = word[0]
-            if letter != last_letter:
+            letter = wikiutil.getUnicodeIndexGroup(word)
+            if letter != current_letter:
                 #html.append(self.formatter.anchordef()) # XXX no text param available!
-                html.append(u'<a name="%s">\n<h3>%s</h3>\n' % (wikiutil.quoteWikinameURL(letter), letter))
-                last_letter = letter
+                html.append(u'<a name="%s"><h3>%s</h3></a>' % (
+                    wikiutil.quoteWikinameURL(letter), letter.replace('~', 'Others')))
+                current_letter = letter
             if letter not in index_letters:
                 index_letters.append(letter)
 
@@ -242,12 +251,18 @@ class Macro:
             links.sort()
             last_page = None
             for name in links:
-                if name == last_page: continue
+                if name == last_page:
+                    continue
                 html.append(self.formatter.listitem(1))
                 html.append(Page(self.request, name).link_to(self.request))
                 html.append(self.formatter.listitem(0))
             html.append(self.formatter.bullet_list(0))
-        return u'%s%s' % (_make_index_key(index_letters), u''.join(html))
+        
+        qpagename = wikiutil.quoteWikinameURL(self.formatter.page.page_name)
+        index = _make_index_key(index_letters, u"""<br>
+<a href="%s?allpages=%d">%s</a>
+""" % (qpagename, not allpages, (_('Include system pages'), _('Exclude system pages'))[allpages]) )
+        return u'%s%s' % (index, u''.join(html)) 
 
 
     def _macro_TitleIndex(self, args):
