@@ -1201,9 +1201,6 @@ actionsMenuInit('%(label)s');
                 ]
             html += ''.join(link)
         html += '<p>'
-        if d['rc_update_bookmark']:
-            html += "%(rc_update_bookmark)s %(rc_curr_bookmark)s<br>" % d
-
         # Add day selector
         if d['rc_days']:
             days = []
@@ -1217,6 +1214,10 @@ actionsMenuInit('%(label)s');
                             str(day)))
             days = ' | '.join(days)
             html += (_("Show %s days.") % (days,))
+        
+        if d['rc_update_bookmark']:
+            html += " %(rc_update_bookmark)s %(rc_curr_bookmark)s" % d
+
         html += '</p>\n</div>\n'
 
         html += '<table>\n'
