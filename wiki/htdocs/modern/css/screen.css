@@ -287,10 +287,12 @@ textarea {
     background-color: white;
     padding: 3px;
     width: 100%;
+    margin-top: 0.5em;
 }
 
 #editor-help {
     font-size: small;
+    background-color: #EEEEFF;
 }
 
 #editor-comment {
@@ -308,6 +310,7 @@ textarea {
 	border: 1px solid #6C7680;
 	padding: 10px 30px 20px 30px;
 	background: url(../img/draft.png);
+    margin-top: 0.5em;
 }
 
 input.button {
