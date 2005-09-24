@@ -263,6 +263,7 @@ class ThemeBase:
             thiswiki = request.cfg.interwikiname
             if interwiki == thiswiki:
                 pagename = page
+                title = page
             else:
                 return (pagename,
                         self.request.formatter.interwikilink(True, interwiki, page) +
