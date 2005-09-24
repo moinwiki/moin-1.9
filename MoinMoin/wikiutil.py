@@ -831,7 +831,7 @@ def getUnicodeIndexGroup(name):
     if u'\uAC00' <= c <= u'\uD7AF': # Hangul Syllables
         return unichr(0xac00 + (int(ord(c) - 0xac00) / 588) * 588)
     else:
-        return c
+        return c.upper() # we put lower and upper case words into the same index group
 
 
 def isStrictWikiname(name, word_re=re.compile(ur"^(?:[%(u)s][%(l)s]+){2,}$" % {'u':config.chars_upper, 'l':config.chars_lower})):
