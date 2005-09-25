@@ -257,7 +257,7 @@ class Formatter(FormatterBase):
             else:
                 html_class = 'interwiki'
             title = kw.get('title', wikitag)
-            return self.url(1, href, title=title, unescaped=0, pretty_url=kw.get('pretty_url', 0), css=html_class)
+            return self.url(1, href, title=title, unescaped=0, css=html_class)
             # unescaped=1 was changed to 0 to make interwiki links with pages with umlauts (or other non-ascii) work
 
     def url(self, on, url=None, css=None, **kw):
@@ -270,25 +270,17 @@ class Formatter(FormatterBase):
             url = wikiutil.mapURL(self.request, url)
         title = kw.get('title', None)
         attrs = kw.get('attrs', None)
-
-        #pretty = kw.get('pretty_url', 0)
-        #if not pretty and wikiutil.isPicture(url):
-        #    # XXX
-        #    return '<img src="%s" alt="%s">' % (url,url)
-
-        # create link
-        if not on:
-            return '</a>'
-        str = '<a'
-        
-        if css: 
-            str = '%s class="%s"' % (str, css)
-        if title:
-            str = '%s title="%s"' % (str, title)
-        if attrs:
-            str = '%s %s' % (str, attrs)
-        str = '%s href="%s">' % (str, wikiutil.escape(url, 1))
-
+        if on:
+            str = '<a'
+            if css: 
+                str = '%s class="%s"' % (str, css)
+            if title:
+                str = '%s title="%s"' % (str, title)
+            if attrs:
+                str = '%s %s' % (str, attrs)
+            str = '%s href="%s">' % (str, wikiutil.escape(url, 1))
+        else:
+            str = '</a>'
         return str
 
     def anchordef(self, id):

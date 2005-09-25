@@ -291,7 +291,6 @@ class ACLStringIterator:
         else:
             # Get entries
             try:
-                # XXX TODO disallow : and , in usernames
                 entries, self.rest = self.rest.split(':', 1)
             except ValueError:
                 self.finished = 1
