@@ -75,13 +75,13 @@ def format_page_edits(macro, lines, bookmark_usecs):
         img = request.theme.make_icon('updated')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(pagename) + "?action=diff&date=%d" % bookmark_usecs,
-                                      img, formatter=macro.formatter, pretty_url=1)
+                                      img, formatter=macro.formatter)
     else:
         # show "DIFF" icon else
         img = request.theme.make_icon('diffrc')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(line.pagename) + "?action=diff",
-                                      img, formatter=macro.formatter, pretty_url=1)
+                                      img, formatter=macro.formatter)
 
     # print name of page, with a link to it
     force_split = len(page.page_name) > _MAX_PAGENAME_LENGTH
@@ -130,7 +130,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     img = request.theme.make_icon('info')
     info_html = wikiutil.link_tag(request,
                                   wikiutil.quoteWikinameURL(line.pagename) + "?action=info",
-                                  img, formatter=macro.formatter, pretty_url=1)
+                                  img, formatter=macro.formatter)
     d['info_html'] = info_html
     
     return request.theme.recentchanges_entry(d)

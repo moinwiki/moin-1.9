@@ -125,7 +125,7 @@ def normalizeName(name):
     @return: user name that can be used in acl lines
     """
     name = name.replace('_', ' ') # we treat _ as a blank
-    username_allowedchars = "'" # O'Brian :)
+    username_allowedchars = "'" # ' for names like O'Brian. "," and ":" must not be allowed (ACL delimiters).
     # Strip non alpha numeric characters (except username_allowedchars), keep white space
     name = ''.join([c for c in name if c.isalnum() or c.isspace() or c in username_allowedchars])
 

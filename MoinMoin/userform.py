@@ -646,7 +646,7 @@ def do_user_browser(request):
         data.addRow((
             #request.formatter.code(1) + uid + request.formatter.code(0),
             request.formatter.rawHTML(namelink),
-            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', pretty_url=1, unescaped=1) +
+            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', unescaped=1) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
             #'',
