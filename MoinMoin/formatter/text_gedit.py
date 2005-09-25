@@ -237,3 +237,10 @@ class Formatter(text_html.Formatter):
         if on:
             return self.open(tag, attr=attrs)
         return self.close(tag)
+
+    def line_anchordef(self, lineno):
+        return '' # not needed for gui editor feeding
+        
+    def line_anchorlink(self, on, lineno=0):
+        return '' # not needed for gui editor feeding
+

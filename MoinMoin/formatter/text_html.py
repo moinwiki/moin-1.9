@@ -286,11 +286,17 @@ class Formatter(FormatterBase):
     def anchordef(self, id):
         return '<a id="%s"></a>\n' % (id, )
 
-    def anchorlink(self, on, name='', id = None):
+    def line_anchordef(self, lineno):
+        return self.anchordef("line-%d" % lineno)
+
+    def anchorlink(self, on, name='', id=None):
         extra = ''
         if id:
             extra = ' id="%s"' % id
         return ['<a href="#%s"%s>' % (name, extra), '</a>'][not on]
+
+    def line_anchorlink(self, on, lineno=0):
+        return self.anchorlink(on, name="line-%d" % lineno)
 
     # Attachments ######################################################
 

@@ -91,7 +91,13 @@ class FormatterBase:
     def anchordef(self, name):
         return ""
 
+    def line_anchordef(self, lineno):
+        return ""
+
     def anchorlink(self, on, name='', id=None):
+        return ""
+
+    def line_anchorlink(self, on, lineno=0):
         return ""
 
     def image(self, **kw):

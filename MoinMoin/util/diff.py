@@ -29,7 +29,6 @@ def diff(request, old, new):
     """
     _ = request.getText
     t_line = _("Line") + " %d"
-    target = '#line-%d'
 
     seq1 = old.splitlines()
     seq2 = new.splitlines()
@@ -69,13 +68,14 @@ def diff(request, old, new):
         result += """
 <tr class="diff-title">
 <td>
-<a href="%s">%s</a>:
+%s:
 </td>
 <td>
-<a href="%s">%s</a>:
+%s:
 </td>
 </tr>
-""" % ( target % llineno, t_line % llineno, target % rlineno, t_line % rlineno)
+""" % ( request.formatter.line_anchorlink(1, llineno) + request.formatter.text(t_line % llineno) + request.formatter.line_anchorlink(0),
+        request.formatter.line_anchorlink(1, rlineno) + request.formatter.text(t_line % rlineno) + request.formatter.line_anchorlink(0))
 
         leftpane  = ''
         rightpane = ''

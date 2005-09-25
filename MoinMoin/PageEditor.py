@@ -195,7 +195,7 @@ class PageEditor(Page):
                 if not ok:
                     # failed to get the lock
                     if preview is not None:
-                        edit_lock_message = _('The lock you held timed out, be prepared for editing conflicts!'
+                        edit_lock_message = _('The lock you held timed out. Be prepared for editing conflicts!'
                             ) + "<br>" + edit_lock_message
                     else:
                         msg = edit_lock_message
