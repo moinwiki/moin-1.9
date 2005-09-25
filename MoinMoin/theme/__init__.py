@@ -743,7 +743,7 @@ function actionsMenuInit(title) {
 //-->
 </script>
 """ % {
-    'search_hint' : _('Search:', formatted=False).replace(':',''), # XXX TODO make own i18n string in 1.4
+    'search_hint' : _('Search', formatted=False),
     }
         return script
     

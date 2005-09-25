@@ -1,6 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - supply common error classes.
+    
+    TODO: translate strings?
 
     @copyright: 2004 by Nir Soffer
     @license: GNU GPL, see COPYING for details.
@@ -23,7 +25,6 @@ class Error(Exception):
             
     When you want to render an error, use unicode() or str() as needed.
     
-    TODO: translate strings?
     """
 
     def __init__(self, message):
@@ -64,8 +65,6 @@ class FatalError(Error):
     what is the error, but still can't continue.
 
     Do not use this class but its more specific sub classes.
-    
-    TODO: translate strings?
     """
     name = 'MoinMoin Fatal Error'
 
@@ -153,16 +152,12 @@ class FatalError(Error):
 
 class ConfigurationError(FatalError):
     """ Raise when fatal misconfiguration is found
-
-    TODO: translate strings?
     """
     name = 'MoinMoin Configuration Error'
         
 
 class InternalError(FatalError):
     """ Raise when internal fatal error is found
-
-    TODO: translate strings?
     """
     name = 'MoinMoin Internal Error'
 

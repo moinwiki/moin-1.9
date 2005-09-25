@@ -67,7 +67,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # improve if we have one...
     if len(results.hits) == 1:
         page = Page(request, results.hits[0].page_name)
-        # TODO: remove escape=0 in 1.4
+        # TODO: remove escape=0 in 2.0
         url = page.url(request, querystr={'highlight': query.highlight_re()},
                        escape=0)
         request.http_redirect(url)

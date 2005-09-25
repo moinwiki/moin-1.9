@@ -9,7 +9,6 @@ web server user.
 @copyright: 2005 by Florian Festi, Nir Soffer
 @license: GNU GPL, see COPYING for details.
 """
-__version__ = "1.0"
 
 import os
 

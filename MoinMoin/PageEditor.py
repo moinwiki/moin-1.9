@@ -1039,15 +1039,13 @@ class PageLock:
                     ) % {'owner': owner, 'timestamp': timestamp, 'mins_valid': mins_valid}
             else:
                 # warn user about existing lock
-### WIKIMARKUP-TODO
+
                 result = 1, _(
-                    'This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]\n'
-                    '\'\'\''
-                    'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),\n'
-                    'to avoid editing conflicts.'
-                    '\'\'\'[[BR]]\n'
-                    'To leave the editor, press the Cancel button.'
-                    ) % {'timestamp': timestamp, 'owner': owner, 'mins_valid': mins_valid}
+"""This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
+'''You should ''refrain from editing'' this page for at least another %(mins_valid)d minute(s),
+to avoid editing conflicts.'''[[BR]]
+To leave the editor, press the Cancel button.""") % {
+                    'timestamp': timestamp, 'owner': owner, 'mins_valid': mins_valid}
 
         return result
 

@@ -773,14 +773,12 @@ class SearchResults:
         @return formatted statistics
         """
         _ = request.getText
-        f = formatter
         output = [
-            f.paragraph(1),
-            # TODO: update to "results of about" in 1.4
-            f.text(_("%(hits)d results out of %(pages)d pages.") %
+            formatter.paragraph(1),
+            formatter.text(_("%(hits)d results out of about %(pages)d pages.") %
                    {'hits': len(self.hits), 'pages': self.pages}),
-            u' (%s)' % f.text(_("%.2f seconds") % self.elapsed),
-            f.paragraph(0),
+            u' (%s)' % formatter.text(_("%.2f seconds") % self.elapsed),
+            formatter.paragraph(0),
             ]
         return ''.join(output)
 

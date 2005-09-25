@@ -5,12 +5,9 @@
     @copyright: 2000, 2001, 2002 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-__version__ = "$Revision: 1.6 $"[11:-2]
 
-# Imports
 import os, sys
 
-# Globals
 flag_quiet = 0
 script_module = '__main__'
 
@@ -55,17 +52,11 @@ class Script:
         from MoinMoin import version
 
         cmd = self.script_module.__name__.split('.')[-1].replace('_', '-')
-        ver = self.script_module.__version__
-        rev = "%s (%s %s [%s])" % (
-            ver, version.project, version.release, version.revision)
+        rev = "%s %s [%s]" % (version.project, version.release, version.revision)
         sys.argv[0] = cmd
 
         self.parser = optparse.OptionParser(
-            usage=
-                "%(cmd)s %(usage)s\n"
-                "\n"
-                "%(cmd)s v%(ver)s, Copyright (c) 2002, 2003 by Jürgen Hermann <jh@web.de>"
-                % {'cmd': cmd, 'usage': usage, 'ver': ver},
+            usage="%(cmd)s %(usage)s\n\n" % {'cmd': cmd, 'usage': usage, },
             version=rev)
         self.parser.add_option(
             "-q", "--quiet", 

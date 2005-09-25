@@ -45,8 +45,6 @@ disable some accounts:
     --wikinames --save
     
 """
-# $Id: moin_usercheck-jh-new.py,v 1.1 2004/01/30 21:29:57 thomaswaldmann Exp $
-__version__ = "$Revision: 1.1 $"[11:-2]
 
 # ----------------------------------------------------------------------------
 # if a user subsribes to magicpages, it means that he wants to keep

@@ -5,7 +5,6 @@
     @copyright: 2001 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-__version__ = "$Revision: 1.4 $"[11:-2]
 
 from xml.sax import saxutils
 from MoinMoin import config

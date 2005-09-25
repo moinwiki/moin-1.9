@@ -730,7 +730,7 @@ class User:
         
         @param pagename: the page name to add to the trail
         """
-        # TODO: acquire lock here, so multiple processes don't clober
+        # TODO: acquire lock here, so multiple processes don't clobber
         # each one trail.
 
         if self.valid and (self.show_page_trail or self.remember_last_visit):
@@ -776,8 +776,6 @@ class User:
             finally:
                 file.close()
 
-            # TODO: do we realy need to set perimssion for each save, which
-            # is on each request?
             try:
                 os.chmod(path, 0666 & config.umask)
             except OSError, err:
