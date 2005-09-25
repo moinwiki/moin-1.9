@@ -134,6 +134,7 @@ Version moin--main--1.5:
     * added a "Despam" action to make de-spamming a wiki easy (mass revert
       bad changes done by a single author or bot). You need to be in
       cfg.superuser to use it.
+    * Better diffs with links to anchors to the changed places
     * Enhanced table support in the DocBook formatter.
     * Added 'moin' daemon script, that let you run moin standalone
       server as daemon and control the server with simple command line

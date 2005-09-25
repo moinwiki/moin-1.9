@@ -932,6 +932,7 @@ class Parser:
         # Main loop
         for line in self.lines:
             self.lineno += 1
+            self.request.write('<a id="line-%d"></a>' % self.lineno) # TODO move to formatter
             self.table_rowstart = 1
             self.line_was_empty = self.line_is_empty
             self.line_is_empty = 0

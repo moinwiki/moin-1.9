@@ -28,11 +28,12 @@ def diff(request, old, new):
         HTML markup visualising them.
     """
     _ = request.getText
-    t_line = _("Line") + " "
+    t_line = _("Line") + " %d"
+    target = '#line-%d'
 
     seq1 = old.splitlines()
     seq2 = new.splitlines()
-    
+
     seqobj = difflib.SequenceMatcher(None, seq1, seq2)
     linematch = seqobj.get_matching_blocks()
 
@@ -64,19 +65,18 @@ def diff(request, old, new):
         if lastmatch == match[0:2]:
             lastmatch = (match[0] + match[2], match[1] + match[2])
             continue
-
+        llineno, rlineno = lastmatch[0]+1, lastmatch[1]+1
         result += """
 <tr class="diff-title">
 <td>
-%s %s:
+<a href="%s">%s</a>:
 </td>
 <td>
-%s %s:
+<a href="%s">%s</a>:
 </td>
 </tr>
-""" % ( t_line, str(lastmatch[0] + 1),
-        t_line, str(lastmatch[1] + 1),)
-        
+""" % ( target % llineno, t_line % llineno, target % rlineno, t_line % rlineno)
+
         leftpane  = ''
         rightpane = ''
         linecount = max(match[0] - lastmatch[0], match[1] - lastmatch[1])
@@ -92,7 +92,7 @@ def diff(request, old, new):
 
         charobj   = difflib.SequenceMatcher(None, leftpane, rightpane)
         charmatch = charobj.get_matching_blocks()
-        
+
         if charobj.ratio() < 0.5:
             # Insufficient similarity.
             if leftpane:
