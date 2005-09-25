@@ -256,9 +256,7 @@ def do_info(pagename, request):
             Column('rev', label='#', align='right'),
             Column('mtime', label=_('Date'), align='right'),
             Column('size',  label=_('Size'), align='right'),
-            Column('diff', label='<input type="submit"           value="%s">' % (_("Diff"))),
-            # TODO: translate to English
-            # entfernt, nicht 4.01 compliant:          href="%s"   % page.url(request)
+            Column('diff', label='<input type="submit" value="%s">' % (_("Diff"))),
             Column('editor', label=_('Editor'), hidden=not request.cfg.show_hosts),
             Column('comment', label=_('Comment')),
             Column('action', label=_('Action')),
@@ -376,7 +374,7 @@ def do_info(pagename, request):
             request.write(_('No log entries found.'))
             return
 
-        # TODO: this form activate revert, which should use post, but
+        # TODO: this form activates revert, which should use POST, but
         # other actions should use get. Maybe we should put the revert
         # into the page view itself, and not in this form.
         request.write('<form method="GET" action="">\n')

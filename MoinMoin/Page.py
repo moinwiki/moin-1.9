@@ -800,12 +800,12 @@ class Page:
         if querystr:
             querystr = web.makeQueryString(querystr)
 
-            # TODO: remove in 1.4
+            # TODO: remove in 2.0
             # Escape query string to be compatible with old 3rd party code
             # New code should call with escape=0 to prevent the warning.
             if escape:
                 import warnings
-                warnings.warn("In moin 1.4 query string in url will not be"
+                warnings.warn("In moin 2.0 query string in url will not be"
                               " escaped. See"
                               " http://moinmoin.wikiwikiweb.de/ApiChanges")
                 querystr = wikiutil.escape(querystr)

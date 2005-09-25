@@ -1230,8 +1230,6 @@ space between words. Group page name is not allowed.""") % self.user.name
          = 0    forever, ignoring user 'remember_me' setting
          > 0    n hours, or forever if user checked 'remember_me'
          < 0    -n hours, ignoring user 'remember_me' setting
-
-        TODO: do we really need this cookie_lifetime setting?
         """
         # Calculate cookie maxage and expires
         lifetime = int(self.cfg.cookie_lifetime) * 3600 

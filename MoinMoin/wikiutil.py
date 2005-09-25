@@ -1155,7 +1155,7 @@ def send_title(request, text, **keywords):
         request.user.edit_on_doubleclick):
         if request.user.may.write(pagename): # separating this gains speed
             querystr = escape(util.web.makeQueryString({'action': 'edit'}))
-            # TODO: remove escape=0 in 1.4
+            # TODO: remove escape=0 in 2.0
             url = page.url(request, querystr, escape=0)
             bodyattr.append(''' ondblclick="location.href='%s'"''' % url)
 

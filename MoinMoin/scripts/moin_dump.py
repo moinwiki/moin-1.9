@@ -10,8 +10,6 @@ web server user.
 @license: GNU GPL, see COPYING for details.
 """
 
-__version__ = "20050725"
-
 import os, time, StringIO, codecs, shutil, errno
 
 # Insert the path to MoinMoin in the start of the path

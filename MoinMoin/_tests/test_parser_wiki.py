@@ -245,8 +245,7 @@ class CloseInlineTestCase(ParserTestCase):
 
 class InlineCrossingTestCase(ParserTestCase):
     """
-    This test case fail with current parser/formatter and should be
-    fixed in 1.4
+    This test case fail with current parser/formatter and should be fixed in 2.0
     """
     
     def disabled_testInlineCrossing(self):
