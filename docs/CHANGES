@@ -16,6 +16,8 @@ Version moin--main--1.5:
      * there is a file CHANGES.config with just the recently changed stuff
        from multiconfig.py
      * new defaults:
+       * page_front_page old: u"FrontPage" new: u"HelpOnLanguages"
+         please just read the help page in case you see it :)
        * bang_meta old: 0 new: 1
        * show_section_numbers old: 1 new: 0
      * removed settings and code [new behaviour]:

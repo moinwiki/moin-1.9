@@ -478,7 +478,7 @@ def getFrontPage(request):
 
     @param request: current request
     @rtype: Page object
-    @return localized FrontPage
+    @return localized page_front_page, if there is a translation
     """
     return getSysPage(request, request.cfg.page_front_page)
     

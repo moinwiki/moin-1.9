@@ -230,7 +230,7 @@ class DefaultConfig:
     page_header1 = ''
     page_header2 = ''
     
-    page_front_page = u'FrontPage'
+    page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
     page_local_spelling_words = u'LocalSpellingWords'
     page_category_regex = u'^Category[A-Z]'
     page_dict_regex = u'[a-z]Dict$'
