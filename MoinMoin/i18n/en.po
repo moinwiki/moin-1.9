@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -70,7 +70,8 @@ msgstr ""
 msgid "Cannot edit old revisions!"
 msgstr ""
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "The lock you held timed out. Be prepared for editing conflicts!"
 
 msgid "Page name is too long, try shorter name."
@@ -423,8 +424,8 @@ msgstr ""
 msgid " %s and try again."
 msgstr ""
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d results of about %(pages)d pages."
 
 #, python-format
@@ -730,8 +731,8 @@ msgid "Can't remove regular expression subscription!"
 msgstr ""
 
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 
 msgid "You have been subscribed to this page."
@@ -815,7 +816,10 @@ msgstr ""
 msgid "Local extension actions"
 msgstr ""
 
-msgid "Installed parsers"
+msgid "Global parsers"
+msgstr ""
+
+msgid "Local extension parsers"
 msgstr ""
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
@@ -1291,6 +1295,9 @@ msgid "Text"
 msgstr ""
 
 msgid "Titles"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Quicklink"

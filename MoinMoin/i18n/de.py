@@ -42,8 +42,8 @@ auf diesen Seiten platziert werden.-~
 '''Die Seite ist gegen Änderungen geschützt!''',
 '''Cannot edit old revisions!''':
 '''Alte Versionen können nicht editiert werden!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Die von Ihnen gehaltene Sperre ist abgelaufen, das Auftreten von Änderungskonflikten ist wahrscheinlich!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Die von Ihnen gehaltene Sperre ist abgelaufen. Das Auftreten von Änderungskonflikten ist wahrscheinlich!''',
 '''Page name is too long, try shorter name.''':
 '''Seitenname ist zu lang, bitte kürzen.''',
 '''Edit "%(pagename)s"''':
@@ -93,7 +93,7 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 '''<No addition>''':
 '''<Keine Änderung>''',
 '''Add to: %(category)s''':
-'''Zu %(category)s hinzufuegen:''',
+'''Zu %(category)s hinzufügen:''',
 '''Trivial change''':
 '''Triviale Änderung''',
 '''Remove trailing whitespace from each line''':
@@ -285,8 +285,8 @@ Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 '''Anmelden''',
 ''' %s and try again.''':
 ''' %s und probieren Sie es noch einmal.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d Treffer in %(pages)d durchsuchten Seiten.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten.''',
 '''%.2f seconds''':
 '''%.2f Sekunden''',
 '''match''':
@@ -488,8 +488,8 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Ihr Abonnements für diese Seite wurde entfernt.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kann nicht Abonnement mit regulärem Ausdruck entfernen.''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Um das Abo zu kündigen, muss der Name der Seite aus der Abo-Liste der persönlichen Einstellungen entfernt werden.''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der Abo-Liste der persönlichen Einstellungen entfernt werden.''',
 '''You have been subscribed to this page.''':
 '''Die Seite wurde zur Liste abonnierter Seiten hinzugefügt.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -542,8 +542,10 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Globale Erweiterungsaktionen''',
 '''Local extension actions''':
 '''Lokale Erweiterungsaktionen''',
-'''Installed parsers''':
-'''Installierte Parser''',
+'''Global parsers''':
+'''Globale Parser''',
+'''Local extension parsers''':
+'''Lokale Erweiterungsparser''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Installierte Prozessoren (veraltet) -- benutzen Sie stattdessen Parser)''',
 '''Disabled''':
@@ -828,6 +830,8 @@ rot=Änderungen''',
 '''Text''',
 '''Titles''':
 '''Titel''',
+'''Search''':
+'''Suche''',
 '''Quicklink''':
 '''Expressverweis''',
 '''More Actions:''':

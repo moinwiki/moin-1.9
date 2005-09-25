@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -73,7 +73,8 @@ msgstr "הדף נעול"
 msgid "Cannot edit old revisions!"
 msgstr "אין אפשרות לערוך גרסאות קודמות"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "נעילת הדף עבורך הסתיימה, אחרים עלולים לערוך את הדף במקביל"
 
 msgid "Page name is too long, try shorter name."
@@ -467,8 +468,8 @@ msgstr "התחבר"
 msgid " %s and try again."
 msgstr " %s ונסה שוב."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d תוצאות מתוך בערך %(pages)d דפים."
 
 #, python-format
@@ -793,9 +794,10 @@ msgstr "המנוי שלך לדף זה בוטל."
 msgid "Can't remove regular expression subscription!"
 msgstr "אין אפשרות להסיר מנוי שבוצע על ידי ביטוי רגולרי."
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "לביטול המנוי גשו לדף \"העדפות משתמש\" ומחקו את שם הדף מרשימת הדפים המנויים."
 
@@ -880,8 +882,13 @@ msgstr "פעולות כלליות"
 msgid "Local extension actions"
 msgstr "פעולות מקומיות"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "מפרשים"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "פקודות מקרו מקומיות"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "מעבדים (השתמש במפרשים במקום)"
@@ -1370,6 +1377,10 @@ msgstr "מלל"
 
 msgid "Titles"
 msgstr "כותרות"
+
+#, fuzzy
+msgid "Search"
+msgstr "חפש:"
 
 #, fuzzy
 msgid "Quicklink"

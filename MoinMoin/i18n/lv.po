@@ -167,18 +167,17 @@ msgid "Preview"
 msgstr "Pirmskats"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Grafiskais režīms"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "Komentārs"
+msgstr "Komentārs:"
 
 msgid "<No addition>"
 msgstr "<Nepievienot>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Pievienot: %(category)s"
 
 msgid "Trivial change"
 msgstr "Maznozīmīgas izmaiņas"
@@ -216,7 +215,7 @@ msgstr ""
 " Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. "
 "numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.\n"
 " Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"kvadrātiekavas "
-"un pēdiņas\"])]]; url; [url]; [url etiķete].\n"
+"un pēdiņas\"])]]; URL; [URL]; [URL etiķete].\n"
 " Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;  Pēc "
 "tabulām un virsrakstiem nedrīkst sekot atstarpes."
 
@@ -264,7 +263,7 @@ msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr "[%(sitename)s] %(trivial)sAtjaunoja \"%(pagename)s\" %(username)s"
 
 msgid "Trivial "
-msgstr "Maznozīmīgs"
+msgstr "Maznozīmīgs "
 
 msgid "Status of sending notification mails:"
 msgstr "Notifikāciju e-pasta ziņojumu sūtīšanas statuss:"
@@ -290,9 +289,8 @@ msgstr "Jums nav tiesību labot šo lapu!"
 msgid "You cannot save empty pages."
 msgstr "Tukšas lapas saglabāt nedrīkst."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "Jums nav tiesību labot šo lapu!"
+msgstr "Lapa jau ir saglabāta!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -325,10 +323,10 @@ msgstr "Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
-msgstr "Jūs nevariet mainīt ACLs, jo jums nav adminstratora tiesību!"
+msgstr "Jūs nevariet mainīt pieejas tesības, Jums nav adminstratora tiesību!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Paldies par izmaiņām. Jūsu uzmanība sīkumiem tiek augstu novērtēta."
+msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu novērtēta."
 
 #, python-format
 msgid ""
@@ -413,7 +411,7 @@ msgid "Up"
 msgstr "Augšup"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Publiskot manu e-pasta adres (bez manas wiki mājas lapas) autora informācijā"
 
 msgid "Open editor on double click"
 msgstr "Labot ar dubultklikšķi"
@@ -451,12 +449,11 @@ msgstr "Aizmirst par mani uz visiem laikiem"
 msgid "Name"
 msgstr "Vārds"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "Ievadiet VārduUzvārdu"
+msgstr "(Ievadiet Vārdu''''''Uzvārdu)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Aliass-Vārds"
 
 msgid "Password"
 msgstr "Parole"
@@ -598,19 +595,18 @@ msgstr "Paroles nesakrīt!"
 msgid "Please specify a password!"
 msgstr "Lūdzu, norādiet paroli!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
 "Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas "
-"informāciju, tā varēs tikt jums izsutīta pa e-pastu."
+"informāciju, to varēs izsutīt uz norādīto e-pasta adresi."
 
 msgid "This email already belongs to somebody else."
 msgstr "Šāda e-pasta adrese jau kādam pieder."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Lietotāja konts izveidots!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -626,10 +622,10 @@ msgid "<Browser setting>"
 msgstr "<Pārlūkprogrammas iestatījumi>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "viens vēlamais"
 
 msgid "free choice"
-msgstr ""
+msgstr "brīva izvēle"
 
 msgid "Save"
 msgstr "Saglabāt"
@@ -640,12 +636,11 @@ msgstr "Iziet"
 msgid "Preferred theme"
 msgstr "Vēlamā tēma"
 
-#, fuzzy
 msgid "Editor Preference"
-msgstr "JūsuIestatījumi"
+msgstr "Redaktora iestatījumi"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Lietotāja saskarnē redzamais redaktors"
 
 msgid "Time zone"
 msgstr "Laika josla"
@@ -792,7 +787,7 @@ msgid "Show chart \"%(title)s\""
 msgstr "Rādīt diagramu \"%(title)s\""
 
 msgid "Page hits and edits"
-msgstr "Pieprasījumu un labojumu lapas"
+msgstr "Apmeklējumi un labojumi"
 
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
@@ -804,13 +799,11 @@ msgstr ""
 "Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu "
 "iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
+msgstr "Jūsu ātrsaite uz šo lapu ir dzēsta."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
+msgstr "Priekš Jums izeidota ātrsaite uz šo lapu."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt."
@@ -833,7 +826,7 @@ msgid "Your subscribtion to this page has been removed."
 msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Nevaru izdzēst pierakstu pēc parauga!"
+msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
 msgid ""
 "To unsubscribe, go to your profile and delete this page from the "
@@ -853,7 +846,7 @@ msgid "Submitted form data:"
 msgstr "Nosūtītie dati:"
 
 msgid "Search Titles"
-msgstr "Meklēt pēc virsrakstiem"
+msgstr "Meklēt virsrakstus"
 
 msgid "Display context of search results"
 msgstr "Attēlot meklēšanas rezultātu kontekstu"
@@ -987,11 +980,11 @@ msgid ""
 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
 "since this is subject to change and can break easily."
 msgstr ""
-"Atsaucei pielikumam lapas tekstā uzrakstiet '''{{{attachment:faila "
-"vārdu}}}''', \n"
-"kā parādīts zemāk failu sarakstā. \n"
-"'''NEIZMANTOT''' saites {{{[paņemt]}}} URL, \n"
-"jo tā bieži mainās."
+"Atsaucei uz piesaisti rakstiet, lapas tekstā, '''{{{attachment:faila "
+"nosaukums}}}''', \n"
+"kā zemāk redzams sarakstā. \n"
+"'''NEIZMANTOJIET''' saites {{{[get]}}} URL. \n"
+"Tas var tikt mainīts."
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1105,7 +1098,7 @@ msgid "Delete"
 msgstr "Dzēst"
 
 msgid "Optional reason for the deletion"
-msgstr "Ja vēlaties, variet norādīt lapas dzēšanas iemeslu"
+msgstr "Ja vēlaties, norādiet lapas dzēšanas iemeslu"
 
 #, python-format
 msgid "No pages like \"%s\"!"
@@ -1128,7 +1121,7 @@ msgid "Local Site Map for \"%s\""
 msgstr "Vietnes Karte apmēram \"%s\""
 
 msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Šajā wiki Jūs nedrīkstat mainīt lapu nosaukumus!"
+msgstr "Šajā wiki Jums nav tiesību pārdēvēt lapas!"
 
 msgid "Please use the interactive user interface to rename pages!"
 msgstr ""
@@ -1146,7 +1139,7 @@ msgid "New name"
 msgstr "Jauns nosaukums"
 
 msgid "Optional reason for the renaming"
-msgstr "Ja vēlaties, variet norādīt pārdēvēšanas iemeslu"
+msgstr "Pārdēvēšanas iemesls (neobligāts)"
 
 #, python-format
 msgid ""
@@ -1271,7 +1264,7 @@ msgid "set bookmark"
 msgstr "ielikt grāmatzīmi"
 
 msgid "[Bookmark reached]"
-msgstr "[Šeit glabājas grāmatzīme]"
+msgstr "[Šeit ielikta grāmatzīme]"
 
 msgid "Markup"
 msgstr "Iezīmēt"
@@ -1422,9 +1415,8 @@ msgstr "Teksts"
 msgid "Titles"
 msgstr "Virsraksti"
 
-#, fuzzy
 msgid "Quicklink"
-msgstr "Grāmatzīmes"
+msgstr "Ātrsaite"
 
 msgid "More Actions:"
 msgstr "Citas darbības:"
@@ -1453,21 +1445,18 @@ msgstr "Parādīt lokālās vietnes karti"
 msgid "Do"
 msgstr "Veikt"
 
-#, fuzzy
 msgid "Parent Page"
-msgstr "Vecāklapa"
+msgstr "Virslapa"
 
-#, fuzzy
 msgid "Edit (Text)"
-msgstr "LabotTekstu"
+msgstr "Labot tekstu"
 
 msgid "Edit (GUI)"
-msgstr ""
+msgstr "Labot grafiski"
 
 msgid "Immutable Page"
 msgstr "Nemaināma Lapa"
 
-#, fuzzy
 msgid "Infos"
 msgstr "Informācija"
 
@@ -1482,13 +1471,13 @@ msgid "Immutable page"
 msgstr "Nemaināma lapa"
 
 msgid "Or try one of these actions:"
-msgstr "Vai mēģināt:"
+msgstr "Vai mēģināt kādu no darbībām:"
 
 msgid "Page"
 msgstr "Lapa"
 
 msgid "Trail"
-msgstr "Nospiedums"
+msgstr "Noslēgums"
 
 msgid "User"
 msgstr "Lietotājs"
@@ -1513,9 +1502,8 @@ msgstr "Pievienotie atzīmēti šādi"
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Pievienoties e-pasta serverim '%(server)s' nedrīkst: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "E-pasts netika nosūtīts"
+msgstr "E-pasts nenosūtīts"
 
 msgid "Mail sent OK"
 msgstr "E-pasts nosūtīts"
@@ -1538,9 +1526,8 @@ msgstr "AtrastLapu"
 msgid "SiteNavigation"
 msgstr "LapasNavigācija"
 
-#, fuzzy
 msgid "HelpContents"
-msgstr "NodaļuPalīdzība"
+msgstr "PamācībasSaturaRādītājs"
 
 msgid "HelpOnFormatting"
 msgstr "PalīdzētFormatēt"
@@ -1600,32 +1587,32 @@ msgstr "PārdēvētLapu"
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
 
-#~ msgid "Refresh"
-#~ msgstr "Atsvaidzināt"
+msgid "Refresh"
+msgstr "Atsvaidzināt"
 
-#~ msgid "Skip to preview"
-#~ msgstr "Izlaist pirmskatu"
+msgid "Skip to preview"
+msgstr "Izlaist pirmskatu"
 
-#~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[lapas izmērs ir '''%(size)d''' baiti]"
+msgid "[current page size '''%(size)d''' bytes]"
+msgstr "[lapas izmērs ir '''%(size)d''' baiti]"
 
-#~ msgid "Optional comment about this change"
-#~ msgstr "Neobligāts komentārs par šo izmaiņu"
+msgid "Optional comment about this change"
+msgstr "Neobligāts komentārs par šo izmaiņu"
 
-#~ msgid "Make this page belong to category %(category)s"
-#~ msgstr "Pievienot lapu kategorijai %(category)s"
+msgid "Make this page belong to category %(category)s"
+msgstr "Pievienot lapu kategorijai %(category)s"
 
-#~ msgid "Can't work out query"
-#~ msgstr "Pieprasījumu nevaru izpildīt"
+msgid "Can't work out query"
+msgstr "Pieprasījumu nevaru izpildīt"
 
-#~ msgid "Show fancy links"
-#~ msgstr "Rādīt modernas saites"
+msgid "Show fancy links"
+msgstr "Rādīt modernas saites"
 
-#~ msgid "Show Parent"
-#~ msgstr "Rādīt vecāklapu"
+msgid "Show Parent"
+msgstr "Virslapa"
 
-#~ msgid "Show Changes"
-#~ msgstr "Rādīt izmaiņas"
+msgid "Show Changes"
+msgstr "Izmaiņas"
 
-#~ msgid "Get Info"
-#~ msgstr "Gūt informāciju"
+msgid "Get Info"
+msgstr "Informācija"

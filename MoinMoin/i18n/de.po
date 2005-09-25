@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-23 17:17+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -78,9 +78,9 @@ msgstr "Die Seite ist gegen Änderungen geschützt!"
 msgid "Cannot edit old revisions!"
 msgstr "Alte Versionen können nicht editiert werden!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Die von Ihnen gehaltene Sperre ist abgelaufen, das Auftreten von "
+"Die von Ihnen gehaltene Sperre ist abgelaufen. Das Auftreten von "
 "Änderungskonflikten ist wahrscheinlich!"
 
 msgid "Page name is too long, try shorter name."
@@ -175,7 +175,7 @@ msgstr "<Keine Änderung>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr "Zu %(category)s hinzufuegen:"
+msgstr "Zu %(category)s hinzufügen:"
 
 msgid "Trivial change"
 msgstr "Triviale Änderung"
@@ -504,8 +504,8 @@ msgid " %s and try again."
 msgstr " %s und probieren Sie es noch einmal."
 
 #, python-format
-msgid "%(hits)d results out of %(pages)d pages."
-msgstr "%(hits)d Treffer in %(pages)d durchsuchten Seiten."
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten."
 
 #, python-format
 msgid "%.2f seconds"
@@ -843,10 +843,10 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Kann nicht Abonnement mit regulärem Ausdruck entfernen."
 
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
-"Um das Abo zu kündigen, muss der Name der Seite aus der Abo-Liste der "
+"Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der Abo-Liste der "
 "persönlichen Einstellungen entfernt werden."
 
 msgid "You have been subscribed to this page."
@@ -930,8 +930,11 @@ msgstr "Globale Erweiterungsaktionen"
 msgid "Local extension actions"
 msgstr "Lokale Erweiterungsaktionen"
 
-msgid "Installed parsers"
-msgstr "Installierte Parser"
+msgid "Global parsers"
+msgstr "Globale Parser"
+
+msgid "Local extension parsers"
+msgstr "Lokale Erweiterungsparser"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr ""
@@ -1446,6 +1449,9 @@ msgstr "Text"
 
 msgid "Titles"
 msgstr "Titel"
+
+msgid "Search"
+msgstr "Suche"
 
 msgid "Quicklink"
 msgstr "Expressverweis"

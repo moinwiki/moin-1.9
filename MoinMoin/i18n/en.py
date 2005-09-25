@@ -42,8 +42,6 @@ macro call.-~
 '''Page is immutable!''',
 '''Cannot edit old revisions!''':
 '''Cannot edit old revisions!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''The lock you held timed out. Be prepared for editing conflicts!''',
 '''Page name is too long, try shorter name.''':
 '''Page name is too long, try shorter name.''',
 '''Edit "%(pagename)s"''':
@@ -286,8 +284,6 @@ space between words. Group page name is not allowed.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s and try again.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d results of about %(pages)d pages.''',
 '''%.2f seconds''':
 '''%.2f seconds''',
 '''match''':
@@ -490,8 +486,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Your subscribtion to this page has been removed.''',
 '''Can\'t remove regular expression subscription!''':
 '''Can\'t remove regular expression subscription!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''',
 '''You have been subscribed to this page.''':
 '''You have been subscribed to this page.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -544,8 +540,10 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Global extension actions''',
 '''Local extension actions''':
 '''Local extension actions''',
-'''Installed parsers''':
-'''Installed parsers''',
+'''Global parsers''':
+'''Global parsers''',
+'''Local extension parsers''':
+'''Local extension parsers''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Installed processors (DEPRECATED -- use Parsers instead)''',
 '''Disabled''':
@@ -830,6 +828,8 @@ red=edit''',
 '''Text''',
 '''Titles''':
 '''Titles''',
+'''Search''':
+'''Search''',
 '''Quicklink''':
 '''Quicklink''',
 '''More Actions:''':

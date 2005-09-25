@@ -11,7 +11,7 @@ meta = {
 }
 text = {
 '''The backed up content of this page is deprecated and will not be included in search results!''':
-'''このページは"deprecated"であるため、検索結果には含まれません。''',
+'''このページのバックアップ保存された内容は"deprecated"であるため、検索結果には含まれません。''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s時点のリビジョン%(rev)d''',
 '''Redirected from page "%(page)s"''':
@@ -352,8 +352,12 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''パスワードが一致していません。''',
 '''Please specify a password!''':
 '''パスワードを入力してください。''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''メールアドレスを入力してください。ログイン情報を忘れてしまった際、メールにてお知らせするために必要となります。''',
 '''This email already belongs to somebody else.''':
 '''このメールアドレスはすでに利用されています。''',
+'''User account created!''':
+'''ユーザアカウントが作成されました。''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
 '''User preferences saved!''':
@@ -821,6 +825,8 @@ red=edit''':
 '''テキスト''',
 '''Titles''':
 '''タイトル''',
+'''Quicklink''':
+'''クイックリンク''',
 '''More Actions:''':
 '''その他のアクション:''',
 '''Show Raw Text''':
@@ -839,12 +845,16 @@ red=edit''':
 '''ローカルサイトマップの表示''',
 '''Do''':
 '''実行''',
+'''Parent Page''':
+'''親ページ''',
 '''Edit (Text)''':
 '''編集(テキストモード)''',
 '''Edit (GUI)''':
 '''編集(GUIモード)''',
 '''Immutable Page''':
 '''編集不可のページ''',
+'''Infos''':
+'''情報''',
 '''Show %s days.''':
 '''%s日表示''',
 '''EditText''':
@@ -869,6 +879,8 @@ red=edit''':
 '''追加された箇所はこのように表示されます。''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''メールサーバ\'%(server)s\'への接続に失敗しました(理由: %(reason)s)。''',
+'''Mail not sent''':
+'''メール送信失敗。''',
 '''Mail sent OK''':
 '''メール送信完了。''',
 '''FrontPage''':

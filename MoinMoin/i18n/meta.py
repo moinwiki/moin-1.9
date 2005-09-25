@@ -27,6 +27,7 @@ languages = {
 'ro': (u'Română', u'Romanian', 'utf-8', 0, """Ovidiu Sabou <ovidiu.sabou@gmail.com>""",),
 'ru': (u'Русский', u'Russian', 'utf-8', 0, """Mike Rovner <mrovner@hotmail.com>""",),
 'sr': (u'Srpski', u'Serbian', 'utf-8', 0, """Thomas W. Horna <sarman@t-online.de>""",),
+'sv': (u'Svenska', u'Swedish', 'utf-8', 0, """Per Olofsson <pelle@debian.org>""",),
 'vi': (u'Tiếng Việt', u'Vietnamese', 'utf-8', 0, """Nam T. Nguyen <nnt@nntsoft.com>""",),
 'zh': (u'简体中文', u'Simplified Chinese', 'utf-8', 0, """Jun Hu <j.hu@tue.nl>""",),
 'zh-tw': (u'繁體中文', u'Chinese/Taiwan', 'utf-8', 0, """Lin Zhemin <ljm@ljm.idv.tw>""",),
