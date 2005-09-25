@@ -630,8 +630,6 @@ class convert_tree(visitor):
                 elif name == 'caption':
                     self.process_caption(node, i, style)
                     style = ''
-                elif name == 'a': # maybe one of our line-XXX anchors
-                    pass
                 else:
                     raise MoinMoin.error.ConvertError("process_table: Don't support %s element" % name)
             #else:
