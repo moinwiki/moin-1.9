@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-24 01:03+0200\n"
-"PO-Revision-Date: 2005-08-10 10:45+0900\n"
+"PO-Revision-Date: 2005-09-24 22:35+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
 "search results!"
-msgstr "このページは\"deprecated\"であるため、検索結果には含まれません。"
+msgstr "このページのバックアップ保存された内容は\"deprecated\"であるため、検索結果には含まれません。"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -589,7 +589,6 @@ msgstr "パスワードが一致していません。"
 msgid "Please specify a password!"
 msgstr "パスワードを入力してください。"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
@@ -601,7 +600,7 @@ msgid "This email already belongs to somebody else."
 msgstr "このメールアドレスはすでに利用されています。"
 
 msgid "User account created!"
-msgstr ""
+msgstr "ユーザアカウントが作成されました。"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1414,7 +1413,6 @@ msgstr "テキスト"
 msgid "Titles"
 msgstr "タイトル"
 
-#, fuzzy
 msgid "Quicklink"
 msgstr "クイックリンク"
 
@@ -1445,9 +1443,8 @@ msgstr "ローカルサイトマップの表示"
 msgid "Do"
 msgstr "実行"
 
-#, fuzzy
 msgid "Parent Page"
-msgstr "フロントページ"
+msgstr "親ページ"
 
 msgid "Edit (Text)"
 msgstr "編集(テキストモード)"
@@ -1458,7 +1455,6 @@ msgstr "編集(GUIモード)"
 msgid "Immutable Page"
 msgstr "編集不可のページ"
 
-#, fuzzy
 msgid "Infos"
 msgstr "情報"
 
@@ -1504,9 +1500,8 @@ msgstr "追加された箇所はこのように表示されます。"
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "メールサーバ'%(server)s'への接続に失敗しました(理由: %(reason)s)。"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "メール送信完了。"
+msgstr "メール送信失敗。"
 
 msgid "Mail sent OK"
 msgstr "メール送信完了。"
@@ -1699,7 +1694,6 @@ msgstr "スペルチェック"
 #~ msgid "Site"
 #~ msgstr "サイト"
 
-#, fuzzy
 #~ msgid "Title: %(titlesearch)s[[BR]]Text: %(textsearch)s"
 #~ msgstr "タイトル: %(titlesearch)s<br/>テキスト: %(textsearch)s"
 
@@ -1740,6 +1734,5 @@ msgstr "スペルチェック"
 #~ msgid "The following pages with similar names already exist..."
 #~ msgstr "似た名前のページ一覧:"
 
-#, fuzzy
 #~ msgid "Account"
 #~ msgstr "アクション"

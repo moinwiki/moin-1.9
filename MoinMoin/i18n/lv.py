@@ -86,8 +86,14 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsaukutu savas izmaiņas.''',
 '''Preview''':
 '''Pirmskats''',
+'''GUI Mode''':
+'''Grafiskais režīms''',
+'''Comment:''':
+'''Komentārs:''',
 '''<No addition>''':
 '''<Nepievienot>''',
+'''Add to: %(category)s''':
+'''Pievienot: %(category)s''',
 '''Trivial change''':
 '''Maznozīmīgas izmaiņas''',
 '''Remove trailing whitespace from each line''':
@@ -100,7 +106,7 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 ''' Uzvērt:: [[Verbatim(\'\')]]\'\'kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'treknā kursīvā\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'jaukti \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]] un kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontāla svītra.
  Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; [[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts [[Verbatim(=====)]].
  Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.
- Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; url; [url]; [url etiķete].
+ Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; URL; [URL]; [URL etiķete].
  Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;  Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
@@ -139,7 +145,7 @@ Sekojošo lapu ir mainījis %(editor)s:
 '''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
 '''[%(sitename)s] %(trivial)sAtjaunoja "%(pagename)s" %(username)s''',
 '''Trivial ''':
-'''Maznozīmīgs''',
+'''Maznozīmīgs ''',
 '''Status of sending notification mails:''':
 '''Notifikāciju e-pasta ziņojumu sūtīšanas statuss:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
@@ -154,6 +160,8 @@ Sekojošo lapu ir mainījis %(editor)s:
 '''Jums nav tiesību labot šo lapu!''',
 '''You cannot save empty pages.''':
 '''Tukšas lapas saglabāt nedrīkst.''',
+'''You already saved this page!''':
+'''Lapa jau ir saglabāta!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -178,9 +186,9 @@ Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 '''You did not change the page content, not saved!''':
 '''Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Jūs nevariet mainīt ACLs, jo jums nav adminstratora tiesību!''',
+'''Jūs nevariet mainīt pieejas tesības, Jums nav adminstratora tiesību!''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Paldies par izmaiņām. Jūsu uzmanība sīkumiem tiek augstu novērtēta.''',
+'''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu novērtēta.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Prioritāte %(owner)s beidzās pirms %(mins_ago)d minūtēm, and you were granted the lock for this page.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -221,6 +229,8 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 '''Skats''',
 '''Up''':
 '''Augšup''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publiskot manu e-pasta adres (bez manas wiki mājas lapas) autora informācijā''',
 '''Open editor on double click''':
 '''Labot ar dubultklikšķi''',
 '''Remember last page visited''':
@@ -245,6 +255,10 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 '''Aizmirst par mani uz visiem laikiem''',
 '''Name''':
 '''Vārds''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Ievadiet Vārdu\'\'\'\'\'\'Uzvārdu)''',
+'''Alias-Name''':
+'''Aliass-Vārds''',
 '''Password''':
 '''Parole''',
 '''Password repeat''':
@@ -336,8 +350,12 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Paroles nesakrīt!''',
 '''Please specify a password!''':
 '''Lūdzu, norādiet paroli!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas informāciju, to varēs izsutīt uz norādīto e-pasta adresi.''',
 '''This email already belongs to somebody else.''':
 '''Šāda e-pasta adrese jau kādam pieder.''',
+'''User account created!''':
+'''Lietotāja konts izveidots!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nevar ielādēt tēmu \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -346,12 +364,20 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Noklusējums''',
 '''<Browser setting>''':
 '''<Pārlūkprogrammas iestatījumi>''',
+'''the one preferred''':
+'''viens vēlamais''',
+'''free choice''':
+'''brīva izvēle''',
 '''Save''':
 '''Saglabāt''',
 '''Logout''':
 '''Iziet''',
 '''Preferred theme''':
 '''Vēlamā tēma''',
+'''Editor Preference''':
+'''Redaktora iestatījumi''',
+'''Editor shown on UI''':
+'''Lietotāja saskarnē redzamais redaktors''',
 '''Time zone''':
 '''Laika josla''',
 '''Your time is''':
@@ -443,11 +469,15 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Show chart "%(title)s"''':
 '''Rādīt diagramu "%(title)s"''',
 '''Page hits and edits''':
-'''Pieprasījumu un labojumu lapas''',
+'''Apmeklējumi un labojumi''',
 '''You are not allowed to revert this page!''':
 '''Jūs nedrīkstat atjaunot no arhīva šo lapu!''',
 '''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
 '''Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī.''',
+'''Your quicklink to this page has been removed.''':
+'''Jūsu ātrsaite uz šo lapu ir dzēsta.''',
+'''A quicklink to this page has been added for you.''':
+'''Priekš Jums izeidota ātrsaite uz šo lapu.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
@@ -457,7 +487,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Your subscribtion to this page has been removed.''':
 '''Jūs vairs neesat pierakstīts uz šo lapu.''',
 '''Can\'t remove regular expression subscription!''':
-'''Nevaru izdzēst pierakstu pēc parauga!''',
+'''Regulāras izteiksmes pierakstu izdzēst nevar!''',
 '''To unsubscribe, go to your profile and delete this page from the subscription list.''':
 '''Lai atceltu pierakstu, atveriet JūsuIestatījumi un noņemiet šo lapu no pierakstu saraksta.''',
 '''You have been subscribed to this page.''':
@@ -467,7 +497,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Submitted form data:''':
 '''Nosūtītie dati:''',
 '''Search Titles''':
-'''Meklēt pēc virsrakstiem''',
+'''Meklēt virsrakstus''',
 '''Display context of search results''':
 '''Attēlot meklēšanas rezultātu kontekstu''',
 '''Case-sensitive searching''':
@@ -548,10 +578,10 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''':
-'''Atsaucei pielikumam lapas tekstā uzrakstiet \'\'\'{{{attachment:faila vārdu}}}\'\'\', 
-kā parādīts zemāk failu sarakstā. 
-\'\'\'NEIZMANTOT\'\'\' saites {{{[paņemt]}}} URL, 
-jo tā bieži mainās.''',
+'''Atsaucei uz piesaisti rakstiet, lapas tekstā, \'\'\'{{{attachment:faila nosaukums}}}\'\'\', 
+kā zemāk redzams sarakstā. 
+\'\'\'NEIZMANTOJIET\'\'\' saites {{{[get]}}} URL. 
+Tas var tikt mainīts.''',
 '''No attachments stored for %(pagename)s''':
 '''Lapai %(pagename)s nav pielikuma''',
 '''Edit drawing''':
@@ -615,7 +645,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''Delete''':
 '''Dzēst''',
 '''Optional reason for the deletion''':
-'''Ja vēlaties, variet norādīt lapas dzēšanas iemeslu''',
+'''Ja vēlaties, norādiet lapas dzēšanas iemeslu''',
 '''No pages like "%s"!''':
 '''"%s" līdzīgu lapu nav!''',
 '''Exactly one page like "%s" found, redirecting to page.''':
@@ -627,7 +657,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''Local Site Map for "%s"''':
 '''Vietnes Karte apmēram "%s"''',
 '''You are not allowed to rename pages in this wiki!''':
-'''Šajā wiki Jūs nedrīkstat mainīt lapu nosaukumus!''',
+'''Šajā wiki Jums nav tiesību pārdēvēt lapas!''',
 '''Please use the interactive user interface to rename pages!''':
 '''Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja saskarni!''',
 '''Could not rename page because of file system error: %s.''':
@@ -637,7 +667,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''New name''':
 '''Jauns nosaukums''',
 '''Optional reason for the renaming''':
-'''Ja vēlaties, variet norādīt pārdēvēšanas iemeslu''',
+'''Pārdēvēšanas iemesls (neobligāts)''',
 '''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
 
 Try a different name.''':
@@ -705,7 +735,7 @@ Pamēģiniet citu nosaukumu.''',
 '''set bookmark''':
 '''ielikt grāmatzīmi''',
 '''[Bookmark reached]''':
-'''[Šeit glabājas grāmatzīme]''',
+'''[Šeit ielikta grāmatzīme]''',
 '''Markup''':
 '''Iezīmēt''',
 '''Display''':
@@ -798,6 +828,8 @@ sarkans=labot''',
 '''Teksts''',
 '''Titles''':
 '''Virsraksti''',
+'''Quicklink''':
+'''Ātrsaite''',
 '''More Actions:''':
 '''Citas darbības:''',
 '''Show Raw Text''':
@@ -816,8 +848,16 @@ sarkans=labot''',
 '''Parādīt lokālās vietnes karti''',
 '''Do''':
 '''Veikt''',
+'''Parent Page''':
+'''Virslapa''',
+'''Edit (Text)''':
+'''Labot tekstu''',
+'''Edit (GUI)''':
+'''Labot grafiski''',
 '''Immutable Page''':
 '''Nemaināma Lapa''',
+'''Infos''':
+'''Informācija''',
 '''Show %s days.''':
 '''Rādīt %s dienas.''',
 '''EditText''':
@@ -825,11 +865,11 @@ sarkans=labot''',
 '''Immutable page''':
 '''Nemaināma lapa''',
 '''Or try one of these actions:''':
-'''Vai mēģināt:''',
+'''Vai mēģināt kādu no darbībām:''',
 '''Page''':
 '''Lapa''',
 '''Trail''':
-'''Nospiedums''',
+'''Noslēgums''',
 '''User''':
 '''Lietotājs''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
@@ -842,6 +882,8 @@ sarkans=labot''',
 '''Pievienotie atzīmēti šādi''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Pievienoties e-pasta serverim \'%(server)s\' nedrīkst: %(reason)s''',
+'''Mail not sent''':
+'''E-pasts nenosūtīts''',
 '''Mail sent OK''':
 '''E-pasts nosūtīts''',
 '''FrontPage''':
@@ -856,6 +898,8 @@ sarkans=labot''',
 '''AtrastLapu''',
 '''SiteNavigation''':
 '''LapasNavigācija''',
+'''HelpContents''':
+'''PamācībasSaturaRādītājs''',
 '''HelpOnFormatting''':
 '''PalīdzētFormatēt''',
 '''UserPreferences''':
@@ -890,4 +934,24 @@ sarkans=labot''',
 '''PārdēvētLapu''',
 '''SpellCheck''':
 '''Pareizrakstība''',
+'''Refresh''':
+'''Atsvaidzināt''',
+'''Skip to preview''':
+'''Izlaist pirmskatu''',
+'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
+'''[lapas izmērs ir \'\'\'%(size)d\'\'\' baiti]''',
+'''Optional comment about this change''':
+'''Neobligāts komentārs par šo izmaiņu''',
+'''Make this page belong to category %(category)s''':
+'''Pievienot lapu kategorijai %(category)s''',
+'''Can\'t work out query''':
+'''Pieprasījumu nevaru izpildīt''',
+'''Show fancy links''':
+'''Rādīt modernas saites''',
+'''Show Parent''':
+'''Virslapa''',
+'''Show Changes''':
+'''Izmaiņas''',
+'''Get Info''':
+'''Informācija''',
 }

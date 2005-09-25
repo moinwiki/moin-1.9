@@ -41,8 +41,6 @@ macro call.-~
 '''הדף נעול''',
 '''Cannot edit old revisions!''':
 '''אין אפשרות לערוך גרסאות קודמות''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''נעילת הדף עבורך הסתיימה, אחרים עלולים לערוך את הדף במקביל''',
 '''Page name is too long, try shorter name.''':
 '''שם הדף ארוך מידי, נסה שם קצר יותר.''',
 '''Edit "%(pagename)s"''':
@@ -256,8 +254,6 @@ space between words. Group page name is not allowed.''':
 '''התחבר''',
 ''' %s and try again.''':
 ''' %s ונסה שוב.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d תוצאות מתוך בערך %(pages)d דפים.''',
 '''%.2f seconds''':
 '''%.2f שניות''',
 '''match''':
@@ -442,8 +438,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''המנוי שלך לדף זה בוטל.''',
 '''Can\'t remove regular expression subscription!''':
 '''אין אפשרות להסיר מנוי שבוצע על ידי ביטוי רגולרי.''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''לביטול המנוי גשו לדף "העדפות משתמש" ומחקו את שם הדף מרשימת הדפים המנויים.''',
 '''You have been subscribed to this page.''':
 '''יש לכם עכשיו מנוי לדף.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -496,8 +490,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''פעולות כלליות''',
 '''Local extension actions''':
 '''פעולות מקומיות''',
-'''Installed parsers''':
-'''מפרשים''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''מעבדים (השתמש במפרשים במקום)''',
 '''Disabled''':

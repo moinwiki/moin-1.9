@@ -44,6 +44,8 @@ llamada macro.-~
 '''¡No puedes editar versiones antiguas!''',
 '''The lock you held timed out, be prepared for editing conflicts!''':
 '''El bloqueo que tenías ha expirado.¡Puede ser que encuentres posibles conflictos de edición!''',
+'''Page name is too long, try shorter name.''':
+'''El nombre de la página es muy largo, intenta usar un nombre más corto''',
 '''Edit "%(pagename)s"''':
 '''Editar "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +86,12 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus cambios.''',
 '''Preview''':
 '''Vista Previa''',
+'''GUI Mode''':
+'''Modo gráfico''',
 '''<No addition>''':
 '''<No añadir>''',
+'''Add to: %(category)s''':
+'''Agregar a: %(category)s''',
 '''Trivial change''':
 '''Cambio trivial''',
 '''Remove trailing whitespace from each line''':
@@ -101,7 +107,7 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
  Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
  Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de tablas o títulos.''',
 '''Edit was cancelled.''':
-'''Se canceló la edición.''',
+'''La edición fue cancelada.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -219,6 +225,8 @@ Para abandonar el editor, presiona el botón Cancelar.''',
 '''Ver''',
 '''Up''':
 '''Arriba''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publicar my e-Mail (no mi página wiki) en la información de autor''',
 '''Open editor on double click''':
 '''Abrir el editor con doble click''',
 '''Remember last page visited''':
@@ -243,6 +251,8 @@ Para abandonar el editor, presiona el botón Cancelar.''',
 '''Desactivar esta cuenta para siempre''',
 '''Name''':
 '''Nombre''',
+'''Alias-Name''':
+'''Alias-Nombre''',
 '''Password''':
 '''Contraseña''',
 '''Password repeat''':
@@ -285,8 +295,37 @@ Contact the owner of the wiki, who can enable email.''':
 Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
 '''Please provide a valid email address!''':
 '''¡Por favor, proporciona una dirección de e-mail válido!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Nombre de Ingreso: %s
+
+Contraseña de Ingreso: %s
+
+URL de Ingreso: %s/?action=userform&uid=%s
+''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''¡No se encontró una cuenta que coincida con la dirección e-mail \'%(email)s\'!''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-mail.
+
+Si perdiste tu contraseña, por favor usa la siguiente información
+e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del wiki
+(usa Copiar y Pegar para ello).
+
+Luego de ingresar con éxito, por supuesto es una buena idea cambiar la contraseña
+por una mejor y más fácil de recordar.
+''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':

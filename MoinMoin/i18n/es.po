@@ -84,7 +84,7 @@ msgstr ""
 "conflictos de edición!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "El nombre de la página es muy largo, intenta usar un nombre más corto"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -164,7 +164,7 @@ msgid "Preview"
 msgstr "Vista Previa"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Modo gráfico"
 
 #, fuzzy
 msgid "Comment:"
@@ -175,7 +175,7 @@ msgstr "<No añadir>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Agregar a: %(category)s"
 
 msgid "Trivial change"
 msgstr "Cambio trivial"
@@ -218,7 +218,7 @@ msgstr ""
 "||;    no se permiten espacios después de tablas o títulos."
 
 msgid "Edit was cancelled."
-msgstr "Se canceló la edición."
+msgstr "La edición fue cancelada."
 
 #, python-format
 msgid ""
@@ -417,7 +417,7 @@ msgid "Up"
 msgstr "Arriba"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Publicar my e-Mail (no mi página wiki) en la información de autor"
 
 msgid "Open editor on double click"
 msgstr "Abrir el editor con doble click"
@@ -457,10 +457,10 @@ msgstr "Nombre"
 
 #, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Usa NombreApellido)"
+msgstr "(Usa Nombre''''''Apellido)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Alias-Nombre"
 
 msgid "Password"
 msgstr "Contraseña"
@@ -540,6 +540,11 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"Nombre de Ingreso: %s\n"
+"\n"
+"Contraseña de Ingreso: %s\n"
+"\n"
+"URL de Ingreso: %s/?action=userform&uid=%s\n"
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
@@ -556,6 +561,14 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-mail.\n"
+"\n"
+"Si perdiste tu contraseña, por favor usa la siguiente información\n"
+"e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del wiki\n"
+"(usa Copiar y Pegar para ello).\n"
+"\n"
+"Luego de ingresar con éxito, por supuesto es una buena idea cambiar la contraseña\n"
+"por una mejor y más fácil de recordar.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
