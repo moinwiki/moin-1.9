@@ -400,8 +400,10 @@ class Macro:
             ', '.join(ext_actions) or nonestr)
         row(_('Local extension actions'), 
             ', '.join(wikiaction.getPlugins(self.request)[1]) or nonestr)
-        row(_('Installed parsers'), 
+        row(_('Global parsers'), 
             ', '.join(parser.modules) or nonestr)
+        row(_('Local extension parsers'), 
+            ', '.join(wikiutil.wikiPlugins('parser', self.cfg)) or nonestr)
         row(_('Installed processors (DEPRECATED -- use Parsers instead)'), 
             ', '.join(processor.processors) or nonestr)
         state = (_('Disabled'), _('Enabled'))
