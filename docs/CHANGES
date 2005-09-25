@@ -197,7 +197,7 @@ Version moin--main--1.5:
       address unknown to the system, he was not notified of this, but just got
       a useless mail with no account data in it. Now the system directly tells
       the user that he entered an unknown email address.
-
+    * Fixed SystemInfo, it now also lists parsers in data/plugin/parser dir.
 
 Version 1.4:
     We used that version number for an internal and early development version
