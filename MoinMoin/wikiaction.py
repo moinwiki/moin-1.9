@@ -733,14 +733,13 @@ def do_subscribe(pagename, request):
             msg = _('Your subscribtion to this page has been removed.')
         else:
             msg = _("Can't remove regular expression subscription!") + u' ' + \
-                  _('To unsubscribe, go to your profile and delete this page from the subscription list.')
+                  _('To unsubscribe, go to your profile and delete the item matching this page from the subscription list.')
             
     # subscribe to current page
     else:
         if request.user.subscribePage(pagename):
             request.user.save()
-        msg = _('You have been subscribed to this page.') + u' ' + \
-              _('To unsubscribe, go to your profile and delete this page from the subscription list.')
+        msg = _('You have been subscribed to this page.')
 
     Page(request, pagename).send_page(request, msg=msg)
 
