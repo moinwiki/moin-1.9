@@ -20,6 +20,7 @@ Version moin--main--1.5:
          please just read the help page in case you see it :)
        * bang_meta old: 0 new: 1
        * show_section_numbers old: 1 new: 0
+       * some regexes that used to be [a-z]Uxxxx$ are now [a-z0-9]Uxxxx$
      * removed settings and code [new behaviour]:
        * acl_enabled [1]
        * allow_extended_names [1]

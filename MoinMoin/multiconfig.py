@@ -233,10 +233,10 @@ class DefaultConfig:
     page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
     page_local_spelling_words = u'LocalSpellingWords'
     page_category_regex = u'^Category[A-Z]'
-    page_dict_regex = u'[a-z]Dict$'
-    page_form_regex = u'[a-z]Form$'
-    page_group_regex = u'[a-z]Group$'
-    page_template_regex = u'[a-z]Template$'
+    page_dict_regex = u'[a-z0-9]Dict$'
+    page_form_regex = u'[a-z0-9]Form$'
+    page_group_regex = u'[a-z0-9]Group$'
+    page_template_regex = u'[a-z0-9]Template$'
 
     page_license_enabled = 0
     page_license_page = u'WikiLicense'
