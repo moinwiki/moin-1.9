@@ -35,6 +35,14 @@ class Config(DefaultConfig):
     # Site name, used by default for wiki name-logo [Unicode]
     sitename = u'Untitled Wiki'
 
+    # name of entry page / front page [Unicode], choose one of those:
+    
+    # a) if most wiki content is in a single language
+    #page_front_page = u"MyStartingPage"
+    
+    # b) if wiki content is maintained in many languages
+    #page_front_page = u"FrontPage"
+
     # Wiki logo. You can use an image, text or both. [Unicode]
     # Example: u'<img src="/wiki/mywiki.png" alt="My Wiki">My Wiki'
     # For no logo or text, use ''
