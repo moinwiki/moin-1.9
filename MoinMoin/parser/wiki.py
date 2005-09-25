@@ -106,7 +106,7 @@ class Parser:
         self.form = request.form
         self._ = request.getText
         self.cfg = request.cfg
-
+        self.line_anchors = kw.get('line_anchors', True)
         self.macro = None
 
         self.is_em = 0
@@ -932,7 +932,8 @@ class Parser:
         # Main loop
         for line in self.lines:
             self.lineno += 1
-            self.request.write(self.formatter.line_anchordef(self.lineno))
+            if self.line_anchors:
+                self.request.write(self.formatter.line_anchordef(self.lineno))
             self.table_rowstart = 1
             self.line_was_empty = self.line_is_empty
             self.line_is_empty = 0
