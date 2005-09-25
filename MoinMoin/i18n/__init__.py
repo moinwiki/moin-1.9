@@ -86,7 +86,7 @@ def formatMarkup(request, text, currentStack = []):
     origtext = text
     out = StringIO.StringIO()
     request.redirect(out)
-    parser = Parser(text, request)
+    parser = Parser(text, request, line_anchors=False)
     formatter = Formatter(request, terse = True)
     reqformatter = None
     if hasattr(request, 'formatter'):
