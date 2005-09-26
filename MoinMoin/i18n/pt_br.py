@@ -41,8 +41,6 @@ Para usar este formulário em outras páginas, insira uma macro do tipo
 '''A página não é editável!''',
 '''Cannot edit old revisions!''':
 '''Não é possível editar revisões antigas!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Seu tempo de edição se esgotou! Esteja preparado para editar conflitos!''',
 '''Page name is too long, try shorter name.''':
 '''Nome desta página é muito grande, tente um mais curto.''',
 '''Edit "%(pagename)s"''':
@@ -285,8 +283,6 @@ entre as palavras. Nome de grupo de página não é permitido.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d páginas localizadas entre um total de %(pages)d páginas procuradas.''',
 '''%.2f seconds''':
 '''%.2f segundos''',
 '''match''':
@@ -485,8 +481,6 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Sua subscrição a esta página foi removida.''',
 '''Can\'t remove regular expression subscription!''':
 '''Não é possível remover expressão regular correspondendo a subscrição!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Para remover a subscrição, vá para seu perfil e apague esta página da lista de páginas subscritas.''',
 '''You have been subscribed to this page.''':
 '''A sua subscrição a esta página foi efetivada.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -539,8 +533,6 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Ações de extensão global''',
 '''Local extension actions''':
 '''Ações de extensão local''',
-'''Installed parsers''':
-'''Parsers instalados''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processadores instalados (OBSOLETO -- utilize Parsers)''',
 '''Disabled''':

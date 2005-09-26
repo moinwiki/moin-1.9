@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -78,7 +78,8 @@ msgstr "이 글은 고칠 수 없습니다."
 msgid "Cannot edit old revisions!"
 msgstr "옛 글은 고칠 수 없습니다."
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "글 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!"
 
 msgid "Page name is too long, try shorter name."
@@ -489,8 +490,8 @@ msgstr "로그인"
 msgid " %s and try again."
 msgstr " %s 하고 다시 시도하세요."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다."
 
 #, python-format
@@ -811,9 +812,10 @@ msgstr "이 글을 더 이상 감시하지 않습니다."
 msgid "Can't remove regular expression subscription!"
 msgstr "정규표현식으로 된 감시 목록은 지울 수 없습니다!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 글을 지"
 "워 주세요."
@@ -899,8 +901,13 @@ msgstr "일반 확장 액션"
 msgid "Local extension actions"
 msgstr "로컬 확장 액션"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "설치된 파서"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "로컬 확장 매크로"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "설치된 프로세서 (낡음 -- 대신 파서를 쓰세요)"
@@ -1404,6 +1411,10 @@ msgstr "내용"
 
 msgid "Titles"
 msgstr "제목"
+
+#, fuzzy
+msgid "Search"
+msgstr "찾기:"
 
 #, fuzzy
 msgid "Quicklink"

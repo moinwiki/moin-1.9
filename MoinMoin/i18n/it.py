@@ -42,8 +42,6 @@ Per usare questa maschera su altre pagine, inserisci una chiamata alla macro
 '''La pagina non è modificabile!''',
 '''Cannot edit old revisions!''':
 '''Non è permesso modificare le versioni precedenti!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Il lock che detenevi è scaduto, preparati a possibili conflitti di modifiche!''',
 '''Edit "%(pagename)s"''':
 '''Modifica "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -264,8 +262,6 @@ Il nome può contenere ogni carattere alfanumerico Unicode , con opzionale unosp
 '''Login''',
 ''' %s and try again.''':
 ''' %s e prova ancora.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''Trovate %(hits)d corrispondenze nelle %(pages)d pagine consultate.''',
 '''%.2f seconds''':
 '''%.2f secondi''',
 '''match''':
@@ -421,8 +417,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''La tua sottoscrizione a questa pagine è stata rimossa.''',
 '''Can\'t remove regular expression subscription!''':
 '''Non posso rimuovere la sottoscrizione per espressione regolare''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Per rimuoverti, vai nel tuo profilo e cancella questa pagina dalla listadelle pagine a cui sei abbonato.''',
 '''You have been subscribed to this page.''':
 '''Da questo momento sei abbonato a questa pagina.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -475,8 +469,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Azioni disponibili''',
 '''Local extension actions''':
 '''Azioni disponibili (in questo wiki)''',
-'''Installed parsers''':
-'''Parser installati''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processori installati (DEPRECATO -- usa i Parser)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

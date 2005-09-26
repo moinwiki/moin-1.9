@@ -5,6 +5,7 @@
 #acl MoinPagesEditorGroup:read,write,delete,revert All:read
 #format gettext
 #language sv
+
 #
 # MoinMoin sv system text translation
 #
@@ -12,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
-"PO-Revision-Date: 2005-09-25 18:11+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
+"PO-Revision-Date: 2005-09-26 15:17+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -77,8 +78,8 @@ msgstr "Sidan är skrivskyddad!"
 msgid "Cannot edit old revisions!"
 msgstr "Kan inte redigera gamla versioner!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
-msgstr "Låset du höll har gått ut, förbered dig för redigeringskonflikter!"
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr "Låset du höll har gått ut. Förbered dig för redigeringskonflikter!"
 
 msgid "Page name is too long, try shorter name."
 msgstr "Sidnamnet är för långt, pröva ett kortare namn."
@@ -496,8 +497,8 @@ msgid " %s and try again."
 msgstr " %s och försök igen."
 
 #, python-format
-msgid "%(hits)d results out of %(pages)d pages."
-msgstr "%(hits)d träffar av %(pages)d sidor."
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultat av ungefär %(pages)d sidor."
 
 #, python-format
 msgid "%.2f seconds"
@@ -830,11 +831,9 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Kan inte ta bort reguljär uttrycks-prenumeration!"
 
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
-msgstr ""
-"För att avsluta prenumerationen, gå till din profil och ta bort den här "
-"sidan från prenumerationslistan."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
+msgstr "För att avsluta prenumerationen, gå till din profil och ta bort posten som matchar den här sidan från prenumerationslistan."
 
 msgid "You have been subscribed to this page."
 msgstr "Du prenumerar nu på den här sidan."
@@ -917,8 +916,11 @@ msgstr "Globala utökningsaktioner"
 msgid "Local extension actions"
 msgstr "Lokala utökningsaktioner"
 
-msgid "Installed parsers"
-msgstr "Installerade parsers"
+msgid "Global parsers"
+msgstr "Globala parsers"
+
+msgid "Local extension parsers"
+msgstr "Lokala utökningsparsers"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Installerade processors (AVRÅDES - använd Parsers i stället)"
@@ -1418,6 +1420,9 @@ msgstr "Text"
 
 msgid "Titles"
 msgstr "Titlar"
+
+msgid "Search"
+msgstr "Sök"
 
 msgid "Quicklink"
 msgstr "Snabblänk"

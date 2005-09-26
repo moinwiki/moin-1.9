@@ -42,8 +42,6 @@ Pour utiliser ce formulaire sur d\'autres pages, insérez un appel à la macro 
 '''Page immuable !''',
 '''Cannot edit old revisions!''':
 '''Impossible de modifier d\'anciennes versions''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Le verrou que vous déteniez à expiré, vos modifications risquent d\'engendrer des conflits''',
 '''Page name is too long, try shorter name.''':
 '''Nom de page trop long, essayez un nom plus court.''',
 '''Edit "%(pagename)s"''':
@@ -283,8 +281,6 @@ Les noms des pages des groupes sont interdits.''',
 '''Connexion''',
 ''' %s and try again.''':
 '''%s et essayez à nouveau.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d pages trouvées parmi les %(pages)d pages.''',
 '''%.2f seconds''':
 '''%.2f secondes''',
 '''match''':
@@ -487,8 +483,6 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Votre abonnement à cette page a été supprimé.''',
 '''Can\'t remove regular expression subscription!''':
 '''Impossible de retirer un abonnement selon une expression rationnelle''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Pour vous désabonner, allez dans votre profil et supprimez cette page de la liste de vos abonnements.''',
 '''You have been subscribed to this page.''':
 '''Vous avez été abonné à cette page.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -541,8 +535,6 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Actions d\'extension globales ''',
 '''Local extension actions''':
 '''Actions d\'extension locales''',
-'''Installed parsers''':
-'''Analyseurs installés''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processeurs installés (OBSOLÈTES -- utilisez plutôt les analyseurs)''',
 '''Disabled''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -80,7 +80,8 @@ msgstr "Ova stranica je neizmenljiva!"
 msgid "Cannot edit old revisions!"
 msgstr "Nemoguće je obrađivati stare revizije!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Vreme za blokadu koju ste imali je isteklo, pripremite se da možda\n"
 "obrađujete konflikte!"
@@ -481,7 +482,7 @@ msgid " %s and try again."
 msgstr ""
 
 #, fuzzy, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d pogodaka u %(pages)d pretraženih stranica."
 
 #, python-format
@@ -803,9 +804,10 @@ msgstr "Niko se nije pretpisao na ovu stranicu, mejl nije poslat."
 msgid "Can't remove regular expression subscription!"
 msgstr "Pretpis na regularne izraze se nije mogao izbrisati!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Da biste se ispisali, idite u vaš profil i obrišite ovu stranicu iz liste "
 "pretpisanih stranica."
@@ -891,8 +893,13 @@ msgstr "Globalne akcije ekstenzija"
 msgid "Local extension actions"
 msgstr "Lokalne akcije ekstenzija"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Instalirani pretraživači"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Lokalni makroi ekstenzija"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Instalirani procesori (ZAPOSTAVLJENO -- koristite pretraživače)"
@@ -1397,6 +1404,10 @@ msgstr "IzmeniTekst"
 #, fuzzy
 msgid "Titles"
 msgstr "IndeksNaslova"
+
+#, fuzzy
+msgid "Search"
+msgstr "Potraga"
 
 #, fuzzy
 msgid "Quicklink"

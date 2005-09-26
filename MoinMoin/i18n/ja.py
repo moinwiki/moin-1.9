@@ -42,7 +42,7 @@ macro call.-~
 '''このページは編集できません。''',
 '''Cannot edit old revisions!''':
 '''古いリビジョンを編集することはできません。''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
+'''The lock you held timed out. Be prepared for editing conflicts!''':
 '''ページのロックが期限切れになりました。他のユーザが行う編集と衝突する可能性があります。''',
 '''Page name is too long, try shorter name.''':
 '''ページ名が長すぎます。短い名前を指定してください。''',
@@ -285,8 +285,8 @@ space between words. Group page name is not allowed.''':
 '''ログイン''',
 ''' %s and try again.''':
 '''%sして、もう一度試してみてください。''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(pages)dページ中%(hits)d箇所一致しました。''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''約%(pages)dページ中%(hits)d箇所一致しました。''',
 '''%.2f seconds''':
 '''%.2f秒''',
 '''match''':
@@ -490,8 +490,8 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''このページの購読を停止しました。''',
 '''Can\'t remove regular expression subscription!''':
 '''正規表現で記述した購読を停止することはできません。''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''購読を停止するには、UserPreferencesのページにて、購読リストからこのページを削除してください。''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''購読を停止するには、ユーザプロファイルのページにて、このページにマッチする項目を購読リストから削除してください。''',
 '''You have been subscribed to this page.''':
 '''このページの購読を開始しました。''',
 '''Required attribute "%(attrname)s" missing''':
@@ -544,8 +544,10 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''グローバル拡張アクション''',
 '''Local extension actions''':
 '''ローカル拡張アクション''',
-'''Installed parsers''':
-'''インストールされているパーサ''',
+'''Global parsers''':
+'''グローバルパーサ''',
+'''Local extension parsers''':
+'''ローカル拡張パーサ''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''インストールされているプロセッサ(現在はパーサの利用を推奨)''',
 '''Disabled''':
@@ -825,6 +827,8 @@ red=edit''':
 '''テキスト''',
 '''Titles''':
 '''タイトル''',
+'''Search''':
+'''検索''',
 '''Quicklink''':
 '''クイックリンク''',
 '''More Actions:''':

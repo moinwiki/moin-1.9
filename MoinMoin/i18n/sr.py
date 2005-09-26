@@ -34,9 +34,6 @@ na ostalim stranicama.-~
 '''Ova stranica je neizmenljiva!''',
 '''Cannot edit old revisions!''':
 '''Nemoguće je obrađivati stare revizije!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Vreme za blokadu koju ste imali je isteklo, pripremite se da možda
-obrađujete konflikte!''',
 '''Edit "%(pagename)s"''':
 '''Obrađivati "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -364,8 +361,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Niko se nije pretpisao na ovu stranicu, mejl nije poslat.''',
 '''Can\'t remove regular expression subscription!''':
 '''Pretpis na regularne izraze se nije mogao izbrisati!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Da biste se ispisali, idite u vaš profil i obrišite ovu stranicu iz liste pretpisanih stranica.''',
 '''You have been subscribed to this page.''':
 '''Vi ste se pretpisali na ovu stranicu.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -412,8 +407,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Globalne akcije ekstenzija''',
 '''Local extension actions''':
 '''Lokalne akcije ekstenzija''',
-'''Installed parsers''':
-'''Instalirani pretraživači''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Instalirani procesori (ZAPOSTAVLJENO -- koristite pretraživače)''',
 '''ERROR in regex \'%s\'''':

@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
-"PO-Revision-Date: 2005-09-24 22:35+0900\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
+"PO-Revision-Date: 2005-09-26 09:54+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,9 @@ msgstr ""
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
 "search results!"
-msgstr "このページのバックアップ保存された内容は\"deprecated\"であるため、検索結果には含まれません。"
+msgstr ""
+"このページのバックアップ保存された内容は\"deprecated\"であるため、検索結果に"
+"は含まれません。"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -76,7 +78,7 @@ msgstr "このページは編集できません。"
 msgid "Cannot edit old revisions!"
 msgstr "古いリビジョンを編集することはできません。"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "ページのロックが期限切れになりました。他のユーザが行う編集と衝突する可能性が"
 "あります。"
@@ -493,8 +495,8 @@ msgid " %s and try again."
 msgstr "%sして、もう一度試してみてください。"
 
 #, python-format
-msgid "%(hits)d results out of %(pages)d pages."
-msgstr "%(pages)dページ中%(hits)d箇所一致しました。"
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "約%(pages)dページ中%(hits)d箇所一致しました。"
 
 #, python-format
 msgid "%.2f seconds"
@@ -823,11 +825,10 @@ msgid "Can't remove regular expression subscription!"
 msgstr "正規表現で記述した購読を停止することはできません。"
 
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
-"購読を停止するには、UserPreferencesのページにて、購読リストからこのページを削"
-"除してください。"
+"購読を停止するには、ユーザプロファイルのページにて、このページにマッチする項目を購読リストから削除してください。"
 
 msgid "You have been subscribed to this page."
 msgstr "このページの購読を開始しました。"
@@ -910,8 +911,11 @@ msgstr "グローバル拡張アクション"
 msgid "Local extension actions"
 msgstr "ローカル拡張アクション"
 
-msgid "Installed parsers"
-msgstr "インストールされているパーサ"
+msgid "Global parsers"
+msgstr "グローバルパーサ"
+
+msgid "Local extension parsers"
+msgstr "ローカル拡張パーサ"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "インストールされているプロセッサ(現在はパーサの利用を推奨)"
@@ -1412,6 +1416,9 @@ msgstr "テキスト"
 
 msgid "Titles"
 msgstr "タイトル"
+
+msgid "Search"
+msgstr "検索"
 
 msgid "Quicklink"
 msgstr "クイックリンク"

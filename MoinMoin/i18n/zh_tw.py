@@ -38,8 +38,6 @@ macro call.-~
 '''本頁不能更動!''',
 '''Cannot edit old revisions!''':
 '''不能編輯舊版頁面!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''編輯鎖定逾時, 請注意多人同時編輯可能發生衝突!''',
 '''Edit "%(pagename)s"''':
 '''編輯 "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -257,8 +255,6 @@ space between words. Group page name is not allowed.''':
 '''登入''',
 ''' %s and try again.''':
 ''' %s 後再試一次.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''在 %(pages)d 頁中找到 %(hits)d 頁.''',
 '''%.2f seconds''':
 '''%.2f 秒''',
 '''match''':
@@ -413,8 +409,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''本頁已取消訂閱.''',
 '''Can\'t remove regular expression subscription!''':
 '''無法取消用 regex 設定的訂閱.''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''如果要取消訂閱, 請點右上角修改個人資料, 並從訂閱清單中刪除本頁.''',
 '''You have been subscribed to this page.''':
 '''訂閱好了.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -467,8 +461,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''全域擴充功能''',
 '''Local extension actions''':
 '''區域擴充功能''',
-'''Installed parsers''':
-'''已安裝的解析器''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''已安裝的處理器 (*不建議使用* -- 請改用解析器)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

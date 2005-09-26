@@ -42,8 +42,6 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Pagina este imuabilă!''',
 '''Cannot edit old revisions!''':
 '''Nu se pot edita revizii vechi!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Blocajul pe care l-aţi înfiinţat a expirat, pregătiţi-vă pentru conflicte de editare!''',
 '''Page name is too long, try shorter name.''':
 '''Numele paginii este prea lung, încercaţi un nume mai mic.''',
 '''Edit "%(pagename)s"''':
@@ -272,8 +270,6 @@ spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s şi încercaţi din nou.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d rezultate din %(pages)d pagini.''',
 '''%.2f seconds''':
 '''%.2f secunde''',
 '''match''':
@@ -461,8 +457,6 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Nu mai sunteţi înscris(ă) pe această pagină.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nu se poate şterge înregistrarea cu expresie regulară!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Pentru a renunţa, ştergeţi această pagină din lista de înregistrări din profilul dumneavoastră.''',
 '''You have been subscribed to this page.''':
 '''Aţi fost înregistrat(ă) pe această pagină.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -515,8 +509,6 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Acţiuni de extensie globale''',
 '''Local extension actions''':
 '''Acţiuni de extensie locale''',
-'''Installed parsers''':
-'''Analizatoare(parsers) instalate''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)''',
 '''Disabled''':

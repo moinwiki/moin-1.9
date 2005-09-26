@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -79,7 +79,8 @@ msgstr "La pagina non è modificabile!"
 msgid "Cannot edit old revisions!"
 msgstr "Non è permesso modificare le versioni precedenti!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Il lock che detenevi è scaduto, preparati a possibili conflitti di modifiche!"
 
@@ -502,8 +503,8 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s e prova ancora."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "Trovate %(hits)d corrispondenze nelle %(pages)d pagine consultate."
 
 #, python-format
@@ -827,9 +828,10 @@ msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
 msgid "Can't remove regular expression subscription!"
 msgstr "Non posso rimuovere la sottoscrizione per espressione regolare"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Per rimuoverti, vai nel tuo profilo e cancella questa pagina dalla "
 "listadelle pagine a cui sei abbonato."
@@ -915,8 +917,13 @@ msgstr "Azioni disponibili"
 msgid "Local extension actions"
 msgstr "Azioni disponibili (in questo wiki)"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Parser installati"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Macro disponibili (in questo wiki)"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Processori installati (DEPRECATO -- usa i Parser)"
@@ -1423,6 +1430,10 @@ msgstr "Testo"
 
 msgid "Titles"
 msgstr "Titoli"
+
+#, fuzzy
+msgid "Search"
+msgstr "Cerca:"
 
 #, fuzzy
 msgid "Quicklink"

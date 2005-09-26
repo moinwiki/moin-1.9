@@ -41,8 +41,6 @@ for at bruge denne formular på andre sider.-~
 '''Siden kan ikke redigeres!''',
 '''Cannot edit old revisions!''':
 '''Kan ikke redigere gamle udgaver!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Låsen du holdt udløb, vær forberedt på redigeringskonflikter!''',
 '''Edit "%(pagename)s"''':
 '''Redigér "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -265,8 +263,6 @@ mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
 '''Log ind''',
 ''' %s and try again.''':
 ''' %s og prøv igen.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d resultater ud af %(pages)d sider.''',
 '''%.2f seconds''':
 '''%.2f sekunder''',
 '''match''':
@@ -423,8 +419,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Dit abonnement på denne side er blevet afmeldt.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kan ikke afmelde et abonnement som regulært udtryk (regexp)!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''For at afmelde abonnement skal du gå til din brugerprofil og slette denne side fra abonnementslisten.''',
 '''You have been subscribed to this page.''':
 '''Du abonnerer nu på denne side.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -477,8 +471,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Globale udvidelsesrutiner''',
 '''Local extension actions''':
 '''Lokale udvidelsesrutiner''',
-'''Installed parsers''':
-'''Installerede fortolkere''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Installerede processorer (FORÆLDET -- brug fortolkere istedet)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

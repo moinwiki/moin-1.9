@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -78,7 +78,8 @@ msgstr "Pagina ligt vast!"
 msgid "Cannot edit old revisions!"
 msgstr "Bewerken van oude versies is niet mogelijk!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Uw slot is verlopen. Houd rekening met bewerkingsconflicten!"
 
 msgid "Page name is too long, try shorter name."
@@ -504,8 +505,8 @@ msgstr "Inloggen"
 msgid " %s and try again."
 msgstr " %s en probeer opnieuw"
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d resultaten in %(pages)d doorzochte pagina's ."
 
 #, python-format
@@ -831,9 +832,10 @@ msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
 msgid "Can't remove regular expression subscription!"
 msgstr "Kan geen reguliere expressie-abonnement verwijderen!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst "
 "met abonnementen."
@@ -919,8 +921,13 @@ msgstr "Globale uitbreidingsacties"
 msgid "Local extension actions"
 msgstr "Lokale uitbreidingsacties"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Geïnstalleerde parsers"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Lokale uitbreidingsmacros"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)"
@@ -1427,6 +1434,10 @@ msgstr "Tekst"
 
 msgid "Titles"
 msgstr "Titels"
+
+#, fuzzy
+msgid "Search"
+msgstr "Zoeken:"
 
 #, fuzzy
 msgid "Quicklink"

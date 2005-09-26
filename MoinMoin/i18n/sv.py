@@ -42,8 +42,8 @@ För att använda det här formuläret på andra sidor, skriv in ett
 '''Sidan är skrivskyddad!''',
 '''Cannot edit old revisions!''':
 '''Kan inte redigera gamla versioner!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Låset du höll har gått ut, förbered dig för redigeringskonflikter!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Låset du höll har gått ut. Förbered dig för redigeringskonflikter!''',
 '''Page name is too long, try shorter name.''':
 '''Sidnamnet är för långt, pröva ett kortare namn.''',
 '''Edit "%(pagename)s"''':
@@ -287,8 +287,8 @@ med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
 '''Logga in''',
 ''' %s and try again.''':
 ''' %s och försök igen.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d träffar av %(pages)d sidor.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d resultat av ungefär %(pages)d sidor.''',
 '''%.2f seconds''':
 '''%.2f sekunder''',
 '''match''':
@@ -492,8 +492,8 @@ lösenord.
 '''Din prenumeration på den här sidan har avslutats.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kan inte ta bort reguljär uttrycks-prenumeration!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''För att avsluta prenumerationen, gå till din profil och ta bort den här sidan från prenumerationslistan.''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''För att avsluta prenumerationen, gå till din profil och ta bort posten som matchar den här sidan från prenumerationslistan.''',
 '''You have been subscribed to this page.''':
 '''Du prenumerar nu på den här sidan.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -546,8 +546,10 @@ lösenord.
 '''Globala utökningsaktioner''',
 '''Local extension actions''':
 '''Lokala utökningsaktioner''',
-'''Installed parsers''':
-'''Installerade parsers''',
+'''Global parsers''':
+'''Globala parsers''',
+'''Local extension parsers''':
+'''Lokala utökningsparsers''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Installerade processors (AVRÅDES - använd Parsers i stället)''',
 '''Disabled''':
@@ -833,6 +835,8 @@ röd=ändra''',
 '''Text''',
 '''Titles''':
 '''Titlar''',
+'''Search''':
+'''Sök''',
 '''Quicklink''':
 '''Snabblänk''',
 '''More Actions:''':

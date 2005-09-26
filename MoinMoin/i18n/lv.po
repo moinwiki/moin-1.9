@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 19:34+0200\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -78,7 +78,7 @@ msgstr "Nemaināma lapa!"
 msgid "Cannot edit old revisions!"
 msgstr "Vecās versijas labot nedrīkst!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Lapas slēgšanas laika kvota ir izsmelta. Iespējams labošanas konflikts!"
 
@@ -411,7 +411,8 @@ msgid "Up"
 msgstr "Augšup"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Publiskot manu e-pasta adres (bez manas wiki mājas lapas) autora informācijā"
+msgstr ""
+"Publiskot manu e-pasta adres (bez manas wiki mājas lapas) autora informācijā"
 
 msgid "Open editor on double click"
 msgstr "Labot ar dubultklikšķi"
@@ -499,8 +500,8 @@ msgid " %s and try again."
 msgstr "%s un mēģiniet vēlreiz."
 
 #, python-format
-msgid "%(hits)d results out of %(pages)d pages."
-msgstr "Atrasti %(hits)d trāpījumi no %(pages)d lapām."
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām."
 
 #, python-format
 msgid "%.2f seconds"
@@ -673,7 +674,7 @@ msgid "Create Profile"
 msgstr "Izveidot profilu"
 
 msgid "Mail me my account data"
-msgstr "Aizsūtīt man konta datus"
+msgstr "Atsūtīt manus konta datus"
 
 msgid "No older revisions available!"
 msgstr "Vecākas versijas nav!"
@@ -829,11 +830,12 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
-"Lai atceltu pierakstu, atveriet JūsuIestatījumi un noņemiet šo lapu no "
-"pierakstu saraksta."
+"Lai atrakstītos, atveriet savu profilu un, "
+" pierakstu sarakstā, izdzēsiet ierakstus, kas saskan ar šo lapu."
+
 
 msgid "You have been subscribed to this page."
 msgstr "Tagad Jūs esat pierakstīts uz šo lapu."
@@ -916,8 +918,11 @@ msgstr "Globālās papildus darbības"
 msgid "Local extension actions"
 msgstr "Lokālās papildus darbības"
 
-msgid "Installed parsers"
-msgstr "Ievietotie parseri"
+msgid "Global parsers"
+msgstr "Globālie parsētāji"
+
+msgid "Local extension parsers"
+msgstr "Lokālo paplašinājumu parsētāji"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)"
@@ -1032,7 +1037,7 @@ msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
-msgstr "Slikts fails. Nodzēsiet visus NE ASCII simbolus un pamēģiniet vēlreiz."
+msgstr "Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Jūs nedrīkstat dzēst šīs lapas pielikumus."
@@ -1118,7 +1123,7 @@ msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
 
 #, python-format
 msgid "Local Site Map for \"%s\""
-msgstr "Vietnes Karte apmēram \"%s\""
+msgstr "\"%s\" vietnes karte"
 
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Šajā wiki Jums nav tiesību pārdēvēt lapas!"
@@ -1213,7 +1218,7 @@ msgid "Unsupported navigation scheme '%(scheme)s'!"
 msgstr "Navigācijas shēma '%(scheme)s' nav pieejama!"
 
 msgid "No parent page found!"
-msgstr "Vecāklapa nav atrasta!"
+msgstr "Virslapa nav atrasta!"
 
 msgid "Wiki"
 msgstr "Wiki"
@@ -1322,10 +1327,10 @@ msgid "%(errortype)s processing error"
 msgstr "%(errortype)s apstrādes kļūda"
 
 msgid "Views/day"
-msgstr "Pārskati/diena"
+msgstr "Skatīta (dienā)"
 
 msgid "Edits/day"
-msgstr "Laboti/diena"
+msgstr "Labota (dienā)"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -1414,6 +1419,9 @@ msgstr "Teksts"
 
 msgid "Titles"
 msgstr "Virsraksti"
+
+msgid "Search"
+msgstr "Meklēt"
 
 msgid "Quicklink"
 msgstr "Ātrsaite"
@@ -1587,32 +1595,35 @@ msgstr "PārdēvētLapu"
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
 
-msgid "Refresh"
-msgstr "Atsvaidzināt"
+#~ msgid "Refresh"
+#~ msgstr "Atsvaidzināt"
 
-msgid "Skip to preview"
-msgstr "Izlaist pirmskatu"
+#~ msgid "Skip to preview"
+#~ msgstr "Izlaist pirmskatu"
 
-msgid "[current page size '''%(size)d''' bytes]"
-msgstr "[lapas izmērs ir '''%(size)d''' baiti]"
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[lapas izmērs ir '''%(size)d''' baiti]"
 
-msgid "Optional comment about this change"
-msgstr "Neobligāts komentārs par šo izmaiņu"
+#~ msgid "Optional comment about this change"
+#~ msgstr "Neobligāts komentārs par šo izmaiņu"
 
-msgid "Make this page belong to category %(category)s"
-msgstr "Pievienot lapu kategorijai %(category)s"
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Pievienot lapu kategorijai %(category)s"
 
-msgid "Can't work out query"
-msgstr "Pieprasījumu nevaru izpildīt"
+#~ msgid "Can't work out query"
+#~ msgstr "Pieprasījumu nevaru izpildīt"
 
-msgid "Show fancy links"
-msgstr "Rādīt modernas saites"
+#~ msgid "Show fancy links"
+#~ msgstr "Rādīt modernas saites"
 
-msgid "Show Parent"
-msgstr "Virslapa"
+#~ msgid "Show Parent"
+#~ msgstr "Virslapa"
 
-msgid "Show Changes"
-msgstr "Izmaiņas"
+#~ msgid "Show Changes"
+#~ msgstr "Izmaiņas"
 
-msgid "Get Info"
-msgstr "Informācija"
+#~ msgid "Get Info"
+#~ msgstr "Informācija"
+
+#~ msgid "Use FirstnameLastname"
+#~ msgstr "Lietojiet VārdsUzvārds"
