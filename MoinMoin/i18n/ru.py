@@ -41,8 +41,6 @@ macro call.-~
 '''Неизменяемая страница!''',
 '''Cannot edit old revisions!''':
 '''Старые версии нельзя изменять!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Привилегия на изменения истекла, приготовьтесь к конфликтам!''',
 '''Page name is too long, try shorter name.''':
 '''Слишком длинное имя страницы, попробуйте что-нибудь покороче.''',
 '''Edit "%(pagename)s"''':
@@ -281,8 +279,6 @@ space between words. Group page name is not allowed.''':
 '''Войти''',
 ''' %s and try again.''':
 ''' %s и попробуйте еще раз.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''Найдено %(hits)d из %(pages)d просмотренных страниц:''',
 '''%.2f seconds''':
 '''%.2f секунд''',
 '''match''':
@@ -475,8 +471,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Вы больше не подписаны на эту страницу.''',
 '''Can\'t remove regular expression subscription!''':
 '''Не могу удалить подписку по образцу.''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Для отмены подписки зайдите в ВашиНастройки и уберите эту страницу из списка подписки.''',
 '''You have been subscribed to this page.''':
 '''Теперь вы подписаны на эту страницу.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -529,8 +523,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Общие дополнительные действия''',
 '''Local extension actions''':
 '''Местные дополнительные действия''',
-'''Installed parsers''':
-'''Доступные парсеры''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Доступные процессоры (УСТАРЕЛО - используйте парсеры)''',
 '''Disabled''':

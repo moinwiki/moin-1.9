@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -79,7 +79,8 @@ msgstr "Siden kan ikke redigeres!"
 msgid "Cannot edit old revisions!"
 msgstr "Kan ikke redigere gamle utgaver!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Din låsing av siden er utgått på tid, så vær forberedt på konflikter!"
 
 msgid "Page name is too long, try shorter name."
@@ -495,8 +496,8 @@ msgstr "Logg inn"
 msgid " %s and try again."
 msgstr " %s og prøv igjen."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d resultater ved søk i %(pages)d sider."
 
 #, python-format
@@ -817,9 +818,10 @@ msgstr "Din avbestilling av denne siden er registrert."
 msgid "Can't remove regular expression subscription!"
 msgstr "Abonnement med regulært uttrykk kan ikke avbestilles."
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "For å avbestille et abonnement må du gå til din brukerprofil og slette denne "
 "siden fra abonnementslisten."
@@ -905,8 +907,13 @@ msgstr "Globale utvidelsesoperasjoner"
 msgid "Local extension actions"
 msgstr "Lokale utvidelsesoperasjoner"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Installerte parsere"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Lokale utvidelsesmakroer"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Installerte prosessorer (FORELDET -- bruk parsere)"
@@ -1402,6 +1409,10 @@ msgstr "Tekst"
 
 msgid "Titles"
 msgstr "Titler"
+
+#, fuzzy
+msgid "Search"
+msgstr "Søk:"
 
 #, fuzzy
 msgid "Quicklink"

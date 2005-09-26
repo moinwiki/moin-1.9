@@ -38,8 +38,6 @@ brukes.-~
 '''Siden kan ikke redigeres!''',
 '''Cannot edit old revisions!''':
 '''Kan ikke redigere gamle utgaver!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Din låsing av siden er utgått på tid, så vær forberedt på konflikter!''',
 '''Edit "%(pagename)s"''':
 '''Rediger "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -263,8 +261,6 @@ mellom ordene. Gruppenavn er ikke tillatt.''',
 '''Logg inn''',
 ''' %s and try again.''':
 ''' %s og prøv igjen.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d resultater ved søk i %(pages)d sider.''',
 '''%.2f seconds''':
 '''%.2f sekunder''',
 '''match''':
@@ -424,8 +420,6 @@ e-post eller fjerne "Abonner"-knappen.''',
 '''Din avbestilling av denne siden er registrert.''',
 '''Can\'t remove regular expression subscription!''':
 '''Abonnement med regulært uttrykk kan ikke avbestilles.''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''For å avbestille et abonnement må du gå til din brukerprofil og slette denne siden fra abonnementslisten.''',
 '''You have been subscribed to this page.''':
 '''Du abonnerer nå på denne siden.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -478,8 +472,6 @@ e-post eller fjerne "Abonner"-knappen.''',
 '''Globale utvidelsesoperasjoner''',
 '''Local extension actions''':
 '''Lokale utvidelsesoperasjoner''',
-'''Installed parsers''':
-'''Installerte parsere''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Installerte prosessorer (FORELDET -- bruk parsere)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

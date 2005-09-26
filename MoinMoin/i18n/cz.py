@@ -42,8 +42,6 @@ volání makra.-~
 '''Tato stránka je neměnná!''',
 '''Cannot edit old revisions!''':
 '''Staré verze se nedají editovat''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Váš časový zámek vypršel, buďte připraveni na možné editační spory!''',
 '''Page name is too long, try shorter name.''':
 '''Název stránky je příliš dlouhý, zvolte kratší název.''',
 '''Edit "%(pagename)s"''':
@@ -274,8 +272,6 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''Přihlášení''',
 ''' %s and try again.''':
 ''' %s a zkuste to znovu.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d nálezů na celkem %(pages)d stránkách.''',
 '''%.2f seconds''':
 '''%.2f sekund''',
 '''match''':
@@ -436,8 +432,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Váš odběr této stránky byl zrušen.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nemohu zrušit odběr z regulárního výrazu!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku ze seznamu odebíraných stránek.''',
 '''You have been subscribed to this page.''':
 '''Přihlásili jste se k odběru této stránky.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -490,8 +484,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Akce globálního rozšíření''',
 '''Local extension actions''':
 '''Akce lokálního rozšíření''',
-'''Installed parsers''':
-'''Instalované parsery.''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Instalované processory (ZAVRŽENÉ -- použijívejte parsery)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

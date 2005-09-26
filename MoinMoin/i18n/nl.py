@@ -42,8 +42,6 @@ toe.-~
 '''Pagina ligt vast!''',
 '''Cannot edit old revisions!''':
 '''Bewerken van oude versies is niet mogelijk!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Uw slot is verlopen. Houd rekening met bewerkingsconflicten!''',
 '''Edit "%(pagename)s"''':
 '''"%(pagename)s" bewerken''',
 '''Preview of "%(pagename)s"''':
@@ -269,8 +267,6 @@ spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 '''Inloggen''',
 ''' %s and try again.''':
 ''' %s en probeer opnieuw''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d resultaten in %(pages)d doorzochte pagina\'s .''',
 '''%.2f seconds''':
 '''%.2f seconden''',
 '''match''':
@@ -427,8 +423,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Uw abonnement op deze pagina is ongedaan gemaakt.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kan geen reguliere expressie-abonnement verwijderen!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst met abonnementen.''',
 '''You have been subscribed to this page.''':
 '''U bent geabonneerd op deze pagina.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -481,8 +475,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Globale uitbreidingsacties''',
 '''Local extension actions''':
 '''Lokale uitbreidingsacties''',
-'''Installed parsers''':
-'''Geïnstalleerde parsers''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

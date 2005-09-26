@@ -42,8 +42,6 @@ macro call.-~
 '''此页不能编辑!''',
 '''Cannot edit old revisions!''':
 '''不能编辑旧版网页!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''编辑锁定超时, 多人同时编辑时可能会发生冲突''',
 '''Edit "%(pagename)s"''':
 '''编辑"%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -269,8 +267,6 @@ space between words. Group page name is not allowed.''':
 '''登录''',
 ''' %s and try again.''':
 '''%s后再试.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''在%(pages)d页中找到%(hits)d个结果.''',
 '''%.2f seconds''':
 '''%.2f秒''',
 '''match''':
@@ -426,8 +422,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''您终止了订阅此页.''',
 '''Can\'t remove regular expression subscription!''':
 '''不能取消用正规表达式定义的订阅!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除此页.''',
 '''You have been subscribed to this page.''':
 '''您已经订阅了此页.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -480,8 +474,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''全局扩充操作''',
 '''Local extension actions''':
 '''本地扩充操作''',
-'''Installed parsers''':
-'''已安装的分析插件(parsers)''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''已安装的处理插件(processors, 不再支持，请使用分析插件)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

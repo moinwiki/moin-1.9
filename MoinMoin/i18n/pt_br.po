@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-09-16 10:56 (UTC)\n"
 "Last-Translator: ASCII-only here <cerdiogenes@yahoo.com.br>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -79,7 +79,8 @@ msgstr "A página não é editável!"
 msgid "Cannot edit old revisions!"
 msgstr "Não é possível editar revisões antigas!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Seu tempo de edição se esgotou! Esteja preparado para editar conflitos!"
 
@@ -500,8 +501,8 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s e tente novamente."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr ""
 "%(hits)d páginas localizadas entre um total de %(pages)d páginas procuradas."
 
@@ -835,9 +836,10 @@ msgstr "Sua subscrição a esta página foi removida."
 msgid "Can't remove regular expression subscription!"
 msgstr "Não é possível remover expressão regular correspondendo a subscrição!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Para remover a subscrição, vá para seu perfil e apague esta página da lista "
 "de páginas subscritas."
@@ -923,8 +925,13 @@ msgstr "Ações de extensão global"
 msgid "Local extension actions"
 msgstr "Ações de extensão local"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Parsers instalados"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Macros de extensão local"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Processadores instalados (OBSOLETO -- utilize Parsers)"
@@ -1432,6 +1439,10 @@ msgstr "Texto"
 
 msgid "Titles"
 msgstr "Títulos"
+
+#, fuzzy
+msgid "Search"
+msgstr "Procurar:"
 
 #, fuzzy
 msgid "Quicklink"

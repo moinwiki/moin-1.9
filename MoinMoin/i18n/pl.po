@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-12-27 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -81,7 +81,8 @@ msgstr "Strona nie została zmieniona!"
 msgid "Cannot edit old revisions!"
 msgstr "Nie można zmieniać starych wersji!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty!"
 
 msgid "Page name is too long, try shorter name."
@@ -495,8 +496,8 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s i spróbuj ponownie."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
 
 #, python-format
@@ -817,9 +818,10 @@ msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nie można usunąć subskrybcji wyrażenia skończonego!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Aby zrezygnować z subskrybcji, wejdź do swojego profilu i usuń stronę z "
 "listy subskrybcji."
@@ -905,8 +907,13 @@ msgstr "Globalne rozsrzerzenia operacji"
 msgid "Local extension actions"
 msgstr "Lokalne rozszerzenia operacji"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Zainstalowane analizatory składni"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Lokalne rozszerzenia makropoleceń"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)"
@@ -1412,6 +1419,10 @@ msgstr "Tekst"
 
 msgid "Titles"
 msgstr "Tytuły"
+
+#, fuzzy
+msgid "Search"
+msgstr "Szukaj:"
 
 #, fuzzy
 msgid "Quicklink"

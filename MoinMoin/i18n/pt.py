@@ -42,8 +42,6 @@ chamada macro.-~
 '''Esta página é imutável!''',
 '''Cannot edit old revisions!''':
 '''Não é possível editar versões antigas!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Seu bloqueio está expirado. Pode ser que encontre conflitos de edição.''',
 '''Edit "%(pagename)s"''':
 '''Editar "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -269,8 +267,6 @@ de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o 
 '''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d acertos de um total de %(pages)d páginas procuradas.''',
 '''%.2f seconds''':
 '''%.2f segundos''',
 '''match''':
@@ -427,8 +423,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Sua inscrição nesta página foi removida.''',
 '''Can\'t remove regular expression subscription!''':
 '''Não pode remover expressões regulares (regex) da subscrição!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Para se desincrever, visite seu Perfil e elimine esta página da lista de inscrições.''',
 '''You have been subscribed to this page.''':
 '''Sua inscrição foi removida desta página.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -481,8 +475,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Ações de extensão global''',
 '''Local extension actions''':
 '''Ações de extensão local''',
-'''Installed parsers''':
-'''Parsers instalados''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processadores instalados (OBSOLETO -- melhor utilizar Parsers)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

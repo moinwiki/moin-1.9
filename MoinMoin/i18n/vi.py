@@ -37,8 +37,6 @@ macro call.-~
 '''Trang này không thể được thay đổi!''',
 '''Cannot edit old revisions!''':
 '''Không thể sửa phiên bản cũ!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Thời gian dành riêng cho bạn đã hết, bạn có thể sẽ gặp sự cố trong việc chỉnh sửa trang!''',
 '''Edit "%(pagename)s"''':
 '''Sửa trang "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -256,8 +254,6 @@ Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng khô
 '''Đăng nhập''',
 ''' %s and try again.''':
 ''' %s và thử lại.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''Tìm thấy %(hits)d trang trong tổng số %(pages)d trang.''',
 '''%.2f seconds''':
 '''%.2f giây''',
 '''match''':
@@ -411,8 +407,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Sự đăng ký của bạn đã được huỷ bỏ.''',
 '''Can\'t remove regular expression subscription!''':
 '''Không thể huỷ bỏ đăng ký biểu thức chính quy!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Để huỷ đăng ký, bạn nhấn vào Sở thích cá nhân và xoá trang này khỏi danh sách đăng ký.''',
 '''You have been subscribed to this page.''':
 '''Bạn vừa đăng ký vào trang này.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -465,8 +459,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Action bổ trợ toàn cục''',
 '''Local extension actions''':
 '''Action bổ trợ nội bộ''',
-'''Installed parsers''':
-'''Parser đã cài''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processor đã cài (KHÔNG CÒN DÙNG -- dùng parser)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

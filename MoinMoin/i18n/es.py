@@ -42,8 +42,6 @@ llamada macro.-~
 '''¡La página no se puede cambiar!''',
 '''Cannot edit old revisions!''':
 '''¡No puedes editar versiones antiguas!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''El bloqueo que tenías ha expirado.¡Puede ser que encuentres posibles conflictos de edición!''',
 '''Page name is too long, try shorter name.''':
 '''El nombre de la página es muy largo, intenta usar un nombre más corto''',
 '''Edit "%(pagename)s"''':
@@ -279,8 +277,6 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''Ingresar''',
 ''' %s and try again.''':
 ''' %s e inténtalo nuevamente.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d resultantes entre %(pages)d páginas revisadas.''',
 '''%.2f seconds''':
 '''%.2f segundos''',
 '''match''':
@@ -466,8 +462,6 @@ por una mejor y más fácil de recordar.
 '''Nadie está suscrito a esta página. No se envió mensaje.''',
 '''Can\'t remove regular expression subscription!''':
 '''No se puede quitar la expresion regular (regex) de suscripción''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Para cancelar tu suscripción, visita tu Perfil y elimina esta página de la lista de suscripción.''',
 '''You have been subscribed to this page.''':
 '''Te has suscrito a esta página.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -520,8 +514,6 @@ por una mejor y más fácil de recordar.
 '''Acciones de extensión global''',
 '''Local extension actions''':
 '''Acciones de extensión local''',
-'''Installed parsers''':
-'''Parsers instalados''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Procesadores instalados (OBSOLETO -- mejor utiliza Parsers)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

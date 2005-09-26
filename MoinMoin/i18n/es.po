@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2004-11-21 00:00+0000\n"
 "Last-Translator: Mauricio Hernandez Z <mhz.chile@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -78,7 +78,8 @@ msgstr "¡La página no se puede cambiar!"
 msgid "Cannot edit old revisions!"
 msgstr "¡No puedes editar versiones antiguas!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "El bloqueo que tenías ha expirado.¡Puede ser que encuentres posibles "
 "conflictos de edición!"
@@ -505,8 +506,8 @@ msgstr "Ingresar"
 msgid " %s and try again."
 msgstr " %s e inténtalo nuevamente."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d resultantes entre %(pages)d páginas revisadas."
 
 #, python-format
@@ -561,13 +562,16 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
-"Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-mail.\n"
+"Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-"
+"mail.\n"
 "\n"
 "Si perdiste tu contraseña, por favor usa la siguiente información\n"
-"e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del wiki\n"
+"e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del "
+"wiki\n"
 "(usa Copiar y Pegar para ello).\n"
 "\n"
-"Luego de ingresar con éxito, por supuesto es una buena idea cambiar la contraseña\n"
+"Luego de ingresar con éxito, por supuesto es una buena idea cambiar la "
+"contraseña\n"
 "por una mejor y más fácil de recordar.\n"
 
 #, python-format
@@ -846,9 +850,10 @@ msgstr "Nadie está suscrito a esta página. No se envió mensaje."
 msgid "Can't remove regular expression subscription!"
 msgstr "No se puede quitar la expresion regular (regex) de suscripción"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Para cancelar tu suscripción, visita tu Perfil y elimina esta página de la "
 "lista de suscripción."
@@ -934,8 +939,13 @@ msgstr "Acciones de extensión global"
 msgid "Local extension actions"
 msgstr "Acciones de extensión local"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Parsers instalados"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Macros de extensión local"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Procesadores instalados (OBSOLETO -- mejor utiliza Parsers)"
@@ -1448,6 +1458,10 @@ msgstr "Texto"
 
 msgid "Titles"
 msgstr "Títulos"
+
+#, fuzzy
+msgid "Search"
+msgstr "Buscar:"
 
 #, fuzzy
 msgid "Quicklink"

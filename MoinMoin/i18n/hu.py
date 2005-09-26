@@ -42,8 +42,6 @@ Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:
 '''A lap nem szerkeszthető!''',
 '''Cannot edit old revisions!''':
 '''A régi módosításokat nem lehet szerkeszteni!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''A zárolás lejárt. Emiatt szerkesztési ütközésekre számíthat!''',
 '''Page name is too long, try shorter name.''':
 '''A lap neve től hosszú, kérjük adjon meg egy rövidebbet!''',
 '''Edit "%(pagename)s"''':
@@ -264,8 +262,6 @@ egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlap
 '''Belépés''',
 ''' %s and try again.''':
 ''' %s, majd próbálja újra.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(pages)d lapból %(hits)d találat''',
 '''%.2f seconds''':
 '''%.2f s''',
 '''match''':
@@ -436,8 +432,6 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Erre a lapra megszűnt az előfizetése.''',
 '''Can\'t remove regular expression subscription!''':
 '''A reguláris kifejezéses előfizetést nem lehet lemondani!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Az előfizetés lemondásához lépjen be a profiljához és törölje ezt a lapot az előfizetési listából.''',
 '''You have been subscribed to this page.''':
 '''Ön előfizetett erre a lapra.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -490,8 +484,6 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Globális kiterjesztőműveletek''',
 '''Local extension actions''':
 '''Lokális kiterjesztőműveletek''',
-'''Installed parsers''':
-'''Telepített pásztázók''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Telepített processzorok (ELAVULTAK -- használjon inkább pásztázókat)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

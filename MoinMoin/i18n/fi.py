@@ -42,8 +42,6 @@ makrokutsu.-~
 '''Sivu on suojattu!''',
 '''Cannot edit old revisions!''':
 '''Vanhoja versioita ei voi muokata!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Lukkosi vanheni, varaudu päällekkäisiin muokkauksiin!''',
 '''Edit "%(pagename)s"''':
 '''Muokkaa "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -270,8 +268,6 @@ sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''Kirjaudu sisään''',
 ''' %s and try again.''':
 ''' %s ja yritä uudelleen.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d tulosta %(pages)d sivusta.''',
 '''%.2f seconds''':
 '''%.2f sekuntia''',
 '''match''':
@@ -428,8 +424,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Tilauksesi tälle sivulle on poistettu.''',
 '''Can\'t remove regular expression subscription!''':
 '''Säännöllisen lausekkeen tilausta ei voida poistaa!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Poistaaksesi tilauksen, mene tietoihisi ja poista tämä sivu tilausten luettelosta.''',
 '''You have been subscribed to this page.''':
 '''Sinulle on lisätty tilaus tälle sivulle.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -482,8 +476,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Yleisiä laajennustoimintoja''',
 '''Local extension actions''':
 '''Paikallisia laajennustoimintoja''',
-'''Installed parsers''':
-'''Asennetut jäsentimet''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

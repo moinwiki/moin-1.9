@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -78,7 +78,8 @@ msgstr "A lap nem szerkeszthető!"
 msgid "Cannot edit old revisions!"
 msgstr "A régi módosításokat nem lehet szerkeszteni!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "A zárolás lejárt. Emiatt szerkesztési ütközésekre számíthat!"
 
 msgid "Page name is too long, try shorter name."
@@ -494,8 +495,8 @@ msgstr "Belépés"
 msgid " %s and try again."
 msgstr " %s, majd próbálja újra."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(pages)d lapból %(hits)d találat"
 
 #, python-format
@@ -826,9 +827,10 @@ msgstr "Erre a lapra megszűnt az előfizetése."
 msgid "Can't remove regular expression subscription!"
 msgstr "A reguláris kifejezéses előfizetést nem lehet lemondani!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Az előfizetés lemondásához lépjen be a profiljához és törölje ezt a lapot az "
 "előfizetési listából."
@@ -914,8 +916,13 @@ msgstr "Globális kiterjesztőműveletek"
 msgid "Local extension actions"
 msgstr "Lokális kiterjesztőműveletek"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Telepített pásztázók"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Lokális kiterjesztőmakrók"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Telepített processzorok (ELAVULTAK -- használjon inkább pásztázókat)"
@@ -1417,6 +1424,10 @@ msgstr "Szöveg"
 
 msgid "Titles"
 msgstr "Címek"
+
+#, fuzzy
+msgid "Search"
+msgstr "Keresés:"
 
 #, fuzzy
 msgid "Quicklink"

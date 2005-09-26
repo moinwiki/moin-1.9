@@ -42,7 +42,7 @@ Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu
 '''Nemaināma lapa!''',
 '''Cannot edit old revisions!''':
 '''Vecās versijas labot nedrīkst!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
+'''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Lapas slēgšanas laika kvota ir izsmelta. Iespējams labošanas konflikts!''',
 '''Page name is too long, try shorter name.''':
 '''Lapas nosaukums ir pārāks garš, pamēģiniet ko īsāku.''',
@@ -285,8 +285,8 @@ Grupas lapas vārds nav atļauts.''',
 '''Ieiet''',
 ''' %s and try again.''':
 '''%s un mēģiniet vēlreiz.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''Atrasti %(hits)d trāpījumi no %(pages)d lapām.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām.''',
 '''%.2f seconds''':
 '''%.2f sekundes''',
 '''match''':
@@ -399,7 +399,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Create Profile''':
 '''Izveidot profilu''',
 '''Mail me my account data''':
-'''Aizsūtīt man konta datus''',
+'''Atsūtīt manus konta datus''',
 '''No older revisions available!''':
 '''Vecākas versijas nav!''',
 '''Diff for "%s"''':
@@ -488,8 +488,8 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Jūs vairs neesat pierakstīts uz šo lapu.''',
 '''Can\'t remove regular expression subscription!''':
 '''Regulāras izteiksmes pierakstu izdzēst nevar!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Lai atceltu pierakstu, atveriet JūsuIestatījumi un noņemiet šo lapu no pierakstu saraksta.''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''Lai atrakstītos, atveriet savu profilu un,  pierakstu sarakstā, izdzēsiet ierakstus, kas saskan ar šo lapu.''',
 '''You have been subscribed to this page.''':
 '''Tagad Jūs esat pierakstīts uz šo lapu.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -542,8 +542,10 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Globālās papildus darbības''',
 '''Local extension actions''':
 '''Lokālās papildus darbības''',
-'''Installed parsers''':
-'''Ievietotie parseri''',
+'''Global parsers''':
+'''Globālie parsētāji''',
+'''Local extension parsers''':
+'''Lokālo paplašinājumu parsētāji''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)''',
 '''Disabled''':
@@ -609,7 +611,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''You are not allowed to save a drawing on this page.''':
 '''Šajā lapā Jūs nedrīkstat veidot attēlus.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
-'''Slikts fails. Nodzēsiet visus NE ASCII simbolus un pamēģiniet vēlreiz.''',
+'''Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz.''',
 '''You are not allowed to delete attachments on this page.''':
 '''Jūs nedrīkstat dzēst šīs lapas pielikumus.''',
 '''You are not allowed to get attachments from this page.''':
@@ -655,7 +657,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''%(matchcount)d %(matches)s for "%(title)s"''':
 '''%(matchcount)d %(matches)s for "%(title)s"''',
 '''Local Site Map for "%s"''':
-'''Vietnes Karte apmēram "%s"''',
+'''"%s" vietnes karte''',
 '''You are not allowed to rename pages in this wiki!''':
 '''Šajā wiki Jums nav tiesību pārdēvēt lapas!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -705,7 +707,7 @@ Pamēģiniet citu nosaukumu.''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Navigācijas shēma \'%(scheme)s\' nav pieejama!''',
 '''No parent page found!''':
-'''Vecāklapa nav atrasta!''',
+'''Virslapa nav atrasta!''',
 '''Wiki''':
 '''Wiki''',
 '''Slideshow''':
@@ -769,9 +771,9 @@ Pamēģiniet citu nosaukumu.''',
 '''%(errortype)s processing error''':
 '''%(errortype)s apstrādes kļūda''',
 '''Views/day''':
-'''Pārskati/diena''',
+'''Skatīta (dienā)''',
 '''Edits/day''':
-'''Laboti/diena''',
+'''Labota (dienā)''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(chart_title)s no %(filterpage)s''',
 '''green=view
@@ -828,6 +830,8 @@ sarkans=labot''',
 '''Teksts''',
 '''Titles''':
 '''Virsraksti''',
+'''Search''':
+'''Meklēt''',
 '''Quicklink''':
 '''Ātrsaite''',
 '''More Actions:''':
@@ -934,24 +938,4 @@ sarkans=labot''',
 '''PārdēvētLapu''',
 '''SpellCheck''':
 '''Pareizrakstība''',
-'''Refresh''':
-'''Atsvaidzināt''',
-'''Skip to preview''':
-'''Izlaist pirmskatu''',
-'''[current page size \'\'\'%(size)d\'\'\' bytes]''':
-'''[lapas izmērs ir \'\'\'%(size)d\'\'\' baiti]''',
-'''Optional comment about this change''':
-'''Neobligāts komentārs par šo izmaiņu''',
-'''Make this page belong to category %(category)s''':
-'''Pievienot lapu kategorijai %(category)s''',
-'''Can\'t work out query''':
-'''Pieprasījumu nevaru izpildīt''',
-'''Show fancy links''':
-'''Rādīt modernas saites''',
-'''Show Parent''':
-'''Virslapa''',
-'''Show Changes''':
-'''Izmaiņas''',
-'''Get Info''':
-'''Informācija''',
 }

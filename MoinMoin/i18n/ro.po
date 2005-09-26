@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 01:03+0200\n"
+"POT-Creation-Date: 2005-09-26 01:01+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -78,7 +78,8 @@ msgstr "Pagina este imuabilă!"
 msgid "Cannot edit old revisions!"
 msgstr "Nu se pot edita revizii vechi!"
 
-msgid "The lock you held timed out, be prepared for editing conflicts!"
+#, fuzzy
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Blocajul pe care l-aţi înfiinţat a expirat, pregătiţi-vă pentru conflicte de "
 "editare!"
@@ -503,8 +504,8 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s şi încercaţi din nou."
 
-#, python-format
-msgid "%(hits)d results out of %(pages)d pages."
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d rezultate din %(pages)d pagini."
 
 #, python-format
@@ -844,9 +845,10 @@ msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nu se poate şterge înregistrarea cu expresie regulară!"
 
+#, fuzzy
 msgid ""
-"To unsubscribe, go to your profile and delete this page from the "
-"subscription list."
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
 "Pentru a renunţa, ştergeţi această pagină din lista de înregistrări din "
 "profilul dumneavoastră."
@@ -932,8 +934,13 @@ msgstr "Acţiuni de extensie globale"
 msgid "Local extension actions"
 msgstr "Acţiuni de extensie locale"
 
-msgid "Installed parsers"
+#, fuzzy
+msgid "Global parsers"
 msgstr "Analizatoare(parsers) instalate"
+
+#, fuzzy
+msgid "Local extension parsers"
+msgstr "Extensii macro locale"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)"
@@ -1442,6 +1449,10 @@ msgstr "Text"
 
 msgid "Titles"
 msgstr "Titluri"
+
+#, fuzzy
+msgid "Search"
+msgstr "Căutare:"
 
 #, fuzzy
 msgid "Quicklink"

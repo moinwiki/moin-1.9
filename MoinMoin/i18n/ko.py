@@ -38,8 +38,6 @@ macro call.-~
 '''이 글은 고칠 수 없습니다.''',
 '''Cannot edit old revisions!''':
 '''옛 글은 고칠 수 없습니다.''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''글 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!''',
 '''Edit "%(pagename)s"''':
 '''"%(pagename)s" 고침''',
 '''Preview of "%(pagename)s"''':
@@ -259,8 +257,6 @@ space between words. Group page name is not allowed.''':
 '''로그인''',
 ''' %s and try again.''':
 ''' %s 하고 다시 시도하세요.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
 '''%.2f seconds''':
 '''%.2f 초''',
 '''match''':
@@ -415,8 +411,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''이 글을 더 이상 감시하지 않습니다.''',
 '''Can\'t remove regular expression subscription!''':
 '''정규표현식으로 된 감시 목록은 지울 수 없습니다!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 글을 지워 주세요.''',
 '''You have been subscribed to this page.''':
 '''이제 이 글이 변경되면 메일로 알려드리겠습니다.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -469,8 +463,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''일반 확장 액션''',
 '''Local extension actions''':
 '''로컬 확장 액션''',
-'''Installed parsers''':
-'''설치된 파서''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''설치된 프로세서 (낡음 -- 대신 파서를 쓰세요)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':

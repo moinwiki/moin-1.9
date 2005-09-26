@@ -38,8 +38,6 @@ makropolecenie.-~
 '''Strona nie została zmieniona!''',
 '''Cannot edit old revisions!''':
 '''Nie można zmieniać starych wersji!''',
-'''The lock you held timed out, be prepared for editing conflicts!''':
-'''Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty!''',
 '''Edit "%(pagename)s"''':
 '''Modyfikuj "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -259,8 +257,6 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s i spróbuj ponownie.''',
-'''%(hits)d results out of %(pages)d pages.''':
-'''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':
 ''' %.2f sekund.''',
 '''match''':
@@ -415,8 +411,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Subskrybcja tej strony przez Ciebie została usunięta.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nie można usunąć subskrybcji wyrażenia skończonego!''',
-'''To unsubscribe, go to your profile and delete this page from the subscription list.''':
-'''Aby zrezygnować z subskrybcji, wejdź do swojego profilu i usuń stronę z listy subskrybcji.''',
 '''You have been subscribed to this page.''':
 '''Rezygnacja z subskrybcji została przyjęta.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -469,8 +463,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Globalne rozsrzerzenia operacji''',
 '''Local extension actions''':
 '''Lokalne rozszerzenia operacji''',
-'''Installed parsers''':
-'''Zainstalowane analizatory składni''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
