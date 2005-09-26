@@ -88,16 +88,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''שינוי פעוט''',
 '''Remove trailing whitespace from each line''':
 '''הסר רווחים מסופי שורות''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' מלל:: [[Verbatim(\'\')]]\'\'מלל נטוי\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'מלל שמן\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'מלל שמן נטוי\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'מלל מעורב [[Verbatim(\'\'\')]]\'\'\'שמן\'\'\'[[Verbatim(\'\'\')]] ונטוי\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] קו מפריד
- כותרות:: [[Verbatim(= כותרת 1 =)]]; [[Verbatim(== כותרת 2 ==)]]; [[Verbatim(=== כותרת 3 ===)]]; [[Verbatim(==== כותרת 4 ====)]]; [[Verbatim(===== כותרת 5 =====)]]
- רשימות:: רווח וכוכבית " *" לפריט ברשימה; רווח ספרה ונקודה " 1." (או אות , a., A., i., I.) לפריט ברשימה ממוספרת; 1.#n המיספור מתחיל ב–n; רווח לבד מזיח את הפסקה
- קישורים:: [[Verbatim(["סוגריים מרובעים ומרכאות"])]]; [[Verbatim(JoinCapitalizedWords)]]; כתובת; [כתובת]; [כתובת כותרת].
- טבלאות:: || תא טבלה |||| תא טבלה שנפרס על שתי עמודות ||; אין להשאיר רווחים אחרי כותרות וטבלאות''',
 '''Edit was cancelled.''':
 '''עריכה בוטלה.''',
 '''Dear Wiki user,
