@@ -284,7 +284,7 @@ class Formatter(FormatterBase):
         return str
 
     def anchordef(self, id):
-        return '<a id="%s"></a>\n' % (id, )
+        return '<a id="%s"></a>' % (id, ) # do not add a \n here, it breaks pre sections with line_anchordef
 
     def line_anchordef(self, lineno):
         return self.anchordef("line-%d" % lineno)
