@@ -8,6 +8,7 @@ import MoinMoin.parser.wiki, MoinMoin.formatter.text_gedit, MoinMoin.request
 convert = converter.convert
 error = converter.ConvertError
 
+
 class BaseTestCase(unittest.TestCase):
     def do_convert_real(self, func_args, successfull = True):
         try:
