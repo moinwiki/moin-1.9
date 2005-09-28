@@ -1363,7 +1363,6 @@ class RequestCGI(RequestBase):
     """ specialized on CGI requests """
 
     def __init__(self, properties={}):
-        self.open_logs()
         try:
             self._setup_vars_from_std_env(os.environ)
             RequestBase.__init__(self, properties)
