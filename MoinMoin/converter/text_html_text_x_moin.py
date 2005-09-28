@@ -7,10 +7,9 @@
 
 import xml.dom.minidom
 from xml.dom import Node
-from MoinMoin import config
-from MoinMoin import wikiutil
-import MoinMoin.error
 import re, urllib
+
+from MoinMoin import config, wikiutil, error
 
 # Portions (C) International Organization for Standardization 1986
 # Permission to copy in any form is granted for use with
@@ -116,6 +115,11 @@ dtd = ur'''
 <!ENTITY yuml   "&#255;"> <!-- latin small letter y with diaeresis, U+00FF ISOlat1 -->
 ]>
 '''
+
+class ConvertError(error.FatalError):
+    """ Raise when html to wiki conversion fails """
+    name = "MoinMoin Convert Error"
+    
 
 class visitor(object):
     def do(self, tree):
@@ -230,7 +234,7 @@ class convert_tree(visitor):
         elif name in ('ol', 'ul',):
             self.process_list(node)
         else:
-            raise MoinMoin.error.ConvertError("visit_element: Don't support %s element" % name)
+            raise ConvertError("visit_element: Don't support %s element" % name)
 
     def process_br(self, node):
             self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
@@ -266,7 +270,7 @@ class convert_tree(visitor):
                     self.text.append(":: ")
                     self.process_list_item(i)
                 else:
-                    raise MoinMoin.error.ConvertError("Illegal list element %s" % i.localName)
+                    raise ConvertError("Illegal list element %s" % i.localName)
         if self.depth == 1:
             self.text.append("\n")
         self.depth -= 1
@@ -311,7 +315,7 @@ class convert_tree(visitor):
                 elif name == 'dl':
                     self.process_dl(i)
                 else:
-                    raise MoinMoin.error.ConvertError("Illegal list element %s" % i.localName)
+                    raise ConvertError("Illegal list element %s" % i.localName)
         if self.depth == 1:
             self.text.append("\n")
         self.depth -= 1
@@ -371,7 +375,7 @@ class convert_tree(visitor):
                 elif name in ('br',):
                     self.process_br(i)
                 else:
-                    raise MoinMoin.error.ConvertError("process_blockquote: Don't support %s element" % name)
+                    raise ConvertError("process_blockquote: Don't support %s element" % name)
         self.depth -= 1
 
     def process_page(self, node):
@@ -423,7 +427,7 @@ class convert_tree(visitor):
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
         else:
-            raise MoinMoin.error.ConvertError("process_inline: Don't support %s element" % name)
+            raise ConvertError("process_inline: Don't support %s element" % name)
         
         self.text.append(command)
         for i in node.childNodes:
@@ -631,9 +635,9 @@ class convert_tree(visitor):
                     self.process_caption(node, i, style)
                     style = ''
                 else:
-                    raise MoinMoin.error.ConvertError("process_table: Don't support %s element" % name)
+                    raise ConvertError("process_table: Don't support %s element" % name)
             #else:
-            #    raise MoinMoin.error.ConvertError("Unexpected node: %r" % i)
+            #    raise ConvertError("Unexpected node: %r" % i)
         self.text.append("\n")
 
     def process_caption(self, table, node, style=""):
@@ -707,7 +711,7 @@ class convert_tree(visitor):
                     self.process_table_data(i, style=style)
                     style = ""
                 else:
-                    raise MoinMoin.error.ConvertError("process_table_record: Don't support %s element" % name)
+                    raise ConvertError("process_table_record: Don't support %s element" % name)
         self.text.append("||\n")
 
     def _unquote_url(self, url): # XXX is it necessary to have "yet another unquote function"?
@@ -746,7 +750,7 @@ class convert_tree(visitor):
                     pagename = href[len(wikiurl):].lstrip('/')
                     interwikiname = "%s:%s" % (wikitag, pagename)
                 else: 
-                    raise MoinMoin.error.ConvertError("Invalid InterWiki link: '%s'" % href)
+                    raise ConvertError("Invalid InterWiki link: '%s'" % href)
             elif class_ == "badinterwiki" and title:
                 pagename = href
                 interwikiname = "%s:%s" % (title, href)
@@ -840,12 +844,12 @@ class convert_tree(visitor):
                     return
                 else:
                     pass #print name, data, filename, alt
-            raise MoinMoin.error.ConvertError("Unknown smiley icon '%s'" % filename)
+            raise ConvertError("Unknown smiley icon '%s'" % filename)
         # Image URL
         elif src and src.startswith("http://") and wikiutil.isPicture(src):
             self.text.extend([self.white_space, src, self.white_space])
         else:
-            raise MoinMoin.error.ConvertError("Strange image src: '%s'" % src)
+            raise ConvertError("Strange image src: '%s'" % src)
 
 
 def parse(text):
@@ -854,7 +858,7 @@ def parse(text):
     try:
         return xml.dom.minidom.parseString(text)
     except xml.parsers.expat.ExpatError, msg:
-        raise MoinMoin.error.ConvertError('ExpatError: %s' % msg)
+        raise ConvertError('ExpatError: %s' % msg)
 
 def convert(request, pagename, text):
     text = u"<page>%s</page>" % text

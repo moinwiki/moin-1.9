@@ -162,9 +162,3 @@ class InternalError(FatalError):
     name = 'MoinMoin Internal Error'
 
 
-class ConvertError(FatalError):
-    """ Raise when html to wiki conversion fails
-    """
-    name = 'MoinMoin Converter Error'
-
-
