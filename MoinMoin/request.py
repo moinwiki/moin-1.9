@@ -961,7 +961,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                     # Redirect to last page visited
                     if ":" in pagetrail[-1]:
                         wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1]) 
-                        url = wikiurl + wikitail
+                        url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
                         url = Page(self, pagetrail[-1]).url(self)
                 else:
