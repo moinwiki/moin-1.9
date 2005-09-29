@@ -173,6 +173,12 @@ class DefaultConfig:
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_cookie]
+    backup_users = []
+    backup_include = []
+    backup_exclude = [r"(.+\.py(c|o)$)",
+                      r"(/cache/(antispam|i18n|user|wikidicts|lupy.*|spellchecker.dict|text_html))",
+                      r"/edit-lock$",
+                      r"/event-log$",]
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
