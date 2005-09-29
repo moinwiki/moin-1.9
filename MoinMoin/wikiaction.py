@@ -834,7 +834,7 @@ def do_format(pagename, request):
     try:
         Formatter = wikiutil.importPlugin(request.cfg, "formatter",
                                           formatterName, "Formatter")
-    except ImportError:
+    except wikiutil.PluginMissingError:
         # default to plain text formatter
         mimetype = "text/plain"
         from MoinMoin.formatter.text_plain import Formatter
@@ -954,7 +954,7 @@ def getHandler(request, action, identifier="execute"):
     try:
         handler = wikiutil.importPlugin(request.cfg, "action", action,
                                         identifier)
-    except ImportError:
+    except wikiutil.PluginMissingError:
         handler = globals().get('do_' + action)
         
     return handler

@@ -411,7 +411,7 @@ class XmlRpcBase:
                 try:
                     fn = wikiutil.importPlugin(self.request.cfg, 'xmlrpc',
                                                method, 'execute')
-                except ImportError:
+                except wikiutil.PluginMissingError:
                     response = xmlrpclib.Fault(1, "No such method: %s." %
                                                method)
                 else:

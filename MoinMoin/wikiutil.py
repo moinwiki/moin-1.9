@@ -565,74 +565,76 @@ def pagelinkmarkup(pagename):
 ### Plugins
 #############################################################################
 
+class PluginError(Exception):
+    """ Base class for plugin errors """
+
+class PluginMissingError(PluginError):
+    """ Raised when a plugin is not found """
+
+class PluginAttributeError(PluginError):
+    """ Raised when plugin does not contain an attribtue """
+
+
 def importPlugin(cfg, kind, name, function="execute"):
     """ Import wiki or builtin plugin
     
-    Returns function from a plugin module. If the module can not be
-    imported, raise ImportError. If function is not there, raise
-    AttributeError.
+    Returns function from a plugin module name. If name can not be
+    imported, raise PluginMissingError. If function is missing, raise
+    PluginAttributeError.
 
     kind may be one of 'action', 'formatter', 'macro', 'processor',
     'parser' or any other directory that exist in MoinMoin or
     data/plugin
 
     Wiki plugins will always override builtin plugins. If you want
-    specific plugin, use either importWikiPlugin or importName directly.
+    specific plugin, use either importWikiPlugin or importBuiltinPlugin
+    directly.
     
     @param cfg: wiki config instance
     @param kind: what kind of module we want to import
     @param name: the name of the module
     @param function: the function name
-    @rtype: callable
+    @rtype: any object
     @return: "function" of module "name" of kind "kind", or None
     """
     try:
-        plugin = importWikiPlugin(cfg, kind, name, function)
-    except ImportError:
-        modulename = 'MoinMoin.%s.%s' % (kind, name)
-        plugin = pysupport.importName(modulename, function)
-    return plugin
+        return importWikiPlugin(cfg, kind, name, function)
+    except PluginMissingError:
+        return importBuiltinPlugin(kind, name, function)
+
 
 def importWikiPlugin(cfg, kind, name, function):
-    """ Import and cache plugin from the wiki data directory
+    """ Import plugin from the wiki data directory
     
-    Returns function from a plugin module. If the module can not be
-    imported, raise ImportError. If function is not there, raise
-    AttributeError.
-
-    We try to import only ONCE - then cache the plugin, even if we got
-    None. This way we prevent expensive import of existing plugins for
-    each call to a plugin.
-
-    @param cfg: wiki config instance
-    @param kind: what kind of module we want to import
-    @param name: the name of the module
-    @param function: the function name
-    @rtype: callable
-    @return: "function" of module "name" of kind "kind"
+    See importPlugin docstring.
     """
-    try:
-        wikiPlugins = cfg._wiki_plugins
-    except AttributeError:
-        wikiPlugins = cfg._wiki_plugins = {}
-        
-    # Wiki plugins are located under 'wikiconfigname.plugin' module.
-    modulename = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
-    # Try cache or import once from disk
-    try:
-        module = wikiPlugins[modulename]
-    except KeyError:
-        try:
-            module = __import__(modulename, globals(), {}, ['dummy'])
-        except ImportError:
-            module = wikiPlugins[modulename] = None
-    if module is None:
-        raise ImportError
-    return getattr(module, function)
+    if not name in wikiPlugins(kind, cfg):
+        raise PluginMissingError
+    moduleName = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
+    return importNameFromPlugin(moduleName, function)
 
-# If we use threads, make this function thread safe
-if config.use_threads:
-    importWikiPlugin = pysupport.makeThreadSafe(importWikiPlugin)
+
+def importBuiltinPlugin(kind, name, function):
+    """ Import builtin plugin from MoinMoin package 
+    
+    See importPlugin docstring.
+    """
+    if not name in builtinPlugins(kind):
+        raise PluginMissingError
+    moduleName = 'MoinMoin.%s.%s' % (kind, name)
+    return importNameFromPlugin(moduleName, function)
+
+
+def importNameFromPlugin(moduleName, name):
+    """ Return name from plugin module 
+    
+    Raise PluginAttributeError if name does not exists.
+    """
+    module = __import__(moduleName, globals(), {}, [name])
+    try:
+        return getattr(module, name)
+    except AttributeError:
+        raise PluginAttributeError
 
 
 def builtinPlugins(kind):
@@ -702,7 +704,7 @@ def getParserForExtension(cfg, extension):
         for pname in getPlugins('parser', cfg):
             try:
                 Parser = importPlugin(cfg, 'parser', pname, 'Parser')
-            except ImportError:
+            except wikiutil.PluginMissingError:
                 continue
             if hasattr(Parser, 'extensions'):
                 exts = Parser.extensions

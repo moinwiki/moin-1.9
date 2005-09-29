@@ -185,7 +185,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             Dependencies = wikiutil.importPlugin(self.request.cfg, type,
                                                  processor_name,
                                                  "Dependencies")
-        except AttributeError:
+        except wikiutil.PluginAttributeError:
             Dependencies = self.defaultDependencies
         if self.__is_static(Dependencies):
             return self.formatter.processor(processor_name, lines, is_parser)
