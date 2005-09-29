@@ -150,6 +150,7 @@ Version moin--main--1.5:
     * Add support for running behind proxy out of the box with out
       manual url mapping.
       See HelpOnConfiguration/IntegratingWithApache
+    * added a WikiBackup action
 
 Developer notes:
     
