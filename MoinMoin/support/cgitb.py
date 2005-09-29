@@ -486,20 +486,27 @@ class View:
     # System details
 
     def formatSystemDetails(self):
-        details = self.systemDetails() + self.applicationDetails()
+        details = ['Date: %s' % self.date(),
+                   'Platform: %s' % self.platform(),
+                   'Python: %s' % self.python(),]
+        details += self.applicationDetails()
         return (self.formatter.subTitle('System Details') +
                 self.formatter.list(details, {'class': 'system'}))
 
-    def systemDetails(self):
+    def date(self):
         import time
+        rfc2822Date = time.strftime("%a, %d %b %Y %H:%M:%S +0000",
+                                    time.gmtime())
+        return rfc2822Date
+
+    def platform(self):
         try:
-            platform = pydoc.html.escape(' '.join(os.uname()))
+            return pydoc.html.escape(' '.join(os.uname()))
         except:
-            platform = pydoc.html.escape('%s (%s)' % (sys.platform, os.name))
-        return ['Date: %s' % time.ctime(time.time()),
-                'Platform: %s' % platform,
-                'Python: Python %s (%s)' % (sys.version.split()[0],
-                                              sys.executable),]
+            return pydoc.html.escape('%s (%s)' % (sys.platform, os.name))
+
+    def python(self):
+        return 'Python %s (%s)' % (sys.version.split()[0], sys.executable)
 
     def applicationDetails(self):
         """ Override for your application """
