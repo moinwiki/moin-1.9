@@ -150,7 +150,15 @@ Version moin--main--1.5:
     * Add support for running behind proxy out of the box with out
       manual url mapping.
       See HelpOnConfiguration/IntegratingWithApache
-    * added a WikiBackup action
+    * added a WikiBackup action, configure it similar to this:
+      data_dir = "...."
+      backup_include = [data_dir, ] # you can add other dirs here
+      backup_users = ["BackupUserName", ] # some VERY trusted guys
+      You usually don't need to change the default backup_exclude setting.
+      The default backup_include list is EMPTY and so will be your
+      backup in case you don't configure it correctly.
+      If you put your data_dir there, the backup will contain private
+      user data like email addresses and crypted passwords.
 
 Developer notes:
     

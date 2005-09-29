@@ -1,6 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - make a backup of the wiki
+    MoinMoin - make a full backup of the wiki
+
+    Triggering WikiBackup action will check if you are authorized to do a
+    backup and if yes, just send a <siteid>-<date>--<time>.tgz to you.
 
     @copyright: 2005 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -17,9 +20,7 @@ def send_backup(request):
     tarfileobj = tarfile.TarFile(fileobj=gzfileobj, mode="w")
     tarfileobj.posix = False # allow GNU tar's longer file/pathnames
 
-    request.cfg.backup_include = [request.cfg.data_dir]
-    request.cfg.backup_exclude = r"(.+\.py(c|o)$)|(cache/(antispam|i18n|user|wikidicts|lupy.*|spellchecker.dict|text_html))|edit-lock|event-log"
-    exclude_re = re.compile(request.cfg.backup_exclude)
+    exclude_re = re.compile("|".join(request.cfg.backup_exclude))
     for path in request.cfg.backup_include:
         for root, dirs, files in os.walk(path):
             for fname in files:
@@ -38,7 +39,7 @@ def execute(pagename, request):
     # be extra paranoid in dangerous actions
     actname = __name__.split('.')[-1]
     if actname in request.cfg.actions_excluded or \
-            request.user.name not in request.cfg.superuser: # TODO: better use some backup_user list
+            request.user.name not in request.cfg.backup_users:
         return Page.Page(request, pagename).send_page(request,
             msg = _('You are not allowed to use this action.'))
 
