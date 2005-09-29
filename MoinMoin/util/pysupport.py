@@ -57,17 +57,16 @@ def importName(modulename, name):
 
     Used to do dynamic import of modules and names that you know their
     names only in runtime.
+
+    Any error raised here must be handled by the caller.
     
     @param modulename: full qualified mudule name, e.g. x.y.z
     @param name: name to import from modulename
     @rtype: any object
-    @return: name from module or None if there is no such name
+    @return: name from module
     """
-    try:
-        module = __import__(modulename, globals(), {}, [name])
-        return getattr(module, name, None)
-    except ImportError:
-        return None
+    module = __import__(modulename, globals(), {}, [name])
+    return getattr(module, name)
 
 
 def makeThreadSafe(function, lock=None):

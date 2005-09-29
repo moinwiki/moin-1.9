@@ -408,9 +408,10 @@ class XmlRpcBase:
             try:
                 fn = getattr(self, 'xmlrpc_' + method)
             except AttributeError:
-                fn = wikiutil.importPlugin(self.request.cfg, 'xmlrpc', method,
-                                           'execute')
-                if fn is None:
+                try:
+                    fn = wikiutil.importPlugin(self.request.cfg, 'xmlrpc',
+                                               method, 'execute')
+                except ImportError:
                     response = xmlrpclib.Fault(1, "No such method: %s." %
                                                method)
                 else:

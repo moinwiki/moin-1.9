@@ -61,6 +61,7 @@ class Macro:
      * External macros - implemented in either MoinMoin.macro package, or
        in the specific wiki instance in the plugin/macro directory
     """
+    defaultDependency = ["time"]
 
     Dependencies = {
         "TitleSearch" : ["namespace"],
@@ -94,24 +95,31 @@ class Macro:
         self.formatter = self.request.formatter
         self._ = self.request.getText
         self.cfg = self.request.cfg
+        
+        # Initialized on execute
+        self.name = None
 
     def execute(self, macro_name, args):
-        macro = wikiutil.importPlugin(self.request.cfg, 'macro', macro_name)
-        if macro:
-            return macro(self, args)
+        """ Get and execute a macro 
+        
+        Try to get a plugin macro, or a builtin macro or a language
+        macro, or just raise ImportError. 
+        """
+        self.name = macro_name
+        try:
+            execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
+        except ImportError:
+            try:
+                builtins = self.__class__
+                execute = getattr(builtins, '_macro_' + macro_name)
+            except AttributeError:
+                if macro_name in i18n.languages:
+                    execute = builtins._m_lang
+                else:
+                    raise ImportError("Cannot load macro %s" % macro_name)        
+        return execute(self, args)
 
-        builtins = vars(self.__class__)
-        # builtin macro
-        if builtins.has_key('_macro_' + macro_name):
-            return builtins['_macro_' + macro_name](self, args)
-
-        # language pseudo macro
-        if i18n.languages.has_key(macro_name):
-            return self._m_lang(macro_name, args)
-
-        raise ImportError("Cannot load macro %s" % macro_name)
-
-    def _m_lang(self, lang_name, text):
+    def _m_lang(self, text):
         """ Set the current language for page content.
         
             Language macro are used in two ways:
@@ -119,22 +127,21 @@ class Macro:
              * [lang(text)] - insert text with specific lang inside page
         """
         if text:
-            return (self.formatter.lang(1, lang_name) +
+            return (self.formatter.lang(1, self.name) +
                     self.formatter.text(text) +
-                    self.formatter.lang(0, lang_name))
+                    self.formatter.lang(0, self.name))
         
-        self.request.current_lang = lang_name
+        self.request.current_lang = self.name
         return ''
   
     def get_dependencies(self, macro_name):
-        if self.Dependencies.has_key(macro_name):
+        if macro_name in self.Dependencies:
             return self.Dependencies[macro_name]
-        result = wikiutil.importPlugin(self.request.cfg, 'macro', macro_name,
-                                       'Dependencies')
-        if result != None:
-            return result
-        else:
-            return ["time"]
+        try:
+            return wikiutil.importPlugin(self.request.cfg, 'macro',
+                                         macro_name, 'Dependencies')
+        except (ImportError, AttributeError):
+            return self.defaultDependency
 
     def _macro_TitleSearch(self, args):
         return self._m_search("titlesearch")

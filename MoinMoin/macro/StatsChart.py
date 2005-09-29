@@ -21,8 +21,10 @@ def execute(macro, args, **kw):
                 formatter.text(_('You need to provide a chart type!')) +
                 formatter.sysmsg(0))
 
-    func = pysupport.importName("MoinMoin.stats." + args, "linkto")
-    if not func:
+    try:
+        # stats module without 'linkto' will raise AttributeError
+        func = pysupport.importName("MoinMoin.stats." + args, "linkto")
+    except ImportError:
         return (formatter.sysmsg(1) +
                 formatter.text(_('Bad chart type "%s"!') % args) +
                 formatter.sysmsg(0))

@@ -568,8 +568,9 @@ def pagelinkmarkup(pagename):
 def importPlugin(cfg, kind, name, function="execute"):
     """ Import wiki or builtin plugin
     
-    Returns an object from a plugin module or None if module or
-    'function' is not found.
+    Returns function from a plugin module. If the module can not be
+    imported, raise ImportError. If function is not there, raise
+    AttributeError.
 
     kind may be one of 'action', 'formatter', 'macro', 'processor',
     'parser' or any other directory that exist in MoinMoin or
@@ -585,18 +586,20 @@ def importPlugin(cfg, kind, name, function="execute"):
     @rtype: callable
     @return: "function" of module "name" of kind "kind", or None
     """
-    # Try to import from the wiki
-    plugin = importWikiPlugin(cfg, kind, name, function)
-    if plugin is None:
-        # Try to get the plugin from MoinMoin
+    try:
+        plugin = importWikiPlugin(cfg, kind, name, function)
+    except ImportError:
         modulename = 'MoinMoin.%s.%s' % (kind, name)
         plugin = pysupport.importName(modulename, function)
-        
     return plugin
 
 def importWikiPlugin(cfg, kind, name, function):
-    """ Import plugin from the wiki data directory
+    """ Import and cache plugin from the wiki data directory
     
+    Returns function from a plugin module. If the module can not be
+    imported, raise ImportError. If function is not there, raise
+    AttributeError.
+
     We try to import only ONCE - then cache the plugin, even if we got
     None. This way we prevent expensive import of existing plugins for
     each call to a plugin.
@@ -606,27 +609,31 @@ def importWikiPlugin(cfg, kind, name, function):
     @param name: the name of the module
     @param function: the function name
     @rtype: callable
-    @return: "function" of module "name" of kind "kind", or None
+    @return: "function" of module "name" of kind "kind"
     """
-
+    try:
+        wikiPlugins = cfg._wiki_plugins
+    except AttributeError:
+        wikiPlugins = cfg._wiki_plugins = {}
+        
     # Wiki plugins are located under 'wikiconfigname.plugin' module.
     modulename = '%s.plugin.%s.%s' % (cfg.siteid, kind, name)
-    key = (modulename, function)
+    # Try cache or import once from disk
     try:
-        # Try cache first - fast!
-        plugin = cfg._wiki_plugins[key]
-    except (KeyError, AttributeError):
-        # Try to import from disk and cache result - slow!
-        plugin = pysupport.importName(modulename, function)
+        module = wikiPlugins[modulename]
+    except KeyError:
         try:
-            cfg._wiki_plugins[key] = plugin
-        except AttributeError:
-            cfg._wiki_plugins = {key: plugin}
-    return plugin
+            module = __import__(modulename, globals(), {}, ['dummy'])
+        except ImportError:
+            module = wikiPlugins[modulename] = None
+    if module is None:
+        raise ImportError
+    return getattr(module, function)
 
 # If we use threads, make this function thread safe
 if config.use_threads:
     importWikiPlugin = pysupport.makeThreadSafe(importWikiPlugin)
+
 
 def builtinPlugins(kind):
     """ Gets a list of modules in MoinMoin.'kind'
@@ -636,12 +643,14 @@ def builtinPlugins(kind):
     @return: module names
     """
     modulename = "MoinMoin." + kind
-    plugins = pysupport.importName(modulename, "modules")
-    return plugins or []
+    return pysupport.importName(modulename, "modules")
 
 
 def wikiPlugins(kind, cfg):
     """ Gets a list of modules in data/plugin/'kind'
+ 
+    Require valid plugin directory. e.g missing 'parser' directory or
+    missing '__init__.py' file will raise errors.
     
     @param kind: what kind of modules we look for
     @rtype: list
@@ -649,8 +658,7 @@ def wikiPlugins(kind, cfg):
     """
     # Wiki plugins are located in wikiconfig.plugin module
     modulename = '%s.plugin.%s' % (cfg.siteid, kind)
-    plugins = pysupport.importName(modulename, "modules")
-    return plugins or []
+    return pysupport.importName(modulename, "modules")
 
 
 def getPlugins(kind, cfg):
@@ -692,15 +700,17 @@ def getParserForExtension(cfg, extension):
         import types
         etp, etd = {}, None
         for pname in getPlugins('parser', cfg):
-            Parser = importPlugin(cfg, 'parser', pname, 'Parser')
-            if Parser is not None:
-                if hasattr(Parser, 'extensions'):
-                    exts = Parser.extensions
-                    if type(exts) == types.ListType:
-                        for ext in Parser.extensions:
-                            etp[ext] = Parser
-                    elif str(exts) == '*':
-                        etd = Parser
+            try:
+                Parser = importPlugin(cfg, 'parser', pname, 'Parser')
+            except ImportError:
+                continue
+            if hasattr(Parser, 'extensions'):
+                exts = Parser.extensions
+                if type(exts) == types.ListType:
+                    for ext in Parser.extensions:
+                        etp[ext] = Parser
+                elif str(exts) == '*':
+                    etd = Parser
         cfg._EXT_TO_PARSER = etp
         cfg._EXT_TO_PARSER_DEFAULT = etd
         
