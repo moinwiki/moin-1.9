@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Multiple config handler and Configuration defaults class
+    MoinMoin - Multiple configuration handler and Configuration defaults class
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
@@ -10,81 +10,104 @@ import re, os, sys
 from MoinMoin import error
 import MoinMoin.auth as authmodule
 
-_url_re = None
-config = {}
+_url_re_cache = None
+_farmconfig_mtime = None
+_config_cache = {}
 
-def url_re():
+
+def _importConfigModule(name):
+    """ Import and return configuration module and its modification time
+    
+    Handle all errors except ImportError, because missing file is not
+    always an error.
+    
+    @param name: module name
+    @rtype: tuple
+    @return: module, modification time
+    """
+    try:
+        module = __import__(name, globals(), {})
+        mtime = os.path.getmtime(module.__file__)
+    except ImportError:
+        raise
+    except IndentationError, err:
+        msg = 'IndentationError: %s\n' % str(err) + '''
+
+The configuration files are python modules. Therefore, whitespace is
+important. Make sure that you use only spaces, no tabs are allowed here!
+You have to use four spaces at the beginning of the line mostly.
+'''
+        raise error.ConfigurationError(msg)
+    except Exception, err:
+        msg = '%s: %s' % (err.__class__.__name__, str(err))
+        raise error.ConfigurationError(msg)
+    return module, mtime
+
+
+def _url_re():
     """ Return url matching regular expression
 
-    Using this regular expression, we find the config_module for each
-    url.
-    
-    Import wikis from 'farmconfig' on the first time, compile and cache url_re
-    regular expression, and return it.
-
-    Note: You must restart a long running process when you edit
-    farmconfig.py config file.
+    Import wikis list from farmconfig on the first call and compile a
+    regex. Later then return the cached regex.
 
     @rtype: compiled re object
     @return: url to wiki config  matching re
     """
-    global _url_re
-    if not _url_re:
+    global _url_re_cache, _farmconfig_mtime
+    if _url_re_cache is None:
         try:
-            farmconfig = __import__('farmconfig', globals(), {})
-            pattern = '|'.join([r'(?P<%s>%s)' % (name, regex)
-                                for name, regex in farmconfig.wikis])
-            _url_re = re.compile(pattern)
-        except (ImportError, AttributeError):
-            # It is not there, so we maybe have only one config. Fall back to
-            # old config file name and use it for all urls we get.
-            # Or we have a farmconfig file, but it does not contain a wikis
-            # attribute (because of typo or everything commented out as in
-            # sample config).
-            _url_re = re.compile(r'(?P<wikiconfig>.)')
-    return _url_re
+            farmconfig, _farmconfig_mtime = _importConfigModule('farmconfig')
+        except ImportError:
+            # Default to wikiconfig for all urls.
+            _farmconfig_mtime = 0
+            _url_re_cache = re.compile(r'(?P<wikiconfig>.)')
+        else:
+            try:
+                pattern = '|'.join([r'(?P<%s>%s)' % (name, regex)
+                                    for name, regex in farmconfig.wikis])
+                _url_re_cache = re.compile(pattern)
+            except AttributeError:
+                msg = """
+Missing required 'wikis' list in 'farmconfig.py'.
+
+If you run a single wiki you do not need farmconfig.py. Delete it and
+use wikiconfig.py.
+"""
+                raise error.ConfigurationError(msg)    
+    return _url_re_cache
 
 
-def getConfig(url):
-    """ Make and return config object, or raise an error
+def _makeConfig(name):
+    """ Create and return a config instance 
 
-    If the config file is not found or broken, either because of a typo
-    in farmconfig or deleted file or some other error, we raise a
-    ConfigurationError which is handled by our client.
-    
-    @param url: the url from request, possibly matching specific wiki
-    @rtype: DefaultConfig subclass instance
-    @return: config object for specific wiki
+    Timestamp config with either module mtime or farmconfig mtime. This
+    mtime can be used later to invalidate older caches.
+
+    @param name: module name
+    @rtype: DefaultConfig sub class instance
+    @return: new configuration instance
     """
-    match = url_re().match(url)
-    if match and match.groups():
-        # Get config module name from match
-        for name, value in match.groupdict().items():
-            if value: break
+    global _farmconfig_mtime
+    try:
+        module, mtime = _importConfigModule(name)
+        configClass = getattr(module, 'Config')
+        cfg = configClass(name)
+        cfg.cfg_mtime = max(mtime, _farmconfig_mtime)
+    except ImportError, err:
+        msg = 'ImportError: %s\n' % str(err) + '''
 
-        try:
-            return config[name]
-        except KeyError:
-            pass
-        
-        try:
-            module =  __import__(name, globals(), {})
-            Config = getattr(module, 'Config', None)
-            if Config:
-                # Config found, return config instance using name as
-                # site identifier (name must be unique of our url_re).
-                # NOTE that this may reevaluate the Config and spawn
-                # multiple configs for one wiki in a farm.
-                cfg = config.setdefault(name, Config(name))
-                # we can use this to invalidate the cache on cfg change:
-                try:
-                    cfg.cfg_mtime = os.path.getmtime(module.__file__)
-                except:
-                    cfg.cfg_mtime = 0
-                return cfg
-            else:
-                # Broken config file, probably old config from 1.2
-                msg = '''
+Check that the file is in the same directory as the server script. If
+it is not, you must add the path of the directory where the file is
+located to the python path in the server script. See the comments at
+the top of the server script.
+
+Check that the configuration file name is either "wikiconfig.py" or the
+module name specified in the wikis list in farmconfig.py. Note that the
+module name does not include the ".py" suffix.
+'''
+        raise error.ConfigurationError(msg)
+    except AttributeError:
+        msg = '''
 Could not find required "Config" class in "%(name)s.py". This might
 happen if you are trying to use a pre 1.3 configuration file, or made a
 syntax or spelling error.
@@ -92,60 +115,44 @@ syntax or spelling error.
 Please check your configuration file. As an example for correct syntax,
 use the wikiconfig.py file from the distribution.
 ''' % {'name': name}
+        raise error.ConfigurationError(msg)
+    return cfg
 
-        # We don't handle fatal errors here
-        except error.FatalError, err:
-            raise err
 
-        # These errors will not be big surprise:       
-        except ImportError, err:
-            msg = '''
-Import of configuration file "%(name)s.py" failed because of
-ImportError: %(err)s.
-
-Check that the file is in the same directory as the server script. If
-it is not, you must add the path of the directory where the file is located
-to the python path in the server script. See the comments at the top of
-the server script.
-
-Check that the configuration file name is either "wikiconfig.py" or the
-module name specified in the wikis list in farmconfig.py. Note that the module
-name does not include the ".py" suffix.
-''' % {'name': name, 'err': str(err)}
-
-        except IndentationError, err:
-            msg = '''
-Import of configuration file "%(name)s.py" failed because of
-IndentationError: %(err)s.
-
-The configuration files are python modules. Therefore, whitespace is
-important. Make sure that you use only spaces, no tabs are allowed here!
-You have to use four spaces at the beginning of the line mostly.
-''' % {'name': name, 'err': str(err)}
-
-        # But people can have many other errors. We hope that the python
-        # error message will help them.
-        except:
-            err = sys.exc_info()[1]
-            msg = '''
-Import of configuration file "%(name)s.py" failed because of %(class)s:
-%(err)s.
-
-We hope this error message make sense. If not, you are welcome to ask on
-the page http://moinmoin.wikiwikiweb.de/MoinMoinQuestions/ConfigFiles
-or the #moin channel on irc.freenode.net or on the mailing list.
-''' % {'name': name, 'class': err.__class__.__name__, 'err': str(err)}
-
-    else:
-        # URL did not match anything, probably error in farmconfig.wikis 
+def _getConfigName(url):
+    """ Return config name for url or raise """
+    match = _url_re().match(url)
+    if not (match and match.groups()):
         msg = '''
 Could not find a match for url: "%(url)s".
 
 Check your URL regular expressions in the "wikis" list in
 "farmconfig.py". 
 ''' % {'url': url}
+        raise error.ConfigurationError(msg)    
+    for name, value in match.groupdict().items():
+        if value: break
+    return name
 
-    raise error.ConfigurationError(msg)
+
+def getConfig(url):
+    """ Return cached config instance for url or create new one
+
+    If called by many threads in the same time multiple config
+    instances might be created. The first created item will be
+    returned, using dict.setdefault.
+
+    @param url: the url from request, possibly matching specific wiki
+    @rtype: DefaultConfig subclass instance
+    @return: config object for specific wiki
+    """
+    configName = _getConfigName(url)
+    try:
+        config = _config_cache[configName]
+    except KeyError:
+        config = _makeConfig(configName)
+        config = _config_cache.setdefault(configName, config)
+    return config
 
 
 # This is a way to mark some text for the gettext tools so that they don't
@@ -154,10 +161,8 @@ def _(text): return text
 
 
 class DefaultConfig:
-    """ default config values
-
-    FIXME: update according to MoinMoin:UpdateConfiguration
-    """    
+    """ default config values """
+    
     # All acl_right lines must use unicode!
     acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
     acl_rights_before = u""
@@ -449,7 +454,6 @@ Unknown configuration options: %s.
 For more information, visit HelpOnConfiguration. Please check your
 configuration for typos before requesting support or reporting a bug.
 """ % ', '.join(unknown)
-            from MoinMoin import error
             raise error.ConfigurationError(msg)
 
     def _decode(self):
@@ -467,8 +471,6 @@ configuration for typos before requesting support or reporting a bug.
         config files.
         """
         charset = 'utf-8'
-
-        # TODO: add to translation
         message = u'''
 "%(name)s" configuration variable is a string, but should be
 unicode. Use %(name)s = u"value" syntax for unicode variables.
@@ -495,7 +497,7 @@ file. It should match the actual charset of the configuration file.
                     except UnicodeError:
                         raise error.ConfigurationError(message %
                                                        {'name': name})
-                # Look into lists and try to decode string inside them
+                # Look into lists and try to decode strings inside them
                 elif isinstance(attr, list):
                     for i in xrange(len(attr)):
                         item = attr[i]
@@ -523,11 +525,12 @@ file. It should match the actual charset of the configuration file.
             path_pages = os.path.join(path, "pages")
             if not (os.path.isdir(path_pages) and os.access(path_pages, mode)):
                 msg = '''
-"%(attr)s" does not exists at "%(path)s", or has incorrect ownership and
+%(attr)s "%(path)s" does not exists, or has incorrect ownership or
 permissions.
 
-Make sure the directory and the subdirectory pages are owned by the web server and are readable,
-writable and executable by the web server user and group.
+Make sure the directory and the subdirectory pages are owned by the web
+server and are readable, writable and executable by the web server user
+and group.
 
 It is recommended to use absolute paths and not relative paths. Check
 also the spelling of the directory name.
@@ -568,7 +571,7 @@ also the spelling of the directory name.
                 imp.release_lock()
         except ImportError, err:
             msg = '''
-Could not import plugin package from "%(path)s" because of ImportError:
+Could not import plugin package "%(path)s/plugin" because of ImportError:
 %(err)s.
 
 Make sure your data directory path is correct, check permissions, and

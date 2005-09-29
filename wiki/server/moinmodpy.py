@@ -42,6 +42,9 @@ sys.path.insert(0, '/path/to/wikiconfig')
 # Path of the directory where farmconfig is located (if different).
 ## sys.path.insert(0, '/path/to/farmconfig')
 
+# Debug mode - show detailed error reports
+## import os
+## os.environ['MOIN_DEBUG'] = '1'
 
 # Set threads flag, so other code can use proper locking.
 # TODO: It seems that modpy does not use threads, so we don't need to

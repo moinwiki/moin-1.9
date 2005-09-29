@@ -21,6 +21,9 @@ sys.path.insert(0, '/path/to/wikiconfig')
 # Path of the directory where farmconfig is located (if different).
 ## sys.path.insert(0, '/path/to/farmconfig')
 
+# Debug mode - show detailed error reports
+## import os
+## os.environ['MOIN_DEBUG'] = '1'
 
 from MoinMoin.server.standalone import StandaloneConfig, run
 

@@ -8,11 +8,8 @@
 """
 
 import os, time, sys, cgi, StringIO
-
-from MoinMoin import config, wikiutil, user, error
+from MoinMoin import config, wikiutil, user
 from MoinMoin.util import MoinMoinNoFooter, IsWin9x
-import MoinMoin.error
-
 
 # Timing ---------------------------------------------------------------
 
@@ -902,10 +899,9 @@ class RequestBase(object):
         self.setResponseCode(403)
         
     def run(self):
-        # __init__ may have failed
+        # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden:
             return self.finish()
-        
         if self.isForbidden():
             self.makeForbidden()
             if self.forbidden:
@@ -941,13 +937,7 @@ class RequestBase(object):
                 pagename = self.normalizePagename(path)
             else:
                 pagename = None
-        except: # catch and print any exception
-            self.reset_output()
-            self.http_headers()
-            self.print_exception()
-            return self.finish()
-        
-        try:
+
             # Handle request. We have these options:
             
             # 1. If user has a bad user name, delete its bad cookie and
@@ -1054,37 +1044,8 @@ space between words. Group page name is not allowed.""") % self.user.name
             
         except MoinMoinNoFooter:
             pass
-
-        except MoinMoin.error.FatalError, err:
+        except Exception, err:
             self.fail(err)
-            return self.finish()
-            
-        except: 
-            # Catch and print any exception
-            saved_exc = sys.exc_info()
-            self.reset_output()
-            
-            # Send 500 error code
-            self.http_headers(['Status: 500 MoinMoin Internal Error'])
-            self.setResponseCode(500)
-            self.http_headers()
-            
-            self.write(u"\n<!-- ERROR REPORT FOLLOWS -->\n")
-            try:
-                from MoinMoin.support import cgitb
-            except:
-                # no cgitb, for whatever reason
-                self.print_exception(*saved_exc)
-            else:
-                try:
-                    cgitb.Hook(file=self).handle(saved_exc)
-                    # was: cgitb.handler()
-                except:
-                    self.print_exception(*saved_exc)
-                    self.write("\n\n<hr>\n")
-                    self.write("<p><strong>Additionally, cgitb raised this exception:</strong></p>\n")
-                    self.print_exception()
-            del saved_exc
 
         return self.finish()
 
@@ -1104,32 +1065,21 @@ space between words. Group page name is not allowed.""") % self.user.name
         pass
 
     def fail(self, err):
-        """ Fail with nice error message when we can't continue
+        """ Fail when we can't continue
 
-        Log the error, then try to print nice error message. Send 500
-        status code with the error name. Reference: 
+        Send 500 status code with the error name. Reference: 
         http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
 
-        @param err: MoinMoin.error.FatalError instance or subclass.
+        Log the error, then let failure module handle it. 
+
+        @param err: Exception instance or subclass.
         """
-        self.failed = 1 # save state for self.run()
-        self.log(err.asLog())
-        self.http_headers(['Status: 500 %(name)s' % err])
+        self.failed = 1 # save state for self.run()            
+        self.http_headers(['Status: 500 MoinMoin Internal Error'])
         self.setResponseCode(500)
-        self.write(err.asHTML())
-            
-    def print_exception(self, type=None, value=None, tb=None, limit=None):
-        if type is None:
-            type, value, tb = sys.exc_info()
-        import traceback
-        self.write("<h2>request.print_exception handler</h2>\n")
-        self.write("<h3>Traceback (most recent call last):</h3>\n")
-        list = traceback.format_tb(tb, limit) + \
-               traceback.format_exception_only(type, value)
-        self.write("<pre>%s<strong>%s</strong></pre>\n" % (
-            wikiutil.escape("".join(list[:-1])),
-            wikiutil.escape(list[-1]),))
-        del tb
+        self.log('%s: %s' % (err.__class__.__name__, str(err)))        
+        from MoinMoin import failure
+        failure.handle(self)             
 
     def open_logs(self):
         pass
@@ -1373,7 +1323,7 @@ class RequestCGI(RequestBase):
                 msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
                 msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
 
-        except error.FatalError, err:
+        except Exception, err:
             self.fail(err)
             
     def open_logs(self):
@@ -1474,8 +1424,13 @@ class RequestTwisted(RequestBase):
             
             RequestBase.__init__(self, properties)
 
-        except error.FatalError, err:
-            self.delayedError = err
+        except Exception, err:
+            # Wrap err inside an internal error if needed
+            from MoinMoin import error
+            if isinstance(err, error.FatalError):
+                self.delayedError = err
+            else:
+                self.delayedError = error.InternalError(str(err))
 
     def run(self):
         """ Handle delayed errors then invoke base class run """
@@ -1715,7 +1670,7 @@ class RequestStandAlone(RequestBase):
             
             RequestBase.__init__(self, properties)
 
-        except error.FatalError, err:
+        except Exception, err:
             self.fail(err)
 
     def _setup_args_from_cgi_form(self, form=None):
@@ -1799,7 +1754,6 @@ class RequestStandAlone(RequestBase):
         #sys.stderr.write(pformat(more_headers))
         #sys.stderr.write(pformat(self.user_headers))
 
-
 # mod_python/Apache ----------------------------------------------------
 
 class RequestModPy(RequestBase):
@@ -1828,7 +1782,7 @@ class RequestModPy(RequestBase):
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self)
 
-        except error.FatalError, err:
+        except Exception, err:
             self.fail(err)
             
     def rewriteURI(self, env):
@@ -1987,7 +1941,7 @@ class RequestFastCGI(RequestBase):
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self, properties)
 
-        except error.FatalError, err:
+        except Exception, err:
             self.fail(err)
 
     def _setup_args_from_cgi_form(self, form=None):
