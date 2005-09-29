@@ -134,8 +134,10 @@ def loadLanguage(request, lang):
     if needsupdate:    
         from MoinMoin.util import pysupport
         lang_module = "MoinMoin.i18n." + filename(lang)
-        texts = pysupport.importName(lang_module, "text")
-        if not texts:
+        try:
+            # Language module without text dict will raise AttributeError
+            texts = pysupport.importName(lang_module, "text")
+        except ImportError:
             return (None, None)
         meta = pysupport.importName(lang_module, "meta") 
         encoding = meta['encoding']

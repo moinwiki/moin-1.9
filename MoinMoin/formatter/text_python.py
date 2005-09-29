@@ -20,6 +20,8 @@ class Formatter:
         Page must be assembled after the parsing to get working python code.
     """
 
+    defaultDependencies = ["time"]
+    
     def __init__(self, request, static = [], formatter = None, **kw):
         if formatter:
             self.formatter = formatter
@@ -174,19 +176,17 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
                 (self.__adjust_formatter_state(),
                  self.__formatter, name, args))
             
-    def processor(self, processor_name, lines, is_parser = 0):
+    def processor(self, processor_name, lines, is_parser=0):
         """ processor_name MUST be valid!
         prints out the result insted of returning it!
         """
-        if not is_parser:
-            Dependencies = wikiutil.importPlugin(self.request.cfg, "processor",
-                                                 processor_name, "Dependencies")
-        else:
-            Dependencies = wikiutil.importPlugin(self.request.cfg, "parser",
-                                                 processor_name, "Dependencies")
-            
-        if Dependencies == None:
-            Dependencies = ["time"]
+        type = ["processor", "parser"][is_parser]
+        try:
+            Dependencies = wikiutil.importPlugin(self.request.cfg, type,
+                                                 processor_name,
+                                                 "Dependencies")
+        except AttributeError:
+            Dependencies = self.defaultDependencies
         if self.__is_static(Dependencies):
             return self.formatter.processor(processor_name, lines, is_parser)
         else:

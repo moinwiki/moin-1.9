@@ -766,16 +766,9 @@ class Parser:
             self.in_pre = 3
             return self._closeP() + self.formatter.preformatted(1)
         elif s_word[:2] == '#!':
-            # first try to find a processor for this (will go away in 2.0)
+            # First try to find a processor for this (will go away in 2.0)
             processor_name = s_word[2:].split()[0]
-            self.processor = wikiutil.importPlugin(
-                self.request.cfg, "processor", processor_name, "process")
-            # now look for a parser with that name
-            if self.processor is None:
-                self.processor = wikiutil.importPlugin(
-                    self.request.cfg, "parser", processor_name, "Parser")
-                if self.processor:
-                    self.processor_is_parser = 1
+            self.setProcessor(processor_name)
 
         if self.processor:
             self.processor_name = processor_name
@@ -963,15 +956,8 @@ class Parser:
                     processor_name = ''
                     if (line.strip()[:2] == "#!"):
                         processor_name = line.strip()[2:].split()[0]
-                        self.processor = wikiutil.importPlugin(
-                            self.request.cfg, "processor", processor_name, "process")
-                                                               
-                        # now look for a parser with that name
-                        if self.processor is None:
-                            self.processor = wikiutil.importPlugin(
-                                self.request.cfg, "parser", processor_name, "Parser") 
-                            if self.processor:
-                                self.processor_is_parser = 1
+                        self.setProcessor(processor_name)
+
                     if self.processor:
                         self.in_pre = 2
                         self.colorize_lines = [line]
@@ -1090,4 +1076,20 @@ class Parser:
         if self.formatter.in_p: self.request.write(self.formatter.paragraph(0))
         if self.in_table: self.request.write(self.formatter.table(0))
 
-
+    # --------------------------------------------------------------------
+    # Private helpers
+    
+    def setProcessor(self, name):
+        """ Set processer to either processor or parser named 'name' """
+        cfg = self.request.cfg
+        try:
+            self.processor = wikiutil.importPlugin(cfg, "processor", name,
+                                                   "process")
+            self.processor_is_parser = 0
+        except ImportError:
+            try:
+                self.processor = wikiutil.importPlugin(cfg, "parser", name,
+                                                   "Parser")
+                self.processor_is_parser = 1
+            except ImportError:
+                self.processor = None

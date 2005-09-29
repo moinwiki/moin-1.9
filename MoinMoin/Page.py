@@ -1172,13 +1172,14 @@ class Page:
                     ) % {'pagename': self.formatter.text(self.page_name)})
                     request.write(''.join(pi_formtext))
 
-        # try to load the parser
-        Parser = wikiutil.importPlugin(self.request.cfg, "parser",
-                                       self.pi_format, "Parser")
-        if Parser is None:
-            # default to plain text formatter (i.e. show the page source)
-            del Parser
-            from parser.plain import Parser
+        # Load the parser, or default to plain text parser that will
+        # just show the page raw source.
+        # TODO: do we need this magic? any effect on debugging?
+        try:
+            Parser = wikiutil.importPlugin(self.request.cfg, "parser", 
+                                           self.pi_format, "Parser")
+        except ImportError:
+            from MoinMoin.parser.plain import Parser
 
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1258,11 +1259,13 @@ class Page:
             not self._raw_body_modified and
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
-            if not parser:
-                parser = wikiutil.importPlugin(self.request.cfg, "parser",
-                                               self.pi_format, "Parser")
+            if parser is None:
+                try:
+                    parser = wikiutil.importPlugin(self.request.cfg, "parser",
+                                                   self.pi_format, "Parser")
+                except ImportError:
+                    pass
             return getattr(parser, 'caching', False)
-
         return False
 
     def send_page_content(self, request, Parser, body, format_args='',

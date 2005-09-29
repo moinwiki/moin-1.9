@@ -18,19 +18,21 @@ class ImportNameFromMoinTestCase(unittest.TestCase):
     not broken.
     """
 
-    def testNonExisting(self):
-        """ pysupport: import nonexistent moin plugin fail """
-        self.failIf(pysupport.importName('MoinMoin.parser.abcdefghijkl',
-                                         'Parser'))
+    def testNonExistingModule(self):
+        """ pysupport: import nonexistent module raises ImportError """
+        self.assertRaises(ImportError, pysupport.importName,
+                          'MoinMoin.parser.abcdefghijkl','Parser')
+
+    def testNonExistingAttribute(self):
+        """ pysupport: import nonexistent attritbue raises AttributeError """
+        self.assertRaises(AttributeError, pysupport.importName,
+                          'MoinMoin.parser.wiki','NoSuchParser')
 
     def testExisting(self):
-        """ pysupport: import existing moin plugin
-        
-        This tests if a module can be imported from the package
-        MoinMoin. Should never fail!
-        """
-        self.failUnless(pysupport.importName('MoinMoin.parser.wiki',
-                                             'Parser'))
+        """ pysupport: import name from existing module """
+        from MoinMoin.parser import wiki
+        Parser = pysupport.importName('MoinMoin.parser.wiki', 'Parser')
+        self.failUnless(Parser is wiki.Parser)
    
 
 class ImportNameFromPlugin(unittest.TestCase):
@@ -67,7 +69,8 @@ class ImportNonExisiting(ImportNameFromPlugin):
         """ pysupport: import nonexistent wiki plugin fail """
         if self.pluginExists():
             raise TestSkiped('plugin exists: %s' % self.plugin)
-        self.failIf(pysupport.importName(self.pluginModule, self.name))
+        self.assertRaises(ImportError, pysupport.importName,
+                          self.pluginModule, self.name)
 
 
 class ImportExisting(ImportNameFromPlugin):

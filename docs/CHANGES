@@ -151,6 +151,14 @@ Version moin--main--1.5:
       manual url mapping.
       See HelpOnConfiguration/IntegratingWithApache
 
+Developer notes:
+    
+    * Plugin API was improved. When plugin module is missing, an
+      ImportError is raised. When trying to import a missing name from a
+      plugin module, an AttributeError is raised. You must update any
+      code that use wikiutil.importPlugin or util.pysupport.importName.
+      Errors in your plugin should raise now correct tracebacks.
+      See http://moinmoin.wikiwikiweb.de/ErrorHandlingInPlugins
 
   Internal Changes:
     * request.formatter (html) is available for actions now
@@ -199,6 +207,10 @@ Version moin--main--1.5:
       the user that he entered an unknown email address.
     * Fixed SystemInfo, it now also lists parsers in data/plugin/parser dir.
     * Fix error handling on failure, improved error display
+    * Fix error handling when importing plugins or importing modules
+      dynamically. The fix is not backward compatible with older plugins.
+    * Fix chart action, returns a page with error message when chart
+      can not be created.
     
     
 Version 1.4:

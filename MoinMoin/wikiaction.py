@@ -830,13 +830,14 @@ def do_format(pagename, request):
         mimetype = u"text/plain"
 
     # try to load the formatter
-    Formatter = wikiutil.importPlugin(request.cfg, "formatter",
-        mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'}), "Formatter")
-    if Formatter is None:
+    formatterName = mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'})
+    try:
+        Formatter = wikiutil.importPlugin(request.cfg, "formatter",
+                                          formatterName, "Formatter")
+    except ImportError:
         # default to plain text formatter
-        del Formatter
         mimetype = "text/plain"
-        from formatter.text_plain import Formatter
+        from MoinMoin.formatter.text_plain import Formatter
 
     if "xml" in mimetype:
         mimetype = "text/xml"
@@ -847,10 +848,31 @@ def do_format(pagename, request):
 
 
 def do_chart(pagename, request):
-    if request.user.may.read(pagename) and request.cfg.chart_options:
-        chart_type = request.form['type'][0]
-        func = pysupport.importName("MoinMoin.stats." + chart_type, "draw")
-        func(pagename, request)
+    """ Show page charts 
+    
+    TODO: add support for text charts?
+    """
+    _ = request.getText
+    if not request.user.may.read(pagename):
+        msg = _("You are not allowed to view this page.")
+        return request.page.send_page(request, msg=msg)
+    
+    if not request.cfg.chart_options:
+        msg = _("Charts are not available!")
+        return request.page.send_page(request, msg=msg)
+    
+    chart_type = request.form.get('type', [''])[0].strip()
+    if not chart_type:
+        msg = _('You need to provide a chart type!')
+        return request.page.send_page(request, msg=msg)
+    
+    try:
+        func = pysupport.importName("MoinMoin.stats." + chart_type, 'draw')
+    except (ImportError, AttributeError):
+        msg = _('Bad chart type "%s"!') % chart_type
+        return request.page.send_page(request, msg=msg)
+    
+    func(pagename, request)
     raise MoinMoinNoFooter
 
 
@@ -929,8 +951,10 @@ def getHandler(request, action, identifier="execute"):
     from MoinMoin.formatter.text_html import Formatter
     request.formatter = Formatter(request)
 
-    handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
-    if handler is None:
+    try:
+        handler = wikiutil.importPlugin(request.cfg, "action", action,
+                                        identifier)
+    except ImportError:
         handler = globals().get('do_' + action)
         
     return handler

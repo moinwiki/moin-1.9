@@ -476,16 +476,20 @@ class RequestBase(object):
         fallback = 0
         if theme_name == "<default>":
             theme_name = self.cfg.theme_default
-        Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name, 'Theme')
-        if Theme is None:
+        
+        try:
+            Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name,
+                                          'Theme')
+        except ImportError:
             fallback = 1
-            Theme = wikiutil.importPlugin(self.cfg, 'theme',
-                                          self.cfg.theme_default, 'Theme')
-            if Theme is None:
+            try:
+                Theme = wikiutil.importPlugin(self.cfg, 'theme',
+                                              self.cfg.theme_default, 'Theme')
+            except ImportError:
                 fallback = 2
                 from MoinMoin.theme.modern import Theme
+        
         self.theme = Theme(self)
-
         return fallback
 
     def setContentLanguage(self, lang):
