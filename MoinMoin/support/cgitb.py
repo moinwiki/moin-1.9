@@ -359,7 +359,7 @@ class View:
 
     def formatStylesheet(self):
         """ Format inline html stylesheet """
-        return '<style type=text/css>%s</style>' % self.stylesheet()
+        return '<style type="text/css">%s</style>' % self.stylesheet()
 
     def stylesheet(self):
         """ Return stylesheet rules. Override to change rules.

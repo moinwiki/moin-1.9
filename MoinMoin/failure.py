@@ -36,7 +36,6 @@ class View(cgitb.View):
             self.formatMessage(),
             self.formatButtons(),
             self.formatDebugInfo(),
-            self.debugInfoHideScript(),
             self.formatTextTraceback()
             )
         return ''.join(content)
@@ -80,7 +79,8 @@ function toggleDebugInfo() {
     def formatDebugInfo(self):
         """ Put debugging information in a hidden div """
         attributes = {'id': self.debugInfoID}
-        info = [self.formatTraceback(),
+        info = [self.debugInfoHideScript(),
+                self.formatTraceback(),
                 self.formatSystemDetails(),]
         return self.formatter.section(''.join(info), attributes)
 
@@ -88,11 +88,9 @@ function toggleDebugInfo() {
         """ Hide debug info for javascript enabled browsers """
         if self.debug:
             return ''
-        return """
-<script type="text/javascript">
-toggleDebugInfo()
-</script>
-"""
+        return '''
+<script type="text/javascript">toggleDebugInfo()</script>
+'''
 
     def formatTraceback(self):
         return self.formatAllTracebacks(self.formatOneTraceback)
