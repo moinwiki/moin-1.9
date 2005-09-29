@@ -25,31 +25,41 @@ def sendmail(request, to, subject, text, **kw):
     @return: (is_ok, Description of error or OK message)
     """
     import smtplib, socket
-    from email.MIMEText import MIMEText
-    from email.Utils import formatdate
+    from email.Message import Message
+    from email.Charset import Charset, QP
+    from email.Utils import formatdate, make_msgid
     from email.Header import Header
-    from email.Utils import make_msgid
     
     from MoinMoin import config
 
     _ = request.getText
     cfg = request.cfg    
     mail_from = kw.get('mail_from', '') or cfg.mail_from
+    subject = subject.encode(config.charset)    
 
-    # Create a text/plain message body (see RFC2822)
-    # Replace LF with CRLF, encode using config.charset.
+    # Create a text/plain body using CRLF (see RFC2822)
     text = text.replace(u'\n', u'\r\n')
     text = text.encode(config.charset)
-    msg = MIMEText(text, 'plain', config.charset)
+
+    # Create a message using config.charset and quoted printable
+    # encoding, which should be supported better by mail clients.
+    # TODO: check if its really works better for major mail clients
+    msg = Message()
+    charset = Charset(config.charset)
+    charset.header_encoding = QP
+    charset.body_encoding = QP
+    msg.set_charset(charset)    
+    msg.set_payload(text)
     
     # Create message headers
-    msg['From'] = mail_from
     # Don't expose emails addreses of the other subscribers, instead we
     # use the same mail_from, e.g. "My Wiki <noreply@mywiki.org>"
+    msg['From'] = mail_from
     msg['To'] = mail_from
     msg['Date'] = formatdate()
     msg['Message-ID'] = make_msgid()
-    msg['Subject'] = Header(subject, config.charset)
+    msg['Subject'] = Header(subject, charset)
+    
     if cfg.mail_sendmail:
         # Set the BCC.  This will be stripped later by sendmail.
         msg['BCC'] = ','.join(to)
