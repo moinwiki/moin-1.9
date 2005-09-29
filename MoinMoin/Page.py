@@ -1178,7 +1178,7 @@ class Page:
         try:
             Parser = wikiutil.importPlugin(self.request.cfg, "parser", 
                                            self.pi_format, "Parser")
-        except ImportError:
+        except wikiutil.PluginMissingError:
             from MoinMoin.parser.plain import Parser
 
         # start wiki content div
@@ -1263,7 +1263,7 @@ class Page:
                 try:
                     parser = wikiutil.importPlugin(self.request.cfg, "parser",
                                                    self.pi_format, "Parser")
-                except ImportError:
+                except wikiutil.PluginMissingError:
                     pass
             return getattr(parser, 'caching', False)
         return False

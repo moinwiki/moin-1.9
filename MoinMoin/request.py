@@ -480,12 +480,12 @@ class RequestBase(object):
         try:
             Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name,
                                           'Theme')
-        except ImportError:
+        except wikiutil.PluginMissingError:
             fallback = 1
             try:
                 Theme = wikiutil.importPlugin(self.cfg, 'theme',
                                               self.cfg.theme_default, 'Theme')
-            except ImportError:
+            except wikiutil.PluginMissingError:
                 fallback = 2
                 from MoinMoin.theme.modern import Theme
         

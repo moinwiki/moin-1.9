@@ -108,7 +108,7 @@ class Macro:
         self.name = macro_name
         try:
             execute = wikiutil.importPlugin(self.cfg, 'macro', macro_name)
-        except ImportError:
+        except wikiutil.PluginMissingError:
             try:
                 builtins = self.__class__
                 execute = getattr(builtins, '_macro_' + macro_name)
@@ -116,7 +116,7 @@ class Macro:
                 if macro_name in i18n.languages:
                     execute = builtins._m_lang
                 else:
-                    raise ImportError("Cannot load macro %s" % macro_name)        
+                    raise ImportError("Cannot load macro %s" % macro_name)
         return execute(self, args)
 
     def _m_lang(self, text):
@@ -140,7 +140,7 @@ class Macro:
         try:
             return wikiutil.importPlugin(self.request.cfg, 'macro',
                                          macro_name, 'Dependencies')
-        except (ImportError, AttributeError):
+        except wikiutil.PluginError:
             return self.defaultDependency
 
     def _macro_TitleSearch(self, args):

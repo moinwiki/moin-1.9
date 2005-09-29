@@ -1086,10 +1086,10 @@ class Parser:
             self.processor = wikiutil.importPlugin(cfg, "processor", name,
                                                    "process")
             self.processor_is_parser = 0
-        except ImportError:
+        except wikiutil.PluginMissingError:
             try:
                 self.processor = wikiutil.importPlugin(cfg, "parser", name,
                                                    "Parser")
                 self.processor_is_parser = 1
-            except ImportError:
+            except wikiutil.PluginMissingError:
                 self.processor = None
