@@ -94,16 +94,6 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Cambio trivial''',
 '''Remove trailing whitespace from each line''':
 '''Eliminar espacios en blanco al final de cada línea''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Enfasis:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrita\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrita cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mezclada \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrita\'\'\'[[Verbatim(\'\'\')]] y cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] línea horizontal.
- Encabezados:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim(=====)]].
- Listas:: espacio y uno de estos: * asteríscos; 1., a., A., i., I. elementos numerados; 1.#n comienza la numeración en n; un \'espacio\' produce sangría o indentado.
- Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
- Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de tablas o títulos.''',
 '''Edit was cancelled.''':
 '''La edición fue cancelada.''',
 '''Dear Wiki user,

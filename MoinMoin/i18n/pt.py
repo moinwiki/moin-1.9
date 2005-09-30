@@ -89,16 +89,6 @@ Se você não quiser isso, clique \'\'\'%(cancel_button_text)s\'\'\' para cancel
 '''Mudança trivial''',
 '''Remove trailing whitespace from each line''':
 '''Remover espaço em branco no final de cada linha''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Ênfase:: [[Verbatim(\'\')]]\'\'itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrito itálico\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mistura\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]] e itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linha horizontal
- Cabeçalho:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim(=====)]].
- Listas:: Espaço e um dos marcadores * ; 1., a., A., i., I. itens numerados; 1.#n inicia a numeração em n; um espaço por si só indenta o texto.
- Links:: [[Verbatim(PalavrasComIniciaisMaiúsculas)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tabelas:: || primeira coluna |||| segunda coluna ||; nenhum espaçoem branco é permitido após tabelas ou cabeçalhos.''',
 '''Edit was cancelled.''':
 '''Sua edição está cancelada.''',
 '''Dear Wiki user,

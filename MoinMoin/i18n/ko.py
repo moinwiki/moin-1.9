@@ -84,16 +84,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''사소한 변경''',
 '''Remove trailing whitespace from each line''':
 '''끝에 붙은 공백을 지움''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' 강조:: [[Verbatim(\'\')]]\'\'뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'굵게 뉘여쓰기\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'혼합 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]] 뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 가로 줄.
- 제목:: [[Verbatim(=)]] 제목 1 [[Verbatim(=)]]; [[Verbatim(==)]] 제목 2 [[Verbatim(==)]]; [[Verbatim(===)]] 제목 3 [[Verbatim(===)]];   [[Verbatim(====)]] 제목 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 제목 5 [[Verbatim(=====)]].
- 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.
- 연결:: 대소문자 섞어 쓰기([[Verbatim(JoinCapitalizedWords)]]); [[Verbatim(["대괄호 안에 큰 따옴표"])]]; URL; [URL]; [URL 이름].
- 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    절대로 제목이나 표 뒤에는 공백이 있으면 안 됩니다.''',
 '''Edit was cancelled.''':
 '''글 고침을 취소했습니다.''',
 '''Dear Wiki user,

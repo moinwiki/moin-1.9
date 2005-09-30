@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 01:01+0200\n"
-"PO-Revision-Date: 2005-09-23 17:50+0200\n"
+"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"PO-Revision-Date: 2005-09-27 13:21+0200\n"
 "Last-Translator: J-P Gue'rard <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -80,11 +80,10 @@ msgstr "Page immuable !"
 msgid "Cannot edit old revisions!"
 msgstr "Impossible de modifier d'anciennes versions"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Le verrou que vous déteniez à expiré, vos modifications risquent d'engendrer "
-"des conflits"
+"Le verrou que vous déteniez à expiré. Vos modifications risquent d'engendrer "
+"des conflits !"
 
 msgid "Page name is too long, try shorter name."
 msgstr "Nom de page trop long, essayez un nom plus court."
@@ -200,7 +199,9 @@ msgid ""
 " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
 "double quotes\"])]]; url; [url]; [url label].\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles."
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
 " Mise en relief:: [[Verbatim('')]]''italique''[[Verbatim('')]] ; [[Verbatim"
 "(''')]]'''gras'''[[Verbatim(''')]] ; [[Verbatim(''''')]]'''''gras "
@@ -217,7 +218,9 @@ msgstr ""
 " Liens:: [[Verbatim(MotsAccolésAvecMajusculesInitiales)]] ; [[Verbatim"
 "([\"crochets et petits guillemets\"])]] ; url ; [url] ; [url intitulé].\n"
 " Tables:: || texte de la cellule |||| texte s'étendant sur 2 colonnes || ; "
-"aucune espace ne doit suivre la fin d'un tableau ou d'un titre."
+"aucune espace ne doit suivre la fin d'un tableau ou d'un titre.\n"
+"\n"
+"(!) Pour plus d'informations, reportez-vous à l'[\"AideDeL'Édition\"] ou au RésuméDeLaSyntaxe.\n"
 
 msgid "Edit was cancelled."
 msgstr "Modification annulée."
@@ -511,9 +514,9 @@ msgstr "Connexion"
 msgid " %s and try again."
 msgstr "%s et essayez à nouveau."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d pages trouvées parmi les %(pages)d pages."
+msgstr "%(hits)d pages trouvées parmi environ %(pages)d pages."
 
 #, python-format
 msgid "%.2f seconds"
@@ -616,12 +619,11 @@ msgstr "Les mots de passe ne correspondent pas !"
 msgid "Please specify a password!"
 msgstr "Veuillez indiquer un mot de passe !"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"Veuillez indiquer une adresse électronique valide. Si vous perdez vos "
+"Veuillez indiquer votre adresse électronique. Si vous perdez vos "
 "identifiants de connexion, vous pourrez les récupérer par courrier "
 "électronique."
 
@@ -858,12 +860,11 @@ msgstr "Votre abonnement à cette page a été supprimé."
 msgid "Can't remove regular expression subscription!"
 msgstr "Impossible de retirer un abonnement selon une expression rationnelle"
 
-#, fuzzy
 msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
 msgstr ""
-"Pour vous désabonner, allez dans votre profil et supprimez cette page de la "
+"Pour vous désabonner, allez dans votre profil et supprimez le motif correspondant à cette page de la "
 "liste de vos abonnements."
 
 msgid "You have been subscribed to this page."
@@ -947,13 +948,11 @@ msgstr "Actions d'extension globales "
 msgid "Local extension actions"
 msgstr "Actions d'extension locales"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Analyseurs installés"
+msgstr "Analyseurs généraux"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Macros d'extension locales"
+msgstr "Analyseurs d'extension locaux"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Processeurs installés (OBSOLÈTES -- utilisez plutôt les analyseurs)"
@@ -1465,12 +1464,8 @@ msgstr "Texte"
 msgid "Titles"
 msgstr "Titres"
 
-# Il faut utiliser une espace normale après « Rechercher »,
-# sinon, du fait d'un défaut du moteur de Mozilla, le texte
-# « Rechercher » ne s'efface pas de la barre de recherche.
-#, fuzzy
 msgid "Search"
-msgstr "Rechercher :"
+msgstr "Rechercher"
 
 msgid "Quicklink"
 msgstr "Lien rapide"

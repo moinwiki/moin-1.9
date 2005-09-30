@@ -83,16 +83,6 @@ Nếu bạn không muốn vậy, nhấn \'\'\'%(cancel_button_text)s\'\'\' để
 '''Thay đổi nhỏ nhặt''',
 '''Remove trailing whitespace from each line''':
 '''Xoá khoảng trắng ở cuối dòng''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Nhấn mạnh:: [[Verbatim(\'\')]]\'\'nghiêng\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'đậm\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'nghiêng đậm\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'lẫn \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'đậm\'\'\'[[Verbatim(\'\'\')]] và nghiêng\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] thước ngang.
- Đầu đề:: [[Verbatim(=)]] Tiêu đề 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tiêu đề 2 [[Verbatim(==]]; [[Verbatim(===)]] Tiêu đề 3 [[Verbatim(===)]]; [[Verbatim(====)]] Tiêu đề 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tiêu đề 5 [[Verbatim(=====)]].
- Danh sách:: khoảng trắng và: * cho điểm tròn; 1. hay a. hay A. hay i. hay I. cho các mục được đánh dấu; 1.#n để đánh số từ n; khoảng trắng để thụt vào.
- Liên kết:: [[Verbatim(CácChữHoaLiềnNhau)]]; [[Verbatim(["ngoặc vuông và nháy kép"])]]; URL; [URL]; [URL nhãn].
- Bảng:: || nội dung ô |||| nội dung ô trải qua 2 cột ||;    không được có khoảng trắng sau bảng hoặc tiêu đề.''',
 '''Edit was cancelled.''':
 '''Các chỉnh sửa đã bị huỷ.''',
 '''Dear Wiki user,

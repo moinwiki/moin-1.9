@@ -88,16 +88,6 @@ Als u dat niet wilt, klik \'\'\'%(cancel_button_text)s\'\'\' om u veranderingen 
 '''Triviale wijziging''',
 '''Remove trailing whitespace from each line''':
 '''Witruimte verwijderen aan het einde van elke regel''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Nadruk:: [[Verbatim(\'\')]]\'\'cursief\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'vet\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'vet cursief\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'gemixt \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'vet\'\'\'[[Verbatim(\'\'\')]] en cursief\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontale lijn.
- Koppen:: [[Verbatim(=)]] Titel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titel 5 [[Verbatim(=====)]].
- Lijsten:: spatie en één van * punten; 1., a., A., i., I. genummerde punten; 1.#n start nummering bij n; spatie alleen springt in.
- Links:: [[Verbatim(WoordenMetHoofdlettersAanElkaar)]]; [[Verbatim(["haken en dubbele aanhalingstekens"])]];  url; [url]; [url tekst].
- Tabellen:: || tekst in cel |||| tekst in cel over twee kolommen ||;    geen witruimte toegestaan na tabellen of titels.''',
 '''Edit was cancelled.''':
 '''Bewerking werd geannuleerd.''',
 '''Dear Wiki user,

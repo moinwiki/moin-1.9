@@ -42,6 +42,8 @@ Pour utiliser ce formulaire sur d\'autres pages, insérez un appel à la macro 
 '''Page immuable !''',
 '''Cannot edit old revisions!''':
 '''Impossible de modifier d\'anciennes versions''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Le verrou que vous déteniez à expiré. Vos modifications risquent d\'engendrer des conflits !''',
 '''Page name is too long, try shorter name.''':
 '''Nom de page trop long, essayez un nom plus court.''',
 '''Edit "%(pagename)s"''':
@@ -100,12 +102,18 @@ Si vous ne le souhaitez pas, utilisez \'\'\'%(cancel_button_text)s\'\'\' pour an
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
  Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
 ''' Mise en relief:: [[Verbatim(\'\')]]\'\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(\'\'\')]]\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] ; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'gras italique\'\'\'\'\'[[Verbatim(\'\'\'\'\')]] ; [[Verbatim(\'\')]]\'\'mélange de \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] et d\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(----)]] filet horizontal.
  Titres:: [[Verbatim(=)]] Titre 1 [[Verbatim(=)]] ; [[Verbatim(==)]] Titre 2 [[Verbatim(==)]] ; [[Verbatim(===)]] Titre 3 [[Verbatim(===)]] ;   [[Verbatim(====)]] Titre 4 [[Verbatim(====)]] ; [[Verbatim(=====)]] Titre 5 [[Verbatim(=====)]].
  Listes:: une espace suivi de : « * » puces ; « 1. », « a. », « A. », « i. », « I. » énumérations ; « 1.#n » énumération commençant à n ; une espace seule ajoute une indentation.
  Liens:: [[Verbatim(MotsAccolésAvecMajusculesInitiales)]] ; [[Verbatim(["crochets et petits guillemets"])]] ; url ; [url] ; [url intitulé].
- Tables:: || texte de la cellule |||| texte s\'étendant sur 2 colonnes || ; aucune espace ne doit suivre la fin d\'un tableau ou d\'un titre.''',
+ Tables:: || texte de la cellule |||| texte s\'étendant sur 2 colonnes || ; aucune espace ne doit suivre la fin d\'un tableau ou d\'un titre.
+
+(!) Pour plus d\'informations, reportez-vous à l\'["AideDeL\'Édition"] ou au RésuméDeLaSyntaxe.
+''',
 '''Edit was cancelled.''':
 '''Modification annulée.''',
 '''Dear Wiki user,
@@ -281,6 +289,8 @@ Les noms des pages des groupes sont interdits.''',
 '''Connexion''',
 ''' %s and try again.''':
 '''%s et essayez à nouveau.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d pages trouvées parmi environ %(pages)d pages.''',
 '''%.2f seconds''':
 '''%.2f secondes''',
 '''match''':
@@ -347,6 +357,8 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Les mots de passe ne correspondent pas !''',
 '''Please specify a password!''':
 '''Veuillez indiquer un mot de passe !''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Veuillez indiquer votre adresse électronique. Si vous perdez vos identifiants de connexion, vous pourrez les récupérer par courrier électronique.''',
 '''This email already belongs to somebody else.''':
 '''Cet adresse électronique appartient déjà à quelqu\'un d\'autre.''',
 '''User account created!''':
@@ -483,6 +495,8 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Votre abonnement à cette page a été supprimé.''',
 '''Can\'t remove regular expression subscription!''':
 '''Impossible de retirer un abonnement selon une expression rationnelle''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''Pour vous désabonner, allez dans votre profil et supprimez le motif correspondant à cette page de la liste de vos abonnements.''',
 '''You have been subscribed to this page.''':
 '''Vous avez été abonné à cette page.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -535,6 +549,10 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Actions d\'extension globales ''',
 '''Local extension actions''':
 '''Actions d\'extension locales''',
+'''Global parsers''':
+'''Analyseurs généraux''',
+'''Local extension parsers''':
+'''Analyseurs d\'extension locaux''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processeurs installés (OBSOLÈTES -- utilisez plutôt les analyseurs)''',
 '''Disabled''':
@@ -820,6 +838,8 @@ rouge=modifications''',
 '''Texte''',
 '''Titles''':
 '''Titres''',
+'''Search''':
+'''Rechercher''',
 '''Quicklink''':
 '''Lien rapide''',
 '''More Actions:''':

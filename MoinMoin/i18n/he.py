@@ -430,6 +430,12 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''אין אפשרות להסיר מנוי שבוצע על ידי ביטוי רגולרי.''',
 '''You have been subscribed to this page.''':
 '''יש לכם עכשיו מנוי לדף.''',
+'''Charts are not available!''':
+'''גרפים אינם זמינים.''',
+'''You need to provide a chart type!''':
+'''בחרו בסוג גרף.''',
+'''Bad chart type "%s"!''':
+'''סוג גרף שגוי "%s"''',
 '''Required attribute "%(attrname)s" missing''':
 '''ערך חובה "%(attrname)s" חסר''',
 '''Submitted form data:''':
@@ -674,10 +680,6 @@ Try a different name.''':
 '''תצוגה''',
 '''Filename''':
 '''שם קובץ''',
-'''You need to provide a chart type!''':
-'''בחרו בסוג גרף.''',
-'''Bad chart type "%s"!''':
-'''סוג גרף שגוי "%s"''',
 '''Download XML export of this wiki''':
 '''יצא את תוכן הוויקי במבנה XML''',
 '''No wanted pages in this wiki.''':
@@ -714,8 +716,6 @@ red=edit''':
 '''תאריך''',
 '''# of hits''':
 '''# כניסות''',
-'''Charts are not available!''':
-'''גרפים אינם זמינים.''',
 '''Page Size Distribution''':
 '''פיזור גודל דפים''',
 '''page size upper bound [bytes]''':

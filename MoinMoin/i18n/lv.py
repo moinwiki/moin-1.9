@@ -102,12 +102,17 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
  Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
 ''' Uzvērt:: [[Verbatim(\'\')]]\'\'kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'treknā kursīvā\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'jaukti \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]] un kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontāla svītra.
  Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; [[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts [[Verbatim(=====)]].
  Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.
  Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; URL; [URL]; [URL etiķete].
- Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;  Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.''',
+ Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;  Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
+(!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai SintaksesIzziņa.
+''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
 '''Dear Wiki user,
@@ -120,9 +125,9 @@ The following page has been changed by %(editor)s:
 ''':
 '''Godājamais Wiki lietotāj,
 
-Jūs esat parakstīts wiki lapā vai wiki kategorijā "%(sitename)s" par izmaiņu paziņojumu.
+Jūs esat parakstīts wiki lapā vai wiki kategorijā "%(sitename)s" par izmaiņu paziņojumiem.
 
-Sekojošo lapu ir mainījis %(editor)s:
+Sekojošo lapu ir mainījis(-usi) %(editor)s:
 %(pagelink)s
 
 ''',
@@ -151,11 +156,11 @@ Sekojošo lapu ir mainījis %(editor)s:
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## dublējums no lapas "%(pagename)s" arhivēta %(date)s''',
+'''## lapas dublējums "%(pagename)s" arhivēts %(date)s''',
 '''Page could not get locked. Unexpected error (errno=%d).''':
-'''Lapa nevar tikt slēgta. Negaidīta kļūda (errno=%d).''',
+'''Nevar nobloķēt lapu. Neapstrādājama kļūda (errno=%d).''',
 '''Page could not get locked. Missing \'current\' file?''':
-'''Lapa nevar tikt slēgta. Trūkst \'aktuālā\' faila?''',
+'''Nevar nobloķēt lapu. Trūkst \'aktuālā\' faila?''',
 '''You are not allowed to edit this page!''':
 '''Jums nav tiesību labot šo lapu!''',
 '''You cannot save empty pages.''':
@@ -175,8 +180,8 @@ delete the changes of the other person, which is excessively rude!\'\'
 ''' Piedodiet, bet kāds cits jau saglabāja lapu, kamēr Jūs to labojāt.
 
 Lūdzu, izdariet sekojošo: Pārlūkprogrammā nospiediet pogu atpakaļ(back) un izgrieziet un ielīmējiet (cut&paste)
-jūsu veiktās izmaiņas. Tad atgriezieties šeit un nospiediet Labot tekstu (EditText) vēlreiz.
-Tagad vēlreiz veiciet izmaiņas jaunajā lapā.
+Jūsu veiktās izmaiņas. Tad atgriezieties šeit un nospiediet Labot tekstu (EditText) vēlreiz.
+Tagad atkārtoti veiciet izmaiņas jaunajā lapā.
 
 \'\'Nemainiet visu tekstu pilnībā, jo tas izdzēsīs cita cilvēka labojumus.
 Tas būtu ļoti nekrietni no Jūsu puses!\'\'
@@ -186,17 +191,17 @@ Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 '''You did not change the page content, not saved!''':
 '''Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Jūs nevariet mainīt pieejas tesības, Jums nav adminstratora tiesību!''',
+'''Jūs nevariet mainīt pieejas tiesības, Jums nav adminstratora tiesību!''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu novērtēta.''',
+'''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Prioritāte %(owner)s beidzās pirms %(mins_ago)d minūtēm, and you were granted the lock for this page.''',
+'''Prioritāte %(owner)s beidzās pirms %(mins_ago)d minūtēm, un Jums šai lapai tika piešķirta lapas slēgšanas laika kvota.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
 '''Citiem lietotājiem tiks \'\'liegta pieeja\'\' šīs lapas labošanai līdz %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Kamēr Jūs labojiet šo lapu, citi lietotāji tiks \'\'brīdināti\'\' līdz %(bumptime)s.''',
+'''Kamēr Jūs labosiet šo lapu, citi lietotāji tiks \'\'brīdināti\'\' līdz %(bumptime)s.''',
 '''Use the Preview button to extend the locking period.''':
-'''Nospiediet pirmskata pogu, lai paildzinātu pieejas liegšanas periodu.''',
+'''Lai paildzinātu pieejas liegšanas periodu, nospiediet pirmskata pogu''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
 '''Pašlaik %(owner)s ir \'\'liedzis pieeju\'\' labošanai līdz %(timestamp)s, t.i., %(mins_valid)d minūtēm.''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
@@ -204,9 +209,9 @@ Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
 '''Šī lapa pēdējoreiz tika atvērta labošanai vai pirmskatīta %(timestamp)s %(owner)s.[[BR]]
-\'\'\'Jums nevajadzētu\'\' labot\'\' šo lapu vēl vismaz %(mins_valid)d minūtes,
-lai neveidotos konflikts.\'\'\'[[BR]]
-Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
+Lai neveidotos konflikts, \'\'\'Jums nevajadzētu\'\' labot\'\' šo lapu vēl vismaz %(mins_valid)d minūtes.\'\'\'[[BR]]
+
+Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''<unknown>''':
 '''<nezināms>''',
 '''Diffs''':
@@ -216,9 +221,9 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 '''Edit''':
 '''Labot''',
 '''UnSubscribe''':
-'''AtRakstīties''',
+'''Atrakstīties''',
 '''Subscribe''':
-'''PieRakstīties''',
+'''Pierakstīties''',
 '''Raw''':
 '''Nepārstrādāts''',
 '''XML''':
@@ -230,7 +235,7 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 '''Up''':
 '''Augšup''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Publiskot manu e-pasta adres (bez manas wiki mājas lapas) autora informācijā''',
+'''Publiskot manu e-pasta adresi (bez manas wiki mājas lapas) autora informācijā''',
 '''Open editor on double click''':
 '''Labot ar dubultklikšķi''',
 '''Remember last page visited''':
@@ -244,9 +249,9 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 '''Show top/bottom links in headings''':
 '''Rādīt augšā/lejā saites virsrakstos''',
 '''Show fancy diffs''':
-'''Rādīt atšķirības''',
+'''Rādīt stilizētas atšķirības''',
 '''Add spaces to displayed wiki names''':
-'''Atdalīt wiki vārdus ar atstarpēm(probeliem)''',
+'''Atdalīt wiki vārdus ar atstarpēm''',
 '''Remember login information''':
 '''Atcerēties ieejas informāciju''',
 '''Subscribe to trivial changes''':
@@ -277,10 +282,10 @@ Lai izietu no labošanas, nospiediet pogu Atcelt (Cancel).''',
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
 '''Kļūdains lietotāja vārds {{{\'%s\'}}}.
-Lietotāja vārds drīkst saturēt visas (Unicode alpha) ciparu un rakstu zīmes un, ja nepieciešams, vienu atstarpi(probels) starp vārdiem.
+Lietotāja vārds drīkst saturēt \'\'Unicode\'\' burtzīmes un ciparus un, ja nepieciešams, vienu atstarpi starp vārdiem.
 Grupas lapas vārds nav atļauts.''',
 '''You are not allowed to do %s on this page.''':
-'''Jūs nedrīkstat %s šo lapu.''',
+'''Jūs nedrīkstat veikt %s ar šo lapu.''',
 '''Login''':
 '''Ieiet''',
 ''' %s and try again.''':
@@ -461,7 +466,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''No log entries found.''':
 '''Ieraksti par labojumiem netika atrasti.''',
 '''Info for "%s"''':
-'''Informācija no "%s"''',
+'''Informācija par "%s"''',
 '''Show "%(title)s"''':
 '''Rādīt "%(title)s"''',
 '''General Page Infos''':
@@ -477,11 +482,11 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Your quicklink to this page has been removed.''':
 '''Jūsu ātrsaite uz šo lapu ir dzēsta.''',
 '''A quicklink to this page has been added for you.''':
-'''Priekš Jums izeidota ātrsaite uz šo lapu.''',
+'''Jums izveidota ātrsaite uz šo lapu.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt.''',
+'''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevariet lasīt.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Šajā wiki e-pasta sūtīšana ir aizliegta. Sazinieties ar wiki īpašnieku,kurš var atļaut jums sūtīšanu vai noņemt pogu "Parakstīšanās".''',
+'''Šajā wiki e-pasta sūtīšana ir aizliegta. Sazinieties ar wiki īpašnieku,kurš var atļaut Jums sūtīšanu vai noņemt pogu "Parakstīšanās".''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
 '''Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda labajā augšējā stūrīun ievadiet pareizu e-pasta adresi.''',
 '''Your subscribtion to this page has been removed.''':
@@ -489,7 +494,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Can\'t remove regular expression subscription!''':
 '''Regulāras izteiksmes pierakstu izdzēst nevar!''',
 '''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Lai atrakstītos, atveriet savu profilu un,  pierakstu sarakstā, izdzēsiet ierakstus, kas saskan ar šo lapu.''',
+'''Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet ierakstus, kas saskan ar šo lapu.''',
 '''You have been subscribed to this page.''':
 '''Tagad Jūs esat pierakstīts uz šo lapu.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -503,7 +508,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Case-sensitive searching''':
 '''Rakstzīmju jūtīga meklēšana''',
 '''Search Text''':
-'''Meklēt tekstu''',
+'''Meklēt tekstā''',
 '''Go To Page''':
 '''Iet uz lapu''',
 '''Include system pages''':
@@ -569,36 +574,36 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Print View''':
 '''Drukāšanai''',
 '''[%d attachments]''':
-'''[%d pielikumi]''',
+'''[%d piesaistes]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
-'''Šai lapai ir <a href="%(link)s">%(count)s pielikumi</a>. ''',
+'''Šai lapai ir <a href="%(link)s">%(count)s piesaistes</a>. ''',
 '''Filename of attachment not specified!''':
-'''Nav norādīts pielikuma faila vārds!''',
+'''Nav norādīts piesaistes faila vārds!''',
 '''Attachment \'%(filename)s\' does not exist!''':
-'''Pielikums \'%(filename)s\' neeksistē!''',
+'''Piesaiste \'%(filename)s\' neeksistē!''',
 '''To refer to attachments on a page, use \'\'\'{{{attachment:filename}}}\'\'\', 
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''':
-'''Atsaucei uz piesaisti rakstiet, lapas tekstā, \'\'\'{{{attachment:faila nosaukums}}}\'\'\', 
+'''Atsaucei uz piesaisti rakstiet, lapas tekstā, \'\'\'{{{piesaiste:faila nosaukums}}}\'\'\', 
 kā zemāk redzams sarakstā. 
 \'\'\'NEIZMANTOJIET\'\'\' saites {{{[get]}}} URL. 
 Tas var tikt mainīts.''',
 '''No attachments stored for %(pagename)s''':
-'''Lapai %(pagename)s nav pielikuma''',
+'''Lapai %(pagename)s nav piesaistes''',
 '''Edit drawing''':
 '''Labot attēlu''',
 '''Attached Files''':
-'''Pielikumu faili''',
+'''Piesaistītie faili''',
 '''You are not allowed to attach a file to this page.''':
-'''Jūs nedrīkstat veidot pielikumus šai lapai.''',
+'''Jūs nedrīkstat veidot piesaistes šai lapai.''',
 '''New Attachment''':
-'''Jauns Pielikums''',
+'''Jauna Piesaiste''',
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Jūsu augšupielādētais pielikuma fails nekad neaizstās jau esošu.
-Ja tāds pielikuma nosaukums jau eksistēs, lai ielādētu savu jauno pielikumu, jums būs tas jāpārdēvē.
+'''Jūsu augšupielādētais piesaistes fails neaizstās jau esošu.
+Ja tāds saistes nosaukums jau eksistēs, lai ielādētu jaunu piesaisti, Jums būs tas jāpārdēvē.
 Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais nosaukums.''',
 '''File to upload''':
 '''Augšupielādējamais fails''',
@@ -607,33 +612,33 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''Upload''':
 '''Ielādēt''',
 '''File attachments are not allowed in this wiki!''':
-'''Šajā Wiki pielikumi ir aizliegti!''',
+'''Šajā Viki lapu piesaistes ir aizliegti!''',
 '''You are not allowed to save a drawing on this page.''':
 '''Šajā lapā Jūs nedrīkstat veidot attēlus.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
 '''Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz.''',
 '''You are not allowed to delete attachments on this page.''':
-'''Jūs nedrīkstat dzēst šīs lapas pielikumus.''',
+'''Jūs nedrīkstat dzēst šīs lapas piesaistes.''',
 '''You are not allowed to get attachments from this page.''':
-'''Jūs nedrīkstat ņemt šīs lapas pielikumus.''',
+'''Jūs nedrīkstat ņemt šīs lapas piesaistes.''',
 '''You are not allowed to view attachments of this page.''':
-'''Jūs nedrīkstat skatīties šīs lapas pielikumus.''',
+'''Jūs nedrīkstat skatīties šīs lapas piesaistes.''',
 '''Unsupported upload action: %s''':
 '''Nestrādājoša ielāde: %s''',
 '''Attachments for "%(pagename)s"''':
-'''Pielikums lapai "%(pagename)s"''',
+'''Lapas "%(pagename)s" piesaistes''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Pielikums \'%(target)s\' (no faila \'%(filename)s\') jau eksistē.''',
+'''Piesaite \'%(target)s\' (veidota no faila \'%(filename)s\') jau eksistē.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
-'''Pielikums \'%(target)s\' (no faila \'%(filename)s\') ar izmēru %(bytes)d biti pievienots.''',
+'''Piesaiste \'%(target)s\' (no faila \'%(filename)s\') ar izmēru %(bytes)d baiti pievienota.''',
 '''Attachment \'%(filename)s\' deleted.''':
-'''Pielikums \'%(filename)s\' dzēsts.''',
+'''Piesaiste \'%(filename)s\' izdzēsta.''',
 '''Attachment \'%(filename)s\'''':
-'''Pielikums \'%(filename)s\'''',
+'''Piesaiste \'%(filename)s\'''',
 '''Unknown file type, cannot display this attachment inline.''':
-'''Nezināms faila tips, nevaru parādīt pielikumu.''',
+'''Nezināms faila tips, nevar attēlot iestarpināto piesaisti.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''pielikums:%(filename)s no %(pagename)s''',
+'''piesaiste:%(filename)s lapai %(pagename)s''',
 '''You are not allowed to delete this page.''':
 '''Jūs nedrīkstat dzēst šo lapu.''',
 '''This page is already deleted or was never created!''':
@@ -689,13 +694,13 @@ Pamēģiniet citu nosaukumu.''',
 '''Title Search: "%s"''':
 '''Meklēt pēc virsrakstiem: "%s"''',
 '''Full Text Search: "%s"''':
-'''Visa teksta meklēšana "%s"''',
+'''Visa teksta meklēšana: "%s"''',
 '''Full Link List for "%s"''':
 '''Visu saišu saraksts "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
 '''Upload new attachment "%(filename)s"''':
-'''Ielādēt jaunu pielikumu "%(filename)s"''',
+'''Ielādēt jaunu piesaisti "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Izveidot jaunu attēlu "%(filename)s"''',
 '''Edit drawing %(filename)s''':
@@ -721,7 +726,7 @@ Pamēģiniet citu nosaukumu.''',
 '''No quotes on %(pagename)s.''':
 '''Lapā %(pagename)s citātu nav.''',
 '''Upload of attachment \'%(filename)s\'.''':
-'''Pielikuma \'%(filename)s\' augšupielāde.''',
+'''Piesaistes \'%(filename)s\' augšupielāde.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Attēls \'%(filename)s\' saglabāts.''',
 '''%(hours)dh %(mins)dm ago''':
@@ -765,9 +770,9 @@ Pamēģiniet citu nosaukumu.''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Nepieciešams krāsas kods "%(arg)s" pēc "%(key)s"''',
 '''XSLT option disabled, please look at HelpOnConfiguration.''':
-'''XSLT izslēgts; lūdzu, skaties PalīdzētUzstādīt.''',
+'''XSLT izslēgts; lūdzu, skatieties PalīdzētUzstādīt.''',
 '''XSLT processing is not available, please install 4suite 1.x.''':
-'''XSLT apstrāde neiespējama, lūdzu, instalē 4suite 1.x.''',
+'''XSLT apstrāde neiespējama, lūdzu, instalējiet 4suite 1.x.''',
 '''%(errortype)s processing error''':
 '''%(errortype)s apstrādes kļūda''',
 '''Views/day''':
@@ -817,7 +822,7 @@ sarkans=labot''',
 '''[TOP]''':
 '''[AUGŠA]''',
 '''Click to do a full-text search for this title''':
-'''Nospied šeit, lai sāktu šī virsraksta meklēšanu visā tekstā''',
+'''Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā''',
 '''Clear message''':
 '''Notīrīt ziņojumu''',
 '''last edited %(time)s by %(editor)s''':
@@ -827,9 +832,9 @@ sarkans=labot''',
 '''Search:''':
 '''Meklēt:''',
 '''Text''':
-'''Teksts''',
+'''Tekstā''',
 '''Titles''':
-'''Virsraksti''',
+'''Virsrakstos''',
 '''Search''':
 '''Meklēt''',
 '''Quicklink''':

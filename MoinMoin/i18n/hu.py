@@ -91,16 +91,6 @@ Ha nem ezt kívánja, akkor a \'\'\'%(cancel_button_text)s\'\'\' gombot nyomja m
 '''Lényegtelen változtatás''',
 '''Remove trailing whitespace from each line''':
 '''A sorvégi szóközök eltávolítása''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Kiemelés:: [[Verbatim(\'\')]]\'\'kurzív\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'félkövér\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'félkövér kurzív\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'vegyes \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'félkövér\'\'\'[[Verbatim(\'\'\')]] és kurzív\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vízszintes vonal.
- Címek:: [[Verbatim(=)]] 1. szintű cím [[Verbatim(=)]]; [[Verbatim(==)]] 2. szintű cím [[Verbatim(==)]]; [[Verbatim(===)]] 3. szintű cím [[Verbatim(===)]];   [[Verbatim(====)]] 4. szintű cím [[Verbatim(====)]]; [[Verbatim(=====)]] 5. szintű cím [[Verbatim(=====)]].
- Listák:: szóköz és egy: * bütykök (körök és négyzetek); 1., a., A., i., I. sorszámozott elemek; 1.#n a sorszámozás n-nél kezdődik; a szóköz magában beljebb tolja a szöveget.
- Kapcsok (linkek):: [[Verbatim(NagyKezdőbetűsSzavakEgybeírva)]]; [[Verbatim(["szögletes zárójelek és macskakörmök"])]]; URL; [URL]; [URL címke].
- Táblázatok:: || cella |||| két oszlopot átfogó cella ||;    cím és táblázat esetén nem szabad szóközt tenni a sor végére.''',
 '''Edit was cancelled.''':
 '''A szerkesztés visszavonva.''',
 '''Dear Wiki user,

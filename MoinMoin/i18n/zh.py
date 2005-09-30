@@ -42,6 +42,10 @@ macro call.-~
 '''此页不能编辑!''',
 '''Cannot edit old revisions!''':
 '''不能编辑旧版网页!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''你的编辑锁定超时. 可能会发生编辑冲突!''',
+'''Page name is too long, try shorter name.''':
+'''网页名称太长, 试试短一些的名称''',
 '''Edit "%(pagename)s"''':
 '''编辑"%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -82,8 +86,14 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 如果你不同意, 按 \'\'\'%(cancel_button_text)s\'\'\' 取消您的修改.''',
 '''Preview''':
 '''预览''',
+'''GUI Mode''':
+'''图形界面模式''',
+'''Comment:''':
+'''备注:''',
 '''<No addition>''':
 '''<不加>''',
+'''Add to: %(category)s''':
+'''添加到: %(category)s''',
 '''Trivial change''':
 '''小修改''',
 '''Remove trailing whitespace from each line''':
@@ -92,12 +102,18 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
  Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
 ''' 强调:: [[Verbatim(\'\')]]\'\'斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'粗体\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜体 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'混合\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗\'\'\'[[Verbatim(\'\'\')]]斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 横线.
  标题:: [[Verbatim(=)]] 标题 1 [[Verbatim(=)]]; [[Verbatim(==)]] 标题 2 [[Verbatim(==)]]; [[Verbatim(===)]] 标题 3 [[Verbatim(===)]];   [[Verbatim(====)]] 标题 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 标题 5 [[Verbatim(=====)]].
  列表:: 空格加下列符号之一: * 代表圆点; 1., a., A., i., I. 代表编号; 1.#n 从n开始编号; 空格本身代表缩进.
  链接:: [[Verbatim(JoinCapitalizedWords两个以上大写开头字)]]; [[Verbatim(["方括号加双引号"])]]; url; [url]; [url 说明].
- 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空格.''',
+ 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空格.
+
+(!) 更多帮助见["帮助-编辑"]["语法参考"], or see HelpOnEditing or SyntaxReference.
+''',
 '''Edit was cancelled.''':
 '''编辑取消了.''',
 '''Dear Wiki user,
@@ -150,6 +166,8 @@ The following page has been changed by %(editor)s:
 '''您无权编辑此页!''',
 '''You cannot save empty pages.''':
 '''不能保存空白网页.''',
+'''You already saved this page!''':
+'''您已经存储了此页!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -217,6 +235,8 @@ To leave the editor, press the Cancel button.''':
 '''刷新''',
 '''Up''':
 '''上层''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''在作者信息中显示我的电子邮件地址(不是我的维基个人主页)''',
 '''Open editor on double click''':
 '''双击打开编辑器''',
 '''Remember last page visited''':
@@ -241,6 +261,10 @@ To leave the editor, press the Cancel button.''':
 '''永久停用此帐户''',
 '''Name''':
 '''用户名''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(请用Firstname\'\'\'\'\'\'Lastname, 或者汉语拼音Xing\'\'\'\'\'\'Ming)''',
+'''Alias-Name''':
+'''别名''',
 '''Password''':
 '''密码''',
 '''Password repeat''':
@@ -267,6 +291,8 @@ space between words. Group page name is not allowed.''':
 '''登录''',
 ''' %s and try again.''':
 '''%s后再试.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''在大约%(pages)d页中找到%(hits)d个结果.''',
 '''%.2f seconds''':
 '''%.2f秒''',
 '''match''':
@@ -280,8 +306,37 @@ Contact the owner of the wiki, who can enable email.''':
 '''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
 '''Please provide a valid email address!''':
 '''请提供一个有效的电子邮件地址!''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''登录帐号: %s
+
+登录口令: %s
+
+登录URL: %s/?action=userform&uid=%s
+''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''找不到用\'%(email)s\'登记的帐户!!''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''有人要求将他的帐号资料寄到这个电子邮件地址.
+
+如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表中. 
+您可以用拷贝粘贴的方法.
+
+成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. 
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] 您的维基帐号资料''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
 '''Missing password. Please enter user name and password.''':
@@ -300,8 +355,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''两次输入的密码不符!''',
 '''Please specify a password!''':
 '''请输入一个密码!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回.''',
 '''This email already belongs to somebody else.''':
 '''别人已经用这个电子邮件注册过了.''',
+'''User account created!''':
+'''用户帐号成功创建!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''未能装载主题\'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -310,12 +369,20 @@ Contact the owner of the wiki, who can enable email.''':
 '''缺省''',
 '''<Browser setting>''':
 '''<根据浏览器设置>''',
+'''the one preferred''':
+'''您喜爱的''',
+'''free choice''':
+'''随意选择''',
 '''Save''':
 '''保存''',
 '''Logout''':
 '''登出''',
 '''Preferred theme''':
 '''主题''',
+'''Editor Preference''':
+'''编辑器喜好''',
+'''Editor shown on UI''':
+'''界面上显示的编辑器''',
 '''Time zone''':
 '''时区''',
 '''Your time is''':
@@ -412,6 +479,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''您不可以把此页恢复成旧版!''',
 '''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
 '''您还没注册. 请点右上角的"用户设置"并注册.''',
+'''Your quicklink to this page has been removed.''':
+'''删除了您对本页的快捷链接.''',
+'''A quicklink to this page has been added for you.''':
+'''本页已加入到您的快捷链接.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''您不能订阅无权阅读的网页!''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
@@ -422,6 +493,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''您终止了订阅此页.''',
 '''Can\'t remove regular expression subscription!''':
 '''不能取消用正规表达式定义的订阅!''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项.''',
 '''You have been subscribed to this page.''':
 '''您已经订阅了此页.''',
 '''Required attribute "%(attrname)s" missing''':
@@ -474,8 +547,18 @@ Contact the owner of the wiki, who can enable email.''':
 '''全局扩充操作''',
 '''Local extension actions''':
 '''本地扩充操作''',
+'''Global parsers''':
+'''全局分析插件(parsers)''',
+'''Local extension parsers''':
+'''本地扩充分析插件(parsers)''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''已安装的处理插件(processors, 不再支持，请使用分析插件)''',
+'''Disabled''':
+'''不再有效''',
+'''Enabled''':
+'''有效''',
+'''Lupy search''':
+'''Lupy搜索''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''请输入比{{{"%s"}}}更精确的关键字!!''',
 '''ERROR in regex \'%s\'''':
@@ -523,6 +606,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 这样就会采用原文件名.''',
 '''File to upload''':
 '''待上载文件''',
+'''Rename to''':
+'''改名为''',
 '''Upload''':
 '''上载''',
 '''File attachments are not allowed in this wiki!''':
@@ -683,8 +768,16 @@ Try a different name.''':
 '''"%(key)s"后面要的是整数"%(arg)s"''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''"%(key)s"后面要接颜色值"%(arg)s"''',
+'''XSLT option disabled, please look at HelpOnConfiguration.''':
+'''XSLT选项没有激活, 请参阅 ["帮助-设置"], 或者HelpOnConfiguration.''',
+'''XSLT processing is not available, please install 4suite 1.x.''':
+'''没有XSLT处理套件. 请安装 4suite 1.x''',
 '''%(errortype)s processing error''':
 '''%(errortype)s处理错误''',
+'''Views/day''':
+'''点击数/天''',
+'''Edits/day''':
+'''改动次数/天''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(filterpage)s的%(chart_title)s图''',
 '''green=view
@@ -703,6 +796,8 @@ red=edit''':
 '''网页大小上界[字节]''',
 '''# of pages of this size''':
 '''相同大小的网页数''',
+'''User agent''':
+'''用户客户端''',
 '''Others''':
 '''其它''',
 '''Distribution of User-Agent Types''':
@@ -739,6 +834,10 @@ red=edit''':
 '''正文''',
 '''Titles''':
 '''标题''',
+'''Search''':
+'''搜索''',
+'''Quicklink''':
+'''快捷链接''',
 '''More Actions:''':
 '''更多操作''',
 '''Show Raw Text''':
@@ -757,8 +856,16 @@ red=edit''':
 '''本站地图''',
 '''Do''':
 '''执行''',
+'''Parent Page''':
+'''上层网页''',
+'''Edit (Text)''':
+'''编辑(文本方式)''',
+'''Edit (GUI)''':
+'''编辑(图形界面)''',
 '''Immutable Page''':
 '''只读网页''',
+'''Infos''':
+'''本页资料''',
 '''Show %s days.''':
 '''显示%s天''',
 '''EditText''':
@@ -783,8 +890,10 @@ red=edit''':
 '''加入的内容标记成这样.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''无发连接到邮件服务器\'%(server)s\': %(reason)s''',
+'''Mail not sent''':
+'''邮件发送失败''',
 '''Mail sent OK''':
-'''邮件发送成功''',
+'''邮件成功发送''',
 '''FrontPage''':
 '''首页''',
 '''RecentChanges''':

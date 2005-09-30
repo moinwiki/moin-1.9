@@ -4,7 +4,7 @@
 meta = {
   'language': """Português do Brasil""",
   'elanguage': """Brazillian Portuguese""",
-  'maintainer': """ASCII-only here <cerdiogenes@yahoo.com.br>""",
+  'maintainer': """Leonardo Gregianin <leonardo@riseup.net>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -41,6 +41,8 @@ Para usar este formulário em outras páginas, insira uma macro do tipo
 '''A página não é editável!''',
 '''Cannot edit old revisions!''':
 '''Não é possível editar revisões antigas!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Seu tempo de edição se esgotou. Esteja preparado para editar conflitos!''',
 '''Page name is too long, try shorter name.''':
 '''Nome desta página é muito grande, tente um mais curto.''',
 '''Edit "%(pagename)s"''':
@@ -99,12 +101,18 @@ Se você discorda, aperte o botão \'\'\'%(cancel_button_text)s\'\'\' para cance
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
  Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
 ''' Ênfase:: [[Verbatim(\'\')]]\'\'itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrito itálico\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'misto \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]] e itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linha horizontal.
  Títulos:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim(=====)]].
- Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas numeradase; 1.#n começar numeração em n; espaço sozinho indenta.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets e aspas duplas"])]]; url; [url]; [etiqueta da urll].
- Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas ||;    espaços em brando não são permitidos após tabelas ou títulos. ''',
+ Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas numeradase; 1.#n começar numeração em n; espaço sozinho identa.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets e aspas duplas"])]]; url; [url]; [etiqueta da url].
+ Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas ||;    espaços em brando não são permitidos após tabelas ou títulos.
+
+(!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.
+''',
 '''Edit was cancelled.''':
 '''A edição foi cancelada.''',
 '''Dear Wiki user,
@@ -283,6 +291,8 @@ entre as palavras. Nome de grupo de página não é permitido.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d páginas localizadas de %(pages)d páginas.''',
 '''%.2f seconds''':
 '''%.2f segundos''',
 '''match''':
@@ -347,8 +357,12 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''As senhas não conferem!''',
 '''Please specify a password!''':
 '''Por favor, informe uma senha!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Por favor informe um endereço de email. Se você perder sua informação de login, você poderá recuperá-la por email.''',
 '''This email already belongs to somebody else.''':
 '''Este email já pertence a alguém cadastrado neste site.''',
+'''User account created!''':
+'''Conta de Usuário criada!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Não foi possível carregar o tema \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -481,8 +495,10 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Sua subscrição a esta página foi removida.''',
 '''Can\'t remove regular expression subscription!''':
 '''Não é possível remover expressão regular correspondendo a subscrição!''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''Para remover a inscrição, vá para seu perfil e apague esta página da lista de páginas inscritas.''',
 '''You have been subscribed to this page.''':
-'''A sua subscrição a esta página foi efetivada.''',
+'''Sua inscrição a esta página foi efetivada.''',
 '''Required attribute "%(attrname)s" missing''':
 '''O atributo necessário "%(attrname)s" está faltando.''',
 '''Submitted form data:''':
@@ -533,6 +549,10 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Ações de extensão global''',
 '''Local extension actions''':
 '''Ações de extensão local''',
+'''Global parsers''':
+'''Parsers globais''',
+'''Local extension parsers''':
+'''Extensão de parsers locais''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Processadores instalados (OBSOLETO -- utilize Parsers)''',
 '''Disabled''':
@@ -817,6 +837,10 @@ vermelho=editar''',
 '''Texto''',
 '''Titles''':
 '''Títulos''',
+'''Search''':
+'''Procurar''',
+'''Quicklink''':
+'''Links rápidos''',
 '''More Actions:''':
 '''Mais Ações:''',
 '''Show Raw Text''':
@@ -835,12 +859,16 @@ vermelho=editar''',
 '''Mostrar Mapa Local do Site''',
 '''Do''':
 '''Fazer''',
+'''Parent Page''':
+'''Página Principal''',
 '''Edit (Text)''':
 '''Editar (Texto)''',
 '''Edit (GUI)''':
 '''Editar (GUI)''',
 '''Immutable Page''':
 '''Página Não Editável''',
+'''Infos''':
+'''Infos''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
 '''EditText''':
@@ -865,8 +893,10 @@ vermelho=editar''',
 '''Adições são marcadas assim.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Conexão ao servidor de correio \'%(server)s\' falhou: %(reason)s''',
+'''Mail not sent''':
+'''E-mail não enviado''',
 '''Mail sent OK''':
-'''Mail enviado OK''',
+'''E-mail enviado''',
 '''FrontPage''':
 '''PáginaPrincipal''',
 '''RecentChanges''':

@@ -90,16 +90,6 @@ Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru an
 '''Modificare minoră''',
 '''Remove trailing whitespace from each line''':
 '''Ştergere spaţii de la sfârşitul fiecărei linii''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Accentuare:: [[Verbatim(\'\')]]\'\'înclinare\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'îngroşare\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'îngroşare şi înclinare\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'înclinare şi\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'îngroşare\'\'\'[[Verbatim(\'\'\')]] combinate\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linie orizontală.
- Antete:: [[Verbatim(=)]] Titlu 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titlu 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titlu 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titlu 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titlu 5 [[Verbatim(=====)]].
- Liste:: spaţiu şi unul dintre: * buline; 1., a., A., i., I. elemente numerotate; 1.#n începere numărare de la n; spaţiul singur indentează.
- Legături:: [[Verbatim(UnireCuvintecuIniţialăMare)]]; [[Verbatim(["paranteze drepte şi ghilimele"])]]; url; [url]; [url etichetă].
- Tabele:: || text în celulă |||| text în celulă pe 2 coloane ||;    nu se permit caractere spaţiu după tabele sau titluri.''',
 '''Edit was cancelled.''':
 '''Editarea a fost anulată''',
 '''Dear Wiki user,

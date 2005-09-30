@@ -84,16 +84,6 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 '''Drobna zmiana''',
 '''Remove trailing whitespace from each line''':
 '''Usuń puste znaki z przodu każdej linii''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Wyróżnienie [[Verbatim(\'\')]]\'\'kursywa\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'pogrubienie\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'pogrubiona kursywas\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mix \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'pogrubienie\'\'\'[[Verbatim(\'\'\')]] i kursywa\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] pozioma linia.
- Nagłówki:: [[Verbatim(=)]] Tytuł 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tytuł 2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3  [[Verbatim(===)]];   [[Verbatim(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 [[Verbatim(=====)]].
- Listy:: spacja plus jedno z: * znak wypunktowania; 1., a., A., i., I.  1.#n rozpoczyna numerowanie od n; spacja pojedyncze wcięcia.
- Odnośniki: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["nawiasy i znaki cudzysłowia"])]]; url; [url]; [url label].
- Tabele:: || tekst pola |||| tekst na dwa pola ||;    niedopuszczalna jest spacja po tabelach lub tytułach.''',
 '''Edit was cancelled.''':
 '''Zmiany zostały anulowane''',
 '''Dear Wiki user,
