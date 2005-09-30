@@ -225,6 +225,8 @@ Developer notes:
       dynamically. The fix is not backward compatible with older plugins.
     * Fix chart action, returns a page with error message when chart
       can not be created.
+    * use Header() to enable correct processing of non-ASCII From: and To: in
+      generated emails
     
     
 Version 1.4:

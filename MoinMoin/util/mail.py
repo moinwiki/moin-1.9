@@ -35,6 +35,7 @@ def sendmail(request, to, subject, text, **kw):
     _ = request.getText
     cfg = request.cfg    
     mail_from = kw.get('mail_from', '') or cfg.mail_from
+    mail_from = Header(mail_from)
     subject = subject.encode(config.charset)    
 
     # Create a text/plain body using CRLF (see RFC2822)
