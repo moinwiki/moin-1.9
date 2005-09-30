@@ -6,9 +6,37 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
+import os, re
+from email.Header import Header
+from MoinMoin import config
 
 _transdict = {"AT": "@", "DOT": ".", "DASH": "-"}
+
+
+def encodeAddress(address, charset):
+    """ Encode email address to enable non ascii names 
+    
+    e.g. '"Jürgen Hermann" <jh@web.de>'. According to the RFC, the name
+    part should be encoded, the address should not.
+    
+    @param address: email address, posibly using '"name" <address>' format
+    @type address: unicode
+    @param charset: sepcifying both the charset and the encoding, e.g
+        quoted printble or base64.
+    @type charset: email.Charset.Charset instance
+    @rtype: string
+    @return: encoded address
+    """   
+    composite = re.compile(r'(?P<phrase>.+)(?P<angle_addr>\<.*\>)', 
+                           re.UNICODE)
+    match = composite.match(address)
+    if match:
+        phrase = match.group('phrase').encode(config.charset)
+        phrase = str(Header(phrase, charset))
+        angle_addr = match.group('angle_addr').encode(config.charset)       
+        return phrase + angle_addr
+    else:
+        return address.encode(config.charset)
 
 
 def sendmail(request, to, subject, text, **kw):
@@ -20,7 +48,8 @@ def sendmail(request, to, subject, text, **kw):
     @param to: recipients (list)
     @param subject: subject of email (unicode)
     @param text: email body text (unicode)
-    @keyword mail_from: override default mail_from (string)
+    @keyword mail_from: override default mail_from
+    @type mail_from: unicode
     @rtype: tuple
     @return: (is_ok, Description of error or OK message)
     """
@@ -28,9 +57,6 @@ def sendmail(request, to, subject, text, **kw):
     from email.Message import Message
     from email.Charset import Charset, QP
     from email.Utils import formatdate, make_msgid
-    from email.Header import Header
-    
-    from MoinMoin import config
 
     _ = request.getText
     cfg = request.cfg    
@@ -53,9 +79,8 @@ def sendmail(request, to, subject, text, **kw):
     
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
-    # use the same mail_from, e.g. "My Wiki <noreply@mywiki.org>"
-    sitename = Header(request.cfg.sitename.encode(config.charset), charset)
-    address = '"%s" <%s>' % (sitename, mail_from) 
+    # use the same mail_from, e.g. u"Jürgen Wiki <noreply@mywiki.org>"
+    address = encodeAddress(mail_from, charset) 
     msg['From'] = address
     msg['To'] = address
     msg['Date'] = formatdate()
@@ -66,7 +91,7 @@ def sendmail(request, to, subject, text, **kw):
         # Set the BCC.  This will be stripped later by sendmail.
         msg['BCC'] = ','.join(to)
         # Set Return-Path so that it isn't set (generally incorrectly) for us.
-        msg['Return-Path'] = mail_from
+        msg['Return-Path'] = address
 
     # Send the message
     if not cfg.mail_sendmail:
