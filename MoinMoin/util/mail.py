@@ -54,7 +54,6 @@ def sendmail(request, to, subject, text, **kw):
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
     # use the same mail_from, e.g. "My Wiki <noreply@mywiki.org>"
-    mail_from = Header(mail_from, charset)
     msg['From'] = mail_from
     msg['To'] = mail_from
     msg['Date'] = formatdate()
