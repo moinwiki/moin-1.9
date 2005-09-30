@@ -41,8 +41,8 @@ def sendmail(mfrom, mto, subject, text):
     
     # Create a text/plain message
     msg = MIMEText(text, 'plain', charset)
-    msg['From'] = mfrom
-    msg['To'] = ', '.join(mto)
+    msg['From'] = Header(mfrom)
+    msg['To'] = Header(', '.join(mto))
     msg['Subject'] = Header(subject, charset)
     msg['Date'] = formatdate()
     
