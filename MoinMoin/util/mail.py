@@ -35,7 +35,6 @@ def sendmail(request, to, subject, text, **kw):
     _ = request.getText
     cfg = request.cfg    
     mail_from = kw.get('mail_from', '') or cfg.mail_from
-    mail_from = Header(mail_from)
     subject = subject.encode(config.charset)    
 
     # Create a text/plain body using CRLF (see RFC2822)
@@ -55,6 +54,7 @@ def sendmail(request, to, subject, text, **kw):
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
     # use the same mail_from, e.g. "My Wiki <noreply@mywiki.org>"
+    mail_from = Header(mail_from, charset)
     msg['From'] = mail_from
     msg['To'] = mail_from
     msg['Date'] = formatdate()
