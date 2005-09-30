@@ -93,11 +93,11 @@ class Config(DefaultConfig):
     # Configure to enable subscribing to pages (disabled by default)
     # or sending forgotten passwords.
 
-    # SMTP server, e.g. "mail.provider.com" (empty or None to disable mail)
+    # SMTP server, e.g. "mail.provider.com" (None to disable mail)
     mail_smarthost = ""
 
-    # The return address, e.g "My Wiki <noreply@mywiki.org>"
-    mail_from = ""
+    # The return address, e.g u"Jürgen Wiki <noreply@mywiki.org>" [Unicode]
+    mail_from = u""
 
     # "user pwd" if you need to use SMTP AUTH
     mail_login = ""

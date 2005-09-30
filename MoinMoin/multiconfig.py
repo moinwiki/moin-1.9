@@ -226,8 +226,10 @@ class DefaultConfig:
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
     mail_smarthost = None
-    mail_from = None
-    navi_bar = [ u'%(page_front_page)s', u'RecentChanges', u'FindPage', u'HelpContents', ]
+    mail_from = None # u'Jürgen Wiki <noreply@jhwiki.org>'
+    
+    navi_bar = [u'%(page_front_page)s', u'RecentChanges', u'FindPage', 
+                u'HelpContents', ]
     nonexist_qm = 0
 
     page_credits = [
@@ -490,7 +492,7 @@ file. It should match the actual charset of the configuration file.
             'page_category_regex', 'page_dict_regex', 'page_form_regex',
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
-            'acl_rights_before', 'acl_rights_after',
+            'acl_rights_before', 'acl_rights_after', 'mail_from'
             )
         
         for name in decode_names:

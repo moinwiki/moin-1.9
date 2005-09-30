@@ -2,15 +2,15 @@ MoinMoin Version History
 ========================
 
 Version moin--main--1.5:
-    * Requirements changed to require Python >= 2.3. We recommend that you use
-      the latest Python release you can get. The reason we dropped 2.2.2
-      support is because no developer or tester uses this old version any more,
-      so incompatibilities crept in the code without anybody noticing.
-      Using some recent Python usually is no real problem, see there for some
-      hints in case you still run an old python:
-      http://moinmoin.wikiwikiweb.de/NewPythonOnOldLinux
-      The hint also does apply to other POSIX style operating systems, not only
-      Linux.
+    * Requirements changed to require Python >= 2.3. We recommend that
+      you use the latest Python release you can get. The reason we
+      dropped 2.2.2 support is because no developer or tester uses this
+      old version any more, so incompatibilities crept in the code
+      without anybody noticing. Using some recent Python usually is no
+      real problem, see there for some hints in case you still run an
+      old python: http://moinmoin.wikiwikiweb.de/NewPythonOnOldLinux
+      The hint also does apply to other POSIX style operating systems,
+      not only Linux.
 
   Config Changes:
      * there is a file CHANGES.config with just the recently changed stuff
@@ -37,11 +37,12 @@ Version moin--main--1.5:
       to Fred CK for his great work). See http://fckeditor.net/ for details.
      * config for FCKeditor is at wiki/htdocs/applets/moinfckeditor.js
      * added cfg.interwiki_preferred (default = []) to set a list of wikis to
-       show at the top of the wiki selection list when inserting an interwiki
-       link (just use the same wiki name as in interwiki map). If the last list
-       item is None, then the preferred wikis will not be followed by the entries
-       of the interwiki map.
-    * moved save/preview/... buttons to the top so that they can be easily reached
+       show at the top of the wiki selection list when inserting an
+       interwiki link (just use the same wiki name as in interwiki
+       map). If the last list item is None, then the preferred wikis
+       will not be followed by the entries of the interwiki map.
+    * moved save/preview/... buttons to the top so that they can be
+      easily reached
     * reduced edit_rows default to 20 lines
     * Added support for edit by doubleclick in the diff view
 
@@ -120,10 +121,10 @@ Version moin--main--1.5:
      * @ME@ expands to just the plain username (no markup added) on save
     
     * User homepages
-     * when a user accesses his own non-existing homepage (pagename == username),
-       the wiki will present the MissingHomePage system page content, explaining
-       what a user homepage is good for and offer one-click editing it with
-       content loaded from HomepageTemplate
+     * when a user accesses his own non-existing homepage (pagename ==
+       username), the wiki will present the MissingHomePage system page
+       content, explaining what a user homepage is good for and offer
+       one-click editing it with content loaded from HomepageTemplate
      * creation of homepage subpages is assisted by the MyPages action, which
        offers rw, ro page creation (and a related group) or creation of private
        pages. If you are not in the user_homewiki, you will get redirected
@@ -142,8 +143,6 @@ Version moin--main--1.5:
     * Added 'moin' daemon script, that let you run moin standalone
       server as daemon and control the server with simple command line
       intreface: moin start | stop | restart | kill
-    * Added a "daemon" option to standalone server. Useful if you want
-      to start if at system startup.    
     * Add 'restart' option to mointwisted script
     * Add properties option to standalone server config. Allow
       overriding any request property like in other server types.
@@ -151,17 +150,20 @@ Version moin--main--1.5:
       manual url mapping.
       See HelpOnConfiguration/IntegratingWithApache
     * added a WikiBackup action, configure it similar to this:
-      data_dir = "...."
+      data_dir = "/path/to/data"
       backup_include = [data_dir, ] # you can add other dirs here
-      backup_users = ["BackupUserName", ] # some VERY trusted guys
+      backup_users = ["BackupUserName", ] # only TRUSTED users!
       You usually don't need to change the default backup_exclude setting.
       The default backup_include list is EMPTY and so will be your
       backup in case you don't configure it correctly.
       If you put your data_dir there, the backup will contain private
-      user data like email addresses and crypted passwords.
+      user data like email addresses and encrypted passwords.
 
-Developer notes:
-    
+  International support:    
+    * mail_from can be now a unicode name-address 
+      e.g u'Jürgen wiki <noreply@jhwiki.org'
+
+  Developer notes:    
     * Plugin API was improved. When plugin module is missing,
       wikiutil.PluginMissingError is raised. When trying to import a
       missing name from a plugin module, wikiutil.PluginMissingError is
