@@ -913,16 +913,17 @@ function actionsMenuInit(title) {
         titles = {
             # action: menu title
             '__title__': _("More Actions:", formatted=False),
-            '__separator__': '--------', # spacer
-            'raw': _('Show Raw Text', formatted=False),
-            'print': _('Show Print View', formatted=False),
+            # Translation may need longer or shorter separator
+            '__separator__': _('------------', formatted=False),
+            'raw': _('Raw Text', formatted=False),
+            'print': _('Print View', formatted=False),
             'refresh': _('Delete Cache', formatted=False),
-            'AttachFile': _('Attach File', formatted=False),
+            'AttachFile': _('Attachments', formatted=False),
             'SpellCheck': _('Check Spelling', formatted=False), # rename action!
             'RenamePage': _('Rename Page', formatted=False),
             'DeletePage': _('Delete Page', formatted=False),
-            'LikePages': _('Show Like Pages', formatted=False),
-            'LocalSiteMap': _('Show Local Site Map', formatted=False),
+            'LikePages': _('Like Pages', formatted=False),
+            'LocalSiteMap': _('Local Site Map', formatted=False),
             }
 
         options = []
@@ -1056,7 +1057,7 @@ actionsMenuInit('%(label)s');
         #add(link(request, quotedname + '?action=diff',
         #         _('Show Changes', formatted=False)))
         add(link(request, quotedname + '?action=info',
-                 _('Infos', formatted=False)))
+                 _('Info', formatted=False)))
         add(self.subscribeLink(page))
         add(self.quicklinkLink(page))
         add(self.actionsMenu(page))
