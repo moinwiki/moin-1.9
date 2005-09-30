@@ -54,8 +54,10 @@ def sendmail(request, to, subject, text, **kw):
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
     # use the same mail_from, e.g. "My Wiki <noreply@mywiki.org>"
-    msg['From'] = mail_from
-    msg['To'] = mail_from
+    sitename = Header(request.cfg.sitename.encode(config.charset), charset)
+    address = '"%s" <%s>' % (sitename, mail_from) 
+    msg['From'] = address
+    msg['To'] = address
     msg['Date'] = formatdate()
     msg['Message-ID'] = make_msgid()
     msg['Subject'] = Header(subject, charset)
