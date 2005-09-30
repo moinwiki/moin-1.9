@@ -84,16 +84,6 @@ Hvis du ikke ønsker dette, trykk på \'\'\'%(cancel_button_text)s\'\'\' for å 
 '''Mindre oppdatering''',
 '''Remove trailing whitespace from each line''':
 '''Fjern ekstra mellomrom på slutten av linjer''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' Utheving:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fet\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kursiv fet\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandet \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fet\'\'\'[[Verbatim(\'\'\')]] og kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vannrett strek.
- Overskrifter:: [[Verbatim(=)]] Tittel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tittel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Tittel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Tittel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tittel 5 [[Verbatim(=====)]].
- Lister:: mellomrom og: * asterisk; 1., a., A., i., I. nummererte emner; 1.#n begynn nummerering ved n; kun mellomrom gir innrykk.
- Lenker:: [[Verbatim(SammenSatteOrd)]]; [[Verbatim(["firkantparentes og sitattegn"])]]; url; [url]; [url beskrivende navn].
- Tabeller:: || celletekst |||| celletekst over to kolonner ||;    etterfølgende mellomrom er ikke tillatt etter tabeller eller titler.''',
 '''Edit was cancelled.''':
 '''Redigeringen ble avbrutt.''',
 '''Dear Wiki user,

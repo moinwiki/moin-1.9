@@ -11,17 +11,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pt_BR\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 01:01+0200\n"
-"PO-Revision-Date: 2005-09-16 10:56 (UTC)\n"
-"Last-Translator: ASCII-only here <cerdiogenes@yahoo.com.br>\n"
+"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"PO-Revision-Date: 2005-09-28 15:00 (UTC)\n"
+"Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Translator: Eduardo Luis Isatto <eduardo.isatto@gmail.com>\n"
 "Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
+"Translator:  <cerdiogenes@yahoo.com.br>\n"
 "X-Direction: ltr\n"
 "X-Language: Português do Brasil\n"
 "X-Language-in-English: Brazillian Portuguese\n"
@@ -79,10 +80,9 @@ msgstr "A página não é editável!"
 msgid "Cannot edit old revisions!"
 msgstr "Não é possível editar revisões antigas!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"Seu tempo de edição se esgotou! Esteja preparado para editar conflitos!"
+"Seu tempo de edição se esgotou. Esteja preparado para editar conflitos!"
 
 msgid "Page name is too long, try shorter name."
 msgstr "Nome desta página é muito grande, tente um mais curto."
@@ -197,7 +197,9 @@ msgid ""
 " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
 "double quotes\"])]]; url; [url]; [url label].\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles."
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
 " Ênfase:: [[Verbatim('')]]''itálico''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''negrito'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''negrito "
@@ -205,15 +207,17 @@ msgstr ""
 "(''')]]'''''negrito'''[[Verbatim(''')]] e itálico''[[Verbatim('')]]; "
 "[[Verbatim(----)]] linha horizontal.\n"
 " Títulos:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   "
-"[[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 "
-"[[Verbatim(=====)]].\n"
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim"
+"(=====)]].\n"
 " Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas "
-"numeradase; 1.#n começar numeração em n; espaço sozinho indenta.\n"
+"numeradase; 1.#n começar numeração em n; espaço sozinho identa.\n"
 " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets e aspas "
-"duplas\"])]]; url; [url]; [etiqueta da urll].\n"
+"duplas\"])]]; url; [url]; [etiqueta da url].\n"
 " Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas "
-"||;    espaços em brando não são permitidos após tabelas ou títulos. "
+"||;    espaços em brando não são permitidos após tabelas ou títulos.\n"
+"\n"
+"(!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.\n"
 
 msgid "Edit was cancelled."
 msgstr "A edição foi cancelada."
@@ -501,10 +505,9 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s e tente novamente."
 
-#, fuzzy, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
 msgstr ""
-"%(hits)d páginas localizadas entre um total de %(pages)d páginas procuradas."
+"%(hits)d páginas localizadas de %(pages)d páginas."
 
 #, python-format
 msgid "%.2f seconds"
@@ -599,19 +602,18 @@ msgstr "As senhas não conferem!"
 msgid "Please specify a password!"
 msgstr "Por favor, informe uma senha!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"Por favor, informe um endereço de email. Se você perder sua informação de "
-"login, você não poderá recuperá-la por email."
+"Por favor informe um endereço de email. Se você perder sua informação de "
+"login, você poderá recuperá-la por email."
 
 msgid "This email already belongs to somebody else."
 msgstr "Este email já pertence a alguém cadastrado neste site."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Conta de Usuário criada!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -836,16 +838,15 @@ msgstr "Sua subscrição a esta página foi removida."
 msgid "Can't remove regular expression subscription!"
 msgstr "Não é possível remover expressão regular correspondendo a subscrição!"
 
-#, fuzzy
 msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
 msgstr ""
-"Para remover a subscrição, vá para seu perfil e apague esta página da lista "
-"de páginas subscritas."
+"Para remover a inscrição, vá para seu perfil e apague esta página da lista "
+"de páginas inscritas."
 
 msgid "You have been subscribed to this page."
-msgstr "A sua subscrição a esta página foi efetivada."
+msgstr "Sua inscrição a esta página foi efetivada."
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -925,13 +926,11 @@ msgstr "Ações de extensão global"
 msgid "Local extension actions"
 msgstr "Ações de extensão local"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Parsers instalados"
+msgstr "Parsers globais"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Macros de extensão local"
+msgstr "Extensão de parsers locais"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Processadores instalados (OBSOLETO -- utilize Parsers)"
@@ -1440,11 +1439,9 @@ msgstr "Texto"
 msgid "Titles"
 msgstr "Títulos"
 
-#, fuzzy
 msgid "Search"
-msgstr "Procurar:"
+msgstr "Procurar"
 
-#, fuzzy
 msgid "Quicklink"
 msgstr "Links rápidos"
 
@@ -1475,9 +1472,8 @@ msgstr "Mostrar Mapa Local do Site"
 msgid "Do"
 msgstr "Fazer"
 
-#, fuzzy
 msgid "Parent Page"
-msgstr "PáginaPrincipal"
+msgstr "Página Principal"
 
 msgid "Edit (Text)"
 msgstr "Editar (Texto)"
@@ -1488,9 +1484,8 @@ msgstr "Editar (GUI)"
 msgid "Immutable Page"
 msgstr "Página Não Editável"
 
-#, fuzzy
 msgid "Infos"
-msgstr "Informações"
+msgstr "Infos"
 
 #, python-format
 msgid "Show %s days."
@@ -1534,12 +1529,11 @@ msgstr "Adições são marcadas assim."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Conexão ao servidor de correio '%(server)s' falhou: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "Mail enviado OK"
+msgstr "E-mail não enviado"
 
 msgid "Mail sent OK"
-msgstr "Mail enviado OK"
+msgstr "E-mail enviado"
 
 msgid "FrontPage"
 msgstr "PáginaPrincipal"

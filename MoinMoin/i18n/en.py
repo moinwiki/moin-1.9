@@ -496,6 +496,12 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''',
 '''You have been subscribed to this page.''':
 '''You have been subscribed to this page.''',
+'''Charts are not available!''':
+'''Charts are not available!''',
+'''You need to provide a chart type!''':
+'''You need to provide a chart type!''',
+'''Bad chart type "%s"!''':
+'''Bad chart type "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Required attribute "%(attrname)s" missing''',
 '''Submitted form data:''':
@@ -748,10 +754,6 @@ Try a different name.''',
 '''Display''',
 '''Filename''':
 '''Filename''',
-'''You need to provide a chart type!''':
-'''You need to provide a chart type!''',
-'''Bad chart type "%s"!''':
-'''Bad chart type "%s"!''',
 '''Download XML export of this wiki''':
 '''Download XML export of this wiki''',
 '''No wanted pages in this wiki.''':
@@ -788,8 +790,6 @@ red=edit''',
 '''date''',
 '''# of hits''':
 '''# of hits''',
-'''Charts are not available!''':
-'''Charts are not available!''',
 '''Page Size Distribution''':
 '''Page Size Distribution''',
 '''page size upper bound [bytes]''':

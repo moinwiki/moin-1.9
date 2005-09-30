@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-09-30 21:03+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -807,6 +807,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "יש לכם עכשיו מנוי לדף."
 
+msgid "Charts are not available!"
+msgstr "גרפים אינם זמינים."
+
+msgid "You need to provide a chart type!"
+msgstr "בחרו בסוג גרף."
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "סוג גרף שגוי \"%s\""
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "ערך חובה \"%(attrname)s\" חסר"
@@ -1241,13 +1251,6 @@ msgstr "תצוגה"
 msgid "Filename"
 msgstr "שם קובץ"
 
-msgid "You need to provide a chart type!"
-msgstr "בחרו בסוג גרף."
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "סוג גרף שגוי \"%s\""
-
 msgid "Download XML export of this wiki"
 msgstr "יצא את תוכן הוויקי במבנה XML"
 
@@ -1309,9 +1312,6 @@ msgstr "תאריך"
 
 msgid "# of hits"
 msgstr "# כניסות"
-
-msgid "Charts are not available!"
-msgstr "גרפים אינם זמינים."
 
 msgid "Page Size Distribution"
 msgstr "פיזור גודל דפים"

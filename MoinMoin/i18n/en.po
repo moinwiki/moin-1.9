@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-09-30 21:03+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -740,6 +740,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr ""
 
+msgid "Charts are not available!"
+msgstr ""
+
+msgid "You need to provide a chart type!"
+msgstr ""
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr ""
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr ""
@@ -1161,13 +1171,6 @@ msgstr ""
 msgid "Filename"
 msgstr ""
 
-msgid "You need to provide a chart type!"
-msgstr ""
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr ""
-
 msgid "Download XML export of this wiki"
 msgstr ""
 
@@ -1226,9 +1229,6 @@ msgid "date"
 msgstr ""
 
 msgid "# of hits"
-msgstr ""
-
-msgid "Charts are not available!"
 msgstr ""
 
 msgid "Page Size Distribution"

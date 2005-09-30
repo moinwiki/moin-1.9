@@ -84,16 +84,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''只改了極少部份''',
 '''Remove trailing whitespace from each line''':
 '''去掉行尾空白''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.''':
-''' 強調:: [[Verbatim(\'\')]]\'\'斜體\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'粗體\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜體\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'混合\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗\'\'\'[[Verbatim(\'\'\')]]斜體\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 分隔線.
- 標題:: [[Verbatim(=)]] 標題1 [[Verbatim(=)]]; [[Verbatim(==)]] 標題2 [[Verbatim(==)]]; [[Verbatim(===)]] 標題3 [[Verbatim(===)]];   [[Verbatim(====)]] 標題4 [[Verbatim(====)]]; [[Verbatim(=====)]] 標題5 [[Verbatim(=====)]].
- 列表:: 空白加下列符號之一: * 圓點; 1., a., A., i., I. 編號; 1.#n 從n開始編號; 空白 表示縮排.
- 連結:: [[Verbatim(JoinCapitalizedWords)]] 兩個以上大寫開頭字; [[Verbatim(["方括號加雙引號"])]]; url; [url]; [url 說明].
- 表格:: || 儲存格內文 |||| 跨兩列的儲存格 ||;    表格或標題尾端不可有空白.''',
 '''Edit was cancelled.''':
 '''取消編輯.''',
 '''Dear Wiki user,

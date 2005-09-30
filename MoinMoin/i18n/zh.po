@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 01:01+0200\n"
+"POT-Creation-Date: 2005-09-26 23:21+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -77,12 +77,11 @@ msgstr "此页不能编辑!"
 msgid "Cannot edit old revisions!"
 msgstr "不能编辑旧版网页!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "编辑锁定超时, 多人同时编辑时可能会发生冲突"
+msgstr "你的编辑锁定超时. 可能会发生编辑冲突!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "网页名称太长, 试试短一些的名称"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -160,18 +159,17 @@ msgid "Preview"
 msgstr "预览"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "图形界面模式"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "备注"
+msgstr "备注:"
 
 msgid "<No addition>"
 msgstr "<不加>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "添加到: %(category)s"
 
 msgid "Trivial change"
 msgstr "小修改"
@@ -194,7 +192,9 @@ msgid ""
 " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
 "double quotes\"])]]; url; [url]; [url label].\n"
 " Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
-"white space allowed after tables or titles."
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
 " 强调:: [[Verbatim('')]]''斜体''[[Verbatim('')]]; [[Verbatim(''')]]'''粗"
 "体'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''粗斜体 '''''[[Verbatim"
@@ -209,7 +209,9 @@ msgstr ""
 " 链接:: [[Verbatim(JoinCapitalizedWords两个以上大写开头字)]]; [[Verbatim"
 "([\"方括号加双引号\"])]]; url; [url]; [url 说明].\n"
 " 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空"
-"格."
+"格.\n"
+"\n"
+"(!) 更多帮助见[\"帮助-编辑\"][\"语法参考\"], or see HelpOnEditing or SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "编辑取消了."
@@ -281,9 +283,8 @@ msgstr "您无权编辑此页!"
 msgid "You cannot save empty pages."
 msgstr "不能保存空白网页."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "您无权编辑此页!"
+msgstr "您已经存储了此页!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -396,7 +397,7 @@ msgid "Up"
 msgstr "上层"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "在作者信息中显示我的电子邮件地址(不是我的维基个人主页)"
 
 msgid "Open editor on double click"
 msgstr "双击打开编辑器"
@@ -434,12 +435,11 @@ msgstr "永久停用此帐户"
 msgid "Name"
 msgstr "用户名"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(请用FirstnameLastname, 或者汉语拼音XingMing)"
+msgstr "(请用Firstname''''''Lastname, 或者汉语拼音Xing''''''Ming)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "别名"
 
 msgid "Password"
 msgstr "密码"
@@ -483,9 +483,9 @@ msgstr "登录"
 msgid " %s and try again."
 msgstr "%s后再试."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "在%(pages)d页中找到%(hits)d个结果."
+msgstr "在大约%(pages)d页中找到%(hits)d个结果."
 
 #, python-format
 msgid "%.2f seconds"
@@ -516,6 +516,12 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"登录帐号: %s\n"
+"\n"
+"登录口令: %s\n"
+"\n"
+"登录URL: %s/?action=userform&uid=%s\n"
+
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
@@ -531,10 +537,16 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"有人要求将他的帐号资料寄到这个电子邮件地址.\n"
+"\n"
+"如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表中. \n"
+"您可以用拷贝粘贴的方法.\n"
+"\n"
+"成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. \n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] 您的维基帐号资料"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -564,18 +576,17 @@ msgstr "两次输入的密码不符!"
 msgid "Please specify a password!"
 msgstr "请输入一个密码!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"请输入电子邮件地址. 否则您忘记名称或密码的时候, 就无法用电子邮件取回了."
+"请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回."
 
 msgid "This email already belongs to somebody else."
 msgstr "别人已经用这个电子邮件注册过了."
 
 msgid "User account created!"
-msgstr ""
+msgstr "用户帐号成功创建!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -591,10 +602,10 @@ msgid "<Browser setting>"
 msgstr "<根据浏览器设置>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "您喜爱的"
 
 msgid "free choice"
-msgstr ""
+msgstr "随意选择"
 
 msgid "Save"
 msgstr "保存"
@@ -605,12 +616,11 @@ msgstr "登出"
 msgid "Preferred theme"
 msgstr "主题"
 
-#, fuzzy
 msgid "Editor Preference"
-msgstr "用户设置"
+msgstr "编辑器喜好"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "界面上显示的编辑器"
 
 msgid "Time zone"
 msgstr "时区"
@@ -767,13 +777,11 @@ msgid ""
 "right corner to create a profile."
 msgstr "您还没注册. 请点右上角的\"用户设置\"并注册."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "您终止了订阅此页."
+msgstr "删除了您对本页的快捷链接."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "您终止了订阅此页."
+msgstr "本页已加入到您的快捷链接."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "您不能订阅无权阅读的网页!"
@@ -798,11 +806,10 @@ msgstr "您终止了订阅此页."
 msgid "Can't remove regular expression subscription!"
 msgstr "不能取消用正规表达式定义的订阅!"
 
-#, fuzzy
 msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
-msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除此页."
+msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项."
 
 msgid "You have been subscribed to this page."
 msgstr "您已经订阅了此页."
@@ -885,25 +892,23 @@ msgstr "全局扩充操作"
 msgid "Local extension actions"
 msgstr "本地扩充操作"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "已安装的分析插件(parsers)"
+msgstr "全局分析插件(parsers)"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "本地扩充宏"
+msgstr "本地扩充分析插件(parsers)"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "已安装的处理插件(processors, 不再支持，请使用分析插件)"
 
 msgid "Disabled"
-msgstr ""
+msgstr "不再有效"
 
 msgid "Enabled"
-msgstr ""
+msgstr "有效"
 
 msgid "Lupy search"
-msgstr ""
+msgstr "Lupy搜索"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -987,9 +992,8 @@ msgstr ""
 msgid "File to upload"
 msgstr "待上载文件"
 
-#, fuzzy
 msgid "Rename to"
-msgstr "改名"
+msgstr "改名为"
 
 msgid "Upload"
 msgstr "上载"
@@ -1279,23 +1283,20 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\"后面要接颜色值\"%(arg)s\""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
+msgstr "XSLT选项没有激活, 请参阅 [\"帮助-设置\"], 或者HelpOnConfiguration."
 
-#, fuzzy
 msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "没有XSLT处理套件!"
+msgstr "没有XSLT处理套件. 请安装 4suite 1.x"
 
 #, python-format
 msgid "%(errortype)s processing error"
 msgstr "%(errortype)s处理错误"
 
-#, fuzzy
 msgid "Views/day"
-msgstr "刷新"
+msgstr "点击数/天"
 
-#, fuzzy
 msgid "Edits/day"
-msgstr "编辑"
+msgstr "改动次数/天"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -1327,7 +1328,7 @@ msgid "# of pages of this size"
 msgstr "相同大小的网页数"
 
 msgid "User agent"
-msgstr ""
+msgstr "用户客户端"
 
 msgid "Others"
 msgstr "其它"
@@ -1385,11 +1386,9 @@ msgstr "正文"
 msgid "Titles"
 msgstr "标题"
 
-#, fuzzy
 msgid "Search"
-msgstr "搜索:"
+msgstr "搜索"
 
-#, fuzzy
 msgid "Quicklink"
 msgstr "快捷链接"
 
@@ -1420,23 +1419,20 @@ msgstr "本站地图"
 msgid "Do"
 msgstr "执行"
 
-#, fuzzy
 msgid "Parent Page"
-msgstr "首页"
+msgstr "上层网页"
 
-#, fuzzy
 msgid "Edit (Text)"
-msgstr "编辑正文"
+msgstr "编辑(文本方式)"
 
 msgid "Edit (GUI)"
-msgstr ""
+msgstr "编辑(图形界面)"
 
 msgid "Immutable Page"
 msgstr "只读网页"
 
-#, fuzzy
 msgid "Infos"
-msgstr "信息"
+msgstr "本页资料"
 
 #, python-format
 msgid "Show %s days."
@@ -1478,12 +1474,11 @@ msgstr "加入的内容标记成这样."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "无发连接到邮件服务器'%(server)s': %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "邮件发送成功"
+msgstr "邮件发送失败"
 
 msgid "Mail sent OK"
-msgstr "邮件发送成功"
+msgstr "邮件成功发送"
 
 msgid "FrontPage"
 msgstr "首页"
@@ -1560,13 +1555,11 @@ msgstr "拼写检查"
 #~ msgid "Can't work out query"
 #~ msgstr "无法完成查询"
 
-#, fuzzy
 #~ msgid "Remove from Quicklinks"
-#~ msgstr "快捷链接"
+#~ msgstr "从快捷链接删除"
 
-#, fuzzy
 #~ msgid "Add to Quicklinks"
-#~ msgstr "快捷链接"
+#~ msgstr "添加到快捷链接"
 
 #~ msgid "Show Parent"
 #~ msgstr "显示上层"
