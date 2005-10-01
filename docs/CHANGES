@@ -130,7 +130,7 @@ Version moin--main--1.5:
        pages. If you are not in the user_homewiki, you will get redirected
        there first.
 
-  Other changes:
+  Other changes/new features:
     * added WSGI server support, thanks to Anakim Border, see:
       wiki/server/moinwsgi.py (moin as WSGI app, uses the flup WSGI server,
                                see http://www.saddi.com/software/flup/)
@@ -158,6 +158,8 @@ Version moin--main--1.5:
       backup in case you don't configure it correctly.
       If you put your data_dir there, the backup will contain private
       user data like email addresses and encrypted passwords.
+    * Added a SubscribeUser action which allows the administrator to subscribe users to the
+      current page.
 
   International support:    
     * mail_from can be now a unicode name-address 
