@@ -173,12 +173,16 @@ class DefaultConfig:
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_cookie]
+    
     backup_users = []
     backup_include = []
-    backup_exclude = [r"(.+\.py(c|o)$)",
-                      r"(/cache/(antispam|i18n|user|wikidicts|lupy.*|spellchecker.dict|text_html))",
-                      r"/edit-lock$",
-                      r"/event-log$",]
+    backup_exclude = [
+        r"(.+\.py(c|o)$)",
+        r"%(cache_dir)s",
+        r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
+        r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
+        ]
+                      
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
@@ -431,10 +435,11 @@ class DefaultConfig:
             except ImportError:
                 self.chart_options = None
         
-        # post process navibar
+        # post process
         # we replace any string placeholders with config values
         # e.g u'%(page_front_page)s' % self
         self.navi_bar = [elem % self for elem in self.navi_bar]
+        self.backup_exclude = [elem % self for elem in self.backup_exclude]
 
         # list to cache lupy searcher objects
         self.lupy_searchers = []

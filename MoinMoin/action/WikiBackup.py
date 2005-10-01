@@ -2,55 +2,78 @@
 """
     MoinMoin - make a full backup of the wiki
 
-    Triggering WikiBackup action will check if you are authorized to do a
-    backup and if yes, just send a <siteid>-<date>--<time>.tgz to you.
+    Triggering WikiBackup action will check if you are authorized to do
+    a backup and if yes, just send a
+    <siteid>-<date>--<time>.tar.<format> to you.
 
     @copyright: 2005 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, time
-import tarfile, gzip
+import os, re, time, tarfile
 from MoinMoin.util import MoinMoinNoFooter
 
-GZCOMPRESSLEVEL = 5 # TODO: look what level is best for us
 
-def send_backup(request):
-    gzfileobj = gzip.GzipFile(fileobj=request, mode="wb", compresslevel=GZCOMPRESSLEVEL)
-    tarfileobj = tarfile.TarFile(fileobj=gzfileobj, mode="w")
-    tarfileobj.posix = False # allow GNU tar's longer file/pathnames
+defaultCompression = 'gz'
+compressionOptions = ['gz', 'bz2']
 
-    exclude_re = re.compile("|".join(request.cfg.backup_exclude))
+
+def addFiles(path, tar, exclude):
+    """ Add files in path to tar """
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            path = os.path.join(root, name)
+            if exclude.search(path):
+                continue
+            tar.add(path)
+    
+
+def sendBackup(request, compression='gz'):
+    """ Send compressed tar file """    
+    tar = tarfile.open(fileobj=request, mode="w|%s" % compression)
+    # allow GNU tar's longer file/pathnames 
+    tar.posix = False           
+    exclude = re.compile("|".join(request.cfg.backup_exclude))
+    
     for path in request.cfg.backup_include:
-        for root, dirs, files in os.walk(path):
-            for fname in files:
-                fpath = os.path.join(root, fname)
-                if not exclude_re.search(fpath):
-                    fileobj = open(fpath, "rb")
-                    tarinfo = tarfileobj.gettarinfo(fileobj=fileobj)
-                    tarfileobj.addfile(tarinfo, fileobj)
-                    fileobj.close()
+        addFiles(path, tar, exclude)
+    
+    tar.close()
 
-    tarfileobj.close()
-    gzfileobj.close()
+
+def sendError(request, pagename, msg):
+    from MoinMoin import Page
+    return Page.Page(request, pagename).send_page(request, msg=msg)    
+
+
+def backupAllowed(request):
+    """ Return True if backup is allowed """
+    action = __name__.split('.')[-1]
+    user = request.user
+    return (action not in request.cfg.actions_excluded and
+            user.valid and user.name in request.cfg.backup_users)
+
 
 def execute(pagename, request):
     _ = request.getText
-    # be extra paranoid in dangerous actions
-    actname = __name__.split('.')[-1]
-    if actname in request.cfg.actions_excluded or \
-            request.user.name not in request.cfg.backup_users:
-        return Page.Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to use this action.'))
+    if not backupAllowed(request):        
+        return sendError(request, pagename, 
+                         msg=_('You are not allowed to do remote backup.'))
 
-    datestr = time.strftime("%Y-%m-%d--%H-%M-%SUTC", time.gmtime())
-    backupfilename = "%s-%s.tgz" % (request.cfg.siteid, datestr)
+    compression = request.form.get('format', [defaultCompression])[0]
+    if compression not in compressionOptions:
+        return sendError(request, pagename, 
+                         msg=_('Unknown backup format: %s.' % compression))
+    
+    dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
+    filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, compression)
+    
     request.http_headers([
-        "Content-Type: application/octet-stream", # we could also use some more tgz specific
-        "Content-Disposition: inline; filename=\"%s\"" % backupfilename,
-    ])
+        # TODO: use more specific tar gz/bz2 content type?
+        "Content-Type: application/octet-stream", 
+        "Content-Disposition: inline; filename=\"%s\"" % filename,])
 
-    send_backup(request)
+    sendBackup(request, compression)
 
     raise MoinMoinNoFooter
 
