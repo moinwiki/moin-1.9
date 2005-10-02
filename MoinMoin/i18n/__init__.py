@@ -283,7 +283,7 @@ def getDirection(lang):
     return ('ltr', 'rtl')[languages[lang][DIRECTION]]
 
 
-def getText(str, request, lang, formatted = True):
+def getText(str, request, lang, formatted=True):
     """
     Return a translation of text in the user's language.
     """
@@ -315,7 +315,10 @@ def getText(str, request, lang, formatted = True):
                     userdict = dicts.dict(dictpagename)
                     trans = userdict[str]
         except KeyError:
-            pass
+            # do not simply return trans with str, but recursively call
+            # to get english translation, maybe formatted
+            if lang != 'en':
+                trans = getText(str, request, 'en', formatted)
     return trans
 
 
