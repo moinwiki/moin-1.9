@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from cStringIO import StringIO
 import unittest
-import xml.dom.DOMImplementation, xml.dom.ext
-
-import MoinMoin.converter.text_html_text_x_moin as converter
-import MoinMoin.parser.wiki, MoinMoin.formatter.text_gedit, MoinMoin.request
 from MoinMoin import _tests
+
+from cStringIO import StringIO
+from MoinMoin.converter import text_html_text_x_moin as converter
+from MoinMoin.parser.wiki import Parser
+from MoinMoin.formatter.text_gedit import Formatter
+from MoinMoin.request import Clock
 
 convert = converter.convert
 error = converter.ConvertError
@@ -45,7 +46,7 @@ class MinimalRequest(object):
 
     def __init__(self, request):
         self.request = request
-        self.clock = MoinMoin.request.Clock()
+        self.clock = Clock()
         
         # This is broken - tests that need correct content_lang will fail
         self.content_lang = None
@@ -71,9 +72,9 @@ class ConvertBlockRepeatableTestCase(BaseTestCase):
         output = output.strip('\n')
         request = MinimalRequest(self.request)
         page = MinimalPage()
-        formatter = MoinMoin.formatter.text_gedit.Formatter(request)
+        formatter = Formatter(request)
         formatter.setPage(page)
-        MoinMoin.parser.wiki.Parser(text, request).format(formatter)
+        Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
         out = self.do_convert_real([request, page.page_name, repeat])
@@ -918,9 +919,9 @@ class ConvertInlineFormatRepeatableTestCase(BaseTestCase):
         output = "<p>%s </p>" % output
         request = MinimalRequest(self.request)
         page = MinimalPage()
-        formatter = MoinMoin.formatter.text_gedit.Formatter(request)
+        formatter = Formatter(request)
         formatter.setPage(page)
-        MoinMoin.parser.wiki.Parser(text, request).format(formatter)
+        Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
         out = self.do_convert_real([request, page.page_name, repeat])
@@ -1029,9 +1030,9 @@ class ConvertInlineItemRepeatableTestCase(BaseTestCase):
         output = "<p>%s </p>" % output
         request = MinimalRequest(self.request)
         page = MinimalPage()
-        formatter = MoinMoin.formatter.text_gedit.Formatter(request)
+        formatter = Formatter(request)
         formatter.setPage(page)
-        MoinMoin.parser.wiki.Parser(text, request).format(formatter)
+        Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
         out = self.do_convert_real([request, page.page_name, repeat])
@@ -1058,6 +1059,10 @@ class StripTestCase(unittest.TestCase):
         tree = converter.parse(text)
         cls().do(tree)
         out = StringIO()
+        try:
+            import xml.dom.ext
+        except ImportError:
+            raise _tests.TestSkiped('xml.dom.ext module is not available')
         xml.dom.ext.Print(tree, out)
         self.failUnlessEqual("<?xml version='1.0' encoding='UTF-8'?>%s" % output, out.getvalue().decode("utf-8"))
 
