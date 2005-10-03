@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+MoinMoin - MoinMoin.text_html_text_x_moin Tests
+
+@copyright: 2000-2005 by Jürgen Hermann <jh@web.de>
+@license: GNU GPL, see COPYING for details.
+"""
+
 import unittest
 from MoinMoin import _tests
 
