@@ -88,7 +88,6 @@ def get_data(request):
 def text(pagename, request):
     from MoinMoin.util.dataset import TupleDataset, Column
     from MoinMoin.widget.browser import DataBrowserWidget
-    from cStringIO import StringIO
 
     fmt = request.formatter
     _ = request.getText
@@ -115,14 +114,9 @@ def text(pagename, request):
             pass
     agents.addRow((_('Others'), "%.2f" % (100*(sum-cnt_printed)/sum)))
 
-    buffer = StringIO()
-    request.redirect(buffer)
     table = DataBrowserWidget(request)
     table.setData(agents)
-    table.render()
-    request.redirect()
-
-    return buffer.getvalue()
+    return table.toHTML()
     
 
 def draw(pagename, request):

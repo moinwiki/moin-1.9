@@ -66,12 +66,8 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
         sys.stderr.write("Msg: %s\n" % msg)
 
     #we need this to update pagelinks cache:
-    import StringIO
-    out = StringIO.StringIO()
-    self.request.redirect(out)
     self.request.args = self.request.form = self.request.setup_args({})
-    page.send_page(self.request, content_only=1)
-    self.request.redirect()
+    self.request.redirectedOutput(page.send_page, self.request, content_only=1)
 
     return xmlrpclib.Boolean(1)
 

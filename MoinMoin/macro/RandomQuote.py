@@ -47,11 +47,8 @@ def execute(macro, args):
                 
     quote = random.choice(quotes)
     page.set_raw_body(quote, 1)
-    out = StringIO.StringIO()
-    macro.request.redirect(out)
-    page.send_page(macro.request, content_only=1, content_id="RandomQuote_%s" % wikiutil.quoteWikinameFS(page.page_name) )
-    quote = out.getvalue()
-    macro.request.redirect()
-    
+    quote = macro.request.redirectedOutput(page.send_page,
+        macro.request, content_only=1, content_id="RandomQuote_%s" % wikiutil.quoteWikinameFS(page.page_name) )
+
     return quote
 

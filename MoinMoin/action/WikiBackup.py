@@ -21,6 +21,7 @@ compressionOptions = ['gz', 'bz2']
 def addFiles(path, tar, exclude):
     """ Add files in path to tar """
     for root, dirs, files in os.walk(path):
+        files.sort() # sorted page revs may compress better
         for name in files:
             path = os.path.join(root, name)
             if exclude.search(path):
