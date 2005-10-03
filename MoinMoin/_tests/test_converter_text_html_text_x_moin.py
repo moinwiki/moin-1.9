@@ -5,11 +5,20 @@ import xml.dom.DOMImplementation, xml.dom.ext
 
 import MoinMoin.converter.text_html_text_x_moin as converter
 import MoinMoin.parser.wiki, MoinMoin.formatter.text_gedit, MoinMoin.request
+from MoinMoin import _tests
+
 convert = converter.convert
 error = converter.ConvertError
 
 
 class BaseTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.cfg = _tests.TestConfig(self.request, bang_meta=True)
+        
+    def tearDown(self):
+        del self.cfg
+
     def do_convert_real(self, func_args, successfull = True):
         try:
             ret = convert(*func_args)
@@ -23,43 +32,51 @@ class BaseTestCase(unittest.TestCase):
         else:
             self.fail("don't fail with parse error")
 
-class MinimalConfig(object):
-    def __init__(self):
-        self.bang_meta = True
-        self.siteid = 'test'
 
 class MinimalPage(object):
     def __init__(self):
         self.hilite_re = None
         self.page_name = "testpage"
 
+
 class MinimalRequest(object):
-    def __init__(self):
-        self.cfg = MinimalConfig()
+    # TODO: do we really need this class? no other test use a request
+    # replacement.
+
+    def __init__(self, request):
+        self.request = request
         self.clock = MoinMoin.request.Clock()
+        
+        # This is broken - tests that need correct content_lang will fail
         self.content_lang = None
         self.current_lang = None
+        
         self.form = {}
         self._page_headings = {}
         self.result = []
 
-    def getText(self, text):
+    def getText(self, text, formatted=True):
         return text
 
     def write(self, text):
         self.result.append(text)
 
+    def __getattr__(self, name):
+        return getattr(self.request, name)
+
+
 class ConvertBlockRepeatableTestCase(BaseTestCase):
     def do(self, text, output):
         text = text.lstrip('\n')
         output = output.strip('\n')
-        request = MinimalRequest()
+        request = MinimalRequest(self.request)
+        page = MinimalPage()
         formatter = MoinMoin.formatter.text_gedit.Formatter(request)
-        formatter.setPage(MinimalPage())
+        formatter.setPage(page)
         MoinMoin.parser.wiki.Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
-        out = self.do_convert_real([request, repeat])
+        out = self.do_convert_real([request, page.page_name, repeat])
         self.failUnlessEqual(text, out)
 
     def testComment01(self):
@@ -899,13 +916,14 @@ class ConvertInlineFormatRepeatableTestCase(BaseTestCase):
         text = text.lstrip('\n')
         output = output.strip('\n')
         output = "<p>%s </p>" % output
-        request = MinimalRequest()
+        request = MinimalRequest(self.request)
+        page = MinimalPage()
         formatter = MoinMoin.formatter.text_gedit.Formatter(request)
-        formatter.setPage(MinimalPage())
+        formatter.setPage(page)
         MoinMoin.parser.wiki.Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
-        out = self.do_convert_real([request, repeat])
+        out = self.do_convert_real([request, page.page_name, repeat])
         out = out.rstrip('\n')
         self.failUnlessEqual(text, out)
 
@@ -1009,13 +1027,14 @@ class ConvertInlineItemRepeatableTestCase(BaseTestCase):
         text = text.lstrip('\n')
         output = output.strip('\n')
         output = "<p>%s </p>" % output
-        request = MinimalRequest()
+        request = MinimalRequest(self.request)
+        page = MinimalPage()
         formatter = MoinMoin.formatter.text_gedit.Formatter(request)
-        formatter.setPage(MinimalPage())
+        formatter.setPage(page)
         MoinMoin.parser.wiki.Parser(text, request).format(formatter)
         repeat = ''.join(request.result).strip('\n')
         self.failUnlessEqual(repeat, output)
-        out = self.do_convert_real([request, repeat])
+        out = self.do_convert_real([request, page.page_name, repeat])
         out = out.rstrip('\n')
         self.failUnlessEqual(text, out)
 
@@ -1089,8 +1108,9 @@ class ConvertBrokenBrowserTestCase(BaseTestCase):
     def do(self, text, output):
         text = text.strip('\n')
         output = output.lstrip('\n')
-        request = MinimalRequest()
-        out = self.do_convert_real([request, text])
+        request = MinimalRequest(self.request)
+        page = MinimalPage()
+        out = self.do_convert_real([request, page.page_name, text])
         self.failUnlessEqual(output, out)
 
     def testList01(self):
