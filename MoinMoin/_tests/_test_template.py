@@ -29,8 +29,7 @@ class SimplestTestCase(unittest.TestCase):
            module_tested: test description ... ok
         """
         # You can access the current request with self.request. It is
-        # injected for you into the test class when by moin test
-        # framework.
+        # injected for you into the test class by moin test framework.
         result = module_tested.some_function(self.request, 'test_value')
         expected = 'expected value'
         self.assertEqual(result, expected,
