@@ -138,13 +138,13 @@ class ThemeBase:
         @rtype: unicode
         @return: logo html
         """
+        html = u''
         if self.cfg.logo_string:
             pagename = wikiutil.getFrontPage(self.request).page_name
             pagename = wikiutil.quoteWikinameURL(pagename)
             logo = wikiutil.link_tag(self.request, pagename, self.cfg.logo_string)
             html = u'''<div id="logo">%s</div>''' % logo
-            return html
-        return u''
+        return html
         
     def title(self, d):
         """ Assemble the title
@@ -301,7 +301,7 @@ class ThemeBase:
         # First use only the sub page name, that might be enough
         if len(name) > maxLength:
             name = name.split('/')[-1]
-            # If its not enough, replace the middle with '...'
+            # If it's not enough, replace the middle with '...'
             if len(name) > maxLength:
                 half, left = divmod(maxLength - 3, 2)
                 name = u'%s...%s' % (name[:half + left], name[-half:])
@@ -328,9 +328,10 @@ class ThemeBase:
         if request.cfg.navi_bar:
             for text in request.cfg.navi_bar:
                 pagename, link = self.splitNavilink(text)
-                cls = 'wikilink'
                 if pagename == current:
                     cls = 'wikilink current'
+                else:
+                    cls = 'wikilink'
                 items.append(item % (cls, link))
                 found[pagename] = 1
 
@@ -340,9 +341,10 @@ class ThemeBase:
             # Split text without localization, user knows what he wants
             pagename, link = self.splitNavilink(text, localize=0)
             if not pagename in found:
-                cls = 'userlink'
                 if pagename == current:
                     cls = 'userlink current'
+                else:
+                    cls = 'userlink'
                 items.append(item % (cls, link))
                 found[pagename] = 1
 
@@ -473,6 +475,7 @@ class ThemeBase:
         """
         request = self.request
         user = request.user
+        html = ''
         if user.valid and user.show_page_trail:
             trail = user.getTrail()
             if trail:
@@ -502,8 +505,7 @@ class ThemeBase:
 <ul id="pagetrail">
 %s
 </ul>''' % '\n'.join(items)
-                return html
-        return ''
+        return html
 
     def html_stylesheets(self, d):
         """ Assemble html head stylesheet links
@@ -583,7 +585,7 @@ class ThemeBase:
         @return: page last edit information
         """
         _ = self.request.getText
-        
+        html = ''
         if self.shouldShowPageinfo(page):
             info = page.lastEditInfo()
             if info:
@@ -591,11 +593,11 @@ class ThemeBase:
                     info = _("last edited %(time)s by %(editor)s") % info
                 else:
                     info = _("last modified %(time)s") % info
-                return '<p id="pageinfo" class="info"%(lang)s>%(info)s</p>\n' % {
+                html = '<p id="pageinfo" class="info"%(lang)s>%(info)s</p>\n' % {
                     'lang': self.ui_lang_attr(),
                     'info': info
                     }
-        return ''
+        return html
     
     def searchform(self, d):
         """
@@ -652,7 +654,7 @@ searchBlur(e);
         """
         html = ''
         if self.cfg.show_version and not keywords.get('print_mode', 0):
-            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2004 by '
+            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2005 by '
                     'Juergen Hermann</div>') % (version.revision,)
         return html
 
@@ -780,15 +782,12 @@ function actionsMenuInit(title) {
         @rtype: unicode
         @return: html head
         """
+        link = u''
         if self.shouldUseRSS():
-            link = [
-                u'<link rel="alternate"',
-                u' title="%s Recent Changes"' % self.cfg.sitename,
-                u' href="%s"' % self.rsshref(),
-                u' type="application/rss+xml">',
-                ]
-            return ''.join(link)
-        return ''
+            link =  u'<link rel="alternate" title="%s Recent Changes" href="%s" type="application/rss+xml">' % (
+                        self.cfg.sitename,
+                        self.rsshref() )
+        return link
        
     def html_head(self, d):
         """ Assemble html head
@@ -1056,8 +1055,7 @@ actionsMenuInit('%(label)s');
         #bookmark on RC is superior.
         #add(link(request, quotedname + '?action=diff',
         #         _('Show Changes', formatted=False)))
-        add(link(request, quotedname + '?action=info',
-                 _('Info', formatted=False)))
+        add(link(request, quotedname + '?action=info', _('Info', formatted=False)))
         add(self.subscribeLink(page))
         add(self.quicklinkLink(page))
         add(self.actionsMenu(page))
