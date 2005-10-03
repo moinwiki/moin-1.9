@@ -12,7 +12,7 @@ convert = converter.convert
 error = converter.ConvertError
 
 
-class BaseTestCase(unittest.TestCase):
+class BaseTests(unittest.TestCase):
 
     def setUp(self):
         self.cfg = _tests.TestConfig(self.request, bang_meta=True)
@@ -66,7 +66,7 @@ class MinimalRequest(object):
         return getattr(self.request, name)
 
 
-class ConvertBlockRepeatableTestCase(BaseTestCase):
+class ConvertBlockRepeatableTests(BaseTests):
     def do(self, text, output):
         text = text.lstrip('\n')
         output = output.strip('\n')
@@ -912,7 +912,7 @@ test
 """
         self.do(test, output)
 
-class ConvertInlineFormatRepeatableTestCase(BaseTestCase):
+class ConvertInlineFormatRepeatableTests(BaseTests):
     def do(self, text, output):
         text = text.lstrip('\n')
         output = output.strip('\n')
@@ -1023,7 +1023,7 @@ class ConvertInlineFormatRepeatableTestCase(BaseTestCase):
         output = ur"<em>test <strong>test</strong></em>"
         self.do(test, output)
 
-class ConvertInlineItemRepeatableTestCase(BaseTestCase):
+class ConvertInlineItemRepeatableTests(BaseTests):
     def do(self, text, output):
         text = text.lstrip('\n')
         output = output.strip('\n')
@@ -1054,7 +1054,7 @@ class ConvertInlineItemRepeatableTestCase(BaseTestCase):
         output = ur""
         self.do(test, output)
 
-class StripTestCase(unittest.TestCase):
+class StripTests(unittest.TestCase):
     def do(self, cls, text, output):
         tree = converter.parse(text)
         cls().do(tree)
@@ -1066,13 +1066,13 @@ class StripTestCase(unittest.TestCase):
         xml.dom.ext.Print(tree, out)
         self.failUnlessEqual("<?xml version='1.0' encoding='UTF-8'?>%s" % output, out.getvalue().decode("utf-8"))
 
-class StripBreakTestCase(StripTestCase):
+class StripBreakTests(StripTests):
     def do(self, text, output):
-        super(StripBreakTestCase, self).do(converter.strip_break, text, output)
+        super(StripBreakTests, self).do(converter.strip_break, text, output)
 
-class StripWhitespaceTestCase(StripTestCase):
+class StripWhitespaceTests(StripTests):
     def do(self, text, output):
-        super(StripWhitespaceTestCase, self).do(converter.strip_whitespace, text, output)
+        super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
 
     def test1(self):
         test = ur"""
@@ -1109,7 +1109,7 @@ class StripWhitespaceTestCase(StripTestCase):
         output = ur"""<p>test</p>"""
         self.do(test, output)
 
-class ConvertBrokenBrowserTestCase(BaseTestCase):
+class ConvertBrokenBrowserTests(BaseTests):
     def do(self, text, output):
         text = text.strip('\n')
         output = output.lstrip('\n')
