@@ -5,7 +5,7 @@
     @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-import os.path, urllib
+import os.path, urllib, re
 from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
