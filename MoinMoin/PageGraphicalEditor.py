@@ -290,12 +290,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         from MoinMoin.formatter.text_gedit import Formatter
         self.formatter = Formatter(request)
         self.formatter.page = self
-
-        output = StringIO()
-        request.redirect(output)
-        self.send_page_content(request, Parser, raw_body, do_cache=False)
-        request.redirect()
-        output = repr(output.getvalue())
+        output = request.redirectedOutput(self.send_page_content, request, Parser, raw_body, do_cache=False)
+        output = repr(output)
         if output[0] == 'u':
             output = output[1:]
         request.write(output)

@@ -136,7 +136,6 @@ def get_data(pagename, request, filterpage=None):
 def text(pagename, request, params=''):
     from MoinMoin.util.dataset import TupleDataset, Column
     from MoinMoin.widget.browser import DataBrowserWidget
-    from cStringIO import StringIO
     _ = request.getText
 
     # check params
@@ -182,14 +181,9 @@ def text(pagename, request, params=''):
             se = 0.0
             sd = 0.0
 
-    buffer = StringIO()
-    request.redirect(buffer)
     table = DataBrowserWidget(request)
     table.setData(hits)
-    table.render()
-    request.redirect()
-
-    return buffer.getvalue()
+    return table.toHTML()
 
 
 def draw(pagename, request):

@@ -19,10 +19,6 @@ def execute(macro, args):
 
     # Render matches
     if matches and not isinstance(matches, (str, unicode)):
-        import StringIO
-        out = StringIO.StringIO()
-        request.redirect(out)
-        LikePages.showMatches(pagename, request, start, end, matches, False)
-        request.redirect()
-        return out.getvalue()
+        return request.redirectedOutput(LikePages.showMatches, pagename, request, start, end, matches, False)
+
     return args

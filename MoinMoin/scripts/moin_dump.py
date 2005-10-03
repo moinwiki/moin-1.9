@@ -139,11 +139,7 @@ class MoinDump(_util.Script):
                 request.page = page
                 try:
                     request.reset()
-                    out = StringIO.StringIO()
-                    request.redirect(out)
-                    page.send_page(request, count_hit=0, content_only=1)
-                    pagehtml = out.getvalue()
-                    request.redirect()
+                    pagehtml = request.redirectedOutput(page.send_page, request, count_hit=0, content_only=1)
                 except:
                     errcnt = errcnt + 1
                     print >>sys.stderr, "*** Caught exception while writing page!"
