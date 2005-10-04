@@ -500,6 +500,12 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''購読を停止するには、ユーザプロファイルのページにて、このページにマッチする項目を購読リストから削除してください。''',
 '''You have been subscribed to this page.''':
 '''このページの購読を開始しました。''',
+'''Charts are not available!''':
+'''チャートは利用できません。''',
+'''You need to provide a chart type!''':
+'''チャートタイプを指定してください。''',
+'''Bad chart type "%s"!''':
+'''チャートタイプ"%s"が不正です。''',
 '''Required attribute "%(attrname)s" missing''':
 '''必須項目"%(attrname)s"を入力してください。''',
 '''Submitted form data:''':
@@ -747,10 +753,6 @@ Try a different name.''':
 '''表示''',
 '''Filename''':
 '''ファイル名''',
-'''You need to provide a chart type!''':
-'''チャートタイプを指定してください。''',
-'''Bad chart type "%s"!''':
-'''チャートタイプ"%s"が不正です。''',
 '''Download XML export of this wiki''':
 '''このwikiのXML exportをダウンロード''',
 '''No wanted pages in this wiki.''':
@@ -787,8 +789,6 @@ red=edit''':
 '''日付''',
 '''# of hits''':
 '''ヒットカウント''',
-'''Charts are not available!''':
-'''チャートは利用できません。''',
 '''Page Size Distribution''':
 '''ページサイズの分布''',
 '''page size upper bound [bytes]''':

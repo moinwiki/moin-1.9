@@ -83,7 +83,7 @@ Caurskatiet atšķirības %(difflink)s, lai redzētu, kas ir mainīts.''',
 '''By hitting \'\'\'%(save_button_text)s\'\'\' you put your changes under the %(license_link)s.
 If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your changes.''':
 '''Nospiežot \'\'\'%(save_button_text)s\'\'\', Jūs pakļaujat izmaiņas %(license_link)s.
-Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsaukutu savas izmaiņas.''',
+Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsauktu savas izmaiņas.''',
 '''Preview''':
 '''Pirmskats''',
 '''GUI Mode''':
@@ -123,9 +123,9 @@ The following page has been changed by %(editor)s:
 %(pagelink)s
 
 ''':
-'''Godājamais Wiki lietotāj,
+'''Godājamais Viki lietotāj,
 
-Jūs esat parakstīts wiki lapā vai wiki kategorijā "%(sitename)s" par izmaiņu paziņojumiem.
+Jūs esat pierakstīts viki lapas vai kategorijas "%(sitename)s" izmaiņām.
 
 Sekojošo lapu ir mainījis(-usi) %(editor)s:
 %(pagelink)s
@@ -191,7 +191,7 @@ Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 '''You did not change the page content, not saved!''':
 '''Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Jūs nevariet mainīt pieejas tiesības, Jums nav adminstratora tiesību!''',
+'''Jūs nevarat mainīt pieejas tiesības, Jums nav adminstratora tiesību!''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
@@ -235,7 +235,7 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Up''':
 '''Augšup''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Publiskot manu e-pasta adresi (bez manas wiki mājas lapas) autora informācijā''',
+'''Publiskot manu e-pasta adresi (bez manas viki mājas lapas) autora informācijā''',
 '''Open editor on double click''':
 '''Labot ar dubultklikšķi''',
 '''Remember last page visited''':
@@ -251,7 +251,7 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Show fancy diffs''':
 '''Rādīt stilizētas atšķirības''',
 '''Add spaces to displayed wiki names''':
-'''Atdalīt wiki vārdus ar atstarpēm''',
+'''Atdalīt viki vārdus ar atstarpēm''',
 '''Remember login information''':
 '''Atcerēties ieejas informāciju''',
 '''Subscribe to trivial changes''':
@@ -302,8 +302,8 @@ Grupas lapas vārds nav atļauts.''',
 '''Sīkdatne dzēsta. Jūs izgājāt no sistēmas.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
-'''Šajā wiki pasta sūtīšana ir aizliegta.
-Sazinieties ar wiki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
+'''Šajā viki pasta sūtīšana ir aizliegta.
+Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
 '''Please provide a valid email address!''':
 '''Lūdzu, norādiet pareizu e-pasta adresi!''',
 '''Login Name: %s
@@ -336,7 +336,7 @@ Ja Jūs esat aizmirsis paroli, lūdzu ievadiet šos datus un paroli KĀ ŠEIT NO
 Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli un izveidotu sev jaunu.
 ''',
 '''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Jūsu wiki konta dati''',
+'''[%(sitename)s] Jūsu viki konta dati''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
 '''Missing password. Please enter user name and password.''':
@@ -400,7 +400,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''This list does not work, unless you have entered a valid email address!''':
 '''Šis saraksts strādā tikai ar pareizu e-pasta adresi!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''Parakstītās wiki lapas (pa vienai katrā rindā)''',
+'''Pierakstītās viki lapas (pa vienai katrā rindā)''',
 '''Create Profile''':
 '''Izveidot profilu''',
 '''Mail me my account data''':
@@ -484,11 +484,11 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''A quicklink to this page has been added for you.''':
 '''Jums izveidota ātrsaite uz šo lapu.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevariet lasīt.''',
+'''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Šajā wiki e-pasta sūtīšana ir aizliegta. Sazinieties ar wiki īpašnieku,kurš var atļaut Jums sūtīšanu vai noņemt pogu "Parakstīšanās".''',
+'''Šajā viki e-pasta sūtīšana ir aizliegta. Sazinieties ar viki īpašnieku, kurš var atļaut Jums sūtīšanu vai noņemt pogu "Parakstīšanās".''',
 '''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda labajā augšējā stūrīun ievadiet pareizu e-pasta adresi.''',
+'''Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda labajā augšējā stūrī un ievadiet pareizu e-pasta adresi.''',
 '''Your subscribtion to this page has been removed.''':
 '''Jūs vairs neesat pierakstīts uz šo lapu.''',
 '''Can\'t remove regular expression subscription!''':
@@ -497,6 +497,12 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet ierakstus, kas saskan ar šo lapu.''',
 '''You have been subscribed to this page.''':
 '''Tagad Jūs esat pierakstīts uz šo lapu.''',
+'''Charts are not available!''':
+'''Diagramma nav pieejama!''',
+'''You need to provide a chart type!''':
+'''Norādiet diagrammas tipu!''',
+'''Bad chart type "%s"!''':
+'''Slikts diagrammas tips "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Trūkst "%(attrname)s" atribūta''',
 '''Submitted form data:''':
@@ -570,7 +576,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Expected a value for key "%(token)s"''':
 '''Nepieciešma vērtība atslēgai "%(token)s"''',
 '''Wiki Markup''':
-'''Wiki marķējums''',
+'''Viki marķējums''',
 '''Print View''':
 '''Drukāšanai''',
 '''[%d attachments]''':
@@ -585,8 +591,8 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''':
-'''Atsaucei uz piesaisti rakstiet, lapas tekstā, \'\'\'{{{piesaiste:faila nosaukums}}}\'\'\', 
-kā zemāk redzams sarakstā. 
+'''Atsaucei uz piesaisti, rakstiet lapas tekstā \'\'\'{{{piesaiste:faila nosaukums}}}\'\'\', 
+kā redzams zemāk sarakstā. 
 \'\'\'NEIZMANTOJIET\'\'\' saites {{{[get]}}} URL. 
 Tas var tikt mainīts.''',
 '''No attachments stored for %(pagename)s''':
@@ -602,13 +608,11 @@ Tas var tikt mainīts.''',
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Jūsu augšupielādētais piesaistes fails neaizstās jau esošu.
-Ja tāds saistes nosaukums jau eksistēs, lai ielādētu jaunu piesaisti, Jums būs tas jāpārdēvē.
-Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais nosaukums.''',
+'''Ja lapai jau ir piesaistes fails ar šādu nosaukumu, ievadlaukā "Pārdēvēt" norādiet citu piesaistes faila nosaukumu.''',
 '''File to upload''':
 '''Augšupielādējamais fails''',
 '''Rename to''':
-'''Pārdēvēt''',
+'''Pārdēvēt par''',
 '''Upload''':
 '''Ielādēt''',
 '''File attachments are not allowed in this wiki!''':
@@ -664,7 +668,7 @@ Jeb arī, ja "Pārdēvēt" atstāsiet tukšu, tiks paņemts faila orģinālais n
 '''Local Site Map for "%s"''':
 '''"%s" vietnes karte''',
 '''You are not allowed to rename pages in this wiki!''':
-'''Šajā wiki Jums nav tiesību pārdēvēt lapas!''',
+'''Šajā viki Jums nav tiesību pārdēvēt lapas!''',
 '''Please use the interactive user interface to rename pages!''':
 '''Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja saskarni!''',
 '''Could not rename page because of file system error: %s.''':
@@ -714,7 +718,7 @@ Pamēģiniet citu nosaukumu.''',
 '''No parent page found!''':
 '''Virslapa nav atrasta!''',
 '''Wiki''':
-'''Wiki''',
+'''Viki''',
 '''Slideshow''':
 '''Prezentācija''',
 '''Start''':
@@ -722,7 +726,7 @@ Pamēģiniet citu nosaukumu.''',
 '''Slide %(pos)d of %(size)d''':
 '''%(size)d slaids %(pos)d''',
 '''No orphaned pages in this wiki.''':
-'''Šajā wiki nav nevienas bāreņlapas.''',
+'''Šajā viki nav nevienas bāreņlapas.''',
 '''No quotes on %(pagename)s.''':
 '''Lapā %(pagename)s citātu nav.''',
 '''Upload of attachment \'%(filename)s\'.''':
@@ -749,14 +753,10 @@ Pamēģiniet citu nosaukumu.''',
 '''Caurskats''',
 '''Filename''':
 '''Faila nosaukums''',
-'''You need to provide a chart type!''':
-'''Norādiet diagrammas tipu!''',
-'''Bad chart type "%s"!''':
-'''Slikts diagrammas tips "%s"!''',
 '''Download XML export of this wiki''':
 '''Lejupielādēt XML eksportu no šī wiki''',
 '''No wanted pages in this wiki.''':
-'''Šajā wiki pieprasīto lapu nav.''',
+'''Šajā viki pieprasīto lapu nav.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**''',
 '''**Could not find the referenced page: %s**''':
@@ -789,8 +789,6 @@ sarkans=labot''',
 '''datums''',
 '''# of hits''':
 '''# apmeklējumi''',
-'''Charts are not available!''':
-'''Diagramma nav pieejama!''',
 '''Page Size Distribution''':
 '''Lapas izmēra sadale''',
 '''page size upper bound [bytes]''':
@@ -847,8 +845,8 @@ sarkans=labot''',
 '''Rādīt drukas skatu''',
 '''Delete Cache''':
 '''Dzēst kešatmiņu''',
-'''Attach File''':
-'''Pievienot failu''',
+'''Attachments''':
+'''Piesaistes''',
 '''Delete Page''':
 '''Dzēst lapu''',
 '''Show Like Pages''':
@@ -882,7 +880,7 @@ sarkans=labot''',
 '''User''':
 '''Lietotājs''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
-'''Piedodiet, Jūs nevarat saglabāt lapu, jo "%(content)s" šajā wiki nav atļauts.''',
+'''Piedodiet, Jūs nevarat saglabāt lapu, jo "%(content)s" šajā viki nav atļauts.''',
 '''Line''':
 '''Rinda''',
 '''Deletions are marked like this.''':
@@ -892,7 +890,7 @@ sarkans=labot''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Pievienoties e-pasta serverim \'%(server)s\' nedrīkst: %(reason)s''',
 '''Mail not sent''':
-'''E-pasts nenosūtīts''',
+'''E-pasts nav nosūtīts''',
 '''Mail sent OK''':
 '''E-pasts nosūtīts''',
 '''FrontPage''':
@@ -914,7 +912,7 @@ sarkans=labot''',
 '''UserPreferences''':
 '''JūsuIestatījumi''',
 '''WikiLicense''':
-'''WikiLicence''',
+'''VikiLicence''',
 '''MissingPage''':
 '''IztrūkstošaLapa''',
 '''Mon''':

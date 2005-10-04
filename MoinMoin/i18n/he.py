@@ -762,20 +762,10 @@ red=edit''':
 '''כותרות''',
 '''More Actions:''':
 '''פעולות נוספות:''',
-'''Show Raw Text''':
-'''הצג מלל''',
-'''Show Print View''':
-'''תצוגת הדפסה''',
 '''Delete Cache''':
 '''נקה מטמון''',
-'''Attach File''':
-'''קבצים מצורפים''',
 '''Delete Page''':
 '''מחק דף''',
-'''Show Like Pages''':
-'''דפים דומים''',
-'''Show Local Site Map''':
-'''מפת אתר מקומית''',
 '''Do''':
 '''בצע''',
 '''Immutable Page''':

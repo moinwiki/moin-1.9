@@ -43,7 +43,7 @@ data = u"""\
 from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 
 user = "ThomasWaldmann" # must be a known Wiki account
-password = "mmegal"
+password = "wrong"
 pagename = "MoinI18n/%s" % lang
 pagedata = data.encode('utf-8')
 

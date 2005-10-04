@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-30 21:03+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1392,25 +1392,29 @@ msgstr "סימניות"
 msgid "More Actions:"
 msgstr "פעולות נוספות:"
 
-msgid "Show Raw Text"
-msgstr "הצג מלל"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "תצוגת הדפסה"
+#, fuzzy
+msgid "Raw Text"
+msgstr "הצג מלל"
 
 msgid "Delete Cache"
 msgstr "נקה מטמון"
 
-msgid "Attach File"
-msgstr "קבצים מצורפים"
+#, fuzzy
+msgid "Attachments"
+msgstr "קובץ מצורף חדש"
 
 msgid "Delete Page"
 msgstr "מחק דף"
 
-msgid "Show Like Pages"
+#, fuzzy
+msgid "Like Pages"
 msgstr "דפים דומים"
 
-msgid "Show Local Site Map"
+#, fuzzy
+msgid "Local Site Map"
 msgstr "מפת אתר מקומית"
 
 msgid "Do"
@@ -1429,10 +1433,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "דף נעול"
-
-#, fuzzy
-msgid "Infos"
-msgstr "מידע"
 
 #, python-format
 msgid "Show %s days."
@@ -1552,6 +1552,22 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "Show Print View"
+#~ msgstr "תצוגת הדפסה"
+
+#~ msgid "Attach File"
+#~ msgstr "קבצים מצורפים"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "דפים דומים"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "מפת אתר מקומית"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "מידע"
 
 #, fuzzy
 #~ msgid "Remove from Quicklinks"

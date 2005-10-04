@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-09-30 21:03+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -614,10 +614,10 @@ msgid "<Browser setting>"
 msgstr "<Nastavení prohlížeče>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "jen oblíbený"
 
 msgid "free choice"
-msgstr ""
+msgstr "nechat možnost zvolit"
 
 msgid "Save"
 msgstr "Uložit"
@@ -629,10 +629,10 @@ msgid "Preferred theme"
 msgstr "Oblíbené téma"
 
 msgid "Editor Preference"
-msgstr "Nastavení Editoru"
+msgstr "Oblíbený Editor"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Editor v uživatelském rozhraní"
 
 msgid "Time zone"
 msgstr "Časová zóna"
@@ -832,6 +832,16 @@ msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "Přihlásili jste se k odběru této stránky."
+
+msgid "Charts are not available!"
+msgstr "Diagramy nejsou dostupné!"
+
+msgid "You need to provide a chart type!"
+msgstr "Musíte udat typy diagramu!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Neplatné typ diagramu \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1270,13 +1280,6 @@ msgstr "Display"
 msgid "Filename"
 msgstr "JmenoSouboru"
 
-msgid "You need to provide a chart type!"
-msgstr "Musíte udat typy diagramu!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Neplatné typ diagramu \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Download XML exportu této wiki"
 
@@ -1339,9 +1342,6 @@ msgstr "datum"
 
 msgid "# of hits"
 msgstr "počet hitů"
-
-msgid "Charts are not available!"
-msgstr "Diagramy nejsou dostupné!"
 
 msgid "Page Size Distribution"
 msgstr "Rozdělení velikosti stránky"

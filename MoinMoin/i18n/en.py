@@ -840,20 +840,18 @@ red=edit''',
 '''Quicklink''',
 '''More Actions:''':
 '''More Actions:''',
-'''Show Raw Text''':
-'''Show Raw Text''',
-'''Show Print View''':
-'''Show Print View''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Raw Text''',
 '''Delete Cache''':
 '''Delete Cache''',
-'''Attach File''':
-'''Attachments''',
 '''Delete Page''':
 '''Delete Page''',
-'''Show Like Pages''':
-'''Show Like Pages''',
-'''Show Local Site Map''':
-'''Show Local Site Map''',
+'''Like Pages''':
+'''Like Pages''',
+'''Local Site Map''':
+'''Local Site Map''',
 '''Do''':
 '''Do''',
 '''Parent Page''':
@@ -864,8 +862,6 @@ red=edit''',
 '''Edit (GUI)''',
 '''Immutable Page''':
 '''Immutable Page''',
-'''Infos''':
-'''Infos''',
 '''Show %s days.''':
 '''Show %s days.''',
 '''EditText''':

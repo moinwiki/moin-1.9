@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-30 21:03+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1300,25 +1300,25 @@ msgstr ""
 msgid "More Actions:"
 msgstr ""
 
-msgid "Show Raw Text"
+msgid "------------"
 msgstr ""
 
-msgid "Show Print View"
+msgid "Raw Text"
 msgstr ""
 
 msgid "Delete Cache"
 msgstr ""
 
-msgid "Attach File"
+msgid "Attachments"
 msgstr ""
 
 msgid "Delete Page"
 msgstr ""
 
-msgid "Show Like Pages"
+msgid "Like Pages"
 msgstr ""
 
-msgid "Show Local Site Map"
+msgid "Local Site Map"
 msgstr ""
 
 msgid "Do"
@@ -1334,9 +1334,6 @@ msgid "Edit (GUI)"
 msgstr ""
 
 msgid "Immutable Page"
-msgstr ""
-
-msgid "Infos"
 msgstr ""
 
 #, python-format

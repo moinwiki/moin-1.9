@@ -308,6 +308,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Předvoleno''',
 '''<Browser setting>''':
 '''<Nastavení prohlížeče>''',
+'''the one preferred''':
+'''jen oblíbený''',
+'''free choice''':
+'''nechat možnost zvolit''',
 '''Save''':
 '''Uložit''',
 '''Logout''':
@@ -315,7 +319,9 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Preferred theme''':
 '''Oblíbené téma''',
 '''Editor Preference''':
-'''Nastavení Editoru''',
+'''Oblíbený Editor''',
+'''Editor shown on UI''':
+'''Editor v uživatelském rozhraní''',
 '''Time zone''':
 '''Časová zóna''',
 '''Your time is''':
@@ -424,6 +430,12 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Nemohu zrušit odběr z regulárního výrazu!''',
 '''You have been subscribed to this page.''':
 '''Přihlásili jste se k odběru této stránky.''',
+'''Charts are not available!''':
+'''Diagramy nejsou dostupné!''',
+'''You need to provide a chart type!''':
+'''Musíte udat typy diagramu!''',
+'''Bad chart type "%s"!''':
+'''Neplatné typ diagramu "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Chybí požadovaný atribut "%(attrname)s"''',
 '''Submitted form data:''':
@@ -662,10 +674,6 @@ Zkuste jiné jméno.''',
 '''Display''',
 '''Filename''':
 '''JmenoSouboru''',
-'''You need to provide a chart type!''':
-'''Musíte udat typy diagramu!''',
-'''Bad chart type "%s"!''':
-'''Neplatné typ diagramu "%s"!''',
 '''Download XML export of this wiki''':
 '''Download XML exportu této wiki''',
 '''No wanted pages in this wiki.''':
@@ -698,8 +706,6 @@ red=edit''':
 '''datum''',
 '''# of hits''':
 '''počet hitů''',
-'''Charts are not available!''':
-'''Diagramy nejsou dostupné!''',
 '''Page Size Distribution''':
 '''Rozdělení velikosti stránky''',
 '''page size upper bound [bytes]''':
