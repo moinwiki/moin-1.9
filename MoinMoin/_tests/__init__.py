@@ -132,6 +132,19 @@ class MoinTestLoader(TestLoader):
     def loadTestsFromTestCase(self, testCaseClass):
         testCaseClass.request = self.request
         return TestLoader.loadTestsFromTestCase(self, testCaseClass)        
+        
+    def loadTestsFromModuleNames(self, names):
+        """ Load tests from qualified module names, eg. a.b.c
+        
+        loadTestsFromNames is broken, hiding ImportErrros in test
+        modules. This method is less flexsible but works correctly.
+        """
+        names = ['%s.%s' % (__name__, name) for name in names]
+        suites = []
+        for name in names:
+            module = __import__(name, globals(), {}, ['dummy'])
+            suites.append(self.loadTestsFromModule(module))    
+        return self.suiteClass(suites)
 
 
 def makeSuite(request, names=None):
@@ -146,12 +159,11 @@ def makeSuite(request, names=None):
     if not names:
         from MoinMoin.util.pysupport import getPackageModules
         names = getPackageModules(__file__)
-        names = ['%s.%s' % (__name__, name) for name in names
-                 if name.startswith('test_')]
+        names = [name for name in names if name.startswith('test_')]
         caseInsensitiveCompare = lambda a, b: cmp(a.lower(), b.lower())
         names.sort(caseInsensitiveCompare)
-    loader = MoinTestLoader(request)
-    return loader.loadTestsFromNames(names)
+    
+    return MoinTestLoader(request).loadTestsFromModuleNames(names)
 
 
 def run(request=None, names=None):
