@@ -98,6 +98,22 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 '''Triviale Änderung''',
 '''Remove trailing whitespace from each line''':
 '''Leerzeichen am Ende jeder Zeile entfernen''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Betonung:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fett\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'fett und kursiv\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'gemischt \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fett\'\'\'[[Verbatim(\'\'\')]] und kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontaler Balken.
+ Überschriften:: [[Verbatim(=)]] Überschrift 1 [[Verbatim(=)]]; [[Verbatim(==)]] Überschrift 2 [[Verbatim(==)]]; [[Verbatim(===)]] Ü 3 [[Verbatim(===)]];   [[Verbatim(====)]] Ü 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Ü 5 [[Verbatim(=====)]].
+ Listen:: Leerzeichen und eins von: * Punkte; 1., a., A., i., I. nummerierte Punkte; 1.#n starte Nummerierung bei n; nur Leerzeichen rückt ein.
+ Links:: [[Verbatim(ZusammenGeschriebeneGroßeWorte)]]; [[Verbatim(["Klammern und doppelte  Anführungszeichen"])]]; url; [url]; [url label].
+ Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    keine anhängenden Leerzeichen nach Überschriften oder Tabellen.
+
+(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference {en}.
+''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',
 '''Dear Wiki user,
@@ -220,7 +236,7 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Up''':
 '''Hoch''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Verföffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
+'''Veröffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
 '''Open editor on double click''':
 '''Editor per Doppelklick öffnen''',
 '''Remember last page visited''':
@@ -482,6 +498,12 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der Abo-Liste der persönlichen Einstellungen entfernt werden.''',
 '''You have been subscribed to this page.''':
 '''Die Seite wurde zur Liste abonnierter Seiten hinzugefügt.''',
+'''Charts are not available!''':
+'''Die Diagrammoption ist nicht verfügbar!''',
+'''You need to provide a chart type!''':
+'''Es muss ein Diagrammtyp angegeben werden!''',
+'''Bad chart type "%s"!''':
+'''Unbekannter Diagrammtyp "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Benötigtes Attribut "%(attrname)s" fehlt''',
 '''Submitted form data:''':
@@ -734,10 +756,6 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Anzeige''',
 '''Filename''':
 '''Dateiname''',
-'''You need to provide a chart type!''':
-'''Es muss ein Diagrammtyp angegeben werden!''',
-'''Bad chart type "%s"!''':
-'''Unbekannter Diagrammtyp "%s"!''',
 '''Download XML export of this wiki''':
 '''XML-Export des Wiki-Inhalts herunter laden''',
 '''No wanted pages in this wiki.''':
@@ -774,8 +792,6 @@ rot=Änderungen''',
 '''Datum''',
 '''# of hits''':
 '''Anzahl der Zugriffe''',
-'''Charts are not available!''':
-'''Die Diagrammoption ist nicht verfügbar!''',
 '''Page Size Distribution''':
 '''Verteilung der Seitengrößen''',
 '''page size upper bound [bytes]''':

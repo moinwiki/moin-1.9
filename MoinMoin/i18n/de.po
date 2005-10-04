@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-09-30 21:03+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -183,7 +183,6 @@ msgstr "Triviale Änderung"
 msgid "Remove trailing whitespace from each line"
 msgstr "Leerzeichen am Ende jeder Zeile entfernen"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -220,7 +219,8 @@ msgstr ""
 " Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    "
 "keine anhängenden Leerzeichen nach Überschriften oder Tabellen.\n"
 "\n"
-"(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference {en}.\n"
+"(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference "
+"{en}.\n"
 
 msgid "Edit was cancelled."
 msgstr "Editierung wurde abgebrochen."
@@ -420,7 +420,7 @@ msgstr "Hoch"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
-"Verföffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der "
+"Veröffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der "
 "Autoren-Info"
 
 msgid "Open editor on double click"
@@ -856,6 +856,16 @@ msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "Die Seite wurde zur Liste abonnierter Seiten hinzugefügt."
+
+msgid "Charts are not available!"
+msgstr "Die Diagrammoption ist nicht verfügbar!"
+
+msgid "You need to provide a chart type!"
+msgstr "Es muss ein Diagrammtyp angegeben werden!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Unbekannter Diagrammtyp \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1313,13 +1323,6 @@ msgstr "Anzeige"
 msgid "Filename"
 msgstr "Dateiname"
 
-msgid "You need to provide a chart type!"
-msgstr "Es muss ein Diagrammtyp angegeben werden!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Unbekannter Diagrammtyp \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "XML-Export des Wiki-Inhalts herunter laden"
 
@@ -1383,9 +1386,6 @@ msgstr "Datum"
 
 msgid "# of hits"
 msgstr "Anzahl der Zugriffe"
-
-msgid "Charts are not available!"
-msgstr "Die Diagrammoption ist nicht verfügbar!"
 
 msgid "Page Size Distribution"
 msgstr "Verteilung der Seitengrößen"

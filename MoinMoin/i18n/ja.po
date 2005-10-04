@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
-"PO-Revision-Date: 2005-09-27 13:01+0900\n"
+"POT-Creation-Date: 2005-09-30 21:03+0200\n"
+"PO-Revision-Date: 2005-10-03 15:23+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,8 @@ msgstr ""
 " 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには"
 "空白を入力しないでください。\n"
 "\n"
-"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してください。\n"
+"(!) 詳細はHelpOnEditingや [\"シンタックスリファレンス\"]を参照してくださ"
+"い。\n"
 
 msgid "Edit was cancelled."
 msgstr "編集はキャンセルされました。"
@@ -838,6 +839,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "このページの購読を開始しました。"
 
+msgid "Charts are not available!"
+msgstr "チャートは利用できません。"
+
+msgid "You need to provide a chart type!"
+msgstr "チャートタイプを指定してください。"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "チャートタイプ\"%s\"が不正です。"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "必須項目\"%(attrname)s\"を入力してください。"
@@ -1279,13 +1290,6 @@ msgstr "表示"
 msgid "Filename"
 msgstr "ファイル名"
 
-msgid "You need to provide a chart type!"
-msgstr "チャートタイプを指定してください。"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "チャートタイプ\"%s\"が不正です。"
-
 msgid "Download XML export of this wiki"
 msgstr "このwikiのXML exportをダウンロード"
 
@@ -1350,9 +1354,6 @@ msgstr "日付"
 
 msgid "# of hits"
 msgstr "ヒットカウント"
-
-msgid "Charts are not available!"
-msgstr "チャートは利用できません。"
 
 msgid "Page Size Distribution"
 msgstr "ページサイズの分布"
