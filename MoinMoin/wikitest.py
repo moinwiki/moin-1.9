@@ -86,10 +86,14 @@ def runTest(request):
     if config.use_threads:
         request.write("    *** The unit tests are disabled when using multi "
                       "threading ***")
-    else:       
+    else:
+        # TODO: do we need to hide the error when _tests can't be
+        # imported? It might make it hard to debug the tests package
+        # itself.
         try:    
             from MoinMoin import _tests
-            _tests.run(request)
         except ImportError:
             request.write("    *** The unit tests are not available ***")
+        else:
+            _tests.run(request)
 
