@@ -44,9 +44,10 @@ Running only few modules::
 from unittest import TestLoader, TextTestRunner
 
 
-class TestSkiped(Exception):
+class TestSkipped(Exception):
     """ Raised when a tests is skipped """
 
+TestSkiped = TestSkipped # ensure a stable interface
 
 class TestConfig:
     """ Custom configuration for unit tests
