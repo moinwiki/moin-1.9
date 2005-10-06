@@ -45,7 +45,7 @@ def execute(macro, args):
                 img = fmt.smiley(markup)
                 row.extend([
                     fmt.code(1) + fmt.text(markup) + fmt.code(0),
-                    fmt.rawHTML(img),
+                    img,
                     fmt.code(1) + smiley[3] + fmt.code(0),
                     '',
                 ])
@@ -57,7 +57,7 @@ def execute(macro, args):
     if data:
         browser = DataBrowserWidget(macro.request)
         browser.setData(data)
-        return fmt.rawHTML(browser.toHTML())
+        return browser.toHTML()
 
     return ''
 
