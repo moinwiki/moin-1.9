@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -838,6 +838,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
@@ -886,6 +889,12 @@ msgid ""
 "as shown below in the list of files. \n"
 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
 "since this is subject to change and can break easily."
+msgstr ""
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
 msgstr ""
 
 #, python-format
@@ -937,6 +946,12 @@ msgstr ""
 msgid "You are not allowed to get attachments from this page."
 msgstr ""
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr ""
+
+msgid "You are not allowed to install files."
+msgstr ""
+
 msgid "You are not allowed to view attachments of this page."
 msgstr ""
 
@@ -963,7 +978,48 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr ""
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr ""
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
+#, python-format
 msgid "Attachment '%(filename)s'"
+msgstr ""
+
+msgid "Package script:"
+msgstr ""
+
+msgid "File Name"
+msgstr ""
+
+msgid "Modified"
 msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."

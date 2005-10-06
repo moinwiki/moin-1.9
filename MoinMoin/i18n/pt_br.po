@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-09-28 15:00 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -207,9 +207,9 @@ msgstr ""
 "(''')]]'''''negrito'''[[Verbatim(''')]] e itálico''[[Verbatim('')]]; "
 "[[Verbatim(----)]] linha horizontal.\n"
 " Títulos:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim"
-"(=====)]].\n"
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   "
+"[[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 "
+"[[Verbatim(=====)]].\n"
 " Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas "
 "numeradase; 1.#n começar numeração em n; espaço sozinho identa.\n"
 " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets e aspas "
@@ -505,9 +505,9 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s e tente novamente."
 
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr ""
-"%(hits)d páginas localizadas de %(pages)d páginas."
+msgstr "%(hits)d páginas localizadas de %(pages)d páginas."
 
 #, python-format
 msgid "%.2f seconds"
@@ -847,6 +847,16 @@ msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "Sua inscrição a esta página foi efetivada."
+
+msgid "Charts are not available!"
+msgstr "Gráficos não estão disponíveis!"
+
+msgid "You need to provide a chart type!"
+msgstr "Você precisa informar um tipo de gráfico!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Tipo inadequado de gráfico \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1298,13 +1308,6 @@ msgstr "Mostrar"
 msgid "Filename"
 msgstr "Nome do arquivo"
 
-msgid "You need to provide a chart type!"
-msgstr "Você precisa informar um tipo de gráfico!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Tipo inadequado de gráfico \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Baixar arquivo XML exportado desta wiki"
 
@@ -1367,9 +1370,6 @@ msgstr "data"
 
 msgid "# of hits"
 msgstr "# of hits"
-
-msgid "Charts are not available!"
-msgstr "Gráficos não estão disponíveis!"
 
 msgid "Page Size Distribution"
 msgstr "Distribuição do Tamanho de Página"
@@ -1448,26 +1448,26 @@ msgstr "Links rápidos"
 msgid "More Actions:"
 msgstr "Mais Ações:"
 
-msgid "Show Raw Text"
-msgstr "Visualizar Texto Bruto"
+msgid "------------"
+msgstr "------------"
 
-msgid "Show Print View"
-msgstr "Visualizar Impressão"
+msgid "Raw Text"
+msgstr "Visualizar Texto"
 
 msgid "Delete Cache"
 msgstr "Deletar Cache"
 
-msgid "Attach File"
-msgstr "Anexar Arquivo"
+msgid "Attachments"
+msgstr "Anexos"
 
 msgid "Delete Page"
 msgstr "Apagar Página"
 
-msgid "Show Like Pages"
-msgstr "Mostrar Páginas Semelhantes"
+msgid "Like Pages"
+msgstr "Páginas Semelhantes"
 
-msgid "Show Local Site Map"
-msgstr "Mostrar Mapa Local do Site"
+msgid "Local Site Map"
+msgstr "Mapa do Site Local"
 
 msgid "Do"
 msgstr "Fazer"
@@ -1483,9 +1483,6 @@ msgstr "Editar (GUI)"
 
 msgid "Immutable Page"
 msgstr "Página Não Editável"
-
-msgid "Infos"
-msgstr "Infos"
 
 #, python-format
 msgid "Show %s days."
@@ -1606,6 +1603,21 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "Show Print View"
+#~ msgstr "Visualizar Impressão"
+
+#~ msgid "Attach File"
+#~ msgstr "Anexar Arquivo"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Mostrar Páginas Semelhantes"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Mostrar Mapa Local do Site"
+
+#~ msgid "Infos"
+#~ msgstr "Infos"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Não posso realizar a busca"

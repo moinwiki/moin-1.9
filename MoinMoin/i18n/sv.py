@@ -98,6 +98,22 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Trivial ändring''',
 '''Remove trailing whitespace from each line''':
 '''Eleminera efterföljande mellanslag från varje rad''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Emfas:: [[Verbatim(\'\')]]\'\'kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kursiv fetstil\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandad \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]] och kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horisontell linje.
+ Rubriker:: [[Verbatim(=)]] Rubrik 1 [[Verbatim(=)]]; [[Verbatim(==)]] Rubrik 2 [[Verbatim(==)]]; [[Verbatim(===)]] Rubrik 3 [[Verbatim(===)]];   [[Verbatim(====)]] Rubrik 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Rubrik 5 [[Verbatim(=====)]].
+ Listor:: mellanslag och en av: * punkter; 1., a., A., i., I. numrerade paragrafer; 1.#n börja numrering på n; enbart mellanslag indenterar.
+ Länkar:: [[Verbatim(IhopskrivnaOrd)]]; [[Verbatim(["hakparenteser och citattecken"])]]; url; [url]; [url etikett].
+ Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;    inga avslutande blanksteg tillåtna efter tabeller och titlar.
+
+(!) För mer hjälp, se HjälpOmRedigering och SyntaxReferens.
+''',
 '''Edit was cancelled.''':
 '''Redigeringen avbröts.''',
 '''Dear Wiki user,
@@ -486,6 +502,12 @@ lösenord.
 '''För att avsluta prenumerationen, gå till din profil och ta bort posten som matchar den här sidan från prenumerationslistan.''',
 '''You have been subscribed to this page.''':
 '''Du prenumerar nu på den här sidan.''',
+'''Charts are not available!''':
+'''Diagram är inte tillgängliga!''',
+'''You need to provide a chart type!''':
+'''Du måste ange en diagramtyp!''',
+'''Bad chart type "%s"!''':
+'''Ogiltig diagramtyp "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Obligatoriskt attribut "%(attrname)s" saknas''',
 '''Submitted form data:''':
@@ -739,10 +761,6 @@ Pröva ett annat namn.''',
 '''Visa''',
 '''Filename''':
 '''Filnamn''',
-'''You need to provide a chart type!''':
-'''Du måste ange en diagramtyp!''',
-'''Bad chart type "%s"!''':
-'''Ogiltig diagramtyp "%s"!''',
 '''Download XML export of this wiki''':
 '''Ladda ner den här wikin som XML''',
 '''No wanted pages in this wiki.''':
@@ -779,8 +797,6 @@ röd=ändra''',
 '''datum''',
 '''# of hits''':
 '''# träffar''',
-'''Charts are not available!''':
-'''Diagram är inte tillgängliga!''',
 '''Page Size Distribution''':
 '''Sidstorleksfördelning''',
 '''page size upper bound [bytes]''':
@@ -831,20 +847,20 @@ röd=ändra''',
 '''Snabblänk''',
 '''More Actions:''':
 '''Fler åtgärder:''',
-'''Show Raw Text''':
-'''Visa råtext''',
-'''Show Print View''':
-'''Visa printvy''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Råtext''',
 '''Delete Cache''':
 '''Radera cache''',
-'''Attach File''':
-'''Bifoga fil''',
+'''Attachments''':
+'''Bilagor''',
 '''Delete Page''':
 '''Radera sida''',
-'''Show Like Pages''':
-'''Visa liknande sidor''',
-'''Show Local Site Map''':
-'''Visa lokal översiktskarta''',
+'''Like Pages''':
+'''Liknande sidor''',
+'''Local Site Map''':
+'''Lokal översiktskarta''',
 '''Do''':
 '''Gör''',
 '''Parent Page''':
@@ -855,8 +871,6 @@ röd=ändra''',
 '''Redigera (grafiskt)''',
 '''Immutable Page''':
 '''Skrivskyddad sida''',
-'''Infos''':
-'''Info''',
 '''Show %s days.''':
 '''Visa %s dagar.''',
 '''EditText''':

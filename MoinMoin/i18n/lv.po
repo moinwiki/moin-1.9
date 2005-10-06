@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 21:00+0200\n"
+"POT-Creation-Date: 2005-10-06 21:50+0200\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -239,8 +239,7 @@ msgid ""
 msgstr ""
 "Godājamais Viki lietotāj,\n"
 "\n"
-"Jūs esat pierakstīts viki lapas vai kategorijas \"%(sitename)s\" "
-"izmaiņām.\n"
+"Jūs esat pierakstīts viki lapas vai kategorijas \"%(sitename)s\" izmaiņām.\n"
 "\n"
 "Sekojošo lapu ir mainījis(-usi) %(editor)s:\n"
 "%(pagelink)s\n"
@@ -667,7 +666,7 @@ msgid "General options"
 msgstr "Vispārējas opcijas"
 
 msgid "Quick links"
-msgstr "Grāmatzīmes"
+msgstr "Ātrsaites"
 
 msgid "This list does not work, unless you have entered a valid email address!"
 msgstr "Šis saraksts strādā tikai ar pareizu e-pasta adresi!"
@@ -679,7 +678,7 @@ msgid "Create Profile"
 msgstr "Izveidot profilu"
 
 msgid "Mail me my account data"
-msgstr "Atsūtīt manus konta datus"
+msgstr "Atsūtīt mana sistēmas konta datus"
 
 msgid "No older revisions available!"
 msgstr "Vecākas versijas nav!"
@@ -1027,8 +1026,8 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Ja lapai jau ir piesaistes fails ar šādu nosaukumu, ievadlaukā "
-"\"Pārdēvēt\" norādiet citu piesaistes faila nosaukumu."
+"Ja lapai jau ir piesaistes fails ar šādu nosaukumu, ievadlaukā \"Pārdēvēt\" "
+"norādiet citu piesaistes faila nosaukumu."
 
 msgid "File to upload"
 msgstr "Augšupielādējamais fails"
@@ -1431,11 +1430,11 @@ msgstr "Ātrsaite"
 msgid "More Actions:"
 msgstr "Citas darbības:"
 
-msgid "Show Raw Text"
-msgstr "Rādīt jēltekstu"
+msgid "------------"
+msgstr "------------"
 
-msgid "Show Print View"
-msgstr "Rādīt drukas skatu"
+msgid "Raw Text"
+msgstr "Rādīt jēltekstu"
 
 msgid "Delete Cache"
 msgstr "Dzēst kešatmiņu"
@@ -1446,11 +1445,11 @@ msgstr "Piesaistes"
 msgid "Delete Page"
 msgstr "Dzēst lapu"
 
-msgid "Show Like Pages"
-msgstr "Rādīt līdzīgas lapas"
+msgid "Like Pages"
+msgstr "Līdzīgas lapas"
 
-msgid "Show Local Site Map"
-msgstr "Parādīt lokālās vietnes karti"
+msgid "Local Site Map"
+msgstr "Lokālā vietnes karte"
 
 msgid "Do"
 msgstr "Veikt"
@@ -1466,9 +1465,6 @@ msgstr "Labot grafiski"
 
 msgid "Immutable Page"
 msgstr "Nemaināma Lapa"
-
-msgid "Infos"
-msgstr "Informācija"
 
 #, python-format
 msgid "Show %s days."
@@ -1519,7 +1515,7 @@ msgid "Mail sent OK"
 msgstr "E-pasts nosūtīts"
 
 msgid "FrontPage"
-msgstr "Priekšlapa"
+msgstr "SākumLapa"
 
 msgid "RecentChanges"
 msgstr "PēdējāsIzmaiņas"
@@ -1597,6 +1593,18 @@ msgstr "PārdēvētLapu"
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
 
+#~ msgid "Show Print View"
+#~ msgstr "Rādīt drukas skatu"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Rādīt līdzīgās lapas"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Rādīt vietnes karti"
+
+#~ msgid "Infos"
+#~ msgstr "Informācija"
+
 #~ msgid "Attach File"
 #~ msgstr "Piesaistes"
 
@@ -1672,3 +1680,18 @@ msgstr "Pareizrakstība"
 
 #~ msgid "MIME Type (optional)"
 #~ msgstr "MIME tips (nav obligāts)"
+
+#~ msgid "Recommend page to"
+#~ msgstr "Ieteikt lapu"
+
+#~ msgid "Recommend Page"
+#~ msgstr "Ieteikt lapu"
+
+#~ msgid "Show Raw Text"
+#~ msgstr "Rādīt jēltekstu"
+
+#~ msgid "Installed parsers"
+#~ msgstr "Uzstādītie parsētāji"
+
+#~ msgid "Event log"
+#~ msgstr "Sistēmas žurnālfails"

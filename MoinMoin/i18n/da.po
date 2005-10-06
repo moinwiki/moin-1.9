@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-03-21 20:17+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -833,6 +833,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Du abonnerer nu på denne side."
 
+msgid "Charts are not available!"
+msgstr "Tabeller er ikke tilgængelige!"
+
+msgid "You need to provide a chart type!"
+msgstr "Tabeltypen skal angives!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Dårlig tabeltype·\"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Krævet atribut \"%(attrname)s\" mangler."
@@ -1279,13 +1289,6 @@ msgstr "Vis"
 msgid "Filename"
 msgstr "Filnavn"
 
-msgid "You need to provide a chart type!"
-msgstr "Tabeltypen skal angives!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Dårlig tabeltype·\"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Hent XML-eksport af denne wiki"
 
@@ -1350,9 +1353,6 @@ msgstr "dato"
 
 msgid "# of hits"
 msgstr "Antal besøg"
-
-msgid "Charts are not available!"
-msgstr "Tabeller er ikke tilgængelige!"
 
 msgid "Page Size Distribution"
 msgstr "Sidestørrelser"
@@ -1433,26 +1433,30 @@ msgstr "Kvik-links"
 msgid "More Actions:"
 msgstr "Flere Rutiner:"
 
-msgid "Show Raw Text"
-msgstr "Vis rå tekst"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Vis udskriftsvenlig udgave"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Vis rå tekst"
 
 msgid "Delete Cache"
 msgstr "Slet cache"
 
-msgid "Attach File"
-msgstr "Vedhæft fil"
+#, fuzzy
+msgid "Attachments"
+msgstr "Ny vedhæftet fil"
 
 msgid "Delete Page"
 msgstr "Slet side"
 
-msgid "Show Like Pages"
-msgstr "Vis lignende sider"
+#, fuzzy
+msgid "Like Pages"
+msgstr "LignendeSide"
 
-msgid "Show Local Site Map"
-msgstr "Vis lokal oversigt"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "LokalOversigt"
 
 msgid "Do"
 msgstr "Anvend"
@@ -1470,10 +1474,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Info"
 
 #, python-format
 msgid "Show %s days."
@@ -1595,6 +1595,22 @@ msgstr "OmdøbSide"
 
 msgid "SpellCheck"
 msgstr "StaveKontrol"
+
+#~ msgid "Show Print View"
+#~ msgstr "Vis udskriftsvenlig udgave"
+
+#~ msgid "Attach File"
+#~ msgstr "Vedhæft fil"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Vis lignende sider"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Vis lokal oversigt"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Info"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Kan ikke forstå forespørgslen"

@@ -363,6 +363,12 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Pretpis na regularne izraze se nije mogao izbrisati!''',
 '''You have been subscribed to this page.''':
 '''Vi ste se pretpisali na ovu stranicu.''',
+'''Charts are not available!''':
+'''Grafikoni trenutno ne postoje!''',
+'''You need to provide a chart type!''':
+'''Morate odrediti vrstu grafikona!''',
+'''Bad chart type "%s"!''':
+'''Loš grafikon tipa "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Potreban atribut "%(attrname)s" nedostaje''',
 '''Submitted form data:''':
@@ -572,10 +578,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Prikaz''',
 '''Filename''':
 '''Ime fajla''',
-'''You need to provide a chart type!''':
-'''Morate odrediti vrstu grafikona!''',
-'''Bad chart type "%s"!''':
-'''Loš grafikon tipa "%s"!''',
 '''Download XML export of this wiki''':
 '''Skinuti XML eksport ovog vikija''',
 '''No wanted pages in this wiki.''':
@@ -600,8 +602,6 @@ crveno=obrade''',
 '''datum''',
 '''# of hits''':
 '''# zahteva''',
-'''Charts are not available!''':
-'''Grafikoni trenutno ne postoje!''',
 '''Page Size Distribution''':
 '''Statistika veličine stranica''',
 '''page size upper bound [bytes]''':

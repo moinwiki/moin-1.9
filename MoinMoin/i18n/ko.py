@@ -403,6 +403,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''정규표현식으로 된 감시 목록은 지울 수 없습니다!''',
 '''You have been subscribed to this page.''':
 '''이제 이 글이 변경되면 메일로 알려드리겠습니다.''',
+'''Charts are not available!''':
+'''이 위키에서는 차트 그리기가 지원되지 않습니다.''',
+'''You need to provide a chart type!''':
+'''차트 타입을 지정하여야 합니다!''',
+'''Bad chart type "%s"!''':
+'''잘못된 차트 종류 입니다: "%s"''',
 '''Required attribute "%(attrname)s" missing''':
 '''필요한 속성인 "%(attrname)s"가 없습니다''',
 '''Submitted form data:''':
@@ -637,10 +643,6 @@ Try a different name.''':
 '''보기''',
 '''Filename''':
 '''파일이름''',
-'''You need to provide a chart type!''':
-'''차트 타입을 지정하여야 합니다!''',
-'''Bad chart type "%s"!''':
-'''잘못된 차트 종류 입니다: "%s"''',
 '''Download XML export of this wiki''':
 '''이 위키 전체를 XML로 반출''',
 '''No wanted pages in this wiki.''':
@@ -665,8 +667,6 @@ red=edit''',
 '''date''',
 '''# of hits''':
 '''# of hits''',
-'''Charts are not available!''':
-'''이 위키에서는 차트 그리기가 지원되지 않습니다.''',
 '''Page Size Distribution''':
 '''Page Size Distribution''',
 '''page size upper bound [bytes]''':
@@ -695,18 +695,8 @@ red=edit''',
 '''제목''',
 '''More Actions:''':
 '''다른 작업:''',
-'''Show Raw Text''':
-'''본문 보기''',
-'''Show Print View''':
-'''인쇄용 화면보기''',
-'''Attach File''':
-'''첨부 파일''',
 '''Delete Page''':
 '''글 지우기''',
-'''Show Like Pages''':
-'''비슷한 글 보기''',
-'''Show Local Site Map''':
-'''사이트 맵 보기''',
 '''Do''':
 '''확인''',
 '''Immutable Page''':

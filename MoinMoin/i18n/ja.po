@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-30 21:03+0200\n"
-"PO-Revision-Date: 2005-10-03 15:23+0900\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"PO-Revision-Date: 2005-10-06 11:00+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -398,7 +398,7 @@ msgid "Subscribe"
 msgstr "購読"
 
 msgid "Raw"
-msgstr "テキスト"
+msgstr "Wikiテキスト"
 
 msgid "XML"
 msgstr "XML"
@@ -742,7 +742,7 @@ msgid "view"
 msgstr "表示"
 
 msgid "raw"
-msgstr "テキスト"
+msgstr "Wikiテキスト"
 
 msgid "print"
 msgstr "印刷"
@@ -1432,26 +1432,26 @@ msgstr "クイックリンク"
 msgid "More Actions:"
 msgstr "その他のアクション:"
 
-msgid "Show Raw Text"
-msgstr "テキストの表示"
+msgid "------------"
+msgstr "------------"
 
-msgid "Show Print View"
-msgstr "印刷ビューの表示"
+msgid "Raw Text"
+msgstr "Wikiテキスト"
 
 msgid "Delete Cache"
 msgstr "キャッシュの削除"
 
-msgid "Attach File"
-msgstr "ファイルの添付"
+msgid "Attachments"
+msgstr "添付ファイル"
 
 msgid "Delete Page"
 msgstr "ページの削除"
 
-msgid "Show Like Pages"
-msgstr "似たページの表示"
+msgid "Like Pages"
+msgstr "似たページ"
 
-msgid "Show Local Site Map"
-msgstr "ローカルサイトマップの表示"
+msgid "Local Site Map"
+msgstr "ローカルサイトマップ"
 
 msgid "Do"
 msgstr "実行"
@@ -1467,9 +1467,6 @@ msgstr "編集(GUIモード)"
 
 msgid "Immutable Page"
 msgstr "編集不可のページ"
-
-msgid "Infos"
-msgstr "情報"
 
 #, python-format
 msgid "Show %s days."
@@ -1590,6 +1587,21 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "Show Print View"
+#~ msgstr "印刷ビューの表示"
+
+#~ msgid "Attach File"
+#~ msgstr "ファイルの添付"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "似たページの表示"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "ローカルサイトマップの表示"
+
+#~ msgid "Infos"
+#~ msgstr "情報"
 
 #~ msgid "Can't work out query"
 #~ msgstr "問い合わせを行うことができません。"

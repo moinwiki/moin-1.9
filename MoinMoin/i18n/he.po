@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -915,6 +915,9 @@ msgstr "מאופשר"
 msgid "Lupy search"
 msgstr "חיפוש מהיר"
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "השתמשו במונח חיפוש בררני יותר מאשר {{{\"%s\"}}}."
@@ -969,6 +972,12 @@ msgstr ""
 "אל תשתמשו בכתובת של הקובץ, היא עלולה להשתנות\n"
 "והקישור ישבר."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "אין קבצים מצורפים ל–%(pagename)s"
@@ -1021,6 +1030,14 @@ msgstr "אין לכם הרשאות למחוק קבצים מצורפים לדף."
 msgid "You are not allowed to get attachments from this page."
 msgstr "אין לכם הרשאות לקבל קבצים מצורפים מהדף"
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "אין לכם הרשאות לצפות בקבצים מצורפים בדף"
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "אין לכם הרשאות לערוך את הדף"
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "אין לכם הרשאות לצפות בקבצים מצורפים בדף"
 
@@ -1048,9 +1065,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "קובץ מצורף \"%(filename)s\" נמחק."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "קובץ מצורף \"%(filename)s\" נמחק."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "איור \"%(filename)s\" נשמר."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "קובץ מצורף \"%(filename)s\" נמחק."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "קובץ מצורף \"%(filename)s\"."
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "שם קובץ"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "סוג קובץ לא ידוע, אי אפשר להציג אותו בתוך הדף."

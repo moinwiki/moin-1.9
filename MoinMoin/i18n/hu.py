@@ -424,6 +424,12 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''A reguláris kifejezéses előfizetést nem lehet lemondani!''',
 '''You have been subscribed to this page.''':
 '''Ön előfizetett erre a lapra.''',
+'''Charts are not available!''':
+'''A diagramok nem elérhetőek!''',
+'''You need to provide a chart type!''':
+'''Meg kell adnia a diagram típusát!''',
+'''Bad chart type "%s"!''':
+'''Hibás diagramtípus: "%s"''',
 '''Required attribute "%(attrname)s" missing''':
 '''A(z) "%(attrname)s" kötelező attribútum hiányzik''',
 '''Submitted form data:''':
@@ -664,10 +670,6 @@ Próbáljon más nevet adni a lapnak.''',
 '''Megjelenítés''',
 '''Filename''':
 '''Állománynév''',
-'''You need to provide a chart type!''':
-'''Meg kell adnia a diagram típusát!''',
-'''Bad chart type "%s"!''':
-'''Hibás diagramtípus: "%s"''',
 '''Download XML export of this wiki''':
 '''A wiki XML-exportjának letöltése''',
 '''No wanted pages in this wiki.''':
@@ -704,8 +706,6 @@ piros=szerkesztés''',
 '''dátum''',
 '''# of hits''':
 '''találatok száma''',
-'''Charts are not available!''':
-'''A diagramok nem elérhetőek!''',
 '''Page Size Distribution''':
 '''Lapméret-eloszlás''',
 '''page size upper bound [bytes]''':
@@ -752,20 +752,10 @@ piros=szerkesztés''',
 '''Címek''',
 '''More Actions:''':
 '''További műveletek:''',
-'''Show Raw Text''':
-'''Nyers szöveg megjelenítése''',
-'''Show Print View''':
-'''Nyomtatási kép megjelenítése''',
 '''Delete Cache''':
 '''Gyorstár törlése''',
-'''Attach File''':
-'''Állomány csatolása''',
 '''Delete Page''':
 '''Lap törlése''',
-'''Show Like Pages''':
-'''Hasonló lapok megjelenítése''',
-'''Show Local Site Map''':
-'''Helyi laptérkép megjelenítése''',
 '''Do''':
 '''Végrehajtás''',
 '''Immutable Page''':

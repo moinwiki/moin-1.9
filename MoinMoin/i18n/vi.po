@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -835,6 +835,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Bạn vừa đăng ký vào trang này."
 
+msgid "Charts are not available!"
+msgstr "Biểu đồ không thể được thực hiện!"
+
+msgid "You need to provide a chart type!"
+msgstr "Bạn cần nhập vào loại biểu đồ!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Không hiểu loại biểu đồ \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Không tìm thấy thuộc tính \"%(attrname)s\""
@@ -1276,13 +1286,6 @@ msgstr "Hiển thị"
 msgid "Filename"
 msgstr "Tên file"
 
-msgid "You need to provide a chart type!"
-msgstr "Bạn cần nhập vào loại biểu đồ!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Không hiểu loại biểu đồ \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Tải về theo dạng XML của trang này"
 
@@ -1348,9 +1351,6 @@ msgstr "ngày"
 
 msgid "# of hits"
 msgstr "số lần xem"
-
-msgid "Charts are not available!"
-msgstr "Biểu đồ không thể được thực hiện!"
 
 msgid "Page Size Distribution"
 msgstr "Thống kê theo kích thước trang"
@@ -1431,27 +1431,31 @@ msgstr "Các liên kết thường dùng"
 msgid "More Actions:"
 msgstr "Các hành động khác:"
 
-msgid "Show Raw Text"
-msgstr "Hiện trang nguồn"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Hiện bản in"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Hiện trang nguồn"
 
 #, fuzzy
 msgid "Delete Cache"
 msgstr "Xóa trang"
 
-msgid "Attach File"
-msgstr "Gửi kèm tập tin"
+#, fuzzy
+msgid "Attachments"
+msgstr "Gửi kèm file mới"
 
 msgid "Delete Page"
 msgstr "Xóa trang"
 
-msgid "Show Like Pages"
-msgstr "Hiện các trang tương tự"
+#, fuzzy
+msgid "Like Pages"
+msgstr "LikePages"
 
-msgid "Show Local Site Map"
-msgstr "Hiện bản đồ liên kết"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "LocalSiteMap"
 
 msgid "Do"
 msgstr "Làm"
@@ -1469,10 +1473,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Trang không thể được thay đổi"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Thông tin"
 
 #, python-format
 msgid "Show %s days."
@@ -1592,6 +1592,22 @@ msgstr "RenamePage"
 
 msgid "SpellCheck"
 msgstr "SpellCheck"
+
+#~ msgid "Show Print View"
+#~ msgstr "Hiện bản in"
+
+#~ msgid "Attach File"
+#~ msgstr "Gửi kèm tập tin"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Hiện các trang tương tự"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Hiện bản đồ liên kết"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Thông tin"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Không thể thực hiện việc tìm kiếm"

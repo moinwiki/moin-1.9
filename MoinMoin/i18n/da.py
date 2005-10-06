@@ -411,6 +411,12 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Kan ikke afmelde et abonnement som regulært udtryk (regexp)!''',
 '''You have been subscribed to this page.''':
 '''Du abonnerer nu på denne side.''',
+'''Charts are not available!''':
+'''Tabeller er ikke tilgængelige!''',
+'''You need to provide a chart type!''':
+'''Tabeltypen skal angives!''',
+'''Bad chart type "%s"!''':
+'''Dårlig tabeltype·"%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Krævet atribut "%(attrname)s" mangler.''',
 '''Submitted form data:''':
@@ -649,10 +655,6 @@ Prøv et andet navn.''',
 '''Vis''',
 '''Filename''':
 '''Filnavn''',
-'''You need to provide a chart type!''':
-'''Tabeltypen skal angives!''',
-'''Bad chart type "%s"!''':
-'''Dårlig tabeltype·"%s"!''',
 '''Download XML export of this wiki''':
 '''Hent XML-eksport af denne wiki''',
 '''No wanted pages in this wiki.''':
@@ -681,8 +683,6 @@ rød=redigér''',
 '''dato''',
 '''# of hits''':
 '''Antal besøg''',
-'''Charts are not available!''':
-'''Tabeller er ikke tilgængelige!''',
 '''Page Size Distribution''':
 '''Sidestørrelser''',
 '''page size upper bound [bytes]''':
@@ -727,20 +727,10 @@ rød=redigér''',
 '''Titler''',
 '''More Actions:''':
 '''Flere Rutiner:''',
-'''Show Raw Text''':
-'''Vis rå tekst''',
-'''Show Print View''':
-'''Vis udskriftsvenlig udgave''',
 '''Delete Cache''':
 '''Slet cache''',
-'''Attach File''':
-'''Vedhæft fil''',
 '''Delete Page''':
 '''Slet side''',
-'''Show Like Pages''':
-'''Vis lignende sider''',
-'''Show Local Site Map''':
-'''Vis lokal oversigt''',
 '''Do''':
 '''Anvend''',
 '''Immutable Page''':

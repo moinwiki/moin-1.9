@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2004-11-21 00:00+0000\n"
 "Last-Translator: Mauricio Hernandez Z <mhz.chile@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -624,7 +624,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Esta dirección e-mail ya es usada por alguien más."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Cuenta de usuario creada!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -640,7 +640,7 @@ msgid "<Browser setting>"
 msgstr "<Configuración de tu Navegador>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "el/la preferido/a"
 
 msgid "free choice"
 msgstr ""
@@ -863,6 +863,16 @@ msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "Te has suscrito a esta página."
+
+msgid "Charts are not available!"
+msgstr "¡Los gráficos no están disponibles!"
+
+msgid "You need to provide a chart type!"
+msgstr "¡Hay que indicar un tipo de gráfico!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "¡Tipo de gráfico incorrecto \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1317,13 +1327,6 @@ msgstr "Visualizar"
 msgid "Filename"
 msgstr "Nombre de Archivo"
 
-msgid "You need to provide a chart type!"
-msgstr "¡Hay que indicar un tipo de gráfico!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "¡Tipo de gráfico incorrecto \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Bajar XML exportado de este wiki"
 
@@ -1389,9 +1392,6 @@ msgstr "fecha"
 
 msgid "# of hits"
 msgstr "# de hits"
-
-msgid "Charts are not available!"
-msgstr "¡Los gráficos no están disponibles!"
 
 msgid "Page Size Distribution"
 msgstr "Distribución del Tamaño de Página"
@@ -1473,26 +1473,30 @@ msgstr "Enlaces rápidos"
 msgid "More Actions:"
 msgstr "Más Acciones"
 
-msgid "Show Raw Text"
-msgstr "Texto sin formato"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Vista de Impresión"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Texto sin formato"
 
 msgid "Delete Cache"
 msgstr "Eliminar Caché"
 
-msgid "Attach File"
-msgstr "Adjuntar Archivo"
+#, fuzzy
+msgid "Attachments"
+msgstr "Nuevo adjunto"
 
 msgid "Delete Page"
 msgstr "Eliminar Página"
 
-msgid "Show Like Pages"
-msgstr "Mostrar Páginas Similares"
+#, fuzzy
+msgid "Like Pages"
+msgstr "PáginasSimilares"
 
-msgid "Show Local Site Map"
-msgstr "Mostrar Mapa Del Sitio"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "MapaDelSitio"
 
 msgid "Do"
 msgstr "Hacer"
@@ -1510,10 +1514,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Página inmutable"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Información"
 
 #, python-format
 msgid "Show %s days."
@@ -1635,6 +1635,22 @@ msgstr "RenombrarPágina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+#~ msgid "Show Print View"
+#~ msgstr "Vista de Impresión"
+
+#~ msgid "Attach File"
+#~ msgstr "Adjuntar Archivo"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Mostrar Páginas Similares"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Mostrar Mapa Del Sitio"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Información"
 
 #~ msgid "Can't work out query"
 #~ msgstr "No puedo procesar la solicitud"

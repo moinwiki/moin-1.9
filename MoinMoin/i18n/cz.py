@@ -42,6 +42,8 @@ volání makra.-~
 '''Tato stránka je neměnná!''',
 '''Cannot edit old revisions!''':
 '''Staré verze se nedají editovat''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Váš časový zámek vypršel, buďte připraveni na možné editační spory!''',
 '''Page name is too long, try shorter name.''':
 '''Název stránky je příliš dlouhý, zvolte kratší název.''',
 '''Edit "%(pagename)s"''':
@@ -237,6 +239,8 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Zablokovat navždy tento účet''',
 '''Name''':
 '''Jméno''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Použijte JmenoPrijmeni)''',
 '''Password''':
 '''Heslo''',
 '''Password repeat''':
@@ -262,6 +266,8 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''Přihlášení''',
 ''' %s and try again.''':
 ''' %s a zkuste to znovu.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d nálezů na celkem %(pages)d stránkách.''',
 '''%.2f seconds''':
 '''%.2f sekund''',
 '''match''':
@@ -296,6 +302,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Hesla nesouhlasí!''',
 '''Please specify a password!''':
 '''Zadejte prosím heslo!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Zadejte prosím Váš email. Pokud zapomenete Vaše přihlašovací informace, mohou Vám být na tento email zaslány.''',
 '''This email already belongs to somebody else.''':
 '''Tato emailová adresa patří již někomu jinému.''',
 '''User account created!''':
@@ -418,6 +426,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Nemáte právo vracet změny na této stránce!''',
 '''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
 '''Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v pravem hornim rohu a vytvořte si ho.''',
+'''Your quicklink to this page has been removed.''':
+'''Odebrali jste tuto stránku z pohotových odkazů.''',
+'''A quicklink to this page has been added for you.''':
+'''Přidali jste si tuto stránku do pohotových odkazů.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nemůžete odebírat stránky, ke kterým nemáte právo čtení.''',
 '''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
@@ -428,6 +440,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Váš odběr této stránky byl zrušen.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nemohu zrušit odběr z regulárního výrazu!''',
+'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
+'''Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku ze seznamu odebíraných stránek.''',
 '''You have been subscribed to this page.''':
 '''Přihlásili jste se k odběru této stránky.''',
 '''Charts are not available!''':
@@ -486,6 +500,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Akce globálního rozšíření''',
 '''Local extension actions''':
 '''Akce lokálního rozšíření''',
+'''Global parsers''':
+'''Globální parsery.''',
+'''Local extension parsers''':
+'''Parsery lokálního rozšíření''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Instalované processory (ZAVRŽENÉ -- použijívejte parsery)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
@@ -610,6 +628,8 @@ Try a different name.''':
 Zkuste jiné jméno.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(včetně %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy%(localwords)s nalezena a jsou zvýrazněna níže:''',
 '''Add checked words to dictionary''':
 '''Přidat označená slova do slovníku''',
 '''No spelling errors found!''':
@@ -690,6 +710,10 @@ Zkuste jiné jméno.''',
 '''Očekáváno celé číslo "%(arg)s" po "%(key)s"''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Očekávána hodnota barvy "%(arg)s" po "%(key)s"''',
+'''XSLT option disabled, please look at HelpOnConfiguration.''':
+'''XSLT není povoleno, prosím vizte HelpOnConfiguration.''',
+'''XSLT processing is not available, please install 4suite 1.x.''':
+'''XSLT zpracování není dostupné, prosím nainstalujte 4suite 1.x.''',
 '''%(errortype)s processing error''':
 '''Chyba při zpracování "%(errortype)s"''',
 '''Views/day''':
@@ -748,22 +772,24 @@ red=edit''':
 '''Text''',
 '''Titles''':
 '''Stránky''',
+'''Search''':
+'''Hledat:''',
+'''Quicklink''':
+'''Pohotový odkaz''',
 '''More Actions:''':
 '''Další akce:''',
-'''Show Raw Text''':
+'''Raw Text''':
 '''Zdrojový text''',
-'''Show Print View''':
-'''Náhled tisku''',
 '''Delete Cache''':
 '''Smazat cache''',
-'''Attach File''':
-'''Připojit soubor''',
+'''Attachments''':
+'''Přílohy''',
 '''Delete Page''':
 '''Smazat stránku''',
-'''Show Like Pages''':
-'''Podobné stránky''',
-'''Show Local Site Map''':
-'''Mapa lokálního umístění''',
+'''Like Pages''':
+'''Podobné Stránky''',
+'''Local Site Map''':
+'''Lokální Mapa Stránek''',
 '''Do''':
 '''Proveď!''',
 '''Parent Page''':

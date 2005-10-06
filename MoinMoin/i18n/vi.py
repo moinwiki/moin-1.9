@@ -399,6 +399,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Không thể huỷ bỏ đăng ký biểu thức chính quy!''',
 '''You have been subscribed to this page.''':
 '''Bạn vừa đăng ký vào trang này.''',
+'''Charts are not available!''':
+'''Biểu đồ không thể được thực hiện!''',
+'''You need to provide a chart type!''':
+'''Bạn cần nhập vào loại biểu đồ!''',
+'''Bad chart type "%s"!''':
+'''Không hiểu loại biểu đồ "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Không tìm thấy thuộc tính "%(attrname)s"''',
 '''Submitted form data:''':
@@ -635,10 +641,6 @@ Vui lòng dùng tên khác.''',
 '''Hiển thị''',
 '''Filename''':
 '''Tên file''',
-'''You need to provide a chart type!''':
-'''Bạn cần nhập vào loại biểu đồ!''',
-'''Bad chart type "%s"!''':
-'''Không hiểu loại biểu đồ "%s"!''',
 '''Download XML export of this wiki''':
 '''Tải về theo dạng XML của trang này''',
 '''No wanted pages in this wiki.''':
@@ -663,8 +665,6 @@ red=edit''':
 '''ngày''',
 '''# of hits''':
 '''số lần xem''',
-'''Charts are not available!''':
-'''Biểu đồ không thể được thực hiện!''',
 '''Page Size Distribution''':
 '''Thống kê theo kích thước trang''',
 '''page size upper bound [bytes]''':
@@ -695,18 +695,8 @@ red=edit''':
 '''Tiêu đề''',
 '''More Actions:''':
 '''Các hành động khác:''',
-'''Show Raw Text''':
-'''Hiện trang nguồn''',
-'''Show Print View''':
-'''Hiện bản in''',
-'''Attach File''':
-'''Gửi kèm tập tin''',
 '''Delete Page''':
 '''Xóa trang''',
-'''Show Like Pages''':
-'''Hiện các trang tương tự''',
-'''Show Local Site Map''':
-'''Hiện bản đồ liên kết''',
 '''Do''':
 '''Làm''',
 '''Immutable Page''':

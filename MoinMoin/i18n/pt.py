@@ -415,6 +415,12 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Não pode remover expressões regulares (regex) da subscrição!''',
 '''You have been subscribed to this page.''':
 '''Sua inscrição foi removida desta página.''',
+'''Charts are not available!''':
+'''Os gráficos não estão disponíveis!''',
+'''You need to provide a chart type!''':
+'''Você precisa indicar um tipo de gráfico!''',
+'''Bad chart type "%s"!''':
+'''Tipo de gráfico incorreto "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Falta o atributo requerido "%(attrname)s"''',
 '''Submitted form data:''':
@@ -655,10 +661,6 @@ Tente um nome diferente.''',
 '''Visualizar''',
 '''Filename''':
 '''Nome do Arquivo''',
-'''You need to provide a chart type!''':
-'''Você precisa indicar um tipo de gráfico!''',
-'''Bad chart type "%s"!''':
-'''Tipo de gráfico incorreto "%s"!''',
 '''Download XML export of this wiki''':
 '''Download do XML exportado deste wiki''',
 '''No wanted pages in this wiki.''':
@@ -687,8 +689,6 @@ vermelho=editar''',
 '''data''',
 '''# of hits''':
 '''# de hits''',
-'''Charts are not available!''':
-'''Os gráficos não estão disponíveis!''',
 '''Page Size Distribution''':
 '''Distribuição do Tamanho da Página''',
 '''page size upper bound [bytes]''':
@@ -733,20 +733,10 @@ vermelho=editar''',
 '''Títulos''',
 '''More Actions:''':
 '''Mais Ações''',
-'''Show Raw Text''':
-'''Texto sem formato''',
-'''Show Print View''':
-'''Previsão de Impressão''',
 '''Delete Cache''':
 '''Eliminar Cache''',
-'''Attach File''':
-'''Arquivo Anexo''',
 '''Delete Page''':
 '''Eliminar Página''',
-'''Show Like Pages''':
-'''Mostrar Páginas Similares''',
-'''Show Local Site Map''':
-'''Mostrar Mapa Do Site''',
 '''Do''':
 '''Fazer''',
 '''Immutable Page''':

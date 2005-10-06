@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-30 21:03+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -79,7 +79,6 @@ msgstr "Tato stránka je neměnná!"
 msgid "Cannot edit old revisions!"
 msgstr "Staré verze se nedají editovat"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Váš časový zámek vypršel, buďte připraveni na možné editační spory!"
 
@@ -450,7 +449,6 @@ msgstr "Zablokovat navždy tento účet"
 msgid "Name"
 msgstr "Jméno"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
 msgstr "(Použijte JmenoPrijmeni)"
 
@@ -499,7 +497,7 @@ msgstr "Přihlášení"
 msgid " %s and try again."
 msgstr " %s a zkuste to znovu."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d nálezů na celkem %(pages)d stránkách."
 
@@ -586,7 +584,6 @@ msgstr "Hesla nesouhlasí!"
 msgid "Please specify a password!"
 msgstr "Zadejte prosím heslo!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
@@ -791,13 +788,11 @@ msgstr ""
 "Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
 "pravem hornim rohu a vytvořte si ho."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Váš odběr této stránky byl zrušen."
+msgstr "Odebrali jste tuto stránku z pohotových odkazů."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Váš odběr této stránky byl zrušen."
+msgstr "Přidali jste si tuto stránku do pohotových odkazů."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nemůžete odebírat stránky, ke kterým nemáte právo čtení."
@@ -822,7 +817,6 @@ msgstr "Váš odběr této stránky byl zrušen."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nemohu zrušit odběr z regulárního výrazu!"
 
-#, fuzzy
 msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
@@ -921,13 +915,11 @@ msgstr "Akce globálního rozšíření"
 msgid "Local extension actions"
 msgstr "Akce lokálního rozšíření"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Instalované parsery."
+msgstr "Globální parsery."
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Makra lokálního rozšíření"
+msgstr "Parsery lokálního rozšíření"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Instalované processory (ZAVRŽENÉ -- použijívejte parsery)"
@@ -1160,13 +1152,13 @@ msgstr ""
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(včetně %(localwords)d %(pagelink)s)"
 
-#, fuzzy, python-format
+#, python-format, fuzzy
 msgid ""
 "The following %(badwords)d words could not be found in the dictionary of %"
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy "
-"nalezena a jsou zvýrazněna níže:"
+"Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy"
+"%(localwords)s nalezena a jsou zvýrazněna níže:"
 
 msgid "Add checked words to dictionary"
 msgstr "Přidat označená slova do slovníku"
@@ -1310,11 +1302,10 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Očekávána hodnota barvy \"%(arg)s\" po \"%(key)s\""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
+msgstr "XSLT není povoleno, prosím vizte HelpOnConfiguration."
 
-#, fuzzy
 msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT zpracování není dostupné!"
+msgstr "XSLT zpracování není dostupné, prosím nainstalujte 4suite 1.x."
 
 #, python-format
 msgid "%(errortype)s processing error"
@@ -1411,37 +1402,35 @@ msgstr "Text"
 msgid "Titles"
 msgstr "Stránky"
 
-#, fuzzy
 msgid "Search"
 msgstr "Hledat:"
 
-#, fuzzy
 msgid "Quicklink"
-msgstr "Pohotové odkazy"
+msgstr "Pohotový odkaz"
 
 msgid "More Actions:"
 msgstr "Další akce:"
 
-msgid "Show Raw Text"
-msgstr "Zdrojový text"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Náhled tisku"
+msgid "Raw Text"
+msgstr "Zdrojový text"
 
 msgid "Delete Cache"
 msgstr "Smazat cache"
 
-msgid "Attach File"
-msgstr "Připojit soubor"
+msgid "Attachments"
+msgstr "Přílohy"
 
 msgid "Delete Page"
 msgstr "Smazat stránku"
 
-msgid "Show Like Pages"
-msgstr "Podobné stránky"
+msgid "Like Pages"
+msgstr "Podobné Stránky"
 
-msgid "Show Local Site Map"
-msgstr "Mapa lokálního umístění"
+msgid "Local Site Map"
+msgstr "Lokální Mapa Stránek"
 
 msgid "Do"
 msgstr "Proveď!"
@@ -1457,10 +1446,6 @@ msgstr "Editace (GUI)"
 
 msgid "Immutable Page"
 msgstr "Neměnná stránka"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Info"
 
 #, python-format
 msgid "Show %s days."
@@ -1581,6 +1566,22 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "Show Print View"
+#~ msgstr "Náhled tisku"
+
+#~ msgid "Attach File"
+#~ msgstr "Připojit soubor"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Podobné stránky"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Mapa lokálního umístění"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Info"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Dotaz nedává smysl"

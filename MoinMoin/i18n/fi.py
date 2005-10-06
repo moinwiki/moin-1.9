@@ -416,6 +416,12 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Säännöllisen lausekkeen tilausta ei voida poistaa!''',
 '''You have been subscribed to this page.''':
 '''Sinulle on lisätty tilaus tälle sivulle.''',
+'''Charts are not available!''':
+'''Kaaviot eivät ole käytettävissä!''',
+'''You need to provide a chart type!''':
+'''Sinun täytyy antaa kaavion tyyppi!''',
+'''Bad chart type "%s"!''':
+'''Kelvoton kaavion tyyppi "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Vaadittu tieto "%(attrname)s" puuttuu''',
 '''Submitted form data:''':
@@ -655,10 +661,6 @@ Kokeile eri nimeä.''',
 '''Näytä''',
 '''Filename''':
 '''Tiedostonimi''',
-'''You need to provide a chart type!''':
-'''Sinun täytyy antaa kaavion tyyppi!''',
-'''Bad chart type "%s"!''':
-'''Kelvoton kaavion tyyppi "%s"!''',
 '''Download XML export of this wiki''':
 '''Lataa tämän wikin XML-vienti''',
 '''No wanted pages in this wiki.''':
@@ -687,8 +689,6 @@ red=edit''',
 '''päivämäärä''',
 '''# of hits''':
 '''katseluiden lukumäärä''',
-'''Charts are not available!''':
-'''Kaaviot eivät ole käytettävissä!''',
 '''Page Size Distribution''':
 '''Sivukoon jakauma''',
 '''page size upper bound [bytes]''':
@@ -733,20 +733,10 @@ red=edit''',
 '''Nimistä''',
 '''More Actions:''':
 '''Lisää toimintoja:''',
-'''Show Raw Text''':
-'''Näytä muotoilematon teksti''',
-'''Show Print View''':
-'''Näytä tulostettavana''',
 '''Delete Cache''':
 '''Poista välimuistista''',
-'''Attach File''':
-'''Liitä tiedosto''',
 '''Delete Page''':
 '''Poista sivu''',
-'''Show Like Pages''':
-'''Näytä samankaltaisia sivuja''',
-'''Show Local Site Map''':
-'''Näytä paikallinen sivukartta''',
 '''Do''':
 '''Tee''',
 '''Immutable Page''':

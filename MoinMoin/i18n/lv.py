@@ -396,7 +396,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''General options''':
 '''Vispārējas opcijas''',
 '''Quick links''':
-'''Grāmatzīmes''',
+'''Ātrsaites''',
 '''This list does not work, unless you have entered a valid email address!''':
 '''Šis saraksts strādā tikai ar pareizu e-pasta adresi!''',
 '''Subscribed wiki pages (one regex per line)''':
@@ -404,7 +404,7 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Create Profile''':
 '''Izveidot profilu''',
 '''Mail me my account data''':
-'''Atsūtīt manus konta datus''',
+'''Atsūtīt mana sistēmas konta datus''',
 '''No older revisions available!''':
 '''Vecākas versijas nav!''',
 '''Diff for "%s"''':
@@ -839,20 +839,20 @@ sarkans=labot''',
 '''Ātrsaite''',
 '''More Actions:''':
 '''Citas darbības:''',
-'''Show Raw Text''':
+'''------------''':
+'''------------''',
+'''Raw Text''':
 '''Rādīt jēltekstu''',
-'''Show Print View''':
-'''Rādīt drukas skatu''',
 '''Delete Cache''':
 '''Dzēst kešatmiņu''',
 '''Attachments''':
 '''Piesaistes''',
 '''Delete Page''':
 '''Dzēst lapu''',
-'''Show Like Pages''':
-'''Rādīt līdzīgas lapas''',
-'''Show Local Site Map''':
-'''Parādīt lokālās vietnes karti''',
+'''Like Pages''':
+'''Līdzīgas lapas''',
+'''Local Site Map''':
+'''Lokālā vietnes karte''',
 '''Do''':
 '''Veikt''',
 '''Parent Page''':
@@ -863,8 +863,6 @@ sarkans=labot''',
 '''Labot grafiski''',
 '''Immutable Page''':
 '''Nemaināma Lapa''',
-'''Infos''':
-'''Informācija''',
 '''Show %s days.''':
 '''Rādīt %s dienas.''',
 '''EditText''':
@@ -894,7 +892,7 @@ sarkans=labot''',
 '''Mail sent OK''':
 '''E-pasts nosūtīts''',
 '''FrontPage''':
-'''Priekšlapa''',
+'''SākumLapa''',
 '''RecentChanges''':
 '''PēdējāsIzmaiņas''',
 '''TitleIndex''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-09-27 13:21+0200\n"
 "Last-Translator: J-P Gue'rard <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -220,7 +220,8 @@ msgstr ""
 " Tables:: || texte de la cellule |||| texte s'étendant sur 2 colonnes || ; "
 "aucune espace ne doit suivre la fin d'un tableau ou d'un titre.\n"
 "\n"
-"(!) Pour plus d'informations, reportez-vous à l'[\"AideDeL'Édition\"] ou au RésuméDeLaSyntaxe.\n"
+"(!) Pour plus d'informations, reportez-vous à l'[\"AideDeL'Édition\"] ou au "
+"RésuméDeLaSyntaxe.\n"
 
 msgid "Edit was cancelled."
 msgstr "Modification annulée."
@@ -864,11 +865,21 @@ msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
 msgstr ""
-"Pour vous désabonner, allez dans votre profil et supprimez le motif correspondant à cette page de la "
-"liste de vos abonnements."
+"Pour vous désabonner, allez dans votre profil et supprimez le motif "
+"correspondant à cette page de la liste de vos abonnements."
 
 msgid "You have been subscribed to this page."
 msgstr "Vous avez été abonné à cette page."
+
+msgid "Charts are not available!"
+msgstr "Les graphiques ne sont pas disponibles !"
+
+msgid "You need to provide a chart type!"
+msgstr "Vous devez fournir un type de graphique !"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Type de graphique « %s » incorrect !"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1317,13 +1328,6 @@ msgstr "Affichage"
 msgid "Filename"
 msgstr "Nom du fichier"
 
-msgid "You need to provide a chart type!"
-msgstr "Vous devez fournir un type de graphique !"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Type de graphique « %s » incorrect !"
-
 msgid "Download XML export of this wiki"
 msgstr "Télécharger un export XML de ce wiki"
 
@@ -1389,9 +1393,6 @@ msgstr "date"
 
 msgid "# of hits"
 msgstr "Nombre de consultations"
-
-msgid "Charts are not available!"
-msgstr "Les graphiques ne sont pas disponibles !"
 
 msgid "Page Size Distribution"
 msgstr "Page Taille Répartition"
@@ -1473,26 +1474,30 @@ msgstr "Lien rapide"
 msgid "More Actions:"
 msgstr "Autres actions :"
 
-msgid "Show Raw Text"
-msgstr "Voir le code source"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Version à imprimer"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Voir le code source"
 
 msgid "Delete Cache"
 msgstr "Effacer le cache"
 
-msgid "Attach File"
-msgstr "Joindre un fichier"
+#, fuzzy
+msgid "Attachments"
+msgstr "Nouvelle pièce jointe"
 
 msgid "Delete Page"
 msgstr "Supprimer la page"
 
-msgid "Show Like Pages"
-msgstr "Pages similaires"
+#, fuzzy
+msgid "Like Pages"
+msgstr "PagesSimilaires"
 
-msgid "Show Local Site Map"
-msgstr "Carte locale du site"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "CarteLocaleDuSite"
 
 msgid "Do"
 msgstr "Exécuter"
@@ -1508,9 +1513,6 @@ msgstr "Éditer (mode graphique)"
 
 msgid "Immutable Page"
 msgstr "Page immuable"
-
-msgid "Infos"
-msgstr "Informations"
 
 #, python-format
 msgid "Show %s days."
@@ -1632,3 +1634,18 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
+
+#~ msgid "Show Print View"
+#~ msgstr "Version à imprimer"
+
+#~ msgid "Attach File"
+#~ msgstr "Joindre un fichier"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Pages similaires"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Carte locale du site"
+
+#~ msgid "Infos"
+#~ msgstr "Informations"

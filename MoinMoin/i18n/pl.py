@@ -403,6 +403,12 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Nie można usunąć subskrybcji wyrażenia skończonego!''',
 '''You have been subscribed to this page.''':
 '''Rezygnacja z subskrybcji została przyjęta.''',
+'''Charts are not available!''':
+'''Wykresy nie są dostępne!''',
+'''You need to provide a chart type!''':
+'''Podaj rodzaj wykresu!''',
+'''Bad chart type "%s"!''':
+'''Nieprawidłowy rodzaj wykresu "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Niezbędny brakujący atrybut "%(attrname)s"''',
 '''Submitted form data:''':
@@ -641,10 +647,6 @@ Spróbuj innej nazwy.''',
 '''Pokaż''',
 '''Filename''':
 '''Nazwa pliku''',
-'''You need to provide a chart type!''':
-'''Podaj rodzaj wykresu!''',
-'''Bad chart type "%s"!''':
-'''Nieprawidłowy rodzaj wykresu "%s"!''',
 '''Download XML export of this wiki''':
 '''Zgraj wersję XML tego wiki''',
 '''No wanted pages in this wiki.''':
@@ -669,8 +671,6 @@ czerwony=edycja''',
 '''data''',
 '''# of hits''':
 '''# odwiedzin''',
-'''Charts are not available!''':
-'''Wykresy nie są dostępne!''',
 '''page size upper bound [bytes]''':
 '''rozmiar strony [bajtów]''',
 '''# of pages of this size''':
@@ -695,18 +695,8 @@ czerwony=edycja''',
 '''Tytuły''',
 '''More Actions:''':
 '''Więcej operacji:''',
-'''Show Raw Text''':
-'''Pokaż tekst źródłowy''',
-'''Show Print View''':
-'''Pokaż podgląd wydruku''',
-'''Attach File''':
-'''Załącz plik''',
 '''Delete Page''':
 '''Usuń stronę''',
-'''Show Like Pages''':
-'''Pokaż podobne strony''',
-'''Show Local Site Map''':
-'''Pokaż mapę wiki''',
 '''Do''':
 '''Wykonaj''',
 '''Immutable Page''':

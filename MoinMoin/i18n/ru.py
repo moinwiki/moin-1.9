@@ -463,6 +463,12 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Не могу удалить подписку по образцу.''',
 '''You have been subscribed to this page.''':
 '''Теперь вы подписаны на эту страницу.''',
+'''Charts are not available!''':
+'''Диаграммы недоступены!''',
+'''You need to provide a chart type!''':
+'''Укажите тип диаграммы!''',
+'''Bad chart type "%s"!''':
+'''Плохой тип диаграммы "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Отсутствует требуемый атрибут"%(attrname)s"''',
 '''Submitted form data:''':
@@ -711,10 +717,6 @@ Try a different name.''':
 '''Просмотр''',
 '''Filename''':
 '''Файл''',
-'''You need to provide a chart type!''':
-'''Укажите тип диаграммы!''',
-'''Bad chart type "%s"!''':
-'''Плохой тип диаграммы "%s"!''',
 '''Download XML export of this wiki''':
 '''Сохранить XML версию этого вики''',
 '''No wanted pages in this wiki.''':
@@ -751,8 +753,6 @@ red=edit''':
 '''дата''',
 '''# of hits''':
 '''Число обращений''',
-'''Charts are not available!''':
-'''Диаграммы недоступены!''',
 '''Page Size Distribution''':
 '''Распределение размера страниц''',
 '''page size upper bound [bytes]''':
@@ -799,20 +799,10 @@ red=edit''':
 '''По заголовкам''',
 '''More Actions:''':
 '''Другие действия:''',
-'''Show Raw Text''':
-'''Показать разметку''',
-'''Show Print View''':
-'''Версия для печати''',
 '''Delete Cache''':
 '''Убрать из кэша''',
-'''Attach File''':
-'''Приложить файл''',
 '''Delete Page''':
 '''Вырвать страницу''',
-'''Show Like Pages''':
-'''Найти похожие страницы''',
-'''Show Local Site Map''':
-'''Карта окресностей''',
 '''Do''':
 '''Выполняй!''',
 '''Edit (Text)''':

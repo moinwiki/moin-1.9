@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -841,6 +841,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Ön előfizetett erre a lapra."
 
+msgid "Charts are not available!"
+msgstr "A diagramok nem elérhetőek!"
+
+msgid "You need to provide a chart type!"
+msgstr "Meg kell adnia a diagram típusát!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Hibás diagramtípus: \"%s\""
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "A(z) \"%(attrname)s\" kötelező attribútum hiányzik"
@@ -1285,13 +1295,6 @@ msgstr "Megjelenítés"
 msgid "Filename"
 msgstr "Állománynév"
 
-msgid "You need to provide a chart type!"
-msgstr "Meg kell adnia a diagram típusát!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Hibás diagramtípus: \"%s\""
-
 msgid "Download XML export of this wiki"
 msgstr "A wiki XML-exportjának letöltése"
 
@@ -1356,9 +1359,6 @@ msgstr "dátum"
 
 msgid "# of hits"
 msgstr "találatok száma"
-
-msgid "Charts are not available!"
-msgstr "A diagramok nem elérhetőek!"
 
 msgid "Page Size Distribution"
 msgstr "Lapméret-eloszlás"
@@ -1439,26 +1439,30 @@ msgstr "Gyorskapcsok (-linkek)"
 msgid "More Actions:"
 msgstr "További műveletek:"
 
-msgid "Show Raw Text"
-msgstr "Nyers szöveg megjelenítése"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Nyomtatási kép megjelenítése"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Nyers szöveg megjelenítése"
 
 msgid "Delete Cache"
 msgstr "Gyorstár törlése"
 
-msgid "Attach File"
-msgstr "Állomány csatolása"
+#, fuzzy
+msgid "Attachments"
+msgstr "Új melléklet"
 
 msgid "Delete Page"
 msgstr "Lap törlése"
 
-msgid "Show Like Pages"
-msgstr "Hasonló lapok megjelenítése"
+#, fuzzy
+msgid "Like Pages"
+msgstr "HasonlóLapok"
 
-msgid "Show Local Site Map"
-msgstr "Helyi laptérkép megjelenítése"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "HelyiLaptérkép"
 
 msgid "Do"
 msgstr "Végrehajtás"
@@ -1476,10 +1480,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Nem szerkeszthető lap"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Infó"
 
 #, python-format
 msgid "Show %s days."
@@ -1603,6 +1603,22 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#~ msgid "Show Print View"
+#~ msgstr "Nyomtatási kép megjelenítése"
+
+#~ msgid "Attach File"
+#~ msgstr "Állomány csatolása"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Hasonló lapok megjelenítése"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Helyi laptérkép megjelenítése"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Infó"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Nem tudjuk a keresést végrehajtani"

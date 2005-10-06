@@ -499,6 +499,12 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Para remover a inscrição, vá para seu perfil e apague esta página da lista de páginas inscritas.''',
 '''You have been subscribed to this page.''':
 '''Sua inscrição a esta página foi efetivada.''',
+'''Charts are not available!''':
+'''Gráficos não estão disponíveis!''',
+'''You need to provide a chart type!''':
+'''Você precisa informar um tipo de gráfico!''',
+'''Bad chart type "%s"!''':
+'''Tipo inadequado de gráfico "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''O atributo necessário "%(attrname)s" está faltando.''',
 '''Submitted form data:''':
@@ -751,10 +757,6 @@ Tente um nome diferente.''',
 '''Mostrar''',
 '''Filename''':
 '''Nome do arquivo''',
-'''You need to provide a chart type!''':
-'''Você precisa informar um tipo de gráfico!''',
-'''Bad chart type "%s"!''':
-'''Tipo inadequado de gráfico "%s"!''',
 '''Download XML export of this wiki''':
 '''Baixar arquivo XML exportado desta wiki''',
 '''No wanted pages in this wiki.''':
@@ -791,8 +793,6 @@ vermelho=editar''',
 '''data''',
 '''# of hits''':
 '''# of hits''',
-'''Charts are not available!''':
-'''Gráficos não estão disponíveis!''',
 '''Page Size Distribution''':
 '''Distribuição do Tamanho de Página''',
 '''page size upper bound [bytes]''':
@@ -843,20 +843,20 @@ vermelho=editar''',
 '''Links rápidos''',
 '''More Actions:''':
 '''Mais Ações:''',
-'''Show Raw Text''':
-'''Visualizar Texto Bruto''',
-'''Show Print View''':
-'''Visualizar Impressão''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Visualizar Texto''',
 '''Delete Cache''':
 '''Deletar Cache''',
-'''Attach File''':
-'''Anexar Arquivo''',
+'''Attachments''':
+'''Anexos''',
 '''Delete Page''':
 '''Apagar Página''',
-'''Show Like Pages''':
-'''Mostrar Páginas Semelhantes''',
-'''Show Local Site Map''':
-'''Mostrar Mapa Local do Site''',
+'''Like Pages''':
+'''Páginas Semelhantes''',
+'''Local Site Map''':
+'''Mapa do Site Local''',
 '''Do''':
 '''Fazer''',
 '''Parent Page''':
@@ -867,8 +867,6 @@ vermelho=editar''',
 '''Editar (GUI)''',
 '''Immutable Page''':
 '''Página Não Editável''',
-'''Infos''':
-'''Infos''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
 '''EditText''':

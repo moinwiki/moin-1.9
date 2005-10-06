@@ -409,6 +409,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Non posso rimuovere la sottoscrizione per espressione regolare''',
 '''You have been subscribed to this page.''':
 '''Da questo momento sei abbonato a questa pagina.''',
+'''Charts are not available!''':
+'''Grafici non disponibili!''',
+'''You need to provide a chart type!''':
+'''Devi specificare un tipo di grafico!''',
+'''Bad chart type "%s"!''':
+'''Tipo di grafico "%s" non valido!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Manca l\'attributo obbligatorio "%(attrname)s" ''',
 '''Submitted form data:''':
@@ -650,10 +656,6 @@ Prova un nome differente.''',
 '''Mostra''',
 '''Filename''':
 '''Nome del file''',
-'''You need to provide a chart type!''':
-'''Devi specificare un tipo di grafico!''',
-'''Bad chart type "%s"!''':
-'''Tipo di grafico "%s" non valido!''',
 '''Download XML export of this wiki''':
 '''Scarica una versione XML di questo wiki''',
 '''No wanted pages in this wiki.''':
@@ -682,8 +684,6 @@ rosso=Mod''',
 '''data''',
 '''# of hits''':
 '''n. di accessi''',
-'''Charts are not available!''':
-'''Grafici non disponibili!''',
 '''Page Size Distribution''':
 '''Distribuzione delle pagine per dimensione''',
 '''page size upper bound [bytes]''':
@@ -728,20 +728,10 @@ rosso=Mod''',
 '''Titoli''',
 '''More Actions:''':
 '''Altre Azioni:''',
-'''Show Raw Text''':
-'''Mostra il testo grezzo''',
-'''Show Print View''':
-'''Versione stampabile''',
 '''Delete Cache''':
 '''Cancella file temporanei''',
-'''Attach File''':
-'''File allegati''',
 '''Delete Page''':
 '''Cancella Pagina''',
-'''Show Like Pages''':
-'''Mostra pagine simili''',
-'''Show Local Site Map''':
-'''Mappa locale del sito''',
 '''Do''':
 '''Vai''',
 '''Immutable Page''':
