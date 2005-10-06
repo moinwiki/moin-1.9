@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-04-17 00:00+0100\n"
 "Last-Translator: Leonardo Gregianin\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -841,6 +841,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Sua inscrição foi removida desta página."
 
+msgid "Charts are not available!"
+msgstr "Os gráficos não estão disponíveis!"
+
+msgid "You need to provide a chart type!"
+msgstr "Você precisa indicar um tipo de gráfico!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Tipo de gráfico incorreto \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Falta o atributo requerido \"%(attrname)s\""
@@ -1289,13 +1299,6 @@ msgstr "Visualizar"
 msgid "Filename"
 msgstr "Nome do Arquivo"
 
-msgid "You need to provide a chart type!"
-msgstr "Você precisa indicar um tipo de gráfico!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Tipo de gráfico incorreto \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Download do XML exportado deste wiki"
 
@@ -1360,9 +1363,6 @@ msgstr "data"
 
 msgid "# of hits"
 msgstr "# de hits"
-
-msgid "Charts are not available!"
-msgstr "Os gráficos não estão disponíveis!"
 
 msgid "Page Size Distribution"
 msgstr "Distribuição do Tamanho da Página"
@@ -1443,26 +1443,30 @@ msgstr "Links rápidos"
 msgid "More Actions:"
 msgstr "Mais Ações"
 
-msgid "Show Raw Text"
-msgstr "Texto sem formato"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Previsão de Impressão"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Texto sem formato"
 
 msgid "Delete Cache"
 msgstr "Eliminar Cache"
 
-msgid "Attach File"
-msgstr "Arquivo Anexo"
+#, fuzzy
+msgid "Attachments"
+msgstr "Novo anexo"
 
 msgid "Delete Page"
 msgstr "Eliminar Página"
 
-msgid "Show Like Pages"
-msgstr "Mostrar Páginas Similares"
+#, fuzzy
+msgid "Like Pages"
+msgstr "PáginasSimilares"
 
-msgid "Show Local Site Map"
-msgstr "Mostrar Mapa Do Site"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "MapaDoSite"
 
 msgid "Do"
 msgstr "Fazer"
@@ -1480,10 +1484,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Página Imutável"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Informação"
 
 #, python-format
 msgid "Show %s days."
@@ -1605,6 +1605,22 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "CorreçãoOrtográfica"
+
+#~ msgid "Show Print View"
+#~ msgstr "Previsão de Impressão"
+
+#~ msgid "Attach File"
+#~ msgstr "Arquivo Anexo"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Mostrar Páginas Similares"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Mostrar Mapa Do Site"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Informação"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Não é possível processar a solicitação"

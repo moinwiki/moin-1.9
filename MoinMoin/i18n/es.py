@@ -332,6 +332,8 @@ por una mejor y más fácil de recordar.
 '''Por favor, provee una contraseña!''',
 '''This email already belongs to somebody else.''':
 '''Esta dirección e-mail ya es usada por alguien más.''',
+'''User account created!''':
+'''Cuenta de usuario creada!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No se pudo cargar el tema \'%(theme_name)s\' !''',
 '''User preferences saved!''':
@@ -340,6 +342,8 @@ por una mejor y más fácil de recordar.
 '''Predeterminado''',
 '''<Browser setting>''':
 '''<Configuración de tu Navegador>''',
+'''the one preferred''':
+'''el/la preferido/a''',
 '''Save''':
 '''Guardar''',
 '''Logout''':
@@ -454,6 +458,12 @@ por una mejor y más fácil de recordar.
 '''No se puede quitar la expresion regular (regex) de suscripción''',
 '''You have been subscribed to this page.''':
 '''Te has suscrito a esta página.''',
+'''Charts are not available!''':
+'''¡Los gráficos no están disponibles!''',
+'''You need to provide a chart type!''':
+'''¡Hay que indicar un tipo de gráfico!''',
+'''Bad chart type "%s"!''':
+'''¡Tipo de gráfico incorrecto "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Falta el atributo requerido "%(attrname)s"''',
 '''Submitted form data:''':
@@ -693,10 +703,6 @@ Intenta con un nombre distinto.''',
 '''Visualizar''',
 '''Filename''':
 '''Nombre de Archivo''',
-'''You need to provide a chart type!''':
-'''¡Hay que indicar un tipo de gráfico!''',
-'''Bad chart type "%s"!''':
-'''¡Tipo de gráfico incorrecto "%s"!''',
 '''Download XML export of this wiki''':
 '''Bajar XML exportado de este wiki''',
 '''No wanted pages in this wiki.''':
@@ -725,8 +731,6 @@ rojo=editar''',
 '''fecha''',
 '''# of hits''':
 '''# de hits''',
-'''Charts are not available!''':
-'''¡Los gráficos no están disponibles!''',
 '''Page Size Distribution''':
 '''Distribución del Tamaño de Página''',
 '''page size upper bound [bytes]''':
@@ -771,20 +775,10 @@ rojo=editar''',
 '''Títulos''',
 '''More Actions:''':
 '''Más Acciones''',
-'''Show Raw Text''':
-'''Texto sin formato''',
-'''Show Print View''':
-'''Vista de Impresión''',
 '''Delete Cache''':
 '''Eliminar Caché''',
-'''Attach File''':
-'''Adjuntar Archivo''',
 '''Delete Page''':
 '''Eliminar Página''',
-'''Show Like Pages''':
-'''Mostrar Páginas Similares''',
-'''Show Local Site Map''':
-'''Mostrar Mapa Del Sitio''',
 '''Do''':
 '''Hacer''',
 '''Immutable Page''':

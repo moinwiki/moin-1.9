@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2004-12-27 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -832,6 +832,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Rezygnacja z subskrybcji została przyjęta."
 
+msgid "Charts are not available!"
+msgstr "Wykresy nie są dostępne!"
+
+msgid "You need to provide a chart type!"
+msgstr "Podaj rodzaj wykresu!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Niezbędny brakujący atrybut \"%(attrname)s\""
@@ -1278,13 +1288,6 @@ msgstr "Pokaż"
 msgid "Filename"
 msgstr "Nazwa pliku"
 
-msgid "You need to provide a chart type!"
-msgstr "Podaj rodzaj wykresu!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Zgraj wersję XML tego wiki"
 
@@ -1349,9 +1352,6 @@ msgstr "data"
 
 msgid "# of hits"
 msgstr "# odwiedzin"
-
-msgid "Charts are not available!"
-msgstr "Wykresy nie są dostępne!"
 
 #, fuzzy
 msgid "Page Size Distribution"
@@ -1434,27 +1434,31 @@ msgstr "Szybkie skróty"
 msgid "More Actions:"
 msgstr "Więcej operacji:"
 
-msgid "Show Raw Text"
-msgstr "Pokaż tekst źródłowy"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Pokaż podgląd wydruku"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Pokaż tekst źródłowy"
 
 #, fuzzy
 msgid "Delete Cache"
 msgstr "Usuń stronę"
 
-msgid "Attach File"
-msgstr "Załącz plik"
+#, fuzzy
+msgid "Attachments"
+msgstr "Nowy załącznik"
 
 msgid "Delete Page"
 msgstr "Usuń stronę"
 
-msgid "Show Like Pages"
-msgstr "Pokaż podobne strony"
+#, fuzzy
+msgid "Like Pages"
+msgstr "PodobneStrony"
 
-msgid "Show Local Site Map"
-msgstr "Pokaż mapę wiki"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "MapaWitryny"
 
 msgid "Do"
 msgstr "Wykonaj"
@@ -1472,10 +1476,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Strona nie zmieniona"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Info"
 
 #, python-format
 msgid "Show %s days."
@@ -1599,6 +1599,22 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "Show Print View"
+#~ msgstr "Pokaż podgląd wydruku"
+
+#~ msgid "Attach File"
+#~ msgstr "Załącz plik"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Pokaż podobne strony"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Pokaż mapę wiki"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Info"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Nie potrafię zadać pytania"

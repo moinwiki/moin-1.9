@@ -415,6 +415,12 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Kan geen reguliere expressie-abonnement verwijderen!''',
 '''You have been subscribed to this page.''':
 '''U bent geabonneerd op deze pagina.''',
+'''Charts are not available!''':
+'''Diagrammen zijn niet beschikbaar!''',
+'''You need to provide a chart type!''':
+'''U dient een grafiektype op te geven!''',
+'''Bad chart type "%s"!''':
+'''Ongeldig grafiektype "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Benodigd attribuut "%(attrname)s" ontbreekt''',
 '''Submitted form data:''':
@@ -654,10 +660,6 @@ Probeer een andere naam.''',
 '''Uiterlijk''',
 '''Filename''':
 '''Bestandsnaam''',
-'''You need to provide a chart type!''':
-'''U dient een grafiektype op te geven!''',
-'''Bad chart type "%s"!''':
-'''Ongeldig grafiektype "%s"!''',
 '''Download XML export of this wiki''':
 '''Download een export naar XML van deze wiki''',
 '''No wanted pages in this wiki.''':
@@ -686,8 +688,6 @@ rood=bewerken''',
 '''datum''',
 '''# of hits''':
 '''# treffers''',
-'''Charts are not available!''':
-'''Diagrammen zijn niet beschikbaar!''',
 '''Page Size Distribution''':
 '''Verdeling van de paginagrootte ''',
 '''page size upper bound [bytes]''':
@@ -732,20 +732,10 @@ rood=bewerken''',
 '''Titels''',
 '''More Actions:''':
 '''Meer acties:''',
-'''Show Raw Text''':
-'''Ruwe tekst tonen''',
-'''Show Print View''':
-'''Afdrukvoorbeeld tonen''',
 '''Delete Cache''':
 '''Buffer legen''',
-'''Attach File''':
-'''Bijlage toevoegen''',
 '''Delete Page''':
 '''Pagina verwijderen''',
-'''Show Like Pages''':
-'''Gelijkende pagina\'s tonen''',
-'''Show Local Site Map''':
-'''Lokale wegwijzer tonen''',
 '''Do''':
 '''Uitvoeren''',
 '''Immutable Page''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-30 21:03+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1464,26 +1464,26 @@ msgstr "Expressverweis"
 msgid "More Actions:"
 msgstr "Weitere Aktionen:"
 
-msgid "Show Raw Text"
-msgstr "Rohform anzeigen"
+msgid "------------"
+msgstr "------------"
 
-msgid "Show Print View"
-msgstr "Druckansicht"
+msgid "Raw Text"
+msgstr "Rohform"
 
 msgid "Delete Cache"
 msgstr "Cache löschen"
 
-msgid "Attach File"
+msgid "Attachments"
 msgstr "Dateianhänge"
 
 msgid "Delete Page"
 msgstr "Seite löschen"
 
-msgid "Show Like Pages"
+msgid "Like Pages"
 msgstr "Ähnliche Seiten"
 
-msgid "Show Local Site Map"
-msgstr "Übersichtskarte"
+msgid "Local Site Map"
+msgstr "ÜbersichtsKarte"
 
 msgid "Do"
 msgstr "Los!"
@@ -1499,9 +1499,6 @@ msgstr "Editieren (GUI)"
 
 msgid "Immutable Page"
 msgstr "Geschützte Seite"
-
-msgid "Infos"
-msgstr "Infos"
 
 #, python-format
 msgid "Show %s days."

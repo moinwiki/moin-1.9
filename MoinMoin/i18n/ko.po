@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -826,6 +826,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "이제 이 글이 변경되면 메일로 알려드리겠습니다."
 
+msgid "Charts are not available!"
+msgstr "이 위키에서는 차트 그리기가 지원되지 않습니다."
+
+msgid "You need to provide a chart type!"
+msgstr "차트 타입을 지정하여야 합니다!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "잘못된 차트 종류 입니다: \"%s\""
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "필요한 속성인 \"%(attrname)s\"가 없습니다"
@@ -1267,13 +1277,6 @@ msgstr "보기"
 msgid "Filename"
 msgstr "파일이름"
 
-msgid "You need to provide a chart type!"
-msgstr "차트 타입을 지정하여야 합니다!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "잘못된 차트 종류 입니다: \"%s\""
-
 msgid "Download XML export of this wiki"
 msgstr "이 위키 전체를 XML로 반출"
 
@@ -1342,9 +1345,6 @@ msgstr "date"
 
 msgid "# of hits"
 msgstr "# of hits"
-
-msgid "Charts are not available!"
-msgstr "이 위키에서는 차트 그리기가 지원되지 않습니다."
 
 msgid "Page Size Distribution"
 msgstr "Page Size Distribution"
@@ -1426,27 +1426,31 @@ msgstr "빨리가기메뉴"
 msgid "More Actions:"
 msgstr "다른 작업:"
 
-msgid "Show Raw Text"
-msgstr "본문 보기"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "인쇄용 화면보기"
+#, fuzzy
+msgid "Raw Text"
+msgstr "본문 보기"
 
 #, fuzzy
 msgid "Delete Cache"
 msgstr "글 지우기"
 
-msgid "Attach File"
-msgstr "첨부 파일"
+#, fuzzy
+msgid "Attachments"
+msgstr "새 첨부"
 
 msgid "Delete Page"
 msgstr "글 지우기"
 
-msgid "Show Like Pages"
-msgstr "비슷한 글 보기"
+#, fuzzy
+msgid "Like Pages"
+msgstr "비슷한페이지"
 
-msgid "Show Local Site Map"
-msgstr "사이트 맵 보기"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "사이트맵"
 
 msgid "Do"
 msgstr "확인"
@@ -1464,10 +1468,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "못 고치는 글"
-
-#, fuzzy
-msgid "Infos"
-msgstr "정보"
 
 #, python-format
 msgid "Show %s days."
@@ -1587,6 +1587,22 @@ msgstr "이름바꿈"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#~ msgid "Show Print View"
+#~ msgstr "인쇄용 화면보기"
+
+#~ msgid "Attach File"
+#~ msgstr "첨부 파일"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "비슷한 글 보기"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "사이트 맵 보기"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "정보"
 
 #~ msgid "Can't work out query"
 #~ msgstr "퀴어리를 쓸 수 없습니다"

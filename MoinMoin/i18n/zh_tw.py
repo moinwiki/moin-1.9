@@ -401,6 +401,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''無法取消用 regex 設定的訂閱.''',
 '''You have been subscribed to this page.''':
 '''訂閱好了.''',
+'''Charts are not available!''':
+'''不能繪製圖表!''',
+'''You need to provide a chart type!''':
+'''請指定圖表類型!''',
+'''Bad chart type "%s"!''':
+'''錯誤的圖表類型 "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''缺少必要的屬性 "%(attrname)s"''',
 '''Submitted form data:''':
@@ -637,10 +643,6 @@ Try a different name.''':
 '''顯示''',
 '''Filename''':
 '''檔名''',
-'''You need to provide a chart type!''':
-'''請指定圖表類型!''',
-'''Bad chart type "%s"!''':
-'''錯誤的圖表類型 "%s"!''',
 '''Download XML export of this wiki''':
 '''匯出並下載本 wiki (XML 格式)''',
 '''No wanted pages in this wiki.''':
@@ -665,8 +667,6 @@ red=edit''':
 '''日期''',
 '''# of hits''':
 '''人氣指數''',
-'''Charts are not available!''':
-'''不能繪製圖表!''',
 '''Page Size Distribution''':
 '''頁面大小分佈''',
 '''page size upper bound [bytes]''':
@@ -697,18 +697,8 @@ red=edit''':
 '''標題''',
 '''More Actions:''':
 '''其他功能:''',
-'''Show Raw Text''':
-'''顯示原始碼''',
-'''Show Print View''':
-'''檢視列印''',
-'''Attach File''':
-'''附件''',
 '''Delete Page''':
 '''刪除本頁''',
-'''Show Like Pages''':
-'''尋找相似頁面''',
-'''Show Local Site Map''':
-'''顯示連結地圖''',
 '''Do''':
 '''執行''',
 '''Immutable Page''':

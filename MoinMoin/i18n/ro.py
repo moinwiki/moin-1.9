@@ -449,6 +449,12 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Nu se poate şterge înregistrarea cu expresie regulară!''',
 '''You have been subscribed to this page.''':
 '''Aţi fost înregistrat(ă) pe această pagină.''',
+'''Charts are not available!''':
+'''Graficele nu sunt disponibile!''',
+'''You need to provide a chart type!''':
+'''Trebuie să specificaţi tipul graficului!''',
+'''Bad chart type "%s"!''':
+'''Este invalid tipul de grafic "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Parametrul necesar "%(attrname)s" lipseşte''',
 '''Submitted form data:''':
@@ -697,10 +703,6 @@ Try a different name.''':
 '''Afişare''',
 '''Filename''':
 '''Nume fişier''',
-'''You need to provide a chart type!''':
-'''Trebuie să specificaţi tipul graficului!''',
-'''Bad chart type "%s"!''':
-'''Este invalid tipul de grafic "%s"!''',
 '''Download XML export of this wiki''':
 '''Descărcare export XML pentru acest wiki''',
 '''No wanted pages in this wiki.''':
@@ -737,8 +739,6 @@ red=editare''',
 '''data''',
 '''# of hits''':
 '''# de accesări''',
-'''Charts are not available!''':
-'''Graficele nu sunt disponibile!''',
 '''Page Size Distribution''':
 '''Distribuţia Dimensiunii Paginii''',
 '''page size upper bound [bytes]''':
@@ -785,20 +785,10 @@ red=editare''',
 '''Titluri''',
 '''More Actions:''':
 '''Mai Multe Acţiuni:''',
-'''Show Raw Text''':
-'''Afişare Text Brut''',
-'''Show Print View''':
-'''Afişare Pentru Tipărire''',
 '''Delete Cache''':
 '''Ştergere Cache''',
-'''Attach File''':
-'''Ataşare Fişier''',
 '''Delete Page''':
 '''Ştergere Pagină''',
-'''Show Like Pages''':
-'''Afişare Pagini Asemănătoare''',
-'''Show Local Site Map''':
-'''Afişare Hartă Locală Sit''',
 '''Do''':
 '''Executare''',
 '''Immutable Page''':

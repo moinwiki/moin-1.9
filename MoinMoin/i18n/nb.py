@@ -412,6 +412,12 @@ e-post eller fjerne "Abonner"-knappen.''',
 '''Abonnement med regulært uttrykk kan ikke avbestilles.''',
 '''You have been subscribed to this page.''':
 '''Du abonnerer nå på denne siden.''',
+'''Charts are not available!''':
+'''Grafer er ikke tilgjengelige!''',
+'''You need to provide a chart type!''':
+'''Graftypen skal angis!''',
+'''Bad chart type "%s"!''':
+'''Feil graftype "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Obligatorisk attributt "%(attrname)s" mangler.''',
 '''Submitted form data:''':
@@ -652,10 +658,6 @@ Prøv igjen med et annet navn.''',
 '''Vis''',
 '''Filename''':
 '''Filnavn''',
-'''You need to provide a chart type!''':
-'''Graftypen skal angis!''',
-'''Bad chart type "%s"!''':
-'''Feil graftype "%s"!''',
 '''Download XML export of this wiki''':
 '''Last ned XML-eksporten av denne wikien''',
 '''No wanted pages in this wiki.''':
@@ -680,8 +682,6 @@ rød=rediger''',
 '''dato''',
 '''# of hits''':
 '''Antall besøk''',
-'''Charts are not available!''':
-'''Grafer er ikke tilgjengelige!''',
 '''Page Size Distribution''':
 '''Fordeling av sidestørrelser''',
 '''page size upper bound [bytes]''':
@@ -710,18 +710,8 @@ rød=rediger''',
 '''Titler''',
 '''More Actions:''':
 '''Flere operasjoner:''',
-'''Show Raw Text''':
-'''Vis kilde''',
-'''Show Print View''':
-'''Vis utskriftsversjon''',
-'''Attach File''':
-'''Legg ved fil''',
 '''Delete Page''':
 '''Slett side''',
-'''Show Like Pages''':
-'''Vis lignende sider''',
-'''Show Local Site Map''':
-'''Vis lokal oversikt''',
 '''Do''':
 '''Utfør''',
 '''Immutable Page''':

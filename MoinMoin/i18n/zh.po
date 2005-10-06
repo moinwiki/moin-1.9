@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -211,7 +211,8 @@ msgstr ""
 " 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空"
 "格.\n"
 "\n"
-"(!) 更多帮助见[\"帮助-编辑\"][\"语法参考\"], or see HelpOnEditing or SyntaxReference.\n"
+"(!) 更多帮助见[\"帮助-编辑\"][\"语法参考\"], or see HelpOnEditing or "
+"SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "编辑取消了."
@@ -522,7 +523,6 @@ msgstr ""
 "\n"
 "登录URL: %s/?action=userform&uid=%s\n"
 
-
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到用'%(email)s'登记的帐户!!"
@@ -539,7 +539,8 @@ msgid ""
 msgstr ""
 "有人要求将他的帐号资料寄到这个电子邮件地址.\n"
 "\n"
-"如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表中. \n"
+"如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表"
+"中. \n"
 "您可以用拷贝粘贴的方法.\n"
 "\n"
 "成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. \n"
@@ -813,6 +814,16 @@ msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单�
 
 msgid "You have been subscribed to this page."
 msgstr "您已经订阅了此页."
+
+msgid "Charts are not available!"
+msgstr "不能绘制图表"
+
+msgid "You need to provide a chart type!"
+msgstr "请指定图表类型!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "错误的图表类型\"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -1246,13 +1257,6 @@ msgstr "显示"
 msgid "Filename"
 msgstr "文件名"
 
-msgid "You need to provide a chart type!"
-msgstr "请指定图表类型!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "错误的图表类型\"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "下载本维基的XML输出"
 
@@ -1314,9 +1318,6 @@ msgstr "日期"
 
 msgid "# of hits"
 msgstr "点击次数"
-
-msgid "Charts are not available!"
-msgstr "不能绘制图表"
 
 msgid "Page Size Distribution"
 msgstr "网页大小分布"
@@ -1395,25 +1396,29 @@ msgstr "快捷链接"
 msgid "More Actions:"
 msgstr "更多操作"
 
-msgid "Show Raw Text"
-msgstr "显示源码"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "打印视图"
+#, fuzzy
+msgid "Raw Text"
+msgstr "显示源码"
 
 msgid "Delete Cache"
 msgstr "删除缓存"
 
-msgid "Attach File"
-msgstr "附件"
+#, fuzzy
+msgid "Attachments"
+msgstr "上载附件"
 
 msgid "Delete Page"
 msgstr "删除"
 
-msgid "Show Like Pages"
+#, fuzzy
+msgid "Like Pages"
 msgstr "相似网页"
 
-msgid "Show Local Site Map"
+#, fuzzy
+msgid "Local Site Map"
 msgstr "本站地图"
 
 msgid "Do"
@@ -1430,9 +1435,6 @@ msgstr "编辑(图形界面)"
 
 msgid "Immutable Page"
 msgstr "只读网页"
-
-msgid "Infos"
-msgstr "本页资料"
 
 #, python-format
 msgid "Show %s days."
@@ -1551,6 +1553,21 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Show Print View"
+#~ msgstr "打印视图"
+
+#~ msgid "Attach File"
+#~ msgstr "附件"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "相似网页"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "本站地图"
+
+#~ msgid "Infos"
+#~ msgstr "本页资料"
 
 #~ msgid "Can't work out query"
 #~ msgstr "无法完成查询"

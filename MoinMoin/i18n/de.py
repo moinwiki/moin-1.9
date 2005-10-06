@@ -842,20 +842,20 @@ rot=Änderungen''',
 '''Expressverweis''',
 '''More Actions:''':
 '''Weitere Aktionen:''',
-'''Show Raw Text''':
-'''Rohform anzeigen''',
-'''Show Print View''':
-'''Druckansicht''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Rohform''',
 '''Delete Cache''':
 '''Cache löschen''',
-'''Attach File''':
+'''Attachments''':
 '''Dateianhänge''',
 '''Delete Page''':
 '''Seite löschen''',
-'''Show Like Pages''':
+'''Like Pages''':
 '''Ähnliche Seiten''',
-'''Show Local Site Map''':
-'''Übersichtskarte''',
+'''Local Site Map''':
+'''ÜbersichtsKarte''',
 '''Do''':
 '''Los!''',
 '''Parent Page''':
@@ -866,8 +866,6 @@ rot=Änderungen''',
 '''Editieren (GUI)''',
 '''Immutable Page''':
 '''Geschützte Seite''',
-'''Infos''':
-'''Infos''',
 '''Show %s days.''':
 '''%s Tage anzeigen.''',
 '''EditText''':

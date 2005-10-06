@@ -564,6 +564,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Enabled''',
 '''Lupy search''':
 '''Lupy search''',
+'''Active threads''':
+'''Active threads''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Please use a more selective search term instead of {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -594,6 +596,10 @@ since this is subject to change and can break easily.''':
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''',
+'''unzip''':
+'''unzip''',
+'''install''':
+'''install''',
 '''No attachments stored for %(pagename)s''':
 '''No attachments stored for %(pagename)s''',
 '''Edit drawing''':
@@ -626,6 +632,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''You are not allowed to delete attachments on this page.''',
 '''You are not allowed to get attachments from this page.''':
 '''You are not allowed to get attachments from this page.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''You are not allowed to unzip attachments of this page.''',
+'''You are not allowed to install files.''':
+'''You are not allowed to install files.''',
 '''You are not allowed to view attachments of this page.''':
 '''You are not allowed to view attachments of this page.''',
 '''Unsupported upload action: %s''':
@@ -638,8 +648,24 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Attachment \'%(filename)s\' deleted.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Installation of \'%(filename)s\' failed.''',
+'''The file %s is not a MoinMoin package file.''':
+'''The file %s is not a MoinMoin package file.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''',
+'''The file %(target) is not a .zip file.''':
+'''The file %(target) is not a .zip file.''',
 '''Attachment \'%(filename)s\'''':
 '''Attachment \'%(filename)s\'''',
+'''Package script:''':
+'''Package script:''',
+'''File Name''':
+'''File Name''',
+'''Modified''':
+'''Modified''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Unknown file type, cannot display this attachment inline.''',
 '''attachment:%(filename)s of %(pagename)s''':

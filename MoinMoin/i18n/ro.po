@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -859,6 +859,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
 
+msgid "Charts are not available!"
+msgstr "Graficele nu sunt disponibile!"
+
+msgid "You need to provide a chart type!"
+msgstr "Trebuie să specificaţi tipul graficului!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Este invalid tipul de grafic \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Parametrul necesar \"%(attrname)s\" lipseşte"
@@ -1313,13 +1323,6 @@ msgstr "Afişare"
 msgid "Filename"
 msgstr "Nume fişier"
 
-msgid "You need to provide a chart type!"
-msgstr "Trebuie să specificaţi tipul graficului!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Este invalid tipul de grafic \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Descărcare export XML pentru acest wiki"
 
@@ -1381,9 +1384,6 @@ msgstr "data"
 
 msgid "# of hits"
 msgstr "# de accesări"
-
-msgid "Charts are not available!"
-msgstr "Graficele nu sunt disponibile!"
 
 msgid "Page Size Distribution"
 msgstr "Distribuţia Dimensiunii Paginii"
@@ -1464,26 +1464,30 @@ msgstr "Legături rapide"
 msgid "More Actions:"
 msgstr "Mai Multe Acţiuni:"
 
-msgid "Show Raw Text"
-msgstr "Afişare Text Brut"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Afişare Pentru Tipărire"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Afişare Text Brut"
 
 msgid "Delete Cache"
 msgstr "Ştergere Cache"
 
-msgid "Attach File"
-msgstr "Ataşare Fişier"
+#, fuzzy
+msgid "Attachments"
+msgstr "Ataşament Nou"
 
 msgid "Delete Page"
 msgstr "Ştergere Pagină"
 
-msgid "Show Like Pages"
-msgstr "Afişare Pagini Asemănătoare"
+#, fuzzy
+msgid "Like Pages"
+msgstr "PaginiAsemănătoare"
 
-msgid "Show Local Site Map"
-msgstr "Afişare Hartă Locală Sit"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "HartaLocalăSit"
 
 msgid "Do"
 msgstr "Executare"
@@ -1501,10 +1505,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Pagină Imuabilă"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Info"
 
 #, python-format
 msgid "Show %s days."
@@ -1625,6 +1625,22 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#~ msgid "Show Print View"
+#~ msgstr "Afişare Pentru Tipărire"
+
+#~ msgid "Attach File"
+#~ msgstr "Ataşare Fişier"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Afişare Pagini Asemănătoare"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Afişare Hartă Locală Sit"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Info"
 
 #~ msgid "Skip to preview"
 #~ msgstr "Salt la previzionare"

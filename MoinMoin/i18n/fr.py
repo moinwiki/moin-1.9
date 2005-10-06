@@ -499,6 +499,12 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Pour vous désabonner, allez dans votre profil et supprimez le motif correspondant à cette page de la liste de vos abonnements.''',
 '''You have been subscribed to this page.''':
 '''Vous avez été abonné à cette page.''',
+'''Charts are not available!''':
+'''Les graphiques ne sont pas disponibles !''',
+'''You need to provide a chart type!''':
+'''Vous devez fournir un type de graphique !''',
+'''Bad chart type "%s"!''':
+'''Type de graphique « %s » incorrect !''',
 '''Required attribute "%(attrname)s" missing''':
 '''L\'attribut obligatoire « %(attrname)s » est absent''',
 '''Submitted form data:''':
@@ -752,10 +758,6 @@ Essayez un autre nom.''',
 '''Affichage''',
 '''Filename''':
 '''Nom du fichier''',
-'''You need to provide a chart type!''':
-'''Vous devez fournir un type de graphique !''',
-'''Bad chart type "%s"!''':
-'''Type de graphique « %s » incorrect !''',
 '''Download XML export of this wiki''':
 '''Télécharger un export XML de ce wiki''',
 '''No wanted pages in this wiki.''':
@@ -792,8 +794,6 @@ rouge=modifications''',
 '''date''',
 '''# of hits''':
 '''Nombre de consultations''',
-'''Charts are not available!''':
-'''Les graphiques ne sont pas disponibles !''',
 '''Page Size Distribution''':
 '''Page Taille Répartition''',
 '''page size upper bound [bytes]''':
@@ -844,20 +844,10 @@ rouge=modifications''',
 '''Lien rapide''',
 '''More Actions:''':
 '''Autres actions :''',
-'''Show Raw Text''':
-'''Voir le code source''',
-'''Show Print View''':
-'''Version à imprimer''',
 '''Delete Cache''':
 '''Effacer le cache''',
-'''Attach File''':
-'''Joindre un fichier''',
 '''Delete Page''':
 '''Supprimer la page''',
-'''Show Like Pages''':
-'''Pages similaires''',
-'''Show Local Site Map''':
-'''Carte locale du site''',
 '''Do''':
 '''Exécuter''',
 '''Parent Page''':
@@ -868,8 +858,6 @@ rouge=modifications''',
 '''Éditer (mode graphique)''',
 '''Immutable Page''':
 '''Page immuable''',
-'''Infos''':
-'''Informations''',
 '''Show %s days.''':
 '''Voir %s jours.''',
 '''EditText''':

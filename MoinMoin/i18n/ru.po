@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-08-15 19:46-0700\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -839,6 +839,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "Теперь вы подписаны на эту страницу."
 
+msgid "Charts are not available!"
+msgstr "Диаграммы недоступены!"
+
+msgid "You need to provide a chart type!"
+msgstr "Укажите тип диаграммы!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Плохой тип диаграммы \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Отсутствует требуемый атрибут\"%(attrname)s\""
@@ -1282,13 +1292,6 @@ msgstr "Просмотр"
 msgid "Filename"
 msgstr "Файл"
 
-msgid "You need to provide a chart type!"
-msgstr "Укажите тип диаграммы!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Плохой тип диаграммы \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Сохранить XML версию этого вики"
 
@@ -1350,9 +1353,6 @@ msgstr "дата"
 
 msgid "# of hits"
 msgstr "Число обращений"
-
-msgid "Charts are not available!"
-msgstr "Диаграммы недоступены!"
 
 msgid "Page Size Distribution"
 msgstr "Распределение размера страниц"
@@ -1433,26 +1433,30 @@ msgstr "Закладки"
 msgid "More Actions:"
 msgstr "Другие действия:"
 
-msgid "Show Raw Text"
-msgstr "Показать разметку"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Версия для печати"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Показать разметку"
 
 msgid "Delete Cache"
 msgstr "Убрать из кэша"
 
-msgid "Attach File"
-msgstr "Приложить файл"
+#, fuzzy
+msgid "Attachments"
+msgstr "Новое приложение"
 
 msgid "Delete Page"
 msgstr "Вырвать страницу"
 
-msgid "Show Like Pages"
-msgstr "Найти похожие страницы"
+#, fuzzy
+msgid "Like Pages"
+msgstr "ПохожиеСтраницы"
 
-msgid "Show Local Site Map"
-msgstr "Карта окресностей"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "КартаОкресностей"
 
 msgid "Do"
 msgstr "Выполняй!"
@@ -1469,10 +1473,6 @@ msgstr "Исправить (Графически)"
 
 msgid "Immutable Page"
 msgstr "Неизменяемая страница"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Справка"
 
 #, python-format
 msgid "Show %s days."
@@ -1594,6 +1594,22 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#~ msgid "Show Print View"
+#~ msgstr "Версия для печати"
+
+#~ msgid "Attach File"
+#~ msgstr "Приложить файл"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Найти похожие страницы"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Карта окресностей"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Справка"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Не могу выполнить запрос"

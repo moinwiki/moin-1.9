@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 23:21+0200\n"
+"POT-Creation-Date: 2005-10-04 17:39+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -846,6 +846,16 @@ msgstr ""
 msgid "You have been subscribed to this page."
 msgstr "U bent geabonneerd op deze pagina."
 
+msgid "Charts are not available!"
+msgstr "Diagrammen zijn niet beschikbaar!"
+
+msgid "You need to provide a chart type!"
+msgstr "U dient een grafiektype op te geven!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Ongeldig grafiektype \"%s\"!"
+
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Benodigd attribuut \"%(attrname)s\" ontbreekt"
@@ -1295,13 +1305,6 @@ msgstr "Uiterlijk"
 msgid "Filename"
 msgstr "Bestandsnaam"
 
-msgid "You need to provide a chart type!"
-msgstr "U dient een grafiektype op te geven!"
-
-#, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Ongeldig grafiektype \"%s\"!"
-
 msgid "Download XML export of this wiki"
 msgstr "Download een export naar XML van deze wiki"
 
@@ -1366,9 +1369,6 @@ msgstr "datum"
 
 msgid "# of hits"
 msgstr "# treffers"
-
-msgid "Charts are not available!"
-msgstr "Diagrammen zijn niet beschikbaar!"
 
 msgid "Page Size Distribution"
 msgstr "Verdeling van de paginagrootte "
@@ -1449,26 +1449,30 @@ msgstr "Snelkoppelingen"
 msgid "More Actions:"
 msgstr "Meer acties:"
 
-msgid "Show Raw Text"
-msgstr "Ruwe tekst tonen"
+msgid "------------"
+msgstr ""
 
-msgid "Show Print View"
-msgstr "Afdrukvoorbeeld tonen"
+#, fuzzy
+msgid "Raw Text"
+msgstr "Ruwe tekst tonen"
 
 msgid "Delete Cache"
 msgstr "Buffer legen"
 
-msgid "Attach File"
-msgstr "Bijlage toevoegen"
+#, fuzzy
+msgid "Attachments"
+msgstr "Nieuwe bijlage"
 
 msgid "Delete Page"
 msgstr "Pagina verwijderen"
 
-msgid "Show Like Pages"
-msgstr "Gelijkende pagina's tonen"
+#, fuzzy
+msgid "Like Pages"
+msgstr "GelijkendePaginas"
 
-msgid "Show Local Site Map"
-msgstr "Lokale wegwijzer tonen"
+#, fuzzy
+msgid "Local Site Map"
+msgstr "LokaleWegwijzer"
 
 msgid "Do"
 msgstr "Uitvoeren"
@@ -1486,10 +1490,6 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Vastliggende pagina"
-
-#, fuzzy
-msgid "Infos"
-msgstr "Informatie"
 
 #, python-format
 msgid "Show %s days."
@@ -1611,6 +1611,22 @@ msgstr "PaginaHernoemen"
 
 msgid "SpellCheck"
 msgstr "Spellingscontrole"
+
+#~ msgid "Show Print View"
+#~ msgstr "Afdrukvoorbeeld tonen"
+
+#~ msgid "Attach File"
+#~ msgstr "Bijlage toevoegen"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Gelijkende pagina's tonen"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Lokale wegwijzer tonen"
+
+#, fuzzy
+#~ msgid "Infos"
+#~ msgstr "Informatie"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Deze query kan niet beantwoord worden"

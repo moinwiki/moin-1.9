@@ -497,6 +497,12 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项.''',
 '''You have been subscribed to this page.''':
 '''您已经订阅了此页.''',
+'''Charts are not available!''':
+'''不能绘制图表''',
+'''You need to provide a chart type!''':
+'''请指定图表类型!''',
+'''Bad chart type "%s"!''':
+'''错误的图表类型"%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''缺少需要的属性"%(attrname)s"''',
 '''Submitted form data:''':
@@ -748,10 +754,6 @@ Try a different name.''':
 '''显示''',
 '''Filename''':
 '''文件名''',
-'''You need to provide a chart type!''':
-'''请指定图表类型!''',
-'''Bad chart type "%s"!''':
-'''错误的图表类型"%s"!''',
 '''Download XML export of this wiki''':
 '''下载本维基的XML输出''',
 '''No wanted pages in this wiki.''':
@@ -788,8 +790,6 @@ red=edit''':
 '''日期''',
 '''# of hits''':
 '''点击次数''',
-'''Charts are not available!''':
-'''不能绘制图表''',
 '''Page Size Distribution''':
 '''网页大小分布''',
 '''page size upper bound [bytes]''':
@@ -840,20 +840,10 @@ red=edit''':
 '''快捷链接''',
 '''More Actions:''':
 '''更多操作''',
-'''Show Raw Text''':
-'''显示源码''',
-'''Show Print View''':
-'''打印视图''',
 '''Delete Cache''':
 '''删除缓存''',
-'''Attach File''':
-'''附件''',
 '''Delete Page''':
 '''删除''',
-'''Show Like Pages''':
-'''相似网页''',
-'''Show Local Site Map''':
-'''本站地图''',
 '''Do''':
 '''执行''',
 '''Parent Page''':
@@ -864,8 +854,6 @@ red=edit''':
 '''编辑(图形界面)''',
 '''Immutable Page''':
 '''只读网页''',
-'''Infos''':
-'''本页资料''',
 '''Show %s days.''':
 '''显示%s天''',
 '''EditText''':
