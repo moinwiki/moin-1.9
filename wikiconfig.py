@@ -15,5 +15,5 @@ class Config(DefaultConfig):
     data_dir = './testwiki/data/'
     data_underlay_dir = './testwiki/underlay/'
     show_hosts = 1                  
-
+    is_test_wiki = True
 
