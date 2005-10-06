@@ -131,6 +131,7 @@ Version moin--main--1.5:
        there first.
 
   Other changes/new features:
+    * Added MoinMoin:PackageInstaller and unzipping support.
     * added WSGI server support, thanks to Anakim Border, see:
       wiki/server/moinwsgi.py (moin as WSGI app, uses the flup WSGI server,
                                see http://www.saddi.com/software/flup/)
@@ -160,6 +161,8 @@ Version moin--main--1.5:
       user data like email addresses and encrypted passwords.
     * Added a SubscribeUser action which allows the administrator to subscribe users to the
       current page.
+    * Added thread count to SystemInfo macro.
+    * Added Petr's newest patch against the DocBook code.
 
   International support:    
     * mail_from can be now a unicode name-address 
@@ -229,6 +232,7 @@ Version moin--main--1.5:
       dynamically. The fix is not backward compatible with older plugins.
     * Fix chart action, returns a page with error message when chart
       can not be created.
+    * Fixed formatter usage in the ShowSmileys macro.
     
     
 Version 1.4:
