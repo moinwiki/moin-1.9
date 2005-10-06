@@ -16,15 +16,17 @@
        to view the content of the file
 
     To insert an attachment into the page, use the "attachment:" pseudo
-    schema.  
+    schema.
 
     @copyright: 2001 by Ken Sugino (sugino@mediaone.net)
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2005 R. Bauer
+    @copyright: 2005 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, mimetypes, time, urllib
-from MoinMoin import config, user, util, wikiutil
+import os, mimetypes, time, urllib, zipfile
+from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import MoinMoinNoFooter, filesys, web
 
@@ -203,6 +205,8 @@ def _build_filelist(request, pagename, showheader, readonly):
         label_get = _("get")
         label_edit = _("edit")
         label_view = _("view")
+        label_unzip = _("unzip")
+        label_install = _("install")
 
         for file in files:
             fsize = float(os.stat(os.path.join(attach_dir,file).encode(config.charset))[6]) # in byte
@@ -218,6 +222,8 @@ def _build_filelist(request, pagename, showheader, readonly):
                         'urlfile': urlfile, 'label_del': label_del,
                         'base': base, 'label_edit': label_edit,
                         'label_view': label_view,
+                        'label_unzip': label_unzip,
+                        'label_install': label_install,
                         'get_url': get_url, 'label_get': label_get,
                         'file': wikiutil.escape(file), 'fsize': fsize,
                         'pagename': pagename}
@@ -231,6 +237,15 @@ def _build_filelist(request, pagename, showheader, readonly):
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;drawing=%(base)s">%(label_edit)s</a>' % parmdict
             else:
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=view&amp;target=%(urlfile)s">%(label_view)s</a>' % parmdict
+
+            if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and
+                request.user.name in request.cfg.superuser):
+                viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=install&amp;target=%(urlfile)s">%(label_install)s</a>' % parmdict
+            elif (zipfile.is_zipfile(os.path.join(attach_dir,file).encode(config.charset)) and
+                request.user.may.read(pagename) and request.user.may.delete(pagename)
+                and request.user.may.write(pagename)):
+                viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=unzip&amp;target=%(urlfile)s">%(label_unzip)s</a>' % parmdict
+
 
             parmdict['viewlink'] = viewlink
             parmdict['del_link'] = del_link
@@ -419,6 +434,16 @@ def execute(pagename, request):
             get_file(pagename, request)
         else:
             msg = _('You are not allowed to get attachments from this page.')
+    elif request.form['do'][0] == 'unzip':
+         if request.user.may.delete(pagename) and request.user.may.read(pagename) and request.user.may.write(pagename):
+            unzip_file(pagename, request)
+         else:
+            msg = _('You are not allowed to unzip attachments of this page.')
+    elif request.form['do'][0] == 'install':
+         if request.user.name in request.cfg.superuser:
+            install_package(pagename, request)
+         else:
+            msg = _('You are not allowed to install files.')
     elif request.form['do'][0] == 'view':
         if request.user.may.read(pagename):
             view_file(pagename, request)
@@ -587,6 +612,91 @@ def get_file(pagename, request):
 
     raise MoinMoinNoFooter
 
+def install_package(pagename, request):
+    _ = request.getText
+
+    target, targetpath = _access_file(pagename, request)
+    if not target:
+        return
+
+    package = packages.ZipPackage(request, targetpath)
+
+    if package.isPackage():
+        if package.installPackage():
+            msg=_("Attachment '%(filename)s' installed.") % {'filename': wikiutil.escape(target)}
+        else:
+            msg=_("Installation of '%(filename)s' failed.") % {'filename': wikiutil.escape(target)}
+        if package.msg != "":
+            msg += "<br><pre>" + wikiutil.escape(package.msg) + "</pre>"
+    else:
+        msg = _('The file %s is not a MoinMoin package file.' % wikiutil.escape(target))
+
+    upload_form(pagename, request, msg=msg)
+
+def unzip_file(pagename, request):
+    _ = request.getText
+    valid_pathname = lambda name: (name.find('/') == -1) and (name.find('\\') == -1)
+
+    filename, fpath = _access_file(pagename, request)
+    if not filename: return # error msg already sent in _access_file
+
+    attachment_path = getAttachDir(request, pagename)
+    single_file_size = 2.0 * 1000**2
+    attachments_file_space = 200.0 * 1000**2
+
+    files = _get_files(request, pagename)
+
+    msg = ""
+    if files:
+        fsize = 0.0
+        for file in files:
+            fsize += float(os.stat(getFilename(request, pagename, file))[6]) # in byte
+
+        available_attachments_file_space = attachments_file_space - fsize
+
+        if zipfile.is_zipfile(fpath):
+            zf = zipfile.ZipFile(fpath)
+            sum_size_over_all_valid_files = 0.0
+            for name in zf.namelist():
+                if valid_pathname(name):
+                    sum_size_over_all_valid_files += zf.getinfo(name).file_size
+
+            if sum_size_over_all_valid_files < available_attachments_file_space:
+                valid_name = False
+                for name in zf.namelist():
+                    if valid_pathname(name):
+                        zi = zf.getinfo(name)
+                        if zi.file_size < single_file_size:
+                            new_file = getFilename(request, pagename, name)
+                            if not os.path.exists(new_file):
+                                outfile = open(new_file, 'wb')
+                                outfile.write(zf.read(name))
+                                outfile.close()
+                                # it's not allowed to zip a zip file so it is dropped
+                                if zipfile.is_zipfile(new_file):
+                                    os.unlink(new_file)
+                                else:
+                                    valid_name = True
+                                    os.chmod(new_file, 0666 & config.umask)
+                                    _addLogEntry(request, 'ATTNEW', pagename, new_file)
+
+                if valid_name:
+                    msg=_("Attachment '%(filename)s' unzipped.") % {'filename': filename}
+                else:
+                    msg=_("Attachment '%(filename)s' not unzipped because the "
+                          "files are too big, .zip files only, exist already or "
+                          "reside in folders.") % {'filename': filename}
+            else:
+                msg=_("Attachment '%(filename)s' could not be unzipped because"
+                      " the resulting files would be too large (%(space)d kB"
+                      " missing).") % {'filename': filename,
+                    'space': (sum_size_over_all_valid_files -
+                              available_attachments_file_space) / 1000}
+        else:
+            msg = _('The file %(target) is not a .zip file.' % target)
+
+    upload_form(pagename, request, msg=wikiutil.escape(msg))
+
 def send_viewfile(pagename, request):
     _ = request.getText
 
@@ -613,6 +723,21 @@ def send_viewfile(pagename, request):
             request.write(content)
             request.write("</pre>")
             return
+
+    package = packages.ZipPackage(request, fpath)
+    if package.isPackage():
+        request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"),wikiutil.escape(package.getScript())))
+        return
+
+    import zipfile
+    if zipfile.is_zipfile(fpath):
+        zf = zipfile.ZipFile(fpath, mode='r')
+        request.write("<pre>%-46s %19s %12s\n" % (_("File Name"), _("Modified")+" "*5, _("Size")))
+        for zinfo in zf.filelist:
+            date = "%d-%02d-%02d %02d:%02d:%02d" % zinfo.date_time
+            request.write(wikiutil.escape("%-46s %s %12d\n" % (zinfo.filename, date, zinfo.file_size)))
+        request.write("</pre>")
+        return
 
     request.write('<p>' + _("Unknown file type, cannot display this attachment inline.") + '</p>')
     request.write('<a href="%s">%s</a>' % (
