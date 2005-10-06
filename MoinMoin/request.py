@@ -1848,9 +1848,6 @@ class RequestModPy(RequestBase):
         """
         return RequestBase.run(self)
 
-    def setup_args(self, form=None):
-        return {}
-
     def read(self, n=None):
         """ Read from input stream.
         """
