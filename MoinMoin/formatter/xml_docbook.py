@@ -15,6 +15,65 @@ from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from xml.sax import saxutils
 
+class DocBookOutputFormatter:
+    """
+       Format docbook output
+    """
+    
+    def __init__(self, dommDoc):
+        self.doc = dommDoc
+        self.curNode = dommDoc.documentElement
+        
+    def setHeading(self, headNode):
+        self.domHeadNode = headNode
+        return u""
+    
+    def _printNode(self, node):
+        """
+            Function print a node
+        """
+        from xml.dom.ext import Print
+        import StringIO
+        from xml.dom.ext import Printer
+        
+        stream = StringIO.StringIO()
+        
+        visitor = Printer.PrintVisitor(stream, 'UTF-8')
+        Printer.PrintWalker(visitor, node).run()
+        # get value from stream
+        ret = stream.getvalue()
+        stream.close()
+        
+        return unicode(ret, 'utf-8')
+
+    def getHeading(self):
+        # return heading from model
+        rootNode = self.doc.documentElement
+        # print article info
+        return '<?xml version="1.0"?><%s>%s' % (rootNode.nodeName,
+                                                self._printNode(self.domHeadNode))
+        
+    def getBody(self):
+        body = []
+        # print all nodes inside dom behid heading
+        firstNode = self.doc.documentElement.firstChild
+        while firstNode:
+            if firstNode != self.domHeadNode:
+                body.append(self._printNode(firstNode))
+            firstNode = firstNode.nextSibling
+        return ''.join(body)
+
+    def getEndContent(self):
+        # close all opened tags
+        ret = []
+        while self.curNode != self.doc.documentElement:
+            ret.append("</%s>" % (self.curNode.nodeName, ))
+            self.curNode = self.curNode.parentNode
+        return ''.join(ret)
+        
+    def getFooter(self):
+        return "</%s>" % self.doc.documentElement.nodeName
+
 class Formatter(FormatterBase):
     """
         Send plain text data.
@@ -31,7 +90,10 @@ class Formatter(FormatterBase):
             "article", "-//OASIS//DTD DocBook V4.4//EN",
             "http://www.docbook.org/xml/4.4/docbookx.dtd"))
         self.root = self.doc.documentElement
-        self.realdepth = 1
+        self.curdepth = 0
+        self.outputFormatter = DocBookOutputFormatter(self.doc)
+        self.exchangeKeys = []
+        self.exchangeValues = []
 
     def startDocument(self, pagename):
         info = self.doc.createElement("articleinfo")
@@ -39,54 +101,64 @@ class Formatter(FormatterBase):
         title.appendChild(self.doc.createTextNode(pagename))
         info.appendChild(title)
         self.root.appendChild(info)
-        return ""
+        # set heading node
+        self.outputFormatter.setHeading(info)
+        
+        return self.outputFormatter.getHeading()
 
     def startContent(self, content_id="content", **kwargs):
         self.cur = self.root
         return ""
 
-    def endDocument(self):
-        from xml.dom.ext import Print
-        import StringIO
+    def endContent(self):
+        bodyStr = self.outputFormatter.getBody()
+        # exchange all strings in body
+        i = 0
+        while i < len(self.exchangeKeys):
+            bodyStr = bodyStr.replace(self.exchangeKeys[i], self.exchangeValues[i])
+            i += 1
+        return bodyStr + self.outputFormatter.getEndContent()
 
-        f = StringIO.StringIO()
-        Print(self.doc, f)
-        txt = f.getvalue()
-        f.close()
-        return txt
+    def endDocument(self):
+        return self.outputFormatter.getFooter()
 
     def text(self, text):
-		if text == "\\n":
-			srcText = "\n"
-		else:
-			srcText = text
-		if self.cur.nodeName == "screen":
-			if self.cur.lastChild != None:
-				from xml.dom.ext import Node
-				if self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
-					t = self.cur.lastChild.nodeValue + srcText
-					self.cur.lastChild.nodeValue = t
-			else:
-				self.cur.appendChild(self.doc.createCDATASection(srcText))
-		else:
-			self.cur.appendChild(self.doc.createTextNode(srcText))
-		return ""
+        if text == "\\n":
+            srcText = "\n"
+        else:
+            srcText = text
+        if self.cur.nodeName == "screen":
+            if self.cur.lastChild != None:
+                from xml.dom.ext import Node
+                if self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
+                    self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
+            else:
+                self.cur.appendChild(self.doc.createCDATASection(srcText))
+        else:
+            self.cur.appendChild(self.doc.createTextNode(srcText))
+        return ""
 
     def heading(self, on, depth, **kw):
         while self.cur.nodeName in self.section_should_break:
             self.cur = self.cur.parentNode
                
         if on:
-            if depth <= self.realdepth:
-                for i in range(depth, self.realdepth):
-                    while(self.cur.nodeName != "section"):
-                        self.cur=self.cur.parentNode
-                    
-                    if len(self.cur.childNodes) < 3:
-                        self._addEmptyNode("para")
+            # try to go to higher level if needed
+            if depth <= self.curdepth:
+                # number of levels we want to go higher
+                numberOfLevels = self.curdepth-depth + 1
+                for i in range(numberOfLevels):
+                    #find first non section node
+                    while (self.cur.nodeName != "section" and self.cur.nodeName != "article"):
+                        self.cur = self.cur.parentNode
 
-                    self.cur=self.cur.parentNode
-                self.realdepth=depth
+# Do not understant this code - looks like unneccesery -- maybe it is used to gain some vertical space for large headings?
+#                    if len(self.cur.childNodes) < 3:
+#                       self._addEmptyNode("para")
+                    
+                    # check if not top-level
+                    if self.cur.nodeName != "article":
+                        self.cur=self.cur.parentNode
 
             section = self.doc.createElement("section")
             self.cur.appendChild(section)
@@ -96,7 +168,6 @@ class Formatter(FormatterBase):
             self.cur.appendChild(title)
             self.cur = title
             self.curdepth = depth
-            self.realdepth += 1
         else:
             self.cur=self.cur.parentNode
 
@@ -147,7 +218,7 @@ class Formatter(FormatterBase):
             s1 = str(s1).replace('"','')
             cols = int(s1)
         return cols
-				
+
     def _addTableCellDefinition(self, attrs=()):
         # Check number of columns
         cols = self._getTableCellCount(attrs)
@@ -163,7 +234,7 @@ class Formatter(FormatterBase):
         while nodeBefore and nodeBefore.nodeName != 'tbody':
             nodeBefore = nodeBefore.nextSibling
             numberExistingColumns += 1
-			
+
         while cols >= 1:
             # Create new node
             numberExistingColumns += 1
@@ -178,7 +249,6 @@ class Formatter(FormatterBase):
         # Set new number of columns for tgroup
         self.cur.parentNode.parentNode.parentNode.setAttribute('cols', str(numberExistingColumns))
         return ""
-
 
 ### Inline ##########################################################
 
@@ -423,6 +493,23 @@ class Formatter(FormatterBase):
         else:
             return ""
 
+    def macro(self, macro_obj, name, args):
+        if name == "TableOfContents":
+            # Table of content can be inserted in docbook transformation
+            return u""
+        # output of all macros is added as the text node
+        # At the begining text mode contain some string which is later
+        # exchange for real value. There is problem that data inserted
+        # as text mode are encoded to xml, e.g. < is encoded in the output as &lt;
+        text=FormatterBase.macro(self, macro_obj, name, args)
+        if len(text) > 0:
+            # prepare identificator
+            sKey="EXCHANGESTRINGMACRO-" + str(len(self.exchangeKeys)) + "-EXCHANGESTRINGMACRO"
+            self.exchangeKeys.append(sKey)
+            self.exchangeValues.append(text)
+            # append data to lists
+            self.text(sKey)
+        return u""
 
 ### Not supported ###################################################
     def rule(self, size = 0):
