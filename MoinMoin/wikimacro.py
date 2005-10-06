@@ -363,6 +363,13 @@ class Macro:
         except AttributeError:
             ftversion = 'N/A'
 
+        t_count = None
+        try:
+            from threading import activeCount
+            t_count = activeCount()
+        except ImportError:
+            pass
+
         # Get the full pagelist in the wiki
         pagelist = self.request.rootpage.getPageList(user='')
         totalsize = reduce(operator.add, [Page(self.request, name).size()
@@ -370,8 +377,7 @@ class Macro:
 
         buf = StringIO()
         row = lambda label, value, buf=buf: buf.write(
-            u'<dt>%s</dt><dd>%s</dd>' %
-            (label, value))
+            u'<dt>%s</dt><dd>%s</dd>' % (label, value))
 
         buf.write(u'<dl>')
         row(_('Python Version'), sys.version)
@@ -389,33 +395,27 @@ class Macro:
             _("%(logcount)s (%(logsize)s bytes)") %
             {'logcount': edlog.lines(), 'logsize': edlog.size()})
 
-        # !!! This puts a heavy load on the server when the log is large,
-        # and it can appear on normal pages ==> so disable it for now.
+        # This puts a heavy load on the server when the log is large
         eventlogger = eventlog.EventLog(self.request)
         nonestr = _("NONE")
-        row('Event log',
-            "%s bytes" % eventlogger.size())
-        row(_('Global extension macros'), 
-            ', '.join(macro.extension_macros) or nonestr)
+        row('Event log', "%s bytes" % eventlogger.size())
+        row(_('Global extension macros'), ', '.join(macro.extension_macros) or nonestr)
         row(_('Local extension macros'), 
             ', '.join(wikiutil.wikiPlugins('macro', self.cfg)) or nonestr)
-        ext_actions = []
-        for a in action.extension_actions:
-            if not a in self.request.cfg.actions_excluded:
-                ext_actions.append(a)
-        row(_('Global extension actions'), 
-            ', '.join(ext_actions) or nonestr)
+        ext_actions = [x for x in action.extension_actions
+                       if not x in self.request.cfg.actions_excluded]
+        row(_('Global extension actions'), ', '.join(ext_actions) or nonestr)
         row(_('Local extension actions'), 
             ', '.join(wikiaction.getPlugins(self.request)[1]) or nonestr)
-        row(_('Global parsers'), 
-            ', '.join(parser.modules) or nonestr)
+        row(_('Global parsers'), ', '.join(parser.modules) or nonestr)
         row(_('Local extension parsers'), 
             ', '.join(wikiutil.wikiPlugins('parser', self.cfg)) or nonestr)
         row(_('Installed processors (DEPRECATED -- use Parsers instead)'), 
             ', '.join(processor.processors) or nonestr)
         state = (_('Disabled'), _('Enabled'))
         row(_('Lupy search'), state[self.request.cfg.lupy_search])
-        buf.write(u'</dl')
+        row(_('Active threads'), t_count or 'N/A')
+        buf.write(u'</dl>')
 
         return self.formatter.rawHTML(buf.getvalue())
 
