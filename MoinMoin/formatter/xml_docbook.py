@@ -13,7 +13,17 @@ import sys, traceback
 
 from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, i18n, config
+from MoinMoin.error import CompositeError
+
 from xml.sax import saxutils
+from xml.dom import getDOMImplementation
+
+class InternalError(CompositeError): pass
+
+try:
+    dom = getDOMImplementation("4DOM")
+except ImportError:
+    raise InternalError("You need to install PyXML to use the DocBook formatter.")
 
 class DocBookOutputFormatter:
     """
@@ -84,8 +94,7 @@ class Formatter(FormatterBase):
     def __init__(self, request, **kw):
         '''We should use this for creating the doc'''
         FormatterBase.__init__(self, request, **kw)
-        from xml.dom import getDOMImplementation
-        dom = getDOMImplementation("4DOM")
+
         self.doc = dom.createDocument(None, "article", dom.createDocumentType(
             "article", "-//OASIS//DTD DocBook V4.4//EN",
             "http://www.docbook.org/xml/4.4/docbookx.dtd"))
@@ -435,7 +444,7 @@ class Formatter(FormatterBase):
         if attrs and attrs.has_key('id'):
             sanitized_attrs[id] = attrs['id']
         return self._handleNode("row", on, sanitized_attrs)
-		
+
     def table_cell(self, on, attrs=None):
         # Finish row definition
         sanitized_attrs = []
