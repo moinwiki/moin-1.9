@@ -19,6 +19,7 @@ PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 from MoinMoin import config, caching, wikiutil
 from MoinMoin.util import datetime, filesys
 
+
 def getUserList(request):
     """ Get a list of all (numerical) user IDs.
 
@@ -31,6 +32,7 @@ def getUserList(request):
     files = dircache.listdir(request.cfg.user_dir)
     userlist = filter(user_re.match, files)
     return userlist
+
 
 def getUserId(request, searchName):
     """
@@ -67,6 +69,7 @@ def getUserId(request, searchName):
         id = _name2id.get(searchName, None)
     return id
 
+
 def getUserIdentification(request, username=None):
     """ 
     Return user name or IP or '<unknown>' indicator.
@@ -82,6 +85,7 @@ def getUserIdentification(request, username=None):
         username = request.user.name
 
     return username or (request.cfg.show_hosts and request.remote_addr) or _("<unknown>")
+
 
 def encodePassword(pwd, charset='utf-8'):
     """ Encode a cleartext password
@@ -107,6 +111,7 @@ def encodePassword(pwd, charset='utf-8'):
     pwd = sha.new(pwd).digest()
     pwd = '{SHA}' + base64.encodestring(pwd).rstrip()
     return pwd
+
     
 def normalizeName(name):
     """ Make normalized user name
@@ -134,6 +139,7 @@ def normalizeName(name):
     name = ' '.join(name.split())
 
     return name
+
     
 def isValidName(request, name):
     """ Validate user name
@@ -143,6 +149,7 @@ def isValidName(request, name):
     normalized = normalizeName(name)
     name = name.replace('_', ' ') # we treat _ as a blank
     return (name == normalized) and not wikiutil.isGroupPage(request, name)
+
 
 def encodeList(items):
     """ Encode list of items in user data file
@@ -163,6 +170,7 @@ def encodeList(items):
     line = '\t'.join(line)
     return line
 
+
 def decodeList(line):
     """ Decode list of items from user data file
     
@@ -177,19 +185,21 @@ def decodeList(line):
             continue
         items.append(item)
     return items
+
     
 class User:
     """A MoinMoin User"""
 
-    def __init__(self, request, id=None, name="", password=None, auth_username=""):
-        """
-        Initialize user object
+    def __init__(self, request, id=None, name="", password=None,
+                 auth_username=""):
+        """ Initialize user object
         
         @param request: the request object
         @param id: (optional) user ID
         @param name: (optional) user name
         @param password: (optional) user password
-        @param auth_username: (optional) already authenticated user name (e.g. apache basic auth)
+        @param auth_username: (optional) already authenticated user
+            name (e.g. apache basic auth)
         """
         self._cfg = request.cfg
         self.valid = 0
@@ -275,8 +285,8 @@ class User:
         return "%s.%d" % (str(time.time()), randint(0,65535))
             
     def __filename(self):
-        """
-        get filename of the user's file on disk
+        """ Get filename of the user's file on disk
+        
         @rtype: string
         @return: full path and filename of user account file
         """
@@ -289,10 +299,8 @@ class User:
         else:
             return self.__filename() + ".bookmark"
 
-
     def exists(self):
-        """
-        Do we have a user account for this user?
+        """ Do we have a user account for this user?
         
         @rtype: bool
         @return: true, if we have a user account
@@ -300,8 +308,7 @@ class User:
         return os.path.exists(self.__filename())
 
     def load_from_id(self, check_pass=0):
-        """
-        Load user account data from disk.
+        """ Load user account data from disk.
 
         Can only load user data if the id number is already known.
 
@@ -311,7 +318,8 @@ class User:
         @param check_pass: If 1, then self.enc_password must match the
                            password in the user account file.
         """
-        if not self.exists(): return
+        if not self.exists():
+            return
 
         data = codecs.open(self.__filename(), "r", config.charset).readlines()
         user_data = {'enc_password': ''}
@@ -458,8 +466,7 @@ class User:
         return False, False
 
     def save(self):
-        """
-        Save user account data to user account file on disk.
+        """ Save user account data to user account file on disk.
 
         This saves all member variables, except "id" and "valid" and
         those starting with an underscore.
@@ -498,9 +505,11 @@ class User:
         if not self.disabled:
             self.valid = 1
 
+    # -----------------------------------------------------------------
+    # Time and date formatting
+
     def getTime(self, tm):
-        """
-        Get time in user's timezone.
+        """ Get time in user's timezone.
         
         @param tm: time (UTC UNIX timestamp)
         @rtype: int
@@ -510,8 +519,7 @@ class User:
 
 
     def getFormattedDate(self, tm):
-        """
-        Get formatted date adjusted for user's timezone.
+        """ Get formatted date adjusted for user's timezone.
 
         @param tm: time (UTC UNIX timestamp)
         @rtype: string
@@ -522,8 +530,7 @@ class User:
 
 
     def getFormattedDateTime(self, tm):
-        """
-        Get formatted date and time adjusted for user's timezone.
+        """ Get formatted date and time adjusted for user's timezone.
 
         @param tm: time (UTC UNIX timestamp)
         @rtype: string
@@ -532,10 +539,11 @@ class User:
         datetime_fmt = self.datetime_fmt or self._cfg.datetime_fmt
         return time.strftime(datetime_fmt, self.getTime(tm))
 
+    # -----------------------------------------------------------------
+    # Bookmark
 
     def setBookmark(self, tm):
-        """
-        Set bookmark timestamp.
+        """ Set bookmark timestamp.
         
         @param tm: timestamp
         """
@@ -550,8 +558,7 @@ class User:
                 pass
 
     def getBookmark(self):
-        """
-        Get bookmark timestamp.
+        """ Get bookmark timestamp.
         
         @rtype: int
         @return: bookmark timestamp or None
@@ -567,8 +574,7 @@ class User:
         return bm
 
     def delBookmark(self):
-        """
-        Removes bookmark timestamp.
+        """ Removes bookmark timestamp.
 
         @rtype: int
         @return: 0 on success, 1 on failure
@@ -583,13 +589,8 @@ class User:
             return 0
         return 1
 
-    def getQuickLinks(self):
-        """ Get list of pages this user wants in the navibar
-
-        @rtype: list
-        @return: quicklinks from user account
-        """
-        return self.quicklinks
+    # -----------------------------------------------------------------
+    # Subscribe
 
     def getSubscriptionList(self):
         """ Get list of pages this user has subscribed to
@@ -598,27 +599,6 @@ class User:
         @return: pages this user has subscribed to
         """
         return self.subscribed_pages
-
-    def isQuickLinkedTo(self, pagelist):
-        """ Check if user quicklink matches any page in pagelist.
-
-        TODO: should return a bool, not int.        
-        
-        @param pagelist: list of pages to check for quicklinks
-        @rtype: int
-        @return: 1, if user has quicklinked any page in pagelist
-                 0, if not
-        """
-        if not self.valid:
-            return 0
-            
-        for pagename in pagelist:
-            if pagename in self.quicklinks:
-                return 1
-            interWikiName = self._interWikiName(pagename)
-            if interWikiName and interWikiName in self.quicklinks:
-                return 1
-        return 0
         
     def isSubscribedTo(self, pagelist):
         """ Check if user subscription matches any page in pagelist.
@@ -656,6 +636,69 @@ class User:
             return 1
         else:
             return 0
+
+    def subscribePage(self, pagename, remove=False):
+        """ Subscribe or unsubscribe to a wiki page.
+
+        Note that you need to save the user data to make this stick!
+
+        @param pagename: name of the page to subscribe
+        @param remove: unsubscribe pagename if set
+        @type remove: bool
+        @rtype: bool
+        @return: true, if page was NEWLY subscribed.
+        """
+        if remove:
+            if pagename in self.subscribed_pages:
+                self.subscribed_pages.remove(pagename)
+                return 1
+            
+        # check for our own interwiki name
+        if self._cfg.interwikiname:
+            pagename = self._interWikiName(pagename)
+
+        if remove and (pagename in self.subscribed_pages):
+            self.subscribed_pages.remove(pagename)
+            return 1
+    
+        else:
+            # add the interwiki name!
+            if pagename not in self.subscribed_pages:
+                self.subscribed_pages.append(pagename)
+                return 1
+        return 0
+    
+    # -----------------------------------------------------------------
+    # Quicklinks
+
+    def getQuickLinks(self):
+        """ Get list of pages this user wants in the navibar
+
+        @rtype: list
+        @return: quicklinks from user account
+        """
+        return self.quicklinks
+
+    def isQuickLinkedTo(self, pagelist):
+        """ Check if user quicklink matches any page in pagelist.
+
+        TODO: should return a bool, not int.        
+        
+        @param pagelist: list of pages to check for quicklinks
+        @rtype: int
+        @return: 1, if user has quicklinked any page in pagelist
+                 0, if not
+        """
+        if not self.valid:
+            return 0
+            
+        for pagename in pagelist:
+            if pagename in self.quicklinks:
+                return 1
+            interWikiName = self._interWikiName(pagename)
+            if interWikiName and interWikiName in self.quicklinks:
+                return 1
+        return 0
 
     def addQuicklink(self, pagename):
         """ Adds a page to the user quicklinks 
@@ -719,41 +762,11 @@ class User:
             return None
         return "%s:%s" % (self._cfg.interwikiname, pagename)
 
-    def subscribePage(self, pagename, remove=False):
-        """ Subscribe or unsubscribe to a wiki page.
-
-        Note that you need to save the user data to make this stick!
-
-        @param pagename: name of the page to subscribe
-        @param remove: unsubscribe pagename if set
-        @type remove: bool
-        @rtype: bool
-        @return: true, if page was NEWLY subscribed.
-        """
-        if remove:
-            if pagename in self.subscribed_pages:
-                self.subscribed_pages.remove(pagename)
-                return 1
-            
-        # check for our own interwiki name
-        if self._cfg.interwikiname:
-            pagename = "%s:%s" % (self._cfg.interwikiname, pagename)
-
-        if remove and (pagename in self.subscribed_pages):
-            self.subscribed_pages.remove(pagename)
-            return 1
-    
-        else:
-            # add the interwiki name!
-            if pagename not in self.subscribed_pages:
-                self.subscribed_pages.append(pagename)
-                return 1
-        return 0
-
+    # -----------------------------------------------------------------
+    # Trail
 
     def addTrail(self, pagename):
-        """
-        Add page to trail.
+        """ Add page to trail.
         
         @param pagename: the page name to add to the trail
         """
@@ -774,11 +787,11 @@ class User:
 
             # save interwiki links internally
             if self._cfg.interwikiname:
-                pagename = "%s:%s" % (self._cfg.interwikiname,
-                                      pagename)
+                pagename = self._interWikiName(pagename)
 
             # don't append tail to trail ;)
-            if self._trail and self._trail[-1] == pagename: return
+            if self._trail and self._trail[-1] == pagename:
+                return
 
             # append new page, limiting the length
             self._trail = filter(lambda p, pn=pagename: p != pn, self._trail)
@@ -812,8 +825,7 @@ class User:
             self._request.log("Can't save trail file: %s" % str(err))
 
     def getTrail(self):
-        """
-        Return list of recently visited pages.
+        """ Return list of recently visited pages.
         
         @rtype: list
         @return: pages in trail
@@ -830,6 +842,9 @@ class User:
                 self._trail = self._trail[-self._cfg.trail_size:]
 
         return self._trail
+
+    # -----------------------------------------------------------------
+    # Other
 
     def isCurrentUser(self):
         return self._request.user.name == self.name
@@ -850,14 +865,16 @@ class User:
         if not self.name:
             return self.host()
         
-        interwiki = wikiutil.getInterwikiHomePage(self._request, self.name)
-        wikiname, pagename = interwiki
+        wikiname, pagename = wikiutil.getInterwikiHomePage(self._request,
+                                                           self.name)
         if wikiname == 'Self':
             if not wikiutil.isStrictWikiname(self.name):
+                # XXX wiki format only.
                 markup = '["%s"]' % pagename
             else:
                 markup = pagename
         else:
-            markup = '%s:%s' % (wikiname, pagename.replace(" ","_")) # XXX moin only. better ideas?
+            # XXX wiki format only.
+            markup = '%s:%s' % (wikiname, pagename.replace(" ","_")) 
         return markup
 
