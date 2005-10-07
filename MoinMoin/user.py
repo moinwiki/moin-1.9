@@ -600,32 +600,30 @@ class User:
         return self.subscribed_pages
 
     def isQuickLinkedTo(self, pagelist):
-        """
-        Check if user quicklink matches any page in pagelist.
+        """ Check if user quicklink matches any page in pagelist.
+
+        TODO: should return a bool, not int.        
         
         @param pagelist: list of pages to check for quicklinks
         @rtype: int
         @return: 1, if user has quicklinked any page in pagelist
                  0, if not
         """
-        quicklinked = 0
-        if self.valid:
-            interwikiname = self._cfg.interwikiname
-            for page in pagelist:
-                if page in self.quicklinks:
-                    quicklinked = 1
-                    break
-                # do also try our own interwiki name
-                if interwikiname:
-                    iwpage = "%s:%s" % (interwikiname, page)
-                    if iwpage in self.quicklinks:
-                        quicklinked = 1
-                        break
-        return quicklinked
-
+        if not self.valid:
+            return 0
+            
+        for pagename in pagelist:
+            if pagename in self.quicklinks:
+                return 1
+            interWikiName = self._interWikiName(pagename)
+            if interWikiName and interWikiName in self.quicklinks:
+                return 1
+        return 0
+        
     def isSubscribedTo(self, pagelist):
-        """
-        Check if user subscription matches any page in pagelist.
+        """ Check if user subscription matches any page in pagelist.
+        
+        TODO: should use _interWikiName and return a bool, not int.
         
         @param pagelist: list of pages to check for subscription
         @rtype: int
@@ -659,38 +657,67 @@ class User:
         else:
             return 0
 
-    def quicklinkPage(self, pagename, remove=False):
-        """ Add or remove a quicklink to a wiki page.
+    def addQuicklink(self, pagename):
+        """ Adds a page to the user quicklinks 
+        
+        If the wiki has an interwiki name, all links are saved as
+        interwiki names. If not, as simple page name.
 
-        Note that you need to save the user data to make this stick!
-
-        @param pagename: name of the page to quicklink
-        @param remove: unsubscribe pagename if set
-        @type remove: bool
+        @param pagename: page name
+        @type pagename: unicode
         @rtype: bool
-        @return: True, if quicklinks were added/removed.
+        @return: if pagename was added
         """
         changed = False
-        if self._cfg.interwikiname:
-            iwpagename = "%s:%s" % (self._cfg.interwikiname, pagename)
-        else:
-            iwpagename = None
-        if remove:
+        interWikiName = self._interWikiName(pagename)
+        if interWikiName:
             if pagename in self.quicklinks:
                 self.quicklinks.remove(pagename)
                 changed = True
-            if iwpagename in self.quicklinks:
-                self.quicklinks.remove(iwpagename)
+            if interWikiName not in self.quicklinks:
+                self.quicklinks.append(interWikiName)
                 changed = True
         else:
-            # add the interwiki name and remove non-interwiki name, if present!
-            if pagename in self.quicklinks:
-                self.quicklinks.remove(pagename)
+            if pagename not in self.quicklinks:
+                self.quicklinks.append(pagename)
                 changed = True
-            if iwpagename not in self.quicklinks:
-                self.quicklinks.append(iwpagename)
-                changed = True
+
+        if changed:
+            self.save()
         return changed
+
+    def removeQuicklink(self, pagename):
+        """ Remove a page from user quicklinks 
+        
+        Remove both interwiki and simple name from quicklinks.
+        
+        @param pagename: page name
+        @type pagename: unicode
+        @rtype: bool
+        @return: if pagename was removed
+        """
+        changed = False
+        interWikiName = self._interWikiName(pagename)
+        if interWikiName and interWikiName in self.quicklinks:
+            self.quicklinks.remove(interWikiName)
+            changed = True
+        if pagename in self.quicklinks:
+            self.quicklinks.remove(pagename)
+            changed = True        
+        
+        if changed:
+            self.save()
+        return changed
+
+    def _interWikiName(self, pagename):
+        """ Return the inter wiki name of a page name 
+
+        @param pagename: page name
+        @type pagename: unicode
+        """
+        if not self._cfg.interwikiname:
+            return None
+        return "%s:%s" % (self._cfg.interwikiname, pagename)
 
     def subscribePage(self, pagename, remove=False):
         """ Subscribe or unsubscribe to a wiki page.

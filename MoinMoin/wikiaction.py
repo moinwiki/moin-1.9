@@ -674,29 +674,21 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
         
 
 def do_quicklink(pagename, request):
-    """ Add the current wiki page to the quicklinks property in
-        current user profile.
+    """ Add the current wiki page to the user quicklinks 
+    
+    TODO: what if add or remove quicklink fail? display an error message?
     """
     _ = request.getText
-    cfg = request.cfg
-    msg = ''
+    msg = None
 
-    # check whether the user has a profile
     if not request.user.valid:
-        msg = _('''You didn't create a user profile yet. '''
-                '''Select UserPreferences in the upper right corner to create a profile.''')
-
-    # check whether already quicklinked
+        msg = _("You must login to add a quicklink.")    
     elif request.user.isQuickLinkedTo([pagename]):
-        if request.user.quicklinkPage(pagename, remove=True):
-            request.user.save()
-            msg = _('Your quicklink to this page has been removed.')
-            
-    # quicklink to current page
+        if request.user.removeQuicklink(pagename):
+            msg = _('Your quicklink to this page has been removed.')            
     else:
-        if request.user.quicklinkPage(pagename):
-            request.user.save()
-        msg = _('A quicklink to this page has been added for you.')
+        if request.user.addQuicklink(pagename):
+            msg = _('A quicklink to this page has been added for you.')
 
     Page(request, pagename).send_page(request, msg=msg)
 
