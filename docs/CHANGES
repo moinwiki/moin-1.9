@@ -163,6 +163,7 @@ Version moin--main--1.5:
       current page.
     * Added thread count to SystemInfo macro.
     * Added Petr's newest patch against the DocBook code.
+    * Added a RenderAsDocbook action which redirects to the DocBook formatter.
 
   International support:    
     * mail_from can be now a unicode name-address 
