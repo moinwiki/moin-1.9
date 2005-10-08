@@ -66,8 +66,7 @@ def subscribe_users(request, usernamelist, pagename, formatter):
                 success = True
             elif not userobj.email:
                 success = False
-            elif userobj.subscribePage(pagename):
-                userobj.save()
+            elif userobj.subscribe(pagename):
                 success = True
             if success:
                 result.append(formatter.smiley('{OK}'))

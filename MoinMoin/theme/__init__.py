@@ -484,6 +484,9 @@ class ThemeBase:
                 for pagename in trail[:-1]:
                     try:
                         interwiki, page = pagename.split(":", 1)
+                        # Items in trail are saved as valid interwiki
+                        # links, using _ for spaces.
+                        page = page.replace('_', ' ')
                         if request.cfg.interwikiname != interwiki:
                             link = (self.request.formatter.interwikilink(
                                 True, interwiki, page) +

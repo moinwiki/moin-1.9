@@ -603,71 +603,95 @@ class User:
     def isSubscribedTo(self, pagelist):
         """ Check if user subscription matches any page in pagelist.
         
-        TODO: should use _interWikiName and return a bool, not int.
+        The subscription list may contain page names or interwiki page
+        names. e.g 'Page Name' or 'WikiName:Page_Name'
         
         @param pagelist: list of pages to check for subscription
-        @rtype: int
-        @return: 1, if user has subscribed any page in pagelist
-                 0, if not
+        @rtype: bool
+        @return: if user is subscribed any page in pagelist
         """
-        import re
+        if not self.valid:
+            return False
+        
+        import re        
+        # Create text with all names and interwiki names, to be
+        # searched with the user pattern.
+        if self._cfg.interwikiname:
+            pagelist += [self._interWikiName(pagename) 
+                         for pagename in pagelist]        
+        text = '\n'.join(pagelist)
+        
+        for pattern in self.getSubscriptionList():
+            # Try simple match first
+            if pattern in pagelist:
+                return True
+            # Try regular expression search, skipping bad patterns
+            try:
+                pattern = re.compile(r'^%s$' % pattern, re.M)
+            except re.error:
+                continue
+            if pattern.search(text):
+                return True
 
-        matched = 0
-        if self.valid:
-            pagelist_lines = '\n'.join(pagelist)
-            # do also try our own interwiki name
-            if self._cfg.interwikiname:
-                pagelist_lines = "%s\n%s" % (pagelist_lines,
-                                  '\n'.join(
-                    ["%s:%s" % (self._cfg.interwikiname, page)
-                     for page in pagelist]))
-            for pattern in self.getSubscriptionList():
-                # check if pattern matches one of the pages in pagelist
-                matched = pattern in pagelist
-                if matched: break
-                try:
-                    rexp = re.compile("^"+pattern+"$", re.M)
-                except re.error:
-                    # skip bad regex
-                    continue
-                matched = rexp.search(pagelist_lines)
-                if matched: break
-        if matched:
-            return 1
-        else:
-            return 0
+        return False
 
-    def subscribePage(self, pagename, remove=False):
-        """ Subscribe or unsubscribe to a wiki page.
+    def subscribe(self, pagename):
+        """ Subscribe to a wiki page.
 
-        Note that you need to save the user data to make this stick!
+        To enable shared farm users, if the wiki has an interwiki name,
+        page names are saved as interwiki names.
 
         @param pagename: name of the page to subscribe
-        @param remove: unsubscribe pagename if set
-        @type remove: bool
+        @type pagename: unicode
         @rtype: bool
-        @return: true, if page was NEWLY subscribed.
-        """
-        if remove:
-            if pagename in self.subscribed_pages:
-                self.subscribed_pages.remove(pagename)
-                return 1
-            
-        # check for our own interwiki name
+        @return: if page was subscribed
+        """        
         if self._cfg.interwikiname:
-            pagename = self._interWikiName(pagename)
+            interWikiName = self._interWikiName(pagename)
+        
+        if interWikiName not in self.subscribed_pages:
+            self.subscribed_pages.append(interWikiName)
+            self.save()
+            return True
+        
+        return False
 
-        if remove and (pagename in self.subscribed_pages):
+    def unsubscribe(self, pagename):
+        """ Unsubscribe a wiki page.
+
+        Try to unsubscribe by removing non-interwiki name (leftover
+        from old use files) and interwiki name from the subscription
+        list.
+
+        Its possible that the user will be subscribed to a page by more
+        then one pattern. It can be both pagename and interwiki name,
+        or few patterns that all of them match the page. Therefore, we
+        must check if the user is still subscribed to the page after we
+        try to remove names from the list.
+
+        TODO: should we remove non-interwiki subscription? what if the
+        user want to subscribe to the same page in multiple wikis?
+
+        @param pagename: name of the page to subscribe
+        @type pagename: unicode
+        @rtype: bool
+        @return: if unsubscrieb was successful. If the user has a
+            regular expression that match, it will always fail.
+        """
+        changed = False
+        if pagename in self.subscribed_pages:
             self.subscribed_pages.remove(pagename)
-            return 1
+            changed = True
+        
+        interWikiName = self._interWikiName(pagename)        
+        if interWikiName and interWikiName in self.subscribed_pages:
+            self.subscribed_pages.remove(interWikiName)
+            changed = True
     
-        else:
-            # add the interwiki name!
-            if pagename not in self.subscribed_pages:
-                self.subscribed_pages.append(pagename)
-                return 1
-        return 0
-    
+        if changed:
+            self.save()
+        return not self.isSubscribedTo([pagename])
+        
     # -----------------------------------------------------------------
     # Quicklinks
 
@@ -681,24 +705,22 @@ class User:
 
     def isQuickLinkedTo(self, pagelist):
         """ Check if user quicklink matches any page in pagelist.
-
-        TODO: should return a bool, not int.        
         
         @param pagelist: list of pages to check for quicklinks
-        @rtype: int
-        @return: 1, if user has quicklinked any page in pagelist
-                 0, if not
+        @rtype: bool
+        @return: if user has quicklinked any page in pagelist
         """
         if not self.valid:
-            return 0
+            return False
             
         for pagename in pagelist:
             if pagename in self.quicklinks:
-                return 1
+                return True
             interWikiName = self._interWikiName(pagename)
             if interWikiName and interWikiName in self.quicklinks:
-                return 1
-        return 0
+                return True
+        
+        return False
 
     def addQuicklink(self, pagename):
         """ Adds a page to the user quicklinks 
@@ -760,6 +782,9 @@ class User:
         """
         if not self._cfg.interwikiname:
             return None
+            
+        # Interwiki links must use _ e.g Wiki:Main_Page
+        pagename = pagename.replace(" ", "_")
         return "%s:%s" % (self._cfg.interwikiname, pagename)
 
     # -----------------------------------------------------------------
@@ -785,21 +810,21 @@ class User:
                         self._request.user.may.read(page.page_name)):
                     return
 
-            # save interwiki links internally
+            # Save interwiki links internally
             if self._cfg.interwikiname:
                 pagename = self._interWikiName(pagename)
 
-            # don't append tail to trail ;)
+            # Don't append tail to trail ;)
             if self._trail and self._trail[-1] == pagename:
                 return
 
-            # append new page, limiting the length
+            # Append new page, limiting the length
             self._trail = filter(lambda p, pn=pagename: p != pn, self._trail)
             self._trail = self._trail[-(self._cfg.trail_size-1):]
             self._trail.append(pagename)
             self.saveTrail()
 
-            ## TODO: release lock here
+        # TODO: release lock here
             
     def saveTrail(self):
         """ Save trail file
@@ -861,6 +886,10 @@ class User:
         Users sign with a link to their homepage, or with text if they
         don't have one. The text may be parsed as a link if it's using
         CamelCase. Visitors return their host address.
+        
+        TODO: The signature use wiki format only, for example, it will
+        not create a link when using rst format. It will also break if
+        we change wiki syntax.
         """
         if not self.name:
             return self.host()
@@ -869,12 +898,10 @@ class User:
                                                            self.name)
         if wikiname == 'Self':
             if not wikiutil.isStrictWikiname(self.name):
-                # XXX wiki format only.
                 markup = '["%s"]' % pagename
             else:
                 markup = pagename
         else:
-            # XXX wiki format only.
             markup = '%s:%s' % (wikiname, pagename.replace(" ","_")) 
         return markup
 
