@@ -694,44 +694,42 @@ def do_quicklink(pagename, request):
 
 
 def do_subscribe(pagename, request):
-    """ Add the current wiki page to the subscribed_page property in
-        current user profile.
+    """ Subscribe or unsubscribe the user to pagename
+    
+    TODO: what if subscribe failed? no message is displayed.
     """
     _ = request.getText
     cfg = request.cfg
+    msg = None
 
     if not request.user.may.read(pagename):
         msg = _("You are not allowed to subscribe to a page you can't read.")
 
-    # check config
+    # Check if mail is enabled
     elif not cfg.mail_enabled:
-        msg = _('''This wiki is not enabled for mail processing. '''
-                '''Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''')
+        msg = _("This wiki is not enabled for mail processing.")
 
-    # check whether the user has a profile
+    # Suggest visitors to login
     elif not request.user.valid:
-        msg = _('''You didn't create a user profile yet. '''
-                '''Select UserPreferences in the upper right corner to create a profile.''')
+        msg = _("You must log in to use subscribtions.")
 
-    # check whether the user has an email address
+    # Suggest users without email to add their email address
     elif not request.user.email:
-        msg = _('''You didn't enter an email address in your profile. '''
-                '''Select your name (UserPreferences) in the upper right corner and enter a valid email address.''')
+        msg = _("Add your email address in your UserPreferences to use subscriptions.")
 
-    # check whether already subscribed
     elif request.user.isSubscribedTo([pagename]):
-        if request.user.subscribePage(pagename, remove=True):
-            request.user.save()
+        # Try to unsubscribe
+        if request.user.unsubscribe(pagename):
             msg = _('Your subscribtion to this page has been removed.')
         else:
             msg = _("Can't remove regular expression subscription!") + u' ' + \
-                  _('To unsubscribe, go to your profile and delete the item matching this page from the subscription list.')
+                  _("Edit the subscription regular expressions in your "
+                    "UserPreferences.")
             
-    # subscribe to current page
     else:
-        if request.user.subscribePage(pagename):
-            request.user.save()
-        msg = _('You have been subscribed to this page.')
+        # Try to subscribe
+        if request.user.subscribe(pagename):
+            msg = _('You have been subscribed to this page.')
 
     Page(request, pagename).send_page(request, msg=msg)
 
