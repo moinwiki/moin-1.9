@@ -234,6 +234,8 @@ Version moin--main--1.5:
     * Fix chart action, returns a page with error message when chart
       can not be created.
     * Fixed formatter usage in the ShowSmileys macro.
+    * Fixed updating pagelinks cache for [:page:text] or [wiki:Self:page text],
+      fixes display of LocalSiteMap and rendering of such links.
     
     
 Version 1.4:
