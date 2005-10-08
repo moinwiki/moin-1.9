@@ -905,7 +905,6 @@ function actionsMenuInit(title) {
             'print',
             'refresh',
             '__separator__',
-            'AttachFile',
             'SpellCheck',
             'LikePages',
             'LocalSiteMap',
@@ -922,7 +921,6 @@ function actionsMenuInit(title) {
             'raw': _('Raw Text', formatted=False),
             'print': _('Print View', formatted=False),
             'refresh': _('Delete Cache', formatted=False),
-            'AttachFile': _('Attachments', formatted=False),
             'SpellCheck': _('Check Spelling', formatted=False), # rename action!
             'RenamePage': _('Rename Page', formatted=False),
             'DeletePage': _('Delete Page', formatted=False),
@@ -1063,6 +1061,7 @@ actionsMenuInit('%(label)s');
         add(link(request, quotedname + '?action=info', _('Info', formatted=False)))
         add(self.subscribeLink(page))
         add(self.quicklinkLink(page))
+        add(self.attachmentsLink(page))
         add(self.actionsMenu(page))
         
         # Format
@@ -1072,6 +1071,13 @@ actionsMenuInit('%(label)s');
         # cache for next call
         self._cache[cacheKey] = html
         return html
+
+    def attachmentsLink(self, page):
+        """ Return link to page attachments """
+        _ = self.request.getText
+        return page.link_to(self.request, 
+                            text=_('Attachments', formatted=False), 
+                            querystr='action=AttachFile')
 
     def startPage(self):
         """ Start page div with page language and direction
