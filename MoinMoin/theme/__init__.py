@@ -842,20 +842,22 @@ function actionsMenuInit(title) {
         return False
 
     def quicklinkLink(self, page):
-        """ Return add/remove quicklink link to valid users
+        """ Return add/remove quicklink link
         
         @rtype: unicode
-        @return: quicklink / quickunlink link
+        @return: link to add or remove a quicklink
         """
+        if not self.request.user.valid:
+            return ''
+        
         _ = self.request.getText
-        user = self.request.user
-        if user.valid:
-            title = _("Quicklink")
-            quotedname = wikiutil.quoteWikinameURL(page.page_name)
-            link = wikiutil.link_tag(self.request, quotedname + 
-                                     '?action=quicklink', title)
-            return link
-        return ''
+        if self.request.user.isQuickLinkedTo([page.page_name]):
+            title = _("Remove Link")
+        else:
+            title = _("Add Link")
+        quotedname = wikiutil.quoteWikinameURL(page.page_name)
+        return wikiutil.link_tag(self.request, quotedname + 
+                                 '?action=quicklink', title)
 
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
