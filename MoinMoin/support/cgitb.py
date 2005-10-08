@@ -372,7 +372,7 @@ class View:
         section.
         """
         return """
-.cgitb {background: #E6EAF0; border: 1px solid #4D6180;}
+.cgitb {background: #E6EAF0; border: 1px solid #4D6180; direction: ltr;}
 .cgitb p {margin: 0.5em 0; padding: 5px 10px; text-align: left;}
 .cgitb ol {margin: 0}
 .cgitb li {margin: 0.25em 0;}
