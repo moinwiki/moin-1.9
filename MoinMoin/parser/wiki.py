@@ -155,7 +155,16 @@ class Parser:
         else:
             url, text = url_and_text
 
-        url = url[5:] # remove "wiki:"
+        # keep track of whether this is a self-reference, so links
+        # are always shown even the page doesn't exist.
+        is_self_reference = 0
+        url2 = url.lower()
+        if url2.startswith('wiki:self:'):
+            url = url[10:] # remove "wiki:self:"
+            is_self_reference = 1
+        elif url2.startswith('wiki:'):
+            url = url[5:] # remove "wiki:"
+           
         tag, tail = wikiutil.split_wiki(url)
         if text is None:
             if tag:
@@ -163,11 +172,9 @@ class Parser:
             else:
                 text = url
                 url = ""
-        elif url.startswith(wikiutil.CHILD_PREFIX):
-            # fancy link to subpage [wiki:/SubPage text]
-            return self._word_repl(url, text)
-        elif Page(self.request, url).exists():
-            # fancy link to local page [wiki:LocalPage text]
+        elif (url.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
+              is_self_reference or # [wiki:Self:LocalPage text] or [:LocalPage:text]
+              Page(self.request, url).exists()): # fancy link to local page [wiki:LocalPage text]
             return self._word_repl(url, text)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, url)
