@@ -606,6 +606,9 @@ class User:
         The subscription list may contain page names or interwiki page
         names. e.g 'Page Name' or 'WikiName:Page_Name'
         
+        TODO: check if its fast enough when calling with many users
+        from page.getSubscribersList()
+        
         @param pagelist: list of pages to check for subscription
         @rtype: bool
         @return: if user is subscribed any page in pagelist
@@ -614,16 +617,16 @@ class User:
             return False
         
         import re        
-        # Create text with all names and interwiki names, to be
-        # searched with the user pattern.
+        # Create a new list with both names and interwiki names.
+        pages = pagelist[:]
         if self._cfg.interwikiname:
-            pagelist += [self._interWikiName(pagename) 
-                         for pagename in pagelist]        
-        text = '\n'.join(pagelist)
+            pages += [self._interWikiName(pagename) for pagename in pagelist]
+        # Create text for regular expression search
+        text = '\n'.join(pages)
         
         for pattern in self.getSubscriptionList():
             # Try simple match first
-            if pattern in pagelist:
+            if pattern in pages:
                 return True
             # Try regular expression search, skipping bad patterns
             try:
