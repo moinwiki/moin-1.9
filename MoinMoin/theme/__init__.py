@@ -770,11 +770,10 @@ function actionsMenuInit(title) {
         """ Create rss href, used for rss button and head link
         
         @rtype: unicode
-        @return: html head
+        @return: rss href
         """
-        href = u'%s/RecentChanges?action=rss_rc&amp;ddiffs=1&amp;unique=1' % \
-               self.request.getScriptname()
-        return href
+        return (u'%s/RecentChanges?action=rss_rc&amp;ddiffs=1&amp;unique=1' 
+                % self.request.getScriptname())
                            
     def rsslink(self):
         """ Create rss link in head, used by FireFox
@@ -787,7 +786,8 @@ function actionsMenuInit(title) {
         """
         link = u''
         if self.shouldUseRSS():
-            link =  u'<link rel="alternate" title="%s Recent Changes" href="%s" type="application/rss+xml">' % (
+            link = (u'<link rel="alternate" title="%s Recent Changes" '
+                    u'href="%s" type="application/rss+xml">') % (
                         self.cfg.sitename,
                         self.rsshref() )
         return link
@@ -817,43 +817,20 @@ function actionsMenuInit(title) {
             html = self.cfg.page_credits
         return html
 
-    def shouldShowEditbar(self, page):
-        """ Should we show the editbar?
-
-        Actions should implement this, because only the action knows if
-        the edit bar makes sense. Until it goes into actions, we do the
-        checking here.
-
-        @param page: current page
-        @rtype: bool
-        @return: true if editbar should show
-        """
-        # Show editbar only for existing pages, including deleted pages,
-        # that the user may read. If you may not read, you can't edit,
-        # so you don't need editbar.
-        if (page.exists(includeDeleted=1) and
-            self.request.user.may.read(page.page_name)):
-            form = self.request.form
-            action = form.get('action', [''])[0]
-            # Do not show editbar on edit but on save/cancel
-            return not (action == 'edit' and
-                        not form.has_key('button_save') and
-                        not form.has_key('button_cancel'))
-        return False
-
     def actionsMenu(self, page):
         """ Create actions menu list and items data dict
         
-        The menu will contain the same items always, but items that are not 
-        available will be disabled (some broken browsers will let you select
-        disabled options though).
+        The menu will contain the same items always, but items that are
+        not available will be disabled (some broken browsers will let
+        you select disabled options though).
 
-        The menu should give best user experience for javascript enabled
-        browsers, and acceptable behavior for those who prefer not to
-        use Javascript.
+        The menu should give best user experience for javascript
+        enabled browsers, and acceptable behavior for those who prefer
+        not to use Javascript.
 
-        TODO: Move actionsMenuInit() into body onload. This require that
-        the theme will render body, its currently done on wikiutil/page.
+        TODO: Move actionsMenuInit() into body onload. This require
+        that the theme will render body, its currently done on
+        wikiutil/page.
         
         @param page: current page, Page object
         @rtype: unicode
@@ -971,9 +948,8 @@ actionsMenuInit('%(label)s');
     def editbar(self, d):
         """ Assemble the page edit bar.
 
-        Display on existing page. Replace iconbar, showtext, edit text,
-        refresh cache and available actions.
-        
+        Create html on first call, then return cached html.
+                
         @param d: parameter dictionary
         @rtype: unicode
         @return: iconbar html
@@ -982,77 +958,116 @@ actionsMenuInit('%(label)s');
         if not self.shouldShowEditbar(page):
             return ''
 
-        # Use cached editbar if possible.
-        cacheKey = 'editbar'
-        cached = self._cache.get(cacheKey)
-        if cached:
-            return cached
-
-        # Make new edit bar
-        request = self.request
-        _ = self.request.getText
-        link = wikiutil.link_tag
-        quotedname = wikiutil.quoteWikinameURL(page.page_name)
-        links = []
-        add = links.append
+        html = self._cache.get('editbar')
+        if html is None:
+            # Remove empty items and format as list
+            items = '\n'.join(['<li>%s</li>' % item
+                               for item in self.editbarItems(page) if item])
+            html = u'<ul class="editbar">\n%s\n</ul>\n' % items
+            self._cache['editbar'] = html
         
-        # Parent page
-        parent = page.getParentPage()
-        if parent:
-           add(parent.link_to(request, _("Parent Page", formatted=False))) 
-        
-        # Page actions
-        if page.isWritable() and request.user.may.write(page.page_name):
-            editor = request.user.editor_ui
-            if editor == '<default>':
-                editor = request.cfg.editor_ui
-            if editor == 'freechoice':
-                add(link(request, '%s?action=edit&editor=%s' % (quotedname, 'text'), _('Edit (Text)')))
-                add(link(request, '%s?action=edit&editor=%s' % (quotedname, 'gui'), _('Edit (GUI)')))
-            else: # editor == 'theonepreferred'
-                add(link(request, '%s?action=edit' % (quotedname, ), _('Edit')))
-                # we dont need to specify editor as edit action will choose the one from userprefs by default
-        else:
-            add(_('Immutable Page', formatted=False))              
-        
-        #This is kind of superfluous as RC and action=info contains this, too.
-        #And it showed only the "Last Change", so it was named wrong and
-        #bookmark on RC is superior.
-        #add(link(request, quotedname + '?action=diff',
-        #         _('Show Changes', formatted=False)))
-        add(link(request, quotedname + '?action=info', _('Info', formatted=False)))
-        add(self.subscribeLink(page))
-        add(self.quicklinkLink(page))
-        add(self.attachmentsLink(page))
-        add(self.actionsMenu(page))
-        
-        # Format
-        items = '\n'.join(['<li>%s</li>' % item for item in links if item != ''])
-        html = u'<ul class="editbar">\n%s\n</ul>\n' % items
-        
-        # cache for next call
-        self._cache[cacheKey] = html
         return html
 
+    def shouldShowEditbar(self, page):
+        """ Should we show the editbar?
+
+        Actions should implement this, because only the action knows if
+        the edit bar makes sense. Until it goes into actions, we do the
+        checking here.
+
+        @param page: current page
+        @rtype: bool
+        @return: true if editbar should show
+        """
+        # Show editbar only for existing pages, including deleted pages,
+        # that the user may read. If you may not read, you can't edit,
+        # so you don't need editbar.
+        if (page.exists(includeDeleted=1) and
+            self.request.user.may.read(page.page_name)):
+            form = self.request.form
+            action = form.get('action', [''])[0]
+            # Do not show editbar on edit but on save/cancel
+            return not (action == 'edit' and
+                        not form.has_key('button_save') and
+                        not form.has_key('button_cancel'))
+        return False
+
+    def editbarItems(self, page):
+        """ Return list of items to show on the editbar 
+        
+        This is separate method to make it easy to customize the
+        edtibar in sub classes.
+        """
+        links = []
+        links.append(self.parentLink(page))
+        links.extend(self.editLinks(page))
+        links.append(self.infoLink(page))
+        links.append(self.subscribeLink(page))
+        links.append(self.quicklinkLink(page))
+        links.append(self.attachmentsLink(page))
+        links.append(self.actionsMenu(page))
+
+        return links
+
+    def parentLink(self, page):
+        """ Return link to parent page """
+        _ = self.request.getText
+        parent = page.getParentPage()
+        if parent is None:
+            return ''
+        return parent.link_to(self.request, _("Parent Page", formatted=False))
+
+    def editLinks(self, page):
+        """ Return list of links to page editors """
+        if not (page.isWritable() and
+                self.request.user.may.write(page.page_name)):
+            return [self.disabledEdit()]
+        
+        _ = self.request.getText
+        editor = self.request.user.editor_ui
+        if editor == '<default>':
+            editor = self.request.cfg.editor_ui
+        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=edit'
+
+        if editor == 'freechoice':
+            return [wikiutil.link_tag(self.request, params + '&editor=text', 
+                                      _('Edit (Text)', formatted=False)),
+                    wikiutil.link_tag(self.request, params + '&editor=gui', 
+                                      _('Edit (GUI)', formatted=False)),]
+        else: # editor == 'theonepreferred'.
+            # unspecified editor will use the user prefered edtior.
+            return [wikiutil.link_tag(self.request, params, 
+                                      _('Edit', formatted=False)),]
+
+    def disabledEdit(self):
+        """ Return a disabled edit link """
+        _ = self.request.getText
+        return ('<span class="disabled">%s</span>' 
+                % _('Immutable Page', formatted=False))
+        
+    def infoLink(self, page):
+        """ Return link to page information """
+        _ = self.request.getText
+        return page.link_to(self.request,
+                            text=_('Info', formatted=False), 
+                            querystr='action=info')
+    
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
         
         @rtype: unicode
         @return: subscribe or unsubscribe link
         """
+        if not (self.cfg.mail_enabled and self.request.user.valid):
+            return ''
+        
         _ = self.request.getText
-        user = self.request.user
-        if self.cfg.mail_enabled and user.valid:
-            # Email enabled and user valid, get current page status
-            if user.isSubscribedTo([page.page_name]):
-                title = _("Unsubscribe")
-            else:
-                title = _("Subscribe")
-            quotedname = wikiutil.quoteWikinameURL(page.page_name)
-            link = wikiutil.link_tag(self.request, quotedname + 
-                                     '?action=subscribe', title)
-            return link
-        return ''
+        if self.request.user.isSubscribedTo([page.page_name]):
+            text = _("Unsubscribe", formatted=False)
+        else:
+            text = _("Subscribe", formatted=False)
+        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=subscribe'
+        return wikiutil.link_tag(self.request, params, text)
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
@@ -1065,17 +1080,16 @@ actionsMenuInit('%(label)s');
         
         _ = self.request.getText
         if self.request.user.isQuickLinkedTo([page.page_name]):
-            title = _("Remove Link")
+            text = _("Remove Link", formatted=False)
         else:
-            title = _("Add Link")
-        quotedname = wikiutil.quoteWikinameURL(page.page_name)
-        return wikiutil.link_tag(self.request, quotedname + 
-                                 '?action=quicklink', title)
+            text = _("Add Link", formatted=False)
+        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=quicklink'
+        return wikiutil.link_tag(self.request, params, text)
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
         _ = self.request.getText
-        return page.link_to(self.request, 
+        return page.link_to(self.request,
                             text=_('Attachments', formatted=False), 
                             querystr='action=AttachFile')
 
