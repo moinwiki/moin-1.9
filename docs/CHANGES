@@ -180,7 +180,10 @@ Version moin--main--1.5:
       errors when trying to import a name from a module. The calling
       code should check for ImportError or AttributeError. Previous
       code used to hide all errors behind None.
-
+    * Its easier now to customize the editbar by overriding
+      editbarItems() in your theme, and returning a list of items to
+      display in the editbar. To change a single editbar link, override
+      one of the xxxLink methods in your theme.
 
   Internal Changes:
     * request.formatter (html) is available for actions now
