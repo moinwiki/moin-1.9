@@ -692,7 +692,7 @@ def unzip_file(pagename, request):
                     'space': (sum_size_over_all_valid_files -
                               available_attachments_file_space) / 1000}
         else:
-            msg = _('The file %(target) is not a .zip file.' % target)
+            msg = _('The file %(target)s is not a .zip file.' % target)
 
     upload_form(pagename, request, msg=wikiutil.escape(msg))
 
