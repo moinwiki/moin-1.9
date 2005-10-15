@@ -42,8 +42,8 @@ class EventLog(LogFile):
                 if value:
                     # Save those http headers in UPPERcase
                     values[key.upper()] = value
-        # Encode values in a query string TODO: use more reaable format
-        values = web.makeQueryString(values)
+        # Encode values in a query string TODO: use more readable format
+        values = wikiutil.makeQueryString(values)
         self._add(u"%d\t%s\t%s\n" % (mtime_usecs, eventtype, values))
 
     def parser(self, line):
@@ -52,7 +52,7 @@ class EventLog(LogFile):
         except ValueError:
             # badly formatted line in file, skip it
             return None
-        return long(time_usecs), eventtype, web.parseQueryString(kvpairs)
+        return long(time_usecs), eventtype, wikiutil.parseQueryString(kvpairs)
                                                                         
     def set_filter(self, event_types = None):
         if event_types == None:

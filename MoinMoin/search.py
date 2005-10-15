@@ -1066,10 +1066,8 @@ class SearchResults:
 
     def querystring(self):
         """ Return query string, used in the page link """
-        from MoinMoin.util import web
-                
         querystr = {'highlight': self.query.highlight_re()}
-        querystr = web.makeQueryString(querystr)
+        querystr = wikiutil.makeQueryString(querystr)
         querystr = wikiutil.escape(querystr)
         return querystr
 

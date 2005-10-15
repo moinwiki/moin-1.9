@@ -25,7 +25,7 @@ class MakeQueryStringTestCase(unittest.TestCase):
             )
 
         for description, arg, expected in tests:
-            result = web.makeQueryString(arg)
+            result = wikiutil.makeQueryString(arg)
             self.assertEqual(result, expected,
                              ('%(description)s: expected "%(expected)s" '
                               'but got "%(result)s"') % locals())
@@ -33,7 +33,7 @@ class MakeQueryStringTestCase(unittest.TestCase):
     def testMakeQueryStringFromKeywords(self):
         """ util.web: make query sting from keywords """
         expected = 'a=1&b=string'
-        result = web.makeQueryString(a=1, b='string')
+        result = wikiutil.makeQueryString(a=1, b='string')
         self.assertEqual(result, expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
@@ -49,7 +49,7 @@ class MakeQueryStringTestCase(unittest.TestCase):
         
         for description, arg, expected in tests:
             # Call makeQueryString with both arg and keyword
-            result = web.makeQueryString(arg, b='kw')
+            result = wikiutil.makeQueryString(arg, b='kw')
             self.assertEqual(result, expected,
                              ('%(description)s: expected "%(expected)s" '
                               'but got "%(result)s"') % locals())

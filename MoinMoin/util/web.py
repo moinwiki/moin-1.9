@@ -7,7 +7,7 @@
 """
 
 import re
-from MoinMoin import config, wikiutil
+from MoinMoin import config
 
 def isSpiderAgent(request):
     """ Return True if user agent appears to be a spider.
@@ -20,41 +20,6 @@ def isSpiderAgent(request):
         return 0
 
     return re.search(request.cfg.ua_spiders, ua, re.I) is not None
-
-
-def parseQueryString(qstr):
-    """ Parse a querystring "key=value&..." into a dict.
-    """
-    import cgi
-    values = {}
-    for key, value in cgi.parse_qs(qstr).items():
-        if len(value) < 2:
-            values[key] = ''.join(value)
-    return values
-
-
-def makeQueryString(qstr=None, **kw):
-    """ Make a querystring from arguments.
-        
-    kw arguments overide values in qstr.
-
-    If a string is passed in, it's returned verbatim and
-    keyword parameters are ignored.
-
-    @param qstr: dict to format as query string, using either ascii or unicode
-    @param kw: same as dict when using keywords, using assci or unicode
-    @rtype: string
-    @return: query string ready to use in a url
-    """
-    if qstr is None:
-        qstr = {}
-    if isinstance(qstr, type({})):
-        qstr.update(kw)        
-        q = lambda x: wikiutil.url_quote_plus(x)
-        items = ['%s=%s' % (q(key), q(value)) for key, value in qstr.items()]
-        qstr = '&'.join(items)
-    
-    return qstr
 
 
 def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):

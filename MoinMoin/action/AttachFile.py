@@ -28,7 +28,7 @@
 import os, mimetypes, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter, filesys, web
+from MoinMoin.util import MoinMoinNoFooter, filesys
 
 action_name = __name__.split('.')[-1]
 
@@ -304,7 +304,7 @@ def send_hotdraw(pagename, request):
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
     querystr = {'action': 'AttachFile', 'ts': now}
-    querystr = wikiutil.escape(web.makeQueryString(querystr))
+    querystr = wikiutil.escape(wikiutil.makeQueryString(querystr))
     pagelink = '%s/%s?%s' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), querystr)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
     savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
