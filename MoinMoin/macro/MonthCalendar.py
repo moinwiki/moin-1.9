@@ -324,7 +324,7 @@ def execute(macro, text):
     if request.mode_getpagelinks:
         return ''
 
-    args_re=re.compile(_args_re_pattern)
+    args_re = re.compile(_args_re_pattern)
     
     currentyear, currentmonth, currentday, h, m, s, wd, yd, ds = request.user.getTime(time.time())
     thispage = formatter.page.page_name
@@ -381,10 +381,10 @@ def execute(macro, text):
     p = Page(request, thispage)
     qpagenames = '*'.join(map(wikiutil.quoteWikinameURL, parmpagename))
     querystr = "calparms=%%s,%d,%d,%d,%%d" % (parmyear, parmmonth, parmoffset)
-    prevlink  = p.url(request, querystr % (qpagenames, parmoffset2 - 1))
-    nextlink  = p.url(request, querystr % (qpagenames, parmoffset2 + 1))
-    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12))
-    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12))
+    prevlink  = p.url(request, querystr % (qpagenames, parmoffset2 - 1), 0)
+    nextlink  = p.url(request, querystr % (qpagenames, parmoffset2 + 1), 0)
+    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12), 0)
+    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12), 0)
     prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
     nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
     prevyear  = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
