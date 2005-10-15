@@ -466,7 +466,9 @@ def execute(macro, text):
                     titletext = []
                     for match in header1_re.finditer(daycontent):
                         if match:
-                            titletext.append(match.group(1))
+                            title = match.group(1)
+                            title = wikiutil.escape(title).replace("'","\\'")
+                            titletext.append(title)
                     tipname = link
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
