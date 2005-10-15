@@ -41,7 +41,7 @@ import sys
 sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin') # farmconfig/wikiconfig location
 sys.path.insert(0, '../../..')
 
-import os.path, urllib, codecs
+import os.path, codecs
 from MoinMoin import config
 from MoinMoin import wikiutil
 from MoinMoin.request import RequestCLI

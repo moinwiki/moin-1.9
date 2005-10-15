@@ -94,6 +94,66 @@ def decodeUserInput(s, charsets=[config.charset]):
     raise UnicodeError('The string %r cannot be decoded.' % s)
 
 
+# this is a thin wrapper around urllib (urllib only handles str, not unicode)
+# with py <= 2.4.1, it would give incorrect results with unicode
+# with py == 2.4.2, it crashes with unicode, if it contains non-ASCII chars
+def url_quote(s, safe='/', want_unicode=False):
+    """
+    Wrapper around urllib.quote doing the encoding/decoding as usually wanted:
+    
+    @param s: the string to quote (can be str or unicode, if it is unicode,
+              config.charset is used to encode it before calling urllib)
+    @param safe: just passed through to urllib
+    @param want_unicode: for the less usual case that you want to get back
+                         unicode and not str, set this to True
+                         Default is False.
+    """
+    is_unicode = isinstance(s, unicode)
+    if is_unicode:
+        s = s.encode(config.charset)
+    s = urllib.quote(s, safe)
+    if want_unicode:
+        s = s.decode(config.charset) # ascii would also work
+    return s
+
+def url_quote_plus(s, safe='/', want_unicode=False):
+    """
+    Wrapper around urllib.quote_plus doing the encoding/decoding as usually wanted:
+    
+    @param s: the string to quote (can be str or unicode, if it is unicode,
+              config.charset is used to encode it before calling urllib)
+    @param safe: just passed through to urllib
+    @param want_unicode: for the less usual case that you want to get back
+                         unicode and not str, set this to True
+                         Default is False.
+    """
+    is_unicode = isinstance(s, unicode)
+    if is_unicode:
+        s = s.encode(config.charset)
+    s = urllib.quote_plus(s, safe)
+    if want_unicode:
+        s = s.decode(config.charset) # ascii would also work
+    return s
+
+def url_unquote(s, want_unicode=True):
+    """
+    Wrapper around urllib.unquote doing the encoding/decoding as usually wanted:
+    
+    @param s: the string to unquote (can be str or unicode, if it is unicode,
+              config.charset is used to encode it before calling urllib)
+    @param want_unicode: for the less usual case that you want to get back
+                         str and not unicode, set this to False.
+                         Default is True.
+    """
+    is_unicode = isinstance(s, unicode)
+    if is_unicode:
+        s = s.encode(config.charset) # ascii would also work
+    s = urllib.unquote(s)
+    if want_unicode:
+        s = s.decode(config.charset)
+    return s
+
+
 # FIXME: better name would be quoteURL, as this is useful for any
 # string, not only wiki names.
 def quoteWikinameURL(pagename, charset=config.charset):

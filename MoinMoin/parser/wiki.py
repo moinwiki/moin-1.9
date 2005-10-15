@@ -195,7 +195,6 @@ class Parser:
     def attachment(self, url_and_text, **kw):
         """ This gets called on attachment URLs.
         """
-        import urllib
         _ = self._
         if len(url_and_text) == 1:
             url = url_and_text[0]
@@ -206,7 +205,7 @@ class Parser:
         inline = url[0] == 'i'
         drawing = url[0] == 'd'
         url = url.split(":", 1)[1]
-        url = urllib.unquote(url)
+        url = wikiutil.url_unquote(url, want_unicode=False)
         text = text or url
 
         parts = url.split('/')
@@ -215,7 +214,6 @@ class Parser:
             pagename = '/'.join(parts[:-1])
             url = parts[-1]
 
-        import urllib
         from MoinMoin.action import AttachFile
         if drawing:
             return self.formatter.attachment_drawing(url, text)

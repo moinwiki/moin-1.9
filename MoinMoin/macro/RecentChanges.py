@@ -27,15 +27,7 @@ def format_comment(request, line):
     comment = line.comment
     _ = request.getText
     if line.action.startswith('ATT'):
-        import urllib
-
-        # TODO: refactor this into the log in 1.5
-        # line.extra is urlencoded then converted to unicode.
-        # urllib.unquote require ascii - unquote(u'%xx') == u'%xx'
-        filename = line.extra.encode('ascii', 'replace')
-        filename = unicode(urllib.unquote(filename), config.charset,
-                           'replace')
-
+        filename = wikiutil.url_unquote(line.extra)
         if line.action == 'ATTNEW':
             comment = _("Upload of attachment '%(filename)s'.") % {
                 'filename': filename}

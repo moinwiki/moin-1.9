@@ -5,7 +5,7 @@
     @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-import os.path, urllib, re
+import os.path, re
 from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
@@ -242,10 +242,9 @@ class Formatter(FormatterBase):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
-            import urllib
             if wikitail.find('#') > -1:
                 wikitail, kw['anchor'] = wikitail.split('#', 1)
-            wikitail = urllib.unquote(wikitail)
+            wikitail = wikiutil.url_unquote(wikitail, want_unicode=False)
             try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
                 return apply(self.pagelink, (on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)), kw)
             except:
@@ -311,7 +310,7 @@ class Formatter(FormatterBase):
                 self.request,
                 self.text('%s?action=AttachFile&rename=%s' %
                           (wikiutil.quoteWikinameURL(pagename),
-                           urllib.quote_plus(fname.encode(config.charset)))),
+                           wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
         target = AttachFile.getAttachUrl(pagename, url, self.request)
         return (self.url(1, target, title="attachment:%s" % url) +
@@ -329,7 +328,7 @@ class Formatter(FormatterBase):
                 self.request,
                 self.text('%s?action=AttachFile&rename=%s' %
                           (wikiutil.quoteWikinameURL(pagename),
-                           urllib.quote_plus(fname.encode(config.charset)))),
+                           wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
         return self.image(
             title="attachment:%s" % url,
@@ -357,12 +356,15 @@ class Formatter(FormatterBase):
             return wikiutil.link_tag(self.request,
                 self.text('%s?action=AttachFile&rename=%s%s' % (
                     wikiutil.quoteWikinameURL(pagename),
-                    urllib.quote_plus(fname.encode(config.charset)),
-                    drawing and ('&drawing=%s' % urllib.quote(drawing.encode(config.charset))) or '')),
+                    wikiutil.url_quote_plus(fname),
+                    drawing and ('&drawing=%s' % wikiutil.url_quote(drawing)) or '')),
                 linktext % {'filename': self.text(fname)})
 
         mappath = AttachFile.getFilename(self.request, pagename, drawing + '.map')
-        edit_link = self.text('%s?action=AttachFile&rename=%s&drawing=%s' % (wikiutil.quoteWikinameURL(pagename), urllib.quote_plus(fname.encode(config.charset)), urllib.quote(drawing.encode(config.charset))))
+        edit_link = self.text('%s?action=AttachFile&rename=%s&drawing=%s' % (
+            wikiutil.quoteWikinameURL(pagename),
+            wikiutil.url_quote_plus(fname),
+            wikiutil.url_quote(drawing)))
 
         # check for map file
         if os.path.exists(mappath):

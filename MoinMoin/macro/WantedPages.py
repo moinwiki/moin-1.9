@@ -6,7 +6,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import urllib
 from MoinMoin import config, wikiutil
 
 Dependencies = ["pages"]
@@ -75,7 +74,7 @@ def execute(macro, args):
         where.sort()
         if macro.formatter.page.page_name in where:
             where.remove(macro.formatter.page.page_name)
-        querystr='highlight=%s' % urllib.quote_plus(name.encode(config.charset))
+        querystr='highlight=%s' % wikiutil.url_quote_plus(name)
         wherelinks = [pages[pagename].link_to(request, querystr=querystr)
                       for pagename in where]
         result.append(": " + ', '.join(wherelinks))

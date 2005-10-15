@@ -5,9 +5,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import re
 import xml.dom.minidom
 from xml.dom import Node
-import re, urllib
 
 from MoinMoin import config, wikiutil, error
 
@@ -714,11 +714,6 @@ class convert_tree(visitor):
                     raise ConvertError("process_table_record: Don't support %s element" % name)
         self.text.append("||\n")
 
-    def _unquote_url(self, url): # XXX is it necessary to have "yet another unquote function"?
-        url = str(url)
-        url = urllib.unquote(url)
-        return unicode(url, 'utf-8', 'replace')
-
     def process_a(self, node):
         scriptname = self.request.getScriptname()
         if scriptname == "":
@@ -726,7 +721,7 @@ class convert_tree(visitor):
         # can either be a link (with href) or an anchor (with e.g. id)
         href = node.attributes.get("href", None)
         if href:
-            href = self._unquote_url(href.nodeValue)
+            href = wikiutil.url_unquote(href.nodeValue)
         id = node.attributes.get("id", None)
         if id:
             id = id.nodeValue
@@ -772,7 +767,7 @@ class convert_tree(visitor):
 
             # Attachments
             if title and title.startswith("attachment:"):
-                url = self._unquote_url(title[len("attachment:"):])
+                url = wikiutil.url_unquote(title[len("attachment:"):])
                 if url != text:
                     self.text.append("[%s %s]" % (title, text))
                 else:
@@ -816,7 +811,7 @@ class convert_tree(visitor):
     def process_img(self, node):
         src = None
         if node.attributes.has_key("src"):
-            src = self._unquote_url(node.attributes.get("src").nodeValue)
+            src = wikiutil.url_unquote(node.attributes.get("src").nodeValue)
         title = None
         if node.attributes.has_key("title"):
             title = node.attributes.get("title").nodeValue
@@ -826,14 +821,14 @@ class convert_tree(visitor):
 
         # Attachment image
         if (title and title.startswith("attachment:") and
-            wikiutil.isPicture(self._unquote_url(title[len("attachment:"):]))):
+            wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))):
             self.text.extend([self.white_space,
-                              self._unquote_url(title),
+                              wikiutil.url_unquote(title),
                               self.white_space])
         # Drawing image
         elif title and title.startswith("drawing:"):
             self.text.extend([self.white_space,
-                              self._unquote_url(title),
+                              wikiutil.url_unquote(title),
                               self.white_space])
         # Smiley
         elif src and (self.request.cfg.url_prefix in src or '../' in src) and "img/" in src: # XXX this is dirty!

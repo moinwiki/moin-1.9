@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time, urllib
+import time
 
 from MoinMoin.logfile import editlog
 from MoinMoin.util.dataset import TupleDataset, Column
@@ -46,7 +46,7 @@ def show_editors(request, pagename, timestamp):
                        Column('pages', label=_("Pages"), align='right'),
                        Column('link', label='', align='left')]
     for nr, editor in editors:
-        dataset.addRow((editor, unicode(nr), pg.link_to(request, text=_("Select Author"), querystr="action=Despam&editor=%s" % urllib.quote_plus(editor))))
+        dataset.addRow((editor, unicode(nr), pg.link_to(request, text=_("Select Author"), querystr="action=Despam&editor=%s" % wikiutil.url_quote_plus(editor))))
     
     table = DataBrowserWidget(request)
     table.setData(dataset)
@@ -91,7 +91,7 @@ def show_pages(request, pagename, editor, timestamp):
 </form>
 </p>
 ''' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
-       urllib.quote(editor), _("Revert all!")))
+       wikiutil.url_quote(editor), _("Revert all!")))
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
@@ -122,7 +122,7 @@ def revert_page(request, pagename, editor):
 def revert_pages(request, editor, timestamp):
     _ =  request.getText
 
-    editor = urllib.unquote(editor)
+    editor = wikiutil.url_unquote(editor, want_unicode=False)
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     pages = {}

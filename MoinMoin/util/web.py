@@ -6,8 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, urllib
-from MoinMoin import config
+import re
+from MoinMoin import config, wikiutil
 
 def isSpiderAgent(request):
     """ Return True if user agent appears to be a spider.
@@ -50,7 +50,7 @@ def makeQueryString(qstr=None, **kw):
         qstr = {}
     if isinstance(qstr, type({})):
         qstr.update(kw)        
-        q = lambda x: urllib.quote_plus(unicode(x).encode(config.charset))
+        q = lambda x: wikiutil.url_quote_plus(x)
         items = ['%s=%s' % (q(key), q(value)) for key, value in qstr.items()]
         qstr = '&'.join(items)
     
