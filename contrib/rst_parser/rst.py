@@ -7,6 +7,22 @@
     @license: GNU GPL, see COPYING for details.
 
     REQUIRES docutils 0.3.3 or later
+
+    TODO: importing this module must not crash due to missing dependencies,
+          like a not installed docutils (or similar). Moin does import the
+          module e.g. when using inline:abc.txt, just to see if it supports
+          the .txt extension. If it crashes then, attachment inlining will
+          not work AT ALL in moin.
+          So the imports should be moved to a function that is invoked when
+          the parser is invoked to parse rst, not on module import.
+          Maybe also add code that can "pseudo parse" rst when docutils is
+          missing, e.g. use plain text parser. Or give some error msg that
+          docutils is missing.
+
+          See also:
+          http://moinmoin.wikiwikiweb.de/ErrorHandlingInPlugins#head-4d50f5e8a2b5b1629e63693954a5354f1d3269d0
+          
+          Moved to contrib/ until this is fixed.
 """
 
 import re
