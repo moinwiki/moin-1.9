@@ -800,7 +800,7 @@ def getParserForExtension(cfg, extension):
         for pname in getPlugins('parser', cfg):
             try:
                 Parser = importPlugin(cfg, 'parser', pname, 'Parser')
-            except wikiutil.PluginMissingError:
+            except PluginMissingError:
                 continue
             if hasattr(Parser, 'extensions'):
                 exts = Parser.extensions

@@ -244,7 +244,7 @@ class Formatter(FormatterBase):
         if wikitag == 'Self': # for own wiki, do simple links
             if wikitail.find('#') > -1:
                 wikitail, kw['anchor'] = wikitail.split('#', 1)
-            wikitail = wikiutil.url_unquote(wikitail, want_unicode=False)
+            wikitail = wikiutil.url_unquote(wikitail)
             try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
                 return apply(self.pagelink, (on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)), kw)
             except:

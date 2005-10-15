@@ -15,7 +15,7 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import caching
+from MoinMoin import caching, config
 from MoinMoin.Page import Page
 from MoinMoin.logfile import eventlog, logfile
 
@@ -62,6 +62,7 @@ class PageHits:
             if event[0] <= cacheDate:
                 break
             page = event[2].get('pagename', None)
+            page = page.decode(config.charset)
             if page:
                 hits[page] = hits.get(page, 0) + 1
                 changed = True
