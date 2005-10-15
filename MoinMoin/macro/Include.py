@@ -110,6 +110,8 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         fmt = macro.formatter.__class__(request, is_included=True)
         fmt._base_depth = macro.formatter._base_depth
         inc_page = Page(request, inc_name, formatter=fmt)
+        if not inc_page.exists():
+            continue
         inc_page._macroInclude_pagelist = this_page._macroInclude_pagelist
 
         # check for "from" and "to" arguments (allowing partial includes)
