@@ -241,7 +241,8 @@ Version moin--main--1.5:
       fixes display of LocalSiteMap and rendering of such links.
     * Hopefully fixed urllib problems (esp. with py 2.4.2, but also before) by
       using our own urllib wrapper that handles encoding/decoding to/from
-      unicode, see wikiutil.py.
+      unicode, see wikiutil.py. Also made a similar fix for making and parsing
+      query strings.
     
 Version 1.4:
 

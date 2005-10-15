@@ -10,7 +10,7 @@ import StringIO, os, re, random, codecs
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys, web
+from MoinMoin.util import filesys
 from MoinMoin.util.datetime import formathttpdate
 
 class Page:
@@ -788,7 +788,7 @@ class Page:
 
         @param request: the request object
         @param querystr: the query string to add after a "?" after the url
-            (str or dict, see util.web.makeQueryString)
+            (str or dict, see wikiutil.makeQueryString)
         @param escpae: escape url for html, to be backward compatible
             with old code (bool)
         @rtype: str
@@ -798,7 +798,7 @@ class Page:
                      wikiutil.quoteWikinameURL(self.page_name))
 
         if querystr:
-            querystr = web.makeQueryString(querystr)
+            querystr = wikiutil.makeQueryString(querystr)
 
             # TODO: remove in 2.0
             # Escape query string to be compatible with old 3rd party code
@@ -835,7 +835,7 @@ class Page:
         # Create url, excluding scriptname
         url = wikiutil.quoteWikinameURL(self.page_name)
         if querystr:
-            querystr = web.makeQueryString(querystr)
+            querystr = wikiutil.makeQueryString(querystr)
             # makeQueryString does not escape any more
             querystr = wikiutil.escape(querystr)
             url = "%s?%s" % (url, querystr)

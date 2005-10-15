@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
     
-import os, re, difflib, urllib
+import os, re, difflib, urllib, cgi
 
 from MoinMoin import util, version, config
 from MoinMoin.util import pysupport
@@ -152,6 +152,42 @@ def url_unquote(s, want_unicode=True):
     if want_unicode:
         s = s.decode(config.charset)
     return s
+
+def parseQueryString(qstr, want_unicode=False):
+    """ Parse a querystring "key=value&..." into a dict.
+    """
+    is_unicode = isinstance(qstr, unicode)
+    if is_unicode:
+        qstr = qstr.encode(config.charset)
+    values = {}
+    for key, value in cgi.parse_qs(qstr).items():
+        if len(value) < 2:
+            v = ''.join(value)
+            if want_unicode:
+                v = v.decode(config.charset)
+            values[key] = v
+    return values
+
+def makeQueryString(qstr=None, want_unicode=False, **kw):
+    """ Make a querystring from arguments.
+        
+    kw arguments overide values in qstr.
+
+    If a string is passed in, it's returned verbatim and
+    keyword parameters are ignored.
+
+    @param qstr: dict to format as query string, using either ascii or unicode
+    @param kw: same as dict when using keywords, using assci or unicode
+    @rtype: string
+    @return: query string ready to use in a url
+    """
+    if qstr is None:
+        qstr = {}
+    if isinstance(qstr, type({})):
+        qstr.update(kw)
+        items = ['%s=%s' % (url_quote_plus(key, want_unicode=want_unicode), url_quote_plus(value, want_unicode=want_unicode)) for key, value in qstr.items()]
+        qstr = '&'.join(items)
+    return qstr
 
 
 # FIXME: better name would be quoteURL, as this is useful for any
@@ -1226,7 +1262,7 @@ def send_title(request, text, **keywords):
         not keywords.get('print_mode', 0) and
         request.user.edit_on_doubleclick):
         if request.user.may.write(pagename): # separating this gains speed
-            querystr = escape(util.web.makeQueryString({'action': 'edit'}))
+            querystr = escape(makeQueryString({'action': 'edit'}))
             # TODO: remove escape=0 in 2.0
             url = page.url(request, querystr, escape=0)
             bodyattr.append(''' ondblclick="location.href='%s'"''' % url)

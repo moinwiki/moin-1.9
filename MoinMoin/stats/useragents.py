@@ -20,7 +20,6 @@ from MoinMoin.logfile import eventlog, logfile
 
 
 def linkto(pagename, request, params=''):
-    from MoinMoin.util import web
     _ = request.getText
 
     if not request.cfg.chart_options:
@@ -32,7 +31,7 @@ def linkto(pagename, request, params=''):
 
     # Create escaped query string from dict and params
     querystr = {'action': 'chart', 'type': 'useragents'}
-    querystr = web.makeQueryString(querystr)
+    querystr = wikiutil.makeQueryString(querystr)
     querystr = wikiutil.escape(querystr)
     if params:
         querystr += '&amp;' + params
