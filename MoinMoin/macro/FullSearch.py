@@ -27,7 +27,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, urllib
+import re
 from MoinMoin import config, wikiutil, search
 
 Dependencies = ["pages"]

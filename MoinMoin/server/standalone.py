@@ -35,11 +35,11 @@
 """
 
 # Imports
-import os, sys, time, urllib, socket, errno, shutil
+import os, sys, time, socket, errno, shutil
 import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
 # MoinMoin imports
-from MoinMoin import version
+from MoinMoin import version, wikiutil
 from MoinMoin.server import Config, switchUID
 from MoinMoin.request import RequestStandAlone
 from MoinMoin.util.datetime import formathttpdate
@@ -344,7 +344,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         Components that mean special things to the local file system
         (e.g. drive or directory names) are ignored.
         """
-        file = urllib.unquote(uri)
+        file = wikiutil.url_unquote(uri, want_unicode=False)
         file.replace('\\', '/')
         words = file.split('/')
         words = filter(None, words)

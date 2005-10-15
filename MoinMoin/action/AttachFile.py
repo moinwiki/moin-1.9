@@ -25,7 +25,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, mimetypes, time, urllib, zipfile
+import os, mimetypes, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import MoinMoinNoFooter, filesys, web
@@ -83,12 +83,12 @@ def getAttachUrl(pagename, filename, request, addts=0, escaped=0):
 
         url = "%s/%s/attachments/%s%s" % (
             request.cfg.attachments['url'], wikiutil.quoteWikinameFS(pagename),
-            urllib.quote(filename.encode(config.charset)), timestamp)
+            wikiutil.url_quote(filename), timestamp)
     else:
         # send file via CGI
         url = "%s/%s?action=%s&do=get&target=%s" % (
             request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
-            action_name, urllib.quote_plus(filename.encode(config.charset)))
+            action_name, wikiutil.url_quote_plus(filename))
     if escaped:
         url = wikiutil.escape(url)
     return url
@@ -147,8 +147,7 @@ def _addLogEntry(request, action, pagename, filename):
     """
     from MoinMoin.logfile import editlog
     t = wikiutil.timestamp2version(time.time())
-    # urllib always return ascii
-    fname = unicode(urllib.quote(filename.encode(config.charset)))
+    fname = wikiutil.url_quote(filename, want_unicode=True)
 
     # TODO: for now we simply write 2 logs, maybe better use some multilog stuff
     # Write to global log
@@ -214,7 +213,7 @@ def _build_filelist(request, pagename, showheader, readonly):
             baseurl = request.getScriptname()
             action = action_name
             urlpagename = wikiutil.quoteWikinameURL(pagename)
-            urlfile = urllib.quote_plus(file.encode(config.charset))
+            urlfile = wikiutil.url_quote_plus(file)
 
             base, ext = os.path.splitext(file)
             get_url = getAttachUrl(pagename, file, request, escaped=1)
@@ -290,7 +289,7 @@ def send_link_rel(request, pagename):
         for file in files:
             url = "%s/%s?action=%s&do=view&target=%s" % (
                 scriptName, pagename_quoted,
-                action_name, urllib.quote_plus(file.encode(config.charset)))
+                action_name, wikiutil.url_quote_plus(file))
 
             request.write(u'<link rel="Appendix" title="%s" href="%s">\n' % (
                 wikiutil.escape(file), wikiutil.escape(url)))

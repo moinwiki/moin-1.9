@@ -19,7 +19,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, time, urllib
+import os, re, time
 from MoinMoin import config, util, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.util import MoinMoinNoFooter, pysupport
@@ -317,13 +317,7 @@ def do_info(pagename, request):
                 rev = '-'
                 diff = '-'
                 
-                # TODO: refactor this into the log in 1.5
-                # line.extra is urlencoded then converted to unicode.
-                # urllib.unquote require ascii - unquote(u'%xx') == u'%xx'
-                filename = line.extra.encode('ascii', 'replace')
-                filename = unicode(urllib.unquote(filename), config.charset,
-                                   'replace')
-
+                filename = wikiutil.url_unquote(line.extra)
                 comment = "%s: %s %s" % (line.action, filename, line.comment)
                 size = 0
                 if line.action != 'ATTDEL':
@@ -418,7 +412,7 @@ def do_info(pagename, request):
     
     if show_hitcounts:
         from MoinMoin.stats import hitcounts
-        request.write(hitcounts.linkto(pagename, request, 'page=' + urllib.quote_plus(pagename.encode(config.charset))))
+        request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote_plus(pagename)))
     elif show_general:
         general(page, pagename, request)
     else:

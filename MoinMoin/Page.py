@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import StringIO, os, re, urllib, random, codecs
+import StringIO, os, re, random, codecs
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
@@ -842,7 +842,7 @@ class Page:
 
         # Add anchor
         if anchor:
-            url = "%s#%s" % (url, urllib.quote_plus(anchor.encode(config.charset)))
+            url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
 
         # Add css class for non existing page
         if not self.exists():
@@ -1034,7 +1034,7 @@ class Page:
                 request.http_redirect('%s/%s?action=show&redirect=%s' % (
                     request.getScriptname(),
                     wikiutil.quoteWikinameURL(pi_redirect),
-                    urllib.quote_plus(self.page_name.encode(config.charset), ''),))
+                    wikiutil.url_quote_plus(self.page_name, ''),))
                 return
             elif verb == "deprecated":
                 # deprecated page, append last backup version to current contents
@@ -1122,7 +1122,7 @@ class Page:
                 link = '%s/%s?action=fullsearch&amp;value=%s&amp;context=180' % (
                     request.getScriptname(),
                     wikiutil.quoteWikinameURL(self.page_name),
-                    urllib.quote_plus(full_text_query.encode(config.charset)))
+                    wikiutil.url_quote_plus(full_text_query))
 
                 title = self.split_title(request)
                 if self.rev:

@@ -239,7 +239,9 @@ Version moin--main--1.5:
     * Fixed formatter usage in the ShowSmileys macro.
     * Fixed updating pagelinks cache for [:page:text] or [wiki:Self:page text],
       fixes display of LocalSiteMap and rendering of such links.
-    
+    * Hopefully fixed urllib problems (esp. with py 2.4.2, but also before) by
+      using our own urllib wrapper that handles encoding/decoding to/from
+      unicode, see wikiutil.py.
     
 Version 1.4:
 

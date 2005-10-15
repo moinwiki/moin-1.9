@@ -319,10 +319,10 @@ class RequestBase(object):
         # Fix path_info
         if os.name != 'posix' and self.request_uri != '':
             # Try to recreate path_info from request_uri.
-            import urlparse, urllib
+            import urlparse
             scriptAndPath = urlparse.urlparse(self.request_uri)[2]
             path = scriptAndPath.replace(self.script_name, '', 1)            
-            self.path_info = urllib.unquote(path)
+            self.path_info = wikiutil.url_unquote(path, want_unicode=False)
         elif os.name == 'nt':
             # Recode path_info to utf-8
             path = wikiutil.decodeWindowsPath(self.path_info)
@@ -410,8 +410,7 @@ class RequestBase(object):
 
     def makeURI(self):
         """ Return uri created from uri parts """
-        import urllib
-        uri = self.script_name + urllib.quote(self.path_info)
+        uri = self.script_name + wikiutil.url_quote(self.path_info)
         if self.query_string:
             uri += '?' + self.query_string
         return uri
@@ -422,12 +421,11 @@ class RequestBase(object):
         Just like CGI environment, the path is unquoted, the query is
         not.
         """
-        import urllib
         if '?' in uri:
             path, query = uri.split('?', 1)
         else:
             path, query = uri, ''
-        return urllib.unquote(path), query        
+        return wikiutil.url_unquote(path, want_unicode=False), query        
                 
     def get_user(self):
         for auth in self.cfg.auth:
@@ -538,8 +536,7 @@ class RequestBase(object):
         solving path_info encodig problems by calling with the page
         name as a query.
         """
-        import urllib
-        pagename = urllib.unquote(self.query_string)
+        pagename = wikiutil.url_unquote(self.query_string, want_unicode=False)
         pagename = self.decodePagename(pagename)
         pagename = self.normalizePagename(pagename)
         return pagename

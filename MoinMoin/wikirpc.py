@@ -24,7 +24,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import sys, urllib, time, xmlrpclib
+import sys, time, xmlrpclib
 
 from MoinMoin import config, user, wikiutil
 from MoinMoin.Page import Page
@@ -460,11 +460,7 @@ class XmlRpc1(XmlRpcBase):
         @rtype: unicode
         @return: text
         """
-        if isinstance(text, unicode):
-            text = text.encode('utf-8') # ascii should also work
-        text = urllib.unquote(text)
-        text = unicode(text, 'utf-8')
-        return text
+        return wikiutil.url_unquote(text) # config.charset must be utf-8
 
     def _outstr(self, text):
         """ Convert string from internal representation to xmlrpc
@@ -473,12 +469,7 @@ class XmlRpc1(XmlRpcBase):
         @rtype: str
         @return: text encoded in utf-8 and quoted
         """
-        if isinstance(text, unicode):
-            text = text.encode('utf-8')
-        elif config.charset != 'utf-8':        
-            text = unicode(text, config.charset).encode('utf-8')
-        text = urllib.quote(text)
-        return text
+        return wikiutil.url_quote(text) # config.charset must be utf-8
 
     
 class XmlRpc2(XmlRpcBase):
