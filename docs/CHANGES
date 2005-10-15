@@ -131,7 +131,7 @@ Version moin--main--1.5:
        there first.
 
   Other changes/new features:
-    * Added MoinMoin:PackageInstaller and unzipping support.
+    * Added PackageInstaller and unzipping support (see HelpOnActions/AttachFile for further details). 
     * added WSGI server support, thanks to Anakim Border, see:
       wiki/server/moinwsgi.py (moin as WSGI app, uses the flup WSGI server,
                                see http://www.saddi.com/software/flup/)
@@ -162,7 +162,7 @@ Version moin--main--1.5:
     * Added a SubscribeUser action which allows the administrator to subscribe users to the
       current page.
     * Added thread count to SystemInfo macro.
-    * Added Petr's newest patch against the DocBook code.
+    * Added Petr's newest patch against the DocBook code. It allows you to use macros (esp. the include macro) in DocBook pages in order to build larger documents.
     * Added a RenderAsDocbook action which redirects to the DocBook formatter.
 
   International support:    
