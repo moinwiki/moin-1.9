@@ -174,6 +174,7 @@ class DefaultConfig:
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_cookie]
     
+    backup_compression = 'gz'
     backup_users = []
     backup_include = []
     backup_exclude = [
@@ -182,7 +183,9 @@ class DefaultConfig:
         r"%(/)spages%(/)s.+%(/)scache%(/)s[^%(/)s]+$" % {'/': os.sep},
         r"%(/)s(edit-lock|event-log|\.DS_Store)$" % {'/': os.sep},
         ]
-                      
+    backup_storage_dir = '/tmp'
+    backup_restore_target_dir = '/tmp'
+    
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
