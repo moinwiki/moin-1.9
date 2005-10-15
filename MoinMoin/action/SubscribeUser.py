@@ -104,7 +104,7 @@ Subscribes the users to a page.
 URL is just needed for a farmconfig scenario.
 
 Example:
-%(myname)s FrontPage TestUser,SaddamHussein
+%(myname)s FrontPage TestUser,MatthewSimpson
 
 """ % {"myname": os.path.basename(args[0])}
         raise SystemExit
