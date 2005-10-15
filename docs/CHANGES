@@ -244,6 +244,7 @@ Version moin--main--1.5:
       unicode, see wikiutil.py. Also made a similar fix for making and parsing
       query strings.
     * Fixed MonthCalendar tooltips when containing special chars like quotes.
+    * Added html escaping for diff text for RSS feed with diff=1.
     
 Version 1.4:
 

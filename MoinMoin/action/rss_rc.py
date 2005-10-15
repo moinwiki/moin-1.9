@@ -164,8 +164,11 @@ def execute(pagename, request):
                 if rev <= item.rev:
                     if idx+1 < rl:
                         lines = wikiutil.pagediff(request, item.pagename, revisions[idx+1], item.pagename, 0, ignorews=1)
-                        if len(lines) > 20: lines = lines[:20] + ['...\n']
-                        desc_text = '%s\n<pre>\n%s\n</pre>\n' % (desc_text, '\n'.join(lines))
+                        if len(lines) > 20:
+                            lines = lines[:20] + ['...\n']
+                        lines = '\n'.join(lines)
+                        lines = wikiutil.escape(lines)
+                        desc_text = '%s\n<pre>\n%s\n</pre>\n' % (desc_text, lines)
                     break
         if desc_text:
             handler.simpleNode('description', desc_text)
