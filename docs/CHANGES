@@ -132,6 +132,7 @@ Version moin--main--1.5:
 
   Other changes/new features:
     * Added PackageInstaller and unzipping support (see HelpOnActions/AttachFile for further details). 
+     * Added an PackagePages action to simplify the package creation.
     * added WSGI server support, thanks to Anakim Border, see:
       wiki/server/moinwsgi.py (moin as WSGI app, uses the flup WSGI server,
                                see http://www.saddi.com/software/flup/)
