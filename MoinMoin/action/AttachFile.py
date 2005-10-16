@@ -640,9 +640,9 @@ def unzip_file(pagename, request):
     if not filename: return # error msg already sent in _access_file
 
     attachment_path = getAttachDir(request, pagename)
-    single_file_size = 2.0 * 1000**2
-    attachments_file_space = 200.0 * 1000**2
-
+    single_file_size = request.cfg.unzip_single_file_size
+    attachments_file_space = request.cfg.unzip_attachments_space
+    
     files = _get_files(request, pagename)
 
     msg = ""

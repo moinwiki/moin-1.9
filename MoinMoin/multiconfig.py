@@ -387,6 +387,9 @@ class DefaultConfig:
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 
+    unzip_single_file_size = 2.0 * 1000**2
+    unzip_attachments_space = 200.0 * 1000**2
+
     xmlrpc_putpage_enabled = 0 # if 0, putpage will write to a test page only
     xmlrpc_putpage_trusted_only = 1 # if 1, you will need to be http auth authenticated
     
