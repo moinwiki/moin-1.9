@@ -637,12 +637,14 @@ def unzip_file(pagename, request):
     valid_pathname = lambda name: (name.find('/') == -1) and (name.find('\\') == -1)
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return # error msg already sent in _access_file
+    if not filename:
+        return # error msg already sent in _access_file
 
     attachment_path = getAttachDir(request, pagename)
     single_file_size = request.cfg.unzip_single_file_size
     attachments_file_space = request.cfg.unzip_attachments_space
-    
+    max_file_count = request.cfg.unzip_file_count
+
     files = _get_files(request, pagename)
 
     msg = ""
@@ -656,11 +658,14 @@ def unzip_file(pagename, request):
         if zipfile.is_zipfile(fpath):
             zf = zipfile.ZipFile(fpath)
             sum_size_over_all_valid_files = 0.0
+            count_valid_files = 0
             for name in zf.namelist():
                 if valid_pathname(name):
                     sum_size_over_all_valid_files += zf.getinfo(name).file_size
+                    count_valid_files += 1
 
-            if sum_size_over_all_valid_files < available_attachments_file_space:
+            if (sum_size_over_all_valid_files < available_attachments_file_space and
+                count_valid_files < max_file_count):
                 valid_name = False
                 for name in zf.namelist():
                     if valid_pathname(name):
@@ -688,9 +693,11 @@ def unzip_file(pagename, request):
             else:
                 msg=_("Attachment '%(filename)s' could not be unzipped because"
                       " the resulting files would be too large (%(space)d kB"
-                      " missing).") % {'filename': filename,
-                    'space': (sum_size_over_all_valid_files -
-                              available_attachments_file_space) / 1000}
+                      " missing) or more than %(count)d files.") % {
+                        'filename': filename,
+                        'space': (sum_size_over_all_valid_files -
+                              available_attachments_file_space) / 1000,
+                        'count': max_file_count }
         else:
             msg = _('The file %(target)s is not a .zip file.' % target)
 
