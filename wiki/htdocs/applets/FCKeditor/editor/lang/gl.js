@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Ítem de ferramentas descoñecido \"%1\"",
 UnknownCommand		: "Nome de comando descoñecido \"%1\"",
 NotImplemented		: "Comando non implementado",
 UnknownToolbarSet	: "O conxunto de ferramentas \"%1\" non existe",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Propriedades das Marcas",
 NumberedListProp	: "Propriedades da Lista de Numeración",
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Círculo",
-DlgLstTypeDisk		: "Disco",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Cuadrado",
 DlgLstTypeNumbers	: "Números (1, 2, 3)",
 DlgLstTypeLCase		: "Letras Minúsculas (a, b, c)",

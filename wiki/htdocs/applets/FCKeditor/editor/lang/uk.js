@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Невідомий елемент панелі інстр�
 UnknownCommand		: "Невідоме ім'я команди \"%1\"",
 NotImplemented		: "Команда не реалізована",
 UnknownToolbarSet	: "Панель інструментів \"%1\" не існує",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "ОК",
@@ -415,7 +416,7 @@ BulletedListProp	: "Властивості маркованого списка",
 NumberedListProp	: "Властивості нумерованного списка",
 DlgLstType			: "Тип",
 DlgLstTypeCircle	: "Коло",
-DlgLstTypeDisk		: "Диск",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Квадрат",
 DlgLstTypeNumbers	: "Номери (1, 2, 3)",
 DlgLstTypeLCase		: "Літери нижнього регістра(a, b, c)",

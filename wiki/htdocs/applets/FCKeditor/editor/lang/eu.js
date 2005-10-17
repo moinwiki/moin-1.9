@@ -134,6 +134,7 @@ UnknownToolbarItem	: "Ataza barrako elementu ezezaguna \"%1\"",
 UnknownCommand		: "Komando izen ezezaguna \"%1\"",
 NotImplemented		: "Komando ez inplementatua",
 UnknownToolbarSet	: "Ataza barra \"%1\" taldea ez da existitzen",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "Ados",
@@ -416,7 +417,7 @@ BulletedListProp	: "Buletdun Zerrendaren Ezarpenak",
 NumberedListProp	: "Zenbakidun Zerrendaren Ezarpenak",
 DlgLstType			: "Mota",
 DlgLstTypeCircle	: "Zirkulua",
-DlgLstTypeDisk		: "Diskoa",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Karratua",
 DlgLstTypeNumbers	: "Zenbakiak (1, 2, 3)",
 DlgLstTypeLCase		: "Letra xeheak (a, b, c)",

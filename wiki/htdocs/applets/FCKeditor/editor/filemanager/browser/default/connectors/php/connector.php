@@ -40,9 +40,18 @@ else
 if ( ! ereg( '/$', $GLOBALS["UserFilesPath"] ) )
 	$GLOBALS["UserFilesPath"] .= '/' ;
 
-// Map the "UserFiles" path to a local directory.
-//$GLOBALS["UserFilesDirectory"] = GetRootPath() . str_replace( '/', '\\', $GLOBALS["UserFilesPath"] ) ;
-$GLOBALS["UserFilesDirectory"] = GetRootPath() . $GLOBALS["UserFilesPath"] ;
+if ( strlen( $Config['UserFilesAbsolutePath'] ) > 0 ) 
+{
+	$GLOBALS["UserFilesDirectory"] = $Config['UserFilesAbsolutePath'] ;
+
+	if ( ! ereg( '/$', $GLOBALS["UserFilesDirectory"] ) )
+		$GLOBALS["UserFilesDirectory"] .= '/' ;
+}
+else
+{
+	// Map the "UserFiles" path to a local directory.
+	$GLOBALS["UserFilesDirectory"] = GetRootPath() . $GLOBALS["UserFilesPath"] ;
+}
 
 DoResponse() ;
 

@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Ukjent menyvalg \"%1\"",
 UnknownCommand		: "Ukjent kommando \"%1\"",
 NotImplemented		: "Kommando ikke ennå implimentert",
 UnknownToolbarSet	: "Verktøylinjesett \"%1\" finnes ikke",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Uordnet listeegenskaper",
 NumberedListProp	: "Ordnet listeegenskaper",
 DlgLstType			: "Type",
 DlgLstTypeCircle	: "Sirkel",
-DlgLstTypeDisk		: "Disk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Firkant",
 DlgLstTypeNumbers	: "Numre(1, 2, 3)",
 DlgLstTypeLCase		: "Små bokstaver (a, b, c)",

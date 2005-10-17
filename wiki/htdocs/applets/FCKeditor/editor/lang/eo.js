@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Ilobretero nekonata \"%1\"",
 UnknownCommand		: "Komandonomo nekonata \"%1\"",
 NotImplemented		: "Komando ne ankoraŭ realigita",
 UnknownToolbarSet	: "La ilobreto \"%1\" ne ekzistas",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "Akcepti",
@@ -415,7 +416,7 @@ BulletedListProp	: "Atributoj de Bula Listo",
 NumberedListProp	: "Atributoj de Numera Listo",
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Cirklo",
-DlgLstTypeDisk		: "Disko",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kvadrato",
 DlgLstTypeNumbers	: "Ciferoj (1, 2, 3)",
 DlgLstTypeLCase		: "Minusklaj Literoj (a, b, c)",

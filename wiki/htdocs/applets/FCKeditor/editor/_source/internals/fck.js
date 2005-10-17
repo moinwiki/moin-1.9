@@ -34,7 +34,7 @@ FCK.EditMode		= FCK_EDITMODE_WYSIWYG ;
 var aElements = window.parent.document.getElementsByName( FCK.Name ) ;
 aElements[ aElements.length ] = window.parent.document.getElementById( FCK.Name ) ;
 var i = 0;
-while ( FCK.LinkedField = aElements[i++] )
+while ( ( FCK.LinkedField = aElements[i++] ) )
 {
 	if ( FCK.LinkedField.tagName == 'INPUT' || FCK.LinkedField.tagName == 'TEXTAREA' )
 		break ;

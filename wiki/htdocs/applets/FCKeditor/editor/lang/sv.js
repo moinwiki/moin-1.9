@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Okänt verktygsfält \"%1\"",
 UnknownCommand		: "Okänt kommando \"%1\"",
 NotImplemented		: "Kommandot finns ej",
 UnknownToolbarSet	: "Verktygsfält \"%1\" finns ej",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Egenskaper för punktlista",
 NumberedListProp	: "Egenskaper för numrerad lista",
 DlgLstType			: "Typ",
 DlgLstTypeCircle	: "Cirkel",
-DlgLstTypeDisk		: "Skiva",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Ruta",
 DlgLstTypeNumbers	: "Nummer (1, 2, 3)",
 DlgLstTypeLCase		: "Gemener (a, b, c)",

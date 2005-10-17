@@ -46,13 +46,11 @@ FCKStyleCommand.prototype.GetState = function()
 	if ( FCKSelection.GetType() == 'Control' )
 	{
 		var e = FCKSelection.GetSelectedElement() ;
-			if ( e )
-				return this.StylesLoader.StyleGroups[ e.tagName ] ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ;
-			else
-				FCK_TRISTATE_OFF ;
+		if ( e )
+			return this.StylesLoader.StyleGroups[ e.tagName ] ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ;
 	}
-	else
-		return FCK_TRISTATE_OFF ;
+
+	return FCK_TRISTATE_OFF ;
 }
 
 FCKStyleCommand.prototype.GetActiveStyles = function()

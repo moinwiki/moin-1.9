@@ -65,6 +65,13 @@ FCKTools.CreateXmlObject = function( object )
 	for ( var i = 0 ; i < 2 ; i++ )
 	{
 		try { return new ActiveXObject( aObjs[i] ) ; }
-		catch (e) {}
+		catch (e) 
+		{}
+	}
+	
+	if ( FCKLang.NoActiveX )
+	{
+		alert( FCKLang.NoActiveX ) ;
+		FCKLang.NoActiveX = null ;
 	}
 }

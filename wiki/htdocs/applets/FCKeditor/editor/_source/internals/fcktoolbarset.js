@@ -94,7 +94,7 @@ FCKToolbarSet.Load = function( toolbarSetName )
 		}
 		else
 		{
-			var oToolbar = new FCKToolbar() ;
+			oToolbar = new FCKToolbar() ;
 			
 			for ( var j = 0 ; j < oToolbarItems.length ; j++ ) 
 			{

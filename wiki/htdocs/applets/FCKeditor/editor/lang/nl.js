@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Onbekende item op menubalk \"%1\"",
 UnknownCommand		: "Onbekende opdracht naam \"%1\"",
 NotImplemented		: "Opdracht niet geïmplementeerd.",
 UnknownToolbarSet	: "Menubalk \"%1\" bestaat niet.",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Eigenschappen opsommingslijst",
 NumberedListProp	: "Eigenschappen genummerde opsommingslijst",
 DlgLstType			: "Soort",
 DlgLstTypeCircle	: "Cirkel",
-DlgLstTypeDisk		: "Schijf",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Vierkant",
 DlgLstTypeNumbers	: "Nummerks (1, 2, 3)",
 DlgLstTypeLCase		: "Kleine letters (a, b, c)",

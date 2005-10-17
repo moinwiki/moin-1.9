@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Непозната ставка toolbara \"%1\"",
 UnknownCommand		: "Непозната наредба \"%1\"",
 NotImplemented		: "Наредба није имплементирана",
 UnknownToolbarSet	: "Toolbar \"%1\" не постоји",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Особине Bulleted листе",
 NumberedListProp	: "Особине набројиве листе",
 DlgLstType			: "Тип",
 DlgLstTypeCircle	: "Круг",
-DlgLstTypeDisk		: "Диск",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Квадрат",
 DlgLstTypeNumbers	: "Бројеви (1, 2, 3)",
 DlgLstTypeLCase		: "мала слова (a, b, c)",

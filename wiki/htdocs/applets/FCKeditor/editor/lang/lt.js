@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Nežinomas mygtukų juosta elementas \"%1\"",
 UnknownCommand		: "Nežinomas komandos vardas \"%1\"",
 NotImplemented		: "Komanda nėra įgyvendinta",
 UnknownToolbarSet	: "Mygtukų juostos rinkinys \"%1\" neegzistuoja",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Suženklinto sąrašo savybės",
 NumberedListProp	: "Numeruoto sąrašo savybės",
 DlgLstType			: "Tipas",
 DlgLstTypeCircle	: "Apskritimas",
-DlgLstTypeDisk		: "Diskas",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kvadratas",
 DlgLstTypeNumbers	: "Skaičiai (1, 2, 3)",
 DlgLstTypeLCase		: "Mažosios raidės (a, b, c)",

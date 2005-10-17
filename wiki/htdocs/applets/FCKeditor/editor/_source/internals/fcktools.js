@@ -172,18 +172,25 @@ FCKTools.GetElementPosition = function( el )
 	return c ;
 }
 
-FCKTools.GetElementAscensor = function( element, ascensorTagName )
+// START iCM MODIFICATIONS
+// Amended to accept a list of one or more ascensor tag names
+// Amended to check the element itself before working back up through the parent hierarchy
+FCKTools.GetElementAscensor = function( element, ascensorTagNames )
 {
-	var e = element.parentNode ;
+//	var e = element.parentNode ;
+	var e = element ;
+	var lstTags = "," + ascensorTagNames.toUpperCase() + "," ;
 
 	while ( e )
 	{
-		if ( e.nodeName == ascensorTagName )
+		if ( lstTags.indexOf( "," + e.nodeName.toUpperCase() + "," ) != -1 )
 			return e ;
 
 		e = e.parentNode ;
 	}
+	return null ;
 }
+// END iCM MODIFICATIONS
 
 FCKTools.Pause = function( miliseconds )
 {
@@ -206,3 +213,73 @@ FCKTools.ConvertHtmlSizeToStyle = function( size )
 {
 	return size.endsWith( '%' ) ? size : ( size + 'px' ) ;
 }
+// START iCM MODIFICATIONS
+// Transfers the supplied attributes to the supplied node
+FCKTools.SetElementAttributes = function( oElement, oAttributes ) 
+{
+	for ( var i = 0; i < oAttributes.length; i++ ) 
+	{
+		if ( oAttributes[i].specified ) // Needed for IE which always returns all attributes whether set or not
+			oElement.setAttribute( oAttributes[i].nodeName, oAttributes[i].nodeValue, 0 ) ;
+	}
+}
+
+// Get immediate block node (P, H1, for example) for the supplied node - the supplied node may itself be a block node in which
+// case it will be returned. If no block node found, returns null.
+FCKTools.GetParentBlockNode = function( oNode )
+{
+	if ( oNode.nodeName.toUpperCase() == "BODY" )
+		return null ;
+	else if ( oNode.nodeType == 1 && FCKRegexLib.BlockElements.test(oNode.tagName) )
+		return oNode ;
+	else
+		return FCKTools.GetParentBlockNode( oNode.parentNode ) ;
+}
+
+// Run through any children of the supplied node. If there are none, or they only comprise 
+// empty text nodes and BR nodes, then the node is effectively empty.
+// Sometimes (on Gecko) a seemingly empty node is coming back with several children that are solely
+// empty text nodes and BRs e.g. the first item in an OL list, for example, when 
+// UseBROnCarriageReturn is set to false. 
+// Seems to be due to the use of the <br _moz_editor_bogus_node="TRUE"> (GECKO_BOGUS) as fillers both
+// in fck_gecko_1.js when html is empty and in ENTER key handler ? If normal BR tags are
+// used instead this doesn't seem to happen....
+FCKTools.NodeIsEmpty = function( oNode )
+{
+	var oSibling = oNode.childNodes[0] ;
+	while ( oSibling )
+	{
+		if ( ( oSibling.nodeType != 1 && oSibling.nodeType != 3 ) || ( oSibling.nodeType == 1 && oSibling.nodeName.toUpperCase() != "BR" ) || ( oSibling.nodeType == 3 && oSibling.nodeValue && oSibling.nodeValue.trim() != '' ) )
+			return false ;
+		
+		oSibling = oSibling.nextSibling ;
+	}
+
+	return true ;
+}
+
+// Returns a document fragment that contains a copy of the specified range of nodes
+FCKTools.GetDocumentFragment = function( oParentNode, oFromNode, oToNode, bIncludeFromNode, bIncludeToNode, bClone )
+{	
+	if ( typeof bIncludeFromNode == "undefined" )  bIncludeFromNode = true ;
+	if ( typeof bIncludeToNode == "undefined" )  bIncludeToNode = true ;
+	if ( typeof bClone == "undefined" )  bClone = true ;
+
+	var oFragment = FCK.EditorDocument.createDocumentFragment() ;
+	
+	var oNode = oFromNode ;
+	while ( oNode && oNode != oToNode )
+	{
+		if ( oNode != oFromNode || bIncludeFromNode )
+			oFragment.appendChild( bClone ? oNode.cloneNode( true ) : oNode ) ;
+			
+		oNode = oNode.nextSibling ;
+	}
+
+	if ( oNode && (oFromNode != oToNode && bIncludeToNode) )
+		oFragment.appendChild( bClone ? oNode.cloneNode( true ) : oNode ) ; // Include To Node
+
+	return oFragment ;
+}
+
+// END iCM MODIFICATIONS

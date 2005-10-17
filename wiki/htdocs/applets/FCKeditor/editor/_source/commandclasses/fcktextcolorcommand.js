@@ -156,7 +156,7 @@ FCKTextColorCommand.prototype._CreatePanelBody = function( targetDocument, targe
 		
 		for ( var i = 0 ; i < 8 && iCounter < aColors.length ; i++, iCounter++ )
 		{
-			var oDiv = oRow.insertCell(-1).appendChild( CreateSelectionDiv() ) ;
+			oDiv = oRow.insertCell(-1).appendChild( CreateSelectionDiv() ) ;
 			oDiv.Color = aColors[iCounter] ;
 			oDiv.innerHTML = '<div class="ColorBoxBorder"><div class="ColorBox" style="background-color: #' + aColors[iCounter] + '"></div></div>' ;
 
@@ -166,10 +166,10 @@ FCKTextColorCommand.prototype._CreatePanelBody = function( targetDocument, targe
 	}
 
 	// Create the Row and the Cell for the "More Colors..." button.
-	var oCell = oTable.insertRow(-1).insertCell(-1) ;
+	oCell = oTable.insertRow(-1).insertCell(-1) ;
 	oCell.colSpan = 8 ;
 
-	var oDiv = oCell.appendChild( CreateSelectionDiv() ) ;
+	oDiv = oCell.appendChild( CreateSelectionDiv() ) ;
 	oDiv.innerHTML = '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td nowrap align="center">' + FCKLang.ColorMoreColors + '</td></tr></table>' ;
 
 	oDiv.Command = this ;

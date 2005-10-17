@@ -25,8 +25,11 @@ FCKRegexLib.AposEntity		= /&apos;/gi ;
 // Used by the Styles combo to identify styles that can't be applied to text.
 FCKRegexLib.ObjectElements	= /^(?:IMG|TABLE|TR|TD|INPUT|SELECT|TEXTAREA|HR|OBJECT)$/i ;
 
+// START iCM MODIFICATIONS
+// Added TABLE and CAPTION to the block elements for ENTER key handling
 // Block Elements.
-FCKRegexLib.BlockElements	= /^(?:P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|OL|UL|LI|TD)$/i ;
+FCKRegexLib.BlockElements	= /^(?:P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|OL|UL|LI|TD|TABLE|CAPTION)$/i ;
+// END iCM MODIFICATIONS
 
 // Elements marked as empty "Empty" in the XHTML DTD.
 FCKRegexLib.EmptyElements	= /^(?:BASE|META|LINK|HR|BR|PARAM|IMG|AREA|INPUT)$/i ;
@@ -44,6 +47,7 @@ FCKRegexLib.MetaHttpEquiv	= /http-equiv\s*=\s*["']?([^"' ]+)/i ;
 
 FCKRegexLib.HasBaseTag		= /<base /i ;
 
+FCKRegexLib.HeadOpener		= /<head\s?[^>]*>/i ;
 FCKRegexLib.HeadCloser		= /<\/head\s*>/i ;
 
 FCKRegexLib.TableBorderClass = /\s*FCK__ShowTableBorders\s*/ ;
@@ -60,3 +64,22 @@ FCKRegexLib.SpaceNoClose = /\/>/g ;
 FCKRegexLib.EmptyParagraph = /^<(p|div)>\s*<\/\1>$/i ;
 
 FCKRegexLib.TagBody = /></ ;
+
+// START iCM MODIFICATIONS
+// HTML table cell elements
+FCKRegexLib.TableCellElements	= /^(?:TD|TH)$/i ;
+// Block elements that can themselves contain block elements - used within the FCKTools.SplitNode
+// function. I know BODY isn't really a block element but means can do the check in one hit.
+FCKRegexLib.SpecialBlockElements	= /^(?:BODY|TH|TD|CAPTION)$/i ;
+// Block elements that can validly contain a nested table. Ditto above for the BODY entry.
+FCKRegexLib.TableBlockElements	= /^(?:BODY|DIV|LI|TD|TH)$/i ;
+// List elements
+FCKRegexLib.ListElements	= /^(?:OL|UL)$/i ;
+// Used to remove empty tags after the split process used on ENTER key press
+FCKRegexLib.EmptyElement = /<(P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|SPAN|A)[^\>]*>\s*<\/\1>/gi ;
+// END iCM MODIFICATIONS
+
+FCKRegexLib.StrongOpener = /<STRONG([ \>])/gi ;
+FCKRegexLib.StrongCloser = /<\/STRONG>/gi ;
+FCKRegexLib.EmOpener = /<EM([ \>])/gi ;
+FCKRegexLib.EmCloser = /<\/EM>/gi ;

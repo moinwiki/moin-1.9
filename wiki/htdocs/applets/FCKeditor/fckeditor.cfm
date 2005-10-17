@@ -17,6 +17,7 @@
 	&gt;
 </FileDescription>
 <Author name="Hendrik Kramer" email="hk@lwd.de" />
+<Author name="Mark Woods" email="mark@thickpaddy.com" />
 --->
 <!--- ::
 	 * 	Attribute validation
@@ -121,7 +122,7 @@ else
 				fieldValue = attributes.config[key];
 				fieldName = listGetAt( lConfigKeys, iPos );
 				
-				sConfig = sConfig & HTMLEditFormat( fieldName ) & '=' & HTMLEditFormat( fieldValue );
+				sConfig = sConfig & urlEncodedFormat( fieldName ) & '=' & urlEncodedFormat( fieldValue );
 			}
 		}
 	</cfscript>

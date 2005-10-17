@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Không rõ Nốt \"%1\"",
 UnknownCommand		: "Không rõ lệnh \"%1\"",
 NotImplemented		: "Lệnh không được thi hành",
 UnknownToolbarSet	: "Thanh công cụ \"%1\" không tồn tại",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "Đồng ý",
@@ -232,6 +233,7 @@ DlgLnkTargetFrameName	: "Tên Frame hướng tới",
 DlgLnkPopWinName	: "Tên Cửa sổ Popup",
 DlgLnkPopWinFeat	: "Cửa sổ Popup Đặc trưng",
 DlgLnkPopResize		: "Kích thước thay đổi",
+DlgLnkPopLocation	: "Location Bar",	//MISSING
 DlgLnkPopMenu		: "Thanh Menu",
 DlgLnkPopScroll		: "Thanh cuộn",
 DlgLnkPopStatus		: "Thanh trạng thái",
@@ -414,7 +416,7 @@ BulletedListProp	: "Thuộc tính Danh sách Bulleted",
 NumberedListProp	: "Thuộc tính Danh sách Số",
 DlgLstType			: "Kiểu",
 DlgLstTypeCircle	: "Tròn",
-DlgLstTypeDisk		: "Vòng",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Vuông",
 DlgLstTypeNumbers	: "Số (1, 2, 3)",
 DlgLstTypeLCase		: "Chữ cái thường (a, b, c)",

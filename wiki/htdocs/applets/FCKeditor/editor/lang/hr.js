@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Nepoznati član trake s alatima \"%1\"",
 UnknownCommand		: "Nepoznata naredba \"%1\"",
 NotImplemented		: "Naredba nije implementirana",
 UnknownToolbarSet	: "Traka s alatima \"%1\" ne postoji",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Svojstva liste",
 NumberedListProp	: "Svojstva brojčane liste",
 DlgLstType			: "Vrsta",
 DlgLstTypeCircle	: "Krug",
-DlgLstTypeDisk		: "Disk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kvadrat",
 DlgLstTypeNumbers	: "Brojevi (1, 2, 3)",
 DlgLstTypeLCase		: "Mala slova (a, b, c)",

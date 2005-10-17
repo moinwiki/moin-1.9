@@ -23,11 +23,21 @@ var FCKXml ;
 if ( !( FCKXml = NS.FCKXml ) )
 {
 	FCKXml = NS.FCKXml = function()
-	{}
+	{
+		this.Error = false ;
+	}
 
 	FCKXml.prototype.LoadUrl = function( urlToCall )
 	{
+		this.Error = false ;
+
 		var oXmlHttp = FCKTools.CreateXmlObject( 'XmlHttp' ) ;
+
+		if ( !oXmlHttp )
+		{
+			this.Error = true ;
+			return ;
+		}
 
 		oXmlHttp.open( "GET", urlToCall, false ) ;
 		
@@ -43,11 +53,17 @@ if ( !( FCKXml = NS.FCKXml ) )
 			this.DOMDocument.loadXML( oXmlHttp.responseText ) ;
 		}
 		else
+		{
+			this.Error = true ;
 			alert( 'Error loading "' + urlToCall + '"' ) ;
+		}
 	}
 
 	FCKXml.prototype.SelectNodes = function( xpath, contextNode )
 	{
+		if ( this.Error )
+			return new Array() ;
+
 		if ( contextNode )
 			return contextNode.selectNodes( xpath ) ;
 		else
@@ -56,6 +72,9 @@ if ( !( FCKXml = NS.FCKXml ) )
 
 	FCKXml.prototype.SelectSingleNode = function( xpath, contextNode ) 
 	{
+		if ( this.Error )
+			return ;
+			
 		if ( contextNode )
 			return contextNode.selectSingleNode( xpath ) ;
 		else

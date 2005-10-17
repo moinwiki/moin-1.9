@@ -55,7 +55,8 @@ oRegex.UrlOnChangeProtocol = new RegExp('') ;
 oRegex.UrlOnChangeProtocol.compile( '^(http|https|ftp|news)://(?=.)', 'gi' ) ;
 
 oRegex.UrlOnChangeTestOther = new RegExp('') ;
-oRegex.UrlOnChangeTestOther.compile( '^(javascript:|#|/)', 'gi' ) ;
+//oRegex.UrlOnChangeTestOther.compile( '^(javascript:|#|/)', 'gi' ) ;
+oRegex.UrlOnChangeTestOther.compile( '^((javascript:)|[#/\.])', 'gi' ) ; 
 
 oRegex.ReserveTarget = new RegExp('') ;
 oRegex.ReserveTarget.compile( '^_(blank|self|top|parent)$', 'i' ) ;
@@ -526,8 +527,17 @@ function BrowseServer()
 	sOptions += ",left=" + iLeft ;
 	sOptions += ",top=" + iTop ;
 
-	// Open the browser window.
-	var oWindow = window.open( FCKConfig.LinkBrowserURL, "FCKBrowseWindow", sOptions ) ;
+	if ( oEditor.FCKBrowserInfo.IsIE )
+	{
+		// The following change has been made otherwise IE will open the file 
+		// browser on a different server session (on some cases):
+		// http://support.microsoft.com/default.aspx?scid=kb;en-us;831678
+		// by Simone Chiaretta.
+		var oWindow = oEditor.window.open( FCKConfig.LinkBrowserURL, "FCKBrowseWindow", sOptions ) ;
+		oWindow.opener = window ;
+    }
+    else
+		window.open( FCKConfig.LinkBrowserURL, "FCKBrowseWindow", sOptions ) ;
 }
 
 function SetUrl( url )

@@ -106,31 +106,36 @@ function CreateFolder( $resourceType, $currentFolder )
 	{
 		$sNewFolderName = $_GET['NewFolderName'] ;
 
-		// Map the virtual path to the local server path of the current folder.
-		$sServerDir = ServerMapFolder( $resourceType, $currentFolder ) ;
-
-		if ( is_writable( $sServerDir ) )
-		{
-			$sServerDir .= $sNewFolderName ;
-
-			$sErrorMsg = CreateServerFolder( $sServerDir ) ;
-
-			switch ( $sErrorMsg )
-			{
-				case '' :
-					$sErrorNumber = '0' ;
-					break ;
-				case 'Invalid argument' :
-				case 'No such file or directory' :
-					$sErrorNumber = '102' ;		// Path too long.
-					break ;
-				default :
-					$sErrorNumber = '110' ;
-					break ;
-			}
-		}
+		if ( strpos( $sNewFolderName, '..' ) !== FALSE )
+			$sErrorNumber = '102' ;		// Invalid folder name.
 		else
-			$sErrorNumber = '103' ;
+		{
+			// Map the virtual path to the local server path of the current folder.
+			$sServerDir = ServerMapFolder( $resourceType, $currentFolder ) ;
+
+			if ( is_writable( $sServerDir ) )
+			{
+				$sServerDir .= $sNewFolderName ;
+
+				$sErrorMsg = CreateServerFolder( $sServerDir ) ;
+
+				switch ( $sErrorMsg )
+				{
+					case '' :
+						$sErrorNumber = '0' ;
+						break ;
+					case 'Invalid argument' :
+					case 'No such file or directory' :
+						$sErrorNumber = '102' ;		// Path too long.
+						break ;
+					default :
+						$sErrorNumber = '110' ;
+						break ;
+				}
+			}
+			else
+				$sErrorNumber = '103' ;
+		}
 	}
 	else
 		$sErrorNumber = '102' ;

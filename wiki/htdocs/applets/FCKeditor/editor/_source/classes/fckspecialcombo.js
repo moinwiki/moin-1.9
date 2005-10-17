@@ -173,12 +173,13 @@ FCKSpecialCombo.prototype.Create = function( targetElement )
 	else
 	{
 		oField.className = 'TB_Button_Off' ;
-		oField.innerHTML = /*('<span className="SC_FieldCaption">' + this.Caption + */'<table cellpadding="0" cellspacing="0" style="TABLE-LAYOUT: fixed;" unselectable="on"><tbody><tr><td class="SC_FieldButton" style="border-left: none;" unselectable="on">&nbsp;</td></tr></tbody></table>' ;
+		//oField.innerHTML = '<span className="SC_FieldCaption">' + this.Caption + '<table cellpadding="0" cellspacing="0" style="TABLE-LAYOUT: fixed;" unselectable="on"><tbody><tr><td class="SC_FieldButton" style="border-left: none;" unselectable="on">&nbsp;</td></tr></tbody></table>' ;
+		oField.innerHTML = '<table cellpadding="0" cellspacing="0" style="TABLE-LAYOUT: fixed;" unselectable="on"><tbody><tr><td class="SC_FieldButton" style="border-left: none;" unselectable="on">&nbsp;</td></tr></tbody></table>' ;
 		
 		// Gets the correct CSS class to use for the specified style (param).
 		oField.innerHTML ='<table title="' + this.Tooltip + '" class="' + sClass + '" cellspacing="0" cellpadding="0" border="0" unselectable="on">' +
 				'<tr>' +
-					/*'<td class="TB_Icon" unselectable="on"><img src="' + FCKConfig.SkinPath + 'toolbar/' + this.Command.Name.toLowerCase() + '.gif" width="21" height="21" unselectable="on"></td>' +*/
+					//'<td class="TB_Icon" unselectable="on"><img src="' + FCKConfig.SkinPath + 'toolbar/' + this.Command.Name.toLowerCase() + '.gif" width="21" height="21" unselectable="on"></td>' +
 					'<td class="TB_Text" unselectable="on">' + this.Caption + '</td>' +
 					'<td class="TB_ButtonArrow" unselectable="on"><img src="' + FCKConfig.SkinPath + 'images/toolbar.buttonarrow.gif" width="5" height="3"></td>' +
 				'</tr>' +
@@ -186,7 +187,7 @@ FCKSpecialCombo.prototype.Create = function( targetElement )
 	}
 
 
-	/* Events Handlers */
+	// Events Handlers
 
 	oField.SpecialCombo = this ;
 	
@@ -242,20 +243,22 @@ function FCKSpecialCombo_OnClick( e )
 
 	if ( this.SpecialCombo.Enabled )
 	{
+		var oPanel = this.SpecialCombo._Panel ;
+		
 		if ( typeof( this.SpecialCombo.OnBeforeClick ) == 'function' )
 			this.SpecialCombo.OnBeforeClick( this.SpecialCombo ) ;
 
 		if ( this.SpecialCombo._ItemsHolderEl.offsetHeight > this.SpecialCombo.PanelMaxHeight )
-			this.SpecialCombo._Panel.PanelDiv.style.height = this.SpecialCombo.PanelMaxHeight + 'px' ;
+			oPanel.PanelDiv.style.height = this.SpecialCombo.PanelMaxHeight + 'px' ;
 		else
-			this.SpecialCombo._Panel.PanelDiv.style.height = this.SpecialCombo._ItemsHolderEl.offsetHeight + 'px' ;
+			oPanel.PanelDiv.style.height = this.SpecialCombo._ItemsHolderEl.offsetHeight + 'px' ;
 			
-		this.SpecialCombo._Panel.PanelDiv.style.width = this.SpecialCombo.PanelWidth + 'px' ;
+		oPanel.PanelDiv.style.width = this.SpecialCombo.PanelWidth + 'px' ;
 		
 		if ( FCKBrowserInfo.IsGecko )
-			this.SpecialCombo._Panel.PanelDiv.style.overflow = '-moz-scrollbars-vertical' ;
+			oPanel.PanelDiv.style.overflow = '-moz-scrollbars-vertical' ;
 
-		this.SpecialCombo._Panel.Show( 0, this.offsetHeight, this, null, this.SpecialCombo.PanelMaxHeight, true ) ;
+		oPanel.Show( 0, this.offsetHeight, this, null, this.SpecialCombo.PanelMaxHeight, true ) ;
 	}
 
 	return false ;

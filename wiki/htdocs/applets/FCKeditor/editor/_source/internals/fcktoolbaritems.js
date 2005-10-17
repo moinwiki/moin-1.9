@@ -107,7 +107,7 @@ FCKToolbarItems.GetItem = function( itemName )
 
 		default:
 			alert( FCKLang.UnknownToolbarItem.replace( /%1/g, itemName ) ) ;
-			return ;
+			return null ;
 	}
 
 	FCKToolbarItems.LoadedItems[ itemName ] = oItem ;

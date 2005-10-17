@@ -133,6 +133,7 @@ UnknownToolbarItem	: "알수없는 툴바입니다. : \"%1\"",
 UnknownCommand		: "알수없는 기능입니다. : \"%1\"",
 NotImplemented		: "기능이 실행되지 않았습니다.",
 UnknownToolbarSet	: "툴바 설정이 없습니다. : \"%1\"",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "예",
@@ -415,7 +416,7 @@ BulletedListProp	: "순서없는 목록 속성",
 NumberedListProp	: "순서있는 목록 속성",
 DlgLstType			: "종류",
 DlgLstTypeCircle	: "원(Circle)",
-DlgLstTypeDisk		: "둥근점(Disk)",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "네모점(Square)",
 DlgLstTypeNumbers	: "번호 (1, 2, 3)",
 DlgLstTypeLCase		: "소문자 (a, b, c)",

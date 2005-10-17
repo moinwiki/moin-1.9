@@ -67,13 +67,10 @@ FCKDialog.CheckFocus = function()
 	// It is strange, but we have to check the FCKDialog existence to avoid a 
 	// random error: "FCKDialog is not defined".
 	if ( typeof( FCKDialog ) != "object" )
-		return ;
+		return false ;
 	
 	if ( FCKDialog.Window && !FCKDialog.Window.closed )
-	{
 		FCKDialog.Window.focus() ;
-		return false ;
-	}
 	else
 	{
 		// Try/Catch must be used to avoit an error when using a frameset 
@@ -90,4 +87,5 @@ FCKDialog.CheckFocus = function()
 		catch (e)
 		{}
 	}
+	return false ;
 }

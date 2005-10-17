@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Neznáma položka panela nástrojov \"%1\"",
 UnknownCommand		: "Neznámy príkaz \"%1\"",
 NotImplemented		: "Príkaz nie je implementovaný",
 UnknownToolbarSet	: "Panel nástrojov \"%1\" neexistuje",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Vlastnosti odrážok",
 NumberedListProp	: "Vlastnosti číslovania",
 DlgLstType			: "Typ",
 DlgLstTypeCircle	: "Krúžok",
-DlgLstTypeDisk		: "Disk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Štvorec",
 DlgLstTypeNumbers	: "Číslovanie (1, 2, 3)",
 DlgLstTypeLCase		: "Malé písmená (a, b, c)",

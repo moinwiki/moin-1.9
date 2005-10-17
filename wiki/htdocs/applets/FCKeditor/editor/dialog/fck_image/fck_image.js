@@ -348,7 +348,17 @@ function OpenServerBrowser( type, url, width, height )
 	sOptions += ",left=" + iLeft ;
 	sOptions += ",top=" + iTop ;
 
-	var oWindow = window.open( url, "FCKBrowseWindow", sOptions ) ;
+	if ( oEditor.FCKBrowserInfo.IsIE )
+	{
+		// The following change has been made otherwise IE will open the file 
+		// browser on a different server session (on some cases):
+		// http://support.microsoft.com/default.aspx?scid=kb;en-us;831678
+		// by Simone Chiaretta.
+		var oWindow = oEditor.window.open( url, "FCKBrowseWindow", sOptions ) ;
+		oWindow.opener = window ;
+    }
+    else
+		window.open( url, "FCKBrowseWindow", sOptions ) ;
 }
 
 var sActualBrowser ;

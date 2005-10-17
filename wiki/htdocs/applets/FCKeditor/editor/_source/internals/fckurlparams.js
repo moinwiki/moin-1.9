@@ -22,7 +22,7 @@
 var FCKURLParams = new Object() ;
 
 var aParams = document.location.search.substr(1).split('&') ;
-for ( i = 0 ; i < aParams.length ; i++ )
+for ( var i = 0 ; i < aParams.length ; i++ )
 {
 	var aParam = aParams[i].split('=') ;
 	var sParamName  = aParam[0] ;
