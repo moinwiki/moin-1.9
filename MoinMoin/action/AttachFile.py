@@ -643,18 +643,21 @@ def unzip_file(pagename, request):
     attachment_path = getAttachDir(request, pagename)
     single_file_size = request.cfg.unzip_single_file_size
     attachments_file_space = request.cfg.unzip_attachments_space
-    max_file_count = request.cfg.unzip_file_count
+    attachments_file_count = request.cfg.unzip_attachments_count
 
     files = _get_files(request, pagename)
 
     msg = ""
     if files:
         fsize = 0.0
+        fcount = 0
         for file in files:
             fsize += float(os.stat(getFilename(request, pagename, file))[6]) # in byte
+            fcount += 1
 
         available_attachments_file_space = attachments_file_space - fsize
-
+        available_attachments_file_count = attachments_file_count - fcount
+        
         if zipfile.is_zipfile(fpath):
             zf = zipfile.ZipFile(fpath)
             sum_size_over_all_valid_files = 0.0
@@ -664,8 +667,21 @@ def unzip_file(pagename, request):
                     sum_size_over_all_valid_files += zf.getinfo(name).file_size
                     count_valid_files += 1
 
-            if (sum_size_over_all_valid_files < available_attachments_file_space and
-                count_valid_files < max_file_count):
+            if sum_size_over_all_valid_files > available_attachments_file_space:
+                msg=_("Attachment '%(filename)s' could not be unzipped because"
+                      " the resulting files would be too large (%(space)d kB"
+                      " missing).") % {
+                        'filename': filename,
+                        'space': (sum_size_over_all_valid_files -
+                              available_attachments_file_space) / 1000 }
+            elif count_valid_files > available_attachments_file_count:
+                msg=_("Attachment '%(filename)s' could not be unzipped because"
+                      " the resulting files would be too many (%(count)d "
+                      "missing).") % {
+                        'filename': filename,
+                        'count': (count_valid_files -
+                                  available_attachments_file_count) }
+            else:
                 valid_name = False
                 for name in zf.namelist():
                     if valid_pathname(name):
@@ -690,14 +706,6 @@ def unzip_file(pagename, request):
                     msg=_("Attachment '%(filename)s' not unzipped because the "
                           "files are too big, .zip files only, exist already or "
                           "reside in folders.") % {'filename': filename}
-            else:
-                msg=_("Attachment '%(filename)s' could not be unzipped because"
-                      " the resulting files would be too large (%(space)d kB"
-                      " missing) or more than %(count)d files.") % {
-                        'filename': filename,
-                        'space': (sum_size_over_all_valid_files -
-                              available_attachments_file_space) / 1000,
-                        'count': max_file_count }
         else:
             msg = _('The file %(target)s is not a .zip file.' % target)
 

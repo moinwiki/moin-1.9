@@ -389,7 +389,7 @@ class DefaultConfig:
 
     unzip_single_file_size = 2.0 * 1000**2
     unzip_attachments_space = 200.0 * 1000**2
-    unzip_file_count = 50
+    unzip_attachments_count = 51 # 1 zip file + 50 files contained in it
 
     xmlrpc_putpage_enabled = 0 # if 0, putpage will write to a test page only
     xmlrpc_putpage_trusted_only = 1 # if 1, you will need to be http auth authenticated
