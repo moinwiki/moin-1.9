@@ -52,6 +52,7 @@ FCKXHtml._AppendAttributes = function( xmlNode, htmlNode, node )
 		if ( oAttribute.specified )
 		{
 			var sAttName = oAttribute.nodeName.toLowerCase() ;
+			var sAttValue ;
 
 			// The "_fckxhtmljob" attribute is used to mark the already processed elements.
 			if ( sAttName == '_fckxhtmljob' )
@@ -62,12 +63,12 @@ FCKXHtml._AppendAttributes = function( xmlNode, htmlNode, node )
 			// There are one cases (on Gecko) when the oAttribute.nodeValue must be used:
 			//		- for the "class" attribute
 			else if ( sAttName == 'class' )
-				var sAttValue = oAttribute.nodeValue ;
+				sAttValue = oAttribute.nodeValue ;
 			// XHTML doens't support attribute minimization like "CHECKED". It must be trasformed to cheched="checked".
 			else if ( oAttribute.nodeValue === true )
 				sAttValue = sAttName ;
 			else
-				var sAttValue = htmlNode.getAttribute( sAttName, 2 ) ;	// We must use getAttribute to get it exactly as it is defined.
+				sAttValue = htmlNode.getAttribute( sAttName, 2 ) ;	// We must use getAttribute to get it exactly as it is defined.
 
 			if ( FCKConfig.ForceSimpleAmpersand && sAttValue.replace )
 				sAttValue = sAttValue.replace( /&/g, '___FCKAmp___' ) ;

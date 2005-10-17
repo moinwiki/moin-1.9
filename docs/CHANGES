@@ -33,7 +33,7 @@ Version moin--main--1.5:
         using SMTP.
  
     * Wiki Editor changes / new WYSIWYG editor
-     * fully imported the javascript based LGPLed FCKeditor 2.0 (many thanks
+     * fully imported the javascript based LGPLed FCKeditor (many thanks
       to Fred CK for his great work). See http://fckeditor.net/ for details.
      * config for FCKeditor is at wiki/htdocs/applets/moinfckeditor.js
      * added cfg.interwiki_preferred (default = []) to set a list of wikis to

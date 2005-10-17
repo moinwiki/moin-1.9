@@ -58,15 +58,18 @@ DoResponse
 Sub DoResponse()
 	Dim sCommand, sResourceType, sCurrentFolder
 	
-	' Get the main request informaiton.
+	' Get the main request information.
 	sCommand = Request.QueryString("Command")
 	If ( sCommand = "" ) Then Exit Sub
 
 	sResourceType = Request.QueryString("Type")
 	If ( sResourceType = "" ) Then Exit Sub
-
+	
 	sCurrentFolder = Request.QueryString("CurrentFolder")
 	If ( sCurrentFolder = "" ) Then Exit Sub
+
+	' Check if it is an allower resource type.
+	if ( Not IsAllowedType( sResourceType ) ) Then Exit Sub
 
 	' Check the current folder syntax (must begin and start with a slash).
 	If ( Right( sCurrentFolder, 1 ) <> "/" ) Then sCurrentFolder = sCurrentFolder & "/"
@@ -101,4 +104,16 @@ Sub DoResponse()
 
 	Response.End
 End Sub
+
+Function IsAllowedType( resourceType )
+	Dim oRE
+	Set oRE	= New RegExp
+	oRE.IgnoreCase	= True
+	oRE.Global		= True
+	oRE.Pattern		= "^(File|Image|Flash|Media)$"
+	
+	IsAllowedType = oRE.Test( resourceType )
+	
+	Set oRE	= Nothing
+End Function
 %>

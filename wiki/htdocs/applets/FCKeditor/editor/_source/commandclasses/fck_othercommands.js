@@ -177,8 +177,9 @@ FCKNewPageCommand.prototype.Execute = function()
 {
 	FCKUndo.SaveUndoStep() ;
 	FCK.SetHTML( '' ) ;
+	FCKUndo.Typing = true ;
 //	FCK.SetHTML( FCKBrowserInfo.IsGecko ? '&nbsp;' : '' ) ;
-//	FCK.SetHTML( FCKBrowserInfo.IsGecko ? '<br _moz_editor_bogus_node="TRUE">' : '' ) ;
+//	FCK.SetHTML( FCKBrowserInfo.IsGecko ? GECKO_BOGUS : '' ) ;
 }
 
 FCKNewPageCommand.prototype.GetState = function()
@@ -226,7 +227,7 @@ FCKUndoCommand.prototype.Execute = function()
 FCKUndoCommand.prototype.GetState = function()
 {
 	if ( FCKBrowserInfo.IsIE )
-		return ( FCKUndo.Typing || FCKUndo.CurrentIndex > 0 ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ) ;
+		return ( FCKUndo.CheckUndoState() ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ) ;
 	else
 		return FCK.GetNamedCommandState( 'Undo' ) ;
 }
@@ -248,7 +249,7 @@ FCKRedoCommand.prototype.Execute = function()
 FCKRedoCommand.prototype.GetState = function()
 {
 	if ( FCKBrowserInfo.IsIE )
-		return ( !FCKUndo.Typing && FCKUndo.CurrentIndex < ( FCKUndo.SavedData.length - 1 ) ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ) ;
+		return ( FCKUndo.CheckRedoState() ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ) ;
 	else
 		return FCK.GetNamedCommandState( 'Redo' ) ;
 }

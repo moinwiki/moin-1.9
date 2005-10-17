@@ -133,6 +133,7 @@ UnknownToolbarItem	: "فقره منوابزار ناشناخته \"%1\"",
 UnknownCommand		: "نام دستور ناشناخته \"%1\"",
 NotImplemented		: "دستور اجرا نشد",
 UnknownToolbarSet	: "مجموعه منوابزار \"%1\" وجود ندارد",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "تائيد",
@@ -415,7 +416,7 @@ BulletedListProp	: "ويژگيهای فهرست دکمه ای",
 NumberedListProp	: "ويژگيهای فهرست عددی",
 DlgLstType			: "نوع",
 DlgLstTypeCircle	: "دايره",
-DlgLstTypeDisk		: "قرص",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "مربع",
 DlgLstTypeNumbers	: "شماره ها (1، 2، 3)",
 DlgLstTypeLCase		: "حروف کوچک (a، b، c)",

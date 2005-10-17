@@ -105,7 +105,7 @@ FCKCommands.GetCommand = function( commandName )
 			else
 			{
 				alert( FCKLang.UnknownCommand.replace( /%1/g, commandName ) ) ;
-				return ;
+				return null ;
 			}
 	}
 	

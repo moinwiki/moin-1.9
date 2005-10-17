@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Unknown toolbar item \"%1\"",
 UnknownCommand		: "Unknown command name \"%1\"",
 NotImplemented		: "Command not implemented",
 UnknownToolbarSet	: "Toolbar set \"%1\" doesn't exist",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",
 
 // Dialogs
 DlgBtnOK			: "OK",

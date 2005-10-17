@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Непознат инструмент \"%1\"",
 UnknownCommand		: "Непозната команда \"%1\"",
 NotImplemented		: "Командата не е имплементирана",
 UnknownToolbarSet	: "Панелът \"%1\" не съществува",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "ОК",
@@ -415,7 +416,7 @@ BulletedListProp	: "Параметри на ненумерирания спис�
 NumberedListProp	: "Параметри на нумерирания списък",
 DlgLstType			: "Тип",
 DlgLstTypeCircle	: "Окръжност",
-DlgLstTypeDisk		: "Диск",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Квадрат",
 DlgLstTypeNumbers	: "Числа (1, 2, 3)",
 DlgLstTypeLCase		: "Малки букви (a, b, c)",

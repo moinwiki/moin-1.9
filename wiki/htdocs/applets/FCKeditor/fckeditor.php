@@ -63,7 +63,12 @@ class FCKeditor
 		
 		if ( $this->IsCompatible() )
 		{
-			$Link = "{$this->BasePath}editor/fckeditor.html?InstanceName={$this->InstanceName}" ;
+			if ( isset( $_GET['fcksource'] ) && $_GET['fcksource'] == "true" )
+				$File = 'fckeditor.original.html' ;
+			else
+				$File = 'fckeditor.html' ;
+
+			$Link = "{$this->BasePath}editor/{$File}?InstanceName={$this->InstanceName}" ;
 			
 			if ( $this->ToolbarSet != '' )
 				$Link .= "&amp;Toolbar={$this->ToolbarSet}" ;

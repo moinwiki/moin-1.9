@@ -134,6 +134,7 @@ UnknownToolbarItem	: "Unbekanntes Menüleisten-Objekt \"%1\"",
 UnknownCommand		: "Unbekannter Befehl \"%1\"",
 NotImplemented		: "Befehl nicht implementiert",
 UnknownToolbarSet	: "Menüleiste \"%1\" existiert nicht",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -416,7 +417,7 @@ BulletedListProp	: "Listen-Eigenschaften",
 NumberedListProp	: "Nummerierte Listen-Eigenschaften",
 DlgLstType			: "Typ",
 DlgLstTypeCircle	: "Kreis",
-DlgLstTypeDisk		: "Disk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Quadrat",
 DlgLstTypeNumbers	: "Nummern (1, 2, 3)",
 DlgLstTypeLCase		: "Kleinbuchstaben (a, b, c)",

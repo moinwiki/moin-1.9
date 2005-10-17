@@ -135,13 +135,16 @@ FCKConfig.ProtectedSource.Protect = function( html )
 
 FCKConfig.ProtectedSource.Revert = function( html, clearBin )
 {
-	function _Replace( m, index )
+	function _Replace( m, opener, index )
 	{
-		if ( clearBin )
-			return FCKTempBin.RemoveElement( index ) ;
-		else
-			return FCKTempBin.Elements[ index ] ;
+		var protectedValue = clearBin ? FCKTempBin.RemoveElement( index ) : FCKTempBin.Elements[ index ] ;
+		// There could be protected source inside another one.
+		return FCKConfig.ProtectedSource.Revert( protectedValue, clearBin ) ;
 	}
-	
-	return html.replace( /<!--\{PS..(\d+)\}-->/g, _Replace ) ;
+
+	return html.replace( /(<|&lt;)!--\{PS..(\d+)\}--(>|&gt;)/g, _Replace ) ;
 }
+
+// First of any other protection, we must protect all comments to avoid 
+// loosing them (of course, IE related).
+FCKConfig.ProtectedSource.Add( /<!--[\s\S]*?-->/g ) ;

@@ -133,6 +133,7 @@ UnknownToolbarItem	: "عنصر شريط أدوات غير معروف \"%1\"",
 UnknownCommand		: "أمر غير معروف \"%1\"",
 NotImplemented		: "لم يتم دعم هذا الأمر",
 UnknownToolbarSet	: "لم أتمكن من العثور على طقم الأدوات \"%1\" ",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "موافق",
@@ -415,7 +416,7 @@ BulletedListProp	: "خصائص التعداد النقطي",
 NumberedListProp	: "خصائص التعداد الرقمي",
 DlgLstType			: "النوع",
 DlgLstTypeCircle	: "دائرة",
-DlgLstTypeDisk		: "قرص",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "مربع",
 DlgLstTypeNumbers	: "أرقام (1، 2، 3)َ",
 DlgLstTypeLCase		: "حروف صغيرة (a, b, c)َ",

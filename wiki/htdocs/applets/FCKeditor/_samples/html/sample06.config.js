@@ -35,8 +35,8 @@ FCKConfig.PluginsPath = FCKConfig.BasePath.substr(0, FCKConfig.BasePath.length -
 //		FCKConfig.Plugins.Add( pluginName, availableLanguages )
 //			pluginName: The plugin name. The plugin directory must match this name.
 //			availableLanguages: a list of available language files for the plugin (separated by a comma).
-FCKConfig.Plugins.Add( 'findreplace', 'en,it' ) ;
-FCKConfig.Plugins.Add( 'samples', 'en,it' ) ;
+FCKConfig.Plugins.Add( 'findreplace', 'en,it,fr' ) ;
+FCKConfig.Plugins.Add( 'samples' ) ;
 
 // If you want to use plugins found on other directories, just use the third parameter.
 var sOtherPluginPath = FCKConfig.BasePath.substr(0, FCKConfig.BasePath.length - 7) + 'editor/plugins/' ;

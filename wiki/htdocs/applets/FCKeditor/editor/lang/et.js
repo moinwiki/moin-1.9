@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Tundmatu tööriistariba üksus \"%1\"",
 UnknownCommand		: "Tundmatu käsunimi \"%1\"",
 NotImplemented		: "Käsku ei täidetud",
 UnknownToolbarSet	: "Tööriistariba \"%1\" ei eksisteeri",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Bulleted List Properties",	//MISSING
 NumberedListProp	: "Numbered List Properties",	//MISSING
 DlgLstType			: "Type",	//MISSING
 DlgLstTypeCircle	: "Circle",	//MISSING
-DlgLstTypeDisk		: "Disk",	//MISSING
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Square",	//MISSING
 DlgLstTypeNumbers	: "Numbers (1, 2, 3)",	//MISSING
 DlgLstTypeLCase		: "Lowercase Letters (a, b, c)",	//MISSING

@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Elemento della barra strumenti sconosciuto \"%1\"",
 UnknownCommand		: "Comando sconosciuto \"%1\"",
 NotImplemented		: "Commando non implementato",
 UnknownToolbarSet	: "La barra di strumenti \"%1\" non esiste",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Propriet lista puntata",
 NumberedListProp	: "Propriet lista numerata",
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Tondo",
-DlgLstTypeDisk		: "Disco",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Quadrato",
 DlgLstTypeNumbers	: "Numeri (1, 2, 3)",
 DlgLstTypeLCase		: "Caratteri minuscoli (a, b, c)",

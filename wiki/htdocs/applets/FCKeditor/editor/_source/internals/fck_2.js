@@ -34,6 +34,8 @@ FCK.ExecuteNamedCommand = function( commandName, commandParameter )
 		FCK.EditorDocument.execCommand( commandName, false, commandParameter ) ; 
 		FCK.Events.FireEvent( 'OnSelectionChange' ) ;
 	}
+	
+	FCKUndo.SaveUndoStep() ;
 }
 
 FCK.GetNamedCommandState = function( commandName )
@@ -124,7 +126,7 @@ FCK.Preview = function()
 	if ( FCKConfig.FullPage )
 	{
 		if ( FCK.TempBaseTag.length > 0 )
-			sHTML = FCK.GetXHTML().replace( FCKRegexLib.HeadCloser, FCK.TempBaseTag + '</head>' ) ;
+			sHTML = FCK.GetXHTML().replace( FCKRegexLib.HeadOpener, '$&' + FCK.TempBaseTag ) ;
 		else
 			sHTML = FCK.GetXHTML() ;
 	}
@@ -196,4 +198,5 @@ FCK.InsertElementAndGetIt = function( e )
 			return aEls[i] ;
 		}
 	}
+	return null ;
 }

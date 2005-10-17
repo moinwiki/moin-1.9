@@ -24,11 +24,10 @@
 		<UL>
   <LI>[<A 
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1200328&amp;group_id=75348&amp;atid=543653" 
-  target="_blank">SF BUG-1200328</A>] The editor now offers a way to "protect" 
-  part of the source to remain untouch while editing or changing 
-  views.&nbsp;Just use the "FCKConfig.ProtectedSource" object to configure it 
-  and customize to your needs. It is based on regular expressions. See 
-  fckconfig.js for some samples. </LI>
+  target="_blank">SF BUG-1200328</A>] The editor now offers a way to "protect" part of the source 
+  to remain untouched while editing or changing views.&nbsp;Just use the 
+  "FCKConfig.ProtectedSource" object to configure it and customize to your 
+  needs. It is based on regular expressions. See fckconfig.js for some samples. 
   <LI>
 				The editor now offers native support for <STRONG>Lasso</STRONG>. Thanks and 
 			welcome&nbsp;to our new developer Jason Huck.
@@ -47,8 +46,20 @@
 					<LI>
 						<STRONG>Vietnamese</STRONG> (by Phan Binh Giang)</LI></UL>
 			<LI>
-			The PHP connector for the default File Browser now sorts the folders and files 
-			names.
+			A new configurable&nbsp;ColdFusion connector is 
+  available. Thanks to Mark Woods. Many enhancements has been introduced with 
+it.
+  <LI>
+			The PHP connector for the default File Browser now 
+  sorts the folders and files names. 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1289372&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1289372</A>] [<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1282758&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1282758</A>] In the PHP connector it is now possible to 
+  set the absolute (server) path to the User Files directory, avoiding 
+			problems with Virtual Directories, Symbolic Links or Aliases. Take a look at the config.php 
+			file.
 			<LI>
 			The ASP.Net uploader (for Quick Uploads) has been 
   added to the package. 
@@ -59,20 +70,62 @@
   Lineberry.&nbsp;See sample06.html and the "simplecommands" plugin&nbsp;to fully understand it.
 			<LI>
 			A new test case has been added that shows how to set the editor background 
-			dinamically without using a CSS.
+			dynamically without using a CSS.
 			<LI>
 				[<A 
   href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1155906&amp;group_id=75348&amp;atid=543653" 
   target="_blank">SF BUG-1155906</A>] [<A 
   href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1110116&amp;group_id=75348&amp;atid=543653" 
-  target="_blank">SF BUG-1110116</A>] The 
-  "AutoDetectPasteFromWord" configuration options is back (IE only feature).
+  target="_blank">SF BUG-1110116</A>] [<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1216332&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1216332</A>] The 
+  "AutoDetectPasteFromWord" configuration option is back (IE only feature).
   <LI>The&nbsp;new "OnAfterLinkedFieldUpdate" event has 
   been introduced. If is fired when the editor updates its hidden associated 
   field.
-  <LI>Attention: The color of the right border of the toolbar (left on RTL 
-  interfaces) has been moved from code to the CSS (TB_SideBorder class). Update 
-  your custom skins.</LI></UL>
+  <LI>Attention: The color of the right border of the 
+  toolbar (left on RTL interfaces) has been moved from code to the CSS 
+  (TB_SideBorder class). Update your custom skins.
+  <LI>A&nbsp;sample "htaccess.txt" file has been added to 
+  the editor's package to show how to configure some Linux sites that could 
+  present problems on Firefox with "Illegal characters" errors. Respectively the 
+  "﻿" chars.
+  <LI>With the JavaScript, ASP and PHP integration files, 
+  you can set the QueryString value "fcksource=true" to load the editor using 
+  the source files (located in the _source directory) instead of the compressed 
+  ones. Thanks to Kae Verens for the suggestion.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1246623&amp;group_id=75348&amp;atid=543656" 
+  target="_blank">SF Feature-1246623</A>] The new configuration option "ForceStrongEm" has been 
+  introduced so you can force the editor to convert all &lt;B&gt; and &lt;I&gt; 
+  tags to &lt;STRONG&gt; and &lt;EM&gt; respectively.
+  <LI>A nice contribution has been done by Goss Interactive 
+  Ltd: 
+  <UL>
+    <LI>[<A 
+    href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1246949&amp;group_id=75348&amp;atid=543653" 
+    target="_blank">SF BUG-1246949</A>] Implemented ENTER key and BACKSPACE key handlers for Gecko so that P 
+    tags (or an appropriate block element) get inserted instead of BR tags when 
+    not in the UseBROnCarriageReturn config mode. <BR>The ENTER key handling has 
+    been written to function much the same as the ENTER key handling on IE : as 
+    soon as the ENTER key is pressed, existing content will be wrapped with a 
+    suitable block element (P tag) as appropriate and a new block element (P 
+    tag) will be started. <BR>The ENTER key handler also caters for pressing 
+    ENTER within empty list items - ENTER in an empty item at the top of a list 
+    will remove that list item and start a new P tag above the list; ENTER in an 
+    empty item at the bottom of a list will remove that list item and start a 
+    new P tag below the list; ENTER in an empty item in the middle of a list 
+    will remove that list item, split the list into two, and start a new P tag 
+    between the two lists.
+    <LI>Any tables that are found to be incorrectly nested within a block 
+    element (P tag) will be moved out of the block element when loaded into the 
+    editor. This is required for the new ENTER/BACKSPACE key handlers and it 
+    also avoids non-compliant HTML.&nbsp;
+    <LI>The InsertOrderedList and InsertUnorderedList commands have been 
+    overridden on Gecko to ensure that block elements (P tags) are placed around 
+    a list item's content when it is moved out of the list due to clicking on 
+    the editor's list toolbar buttons (when not in the UseBROnCarriageReturn 
+    config mode). </LI></UL></LI></UL>
 		<P>Fixed Bugs:</P>
 <UL>
 			<LI>
@@ -91,28 +144,60 @@
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1256178&amp;group_id=75348&amp;atid=543653" 
   target="_blank">SF BUG-1256178</A>] [<A 
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1274841&amp;group_id=75348&amp;atid=543653" 
-  target="_blank">SF BUG-1274841</A>] Due to a bug on Firefox, some keys stopped working on startup 
+  target="_blank">SF BUG-1274841</A>] [<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1303949&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1303949</A>] Due to a bug on Firefox, some keys stopped working on startup 
   over Firefox. It has been fixed.
   <LI>[<A 
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1251373&amp;group_id=75348&amp;atid=543653" 
-  target="_blank">SF BUG-1251373</A>  ] The above fix also has&nbsp;corrected 
-  some strange behaviors on Firefox.
+  target="_blank">SF BUG-1251373</A> ] The above fix also has&nbsp;corrected some strange behaviors 
+  on Firefox. 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/?group_id=75348&amp;atid=543653&amp;func=detail&amp;aid=1144258" 
+  target="_blank">SF BUG-1144258</A>] [<A 
+  href="https://sourceforge.net/tracker/?group_id=75348&amp;atid=543653&amp;func=detail&amp;aid=1092081" 
+  target="_blank">SF BUG-1092081</A>] The File Browsers now run on the&nbsp;same server session 
+  used in the page where the editor is placed in (IE issue). Thanks to Simone 
+  Chiaretta. 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1305619&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1305619</A>          ] No more repeated 
+  login  dialogs when running the editor with 
+  Windows Integrated Security with IIS.
   <LI>
 				[<A href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1245304&amp;group_id=75348&amp;atid=543655"
 					target="_blank">SF Patch-1245304</A>] The Test Case 004 is now working correctly. It has been 
   changed to set the editor hidden at startup.
-  <LI>Due to Gecko bugs, two erros were thrown when loading the editor in a 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1290610&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1290610</A>    ] Over HTTPS, there were some warnings when 
+  loading the Images, Flash and Link dialogs. Fixed.
+  <LI>Due to Gecko bugs, two errors were thrown when loading the editor in a 
   hidden div. Workarounds have been introduced. In any case, the testcase 004 
   hack is needed when showing the editor (as in a tabbed 
 			interface).
 			<LI>
-			An invalid path in the dialogs CSS file has been corrected.
+			An invalid path in the dialogs CSS file has been 
+  corrected. 
+  <LI>On IE, the Undo/Redo can now be controlled using the 
+  Ctrl+Z and Ctrl+Y shortcut keys.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1295538&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1295538</A>     ] A few Undo/Redo fixes 
+  for IE have been done. 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1247070&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1247070</A>] On Gecko, it is now possible to use the shortcut keys for Bold (CTRL+B), Italic (CTRL+I) and Underline (CTRL+U), like in IE.
 			<LI>
 			[<A 
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1274303&amp;group_id=75348&amp;atid=543653" 
-  target="_blank">SF BUG-1274303</A>] 
-			The "Insert Column" command is now working correctly on TH cells. It also 
-			copies any attribute applied to the source cells.
+  target="_blank">SF BUG-1274303</A>] The "Insert Column" command is now working correctly on TH 
+  cells. It also copies any attribute applied to the source cells. 
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1287070&amp;group_id=75348&amp;atid=543655" 
+  target="_blank">SF Patch-1287070</A> 
+			  ] In the Universal Keyboard, the Arabic keystrokes translator is now 
+			working with Firefox. Thanks again to Abdul-Aziz Al-Oraij.
 			<LI>      
             The editor 
   now handles AJAX requests with HTTP status 304.
@@ -125,7 +210,7 @@
   <LI>[<A 
   href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1155774&amp;group_id=75348&amp;atid=543653" 
   target="_blank">SF BUG-1155774</A>] A spelling error in the 
-  Bulletted List Properties dialog has been corrected.
+  Bulleted List Properties dialog has been corrected.
   <LI>[<A 
   href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1272018&amp;group_id=75348&amp;atid=543653" 
   target="_blank">SF BUG-1272018</A>] The ampersand character can now be added 
@@ -138,8 +223,52 @@
   href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1241504&amp;group_id=75348&amp;atid=543653" 
   target="_blank">SF BUG-1241504</A>] The editor now looks 
   also for the ID of the hidden linked field.
-  <LI>The caption property on tables is now working on Gecko. Thanks to Helen 
-  Somers (Goss Interactive Ltd).</LI></UL>
+  <LI>The caption property on tables is now working on 
+  Gecko. Thanks to Helen Somers (Goss Interactive Ltd).
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1297431&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1297431</A>] With IE, the editor now works locally when 
+  its files are placed in a directory path that contains spaces.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1279551&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1279551</A>] [<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1242105&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1242105</A>] On IE, some features are dependant of ActiveX components 
+  (secure... distributed&nbsp;with IE itself). Some security setting could avoid 
+  the usage of those components and the editor would stop working. Now a message 
+  is shown, indicating the use the minimum necessary settings need&nbsp;by the 
+  editor to run.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1298880&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1298880</A>] Firefox can't handle the STRONG and EM tags. Those 
+  tags are now converted to B and I so it works accordingly.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1271723&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1271723</A>] On IE, it is now possible to select the text and work correctly in the 
+  contents of absolute positioned/dimensioned divs.
+  <LI>On IE, there is no need to click twice in the editor 
+  to&nbsp;activate the cursor in the editing area.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/?func=detail&amp;atid=543653&amp;aid=1221621&amp;group_id=75348" 
+  target="_blank">SF BUG-1221621</A>] Many "warnings" in the Firefox console are not thrown 
+anymore.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1295526&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1295526</A>] While&nbsp;editing on "FullPage" mode the basehref is now 
+  active for CSS "link" tags.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1222584&amp;group_id=75348&amp;atid=543655" 
+  target="_blank">SF Patch-1222584</A>] A small fix to the PHP connector has been 
+  applied.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1281313&amp;group_id=75348&amp;atid=543655" 
+  target="_blank">SF Patch-1281313</A>] A few small changes to avoid problems with Plone. Thanks to 
+  Jean-mat.
+  <LI>[<A 
+  href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1275911&amp;group_id=75348&amp;atid=543653" 
+  target="_blank">SF BUG-1275911</A>] A check for double dots sequences on 
+  directory names on creation has been introduced to the PHP and ASP 
+  connectors.</LI></UL>
 		<H3>Version 2.0</H3>
 		<P>New Features and Improvements:</P>
 		<UL>

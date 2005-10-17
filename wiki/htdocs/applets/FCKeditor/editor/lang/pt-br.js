@@ -134,6 +134,7 @@ UnknownToolbarItem	: "O item da barra de ferramentas \"%1\" não é reconhecido"
 UnknownCommand		: "O comando \"%1\" não é reconhecido",
 NotImplemented		: "O comando não foi implementado",
 UnknownToolbarSet	: "A barra de ferramentas \"%1\" não existe",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -416,7 +417,7 @@ BulletedListProp	: "Formatar Marcadores",
 NumberedListProp	: "Formatar Numeração",
 DlgLstType			: "Tipo",
 DlgLstTypeCircle	: "Círculo",
-DlgLstTypeDisk		: "Disco",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Quadrado",
 DlgLstTypeNumbers	: "Números (1, 2, 3)",
 DlgLstTypeLCase		: "Letras Minúsculas (a, b, c)",

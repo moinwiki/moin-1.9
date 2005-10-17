@@ -47,7 +47,7 @@ var FCKPanel = function( parentWindow )
 
 FCKPanel.prototype.Create = function()
 {
-	this._IFrame = this.Window.document.body.appendChild( this.Window.document.createElement('iframe') ) ;
+	this._IFrame = this.Window.document.createElement('iframe') ; 
 	this._IFrame.src = 'about:blank' ;
     this._IFrame.frameBorder		= '0';
     this._IFrame.scrolling			= 'no' ;
@@ -61,6 +61,8 @@ FCKPanel.prototype.Create = function()
 	this._IFrame.IsFCKPanel	= true ;
 	this._IFrame.Panel		= this ;
 
+	this.Window.document.body.appendChild( this._IFrame ) ;
+	
 	this.Document = this._IFrame.contentWindow.document ;
 
 	// Initialize the IFRAME document body.

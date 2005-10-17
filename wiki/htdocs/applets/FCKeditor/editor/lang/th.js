@@ -134,6 +134,7 @@ UnknownToolbarItem	: "ไม่สามารถระบุปุ่มเค�
 UnknownCommand		: "ไม่สามารถระบุชื่อคำสั่งได้ \"%1\"",
 NotImplemented		: "ไม่สามารถใช้งานคำสั่งได้",
 UnknownToolbarSet	: "ไม่มีการติดตั้งชุดคำสั่งในแถบเครื่องมือ \"%1\" กรุณาติดต่อผู้ดูแลระบบ",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "ตกลง",
@@ -416,7 +417,7 @@ BulletedListProp	: "คุณสมบัติของ บูลเล็ต�
 NumberedListProp	: "คุณสมบัติของ นัมเบอร์ลิสต์",
 DlgLstType			: "ชนิด",
 DlgLstTypeCircle	: "รูปวงกลม",
-DlgLstTypeDisk		: "รูปดิสก์",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "รูปสี่เหลี่ยม",
 DlgLstTypeNumbers	: "หมายเลข (1, 2, 3)",
 DlgLstTypeLCase		: "ตัวพิมพ์เล็ก (a, b, c)",

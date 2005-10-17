@@ -79,8 +79,15 @@ Class FCKeditor
 
 		If IsCompatible() Then
 
+			Dim sFile
+			If Request.QueryString( "fcksource" ) = "true" Then
+				sFile = "fckeditor.original.html"
+			Else
+				sFile = "fckeditor.html"
+			End If
+
 			Dim sLink
-			sLink = sBasePath & "editor/fckeditor.html?InstanceName=" + instanceName
+			sLink = sBasePath & "editor/" & sFile & "?InstanceName=" + instanceName
 
 			If (sToolbarSet & "") <> "" Then
 				sLink = sLink + "&amp;Toolbar=" & sToolbarSet

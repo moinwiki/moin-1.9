@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Bilinmeyen araç çubugu ögesi \"%1\"",
 UnknownCommand		: "Bilinmeyen komut \"%1\"",
 NotImplemented		: "Komut uyarlanamadi",
 UnknownToolbarSet	: "\"%1\" araç çubugu ögesi mevcut degil",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "Tamam",
@@ -415,7 +416,7 @@ BulletedListProp	: "Simgeli Liste Özellikleri",
 NumberedListProp	: "Numarali Liste Özellikleri",
 DlgLstType			: "Tip",
 DlgLstTypeCircle	: "Çember",
-DlgLstTypeDisk		: "Daire",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kare",
 DlgLstTypeNumbers	: "Sayilar (1, 2, 3)",
 DlgLstTypeLCase		: "Küçük Harfler (a, b, c)",

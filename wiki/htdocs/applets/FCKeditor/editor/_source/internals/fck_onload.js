@@ -64,10 +64,10 @@ if ( FCKBrowserInfo.IsIE )
 		var d, e ;
 
 		var j = 0 ;
-		while ( d = aCleanupDocs[j++] )
+		while ( ( d = aCleanupDocs[j++] ) )
 		{
 			var i = 0 ;
-			while ( e = d.getElementsByTagName("DIV").item(i++) )
+			while ( ( e = d.getElementsByTagName("DIV").item(i++) ) )
 			{
 				if ( e.FCKToolbarButton )
 					e.FCKToolbarButton = null ;
@@ -80,7 +80,7 @@ if ( FCKBrowserInfo.IsIE )
 			}
 
 			i = 0 ;
-			while ( e = d.getElementsByTagName("TR").item(i++) )
+			while ( ( e = d.getElementsByTagName("TR").item(i++) ) )
 			{
 				if ( e.FCKContextMenuItem )
 					e.FCKContextMenuItem = null ;
@@ -178,22 +178,19 @@ function LoadScripts()
 	// @Packager.Compactor.Remove.Start
 	var sSuffix = FCKBrowserInfo.IsIE ? 'ie' : 'gecko' ;
 
-	with ( FCKScriptLoader )
-	{
-		AddScript( '_source/internals/fckdebug.js' ) ;
-		AddScript( '_source/internals/fcktools.js' ) ;
-		AddScript( '_source/internals/fcktools_' + sSuffix + '.js' ) ;
-		AddScript( '_source/internals/fckregexlib.js' ) ;
-		AddScript( '_source/internals/fcklanguagemanager.js' ) ;
-		AddScript( '_source/classes/fckevents.js' ) ;
-		AddScript( '_source/internals/fckxhtmlentities.js' ) ;
-		AddScript( '_source/internals/fckxhtml.js' ) ;
-		AddScript( '_source/internals/fckxhtml_' + sSuffix + '.js' ) ;
-		AddScript( '_source/internals/fckcodeformatter.js' ) ;
-		AddScript( '_source/internals/fckundo_' + sSuffix + '.js' ) ;
-		AddScript( '_source/internals/fck_1.js' ) ;
-		AddScript( '_source/internals/fck_1_' + sSuffix + '.js' ) ;
-	}
+	FCKScriptLoader.AddScript( '_source/internals/fckdebug.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fcktools.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fcktools_' + sSuffix + '.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckregexlib.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fcklanguagemanager.js' ) ;
+	FCKScriptLoader.AddScript( '_source/classes/fckevents.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckxhtmlentities.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckxhtml.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckxhtml_' + sSuffix + '.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckcodeformatter.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fckundo_' + sSuffix + '.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fck_1.js' ) ;
+	FCKScriptLoader.AddScript( '_source/internals/fck_1_' + sSuffix + '.js' ) ;
 	// @Packager.Compactor.Remove.End
 
 	/* @Packager.Compactor.RemoveLine

@@ -134,6 +134,7 @@ UnknownToolbarItem	: "Obiectul \"%1\" din bara cu opţiuni necunoscut",
 UnknownCommand		: "Comanda \"%1\" necunoscută",
 NotImplemented		: "Comandă neimplementată",
 UnknownToolbarSet	: "Grupul din bara cu opţiuni \"%1\" nu există",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "Bine",
@@ -416,7 +417,7 @@ BulletedListProp	: "Proprietăţile listei punctate (Bulleted List)",
 NumberedListProp	: "Proprietăţile listei numerotate (Numbered List)",
 DlgLstType			: "Tip",
 DlgLstTypeCircle	: "Cerc",
-DlgLstTypeDisk		: "Disc",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Pătrat",
 DlgLstTypeNumbers	: "Numere (1, 2, 3)",
 DlgLstTypeLCase		: "Minuscule-litere mici (a, b, c)",

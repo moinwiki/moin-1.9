@@ -22,25 +22,23 @@ var FCKToolbar = function()
 {
 	this.Items = new Array() ;
 	
-	this.DOMTable = document.createElement( 'table' ) ;
-	this.DOMTable.className = 'TB_Toolbar' ;
-	with ( this.DOMTable )
-	{
-		// Sets the toolbar direction. IE uses "styleFloat" and Gecko uses "cssFloat".
-		style.styleFloat = style.cssFloat = FCKLang.Dir == 'rtl' ? 'right' : 'left' ;
-		
-		cellPadding = 0 ;
-		cellSpacing = 0 ;
-		border = 0 ;
-	}
+	var e = this.DOMTable = document.createElement( 'table' ) ;
+	e.className = 'TB_Toolbar' ;
 
-	this.DOMRow = this.DOMTable.insertRow(-1) ;
+	// Sets the toolbar direction. IE uses "styleFloat" and Gecko uses "cssFloat".
+	e.style.styleFloat = e.style.cssFloat = FCKLang.Dir == 'rtl' ? 'right' : 'left' ;
+
+	e.cellPadding = 0 ;
+	e.cellSpacing = 0 ;
+	e.border = 0 ;
+
+	this.DOMRow = e.insertRow(-1) ;
 
 	var oCell = this.DOMRow.insertCell(-1) ;
 	oCell.className = 'TB_Start' ;
 	oCell.innerHTML = '<img src="' + FCKConfig.SkinPath + 'images/toolbar.start.gif" width="7" height="21" style="VISIBILITY: hidden" onload="this.style.visibility = \'\';" unselectable="on">' ;
 
-	FCKToolbarSet.DOMElement.appendChild( this.DOMTable ) ;
+	FCKToolbarSet.DOMElement.appendChild( e ) ;
 }
 
 FCKToolbar.prototype.AddItem = function( toolbarItem )

@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Elément de barre d'outil inconnu \"%1\"",
 UnknownCommand		: "Nom de commande inconnu \"%1\"",
 NotImplemented		: "Commande non encore écrite",
 UnknownToolbarSet	: "La barre d'outils \"%1\" n'existe pas",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Propriétés de Liste à puces",
 NumberedListProp	: "Propriétés de Numérotée",
 DlgLstType			: "Type",
 DlgLstTypeCircle	: "Cercle",
-DlgLstTypeDisk		: "Disque",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Carré",
 DlgLstTypeNumbers	: "Nombres (1, 2, 3)",
 DlgLstTypeLCase		: "Lettres Minuscules (a, b, c)",

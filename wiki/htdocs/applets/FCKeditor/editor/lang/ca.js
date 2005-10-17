@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Element de la Barra d'eines desconegut \"%1\"",
 UnknownCommand		: "Nom de comanda desconegut \"%1\"",
 NotImplemented		: "Mètode no implementat",
 UnknownToolbarSet	: "Conjunt de barra d'eines \"%1\" inexistent",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Proprietats de llista marcada",
 NumberedListProp	: "Proprietats de llista numerada",
 DlgLstType			: "Tipus",
 DlgLstTypeCircle	: "Cercle",
-DlgLstTypeDisk		: "Disc",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Quadrat",
 DlgLstTypeNumbers	: "Números (1, 2, 3)",
 DlgLstTypeLCase		: "Lletres minúscules (a, b, c)",

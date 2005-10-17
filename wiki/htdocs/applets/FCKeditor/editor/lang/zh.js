@@ -133,6 +133,7 @@ UnknownToolbarItem	: "未知工具列項目 \"%1\"",
 UnknownCommand		: "未知指令名稱 \"%1\"",
 NotImplemented		: "尚未安裝此指令",
 UnknownToolbarSet	: "工具列設定 \"%1\" 不存在",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "確定",
@@ -415,7 +416,7 @@ BulletedListProp	: "項目清單屬性",
 NumberedListProp	: "編號清單屬性",
 DlgLstType			: "清單類型",
 DlgLstTypeCircle	: "圓圈",
-DlgLstTypeDisk		: "圓點",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "方塊",
 DlgLstTypeNumbers	: "數字 (1, 2, 3)",
 DlgLstTypeLCase		: "小寫字母 (a, b, c)",

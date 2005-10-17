@@ -148,7 +148,7 @@ FCKXHtml._AppendNode = function( xmlNode, htmlNode )
 
 			// The already processed nodes must be marked to avoid then to be duplicated (bad formatted HTML).
 			// So here, the "mark" is checked... if the element is Ok, then mark it.
-			if ( htmlNode._fckxhtmljob == FCKXHtml.CurrentJobNum )
+			if ( htmlNode._fckxhtmljob && htmlNode._fckxhtmljob == FCKXHtml.CurrentJobNum )
 				return false ;
 			else
 				htmlNode._fckxhtmljob = FCKXHtml.CurrentJobNum ;
@@ -158,8 +158,8 @@ FCKXHtml._AppendNode = function( xmlNode, htmlNode )
 //			if ( sNodeName.length == 0 || sNodeName.substr(0,1) == '/' )
 //				break ;
 
-			var oNode = this.XML.createElement( sNodeName ) ;
-
+			var oNode = this._CreateNode( sNodeName ) ;
+			
 			// Add all attributes.
 			FCKXHtml._AppendAttributes( xmlNode, htmlNode, oNode, sNodeName ) ;
 
@@ -195,6 +195,30 @@ FCKXHtml._AppendNode = function( xmlNode, htmlNode )
 			break ;
 	}
 	return true ;
+}
+
+if ( FCKConfig.ForceStrongEm )
+{
+	FCKXHtml._CreateNode = function( nodeName )
+	{
+		switch ( nodeName )
+		{
+			case 'b' :
+				nodeName = 'strong' ;
+				break ;
+			case 'i' :
+				nodeName = 'em' ;
+				break ;
+		}
+		return this.XML.createElement( nodeName ) ;
+	}
+}
+else
+{
+	FCKXHtml._CreateNode = function( nodeName )
+	{
+		return this.XML.createElement( nodeName ) ;
+	}
 }
 
 // Append an item to the SpecialBlocks array and returns the tag to be used.

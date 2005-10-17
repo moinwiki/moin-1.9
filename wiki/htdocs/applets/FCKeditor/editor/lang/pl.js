@@ -134,6 +134,7 @@ UnknownToolbarItem	: "Nieznany element paska narzędzi \"%1\"",
 UnknownCommand		: "Nieznana komenda \"%1\"",
 NotImplemented		: "Komenda niezaimplementowana",
 UnknownToolbarSet	: "Pasek narzędzi \"%1\" nie istnieje",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -416,7 +417,7 @@ BulletedListProp	: "Właściwości listy punktowanej",
 NumberedListProp	: "Właściwości listy numerowanej",
 DlgLstType			: "Typ",
 DlgLstTypeCircle	: "Koło",
-DlgLstTypeDisk		: "Dysk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kwadrat",
 DlgLstTypeNumbers	: "Cyfry (1, 2, 3)",
 DlgLstTypeLCase		: "Małe litery (a, b, c)",

@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Ismeretlen eszköztár elem \"%1\"",
 UnknownCommand		: "Ismeretlen parancs \"%1\"",
 NotImplemented		: "A parancs nincs beágyazva",
 UnknownToolbarSet	: "Eszközkészlet beállítás \"%1\" nem létezik",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -415,7 +416,7 @@ BulletedListProp	: "Felsorolás tulajdonságai",
 NumberedListProp	: "Számozás tulajdonságai",
 DlgLstType			: "Típus",
 DlgLstTypeCircle	: "Ciklus",
-DlgLstTypeDisk		: "Lemez",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Négyzet",
 DlgLstTypeNumbers	: "Számok (1, 2, 3)",
 DlgLstTypeLCase		: "Kisbetűs (a, b, c)",

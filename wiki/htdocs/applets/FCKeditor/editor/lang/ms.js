@@ -43,6 +43,8 @@ RemoveLink			: "Buang Sambungan",
 Anchor				: "Masukkan/Sunting Pautan",
 InsertImageLbl		: "Gambar",
 InsertImage			: "Masukkan/Sunting Gambar",
+InsertFlashLbl		: "Flash",	//MISSING
+InsertFlash			: "Insert/Edit Flash",	//MISSING
 InsertTableLbl		: "Jadual",
 InsertTable			: "Masukkan/Sunting Jadual",
 InsertLineLbl		: "Garisan",
@@ -107,6 +109,7 @@ SplitCell			: "Bahagikan Sel",
 CellProperties		: "Ciri-ciri Sel",
 TableProperties		: "Ciri-ciri Jadual",
 ImageProperties		: "Ciri-ciri Gambar",
+FlashProperties		: "Flash Properties",	//MISSING
 
 AnchorProp			: "Ciri-ciri Pautan",
 ButtonProp			: "Ciri-ciri Butang",
@@ -130,6 +133,7 @@ UnknownToolbarItem	: "Toolbar item tidak diketahui\"%1\"",
 UnknownCommand		: "Arahan tidak diketahui \"%1\"",
 NotImplemented		: "Arahan tidak terdapat didalam sistem",
 UnknownToolbarSet	: "Set toolbar \"%1\" tidak wujud",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "OK",
@@ -138,6 +142,8 @@ DlgBtnClose			: "Tutup",
 DlgBtnBrowseServer	: "Browse Server",
 DlgAdvancedTag		: "Advanced",
 DlgOpOther			: "&lt;Lain-lain&gt;",
+DlgInfoTab			: "Info",	//MISSING
+DlgAlertUrl			: "Please insert the URL",	//MISSING
 
 // General Dialogs Labels
 DlgGenNotSet		: "&lt;tidak di set&gt;",
@@ -183,6 +189,16 @@ DlgImgAlignTop		: "Atas",
 DlgImgPreview		: "Prebiu",
 DlgImgAlertUrl		: "Sila taip URL untuk fail gambar",
 DlgImgLinkTab		: "Sambungan",
+
+// Flash Dialog
+DlgFlashTitle		: "Flash Properties",	//MISSING
+DlgFlashChkPlay		: "Auto Play",	//MISSING
+DlgFlashChkLoop		: "Loop",	//MISSING
+DlgFlashChkMenu		: "Enable Flash Menu",	//MISSING
+DlgFlashScale		: "Scale",	//MISSING
+DlgFlashScaleAll	: "Show all",	//MISSING
+DlgFlashScaleNoBorder	: "No Border",	//MISSING
+DlgFlashScaleFit	: "Exact Fit",	//MISSING
 
 // Link Dialog
 DlgLnkWindowTitle	: "Sambungan",
@@ -312,7 +328,11 @@ PasteErrorCopy	: "Keselamatan perisian browser anda tidak membenarkan operasi sa
 PasteAsText		: "Tampal sebagai text biasa",
 PasteFromWord	: "Tampal dari perisian \"Word\"",
 
-DlgPasteMsg		: "Editor tidak dapat membuat tampalan secara otomatik kerana <STRONG>ciri keselamatan</STRONG> perisian browser anda.<BR>Sila tampal ke dalam kotak di bawah menggunakan papan kekcunci  (<STRONG>Ctrl+V</STRONG>) dan tekan <STRONG>OK</STRONG>.",
+DlgPasteMsg2	: "Please paste inside the following box using the keyboard (<STRONG>Ctrl+V</STRONG>) and hit <STRONG>OK</STRONG>.",	//MISSING
+DlgPasteIgnoreFont		: "Ignore Font Face definitions",	//MISSING
+DlgPasteRemoveStyles	: "Remove Styles definitions",	//MISSING
+DlgPasteCleanBox		: "Clean Up Box",	//MISSING
+
 
 // Color Picker
 ColorAutomatic	: "Otomatik",
@@ -396,7 +416,7 @@ BulletedListProp	: "Ciri-ciri senarai berpeluru",
 NumberedListProp	: "Ciri-ciri senarai bernombor",
 DlgLstType			: "Jenis",
 DlgLstTypeCircle	: "Circle",
-DlgLstTypeDisk		: "Disk",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Square",
 DlgLstTypeNumbers	: "Nombor-nombor (1, 2, 3)",
 DlgLstTypeLCase		: "Huruf-huruf kecil (a, b, c)",

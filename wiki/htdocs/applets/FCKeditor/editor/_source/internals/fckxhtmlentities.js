@@ -19,7 +19,7 @@
 
 if ( FCKConfig.ProcessHTMLEntities )
 {
-	FCKXHtmlEntities = new Object();
+	var FCKXHtmlEntities = new Object() ;
 
 	FCKXHtmlEntities.Entities = {
 		// Latin-1 Entities

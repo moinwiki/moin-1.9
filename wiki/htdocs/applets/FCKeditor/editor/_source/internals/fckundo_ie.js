@@ -35,9 +35,19 @@ FCKUndo.SaveUndoStep = function()
 	FCK.Events.FireEvent( "OnSelectionChange" ) ;
 }
 
+FCKUndo.CheckUndoState = function()
+{
+	return ( FCKUndo.Typing || FCKUndo.CurrentIndex > 0 ) ;
+}
+
+FCKUndo.CheckRedoState = function()
+{
+	return ( !FCKUndo.Typing && FCKUndo.CurrentIndex < ( FCKUndo.SavedData.length - 1 ) ) ;
+}
+
 FCKUndo.Undo = function()
 {
-	if ( FCKUndo.CurrentIndex >= 0 )
+	if ( FCKUndo.CheckUndoState() )
 	{
 		// If it is the first step.
 		if ( FCKUndo.CurrentIndex == ( FCKUndo.SavedData.length - 1 ) )
@@ -55,7 +65,7 @@ FCKUndo.Undo = function()
 
 FCKUndo.Redo = function()
 {
-	if ( FCKUndo.CurrentIndex < ( FCKUndo.SavedData.length - 1 ) )
+	if ( FCKUndo.CheckRedoState() )
 	{
 		// Go a step forward.
 		FCKUndo._ApplyUndoLevel( ++FCKUndo.CurrentIndex ) ;
@@ -67,6 +77,9 @@ FCKUndo.Redo = function()
 FCKUndo._ApplyUndoLevel = function(level)
 {
 	var oData = FCKUndo.SavedData[ level ] ;
+	
+	if ( !oData )
+		return ;
 
 	// Update the editor contents with that step data.
 	FCK.EditorDocument.body.innerHTML = oData[0] ;

@@ -97,7 +97,7 @@ FCKTableHandler.InsertColumn = function()
 		oCell = oRow.cells[iIndex-1].cloneNode(false) ;
 		
 		if ( FCKBrowserInfo.IsGecko )
-			oCell.innerHTML = FCKBrowserInfo.IsGecko ? '<br _moz_editor_bogus_node="TRUE">' : '' ;
+			oCell.innerHTML = FCKBrowserInfo.IsGecko ? GECKO_BOGUS : '' ;
 		
 		// Get the cell that is placed in the new cell place.
 		var oBaseCell = oRow.cells[iIndex] ;
@@ -152,7 +152,7 @@ FCKTableHandler.InsertCell = function( cell )
 	// Create the new cell element to be added.
 	var oNewCell = FCK.EditorDocument.createElement("TD");
 	if ( FCKBrowserInfo.IsGecko )
-		oNewCell.innerHTML = '<br _moz_editor_bogus_node="TRUE">' ;
+		oNewCell.innerHTML = GECKO_BOGUS ;
 //	oNewCell.innerHTML = "&nbsp;" ;
 
 	// If it is the last cell in the row.
@@ -262,7 +262,7 @@ FCKTableHandler.SplitCell = function()
 FCKTableHandler._GetCellIndexSpan = function( tableMap, rowIndex, cell )
 {
 	if ( tableMap.length < rowIndex + 1 )
-		return ;
+		return null ;
 	
 	var oRow = tableMap[ rowIndex ] ;
 	
@@ -271,6 +271,8 @@ FCKTableHandler._GetCellIndexSpan = function( tableMap, rowIndex, cell )
 		if ( oRow[c] == cell )
 			return c ;
 	}
+	
+	return null ;
 }
 
 // Get the cells available in a collumn of a TableMap.
@@ -348,7 +350,7 @@ FCKTableHandler.ClearRow = function( tr )
 	for ( var i = 0 ; i < aCells.length ; i++ ) 
 	{
 		if ( FCKBrowserInfo.IsGecko )
-			aCells[i].innerHTML = '<br _moz_editor_bogus_node="TRUE">' ;
+			aCells[i].innerHTML = GECKO_BOGUS ;
 		else
 			aCells[i].innerHTML = '' ;
 	}

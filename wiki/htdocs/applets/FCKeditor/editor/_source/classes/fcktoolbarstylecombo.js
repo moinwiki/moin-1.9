@@ -46,10 +46,13 @@ FCKToolbarStyleCombo.prototype.CreateItems = function( targetSpecialCombo )
 	for ( var s in this.Command.Styles )
 	{
 		var oStyle = this.Command.Styles[s] ;
+		var oItem ;
+		
 		if ( oStyle.IsObjectElement )
-			var oItem = targetSpecialCombo.AddItem( s, s ) ;
+			oItem = targetSpecialCombo.AddItem( s, s ) ;
 		else
-			var oItem = targetSpecialCombo.AddItem( s, oStyle.GetOpenerTag() + s + oStyle.GetCloserTag() ) ;
+			oItem = targetSpecialCombo.AddItem( s, oStyle.GetOpenerTag() + s + oStyle.GetCloserTag() ) ;
+			
 		oItem.Style = oStyle ;
 	}
 }

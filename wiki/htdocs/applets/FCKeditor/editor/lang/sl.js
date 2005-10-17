@@ -133,6 +133,7 @@ UnknownToolbarItem	: "Neznan element orodne vrstice \"%1\"",
 UnknownCommand		: "Neznano ime ukaza \"%1\"",
 NotImplemented		: "Ukaz ni izdelan",
 UnknownToolbarSet	: "Skupina orodnih vrstic \"%1\" ne obstoja",
+NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "V redu",
@@ -415,7 +416,7 @@ BulletedListProp	: "Lastnosti označenega seznama",
 NumberedListProp	: "Lastnosti oštevilčenega seznama",
 DlgLstType			: "Tip",
 DlgLstTypeCircle	: "Pikica",
-DlgLstTypeDisk		: "Krožec",
+DlgLstTypeDisc		: "Disc",	//MISSING
 DlgLstTypeSquare	: "Kvadratek",
 DlgLstTypeNumbers	: "Številke (1, 2, 3)",
 DlgLstTypeLCase		: "Male črke (a, b, c)",

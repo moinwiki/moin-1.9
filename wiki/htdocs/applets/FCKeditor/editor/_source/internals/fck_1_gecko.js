@@ -41,16 +41,52 @@ FCK.InitializeBehaviors = function()
 	// Handle pasting operations.
 	var oOnKeyDown = function( e )
 	{
+		// FCKDebug.Output( 'Which Key: ' +  e.which ) ;
+
+		// START iCM Modifications
+		// Need to amend carriage return key handling so inserts block element tags rather than BR all the time
+		if ( e.which == 13 && !e.shiftKey && !e.ctrlKey && !e.altKey && !FCKConfig.UseBROnCarriageReturn && !FCK.Events.FireEvent( "OnEnter" ) )
+		{
+			e.preventDefault() ;
+			e.stopPropagation() ;
+		}
+		// Amend backspace handling so correctly removes empty block elements i.e. those block elements containing nothing or
+		// just the bogus BR node
+		if ( e.which == 8 && !e.shiftKey && !e.ctrlKey && !e.altKey && !FCKConfig.UserBROnCarriageReturn && !FCK.Events.FireEvent( "OnBackSpace" ) )
+		{
+			e.preventDefault() ;
+			e.stopPropagation() ;
+		}
+		// END iCM Modifications
+
 		if ( e.ctrlKey && !e.shiftKey && !e.altKey )
 		{
-			// Char 86/118 = V/v
-			if ( e.which == 86 || e.which == 118 )
+			var bPrevent = false ;
+			
+			switch ( e.which ) 
 			{
-				if ( FCK.Status != FCK_STATUS_COMPLETE || !FCK.Events.FireEvent( "OnPaste" ) )
-				{
-					e.preventDefault() ;
-					e.stopPropagation() ;
-				}
+				case 66 :	// B
+				case 98 :	// b
+					FCK.ExecuteNamedCommand( 'bold' ) ; bPrevent = true ;
+					break;
+				case 105 :	// i
+				case 73 :	// I
+					FCK.ExecuteNamedCommand( 'italic' ) ; bPrevent = true ;
+					break;
+				case 117 :	// u
+				case 85 :	// U
+					FCK.ExecuteNamedCommand( 'underline' ) ; bPrevent = true ;
+					break;
+				case 86 :	// V
+				case 118 :	// v
+					bPrevent = ( FCK.Status != FCK_STATUS_COMPLETE || !FCK.Events.FireEvent( "OnPaste" ) ) ;
+					break ;
+			}
+	
+			if ( bPrevent ) 
+			{
+				e.preventDefault() ;
+				e.stopPropagation() ;
 			}
 		}
 	}
@@ -129,6 +165,13 @@ FCK.Focus = function()
 
 FCK.SetHTML = function( html, forceWYSIWYG )
 {
+	// Firefox can't handle correctly the editing of the STRONG and EM tags. 
+	// We must replace them with B and I.
+	html = html.replace( FCKRegexLib.StrongOpener, '<b$1' ) ;
+	html = html.replace( FCKRegexLib.StrongCloser, '<\/b>' ) ;
+	html = html.replace( FCKRegexLib.EmOpener, '<i$1' ) ;
+	html = html.replace( FCKRegexLib.EmCloser, '<\/i>' ) ;
+
 	if ( forceWYSIWYG || FCK.EditMode == FCK_EDITMODE_WYSIWYG )
 	{
 		html = FCKConfig.ProtectedSource.Protect( html ) ;
@@ -143,7 +186,7 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 		{
 			// Add the <BASE> tag to the input HTML.
 			if ( FCK.TempBaseTag.length > 0 && !FCKRegexLib.HasBaseTag.test( html ) )
-				html = html.replace( FCKRegexLib.HeadCloser, FCK.TempBaseTag + '</head>' ) ;
+				html = html.replace( FCKRegexLib.HeadOpener, '$&' + FCK.TempBaseTag ) ;
 
 			html = html.replace( FCKRegexLib.HeadCloser, '<link href="' + FCKConfig.BasePath + 'css/fck_internal.css' + '" rel="stylesheet" type="text/css" _fcktemp="true" /></head>' ) ;
 
@@ -198,9 +241,8 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 				var sHtml =
 					'<title></title>' +
 					'<link href="' + FCKConfig.EditorAreaCSS + '" rel="stylesheet" type="text/css" />' +
-					'<link href="' + FCKConfig.BasePath + 'css/fck_internal.css' + '" rel="stylesheet" type="text/css" _fcktemp="true" />' ;
-
-				sHtml += FCK.TempBaseTag ;
+					'<link href="' + FCKConfig.BasePath + 'css/fck_internal.css' + '" rel="stylesheet" type="text/css" _fcktemp="true" />' +
+					FCK.TempBaseTag ;
 
 				this.EditorDocument.getElementsByTagName("HEAD")[0].innerHTML = sHtml ;
 
@@ -213,9 +255,9 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 //			FCK.EditorDocument.designMode = 'off' ;
 
 			if ( html.length == 0 )
-				FCK.EditorDocument.body.innerHTML = '<br _moz_editor_bogus_node="TRUE">' ;
+				FCK.EditorDocument.body.innerHTML = GECKO_BOGUS ;
 			else if ( FCKRegexLib.EmptyParagraph.test( html ) )
-				FCK.EditorDocument.body.innerHTML = html.replace( FCKRegexLib.TagBody, '><br _moz_editor_bogus_node="TRUE"><' ) ;
+				FCK.EditorDocument.body.innerHTML = html.replace( FCKRegexLib.TagBody, '>' + GECKO_BOGUS + '<' ) ;
 			else
 				FCK.EditorDocument.body.innerHTML = html ;
 			
