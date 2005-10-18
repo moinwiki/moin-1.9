@@ -698,7 +698,7 @@ def unzip_file(pagename, request):
                                 else:
                                     valid_name = True
                                     os.chmod(new_file, 0666 & config.umask)
-                                    _addLogEntry(request, 'ATTNEW', pagename, new_file)
+                                    _addLogEntry(request, 'ATTNEW', pagename, name)
 
                 if valid_name:
                     msg=_("Attachment '%(filename)s' unzipped.") % {'filename': filename}
