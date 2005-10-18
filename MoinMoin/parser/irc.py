@@ -32,7 +32,7 @@ class Parser:
             ((\[|\()?                      # Opening bracket for the timestamp (if it exists)
                 (?P<time>([\d]?\d[:.]?)+)  # Timestamp as one or more :/.-separated groups of 1 or 2 digits (if it exists)
             (\]|\))?\s+)?                  # Closing bracket for the timestamp (if it exists) plus whitespace
-             <\s*?(?P<nick>.*)\s*?>        # Nick
+            <\s*?(?P<nick>.*?)\s*?>        # Nick
             \s+                            # Space between the nick and message
             (?P<msg>.*)                    # Message
         """, re.VERBOSE + re.UNICODE)
