@@ -650,10 +650,10 @@ class User:
         @return: if page was subscribed
         """        
         if self._cfg.interwikiname:
-            interWikiName = self._interWikiName(pagename)
+            pagename = self._interWikiName(pagename)
         
-        if interWikiName not in self.subscribed_pages:
-            self.subscribed_pages.append(interWikiName)
+        if pagename not in self.subscribed_pages:
+            self.subscribed_pages.append(pagename)
             self.save()
             return True
         
