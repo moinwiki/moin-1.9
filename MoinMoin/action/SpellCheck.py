@@ -30,10 +30,11 @@ def _getWordsFiles(request):
     candidates = []
 
     # load a list of possible word files
-    localdict = os.path.join(request.cfg.moinmoin_dir, 'dict')
-    if os.path.isdir(localdict):
-        candidates.extend(map(
-            lambda f, d=localdict: os.path.join(d, f), os.listdir(localdict)))
+    for basedir in (request.cfg.moinmoin_dir, request.cfg.data_dir):
+        localdict = os.path.join(basedir, 'dict')
+        if os.path.isdir(localdict):
+            candidates.extend(map(
+                lambda f, d=localdict: os.path.join(d, f), os.listdir(localdict)))
 
     # validate candidate list (leave out directories!)
     wordsfiles = []
