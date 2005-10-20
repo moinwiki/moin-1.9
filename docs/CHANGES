@@ -165,6 +165,8 @@ Version moin--main--1.5:
     * Added thread count to SystemInfo macro.
     * Added Petr's newest patch against the DocBook code. It allows you to use macros (esp. the include macro) in DocBook pages in order to build larger documents.
     * Added a RenderAsDocbook action which redirects to the DocBook formatter.
+    * Added searching for wiki-local words lists under <data_dir>/dict/.
+      They are used additionally to the global lists in MoinMoin/dict/.
 
   International support:    
     * mail_from can be now a unicode name-address 
