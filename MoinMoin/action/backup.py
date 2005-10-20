@@ -88,20 +88,9 @@ def sendBackupForm(request, pagename):
  * To make a backup, just hit the [[GetText(Backup)]] button and save the file
    you get to a secure place.
 
-Please make sure your wiki configuration backup_* values are correct and complete:
+Please make sure your wiki configuration backup_* values are correct and complete.
 
 """))
-
-# does not work, why?
-#    request.write("""<p>\
-#backup_compression = %(backup_compression)s<br>
-#backup_include = %(backup_include)r<br>
-#backup_exclude = %(backup_exclude)r<br>
-#backup_users = %(backup_users)r<br>
-#backup_storage_dir = %(backup_storage_dir)s<br>
-#backup_restore_target_dir = %(backup_restore_target_dir)s<br>
-#</p>
-#""" % request.cfg.__dict__)
 
     request.write("""
 <form action="%(baseurl)s/%(pagename)s" method="POST" enctype="multipart/form-data">
