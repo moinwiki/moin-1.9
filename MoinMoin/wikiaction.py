@@ -527,7 +527,13 @@ def do_edit(pagename, request):
     if editor not in valideditors:
         editor = request.cfg.editor_default
     
-    editor = lasteditor = request.form.get('editor', [editor])[0]
+    editorparam = request.form.get('editor', [editor])[0]
+    if editorparam == "guipossible":
+        lasteditor = editor
+    elif editorparam == "textonly":
+        editor = lasteditor = 'text'
+    else:
+        editor = lasteditor = editorparam
 
     if request.cfg.editor_force:
         editor = request.cfg.editor_default

@@ -360,7 +360,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.request.write('''
 <input class="button" type="submit" name="button_save" value="%s">
 <input class="button" type="submit" name="button_preview" value="%s">
-<input class="button" type="submit" name="button_switch" value="%s">
+<input class="button" type="submit" name="button_switch" value="%s" id="switch2gui">
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="text">

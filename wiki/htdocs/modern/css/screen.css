@@ -231,6 +231,9 @@ textarea {
 
 .editbar a, .editbar a:visited {color: #0044B3;}
 
+#guieditlink { display: none; } // will be enabled by JS (if we have JS)
+#switch2gui { visibility: hidden; } // will be enabled by JS (if we have JS)
+
 #message {
 	clear: both;
 	margin: 0;

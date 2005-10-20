@@ -1246,6 +1246,8 @@ def send_title(request, text, **keywords):
         '<link rel="Help" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_help_formatting)),
                   ])
 
+    output.append('<script type="text/javascript" src="%s/common/js/common.js"></script>\n' % request.cfg.url_prefix)
+    
     output.append("</head>\n")
     request.write(''.join(output))
     output = []
