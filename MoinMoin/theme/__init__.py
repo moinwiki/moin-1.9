@@ -1031,13 +1031,14 @@ actionsMenuInit('%(label)s');
 
         if editor == 'freechoice':
             return [wikiutil.link_tag(self.request, params + '&editor=text', 
-                                      _('Edit (Text)', formatted=False)),
+                                      _('Edit (Text)', formatted=False), attrs='id="texteditlink"'),
                     wikiutil.link_tag(self.request, params + '&editor=gui', 
-                                      _('Edit (GUI)', formatted=False)),]
+                                      _('Edit (GUI)', formatted=False), attrs='id="guieditlink"'),]
         else: # editor == 'theonepreferred'.
             # unspecified editor will use the user prefered edtior.
-            return [wikiutil.link_tag(self.request, params, 
-                                      _('Edit', formatted=False)),]
+            # 'textonly' will be upgraded dynamically to 'guipossible' by JS
+            return [wikiutil.link_tag(self.request, params + '&editor=textonly',
+                                      _('Edit', formatted=False), attrs='id="editlink"'),]
 
     def disabledEdit(self):
         """ Return a disabled edit link """
