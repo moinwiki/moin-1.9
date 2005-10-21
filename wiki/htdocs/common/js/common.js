@@ -43,10 +43,19 @@ function update_ui() {
 }
 
 function onload() {
-    update_ui();    
+    update_ui()
     // countdown is available when editing
     try {countdown()} catch (e) {}
 }
 
+function beforeunload(evt) {
+    // confirmleaving is available when editing
+    return confirmleaving()
+}
+
 // Initialize after loading the page
-window.onload = onload;
+window.onload = onload
+
+// Catch before unloading the page
+window.onbeforeunload = beforeunload
+
