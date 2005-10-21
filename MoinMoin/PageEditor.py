@@ -321,7 +321,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
         #self.request.write(_('[current page size \'\'\'%(size)d\'\'\' bytes]') % {'size': self.size()})
         
         # send form
-        self.request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
+        self.request.write('<form id="editor" method="post" action="%s/%s#preview" onSubmit="flgChange = false;">' % (
             self.request.getScriptname(),
             wikiutil.quoteWikinameURL(self.page_name),
             ))
@@ -343,7 +343,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
 
         # button bar
         button_spellcheck = (SpellCheck and
-            '<input class="button" type="submit" name="button_spellcheck" value="%s">'
+            '<input class="button" type="submit" name="button_spellcheck" value="%s" onClick="flgChange = false;">'
                 % _('Check Spelling')) or ''
 
         save_button_text = _('Save Changes')
@@ -359,8 +359,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             }, '</em></p>')
 
         self.request.write('''
-<input class="button" type="submit" name="button_save" value="%s">
-<input class="button" type="submit" name="button_preview" value="%s">
+<input class="button" type="submit" name="button_save" value="%s" onClick="flgChange = false;">
+<input class="button" type="submit" name="button_preview" value="%s" onClick="flgChange = false;">
 <input id="switch2gui" style="display: none;" class="button" type="submit"     
     name="button_switch" value="%s">
 %s
@@ -375,9 +375,21 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         # language into meta file.
         lang = self.language or self.request.cfg.default_lang
 
+        # to prevent moving away from the page without saving it
+        self.request.write(u'''\
+<script type="text/javascript">
+    var flgChange = false;
+    function confirmleaving() {
+        if ( flgChange )
+            return "%s";
+    }
+</script>
+''' % _("Your changes are not saved!"))
+
         self.request.write(
             u'''\
-<textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d">\
+<textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d"
+          onChange="flgChange = true;" onKeyPress="flgChange = true;">\
 %(text)s\
 </textarea>''' %   {
             'lang': lang,
@@ -388,7 +400,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         self.request.write("<p>")
         self.request.write(_("Comment:"),
-            ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="80">' % (
+            ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="80"'
+            ' onChange="flgChange = true;" onKeyPress="flgChange = true;">' % (
                 wikiutil.escape(kw.get('comment', ''), 1), ))
         self.request.write("</p>")
 
