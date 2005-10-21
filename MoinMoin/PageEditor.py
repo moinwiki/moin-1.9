@@ -25,6 +25,8 @@ import MoinMoin.util.datetime
 
 # This code is internal to allow I18N, else we'd use a .js file;
 # we avoid the "--" operator to make this XHTML happy!
+# TODO: move to external js file, send the translations when we load or
+# set the them as global variables.
 _countdown_js = """
 <script type="text/javascript">
 var timeout_min = %(lock_timeout)s;
@@ -70,7 +72,7 @@ function countdown() {
     counter -= step
 
     // Set timer for next update
-    setTimeout("countdown()", delay)
+    setTimeout("countdown()", delay);    
 }
 </script>
 """
@@ -274,7 +276,6 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
             title % {'pagename': self.split_title(self.request),},
             page=self,
             pagename=self.page_name, msg=status,
-            body_onload=self.lock.locktype and 'countdown()' or '', # broken / bug in Mozilla 1.5, when using #preview
             html_head=self.lock.locktype and (
                 _countdown_js % {
                      'lock_timeout': lock_timeout,
@@ -360,7 +361,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.request.write('''
 <input class="button" type="submit" name="button_save" value="%s">
 <input class="button" type="submit" name="button_preview" value="%s">
-<input class="button" type="submit" name="button_switch" value="%s" id="switch2gui">
+<input id="switch2gui" style="display: none;" class="button" type="submit"     
+    name="button_switch" value="%s">
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="text">
