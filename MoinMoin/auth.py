@@ -7,7 +7,7 @@
 """
 
 import Cookie
-from MoinMoin.user import User
+from MoinMoin import user
 
 def moin_cookie(request):
     """ authenticate via the MOIN_ID cookie """
@@ -17,10 +17,9 @@ def moin_cookie(request):
         # ignore invalid cookies, else user can't relogin
         cookie = None
     if cookie and cookie.has_key('MOIN_ID'):
-        user = User(request, id=cookie['MOIN_ID'].value)
-        if user.valid:
-            return user
-
+        u = user.User(request, id=cookie['MOIN_ID'].value)
+        if u.valid:
+            return u
     return None
 
 
@@ -36,12 +35,12 @@ def moin_cookie(request):
 def http(request):
     """ authenticate via http basic/digest/ntlm auth """
     from MoinMoin.request import RequestTwisted
-    user = None
+    u = None
     # check if we are running Twisted
     if isinstance(request, RequestTwisted):
         username = request.twistd.getUser()
         password = request.twistd.getPassword()
-        user = User(request, auth_username=username, password=password)
+        u = user.User(request, auth_username=username, password=password)
 
     else:
         env = request.env
@@ -57,13 +56,52 @@ def http(request):
                 # this "normalizes" the login name from {meier, Meier, MEIER} to Meier
                 # put a comment sign in front of next line if you don't want that:
                 username = username.title()
-            user = User(request, auth_username=username)
+            u = user.User(request, auth_username=username)
 
     # XXX create (user? maybe should not happen here, but one layer higher to be
     # common for all auth methods
 
-    if user and user.valid:
-        return user
+    if u and u.valid:
+        return u
+    else:
+        return None
+
+def sslclientcert(request):
+    """ authenticate via SSL client certificate """
+    from MoinMoin.request import RequestTwisted
+    u = None
+    # check if we are running Twisted
+    if isinstance(request, RequestTwisted):
+        return u # not supported if we run twisted
+        # Addendum: this seems to need quite some twisted insight and coding.
+        # A pointer i got on #twisted: divmod's vertex.sslverify
+        # If you really need this, feel free to implement and test it and
+        # submit a patch if it works.
+    else:
+        env = request.env
+        if env.get('SSL_CLIENT_VERIFY', 'FAILURE') == 'SUCCESS':
+            # if we only want to accept some specific CA, do a check like:
+            # if env.get('SSL_CLIENT_I_DN_OU') == "http://www.cacert.org"
+            email = env.get('SSL_CLIENT_S_DN_Email', '')
+            email_lower = email.lower()
+            commonname = env.get('SSL_CLIENT_S_DN_CN', '')
+            commonname_lower = commonname.lower()
+            if email_lower or commonname_lower:
+                for uid in user.getUserList():
+                    u = user.User(request, uid)
+                    if email_lower and u.email.lower() == email_lower:
+                        break
+                    if commonname_lower and u.name.lower() == commonname_lower:
+                        break
+                else:
+                    u = None
+                #u = user.User(request, auth_username=username)
+
+    # XXX create (user? maybe should not happen here, but one layer higher to be
+    # common for all auth methods
+
+    if u and u.valid:
+        return u
     else:
         return None
 
@@ -89,17 +127,17 @@ def interwiki(request):
             # show error message
             return None
         
-        user = User(request, name=username)
+        u = user.User(request, name=username)
         for key, value in account_data.iteritems():
             if key not in ["may", "id", "valid", "trusted"
                            "auth_username",
                            "name", "aliasname",
                            "enc_passwd"]:
-                setattr(user, key, value)
-        user.save()
-        request.user = user
+                setattr(u, key, value)
+        u.save()
+        request.user = u
         request.setCookie()
-        return user
+        return u
     else:
         pass
         # XXX redirect to homewiki
