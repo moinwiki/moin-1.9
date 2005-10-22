@@ -23,39 +23,86 @@ function can_use_gui_editor() {
     }
 }
 
-function update_ui() {
-    if (can_use_gui_editor()) {
-        guieditlink = document.getElementById("guieditlink");
-        if (guieditlink) {
-            guieditlink.style.display = 'inline';
-        }
-        editlink = document.getElementById("editlink")
-        if (editlink) {
-            href = editlink.href.replace('editor=textonly',
-                                         'editor=guipossible');
-            editlink.href = href;
-        }
-        switch2gui = document.getElementById('switch2gui')
-        if (switch2gui) {
-            switch2gui.style.display = 'inline';
-        }
+
+function update_edit_links() {
+    // Update editlink according if if the browser is compatible
+    if (can_use_gui_editor() == false) return;
+
+    var editlinks = document.getElementsByName("editlink");
+    for (i = 0; i < editlinks.length; i++) {
+        var link = editlinks[i];
+        href = link.href.replace('editor=textonly','editor=guipossible');
+        link.href = href;
     }
 }
 
-function onload() {
-    update_ui()
-    // countdown is available when editing
-    try {countdown()} catch (e) {}
+
+function add_gui_editor_links() {
+    // Add gui editor link after the text editor link
+    
+    // If the variable is not set or browser is not compatible, exit
+    try {gui_editor_link_href} catch (e) {return}
+    if (can_use_gui_editor() == false) return;
+    
+    var all = document.getElementsByName('texteditlink');
+    for (i = 0; i < all.length; i++) {
+        var textEditorLink = all[i];
+        // Create a list item with a link
+        var guiEditorLink = document.createElement('a');
+        guiEditorLink.href = gui_editor_link_href;
+        var text = document.createTextNode(gui_editor_link_text);
+        guiEditorLink.appendChild(text);
+        var listItem = document.createElement('li')
+        listItem.appendChild(guiEditorLink);
+        // Insert in the editbar
+        var editbar = textEditorLink.parentNode.parentNode
+        var nextListItem = textEditorLink.parentNode.nextSibling;
+        editbar.insertBefore(listItem, nextListItem);
+    }
+}
+  
+
+function show_switch2gui() {
+    // Show switch to gui editor link if the browser is compatible
+    if (can_use_gui_editor() == false) return;
+    
+    var switch2gui = document.getElementById('switch2gui')
+    if (switch2gui) {
+        switch2gui.style.display = 'inline';
+    }
 }
 
-function beforeunload(evt) {
-    // confirmleaving is available when editing
-    return confirmleaving()
+
+function load() {
+    // Do not name this "onload", it does not work with IE :-)
+    // TODO: create separate onload for each type of view and set the
+    // correct function name in the html. 
+    // e.g <body onlod='editor_onload()'>
+    
+    // Page view stuff
+    update_edit_links();
+    add_gui_editor_links();
+    
+    // Editor stuff
+    show_switch2gui();
+    // countdown is available when editing
+    try {countdown()}
+    catch (e) {}
 }
+
+
+function before_unload(evt) {
+    // TODO: Better to set this in the editor html, as it does not make
+    // sense elsehwere.
+    // confirmleaving is available when editing
+    try {return confirmleaving();}
+    catch (e) {}
+}
+
 
 // Initialize after loading the page
-window.onload = onload
+window.onload = load;
 
 // Catch before unloading the page
-window.onbeforeunload = beforeunload
+window.onbeforeunload = before_unload;
 

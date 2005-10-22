@@ -801,11 +801,18 @@ function actionsMenuInit(title) {
         """
         html = [
             u'<title>%(title)s - %(sitename)s</title>' % d,
+            self.externalScript('common'),
             self.headscript(d), # Should move to separate .js file
+            self.guiEditorScript(d),
             self.html_stylesheets(d),
             self.rsslink(),
             ]
         return '\n'.join(html)
+
+    def externalScript(self, name):
+        """ Format external script html """
+        src = '%s/common/js/%s.js' % (self.request.cfg.url_prefix, name)
+        return '<script type="text/javascript" src="%s"></script>' % src
 
     def credits(self, d, **keywords):
         """ Create credits html from credits list """
@@ -994,20 +1001,17 @@ actionsMenuInit('%(label)s');
 
     def editbarItems(self, page):
         """ Return list of items to show on the editbar 
-        
+
         This is separate method to make it easy to customize the
         edtibar in sub classes.
         """
-        links = []
-        links.append(self.parentLink(page))
-        links.extend(self.editLinks(page))
-        links.append(self.infoLink(page))
-        links.append(self.subscribeLink(page))
-        links.append(self.quicklinkLink(page))
-        links.append(self.attachmentsLink(page))
-        links.append(self.actionsMenu(page))
-
-        return links
+        return [self.parentLink(page),
+                self.editorLink(page),
+                self.infoLink(page),
+                self.subscribeLink(page),
+                self.quicklinkLink(page),
+                self.attachmentsLink(page),
+                self.actionsMenu(page),]
 
     def parentLink(self, page):
         """ Return link to parent page """
@@ -1017,28 +1021,61 @@ actionsMenuInit('%(label)s');
             return ''
         return parent.link_to(self.request, _("Parent Page", formatted=False))
 
-    def editLinks(self, page):
-        """ Return list of links to page editors """
+    def editorLink(self, page):
+        """ Return a link to the editor 
+        
+        If the user can't edit, return a disabled edit link.
+        
+        If the user want to show both editors, it will display "Edit
+        (Text)", otherwise as "Edit".
+        """
         if not (page.isWritable() and
                 self.request.user.may.write(page.page_name)):
-            return [self.disabledEdit()]
+            return self.disabledEdit()
         
         _ = self.request.getText
+        params = (wikiutil.quoteWikinameURL(page.page_name) +
+                  '?action=edit&amp;editor=')
+
+        if self.showBothEditLinks():
+            text = _('Edit (Text)', formatted=False)
+            params = params + 'text'
+            attrs = 'name="texteditlink"'
+        else:
+            text = _('Edit', formatted=False)
+            # 'textonly' will be upgraded dynamically to 'guipossible' by JS
+            params = params + 'textonly'
+            attrs='name="editlink"'
+        
+        return wikiutil.link_tag(self.request, params, text, attrs=attrs)
+
+    def showBothEditLinks(self):
+        """ Return True if both edit links should be displayed """
         editor = self.request.user.editor_ui
         if editor == '<default>':
             editor = self.request.cfg.editor_ui
-        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=edit'
+        return editor == 'freechoice'
 
-        if editor == 'freechoice':
-            return [wikiutil.link_tag(self.request, params + '&editor=text', 
-                                      _('Edit (Text)', formatted=False), attrs='id="texteditlink"'),
-                    wikiutil.link_tag(self.request, params + '&editor=gui', 
-                                      _('Edit (GUI)', formatted=False), attrs='id="guieditlink"'),]
-        else: # editor == 'theonepreferred'.
-            # unspecified editor will use the user prefered edtior.
-            # 'textonly' will be upgraded dynamically to 'guipossible' by JS
-            return [wikiutil.link_tag(self.request, params + '&editor=textonly',
-                                      _('Edit', formatted=False), attrs='id="editlink"'),]
+    def guiEditorScript(self, d):
+        """ Return a script that set the gui editor link variables
+        
+        The link will be created only when javascript is enabled and
+        the browser is compatible with the editor.
+        """
+        page = d['page']
+        if not (page.isWritable() and
+                self.request.user.may.write(page.page_name) and
+                self.showBothEditLinks()):
+            return ''
+
+        _ = self.request.getText
+        return """\
+<script type="text/javascript">
+var gui_editor_link_href = "%(url)s?action=edit&editor=gui";
+var gui_editor_link_text = "%(text)s";
+</script>        
+""" % {'url': wikiutil.quoteWikinameURL(page.page_name),
+       'text': _('Edit (GUI)', formatted=False),}
 
     def disabledEdit(self):
         """ Return a disabled edit link """
