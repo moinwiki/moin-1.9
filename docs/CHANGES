@@ -73,6 +73,9 @@ Version moin--main--1.5:
            auth = [http, moin_cookie]
      * cfg.auth_http_enabled was removed, please use cfg.auth instead.
      * http auth now supports "Negotiate" scheme, too
+     * Added sslclientcert auth method (Apache: untested, Twisted: not
+       implemented, IIS: no idea). See MoinMoin/auth.py for details.
+       Submit a patch if you have improvements.
      * cfg.superuser is a list of unicode usernames. Currently it is not used
        by anything, but it will be used e.g. to enable software installation
        via the wiki.
