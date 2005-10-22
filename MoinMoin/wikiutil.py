@@ -1196,6 +1196,7 @@ def send_title(request, text, **keywords):
         ''.join(user_head),
         keywords.get('html_head', ''),
         request.theme.html_head({
+            'page': page,
             'title': escape(text),
             'sitename': escape(request.cfg.html_pagetitle or request.cfg.sitename),
             'print_mode': keywords.get('print_mode', False),
@@ -1245,8 +1246,6 @@ def send_title(request, text, **keywords):
         '<link rel="Glossary" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_word_index)),
         '<link rel="Help" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_help_formatting)),
                   ])
-
-    output.append('<script type="text/javascript" src="%s/common/js/common.js"></script>\n' % request.cfg.url_prefix)
     
     output.append("</head>\n")
     request.write(''.join(output))
