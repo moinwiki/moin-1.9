@@ -568,6 +568,8 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''有効''',
 '''Lupy search''':
 '''Lupyによる検索''',
+'''Active threads''':
+'''アクティブなスレッド''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''検索キーワード{{{"%s"}}}が適切ではありません。他のキーワードでやり直してください。''',
 '''ERROR in regex \'%s\'''':
@@ -596,6 +598,10 @@ Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link,
 since this is subject to change and can break easily.''':
 '''添付ファイルを参照するには、(下のファイル一覧にあるように)\'\'\'{{{attachment:filename}}}\'\'\'と記述します。
 {{{[get]}}}リンクのURLは変更される可能性が高いので、利用しないでください。''',
+'''unzip''':
+'''unzip''',
+'''install''':
+'''インストール''',
 '''No attachments stored for %(pagename)s''':
 '''%(pagename)sに添付ファイルはありません。''',
 '''Edit drawing''':
@@ -619,15 +625,19 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''File attachments are not allowed in this wiki!''':
 '''このwikiではファイルの添付はできません。''',
 '''You are not allowed to save a drawing on this page.''':
-'''drawingを保存する権限がありません。''',
+'''このページにdrawingを保存する権限がありません。''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
 '''ファイルの中身がありません。ファイル名からASCII以外の文字を削除して、もう一度試してください。''',
 '''You are not allowed to delete attachments on this page.''':
-'''添付ファイルを削除する権限がありません。''',
+'''このページの添付ファイルを削除する権限がありません。''',
 '''You are not allowed to get attachments from this page.''':
-'''添付ファイルをダウンロードする権限がありません。''',
+'''このページの添付ファイルをダウンロードする権限がありません。''',
+'''You are not allowed to unzip attachments of this page.''':
+'''このページの添付ファイルをunzipする権限がありません。''',
+'''You are not allowed to install files.''':
+'''ファイルをインストールする権限がありません。''',
 '''You are not allowed to view attachments of this page.''':
-'''添付ファイルを見る権限がありません。''',
+'''このページの添付ファイルを見る権限がありません。''',
 '''Unsupported upload action: %s''':
 '''サポートされていないアップロードアクション: %s''',
 '''Attachments for "%(pagename)s"''':
@@ -638,8 +648,28 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''添付ファイル\'%(target)s\'(サーバでのファイル名\'%(filename)s\'、%(bytes)d)を保存しました。''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''添付ファイル\'%(filename)s\'を削除しました。''',
+'''Attachment \'%(filename)s\' installed.''':
+'''添付ファイル\'%(filename)s\'をインストールしました。''',
+'''Installation of \'%(filename)s\' failed.''':
+'''%(filename)s\'のインストールに失敗しました。''',
+'''The file %s is not a MoinMoin package file.''':
+'''%sはMoinMoinのパッケージファイルではありません。''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''添付ファイル\'%(filename)s\'をunzipしました。''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''添付ファイル\'%(filename)s\'はunzipされませんでした。原因はファイルが大きすぎる、すでにファイルが存在するなどが考えられます。''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''添付ファイル\'%(filename)s\'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。''',
+'''The file %(target)s is not a .zip file.''':
+'''%(target)sはzipファイルではありません。''',
 '''Attachment \'%(filename)s\'''':
 '''添付ファイル \'%(filename)s\'''',
+'''Package script:''':
+'''パッケージスクリプト:''',
+'''File Name''':
+'''ファイル名''',
+'''Modified''':
+'''更新日付''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''ファイルタイプが不明なため、添付ファイルをインラインで表示できません。''',
 '''attachment:%(filename)s of %(pagename)s''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2004-11-29 05:38+0800\n"
 "Last-Translator: Lin Zhemin <ljm@ljm.idv.tw>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -918,6 +918,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "{{{\"%s\"}}} 找到太多東西, 請輸入更精確的關鍵字!"
@@ -972,6 +975,12 @@ msgstr ""
 "'''請不要'''用 {{{[下載]}}} 指向的 URL, \n"
 "因為那個位置可能會變, 到時候就不能用了.</p>"
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)s 沒有附件"
@@ -1025,6 +1034,14 @@ msgstr "本頁附件不能刪除."
 msgid "You are not allowed to get attachments from this page."
 msgstr "你不能下載本頁附件."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "你不能觀看本頁附件."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "你不能編輯本頁."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "你不能觀看本頁附件."
 
@@ -1051,9 +1068,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "附件 '%(filename)s' 已刪除."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "附件 '%(filename)s' 已刪除."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "圖片 '%(filename)s' 存好了."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "附件 '%(filename)s' 已刪除."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "附件 '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "檔名"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "不明的檔案類型, 不能內嵌在內文中."

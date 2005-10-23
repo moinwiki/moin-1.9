@@ -567,6 +567,8 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Habilitado''',
 '''Lupy search''':
 '''Busca com Lupy''',
+'''Active threads''':
+'''Ativar threads''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Por favor, use um termo mais preciso ao invés de {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -597,6 +599,10 @@ since this is subject to change and can break easily.''':
 como mostrado abaixo na lista de arquivos. 
 \'\'\'NÃO\'\'\' use a URL do link {{{[get]}}}, 
 já que a mesma está sujeita a alterações, e pode facilmente ser inutilizada.''',
+'''unzip''':
+'''não-zipado''',
+'''install''':
+'''instalar''',
 '''No attachments stored for %(pagename)s''':
 '''Nenhum anexo armazenado para %(pagename)s''',
 '''Edit drawing''':
@@ -629,6 +635,10 @@ Por outro lado, se "Renomear como" for deixado em branco, o nome original do arq
 '''Você não tem permissão para remover arquivos anexados a esta página.''',
 '''You are not allowed to get attachments from this page.''':
 '''Você não tem permissão para acessar arquivos anexados a esta página.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Você não tem permissão para anexar arquivos não-zipados a esta página.''',
+'''You are not allowed to install files.''':
+'''Você não tem permissão para adicionar arquivos!''',
 '''You are not allowed to view attachments of this page.''':
 '''Você não tem permissão para ver arquivos anexados a esta página.''',
 '''Unsupported upload action: %s''':
@@ -641,8 +651,28 @@ Por outro lado, se "Renomear como" for deixado em branco, o nome original do arq
 '''Anexo \'%(target)s\' (remote name \'%(filename)s\') com %(bytes)d bytes salvo.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Anexo \'%(filename)s\' apagado.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Anexo \'%(filename)s\' adicionado.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Instalação de \'%(filename)s\' falhou.''',
+'''The file %s is not a MoinMoin package file.''':
+'''O arquivo %s não é um arquivo de pacote do MoinMoin.''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Anexo \'%(filename)s\' não-zipado.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Anexo \'%(filename)s\' não descompactado porque o arquivo é muito grande, somente arquivos .zip que já existam ou que estejam em pastas.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Anexo \'%(filename)s\' não pode ser descompactado porque os arquivos resultantesseriam muito grandes (%(space)d kB missing).''',
+'''The file \'%(target)\' is not a .zip file.''':
+'''O arquivo \'%(target)\' não é um arquivo .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Arquivo anexado \'%(filename)s\'''',
+'''Package script:''':
+'''Script do pacote:''',
+'''File Name''':
+'''Nome do arquivo''',
+'''Modified''':
+'''Modificado''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Tipo de arquivo desconhecido. Não é possível mostrar o anexo diretamente na página.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -762,7 +792,7 @@ Tente um nome diferente.''',
 '''No wanted pages in this wiki.''':
 '''Nenhuma página solicitada neste wiki.''',
 '''**Maximum number of allowed includes exceeded**''':
-'''**O número máximo de inserções permitidas foi superado**''',
+'''**O número máximo de inserções permitidas foi excedida**''',
 '''**Could not find the referenced page: %s**''':
 '''**Não foi possível encontrar a página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':

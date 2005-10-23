@@ -88,6 +88,8 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 '''Vorschau anzeigen''',
 '''GUI Mode''':
 '''GUI-Modus''',
+'''Your changes are not saved!''':
+'''Ihre Änderungen sind nicht gesichert!''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -478,24 +480,26 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Seitenzugriffe und Änderungen''',
 '''You are not allowed to revert this page!''':
 '''Sie dürfen diese Seite nicht restaurieren!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in der oberen rechten Ecke, um ein Profil anzulegen.''',
+'''You must login to add a quicklink.''':
+'''Sie müssen sich anmelden, um einen Expressverweis hinzuzufügen.''',
 '''Your quicklink to this page has been removed.''':
 '''Ihr Expressverweis für diese Seite wurde entfernt.''',
 '''A quicklink to this page has been added for you.''':
 '''Ein Expressverweis für diese Seite wurde hinzugefügt.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet. Bitte kontaktieren Sie den Eigentümer des Wiki, der dann entweder die Mailfunktionen einschalten oder das "Abonnieren"-Symbol entfernen kann.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Sie haben keine E-Mail-Adresse in Ihrem Profil eingegeben. Wählen Sie Ihren Namen (BenutzerEinstellungen) in der rechten oberen Ecke an und geben Sie eine gültige E-Mail-Adresse ein.''',
+'''This wiki is not enabled for mail processing.''':
+'''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.''',
+'''You must log in to use subscribtions.''':
+'''Sie müssen sich anmelden, um Abonnements verwenden zu können.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, um Abonnements benutzen zu können.''',
 '''Your subscribtion to this page has been removed.''':
 '''Ihr Abonnements für diese Seite wurde entfernt.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kann nicht Abonnement mit regulärem Ausdruck entfernen.''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der Abo-Liste der persönlichen Einstellungen entfernt werden.''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Editieren Sie die regulären Ausdrücke für Abonnements in Ihren BenutzerEinstellungen.''',
 '''You have been subscribed to this page.''':
 '''Die Seite wurde zur Liste abonnierter Seiten hinzugefügt.''',
 '''Charts are not available!''':
@@ -566,6 +570,8 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Aktiviert''',
 '''Lupy search''':
 '''Lupy-Suche''',
+'''Active threads''':
+'''Aktive Threads''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Bitte verwenden Sie einen selektiveren Suchbegriff anstatt {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -597,6 +603,10 @@ wie \'\'\'{{{attachment:filename}}}\'\'\' benutzt werden,
 wie sie auch in der folgenden Liste der Dateien auftaucht. 
 Es sollte \'\'\'NIEMALS\'\'\' die URL des Verweises {{{[get]}}} kopiert werden, 
 da sich diese jederzeit ändern kann und damit der Verweis auf die Datei bricht.''',
+'''unzip''':
+'''auspacken''',
+'''install''':
+'''installieren''',
 '''No attachments stored for %(pagename)s''':
 '''Es wurden keine Anhänge für die Seite %(pagename)s gespeichert.''',
 '''Edit drawing''':
@@ -629,6 +639,10 @@ Ansonsten kann das Feld "Speichern unter..." leer bleiben und es wird der origin
 '''Sie dürfen keine Anhänge dieser Seite löschen!''',
 '''You are not allowed to get attachments from this page.''':
 '''Sie dürfen auf keine Anhänge dieser Seite zugreifen.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Sie dürfen keine Anhänge dieser Seite auspacken.''',
+'''You are not allowed to install files.''':
+'''Sie dürfen keine Dateien installieren.''',
 '''You are not allowed to view attachments of this page.''':
 '''Sie dürfen keine Anhänge dieser Seite ansehen.''',
 '''Unsupported upload action: %s''':
@@ -641,8 +655,30 @@ Ansonsten kann das Feld "Speichern unter..." leer bleiben und es wird der origin
 '''Dateianhang \'%(target)s\' (ursprünglicher Name \'%(filename)s\') mit %(bytes)d Bytes gesichert.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Dateianhang \'%(filename)s\' wurde gelöscht.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Dateianhang \'%(filename)s\' wurde installiert.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Installation von \'%(filename)s\' fehlgeschlagen.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Die Datei %s ist keine MoinMoin-Paket-Datei.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Dateianhang \'%(filename)s\' konnte nicht ausgepackt werden, weil die ausgepackten Dateien zu groß wären (%(space)d kB fehlen).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Dateianhang \'%(filename)s\' konnte nicht ausgepackt werden, weil die ausgepackten Dateien zu viele wären (%(count)d fehlen).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Dateianhang \'%(filename)s\' wurde ausgepackt.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Dateianhang \'%(filename)s\' wurde nicht ausgepackt, weil die Datei zu groß sind, weil nur .zip-Dateien erlaubt sind, weil sie bereits existieren oder weil Dateien in Ordnern enthalten sind.''',
+'''The file %(target)s is not a .zip file.''':
+'''Die Datei %(target)s ist keine .zip-Datei.''',
 '''Attachment \'%(filename)s\'''':
 '''Dateianhang \'%(filename)s\'''',
+'''Package script:''':
+'''Paket-Skript:''',
+'''File Name''':
+'''Dateiname''',
+'''Modified''':
+'''Modifiziert''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Dieser Anhang besitzt einen unbekannten Dateityp und kann deshalb nicht direkt angezeigt werden.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -760,10 +796,6 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''XML-Export des Wiki-Inhalts herunter laden''',
 '''No wanted pages in this wiki.''':
 '''Es existieren keine gewünschten Seiten in diesem Wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Maximale Anzahl erlaubter Includesi überschritten**''',
-'''**Could not find the referenced page: %s**''':
-'''**Konnte die referenzierte Seite nicht finden: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Erwartete "%(wanted)s" nach "%(key)s", bekam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -838,8 +870,6 @@ rot=Änderungen''',
 '''Titel''',
 '''Search''':
 '''Suche''',
-'''Quicklink''':
-'''Expressverweis''',
 '''More Actions:''':
 '''Weitere Aktionen:''',
 '''------------''':
@@ -848,8 +878,6 @@ rot=Änderungen''',
 '''Rohform''',
 '''Delete Cache''':
 '''Cache löschen''',
-'''Attachments''':
-'''Dateianhänge''',
 '''Delete Page''':
 '''Seite löschen''',
 '''Like Pages''':
@@ -866,6 +894,12 @@ rot=Änderungen''',
 '''Editieren (GUI)''',
 '''Immutable Page''':
 '''Geschützte Seite''',
+'''Remove Link''':
+'''Verweis entfernen''',
+'''Add Link''':
+'''Verweis hinzufügen''',
+'''Attachments''':
+'''Dateianhänge''',
 '''Show %s days.''':
 '''%s Tage anzeigen.''',
 '''EditText''':

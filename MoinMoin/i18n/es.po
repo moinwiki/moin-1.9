@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2004-11-21 00:00+0000\n"
 "Last-Translator: Mauricio Hernandez Z <mhz.chile@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -972,6 +972,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Por favor, usa un término de búsqueda más específico que {{{\"%s\"}}}"
@@ -1028,6 +1031,12 @@ msgstr ""
 "como se muestra abajo en la lista de archivos. \n"
 "'''NO''' uses la URL del enlace {{{[get]}}}, \n"
 "ya que puede cambiar y fácilmente dejar de funcionar."
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1086,6 +1095,14 @@ msgstr "No tienes permisos para borrar adjuntos en esta página."
 msgid "You are not allowed to get attachments from this page."
 msgstr "No tienes permisos para descargar adjuntos de esta página."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "No tienes permisos para ver adjuntos de esta página."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "No tienes permisos para editar esta página."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "No tienes permisos para ver adjuntos de esta página."
 
@@ -1113,9 +1130,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Adjunto eliminado '%(filename)s'."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Adjunto eliminado '%(filename)s'."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Dibujo '%(filename)s' guardado."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Adjunto eliminado '%(filename)s'."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Adjunto '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Nombre de Archivo"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Tipo de archivo desconocido, no se puede mostrar este adjunto."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-10-04 19:01+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -950,6 +950,9 @@ msgstr "Aktiverad"
 msgid "Lupy search"
 msgstr "Lupy-sökning"
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Var god använd en mer specifik sökterm än {{{\"%s\"}}}"
@@ -1007,6 +1010,12 @@ msgstr ""
 "Använd '''INTE''' {{{[get]}}} länkens URL, \n"
 "eftersom den inte är permanent och kan ändras."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Inga bifogade filer på %(pagename)s"
@@ -1061,6 +1070,14 @@ msgstr "Du har inte tillåtelse att ta bort bilagor från den här sidan."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du har inte tillåtelse att hämta bilagor från den här sidan."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "Du har inte tillåtelse att redigera den här sidan."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
 
@@ -1088,9 +1105,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Bifogad fil '%(filename)s' raderad."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Bifogad fil '%(filename)s' raderad."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Teckningen '%(filename)s' sparad."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Bifogad fil '%(filename)s' raderad."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Bilaga \"%(filename)s\""
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Filnamn"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Okänd filtyp, kan inte visa bifogad fil direkt."

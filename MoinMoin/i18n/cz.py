@@ -567,6 +567,10 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Nemáte dostatečná práva ke smazání přílohy u této stránky!''',
 '''You are not allowed to get attachments from this page.''':
 '''Nemáte dostatečná práva k získání přílohy na této stránky.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Nemáte dovoleno rozbalovat přílohy na této stránce.''',
+'''You are not allowed to install files.''':
+'''Nemáte dovoleno instalovat soubory.''',
 '''You are not allowed to view attachments of this page.''':
 '''Nemáte dostatečná práva k prohlížení příloh na této stránce.''',
 '''Unsupported upload action: %s''':
@@ -579,8 +583,16 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Příloha \'%(target)s\' (vzdálené jméno \'%(filename)s\') s %(bytes)d byty uložena.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Příloha \'%(filename)s\' smazána.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Příloha \'%(filename)s\' úspěšně instalována.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Instalace \'%(filename)s\' selhala.''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Příloha \'%(filename)s\' rozbalena.''',
 '''Attachment \'%(filename)s\'''':
 '''Příloha \'%(filename)s\'''',
+'''File Name''':
+'''JmenoSouboru''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Neznámy typ souboru, nemohu tuto přílohu přímo zobrazit.''',
 '''attachment:%(filename)s of %(pagename)s''':

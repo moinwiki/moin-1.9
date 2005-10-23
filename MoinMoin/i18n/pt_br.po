@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
-"PO-Revision-Date: 2005-09-28 15:00 (UTC)\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"PO-Revision-Date: 2005-10-20 12:35 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Translator: Eduardo Luis Isatto <eduardo.isatto@gmail.com>\n"
 "Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
-"Translator:  <cerdiogenes@yahoo.com.br>\n"
+"Translator: <cerdiogenes@yahoo.com.br>\n"
 "X-Direction: ltr\n"
 "X-Language: Português do Brasil\n"
 "X-Language-in-English: Brazillian Portuguese\n"
@@ -954,6 +954,9 @@ msgstr "Habilitado"
 msgid "Lupy search"
 msgstr "Busca com Lupy"
 
+msgid "Active threads"
+msgstr "Ativar threads"
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Por favor, use um termo mais preciso ao invés de {{{\"%s\"}}}"
@@ -1011,6 +1014,12 @@ msgstr ""
 "'''NÃO''' use a URL do link {{{[get]}}}, \n"
 "já que a mesma está sujeita a alterações, e pode facilmente ser inutilizada."
 
+msgid "unzip"
+msgstr "não-zipado"
+
+msgid "install"
+msgstr "instalar"
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nenhum anexo armazenado para %(pagename)s"
@@ -1067,6 +1076,12 @@ msgstr "Você não tem permissão para remover arquivos anexados a esta página.
 msgid "You are not allowed to get attachments from this page."
 msgstr "Você não tem permissão para acessar arquivos anexados a esta página."
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Você não tem permissão para anexar arquivos não-zipados a esta página."
+
+msgid "You are not allowed to install files."
+msgstr "Você não tem permissão para adicionar arquivos!"
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Você não tem permissão para ver arquivos anexados a esta página."
 
@@ -1094,8 +1109,53 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "Anexo '%(filename)s' apagado."
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Anexo '%(filename)s' adicionado."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Instalação de '%(filename)s' falhou."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "O arquivo %s não é um arquivo de pacote do MoinMoin."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Anexo '%(filename)s' não-zipado."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Anexo '%(filename)s' não descompactado porque o arquivo é muito grande, somente "
+"arquivos .zip que já existam ou que estejam em pastas."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Anexo '%(filename)s' não pode ser descompactado porque os arquivos resultantes"
+"seriam muito grandes (%(space)d kB missing)."
+
+#, python-format
+msgid "The file '%(target)' is not a .zip file."
+msgstr "O arquivo '%(target)' não é um arquivo .zip."
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Arquivo anexado '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Script do pacote:"
+
+msgid "File Name"
+msgstr "Nome do arquivo"
+
+msgid "Modified"
+msgstr "Modificado"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
@@ -1315,7 +1375,7 @@ msgid "No wanted pages in this wiki."
 msgstr "Nenhuma página solicitada neste wiki."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**O número máximo de inserções permitidas foi superado**"
+msgstr "**O número máximo de inserções permitidas foi excedida**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-03-21 20:17+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -941,6 +941,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Formulér venligst søgningen mere specifikt end {{{\"%s\"}}}"
@@ -997,6 +1000,12 @@ msgstr ""
 "Anvend '''IKKE''' URL'en under {{{[get]}}}, da den link kun er midlertidig "
 "og derfor let kan holde op med at fungere."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Ingen vedhæftede filer for %(pagename)s"
@@ -1052,6 +1061,14 @@ msgstr "Du har ikke lov til at slette vedhæftede filer på denne side."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du har ikke lov til at hente vedhæftede filer fra denne side!"
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Du har ikke lov til at se denne sides vedhæftede filer!"
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "Du har ikke lov til at redigere denne side!"
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Du har ikke lov til at se denne sides vedhæftede filer!"
 
@@ -1081,9 +1098,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Vedhæftet fil '%(filename)s' slettet."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Vedhæftet fil '%(filename)s' slettet."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Tegningen '%(filename)s' er gemt."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Vedhæftet fil '%(filename)s' slettet."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Vedhæftet fil '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Filnavn"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Ukendt filtype. Kan ikke vise denne vedhæftede fil direkte."

@@ -416,14 +416,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''כניסות ופעולות עריכה''',
 '''You are not allowed to revert this page!''':
 '''אין לכם הרשאות לשחזר את הדף.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''אתם עדיין לא רשומים. לחצו על הקישור UserPreferences בראש הדף כדי להרשם.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''אין לכם הרשאות לעשות מנוי לדף.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''דואר אלקטרוני לא מאופשר בוויקי הזה. פנה למנהל המערכת.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''לא הכנסתם כתובת דואר אלקטרוני בהעדפות המשתמש. לחצו על שמכם בראש הדף והוסיפו את כתובת הדואר שלכם בטופס.''',
 '''Your subscribtion to this page has been removed.''':
 '''המנוי שלך לדף זה בוטל.''',
 '''Can\'t remove regular expression subscription!''':
@@ -684,10 +678,6 @@ Try a different name.''':
 '''יצא את תוכן הוויקי במבנה XML''',
 '''No wanted pages in this wiki.''':
 '''אין בוויקי הזה קישורים לדפים חסרים.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**מספר גדול מידי של קבצים מוכללים**''',
-'''**Could not find the referenced page: %s**''':
-'''**אין אפשרות למצוא את הדף המוכלל: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''ציפיתי ל–"%(wanted)s" לאחר "%(key)s", קיבלתי "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

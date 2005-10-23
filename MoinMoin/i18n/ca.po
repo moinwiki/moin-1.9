@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -80,7 +80,8 @@ msgstr "No es poden editar les revisions antigues!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"El blocatge que mantenieu ha expirat. Prepareu-vos per als conflictes d'edició!"
+"El blocatge que mantenieu ha expirat. Prepareu-vos per als conflictes "
+"d'edició!"
 
 msgid "Page name is too long, try shorter name."
 msgstr "El nom de la pàgina és massa llarg, proveu un nom més curt."
@@ -416,7 +417,9 @@ msgid "Up"
 msgstr "Amunt"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Publica el meu correu electrònic (i no la meua pàgina principal del wiki a la informació de l'autor"
+msgstr ""
+"Publica el meu correu electrònic (i no la meua pàgina principal del wiki a "
+"la informació de l'autor"
 
 msgid "Open editor on double click"
 msgstr "Obre l'editor en fer doble clic"
@@ -643,7 +646,6 @@ msgstr "Surt"
 msgid "Preferred theme"
 msgstr "Tema preferit"
 
-
 msgid "Editor Preference"
 msgstr "Preferències de l'editor"
 
@@ -844,8 +846,8 @@ msgid ""
 "To unsubscribe, go to your profile and delete the item matching this page "
 "from the subscription list."
 msgstr ""
-"Per a desubscriure, aneu al vostre perfil i suprimiu l'element que concorde amb aquesta pàgina de la "
-"pàgina de subscripcions."
+"Per a desubscriure, aneu al vostre perfil i suprimiu l'element que concorde "
+"amb aquesta pàgina de la pàgina de subscripcions."
 
 msgid "You have been subscribed to this page."
 msgstr "Vos heu subscrit a aquesta pàgina."
@@ -958,6 +960,9 @@ msgstr "Habilitat"
 msgid "Lupy search"
 msgstr "Cerca Lupy"
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}"
@@ -1015,6 +1020,12 @@ msgstr ""
 "'''No''' utilitzeu l'URL de l'enllaç {{{[get]}}}, \n"
 "ja que aquest pot canviar i es pot trencar fàcilment."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "No hi ha cap adjunció emmagatzemada per a %(pagename)s"
@@ -1071,6 +1082,14 @@ msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
 msgid "You are not allowed to get attachments from this page."
 msgstr "No teniu permís per a obtindre adjuncions des d'aquesta pàgina."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "No teniu permís per a editar aquesta pàgina."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
 
@@ -1098,9 +1117,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "S'ha suprimit l'adjunció «%(filename)s»."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "S'ha suprimit l'adjunció «%(filename)s»."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "S'ha desat el dibuix «%(filename)s»."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "S'ha suprimit l'adjunció «%(filename)s»."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Adjunció «%(filename)s»"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Nom del fitxer"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
@@ -1478,7 +1539,6 @@ msgstr "Fes"
 
 msgid "Parent Page"
 msgstr "Pàgina pare"
-
 
 msgid "Edit (Text)"
 msgstr "Edita (text)"

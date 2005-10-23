@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -147,6 +147,9 @@ msgid "Preview"
 msgstr ""
 
 msgid "GUI Mode"
+msgstr ""
+
+msgid "Your changes are not saved!"
 msgstr ""
 
 msgid "Comment:"
@@ -702,9 +705,7 @@ msgstr ""
 msgid "You are not allowed to revert this page!"
 msgstr ""
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
 
 msgid "Your quicklink to this page has been removed."
@@ -716,14 +717,13 @@ msgstr ""
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
+msgstr ""
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
@@ -732,9 +732,7 @@ msgstr ""
 msgid "Can't remove regular expression subscription!"
 msgstr ""
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
 
 msgid "You have been subscribed to this page."
@@ -997,6 +995,18 @@ msgstr ""
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
@@ -1008,13 +1018,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1233,13 +1237,6 @@ msgstr ""
 msgid "No wanted pages in this wiki."
 msgstr ""
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1358,9 +1355,6 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Quicklink"
-msgstr ""
-
 msgid "More Actions:"
 msgstr ""
 
@@ -1372,10 +1366,6 @@ msgstr ""
 
 msgid "Delete Cache"
 msgstr ""
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Attachments"
 
 msgid "Delete Page"
 msgstr ""
@@ -1400,6 +1390,16 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr ""
+
+msgid "Remove Link"
+msgstr ""
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Attachments"
 
 #, python-format
 msgid "Show %s days."
