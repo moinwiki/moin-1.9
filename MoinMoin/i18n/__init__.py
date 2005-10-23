@@ -199,15 +199,16 @@ def requestLanguage(request):
     # Or try to return one of the user browser accepted languages, if it
     # is available on this wiki...
     available = wikiLanguages()
-    for lang in browserLanguages(request):
-        if available.has_key(lang):
-            if request.http_accept_language:
-                request.setHttpHeader('Vary: Accept-Language')
-            return lang
+    if not request.cfg.language_ignore_browser:
+        for lang in browserLanguages(request):
+            if available.has_key(lang):
+                if request.http_accept_language:
+                    request.setHttpHeader('Vary: Accept-Language')
+                return lang
     
     # Or return the wiki default language...
-    if available.has_key(request.cfg.default_lang):
-        lang = request.cfg.default_lang
+    if available.has_key(request.cfg.language_default):
+        lang = request.cfg.language_default
 
     # If everything else fails, read the manual... or return 'en'
     else:

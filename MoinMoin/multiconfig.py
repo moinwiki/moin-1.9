@@ -201,7 +201,6 @@ class DefaultConfig:
     data_underlay_dir = './underlay/'
     date_fmt = '%Y-%m-%d'
     datetime_fmt = '%Y-%m-%d %H:%M:%S'
-    default_lang = 'en'
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
     editor_default = 'text' # which editor is called when nothing is specified
@@ -227,6 +226,10 @@ class DefaultConfig:
     html_pagetitle = None
 
     interwiki_preferred = [] # list of wiki names to show at top of interwiki list
+
+    language_default = 'en'
+    language_ignore_browser = False # ignore browser settings, use language_default
+                                    # or user prefs
 
     lupy_search = False # disabled until lupy is finished
 
@@ -424,7 +427,7 @@ class DefaultConfig:
         self._fillDicts()
         
         # Normalize values
-        self.default_lang = self.default_lang.lower()
+        self.language_default = self.language_default.lower()
 
         # Use site name as default name-logo
         if self.logo_string is None:
