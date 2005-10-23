@@ -138,7 +138,7 @@ class FarmConfig(DefaultConfig):
     # YOUR language that other people contributed.
 
     # The main wiki language, set the direction of the wiki pages
-    default_lang = 'en'
+    language_default = 'en'
 
     # You must use Unicode strings here [Unicode]
     page_category_regex = u'^Category[A-Z]'
