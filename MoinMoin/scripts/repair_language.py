@@ -30,7 +30,7 @@ Why run this script?
 
     In patch-325 a new #language processing instruction has been added.
     Pages that specify the language with it are displayed using correct
-    direction, even if default_lang use different direction.
+    direction, even if language_default use different direction.
 
     In the past, pages used to have ##language:xx comment. This comment
     has no effect, and should be replaced with newer #language xx

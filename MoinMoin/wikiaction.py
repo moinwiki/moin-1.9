@@ -392,7 +392,7 @@ def do_info(pagename, request):
     # This action uses page or wiki language TODO: currently
     # page.language is broken and not available now, when we fix it,
     # this will be automatically fixed.
-    lang = page.language or request.cfg.default_lang
+    lang = page.language or request.cfg.language_default
     request.setContentLanguage(lang)
     
     wikiutil.send_title(request, _('Info for "%s"') % (title,), pagename=pagename)

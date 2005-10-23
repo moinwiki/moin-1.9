@@ -373,7 +373,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         # TODO: currently self.language is None at this point. We have
         # to do processing instructions parsing earlier, or move page
         # language into meta file.
-        lang = self.language or self.request.cfg.default_lang
+        lang = self.language or self.request.cfg.language_default
 
         # to prevent moving away from the page without saving it
         self.request.write(u'''\

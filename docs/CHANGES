@@ -31,6 +31,11 @@ Version moin--main--1.5:
       * cfg.mail_sendmail = "/usr/sbin/sendmail -t -i" can be used if sending
         via SMTP doesn't work on your server. Default is None and that means
         using SMTP.
+      * language_default replaces the old default_lang setting (just renamed).
+      * language_ignore_browser = True can be used to let moin ignore the
+        user's browser settings (e.g. if you run a local-language only wiki
+        and your users use misconfigured or buggy browsers often). Default is
+        False. Don't forget to set language_default when using this.
  
     * Wiki Editor changes / new WYSIWYG editor
      * fully imported the javascript based LGPLed FCKeditor (many thanks
