@@ -211,6 +211,8 @@ Version moin--main--1.5:
     * added IE7 (v0.9) from Dean Edwards (see http://dean.edwards.name/IE7/) -
       that should fix quite some IE bugs and annoyances (on Win32).
       * for enabling IE7, use cfg.hacks = { 'ie7': True }
+    * reducewiki now also copies all attachments (we use that to make underlay
+      directory from moinmaster wiki's data_dir)
 
   Fixes:  
     * Fixed a typo in xslt.py which led to a traceback instead of an
