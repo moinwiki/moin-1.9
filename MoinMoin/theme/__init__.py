@@ -154,14 +154,23 @@ class ThemeBase:
         @return: title html
         """
         _ = self.request.getText
+
         if d['title_link']:
-            content = ('<a title="%(title)s" href="%(href)s">%(text)s</a>') % {
+            content = curpage = ''
+            segments = d['title_text'].split('/')
+            for s in segments[:-1]:
+                curpage += s
+                content = "%s%s/" % (content, Page(self.request, curpage).link_to(self.request, s))
+                curpage += '/'
+
+            content += ('<a class="backlink" title="%(title)s" href="%(href)s">%(text)s</a>') % {
                 'title': _('Click to do a full-text search for this title'),
                 'href': d['title_link'],
-                'text': wikiutil.escape(d['title_text']),
+                'text': wikiutil.escape(segments[-1]),
                 }
         else:
             content = wikiutil.escape(d['title_text'])
+
         html = '''
 <h1 id="title">%s</h1>
 ''' % content
