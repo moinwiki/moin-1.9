@@ -7,6 +7,7 @@
 """
 
 import unittest
+from MoinMoin import wikiutil
 from MoinMoin.util import web
 from MoinMoin.widget import html
 

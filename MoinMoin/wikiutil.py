@@ -108,9 +108,10 @@ def url_quote(s, safe='/', want_unicode=False):
                          unicode and not str, set this to True
                          Default is False.
     """
-    is_unicode = isinstance(s, unicode)
-    if is_unicode:
+    if isinstance(s, unicode):
         s = s.encode(config.charset)
+    elif not isinstance(s, str):
+        s = str(s)
     s = urllib.quote(s, safe)
     if want_unicode:
         s = s.decode(config.charset) # ascii would also work
@@ -127,9 +128,10 @@ def url_quote_plus(s, safe='/', want_unicode=False):
                          unicode and not str, set this to True
                          Default is False.
     """
-    is_unicode = isinstance(s, unicode)
-    if is_unicode:
+    if isinstance(s, unicode):
         s = s.encode(config.charset)
+    elif not isinstance(s, str):
+        s = str(s)
     s = urllib.quote_plus(s, safe)
     if want_unicode:
         s = s.decode(config.charset) # ascii would also work
@@ -145,8 +147,7 @@ def url_unquote(s, want_unicode=True):
                          str and not unicode, set this to False.
                          Default is True.
     """
-    is_unicode = isinstance(s, unicode)
-    if is_unicode:
+    if isinstance(s, unicode):
         s = s.encode(config.charset) # ascii would also work
     s = urllib.unquote(s)
     if want_unicode:
@@ -177,7 +178,7 @@ def makeQueryString(qstr=None, want_unicode=False, **kw):
     keyword parameters are ignored.
 
     @param qstr: dict to format as query string, using either ascii or unicode
-    @param kw: same as dict when using keywords, using assci or unicode
+    @param kw: same as dict when using keywords, using ascii or unicode
     @rtype: string
     @return: query string ready to use in a url
     """
