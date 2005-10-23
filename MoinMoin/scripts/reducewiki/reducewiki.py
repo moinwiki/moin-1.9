@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
     Use this script to reduce a data/ directory to the latest page revision of
-    each non-deleted page.
+    each non-deleted page (plus all attachments).
+    
     This is used to make the distributed underlay directory, but can also be
     used for other purposes.
     
@@ -12,7 +13,9 @@
           -> same (pointing to 1)
         * data/pages/PageName/edit-log and data/edit-log
           -> do not copy
-           
+        * data/pages/PageName/attachments/*
+          -> just copy
+
     Steps for a successful conversion:
 
         1. Stop your wiki and make a backup of old data and code
@@ -30,7 +33,7 @@
         6. Test it - if something has gone wrong, you still have your backup.
 
 
-    @copyright: 2004 Thomas Waldmann
+    @copyright: 2005 Thomas Waldmann
     @license: GPL, see COPYING for details
 """
 
@@ -41,14 +44,15 @@ import sys
 sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin') # farmconfig/wikiconfig location
 sys.path.insert(0, '../../..')
 
-import os.path, codecs
+import os, os.path, shutil, codecs
 from MoinMoin import config
 from MoinMoin import wikiutil
 from MoinMoin.request import RequestCLI
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
+from MoinMoin.action import AttachFile
 
-def makepage(rootdir, pagename, text):
+def copypage(request, rootdir, pagename):
     """quick and dirty!"""
     pagedir = os.path.join(rootdir, 'pages', wikiutil.quoteWikinameFS(pagename))
     os.makedirs(pagedir)
@@ -60,16 +64,25 @@ def makepage(rootdir, pagename, text):
     revdir = os.path.join(pagedir, 'revisions')
     os.makedirs(revdir)
     tf = os.path.join(revdir, revstr)
-    text = text.replace("\n","\r\n")
+    p = Page(request, pagename)
+    text = p.get_raw_body().replace("\n","\r\n")
     codecs.open(tf, 'wb', config.charset).write(text)
-    
+
+    source_dir = AttachFile.getAttachDir(request, pagename)
+    if os.path.exists(source_dir):
+        dest_dir = os.path.join(pagedir, "attachments")
+        os.makedirs(dest_dir)
+        for filename in os.listdir(source_dir):
+            source_file = os.path.join(source_dir, filename)
+            dest_file = os.path.join(dest_dir, filename)
+            shutil.copyfile(source_file, dest_file)
+
+
 request = RequestCLI(url=url)
 request.form = request.args = request.setup_args()
 
 pagelist = list(request.rootpage.getPageList(user=''))
 for pagename in pagelist:
-    p = Page(request, pagename)
-    text = p.get_raw_body()
-    makepage(destdir, pagename, text)
+    copypage(request, destdir, pagename)
     
 
