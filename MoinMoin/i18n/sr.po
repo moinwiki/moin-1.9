@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -925,6 +925,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
@@ -981,6 +984,12 @@ msgstr ""
 "Nemojte '''NIKAD''' kopirati URL  od {{{[get]}}} linka, pošto \n"
 "se on može bilo kad promeniti i tako pokvariti link za zakačeni fajl.</p>"
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nema priloga zakačenih za %(pagename)s"
@@ -1035,6 +1044,14 @@ msgstr "Vama nije dozvoljeno da brišete priloge na ovoj stranici."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Vama nije dozvoljeno da snimite priloge sa ove stranice."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Vama nije dozvoljeno da vidite priloge sa ove stranice"
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "Nije Vam dozvoljeno da obrađujete ovu stranicu."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Vama nije dozvoljeno da vidite priloge sa ove stranice"
 
@@ -1062,9 +1079,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Prilog '%(filename)s' je izbrisan."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Prilog '%(filename)s' je izbrisan."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Crtež '%(filename)s' je snimljen."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Prilog '%(filename)s' je izbrisan."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Prilog '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Ime fajla"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Nepoznat tip fajla, nemoguć prikaz"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -166,6 +166,9 @@ msgstr "Vorschau anzeigen"
 
 msgid "GUI Mode"
 msgstr "GUI-Modus"
+
+msgid "Your changes are not saved!"
+msgstr "Ihre Änderungen sind nicht gesichert!"
 
 msgid "Comment:"
 msgstr "Kommentar:"
@@ -809,12 +812,8 @@ msgstr "Seitenzugriffe und Änderungen"
 msgid "You are not allowed to revert this page!"
 msgstr "Sie dürfen diese Seite nicht restaurieren!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in der "
-"oberen rechten Ecke, um ein Profil anzulegen."
+msgid "You must login to add a quicklink."
+msgstr "Sie müssen sich anmelden, um einen Expressverweis hinzuzufügen."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Ihr Expressverweis für diese Seite wurde entfernt."
@@ -825,21 +824,16 @@ msgstr "Ein Expressverweis für diese Seite wurde hinzugefügt."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet. Bitte kontaktieren "
-"Sie den Eigentümer des Wiki, der dann entweder die Mailfunktionen "
-"einschalten oder das \"Abonnieren\"-Symbol entfernen kann."
+"In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
-msgstr ""
-"Sie haben keine E-Mail-Adresse in Ihrem Profil eingegeben. Wählen Sie Ihren "
-"Namen (BenutzerEinstellungen) in der rechten oberen Ecke an und geben Sie "
-"eine gültige E-Mail-Adresse ein."
+msgid "You must log in to use subscribtions."
+msgstr "Sie müssen sich anmelden, um Abonnements verwenden zu können."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr "Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, "
+"um Abonnements benutzen zu können."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Ihr Abonnements für diese Seite wurde entfernt."
@@ -847,12 +841,9 @@ msgstr "Ihr Abonnements für diese Seite wurde entfernt."
 msgid "Can't remove regular expression subscription!"
 msgstr "Kann nicht Abonnement mit regulärem Ausdruck entfernen."
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr ""
-"Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der Abo-"
-"Liste der persönlichen Einstellungen entfernt werden."
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "Editieren Sie die regulären Ausdrücke für Abonnements in Ihren "
+"BenutzerEinstellungen."
 
 msgid "You have been subscribed to this page."
 msgstr "Die Seite wurde zur Liste abonnierter Seiten hinzugefügt."
@@ -964,6 +955,9 @@ msgstr "Aktiviert"
 msgid "Lupy search"
 msgstr "Lupy-Suche"
 
+msgid "Active threads"
+msgstr "Aktive Threads"
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
@@ -1023,6 +1017,12 @@ msgstr ""
 "da sich diese jederzeit ändern kann und damit der Verweis auf die Datei "
 "bricht."
 
+msgid "unzip"
+msgstr "auspacken"
+
+msgid "install"
+msgstr "installieren"
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Es wurden keine Anhänge für die Seite %(pagename)s gespeichert."
@@ -1080,6 +1080,12 @@ msgstr "Sie dürfen keine Anhänge dieser Seite löschen!"
 msgid "You are not allowed to get attachments from this page."
 msgstr "Sie dürfen auf keine Anhänge dieser Seite zugreifen."
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Sie dürfen keine Anhänge dieser Seite auspacken."
+
+msgid "You are not allowed to install files."
+msgstr "Sie dürfen keine Dateien installieren."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Sie dürfen keine Anhänge dieser Seite ansehen."
 
@@ -1110,8 +1116,62 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "Dateianhang '%(filename)s' wurde gelöscht."
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Dateianhang '%(filename)s' wurde installiert."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Installation von '%(filename)s' fehlgeschlagen."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Die Datei %s ist keine MoinMoin-Paket-Datei."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Dateianhang '%(filename)s' konnte nicht ausgepackt werden, weil die "
+"ausgepackten Dateien zu groß wären (%(space)d kB fehlen)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Dateianhang '%(filename)s' konnte nicht ausgepackt werden, weil die "
+"ausgepackten Dateien zu viele wären (%(count)d fehlen)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Dateianhang '%(filename)s' wurde ausgepackt."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Dateianhang '%(filename)s' wurde nicht ausgepackt, weil die Datei zu groß "
+"sind, weil nur .zip-Dateien erlaubt sind, weil sie bereits existieren oder "
+"weil Dateien in Ordnern enthalten sind."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "Die Datei %(target)s ist keine .zip-Datei."
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Dateianhang '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Paket-Skript:"
+
+msgid "File Name"
+msgstr "Dateiname"
+
+msgid "Modified"
+msgstr "Modifiziert"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
@@ -1329,13 +1389,6 @@ msgstr "XML-Export des Wiki-Inhalts herunter laden"
 msgid "No wanted pages in this wiki."
 msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maximale Anzahl erlaubter Includesi überschritten**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Erwartete \"%(wanted)s\" nach \"%(key)s\", bekam \"%(token)s\""
@@ -1458,9 +1511,6 @@ msgstr "Titel"
 msgid "Search"
 msgstr "Suche"
 
-msgid "Quicklink"
-msgstr "Expressverweis"
-
 msgid "More Actions:"
 msgstr "Weitere Aktionen:"
 
@@ -1472,9 +1522,6 @@ msgstr "Rohform"
 
 msgid "Delete Cache"
 msgstr "Cache löschen"
-
-msgid "Attachments"
-msgstr "Dateianhänge"
 
 msgid "Delete Page"
 msgstr "Seite löschen"
@@ -1499,6 +1546,15 @@ msgstr "Editieren (GUI)"
 
 msgid "Immutable Page"
 msgstr "Geschützte Seite"
+
+msgid "Remove Link"
+msgstr "Verweis entfernen"
+
+msgid "Add Link"
+msgstr "Verweis hinzufügen"
+
+msgid "Attachments"
+msgstr "Dateianhänge"
 
 #, python-format
 msgid "Show %s days."
@@ -1619,3 +1675,43 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in "
+#~ "der oberen rechten Ecke, um ein Profil anzulegen."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet. Bitte "
+#~ "kontaktieren Sie den Eigentümer des Wiki, der dann entweder die "
+#~ "Mailfunktionen einschalten oder das \"Abonnieren\"-Symbol entfernen kann."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Sie haben keine E-Mail-Adresse in Ihrem Profil eingegeben. Wählen Sie "
+#~ "Ihren Namen (BenutzerEinstellungen) in der rechten oberen Ecke an und "
+#~ "geben Sie eine gültige E-Mail-Adresse ein."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der "
+#~ "Abo-Liste der persönlichen Einstellungen entfernt werden."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Maximale Anzahl erlaubter Includesi überschritten**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "Expressverweis"

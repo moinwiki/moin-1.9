@@ -565,6 +565,8 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Ieslēgts''',
 '''Lupy search''':
 '''Kopējā meklēšana''',
+'''Active threads''':
+'''Aktīvie pavedieni''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Lūdzu, norādiet konkrētāku meklējamo terminu {{{"%s"}}} vietā''',
 '''ERROR in regex \'%s\'''':
@@ -595,6 +597,10 @@ since this is subject to change and can break easily.''':
 kā redzams zemāk sarakstā. 
 \'\'\'NEIZMANTOJIET\'\'\' saites {{{[get]}}} URL. 
 Tas var tikt mainīts.''',
+'''unzip''':
+'''atspiest''',
+'''install''':
+'''instalēt''',
 '''No attachments stored for %(pagename)s''':
 '''Lapai %(pagename)s nav piesaistes''',
 '''Edit drawing''':
@@ -625,6 +631,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Jūs nedrīkstat dzēst šīs lapas piesaistes.''',
 '''You are not allowed to get attachments from this page.''':
 '''Jūs nedrīkstat ņemt šīs lapas piesaistes.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Jūs nav tiesību atspiest šīs lapas piesaistes.''',
+'''You are not allowed to install files.''':
+'''Jums nav tiesību instalēt failus.''',
 '''You are not allowed to view attachments of this page.''':
 '''Jūs nedrīkstat skatīties šīs lapas piesaistes.''',
 '''Unsupported upload action: %s''':
@@ -637,8 +647,28 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Piesaiste \'%(target)s\' (no faila \'%(filename)s\') ar izmēru %(bytes)d baiti pievienota.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Piesaiste \'%(filename)s\' izdzēsta.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Piesaiste \'%(filename)s\' ir uzinstalēta.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Nesekmīga faila \'%(filename)s\' instalēšana.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Fails %s nav MoinMoin pakotnes fails.''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Piesaiste \'%(filename)s\' atspiesta.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Piesaiste \'%(filename)s\' nav atpakota, jo faili ir pārāk lieli, tikai .zip faili, jau ekstistē vai atrodas mapēs.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Nevar atpakot piesaisti \'%(filename)s\' - rezultējošie faili var būt pārāk lieli (pietrūkst %(space)d kB).''',
+'''The file %(target)s is not a .zip file.''':
+'''Fails %(target)s nav .zip fails.''',
 '''Attachment \'%(filename)s\'''':
 '''Piesaiste \'%(filename)s\'''',
+'''Package script:''':
+'''Pakotnes skripts:''',
+'''File Name''':
+'''Faila nosaukums''',
+'''Modified''':
+'''Modificēts''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Nezināms faila tips, nevar attēlot iestarpināto piesaisti.''',
 '''attachment:%(filename)s of %(pagename)s''':

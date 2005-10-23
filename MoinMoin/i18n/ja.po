@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
-"PO-Revision-Date: 2005-10-06 11:00+0900\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"PO-Revision-Date: 2005-10-07 19:41+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -945,6 +945,9 @@ msgstr "有効"
 msgid "Lupy search"
 msgstr "Lupyによる検索"
 
+msgid "Active threads"
+msgstr "アクティブなスレッド"
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
@@ -1001,6 +1004,12 @@ msgstr ""
 "filename}}}'''と記述します。\n"
 "{{{[get]}}}リンクのURLは変更される可能性が高いので、利用しないでください。"
 
+msgid "unzip"
+msgstr "unzip"
+
+msgid "install"
+msgstr "インストール"
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)sに添付ファイルはありません。"
@@ -1040,7 +1049,7 @@ msgid "File attachments are not allowed in this wiki!"
 msgstr "このwikiではファイルの添付はできません。"
 
 msgid "You are not allowed to save a drawing on this page."
-msgstr "drawingを保存する権限がありません。"
+msgstr "このページにdrawingを保存する権限がありません。"
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1050,13 +1059,19 @@ msgstr ""
 "試してください。"
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "添付ファイルを削除する権限がありません。"
+msgstr "このページの添付ファイルを削除する権限がありません。"
 
 msgid "You are not allowed to get attachments from this page."
-msgstr "添付ファイルをダウンロードする権限がありません。"
+msgstr "このページの添付ファイルをダウンロードする権限がありません。"
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "このページの添付ファイルをunzipする権限がありません。"
+
+msgid "You are not allowed to install files."
+msgstr "ファイルをインストールする権限がありません。"
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "添付ファイルを見る権限がありません。"
+msgstr "このページの添付ファイルを見る権限がありません。"
 
 #, python-format
 msgid "Unsupported upload action: %s"
@@ -1085,8 +1100,51 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "添付ファイル'%(filename)s'を削除しました。"
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "添付ファイル'%(filename)s'をインストールしました。"
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "%(filename)s'のインストールに失敗しました。"
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "%sはMoinMoinのパッケージファイルではありません。"
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "添付ファイル'%(filename)s'をunzipしました。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。原因はファイルが大きすぎる、すでにファイルが存在するなどが考えられます。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。"
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "%(target)sはzipファイルではありません。"
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "添付ファイル '%(filename)s'"
+
+msgid "Package script:"
+msgstr "パッケージスクリプト:"
+
+msgid "File Name"
+msgstr "ファイル名"
+
+msgid "Modified"
+msgstr "更新日付"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "ファイルタイプが不明なため、添付ファイルをインラインで表示できません。"

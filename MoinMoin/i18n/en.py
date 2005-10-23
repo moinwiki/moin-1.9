@@ -86,6 +86,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Preview''',
 '''GUI Mode''':
 '''GUI Mode''',
+'''Your changes are not saved!''':
+'''Your changes are not saved!''',
 '''Comment:''':
 '''Comment:''',
 '''<No addition>''':
@@ -476,24 +478,26 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Page hits and edits''',
 '''You are not allowed to revert this page!''':
 '''You are not allowed to revert this page!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''',
+'''You must login to add a quicklink.''':
+'''You must login to add a quicklink.''',
 '''Your quicklink to this page has been removed.''':
 '''Your quicklink to this page has been removed.''',
 '''A quicklink to this page has been added for you.''':
 '''A quicklink to this page has been added for you.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''You are not allowed to subscribe to a page you can\'t read.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''',
+'''This wiki is not enabled for mail processing.''':
+'''This wiki is not enabled for mail processing.''',
+'''You must log in to use subscribtions.''':
+'''You must log in to use subscribtions.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Add your email address in your UserPreferences to use subscriptions.''',
 '''Your subscribtion to this page has been removed.''':
 '''Your subscribtion to this page has been removed.''',
 '''Can\'t remove regular expression subscription!''':
 '''Can\'t remove regular expression subscription!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Edit the subscription regular expressions in your UserPreferences.''',
 '''You have been subscribed to this page.''':
 '''You have been subscribed to this page.''',
 '''Charts are not available!''':
@@ -652,12 +656,14 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''Installation of \'%(filename)s\' failed.''',
 '''The file %s is not a MoinMoin package file.''':
 '''The file %s is not a MoinMoin package file.''',
-'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
-'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''',
-'''The file %(target) is not a .zip file.''':
-'''The file %(target) is not a .zip file.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''',
+'''The file %(target)s is not a .zip file.''':
+'''The file %(target)s is not a .zip file.''',
 '''Attachment \'%(filename)s\'''':
 '''Attachment \'%(filename)s\'''',
 '''Package script:''':
@@ -784,10 +790,6 @@ Try a different name.''',
 '''Download XML export of this wiki''',
 '''No wanted pages in this wiki.''':
 '''No wanted pages in this wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Maximum number of allowed includes exceeded**''',
-'''**Could not find the referenced page: %s**''':
-'''**Could not find the referenced page: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -862,8 +864,6 @@ red=edit''',
 '''Titles''',
 '''Search''':
 '''Search''',
-'''Quicklink''':
-'''Quicklink''',
 '''More Actions:''':
 '''More Actions:''',
 '''------------''':
@@ -888,6 +888,10 @@ red=edit''',
 '''Edit (GUI)''',
 '''Immutable Page''':
 '''Immutable Page''',
+'''Remove Link''':
+'''Remove Link''',
+'''Add Link''':
+'''Add Link''',
 '''Show %s days.''':
 '''Show %s days.''',
 '''EditText''':

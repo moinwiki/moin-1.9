@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 21:50+0200\n"
+"POT-Creation-Date: 2005-10-06 22:30+0200\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -949,6 +949,9 @@ msgstr "Ieslēgts"
 msgid "Lupy search"
 msgstr "Kopējā meklēšana"
 
+msgid "Active threads"
+msgstr "Aktīvie pavedieni"
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Lūdzu, norādiet konkrētāku meklējamo terminu {{{\"%s\"}}} vietā"
@@ -1004,6 +1007,12 @@ msgstr ""
 "'''NEIZMANTOJIET''' saites {{{[get]}}} URL. \n"
 "Tas var tikt mainīts."
 
+msgid "unzip"
+msgstr "atspiest"
+
+msgid "install"
+msgstr "instalēt"
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Lapai %(pagename)s nav piesaistes"
@@ -1056,6 +1065,12 @@ msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Jūs nedrīkstat ņemt šīs lapas piesaistes."
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Jūs nav tiesību atspiest šīs lapas piesaistes."
+
+msgid "You are not allowed to install files."
+msgstr "Jums nav tiesību instalēt failus."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Jūs nedrīkstat skatīties šīs lapas piesaistes."
 
@@ -1084,8 +1099,53 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "Piesaiste '%(filename)s' izdzēsta."
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Piesaiste '%(filename)s' ir uzinstalēta."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Nesekmīga faila '%(filename)s' instalēšana."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Fails %s nav MoinMoin pakotnes fails."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Piesaiste '%(filename)s' atspiesta."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Piesaiste '%(filename)s' nav atpakota, jo faili ir pārāk lieli, tikai .zip "
+"faili, jau ekstistē vai atrodas mapēs."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošie faili var būt pārāk lieli "
+"(pietrūkst %(space)d kB)."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "Fails %(target)s nav .zip fails."
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Piesaiste '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Pakotnes skripts:"
+
+msgid "File Name"
+msgstr "Faila nosaukums"
+
+msgid "Modified"
+msgstr "Modificēts"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Nezināms faila tips, nevar attēlot iestarpināto piesaisti."

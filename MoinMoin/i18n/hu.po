@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -949,6 +949,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Kérjük a(z) {{{\"%s\"}}} helyett használjon szelektívebb kifejezést!"
@@ -1003,6 +1006,12 @@ msgstr ""
 "ahogy ez a mellékletek listáján látszik. \n"
 "Kérjük '''NE''' használja a {{{[letöltés]}}} URL-jét, \n"
 "mert ez megváltozhat, és akkor már nem lesz érvényes a kapocs (link)."
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1059,6 +1068,14 @@ msgstr "A mellékletek törlése nem engedélyezett ezen a lapon."
 msgid "You are not allowed to get attachments from this page."
 msgstr "A mellékletek letöltése nem engedélyezett erről a lapról."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "A lap szerkesztése nem engedélyezett."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "A mellékletek megtekintése nem engedélyezett ennél a lapnál."
 
@@ -1087,9 +1104,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "A(z) '%(filename)s' melléklet törölve."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "A(z) '%(filename)s' melléklet törölve."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "A(z) '%(filename)s' rajz elmentve."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "A(z) '%(filename)s' melléklet törölve."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "A(z) '%(filename)s' melléklet"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Állománynév"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Ismeretlen állománytípus: nem lehet beágyazva megjeleníteni."

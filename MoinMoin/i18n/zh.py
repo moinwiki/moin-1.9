@@ -565,6 +565,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''有效''',
 '''Lupy search''':
 '''Lupy搜索''',
+'''Active threads''':
+'''活跃线程''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''请输入比{{{"%s"}}}更精确的关键字!!''',
 '''ERROR in regex \'%s\'''':
@@ -594,6 +596,10 @@ since this is subject to change and can break easily.''':
 '''如果要在正文中引用附件, 请参考下表, 使用\'\'\'{{{attachment:filename}}}\'\'\', 
 请\'\'\'不要\'\'\'用{{{[下载]}}}指向的 URL, 
 因为那个位置可能会变, 很可能就不能用了.''',
+'''unzip''':
+'''解压缩''',
+'''install''':
+'''安装''',
 '''No attachments stored for %(pagename)s''':
 '''%(pagename)s没有附件''',
 '''Edit drawing''':
@@ -626,6 +632,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''您无权删除此页的附件.''',
 '''You are not allowed to get attachments from this page.''':
 '''您无权下载此页附件''',
+'''You are not allowed to unzip attachments of this page.''':
+'''你无权对此页附件解压缩(unzip).''',
+'''You are not allowed to install files.''':
+'''您无权安装文件.''',
 '''You are not allowed to view attachments of this page.''':
 '''你无权访问此页附件''',
 '''Unsupported upload action: %s''':
@@ -638,8 +648,26 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''附件\'%(target)s\'(远端名称\'%(filename)s\')已上载, 共计%(bytes)d字节.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''附件\'%(filename)s\'已删除.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''附件\'%(filename)s\'已安装.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''文件\'%(filename)s\'安装失败''',
+'''The file %s is not a MoinMoin package file.''':
+'''文件%s不是MoinMoin包.''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''附件\'%(filename)s\'已解压缩(unzip).''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''附件\'%(filename)s\'解压缩失败, 原因可能是由于文件太大, .zip只能包含文件, 已存在, 或包含在文件夹中.''',
+'''The file %(target)s is not a .zip file.''':
+'''此文件%(target)s不是一个.zip文件''',
 '''Attachment \'%(filename)s\'''':
 '''附件\'%(filename)s\'''',
+'''Package script:''':
+'''包脚本:''',
+'''File Name''':
+'''文件名''',
+'''Modified''':
+'''已更新''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''不明文件类型, 不能内嵌在正文中.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -840,10 +868,20 @@ red=edit''':
 '''快捷链接''',
 '''More Actions:''':
 '''更多操作''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''源码''',
 '''Delete Cache''':
 '''删除缓存''',
+'''Attachments''':
+'''附件''',
 '''Delete Page''':
 '''删除''',
+'''Like Pages''':
+'''相似网页''',
+'''Local Site Map''':
+'''本站地图''',
 '''Do''':
 '''执行''',
 '''Parent Page''':

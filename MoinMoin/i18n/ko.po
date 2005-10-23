@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -934,6 +934,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "{{{\"%s\"}}} 대신 좀 더 드문 단어로 다시 찾아 주세요!"
@@ -986,6 +989,12 @@ msgstr ""
 "이 글에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 "
 "'''{{{attachment:파일이름}}}''' 형식으로 쓰십시오.\n"
 "URL은 자주 바뀔 수 있으므로 {{{[받기]}}} 링크의 URL을 직접 사용하지 마세요."
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1040,6 +1049,14 @@ msgstr "이 글의 첨부를 지울 권한이 없습니다."
 msgid "You are not allowed to get attachments from this page."
 msgstr "이 글의 첨부를 가져올 권한이 없습니다."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "이 글의 첨부를 볼 권한이 없습니다."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "이 글을 고칠 권한이 없습니다."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "이 글의 첨부를 볼 권한이 없습니다."
 
@@ -1068,9 +1085,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "첨부 '%(filename)s'를 지움"
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "첨부 '%(filename)s'를 지움"
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "그림 '%(filename)s'가 저장되었습니다."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "첨부 '%(filename)s'를 지움"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "첨부 '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "파일이름"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""

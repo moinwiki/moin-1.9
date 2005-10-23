@@ -13,7 +13,7 @@ languages = {
 'en': (u'English', u'English', 'utf-8', 0, """Thomas Waldmann <tw-public@gmx.de>""",),
 'es': (u'Spanish', u'Spanish', 'utf-8', 0, """Mauricio Hernandez Z <mhz.chile@gmail.com>""",),
 'fi': (u'Suomi', u'Finnish', 'utf-8', 0, """Tuukka Hastrup <Tuukka.Hastrup@iki.fi>""",),
-'fr': (u'Français', u'French', 'utf-8', 0, """J-P Gue'rard <fevrier@tigreraye.org>""",),
+'fr': (u'Français', u'French', 'utf-8', 0, """JPG <fevrier@tigreraye.org>""",),
 'he': (u'עברית', u'Hebrew', 'utf-8', 1, """Nir Soffer <nirs@freeshell.org>""",),
 'hu': (u'Magyar', u'Hungarian', 'utf-8', 0, """VOROSBARANYI Zoltan <http://vbzo.li/>""",),
 'it': (u'Italiano', u'Italian', 'utf-8', 0, """gian paolo ciceri <gp.ciceri@acm.org>""",),

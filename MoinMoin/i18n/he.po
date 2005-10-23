@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -156,6 +156,10 @@ msgstr "תצוגה מקדימה"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "תוכן הדף לא השתנה."
 
 #, fuzzy
 msgid "Comment:"
@@ -762,11 +766,8 @@ msgstr "כניסות ופעולות עריכה"
 msgid "You are not allowed to revert this page!"
 msgstr "אין לכם הרשאות לשחזר את הדף."
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"אתם עדיין לא רשומים. לחצו על הקישור UserPreferences בראש הדף כדי להרשם."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -779,17 +780,17 @@ msgstr "המנוי שלך לדף זה בוטל."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "אין לכם הרשאות לעשות מנוי לדף."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
-msgstr "דואר אלקטרוני לא מאופשר בוויקי הזה. פנה למנהל המערכת."
-
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"לא הכנסתם כתובת דואר אלקטרוני בהעדפות המשתמש. לחצו על שמכם בראש הדף והוסיפו "
-"את כתובת הדואר שלכם בטופס."
+"דואר אלקטרוני לא מאופשר בוויקי הזה\n"
+".פנה למנהל המערכת."
+
+msgid "You must log in to use subscribtions."
+msgstr ""
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "המנוי שלך לדף זה בוטל."
@@ -797,12 +798,8 @@ msgstr "המנוי שלך לדף זה בוטל."
 msgid "Can't remove regular expression subscription!"
 msgstr "אין אפשרות להסיר מנוי שבוצע על ידי ביטוי רגולרי."
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"לביטול המנוי גשו לדף \"העדפות משתמש\" ומחקו את שם הדף מרשימת הדפים המנויים."
 
 msgid "You have been subscribed to this page."
 msgstr "יש לכם עכשיו מנוי לדף."
@@ -1077,6 +1074,18 @@ msgstr "איור \"%(filename)s\" נשמר."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "קובץ מצורף \"%(filename)s\" נמחק."
@@ -1088,13 +1097,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1316,13 +1319,6 @@ msgstr "יצא את תוכן הוויקי במבנה XML"
 msgid "No wanted pages in this wiki."
 msgstr "אין בוויקי הזה קישורים לדפים חסרים."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**מספר גדול מידי של קבצים מוכללים**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "ציפיתי ל–\"%(wanted)s\" לאחר \"%(key)s\", קיבלתי \"%(token)s\""
@@ -1444,10 +1440,6 @@ msgstr "כותרות"
 msgid "Search"
 msgstr "חפש:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "סימניות"
-
 msgid "More Actions:"
 msgstr "פעולות נוספות:"
 
@@ -1460,10 +1452,6 @@ msgstr "הצג מלל"
 
 msgid "Delete Cache"
 msgstr "נקה מטמון"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "קובץ מצורף חדש"
 
 msgid "Delete Page"
 msgstr "מחק דף"
@@ -1492,6 +1480,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "דף נעול"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "סימניות"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "קובץ מצורף חדש"
 
 #, python-format
 msgid "Show %s days."
@@ -1612,6 +1611,43 @@ msgstr "שנה שם דף"
 msgid "SpellCheck"
 msgstr "בדוק איות"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "אתם עדיין לא רשומים. לחצו על הקישור UserPreferences בראש הדף כדי להרשם."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr "דואר אלקטרוני לא מאופשר בוויקי הזה. פנה למנהל המערכת."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "לא הכנסתם כתובת דואר אלקטרוני בהעדפות המשתמש. לחצו על שמכם בראש הדף "
+#~ "והוסיפו את כתובת הדואר שלכם בטופס."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "לביטול המנוי גשו לדף \"העדפות משתמש\" ומחקו את שם הדף מרשימת הדפים "
+#~ "המנויים."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**מספר גדול מידי של קבצים מוכללים**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "סימניות"
+
 #~ msgid "Show Print View"
 #~ msgstr "תצוגת הדפסה"
 
@@ -1627,10 +1663,6 @@ msgstr "בדוק איות"
 #, fuzzy
 #~ msgid "Infos"
 #~ msgstr "מידע"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "סימניות"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

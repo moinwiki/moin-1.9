@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -940,6 +940,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "käytä tarkempaa hakuehtoa kuin {{{\"%s\"}}}"
@@ -995,6 +998,12 @@ msgstr ""
 "tiedostonimi}}}''' allaolevan tiedostoluettelon mukaisesti. \n"
 "'''ÄLÄ''' käytä {{{[hae]}}}-linkin [[Verbatim(URL:)]]ää, \n"
 "sillä se voi muuttua, jolloin viittaus ei enää toimisi."
+
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1052,6 +1061,14 @@ msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta.!"
 msgid "You are not allowed to get attachments from this page."
 msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
 
@@ -1081,9 +1098,51 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Liitetiedosto '%(filename)s' poistettu."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Liitetiedosto '%(filename)s' poistettu."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Piirros '%(filename)s' tallennettu."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Liitetiedosto '%(filename)s' poistettu."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Liitetiedosto '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Tiedostonimi"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Tuntematon tiedostotyyppi, liitettä ei voida näyttää sivulla."

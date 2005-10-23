@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -921,6 +921,9 @@ msgstr "有效"
 msgid "Lupy search"
 msgstr "Lupy搜索"
 
+msgid "Active threads"
+msgstr "活跃线程"
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "请输入比{{{\"%s\"}}}更精确的关键字!!"
@@ -974,6 +977,12 @@ msgstr ""
 "请'''不要'''用{{{[下载]}}}指向的 URL, \n"
 "因为那个位置可能会变, 很可能就不能用了."
 
+msgid "unzip"
+msgstr "解压缩"
+
+msgid "install"
+msgstr "安装"
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "%(pagename)s没有附件"
@@ -1026,6 +1035,12 @@ msgstr "您无权删除此页的附件."
 msgid "You are not allowed to get attachments from this page."
 msgstr "您无权下载此页附件"
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "你无权对此页附件解压缩(unzip)."
+
+msgid "You are not allowed to install files."
+msgstr "您无权安装文件."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "你无权访问此页附件"
 
@@ -1052,8 +1067,51 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "附件'%(filename)s'已删除."
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "附件'%(filename)s'已安装."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "文件'%(filename)s'安装失败"
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "文件%s不是MoinMoin包."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "附件'%(filename)s'已解压缩(unzip)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr "附件'%(filename)s'解压缩失败, 原因可能是由于文件太大, .zip只能包含文件, "
+"已存在, 或包含在文件夹中."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr 
+"附件'%(filename)s'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间)."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "此文件%(target)s不是一个.zip文件"
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "附件'%(filename)s'"
+
+msgid "Package script:"
+msgstr "包脚本:"
+
+msgid "File Name"
+msgstr "文件名"
+
+msgid "Modified"
+msgstr "已更新"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "不明文件类型, 不能内嵌在正文中."
@@ -1397,27 +1455,23 @@ msgid "More Actions:"
 msgstr "更多操作"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
-#, fuzzy
 msgid "Raw Text"
-msgstr "显示源码"
+msgstr "源码"
 
 msgid "Delete Cache"
 msgstr "删除缓存"
 
-#, fuzzy
 msgid "Attachments"
-msgstr "上载附件"
+msgstr "附件"
 
 msgid "Delete Page"
 msgstr "删除"
 
-#, fuzzy
 msgid "Like Pages"
 msgstr "相似网页"
 
-#, fuzzy
 msgid "Local Site Map"
 msgstr "本站地图"
 

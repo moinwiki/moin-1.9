@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -933,6 +933,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Použijte prosím selektivnější vyhledávací výraz místo {{{\"%s\"}}}"
@@ -987,6 +990,12 @@ msgstr ""
 "NEPOUŽÍVEJTE url odkazu {{{[get]}}}, protože to je konstrukce, \n"
 "která se brzy může změnit nebo dokonce zrušit."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Nebyly uloženy žádné přílohy ke stránce %(pagename)s."
@@ -1039,6 +1048,12 @@ msgstr "Nemáte dostatečná práva ke smazání přílohy u této stránky!"
 msgid "You are not allowed to get attachments from this page."
 msgstr "Nemáte dostatečná práva k získání přílohy na této stránky."
 
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Nemáte dovoleno rozbalovat přílohy na této stránce."
+
+msgid "You are not allowed to install files."
+msgstr "Nemáte dovoleno instalovat soubory."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Nemáte dostatečná práva k prohlížení příloh na této stránce."
 
@@ -1067,8 +1082,49 @@ msgid "Attachment '%(filename)s' deleted."
 msgstr "Příloha '%(filename)s' smazána."
 
 #, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Příloha '%(filename)s' úspěšně instalována."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Instalace '%(filename)s' selhala."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Příloha '%(filename)s' rozbalena."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid "The file %(target) is not a .zip file."
+msgstr ""
+
+#, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Příloha '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+msgid "File Name"
+msgstr "JmenoSouboru"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Neznámy typ souboru, nemohu tuto přílohu přímo zobrazit."
@@ -1152,13 +1208,13 @@ msgstr ""
 msgid "(including %(localwords)d %(pagelink)s)"
 msgstr "(včetně %(localwords)d %(pagelink)s)"
 
-#, python-format, fuzzy
+#, python-format
 msgid ""
 "The following %(badwords)d words could not be found in the dictionary of %"
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy"
-"%(localwords)s nalezena a jsou zvýrazněna níže:"
+"Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy%"
+"(localwords)s nalezena a jsou zvýrazněna níže:"
 
 msgid "Add checked words to dictionary"
 msgstr "Přidat označená slova do slovníku"
