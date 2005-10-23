@@ -7,21 +7,20 @@ You must run this script as owner of the wiki files, usually this is the
 web server user.
 
 @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
+@copyright: 2005 Thomas Waldmann
 @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, StringIO, codecs, shutil, errno
+import sys, os, time, StringIO, codecs, shutil, re, errno
 
 # Insert the path to MoinMoin in the start of the path
-import sys
 sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), 
                                 os.pardir, os.pardir))
 
 from MoinMoin import config, wikiutil, Page
 from MoinMoin.scripts import _util
 from MoinMoin.request import RequestCLI
-
-logo_html = '<img src="moinmoin.png">'
+from MoinMoin.action import AttachFile
 
 url_prefix = "."
 HTML_SUFFIX = ".html"
@@ -47,13 +46,37 @@ page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 </tr>
 </table>
 <hr>
+<div id="page">
+<h1 id="title">%(pagename)s</h1>
 %(pagehtml)s
+</div>
 <hr>
 %(timestamp)s
 </body>
 </html>
 '''
 
+def _attachment(request, pagename, filename, outputdir):
+    source_dir = AttachFile.getAttachDir(request, pagename)
+    source_file = os.path.join(source_dir, filename)
+    dest_dir = os.path.join(outputdir, "attachments", wikiutil.quoteWikinameFS(pagename))
+    dest_file = os.path.join(dest_dir, filename)
+    dest_url = "attachments/%s/%s" % (wikiutil.quoteWikinameFS(pagename), filename)
+    if os.access(source_file, os.R_OK):
+        if not os.access(dest_dir, os.F_OK):
+            try:
+                os.makedirs(dest_dir)
+            except:
+                _util.fatal("Cannot create attachment directory '%s'" % dest_dir)
+        elif not os.path.isdir(dest_dir):
+            _util.fatal("'%s' is not a directory" % dest_dir)
+
+        shutil.copyfile(source_file, dest_file)
+        _util.log('Writing "%s"...' % dest_url)
+        return dest_url
+    else:
+        return ""
+  
 
 class MoinDump(_util.Script):
     
@@ -106,6 +129,7 @@ class MoinDump(_util.Script):
             request = RequestCLI()
 
         # fix url_prefix so we get relative paths in output html
+        original_url_prefix = request.cfg.url_prefix
         request.cfg.url_prefix = url_prefix
 
         if self.options.page:
@@ -117,6 +141,8 @@ class MoinDump(_util.Script):
 
         wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
 
+        AttachFile.getAttachUrl = lambda pagename, filename, request, addts=0, escaped=0: (_attachment(request, pagename, filename, outputdir))
+
         errfile = os.path.join(outputdir, 'error.log')
         errlog = open(errfile, 'w')
         errcnt = 0
@@ -127,7 +153,7 @@ class MoinDump(_util.Script):
         
         navibar_html = ''
         for p in [page_front_page, page_title_index, page_word_index]:
-            navibar_html += '&nbsp;[<a href="%s">%s</a>]' % (wikiutil.quoteWikinameFS(p), wikiutil.escape(p))
+            navibar_html += '&nbsp;[<a href="%s">%s</a>]' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
 
         for pagename in pages:
             # we have the same name in URL and FS
@@ -148,6 +174,7 @@ class MoinDump(_util.Script):
                     import traceback
                     traceback.print_exc(None, errlog)
             finally:
+                logo_html = re.sub(original_url_prefix + "/?", "", request.cfg.logo_string)
                 timestamp = time.strftime("%Y-%m-%d %H:%M")
                 filepath = os.path.join(outputdir, file)
                 fileout = codecs.open(filepath, 'w', config.charset)

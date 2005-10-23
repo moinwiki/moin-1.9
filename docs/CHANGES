@@ -178,6 +178,8 @@ Version moin--main--1.5:
     * Added a RenderAsDocbook action which redirects to the DocBook formatter.
     * Added searching for wiki-local words lists under <data_dir>/dict/.
       They are used additionally to the global lists in MoinMoin/dict/.
+    * moin_dump now also dumps attachments referenced from the page.
+      It doesn't dump stuff that is just attached, but not referenced!
 
   International support:    
     * mail_from can be now a unicode name-address 
