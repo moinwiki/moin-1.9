@@ -17,7 +17,6 @@ FreshMeat http://freshmeat.net/
 Thinki http://www.thinkware.se/cgi-bin/thinki.cgi/
 PythonFaq http://www.python.org/cgi-bin/faqw.py?req=show&file=faq$PAGE.htp
 DocBook http://docbook.org/wiki/moin.cgi/
-AwarenessWiki http://aware.wiki.taoriver.net/moin.cgi/
 SpackOrg http://www.spack.org/index.cgi/
 ESW http://esw.w3.org/topic/
 OSPedia http://ospedia.osdir.com/
@@ -36,32 +35,35 @@ Parawiki http://parawiki.plm.eecs.uni-kassel.de/
 CPAN http://search.cpan.org/perldoc?
 NemWiki http://nematologists.org.au/nemwiki
 PostWiki http://www.postwiki.net/
+GentooLinux http://gentoo-wiki.com/
+CoLinux http://wiki.colinux.org/cgi-bin/
+LinuxMM http://linux-mm.org/
+LinuxNet http://linux-net.osdl.org/index.php/
+KernelNewbies http://wiki.kernelnewbies.org/
+Spamikaze http://spamikaze.org/
 
 ## Updated 2004-11-19 from http://www.usemod.com/cgi-bin/mb.pl?InterMapTxt
 ## Please modify the upper part of this page only
 
 AbbeNormal http://ourpla.net/cgi/pikie?
-AcadWiki http://xarch.tu-graz.ac.at/autocad/wiki/
 Acronym http://www.acronymfinder.com/af-query.asp?String=exact&Acronym=
 Advogato http://www.advogato.org/
-ALife http://news.alife.org/wiki/index.php?
 AnnotationWiki http://www.seedwiki.com/page.cfm?wikiid=368&doc=
 AtomWiki http://intertwingly.net/wiki/pie/
 BitTorrentFAQ http://www.bamber.org/wiki/ow.asp?
 BookShelved http://bookshelved.org/cgi-bin/wiki.pl?
-BuildingControlsWiki http://www.buildingcontrols.de/
+BuildingControlsWiki http://wiki.buildingcontrols.de/CoMa.php?CoMa=
 C2find http://c2.com/cgi/wiki?FindPage&value=
 Cache http://www.google.com/search?q=cache:
 CarpeWiki http://carpe.com/wiki/wiki.pl?
 CommunityWiki http://www.emacswiki.org/cgi-bin/community?
-ConcurrenceWiki http://concurrence.sourceforge.net/cgi-bin/moin.cgi/
 CraoWiki http://wiki.crao.net/index.php/
 CreationMatters http://www.ourpla.net/cgi-bin/wiki.pl?
 DebianforumDeWiki http://www.debianforum.de/wiki/?page=
 Dictionary http://www.dict.org/bin/Dict?Database=*&Form=Dict1&Strategy=*&Query=
 Disinfopedia http://www.disinfopedia.org/wiki.phtml?title=
 DseWiki http://www.wikiservice.at/dse/wiki.cgi?
-EmacsWiki http://www.emacswiki.org/cgi-bin/wiki/
+EmacsWiki http://www.emacswiki.org/
 Foldoc http://www.foldoc.org/foldoc/foldoc.cgi?
 FoxWiki http://fox.wikis.com/wc.dll?Wiki~
 FractalWiki http://www.wikiservice.at/fractal/wikidev.cgi?
@@ -83,7 +85,7 @@ MeatBall http://www.usemod.com/cgi-bin/mb.pl?
 MetaWiki http://sunir.org/apps/meta.pl?
 MetaWikiPedia http://meta.wikipedia.org/wiki/
 MoinMoin http://moinmoin.wikiwikiweb.de/
-OddMuse http://www.emacswiki.org/cgi-bin/oddmuse/
+OddMuse http://www.oddmuse.org/
 OPAG http://opag.ca/wiki?
 OpenMind http://www2.iro.umontreal.ca/~paquetse/cgi-bin/om.cgi?
 OpenWiki http://openwiki.com/?
