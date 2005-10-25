@@ -835,9 +835,11 @@ class Page:
         # Create url, excluding scriptname
         url = wikiutil.quoteWikinameURL(self.page_name)
         if querystr:
+            if not isinstance(querystr, type({})):
+                # makeQueryString does not escape strings any more
+                querystr = wikiutil.escape(querystr)
+                
             querystr = wikiutil.makeQueryString(querystr)
-            # makeQueryString does not escape any more
-            querystr = wikiutil.escape(querystr)
             url = "%s?%s" % (url, querystr)
 
         # Add anchor
