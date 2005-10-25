@@ -537,7 +537,15 @@ class Macro:
 
     def _macro_UserPreferences(self, args):
         from MoinMoin import userform
-        return self.formatter.rawHTML(userform.getUserForm(self.request))
+
+        create_only = False
+        if isinstance(args, unicode):
+            args = args.strip(" '\"")
+            create_only = (args.lower()=="createonly")
+
+        return self.formatter.rawHTML(userform.getUserForm(
+            self.request,
+            create_only=create_only))
 
     def _macro_Anchor(self, args):
         return self.formatter.anchordef(args or "anchor")

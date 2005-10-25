@@ -80,38 +80,16 @@ Contact the owner of the wiki, who can enable email.""")
             except KeyError:
                 return _("Please provide a valid email address!")
     
-            text = ''
             users = user.getUserList(self.request)
             for uid in users:
                 theuser = user.User(self.request, uid)
                 if theuser.valid and theuser.email.lower() == email:
-                    text += '\n' + _("""\
-Login Name: %s
+                    msg = theuser.mailAccountData()
+                    return wikiutil.escape(msg)
 
-Login Password: %s
+            return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
 
-Login URL: %s/?action=userform&uid=%s
-""", formatted=False) % (
-                        theuser.name, theuser.enc_password, self.request.getBaseURL(), theuser.id)
 
-            if not text:
-                return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
-
-            text = _("""\
-Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki's password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-""", formatted=False) + text
-
-            subject = _('[%(sitename)s] Your wiki account data',
-                formatted=False) % {'sitename': self.cfg.sitename or "Wiki"}
-            mailok, msg = util.mail.sendmail(self.request, [email], subject,
-                text, mail_from=self.cfg.mail_from)
-            return wikiutil.escape(msg)
 
         if form.has_key('login'):
             # Trying to login with a user name and a password
@@ -159,9 +137,14 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
             self.request.setCookie()           
         
         
-        elif form.has_key('create'):
+        elif (form.has_key('create') or
+              form.has_key('create_only') or
+              form.has_key('create_and_mail')):
             # Create user profile
-            theuser = self.request.get_user()
+            if form.has_key('create'):
+                theuser = self.request.get_user()
+            else:
+                theuser = user.User(self.request)
                 
             # Require non-empty name
             try:
@@ -221,10 +204,14 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                         return _("This email already belongs to somebody else.")
 
             # save data and send cookie
-            theuser.save()            
-            self.request.user = theuser
-            self.request.setCookie()
+            theuser.save()
+            if form.has_key('create'):
+                self.request.user = theuser
+                self.request.setCookie()
 
+            if form.has_key('create_and_mail'):
+                theuser.mailAccountData()
+            
             result = _("User account created!")
             if _debug:
                 result = result + util.dumpFormData(form)
@@ -492,12 +479,12 @@ class UserSettings:
         ]))
 
 
-    def asHTML(self):
+    def asHTML(self, create_only=False):
         """ Create the complete HTML form code. """
         _ = self._
         self.make_form()
 
-        if self.request.user.valid:
+        if self.request.user.valid and not create_only:
             buttons = [
                 ('save', _('Save')),
                 ('logout', _('Logout')),
@@ -592,10 +579,18 @@ class UserSettings:
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 if key in ('name', 'password', 'password2', 'email'):
                     self.make_row(_(label),
-                              [ html.INPUT(type=type, size=length, name=key, value=getattr(self.request.user, key)), ' ', _(textafter), ])
+                              [ html.INPUT(type=type, size=length, name=key,
+                                           value=''),
+                                ' ', _(textafter), ])
 
         if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
+
+        if create_only:
+            buttons = [("create_only", _('Create Profile'))]
+            if self.cfg.mail_enabled:
+                buttons.append(("create_and_mail", "%s + %s" %
+                                (_('Create Profile'), _('Email'))))
 
         # Add buttons
         button_cell = []
@@ -610,9 +605,9 @@ class UserSettings:
         return unicode(self._form)
 
 
-def getUserForm(request):
+def getUserForm(request, create_only=False):
     """ Return HTML code for the user settings. """
-    return UserSettings(request).asHTML()
+    return UserSettings(request).asHTML(create_only=create_only)
 
 
 #############################################################################
@@ -630,7 +625,7 @@ def do_user_browser(request):
         #Column('id', label=('ID'), align='right'),
         Column('name', label=('Username')),
         Column('email', label=('Email')),
-        #Column('action', label=_('Action')),
+        Column('action', label=_('Action')),
     ]
 
     # Iterate over users
@@ -649,7 +644,11 @@ def do_user_browser(request):
             (request.formatter.url(1, 'mailto:' + account.email, css='mailto', unescaped=1) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
-            #'',
+            request.page.link_to(request, text=_('Mail me my account data'),
+                                 querystr= {"action":"userform",
+                                            "email": account.email,  
+                                            "account_sendmail": "1",
+                                            "sysadm": "users",})
         ))
 
     if data:

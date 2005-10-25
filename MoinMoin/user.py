@@ -908,3 +908,33 @@ class User:
             markup = '%s:%s' % (wikiname, pagename.replace(" ","_")) 
         return markup
 
+    def mailAccountData(self, cleartext_passwd=None):
+        from MoinMoin.util import mail
+        _ = self._request.getText
+
+        text = '\n' + _("""\
+Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+""", formatted=False) % (
+                        self.name, self.enc_password, self._request.getBaseURL(), self.id)
+
+        text = _("""\
+Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki's password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+""", formatted=False) + text
+
+
+        subject = _('[%(sitename)s] Your wiki account data',
+                    formatted=False) % {'sitename': self._cfg.sitename or "Wiki"}
+        mailok, msg = mail.sendmail(self._request, [self.email], subject,
+                                    text, mail_from=self._cfg.mail_from)
+        return msg
+        
