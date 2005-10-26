@@ -35,6 +35,19 @@ class Formatter(text_html.Formatter):
 
     # Links ##############################################################
 
+    def pagelink(self, on, pagename='', page=None, **kw):
+        """ Link to a page.
+
+            formatter.text_python will use an optimized call with a page!=None
+            parameter. DO NOT USE THIS YOURSELF OR IT WILL BREAK.
+
+            See wikiutil.link_tag() for possible keyword parameters.
+        """
+        apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
+        if page is None:
+            page = Page(self.request, pagename, formatter=self);
+        return page.link_to(self.request, on=on, **kw)
+
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         """
         @keyword title: override using the interwiki wikiname as title
