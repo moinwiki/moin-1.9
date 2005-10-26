@@ -1083,7 +1083,7 @@ actionsMenuInit('%(label)s');
 var gui_editor_link_href = "%(url)s?action=edit&editor=gui";
 var gui_editor_link_text = "%(text)s";
 </script>        
-""" % {'url': wikiutil.quoteWikinameURL(page.page_name),
+""" % {'url': page.url(self.request),
        'text': _('Edit (GUI)', formatted=False),}
 
     def disabledEdit(self):
