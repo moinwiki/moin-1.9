@@ -208,12 +208,6 @@ class Parser:
         url = wikiutil.url_unquote(url, want_unicode=False)
         text = text or url
 
-        parts = url.split('/')
-        if len(parts) > 1:
-            # get attachment from other page
-            pagename = '/'.join(parts[:-1])
-            url = parts[-1]
-
         from MoinMoin.action import AttachFile
         if drawing:
             return self.formatter.attachment_drawing(url, text)

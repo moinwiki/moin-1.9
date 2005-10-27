@@ -301,8 +301,8 @@ class Formatter(FormatterBase):
 
     def attachment_link(self, url, text, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        fname = wikiutil.taintfilename(url)
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
             linktext = _('Upload new attachment "%(filename)s"')
@@ -312,15 +312,15 @@ class Formatter(FormatterBase):
                           (wikiutil.quoteWikinameURL(pagename),
                            wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
-        target = AttachFile.getAttachUrl(pagename, url, self.request)
+        target = AttachFile.getAttachUrl(pagename, filename, self.request)
         return (self.url(1, target, title="attachment:%s" % url) +
                 self.text(text) +
                 self.url(0))
     
     def attachment_image(self, url, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        fname = wikiutil.taintfilename(url)
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
             linktext = _('Upload new attachment "%(filename)s"')
@@ -332,23 +332,23 @@ class Formatter(FormatterBase):
                 linktext % {'filename': self.text(fname)})
         return self.image(
             title="attachment:%s" % url,
-            src=AttachFile.getAttachUrl(pagename, url, self.request, addts=1))
+            src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1))
     
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        fname = wikiutil.taintfilename(url)
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
         drawing = fname
         fname = fname + ".png"
-        url = url + ".png"
+        filename = filename + ".png"
         # fallback for old gif drawings (1.1 -> 1.2)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
             gfname = fname[:-4] + ".gif"
-            gurl = url[:-4] + ".gif"
+            gfilename = filename[:-4] + ".gif"
             gfpath = AttachFile.getFilename(self.request, pagename, gfname)
             if os.path.exists(gfpath):
-                fname, url, fpath = gfname, gurl, gfpath
+                fname, filename, fpath = gfname, gfilename, gfpath
 
         # check whether attachment exists, possibly point to upload form
         if not os.path.exists(fpath):
@@ -389,23 +389,23 @@ class Formatter(FormatterBase):
                 return (map + self.image(
                     alt=drawing,
                     src=AttachFile.getAttachUrl(
-                    pagename, url, self.request,
+                    pagename, filename, self.request,
                     addts=1),
                     usemap='#'+mapid, html_class="drawing"))
         else:
             return wikiutil.link_tag(self.request,
                                      edit_link,
                                      self.image(alt=url,
-                                                src=AttachFile.getAttachUrl(pagename, url, self.request, addts=1), html_class="drawing"),
+                                                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), html_class="drawing"),
                                      attrs='title="%s"' % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
         
     
     def attachment_inlined(self, url, text, **kw):
         _ = self.request.getText
-        pagename = self.page.page_name
-        fname = wikiutil.taintfilename(url)
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
-        base, ext = os.path.splitext(url)
+        base, ext = os.path.splitext(filename)
         Parser = wikiutil.getParserForExtension(self.request.cfg, ext)
         if Parser is not None:
             try:
