@@ -1014,21 +1014,12 @@ actionsMenuInit('%(label)s');
         This is separate method to make it easy to customize the
         edtibar in sub classes.
         """
-        return [self.parentLink(page),
-                self.editorLink(page),
+        return [self.editorLink(page),
                 self.infoLink(page),
                 self.subscribeLink(page),
                 self.quicklinkLink(page),
                 self.attachmentsLink(page),
                 self.actionsMenu(page),]
-
-    def parentLink(self, page):
-        """ Return link to parent page """
-        _ = self.request.getText
-        parent = page.getParentPage()
-        if parent is None:
-            return ''
-        return parent.link_to(self.request, _("Parent Page", formatted=False))
 
     def editorLink(self, page):
         """ Return a link to the editor 
