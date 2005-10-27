@@ -154,28 +154,39 @@ class ThemeBase:
         @return: title html
         """
         _ = self.request.getText
-
         if d['title_link']:
-            content = curpage = ''
-            segments = d['title_text'].split('/')
-            for s in segments[:-1]:
-                curpage += s
-                content = "%s%s/" % (content, Page(self.request, curpage).link_to(self.request, s))
-                curpage += '/'
-
+            # This is a page title
+            page = d["page"]
+            content = self.location(page)
             content += ('<a class="backlink" title="%(title)s" href="%(href)s">%(text)s</a>') % {
                 'title': _('Click to do a full-text search for this title'),
                 'href': d['title_link'],
-                'text': wikiutil.escape(segments[-1]),
-                }
+                'text': wikiutil.escape(page.page_name.split('/')[-1]),}
         else:
+            # Search or other action, not a page title
             content = wikiutil.escape(d['title_text'])
 
         html = '''
 <h1 id="title">%s</h1>
 ''' % content
-
         return html
+
+    def location(self, page):
+        """ Create breadcrumbs like location links 
+        
+        a / b / c / - > a link to a, b link to a/b...
+        
+        Themes may place this item as part of the title, or in any
+        other location, like modern_cms.
+        """
+        content = curpage = ''
+        segments = page.page_name.split('/')
+        for s in segments[:-1]:
+            curpage += s
+            page = Page(self.request, curpage)
+            content = "%s%s/" % (content, page.link_to(self.request, s))
+            curpage += '/'
+        return content
 
     def username(self, d):
         """ Assemble the username / userprefs link
