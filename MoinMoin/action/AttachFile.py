@@ -64,6 +64,16 @@ def getAttachDir(request, pagename, create=0):
 
     return attach_dir
 
+def absoluteName(url, pagename):
+    """ Get (pagename, filename) of an atatchment: link
+    """
+
+    pieces = url.rsplit('/', 1)
+    if len(pieces)==1:
+        return pagename, pieces[0]
+    else:
+        print pieces
+        return pieces[0], pieces[1]
 
 def getAttachUrl(pagename, filename, request, addts=0, escaped=0):
     """ Get URL that points to attachment `filename` of page `pagename`.
