@@ -273,9 +273,9 @@ class RequestBase(object):
         
         @param env: dict like object containing cgi meta variables
         """
-        self.is_ssl = (env.get('SSL_PROTOCOL') or
-                       env.get('SSL_PROTOCOL_VERSION') or
-                       env.get('HTTPS') == 'on')
+        self.is_ssl = bool(env.get('SSL_PROTOCOL') or
+                           env.get('SSL_PROTOCOL_VERSION') or
+                           env.get('HTTPS') == 'on')
 
     def setHost(self, host=None):
         """ Set http_host 
