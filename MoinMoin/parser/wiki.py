@@ -338,7 +338,14 @@ class Parser:
             text = word
         if word.startswith(wikiutil.CHILD_PREFIX):
             word = self.formatter.page.page_name + '/' + word[wikiutil.CHILD_PREFIX_LEN:]
-        return (self.formatter.pagelink(1, word) +
+
+        # handle anchors
+        parts = word.split("#", 1)
+        anchor = ""
+        if len(parts)==2:
+            word, anchor = parts
+            
+        return (self.formatter.pagelink(1, word, anchor=anchor) +
                 self.formatter.text(text) +
                 self.formatter.pagelink(0, word))
 
