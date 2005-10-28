@@ -970,6 +970,7 @@ class Page:
         pi_refresh = None
         pi_formtext = []
         pi_formfields = []
+        pi_lines = 0
         wikiform = None
 
         # check for XML content
@@ -978,6 +979,8 @@ class Page:
 
         # check processing instructions
         while body and body[0] == '#':
+            pi_lines += 1
+            
             # extract first line
             try:
                 line, body = body.split('\n', 1)
@@ -1204,7 +1207,9 @@ class Page:
         else:
             # parse the text and send the page content
             self.send_page_content(request, Parser, body,
-                                   format_args=pi_formatargs, do_cache=do_cache)
+                                   format_args=pi_formatargs,
+                                   do_cache=do_cache,
+                                   start_line=pi_lines)
 
             # check for pending footnotes
             if getattr(request, 'footnotes', None):
@@ -1271,7 +1276,7 @@ class Page:
         return False
 
     def send_page_content(self, request, Parser, body, format_args='',
-                          do_cache=1):
+                          do_cache=1, **kw):
         """ Output the formatted wiki page, using caching if possible
 
         @param request: the request object
@@ -1281,7 +1286,7 @@ class Page:
         @param do_cache: if True, use cached content
         """
         request.clock.start('send_page_content')
-        parser = Parser(body, request, format_args=format_args)
+        parser = Parser(body, request, format_args=format_args, **kw)
 
         if not (do_cache and self.canUseCache(Parser)):
             self.format(parser)
