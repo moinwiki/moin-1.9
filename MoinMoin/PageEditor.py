@@ -488,12 +488,19 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         and keeping the backups, logs and attachments).
         
         @param comment: Comment given by user
+        @rtype: unicode
+        @return: error message
         """
         # First save a final backup copy of the current page
         # (recreating the page allows access to the backups again)
+        _ = self._
+        
         try:
-            self.saveText(u"deleted\n", 0, comment=comment or u'')
-        except self.SaveError, msg:
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'')
+            msg = msg.replace(
+                _("Thank you for your changes. Your attention to detail is appreciated."),
+                _('Page "%s" was successfully deleted!') % (self.page_name,))
+        except self.SaveError, message:
             # XXX Error handling
             pass
         # Then really delete it
@@ -523,6 +530,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             key = formatter_name
             cache = caching.CacheEntry(self.request, arena, key)
             cache.remove()
+        return msg
 
     def _sendNotification(self, comment, emails, email_lang, revisions, trivial):
         """

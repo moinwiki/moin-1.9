@@ -41,10 +41,9 @@ def execute(pagename, request):
                 msg = _('Please use the interactive user interface to delete pages!'))
 
         # Delete the page
-        page.deletePage(request.form.get('comment', [u''])[0])
+        msg = page.deletePage(request.form.get('comment', [u''])[0])
 
-        return page.send_page(request,
-                msg = _('Page "%s" was successfully deleted!') % (pagename,))
+        return page.send_page(request, msg = msg)
 
     # send deletion form
     ticket = wikiutil.createTicket()
