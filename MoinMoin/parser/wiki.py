@@ -108,6 +108,7 @@ class Parser:
         self.cfg = request.cfg
         self.line_anchors = kw.get('line_anchors', True)
         self.macro = None
+        self.start_line = kw.get('start_line', 0)
 
         self.is_em = 0
         self.is_b = 0
@@ -922,7 +923,7 @@ class Parser:
         rawtext = self.raw.expandtabs()
 
         # go through the lines
-        self.lineno = 0
+        self.lineno = self.start_line
         self.lines = eol_re.split(rawtext)
         self.line_is_empty = 0
 
