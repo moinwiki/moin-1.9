@@ -224,6 +224,7 @@ class Formatter(FormatterBase):
             
         if self.request.user.show_nonexist_qm and on and not page.exists():
             self.pagelink_preclosed = True
+            import sys; sys.stderr.write("DEBUG - Calling 2x link_to(**%r)\n" % (kw))
             return (page.link_to(self.request, on=1, **kw) +
                     self.text("?") +
                     page.link_to(self.request, on=0, **kw))
@@ -269,6 +270,7 @@ class Formatter(FormatterBase):
             url = wikiutil.mapURL(self.request, url)
         title = kw.get('title', None)
         attrs = kw.get('attrs', None)
+        import sys; sys.stderr.write("DEBUG - called url. on is %r\n" % (on))
         if on:
             str = '<a'
             if css: 
