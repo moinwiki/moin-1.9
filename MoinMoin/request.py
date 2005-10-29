@@ -140,13 +140,6 @@ class RequestBase(object):
 
             from MoinMoin import i18n
 
-            # Set theme - forced theme, user theme or wiki default
-            if self.cfg.theme_force:
-                theme_name = self.cfg.theme_default
-            else:
-                theme_name = self.user.theme_name
-            self.loadTheme(theme_name)
-            
             self.logger = None
             self.pragma = {}
             self.mode_getpagelinks = 0
@@ -927,6 +920,13 @@ class RequestBase(object):
 
         # parse request data
         try:
+            # Set theme - forced theme, user theme or wiki default
+            if self.cfg.theme_force:
+                theme_name = self.cfg.theme_default
+            else:
+                theme_name = self.user.theme_name
+            self.loadTheme(theme_name)
+            
             self.args = self.setup_args()
             self.form = self.args    
             action = self.form.get('action',[None])[0]
