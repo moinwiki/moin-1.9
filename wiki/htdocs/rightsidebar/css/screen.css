@@ -6,9 +6,9 @@ Copyright (c) 2001, 2002, 2003 by Juergen Hermann
 /* content styles */
 
 body {
-	margin:0;
-	padding:0;
-	border:0;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 .footnotes div {
@@ -77,7 +77,7 @@ span.sep {
 
 #page {
     margin: 10px 220px 10px 10px;
-	padding: 15px 30px;
+	padding: 4px;
 	border: 1px solid #9c9c9c;
 	border-bottom: 2px solid #9c9c9c;
 	background-color: white;
@@ -105,7 +105,7 @@ span.sep {
 .sidepanel h1 {
 	margin: 0;
 	padding: 0.2em 10px;
-	text-align:center;
+	text-align: center;
 	border: none;
 	border-top: 1px solid white;
 	border-bottom: 1pt solid #BFAE8F;
@@ -126,12 +126,12 @@ span.sep {
 .sidepanel ul {
 	list-style-type: none;
 	margin: 0;
-	padding:0;
+	padding: 0;
 }
 
 .sidepanel li {
 	margin: 0;
-	padding:2px 10px;
+	padding: 2px 10px;
 	border-bottom: 1pt solid #BFAE8F;
 	background: tan;
 }
@@ -223,13 +223,13 @@ span.sep {
 
 #message {
 	margin: 10px 220px 10px 10px;
-	padding: 5px 10px;
+	padding: 4px;
 	background-color: #F0ECE6;
 	border: 1px solid #9c9c9c;
 	border-bottom: 2px solid #9c9c9c;
 }
 
-#message p{
+#message p {
 	margin: 5px 0;
 	padding: 0;
 	font-weight: bold;
@@ -302,7 +302,7 @@ form.dialog {
 }
 
 .diff {
-	width:99%;
+	width: 99%;
 }
 
 .diff-title {
