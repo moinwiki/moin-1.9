@@ -238,8 +238,7 @@ class DefaultConfig:
     mail_smarthost = None
     mail_from = None # u'Jürgen Wiki <noreply@jhwiki.org>'
     
-    navi_bar = [u'%(page_front_page)s', u'RecentChanges', u'FindPage', 
-                u'HelpContents', ]
+    navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = 0
 
     page_credits = [

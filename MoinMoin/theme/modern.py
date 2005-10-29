@@ -28,6 +28,7 @@ class Theme(ThemeBase):
             self.logo(),
             self.searchform(d),
             self.username(d),
+            self.title(d),
             self.trail(d),
             self.navibar(d),
             #u'<hr id="pageline">',
@@ -41,7 +42,6 @@ class Theme(ThemeBase):
             
             # Start of page
             self.startPage(),
-            self.title(d),
         ]
         return u'\n'.join(html)
 

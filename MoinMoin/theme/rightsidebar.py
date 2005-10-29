@@ -43,15 +43,10 @@ class Theme(ThemeBase):
         """ Create user panel """
         _ = self.request.getText
 
-        trail = self.trail(d)
-        if trail:
-            trail = u'<h2>%s</h2>\n' % _("Trail") + trail
-
         html = [
             u'<div class="sidepanel">',
             u'<h1>%s</h1>' %  _("User"),
             self.username(d),
-            trail,
             u'</div>'
             ]
         return u'\n'.join(html)
@@ -74,6 +69,8 @@ class Theme(ThemeBase):
             u'<div id="header">',
             self.searchform(d),
             self.logo(),
+            self.title(d),
+            self.trail(d),
             u'</div>',
             
             # Custom html below header (not recomended!)
@@ -90,7 +87,6 @@ class Theme(ThemeBase):
             
             # Page
             self.startPage(),
-            self.title(d),
             ]
         return u'\n'.join(html)
     

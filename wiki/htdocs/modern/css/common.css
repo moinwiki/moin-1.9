@@ -50,21 +50,7 @@ After getting it to work, this has to be fine-tuned to avoid screen jumping.
 
 /* Headings */
 
-h1 {
-	margin: 0;
-	padding: 0;
-	color: black;
-	font-size: 2em;
-	font-weight: bold; 
-	line-height: 1.2em;
-}
-
-h1 a, h1 a:visited {
-	text-decoration: none;    
-	color: black;
-}
-
-h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5, h6
 {
 	margin: 1.5em 0 0 0;
 	padding: 0;
@@ -72,6 +58,7 @@ h2, h3, h4, h5, h6
 	line-height: 1.2em;
 }	
 
+h1 {font-size: 1.9em;}
 h2 {font-size: 1.6em;}
 h3 {font-size: 1.3em;}
 h4 {font-size: 1.1em;}

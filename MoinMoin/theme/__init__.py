@@ -147,46 +147,41 @@ class ThemeBase:
         return html
         
     def title(self, d):
-        """ Assemble the title
+        """ Assemble the title (now using breadcrumbs and interwiki info)
         
         @param d: parameter dictionary
         @rtype: string
         @return: title html
         """
         _ = self.request.getText
+        content = []
+        # Show our interwikiname or Self (and link to page_front_page)
+        pagename = wikiutil.getFrontPage(self.request).page_name
+        pagename = wikiutil.quoteWikinameURL(pagename)
+        link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
+        content.append(u"<li>%s</li>" % link)
+        
         if d['title_link']:
-            # This is a page title
-            page = d["page"]
-            content = self.location(page)
-            content += ('<a class="backlink" title="%(title)s" href="%(href)s">%(text)s</a>') % {
+            curpage = ''
+            segments = d['title_text'].split('/')
+            for s in segments[:-1]:
+                curpage += s
+                content.append("<li>%s</li>" % Page(self.request, curpage).link_to(self.request, s))
+                curpage += '/'
+            content.append(('<li><a class="backlink" title="%(title)s" href="%(href)s">%(text)s</a></li>') % {
                 'title': _('Click to do a full-text search for this title'),
                 'href': d['title_link'],
-                'text': wikiutil.escape(page.page_name.split('/')[-1]),}
+                'text': wikiutil.escape(segments[-1]),
+                })
         else:
-            # Search or other action, not a page title
-            content = wikiutil.escape(d['title_text'])
+            content.append('<li>%s</li>' % wikiutil.escape(d['title_text']))
 
         html = '''
-<h1 id="title">%s</h1>
-''' % content
+<ul id="pagelocation">
+%s
+</ul>
+''' % "".join(content)
         return html
-
-    def location(self, page):
-        """ Create breadcrumbs like location links 
-        
-        a / b / c / - > a link to a, b link to a/b...
-        
-        Themes may place this item as part of the title, or in any
-        other location, like modern_cms.
-        """
-        content = curpage = ''
-        segments = page.page_name.split('/')
-        for s in segments[:-1]:
-            curpage += s
-            page = Page(self.request, curpage)
-            content = "%s%s/" % (content, page.link_to(self.request, s))
-            curpage += '/'
-        return content
 
     def username(self, d):
         """ Assemble the username / userprefs link
@@ -368,14 +363,6 @@ class ThemeBase:
                 items.append(item % (cls, link))
                 found[pagename] = 1
 
-        # Add current page at end
-        if not current in found:
-            title = d['page'].split_title(request)
-            title = self.shortenPagename(title)
-            link = d['page'].link_to(request, title)
-            cls = 'current'
-            items.append(item % (cls, link))
-
         # Assemble html
         items = u'\n'.join(items)
         html = u'''
@@ -384,7 +371,7 @@ class ThemeBase:
 </ul>
 ''' % items
         return html
-                
+
     def get_icon(self, icon):
         """ Return icon data from self.icons
 
@@ -500,8 +487,7 @@ class ThemeBase:
             trail = user.getTrail()
             if trail:
                 items = []
-                # Show all items except the last one which is this page.
-                for pagename in trail[:-1]:
+                for pagename in trail:
                     try:
                         interwiki, page = pagename.split(":", 1)
                         # Items in trail are saved as valid interwiki
