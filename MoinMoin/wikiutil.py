@@ -237,6 +237,19 @@ def escape(s, quote=0):
         s = s.replace('"', "&quot;")
     return s
 
+def make_breakable(text, maxlen):
+    """ make a text breakable by inserting spaces into nonbreakable parts
+    """
+    text = text.split(" ")
+    newtext = []
+    for part in text:
+        if len(part) > maxlen:
+            while part:
+                newtext.append(part[:maxlen])
+                part = part[maxlen:]
+        else:
+            newtext.append(part)
+    return " ".join(newtext)
 
 ########################################################################
 ### Storage
