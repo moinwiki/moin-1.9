@@ -185,6 +185,21 @@ Version moin--main--1.5:
     * mail_from can be now a unicode name-address 
       e.g u'Jürgen wiki <noreply@jhwiki.org'
 
+  Theme changes:
+    * logo_string is now should be really only the logo (img).
+      If you included your wiki's name in logo_string you maybe want to remove
+      it now as it is shown as part of the location display now anyway.
+    * You maybe want to remove page_front_page from your navi_bar - we link to
+      that page now from the logo and (new) from the interwiki name displayed
+      in location display, so you maybe don't need it in navi_bar, too.
+    * If you have a custom theme, you should / may:
+     * sync modern/css/screen.css #pagelocation #pagetrail stuff to your
+       screen.css or pagelocation display (title()) will look strange (like a
+       list).
+     * remove "#title h1 ..." CSS, not used any more.
+     * maybe move both title() and trail() to header area, like the builtin
+       themes do it.
+
   Developer notes:    
     * Plugin API was improved. When plugin module is missing,
       wikiutil.PluginMissingError is raised. When trying to import a

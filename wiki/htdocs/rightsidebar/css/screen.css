@@ -38,13 +38,17 @@ span.sep {
 }
 
 #logo {
-    margin: 0;
-    padding: 5px 10px;
+    float: left;
+    margin: 5px 10px;
+    padding: 0;
     /* For text only logo */
-    font-weight: bold;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1em;
-    white-space: nowrap;
+    font-weight: bold;
+}
+
+*[dir="rtl"] #logo {
+    float: right;
 }
 
 #logo img {
@@ -52,7 +56,7 @@ span.sep {
 }
 
 #logo a {
-    color: black;  
+    color: black;
     text-decoration: none;
 }
 
@@ -77,17 +81,6 @@ span.sep {
 	border: 1px solid #9c9c9c;
 	border-bottom: 2px solid #9c9c9c;
 	background-color: white;
-}
-
-#title h1 {
-	margin: 0;
-	padding:10px 0;
-	font-size: 2em;
-	line-height: 1.2em;
-}
-
-#title h1 a {
-	text-decoration: none;
 }
 
 #sidebar {
@@ -159,7 +152,65 @@ span.sep {
 .actionsmenu select {
     width: 180px;
 }
-    
+
+#pagetrail {
+    clear: right;
+    display: block;
+    margin: 4px;
+    padding: 0 10px;
+    font-size: 0.88em;
+}
+
+*[dir="rtl"] #pagetrail {
+    clear: left;
+}
+
+#pagelocation {
+    clear: right;
+    display: block;
+    margin: 8px 0;
+    padding: 0 10px;
+    font-size: 24px;
+}
+
+*[dir="rtl"] #pagelocation {
+    clear: left;
+}
+
+#pagetrail li, #pagelocation li {
+    display: inline;
+    padding: 0 2px;
+    margin: 0 0 5px 0;
+}
+
+/* XXX Warning: non-ascii characters! */
+#pagetrail li:after {
+    content: " » ";
+}
+
+*[dir="rtl"] #pagetrail li:after {
+    content: " « ";
+}
+
+#pagetrail li:last-child:after {
+    content: "";
+}
+#pagelocation li:after {
+    content: "/ ";
+}
+
+*[dir="rtl"] #pagelocation li:after {
+    content: " \\ "; /* TODO: check what looks best with RTL */
+}
+
+#pagelocation li:last-child:after {
+    content: "";
+}
+
+#pagelocation li:first-child:after {
+    content: ": ";
+}
+
 #navibar li.current {
 	border: none;
 	background: #BFAE8F;

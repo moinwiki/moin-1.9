@@ -61,18 +61,6 @@ pre {
 	margin: 0 0 0 10px;
 }
 
-#title h1 {
-	margin: 0;
-	padding: 0;    
-	font-size: 2em;
-	font-weight: bold;
-	line-height: 1.2;
-}
-
-#title h1 a {
-	text-decoration: none;
-}
-
 #searchform {
 	float: right;
 	margin: 0 0 0 10px;
@@ -115,36 +103,64 @@ pre {
 }
 
 #pagetrail {
-	clear: left;
-	margin: 0;
-	padding: 0;
-	font-size: 0.88em;
-	height: 2em;
+    clear: right;
+    display: block;
+    margin: 4px;
+    padding: 0 10px;
+    font-size: 0.88em;
+    height: 2em;
 }
 
 *[dir="rtl"] #pagetrail {
-	clear: right;
+    clear: left;
 }
 
-#pagetrail li  {
-	float: left;
-	display: block;
-	margin: 5px 2px;
-	padding: 0 2px;
+#pagelocation {
+    clear: right;
+    display: block;
+    margin: 8px 0;
+    padding: 0 10px;
+    font-size: 24px;
 }
 
-*[dir="rtl"] #pagetrail li {
-	float: right;
+*[dir="rtl"] #pagelocation {
+    clear: left;
 }
 
-#pagetrail a {
-	text-decoration: none;
+#pagetrail li, #pagelocation li {
+    display: inline; /* old: block */
+    padding: 0 2px;
+    margin: 0 0 5px 0; /* old: 5px 2px */
 }
 
 /* XXX Warning: non-ascii characters! */
 #pagetrail li:after {
-	content: " »";
+    content: " » ";
 }
+
+*[dir="rtl"] #pagetrail li:after {
+    content: " « ";
+}
+
+#pagetrail li:last-child:after {
+    content: "";
+}
+#pagelocation li:after {
+    content: "/ ";
+}
+
+*[dir="rtl"] #pagelocation li:after {
+    content: " \\ "; /* TODO: check what looks best with RTL */
+}
+
+#pagelocation li:last-child:after {
+    content: "";
+}
+
+#pagelocation li:first-child:after {
+    content: ": ";
+}
+
 
 #iconbar {
 	clear: both;

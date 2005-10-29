@@ -14,7 +14,10 @@ body {
     border:0;
 }
 
-a:hover, h1 a:hover {color: #0044B3;}
+a:link { text-decoration: none; }
+a:link:hover, a:link:active { text-decoration: underline; color: green; }
+a:visited { text-decoration: none; color: blue; }
+a:visited:hover { text-decoration: none; color: red; }
 
 input {
     /* does strange effect to button (text size becomes bigger when clicking)
@@ -52,6 +55,10 @@ textarea {
     font-weight: bold;
 }
 
+*[dir="rtl"] #logo {
+    float: right;
+}
+
 #logo img {
     vertical-align: middle;
 }
@@ -59,10 +66,6 @@ textarea {
 #logo a {
     color: black;
     text-decoration: none;
-}
-
-*[dir="rtl"] #logo {
-    float: right;
 }
 
 #username {
@@ -83,24 +86,24 @@ textarea {
 }
 
 #username li:before {
-	content: "| ";
+    content: "| ";
     color: black;
 }
 
 #username li:first-child:before {
-	content: "";
+    content: "";
 }
 
 #searchform {
-	float: right;
-	margin: 5px 10px;
-	padding: 0;
-	white-space: nowrap;
-	font-size: 13px;
+    float: right;
+    margin: 5px 10px;
+    padding: 0;
+    white-space: nowrap;
+    font-size: 13px;
 }
 
 *[dir="rtl"] #searchform {
-	float: left;
+    float: left;
 }
 
 #searchform form div {
@@ -108,145 +111,179 @@ textarea {
 }
 
 #pagetrail {
-	clear: both;
-	margin: 0;
-	padding: 0 10px;
-	font-size: 13px;
-}
-
-#pagetrail li {
-	float: left;
-	display: block;
-	padding: 0 2px;
-	margin: 0 0 5px 0;
+    clear: right;
+    display: block;
+    margin: 4px;
+    padding: 0 10px;
+    font-size: 0.88em;
 }
 
 *[dir="rtl"] #pagetrail {
-	float: right;
+    clear: left;
+}
+
+#pagelocation {
+    clear: right;
+    display: block;
+    margin: 8px 0;
+    padding: 0 10px;
+    font-size: 24px;
+}
+
+*[dir="rtl"] #pagelocation {
+    clear: left;
+}
+
+#pagetrail li, #pagelocation li {
+    display: inline;
+    padding: 0 2px;
+    margin: 0 0 5px 0;
 }
 
 /* XXX Warning: non-ascii characters! */
 #pagetrail li:after {
-	content: " » ";
-	color: black;
+    content: " » ";
 }
 
 *[dir="rtl"] #pagetrail li:after {
-	content: " « ";
+    content: " « ";
+}
+
+#pagetrail li:last-child:after {
+    content: "";
+}
+#pagelocation li:after {
+    content: "/ ";
+}
+
+*[dir="rtl"] #pagelocation li:after {
+    content: " \\ "; /* TODO: check what looks best with RTL */
+}
+
+#pagelocation li:last-child:after {
+    content: "";
+}
+
+#pagelocation li:first-child:after {
+    content: ": ";
 }
 
 #navibar {
-	clear: both;
-	display: block;
-	margin: 0;
-	padding: 0 10px;
-	font-size: 13px;
+    clear: both;  /* problem: clear: right; aligns nicely right of logo,
+                    but lets it float high in the header, disconnected from ground */
+    display: block;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 13px;
 }
 
 #navibar li {
-	float: left;
-	display: block;
-	margin: 0 2px;
-	padding: 2px 5px;
-	border: 1px solid #9C9C9C;
-	border-bottom: none;
-	white-space: nowrap;
+    float: left;
+    display: inline;
+    margin: 0 2px;
+    padding: 2px 5px;
+    border: 1px solid #9C9C9C;
+    border-bottom: none;
+    white-space: nowrap;
 }
 
 *[dir="rtl"] #navibar li {
-	float: right;
+    float: right;
 }
 
 #navibar li.wikilink {
-	background: white /*url(../img/tab-wiki.png) repeat-x;*/
+    background: white; /*url(../img/tab-wiki.png) repeat-x;*/
 }
 
 #navibar li.userlink {
-	background: #E6EAF0 /*url(../img/tab-user.png) repeat-x;*/
+    background: #E6EAF0; /*url(../img/tab-user.png) repeat-x;*/
 }
 
 #navibar a, #navibar a:visited {
-	color: black;
-	text-decoration: none;    
+    color: black;
+    text-decoration: none;    
 }
 
 #navibar li.current a {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #navibar li:hover {
-	background: #CCCCCC;
+    background: #CCCCCC;
 }
 
 #navibar li.current, #navibar li.current:hover {
-	background: #81BBF2 /* url(../img/tab-selected.png) repeat-x; */
+    background: #81BBF2; /* url(../img/tab-selected.png) repeat-x; */
 }
 
 #pageline {
-	clear: both;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	/* sync these values, line-height is needed for IE */
-		height: 4px;
-		line-height: 4px;
-	border-bottom: 1px solid #9C9C9C;
-	background: #81BBF2;
+    clear: both;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* sync these values, line-height is needed for IE */
+        height: 4px;
+        line-height: 4px;
+    border-bottom: 1px solid #9C9C9C;
+    background: #81BBF2;
 }
 
 .editbar {
-	clear: both;
-	margin: 0;
-	padding: 0 8px;
-	white-space: nowrap;
-	height: 26px;
-	background: white;
-	font-size: 13px;
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0 8px;
+    white-space: nowrap;
+    height: 2.2em;  /* this has to be adapted to user's font size! fragile!
+                       It is differently broken depending on the stuff following it.
+                       2em looks good on MoinMoin:AnyPage, but not on RecentChanges! */
+    background: white;
+    font-size: 0.8em; /* 13px */
 }
 
 .editbar form, .editbar form div {
     display: inline;
-	margin: 0;
+    margin: 0;
 }
 
 .editbar li {
-	float: left;
-	display: block;
-	padding: 0;
-	margin: 2px 6px;
+    float: left;
+    display: inline;
+    padding: 0;
+    margin: 4px 6px;
 }
 
 *[dir="rtl"] .editbar li {
-	float: right;
+    float: right;
 }
 
 #header .editbar {
-	border-bottom: 1px dotted #9C9C9C;
+    border-bottom: 1px dotted #9C9C9C;
 }
 
 #footer .editbar {
-	border-top: 1px dotted #9C9C9C;
-	border-bottom: 1px solid #9C9C9C;
+    border-top: 1px dotted #9C9C9C;
+    border-bottom: 1px solid #9C9C9C;
 }
 
-.editbar a, .editbar a:visited {color: #0044B3;}
+.editbar a, .editbar a:visited { color: #0044B3; }
 
 #message {
-	clear: both;
-	margin: 0;
-	padding: 5px 10px;
-	border-bottom: 1px solid #c9c9c9;
-	background: #E6EAF0;
+    clear: both;
+    margin: 0;
+    padding: 5px 10px;
+    border-bottom: 1px solid #c9c9c9;
+    background: #E6EAF0;
 }
 
-#message p{
-	margin: 5px 0;
-	padding: 0;
-	/* font-weight: bold; */
+#message p {
+    margin: 5px 0;
+    padding: 0;
+    /* font-weight: bold; */
 }
 
 #message div.buttons {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 .dialog form {
@@ -273,10 +310,10 @@ textarea {
 }
 
 #page {
-	background-color: white;
-	margin: 0;
-	padding: 10px 30px 20px 30px;
-   
+    background-color: white;
+    margin: 0;
+    padding: 2px 20px 20px 20px;
+
    /* theses are some Firefox 1.5b1 specific extensions, see also the CSS3 draft.
    -moz-column-width: 25em;
    -moz-column-gap: 2em;
@@ -287,11 +324,10 @@ textarea {
 }
 
 /* We use here dumb css1 ids because of IE suckiness */
-
 #editor-textarea, #editor-help {
     font-family: monospace;
     border: 1px solid #8cacbb;  
-    color: Black;
+    color: black;
     background-color: white;
     padding: 3px;
     width: 100%;
@@ -306,7 +342,7 @@ textarea {
 #editor-comment {
     font-size: 100%;
     border: 1px solid #8cacbb;
-    color: Black;
+    color: black;
     background-color: white;
     vertical-align: middle;
     padding: 1px;
@@ -315,16 +351,16 @@ textarea {
 }
 
 #preview, #previewbelow {
-	border: 1px solid #6C7680;
-	padding: 10px 30px 20px 30px;
-	background: url(../img/draft.png);
+    border: 1px solid #6C7680;
+    padding: 10px 30px 20px 30px;
+    background: url(../img/draft.png);
     margin-top: 0.5em;
 }
 
 input.button {
     /*
     border: 1px solid #8cacbb;  
-    color: Black;
+    color: black;
     background-color: #CCCCCC;
     vertical-align: middle;
     text-decoration: none;
@@ -337,57 +373,57 @@ input.button {
 }
 
 #footer {
-	clear: both;
-	margin: 0;
-	padding: 0;
+    clear: both;
+    margin: 0;
+    padding: 0;
 }
 
 #credits, #version, #timings{
-	margin: 5px 10px;
-	padding: 0;
-	text-align: center;
-	font-size: 0.88em;
-	color: #6C7680;
-	font-size: 12px;
+    margin: 5px 10px;
+    padding: 0;
+    text-align: center;
+    font-size: 0.88em;
+    color: #6C7680;
+    font-size: 12px;
 }
 
 #credits li, #timings li {
-	display: inline;
-	padding: 0 2px;
-	margin: 0 4px;
+    display: inline;
+    padding: 0 2px;
+    margin: 0 4px;
 }
 
 #credits img {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .diff {
-	width:99%;
+    width:99%;
 }
 
 .diff-header {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .diff-title {
-	background-color: #C0C0C0;
+    background-color: #C0C0C0;
 }
 
 .diff-added {
-	background-color: #E0FFE0;
-	vertical-align: sub;
+    background-color: #E0FFE0;
+    vertical-align: sub;
 }
 
 .diff-removed {
-	background-color: #FFFFE0;
-	vertical-align: sub;
+    background-color: #FFFFE0;
+    vertical-align: sub;
 }
 
 .diff-added span {
-	background-color: #80FF80;
+    background-color: #80FF80;
 }
 
 .diff-removed span {
-	background-color: #FFFF80;
+    background-color: #FFFF80;
 }
 
