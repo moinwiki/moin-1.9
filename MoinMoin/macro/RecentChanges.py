@@ -16,6 +16,7 @@ from MoinMoin.logfile import editlog
 _DAYS_SELECTION = [1, 2, 3, 7, 14, 30, 60, 90]
 _MAX_DAYS = 7
 _MAX_PAGENAME_LENGTH = 15 # 35
+_MAX_COMMENT_LENGTH = 20
 
 #############################################################################
 ### RecentChanges Macro
@@ -40,7 +41,8 @@ def format_comment(request, line):
     elif line.action.find('/REVERT') != -1:
         rev = int(line.extra)
         comment = _("Revert to revision %(rev)d.") % {'rev': rev}
-    return comment
+
+    return wikiutil.make_breakable(comment, _MAX_COMMENT_LENGTH)
 
 def format_page_edits(macro, lines, bookmark_usecs):
     request = macro.request
@@ -61,7 +63,9 @@ def format_page_edits(macro, lines, bookmark_usecs):
     elif is_new:
         # show "NEW" icon if page was created after the user's bookmark
         if hilite:
-            html_link = request.theme.make_icon('new')
+            img = request.theme.make_icon('new')
+            html_link = wikiutil.link_tag(request, wikiutil.quoteWikinameURL(pagename),
+                                          img, formatter=macro.formatter)
     elif hilite:
         # show "UPDATED" icon if page was edited after the user's bookmark
         img = request.theme.make_icon('updated')
@@ -85,7 +89,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     d['time_html'] = None
     if request.cfg.changed_time_fmt:
         tdiff = long(tnow - wikiutil.version2timestamp(long(line.ed_time_usecs))) / 60 # has to be long for py 2.2.x
-        if tdiff < 100: # was 1440
+        if tdiff < 100:
             d['time_html'] = _("%(mins)dm ago") % {
                 'mins': tdiff}
         else:

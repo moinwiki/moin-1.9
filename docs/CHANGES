@@ -21,6 +21,7 @@ Version moin--main--1.5:
        * bang_meta old: 0 new: 1
        * show_section_numbers old: 1 new: 0
        * some regexes that used to be [a-z]Uxxxx$ are now [a-z0-9]Uxxxx$
+       * navi_bar has no page_front_page as first element any more
      * removed settings and code [new behaviour]:
        * acl_enabled [1]
        * allow_extended_names [1]
@@ -180,6 +181,11 @@ Version moin--main--1.5:
       They are used additionally to the global lists in MoinMoin/dict/.
     * moin_dump now also dumps attachments referenced from the page.
       It doesn't dump stuff that is just attached, but not referenced!
+    * On RecentChanges we now force the comment to be breakable, this improves
+      rendering of over-long words or on narrow browser windows - especially
+      for themes with limited content width like rightsidebar.
+    * We now have the "new" icon on RecentChanges clickable, just links to the
+      page.
 
   International support:    
     * mail_from can be now a unicode name-address 
