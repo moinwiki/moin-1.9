@@ -852,7 +852,7 @@ class Page:
 
         link = wikiutil.link_tag(request, url, wikiutil.escape(text),
                                  formatter=getattr(self, 'formatter', None), **kw)
-
+        import sys; sys.stderr.write("DEBUG - in link_to. got '%r' from link_tag\n" % (link))
         # Create a link to attachments if any exist
         if kw.get('attachment_indicator', 0):
             from MoinMoin.action import AttachFile
