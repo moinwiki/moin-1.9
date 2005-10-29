@@ -107,9 +107,9 @@ class Theme(ThemeBase):
         html = """
 %(config_header1_html)s
 
+%(logo_html)s
 %(search_form_html)s
 %(username_html)s
-%(logo_html)s
 %(title_html)s
 %(trail_html)s
 %(iconbar_html)s
