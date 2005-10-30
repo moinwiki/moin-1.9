@@ -222,18 +222,14 @@ class Formatter(FormatterBase):
         self.pagelink_preclosed = False
         if page is None:
             page = Page(self.request, pagename, formatter=self);
-        import sys; sys.stderr.write("DEBUG - pagelink: page is %r\n" % (page))    
         if self.request.user.show_nonexist_qm and on and not page.exists():
-            import sys; sys.stderr.write("DEBUG - Calling 2x link_to(**%r)\n" % (kw))
             self.pagelink_preclosed = True
             return (page.link_to(self.request, on=1, **kw) +
                     self.text("?") +
                     page.link_to(self.request, on=0, **kw))
         elif not on and self.pagelink_preclosed:
-            import sys; sys.stderr.write("DEBUG - pagelink: was preclosed\n" )
             return ""
         else:
-            import sys; sys.stderr.write("DEBUG - pagelink: calling link_to\n" )
             return page.link_to(self.request, on=on, **kw)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
@@ -272,7 +268,6 @@ class Formatter(FormatterBase):
             url = wikiutil.mapURL(self.request, url)
         title = kw.get('title', None)
         attrs = kw.get('attrs', None)
-        import sys; sys.stderr.write("DEBUG - called url. on is %r\n" % (on))
         if on:
             str = '<a'
             if css: 
