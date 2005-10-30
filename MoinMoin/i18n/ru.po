@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-08-15 19:46-0700\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -160,6 +160,10 @@ msgstr "Показать макет"
 
 msgid "GUI Mode"
 msgstr "Графический редактор"
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Вы не сделали никаких исправлений - страница не переписана!"
 
 msgid "Comment:"
 msgstr "Комментарий:"
@@ -791,12 +795,8 @@ msgstr "Запросы и исправления страниц"
 msgid "You are not allowed to revert this page!"
 msgstr "Вы не можете восстанавливать из архива эту страницу!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем "
-"углу для их создания."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Ваша ссылка на эту страницу удалена."
@@ -808,19 +808,17 @@ msgstr "Вам добавлена ссылка на эту страницу."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Вы не можете подписаться на страницу которую вам нельзя читать."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
 "В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
-"может разрешить отправку или убрать кнопку \"Подписка\"."
+"может разрешить отправку."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"В ВашихНастройках не указан почтовый адрес. Нажмите на свое имя в правом "
-"верхнем углу и введите правильный почтовый адрес."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Вы больше не подписаны на эту страницу."
@@ -828,13 +826,8 @@ msgstr "Вы больше не подписаны на эту страницу."
 msgid "Can't remove regular expression subscription!"
 msgstr "Не могу удалить подписку по образцу."
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Для отмены подписки зайдите в ВашиНастройки и уберите эту страницу из списка "
-"подписки."
 
 msgid "You have been subscribed to this page."
 msgstr "Теперь вы подписаны на эту страницу."
@@ -1112,6 +1105,18 @@ msgstr "Рисунок '%(filename)s' записан."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Приложение '%(filename)s' стерто."
@@ -1123,13 +1128,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1357,13 +1356,6 @@ msgstr "Сохранить XML версию этого вики"
 msgid "No wanted pages in this wiki."
 msgstr "В этом вики нет требуемых страниц."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Превышено максимальное число вставок include**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Не могу найти страницу по ссылке: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Нужно \"%(wanted)s\" после \"%(key)s\", а не \"%(token)s\""
@@ -1485,10 +1477,6 @@ msgstr "По заголовкам"
 msgid "Search"
 msgstr "Искать:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Закладки"
-
 msgid "More Actions:"
 msgstr "Другие действия:"
 
@@ -1501,10 +1489,6 @@ msgstr "Показать разметку"
 
 msgid "Delete Cache"
 msgstr "Убрать из кэша"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Новое приложение"
 
 msgid "Delete Page"
 msgstr "Вырвать страницу"
@@ -1532,6 +1516,17 @@ msgstr "Исправить (Графически)"
 
 msgid "Immutable Page"
 msgstr "Неизменяемая страница"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Убрать из закладок"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Новое приложение"
 
 #, python-format
 msgid "Show %s days."
@@ -1654,6 +1649,46 @@ msgstr "Переименовать"
 msgid "SpellCheck"
 msgstr "Правописание"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем "
+#~ "углу для их создания."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, "
+#~ "который может разрешить отправку или убрать кнопку \"Подписка\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "В ВашихНастройках не указан почтовый адрес. Нажмите на свое имя в правом "
+#~ "верхнем углу и введите правильный почтовый адрес."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Для отмены подписки зайдите в ВашиНастройки и уберите эту страницу из "
+#~ "списка подписки."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Превышено максимальное число вставок include**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Не могу найти страницу по ссылке: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Закладки"
+
 #~ msgid "Show Print View"
 #~ msgstr "Версия для печати"
 
@@ -1672,9 +1707,6 @@ msgstr "Правописание"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Не могу выполнить запрос"
-
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Убрать из закладок"
 
 #~ msgid "Add to Quicklinks"
 #~ msgstr "Добавить в закладки"

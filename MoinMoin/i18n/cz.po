@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -165,6 +165,10 @@ msgstr "Náhled"
 
 msgid "GUI Mode"
 msgstr "GUI Mód"
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Neudělal jste žádnou změnu, stránka neuložena!"
 
 msgid "Comment:"
 msgstr "Komentář:"
@@ -781,12 +785,8 @@ msgstr "Počty zásahů a editací stránky"
 msgid "You are not allowed to revert this page!"
 msgstr "Nemáte právo vracet změny na této stránce!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
-"pravem hornim rohu a vytvořte si ho."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Odebrali jste tuto stránku z pohotových odkazů."
@@ -797,19 +797,17 @@ msgstr "Přidali jste si tuto stránku do pohotových odkazů."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nemůžete odebírat stránky, ke kterým nemáte právo čtení."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, který "
-"může emaily povolit nebo odstranit ikonu Odebírat."
+"Tato wiki není upravena na posílání emailů.\n"
+"Kontaktujte vlastníka wiki, který to může změnit."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Nezadal jste svou emailovou adresu ve Všem profilu. Zadejte své jméno v "
-"(NastaveniUzivatele) v pravém horním rohu a vložte platnou emilovou adresu."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Váš odběr této stránky byl zrušen."
@@ -817,12 +815,8 @@ msgstr "Váš odběr této stránky byl zrušen."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nemohu zrušit odběr z regulárního výrazu!"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku ze "
-"seznamu odebíraných stránek."
 
 msgid "You have been subscribed to this page."
 msgstr "Přihlásili jste se k odběru této stránky."
@@ -1094,6 +1088,18 @@ msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
 #, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Příloha '%(filename)s' rozbalena."
 
@@ -1104,13 +1110,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1334,13 +1334,6 @@ msgstr "Download XML exportu této wiki"
 msgid "No wanted pages in this wiki."
 msgstr "V této wiki neexitují žádné žádoucí stránky."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Překročen maximální počet povolených includes**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Nemohu najít odkazovanou stránku: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Očekáváno \"%(wanted)s\" po \"%(key)s\", získáno \"%(token)s\""
@@ -1461,9 +1454,6 @@ msgstr "Stránky"
 msgid "Search"
 msgstr "Hledat:"
 
-msgid "Quicklink"
-msgstr "Pohotový odkaz"
-
 msgid "More Actions:"
 msgstr "Další akce:"
 
@@ -1475,9 +1465,6 @@ msgstr "Zdrojový text"
 
 msgid "Delete Cache"
 msgstr "Smazat cache"
-
-msgid "Attachments"
-msgstr "Přílohy"
 
 msgid "Delete Page"
 msgstr "Smazat stránku"
@@ -1502,6 +1489,16 @@ msgstr "Editace (GUI)"
 
 msgid "Immutable Page"
 msgstr "Neměnná stránka"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Pohotové odkazy"
+
+msgid "Add Link"
+msgstr ""
+
+msgid "Attachments"
+msgstr "Přílohy"
 
 #, python-format
 msgid "Show %s days."
@@ -1623,6 +1620,45 @@ msgstr "PřejmenovatStránku"
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
+#~ "pravem hornim rohu a vytvořte si ho."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, "
+#~ "který může emaily povolit nebo odstranit ikonu Odebírat."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Nezadal jste svou emailovou adresu ve Všem profilu. Zadejte své jméno v "
+#~ "(NastaveniUzivatele) v pravém horním rohu a vložte platnou emilovou "
+#~ "adresu."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku "
+#~ "ze seznamu odebíraných stránek."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Překročen maximální počet povolených includes**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Nemohu najít odkazovanou stránku: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "Pohotový odkaz"
+
 #~ msgid "Show Print View"
 #~ msgstr "Náhled tisku"
 
@@ -1641,10 +1677,6 @@ msgstr "KontrolaPravopisu"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Dotaz nedává smysl"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Pohotové odkazy"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

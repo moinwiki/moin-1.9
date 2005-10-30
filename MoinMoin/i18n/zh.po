@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -160,6 +160,10 @@ msgstr "预览"
 
 msgid "GUI Mode"
 msgstr "图形界面模式"
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "此页未作改动, 所以没有保存!"
 
 msgid "Comment:"
 msgstr "备注:"
@@ -773,10 +777,8 @@ msgstr "网页点击次数和编辑次数"
 msgid "You are not allowed to revert this page!"
 msgstr "您不可以把此页恢复成旧版!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr "您还没注册. 请点右上角的\"用户设置\"并注册."
+msgid "You must login to add a quicklink."
+msgstr ""
 
 msgid "Your quicklink to this page has been removed."
 msgstr "删除了您对本页的快捷链接."
@@ -787,19 +789,15 @@ msgstr "本页已加入到您的快捷链接."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "您不能订阅无权阅读的网页!"
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
-msgstr ""
-"本维基不支持邮件处理, 请联系管理员, 以便他决定是否要启动邮寄功能,或是干脆去掉"
-"「订阅」图示."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
+msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"您注册的时候没有提供电子邮件地址.请在右上角点一下你的名字(或是\"用户设置\", "
-"UserPreferences) 并提供合法的电子邮件地址."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "您终止了订阅此页."
@@ -807,10 +805,8 @@ msgstr "您终止了订阅此页."
 msgid "Can't remove regular expression subscription!"
 msgstr "不能取消用正规表达式定义的订阅!"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项."
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "您已经订阅了此页."
@@ -1079,6 +1075,20 @@ msgid "The file %s is not a MoinMoin package file."
 msgstr "文件%s不是MoinMoin包."
 
 #, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"附件'%(filename)s'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间)."
+
+#, fuzzy, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"附件'%(filename)s'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间)."
+
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "附件'%(filename)s'已解压缩(unzip)."
 
@@ -1086,15 +1096,9 @@ msgstr "附件'%(filename)s'已解压缩(unzip)."
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
-msgstr "附件'%(filename)s'解压缩失败, 原因可能是由于文件太大, .zip只能包含文件, "
-"已存在, 或包含在文件夹中."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr 
-"附件'%(filename)s'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间)."
+msgstr ""
+"附件'%(filename)s'解压缩失败, 原因可能是由于文件太大, .zip只能包含文件, 已存"
+"在, 或包含在文件夹中."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1321,13 +1325,6 @@ msgstr "下载本维基的XML输出"
 msgid "No wanted pages in this wiki."
 msgstr "本维基中没有未定义的网页."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**太多的包含(include)**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**未能找到引用的网页: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "\"%(key)s\"后面应该接\"%(wanted)s\", 但却接着\"%(token)s\""
@@ -1448,9 +1445,6 @@ msgstr "标题"
 msgid "Search"
 msgstr "搜索"
 
-msgid "Quicklink"
-msgstr "快捷链接"
-
 msgid "More Actions:"
 msgstr "更多操作"
 
@@ -1462,9 +1456,6 @@ msgstr "源码"
 
 msgid "Delete Cache"
 msgstr "删除缓存"
-
-msgid "Attachments"
-msgstr "附件"
 
 msgid "Delete Page"
 msgstr "删除"
@@ -1489,6 +1480,16 @@ msgstr "编辑(图形界面)"
 
 msgid "Immutable Page"
 msgstr "只读网页"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "从快捷链接删除"
+
+msgid "Add Link"
+msgstr ""
+
+msgid "Attachments"
+msgstr "附件"
 
 #, python-format
 msgid "Show %s days."
@@ -1608,6 +1609,40 @@ msgstr "改名"
 msgid "SpellCheck"
 msgstr "拼写检查"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr "您还没注册. 请点右上角的\"用户设置\"并注册."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "本维基不支持邮件处理, 请联系管理员, 以便他决定是否要启动邮寄功能,或是干脆"
+#~ "去掉「订阅」图示."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "您注册的时候没有提供电子邮件地址.请在右上角点一下你的名字(或是\"用户设置"
+#~ "\", UserPreferences) 并提供合法的电子邮件地址."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**太多的包含(include)**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**未能找到引用的网页: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "快捷链接"
+
 #~ msgid "Show Print View"
 #~ msgstr "打印视图"
 
@@ -1625,9 +1660,6 @@ msgstr "拼写检查"
 
 #~ msgid "Can't work out query"
 #~ msgstr "无法完成查询"
-
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "从快捷链接删除"
 
 #~ msgid "Add to Quicklinks"
 #~ msgstr "添加到快捷链接"

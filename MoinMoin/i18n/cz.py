@@ -424,24 +424,16 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Počty zásahů a editací stránky''',
 '''You are not allowed to revert this page!''':
 '''Nemáte právo vracet změny na této stránce!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v pravem hornim rohu a vytvořte si ho.''',
 '''Your quicklink to this page has been removed.''':
 '''Odebrali jste tuto stránku z pohotových odkazů.''',
 '''A quicklink to this page has been added for you.''':
 '''Přidali jste si tuto stránku do pohotových odkazů.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nemůžete odebírat stránky, ke kterým nemáte právo čtení.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, který může emaily povolit nebo odstranit ikonu Odebírat.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Nezadal jste svou emailovou adresu ve Všem profilu. Zadejte své jméno v (NastaveniUzivatele) v pravém horním rohu a vložte platnou emilovou adresu.''',
 '''Your subscribtion to this page has been removed.''':
 '''Váš odběr této stránky byl zrušen.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nemohu zrušit odběr z regulárního výrazu!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku ze seznamu odebíraných stránek.''',
 '''You have been subscribed to this page.''':
 '''Přihlásili jste se k odběru této stránky.''',
 '''Charts are not available!''':
@@ -710,10 +702,6 @@ Zkuste jiné jméno.''',
 '''Download XML exportu této wiki''',
 '''No wanted pages in this wiki.''':
 '''V této wiki neexitují žádné žádoucí stránky.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Překročen maximální počet povolených includes**''',
-'''**Could not find the referenced page: %s**''':
-'''**Nemohu najít odkazovanou stránku: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Očekáváno "%(wanted)s" po "%(key)s", získáno "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -786,16 +774,12 @@ red=edit''':
 '''Stránky''',
 '''Search''':
 '''Hledat:''',
-'''Quicklink''':
-'''Pohotový odkaz''',
 '''More Actions:''':
 '''Další akce:''',
 '''Raw Text''':
 '''Zdrojový text''',
 '''Delete Cache''':
 '''Smazat cache''',
-'''Attachments''':
-'''Přílohy''',
 '''Delete Page''':
 '''Smazat stránku''',
 '''Like Pages''':
@@ -812,6 +796,8 @@ red=edit''':
 '''Editace (GUI)''',
 '''Immutable Page''':
 '''Neměnná stránka''',
+'''Attachments''':
+'''Přílohy''',
 '''Show %s days.''':
 '''Ukázat %s dní.''',
 '''EditText''':

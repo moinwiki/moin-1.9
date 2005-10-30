@@ -88,6 +88,8 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 '''Pirmskats''',
 '''GUI Mode''':
 '''Grafiskais režīms''',
+'''Your changes are not saved!''':
+'''Jūs izmaiņas nav saglabātas!''',
 '''Comment:''':
 '''Komentārs:''',
 '''<No addition>''':
@@ -477,24 +479,26 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Apmeklējumi un labojumi''',
 '''You are not allowed to revert this page!''':
 '''Jūs nedrīkstat atjaunot no arhīva šo lapu!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī.''',
+'''You must login to add a quicklink.''':
+'''Lai izveidotu ātrsaiti, Jums jāpieslēdzas.''',
 '''Your quicklink to this page has been removed.''':
 '''Jūsu ātrsaite uz šo lapu ir dzēsta.''',
 '''A quicklink to this page has been added for you.''':
 '''Jums izveidota ātrsaite uz šo lapu.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Šajā viki e-pasta sūtīšana ir aizliegta. Sazinieties ar viki īpašnieku, kurš var atļaut Jums sūtīšanu vai noņemt pogu "Parakstīšanās".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda labajā augšējā stūrī un ievadiet pareizu e-pasta adresi.''',
+'''This wiki is not enabled for mail processing.''':
+'''Šajā viki pasta sūtīšana nav iespējota.''',
+'''You must log in to use subscribtions.''':
+'''Lai izmanototu parasktīšanos, Jums jāpieslēdzas''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi LietotājaIestatījumos.''',
 '''Your subscribtion to this page has been removed.''':
 '''Jūs vairs neesat pierakstīts uz šo lapu.''',
 '''Can\'t remove regular expression subscription!''':
 '''Regulāras izteiksmes pierakstu izdzēst nevar!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet ierakstus, kas saskan ar šo lapu.''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi.''',
 '''You have been subscribed to this page.''':
 '''Tagad Jūs esat pierakstīts uz šo lapu.''',
 '''Charts are not available!''':
@@ -653,12 +657,14 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Nesekmīga faila \'%(filename)s\' instalēšana.''',
 '''The file %s is not a MoinMoin package file.''':
 '''Fails %s nav MoinMoin pakotnes fails.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Nevar atpakot piesaisti \'%(filename)s\' - rezultējošie faili var būt pārāk lieli (pietrūkst %(space)d kB).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Nevar atpakot piesaisti \'%(filename)s\' - rezultējošo failu būs pārāk daudz (pietrūkst %(count)d).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Piesaiste \'%(filename)s\' atspiesta.''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
 '''Piesaiste \'%(filename)s\' nav atpakota, jo faili ir pārāk lieli, tikai .zip faili, jau ekstistē vai atrodas mapēs.''',
-'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
-'''Nevar atpakot piesaisti \'%(filename)s\' - rezultējošie faili var būt pārāk lieli (pietrūkst %(space)d kB).''',
 '''The file %(target)s is not a .zip file.''':
 '''Fails %(target)s nav .zip fails.''',
 '''Attachment \'%(filename)s\'''':
@@ -787,10 +793,6 @@ Pamēģiniet citu nosaukumu.''',
 '''Lejupielādēt XML eksportu no šī wiki''',
 '''No wanted pages in this wiki.''':
 '''Šajā viki pieprasīto lapu nav.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**''',
-'''**Could not find the referenced page: %s**''':
-'''**Nevaru atrast lapu pēc atsauces: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Nepieciešams "%(wanted)s" pēc "%(key)s", nevis "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -865,8 +867,6 @@ sarkans=labot''',
 '''Virsrakstos''',
 '''Search''':
 '''Meklēt''',
-'''Quicklink''':
-'''Ātrsaite''',
 '''More Actions:''':
 '''Citas darbības:''',
 '''------------''':
@@ -875,8 +875,6 @@ sarkans=labot''',
 '''Rādīt jēltekstu''',
 '''Delete Cache''':
 '''Dzēst kešatmiņu''',
-'''Attachments''':
-'''Piesaistes''',
 '''Delete Page''':
 '''Dzēst lapu''',
 '''Like Pages''':
@@ -893,6 +891,12 @@ sarkans=labot''',
 '''Labot grafiski''',
 '''Immutable Page''':
 '''Nemaināma Lapa''',
+'''Remove Link''':
+'''Dzēst saiti''',
+'''Add Link''':
+'''Pievienot saiti''',
+'''Attachments''':
+'''Piesaistes''',
 '''Show %s days.''':
 '''Rādīt %s dienas.''',
 '''EditText''':

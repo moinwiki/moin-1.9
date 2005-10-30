@@ -389,14 +389,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Ilość odsłon i edycji''',
 '''You are not allowed to revert this page!''':
 '''Nie możesz przywracać tej strony!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nie możesz subskrybować strony, której nie możesz przeczytać.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. Skontaktuj się z właścicielem, aby je uruchomił, albo usuń ikonę "Subskrybuj".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz (PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres.''',
 '''Your subscribtion to this page has been removed.''':
 '''Subskrybcja tej strony przez Ciebie została usunięta.''',
 '''Can\'t remove regular expression subscription!''':

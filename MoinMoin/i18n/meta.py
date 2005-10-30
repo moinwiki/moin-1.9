@@ -21,7 +21,7 @@ languages = {
 'ko': (u'한국어', u'Korean', 'utf-8', 0, """Hye-Shik Chang <perky@FreeBSD.org>""",),
 'lv': (u'Latviešu', u'Latvian', 'utf-8', 0, """Viktors Kalnacs <v.kalnacs@datapro.lv>""",),
 'nb': (u'Norsk Bokmål', u'Norwegian Bokmal', 'utf-8', 0, """Joerg Cassens <jmt@cassens.org>""",),
-'nl': (u'Nederlands', u'Dutch', 'utf-8', 0, """Reinout van Schouwen <reinout@cs.vu.nl>""",),
+'nl': (u'Polski', u'Polish', 'utf-8', 0, """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",),
 'pl': (u'Polski', u'Polish', 'utf-8', 0, """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",),
 'pt': (u'Português', u'Portuguese', 'utf-8', 0, """Leonardo Gregianin""",),
 'pt-br': (u'Português do Brasil', u'Brazillian Portuguese', 'utf-8', 0, """Leonardo Gregianin <leonardo@riseup.net>""",),

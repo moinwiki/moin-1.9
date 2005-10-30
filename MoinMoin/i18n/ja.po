@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
-"PO-Revision-Date: 2005-10-07 19:41+0900\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"PO-Revision-Date: 2005-10-23 22:23+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -164,6 +164,9 @@ msgstr "プレビュー"
 
 msgid "GUI Mode"
 msgstr "GUIモード"
+
+msgid "Your changes are not saved!"
+msgstr "このページに対する変更は保存されませんでした。"
 
 msgid "Comment:"
 msgstr "コメント:"
@@ -793,12 +796,8 @@ msgstr "ページの参照と更新"
 msgid "You are not allowed to revert this page!"
 msgstr "このページを前のバージョンに戻す権限がありません。"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、"
-"プロファイルを作成してください。"
+msgid "You must login to add a quicklink."
+msgstr "クイックリンクを追加するためには、ログインしてください。"
 
 msgid "Your quicklink to this page has been removed."
 msgstr "このページへのクイックリンクを削除しました。"
@@ -809,19 +808,14 @@ msgstr "このページへのクイックリンクを追加しました。"
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "読む権限がないページを購読することはできません。"
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
-msgstr ""
-"このwikiではメールが利用できません。メールを利用できるようにするか、\"購読"
-"\"アイコンを無効にするよう、管理者に問い合わせてください。"
+msgid "This wiki is not enabled for mail processing."
+msgstr "このwikiではメールを利用できません。"
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
-msgstr ""
-"プロファイルにメールアドレスが存在しません。UserPreferencesのページにてメール"
-"アドレスを登録してください。"
+msgid "You must log in to use subscribtions."
+msgstr "購読を利用するためには、ログインしてください。"
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr "購読を利用するためには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してください。"
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "このページの購読を停止しました。"
@@ -829,12 +823,8 @@ msgstr "このページの購読を停止しました。"
 msgid "Can't remove regular expression subscription!"
 msgstr "正規表現で記述した購読を停止することはできません。"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr ""
-"購読を停止するには、ユーザプロファイルのページにて、このページにマッチする項"
-"目を購読リストから削除してください。"
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "[\"ユーザプレファレンス\"]にて、購読の正規表現を編集してください。"
 
 msgid "You have been subscribed to this page."
 msgstr "このページの購読を開始しました。"
@@ -1112,6 +1102,21 @@ msgid "The file %s is not a MoinMoin package file."
 msgstr "%sはMoinMoinのパッケージファイルではありません。"
 
 #, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイルが"
+"大きすぎるためです(%(space)d kB足りません)。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイル数が多すぎるためです(%(count)d個不足しています)。"
+
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "添付ファイル'%(filename)s'をunzipしました。"
 
@@ -1120,14 +1125,8 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因はファイルが大きすぎる、すでにファイルが存在するなどが考えられます。"
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。"
+"添付ファイル'%(filename)s'はunzipされませんでした。原因はファイルが大きすぎ"
+"る、すでにファイルが存在するなどが考えられます。"
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1354,13 +1353,6 @@ msgstr "このwikiのXML exportをダウンロード"
 msgid "No wanted pages in this wiki."
 msgstr "このwikiに参照先がないページはありません。"
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**インクルードの許容数を越えました**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**参照されたページ(%s)が見つかりませんでした**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1484,9 +1476,6 @@ msgstr "タイトル"
 msgid "Search"
 msgstr "検索"
 
-msgid "Quicklink"
-msgstr "クイックリンク"
-
 msgid "More Actions:"
 msgstr "その他のアクション:"
 
@@ -1498,9 +1487,6 @@ msgstr "Wikiテキスト"
 
 msgid "Delete Cache"
 msgstr "キャッシュの削除"
-
-msgid "Attachments"
-msgstr "添付ファイル"
 
 msgid "Delete Page"
 msgstr "ページの削除"
@@ -1525,6 +1511,15 @@ msgstr "編集(GUIモード)"
 
 msgid "Immutable Page"
 msgstr "編集不可のページ"
+
+msgid "Remove Link"
+msgstr "リンクを削除"
+
+msgid "Add Link"
+msgstr "リンクを追加"
+
+msgid "Attachments"
+msgstr "添付ファイル"
 
 #, python-format
 msgid "Show %s days."
@@ -1646,6 +1641,44 @@ msgstr "ページ名変更"
 msgid "SpellCheck"
 msgstr "スペルチェック"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "ユーザプロファイルをまだ作成していません。右上の[\"ユーザプレファレンス\"]をクリック"
+#~ "し、プロファイルを作成してください。"
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "このwikiではメールが利用できません。メールを利用できるようにするか、\"購読"
+#~ "\"アイコンを無効にするよう、管理者に問い合わせてください。"
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "プロファイルにメールアドレスが存在しません。UserPreferencesのページにて"
+#~ "メールアドレスを登録してください。"
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "購読を停止するには、ユーザプロファイルのページにて、このページにマッチする"
+#~ "項目を購読リストから削除してください。"
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**インクルードの許容数を越えました**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**参照されたページ(%s)が見つかりませんでした**"
+
+#~ msgid "Quicklink"
+#~ msgstr "クイックリンク"
+
 #~ msgid "Show Print View"
 #~ msgstr "印刷ビューの表示"
 
@@ -1663,9 +1696,6 @@ msgstr "スペルチェック"
 
 #~ msgid "Can't work out query"
 #~ msgstr "問い合わせを行うことができません。"
-
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "クイックリンクから削除"
 
 #~ msgid "Add to Quicklinks"
 #~ msgstr "クイックリンクに追加"

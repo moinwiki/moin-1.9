@@ -44,7 +44,7 @@ Para usar este formulário em outras páginas, insira uma macro do tipo
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Seu tempo de edição se esgotou. Esteja preparado para editar conflitos!''',
 '''Page name is too long, try shorter name.''':
-'''Nome desta página é muito grande, tente um mais curto.''',
+'''O nome desta página é muito grande, tente um mais curto.''',
 '''Edit "%(pagename)s"''':
 '''Editar "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -87,6 +87,8 @@ Se você discorda, aperte o botão \'\'\'%(cancel_button_text)s\'\'\' para cance
 '''Previsão''',
 '''GUI Mode''':
 '''Visualização Gráfica''',
+'''Your changes are not saved!''':
+'''Suas mudanças não foram gravadas!''',
 '''Comment:''':
 '''Comentário:''',
 '''<No addition>''':
@@ -107,9 +109,9 @@ Se você discorda, aperte o botão \'\'\'%(cancel_button_text)s\'\'\' para cance
 ''':
 ''' Ênfase:: [[Verbatim(\'\')]]\'\'itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrito itálico\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'misto \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrito\'\'\'[[Verbatim(\'\'\')]] e itálico\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linha horizontal.
  Títulos:: [[Verbatim(=)]] Título 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 [[Verbatim(=====)]].
- Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas numeradase; 1.#n começar numeração em n; espaço sozinho identa.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets e aspas duplas"])]]; url; [url]; [etiqueta da url].
- Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas ||;    espaços em brando não são permitidos após tabelas ou títulos.
+ Listas:: Espaço com um dos seguintes: * marcadores; 1., a., A., i., I. listas numeradas; 1.#n começar numeração em n; espaço sozinho identa a linha.
+ Links:: [[Verbatim(PalavrasComIniciaisMaiúsculas)]]; [[Verbatim(["Aspas duplas"])]]; url; [url]; [Título da URL].
+ Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas ||;    espaços em branco não são permitidos após tabelas ou títulos.
 
 (!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.
 ''',
@@ -152,7 +154,7 @@ A página seguinte foi alterada por %(editor)s:
 '''Trivial ''':
 '''Superficial ''',
 '''Status of sending notification mails:''':
-'''Status de notificação por mail:''',
+'''Status de notificação por e-mail:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
@@ -329,7 +331,7 @@ for that).
 
 After successfully logging in, it is of course a good idea to set a new and known password.
 ''':
-'''Você solicitou submeter seus dados de conta a este endereço de email.
+'''Você solicitou submeter seus dados de conta a este endereço de e-mail.
 
 Se você perder sua senha, por favor use os dados acima e somente entre com
 a senha COMO MOSTRADO no campo da senha do wiki (utilize copiar e colar
@@ -479,24 +481,26 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Número de acessos e edições da página''',
 '''You are not allowed to revert this page!''':
 '''Você não tem permissão para reverter as alterações desta página!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Você ainda não criou um perfil de usuário. Selecione PreferênciasDoUsuário no canto superior direito para criar um perfil.''',
+'''You must login to add a quicklink.''':
+'''Você precisa se logar para adicionar links rápidos.''',
 '''Your quicklink to this page has been removed.''':
 '''Sua subscrição a esta página foi removida.''',
 '''A quicklink to this page has been added for you.''':
 '''Uma subscrição a esta página foi adicionada por você.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Você não tem permissão para subscrever uma página que você não pode ler.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Esta wiki não está habilitada a enviar mensagens de correio eletrônico. Contate o administrador da wiki, o qual poderá habilitar a opção de envio de mensagens, ou remover o ícone de "Subscrever".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Você não inseriu um endereço de email válido em seu perfil. Selecione seu nome (PreferênciasDoUsuário) no canto superior direito e insira um endereço válido de email.''',
+'''Você não tem permissão para se inscrever em uma página que você não pode ler.''',
+'''This wiki is not enabled for mail processing.''':
+'''Este wiki não está habilitado a enviar mensagens de correio eletrônico.''',
+'''You must log in to use subscribtions.''':
+'''Você precisa fazer o login antes de se inscrever.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Adicione um endereço de e-mail nas PreferênciasDoUsuário para usar as inscrições.''',
 '''Your subscribtion to this page has been removed.''':
 '''Sua subscrição a esta página foi removida.''',
 '''Can\'t remove regular expression subscription!''':
 '''Não é possível remover expressão regular correspondendo a subscrição!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Para remover a inscrição, vá para seu perfil e apague esta página da lista de páginas inscritas.''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Edite suas inscrições de páginas nas sua PreferênciasDoUsuário.''',
 '''You have been subscribed to this page.''':
 '''Sua inscrição a esta página foi efetivada.''',
 '''Charts are not available!''':
@@ -572,7 +576,7 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Por favor, use um termo mais preciso ao invés de {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
-'''ERRO na regex, expressã regular, \'%s\'''',
+'''ERRO na regex, expressão regular, \'%s\'''',
 '''Bad timestamp \'%s\'''':
 '''Formato da data está errrado \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
@@ -657,14 +661,16 @@ Por outro lado, se "Renomear como" for deixado em branco, o nome original do arq
 '''Instalação de \'%(filename)s\' falhou.''',
 '''The file %s is not a MoinMoin package file.''':
 '''O arquivo %s não é um arquivo de pacote do MoinMoin.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Anexo \'%(filename)s\' não pode ser descompactado porque os arquivos resultantesseriam muito grandes (%(space)d kB missing).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Anexo \'%(filename)s\' não pode ser descompactado porque os arquivos resultantes seriam muito grandes (%(count)d kB missing).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Anexo \'%(filename)s\' não-zipado.''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
 '''Anexo \'%(filename)s\' não descompactado porque o arquivo é muito grande, somente arquivos .zip que já existam ou que estejam em pastas.''',
-'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
-'''Anexo \'%(filename)s\' não pode ser descompactado porque os arquivos resultantesseriam muito grandes (%(space)d kB missing).''',
-'''The file \'%(target)\' is not a .zip file.''':
-'''O arquivo \'%(target)\' não é um arquivo .zip.''',
+'''The file %(target)s is not a .zip file.''':
+'''O arquivo %(target)s não é um arquivo .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Arquivo anexado \'%(filename)s\'''',
 '''Package script:''':
@@ -791,10 +797,6 @@ Tente um nome diferente.''',
 '''Baixar arquivo XML exportado desta wiki''',
 '''No wanted pages in this wiki.''':
 '''Nenhuma página solicitada neste wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**O número máximo de inserções permitidas foi excedida**''',
-'''**Could not find the referenced page: %s**''':
-'''**Não foi possível encontrar a página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Esperado "%(wanted)s" depois de "%(key)s", obtido "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -869,8 +871,6 @@ vermelho=editar''',
 '''Títulos''',
 '''Search''':
 '''Procurar''',
-'''Quicklink''':
-'''Links rápidos''',
 '''More Actions:''':
 '''Mais Ações:''',
 '''------------''':
@@ -879,8 +879,6 @@ vermelho=editar''',
 '''Visualizar Texto''',
 '''Delete Cache''':
 '''Deletar Cache''',
-'''Attachments''':
-'''Anexos''',
 '''Delete Page''':
 '''Apagar Página''',
 '''Like Pages''':
@@ -897,6 +895,12 @@ vermelho=editar''',
 '''Editar (GUI)''',
 '''Immutable Page''':
 '''Página Não Editável''',
+'''Remove Link''':
+'''Remover Link''',
+'''Add Link''':
+'''Adicionar Link''',
+'''Attachments''':
+'''Anexos''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
 '''EditText''':

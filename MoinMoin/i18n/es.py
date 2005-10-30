@@ -444,14 +444,8 @@ por una mejor y más fácil de recordar.
 '''Hits y ediciones de la página''',
 '''You are not allowed to revert this page!''':
 '''¡No tienes permisos para volver a una versión anterior de esta página!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Aún no has creado un perfil de usuario. Selecciona UserPreferences en la esquina superior derecha para crear un perfil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No tienes permisos para  suscribirte a una página que no puedes ver.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Este wiki no tiene activado el procesamiento de e-mails. Contacta el propietario del wiki. Es el quien puede habilitar e-mails o eliminar el ícono de "Suscripción"''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''No has introducido una dirección e-mail en tu perfil. Selecciona tu nombre  en la esquina superior derecha (UserPreferences) e introduce una dirección válida de e-mail.''',
 '''Your subscribtion to this page has been removed.''':
 '''Nadie está suscrito a esta página. No se envió mensaje.''',
 '''Can\'t remove regular expression subscription!''':
@@ -707,10 +701,6 @@ Intenta con un nombre distinto.''',
 '''Bajar XML exportado de este wiki''',
 '''No wanted pages in this wiki.''':
 '''No existen páginas-por-crear en este wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Excedido el número máximo de \'includes\' permitidos''',
-'''**Could not find the referenced page: %s**''':
-'''**No se encontró la página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Esperaba "%(wanted)s" después de "%(key)s", he encontrado "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

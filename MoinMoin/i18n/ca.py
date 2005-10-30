@@ -478,24 +478,16 @@ Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu r
 '''Peticions i edicions de la pàgina''',
 '''You are not allowed to revert this page!''':
 '''No teniu permís per a recuperar aquesta pàgina.''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Encara no heu creat un perfil d\'usuari. Seleccioneu Preferències d\'usuari en la part superior a la dreta per a crear un perfil.''',
 '''Your quicklink to this page has been removed.''':
 '''S\'ha suprimit el vostre enllaç ràpid a aquesta pàgina.''',
 '''A quicklink to this page has been added for you.''':
 '''S\'ha afegit un enllaç ràpid a aquesta pàgina.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No teniu permís per a subscriure a una pàgina la qual no podeu llegir.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Aquest wiki no té habilitat el processament de correu. Contacteu amb el responsable del wiki, que pot habilitar el correu, o suprimir la icona «Subscriu-te».''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''No heu introduït una adreça de correu electrònic en el vostre perfil. Seleccioneu el vostre nom (Preferencies d\'usuari) en la part superior a la dreta i introduïu una adreça de correu vàlida.''',
 '''Your subscribtion to this page has been removed.''':
 '''S\'ha cancel·lat la vostra subscripció a aquesta pàgina.''',
 '''Can\'t remove regular expression subscription!''':
 '''No es pot cancel·lar una subscripció mitjançant expressió regular!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''Per a desubscriure, aneu al vostre perfil i suprimiu l\'element que concorde amb aquesta pàgina de la pàgina de subscripcions.''',
 '''You have been subscribed to this page.''':
 '''Vos heu subscrit a aquesta pàgina.''',
 '''Charts are not available!''':
@@ -761,10 +753,6 @@ Proveu amb un nom diferent.''',
 '''Descarregueu una exportació en XML d\'aquest wiki''',
 '''No wanted pages in this wiki.''':
 '''No hi ha cap pàgina dessitjada en aquest wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**S\'ha superat el nombre màxim de includes permès**''',
-'''**Could not find the referenced page: %s**''':
-'''**No s\'ha trobat la pàgina referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''S\'esperava «%(wanted)s» després de «%(key)s», s\'ha obtingut «%(token)s»''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -839,8 +827,6 @@ roig=edició''',
 '''Títols''',
 '''Search''':
 '''Cerca''',
-'''Quicklink''':
-'''Enllaç ràpid''',
 '''More Actions:''':
 '''Més accions:''',
 '''------------''':
@@ -849,8 +835,6 @@ roig=edició''',
 '''Text cru''',
 '''Delete Cache''':
 '''Suprimeix la memòria cau''',
-'''Attachments''':
-'''Adjuncions''',
 '''Delete Page''':
 '''Suprimeix la pàgina''',
 '''Like Pages''':
@@ -867,6 +851,8 @@ roig=edició''',
 '''Edita (interfície gràfica)''',
 '''Immutable Page''':
 '''Pàgina no modificable''',
+'''Attachments''':
+'''Adjuncions''',
 '''Show %s days.''':
 '''Mostra %s dies.''',
 '''EditText''':

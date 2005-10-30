@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -216,6 +216,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "עריכה בוטלה."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "תודה על השינויים שעשיתם."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "דף \"%s\" נמחק בהצלחה."
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -311,9 +318,6 @@ msgstr "תוכן הדף לא השתנה."
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr "אין לכם אפשרות לשנות הרשאות בדף כי אין לכם הרשאת מנהל לדף."
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "תודה על השינויים שעשיתם."
 
 #, python-format
 msgid ""
@@ -489,19 +493,6 @@ msgstr "התאמה"
 msgid "matches"
 msgstr "התאמות"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "קוקית נמחקה, אתם מנותקים."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"דואר אלקטרוני לא מאופשר בוויקי הזה\n"
-".פנה למנהל המערכת."
-
-msgid "Please provide a valid email address!"
-msgstr "אנא רשום כתובת דואר אלקטרוני אמיתית."
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -515,10 +506,6 @@ msgstr ""
 "סיסמא: %s\n"
 "\n"
 "כתובת להתחברות אוטמטית: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "לא נמצא משתמש עם כתובת הדואר האלקטרוני \"%(email)s\"."
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -539,6 +526,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] פרטי המשתמש שלך"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "קוקית נמחקה, אתם מנותקים."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"דואר אלקטרוני לא מאופשר בוויקי הזה\n"
+".פנה למנהל המערכת."
+
+msgid "Please provide a valid email address!"
+msgstr "אנא רשום כתובת דואר אלקטרוני אמיתית."
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "לא נמצא משתמש עם כתובת הדואר האלקטרוני \"%(email)s\"."
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -649,6 +653,9 @@ msgstr "הרשם"
 msgid "Mail me my account data"
 msgstr "שלח לי את פרטי המשתמש"
 
+msgid "Action"
+msgstr "פעולה"
+
 msgid "No older revisions available!"
 msgstr "אין גרסאות ישנות יותר."
 
@@ -707,9 +714,6 @@ msgstr "עורך"
 
 msgid "Comment"
 msgstr "הערה"
-
-msgid "Action"
-msgstr "פעולה"
 
 msgid "view"
 msgstr "הצג"
@@ -1130,10 +1134,6 @@ msgstr "דף זה כבר נמחק או שמעולם לא נוצר."
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "השתמשו במנשק המשתמש למחיקת דפים."
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "דף \"%s\" נמחק בהצלחה."
-
 msgid "Really delete this page?"
 msgstr "באמת למחוק את הדף?"
 
@@ -1281,8 +1281,8 @@ msgstr "צירוף קובץ \"%(filename)s\"."
 msgid "Drawing '%(filename)s' saved."
 msgstr "איור \"%(filename)s\" נשמר."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "לפני %(hours)dש %(mins)dד"
 
 msgid "(no bookmark set)"
@@ -1468,10 +1468,6 @@ msgid "Do"
 msgstr "בצע"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "פתיחה"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "ערוך דף"
 
@@ -1507,9 +1503,6 @@ msgstr "פעולות נוספות:"
 
 msgid "Page"
 msgstr "דף"
-
-msgid "Trail"
-msgstr "דפים אחרונים"
 
 msgid "User"
 msgstr "משתמש"
@@ -1610,6 +1603,13 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "פתיחה"
+
+#~ msgid "Trail"
+#~ msgstr "דפים אחרונים"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

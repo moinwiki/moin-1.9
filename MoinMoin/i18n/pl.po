@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 17:39+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-12-27 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -167,6 +167,10 @@ msgstr "Podgląd"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Nie zmieniono zawartości strony, nic nie zapisano!"
 
 #, fuzzy
 msgid "Comment:"
@@ -783,12 +787,8 @@ msgstr "Ilość odsłon i edycji"
 msgid "You are not allowed to revert this page!"
 msgstr "Nie możesz przywracać tej strony!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz PreferencjeCzytelnika "
-"w prawym górnym rogu aby go utworzyć."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -801,19 +801,17 @@ msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nie możesz subskrybować strony, której nie możesz przeczytać."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. Skontaktuj "
-"się z właścicielem, aby je uruchomił, albo usuń ikonę \"Subskrybuj\"."
+"W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.\n"
+"Skontaktuj się z właścicielem, który może tę opcję włączyć."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz "
-"(PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
@@ -821,13 +819,8 @@ msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nie można usunąć subskrybcji wyrażenia skończonego!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Aby zrezygnować z subskrybcji, wejdź do swojego profilu i usuń stronę z "
-"listy subskrybcji."
 
 msgid "You have been subscribed to this page."
 msgstr "Rezygnacja z subskrybcji została przyjęta."
@@ -940,6 +933,9 @@ msgstr ""
 msgid "Lupy search"
 msgstr ""
 
+msgid "Active threads"
+msgstr ""
+
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr "Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{\"%s\"}}}"
@@ -997,6 +993,12 @@ msgstr ""
 "zmienić \n"
 "i spowodować utratę informacji, którą chcesz przekazać."
 
+msgid "unzip"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
 #, python-format
 msgid "No attachments stored for %(pagename)s"
 msgstr "Strona %(pagename)s nie ma żadnyc załączników"
@@ -1053,6 +1055,14 @@ msgstr "Nie możesz skasować załączników z tej strony."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Nie możesz pobierać załączników z tej strony."
 
+#, fuzzy
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Nie możesz obejrzeć załączników do tej strony."
+
+#, fuzzy
+msgid "You are not allowed to install files."
+msgstr "Nie możesz zmieniać zawartości tej strony."
+
 msgid "You are not allowed to view attachments of this page."
 msgstr "Nie możesz obejrzeć załączników do tej strony."
 
@@ -1080,9 +1090,57 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Załącznik '%(filename)s' usunięty."
 
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Załącznik '%(filename)s' usunięty."
+
+#, fuzzy, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Rysunek '%(filename)s' zachowany."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Załącznik '%(filename)s' usunięty."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr ""
+
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Załącznik '%(filename)s'"
+
+msgid "Package script:"
+msgstr ""
+
+#, fuzzy
+msgid "File Name"
+msgstr "Nazwa pliku"
+
+msgid "Modified"
+msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić."
@@ -1294,13 +1352,6 @@ msgstr "Zgraj wersję XML tego wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Brak poszukiwanych stron w tym wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Spodziewane \"%(wanted)s\" po \"%(key)s\", otrzymano \"%(token)s\""
@@ -1427,10 +1478,6 @@ msgstr "Tytuły"
 msgid "Search"
 msgstr "Szukaj:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Szybkie skróty"
-
 msgid "More Actions:"
 msgstr "Więcej operacji:"
 
@@ -1444,10 +1491,6 @@ msgstr "Pokaż tekst źródłowy"
 #, fuzzy
 msgid "Delete Cache"
 msgstr "Usuń stronę"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Nowy załącznik"
 
 msgid "Delete Page"
 msgstr "Usuń stronę"
@@ -1476,6 +1519,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Strona nie zmieniona"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Szybkie skróty"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Nowy załącznik"
 
 #, python-format
 msgid "Show %s days."
@@ -1600,6 +1654,41 @@ msgstr "ZmieńNazwę"
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz "
+#~ "PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. "
+#~ "Skontaktuj się z właścicielem, aby je uruchomił, albo usuń ikonę "
+#~ "\"Subskrybuj\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz "
+#~ "(PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Aby zrezygnować z subskrybcji, wejdź do swojego profilu i usuń stronę z "
+#~ "listy subskrybcji."
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Szybkie skróty"
+
 #~ msgid "Show Print View"
 #~ msgstr "Pokaż podgląd wydruku"
 
@@ -1618,10 +1707,6 @@ msgstr "SprawdźPisownię"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Nie potrafię zadać pytania"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Szybkie skróty"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

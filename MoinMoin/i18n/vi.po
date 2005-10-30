@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -167,6 +167,10 @@ msgstr "Xem qua"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Bạn chưa thay đổi nội dung trang nên không cần lưu lại!"
 
 #, fuzzy
 msgid "Comment:"
@@ -786,12 +790,8 @@ msgstr "Số lần xem và sửa"
 msgid "You are not allowed to revert this page!"
 msgstr "Bạn không thể hoàn nguyên phiên bản cũ của trang này!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Bạn chưa có profile. Nhấn vào Sở thích cá nhân ở góc phải trên để tạo một "
-"profile."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -804,19 +804,17 @@ msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Bạn không thể đăng ký vào trang mà bạn không thể xem."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Wiki này không hỗ trợ việc soạn thư. Mong bạn thông báo cho chủ wiki, người "
-"mà có thể bật chức năng này lên, hay là bỏ đi biểu tượng \"Đăng ký\"."
+"Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người "
+"có thể kích hoạt chức năng này."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Bạn chưa nhập địa chỉ thư điện tử. Nhấn vào tên bạn (Sở thích cá nhân) ở góc "
-"phải trên để nhập vào một địa chỉ thư điện tử hợp lệ."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
@@ -824,13 +822,8 @@ msgstr "Sự đăng ký của bạn đã được huỷ bỏ."
 msgid "Can't remove regular expression subscription!"
 msgstr "Không thể huỷ bỏ đăng ký biểu thức chính quy!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Để huỷ đăng ký, bạn nhấn vào Sở thích cá nhân và xoá trang này khỏi danh "
-"sách đăng ký."
 
 msgid "You have been subscribed to this page."
 msgstr "Bạn vừa đăng ký vào trang này."
@@ -1108,6 +1101,18 @@ msgstr "Bản vẽ '%(filename)s' đã được lưu."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "File gửi kèm '%(filename)s' đã được xoá."
@@ -1119,13 +1124,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1351,13 +1350,6 @@ msgstr "Tải về theo dạng XML của trang này"
 msgid "No wanted pages in this wiki."
 msgstr "Không có trang cần tạo trong wiki này."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1483,10 +1475,6 @@ msgstr "Tiêu đề"
 msgid "Search"
 msgstr "Tìm:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Các liên kết thường dùng"
-
 msgid "More Actions:"
 msgstr "Các hành động khác:"
 
@@ -1500,10 +1488,6 @@ msgstr "Hiện trang nguồn"
 #, fuzzy
 msgid "Delete Cache"
 msgstr "Xóa trang"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Gửi kèm file mới"
 
 msgid "Delete Page"
 msgstr "Xóa trang"
@@ -1532,6 +1516,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Trang không thể được thay đổi"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Các liên kết thường dùng"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Gửi kèm file mới"
 
 #, python-format
 msgid "Show %s days."
@@ -1652,6 +1647,41 @@ msgstr "RenamePage"
 msgid "SpellCheck"
 msgstr "SpellCheck"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Bạn chưa có profile. Nhấn vào Sở thích cá nhân ở góc phải trên để tạo một "
+#~ "profile."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Wiki này không hỗ trợ việc soạn thư. Mong bạn thông báo cho chủ wiki, "
+#~ "người mà có thể bật chức năng này lên, hay là bỏ đi biểu tượng \"Đăng ký"
+#~ "\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Bạn chưa nhập địa chỉ thư điện tử. Nhấn vào tên bạn (Sở thích cá nhân) ở "
+#~ "góc phải trên để nhập vào một địa chỉ thư điện tử hợp lệ."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Để huỷ đăng ký, bạn nhấn vào Sở thích cá nhân và xoá trang này khỏi danh "
+#~ "sách đăng ký."
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Các liên kết thường dùng"
+
 #~ msgid "Show Print View"
 #~ msgstr "Hiện bản in"
 
@@ -1670,10 +1700,6 @@ msgstr "SpellCheck"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Không thể thực hiện việc tìm kiếm"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Các liên kết thường dùng"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

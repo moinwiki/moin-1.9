@@ -88,6 +88,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''プレビュー''',
 '''GUI Mode''':
 '''GUIモード''',
+'''Your changes are not saved!''':
+'''このページに対する変更は保存されませんでした。''',
 '''Comment:''':
 '''コメント:''',
 '''<No addition>''':
@@ -480,24 +482,26 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''ページの参照と更新''',
 '''You are not allowed to revert this page!''':
 '''このページを前のバージョンに戻す権限がありません。''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''ユーザプロファイルをまだ作成していません。右上のUserPreferencesをクリックし、プロファイルを作成してください。''',
+'''You must login to add a quicklink.''':
+'''クイックリンクを追加するためには、ログインしてください。''',
 '''Your quicklink to this page has been removed.''':
 '''このページへのクイックリンクを削除しました。''',
 '''A quicklink to this page has been added for you.''':
 '''このページへのクイックリンクを追加しました。''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''読む権限がないページを購読することはできません。''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''このwikiではメールが利用できません。メールを利用できるようにするか、"購読"アイコンを無効にするよう、管理者に問い合わせてください。''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''プロファイルにメールアドレスが存在しません。UserPreferencesのページにてメールアドレスを登録してください。''',
+'''This wiki is not enabled for mail processing.''':
+'''このwikiではメールを利用できません。''',
+'''You must log in to use subscribtions.''':
+'''購読を利用するためには、ログインしてください。''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''購読を利用するためには、["ユーザプレファレンス"]にてメールアドレスを登録してください。''',
 '''Your subscribtion to this page has been removed.''':
 '''このページの購読を停止しました。''',
 '''Can\'t remove regular expression subscription!''':
 '''正規表現で記述した購読を停止することはできません。''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''購読を停止するには、ユーザプロファイルのページにて、このページにマッチする項目を購読リストから削除してください。''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''["ユーザプレファレンス"]にて、購読の正規表現を編集してください。''',
 '''You have been subscribed to this page.''':
 '''このページの購読を開始しました。''',
 '''Charts are not available!''':
@@ -654,12 +658,14 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''%(filename)s\'のインストールに失敗しました。''',
 '''The file %s is not a MoinMoin package file.''':
 '''%sはMoinMoinのパッケージファイルではありません。''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''添付ファイル\'%(filename)s\'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''添付ファイル\'%(filename)s\'はunzipされませんでした。原因は展開されたファイル数が多すぎるためです(%(count)d個不足しています)。''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''添付ファイル\'%(filename)s\'をunzipしました。''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
 '''添付ファイル\'%(filename)s\'はunzipされませんでした。原因はファイルが大きすぎる、すでにファイルが存在するなどが考えられます。''',
-'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
-'''添付ファイル\'%(filename)s\'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。''',
 '''The file %(target)s is not a .zip file.''':
 '''%(target)sはzipファイルではありません。''',
 '''Attachment \'%(filename)s\'''':
@@ -787,10 +793,6 @@ Try a different name.''':
 '''このwikiのXML exportをダウンロード''',
 '''No wanted pages in this wiki.''':
 '''このwikiに参照先がないページはありません。''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**インクルードの許容数を越えました**''',
-'''**Could not find the referenced page: %s**''':
-'''**参照されたページ(%s)が見つかりませんでした**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"の後には"%(wanted)s"が必要です("%(token)s"が指定されました)。''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -865,8 +867,6 @@ red=edit''':
 '''タイトル''',
 '''Search''':
 '''検索''',
-'''Quicklink''':
-'''クイックリンク''',
 '''More Actions:''':
 '''その他のアクション:''',
 '''------------''':
@@ -875,8 +875,6 @@ red=edit''':
 '''Wikiテキスト''',
 '''Delete Cache''':
 '''キャッシュの削除''',
-'''Attachments''':
-'''添付ファイル''',
 '''Delete Page''':
 '''ページの削除''',
 '''Like Pages''':
@@ -893,6 +891,12 @@ red=edit''':
 '''編集(GUIモード)''',
 '''Immutable Page''':
 '''編集不可のページ''',
+'''Remove Link''':
+'''リンクを削除''',
+'''Add Link''':
+'''リンクを追加''',
+'''Attachments''':
+'''添付ファイル''',
 '''Show %s days.''':
 '''%s日表示''',
 '''EditText''':

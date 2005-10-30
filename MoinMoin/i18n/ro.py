@@ -435,14 +435,8 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Accesări şi editări ale paginii''',
 '''You are not allowed to revert this page!''':
 '''Nu aveţi permisiunea de a modifica această pagină la o stare anterioară''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Nu aţi creat un profil de utilizator încă. Selectaţi PreferinţeUtilizator în colţul din dreapta sus pentru a crea un profil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nu aveţi permisiunea de înscriere la o pagină pe care nu o puteţi citi.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Acest wiki nu permite mesajele email. Contactaţi deţinătorul wiki-ului, care poate ori să activeze email, ori să dezactiveze pictograma "Înscriere".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Nu aţi introdus o adresă de email în profilul dumneavoastră. Selectaţi numele dumneavoastră (PreferinţeUtilizator) în colţul din dreapta sus şi introduceţi o adresă de email validă.''',
 '''Your subscribtion to this page has been removed.''':
 '''Nu mai sunteţi înscris(ă) pe această pagină.''',
 '''Can\'t remove regular expression subscription!''':
@@ -707,10 +701,6 @@ Try a different name.''':
 '''Descărcare export XML pentru acest wiki''',
 '''No wanted pages in this wiki.''':
 '''Nici o pagină dorită în acest wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Numărul maxim de incluziuni acceptate a fost depăşit**''',
-'''**Could not find the referenced page: %s**''':
-'''**Pagina de referinţă %s nu a putut fi găsită**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Trebuie "%(wanted)s" după "%(key)s", s-a primit "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

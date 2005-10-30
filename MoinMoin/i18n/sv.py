@@ -482,24 +482,16 @@ lösenord.
 '''Sidträffar och ändringar''',
 '''You are not allowed to revert this page!''':
 '''Du har inte tillåtelse att göra så att den här sidan återgår till en äldre version!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Du har inte skapat en användarprofil än. Välj Användarinställningar i det övre högre hörnet för att skapa en profil.''',
 '''Your quicklink to this page has been removed.''':
 '''Din snabblänk till den här sidan har tagits bort.''',
 '''A quicklink to this page has been added for you.''':
 '''En snabblänk till den här sidan har lagts till åt dig.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har inte tillåtelse att prenumerera på en sida du inte kan läsa.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Den här wikin har inte eposthantering påslagen. Kontakta wikins ägare för att få eposthantering påslagen eller "Prenumerera"-ikonen borttagen.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Du har inte angivit någon epostadress i din profil. Klicka på ditt namn (AnvändarInställningar) i övre högra hörnet och ange en giltig epostadress.''',
 '''Your subscribtion to this page has been removed.''':
 '''Din prenumeration på den här sidan har avslutats.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kan inte ta bort reguljär uttrycks-prenumeration!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''För att avsluta prenumerationen, gå till din profil och ta bort posten som matchar den här sidan från prenumerationslistan.''',
 '''You have been subscribed to this page.''':
 '''Du prenumerar nu på den här sidan.''',
 '''Charts are not available!''':
@@ -765,10 +757,6 @@ Pröva ett annat namn.''',
 '''Ladda ner den här wikin som XML''',
 '''No wanted pages in this wiki.''':
 '''Inga önskade sidor i den här wikin.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Maximalt antal tillåtna inkluderingar överskridet**''',
-'''**Could not find the referenced page: %s**''':
-'''**Kunde inte hitta den refererade sidan: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Förväntade "%(wanted)s" efter "%(key)s", hittade "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -843,8 +831,6 @@ röd=ändra''',
 '''Titlar''',
 '''Search''':
 '''Sök''',
-'''Quicklink''':
-'''Snabblänk''',
 '''More Actions:''':
 '''Fler åtgärder:''',
 '''------------''':
@@ -853,8 +839,6 @@ röd=ändra''',
 '''Råtext''',
 '''Delete Cache''':
 '''Radera cache''',
-'''Attachments''':
-'''Bilagor''',
 '''Delete Page''':
 '''Radera sida''',
 '''Like Pages''':
@@ -871,6 +855,8 @@ röd=ändra''',
 '''Redigera (grafiskt)''',
 '''Immutable Page''':
 '''Skrivskyddad sida''',
+'''Attachments''':
+'''Bilagor''',
 '''Show %s days.''':
 '''Visa %s dagar.''',
 '''EditText''':

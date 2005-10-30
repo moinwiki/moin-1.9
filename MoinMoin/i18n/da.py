@@ -397,14 +397,8 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Sidebesøg og -redigeringer''',
 '''You are not allowed to revert this page!''':
 '''Du har ikke lov til at tilbageføre denne side!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste højre hjørne for at oprette en brugerprofil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har ikke lov til at abonnere på en side du ikke kan læse!''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af wiki\'en, som kan enten aktivere email eller fjerne Abonnér-ikonet.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Du har ikke angivet en email-adresse i din brugerprofil. Vælg dit navn (BrugerProfil) i øverste højre hjørne og angiv en gyldig email-adresse.''',
 '''Your subscribtion to this page has been removed.''':
 '''Dit abonnement på denne side er blevet afmeldt.''',
 '''Can\'t remove regular expression subscription!''':
@@ -659,10 +653,6 @@ Prøv et andet navn.''',
 '''Hent XML-eksport af denne wiki''',
 '''No wanted pages in this wiki.''':
 '''Ingen ønskede sider i denne wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Maksimum antal tilladte inkluderinger overskredet**''',
-'''**Could not find the referenced page: %s**''':
-'''**Kunne ikke finde den henviste side: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Forventede "%(wanted)s"·efter·"%(key)s",·fik "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -164,6 +164,10 @@ msgstr "Previsualitza"
 
 msgid "GUI Mode"
 msgstr "Mode amb interfície gràfica"
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "No heu canviat el contingut de la pàgina, no es desa!"
 
 msgid "Comment:"
 msgstr "Comentari:"
@@ -804,12 +808,8 @@ msgstr "Peticions i edicions de la pàgina"
 msgid "You are not allowed to revert this page!"
 msgstr "No teniu permís per a recuperar aquesta pàgina."
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Encara no heu creat un perfil d'usuari. Seleccioneu Preferències d'usuari en "
-"la part superior a la dreta per a crear un perfil."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
@@ -820,21 +820,17 @@ msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "No teniu permís per a subscriure a una pàgina la qual no podeu llegir."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Aquest wiki no té habilitat el processament de correu. Contacteu amb el "
-"responsable del wiki, que pot habilitar el correu, o suprimir la icona "
-"«Subscriu-te»."
+"Aquest wiki no té habilitat el processament de correu.\n"
+"Contacteu amb el responsable del wiki, que pot habilitar el correu."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"No heu introduït una adreça de correu electrònic en el vostre perfil. "
-"Seleccioneu el vostre nom (Preferencies d'usuari) en la part superior a la "
-"dreta i introduïu una adreça de correu vàlida."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "S'ha cancel·lat la vostra subscripció a aquesta pàgina."
@@ -842,12 +838,8 @@ msgstr "S'ha cancel·lat la vostra subscripció a aquesta pàgina."
 msgid "Can't remove regular expression subscription!"
 msgstr "No es pot cancel·lar una subscripció mitjançant expressió regular!"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Per a desubscriure, aneu al vostre perfil i suprimiu l'element que concorde "
-"amb aquesta pàgina de la pàgina de subscripcions."
 
 msgid "You have been subscribed to this page."
 msgstr "Vos heu subscrit a aquesta pàgina."
@@ -1129,6 +1121,18 @@ msgstr "S'ha desat el dibuix «%(filename)s»."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "S'ha suprimit l'adjunció «%(filename)s»."
@@ -1140,13 +1144,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1379,13 +1377,6 @@ msgstr "Descarregueu una exportació en XML d'aquest wiki"
 msgid "No wanted pages in this wiki."
 msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**S'ha superat el nombre màxim de includes permès**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**No s'ha trobat la pàgina referenciada: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1507,9 +1498,6 @@ msgstr "Títols"
 msgid "Search"
 msgstr "Cerca"
 
-msgid "Quicklink"
-msgstr "Enllaç ràpid"
-
 msgid "More Actions:"
 msgstr "Més accions:"
 
@@ -1521,9 +1509,6 @@ msgstr "Text cru"
 
 msgid "Delete Cache"
 msgstr "Suprimeix la memòria cau"
-
-msgid "Attachments"
-msgstr "Adjuncions"
 
 msgid "Delete Page"
 msgstr "Suprimeix la pàgina"
@@ -1548,6 +1533,15 @@ msgstr "Edita (interfície gràfica)"
 
 msgid "Immutable Page"
 msgstr "Pàgina no modificable"
+
+msgid "Remove Link"
+msgstr ""
+
+msgid "Add Link"
+msgstr ""
+
+msgid "Attachments"
+msgstr "Adjuncions"
 
 #, python-format
 msgid "Show %s days."
@@ -1667,6 +1661,46 @@ msgstr "Reanomena la pàgina"
 
 msgid "SpellCheck"
 msgstr "Comprovació ortogràfica"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Encara no heu creat un perfil d'usuari. Seleccioneu Preferències d'usuari "
+#~ "en la part superior a la dreta per a crear un perfil."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Aquest wiki no té habilitat el processament de correu. Contacteu amb el "
+#~ "responsable del wiki, que pot habilitar el correu, o suprimir la icona "
+#~ "«Subscriu-te»."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "No heu introduït una adreça de correu electrònic en el vostre perfil. "
+#~ "Seleccioneu el vostre nom (Preferencies d'usuari) en la part superior a "
+#~ "la dreta i introduïu una adreça de correu vàlida."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Per a desubscriure, aneu al vostre perfil i suprimiu l'element que "
+#~ "concorde amb aquesta pàgina de la pàgina de subscripcions."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**S'ha superat el nombre màxim de includes permès**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**No s'ha trobat la pàgina referenciada: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "Enllaç ràpid"
 
 #~ msgid "Skip to preview"
 #~ msgstr "Ometeu per a previsualitzar"

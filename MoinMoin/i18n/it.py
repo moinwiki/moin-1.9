@@ -395,14 +395,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Richieste e modifiche alla pagina''',
 '''You are not allowed to revert this page!''':
 '''Non sei autorizzato a ripristinare questa pagina!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Non hai ancora creato un profilo utente. Seleziona UserPreferences nell\'angolo in alto a destra per creare un profilo.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Non ti è consentito abbonarti a pagine che non puoi leggere.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Questo wiki non è abilitato ad usare la mail. Contatta il gestore del wiki, o chi può abilitare la mail, oppure togli l\'icona "Subscribe".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Non hai inserito un indirizzo email nel tuo profilo. Seleziona il tuo nome(PreferenzeUtente) nell\'angolo in alto a destra ed inserisci un indirizzo email valido.''',
 '''Your subscribtion to this page has been removed.''':
 '''La tua sottoscrizione a questa pagine è stata rimossa.''',
 '''Can\'t remove regular expression subscription!''':
@@ -660,10 +654,6 @@ Prova un nome differente.''',
 '''Scarica una versione XML di questo wiki''',
 '''No wanted pages in this wiki.''':
 '''Non ci sono pagine "non scritte" in questo wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Superato il limite massimo di inclusioni consentite**''',
-'''**Could not find the referenced page: %s**''':
-'''**Impossibile trovare la pagina referenziata: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Atteso "%(wanted)s" per "%(key)s", trovato "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

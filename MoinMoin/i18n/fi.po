@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -163,6 +163,10 @@ msgstr "Esikatsele"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Et muuttanut sisältöä, joten sivua ei tallennettu!"
 
 #, fuzzy
 msgid "Comment:"
@@ -782,12 +786,8 @@ msgstr "Sivun katselut ja muokkaukset"
 msgid "You are not allowed to revert this page!"
 msgstr "Sinulla ei ole oikeutta palauttaa tätä sivua!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta "
-"yläkulmasta luodaksesi tiedot."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -800,20 +800,17 @@ msgstr "Tilauksesi tälle sivulle on poistettu."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sinulla ei ole oikeutta tilata sivua jota et voi lukea."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin "
-"omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen."
+"Sähköpostia ei ole otettu käyttöön tässä wikissä.\n"
+"Ota yhteyttä wikin omistajaan, joka voi tehdä sen."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Käyttäjätiedoissasi ei ole sähköpostiosoitetta. Valitse nimesi "
-"(KäyttäjäAsetukset) oikeasta yläkulmasta ja syötä kelvollinen "
-"sähköpostiosoite."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Tilauksesi tälle sivulle on poistettu."
@@ -821,13 +818,8 @@ msgstr "Tilauksesi tälle sivulle on poistettu."
 msgid "Can't remove regular expression subscription!"
 msgstr "Säännöllisen lausekkeen tilausta ei voida poistaa!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Poistaaksesi tilauksen, mene tietoihisi ja poista tämä sivu tilausten "
-"luettelosta."
 
 msgid "You have been subscribed to this page."
 msgstr "Sinulle on lisätty tilaus tälle sivulle."
@@ -1110,6 +1102,18 @@ msgstr "Piirros '%(filename)s' tallennettu."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Liitetiedosto '%(filename)s' poistettu."
@@ -1121,13 +1125,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1354,13 +1352,6 @@ msgstr "Lataa tämän wikin XML-vienti"
 msgid "No wanted pages in this wiki."
 msgstr "Tässä wikissä ei ole toivottu sivuja."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Sisällytysten maksimimäärä ylitetty**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Viitattua sivua ei löydy: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Odotettiin \"%(wanted)s\" \"%(key)s\":n jälkeen, saatiin \"%(token)s\""
@@ -1485,10 +1476,6 @@ msgstr "Nimistä"
 msgid "Search"
 msgstr "Etsi:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Pikalinkit"
-
 msgid "More Actions:"
 msgstr "Lisää toimintoja:"
 
@@ -1501,10 +1488,6 @@ msgstr "Näytä muotoilematon teksti"
 
 msgid "Delete Cache"
 msgstr "Poista välimuistista"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Uusi liitetiedosto"
 
 msgid "Delete Page"
 msgstr "Poista sivu"
@@ -1533,6 +1516,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Suojattu sivu"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Pikalinkit"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Uusi liitetiedosto"
 
 #, python-format
 msgid "Show %s days."
@@ -1656,6 +1650,47 @@ msgstr "UudelleennimeäSivu"
 msgid "SpellCheck"
 msgstr "OikoLue"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta "
+#~ "yläkulmasta luodaksesi tiedot."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin "
+#~ "omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Käyttäjätiedoissasi ei ole sähköpostiosoitetta. Valitse nimesi "
+#~ "(KäyttäjäAsetukset) oikeasta yläkulmasta ja syötä kelvollinen "
+#~ "sähköpostiosoite."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Poistaaksesi tilauksen, mene tietoihisi ja poista tämä sivu tilausten "
+#~ "luettelosta."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Sisällytysten maksimimäärä ylitetty**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Viitattua sivua ei löydy: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Pikalinkit"
+
 #~ msgid "Show Print View"
 #~ msgstr "Näytä tulostettavana"
 
@@ -1674,10 +1709,6 @@ msgstr "OikoLue"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Hakua ei voida suorittaa"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Pikalinkit"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

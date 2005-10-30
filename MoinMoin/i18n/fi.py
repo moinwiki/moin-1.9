@@ -402,14 +402,8 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sivun katselut ja muokkaukset''',
 '''You are not allowed to revert this page!''':
 '''Sinulla ei ole oikeutta palauttaa tätä sivua!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta yläkulmasta luodaksesi tiedot.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sinulla ei ole oikeutta tilata sivua jota et voi lukea.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Käyttäjätiedoissasi ei ole sähköpostiosoitetta. Valitse nimesi (KäyttäjäAsetukset) oikeasta yläkulmasta ja syötä kelvollinen sähköpostiosoite.''',
 '''Your subscribtion to this page has been removed.''':
 '''Tilauksesi tälle sivulle on poistettu.''',
 '''Can\'t remove regular expression subscription!''':
@@ -665,10 +659,6 @@ Kokeile eri nimeä.''',
 '''Lataa tämän wikin XML-vienti''',
 '''No wanted pages in this wiki.''':
 '''Tässä wikissä ei ole toivottu sivuja.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Sisällytysten maksimimäärä ylitetty**''',
-'''**Could not find the referenced page: %s**''':
-'''**Viitattua sivua ei löydy: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Odotettiin "%(wanted)s" "%(key)s":n jälkeen, saatiin "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

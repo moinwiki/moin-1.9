@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -163,6 +163,10 @@ msgstr "미리보기"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "글 내용을 고치지 않았으므로 저장되지 않았습니다."
 
 #, fuzzy
 msgid "Comment:"
@@ -777,12 +781,8 @@ msgstr "Page hits and edits"
 msgid "You are not allowed to revert this page!"
 msgstr "이 글을 되돌릴 권한이 없습니다!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러"
-"서 사용자 계정을 만들어 주세요."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -795,19 +795,17 @@ msgstr "이 글을 더 이상 감시하지 않습니다."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "글을 감시하기 위해서는 읽기 권한이 필요합니다."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 위키 관리자에게 연락하여 메"
-"일을 쓸 수 있도록 하거나, \"Subscribe\" 아이콘을 지워달라고 하세요."
+"이 위키는 메일 처리를 할 수 없도록 되어 있습니다. \n"
+"위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"사용자 정보에 메일 주소를 입력하지 않았습니다. 화면 오른쪽 위의 "
-"UserPreferences에 들어가서 이름을 입력하고 메일 주소를 바르게 입력해 주세요."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "이 글을 더 이상 감시하지 않습니다."
@@ -815,13 +813,8 @@ msgstr "이 글을 더 이상 감시하지 않습니다."
 msgid "Can't remove regular expression subscription!"
 msgstr "정규표현식으로 된 감시 목록은 지울 수 없습니다!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 글을 지"
-"워 주세요."
 
 msgid "You have been subscribed to this page."
 msgstr "이제 이 글이 변경되면 메일로 알려드리겠습니다."
@@ -1097,6 +1090,18 @@ msgstr "그림 '%(filename)s'가 저장되었습니다."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "첨부 '%(filename)s'를 지움"
@@ -1108,13 +1113,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1342,13 +1341,6 @@ msgstr "이 위키 전체를 XML로 반출"
 msgid "No wanted pages in this wiki."
 msgstr "이 위키에는 수배중인 글이 없습니다."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1478,10 +1470,6 @@ msgstr "제목"
 msgid "Search"
 msgstr "찾기:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "빨리가기메뉴"
-
 msgid "More Actions:"
 msgstr "다른 작업:"
 
@@ -1495,10 +1483,6 @@ msgstr "본문 보기"
 #, fuzzy
 msgid "Delete Cache"
 msgstr "글 지우기"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "새 첨부"
 
 msgid "Delete Page"
 msgstr "글 지우기"
@@ -1527,6 +1511,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "못 고치는 글"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "빨리가기메뉴"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "새 첨부"
 
 #, python-format
 msgid "Show %s days."
@@ -1647,6 +1642,41 @@ msgstr "이름바꿈"
 msgid "SpellCheck"
 msgstr "철자검사"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 "
+#~ "눌러서 사용자 계정을 만들어 주세요."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 위키 관리자에게 연락하"
+#~ "여 메일을 쓸 수 있도록 하거나, \"Subscribe\" 아이콘을 지워달라고 하세요."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "사용자 정보에 메일 주소를 입력하지 않았습니다. 화면 오른쪽 위의 "
+#~ "UserPreferences에 들어가서 이름을 입력하고 메일 주소를 바르게 입력해 주세"
+#~ "요."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 글을 "
+#~ "지워 주세요."
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "빨리가기메뉴"
+
 #~ msgid "Show Print View"
 #~ msgstr "인쇄용 화면보기"
 
@@ -1665,10 +1695,6 @@ msgstr "철자검사"
 
 #~ msgid "Can't work out query"
 #~ msgstr "퀴어리를 쓸 수 없습니다"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "빨리가기메뉴"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -168,6 +168,12 @@ msgstr "Anteprima"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr ""
+"Dal momento che non ne hai modificato il contenuto, la pagina non è stata "
+"salvata!"
 
 #, fuzzy
 msgid "Comment:"
@@ -792,12 +798,8 @@ msgstr "Richieste e modifiche alla pagina"
 msgid "You are not allowed to revert this page!"
 msgstr "Non sei autorizzato a ripristinare questa pagina!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Non hai ancora creato un profilo utente. Seleziona UserPreferences "
-"nell'angolo in alto a destra per creare un profilo."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -810,20 +812,17 @@ msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Non ti è consentito abbonarti a pagine che non puoi leggere."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
 "Questo wiki non è abilitato ad usare la mail. Contatta il gestore del wiki, "
-"o chi può abilitare la mail, oppure togli l'icona \"Subscribe\"."
+"o chi può abilitare la mail."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Non hai inserito un indirizzo email nel tuo profilo. Seleziona il tuo nome"
-"(PreferenzeUtente) nell'angolo in alto a destra ed inserisci un indirizzo "
-"email valido."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
@@ -831,13 +830,8 @@ msgstr "La tua sottoscrizione a questa pagine è stata rimossa."
 msgid "Can't remove regular expression subscription!"
 msgstr "Non posso rimuovere la sottoscrizione per espressione regolare"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Per rimuoverti, vai nel tuo profilo e cancella questa pagina dalla "
-"listadelle pagine a cui sei abbonato."
 
 msgid "You have been subscribed to this page."
 msgstr "Da questo momento sei abbonato a questa pagina."
@@ -1117,6 +1111,18 @@ msgstr "Il disegno '%(filename)s' è stato memorizzato."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "L'allegato '%(filename)s' è stato cancellato."
@@ -1128,13 +1134,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1366,13 +1366,6 @@ msgstr "Scarica una versione XML di questo wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Non ci sono pagine \"non scritte\" in questo wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Superato il limite massimo di inclusioni consentite**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Impossibile trovare la pagina referenziata: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Atteso \"%(wanted)s\" per \"%(key)s\", trovato \"%(token)s\""
@@ -1497,10 +1490,6 @@ msgstr "Titoli"
 msgid "Search"
 msgstr "Cerca:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Collegamenti rapidi"
-
 msgid "More Actions:"
 msgstr "Altre Azioni:"
 
@@ -1513,10 +1502,6 @@ msgstr "Mostra il testo grezzo"
 
 msgid "Delete Cache"
 msgstr "Cancella file temporanei"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Nuovo allegato"
 
 msgid "Delete Page"
 msgstr "Cancella Pagina"
@@ -1545,6 +1530,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Pagina non alterabile"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Collegamenti rapidi"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Nuovo allegato"
 
 #, python-format
 msgid "Show %s days."
@@ -1666,6 +1662,47 @@ msgstr "RinominaPagina"
 msgid "SpellCheck"
 msgstr "ControlloOrtografico"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Non hai ancora creato un profilo utente. Seleziona UserPreferences "
+#~ "nell'angolo in alto a destra per creare un profilo."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Questo wiki non è abilitato ad usare la mail. Contatta il gestore del "
+#~ "wiki, o chi può abilitare la mail, oppure togli l'icona \"Subscribe\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Non hai inserito un indirizzo email nel tuo profilo. Seleziona il tuo nome"
+#~ "(PreferenzeUtente) nell'angolo in alto a destra ed inserisci un indirizzo "
+#~ "email valido."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Per rimuoverti, vai nel tuo profilo e cancella questa pagina dalla "
+#~ "listadelle pagine a cui sei abbonato."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Superato il limite massimo di inclusioni consentite**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Impossibile trovare la pagina referenziata: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Collegamenti rapidi"
+
 #~ msgid "Show Print View"
 #~ msgstr "Versione stampabile"
 
@@ -1684,10 +1721,6 @@ msgstr "ControlloOrtografico"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Non riesco a impostare la query di ricerca"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Collegamenti rapidi"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

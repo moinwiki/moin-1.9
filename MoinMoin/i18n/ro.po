@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -169,6 +169,10 @@ msgstr "Previzionare"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Nu aţi modificat conţinutul paginii; nu se salvează!"
 
 #, fuzzy
 msgid "Comment:"
@@ -808,12 +812,8 @@ msgid "You are not allowed to revert this page!"
 msgstr ""
 "Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Nu aţi creat un profil de utilizator încă. Selectaţi PreferinţeUtilizator în "
-"colţul din dreapta sus pentru a crea un profil."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -827,20 +827,17 @@ msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 "Nu aveţi permisiunea de înscriere la o pagină pe care nu o puteţi citi."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Acest wiki nu permite mesajele email. Contactaţi deţinătorul wiki-ului, care "
-"poate ori să activeze email, ori să dezactiveze pictograma \"Înscriere\"."
+"Acest wiki nu permite procesare poştei electronice.\n"
+"Contactaţi deţinătorul wiki-ului, care poate activa email."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Nu aţi introdus o adresă de email în profilul dumneavoastră. Selectaţi "
-"numele dumneavoastră (PreferinţeUtilizator) în colţul din dreapta sus şi "
-"introduceţi o adresă de email validă."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
@@ -848,13 +845,8 @@ msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
 msgid "Can't remove regular expression subscription!"
 msgstr "Nu se poate şterge înregistrarea cu expresie regulară!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Pentru a renunţa, ştergeţi această pagină din lista de înregistrări din "
-"profilul dumneavoastră."
 
 msgid "You have been subscribed to this page."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
@@ -1137,6 +1129,18 @@ msgstr "Desenul '%(filename)s' a fost salvat."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Ataşamentul '%(filename)s' a fost şters."
@@ -1148,13 +1152,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1388,13 +1386,6 @@ msgstr "Descărcare export XML pentru acest wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Nici o pagină dorită în acest wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Numărul maxim de incluziuni acceptate a fost depăşit**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Pagina de referinţă %s nu a putut fi găsită**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Trebuie \"%(wanted)s\" după \"%(key)s\", s-a primit \"%(token)s\""
@@ -1516,10 +1507,6 @@ msgstr "Titluri"
 msgid "Search"
 msgstr "Căutare:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Legături rapide"
-
 msgid "More Actions:"
 msgstr "Mai Multe Acţiuni:"
 
@@ -1532,10 +1519,6 @@ msgstr "Afişare Text Brut"
 
 msgid "Delete Cache"
 msgstr "Ştergere Cache"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Ataşament Nou"
 
 msgid "Delete Page"
 msgstr "Ştergere Pagină"
@@ -1564,6 +1547,16 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Pagină Imuabilă"
+
+msgid "Remove Link"
+msgstr ""
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Ataşament Nou"
 
 #, python-format
 msgid "Show %s days."
@@ -1684,6 +1677,48 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Nu aţi creat un profil de utilizator încă. Selectaţi PreferinţeUtilizator "
+#~ "în colţul din dreapta sus pentru a crea un profil."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Acest wiki nu permite mesajele email. Contactaţi deţinătorul wiki-ului, "
+#~ "care poate ori să activeze email, ori să dezactiveze pictograma "
+#~ "\"Înscriere\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Nu aţi introdus o adresă de email în profilul dumneavoastră. Selectaţi "
+#~ "numele dumneavoastră (PreferinţeUtilizator) în colţul din dreapta sus şi "
+#~ "introduceţi o adresă de email validă."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Pentru a renunţa, ştergeţi această pagină din lista de înregistrări din "
+#~ "profilul dumneavoastră."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Numărul maxim de incluziuni acceptate a fost depăşit**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Pagina de referinţă %s nu a putut fi găsită**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Legături rapide"
 
 #~ msgid "Show Print View"
 #~ msgstr "Afişare Pentru Tipărire"

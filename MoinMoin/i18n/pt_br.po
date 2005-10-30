@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
-"PO-Revision-Date: 2005-10-20 12:35 (UTC)\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"PO-Revision-Date: 2005-10-30 01:56 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr ""
 "Seu tempo de edição se esgotou. Esteja preparado para editar conflitos!"
 
 msgid "Page name is too long, try shorter name."
-msgstr "Nome desta página é muito grande, tente um mais curto."
+msgstr "O nome desta página é muito grande, tente um mais curto."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -166,6 +166,9 @@ msgstr "Previsão"
 msgid "GUI Mode"
 msgstr "Visualização Gráfica"
 
+msgid "Your changes are not saved!"
+msgstr "Suas mudanças não foram gravadas!"
+
 msgid "Comment:"
 msgstr "Comentário:"
 
@@ -210,12 +213,12 @@ msgstr ""
 "2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   "
 "[[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 "
 "[[Verbatim(=====)]].\n"
-" Listas:: espaço e um dos seguintes: * marcadores; 1., a., A., i., I. listas "
-"numeradase; 1.#n começar numeração em n; espaço sozinho identa.\n"
-" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets e aspas "
-"duplas\"])]]; url; [url]; [etiqueta da url].\n"
+" Listas:: Espaço com um dos seguintes: * marcadores; 1., a., A., i., I. listas "
+"numeradas; 1.#n começar numeração em n; espaço sozinho identa a linha.\n"
+" Links:: [[Verbatim(PalavrasComIniciaisMaiúsculas)]]; [[Verbatim([\"Aspas "
+"duplas\"])]]; url; [url]; [Título da URL].\n"
 " Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas "
-"||;    espaços em brando não são permitidos após tabelas ou títulos.\n"
+"||;    espaços em branco não são permitidos após tabelas ou títulos.\n"
 "\n"
 "(!) Para mais ajuda, veja AjudaNaEdição ou ReferênciaDeSintaxe.\n"
 
@@ -267,7 +270,7 @@ msgid "Trivial "
 msgstr "Superficial "
 
 msgid "Status of sending notification mails:"
-msgstr "Status de notificação por mail:"
+msgstr "Status de notificação por e-mail:"
 
 #, python-format
 msgid "[%(lang)s] %(recipients)s: %(status)s"
@@ -560,7 +563,7 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
-"Você solicitou submeter seus dados de conta a este endereço de email.\n"
+"Você solicitou submeter seus dados de conta a este endereço de e-mail.\n"
 "\n"
 "Se você perder sua senha, por favor use os dados acima e somente entre com\n"
 "a senha COMO MOSTRADO no campo da senha do wiki (utilize copiar e colar\n"
@@ -799,12 +802,8 @@ msgstr "Número de acessos e edições da página"
 msgid "You are not allowed to revert this page!"
 msgstr "Você não tem permissão para reverter as alterações desta página!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Você ainda não criou um perfil de usuário. Selecione PreferênciasDoUsuário "
-"no canto superior direito para criar um perfil."
+msgid "You must login to add a quicklink."
+msgstr "Você precisa se logar para adicionar links rápidos."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Sua subscrição a esta página foi removida."
@@ -813,24 +812,16 @@ msgid "A quicklink to this page has been added for you."
 msgstr "Uma subscrição a esta página foi adicionada por você."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr ""
-"Você não tem permissão para subscrever uma página que você não pode ler."
+msgstr "Você não tem permissão para se inscrever em uma página que você não pode ler."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
-msgstr ""
-"Esta wiki não está habilitada a enviar mensagens de correio eletrônico. "
-"Contate o administrador da wiki, o qual poderá habilitar a opção de envio de "
-"mensagens, ou remover o ícone de \"Subscrever\"."
+msgid "This wiki is not enabled for mail processing."
+msgstr "Este wiki não está habilitado a enviar mensagens de correio eletrônico."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
-msgstr ""
-"Você não inseriu um endereço de email válido em seu perfil. Selecione seu "
-"nome (PreferênciasDoUsuário) no canto superior direito e insira um endereço "
-"válido de email."
+msgid "You must log in to use subscribtions."
+msgstr "Você precisa fazer o login antes de se inscrever."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr "Adicione um endereço de e-mail nas PreferênciasDoUsuário para usar as inscrições."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Sua subscrição a esta página foi removida."
@@ -838,12 +829,8 @@ msgstr "Sua subscrição a esta página foi removida."
 msgid "Can't remove regular expression subscription!"
 msgstr "Não é possível remover expressão regular correspondendo a subscrição!"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr ""
-"Para remover a inscrição, vá para seu perfil e apague esta página da lista "
-"de páginas inscritas."
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "Edite suas inscrições de páginas nas sua PreferênciasDoUsuário."
 
 msgid "You have been subscribed to this page."
 msgstr "Sua inscrição a esta página foi efetivada."
@@ -963,7 +950,7 @@ msgstr "Por favor, use um termo mais preciso ao invés de {{{\"%s\"}}}"
 
 #, python-format
 msgid "ERROR in regex '%s'"
-msgstr "ERRO na regex, expressã regular, '%s'"
+msgstr "ERRO na regex, expressão regular, '%s'"
 
 #, python-format
 msgid "Bad timestamp '%s'"
@@ -1121,6 +1108,22 @@ msgid "The file %s is not a MoinMoin package file."
 msgstr "O arquivo %s não é um arquivo de pacote do MoinMoin."
 
 #, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Anexo '%(filename)s' não pode ser descompactado porque os arquivos "
+"resultantesseriam muito grandes (%(space)d kB missing)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Anexo '%(filename)s' não pode ser descompactado porque os arquivos "
+"resultantes seriam muito grandes (%(count)d kB missing)."
+
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Anexo '%(filename)s' não-zipado."
 
@@ -1129,20 +1132,12 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
-"Anexo '%(filename)s' não descompactado porque o arquivo é muito grande, somente "
-"arquivos .zip que já existam ou que estejam em pastas."
+"Anexo '%(filename)s' não descompactado porque o arquivo é muito grande, "
+"somente arquivos .zip que já existam ou que estejam em pastas."
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Anexo '%(filename)s' não pode ser descompactado porque os arquivos resultantes"
-"seriam muito grandes (%(space)d kB missing)."
-
-#, python-format
-msgid "The file '%(target)' is not a .zip file."
-msgstr "O arquivo '%(target)' não é um arquivo .zip."
+msgid "The file %(target)s is not a .zip file."
+msgstr "O arquivo %(target)s não é um arquivo .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1374,13 +1369,6 @@ msgstr "Baixar arquivo XML exportado desta wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Nenhuma página solicitada neste wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**O número máximo de inserções permitidas foi excedida**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Não foi possível encontrar a página referenciada: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Esperado \"%(wanted)s\" depois de \"%(key)s\", obtido \"%(token)s\""
@@ -1502,9 +1490,6 @@ msgstr "Títulos"
 msgid "Search"
 msgstr "Procurar"
 
-msgid "Quicklink"
-msgstr "Links rápidos"
-
 msgid "More Actions:"
 msgstr "Mais Ações:"
 
@@ -1516,9 +1501,6 @@ msgstr "Visualizar Texto"
 
 msgid "Delete Cache"
 msgstr "Deletar Cache"
-
-msgid "Attachments"
-msgstr "Anexos"
 
 msgid "Delete Page"
 msgstr "Apagar Página"
@@ -1543,6 +1525,15 @@ msgstr "Editar (GUI)"
 
 msgid "Immutable Page"
 msgstr "Página Não Editável"
+
+msgid "Remove Link"
+msgstr "Remover Link"
+
+msgid "Add Link"
+msgstr "Adicionar Link"
+
+msgid "Attachments"
+msgstr "Anexos"
 
 #, python-format
 msgid "Show %s days."
@@ -1664,6 +1655,46 @@ msgstr "RenomearPágina"
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Você ainda não criou um perfil de usuário. Selecione "
+#~ "PreferênciasDoUsuário no canto superior direito para criar um perfil."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Esta wiki não está habilitada a enviar mensagens de correio eletrônico. "
+#~ "Contate o administrador da wiki, o qual poderá habilitar a opção de envio "
+#~ "de mensagens, ou remover o ícone de \"Subscrever\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Você não inseriu um endereço de email válido em seu perfil. Selecione seu "
+#~ "nome (PreferênciasDoUsuário) no canto superior direito e insira um "
+#~ "endereço válido de email."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Para remover a inscrição, vá para seu perfil e apague esta página da "
+#~ "lista de páginas inscritas."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**O número máximo de inserções permitidas foi excedida**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Não foi possível encontrar a página referenciada: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "Links rápidos"
+
 #~ msgid "Show Print View"
 #~ msgstr "Visualizar Impressão"
 
@@ -1681,9 +1712,6 @@ msgstr "VerificaçãoOrtográfica"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Não posso realizar a busca"
-
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Remover links rápidos"
 
 #~ msgid "Add to Quicklinks"
 #~ msgstr "Adicionar links rápidos"

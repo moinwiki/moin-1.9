@@ -349,14 +349,8 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Broj poziva i izmena stranica''',
 '''You are not allowed to revert this page!''':
 '''Vama nije dozvoljeno da povratite ovu stranicu!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Još nemate korisnički profil. Izaberite MojePostavke u gornjem desnom uglu da kreirate profil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Ne možete se pretpisati na stranicu koju ne možete čitati.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Ovaj viki nije aktiviran za obradu mejlova. Kontaktirajte vlasnika ovog vikija, koji ili može da uključi mejl opcije, ili da skloni "Pretpisati" icon.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Niste ukucali mejl adresu u vaš profil. Izaberite vaše ime (MojePostavke) u gornjem desnom uglu i izaberite važeću mejl adresu. ''',
 '''Your subscribtion to this page has been removed.''':
 '''Niko se nije pretpisao na ovu stranicu, mejl nije poslat.''',
 '''Can\'t remove regular expression subscription!''':

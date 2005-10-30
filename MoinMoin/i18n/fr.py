@@ -88,6 +88,8 @@ Si vous ne le souhaitez pas, utilisez \'\'\'%(cancel_button_text)s\'\'\' pour an
 '''Aperçu''',
 '''GUI Mode''':
 '''Mode graphique''',
+'''Your changes are not saved!''':
+'''Vos modifications ne sont pas enregistrées !''',
 '''Comment:''':
 '''Commentaire :''',
 '''<No addition>''':
@@ -479,16 +481,26 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Nombre de consultations et d\'éditions''',
 '''You are not allowed to revert this page!''':
 '''Vous n\'êtes pas autorisé à restaurer une version antérieure de cette page !''',
+'''You must login to add a quicklink.''':
+'''Vous devez être identifié pour ajouter un lien rapide.''',
 '''Your quicklink to this page has been removed.''':
 '''Votre lien rapide vers cette page a été supprimé.''',
 '''A quicklink to this page has been added for you.''':
 '''Un lien rapide vers cette page a été ajouté pour vous.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Vous n\'êtes pas autorisé à vous abonner à une page que vous ne pouvez pas lire.''',
+'''This wiki is not enabled for mail processing.''':
+'''La gestion du courrier n\'est pas activée sur ce wiki.''',
+'''You must log in to use subscribtions.''':
+'''Vous devez être identifié pour utiliser l\'abonnement.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Ajoutez votre adresse électronique dans les PréférencesUtilisateur pour utiliser l\'abonnement.''',
 '''Your subscribtion to this page has been removed.''':
 '''Votre abonnement à cette page a été supprimé.''',
 '''Can\'t remove regular expression subscription!''':
 '''Impossible de retirer un abonnement selon une expression rationnelle''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Modifiez les expressions rationnelles contenues dans vos PréférencesUtilisateur.''',
 '''You have been subscribed to this page.''':
 '''Vous avez été abonné à cette page.''',
 '''Charts are not available!''':
@@ -574,7 +586,7 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 '''Wiki Markup''':
 '''Balisage Wiki''',
 '''Print View''':
-'''version d\'impression''',
+'''Version à imprimer''',
 '''[%d attachments]''':
 '''[%d pièces jointes]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -652,6 +664,8 @@ en blanc, le nom original sera conservé.''',
 '''Le fichier %s n\'est pas un paquet MoinMoin.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''La pièce jointe « %(filename)s » n\'a pu être décompressée, car les fichiers résultants seraient trop volumineux (il manque %(space)d ko).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''La pièce jointe « %(filename)s » n\'a pu être décompressée, car les fichiers résultants seraient trop nombreux (%(count)d en trop).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Pièce jointe « %(filename)s » décompressée.''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
@@ -882,6 +896,10 @@ rouge=modifications''',
 '''Éditer (mode graphique)''',
 '''Immutable Page''':
 '''Page immuable''',
+'''Remove Link''':
+'''Enlever le lien''',
+'''Add Link''':
+'''Ajouter un lien''',
 '''Attachments''':
 '''Pièces jointes''',
 '''Show %s days.''':
