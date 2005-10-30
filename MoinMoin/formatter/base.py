@@ -88,6 +88,38 @@ class FormatterBase:
     def url(self, on, url=None, css=None, **kw):
         raise NotImplementedError
 
+    # Attachments ######################################################
+
+    def attachment_link(self, url, text, **kw):
+        raise NotImplementedError
+    def attachment_image(self, url, **kw):
+        raise NotImplementedError
+    def attachment_drawing(self, url, text, **kw):
+        raise NotImplementedError
+
+    def attachment_inlined(self, url, text, **kw):
+        from MoinMoin.action import AttachFile
+        import os
+        _ = self.request.getText
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
+        fpath = AttachFile.getFilename(self.request, pagename, fname)
+        base, ext = os.path.splitext(filename)
+        Parser = wikiutil.getParserForExtension(self.request.cfg, ext)
+        if Parser is not None:
+            try:
+                content = file(fpath, 'r').read()
+                # Try to decode text. It might return junk, but we don't
+                # have enough information with attachments.
+                content = wikiutil.decodeUnknownInput(content)
+                colorizer = Parser(content, self.request)
+                colorizer.format(self)
+            except IOError:
+                pass
+
+        return self.attachment_link(url, text)
+
+
     def anchordef(self, name):
         return ""
 
