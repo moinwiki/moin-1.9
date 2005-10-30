@@ -996,20 +996,15 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     if text is None:
         text = params # default
     if formatter:
-        import sys; sys.stderr.write("DEBUG - in link_tag. having a formatter\n" % (kw))
         url = "%s/%s" % (request.getScriptname(), params)
         if on != None:
-            import sys; sys.stderr.write("DEBUG - link_tag 2\n" % (kw))
             return formatter.url(on, url, css_class, **kw)
-        import sys; sys.stderr.write("DEBUG - link_tag 3\n" % (kw))
         return (formatter.url(1, url, css_class, **kw) +
                 formatter.rawHTML(text) +
                 formatter.url(0))
-    import sys; sys.stderr.write("DEBUG - link_tag 4\n" % (kw))
     if on != None and not on:
         return '</a>'
     
-    import sys; sys.stderr.write("DEBUG - link_tag 5\n" % (kw))
     attrs = ''
     if kw.has_key('attrs'):
         attrs += ' ' + kw['attrs']
