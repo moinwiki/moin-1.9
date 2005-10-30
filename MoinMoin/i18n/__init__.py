@@ -8,20 +8,21 @@
     values. Other supporting modules start with an underscore.
 
     Public attributes:
-    languages -- languages that MoinMoin knows about
-    NAME, ENCODING, DIRECTION, MAINTAINER -- named indexes
+        languages -- languages that MoinMoin knows about
+        NAME, ENCODING, DIRECTION, MAINTAINER -- named indexes
 
     Public functions:
-    filename(lang) -- return the filename of lang
-    loadLanguage(request, lang) -- load text dictionary for a specific language, returns (formatted, unformatted)
-    requestLanguage(request, usecache=1) -- return the request language
-    wikiLanguages() -- return the available wiki user languages
-    browserLanguages() -- return the browser accepted languages
-    getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
-    getText(str, request) -- return str translation
-    canRecode(input, output, strict) -- check recode ability
+        filename(lang) -- return the filename of lang
+        loadLanguage(request, lang) -- load text dictionary for a specific language, returns (formatted, unformatted)
+        requestLanguage(request, usecache=1) -- return the request language
+        wikiLanguages() -- return the available wiki user languages
+        browserLanguages() -- return the browser accepted languages
+        getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
+        getText(str, request) -- return str translation
+        canRecode(input, output, strict) -- check recode ability
     
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2005 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -35,7 +36,6 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import config
 from MoinMoin.Page import Page
 
 NAME, ENAME, ENCODING, DIRECTION, MAINTAINER = range(0,5)
@@ -65,6 +65,7 @@ def filename(lang):
     filename = filename.lower()
     return filename
 
+
 def formatMarkup(request, text, currentStack = []):
     """
     Formats the text passed according to wiki markup.
@@ -78,7 +79,6 @@ def formatMarkup(request, text, currentStack = []):
         pass
     currentStack.append(text)
 
-    from MoinMoin.Page import Page
     from MoinMoin.parser.wiki import Parser
     from MoinMoin.formatter.text_html import Formatter
     import StringIO
@@ -104,7 +104,8 @@ def formatMarkup(request, text, currentStack = []):
     del currentStack[-1]
     text = text.strip()
     return text
-   
+
+
 def loadLanguage(request, lang):
     """
     Load text dictionary for a specific language.
@@ -128,7 +129,7 @@ def loadLanguage(request, lang):
     if not needsupdate:
         try:
             (uc_texts, uc_unformatted) = pickle.loads(cache.content())
-        except (IOError,ValueError,pickle.UnpicklingError): #bad pickle data, no pickle
+        except (IOError,ValueError,pickle.UnpicklingError): # bad pickle data, no pickle
             needsupdate = 1
 
     if needsupdate:    
@@ -220,28 +221,9 @@ def requestLanguage(request):
 def wikiLanguages():
     """
     Return the available user languages in this wiki.
-
-    Since the wiki has only one charset set by the admin, and the user
-    interface files could have another charset, not all languages are
-    available on every wiki - unless we move to Unicode for all
-    languages translations. Even then, Python still can't recode some
-    charsets.
-
-    !!! Note: we use strict = 1 to choose only language that we can
-    recode strictly from the language encodings to the wiki
-    encoding. This preference could be left to the wiki admin instead.
-
-    Return a dict containing a subset of MoinMoin languages ISO codes.
+    As we do everything in unicode (or utf-8) now, everything is available.
     """
-    
-    available = {}
-    for lang in languages.keys():
-        encoding = languages[lang][ENCODING].lower()
-        if (encoding == config.charset or
-            canRecode(encoding, config.charset, strict=1)):
-            available[lang] = languages[lang]
-        
-    return available
+    return languages
 
 
 def browserLanguages(request):
@@ -323,22 +305,16 @@ def getText(str, request, lang, formatted=True):
     return trans
 
 
-########################################################################
-# Encoding
-########################################################################
-
 def canRecode(input, output, strict=1):
-    """
-    Check if we can recode text from input to output.
+    """ Check if we can recode text from input to output.
 
-    Return 1 if we can probably recode from one charset to
-    another, or 0 if the charset are not known or compatible.
-
-    arguments:
-    input -- the input encoding codec name or alias
-    output -- the output encoding codec name or alias
-    strict -- Are you going to recode using errors='strict' or you can
-    get with 'ignore', 'replace' or other error levels?
+    @param input: the input encoding codec name or alias
+    @param output: the output encoding codec name or alias
+    @param strict: Are you going to recode using errors='strict' or you can
+                   get with 'ignore', 'replace' or other error levels?
+    @rtype: bool
+    @return: True if we can probably recode from one charset to another or
+             False if the charset are not known or compatible.
     """
 
     import codecs
@@ -353,14 +329,14 @@ def canRecode(input, output, strict=1):
         decoder = codecs.getdecoder(input)          
     except LookupError:
         # Unknown encoding - forget about it!
-        return 0
+        return False
     
     # We assume that any charset that Python knows about, can be recoded
     # into any Unicode charset. Because codecs have many aliases, we
     # check the codec name itself
     if encoder.__name__.startswith('utf'):
         # This is a unicode encoding, so input could be anything.
-        return 1
+        return True
 
     # We know both encodings but we don't know if we can actually recode
     # any text from one to another. For example, we can recode from
@@ -369,9 +345,9 @@ def canRecode(input, output, strict=1):
     # We choose our answer according to the strict keyword argument
     if strict:
         # We are not sure, so NO
-        return 0
+        return False
     else:
         # Probably you can recode using 'replace' or 'ignore' or other
         # encodings error level and be happy with the results, so YES
-        return 1
+        return True
 
