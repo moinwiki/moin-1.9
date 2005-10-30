@@ -46,3 +46,37 @@ a.interwiki img, a.badinterwiki img {
 #header, #sidebar, #footer, #timings, #credits {
 	display: none;
 }
+
+#interwiki {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: 0.4em;
+}
+
+*[dir="rtl"] #interwiki {
+    float: right;
+}
+
+#interwiki :after {
+    content: ": ";
+}
+
+#pagelocation {
+    clear: right;
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 0.4em;
+}
+
+*[dir="rtl"] #pagelocation {
+    clear: left;
+}
+
+#pagelocation li {
+    display: inline;
+    padding: 0 0.3em;
+    margin: 0;
+}
+
