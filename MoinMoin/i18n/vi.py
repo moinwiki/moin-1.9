@@ -385,14 +385,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Số lần xem và sửa''',
 '''You are not allowed to revert this page!''':
 '''Bạn không thể hoàn nguyên phiên bản cũ của trang này!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Bạn chưa có profile. Nhấn vào Sở thích cá nhân ở góc phải trên để tạo một profile.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Bạn không thể đăng ký vào trang mà bạn không thể xem.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Wiki này không hỗ trợ việc soạn thư. Mong bạn thông báo cho chủ wiki, người mà có thể bật chức năng này lên, hay là bỏ đi biểu tượng "Đăng ký".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Bạn chưa nhập địa chỉ thư điện tử. Nhấn vào tên bạn (Sở thích cá nhân) ở góc phải trên để nhập vào một địa chỉ thư điện tử hợp lệ.''',
 '''Your subscribtion to this page has been removed.''':
 '''Sự đăng ký của bạn đã được huỷ bỏ.''',
 '''Can\'t remove regular expression subscription!''':

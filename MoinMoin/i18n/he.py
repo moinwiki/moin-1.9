@@ -90,6 +90,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''הסר רווחים מסופי שורות''',
 '''Edit was cancelled.''':
 '''עריכה בוטלה.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''תודה על השינויים שעשיתם.''',
+'''Page "%s" was successfully deleted!''':
+'''דף "%s" נמחק בהצלחה.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -157,8 +161,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''תוכן הדף לא השתנה.''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''אין לכם אפשרות לשנות הרשאות בדף כי אין לכם הרשאת מנהל לדף.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''תודה על השינויים שעשיתם.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''הנעילה של %(owner)s הסתיימה לפני %(mins_ago)d דקות, וקבלתם את נעילת העריכה''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -250,14 +252,6 @@ space between words. Group page name is not allowed.''':
 '''התאמה''',
 '''matches''':
 '''התאמות''',
-'''Cookie deleted. You are now logged out.''':
-'''קוקית נמחקה, אתם מנותקים.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''דואר אלקטרוני לא מאופשר בוויקי הזה
-.פנה למנהל המערכת.''',
-'''Please provide a valid email address!''':
-'''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
 '''Login Name: %s
 
 Login Password: %s
@@ -270,8 +264,6 @@ Login URL: %s/?action=userform&uid=%s
 
 כתובת להתחברות אוטמטית: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -288,6 +280,16 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] פרטי המשתמש שלך''',
+'''Cookie deleted. You are now logged out.''':
+'''קוקית נמחקה, אתם מנותקים.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''דואר אלקטרוני לא מאופשר בוויקי הזה
+.פנה למנהל המערכת.''',
+'''Please provide a valid email address!''':
+'''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''משתמש לא קיים: {{{"%s"}}}. אנא הכנס שם משתמש וסיסמא.''',
 '''Missing password. Please enter user name and password.''':
@@ -344,6 +346,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''הרשם''',
 '''Mail me my account data''':
 '''שלח לי את פרטי המשתמש''',
+'''Action''':
+'''פעולה''',
 '''No older revisions available!''':
 '''אין גרסאות ישנות יותר.''',
 '''Diff for "%s"''':
@@ -380,8 +384,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''עורך''',
 '''Comment''':
 '''הערה''',
-'''Action''':
-'''פעולה''',
 '''view''':
 '''הצג''',
 '''raw''':
@@ -572,8 +574,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''דף זה כבר נמחק או שמעולם לא נוצר.''',
 '''Please use the interactive user interface to delete pages!''':
 '''השתמשו במנשק המשתמש למחיקת דפים.''',
-'''Page "%s" was successfully deleted!''':
-'''דף "%s" נמחק בהצלחה.''',
 '''Really delete this page?''':
 '''באמת למחוק את הדף?''',
 '''Delete''':
@@ -654,8 +654,6 @@ Try a different name.''':
 '''צירוף קובץ "%(filename)s".''',
 '''Drawing \'%(filename)s\' saved.''':
 '''איור "%(filename)s" נשמר.''',
-'''%(hours)dh %(mins)dm ago''':
-'''לפני %(hours)dש %(mins)dד''',
 '''(no bookmark set)''':
 '''(אין סימנייה)''',
 '''(currently set to %s)''':
@@ -770,8 +768,6 @@ red=edit''':
 '''פעולות נוספות:''',
 '''Page''':
 '''דף''',
-'''Trail''':
-'''דפים אחרונים''',
 '''User''':
 '''משתמש''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

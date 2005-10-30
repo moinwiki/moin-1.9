@@ -396,16 +396,8 @@ e-post eller fjerne Abonner-knappen.''',
 '''Sidebesøk og -redigeringer''',
 '''You are not allowed to revert this page!''':
 '''Du har ikke tillatelse til å tilbakestille denne siden!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Du har ikke opprettet en brukerprofil ennå. Velg BrukerProfil øverst til høyre for å opprette en brukerprofil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har ikke tillatelse til å abonnere på en side du ikke kan lese!''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Denne wikien har ikke aktivert e-posthåndtering.
-Kontakt eieren av wikien, som enten kan aktivere
-e-post eller fjerne "Abonner"-knappen.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Du har ikke oppgitt en e-postadresse i din brukerprofil. Velg ditt navn (BrukerProfil) øverst til høyre og angi en gyldig e-postadresse.''',
 '''Your subscribtion to this page has been removed.''':
 '''Din avbestilling av denne siden er registrert.''',
 '''Can\'t remove regular expression subscription!''':

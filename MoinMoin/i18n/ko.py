@@ -389,14 +389,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Page hits and edits''',
 '''You are not allowed to revert this page!''':
 '''이 글을 되돌릴 권한이 없습니다!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''사용자 계정을 아직 만들지 않았습니다. 오른쪽 위에 있는 UserPreferences를 눌러서 사용자 계정을 만들어 주세요.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''글을 감시하기 위해서는 읽기 권한이 필요합니다.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 위키 관리자에게 연락하여 메일을 쓸 수 있도록 하거나, "Subscribe" 아이콘을 지워달라고 하세요.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''사용자 정보에 메일 주소를 입력하지 않았습니다. 화면 오른쪽 위의 UserPreferences에 들어가서 이름을 입력하고 메일 주소를 바르게 입력해 주세요.''',
 '''Your subscribtion to this page has been removed.''':
 '''이 글을 더 이상 감시하지 않습니다.''',
 '''Can\'t remove regular expression subscription!''':

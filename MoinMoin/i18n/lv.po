@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:30+0200\n"
+"POT-Creation-Date: 2005-10-23 18:08+0200\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -168,6 +168,9 @@ msgstr "Pirmskats"
 
 msgid "GUI Mode"
 msgstr "Grafiskais režīms"
+
+msgid "Your changes are not saved!"
+msgstr "Jūs izmaiņas nav saglabātas!"
 
 msgid "Comment:"
 msgstr "Komentārs:"
@@ -797,12 +800,8 @@ msgstr "Apmeklējumi un labojumi"
 msgid "You are not allowed to revert this page!"
 msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr ""
-"Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu "
-"iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī."
+msgid "You must login to add a quicklink."
+msgstr "Lai izveidotu ātrsaiti, Jums jāpieslēdzas."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Jūsu ātrsaite uz šo lapu ir dzēsta."
@@ -813,19 +812,14 @@ msgstr "Jums izveidota ātrsaite uz šo lapu."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
-msgstr ""
-"Šajā viki e-pasta sūtīšana ir aizliegta. Sazinieties ar viki īpašnieku, kurš "
-"var atļaut Jums sūtīšanu vai noņemt pogu \"Parakstīšanās\"."
+msgid "This wiki is not enabled for mail processing."
+msgstr "Šajā viki pasta sūtīšana nav iespējota."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
-msgstr ""
-"Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda labajā "
-"augšējā stūrī un ievadiet pareizu e-pasta adresi."
+msgid "You must log in to use subscribtions."
+msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas"
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr "Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi LietotājaIestatījumos."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
@@ -833,12 +827,8 @@ msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
 msgid "Can't remove regular expression subscription!"
 msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
 
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr ""
-"Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet "
-"ierakstus, kas saskan ar šo lapu."
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi."
 
 msgid "You have been subscribed to this page."
 msgstr "Tagad Jūs esat pierakstīts uz šo lapu."
@@ -1111,6 +1101,21 @@ msgid "The file %s is not a MoinMoin package file."
 msgstr "Fails %s nav MoinMoin pakotnes fails."
 
 #, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošie faili var būt pārāk "
+"lieli (pietrūkst %(space)d kB)."
+
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošo failu "
+"būs pārāk daudz (pietrūkst %(count)d)."
+
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Piesaiste '%(filename)s' atspiesta."
 
@@ -1121,14 +1126,6 @@ msgid ""
 msgstr ""
 "Piesaiste '%(filename)s' nav atpakota, jo faili ir pārāk lieli, tikai .zip "
 "faili, jau ekstistē vai atrodas mapēs."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-"Nevar atpakot piesaisti '%(filename)s' - rezultējošie faili var būt pārāk lieli "
-"(pietrūkst %(space)d kB)."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1357,13 +1354,6 @@ msgstr "Lejupielādēt XML eksportu no šī wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Nepieciešams \"%(wanted)s\" pēc \"%(key)s\", nevis \"%(token)s\""
@@ -1484,9 +1474,6 @@ msgstr "Virsrakstos"
 msgid "Search"
 msgstr "Meklēt"
 
-msgid "Quicklink"
-msgstr "Ātrsaite"
-
 msgid "More Actions:"
 msgstr "Citas darbības:"
 
@@ -1498,9 +1485,6 @@ msgstr "Rādīt jēltekstu"
 
 msgid "Delete Cache"
 msgstr "Dzēst kešatmiņu"
-
-msgid "Attachments"
-msgstr "Piesaistes"
 
 msgid "Delete Page"
 msgstr "Dzēst lapu"
@@ -1525,6 +1509,15 @@ msgstr "Labot grafiski"
 
 msgid "Immutable Page"
 msgstr "Nemaināma Lapa"
+
+msgid "Remove Link"
+msgstr "Dzēst saiti"
+
+msgid "Add Link"
+msgstr "Pievienot saiti"
+
+msgid "Attachments"
+msgstr "Piesaistes"
 
 #, python-format
 msgid "Show %s days."
@@ -1652,6 +1645,44 @@ msgstr "PārdēvētLapu"
 
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu "
+#~ "iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Šajā viki e-pasta sūtīšana ir aizliegta. Sazinieties ar viki īpašnieku, "
+#~ "kurš var atļaut Jums sūtīšanu vai noņemt pogu \"Parakstīšanās\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda "
+#~ "labajā augšējā stūrī un ievadiet pareizu e-pasta adresi."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet "
+#~ "ierakstus, kas saskan ar šo lapu."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
+
+#~ msgid "Quicklink"
+#~ msgstr "Ātrsaite"
 
 #~ msgid "Show Print View"
 #~ msgstr "Rādīt drukas skatu"

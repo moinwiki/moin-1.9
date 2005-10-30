@@ -477,24 +477,16 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''网页点击次数和编辑次数''',
 '''You are not allowed to revert this page!''':
 '''您不可以把此页恢复成旧版!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''您还没注册. 请点右上角的"用户设置"并注册.''',
 '''Your quicklink to this page has been removed.''':
 '''删除了您对本页的快捷链接.''',
 '''A quicklink to this page has been added for you.''':
 '''本页已加入到您的快捷链接.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''您不能订阅无权阅读的网页!''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''本维基不支持邮件处理, 请联系管理员, 以便他决定是否要启动邮寄功能,或是干脆去掉「订阅」图示.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''您注册的时候没有提供电子邮件地址.请在右上角点一下你的名字(或是"用户设置", UserPreferences) 并提供合法的电子邮件地址.''',
 '''Your subscribtion to this page has been removed.''':
 '''您终止了订阅此页.''',
 '''Can\'t remove regular expression subscription!''':
 '''不能取消用正规表达式定义的订阅!''',
-'''To unsubscribe, go to your profile and delete the item matching this page from the subscription list.''':
-'''如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项.''',
 '''You have been subscribed to this page.''':
 '''您已经订阅了此页.''',
 '''Charts are not available!''':
@@ -654,6 +646,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''文件\'%(filename)s\'安装失败''',
 '''The file %s is not a MoinMoin package file.''':
 '''文件%s不是MoinMoin包.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''附件\'%(filename)s\'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''附件\'%(filename)s\'已解压缩(unzip).''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
@@ -786,10 +780,6 @@ Try a different name.''':
 '''下载本维基的XML输出''',
 '''No wanted pages in this wiki.''':
 '''本维基中没有未定义的网页.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**太多的包含(include)**''',
-'''**Could not find the referenced page: %s**''':
-'''**未能找到引用的网页: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"后面应该接"%(wanted)s", 但却接着"%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -864,8 +854,6 @@ red=edit''':
 '''标题''',
 '''Search''':
 '''搜索''',
-'''Quicklink''':
-'''快捷链接''',
 '''More Actions:''':
 '''更多操作''',
 '''------------''':
@@ -874,8 +862,6 @@ red=edit''':
 '''源码''',
 '''Delete Cache''':
 '''删除缓存''',
-'''Attachments''':
-'''附件''',
 '''Delete Page''':
 '''删除''',
 '''Like Pages''':
@@ -892,6 +878,8 @@ red=edit''':
 '''编辑(图形界面)''',
 '''Immutable Page''':
 '''只读网页''',
+'''Attachments''':
+'''附件''',
 '''Show %s days.''':
 '''显示%s天''',
 '''EditText''':

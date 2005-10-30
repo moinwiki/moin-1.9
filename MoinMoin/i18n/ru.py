@@ -447,16 +447,10 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Запросы и исправления страниц''',
 '''You are not allowed to revert this page!''':
 '''Вы не можете восстанавливать из архива эту страницу!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем углу для их создания.''',
 '''Your quicklink to this page has been removed.''':
 '''Ваша ссылка на эту страницу удалена.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Вы не можете подписаться на страницу которую вам нельзя читать.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку или убрать кнопку "Подписка".''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''В ВашихНастройках не указан почтовый адрес. Нажмите на свое имя в правом верхнем углу и введите правильный почтовый адрес.''',
 '''Your subscribtion to this page has been removed.''':
 '''Вы больше не подписаны на эту страницу.''',
 '''Can\'t remove regular expression subscription!''':
@@ -721,10 +715,6 @@ Try a different name.''':
 '''Сохранить XML версию этого вики''',
 '''No wanted pages in this wiki.''':
 '''В этом вики нет требуемых страниц.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Превышено максимальное число вставок include**''',
-'''**Could not find the referenced page: %s**''':
-'''**Не могу найти страницу по ссылке: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Нужно "%(wanted)s" после "%(key)s", а не "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

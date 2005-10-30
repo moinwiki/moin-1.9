@@ -401,14 +401,8 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Hits e edições da página''',
 '''You are not allowed to revert this page!''':
 '''Não tem permissão para voltar a uma revisão anterior desta página!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Você não criou um perfil de Usuário. Selecione PreferênciasDoUsuário na parte superior direita para criar seu Perfil.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Não tem permissão para subescrever uma página que não pode ver.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Este wiki não tem ativado o envio automático de e-mails, contacte a administração deste wiki, a única opção para poder habilitar e-mails ou eliminar o ícone de "Inscrição"''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Não foi introduzido um e-mail em seu Perfil. Selecione seu nome na parte superior direita (PreferênciasDoUsuário) e introduza uma  conta de e-mail válida.''',
 '''Your subscribtion to this page has been removed.''':
 '''Sua inscrição nesta página foi removida.''',
 '''Can\'t remove regular expression subscription!''':
@@ -665,10 +659,6 @@ Tente um nome diferente.''',
 '''Download do XML exportado deste wiki''',
 '''No wanted pages in this wiki.''':
 '''Não existem páginas-a-criar neste wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Excedido o número máximo de \'inclusões\' permitidas''',
-'''**Could not find the referenced page: %s**''':
-'''**Não foi encontrada a página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Espere "%(wanted)s" depois de "%(key)s", encontrado "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

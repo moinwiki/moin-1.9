@@ -825,15 +825,15 @@ msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
 
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet."
+msgstr "In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet."
 
 msgid "You must log in to use subscribtions."
 msgstr "Sie müssen sich anmelden, um Abonnements verwenden zu können."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, "
-"um Abonnements benutzen zu können."
+msgstr ""
+"Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, um "
+"Abonnements benutzen zu können."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Ihr Abonnements für diese Seite wurde entfernt."
@@ -842,7 +842,8 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Kann nicht Abonnement mit regulärem Ausdruck entfernen."
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "Editieren Sie die regulären Ausdrücke für Abonnements in Ihren "
+msgstr ""
+"Editieren Sie die regulären Ausdrücke für Abonnements in Ihren "
 "BenutzerEinstellungen."
 
 msgid "You have been subscribed to this page."

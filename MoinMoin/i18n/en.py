@@ -116,6 +116,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 ''',
 '''Edit was cancelled.''':
 '''Edit was cancelled.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Thank you for your changes. Your attention to detail is appreciated.''',
+'''Page "%s" was successfully deleted!''':
+'''Page "%s" was successfully deleted!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -194,8 +198,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''You did not change the page content, not saved!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''You can\'t change ACLs on this page since you have no admin rights on it!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Thank you for your changes. Your attention to detail is appreciated.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -298,14 +300,6 @@ space between words. Group page name is not allowed.''',
 '''match''',
 '''matches''':
 '''matches''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie deleted. You are now logged out.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''',
-'''Please provide a valid email address!''':
-'''Please provide a valid email address!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -318,8 +312,6 @@ Login Password: %s
 
 Login URL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Found no account matching the given email address \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -338,6 +330,16 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Your wiki account data''',
+'''Cookie deleted. You are now logged out.''':
+'''Cookie deleted. You are now logged out.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''',
+'''Please provide a valid email address!''':
+'''Please provide a valid email address!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Found no account matching the given email address \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''',
 '''Missing password. Please enter user name and password.''':
@@ -406,6 +408,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Create Profile''',
 '''Mail me my account data''':
 '''Mail me my account data''',
+'''Action''':
+'''Action''',
 '''No older revisions available!''':
 '''No older revisions available!''',
 '''Diff for "%s"''':
@@ -442,8 +446,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Editor''',
 '''Comment''':
 '''Comment''',
-'''Action''':
-'''Action''',
 '''view''':
 '''view''',
 '''raw''':
@@ -682,8 +684,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''This page is already deleted or was never created!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Please use the interactive user interface to delete pages!''',
-'''Page "%s" was successfully deleted!''':
-'''Page "%s" was successfully deleted!''',
 '''Really delete this page?''':
 '''Really delete this page?''',
 '''Delete''':
@@ -766,8 +766,8 @@ Try a different name.''',
 '''Upload of attachment \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Drawing \'%(filename)s\' saved.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dh %(mins)dm ago''',
+'''%(mins)dm ago''':
+'''%(mins)dm ago''',
 '''(no bookmark set)''':
 '''(no bookmark set)''',
 '''(currently set to %s)''':
@@ -880,8 +880,6 @@ red=edit''',
 '''Local Site Map''',
 '''Do''':
 '''Do''',
-'''Parent Page''':
-'''Parent Page''',
 '''Edit (Text)''':
 '''Edit (Text)''',
 '''Edit (GUI)''':
@@ -902,8 +900,6 @@ red=edit''',
 '''Or try one of these actions:''',
 '''Page''':
 '''Page''',
-'''Trail''':
-'''Trail''',
 '''User''':
 '''User''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

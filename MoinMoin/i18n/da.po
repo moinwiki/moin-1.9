@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-03-21 20:17+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -163,6 +163,10 @@ msgstr "Forhåndsvis"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Du ændrede ikke på sidens indhold, så den er ikke gemt!"
 
 #, fuzzy
 msgid "Comment:"
@@ -784,12 +788,8 @@ msgstr "Sidebesøg og -redigeringer"
 msgid "You are not allowed to revert this page!"
 msgstr "Du har ikke lov til at tilbageføre denne side!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste "
-"højre hjørne for at oprette en brugerprofil."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -802,19 +802,17 @@ msgstr "Dit abonnement på denne side er blevet afmeldt."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du har ikke lov til at abonnere på en side du ikke kan læse!"
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af wiki'en, "
-"som kan enten aktivere email eller fjerne Abonnér-ikonet."
+"Denne wiki har ikke aktiveret email-håndtering.\n"
+"Kontakt ejeren af wiki'en, som kan aktivere email."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Du har ikke angivet en email-adresse i din brugerprofil. Vælg dit navn "
-"(BrugerProfil) i øverste højre hjørne og angiv en gyldig email-adresse."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Dit abonnement på denne side er blevet afmeldt."
@@ -822,13 +820,8 @@ msgstr "Dit abonnement på denne side er blevet afmeldt."
 msgid "Can't remove regular expression subscription!"
 msgstr "Kan ikke afmelde et abonnement som regulært udtryk (regexp)!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"For at afmelde abonnement skal du gå til din brugerprofil og slette denne "
-"side fra abonnementslisten."
 
 msgid "You have been subscribed to this page."
 msgstr "Du abonnerer nu på denne side."
@@ -1110,6 +1103,18 @@ msgstr "Tegningen '%(filename)s' er gemt."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Vedhæftet fil '%(filename)s' slettet."
@@ -1121,13 +1126,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1354,13 +1353,6 @@ msgstr "Hent XML-eksport af denne wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Ingen ønskede sider i denne wiki."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maksimum antal tilladte inkluderinger overskredet**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Kunne ikke finde den henviste side: %s**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Forventede \"%(wanted)s\"·efter·\"%(key)s\",·fik \"%(token)s\""
@@ -1485,10 +1477,6 @@ msgstr "Titler"
 msgid "Search"
 msgstr "Søg:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Kvik-links"
-
 msgid "More Actions:"
 msgstr "Flere Rutiner:"
 
@@ -1501,10 +1489,6 @@ msgstr "Vis rå tekst"
 
 msgid "Delete Cache"
 msgstr "Slet cache"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Ny vedhæftet fil"
 
 msgid "Delete Page"
 msgstr "Slet side"
@@ -1533,6 +1517,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Kvik-links"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Ny vedhæftet fil"
 
 #, python-format
 msgid "Show %s days."
@@ -1655,6 +1650,46 @@ msgstr "OmdøbSide"
 msgid "SpellCheck"
 msgstr "StaveKontrol"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste "
+#~ "højre hjørne for at oprette en brugerprofil."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af "
+#~ "wiki'en, som kan enten aktivere email eller fjerne Abonnér-ikonet."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Du har ikke angivet en email-adresse i din brugerprofil. Vælg dit navn "
+#~ "(BrugerProfil) i øverste højre hjørne og angiv en gyldig email-adresse."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "For at afmelde abonnement skal du gå til din brugerprofil og slette denne "
+#~ "side fra abonnementslisten."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Maksimum antal tilladte inkluderinger overskredet**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Kunne ikke finde den henviste side: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Kvik-links"
+
 #~ msgid "Show Print View"
 #~ msgstr "Vis udskriftsvenlig udgave"
 
@@ -1673,10 +1708,6 @@ msgstr "StaveKontrol"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Kan ikke forstå forespørgslen"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Kvik-links"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

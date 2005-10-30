@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -191,6 +191,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr ""
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr ""
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -271,9 +278,6 @@ msgstr ""
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
-msgstr ""
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
 
 #, python-format
@@ -443,17 +447,6 @@ msgstr ""
 msgid "matches"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr ""
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-
-msgid "Please provide a valid email address!"
-msgstr ""
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -461,10 +454,6 @@ msgid ""
 "Login Password: %s\n"
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
-msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 
 msgid ""
@@ -480,6 +469,21 @@ msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr ""
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+
+msgid "Please provide a valid email address!"
+msgstr ""
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 
 #, python-format
@@ -588,6 +592,9 @@ msgstr ""
 msgid "Mail me my account data"
 msgstr ""
 
+msgid "Action"
+msgstr ""
+
 msgid "No older revisions available!"
 msgstr ""
 
@@ -645,9 +652,6 @@ msgid "Editor"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
-
-msgid "Action"
 msgstr ""
 
 msgid "view"
@@ -1050,10 +1054,6 @@ msgstr ""
 msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr ""
-
 msgid "Really delete this page?"
 msgstr ""
 
@@ -1200,7 +1200,7 @@ msgid "Drawing '%(filename)s' saved."
 msgstr ""
 
 #, python-format
-msgid "%(hours)dh %(mins)dm ago"
+msgid "%(mins)dm ago"
 msgstr ""
 
 msgid "(no bookmark set)"
@@ -1379,9 +1379,6 @@ msgstr ""
 msgid "Do"
 msgstr ""
 
-msgid "Parent Page"
-msgstr ""
-
 msgid "Edit (Text)"
 msgstr ""
 
@@ -1415,9 +1412,6 @@ msgid "Or try one of these actions:"
 msgstr ""
 
 msgid "Page"
-msgstr ""
-
-msgid "Trail"
 msgstr ""
 
 msgid "User"

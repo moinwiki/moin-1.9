@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -163,6 +163,10 @@ msgstr "Nézet"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Nem változtatta meg a lapot, ezért nem is mentettük el!"
 
 #, fuzzy
 msgid "Comment:"
@@ -792,12 +796,8 @@ msgstr "A lap találatainak és szerkesztéseinek száma"
 msgid "You are not allowed to revert this page!"
 msgstr "Nem állíthatja vissza ezt a lapot!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"Még nem hozott létre felhasználói profilt. Kérjük válassza az oldal jobb "
-"fölső sarkában található FelhasználóiBeállítások-at a profil létrehozásához"
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -810,19 +810,17 @@ msgstr "Erre a lapra megszűnt az előfizetése."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nem fizethet elő olyan lapra, amelyet nem olvashat."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
 "A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a "
-"wiki rendszergazdájával, aki engedélyezheti a levélküldést."
+"wiki rendszergazdájával, aki engedélyezheti a levélküldést!"
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"Még nem adott meg levélcímet a profiljában. Kérjük kattintson a nevére a lap "
-"jobb fölső sarkán (FelhasználóiBeállítások), és írja be a címét."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Erre a lapra megszűnt az előfizetése."
@@ -830,13 +828,8 @@ msgstr "Erre a lapra megszűnt az előfizetése."
 msgid "Can't remove regular expression subscription!"
 msgstr "A reguláris kifejezéses előfizetést nem lehet lemondani!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Az előfizetés lemondásához lépjen be a profiljához és törölje ezt a lapot az "
-"előfizetési listából."
 
 msgid "You have been subscribed to this page."
 msgstr "Ön előfizetett erre a lapra."
@@ -1116,6 +1109,18 @@ msgstr "A(z) '%(filename)s' rajz elmentve."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "A(z) '%(filename)s' melléklet törölve."
@@ -1127,13 +1132,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1360,15 +1359,6 @@ msgstr "A wiki XML-exportjának letöltése"
 msgid "No wanted pages in this wiki."
 msgstr "Ebben a wikiben nincsenek kívánt lapok."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-"Az beágyazott dokumentumok (include-ok) száma több, mint amennyi "
-"engedélyezett**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**A hivatkozott lap (%s) nem található**"
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "\"%(wanted)s\" helyett \"%(token)s\" szerepel \"%(key)s\" után"
@@ -1491,10 +1481,6 @@ msgstr "Címek"
 msgid "Search"
 msgstr "Keresés:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Gyorskapcsok (-linkek)"
-
 msgid "More Actions:"
 msgstr "További műveletek:"
 
@@ -1507,10 +1493,6 @@ msgstr "Nyers szöveg megjelenítése"
 
 msgid "Delete Cache"
 msgstr "Gyorstár törlése"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Új melléklet"
 
 msgid "Delete Page"
 msgstr "Lap törlése"
@@ -1539,6 +1521,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Nem szerkeszthető lap"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Gyorskapcsok (-linkek)"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Új melléklet"
 
 #, python-format
 msgid "Show %s days."
@@ -1663,6 +1656,49 @@ msgstr "LapÁtnevezés"
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Még nem hozott létre felhasználói profilt. Kérjük válassza az oldal jobb "
+#~ "fölső sarkában található FelhasználóiBeállítások-at a profil "
+#~ "létrehozásához"
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba "
+#~ "a wiki rendszergazdájával, aki engedélyezheti a levélküldést."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Még nem adott meg levélcímet a profiljában. Kérjük kattintson a nevére a "
+#~ "lap jobb fölső sarkán (FelhasználóiBeállítások), és írja be a címét."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Az előfizetés lemondásához lépjen be a profiljához és törölje ezt a lapot "
+#~ "az előfizetési listából."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr ""
+#~ "Az beágyazott dokumentumok (include-ok) száma több, mint amennyi "
+#~ "engedélyezett**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**A hivatkozott lap (%s) nem található**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Gyorskapcsok (-linkek)"
+
 #~ msgid "Show Print View"
 #~ msgstr "Nyomtatási kép megjelenítése"
 
@@ -1681,10 +1717,6 @@ msgstr "HelyesírásEllenőrzés"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Nem tudjuk a keresést végrehajtani"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Gyorskapcsok (-linkek)"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

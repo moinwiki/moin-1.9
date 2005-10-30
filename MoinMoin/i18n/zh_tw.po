@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-23 13:33+0200\n"
 "PO-Revision-Date: 2004-11-29 05:38+0800\n"
 "Last-Translator: Lin Zhemin <ljm@ljm.idv.tw>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -162,6 +162,10 @@ msgstr "預覽"
 
 msgid "GUI Mode"
 msgstr ""
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "本頁內容沒變, 所以沒有存檔!"
 
 #, fuzzy
 msgid "Comment:"
@@ -765,10 +769,8 @@ msgstr "本頁人氣和編輯次數"
 msgid "You are not allowed to revert this page!"
 msgstr "你不能把本頁恢復成舊版!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
-msgstr "你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」."
+msgid "You must login to add a quicklink."
+msgstr ""
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -781,19 +783,17 @@ msgstr "本頁已取消訂閱."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱不能閱讀的頁面."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"本 wiki 不支援郵寄工作, 請連絡管理員, 以便他決定要啟動郵寄功能, 或是乾脆去掉"
-"「訂閱」圖示."
+"本 wiki 不支援郵寄工作.\n"
+"請連絡管理員, 看他要不要啟動郵寄功能."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"你註冊的時候沒有提供 email 地址. 請在右上角點一下你的名字(或是「使用者設"
-"定」) 並提供合法的 email 地址."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "本頁已取消訂閱."
@@ -801,11 +801,8 @@ msgstr "本頁已取消訂閱."
 msgid "Can't remove regular expression subscription!"
 msgstr "無法取消用 regex 設定的訂閱."
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
-msgstr "如果要取消訂閱, 請點右上角修改個人資料, 並從訂閱清單中刪除本頁."
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
 
 msgid "You have been subscribed to this page."
 msgstr "訂閱好了."
@@ -1080,6 +1077,18 @@ msgstr "圖片 '%(filename)s' 存好了."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "附件 '%(filename)s' 已刪除."
@@ -1091,13 +1100,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1322,13 +1325,6 @@ msgstr "匯出並下載本 wiki (XML 格式)"
 msgid "No wanted pages in this wiki."
 msgstr "本 wiki 沒有未定義的頁面."
 
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr ""
-
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "\"%(key)s\" 後面應該接 \"%(wanted)s\", 但卻接著 \"%(token)s\""
@@ -1453,10 +1449,6 @@ msgstr "標題"
 msgid "Search"
 msgstr "尋找:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "快速連結"
-
 msgid "More Actions:"
 msgstr "其他功能:"
 
@@ -1470,10 +1462,6 @@ msgstr "顯示原始碼"
 #, fuzzy
 msgid "Delete Cache"
 msgstr "刪除本頁"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "加入附件"
 
 msgid "Delete Page"
 msgstr "刪除本頁"
@@ -1502,6 +1490,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "本頁不可更改"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "快速連結"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "加入附件"
 
 #, python-format
 msgid "Show %s days."
@@ -1622,6 +1621,36 @@ msgstr "重新命名"
 msgid "SpellCheck"
 msgstr "拼字檢查"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr "你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "本 wiki 不支援郵寄工作, 請連絡管理員, 以便他決定要啟動郵寄功能, 或是乾脆去"
+#~ "掉「訂閱」圖示."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "你註冊的時候沒有提供 email 地址. 請在右上角點一下你的名字(或是「使用者設"
+#~ "定」) 並提供合法的 email 地址."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr "如果要取消訂閱, 請點右上角修改個人資料, 並從訂閱清單中刪除本頁."
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "快速連結"
+
 #~ msgid "Show Print View"
 #~ msgstr "檢視列印"
 
@@ -1640,10 +1669,6 @@ msgstr "拼字檢查"
 
 #~ msgid "Can't work out query"
 #~ msgstr "無法查詢"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "快速連結"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"

@@ -387,14 +387,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''本頁人氣和編輯次數''',
 '''You are not allowed to revert this page!''':
 '''你不能把本頁恢復成舊版!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''你還沒註冊. 請點右上角的 使用者設定 並按下「新使用者註冊」.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''你不能訂閱不能閱讀的頁面.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''本 wiki 不支援郵寄工作, 請連絡管理員, 以便他決定要啟動郵寄功能, 或是乾脆去掉「訂閱」圖示.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''你註冊的時候沒有提供 email 地址. 請在右上角點一下你的名字(或是「使用者設定」) 並提供合法的 email 地址.''',
 '''Your subscribtion to this page has been removed.''':
 '''本頁已取消訂閱.''',
 '''Can\'t remove regular expression subscription!''':

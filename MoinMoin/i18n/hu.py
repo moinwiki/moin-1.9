@@ -410,14 +410,8 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''A lap találatainak és szerkesztéseinek száma''',
 '''You are not allowed to revert this page!''':
 '''Nem állíthatja vissza ezt a lapot!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''Még nem hozott létre felhasználói profilt. Kérjük válassza az oldal jobb fölső sarkában található FelhasználóiBeállítások-at a profil létrehozásához''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nem fizethet elő olyan lapra, amelyet nem olvashat.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''Még nem adott meg levélcímet a profiljában. Kérjük kattintson a nevére a lap jobb fölső sarkán (FelhasználóiBeállítások), és írja be a címét.''',
 '''Your subscribtion to this page has been removed.''':
 '''Erre a lapra megszűnt az előfizetése.''',
 '''Can\'t remove regular expression subscription!''':
@@ -674,10 +668,6 @@ Próbáljon más nevet adni a lapnak.''',
 '''A wiki XML-exportjának letöltése''',
 '''No wanted pages in this wiki.''':
 '''Ebben a wikiben nincsenek kívánt lapok.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''Az beágyazott dokumentumok (include-ok) száma több, mint amennyi engedélyezett**''',
-'''**Could not find the referenced page: %s**''':
-'''**A hivatkozott lap (%s) nem található**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(wanted)s" helyett "%(token)s" szerepel "%(key)s" után''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
