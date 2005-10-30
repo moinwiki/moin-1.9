@@ -186,6 +186,7 @@ Version moin--main--1.5:
       for themes with limited content width like rightsidebar.
     * We now have the "new" icon on RecentChanges clickable, just links to the
       page.
+    * Print view now shows "interwikiname: pagename" (for show_interwiki = 1).
 
   International support:    
     * mail_from can be now a unicode name-address 
@@ -203,7 +204,10 @@ Version moin--main--1.5:
      * sync modern/css/screen.css #pagelocation #pagetrail stuff to your
        screen.css or pagelocation display (title()) will look strange (like a
        list).
-     * remove "#title h1 ..." CSS, not used any more.
+     * remove "#title h1 ..." CSS (or any other CSS assuming h1 is a page
+       title and not just a first level heading), it is not used any more.
+     * we now render = heading = as <h1> (was <h2> before 1.5),
+       == heading == as <h2> (was <h3>), etc.
      * maybe move both title() and trail() to header area, like the builtin
        themes do it.
      * there is a new interwiki() base theme method that optionally (when
@@ -288,6 +292,8 @@ Version moin--main--1.5:
       query strings.
     * Fixed MonthCalendar tooltips when containing special chars like quotes.
     * Added html escaping for diff text for RSS feed with diff=1.
+    * The distance between page content beginning and the first = heading =
+      was much too much. Fixed.
     
 Version 1.4:
 
