@@ -310,9 +310,9 @@ class Formatter(FormatterBase):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(
                 self.request,
-                self.text('%s?action=AttachFile&rename=%s' %
-                          (wikiutil.quoteWikinameURL(pagename),
-                           wikiutil.url_quote_plus(fname))),
+                ('%s?action=AttachFile&rename=%s' %
+                 (wikiutil.quoteWikinameURL(pagename),
+                  wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
         target = AttachFile.getAttachUrl(pagename, filename, self.request)
         return (self.url(1, target, title="attachment:%s" % url) +
@@ -328,9 +328,9 @@ class Formatter(FormatterBase):
             linktext = _('Upload new attachment "%(filename)s"')
             return wikiutil.link_tag(
                 self.request,
-                self.text('%s?action=AttachFile&rename=%s' %
-                          (wikiutil.quoteWikinameURL(pagename),
-                           wikiutil.url_quote_plus(fname))),
+                ('%s?action=AttachFile&rename=%s' %
+                 (wikiutil.quoteWikinameURL(pagename),
+                  wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
         return self.image(
             title="attachment:%s" % url,
@@ -355,15 +355,16 @@ class Formatter(FormatterBase):
         # check whether attachment exists, possibly point to upload form
         if not os.path.exists(fpath):
             linktext = _('Create new drawing "%(filename)s"')
-            return wikiutil.link_tag(self.request,
-                self.text('%s?action=AttachFile&rename=%s%s' % (
-                    wikiutil.quoteWikinameURL(pagename),
-                    wikiutil.url_quote_plus(fname),
-                    drawing and ('&drawing=%s' % wikiutil.url_quote(drawing)) or '')),
+            return wikiutil.link_tag(
+                self.request,
+                ('%s?action=AttachFile&rename=%s%s' %
+                 (wikiutil.quoteWikinameURL(pagename),
+                  wikiutil.url_quote_plus(fname),
+                  drawing and ('&drawing=%s' % wikiutil.url_quote(drawing)) or '')),
                 linktext % {'filename': self.text(fname)})
 
         mappath = AttachFile.getFilename(self.request, pagename, drawing + '.map')
-        edit_link = self.text('%s?action=AttachFile&rename=%s&drawing=%s' % (
+        edit_link = ('%s?action=AttachFile&rename=%s&drawing=%s' % (
             wikiutil.quoteWikinameURL(pagename),
             wikiutil.url_quote_plus(fname),
             wikiutil.url_quote(drawing)))
@@ -402,25 +403,8 @@ class Formatter(FormatterBase):
                                      attrs='title="%s"' % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
         
     
-    def attachment_inlined(self, url, text, **kw):
-        _ = self.request.getText
-        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
-        fname = wikiutil.taintfilename(filename)
-        fpath = AttachFile.getFilename(self.request, pagename, fname)
-        base, ext = os.path.splitext(filename)
-        Parser = wikiutil.getParserForExtension(self.request.cfg, ext)
-        if Parser is not None:
-            try:
-                content = file(fpath, 'r').read()
-                # Try to decode text. It might return junk, but we don't
-                # have enough information with attachments.
-                content = wikiutil.decodeUnknownInput(content)
-                colorizer = Parser(content, self.request)
-                colorizer.format(self)
-            except IOError:
-                pass
-
-        return self.attachment_link(url, text)
+    # def attachment_inlined(self, url, text, **kw):
+    # moved to MoinMoin/formatter/base.py
 
 
     # Text ##############################################################
