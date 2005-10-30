@@ -83,6 +83,14 @@ class FormatterBase:
             self.pagelinks.append(pagename)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
+        # call pagelink() for internal interwikilinks
+        # to make shure they get counted for self.pagelinks
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
+        if wikitag=='Self' or wikitag==self.request.cfg.interwikiname:
+            if wikitail.find('#') > -1:
+                wikitail, kw['anchor'] = wikitail.split('#', 1)
+                wikitail = wikiutil.url_unquote(wikitail)
+            return self.pagelink(on, wikitail, **kw)
         return ''
             
     def url(self, on, url=None, css=None, **kw):

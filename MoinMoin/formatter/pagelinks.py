@@ -53,6 +53,9 @@ class Formatter(FormatterBase):
     table = null
     table_row = null
     table_cell = null
+    attachment_link = null
+    attachment_image = null
+    attachment_drawing = null
     
     # These are private additions to formatter added by text_html, and
     # some code use or might use them.
