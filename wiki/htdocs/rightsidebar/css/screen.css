@@ -84,7 +84,7 @@ span.sep {
 }
 
 #sidebar {
-        display: inline;
+    display: inline;
 	margin: 10px;
 	float: right;
 	clear: right;
@@ -165,6 +165,21 @@ span.sep {
     clear: left;
 }
 
+#interwiki {
+    float: left;
+    margin: 8px 0;
+    padding: 0 2px;
+    font-size: 18px;
+}
+
+*[dir="rtl"] #interwiki {
+    float: right;
+}
+
+#interwiki :after {
+    content: ": ";
+}
+
 #pagelocation {
     clear: right;
     display: block;
@@ -205,10 +220,6 @@ span.sep {
 
 #pagelocation li:last-child:after {
     content: "";
-}
-
-#pagelocation li:first-child:after {
-    content: ": ";
 }
 
 #navibar li.current {

@@ -145,9 +145,25 @@ class ThemeBase:
             logo = wikiutil.link_tag(self.request, pagename, self.cfg.logo_string)
             html = u'''<div id="logo">%s</div>''' % logo
         return html
+
+    def interwiki(self, d):
+        """ Assemble the interwiki name display, linking to page_front_page
+        
+        @param d: parameter dictionary
+        @rtype: string
+        @return: interwiki html
+        """
+        html = u''
+        if self.request.cfg.show_interwiki:
+            # Show our interwikiname or Self (and link to page_front_page)
+            pagename = wikiutil.getFrontPage(self.request).page_name
+            pagename = wikiutil.quoteWikinameURL(pagename)
+            link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
+            html = u'<div id="interwiki">%s</div>' % link
+        return html
         
     def title(self, d):
-        """ Assemble the title (now using breadcrumbs and interwiki info)
+        """ Assemble the title (now using breadcrumbs)
         
         @param d: parameter dictionary
         @rtype: string
@@ -155,12 +171,6 @@ class ThemeBase:
         """
         _ = self.request.getText
         content = []
-        # Show our interwikiname or Self (and link to page_front_page)
-        pagename = wikiutil.getFrontPage(self.request).page_name
-        pagename = wikiutil.quoteWikinameURL(pagename)
-        link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
-        content.append(u"<li>%s</li>" % link)
-        
         if d['title_link']:
             curpage = ''
             segments = d['title_text'].split('/')

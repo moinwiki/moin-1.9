@@ -94,6 +94,7 @@ class Theme(ThemeBase):
             'config_header2_html': self.emit_custom_html(self.cfg.page_header2),
             'search_form_html': self.searchform(d),
             'logo_html':  self.logo(),
+            'interwiki_html':  self.interwiki(d),
             'title_html':  self.title(d),
             'username_html':  self.username(d),
             'navibar_html': self.navibar(d),
@@ -110,6 +111,7 @@ class Theme(ThemeBase):
 %(logo_html)s
 %(search_form_html)s
 %(username_html)s
+%(interwiki_html)s
 %(title_html)s
 %(trail_html)s
 %(iconbar_html)s

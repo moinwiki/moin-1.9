@@ -194,7 +194,8 @@ Version moin--main--1.5:
   Theme changes:
     * logo_string is now should be really only the logo (img).
       If you included your wiki's name in logo_string you maybe want to remove
-      it now as it is shown as part of the location display now anyway.
+      it now as it is shown as part of the location display now anyway (when
+      show_interwiki = 1).
     * You maybe want to remove page_front_page from your navi_bar - we link to
       that page now from the logo and (new) from the interwiki name displayed
       in location display, so you maybe don't need it in navi_bar, too.
@@ -205,6 +206,9 @@ Version moin--main--1.5:
      * remove "#title h1 ..." CSS, not used any more.
      * maybe move both title() and trail() to header area, like the builtin
        themes do it.
+     * there is a new interwiki() base theme method that optionally (when
+       show_interwiki = 1) shows the interwiki name of this wiki and links to
+       page_front_page. The css for it is #interwiki.
 
   Developer notes:    
     * Plugin API was improved. When plugin module is missing,
