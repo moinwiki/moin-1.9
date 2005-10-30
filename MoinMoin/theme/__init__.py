@@ -363,6 +363,14 @@ class ThemeBase:
                 items.append(item % (cls, link))
                 found[pagename] = 1
 
+        # Add current page at end
+        if not current in found:
+            title = d['page'].split_title(request)
+            title = self.shortenPagename(title)
+            link = d['page'].link_to(request, title)
+            cls = 'current'
+            items.append(item % (cls, link))
+
         # Assemble html
         items = u'\n'.join(items)
         html = u'''
