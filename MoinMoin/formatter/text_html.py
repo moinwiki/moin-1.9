@@ -706,7 +706,7 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
                 # explicit base level for section number display
                 self._show_section_numbers = int(numbering)
 
-        heading_depth = depth + 1
+        heading_depth = depth # + 1
 
         # closing tag, with empty line after, to make source more readable
         if not on:
