@@ -1304,6 +1304,7 @@ def send_title(request, text, **keywords):
         d = {'title_text': text, 'title_link': None, 'page': page,}
         request.themedict = d
         output.append(theme.startPage())
+        output.append(theme.interwiki(d))      
         output.append(theme.title(d))      
 
     # In standard mode, emit theme.header
