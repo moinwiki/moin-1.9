@@ -12,7 +12,7 @@
 import sys, traceback
 
 from MoinMoin.formatter.base import FormatterBase
-from MoinMoin import wikiutil, i18n, config
+from MoinMoin import wikiutil, config
 from MoinMoin.error import CompositeError
 
 from xml.sax import saxutils

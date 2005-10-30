@@ -8,7 +8,7 @@
 
 from MoinMoin.formatter import text_html
 from MoinMoin.formatter.base import FormatterBase
-from MoinMoin import wikiutil, i18n, config
+from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 

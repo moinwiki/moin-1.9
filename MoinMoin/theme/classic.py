@@ -12,7 +12,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import i18n, wikiutil, version
+from MoinMoin import wikiutil, version
 from MoinMoin.theme import ThemeBase
 from MoinMoin.Page import Page
 
