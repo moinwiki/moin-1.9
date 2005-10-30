@@ -69,6 +69,7 @@ class Theme(ThemeBase):
             u'<div id="header">',
             self.searchform(d),
             self.logo(),
+            self.interwiki(d),
             self.title(d),
             self.trail(d),
             u'</div>',

@@ -28,6 +28,7 @@ class Theme(ThemeBase):
             self.logo(),
             self.searchform(d),
             self.username(d),
+            self.interwiki(d),
             self.title(d),
             self.trail(d),
             self.navibar(d),

@@ -122,6 +122,21 @@ textarea {
     clear: left;
 }
 
+#interwiki {
+    float: left;
+    margin: 8px 0;
+    padding: 0 2px;
+    font-size: 18px;
+}
+
+*[dir="rtl"] #interwiki {
+    float: right;
+}
+
+#interwiki :after {
+    content: ": ";
+}
+
 #pagelocation {
     clear: right;
     display: block;
@@ -162,10 +177,6 @@ textarea {
 
 #pagelocation li:last-child:after {
     content: "";
-}
-
-#pagelocation li:first-child:after {
-    content: ": ";
 }
 
 #navibar {
