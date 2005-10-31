@@ -23,7 +23,10 @@ class Config(FarmConfig):
     # basic options (you normally need to change these)
     sitename = u'MoinMaster' # [Unicode]
     interwikiname = 'MoinMaster'
-    
+
+    # See also url_prefix setting!
+    logo_string = u'<img src="/wiki/common/moinhalloween.png" alt="MoinMoin Halloween Logo">'
+
     # name of entry page / front page [Unicode], choose one of those:
     
     # a) if most wiki content is in a single language
