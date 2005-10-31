@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2004-11-29 05:38+0800\n"
 "Last-Translator: Lin Zhemin <ljm@ljm.idv.tw>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -221,6 +221,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "取消編輯."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "謝謝修改, 敬請注意細節."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "頁面 \"%s\" 刪掉了!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -321,9 +328,6 @@ msgstr "本頁內容沒變, 所以沒有存檔!"
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr "你不能修改本頁的存取控制表(ACL), 因為你沒有管理權限!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "謝謝修改, 敬請注意細節."
 
 #, python-format
 msgid ""
@@ -503,19 +507,6 @@ msgstr "筆"
 msgid "matches"
 msgstr "筆"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie 已經刪除. 你登出了."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"本 wiki 不支援郵寄工作.\n"
-"請連絡管理員, 看他要不要啟動郵寄功能."
-
-msgid "Please provide a valid email address!"
-msgstr "請輸入合法的 email 地址!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -524,10 +515,6 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "找不到登記為 '%(email)s' 的帳戶!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -543,6 +530,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie 已經刪除. 你登出了."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"本 wiki 不支援郵寄工作.\n"
+"請連絡管理員, 看他要不要啟動郵寄功能."
+
+msgid "Please provide a valid email address!"
+msgstr "請輸入合法的 email 地址!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "找不到登記為 '%(email)s' 的帳戶!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -652,6 +656,9 @@ msgstr "新使用者註冊"
 msgid "Mail me my account data"
 msgstr "把帳號資料寄給我 "
 
+msgid "Action"
+msgstr "功能"
+
 msgid "No older revisions available!"
 msgstr "沒有舊版!"
 
@@ -710,9 +717,6 @@ msgstr "編輯者"
 
 msgid "Comment"
 msgstr "註解"
-
-msgid "Action"
-msgstr "功能"
 
 msgid "view"
 msgstr "觀看"
@@ -1133,10 +1137,6 @@ msgstr "本頁已經刪除或還沒建立!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "請使用互動式介面刪除頁面!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "頁面 \"%s\" 刪掉了!"
-
 msgid "Really delete this page?"
 msgstr "真的要刪除本頁?"
 
@@ -1287,8 +1287,8 @@ msgstr "傳上 '%(filename)s' 附件."
 msgid "Drawing '%(filename)s' saved."
 msgstr "圖片 '%(filename)s' 存好了."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)d小時又 %(mins)d分 前]"
 
 msgid "(no bookmark set)"
@@ -1478,10 +1478,6 @@ msgid "Do"
 msgstr "執行"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "首頁"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "編輯本頁"
 
@@ -1517,9 +1513,6 @@ msgstr "或使用下列功能: "
 
 msgid "Page"
 msgstr "頁面"
-
-msgid "Trail"
-msgstr "些微更動"
 
 msgid "User"
 msgstr "使用者"
@@ -1620,6 +1613,13 @@ msgstr "重新命名"
 
 msgid "SpellCheck"
 msgstr "拼字檢查"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "首頁"
+
+#~ msgid "Trail"
+#~ msgstr "些微更動"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

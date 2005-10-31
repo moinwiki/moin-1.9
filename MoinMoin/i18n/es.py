@@ -96,6 +96,10 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Eliminar espacios en blanco al final de cada línea''',
 '''Edit was cancelled.''':
 '''La edición fue cancelada.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Gracias por tus modificaciones. Se aprecia tu preocupación por los detalles.''',
+'''Page "%s" was successfully deleted!''':
+'''¡La página "%s" se eliminó de forma correcta!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -171,8 +175,6 @@ lo que es realmente de mala educación!\'\'
 '''¡No has modificado el contenido de la página. Nada que  guardar!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''¡No tienes permisos para cambiar el ACL en esta página porque no posees derechos de adiministrador sobre ella!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Gracias por tus modificaciones. Se aprecia tu preocupación por los detalles.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''El bloqueo de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha concedido el bloqueo de esta página.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -273,14 +275,6 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie borrada. Has salido del sistema.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Este wiki no tiene activado el procesamiento de e-mails.
-Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
-'''Please provide a valid email address!''':
-'''¡Por favor, proporciona una dirección de e-mail válido!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -293,8 +287,6 @@ Contraseña de Ingreso: %s
 
 URL de Ingreso: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''¡No se encontró una cuenta que coincida con la dirección e-mail \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -312,6 +304,16 @@ e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del wiki
 Luego de ingresar con éxito, por supuesto es una buena idea cambiar la contraseña
 por una mejor y más fácil de recordar.
 ''',
+'''Cookie deleted. You are now logged out.''':
+'''Cookie borrada. Has salido del sistema.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Este wiki no tiene activado el procesamiento de e-mails.
+Contacta el propietario del wiki. El es quien puede habilitar e-mails''',
+'''Please provide a valid email address!''':
+'''¡Por favor, proporciona una dirección de e-mail válido!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''¡No se encontró una cuenta que coincida con la dirección e-mail \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':
@@ -372,6 +374,8 @@ por una mejor y más fácil de recordar.
 '''Crear Perfil de Usuario''',
 '''Mail me my account data''':
 '''Envíame los datos de mi cuenta ''',
+'''Action''':
+'''Acción''',
 '''No older revisions available!''':
 '''¡No hay revisiones anteriores disponibles!''',
 '''Diff for "%s"''':
@@ -408,8 +412,6 @@ por una mejor y más fácil de recordar.
 '''Editor''',
 '''Comment''':
 '''Comentario''',
-'''Action''':
-'''Acción''',
 '''view''':
 '''ver''',
 '''raw''':
@@ -593,8 +595,6 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''¡Esta página ya ha sido borrada o nunca se creó!''',
 '''Please use the interactive user interface to delete pages!''':
 '''¡Por favor, usa la interfaz interactiva de usuario para eliminar páginas!''',
-'''Page "%s" was successfully deleted!''':
-'''¡La página "%s" se eliminó de forma correcta!''',
 '''Really delete this page?''':
 '''¿Realmente deseas eliminar esta página?''',
 '''Delete''':
@@ -677,8 +677,6 @@ Intenta con un nombre distinto.''',
 '''Subida (upload) del adjunto \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Dibujo \'%(filename)s\' guardado.''',
-'''%(hours)dh %(mins)dm ago''':
-'''hace %(hours)dh %(mins)dm''',
 '''(no bookmark set)''':
 '''(no has establecido marca-de-tiempo)''',
 '''(currently set to %s)''':
@@ -783,8 +781,6 @@ rojo=editar''',
 '''O intenta una de estas acciones: ''',
 '''Page''':
 '''Página''',
-'''Trail''':
-'''Páginas Visitadas''',
 '''User''':
 '''Usuario''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

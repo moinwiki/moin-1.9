@@ -86,6 +86,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''去掉行尾空白''',
 '''Edit was cancelled.''':
 '''取消編輯.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''謝謝修改, 敬請注意細節.''',
+'''Page "%s" was successfully deleted!''':
+'''頁面 "%s" 刪掉了!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -154,8 +158,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''本頁內容沒變, 所以沒有存檔!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''你不能修改本頁的存取控制表(ACL), 因為你沒有管理權限!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''謝謝修改, 敬請注意細節.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''%(owner)s 對本頁的編輯鎖定在 %(mins_ago)d 分鐘前已經失效了, 你取得了本頁的編輯鎖定.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -317,6 +319,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''新使用者註冊''',
 '''Mail me my account data''':
 '''把帳號資料寄給我 ''',
+'''Action''':
+'''功能''',
 '''No older revisions available!''':
 '''沒有舊版!''',
 '''Diff for "%s"''':
@@ -351,8 +355,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''編輯者''',
 '''Comment''':
 '''註解''',
-'''Action''':
-'''功能''',
 '''view''':
 '''觀看''',
 '''raw''':
@@ -537,8 +539,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''本頁已經刪除或還沒建立!''',
 '''Please use the interactive user interface to delete pages!''':
 '''請使用互動式介面刪除頁面!''',
-'''Page "%s" was successfully deleted!''':
-'''頁面 "%s" 刪掉了!''',
 '''Really delete this page?''':
 '''真的要刪除本頁?''',
 '''Delete''':
@@ -617,8 +617,6 @@ Try a different name.''':
 '''傳上 \'%(filename)s\' 附件.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''圖片 \'%(filename)s\' 存好了.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)d小時又 %(mins)d分 前]''',
 '''(no bookmark set)''':
 '''(未設定書籤)''',
 '''(currently set to %s)''':
@@ -707,8 +705,6 @@ red=edit''':
 '''或使用下列功能: ''',
 '''Page''':
 '''頁面''',
-'''Trail''':
-'''些微更動''',
 '''User''':
 '''使用者''',
 '''Line''':

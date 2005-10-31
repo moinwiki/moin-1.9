@@ -86,6 +86,10 @@ Hvis du ikke ønsker dette, trykk på \'\'\'%(cancel_button_text)s\'\'\' for å 
 '''Fjern ekstra mellomrom på slutten av linjer''',
 '''Edit was cancelled.''':
 '''Redigeringen ble avbrutt.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Takk for dine endringer. Ditt bidrag er verdsatt.''',
+'''Page "%s" was successfully deleted!''':
+'''Siden "%s" ble slettet.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -159,8 +163,6 @@ den andre personens endringer, noe som er meget uhøflig!\'\'
 '''Du har ikke endret på sidens innhold, så den ble ikke lagret!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Du kan ikke endre adgangsrettigheter (ACL) på denne siden. Du har ikke administratortilgang til den!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Takk for dine endringer. Ditt bidrag er verdsatt.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Låsen for %(owner)s gikk ut for %(mins_ago)d minutt(er) siden, og du har tatt over låsen til denne siden.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -324,6 +326,8 @@ e-post eller fjerne Abonner-knappen.''',
 '''Opprett brukerprofil''',
 '''Mail me my account data''':
 '''Send meg e-post med min påloggingsinformasjon''',
+'''Action''':
+'''Operasjon''',
 '''No older revisions available!''':
 '''Ingen eldre utgaver tilgjengelig!''',
 '''Diff for "%s"''':
@@ -360,8 +364,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''Forfatter''',
 '''Comment''':
 '''Kommentar''',
-'''Action''':
-'''Operasjon''',
 '''view''':
 '''vis''',
 '''raw''':
@@ -546,8 +548,6 @@ Alternativt, hvis "Endre navn" er blank, brukes det originale filnavnet.''',
 '''Denne siden er allerede slettet eller har aldri eksistert!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Bruk det interaktive brukergrensesnittet for å slette sider!''',
-'''Page "%s" was successfully deleted!''':
-'''Siden "%s" ble slettet.''',
 '''Really delete this page?''':
 '''Er du sikker på at denne siden skal slettes?''',
 '''Delete''':
@@ -630,8 +630,6 @@ Prøv igjen med et annet navn.''',
 '''Opplasting av vedlegg \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Tegningen \'%(filename)s\' er lagret.''',
-'''%(hours)dh %(mins)dm ago''':
-'''for %(hours)dt %(mins)dm siden''',
 '''(no bookmark set)''':
 '''(intet bokmerke satt)''',
 '''(currently set to %s)''':
@@ -718,8 +716,6 @@ rød=rediger''',
 '''Eller prøv en av følgende operasjoner:''',
 '''Page''':
 '''Side''',
-'''Trail''':
-'''Siste''',
 '''User''':
 '''Bruker''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-10-04 19:01+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -224,6 +224,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Redigeringen avbröts."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Tack för dina ändringar. Ditt sinne för detaljer är uppskattat."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Sidan \"%s\" raderades korrekt."
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -329,9 +336,6 @@ msgid ""
 msgstr ""
 "Du kan inte ändra ACL:er på den här sidan eftersom du inte har "
 "administratörsrättigheter till den!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Tack för dina ändringar. Ditt sinne för detaljer är uppskattat."
 
 #, python-format
 msgid ""
@@ -518,19 +522,6 @@ msgstr "träff"
 msgid "matches"
 msgstr "träffar"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Kakan togs bort. Du är nu utloggad."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Den här wikin har inte eposthantering påslagen.\n"
-"För att få eposthantering påslagen, kontakta wikins ägare."
-
-msgid "Please provide a valid email address!"
-msgstr "Var god ange en korrekt epostadress!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -544,10 +535,6 @@ msgstr ""
 "Inloggningslösenord: %s\n"
 "\n"
 "Inloggnings-URL: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Kunde inte hitta något konto med epostadressen \"%(email)s\"!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -571,6 +558,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Din wiki-kontoinformation"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Kakan togs bort. Du är nu utloggad."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Den här wikin har inte eposthantering påslagen.\n"
+"För att få eposthantering påslagen, kontakta wikins ägare."
+
+msgid "Please provide a valid email address!"
+msgstr "Var god ange en korrekt epostadress!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Kunde inte hitta något konto med epostadressen \"%(email)s\"!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -683,6 +687,9 @@ msgstr "Skapa profil"
 msgid "Mail me my account data"
 msgstr "Eposta mig information om mitt konto"
 
+msgid "Action"
+msgstr "Anrop"
+
 msgid "No older revisions available!"
 msgstr "Inga äldre versioner tillgängliga!"
 
@@ -741,9 +748,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Kommentar"
-
-msgid "Action"
-msgstr "Anrop"
 
 msgid "view"
 msgstr "visa"
@@ -1168,10 +1172,6 @@ msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 "Var god använd det interaktiva användargränsnittet för att radera sidor!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Sidan \"%s\" raderades korrekt."
-
 msgid "Really delete this page?"
 msgstr "Radera den här sidan, är du säker?"
 
@@ -1324,8 +1324,8 @@ msgstr "Uppladdning av bifogad fil '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Teckningen '%(filename)s' sparad."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)dh %(mins)dm sedan"
 
 msgid "(no bookmark set)"
@@ -1506,9 +1506,6 @@ msgstr "Lokal översiktskarta"
 msgid "Do"
 msgstr "Gör"
 
-msgid "Parent Page"
-msgstr "Föräldrasida"
-
 msgid "Edit (Text)"
 msgstr "Redigera (textläge)"
 
@@ -1542,9 +1539,6 @@ msgstr "Eller pröva någon av de här åtgärderna:"
 
 msgid "Page"
 msgstr "Sida"
-
-msgid "Trail"
-msgstr "Spår"
 
 msgid "User"
 msgstr "Användare"
@@ -1646,6 +1640,12 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+#~ msgid "Parent Page"
+#~ msgstr "Föräldrasida"
+
+#~ msgid "Trail"
+#~ msgstr "Spår"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

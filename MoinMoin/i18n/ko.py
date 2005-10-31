@@ -86,6 +86,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''끝에 붙은 공백을 지움''',
 '''Edit was cancelled.''':
 '''글 고침을 취소했습니다.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''글이 저장되었습니다.''',
+'''Page "%s" was successfully deleted!''':
+'''글 "%s"가 지워졌습니다!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -156,8 +160,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''글 내용을 고치지 않았으므로 저장되지 않았습니다.''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''관리자만 접근 허용 설정을 고칠 수 있습니다.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''글이 저장되었습니다.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''%(owner)s의 글 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 글을 잠그고 고칠 수 있습니다.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -319,6 +321,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''사용자 등록''',
 '''Mail me my account data''':
 '''비밀번호 되찾기''',
+'''Action''':
+'''액션''',
 '''No older revisions available!''':
 '''옛 버전이 저장되어 있지 않습니다!''',
 '''Diff for "%s"''':
@@ -353,8 +357,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''수정한 사람''',
 '''Comment''':
 '''코멘트''',
-'''Action''':
-'''액션''',
 '''view''':
 '''보기''',
 '''raw''':
@@ -537,8 +539,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''이 글은 이미 지워졌거나 없습니다.''',
 '''Please use the interactive user interface to delete pages!''':
 '''글을 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
-'''Page "%s" was successfully deleted!''':
-'''글 "%s"가 지워졌습니다!''',
 '''Really delete this page?''':
 '''정말로 이 글을 지우겠습니까?''',
 '''Delete''':
@@ -617,8 +617,6 @@ Try a different name.''':
 '''첨부 \'%(filename)s\'를 업로드''',
 '''Drawing \'%(filename)s\' saved.''':
 '''그림 \'%(filename)s\'가 저장되었습니다.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)02d시간 %(mins)02d분 전''',
 '''(no bookmark set)''':
 '''(책갈피가 없음)''',
 '''(currently set to %s)''':
@@ -705,8 +703,6 @@ red=edit''',
 '''다른 작업을 할 수도 있습니다 : ''',
 '''Page''':
 '''글''',
-'''Trail''':
-'''흔적''',
 '''User''':
 '''사용자''',
 '''Line''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -230,6 +230,14 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Editarea a fost anulată"
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+"Mulţumim pentru modificări. Atenţia dumneavoastră la detalii este apreciată."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Pagina \"%s\" a fost ştearsă cu succes!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -335,10 +343,6 @@ msgid ""
 msgstr ""
 "Nu puteţi modifica ACLs pe această pagină, deoarece nu aveţi drepturile "
 "necesare!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
-"Mulţumim pentru modificări. Atenţia dumneavoastră la detalii este apreciată."
 
 #, python-format
 msgid ""
@@ -525,19 +529,6 @@ msgstr "potrivire"
 msgid "matches"
 msgstr "potriviri"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Acest wiki nu permite procesare poştei electronice.\n"
-"Contactaţi deţinătorul wiki-ului, care poate activa email."
-
-msgid "Please provide a valid email address!"
-msgstr "Introduceţi o adresă de email validă!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -551,12 +542,6 @@ msgstr ""
 "Parola de înregistrare: %s\n"
 "\n"
 "URL de înregistrare: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"Nu a fost găsit nici un cont care să se potrivească cu adresa\n"
-"de email '%(email)s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -581,6 +566,25 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Datele contului wiki al dumneavoastră"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Acest wiki nu permite procesare poştei electronice.\n"
+"Contactaţi deţinătorul wiki-ului, care poate activa email."
+
+msgid "Please provide a valid email address!"
+msgstr "Introduceţi o adresă de email validă!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"Nu a fost găsit nici un cont care să se potrivească cu adresa\n"
+"de email '%(email)s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -694,6 +698,9 @@ msgstr "Creează profil"
 msgid "Mail me my account data"
 msgstr "Trimitere prin email datele contului"
 
+msgid "Action"
+msgstr "Acţiune"
+
 msgid "No older revisions available!"
 msgstr "Nici o revizie mai veche nu este disponibilă!"
 
@@ -752,9 +759,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Comentariu"
-
-msgid "Action"
-msgstr "Acţiune"
 
 msgid "view"
 msgstr "vizionare"
@@ -1187,10 +1191,6 @@ msgstr "Această pagină este deja ştearsă sau nu a fost creată niciodată!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Pagina \"%s\" a fost ştearsă cu succes!"
-
 msgid "Really delete this page?"
 msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
@@ -1348,8 +1348,8 @@ msgstr "Trimiterea ataşamentului '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Desenul '%(filename)s' a fost salvat."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)dh %(mins)dm mai devreme"
 
 msgid "(no bookmark set)"
@@ -1535,10 +1535,6 @@ msgid "Do"
 msgstr "Executare"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "PaginaPrincipală"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "EditareText"
 
@@ -1573,9 +1569,6 @@ msgstr "Sau încercaţi una dintre aceste acţiuni:"
 
 msgid "Page"
 msgstr "Pagină"
-
-msgid "Trail"
-msgstr "Trail"
 
 msgid "User"
 msgstr "Utilizator"
@@ -1677,6 +1670,13 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "PaginaPrincipală"
+
+#~ msgid "Trail"
+#~ msgstr "Trail"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

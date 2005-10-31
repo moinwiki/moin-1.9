@@ -118,6 +118,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 ''',
 '''Edit was cancelled.''':
 '''編集はキャンセルされました。''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''ページが更新されました。Thank you!''',
+'''Page "%s" was successfully deleted!''':
+'''ページ"%s"を削除しました。''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -197,8 +201,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''このページに対する変更は行われませんでした。''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''このページのACL(アクセスコントロールリスト)を変更する権限がありません。''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''ページが更新されました。Thank you!''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''このページに対する%(owner)sのロックは%(mins_ago)d分前に期限切れになりました。現在、あなたがこのページをロックしています。''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -301,14 +303,6 @@ space between words. Group page name is not allowed.''':
 '''箇所一致''',
 '''matches''':
 '''箇所一致''',
-'''Cookie deleted. You are now logged out.''':
-'''クッキーが削除されました。ログアウト完了。''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''このwikiではメールが利用できません。
-管理者に問い合わせてください。''',
-'''Please provide a valid email address!''':
-'''正しいメールアドレスを入力してください。''',
 '''Login Name: %s
 
 Login Password: %s
@@ -321,8 +315,6 @@ Login URL: %s/?action=userform&uid=%s
 
 ログインURL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -342,6 +334,16 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] アカウント情報''',
+'''Cookie deleted. You are now logged out.''':
+'''クッキーが削除されました。ログアウト完了。''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''このwikiではメールが利用できません。
+管理者に問い合わせてください。''',
+'''Please provide a valid email address!''':
+'''正しいメールアドレスを入力してください。''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
 '''Missing password. Please enter user name and password.''':
@@ -410,6 +412,8 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''プロファイル作成''',
 '''Mail me my account data''':
 '''アカウント情報をメールする''',
+'''Action''':
+'''アクション''',
 '''No older revisions available!''':
 '''古いリビジョンはありません。''',
 '''Diff for "%s"''':
@@ -446,8 +450,6 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 '''編集者''',
 '''Comment''':
 '''コメント''',
-'''Action''':
-'''アクション''',
 '''view''':
 '''表示''',
 '''raw''':
@@ -686,8 +688,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''このページは既に削除された、またはまだ作られていません。''',
 '''Please use the interactive user interface to delete pages!''':
 '''対話的なユーザインターフェースからページを削除してください。''',
-'''Page "%s" was successfully deleted!''':
-'''ページ"%s"を削除しました。''',
 '''Really delete this page?''':
 '''このページを本当に削除しますか？''',
 '''Delete''':
@@ -769,8 +769,8 @@ Try a different name.''':
 '''添付ファイル\'%(filename)s\'をアップロードしました。''',
 '''Drawing \'%(filename)s\' saved.''':
 '''drawing \'%(filename)s\'を保存しました。''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)d時間%(mins)d分前''',
+'''%(mins)dm ago''':
+'''%(mins)d分前''',
 '''(no bookmark set)''':
 '''(ブックマーク未設定)''',
 '''(currently set to %s)''':
@@ -883,8 +883,6 @@ red=edit''':
 '''ローカルサイトマップ''',
 '''Do''':
 '''実行''',
-'''Parent Page''':
-'''親ページ''',
 '''Edit (Text)''':
 '''編集(テキストモード)''',
 '''Edit (GUI)''':
@@ -907,8 +905,6 @@ red=edit''':
 '''アクション一覧:''',
 '''Page''':
 '''ページ''',
-'''Trail''':
-'''訪れたページの履歴''',
 '''User''':
 '''ユーザ''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

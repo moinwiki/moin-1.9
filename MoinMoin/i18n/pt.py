@@ -91,6 +91,11 @@ Se você não quiser isso, clique \'\'\'%(cancel_button_text)s\'\'\' para cancel
 '''Remover espaço em branco no final de cada linha''',
 '''Edit was cancelled.''':
 '''Sua edição está cancelada.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Obrigado por suas mudanças.
+Sua atenção aos detalhes é apreciada.''',
+'''Page "%s" was successfully deleted!''':
+'''A página "%s" foi eliminada corretamente!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -164,9 +169,6 @@ pois isto irá remover as mudanças da outra pessoa, o que é extremamente sem e
 '''O conteúdo desta página não foi modificado. Nada a salvar!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Você não possui permissão para modificar as ACL desta página porque não  tem direitos de administrador sobre ela!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Obrigado por suas mudanças.
-Sua atenção aos detalhes é apreciada.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''O bloqueio de %(owner)s foi expirado faz %(mins_ago)d minuto(s), e está concedido o bloqueio desta página.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -329,6 +331,8 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Criar Perfil de Usuário''',
 '''Mail me my account data''':
 '''Enviar os dados por e-mail''',
+'''Action''':
+'''Ação''',
 '''No older revisions available!''':
 '''Não existe revisões anteriores disponíveis!''',
 '''Diff for "%s"''':
@@ -365,8 +369,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Editor''',
 '''Comment''':
 '''Comentário''',
-'''Action''':
-'''Ação''',
 '''view''':
 '''ver''',
 '''raw''':
@@ -551,8 +553,6 @@ Do contrário: se o campo "Mudar nome a" estiver vazio, usará o nome original d
 '''Esta página já foi eliminada ou nunca foi criada!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Por favor, use uma interface interativa de usuário para eliminar páginas!''',
-'''Page "%s" was successfully deleted!''':
-'''A página "%s" foi eliminada corretamente!''',
 '''Really delete this page?''':
 '''Realmente deseja eliminar esta página?''',
 '''Delete''':
@@ -635,8 +635,6 @@ Tente um nome diferente.''',
 '''Upload do anexo \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Desenho \'%(filename)s\' guardado.''',
-'''%(hours)dh %(mins)dm ago''':
-'''São %(hours)dh %(mins)dm''',
 '''(no bookmark set)''':
 '''(favorito não selecionado)''',
 '''(currently set to %s)''':
@@ -741,8 +739,6 @@ vermelho=editar''',
 '''Tentar uma destas ações:''',
 '''Page''':
 '''Página''',
-'''Trail''':
-'''Páginas Visitadas''',
 '''User''':
 '''Usuário''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

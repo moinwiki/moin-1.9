@@ -85,6 +85,10 @@ Nếu bạn không muốn vậy, nhấn \'\'\'%(cancel_button_text)s\'\'\' để
 '''Xoá khoảng trắng ở cuối dòng''',
 '''Edit was cancelled.''':
 '''Các chỉnh sửa đã bị huỷ.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Cám ơn bạn vì những sửa đổi. Sự quan tâm của bạn rất được cảm kích.''',
+'''Page "%s" was successfully deleted!''':
+'''Trang "%s" đã được xoá!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -154,8 +158,6 @@ của người khác, và được coi là một việc làm cực kỳ khiếm 
 '''Bạn chưa thay đổi nội dung trang nên không cần lưu lại!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Bạn không thể thay đổi ACL của trang này vì bạn không có quyền admin!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Cám ơn bạn vì những sửa đổi. Sự quan tâm của bạn rất được cảm kích.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Thời gian dành riêng cho %(owner)s đã hết %(mins_ago)d phút trước đây và bạn được dành riêng một khoảng thời gian mới.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -315,6 +317,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Tạo Profile''',
 '''Mail me my account data''':
 '''Gửi cho tôi thông tin về account cá nhân''',
+'''Action''':
+'''Công việc''',
 '''No older revisions available!''':
 '''Không có phiên bản cũ hơn!''',
 '''Diff for "%s"''':
@@ -349,8 +353,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Tác giả''',
 '''Comment''':
 '''Chú thích''',
-'''Action''':
-'''Công việc''',
 '''view''':
 '''xem''',
 '''raw''':
@@ -535,8 +537,6 @@ cần phải đổi tên file bạn sắp tải lên. Mặc khác, nếu ô "Đ�
 '''Trang này đã bị xoá hoặc chưa bao giờ tồn tại!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Vui lòng sử dụng giao diện người dùng để xoá trang!''',
-'''Page "%s" was successfully deleted!''':
-'''Trang "%s" đã được xoá!''',
 '''Really delete this page?''':
 '''Thật sự xoá trang này?''',
 '''Delete''':
@@ -615,8 +615,6 @@ Vui lòng dùng tên khác.''',
 '''Tải lên file \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Bản vẽ \'%(filename)s\' đã được lưu.''',
-'''%(hours)dh %(mins)dm ago''':
-'''cách nay %(hours)d giờ %(mins)d phút''',
 '''(no bookmark set)''':
 '''(không có bookmark)''',
 '''(currently set to %s)''':
@@ -705,8 +703,6 @@ red=edit''':
 '''Hoặc chọn các hành động sau:''',
 '''Page''':
 '''Trang''',
-'''Trail''':
-'''Vệt''',
 '''User''':
 '''Người dùng''',
 '''Line''':

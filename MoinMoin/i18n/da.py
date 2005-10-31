@@ -89,6 +89,10 @@ Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·
 '''Fjern ekstra mellemrum i slutningen af hver linje''',
 '''Edit was cancelled.''':
 '''Redigeringen blev afbrudt.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Tak for dine rettelser. Dit bidrag er værdsat.''',
+'''Page "%s" was successfully deleted!''':
+'''Siden "%s" blev korrekt slettet.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -161,8 +165,6 @@ Gør venligst følgende: Brug "tilbage"-knappen på din browser, og kopiér dine
 '''Du ændrede ikke på sidens indhold, så den er ikke gemt!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Du kan ikke ændre adgangsrettigheder (ACL) på denne side da du ikke har administratoradgang til den!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Tak for dine rettelser. Dit bidrag er værdsat.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Låsen for %(owner)s udløb for %(mins_ago)d minut(ter) siden, og du fik overdraget låsen til denne side.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -325,6 +327,8 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Opret brugerprofil''',
 '''Mail me my account data''':
 '''Send mig en email med mine adgangsoplysninger''',
+'''Action''':
+'''Rutine''',
 '''No older revisions available!''':
 '''Ingen ældre udgaver tilgængelig!''',
 '''Diff for "%s"''':
@@ -361,8 +365,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Forfatter''',
 '''Comment''':
 '''Kommentar''',
-'''Action''':
-'''Rutine''',
 '''view''':
 '''vis''',
 '''raw''':
@@ -545,8 +547,6 @@ Alternativt, hvis "Omdøb" er blank, anvendes det originale filnavn.''',
 '''Denne side er allerede slettet eller har aldrig eksisteret!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Anvend venligst den interaktive brugergrænseflade til at slette sider!!''',
-'''Page "%s" was successfully deleted!''':
-'''Siden "%s" blev korrekt slettet.''',
 '''Really delete this page?''':
 '''Er du sikker på at denne side skal slettes?''',
 '''Delete''':
@@ -629,8 +629,6 @@ Prøv et andet navn.''',
 '''Oplægning af vedhæftet fil \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Tegningen \'%(filename)s\' er gemt.''',
-'''%(hours)dh %(mins)dm ago''':
-'''for %(hours)dt %(mins)dm siden''',
 '''(no bookmark set)''':
 '''(intet bogmærke sat)''',
 '''(currently set to %s)''':
@@ -735,8 +733,6 @@ rød=redigér''',
 '''Eller prøv en af følgende rutiner:''',
 '''Page''':
 '''Side''',
-'''Trail''':
-'''Sti''',
 '''User''':
 '''Bruger''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

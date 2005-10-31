@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2004-11-21 00:00+0000\n"
 "Last-Translator: Mauricio Hernandez Z <mhz.chile@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -228,6 +228,14 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "La edición fue cancelada."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+"Gracias por tus modificaciones. Se aprecia tu preocupación por los detalles."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "¡La página \"%s\" se eliminó de forma correcta!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -336,10 +344,6 @@ msgid ""
 msgstr ""
 "¡No tienes permisos para cambiar el ACL en esta página porque no posees "
 "derechos de adiministrador sobre ella!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
-"Gracias por tus modificaciones. Se aprecia tu preocupación por los detalles."
 
 #, python-format
 msgid ""
@@ -527,19 +531,6 @@ msgstr "coincidencia"
 msgid "matches"
 msgstr "coincidencias"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie borrada. Has salido del sistema."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Este wiki no tiene activado el procesamiento de e-mails.\n"
-"Contacta el propietario del wiki. El es quien puede habilitar e-mails"
-
-msgid "Please provide a valid email address!"
-msgstr "¡Por favor, proporciona una dirección de e-mail válido!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -553,11 +544,6 @@ msgstr ""
 "Contraseña de Ingreso: %s\n"
 "\n"
 "URL de Ingreso: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"¡No se encontró una cuenta que coincida con la dirección e-mail '%(email)s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -584,6 +570,24 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie borrada. Has salido del sistema."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Este wiki no tiene activado el procesamiento de e-mails.\n"
+"Contacta el propietario del wiki. El es quien puede habilitar e-mails"
+
+msgid "Please provide a valid email address!"
+msgstr "¡Por favor, proporciona una dirección de e-mail válido!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"¡No se encontró una cuenta que coincida con la dirección e-mail '%(email)s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -700,6 +704,9 @@ msgstr "Crear Perfil de Usuario"
 msgid "Mail me my account data"
 msgstr "Envíame los datos de mi cuenta "
 
+msgid "Action"
+msgstr "Acción"
+
 msgid "No older revisions available!"
 msgstr "¡No hay revisiones anteriores disponibles!"
 
@@ -758,9 +765,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Comentario"
-
-msgid "Action"
-msgstr "Acción"
 
 msgid "view"
 msgstr "ver"
@@ -1190,10 +1194,6 @@ msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 "¡Por favor, usa la interfaz interactiva de usuario para eliminar páginas!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "¡La página \"%s\" se eliminó de forma correcta!"
-
 msgid "Really delete this page?"
 msgstr "¿Realmente deseas eliminar esta página?"
 
@@ -1351,8 +1351,8 @@ msgstr "Subida (upload) del adjunto '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Dibujo '%(filename)s' guardado."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "hace %(hours)dh %(mins)dm"
 
 msgid "(no bookmark set)"
@@ -1543,10 +1543,6 @@ msgid "Do"
 msgstr "Hacer"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "PáginaInicial"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "EditarTexto"
 
@@ -1582,9 +1578,6 @@ msgstr "O intenta una de estas acciones: "
 
 msgid "Page"
 msgstr "Página"
-
-msgid "Trail"
-msgstr "Páginas Visitadas"
 
 msgid "User"
 msgstr "Usuario"
@@ -1687,6 +1680,13 @@ msgstr "RenombrarPágina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "PáginaInicial"
+
+#~ msgid "Trail"
+#~ msgstr "Páginas Visitadas"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "
