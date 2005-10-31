@@ -98,6 +98,10 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Odstraň koncové mezery u každého řádku''',
 '''Edit was cancelled.''':
 '''Editace byla zrušena.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku.''',
+'''Page "%s" was successfully deleted!''':
+'''Stránka "%s" byla úspěšně smazána!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -172,8 +176,6 @@ Prosíme o následující: Vraťte se pomocí tlačítka Zpět ve vašem prohlí
 '''Neudělal jste žádnou změnu, stránka neuložena!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Nemůžete měnit žádná ACL práva na této stránce, protože nemáte práva admin''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Zámek uživatele %(owner)s vypršel před %(mins_ago)d minutami. Nyní máte Vy zajištěn zámek na tuto stránku.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -352,6 +354,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Vytvořit profil''',
 '''Mail me my account data''':
 '''Zašli mi má data k účtu''',
+'''Action''':
+'''Akce''',
 '''No older revisions available!''':
 '''Starší verze nejsou k dispozici!''',
 '''Diff for "%s"''':
@@ -388,8 +392,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Autor''',
 '''Comment''':
 '''Komentář''',
-'''Action''':
-'''Akce''',
 '''view''':
 '''náhled''',
 '''raw''':
@@ -595,8 +597,6 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Tato stránka již byla smazána nebo nebyla nikdy vytvořena!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!''',
-'''Page "%s" was successfully deleted!''':
-'''Stránka "%s" byla úspěšně smazána!''',
 '''Really delete this page?''':
 '''Akutečně smazat tuto stránku?''',
 '''Delete''':
@@ -678,8 +678,6 @@ Zkuste jiné jméno.''',
 '''Upload přílohy \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Obrázek \'%(filename)s\' uložen.''',
-'''%(hours)dh %(mins)dm ago''':
-'''před %(hours)02d:%(mins)02d''',
 '''(no bookmark set)''':
 '''(žádná záložka nezaložena)''',
 '''(currently set to %s)''':
@@ -788,8 +786,6 @@ red=edit''':
 '''Lokální Mapa Stránek''',
 '''Do''':
 '''Proveď!''',
-'''Parent Page''':
-'''Mateřská Stránka''',
 '''Edit (Text)''':
 '''Editace (Text)''',
 '''Edit (GUI)''':
@@ -808,8 +804,6 @@ red=edit''':
 '''Nebo zkuste jednu z následujících akcí:''',
 '''Page''':
 '''Stránka''',
-'''Trail''':
-'''Stopa''',
 '''User''':
 '''Uživatel''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

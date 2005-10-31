@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -221,6 +221,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "编辑取消了."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "谢谢您的细心修改."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "网页\"%s\"被已被删除!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -322,9 +329,6 @@ msgstr "此页未作改动, 所以没有保存!"
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr "您不能修改此页的访问控制表(ACL), 因为您没有管理权限!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "谢谢您的细心修改."
 
 #, python-format
 msgid ""
@@ -502,17 +506,6 @@ msgstr "次匹配"
 msgid "matches"
 msgstr "次匹配"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie已经删除. 您已登出."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能."
-
-msgid "Please provide a valid email address!"
-msgstr "请提供一个有效的电子邮件地址!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -526,10 +519,6 @@ msgstr ""
 "登录口令: %s\n"
 "\n"
 "登录URL: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "找不到用'%(email)s'登记的帐户!!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -552,6 +541,21 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] 您的维基帐号资料"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie已经删除. 您已登出."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能."
+
+msgid "Please provide a valid email address!"
+msgstr "请提供一个有效的电子邮件地址!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "找不到用'%(email)s'登记的帐户!!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -660,6 +664,9 @@ msgstr "新用户注册"
 msgid "Mail me my account data"
 msgstr "把帐号资料寄给我"
 
+msgid "Action"
+msgstr "操作"
+
 msgid "No older revisions available!"
 msgstr "没有旧版"
 
@@ -718,9 +725,6 @@ msgstr "编辑"
 
 msgid "Comment"
 msgstr "备注"
-
-msgid "Action"
-msgstr "操作"
 
 msgid "view"
 msgstr "查看"
@@ -1133,10 +1137,6 @@ msgstr "此页已被删除或根本就不存在!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "请使用用户界面交互删除网页!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "网页\"%s\"被已被删除!"
-
 msgid "Really delete this page?"
 msgstr "真的要删除此页?"
 
@@ -1287,8 +1287,8 @@ msgstr "上载附件'%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "图片'%(filename)s'已保存"
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)d小时%(mins)d分前"
 
 msgid "(no bookmark set)"
@@ -1469,9 +1469,6 @@ msgstr "本站地图"
 msgid "Do"
 msgstr "执行"
 
-msgid "Parent Page"
-msgstr "上层网页"
-
 msgid "Edit (Text)"
 msgstr "编辑(文本方式)"
 
@@ -1506,9 +1503,6 @@ msgstr "或下列操作: "
 
 msgid "Page"
 msgstr "网页"
-
-msgid "Trail"
-msgstr "访问历史"
 
 msgid "User"
 msgstr "用户"
@@ -1608,6 +1602,12 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Parent Page"
+#~ msgstr "上层网页"
+
+#~ msgid "Trail"
+#~ msgstr "访问历史"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

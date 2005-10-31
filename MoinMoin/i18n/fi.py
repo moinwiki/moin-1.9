@@ -90,6 +90,10 @@ Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muut
 '''Poista rivien lopusta tyhjämerkit''',
 '''Edit was cancelled.''':
 '''Muokkaus peruttu.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Kiitos tekemistäsi muutoksista. Huolellisuuttasi arvostetaan.''',
+'''Page "%s" was successfully deleted!''':
+'''Sivu "%s" poistettiin onnistuneesti!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -166,8 +170,6 @@ henkilön muutokset ohittuisivat kokonaan, mikä olisi erittäin tylyä!\'\'
 '''Et muuttanut sisältöä, joten sivua ei tallennettu!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Et voi muuttaa [[Verbatim(ACL:)]]iä tällä sivulla, koska sinulla ei ole ylläpito-oikeutta sille!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Kiitos tekemistäsi muutoksista. Huolellisuuttasi arvostetaan.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''%(owner)s menetti lukon %(mins_ago)d minuuttia sitten, ja saat lukon tälle sivulle.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -330,6 +332,8 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Luo profiili''',
 '''Mail me my account data''':
 '''Sähköpostita minulle käyttäjätietoni''',
+'''Action''':
+'''Toiminto''',
 '''No older revisions available!''':
 '''Ei vanhempia versioita saatavilla!''',
 '''Diff for "%s"''':
@@ -366,8 +370,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Muokkaaja''',
 '''Comment''':
 '''Kuvaus''',
-'''Action''':
-'''Toiminto''',
 '''view''':
 '''näytä''',
 '''raw''':
@@ -551,8 +553,6 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Tämä sivu on jo poistettu tai sitä ei ollutkaan!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!''',
-'''Page "%s" was successfully deleted!''':
-'''Sivu "%s" poistettiin onnistuneesti!''',
 '''Really delete this page?''':
 '''Haluatko varmasti poistaa tämän sivun?''',
 '''Delete''':
@@ -635,8 +635,6 @@ Kokeile eri nimeä.''',
 '''Liitetiedoston \'%(filename)s\' lähetys.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Piirros \'%(filename)s\' tallennettu.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dt %(mins)dm sitten''',
 '''(no bookmark set)''':
 '''(ei kirjanmerkkiä asetettu)''',
 '''(currently set to %s)''':
@@ -741,8 +739,6 @@ red=edit''',
 '''Tai koita jotakin näistä toiminnoista:''',
 '''Page''':
 '''Sivu''',
-'''Trail''':
-'''Polku''',
 '''User''':
 '''Käyttäjä''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

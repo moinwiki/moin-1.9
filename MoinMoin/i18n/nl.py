@@ -86,6 +86,10 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 '''Usuń puste znaki z przodu każdej linii''',
 '''Edit was cancelled.''':
 '''Zmiany zostały anulowane''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona.''',
+'''Page "%s" was successfully deleted!''':
+'''Strona "%s" została pomyślnie skasowana!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -155,8 +159,6 @@ możesz zniszczyć pracę innych, co może grozić wzrostem poziomu agresji!\'\'
 '''Nie zmieniono zawartości strony, nic nie zapisano!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Nie możesz zmieniać ACL tej strony, ponieważ nie masz praw administratora!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Blokada założona przez %(owner)s wygasła %(mins_ago)d minut temu, i już możesz śmiało edytować tę stronę.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -319,6 +321,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Utwórz profil''',
 '''Mail me my account data''':
 '''Prześlij do mnie moje dane''',
+'''Action''':
+'''Akcja''',
 '''No older revisions available!''':
 '''Nie ma starszych wersji!''',
 '''Diff for "%s"''':
@@ -353,8 +357,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Edytor''',
 '''Comment''':
 '''Komentarz''',
-'''Action''':
-'''Akcja''',
 '''view''':
 '''Zobacz''',
 '''raw''':
@@ -539,8 +541,6 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Niniejsza strona została już skasowana albo nigdy jej nie było!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Użyj interkatywnego interfejsu aby usuwać strony!''',
-'''Page "%s" was successfully deleted!''':
-'''Strona "%s" została pomyślnie skasowana!''',
 '''Really delete this page?''':
 '''Czy na pewno usunąć niniejszą stronę?''',
 '''Delete''':
@@ -621,8 +621,6 @@ Spróbuj innej nazwy.''',
 '''Przekazanie załącznika \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Rysunek \'%(filename)s\' zachowany.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dh %(mins)dm temu''',
 '''(no bookmark set)''':
 '''(brak ustalonych zakładek)''',
 '''(currently set to %s)''':
@@ -705,8 +703,6 @@ czerwony=edycja''',
 '''Lub spróbuj wykonać: ''',
 '''Page''':
 '''Strona''',
-'''Trail''':
-'''Ślad''',
 '''User''':
 '''Czytelnik''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

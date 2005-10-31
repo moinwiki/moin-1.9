@@ -117,6 +117,10 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 ''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta.''',
+'''Page "%s" was successfully deleted!''':
+'''Lapa "%s" veiksmīgi dzēsta!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -194,8 +198,6 @@ Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 '''Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Jūs nevarat mainīt pieejas tiesības, Jums nav adminstratora tiesību!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Prioritāte %(owner)s beidzās pirms %(mins_ago)d minūtēm, un Jums šai lapai tika piešķirta lapas slēgšanas laika kvota.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -300,14 +302,6 @@ Grupas lapas vārds nav atļauts.''',
 '''saskaņa''',
 '''matches''':
 '''saskaņas''',
-'''Cookie deleted. You are now logged out.''':
-'''Sīkdatne dzēsta. Jūs izgājāt no sistēmas.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Šajā viki pasta sūtīšana ir aizliegta.
-Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
-'''Please provide a valid email address!''':
-'''Lūdzu, norādiet pareizu e-pasta adresi!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -320,8 +314,6 @@ Lietotāja parole: %s
 
 Lietotāja URL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -339,6 +331,16 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Jūsu viki konta dati''',
+'''Cookie deleted. You are now logged out.''':
+'''Sīkdatne dzēsta. Jūs izgājāt no sistēmas.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Šajā viki pasta sūtīšana ir aizliegta.
+Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
+'''Please provide a valid email address!''':
+'''Lūdzu, norādiet pareizu e-pasta adresi!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
 '''Missing password. Please enter user name and password.''':
@@ -407,6 +409,8 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Izveidot profilu''',
 '''Mail me my account data''':
 '''Atsūtīt mana sistēmas konta datus''',
+'''Action''':
+'''Darbība''',
 '''No older revisions available!''':
 '''Vecākas versijas nav!''',
 '''Diff for "%s"''':
@@ -443,8 +447,6 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 '''Redaktors''',
 '''Comment''':
 '''Komentārs''',
-'''Action''':
-'''Darbība''',
 '''view''':
 '''Skats''',
 '''raw''':
@@ -685,8 +687,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!''',
-'''Page "%s" was successfully deleted!''':
-'''Lapa "%s" veiksmīgi dzēsta!''',
 '''Really delete this page?''':
 '''Jūs tiešām vēlaties dzēst šo lapu?''',
 '''Delete''':
@@ -769,8 +769,8 @@ Pamēģiniet citu nosaukumu.''',
 '''Piesaistes \'%(filename)s\' augšupielāde.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Attēls \'%(filename)s\' saglabāts.''',
-'''%(hours)dh %(mins)dm ago''':
-'''Pirms %(hours)dh %(mins)dm''',
+'''%(mins)dm ago''':
+'''Pirms %(mins)d min''',
 '''(no bookmark set)''':
 '''(nav grāmatzīmes)''',
 '''(currently set to %s)''':
@@ -883,8 +883,6 @@ sarkans=labot''',
 '''Lokālā vietnes karte''',
 '''Do''':
 '''Veikt''',
-'''Parent Page''':
-'''Virslapa''',
 '''Edit (Text)''':
 '''Labot tekstu''',
 '''Edit (GUI)''':
@@ -907,8 +905,6 @@ sarkans=labot''',
 '''Vai mēģināt kādu no darbībām:''',
 '''Page''':
 '''Lapa''',
-'''Trail''':
-'''Noslēgums''',
 '''User''':
 '''Lietotājs''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
-"PO-Revision-Date: 2005-10-23 22:23+0900\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"PO-Revision-Date: 2005-10-31 15:40+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -225,6 +225,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "編集はキャンセルされました。"
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "ページが更新されました。Thank you!"
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "ページ\"%s\"を削除しました。"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -332,9 +339,6 @@ msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 "このページのACL(アクセスコントロールリスト)を変更する権限がありません。"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "ページが更新されました。Thank you!"
 
 #, python-format
 msgid ""
@@ -516,19 +520,6 @@ msgstr "箇所一致"
 msgid "matches"
 msgstr "箇所一致"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "クッキーが削除されました。ログアウト完了。"
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"このwikiではメールが利用できません。\n"
-"管理者に問い合わせてください。"
-
-msgid "Please provide a valid email address!"
-msgstr "正しいメールアドレスを入力してください。"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -542,10 +533,6 @@ msgstr ""
 "ログインパスワード: %s\n"
 "\n"
 "ログインURL: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -569,6 +556,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] アカウント情報"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "クッキーが削除されました。ログアウト完了。"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"このwikiではメールが利用できません。\n"
+"管理者に問い合わせてください。"
+
+msgid "Please provide a valid email address!"
+msgstr "正しいメールアドレスを入力してください。"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -679,6 +683,9 @@ msgstr "プロファイル作成"
 msgid "Mail me my account data"
 msgstr "アカウント情報をメールする"
 
+msgid "Action"
+msgstr "アクション"
+
 msgid "No older revisions available!"
 msgstr "古いリビジョンはありません。"
 
@@ -737,9 +744,6 @@ msgstr "編集者"
 
 msgid "Comment"
 msgstr "コメント"
-
-msgid "Action"
-msgstr "アクション"
 
 msgid "view"
 msgstr "表示"
@@ -815,7 +819,9 @@ msgid "You must log in to use subscribtions."
 msgstr "購読を利用するためには、ログインしてください。"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "購読を利用するためには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してください。"
+msgstr ""
+"購読を利用するためには、[\"ユーザプレファレンス\"]にてメールアドレスを登録し"
+"てください。"
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "このページの購読を停止しました。"
@@ -1114,7 +1120,8 @@ msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
-"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイル数が多すぎるためです(%(count)d個不足しています)。"
+"添付ファイル'%(filename)s'はunzipされませんでした。原因は展開されたファイル数"
+"が多すぎるためです(%(count)d個不足しています)。"
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1160,10 +1167,6 @@ msgstr "このページは既に削除された、またはまだ作られてい
 
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "対話的なユーザインターフェースからページを削除してください。"
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "ページ\"%s\"を削除しました。"
 
 msgid "Really delete this page?"
 msgstr "このページを本当に削除しますか？"
@@ -1316,8 +1319,8 @@ msgid "Drawing '%(filename)s' saved."
 msgstr "drawing '%(filename)s'を保存しました。"
 
 #, python-format
-msgid "%(hours)dh %(mins)dm ago"
-msgstr "%(hours)d時間%(mins)d分前"
+msgid "%(mins)dm ago"
+msgstr "%(mins)d分前"
 
 msgid "(no bookmark set)"
 msgstr "(ブックマーク未設定)"
@@ -1500,9 +1503,6 @@ msgstr "ローカルサイトマップ"
 msgid "Do"
 msgstr "実行"
 
-msgid "Parent Page"
-msgstr "親ページ"
-
 msgid "Edit (Text)"
 msgstr "編集(テキストモード)"
 
@@ -1536,9 +1536,6 @@ msgstr "アクション一覧:"
 
 msgid "Page"
 msgstr "ページ"
-
-msgid "Trail"
-msgstr "訪れたページの履歴"
 
 msgid "User"
 msgstr "ユーザ"
@@ -1641,12 +1638,18 @@ msgstr "ページ名変更"
 msgid "SpellCheck"
 msgstr "スペルチェック"
 
+#~ msgid "Parent Page"
+#~ msgstr "親ページ"
+
+#~ msgid "Trail"
+#~ msgstr "訪れたページの履歴"
+
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "
 #~ "right corner to create a profile."
 #~ msgstr ""
-#~ "ユーザプロファイルをまだ作成していません。右上の[\"ユーザプレファレンス\"]をクリック"
-#~ "し、プロファイルを作成してください。"
+#~ "ユーザプロファイルをまだ作成していません。右上の[\"ユーザプレファレンス\"]"
+#~ "をクリックし、プロファイルを作成してください。"
 
 #~ msgid ""
 #~ "This wiki is not enabled for mail processing. Contact the owner of the "

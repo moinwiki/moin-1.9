@@ -118,6 +118,10 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 ''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Danke für die Änderung und die Sorgfalt beim Editieren.''',
+'''Page "%s" was successfully deleted!''':
+'''Seite "%s" wurde erfolgreich gelöscht!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -195,8 +199,6 @@ Schließlich die Änderungen zum aktuellen Stand der Seite wieder hinzufügen.
 '''Der Seiteninhalt wurde nicht verändert und folglich nicht gesichert!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Sie dürfen keine ACLs auf dieser Seite ändern, weil Sie keine admin-Rechte auf ihr haben!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Danke für die Änderung und die Sorgfalt beim Editieren.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Die Sperre von %(owner)s ist vor %(mins_ago)d Minute(n) abgelaufen und wurde an Sie übertragen.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -301,14 +303,6 @@ Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 '''Treffer''',
 '''matches''':
 '''Treffer''',
-'''Cookie deleted. You are now logged out.''':
-'''Das "Cookie" wurde gelöscht. Sie sind jetzt abgemeldet.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.
-Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschalten kann.''',
-'''Please provide a valid email address!''':
-'''Bitte eine gültige E-Mail-Adresse angeben!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -321,8 +315,6 @@ Anmelde-Passwort: %s
 
 Anmelde-URL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -340,6 +332,16 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Ihre Wiki-Acount-Daten''',
+'''Cookie deleted. You are now logged out.''':
+'''Das "Cookie" wurde gelöscht. Sie sind jetzt abgemeldet.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.
+Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschalten kann.''',
+'''Please provide a valid email address!''':
+'''Bitte eine gültige E-Mail-Adresse angeben!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzernamen und Passwort ein.''',
 '''Missing password. Please enter user name and password.''':
@@ -408,6 +410,8 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Benutzer anlegen''',
 '''Mail me my account data''':
 '''E-Mail mit den Zugangsdaten senden''',
+'''Action''':
+'''Aktion''',
 '''No older revisions available!''':
 '''Es sind keine älteren Versionen dieser Seite verfügbar!''',
 '''Diff for "%s"''':
@@ -444,8 +448,6 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 '''Autor''',
 '''Comment''':
 '''Kommentar''',
-'''Action''':
-'''Aktion''',
 '''view''':
 '''anzeigen''',
 '''raw''':
@@ -689,8 +691,6 @@ Ansonsten kann das Feld "Speichern unter..." leer bleiben und es wird der origin
 '''Diese Seite wurde bereits gelöscht oder wurde bisher nicht angelegt!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Zum Löschen von Seiten bitte nur die vorgesehenen Webseiten benutzen!''',
-'''Page "%s" was successfully deleted!''':
-'''Seite "%s" wurde erfolgreich gelöscht!''',
 '''Really delete this page?''':
 '''Diese Seite wirklich löschen?''',
 '''Delete''':
@@ -772,8 +772,8 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Dateianhang \'%(filename)s\' wurde angelegt.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Zeichnung \'%(filename)s\' wurde gesichert.''',
-'''%(hours)dh %(mins)dm ago''':
-'''vor %(hours)02d:%(mins)02d''',
+'''%(mins)dm ago''':
+'''vor %(mins)dm''',
 '''(no bookmark set)''':
 '''(kein Lesezeichen gesetzt)''',
 '''(currently set to %s)''':
@@ -886,8 +886,6 @@ rot=Änderungen''',
 '''ÜbersichtsKarte''',
 '''Do''':
 '''Los!''',
-'''Parent Page''':
-'''Übergeordnete Seite''',
 '''Edit (Text)''':
 '''Editieren (Text)''',
 '''Edit (GUI)''':
@@ -910,8 +908,6 @@ rot=Änderungen''',
 '''Oder benutze eine dieser Aktionen:''',
 '''Page''':
 '''Seite''',
-'''Trail''':
-'''Trail''',
 '''User''':
 '''Benutzer''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

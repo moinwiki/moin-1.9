@@ -92,6 +92,10 @@ Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru an
 '''Ştergere spaţii de la sfârşitul fiecărei linii''',
 '''Edit was cancelled.''':
 '''Editarea a fost anulată''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Mulţumim pentru modificări. Atenţia dumneavoastră la detalii este apreciată.''',
+'''Page "%s" was successfully deleted!''':
+'''Pagina "%s" a fost ştearsă cu succes!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -168,8 +172,6 @@ modificările celeilalte persoane, ceea ce este extrem de nepolicos!\'\'
 '''Nu aţi modificat conţinutul paginii; nu se salvează!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Nu puteţi modifica ACLs pe această pagină, deoarece nu aveţi drepturile necesare!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Mulţumim pentru modificări. Atenţia dumneavoastră la detalii este apreciată.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Blocajul iniţiat de %(owner)s a expirat de %(mins_ago)d minut(e) şi vi s-a dat dreptul de a bloca această pagină.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -266,14 +268,6 @@ spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''potrivire''',
 '''matches''':
 '''potriviri''',
-'''Cookie deleted. You are now logged out.''':
-'''Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă).''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Acest wiki nu permite procesare poştei electronice.
-Contactaţi deţinătorul wiki-ului, care poate activa email.''',
-'''Please provide a valid email address!''':
-'''Introduceţi o adresă de email validă!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -286,9 +280,6 @@ Parola de înregistrare: %s
 
 URL de înregistrare: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nu a fost găsit nici un cont care să se potrivească cu adresa
-de email \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -307,6 +298,17 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Datele contului wiki al dumneavoastră''',
+'''Cookie deleted. You are now logged out.''':
+'''Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă).''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Acest wiki nu permite procesare poştei electronice.
+Contactaţi deţinătorul wiki-ului, care poate activa email.''',
+'''Please provide a valid email address!''':
+'''Introduceţi o adresă de email validă!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nu a fost găsit nici un cont care să se potrivească cu adresa
+de email \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nume de utilizator necunoscut: {{{"%s"}}}. Introduceţi nume şi parolă''',
 '''Missing password. Please enter user name and password.''':
@@ -363,6 +365,8 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Creează profil''',
 '''Mail me my account data''':
 '''Trimitere prin email datele contului''',
+'''Action''':
+'''Acţiune''',
 '''No older revisions available!''':
 '''Nici o revizie mai veche nu este disponibilă!''',
 '''Diff for "%s"''':
@@ -399,8 +403,6 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 '''Editor''',
 '''Comment''':
 '''Comentariu''',
-'''Action''':
-'''Acţiune''',
 '''view''':
 '''vizionare''',
 '''raw''':
@@ -593,8 +595,6 @@ Altfel, dacă "Redenumeşte în" este necompletat, va fi folosit numele original
 '''Această pagină este deja ştearsă sau nu a fost creată niciodată!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!''',
-'''Page "%s" was successfully deleted!''':
-'''Pagina "%s" a fost ştearsă cu succes!''',
 '''Really delete this page?''':
 '''Sigur doriţi ştergerea acestei pagini ?''',
 '''Delete''':
@@ -677,8 +677,6 @@ Try a different name.''':
 '''Trimiterea ataşamentului \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Desenul \'%(filename)s\' a fost salvat.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dh %(mins)dm mai devreme''',
 '''(no bookmark set)''':
 '''(nici un semn de carte setat)''',
 '''(currently set to %s)''':
@@ -793,8 +791,6 @@ red=editare''',
 '''Sau încercaţi una dintre aceste acţiuni:''',
 '''Page''':
 '''Pagină''',
-'''Trail''':
-'''Trail''',
 '''User''':
 '''Utilizator''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

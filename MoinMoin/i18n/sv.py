@@ -116,6 +116,10 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 ''',
 '''Edit was cancelled.''':
 '''Redigeringen avbröts.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Tack för dina ändringar. Ditt sinne för detaljer är uppskattat.''',
+'''Page "%s" was successfully deleted!''':
+'''Sidan "%s" raderades korrekt.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -195,8 +199,6 @@ andre personens ändringar, vilket skulle vara mycket olämpligt!
 '''Ingen ny version har sparats eftersom du inte ändrade sidans innehåll!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Du kan inte ändra ACL:er på den här sidan eftersom du inte har administratörsrättigheter till den!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Tack för dina ändringar. Ditt sinne för detaljer är uppskattat.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Låset som %(owner)s hade gick ut för %(mins_ago)d minut(er) sedan, så du har nu ett lås på den här sidan.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -301,14 +303,6 @@ med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
 '''träff''',
 '''matches''':
 '''träffar''',
-'''Cookie deleted. You are now logged out.''':
-'''Kakan togs bort. Du är nu utloggad.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Den här wikin har inte eposthantering påslagen.
-För att få eposthantering påslagen, kontakta wikins ägare.''',
-'''Please provide a valid email address!''':
-'''Var god ange en korrekt epostadress!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -321,8 +315,6 @@ Inloggningslösenord: %s
 
 Inloggnings-URL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Kunde inte hitta något konto med epostadressen "%(email)s"!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -342,6 +334,16 @@ lösenord.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Din wiki-kontoinformation''',
+'''Cookie deleted. You are now logged out.''':
+'''Kakan togs bort. Du är nu utloggad.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Den här wikin har inte eposthantering påslagen.
+För att få eposthantering påslagen, kontakta wikins ägare.''',
+'''Please provide a valid email address!''':
+'''Var god ange en korrekt epostadress!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Kunde inte hitta något konto med epostadressen "%(email)s"!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Okänt användarnamn: {{{"%s"}}}. Var god ange ditt användarnamn och lösenord.''',
 '''Missing password. Please enter user name and password.''':
@@ -410,6 +412,8 @@ lösenord.
 '''Skapa profil''',
 '''Mail me my account data''':
 '''Eposta mig information om mitt konto''',
+'''Action''':
+'''Anrop''',
 '''No older revisions available!''':
 '''Inga äldre versioner tillgängliga!''',
 '''Diff for "%s"''':
@@ -446,8 +450,6 @@ lösenord.
 '''Editor''',
 '''Comment''':
 '''Kommentar''',
-'''Action''':
-'''Anrop''',
 '''view''':
 '''visa''',
 '''raw''':
@@ -649,8 +651,6 @@ originalfilnamnet att användas.''',
 '''Den här sidan är redan raderad eller existerade aldrig!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Var god använd det interaktiva användargränsnittet för att radera sidor!''',
-'''Page "%s" was successfully deleted!''':
-'''Sidan "%s" raderades korrekt.''',
 '''Really delete this page?''':
 '''Radera den här sidan, är du säker?''',
 '''Delete''':
@@ -733,8 +733,6 @@ Pröva ett annat namn.''',
 '''Uppladdning av bifogad fil \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Teckningen \'%(filename)s\' sparad.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dh %(mins)dm sedan''',
 '''(no bookmark set)''':
 '''(inget bokmärke satt)''',
 '''(currently set to %s)''':
@@ -847,8 +845,6 @@ röd=ändra''',
 '''Lokal översiktskarta''',
 '''Do''':
 '''Gör''',
-'''Parent Page''':
-'''Föräldrasida''',
 '''Edit (Text)''':
 '''Redigera (textläge)''',
 '''Edit (GUI)''':
@@ -867,8 +863,6 @@ röd=ändra''',
 '''Eller pröva någon av de här åtgärderna:''',
 '''Page''':
 '''Sida''',
-'''Trail''':
-'''Spår''',
 '''User''':
 '''Användare''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

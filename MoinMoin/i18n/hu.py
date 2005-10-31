@@ -93,6 +93,10 @@ Ha nem ezt kívánja, akkor a \'\'\'%(cancel_button_text)s\'\'\' gombot nyomja m
 '''A sorvégi szóközök eltávolítása''',
 '''Edit was cancelled.''':
 '''A szerkesztés visszavonva.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez.''',
+'''Page "%s" was successfully deleted!''':
+'''A(z) "%s" lap törölve!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -162,8 +166,6 @@ Kérjük a böngészője "vissza"-gombjával lépjen vissza, majd vágja ki a me
 '''Nem változtatta meg a lapot, ezért nem is mentettük el!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Nem változtathatja meg a lap ACL-jeit, mert Önnek ehhez nincs adminisztrátori joga!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Ön megkapta a zárolást erre a lapra, mert a(z) %(owner)s zárolása lejárt %(mins_ago)d perce.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -258,15 +260,6 @@ egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlap
 '''találat''',
 '''matches''':
 '''találatok''',
-'''Cookie deleted. You are now logged out.''':
-'''A sütit letöröltük. Ön kilépett.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
-'''Please provide a valid email address!''':
-'''Kérjük, hogy érvényes levélcímet adjon meg!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -282,6 +275,15 @@ a jelszó-mezőbe (legcélszerűbb ha bemásolja).
 
 Miután sikeresen belépett kérjük írja át a jelszót!
 ''',
+'''Cookie deleted. You are now logged out.''':
+'''A sütit letöröltük. Ön kilépett.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
+'''Please provide a valid email address!''':
+'''Kérjük, hogy érvényes levélcímet adjon meg!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
 '''Missing password. Please enter user name and password.''':
@@ -338,6 +340,8 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Profil létrehozása''',
 '''Mail me my account data''':
 '''Kérem a felhasználói adataim elküldését levélben''',
+'''Action''':
+'''Művelet''',
 '''No older revisions available!''':
 '''Nincsenek régebbi módosítások!''',
 '''Diff for "%s"''':
@@ -374,8 +378,6 @@ Miután sikeresen belépett kérjük írja át a jelszót!
 '''Szerkesztő''',
 '''Comment''':
 '''Megjegyzés''',
-'''Action''':
-'''Művelet''',
 '''view''':
 '''nézet''',
 '''raw''':
@@ -560,8 +562,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Ezt a lapot már törölték, vagy soha nem is hozták létre!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Kérjük a lap törléséhez az interaktív felületet használja!''',
-'''Page "%s" was successfully deleted!''':
-'''A(z) "%s" lap törölve!''',
 '''Really delete this page?''':
 '''Törölni kívánja ezt a lapot?''',
 '''Delete''':
@@ -644,8 +644,6 @@ Próbáljon más nevet adni a lapnak.''',
 '''A(z) \'%(filename)s\' melléklet föltöltése.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''A(z) \'%(filename)s\' rajz elmentve.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)d óra %(mins)d perccel ezelőtt''',
 '''(no bookmark set)''':
 '''(nincs könyvjelző)''',
 '''(currently set to %s)''':
@@ -760,8 +758,6 @@ piros=szerkesztés''',
 '''Vagy próbáljon ki egyet ezekből a műveletekből:''',
 '''Page''':
 '''Oldal''',
-'''Trail''':
-'''Nyom''',
 '''User''':
 '''Felhasználó''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

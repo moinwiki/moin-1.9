@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -225,6 +225,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "A szerkesztés visszavonva."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "A(z) \"%s\" lap törölve!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -329,9 +336,6 @@ msgid ""
 msgstr ""
 "Nem változtathatja meg a lap ACL-jeit, mert Önnek ehhez nincs "
 "adminisztrátori joga!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez."
 
 #, python-format
 msgid ""
@@ -516,19 +520,6 @@ msgstr "találat"
 msgid "matches"
 msgstr "találatok"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "A sütit letöröltük. Ön kilépett."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a "
-"wiki rendszergazdájával, aki engedélyezheti a levélküldést!"
-
-msgid "Please provide a valid email address!"
-msgstr "Kérjük, hogy érvényes levélcímet adjon meg!"
-
 #, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
@@ -540,10 +531,6 @@ msgstr ""
 "Belépési név: %s \n"
 "Belépési jelszó: %s\n"
 "Belépési URL: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Nem találtunk a megadott '%(email)s' címhez felhasználói azonosítót!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -566,6 +553,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "A sütit letöröltük. Ön kilépett."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a "
+"wiki rendszergazdájával, aki engedélyezheti a levélküldést!"
+
+msgid "Please provide a valid email address!"
+msgstr "Kérjük, hogy érvényes levélcímet adjon meg!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Nem találtunk a megadott '%(email)s' címhez felhasználói azonosítót!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -679,6 +683,9 @@ msgstr "Profil létrehozása"
 msgid "Mail me my account data"
 msgstr "Kérem a felhasználói adataim elküldését levélben"
 
+msgid "Action"
+msgstr "Művelet"
+
 msgid "No older revisions available!"
 msgstr "Nincsenek régebbi módosítások!"
 
@@ -737,9 +744,6 @@ msgstr "Szerkesztő"
 
 msgid "Comment"
 msgstr "Megjegyzés"
-
-msgid "Action"
-msgstr "Művelet"
 
 msgid "view"
 msgstr "nézet"
@@ -1166,10 +1170,6 @@ msgstr "Ezt a lapot már törölték, vagy soha nem is hozták létre!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Kérjük a lap törléséhez az interaktív felületet használja!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "A(z) \"%s\" lap törölve!"
-
 msgid "Really delete this page?"
 msgstr "Törölni kívánja ezt a lapot?"
 
@@ -1321,8 +1321,8 @@ msgstr "A(z) '%(filename)s' melléklet föltöltése."
 msgid "Drawing '%(filename)s' saved."
 msgstr "A(z) '%(filename)s' rajz elmentve."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)d óra %(mins)d perccel ezelőtt"
 
 msgid "(no bookmark set)"
@@ -1509,10 +1509,6 @@ msgid "Do"
 msgstr "Végrehajtás"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "KezdőLap"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "SzövegSzerkesztése"
 
@@ -1548,9 +1544,6 @@ msgstr "Vagy próbáljon ki egyet ezekből a műveletekből:"
 
 msgid "Page"
 msgstr "Oldal"
-
-msgid "Trail"
-msgstr "Nyom"
 
 msgid "User"
 msgstr "Felhasználó"
@@ -1655,6 +1648,13 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "KezdőLap"
+
+#~ msgid "Trail"
+#~ msgstr "Nyom"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

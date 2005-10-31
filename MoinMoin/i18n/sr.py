@@ -81,6 +81,10 @@ Ako to ne želite, kliknite na \'\'\'%(cancel_button_text)s\'\'\' , da biste Va�
 '''Skini blankove sa kraja svake linije''',
 '''Edit was cancelled.''':
 '''Izmena je prekinuta.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Hvala za vaše izmene. Cenimo Vašu pažnju.''',
+'''Page "%s" was successfully deleted!''':
+'''Stranica "%s" je uspešno izbrisana!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -149,8 +153,6 @@ je vrlo nepristojno!\'\'
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Ne možete menjati korisnička prava - ACL na ovoj stranici, pošto
 nemate administratorska prava za nju!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Hvala za vaše izmene. Cenimo Vašu pažnju.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Blokada od %(owner)s je istekla pre %(mins_ago)d minuta, i vi ste dobili sada blokadu za ovu stranicu.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -283,6 +285,8 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''stvoriti profil''',
 '''Mail me my account data''':
 '''poslati mi moje podatke putem mejla''',
+'''Action''':
+'''Akcija''',
 '''No older revisions available!''':
 '''Prethodne revizije ne postoje!''',
 '''Diff for "%s"''':
@@ -317,8 +321,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Editor''',
 '''Comment''':
 '''Napomena''',
-'''Action''':
-'''Akcija''',
 '''view''':
 '''vidi''',
 '''raw''':
@@ -490,8 +492,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Ova stranica je već izbrisan ili nikad nije stvorena!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Molimo Vas koristite interaktivni korisnički interfejs da brišete stranice!''',
-'''Page "%s" was successfully deleted!''':
-'''Stranica "%s" je uspešno izbrisana!''',
 '''Really delete this page?''':
 '''Stvarno izbrisati ovu stranicu?''',
 '''Delete''':
@@ -552,8 +552,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Prenos priloga \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Crtež \'%(filename)s\' je snimljen.''',
-'''%(hours)dh %(mins)dm ago''':
-'''pre %(hours)dh %(mins)dm''',
 '''(no bookmark set)''':
 '''(obeleživač nije aktiviran)''',
 '''(currently set to %s)''':
@@ -618,8 +616,6 @@ crveno=obrade''',
 '''Ili izaberite neke od ovih akcija:''',
 '''Page''':
 '''Stranica''',
-'''Trail''':
-'''Trag''',
 '''User''':
 '''Korisnik''',
 '''Line''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -214,6 +214,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Izmena je prekinuta."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Hvala za vaše izmene. Cenimo Vašu pažnju."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Stranica \"%s\" je uspešno izbrisana!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -316,9 +323,6 @@ msgid ""
 msgstr ""
 "Ne možete menjati korisnička prava - ACL na ovoj stranici, pošto\n"
 "nemate administratorska prava za nju!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Hvala za vaše izmene. Cenimo Vašu pažnju."
 
 #, python-format
 msgid ""
@@ -501,6 +505,30 @@ msgstr "pronađen"
 msgid "matches"
 msgstr "pronađenih"
 
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/?action=userform&uid=%s\n"
+msgstr ""
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr ""
+
 msgid "Cookie deleted. You are now logged out."
 msgstr "Kolačić izbrisan. Vi ste sada odjavljeni iz sistema"
 
@@ -517,32 +545,8 @@ msgid "Please provide a valid email address!"
 msgstr "Molimo vas da upišete ispravnu mejl adresu!"
 
 #, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/?action=userform&uid=%s\n"
-msgstr ""
-
-#, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Nalog koji odgovara datoj mejl adresi , '%(email)s' , ne postoji!"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -654,6 +658,9 @@ msgstr "stvoriti profil"
 msgid "Mail me my account data"
 msgstr "poslati mi moje podatke putem mejla"
 
+msgid "Action"
+msgstr "Akcija"
+
 msgid "No older revisions available!"
 msgstr "Prethodne revizije ne postoje!"
 
@@ -712,9 +719,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Napomena"
-
-msgid "Action"
-msgstr "Akcija"
 
 msgid "view"
 msgstr "vidi"
@@ -1141,10 +1145,6 @@ msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 "Molimo Vas koristite interaktivni korisnički interfejs da brišete stranice!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Stranica \"%s\" je uspešno izbrisana!"
-
 msgid "Really delete this page?"
 msgstr "Stvarno izbrisati ovu stranicu?"
 
@@ -1295,8 +1295,8 @@ msgstr "Prenos priloga '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Crtež '%(filename)s' je snimljen."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "pre %(hours)dh %(mins)dm"
 
 msgid "(no bookmark set)"
@@ -1493,10 +1493,6 @@ msgid "Do"
 msgstr ""
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "NaslovnaStrana"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "IzmeniTekst"
 
@@ -1533,9 +1529,6 @@ msgstr "Ili izaberite neke od ovih akcija:"
 
 msgid "Page"
 msgstr "Stranica"
-
-msgid "Trail"
-msgstr "Trag"
 
 msgid "User"
 msgstr "Korisnik"
@@ -1636,6 +1629,13 @@ msgstr "PreimenitiStranicu"
 
 msgid "SpellCheck"
 msgstr "ProveraPravopisa"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "NaslovnaStrana"
+
+#~ msgid "Trail"
+#~ msgstr "Trag"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 18:08+0200\n"
+"POT-Creation-Date: 2005-10-31 16:40+0200\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -229,6 +229,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Labošana tika atsaukta."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Lapa \"%s\" veiksmīgi dzēsta!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -330,9 +337,6 @@ msgstr "Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!"
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr "Jūs nevarat mainīt pieejas tiesības, Jums nav adminstratora tiesību!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta."
 
 #, python-format
 msgid ""
@@ -520,19 +524,6 @@ msgstr "saskaņa"
 msgid "matches"
 msgstr "saskaņas"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Sīkdatne dzēsta. Jūs izgājāt no sistēmas."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Šajā viki pasta sūtīšana ir aizliegta.\n"
-"Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu."
-
-msgid "Please provide a valid email address!"
-msgstr "Lūdzu, norādiet pareizu e-pasta adresi!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -546,10 +537,6 @@ msgstr ""
 "Lietotāja parole: %s\n"
 "\n"
 "Lietotāja URL: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Netika atrasts neviens lietotājs ar tādu e-pasta adresi '%(email)s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -573,6 +560,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Jūsu viki konta dati"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Sīkdatne dzēsta. Jūs izgājāt no sistēmas."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Šajā viki pasta sūtīšana ir aizliegta.\n"
+"Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu."
+
+msgid "Please provide a valid email address!"
+msgstr "Lūdzu, norādiet pareizu e-pasta adresi!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Netika atrasts neviens lietotājs ar tādu e-pasta adresi '%(email)s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -683,6 +687,9 @@ msgstr "Izveidot profilu"
 msgid "Mail me my account data"
 msgstr "Atsūtīt mana sistēmas konta datus"
 
+msgid "Action"
+msgstr "Darbība"
+
 msgid "No older revisions available!"
 msgstr "Vecākas versijas nav!"
 
@@ -741,9 +748,6 @@ msgstr "Redaktors"
 
 msgid "Comment"
 msgstr "Komentārs"
-
-msgid "Action"
-msgstr "Darbība"
 
 msgid "view"
 msgstr "Skats"
@@ -819,7 +823,9 @@ msgid "You must log in to use subscribtions."
 msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi LietotājaIestatījumos."
+msgstr ""
+"Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi "
+"LietotājaIestatījumos."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Jūs vairs neesat pierakstīts uz šo lapu."
@@ -1108,12 +1114,13 @@ msgstr ""
 "Nevar atpakot piesaisti '%(filename)s' - rezultējošie faili var būt pārāk "
 "lieli (pietrūkst %(space)d kB)."
 
+#, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
-"Nevar atpakot piesaisti '%(filename)s' - rezultējošo failu "
-"būs pārāk daudz (pietrūkst %(count)d)."
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošo failu būs pārāk daudz "
+"(pietrūkst %(count)d)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1159,10 +1166,6 @@ msgstr "Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!"
 
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!"
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Lapa \"%s\" veiksmīgi dzēsta!"
 
 msgid "Really delete this page?"
 msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
@@ -1316,9 +1319,8 @@ msgstr "Piesaistes '%(filename)s' augšupielāde."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Attēls '%(filename)s' saglabāts."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
-msgstr "Pirms %(hours)dh %(mins)dm"
+msgid "%(mins)dm ago"
+msgstr "Pirms %(mins)d min"
 
 msgid "(no bookmark set)"
 msgstr "(nav grāmatzīmes)"
@@ -1498,9 +1500,6 @@ msgstr "Lokālā vietnes karte"
 msgid "Do"
 msgstr "Veikt"
 
-msgid "Parent Page"
-msgstr "Virslapa"
-
 msgid "Edit (Text)"
 msgstr "Labot tekstu"
 
@@ -1534,9 +1533,6 @@ msgstr "Vai mēģināt kādu no darbībām:"
 
 msgid "Page"
 msgstr "Lapa"
-
-msgid "Trail"
-msgstr "Noslēgums"
 
 msgid "User"
 msgstr "Lietotājs"
@@ -1645,6 +1641,12 @@ msgstr "PārdēvētLapu"
 
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
+
+#~ msgid "Parent Page"
+#~ msgstr "Virslapa"
+
+#~ msgid "Trail"
+#~ msgstr "Noslēgums"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

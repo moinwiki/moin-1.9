@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-10-23 15:04+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -229,6 +229,15 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Modification annulée."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr ""
+"Merci pour vos modifications. Nous apprécions le soin que vous apportez aux "
+"détails."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Page « %s » supprimée avec succès !"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -338,11 +347,6 @@ msgid ""
 msgstr ""
 "Vous ne pouvez pas modifier la liste de contrôle d'accès (ACL) de cette "
 "page, car vous n'en avez pas les droits d'administration !"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
-"Merci pour vos modifications. Nous apprécions le soin que vous apportez aux "
-"détails."
 
 #, python-format
 msgid ""
@@ -532,19 +536,6 @@ msgstr "correspondance"
 msgid "matches"
 msgstr "correspondances"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie effacé. Vous êtes déconnecté."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"La gestion du courrier n'est pas activée sur ce wiki.\n"
-"Contactez le propriétaire de ce wiki, qui pourra l'activer."
-
-msgid "Please provide a valid email address!"
-msgstr "Veuillez fournir une adresse électronique valide !"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -558,10 +549,6 @@ msgstr ""
 "Mot de passe : %s\n"
 "\n"
 "URL de connexion : %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -588,6 +575,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Vos identifiants de connexion au wiki"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie effacé. Vous êtes déconnecté."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"La gestion du courrier n'est pas activée sur ce wiki.\n"
+"Contactez le propriétaire de ce wiki, qui pourra l'activer."
+
+msgid "Please provide a valid email address!"
+msgstr "Veuillez fournir une adresse électronique valide !"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -706,6 +710,9 @@ msgstr "Créer un profil"
 msgid "Mail me my account data"
 msgstr "Envoi par courrier électronique de mes identifiants de connexion"
 
+msgid "Action"
+msgstr "Action"
+
 msgid "No older revisions available!"
 msgstr "Il n'y a pas de version antérieure."
 
@@ -764,9 +771,6 @@ msgstr "Éditeur"
 
 msgid "Comment"
 msgstr "Commentaire"
-
-msgid "Action"
-msgstr "Action"
 
 msgid "view"
 msgstr "voir"
@@ -845,7 +849,9 @@ msgid "You must log in to use subscribtions."
 msgstr "Vous devez être identifié pour utiliser l'abonnement."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Ajoutez votre adresse électronique dans les PréférencesUtilisateur pour utiliser l'abonnement."
+msgstr ""
+"Ajoutez votre adresse électronique dans les PréférencesUtilisateur pour "
+"utiliser l'abonnement."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Votre abonnement à cette page a été supprimé."
@@ -854,7 +860,9 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Impossible de retirer un abonnement selon une expression rationnelle"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "Modifiez les expressions rationnelles contenues dans vos PréférencesUtilisateur."
+msgstr ""
+"Modifiez les expressions rationnelles contenues dans vos "
+"PréférencesUtilisateur."
 
 msgid "You have been subscribed to this page."
 msgstr "Vous avez été abonné à cette page."
@@ -1194,10 +1202,6 @@ msgstr "Cette page a déjà été supprimée ou n'a jamais existé !"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Utilisez l'interface interactive pour la suppression de pages !"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Page « %s » supprimée avec succès !"
-
 msgid "Really delete this page?"
 msgstr "Voulez-vous vraiment supprimer cette page ?"
 
@@ -1354,8 +1358,8 @@ msgstr "Ajout de la pièce jointe « %(filename)s »."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Enregistrement du dessin « %(filename)s »."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "Il y a %(hours)dh %(mins)dm "
 
 msgid "(no bookmark set)"
@@ -1543,9 +1547,6 @@ msgstr "Carte locale du site"
 msgid "Do"
 msgstr "Exécuter"
 
-msgid "Parent Page"
-msgstr "Page supérieure"
-
 msgid "Edit (Text)"
 msgstr "Éditer (mode texte)"
 
@@ -1579,9 +1580,6 @@ msgstr "Ou essayez l'une de ces actions :"
 
 msgid "Page"
 msgstr "Page"
-
-msgid "Trail"
-msgstr "Chemin suivi"
 
 msgid "User"
 msgstr "Utilisateur"
@@ -1684,3 +1682,9 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
+
+#~ msgid "Parent Page"
+#~ msgstr "Page supérieure"
+
+#~ msgid "Trail"
+#~ msgstr "Chemin suivi"

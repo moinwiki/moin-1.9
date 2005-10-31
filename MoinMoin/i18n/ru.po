@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-08-15 19:46-0700\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -221,6 +221,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Изменение отменено."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Страница \"%s\" успешно стерта!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -323,9 +330,6 @@ msgid ""
 msgstr ""
 "Вы не можете менять права доступа(ACL) к этой странице, так у вас нет прав "
 "администратора на неё!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям."
 
 #, python-format
 msgid ""
@@ -513,19 +517,6 @@ msgstr "совпадение"
 msgid "matches"
 msgstr "совпадений"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie стерты. Вы вышли."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
-"может разрешить отправку."
-
-msgid "Please provide a valid email address!"
-msgstr "Пожалуйста укажите правильный почтовый адрес!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -539,10 +530,6 @@ msgstr ""
 "Пароль: %s\n"
 "\n"
 "URL для входа: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -566,6 +553,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie стерты. Вы вышли."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
+"может разрешить отправку."
+
+msgid "Please provide a valid email address!"
+msgstr "Пожалуйста укажите правильный почтовый адрес!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -678,6 +682,9 @@ msgstr "Создать настройки"
 msgid "Mail me my account data"
 msgstr "Отправить мне настройки почтой"
 
+msgid "Action"
+msgstr "Действие"
+
 msgid "No older revisions available!"
 msgstr "Нет более старых версий!"
 
@@ -736,9 +743,6 @@ msgstr "Редактор"
 
 msgid "Comment"
 msgstr "Комментарий"
-
-msgid "Action"
-msgstr "Действие"
 
 msgid "view"
 msgstr "показать"
@@ -1162,10 +1166,6 @@ msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 "Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Страница \"%s\" успешно стерта!"
-
 msgid "Really delete this page?"
 msgstr "Точно стереть эту страницу?"
 
@@ -1318,8 +1318,8 @@ msgstr "Загружено приложение '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Рисунок '%(filename)s' записан."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)dч %(mins)dм назад"
 
 msgid "(no bookmark set)"
@@ -1504,10 +1504,6 @@ msgstr "КартаОкресностей"
 msgid "Do"
 msgstr "Выполняй!"
 
-#, fuzzy
-msgid "Parent Page"
-msgstr "Начало"
-
 msgid "Edit (Text)"
 msgstr "Исправить (Текст)"
 
@@ -1543,9 +1539,6 @@ msgstr "Или попробуйте сделать"
 
 msgid "Page"
 msgstr "Страница"
-
-msgid "Trail"
-msgstr "След"
 
 msgid "User"
 msgstr "Кто"
@@ -1648,6 +1641,13 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "Начало"
+
+#~ msgid "Trail"
+#~ msgstr "След"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

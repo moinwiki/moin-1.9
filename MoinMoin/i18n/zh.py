@@ -116,6 +116,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 ''',
 '''Edit was cancelled.''':
 '''编辑取消了.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''谢谢您的细心修改.''',
+'''Page "%s" was successfully deleted!''':
+'''网页"%s"被已被删除!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -194,8 +198,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''此页未作改动, 所以没有保存!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''您不能修改此页的访问控制表(ACL), 因为您没有管理权限!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''谢谢您的细心修改.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''%(owner)s对此页的编辑锁定在%(mins_ago)d分钟前已经失效了,现在您锁定了此页.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -299,13 +301,6 @@ space between words. Group page name is not allowed.''':
 '''次匹配''',
 '''matches''':
 '''次匹配''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie已经删除. 您已登出.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
-'''Please provide a valid email address!''':
-'''请提供一个有效的电子邮件地址!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -318,8 +313,6 @@ Login URL: %s/?action=userform&uid=%s
 
 登录URL: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''找不到用\'%(email)s\'登记的帐户!!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -337,6 +330,15 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] 您的维基帐号资料''',
+'''Cookie deleted. You are now logged out.''':
+'''Cookie已经删除. 您已登出.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
+'''Please provide a valid email address!''':
+'''请提供一个有效的电子邮件地址!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''找不到用\'%(email)s\'登记的帐户!!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
 '''Missing password. Please enter user name and password.''':
@@ -405,6 +407,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''新用户注册''',
 '''Mail me my account data''':
 '''把帐号资料寄给我''',
+'''Action''':
+'''操作''',
 '''No older revisions available!''':
 '''没有旧版''',
 '''Diff for "%s"''':
@@ -441,8 +445,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''编辑''',
 '''Comment''':
 '''备注''',
-'''Action''':
-'''操作''',
 '''view''':
 '''查看''',
 '''raw''':
@@ -672,8 +674,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''此页已被删除或根本就不存在!''',
 '''Please use the interactive user interface to delete pages!''':
 '''请使用用户界面交互删除网页!''',
-'''Page "%s" was successfully deleted!''':
-'''网页"%s"被已被删除!''',
 '''Really delete this page?''':
 '''真的要删除此页?''',
 '''Delete''':
@@ -756,8 +756,6 @@ Try a different name.''':
 '''上载附件\'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''图片\'%(filename)s\'已保存''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)d小时%(mins)d分前''',
 '''(no bookmark set)''':
 '''(未设置书签)''',
 '''(currently set to %s)''':
@@ -870,8 +868,6 @@ red=edit''':
 '''本站地图''',
 '''Do''':
 '''执行''',
-'''Parent Page''':
-'''上层网页''',
 '''Edit (Text)''':
 '''编辑(文本方式)''',
 '''Edit (GUI)''':
@@ -890,8 +886,6 @@ red=edit''':
 '''或下列操作: ''',
 '''Page''':
 '''网页''',
-'''Trail''':
-'''访问历史''',
 '''User''':
 '''用户''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

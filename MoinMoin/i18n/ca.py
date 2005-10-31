@@ -115,6 +115,10 @@ Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar e
 ''',
 '''Edit was cancelled.''':
 '''S\'ha cancel·lat l\'edició.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Gràcies pels vostres canvis. S\'aprecia la vostra atenció als detalls.''',
+'''Page "%s" was successfully deleted!''':
+'''S\'ha suprimit la pàgina «%s» amb èxit.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -195,8 +199,6 @@ això suprimiria els canvis de l\'altra persona, i això és molt ofensiu!\'\'
 '''No heu canviat el contingut de la pàgina, no es desa!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''No podeu canviar els ACL en aquesta pàgina ja que no teniu permisos d\'administració sobre ella.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Gràcies pels vostres canvis. S\'aprecia la vostra atenció als detalls.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''El blocatge de %(owner)s ha expirat fa %(mins_ago)d minuts, i ara teniu el blocatge sobre la pàgina.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -300,14 +302,6 @@ El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai opcio
 '''coincidència''',
 '''matches''':
 '''coincidències''',
-'''Cookie deleted. You are now logged out.''':
-'''S\'ha suprimit la galeta. Heu eixit del vostre compte.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Aquest wiki no té habilitat el processament de correu.
-Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
-'''Please provide a valid email address!''':
-'''Proveïu una adreça de correu vàlida''',
 '''Login Name: %s
 
 Login Password: %s
@@ -320,8 +314,6 @@ Contrasenya d\'entrada: %s
 
 URL d\'entrada: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -338,6 +330,16 @@ Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu r
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Les dades del vostre compte wiki''',
+'''Cookie deleted. You are now logged out.''':
+'''S\'ha suprimit la galeta. Heu eixit del vostre compte.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Aquest wiki no té habilitat el processament de correu.
+Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
+'''Please provide a valid email address!''':
+'''Proveïu una adreça de correu vàlida''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''El nom d\'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d\'usuari i contrasenya.''',
 '''Missing password. Please enter user name and password.''':
@@ -406,6 +408,8 @@ Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu r
 '''Crea un perfil''',
 '''Mail me my account data''':
 '''Envia\'m les dades del meu compte''',
+'''Action''':
+'''Acció''',
 '''No older revisions available!''':
 '''No hi ha revisions més velles disponibles.''',
 '''Diff for "%s"''':
@@ -442,8 +446,6 @@ Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu r
 '''Editor''',
 '''Comment''':
 '''Comentari''',
-'''Action''':
-'''Acció''',
 '''view''':
 '''visualitza''',
 '''raw''':
@@ -645,8 +647,6 @@ del fitxer.''',
 '''Aquesta pàgina ja està suprimida o mai s\'ha creat.''',
 '''Please use the interactive user interface to delete pages!''':
 '''Utilitzeu la interfície d\'usuari interactiva per a suprimir pàgines.''',
-'''Page "%s" was successfully deleted!''':
-'''S\'ha suprimit la pàgina «%s» amb èxit.''',
 '''Really delete this page?''':
 '''Esteu segur de voler suprimir aquesta pàgina?''',
 '''Delete''':
@@ -729,8 +729,6 @@ Proveu amb un nom diferent.''',
 '''Pujada de l\'adjuntació «%(filename)s».''',
 '''Drawing \'%(filename)s\' saved.''':
 '''S\'ha desat el dibuix «%(filename)s».''',
-'''%(hours)dh %(mins)dm ago''':
-'''fa %(hours)dh %(mins)dm''',
 '''(no bookmark set)''':
 '''(cap adreça d\'interès establida)''',
 '''(currently set to %s)''':
@@ -843,8 +841,6 @@ roig=edició''',
 '''Mapa del lloc''',
 '''Do''':
 '''Fes''',
-'''Parent Page''':
-'''Pàgina pare''',
 '''Edit (Text)''':
 '''Edita (text)''',
 '''Edit (GUI)''':
@@ -863,8 +859,6 @@ roig=edició''',
 '''O proveu amb una d\'aquestes accions:''',
 '''Page''':
 '''Pàgina''',
-'''Trail''':
-'''Recorregut''',
 '''User''':
 '''Usuari''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

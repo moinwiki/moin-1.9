@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
 "Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
@@ -225,6 +225,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "Editace byla zrušena."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Stránka \"%s\" byla úspěšně smazána!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -329,9 +336,6 @@ msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
 "Nemůžete měnit žádná ACL práva na této stránce, protože nemáte práva admin"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku."
 
 #, python-format
 msgid ""
@@ -515,19 +519,6 @@ msgstr "nález"
 msgid "matches"
 msgstr "nálezů"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Koláček byl smazán. Nyní jste odhlášeni."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Tato wiki není upravena na posílání emailů.\n"
-"Kontaktujte vlastníka wiki, který to může změnit."
-
-msgid "Please provide a valid email address!"
-msgstr "Napište prosím platnou emailovou adresu!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -536,12 +527,6 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"Nebyl nalezen žádný účet, který by odpovídal zadané emailové adrese '%(email)"
-"s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -557,6 +542,25 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Koláček byl smazán. Nyní jste odhlášeni."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Tato wiki není upravena na posílání emailů.\n"
+"Kontaktujte vlastníka wiki, který to může změnit."
+
+msgid "Please provide a valid email address!"
+msgstr "Napište prosím platnou emailovou adresu!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"Nebyl nalezen žádný účet, který by odpovídal zadané emailové adrese '%(email)"
+"s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -668,6 +672,9 @@ msgstr "Vytvořit profil"
 msgid "Mail me my account data"
 msgstr "Zašli mi má data k účtu"
 
+msgid "Action"
+msgstr "Akce"
+
 msgid "No older revisions available!"
 msgstr "Starší verze nejsou k dispozici!"
 
@@ -726,9 +733,6 @@ msgstr "Autor"
 
 msgid "Comment"
 msgstr "Komentář"
-
-msgid "Action"
-msgstr "Akce"
 
 msgid "view"
 msgstr "náhled"
@@ -1142,10 +1146,6 @@ msgstr "Tato stránka již byla smazána nebo nebyla nikdy vytvořena!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Stránka \"%s\" byla úspěšně smazána!"
-
 msgid "Really delete this page?"
 msgstr "Akutečně smazat tuto stránku?"
 
@@ -1296,8 +1296,8 @@ msgstr "Upload přílohy '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Obrázek '%(filename)s' uložen."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "před %(hours)02d:%(mins)02d"
 
 msgid "(no bookmark set)"
@@ -1478,9 +1478,6 @@ msgstr "Lokální Mapa Stránek"
 msgid "Do"
 msgstr "Proveď!"
 
-msgid "Parent Page"
-msgstr "Mateřská Stránka"
-
 msgid "Edit (Text)"
 msgstr "Editace (Text)"
 
@@ -1515,9 +1512,6 @@ msgstr "Nebo zkuste jednu z následujících akcí:"
 
 msgid "Page"
 msgstr "Stránka"
-
-msgid "Trail"
-msgstr "Stopa"
 
 msgid "User"
 msgstr "Uživatel"
@@ -1619,6 +1613,12 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "Parent Page"
+#~ msgstr "Mateřská Stránka"
+
+#~ msgid "Trail"
+#~ msgstr "Stopa"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

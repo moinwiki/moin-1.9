@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -223,6 +223,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "글 고침을 취소했습니다."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "글이 저장되었습니다."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "글 \"%s\"가 지워졌습니다!"
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -326,9 +333,6 @@ msgstr "글 내용을 고치지 않았으므로 저장되지 않았습니다."
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr "관리자만 접근 허용 설정을 고칠 수 있습니다."
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "글이 저장되었습니다."
 
 #, python-format
 msgid ""
@@ -511,19 +515,6 @@ msgstr " 개 포함"
 msgid "matches"
 msgstr " 개 포함"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "쿠키가 지워졌습니다. 로그아웃 되었습니다."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"이 위키는 메일 처리를 할 수 없도록 되어 있습니다. \n"
-"위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요."
-
-msgid "Please provide a valid email address!"
-msgstr "사용가능한 메일 주소를 써 주세요!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -532,10 +523,6 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "메일 주소가 '%(email)s'로 되어있는 계정이 없습니다!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -551,6 +538,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "쿠키가 지워졌습니다. 로그아웃 되었습니다."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"이 위키는 메일 처리를 할 수 없도록 되어 있습니다. \n"
+"위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요."
+
+msgid "Please provide a valid email address!"
+msgstr "사용가능한 메일 주소를 써 주세요!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "메일 주소가 '%(email)s'로 되어있는 계정이 없습니다!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -664,6 +668,9 @@ msgstr "사용자 등록"
 msgid "Mail me my account data"
 msgstr "비밀번호 되찾기"
 
+msgid "Action"
+msgstr "액션"
+
 msgid "No older revisions available!"
 msgstr "옛 버전이 저장되어 있지 않습니다!"
 
@@ -722,9 +729,6 @@ msgstr "수정한 사람"
 
 msgid "Comment"
 msgstr "코멘트"
-
-msgid "Action"
-msgstr "액션"
 
 msgid "view"
 msgstr "보기"
@@ -1147,10 +1151,6 @@ msgstr "이 글은 이미 지워졌거나 없습니다."
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "글을 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "글 \"%s\"가 지워졌습니다!"
-
 msgid "Really delete this page?"
 msgstr "정말로 이 글을 지우겠습니까?"
 
@@ -1303,8 +1303,8 @@ msgstr "첨부 '%(filename)s'를 업로드"
 msgid "Drawing '%(filename)s' saved."
 msgstr "그림 '%(filename)s'가 저장되었습니다."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)02d시간 %(mins)02d분 전"
 
 msgid "(no bookmark set)"
@@ -1499,10 +1499,6 @@ msgid "Do"
 msgstr "확인"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "대문"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "글 고치기"
 
@@ -1538,9 +1534,6 @@ msgstr "다른 작업을 할 수도 있습니다 : "
 
 msgid "Page"
 msgstr "글"
-
-msgid "Trail"
-msgstr "흔적"
 
 msgid "User"
 msgstr "사용자"
@@ -1641,6 +1634,13 @@ msgstr "이름바꿈"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "대문"
+
+#~ msgid "Trail"
+#~ msgstr "흔적"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

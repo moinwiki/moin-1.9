@@ -117,6 +117,10 @@ Se você discorda, aperte o botão \'\'\'%(cancel_button_text)s\'\'\' para cance
 ''',
 '''Edit was cancelled.''':
 '''A edição foi cancelada.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Obrigado por suas mudanças. Sua atenção aos detalhes é apreciada.''',
+'''Page "%s" was successfully deleted!''':
+'''Página "%s" foi removida com sucesso!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -147,7 +151,7 @@ A página seguinte foi alterada por %(editor)s:
 ''',
 '''No differences found!
 ''':
-'''Nenhuma differença encontrada!
+'''Nenhuma diferença encontrada!
 ''',
 '''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
 '''[%(sitename)s] %(trivial)sAtualização de "%(pagename)s" por %(username)s''',
@@ -195,8 +199,6 @@ apagar as alterações da outra pessoa, o que é demasiadamente rude!"
 '''Você não pode alterar o conteúdo da página, alterações não foram salvas!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Você não podem mudar ACLs nesta página, pois você não tem direitos de administração sobre ela!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Obrigado por suas mudanças. Sua atenção aos detalhes é apreciada.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''O bloqueio de %(owner)s expirou %(mins_ago)d minuto(s) atrás, e você foi autorizado a bloquear esta página para edição.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -224,7 +226,7 @@ Para deixar o editor, selecione o botão Cancelar.''',
 '''Edit''':
 '''Editar''',
 '''UnSubscribe''':
-'''RemoverSubscrição''',
+'''RemoverInscrição''',
 '''Subscribe''':
 '''Subscrever''',
 '''Raw''':
@@ -238,7 +240,7 @@ Para deixar o editor, selecione o botão Cancelar.''',
 '''Up''':
 '''Acima''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Publique meu email (não em minha homepage do wiki) nas informações do autor''',
+'''Publique meu e-mail (não em minha homepage do wiki) nas informações do autor''',
 '''Open editor on double click''':
 '''Abra o editor com um duplo clique''',
 '''Remember last page visited''':
@@ -301,14 +303,6 @@ entre as palavras. Nome de grupo de página não é permitido.''',
 '''combina''',
 '''matches''':
 '''combinam''',
-'''Cookie deleted. You are now logged out.''':
-'''Você saiu com sucesso do sistema (cookie apagado).''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Esta wiki não está habilitada a enviar mensagens de correio eletrônico.
-Contate o administrador desta wiki para habilitar esta opção.''',
-'''Please provide a valid email address!''':
-'''Por favor, forneça um endereço de e-mail válido!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -321,8 +315,6 @@ Senha para Login: %s
 
 URL do Login: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Não foi encontrada nenhuma conta com o endereço \'%(email)s!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -341,6 +333,16 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Seus dados da conta do wiki''',
+'''Cookie deleted. You are now logged out.''':
+'''Você saiu com sucesso do sistema (cookie apagado).''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Esta wiki não está habilitada a enviar mensagens de correio eletrônico.
+Contate o administrador desta wiki para habilitar esta opção.''',
+'''Please provide a valid email address!''':
+'''Por favor, forneça um endereço de e-mail válido!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Não foi encontrada nenhuma conta com o endereço \'%(email)s!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, informe o nome do usuário e senha.''',
 '''Missing password. Please enter user name and password.''':
@@ -409,6 +411,8 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Criar Perfil''',
 '''Mail me my account data''':
 '''Envie os dados de minha conta por email''',
+'''Action''':
+'''Ação''',
 '''No older revisions available!''':
 '''Nenhuma revisão antiga disponível!''',
 '''Diff for "%s"''':
@@ -432,7 +436,7 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''SHA digest of this page\'s content is:''':
 '''SHA digest para o conteúdo desta página é:''',
 '''The following users subscribed to this page:''':
-'''Os seguintes usuários subscreveram esta página:''',
+'''Os seguintes usuários se inscreveram nesta página:''',
 '''This page links to the following pages:''':
 '''Esta página tem links para as seguintes páginas:''',
 '''Date''':
@@ -445,8 +449,6 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Editor''',
 '''Comment''':
 '''Comentário''',
-'''Action''':
-'''Ação''',
 '''view''':
 '''visualizar''',
 '''raw''':
@@ -484,9 +486,9 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''You must login to add a quicklink.''':
 '''Você precisa se logar para adicionar links rápidos.''',
 '''Your quicklink to this page has been removed.''':
-'''Sua subscrição a esta página foi removida.''',
+'''Sua inscrição a esta página foi removida.''',
 '''A quicklink to this page has been added for you.''':
-'''Uma subscrição a esta página foi adicionada por você.''',
+'''Uma inscrição a esta página foi adicionada por você.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Você não tem permissão para se inscrever em uma página que você não pode ler.''',
 '''This wiki is not enabled for mail processing.''':
@@ -500,7 +502,7 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 '''Can\'t remove regular expression subscription!''':
 '''Não é possível remover expressão regular correspondendo a subscrição!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
-'''Edite suas inscrições de páginas nas sua PreferênciasDoUsuário.''',
+'''Edite suas inscrições de páginas nas PreferênciasDoUsuário.''',
 '''You have been subscribed to this page.''':
 '''Sua inscrição a esta página foi efetivada.''',
 '''Charts are not available!''':
@@ -620,7 +622,7 @@ já que a mesma está sujeita a alterações, e pode facilmente ser inutilizada.
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Um upload nunca irá sobrescrever uma arquivo. Se existir um conflito quanto
+'''Um upload nunca irá sobrescrever um arquivo. Se existir um conflito quanto
 ao nome, você será lembrado sobre o nome do arquivo que você deseja inserir.
 Por outro lado, se "Renomear como" for deixado em branco, o nome original do arquivo será usado.''',
 '''File to upload''':
@@ -689,8 +691,6 @@ Por outro lado, se "Renomear como" for deixado em branco, o nome original do arq
 '''Esta página já está removida ou nunca foi criada!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Por favor, use a interface interativa para remover páginas!''',
-'''Page "%s" was successfully deleted!''':
-'''Página "%s" foi removida com sucesso!''',
 '''Really delete this page?''':
 '''Realmente remover esta página?''',
 '''Delete''':
@@ -773,8 +773,8 @@ Tente um nome diferente.''',
 '''Envio de anexo \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Desenho \'%(filename)s\' salvo.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dh %(mins)dm atrás''',
+'''%(mins)dm ago''':
+'''%(mins)dm atrás''',
 '''(no bookmark set)''':
 '''(nenhum marcador configurado)''',
 '''(currently set to %s)''':
@@ -887,8 +887,6 @@ vermelho=editar''',
 '''Mapa do Site Local''',
 '''Do''':
 '''Fazer''',
-'''Parent Page''':
-'''Página Principal''',
 '''Edit (Text)''':
 '''Editar (Texto)''',
 '''Edit (GUI)''':
@@ -911,8 +909,6 @@ vermelho=editar''',
 '''Ou tente uma da seguintes ações: ''',
 '''Page''':
 '''Página''',
-'''Trail''':
-'''Histórico''',
 '''User''':
 '''Usuário''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

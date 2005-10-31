@@ -97,6 +97,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Стереть хвостовые пробелы из каждой строки''',
 '''Edit was cancelled.''':
 '''Изменение отменено.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям.''',
+'''Page "%s" was successfully deleted!''':
+'''Страница "%s" успешно стерта!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -172,8 +176,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''Вы не сделали никаких исправлений - страница не переписана!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Вы не можете менять права доступа(ACL) к этой странице, так у вас нет прав администратора на неё!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Привилегия %(owner)s на изменения истекла %(mins_ago)d минут(ы) назад и вы получили привилегию на изменение этой страницы.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -275,13 +277,6 @@ space between words. Group page name is not allowed.''':
 '''совпадение''',
 '''matches''':
 '''совпадений''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie стерты. Вы вышли.''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
-'''Please provide a valid email address!''':
-'''Пожалуйста укажите правильный почтовый адрес!''',
 '''Login Name: %s
 
 Login Password: %s
@@ -294,8 +289,6 @@ Login URL: %s/?action=userform&uid=%s
 
 URL для входа: %s/?action=userform&uid=%s
 ''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -311,6 +304,15 @@ After successfully logging in, it is of course a good idea to set a new and know
 
 После успешного входа в систему неплохо бы поменять пароль на ваш собственный.
 ''',
+'''Cookie deleted. You are now logged out.''':
+'''Cookie стерты. Вы вышли.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
+'''Please provide a valid email address!''':
+'''Пожалуйста укажите правильный почтовый адрес!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Неизвестное имя пользователя: {{{"%s"}}}. Пожалуйста введите имя пользователя и пароль.''',
 '''Missing password. Please enter user name and password.''':
@@ -375,6 +377,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Создать настройки''',
 '''Mail me my account data''':
 '''Отправить мне настройки почтой''',
+'''Action''':
+'''Действие''',
 '''No older revisions available!''':
 '''Нет более старых версий!''',
 '''Diff for "%s"''':
@@ -411,8 +415,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Редактор''',
 '''Comment''':
 '''Комментарий''',
-'''Action''':
-'''Действие''',
 '''view''':
 '''показать''',
 '''raw''':
@@ -607,8 +609,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Такая страница уже стерта или никогда не существовала!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!''',
-'''Page "%s" was successfully deleted!''':
-'''Страница "%s" успешно стерта!''',
 '''Really delete this page?''':
 '''Точно стереть эту страницу?''',
 '''Delete''':
@@ -691,8 +691,6 @@ Try a different name.''':
 '''Загружено приложение \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Рисунок \'%(filename)s\' записан.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)dч %(mins)dм назад''',
 '''(no bookmark set)''':
 '''(нет закладки)''',
 '''(currently set to %s)''':
@@ -811,8 +809,6 @@ red=edit''':
 '''Или попробуйте сделать''',
 '''Page''':
 '''Страница''',
-'''Trail''':
-'''След''',
 '''User''':
 '''Кто''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

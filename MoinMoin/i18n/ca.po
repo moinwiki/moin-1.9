@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -225,6 +225,13 @@ msgstr ""
 msgid "Edit was cancelled."
 msgstr "S'ha cancel·lat l'edició."
 
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Gràcies pels vostres canvis. S'aprecia la vostra atenció als detalls."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "S'ha suprimit la pàgina «%s» amb èxit."
+
 #, python-format
 msgid ""
 "Dear Wiki user,\n"
@@ -333,9 +340,6 @@ msgid ""
 msgstr ""
 "No podeu canviar els ACL en aquesta pàgina ja que no teniu permisos "
 "d'administració sobre ella."
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Gràcies pels vostres canvis. S'aprecia la vostra atenció als detalls."
 
 #, python-format
 msgid ""
@@ -523,19 +527,6 @@ msgstr "coincidència"
 msgid "matches"
 msgstr "coincidències"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Aquest wiki no té habilitat el processament de correu.\n"
-"Contacteu amb el responsable del wiki, que pot habilitar el correu."
-
-msgid "Please provide a valid email address!"
-msgstr "Proveïu una adreça de correu vàlida"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -549,11 +540,6 @@ msgstr ""
 "Contrasenya d'entrada: %s\n"
 "\n"
 "URL d'entrada: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"No s'ha trobat cap compte que concorde amb l'adreça de correu «%(email)s»."
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -578,6 +564,24 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Les dades del vostre compte wiki"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Aquest wiki no té habilitat el processament de correu.\n"
+"Contacteu amb el responsable del wiki, que pot habilitar el correu."
+
+msgid "Please provide a valid email address!"
+msgstr "Proveïu una adreça de correu vàlida"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"No s'ha trobat cap compte que concorde amb l'adreça de correu «%(email)s»."
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -691,6 +695,9 @@ msgstr "Crea un perfil"
 msgid "Mail me my account data"
 msgstr "Envia'm les dades del meu compte"
 
+msgid "Action"
+msgstr "Acció"
+
 msgid "No older revisions available!"
 msgstr "No hi ha revisions més velles disponibles."
 
@@ -749,9 +756,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Comentari"
-
-msgid "Action"
-msgstr "Acció"
 
 msgid "view"
 msgstr "visualitza"
@@ -1179,10 +1183,6 @@ msgstr "Aquesta pàgina ja està suprimida o mai s'ha creat."
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Utilitzeu la interfície d'usuari interactiva per a suprimir pàgines."
 
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "S'ha suprimit la pàgina «%s» amb èxit."
-
 msgid "Really delete this page?"
 msgstr "Esteu segur de voler suprimir aquesta pàgina?"
 
@@ -1339,8 +1339,8 @@ msgstr "Pujada de l'adjuntació «%(filename)s»."
 msgid "Drawing '%(filename)s' saved."
 msgstr "S'ha desat el dibuix «%(filename)s»."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "fa %(hours)dh %(mins)dm"
 
 msgid "(no bookmark set)"
@@ -1522,9 +1522,6 @@ msgstr "Mapa del lloc"
 msgid "Do"
 msgstr "Fes"
 
-msgid "Parent Page"
-msgstr "Pàgina pare"
-
 msgid "Edit (Text)"
 msgstr "Edita (text)"
 
@@ -1558,9 +1555,6 @@ msgstr "O proveu amb una d'aquestes accions:"
 
 msgid "Page"
 msgstr "Pàgina"
-
-msgid "Trail"
-msgstr "Recorregut"
 
 msgid "User"
 msgstr "Usuari"
@@ -1661,6 +1655,12 @@ msgstr "Reanomena la pàgina"
 
 msgid "SpellCheck"
 msgstr "Comprovació ortogràfica"
+
+#~ msgid "Parent Page"
+#~ msgstr "Pàgina pare"
+
+#~ msgid "Trail"
+#~ msgstr "Recorregut"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-23 13:33+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-10-30 01:56 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -213,8 +213,9 @@ msgstr ""
 "2 [[Verbatim(==)]]; [[Verbatim(===)]] Título 3 [[Verbatim(===)]];   "
 "[[Verbatim(====)]] Título 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título 5 "
 "[[Verbatim(=====)]].\n"
-" Listas:: Espaço com um dos seguintes: * marcadores; 1., a., A., i., I. listas "
-"numeradas; 1.#n começar numeração em n; espaço sozinho identa a linha.\n"
+" Listas:: Espaço com um dos seguintes: * marcadores; 1., a., A., i., I. "
+"listas numeradas; 1.#n começar numeração em n; espaço sozinho identa a "
+"linha.\n"
 " Links:: [[Verbatim(PalavrasComIniciaisMaiúsculas)]]; [[Verbatim([\"Aspas "
 "duplas\"])]]; url; [url]; [Título da URL].\n"
 " Tabelas:: || texto da célula |||| texto da célula mesclando duas colunas "
@@ -224,6 +225,13 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "A edição foi cancelada."
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Obrigado por suas mudanças. Sua atenção aos detalhes é apreciada."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Página \"%s\" foi removida com sucesso!"
 
 #, python-format
 msgid ""
@@ -259,7 +267,7 @@ msgid "New page:\n"
 msgstr "Nova página:\n"
 
 msgid "No differences found!\n"
-msgstr "Nenhuma differença encontrada!\n"
+msgstr "Nenhuma diferença encontrada!\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
@@ -335,9 +343,6 @@ msgstr ""
 "Você não podem mudar ACLs nesta página, pois você não tem direitos de "
 "administração sobre ela!"
 
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Obrigado por suas mudanças. Sua atenção aos detalhes é apreciada."
-
 #, python-format
 msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
@@ -399,7 +404,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "UnSubscribe"
-msgstr "RemoverSubscrição"
+msgstr "RemoverInscrição"
 
 msgid "Subscribe"
 msgstr "Subscrever"
@@ -421,7 +426,7 @@ msgstr "Acima"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
-"Publique meu email (não em minha homepage do wiki) nas informações do autor"
+"Publique meu e-mail (não em minha homepage do wiki) nas informações do autor"
 
 msgid "Open editor on double click"
 msgstr "Abra o editor com um duplo clique"
@@ -522,19 +527,6 @@ msgstr "combina"
 msgid "matches"
 msgstr "combinam"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Você saiu com sucesso do sistema (cookie apagado)."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Esta wiki não está habilitada a enviar mensagens de correio eletrônico.\n"
-"Contate o administrador desta wiki para habilitar esta opção."
-
-msgid "Please provide a valid email address!"
-msgstr "Por favor, forneça um endereço de e-mail válido!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -548,10 +540,6 @@ msgstr ""
 "Senha para Login: %s\n"
 "\n"
 "URL do Login: %s/?action=userform&uid=%s\n"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Não foi encontrada nenhuma conta com o endereço '%(email)s!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -574,6 +562,23 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Seus dados da conta do wiki"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Você saiu com sucesso do sistema (cookie apagado)."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Esta wiki não está habilitada a enviar mensagens de correio eletrônico.\n"
+"Contate o administrador desta wiki para habilitar esta opção."
+
+msgid "Please provide a valid email address!"
+msgstr "Por favor, forneça um endereço de e-mail válido!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Não foi encontrada nenhuma conta com o endereço '%(email)s!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -685,6 +690,9 @@ msgstr "Criar Perfil"
 msgid "Mail me my account data"
 msgstr "Envie os dados de minha conta por email"
 
+msgid "Action"
+msgstr "Ação"
+
 msgid "No older revisions available!"
 msgstr "Nenhuma revisão antiga disponível!"
 
@@ -724,7 +732,7 @@ msgid "SHA digest of this page's content is:"
 msgstr "SHA digest para o conteúdo desta página é:"
 
 msgid "The following users subscribed to this page:"
-msgstr "Os seguintes usuários subscreveram esta página:"
+msgstr "Os seguintes usuários se inscreveram nesta página:"
 
 msgid "This page links to the following pages:"
 msgstr "Esta página tem links para as seguintes páginas:"
@@ -743,9 +751,6 @@ msgstr "Editor"
 
 msgid "Comment"
 msgstr "Comentário"
-
-msgid "Action"
-msgstr "Ação"
 
 msgid "view"
 msgstr "visualizar"
@@ -806,22 +811,26 @@ msgid "You must login to add a quicklink."
 msgstr "Você precisa se logar para adicionar links rápidos."
 
 msgid "Your quicklink to this page has been removed."
-msgstr "Sua subscrição a esta página foi removida."
+msgstr "Sua inscrição a esta página foi removida."
 
 msgid "A quicklink to this page has been added for you."
-msgstr "Uma subscrição a esta página foi adicionada por você."
+msgstr "Uma inscrição a esta página foi adicionada por você."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Você não tem permissão para se inscrever em uma página que você não pode ler."
+msgstr ""
+"Você não tem permissão para se inscrever em uma página que você não pode ler."
 
 msgid "This wiki is not enabled for mail processing."
-msgstr "Este wiki não está habilitado a enviar mensagens de correio eletrônico."
+msgstr ""
+"Este wiki não está habilitado a enviar mensagens de correio eletrônico."
 
 msgid "You must log in to use subscribtions."
 msgstr "Você precisa fazer o login antes de se inscrever."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Adicione um endereço de e-mail nas PreferênciasDoUsuário para usar as inscrições."
+msgstr ""
+"Adicione um endereço de e-mail nas PreferênciasDoUsuário para usar as "
+"inscrições."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Sua subscrição a esta página foi removida."
@@ -830,7 +839,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Não é possível remover expressão regular correspondendo a subscrição!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "Edite suas inscrições de páginas nas sua PreferênciasDoUsuário."
+msgstr "Edite suas inscrições de páginas nas PreferênciasDoUsuário."
 
 msgid "You have been subscribed to this page."
 msgstr "Sua inscrição a esta página foi efetivada."
@@ -1029,7 +1038,7 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Um upload nunca irá sobrescrever uma arquivo. Se existir um conflito quanto\n"
+"Um upload nunca irá sobrescrever um arquivo. Se existir um conflito quanto\n"
 "ao nome, você será lembrado sobre o nome do arquivo que você deseja "
 "inserir.\n"
 "Por outro lado, se \"Renomear como\" for deixado em branco, o nome original "
@@ -1169,10 +1178,6 @@ msgstr "Esta página já está removida ou nunca foi criada!"
 
 msgid "Please use the interactive user interface to delete pages!"
 msgstr "Por favor, use a interface interativa para remover páginas!"
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Página \"%s\" foi removida com sucesso!"
 
 msgid "Really delete this page?"
 msgstr "Realmente remover esta página?"
@@ -1332,8 +1337,8 @@ msgid "Drawing '%(filename)s' saved."
 msgstr "Desenho '%(filename)s' salvo."
 
 #, python-format
-msgid "%(hours)dh %(mins)dm ago"
-msgstr "%(hours)dh %(mins)dm atrás"
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm atrás"
 
 msgid "(no bookmark set)"
 msgstr "(nenhum marcador configurado)"
@@ -1514,9 +1519,6 @@ msgstr "Mapa do Site Local"
 msgid "Do"
 msgstr "Fazer"
 
-msgid "Parent Page"
-msgstr "Página Principal"
-
 msgid "Edit (Text)"
 msgstr "Editar (Texto)"
 
@@ -1550,9 +1552,6 @@ msgstr "Ou tente uma da seguintes ações: "
 
 msgid "Page"
 msgstr "Página"
-
-msgid "Trail"
-msgstr "Histórico"
 
 msgid "User"
 msgstr "Usuário"
@@ -1654,6 +1653,12 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "Parent Page"
+#~ msgstr "Página Principal"
+
+#~ msgid "Trail"
+#~ msgstr "Histórico"
 
 #~ msgid ""
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "
