@@ -3,7 +3,7 @@
 """
     MoinMoin - Version Information
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2005 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -13,7 +13,7 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release  = '1.5.0 alpha'
+release  = '1.5.0beta0'
 revision = patchlevel
 
 if __name__ == '__main__':

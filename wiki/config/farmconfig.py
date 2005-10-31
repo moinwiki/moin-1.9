@@ -33,6 +33,16 @@
 # regular expression against the URL of this request - until it matches.
 # Then it loads the <wikiname>.py config for handling that request.
 
+# Important:
+#  * the left part is the wikiname enclosed in double quotes
+#  * the left part must be a valid python module name, so better use only
+#    lower letters "a-z" and "_". Do not use blanks or "-" there!!!
+#  * the right part is the url re, use r"..." for it
+#  * the right part does NOT include "http://" nor "https://" at the beginning
+#  * in the right part ".*" means "everything". Just "*" does not work like
+#    for filenames on the shell / commandline, you must use ".*" as it is a RE.
+#  * in the right part, "^" means "beginning" and "$" means "end"
+
 wikis = [
     # wikiname,     url regular expression (no protocol)
     # Standalone server needs the port e.g. localhost:8000
@@ -87,6 +97,10 @@ class FarmConfig(DefaultConfig):
 
     # Security ----------------------------------------------------------
 
+    # This is checked by some rather critical and potentially harmful actions,
+    # like despam or PackageInstaller action:
+    #superuser = [u"YourName", ]
+    
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
@@ -121,8 +135,8 @@ class FarmConfig(DefaultConfig):
     # page names for system and help pages, those will be used automatically
     # according to the user selected language. [Unicode]
     navi_bar = [
-        # Will use page_front_page, (default FrontPage)
-        u'%(page_front_page)s',
+        # If you want to show your page_front_page here:
+        #u'%(page_front_page)s',
         u'RecentChanges',
         u'FindPage',
         u'HelpContents',
@@ -150,8 +164,12 @@ class FarmConfig(DefaultConfig):
     # Content options ---------------------------------------------------
 
     # Show users hostnames in RecentChanges
-    show_hosts = 1                  
+    show_hosts = 1
 
-    # Charts size, require gdchart (Set to None to disable).
-    chart_options = {'width': 600, 'height': 300}
+    # Show the interwiki name (and link it to page_front_page) in the Theme,
+    # nice for farm setups or when your logo does not show the wiki's name.
+    show_interwiki = 1
+    
+    # Enable graphical charts, requires gdchart.
+    #chart_options = {'width': 600, 'height': 300}
 
