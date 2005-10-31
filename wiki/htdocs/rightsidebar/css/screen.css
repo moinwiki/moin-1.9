@@ -176,7 +176,7 @@ span.sep {
     float: right;
 }
 
-#interwiki :after {
+#interwiki span:after {
     content: ": ";
 }
 
