@@ -35,6 +35,10 @@ class Config(DefaultConfig):
     # Site name, used by default for wiki name-logo [Unicode]
     sitename = u'Untitled Wiki'
 
+    # Wiki logo. You can use an image, text or both. [Unicode]
+    # For no logo or text, use '' - the default is to show the sitename.
+    #logo_string = u'<img src="/wiki/mywiki.png" alt="My Wiki">'
+
     # name of entry page / front page [Unicode], choose one of those:
     
     # a) if most wiki content is in a single language
@@ -43,14 +47,9 @@ class Config(DefaultConfig):
     # b) if wiki content is maintained in many languages
     #page_front_page = u"FrontPage"
 
-    # Wiki logo. You can use an image, text or both. [Unicode]
-    # Example: u'<img src="/wiki/mywiki.png" alt="My Wiki">My Wiki'
-    # For no logo or text, use ''
-    logo_string = sitename
-
     # The interwiki name used in interwiki links
     interwikiname = None
-
+    
 
     # Critical setup  ---------------------------------------------------
 
@@ -78,6 +77,10 @@ class Config(DefaultConfig):
 
     # Security ----------------------------------------------------------
 
+    # This is checked by some rather critical and potentially harmful actions,
+    # like despam or PackageInstaller action:
+    #superuser = [u"YourName", ]
+    
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
@@ -112,8 +115,8 @@ class Config(DefaultConfig):
     # page names for system and help pages, those will be used automatically
     # according to the user selected language. [Unicode]
     navi_bar = [
-        # Will use page_front_page, (default FrontPage)
-        u'%(page_front_page)s',
+        # If you want to show your page_front_page here:
+        #u'%(page_front_page)s',
         u'RecentChanges',
         u'FindPage',
         u'HelpContents',
@@ -143,7 +146,10 @@ class Config(DefaultConfig):
     # Show users hostnames in RecentChanges
     show_hosts = 1                  
 
-    # Charts size, require gdchart (Set to None to disable).
-    chart_options = {'width': 600, 'height': 300}   
-
+    # Show the interwiki name (and link it to page_front_page) in the Theme,
+    # nice for farm setups or when your logo does not show the wiki's name.
+    #show_interwiki = 1
+    
+    # Enable graphical charts, requires gdchart.
+    #chart_options = {'width': 600, 'height': 300}
 

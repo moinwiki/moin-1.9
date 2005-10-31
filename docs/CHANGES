@@ -82,9 +82,8 @@ Version moin--main--1.5:
      * Added sslclientcert auth method (Apache: untested, Twisted: not
        implemented, IIS: no idea). See MoinMoin/auth.py for details.
        Submit a patch if you have improvements.
-     * cfg.superuser is a list of unicode usernames. Currently it is not used
-       by anything, but it will be used e.g. to enable software installation
-       via the wiki.
+     * cfg.superuser is a list of unicode usernames. It is used by some
+       critical operations like despam action or PackageInstaller.
      * removed allowed_actions, we now use actions_excluded only and it
        defaults to [], that means, no action is excluded, everything is
        allowed (limited by ACLs). In case of RenamePage and DeletePage,
@@ -140,7 +139,9 @@ Version moin--main--1.5:
        there first.
 
   Other changes/new features:
-    * Added PackageInstaller and unzipping support (see HelpOnActions/AttachFile for further details). 
+    * Added PackageInstaller and unzipping support (see wiki page
+      HelpOnActions/AttachFile for further details).  PackageInstaller requires
+      the user to be in cfg.superuser list.
      * Added an PackagePages action to simplify the package creation.
     * Added location breadcrumbs - when you are on some subpage, the page
       title parts link to the corresponding parent pages, the last part does
