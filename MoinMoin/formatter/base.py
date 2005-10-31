@@ -76,9 +76,10 @@ class FormatterBase:
             will be used.
         """
         if not self._store_pagelinks or not on or kw.get('generated'): 
-            return
+            return ''
         if not pagename and page:
             pagename = page.page_name
+        pagename = pagename.replace(" ", "_")
         if pagename and pagename not in self.pagelinks:
             self.pagelinks.append(pagename)
 
