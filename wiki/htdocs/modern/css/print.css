@@ -58,7 +58,7 @@ a.interwiki img, a.badinterwiki img {
     float: right;
 }
 
-#interwiki :after {
+#interwiki span:after {
     content: ": ";
 }
 

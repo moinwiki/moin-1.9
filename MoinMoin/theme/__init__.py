@@ -159,7 +159,7 @@ class ThemeBase:
             pagename = wikiutil.getFrontPage(self.request).page_name
             pagename = wikiutil.quoteWikinameURL(pagename)
             link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
-            html = u'<div id="interwiki">%s</div>' % link
+            html = u'<div id="interwiki"><span>%s</span></div>' % link
         return html
         
     def title(self, d):
