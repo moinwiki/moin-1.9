@@ -154,7 +154,7 @@ def url_unquote(s, want_unicode=True):
         s = s.decode(config.charset)
     return s
 
-def parseQueryString(qstr, want_unicode=False):
+def parseQueryString(qstr, want_unicode=True):
     """ Parse a querystring "key=value&..." into a dict.
     """
     is_unicode = isinstance(qstr, unicode)
@@ -165,7 +165,10 @@ def parseQueryString(qstr, want_unicode=False):
         if len(value) < 2:
             v = ''.join(value)
             if want_unicode:
-                v = v.decode(config.charset)
+                try:
+                    v = unicode(v, config.charset)
+                except UnicodeDecodeError:
+                    v = unicode(v, 'iso-8859-1', 'replace')
             values[key] = v
     return values
 
