@@ -1,7 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version moin--main--1.5:
+Version 1.5.0beta1:
     * Requirements changed to require Python >= 2.3. We recommend that
       you use the latest Python release you can get. The reason we
       dropped 2.2.2 support is because no developer or tester uses this
