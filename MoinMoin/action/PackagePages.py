@@ -30,7 +30,7 @@ class PackagePages:
     def allowed(self):
         """ Check if user is allowed to do this. """
         may = self.request.user.may
-        return (self.__class__.__name__ in self.request.cfg.allowed_actions and
+        return (not self.__class__.__name__ in self.request.cfg.actions_excluded and
                 may.write(self.pagename))
     
     def render(self):
@@ -88,7 +88,7 @@ class PackagePages:
         # get directory, and possibly create it
         attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
         fpath = os.path.join(attach_dir, target).encode(config.charset)
-        print fpath
+        #print fpath
         if os.path.exists(fpath):
             raise ActionError(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
                 'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)})
