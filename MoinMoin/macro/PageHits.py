@@ -62,7 +62,6 @@ class PageHits:
             if event[0] <= cacheDate:
                 break
             page = event[2].get('pagename', None)
-            page = page.decode(config.charset)
             if page:
                 hits[page] = hits.get(page, 0) + 1
                 changed = True
