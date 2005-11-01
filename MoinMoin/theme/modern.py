@@ -59,6 +59,7 @@ class Theme(ThemeBase):
             
             # Header
             u'<div id="header">',
+            self.title(d),
             self.msg(d),
             u'</div>',
             
