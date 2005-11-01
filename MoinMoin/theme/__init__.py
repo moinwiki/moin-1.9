@@ -171,9 +171,10 @@ class ThemeBase:
         """
         _ = self.request.getText
         content = []
-        if d['title_link']:
+        if d['title_link']: # having a link means we have a (linked) pagename ONLY as title, not a message title
+                            # XXX this method is rather ugly and should be improved
             curpage = ''
-            segments = d['title_text'].split('/')
+            segments = d['page_name'].split('/') # was: title_text
             for s in segments[:-1]:
                 curpage += s
                 content.append("<li>%s</li>" % Page(self.request, curpage).link_to(self.request, s))
