@@ -12,18 +12,23 @@ What we need
 We need your help again for updating the following (high priority and
 most important stuff is on top of the list):
 
-[X] MoinMoin/i18n/%(lang)s.po file
+[X] MoinMaster:MoinI18n/%(lang)s page (source for the .po file)
 
-[X] "%(lang)s" system pages on the MoinMaster wiki (as we use utf-8
-    now, ALL languages should have their master copies there).
+[X] "%(lang)s" system pages on the MoinMaster wiki
 
 [X] "%(lang)s" help pages on the MoinMaster wiki (optional - would be
     nice, if you had the time)
 
-We need that until 1.12.2004 - because MoinMoin 1.3 will be released
-short after that, so we can include that stuff into the distribution
-archive to make people speaking your language happy. ;)
+We need that until 1.12.2005 - because MoinMoin 1.5 RC1 will be released
+then, so we can include that stuff into the distribution archive to make
+people speaking your language happy. ;)
 
+Please, after translating the current stuff, keep an eye on MoinMaster
+wiki - we are still in the beta phase of 1.5 development and thus, some
+strings in the PO file may still change or get added/deleted.
+
+See http://moinmoin.wikiwikiweb.de/MoinMoinTodo/Release_1.5 for our
+planned release schedule.
 
 Please reply immediately
 ========================
