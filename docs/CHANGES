@@ -77,6 +77,10 @@ Version 1.5.0beta1:
        valid user or None, use it like this:
            from MoinMoin.auth import http, moin_cookie
            auth = [http, moin_cookie]
+     * Added a WhoAmI.py wiki xmlrpc plugin to check whether auth works
+       correctly for xmlrpc. There is a counterpart script WhoAmI.py that
+       uses http auth when calling the xmlrpc plugin, so you can use it to
+       check http auth.
      * cfg.auth_http_enabled was removed, please use cfg.auth instead.
      * http auth now supports "Negotiate" scheme, too
      * Added sslclientcert auth method (Apache: untested, Twisted: not
