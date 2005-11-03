@@ -82,7 +82,7 @@ if __name__ == '__main__':
     langs = languages.keys()
     langs.remove('en') # nothing to do for english, so remove it
 
-    #langs = ['da', 'hr', 'ja', 'nb', 'pt', 'sr', 'sv', ] # for testing
+    #langs = ['de', ] # for testing
 
     import sys
     mail_text = sys.stdin.read()
