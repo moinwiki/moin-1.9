@@ -1358,9 +1358,9 @@ msgstr "Ajout de la pièce jointe « %(filename)s »."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Enregistrement du dessin « %(filename)s »."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "Il y a %(hours)dh %(mins)dm "
+msgstr "il y a %(mins)dm "
 
 msgid "(no bookmark set)"
 msgstr "(aucun signet n'a été défini)"

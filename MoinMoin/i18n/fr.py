@@ -774,6 +774,8 @@ Essayez un autre nom.''',
 '''Ajout de la pièce jointe « %(filename)s ».''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Enregistrement du dessin « %(filename)s ».''',
+'''%(mins)dm ago''':
+'''il y a %(mins)dm ''',
 '''(no bookmark set)''':
 '''(aucun signet n\'a été défini)''',
 '''(currently set to %s)''':
