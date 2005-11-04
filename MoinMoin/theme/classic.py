@@ -108,6 +108,7 @@ class Theme(ThemeBase):
         html = """
 %(config_header1_html)s
 
+<div id="header">
 %(logo_html)s
 %(search_form_html)s
 %(username_html)s
@@ -117,6 +118,7 @@ class Theme(ThemeBase):
 %(iconbar_html)s
 %(navibar_html)s
 %(msg_html)s
+</div>
 
 %(config_header2_html)s
 

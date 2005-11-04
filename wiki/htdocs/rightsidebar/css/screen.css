@@ -35,6 +35,7 @@ span.sep {
 #header {
     background: #e5e5e5;
     border-bottom: 1px solid #9C9C9C;
+    line-height: 1.1em;
 }
 
 #logo {
