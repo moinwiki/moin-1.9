@@ -401,9 +401,9 @@ class visitor(object):
     def do(self, tree):
         self.visit_node_list(tree.childNodes)
 
-    def visit_node_list(self, node):
-        for i in node:
-            self.visit(i)
+    def visit_node_list(self, nodelist):
+        for node in nodelist:
+            self.visit(node)
 
     def visit(self, node):
         nodeType = node.nodeType
@@ -431,8 +431,6 @@ class visitor(object):
 
 
 class strip_whitespace(visitor):
-    def do(self, tree):
-        self.visit_node_list(tree.childNodes)
 
     def visit_element(self, node):
         if node.localName == 'p':
@@ -475,14 +473,12 @@ class convert_tree(visitor):
                 if i == 0 or i == len(text)-1:
                     text[0:0] = [" "] # del?            XXX this is either a bug or a missing comment - what does that mean? why 0:0?
                     i += 1
-                elif (text[i-1][-1] in (" ", "\n",) or
-                      # last char of previous element is whitespace
-                      text[i+1][0] in (" ", "\n",)):
-                      # or first char of next element is whitespace
+                elif text[i-1][-1] in (" ", "\n",):     # last char of previous element is whitespace
                     del text[i]
-                elif (text[i+1] is self.white_space or
-                      # next element is white_space
+                elif (text[i+1] is self.white_space or  # next element is white_space
                       text[i+1] is self.new_line):      # or new_line
+                    del text[i]
+                elif text[i+1][0] in (" ", "\n",):      # first char of next element is whitespace
                     del text[i]
                 else:
                     text[i] = " "
@@ -504,7 +500,6 @@ class convert_tree(visitor):
 
     def visit_element(self, node):
         name = node.localName.lower()
-
         func = getattr(self, "process_" + name,  None)
         if func:
             func(node)
@@ -519,18 +514,18 @@ class convert_tree(visitor):
             self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
                                    # when it gets merged to float text, like word word wordword word word
         
-    def visit_node_list_element_only(self, node):
-        for i in node:
-            if i.nodeType == Node.ELEMENT_NODE:
-                self.visit_element(i)
+    def visit_node_list_element_only(self, nodelist):
+        for node in nodelist:
+            if node.nodeType == Node.ELEMENT_NODE:
+                self.visit_element(node)
 
     def node_list_text_only(self, nodelist):
         result = []
-        for i in nodelist:
-            if i.nodeType == Node.TEXT_NODE:
-                result.append(i.data)
+        for node in nodelist:
+            if node.nodeType == Node.TEXT_NODE:
+                result.append(node.data)
             else:
-                result.extend(self.node_list_text_only(i.childNodes))
+                result.extend(self.node_list_text_only(node.childNodes))
         return "".join(result)
 
     def visit_text(self, node):
