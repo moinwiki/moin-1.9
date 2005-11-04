@@ -26,6 +26,7 @@ function infoinit(){
  // Workaround for just another netscape bug: Fix browser confusion on resize
  // obviously conqueror has a similar problem :-(
  if(kon){ nsfix() }
+ if(old_onload) old_onload();
 }
 
 function untip(){
@@ -74,6 +75,7 @@ function mousemove(e){
 }
 
 // Initialize after loading the page
+old_onload=window.onload
 window.onload=infoinit;
 
 // EOF infobox.js
