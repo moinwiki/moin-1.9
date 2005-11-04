@@ -34,6 +34,12 @@ pre {
 
 /* user interface styles */
 
+#header {
+    margin: 0;
+    padding: 0;
+    line-height: 1.1em;
+}
+
 #logo {
 	/* contains image and/or text link */
 	float: left;
