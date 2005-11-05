@@ -299,6 +299,8 @@ Version 1.5.0beta1:
     * Added html escaping for diff text for RSS feed with diff=1.
     * The distance between page content beginning and the first = heading =
       was much too much. Fixed.
+    * Avoid destroying existing page content when editor is called with
+      template parameter for an existing page.
     
 Version 1.4:
 
