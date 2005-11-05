@@ -1211,14 +1211,14 @@ def send_title(request, text, **keywords):
 %s
 """ % (
         ''.join(user_head),
-        keywords.get('html_head', ''),
         request.theme.html_head({
             'page': page,
             'title': escape(text),
             'sitename': escape(request.cfg.html_pagetitle or request.cfg.sitename),
             'print_mode': keywords.get('print_mode', False),
             'media': keywords.get('media', 'screen'),
-        })
+        }),
+        keywords.get('html_head', ''),
     ))
 
     # Links

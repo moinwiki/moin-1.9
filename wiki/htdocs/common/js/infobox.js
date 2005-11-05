@@ -75,8 +75,7 @@ function mousemove(e){
 }
 
 // Initialize after loading the page
-old_onload=window.onload
-window.onload=infoinit;
+addLoadEvent(infoinit)
 
 // EOF infobox.js
 

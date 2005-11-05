@@ -154,9 +154,9 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
             title % {'pagename': self.split_title(self.request),},
             page=self,
             pagename=self.page_name, msg=status,
-            body_onload=self.lock.locktype and 'countdown()' or '', # broken / bug in Mozilla 1.5, when using #preview
             html_head=self.lock.locktype and (
                 PageEditor._countdown_js % {
+                     'countdown_script': self.request.theme.externalScript('countdown'),
                      'lock_timeout': lock_timeout,
                      'lock_expire': lock_expire,
                      'lock_mins': lock_mins,
