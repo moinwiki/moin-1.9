@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-31 16:40+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -1319,6 +1319,7 @@ msgstr "Piesaistes '%(filename)s' augšupielāde."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Attēls '%(filename)s' saglabāts."
 
+#, python-format
 msgid "%(mins)dm ago"
 msgstr "Pirms %(mins)d min"
 

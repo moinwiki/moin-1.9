@@ -88,6 +88,8 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Náhled''',
 '''GUI Mode''':
 '''GUI Mód''',
+'''Your changes are not saved!''':
+'''Provedené změny nejsou uloženy!''',
 '''Comment:''':
 '''Komentář:''',
 '''<No addition>''':
@@ -96,6 +98,22 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Minimální změna''',
 '''Remove trailing whitespace from each line''':
 '''Odstraň koncové mezery u každého řádku''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Zvýraznění:: [[Verbatim(\'\')]]\'\'kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'tučně kurzíva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'smíšené \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]] a kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vodorovná čára.
+ Nadpisy:: [[Verbatim(=)]] Nadpis 1 [[Verbatim(=)]]; [[Verbatim(==)]] Nadpis 2 [[Verbatim(==)]]; [[Verbatim(===)]] Nadpis 3 [[Verbatim(===)]];   [[Verbatim(====)]] Nadpis 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Nadpis 5 [[Verbatim(=====)]].
+ Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.
+ Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim(["hranaté závorky a dvojité uvozovky"])]]; url; [url]; [url text].
+ Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny mezery za nadpisy a tabulkami.
+
+(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
+''',
 '''Edit was cancelled.''':
 '''Editace byla zrušena.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -426,16 +444,26 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Počty zásahů a editací stránky''',
 '''You are not allowed to revert this page!''':
 '''Nemáte právo vracet změny na této stránce!''',
+'''You must login to add a quicklink.''':
+'''Bez přihlášení nelze přidat pohotový odkaz.''',
 '''Your quicklink to this page has been removed.''':
 '''Odebrali jste tuto stránku z pohotových odkazů.''',
 '''A quicklink to this page has been added for you.''':
 '''Přidali jste si tuto stránku do pohotových odkazů.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nemůžete odebírat stránky, ke kterým nemáte právo čtení.''',
+'''This wiki is not enabled for mail processing.''':
+'''Tato wiki není upravena na posílání emailů.''',
+'''You must log in to use subscribtions.''':
+'''Bez přihlášení nelze odebírat stránky''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele.''',
 '''Your subscribtion to this page has been removed.''':
 '''Váš odběr této stránky byl zrušen.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nemohu zrušit odběr z regulárního výrazu!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Upravte výrazy pro odebírání v NastaveniUzivatele.''',
 '''You have been subscribed to this page.''':
 '''Přihlásili jste se k odběru této stránky.''',
 '''Charts are not available!''':
@@ -521,7 +549,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Filename of attachment not specified!''':
 '''Není zadáno jméno přílohy!''',
 '''Attachment \'%(filename)s\' does not exist!''':
-'''Příloha \'%(filename)s\' neexistujet!''',
+'''Příloha \'%(filename)s\' neexistuje!''',
 '''To refer to attachments on a page, use \'\'\'{{{attachment:filename}}}\'\'\', 
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
@@ -581,12 +609,22 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Příloha \'%(filename)s\' úspěšně instalována.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Instalace \'%(filename)s\' selhala.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Soubor %s není MoinMoin balík.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Příloha \'%(filename)s\' nemohla být rozbalena kvůli nedostatku místa (schází %(space)d kB.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Příloha \'%(filename)s\' nemohla být rozbalena kvůli příliš velkému počtu souborů (schází %(count)d).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Příloha \'%(filename)s\' rozbalena.''',
+'''The file %(target)s is not a .zip file.''':
+'''%(target)s není platný soubor typu .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Příloha \'%(filename)s\'''',
 '''File Name''':
-'''JmenoSouboru''',
+'''Jméno Souboru''',
+'''Modified''':
+'''Změněno''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Neznámy typ souboru, nemohu tuto přílohu přímo zobrazit.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -792,6 +830,10 @@ red=edit''':
 '''Editace (GUI)''',
 '''Immutable Page''':
 '''Neměnná stránka''',
+'''Remove Link''':
+'''Odstranit Odkaz''',
+'''Add Link''':
+'''Přidat Odkaz''',
 '''Attachments''':
 '''Přílohy''',
 '''Show %s days.''':
