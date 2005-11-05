@@ -166,10 +166,16 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
         )
         
         self.request.write(self.request.formatter.startContent("content"))
-        
-        # get the text body for the editor field
-        if form.has_key('template'):
-            # "template" parameter contains the name of the template page
+
+        # Get the text body for the editor field.
+        # TODO: what about deleted pages? show the text of the last revision or use the template?
+        raw_body = ''
+        if self.exists():
+            # If the page exists, we get the text from the page.
+            # TODO: maybe warn if template argument was ignored because the page exists?
+            raw_body = self.get_raw_body()
+        elif form.has_key('template'):
+            # If the page does not exists, we try to get the content from the template parameter.
             template_page = wikiutil.unquoteWikiname(form['template'][0])
             if self.request.user.may.read(template_page):
                 raw_body = Page(self.request, template_page).get_raw_body()
@@ -178,10 +184,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
                 else:
                     self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
             else:
-                raw_body = ''
                 self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
-        else:
-            raw_body = self.get_raw_body()
 
         # Make backup on previews - but not for new empty pages
         if preview and raw_body:
@@ -191,16 +194,6 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
         if not raw_body:
             raw_body = _('Describe %s here.') % (self.page_name,)
 
-        # send text above text area
-        #self.request.write('<p>')
-        #self.request.write(wikiutil.getSysPage(self.request, 'HelpOnFormatting').link_to(self.request))
-        #self.request.write(" | ", wikiutil.getSysPage(self.request, 'InterWiki').link_to(self.request))
-        #if preview is not None and not staytop:
-        #    self.request.write(' | <a href="#preview">%s</a>' % _('Skip to preview'))
-        #self.request.write(' ')
-        #self.request.write(_('[current page size \'\'\'%(size)d\'\'\' bytes]') % {'size': self.size()})
-        #self.request.write('</p>')
-        
         # send form
         self.request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
             self.request.getScriptname(),
