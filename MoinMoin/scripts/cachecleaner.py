@@ -21,18 +21,19 @@
     by the wiki text to html formatter,
 """
 
-base = "." # location of data directory
-fname = 'text_html' # cache filename to delete
+base = "." # directory containing the data directory
+fnames = ['text_html', 'pagelinks', ] # cache filenames to delete
 
 import sys, os
 
-pagesdir = os.path.join(base,'data','pages')
+pagesdir = os.path.join(base, 'data', 'pages')
 for f in os.listdir(pagesdir):
-    cachefile = os.path.join(pagesdir,f,'cache',fname)
-    try:
-        os.remove(cachefile)
-    except:
-        pass
+    for fname in fnames:
+        cachefile = os.path.join(pagesdir, f, 'cache', fname)
+        try:
+            os.remove(cachefile)
+        except:
+            pass
     
 # EOF
 

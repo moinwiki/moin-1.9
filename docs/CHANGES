@@ -11,6 +11,10 @@ Version 1.5.0beta1:
       old python: http://moinmoin.wikiwikiweb.de/NewPythonOnOldLinux
       The hint also does apply to other POSIX style operating systems,
       not only Linux.
+    * We recommend you use MoinMoin/scripts/cachecleaner.py to clean the
+      wiki's cache (see comments at top of the script).
+      The cache will automatically be rebuilt (some operations may take
+      some time when first being used, e.g. linkto: search, so be patient!).
 
   Config Changes:
      * there is a file CHANGES.config with just the recently changed stuff
