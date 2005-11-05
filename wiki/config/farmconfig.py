@@ -169,7 +169,8 @@ class FarmConfig(DefaultConfig):
     # Show the interwiki name (and link it to page_front_page) in the Theme,
     # nice for farm setups or when your logo does not show the wiki's name.
     show_interwiki = 1
-    
+    logo_string = u''
+   
     # Enable graphical charts, requires gdchart.
     #chart_options = {'width': 600, 'height': 300}
 
