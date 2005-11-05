@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-10-30 13:52+0100\n"
-"PO-Revision-Date: 2005-10-04 19:01+0200\n"
+"PO-Revision-Date: 2005-11-05 18:48+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgid "Describe %s here."
 msgstr "Beskriv %s här."
 
 msgid "Check Spelling"
-msgstr "Stavningskoll"
+msgstr "Stavningskontroll"
 
 msgid "Save Changes"
 msgstr "Spara ändringar"
@@ -164,9 +164,8 @@ msgstr "Förhandsgranska"
 msgid "GUI Mode"
 msgstr "Grafiskt läge"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Ingen ny version har sparats eftersom du inte ändrade sidans innehåll!"
+msgstr "Dina ändringar sparas inte!"
 
 msgid "Comment:"
 msgstr "Kommentar:"
@@ -182,7 +181,7 @@ msgid "Trivial change"
 msgstr "Trivial ändring"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Eleminera efterföljande mellanslag från varje rad"
+msgstr "Eliminera efterföljande mellanslag från varje rad"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -361,7 +360,7 @@ msgstr ""
 "den här sidan."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Använd knappen \"Förhandsgranskning\" för att utöka låsperioden."
+msgstr "Använd knappen \"Förhandsgranska\" för att utöka låsperioden."
 
 #, python-format
 msgid ""
@@ -807,7 +806,7 @@ msgstr ""
 "version!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Du måste logga in för att kunna lägga till en snabblänk."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Din snabblänk till den här sidan har tagits bort."
@@ -818,17 +817,14 @@ msgstr "En snabblänk till den här sidan har lagts till åt dig."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du har inte tillåtelse att prenumerera på en sida du inte kan läsa."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Den här wikin har inte eposthantering påslagen.\n"
-"För att få eposthantering påslagen, kontakta wikins ägare."
+msgstr "Den här wikin har inte eposthantering påslagen."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Du måste logga in för att kunna prenumerera på sidor."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Du måste ange din epostadress i AnvändarInställningar för att kunna prenumerera på sidor."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Din prenumeration på den här sidan har avslutats."
@@ -837,7 +833,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Kan inte ta bort reguljär uttrycks-prenumeration!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Redigera de reguljära uttrycken för dina prenumerationer i dina AnvändarInställningar."
 
 msgid "You have been subscribed to this page."
 msgstr "Du prenumerar nu på den här sidan."
@@ -949,7 +945,7 @@ msgid "Lupy search"
 msgstr "Lupy-sökning"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Aktiva trådar"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -1009,10 +1005,10 @@ msgstr ""
 "eftersom den inte är permanent och kan ändras."
 
 msgid "unzip"
-msgstr ""
+msgstr "packa upp"
 
 msgid "install"
-msgstr ""
+msgstr "installera"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1068,13 +1064,11 @@ msgstr "Du har inte tillåtelse att ta bort bilagor från den här sidan."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du har inte tillåtelse att hämta bilagor från den här sidan."
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
+msgstr "Du har inte tillåtelse att packa upp bilagor till den här sidan."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Du har inte tillåtelse att redigera den här sidan."
+msgstr "Du har inte tillåtelse att installera filer."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Du har inte tillåtelse att visa bilagor på den här sidan."
@@ -1085,82 +1079,79 @@ msgstr "Okänd uppladningsförfrågan: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
-msgstr "Bifogade filer för \"%(pagename)s\""
+msgstr "Bilagor till \"%(pagename)s\""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Bilaga \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
+msgstr "Bilagan \"%(target)s\" (fjärrnamn \"%(filename)s\") existerar redan."
 
 #, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
-msgstr ""
-"Bifogad fil '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte "
-"sparade."
+msgstr "Bilagan '%(target)s' (fjärrnamn '%(filename)s') med %(bytes)d byte sparade."
 
 #, python-format
 msgid "Attachment '%(filename)s' deleted."
-msgstr "Bifogad fil '%(filename)s' raderad."
+msgstr "Bilagan '%(filename)s' raderad."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Bifogad fil '%(filename)s' raderad."
+msgstr "Bilagan '%(filename)s' installerad."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Teckningen '%(filename)s' sparad."
+msgstr "Installeringen av \"%(filename)s\" misslyckades."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Filen %s är inte en MoinMoin-paketfil."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
-msgstr ""
+msgstr "Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande filerna skulle bli för stora (%(space)d kB saknas)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
-msgstr ""
+msgstr "Bilagan \"%(filename)s\" kunde inte packas upp eftersom de resulterande filerna skulle bli för många (%(count)d för många)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Bifogad fil '%(filename)s' raderad."
+msgstr "Bilagan \"%(filename)s\" uppackad."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
-msgstr ""
+msgstr "Bilagan \"%(filename)s\" kunde inte packas upp eftersom filerna är för stora, endast är .zip-filer, redan existerar eller ligger i kataloger."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "Filen %(target)s är inte en .zip-fil."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Bilaga \"%(filename)s\""
 
 msgid "Package script:"
-msgstr ""
+msgstr "Paketskript:"
 
-#, fuzzy
 msgid "File Name"
 msgstr "Filnamn"
 
 msgid "Modified"
-msgstr ""
+msgstr "Modifierad"
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Okänd filtyp, kan inte visa bifogad fil direkt."
+msgstr "Okänd filtyp, kan inte visa bilagan direkt."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "bifogad fil:%(filename)s för %(pagename)s"
+msgstr "bilaga:%(filename)s för %(pagename)s"
 
 msgid "You are not allowed to delete this page."
 msgstr "Du har inte tillåtelse att radera den här sidan."
@@ -1271,7 +1262,7 @@ msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
-msgstr "Ladda upp ny bifogad fil \"%(filename)s\""
+msgstr "Ladda upp ny bilaga \"%(filename)s\""
 
 #, python-format
 msgid "Create new drawing \"%(filename)s\""
@@ -1318,15 +1309,15 @@ msgstr "Inga citattecken på %(pagename)s."
 
 #, python-format
 msgid "Upload of attachment '%(filename)s'."
-msgstr "Uppladdning av bifogad fil '%(filename)s'."
+msgstr "Uppladdning av bilaga '%(filename)s'."
 
 #, python-format
 msgid "Drawing '%(filename)s' saved."
 msgstr "Teckningen '%(filename)s' sparad."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "%(hours)dh %(mins)dm sedan"
+msgstr "%(mins)dm sedan"
 
 msgid "(no bookmark set)"
 msgstr "(inget bokmärke satt)"
@@ -1516,10 +1507,10 @@ msgid "Immutable Page"
 msgstr "Skrivskyddad sida"
 
 msgid "Remove Link"
-msgstr ""
+msgstr "Ta bort länk"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Lägg till länk"
 
 msgid "Attachments"
 msgstr "Bilagor"
@@ -1570,7 +1561,7 @@ msgid "Mail sent OK"
 msgstr "Epost skickad korrekt"
 
 msgid "FrontPage"
-msgstr "FramSida"
+msgstr "StartSida"
 
 msgid "RecentChanges"
 msgstr "SenasteÄndringar"
@@ -1640,48 +1631,3 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
-
-#~ msgid "Parent Page"
-#~ msgstr "Föräldrasida"
-
-#~ msgid "Trail"
-#~ msgstr "Spår"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Du har inte skapat en användarprofil än. Välj Användarinställningar i det "
-#~ "övre högre hörnet för att skapa en profil."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "Den här wikin har inte eposthantering påslagen. Kontakta wikins ägare för "
-#~ "att få eposthantering påslagen eller \"Prenumerera\"-ikonen borttagen."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Du har inte angivit någon epostadress i din profil. Klicka på ditt namn "
-#~ "(AnvändarInställningar) i övre högra hörnet och ange en giltig "
-#~ "epostadress."
-
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "För att avsluta prenumerationen, gå till din profil och ta bort posten "
-#~ "som matchar den här sidan från prenumerationslistan."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Maximalt antal tillåtna inkluderingar överskridet**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Kunde inte hitta den refererade sidan: %s**"
-
-#~ msgid "Quicklink"
-#~ msgstr "Snabblänk"

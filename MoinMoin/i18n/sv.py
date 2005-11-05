@@ -75,7 +75,7 @@ Ta en titt på skillnaderna gentemot %(difflink)s för att se vad som har ändra
 '''Describe %s here.''':
 '''Beskriv %s här.''',
 '''Check Spelling''':
-'''Stavningskoll''',
+'''Stavningskontroll''',
 '''Save Changes''':
 '''Spara ändringar''',
 '''Cancel''':
@@ -88,6 +88,8 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Förhandsgranska''',
 '''GUI Mode''':
 '''Grafiskt läge''',
+'''Your changes are not saved!''':
+'''Dina ändringar sparas inte!''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -97,7 +99,7 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Trivial change''':
 '''Trivial ändring''',
 '''Remove trailing whitespace from each line''':
-'''Eleminera efterföljande mellanslag från varje rad''',
+'''Eliminera efterföljande mellanslag från varje rad''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -206,7 +208,7 @@ andre personens ändringar, vilket skulle vara mycket olämpligt!
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
 '''Andra användare kommer att \'\'varnas\'\' tills %(bumptime)s att du redigerar den här sidan.''',
 '''Use the Preview button to extend the locking period.''':
-'''Använd knappen "Förhandsgranskning" för att utöka låsperioden.''',
+'''Använd knappen "Förhandsgranska" för att utöka låsperioden.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
 '''Den här sidan är för närvarande \'\'låst\'\' för redigering av %(owner)s tills %(timestamp)s, alltså för %(mins_valid)d minut(er).''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
@@ -484,16 +486,26 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Sidträffar och ändringar''',
 '''You are not allowed to revert this page!''':
 '''Du har inte tillåtelse att göra så att den här sidan återgår till en äldre version!''',
+'''You must login to add a quicklink.''':
+'''Du måste logga in för att kunna lägga till en snabblänk.''',
 '''Your quicklink to this page has been removed.''':
 '''Din snabblänk till den här sidan har tagits bort.''',
 '''A quicklink to this page has been added for you.''':
 '''En snabblänk till den här sidan har lagts till åt dig.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Du har inte tillåtelse att prenumerera på en sida du inte kan läsa.''',
+'''This wiki is not enabled for mail processing.''':
+'''Den här wikin har inte eposthantering påslagen.''',
+'''You must log in to use subscribtions.''':
+'''Du måste logga in för att kunna prenumerera på sidor.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Du måste ange din epostadress i AnvändarInställningar för att kunna prenumerera på sidor.''',
 '''Your subscribtion to this page has been removed.''':
 '''Din prenumeration på den här sidan har avslutats.''',
 '''Can\'t remove regular expression subscription!''':
 '''Kan inte ta bort reguljär uttrycks-prenumeration!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Redigera de reguljära uttrycken för dina prenumerationer i dina AnvändarInställningar.''',
 '''You have been subscribed to this page.''':
 '''Du prenumerar nu på den här sidan.''',
 '''Charts are not available!''':
@@ -564,6 +576,8 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Aktiverad''',
 '''Lupy search''':
 '''Lupy-sökning''',
+'''Active threads''':
+'''Aktiva trådar''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Var god använd en mer specifik sökterm än {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -594,6 +608,10 @@ since this is subject to change and can break easily.''':
 som visas nedan i listan av filer. 
 Använd \'\'\'INTE\'\'\' {{{[get]}}} länkens URL, 
 eftersom den inte är permanent och kan ändras.''',
+'''unzip''':
+'''packa upp''',
+'''install''':
+'''installera''',
 '''No attachments stored for %(pagename)s''':
 '''Inga bifogade filer på %(pagename)s''',
 '''Edit drawing''':
@@ -627,24 +645,50 @@ originalfilnamnet att användas.''',
 '''Du har inte tillåtelse att ta bort bilagor från den här sidan.''',
 '''You are not allowed to get attachments from this page.''':
 '''Du har inte tillåtelse att hämta bilagor från den här sidan.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Du har inte tillåtelse att packa upp bilagor till den här sidan.''',
+'''You are not allowed to install files.''':
+'''Du har inte tillåtelse att installera filer.''',
 '''You are not allowed to view attachments of this page.''':
 '''Du har inte tillåtelse att visa bilagor på den här sidan.''',
 '''Unsupported upload action: %s''':
 '''Okänd uppladningsförfrågan: %s''',
 '''Attachments for "%(pagename)s"''':
-'''Bifogade filer för "%(pagename)s"''',
+'''Bilagor till "%(pagename)s"''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Bilaga "%(target)s" (fjärrnamn "%(filename)s") existerar redan.''',
+'''Bilagan "%(target)s" (fjärrnamn "%(filename)s") existerar redan.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
-'''Bifogad fil \'%(target)s\' (fjärrnamn \'%(filename)s\') med %(bytes)d byte sparade.''',
+'''Bilagan \'%(target)s\' (fjärrnamn \'%(filename)s\') med %(bytes)d byte sparade.''',
 '''Attachment \'%(filename)s\' deleted.''':
-'''Bifogad fil \'%(filename)s\' raderad.''',
+'''Bilagan \'%(filename)s\' raderad.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Bilagan \'%(filename)s\' installerad.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Installeringen av "%(filename)s" misslyckades.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Filen %s är inte en MoinMoin-paketfil.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Bilagan "%(filename)s" kunde inte packas upp eftersom de resulterande filerna skulle bli för stora (%(space)d kB saknas).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Bilagan "%(filename)s" kunde inte packas upp eftersom de resulterande filerna skulle bli för många (%(count)d för många).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Bilagan "%(filename)s" uppackad.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Bilagan "%(filename)s" kunde inte packas upp eftersom filerna är för stora, endast är .zip-filer, redan existerar eller ligger i kataloger.''',
+'''The file %(target)s is not a .zip file.''':
+'''Filen %(target)s är inte en .zip-fil.''',
 '''Attachment \'%(filename)s\'''':
 '''Bilaga "%(filename)s"''',
+'''Package script:''':
+'''Paketskript:''',
+'''File Name''':
+'''Filnamn''',
+'''Modified''':
+'''Modifierad''',
 '''Unknown file type, cannot display this attachment inline.''':
-'''Okänd filtyp, kan inte visa bifogad fil direkt.''',
+'''Okänd filtyp, kan inte visa bilagan direkt.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''bifogad fil:%(filename)s för %(pagename)s''',
+'''bilaga:%(filename)s för %(pagename)s''',
 '''You are not allowed to delete this page.''':
 '''Du har inte tillåtelse att radera den här sidan.''',
 '''This page is already deleted or was never created!''':
@@ -704,7 +748,7 @@ Pröva ett annat namn.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
 '''Upload new attachment "%(filename)s"''':
-'''Ladda upp ny bifogad fil "%(filename)s"''',
+'''Ladda upp ny bilaga "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Skapa ny teckning "%(filename)s"''',
 '''Edit drawing %(filename)s''':
@@ -730,9 +774,11 @@ Pröva ett annat namn.''',
 '''No quotes on %(pagename)s.''':
 '''Inga citattecken på %(pagename)s.''',
 '''Upload of attachment \'%(filename)s\'.''':
-'''Uppladdning av bifogad fil \'%(filename)s\'.''',
+'''Uppladdning av bilaga \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Teckningen \'%(filename)s\' sparad.''',
+'''%(mins)dm ago''':
+'''%(mins)dm sedan''',
 '''(no bookmark set)''':
 '''(inget bokmärke satt)''',
 '''(currently set to %s)''':
@@ -851,6 +897,10 @@ röd=ändra''',
 '''Redigera (grafiskt)''',
 '''Immutable Page''':
 '''Skrivskyddad sida''',
+'''Remove Link''':
+'''Ta bort länk''',
+'''Add Link''':
+'''Lägg till länk''',
 '''Attachments''':
 '''Bilagor''',
 '''Show %s days.''':
@@ -880,7 +930,7 @@ röd=ändra''',
 '''Mail sent OK''':
 '''Epost skickad korrekt''',
 '''FrontPage''':
-'''FramSida''',
+'''StartSida''',
 '''RecentChanges''':
 '''SenasteÄndringar''',
 '''TitleIndex''':

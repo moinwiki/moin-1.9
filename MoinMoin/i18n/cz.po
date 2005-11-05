@@ -166,9 +166,8 @@ msgstr "Náhled"
 msgid "GUI Mode"
 msgstr "GUI Mód"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Neudělal jste žádnou změnu, stránka neuložena!"
+msgstr "Provedené změny nejsou uloženy!"
 
 msgid "Comment:"
 msgstr "Komentář:"
@@ -186,7 +185,6 @@ msgstr "Minimální změna"
 msgid "Remove trailing whitespace from each line"
 msgstr "Odstraň koncové mezery u každého řádku"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -220,7 +218,9 @@ msgstr ""
 " Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim"
 "([\"hranaté závorky a dvojité uvozovky\"])]]; url; [url]; [url text].\n"
 " Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny "
-"mezery za nadpisy a tabulkami."
+"mezery za nadpisy a tabulkami.\n"
+"\n"
+"(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Editace byla zrušena."
@@ -602,6 +602,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Tato emailová adresa patří již někomu jinému."
 
+
 msgid "User account created!"
 msgstr "Uživatelský účet vytvořen!"
 
@@ -790,7 +791,7 @@ msgid "You are not allowed to revert this page!"
 msgstr "Nemáte právo vracet změny na této stránce!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Bez přihlášení nelze přidat pohotový odkaz."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Odebrali jste tuto stránku z pohotových odkazů."
@@ -801,17 +802,14 @@ msgstr "Přidali jste si tuto stránku do pohotových odkazů."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nemůžete odebírat stránky, ke kterým nemáte právo čtení."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Tato wiki není upravena na posílání emailů.\n"
-"Kontaktujte vlastníka wiki, který to může změnit."
+msgstr "Tato wiki není upravena na posílání emailů."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Bez přihlášení nelze odebírat stránky"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Váš odběr této stránky byl zrušen."
@@ -820,7 +818,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Nemohu zrušit odběr z regulárního výrazu!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Upravte výrazy pro odebírání v NastaveniUzivatele."
 
 msgid "You have been subscribed to this page."
 msgstr "Přihlásili jste se k odběru této stránky."
@@ -975,7 +973,7 @@ msgstr "Není zadáno jméno přílohy!"
 
 #, python-format
 msgid "Attachment '%(filename)s' does not exist!"
-msgstr "Příloha '%(filename)s' neexistujet!"
+msgstr "Příloha '%(filename)s' neexistuje!"
 
 msgid ""
 "To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
@@ -1089,19 +1087,21 @@ msgstr "Instalace '%(filename)s' selhala."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Soubor %s není MoinMoin balík."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
-msgstr ""
+msgstr "Příloha '%(filename)s' nemohla být rozbalena kvůli nedostatku místa "
+"(schází %(space)d kB."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
-msgstr ""
+msgstr "Příloha '%(filename)s' nemohla být rozbalena kvůli příliš velkému "
+"počtu souborů (schází %(count)d)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1115,7 +1115,7 @@ msgstr ""
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "%(target)s není platný soubor typu .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
@@ -1125,10 +1125,10 @@ msgid "Package script:"
 msgstr ""
 
 msgid "File Name"
-msgstr "JmenoSouboru"
+msgstr "Jméno Souboru"
 
 msgid "Modified"
-msgstr ""
+msgstr "Změněno"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Neznámy typ souboru, nemohu tuto přílohu přímo zobrazit."
@@ -1487,12 +1487,11 @@ msgstr "Editace (GUI)"
 msgid "Immutable Page"
 msgstr "Neměnná stránka"
 
-#, fuzzy
 msgid "Remove Link"
-msgstr "Pohotové odkazy"
+msgstr "Odstranit Odkaz"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Přidat Odkaz"
 
 msgid "Attachments"
 msgstr "Přílohy"
@@ -1671,16 +1670,14 @@ msgstr "KontrolaPravopisu"
 #~ msgid "Show Local Site Map"
 #~ msgstr "Mapa lokálního umístění"
 
-#, fuzzy
 #~ msgid "Infos"
 #~ msgstr "Info"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Dotaz nedává smysl"
 
-#, fuzzy
 #~ msgid "Add to Quicklinks"
-#~ msgstr "Pohotové odkazy"
+#~ msgstr "Přidat k Pohotovým odkazům"
 
 #~ msgid "Show Parent"
 #~ msgstr "Předek"

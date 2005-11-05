@@ -88,6 +88,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''预览''',
 '''GUI Mode''':
 '''图形界面模式''',
+'''Your changes are not saved!''':
+'''您的改动有保存!''',
 '''Comment:''':
 '''备注:''',
 '''<No addition>''':
@@ -479,16 +481,26 @@ Contact the owner of the wiki, who can enable email.''':
 '''网页点击次数和编辑次数''',
 '''You are not allowed to revert this page!''':
 '''您不可以把此页恢复成旧版!''',
+'''You must login to add a quicklink.''':
+'''您必须首先登录才能添加快捷链接.''',
 '''Your quicklink to this page has been removed.''':
 '''删除了您对本页的快捷链接.''',
 '''A quicklink to this page has been added for you.''':
 '''本页已加入到您的快捷链接.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''您不能订阅无权阅读的网页!''',
+'''This wiki is not enabled for mail processing.''':
+'''本维基不支持邮件处理.''',
+'''You must log in to use subscribtions.''':
+'''您必须首先登录才能订阅.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''在用户设置中设定您的电子邮件地址后才能订阅.''',
 '''Your subscribtion to this page has been removed.''':
 '''您终止了订阅此页.''',
 '''Can\'t remove regular expression subscription!''':
 '''不能取消用正规表达式定义的订阅!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''在用户设置中编辑订阅正则表达式.''',
 '''You have been subscribed to this page.''':
 '''您已经订阅了此页.''',
 '''Charts are not available!''':
@@ -650,6 +662,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''文件%s不是MoinMoin包.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''附件\'%(filename)s\'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''附件\'%(filename)s\'解压缩失败, 原因是文件解包后太多 (多%(count)d个文件).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''附件\'%(filename)s\'已解压缩(unzip).''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
@@ -756,6 +770,8 @@ Try a different name.''':
 '''上载附件\'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''图片\'%(filename)s\'已保存''',
+'''%(mins)dm ago''':
+'''%(mins)dm分钟前''',
 '''(no bookmark set)''':
 '''(未设置书签)''',
 '''(currently set to %s)''':
@@ -874,6 +890,10 @@ red=edit''':
 '''编辑(图形界面)''',
 '''Immutable Page''':
 '''只读网页''',
+'''Remove Link''':
+'''删除链接''',
+'''Add Link''':
+'''添加链接''',
 '''Attachments''':
 '''附件''',
 '''Show %s days.''':
