@@ -979,7 +979,7 @@ def isPicture(url):
     @return: true if url points to a picture
     """
     extpos = url.rfind(".")
-    return extpos > 0 and url[extpos:].lower() in ['.gif', '.jpg', '.jpeg', '.png']
+    return extpos > 0 and url[extpos:].lower() in ['.gif', '.jpg', '.jpeg', '.png', '.bmp', '.ico', ]
 
 
 def link_tag(request, params, text=None, formatter=None, on=None, **kw):
