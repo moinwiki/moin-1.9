@@ -1,6 +1,9 @@
 MoinMoin Version History
 ========================
 
+Current:
+    * added support for linking to .ico and .bmp
+
 Version 1.5.0beta2:
   Fixes:
     * fix wrong _ in title links (MoinMoinBugs/AddSpaceWikiNameAtHead)
