@@ -23,57 +23,15 @@ import MoinMoin.util.datetime
 ### Javascript code for editor page
 #############################################################################
 
-# This code is internal to allow I18N, else we'd use a .js file;
 # we avoid the "--" operator to make this XHTML happy!
-# TODO: move to external js file, send the translations when we load or
-# set the them as global variables.
 _countdown_js = """
+%(countdown_script)s
 <script type="text/javascript">
-var timeout_min = %(lock_timeout)s;
-var state = 0; // 0: start; 1: long count; 2: short count; 3: timeout; 4/5: blink
-var counter = 0, step = 1, delay = 1;
-
-function countdown() {
-    // change state if counter is down
-    if (counter <= 1) {
-        state += 1
-        if (state == 1) {
-            counter = timeout_min
-            step = 1
-            delay = 60000
-        }
-        if (state == 2) {
-            counter = 60
-            step = 5
-            delay = step * 1000
-        }
-        if (state == 3 || state == 5) {
-            window.status = "%(lock_expire)s"
-            state = 3
-            counter = 1
-            step = 1
-            delay = 500
-        }
-        if (state == 4) {
-            // blink the above text
-            window.status = " "
-            counter = 1
-            delay = 250
-        }
-    }
-
-    // display changes
-    if (state < 3) {
-        var msg
-        if (state == 1) msg = "%(lock_mins)s"
-        if (state == 2) msg = "%(lock_secs)s"
-        window.status = msg.replace(/#/, counter)
-    }
-    counter -= step
-
-    // Set timer for next update
-    setTimeout("countdown()", delay);    
-}
+var countdown_timeout_min = %(lock_timeout)s
+var countdown_lock_expire = "%(lock_expire)s"
+var countdown_lock_mins = "%(lock_mins)s"
+var countdown_lock_secs = "%(lock_secs)s"
+addLoadEvent(countdown)
 </script>
 """
 
@@ -278,6 +236,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
             pagename=self.page_name, msg=status,
             html_head=self.lock.locktype and (
                 _countdown_js % {
+                     'countdown_script': self.request.theme.externalScript('countdown'),
                      'lock_timeout': lock_timeout,
                      'lock_expire': lock_expire,
                      'lock_mins': lock_mins,

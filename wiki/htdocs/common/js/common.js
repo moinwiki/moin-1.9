@@ -2,6 +2,19 @@
 // MoinMoin commonly used JavaScript functions
 //
 
+// use this instead of assigning to window.onload directly:
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      oldonload();
+      func();
+    }
+  }
+}
+
 function can_use_gui_editor() {
     var sAgent = navigator.userAgent.toLowerCase();
  
@@ -85,9 +98,6 @@ function load() {
     
     // Editor stuff
     show_switch2gui();
-    // countdown is available when editing
-    try {countdown()}
-    catch (e) {}
 }
 
 
@@ -99,10 +109,9 @@ function before_unload(evt) {
     catch (e) {}
 }
 
-
 // Initialize after loading the page
-window.onload = load;
+addLoadEvent(load)
 
 // Catch before unloading the page
-window.onbeforeunload = before_unload;
+window.onbeforeunload = before_unload
 
