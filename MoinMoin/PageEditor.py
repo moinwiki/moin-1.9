@@ -130,6 +130,7 @@ class PageEditor(Page):
         _ = self._
         self.request.http_headers(self.request.nocache)
 
+        raw_body = ''
         msg = None
         conflict_msg = None
         edit_lock_message = None
@@ -249,8 +250,9 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
 
         # Get the text body for the editor field.
         # TODO: what about deleted pages? show the text of the last revision or use the template?
-        raw_body = ''
-        if self.exists():
+        if preview is not None:
+            raw_body = self.get_raw_body()
+        elif self.exists():
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
             raw_body = self.get_raw_body()
