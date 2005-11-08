@@ -249,7 +249,7 @@ Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
 '''Show icon toolbar''':
 '''Voir la barre d\'icônes''',
 '''Show top/bottom links in headings''':
-'''Ajouter aux titres des liens vers le haut et le bas de la page''',
+'''Ajouter des liens vers le haut et le bas de la page aux titres''',
 '''Show fancy diffs''':
 '''Affichage amélioré des modifications''',
 '''Add spaces to displayed wiki names''':
@@ -364,7 +364,7 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Please provide your email address. If you lose your login information, you can get it by email.''':
 '''Veuillez indiquer votre adresse électronique. Si vous perdez vos identifiants de connexion, vous pourrez les récupérer par courrier électronique.''',
 '''This email already belongs to somebody else.''':
-'''Cet adresse électronique appartient déjà à quelqu\'un d\'autre.''',
+'''Cette adresse électronique appartient déjà à quelqu\'un d\'autre.''',
 '''User account created!''':
 '''Compte utilisateur créé !''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
@@ -516,7 +516,7 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Submitted form data:''':
 '''Données du formulaire soumis :''',
 '''Search Titles''':
-'''Recherche de titres''',
+'''Recherche de titre''',
 '''Display context of search results''':
 '''Affiche le contexte des résultats de la recherche''',
 '''Case-sensitive searching''':

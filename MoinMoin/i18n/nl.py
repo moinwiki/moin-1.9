@@ -1,95 +1,95 @@
 # -*- coding: utf-8 -*-
-# Text translations for Polski (nl).
+# Text translations for Nederlands (nl).
 # Automatically generated - DO NOT EDIT, edit nl.po instead!
 meta = {
-  'language': """Polski""",
-  'elanguage': """Polish""",
-  'maintainer': """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",
+  'language': """Nederlands""",
+  'elanguage': """Dutch""",
+  'maintainer': """Reinout van Schouwen <reinout@cs.vu.nl>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
 }
 text = {
 '''The backed up content of this page is deprecated and will not be included in search results!''':
-'''Kopia zapasowa zawartości tej strony jest nieważna i nie będzie włączona do rezultatów przeszukiwania''',
+'''De reservekopie van de inhoud van deze pagina is achterhaald, en wordt niet opgenomen in zoekresultaten!''',
 '''Revision %(rev)d as of %(date)s''':
-'''Wersja %(rev)d z %(date)s''',
+'''Versie %(rev)d zoals vanaf %(date)s''',
 '''Redirected from page "%(page)s"''':
-'''Przekazano ze strony "%(page)s"''',
+'''Omgeleid vanaf pagina "%(page)s"''',
 '''This page redirects to page "%(page)s"''':
-'''Ta strona przekazuje na stronę "%(page)s"''',
+'''Deze pagina leidt om naar pagina "%(page)s"''',
 '''~-If you submit this form, the submitted values will be displayed.
 To use this form on other pages, insert a
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
 macro call.-~
 ''':
-'''~-Jeżeli zaakceptujesz dane z formularza, wpisane wartości zostaną wyświetlone.
-Aby użyć tego formularza na innych stronach, wprowadź
+'''~-Als u dit formulier indient dan worden de ingevulde waarden getoond.
+Om dit formulier op andere pagina\'s te gebruiken, voeg een macro-aanroep
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
-makropolecenie.-~
+toe.-~
 ''',
+'''Create New Page''':
+'''Nieuwe pagina aanmaken''',
 '''You are not allowed to view this page.''':
-'''Nie możesz oglądać tej strony.''',
+'''U hebt geen toestemming deze pagina te bekijken.''',
+'''DeleteCache''':
+'''BufferLegen''',
 '''(cached %s)''':
-'''(w pamięci podręcznej %s)''',
+'''(%s gebufferd)''',
 '''You are not allowed to edit this page.''':
-'''Nie możesz zmieniać zawartości tej strony.''',
+'''U hebt geen toestemming deze pagina te bewerken.''',
 '''Page is immutable!''':
-'''Strona nie została zmieniona!''',
+'''Pagina ligt vast!''',
 '''Cannot edit old revisions!''':
-'''Nie można zmieniać starych wersji!''',
+'''Bewerken van oude versies is niet mogelijk!''',
 '''Edit "%(pagename)s"''':
-'''Modyfikuj "%(pagename)s"''',
+'''"%(pagename)s" bewerken''',
 '''Preview of "%(pagename)s"''':
-'''Podgląd "%(pagename)s"''',
+'''Proeflezing van "%(pagename)s"''',
 '''Your edit lock on %(lock_page)s has expired!''':
-'''Blokada strony %(lock_page)s wygasła!''',
+'''Uw slot op %(lock_page)s is verlopen!''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''Blokada strony %(lock_page)s wygaśnie w ciągu # minut.''',
+'''Uw slot op %(lock_page)s verloopt in # minuten.''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''Blokada strony %(lock_page)s wygaśnie w ciągu # sekund.''',
+'''Uw slot op %(lock_page)s verloopt in # seconden.''',
 '''Someone else deleted this page while you were editing!''':
-'''Ktoś inny skasował tę stronę w czasie, kiedy ją modyfikowałeś!''',
+'''Iemand anders heeft deze pagina verwijderd terwijl u hem aan het bewerken was!''',
 '''Someone else changed this page while you were editing!''':
-'''Ktoś inny zmienił zawartość tej strony w czasie, kiedy ją modyfikowałeś!''',
+'''Iemand anders heeft deze pagina veranderd terwijl u hem aan het bewerken was!''',
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
-'''Ktoś inny zapisał tę stronę kiedy ją edytowano!
-Przejrzyj tę stronę i wtedy zapisz. Nie zapisuj jej takiej jaka jest!
-Obejrzyj %(difflink)s aby stwierdzić, co zostało zmienione.''',
+'''Iemand anders heeft deze pagina opgeslagen terwijl u hem aan het bewerken was!
+Herzie de pagina voor u hem opslaat. Bewaar deze pagina niet zoals hij nu is!
+Kijk eerst naar de verschillen van %(difflink)s om te zien wat er is veranderd.''',
 '''[Content of new page loaded from %s]''':
-'''[Zawartość nowej strony zaczerpnięta z %s]''',
+'''[Inhoud van nieuwe pagina geladen van %s]''',
 '''[Template %s not found]''':
-'''[Szablon %s nie znaleziony]''',
+'''[Sjabloon %s niet gevonden]''',
 '''[You may not read %s]''':
-'''[Nie można czytać %s]''',
+'''[Je mag niet lezen %s]''',
 '''Describe %s here.''':
-'''Opisz %s tutaj.''',
+'''Omschrijf %s hier.''',
 '''Check Spelling''':
-'''Sprawdź pisownię''',
+'''Spellingscontrole''',
 '''Save Changes''':
-'''Zachowaj zmiany''',
+'''Wijzigingen opslaan''',
 '''Cancel''':
-'''Anuluj''',
+'''Annuleren''',
 '''By hitting \'\'\'%(save_button_text)s\'\'\' you put your changes under the %(license_link)s.
 If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your changes.''':
-'''Klikając w \'\'\'%(save_button_text)s\'\'\' umieszczasz swoje zmiany pod %(license_link)s.
-Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygnować z wprowadzenia zmian.''',
+'''Als u op \'\'\'%(save_button_text)s\'\'\' klikt plaats u je veranderingen onder de %(license_link)s.
+Als u dat niet wilt, klik \'\'\'%(cancel_button_text)s\'\'\' om u veranderingen te annuleren.''',
 '''Preview''':
-'''Podgląd''',
+'''Proeflezing''',
 '''<No addition>''':
-'''<Bez dodania>''',
+'''<Geen toevoeging>''',
 '''Trivial change''':
-'''Drobna zmiana''',
+'''Triviale wijziging''',
 '''Remove trailing whitespace from each line''':
-'''Usuń puste znaki z przodu każdej linii''',
+'''Witruimte verwijderen aan het einde van elke regel''',
 '''Edit was cancelled.''':
-'''Zmiany zostały anulowane''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona.''',
-'''Page "%s" was successfully deleted!''':
-'''Strona "%s" została pomyślnie skasowana!''',
+'''Bewerking werd geannuleerd.''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -98,42 +98,47 @@ The following page has been changed by %(editor)s:
 %(pagelink)s
 
 ''':
-'''Drogi czytelniku wiki,
+'''Beste Wikigebruiker,
 
-Zasubskrybowałeś stronę wiki lub kategorię wiki na "%(sitename)s" w celu otrzymywania informacji o zmianach.
+U hebt zich geabonneerd op het ontvangen van kennisgevingen over wijzingingen
+van een wikipagina of wikicategorie op "%(sitename)s".
 
-Następująca strona została zaktualizowana przez %(editor)s:
+De volgende pagina is gewijzigd door %(editor)s:
 %(pagelink)s
-
 ''',
 '''The comment on the change is:
 %(comment)s
 
 ''':
-'''Komentarz do zmiany:
+'''Het commentaar bij de wijziging is:
 %(comment)s
-
 ''',
 '''New page:
 ''':
-'''Nowa strona:
+'''Nieuwe pagina:
 ''',
 '''No differences found!
 ''':
-'''Nie znaleziono różnic!
+'''Geen verschillen gevonden!
 ''',
+'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
+'''[%(sitename)s] %(trivial)sBijwerking van "%(pagename)s" door %(username)s''',
 '''Trivial ''':
-'''Drobna ''',
+'''Triviaal ''',
 '''Status of sending notification mails:''':
-'''Stan wysyłki powiadomienia pocztą elektroniczną:''',
+'''Status van het verzenden van kennisgevingen:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## kopia zapasowa strony "%(pagename)s" wprowadzona %(date)s''',
+'''## reservekopie van pagina "%(pagename)s" ingediend op %(date)s''',
+'''Page could not get locked. Unexpected error (errno=%d).''':
+'''Pagina kan niet op slot gedaan worden. Onverwachte fout (foutnr=%d).''',
+'''Page could not get locked. Missing \'current\' file?''':
+'''Pagina kan niet op slot gedaan worden. \'current\'-bestand ontbreekt?''',
 '''You are not allowed to edit this page!''':
-'''Nie możesz zmieniać zawartości tej strony!''',
+'''U hebt geen toestemming voor het bewerken van deze pagina!''',
 '''You cannot save empty pages.''':
-'''Nie możesz zapisywać pustcyh stron.''',
+'''U kunt een lege pagina niet opslaan.''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -144,625 +149,669 @@ Now re-add your changes to the current page contents.
 the content editbox with your version of the page, because that would
 delete the changes of the other person, which is excessively rude!\'\'
 ''':
-'''Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją edytowano.
+'''Sorry, iemand anders heeft deze pagina opgeslagen terwijl u hem aan het bewerken was.
 
-Musisz teraz cofnąć się za pomocą przeglądarki, i skopiować do schowka
-Twoje zmiany. Potem ponownie rozpocznij edycję strony i wklej zawartość
-schowka odpowiednio ją modyfikując wobec zmian uczynionych przez innych.
+Doe het volgende: klik op de knop Terug van uw browser, en knip&plak uw
+wijzigingen daarvandaan. Ga dan met de knop Vooruit terug naar deze
+pagina, en klik nogmaals op TekstBewerken.
+Voeg dan nogmaals u wijzigingen toe aan de hernieuwde inhoud van de pagina.
 
-\'\'Tylko przypadkiem nie zapisuj na siłę swoich zmian, gdyż w ten sposób
-możesz zniszczyć pracę innych, co może grozić wzrostem poziomu agresji!\'\'
+\'\'Vervang niet zomaar de inhoud van het bewerkingsvenster door u eigen tekst, want
+daarmee verwijdert u de veranderingen die de ander heeft gemaakt, en dat is bijzonder onfatsoenlijk!\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
-'''Kopia zapasowa Twoich zmian jest [%(backup_url)s tutaj].''',
+'''Een reservekopie van u veranderingen is [%(backup_url)s hier].''',
 '''You did not change the page content, not saved!''':
-'''Nie zmieniono zawartości strony, nic nie zapisano!''',
+'''U hebt niets veranderd. Niet opgeslagen!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Nie możesz zmieniać ACL tej strony, ponieważ nie masz praw administratora!''',
+'''U kunt op deze pagina geen ACL\'s veranderen want u hebt niet de rechten van een beheerder!''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Blokada założona przez %(owner)s wygasła %(mins_ago)d minut temu, i już możesz śmiało edytować tę stronę.''',
+'''Het slot van %(owner)s is %(mins_ago)d minuten geleden verlopen, en jij hebt nu het slot op deze pagina.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''Inni czytelnicy nie mogą zmieniać tej strony do %(bumptime)s.''',
+'''Andere gebruikers worden \'\'geblokkeerd\'\' van het bewerken van deze pagina tot %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Inni czytelnicy będą ostrzeżeni że edytujesz tę stronę do %(bumptime)s .''',
+'''Andere gebruikers zullen tot %(bumptime)s \'\'gewaarschuwd\'\' worden dat u deze pagina aan het bewerken bent.''',
 '''Use the Preview button to extend the locking period.''':
-'''Użyj przycisku podglądu aby przedłużyć czas blokady.''',
+'''Gebruik de knop Proeflezing om de op-slot-periode te verlengen.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''Ta strona jest obecnie \'\'zablokowana\'\' w celu edycji przez %(owner)sdo  %(timestamp)s, to jest przez %(mins_valid)d minut.''',
+'''Deze pagina is momenteel \'\'op slot\'\' voor bewerking door %(owner)s tot %(timestamp)s, dus gedurende %(mins_valid)d minuten.''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
-'''Ta strona została otwarta do edycji albo ostatni podglądana %(timestamp)s przez %(owner)s.[[BR]]
-\'\'\'Powinno się \'\'powstrzymać od edycji\'\' tej strony przez minimum następne %(mins_valid)d minut,
-aby zapobiec konfliktom w edycji.\'\'\'[[BR]]
-Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
+'''Deze pagina is voor het laatst om %(timestamp)s geopend voor bewerking of proeflezing door %(owner)s.[[BR]]
+\'\'\'U dient nog tenminste %(mins_valid)d minuten te \'\'wachten met bewerken\'\'
+van deze pagina om bewerkingsconflicten te voorkomen.\'\'\'[[BR]]
+Klik op Annuleren om de bewerking te staken.''',
 '''<unknown>''':
-'''<nieznany>''',
+'''<onbekend>''',
 '''Diffs''':
-'''Różnice''',
+'''Verschillen''',
 '''Info''':
-'''Info''',
+'''Informatie''',
 '''Edit''':
-'''Edycja''',
+'''Bewerken''',
 '''UnSubscribe''':
-'''Zaprzestań subskrybcji''',
+'''Opzeggen''',
 '''Subscribe''':
-'''Zasubskrybuj''',
+'''Abonneren''',
 '''Raw''':
-'''Surowy''',
+'''Brontekst''',
 '''XML''':
 '''XML''',
 '''Print''':
-'''Drukuj''',
+'''Afdrukken''',
 '''View''':
-'''Zobacz''',
+'''Bekijken''',
 '''Up''':
-'''Góra''',
+'''Omhoog''',
 '''Open editor on double click''':
-'''Otwórz edytor podwójnym kliknięciem''',
+'''Editor openen bij dubbelklik''',
 '''Remember last page visited''':
-'''Zapamiętaj ostatnią odwiedzoną stronę''',
+'''De laatstbezochte pagina onthouden''',
 '''Show question mark for non-existing pagelinks''':
-'''Pokaż znaki zapytania dla nieistniejących jeszcze stron''',
+'''Vraagteken tonen voor verwijzingen naar niet-bestaande pagina\'s''',
 '''Show page trail''':
-'''Pokaż ślad strony''',
+'''Paginaspoor tonen''',
 '''Show icon toolbar''':
-'''Pokaż pasek narzędziowy''',
+'''Pictogrammenwerkbalk tonen''',
 '''Show top/bottom links in headings''':
-'''Pokaż górne/dolne odnośniki w nagłówkach''',
+'''Verwijzingen naar begin/einde in koppen tonen''',
 '''Show fancy diffs''':
-'''Pokaż ozdobne różnice''',
+'''Mooie verschillenoverzichten tonen''',
 '''Add spaces to displayed wiki names''':
-'''Dodaj spacje do wyświetlanych nazw wiki''',
+'''Spaties toevoegen aan getoonde wikinamen''',
 '''Remember login information''':
-'''Zapamiętaj informacje o czytelniku''',
+'''Aanmeldinformatie onthouden''',
 '''Subscribe to trivial changes''':
-'''Zasubksrybuj drobne zmiany''',
+'''Abonneren op triviale wijzigingen''',
 '''Disable this account forever''':
-'''Wyłącz to konto na zawsze''',
+'''Dit account permanent uitschakelen.''',
 '''Name''':
-'''Nazwa''',
+'''Naam''',
 '''Password''':
-'''Hasło''',
+'''Wachtwoord''',
 '''Password repeat''':
-'''Powtórz hasło''',
+'''Wachtwoord herhalen''',
 '''(Only when changing passwords)''':
-'''(Tylko podczas zmiany hasła)''',
+'''(Alleen bij veranderen van wachtwoord)''',
 '''Email''':
-'''Email''',
+'''E-mail''',
 '''User CSS URL''':
-'''Podaj odnośnik do pliku CSS''',
+'''URL van CSS van gebruiker''',
 '''(Leave it empty for disabling user CSS)''':
-'''(pozostaw pole puste, aby wyłączyć CSS użytkownika)''',
+'''(Leeglaten om geen CSS van gebruiker toe te passen)''',
 '''Editor size''':
-'''Rozmiar edytora''',
+'''Grootte van de editor''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
-'''Nieprawidłowy identyfikator czytelnika {{{\'%s\'}}}.
-Identyfikator może zawierać jakikolwiek znak unikodu, z opcjonalnie 
-jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
+'''Foutieve gebruikersnaam {{{\'%s\'}}}.
+Gebruikersnaam mag ieder Unicode alpha-numeriek karakter bevatten, met optioneel een
+spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 '''You are not allowed to do %s on this page.''':
-'''Nie możesz wykonać %s na tej stronie.''',
+'''Het is u niet toegestaan om %s op deze pagina te doen.''',
 '''Login''':
-'''Login''',
+'''Inloggen''',
 ''' %s and try again.''':
-''' %s i spróbuj ponownie.''',
+''' %s en probeer opnieuw''',
 '''%.2f seconds''':
-''' %.2f sekund.''',
+'''%.2f seconden''',
 '''match''':
-'''porównanie''',
+''' overeenkomst''',
 '''matches''':
-'''porówniania''',
+''' overeenkomsten''',
 '''Cookie deleted. You are now logged out.''':
-'''Ciasteczko skasowane. Wylogowano.''',
+'''Cookie verwijderd. U bent nu uitgelogd.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
-'''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
-Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
+'''Deze wiki is niet ingesteld op het afhandelen van e-mail.
+Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Please provide a valid email address!''':
-'''Podaj prawidłowy adres poczty elektronicznej!''',
+'''Geef een geldig e-mailadres op!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
-'''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
+'''Geen account gevonden dat overeenkomt met het opgegeven e-mailadres \'%(email)s\'!''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
+'''Onbekende gebruikersnaam: {{{"%s"}}}. Geef een gebruikersnaam en wachtwoord op.''',
 '''Missing password. Please enter user name and password.''':
-'''Zapomniano o haśle. Podaj identyfikator i hasło.''',
+'''Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op.''',
 '''Sorry, wrong password.''':
-'''Przykro mi, hasło nieprawidłowe.''',
+'''Sorry, foutief wachtwoord.''',
 '''Bad relogin URL.''':
-'''Niewłaściwy URL logowania.''',
+'''Onjuiste herlogin URL.''',
 '''Unknown user.''':
-'''Nieznany identyfikator czytelnika.''',
+'''Gebruikersnaam onbekend.''',
 '''Empty user name. Please enter a user name.''':
-'''Puste pole identyfikatora. Podaj swój identyfikator''',
+'''Geen gebruikersnaam. Geef een gebruikersnaam!''',
 '''This user name already belongs to somebody else.''':
-'''Niniejsza nazwa należy do kogoś innego.''',
+'''Deze gebruikersnaam is al in gebruik.''',
 '''Passwords don\'t match!''':
-'''Hasła się nie zgadzają!''',
+'''De wachtwoorden komen niet overeen!''',
 '''Please specify a password!''':
-'''Podaj hasło!''',
+'''Geef een wachtwoord!''',
 '''This email already belongs to somebody else.''':
-'''Ten adres poczty elektronicznej należy do kogoś innego.''',
+'''Dit e-mailadres behoort is al in gebruik.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
-'''wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
+'''Het thema \'%(theme_name)s\' kan niet worden geladen!''',
 '''User preferences saved!''':
-'''Ustawienia użytkownika zapisane!''',
+'''Voorkeuren van gebruiker bewaard!''',
 '''Default''':
-'''Domyślny''',
+'''Standaard''',
 '''<Browser setting>''':
-'''<Ustawienia przeglądarki>''',
+'''<Browserinstelling>''',
 '''Save''':
-'''Zachowaj''',
+'''Opslaan''',
 '''Logout''':
-'''Wyjdź''',
+'''Uitloggen''',
 '''Preferred theme''':
-'''Ulubiony wystrój''',
+'''Verkozen opmaak''',
 '''Time zone''':
-'''Strefa czasowa''',
+'''Tijdzone''',
 '''Your time is''':
-'''U Ciebie jest teraz''',
+'''Uw tijd is''',
 '''Server time is''':
-'''Na serwerze jest teraz''',
+'''Tijd op de server is''',
 '''Date format''':
-'''Format daty''',
+'''Datumformaat''',
 '''Preferred language''':
-'''Ulubiony język''',
+'''Voorkeurstaal''',
 '''General options''':
-'''Głowne opcje''',
+'''Algemene opties''',
 '''Quick links''':
-'''Szybkie skróty''',
+'''Snelkoppelingen''',
 '''This list does not work, unless you have entered a valid email address!''':
-'''Ta lista nie działa, dopóki nie podasz prawidłowego adresu poczty elektronicznej!''',
+'''Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''Zasubskrybowane strony wiki (jedno wyrażenie regularne w linii)''',
+'''Geabonneerde wikipagina\'s (één reguliere expressie per regel)''',
 '''Create Profile''':
-'''Utwórz profil''',
+'''Profiel aanmaken''',
 '''Mail me my account data''':
-'''Prześlij do mnie moje dane''',
-'''Action''':
-'''Akcja''',
+'''Stuur me mijn accountgegevens per e-mail''',
 '''No older revisions available!''':
-'''Nie ma starszych wersji!''',
+'''Geen oudere versies aanwezig!''',
 '''Diff for "%s"''':
-'''Różnice "%s"''',
+'''Verschillen voor "%s"''',
 '''Differences between revisions %d and %d''':
-'''Różnice pomiędzy wersjami %d i %d''',
+'''Verschillen tussen versies %d en %d''',
 '''(spanning %d versions)''':
-'''(Spinanie %d wersji)''',
+'''(omvat %d versies)''',
 '''No differences found!''':
-'''Nie znaleziono różnic!''',
+'''Geen verschillen gevonden!''',
 '''The page was saved %(count)d times, though!''':
-'''Strona została zachowana %(count)d razy, wszelako!''',
+'''De pagina is weliswaar %(count)d keer opgeslagen!''',
+'''(ignoring whitespace)''':
+'''(spaties niet meegeteld)''',
 '''Ignore changes in the amount of whitespace''':
-'''Ignoruj zmiany w ilości spacji''',
+'''Wijzigingen in de hoeveelheid witruimte negeren''',
 '''General Information''':
-'''Podstawowe informacje''',
+'''Algemene informatie''',
 '''Page size: %d''':
-'''Rozmiar strony: %d''',
+'''Paginagrootte: %d''',
 '''SHA digest of this page\'s content is:''':
-'''Odcisk SHA niniejszej strony:''',
+'''SHA-waarde van deze pagina is:''',
 '''The following users subscribed to this page:''':
-'''Następujący czytelnicy zasubskrybowali niniejszą stronę:''',
+'''De volgende gebruikers zijn op deze pagina geabonneerd:''',
 '''This page links to the following pages:''':
-'''Niniejsza strona zawiera odnośniki do następujących stron:''',
+'''Deze pagina linkt naar de volgende pagina\'s:<br>''',
 '''Date''':
-'''Data''',
+'''Datum''',
 '''Size''':
-'''Rozmiar''',
+'''Grootte''',
 '''Diff''':
-'''Róznice''',
+'''Verschil''',
 '''Editor''':
-'''Edytor''',
+'''Bewerker''',
 '''Comment''':
-'''Komentarz''',
+'''Commentaar''',
+'''Action''':
+'''Actie''',
 '''view''':
-'''Zobacz''',
+'''bekijken''',
 '''raw''':
-'''surowy''',
+'''brontekst''',
 '''print''':
-'''drukuj''',
+'''afdrukken''',
 '''revert''':
-'''przywróć''',
+'''herstellen''',
 '''Revert to revision %(rev)d.''':
-'''Przywróć wersję %(rev)d.''',
+'''Terugzetten naar versie %(rev)d.''',
 '''edit''':
-'''edytuj''',
+'''bewerken''',
 '''get''':
-'''pobierz''',
+'''ophalen''',
 '''del''':
-'''usuń''',
+'''verwijderen''',
 '''N/A''':
-'''N/D''',
+'''n.v.t.''',
 '''Revision History''':
-'''Histora zmian''',
+'''Geschiedenis van revisies''',
 '''No log entries found.''':
-'''Nie znaleziono wpisów do dziennika.''',
+'''Geen logboekaantekeningen gevonden.''',
 '''Info for "%s"''':
-'''Informacja o "%s"''',
+'''Informatie voor "%s"''',
 '''Show "%(title)s"''':
-'''Pokaż "%(title)s"''',
+'''Toon "%(title)s"''',
 '''General Page Infos''':
-'''Główne informacje o stronie''',
+'''Algemene pagina-informatie''',
 '''Show chart "%(title)s"''':
-'''Pokaż wykres "%(title)s"''',
+'''Toon diagram "%(title)s"''',
 '''Page hits and edits''':
-'''Ilość odsłon i edycji''',
+'''Aantal raadplegingen en bewerkingen''',
 '''You are not allowed to revert this page!''':
-'''Nie możesz przywracać tej strony!''',
+'''U hebt geen toestemming om deze pagina terug te zetten!''',
+'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
+'''U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in de hoek rechtsboven voor het aanmaken van een profiel.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Nie możesz subskrybować strony, której nie możesz przeczytać.''',
+'''U hebt geen toestemming zich te abonneren op een pagina die u niet kunt lezen.''',
+'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
+'''Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail opstarten, of het pictogram "Abonneren" verwijderen.''',
+'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
+'''U hebt geen e-mailadres opgegeven in u profiel. Kies u naam (UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres.''',
 '''Your subscribtion to this page has been removed.''':
-'''Subskrybcja tej strony przez Ciebie została usunięta.''',
+'''Uw abonnement op deze pagina is ongedaan gemaakt.''',
 '''Can\'t remove regular expression subscription!''':
-'''Nie można usunąć subskrybcji wyrażenia skończonego!''',
+'''Kan geen reguliere expressie-abonnement verwijderen!''',
 '''You have been subscribed to this page.''':
-'''Rezygnacja z subskrybcji została przyjęta.''',
+'''U bent geabonneerd op deze pagina.''',
 '''Charts are not available!''':
-'''Wykresy nie są dostępne!''',
+'''Diagrammen zijn niet beschikbaar!''',
 '''You need to provide a chart type!''':
-'''Podaj rodzaj wykresu!''',
+'''U dient een grafiektype op te geven!''',
 '''Bad chart type "%s"!''':
-'''Nieprawidłowy rodzaj wykresu "%s"!''',
+'''Ongeldig grafiektype "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
-'''Niezbędny brakujący atrybut "%(attrname)s"''',
+'''Benodigd attribuut "%(attrname)s" ontbreekt''',
 '''Submitted form data:''':
-'''Dane przekazane z formularza:''',
+'''Verstuurde gegevens in het formulier:''',
 '''Search Titles''':
-'''Przeszukaj tytuły''',
+'''Titels doorzoeken''',
 '''Display context of search results''':
-'''Pokaż kontekst rezultatu poszukiwań''',
+'''Context van de zoekresultaten tonen''',
 '''Case-sensitive searching''':
-'''Przeszukiwanie z uwzględnieniem wielkości liter''',
+'''Hoodletter-gevoelig zoeken''',
 '''Search Text''':
-'''Szukaj frazy''',
+'''Tekst doorzoeken''',
 '''Go To Page''':
-'''Idź do strony''',
+'''Ga naar Pagina''',
 '''Include system pages''':
-'''Uwzględnij strony systemowe''',
+'''Inclusief systeempagina\'s''',
 '''Exclude system pages''':
-'''Pomiń strony systemowe''',
+'''Exclusief systeempagina\'s''',
 '''Plain title index''':
-'''Indeks tytułów''',
+'''Eenvoudige titelindex''',
 '''XML title index''':
-'''Indeks tytułów XML''',
+'''Titelindex XML''',
 '''Python Version''':
-'''Wersja języka Python''',
+'''Python versie''',
 '''MoinMoin Version''':
-'''Wersja MoinMoin''',
+'''MoinMoin versie''',
 '''Release %s [Revision %s]''':
-'''Wydanie %s [Korekta %s]''',
+'''Uitgave %s [Revisie %s]''',
 '''4Suite Version''':
-'''Wersja 4Suite''',
+'''4Suite versie''',
 '''Number of pages''':
-'''Ilość stron''',
+'''Aantal pagina\'s''',
 '''Number of system pages''':
-'''Ilość stron systemowych''',
+'''Aantal systeempagina\'s''',
 '''Accumulated page sizes''':
-'''Zakumulowana wielkość stron''',
+'''Totale grootte van alle pagina\'s''',
 '''Entries in edit log''':
-'''Pozycji w dzienniku zmian''',
+'''Boekingen in het bewerkingslog''',
 '''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bajtów)''',
+'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
-'''BRAK''',
+'''GEEN''',
 '''Global extension macros''':
-'''Globalne rozszerzenia makropoleceń''',
+'''Globale uitbreidingsmacros''',
 '''Local extension macros''':
-'''Lokalne rozszerzenia makropoleceń''',
+'''Lokale uitbreidingsmacros''',
 '''Global extension actions''':
-'''Globalne rozsrzerzenia operacji''',
+'''Globale uitbreidingsacties''',
 '''Local extension actions''':
-'''Lokalne rozszerzenia operacji''',
+'''Lokale uitbreidingsacties''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)''',
+'''Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{"%s"}}}''',
+'''Gebruik een specifiekere zoekterm dan {{{"%s"}}}!''',
 '''ERROR in regex \'%s\'''':
-'''Błąd w wyrażeniu \'%s\'''',
+'''FOUT in reguliere expressie \'%s\'''',
 '''Bad timestamp \'%s\'''':
-'''Nieprawidłowy datownik binarny \'%s\'''',
+'''Ongeldig datumkenmerk \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
-'''Spodziewane "=" aby podążyć za "%(token)s"''',
+'''Verwacht "=" volgend op "%(token)s"''',
 '''Expected a value for key "%(token)s"''':
-'''Spodziwana wartość dla klucza "%(token)s"''',
+'''Verwacht een waarde voor sleutel "%(token)s"''',
 '''Wiki Markup''':
-'''Język oznaczeń Wiki''',
+'''Wikiopmaak''',
 '''Print View''':
-'''Podgląd wydruku''',
+'''Afdrukvoorbeeld''',
 '''[%d attachments]''':
-'''[%d załączników]''',
+'''[%d bijlagen]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
-'''Istnieje <a href="%(link)s">%(count)s załącznik(ów)</a> do tej strony.''',
+'''Er zijn <a href="%(link)s">%(count)s bijlagen</a> opgeslagen voor deze pagina.''',
 '''Filename of attachment not specified!''':
-'''Nie została podana nazwa pliku załącznika!''',
+'''Bestandsnaam van bijlage ontbreekt!''',
 '''Attachment \'%(filename)s\' does not exist!''':
-'''Załącznik \'%(filename)s\' nie istnieje!''',
+'''Bijlage \'%(filename)s\' bestaat niet!''',
 '''To refer to attachments on a page, use \'\'\'{{{attachment:filename}}}\'\'\', 
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''':
-'''Aby odnieść się do załącznika na stronie, użyj \'\'\'{{{attachment:filename}}}\'\'\', 
-jak pokazano poniżej na liście plików. 
-\'\'\'NIGDY\'\'\' nie używaj URLa {{{[get]}}}, ponieważ odnośnik może się zmienić 
-i spowodować utratę informacji, którą chcesz przekazać.''',
+'''Om op een pagina naar een bijlage te verwijzen, gebruik \'\'\'{{{attachment:filename}}}\'\'\',
+zoals hieronder getoond in de bestandenlijst.
+Gebruik \'\'\'NIET\'\'\' de URL van de verwijzing naar {{{[ophalen]}}},
+omdat deze aan veranderingen onderhevig is en eenvoudig kapot gaat.''',
 '''No attachments stored for %(pagename)s''':
-'''Strona %(pagename)s nie ma żadnyc załączników''',
+'''Geen bijlagen opgeslagen voor %(pagename)s''',
 '''Edit drawing''':
-'''Edytuj rysunek''',
+'''Tekening bewerken''',
 '''Attached Files''':
-'''Załączone pliki''',
+'''Bijlagen''',
 '''You are not allowed to attach a file to this page.''':
-'''Nie możesz załączać plików do niniejszej strony.''',
+'''U hebt geen toestemming voor het plaatsen van bijlagen bij deze pagina.''',
 '''New Attachment''':
-'''Nowy załącznik''',
+'''Nieuwe bijlage''',
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Wgranie pliku do wiki nigdy nie nadpisze istniejącego zbioru. Jeżeli w wiki
-istnieje już plik o identycznej nazwie, musisz zmienić nazwę zbioru, który chcesz wgrać.
-W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta nazwa oryginalna.''',
+'''Het sturen van een bijlage zal nooit een bestaand bestand overschrijven. Als er een naamsconflict
+is dan zul u het bestand dat u wilt inzenden een andere naam moeten geven.Anders, als "Opslaan als" leeg is zal de oorspronkelijke naam van het bestand gebruikt worden.''',
 '''File to upload''':
-'''Plik do przekazania''',
+'''Bestand om op te sturen''',
 '''Upload''':
-'''Przekaż''',
+'''Opsturen''',
 '''File attachments are not allowed in this wiki!''':
-'''Załączniki w postaci plików nie są dozwolne w tym wiki!''',
+'''Bijlagen zijn in deze wiki niet toegestaan!''',
 '''You are not allowed to save a drawing on this page.''':
-'''Nie możesz zachowywać rysunków na niniejszej stronie.''',
+'''U hebt geen toestemming een afbeelding op deze pagina te bewaren.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
-'''W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie.''',
+'''Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en probeer opnieuw.''',
 '''You are not allowed to delete attachments on this page.''':
-'''Nie możesz skasować załączników z tej strony.''',
+'''U hebt geen toestemming bijlages van deze pagina te verwijderen.''',
 '''You are not allowed to get attachments from this page.''':
-'''Nie możesz pobierać załączników z tej strony.''',
+'''U hebt geen toestemming bijlages van deze pagina op te vragen.''',
 '''You are not allowed to view attachments of this page.''':
-'''Nie możesz obejrzeć załączników do tej strony.''',
+'''U hebt geen toestemming bijlagen van deze pagina te bekijken.''',
 '''Unsupported upload action: %s''':
-'''Nieprzewidziany sposób poboru pliku: %s''',
+'''Opsturen niet ondersteund: %s''',
 '''Attachments for "%(pagename)s"''':
-'''Załączniki do "%(pagename)s"''',
+'''Bijlages voor "%(pagename)s"''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') już istnieje.''',
+'''Bijlage \'%(target)s\' bestaat al (naam op de server \'%(filename)s\').''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
-'''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') o wielkości %(bytes)d bajtów zapisany.''',
+'''Bijlage \'%(target)s\' opgeslagen (naam op de server \'%(filename)s\', %(bytes)d bytes).''',
 '''Attachment \'%(filename)s\' deleted.''':
-'''Załącznik \'%(filename)s\' usunięty.''',
+'''Bijlage \'%(filename)s\' verwijderd.''',
 '''Attachment \'%(filename)s\'''':
-'''Załącznik \'%(filename)s\'''',
+'''Bijlage \'%(filename)s\'''',
 '''Unknown file type, cannot display this attachment inline.''':
-'''Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić.''',
+'''Onbekend bestandstype. Deze bijlage kan niet inline worden getoond.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''załącznik:%(filename)s z %(pagename)s''',
+'''bijlage:%(filename)s bij %(pagename)s''',
 '''You are not allowed to delete this page.''':
-'''Nie możesz kasować niniejszej strony.''',
+'''U hebt geen toestemming deze pagina te verwijderen.''',
 '''This page is already deleted or was never created!''':
-'''Niniejsza strona została już skasowana albo nigdy jej nie było!''',
+'''Deze pagina is al gewist of heeft nooit bestaan!''',
 '''Please use the interactive user interface to delete pages!''':
-'''Użyj interkatywnego interfejsu aby usuwać strony!''',
+'''Gebruik de interactieve gebruikersinterface om pagina\'s te verwijderen!''',
+'''Page "%s" was successfully deleted!''':
+'''Verwijderen van pagina "%s" is gelukt!''',
 '''Really delete this page?''':
-'''Czy na pewno usunąć niniejszą stronę?''',
+'''Deze pagina werkelijk verwijderen?''',
 '''Delete''':
-'''Skasować?''',
+'''Verwijderen''',
 '''Optional reason for the deletion''':
-'''Opcjonalna przyczyna usunięcia''',
+'''Eventueel de reden voor deze verwijdering''',
 '''No pages like "%s"!''':
-'''Brak stron w rodzaju "%s"!''',
+'''Geen pagina\'s lijken op "%s"!''',
 '''Exactly one page like "%s" found, redirecting to page.''':
-'''Dokładnie jedna strona typu "%s" została znaleziona, przekazuję Cię na tę stronę.''',
+'''Zoeken op "%s" gaf precies een resultaat, u wordt er nu heengebracht''',
 '''Pages like "%s"''':
-'''Stron w rodzaju "%s"''',
+'''Pagina\'s zoals "%s"''',
 '''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s dla "%(title)s"''',
+'''%(matchcount)d %(matches)s op "%(title)s"''',
 '''Local Site Map for "%s"''':
-'''Mapa "%s"''',
+'''Lokale wegwijzer voor "%s"''',
 '''You are not allowed to rename pages in this wiki!''':
-'''Nie możesz zmieniać nazw stron na tym wiki!''',
+'''U hebt geen toestemming in deze wiki pagina\'s van naam te veranderen!''',
 '''Please use the interactive user interface to rename pages!''':
-'''Użyj interkatywnego interfejsu aby zmieniać nazwy stron!''',
+'''Gebruik de interactieve gebruikersinterface om pagina\'s te hernoemen!''',
 '''Could not rename page because of file system error: %s.''':
-'''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
+'''Kon paginanaam niet wijzigen vanwege systeemfout: %s.''',
 '''Rename Page''':
-'''Zmień nazwę strony''',
+'''Pagina hernoemen''',
 '''New name''':
-'''Nowa nazwa''',
+'''Nieuwe naam''',
 '''Optional reason for the renaming''':
-'''Opcjonalna przyczyna zmiany nazwy''',
+'''Eventueel de reden voor deze hernoeming''',
 '''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
 
 Try a different name.''':
-'''\'\'\'Strona o nazwie {{{\'%s\'}}} już istnieje.\'\'\'
+'''\'\'\'Een pagina met de naam {{{\'%s\'}}} bestaat al.\'\'\'
 
-Spróbuj innej nazwy.''',
+Probeer een andere naam.''',
 '''(including %(localwords)d %(pagelink)s)''':
-'''(zawarto  %(localwords)d %(pagelink)s)''',
+'''(inclusief %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Następujące %(badwords)d wyrazy nie zostały odnalezione w słowniku z %(totalwords)d words%(localwords)s i zostały podświetlone poniżej:''',
+'''De volgende %(badwords)d woorden konden niet gevonden worden in het woordenboek van %(totalwords)d woorden %(localwords)s en zijn hieronder gemarkeerd:''',
 '''Add checked words to dictionary''':
-'''Dodaj sprawdzone słowa do słownika''',
+'''Voeg geselecteerde woorden toe aan het woordenboek''',
 '''No spelling errors found!''':
-'''Nie znaleziono błędów!''',
+'''Geen spelfouten gevonden!''',
 '''You can\'t check spelling on a page you can\'t read.''':
-'''Nie możesz sprawdzać stron, których nie możesz czytać.''',
+'''U kunt geen spelling controleren op een pagina die u niet kunt lezen.''',
 '''Title Search: "%s"''':
-'''Przeszukiwanie tytułów: "%s"''',
+'''In titels zoeken op: "%s"''',
 '''Full Text Search: "%s"''':
-'''Przeszukiwanie pełnotekstowe: "%s"''',
+'''Volledige tekst doorzoeken op: "%s"''',
 '''Full Link List for "%s"''':
-'''Pełna lista odnośników dla "%s"''',
+'''Volledige verwijzingenlijst voor "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
 '''Upload new attachment "%(filename)s"''':
-'''Wgraj nowy załącznik "%(filename)s"''',
+'''Verstuur een nieuwe bijlage "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
-'''Utwórz nowy rysunek "%(filename)s"''',
+'''Nieuwe tekening maken "%(filename)s"''',
 '''Edit drawing %(filename)s''':
-'''Edytuj rysunek %(filename)s''',
+'''Tekening bewerken "%(filename)s"''',
 '''Invalid include arguments "%s"!''':
-'''Nieprawidłowe argumenty "%s"!''',
+'''Ongeldige argumenten voor invoegen "%s"!''',
 '''Nothing found for "%s"!''':
-'''Nic nie znaleziono dla "%s"!''',
+'''Niets gevonden voor "%s"''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
-'''Nieobsługiwany schemat nawigacyjny \'%(scheme)s\'!''',
+'''Navigitiemethode \'%(scheme)s\' niet ondersteund!''',
 '''No parent page found!''':
-'''Nie znaleziono strony nadrzędnej!''',
+'''Geen bovenliggende pagina gevonden!''',
 '''Wiki''':
 '''Wiki''',
 '''Slideshow''':
-'''Pokaz slajdów''',
+'''Diavoorstelling''',
 '''Start''':
 '''Start''',
 '''Slide %(pos)d of %(size)d''':
-'''Slajd %(pos)d z %(size)d''',
+'''Dia %(pos)d van %(size)d''',
 '''No orphaned pages in this wiki.''':
-'''Nie znaleziono stron - bękartów w tym wiki.''',
+'''Geen weespagina\'s in deze wiki.''',
 '''No quotes on %(pagename)s.''':
-'''Brak przytoczeń na %(pagename)s.''',
+'''Geen citaten op %(pagename)s.''',
 '''Upload of attachment \'%(filename)s\'.''':
-'''Przekazanie załącznika \'%(filename)s\'.''',
+'''Versturen van bijlage \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
-'''Rysunek \'%(filename)s\' zachowany.''',
+'''Tekening \'%(filename)s\' opgeslagen.''',
+'''%(hours)dh %(mins)dm ago''':
+'''%(hours)du %(mins)dm geleden''',
 '''(no bookmark set)''':
-'''(brak ustalonych zakładek)''',
+'''(geen bladwijzer ingesteld)''',
 '''(currently set to %s)''':
-'''(obecnie ustawione na %s)''',
+'''(staat op dit moment op %s)''',
 '''Delete Bookmark''':
-'''Usuń zakładkę''',
+'''Bladwijzer verwijderen''',
 '''Set bookmark''':
-'''Ustaw zakładkę''',
+'''Bladwijzer instellen''',
 '''set bookmark''':
-'''ustaw zakładkę''',
+'''bladwijzer instellen''',
 '''[Bookmark reached]''':
-'''[Zakładka osiągnięta]''',
+'''[Bladwijzer bereikt]''',
 '''Markup''':
-'''Znacznik''',
+'''Opmaak''',
 '''Display''':
-'''Pokaż''',
+'''Uiterlijk''',
 '''Filename''':
-'''Nazwa pliku''',
+'''Bestandsnaam''',
 '''Download XML export of this wiki''':
-'''Zgraj wersję XML tego wiki''',
+'''Download een export naar XML van deze wiki''',
 '''No wanted pages in this wiki.''':
-'''Brak poszukiwanych stron w tym wiki.''',
+'''Geen gewenste pagina\'s in deze wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maximum aantal toegestane includes overschreden**''',
+'''**Could not find the referenced page: %s**''':
+'''**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
-'''Spodziewane "%(wanted)s" po "%(key)s", otrzymano "%(token)s"''',
+'''Er werd "%(wanted)s" na "%(key)s" verwacht, er kwam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
-'''Spodziewana wartość całkowita "%(key)s" przed "%(token)s"''',
+'''Er werd een integer "%(key)s" voor "%(token)s" verwacht''',
 '''Expected an integer "%(arg)s" after "%(key)s"''':
-'''Spodziewana wartość całkowita "%(arg)s"  po "%(key)s"''',
+'''Er werd een integer "%(arg)s" na "%(key)s" verwacht''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
-'''Spodziewana wartość koloru "%(arg)s" po "%(key)s"''',
+'''Er werd een kleurwaarde "%(arg)s" na "%(key)s" verwacht''',
 '''%(errortype)s processing error''':
-'''błąd przetwarzania %(errortype)s''',
+'''Verwerkingsfout %(errortype)s''',
 '''%(chart_title)s for %(filterpage)s''':
-'''%(chart_title)s dla %(filterpage)s''',
+'''%(chart_title)s voor %(filterpage)s''',
 '''green=view
 red=edit''':
-'''zielony=podgląd
-czerwony=edycja''',
+'''groen=bekijken
+rood=bewerken''',
 '''date''':
-'''data''',
+'''datum''',
 '''# of hits''':
-'''# odwiedzin''',
+'''# treffers''',
+'''Page Size Distribution''':
+'''Verdeling van de paginagrootte ''',
 '''page size upper bound [bytes]''':
-'''rozmiar strony [bajtów]''',
+'''bovengrens van paginagrootte [bytes]''',
 '''# of pages of this size''':
-'''# stron tego rozmiaru''',
+'''# pagina\'s van deze grootte''',
 '''Others''':
-'''Inni''',
+'''Andere''',
+'''Distribution of User-Agent Types''':
+'''Verdeling van types User-Agent''',
 '''Unsubscribe''':
-'''Rezygnuj z subskrybcji''',
+'''Opzeggen''',
+'''Home''':
+'''Start''',
+'''[RSS]''':
+'''[RSS]''',
+'''[DELETED]''':
+'''[GEWIST]''',
+'''[UPDATED]''':
+'''[HERZIEN]''',
+'''[NEW]''':
+'''[NIEUW]''',
+'''[DIFF]''':
+'''[VERSCHIL]''',
+'''[BOTTOM]''':
+'''[ONDER]''',
+'''[TOP]''':
+'''[BOVEN]''',
 '''Click to do a full-text search for this title''':
-'''kliknij aby poszukać tytułu metodą pełnotekstową''',
+'''Klik hier om in de hele tekst te zoeken naar deze titel''',
 '''Clear message''':
-'''Usuń wiadomość''',
+'''Bericht wissen''',
 '''last edited %(time)s by %(editor)s''':
-'''ostatnio modyfikowane %(time)s przez %(editor)s''',
+'''laatst bewerkt op %(time)s door %(editor)s''',
 '''last modified %(time)s''':
-'''ostatnio modyfikowane %(time)s''',
+'''laatst gewijzigd %(time)s''',
 '''Search:''':
-'''Szukaj:''',
+'''Zoeken:''',
 '''Text''':
 '''Tekst''',
 '''Titles''':
-'''Tytuły''',
+'''Titels''',
 '''More Actions:''':
-'''Więcej operacji:''',
+'''Meer acties:''',
+'''Delete Cache''':
+'''Buffer legen''',
 '''Delete Page''':
-'''Usuń stronę''',
+'''Pagina verwijderen''',
 '''Do''':
-'''Wykonaj''',
+'''Uitvoeren''',
 '''Immutable Page''':
-'''Strona nie zmieniona''',
+'''Vastliggende pagina''',
 '''Show %s days.''':
-'''Pokaż %s dni.''',
+'''Laat %s dagen zien.''',
 '''EditText''':
-'''Edytuj tekst''',
+'''TekstBewerken''',
 '''Immutable page''':
-'''Strona nie zmieniona''',
+'''Vastliggende pagina''',
 '''Or try one of these actions:''':
-'''Lub spróbuj wykonać: ''',
+'''Of probeer een van deze acties: ''',
 '''Page''':
-'''Strona''',
+'''Pagina''',
+'''Trail''':
+'''Spoor''',
 '''User''':
-'''Czytelnik''',
+'''Gebruiker''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
-'''Przepraszam, strona nie została zachowana ze względu na to, że "%(content)s" nie są dozwolone na tej stronie''',
+'''Sorry, kan pagina niet opslaan omdat "%(content)s" in deze wiki niet is toegestaan.''',
 '''Line''':
-'''Linia''',
+'''Regel''',
 '''Deletions are marked like this.''':
-'''Usunięcia zostały oznaczone w ten sposób.''',
+'''Verwijderingen worden op deze manier gemarkeerd.''',
 '''Additions are marked like this.''':
-'''Dodatki zostały oznaczone w ten sposób.''',
+'''Toevoegingen worden op deze manier gemarkeerd.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
-'''Awaria połączenia z serwerem poczty elektronicznej \'%(server)s\' z powodu: %(reason)s''',
+'''Verbinding met de mailserver \'%(server)s\' mislukt: %(reason)s''',
 '''Mail sent OK''':
-'''Poczta została wysłana''',
+'''E-mail correct verzonden''',
 '''FrontPage''':
-'''StronaGłowna''',
+'''VoorPagina''',
 '''RecentChanges''':
-'''OstatnieZmiany''',
+'''RecenteWijzigingen''',
 '''TitleIndex''':
-'''IndeksTytułów''',
+'''IndexVanTitels''',
 '''WordIndex''':
-'''IndeksSłów''',
+'''IndexVanWoorden''',
 '''FindPage''':
-'''ZnajdźStronę''',
+'''PaginaZoeken''',
 '''SiteNavigation''':
-'''NawigacjaWitryny''',
+'''WegWijzer''',
 '''HelpContents''':
-'''KontekstPomocy''',
+'''HelpInhoud''',
 '''HelpOnFormatting''':
-'''PomocFormatowania''',
+'''HelpBijOpmaak''',
 '''UserPreferences''':
-'''PreferencjeCzytelnika''',
+'''GebruikersVoorkeuren''',
 '''WikiLicense''':
-'''LicencjaWiki''',
+'''WikiLicentie''',
 '''MissingPage''':
-'''ZagubionaStrona''',
+'''OntbrekendePagina''',
 '''Mon''':
-'''pon''',
+'''Maa''',
 '''Tue''':
-'''wto''',
+'''Din''',
 '''Wed''':
-'''śro''',
+'''Woe''',
 '''Thu''':
-'''czw''',
+'''Don''',
 '''Fri''':
-'''pią''',
+'''Vrij''',
 '''Sat''':
-'''sob''',
+'''Zat''',
 '''Sun''':
-'''nie''',
+'''Zon''',
 '''AttachFile''':
-'''ZałączPlik''',
+'''BijlageToevoegen''',
 '''DeletePage''':
-'''UsuńStronę''',
+'''PaginaVerwijderen''',
 '''LikePages''':
-'''PodobneStrony''',
+'''GelijkendePaginas''',
 '''LocalSiteMap''':
-'''MapaWitryny''',
+'''LokaleWegwijzer''',
 '''RenamePage''':
-'''ZmieńNazwę''',
+'''PaginaHernoemen''',
 '''SpellCheck''':
-'''SprawdźPisownię''',
+'''Spellingscontrole''',
 }

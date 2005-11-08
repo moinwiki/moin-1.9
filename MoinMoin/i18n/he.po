@@ -1,15 +1,17 @@
-# # Please edit system and help pages ONLY in the moinmaster wiki! For more
-# # information, please see MoinMaster:MoinPagesEditorGroup.
-# #master-page:None
-# #master-date:None
-# acl MoinPagesEditorGroup:read,write,delete,revert All:read
-# format gettext
-# language he
-# MoinMoin translation
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language he
+
+#
+# MoinMoin he system text translation
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.2\n"
+"Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"

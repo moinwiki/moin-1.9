@@ -132,7 +132,7 @@ The following page has been changed by %(editor)s:
 ''':
 '''Hej wikianvändare!
 
-Du har prenumerar på wikisidan eller wikikategorin på "%(sitename)s"
+Du prenumerar på en wikisida eller wikikategori på "%(sitename)s"
 för ändringsnotifiering.
 
 Följande sida har ändrats av %(editor)s:
@@ -627,8 +627,8 @@ conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''En uppladdning kommer aldrig att skriva över en existerande fil. Om
 det blir en namnkonflikt så måste du byta namn på filen som du vill
-ladda upp. Annars, om "Byt namn till"-fältet lämnas tomt, så kommer
-originalfilnamnet att användas.''',
+ladda upp. Om "Byt namn till"-fältet lämnas tomt kommer originalfilnamnet
+att användas.''',
 '''File to upload''':
 '''Fil att ladda upp''',
 '''Rename to''':

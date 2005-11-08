@@ -453,7 +453,7 @@ msgid "Show icon toolbar"
 msgstr "Voir la barre d'icônes"
 
 msgid "Show top/bottom links in headings"
-msgstr "Ajouter aux titres des liens vers le haut et le bas de la page"
+msgstr "Ajouter des liens vers le haut et le bas de la page aux titres"
 
 msgid "Show fancy diffs"
 msgstr "Affichage amélioré des modifications"
@@ -636,7 +636,7 @@ msgstr ""
 "électronique."
 
 msgid "This email already belongs to somebody else."
-msgstr "Cet adresse électronique appartient déjà à quelqu'un d'autre."
+msgstr "Cette adresse électronique appartient déjà à quelqu'un d'autre."
 
 msgid "User account created!"
 msgstr "Compte utilisateur créé !"
@@ -885,7 +885,7 @@ msgid "Submitted form data:"
 msgstr "Données du formulaire soumis :"
 
 msgid "Search Titles"
-msgstr "Recherche de titres"
+msgstr "Recherche de titre"
 
 msgid "Display context of search results"
 msgstr "Affiche le contexte des résultats de la recherche"

@@ -11,38 +11,38 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.3.1\n"
+"Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
-"PO-Revision-Date: 2004-12-27 08:30+0100\n"
-"Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
-"Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
+"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"PO-Revision-Date: 2005-03-13 17:43+0200\n"
+"Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Language: Polski\n"
-"X-Language-in-English: Polish\n"
-"X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
+"X-Language: Nederlands\n"
+"X-Language-in-English: Dutch\n"
+"X-HasWikiMarkup: True\n"
 
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
-"Kopia zapasowa zawartości tej strony jest nieważna i nie będzie włączona do "
-"rezultatów przeszukiwania"
+"De reservekopie van de inhoud van deze pagina is achterhaald, en wordt niet "
+"opgenomen in zoekresultaten!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
-msgstr "Wersja %(rev)d z %(date)s"
+msgstr "Versie %(rev)d zoals vanaf %(date)s"
 
 #, python-format
 msgid "Redirected from page \"%(page)s\""
-msgstr "Przekazano ze strony \"%(page)s\""
+msgstr "Omgeleid vanaf pagina \"%(page)s\""
 
 #, python-format
 msgid "This page redirects to page \"%(page)s\""
-msgstr "Ta strona przekazuje na stronę \"%(page)s\""
+msgstr "Deze pagina leidt om naar pagina \"%(page)s\""
 
 #, python-format
 msgid ""
@@ -51,69 +51,68 @@ msgid ""
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
 "macro call.-~\n"
 msgstr ""
-"~-Jeżeli zaakceptujesz dane z formularza, wpisane wartości zostaną "
-"wyświetlone.\n"
-"Aby użyć tego formularza na innych stronach, wprowadź\n"
+"~-Als u dit formulier indient dan worden de ingevulde waarden getoond.\n"
+"Om dit formulier op andere pagina's te gebruiken, voeg een macro-aanroep\n"
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
-"makropolecenie.-~\n"
+"toe.-~\n"
 
-#, fuzzy
 msgid "Create New Page"
-msgstr "Utwórz profil"
+msgstr "Nieuwe pagina aanmaken"
 
 msgid "You are not allowed to view this page."
-msgstr "Nie możesz oglądać tej strony."
+msgstr "U hebt geen toestemming deze pagina te bekijken."
 
-#, fuzzy
 msgid "DeleteCache"
-msgstr "UsuńStronę"
+msgstr "BufferLegen"
 
 #, python-format
 msgid "(cached %s)"
-msgstr "(w pamięci podręcznej %s)"
+msgstr "(%s gebufferd)"
 
 msgid "You are not allowed to edit this page."
-msgstr "Nie możesz zmieniać zawartości tej strony."
+msgstr "U hebt geen toestemming deze pagina te bewerken."
 
 msgid "Page is immutable!"
-msgstr "Strona nie została zmieniona!"
+msgstr "Pagina ligt vast!"
 
 msgid "Cannot edit old revisions!"
-msgstr "Nie można zmieniać starych wersji!"
+msgstr "Bewerken van oude versies is niet mogelijk!"
 
 #, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty!"
+msgstr "Uw slot is verlopen. Houd rekening met bewerkingsconflicten!"
 
 msgid "Page name is too long, try shorter name."
 msgstr ""
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
-msgstr "Modyfikuj \"%(pagename)s\""
+msgstr "\"%(pagename)s\" bewerken"
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
-msgstr "Podgląd \"%(pagename)s\""
+msgstr "Proeflezing van \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
-msgstr "Blokada strony %(lock_page)s wygasła!"
+msgstr "Uw slot op %(lock_page)s is verlopen!"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "Blokada strony %(lock_page)s wygaśnie w ciągu # minut."
+msgstr "Uw slot op %(lock_page)s verloopt in # minuten."
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "Blokada strony %(lock_page)s wygaśnie w ciągu # sekund."
+msgstr "Uw slot op %(lock_page)s verloopt in # seconden."
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "Ktoś inny skasował tę stronę w czasie, kiedy ją modyfikowałeś!"
+msgstr ""
+"Iemand anders heeft deze pagina verwijderd terwijl u hem aan het bewerken "
+"was!"
 
 msgid "Someone else changed this page while you were editing!"
 msgstr ""
-"Ktoś inny zmienił zawartość tej strony w czasie, kiedy ją modyfikowałeś!"
+"Iemand anders heeft deze pagina veranderd terwijl u hem aan het bewerken was!"
 
 #, python-format
 msgid ""
@@ -121,34 +120,37 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!\n"
 "Have a look at the diff of %(difflink)s to see what has been changed."
 msgstr ""
-"Ktoś inny zapisał tę stronę kiedy ją edytowano!\n"
-"Przejrzyj tę stronę i wtedy zapisz. Nie zapisuj jej takiej jaka jest!\n"
-"Obejrzyj %(difflink)s aby stwierdzić, co zostało zmienione."
+"Iemand anders heeft deze pagina opgeslagen terwijl u hem aan het bewerken "
+"was!\n"
+"Herzie de pagina voor u hem opslaat. Bewaar deze pagina niet zoals hij nu "
+"is!\n"
+"Kijk eerst naar de verschillen van %(difflink)s om te zien wat er is "
+"veranderd."
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[Zawartość nowej strony zaczerpnięta z %s]"
+msgstr "[Inhoud van nieuwe pagina geladen van %s]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[Szablon %s nie znaleziony]"
+msgstr "[Sjabloon %s niet gevonden]"
 
 #, python-format
 msgid "[You may not read %s]"
-msgstr "[Nie można czytać %s]"
+msgstr "[Je mag niet lezen %s]"
 
 #, python-format
 msgid "Describe %s here."
-msgstr "Opisz %s tutaj."
+msgstr "Omschrijf %s hier."
 
 msgid "Check Spelling"
-msgstr "Sprawdź pisownię"
+msgstr "Spellingscontrole"
 
 msgid "Save Changes"
-msgstr "Zachowaj zmiany"
+msgstr "Wijzigingen opslaan"
 
 msgid "Cancel"
-msgstr "Anuluj"
+msgstr "Annuleren"
 
 #, python-format
 msgid ""
@@ -157,37 +159,33 @@ msgid ""
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
-"Klikając w '''%(save_button_text)s''' umieszczasz swoje zmiany pod %"
-"(license_link)s.\n"
-"Jeżeli tego nie chcesz, kliknij '''%(cancel_button_text)s''' aby zrezygnować "
-"z wprowadzenia zmian."
+"Als u op '''%(save_button_text)s''' klikt plaats u je veranderingen onder de "
+"%(license_link)s.\n"
+"Als u dat niet wilt, klik '''%(cancel_button_text)s''' om u veranderingen te "
+"annuleren."
 
 msgid "Preview"
-msgstr "Podgląd"
+msgstr "Proeflezing"
 
 msgid "GUI Mode"
 msgstr ""
 
 #, fuzzy
-msgid "Your changes are not saved!"
-msgstr "Nie zmieniono zawartości strony, nic nie zapisano!"
-
-#, fuzzy
 msgid "Comment:"
-msgstr "Komentarz"
+msgstr "Commentaar"
 
 msgid "<No addition>"
-msgstr "<Bez dodania>"
+msgstr "<Geen toevoeging>"
 
 #, python-format
 msgid "Add to: %(category)s"
 msgstr ""
 
 msgid "Trivial change"
-msgstr "Drobna zmiana"
+msgstr "Triviale wijziging"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Usuń puste znaki z przodu każdej linii"
+msgstr "Witruimte verwijderen aan het einde van elke regel"
 
 #, fuzzy
 msgid ""
@@ -209,32 +207,24 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" Wyróżnienie [[Verbatim('')]]''kursywa''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''pogrubienie'''[[Verbatim(''')]]; [[Verbatim"
-"(''''')]]'''''pogrubiona kursywas'''''[[Verbatim(''''')]]; [[Verbatim"
-"('')]]''mix ''[[Verbatim(''')]]'''''pogrubienie'''[[Verbatim(''')]] i "
-"kursywa''[[Verbatim('')]]; [[Verbatim(----)]] pozioma linia.\n"
-" Nagłówki:: [[Verbatim(=)]] Tytuł 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tytuł "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3  [[Verbatim(===)]];   "
-"[[Verbatim(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 "
-"[[Verbatim(=====)]].\n"
-" Listy:: spacja plus jedno z: * znak wypunktowania; 1., a., A., i., I.  1.#n "
-"rozpoczyna numerowanie od n; spacja pojedyncze wcięcia.\n"
-" Odnośniki: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"nawiasy i "
-"znaki cudzysłowia\"])]]; url; [url]; [url label].\n"
-" Tabele:: || tekst pola |||| tekst na dwa pola ||;    niedopuszczalna jest "
-"spacja po tabelach lub tytułach."
+" Nadruk:: [[Verbatim('')]]''cursief''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''vet'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''vet "
+"cursief'''''[[Verbatim(''''')]]; [[Verbatim('')]]''gemixt ''[[Verbatim"
+"(''')]]'''''vet'''[[Verbatim(''')]] en cursief''[[Verbatim('')]]; [[Verbatim"
+"(----)]] horizontale lijn.\n"
+" Koppen:: [[Verbatim(=)]] Titel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titel 2 "
+"[[Verbatim(==)]]; [[Verbatim(===)]] Titel 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Titel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titel 5 [[Verbatim"
+"(=====)]].\n"
+" Lijsten:: spatie en één van * punten; 1., a., A., i., I. genummerde punten; "
+"1.#n start nummering bij n; spatie alleen springt in.\n"
+" Links:: [[Verbatim(WoordenMetHoofdlettersAanElkaar)]]; [[Verbatim([\"haken "
+"en dubbele aanhalingstekens\"])]];  url; [url]; [url tekst].\n"
+" Tabellen:: || tekst in cel |||| tekst in cel over twee kolommen ||;    geen "
+"witruimte toegestaan na tabellen of titels."
 
 msgid "Edit was cancelled."
-msgstr "Zmiany zostały anulowane"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr ""
-"Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona."
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Strona \"%s\" została pomyślnie skasowana!"
+msgstr "Bewerking werd geannuleerd."
 
 #, python-format
 msgid ""
@@ -247,14 +237,14 @@ msgid ""
 "%(pagelink)s\n"
 "\n"
 msgstr ""
-"Drogi czytelniku wiki,\n"
+"Beste Wikigebruiker,\n"
 "\n"
-"Zasubskrybowałeś stronę wiki lub kategorię wiki na \"%(sitename)s\" w celu "
-"otrzymywania informacji o zmianach.\n"
+"U hebt zich geabonneerd op het ontvangen van kennisgevingen over "
+"wijzingingen\n"
+"van een wikipagina of wikicategorie op \"%(sitename)s\".\n"
 "\n"
-"Następująca strona została zaktualizowana przez %(editor)s:\n"
+"De volgende pagina is gewijzigd door %(editor)s:\n"
 "%(pagelink)s\n"
-"\n"
 
 #, python-format
 msgid ""
@@ -262,25 +252,25 @@ msgid ""
 "%(comment)s\n"
 "\n"
 msgstr ""
-"Komentarz do zmiany:\n"
+"Het commentaar bij de wijziging is:\n"
 "%(comment)s\n"
-"\n"
 
 msgid "New page:\n"
-msgstr "Nowa strona:\n"
+msgstr "Nieuwe pagina:\n"
 
 msgid "No differences found!\n"
-msgstr "Nie znaleziono różnic!\n"
+msgstr "Geen verschillen gevonden!\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)sAktualizacja strony \"%(pagename)s\""
+msgstr ""
+"[%(sitename)s] %(trivial)sBijwerking van \"%(pagename)s\" door %(username)s"
 
 msgid "Trivial "
-msgstr "Drobna "
+msgstr "Triviaal "
 
 msgid "Status of sending notification mails:"
-msgstr "Stan wysyłki powiadomienia pocztą elektroniczną:"
+msgstr "Status van het verzenden van kennisgevingen:"
 
 #, python-format
 msgid "[%(lang)s] %(recipients)s: %(status)s"
@@ -288,24 +278,24 @@ msgstr "[%(lang)s] %(recipients)s: %(status)s"
 
 #, python-format
 msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
-msgstr "## kopia zapasowa strony \"%(pagename)s\" wprowadzona %(date)s"
+msgstr "## reservekopie van pagina \"%(pagename)s\" ingediend op %(date)s"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "Pagina kan niet op slot gedaan worden. Onverwachte fout (foutnr=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
+msgstr "Pagina kan niet op slot gedaan worden. 'current'-bestand ontbreekt?"
 
 msgid "You are not allowed to edit this page!"
-msgstr "Nie możesz zmieniać zawartości tej strony!"
+msgstr "U hebt geen toestemming voor het bewerken van deze pagina!"
 
 msgid "You cannot save empty pages."
-msgstr "Nie możesz zapisywać pustcyh stron."
+msgstr "U kunt een lege pagina niet opslaan."
 
 #, fuzzy
 msgid "You already saved this page!"
-msgstr "Nie możesz zmieniać zawartości tej strony!"
+msgstr "U hebt geen toestemming voor het bewerken van deze pagina!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -318,57 +308,68 @@ msgid ""
 "the content editbox with your version of the page, because that would\n"
 "delete the changes of the other person, which is excessively rude!''\n"
 msgstr ""
-"Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją edytowano.\n"
+"Sorry, iemand anders heeft deze pagina opgeslagen terwijl u hem aan het "
+"bewerken was.\n"
 "\n"
-"Musisz teraz cofnąć się za pomocą przeglądarki, i skopiować do schowka\n"
-"Twoje zmiany. Potem ponownie rozpocznij edycję strony i wklej zawartość\n"
-"schowka odpowiednio ją modyfikując wobec zmian uczynionych przez innych.\n"
+"Doe het volgende: klik op de knop Terug van uw browser, en knip&plak uw\n"
+"wijzigingen daarvandaan. Ga dan met de knop Vooruit terug naar deze\n"
+"pagina, en klik nogmaals op TekstBewerken.\n"
+"Voeg dan nogmaals u wijzigingen toe aan de hernieuwde inhoud van de pagina.\n"
 "\n"
-"''Tylko przypadkiem nie zapisuj na siłę swoich zmian, gdyż w ten sposób\n"
-"możesz zniszczyć pracę innych, co może grozić wzrostem poziomu agresji!''\n"
+"''Vervang niet zomaar de inhoud van het bewerkingsvenster door u eigen "
+"tekst, want\n"
+"daarmee verwijdert u de veranderingen die de ander heeft gemaakt, en dat is "
+"bijzonder onfatsoenlijk!''\n"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
-msgstr "Kopia zapasowa Twoich zmian jest [%(backup_url)s tutaj]."
+msgstr "Een reservekopie van u veranderingen is [%(backup_url)s hier]."
 
 msgid "You did not change the page content, not saved!"
-msgstr "Nie zmieniono zawartości strony, nic nie zapisano!"
+msgstr "U hebt niets veranderd. Niet opgeslagen!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
-"Nie możesz zmieniać ACL tej strony, ponieważ nie masz praw administratora!"
+"U kunt op deze pagina geen ACL's veranderen want u hebt niet de rechten van "
+"een beheerder!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd."
 
 #, python-format
 msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"Blokada założona przez %(owner)s wygasła %(mins_ago)d minut temu, i już "
-"możesz śmiało edytować tę stronę."
+"Het slot van %(owner)s is %(mins_ago)d minuten geleden verlopen, en jij hebt "
+"nu het slot op deze pagina."
 
 #, python-format
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr "Inni czytelnicy nie mogą zmieniać tej strony do %(bumptime)s."
+msgstr ""
+"Andere gebruikers worden ''geblokkeerd'' van het bewerken van deze pagina "
+"tot %(bumptime)s."
 
 #, python-format
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"Inni czytelnicy będą ostrzeżeni że edytujesz tę stronę do %(bumptime)s ."
+"Andere gebruikers zullen tot %(bumptime)s ''gewaarschuwd'' worden dat u deze "
+"pagina aan het bewerken bent."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Użyj przycisku podglądu aby przedłużyć czas blokady."
+msgstr "Gebruik de knop Proeflezing om de op-slot-periode te verlengen."
 
 #, python-format
 msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"Ta strona jest obecnie ''zablokowana'' w celu edycji przez %(owner)sdo  %"
-"(timestamp)s, to jest przez %(mins_valid)d minut."
+"Deze pagina is momenteel ''op slot'' voor bewerking door %(owner)s tot %"
+"(timestamp)s, dus gedurende %(mins_valid)d minuten."
 
 #, python-format
 msgid ""
@@ -379,112 +380,111 @@ msgid ""
 "to avoid editing conflicts.'''[[BR]]\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
-"Ta strona została otwarta do edycji albo ostatni podglądana %(timestamp)s "
-"przez %(owner)s.[[BR]]\n"
-"'''Powinno się ''powstrzymać od edycji'' tej strony przez minimum następne %"
-"(mins_valid)d minut,\n"
-"aby zapobiec konfliktom w edycji.'''[[BR]]\n"
-"Aby opuścić edytor, kliknij w przycisk \"Anuluj\"."
+"Deze pagina is voor het laatst om %(timestamp)s geopend voor bewerking of "
+"proeflezing door %(owner)s.[[BR]]\n"
+"'''U dient nog tenminste %(mins_valid)d minuten te ''wachten met bewerken''\n"
+"van deze pagina om bewerkingsconflicten te voorkomen.'''[[BR]]\n"
+"Klik op Annuleren om de bewerking te staken."
 
 msgid "<unknown>"
-msgstr "<nieznany>"
+msgstr "<onbekend>"
 
 msgid "Diffs"
-msgstr "Różnice"
+msgstr "Verschillen"
 
 msgid "Info"
-msgstr "Info"
+msgstr "Informatie"
 
 msgid "Edit"
-msgstr "Edycja"
+msgstr "Bewerken"
 
 msgid "UnSubscribe"
-msgstr "Zaprzestań subskrybcji"
+msgstr "Opzeggen"
 
 msgid "Subscribe"
-msgstr "Zasubskrybuj"
+msgstr "Abonneren"
 
 msgid "Raw"
-msgstr "Surowy"
+msgstr "Brontekst"
 
 msgid "XML"
 msgstr "XML"
 
 msgid "Print"
-msgstr "Drukuj"
+msgstr "Afdrukken"
 
 msgid "View"
-msgstr "Zobacz"
+msgstr "Bekijken"
 
 msgid "Up"
-msgstr "Góra"
+msgstr "Omhoog"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
 
 msgid "Open editor on double click"
-msgstr "Otwórz edytor podwójnym kliknięciem"
+msgstr "Editor openen bij dubbelklik"
 
 msgid "Remember last page visited"
-msgstr "Zapamiętaj ostatnią odwiedzoną stronę"
+msgstr "De laatstbezochte pagina onthouden"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "Pokaż znaki zapytania dla nieistniejących jeszcze stron"
+msgstr "Vraagteken tonen voor verwijzingen naar niet-bestaande pagina's"
 
 msgid "Show page trail"
-msgstr "Pokaż ślad strony"
+msgstr "Paginaspoor tonen"
 
 msgid "Show icon toolbar"
-msgstr "Pokaż pasek narzędziowy"
+msgstr "Pictogrammenwerkbalk tonen"
 
 msgid "Show top/bottom links in headings"
-msgstr "Pokaż górne/dolne odnośniki w nagłówkach"
+msgstr "Verwijzingen naar begin/einde in koppen tonen"
 
 msgid "Show fancy diffs"
-msgstr "Pokaż ozdobne różnice"
+msgstr "Mooie verschillenoverzichten tonen"
 
 msgid "Add spaces to displayed wiki names"
-msgstr "Dodaj spacje do wyświetlanych nazw wiki"
+msgstr "Spaties toevoegen aan getoonde wikinamen"
 
 msgid "Remember login information"
-msgstr "Zapamiętaj informacje o czytelniku"
+msgstr "Aanmeldinformatie onthouden"
 
 msgid "Subscribe to trivial changes"
-msgstr "Zasubksrybuj drobne zmiany"
+msgstr "Abonneren op triviale wijzigingen"
 
 msgid "Disable this account forever"
-msgstr "Wyłącz to konto na zawsze"
+msgstr "Dit account permanent uitschakelen."
 
 msgid "Name"
-msgstr "Nazwa"
+msgstr "Naam"
 
 #, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Użyj postaci ImięNazwisko"
+msgstr "(Gebruik VoornaamAchternaam)"
 
 msgid "Alias-Name"
 msgstr ""
 
 msgid "Password"
-msgstr "Hasło"
+msgstr "Wachtwoord"
 
 msgid "Password repeat"
-msgstr "Powtórz hasło"
+msgstr "Wachtwoord herhalen"
 
 msgid "(Only when changing passwords)"
-msgstr "(Tylko podczas zmiany hasła)"
+msgstr "(Alleen bij veranderen van wachtwoord)"
 
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
 
 msgid "User CSS URL"
-msgstr "Podaj odnośnik do pliku CSS"
+msgstr "URL van CSS van gebruiker"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(pozostaw pole puste, aby wyłączyć CSS użytkownika)"
+msgstr "(Leeglaten om geen CSS van gebruiker toe te passen)"
 
 msgid "Editor size"
-msgstr "Rozmiar edytora"
+msgstr "Grootte van de editor"
 
 #, python-format
 msgid ""
@@ -492,34 +492,48 @@ msgid ""
 "Name may contain any Unicode alpha numeric character, with optional one\n"
 "space between words. Group page name is not allowed."
 msgstr ""
-"Nieprawidłowy identyfikator czytelnika {{{'%s'}}}.\n"
-"Identyfikator może zawierać jakikolwiek znak unikodu, z opcjonalnie \n"
-"jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona."
+"Foutieve gebruikersnaam {{{'%s'}}}.\n"
+"Gebruikersnaam mag ieder Unicode alpha-numeriek karakter bevatten, met "
+"optioneel een\n"
+"spatie tussen woorden. Groeps paginanaam is niet toegestaan."
 
 #, python-format
 msgid "You are not allowed to do %s on this page."
-msgstr "Nie możesz wykonać %s na tej stronie."
+msgstr "Het is u niet toegestaan om %s op deze pagina te doen."
 
 msgid "Login"
-msgstr "Login"
+msgstr "Inloggen"
 
 #, python-format
 msgid " %s and try again."
-msgstr " %s i spróbuj ponownie."
+msgstr " %s en probeer opnieuw"
 
 #, fuzzy, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
+msgstr "%(hits)d resultaten in %(pages)d doorzochte pagina's ."
 
 #, python-format
 msgid "%.2f seconds"
-msgstr " %.2f sekund."
+msgstr "%.2f seconden"
 
 msgid "match"
-msgstr "porównanie"
+msgstr " overeenkomst"
 
 msgid "matches"
-msgstr "porówniania"
+msgstr " overeenkomsten"
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie verwijderd. U bent nu uitgelogd."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
+"Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten."
+
+msgid "Please provide a valid email address!"
+msgstr "Geef een geldig e-mailadres op!"
 
 #, python-format
 msgid ""
@@ -529,6 +543,12 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"Geen account gevonden dat overeenkomt met het opgegeven e-mailadres '%(email)"
+"s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -545,77 +565,62 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Ciasteczko skasowane. Wylogowano."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.\n"
-"Skontaktuj się z właścicielem, który może tę opcję włączyć."
-
-msgid "Please provide a valid email address!"
-msgstr "Podaj prawidłowy adres poczty elektronicznej!"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Brak odpowiednich kont do podanego adresu '%(email)s'!"
-
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
+msgstr ""
+"Onbekende gebruikersnaam: {{{\"%s\"}}}. Geef een gebruikersnaam en "
+"wachtwoord op."
 
 msgid "Missing password. Please enter user name and password."
-msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
+msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
 
 msgid "Sorry, wrong password."
-msgstr "Przykro mi, hasło nieprawidłowe."
+msgstr "Sorry, foutief wachtwoord."
 
 msgid "Bad relogin URL."
-msgstr "Niewłaściwy URL logowania."
+msgstr "Onjuiste herlogin URL."
 
 msgid "Unknown user."
-msgstr "Nieznany identyfikator czytelnika."
+msgstr "Gebruikersnaam onbekend."
 
 msgid "Empty user name. Please enter a user name."
-msgstr "Puste pole identyfikatora. Podaj swój identyfikator"
+msgstr "Geen gebruikersnaam. Geef een gebruikersnaam!"
 
 msgid "This user name already belongs to somebody else."
-msgstr "Niniejsza nazwa należy do kogoś innego."
+msgstr "Deze gebruikersnaam is al in gebruik."
 
 msgid "Passwords don't match!"
-msgstr "Hasła się nie zgadzają!"
+msgstr "De wachtwoorden komen niet overeen!"
 
 msgid "Please specify a password!"
-msgstr "Podaj hasło!"
+msgstr "Geef een wachtwoord!"
 
 #, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"Lepiej podaj swój adres poczty elektronicznej. Obecni jeżeli zapomnisz "
-"identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą."
+"Geef uw e-mailadres op. Als u uw aanmeldgegevens verliest, kunt u deze per e-"
+"mail weer ontvangen."
 
 msgid "This email already belongs to somebody else."
-msgstr "Ten adres poczty elektronicznej należy do kogoś innego."
+msgstr "Dit e-mailadres behoort is al in gebruik."
 
 msgid "User account created!"
 msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "wystrój '%(theme_name)s' nie może zostać załadowany!"
+msgstr "Het thema '%(theme_name)s' kan niet worden geladen!"
 
 msgid "User preferences saved!"
-msgstr "Ustawienia użytkownika zapisane!"
+msgstr "Voorkeuren van gebruiker bewaard!"
 
 msgid "Default"
-msgstr "Domyślny"
+msgstr "Standaard"
 
 msgid "<Browser setting>"
-msgstr "<Ustawienia przeglądarki>"
+msgstr "<Browserinstelling>"
 
 msgid "the one preferred"
 msgstr ""
@@ -624,309 +629,321 @@ msgid "free choice"
 msgstr ""
 
 msgid "Save"
-msgstr "Zachowaj"
+msgstr "Opslaan"
 
 msgid "Logout"
-msgstr "Wyjdź"
+msgstr "Uitloggen"
 
 msgid "Preferred theme"
-msgstr "Ulubiony wystrój"
+msgstr "Verkozen opmaak"
 
 #, fuzzy
 msgid "Editor Preference"
-msgstr "PreferencjeCzytelnika"
+msgstr "GebruikersVoorkeuren"
 
 msgid "Editor shown on UI"
 msgstr ""
 
 msgid "Time zone"
-msgstr "Strefa czasowa"
+msgstr "Tijdzone"
 
 msgid "Your time is"
-msgstr "U Ciebie jest teraz"
+msgstr "Uw tijd is"
 
 msgid "Server time is"
-msgstr "Na serwerze jest teraz"
+msgstr "Tijd op de server is"
 
 msgid "Date format"
-msgstr "Format daty"
+msgstr "Datumformaat"
 
 msgid "Preferred language"
-msgstr "Ulubiony język"
+msgstr "Voorkeurstaal"
 
 msgid "General options"
-msgstr "Głowne opcje"
+msgstr "Algemene opties"
 
 msgid "Quick links"
-msgstr "Szybkie skróty"
+msgstr "Snelkoppelingen"
 
 msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
-"Ta lista nie działa, dopóki nie podasz prawidłowego adresu poczty "
-"elektronicznej!"
+msgstr "Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!"
 
 msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Zasubskrybowane strony wiki (jedno wyrażenie regularne w linii)"
+msgstr "Geabonneerde wikipagina's (één reguliere expressie per regel)"
 
 msgid "Create Profile"
-msgstr "Utwórz profil"
+msgstr "Profiel aanmaken"
 
 msgid "Mail me my account data"
-msgstr "Prześlij do mnie moje dane"
-
-msgid "Action"
-msgstr "Akcja"
+msgstr "Stuur me mijn accountgegevens per e-mail"
 
 msgid "No older revisions available!"
-msgstr "Nie ma starszych wersji!"
+msgstr "Geen oudere versies aanwezig!"
 
 #, python-format
 msgid "Diff for \"%s\""
-msgstr "Różnice \"%s\""
+msgstr "Verschillen voor \"%s\""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
-msgstr "Różnice pomiędzy wersjami %d i %d"
+msgstr "Verschillen tussen versies %d en %d"
 
 #, python-format
 msgid "(spanning %d versions)"
-msgstr "(Spinanie %d wersji)"
+msgstr "(omvat %d versies)"
 
 msgid "No differences found!"
-msgstr "Nie znaleziono różnic!"
+msgstr "Geen verschillen gevonden!"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
-msgstr "Strona została zachowana %(count)d razy, wszelako!"
+msgstr "De pagina is weliswaar %(count)d keer opgeslagen!"
 
 msgid "(ignoring whitespace)"
-msgstr ""
+msgstr "(spaties niet meegeteld)"
 
 msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignoruj zmiany w ilości spacji"
+msgstr "Wijzigingen in de hoeveelheid witruimte negeren"
 
 msgid "General Information"
-msgstr "Podstawowe informacje"
+msgstr "Algemene informatie"
 
 #, python-format
 msgid "Page size: %d"
-msgstr "Rozmiar strony: %d"
+msgstr "Paginagrootte: %d"
 
 msgid "SHA digest of this page's content is:"
-msgstr "Odcisk SHA niniejszej strony:"
+msgstr "SHA-waarde van deze pagina is:"
 
 msgid "The following users subscribed to this page:"
-msgstr "Następujący czytelnicy zasubskrybowali niniejszą stronę:"
+msgstr "De volgende gebruikers zijn op deze pagina geabonneerd:"
 
 msgid "This page links to the following pages:"
-msgstr "Niniejsza strona zawiera odnośniki do następujących stron:"
+msgstr "Deze pagina linkt naar de volgende pagina's:<br>"
 
 msgid "Date"
-msgstr "Data"
+msgstr "Datum"
 
 msgid "Size"
-msgstr "Rozmiar"
+msgstr "Grootte"
 
 msgid "Diff"
-msgstr "Róznice"
+msgstr "Verschil"
 
 msgid "Editor"
-msgstr "Edytor"
+msgstr "Bewerker"
 
 msgid "Comment"
-msgstr "Komentarz"
+msgstr "Commentaar"
+
+msgid "Action"
+msgstr "Actie"
 
 msgid "view"
-msgstr "Zobacz"
+msgstr "bekijken"
 
 msgid "raw"
-msgstr "surowy"
+msgstr "brontekst"
 
 msgid "print"
-msgstr "drukuj"
+msgstr "afdrukken"
 
 msgid "revert"
-msgstr "przywróć"
+msgstr "herstellen"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
-msgstr "Przywróć wersję %(rev)d."
+msgstr "Terugzetten naar versie %(rev)d."
 
 msgid "edit"
-msgstr "edytuj"
+msgstr "bewerken"
 
 msgid "get"
-msgstr "pobierz"
+msgstr "ophalen"
 
 msgid "del"
-msgstr "usuń"
+msgstr "verwijderen"
 
 msgid "N/A"
-msgstr "N/D"
+msgstr "n.v.t."
 
 msgid "Revision History"
-msgstr "Histora zmian"
+msgstr "Geschiedenis van revisies"
 
 msgid "No log entries found."
-msgstr "Nie znaleziono wpisów do dziennika."
+msgstr "Geen logboekaantekeningen gevonden."
 
 #, python-format
 msgid "Info for \"%s\""
-msgstr "Informacja o \"%s\""
+msgstr "Informatie voor \"%s\""
 
 #, python-format
 msgid "Show \"%(title)s\""
-msgstr "Pokaż \"%(title)s\""
+msgstr "Toon \"%(title)s\""
 
 msgid "General Page Infos"
-msgstr "Główne informacje o stronie"
+msgstr "Algemene pagina-informatie"
 
 #, python-format
 msgid "Show chart \"%(title)s\""
-msgstr "Pokaż wykres \"%(title)s\""
+msgstr "Toon diagram \"%(title)s\""
 
 msgid "Page hits and edits"
-msgstr "Ilość odsłon i edycji"
+msgstr "Aantal raadplegingen en bewerkingen"
 
 msgid "You are not allowed to revert this page!"
-msgstr "Nie możesz przywracać tej strony!"
+msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
 
-msgid "You must login to add a quicklink."
+msgid ""
+"You didn't create a user profile yet. Select UserPreferences in the upper "
+"right corner to create a profile."
 msgstr ""
+"U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in "
+"de hoek rechtsboven voor het aanmaken van een profiel."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
 
 #, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Nie możesz subskrybować strony, której nie możesz przeczytać."
-
-#, fuzzy
-msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.\n"
-"Skontaktuj się z właścicielem, który może tę opcję włączyć."
+"U hebt geen toestemming zich te abonneren op een pagina die u niet kunt "
+"lezen."
 
-msgid "You must log in to use subscribtions."
+msgid ""
+"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
+"who can either enable email, or remove the \"Subscribe\" icon."
 msgstr ""
+"Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op "
+"met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail "
+"opstarten, of het pictogram \"Abonneren\" verwijderen."
 
-msgid "Add your email address in your UserPreferences to use subscriptions."
+msgid ""
+"You didn't enter an email address in your profile. Select your name "
+"(UserPreferences) in the upper right corner and enter a valid email address."
 msgstr ""
+"U hebt geen e-mailadres opgegeven in u profiel. Kies u naam "
+"(UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres."
 
 msgid "Your subscribtion to this page has been removed."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Nie można usunąć subskrybcji wyrażenia skończonego!"
+msgstr "Kan geen reguliere expressie-abonnement verwijderen!"
 
-msgid "Edit the subscription regular expressions in your UserPreferences."
+#, fuzzy
+msgid ""
+"To unsubscribe, go to your profile and delete the item matching this page "
+"from the subscription list."
 msgstr ""
+"Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst "
+"met abonnementen."
 
 msgid "You have been subscribed to this page."
-msgstr "Rezygnacja z subskrybcji została przyjęta."
+msgstr "U bent geabonneerd op deze pagina."
 
 msgid "Charts are not available!"
-msgstr "Wykresy nie są dostępne!"
+msgstr "Diagrammen zijn niet beschikbaar!"
 
 msgid "You need to provide a chart type!"
-msgstr "Podaj rodzaj wykresu!"
+msgstr "U dient een grafiektype op te geven!"
 
 #, python-format
 msgid "Bad chart type \"%s\"!"
-msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
+msgstr "Ongeldig grafiektype \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Niezbędny brakujący atrybut \"%(attrname)s\""
+msgstr "Benodigd attribuut \"%(attrname)s\" ontbreekt"
 
 msgid "Submitted form data:"
-msgstr "Dane przekazane z formularza:"
+msgstr "Verstuurde gegevens in het formulier:"
 
 msgid "Search Titles"
-msgstr "Przeszukaj tytuły"
+msgstr "Titels doorzoeken"
 
 msgid "Display context of search results"
-msgstr "Pokaż kontekst rezultatu poszukiwań"
+msgstr "Context van de zoekresultaten tonen"
 
 msgid "Case-sensitive searching"
-msgstr "Przeszukiwanie z uwzględnieniem wielkości liter"
+msgstr "Hoodletter-gevoelig zoeken"
 
 msgid "Search Text"
-msgstr "Szukaj frazy"
+msgstr "Tekst doorzoeken"
 
 msgid "Go To Page"
-msgstr "Idź do strony"
+msgstr "Ga naar Pagina"
 
 msgid "Include system pages"
-msgstr "Uwzględnij strony systemowe"
+msgstr "Inclusief systeempagina's"
 
 msgid "Exclude system pages"
-msgstr "Pomiń strony systemowe"
+msgstr "Exclusief systeempagina's"
 
 msgid "Plain title index"
-msgstr "Indeks tytułów"
+msgstr "Eenvoudige titelindex"
 
 msgid "XML title index"
-msgstr "Indeks tytułów XML"
+msgstr "Titelindex XML"
 
 msgid "Python Version"
-msgstr "Wersja języka Python"
+msgstr "Python versie"
 
 msgid "MoinMoin Version"
-msgstr "Wersja MoinMoin"
+msgstr "MoinMoin versie"
 
 #, python-format
 msgid "Release %s [Revision %s]"
-msgstr "Wydanie %s [Korekta %s]"
+msgstr "Uitgave %s [Revisie %s]"
 
 msgid "4Suite Version"
-msgstr "Wersja 4Suite"
+msgstr "4Suite versie"
 
 msgid "Number of pages"
-msgstr "Ilość stron"
+msgstr "Aantal pagina's"
 
 msgid "Number of system pages"
-msgstr "Ilość stron systemowych"
+msgstr "Aantal systeempagina's"
 
 msgid "Accumulated page sizes"
-msgstr "Zakumulowana wielkość stron"
+msgstr "Totale grootte van alle pagina's"
 
 msgid "Entries in edit log"
-msgstr "Pozycji w dzienniku zmian"
+msgstr "Boekingen in het bewerkingslog"
 
 #, python-format
 msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bajtów)"
+msgstr "%(logcount)s (%(logsize)s bytes)"
 
 msgid "NONE"
-msgstr "BRAK"
+msgstr "GEEN"
 
 msgid "Global extension macros"
-msgstr "Globalne rozszerzenia makropoleceń"
+msgstr "Globale uitbreidingsmacros"
 
 msgid "Local extension macros"
-msgstr "Lokalne rozszerzenia makropoleceń"
+msgstr "Lokale uitbreidingsmacros"
 
 msgid "Global extension actions"
-msgstr "Globalne rozsrzerzenia operacji"
+msgstr "Globale uitbreidingsacties"
 
 msgid "Local extension actions"
-msgstr "Lokalne rozszerzenia operacji"
+msgstr "Lokale uitbreidingsacties"
 
 #, fuzzy
 msgid "Global parsers"
-msgstr "Zainstalowane analizatory składni"
+msgstr "Geïnstalleerde parsers"
 
 #, fuzzy
 msgid "Local extension parsers"
-msgstr "Lokalne rozszerzenia makropoleceń"
+msgstr "Lokale uitbreidingsmacros"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)"
+msgstr "Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)"
 
 msgid "Disabled"
 msgstr ""
@@ -942,47 +959,48 @@ msgstr ""
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{\"%s\"}}}"
+msgstr "Gebruik een specifiekere zoekterm dan {{{\"%s\"}}}!"
 
 #, python-format
 msgid "ERROR in regex '%s'"
-msgstr "Błąd w wyrażeniu '%s'"
+msgstr "FOUT in reguliere expressie '%s'"
 
 #, python-format
 msgid "Bad timestamp '%s'"
-msgstr "Nieprawidłowy datownik binarny '%s'"
+msgstr "Ongeldig datumkenmerk '%s'"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Spodziewane \"=\" aby podążyć za \"%(token)s\""
+msgstr "Verwacht \"=\" volgend op \"%(token)s\""
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
-msgstr "Spodziwana wartość dla klucza \"%(token)s\""
+msgstr "Verwacht een waarde voor sleutel \"%(token)s\""
 
 msgid "Wiki Markup"
-msgstr "Język oznaczeń Wiki"
+msgstr "Wikiopmaak"
 
 msgid "Print View"
-msgstr "Podgląd wydruku"
+msgstr "Afdrukvoorbeeld"
 
 #, python-format
 msgid "[%d attachments]"
-msgstr "[%d załączników]"
+msgstr "[%d bijlagen]"
 
 #, python-format
 msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
 msgstr ""
-"Istnieje <a href=\"%(link)s\">%(count)s załącznik(ów)</a> do tej strony."
+"Er zijn <a href=\"%(link)s\">%(count)s bijlagen</a> opgeslagen voor deze "
+"pagina."
 
 msgid "Filename of attachment not specified!"
-msgstr "Nie została podana nazwa pliku załącznika!"
+msgstr "Bestandsnaam van bijlage ontbreekt!"
 
 #, python-format
 msgid "Attachment '%(filename)s' does not exist!"
-msgstr "Załącznik '%(filename)s' nie istnieje!"
+msgstr "Bijlage '%(filename)s' bestaat niet!"
 
 msgid ""
 "To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
@@ -990,12 +1008,11 @@ msgid ""
 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
 "since this is subject to change and can break easily."
 msgstr ""
-"Aby odnieść się do załącznika na stronie, użyj '''{{{attachment:"
-"filename}}}''', \n"
-"jak pokazano poniżej na liście plików. \n"
-"'''NIGDY''' nie używaj URLa {{{[get]}}}, ponieważ odnośnik może się "
-"zmienić \n"
-"i spowodować utratę informacji, którą chcesz przekazać."
+"Om op een pagina naar een bijlage te verwijzen, gebruik '''{{{attachment:"
+"filename}}}''',\n"
+"zoals hieronder getoond in de bestandenlijst.\n"
+"Gebruik '''NIET''' de URL van de verwijzing naar {{{[ophalen]}}},\n"
+"omdat deze aan veranderingen onderhevig is en eenvoudig kapot gaat."
 
 msgid "unzip"
 msgstr ""
@@ -1005,19 +1022,20 @@ msgstr ""
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
-msgstr "Strona %(pagename)s nie ma żadnyc załączników"
+msgstr "Geen bijlagen opgeslagen voor %(pagename)s"
 
 msgid "Edit drawing"
-msgstr "Edytuj rysunek"
+msgstr "Tekening bewerken"
 
 msgid "Attached Files"
-msgstr "Załączone pliki"
+msgstr "Bijlagen"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr "Nie możesz załączać plików do niniejszej strony."
+msgstr ""
+"U hebt geen toestemming voor het plaatsen van bijlagen bij deze pagina."
 
 msgid "New Attachment"
-msgstr "Nowy załącznik"
+msgstr "Nieuwe bijlage"
 
 msgid ""
 "An upload will never overwrite an existing file. If there is a name\n"
@@ -1025,85 +1043,96 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Wgranie pliku do wiki nigdy nie nadpisze istniejącego zbioru. Jeżeli w wiki\n"
-"istnieje już plik o identycznej nazwie, musisz zmienić nazwę zbioru, który "
-"chcesz wgrać.\n"
-"W przeciwnym wypadku, kiedy pole \"Zmień nazwę\" jest puste, zostanie użyta "
-"nazwa oryginalna."
+"Het sturen van een bijlage zal nooit een bestaand bestand overschrijven. Als "
+"er een naamsconflict\n"
+"is dan zul u het bestand dat u wilt inzenden een andere naam moeten geven."
+"Anders, als \"Opslaan als\" leeg is zal de oorspronkelijke naam van het "
+"bestand gebruikt worden."
 
 msgid "File to upload"
-msgstr "Plik do przekazania"
+msgstr "Bestand om op te sturen"
 
 #, fuzzy
 msgid "Rename to"
-msgstr "Zmień nazwę strony"
+msgstr "Pagina hernoemen"
 
 msgid "Upload"
-msgstr "Przekaż"
+msgstr "Opsturen"
 
 msgid "File attachments are not allowed in this wiki!"
-msgstr "Załączniki w postaci plików nie są dozwolne w tym wiki!"
+msgstr "Bijlagen zijn in deze wiki niet toegestaan!"
 
 msgid "You are not allowed to save a drawing on this page."
-msgstr "Nie możesz zachowywać rysunków na niniejszej stronie."
+msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
 msgstr ""
-"W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
+"Geen bestandsinhoud. Verwijder de non-ASCII tekens uit het bestand en "
+"probeer opnieuw."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "Nie możesz skasować załączników z tej strony."
+msgstr "U hebt geen toestemming bijlages van deze pagina te verwijderen."
 
 msgid "You are not allowed to get attachments from this page."
-msgstr "Nie możesz pobierać załączników z tej strony."
+msgstr "U hebt geen toestemming bijlages van deze pagina op te vragen."
 
 #, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Nie możesz obejrzeć załączników do tej strony."
+msgstr "U hebt geen toestemming bijlagen van deze pagina te bekijken."
 
 #, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Nie możesz zmieniać zawartości tej strony."
+msgstr "U hebt geen toestemming deze pagina te bewerken."
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "Nie możesz obejrzeć załączników do tej strony."
+msgstr "U hebt geen toestemming bijlagen van deze pagina te bekijken."
 
 #, python-format
 msgid "Unsupported upload action: %s"
-msgstr "Nieprzewidziany sposób poboru pliku: %s"
+msgstr "Opsturen niet ondersteund: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
-msgstr "Załączniki do \"%(pagename)s\""
+msgstr "Bijlages voor \"%(pagename)s\""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Załącznik '%(target)s' (nazwa zdalna '%(filename)s') już istnieje."
+msgstr "Bijlage '%(target)s' bestaat al (naam op de server '%(filename)s')."
 
 #, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
 msgstr ""
-"Załącznik '%(target)s' (nazwa zdalna '%(filename)s') o wielkości %(bytes)d "
-"bajtów zapisany."
+"Bijlage '%(target)s' opgeslagen (naam op de server '%(filename)s', %(bytes)d "
+"bytes)."
 
 #, python-format
 msgid "Attachment '%(filename)s' deleted."
-msgstr "Załącznik '%(filename)s' usunięty."
+msgstr "Bijlage '%(filename)s' verwijderd."
 
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Załącznik '%(filename)s' usunięty."
+msgstr "Bijlage '%(filename)s' verwijderd."
 
 #, fuzzy, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Rysunek '%(filename)s' zachowany."
+msgstr "Tekening '%(filename)s' opgeslagen."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Bijlage '%(filename)s' verwijderd."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
 msgstr ""
 
 #, python-format
@@ -1113,104 +1142,91 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too many (%(count)d missing)."
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Attachment '%(filename)s' unzipped."
-msgstr "Załącznik '%(filename)s' usunięty."
-
-#, python-format
-msgid ""
-"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
-"files only, exist already or reside in folders."
-msgstr ""
-
-#, python-format
-msgid "The file %(target)s is not a .zip file."
+msgid "The file %(target) is not a .zip file."
 msgstr ""
 
 #, python-format
 msgid "Attachment '%(filename)s'"
-msgstr "Załącznik '%(filename)s'"
+msgstr "Bijlage '%(filename)s'"
 
 msgid "Package script:"
 msgstr ""
 
 #, fuzzy
 msgid "File Name"
-msgstr "Nazwa pliku"
+msgstr "Bestandsnaam"
 
 msgid "Modified"
 msgstr ""
 
 msgid "Unknown file type, cannot display this attachment inline."
-msgstr "Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić."
+msgstr "Onbekend bestandstype. Deze bijlage kan niet inline worden getoond."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "załącznik:%(filename)s z %(pagename)s"
+msgstr "bijlage:%(filename)s bij %(pagename)s"
 
 msgid "You are not allowed to delete this page."
-msgstr "Nie możesz kasować niniejszej strony."
+msgstr "U hebt geen toestemming deze pagina te verwijderen."
 
 msgid "This page is already deleted or was never created!"
-msgstr "Niniejsza strona została już skasowana albo nigdy jej nie było!"
+msgstr "Deze pagina is al gewist of heeft nooit bestaan!"
 
 msgid "Please use the interactive user interface to delete pages!"
-msgstr "Użyj interkatywnego interfejsu aby usuwać strony!"
+msgstr ""
+"Gebruik de interactieve gebruikersinterface om pagina's te verwijderen!"
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Verwijderen van pagina \"%s\" is gelukt!"
 
 msgid "Really delete this page?"
-msgstr "Czy na pewno usunąć niniejszą stronę?"
+msgstr "Deze pagina werkelijk verwijderen?"
 
 msgid "Delete"
-msgstr "Skasować?"
+msgstr "Verwijderen"
 
 msgid "Optional reason for the deletion"
-msgstr "Opcjonalna przyczyna usunięcia"
+msgstr "Eventueel de reden voor deze verwijdering"
 
 #, python-format
 msgid "No pages like \"%s\"!"
-msgstr "Brak stron w rodzaju \"%s\"!"
+msgstr "Geen pagina's lijken op \"%s\"!"
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr ""
-"Dokładnie jedna strona typu \"%s\" została znaleziona, przekazuję Cię na tę "
-"stronę."
+msgstr "Zoeken op \"%s\" gaf precies een resultaat, u wordt er nu heengebracht"
 
 #, python-format
 msgid "Pages like \"%s\""
-msgstr "Stron w rodzaju \"%s\""
+msgstr "Pagina's zoals \"%s\""
 
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s dla \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s op \"%(title)s\""
 
 #, python-format
 msgid "Local Site Map for \"%s\""
-msgstr "Mapa \"%s\""
+msgstr "Lokale wegwijzer voor \"%s\""
 
 msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Nie możesz zmieniać nazw stron na tym wiki!"
+msgstr "U hebt geen toestemming in deze wiki pagina's van naam te veranderen!"
 
 msgid "Please use the interactive user interface to rename pages!"
-msgstr "Użyj interkatywnego interfejsu aby zmieniać nazwy stron!"
+msgstr "Gebruik de interactieve gebruikersinterface om pagina's te hernoemen!"
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
-msgstr "Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s."
+msgstr "Kon paginanaam niet wijzigen vanwege systeemfout: %s."
 
 msgid "Rename Page"
-msgstr "Zmień nazwę strony"
+msgstr "Pagina hernoemen"
 
 msgid "New name"
-msgstr "Nowa nazwa"
+msgstr "Nieuwe naam"
 
 msgid "Optional reason for the renaming"
-msgstr "Opcjonalna przyczyna zmiany nazwy"
+msgstr "Eventueel de reden voor deze hernoeming"
 
 #, python-format
 msgid ""
@@ -1218,544 +1234,502 @@ msgid ""
 "\n"
 "Try a different name."
 msgstr ""
-"'''Strona o nazwie {{{'%s'}}} już istnieje.'''\n"
+"'''Een pagina met de naam {{{'%s'}}} bestaat al.'''\n"
 "\n"
-"Spróbuj innej nazwy."
+"Probeer een andere naam."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(zawarto  %(localwords)d %(pagelink)s)"
+msgstr "(inclusief %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
 "The following %(badwords)d words could not be found in the dictionary of %"
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
-"Następujące %(badwords)d wyrazy nie zostały odnalezione w słowniku z %"
-"(totalwords)d words%(localwords)s i zostały podświetlone poniżej:"
+"De volgende %(badwords)d woorden konden niet gevonden worden in het "
+"woordenboek van %(totalwords)d woorden %(localwords)s en zijn hieronder "
+"gemarkeerd:"
 
 msgid "Add checked words to dictionary"
-msgstr "Dodaj sprawdzone słowa do słownika"
+msgstr "Voeg geselecteerde woorden toe aan het woordenboek"
 
 msgid "No spelling errors found!"
-msgstr "Nie znaleziono błędów!"
+msgstr "Geen spelfouten gevonden!"
 
 msgid "You can't check spelling on a page you can't read."
-msgstr "Nie możesz sprawdzać stron, których nie możesz czytać."
+msgstr "U kunt geen spelling controleren op een pagina die u niet kunt lezen."
 
 #, python-format
 msgid "Title Search: \"%s\""
-msgstr "Przeszukiwanie tytułów: \"%s\""
+msgstr "In titels zoeken op: \"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
-msgstr "Przeszukiwanie pełnotekstowe: \"%s\""
+msgstr "Volledige tekst doorzoeken op: \"%s\""
 
 #, python-format
 msgid "Full Link List for \"%s\""
-msgstr "Pełna lista odnośników dla \"%s\""
+msgstr "Volledige verwijzingenlijst voor \"%s\""
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
+"Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
-msgstr "Wgraj nowy załącznik \"%(filename)s\""
+msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
 
 #, python-format
 msgid "Create new drawing \"%(filename)s\""
-msgstr "Utwórz nowy rysunek \"%(filename)s\""
+msgstr "Nieuwe tekening maken \"%(filename)s\""
 
 #, python-format
 msgid "Edit drawing %(filename)s"
-msgstr "Edytuj rysunek %(filename)s"
+msgstr "Tekening bewerken \"%(filename)s\""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
-msgstr "Nieprawidłowe argumenty \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
 
 #, python-format
 msgid "Nothing found for \"%s\"!"
-msgstr "Nic nie znaleziono dla \"%s\"!"
+msgstr "Niets gevonden voor \"%s\""
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Nieobsługiwany schemat nawigacyjny '%(scheme)s'!"
+msgstr "Navigitiemethode '%(scheme)s' niet ondersteund!"
 
 msgid "No parent page found!"
-msgstr "Nie znaleziono strony nadrzędnej!"
+msgstr "Geen bovenliggende pagina gevonden!"
 
 msgid "Wiki"
 msgstr "Wiki"
 
 msgid "Slideshow"
-msgstr "Pokaz slajdów"
+msgstr "Diavoorstelling"
 
 msgid "Start"
 msgstr "Start"
 
 #, python-format
 msgid "Slide %(pos)d of %(size)d"
-msgstr "Slajd %(pos)d z %(size)d"
+msgstr "Dia %(pos)d van %(size)d"
 
 msgid "No orphaned pages in this wiki."
-msgstr "Nie znaleziono stron - bękartów w tym wiki."
+msgstr "Geen weespagina's in deze wiki."
 
 #, python-format
 msgid "No quotes on %(pagename)s."
-msgstr "Brak przytoczeń na %(pagename)s."
+msgstr "Geen citaten op %(pagename)s."
 
 #, python-format
 msgid "Upload of attachment '%(filename)s'."
-msgstr "Przekazanie załącznika '%(filename)s'."
+msgstr "Versturen van bijlage '%(filename)s'."
 
 #, python-format
 msgid "Drawing '%(filename)s' saved."
-msgstr "Rysunek '%(filename)s' zachowany."
+msgstr "Tekening '%(filename)s' opgeslagen."
 
-#, fuzzy, python-format
-msgid "%(mins)dm ago"
-msgstr "%(hours)dh %(mins)dm temu"
+#, python-format
+msgid "%(hours)dh %(mins)dm ago"
+msgstr "%(hours)du %(mins)dm geleden"
 
 msgid "(no bookmark set)"
-msgstr "(brak ustalonych zakładek)"
+msgstr "(geen bladwijzer ingesteld)"
 
 #, python-format
 msgid "(currently set to %s)"
-msgstr "(obecnie ustawione na %s)"
+msgstr "(staat op dit moment op %s)"
 
 msgid "Delete Bookmark"
-msgstr "Usuń zakładkę"
+msgstr "Bladwijzer verwijderen"
 
 msgid "Set bookmark"
-msgstr "Ustaw zakładkę"
+msgstr "Bladwijzer instellen"
 
 msgid "set bookmark"
-msgstr "ustaw zakładkę"
+msgstr "bladwijzer instellen"
 
 msgid "[Bookmark reached]"
-msgstr "[Zakładka osiągnięta]"
+msgstr "[Bladwijzer bereikt]"
 
 msgid "Markup"
-msgstr "Znacznik"
+msgstr "Opmaak"
 
 msgid "Display"
-msgstr "Pokaż"
+msgstr "Uiterlijk"
 
 msgid "Filename"
-msgstr "Nazwa pliku"
+msgstr "Bestandsnaam"
 
 msgid "Download XML export of this wiki"
-msgstr "Zgraj wersję XML tego wiki"
+msgstr "Download een export naar XML van deze wiki"
 
 msgid "No wanted pages in this wiki."
-msgstr "Brak poszukiwanych stron w tym wiki."
+msgstr "Geen gewenste pagina's in deze wiki."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximum aantal toegestane includes overschreden**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
-msgstr "Spodziewane \"%(wanted)s\" po \"%(key)s\", otrzymano \"%(token)s\""
+msgstr "Er werd \"%(wanted)s\" na \"%(key)s\" verwacht, er kwam \"%(token)s\""
 
 #, python-format
 msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Spodziewana wartość całkowita \"%(key)s\" przed \"%(token)s\""
+msgstr "Er werd een integer \"%(key)s\" voor \"%(token)s\" verwacht"
 
 #, python-format
 msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Spodziewana wartość całkowita \"%(arg)s\"  po \"%(key)s\""
+msgstr "Er werd een integer \"%(arg)s\" na \"%(key)s\" verwacht"
 
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
-msgstr "Spodziewana wartość koloru \"%(arg)s\" po \"%(key)s\""
+msgstr "Er werd een kleurwaarde \"%(arg)s\" na \"%(key)s\" verwacht"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
 msgstr ""
 
 #, fuzzy
 msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "Przetwarzanie XSLT niedostępne!"
+msgstr "Verwerking van XSLT is niet beschikbaar!"
 
 #, python-format
 msgid "%(errortype)s processing error"
-msgstr "błąd przetwarzania %(errortype)s"
+msgstr "Verwerkingsfout %(errortype)s"
 
 #, fuzzy
 msgid "Views/day"
-msgstr "Zobacz"
+msgstr "Bekijken"
 
 #, fuzzy
 msgid "Edits/day"
-msgstr "Edycja"
+msgstr "Bewerken"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
-msgstr "%(chart_title)s dla %(filterpage)s"
+msgstr "%(chart_title)s voor %(filterpage)s"
 
 msgid ""
 "green=view\n"
 "red=edit"
 msgstr ""
-"zielony=podgląd\n"
-"czerwony=edycja"
+"groen=bekijken\n"
+"rood=bewerken"
 
 msgid "date"
-msgstr "data"
+msgstr "datum"
 
 msgid "# of hits"
-msgstr "# odwiedzin"
+msgstr "# treffers"
 
-#, fuzzy
 msgid "Page Size Distribution"
-msgstr "Page Size Distribution"
+msgstr "Verdeling van de paginagrootte "
 
 msgid "page size upper bound [bytes]"
-msgstr "rozmiar strony [bajtów]"
+msgstr "bovengrens van paginagrootte [bytes]"
 
 msgid "# of pages of this size"
-msgstr "# stron tego rozmiaru"
+msgstr "# pagina's van deze grootte"
 
 msgid "User agent"
 msgstr ""
 
 msgid "Others"
-msgstr "Inni"
+msgstr "Andere"
 
-#, fuzzy
 msgid "Distribution of User-Agent Types"
-msgstr "Distribution of User-Agent Types"
+msgstr "Verdeling van types User-Agent"
 
 msgid "Unsubscribe"
-msgstr "Rezygnuj z subskrybcji"
+msgstr "Opzeggen"
 
 msgid "Home"
-msgstr ""
+msgstr "Start"
 
 msgid "[RSS]"
-msgstr ""
+msgstr "[RSS]"
 
 msgid "[DELETED]"
-msgstr ""
+msgstr "[GEWIST]"
 
 msgid "[UPDATED]"
-msgstr ""
+msgstr "[HERZIEN]"
 
 msgid "[NEW]"
-msgstr ""
+msgstr "[NIEUW]"
 
 msgid "[DIFF]"
-msgstr ""
+msgstr "[VERSCHIL]"
 
 msgid "[BOTTOM]"
-msgstr ""
+msgstr "[ONDER]"
 
 msgid "[TOP]"
-msgstr ""
+msgstr "[BOVEN]"
 
 msgid "Click to do a full-text search for this title"
-msgstr "kliknij aby poszukać tytułu metodą pełnotekstową"
+msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
 
 msgid "Clear message"
-msgstr "Usuń wiadomość"
+msgstr "Bericht wissen"
 
 #, python-format
 msgid "last edited %(time)s by %(editor)s"
-msgstr "ostatnio modyfikowane %(time)s przez %(editor)s"
+msgstr "laatst bewerkt op %(time)s door %(editor)s"
 
 #, python-format
 msgid "last modified %(time)s"
-msgstr "ostatnio modyfikowane %(time)s"
+msgstr "laatst gewijzigd %(time)s"
 
 msgid "Search:"
-msgstr "Szukaj:"
+msgstr "Zoeken:"
 
 msgid "Text"
 msgstr "Tekst"
 
 msgid "Titles"
-msgstr "Tytuły"
+msgstr "Titels"
 
 #, fuzzy
 msgid "Search"
-msgstr "Szukaj:"
+msgstr "Zoeken:"
+
+#, fuzzy
+msgid "Quicklink"
+msgstr "Snelkoppelingen"
 
 msgid "More Actions:"
-msgstr "Więcej operacji:"
+msgstr "Meer acties:"
 
 msgid "------------"
 msgstr ""
 
 #, fuzzy
 msgid "Raw Text"
-msgstr "Pokaż tekst źródłowy"
+msgstr "Ruwe tekst tonen"
+
+msgid "Delete Cache"
+msgstr "Buffer legen"
 
 #, fuzzy
-msgid "Delete Cache"
-msgstr "Usuń stronę"
+msgid "Attachments"
+msgstr "Nieuwe bijlage"
 
 msgid "Delete Page"
-msgstr "Usuń stronę"
+msgstr "Pagina verwijderen"
 
 #, fuzzy
 msgid "Like Pages"
-msgstr "PodobneStrony"
+msgstr "GelijkendePaginas"
 
 #, fuzzy
 msgid "Local Site Map"
-msgstr "MapaWitryny"
+msgstr "LokaleWegwijzer"
 
 msgid "Do"
-msgstr "Wykonaj"
+msgstr "Uitvoeren"
+
+#, fuzzy
+msgid "Parent Page"
+msgstr "VoorPagina"
 
 #, fuzzy
 msgid "Edit (Text)"
-msgstr "Edytuj tekst"
+msgstr "TekstBewerken"
 
 msgid "Edit (GUI)"
 msgstr ""
 
 msgid "Immutable Page"
-msgstr "Strona nie zmieniona"
-
-#, fuzzy
-msgid "Remove Link"
-msgstr "Szybkie skróty"
-
-msgid "Add Link"
-msgstr ""
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Nowy załącznik"
+msgstr "Vastliggende pagina"
 
 #, python-format
 msgid "Show %s days."
-msgstr "Pokaż %s dni."
+msgstr "Laat %s dagen zien."
 
 msgid "EditText"
-msgstr "Edytuj tekst"
+msgstr "TekstBewerken"
 
 msgid "Immutable page"
-msgstr "Strona nie zmieniona"
+msgstr "Vastliggende pagina"
 
 msgid "Or try one of these actions:"
-msgstr "Lub spróbuj wykonać: "
+msgstr "Of probeer een van deze acties: "
 
 msgid "Page"
-msgstr "Strona"
+msgstr "Pagina"
+
+msgid "Trail"
+msgstr "Spoor"
 
 msgid "User"
-msgstr "Czytelnik"
+msgstr "Gebruiker"
 
 #, python-format
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"Przepraszam, strona nie została zachowana ze względu na to, że \"%(content)s"
-"\" nie są dozwolone na tej stronie"
+"Sorry, kan pagina niet opslaan omdat \"%(content)s\" in deze wiki niet is "
+"toegestaan."
 
 msgid "Line"
-msgstr "Linia"
+msgstr "Regel"
 
 msgid "Deletions are marked like this."
-msgstr "Usunięcia zostały oznaczone w ten sposób."
+msgstr "Verwijderingen worden op deze manier gemarkeerd."
 
 msgid "Additions are marked like this."
-msgstr "Dodatki zostały oznaczone w ten sposób."
+msgstr "Toevoegingen worden op deze manier gemarkeerd."
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr ""
-"Awaria połączenia z serwerem poczty elektronicznej '%(server)s' z powodu: %"
-"(reason)s"
+msgstr "Verbinding met de mailserver '%(server)s' mislukt: %(reason)s"
 
 #, fuzzy
 msgid "Mail not sent"
-msgstr "Poczta została wysłana"
+msgstr "E-mail correct verzonden"
 
 msgid "Mail sent OK"
-msgstr "Poczta została wysłana"
+msgstr "E-mail correct verzonden"
 
 msgid "FrontPage"
-msgstr "StronaGłowna"
+msgstr "VoorPagina"
 
 msgid "RecentChanges"
-msgstr "OstatnieZmiany"
+msgstr "RecenteWijzigingen"
 
 msgid "TitleIndex"
-msgstr "IndeksTytułów"
+msgstr "IndexVanTitels"
 
 msgid "WordIndex"
-msgstr "IndeksSłów"
+msgstr "IndexVanWoorden"
 
 msgid "FindPage"
-msgstr "ZnajdźStronę"
+msgstr "PaginaZoeken"
 
 msgid "SiteNavigation"
-msgstr "NawigacjaWitryny"
+msgstr "WegWijzer"
 
 msgid "HelpContents"
-msgstr "KontekstPomocy"
+msgstr "HelpInhoud"
 
 msgid "HelpOnFormatting"
-msgstr "PomocFormatowania"
+msgstr "HelpBijOpmaak"
 
 msgid "UserPreferences"
-msgstr "PreferencjeCzytelnika"
+msgstr "GebruikersVoorkeuren"
 
 msgid "WikiLicense"
-msgstr "LicencjaWiki"
+msgstr "WikiLicentie"
 
 msgid "MissingPage"
-msgstr "ZagubionaStrona"
+msgstr "OntbrekendePagina"
 
 msgid "Mon"
-msgstr "pon"
+msgstr "Maa"
 
 msgid "Tue"
-msgstr "wto"
+msgstr "Din"
 
 msgid "Wed"
-msgstr "śro"
+msgstr "Woe"
 
 msgid "Thu"
-msgstr "czw"
+msgstr "Don"
 
 msgid "Fri"
-msgstr "pią"
+msgstr "Vrij"
 
 msgid "Sat"
-msgstr "sob"
+msgstr "Zat"
 
 msgid "Sun"
-msgstr "nie"
+msgstr "Zon"
 
 msgid "AttachFile"
-msgstr "ZałączPlik"
+msgstr "BijlageToevoegen"
 
 msgid "DeletePage"
-msgstr "UsuńStronę"
+msgstr "PaginaVerwijderen"
 
 msgid "LikePages"
-msgstr "PodobneStrony"
+msgstr "GelijkendePaginas"
 
 msgid "LocalSiteMap"
-msgstr "MapaWitryny"
+msgstr "LokaleWegwijzer"
 
 msgid "RenamePage"
-msgstr "ZmieńNazwę"
+msgstr "PaginaHernoemen"
 
 msgid "SpellCheck"
-msgstr "SprawdźPisownię"
-
-#, fuzzy
-#~ msgid "Parent Page"
-#~ msgstr "StronaGłowna"
-
-#~ msgid "Trail"
-#~ msgstr "Ślad"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz "
-#~ "PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. "
-#~ "Skontaktuj się z właścicielem, aby je uruchomił, albo usuń ikonę "
-#~ "\"Subskrybuj\"."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz "
-#~ "(PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres."
-
-#, fuzzy
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Aby zrezygnować z subskrybcji, wejdź do swojego profilu i usuń stronę z "
-#~ "listy subskrybcji."
-
-#, fuzzy
-#~ msgid "Quicklink"
-#~ msgstr "Szybkie skróty"
+msgstr "Spellingscontrole"
 
 #~ msgid "Show Print View"
-#~ msgstr "Pokaż podgląd wydruku"
+#~ msgstr "Afdrukvoorbeeld tonen"
 
 #~ msgid "Attach File"
-#~ msgstr "Załącz plik"
+#~ msgstr "Bijlage toevoegen"
 
 #~ msgid "Show Like Pages"
-#~ msgstr "Pokaż podobne strony"
+#~ msgstr "Gelijkende pagina's tonen"
 
 #~ msgid "Show Local Site Map"
-#~ msgstr "Pokaż mapę wiki"
+#~ msgstr "Lokale wegwijzer tonen"
 
 #, fuzzy
 #~ msgid "Infos"
-#~ msgstr "Info"
+#~ msgstr "Informatie"
 
 #~ msgid "Can't work out query"
-#~ msgstr "Nie potrafię zadać pytania"
+#~ msgstr "Deze query kan niet beantwoord worden"
+
+#, fuzzy
+#~ msgid "Remove from Quicklinks"
+#~ msgstr "Snelkoppelingen"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"
-#~ msgstr "Szybkie skróty"
+#~ msgstr "Snelkoppelingen"
 
 #~ msgid "Show Parent"
-#~ msgstr "Pokaż nadrzędne"
+#~ msgstr "Bovenliggende tonen"
 
 #~ msgid "Show Changes"
-#~ msgstr "Pokaż zmiany"
+#~ msgstr "Wijzigingen tonen"
 
 #~ msgid "Get Info"
-#~ msgstr "Pobierz info"
+#~ msgstr "Informatie opzoeken"
 
 #~ msgid "Skip to preview"
-#~ msgstr "Pomiń aby zobaczyć podgląd"
+#~ msgstr "Direct naar proeflezing"
 
 #~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[Rozmiar bieżącej strony '''%(size)d''' bajtów]"
+#~ msgstr "[huidige paginagrootte '''%(size)d''' bytes]"
 
 #~ msgid "Optional comment about this change"
-#~ msgstr "Opcjonalny komentarz dotyczący niniejszej zmiany"
+#~ msgstr "Eventueel commentaar over deze wijziging"
 
 #~ msgid "Make this page belong to category %(category)s"
-#~ msgstr "Przypisz tę stronę do kategorii %(category)s"
+#~ msgstr "Plaats deze pagina onder categorie %(category)s"
 
 #~ msgid "Show fancy links"
-#~ msgstr "Pokaż ozdobne odnośniki"
+#~ msgstr "Mooie verwijzingen tonen"
 
 #~ msgid "Save as"
-#~ msgstr "Zachowaj jako"
+#~ msgstr "Opslaan als"
 
 #~ msgid "XSLT option disabled!"
-#~ msgstr "Opcja XSLT wyłączona!"
+#~ msgstr "De optie XSLT is uitgeschakeld!"
 
 #~ msgid "RefreshCache"
-#~ msgstr "Odśwież pamięć podręczną"
+#~ msgstr "VerversCache"
 
 #~ msgid "for this page (cached %(date)s)"
-#~ msgstr "dla tej strony (w pamięci podręcznej od %(date)s)"
-
-#~ msgid "MIME Type (optional)"
-#~ msgstr "Rodzaj MIME (opcjonalnie)"
-
-#~ msgid "Refresh"
-#~ msgstr "Odśwież"
-
-#~ msgid "<escape>"
-#~ msgstr "<escape>"
-
-#~ msgid "[\"<escape>\"]"
-#~ msgstr "[\"<escape>\"]"
+#~ msgstr "voor deze pagina (gecachet %(date)s)"
