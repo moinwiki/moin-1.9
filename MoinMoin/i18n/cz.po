@@ -602,7 +602,6 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Tato emailová adresa patří již někomu jinému."
 
-
 msgid "User account created!"
 msgstr "Uživatelský účet vytvořen!"
 
@@ -809,7 +808,8 @@ msgid "You must log in to use subscribtions."
 msgstr "Bez přihlášení nelze odebírat stránky"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele."
+msgstr ""
+"Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Váš odběr této stránky byl zrušen."
@@ -1093,15 +1093,17 @@ msgstr "Soubor %s není MoinMoin balík."
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
-msgstr "Příloha '%(filename)s' nemohla být rozbalena kvůli nedostatku místa "
-"(schází %(space)d kB."
+msgstr ""
+"Příloha '%(filename)s' nemohla být rozbalena kvůli nedostatku místa (schází %"
+"(space)d kB."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
-msgstr "Příloha '%(filename)s' nemohla být rozbalena kvůli příliš velkému "
-"počtu souborů (schází %(count)d)."
+msgstr ""
+"Příloha '%(filename)s' nemohla být rozbalena kvůli příliš velkému počtu "
+"souborů (schází %(count)d)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."

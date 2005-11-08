@@ -7,7 +7,7 @@
 import sys, xmlrpclib
 sys.path.insert(0, '../..')
 
-excluded = ["en", "he"] # languages managed in tla repository, not in wiki
+excluded = ["en",] # languages managed in tla repository, not in wiki
 
 lang = sys.argv[1]
 lang = lang.replace('_', '-') # module names use _ instead of -
