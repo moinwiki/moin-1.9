@@ -9,11 +9,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, traceback
+import sys, traceback, os
 
 from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, config
 from MoinMoin.error import CompositeError
+from MoinMoin.action import AttachFile
 
 from xml.sax import saxutils
 from xml.dom import getDOMImplementation
@@ -384,6 +385,50 @@ class Formatter(FormatterBase):
             attrs.append(('linkend', name))
 
         return self._handleNode("link", on, attrs)
+
+# Attachments ######################################################
+
+    def attachment_link(self, url, text, **kw):
+        _ = self.request.getText
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
+        fpath = AttachFile.getFilename(self.request, pagename, fname)
+        target = AttachFile.getAttachUrl(pagename, filename, self.request)
+        if not os.path.exists(fpath):
+            return self.text("[attachment:%s]" % url)
+        else:
+            return (self.url(1, target, title="attachment:%s" % url) +
+                    self.text(text) +
+                    self.url(0))
+
+    def attachment_image(self, url, **kw):
+        _ = self.request.getText
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
+        fpath = AttachFile.getFilename(self.request, pagename, fname)
+        if not os.path.exists(fpath):
+            return self.text("[attachment:%s]" % url)
+        else:
+            return self.image(
+                title="attachment:%s" % url,
+                src=AttachFile.getAttachUrl(pagename, filename,
+                                            self.request, addts=1))
+
+    def attachment_drawing(self, url, text, **kw):
+        _ = self.request.getText
+        pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        fname = wikiutil.taintfilename(filename)
+        drawing = fname
+        fname = fname + ".png"
+        filename = filename + ".png"
+        if not os.path.exists(fpath):
+            return self.text("[drawing:%s]" % url)
+        else:
+            return self.image(
+                alt=drawing,
+                src=AttachFile.getAttachUrl(pagename, filename, self.request,
+                                            addts=1),
+                html_class="drawing")
 
 
 ### Images and Smileys ##############################################
