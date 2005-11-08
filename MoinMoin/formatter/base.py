@@ -79,7 +79,7 @@ class FormatterBase:
             return ''
         if not pagename and page:
             pagename = page.page_name
-        pagename = pagename.replace(" ", "_")
+        pagename = self.request.normalizePagename(pagename)
         if pagename and pagename not in self.pagelinks:
             self.pagelinks.append(pagename)
 
