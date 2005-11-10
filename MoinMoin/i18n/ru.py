@@ -41,6 +41,8 @@ macro call.-~
 '''Неизменяемая страница!''',
 '''Cannot edit old revisions!''':
 '''Старые версии нельзя изменять!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Привилегия на изменения истекла, приготовьтесь к конфликтам!''',
 '''Page name is too long, try shorter name.''':
 '''Слишком длинное имя страницы, попробуйте что-нибудь покороче.''',
 '''Edit "%(pagename)s"''':
@@ -85,6 +87,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Показать макет''',
 '''GUI Mode''':
 '''Графический редактор''',
+'''Your changes are not saved!''':
+'''Ваши исправления не сохранились!''',
 '''Comment:''':
 '''Комментарий:''',
 '''<No addition>''':
@@ -95,8 +99,24 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Малое изменение''',
 '''Remove trailing whitespace from each line''':
 '''Стереть хвостовые пробелы из каждой строки''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Выделить:: [[Verbatim(\'\')]]\'\'курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'жирным курсивом\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'смешаным \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]] и курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] горизонтальной чертой.
+ Заголовки:: [[Verbatim(=)]] Уровня 1 [[Verbatim(=)]]; [[Verbatim(==)]] Уровня 2 [[Verbatim(==)]]; [[Verbatim(===)]] Уровня 3 [[Verbatim(===)]]; [[Verbatim(====)]] Уровня 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Уровня 5 [[Verbatim(=====)]].
+ Списки:: пробел и один из: * - ненумерованный список; 1., a., A., i., I. - нумерованный список; 1.#n - начать нумерацию с n; только пробел(ы) дают отступ.
+ Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim(["скобки и двойные кавычки"])]]; url; [url]; [url метка].
+ Таблицы:: || текст клетки |||| текст клетки растянутый на 2 колонки ||; после таблиц и заголовков нельзя оставлять пробелы.
+
+(!) Подробная помощь КакРедактировать и СправочникПоСинтаксису.
+''',
 '''Edit was cancelled.''':
-'''Изменение отменено.''',
+'''Исправления отменены.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям.''',
 '''Page "%s" was successfully deleted!''':
@@ -271,6 +291,8 @@ space between words. Group page name is not allowed.''':
 '''Войти''',
 ''' %s and try again.''':
 ''' %s и попробуйте еще раз.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d результатов из %(pages)d просмотренных страниц.''',
 '''%.2f seconds''':
 '''%.2f секунд''',
 '''match''':
@@ -304,6 +326,8 @@ After successfully logging in, it is of course a good idea to set a new and know
 
 После успешного входа в систему неплохо бы поменять пароль на ваш собственный.
 ''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Ваша запись пользователя''',
 '''Cookie deleted. You are now logged out.''':
 '''Cookie стерты. Вы вышли.''',
 '''This wiki is not enabled for mail processing.
@@ -331,8 +355,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Пароли не совпадают!''',
 '''Please specify a password!''':
 '''Пожалуйста укажите пароль!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
 '''This email already belongs to somebody else.''':
 '''Это чужой адрес.''',
+'''User account created!''':
+'''Пользователь создан!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Не могу загрузать макияж \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -340,7 +368,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Default''':
 '''По умолчанию''',
 '''<Browser setting>''':
-'''<Настройки броузера>''',
+'''<Настройки браузера>''',
 '''the one preferred''':
 '''предпочтительно''',
 '''free choice''':
@@ -449,14 +477,26 @@ Contact the owner of the wiki, who can enable email.''':
 '''Запросы и исправления страниц''',
 '''You are not allowed to revert this page!''':
 '''Вы не можете восстанавливать из архива эту страницу!''',
+'''You must login to add a quicklink.''':
+'''Зарегистрируйтесь чтобы добавить закладку.''',
 '''Your quicklink to this page has been removed.''':
 '''Ваша ссылка на эту страницу удалена.''',
+'''A quicklink to this page has been added for you.''':
+'''Вам добавлена ссылка на эту страницу.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Вы не можете подписаться на страницу которую вам нельзя читать.''',
+'''This wiki is not enabled for mail processing.''':
+'''В этом вики запрещена отправка почты.''',
+'''You must log in to use subscribtions.''':
+'''Зарегистрируйтесь чтобы воспользоваться подпиской.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Добавьте ваш почтовый адрес в ВашиНастройки чтобы воспользоваться подпиской.''',
 '''Your subscribtion to this page has been removed.''':
 '''Вы больше не подписаны на эту страницу.''',
 '''Can\'t remove regular expression subscription!''':
 '''Не могу удалить подписку по образцу.''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Исправьте ВашиНастройки содержащие образцы подписки.''',
 '''You have been subscribed to this page.''':
 '''Теперь вы подписаны на эту страницу.''',
 '''Charts are not available!''':
@@ -490,7 +530,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Python Version''':
 '''Версия Python''',
 '''MoinMoin Version''':
-'''Версия MoinMoin''',
+'''Версия МойнМойн''',
 '''Release %s [Revision %s]''':
 '''Release %s [Revision %s]''',
 '''4Suite Version''':
@@ -515,6 +555,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''Общие дополнительные действия''',
 '''Local extension actions''':
 '''Местные дополнительные действия''',
+'''Global parsers''':
+'''Общие парсеры''',
+'''Local extension parsers''':
+'''Местные дополнительные парсеры''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Доступные процессоры (УСТАРЕЛО - используйте парсеры)''',
 '''Disabled''':
@@ -523,6 +567,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Включен''',
 '''Lupy search''':
 '''Общий поиск''',
+'''Active threads''':
+'''Активных потоков''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Пожалуйста уточните что искать вместо {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -553,6 +599,10 @@ since this is subject to change and can break easily.''':
 как показано ниже в списке файлов.
 \'\'\'НЕ\'\'\' используйте URL из {{{[взять]}}}, 
 так как он чисто внутренний и часто меняется.''',
+'''unzip''':
+'''unzip''',
+'''install''':
+'''install''',
 '''No attachments stored for %(pagename)s''':
 '''Нет приложений к %(pagename)s''',
 '''Edit drawing''':
@@ -580,11 +630,15 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''You are not allowed to save a drawing on this page.''':
 '''Вам нельзя делать рисунки на этой странице.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
-'''Плохой файл. Сотрите все не ASCII символы из файла и попробуйте снова.''',
+'''Плохое имя файла. Уберите все спец-символы из имени файла и попробуйте снова.''',
 '''You are not allowed to delete attachments on this page.''':
 '''Вам нельзя стирать приложения к этой странице.''',
 '''You are not allowed to get attachments from this page.''':
 '''Вам нельзя забирать приложения к этой странице.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Вам нельзя распаковывать приложения к этой странице.''',
+'''You are not allowed to install files.''':
+'''Вам нельзя устанавливать файлы.''',
 '''You are not allowed to view attachments of this page.''':
 '''Вам нельзя смотреть приложения к этой странице.''',
 '''Unsupported upload action: %s''':
@@ -597,8 +651,30 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Приложение \'%(target)s\' (из файла \'%(filename)s\') длиной %(bytes)d байт записано.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Приложение \'%(filename)s\' стерто.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Приложение \'%(filename)s\' установлено.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Установка \'%(filename)s\' не удалась.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Файл %s не является пакетом МойнМойн.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Приложение \'%(filename)s\' не распаковано, т.к. не хватает места (%(space)d Кб).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Приложение \'%(filename)s\' не распаковано, т.к. получается слишком много файлов (%(count)d лишних).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Приложение \'%(filename)s\' распаковано.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Приложение \'%(filename)s\' не распаковано, т.к. файлы слишком велики''',
+'''The file %(target)s is not a .zip file.''':
+'''Файл %(target)s не zip-архив.''',
 '''Attachment \'%(filename)s\'''':
 '''Приложение \'%(filename)s\'''',
+'''Package script:''':
+'''Команды пакета:''',
+'''File Name''':
+'''Файл''',
+'''Modified''':
+'''Исправлено''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Незнакомый тип файла, не могу показать приложение в тексте.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -691,6 +767,8 @@ Try a different name.''':
 '''Загружено приложение \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Рисунок \'%(filename)s\' записан.''',
+'''%(mins)dm ago''':
+'''%(mins)dм назад''',
 '''(no bookmark set)''':
 '''(нет закладки)''',
 '''(currently set to %s)''':
@@ -785,12 +863,22 @@ red=edit''':
 '''По тексту''',
 '''Titles''':
 '''По заголовкам''',
+'''Search''':
+'''Искать''',
 '''More Actions:''':
 '''Другие действия:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Показать разметку''',
 '''Delete Cache''':
 '''Убрать из кэша''',
 '''Delete Page''':
 '''Вырвать страницу''',
+'''Like Pages''':
+'''Похожие Страницы''',
+'''Local Site Map''':
+'''Карта Окресностей''',
 '''Do''':
 '''Выполняй!''',
 '''Edit (Text)''':
@@ -799,6 +887,12 @@ red=edit''':
 '''Исправить (Графически)''',
 '''Immutable Page''':
 '''Неизменяемая страница''',
+'''Remove Link''':
+'''Убрать из закладок''',
+'''Add Link''':
+'''Добавить ссылку''',
+'''Attachments''':
+'''Приложения''',
 '''Show %s days.''':
 '''Показать изменения за %s дней.''',
 '''EditText''':
@@ -821,6 +915,8 @@ red=edit''':
 '''Добавления помечены так.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Соединиться с почтовым сервером \'%(server)s\' не удалось: %(reason)s''',
+'''Mail not sent''':
+'''Почта не ушла.''',
 '''Mail sent OK''':
 '''Почта ушла.''',
 '''FrontPage''':
