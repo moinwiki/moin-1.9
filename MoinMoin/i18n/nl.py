@@ -90,6 +90,10 @@ Als u dat niet wilt, klik \'\'\'%(cancel_button_text)s\'\'\' om u veranderingen 
 '''Witruimte verwijderen aan het einde van elke regel''',
 '''Edit was cancelled.''':
 '''Bewerking werd geannuleerd.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd.''',
+'''Page "%s" was successfully deleted!''':
+'''Verwijderen van pagina "%s" is gelukt!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -165,8 +169,6 @@ daarmee verwijdert u de veranderingen die de ander heeft gemaakt, en dat is bijz
 '''U hebt niets veranderd. Niet opgeslagen!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''U kunt op deze pagina geen ACL\'s veranderen want u hebt niet de rechten van een beheerder!''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd.''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
 '''Het slot van %(owner)s is %(mins_ago)d minuten geleden verlopen, en jij hebt nu het slot op deze pagina.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
@@ -329,6 +331,8 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Profiel aanmaken''',
 '''Mail me my account data''':
 '''Stuur me mijn accountgegevens per e-mail''',
+'''Action''':
+'''Actie''',
 '''No older revisions available!''':
 '''Geen oudere versies aanwezig!''',
 '''Diff for "%s"''':
@@ -365,8 +369,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Bewerker''',
 '''Comment''':
 '''Commentaar''',
-'''Action''':
-'''Actie''',
 '''view''':
 '''bekijken''',
 '''raw''':
@@ -401,14 +403,8 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Aantal raadplegingen en bewerkingen''',
 '''You are not allowed to revert this page!''':
 '''U hebt geen toestemming om deze pagina terug te zetten!''',
-'''You didn\'t create a user profile yet. Select UserPreferences in the upper right corner to create a profile.''':
-'''U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in de hoek rechtsboven voor het aanmaken van een profiel.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''U hebt geen toestemming zich te abonneren op een pagina die u niet kunt lezen.''',
-'''This wiki is not enabled for mail processing. Contact the owner of the wiki, who can either enable email, or remove the "Subscribe" icon.''':
-'''Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail opstarten, of het pictogram "Abonneren" verwijderen.''',
-'''You didn\'t enter an email address in your profile. Select your name (UserPreferences) in the upper right corner and enter a valid email address.''':
-'''U hebt geen e-mailadres opgegeven in u profiel. Kies u naam (UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres.''',
 '''Your subscribtion to this page has been removed.''':
 '''Uw abonnement op deze pagina is ongedaan gemaakt.''',
 '''Can\'t remove regular expression subscription!''':
@@ -556,8 +552,6 @@ is dan zul u het bestand dat u wilt inzenden een andere naam moeten geven.Anders
 '''Deze pagina is al gewist of heeft nooit bestaan!''',
 '''Please use the interactive user interface to delete pages!''':
 '''Gebruik de interactieve gebruikersinterface om pagina\'s te verwijderen!''',
-'''Page "%s" was successfully deleted!''':
-'''Verwijderen van pagina "%s" is gelukt!''',
 '''Really delete this page?''':
 '''Deze pagina werkelijk verwijderen?''',
 '''Delete''':
@@ -640,8 +634,6 @@ Probeer een andere naam.''',
 '''Versturen van bijlage \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Tekening \'%(filename)s\' opgeslagen.''',
-'''%(hours)dh %(mins)dm ago''':
-'''%(hours)du %(mins)dm geleden''',
 '''(no bookmark set)''':
 '''(geen bladwijzer ingesteld)''',
 '''(currently set to %s)''':
@@ -664,10 +656,6 @@ Probeer een andere naam.''',
 '''Download een export naar XML van deze wiki''',
 '''No wanted pages in this wiki.''':
 '''Geen gewenste pagina\'s in deze wiki.''',
-'''**Maximum number of allowed includes exceeded**''':
-'''**Maximum aantal toegestane includes overschreden**''',
-'''**Could not find the referenced page: %s**''':
-'''**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Er werd "%(wanted)s" na "%(key)s" verwacht, er kwam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -750,8 +738,6 @@ rood=bewerken''',
 '''Of probeer een van deze acties: ''',
 '''Page''':
 '''Pagina''',
-'''Trail''':
-'''Spoor''',
 '''User''':
 '''Gebruiker''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':

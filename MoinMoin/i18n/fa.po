@@ -25,7 +25,6 @@ msgstr ""
 "X-HasWikiMarkup: True\n"
 "X-Language-in-English: Persian\n"
 
-#, fuzzy
 msgid ""
 "The backed up content of this page is deprecated and will not be included in "
 "search results!"
@@ -33,9 +32,9 @@ msgstr ""
 "نسخه های پشتیبان گرفته شده از این صفحه راضی کننده نبوده اند و در نتایج جستجو "
 "نخواهند آمد"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Revision %(rev)d as of %(date)s"
-msgstr "ویرایش %(rev) .... %(date)s"
+msgstr "ویرایش %(rev)d as of %(date)s"
 
 #, python-format
 msgid "Redirected from page \"%(page)s\""
@@ -79,10 +78,8 @@ msgstr "این صفحه قابل تغییر نمی باشد"
 msgid "Cannot edit old revisions!"
 msgstr "شما نمی توانید ویرایش های قبلی را ویرایش نمایید"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr ""
-"زمان قفلی که شما گذاشته اید به سر آمده است٬ آماده ویرایش ناسازگاریها باشید"
+msgstr "زمان قفلی که شما گذاشته اید به سر آمده است٬ آماده ویرایش مجدد باشید"
 
 msgid "Page name is too long, try shorter name."
 msgstr "نام این صفحه بسیار بلند است٬ لطفا نام کوتاه تری انتخاب نمایید"
@@ -167,20 +164,20 @@ msgid "Preview"
 msgstr "پیش نمایش"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "حالت گرافیکی"
 
 msgid "Your changes are not saved!"
-msgstr ""
+msgstr "تغییراتی که شما انجام داده اید ذخیره نشده اند !"
 
 msgid "Comment:"
-msgstr ""
+msgstr "نظر:"
 
 msgid "<No addition>"
 msgstr "<چیزی اضافه نمی شود>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "به %(category)s اضافه شود"
 
 msgid "Trivial change"
 msgstr "تغییرات جزئی"
@@ -188,7 +185,6 @@ msgstr "تغییرات جزئی"
 msgid "Remove trailing whitespace from each line"
 msgstr "جاهای خالی را از هر خط حذف کن"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -222,17 +218,21 @@ msgstr ""
 "·Links::·[[Verbatim(JoinCapitalizedWords)]];·[[Verbatim"
 "([\"brackets·and·double·quotes\"])]];·url;·[url];·[url·label].\n"
 "·Tables::·||·cell·text·||||·cell·text·spanning·2·columns·||;"
-"····no·trailing·white·space·allowed·after·tables·or·titles."
+"····no·trailing·white·space·allowed·after·tables·or·titles.\n"
+"\n"
+"(!)·For·more·help,·see·HelpOnEditing·or·SyntaxReference.\n"
 
 msgid "Edit was cancelled."
-msgstr ""
+msgstr "ویرایش لغو شد."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
+"با تشکر از تغییراتی که انجام دادید. از حسن توجه شما به جزئیات قدردانی می "
+"نماییم."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "صفحه \"%s\" با موفقیت حذف شد!"
 
 #, python-format
 msgid ""
@@ -259,47 +259,49 @@ msgid ""
 "%(comment)s\n"
 "\n"
 msgstr ""
+"نظر ارسال شده در مورد این تغییرات:\n"
+"%(comment)s\n"
+"\n"
 
 msgid "New page:\n"
-msgstr ""
+msgstr "صفحه جدید:\n"
 
 msgid "No differences found!\n"
-msgstr ""
+msgstr "تغییری یافت نشد!\n"
 
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr ""
+msgstr "[%(sitename)s]·%(trivial)sUpdate·of·\"%(pagename)s\"·by·%(username)s"
 
 msgid "Trivial "
-msgstr ""
+msgstr "جزئی"
 
 msgid "Status of sending notification mails:"
-msgstr ""
+msgstr "وضعیت ایمیل های آگاه سازی:"
 
 #, python-format
 msgid "[%(lang)s] %(recipients)s: %(status)s"
-msgstr ""
+msgstr "[%(lang)s]·%(recipients)s:·%(status)s"
 
 #, python-format
 msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
-msgstr ""
+msgstr "نسخه پشتیبان صفحه \"%(pagename)s\" در تاریخ %(date)s وارد شد"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "این صفحه قفل ویرایش نشد. ایراد منتظره (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
+msgstr "این صفحه قفل ویرایش نشد. فایل از دست رفته است ؟"
 
 msgid "You are not allowed to edit this page!"
-msgstr ""
+msgstr "شما مجاز به ویرایش این صفحه نمی باشید!"
 
 msgid "You cannot save empty pages."
-msgstr ""
+msgstr "ذخیره صفحات خالی مجاز نیست."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "شما مجاز به ویرایش این صفحه نمی باشید"
+msgstr "شما این صفحه را ذخیر نموده اید !"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -312,43 +314,62 @@ msgid ""
 "the content editbox with your version of the page, because that would\n"
 "delete the changes of the other person, which is excessively rude!''\n"
 msgstr ""
+"متاسفانه شخص دیگری در حالی که شما مشغول ویرایش این بودید صفحه را ذخیره نموده "
+"است.\n"
+"\n"
+"لطفا مراحل زیر را انجام دهید: دکمه back مرورگر خود را فشار داده و روی لینک "
+"Edit Text مجددا کلیک نمایید.\n"
+"اکنون مجددا تغییرات خود را در صفحه انجام دهید.\n"
+"\n"
+"لطفا با توجه به تغییراتی که نفر قبل انجام داده است شما مجددا صفحه را مرور "
+"نموده و تغییراتی را که لازم میدانید اعمال نمایید.\n"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
 msgstr ""
+"نسخه پشتیبانی از تغییراتی که شما اعمال نموده اید [%(backup_url)s·اینجا] وجود "
+"دارد."
 
 msgid "You did not change the page content, not saved!"
-msgstr ""
+msgstr "تغییری از طرف شما اعمال نشد٬ چیزی ذخیره نشد!"
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
 msgstr ""
+"شما مجاز به تغییر ACL ها در این صفحه نمی باشید. این کار نیاز به سطح دسترسی "
+"مدیر دارد!"
 
 #, python-format
 msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
+"زمان قفل ویرایش %(owner)s در %(mins_ago)d پیش منقضی شده است و قفل ویرایش این "
+"صفحه در اختیار شما می باشد."
 
 #, python-format
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr ""
+msgstr "سایر کاربران تا %(bumptime)s دیگر مجاز به تغییر این صفحه نخواهند بود."
 
 #, python-format
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
+"سایر کاربران تا %(bumptime)s دیگر پیغامی مبنی بر اینکه شما در حال ویرایش این "
+"صفحه می باشید دریافت خواهند نمود."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr ""
+msgstr "جهت تمدید مدت زمان قفل ویرایش دکمه Preview را فشار دهید."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
+"این صفحه توسط %(owner)s تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل در حال ویرایش بودن قفل "
+"شده است."
 
 #, python-format
 msgid ""
@@ -359,105 +380,110 @@ msgid ""
 "to avoid editing conflicts.'''[[BR]]\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
+"این صفحه برای پیش نمایش و یا ویرایش در %(timestamp)s توسط %(owner)s.[[BR]]\n"
+"باز شده است.برای جلوگیری از ناسازگاریهای ناخواسته از ویرایش این صفحه حداقل "
+"برای مدت زمان %(mins_valid)d·دقیقه(s),\n"
+"دیگر خودداری نمایید.'''[[BR]]\n"
+"جهت ترک ویرایشگر دکمه Cancel را فشار دهید."
 
 msgid "<unknown>"
-msgstr ""
+msgstr "<نامشخص>"
 
 msgid "Diffs"
-msgstr ""
+msgstr "تغییرات"
 
 msgid "Info"
-msgstr ""
+msgstr "اطلاع"
 
 msgid "Edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "UnSubscribe"
-msgstr ""
+msgstr "غیر عضو"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "عضویت"
 
 msgid "Raw"
-msgstr ""
+msgstr "Raw"
 
 msgid "XML"
-msgstr ""
+msgstr "XML"
 
 msgid "Print"
-msgstr ""
+msgstr "چاپ"
 
 msgid "View"
-msgstr ""
+msgstr "دیدن"
 
 msgid "Up"
-msgstr ""
+msgstr "بالا"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "لطفا در اطلاعات نویسنده آدرس ایمیل من را اصلاح نمایید."
 
 msgid "Open editor on double click"
-msgstr ""
+msgstr "با دوبار کلیک ویرایشگر را باز کن"
 
 msgid "Remember last page visited"
-msgstr ""
+msgstr "آخرین صفحه ای که میبینم را به خاطر بسپار"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr ""
+msgstr "به جای لینک صفحه هایی که وجود ندارند علامت سوال بگذار"
 
 msgid "Show page trail"
-msgstr ""
+msgstr "دنبالک صفحه را نشان بده"
 
 msgid "Show icon toolbar"
-msgstr ""
+msgstr "نوار ابزار آیکونها را نشان بده"
 
 msgid "Show top/bottom links in headings"
-msgstr ""
+msgstr "دنبالکهای بالا/پایین را در بلای صفحه نشان بده"
 
 msgid "Show fancy diffs"
-msgstr ""
+msgstr "تفاوتهای فانتزی را نشان بده"
 
 msgid "Add spaces to displayed wiki names"
-msgstr ""
+msgstr "بین نام ویکی های نمایش داده شده فاصله اضافه کن"
 
 msgid "Remember login information"
-msgstr ""
+msgstr "اطلاعات ورودی مرا به خاطر بسپار"
 
 msgid "Subscribe to trivial changes"
-msgstr ""
+msgstr "عضویت در گزارش تغییرات جزئی"
 
 msgid "Disable this account forever"
-msgstr ""
+msgstr "این حساب کاربری را برای همیشه غیرفعال کن"
 
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 msgid "(Use Firstname''''''Lastname)"
-msgstr ""
+msgstr "(از نام''''''نام خانوادگی استفاده نمایید)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "نام مستعار"
 
 msgid "Password"
-msgstr ""
+msgstr "کلمه عبور"
 
 msgid "Password repeat"
-msgstr ""
+msgstr "تکرار کلمه عبور"
 
 msgid "(Only when changing passwords)"
-msgstr ""
+msgstr "(فقط برای زمانی که میخواهید کلمه عبور خود را تغییر دهید)"
 
 msgid "Email"
-msgstr ""
+msgstr "آدرس ایمیل"
 
 msgid "User CSS URL"
-msgstr ""
+msgstr "آدرس CSS کاربر"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr ""
+msgstr "(جهت غیر فعال نمودن CSS کاربر٬ این قسمت را خالی گذارید)"
 
 msgid "Editor size"
-msgstr ""
+msgstr "اندازه ویرایشگر"
 
 #, python-format
 msgid ""
@@ -465,17 +491,20 @@ msgid ""
 "Name may contain any Unicode alpha numeric character, with optional one\n"
 "space between words. Group page name is not allowed."
 msgstr ""
+"نام کاربری غیر قابل قبول {{{'%s'}}} نام کاربری میتواند شامل کاراکترهای "
+"شمارشی Unicode با یک فاصله بین کلمات باشد.\n"
+"نام صفحات گروهی قابل قبول نیست."
 
 #, python-format
 msgid "You are not allowed to do %s on this page."
-msgstr ""
+msgstr "شما مجاز به %s روی این صفحه نمی باشید"
 
 msgid "Login"
-msgstr ""
+msgstr "ورود"
 
 #, python-format
 msgid " %s and try again."
-msgstr ""
+msgstr "لطفا %s نموده و مجددا سعی نمایید."
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1000,13 +1029,11 @@ msgstr ""
 msgid "You are not allowed to get attachments from this page."
 msgstr ""
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "شما مجاز به مشاهده این صفحه نیستید"
+msgstr "شما مجاز نیستید ضمائم فشرده این صفحه را باز کنید."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "شما مجاز به ویرایش این صفحه نمی باشید"
+msgstr "شما اجازه نصب فایل ندارید."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr ""

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-10-30 13:52+0100\n"
-"PO-Revision-Date: 2005-08-15 19:46-0700\n"
+"PO-Revision-Date: 2005-11-09 23:54-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,6 @@ msgstr "Неизменяемая страница!"
 msgid "Cannot edit old revisions!"
 msgstr "Старые версии нельзя изменять!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Привилегия на изменения истекла, приготовьтесь к конфликтам!"
 
@@ -161,9 +160,8 @@ msgstr "Показать макет"
 msgid "GUI Mode"
 msgstr "Графический редактор"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Вы не сделали никаких исправлений - страница не переписана!"
+msgstr "Ваши исправления не сохранились!"
 
 msgid "Comment:"
 msgstr "Комментарий:"
@@ -181,7 +179,6 @@ msgstr "Малое изменение"
 msgid "Remove trailing whitespace from each line"
 msgstr "Стереть хвостовые пробелы из каждой строки"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -210,16 +207,18 @@ msgstr ""
 "Уровня 2 [[Verbatim(==)]]; [[Verbatim(===)]] Уровня 3 [[Verbatim(===)]]; "
 "[[Verbatim(====)]] Уровня 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Уровня 5 "
 "[[Verbatim(=====)]].\n"
-" Списки:: пробел и один из * буллетов - ненумерованный список; 1., a., A., "
-"i., I. - нумерованный список; 1.#n начать нумерацию с n; только пробел дает "
+" Списки:: пробел и один из: * - ненумерованный список; 1., a., A., i., I. - "
+"нумерованный список; 1.#n - начать нумерацию с n; только пробел(ы) дают "
 "отступ.\n"
 " Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim([\"скобки и двойные кавычки"
 "\"])]]; url; [url]; [url метка].\n"
 " Таблицы:: || текст клетки |||| текст клетки растянутый на 2 колонки ||; "
-"после таблиц и заголовков нельзя оставлять пробелы."
+"после таблиц и заголовков нельзя оставлять пробелы.\n"
+"\n"
+"(!) Подробная помощь КакРедактировать и СправочникПоСинтаксису.\n"
 
 msgid "Edit was cancelled."
-msgstr "Изменение отменено."
+msgstr "Исправления отменены."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям."
@@ -503,9 +502,9 @@ msgstr "Войти"
 msgid " %s and try again."
 msgstr " %s и попробуйте еще раз."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "Найдено %(hits)d из %(pages)d просмотренных страниц:"
+msgstr "%(hits)d результатов из %(pages)d просмотренных страниц."
 
 #, python-format
 msgid "%.2f seconds"
@@ -552,7 +551,7 @@ msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] Ваша запись пользователя"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Cookie стерты. Вы вышли."
@@ -601,7 +600,6 @@ msgstr "Пароли не совпадают!"
 msgid "Please specify a password!"
 msgstr "Пожалуйста укажите пароль!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
@@ -613,7 +611,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Это чужой адрес."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Пользователь создан!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -626,7 +624,7 @@ msgid "Default"
 msgstr "По умолчанию"
 
 msgid "<Browser setting>"
-msgstr "<Настройки броузера>"
+msgstr "<Настройки браузера>"
 
 msgid "the one preferred"
 msgstr "предпочтительно"
@@ -800,29 +798,26 @@ msgid "You are not allowed to revert this page!"
 msgstr "Вы не можете восстанавливать из архива эту страницу!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Зарегистрируйтесь чтобы добавить закладку."
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Ваша ссылка на эту страницу удалена."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
 msgstr "Вам добавлена ссылка на эту страницу."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Вы не можете подписаться на страницу которую вам нельзя читать."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
-"может разрешить отправку."
+msgstr "В этом вики запрещена отправка почты."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Зарегистрируйтесь чтобы воспользоваться подпиской."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
+"Добавьте ваш почтовый адрес в ВашиНастройки чтобы воспользоваться подпиской."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Вы больше не подписаны на эту страницу."
@@ -831,7 +826,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Не могу удалить подписку по образцу."
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Исправьте ВашиНастройки содержащие образцы подписки."
 
 msgid "You have been subscribed to this page."
 msgstr "Теперь вы подписаны на эту страницу."
@@ -884,7 +879,7 @@ msgid "Python Version"
 msgstr "Версия Python"
 
 msgid "MoinMoin Version"
-msgstr "Версия MoinMoin"
+msgstr "Версия МойнМойн"
 
 #, python-format
 msgid "Release %s [Revision %s]"
@@ -924,13 +919,11 @@ msgstr "Общие дополнительные действия"
 msgid "Local extension actions"
 msgstr "Местные дополнительные действия"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Доступные парсеры"
+msgstr "Общие парсеры"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Местные дополнительные макросы"
+msgstr "Местные дополнительные парсеры"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Доступные процессоры (УСТАРЕЛО - используйте парсеры)"
@@ -945,7 +938,7 @@ msgid "Lupy search"
 msgstr "Общий поиск"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Активных потоков"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -1004,10 +997,10 @@ msgstr ""
 "так как он чисто внутренний и часто меняется."
 
 msgid "unzip"
-msgstr ""
+msgstr "unzip"
 
 msgid "install"
-msgstr ""
+msgstr "install"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1054,7 +1047,8 @@ msgstr "Вам нельзя делать рисунки на этой стран
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
-msgstr "Плохой файл. Сотрите все не ASCII символы из файла и попробуйте снова."
+msgstr ""
+"Плохое имя файла. Уберите все спец-символы из имени файла и попробуйте снова."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Вам нельзя стирать приложения к этой странице."
@@ -1062,13 +1056,11 @@ msgstr "Вам нельзя стирать приложения к этой ст
 msgid "You are not allowed to get attachments from this page."
 msgstr "Вам нельзя забирать приложения к этой странице."
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Вам нельзя смотреть приложения к этой странице."
+msgstr "Вам нельзя распаковывать приложения к этой странице."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Вам нельзя менять эту страницу."
+msgstr "Вам нельзя устанавливать файлы."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Вам нельзя смотреть приложения к этой странице."
@@ -1097,57 +1089,60 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Приложение '%(filename)s' стерто."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Приложение '%(filename)s' стерто."
+msgstr "Приложение '%(filename)s' установлено."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Рисунок '%(filename)s' записан."
+msgstr "Установка '%(filename)s' не удалась."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Файл %s не является пакетом МойнМойн."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
+"Приложение '%(filename)s' не распаковано, т.к. не хватает места (%(space)d "
+"Кб)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
+"Приложение '%(filename)s' не распаковано, т.к. получается слишком много "
+"файлов (%(count)d лишних)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Приложение '%(filename)s' стерто."
+msgstr "Приложение '%(filename)s' распаковано."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
-msgstr ""
+msgstr "Приложение '%(filename)s' не распаковано, т.к. файлы слишком велики"
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "Файл %(target)s не zip-архив."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Приложение '%(filename)s'"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Команды пакета:"
 
-#, fuzzy
 msgid "File Name"
 msgstr "Файл"
 
 msgid "Modified"
-msgstr ""
+msgstr "Исправлено"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Незнакомый тип файла, не могу показать приложение в тексте."
@@ -1318,9 +1313,9 @@ msgstr "Загружено приложение '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Рисунок '%(filename)s' записан."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "%(hours)dч %(mins)dм назад"
+msgstr "%(mins)dм назад"
 
 msgid "(no bookmark set)"
 msgstr "(нет закладки)"
@@ -1473,17 +1468,15 @@ msgstr "По тексту"
 msgid "Titles"
 msgstr "По заголовкам"
 
-#, fuzzy
 msgid "Search"
-msgstr "Искать:"
+msgstr "Искать"
 
 msgid "More Actions:"
 msgstr "Другие действия:"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
-#, fuzzy
 msgid "Raw Text"
 msgstr "Показать разметку"
 
@@ -1493,13 +1486,11 @@ msgstr "Убрать из кэша"
 msgid "Delete Page"
 msgstr "Вырвать страницу"
 
-#, fuzzy
 msgid "Like Pages"
-msgstr "ПохожиеСтраницы"
+msgstr "Похожие Страницы"
 
-#, fuzzy
 msgid "Local Site Map"
-msgstr "КартаОкресностей"
+msgstr "Карта Окресностей"
 
 msgid "Do"
 msgstr "Выполняй!"
@@ -1513,16 +1504,14 @@ msgstr "Исправить (Графически)"
 msgid "Immutable Page"
 msgstr "Неизменяемая страница"
 
-#, fuzzy
 msgid "Remove Link"
 msgstr "Убрать из закладок"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Добавить ссылку"
 
-#, fuzzy
 msgid "Attachments"
-msgstr "Новое приложение"
+msgstr "Приложения"
 
 #, python-format
 msgid "Show %s days."
@@ -1563,9 +1552,8 @@ msgstr "Добавления помечены так."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Соединиться с почтовым сервером '%(server)s' не удалось: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "Почта ушла."
+msgstr "Почта не ушла."
 
 msgid "Mail sent OK"
 msgstr "Почта ушла."
@@ -1641,81 +1629,3 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
-
-#, fuzzy
-#~ msgid "Parent Page"
-#~ msgstr "Начало"
-
-#~ msgid "Trail"
-#~ msgstr "След"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Вы еще не создали свои настройки. Выберите ВашиНастройки в правом верхнем "
-#~ "углу для их создания."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, "
-#~ "который может разрешить отправку или убрать кнопку \"Подписка\"."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "В ВашихНастройках не указан почтовый адрес. Нажмите на свое имя в правом "
-#~ "верхнем углу и введите правильный почтовый адрес."
-
-#, fuzzy
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Для отмены подписки зайдите в ВашиНастройки и уберите эту страницу из "
-#~ "списка подписки."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Превышено максимальное число вставок include**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Не могу найти страницу по ссылке: %s**"
-
-#, fuzzy
-#~ msgid "Quicklink"
-#~ msgstr "Закладки"
-
-#~ msgid "Show Print View"
-#~ msgstr "Версия для печати"
-
-#~ msgid "Attach File"
-#~ msgstr "Приложить файл"
-
-#~ msgid "Show Like Pages"
-#~ msgstr "Найти похожие страницы"
-
-#~ msgid "Show Local Site Map"
-#~ msgstr "Карта окресностей"
-
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Справка"
-
-#~ msgid "Can't work out query"
-#~ msgstr "Не могу выполнить запрос"
-
-#~ msgid "Add to Quicklinks"
-#~ msgstr "Добавить в закладки"
-
-#~ msgid "Show Parent"
-#~ msgstr "Показать обложку"
-
-#~ msgid "Show Changes"
-#~ msgstr "Показать изменения"
-
-#~ msgid "Get Info"
-#~ msgstr "Справка"

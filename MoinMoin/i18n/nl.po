@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 22:17+0200\n"
+"POT-Creation-Date: 2005-10-30 13:52+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -171,6 +171,10 @@ msgid "GUI Mode"
 msgstr ""
 
 #, fuzzy
+msgid "Your changes are not saved!"
+msgstr "U hebt niets veranderd. Niet opgeslagen!"
+
+#, fuzzy
 msgid "Comment:"
 msgstr "Commentaar"
 
@@ -225,6 +229,13 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "Bewerking werd geannuleerd."
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Verwijderen van pagina \"%s\" is gelukt!"
 
 #, python-format
 msgid ""
@@ -333,9 +344,6 @@ msgid ""
 msgstr ""
 "U kunt op deze pagina geen ACL's veranderen want u hebt niet de rechten van "
 "een beheerder!"
-
-msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd."
 
 #, python-format
 msgid ""
@@ -522,19 +530,6 @@ msgstr " overeenkomst"
 msgid "matches"
 msgstr " overeenkomsten"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie verwijderd. U bent nu uitgelogd."
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
-"Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten."
-
-msgid "Please provide a valid email address!"
-msgstr "Geef een geldig e-mailadres op!"
-
 #, python-format
 msgid ""
 "Login Name: %s\n"
@@ -543,12 +538,6 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"Geen account gevonden dat overeenkomt met het opgegeven e-mailadres '%(email)"
-"s'!"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -564,6 +553,25 @@ msgstr ""
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
+
+msgid "Cookie deleted. You are now logged out."
+msgstr "Cookie verwijderd. U bent nu uitgelogd."
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
+"Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten."
+
+msgid "Please provide a valid email address!"
+msgstr "Geef een geldig e-mailadres op!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr ""
+"Geen account gevonden dat overeenkomt met het opgegeven e-mailadres '%(email)"
+"s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -677,6 +685,9 @@ msgstr "Profiel aanmaken"
 msgid "Mail me my account data"
 msgstr "Stuur me mijn accountgegevens per e-mail"
 
+msgid "Action"
+msgstr "Actie"
+
 msgid "No older revisions available!"
 msgstr "Geen oudere versies aanwezig!"
 
@@ -736,9 +747,6 @@ msgstr "Bewerker"
 msgid "Comment"
 msgstr "Commentaar"
 
-msgid "Action"
-msgstr "Actie"
-
 msgid "view"
 msgstr "bekijken"
 
@@ -794,12 +802,8 @@ msgstr "Aantal raadplegingen en bewerkingen"
 msgid "You are not allowed to revert this page!"
 msgstr "U hebt geen toestemming om deze pagina terug te zetten!"
 
-msgid ""
-"You didn't create a user profile yet. Select UserPreferences in the upper "
-"right corner to create a profile."
+msgid "You must login to add a quicklink."
 msgstr ""
-"U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen in "
-"de hoek rechtsboven voor het aanmaken van een profiel."
 
 #, fuzzy
 msgid "Your quicklink to this page has been removed."
@@ -814,20 +818,17 @@ msgstr ""
 "U hebt geen toestemming zich te abonneren op een pagina die u niet kunt "
 "lezen."
 
-msgid ""
-"This wiki is not enabled for mail processing. Contact the owner of the wiki, "
-"who can either enable email, or remove the \"Subscribe\" icon."
+#, fuzzy
+msgid "This wiki is not enabled for mail processing."
 msgstr ""
-"Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op "
-"met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail "
-"opstarten, of het pictogram \"Abonneren\" verwijderen."
+"Deze wiki is niet ingesteld op het afhandelen van e-mail.\n"
+"Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten."
 
-msgid ""
-"You didn't enter an email address in your profile. Select your name "
-"(UserPreferences) in the upper right corner and enter a valid email address."
+msgid "You must log in to use subscribtions."
 msgstr ""
-"U hebt geen e-mailadres opgegeven in u profiel. Kies u naam "
-"(UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
@@ -835,13 +836,8 @@ msgstr "Uw abonnement op deze pagina is ongedaan gemaakt."
 msgid "Can't remove regular expression subscription!"
 msgstr "Kan geen reguliere expressie-abonnement verwijderen!"
 
-#, fuzzy
-msgid ""
-"To unsubscribe, go to your profile and delete the item matching this page "
-"from the subscription list."
+msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst "
-"met abonnementen."
 
 msgid "You have been subscribed to this page."
 msgstr "U bent geabonneerd op deze pagina."
@@ -1125,6 +1121,18 @@ msgstr "Tekening '%(filename)s' opgeslagen."
 msgid "The file %s is not a MoinMoin package file."
 msgstr ""
 
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
 msgstr "Bijlage '%(filename)s' verwijderd."
@@ -1136,13 +1144,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid ""
-"Attachment '%(filename)s' could not be unzipped because the resulting files "
-"would be too large (%(space)d kB missing)."
-msgstr ""
-
-#, python-format
-msgid "The file %(target) is not a .zip file."
+msgid "The file %(target)s is not a .zip file."
 msgstr ""
 
 #, python-format
@@ -1175,10 +1177,6 @@ msgstr "Deze pagina is al gewist of heeft nooit bestaan!"
 msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
 "Gebruik de interactieve gebruikersinterface om pagina's te verwijderen!"
-
-#, python-format
-msgid "Page \"%s\" was successfully deleted!"
-msgstr "Verwijderen van pagina \"%s\" is gelukt!"
 
 msgid "Really delete this page?"
 msgstr "Deze pagina werkelijk verwijderen?"
@@ -1332,8 +1330,8 @@ msgstr "Versturen van bijlage '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Tekening '%(filename)s' opgeslagen."
 
-#, python-format
-msgid "%(hours)dh %(mins)dm ago"
+#, fuzzy, python-format
+msgid "%(mins)dm ago"
 msgstr "%(hours)du %(mins)dm geleden"
 
 msgid "(no bookmark set)"
@@ -1369,13 +1367,6 @@ msgstr "Download een export naar XML van deze wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Geen gewenste pagina's in deze wiki."
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maximum aantal toegestane includes overschreden**"
-
-#, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1501,10 +1492,6 @@ msgstr "Titels"
 msgid "Search"
 msgstr "Zoeken:"
 
-#, fuzzy
-msgid "Quicklink"
-msgstr "Snelkoppelingen"
-
 msgid "More Actions:"
 msgstr "Meer acties:"
 
@@ -1517,10 +1504,6 @@ msgstr "Ruwe tekst tonen"
 
 msgid "Delete Cache"
 msgstr "Buffer legen"
-
-#, fuzzy
-msgid "Attachments"
-msgstr "Nieuwe bijlage"
 
 msgid "Delete Page"
 msgstr "Pagina verwijderen"
@@ -1537,10 +1520,6 @@ msgid "Do"
 msgstr "Uitvoeren"
 
 #, fuzzy
-msgid "Parent Page"
-msgstr "VoorPagina"
-
-#, fuzzy
 msgid "Edit (Text)"
 msgstr "TekstBewerken"
 
@@ -1549,6 +1528,17 @@ msgstr ""
 
 msgid "Immutable Page"
 msgstr "Vastliggende pagina"
+
+#, fuzzy
+msgid "Remove Link"
+msgstr "Snelkoppelingen"
+
+msgid "Add Link"
+msgstr ""
+
+#, fuzzy
+msgid "Attachments"
+msgstr "Nieuwe bijlage"
 
 #, python-format
 msgid "Show %s days."
@@ -1565,9 +1555,6 @@ msgstr "Of probeer een van deze acties: "
 
 msgid "Page"
 msgstr "Pagina"
-
-msgid "Trail"
-msgstr "Spoor"
 
 msgid "User"
 msgstr "Gebruiker"
@@ -1671,6 +1658,54 @@ msgstr "PaginaHernoemen"
 msgid "SpellCheck"
 msgstr "Spellingscontrole"
 
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "U hebt nog geen gebruikersprofiel aangemaakt. Kies GerbuikersInstellingen "
+#~ "in de hoek rechtsboven voor het aanmaken van een profiel."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Deze wiki is niet ingesteld op het afhandelen van e-mail. Neem contact op "
+#~ "met de eigenaar van de wiki. Hij of zij kan het afhandelen van e-mail "
+#~ "opstarten, of het pictogram \"Abonneren\" verwijderen."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "U hebt geen e-mailadres opgegeven in u profiel. Kies u naam "
+#~ "(UserPreferences) in de hoek rechtsboven en geef een geldig e-mailadres."
+
+#, fuzzy
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst "
+#~ "met abonnementen."
+
+#~ msgid "**Maximum number of allowed includes exceeded**"
+#~ msgstr "**Maximum aantal toegestane includes overschreden**"
+
+#~ msgid "**Could not find the referenced page: %s**"
+#~ msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
+
+#, fuzzy
+#~ msgid "Quicklink"
+#~ msgstr "Snelkoppelingen"
+
+#, fuzzy
+#~ msgid "Parent Page"
+#~ msgstr "VoorPagina"
+
+#~ msgid "Trail"
+#~ msgstr "Spoor"
+
 #~ msgid "Show Print View"
 #~ msgstr "Afdrukvoorbeeld tonen"
 
@@ -1689,10 +1724,6 @@ msgstr "Spellingscontrole"
 
 #~ msgid "Can't work out query"
 #~ msgstr "Deze query kan niet beantwoord worden"
-
-#, fuzzy
-#~ msgid "Remove from Quicklinks"
-#~ msgstr "Snelkoppelingen"
 
 #, fuzzy
 #~ msgid "Add to Quicklinks"
