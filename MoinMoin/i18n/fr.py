@@ -745,7 +745,7 @@ Essayez un autre nom.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossible de créer une page sans nom. Veuillez indiquer un nom de page.''',
 '''Upload new attachment "%(filename)s"''':
-'''Envoi d\'une nouvelle pièce jointe « %(filename)s »''',
+'''Envoyer la nouvelle pièce jointe « %(filename)s »''',
 '''Create new drawing "%(filename)s"''':
 '''Création nouveau dessin « %(filename)s »''',
 '''Edit drawing %(filename)s''':

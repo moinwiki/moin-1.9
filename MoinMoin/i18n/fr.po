@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-10-23 15:04+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -604,6 +604,10 @@ msgstr ""
 "Mot de passe absent. Veuillez indiquer un nom d'utilisateur et un mot de "
 "passe."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "Désolé, mauvais mot de passe."
 
@@ -612,6 +616,9 @@ msgstr "Mauvaise URL de reconnexion."
 
 msgid "Unknown user."
 msgstr "Utilisateur inconnu."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr ""
@@ -1305,7 +1312,7 @@ msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
-msgstr "Envoi d'une nouvelle pièce jointe « %(filename)s »"
+msgstr "Envoyer la nouvelle pièce jointe « %(filename)s »"
 
 #, python-format
 msgid "Create new drawing \"%(filename)s\""

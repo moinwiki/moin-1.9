@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-10-31 15:40+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -582,6 +582,10 @@ msgid "Missing password. Please enter user name and password."
 msgstr ""
 "パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "不正なパスワードです。"
 
@@ -590,6 +594,9 @@ msgstr "再ログインのURLが不正です。"
 
 msgid "Unknown user."
 msgstr "不正なユーザ名です。"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "ユーザ名が入力されていません。ユーザ名を入力してください。"
