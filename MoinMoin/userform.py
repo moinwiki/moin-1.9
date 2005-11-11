@@ -114,8 +114,11 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
             # Load the user data and check for validness
             theuser = user.User(self.request, name=name, password=password)
             if not theuser.valid:
-                return _("Sorry, wrong password.")
-            
+                if theuser.disabled:
+                    return _('Account "%s" is disabled.') % name
+                else:
+                    return _("Sorry, wrong password.")
+
             # Save the user and send a cookie
             self.request.user = theuser
             self.request.setCookie()
