@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2004-12-27 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -569,6 +569,10 @@ msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
 msgid "Missing password. Please enter user name and password."
 msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "Przykro mi, hasło nieprawidłowe."
 
@@ -577,6 +581,9 @@ msgstr "Niewłaściwy URL logowania."
 
 msgid "Unknown user."
 msgstr "Nieznany identyfikator czytelnika."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Puste pole identyfikatora. Podaj swój identyfikator"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -368,8 +368,8 @@ msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"این صفحه توسط %(owner)s تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل در حال ویرایش بودن قفل "
-"شده است."
+"این صفحه توسط %(owner)s تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل "
+"در حال ویرایش بودن قفل شده است."
 
 #, python-format
 msgid ""
@@ -566,6 +566,10 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr ""
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr ""
 
@@ -573,6 +577,9 @@ msgid "Bad relogin URL."
 msgstr ""
 
 msgid "Unknown user."
+msgstr ""
+
+msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 
 msgid "Empty user name. Please enter a user name."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -553,6 +553,10 @@ msgstr "משתמש לא קיים: {{{\"%s\"}}}. אנא הכנס שם משתמש 
 msgid "Missing password. Please enter user name and password."
 msgstr "סיסמא חסרה. אנא הכנס שם משתמש וסיסמא."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "מצטער, סיסמא לא נכונה."
 
@@ -561,6 +565,9 @@ msgstr "כתובת חיבור–מחדש לא נכונה."
 
 msgid "Unknown user."
 msgstr "משתמש לא קיים."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "שם משתמש ריק. אנא הכנס שם משתמש."

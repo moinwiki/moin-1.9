@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -592,6 +592,10 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "Contrasenya errònia."
 
@@ -600,6 +604,9 @@ msgstr "L'URL de reentrada és errònia."
 
 msgid "Unknown user."
 msgstr "L'usuari és desconegut."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "El nom d'usuari és buit. Introduïu un nom d'usuari."

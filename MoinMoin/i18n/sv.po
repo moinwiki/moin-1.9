@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-11-06 14:30+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -584,6 +584,10 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Lösenord saknas. Var god ange ditt användarnamn och lösenord."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "Tyvärr, felaktigt lösenord."
 
@@ -592,6 +596,9 @@ msgstr "Ogiltig ominloggnings-URL."
 
 msgid "Unknown user."
 msgstr "Okänd användare."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Tomt användarnamn. Var god ange ett användarnamn."

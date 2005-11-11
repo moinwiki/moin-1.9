@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2005-10-30 01:56 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -589,6 +589,10 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "Desculpe. Senha errada."
 
@@ -597,6 +601,9 @@ msgstr "URL inválida para novo login."
 
 msgid "Unknown user."
 msgstr "Usuário desconhecido."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Nome do usuário não informado. Por favor, informe o nome do usuário."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-30 13:52+0100\n"
+"POT-Creation-Date: 2005-11-12 01:09+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -563,6 +563,10 @@ msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
 msgid "Missing password. Please enter user name and password."
 msgstr "需要密码, 请输入用户名和密码."
 
+#, python-format
+msgid "Account \"%s\" is disabled."
+msgstr ""
+
 msgid "Sorry, wrong password."
 msgstr "对不起, 无效密码."
 
@@ -571,6 +575,9 @@ msgstr "无效的登录URL."
 
 msgid "Unknown user."
 msgstr "无效用户."
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
 
 msgid "Empty user name. Please enter a user name."
 msgstr "请输入用户名."

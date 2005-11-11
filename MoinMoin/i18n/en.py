@@ -344,12 +344,16 @@ Contact the owner of the wiki, who can enable email.''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''',
 '''Missing password. Please enter user name and password.''':
 '''Missing password. Please enter user name and password.''',
+'''Account "%s" is disabled.''':
+'''Account "%s" is disabled.''',
 '''Sorry, wrong password.''':
 '''Sorry, wrong password.''',
 '''Bad relogin URL.''':
 '''Bad relogin URL.''',
 '''Unknown user.''':
 '''Unknown user.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Use UserPreferences to change your settings or create an account.''',
 '''Empty user name. Please enter a user name.''':
 '''Empty user name. Please enter a user name.''',
 '''This user name already belongs to somebody else.''':
