@@ -89,8 +89,6 @@ Contact the owner of the wiki, who can enable email.""")
 
             return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
 
-
-
         if form.has_key('login'):
             # Trying to login with a user name and a password
 
@@ -143,6 +141,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
         elif (form.has_key('create') or
               form.has_key('create_only') or
               form.has_key('create_and_mail')):
+            if self.request.request_method != 'POST':
+                return _("Use UserPreferences to change your settings or create an account.")
             # Create user profile
             if form.has_key('create'):
                 theuser = self.request.get_user()
@@ -221,6 +221,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             return result
 
         else: 
+            if self.request.request_method != 'POST':
+                return _("Use UserPreferences to change your settings or create an account.")
             # Save user profile
             theuser = self.request.get_user()
                 

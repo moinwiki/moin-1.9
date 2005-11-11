@@ -4,6 +4,8 @@ MoinMoin Version History
 Current:
     * added support for linking to .ico and .bmp
     * fixed editor preview throwing away page content for new pages
+  Fixes:
+    * require POST for userform save and create* action
 
 Version 1.5.0beta2:
   Fixes:
