@@ -6,6 +6,7 @@ Version 1.5.0beta3:
     * fixed editor preview throwing away page content for new pages
     * require POST for userform save and create* action
     * use request.normalizePagename() while collecting pagelinks
+    * do not offer gui editor for safari
   Other changes:
     * tell user if account is disabled
     * added support for linking to .ico and .bmp
