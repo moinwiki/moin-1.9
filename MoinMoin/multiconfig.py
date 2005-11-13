@@ -317,7 +317,7 @@ class DefaultConfig:
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
         ('edit_on_doubleclick', lambda _: _('Open editor on double click')),
-        ('remember_last_visit', lambda _: _('Remember last page visited')),
+        ('remember_last_visit', lambda _: _('Jump to last visited page instead of frontpage')),
         ('show_nonexist_qm', lambda _: _('Show question mark for non-existing pagelinks')),
         ('show_page_trail', lambda _: _('Show page trail')),
         ('show_toolbar', lambda _: _('Show icon toolbar')),
