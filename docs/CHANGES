@@ -1,11 +1,17 @@
 MoinMoin Version History
 ========================
 
-Current:
-    * added support for linking to .ico and .bmp
-    * fixed editor preview throwing away page content for new pages
+Version 1.5.0beta3:
   Fixes:
+    * fixed editor preview throwing away page content for new pages
     * require POST for userform save and create* action
+    * use request.normalizePagename() while collecting pagelinks
+  Other changes:
+    * tell user if account is disabled
+    * added support for linking to .ico and .bmp
+    * attachment methods for the text_xml and xml_docbook formatters
+    * new favicon
+    * updated i18n (fixed nl, did nobody notice this?) and underlay
 
 Version 1.5.0beta2:
   Fixes:
