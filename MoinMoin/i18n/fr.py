@@ -347,12 +347,16 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Nom d\'utilisateur inconnu : {{{"%s"}}}. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
 '''Missing password. Please enter user name and password.''':
 '''Mot de passe absent. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
+'''Account "%s" is disabled.''':
+'''Le compte « %s » est désactivé.''',
 '''Sorry, wrong password.''':
 '''Désolé, mauvais mot de passe.''',
 '''Bad relogin URL.''':
 '''Mauvaise URL de reconnexion.''',
 '''Unknown user.''':
 '''Utilisateur inconnu.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Utilisez les PréférencesUtilisateur pour modifier vos paramètres ou pour créer un compte.''',
 '''Empty user name. Please enter a user name.''':
 '''Nom d\'utilisateur absent. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
 '''This user name already belongs to somebody else.''':
@@ -651,15 +655,15 @@ en blanc, le nom original sera conservé.''',
 '''Unsupported upload action: %s''':
 '''Action d\'envoi non disponible : %s''',
 '''Attachments for "%(pagename)s"''':
-'''Pièces jointes de « %(pagename)s »''',
+'''Pièces jointes de « %(pagename)s »''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''La pièce jointe « %(target)s » (nom distant \'%(filename)s\') existe déjà.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
-'''Pièce jointe « %(target)s » (nom distant « %(filename)s ») de %(bytes)d octets enregistrée.''',
+'''Pièce jointe « %(target)s » enregistrée (nom distant « %(filename)s » ; %(bytes)d octets).''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Suppression de la pièce jointe « %(filename)s ».''',
 '''Attachment \'%(filename)s\' installed.''':
-'''Pièce jointe « %(filename)s » installée.''',
+'''Pièce jointe « %(filename)s » installée.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Enregistrement du dessin « %(filename)s ».''',
 '''The file %s is not a MoinMoin package file.''':
@@ -669,13 +673,13 @@ en blanc, le nom original sera conservé.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
 '''La pièce jointe « %(filename)s » n\'a pu être décompressée, car les fichiers résultants seraient trop nombreux (%(count)d en trop).''',
 '''Attachment \'%(filename)s\' unzipped.''':
-'''Pièce jointe « %(filename)s » décompressée.''',
+'''Pièce jointe « %(filename)s » décompressée.''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
 '''La pièce jointe « %(filename)s » n\'a pas été décompressée, car les fichiers sont trop volumineux, sont uniquement des fichiers .zip, existent déjà ou sont contenus dans des répertoires.''',
 '''The file %(target)s is not a .zip file.''':
 '''Le fichier %(target)s n\'est pas un fichier .zip.''',
 '''Attachment \'%(filename)s\'''':
-'''Pièce jointe « %(filename)s »''',
+'''Pièce jointe « %(filename)s »''',
 '''Package script:''':
 '''Script d\'installation :''',
 '''File Name''':
