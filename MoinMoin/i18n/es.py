@@ -250,9 +250,9 @@ Para abandonar el editor, presione el botón Cancelar.''',
 '''Show icon toolbar''':
 '''Mostrar íconos de la barra de herramientas''',
 '''Show top/bottom links in headings''':
-'''Mostrar enlaces a arriba/abajo en las cabeceras''',
+'''Mostrar enlaces arriba/abajo en las cabeceras''',
 '''Show fancy diffs''':
-'''Mostrar differencias adornadas''',
+'''Mostrar diferencias adornadas''',
 '''Add spaces to displayed wiki names''':
 '''Añadir espacios entre los nombres de wiki mostrados''',
 '''Remember login information''':
@@ -278,7 +278,7 @@ Para abandonar el editor, presione el botón Cancelar.''',
 '''User CSS URL''':
 '''URL de CSS del usuario''',
 '''(Leave it empty for disabling user CSS)''':
-'''(Déjalo vacío para deactivar el CSS del usuario)''',
+'''(Vacío para desactivar el CSS del usuario)''',
 '''Editor size''':
 '''Tamaño del Editor''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -346,12 +346,16 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingrese su nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':
 '''Faltó ingresar password. Por favor, ingrese nombre de usuario y password''',
+'''Account "%s" is disabled.''':
+'''La cuenta "%s" está deshabilitada.''',
 '''Sorry, wrong password.''':
 '''Lo lamento, clave errónea''',
 '''Bad relogin URL.''':
 '''URL de re-ingreso no válida''',
 '''Unknown user.''':
 '''Nombre de usuario desconocido.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Use PreferenciasDelUsuario para cambiar sus preferencias o crear una cuenta''',
 '''Empty user name. Please enter a user name.''':
 '''Nombre de usuario en blanco. Por favor, introduzca un nombre de usuario''',
 '''This user name already belongs to somebody else.''':
@@ -774,7 +778,7 @@ Intente con un nombre distinto.''',
 '''%(mins)dm ago''':
 '''hace %(mins)dm''',
 '''(no bookmark set)''':
-'''(no ha establecido enlaces personales)''',
+'''(no es un enlace personal)''',
 '''(currently set to %s)''':
 '''(actualmente configurado como %s)''',
 '''Delete Bookmark''':

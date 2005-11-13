@@ -363,12 +363,12 @@ msgstr ""
 msgid "Use the Preview button to extend the locking period."
 msgstr "جهت تمدید مدت زمان قفل ویرایش دکمه Preview را فشار دهید."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"این صفحه توسط %(owner)s تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل "
+"این صفحه توسط %(owner)sها تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل "
 "در حال ویرایش بودن قفل شده است."
 
 #, python-format
@@ -508,17 +508,17 @@ msgstr "لطفا %s نموده و مجددا سعی نمایید."
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr ""
+msgstr "%(hits)d نتیجه بدست آمده از حدود %(pages)d صفحه"
 
 #, python-format
 msgid "%.2f seconds"
-msgstr ""
+msgstr "%.2f ثانیه"
 
 msgid "match"
-msgstr ""
+msgstr "برابری"
 
 msgid "matches"
-msgstr ""
+msgstr "برابری ها"
 
 #, python-format
 msgid ""
@@ -527,7 +527,12 @@ msgid ""
 "Login Password: %s\n"
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
-msgstr ""
+msgstr "نام کاربری: %s\n"
+"\n"
+"کلمه عبور: %s\n"
+"\n"
+"آدرس ورود: %s/?action=userform&uid=%s\n"
+"\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -538,295 +543,300 @@ msgid ""
 "\n"
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
-msgstr ""
+msgstr "شخصی درخواست نموده است تا اطلاعات کاربری شما به آدرس ایمیلش ارسال شود.\n"
+"\n"
+"در صورتی که کلمه عبور خود را فراموش نموده اید از اطلاعات زیر استفاده نموده و کلمه عبور را همینگونه که ذکر شده در قسمت کلمه عبور با کمک copy و paste بنویسید.\n"
+"\n"
+"پس از ورود خوب می توانید کلمه عبور خود را تغییر دهید.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] اطلاعات مربوط به حساب کاربری شما"
 
 msgid "Cookie deleted. You are now logged out."
-msgstr ""
+msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
-msgstr ""
+msgstr "گزینه جابجایی ایمیل برای این ویکی فعال نمی باشد.\n"
+"از صاحب ویکی بخواهید تا این امکان را فراهم آورد."
 
 msgid "Please provide a valid email address!"
-msgstr ""
+msgstr "لطفا یک آدرس ایمیل معتبر وارد نمایید!"
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
+msgstr "هیچ حساب کاربری مطابق با آدرس ایمیل '%(email)s' یافت نشد!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
+msgstr "نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید."
 
 msgid "Missing password. Please enter user name and password."
-msgstr ""
+msgstr "کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "حساب کاربری \"%s\" خیر فعال شده است."
 
 msgid "Sorry, wrong password."
-msgstr ""
+msgstr "متاسفم٬ کلمه عبور اشتباه می باشد."
 
 msgid "Bad relogin URL."
-msgstr ""
+msgstr "آدرس ورود مجدد اشتباه است."
 
 msgid "Unknown user."
-msgstr ""
+msgstr "کاربر غیر ثبت شده"
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "از بخش مرجع کاربران برای تغییر تنظیمات خود و یا ایجاد یک حساب جدید استفاده نمایید."
 
 msgid "Empty user name. Please enter a user name."
-msgstr ""
+msgstr "محل نام کاربری خالی است. لطفا یک نام کاربری وارد نمایید."
 
 msgid "This user name already belongs to somebody else."
-msgstr ""
+msgstr "این نام کاربری توسط شخص دیگری ثبت شده است."
 
 msgid "Passwords don't match!"
-msgstr ""
+msgstr "کلمه عبورها با هم مطابق نیستند!"
 
 msgid "Please specify a password!"
-msgstr ""
+msgstr "لطفا یک کلمه عبور وارد نمایید!"
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
-msgstr ""
+msgstr "لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را از دست بدهید از طریق ایمیل این اطلاعات برای شما ارسال خواهند شد."
 
 msgid "This email already belongs to somebody else."
-msgstr ""
+msgstr "این ایمیل توسط شخص دیگری وارد شده است."
 
 msgid "User account created!"
-msgstr ""
+msgstr "حساب کاربری شما ثبت شد!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr ""
+msgstr "تم درخواستی شما '%(theme_name)s' بالا نیامد!"
 
 msgid "User preferences saved!"
-msgstr ""
+msgstr "مرجع مشخصات کاربری ذخیره شد!"
 
 msgid "Default"
-msgstr ""
+msgstr "پیش گزینه"
 
 msgid "<Browser setting>"
-msgstr ""
+msgstr "<تنظیمات مرورگر>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "مورد ترجیح داده شده"
 
 msgid "free choice"
-msgstr ""
+msgstr "گزینه رایگان"
 
 msgid "Save"
-msgstr ""
+msgstr "ذخیره کن"
 
 msgid "Logout"
-msgstr ""
+msgstr "خروج"
 
 msgid "Preferred theme"
-msgstr ""
+msgstr "تم کاربری ترجیح داده شده"
 
 msgid "Editor Preference"
-msgstr ""
+msgstr "مرجع ویرایشگر"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "ویرایشگر نمایش داده شده در UI"
 
 msgid "Time zone"
-msgstr ""
+msgstr "موقعیت زمانی"
 
 msgid "Your time is"
-msgstr ""
+msgstr "ساعت به وقت شما"
 
 msgid "Server time is"
-msgstr ""
+msgstr "ساعت سرویس دهنده"
 
 msgid "Date format"
-msgstr ""
+msgstr "الگوی تاریخ"
 
 msgid "Preferred language"
-msgstr ""
+msgstr "زبان ترجیح داده شده"
 
 msgid "General options"
-msgstr ""
+msgstr "نکات عمومی"
 
 msgid "Quick links"
-msgstr ""
+msgstr "لینکهای سریع"
 
 msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
+msgstr "این لیست تا زمانی که شما یک شما یک آدرس ایمیل معتبر وارد ننمایید کار نخواهد کرد!"
 
 msgid "Subscribed wiki pages (one regex per line)"
-msgstr ""
+msgstr "صفحات ویکی ثبت شده (one·regex·per·line)"
 
 msgid "Create Profile"
-msgstr ""
+msgstr "پروفایل بسازید"
 
 msgid "Mail me my account data"
-msgstr ""
+msgstr "اطلاعات حساب من را ایمیل کن"
 
 msgid "Action"
-msgstr ""
+msgstr "حرکت"
 
 msgid "No older revisions available!"
-msgstr ""
+msgstr "ویرایش قدیمی تری موجود نیست!"
 
 #, python-format
 msgid "Diff for \"%s\""
-msgstr ""
+msgstr "تغییرات \"%s\""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
-msgstr ""
+msgstr "تغییرات بین ویرایش های %d و %d"
 
 #, python-format
 msgid "(spanning %d versions)"
-msgstr ""
+msgstr "(محدوده های نسخه های %d)"
 
 msgid "No differences found!"
-msgstr ""
+msgstr "هیچ گونه تغییری یافت نشد!"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
-msgstr ""
+msgstr "این صفحه %(count)d بار ذخیر شده است!"
 
 msgid "(ignoring whitespace)"
-msgstr ""
+msgstr "(صرف نظر از فاصله های سفید)"
 
 msgid "Ignore changes in the amount of whitespace"
-msgstr ""
+msgstr "صرف نظر از تغییرات در تعداد فاصله های سفید"
 
 msgid "General Information"
-msgstr ""
+msgstr "اطلاعات عمومی"
 
 #, python-format
 msgid "Page size: %d"
-msgstr ""
+msgstr "اندازه صفحه: %d"
 
 msgid "SHA digest of this page's content is:"
-msgstr ""
+msgstr "نسخه SHA فشرده شده محتویات این صفحه:"
 
 msgid "The following users subscribed to this page:"
-msgstr ""
+msgstr "کاربران زیر در این صفحه عضو می باشند:"
 
 msgid "This page links to the following pages:"
-msgstr ""
+msgstr "این صفحه به صفحات زیر لینک دارد:"
 
 msgid "Date"
-msgstr ""
+msgstr "تاریخ"
 
 msgid "Size"
-msgstr ""
+msgstr "اندازه"
 
 msgid "Diff"
-msgstr ""
+msgstr "تغییرات"
 
 msgid "Editor"
-msgstr ""
+msgstr "ویرایشگر"
 
 msgid "Comment"
-msgstr ""
+msgstr "نظر"
 
 msgid "view"
-msgstr ""
+msgstr "دید"
 
 msgid "raw"
-msgstr ""
+msgstr "raw"
 
 msgid "print"
-msgstr ""
+msgstr "چاپ"
 
 msgid "revert"
-msgstr ""
+msgstr "رجوع"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
-msgstr ""
+msgstr "رجوع به نسخه %(rev)d"
 
 msgid "edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "get"
-msgstr ""
+msgstr "بگیر"
 
 msgid "del"
-msgstr ""
+msgstr "حذف نما"
 
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 msgid "Revision History"
-msgstr ""
+msgstr "تاریخچه ویرایش"
 
 msgid "No log entries found."
-msgstr ""
+msgstr "گزارش کیری یافت نشد."
 
 #, python-format
 msgid "Info for \"%s\""
-msgstr ""
+msgstr "اطلاعات برای \"%s\""
 
 #, python-format
 msgid "Show \"%(title)s\""
-msgstr ""
+msgstr "عنوان \"%(title)s\" را نشان بده"
 
 msgid "General Page Infos"
-msgstr ""
+msgstr "اطلاعات صفحات عمومی"
 
 #, python-format
 msgid "Show chart \"%(title)s\""
-msgstr ""
+msgstr "عنوان چارت \"%(title)s\" را نشان بده"
 
 msgid "Page hits and edits"
-msgstr ""
+msgstr "مشاهدات و ویرایش های صفحه"
 
 msgid "You are not allowed to revert this page!"
-msgstr ""
+msgstr "شما مجاز نیستید این صفحه را ارجاع دهید!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "برای اضافه نمودن یک لینک سریع باید وارد سیستم شوید."
 
 msgid "Your quicklink to this page has been removed."
-msgstr ""
+msgstr "لینک سریع شما به این صفحه حذف شد."
 
 msgid "A quicklink to this page has been added for you."
-msgstr ""
+msgstr "یک لینک سریع به این صفحه برای شما اضافه شد."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr ""
+msgstr "شما مجاز نیستید در صفحه ای عضو شوید که حق خواندن آنرا ندارید."
 
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
+msgstr "گزینه جابجایی ایمیل ها برای این ویکی فعال نشده است."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "برای استفاده از حقوق اعضا حتما باید وارد سیستم شوید."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "برای استفاده از حقوق عضویت آدرس ایمیل خود را در قسمت مرجع کاربر اضافه نمایید."
 
 msgid "Your subscribtion to this page has been removed."
-msgstr ""
+msgstr "عضویت شما از این صفحه حذف شده است."
 
 msgid "Can't remove regular expression subscription!"
-msgstr ""
+msgstr "قسمت اصطلاحات عمومی عضویت قابل حذف نیست!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "قسمت اصطلاحات عمومی عضویت را در بخش مرجع کاربری ویرایش نمایید."
 
 msgid "You have been subscribed to this page."
-msgstr ""
+msgstr "شما در این صفحه عضو شدید."
 
 msgid "Charts are not available!"
-msgstr ""
+msgstr "چارت ها قابل دسترسی نیستند!"
 
 msgid "You need to provide a chart type!"
-msgstr ""
+msgstr "شما باید نوع چارت را مشخص نمایید!"
 
 #, python-format
 msgid "Bad chart type \"%s\"!"

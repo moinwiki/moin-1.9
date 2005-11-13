@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-12 01:09+0100\n"
-"PO-Revision-Date: 2005-10-23 15:04+0200\n"
+"PO-Revision-Date: 2005-11-12 01:36+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -606,7 +606,7 @@ msgstr ""
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Le compte « %s » est désactivé."
 
 msgid "Sorry, wrong password."
 msgstr "Désolé, mauvais mot de passe."
@@ -619,6 +619,8 @@ msgstr "Utilisateur inconnu."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Utilisez les PréférencesUtilisateur pour modifier vos paramètres ou "
+"pour créer un compte."
 
 msgid "Empty user name. Please enter a user name."
 msgstr ""
@@ -1115,7 +1117,7 @@ msgstr "Action d'envoi non disponible : %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
-msgstr "Pièces jointes de « %(pagename)s »"
+msgstr "Pièces jointes de « %(pagename)s »"
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -1127,8 +1129,8 @@ msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
 msgstr ""
-"Pièce jointe « %(target)s » (nom distant « %(filename)s ») de %(bytes)d "
-"octets enregistrée."
+"Pièce jointe « %(target)s » enregistrée (nom distant « %(filename)s » ; "
+"%(bytes)d octets)."
 
 #, python-format
 msgid "Attachment '%(filename)s' deleted."
@@ -1136,7 +1138,7 @@ msgstr "Suppression de la pièce jointe « %(filename)s »."
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Pièce jointe « %(filename)s » installée."
+msgstr "Pièce jointe « %(filename)s » installée."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -1164,7 +1166,7 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Pièce jointe « %(filename)s » décompressée."
+msgstr "Pièce jointe « %(filename)s » décompressée."
 
 #, python-format
 msgid ""
@@ -1181,7 +1183,7 @@ msgstr "Le fichier %(target)s n'est pas un fichier .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
-msgstr "Pièce jointe « %(filename)s »"
+msgstr "Pièce jointe « %(filename)s »"
 
 msgid "Package script:"
 msgstr "Script d'installation :"

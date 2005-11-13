@@ -443,10 +443,10 @@ msgid "Show icon toolbar"
 msgstr "Mostrar íconos de la barra de herramientas"
 
 msgid "Show top/bottom links in headings"
-msgstr "Mostrar enlaces a arriba/abajo en las cabeceras"
+msgstr "Mostrar enlaces arriba/abajo en las cabeceras"
 
 msgid "Show fancy diffs"
-msgstr "Mostrar differencias adornadas"
+msgstr "Mostrar diferencias adornadas"
 
 msgid "Add spaces to displayed wiki names"
 msgstr "Añadir espacios entre los nombres de wiki mostrados"
@@ -485,7 +485,7 @@ msgid "User CSS URL"
 msgstr "URL de CSS del usuario"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Déjalo vacío para deactivar el CSS del usuario)"
+msgstr "(Vacío para desactivar el CSS del usuario)"
 
 msgid "Editor size"
 msgstr "Tamaño del Editor"
@@ -595,7 +595,7 @@ msgstr ""
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "La cuenta \"%s\" está deshabilitada."
 
 msgid "Sorry, wrong password."
 msgstr "Lo lamento, clave errónea"
@@ -608,6 +608,7 @@ msgstr "Nombre de usuario desconocido."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Use PreferenciasDelUsuario para cambiar sus preferencias o crear una cuenta"
 
 msgid "Empty user name. Please enter a user name."
 msgstr ""
@@ -1348,7 +1349,7 @@ msgid "%(mins)dm ago"
 msgstr "hace %(mins)dm"
 
 msgid "(no bookmark set)"
-msgstr "(no ha establecido enlaces personales)"
+msgstr "(no es un enlace personal)"
 
 #, python-format
 msgid "(currently set to %s)"

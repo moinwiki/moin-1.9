@@ -204,6 +204,8 @@ delete the changes of the other person, which is excessively rude!\'\'
 '''سایر کاربران تا %(bumptime)s دیگر پیغامی مبنی بر اینکه شما در حال ویرایش این صفحه می باشید دریافت خواهند نمود.''',
 '''Use the Preview button to extend the locking period.''':
 '''جهت تمدید مدت زمان قفل ویرایش دکمه Preview را فشار دهید.''',
+'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
+'''این صفحه توسط %(owner)sها تا %(timestamp)s xxx %(mins_valid)d xxx دیگر بدلیل در حال ویرایش بودن قفل شده است.''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
@@ -289,6 +291,223 @@ space between words. Group page name is not allowed.''':
 '''ورود''',
 ''' %s and try again.''':
 '''لطفا %s نموده و مجددا سعی نمایید.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d نتیجه بدست آمده از حدود %(pages)d صفحه''',
+'''%.2f seconds''':
+'''%.2f ثانیه''',
+'''match''':
+'''برابری''',
+'''matches''':
+'''برابری ها''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''نام کاربری: %s
+
+کلمه عبور: %s
+
+آدرس ورود: %s/?action=userform&uid=%s
+
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''شخصی درخواست نموده است تا اطلاعات کاربری شما به آدرس ایمیلش ارسال شود.
+
+در صورتی که کلمه عبور خود را فراموش نموده اید از اطلاعات زیر استفاده نموده و کلمه عبور را همینگونه که ذکر شده در قسمت کلمه عبور با کمک copy و paste بنویسید.
+
+پس از ورود خوب می توانید کلمه عبور خود را تغییر دهید.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] اطلاعات مربوط به حساب کاربری شما''',
+'''Cookie deleted. You are now logged out.''':
+'''کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید.''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''گزینه جابجایی ایمیل برای این ویکی فعال نمی باشد.
+از صاحب ویکی بخواهید تا این امکان را فراهم آورد.''',
+'''Please provide a valid email address!''':
+'''لطفا یک آدرس ایمیل معتبر وارد نمایید!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''هیچ حساب کاربری مطابق با آدرس ایمیل \'%(email)s\' یافت نشد!''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید.''',
+'''Missing password. Please enter user name and password.''':
+'''کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید.''',
+'''Account "%s" is disabled.''':
+'''حساب کاربری "%s" خیر فعال شده است.''',
+'''Sorry, wrong password.''':
+'''متاسفم٬ کلمه عبور اشتباه می باشد.''',
+'''Bad relogin URL.''':
+'''آدرس ورود مجدد اشتباه است.''',
+'''Unknown user.''':
+'''کاربر غیر ثبت شده''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''از بخش مرجع کاربران برای تغییر تنظیمات خود و یا ایجاد یک حساب جدید استفاده نمایید.''',
+'''Empty user name. Please enter a user name.''':
+'''محل نام کاربری خالی است. لطفا یک نام کاربری وارد نمایید.''',
+'''This user name already belongs to somebody else.''':
+'''این نام کاربری توسط شخص دیگری ثبت شده است.''',
+'''Passwords don\'t match!''':
+'''کلمه عبورها با هم مطابق نیستند!''',
+'''Please specify a password!''':
+'''لطفا یک کلمه عبور وارد نمایید!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را از دست بدهید از طریق ایمیل این اطلاعات برای شما ارسال خواهند شد.''',
+'''This email already belongs to somebody else.''':
+'''این ایمیل توسط شخص دیگری وارد شده است.''',
+'''User account created!''':
+'''حساب کاربری شما ثبت شد!''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''تم درخواستی شما \'%(theme_name)s\' بالا نیامد!''',
+'''User preferences saved!''':
+'''مرجع مشخصات کاربری ذخیره شد!''',
+'''Default''':
+'''پیش گزینه''',
+'''<Browser setting>''':
+'''<تنظیمات مرورگر>''',
+'''the one preferred''':
+'''مورد ترجیح داده شده''',
+'''free choice''':
+'''گزینه رایگان''',
+'''Save''':
+'''ذخیره کن''',
+'''Logout''':
+'''خروج''',
+'''Preferred theme''':
+'''تم کاربری ترجیح داده شده''',
+'''Editor Preference''':
+'''مرجع ویرایشگر''',
+'''Editor shown on UI''':
+'''ویرایشگر نمایش داده شده در UI''',
+'''Time zone''':
+'''موقعیت زمانی''',
+'''Your time is''':
+'''ساعت به وقت شما''',
+'''Server time is''':
+'''ساعت سرویس دهنده''',
+'''Date format''':
+'''الگوی تاریخ''',
+'''Preferred language''':
+'''زبان ترجیح داده شده''',
+'''General options''':
+'''نکات عمومی''',
+'''Quick links''':
+'''لینکهای سریع''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''این لیست تا زمانی که شما یک شما یک آدرس ایمیل معتبر وارد ننمایید کار نخواهد کرد!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''صفحات ویکی ثبت شده (one·regex·per·line)''',
+'''Create Profile''':
+'''پروفایل بسازید''',
+'''Mail me my account data''':
+'''اطلاعات حساب من را ایمیل کن''',
+'''Action''':
+'''حرکت''',
+'''No older revisions available!''':
+'''ویرایش قدیمی تری موجود نیست!''',
+'''Diff for "%s"''':
+'''تغییرات "%s"''',
+'''Differences between revisions %d and %d''':
+'''تغییرات بین ویرایش های %d و %d''',
+'''(spanning %d versions)''':
+'''(محدوده های نسخه های %d)''',
+'''No differences found!''':
+'''هیچ گونه تغییری یافت نشد!''',
+'''The page was saved %(count)d times, though!''':
+'''این صفحه %(count)d بار ذخیر شده است!''',
+'''(ignoring whitespace)''':
+'''(صرف نظر از فاصله های سفید)''',
+'''Ignore changes in the amount of whitespace''':
+'''صرف نظر از تغییرات در تعداد فاصله های سفید''',
+'''General Information''':
+'''اطلاعات عمومی''',
+'''Page size: %d''':
+'''اندازه صفحه: %d''',
+'''SHA digest of this page\'s content is:''':
+'''نسخه SHA فشرده شده محتویات این صفحه:''',
+'''The following users subscribed to this page:''':
+'''کاربران زیر در این صفحه عضو می باشند:''',
+'''This page links to the following pages:''':
+'''این صفحه به صفحات زیر لینک دارد:''',
+'''Date''':
+'''تاریخ''',
+'''Size''':
+'''اندازه''',
+'''Diff''':
+'''تغییرات''',
+'''Editor''':
+'''ویرایشگر''',
+'''Comment''':
+'''نظر''',
+'''view''':
+'''دید''',
+'''raw''':
+'''raw''',
+'''print''':
+'''چاپ''',
+'''revert''':
+'''رجوع''',
+'''Revert to revision %(rev)d.''':
+'''رجوع به نسخه %(rev)d''',
+'''edit''':
+'''ویرایش''',
+'''get''':
+'''بگیر''',
+'''del''':
+'''حذف نما''',
+'''N/A''':
+'''N/A''',
+'''Revision History''':
+'''تاریخچه ویرایش''',
+'''No log entries found.''':
+'''گزارش کیری یافت نشد.''',
+'''Info for "%s"''':
+'''اطلاعات برای "%s"''',
+'''Show "%(title)s"''':
+'''عنوان "%(title)s" را نشان بده''',
+'''General Page Infos''':
+'''اطلاعات صفحات عمومی''',
+'''Show chart "%(title)s"''':
+'''عنوان چارت "%(title)s" را نشان بده''',
+'''Page hits and edits''':
+'''مشاهدات و ویرایش های صفحه''',
+'''You are not allowed to revert this page!''':
+'''شما مجاز نیستید این صفحه را ارجاع دهید!''',
+'''You must login to add a quicklink.''':
+'''برای اضافه نمودن یک لینک سریع باید وارد سیستم شوید.''',
+'''Your quicklink to this page has been removed.''':
+'''لینک سریع شما به این صفحه حذف شد.''',
+'''A quicklink to this page has been added for you.''':
+'''یک لینک سریع به این صفحه برای شما اضافه شد.''',
+'''You are not allowed to subscribe to a page you can\'t read.''':
+'''شما مجاز نیستید در صفحه ای عضو شوید که حق خواندن آنرا ندارید.''',
+'''This wiki is not enabled for mail processing.''':
+'''گزینه جابجایی ایمیل ها برای این ویکی فعال نشده است.''',
+'''You must log in to use subscribtions.''':
+'''برای استفاده از حقوق اعضا حتما باید وارد سیستم شوید.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''برای استفاده از حقوق عضویت آدرس ایمیل خود را در قسمت مرجع کاربر اضافه نمایید.''',
+'''Your subscribtion to this page has been removed.''':
+'''عضویت شما از این صفحه حذف شده است.''',
+'''Can\'t remove regular expression subscription!''':
+'''قسمت اصطلاحات عمومی عضویت قابل حذف نیست!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''قسمت اصطلاحات عمومی عضویت را در بخش مرجع کاربری ویرایش نمایید.''',
+'''You have been subscribed to this page.''':
+'''شما در این صفحه عضو شدید.''',
+'''Charts are not available!''':
+'''چارت ها قابل دسترسی نیستند!''',
+'''You need to provide a chart type!''':
+'''شما باید نوع چارت را مشخص نمایید!''',
 '''You are not allowed to unzip attachments of this page.''':
 '''شما مجاز نیستید ضمائم فشرده این صفحه را باز کنید.''',
 '''You are not allowed to install files.''':
