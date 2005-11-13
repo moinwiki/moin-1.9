@@ -288,7 +288,7 @@ class DefaultConfig:
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = 1
-    show_interwiki = 1
+    show_interwiki = 0
     show_section_numbers = 0
     show_timings = 0
     show_version = 0
