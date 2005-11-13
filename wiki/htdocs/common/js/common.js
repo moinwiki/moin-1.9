@@ -27,10 +27,12 @@ function can_use_gui_editor() {
                navigator.productSub >= 20030210) {
         // Gecko
         return true;
-    } else if (sAgent.indexOf("safari") != -1 ) {
-        // Safari - build must be at least 312 (1.3)
-        return (sAgent.match( /safari\/(\d+)/ )[1] >= 312 );
-    } else {
+    }
+    // else if (sAgent.indexOf("safari") != -1 ) {
+    //    // Safari - build must be at least 312 (1.3)
+    //    return (sAgent.match( /safari\/(\d+)/ )[1] >= 312 );
+    // } 
+    else {
         // Unknown browser, assume gui editor is not compatible
         return false;
     }
