@@ -12,6 +12,7 @@ Version 1.5.0beta3:
     * attachment methods for the text_xml and xml_docbook formatters
     * new favicon
     * updated i18n (fixed nl, did nobody notice this?) and underlay
+    * changed show_interwiki default to 0
 
 Version 1.5.0beta2:
   Fixes:
@@ -19,7 +20,7 @@ Version 1.5.0beta2:
     * fix gui editor (converter) crash on save
     * MoinMoinBugs/PageHitsFails
     * MoinMoinBugs/PackagePagesFailsBecauseAllowedActionsMissing
-    * Avoid destroying existing page content when editor is called with
+    * Avoid destroying existing page content if editor is called with
       template parameter for an existing page.
     * fix countdown javascript for browser status line in editor
     * added page title display for editor
@@ -152,7 +153,7 @@ Version 1.5.0beta1:
        2 edit links in that case).
      * a user can add/remove the current page to/from his quicklinks with an
        appropriate action now
-     * when cfg.user_email_unique = False, we don't require user's email
+     * if cfg.user_email_unique = False, we don't require user's email
        addresses to be unique
      * removed show_fancy_links user preferences setting to simplify code and
        caching. Displaying those icons is now done by CSS styles (see
@@ -230,11 +231,12 @@ Version 1.5.0beta1:
   Theme changes:
     * logo_string is now should be really only the logo (img).
       If you included your wiki's name in logo_string you maybe want to remove
-      it now as it is shown as part of the location display now anyway (when
-      show_interwiki = 1).
+      it now as it is shown as part of the location display now anyway (if
+      you set show_interwiki = 1).
     * You maybe want to remove page_front_page from your navi_bar - we link to
-      that page now from the logo and (new) from the interwiki name displayed
-      in location display, so you maybe don't need it in navi_bar, too.
+      that page now from the logo and (new, if you set show_interwiki = 1) from
+      the interwiki name displayed in location display, so you maybe don't need
+      it in navi_bar, too.
     * If you have a custom theme, you should / may:
      * sync modern/css/screen.css #pagelocation #pagetrail stuff to your
        screen.css or pagelocation display (title()) will look strange (like a
@@ -245,7 +247,7 @@ Version 1.5.0beta1:
        == heading == as <h2> (was <h3>), etc.
      * maybe move both title() and trail() to header area, like the builtin
        themes do it.
-     * there is a new interwiki() base theme method that optionally (when
+     * there is a new interwiki() base theme method that optionally (if
        show_interwiki = 1) shows the interwiki name of this wiki and links to
        page_front_page. The css for it is #interwiki.
 
