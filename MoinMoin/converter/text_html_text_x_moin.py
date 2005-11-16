@@ -511,7 +511,7 @@ class convert_tree(visitor):
         elif name in ('ol', 'ul',):
             self.process_list(node)
         else:
-            raise ConvertError("visit_element: Don't support %s element" % name)
+            self.process_inline(node)
 
     def process_br(self, node):
             self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
