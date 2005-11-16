@@ -471,14 +471,17 @@ class convert_tree(visitor):
         while i < len(text):
             if text[i] is self.white_space:
                 if i == 0 or i == len(text)-1:
-                    text[0:0] = [" "] # del?            XXX this is either a bug or a missing comment - what does that mean? why 0:0?
-                    i += 1
-                elif text[i-1][-1] in (" ", "\n",):     # last char of previous element is whitespace
                     del text[i]
-                elif (text[i+1] is self.white_space or  # next element is white_space
-                      text[i+1] is self.new_line):      # or new_line
+                elif text[i-1][-1] in (" ", "\n",):
+                    # last char of previous element is whitespace
                     del text[i]
-                elif text[i+1][0] in (" ", "\n",):      # first char of next element is whitespace
+                elif (text[i+1] is self.white_space or
+                      # next element is white_space
+                      text[i+1] is self.new_line):
+                      # or new_line
+                    del text[i]
+                elif text[i+1][0] in (" ", "\n",):
+                    # first char of next element is whitespace
                     del text[i]
                 else:
                     text[i] = " "
@@ -490,7 +493,7 @@ class convert_tree(visitor):
                     text[i] = "\n"
                     i += 1
                 elif text[i-1][-1] == "\n" or (
-                      isinstance(text[i+1], str) and text[i+1][0] == "\n"): # XXX why do we need isinstance here, but not above?
+                      isinstance(text[i+1], str) and text[i+1][0] == "\n"):
                     del text[i]
                 else:
                     text[i] = "\n"
@@ -1023,7 +1026,7 @@ class convert_tree(visitor):
             elif class_ == "badinterwiki" and title:
                 pagename = href
                 interwikiname = "%s:%s" % (title, href)
-            if interwikiname and pagename == text: # XXX interwiki can be undefined here!? 
+            if interwikiname and pagename == text: 
                 self.text.append("%s" % interwikiname)
                 return
             elif title == 'Self':
@@ -1071,13 +1074,14 @@ class convert_tree(visitor):
                 else:
                     self.text.append("[%s %s]" % (href, text))
             # simple link
-            elif href == text:
-                self.text.append("%s" % href)
+            elif href.replace(" ", "%20") == text:
+                self.text.append("%s" % text)
             # imagelink
             elif text == "" and wikiutil.isPicture(href):
                 self.text.append("[%s]" % href)
             # labeled link
             else:
+                href = href.replace(" ", "%20")
                 self.text.append("[%s %s]" % (href, text))
         elif id:
             pass # we dont support anchors yet
