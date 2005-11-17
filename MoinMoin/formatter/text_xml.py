@@ -123,6 +123,9 @@ class Formatter(FormatterBase):
     def sub(self, on):
         return ['<sub>', '</sub>'][not on]
 
+    def strike(self, on):
+        return ['<strike>', '</strike>'][not on]
+
     def preformatted(self, on):
         FormatterBase.preformatted(self, on)
         result = ''

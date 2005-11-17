@@ -203,6 +203,9 @@ class FormatterBase:
     def sub(self, on):
         raise NotImplementedError
 
+    def strike(self, on):
+        raise NotImplementedError
+
     def code(self, on, **kw):
         raise NotImplementedError
 

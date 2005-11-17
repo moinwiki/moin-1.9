@@ -23,7 +23,7 @@ class Formatter(FormatterBase):
 
     hardspace = ' '
 
-    format_tags = ['b', 'em', 'highlight', 'sup', 'sub', 'code', 'u']
+    format_tags = ['b', 'em', 'highlight', 'sup', 'sub', 'strike', 'code', 'u']
 
     unbreakables = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6',
                     'p', 'ol', 'ul', 'li', 'pre', 'a',
@@ -285,6 +285,9 @@ class Formatter(FormatterBase):
 
     def sub(self, on):
         return self._set_tag('sub', on)
+
+    def strike(self, on):
+        return self._set_tag('strike', on)
 
     def code(self, on, **kw):
         return self._set_tag('code', on)

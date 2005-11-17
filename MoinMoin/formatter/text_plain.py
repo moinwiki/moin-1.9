@@ -142,6 +142,9 @@ class Formatter(FormatterBase):
     def sub(self, on):
         return u'_'
 
+    def sub(self, on):
+        return u'__'
+
     def code(self, on, **kw):
         #return [unichr(0x60), unichr(0xb4)][not on]
         return u"'" # avoid high-ascii
