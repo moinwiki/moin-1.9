@@ -287,6 +287,10 @@ class Formatter(FormatterBase):
     def sub(self, on):
         return self._handleFormatting("subscript", on)
 
+    def strike(self, on):
+        return self._handleFormatting("emphasis", on,
+                                      (('role','strikethrough'), ))
+
     def code(self, on):
         return self._handleFormatting("code", on)
 

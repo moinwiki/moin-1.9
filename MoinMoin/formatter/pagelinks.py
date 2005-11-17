@@ -32,6 +32,7 @@ class Formatter(FormatterBase):
     highlight = null
     sup = null
     sub = null
+    strike = null
     code = null
     preformatted = null
     small = null
