@@ -227,7 +227,7 @@ Version 1.5.0beta1:
 
   International support:    
     * mail_from can be now a unicode name-address 
-      e.g u'Jürgen wiki <noreply@jhwiki.org'
+      e.g u'Jürgen wiki <noreply@jhwiki.org>'
 
   Theme changes:
     * logo_string is now should be really only the logo (img).
