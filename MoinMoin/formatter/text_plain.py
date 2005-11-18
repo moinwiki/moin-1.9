@@ -142,7 +142,7 @@ class Formatter(FormatterBase):
     def sub(self, on):
         return u'_'
 
-    def sub(self, on):
+    def strike(self, on):
         return u'__'
 
     def code(self, on, **kw):
