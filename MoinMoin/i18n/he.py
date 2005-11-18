@@ -200,8 +200,6 @@ To leave the editor, press the Cancel button.''':
 '''חזרה לדף אב''',
 '''Open editor on double click''':
 '''ערוך דף בלחיצה כפולה''',
-'''Remember last page visited''':
-'''זכור את הדף אחרון שביקרתי בו''',
 '''Show question mark for non-existing pagelinks''':
 '''הצג סימני שאלה בקישורים לדפים לא קיימים''',
 '''Show page trail''':

@@ -211,8 +211,6 @@ Para abandonar a edição, pressione o botão Cancelar.''',
 '''Subir''',
 '''Open editor on double click''':
 '''Abrir o editor com duplo clique''',
-'''Remember last page visited''':
-'''Recordar a última página visitada''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostrar sinal de interrogação para links de páginas inexistentes''',
 '''Show page trail''':

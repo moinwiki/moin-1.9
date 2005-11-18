@@ -201,8 +201,6 @@ To leave the editor, press the Cancel button.''':
 '''위로''',
 '''Open editor on double click''':
 '''더블 클릭해서 글 고치기로 들어감''',
-'''Remember last page visited''':
-'''마지막 방문을 기억해둠''',
 '''Show question mark for non-existing pagelinks''':
 '''존재하지 않는 글 링크 옆에 물음표 표시''',
 '''Show page trail''':

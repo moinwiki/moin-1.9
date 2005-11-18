@@ -242,8 +242,8 @@ To leave the editor, press the Cancel button.''',
 '''Publish my email (not my wiki homepage) in author info''',
 '''Open editor on double click''':
 '''Open editor on double click''',
-'''Remember last page visited''':
-'''Remember last page visited''',
+'''Jump to last visited page instead of frontpage''':
+'''Jump to last visited page instead of frontpage''',
 '''Show question mark for non-existing pagelinks''':
 '''Show question mark for non-existing pagelinks''',
 '''Show page trail''':

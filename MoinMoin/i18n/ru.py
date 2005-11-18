@@ -240,8 +240,6 @@ To leave the editor, press the Cancel button.''':
 '''Показывать мой почтовый адрес (вместо домашней страницы) в информации об авторе''',
 '''Open editor on double click''':
 '''Открывать редактор по двойному клику''',
-'''Remember last page visited''':
-'''Запомнить последнюю открытую страницу''',
 '''Show question mark for non-existing pagelinks''':
 '''Показывать ? для незаполненных страниц''',
 '''Show page trail''':

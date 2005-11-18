@@ -241,8 +241,6 @@ Para abandonar el editor, presione el botón Cancelar.''',
 '''Publicar my e-Mail (no mi página wiki) en la información de autor''',
 '''Open editor on double click''':
 '''Abrir el editor con doble click''',
-'''Remember last page visited''':
-'''Recordar la última página visitada''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostrar signo de interrogación en enlaces a páginas inexistentes''',
 '''Show page trail''':
@@ -487,11 +485,11 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''You are not allowed to revert this page!''':
 '''¡No tiene permisos para volver a una versión anterior de esta página!''',
 '''You must login to add a quicklink.''':
-'''Debe ingresar al sistema para adicionar un enlace rápido''',
+'''Debe ingresar al sistema para añadir un enlace rápido''',
 '''Your quicklink to this page has been removed.''':
 '''Se eliminó el enlace rápido a esta página.''',
 '''A quicklink to this page has been added for you.''':
-'''Se le adicionó un enlace rápido a esta página.''',
+'''Se le añadió un enlace rápido a esta página.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No tiene permisos para  suscribirse a una página que no puede ver.''',
 '''This wiki is not enabled for mail processing.''':
@@ -890,7 +888,7 @@ rojo=editar''',
 '''Do''':
 '''Hacer''',
 '''Edit (Text)''':
-'''Edción (Texto)''',
+'''Edición (Texto)''',
 '''Edit (GUI)''':
 '''Edición (GUI)''',
 '''Immutable Page''':
@@ -898,7 +896,7 @@ rojo=editar''',
 '''Remove Link''':
 '''Eliminar Enlace''',
 '''Add Link''':
-'''Adicionar Enlace''',
+'''Añadir Enlace''',
 '''Attachments''':
 '''Adjuntos''',
 '''Show %s days.''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -400,8 +400,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "ערוך דף בלחיצה כפולה"
 
-msgid "Remember last page visited"
-msgstr "זכור את הדף אחרון שביקרתי בו"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "הצג סימני שאלה בקישורים לדפים לא קיימים"
@@ -1612,6 +1612,9 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "זכור את הדף אחרון שביקרתי בו"
 
 #, fuzzy
 #~ msgid "Parent Page"

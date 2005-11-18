@@ -195,8 +195,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Gore''',
 '''Open editor on double click''':
 '''Otvoriti editor sa duplim klikom''',
-'''Remember last page visited''':
-'''Zapamtiti poslednje posećene stranice''',
 '''Show question mark for non-existing pagelinks''':
 '''Pokazivati znak pitanja za nepostojeće linkove''',
 '''Show page trail''':

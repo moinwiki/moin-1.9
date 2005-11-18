@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2004-11-27 16:28+0900\n"
 "Last-Translator: Hye-Shik Chang <perky@FreeBSD.org>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -419,8 +419,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "더블 클릭해서 글 고치기로 들어감"
 
-msgid "Remember last page visited"
-msgstr "마지막 방문을 기억해둠"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "존재하지 않는 글 링크 옆에 물음표 표시"
@@ -1641,6 +1641,9 @@ msgstr "이름바꿈"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "마지막 방문을 기억해둠"
 
 #, fuzzy
 #~ msgid "Parent Page"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-11-11 07:18+0500\n"
 "Last-Translator: Igor TAmara <igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -430,8 +430,8 @@ msgstr "Publicar my e-Mail (no mi página wiki) en la información de autor"
 msgid "Open editor on double click"
 msgstr "Abrir el editor con doble click"
 
-msgid "Remember last page visited"
-msgstr "Recordar la última página visitada"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar signo de interrogación en enlaces a páginas inexistentes"
@@ -821,13 +821,13 @@ msgid "You are not allowed to revert this page!"
 msgstr "¡No tiene permisos para volver a una versión anterior de esta página!"
 
 msgid "You must login to add a quicklink."
-msgstr "Debe ingresar al sistema para adicionar un enlace rápido"
+msgstr "Debe ingresar al sistema para añadir un enlace rápido"
 
 msgid "Your quicklink to this page has been removed."
 msgstr "Se eliminó el enlace rápido a esta página."
 
 msgid "A quicklink to this page has been added for you."
-msgstr "Se le adicionó un enlace rápido a esta página."
+msgstr "Se le añadió un enlace rápido a esta página."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "No tiene permisos para  suscribirse a una página que no puede ver."
@@ -1530,7 +1530,7 @@ msgid "Do"
 msgstr "Hacer"
 
 msgid "Edit (Text)"
-msgstr "Edción (Texto)"
+msgstr "Edición (Texto)"
 
 msgid "Edit (GUI)"
 msgstr "Edición (GUI)"
@@ -1542,7 +1542,7 @@ msgid "Remove Link"
 msgstr "Eliminar Enlace"
 
 msgid "Add Link"
-msgstr "Adicionar Enlace"
+msgstr "Añadir Enlace"
 
 msgid "Attachments"
 msgstr "Adjuntos"
@@ -1663,6 +1663,9 @@ msgstr "RenombrarPágina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Recordar la última página visitada"
 
 #~ msgid "Parent Page"
 #~ msgstr "Página Superior"

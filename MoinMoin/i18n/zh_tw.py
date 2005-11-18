@@ -199,8 +199,6 @@ To leave the editor, press the Cancel button.''':
 '''上層''',
 '''Open editor on double click''':
 '''點兩下就打開編輯器''',
-'''Remember last page visited''':
-'''記住上次看的最後一頁''',
 '''Show question mark for non-existing pagelinks''':
 '''不存在的頁面連結前打上問號''',
 '''Show page trail''':

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
-"PO-Revision-Date: 2005-11-06 14:30+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"PO-Revision-Date: 2005-11-14 21:54+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -426,8 +426,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Öppna editorn vid dubbelklick"
 
-msgid "Remember last page visited"
-msgstr "Kom ihåg senaste besökta sidan"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Visa frågetecken för brutna sidlänkar"
@@ -586,7 +586,7 @@ msgstr "Lösenord saknas. Var god ange ditt användarnamn och lösenord."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Kontot \"%s\" är avstängt."
 
 msgid "Sorry, wrong password."
 msgstr "Tyvärr, felaktigt lösenord."
@@ -599,6 +599,8 @@ msgstr "Okänd användare."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Använd AnvändarInställningar för att ändra dina inställningar eller skapa "
+"ett konto."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Tomt användarnamn. Var god ange ett användarnamn."
@@ -1649,3 +1651,6 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Kom ihåg senaste besökta sidan"

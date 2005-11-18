@@ -199,8 +199,6 @@ To leave the editor, press the Cancel button.''':
 '''Trên''',
 '''Open editor on double click''':
 '''Mở khung soạn thảo khi nhấp chuột 2 lần''',
-'''Remember last page visited''':
-'''Nhớ trang cuối''',
 '''Show question mark for non-existing pagelinks''':
 '''Hiện dấu chấm hỏi cho các trang không tồn tại''',
 '''Show page trail''':

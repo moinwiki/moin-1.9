@@ -205,8 +205,6 @@ Trykk på Avbryt hvis du ikke vil redigere.''',
 '''Opp''',
 '''Open editor on double click''':
 '''Dobbeltklikk åpner redigeringsvindu''',
-'''Remember last page visited''':
-'''Husk sist besøkte side''',
 '''Show question mark for non-existing pagelinks''':
 '''Vis spørsmålstegn ved lenker til ikke-eksisterende sider''',
 '''Show page trail''':

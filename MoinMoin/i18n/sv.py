@@ -245,8 +245,6 @@ För att lämna redigeringen, tryck på "Avbryt".''',
 '''Publicera min epostadress (inte min wiki-hemsida) i författarinformationen''',
 '''Open editor on double click''':
 '''Öppna editorn vid dubbelklick''',
-'''Remember last page visited''':
-'''Kom ihåg senaste besökta sidan''',
 '''Show question mark for non-existing pagelinks''':
 '''Visa frågetecken för brutna sidlänkar''',
 '''Show page trail''':
@@ -350,12 +348,16 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Okänt användarnamn: {{{"%s"}}}. Var god ange ditt användarnamn och lösenord.''',
 '''Missing password. Please enter user name and password.''':
 '''Lösenord saknas. Var god ange ditt användarnamn och lösenord.''',
+'''Account "%s" is disabled.''':
+'''Kontot "%s" är avstängt.''',
 '''Sorry, wrong password.''':
 '''Tyvärr, felaktigt lösenord.''',
 '''Bad relogin URL.''':
 '''Ogiltig ominloggnings-URL.''',
 '''Unknown user.''':
 '''Okänd användare.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Använd AnvändarInställningar för att ändra dina inställningar eller skapa ett konto.''',
 '''Empty user name. Please enter a user name.''':
 '''Tomt användarnamn. Var god ange ett användarnamn.''',
 '''This user name already belongs to somebody else.''':

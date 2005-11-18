@@ -243,8 +243,6 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Veröffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
 '''Open editor on double click''':
 '''Editor per Doppelklick öffnen''',
-'''Remember last page visited''':
-'''Zuletzt besuchte Seite merken''',
 '''Show question mark for non-existing pagelinks''':
 '''Verweise auf unbekannte Seiten mit Fragezeichen markieren''',
 '''Show page trail''':

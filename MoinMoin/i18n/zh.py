@@ -243,8 +243,6 @@ To leave the editor, press the Cancel button.''':
 '''在作者信息中显示我的电子邮件地址(不是我的维基个人主页)''',
 '''Open editor on double click''':
 '''双击打开编辑器''',
-'''Remember last page visited''':
-'''记住上次访问的最后一页''',
 '''Show question mark for non-existing pagelinks''':
 '''不存在的网页链接显示问号''',
 '''Show page trail''':

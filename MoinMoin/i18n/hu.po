@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -423,8 +423,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Kettős kattintásra nyíljon meg a szerkesztő"
 
-msgid "Remember last page visited"
-msgstr "A legutóbbi meglátogatott lap megjegyzése"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "A nemlétező kapcsoknál (linkeknél) kérdőjel megjelenítése"
@@ -1655,6 +1655,9 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "A legutóbbi meglátogatott lap megjegyzése"
 
 #, fuzzy
 #~ msgid "Parent Page"
