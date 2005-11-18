@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -410,8 +410,8 @@ msgstr "在作者信息中显示我的电子邮件地址(不是我的维基个�
 msgid "Open editor on double click"
 msgstr "双击打开编辑器"
 
-msgid "Remember last page visited"
-msgstr "记住上次访问的最后一页"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "不存在的网页链接显示问号"
@@ -1606,6 +1606,9 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "记住上次访问的最后一页"
 
 #~ msgid "Parent Page"
 #~ msgstr "上层网页"

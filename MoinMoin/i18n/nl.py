@@ -211,8 +211,6 @@ Klik op Annuleren om de bewerking te staken.''',
 '''Omhoog''',
 '''Open editor on double click''':
 '''Editor openen bij dubbelklik''',
-'''Remember last page visited''':
-'''De laatstbezochte pagina onthouden''',
 '''Show question mark for non-existing pagelinks''':
 '''Vraagteken tonen voor verwijzingen naar niet-bestaande pagina\'s''',
 '''Show page trail''':

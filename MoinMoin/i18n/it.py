@@ -207,8 +207,6 @@ Premi il pulsante Annulla per lasciare l\'editor.''',
 '''Su''',
 '''Open editor on double click''':
 '''Con un doppio click, apri l\'editor''',
-'''Remember last page visited''':
-'''Ricorda l\'ultima pagina visitata''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostra un punto di domanda al posto dei collegamenti non esistenti''',
 '''Show page trail''':

@@ -243,8 +243,6 @@ Para deixar o editor, selecione o botão Cancelar.''',
 '''Publique meu e-mail (não em minha homepage do wiki) nas informações do autor''',
 '''Open editor on double click''':
 '''Abra o editor com um duplo clique''',
-'''Remember last page visited''':
-'''Lembrar última página visitada''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostrar sinal de interrogação nos links cujas páginas não existem''',
 '''Show page trail''':
@@ -347,12 +345,16 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, informe o nome do usuário e senha.''',
 '''Missing password. Please enter user name and password.''':
 '''Senha não foi informada. Por favor, informe o nome do usuário e senha.''',
+'''Account "%s" is disabled.''':
+'''Conta "%s" desabilitada.''',
 '''Sorry, wrong password.''':
 '''Desculpe. Senha errada.''',
 '''Bad relogin URL.''':
 '''URL inválida para novo login.''',
 '''Unknown user.''':
 '''Usuário desconhecido.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Use as PreferênciasDoUsuário para mudar suas configurações ou criar uma outra conta.''',
 '''Empty user name. Please enter a user name.''':
 '''Nome do usuário não informado. Por favor, informe o nome do usuário.''',
 '''This user name already belongs to somebody else.''':

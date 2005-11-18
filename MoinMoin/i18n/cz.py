@@ -237,8 +237,6 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Publikovat email v infromací o autorovi (místo domovské wiki stránky)''',
 '''Open editor on double click''':
 '''Otevřít editor dvojklikem''',
-'''Remember last page visited''':
-'''Pamatovat si naposledy navštívenou stránku''',
 '''Show question mark for non-existing pagelinks''':
 '''Zobrazit otazník u neexistujících odkazů''',
 '''Show page trail''':

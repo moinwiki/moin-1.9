@@ -206,8 +206,6 @@ To leave the editor, press the Cancel button.''':
 '''Fel''',
 '''Open editor on double click''':
 '''Kettős kattintásra nyíljon meg a szerkesztő''',
-'''Remember last page visited''':
-'''A legutóbbi meglátogatott lap megjegyzése''',
 '''Show question mark for non-existing pagelinks''':
 '''A nemlétező kapcsoknál (linkeknél) kérdőjel megjelenítése''',
 '''Show page trail''':

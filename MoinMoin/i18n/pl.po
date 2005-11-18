@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2004-12-27 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -425,8 +425,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Otwórz edytor podwójnym kliknięciem"
 
-msgid "Remember last page visited"
-msgstr "Zapamiętaj ostatnią odwiedzoną stronę"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Pokaż znaki zapytania dla nieistniejących jeszcze stron"
@@ -1653,6 +1653,9 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Zapamiętaj ostatnią odwiedzoną stronę"
 
 #, fuzzy
 #~ msgid "Parent Page"

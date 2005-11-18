@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
-"PO-Revision-Date: 2005-03-21 20:17+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"PO-Revision-Date: 2005-11-16 01:27+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -38,11 +38,11 @@ msgstr "Version %(rev)d per %(date)s"
 
 #, python-format
 msgid "Redirected from page \"%(page)s\""
-msgstr "Henvist fra siden \"%(page)s\""
+msgstr "Omdirigeret fra siden \"%(page)s\""
 
 #, python-format
 msgid "This page redirects to page \"%(page)s\""
-msgstr "Denne side henviser til \"%(page)s\""
+msgstr "Denne side omdirigerer til \"%(page)s\""
 
 #, python-format
 msgid ""
@@ -60,7 +60,7 @@ msgid "Create New Page"
 msgstr "Opret ny side"
 
 msgid "You are not allowed to view this page."
-msgstr "Du har ikke lov til at se denne side!"
+msgstr "Du har ikke lov til at se denne side."
 
 msgid "DeleteCache"
 msgstr "SletCache"
@@ -70,7 +70,7 @@ msgid "(cached %s)"
 msgstr "(husket %s)"
 
 msgid "You are not allowed to edit this page."
-msgstr "Du har ikke lov til at redigere denne side!"
+msgstr "Du har ikke lov til at redigere denne side."
 
 msgid "Page is immutable!"
 msgstr "Siden kan ikke redigeres!"
@@ -78,12 +78,11 @@ msgstr "Siden kan ikke redigeres!"
 msgid "Cannot edit old revisions!"
 msgstr "Kan ikke redigere gamle udgaver!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "Låsen du holdt udløb, vær forberedt på redigeringskonflikter!"
+msgstr "Låsen du holdt udløb. Vær forberedt på redigeringskonflikter!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "Sidenavn er for langt, prøv et kortere navn."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -91,7 +90,7 @@ msgstr "Redigér \"%(pagename)s\""
 
 #, python-format
 msgid "Preview of \"%(pagename)s\""
-msgstr "Forhåndsvisning af \"%(pagename)s\""
+msgstr "Smugkig på \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
@@ -99,17 +98,17 @@ msgstr "Din redigeringslås på %(lock_page)s er udløbet!"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "Din redigeringslås på %(lock_page)s udløber om # minuter."
+msgstr "Din redigeringslås på %(lock_page)s udløber om # minutter."
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
 msgstr "Din redigeringslås på %(lock_page)s udløber om # sekunder."
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "En anden slettede denne side mens du redigerede den!"
+msgstr "Nogen slettede denne side mens du redigerede den!"
 
 msgid "Someone else changed this page while you were editing!"
-msgstr "En anden ændrede denne side mens du redigerede den!"
+msgstr "Nogen ændrede denne side mens du redigerede den!"
 
 #, python-format
 msgid ""
@@ -117,13 +116,13 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!\n"
 "Have a look at the diff of %(difflink)s to see what has been changed."
 msgstr ""
-"En anden gemte denne side mens du redigerede den!\n"
+"Nogen gemte denne side mens du redigerede den!\n"
 "Gennemgå venligst siden og gem derefter. Gem ikke denne side som den er!\n"
 "Kig på ændringerne pr. %(difflink)s for at se hvad der er blevet ændret."
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[Den nye sides indhold indlæst fra %s]"
+msgstr "[Indhold af ny side indlæst fra %s]"
 
 #, python-format
 msgid "[Template %s not found]"
@@ -159,33 +158,30 @@ msgstr ""
 "annullere dine ændringer."
 
 msgid "Preview"
-msgstr "Forhåndsvis"
+msgstr "Smugkig"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Grafisk redigering"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Du ændrede ikke på sidens indhold, så den er ikke gemt!"
+msgstr "Dine ændringer er ikke gemt!"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "Kommentar"
+msgstr "Kommentar:"
 
 msgid "<No addition>"
 msgstr "<Ingen tilføjelser>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Tilføj: %(category)s"
 
 msgid "Trivial change"
 msgstr "Simpel ændring"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Fjern ekstra mellemrum i slutningen af hver linje"
+msgstr "Fjern mellemrum sidst i hver linje"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -214,19 +210,20 @@ msgstr ""
 "Titel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titel 3 [[Verbatim(===)]];   "
 "[[Verbatim(====)]] Titel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titel 5 "
 "[[Verbatim(=====)]].\n"
-" Lister:: mellemrum og enten * asterisker eller 1., a., A., i., I. "
-"nummererede emner; 1.#n begynd nummerering ved n; mellemrum alene giver "
-"indryk.\n"
+" Lister:: mellemrum og enten * asterisker; 1., a., A., i., I. nummererede "
+"emner; 1.#n begynd nummerering ved n; mellemrum alene giver indryk.\n"
 " Links:: [[Verbatim(SammenSatteOrd)]]; [[Verbatim([\"lodrette klammer og "
 "dobbelte citationstegn\"])]]; url; [url]; [url beskrivende navn].\n"
 " Tabeller:: || celletekst |||| celletekst over to kolonner ||;    "
-"efterfølgende mellemrum er ikke tiladt efter tabeller eller titler."
+"efterfølgende mellemrum er ikke tiladt efter tabeller eller titler.\n"
+"\n"
+"(!) For yderligere hjælp, se HjælpTilRedigering eller SyntaksReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen blev afbrudt."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Tak for dine rettelser. Dit bidrag er værdsat."
+msgstr "Tak for dine rettelser - de er værdsat."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -245,10 +242,10 @@ msgid ""
 msgstr ""
 "Hej Wiki-bruger!\n"
 "\n"
-"Du abonnerer på orientering om rettelser til en wiki-side eller wiki-"
-"kategori på \"%(sitename)s\".\n"
+"Du abonnerer på rettelser til en wiki-side eller wiki-kategori på \"%"
+"(sitename)s\".\n"
 "\n"
-"Følgende sider er ændret af %(editor)s:\n"
+"Følgende side er ændret af %(editor)s:\n"
 "%(pagelink)s\n"
 "\n"
 
@@ -274,7 +271,7 @@ msgstr ""
 "[%(sitename)s] %(trivial)sopdatering af \"%(pagename)s\" af %(username)s"
 
 msgid "Trivial "
-msgstr "Simpel "
+msgstr "simpel "
 
 msgid "Status of sending notification mails:"
 msgstr "Status for udsending af orienterings-emails:"
@@ -292,7 +289,7 @@ msgid "Page could not get locked. Unexpected error (errno=%d)."
 msgstr "Side kunne ikke låses. Uventet fejl (fejlnummer=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr "Side kunne ikke låses. Manglende 'current' fil?"
+msgstr "Side kunne ikke låses. Mangler filen 'current'?"
 
 msgid "You are not allowed to edit this page!"
 msgstr "Du har ikke lov til at redigere denne side!"
@@ -300,9 +297,8 @@ msgstr "Du har ikke lov til at redigere denne side!"
 msgid "You cannot save empty pages."
 msgstr "Du kan ikke gemme tomme sider."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "Du har ikke lov til at redigere denne side!"
+msgstr "Du har allerede gemt denne side!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -322,7 +318,7 @@ msgstr ""
 "rettelser til den nuværende tekst.\n"
 "\n"
 "''Overskriv ikke blot den nuværende tekst med din version. Det vil slette "
-"den anden persons rettelser, og det er meget ubehøvlet!!''\n"
+"den anden persons rettelser, og det er meget ubehøvlet!''\n"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -342,8 +338,8 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"Låsen for %(owner)s udløb for %(mins_ago)d minut(ter) siden, og du fik "
-"overdraget låsen til denne side."
+"Låsen for %(owner)s udløb for %(mins_ago)d minut(ter) siden. Du er nu blevet "
+"tildelt låsen til denne side."
 
 #, python-format
 msgid ""
@@ -361,7 +357,7 @@ msgstr ""
 "denne side."
 
 msgid "Use the Preview button to extend the locking period."
-msgstr "Brug knappen Forhåndsvis til at udvide låseperioden."
+msgstr "Brug Smugkig-knappen til at udvide låseperioden."
 
 #, python-format
 msgid ""
@@ -385,7 +381,7 @@ msgstr ""
 "'''Du bør ''undgå at redigere'' denne side ihvertfald %(mins_valid)d minut"
 "(ter) endnu,\n"
 "for at undgå redigeringskonflikter.'''[[BR]]\n"
-"Tryk Annullér hvis du ikke vil redigére."
+"Tryk Annullér for at afbryde redigeringen."
 
 msgid "<unknown>"
 msgstr "<ukendt>"
@@ -421,16 +417,16 @@ msgid "Up"
 msgstr "Op"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Publicér min email (ikke min wiki-hjemmeside) i forfatter-info"
 
 msgid "Open editor on double click"
-msgstr "Åbn redigeringsvindue ved at dobbeltklikke"
+msgstr "Åbn redigeringsvindue ved dobbeltklik"
 
-msgid "Remember last page visited"
-msgstr "Husk senest besøgte side"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "Vis spørgsmålstegn ved links til ikke-eksisterende sider"
+msgstr "Vis spørgsmålstegn ved ikke-eksisterende sider"
 
 msgid "Show page trail"
 msgstr "Vis senest besøgte sider"
@@ -439,7 +435,7 @@ msgid "Show icon toolbar"
 msgstr "Vis knap-panel"
 
 msgid "Show top/bottom links in headings"
-msgstr "Vis top-/bund-links i header"
+msgstr "Vil lænker til top/bund i overskrifter"
 
 msgid "Show fancy diffs"
 msgstr "Vis detaljerede forskelle"
@@ -459,12 +455,11 @@ msgstr "Luk denne brugerprofil permanent"
 msgid "Name"
 msgstr "Navn"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Brug FornavnEfternavn)"
+msgstr "(Brug Fornavn''''''Efternavn)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Kælenavn"
 
 msgid "Password"
 msgstr "Adgangskode"
@@ -482,10 +477,10 @@ msgid "User CSS URL"
 msgstr "Personlig CSS URL"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Lad det stå blankt for at slå bruger-CSS fra)"
+msgstr "(Efterlad blankt for at deaktivere bruger-CSS)"
 
 msgid "Editor size"
-msgstr "Størrelse på redigeringsvindue"
+msgstr "Redigeringsvinduestørrelse"
 
 #, python-format
 msgid ""
@@ -508,9 +503,9 @@ msgstr "Log ind"
 msgid " %s and try again."
 msgstr " %s og prøv igen."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultater ud af %(pages)d sider."
+msgstr "%(hits)d resultater ud af cirka %(pages)d sider."
 
 #, python-format
 msgid "%.2f seconds"
@@ -530,6 +525,11 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"Brugernavn: %s\n"
+"\n"
+"Adgangskode: %s\n"
+"\n"
+"Adgangs-URL: %s/?action=userform&uid=%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -541,10 +541,18 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"Nogen har bedt om at dine adgangsdata bliver tilsendt denne email-adresse.\n"
+"\n"
+"Hvis du har mistet din adgangskode, kan du bruge informationerne nedenfor og "
+"blot angive\n"
+"adgangskoden PRÆCIST SOM VIST i wiki'ens adgangskode-formularfelt.\n"
+"\n"
+"Når du er korrekt logget ind, er det naturligvis en god idé at ændre "
+"adgangskoden.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] Dine wiki brugerprofil-oplysninger"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Infokage slettet. Du er nu logget ud."
@@ -561,7 +569,8 @@ msgstr "Angiv venligst en korrekt email-adresse!"
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Ingen brugerprofil blev fundet med email-adressen '%(email)s'!"
+msgstr ""
+"Ingen brugerprofil blev fundet med den angivne email-adresse '%(email)s'!"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -569,29 +578,31 @@ msgstr ""
 "Ukendt brugernavn: [[[\"%s\"}}}. Angiv venligst brugernavn og adgangskode."
 
 msgid "Missing password. Please enter user name and password."
-msgstr "Manglende adgangskode. Angive venligst brugernavn og adgangskode."
+msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Brugerprofil \"%s\" er deaktiveret."
 
 msgid "Sorry, wrong password."
 msgstr "Desværre, forkert adgangskode."
 
 msgid "Bad relogin URL."
-msgstr "Forkert adgangsadresse."
+msgstr "Forkert adgangs-URL."
 
 msgid "Unknown user."
 msgstr "Ukendt bruger."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Brug BrugerProfil til at ændre dinne indstillinger eller oprette en "
+"brugerprofil."
 
 msgid "Empty user name. Please enter a user name."
-msgstr "Tomt brugernavn. Angiv venligst et brugernavn."
+msgstr "Blankt brugernavn. Angiv venligst et brugernavn."
 
 msgid "This user name already belongs to somebody else."
-msgstr "Dette brugernavn tilhører en anden allerede."
+msgstr "Dette brugernavn tilhører allerede en anden."
 
 msgid "Passwords don't match!"
 msgstr "Adgangskoderne er ikke ens!"
@@ -599,7 +610,6 @@ msgstr "Adgangskoderne er ikke ens!"
 msgid "Please specify a password!"
 msgstr "Angiv venligst en adgangskode!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
@@ -608,10 +618,10 @@ msgstr ""
 "kan du få dem tilsendt pr. email."
 
 msgid "This email already belongs to somebody else."
-msgstr "Denne email-adresse tilhører en anden allerede."
+msgstr "Denne email-adresse tilhører allerede en anden."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Brugerprofil oprettet!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -627,10 +637,10 @@ msgid "<Browser setting>"
 msgstr "<Browser opsætning>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "den foretrukne"
 
 msgid "free choice"
-msgstr ""
+msgstr "frit valg"
 
 msgid "Save"
 msgstr "Gem"
@@ -641,12 +651,11 @@ msgstr "Log ud"
 msgid "Preferred theme"
 msgstr "Ønsket tema"
 
-#, fuzzy
 msgid "Editor Preference"
-msgstr "BrugerProfil"
+msgstr "Foretrukne redigeringsprogram"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Redigeringsprogram vist på brugerfladen"
 
 msgid "Time zone"
 msgstr "Tidszone"
@@ -655,19 +664,19 @@ msgid "Your time is"
 msgstr "Din tid er"
 
 msgid "Server time is"
-msgstr "Servertid er"
+msgstr "Serverens tid er"
 
 msgid "Date format"
 msgstr "Datoformat"
 
 msgid "Preferred language"
-msgstr "Ønsket sprog"
+msgstr "Foretrukne sprog"
 
 msgid "General options"
 msgstr "Generelle valg"
 
 msgid "Quick links"
-msgstr "Kvik-links"
+msgstr "Genveje"
 
 msgid "This list does not work, unless you have entered a valid email address!"
 msgstr ""
@@ -680,13 +689,13 @@ msgid "Create Profile"
 msgstr "Opret brugerprofil"
 
 msgid "Mail me my account data"
-msgstr "Send mig en email med mine adgangsoplysninger"
+msgstr "Send mig mine adgangsoplysninger pr. email"
 
 msgid "Action"
 msgstr "Rutine"
 
 msgid "No older revisions available!"
-msgstr "Ingen ældre udgaver tilgængelig!"
+msgstr "Ingen ældre udgaver tilgængelige!"
 
 #, python-format
 msgid "Diff for \"%s\""
@@ -694,7 +703,7 @@ msgstr "Forskelle for \"%s\""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
-msgstr "Forskelle mellem versionerne %d og %d"
+msgstr "Forskelle mellem udgaverne %d og %d"
 
 #, python-format
 msgid "(spanning %d versions)"
@@ -705,29 +714,29 @@ msgstr "Ingen forskelle fundet!"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
-msgstr "Selvom siden dog er gemt %(count)d gange!"
+msgstr "Siden dog er gemt %(count)d gange!"
 
 msgid "(ignoring whitespace)"
 msgstr "(ignorerer mellemrum)"
 
 msgid "Ignore changes in the amount of whitespace"
-msgstr "Ignorér ændringer i antallet af mellemrum"
+msgstr "Ignorér forskelle i antal mellemrum"
 
 msgid "General Information"
 msgstr "Generel information"
 
 #, python-format
 msgid "Page size: %d"
-msgstr "SideStørrelse: %d"
+msgstr "Sidestørrelse: %d"
 
 msgid "SHA digest of this page's content is:"
-msgstr "SHA-signatur for indholdet på denne side:"
+msgstr "SHA-tværsum for denne sides indhold:"
 
 msgid "The following users subscribed to this page:"
 msgstr "Følgende brugere abonnerer på denne side:"
 
 msgid "This page links to the following pages:"
-msgstr "Denne side har links til følgende sider:"
+msgstr "Denne side har lænker til følgende sider:"
 
 msgid "Date"
 msgstr "Dato"
@@ -758,7 +767,7 @@ msgstr "tilbagefør"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
-msgstr "Tilbagefør til version %(rev)d."
+msgstr "Tilbagefør til udgave %(rev)d."
 
 msgid "edit"
 msgstr "redigér"
@@ -770,7 +779,7 @@ msgid "del"
 msgstr "slet"
 
 msgid "N/A"
-msgstr "Ikke tilgængelig"
+msgstr "utilgængelig"
 
 msgid "Revision History"
 msgstr "Historik"
@@ -787,11 +796,11 @@ msgid "Show \"%(title)s\""
 msgstr "Vis \"%(title)s\""
 
 msgid "General Page Infos"
-msgstr "Generel side-information"
+msgstr "Generelle side-informationer"
 
 #, python-format
 msgid "Show chart \"%(title)s\""
-msgstr "Vis kortet \"%(title)s\""
+msgstr "Vis diagrammet \"%(title)s\""
 
 msgid "Page hits and edits"
 msgstr "Sidebesøg og -redigeringer"
@@ -800,59 +809,55 @@ msgid "You are not allowed to revert this page!"
 msgstr "Du har ikke lov til at tilbageføre denne side!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Du skal være logget på for at tilføje en genvej."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Dit abonnement på denne side er blevet afmeldt."
+msgstr "Din genvej til denne side er fjernet."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Dit abonnement på denne side er blevet afmeldt."
+msgstr "En genvej til denne side er blevet tilføjet."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Du har ikke lov til at abonnere på en side du ikke kan læse!"
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Denne wiki har ikke aktiveret email-håndtering.\n"
-"Kontakt ejeren af wiki'en, som kan aktivere email."
+msgstr "Denne wiki har ikke aktiveret email-håndtering."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Du skal være logget på for at abonnere."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Tilføj din email-adresse under BrugerProfil for at kunne abonnere."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Dit abonnement på denne side er blevet afmeldt."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Kan ikke afmelde et abonnement som regulært udtryk (regexp)!"
+msgstr ""
+"Kan ikke afmelde abonnement formuleret med et regulært udtryk (regexp)!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Redigér regulære udtryk (regexp) for abonnement under BrugerProfil."
 
 msgid "You have been subscribed to this page."
 msgstr "Du abonnerer nu på denne side."
 
 msgid "Charts are not available!"
-msgstr "Tabeller er ikke tilgængelige!"
+msgstr "Diagrammer er ikke tilgængelige!"
 
 msgid "You need to provide a chart type!"
-msgstr "Tabeltypen skal angives!"
+msgstr "Diagram-typen skal angives!"
 
 #, python-format
 msgid "Bad chart type \"%s\"!"
-msgstr "Dårlig tabeltype·\"%s\"!"
+msgstr "Dårlig diagram-type·\"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
 msgstr "Krævet atribut \"%(attrname)s\" mangler."
 
 msgid "Submitted form data:"
-msgstr "Formular-data sendt:"
+msgstr "Formular-informationer sendt:"
 
 msgid "Search Titles"
 msgstr "Søg i titler"
@@ -892,7 +897,7 @@ msgid "Release %s [Revision %s]"
 msgstr "Version %s [Udgave %s]"
 
 msgid "4Suite Version"
-msgstr "Version af 4Suite"
+msgstr "4Suite-version"
 
 msgid "Number of pages"
 msgstr "Antal sider"
@@ -925,28 +930,26 @@ msgstr "Globale udvidelsesrutiner"
 msgid "Local extension actions"
 msgstr "Lokale udvidelsesrutiner"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Installerede fortolkere"
+msgstr "Globale fortolkere"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Lokale udvidelsesmakroer"
+msgstr "Lokale udvidelsesfortolkere"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Installerede processorer (FORÆLDET -- brug fortolkere istedet)"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktiveret"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Aktiveret"
 
 msgid "Lupy search"
-msgstr ""
+msgstr "Lupy søgning"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Aktive tråde"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -969,10 +972,10 @@ msgid "Expected a value for key \"%(token)s\""
 msgstr "Forventede en værdi for variablen \"%(token)s\""
 
 msgid "Wiki Markup"
-msgstr "Wiki opmærkning"
+msgstr "Wiki-opmærkning"
 
 msgid "Print View"
-msgstr "Udskriftsvisning"
+msgstr "Printer-venlig"
 
 #, python-format
 msgid "[%d attachments]"
@@ -987,7 +990,7 @@ msgstr ""
 "side."
 
 msgid "Filename of attachment not specified!"
-msgstr "Filnavn for vedhæftet fil mangler eller er forkert!"
+msgstr "Filnavn for vedhæftet fil ikke angivet!"
 
 #, python-format
 msgid "Attachment '%(filename)s' does not exist!"
@@ -1005,14 +1008,14 @@ msgstr ""
 "og derfor let kan holde op med at fungere."
 
 msgid "unzip"
-msgstr ""
+msgstr "udpak"
 
 msgid "install"
-msgstr ""
+msgstr "installere"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
-msgstr "Ingen vedhæftede filer for %(pagename)s"
+msgstr "Ingen vedhæftede filer tilknyttet %(pagename)s"
 
 msgid "Edit drawing"
 msgstr "Redigér tegning"
@@ -1021,7 +1024,7 @@ msgid "Attached Files"
 msgstr "Vedhæftede filer"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr "Du har ikke lov til at vedhæfte dokumenter på denne side."
+msgstr "Du har ikke lov til at vedhæfte filer til denne side."
 
 msgid "New Attachment"
 msgstr "Ny vedhæftet fil"
@@ -1037,11 +1040,10 @@ msgstr ""
 "Alternativt, hvis \"Omdøb\" er blank, anvendes det originale filnavn."
 
 msgid "File to upload"
-msgstr "Fil at lægge op"
+msgstr "Fil at overføre"
 
-#, fuzzy
 msgid "Rename to"
-msgstr "Omdøb side"
+msgstr "Omdøb til"
 
 msgid "Upload"
 msgstr "Overfør"
@@ -1065,20 +1067,18 @@ msgstr "Du har ikke lov til at slette vedhæftede filer på denne side."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Du har ikke lov til at hente vedhæftede filer fra denne side!"
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Du har ikke lov til at se denne sides vedhæftede filer!"
+msgstr "Du har ikke lov til at udpakke filer vedhæftet denne side."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Du har ikke lov til at redigere denne side!"
+msgstr "Du har ikke lov til at installere filer."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Du har ikke lov til at se denne sides vedhæftede filer!"
 
 #, python-format
 msgid "Unsupported upload action: %s"
-msgstr "Oplægningsrutine ikke understøttet: %s"
+msgstr "Overførselsrutine ikke understøttet: %s"
 
 #, python-format
 msgid "Attachments for \"%(pagename)s\""
@@ -1102,57 +1102,62 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Vedhæftet fil '%(filename)s' slettet."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Vedhæftet fil '%(filename)s' slettet."
+msgstr "Vedhæftet fil '%(filename)s' installeret."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Tegningen '%(filename)s' er gemt."
+msgstr "Installation af '%(filename)s' fejlede."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Filen %s er ikke en MoinMoin pakkefil."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
+"Den vedhæftede fil '%(filename)s' kunne ikke udpakkes fordi indholdet ville "
+"fylde for meget (%(space)d kB mangler)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
+"Den vedhæftede fil '%(filename)s' kunne ikke udpakkes fordi den indeholder "
+"for mange filer (%(count)d kB for mange)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Vedhæftet fil '%(filename)s' slettet."
+msgstr "Vedhæftet fil '%(filename)s' udpakket."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
+"Den vedhæftede fil '%(filename)s' ikke udpakket fordi indholdet ville fylde "
+"for meget, kun er zip-filer, eksisterer allerede eller ligger i mapper."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "Filen %(target)s er ikke en .zip-fil."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Vedhæftet fil '%(filename)s'"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Pakkeskript:"
 
-#, fuzzy
 msgid "File Name"
 msgstr "Filnavn"
 
 msgid "Modified"
-msgstr ""
+msgstr "Redigeret"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Ukendt filtype. Kan ikke vise denne vedhæftede fil direkte."
@@ -1168,8 +1173,7 @@ msgid "This page is already deleted or was never created!"
 msgstr "Denne side er allerede slettet eller har aldrig eksisteret!"
 
 msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"Anvend venligst den interaktive brugergrænseflade til at slette sider!!"
+msgstr "Anvend venligst den interaktive brugergrænseflade til at slette sider!"
 
 msgid "Really delete this page?"
 msgstr "Er du sikker på at denne side skal slettes?"
@@ -1208,7 +1212,7 @@ msgstr "Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
-msgstr "Kunne ikke omdøbe side pÝ grund af systemfejl: %s."
+msgstr "Kunne ikke omdøbe side på grund af systemfejl: %s."
 
 msgid "Rename Page"
 msgstr "Omdøb side"
@@ -1217,7 +1221,7 @@ msgid "New name"
 msgstr "Nyt navn"
 
 msgid "Optional reason for the renaming"
-msgstr "Årsag til denne omdøbning (valgfrit)"
+msgstr "Årsag til omdøbning (valgfrit)"
 
 #, python-format
 msgid ""
@@ -1239,7 +1243,7 @@ msgid ""
 "(totalwords)d words%(localwords)s and are highlighted below:"
 msgstr ""
 "Følgende %(badwords)d ord blev ikke fundet i den %(totalwords)d ord store "
-"ordliste %(localwords)s og er markeret herunder:"
+"ordliste %(localwords)s og er fremhævet herunder:"
 
 msgid "Add checked words to dictionary"
 msgstr "Tilføj de markerede ord til ordlisten"
@@ -1260,7 +1264,7 @@ msgstr "Fritekst-søgning: \"%s\""
 
 #, python-format
 msgid "Full Link List for \"%s\""
-msgstr "Fuld liste over links for \"%s\""
+msgstr "Fuld lænke-liste for \"%s\""
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
@@ -1269,7 +1273,7 @@ msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
-msgstr "Læg ny vedhæftet fil \"%(filename)s\" op"
+msgstr "Overfør ny vedhæftet fil \"%(filename)s\""
 
 #, python-format
 msgid "Create new drawing \"%(filename)s\""
@@ -1277,11 +1281,11 @@ msgstr "Opret ny tegning \"%(filename)s\""
 
 #, python-format
 msgid "Edit drawing %(filename)s"
-msgstr "Redigér tegningen \"%(filename)s\""
+msgstr "Redigér tegning \"%(filename)s\""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
-msgstr "Forkerte include-argumenter \"%s\"!"
+msgstr "Forkerte inkluderingsargumenter \"%s\"!"
 
 #, python-format
 msgid "Nothing found for \"%s\"!"
@@ -1289,10 +1293,10 @@ msgstr "Intet fundet for \"%s\""
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "Navigationsskemaet '%(scheme)s' er ikke understøttet!"
+msgstr "Navigationsskema '%(scheme)s' ikke understøttet!"
 
 msgid "No parent page found!"
-msgstr "Ingen foregående side fundet!"
+msgstr "Ingen overliggende side fundet!"
 
 msgid "Wiki"
 msgstr "Wiki"
@@ -1316,15 +1320,15 @@ msgstr "Ingen citater i %(pagename)s."
 
 #, python-format
 msgid "Upload of attachment '%(filename)s'."
-msgstr "Oplægning af vedhæftet fil '%(filename)s'."
+msgstr "Overførsel af vedhæftet fil '%(filename)s'."
 
 #, python-format
 msgid "Drawing '%(filename)s' saved."
 msgstr "Tegningen '%(filename)s' er gemt."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "for %(hours)dt %(mins)dm siden"
+msgstr "for %(mins)dm siden"
 
 msgid "(no bookmark set)"
 msgstr "(intet bogmærke sat)"
@@ -1377,23 +1381,20 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Forventede en farvekode·\"%(arg)s\"·efter·\"%(key)s\""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
+msgstr "XSLT er slået fra, se venligst HjælpTilInstallation."
 
-#, fuzzy
 msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT-håndtering er ikke tilgængelig!"
+msgstr "XSLT-håndtering er ikke tilgængelig. Installér venligst 4suite 1.x."
 
 #, python-format
 msgid "%(errortype)s processing error"
 msgstr "%(errortype)s programfejl"
 
-#, fuzzy
 msgid "Views/day"
-msgstr "Vis"
+msgstr "Visninger/dag"
 
-#, fuzzy
 msgid "Edits/day"
-msgstr "Redigér"
+msgstr "Redigeringer/dag"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -1416,19 +1417,19 @@ msgid "Page Size Distribution"
 msgstr "Sidestørrelser"
 
 msgid "page size upper bound [bytes]"
-msgstr "øvre grænse for sidestørrelse [bytes]"
+msgstr "sidestørrelse øvre grænse [bytes]"
 
 msgid "# of pages of this size"
 msgstr "Antal sider af denne størrelse"
 
 msgid "User agent"
-msgstr ""
+msgstr "Bruger-agent"
 
 msgid "Others"
 msgstr "Andre"
 
 msgid "Distribution of User-Agent Types"
-msgstr "Fordeling af \"User-Agent\"-typer"
+msgstr "Fordeling af bruger-agent-typer"
 
 msgid "Unsubscribe"
 msgstr "Afmeld abonnement"
@@ -1449,7 +1450,7 @@ msgid "[NEW]"
 msgstr "[NY]"
 
 msgid "[DIFF]"
-msgstr "[DIFF]"
+msgstr "[FORSKELLE]"
 
 msgid "[BOTTOM]"
 msgstr "[BUND]"
@@ -1480,19 +1481,17 @@ msgstr "Tekst"
 msgid "Titles"
 msgstr "Titler"
 
-#, fuzzy
 msgid "Search"
-msgstr "Søg:"
+msgstr "Søg"
 
 msgid "More Actions:"
 msgstr "Flere Rutiner:"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
-#, fuzzy
 msgid "Raw Text"
-msgstr "Vis rå tekst"
+msgstr "Rå tekst"
 
 msgid "Delete Cache"
 msgstr "Slet cache"
@@ -1500,37 +1499,32 @@ msgstr "Slet cache"
 msgid "Delete Page"
 msgstr "Slet side"
 
-#, fuzzy
 msgid "Like Pages"
-msgstr "LignendeSide"
+msgstr "Lignende sider"
 
-#, fuzzy
 msgid "Local Site Map"
-msgstr "LokalOversigt"
+msgstr "Lokal oversigt"
 
 msgid "Do"
 msgstr "Anvend"
 
-#, fuzzy
 msgid "Edit (Text)"
-msgstr "RedigérTekst"
+msgstr "Redigér (tekst)"
 
 msgid "Edit (GUI)"
-msgstr ""
+msgstr "Rediger (grafisk)"
 
 msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"
 
-#, fuzzy
 msgid "Remove Link"
-msgstr "Kvik-links"
+msgstr "Fjern lænke"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Tilføj lænke"
 
-#, fuzzy
 msgid "Attachments"
-msgstr "Ny vedhæftet fil"
+msgstr "Vedhæftede filer"
 
 #, python-format
 msgid "Show %s days."
@@ -1555,7 +1549,7 @@ msgstr "Bruger"
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"Desvürre, kan ikke gemme side fordi \"%(content)s\" ikke er tilladt i denne "
+"Desværre, kan ikke gemme side fordi \"%(content)s\" ikke er tilladt i denne "
 "wiki."
 
 msgid "Line"
@@ -1571,9 +1565,8 @@ msgstr "Tilføjelser er markeret som her."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Forbindelse til email-server '%(server)s' mislykkedes: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "Email sendt OK"
+msgstr "Email ikke sendt"
 
 msgid "Mail sent OK"
 msgstr "Email sendt OK"
@@ -1650,108 +1643,5 @@ msgstr "OmdøbSide"
 msgid "SpellCheck"
 msgstr "StaveKontrol"
 
-#, fuzzy
-#~ msgid "Parent Page"
-#~ msgstr "ForSide"
-
-#~ msgid "Trail"
-#~ msgstr "Sti"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Du har ikke oprettet en brugerprofil endnu. Vælg BrugerProfil i øverste "
-#~ "højre hjørne for at oprette en brugerprofil."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "Denne wiki har ikke aktiveret email-håndtering. Kontakt ejeren af "
-#~ "wiki'en, som kan enten aktivere email eller fjerne Abonnér-ikonet."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Du har ikke angivet en email-adresse i din brugerprofil. Vælg dit navn "
-#~ "(BrugerProfil) i øverste højre hjørne og angiv en gyldig email-adresse."
-
-#, fuzzy
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "For at afmelde abonnement skal du gå til din brugerprofil og slette denne "
-#~ "side fra abonnementslisten."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Maksimum antal tilladte inkluderinger overskredet**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Kunne ikke finde den henviste side: %s**"
-
-#, fuzzy
-#~ msgid "Quicklink"
-#~ msgstr "Kvik-links"
-
-#~ msgid "Show Print View"
-#~ msgstr "Vis udskriftsvenlig udgave"
-
-#~ msgid "Attach File"
-#~ msgstr "Vedhæft fil"
-
-#~ msgid "Show Like Pages"
-#~ msgstr "Vis lignende sider"
-
-#~ msgid "Show Local Site Map"
-#~ msgstr "Vis lokal oversigt"
-
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Info"
-
-#~ msgid "Can't work out query"
-#~ msgstr "Kan ikke forstå forespørgslen"
-
-#, fuzzy
-#~ msgid "Add to Quicklinks"
-#~ msgstr "Kvik-links"
-
-#~ msgid "Show Parent"
-#~ msgstr "Vis \"forælder\" (siden denne stammer fra)"
-
-#~ msgid "Show Changes"
-#~ msgstr "Vis ændringer"
-
-#~ msgid "Get Info"
-#~ msgstr "Hent informationer"
-
-#~ msgid "Skip to preview"
-#~ msgstr "Skift til forhåndsvisning"
-
-#~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[nuværende sidestørrelse '''%(size)d''' bytes]"
-
-#~ msgid "Optional comment about this change"
-#~ msgstr "Kommentar til denne ændring (valgfri)"
-
-#~ msgid "Make this page belong to category %(category)s"
-#~ msgstr "Lad denne side tilhøre kategorien %(category)s"
-
-#~ msgid "Show fancy links"
-#~ msgstr "Vis smarte links"
-
-#~ msgid "Save as"
-#~ msgstr "Gem som"
-
-#~ msgid "XSLT option disabled!"
-#~ msgstr "XSLT slået fra!"
-
-#~ msgid "RefreshCache"
-#~ msgstr "OpdatérCache"
-
-#~ msgid "for this page (cached %(date)s)"
-#~ msgstr "for denne side (husket siden %(date)s)"
+#~ msgid "Remember last page visited"
+#~ msgstr "Husk senest besøgte side"

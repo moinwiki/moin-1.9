@@ -242,8 +242,6 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Publiskot manu e-pasta adresi (bez manas viki mājas lapas) autora informācijā''',
 '''Open editor on double click''':
 '''Labot ar dubultklikšķi''',
-'''Remember last page visited''':
-'''Atcerēties pēdējo apmeklēto lapu''',
 '''Show question mark for non-existing pagelinks''':
 '''Rādīt jautājuma zīmi neeksistējošu lapu saitēm''',
 '''Show page trail''':

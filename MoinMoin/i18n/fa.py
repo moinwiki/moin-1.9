@@ -11,7 +11,7 @@ meta = {
 }
 text = {
 '''The backed up content of this page is deprecated and will not be included in search results!''':
-'''نسخه های پشتیبان گرفته شده از این صفحه راضی کننده نبوده اند و در نتایج جستجو نخواهند آمد''',
+'''نسخه های پشتیبان گرفته شده از این صفحه راضی کننده نبوده اند و در نتایج جستجو نخواهند آمد!''',
 '''Revision %(rev)d as of %(date)s''':
 '''ویرایش %(rev)d as of %(date)s''',
 '''Redirected from page "%(page)s"''':
@@ -240,8 +240,6 @@ To leave the editor, press the Cancel button.''':
 '''لطفا در اطلاعات نویسنده آدرس ایمیل من را اصلاح نمایید.''',
 '''Open editor on double click''':
 '''با دوبار کلیک ویرایشگر را باز کن''',
-'''Remember last page visited''':
-'''آخرین صفحه ای که میبینم را به خاطر بسپار''',
 '''Show question mark for non-existing pagelinks''':
 '''به جای لینک صفحه هایی که وجود ندارند علامت سوال بگذار''',
 '''Show page trail''':
@@ -508,8 +506,465 @@ Contact the owner of the wiki, who can enable email.''':
 '''چارت ها قابل دسترسی نیستند!''',
 '''You need to provide a chart type!''':
 '''شما باید نوع چارت را مشخص نمایید!''',
+'''Bad chart type "%s"!''':
+'''چارت "%s" صحیح نمی باشد!''',
+'''Required attribute "%(attrname)s" missing''':
+'''نسبت های مورد نیاز "%(attrname)s" یافت نشد''',
+'''Submitted form data:''':
+'''اطلاعات وارد شده:''',
+'''Search Titles''':
+'''عناوین جستجو''',
+'''Display context of search results''':
+'''نتایج جستجو را نشان بده''',
+'''Case-sensitive searching''':
+'''جستجوی حساس به حروف بزرگ و کوچک''',
+'''Search Text''':
+'''جستجوی متن''',
+'''Go To Page''':
+'''برو به صفحه''',
+'''Include system pages''':
+'''با·در·نظر·گرفتن·صفحات·سیستمی''',
+'''Exclude system pages''':
+'''بدون در نظر گرفتن صفحات سیستمی''',
+'''Plain title index''':
+'''فهرست عناوین به صورت متن ساده''',
+'''XML title index''':
+'''فهرست عنواین بصورت XML''',
+'''Python Version''':
+'''نسخه python''',
+'''MoinMoin Version''':
+'''نسخه MoinMoin''',
+'''Release %s [Revision %s]''':
+'''انتشار %s·[Revision·%s]''',
+'''4Suite Version''':
+'''نسخه 4Suite''',
+'''Number of pages''':
+'''تعداد صفحات''',
+'''Number of system pages''':
+'''تعداد صفحات سیستمی''',
+'''Accumulated page sizes''':
+'''حجم صفحات جمع شده''',
+'''Entries in edit log''':
+'''محتویات گزارش ویرایش''',
+'''%(logcount)s (%(logsize)s bytes)''':
+'''%(logcount)s·(%(logsize)s·bytes)''',
+'''NONE''':
+'''هیچ یک''',
+'''Global extension macros''':
+'''اضافات macro عمومی''',
+'''Local extension macros''':
+'''اضافات·macro·محلی''',
+'''Global extension actions''':
+'''رفتارهای اضافات عمومی''',
+'''Local extension actions''':
+'''رفتارهای·اضافات·محلی''',
+'''Global parsers''':
+'''تجزیه کننده های عمومی''',
+'''Local extension parsers''':
+'''تجزیه کننده های اضافات محلی''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''پردازشگرهای نصب شده (DEPRECATED·--·use·Parsers·instead)''',
+'''Disabled''':
+'''غیرفعال شده''',
+'''Enabled''':
+'''فعال شده''',
+'''Lupy search''':
+'''جستجوی Lupy''',
+'''Active threads''':
+'''مباحث فعال''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''لطفا به جای {{{"%s"}}} جستجوی گزیده تری انجام دهید''',
+'''ERROR in regex \'%s\'''':
+'''ایراد در regex·\'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''timestamp·\'%s\' غیر قابل قبول''',
+'''Expected "=" to follow "%(token)s"''':
+'''Expected·"="·to·follow·"%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Expected·a·value·for·key·"%(token)s"''',
+'''Wiki Markup''':
+'''علامت گذاری ویکی''',
+'''Print View''':
+'''دیدن صفحه قابل چاپ''',
+'''[%d attachments]''':
+'''[%d·attachments]''',
+'''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
+'''این صفحه <a·href="%(link)s">%(count)s·ضمائم</a> دارد.''',
+'''Filename of attachment not specified!''':
+'''نام فایل ضمیمه مشخص نشده است!''',
+'''Attachment \'%(filename)s\' does not exist!''':
+'''ضمیمه \'%(filename)s\' وجود ندارد!''',
+'''To refer to attachments on a page, use \'\'\'{{{attachment:filename}}}\'\'\', 
+as shown below in the list of files. 
+Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
+since this is subject to change and can break easily.''':
+'''جهت ارجاع به ضمیمه موجود در یک صفحه٬ از \'\'\'{{{ضمیمه:نام فایل}}}\'\'\' استفاده نمایید.
+همینگونه که در زیر در قسمت لیست فایل ها نشان داده شده است از لینک آدرس {{{[get]}}} استفاده ننمایید''',
+'''unzip''':
+'''از حالت فشرده خارج نما''',
+'''install''':
+'''نصب''',
+'''No attachments stored for %(pagename)s''':
+'''هیچ ضمیمه ای برای صفحه %(pagename)s ذخیره نشده است''',
+'''Edit drawing''':
+'''ویرایش ترسیمات''',
+'''Attached Files''':
+'''فایل های ضمیمه شده''',
+'''You are not allowed to attach a file to this page.''':
+'''شما مجاز نیستید فایلی را به این صفحه ضمیمه نمایید.''',
+'''New Attachment''':
+'''ضمیمه جدید''',
+'''An upload will never overwrite an existing file. If there is a name
+conflict, you have to rename the file that you want to upload.
+Otherwise, if "Rename to" is left blank, the original filename will be used.''':
+'''فرستادن فایل جدید جایگزین فایل قبلی نخواهد شد. اگر نام فایلها مشابه می باشد٬ شما باید نام فایلی که می فرستید را تغییر دهید.
+در غیر این صورت و در صورتی که قسمت "تغیر نام به" نیز خالی مانده باشد٬ فایل اولیه مورد استفاده قرار خواهد گرفت.''',
+'''File to upload''':
+'''فایلی که باید ارسال شود''',
+'''Rename to''':
+'''تغییر نام به''',
+'''Upload''':
+'''بفرست''',
+'''File attachments are not allowed in this wiki!''':
+'''ضمیمه کردن فایل به این ویکی مجاز نیست!''',
+'''You are not allowed to save a drawing on this page.''':
+'''شما مجاز به ذخیره ترسیمات برای این صفحه نیستید.''',
+'''No file content. Delete non ASCII characters from the file name and try again.''':
+'''محتویات فایل یافت نشد. کاراکترهای غیر ASCII را از نام فایل حذف نموده و مجددا سعی نمایید.''',
+'''You are not allowed to delete attachments on this page.''':
+'''شما مجاز به حذف ضمایم این صفحه نمی باشید.''',
+'''You are not allowed to get attachments from this page.''':
+'''شما مجاز به دریافت ضمایم این صفحه نمی باشید.''',
 '''You are not allowed to unzip attachments of this page.''':
 '''شما مجاز نیستید ضمائم فشرده این صفحه را باز کنید.''',
 '''You are not allowed to install files.''':
 '''شما اجازه نصب فایل ندارید.''',
+'''You are not allowed to view attachments of this page.''':
+'''شما مجاز به دیدن ضمایم این صفحه نمی باشید.''',
+'''Unsupported upload action: %s''':
+'''ارسال غیر مجاز: %s''',
+'''Attachments for "%(pagename)s"''':
+'''ضمایم برای "%(pagename)s"''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''ضمیمه \'%(target)s\'·(نام راه دور·\'%(filename)s\') در حال حاضر وجود دارد.''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
+'''ضمیمه \'%(target)s\' (نام راه دور·\'%(filename)s\') به حجم %(bytes)d بایت ذخیره شد.''',
+'''Attachment \'%(filename)s\' deleted.''':
+'''ضمیمه \'%(filename)s\' حذف شد.\'''',
+'''Attachment \'%(filename)s\' installed.''':
+'''ضمیمه \'%(filename)s\' نصب شد.\'''',
+'''Installation of \'%(filename)s\' failed.''':
+'''فایل \'%(filename)s\' نصب نشد.''',
+'''The file %s is not a MoinMoin package file.''':
+'''فایل %s فایلی از بسته MoinMoin نیست.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''ضمیمه \'%(filename)s\' به دلیل اینکه پس از باز شدن حجم زیادی دارد٬ باز نشد.(%(space)d·kB·missing).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''ضمیمه·\'%(filename)s\'·به·دلیل·اینکه·پس·از·باز·شدن·تعداد فایلها بسیار زیاد است٬·باز·نشد.(%(count)d·missing).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''ضمیمه \'%(filename)s\' از حالت فشرده خارج شد.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''ضمیمه \'%(filename)s\' به دلیل اینکه پس از باز شدن تعداد·فایلها·بسیار·زیاد·است٬ باز نشد.''',
+'''The file %(target)s is not a .zip file.''':
+'''فایل %(target)s یک فایل zip نیست.''',
+'''Attachment \'%(filename)s\'''':
+'''فایل ضمیمه \'%(filename)s\'''',
+'''Package script:''':
+'''اسکریپت بسته:''',
+'''File Name''':
+'''نام فایل''',
+'''Modified''':
+'''اصلاح شده''',
+'''Unknown file type, cannot display this attachment inline.''':
+'''نوع فایل نامشخص است٬ این فایل ضمیمه اینجا قابل نمایش نمی باشد.''',
+'''attachment:%(filename)s of %(pagename)s''':
+'''فایل ضمیمه: فایل %(filename)s از صفحه %(pagename)s''',
+'''You are not allowed to delete this page.''':
+'''شما مجاز به حذف این صفحه نمی باشید.''',
+'''This page is already deleted or was never created!''':
+'''این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!''',
+'''Please use the interactive user interface to delete pages!''':
+'''لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!''',
+'''Really delete this page?''':
+'''آیا این صفحه واقعا باید حذف شوید؟''',
+'''Delete''':
+'''حذف''',
+'''Optional reason for the deletion''':
+'''توضیحات دلخواه برای این حذف''',
+'''No pages like "%s"!''':
+'''هیچ بسته ای مانند "%s" یافت نشد!''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''یک صفحه مانند "%s" پیدا شد٬ اکنون به آن صفحه میروید.''',
+'''Pages like "%s"''':
+'''صفحات مانند "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d·%(matches)s·for·"%(title)s"''',
+'''Local Site Map for "%s"''':
+'''نقشه سایت محلی برای "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''شما مجاز به تغییر نام صفحات در این ویکی نمی باشید!''',
+'''Please use the interactive user interface to rename pages!''':
+'''لطفا برای تغییر نام صفحات از این صفحه کاربری interactive استفاده نمایید!''',
+'''Could not rename page because of file system error: %s.''':
+'''بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد.''',
+'''Rename Page''':
+'''تغیر نام صفحه''',
+'''New name''':
+'''نام جدید''',
+'''Optional reason for the renaming''':
+'''دلیل اختیاری برای تغببر نام صفحه''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''صفحه ای با نام {{{\'%s\'}}} وجود دارد.
+
+لطفا نام دیگری انتخاب نمایید.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(including·%(localwords)d·%(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''کلمات %(badwords)d در مر جع لغات %(totalwords)d لغات %(localwords)s یافت نشدند و در زیر مشخص شده اند:''',
+'''Add checked words to dictionary''':
+'''لغت چک شده را به مرجع لغات اضافه نما''',
+'''No spelling errors found!''':
+'''اشتباه املایی یافت نشد!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''شما نمی توانید صفحه که مجاز به خواندن آن نیستید را تصحیح املایی نمایید.''',
+'''Title Search: "%s"''':
+'''جستجوی موضوع: "%s"''',
+'''Full Text Search: "%s"''':
+'''جستجوی کامل متن: "%s"''',
+'''Full Link List for "%s"''':
+'''لیست کامل لینکهای "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''سیستم نمی تواند صفحه جدید بدون نام ایجاد نماید.  لطفا یک نام صفحه مشخص نمایید.''',
+'''Upload new attachment "%(filename)s"''':
+'''ضمیمه جدید "%(filename)s" را بفرست''',
+'''Create new drawing "%(filename)s"''':
+'''شکل جدید "%(filename)s" را بساز''',
+'''Edit drawing %(filename)s''':
+'''ویرایش شکل %(filename)s''',
+'''Invalid include arguments "%s"!''':
+'''آرگومان "%s" غیر مجاز است!''',
+'''Nothing found for "%s"!''':
+'''در مورد "%s" چیزی یافت نشد!''',
+'''Unsupported navigation scheme \'%(scheme)s\'!''':
+'''طرح \'%(scheme)s\' پشتیبانی نشده است!''',
+'''No parent page found!''':
+'''صفحه والد بالاتر یافت نشد!''',
+'''Wiki''':
+'''ویکی''',
+'''Slideshow''':
+'''نمایش تصاویر پشت سر هم''',
+'''Start''':
+'''شروع''',
+'''Slide %(pos)d of %(size)d''':
+'''اسلاید %(pos)d با حجم %(size)d''',
+'''No orphaned pages in this wiki.''':
+'''در این ویکی هیچ صفحه بی والد یافت نشد.''',
+'''No quotes on %(pagename)s.''':
+'''برای صفحه %(pagename)s نظری وجود ندارد.''',
+'''Upload of attachment \'%(filename)s\'.''':
+'''ارسال ضمیمه \'%(filename)s\'''',
+'''Drawing \'%(filename)s\' saved.''':
+'''شکل \'%(filename)s\' ذخیره شد.''',
+'''%(mins)dm ago''':
+'''%(mins)dm دقیقه پیش''',
+'''(no bookmark set)''':
+'''(بدون نشان bookmark)''',
+'''(currently set to %s)''':
+'''(در حال حاضر تنظیم شده به %s)''',
+'''Delete Bookmark''':
+'''حذف نشان bookmark''',
+'''Set bookmark''':
+'''نشان bookmark بگذار''',
+'''set bookmark''':
+'''نشان·bookmark·بگذار''',
+'''[Bookmark reached]''':
+'''[به نشان bookmark رسید]''',
+'''Markup''':
+'''علامت بگذار''',
+'''Display''':
+'''نشان بده''',
+'''Filename''':
+'''نام فایل''',
+'''Download XML export of this wiki''':
+'''دریافت خروجی این ویکی با فرمت XML''',
+'''No wanted pages in this wiki.''':
+'''در این ویکی صفحه ای مورد نیاز نیست.''',
+'''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
+'''Expected·"%(wanted)s"·after·"%(key)s",·got·"%(token)s"''',
+'''Expected an integer "%(key)s" before "%(token)s"''':
+'''Expected·an·integer·"%(key)s"·before·"%(token)s"''',
+'''Expected an integer "%(arg)s" after "%(key)s"''':
+'''Expected·an·integer·"%(arg)s"·after·"%(key)s"''',
+'''Expected a color value "%(arg)s" after "%(key)s"''':
+'''Expected·a·color·value·"%(arg)s"·after·"%(key)s"''',
+'''XSLT option disabled, please look at HelpOnConfiguration.''':
+'''گزینه XSLT غیر فعال است٬ لطفا به راهنمای تنظیمات HelpOnConfiguration نگاه کنید.''',
+'''XSLT processing is not available, please install 4suite 1.x.''':
+'''پردازش XSLT قابل انجام نیست٬ لطفا بسته 4suite·1.x را نصب نمایید.''',
+'''%(errortype)s processing error''':
+'''ایراد پردازش %(errortype)s''',
+'''Views/day''':
+'''بازدید/روز''',
+'''Edits/day''':
+'''ویرایش/روز''',
+'''%(chart_title)s for %(filterpage)s''':
+'''%(chart_title)s برای %(filterpage)s''',
+'''green=view
+red=edit''':
+'''سبز=بازدید
+قرمز=ویرایش''',
+'''date''':
+'''تاریخ''',
+'''# of hits''':
+'''تعداد بازدید''',
+'''Page Size Distribution''':
+'''توزیع حجم صفحه''',
+'''page size upper bound [bytes]''':
+'''حد بالای حجم صفحه [bytes]''',
+'''# of pages of this size''':
+'''تعداد صفحات با این اندازه''',
+'''User agent''':
+'''User·agent''',
+'''Others''':
+'''سایر''',
+'''Distribution of User-Agent Types''':
+'''توزیع انواع نماینده کاربر''',
+'''Unsubscribe''':
+'''خارج شدن از عضویت''',
+'''Home''':
+'''خانه''',
+'''[RSS]''':
+'''[RSS]''',
+'''[DELETED]''':
+'''[حذف شد]''',
+'''[UPDATED]''':
+'''[به روزآوری شد]''',
+'''[NEW]''':
+'''[جدید]''',
+'''[DIFF]''':
+'''[تغییرات]''',
+'''[BOTTOM]''':
+'''[انتها]''',
+'''[TOP]''':
+'''[ابتدا]''',
+'''Click to do a full-text search for this title''':
+'''برای انجام جستجوی کامل این موضوع کلیک نمایید''',
+'''Clear message''':
+'''پیغام حذف شود''',
+'''last edited %(time)s by %(editor)s''':
+'''آخرین بار در زمان %(time)s توسط %(editor)s ویرایش شد''',
+'''last modified %(time)s''':
+'''آخرین تغییرات %(time)s''',
+'''Search:''':
+'''جستجو:''',
+'''Text''':
+'''متن''',
+'''Titles''':
+'''عناوین''',
+'''Search''':
+'''جستجو''',
+'''More Actions:''':
+'''عملیات اضافه تر:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''متن معمولی''',
+'''Delete Cache''':
+'''حذف حافظه cache''',
+'''Delete Page''':
+'''حذف صفحه''',
+'''Like Pages''':
+'''مانند صفحات''',
+'''Local Site Map''':
+'''نقشه سایت محلی''',
+'''Do''':
+'''انجام بده''',
+'''Edit (Text)''':
+'''ویرایش (متنی)''',
+'''Edit (GUI)''':
+'''ویرایش (گرافیکی)''',
+'''Immutable Page''':
+'''صفحه تغییرناپذیر''',
+'''Remove Link''':
+'''حذف لینک''',
+'''Add Link''':
+'''لینک اضافه نما''',
+'''Attachments''':
+'''ضمائم''',
+'''Show %s days.''':
+'''%s روز نشان بده''',
+'''EditText''':
+'''ویرایش متن''',
+'''Immutable page''':
+'''صفحه·تغییرناپذیر''',
+'''Or try one of these actions:''':
+'''و یا یکی از عملیات زیر را انتخاب نمایید:''',
+'''Page''':
+'''صفحه''',
+'''User''':
+'''کاربر''',
+'''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
+'''متاسفم! این صفحه بدلیل اینکه محتوی "%(content)s" در این صفحه مجاز نمی باشد٬ ذخیره نشد.''',
+'''Line''':
+'''خط''',
+'''Deletions are marked like this.''':
+'''حذفیات به این ترتیب مشخص میشوند''',
+'''Additions are marked like this.''':
+'''اضافات مانند این مشخص میشوند''',
+'''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
+'''اتصال به سرویس دهنده ایمیل \'%(server)s\' مقدور نیست: %(reason)s''',
+'''Mail not sent''':
+'''پیغام شما فرستاده نشد''',
+'''Mail sent OK''':
+'''پیغام با موفقیت ارسال شد''',
+'''FrontPage''':
+'''صفحه اولیه''',
+'''RecentChanges''':
+'''آخرین تغییرات''',
+'''TitleIndex''':
+'''فهرست موضوعات''',
+'''WordIndex''':
+'''فهرست لغات''',
+'''FindPage''':
+'''جستجوی صفحه''',
+'''SiteNavigation''':
+'''نوع سایت''',
+'''HelpContents''':
+'''فهرست راهنما''',
+'''HelpOnFormatting''':
+'''راهنمای فرمت ها''',
+'''UserPreferences''':
+'''مشخصات کاربر''',
+'''WikiLicense''':
+'''اجازه نامه ویکی''',
+'''MissingPage''':
+'''صفحه گم شده''',
+'''Mon''':
+'''دوشنبه''',
+'''Tue''':
+'''سه شنبه''',
+'''Wed''':
+'''چهارشنبه''',
+'''Thu''':
+'''پنج شنبه''',
+'''Fri''':
+'''جمعه''',
+'''Sat''':
+'''شنبه''',
+'''Sun''':
+'''یکشنبه''',
+'''AttachFile''':
+'''ضمیمه فایل''',
+'''DeletePage''':
+'''حذف صفحه''',
+'''LikePages''':
+'''مانند صفحات''',
+'''LocalSiteMap''':
+'''نقشه سایت''',
+'''RenamePage''':
+'''تغییرنام صفحه''',
+'''SpellCheck''':
+'''تصحیح املایی''',
 }

@@ -212,8 +212,6 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''Ylös''',
 '''Open editor on double click''':
 '''Siirry muokkaukseen kaksoisnapsautuksella''',
-'''Remember last page visited''':
-'''Muista viimeisin sivu''',
 '''Show question mark for non-existing pagelinks''':
 '''Näytä kysymysmerkki puuttuvien sivujen linkeissä''',
 '''Show page trail''':

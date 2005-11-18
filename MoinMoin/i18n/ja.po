@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-10-31 15:40+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -425,8 +425,8 @@ msgstr "作成者の情報として(Wikiホームページではなく)メール
 msgid "Open editor on double click"
 msgstr "ダブルクリックでエディタを開く"
 
-msgid "Remember last page visited"
-msgstr "最後に訪れたページを記憶する"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "存在しないページへのリンクには\"?\"を表示する"
@@ -1644,6 +1644,9 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "最後に訪れたページを記憶する"
 
 #~ msgid "Parent Page"
 #~ msgstr "親ページ"

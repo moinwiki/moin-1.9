@@ -243,8 +243,6 @@ Per a abandonar l\'editor, premeu el botó Cancel·la.''',
 '''Publica el meu correu electrònic (i no la meua pàgina principal del wiki a la informació de l\'autor''',
 '''Open editor on double click''':
 '''Obre l\'editor en fer doble clic''',
-'''Remember last page visited''':
-'''Recorda l\'última pàgina visitada''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostra un signe d\'interrogació per a enllaços a pàgines no existents''',
 '''Show page trail''':

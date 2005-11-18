@@ -214,8 +214,6 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''Sus''',
 '''Open editor on double click''':
 '''Deschidere editor la dublu clic''',
-'''Remember last page visited''':
-'''Memorare ultima pagină vizitată''',
 '''Show question mark for non-existing pagelinks''':
 '''Afişare semn de întebare pentru legăturile cu pagini inexistente''',
 '''Show page trail''':

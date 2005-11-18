@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-04-17 00:00+0100\n"
 "Last-Translator: Leonardo Gregianin\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -430,8 +430,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Abrir o editor com duplo clique"
 
-msgid "Remember last page visited"
-msgstr "Recordar a última página visitada"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar sinal de interrogação para links de páginas inexistentes"
@@ -1657,6 +1657,9 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "CorreçãoOrtográfica"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Recordar a última página visitada"
 
 #, fuzzy
 #~ msgid "Parent Page"

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-12 01:09+0100\n"
-"PO-Revision-Date: 2005-10-30 01:56 (UTC)\n"
+"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"PO-Revision-Date: 2005-11-17 12:56 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
@@ -431,8 +431,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Abra o editor com um duplo clique"
 
-msgid "Remember last page visited"
-msgstr "Lembrar última página visitada"
+msgid "Jump to last visited page instead of frontpage"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar sinal de interrogação nos links cujas páginas não existem"
@@ -591,7 +591,7 @@ msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha.
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Conta \"%s\" desabilitada."
 
 msgid "Sorry, wrong password."
 msgstr "Desculpe. Senha errada."
@@ -604,6 +604,8 @@ msgstr "Usuário desconhecido."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Use as PreferênciasDoUsuário para mudar suas configurações ou criar uma "
+"outra conta."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Nome do usuário não informado. Por favor, informe o nome do usuário."
@@ -1660,6 +1662,9 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Lembrar última página visitada"
 
 #~ msgid "Parent Page"
 #~ msgstr "Página Principal"

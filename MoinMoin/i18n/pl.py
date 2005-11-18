@@ -201,8 +201,6 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''Góra''',
 '''Open editor on double click''':
 '''Otwórz edytor podwójnym kliknięciem''',
-'''Remember last page visited''':
-'''Zapamiętaj ostatnią odwiedzoną stronę''',
 '''Show question mark for non-existing pagelinks''':
 '''Pokaż znaki zapytania dla nieistniejących jeszcze stron''',
 '''Show page trail''':
