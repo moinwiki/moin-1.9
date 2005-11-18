@@ -564,6 +564,11 @@ class ThemeBase:
             if usercss and usercss == href:
                 usercss = None
 
+        # admin configurable additional css (farm or wiki level)
+        for media, csshref in self.request.cfg.stylesheets:
+            html.append(link % (self.stylesheetsCharset, media, csshref))
+
+        
         # tribute to the most sucking browser...
         if self.cfg.hacks.get('ie7', False):
             html.append("""

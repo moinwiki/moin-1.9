@@ -1,6 +1,12 @@
 MoinMoin Version History
 ========================
 
+Version 1.5.0beta4:
+  Other changes:
+    * cfg.stylesheets = [] (default). You can use this on wiki or farm level
+      to emit stylesheets after the theme css and before the user prefs css.
+      The list entries must be ('screen', '/where/ever/is/my.css') style.
+  
 Version 1.5.0beta3:
   Fixes:
     * fixed editor preview throwing away page content for new pages

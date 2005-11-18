@@ -293,6 +293,7 @@ class DefaultConfig:
     show_timings = 0
     show_version = 0
     siteid = 'default'
+    stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
     superuser = [] # list of unicode user names that have super powers :)
     theme_default = 'modern'
     theme_force = False
