@@ -439,3 +439,8 @@ input.button {
     background-color: #FFFF80;
 }
 
+/* Spans for line-anchors - uses * html hack so that the rule only applies to
+ * IE (where omitting the "display: none" triggers rendering bugs).
+ */
+* html span.anchor { display: none; }
+
