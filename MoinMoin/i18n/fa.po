@@ -426,7 +426,7 @@ msgid "Open editor on double click"
 msgstr "با دوبار کلیک ویرایشگر را باز کن"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "بجای صفحه اولیه به آخرین صفحه بازدید شده برو"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "به جای لینک صفحه هایی که وجود ندارند علامت سوال بگذار"
