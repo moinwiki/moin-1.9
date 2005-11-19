@@ -565,7 +565,7 @@ def do_edit(pagename, request):
 
     # Edit was canceled
     if request.form.has_key('button_cancel'):
-        pg.sendCancel(savetext, rev)
+        pg.sendCancel(savetext or "", rev)
         return
 
     # is invoked without savetext start editing
