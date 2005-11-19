@@ -431,7 +431,7 @@ msgid "Open editor on double click"
 msgstr "Abrir el editor con doble click"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Ir a la última página visitada en lugar de la páginainicial"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar signo de interrogación en enlaces a páginas inexistentes"

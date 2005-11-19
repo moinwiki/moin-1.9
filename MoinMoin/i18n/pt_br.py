@@ -243,6 +243,8 @@ Para deixar o editor, selecione o botão Cancelar.''',
 '''Publique meu e-mail (não em minha homepage do wiki) nas informações do autor''',
 '''Open editor on double click''':
 '''Abra o editor com um duplo clique''',
+'''Jump to last visited page instead of frontpage''':
+'''Ir à última página visitada em vez da página inicial''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostrar sinal de interrogação nos links cujas páginas não existem''',
 '''Show page trail''':

@@ -240,6 +240,8 @@ To leave the editor, press the Cancel button.''':
 '''لطفا در اطلاعات نویسنده آدرس ایمیل من را اصلاح نمایید.''',
 '''Open editor on double click''':
 '''با دوبار کلیک ویرایشگر را باز کن''',
+'''Jump to last visited page instead of frontpage''':
+'''بجای صفحه اولیه به آخرین صفحه بازدید شده برو''',
 '''Show question mark for non-existing pagelinks''':
 '''به جای لینک صفحه هایی که وجود ندارند علامت سوال بگذار''',
 '''Show page trail''':

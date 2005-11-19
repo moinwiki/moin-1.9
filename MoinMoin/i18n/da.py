@@ -239,6 +239,8 @@ Tryk Annullér for at afbryde redigeringen.''',
 '''Publicér min email (ikke min wiki-hjemmeside) i forfatter-info''',
 '''Open editor on double click''':
 '''Åbn redigeringsvindue ved dobbeltklik''',
+'''Jump to last visited page instead of frontpage''':
+'''Skift til senest besøgte side fremfor startsiden''',
 '''Show question mark for non-existing pagelinks''':
 '''Vis spørgsmålstegn ved ikke-eksisterende sider''',
 '''Show page trail''':

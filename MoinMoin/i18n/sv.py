@@ -245,6 +245,8 @@ För att lämna redigeringen, tryck på "Avbryt".''',
 '''Publicera min epostadress (inte min wiki-hemsida) i författarinformationen''',
 '''Open editor on double click''':
 '''Öppna editorn vid dubbelklick''',
+'''Jump to last visited page instead of frontpage''':
+'''Hoppa till den senast besökta sidan i stället för startsidan''',
 '''Show question mark for non-existing pagelinks''':
 '''Visa frågetecken för brutna sidlänkar''',
 '''Show page trail''':

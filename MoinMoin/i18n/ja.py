@@ -244,6 +244,8 @@ To leave the editor, press the Cancel button.''':
 '''作成者の情報として(Wikiホームページではなく)メールアドレスを載せる''',
 '''Open editor on double click''':
 '''ダブルクリックでエディタを開く''',
+'''Jump to last visited page instead of frontpage''':
+'''フロントページのかわりに最後に訪れたページに飛ぶ''',
 '''Show question mark for non-existing pagelinks''':
 '''存在しないページへのリンクには"?"を表示する''',
 '''Show page trail''':
