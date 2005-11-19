@@ -282,7 +282,9 @@ class Formatter(FormatterBase):
         return str
 
     def anchordef(self, id):
-        return '<a id="%s"></a>' % (id, ) # do not add a \n here, it breaks pre sections with line_anchordef
+        #return '<a id="%s"></a>' % (id, ) # this breaks PRE sections for IE
+        # do not add a \n here, it breaks pre sections with line_anchordef
+        return '<span id="%s" class="anchor"></span>' % (id, )
 
     def line_anchordef(self, lineno):
         return self.anchordef("line-%d" % lineno)
