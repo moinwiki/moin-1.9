@@ -440,7 +440,7 @@ msgid "Open editor on double click"
 msgstr "Double-cliquer pour ouvrir l'éditeur"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Démarrer à la dernière page visitée au lieu d'à la page d'accueil"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr ""
