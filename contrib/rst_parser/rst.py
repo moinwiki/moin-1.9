@@ -31,6 +31,7 @@ import StringIO
 import __builtin__
 import sys
 import copy
+import types
 
 # docutils imports are below
 import MoinMoin.parser.wiki
@@ -111,9 +112,9 @@ class MoinWriter(html4css1.Writer):
         if getattr(node, 'indirect_reference_name', None):
             node['refuri'] = node.indirect_reference_name
             return 1
-        elif 'id' in node.attributes:
+        elif 'ids' in node.attributes or 'id' in node.attributes:
             # I'm pretty sure the first test should catch any targets or
-            # references with the "id" attribute. Therefore, if we get to here
+            # references with the "id[s]" attribute. Therefore, if we get to here
             # its probably an internal link that didn't work so we let it go
             # through as an error.
             return 0
@@ -137,7 +138,6 @@ class MoinWriter(html4css1.Writer):
         self.wikiparser.formatter = self.formatter
         self.wikiparser.hilite_re = None
         self.nodes = []
-
 
     def translate(self):
         visitor = MoinTranslator(self.document,
@@ -163,28 +163,48 @@ class Parser:
         # Create our simple parser
         parser = MoinDirectives(self.request)
 
-        parts =  publish_parts(source = self.raw,
-                               writer = MoinWriter(formatter, self.request),
-                               settings_overrides = {'halt_level': 5,
-                                                     'traceback': True,
-                                                     'file_insertion_enabled': 0,
-                                                     'raw_enabled': 0,
-                                                     }
-                              )
+        parts = publish_parts(
+            source = self.raw,
+            writer = MoinWriter(formatter, self.request),
+            settings_overrides = {
+                'halt_level': 5,
+                'traceback': True,
+                'file_insertion_enabled': 0,
+                'raw_enabled': 0,
+                'stylesheet_path': '',
+            }
+        )
 
         text = ''
         if parts['title']:
-            text += '<h2>' + parts['title'] + '</h2>'
+            text += formatter.rawHTML('<h2>' + parts['title'] + '</h2>')
         # If there is only one subtitle then it is held in parts['subtitle'].
         # However, if there is more than one subtitle then this is empty and
         # fragment contains all of the subtitles.
         if parts['subtitle']:
-            text += '<h3>' + parts['subtitle'] + '</h3>'
+            text += formatter.rawHTML('<h3>' + parts['subtitle'] + '</h3>')
         if parts['docinfo']:
             text += parts['docinfo']
         text += parts['fragment']
         self.request.write(html_escape_unicode(text))
 
+class RawHTMLList(list):
+    """
+        RawHTMLList catches all html appended to internal HTMLTranslator lists.
+        It passes the HTML through the MoinMoin rawHTML formatter to strip 
+        markup when necessary. This is to support other formatting outputs
+        (such as ?action=format&mimetype=text/plain).
+    """
+    
+    def __init__(self, formatter):
+        self.formatter = formatter
+        
+    def append(self, text):
+        f = sys._getframe()
+        if f.f_back.f_code.co_filename.endswith('html4css1.py'):
+            if isinstance(text, types.StringType) or isinstance(text, types.UnicodeType):
+                text = self.formatter.rawHTML(text)
+        list.append(self, text)
 
 class MoinTranslator(html4css1.HTMLTranslator):
 
@@ -206,6 +226,20 @@ class MoinTranslator(html4css1.HTMLTranslator):
         # function (see visit_image for an example).
         self.wiki_text = ''
         self.setup_wiki_handlers()
+        
+        # Make all internal lists RawHTMLLists, see RawHTMLList class
+        # comment for more information.
+        for i in self.__dict__:
+            if isinstance(getattr(self, i), types.ListType):
+                setattr(self, i, RawHTMLList(formatter))
+
+    def depart_docinfo(self, node):
+        """
+            depart_docinfo assigns a new list to self.body, we need to re-make that
+            into a RawHTMLList.
+        """
+        html4css1.HTMLTranslator.depart_docinfo(self, node)
+        self.body = RawHTMLList(self.formatter)
 
     def capture_wiki_formatting(self, text):
         """
@@ -249,7 +283,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
 
     def process_inline(self, node, uri_string):
         """
-            Process the "inline:" link scheme. This can either ome from
+            Process the "inline:" link scheme. This can either come from
             visit_reference or from visit_image. The uri_string changes
             depending on the caller. The uri is passed to MoinMoin to handle the
             inline link. If it is an image, the src line is extracted and passed
@@ -360,7 +394,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             TODO: Need to handle figures similarly.
         """
         uri = node['uri'].lstrip()
-        prefix = ''       # assume no prefix
+        prefix = ''		  # assume no prefix
         if ':' in uri:
             prefix = uri.split(':',1)[0]
         # if prefix isn't URL, try to display in page
@@ -407,7 +441,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
             # Definition List
             'definition_list': 'definition_list',
             # Admonitions
-            'warning': 'highlight'}
+            'warning': 'highlight'
+        }
         for rest_func, moin_func in handlers.items():
             visit_func, depart_func = self.create_wiki_functor(moin_func)
             visit_func = new.instancemethod(visit_func, self, MoinTranslator)
