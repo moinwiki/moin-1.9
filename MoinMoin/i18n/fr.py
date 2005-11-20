@@ -240,6 +240,8 @@ Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
 '''Indiquer mon adresse électronique au lieu de ma page wiki personnelle dans les informations sur l\'auteur''',
 '''Open editor on double click''':
 '''Double-cliquer pour ouvrir l\'éditeur''',
+'''Jump to last visited page instead of frontpage''':
+'''Démarrer à la dernière page visitée au lieu d\'à la page d\'accueil''',
 '''Show question mark for non-existing pagelinks''':
 '''Afficher un point d\'interrogation pour les liens vers une page inexistante''',
 '''Show page trail''':
