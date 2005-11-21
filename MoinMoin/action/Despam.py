@@ -67,22 +67,22 @@ def show_pages(request, pagename, editor, timestamp):
     macro.request = request
     macro.formatter = Formatter(request)
 
-    request.write("<p>")
+    request.write("<table>")
     for line in log.reverse():
         if line.ed_time_usecs < timestamp:
             break
         
         if not request.user.may.read(line.pagename):
             continue
-        
-        
+
         if not pages.has_key(line.pagename):
             pages[line.pagename] = 1
             if line.getEditor(request) == editor:
+                line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
                 request.write(RecentChanges.format_page_edits(macro, [line], timestamp))
 
     request.write('''
-</p>
+</table>
 <p>
 <form method="post" action="%s/%s">
 <input type="hidden" name="action" value="Despam">
@@ -110,13 +110,21 @@ def revert_page(request, pagename, editor):
             if line.getEditor(request) != editor:
                 rev = line.rev
                 break
-    oldpg = Page.Page(request, pagename, rev=int(rev))
-    pg = PageEditor.PageEditor(request, pagename)
-    try:
-        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=rev, action="SAVE/REVERT")
-    except pg.SaveError, msg:
-        # msg contain a unicode string
-        savemsg = unicode(msg)
+
+    if rev == u"00000000": # page created by spammer 
+        comment = u"Page deleted by Despam action"
+        pg = PageEditor.PageEditor(request, pagename, do_editor_backup=0)
+        try:
+            savemsg = pg.deletePage(comment)
+        except pg.SaveError, msg:
+            savemsg = unicode(msg)
+    else: # page edited by spammer
+        oldpg = Page.Page(request, pagename, rev=int(rev))
+        pg = PageEditor.PageEditor(request, pagename, do_editor_backup=0)
+        try:
+            savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=rev, action="SAVE/REVERT")
+        except pg.SaveError, msg:
+            savemsg = unicode(msg)
     return savemsg
     
 def revert_pages(request, editor, timestamp):
@@ -126,7 +134,7 @@ def revert_pages(request, editor, timestamp):
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     pages = {}
-    messages = []
+    revertpages = []
     for line in log.reverse():
         if line.ed_time_usecs < timestamp:
             break
@@ -137,10 +145,16 @@ def revert_pages(request, editor, timestamp):
         if not pages.has_key(line.pagename):
             pages[line.pagename] = 1
             if line.getEditor(request) == editor:
-                msg = revert_page(request, line.pagename, editor)
-                if msg:
-                    request.write("<p>%s: %s</p>" % (
-                        Page.Page(request, line.pagename).link_to(request), msg))
+                revertpages.append(line.pagename)
+
+    request.write("Debug: Pages to revert:<br>%s" % "<br>".join(revertpages))
+    for pagename in revertpages:
+        request.write("Debug: Begin reverting %s ...<br>" % pagename)
+        msg = revert_page(request, pagename, editor)
+        if msg:
+            request.write("<p>%s: %s</p>" % (
+                Page.Page(request, pagename).link_to(request), msg))
+        request.write("Debug: Finished reverting %s.<br>" % pagename)
 
 def execute(pagename, request):
     _ = request.getText
