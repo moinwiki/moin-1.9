@@ -16,8 +16,8 @@ from MoinMoin.PageEditor import PageEditor
 def execute(pagename, request):
     _ = request.getText
     actname = __name__.split('.')[-1]
-    # Create a page editor that does not do edior backups, becuase
-    # delete generate "deleted" version, of the page.
+    # Create a page editor that does not do editor backups, because
+    # delete generates a "deleted" version of the page.
     page = PageEditor(request, pagename, do_editor_backup=0)
 
     # be extra paranoid in dangerous actions
@@ -51,7 +51,7 @@ def execute(pagename, request):
     button = _('Delete')
     comment_label = _("Optional reason for the deletion")
 
-    # TODO: this form suck, redesign like RenamePage
+    # TODO: this form sucks, redesign like RenamePage
     formhtml = '''
 <form method="post" action="">
 <strong>%(querytext)s</strong>
