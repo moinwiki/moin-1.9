@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, string, time, Cookie, sha, codecs
+import os, time, sha, codecs
 
 try:
     import cPickle as pickle
@@ -30,7 +30,7 @@ def getUserList(request):
     import re, dircache
     user_re = re.compile(r'^\d+\.\d+(\.\d+)?$')
     files = dircache.listdir(request.cfg.user_dir)
-    userlist = filter(user_re.match, files)
+    userlist = [f for f in files if user_re.match(f)]
     return userlist
 
 
@@ -437,7 +437,6 @@ class User:
             return False, False 
                 
         # First get all available pre13 charsets on this system
-        import codecs
         pre13 = ['iso-8859-1', 'iso-8859-2', 'euc-jp', 'gb2312', 'big5',]
         available = []
         for charset in pre13:
@@ -822,7 +821,7 @@ class User:
                 return
 
             # Append new page, limiting the length
-            self._trail = filter(lambda p, pn=pagename: p != pn, self._trail)
+            self._trail = [p for p in self._trail if p != pagename]
             self._trail = self._trail[-(self._cfg.trail_size-1):]
             self._trail.append(pagename)
             self.saveTrail()
@@ -862,12 +861,12 @@ class User:
                 and not self._trail \
                 and os.path.exists(self.__filename() + ".trail"):
             try:
-                self._trail = codecs.open(self.__filename() + ".trail", 'r', config.charset).readlines()
+                trail = codecs.open(self.__filename() + ".trail", 'r', config.charset).readlines()
             except (OSError, ValueError):
-                self._trail = []
-            else:
-                self._trail = filter(None, map(string.strip, self._trail))
-                self._trail = self._trail[-self._cfg.trail_size:]
+                trail = []
+            trail = [t.strip() for t in trail]
+            trail = [t for t in trail if t]
+            self._trail = trail[-self._cfg.trail_size:]
 
         return self._trail
 
