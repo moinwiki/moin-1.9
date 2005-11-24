@@ -59,7 +59,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         return ''
 
     # parse and check arguments
-    args = args_re.match(text)
+    args = text and args_re.match(text)
     if not args:
         return (_sysmsg % ('error', _('Invalid include arguments "%s"!')) % (text,))
 
