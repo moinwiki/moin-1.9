@@ -1,6 +1,14 @@
 MoinMoin Version History
 ========================
 
+Version 1.5.0current:
+  Fixes:
+    * Fixed a minor user interface bug: it showed RenamePage and DeletePage
+      actions in the menu if you only had write rights and then complained
+      when you really tried when you had no delete rights additionally.
+    * We don't remove RenamePage and DeletePage from menu any more if user is
+      unknown. This stuff is only driven by ACLs now.
+
 Version 1.5.0beta4:
   Fixes:
     * use <span class="anchor"> instead of <a> for line-xxx anchors, this

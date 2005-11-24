@@ -596,13 +596,11 @@ class RequestBase(object):
             # Filter actions by page type, acl and user state
             excluded = []
             if ((page.isUnderlayPage() and not page.isStandardPage()) or
-                not self.user.may.write(page.page_name)):
+                not self.user.may.write(page.page_name) or
+                not self.user.may.delete(page.page_name)):
                 # Prevent modification of underlay only pages, or pages
-                # the user can't write to
+                # the user can't write and can't delete
                 excluded = [u'RenamePage', u'DeletePage',] # AttachFile must NOT be here!
-            elif not self.user.valid:
-                # Prevent rename and delete for non registered users
-                excluded = [u'RenamePage', u'DeletePage']
             for key in excluded:
                 if key in actions:
                     del actions[key]                
