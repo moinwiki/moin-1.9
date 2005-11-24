@@ -230,8 +230,8 @@ class ThemeBase:
         html = u'<ul id="username">\n%s</ul>' % ''.join(userlinks)
         return html
 
-    # Schemas supported in toolbar links, using [url label] foramrt
-    linkSchemas = [r'http://', r'https://', r'ftp://', 'mailto:'] + \
+    # Schemas supported in toolbar links, using [url label] format
+    linkSchemas = [r'http://', r'https://', r'ftp://', 'mailto:', r'irc://', ] + \
                   [x + ':' for x in config.url_schemas]
 
     def splitNavilink(self, text, localize=1):

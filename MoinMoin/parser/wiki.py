@@ -32,7 +32,7 @@ class Parser:
     PARENT_PREFIX = wikiutil.PARENT_PREFIX
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
-    url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|' +
+    url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc|' +
             u'|'.join(attachment_schemas) + 
             (config.url_schemas and u'|' + u'|'.join(config.url_schemas) or ''))
 
