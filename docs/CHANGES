@@ -8,6 +8,9 @@ Version 1.5.0current:
       when you really tried when you had no delete rights additionally.
     * We don't remove RenamePage and DeletePage from menu any more if user is
       unknown. This stuff is only driven by ACLs now.
+  Other changes:
+    * Added irc:// to the builtin supported link schemas. You can remove it
+      from config.url_schemas in case you have patched it in there.
 
 Version 1.5.0beta4:
   Fixes:
