@@ -23,7 +23,7 @@ base_page = 'MoinMoinChat/Logs/'
 
 # this function generates a pagename from the file name
 filename_function = lambda filename: '/'.join([x.replace('-', '/') for x in filename.split('.')][:-1])
-### End of configuration
+### end of configuration
 
 import os, sys
 
@@ -57,7 +57,7 @@ for root, dirs, files in os.walk(local_dir):
                     
         fileObj = open(os.path.join(root, filename), 'rb')
         try:
-            p.saveText(decodeLinewise(fileObj.read()), 0)
+            p.saveText("#format plain\n" + decodeLinewise(fileObj.read()), 0)
         except PageEditor.SaveError, e:
             print "Got %r" % (e, )
         fileObj.close()
