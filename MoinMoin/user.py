@@ -130,7 +130,8 @@ def normalizeName(name):
     @return: user name that can be used in acl lines
     """
     name = name.replace('_', ' ') # we treat _ as a blank
-    username_allowedchars = "'" # ' for names like O'Brian. "," and ":" must not be allowed (ACL delimiters).
+    username_allowedchars = "'@." # ' for names like O'Brian or email addresses.
+                                  # "," and ":" must not be allowed (ACL delimiters).
     # Strip non alpha numeric characters (except username_allowedchars), keep white space
     name = ''.join([c for c in name if c.isalnum() or c.isspace() or c in username_allowedchars])
 
@@ -283,7 +284,16 @@ class User:
         # use it reliably in edit locking
         from random import randint
         return "%s.%d" % (str(time.time()), randint(0,65535))
-            
+
+    def create_or_update(self, changed=False):
+        """ Create or update a user profile
+
+        @param changed: bool, set this to True if you updated the user profile values
+        """
+        if self._cfg.user_autocreate:
+            if not self.valid and not self.disabled or changed: # do we need to save/update?
+                self.save() # yes, create/update user profile
+                                
     def __filename(self):
         """ Get filename of the user's file on disk
         

@@ -299,6 +299,7 @@ class DefaultConfig:
     theme_force = False
     trail_size = 5
     tz_offset = 0.0 # default time zone offset in hours from UTC
+    user_autocreate = False # do we auto-create user profiles
     user_email_unique = True # do we check whether a user's email is unique?
 
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
