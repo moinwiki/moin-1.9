@@ -10,6 +10,7 @@ class FarmConfig(DefaultConfig):
     def external_cookie(request):
         """ authenticate via external cookie """
         import Cookie
+        user = None
         cookiename = "whatever" # XXX external cookie name you want to use
         try:
             cookie = Cookie.SimpleCookie(request.saved_cookie)
@@ -47,11 +48,11 @@ class FarmConfig(DefaultConfig):
                 user.aliasname = aliasname ; changed = True # yes -> update user profile
             if email != user.email: # was the email addr externally updated?
                 user.email = email ; changed = True # yes -> update user profile
-
-            if not user.valid and not user.disabled or changed: # do we need to save/update?
-                user.save() # yes, create/update user profile
-            if user.valid: # did we succeed making up a valid user?
-                return user # yes, return user object and stop processing auth method list
+            
+            if u:
+                u.create_or_update(changed)
+            if u and u.valid: # did we succeed making up a valid user?
+                return u # yes, return user object and stop processing auth method list
         return None # no, return None and continue with next method in auth list
 
     from MoinMoin.auth import moin_cookie, http
