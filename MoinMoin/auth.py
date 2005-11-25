@@ -58,9 +58,8 @@ def http(request):
                 username = username.title()
             u = user.User(request, auth_username=username)
 
-    # XXX create (user? maybe should not happen here, but one layer higher to be
-    # common for all auth methods
-
+    if u:
+        u.create_or_update()
     if u and u.valid:
         return u
     else:
@@ -97,9 +96,8 @@ def sslclientcert(request):
                     u = None
                 #u = user.User(request, auth_username=username)
 
-    # XXX create (user? maybe should not happen here, but one layer higher to be
-    # common for all auth methods
-
+    if u:
+        u.create_or_update()
     if u and u.valid:
         return u
     else:
