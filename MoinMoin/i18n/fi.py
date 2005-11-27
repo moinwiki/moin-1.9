@@ -42,6 +42,10 @@ makrokutsu.-~
 '''Sivu on suojattu!''',
 '''Cannot edit old revisions!''':
 '''Vanhoja versioita ei voi muokata!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Lukkosi sivuun vanheni. Varaudu päällekkäisiin muokkauksiin!''',
+'''Page name is too long, try shorter name.''':
+'''Sivun nimi on liian pitkä, kokeile lyhyempää nimeä.''',
 '''Edit "%(pagename)s"''':
 '''Muokkaa "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -82,12 +86,36 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muutoksesi.''',
 '''Preview''':
 '''Esikatsele''',
+'''GUI Mode''':
+'''GUI-tila''',
+'''Your changes are not saved!''':
+'''Muutoksiasi ei ole tallennettu!''',
+'''Comment:''':
+'''Kuvaus:''',
 '''<No addition>''':
 '''<ei lisäystä>''',
+'''Add to: %(category)s''':
+'''Lisää kategoriaan: %(category)s''',
 '''Trivial change''':
 '''Vähäinen muutos''',
 '''Remove trailing whitespace from each line''':
 '''Poista rivien lopusta tyhjämerkit''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Korostus:: [[Verbatim(\'\')]]\'\'kursiivi\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'lihavoitu\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'lihavoitu kursiivi\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'sekä \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'lihavoitua\'\'\'[[Verbatim(\'\'\')]] että kursiivia\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vaakaviiva.
+ Otsikot:: [[Verbatim(=)]] Otsikko 1 [[Verbatim(=)]]; [[Verbatim(==)]] Otsikko 2 [[Verbatim(==)]]; [[Verbatim(===)]] Otsikko 3 [[Verbatim(===)]]; [[Verbatim(====)]] Otsikko 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Otsikko 5 [[Verbatim(=====)]].
+ Luettelot:: väli ja jokin näistä: * numeroimaton kohta; 1., a., A., i., I. numeroitu kohta; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.
+ Linkit:: [[Verbatim(YhteenIsollaKirjoitetut)]]; [[Verbatim(["hakasulkeissa ja lainausmerkeissä"])]]; url; [url]; [url nimi].
+ Taulukot:: || solun teksti |||| kahden sarakkeen solun teksti ||; tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen.
+
+(!) Lisää apua sivuilla HelpOnEditing ja SyntaxReference.
+''',
 '''Edit was cancelled.''':
 '''Muokkaus peruttu.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -144,6 +172,8 @@ Olet tilannut wikin "%(sitename)s" sivun tai kategorian muutosilmoitukset.
 '''Sinulla ei ole oikeutta muokata tätä sivua!''',
 '''You cannot save empty pages.''':
 '''Tyhjää sivua ei voi tallentaa.''',
+'''You already saved this page!''':
+'''Tallensit tämän sivun jo!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -210,8 +240,12 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''Näytä''',
 '''Up''':
 '''Ylös''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Julkista kirjoittajatiedoissa sähköpostiosoitteeni (wikisivuni sijaan)''',
 '''Open editor on double click''':
 '''Siirry muokkaukseen kaksoisnapsautuksella''',
+'''Jump to last visited page instead of frontpage''':
+'''Hyppää viimeksi vieraillulle sivulle etusivun sijaan''',
 '''Show question mark for non-existing pagelinks''':
 '''Näytä kysymysmerkki puuttuvien sivujen linkeissä''',
 '''Show page trail''':
@@ -232,6 +266,10 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''Sulje tämä käyttäjätunnus pysyvästi''',
 '''Name''':
 '''Nimi''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(muodossa Etunimi\'\'\'\'\'\'Sukunimi)''',
+'''Alias-Name''':
+'''Peitenimi''',
 '''Password''':
 '''Salasana''',
 '''Password repeat''':
@@ -258,12 +296,44 @@ sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''Kirjaudu sisään''',
 ''' %s and try again.''':
 ''' %s ja yritä uudelleen.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d tulosta noin %(pages)d sivusta.''',
 '''%.2f seconds''':
 '''%.2f sekuntia''',
 '''match''':
 '''osuma''',
 '''matches''':
 '''osumaa''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Kirjautumisnimi: %s
+
+Kirjautumissalasana: %s
+
+Kirjautumisosoite: %s/?action=userform&uid=%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Joku on pyytänyt lähettämään tunnustietosi tähän sähköpostiosoitteeseen.
+
+Jos kadotit salasanasi, käytä alla olevia tietoja ja kirjoita annettu
+salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä 
+leikkausta ja liimausta).
+
+Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva salasana.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Wikitunnuksesi tiedot''',
 '''Cookie deleted. You are now logged out.''':
 '''Eväste poistettu. Olet kirjautunut ulos.''',
 '''This wiki is not enabled for mail processing.
@@ -278,12 +348,16 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Tuntematon käyttäjänimi: {{{"%s"}}}. Anna käyttäjänimi ja salasana.''',
 '''Missing password. Please enter user name and password.''':
 '''Salasana puuttuu. Anna käyttäjänimi ja salasana.''',
+'''Account "%s" is disabled.''':
+'''Tunnus "%s" on pois käytöstä.''',
 '''Sorry, wrong password.''':
 '''Valitettavasti salasana on väärin.''',
 '''Bad relogin URL.''':
 '''Uudelleenkirjautumisen URL ei kelpaa.''',
 '''Unknown user.''':
 '''Tuntematon käyttäjä.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen.''',
 '''Empty user name. Please enter a user name.''':
 '''Tyhjä käyttäjänimi. Anna käyttäjänimi.''',
 '''This user name already belongs to somebody else.''':
@@ -292,8 +366,12 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Salasanat eivät vastaa!''',
 '''Please specify a password!''':
 '''Mainitse salasana!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
 '''This email already belongs to somebody else.''':
 '''Tämä sähköposti kuuluu jo jollekin toiselle.''',
+'''User account created!''':
+'''Käyttäjätili luotu!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Teemaa \'%(theme_name)s\' ei voida ladata!''',
 '''User preferences saved!''':
@@ -302,12 +380,20 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''oletusarvo''',
 '''<Browser setting>''':
 '''<selaimen asetus>''',
+'''the one preferred''':
+'''suosikki''',
+'''free choice''':
+'''valittavissa''',
 '''Save''':
 '''Tallenna''',
 '''Logout''':
 '''Kirjaudu ulos ''',
 '''Preferred theme''':
 '''Suosikkiulkoasu''',
+'''Editor Preference''':
+'''Suosikkimuokkaustapa''',
+'''Editor shown on UI''':
+'''Käytettävä muokkaustapa''',
 '''Time zone''':
 '''Aikavyöhyke''',
 '''Your time is''':
@@ -402,12 +488,26 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sivun katselut ja muokkaukset''',
 '''You are not allowed to revert this page!''':
 '''Sinulla ei ole oikeutta palauttaa tätä sivua!''',
+'''You must login to add a quicklink.''':
+'''Sinun täytyy kirjautua lisätäksesi pikalinkin.''',
+'''Your quicklink to this page has been removed.''':
+'''Pikalinkkisi tälle sivulle on poistettu.''',
+'''A quicklink to this page has been added for you.''':
+'''Sinulle on lisätty pikalinkki tälle sivulle.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Sinulla ei ole oikeutta tilata sivua jota et voi lukea.''',
+'''This wiki is not enabled for mail processing.''':
+'''Sähköpostia ei ole otettu käyttöön tässä wikissä.''',
+'''You must log in to use subscribtions.''':
+'''Sinun täytyy kirjautua käyttääksesi tilauksia.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Lisää sähköpostiosoitteesi sivullasi KäyttäjäAsetukset tilauksia varten.''',
 '''Your subscribtion to this page has been removed.''':
 '''Tilauksesi tälle sivulle on poistettu.''',
 '''Can\'t remove regular expression subscription!''':
 '''Säännöllisen lausekkeen tilausta ei voida poistaa!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Muokkaa tilauksien säännöllisiä lausekkeita sivullasi KäyttäjäAsetukset.''',
 '''You have been subscribed to this page.''':
 '''Sinulle on lisätty tilaus tälle sivulle.''',
 '''Charts are not available!''':
@@ -466,8 +566,20 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Yleisiä laajennustoimintoja''',
 '''Local extension actions''':
 '''Paikallisia laajennustoimintoja''',
+'''Global parsers''':
+'''Yleiset jäsentimet''',
+'''Local extension parsers''':
+'''Paikalliset laajennusjäsentimet''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)''',
+'''Disabled''':
+'''Poissa''',
+'''Enabled''':
+'''Käytössä''',
+'''Lupy search''':
+'''Lupy-haku''',
+'''Active threads''':
+'''Aktiiviset säikeet''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''käytä tarkempaa hakuehtoa kuin {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -497,6 +609,8 @@ since this is subject to change and can break easily.''':
 '''Viitataksesi sivun liitetiedostoihin, käytä merkintää \'\'\'{{{attachment:tiedostonimi}}}\'\'\' allaolevan tiedostoluettelon mukaisesti. 
 \'\'\'ÄLÄ\'\'\' käytä {{{[hae]}}}-linkin [[Verbatim(URL:)]]ää, 
 sillä se voi muuttua, jolloin viittaus ei enää toimisi.''',
+'''install''':
+'''asenna''',
 '''No attachments stored for %(pagename)s''':
 '''Sivulla %(pagename)s ei ole liitteitä''',
 '''Edit drawing''':
@@ -515,6 +629,8 @@ törmäävät, sinun täytyy antaa uusi nimi tiedostoa lähettäessäsi.
 Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisellä nimellään.''',
 '''File to upload''':
 '''Lähetettävä tiedosto''',
+'''Rename to''':
+'''Uudelleennimeä''',
 '''Upload''':
 '''Lähetä''',
 '''File attachments are not allowed in this wiki!''':
@@ -524,9 +640,11 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''No file content. Delete non ASCII characters from the file name and try again.''':
 '''Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä uudestaan.''',
 '''You are not allowed to delete attachments on this page.''':
-'''Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta.!''',
+'''Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta.''',
 '''You are not allowed to get attachments from this page.''':
 '''Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta.''',
+'''You are not allowed to install files.''':
+'''Sinulla ei ole oikeutta asentaa tiedostoja.''',
 '''You are not allowed to view attachments of this page.''':
 '''Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja.''',
 '''Unsupported upload action: %s''':
@@ -539,8 +657,26 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Liitetiedosto \'%(target)s\' (alkuperäinen nimi \'%(filename)s\'), %(bytes)d tavua tallennettu.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Liitetiedosto \'%(filename)s\' poistettu.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Liitetiedosto \'%(filename)s\' asennettu.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Tiedoston \'%(filename)s\' asennus ei onnistunut.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Tiedosto %s ei ole MoinMoinin pakettitiedosto.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostot olisivat liian suuret (%(space)d kt puuttuu).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostoja olisi liian monta (%(count)d puuttuu).''',
+'''The file %(target)s is not a .zip file.''':
+'''Tiedosto %(target)s ei ole .zip-tiedosto.''',
 '''Attachment \'%(filename)s\'''':
 '''Liitetiedosto \'%(filename)s\'''',
+'''Package script:''':
+'''Pakettijuonto:''',
+'''File Name''':
+'''Tiedoston nimi''',
+'''Modified''':
+'''Muokattu''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Tuntematon tiedostotyyppi, liitettä ei voida näyttää sivulla.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -633,6 +769,8 @@ Kokeile eri nimeä.''',
 '''Liitetiedoston \'%(filename)s\' lähetys.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Piirros \'%(filename)s\' tallennettu.''',
+'''%(mins)dm ago''':
+'''%(mins)dm sitten''',
 '''(no bookmark set)''':
 '''(ei kirjanmerkkiä asetettu)''',
 '''(currently set to %s)''':
@@ -663,8 +801,16 @@ Kokeile eri nimeä.''',
 '''Odotettiin kokonaislukua "%(arg)s" "%(key)s":n jälkeen''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Odotettiin väriarvoa "%(arg)s" "%(key)s":n jälkeen''',
+'''XSLT option disabled, please look at HelpOnConfiguration.''':
+'''XSLT-vaihtoehto pois, katso sivua HelpOnConfiguration.''',
+'''XSLT processing is not available, please install 4suite 1.x.''':
+'''XSLT-käsittely ei ole käytettävissä, asenna 4suite 1.x.''',
 '''%(errortype)s processing error''':
 '''Käsittelyvirhe %(errortype)s''',
+'''Views/day''':
+'''Katseluita/päivä''',
+'''Edits/day''':
+'''Muokkauksia/päivä''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(chart_title)s sivulle %(filterpage)s''',
 '''green=view
@@ -681,10 +827,12 @@ red=edit''',
 '''sivukoon yläraja [tavuja]''',
 '''# of pages of this size''':
 '''tämänkokoisten sivujen lukumäärä''',
+'''User agent''':
+'''User agent''',
 '''Others''':
 '''Muut''',
 '''Distribution of User-Agent Types''':
-'''User-Agent -tyyppien jakauma''',
+'''User agent -tyyppien jakauma''',
 '''Unsubscribe''':
 '''Poista tilaus''',
 '''Home''':
@@ -717,16 +865,36 @@ red=edit''',
 '''Teksteistä''',
 '''Titles''':
 '''Nimistä''',
+'''Search''':
+'''Etsi''',
 '''More Actions:''':
 '''Lisää toimintoja:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Muotoilematon teksti''',
 '''Delete Cache''':
 '''Poista välimuistista''',
 '''Delete Page''':
 '''Poista sivu''',
+'''Like Pages''':
+'''Samankaltaisia sivuja''',
+'''Local Site Map''':
+'''Paikallinen sivukartta''',
 '''Do''':
 '''Tee''',
+'''Edit (Text)''':
+'''Muokkaa (tekstinä)''',
+'''Edit (GUI)''':
+'''Muokkaa (GUI)''',
 '''Immutable Page''':
 '''Suojattu sivu''',
+'''Remove Link''':
+'''Poista linkki''',
+'''Add Link''':
+'''Lisää linkki''',
+'''Attachments''':
+'''Liitetiedostot''',
 '''Show %s days.''':
 '''Näytä %s päivää.''',
 '''EditText''':
@@ -749,6 +917,8 @@ red=edit''',
 '''Lisäykset on merkattu näin.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Yhteydenotto sähköpostipalvelimeen \'%(server)s\' ei onnistunut: %(reason)s''',
+'''Mail not sent''':
+'''Ei lähetetty sähköpostia''',
 '''Mail sent OK''':
 '''Sähköposti lähetetty onnistuneesti''',
 '''FrontPage''':

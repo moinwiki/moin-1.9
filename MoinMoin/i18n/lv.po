@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-11-28 18:11+0100\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -429,7 +429,7 @@ msgid "Open editor on double click"
 msgstr "Labot ar dubultklikšķi"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Pāriet uz pēdējo apmeklēto lapu SākumLapas vietā"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Rādīt jautājuma zīmi neeksistējošu lapu saitēm"
@@ -588,7 +588,7 @@ msgstr "Trūkst paroles. Lūdzu, ievadiet vārdu un paroli."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Konts \"%s\" ir atslēgts."
 
 msgid "Sorry, wrong password."
 msgstr "Piedodiet, nepareiza parole."
@@ -600,7 +600,7 @@ msgid "Unknown user."
 msgstr "Nezināms lietotājs"
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu."

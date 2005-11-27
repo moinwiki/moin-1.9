@@ -242,6 +242,8 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Publiskot manu e-pasta adresi (bez manas viki mājas lapas) autora informācijā''',
 '''Open editor on double click''':
 '''Labot ar dubultklikšķi''',
+'''Jump to last visited page instead of frontpage''':
+'''Pāriet uz pēdējo apmeklēto lapu SākumLapas vietā''',
 '''Show question mark for non-existing pagelinks''':
 '''Rādīt jautājuma zīmi neeksistējošu lapu saitēm''',
 '''Show page trail''':
@@ -343,12 +345,16 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
 '''Missing password. Please enter user name and password.''':
 '''Trūkst paroles. Lūdzu, ievadiet vārdu un paroli.''',
+'''Account "%s" is disabled.''':
+'''Konts "%s" ir atslēgts.''',
 '''Sorry, wrong password.''':
 '''Piedodiet, nepareiza parole.''',
 '''Bad relogin URL.''':
 '''Nepareizs atkārtotas ieejas URL''',
 '''Unknown user.''':
 '''Nezināms lietotājs''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
 '''Empty user name. Please enter a user name.''':
 '''Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu.''',
 '''This user name already belongs to somebody else.''':
