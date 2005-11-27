@@ -8,6 +8,7 @@ Version 1.5.0current:
       when you really tried when you had no delete rights additionally.
     * We don't remove RenamePage and DeletePage from menu any more if user is
       unknown. This stuff is only driven by ACLs now.
+    * Some fixes to Despam action.
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
       from config.url_schemas in case you have patched it in there.
@@ -16,12 +17,16 @@ Version 1.5.0current:
       externally authenticated users don't need to create their moin profile
       manually. The auth method (see cfg.auth list) must check this setting
       if it supports auto creation.
-    * Added user_autocreate support for auth.http and auth.ssl_clientcert.
+    * Added user_autocreate support for auth.http and auth.sslclientcert.
     * Added "." and "@" to allowed characters in usernames. This is needed
       e.g. when using mod_pubcookie for authentication. mod_pubcookie returns
       userids like "geek@ANDREW.CMU.EDU" (e.g. the Kerberos domain is part of
       the id). Thanks to Brian E. Gallew for his patch, which we used for
       inspiration for user autocreation changes.
+    * Added MoinMoin/scripts/import/IrcLogImporter.py to import supybot's
+      IRC logs into a moin wiki. We use MonthCalendar compatible page names,
+      so you can use the calendar for showing / navigating the logs.
+    * Removed packager binary from FCKeditor (fixing a Debian policy problem).
 
 Version 1.5.0beta4:
   Fixes:
