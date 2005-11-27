@@ -24,7 +24,7 @@ base_page = 'MoinMoinChat/Logs/'
 # this function generates a pagename from the file name
 def filename_function(filename):
     splitted = filename.split('.')
-    return '/'.join(splitted[0] + [x.replace('-', '/') for x in splitted[0:-1]])
+    return '/'.join([splitted[0]] + [x.replace('-', '/') for x in splitted[1:-1]])
 ### end of configuration
 
 import os, sys
