@@ -435,7 +435,7 @@ msgid "Show icon toolbar"
 msgstr "Vis knap-panel"
 
 msgid "Show top/bottom links in headings"
-msgstr "Vil lænker til top/bund i overskrifter"
+msgstr "Vis lænker til top/bund i overskrifter"
 
 msgid "Show fancy diffs"
 msgstr "Vis detaljerede forskelle"
@@ -1518,10 +1518,10 @@ msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"
 
 msgid "Remove Link"
-msgstr "Fjern lænke"
+msgstr "Fjern genvej"
 
 msgid "Add Link"
-msgstr "Tilføj lænke"
+msgstr "Tilføj genvej"
 
 msgid "Attachments"
 msgstr "Vedhæftede filer"

@@ -4,7 +4,7 @@
 meta = {
   'language': """Čeština""",
   'elanguage': """Czech""",
-  'maintainer': """Pavel Kosina <pkosina@seznam.cz>""",
+  'maintainer': """Jan Blaha <Jan.Blaha@unet.cz>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -237,6 +237,8 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Publikovat email v infromací o autorovi (místo domovské wiki stránky)''',
 '''Open editor on double click''':
 '''Otevřít editor dvojklikem''',
+'''Jump to last visited page instead of frontpage''':
+'''Jít na naposledy navštívenou stránku místo na hlavní stránku''',
 '''Show question mark for non-existing pagelinks''':
 '''Zobrazit otazník u neexistujících odkazů''',
 '''Show page trail''':
@@ -268,9 +270,9 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Email''':
 '''Email''',
 '''User CSS URL''':
-'''Uživatelské CSS URL''',
+'''URL uživatelského CSS''',
 '''(Leave it empty for disabling user CSS)''':
-'''(Při nevyužití uživatelského CSS zanechte prázdné)''',
+'''(Nechte prázdné nechcete-li využít uživatelské CSS)''',
 '''Editor size''':
 '''Velikost editoru''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -306,12 +308,16 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Neznámý uživatel: {{{"%s"}}}. Zadejte prosím Vaše uživatelské jméno a heslo.''',
 '''Missing password. Please enter user name and password.''':
 '''Chybějící heslo. Zadejte prosím vaše uživatelské jméno a heslo.''',
+'''Account "%s" is disabled.''':
+'''Účet "%s" je zakázaný.''',
 '''Sorry, wrong password.''':
 '''Lituji, neplatné heslo.''',
 '''Bad relogin URL.''':
 '''Neplatné URL opětovného přihlášení.''',
 '''Unknown user.''':
 '''Neznámý uživatel.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Své nastavení změníte nebo účet vytvoříte v NastaveniUzivatele.''',
 '''Empty user name. Please enter a user name.''':
 '''Prázdné uživatelské jméno. Zadejte prosím uživatelské jméno.''',
 '''This user name already belongs to somebody else.''':
@@ -337,7 +343,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''the one preferred''':
 '''jen oblíbený''',
 '''free choice''':
-'''nechat možnost zvolit''',
+'''nechat možnost volby''',
 '''Save''':
 '''Uložit''',
 '''Logout''':
@@ -375,7 +381,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''No older revisions available!''':
 '''Starší verze nejsou k dispozici!''',
 '''Diff for "%s"''':
-'''Změny od "%s"''',
+'''Změny pro "%s"''',
 '''Differences between revisions %d and %d''':
 '''Rozdíly mezi verzemi  %d a %d''',
 '''(spanning %d versions)''':
@@ -393,7 +399,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Page size: %d''':
 '''Velikost stránky: %d''',
 '''SHA digest of this page\'s content is:''':
-'''Klíč SHA  obsahu této stránky je:''',
+'''Klíč SHA obsahu této stránky je:''',
 '''The following users subscribed to this page:''':
 '''Následující uživatelé odebírají tuto stránku:''',
 '''This page links to the following pages:''':
@@ -427,9 +433,9 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''N/A''':
 '''nedostupný''',
 '''Revision History''':
-'''Historii verzí''',
+'''Historie verzí''',
 '''No log entries found.''':
-'''Nenalezeny žádné logovací záznamy.''',
+'''Nenalezeny žádné záznamy v logu.''',
 '''Info for "%s"''':
 '''Info pro "%s"''',
 '''Show "%(title)s"''':
@@ -455,7 +461,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''You must log in to use subscribtions.''':
 '''Bez přihlášení nelze odebírat stránky''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele.''',
+'''Odebírat stránky můžete až po zadání e-mailové adresy v NastaveniUzivatele.''',
 '''Your subscribtion to this page has been removed.''':
 '''Váš odběr této stránky byl zrušen.''',
 '''Can\'t remove regular expression subscription!''':
@@ -467,21 +473,21 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Charts are not available!''':
 '''Diagramy nejsou dostupné!''',
 '''You need to provide a chart type!''':
-'''Musíte udat typy diagramu!''',
+'''Musíte udat typ diagramu!''',
 '''Bad chart type "%s"!''':
-'''Neplatné typ diagramu "%s"!''',
+'''Neplatný diagram typu "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
 '''Chybí požadovaný atribut "%(attrname)s"''',
 '''Submitted form data:''':
 '''Zadaná formulářová data:''',
 '''Search Titles''':
-'''Hledat srtánky''',
+'''Hledat v titulcích''',
 '''Display context of search results''':
 '''Zobrazit výsledek výhledávání''',
 '''Case-sensitive searching''':
 '''Rozlišovat velikost písmen''',
 '''Search Text''':
-'''Hledat text''',
+'''Hledat v textu''',
 '''Go To Page''':
 '''Jít na stránku''',
 '''Include system pages''':
@@ -526,6 +532,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Parsery lokálního rozšíření''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Instalované processory (ZAVRŽENÉ -- použijívejte parsery)''',
+'''Disabled''':
+'''Zakázáno''',
+'''Enabled''':
+'''Povoleno''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Použijte prosím selektivnější vyhledávací výraz místo {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':

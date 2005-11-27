@@ -11,7 +11,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
@@ -78,12 +78,11 @@ msgstr "Sivu on suojattu!"
 msgid "Cannot edit old revisions!"
 msgstr "Vanhoja versioita ei voi muokata!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "Lukkosi vanheni, varaudu päällekkäisiin muokkauksiin!"
+msgstr "Lukkosi sivuun vanheni. Varaudu päällekkäisiin muokkauksiin!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "Sivun nimi on liian pitkä, kokeile lyhyempää nimeä."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -162,22 +161,20 @@ msgid "Preview"
 msgstr "Esikatsele"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "GUI-tila"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Et muuttanut sisältöä, joten sivua ei tallennettu!"
+msgstr "Muutoksiasi ei ole tallennettu!"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "Kuvaus"
+msgstr "Kuvaus:"
 
 msgid "<No addition>"
 msgstr "<ei lisäystä>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Lisää kategoriaan: %(category)s"
 
 msgid "Trivial change"
 msgstr "Vähäinen muutos"
@@ -185,7 +182,6 @@ msgstr "Vähäinen muutos"
 msgid "Remove trailing whitespace from each line"
 msgstr "Poista rivien lopusta tyhjämerkit"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -214,12 +210,14 @@ msgstr ""
 "Otsikko 2 [[Verbatim(==)]]; [[Verbatim(===)]] Otsikko 3 [[Verbatim(===)]]; "
 "[[Verbatim(====)]] Otsikko 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Otsikko "
 "5 [[Verbatim(=====)]].\n"
-" Luettelot:: väli ja jokin näistä: * numeroimaton; 1., a., A., i., I. "
-"numeroitu; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.\n"
+" Luettelot:: väli ja jokin näistä: * numeroimaton kohta; 1., a., A., i., I. "
+"numeroitu kohta; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.\n"
 " Linkit:: [[Verbatim(YhteenIsollaKirjoitetut)]]; [[Verbatim([\"hakasulkeissa "
 "ja lainausmerkeissä\"])]]; url; [url]; [url nimi].\n"
 " Taulukot:: || solun teksti |||| kahden sarakkeen solun teksti ||; "
-"tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen."
+"tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen.\n"
+"\n"
+"(!) Lisää apua sivuilla HelpOnEditing ja SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Muokkaus peruttu."
@@ -300,9 +298,8 @@ msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
 msgid "You cannot save empty pages."
 msgstr "Tyhjää sivua ei voi tallentaa."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
+msgstr "Tallensit tämän sivun jo!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -421,13 +418,13 @@ msgid "Up"
 msgstr "Ylös"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Julkista kirjoittajatiedoissa sähköpostiosoitteeni (wikisivuni sijaan)"
 
 msgid "Open editor on double click"
 msgstr "Siirry muokkaukseen kaksoisnapsautuksella"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Hyppää viimeksi vieraillulle sivulle etusivun sijaan"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Näytä kysymysmerkki puuttuvien sivujen linkeissä"
@@ -459,12 +456,11 @@ msgstr "Sulje tämä käyttäjätunnus pysyvästi"
 msgid "Name"
 msgstr "Nimi"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(muodossa EtunimiSukunimi)"
+msgstr "(muodossa Etunimi''''''Sukunimi)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Peitenimi"
 
 msgid "Password"
 msgstr "Salasana"
@@ -508,9 +504,9 @@ msgstr "Kirjaudu sisään"
 msgid " %s and try again."
 msgstr " %s ja yritä uudelleen."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d tulosta %(pages)d sivusta."
+msgstr "%(hits)d tulosta noin %(pages)d sivusta."
 
 #, python-format
 msgid "%.2f seconds"
@@ -530,6 +526,11 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"Kirjautumisnimi: %s\n"
+"\n"
+"Kirjautumissalasana: %s\n"
+"\n"
+"Kirjautumisosoite: %s/?action=userform&uid=%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -541,10 +542,18 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"Joku on pyytänyt lähettämään tunnustietosi tähän sähköpostiosoitteeseen.\n"
+"\n"
+"Jos kadotit salasanasi, käytä alla olevia tietoja ja kirjoita annettu\n"
+"salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä \n"
+"leikkausta ja liimausta).\n"
+"\n"
+"Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja "
+"muistuva salasana.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] Wikitunnuksesi tiedot"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Eväste poistettu. Olet kirjautunut ulos."
@@ -572,7 +581,7 @@ msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Tunnus \"%s\" on pois käytöstä."
 
 msgid "Sorry, wrong password."
 msgstr "Valitettavasti salasana on väärin."
@@ -584,7 +593,7 @@ msgid "Unknown user."
 msgstr "Tuntematon käyttäjä."
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Tyhjä käyttäjänimi. Anna käyttäjänimi."
@@ -598,7 +607,6 @@ msgstr "Salasanat eivät vastaa!"
 msgid "Please specify a password!"
 msgstr "Mainitse salasana!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
@@ -610,7 +618,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Tämä sähköposti kuuluu jo jollekin toiselle."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Käyttäjätili luotu!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -626,10 +634,10 @@ msgid "<Browser setting>"
 msgstr "<selaimen asetus>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "suosikki"
 
 msgid "free choice"
-msgstr ""
+msgstr "valittavissa"
 
 msgid "Save"
 msgstr "Tallenna"
@@ -640,12 +648,11 @@ msgstr "Kirjaudu ulos "
 msgid "Preferred theme"
 msgstr "Suosikkiulkoasu"
 
-#, fuzzy
 msgid "Editor Preference"
-msgstr "KäyttäjäAsetukset"
+msgstr "Suosikkimuokkaustapa"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Käytettävä muokkaustapa"
 
 msgid "Time zone"
 msgstr "Aikavyöhyke"
@@ -798,30 +805,25 @@ msgid "You are not allowed to revert this page!"
 msgstr "Sinulla ei ole oikeutta palauttaa tätä sivua!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Sinun täytyy kirjautua lisätäksesi pikalinkin."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Tilauksesi tälle sivulle on poistettu."
+msgstr "Pikalinkkisi tälle sivulle on poistettu."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Tilauksesi tälle sivulle on poistettu."
+msgstr "Sinulle on lisätty pikalinkki tälle sivulle."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Sinulla ei ole oikeutta tilata sivua jota et voi lukea."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Sähköpostia ei ole otettu käyttöön tässä wikissä.\n"
-"Ota yhteyttä wikin omistajaan, joka voi tehdä sen."
+msgstr "Sähköpostia ei ole otettu käyttöön tässä wikissä."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Sinun täytyy kirjautua käyttääksesi tilauksia."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Lisää sähköpostiosoitteesi sivullasi KäyttäjäAsetukset tilauksia varten."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Tilauksesi tälle sivulle on poistettu."
@@ -830,7 +832,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Säännöllisen lausekkeen tilausta ei voida poistaa!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Muokkaa tilauksien säännöllisiä lausekkeita sivullasi KäyttäjäAsetukset."
 
 msgid "You have been subscribed to this page."
 msgstr "Sinulle on lisätty tilaus tälle sivulle."
@@ -923,28 +925,26 @@ msgstr "Yleisiä laajennustoimintoja"
 msgid "Local extension actions"
 msgstr "Paikallisia laajennustoimintoja"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Asennetut jäsentimet"
+msgstr "Yleiset jäsentimet"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Paikallisia laajennusmakroja"
+msgstr "Paikalliset laajennusjäsentimet"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Poissa"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Käytössä"
 
 msgid "Lupy search"
-msgstr ""
+msgstr "Lupy-haku"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Aktiiviset säikeet"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -1006,7 +1006,7 @@ msgid "unzip"
 msgstr ""
 
 msgid "install"
-msgstr ""
+msgstr "asenna"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1038,9 +1038,8 @@ msgstr ""
 msgid "File to upload"
 msgstr "Lähetettävä tiedosto"
 
-#, fuzzy
 msgid "Rename to"
-msgstr "Nimeä sivu uudelleen"
+msgstr "Uudelleennimeä"
 
 msgid "Upload"
 msgstr "Lähetä"
@@ -1059,7 +1058,7 @@ msgstr ""
 "uudestaan."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta.!"
+msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
@@ -1068,9 +1067,8 @@ msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
 msgid "You are not allowed to unzip attachments of this page."
 msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
+msgstr "Sinulla ei ole oikeutta asentaa tiedostoja."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
@@ -1101,29 +1099,33 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Liitetiedosto '%(filename)s' poistettu."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Liitetiedosto '%(filename)s' poistettu."
+msgstr "Liitetiedosto '%(filename)s' asennettu."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Piirros '%(filename)s' tallennettu."
+msgstr "Tiedoston '%(filename)s' asennus ei onnistunut."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Tiedosto %s ei ole MoinMoinin pakettitiedosto."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostot "
+"olisivat liian suuret (%(space)d kt puuttuu)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostoja "
+"olisi liian monta (%(count)d puuttuu)."
 
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1137,21 +1139,20 @@ msgstr ""
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "Tiedosto %(target)s ei ole .zip-tiedosto."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Liitetiedosto '%(filename)s'"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Pakettijuonto:"
 
-#, fuzzy
 msgid "File Name"
-msgstr "Tiedostonimi"
+msgstr "Tiedoston nimi"
 
 msgid "Modified"
-msgstr ""
+msgstr "Muokattu"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr "Tuntematon tiedostotyyppi, liitettä ei voida näyttää sivulla."
@@ -1321,9 +1322,9 @@ msgstr "Liitetiedoston '%(filename)s' lähetys."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Piirros '%(filename)s' tallennettu."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "%(hours)dt %(mins)dm sitten"
+msgstr "%(mins)dm sitten"
 
 msgid "(no bookmark set)"
 msgstr "(ei kirjanmerkkiä asetettu)"
@@ -1376,23 +1377,20 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Odotettiin väriarvoa \"%(arg)s\" \"%(key)s\":n jälkeen"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr ""
+msgstr "XSLT-vaihtoehto pois, katso sivua HelpOnConfiguration."
 
-#, fuzzy
 msgid "XSLT processing is not available, please install 4suite 1.x."
-msgstr "XSLT-käsittely ei ole käytettävissä!"
+msgstr "XSLT-käsittely ei ole käytettävissä, asenna 4suite 1.x."
 
 #, python-format
 msgid "%(errortype)s processing error"
 msgstr "Käsittelyvirhe %(errortype)s"
 
-#, fuzzy
 msgid "Views/day"
-msgstr "Näytä"
+msgstr "Katseluita/päivä"
 
-#, fuzzy
 msgid "Edits/day"
-msgstr "Muokkaa"
+msgstr "Muokkauksia/päivä"
 
 #, python-format
 msgid "%(chart_title)s for %(filterpage)s"
@@ -1421,13 +1419,13 @@ msgid "# of pages of this size"
 msgstr "tämänkokoisten sivujen lukumäärä"
 
 msgid "User agent"
-msgstr ""
+msgstr "User agent"
 
 msgid "Others"
 msgstr "Muut"
 
 msgid "Distribution of User-Agent Types"
-msgstr "User-Agent -tyyppien jakauma"
+msgstr "User agent -tyyppien jakauma"
 
 msgid "Unsubscribe"
 msgstr "Poista tilaus"
@@ -1479,19 +1477,17 @@ msgstr "Teksteistä"
 msgid "Titles"
 msgstr "Nimistä"
 
-#, fuzzy
 msgid "Search"
-msgstr "Etsi:"
+msgstr "Etsi"
 
 msgid "More Actions:"
 msgstr "Lisää toimintoja:"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
-#, fuzzy
 msgid "Raw Text"
-msgstr "Näytä muotoilematon teksti"
+msgstr "Muotoilematon teksti"
 
 msgid "Delete Cache"
 msgstr "Poista välimuistista"
@@ -1499,37 +1495,32 @@ msgstr "Poista välimuistista"
 msgid "Delete Page"
 msgstr "Poista sivu"
 
-#, fuzzy
 msgid "Like Pages"
-msgstr "SamankaltaisiaSivuja"
+msgstr "Samankaltaisia sivuja"
 
-#, fuzzy
 msgid "Local Site Map"
-msgstr "PaikallinenSivukartta"
+msgstr "Paikallinen sivukartta"
 
 msgid "Do"
 msgstr "Tee"
 
-#, fuzzy
 msgid "Edit (Text)"
-msgstr "MuokkaaTekstiä"
+msgstr "Muokkaa (tekstinä)"
 
 msgid "Edit (GUI)"
-msgstr ""
+msgstr "Muokkaa (GUI)"
 
 msgid "Immutable Page"
 msgstr "Suojattu sivu"
 
-#, fuzzy
 msgid "Remove Link"
-msgstr "Pikalinkit"
+msgstr "Poista linkki"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Lisää linkki"
 
-#, fuzzy
 msgid "Attachments"
-msgstr "Uusi liitetiedosto"
+msgstr "Liitetiedostot"
 
 #, python-format
 msgid "Show %s days."
@@ -1571,9 +1562,8 @@ msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr ""
 "Yhteydenotto sähköpostipalvelimeen '%(server)s' ei onnistunut: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "Sähköposti lähetetty onnistuneesti"
+msgstr "Ei lähetetty sähköpostia"
 
 msgid "Mail sent OK"
 msgstr "Sähköposti lähetetty onnistuneesti"

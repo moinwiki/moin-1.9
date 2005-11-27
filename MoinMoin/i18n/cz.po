@@ -15,8 +15,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-18 20:41+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Pavel Kosina <pkosina@seznam.cz>\n"
-"Language-Team: Czech <moin-devel@lists.sourceforge.net>\n"
+"Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
+"Language-Team: Czech <moin@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -425,7 +425,7 @@ msgid "Open editor on double click"
 msgstr "Otevřít editor dvojklikem"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Jít na naposledy navštívenou stránku místo na hlavní stránku"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Zobrazit otazník u neexistujících odkazů"
@@ -476,10 +476,10 @@ msgid "Email"
 msgstr "Email"
 
 msgid "User CSS URL"
-msgstr "Uživatelské CSS URL"
+msgstr "URL uživatelského CSS"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Při nevyužití uživatelského CSS zanechte prázdné)"
+msgstr "(Nechte prázdné nechcete-li využít uživatelské CSS)"
 
 msgid "Editor size"
 msgstr "Velikost editoru"
@@ -573,7 +573,7 @@ msgstr "Chybějící heslo. Zadejte prosím vaše uživatelské jméno a heslo."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Účet \"%s\" je zakázaný."
 
 msgid "Sorry, wrong password."
 msgstr "Lituji, neplatné heslo."
@@ -585,7 +585,7 @@ msgid "Unknown user."
 msgstr "Neznámý uživatel."
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "Své nastavení změníte nebo účet vytvoříte v NastaveniUzivatele."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Prázdné uživatelské jméno. Zadejte prosím uživatelské jméno."
@@ -629,7 +629,7 @@ msgid "the one preferred"
 msgstr "jen oblíbený"
 
 msgid "free choice"
-msgstr "nechat možnost zvolit"
+msgstr "nechat možnost volby"
 
 msgid "Save"
 msgstr "Uložit"
@@ -687,7 +687,7 @@ msgstr "Starší verze nejsou k dispozici!"
 
 #, python-format
 msgid "Diff for \"%s\""
-msgstr "Změny od \"%s\""
+msgstr "Změny pro \"%s\""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
@@ -718,7 +718,7 @@ msgid "Page size: %d"
 msgstr "Velikost stránky: %d"
 
 msgid "SHA digest of this page's content is:"
-msgstr "Klíč SHA  obsahu této stránky je:"
+msgstr "Klíč SHA obsahu této stránky je:"
 
 msgid "The following users subscribed to this page:"
 msgstr "Následující uživatelé odebírají tuto stránku:"
@@ -770,10 +770,10 @@ msgid "N/A"
 msgstr "nedostupný"
 
 msgid "Revision History"
-msgstr "Historii verzí"
+msgstr "Historie verzí"
 
 msgid "No log entries found."
-msgstr "Nenalezeny žádné logovací záznamy."
+msgstr "Nenalezeny žádné záznamy v logu."
 
 #, python-format
 msgid "Info for \"%s\""
@@ -816,7 +816,7 @@ msgstr "Bez přihlášení nelze odebírat stránky"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"Pro odebírání stránky musíte zadete e-mailovou adresu v NastaveniUzivatele."
+"Odebírat stránky můžete až po zadání e-mailové adresy v NastaveniUzivatele."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Váš odběr této stránky byl zrušen."
@@ -834,11 +834,11 @@ msgid "Charts are not available!"
 msgstr "Diagramy nejsou dostupné!"
 
 msgid "You need to provide a chart type!"
-msgstr "Musíte udat typy diagramu!"
+msgstr "Musíte udat typ diagramu!"
 
 #, python-format
 msgid "Bad chart type \"%s\"!"
-msgstr "Neplatné typ diagramu \"%s\"!"
+msgstr "Neplatný diagram typu \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
@@ -848,7 +848,7 @@ msgid "Submitted form data:"
 msgstr "Zadaná formulářová data:"
 
 msgid "Search Titles"
-msgstr "Hledat srtánky"
+msgstr "Hledat v titulcích"
 
 msgid "Display context of search results"
 msgstr "Zobrazit výsledek výhledávání"
@@ -857,7 +857,7 @@ msgid "Case-sensitive searching"
 msgstr "Rozlišovat velikost písmen"
 
 msgid "Search Text"
-msgstr "Hledat text"
+msgstr "Hledat v textu"
 
 msgid "Go To Page"
 msgstr "Jít na stránku"
@@ -928,10 +928,10 @@ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Instalované processory (ZAVRŽENÉ -- použijívejte parsery)"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Zakázáno"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Povoleno"
 
 msgid "Lupy search"
 msgstr ""

@@ -248,7 +248,7 @@ Tryk Annullér for at afbryde redigeringen.''',
 '''Show icon toolbar''':
 '''Vis knap-panel''',
 '''Show top/bottom links in headings''':
-'''Vil lænker til top/bund i overskrifter''',
+'''Vis lænker til top/bund i overskrifter''',
 '''Show fancy diffs''':
 '''Vis detaljerede forskelle''',
 '''Add spaces to displayed wiki names''':
@@ -891,9 +891,9 @@ rød=redigér''',
 '''Immutable Page''':
 '''Ikke-redigérbar side''',
 '''Remove Link''':
-'''Fjern lænke''',
+'''Fjern genvej''',
 '''Add Link''':
-'''Tilføj lænke''',
+'''Tilføj genvej''',
 '''Attachments''':
 '''Vedhæftede filer''',
 '''Show %s days.''':
