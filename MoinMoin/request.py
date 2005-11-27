@@ -889,6 +889,14 @@ class RequestBase(object):
         ])
         self.write('You are not allowed to access this!\r\n')
         self.setResponseCode(403)
+
+    def initTheme(self):
+        """ Set theme - forced theme, user theme or wiki default """
+        if self.cfg.theme_force:
+            theme_name = self.cfg.theme_default
+        else:
+            theme_name = self.user.theme_name
+        self.loadTheme(theme_name)
         
     def run(self):
         # Exit now if __init__ failed or request is forbidden
@@ -918,12 +926,7 @@ class RequestBase(object):
 
         # parse request data
         try:
-            # Set theme - forced theme, user theme or wiki default
-            if self.cfg.theme_force:
-                theme_name = self.cfg.theme_default
-            else:
-                theme_name = self.user.theme_name
-            self.loadTheme(theme_name)
+            self.initTheme()
             
             self.args = self.setup_args()
             self.form = self.args    
