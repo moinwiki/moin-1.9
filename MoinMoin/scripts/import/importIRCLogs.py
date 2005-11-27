@@ -22,7 +22,9 @@ local_dir = '/home/aschremmer/channel-logging/logs/ChannelLogger/freenode/#moin-
 base_page = 'MoinMoinChat/Logs/'
 
 # this function generates a pagename from the file name
-filename_function = lambda filename: '/'.join([x.replace('-', '/') for x in filename.split('.')][:-1])
+def filename_function(filename):
+    splitted = filename.split('.')
+    return '/'.join(splitted[0] + [x.replace('-', '/') for x in splitted[0:-1]])
 ### end of configuration
 
 import os, sys
