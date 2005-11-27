@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 MoinMoin - Push files into the wiki.
 
@@ -13,7 +14,7 @@ to mirror IRC logs for example.
 url = "moinmoin.wikiwikiweb.de/"
 
 # the author, visible in RecentChanges etc.
-author = "WikiSyncronisationDaemon"
+author = "IrcLogImporter"
 
 # the directory that should be pushed
 local_dir = '/home/aschremmer/channel-logging/logs/ChannelLogger/freenode/#moin-dev'
@@ -24,10 +25,12 @@ base_page = 'MoinMoinChat/Logs/'
 # this function generates a pagename from the file name
 def filename_function(filename):
     splitted = filename.split('.')
-    return '/'.join([splitted[0]] + [x.replace('-', '/') for x in splitted[1:-1]])
+    return '/'.join(splitted[0:2])
 ### end of configuration
 
 import os, sys
+sys.path.insert(0, '/srv/moin_tw/moin--main--1.5')
+sys.path.insert(0, '/srv/de.wikiwikiweb.moinmaster/bin15')
 
 from MoinMoin import wikiutil
 from MoinMoin.request import RequestCLI
@@ -35,14 +38,12 @@ from MoinMoin.PageEditor import PageEditor
 
 def decodeLinewise(text):
     resultList = []
-
     for line in text.splitlines():
         try:
             decoded_line = line.decode("utf-8")
         except UnicodeDecodeError:
             decoded_line = line.decode("iso-8859-1")
         resultList.append(decoded_line)
-
     return '\n'.join(resultList)
 
 request = RequestCLI(url=url) #pagename necessary here?
