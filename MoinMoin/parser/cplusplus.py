@@ -3,7 +3,7 @@
 	MoinMoin - C++ Source Parser
 
     @copyright: 2002 by Taesu Pyo <bigflood@hitel.net>
-    @license: All rights reserved.
+    @license: GNU GPL, see COPYING for details.
 
 css:
 
