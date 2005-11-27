@@ -191,9 +191,8 @@ def decodeList(line):
 class User:
     """A MoinMoin User"""
 
-    def __init__(self, request, id=None, name="", password=None,
-                 auth_username=""):
-        """ Initialize user object
+    def __init__(self, request, id=None, name="", password=None, auth_username=""):
+        """ Initialize User object
         
         @param request: the request object
         @param id: (optional) user ID
@@ -216,7 +215,9 @@ class User:
        
         if name:
             self.name = name
-        
+        elif auth_username: # this is needed for user_autocreate
+            self.name = auth_username
+            
         # create checkbox fields (with default 0)
         for key, label in self._cfg.user_checkbox_fields:
             setattr(self, key, self._cfg.user_checkbox_defaults.get(key, 0))
