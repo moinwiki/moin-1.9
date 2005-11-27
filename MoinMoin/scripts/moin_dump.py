@@ -113,8 +113,7 @@ class MoinDump(_util.Script):
             if err.errno != errno.EEXIST:
                 _util.fatal("Cannot create output directory '%s'!" % outputdir)
 
-        # Insert config dir or the current directory to the start of the
-        # path.
+        # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
         if config_dir and os.path.isfile(config_dir):
             config_dir = os.path.dirname(config_dir)
@@ -131,6 +130,8 @@ class MoinDump(_util.Script):
         # fix url_prefix so we get relative paths in output html
         original_url_prefix = request.cfg.url_prefix
         request.cfg.url_prefix = url_prefix
+
+        request.initTheme() # usually request.run() does this, but we don't use it
 
         if self.options.page:
             pages = [self.options.page]
