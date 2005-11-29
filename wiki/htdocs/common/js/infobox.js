@@ -26,7 +26,6 @@ function infoinit(){
  // Workaround for just another netscape bug: Fix browser confusion on resize
  // obviously conqueror has a similar problem :-(
  if(kon){ nsfix() }
- if(old_onload) old_onload();
 }
 
 function untip(){
