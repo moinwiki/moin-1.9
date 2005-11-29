@@ -5,7 +5,7 @@
 
 import itertools
 import similarity
-
+import traceback
 
 class BooleanQuery:
     """A Query that matches documents matching boolean combinations of
@@ -169,14 +169,17 @@ class BooleanScorer:
             # add bits in mask
             bucket[2] |= mask
             # increment coord
-            bucket[3] += 1
+            bucket[3] += 1 # XXX
+            #print doc, score, mask, bucket
 
             
     def score(self, maxDoc):
         if self.coordFactors is None:
             self.computeCoordFactors()
         for t in self.scorers:
+            #print "SCORER", t.scorer
             for d,score in t.scorer.score(maxDoc):
+                #print "DOCUMENT"
                 self.collect(d,score,t.mask)
         return self.collectHits()
     
@@ -186,7 +189,7 @@ class BooleanScorer:
             if (bits & self.prohibitedMask) == 0 and (bits & self.requiredMask) == self.requiredMask:
                 # if prohibited and required check out
                 # add to results
-                #print (doc, score * self.coordFactors[coord])
+                #print "CollectHits:", doc, score, self.coordFactors, coord
                 yield (doc, score * self.coordFactors[coord])
         del self.validList[:]
             
