@@ -10,6 +10,10 @@ Version 1.5.0current:
       unknown. This stuff is only driven by ACLs now.
     * Some fixes to Despam action.
     * Fixed moin_dump (broken by some recent theme init change).
+    * removed old_onload reference from infobox.js
+    * Fixed MoinMoin logo for IE.
+    * search: fixed whitespace handling in linkto: search terms
+
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
       from config.url_schemas in case you have patched it in there.
