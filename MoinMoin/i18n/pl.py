@@ -533,11 +533,23 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Local extension macros''':
 '''Lokalne rozszerzenia makropoleceń''',
 '''Global extension actions''':
-'''Globalne rozsrzerzenia operacji''',
+'''Globalne rozszerzenia operacji''',
 '''Local extension actions''':
 '''Lokalne rozszerzenia operacji''',
+'''Global parsers''':
+'''Globalne analizatory składni''',
+'''Local extension parsers''':
+'''Lokalne rozszerzenia analizatorów składni''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)''',
+'''Disabled''':
+'''Wyłączone''',
+'''Enabled''':
+'''Włączone''',
+'''Lupy search''':
+'''Wyszukiwanie przez Lupy''',
+'''Active threads''':
+'''Aktywne wątki''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -547,7 +559,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Expected "=" to follow "%(token)s"''':
 '''Spodziewane "=" aby podążyć za "%(token)s"''',
 '''Expected a value for key "%(token)s"''':
-'''Spodziwana wartość dla klucza "%(token)s"''',
+'''Spodziewana wartość dla klucza "%(token)s"''',
 '''Wiki Markup''':
 '''Język oznaczeń Wiki''',
 '''Print View''':
@@ -568,8 +580,12 @@ since this is subject to change and can break easily.''':
 jak pokazano poniżej na liście plików. 
 \'\'\'NIGDY\'\'\' nie używaj URLa {{{[get]}}}, ponieważ odnośnik może się zmienić 
 i spowodować utratę informacji, którą chcesz przekazać.''',
+'''unzip''':
+'''rozpakuj''',
+'''install''':
+'''instaluj''',
 '''No attachments stored for %(pagename)s''':
-'''Strona %(pagename)s nie ma żadnyc załączników''',
+'''Strona %(pagename)s nie ma żadnych załączników''',
 '''Edit drawing''':
 '''Edytuj rysunek''',
 '''Attached Files''':
@@ -586,6 +602,8 @@ istnieje już plik o identycznej nazwie, musisz zmienić nazwę zbioru, który c
 W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta nazwa oryginalna.''',
 '''File to upload''':
 '''Plik do przekazania''',
+'''Rename to''':
+'''Zmień nazwę''',
 '''Upload''':
 '''Przekaż''',
 '''File attachments are not allowed in this wiki!''':
@@ -598,6 +616,10 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Nie możesz skasować załączników z tej strony.''',
 '''You are not allowed to get attachments from this page.''':
 '''Nie możesz pobierać załączników z tej strony.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Nie możesz rozpakowywać załączników tej strony.''',
+'''You are not allowed to install files.''':
+'''Nie możesz instalować plików.''',
 '''You are not allowed to view attachments of this page.''':
 '''Nie możesz obejrzeć załączników do tej strony.''',
 '''Unsupported upload action: %s''':
@@ -610,8 +632,30 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') o wielkości %(bytes)d bajtów zapisany.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Załącznik \'%(filename)s\' usunięty.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Załącznik \'%(filename)s\' zachowano.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Nie udało się zainstalować \'%(filename)s\'.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Plik %s nie jest pakietem MoinMoin.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Załącznik \'%(filename)s\' nie mógł zostać rozpakowany, ponieważ powstałe pliki byłyby zbyt duże (zabrakło %(space)d kB).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Załącznik \'%(filename)s\' nie mógł zostać rozpakowany, ponieważ powstałoby zbyt wiele plików (zabrakło %(count)d).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Załącznik \'%(filename)s\' rozpakowano.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Nie rozpakowano załącznika \'%(filename)s\', ponieważ pliki są zbyt duże, tylko typu .zip, już istnieją, albo znajdują się w podkatalogach.''',
+'''The file %(target)s is not a .zip file.''':
+'''Plik %(target)s nie jest typu .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Załącznik \'%(filename)s\'''',
+'''Package script:''':
+'''Skrypt pakietu:''',
+'''File Name''':
+'''Nazwa pliku''',
+'''Modified''':
+'''Zmodyfikowane''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -621,7 +665,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''This page is already deleted or was never created!''':
 '''Niniejsza strona została już skasowana albo nigdy jej nie było!''',
 '''Please use the interactive user interface to delete pages!''':
-'''Użyj interkatywnego interfejsu aby usuwać strony!''',
+'''Użyj interaktywnego interfejsu aby usuwać strony!''',
 '''Really delete this page?''':
 '''Czy na pewno usunąć niniejszą stronę?''',
 '''Delete''':
@@ -641,7 +685,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''You are not allowed to rename pages in this wiki!''':
 '''Nie możesz zmieniać nazw stron na tym wiki!''',
 '''Please use the interactive user interface to rename pages!''':
-'''Użyj interkatywnego interfejsu aby zmieniać nazwy stron!''',
+'''Użyj interaktywnego interfejsu aby zmieniać nazwy stron!''',
 '''Could not rename page because of file system error: %s.''':
 '''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
 '''Rename Page''':
@@ -672,6 +716,8 @@ Spróbuj innej nazwy.''',
 '''Przeszukiwanie pełnotekstowe: "%s"''',
 '''Full Link List for "%s"''':
 '''Pełna lista odnośników dla "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony.''',
 '''Upload new attachment "%(filename)s"''':
 '''Wgraj nowy załącznik "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -695,13 +741,15 @@ Spróbuj innej nazwy.''',
 '''Slide %(pos)d of %(size)d''':
 '''Slajd %(pos)d z %(size)d''',
 '''No orphaned pages in this wiki.''':
-'''Nie znaleziono stron - bękartów w tym wiki.''',
+'''Nie znaleziono osieroconych stron w tym wiki.''',
 '''No quotes on %(pagename)s.''':
 '''Brak przytoczeń na %(pagename)s.''',
 '''Upload of attachment \'%(filename)s\'.''':
 '''Przekazanie załącznika \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Rysunek \'%(filename)s\' zachowany.''',
+'''%(mins)dm ago''':
+'''%(mins)d minut temu''',
 '''(no bookmark set)''':
 '''(brak ustalonych zakładek)''',
 '''(currently set to %s)''':
@@ -732,8 +780,16 @@ Spróbuj innej nazwy.''',
 '''Spodziewana wartość całkowita "%(arg)s"  po "%(key)s"''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Spodziewana wartość koloru "%(arg)s" po "%(key)s"''',
+'''XSLT option disabled, please look at HelpOnConfiguration.''':
+'''Opcja XSLT jest wyłączona, proszę przeczytać HelpOnConfiguration.''',
+'''XSLT processing is not available, please install 4suite 1.x.''':
+'''Przetwarzanie XSLT jest niedostępne, zainstaluj 4suite 1.x.''',
 '''%(errortype)s processing error''':
 '''błąd przetwarzania %(errortype)s''',
+'''Views/day''':
+'''Odczytów/dzień''',
+'''Edits/day''':
+'''Edycji/dzień''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(chart_title)s dla %(filterpage)s''',
 '''green=view
@@ -744,16 +800,38 @@ czerwony=edycja''',
 '''data''',
 '''# of hits''':
 '''# odwiedzin''',
+'''Page Size Distribution''':
+'''Rozkład rozmiarów stron''',
 '''page size upper bound [bytes]''':
 '''rozmiar strony [bajtów]''',
 '''# of pages of this size''':
 '''# stron tego rozmiaru''',
+'''User agent''':
+'''Typ przeglądarki (User-Agent)''',
 '''Others''':
 '''Inni''',
+'''Distribution of User-Agent Types''':
+'''Rozkład typów przeglądarek (User-Agent)''',
 '''Unsubscribe''':
 '''Rezygnuj z subskrybcji''',
+'''Home''':
+'''Strona domowa''',
+'''[RSS]''':
+'''[RSS]''',
+'''[DELETED]''':
+'''[SKASOWANA]''',
+'''[UPDATED]''':
+'''[UAKTUALNIONA]''',
+'''[NEW]''':
+'''[NOWA]''',
+'''[DIFF]''':
+'''[RÓŻNICE]''',
+'''[BOTTOM]''':
+'''[KONIEC STRONY]''',
+'''[TOP]''':
+'''[POCZĄTEK STRONY]''',
 '''Click to do a full-text search for this title''':
-'''kliknij aby poszukać tytułu metodą pełnotekstową''',
+'''Kliknij aby poszukać tytułu metodą pełnotekstową''',
 '''Clear message''':
 '''Usuń wiadomość''',
 '''last edited %(time)s by %(editor)s''':
@@ -766,14 +844,36 @@ czerwony=edycja''',
 '''Tekst''',
 '''Titles''':
 '''Tytuły''',
+'''Search''':
+'''Szukaj''',
 '''More Actions:''':
 '''Więcej operacji:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Tekst surowy''',
+'''Delete Cache''':
+'''Usuń pamięć podręczną''',
 '''Delete Page''':
 '''Usuń stronę''',
+'''Like Pages''':
+'''Podobne strony''',
+'''Local Site Map''':
+'''Lokalna mapa witryny''',
 '''Do''':
 '''Wykonaj''',
+'''Edit (Text)''':
+'''Edytuj (tekstowo)''',
+'''Edit (GUI)''':
+'''Edytuj (graficznie)''',
 '''Immutable Page''':
 '''Strona nie zmieniona''',
+'''Remove Link''':
+'''Usuń skrót''',
+'''Add Link''':
+'''Dodaj skrót''',
+'''Attachments''':
+'''Załączniki''',
 '''Show %s days.''':
 '''Pokaż %s dni.''',
 '''EditText''':
@@ -796,10 +896,12 @@ czerwony=edycja''',
 '''Dodatki zostały oznaczone w ten sposób.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Awaria połączenia z serwerem poczty elektronicznej \'%(server)s\' z powodu: %(reason)s''',
+'''Mail not sent''':
+'''Poczta nie została wysłana''',
 '''Mail sent OK''':
 '''Poczta została wysłana''',
 '''FrontPage''':
-'''StronaGłowna''',
+'''StronaGłówna''',
 '''RecentChanges''':
 '''OstatnieZmiany''',
 '''TitleIndex''':
