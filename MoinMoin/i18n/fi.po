@@ -548,8 +548,8 @@ msgstr ""
 "salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä \n"
 "leikkausta ja liimausta).\n"
 "\n"
-"Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja "
-"muistuva salasana.\n"
+"Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva "
+"salasana.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -593,7 +593,8 @@ msgid "Unknown user."
 msgstr "Tuntematon käyttäjä."
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr "Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen."
+msgstr ""
+"Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Tyhjä käyttäjänimi. Anna käyttäjänimi."
@@ -823,7 +824,8 @@ msgid "You must log in to use subscribtions."
 msgstr "Sinun täytyy kirjautua käyttääksesi tilauksia."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr "Lisää sähköpostiosoitteesi sivullasi KäyttäjäAsetukset tilauksia varten."
+msgstr ""
+"Lisää sähköpostiosoitteesi sivullasi KäyttäjäAsetukset tilauksia varten."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Tilauksesi tälle sivulle on poistettu."
@@ -832,7 +834,8 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Säännöllisen lausekkeen tilausta ei voida poistaa!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "Muokkaa tilauksien säännöllisiä lausekkeita sivullasi KäyttäjäAsetukset."
+msgstr ""
+"Muokkaa tilauksien säännöllisiä lausekkeita sivullasi KäyttäjäAsetukset."
 
 msgid "You have been subscribed to this page."
 msgstr "Sinulle on lisätty tilaus tälle sivulle."
@@ -1116,16 +1119,16 @@ msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
-"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostot "
-"olisivat liian suuret (%(space)d kt puuttuu)."
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostot olisivat "
+"liian suuret (%(space)d kt puuttuu)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
-"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostoja "
-"olisi liian monta (%(count)d puuttuu)."
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostoja olisi "
+"liian monta (%(count)d puuttuu)."
 
 #, fuzzy, python-format
 msgid "Attachment '%(filename)s' unzipped."

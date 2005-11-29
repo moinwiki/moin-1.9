@@ -28,16 +28,24 @@ Aby użyć tego formularza na innych stronach, wprowadź
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
 makropolecenie.-~
 ''',
+'''Create New Page''':
+'''Utwórz nową stronę''',
 '''You are not allowed to view this page.''':
 '''Nie możesz oglądać tej strony.''',
+'''DeleteCache''':
+'''UsuńPamięćPodręczną''',
 '''(cached %s)''':
 '''(w pamięci podręcznej %s)''',
 '''You are not allowed to edit this page.''':
 '''Nie możesz zmieniać zawartości tej strony.''',
 '''Page is immutable!''':
-'''Strona nie została zmieniona!''',
+'''Strona statyczna!''',
 '''Cannot edit old revisions!''':
 '''Nie można zmieniać starych wersji!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty edycji!''',
+'''Page name is too long, try shorter name.''':
+'''Nazwa strony jest zbyt długa, spróbuj krótszej.''',
 '''Edit "%(pagename)s"''':
 '''Modyfikuj "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -78,12 +86,36 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygnować z wprowadzenia zmian.''',
 '''Preview''':
 '''Podgląd''',
+'''GUI Mode''':
+'''Tryb GUI''',
+'''Your changes are not saved!''':
+'''Nic nie zapisano!''',
+'''Comment:''':
+'''Komentarz:''',
 '''<No addition>''':
 '''<Bez dodania>''',
+'''Add to: %(category)s''':
+'''Dodaj do: %(category)s''',
 '''Trivial change''':
 '''Drobna zmiana''',
 '''Remove trailing whitespace from each line''':
 '''Usuń puste znaki z przodu każdej linii''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Wyróżnienie:: [[Verbatim(\'\')]]\'\'kursywa\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'pogrubienie\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim\'\'\'\'\')]]\'\'\'\'\'pogrubienie kursywa\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mix \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'pogrubienia\'\'\'[[Verbatim(\'\'\')]] i kursywy\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] pozioma linia.
+ Nagłówki:: [[Verbatim(=)]] Tytuł 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tytuł 2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3 [[Verbatim(===)]];   [[Verbatim(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 [[Verbatim(=====)]].
+ Listy:: spacja i jeden ze: * znaków; 1., a., A., i., I. numerowane pozycje; 1.#n rozpoczyna numerowanie od n; sama spacja robi wcięcie.
+ Odnośniki:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["nawiasy i znaki cudzysłowia"])]]; url; [url]; [url label].
+ Tabele:: || tekst komórki |||| tekst komórki na dwa pola ||;    niedopuszczalna jest spacja po tabelach lub tytułach.
+
+(!) Aby uzyskać więcej pomocy, obejrzyj HelpOnEditing lub SyntaxReference.
+''',
 '''Edit was cancelled.''':
 '''Zmiany zostały anulowane''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -122,6 +154,8 @@ Następująca strona została zaktualizowana przez %(editor)s:
 ''':
 '''Nie znaleziono różnic!
 ''',
+'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
+'''[%(sitename)s] %(trivial)sAktualizacja strony "%(pagename)s" dokonana przez %(username)s''',
 '''Trivial ''':
 '''Drobna ''',
 '''Status of sending notification mails:''':
@@ -130,10 +164,16 @@ Następująca strona została zaktualizowana przez %(editor)s:
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
 '''## kopia zapasowa strony "%(pagename)s" wprowadzona %(date)s''',
+'''Page could not get locked. Unexpected error (errno=%d).''':
+'''Strona nie może zostać zamknięta. Niespodziewany błąd (errno=%d).''',
+'''Page could not get locked. Missing \'current\' file?''':
+'''Strona nie może zostać zamknięta. Brakuje bieżącego pliku?''',
 '''You are not allowed to edit this page!''':
 '''Nie możesz zmieniać zawartości tej strony!''',
 '''You cannot save empty pages.''':
-'''Nie możesz zapisywać pustcyh stron.''',
+'''Nie możesz zapisywać pustych stron.''',
+'''You already saved this page!''':
+'''Już zapisałeś tę stronę!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -199,8 +239,12 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''Zobacz''',
 '''Up''':
 '''Góra''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publikuj mój e-mail (nie moją stronę domową) w informacjach o autorze''',
 '''Open editor on double click''':
 '''Otwórz edytor podwójnym kliknięciem''',
+'''Jump to last visited page instead of frontpage''':
+'''Przeskocz do ostatnio odwiedzanej strony zamiast kierować na stronę główną''',
 '''Show question mark for non-existing pagelinks''':
 '''Pokaż znaki zapytania dla nieistniejących jeszcze stron''',
 '''Show page trail''':
@@ -221,6 +265,10 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''Wyłącz to konto na zawsze''',
 '''Name''':
 '''Nazwa''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Użyj postaci Imię\'\'\'\'\'\'Nazwisko''',
+'''Alias-Name''':
+'''Nazwa aliasu''',
 '''Password''':
 '''Hasło''',
 '''Password repeat''':
@@ -228,7 +276,7 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''(Only when changing passwords)''':
 '''(Tylko podczas zmiany hasła)''',
 '''Email''':
-'''Email''',
+'''E-mail''',
 '''User CSS URL''':
 '''Podaj odnośnik do pliku CSS''',
 '''(Leave it empty for disabling user CSS)''':
@@ -247,6 +295,8 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s i spróbuj ponownie.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':
 ''' %.2f sekund.''',
 '''match''':
@@ -267,12 +317,16 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
 '''Missing password. Please enter user name and password.''':
 '''Zapomniano o haśle. Podaj identyfikator i hasło.''',
+'''Account "%s" is disabled.''':
+'''Konto "%s" jest wyłączone.''',
 '''Sorry, wrong password.''':
-'''Przykro mi, hasło nieprawidłowe.''',
+'''Przykro mi, nieprawidłowe hasło.''',
 '''Bad relogin URL.''':
 '''Niewłaściwy URL logowania.''',
 '''Unknown user.''':
 '''Nieznany identyfikator czytelnika.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Wejdź do UserPreferences aby zmienić swe ustawienia lub utworzyć konto.''',
 '''Empty user name. Please enter a user name.''':
 '''Puste pole identyfikatora. Podaj swój identyfikator''',
 '''This user name already belongs to somebody else.''':
@@ -281,8 +335,12 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Hasła się nie zgadzają!''',
 '''Please specify a password!''':
 '''Podaj hasło!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
 '''This email already belongs to somebody else.''':
 '''Ten adres poczty elektronicznej należy do kogoś innego.''',
+'''User account created!''':
+'''Konto utworzone!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':
@@ -291,12 +349,20 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Domyślny''',
 '''<Browser setting>''':
 '''<Ustawienia przeglądarki>''',
+'''the one preferred''':
+'''tylko preferowane''',
+'''free choice''':
+'''wybór dowolny''',
 '''Save''':
 '''Zachowaj''',
 '''Logout''':
 '''Wyjdź''',
 '''Preferred theme''':
 '''Ulubiony wystrój''',
+'''Editor Preference''':
+'''Preferencje Czytelnika''',
+'''Editor shown on UI''':
+'''Edytor pokazuje się w GUI''',
 '''Time zone''':
 '''Strefa czasowa''',
 '''Your time is''':
@@ -333,6 +399,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Nie znaleziono różnic!''',
 '''The page was saved %(count)d times, though!''':
 '''Strona została zachowana %(count)d razy, wszelako!''',
+'''(ignoring whitespace)''':
+'''(pomijam spacje)''',
 '''Ignore changes in the amount of whitespace''':
 '''Ignoruj zmiany w ilości spacji''',
 '''General Information''':
@@ -389,12 +457,27 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Ilość odsłon i edycji''',
 '''You are not allowed to revert this page!''':
 '''Nie możesz przywracać tej strony!''',
+'''You must login to add a quicklink.''':
+'''Musisz się zalogować by dodać szybki odnośnik.''',
+'''Your quicklink to this page has been removed.''':
+'''Szybki odnośnik do tej strony został usunięty.''',
+'''A quicklink to this page has been added for you.''':
+'''Szybki odnośnik do tej strony został dodany.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nie możesz subskrybować strony, której nie możesz przeczytać.''',
+'''This wiki is not enabled for mail processing.''':
+'''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
+Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
+'''You must log in to use subscribtions.''':
+'''Musisz się zalogować''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Dodaj swój adres poczty eleketronicznej w UserPreferences aby użytkować subskrybcję.''',
 '''Your subscribtion to this page has been removed.''':
 '''Subskrybcja tej strony przez Ciebie została usunięta.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nie można usunąć subskrybcji wyrażenia skończonego!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich UserPreferences''',
 '''You have been subscribed to this page.''':
 '''Rezygnacja z subskrybcji została przyjęta.''',
 '''Charts are not available!''':

@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.3.1\n"
+"Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-18 20:41+0100\n"
-"PO-Revision-Date: 2004-12-27 08:30+0100\n"
+"PO-Revision-Date: 2005-11-28 08:30+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
@@ -57,16 +57,14 @@ msgstr ""
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
 "makropolecenie.-~\n"
 
-#, fuzzy
 msgid "Create New Page"
-msgstr "Utwórz profil"
+msgstr "Utwórz nową stronę"
 
 msgid "You are not allowed to view this page."
 msgstr "Nie możesz oglądać tej strony."
 
-#, fuzzy
 msgid "DeleteCache"
-msgstr "UsuńStronę"
+msgstr "UsuńPamięćPodręczną"
 
 #, python-format
 msgid "(cached %s)"
@@ -76,17 +74,16 @@ msgid "You are not allowed to edit this page."
 msgstr "Nie możesz zmieniać zawartości tej strony."
 
 msgid "Page is immutable!"
-msgstr "Strona nie została zmieniona!"
+msgstr "Strona statyczna!"
 
 msgid "Cannot edit old revisions!"
 msgstr "Nie można zmieniać starych wersji!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty!"
+msgstr "Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty edycji!"
 
 msgid "Page name is too long, try shorter name."
-msgstr ""
+msgstr "Nazwa strony jest zbyt długa, spróbuj krótszej."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -166,22 +163,20 @@ msgid "Preview"
 msgstr "Podgląd"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Tryb GUI"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Nie zmieniono zawartości strony, nic nie zapisano!"
+msgstr "Nic nie zapisano!"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "Komentarz"
+msgstr "Komentarz:"
 
 msgid "<No addition>"
 msgstr "<Bez dodania>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Dodaj do: %(category)s"
 
 msgid "Trivial change"
 msgstr "Drobna zmiana"
@@ -189,7 +184,6 @@ msgstr "Drobna zmiana"
 msgid "Remove trailing whitespace from each line"
 msgstr "Usuń puste znaki z przodu każdej linii"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -209,21 +203,23 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" Wyróżnienie [[Verbatim('')]]''kursywa''[[Verbatim('')]]; [[Verbatim"
-"(''')]]'''pogrubienie'''[[Verbatim(''')]]; [[Verbatim"
-"(''''')]]'''''pogrubiona kursywas'''''[[Verbatim(''''')]]; [[Verbatim"
-"('')]]''mix ''[[Verbatim(''')]]'''''pogrubienie'''[[Verbatim(''')]] i "
-"kursywa''[[Verbatim('')]]; [[Verbatim(----)]] pozioma linia.\n"
+" Wyróżnienie:: [[Verbatim('')]]''kursywa''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''pogrubienie'''[[Verbatim(''')]]; [[Verbatim''''')]]'''''pogrubienie "
+"kursywa'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mix ''[[Verbatim"
+"(''')]]'''''pogrubienia'''[[Verbatim(''')]] i kursywy''[[Verbatim('')]]; "
+"[[Verbatim(----)]] pozioma linia.\n"
 " Nagłówki:: [[Verbatim(=)]] Tytuł 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tytuł "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3  [[Verbatim(===)]];   "
-"[[Verbatim(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 "
-"[[Verbatim(=====)]].\n"
-" Listy:: spacja plus jedno z: * znak wypunktowania; 1., a., A., i., I.  1.#n "
-"rozpoczyna numerowanie od n; spacja pojedyncze wcięcia.\n"
-" Odnośniki: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"nawiasy i "
-"znaki cudzysłowia\"])]]; url; [url]; [url label].\n"
-" Tabele:: || tekst pola |||| tekst na dwa pola ||;    niedopuszczalna jest "
-"spacja po tabelach lub tytułach."
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 [[Verbatim"
+"(=====)]].\n"
+" Listy:: spacja i jeden ze: * znaków; 1., a., A., i., I. numerowane pozycje; 1."
+"#n rozpoczyna numerowanie od n; sama spacja robi wcięcie.\n"
+" Odnośniki:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"nawiasy i znaki "
+"cudzysłowia\"])]]; url; [url]; [url label].\n"
+" Tabele:: || tekst komórki |||| tekst komórki na dwa pola ||;    niedopuszczalna "
+"jest spacja po tabelach lub tytułach.\n"
+"\n"
+"(!) Aby uzyskać więcej pomocy, obejrzyj HelpOnEditing lub SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Zmiany zostały anulowane"
@@ -272,9 +268,9 @@ msgstr "Nowa strona:\n"
 msgid "No differences found!\n"
 msgstr "Nie znaleziono różnic!\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
-msgstr "[%(sitename)s] %(trivial)sAktualizacja strony \"%(pagename)s\""
+msgstr "[%(sitename)s] %(trivial)sAktualizacja strony \"%(pagename)s\" dokonana przez %(username)s"
 
 msgid "Trivial "
 msgstr "Drobna "
@@ -292,20 +288,19 @@ msgstr "## kopia zapasowa strony \"%(pagename)s\" wprowadzona %(date)s"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr ""
+msgstr "Strona nie może zostać zamknięta. Niespodziewany błąd (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr ""
+msgstr "Strona nie może zostać zamknięta. Brakuje bieżącego pliku?"
 
 msgid "You are not allowed to edit this page!"
 msgstr "Nie możesz zmieniać zawartości tej strony!"
 
 msgid "You cannot save empty pages."
-msgstr "Nie możesz zapisywać pustcyh stron."
+msgstr "Nie możesz zapisywać pustych stron."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "Nie możesz zmieniać zawartości tej strony!"
+msgstr "Już zapisałeś tę stronę!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -420,13 +415,13 @@ msgid "Up"
 msgstr "Góra"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Publikuj mój e-mail (nie moją stronę domową) w informacjach o autorze"
 
 msgid "Open editor on double click"
 msgstr "Otwórz edytor podwójnym kliknięciem"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Przeskocz do ostatnio odwiedzanej strony zamiast kierować na stronę główną"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Pokaż znaki zapytania dla nieistniejących jeszcze stron"
@@ -458,12 +453,11 @@ msgstr "Wyłącz to konto na zawsze"
 msgid "Name"
 msgstr "Nazwa"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Użyj postaci ImięNazwisko"
+msgstr "(Użyj postaci Imię''''''Nazwisko"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Nazwa aliasu"
 
 msgid "Password"
 msgstr "Hasło"
@@ -475,7 +469,7 @@ msgid "(Only when changing passwords)"
 msgstr "(Tylko podczas zmiany hasła)"
 
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
 
 msgid "User CSS URL"
 msgstr "Podaj odnośnik do pliku CSS"
@@ -507,7 +501,7 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s i spróbuj ponownie."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
 msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
 
@@ -571,10 +565,10 @@ msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Konto \"%s\" jest wyłączone."
 
 msgid "Sorry, wrong password."
-msgstr "Przykro mi, hasło nieprawidłowe."
+msgstr "Przykro mi, nieprawidłowe hasło."
 
 msgid "Bad relogin URL."
 msgstr "Niewłaściwy URL logowania."
@@ -583,7 +577,7 @@ msgid "Unknown user."
 msgstr "Nieznany identyfikator czytelnika."
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "Wejdź do UserPreferences aby zmienić swe ustawienia lub utworzyć konto."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Puste pole identyfikatora. Podaj swój identyfikator"
@@ -597,19 +591,18 @@ msgstr "Hasła się nie zgadzają!"
 msgid "Please specify a password!"
 msgstr "Podaj hasło!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"Lepiej podaj swój adres poczty elektronicznej. Obecni jeżeli zapomnisz "
+"Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz "
 "identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą."
 
 msgid "This email already belongs to somebody else."
 msgstr "Ten adres poczty elektronicznej należy do kogoś innego."
 
 msgid "User account created!"
-msgstr ""
+msgstr "Konto utworzone!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -625,10 +618,10 @@ msgid "<Browser setting>"
 msgstr "<Ustawienia przeglądarki>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "tylko preferowane"
 
 msgid "free choice"
-msgstr ""
+msgstr "wybór dowolny"
 
 msgid "Save"
 msgstr "Zachowaj"
@@ -639,12 +632,11 @@ msgstr "Wyjdź"
 msgid "Preferred theme"
 msgstr "Ulubiony wystrój"
 
-#, fuzzy
 msgid "Editor Preference"
-msgstr "PreferencjeCzytelnika"
+msgstr "Preferencje Czytelnika"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Edytor pokazuje się w GUI"
 
 msgid "Time zone"
 msgstr "Strefa czasowa"
@@ -707,7 +699,7 @@ msgid "The page was saved %(count)d times, though!"
 msgstr "Strona została zachowana %(count)d razy, wszelako!"
 
 msgid "(ignoring whitespace)"
-msgstr ""
+msgstr "(pomijam spacje)"
 
 msgid "Ignore changes in the amount of whitespace"
 msgstr "Ignoruj zmiany w ilości spacji"
@@ -799,30 +791,27 @@ msgid "You are not allowed to revert this page!"
 msgstr "Nie możesz przywracać tej strony!"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Musisz się zalogować by dodać szybki odnośnik."
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Szybki odnośnik do tej strony został usunięty."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Szybki odnośnik do tej strony został dodany."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "Nie możesz subskrybować strony, której nie możesz przeczytać."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
 msgstr ""
 "W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.\n"
 "Skontaktuj się z właścicielem, który może tę opcję włączyć."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Musisz się zalogować"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Dodaj swój adres poczty eleketronicznej w UserPreferences aby użytkować subskrybcję."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
@@ -831,7 +820,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Nie można usunąć subskrybcji wyrażenia skończonego!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich UserPreferences"
 
 msgid "You have been subscribed to this page."
 msgstr "Rezygnacja z subskrybcji została przyjęta."
