@@ -699,6 +699,8 @@ class convert_tree(visitor):
             command = ",,"
         elif name == 'sup':
             command = "^"
+        elif name == 'font':
+            command = "" # just throw away font settings
         elif name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',): # headers are not allowed here (e.g. inside a ul li),
             text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
             self.text.append(text)                          # so we just drop the header markup and keep the text
