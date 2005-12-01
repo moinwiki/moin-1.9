@@ -131,8 +131,6 @@ class MoinDump(_util.Script):
         original_url_prefix = request.cfg.url_prefix
         request.cfg.url_prefix = url_prefix
 
-        request.initTheme() # usually request.run() does this, but we don't use it
-
         if self.options.page:
             pages = [self.options.page]
         else:
