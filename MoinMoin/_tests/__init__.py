@@ -41,6 +41,8 @@ Running only few modules::
 @license: GNU GPL, see COPYING for details.
 """
 
+import sys
+
 from unittest import TestLoader, TextTestRunner
 
 
@@ -182,4 +184,7 @@ def run(request=None, names=None):
         request.user = User(request)
         
     suite = makeSuite(request, names)
-    TextTestRunner(stream=request, verbosity=2).run(suite)
+    
+    # do not redirect the stream to request here because request.write can
+    # be invalid or broken because not all redirections of it use a finally: block
+    TextTestRunner(stream=sys.stdout, verbosity=2).run(suite)
