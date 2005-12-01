@@ -6,7 +6,7 @@ MoinMoin - MoinMoin.packages tests
 @license: GNU GPL, see COPYING for details.
 """
 
-import unittest
+from unittest import TestCase
 from MoinMoin.Page import Page
 from MoinMoin._tests import TestConfig
 from MoinMoin._tests import TestSkiped as TestSkipped
@@ -14,14 +14,11 @@ from MoinMoin.packages import Package, ScriptEngine, MOIN_PACKAGE_FILE, packLine
 
 class DebugPackage(Package, ScriptEngine):
     """ Used for debugging, does not need a real .zip file. """
-    def __init__(self, request, filename):
+    def __init__(self, request, filename, script=None):
         Package.__init__(self, request)
         ScriptEngine.__init__(self)
         self.filename = filename
-
-    def extract_file(self, filename):
-        if filename == MOIN_PACKAGE_FILE:
-            return u"""moinmoinpackage|1
+        self.script = script or u"""moinmoinpackage|1
 print|foo
 ReplaceUnderlay|testdatei|TestSeite2
 DeletePage|TestSeite2|Test ...
@@ -29,11 +26,16 @@ IgnoreExceptions|True
 DeletePage|TestSeiteDoesNotExist|Test ...
 IgnoreExceptions|False
 AddRevision|foofile|FooPage
+AddRevision|foofile|FooPage
 DeletePage|FooPage|Test ...
 setthemename|foo
 #foobar
 installplugin|foo|local|parser|testy
-""".encode("utf-8")
+"""
+
+    def extract_file(self, filename):
+        if filename == MOIN_PACKAGE_FILE:
+            return self.script.encode("utf-8")
         else:
             return "Hello world, I am the file " + filename.encode("utf-8")
 
@@ -43,7 +45,7 @@ installplugin|foo|local|parser|testy
     def isPackage(self):
         return True
     
-class PackagesTests(unittest.TestCase):
+class UnsafePackageTestcase(TestCase):
     """ Tests various things in the packages package. Note that this package does
         not care to clean up and needs to run in a test wiki because of that. """
 
@@ -60,7 +62,7 @@ class PackagesTests(unittest.TestCase):
         self.assert_(testseite2.isUnderlayPage())
         self.assert_(not Page(self.request, 'FooPage').exists())
 
-class QuotingTests(unittest.TestCase):
+class QuotingTestCase(TestCase):
     def testQuoting(self):
         for line in ([':foo', 'is\\', 'ja|', u't|ü', u'baAzß'], [], ['', '']):
             self.assertEqual(line, unpackLine(packLine(line)))
