@@ -114,7 +114,7 @@ class Formatter(FormatterBase):
     def listitem(self, on, **kw):
         return ['<li>', '</li>\n'][not on]
 
-    def code(self, on):
+    def code(self, on, **kw):
         return ['<code>', '</code>'][not on]
 
     def sup(self, on):
@@ -200,7 +200,7 @@ class Formatter(FormatterBase):
                 attrs[key] = value
         return apply(FormatterBase.image, (self,), attrs) + '</img>'
 
-    def code_area(self, on, code_id, **kwargs):
+    def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         return ('<codearea id="%s">' % code_id, '</codearea')[not on]
 
     def code_line(self, on):
@@ -208,9 +208,6 @@ class Formatter(FormatterBase):
 
     def code_token(self, on, tok_type):
         return ('<codetoken type="%s">' % tok_type, '</codetoken')[not on]
-
-    def code_area(self, on, code_id, **kwargs):
-        return ('<codearea id="%s">' % code_id, '</codearea')[not on]
 
     def code_line(self, on):
         return ('<codeline>', '</codeline')[not on]

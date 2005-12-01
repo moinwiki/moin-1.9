@@ -288,10 +288,12 @@ class Formatter(FormatterBase):
         return self._handleFormatting("subscript", on)
 
     def strike(self, on):
+        # does not yield <strike> using the HTML XSLT files here ...
+        # but seems to be correct
         return self._handleFormatting("emphasis", on,
                                       (('role','strikethrough'), ))
 
-    def code(self, on):
+    def code(self, on, **kwargs):
         return self._handleFormatting("code", on)
 
     def preformatted(self, on):
