@@ -56,8 +56,7 @@ def run():
     removeTestWiki()
     copyData()
     untarUnderlay()
-    names = ['MoinMoin._tests.' + name for name in sys.argv[1:]]
-    _tests.run(names=names)
+    _tests.run(names=sys.argv[1:])
 
 
 if __name__ == '__main__':
