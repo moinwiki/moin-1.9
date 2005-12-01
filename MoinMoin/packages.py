@@ -209,7 +209,10 @@ class ScriptEngine:
         trivial = self._toBoolean(trivial)
 
         page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
-        page.saveText(self.extract_file(filename), 0, trivial=trivial, comment=comment)
+        try:
+            page.saveText(self.extract_file(filename), 0, trivial=trivial, comment=comment)
+        except PageEditor.Unchanged:
+            pass
 
         page.clean_acl_cache()
 
