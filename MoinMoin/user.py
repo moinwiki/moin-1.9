@@ -191,22 +191,33 @@ def decodeList(line):
 class User:
     """A MoinMoin User"""
 
-    def __init__(self, request, id=None, name="", password=None, auth_username=""):
+    def __init__(self, request, id=None, name="", password=None, auth_username="", **kw):
         """ Initialize User object
         
         @param request: the request object
         @param id: (optional) user ID
         @param name: (optional) user name
         @param password: (optional) user password
-        @param auth_username: (optional) already authenticated user
-            name (e.g. apache basic auth)
+        @param auth_username: (optional) already authenticated user name
+                              (e.g. when using http basic auth)
+        @keyword auth_method: method that was used for authentication,
+                              default: 'internal'
+        @keyword auth_attribs: tuple of user object attribute names that are
+                               determined by auth method and should not be
+                               changed by UserPreferences form, default: ().
+                               First tuple element was used for authentication.
         """
         self._cfg = request.cfg
         self.valid = 0
         self.trusted = 0
         self.id = id
         self.auth_username = auth_username
-
+        self.auth_method = kw.get('auth_method', 'internal')
+        self.auth_attribs = kw.get('auth_attribs', ())
+        if self.auth_method == 'internal':
+            import sys, traceback
+            traceback.print_stack(limit=4, file=sys.stderr)
+                                       
         # create some vars automatically
         for tuple in self._cfg.user_form_fields:
             key = tuple[0]

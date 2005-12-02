@@ -424,9 +424,7 @@ class RequestBase(object):
         for auth in self.cfg.auth:
             the_user = auth(self)
             if the_user: return the_user
-
-        # XXX create
-        return user.User(self)
+        return user.User(self, auth_method="request:427")
 
     def reset(self):
         """ Reset request state.
@@ -1041,7 +1039,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                     for t in self.clock.dump():
                         self.write('<li>%s</li>\n' % t)
                     self.write('</ul>\n')
-
+                self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
                 self.write('</body>\n</html>\n\n')
             
         except MoinMoinNoFooter:
@@ -1244,7 +1242,7 @@ space between words. Group page name is not allowed.""") % self.user.name
 
         # Update saved cookie and set new unregistered user
         self.saved_cookie = ''
-        self.user = user.User(self)
+        self.user = user.User(self, auth_method="request:1245")
 
         # IMPORTANT: Prevent caching of current page and cookie        
         self.disableHttpCaching()

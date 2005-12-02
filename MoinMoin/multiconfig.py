@@ -388,7 +388,7 @@ class DefaultConfig:
     user_form_remove = []
     
     # attributes we do NOT save to the userpref file
-    user_transient_fields =  ['id', 'valid', 'may', 'auth_username', 'trusted', 'password', 'password2',]
+    user_transient_fields =  ['id', 'valid', 'may', 'auth_username', 'trusted', 'password', 'password2', 'auth_method', 'auth_attribs']
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 
