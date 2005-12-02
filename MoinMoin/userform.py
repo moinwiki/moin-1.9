@@ -110,7 +110,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
                 return _("Missing password. Please enter user name and password.")
 
             # Load the user data and check for validness
-            theuser = user.User(self.request, name=name, password=password)
+            theuser = user.User(self.request, name=name, password=password,
+                                auth_method='login_userpassword')
             if not theuser.valid:
                 if theuser.disabled:
                     return _('Account "%s" is disabled.') % name
@@ -129,7 +130,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
                  return _("Bad relogin URL.")
 
             # Load the user data and check for validness
-            theuser = user.User(self.request, uid)
+            theuser = user.User(self.request, uid,
+                                auth_method='login_uid')
             if not theuser.valid:
                 return _("Unknown user.")
             
@@ -147,7 +149,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
             if form.has_key('create'):
                 theuser = self.request.get_user()
             else:
-                theuser = user.User(self.request)
+                theuser = user.User(self.request, auth_method="request:152")
                 
             # Require non-empty name
             try:
@@ -187,11 +189,9 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     # Should never happen
                     return "Can't encode password: %s" % str(err)
 
-            # try to get the (optional) email
+            # try to get the (required) email
             email = form.get('email', [''])[0]
             theuser.email = email.strip()
-
-            # Require email if acl is enabled
             if not theuser.email:
                 return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
@@ -220,14 +220,14 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 result = result + util.dumpFormData(form)
             return result
 
-        else: 
+        else: # Save user profile
             if self.request.request_method != 'POST':
                 return _("Use UserPreferences to change your settings or create an account.")
-            # Save user profile
             theuser = self.request.get_user()
                 
-            # Require non-empty name
-            theuser.name = form.get('name', [theuser.name])[0]
+            if not 'name' in theuser.auth_attribs:
+                # Require non-empty name
+                theuser.name = form.get('name', [theuser.name])[0]
             if not theuser.name:
                 return _("Empty user name. Please enter a user name.")
 
@@ -246,28 +246,30 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 else:
                     newuser = 0
 
-            # try to get the password and pw repeat
-            password = form.get('password', [''])[0]
-            password2 = form.get('password2',[''])[0]
+            if not 'password' in theuser.auth_attribs:
+                # try to get the password and pw repeat
+                password = form.get('password', [''])[0]
+                password2 = form.get('password2',[''])[0]
 
-            # Check if password is given and matches with password repeat
-            if password != password2:
-                return _("Passwords don't match!")
-            if not password and newuser:
-                return _("Please specify a password!")
-            # Encode password
-            if password and not password.startswith('{SHA}'):
-                try:
-                    theuser.enc_password = user.encodePassword(password)
-                except UnicodeError, err:
-                    # Should never happen
-                    return "Can't encode password: %s" % str(err)
+                # Check if password is given and matches with password repeat
+                if password != password2:
+                    return _("Passwords don't match!")
+                if not password and newuser:
+                    return _("Please specify a password!")
+                # Encode password
+                if password and not password.startswith('{SHA}'):
+                    try:
+                        theuser.enc_password = user.encodePassword(password)
+                    except UnicodeError, err:
+                        # Should never happen
+                        return "Can't encode password: %s" % str(err)
 
-            # try to get the (optional) email
-            email = form.get('email', [theuser.email])[0]
-            theuser.email = email.strip()
+            if not 'email' in theuser.auth_attribs:
+                # try to get the email
+                email = form.get('email', [theuser.email])[0]
+                theuser.email = email.strip()
 
-            # Require email if acl is enabled
+            # Require email
             if not theuser.email:
                 return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
@@ -278,12 +280,13 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 for uid in users:
                     if uid == theuser.id:
                         continue
-                    thisuser = user.User(self.request, uid)
+                    thisuser = user.User(self.request, uid, auth_method='userform:283')
                     if thisuser.email == theuser.email:
                         return _("This email already belongs to somebody else.")
 
-            # aliasname
-            theuser.aliasname = form.get('aliasname', [theuser.aliasname])[0]
+            if not 'aliasname' in theuser.auth_attribs:
+                # aliasname
+                theuser.aliasname = form.get('aliasname', [theuser.aliasname])[0]
 	    
             # editor size
             theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)
@@ -344,10 +347,12 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             # subscription for page change notification
             theuser.subscribed_pages = self.decodePageList('subscribed_pages')
                     
-            # save data and send cookie
+            # save data
             theuser.save()            
             self.request.user = theuser
-            self.request.setCookie()
+
+            if 1: # theuser.auth_method == 'moin_cookie': # XXX
+                self.request.setCookie()
 
             result = _("User preferences saved!")
             if _debug:
@@ -490,14 +495,20 @@ class UserSettings:
         self.make_form()
 
         if self.request.user.valid and not create_only:
-            buttons = [
-                ('save', _('Save')),
-                ('logout', _('Logout')),
-            ]  
+            buttons = [('save', _('Save'))]
+            if self.request.user.auth_method == 'moin_cookie':
+                buttons.append(('logout', _('Logout')))
+            uf_remove = self.cfg.user_form_remove
+            uf_disable = self.cfg.user_form_disable
+            for attr in self.request.user.auth_attribs:
+                if attr == 'password':
+                    uf_remove.append(attr)
+                else:
+                    uf_disable.append(attr)
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 default = self.cfg.user_form_defaults[key]
-                if not key in self.cfg.user_form_remove:
-                    if key in self.cfg.user_form_disable:
+                if not key in uf_remove:
+                    if key in uf_disable:
                         self.make_row(_(label),
                                   [ html.INPUT(type=type, size=length, name=key, disabled="disabled",
                                     value=getattr(self.request.user, key)), ' ', _(textafter), ])

@@ -50,7 +50,7 @@ class EditLogLine:
         result = 'ip', request.cfg.show_hosts and self.hostname or ''
         if self.userid:
             if not self._usercache.has_key(self.userid):
-                self._usercache[self.userid] = user.User(request, self.userid)
+                self._usercache[self.userid] = user.User(request, self.userid, auth_method="editlog:53")
             userdata = self._usercache[self.userid]
             if userdata.name:
                 pg = wikiutil.getHomePage(request, username=userdata.name)
@@ -72,7 +72,7 @@ class EditLogLine:
         result = 'ip', request.cfg.show_hosts and self.hostname or ''
         if self.userid:
             if not self._usercache.has_key(self.userid):
-                self._usercache[self.userid] = user.User(request, self.userid)
+                self._usercache[self.userid] = user.User(request, self.userid, auth_method="editlog:75")
             userdata = self._usercache[self.userid]
             if userdata.mailto_author and userdata.email:
                 return ('email', userdata.email)
