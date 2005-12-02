@@ -23,7 +23,16 @@ a:visited {color: #597BB3;}
 a.nonexistent, a.badinterwiki {color: gray;}
 
 a.www:before {content: url(../img/moin-www.png);}
+a.http:before {content: url(../img/moin-www.png);}
+a.https:before {content: url(../img/moin-www.png);}
+a.file:before {content: url(../img/moin-ftp.png);}
+a.ftp:before {content: url(../img/moin-ftp.png);}
+a.nntp:before {content: url(../img/moin-news.png);}
+a.news:before {content: url(../img/moin-news.png);}
+a.telnet:before {content: url(../img/moin-telnet.png);}
+a.irc:before {content: url(../img/moin-telnet.png);}
 a.mailto:before {content: url(../img/moin-email.png);}
+a.attachment:before {content: url(../img/moin-attach.png);}
 a.badinterwiki:before {content: url(../img/moin-inter.png);}
 a.interwiki:before {content: url(../img/moin-inter.png);}
 
