@@ -314,7 +314,7 @@ class Formatter(FormatterBase):
                   wikiutil.url_quote_plus(fname))),
                 linktext % {'filename': self.text(fname)})
         target = AttachFile.getAttachUrl(pagename, filename, self.request)
-        return (self.url(1, target, title="attachment:%s" % url) +
+        return (self.url(1, target, css='attachment', title="attachment:%s" % url) +
                 self.text(text) +
                 self.url(0))
     
