@@ -7,22 +7,6 @@
     @license: GNU GPL, see COPYING for details.
 
     REQUIRES docutils 0.3.3 or later
-
-    TODO: importing this module must not crash due to missing dependencies,
-          like a not installed docutils (or similar). Moin does import the
-          module e.g. when using inline:abc.txt, just to see if it supports
-          the .txt extension. If it crashes then, attachment inlining will
-          not work AT ALL in moin.
-          So the imports should be moved to a function that is invoked when
-          the parser is invoked to parse rst, not on module import.
-          Maybe also add code that can "pseudo parse" rst when docutils is
-          missing, e.g. use plain text parser. Or give some error msg that
-          docutils is missing.
-
-          See also:
-          http://moinmoin.wikiwikiweb.de/ErrorHandlingInPlugins#head-4d50f5e8a2b5b1629e63693954a5354f1d3269d0
-          
-          Moved to contrib/ until this is fixed.
 """
 
 import re
@@ -57,13 +41,39 @@ class dummyUrllib2:
     urlopen = staticmethod(urlopen)
 
 # # # All docutils imports must be contained below here
-import docutils
-from docutils.core import publish_parts
-from docutils.writers import html4css1
-from docutils.nodes import fully_normalize_name, reference
-from docutils.parsers import rst
-from docutils.parsers.rst import directives, roles
+try:
+    import docutils
+    from docutils.core import publish_parts
+    from docutils.writers import html4css1
+    from docutils.nodes import fully_normalize_name, reference
+    from docutils.parsers import rst
+    from docutils.parsers.rst import directives, roles
 # # # All docutils imports must be contained above here
+
+    ErrorParser = None # used in the case of missing docutils
+    docutils.io.FileOutput = docutils.io.FileInput = dummyIO
+except ImportError:
+    # we need to workaround this totally broken plugin interface that does
+    # not allow us to raise exceptions
+    class ErrorParser:
+        caching = 0
+        Dependencies = Dependencies # copy dependencies from module-scope
+
+        def __init__(self, raw, request, **kw):
+            self.raw = raw
+            self.request = request
+    
+        def format(self, formatter):
+            _ = self.request.getText
+            from MoinMoin.parser import plain
+            self.request.write(formatter.sysmsg(1) +
+                               formatter.rawHTML(_('Rendering of reStructured text is not possible, ''please'' install docutils.')) +
+                               formatter.sysmsg(0))
+            plain.Parser(self.raw, self.request).format(formatter)
+    
+    # Create a pseudo docutils environment
+    docutils = html4css1 = dummyUrllib2()
+    html4css1.HTMLTranslator = html4css1.Writer = object
 
 def safe_import(name, globals = None, locals = None, fromlist = None):
     mod = __builtin__.__import__(name, globals, locals, fromlist)
@@ -80,8 +90,6 @@ for i in sys.modules.keys():
         sys.modules[i].open = dummyOpen
         sys.modules[i].urllib2 = dummyUrllib2
         sys.modules[i].__import__ = safe_import
-
-docutils.io.FileOutput = docutils.io.FileInput = dummyIO
 
 # --- End of dummy-code --------------------------------------------------------
 
@@ -541,3 +549,5 @@ class MoinDirectives:
 
     macro.content = True
 
+if ErrorParser: # fixup in case of missing docutils
+    Parser = ErrorParser
