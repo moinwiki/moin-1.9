@@ -36,6 +36,8 @@ Version 1.5.0current:
       two logos: moinmoin.png without an alpha channel (IE compatible) and
       moinmoin_alpha.png which has an alpha channel and looks better on
       browsers with full .png support.
+    * Changed auth method to return a tuple (user_obj, continue_flag), see
+      comments in auth.py.
 
 Version 1.5.0beta4:
   Fixes:
