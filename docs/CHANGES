@@ -13,6 +13,12 @@ Version 1.5.0current:
     * removed old_onload reference from infobox.js
     * Fixed MoinMoin logo for IE.
     * search: fixed whitespace handling in linkto: search terms
+    * Increased stability of the tests system by outputting results to sys.stdout
+      instead of request. Note that this changes the semantics for e.g. mod_py or
+      mod_fcgi.
+    * Fixed packaging system in the case of AddRevision that does not alter the page.
+    * Fixed a few tests by moving the theme init from moin_dump to RequestCLI.
+    * Fixed a few bugs in the XML formatters (dom_xml, text_xml, xml_docbook).
 
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
