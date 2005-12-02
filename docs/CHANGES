@@ -19,6 +19,8 @@ Version 1.5.0current:
     * Fixed packaging system in the case of AddRevision that does not alter the page.
     * Fixed a few tests by moving the theme init from moin_dump to RequestCLI.
     * Fixed a few bugs in the XML formatters (dom_xml, text_xml, xml_docbook).
+    * Fixed link icons. We now just use a.xxx.before where xxx is the link scheme,
+      e.g. a.http.before. See theme's common.css.
 
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
