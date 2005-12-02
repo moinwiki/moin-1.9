@@ -351,7 +351,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             theuser.save()            
             self.request.user = theuser
 
-            if 1: # theuser.auth_method == 'moin_cookie': # XXX
+            if theuser.auth_method == 'moin_cookie':
                 self.request.setCookie()
 
             result = _("User preferences saved!")

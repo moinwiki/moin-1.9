@@ -214,9 +214,6 @@ class User:
         self.auth_username = auth_username
         self.auth_method = kw.get('auth_method', 'internal')
         self.auth_attribs = kw.get('auth_attribs', ())
-        if self.auth_method == 'internal':
-            import sys, traceback
-            traceback.print_stack(limit=4, file=sys.stderr)
                                        
         # create some vars automatically
         for tuple in self._cfg.user_form_fields:
@@ -228,7 +225,7 @@ class User:
             self.name = name
         elif auth_username: # this is needed for user_autocreate
             self.name = auth_username
-            
+
         # create checkbox fields (with default 0)
         for key, label in self._cfg.user_checkbox_fields:
             setattr(self, key, self._cfg.user_checkbox_defaults.get(key, 0))
