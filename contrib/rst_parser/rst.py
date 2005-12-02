@@ -108,20 +108,15 @@ class MoinWriter(html4css1.Writer):
             passes on unknown references to eventually be handled by the
             MoinMoin formatter.
         """
-        # TODO: Need to better document the attributes here.
-        if getattr(node, 'indirect_reference_name', None):
-            node['refuri'] = node.indirect_reference_name
-            return 1
-        elif 'ids' in node.attributes or 'id' in node.attributes:
-            # I'm pretty sure the first test should catch any targets or
-            # references with the "id[s]" attribute. Therefore, if we get to here
-            # its probably an internal link that didn't work so we let it go
-            # through as an error.
-            return 0
-        node['refuri'] = node['refname']
+        if len(node['ids']) != 0:
+            # If the node has id then its probably an internal link. Let
+            # docutils generate an error.
+            return False
+        node['refuri'] = node['name']
         del node['refname']
+        node.resolved = 1
         self.nodes.append(node)
-        return 1
+        return True
 
     wiki_resolver.priority = 001
 
@@ -394,7 +389,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             TODO: Need to handle figures similarly.
         """
         uri = node['uri'].lstrip()
-        prefix = ''		  # assume no prefix
+        prefix = ''          # assume no prefix
         if ':' in uri:
             prefix = uri.split(':',1)[0]
         # if prefix isn't URL, try to display in page
