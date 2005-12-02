@@ -3,9 +3,20 @@
     MoinMoin - modular authentication code
 
     Here are some methods moin can use in cfg.auth authentication method list.
-    The methods from that list get called in that sequence until one returns
-    a user object (not None).
-    
+    The methods from that list get called (from request.py) in that sequence.
+    The called auth method the must return a tuple (user_obj, continue_flag).
+    user_obj is either a User object or None if it could not make one.
+    continue_flag is a boolean indication whether the auth loop shall continue
+    trying other auth methods (or not).
+
+    There are the possible cases for the returned tuple:
+    user, False == we managed to authentify a user and we don't need to continue
+    user, True  == makes no sense (unused)
+    None, False == we could not authenticate the user and this is final, we
+                   don't want to try other auth methods to authenticate him
+    None, True  == we could not authentifacte the user, but we want to continue
+                   trying with other auth methods
+
     The methods give a kw arg "auth_attribs" to User.__init__ that tells
     which user attribute names are DETERMINED and set by this auth method and
     must not get changed by the user using the UserPreferences form.
@@ -30,8 +41,8 @@ def moin_cookie(request):
         u = user.User(request, id=cookie['MOIN_ID'].value,
                       auth_method='moin_cookie', auth_attribs=())
         if u.valid:
-            return u
-    return None
+            return u, False
+    return None, True
 
 
 """
@@ -78,9 +89,9 @@ def http(request):
     if u:
         u.create_or_update()
     if u and u.valid:
-        return u
+        return u, False
     else:
-        return None
+        return None, True
 
 def sslclientcert(request):
     """ authenticate via SSL client certificate """
@@ -131,12 +142,13 @@ def sslclientcert(request):
     if u:
         u.create_or_update(changed)
     if u and u.valid:
-        return u
+        return u, False
     else:
-        return None
+        return None, True
 
 def interwiki(request):
     # TODO use auth_method and auth_attribs for User object
+    # TODO use tuples as return value
     if request.form.has_key("user"):
         username = request.form["user"][0]
     else:

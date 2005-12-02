@@ -52,8 +52,8 @@ class FarmConfig(DefaultConfig):
             if u:
                 u.create_or_update(changed)
             if u and u.valid: # did we succeed making up a valid user?
-                return u # yes, return user object and stop processing auth method list
-        return None # no, return None and continue with next method in auth list
+                return u, False # yes, return user object and stop processing auth method list
+        return None, True # no, return None and continue with next method in auth list
 
     from MoinMoin.auth import moin_cookie, http
     # first try the external_cookie, then http basic auth, then the usual moin_cookie

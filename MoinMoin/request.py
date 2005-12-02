@@ -422,9 +422,12 @@ class RequestBase(object):
                 
     def get_user(self):
         for auth in self.cfg.auth:
-            the_user = auth(self)
-            if the_user: return the_user
-        return user.User(self, auth_method="request:427")
+            user_obj, continue_flag = auth(self)
+            if not continue_flag:
+                break
+        if user_obj is None:
+            user_obj = user.User(self, auth_method="request:427")
+        return user_obj
 
     def reset(self):
         """ Reset request state.
