@@ -130,8 +130,11 @@ class RequestBase(object):
             #    # no extra path after script name
             #    rootname = u""
 
-            self.args = {}
-            self.form = {}
+            #self.args = {}
+            #self.form = {}
+
+            # MOVED: this was in run() method, but moved here for auth module being able to use it
+            self.args = self.form = self.setup_args()
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
@@ -929,8 +932,10 @@ class RequestBase(object):
         try:
             self.initTheme()
             
-            self.args = self.setup_args()
-            self.form = self.args    
+            # MOVED: moved to __init__() for auth module being able to use it
+            #self.args = self.setup_args()
+            #self.form = self.args    
+            
             action = self.form.get('action',[None])[0]
 
             # Get pagename
