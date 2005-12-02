@@ -472,7 +472,7 @@ class convert_tree(visitor):
             if text[i] is self.white_space:
                 if i == 0 or i == len(text)-1:
                     del text[i]
-                elif text[i-1][-1] in (" ", "\n",):
+                elif text[i-1].endswith(" ") or text[i-1].endswith("\n"):
                     # last char of previous element is whitespace
                     del text[i]
                 elif (text[i+1] is self.white_space or
@@ -480,7 +480,7 @@ class convert_tree(visitor):
                       text[i+1] is self.new_line):
                       # or new_line
                     del text[i]
-                elif text[i+1][0] in (" ", "\n",):
+                elif text[i+1].startswith(" ") or text[i+1].startswith("\n"):
                     # first char of next element is whitespace
                     del text[i]
                 else:
@@ -492,8 +492,8 @@ class convert_tree(visitor):
                 elif i == len(text) - 1:
                     text[i] = "\n"
                     i += 1
-                elif text[i-1][-1] == "\n" or (
-                      isinstance(text[i+1], str) and text[i+1][0] == "\n"):
+                elif text[i-1].endswith("\n") or (
+                      isinstance(text[i+1], str) and text[i+1].startswith("\n")):
                     del text[i]
                 else:
                     text[i] = "\n"
