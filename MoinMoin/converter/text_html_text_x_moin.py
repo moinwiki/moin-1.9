@@ -825,9 +825,12 @@ class convert_tree(visitor):
         if node.hasAttribute("height"):
             value = node.getAttribute("height")
             result.append('tableheight="%s"' % self._check_length(value))
+        if node.hasAttribute("align"):
+            value = node.getAttribute("align")
+            result.append('tablealign="%s"' % value)
         if node.hasAttribute("style"):
             result.append('tablestyle="%s"' % node.getAttribute("style"))
-        return "".join(result)
+        return " ".join(result)
 
     def _row_style(self, node):
         result = []
