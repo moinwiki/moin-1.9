@@ -502,7 +502,10 @@ class convert_tree(visitor):
                 i += 1
 
     def visit_element(self, node):
-        name = node.localName.lower()
+        name = node.localName
+        if name is None: # not sure this can happen here (DOM comment node), but just for the case
+            return
+        name = name.lower()
         func = getattr(self, "process_" + name,  None)
         if func:
             func(node)
@@ -673,7 +676,9 @@ class convert_tree(visitor):
             self.text.append(node.data.strip('\n'))
             return
 
-        name = node.localName
+        name = node.localName # can be None for DOM Comment nodes
+        if name is None:
+            return
         func = getattr(self, "process_" + name,  None)
         if func:
             func(node)
