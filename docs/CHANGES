@@ -10,6 +10,7 @@ Version 1.5.0current:
       unknown. This stuff is only driven by ACLs now.
     * Some fixes to Despam action.
     * Fixed moin_dump (broken by some recent theme init change).
+    * Fixed a few tests by moving the theme init from moin_dump to RequestCLI.
     * removed old_onload reference from infobox.js
     * Fixed MoinMoin logo for IE.
     * search: fixed whitespace handling in linkto: search terms
@@ -17,7 +18,6 @@ Version 1.5.0current:
       instead of request. Note that this changes the semantics for e.g. mod_py or
       mod_fcgi.
     * Fixed packaging system in the case of AddRevision that does not alter the page.
-    * Fixed a few tests by moving the theme init from moin_dump to RequestCLI.
     * Fixed a few bugs in the XML formatters (dom_xml, text_xml, xml_docbook).
     * Fixed link icons. We now just use a.xxx.before where xxx is the link scheme,
       e.g. a.http.before. See theme's common.css.
@@ -36,6 +36,11 @@ Version 1.5.0current:
       userids like "geek@ANDREW.CMU.EDU" (e.g. the Kerberos domain is part of
       the id). Thanks to Brian E. Gallew for his patch, which we used for
       inspiration for user autocreation changes.
+    * Changed auth method to return a tuple (user_obj, continue_flag), see
+      comments in auth.py.
+    * auth methods now create user objects with kw args auth_method and
+      auth_attribs, so that moin knows later how the user was authenticated
+      and which user object attributes were determined by the auth method.
     * Added MoinMoin/scripts/import/IrcLogImporter.py to import supybot's
       IRC logs into a moin wiki. We use MonthCalendar compatible page names,
       so you can use the calendar for showing / navigating the logs.
@@ -44,8 +49,6 @@ Version 1.5.0current:
       two logos: moinmoin.png without an alpha channel (IE compatible) and
       moinmoin_alpha.png which has an alpha channel and looks better on
       browsers with full .png support.
-    * Changed auth method to return a tuple (user_obj, continue_flag), see
-      comments in auth.py.
 
 Version 1.5.0beta4:
   Fixes:
