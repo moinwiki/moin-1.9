@@ -503,6 +503,7 @@ class UserSettings:
             for attr in self.request.user.auth_attribs:
                 if attr == 'password':
                     uf_remove.append(attr)
+                    uf_remove.append('password2')
                 else:
                     uf_disable.append(attr)
             for key, label, type, length, textafter in self.cfg.user_form_fields:
