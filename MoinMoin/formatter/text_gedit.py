@@ -164,9 +164,12 @@ class Formatter(text_html.Formatter):
     style2attribute = {
         'width': 'width',
         'height': 'height',
+        'background' : 'bgcolor',
         'background-color' : 'bgcolor',
-        'text-align' : 'align',
-        'vertical-align' : 'valign'
+        #if this is used as table style="text-align: right", it doesn't work
+        #if it is transformed to align="right":
+        #'text-align' : 'align',
+        #'vertical-align' : 'valign'
         }
 
     def _style_to_attributes(self, attrs):
@@ -183,8 +186,8 @@ class Formatter(text_html.Formatter):
             if self.style2attribute.has_key(key):
                 attrs[self.style2attribute[key]] = value
             else:
-                unknown.append("%s:%s" %(key, value))
-        if len(unknown)>1:
+                unknown.append("%s:%s" % (key, value))
+        if unknown:
             attrs['style'] = ';'.join(unknown)
         else:
             del attrs['style']
@@ -208,7 +211,9 @@ class Formatter(text_html.Formatter):
             if not attrs:
                 attrs = {}
             else:
+                #result.append(self.rawHTML("<!-- ATTRS1: %s -->" % repr(attrs)))
                 attrs = self._checkTableAttr(attrs, 'table')
+                #result.append(self.rawHTML("<!-- ATTRS2: %s -->" % repr(attrs)))
             result.append(self.open('table', newline=1, attr=attrs))
         else:
             # Close table then div
