@@ -1047,7 +1047,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                     for t in self.clock.dump():
                         self.write('<li>%s</li>\n' % t)
                     self.write('</ul>\n')
-                self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
+                #self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
                 self.write('</body>\n</html>\n\n')
             
         except MoinMoinNoFooter:
