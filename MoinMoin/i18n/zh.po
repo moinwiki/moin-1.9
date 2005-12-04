@@ -411,7 +411,7 @@ msgid "Open editor on double click"
 msgstr "双击打开编辑器"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "跳转到最后一次访问的网页而不是首页"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "不存在的网页链接显示问号"
@@ -565,7 +565,7 @@ msgstr "需要密码, 请输入用户名和密码."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "\"%s\"的帐号被停用"
 
 msgid "Sorry, wrong password."
 msgstr "对不起, 无效密码."
@@ -577,7 +577,7 @@ msgid "Unknown user."
 msgstr "无效用户."
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "请输入用户名."

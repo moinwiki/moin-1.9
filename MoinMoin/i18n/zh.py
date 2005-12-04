@@ -243,6 +243,8 @@ To leave the editor, press the Cancel button.''':
 '''在作者信息中显示我的电子邮件地址(不是我的维基个人主页)''',
 '''Open editor on double click''':
 '''双击打开编辑器''',
+'''Jump to last visited page instead of frontpage''':
+'''跳转到最后一次访问的网页而不是首页''',
 '''Show question mark for non-existing pagelinks''':
 '''不存在的网页链接显示问号''',
 '''Show page trail''':
@@ -343,12 +345,16 @@ Contact the owner of the wiki, who can enable email.''':
 '''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
 '''Missing password. Please enter user name and password.''':
 '''需要密码, 请输入用户名和密码.''',
+'''Account "%s" is disabled.''':
+'''"%s"的帐号被停用''',
 '''Sorry, wrong password.''':
 '''对不起, 无效密码.''',
 '''Bad relogin URL.''':
 '''无效的登录URL.''',
 '''Unknown user.''':
 '''无效用户.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''请到用户设置(UserPreferences)修改您的设置或创建新的帐号.''',
 '''Empty user name. Please enter a user name.''':
 '''请输入用户名.''',
 '''This user name already belongs to somebody else.''':

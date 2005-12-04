@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-18 20:41+0100\n"
-"PO-Revision-Date: 2005-11-29 23:20+0100\n"
+"PO-Revision-Date: 2005-11-30 23:50+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
@@ -291,10 +291,10 @@ msgstr "## kopia zapasowa strony \"%(pagename)s\" wprowadzona %(date)s"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr "Strona nie może zostać zamknięta. Niespodziewany błąd (errno=%d)."
+msgstr "Strony nie można było zablokować. Niespodziewany błąd (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr "Strona nie może zostać zamknięta. Brakuje bieżącego pliku?"
+msgstr "Strony nie można było zablokować. Brakuje pliku 'current'?"
 
 msgid "You are not allowed to edit this page!"
 msgstr "Nie możesz zmieniać zawartości tej strony!"
@@ -365,8 +365,8 @@ msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"Ta strona jest obecnie ''zablokowana'' w celu edycji przez %(owner)sdo  %"
-"(timestamp)s, to jest przez %(mins_valid)d minut."
+"Ta strona jest obecnie ''zablokowana'' w celu edycji przez %(owner)s do "
+"%(timestamp)s, to jest przez %(mins_valid)d minut."
 
 #, python-format
 msgid ""
@@ -491,7 +491,7 @@ msgid ""
 "space between words. Group page name is not allowed."
 msgstr ""
 "Nieprawidłowy identyfikator czytelnika {{{'%s'}}}.\n"
-"Identyfikator może zawierać jakikolwiek znak unikodu, z opcjonalnie \n"
+"Identyfikator może zawierać alfanumeryczne znaki unikodu, z opcjonalnie\n"
 "jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona."
 
 #, python-format
@@ -527,6 +527,11 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"Identyfikator czytelnika: %s\n"
+"\n"
+"Hasło czytelnika: %s\n"
+"\n"
+"URL logowania: %s/?action=userform&uid=%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -538,10 +543,16 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"Ktoś zlecił wysłanie Twoich danych czytelnika na ten adres e-mail.\n"
+"\n"
+"Jeśli zapomniałeś swego hasła, użyj tych danych wpisując w pole hasła\n"
+"na stronie logowania DOKŁADNIE TO CO PONIŻEJ (skopiuj i wklej).\n"
+"\n"
+"Wskazane jest, aby po zalogowaniu się ustawić inne, nowe hasło.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s] Twoje dane czytelnika"
 
 msgid "Cookie deleted. You are now logged out."
 msgstr "Ciasteczko skasowane. Wylogowano."
@@ -611,7 +622,7 @@ msgstr "Konto utworzone!"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "wystrój '%(theme_name)s' nie może zostać załadowany!"
+msgstr "Wystrój '%(theme_name)s' nie może zostać załadowany!"
 
 msgid "User preferences saved!"
 msgstr "Ustawienia użytkownika zapisane!"
@@ -659,7 +670,7 @@ msgid "Preferred language"
 msgstr "Ulubiony język"
 
 msgid "General options"
-msgstr "Głowne opcje"
+msgstr "Główne opcje"
 
 msgid "Quick links"
 msgstr "Szybkie skróty"
@@ -732,7 +743,7 @@ msgid "Size"
 msgstr "Rozmiar"
 
 msgid "Diff"
-msgstr "Róznice"
+msgstr "Różnice"
 
 msgid "Editor"
 msgstr "Edytor"
@@ -741,7 +752,7 @@ msgid "Comment"
 msgstr "Komentarz"
 
 msgid "view"
-msgstr "Zobacz"
+msgstr "zobacz"
 
 msgid "raw"
 msgstr "surowy"
@@ -813,7 +824,7 @@ msgstr ""
 "Skontaktuj się z właścicielem, który może tę opcję włączyć."
 
 msgid "You must log in to use subscribtions."
-msgstr "Musisz się zalogować"
+msgstr "Musisz się zalogować, aby móc korzystać z subskrybcji."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
@@ -824,7 +835,7 @@ msgid "Your subscribtion to this page has been removed."
 msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Nie można usunąć subskrybcji wyrażenia skończonego!"
+msgstr "Nie można usunąć subskrybcji wyrażenia regularnego!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
@@ -956,7 +967,7 @@ msgstr "Nieprawidłowy datownik binarny '%s'"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Spodziewane \"=\" aby podążyć za \"%(token)s\""
+msgstr "Za \"%(token)s\" powinno być \"=\""
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
@@ -1170,7 +1181,7 @@ msgid "Really delete this page?"
 msgstr "Czy na pewno usunąć niniejszą stronę?"
 
 msgid "Delete"
-msgstr "Skasować?"
+msgstr "Usunąć"
 
 msgid "Optional reason for the deletion"
 msgstr "Opcjonalna przyczyna usunięcia"
@@ -1261,8 +1272,7 @@ msgstr "Pełna lista odnośników dla \"%s\""
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony."
+msgstr "Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1384,7 +1394,7 @@ msgid "%(errortype)s processing error"
 msgstr "błąd przetwarzania %(errortype)s"
 
 msgid "Views/day"
-msgstr "Odczytów/dzień"
+msgstr "Odsłon/dzień"
 
 msgid "Edits/day"
 msgstr "Edycji/dzień"
@@ -1508,7 +1518,7 @@ msgid "Edit (GUI)"
 msgstr "Edytuj (graficznie)"
 
 msgid "Immutable Page"
-msgstr "Strona nie zmieniona"
+msgstr "Strona statyczna"
 
 msgid "Remove Link"
 msgstr "Usuń skrót"
@@ -1527,7 +1537,7 @@ msgid "EditText"
 msgstr "Edytuj tekst"
 
 msgid "Immutable page"
-msgstr "Strona nie zmieniona"
+msgstr "Strona statyczna"
 
 msgid "Or try one of these actions:"
 msgstr "Lub spróbuj wykonać: "
@@ -1585,7 +1595,7 @@ msgid "SiteNavigation"
 msgstr "NawigacjaWitryny"
 
 msgid "HelpContents"
-msgstr "KontekstPomocy"
+msgstr "PomocSpisTreści"
 
 msgid "HelpOnFormatting"
 msgstr "PomocFormatowania"
@@ -1597,7 +1607,7 @@ msgid "WikiLicense"
 msgstr "LicencjaWiki"
 
 msgid "MissingPage"
-msgstr "ZagubionaStrona"
+msgstr "NieistniejącaStrona"
 
 msgid "Mon"
 msgstr "pon"
