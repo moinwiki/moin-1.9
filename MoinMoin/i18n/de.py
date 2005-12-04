@@ -243,6 +243,8 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Veröffentliche meine E-Mail-Adresse (nicht meine Wiki-Homepage) in der Autoren-Info''',
 '''Open editor on double click''':
 '''Editor per Doppelklick öffnen''',
+'''Jump to last visited page instead of frontpage''':
+'''Springe zur letztbesuchten Seite anstatt zur Startseite''',
 '''Show question mark for non-existing pagelinks''':
 '''Verweise auf unbekannte Seiten mit Fragezeichen markieren''',
 '''Show page trail''':
@@ -344,12 +346,16 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzernamen und Passwort ein.''',
 '''Missing password. Please enter user name and password.''':
 '''Fehlendes Passwort. Bitte Benutzername und Passwort eingeben.''',
+'''Account "%s" is disabled.''':
+'''Konto "%s" ist deaktiviert.''',
 '''Sorry, wrong password.''':
 '''Falsches Passwort.''',
 '''Bad relogin URL.''':
 '''Ungültige Relogin-URL.''',
 '''Unknown user.''':
 '''Unbekannter Benutzer.''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein Konto zu erzeugen.''',
 '''Empty user name. Please enter a user name.''':
 '''Leerer Benutzername, bitte geben Sie einen Benutzernamen ein.''',
 '''This user name already belongs to somebody else.''':
@@ -794,6 +800,12 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''XML-Export des Wiki-Inhalts herunter laden''',
 '''No wanted pages in this wiki.''':
 '''Es existieren keine gewünschten Seiten in diesem Wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Anzeigen von reStructured Text ist nicht möglich, bitte installieren Sie docutils.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maximale Anzahl erlaubter Includes überschritten**''',
+'''**Could not find the referenced page: %s**''':
+'''**Konnte die referenzierte Seite nicht finden: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Erwartete "%(wanted)s" nach "%(key)s", bekam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

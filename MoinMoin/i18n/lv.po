@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-09-07 00:00+0200\n"
 "Last-Translator: Viktors Kalnacs <v.kalnacs@datapro.lv>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -1366,6 +1366,17 @@ msgstr "Lejupielādēt XML eksportu no šī wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Nepieciešams \"%(wanted)s\" pēc \"%(key)s\", nevis \"%(token)s\""
@@ -1689,12 +1700,6 @@ msgstr "Pareizrakstība"
 #~ msgstr ""
 #~ "Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet "
 #~ "ierakstus, kas saskan ar šo lapu."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
 
 #~ msgid "Quicklink"
 #~ msgstr "Ātrsaite"

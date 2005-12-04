@@ -798,6 +798,10 @@ Try a different name.''':
 '''下载本维基的XML输出''',
 '''No wanted pages in this wiki.''':
 '''本维基中没有未定义的网页.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**太多的包含(include)**''',
+'''**Could not find the referenced page: %s**''':
+'''**未能找到引用的网页: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"后面应该接"%(wanted)s", 但却接着"%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

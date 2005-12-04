@@ -654,6 +654,10 @@ Probeer een andere naam.''',
 '''Download een export naar XML van deze wiki''',
 '''No wanted pages in this wiki.''':
 '''Geen gewenste pagina\'s in deze wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maximum aantal toegestane includes overschreden**''',
+'''**Could not find the referenced page: %s**''':
+'''**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Er werd "%(wanted)s" na "%(key)s" verwacht, er kwam "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

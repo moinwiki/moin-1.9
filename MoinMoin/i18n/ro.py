@@ -697,6 +697,10 @@ Try a different name.''':
 '''Descărcare export XML pentru acest wiki''',
 '''No wanted pages in this wiki.''':
 '''Nici o pagină dorită în acest wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Numărul maxim de incluziuni acceptate a fost depăşit**''',
+'''**Could not find the referenced page: %s**''':
+'''**Pagina de referinţă %s nu a putut fi găsită**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Trebuie "%(wanted)s" după "%(key)s", s-a primit "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

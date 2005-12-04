@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1330,6 +1330,17 @@ msgstr "下载本维基的XML输出"
 msgid "No wanted pages in this wiki."
 msgstr "本维基中没有未定义的网页."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**太多的包含(include)**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**未能找到引用的网页: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "\"%(key)s\"后面应该接\"%(wanted)s\", 但却接着\"%(token)s\""
@@ -1640,12 +1651,6 @@ msgstr "拼写检查"
 #~ "To unsubscribe, go to your profile and delete the item matching this page "
 #~ "from the subscription list."
 #~ msgstr "如果要取消订阅, 请修改您的用户设置, 并从订阅清单中删除匹配此页的项."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**太多的包含(include)**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**未能找到引用的网页: %s**"
 
 #~ msgid "Quicklink"
 #~ msgstr "快捷链接"

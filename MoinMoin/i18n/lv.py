@@ -797,6 +797,10 @@ Pamēģiniet citu nosaukumu.''',
 '''Lejupielādēt XML eksportu no šī wiki''',
 '''No wanted pages in this wiki.''':
 '''Šajā viki pieprasīto lapu nav.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**''',
+'''**Could not find the referenced page: %s**''':
+'''**Nevaru atrast lapu pēc atsauces: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Nepieciešams "%(wanted)s" pēc "%(key)s", nevis "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

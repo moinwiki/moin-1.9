@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -434,7 +434,7 @@ msgid "Open editor on double click"
 msgstr "Editor per Doppelklick öffnen"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Springe zur letztbesuchten Seite anstatt zur Startseite"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Verweise auf unbekannte Seiten mit Fragezeichen markieren"
@@ -598,7 +598,7 @@ msgstr "Fehlendes Passwort. Bitte Benutzername und Passwort eingeben."
 
 #, python-format
 msgid "Account \"%s\" is disabled."
-msgstr ""
+msgstr "Konto \"%s\" ist deaktiviert."
 
 msgid "Sorry, wrong password."
 msgstr "Falsches Passwort."
@@ -611,6 +611,8 @@ msgstr "Unbekannter Benutzer."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein "
+"Konto zu erzeugen."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Leerer Benutzername, bitte geben Sie einen Benutzernamen ein."
@@ -1397,6 +1399,19 @@ msgstr "XML-Export des Wiki-Inhalts herunter laden"
 msgid "No wanted pages in this wiki."
 msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+"Anzeigen von reStructured Text ist nicht möglich, bitte installieren Sie "
+"docutils."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximale Anzahl erlaubter Includes überschritten**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Erwartete \"%(wanted)s\" nach \"%(key)s\", bekam \"%(token)s\""
@@ -1677,52 +1692,3 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
-
-#~ msgid "Remember last page visited"
-#~ msgstr "Zuletzt besuchte Seite merken"
-
-#~ msgid "Parent Page"
-#~ msgstr "Übergeordnete Seite"
-
-#~ msgid "Trail"
-#~ msgstr "Trail"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Sie haben noch kein Profil angelegt. Wählen Sie BenutzerEinstellungen in "
-#~ "der oberen rechten Ecke, um ein Profil anzulegen."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet. Bitte "
-#~ "kontaktieren Sie den Eigentümer des Wiki, der dann entweder die "
-#~ "Mailfunktionen einschalten oder das \"Abonnieren\"-Symbol entfernen kann."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Sie haben keine E-Mail-Adresse in Ihrem Profil eingegeben. Wählen Sie "
-#~ "Ihren Namen (BenutzerEinstellungen) in der rechten oberen Ecke an und "
-#~ "geben Sie eine gültige E-Mail-Adresse ein."
-
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Um das Abo zu kündigen, muss der auf die Seite passende Eintrag aus der "
-#~ "Abo-Liste der persönlichen Einstellungen entfernt werden."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Maximale Anzahl erlaubter Includesi überschritten**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
-
-#~ msgid "Quicklink"
-#~ msgstr "Expressverweis"

@@ -793,6 +793,10 @@ Try a different name.''':
 '''このwikiのXML exportをダウンロード''',
 '''No wanted pages in this wiki.''':
 '''このwikiに参照先がないページはありません。''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**インクルードの許容数を越えました**''',
+'''**Could not find the referenced page: %s**''':
+'''**参照されたページ(%s)が見つかりませんでした**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"の後には"%(wanted)s"が必要です("%(token)s"が指定されました)。''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

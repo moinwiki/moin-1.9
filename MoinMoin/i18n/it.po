@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -1373,6 +1373,17 @@ msgstr "Scarica una versione XML di questo wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Non ci sono pagine \"non scritte\" in questo wiki."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Superato il limite massimo di inclusioni consentite**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Impossibile trovare la pagina referenziata: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Atteso \"%(wanted)s\" per \"%(key)s\", trovato \"%(token)s\""
@@ -1702,12 +1713,6 @@ msgstr "ControlloOrtografico"
 #~ msgstr ""
 #~ "Per rimuoverti, vai nel tuo profilo e cancella questa pagina dalla "
 #~ "listadelle pagine a cui sei abbonato."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Superato il limite massimo di inclusioni consentite**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Impossibile trovare la pagina referenziata: %s**"
 
 #, fuzzy
 #~ msgid "Quicklink"

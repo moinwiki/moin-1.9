@@ -793,6 +793,10 @@ Kokeile eri nimeä.''',
 '''Lataa tämän wikin XML-vienti''',
 '''No wanted pages in this wiki.''':
 '''Tässä wikissä ei ole toivottu sivuja.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Sisällytysten maksimimäärä ylitetty**''',
+'''**Could not find the referenced page: %s**''':
+'''**Viitattua sivua ei löydy: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Odotettiin "%(wanted)s" "%(key)s":n jälkeen, saatiin "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

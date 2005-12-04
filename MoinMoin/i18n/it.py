@@ -650,6 +650,10 @@ Prova un nome differente.''',
 '''Scarica una versione XML di questo wiki''',
 '''No wanted pages in this wiki.''':
 '''Non ci sono pagine "non scritte" in questo wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Superato il limite massimo di inclusioni consentite**''',
+'''**Could not find the referenced page: %s**''':
+'''**Impossibile trovare la pagina referenziata: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Atteso "%(wanted)s" per "%(key)s", trovato "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

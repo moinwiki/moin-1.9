@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-11-20 00:10+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1363,6 +1363,17 @@ msgstr "このwikiのXML exportをダウンロード"
 msgid "No wanted pages in this wiki."
 msgstr "このwikiに参照先がないページはありません。"
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**インクルードの許容数を越えました**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**参照されたページ(%s)が見つかりませんでした**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1682,12 +1693,6 @@ msgstr "スペルチェック"
 #~ msgstr ""
 #~ "購読を停止するには、ユーザプロファイルのページにて、このページにマッチする"
 #~ "項目を購読リストから削除してください。"
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**インクルードの許容数を越えました**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**参照されたページ(%s)が見つかりませんでした**"
 
 #~ msgid "Quicklink"
 #~ msgstr "クイックリンク"
