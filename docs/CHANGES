@@ -22,6 +22,7 @@ Version 1.5.0current:
     * Fixed link icons. We now just use a.xxx.before where xxx is the link scheme,
       e.g. a.http.before. See theme's common.css.
     * Hopefully fixed some issue with non-ASCII attachment filenames.
+    * Workaround for Opera 8.5 making silly "No addition" categories.
 
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it

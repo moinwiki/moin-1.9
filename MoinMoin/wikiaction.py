@@ -589,7 +589,7 @@ def do_edit(pagename, request):
     # a full interface for categories (add, delete) or just add them by
     # markup.
     
-    if category:
+    if category and category != _('<No addition>', formatted=False): # opera 8.5 needs this
         # strip trailing whitespace
         savetext = savetext.rstrip()
 
