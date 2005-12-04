@@ -23,6 +23,8 @@ Version 1.5.0current:
       e.g. a.http.before. See theme's common.css.
     * Hopefully fixed some issue with non-ASCII attachment filenames.
     * Workaround for Opera 8.5 making silly "No addition" categories.
+    * Do not show GUI editor for non-wiki format pages, because we only have a
+      converter from html to wiki right now.
 
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
