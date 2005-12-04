@@ -49,6 +49,7 @@ Version 1.5.0current:
       two logos: moinmoin.png without an alpha channel (IE compatible) and
       moinmoin_alpha.png which has an alpha channel and looks better on
       browsers with full .png support.
+    * Allow a .zip file to have a directory in it if it is the only one.
 
 Version 1.5.0beta4:
   Fixes:

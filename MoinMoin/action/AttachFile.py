@@ -22,6 +22,7 @@
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
     @copyright: 2005 R. Bauer
     @copyright: 2005 MoinMoin:AlexanderSchremmer
+    @copyright: 2005 DiegoOngaro at ETSZONE (diego@etszone.com)
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -280,6 +281,26 @@ def _get_files(request, pagename):
 def _get_filelist(request, pagename):
     return _build_filelist(request, pagename, 1, 0)
 
+def _subdir_exception(zf):
+    """
+    Checks for the existance of one common subdirectory shared among
+    all files in the zip file. If this is the case, returns a dict of
+    original names to modified names so that such files can be unpacked
+    as the user would expect.
+    """
+
+    b = zf.namelist()
+    if not '/' in b[0]:
+        return False #No directory
+    slashoffset = b[0].index('/')
+    directory = b[0][:slashoffset]
+    for origname in b:
+        if origname.rfind('/') != slashoffset or origname[:slashoffset] != directory:
+            return False #Multiple directories or different directory
+    names = {}
+    for origname in b:
+        names[origname] = origname[slashoffset+1:]
+    return names #Returns dict of {origname: safename}
 
 def error_msg(pagename, request, msg):
     Page(request, pagename).send_page(request, msg=msg)
@@ -671,9 +692,15 @@ def unzip_file(pagename, request):
             zf = zipfile.ZipFile(fpath)
             sum_size_over_all_valid_files = 0.0
             count_valid_files = 0
-            for name in zf.namelist():
-                if valid_pathname(name):
-                    sum_size_over_all_valid_files += zf.getinfo(name).file_size
+            namelist = _subdir_exception(zf)
+            if not namelist: #if it's not handled by _subdir_exception()
+                #Convert normal zf.namelist() to {origname:finalname} dict
+                namelist = {}
+                for name in zf.namelist():
+                    namelist[name] = name
+            for (origname, finalname) in namelist.iteritems():
+                if valid_pathname(finalname):
+                    sum_size_over_all_valid_files += zf.getinfo(origname).file_size
                     count_valid_files += 1
 
             if sum_size_over_all_valid_files > available_attachments_file_space:
@@ -692,14 +719,14 @@ def unzip_file(pagename, request):
                                   available_attachments_file_count) }
             else:
                 valid_name = False
-                for name in zf.namelist():
-                    if valid_pathname(name):
-                        zi = zf.getinfo(name)
+                for (oirgname, finalname) in namelist.iteritems():
+                    if valid_pathname(finalname):
+                        zi = zf.getinfo(origname)
                         if zi.file_size < single_file_size:
-                            new_file = getFilename(request, pagename, name)
+                            new_file = getFilename(request, pagename, finalname)
                             if not os.path.exists(new_file):
                                 outfile = open(new_file, 'wb')
-                                outfile.write(zf.read(name))
+                                outfile.write(zf.read(origname))
                                 outfile.close()
                                 # it's not allowed to zip a zip file so it is dropped
                                 if zipfile.is_zipfile(new_file):
@@ -707,7 +734,7 @@ def unzip_file(pagename, request):
                                 else:
                                     valid_name = True
                                     os.chmod(new_file, 0666 & config.umask)
-                                    _addLogEntry(request, 'ATTNEW', pagename, name)
+                                    _addLogEntry(request, 'ATTNEW', pagename, finalname)
 
                 if valid_name:
                     msg=_("Attachment '%(filename)s' unzipped.") % {'filename': filename}
