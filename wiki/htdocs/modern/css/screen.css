@@ -246,9 +246,6 @@ textarea {
     margin: 0;
     padding: 0 8px;
     white-space: nowrap;
-    height: 2.2em;  /* this has to be adapted to user's font size! fragile!
-                       It is differently broken depending on the stuff following it.
-                       2em looks good on MoinMoin:AnyPage, but not on RecentChanges! */
     background: white;
     font-size: 0.8em; /* 13px */
 }
@@ -259,7 +256,6 @@ textarea {
 }
 
 .editbar li {
-    float: left;
     display: inline;
     padding: 0;
     margin: 4px 6px;
