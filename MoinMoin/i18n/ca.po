@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1384,6 +1384,17 @@ msgstr "Descarregueu una exportació en XML d'aquest wiki"
 msgid "No wanted pages in this wiki."
 msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**S'ha superat el nombre màxim de includes permès**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**No s'ha trobat la pàgina referenciada: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1702,12 +1713,6 @@ msgstr "Comprovació ortogràfica"
 #~ msgstr ""
 #~ "Per a desubscriure, aneu al vostre perfil i suprimiu l'element que "
 #~ "concorde amb aquesta pàgina de la pàgina de subscripcions."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**S'ha superat el nombre màxim de includes permès**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**No s'ha trobat la pàgina referenciada: %s**"
 
 #~ msgid "Quicklink"
 #~ msgstr "Enllaç ràpid"

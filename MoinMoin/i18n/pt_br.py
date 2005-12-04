@@ -801,6 +801,10 @@ Tente um nome diferente.''',
 '''Baixar arquivo XML exportado desta wiki''',
 '''No wanted pages in this wiki.''':
 '''Nenhuma página solicitada neste wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**O número máximo de inserções permitidas foi excedida**''',
+'''**Could not find the referenced page: %s**''':
+'''**Não foi possível encontrar a página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Esperado "%(wanted)s" depois de "%(key)s", obtido "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

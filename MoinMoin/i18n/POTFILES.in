@@ -59,6 +59,7 @@ macro/WantedPages.py
 
 parser/plain.py
 parser/python.py
+parser/rst.py
 parser/wiki.py
 parser/xslt.py
 

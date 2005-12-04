@@ -674,6 +674,10 @@ Try a different name.''':
 '''יצא את תוכן הוויקי במבנה XML''',
 '''No wanted pages in this wiki.''':
 '''אין בוויקי הזה קישורים לדפים חסרים.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**מספר גדול מידי של קבצים מוכללים**''',
+'''**Could not find the referenced page: %s**''':
+'''**אין אפשרות למצוא את הדף המוכלל: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''ציפיתי ל–"%(wanted)s" לאחר "%(key)s", קיבלתי "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

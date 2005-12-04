@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-11-11 07:18+0500\n"
 "Last-Translator: Igor TAmara <igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -1382,6 +1382,17 @@ msgstr "Bajar XML exportado de este wiki"
 msgid "No wanted pages in this wiki."
 msgstr "No existen páginas-por-crear en este wiki."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Excedido el número máximo de 'includes' permitidos"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**No se encontró la página referenciada: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr ""
@@ -1703,12 +1714,6 @@ msgstr "CorrecciónOrtográfica"
 #~ msgstr ""
 #~ "Para cancelar su suscripción, visite su Perfil y elimine esta página de "
 #~ "su lista de suscripción."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Excedido el número máximo de 'includes' permitidos"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**No se encontró la página referenciada: %s**"
 
 #~ msgid "Quicklink"
 #~ msgstr "Enlaces rápidos"

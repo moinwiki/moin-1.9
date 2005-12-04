@@ -655,6 +655,10 @@ Tente um nome diferente.''',
 '''Download do XML exportado deste wiki''',
 '''No wanted pages in this wiki.''':
 '''Não existem páginas-a-criar neste wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Excedido o número máximo de \'inclusões\' permitidas''',
+'''**Could not find the referenced page: %s**''':
+'''**Não foi encontrada a página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Espere "%(wanted)s" depois de "%(key)s", encontrado "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

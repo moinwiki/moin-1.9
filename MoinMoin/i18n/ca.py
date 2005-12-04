@@ -749,6 +749,10 @@ Proveu amb un nom diferent.''',
 '''Descarregueu una exportació en XML d\'aquest wiki''',
 '''No wanted pages in this wiki.''':
 '''No hi ha cap pàgina dessitjada en aquest wiki.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**S\'ha superat el nombre màxim de includes permès**''',
+'''**Could not find the referenced page: %s**''':
+'''**No s\'ha trobat la pàgina referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''S\'esperava «%(wanted)s» després de «%(key)s», s\'ha obtingut «%(token)s»''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1363,6 +1363,17 @@ msgstr "Lataa tämän wikin XML-vienti"
 msgid "No wanted pages in this wiki."
 msgstr "Tässä wikissä ei ole toivottu sivuja."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Sisällytysten maksimimäärä ylitetty**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Viitattua sivua ei löydy: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Odotettiin \"%(wanted)s\" \"%(key)s\":n jälkeen, saatiin \"%(token)s\""
@@ -1683,12 +1694,6 @@ msgstr "OikoLue"
 #~ msgstr ""
 #~ "Poistaaksesi tilauksen, mene tietoihisi ja poista tämä sivu tilausten "
 #~ "luettelosta."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Sisällytysten maksimimäärä ylitetty**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Viitattua sivua ei löydy: %s**"
 
 #, fuzzy
 #~ msgid "Quicklink"

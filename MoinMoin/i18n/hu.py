@@ -664,6 +664,10 @@ Próbáljon más nevet adni a lapnak.''',
 '''A wiki XML-exportjának letöltése''',
 '''No wanted pages in this wiki.''':
 '''Ebben a wikiben nincsenek kívánt lapok.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''Az beágyazott dokumentumok (include-ok) száma több, mint amennyi engedélyezett**''',
+'''**Could not find the referenced page: %s**''':
+'''**A hivatkozott lap (%s) nem található**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(wanted)s" helyett "%(token)s" szerepel "%(key)s" után''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

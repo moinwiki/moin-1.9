@@ -794,6 +794,12 @@ Try a different name.''',
 '''Download XML export of this wiki''',
 '''No wanted pages in this wiki.''':
 '''No wanted pages in this wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Rendering of reStructured text is not possible, please install docutils.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maximum number of allowed includes exceeded**''',
+'''**Could not find the referenced page: %s**''':
+'''**Could not find the referenced page: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

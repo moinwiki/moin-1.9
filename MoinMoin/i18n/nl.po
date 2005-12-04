@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1375,6 +1375,17 @@ msgstr "Download een export naar XML van deze wiki"
 msgid "No wanted pages in this wiki."
 msgstr "Geen gewenste pagina's in deze wiki."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximum aantal toegestane includes overschreden**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "Er werd \"%(wanted)s\" na \"%(key)s\" verwacht, er kwam \"%(token)s\""
@@ -1698,12 +1709,6 @@ msgstr "Spellingscontrole"
 #~ msgstr ""
 #~ "Om op te zeggen, ga naar uw profiel en verwijder deze pagina uit de lijst "
 #~ "met abonnementen."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**Maximum aantal toegestane includes overschreden**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**Kan pagina waarnaar gerefereerd wordt niet vinden: %s**"
 
 #, fuzzy
 #~ msgid "Quicklink"

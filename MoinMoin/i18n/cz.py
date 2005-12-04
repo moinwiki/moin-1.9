@@ -746,6 +746,10 @@ Zkuste jiné jméno.''',
 '''Download XML exportu této wiki''',
 '''No wanted pages in this wiki.''':
 '''V této wiki neexitují žádné žádoucí stránky.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Překročen maximální počet povolených includes**''',
+'''**Could not find the referenced page: %s**''':
+'''**Nemohu najít odkazovanou stránku: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Očekáváno "%(wanted)s" po "%(key)s", získáno "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

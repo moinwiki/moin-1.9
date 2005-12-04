@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-18 20:41+0100\n"
+"POT-Creation-Date: 2005-12-04 22:17+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1328,6 +1328,17 @@ msgstr "יצא את תוכן הוויקי במבנה XML"
 msgid "No wanted pages in this wiki."
 msgstr "אין בוויקי הזה קישורים לדפים חסרים."
 
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**מספר גדול מידי של קבצים מוכללים**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
+
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
 msgstr "ציפיתי ל–\"%(wanted)s\" לאחר \"%(key)s\", קיבלתי \"%(token)s\""
@@ -1649,12 +1660,6 @@ msgstr "בדוק איות"
 #~ msgstr ""
 #~ "לביטול המנוי גשו לדף \"העדפות משתמש\" ומחקו את שם הדף מרשימת הדפים "
 #~ "המנויים."
-
-#~ msgid "**Maximum number of allowed includes exceeded**"
-#~ msgstr "**מספר גדול מידי של קבצים מוכללים**"
-
-#~ msgid "**Could not find the referenced page: %s**"
-#~ msgstr "**אין אפשרות למצוא את הדף המוכלל: %s**"
 
 #, fuzzy
 #~ msgid "Quicklink"
