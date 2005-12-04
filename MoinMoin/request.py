@@ -1794,25 +1794,41 @@ class RequestModPy(RequestBase):
         except Exception, err:
             self.fail(err)
             
-    def rewriteURI(self, env):
-        """ Use PythonOption directive to rewrite URI
+    def fixURI(self, env):
+        """ Fix problems with script_name and path_info using
+        PythonOption directive to rewrite URI.
         
         This is needed when using Apache 1 or other server which does
-        not support adding custom headers per request. With mod python we
-        can the PythonOption directive:
+        not support adding custom headers per request. With mod_python we
+        can use the PythonOption directive:
         
             <Location /url/to/mywiki/>
                 PythonOption X-Moin-Location /url/to/mywiki/
-            </location>            
+            </location>
+
+        Note that *neither* script_name *nor* path_info can be trusted
+        when Moin is invoked as a mod_python handler with apache1, so we
+        must build both using request_uri and the provided PythonOption.
         """
         # Be compatible with release 1.3.5 "Location" option 
         # TODO: Remove in later release, we should have one option only.
         old_location = 'Location'
-        options = self.mpyreq.get_options()
+        options_table = self.mpyreq.get_options()
+        if not hasattr(options_table, 'get'):
+            options = dict(options_table)
+        else:
+            options = options_table
         location = options.get(self.moin_location) or options.get(old_location)
         if location:
             env[self.moin_location] = location
-        RequestBase.rewriteURI(self, env)
+            # Try to recreate script_name and path_info from request_uri.
+            import urlparse
+            scriptAndPath = urlparse.urlparse(self.request_uri)[2]
+            self.script_name = location.rstrip('/')
+            path = scriptAndPath.replace(self.script_name, '', 1)            
+            self.path_info = wikiutil.url_unquote(path, want_unicode=False)
+
+        RequestBase.fixURI(self, env)
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Override to use mod_python.util.FieldStorage 
