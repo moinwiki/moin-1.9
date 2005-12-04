@@ -57,6 +57,7 @@ class Page:
         self._raw_body_modified = 0
         self.hilite_re = None
         self.language = None
+        self.pi_format = None
 
         self.reset()
 

@@ -1042,6 +1042,13 @@ actionsMenuInit('%(label)s');
                 self.attachmentsLink(page),
                 self.actionsMenu(page),]
 
+    def guiworks(self, page):
+        """ Return whether the gui editor / converter can work for that page.
+
+            The GUI editor currently only works for wiki format.
+        """
+        return page.pi_format == 'wiki'
+        
     def editorLink(self, page):
         """ Return a link to the editor 
         
@@ -1057,16 +1064,21 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         params = (wikiutil.quoteWikinameURL(page.page_name) +
                   '?action=edit&amp;editor=')
-
-        if self.showBothEditLinks():
+        
+        guiworks = self.guiworks(page)
+        if self.showBothEditLinks() and guiworks:
             text = _('Edit (Text)', formatted=False)
             params = params + 'text'
             attrs = 'name="texteditlink"'
         else:
             text = _('Edit', formatted=False)
-            # 'textonly' will be upgraded dynamically to 'guipossible' by JS
-            params = params + 'textonly'
-            attrs='name="editlink"'
+            if guiworks:
+                # 'textonly' will be upgraded dynamically to 'guipossible' by JS
+                params = params + 'textonly'
+                attrs = 'name="editlink"'
+            else:
+                params = params + 'text'
+                attrs = 'name="texteditlink"'
         
         return wikiutil.link_tag(self.request, params, text, attrs=attrs)
 
@@ -1086,7 +1098,8 @@ actionsMenuInit('%(label)s');
         page = d['page']
         if not (page.isWritable() and
                 self.request.user.may.write(page.page_name) and
-                self.showBothEditLinks()):
+                self.showBothEditLinks() and
+                self.guiworks(page)):
             return ''
 
         _ = self.request.getText
