@@ -1,7 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version 1.5.0current:
+Version 1.5.0beta5:
   Fixes:
     * Fixed a minor user interface bug: it showed RenamePage and DeletePage
       actions in the menu if you only had write rights and then complained

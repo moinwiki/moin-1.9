@@ -13,7 +13,7 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release  = '1.5.0beta4'
+release  = '1.5.0beta5'
 revision = patchlevel
 
 if __name__ == '__main__':
