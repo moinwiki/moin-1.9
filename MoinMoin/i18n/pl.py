@@ -165,9 +165,9 @@ Następująca strona została zaktualizowana przez %(editor)s:
 '''## backup of page "%(pagename)s" submitted %(date)s''':
 '''## kopia zapasowa strony "%(pagename)s" wprowadzona %(date)s''',
 '''Page could not get locked. Unexpected error (errno=%d).''':
-'''Strona nie może zostać zamknięta. Niespodziewany błąd (errno=%d).''',
+'''Strony nie można było zablokować. Niespodziewany błąd (errno=%d).''',
 '''Page could not get locked. Missing \'current\' file?''':
-'''Strona nie może zostać zamknięta. Brakuje bieżącego pliku?''',
+'''Strony nie można było zablokować. Brakuje pliku \'current\'?''',
 '''You are not allowed to edit this page!''':
 '''Nie możesz zmieniać zawartości tej strony!''',
 '''You cannot save empty pages.''':
@@ -208,7 +208,7 @@ możesz zniszczyć pracę innych, co może grozić wzrostem poziomu agresji!\'\'
 '''Use the Preview button to extend the locking period.''':
 '''Użyj przycisku podglądu aby przedłużyć czas blokady.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''Ta strona jest obecnie \'\'zablokowana\'\' w celu edycji przez %(owner)sdo  %(timestamp)s, to jest przez %(mins_valid)d minut.''',
+'''Ta strona jest obecnie \'\'zablokowana\'\' w celu edycji przez %(owner)s do %(timestamp)s, to jest przez %(mins_valid)d minut.''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
@@ -287,7 +287,7 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
 '''Nieprawidłowy identyfikator czytelnika {{{\'%s\'}}}.
-Identyfikator może zawierać jakikolwiek znak unikodu, z opcjonalnie 
+Identyfikator może zawierać alfanumeryczne znaki unikodu, z opcjonalnie
 jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''You are not allowed to do %s on this page.''':
 '''Nie możesz wykonać %s na tej stronie.''',
@@ -303,6 +303,35 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''porównanie''',
 '''matches''':
 '''porówniania''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Identyfikator czytelnika: %s
+
+Hasło czytelnika: %s
+
+URL logowania: %s/?action=userform&uid=%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Ktoś zlecił wysłanie Twoich danych czytelnika na ten adres e-mail.
+
+Jeśli zapomniałeś swego hasła, użyj tych danych wpisując w pole hasła
+na stronie logowania DOKŁADNIE TO CO PONIŻEJ (skopiuj i wklej).
+
+Wskazane jest, aby po zalogowaniu się ustawić inne, nowe hasło.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Twoje dane czytelnika''',
 '''Cookie deleted. You are now logged out.''':
 '''Ciasteczko skasowane. Wylogowano.''',
 '''This wiki is not enabled for mail processing.
@@ -342,7 +371,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''User account created!''':
 '''Konto utworzone!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
-'''wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
+'''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':
 '''Ustawienia użytkownika zapisane!''',
 '''Default''':
@@ -374,7 +403,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Preferred language''':
 '''Ulubiony język''',
 '''General options''':
-'''Głowne opcje''',
+'''Główne opcje''',
 '''Quick links''':
 '''Szybkie skróty''',
 '''This list does not work, unless you have entered a valid email address!''':
@@ -418,13 +447,13 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Size''':
 '''Rozmiar''',
 '''Diff''':
-'''Róznice''',
+'''Różnice''',
 '''Editor''':
 '''Edytor''',
 '''Comment''':
 '''Komentarz''',
 '''view''':
-'''Zobacz''',
+'''zobacz''',
 '''raw''':
 '''surowy''',
 '''print''':
@@ -469,13 +498,13 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
 Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''You must log in to use subscribtions.''':
-'''Musisz się zalogować''',
+'''Musisz się zalogować, aby móc korzystać z subskrybcji.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
 '''Dodaj swój adres poczty eleketronicznej w UserPreferences aby użytkować subskrybcję.''',
 '''Your subscribtion to this page has been removed.''':
 '''Subskrybcja tej strony przez Ciebie została usunięta.''',
 '''Can\'t remove regular expression subscription!''':
-'''Nie można usunąć subskrybcji wyrażenia skończonego!''',
+'''Nie można usunąć subskrybcji wyrażenia regularnego!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
 '''Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich UserPreferences''',
 '''You have been subscribed to this page.''':
@@ -557,7 +586,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Bad timestamp \'%s\'''':
 '''Nieprawidłowy datownik binarny \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
-'''Spodziewane "=" aby podążyć za "%(token)s"''',
+'''Za "%(token)s" powinno być "="''',
 '''Expected a value for key "%(token)s"''':
 '''Spodziewana wartość dla klucza "%(token)s"''',
 '''Wiki Markup''':
@@ -669,7 +698,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Really delete this page?''':
 '''Czy na pewno usunąć niniejszą stronę?''',
 '''Delete''':
-'''Skasować?''',
+'''Usunąć''',
 '''Optional reason for the deletion''':
 '''Opcjonalna przyczyna usunięcia''',
 '''No pages like "%s"!''':
@@ -787,7 +816,7 @@ Spróbuj innej nazwy.''',
 '''%(errortype)s processing error''':
 '''błąd przetwarzania %(errortype)s''',
 '''Views/day''':
-'''Odczytów/dzień''',
+'''Odsłon/dzień''',
 '''Edits/day''':
 '''Edycji/dzień''',
 '''%(chart_title)s for %(filterpage)s''':
@@ -867,7 +896,7 @@ czerwony=edycja''',
 '''Edit (GUI)''':
 '''Edytuj (graficznie)''',
 '''Immutable Page''':
-'''Strona nie zmieniona''',
+'''Strona statyczna''',
 '''Remove Link''':
 '''Usuń skrót''',
 '''Add Link''':
@@ -879,7 +908,7 @@ czerwony=edycja''',
 '''EditText''':
 '''Edytuj tekst''',
 '''Immutable page''':
-'''Strona nie zmieniona''',
+'''Strona statyczna''',
 '''Or try one of these actions:''':
 '''Lub spróbuj wykonać: ''',
 '''Page''':
@@ -913,7 +942,7 @@ czerwony=edycja''',
 '''SiteNavigation''':
 '''NawigacjaWitryny''',
 '''HelpContents''':
-'''KontekstPomocy''',
+'''PomocSpisTreści''',
 '''HelpOnFormatting''':
 '''PomocFormatowania''',
 '''UserPreferences''':
@@ -921,7 +950,7 @@ czerwony=edycja''',
 '''WikiLicense''':
 '''LicencjaWiki''',
 '''MissingPage''':
-'''ZagubionaStrona''',
+'''NieistniejącaStrona''',
 '''Mon''':
 '''pon''',
 '''Tue''':
