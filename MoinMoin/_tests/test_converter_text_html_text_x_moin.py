@@ -27,18 +27,18 @@ class BaseTests(unittest.TestCase):
     def tearDown(self):
         del self.cfg
 
-    def do_convert_real(self, func_args, successfull = True):
+    def do_convert_real(self, func_args, successful=True):
         try:
             ret = convert(*func_args)
         except error, e:
-            if successfull:
+            if successful:
                 self.fail("fails with parse error: %s" % e)
             else:
                 return
-        if successfull:
+        if successful:
             return ret
         else:
-            self.fail("don't fail with parse error")
+            self.fail("doesn't fail with parse error")
 
 
 class MinimalPage(object):
@@ -48,8 +48,7 @@ class MinimalPage(object):
 
 
 class MinimalRequest(object):
-    # TODO: do we really need this class? no other test use a request
-    # replacement.
+    # TODO: do we really need this class? no other test uses a request replacement.
 
     def __init__(self, request):
         self.request = request
@@ -1048,7 +1047,7 @@ class ConvertInlineItemRepeatableTests(BaseTests):
 
     def testWikiWord01(self):
         test = ur"WikiWord"
-        output = ur"""<a href="""""
+        output = ur"""<a href=""""" # XXX ???
         self.do(test, output)
 
     def testNoWikiWord01(self):
@@ -1145,3 +1144,4 @@ class ConvertBrokenBrowserTests(BaseTests):
 
 if __name__ == '__main__':
     unittest.main()
+
