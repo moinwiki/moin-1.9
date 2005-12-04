@@ -25,6 +25,8 @@ Version 1.5.0current:
     * Workaround for Opera 8.5 making silly "No addition" categories.
     * Do not show GUI editor for non-wiki format pages, because we only have a
       converter from html to wiki right now.
+    * Fix the modern CSS issues for editbar, when it shifted content far right.
+      Also removed the absolute height value that never was right.
 
   Other changes:
     * Added irc:// to the builtin supported link schemas. You can remove it
