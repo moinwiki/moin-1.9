@@ -238,18 +238,18 @@ class Parser:
     def _small_repl(self, word):
         """Handle small."""
         if word.strip() == '~-' and self.is_small:
-            return word
+            return self.formatter.text(word)
         if word.strip() == '-~' and not self.is_small:
-            return word
+            return self.formatter.text(word)
         self.is_small = not self.is_small
         return self.formatter.small(self.is_small)
 
     def _big_repl(self, word):
         """Handle big."""
         if word.strip() == '~+' and self.is_big:
-            return word
+            return self.formatter.text(word)
         if word.strip() == '+~' and not self.is_big:
-            return word
+            return self.formatter.text(word)
         self.is_big = not self.is_big
         return self.formatter.big(self.is_big)
 
@@ -390,7 +390,7 @@ class Parser:
         if wikiname:
             return self._word_repl(wikiname)
         else:
-            return word
+            return self.formatter.text(word)
 
 
     def _url_bracket_repl(self, word):
@@ -675,7 +675,7 @@ class Parser:
             else:
                 msg = None
             #print "key: %s\nattrs: %s" % (key, str(attrs))
-            return msg
+            return self.formatter.rawHTML(msg)
 
         # scan attributes
         attr, msg = wikiutil.parseAttributes(self.request, attrdef, '>', table_extension)
@@ -693,7 +693,7 @@ class Parser:
             result += self.formatter.table_cell(0) + self.formatter.table_row(0)
             return result
         else:
-            return word
+            return self.formatter.text(word)
 
     def _table_repl(self, word):
         """Handle table cell separator."""
@@ -724,7 +724,7 @@ class Parser:
             result.append(self.formatter.table_cell(1, attrs) + attrerr)         
             return ''.join(result) 
         else:
-            return word
+            return self.formatter.text(word)
 
 
     def _heading_repl(self, word):
@@ -800,7 +800,7 @@ class Parser:
             self.in_pre = 0
             self.inhibit_p = 0
             return self.formatter.preformatted(self.in_pre)
-        return word
+        return self.formatter.text(word)
 
 
     def _smiley_repl(self, word):
