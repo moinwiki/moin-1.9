@@ -66,11 +66,14 @@ def getAttachDir(request, pagename, create=0):
     return attach_dir
 
 def absoluteName(url, pagename):
-    """ Get (pagename, filename) of an atatchment: link
+    """ Get (pagename, filename) of an attachment: link
+        @param url: PageName/filename.ext or filename.ext (unicode)
+        @param pagename: name of the currently processed page (unicode)
+        @rtype: tuple of unicode
+        @return: PageName, filename.ext
     """
-
-    pieces = url.split('/')
-    if len(pieces)==1:
+    pieces = url.split(u'/')
+    if len(pieces) == 1:
         return pagename, pieces[0]
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
@@ -123,8 +126,15 @@ def getIndicator(request, pagename):
     return attach_link
 
 
-def getFilename(request, pagename, name):
-    return os.path.join(getAttachDir(request, pagename), name).encode(config.charset)
+def getFilename(request, pagename, filename):
+    """ make complete pathfilename of file "name" attached to some page "pagename"
+        @param request: request object
+        @param pagename: name of page where the file is attached to (unicode)
+        @param filename: filename of attached file (unicode)
+        @rtype: string (in config.charset encoding)
+        @return: complete path/filename of attached file
+    """
+    return os.path.join(getAttachDir(request, pagename), filename).encode(config.charset)
 
 
 def info(pagename, request):

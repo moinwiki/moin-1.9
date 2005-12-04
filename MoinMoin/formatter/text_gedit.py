@@ -103,7 +103,7 @@ class Formatter(text_html.Formatter):
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
         pagename = self.page.page_name
-        image = url + '.png'
+        image = url + u'.png'
         fname = wikiutil.taintfilename(image)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         return self.image(

@@ -340,13 +340,13 @@ class Formatter(FormatterBase):
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
         drawing = fname
-        fname = fname + ".png"
-        filename = filename + ".png"
+        fname = fname + u".png"
+        filename = filename + u".png"
         # fallback for old gif drawings (1.1 -> 1.2)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
-            gfname = fname[:-4] + ".gif"
-            gfilename = filename[:-4] + ".gif"
+            gfname = fname[:-4] + u".gif"
+            gfilename = filename[:-4] + u".gif"
             gfpath = AttachFile.getFilename(self.request, pagename, gfname)
             if os.path.exists(gfpath):
                 fname, filename, fpath = gfname, gfilename, gfpath
@@ -362,7 +362,7 @@ class Formatter(FormatterBase):
                   drawing and ('&drawing=%s' % wikiutil.url_quote(drawing)) or '')),
                 linktext % {'filename': self.text(fname)})
 
-        mappath = AttachFile.getFilename(self.request, pagename, drawing + '.map')
+        mappath = AttachFile.getFilename(self.request, pagename, drawing + u'.map')
         edit_link = ('%s?action=AttachFile&rename=%s&drawing=%s' % (
             wikiutil.quoteWikinameURL(pagename),
             wikiutil.url_quote_plus(fname),
