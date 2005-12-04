@@ -2,7 +2,7 @@
 """
 MoinMoin - MoinMoin.text_html_text_x_moin Tests
 
-@copyright: 2000-2005 by Jürgen Hermann <jh@web.de>
+@copyright: 2005 by Bastian Blank, ThomasWaldmann
 @license: GNU GPL, see COPYING for details.
 """
 
@@ -88,26 +88,19 @@ class ConvertBlockRepeatableTests(BaseTests):
 
     def testComment01(self):
         test = ur"""
-#test
+##test
 """
-        output = ur"""<!--#test-->"""
+        output = u"""<pre class="comment">\n##test</pre>"""
         self.do(test, output)
 
     def testComment02(self):
         test = ur"""
 ##test
-"""
-        output = ur"""<!--##test-->"""
-        self.do(test, output)
-
-    def testComment03(self):
-        test = ur"""
-##test
 ##test
 """
-        output = ur"""
-<!--##test-->
-<!--##test-->
+        output = u"""
+<pre class="comment">\n##test</pre>
+<pre class="comment">\n##test</pre>
 """
         self.do(test, output)
 
@@ -1016,7 +1009,7 @@ class ConvertInlineFormatRepeatableTests(BaseTests):
 
     def testFormatUnderline01(self):
         test = ur"__test__"
-        output = ur""
+        output = ur"<u>test</u>"
         self.do(test, output)
 
     def testPre01(self):
@@ -1047,7 +1040,7 @@ class ConvertInlineItemRepeatableTests(BaseTests):
 
     def testWikiWord01(self):
         test = ur"WikiWord"
-        output = ur"""<a href=""""" # XXX ???
+        output = ur"""<a class="nonexistent" href="./WikiWord">WikiWord</a>"""
         self.do(test, output)
 
     def testNoWikiWord01(self):
@@ -1057,7 +1050,7 @@ class ConvertInlineItemRepeatableTests(BaseTests):
 
     def testSmiley01(self):
         test = ur":-)"
-        output = ur""
+        output = ur"""<img src="/wiki/modern/img/smile.png" alt=":-)" height="15" width="15">"""
         self.do(test, output)
 
 class StripTests(unittest.TestCase):
