@@ -39,24 +39,24 @@ class ScriptExit(Exception):
     """ Raised by the script commands when the script should quit. """
 
 # Parsing and (un)quoting for script files
-def packLine(list):
-    return '|'.join([x.replace('\\', '\\\\').replace('|', r'\|') for x in list])
+def packLine(list, separator="|"):
+    return '|'.join([x.replace('\\', '\\\\').replace(separator, '\\' + separator) for x in list])
 
-def unpackLine(string):
+def unpackLine(string, separator="|"):
     result = []
     token = None
     escaped = False
     for x in string:
         if token is None:
             token = ""
-        if escaped and x in ('\\', '|'):
+        if escaped and x in ('\\', separator):
             token += x
             escaped = False
             continue
         escaped = (x == '\\')
         if escaped:
             continue
-        if x == '|':
+        if x == separator:
             result.append(token)
             token = ""
         else:
