@@ -916,7 +916,7 @@ class convert_tree(visitor):
                 if name == 'tr':
                     self.process_table_record(i, style)
                     style = ""
-                elif name == 'tbody':
+                elif name in ('thead', 'tbody', 'tfoot'):
                     self.process_table(i, style)
                 elif name == 'caption':
                     self.process_caption(node, i, style)
@@ -930,7 +930,8 @@ class convert_tree(visitor):
     def process_caption(self, table, node, style=""):
         # get first row
         for i in table.childNodes:
-            if i.localName == 'tbody':
+            if i.localName in ('thead', 'tbody', 'tfoot'): # XXX is this correct?
+            #if i.localName == 'tbody': (old version)
                 for i in i.childNodes:
                     if i.localName == 'tr':
                         break
