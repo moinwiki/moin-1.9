@@ -222,10 +222,19 @@ class ThemeBase:
             # Set pref page to localized Preferences page
             title = preferencesPage.split_title(request)
             userlinks.append(preferencesPage.link_to(request, text=title))
-        else:
-            # Add prefpage links with title: Login
-            userlinks.append(preferencesPage.link_to(request, text=_("Login")))
             
+        if 1: # XXX request.cfg.user_login_show:
+            if request.user.valid:
+                #loghtml = preferencesPage.link_to(request, text=_("Logout"))
+                userlinks.append("""\
+<form action="/" method="POST">
+<input type="hidden" name="action" value="userform">
+<input type="submit" name="logout" value="%(logout)s">
+</form>
+""" % { 'logout': _('Logout') }) # XXX add path instead of /
+            else:
+                userlinks.append(preferencesPage.link_to(request, text=_("Login")))
+
         userlinks = [u'<li>%s</li>\n' % link for link in userlinks]
         html = u'<ul id="username">\n%s</ul>' % ''.join(userlinks)
         return html

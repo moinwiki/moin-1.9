@@ -83,29 +83,34 @@ pre {
 }
 
 #username {
-	margin: 0;
-	padding: 0.25em;
-	text-align: right;
-	font-size: 0.82em;
-	white-space: nowrap;
+    display: inline;
+    padding: 0;
+    text-align: right;
+    font-size: 0.82em;
+    white-space: nowrap;
 }
 
 *[dir="rtl"] #username {
-	text-align: left;
+    text-align: left;
 }
 
 #username li {
-	display: inline;
-	padding: 0 2px;
+    display: inline;
+    padding: 0 0.2em;
 }
 
-#username li:before {
-	content: "| ";
-	color: gray;
+#username form {
+    display: inline;
 }
 
-#username li:first-child:before {
-	content: "";
+#username input {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: white; /* inherit is broken on IE */
+    color: brown;
+    font-size: 0.82em;
 }
 
 #pagetrail {
