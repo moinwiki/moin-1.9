@@ -223,7 +223,7 @@ class ThemeBase:
             title = preferencesPage.split_title(request)
             userlinks.append(preferencesPage.link_to(request, text=title))
             
-        if 1: # XXX request.cfg.user_login_show:
+        if request.cfg.show_login:
             if request.user.valid:
                 #loghtml = preferencesPage.link_to(request, text=_("Logout"))
                 userlinks.append("""\
