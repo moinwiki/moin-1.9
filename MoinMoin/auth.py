@@ -4,7 +4,22 @@
 
     Here are some methods moin can use in cfg.auth authentication method list.
     The methods from that list get called (from request.py) in that sequence.
-    The called auth method the must return a tuple (user_obj, continue_flag).
+    They get request as first argument and also some more kw arguments:
+       name: the value we did get from a POST of the UserPreferences page
+             in the "name" form field (or None)
+       password: the value of the password form field (or None)
+       login: True if user has clicked on Login button
+       logout: True if user has clicked on Logout button
+       (we maybe add some more here)
+
+    Use code like this to get them:
+        name = kw.get('name') or ''
+        password = kw.get('password') or ''
+        login = kw.get('login')
+        logout = kw.get('logout')
+        request.log("got name=%s len(password)=%d login=%r logout=%r" % (name, len(password), login, logout))
+    
+    The called auth method then must return a tuple (user_obj, continue_flag).
     user_obj is either a User object or None if it could not make one.
     continue_flag is a boolean indication whether the auth loop shall continue
     trying other auth methods (or not).
@@ -30,7 +45,7 @@
 import Cookie
 from MoinMoin import user
 
-def moin_cookie(request):
+def moin_cookie(request, **kw):
     """ authenticate via the MOIN_ID cookie """
     try:
         cookie = Cookie.SimpleCookie(request.saved_cookie)
@@ -54,7 +69,7 @@ def moin_cookie(request):
          thus, the server specific code would stay in request object implementation.
 """
 	 
-def http(request):
+def http(request, **kw):
     """ authenticate via http basic/digest/ntlm auth """
     from MoinMoin.request import RequestTwisted
     u = None
@@ -93,7 +108,7 @@ def http(request):
     else:
         return None, True
 
-def sslclientcert(request):
+def sslclientcert(request, **kw):
     """ authenticate via SSL client certificate """
     from MoinMoin.request import RequestTwisted
     u = None
@@ -146,7 +161,7 @@ def sslclientcert(request):
     else:
         return None, True
 
-def interwiki(request):
+def interwiki(request, **kw):
     # TODO use auth_method and auth_attribs for User object
     # TODO use tuples as return value
     if request.form.has_key("user"):
