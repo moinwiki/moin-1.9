@@ -137,9 +137,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(name)
             
             # Save the user and send a cookie
             self.request.user = theuser
-            self.request.setCookie()           
-        
-        
+            self.request.setCookie()
+
         elif (form.has_key('create') or
               form.has_key('create_only') or
               form.has_key('create_and_mail')):
@@ -496,8 +495,6 @@ class UserSettings:
 
         if self.request.user.valid and not create_only:
             buttons = [('save', _('Save'))]
-            if self.request.user.auth_method == 'moin_cookie':
-                buttons.append(('logout', _('Logout')))
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
             for attr in self.request.user.auth_attribs:
