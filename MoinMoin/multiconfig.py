@@ -289,6 +289,7 @@ class DefaultConfig:
     shared_intermap = None # can be string or list of strings (filenames)
     show_hosts = 1
     show_interwiki = 0
+    show_login = 1
     show_section_numbers = 0
     show_timings = 0
     show_version = 0
