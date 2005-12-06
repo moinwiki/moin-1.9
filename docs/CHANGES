@@ -1,6 +1,13 @@
 MoinMoin Version History
 ========================
 
+Version 1.5.0current:
+  Other changes:
+    * Made it easier for auth methods needing a user interface (like ldap or
+      mysql stuff). Unlike http auth, they usually need some "login form".
+      We made UserPreferences login form values (name, password, login, logout)
+      available as kw args of the auth method, so it is easy and obvious now.
+
 Version 1.5.0beta5:
   Fixes:
     * Fixed a minor user interface bug: it showed RenamePage and DeletePage

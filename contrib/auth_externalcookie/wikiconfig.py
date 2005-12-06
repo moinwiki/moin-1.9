@@ -7,7 +7,7 @@
 # ...
 
 class FarmConfig(DefaultConfig):
-    def external_cookie(request):
+    def external_cookie(request, **kw):
         """ authenticate via external cookie """
         import Cookie
         user = None

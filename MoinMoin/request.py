@@ -424,8 +424,17 @@ class RequestBase(object):
         return wikiutil.url_unquote(path, want_unicode=False), query        
                 
     def get_user(self):
+        # try to get some values from the maybe present UserPreferences form,
+        # so auth methods can use it as their user interface for login
+        name = self.form.get('name', [None])[0]
+        password = self.form.get('password', [None])[0]
+        login = self.form.has_key('login')
+        logout = self.form.has_key('logout')
+        
         for auth in self.cfg.auth:
-            user_obj, continue_flag = auth(self)
+            user_obj, continue_flag = auth(self,
+                                           name=name, password=password,
+                                           login=login, logout=logout)
             if not continue_flag:
                 break
         if user_obj is None:
