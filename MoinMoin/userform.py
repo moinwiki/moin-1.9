@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import string, time, re, Cookie
+import string, time, re
 from MoinMoin import user, util, wikiutil
 from MoinMoin.util import web, mail, datetime
 from MoinMoin.widget import html
@@ -64,13 +64,6 @@ class UserSettingsHandler:
         _ = self._
         form = self.request.form
     
-        if form.has_key('logout'):
-            # clear the cookie in the browser and locally. Does not
-            # check if we have a valid user logged, just make sure we
-            # don't have one after this call.
-            self.request.deleteCookie()
-            return _("Cookie deleted. You are now logged out.")
-    
         if form.has_key('account_sendmail'):
             if not self.cfg.mail_enabled:
                 return _("""This wiki is not enabled for mail processing.
@@ -89,59 +82,9 @@ Contact the owner of the wiki, who can enable email.""")
 
             return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
 
-        if form.has_key('login'):
-            # Trying to login with a user name and a password
-
-            # Require valid user name
-            name = form.get('name', [''])[0]
-            if not user.isValidName(self.request, name):
-                return _("""Invalid user name {{{'%s'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.""") % wikiutil.escape(name)
-
-            # Check that user exists
-            if not user.getUserId(self.request, name):
-                return _('Unknown user name: {{{"%s"}}}. Please enter'
-                         ' user name and password.') % name
-
-            # Require password
-            password = form.get('password',[None])[0]
-            if not password:
-                return _("Missing password. Please enter user name and password.")
-
-            # Load the user data and check for validness
-            theuser = user.User(self.request, name=name, password=password,
-                                auth_method='login_userpassword')
-            if not theuser.valid:
-                if theuser.disabled:
-                    return _('Account "%s" is disabled.') % name
-                else:
-                    return _("Sorry, wrong password.")
-
-            # Save the user and send a cookie
-            self.request.user = theuser
-            self.request.setCookie()
-
-        elif form.has_key('uid'):
-            # Trying to login with the login URL, soon to be removed!
-            try:
-                 uid = form['uid'][0]
-            except KeyError:
-                 return _("Bad relogin URL.")
-
-            # Load the user data and check for validness
-            theuser = user.User(self.request, uid,
-                                auth_method='login_uid')
-            if not theuser.valid:
-                return _("Unknown user.")
-            
-            # Save the user and send a cookie
-            self.request.user = theuser
-            self.request.setCookie()
-
-        elif (form.has_key('create') or
-              form.has_key('create_only') or
-              form.has_key('create_and_mail')):
+        if (form.has_key('create') or
+            form.has_key('create_only') or
+            form.has_key('create_and_mail')):
             if self.request.request_method != 'POST':
                 return _("Use UserPreferences to change your settings or create an account.")
             # Create user profile
@@ -205,21 +148,17 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     if thisuser.email == theuser.email:
                         return _("This email already belongs to somebody else.")
 
-            # save data and send cookie
+            # save data
             theuser.save()
-            if form.has_key('create'):
-                self.request.user = theuser
-                self.request.setCookie()
-
             if form.has_key('create_and_mail'):
                 theuser.mailAccountData()
             
-            result = _("User account created!")
+            result = _("User account created! You can use this account to login now...")
             if _debug:
                 result = result + util.dumpFormData(form)
             return result
 
-        else: # Save user profile
+        if form.has_key('save'): # Save user profile
             if self.request.request_method != 'POST':
                 return _("Use UserPreferences to change your settings or create an account.")
             theuser = self.request.get_user()
@@ -349,9 +288,6 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             # save data
             theuser.save()            
             self.request.user = theuser
-
-            if theuser.auth_method == 'moin_cookie':
-                self.request.setCookie()
 
             result = _("User preferences saved!")
             if _debug:

@@ -240,8 +240,7 @@ class RequestBase(object):
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
 
-        # REQUEST_URI is not part of CGI spec, but an addition of
-        # Apache.
+        # REQUEST_URI is not part of CGI spec, but an addition of Apache.
         self.request_uri = env.get('REQUEST_URI', '')
         
         # Values that need more work
@@ -430,7 +429,7 @@ class RequestBase(object):
         password = self.form.get('password', [None])[0]
         login = self.form.has_key('login')
         logout = self.form.has_key('logout')
-        
+
         for auth in self.cfg.auth:
             user_obj, continue_flag = auth(self,
                                            name=name, password=password,
@@ -1507,7 +1506,7 @@ class RequestTwisted(RequestBase):
             header = header.encode('ascii')
         key, value = header.split(':',1)
         value = value.lstrip()
-        if key.lower()=='set-cookie':
+        if key.lower() == 'set-cookie':
             key, value = value.split('=',1)
             self.twistd.addCookie(key, value)
         else:

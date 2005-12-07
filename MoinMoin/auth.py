@@ -47,6 +47,24 @@ from MoinMoin import user
 
 def moin_cookie(request, **kw):
     """ authenticate via the MOIN_ID cookie """
+    if kw.get('login'):
+        name = kw.get('name')
+        password = kw.get('password')
+        u = user.User(request, name=name, password=password,
+                      auth_method='login_userpassword')
+        if u.valid:
+            request.user = u # needed by setCookie
+            request.setCookie()
+            return u, False
+        return None, True
+
+    if kw.get('logout'):
+        # clear the cookie in the browser and locally. Does not
+        # check if we have a valid user logged, just make sure we
+        # don't have one after this call.
+        request.deleteCookie()
+        return None, True
+    
     try:
         cookie = Cookie.SimpleCookie(request.saved_cookie)
     except Cookie.CookieError:
