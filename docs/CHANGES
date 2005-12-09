@@ -2,6 +2,11 @@ MoinMoin Version History
 ========================
 
 Version 1.5.0current:
+  Authentication:
+    * Added SSO module for PHP based apps. Currently supported: eGroupware 1.2.
+      No need to login in two systems anymore - MoinMoin will read the PHP session
+      files.
+
   Other changes:
     * Made it easier for auth methods needing a user interface (like ldap or
       mysql stuff). Unlike http auth, they usually need some "login form".
