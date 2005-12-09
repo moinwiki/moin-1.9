@@ -7,6 +7,10 @@ Version 1.5.0current:
       No need to login in two systems anymore - MoinMoin will read the PHP session
       files.
 
+  Fixes:
+    * Improved rendering of bullet lists and external links in Restructured text.
+      Thanks to Matthew Gilbert.
+
   Other changes:
     * Made it easier for auth methods needing a user interface (like ldap or
       mysql stuff). Unlike http auth, they usually need some "login form".
