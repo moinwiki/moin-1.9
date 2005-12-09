@@ -306,7 +306,8 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['alt'] = alt.groups()[0]
         else:
             # Image doesn't exist yet for the page so just use what's
-            # returned from MoinMoin verbatim
+            # returned from MoinMoin.
+            self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
             self.add_wiki_markup()
 
     def process_wiki_target(self, target):
@@ -347,12 +348,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             # MMG: Fix this line
             if [scheme for scheme in moin_link_schemes if
                     refuri.lstrip().startswith(scheme)]:
-                # For a macro, We want the actuall text from the user in target,
-                # not the fully normalized version that is contained in refuri.
-                if refuri.startswith('[['):
-                    target = node['name']
-                else:
-                    target = refuri
+                target = refuri
             # TODO: Figure out the following two elif's and comment
             # appropriately.
             # The node should have a whitespace normalized name if the docutlis
@@ -364,26 +360,25 @@ class MoinTranslator(html4css1.HTMLTranslator):
             # wiki space.
             elif ':' not in refuri:
                 target = ':%s:' % (refuri)
+            else:
+                target = refuri
 
             if target:
                 if target.startswith('inline:'):
                     self.process_inline(node, 'refuri')
                 elif target.startswith('[[') and target.endswith(']]'):
                     self.process_wiki_target(target)
+                    raise docutils.nodes.SkipNode
                 else:
                     # Not a macro or inline so hopefully its a link. Put the target in
-                    # brackets so that MoinMoin knows its a link. Extract the
-                    # href, if it exists, and let docutils handle it from there.
-                    # If there is no href just add whatever MoinMoin returned.
+                    # brackets so that MoinMoin knows its a link. Allow MoinMoin to
+                    # handle all links so that the link decorations get used (e.g. 
+                    # icons for external pages).
                     node_text = node.astext().replace('\n', ' ')
                     self.process_wiki_text('[%s %s]' % (target, node_text))
-                    href = re.search('href="([^"]+)"', self.wiki_text)
-                    if href:
-                        # dirty hack in order to undo the HTML entity quoting
-                        node['refuri'] = href.groups()[0].replace("&amp;", "&")
-                    else:
-                        self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
-                        self.add_wiki_markup()
+                    self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
+                    self.add_wiki_markup()
+                    raise docutils.nodes.SkipNode
         html4css1.HTMLTranslator.visit_reference(self, node)
 
     def visit_image(self, node):
@@ -439,7 +434,9 @@ class MoinTranslator(html4css1.HTMLTranslator):
             # Blocks
             'literal_block': 'preformatted',
             # Simple Lists
-            'bullet_list': 'bullet_list',
+            # bullet-lists are handled completely by docutils because it uses
+            # the node context when to decide to make a compact list 
+            # (no <p> tags).
             'list_item': 'listitem',
             # Definition List
             'definition_list': 'definition_list',
