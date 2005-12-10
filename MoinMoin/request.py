@@ -134,7 +134,8 @@ class RequestBase(object):
             #self.form = {}
 
             # MOVED: this was in run() method, but moved here for auth module being able to use it
-            self.args = self.form = self.setup_args()
+            if not self.query_string.startswith('action=xmlrpc'):
+                self.args = self.form = self.setup_args()
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
