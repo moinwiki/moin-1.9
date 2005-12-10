@@ -802,6 +802,12 @@ Essayez un autre nom.''',
 '''Télécharger un export XML de ce wiki''',
 '''No wanted pages in this wiki.''':
 '''Aucune page référencée ne reste à créer.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Le rendu du format reStructuredText n\'est pas possible. Veuillez installer docutils.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Dépassement du nombre maximum d\'inclusions autorisées**''',
+'''**Could not find the referenced page: %s**''':
+'''**Impossible de trouver la page à laquelle il est fait référence : %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''« %(wanted)s » était attendu après « %(key)s », mais « %(token)s » a été obtenu''',
 '''Expected an integer "%(key)s" before "%(token)s"''':

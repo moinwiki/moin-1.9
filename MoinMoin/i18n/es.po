@@ -1385,9 +1385,10 @@ msgstr "No existen páginas-por-crear en este wiki."
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
 msgstr ""
+"No se pudo mostrar el texto reEstructurado, por favor instale docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Excedido el número máximo de 'includes' permitidos"
+msgstr "**Se Excedió el número máximo de 'includes' permitidos"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"

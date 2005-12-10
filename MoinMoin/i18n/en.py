@@ -330,8 +330,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Your wiki account data''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie deleted. You are now logged out.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''This wiki is not enabled for mail processing.
@@ -340,18 +338,6 @@ Contact the owner of the wiki, who can enable email.''',
 '''Please provide a valid email address!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Found no account matching the given email address \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''',
-'''Missing password. Please enter user name and password.''':
-'''Missing password. Please enter user name and password.''',
-'''Account "%s" is disabled.''':
-'''Account "%s" is disabled.''',
-'''Sorry, wrong password.''':
-'''Sorry, wrong password.''',
-'''Bad relogin URL.''':
-'''Bad relogin URL.''',
-'''Unknown user.''':
-'''Unknown user.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Use UserPreferences to change your settings or create an account.''',
 '''Empty user name. Please enter a user name.''':
@@ -366,8 +352,8 @@ Contact the owner of the wiki, who can enable email.''',
 '''Please provide your email address. If you lose your login information, you can get it by email.''',
 '''This email already belongs to somebody else.''':
 '''This email already belongs to somebody else.''',
-'''User account created!''':
-'''User account created!''',
+'''User account created! You can use this account to login now...''':
+'''User account created! You can use this account to login now...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''The theme \'%(theme_name)s\' could not be loaded!''',
 '''User preferences saved!''':
@@ -382,8 +368,6 @@ Contact the owner of the wiki, who can enable email.''',
 '''free choice''',
 '''Save''':
 '''Save''',
-'''Logout''':
-'''Logout''',
 '''Preferred theme''':
 '''Preferred theme''',
 '''Editor Preference''':
@@ -860,6 +844,8 @@ red=edit''',
 '''[TOP]''',
 '''Click to do a full-text search for this title''':
 '''Click to do a full-text search for this title''',
+'''Logout''':
+'''Logout''',
 '''Clear message''':
 '''Clear message''',
 '''last edited %(time)s by %(editor)s''':

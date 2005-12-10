@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-04 22:17+0100\n"
-"PO-Revision-Date: 2005-11-30 23:50+0100\n"
+"PO-Revision-Date: 2005-12-08 23:45+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgid "Trivial change"
 msgstr "Drobna zmiana"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "Usuń puste znaki z przodu każdej linii"
+msgstr "Usuń znaki spacji z końca każdej linii"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -511,7 +511,7 @@ msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
 
 #, python-format
 msgid "%.2f seconds"
-msgstr " %.2f sekund."
+msgstr "%.2f sekund."
 
 msgid "match"
 msgstr "porównanie"
@@ -593,7 +593,7 @@ msgstr "Nieznany identyfikator czytelnika."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
-"Wejdź do UserPreferences aby zmienić swe ustawienia lub utworzyć konto."
+"Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Puste pole identyfikatora. Podaj swój identyfikator"
@@ -605,7 +605,7 @@ msgid "Passwords don't match!"
 msgstr "Hasła się nie zgadzają!"
 
 msgid "Please specify a password!"
-msgstr "Podaj hasło!"
+msgstr "Proszę podać hasło!"
 
 msgid ""
 "Please provide your email address. If you lose your login information, you "
@@ -634,7 +634,7 @@ msgid "<Browser setting>"
 msgstr "<Ustawienia przeglądarki>"
 
 msgid "the one preferred"
-msgstr "tylko preferowane"
+msgstr "tylko preferowany"
 
 msgid "free choice"
 msgstr "wybór dowolny"
@@ -649,10 +649,10 @@ msgid "Preferred theme"
 msgstr "Ulubiony wystrój"
 
 msgid "Editor Preference"
-msgstr "Preferencje Czytelnika"
+msgstr "Ulubiony edytor"
 
 msgid "Editor shown on UI"
-msgstr "Edytor pokazuje się w GUI"
+msgstr "Pokazywany edytor"
 
 msgid "Time zone"
 msgstr "Strefa czasowa"
@@ -1370,13 +1370,15 @@ msgstr "Brak poszukiwanych stron w tym wiki."
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
 msgstr ""
+"Przetwarzanie tekstu w formacie reStructured jest niemożliwe, proszę "
+"doinstalować pakiet \"docutils\"."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
+msgstr "**Przekroczona maksymalna dozwolona liczba dyrektyw włączających zawartość innych stron**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr ""
+msgstr "**Nie można znaleźć strony, do której się odwołano: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1480,7 +1482,7 @@ msgstr "Usuń wiadomość"
 
 #, python-format
 msgid "last edited %(time)s by %(editor)s"
-msgstr "ostatnio modyfikowane %(time)s przez %(editor)s"
+msgstr "ostatnio edytowane %(time)s przez %(editor)s"
 
 #, python-format
 msgid "last modified %(time)s"
@@ -1662,10 +1664,6 @@ msgstr "SprawdźPisownię"
 #~ msgid "Remember last page visited"
 #~ msgstr "Zapamiętaj ostatnią odwiedzoną stronę"
 
-#, fuzzy
-#~ msgid "Parent Page"
-#~ msgstr "StronaGłowna"
-
 #~ msgid "Trail"
 #~ msgstr "Ślad"
 
@@ -1673,7 +1671,7 @@ msgstr "SprawdźPisownię"
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "
 #~ "right corner to create a profile."
 #~ msgstr ""
-#~ "Nie utworzyłeś dotychczas profilu czytelnika. Zaznacz "
+#~ "Nie utworzyłeś dotychczas profilu czytelnika. Wybierz "
 #~ "PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć."
 
 #~ msgid ""
@@ -1681,7 +1679,7 @@ msgstr "SprawdźPisownię"
 #~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
 #~ msgstr ""
 #~ "W tym wiki nie uruchomiono przetwarzania poczty elektronicznej. "
-#~ "Skontaktuj się z właścicielem, aby je uruchomił, albo usuń ikonę "
+#~ "Skontaktuj się z właścicielem, aby je uruchomił, albo usunął ikonę "
 #~ "\"Subskrybuj\"."
 
 #~ msgid ""
@@ -1689,7 +1687,7 @@ msgstr "SprawdźPisownię"
 #~ "(UserPreferences) in the upper right corner and enter a valid email "
 #~ "address."
 #~ msgstr ""
-#~ "Nie podano adresu poczty elektronicznej w Twoim profilu. Zaznacz "
+#~ "Nie podano adresu poczty elektronicznej w Twoim profilu. Wybierz "
 #~ "(PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres."
 
 #, fuzzy
@@ -1716,17 +1714,6 @@ msgstr "SprawdźPisownię"
 #~ msgid "Show Local Site Map"
 #~ msgstr "Pokaż mapę wiki"
 
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Info"
-
-#~ msgid "Can't work out query"
-#~ msgstr "Nie potrafię zadać pytania"
-
-#, fuzzy
-#~ msgid "Add to Quicklinks"
-#~ msgstr "Szybkie skróty"
-
 #~ msgid "Show Parent"
 #~ msgstr "Pokaż nadrzędne"
 
@@ -1737,7 +1724,7 @@ msgstr "SprawdźPisownię"
 #~ msgstr "Pobierz info"
 
 #~ msgid "Skip to preview"
-#~ msgstr "Pomiń aby zobaczyć podgląd"
+#~ msgstr "Przeskocz do podglądu"
 
 #~ msgid "[current page size '''%(size)d''' bytes]"
 #~ msgstr "[Rozmiar bieżącej strony '''%(size)d''' bajtów]"

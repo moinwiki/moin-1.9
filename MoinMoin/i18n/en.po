@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -471,9 +471,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr ""
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -484,26 +481,6 @@ msgstr ""
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr ""
-
-msgid "Bad relogin URL."
-msgstr ""
-
-msgid "Unknown user."
 msgstr ""
 
 msgid "Use UserPreferences to change your settings or create an account."
@@ -529,7 +506,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr ""
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -552,9 +529,6 @@ msgid "free choice"
 msgstr ""
 
 msgid "Save"
-msgstr ""
-
-msgid "Logout"
 msgstr ""
 
 msgid "Preferred theme"
@@ -1348,6 +1322,9 @@ msgid "[TOP]"
 msgstr ""
 
 msgid "Click to do a full-text search for this title"
+msgstr ""
+
+msgid "Logout"
 msgstr ""
 
 msgid "Clear message"
