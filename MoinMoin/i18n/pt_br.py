@@ -256,7 +256,7 @@ Para deixar o editor, selecione o botão Cancelar.''',
 '''Show fancy diffs''':
 '''Útilizar visualização agradável para diffs''',
 '''Add spaces to displayed wiki names''':
-'''Adicionar espaços entre os NomesWiki''',
+'''Adicionar espaços aos WikiNome''',
 '''Remember login information''':
 '''Lembrar das informações de login''',
 '''Subscribe to trivial changes''':

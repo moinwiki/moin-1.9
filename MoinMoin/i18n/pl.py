@@ -99,7 +99,7 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 '''Trivial change''':
 '''Drobna zmiana''',
 '''Remove trailing whitespace from each line''':
-'''Usuń puste znaki z przodu każdej linii''',
+'''Usuń znaki spacji z końca każdej linii''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -298,7 +298,7 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':
-''' %.2f sekund.''',
+'''%.2f sekund.''',
 '''match''':
 '''porównanie''',
 '''matches''':
@@ -355,7 +355,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Unknown user.''':
 '''Nieznany identyfikator czytelnika.''',
 '''Use UserPreferences to change your settings or create an account.''':
-'''Wejdź do UserPreferences aby zmienić swe ustawienia lub utworzyć konto.''',
+'''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
 '''Empty user name. Please enter a user name.''':
 '''Puste pole identyfikatora. Podaj swój identyfikator''',
 '''This user name already belongs to somebody else.''':
@@ -363,7 +363,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Passwords don\'t match!''':
 '''Hasła się nie zgadzają!''',
 '''Please specify a password!''':
-'''Podaj hasło!''',
+'''Proszę podać hasło!''',
 '''Please provide your email address. If you lose your login information, you can get it by email.''':
 '''Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
 '''This email already belongs to somebody else.''':
@@ -379,7 +379,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''<Browser setting>''':
 '''<Ustawienia przeglądarki>''',
 '''the one preferred''':
-'''tylko preferowane''',
+'''tylko preferowany''',
 '''free choice''':
 '''wybór dowolny''',
 '''Save''':
@@ -389,9 +389,9 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Preferred theme''':
 '''Ulubiony wystrój''',
 '''Editor Preference''':
-'''Preferencje Czytelnika''',
+'''Ulubiony edytor''',
 '''Editor shown on UI''':
-'''Edytor pokazuje się w GUI''',
+'''Pokazywany edytor''',
 '''Time zone''':
 '''Strefa czasowa''',
 '''Your time is''':
@@ -801,6 +801,12 @@ Spróbuj innej nazwy.''',
 '''Zgraj wersję XML tego wiki''',
 '''No wanted pages in this wiki.''':
 '''Brak poszukiwanych stron w tym wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Przetwarzanie tekstu w formacie reStructured jest niemożliwe, proszę doinstalować pakiet "docutils".''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Przekroczona maksymalna dozwolona liczba dyrektyw włączających zawartość innych stron**''',
+'''**Could not find the referenced page: %s**''':
+'''**Nie można znaleźć strony, do której się odwołano: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Spodziewane "%(wanted)s" po "%(key)s", otrzymano "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -864,7 +870,7 @@ czerwony=edycja''',
 '''Clear message''':
 '''Usuń wiadomość''',
 '''last edited %(time)s by %(editor)s''':
-'''ostatnio modyfikowane %(time)s przez %(editor)s''',
+'''ostatnio edytowane %(time)s przez %(editor)s''',
 '''last modified %(time)s''':
 '''ostatnio modyfikowane %(time)s''',
 '''Search:''':

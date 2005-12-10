@@ -450,7 +450,7 @@ msgid "Show fancy diffs"
 msgstr "Útilizar visualização agradável para diffs"
 
 msgid "Add spaces to displayed wiki names"
-msgstr "Adicionar espaços entre os NomesWiki"
+msgstr "Adicionar espaços aos WikiNome"
 
 msgid "Remember login information"
 msgstr "Lembrar das informações de login"

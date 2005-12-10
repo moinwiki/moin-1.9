@@ -797,6 +797,8 @@ Pamēģiniet citu nosaukumu.''',
 '''Lejupielādēt XML eksportu no šī wiki''',
 '''No wanted pages in this wiki.''':
 '''Šajā viki pieprasīto lapu nav.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''\'\'reStructured\'\' teksta attēlošana nav iespējama. Lūdzu, instalējiet \'\'docutils\'\'.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**''',
 '''**Could not find the referenced page: %s**''':

@@ -799,8 +799,10 @@ Intente con un nombre distinto.''',
 '''Bajar XML exportado de este wiki''',
 '''No wanted pages in this wiki.''':
 '''No existen páginas-por-crear en este wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''No se pudo mostrar el texto reEstructurado, por favor instale docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
-'''**Excedido el número máximo de \'includes\' permitidos''',
+'''**Se Excedió el número máximo de \'includes\' permitidos''',
 '''**Could not find the referenced page: %s**''':
 '''**No se encontró la página referenciada: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
