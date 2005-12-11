@@ -10,6 +10,8 @@ Version 1.5.0current:
   Fixes:
     * Improved rendering of bullet lists and external links in Restructured text.
       Thanks to Matthew Gilbert.
+    * Fixed modern theme rendering, including some fixes and workarounds for
+      broken MS IE.
 
   Other changes:
     * Made it easier for auth methods needing a user interface (like ldap or

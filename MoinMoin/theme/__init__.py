@@ -234,8 +234,8 @@ class ThemeBase:
             else:
                 userlinks.append(preferencesPage.link_to(request, text=_("Login")))
 
-        userlinks = [u'<li>%s</li>\n' % link for link in userlinks]
-        html = u'<ul id="username">\n%s</ul>' % ''.join(userlinks)
+        userlinks = [u'<li>%s</li>' % link for link in userlinks]
+        html = u'<ul id="username">%s</ul>' % ''.join(userlinks)
         return html
 
     # Schemas supported in toolbar links, using [url label] format
@@ -391,7 +391,7 @@ class ThemeBase:
             items.append(item % (cls, link))
 
         # Assemble html
-        items = u'\n'.join(items)
+        items = u''.join(items)
         html = u'''
 <ul id="navibar">
 %s
@@ -540,7 +540,7 @@ class ThemeBase:
                 html = '''
 <ul id="pagetrail">
 %s
-</ul>''' % '\n'.join(items)
+</ul>''' % ''.join(items)
         return html
 
     def html_stylesheets(self, d):
@@ -856,7 +856,7 @@ function actionsMenuInit(title) {
         """ Create credits html from credits list """
         if isinstance(self.cfg.page_credits, (list, tuple)):
             items = ['<li>%s</li>' % i for i in self.cfg.page_credits]
-            html = '<ul id="credits">\n%s\n</ul>\n' % '\n'.join(items)
+            html = '<ul id="credits">\n%s\n</ul>\n' % ''.join(items)
         else:
             # Old config using string, output as is
             html = self.cfg.page_credits
@@ -1006,9 +1006,9 @@ actionsMenuInit('%(label)s');
         html = self._cache.get('editbar')
         if html is None:
             # Remove empty items and format as list
-            items = '\n'.join(['<li>%s</li>' % item
-                               for item in self.editbarItems(page) if item])
-            html = u'<ul class="editbar">\n%s\n</ul>\n' % items
+            items = ''.join(['<li>%s</li>' % item
+                             for item in self.editbarItems(page) if item])
+            html = u'<ul class="editbar">%s</ul>\n' % items
             self._cache['editbar'] = html
         
         return html
