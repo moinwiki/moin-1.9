@@ -10,8 +10,8 @@ Copyright (c) 2001, 2002, 2003 by Juergen Hermann
 */
 
 body {
-    padding:0;
-    border:0;
+    padding: 0;
+    border: 0;
 }
 
 a:link { text-decoration: none; }
@@ -51,7 +51,7 @@ textarea {
     margin: 5px 10px;
     padding: 0;
     /* For text only logo */
-    font-size: 22px;
+    font-size: 1.4em;
     line-height: 1em;
     font-weight: bold;
 }
@@ -71,6 +71,7 @@ textarea {
 
 #username {
     display: inline;
+    margin: 0;
     padding: 0;
     text-align: right;
     font-size: 0.82em;
@@ -83,7 +84,7 @@ textarea {
 
 #username li {
     display: inline;
-    padding: 0 0.2em;
+    padding: 0 0.5em 0 0;
 }
 
 #username form {
@@ -98,6 +99,11 @@ textarea {
     background: #E7E7E7; /* inherit doesnt work on IE */
     color: blue;
     font-size: 0.82em;
+    cursor: pointer;
+}
+
+#username input:hover {
+    color: red;
 }
 
 #searchform {
@@ -105,7 +111,7 @@ textarea {
     margin: 5px 10px;
     padding: 0;
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 0.82em;
 }
 
 *[dir="rtl"] #searchform {
@@ -119,8 +125,8 @@ textarea {
 #pagetrail {
     clear: right;
     display: block;
-    margin: 4px;
-    padding: 0 10px;
+    margin: 0.2em 0;
+    padding: 0;
     font-size: 0.88em;
 }
 
@@ -129,36 +135,33 @@ textarea {
 }
 
 #interwiki {
-    float: left;
-    margin: 8px 0;
-    padding: 0 2px;
-    font-size: 18px;
-}
-
-*[dir="rtl"] #interwiki {
-    float: right;
+    display: inline;
+    font-size: 1em;
 }
 
 #interwiki span:after {
-    content: ": ";
+    content: ":";
+}
+
+#locationline {
+    clear: right;
+    padding: 3px 0;
+}
+
+*[dir="rtl"] #loc {
+    clear: left;
 }
 
 #pagelocation {
-    clear: right;
-    display: block;
-    margin: 8px 0;
-    padding: 0 10px;
-    font-size: 24px;
-}
-
-*[dir="rtl"] #pagelocation {
-    clear: left;
+    display: inline;
+    margin: 0 0.25em;
+    padding: 0;
+    font-size: 1.5em;
 }
 
 #pagetrail li, #pagelocation li {
     display: inline;
-    padding: 0 2px;
-    margin: 0 0 5px 0;
+    margin: 0;
 }
 
 /* XXX Warning: non-ascii characters! */
@@ -173,6 +176,12 @@ textarea {
 #pagetrail li:last-child:after {
     content: "";
 }
+
+* html #pagetrail li, * html #pagelocation li { /* for broken IE */
+    border-left: 1px solid #AAA;
+    padding: 0 0.3em;
+}
+
 #pagelocation li:after {
     content: "/ ";
 }
@@ -191,7 +200,8 @@ textarea {
     display: block;
     margin: 0;
     padding: 0 10px;
-    font-size: 13px;
+    font-size: 0.82em;
+    zoom: 1; /* for avoiding a gap between navibar and pageline on IE */
 }
 
 #navibar li {
@@ -252,7 +262,7 @@ textarea {
     padding: 0 8px;
     white-space: nowrap;
     background: white;
-    font-size: 0.8em; /* 13px */
+    font-size: 0.8em;
 }
 
 .editbar form, .editbar form div {
@@ -397,7 +407,6 @@ input.button {
     text-align: center;
     font-size: 0.88em;
     color: #6C7680;
-    font-size: 12px;
 }
 
 #credits li, #timings li {
@@ -445,3 +454,8 @@ input.button {
  */
 * html span.anchor { display: none; }
 
+/*
+ul {
+    border: 1px solid #9C9C9C;
+}
+*/
