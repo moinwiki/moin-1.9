@@ -43,7 +43,7 @@ span.sep {
     margin: 5px 10px;
     padding: 0;
     /* For text only logo */
-    font-size: 22px;
+    font-size: 1.4em;
     line-height: 1em;
     font-weight: bold;
 }
@@ -92,6 +92,7 @@ span.sep {
 	width: 200px;
 	padding: 0;	
 	font-size: 0.88em;
+    overflow: hidden;
 }
 
 .sidepanel {
@@ -157,8 +158,8 @@ span.sep {
 #pagetrail {
     clear: right;
     display: block;
-    margin: 4px;
-    padding: 0 10px;
+    margin: 0.2em 0;
+    padding: 0;
     font-size: 0.88em;
 }
 
@@ -167,36 +168,33 @@ span.sep {
 }
 
 #interwiki {
-    float: left;
-    margin: 8px 0;
-    padding: 0 2px;
-    font-size: 18px;
-}
-
-*[dir="rtl"] #interwiki {
-    float: right;
+    display: inline;
+    font-size: 1em;
 }
 
 #interwiki span:after {
-    content: ": ";
+    content: ":";
+}
+  
+#locationline {
+    clear: right;
+    padding: 3px 0;
+}
+
+*[dir="rtl"] #locationline {
+    clear: left;
 }
 
 #pagelocation {
-    clear: right;
-    display: block;
-    margin: 8px 0;
-    padding: 0 10px;
-    font-size: 24px;
-}
-
-*[dir="rtl"] #pagelocation {
-    clear: left;
+    display: inline;
+    margin: 0 0.25em;
+    padding: 0;
+    font-size: 1.5em;
 }
 
 #pagetrail li, #pagelocation li {
     display: inline;
-    padding: 0 2px;
-    margin: 0 0 5px 0;
+    margin: 0;
 }
 
 /* XXX Warning: non-ascii characters! */
@@ -211,6 +209,12 @@ span.sep {
 #pagetrail li:last-child:after {
     content: "";
 }
+
+* html #pagetrail li, * html #pagelocation li { /* for broken IE */
+    border-left: 1px solid #AAA;
+    padding: 0 0.3em;
+}
+
 #pagelocation li:after {
     content: "/ ";
 }
@@ -300,7 +304,6 @@ form.dialog {
 	text-align: center;
 	font-size: 0.88em;
 	color: #6C7680;
-	font-size: 12px;
 }
 
 #credits li, #timings li {
