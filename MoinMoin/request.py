@@ -130,8 +130,8 @@ class RequestBase(object):
             #    # no extra path after script name
             #    rootname = u""
 
-            #self.args = {}
-            #self.form = {}
+            self.args = {}
+            self.form = {}
 
             # MOVED: this was in run() method, but moved here for auth module being able to use it
             if not self.query_string.startswith('action=xmlrpc'):
