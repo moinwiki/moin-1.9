@@ -148,7 +148,7 @@ textarea {
     padding: 3px 0;
 }
 
-*[dir="rtl"] #loc {
+*[dir="rtl"] #locationline {
     clear: left;
 }
 
@@ -454,8 +454,3 @@ input.button {
  */
 * html span.anchor { display: none; }
 
-/*
-ul {
-    border: 1px solid #9C9C9C;
-}
-*/

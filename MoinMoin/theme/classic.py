@@ -112,8 +112,10 @@ class Theme(ThemeBase):
 %(logo_html)s
 %(search_form_html)s
 %(username_html)s
+<div id="locationline">
 %(interwiki_html)s
 %(title_html)s
+</div>
 %(trail_html)s
 %(iconbar_html)s
 %(navibar_html)s
