@@ -84,6 +84,7 @@ pre {
 
 #username {
     display: inline;
+    margin: 0;
     padding: 0;
     text-align: right;
     font-size: 0.82em;
@@ -96,7 +97,7 @@ pre {
 
 #username li {
     display: inline;
-    padding: 0 0.2em;
+    padding: 0 0.5em 0 0;
 }
 
 #username form {
@@ -111,13 +112,15 @@ pre {
     background-color: white; /* inherit is broken on IE */
     color: brown;
     font-size: 0.82em;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 #pagetrail {
     clear: right;
     display: block;
-    margin: 4px;
-    padding: 0 10px;
+    margin: 0.2em 0;
+    padding: 0;
     font-size: 0.88em;
     height: 2em;
 }
@@ -127,36 +130,33 @@ pre {
 }
 
 #interwiki {
-    float: left;
-    margin: 8px 0;
-    padding: 0 2px;
-    font-size: 18px;
-}
-
-*[dir="rtl"] #interwiki {
-    float: right;
+    display: inline;
+    font-size: 1em;
 }
 
 #interwiki span:after {
-    content: ": ";
+    content: ":";
 }
 
-#pagelocation {
+#locationline {
     clear: right;
-    display: block;
-    margin: 8px 0;
-    padding: 0 10px;
-    font-size: 24px;
+    padding: 3px 0;
 }
-
-*[dir="rtl"] #pagelocation {
+  
+*[dir="rtl"] #locationline {
     clear: left;
+}
+  
+#pagelocation {
+    display: inline;
+    margin: 0 0.25em;
+    padding: 0;
+    font-size: 1.5em;
 }
 
 #pagetrail li, #pagelocation li {
-    display: inline; /* old: block */
-    padding: 0 2px;
-    margin: 0 0 5px 0; /* old: 5px 2px */
+    display: inline;
+    margin: 0;
 }
 
 /* XXX Warning: non-ascii characters! */
@@ -171,6 +171,12 @@ pre {
 #pagetrail li:last-child:after {
     content: "";
 }
+
+* html #pagetrail li, * html #pagelocation li { /* for broken IE */
+    border-left: 1px solid #AAA;
+    padding: 0 0.3em;
+}
+
 #pagelocation li:after {
     content: "/ ";
 }
@@ -206,8 +212,8 @@ pre {
 	clear: left;
 	margin: 0;
 	padding: 0;
-	font-size: 0.88em;
-	height: 2em;
+    font-size: 0.82em;
+    zoom: 1; /* for avoiding a gap between navibar and pageline on IE */
 }
 
 *[dir="rtl"] #navibar {
