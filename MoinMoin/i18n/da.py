@@ -328,8 +328,6 @@ Når du er korrekt logget ind, er det naturligvis en god idé at ændre adgangsk
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Dine wiki brugerprofil-oplysninger''',
-'''Cookie deleted. You are now logged out.''':
-'''Infokage slettet. Du er nu logget ud.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Denne wiki har ikke aktiveret email-håndtering.
@@ -338,18 +336,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Angiv venligst en korrekt email-adresse!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Ingen brugerprofil blev fundet med den angivne email-adresse \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Ukendt brugernavn: [[["%s"}}}. Angiv venligst brugernavn og adgangskode.''',
-'''Missing password. Please enter user name and password.''':
-'''Manglende adgangskode. Angiv venligst brugernavn og adgangskode.''',
-'''Account "%s" is disabled.''':
-'''Brugerprofil "%s" er deaktiveret.''',
-'''Sorry, wrong password.''':
-'''Desværre, forkert adgangskode.''',
-'''Bad relogin URL.''':
-'''Forkert adgangs-URL.''',
-'''Unknown user.''':
-'''Ukendt bruger.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Brug BrugerProfil til at ændre dinne indstillinger eller oprette en brugerprofil.''',
 '''Empty user name. Please enter a user name.''':
@@ -364,8 +350,8 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Oplys venligst din email-adresse. Hvis du mister dine adgangsoplysninger, kan du få dem tilsendt pr. email.''',
 '''This email already belongs to somebody else.''':
 '''Denne email-adresse tilhører allerede en anden.''',
-'''User account created!''':
-'''Brugerprofil oprettet!''',
+'''User account created! You can use this account to login now...''':
+'''Brugerprofil oprettet. Du kan bruge denne konto til at logge på nu...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Temaet \'%(theme_name)s\' kunne ikke indlæses!''',
 '''User preferences saved!''':
@@ -380,8 +366,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''frit valg''',
 '''Save''':
 '''Gem''',
-'''Logout''':
-'''Log ud''',
 '''Preferred theme''':
 '''Ønsket tema''',
 '''Editor Preference''':
@@ -794,6 +778,12 @@ Prøv et andet navn.''',
 '''Hent XML-eksport af denne wiki''',
 '''No wanted pages in this wiki.''':
 '''Ingen ønskede sider i denne wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Dannelsen af reStructured text er ikke mulig - kræver docutils installeret.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maks. antal tilladte inkluderinger overskredet**''',
+'''**Could not find the referenced page: %s**''':
+'''**Kunne ikke finde den henviste side: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Forventede "%(wanted)s"·efter·"%(key)s",·fik "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -854,6 +844,8 @@ rød=redigér''',
 '''[TOP]''',
 '''Click to do a full-text search for this title''':
 '''Klik her for at lave en fritekstsøgning efter denne titel''',
+'''Logout''':
+'''Log ud''',
 '''Clear message''':
 '''Fjern besked''',
 '''last edited %(time)s by %(editor)s''':

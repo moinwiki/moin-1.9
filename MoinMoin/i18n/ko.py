@@ -253,8 +253,6 @@ space between words. Group page name is not allowed.''':
 ''' 개 포함''',
 '''matches''':
 ''' 개 포함''',
-'''Cookie deleted. You are now logged out.''':
-'''쿠키가 지워졌습니다. 로그아웃 되었습니다.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 
@@ -263,16 +261,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''사용가능한 메일 주소를 써 주세요!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''메일 주소가 \'%(email)s\'로 되어있는 계정이 없습니다!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
-'''Missing password. Please enter user name and password.''':
-'''비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
-'''Sorry, wrong password.''':
-'''비밀번호가 틀렸습니다.''',
-'''Bad relogin URL.''':
-'''잘못된 재접속 URL입니다.''',
-'''Unknown user.''':
-'''등록되지 않은 사용자입니다.''',
 '''Empty user name. Please enter a user name.''':
 '''이름을 입력하세요.''',
 '''This user name already belongs to somebody else.''':
@@ -293,8 +281,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''<브라우저 설정>''',
 '''Save''':
 '''저장''',
-'''Logout''':
-'''로그아웃''',
 '''Preferred theme''':
 '''좋아하는 테마''',
 '''Time zone''':
@@ -671,6 +657,8 @@ red=edit''',
 '''감시 해제''',
 '''Click to do a full-text search for this title''':
 '''이 제목을 내용 전체에서 찾아보려면 여기를 누르세요''',
+'''Logout''':
+'''로그아웃''',
 '''Clear message''':
 '''메시지 지움''',
 '''last edited %(time)s by %(editor)s''':

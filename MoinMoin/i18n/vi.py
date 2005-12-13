@@ -250,8 +250,6 @@ Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng khô
 '''phù hợp''',
 '''matches''':
 '''phù hợp''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người có thể kích hoạt chức năng này.''',
@@ -259,16 +257,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Vui lòng cho biết địa chỉ thư điện tử hợp lệ!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Không tìm thấy account có địa chỉ thư điện tử \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Không biết người dùng: {{{"%s"}}}. Vui lòng nhập tên người dùng và mật khẩu.''',
-'''Missing password. Please enter user name and password.''':
-'''Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu.''',
-'''Sorry, wrong password.''':
-'''Xin lỗi, sai mật khẩu.''',
-'''Bad relogin URL.''':
-'''URL đăng nhập lại không chính xác.''',
-'''Unknown user.''':
-'''Không rõ người dùng.''',
 '''Empty user name. Please enter a user name.''':
 '''Tên người dùng trống. Vui lòng nhập vào tên người dùng.''',
 '''This user name already belongs to somebody else.''':
@@ -289,8 +277,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''<Theo trình duyệt>''',
 '''Save''':
 '''Lưu''',
-'''Logout''':
-'''Thoát''',
 '''Preferred theme''':
 '''Theme mặc định''',
 '''Time zone''':
@@ -671,6 +657,8 @@ red=edit''':
 '''Trang nhà''',
 '''Click to do a full-text search for this title''':
 '''Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này''',
+'''Logout''':
+'''Thoát''',
 '''Clear message''':
 '''Xoá thông báo''',
 '''last edited %(time)s by %(editor)s''':

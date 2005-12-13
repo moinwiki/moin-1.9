@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -557,9 +557,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] اطلاعات مربوط به حساب کاربری شما"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -573,28 +570,6 @@ msgstr "لطفا یک آدرس ایمیل معتبر وارد نمایید!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "هیچ حساب کاربری مطابق با آدرس ایمیل '%(email)s' یافت نشد!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید."
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-"کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "حساب کاربری \"%s\" خیر فعال شده است."
-
-msgid "Sorry, wrong password."
-msgstr "متاسفم٬ کلمه عبور اشتباه می باشد."
-
-msgid "Bad relogin URL."
-msgstr "آدرس ورود مجدد اشتباه است."
-
-msgid "Unknown user."
-msgstr "کاربر غیر ثبت شده"
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -623,8 +598,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "این ایمیل توسط شخص دیگری وارد شده است."
 
-msgid "User account created!"
-msgstr "حساب کاربری شما ثبت شد!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -647,9 +622,6 @@ msgstr "گزینه رایگان"
 
 msgid "Save"
 msgstr "ذخیره کن"
-
-msgid "Logout"
-msgstr "خروج"
 
 msgid "Preferred theme"
 msgstr "تم کاربری ترجیح داده شده"
@@ -1478,6 +1450,9 @@ msgstr "[ابتدا]"
 msgid "Click to do a full-text search for this title"
 msgstr "برای انجام جستجوی کامل این موضوع کلیک نمایید"
 
+msgid "Logout"
+msgstr "خروج"
+
 msgid "Clear message"
 msgstr "پیغام حذف شود"
 
@@ -1659,6 +1634,34 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد "
+#~ "نمایید."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr ""
+#~ "کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "حساب کاربری \"%s\" خیر فعال شده است."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "متاسفم٬ کلمه عبور اشتباه می باشد."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "آدرس ورود مجدد اشتباه است."
+
+#~ msgid "Unknown user."
+#~ msgstr "کاربر غیر ثبت شده"
+
+#~ msgid "User account created!"
+#~ msgstr "حساب کاربری شما ثبت شد!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "آخرین صفحه ای که میبینم را به خاطر بسپار"

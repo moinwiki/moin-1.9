@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-11-09 23:54-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -553,9 +553,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Ваша запись пользователя"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie стерты. Вы вышли."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -569,28 +566,6 @@ msgstr "Пожалуйста укажите правильный почтовы�
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Неизвестное имя пользователя: {{{\"%s\"}}}. Пожалуйста введите имя "
-"пользователя и пароль."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Пароль не указан. Пожалуйста введите имя пользователя и пароль."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Увы, пароль не подходит."
-
-msgid "Bad relogin URL."
-msgstr "Плохой URL"
-
-msgid "Unknown user."
-msgstr "Неизвестный пользователь."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -617,8 +592,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Это чужой адрес."
 
-msgid "User account created!"
-msgstr "Пользователь создан!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -641,9 +616,6 @@ msgstr "по выбору"
 
 msgid "Save"
 msgstr "Записать"
-
-msgid "Logout"
-msgstr "Выйти"
 
 msgid "Preferred theme"
 msgstr "Предпочитаемый стиль"
@@ -1466,6 +1438,9 @@ msgstr "[ВВЕРХ]"
 msgid "Click to do a full-text search for this title"
 msgstr "Нажмите сюда для поиска этого названия везде"
 
+msgid "Logout"
+msgstr "Выйти"
+
 msgid "Clear message"
 msgstr "Убрать это сообщение"
 
@@ -1647,6 +1622,30 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie стерты. Вы вышли."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Неизвестное имя пользователя: {{{\"%s\"}}}. Пожалуйста введите имя "
+#~ "пользователя и пароль."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Пароль не указан. Пожалуйста введите имя пользователя и пароль."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Увы, пароль не подходит."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Плохой URL"
+
+#~ msgid "Unknown user."
+#~ msgstr "Неизвестный пользователь."
+
+#~ msgid "User account created!"
+#~ msgstr "Пользователь создан!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Запомнить последнюю открытую страницу"

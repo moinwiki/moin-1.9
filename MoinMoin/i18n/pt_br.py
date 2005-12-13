@@ -333,8 +333,6 @@ Depois de logar com sucesso, seria uma boa idéia solicitar uma nova senha.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Seus dados da conta do wiki''',
-'''Cookie deleted. You are now logged out.''':
-'''Você saiu com sucesso do sistema (cookie apagado).''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Esta wiki não está habilitada a enviar mensagens de correio eletrônico.
@@ -343,18 +341,6 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''Por favor, forneça um endereço de e-mail válido!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Não foi encontrada nenhuma conta com o endereço \'%(email)s!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, informe o nome do usuário e senha.''',
-'''Missing password. Please enter user name and password.''':
-'''Senha não foi informada. Por favor, informe o nome do usuário e senha.''',
-'''Account "%s" is disabled.''':
-'''Conta "%s" desabilitada.''',
-'''Sorry, wrong password.''':
-'''Desculpe. Senha errada.''',
-'''Bad relogin URL.''':
-'''URL inválida para novo login.''',
-'''Unknown user.''':
-'''Usuário desconhecido.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Use as PreferênciasDoUsuário para mudar suas configurações ou criar uma outra conta.''',
 '''Empty user name. Please enter a user name.''':
@@ -369,8 +355,6 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''Por favor informe um endereço de email. Se você perder sua informação de login, você poderá recuperá-la por email.''',
 '''This email already belongs to somebody else.''':
 '''Este email já pertence a alguém cadastrado neste site.''',
-'''User account created!''':
-'''Conta de Usuário criada!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Não foi possível carregar o tema \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -385,8 +369,6 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''escolha livre''',
 '''Save''':
 '''Salvar''',
-'''Logout''':
-'''Sair''',
 '''Preferred theme''':
 '''Tema preferido''',
 '''Editor Preference''':
@@ -865,6 +847,8 @@ vermelho=editar''',
 '''[TOPO]''',
 '''Click to do a full-text search for this title''':
 '''Clique aqui para fazer uma busca completa para este título''',
+'''Logout''':
+'''Sair''',
 '''Clear message''':
 '''Apagar mensagem''',
 '''last edited %(time)s by %(editor)s''':

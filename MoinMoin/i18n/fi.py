@@ -334,8 +334,6 @@ Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva s
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Wikitunnuksesi tiedot''',
-'''Cookie deleted. You are now logged out.''':
-'''Eväste poistettu. Olet kirjautunut ulos.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Sähköpostia ei ole otettu käyttöön tässä wikissä.
@@ -344,18 +342,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Anna kelvollinen sähköpostiosoite!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Sähköpostiosoitetta \'%(email)s\' vastaavaa käyttäjää ei löytynyt!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Tuntematon käyttäjänimi: {{{"%s"}}}. Anna käyttäjänimi ja salasana.''',
-'''Missing password. Please enter user name and password.''':
-'''Salasana puuttuu. Anna käyttäjänimi ja salasana.''',
-'''Account "%s" is disabled.''':
-'''Tunnus "%s" on pois käytöstä.''',
-'''Sorry, wrong password.''':
-'''Valitettavasti salasana on väärin.''',
-'''Bad relogin URL.''':
-'''Uudelleenkirjautumisen URL ei kelpaa.''',
-'''Unknown user.''':
-'''Tuntematon käyttäjä.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen.''',
 '''Empty user name. Please enter a user name.''':
@@ -370,8 +356,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
 '''This email already belongs to somebody else.''':
 '''Tämä sähköposti kuuluu jo jollekin toiselle.''',
-'''User account created!''':
-'''Käyttäjätili luotu!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Teemaa \'%(theme_name)s\' ei voida ladata!''',
 '''User preferences saved!''':
@@ -386,8 +370,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''valittavissa''',
 '''Save''':
 '''Tallenna''',
-'''Logout''':
-'''Kirjaudu ulos ''',
 '''Preferred theme''':
 '''Suosikkiulkoasu''',
 '''Editor Preference''':
@@ -857,6 +839,8 @@ red=edit''',
 '''[ALKUUN]''',
 '''Click to do a full-text search for this title''':
 '''Napsauta tehdäksesi tekstihaun tälle nimelle''',
+'''Logout''':
+'''Kirjaudu ulos ''',
 '''Clear message''':
 '''Sulje viesti''',
 '''last edited %(time)s by %(editor)s''':

@@ -333,8 +333,6 @@ d\'enregistrer un nouveau mot de passe que vous connaissiez.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Vos identifiants de connexion au wiki''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie effacé. Vous êtes déconnecté.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''La gestion du courrier n\'est pas activée sur ce wiki.
@@ -343,18 +341,6 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Veuillez fournir une adresse électronique valide !''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Aucun compte correspondant à l\'adresse « %(email)s » n\'a été trouvé !''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nom d\'utilisateur inconnu : {{{"%s"}}}. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
-'''Missing password. Please enter user name and password.''':
-'''Mot de passe absent. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
-'''Account "%s" is disabled.''':
-'''Le compte « %s » est désactivé.''',
-'''Sorry, wrong password.''':
-'''Désolé, mauvais mot de passe.''',
-'''Bad relogin URL.''':
-'''Mauvaise URL de reconnexion.''',
-'''Unknown user.''':
-'''Utilisateur inconnu.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Utilisez les PréférencesUtilisateur pour modifier vos paramètres ou pour créer un compte.''',
 '''Empty user name. Please enter a user name.''':
@@ -369,8 +355,8 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Veuillez indiquer votre adresse électronique. Si vous perdez vos identifiants de connexion, vous pourrez les récupérer par courrier électronique.''',
 '''This email already belongs to somebody else.''':
 '''Cette adresse électronique appartient déjà à quelqu\'un d\'autre.''',
-'''User account created!''':
-'''Compte utilisateur créé !''',
+'''User account created! You can use this account to login now...''':
+'''Compte utilisateur créé ! Vous pouvez l\'utiliser dès à présent pour vous connecter...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Le thème « %(theme_name)s » n\'a pu être chargé !''',
 '''User preferences saved!''':
@@ -385,8 +371,6 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''choix libre''',
 '''Save''':
 '''Enregistrer''',
-'''Logout''':
-'''Déconnexion''',
 '''Preferred theme''':
 '''Thème préféré''',
 '''Editor Preference''':
@@ -817,7 +801,7 @@ Essayez un autre nom.''',
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Une couleur « %(arg)s » était attendue après « %(key)s »''',
 '''XSLT option disabled, please look at HelpOnConfiguration.''':
-'''L\'option XSLT a été désactivée, consultez l\'AideDeConfiguration.''',
+'''L\'option XSLT a été désactivée, consultez l\'AideDeParamétrage.''',
 '''XSLT processing is not available, please install 4suite 1.x.''':
 '''Impossible de réaliser des traitements XSLT, veuillez installer la version 1.x de 4suite.''',
 '''%(errortype)s processing error''':
@@ -868,6 +852,8 @@ rouge=modifications''',
 '''[HAUT]''',
 '''Click to do a full-text search for this title''':
 '''Cliquez ici pour faire une recherche de ce titre dans les pages''',
+'''Logout''':
+'''Déconnexion''',
 '''Clear message''':
 '''Fermer ce message''',
 '''last edited %(time)s by %(editor)s''':

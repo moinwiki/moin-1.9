@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-12-08 23:45+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -554,9 +554,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Twoje dane czytelnika"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Ciasteczko skasowane. Wylogowano."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -570,26 +567,6 @@ msgstr "Podaj prawidłowy adres poczty elektronicznej!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Brak odpowiednich kont do podanego adresu '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "Konto \"%s\" jest wyłączone."
-
-msgid "Sorry, wrong password."
-msgstr "Przykro mi, nieprawidłowe hasło."
-
-msgid "Bad relogin URL."
-msgstr "Niewłaściwy URL logowania."
-
-msgid "Unknown user."
-msgstr "Nieznany identyfikator czytelnika."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -617,8 +594,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Ten adres poczty elektronicznej należy do kogoś innego."
 
-msgid "User account created!"
-msgstr "Konto utworzone!"
+msgid "User account created! You can use this account to login now..."
+msgstr "Konto czytelnika utowrzone! Możesz teraz użyć tego konta żeby się zalogować..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -641,9 +618,6 @@ msgstr "wybór dowolny"
 
 msgid "Save"
 msgstr "Zachowaj"
-
-msgid "Logout"
-msgstr "Wyjdź"
 
 msgid "Preferred theme"
 msgstr "Ulubiony wystrój"
@@ -1374,7 +1348,9 @@ msgstr ""
 "doinstalować pakiet \"docutils\"."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Przekroczona maksymalna dozwolona liczba dyrektyw włączających zawartość innych stron**"
+msgstr ""
+"**Przekroczona maksymalna dozwolona liczba dyrektyw włączających zawartość "
+"innych stron**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
@@ -1476,6 +1452,9 @@ msgstr "[POCZĄTEK STRONY]"
 
 msgid "Click to do a full-text search for this title"
 msgstr "Kliknij aby poszukać tytułu metodą pełnotekstową"
+
+msgid "Logout"
+msgstr "Wyjdź"
 
 msgid "Clear message"
 msgstr "Usuń wiadomość"
@@ -1660,6 +1639,31 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Ciasteczko skasowane. Wylogowano."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "Nieznana nazwa konta: {{{\"%s\"}}}. Podaj identyfikator i hasło."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Zapomniano o haśle. Podaj identyfikator i hasło."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "Konto \"%s\" jest wyłączone."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Przykro mi, nieprawidłowe hasło."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Niewłaściwy URL logowania."
+
+#~ msgid "Unknown user."
+#~ msgstr "Nieznany identyfikator czytelnika."
+
+#~ msgid "User account created!"
+#~ msgstr "Konto utworzone!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Zapamiętaj ostatnią odwiedzoną stronę"

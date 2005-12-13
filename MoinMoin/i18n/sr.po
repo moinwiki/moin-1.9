@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -529,9 +529,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Kolačić izbrisan. Vi ste sada odjavljeni iz sistema"
-
 #, fuzzy
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -547,26 +544,6 @@ msgstr "Molimo vas da upišete ispravnu mejl adresu!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Nalog koji odgovara datoj mejl adresi , '%(email)s' , ne postoji!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr ""
-
-msgid "Bad relogin URL."
-msgstr ""
-
-msgid "Unknown user."
-msgstr ""
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -594,7 +571,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Neko drugi već poseduje ovu mejl adresu"
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -618,9 +595,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Snimiti"
-
-msgid "Logout"
-msgstr "Izlogovati se"
 
 msgid "Preferred theme"
 msgstr "Omiljena tema"
@@ -1453,6 +1427,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "Klikni ovde za kompletnu potragu za ovaj naslov"
 
+msgid "Logout"
+msgstr "Izlogovati se"
+
 msgid "Clear message"
 msgstr "Izbriši ovu poruku"
 
@@ -1647,6 +1624,9 @@ msgstr "PreimenitiStranicu"
 
 msgid "SpellCheck"
 msgstr "ProveraPravopisa"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Kolačić izbrisan. Vi ste sada odjavljeni iz sistema"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Zapamtiti poslednje posećene stranice"

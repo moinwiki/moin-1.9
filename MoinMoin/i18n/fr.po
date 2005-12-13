@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
-"PO-Revision-Date: 2005-02-05 08:15+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"PO-Revision-Date: 2005-12-10 23:28+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -576,9 +576,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Vos identifiants de connexion au wiki"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie effacé. Vous êtes déconnecté."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -592,30 +589,6 @@ msgstr "Veuillez fournir une adresse électronique valide !"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Aucun compte correspondant à l'adresse « %(email)s » n'a été trouvé !"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Nom d'utilisateur inconnu : {{{\"%s\"}}}. Veuillez indiquer un nom "
-"d'utilisateur et un mot de passe."
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-"Mot de passe absent. Veuillez indiquer un nom d'utilisateur et un mot de "
-"passe."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "Le compte « %s » est désactivé."
-
-msgid "Sorry, wrong password."
-msgstr "Désolé, mauvais mot de passe."
-
-msgid "Bad relogin URL."
-msgstr "Mauvaise URL de reconnexion."
-
-msgid "Unknown user."
-msgstr "Utilisateur inconnu."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -647,8 +620,10 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Cette adresse électronique appartient déjà à quelqu'un d'autre."
 
-msgid "User account created!"
-msgstr "Compte utilisateur créé !"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Compte utilisateur créé ! Vous pouvez l'utiliser dès à présent pour vous "
+"connecter..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -671,9 +646,6 @@ msgstr "choix libre"
 
 msgid "Save"
 msgstr "Enregistrer"
-
-msgid "Logout"
-msgstr "Déconnexion"
 
 msgid "Preferred theme"
 msgstr "Thème préféré"
@@ -1416,7 +1388,8 @@ msgstr "**Dépassement du nombre maximum d'inclusions autorisées**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr "**Impossible de trouver la page à laquelle il est fait référence : %s**"
+msgstr ""
+"**Impossible de trouver la page à laquelle il est fait référence : %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1437,7 +1410,7 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Une couleur « %(arg)s » était attendue après « %(key)s »"
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "L'option XSLT a été désactivée, consultez l'AideDeConfiguration."
+msgstr "L'option XSLT a été désactivée, consultez l'AideDeParamétrage."
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr ""
@@ -1518,6 +1491,9 @@ msgstr "[HAUT]"
 
 msgid "Click to do a full-text search for this title"
 msgstr "Cliquez ici pour faire une recherche de ce titre dans les pages"
+
+msgid "Logout"
+msgstr "Déconnexion"
 
 msgid "Clear message"
 msgstr "Fermer ce message"

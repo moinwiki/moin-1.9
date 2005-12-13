@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-11-18 23:08+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -558,9 +558,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Din wiki-kontoinformation"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Kakan togs bort. Du är nu utloggad."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -574,28 +571,6 @@ msgstr "Var god ange en korrekt epostadress!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Kunde inte hitta något konto med epostadressen \"%(email)s\"!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Okänt användarnamn: {{{\"%s\"}}}. Var god ange ditt användarnamn och "
-"lösenord."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Lösenord saknas. Var god ange ditt användarnamn och lösenord."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "Kontot \"%s\" är avstängt."
-
-msgid "Sorry, wrong password."
-msgstr "Tyvärr, felaktigt lösenord."
-
-msgid "Bad relogin URL."
-msgstr "Ogiltig ominloggnings-URL."
-
-msgid "Unknown user."
-msgstr "Okänd användare."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -624,8 +599,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Den här epostadressen tillhör redan någon annan."
 
-msgid "User account created!"
-msgstr "Användarkonto skapat!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -648,9 +623,6 @@ msgstr "valfritt"
 
 msgid "Save"
 msgstr "Spara"
-
-msgid "Logout"
-msgstr "Logga ut"
 
 msgid "Preferred theme"
 msgstr "Önskat tema"
@@ -1481,6 +1453,9 @@ msgstr "[BÖRJAN]"
 msgid "Click to do a full-text search for this title"
 msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
 
+msgid "Logout"
+msgstr "Logga ut"
+
 msgid "Clear message"
 msgstr "Ta bort meddelande"
 
@@ -1662,3 +1637,30 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Kakan togs bort. Du är nu utloggad."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Okänt användarnamn: {{{\"%s\"}}}. Var god ange ditt användarnamn och "
+#~ "lösenord."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Lösenord saknas. Var god ange ditt användarnamn och lösenord."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "Kontot \"%s\" är avstängt."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Tyvärr, felaktigt lösenord."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Ogiltig ominloggnings-URL."
+
+#~ msgid "Unknown user."
+#~ msgstr "Okänd användare."
+
+#~ msgid "User account created!"
+#~ msgstr "Användarkonto skapat!"

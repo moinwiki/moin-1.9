@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -541,9 +541,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] 您的维基帐号资料"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie已经删除. 您已登出."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -555,26 +552,6 @@ msgstr "请提供一个有效的电子邮件地址!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到用'%(email)s'登记的帐户!!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "需要密码, 请输入用户名和密码."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "\"%s\"的帐号被停用"
-
-msgid "Sorry, wrong password."
-msgstr "对不起, 无效密码."
-
-msgid "Bad relogin URL."
-msgstr "无效的登录URL."
-
-msgid "Unknown user."
-msgstr "无效用户."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
@@ -600,8 +577,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "别人已经用这个电子邮件注册过了."
 
-msgid "User account created!"
-msgstr "用户帐号成功创建!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -624,9 +601,6 @@ msgstr "随意选择"
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Logout"
-msgstr "登出"
 
 msgid "Preferred theme"
 msgstr "主题"
@@ -1294,7 +1268,7 @@ msgstr "图片'%(filename)s'已保存"
 
 #, python-format
 msgid "%(mins)dm ago"
-msgstr "%(mins)dm分钟前"
+msgstr "%(mins)d分钟前"
 
 msgid "(no bookmark set)"
 msgstr "(未设置书签)"
@@ -1437,6 +1411,9 @@ msgstr "[顶部]"
 
 msgid "Click to do a full-text search for this title"
 msgstr "点击对这个标题进行全文检索"
+
+msgid "Logout"
+msgstr "登出"
 
 msgid "Clear message"
 msgstr "清除此提示信息"
@@ -1617,6 +1594,31 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie已经删除. 您已登出."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "需要密码, 请输入用户名和密码."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "\"%s\"的帐号被停用"
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "对不起, 无效密码."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "无效的登录URL."
+
+#~ msgid "Unknown user."
+#~ msgstr "无效用户."
+
+#~ msgid "User account created!"
+#~ msgstr "用户帐号成功创建!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "记住上次访问的最后一页"

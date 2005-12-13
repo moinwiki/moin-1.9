@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-11-18 21:40+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -554,9 +554,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Dine wiki brugerprofil-oplysninger"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Infokage slettet. Du er nu logget ud."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -571,27 +568,6 @@ msgstr "Angiv venligst en korrekt email-adresse!"
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Ingen brugerprofil blev fundet med den angivne email-adresse '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Ukendt brugernavn: [[[\"%s\"}}}. Angiv venligst brugernavn og adgangskode."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "Brugerprofil \"%s\" er deaktiveret."
-
-msgid "Sorry, wrong password."
-msgstr "Desværre, forkert adgangskode."
-
-msgid "Bad relogin URL."
-msgstr "Forkert adgangs-URL."
-
-msgid "Unknown user."
-msgstr "Ukendt bruger."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -620,8 +596,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Denne email-adresse tilhører allerede en anden."
 
-msgid "User account created!"
-msgstr "Brugerprofil oprettet!"
+msgid "User account created! You can use this account to login now..."
+msgstr "Brugerprofil oprettet. Du kan bruge denne konto til at logge på nu..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -644,9 +620,6 @@ msgstr "frit valg"
 
 msgid "Save"
 msgstr "Gem"
-
-msgid "Logout"
-msgstr "Log ud"
 
 msgid "Preferred theme"
 msgstr "Ønsket tema"
@@ -1366,14 +1339,14 @@ msgstr "Ingen ønskede sider i denne wiki."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "Dannelsen af reStructured text er ikke mulig - kræver docutils installeret."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
+msgstr "**Maks. antal tilladte inkluderinger overskredet**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr ""
+msgstr "**Kunne ikke finde den henviste side: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1471,6 +1444,9 @@ msgstr "[TOP]"
 
 msgid "Click to do a full-text search for this title"
 msgstr "Klik her for at lave en fritekstsøgning efter denne titel"
+
+msgid "Logout"
+msgstr "Log ud"
 
 msgid "Clear message"
 msgstr "Fjern besked"
@@ -1653,6 +1629,32 @@ msgstr "OmdøbSide"
 
 msgid "SpellCheck"
 msgstr "StaveKontrol"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Infokage slettet. Du er nu logget ud."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Ukendt brugernavn: [[[\"%s\"}}}. Angiv venligst brugernavn og adgangskode."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "Brugerprofil \"%s\" er deaktiveret."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Desværre, forkert adgangskode."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Forkert adgangs-URL."
+
+#~ msgid "Unknown user."
+#~ msgstr "Ukendt bruger."
+
+#~ msgid "User account created!"
+#~ msgstr "Brugerprofil oprettet!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Husk senest besøgte side"

@@ -332,8 +332,6 @@ Wskazane jest, aby po zalogowaniu się ustawić inne, nowe hasło.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Twoje dane czytelnika''',
-'''Cookie deleted. You are now logged out.''':
-'''Ciasteczko skasowane. Wylogowano.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
@@ -342,18 +340,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Podaj prawidłowy adres poczty elektronicznej!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
-'''Missing password. Please enter user name and password.''':
-'''Zapomniano o haśle. Podaj identyfikator i hasło.''',
-'''Account "%s" is disabled.''':
-'''Konto "%s" jest wyłączone.''',
-'''Sorry, wrong password.''':
-'''Przykro mi, nieprawidłowe hasło.''',
-'''Bad relogin URL.''':
-'''Niewłaściwy URL logowania.''',
-'''Unknown user.''':
-'''Nieznany identyfikator czytelnika.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
 '''Empty user name. Please enter a user name.''':
@@ -368,8 +354,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
 '''This email already belongs to somebody else.''':
 '''Ten adres poczty elektronicznej należy do kogoś innego.''',
-'''User account created!''':
-'''Konto utworzone!''',
+'''User account created! You can use this account to login now...''':
+'''Konto czytelnika utowrzone! Możesz teraz użyć tego konta żeby się zalogować...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':
@@ -384,8 +370,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''wybór dowolny''',
 '''Save''':
 '''Zachowaj''',
-'''Logout''':
-'''Wyjdź''',
 '''Preferred theme''':
 '''Ulubiony wystrój''',
 '''Editor Preference''':
@@ -867,6 +851,8 @@ czerwony=edycja''',
 '''[POCZĄTEK STRONY]''',
 '''Click to do a full-text search for this title''':
 '''Kliknij aby poszukać tytułu metodą pełnotekstową''',
+'''Logout''':
+'''Wyjdź''',
 '''Clear message''':
 '''Usuń wiadomość''',
 '''last edited %(time)s by %(editor)s''':

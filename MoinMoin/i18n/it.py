@@ -258,8 +258,6 @@ Il nome può contenere ogni carattere alfanumerico Unicode , con opzionale unosp
 '''corrispondenza''',
 '''matches''':
 '''corrispondenze''',
-'''Cookie deleted. You are now logged out.''':
-'''Il Cookie è stato cancellato! Sei stato disconnesso.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Questo wiki non è abilitato ad usare la mail. Contatta il gestore del wiki, o chi può abilitare la mail.''',
@@ -267,16 +265,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Per favore immetti un indirizzo email valido!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Non ho trovato nessuna corrispondenza per l\'indirizzo email \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nome utente sconosciuto: {{{"%s"}}}. Inserisci nome utente e password''',
-'''Missing password. Please enter user name and password.''':
-'''Password mancante. Inserisci nome utente e password''',
-'''Sorry, wrong password.''':
-'''Spiacente, password errata.''',
-'''Bad relogin URL.''':
-'''Relogin URL non corretta.''',
-'''Unknown user.''':
-'''Nome utente non riconosciuto.''',
 '''Empty user name. Please enter a user name.''':
 '''Nome utente vuoto. Inserisci un nome utente''',
 '''This user name already belongs to somebody else.''':
@@ -297,8 +285,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''<Impostazioni del browser>''',
 '''Save''':
 '''Salva''',
-'''Logout''':
-'''Logout''',
 '''Preferred theme''':
 '''Tema preferito''',
 '''Time zone''':
@@ -704,6 +690,8 @@ rosso=Mod''',
 '''[INIZIO]''',
 '''Click to do a full-text search for this title''':
 '''Clicca qui per effettuare una ricerca full-text per questo titolo''',
+'''Logout''':
+'''Logout''',
 '''Clear message''':
 '''Nascondi questo messaggio''',
 '''last edited %(time)s by %(editor)s''':

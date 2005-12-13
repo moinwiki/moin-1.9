@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-11-11 07:18+0500\n"
 "Last-Translator: Igor TAmara <igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -566,9 +566,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "Sus datos de la cuenta del wiki en [%(sitename)s]"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie borrada. Ha salido del sistema."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -582,29 +579,6 @@ msgstr "¡Por favor, proporcione una dirección de e-mail válido!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "¡No se encontró una cuenta que coincida con el e-mail '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Nombre de usuario desconocido: {{{\"%s\"}}}. Por favor, ingrese su nombre de "
-"usuario y password"
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-"Faltó ingresar password. Por favor, ingrese nombre de usuario y password"
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "La cuenta \"%s\" está deshabilitada."
-
-msgid "Sorry, wrong password."
-msgstr "Lo lamento, clave errónea"
-
-msgid "Bad relogin URL."
-msgstr "URL de re-ingreso no válida"
-
-msgid "Unknown user."
-msgstr "Nombre de usuario desconocido."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -633,8 +607,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Esta dirección e-mail ya es usada por alguien más."
 
-msgid "User account created!"
-msgstr "Cuenta de usuario creada!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -657,9 +631,6 @@ msgstr "elección libre"
 
 msgid "Save"
 msgstr "Guardar"
-
-msgid "Logout"
-msgstr "Salir"
 
 msgid "Preferred theme"
 msgstr "Tema preferido"
@@ -1494,6 +1465,9 @@ msgid "Click to do a full-text search for this title"
 msgstr ""
 "Haz click aquí para efectuar una búsqueda de contenidos para este título"
 
+msgid "Logout"
+msgstr "Salir"
+
 msgid "Clear message"
 msgstr "Quitar mensaje"
 
@@ -1675,6 +1649,34 @@ msgstr "RenombrarPágina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie borrada. Ha salido del sistema."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nombre de usuario desconocido: {{{\"%s\"}}}. Por favor, ingrese su nombre "
+#~ "de usuario y password"
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr ""
+#~ "Faltó ingresar password. Por favor, ingrese nombre de usuario y password"
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "La cuenta \"%s\" está deshabilitada."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Lo lamento, clave errónea"
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "URL de re-ingreso no válida"
+
+#~ msgid "Unknown user."
+#~ msgstr "Nombre de usuario desconocido."
+
+#~ msgid "User account created!"
+#~ msgstr "Cuenta de usuario creada!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Recordar la última página visitada"

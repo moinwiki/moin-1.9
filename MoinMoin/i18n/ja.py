@@ -334,8 +334,6 @@ Wikiのパスワード入力欄にパスワードを入力してください。
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] アカウント情報''',
-'''Cookie deleted. You are now logged out.''':
-'''クッキーが削除されました。ログアウト完了。''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''このwikiではメールが利用できません。
@@ -344,16 +342,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''正しいメールアドレスを入力してください。''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
-'''Missing password. Please enter user name and password.''':
-'''パスワードが入力されていません。ユーザ名とパスワードを入力してください。''',
-'''Sorry, wrong password.''':
-'''不正なパスワードです。''',
-'''Bad relogin URL.''':
-'''再ログインのURLが不正です。''',
-'''Unknown user.''':
-'''不正なユーザ名です。''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''設定変更やアカウント作成をおこなうには、["ユーザプレファレンス"]を利用してください。''',
 '''Empty user name. Please enter a user name.''':
 '''ユーザ名が入力されていません。ユーザ名を入力してください。''',
 '''This user name already belongs to somebody else.''':
@@ -366,8 +356,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''メールアドレスを入力してください。ログイン情報を忘れてしまった際、メールにてお知らせするために必要となります。''',
 '''This email already belongs to somebody else.''':
 '''このメールアドレスはすでに利用されています。''',
-'''User account created!''':
-'''ユーザアカウントが作成されました。''',
+'''User account created! You can use this account to login now...''':
+'''ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
 '''User preferences saved!''':
@@ -382,8 +372,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''自由選択''',
 '''Save''':
 '''保存''',
-'''Logout''':
-'''ログアウト''',
 '''Preferred theme''':
 '''テーマ''',
 '''Editor Preference''':
@@ -485,7 +473,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''You are not allowed to revert this page!''':
 '''このページを前のバージョンに戻す権限がありません。''',
 '''You must login to add a quicklink.''':
-'''クイックリンクを追加するためには、ログインしてください。''',
+'''クイックリンクを追加するには、ログインしてください。''',
 '''Your quicklink to this page has been removed.''':
 '''このページへのクイックリンクを削除しました。''',
 '''A quicklink to this page has been added for you.''':
@@ -495,9 +483,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''This wiki is not enabled for mail processing.''':
 '''このwikiではメールを利用できません。''',
 '''You must log in to use subscribtions.''':
-'''購読を利用するためには、ログインしてください。''',
+'''購読を利用するには、ログインしてください。''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''購読を利用するためには、["ユーザプレファレンス"]にてメールアドレスを登録してください。''',
+'''購読を利用するには、["ユーザプレファレンス"]にてメールアドレスを登録してください。''',
 '''Your subscribtion to this page has been removed.''':
 '''このページの購読を停止しました。''',
 '''Can\'t remove regular expression subscription!''':
@@ -793,6 +781,8 @@ Try a different name.''':
 '''このwikiのXML exportをダウンロード''',
 '''No wanted pages in this wiki.''':
 '''このwikiに参照先がないページはありません。''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''reStructured textを利用できません。docutilsをインストールしてください。''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**インクルードの許容数を越えました**''',
 '''**Could not find the referenced page: %s**''':
@@ -857,6 +847,8 @@ red=edit''':
 '''画面上へ''',
 '''Click to do a full-text search for this title''':
 '''このタイトルでテキスト検索するには、ここをクリックしてください''',
+'''Logout''':
+'''ログアウト''',
 '''Clear message''':
 '''メッセージを消去''',
 '''last edited %(time)s by %(editor)s''':

@@ -328,8 +328,6 @@ Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu r
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Les dades del vostre compte wiki''',
-'''Cookie deleted. You are now logged out.''':
-'''S\'ha suprimit la galeta. Heu eixit del vostre compte.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Aquest wiki no té habilitat el processament de correu.
@@ -338,16 +336,6 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Proveïu una adreça de correu vàlida''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''El nom d\'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d\'usuari i contrasenya.''',
-'''Missing password. Please enter user name and password.''':
-'''Manca la contrasenya. Introduïu el nom d\'usuari i contrasenya.''',
-'''Sorry, wrong password.''':
-'''Contrasenya errònia.''',
-'''Bad relogin URL.''':
-'''L\'URL de reentrada és errònia.''',
-'''Unknown user.''':
-'''L\'usuari és desconegut.''',
 '''Empty user name. Please enter a user name.''':
 '''El nom d\'usuari és buit. Introduïu un nom d\'usuari.''',
 '''This user name already belongs to somebody else.''':
@@ -360,8 +348,6 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació d\'entrada, podeu recuperar-la per correu.''',
 '''This email already belongs to somebody else.''':
 '''Aquest correu electrònic ja pertany a algú.''',
-'''User account created!''':
-'''S\'ha creat el compte d\'usuari!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No s\'ha pogut carregar el tema «%(theme_name)s.''',
 '''User preferences saved!''':
@@ -376,8 +362,6 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''selecció lliure''',
 '''Save''':
 '''Desa''',
-'''Logout''':
-'''Surt''',
 '''Preferred theme''':
 '''Tema preferit''',
 '''Editor Preference''':
@@ -813,6 +797,8 @@ roig=edició''',
 '''[SUPERIOR]''',
 '''Click to do a full-text search for this title''':
 '''Feu clic per a fer una cerca del text complet per a aquest títol''',
+'''Logout''':
+'''Surt''',
 '''Clear message''':
 '''Neteja el missatge''',
 '''last edited %(time)s by %(editor)s''':

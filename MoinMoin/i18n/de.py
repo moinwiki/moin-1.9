@@ -332,8 +332,6 @@ Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort neu
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Ihre Wiki-Acount-Daten''',
-'''Cookie deleted. You are now logged out.''':
-'''Das "Cookie" wurde gelöscht. Sie sind jetzt abgemeldet.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.
@@ -342,18 +340,6 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Bitte eine gültige E-Mail-Adresse angeben!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Es wurde kein Benutzerkonto mit der E-Mail-Adresse \'%(email)s\' gefunden!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzernamen und Passwort ein.''',
-'''Missing password. Please enter user name and password.''':
-'''Fehlendes Passwort. Bitte Benutzername und Passwort eingeben.''',
-'''Account "%s" is disabled.''':
-'''Konto "%s" ist deaktiviert.''',
-'''Sorry, wrong password.''':
-'''Falsches Passwort.''',
-'''Bad relogin URL.''':
-'''Ungültige Relogin-URL.''',
-'''Unknown user.''':
-'''Unbekannter Benutzer.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein Konto zu erzeugen.''',
 '''Empty user name. Please enter a user name.''':
@@ -368,8 +354,6 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen verlieren können Sie sie per E-Mail wieder bekommen.''',
 '''This email already belongs to somebody else.''':
 '''Diese E-Mail-Adresse gehört bereits jemand anderem.''',
-'''User account created!''':
-'''Benutzerprofil angelegt!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Das Theme \'%(theme_name)s\' konnte nicht geladen werden!''',
 '''User preferences saved!''':
@@ -384,8 +368,6 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Freie Auswahl''',
 '''Save''':
 '''Speichern''',
-'''Logout''':
-'''Abmelden''',
 '''Preferred theme''':
 '''Bevorzugter Stil''',
 '''Editor Preference''':
@@ -866,6 +848,8 @@ rot=Änderungen''',
 '''[KOPF]''',
 '''Click to do a full-text search for this title''':
 '''Hier klicken für eine Liste der Seiten, die auf diese verweisen''',
+'''Logout''':
+'''Abmelden''',
 '''Clear message''':
 '''Nachricht löschen''',
 '''last edited %(time)s by %(editor)s''':

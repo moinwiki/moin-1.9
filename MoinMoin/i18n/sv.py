@@ -336,8 +336,6 @@ lösenord.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Din wiki-kontoinformation''',
-'''Cookie deleted. You are now logged out.''':
-'''Kakan togs bort. Du är nu utloggad.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Den här wikin har inte eposthantering påslagen.
@@ -346,18 +344,6 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Var god ange en korrekt epostadress!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Kunde inte hitta något konto med epostadressen "%(email)s"!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Okänt användarnamn: {{{"%s"}}}. Var god ange ditt användarnamn och lösenord.''',
-'''Missing password. Please enter user name and password.''':
-'''Lösenord saknas. Var god ange ditt användarnamn och lösenord.''',
-'''Account "%s" is disabled.''':
-'''Kontot "%s" är avstängt.''',
-'''Sorry, wrong password.''':
-'''Tyvärr, felaktigt lösenord.''',
-'''Bad relogin URL.''':
-'''Ogiltig ominloggnings-URL.''',
-'''Unknown user.''':
-'''Okänd användare.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Använd AnvändarInställningar för att ändra dina inställningar eller skapa ett konto.''',
 '''Empty user name. Please enter a user name.''':
@@ -372,8 +358,6 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan du få tillbaka dem via epost.''',
 '''This email already belongs to somebody else.''':
 '''Den här epostadressen tillhör redan någon annan.''',
-'''User account created!''':
-'''Användarkonto skapat!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Temat \'%(theme_name)s\' kunde inte laddas!''',
 '''User preferences saved!''':
@@ -388,8 +372,6 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''valfritt''',
 '''Save''':
 '''Spara''',
-'''Logout''':
-'''Logga ut''',
 '''Preferred theme''':
 '''Önskat tema''',
 '''Editor Preference''':
@@ -865,6 +847,8 @@ röd=ändra''',
 '''[BÖRJAN]''',
 '''Click to do a full-text search for this title''':
 '''Klicka här för att göra en fulltextsökning på den här titeln''',
+'''Logout''':
+'''Logga ut''',
 '''Clear message''':
 '''Ta bort meddelande''',
 '''last edited %(time)s by %(editor)s''':

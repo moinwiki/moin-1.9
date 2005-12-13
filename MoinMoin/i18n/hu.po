@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -554,9 +554,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "A sütit letöröltük. Ön kilépett."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -570,28 +567,6 @@ msgstr "Kérjük, hogy érvényes levélcímet adjon meg!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Nem találtunk a megadott '%(email)s' címhez felhasználói azonosítót!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Ismeretlen felhasználónév: {{{\"%s\"}}}. Kérjük adja meg a felhasználónevet "
-"és a jelszót."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Sajnos rossz a jelszó."
-
-msgid "Bad relogin URL."
-msgstr "Hibás újrabejelentkezési URL."
-
-msgid "Unknown user."
-msgstr "Ismeretlen felhasználó."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -619,7 +594,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Ezt a levélcímet már más bejegyezte."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -643,9 +618,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Mentés"
-
-msgid "Logout"
-msgstr "Kilépés"
 
 msgid "Preferred theme"
 msgstr "Kedvenc téma"
@@ -1477,6 +1449,9 @@ msgstr "[FELÜLRE]"
 msgid "Click to do a full-text search for this title"
 msgstr "Kattintson a cím teljes szöveges kereséséért"
 
+msgid "Logout"
+msgstr "Kilépés"
+
 msgid "Clear message"
 msgstr "Üzenet törlése"
 
@@ -1668,6 +1643,27 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "A sütit letöröltük. Ön kilépett."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Ismeretlen felhasználónév: {{{\"%s\"}}}. Kérjük adja meg a "
+#~ "felhasználónevet és a jelszót."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Sajnos rossz a jelszó."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Hibás újrabejelentkezési URL."
+
+#~ msgid "Unknown user."
+#~ msgstr "Ismeretlen felhasználó."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "A legutóbbi meglátogatott lap megjegyzése"

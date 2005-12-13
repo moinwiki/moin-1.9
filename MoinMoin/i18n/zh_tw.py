@@ -251,8 +251,6 @@ space between words. Group page name is not allowed.''':
 '''筆''',
 '''matches''':
 '''筆''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie 已經刪除. 你登出了.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''本 wiki 不支援郵寄工作.
@@ -261,16 +259,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''請輸入合法的 email 地址!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''找不到登記為 \'%(email)s\' 的帳戶!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''找不到使用者: {{{"%s"}}}. 請輸入名稱及密碼.''',
-'''Missing password. Please enter user name and password.''':
-'''沒輸入密碼. 請輸入名稱及密碼.''',
-'''Sorry, wrong password.''':
-'''密碼錯了!''',
-'''Bad relogin URL.''':
-'''錯誤的重新登入 URL.''',
-'''Unknown user.''':
-'''使用者名稱錯誤.''',
 '''Empty user name. Please enter a user name.''':
 '''請輸入使用者名稱!''',
 '''This user name already belongs to somebody else.''':
@@ -291,8 +279,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''<依瀏覽器設定>''',
 '''Save''':
 '''存檔''',
-'''Logout''':
-'''登出''',
 '''Preferred theme''':
 '''佈景主題''',
 '''Time zone''':
@@ -673,6 +659,8 @@ red=edit''':
 '''首頁''',
 '''Click to do a full-text search for this title''':
 '''點一下: 對本頁標題做全文檢索''',
+'''Logout''':
+'''登出''',
 '''Clear message''':
 '''關閉訊息視窗''',
 '''last edited %(time)s by %(editor)s''':

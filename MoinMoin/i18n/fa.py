@@ -328,8 +328,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] اطلاعات مربوط به حساب کاربری شما''',
-'''Cookie deleted. You are now logged out.''':
-'''کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''گزینه جابجایی ایمیل برای این ویکی فعال نمی باشد.
@@ -338,18 +336,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''لطفا یک آدرس ایمیل معتبر وارد نمایید!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''هیچ حساب کاربری مطابق با آدرس ایمیل \'%(email)s\' یافت نشد!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید.''',
-'''Missing password. Please enter user name and password.''':
-'''کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید.''',
-'''Account "%s" is disabled.''':
-'''حساب کاربری "%s" خیر فعال شده است.''',
-'''Sorry, wrong password.''':
-'''متاسفم٬ کلمه عبور اشتباه می باشد.''',
-'''Bad relogin URL.''':
-'''آدرس ورود مجدد اشتباه است.''',
-'''Unknown user.''':
-'''کاربر غیر ثبت شده''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''از بخش مرجع کاربران برای تغییر تنظیمات خود و یا ایجاد یک حساب جدید استفاده نمایید.''',
 '''Empty user name. Please enter a user name.''':
@@ -364,8 +350,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را از دست بدهید از طریق ایمیل این اطلاعات برای شما ارسال خواهند شد.''',
 '''This email already belongs to somebody else.''':
 '''این ایمیل توسط شخص دیگری وارد شده است.''',
-'''User account created!''':
-'''حساب کاربری شما ثبت شد!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''تم درخواستی شما \'%(theme_name)s\' بالا نیامد!''',
 '''User preferences saved!''':
@@ -380,8 +364,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''گزینه رایگان''',
 '''Save''':
 '''ذخیره کن''',
-'''Logout''':
-'''خروج''',
 '''Preferred theme''':
 '''تم کاربری ترجیح داده شده''',
 '''Editor Preference''':
@@ -853,6 +835,8 @@ red=edit''':
 '''[ابتدا]''',
 '''Click to do a full-text search for this title''':
 '''برای انجام جستجوی کامل این موضوع کلیک نمایید''',
+'''Logout''':
+'''خروج''',
 '''Clear message''':
 '''پیغام حذف شود''',
 '''last edited %(time)s by %(editor)s''':

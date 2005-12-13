@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-04-17 00:00+0100\n"
 "Last-Translator: Leonardo Gregianin\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -551,9 +551,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie deletada. Você saiu do sistema agora."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -567,28 +564,6 @@ msgstr "Por favor, coloque um e-mail válido!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Não existe uma conta que coincida com o e-mail '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Nome de usuário desconhecido: {{{\"%s\"}}}. Por favor, insira usuário e "
-"senha novamente."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Senha inválida. Por favor, insira usuário e senha novamente."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Desculpe, senha inválida."
-
-msgid "Bad relogin URL."
-msgstr "URL de re-ingreso não válida."
-
-msgid "Unknown user."
-msgstr "Nome de usuário desconhecido."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -617,7 +592,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Este endereço de e-mail já é utilizado por alguém."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -641,9 +616,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Salvar"
-
-msgid "Logout"
-msgstr "Sair"
 
 msgid "Preferred theme"
 msgstr "Tema preferido"
@@ -1479,6 +1451,9 @@ msgstr "[INÍCIO]"
 msgid "Click to do a full-text search for this title"
 msgstr "Clique aqui para fazer uma buscar pelo conteúdo deste título"
 
+msgid "Logout"
+msgstr "Sair"
+
 msgid "Clear message"
 msgstr "Limpar mensagem"
 
@@ -1668,6 +1643,27 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "CorreçãoOrtográfica"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie deletada. Você saiu do sistema agora."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nome de usuário desconhecido: {{{\"%s\"}}}. Por favor, insira usuário e "
+#~ "senha novamente."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Senha inválida. Por favor, insira usuário e senha novamente."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Desculpe, senha inválida."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "URL de re-ingreso não válida."
+
+#~ msgid "Unknown user."
+#~ msgstr "Nome de usuário desconhecido."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Recordar a última página visitada"

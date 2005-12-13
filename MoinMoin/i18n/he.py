@@ -278,8 +278,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] פרטי המשתמש שלך''',
-'''Cookie deleted. You are now logged out.''':
-'''קוקית נמחקה, אתם מנותקים.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''דואר אלקטרוני לא מאופשר בוויקי הזה
@@ -288,16 +286,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''משתמש לא קיים: {{{"%s"}}}. אנא הכנס שם משתמש וסיסמא.''',
-'''Missing password. Please enter user name and password.''':
-'''סיסמא חסרה. אנא הכנס שם משתמש וסיסמא.''',
-'''Sorry, wrong password.''':
-'''מצטער, סיסמא לא נכונה.''',
-'''Bad relogin URL.''':
-'''כתובת חיבור–מחדש לא נכונה.''',
-'''Unknown user.''':
-'''משתמש לא קיים.''',
 '''Empty user name. Please enter a user name.''':
 '''שם משתמש ריק. אנא הכנס שם משתמש.''',
 '''This user name already belongs to somebody else.''':
@@ -318,8 +306,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''העדפת דפדפן''',
 '''Save''':
 '''שמור''',
-'''Logout''':
-'''התנתק''',
 '''Preferred theme''':
 '''עיצוב''',
 '''Time zone''':
@@ -738,6 +724,8 @@ red=edit''':
 '''למעלה''',
 '''Click to do a full-text search for this title''':
 '''חפשו דפים הקשורים לדף זה''',
+'''Logout''':
+'''התנתק''',
 '''Clear message''':
 '''סגור הודעה''',
 '''last edited %(time)s by %(editor)s''':

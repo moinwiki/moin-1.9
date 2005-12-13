@@ -294,8 +294,6 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''nález''',
 '''matches''':
 '''nálezů''',
-'''Cookie deleted. You are now logged out.''':
-'''Koláček byl smazán. Nyní jste odhlášeni.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Tato wiki není upravena na posílání emailů.
@@ -304,18 +302,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Napište prosím platnou emailovou adresu!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Nebyl nalezen žádný účet, který by odpovídal zadané emailové adrese \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Neznámý uživatel: {{{"%s"}}}. Zadejte prosím Vaše uživatelské jméno a heslo.''',
-'''Missing password. Please enter user name and password.''':
-'''Chybějící heslo. Zadejte prosím vaše uživatelské jméno a heslo.''',
-'''Account "%s" is disabled.''':
-'''Účet "%s" je zakázaný.''',
-'''Sorry, wrong password.''':
-'''Lituji, neplatné heslo.''',
-'''Bad relogin URL.''':
-'''Neplatné URL opětovného přihlášení.''',
-'''Unknown user.''':
-'''Neznámý uživatel.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Své nastavení změníte nebo účet vytvoříte v NastaveniUzivatele.''',
 '''Empty user name. Please enter a user name.''':
@@ -330,8 +316,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Zadejte prosím Váš email. Pokud zapomenete Vaše přihlašovací informace, mohou Vám být na tento email zaslány.''',
 '''This email already belongs to somebody else.''':
 '''Tato emailová adresa patří již někomu jinému.''',
-'''User account created!''':
-'''Uživatelský účet vytvořen!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nemohu nahrát téma \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -346,8 +330,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''nechat možnost volby''',
 '''Save''':
 '''Uložit''',
-'''Logout''':
-'''Odhlásit''',
 '''Preferred theme''':
 '''Oblíbené téma''',
 '''Editor Preference''':
@@ -808,6 +790,8 @@ red=edit''':
 '''[ZÁHLAVÍ]''',
 '''Click to do a full-text search for this title''':
 '''Fulltextové prohledávání na tento název stránky''',
+'''Logout''':
+'''Odhlásit''',
 '''Clear message''':
 '''Odstranit zprávu''',
 '''last edited %(time)s by %(editor)s''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -565,9 +565,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Les dades del vostre compte wiki"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -582,28 +579,6 @@ msgstr "Proveïu una adreça de correu vàlida"
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "No s'ha trobat cap compte que concorde amb l'adreça de correu «%(email)s»."
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"El nom d'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d'usuari i "
-"contrasenya."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Contrasenya errònia."
-
-msgid "Bad relogin URL."
-msgstr "L'URL de reentrada és errònia."
-
-msgid "Unknown user."
-msgstr "L'usuari és desconegut."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -630,8 +605,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Aquest correu electrònic ja pertany a algú."
 
-msgid "User account created!"
-msgstr "S'ha creat el compte d'usuari!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -654,9 +629,6 @@ msgstr "selecció lliure"
 
 msgid "Save"
 msgstr "Desa"
-
-msgid "Logout"
-msgstr "Surt"
 
 msgid "Preferred theme"
 msgstr "Tema preferit"
@@ -1493,6 +1465,9 @@ msgstr "[SUPERIOR]"
 msgid "Click to do a full-text search for this title"
 msgstr "Feu clic per a fer una cerca del text complet per a aquest títol"
 
+msgid "Logout"
+msgstr "Surt"
+
 msgid "Clear message"
 msgstr "Neteja el missatge"
 
@@ -1673,6 +1648,30 @@ msgstr "Reanomena la pàgina"
 
 msgid "SpellCheck"
 msgstr "Comprovació ortogràfica"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "El nom d'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d'usuari i "
+#~ "contrasenya."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Manca la contrasenya. Introduïu el nom d'usuari i contrasenya."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Contrasenya errònia."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "L'URL de reentrada és errònia."
+
+#~ msgid "Unknown user."
+#~ msgstr "L'usuari és desconegut."
+
+#~ msgid "User account created!"
+#~ msgstr "S'ha creat el compte d'usuari!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Recorda l'última pàgina visitada"
