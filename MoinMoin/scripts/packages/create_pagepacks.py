@@ -28,6 +28,7 @@ from MoinMoin.packages import packLine, unpackLine, MOIN_PACKAGE_FILE
 master_url ="http://moinmaster.wikiwikiweb.de/?action=xmlrpc2"
 
 EXTRA = u'extra'
+NODIST = u'nodist'
 ALL = u'all_languages'
 COMPRESSION_LEVEL = zipfile.ZIP_STORED
 
@@ -35,44 +36,45 @@ def buildPageSets():
     """ Calculates which pages should go into which package. """
     pageSets = {}
 
-    allPages = Set()
-
-    masterSet = Set(xmlrpclib.ServerProxy(master_url).getAllPages())
+    allPages = Set(xmlrpclib.ServerProxy(master_url).getAllPages())
 
     systemPages = wikidicts.Group(request, "SystemPagesGroup").members()
-
-    specialPages = Set([x for x in systemPages if not x.endswith("Group")] + ["SystemPagesGroup"])
 
     for pagename in systemPages:
         if pagename.endswith("Group"):
             #print x + " -> " + repr(wikidicts.Group(request, x).members())
             gd.addgroup(request, pagename)
 
+    langPages = Set()
     for name, group in gd.dictdict.items():
         group.expandgroups(gd)
         groupPages = Set(group.members() + [name])
         name = name.replace("SystemPagesIn", "").replace("Group", "")
         pageSets[name] = groupPages
-        allPages |= groupPages
+        langPages |= groupPages
 
-    masterNonSystemPages = masterSet - allPages - specialPages
+    specialPages = Set(["SystemPagesGroup"])
 
-    frontPagesEtc = Set([x for x in masterNonSystemPages if not (
-        x.startswith("MoinI18n") or x == "MoinPagesEditorGroup" or
-        x == "InterWikiMap"
-        )])
+    masterNonSystemPages = allPages - langPages - specialPages
 
-    specialPages |= frontPagesEtc
+    moinI18nPages = Set([x for x in masterNonSystemPages if x.startswith("MoinI18n")])
+    
+    nodistPages = moinI18nPages | Set([
+            "MoinPagesEditorGroup",
+            "InterWikiMap",
+            ])
 
-    pageSets[EXTRA] = specialPages
+    extraPages = masterNonSystemPages - nodistPages
 
-    pageSets[ALL] = allPages
-
+    pageSets[ALL] = langPages
+    
     for name in pageSets.keys():
-        if name not in (EXTRA, u"English"):
-            pageSets[name] -= pageSets[EXTRA]
+        if name not in (u"English"):
             pageSets[name] -= pageSets[u"English"]
+            pageSets[name] -= nodistPages
 
+    pageSets[EXTRA] = extraPages   # stuff that maybe should be in some language group
+    pageSets[NODIST] = nodistPages # we dont want to have them in dist archive
     return pageSets
 
 def packagePages(pagelist, filename, function):
@@ -106,6 +108,18 @@ def packagePages(pagelist, filename, function):
     zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
     zf.close()
 
+def removePages(pagelist):
+    """ Pages from pagelist get removed from the underlay directory. """
+    import shutil
+    for pagename in pagelist:
+        pagename = pagename.strip()
+        page = Page(request, pagename)
+        try:
+            underlay, path = page.getPageBasePath(-1)
+            shutil.rmtree(path)
+        except:
+            pass
+
 def packageCompoundInstaller(bundledict, filename):
     """ Creates a package which installs all other packages. """
     try:
@@ -118,7 +132,7 @@ def packageCompoundInstaller(bundledict, filename):
               ]
 
     script += [packLine(["InstallPackage", "SystemPagesSetup", name + ".zip"])
-               for name in bundledict.keys() if name not in (EXTRA, ALL, u"English")]
+               for name in bundledict.keys() if name not in (NODIST, EXTRA, ALL, u"English")]
     script += [packLine(['Print', 'Installed all MoinMaster page bundles.'])]
 
     zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
@@ -175,7 +189,12 @@ print "Creating packages ..."
 generate_filename = lambda name: os.path.join('testwiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
 
 packageCompoundInstaller(pageSets, generate_filename(ALL))
-[packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items() if name != ALL]
+
+[packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") 
+    for name, pages in pageSets.items() if not name in (u'English', ALL, NODIST)]
+
+[removePages(list(pages)) 
+    for name, pages in pageSets.items() if not name in (u'English', ALL)]
 
 print "Finished."
 

@@ -8,13 +8,6 @@ share := ./wiki
 all:
 	python setup.py build
 
-dist:
-	-rm MANIFEST
-	python setup.py sdist
-
-pagepacks:
-	python MoinMoin/scripts/packages/create_pagepacks.py
-
 install-docs:
 	-mkdir build
 	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://moinmaster.wikiwikiweb.de/MoinMoin/InstallDocs?action=print"
@@ -64,6 +57,16 @@ underlay:
 	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001
 	cd $(share); rm -rf underlay.tar.bz2; tar cjf underlay.tar.bz2 underlay
 
+pagepacks:
+	@python tests/maketestwiki.py
+	@python MoinMoin/scripts/packages/create_pagepacks.py
+	cd $(share) ; rm -rf underlay
+	cp -a $(testwiki)/underlay $(share)/
+	
+dist:
+	-rm MANIFEST
+	python setup.py sdist
+
 # Create patchlevel module
 patchlevel:
 	@echo -e patchlevel = "\"`tla logs | tail -n1`\"\n" >MoinMoin/patchlevel.py
@@ -87,6 +90,7 @@ merge:
 	tla star-merge arch@arch.thinkmo.de--2003-archives/moin--main--1.3
 
 test: 
+	@python tests/maketestwiki.py
 	@python tests/runtests.py
 
 clean: clean-testwiki clean-pyc
