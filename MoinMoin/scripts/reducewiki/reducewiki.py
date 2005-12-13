@@ -41,7 +41,7 @@ url = 'moinmaster.wikiwikiweb.de/'
 destdir = 'underlay'
 
 import sys
-sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin') # farmconfig/wikiconfig location
+sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin15') # farmconfig/wikiconfig location
 sys.path.insert(0, '../../..')
 
 import os, os.path, shutil, codecs
