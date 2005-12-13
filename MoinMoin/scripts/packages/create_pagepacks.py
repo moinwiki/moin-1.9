@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 """
     MoinMoin - Package Generator
@@ -6,8 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
-import sys
+import os, sys
 import zipfile
 import threading
 import xmlrpclib
@@ -15,16 +15,19 @@ from sets import Set
 from datetime import datetime
 from time import sleep
 
-#your MoinMoin package path here
-#sys.path.append(r"C:\CachedFromDesktop\MoinMoin\_resources")
+# your MoinMoin package path here
+sys.path.insert(0, r"../../..")
+sys.path.insert(0, r".")
 
 from MoinMoin import config, wikidicts, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.request import RequestCLI
-from packages import packLine, unpackLine, MOIN_PACKAGE_FILE
+from MoinMoin.packages import packLine, unpackLine, MOIN_PACKAGE_FILE
 
-BASE = u'base'
+master_url ="http://moinmaster.wikiwikiweb.de/?action=xmlrpc2"
+
+EXTRA = u'extra'
 ALL = u'all_languages'
 COMPRESSION_LEVEL = zipfile.ZIP_STORED
 
@@ -34,7 +37,7 @@ def buildPageSets():
 
     allPages = Set()
 
-    masterSet = Set(xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2").getAllPages())
+    masterSet = Set(xmlrpclib.ServerProxy(master_url).getAllPages())
 
     systemPages = wikidicts.Group(request, "SystemPagesGroup").members()
 
@@ -61,13 +64,14 @@ def buildPageSets():
 
     specialPages |= frontPagesEtc
 
-    pageSets[BASE] = pageSets[u"English"] | specialPages
+    pageSets[EXTRA] = specialPages
 
     pageSets[ALL] = allPages
 
     for name in pageSets.keys():
-        if name not in (BASE, u"English"):
-            pageSets[name] -= pageSets[BASE]
+        if name not in (EXTRA, u"English"):
+            pageSets[name] -= pageSets[EXTRA]
+            pageSets[name] -= pageSets[u"English"]
 
     return pageSets
 
@@ -114,7 +118,7 @@ def packageCompoundInstaller(bundledict, filename):
               ]
 
     script += [packLine(["InstallPackage", "SystemPagesSetup", name + ".zip"])
-               for name in bundledict.keys() if name not in (BASE, ALL, u"English")]
+               for name in bundledict.keys() if name not in (EXTRA, ALL, u"English")]
     script += [packLine(['Print', 'Installed all MoinMaster page bundles.'])]
 
     zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
@@ -122,7 +126,7 @@ def packageCompoundInstaller(bundledict, filename):
 
 def getMasterPages():
     """ Leechezzz. """
-    master = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2")
+    master = xmlrpclib.ServerProxy(master_url)
     maxThreads = 100
 
     def downloadpage(wiki, pagename):
@@ -157,7 +161,7 @@ def getMasterPages():
             #print "Scheduled %s." % repr(t)
         sleep(1)
 
-request = RequestCLI(url = 'localhost/')
+request = RequestCLI(url='localhost/')
 request.form = request.args = request.setup_args()
 
 gd = wikidicts.GroupDict(request)
@@ -168,9 +172,10 @@ print "Building page sets ..."
 pageSets = buildPageSets()
 
 print "Creating packages ..."
-generate_filename = lambda name: r"C:\CachedFromDesktop\MoinMoin\_underlay\SystemPagesSetup\attachments" + "\\" + name + ".zip"
+generate_filename = lambda name: os.path.join('testwiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
 
 packageCompoundInstaller(pageSets, generate_filename(ALL))
-[packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items() if name not in (u"English", ALL)]
+[packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") for name, pages in pageSets.items() if name != ALL]
 
 print "Finished."
+

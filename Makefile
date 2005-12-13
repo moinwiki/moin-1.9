@@ -12,6 +12,9 @@ dist:
 	-rm MANIFEST
 	python setup.py sdist
 
+pagepacks:
+	python MoinMoin/scripts/packages/create_pagepacks.py
+
 install-docs:
 	-mkdir build
 	wget -U MoinMoin/Makefile -O build/INSTALL.html "http://moinmaster.wikiwikiweb.de/MoinMoin/InstallDocs?action=print"
