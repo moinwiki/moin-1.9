@@ -326,8 +326,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Ваша запись пользователя''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie стерты. Вы вышли.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
@@ -335,16 +333,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Пожалуйста укажите правильный почтовый адрес!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Не найдено пользователя с таким адресом \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Неизвестное имя пользователя: {{{"%s"}}}. Пожалуйста введите имя пользователя и пароль.''',
-'''Missing password. Please enter user name and password.''':
-'''Пароль не указан. Пожалуйста введите имя пользователя и пароль.''',
-'''Sorry, wrong password.''':
-'''Увы, пароль не подходит.''',
-'''Bad relogin URL.''':
-'''Плохой URL''',
-'''Unknown user.''':
-'''Неизвестный пользователь.''',
 '''Empty user name. Please enter a user name.''':
 '''Имя не указано. Пожалуйста введите имя пользователя.''',
 '''This user name already belongs to somebody else.''':
@@ -357,8 +345,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
 '''This email already belongs to somebody else.''':
 '''Это чужой адрес.''',
-'''User account created!''':
-'''Пользователь создан!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Не могу загрузать макияж \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -373,8 +359,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''по выбору''',
 '''Save''':
 '''Записать''',
-'''Logout''':
-'''Выйти''',
 '''Preferred theme''':
 '''Предпочитаемый стиль''',
 '''Editor Preference''':
@@ -849,6 +833,8 @@ red=edit''':
 '''[ВВЕРХ]''',
 '''Click to do a full-text search for this title''':
 '''Нажмите сюда для поиска этого названия везде''',
+'''Logout''':
+'''Выйти''',
 '''Clear message''':
 '''Убрать это сообщение''',
 '''last edited %(time)s by %(editor)s''':

@@ -332,8 +332,6 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] 您的维基帐号资料''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie已经删除. 您已登出.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
@@ -341,18 +339,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''请提供一个有效的电子邮件地址!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''找不到用\'%(email)s\'登记的帐户!!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
-'''Missing password. Please enter user name and password.''':
-'''需要密码, 请输入用户名和密码.''',
-'''Account "%s" is disabled.''':
-'''"%s"的帐号被停用''',
-'''Sorry, wrong password.''':
-'''对不起, 无效密码.''',
-'''Bad relogin URL.''':
-'''无效的登录URL.''',
-'''Unknown user.''':
-'''无效用户.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''请到用户设置(UserPreferences)修改您的设置或创建新的帐号.''',
 '''Empty user name. Please enter a user name.''':
@@ -367,8 +353,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回.''',
 '''This email already belongs to somebody else.''':
 '''别人已经用这个电子邮件注册过了.''',
-'''User account created!''':
-'''用户帐号成功创建!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''未能装载主题\'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -383,8 +367,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''随意选择''',
 '''Save''':
 '''保存''',
-'''Logout''':
-'''登出''',
 '''Preferred theme''':
 '''主题''',
 '''Editor Preference''':
@@ -775,7 +757,7 @@ Try a different name.''':
 '''Drawing \'%(filename)s\' saved.''':
 '''图片\'%(filename)s\'已保存''',
 '''%(mins)dm ago''':
-'''%(mins)dm分钟前''',
+'''%(mins)d分钟前''',
 '''(no bookmark set)''':
 '''(未设置书签)''',
 '''(currently set to %s)''':
@@ -862,6 +844,8 @@ red=edit''':
 '''[顶部]''',
 '''Click to do a full-text search for this title''':
 '''点击对这个标题进行全文检索''',
+'''Logout''':
+'''登出''',
 '''Clear message''':
 '''清除此提示信息''',
 '''last edited %(time)s by %(editor)s''':

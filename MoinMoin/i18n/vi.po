@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -547,9 +547,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -563,28 +560,6 @@ msgstr "Vui lòng cho biết địa chỉ thư điện tử hợp lệ!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Không tìm thấy account có địa chỉ thư điện tử '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
-"khẩu."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Xin lỗi, sai mật khẩu."
-
-msgid "Bad relogin URL."
-msgstr "URL đăng nhập lại không chính xác."
-
-msgid "Unknown user."
-msgstr "Không rõ người dùng."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -612,7 +587,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Địa chỉ thư điện tử này đã được đăng ký."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -636,9 +611,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Lưu"
-
-msgid "Logout"
-msgstr "Thoát"
 
 msgid "Preferred theme"
 msgstr "Theme mặc định"
@@ -1469,6 +1441,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này"
 
+msgid "Logout"
+msgstr "Thoát"
+
 msgid "Clear message"
 msgstr "Xoá thông báo"
 
@@ -1657,6 +1632,27 @@ msgstr "RenamePage"
 
 msgid "SpellCheck"
 msgstr "SpellCheck"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
+#~ "khẩu."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Xin lỗi, sai mật khẩu."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "URL đăng nhập lại không chính xác."
+
+#~ msgid "Unknown user."
+#~ msgstr "Không rõ người dùng."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Nhớ trang cuối"

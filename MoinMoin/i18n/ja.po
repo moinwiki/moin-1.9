@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
-"PO-Revision-Date: 2005-11-20 00:10+0900\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"PO-Revision-Date: 2005-12-10 22:50+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -557,9 +557,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] アカウント情報"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "クッキーが削除されました。ログアウト完了。"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -574,29 +571,8 @@ msgstr "正しいメールアドレスを入力してください。"
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
 
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "{{{\"%s\"}}}は不正なユーザ名です。正しいユーザ名を入力してください。"
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-"パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "不正なパスワードです。"
-
-msgid "Bad relogin URL."
-msgstr "再ログインのURLが不正です。"
-
-msgid "Unknown user."
-msgstr "不正なユーザ名です。"
-
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用してください。"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "ユーザ名が入力されていません。ユーザ名を入力してください。"
@@ -620,8 +596,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "このメールアドレスはすでに利用されています。"
 
-msgid "User account created!"
-msgstr "ユーザアカウントが作成されました。"
+msgid "User account created! You can use this account to login now..."
+msgstr "ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -644,9 +620,6 @@ msgstr "自由選択"
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Logout"
-msgstr "ログアウト"
 
 msgid "Preferred theme"
 msgstr "テーマ"
@@ -808,7 +781,7 @@ msgid "You are not allowed to revert this page!"
 msgstr "このページを前のバージョンに戻す権限がありません。"
 
 msgid "You must login to add a quicklink."
-msgstr "クイックリンクを追加するためには、ログインしてください。"
+msgstr "クイックリンクを追加するには、ログインしてください。"
 
 msgid "Your quicklink to this page has been removed."
 msgstr "このページへのクイックリンクを削除しました。"
@@ -823,11 +796,11 @@ msgid "This wiki is not enabled for mail processing."
 msgstr "このwikiではメールを利用できません。"
 
 msgid "You must log in to use subscribtions."
-msgstr "購読を利用するためには、ログインしてください。"
+msgstr "購読を利用するには、ログインしてください。"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"購読を利用するためには、[\"ユーザプレファレンス\"]にてメールアドレスを登録し"
+"購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録し"
 "てください。"
 
 msgid "Your subscribtion to this page has been removed."
@@ -1365,7 +1338,7 @@ msgstr "このwikiに参照先がないページはありません。"
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "reStructured textを利用できません。docutilsをインストールしてください。"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**インクルードの許容数を越えました**"
@@ -1473,6 +1446,9 @@ msgstr "画面上へ"
 
 msgid "Click to do a full-text search for this title"
 msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
+
+msgid "Logout"
+msgstr "ログアウト"
 
 msgid "Clear message"
 msgstr "メッセージを消去"
@@ -1655,6 +1631,30 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "クッキーが削除されました。ログアウト完了。"
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "{{{\"%s\"}}}は不正なユーザ名です。正しいユーザ名を入力してください。"
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr ""
+#~ "パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "不正なパスワードです。"
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "再ログインのURLが不正です。"
+
+#~ msgid "Unknown user."
+#~ msgstr "不正なユーザ名です。"
+
+#~ msgid "User account created!"
+#~ msgstr "ユーザアカウントが作成されました。"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "最後に訪れたページを記憶する"

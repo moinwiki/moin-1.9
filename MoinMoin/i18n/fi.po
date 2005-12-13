@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -555,9 +555,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Wikitunnuksesi tiedot"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Eväste poistettu. Olet kirjautunut ulos."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -571,26 +568,6 @@ msgstr "Anna kelvollinen sähköpostiosoite!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Sähköpostiosoitetta '%(email)s' vastaavaa käyttäjää ei löytynyt!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Tuntematon käyttäjänimi: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr "Tunnus \"%s\" on pois käytöstä."
-
-msgid "Sorry, wrong password."
-msgstr "Valitettavasti salasana on väärin."
-
-msgid "Bad relogin URL."
-msgstr "Uudelleenkirjautumisen URL ei kelpaa."
-
-msgid "Unknown user."
-msgstr "Tuntematon käyttäjä."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -618,8 +595,8 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Tämä sähköposti kuuluu jo jollekin toiselle."
 
-msgid "User account created!"
-msgstr "Käyttäjätili luotu!"
+msgid "User account created! You can use this account to login now..."
+msgstr ""
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -642,9 +619,6 @@ msgstr "valittavissa"
 
 msgid "Save"
 msgstr "Tallenna"
-
-msgid "Logout"
-msgstr "Kirjaudu ulos "
 
 msgid "Preferred theme"
 msgstr "Suosikkiulkoasu"
@@ -1471,6 +1445,9 @@ msgstr "[ALKUUN]"
 msgid "Click to do a full-text search for this title"
 msgstr "Napsauta tehdäksesi tekstihaun tälle nimelle"
 
+msgid "Logout"
+msgstr "Kirjaudu ulos "
+
 msgid "Clear message"
 msgstr "Sulje viesti"
 
@@ -1653,6 +1630,32 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Eväste poistettu. Olet kirjautunut ulos."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Tuntematon käyttäjänimi: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "Tunnus \"%s\" on pois käytöstä."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Valitettavasti salasana on väärin."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Uudelleenkirjautumisen URL ei kelpaa."
+
+#~ msgid "Unknown user."
+#~ msgstr "Tuntematon käyttäjä."
+
+#~ msgid "User account created!"
+#~ msgstr "Käyttäjätili luotu!"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Muista viimeisin sivu"

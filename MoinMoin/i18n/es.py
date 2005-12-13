@@ -332,8 +332,6 @@ por una mejor y más fácil de recordar.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''Sus datos de la cuenta del wiki en [%(sitename)s]''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie borrada. Ha salido del sistema.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Este wiki no tiene activado el procesamiento de e-mails.
@@ -342,18 +340,6 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''¡Por favor, proporcione una dirección de e-mail válido!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''¡No se encontró una cuenta que coincida con el e-mail \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingrese su nombre de usuario y password''',
-'''Missing password. Please enter user name and password.''':
-'''Faltó ingresar password. Por favor, ingrese nombre de usuario y password''',
-'''Account "%s" is disabled.''':
-'''La cuenta "%s" está deshabilitada.''',
-'''Sorry, wrong password.''':
-'''Lo lamento, clave errónea''',
-'''Bad relogin URL.''':
-'''URL de re-ingreso no válida''',
-'''Unknown user.''':
-'''Nombre de usuario desconocido.''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Use PreferenciasDelUsuario para cambiar sus preferencias o crear una cuenta''',
 '''Empty user name. Please enter a user name.''':
@@ -368,8 +354,6 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''Por favor, indique su e-mail. Si pierde su información de ingreso, puede obtenerla vía e-mail.''',
 '''This email already belongs to somebody else.''':
 '''Esta dirección e-mail ya es usada por alguien más.''',
-'''User account created!''':
-'''Cuenta de usuario creada!''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No se pudo cargar el tema \'%(theme_name)s\' !''',
 '''User preferences saved!''':
@@ -384,8 +368,6 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''elección libre''',
 '''Save''':
 '''Guardar''',
-'''Logout''':
-'''Salir''',
 '''Preferred theme''':
 '''Tema preferido''',
 '''Editor Preference''':
@@ -865,6 +847,8 @@ rojo=editar''',
 '''[INICIO]''',
 '''Click to do a full-text search for this title''':
 '''Haz click aquí para efectuar una búsqueda de contenidos para este título''',
+'''Logout''':
+'''Salir''',
 '''Clear message''':
 '''Quitar mensaje''',
 '''last edited %(time)s by %(editor)s''':

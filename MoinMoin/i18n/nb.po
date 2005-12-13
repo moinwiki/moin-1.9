@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -545,9 +545,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie slettet. Du er nå logget ut."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -562,26 +559,6 @@ msgstr "Oppgi en gyldig e-postadresse!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "Ingen brukerprofil med e-postadressen '%(email)s' ble funnet!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Ukjent brukernavn: {{{\"%s\"}}}. Oppgi brukernavn og passord."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Passordet mangler. Oppgi et passord."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Du har oppgitt feil passord."
-
-msgid "Bad relogin URL."
-msgstr "Ukjent URL for pålogging."
-
-msgid "Unknown user."
-msgstr "Ukjent bruker."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -609,7 +586,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Denne e-postadressen tilhører en annen bruker."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -633,9 +610,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Lagre"
-
-msgid "Logout"
-msgstr "Logg ut"
 
 msgid "Preferred theme"
 msgstr "Ønsket utseende"
@@ -1462,6 +1436,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
 
+msgid "Logout"
+msgstr "Logg ut"
+
 msgid "Clear message"
 msgstr "Fjern beskjed"
 
@@ -1653,6 +1630,25 @@ msgstr "EndreSidenavn"
 
 msgid "SpellCheck"
 msgstr "StaveKontroll"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie slettet. Du er nå logget ut."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "Ukjent brukernavn: {{{\"%s\"}}}. Oppgi brukernavn og passord."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Passordet mangler. Oppgi et passord."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Du har oppgitt feil passord."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Ukjent URL for pålogging."
+
+#~ msgid "Unknown user."
+#~ msgstr "Ukjent bruker."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Husk sist besøkte side"

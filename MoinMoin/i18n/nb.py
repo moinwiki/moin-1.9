@@ -257,8 +257,6 @@ mellom ordene. Gruppenavn er ikke tillatt.''',
 '''resultat''',
 '''matches''':
 '''resultater''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie slettet. Du er nå logget ut.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Denne wikien har ikke aktivert e-posthåndtering.
@@ -268,16 +266,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''Oppgi en gyldig e-postadresse!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Ingen brukerprofil med e-postadressen \'%(email)s\' ble funnet!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Ukjent brukernavn: {{{"%s"}}}. Oppgi brukernavn og passord.''',
-'''Missing password. Please enter user name and password.''':
-'''Passordet mangler. Oppgi et passord.''',
-'''Sorry, wrong password.''':
-'''Du har oppgitt feil passord.''',
-'''Bad relogin URL.''':
-'''Ukjent URL for pålogging.''',
-'''Unknown user.''':
-'''Ukjent bruker.''',
 '''Empty user name. Please enter a user name.''':
 '''Tomt brukernavn. Oppgi gyldig brukernavn.''',
 '''This user name already belongs to somebody else.''':
@@ -298,8 +286,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''<Nettleseroppsett>''',
 '''Save''':
 '''Lagre''',
-'''Logout''':
-'''Logg ut''',
 '''Preferred theme''':
 '''Ønsket utseende''',
 '''Time zone''':
@@ -684,6 +670,8 @@ rød=rediger''',
 '''Avbestill''',
 '''Click to do a full-text search for this title''':
 '''Klikk her for å kjøre et fritekstsøk etter denne tittelen''',
+'''Logout''':
+'''Logg ut''',
 '''Clear message''':
 '''Fjern beskjed''',
 '''last edited %(time)s by %(editor)s''':

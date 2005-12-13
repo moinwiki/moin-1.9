@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -529,9 +529,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] פרטי המשתמש שלך"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "קוקית נמחקה, אתם מנותקים."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -545,26 +542,6 @@ msgstr "אנא רשום כתובת דואר אלקטרוני אמיתית."
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "לא נמצא משתמש עם כתובת הדואר האלקטרוני \"%(email)s\"."
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "משתמש לא קיים: {{{\"%s\"}}}. אנא הכנס שם משתמש וסיסמא."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "סיסמא חסרה. אנא הכנס שם משתמש וסיסמא."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "מצטער, סיסמא לא נכונה."
-
-msgid "Bad relogin URL."
-msgstr "כתובת חיבור–מחדש לא נכונה."
-
-msgid "Unknown user."
-msgstr "משתמש לא קיים."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -591,7 +568,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "כתובת הדואר האלקטרוני הזאת שייכת למישהו אחר."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -615,9 +592,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "שמור"
-
-msgid "Logout"
-msgstr "התנתק"
 
 msgid "Preferred theme"
 msgstr "עיצוב"
@@ -1436,6 +1410,9 @@ msgstr "למעלה"
 msgid "Click to do a full-text search for this title"
 msgstr "חפשו דפים הקשורים לדף זה"
 
+msgid "Logout"
+msgstr "התנתק"
+
 msgid "Clear message"
 msgstr "סגור הודעה"
 
@@ -1623,6 +1600,25 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "קוקית נמחקה, אתם מנותקים."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "משתמש לא קיים: {{{\"%s\"}}}. אנא הכנס שם משתמש וסיסמא."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "סיסמא חסרה. אנא הכנס שם משתמש וסיסמא."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "מצטער, סיסמא לא נכונה."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "כתובת חיבור–מחדש לא נכונה."
+
+#~ msgid "Unknown user."
+#~ msgstr "משתמש לא קיים."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "זכור את הדף אחרון שביקרתי בו"

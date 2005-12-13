@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2004-11-29 05:38+0800\n"
 "Last-Translator: Lin Zhemin <ljm@ljm.idv.tw>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -531,9 +531,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr ""
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Cookie 已經刪除. 你登出了."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -547,26 +544,6 @@ msgstr "請輸入合法的 email 地址!"
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "找不到登記為 '%(email)s' 的帳戶!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "找不到使用者: {{{\"%s\"}}}. 請輸入名稱及密碼."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "沒輸入密碼. 請輸入名稱及密碼."
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "密碼錯了!"
-
-msgid "Bad relogin URL."
-msgstr "錯誤的重新登入 URL."
-
-msgid "Unknown user."
-msgstr "使用者名稱錯誤."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -592,7 +569,7 @@ msgstr "請輸入 email 地址 - 不然你忘記名稱或密碼的時候, 就不
 msgid "This email already belongs to somebody else."
 msgstr "這個 email 地址是別人的."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -616,9 +593,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "存檔"
-
-msgid "Logout"
-msgstr "登出"
 
 msgid "Preferred theme"
 msgstr "佈景主題"
@@ -1443,6 +1417,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "點一下: 對本頁標題做全文檢索"
 
+msgid "Logout"
+msgstr "登出"
+
 msgid "Clear message"
 msgstr "關閉訊息視窗"
 
@@ -1631,6 +1608,25 @@ msgstr "重新命名"
 
 msgid "SpellCheck"
 msgstr "拼字檢查"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Cookie 已經刪除. 你登出了."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr "找不到使用者: {{{\"%s\"}}}. 請輸入名稱及密碼."
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "沒輸入密碼. 請輸入名稱及密碼."
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "密碼錯了!"
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "錯誤的重新登入 URL."
+
+#~ msgid "Unknown user."
+#~ msgstr "使用者名稱錯誤."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "記住上次看的最後一頁"

@@ -273,8 +273,6 @@ a jelszó-mezőbe (legcélszerűbb ha bemásolja).
 
 Miután sikeresen belépett kérjük írja át a jelszót!
 ''',
-'''Cookie deleted. You are now logged out.''':
-'''A sütit letöröltük. Ön kilépett.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
@@ -282,16 +280,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Kérjük, hogy érvényes levélcímet adjon meg!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
-'''Missing password. Please enter user name and password.''':
-'''Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót.''',
-'''Sorry, wrong password.''':
-'''Sajnos rossz a jelszó.''',
-'''Bad relogin URL.''':
-'''Hibás újrabejelentkezési URL.''',
-'''Unknown user.''':
-'''Ismeretlen felhasználó.''',
 '''Empty user name. Please enter a user name.''':
 '''Üres felhasználónév. Kérjük adja meg a felhasználónevet.''',
 '''This user name already belongs to somebody else.''':
@@ -312,8 +300,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''<Böngésző beállításai>''',
 '''Save''':
 '''Mentés''',
-'''Logout''':
-'''Kilépés''',
 '''Preferred theme''':
 '''Kedvenc téma''',
 '''Time zone''':
@@ -728,6 +714,8 @@ piros=szerkesztés''',
 '''[FELÜLRE]''',
 '''Click to do a full-text search for this title''':
 '''Kattintson a cím teljes szöveges kereséséért''',
+'''Logout''':
+'''Kilépés''',
 '''Clear message''':
 '''Üzenet törlése''',
 '''last edited %(time)s by %(editor)s''':

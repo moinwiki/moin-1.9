@@ -263,8 +263,6 @@ spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 ''' overeenkomst''',
 '''matches''':
 ''' overeenkomsten''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie verwijderd. U bent nu uitgelogd.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Deze wiki is niet ingesteld op het afhandelen van e-mail.
@@ -273,16 +271,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Geef een geldig e-mailadres op!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Geen account gevonden dat overeenkomt met het opgegeven e-mailadres \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Onbekende gebruikersnaam: {{{"%s"}}}. Geef een gebruikersnaam en wachtwoord op.''',
-'''Missing password. Please enter user name and password.''':
-'''Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op.''',
-'''Sorry, wrong password.''':
-'''Sorry, foutief wachtwoord.''',
-'''Bad relogin URL.''':
-'''Onjuiste herlogin URL.''',
-'''Unknown user.''':
-'''Gebruikersnaam onbekend.''',
 '''Empty user name. Please enter a user name.''':
 '''Geen gebruikersnaam. Geef een gebruikersnaam!''',
 '''This user name already belongs to somebody else.''':
@@ -303,8 +291,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''<Browserinstelling>''',
 '''Save''':
 '''Opslaan''',
-'''Logout''':
-'''Uitloggen''',
 '''Preferred theme''':
 '''Verkozen opmaak''',
 '''Time zone''':
@@ -708,6 +694,8 @@ rood=bewerken''',
 '''[BOVEN]''',
 '''Click to do a full-text search for this title''':
 '''Klik hier om in de hele tekst te zoeken naar deze titel''',
+'''Logout''':
+'''Uitloggen''',
 '''Clear message''':
 '''Bericht wissen''',
 '''last edited %(time)s by %(editor)s''':

@@ -263,8 +263,6 @@ de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o 
 '''coincidência''',
 '''matches''':
 '''coincidências''',
-'''Cookie deleted. You are now logged out.''':
-'''Cookie deletada. Você saiu do sistema agora.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Este wiki não tem ativado o envio automático de e-mails.
@@ -273,16 +271,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Por favor, coloque um e-mail válido!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Não existe uma conta que coincida com o e-mail \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, insira usuário e senha novamente.''',
-'''Missing password. Please enter user name and password.''':
-'''Senha inválida. Por favor, insira usuário e senha novamente.''',
-'''Sorry, wrong password.''':
-'''Desculpe, senha inválida.''',
-'''Bad relogin URL.''':
-'''URL de re-ingreso não válida.''',
-'''Unknown user.''':
-'''Nome de usuário desconhecido.''',
 '''Empty user name. Please enter a user name.''':
 '''Nome de usuário em branco. Por favor, coloque um nome de usuário válido.''',
 '''This user name already belongs to somebody else.''':
@@ -303,8 +291,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''<Configuração do seu Navegador>''',
 '''Save''':
 '''Salvar''',
-'''Logout''':
-'''Sair''',
 '''Preferred theme''':
 '''Tema preferido''',
 '''Time zone''':
@@ -709,6 +695,8 @@ vermelho=editar''',
 '''[INÍCIO]''',
 '''Click to do a full-text search for this title''':
 '''Clique aqui para fazer uma buscar pelo conteúdo deste título''',
+'''Logout''':
+'''Sair''',
 '''Clear message''':
 '''Limpar mensagem''',
 '''last edited %(time)s by %(editor)s''':

@@ -4,7 +4,7 @@
 meta = {
   'language': """Latviešu""",
   'elanguage': """Latvian""",
-  'maintainer': """Viktors Kalnacs <v.kalnacs@datapro.lv>""",
+  'maintainer': """Radomirs Cirskis <nad2000@gmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -331,8 +331,6 @@ Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Jūsu viki konta dati''',
-'''Cookie deleted. You are now logged out.''':
-'''Sīkdatne dzēsta. Jūs izgājāt no sistēmas.''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Šajā viki pasta sūtīšana ir aizliegta.
@@ -341,18 +339,6 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Lūdzu, norādiet pareizu e-pasta adresi!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
-'''Missing password. Please enter user name and password.''':
-'''Trūkst paroles. Lūdzu, ievadiet vārdu un paroli.''',
-'''Account "%s" is disabled.''':
-'''Konts "%s" ir atslēgts.''',
-'''Sorry, wrong password.''':
-'''Piedodiet, nepareiza parole.''',
-'''Bad relogin URL.''':
-'''Nepareizs atkārtotas ieejas URL''',
-'''Unknown user.''':
-'''Nezināms lietotājs''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
 '''Empty user name. Please enter a user name.''':
@@ -367,8 +353,8 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas informāciju, to varēs izsutīt uz norādīto e-pasta adresi.''',
 '''This email already belongs to somebody else.''':
 '''Šāda e-pasta adrese jau kādam pieder.''',
-'''User account created!''':
-'''Lietotāja konts izveidots!''',
+'''User account created! You can use this account to login now...''':
+'''Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nevar ielādēt tēmu \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -383,8 +369,6 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''brīva izvēle''',
 '''Save''':
 '''Saglabāt''',
-'''Logout''':
-'''Iziet''',
 '''Preferred theme''':
 '''Vēlamā tēma''',
 '''Editor Preference''':
@@ -863,6 +847,8 @@ sarkans=labot''',
 '''[AUGŠA]''',
 '''Click to do a full-text search for this title''':
 '''Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā''',
+'''Logout''':
+'''Iziet''',
 '''Clear message''':
 '''Notīrīt ziņojumu''',
 '''last edited %(time)s by %(editor)s''':

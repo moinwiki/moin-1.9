@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-04 22:17+0100\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -567,9 +567,6 @@ msgstr ""
 msgid "[%(sitename)s] Your wiki account data"
 msgstr "[%(sitename)s] Datele contului wiki al dumneavoastră"
 
-msgid "Cookie deleted. You are now logged out."
-msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -585,27 +582,6 @@ msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
 "Nu a fost găsit nici un cont care să se potrivească cu adresa\n"
 "de email '%(email)s'!"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr ""
-"Nume de utilizator necunoscut: {{{\"%s\"}}}. Introduceţi nume şi parolă"
-
-msgid "Missing password. Please enter user name and password."
-msgstr "Parola lipseşte. Introduceti nume şi parolă"
-
-#, python-format
-msgid "Account \"%s\" is disabled."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr "Parolă greşită."
-
-msgid "Bad relogin URL."
-msgstr "URL de reînregistrare invalid."
-
-msgid "Unknown user."
-msgstr "Utilizator necunoscut."
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -633,7 +609,7 @@ msgstr ""
 msgid "This email already belongs to somebody else."
 msgstr "Această adresă de email este deţinută deja de altcineva."
 
-msgid "User account created!"
+msgid "User account created! You can use this account to login now..."
 msgstr ""
 
 #, python-format
@@ -657,9 +633,6 @@ msgstr ""
 
 msgid "Save"
 msgstr "Salvare"
-
-msgid "Logout"
-msgstr "Logout"
 
 msgid "Preferred theme"
 msgstr "Tema dorită"
@@ -1501,6 +1474,9 @@ msgstr "[SUS]"
 msgid "Click to do a full-text search for this title"
 msgstr "Clic aici pentru a face o căutare full-text pentru acest titlu"
 
+msgid "Logout"
+msgstr "Logout"
+
 msgid "Clear message"
 msgstr "Ştergere mesaj"
 
@@ -1688,6 +1664,26 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#~ msgid "Cookie deleted. You are now logged out."
+#~ msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
+
+#~ msgid ""
+#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+#~ msgstr ""
+#~ "Nume de utilizator necunoscut: {{{\"%s\"}}}. Introduceţi nume şi parolă"
+
+#~ msgid "Missing password. Please enter user name and password."
+#~ msgstr "Parola lipseşte. Introduceti nume şi parolă"
+
+#~ msgid "Sorry, wrong password."
+#~ msgstr "Parolă greşită."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "URL de reînregistrare invalid."
+
+#~ msgid "Unknown user."
+#~ msgstr "Utilizator necunoscut."
 
 #~ msgid "Remember last page visited"
 #~ msgstr "Memorare ultima pagină vizitată"

@@ -235,8 +235,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''pronađen''',
 '''matches''':
 '''pronađenih''',
-'''Cookie deleted. You are now logged out.''':
-'''Kolačić izbrisan. Vi ste sada odjavljeni iz sistema''',
 '''Please provide a valid email address!''':
 '''Molimo vas da upišete ispravnu mejl adresu!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
@@ -257,8 +255,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''<postavke Brauzera>''',
 '''Save''':
 '''Snimiti''',
-'''Logout''':
-'''Izlogovati se''',
 '''Preferred theme''':
 '''Omiljena tema''',
 '''Time zone''':
@@ -604,6 +600,8 @@ crveno=obrade''',
 '''Statistika tipova brauzera''',
 '''Home''':
 '''PočetnaStranica''',
+'''Logout''':
+'''Izlogovati se''',
 '''Clear message''':
 '''Izbriši ovu poruku''',
 '''EditText''':

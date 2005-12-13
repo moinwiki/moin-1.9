@@ -296,8 +296,6 @@ După înregistrarea cu succes, este recomandată modificarea parolei în una cu
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Datele contului wiki al dumneavoastră''',
-'''Cookie deleted. You are now logged out.''':
-'''Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă).''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Acest wiki nu permite procesare poştei electronice.
@@ -307,16 +305,6 @@ Contactaţi deţinătorul wiki-ului, care poate activa email.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Nu a fost găsit nici un cont care să se potrivească cu adresa
 de email \'%(email)s\'!''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nume de utilizator necunoscut: {{{"%s"}}}. Introduceţi nume şi parolă''',
-'''Missing password. Please enter user name and password.''':
-'''Parola lipseşte. Introduceti nume şi parolă''',
-'''Sorry, wrong password.''':
-'''Parolă greşită.''',
-'''Bad relogin URL.''':
-'''URL de reînregistrare invalid.''',
-'''Unknown user.''':
-'''Utilizator necunoscut.''',
 '''Empty user name. Please enter a user name.''':
 '''Numele necompletat. Introduceţi un nume de utilizator''',
 '''This user name already belongs to somebody else.''':
@@ -337,8 +325,6 @@ de email \'%(email)s\'!''',
 '''<Setare browser>''',
 '''Save''':
 '''Salvare''',
-'''Logout''':
-'''Logout''',
 '''Preferred theme''':
 '''Tema dorită''',
 '''Time zone''':
@@ -761,6 +747,8 @@ red=editare''',
 '''[SUS]''',
 '''Click to do a full-text search for this title''':
 '''Clic aici pentru a face o căutare full-text pentru acest titlu''',
+'''Logout''':
+'''Logout''',
 '''Clear message''':
 '''Ştergere mesaj''',
 '''last edited %(time)s by %(editor)s''':
