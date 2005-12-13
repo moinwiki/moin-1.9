@@ -292,7 +292,9 @@ class MoinTranslator(html4css1.HTMLTranslator):
             inline link. If it is an image, the src line is extracted and passed
             to the html4css1 writer to allow the reST image attributes.
             Otherwise, the html from MoinMoin is inserted into the reST document
-            and SkipNode is raised.
+            and SkipNode should be raised.
+
+            returns True if SkipNode should be raised; False otherwise.
         """
         self.process_wiki_text(node[uri_string])
         # Only pass the src and alt parts to the writer. The reST writer
@@ -304,17 +306,12 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 alt = re.search('alt="([^"]*)"', self.wiki_text)
                 if alt:
                     node['alt'] = alt.groups()[0]
+            return False
         else:
-            # Image doesn't exist yet for the page so just use what's
-            # returned from MoinMoin.
-            self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
+            # It's not an image or the image doesn't exist, so just use what is
+            # returned from MoinMoin verbatim.
             self.add_wiki_markup()
-
-    def process_wiki_target(self, target):
-        self.process_wiki_text(target)
-        # MMG: May need a call to fixup_wiki_formatting here but I
-        # don't think so.
-        self.add_wiki_markup()
+            return True
 
     def fixup_wiki_formatting(self, text):
         replacement = {'<p>': '', '</p>': '', '\n': '', '> ': '>'}
@@ -338,47 +335,43 @@ class MoinTranslator(html4css1.HTMLTranslator):
             MoinMoin formatter and the resulting markup is inserted into the
             document in the place of the original link reference.
         """
-        moin_link_schemes = ('wiki:', 'attachment:', 'drawing:', '[[',
-                             'inline:')
-
         if 'refuri' in node.attributes:
-            target = None
+            def is_moin_link(link):
+                moin_link_schemes = ('wiki:', 'attachment:', 'drawing:', '[[',
+                                     'inline:')
+                for i in moin_link_schemes:
+                    if link.lstrip().startswith(i):
+                        return True
+                return False
+
             refuri = node['refuri']
 
-            # MMG: Fix this line
-            if [scheme for scheme in moin_link_schemes if
-                    refuri.lstrip().startswith(scheme)]:
-                target = refuri
-            # TODO: Figure out the following two elif's and comment
-            # appropriately.
-            # The node should have a whitespace normalized name if the docutlis
-            # reStructuredText parser would normally fully normalize the name.
-            elif ('name' in node.attributes and
-                  fully_normalize_name(node['name']) == refuri):
-                target = ':%s:' % (node['name'])
+            target = refuri
             # If its not a uri containing a ':' then its probably destined for
             # wiki space.
-            elif ':' not in refuri:
+            if ':' not in refuri and not is_moin_link(refuri):
                 target = ':%s:' % (refuri)
-            else:
-                target = refuri
 
-            if target:
-                if target.startswith('inline:'):
-                    self.process_inline(node, 'refuri')
-                elif target.startswith('[[') and target.endswith(']]'):
-                    self.process_wiki_target(target)
+            if target.startswith('inline:'):
+                if self.process_inline(node, 'refuri'):
+                    # process inline returns True if SkipNode should be raised
                     raise docutils.nodes.SkipNode
-                else:
-                    # Not a macro or inline so hopefully its a link. Put the target in
-                    # brackets so that MoinMoin knows its a link. Allow MoinMoin to
-                    # handle all links so that the link decorations get used (e.g. 
-                    # icons for external pages).
-                    node_text = node.astext().replace('\n', ' ')
-                    self.process_wiki_text('[%s %s]' % (target, node_text))
-                    self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
-                    self.add_wiki_markup()
-                    raise docutils.nodes.SkipNode
+            elif target.startswith('[[') and target.endswith(']]'):
+                self.process_wiki_text(target)
+                # Don't call fixup_wiki_formatting because who knows what the
+                # macro is inserting.
+                self.add_wiki_markup()
+                raise docutils.nodes.SkipNode
+            else:
+                # Not a macro or inline so hopefully its a link. Put the target in
+                # brackets so that MoinMoin knows its a link. Allow MoinMoin to
+                # handle all links so that the link decorations get used (e.g. 
+                # icons for external pages).
+                node_text = node.astext().replace('\n', ' ')
+                self.process_wiki_text('[%s %s]' % (target, node_text))
+                self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
+                self.add_wiki_markup()
+                raise docutils.nodes.SkipNode
         html4css1.HTMLTranslator.visit_reference(self, node)
 
     def visit_image(self, node):
