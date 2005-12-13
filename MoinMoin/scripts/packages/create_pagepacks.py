@@ -59,10 +59,7 @@ def buildPageSets():
 
     moinI18nPages = Set([x for x in masterNonSystemPages if x.startswith("MoinI18n")])
     
-    nodistPages = moinI18nPages | Set([
-            "MoinPagesEditorGroup",
-            "InterWikiMap",
-            ])
+    nodistPages = moinI18nPages | Set(["InterWikiMap", ])
 
     extraPages = masterNonSystemPages - nodistPages
 

@@ -26,6 +26,12 @@ Version 1.5.0current:
     * Made builtin moin_cookie authentication more modular: the cookie is now
       touched by MoinMoin.auth.moin_cookie only, with one minor discomfort:
       When creating a user, you are not automatically logged in any more.
+    * We now use the packager for additional help and system pages in all other
+      languages except English. The packages are attached to SystemPagesSetup
+      page and can be installed from there after getting "superuser" powers.
+      The "extra" package contains a collection of orphan pages not listed on
+      some SystemPagesIn<Language>Group page.
+
 
 Version 1.5.0beta5:
   Fixes:
