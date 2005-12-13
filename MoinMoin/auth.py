@@ -91,7 +91,7 @@ def moin_cookie(request, **kw):
 	 
 def http(request, **kw):
     """ authenticate via http basic/digest/ntlm auth """
-    from MoinMoin.request import RequestTwisted
+    from MoinMoin.request import RequestTwisted, RequestCLI
     u = None
     # check if we are running Twisted
     if isinstance(request, RequestTwisted):
@@ -102,7 +102,7 @@ def http(request, **kw):
         u = user.User(request, auth_username=username, password=password,
                       auth_method='http', auth_attribs=())
 
-    else:
+    elif not isinstance(request, RequestCLI):
         env = request.env
         auth_type = env.get('AUTH_TYPE','')
         if auth_type in ['Basic', 'Digest', 'NTLM', 'Negotiate',]:
