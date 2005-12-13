@@ -145,7 +145,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     if uid == theuser.id:
                         continue
                     thisuser = user.User(self.request, uid)
-                    if thisuser.email == theuser.email:
+                    if thisuser.email == theuser.email and not thisuser.disabled:
                         return _("This email already belongs to somebody else.")
 
             # save data

@@ -12,6 +12,8 @@ Version 1.5.0current:
       Thanks to Matthew Gilbert.
     * Fixed modern theme rendering, including some fixes and workarounds for
       broken MS IE.
+    * When checking for email uniqueness, do not compare with disabled user
+      profiles.
 
   Other changes:
     * Made it easier for auth methods needing a user interface (like ldap or
