@@ -30,8 +30,8 @@
 <li>HelpOnUpdating</li>
 </ul>
 <div lang="en" id="content" dir="ltr">
-<span id="top" class="anchor"></span><span id="line-8" class="anchor"></span><p><a href="http://moinmaster.wikiwikiweb.de/HelpContents">HelpContents</a> &gt; <a href="http://moinmaster.wikiwikiweb.de/HelpOnAdministration">HelpOnAdministration</a> &gt; HelpOnUpdating  <span id="line-9" class="anchor"></span></p>
-<span id="line-10" class="anchor"></span><p><strong>Index</strong> <span id="line-11" class="anchor"></span><ol>
+<span id="top" class="anchor"></span><p><a href="http://moinmaster.wikiwikiweb.de/HelpContents">HelpContents</a> &gt; <a href="http://moinmaster.wikiwikiweb.de/HelpOnAdministration">HelpOnAdministration</a> &gt; HelpOnUpdating  </p>
+<p><strong>Index</strong> <ol>
 <li><a href="#head-e9fc017905cde431b9eb693851523c71c81b9a9e">General procedures</a><ol>
 <li><a href="#head-6c62d24dd986c08a1a21ae0a6e2c4548f79f989d">Backup</a></li>
 <li><a href="#head-28a7e259e240e06c446a4e260ad6a96322de263d">Install</a></li>
@@ -49,272 +49,279 @@
 </ol>
 </li>
 </ol>
- <span id="line-12" class="anchor"></span></p>
-<span id="line-13" class="anchor"></span>
-<h2 id="head-e9fc017905cde431b9eb693851523c71c81b9a9e">General procedures</h2>
+ </p>
 
-<span id="line-14" class="anchor"></span><span id="line-15" class="anchor"></span>
-<h3 id="head-6c62d24dd986c08a1a21ae0a6e2c4548f79f989d">Backup</h3>
+<h2 id="head-e9fc017905cde431b9eb693851523c71c81b9a9e">General procedures</h3>
 
-<span id="line-16" class="anchor"></span><span id="line-17" class="anchor"></span><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> <strong>Before you update an existing wiki, MAKE A BACKUP!</strong> <span id="line-18" class="anchor"></span></p>
-<span id="line-19" class="anchor"></span><p>You have been warned, and it's not our fault when you end up like this: <img src="wiki/htdocs/modern/img/angry.png" alt="X-(" height="15" width="15">  <span id="line-20" class="anchor"></span></p>
-<span id="line-21" class="anchor"></span><p>There are two directory trees which you should backup: <span id="line-22" class="anchor"></span></p>
-<span id="line-23" class="anchor"></span><ul>
-<li><p>The one containing the <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> executable files (e.g. <tt>/usr/lib/python*.*/site-packages/MoinMoin</tt>) <span id="line-24" class="anchor"></span></p>
-</li>
-<li><p>and the one containing the data (e.g. <tt>/usr/share/moin/wikiname/data</tt> - see data_dir in your moin_config.py).  <span id="line-25" class="anchor"></span></p>
-<span id="line-26" class="anchor"></span></li>
-</ul>
-<p>The pathes depend on your installation. <span id="line-27" class="anchor"></span></p>
-<span id="line-28" class="anchor"></span>
-<h3 id="head-28a7e259e240e06c446a4e260ad6a96322de263d">Install</h3>
 
-<span id="line-29" class="anchor"></span><span id="line-30" class="anchor"></span><p>Download the <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> code that you are interested in updating to. <span id="line-31" class="anchor"></span></p>
-<span id="line-32" class="anchor"></span><p>As root, run "<tt>python&nbsp;setup.py&nbsp;install</tt>" to install the new version. <span id="line-33" class="anchor"></span></p>
-<span id="line-34" class="anchor"></span>
-<h3 id="head-1409f14b1d4801cdc1cfa7a7d31ebe9011a350f1">Configuration update</h3>
+<h3 id="head-6c62d24dd986c08a1a21ae0a6e2c4548f79f989d">Backup</h4>
 
-<span id="line-35" class="anchor"></span><span id="line-36" class="anchor"></span><p>After upgrading, your existing wiki should continue to work (the goal is to have sane defaults for any new config values, but then there can be bugs). Check that this is indeed the case, and then take the time to check the CHANGES file in your distribution. Often, new features will be invisible unless your extend your configuration in "moin_config.py" (1.3: wikiconfig.py). <span id="line-37" class="anchor"></span></p>
-<span id="line-38" class="anchor"></span><p>This is especially true for: <span id="line-39" class="anchor"></span></p>
+<p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> <strong>Before you update an existing wiki, MAKE A BACKUP!</strong> </p>
+<p>You have been warned, and it's not our fault when you end up like this: <img src="wiki/htdocs/modern/img/angry.png" alt="X-(" height="15" width="15">  </p>
+<p>There are two directory trees which you should backup: </p>
 <ul>
-<li><p>somewhat dangerous macros that won't be activated by default, because they're not advisable for public wikis. You need to explicitely activate those by adding an <tt>allowed_actions</tt> list to the config. Currently, the actions <tt>DeletePage</tt> and <tt>AttachFile</tt> are considered unsafe. <span id="line-40" class="anchor"></span></p>
-<span id="line-41" class="anchor"></span></li>
-<li class="gap"><p>email features: you need to provide <tt>mail_smarthost</tt> and <tt>mail_from</tt>. <span id="line-42" class="anchor"></span></p>
-<span id="line-43" class="anchor"></span></li>
-<li class="gap"><p>new pages icons: to get new icons like "XML", "Subscribe" etc. it's best to just delete the <tt>page_icons</tt> setting, now that "config.py" has a default for it. If you changed it in the past, add new icons from the "config.py" default to your "moin_config.py". <span id="line-44" class="anchor"></span></p>
-<span id="line-45" class="anchor"></span></li>
+<li><p> The one containing the <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> executable files (e.g. <tt>/usr/lib/python*.*/site-packages/MoinMoin</tt>) </p>
+</li>
+<li><p> and the one containing the data (e.g. <tt>/usr/share/moin/wikiname/data</tt> - see data_dir in your moin_config.py).  </p>
+</li>
+</ul>
+<p>The pathes depend on your installation. </p>
+
+<h3 id="head-28a7e259e240e06c446a4e260ad6a96322de263d">Install</h4>
+
+<p>Download the <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> code that you are interested in updating to. </p>
+<p>As root, run "<tt>python&nbsp;setup.py&nbsp;install</tt>" to install the new version. </p>
+
+<h3 id="head-1409f14b1d4801cdc1cfa7a7d31ebe9011a350f1">Configuration update</h4>
+
+<p>After upgrading, your existing wiki should continue to work (the goal is to have sane defaults for any new config values, but then there can be bugs). Check that this is indeed the case, and then take the time to check the CHANGES file in your distribution. Often, new features will be invisible unless your extend your configuration in "moin_config.py" (1.3: wikiconfig.py). </p>
+<p>This is especially true for: </p>
+<ul>
+<li><p> somewhat dangerous macros that won't be activated by default, because they're not advisable for public wikis. You need to explicitely activate those by adding an <tt>allowed_actions</tt> list to the config. Currently, the actions <tt>DeletePage</tt> and <tt>AttachFile</tt> are considered unsafe. </p>
+</li>
+<li class="gap"><p> email features: you need to provide <tt>mail_smarthost</tt> and <tt>mail_from</tt>. </p>
+</li>
+<li class="gap"><p> new pages icons: to get new icons like "XML", "Subscribe" etc. it's best to just delete the <tt>page_icons</tt> setting, now that "config.py" has a default for it. If you changed it in the past, add new icons from the "config.py" default to your "moin_config.py". </p>
+</li>
 </ul>
 
-<h3 id="head-93651cf60ec7638f011aa01673f747b168e68c9e">Updating files</h3>
+<h3 id="head-93651cf60ec7638f011aa01673f747b168e68c9e">Updating files</h4>
 
-<span id="line-46" class="anchor"></span><span id="line-47" class="anchor"></span><dl>
+<dl>
 <dt>Images and CSS</dt>
-<dd><p>On every update, you should copy the content of the "share/moin/htdocs/" directory to the directory visible to your web server, normally a new release has some new images and CSS in it. If you use the default distutils setup scheme, this is no longer necessary (distutils updates the files for you, and your webserver gets the files from the installed images and CSS). <span id="line-48" class="anchor"></span></p>
-<span id="line-49" class="anchor"></span></dd>
+<dd><p>On every update, you should copy the content of the "share/moin/htdocs/" directory to the directory visible to your web server, normally a new release has some new images and CSS in it. If you use the default distutils setup scheme, this is no longer necessary (distutils updates the files for you, and your webserver gets the files from the installed images and CSS). </p>
+</dd>
 <dt>System pages</dt>
-<dd><p>When upgrading to a new version, copy at least the help pages ("Help*") to your existing directory. Then check whether you miss any new system pages. In 1.3 these pages are kept separate in the underlay directory. <span id="line-50" class="anchor"></span></p>
+<dd><p>When upgrading to a new version, copy at least the help pages ("Help*") to your existing directory. Then check whether you miss any new system pages. In 1.3 these pages are kept separate in the underlay directory. </p>
 <ul>
-<li><p>When updating from 1.2 or lower to 1.3 or higher, you will want to clean out the copies of the system pages in your <tt>wiki/data</tt> directory. All of these pages will now reside in the underlay directory. If you have system pages from 1.2 or lower in your <tt>wiki/data</tt> directory, they will overshadow the more up-to-date documentation. This can be done using the following manual procedure: <span id="line-51" class="anchor"></span></p>
+<li><p> When updating from 1.2 or lower to 1.3 or higher, you will want to clean out the copies of the system pages in your <tt>wiki/data</tt> directory. All of these pages will now reside in the underlay directory. If you have system pages from 1.2 or lower in your <tt>wiki/data</tt> directory, they will overshadow the more up-to-date documentation. This can be done using the following manual procedure: </p>
 <ol type="1">
-<li><p>You have just converted from 1.2 or lower to post-1.3. <span id="line-52" class="anchor"></span></p>
+<li><p>You have just converted from 1.2 or lower to post-1.3. </p>
 </li>
-<li><p>Go to your wiki's EditedSystemPages. <span id="line-53" class="anchor"></span></p>
+<li><p>Go to your wiki's EditedSystemPages. </p>
 </li>
-<li><p>Find all the pages that are MoinMoin system or help pages. You will know if it is one of those pages because it is not your page. <span id="line-54" class="anchor"></span></p>
+<li><p>Find all the pages that are MoinMoin system or help pages. You will know if it is one of those pages because it is not your page. </p>
 </li>
-<li><p>Check if it is okay to delete by either: <span id="line-55" class="anchor"></span></p>
+<li><p>Check if it is okay to delete by either: </p>
 <ol type="1">
-<li><p>Using the this page "info" link and check the Revision History to see if it is greater than 1. If so, there are modifications, so do not delete the page and evaluate the modifications to see if they are necessary. <span id="line-56" class="anchor"></span></p>
+<li><p>Using the this page "info" link and check the Revision History to see if it is greater than 1. If so, there are modifications, so do not delete the page and evaluate the modifications to see if they are necessary. </p>
 </li>
-<li><p>Using your file browser (Windows Explorer, etc) to go to your <tt>wiki/data/&lt;&lt;systemPage&gt;&gt;/revisions</tt> directory and to see if there are no modifications. If there are, do not delete the page and evaluate the modifications to see if they are necessary. <span id="line-57" class="anchor"></span></p>
+<li><p>Using your file browser (Windows Explorer, etc) to go to your <tt>wiki/data/&lt;&lt;systemPage&gt;&gt;/revisions</tt> directory and to see if there are no modifications. If there are, do not delete the page and evaluate the modifications to see if they are necessary. </p>
 </li>
 </ol>
 </li>
-<li><p>(If you have useful edits, please contribute them to the <a class="www" href="http://moinmaster.wikiwikiweb.de/">MoinMoin development</a>.) <span id="line-58" class="anchor"></span></p>
+<li><p>(If you have useful edits, please contribute them to the <a class="external" href="http://moinmaster.wikiwikiweb.de/"><img src="wiki/htdocs/modern/img/moin-www.png" alt="[WWW]" height="11" width="11"> MoinMoin development</a>.) </p>
 </li>
-<li><p>Delete that <tt>wiki/data/&lt;&lt;systemPage&gt;&gt;</tt> using your file browser. <span id="line-59" class="anchor"></span></p>
-</li>
-</ol>
-</li>
-<li><p>Japanese translation follows. <span id="line-60" class="anchor"></span></p>
-</li>
-<li><p>1.2以前から1.3以降のアップグレードの際、<tt>wiki/data</tt>ディレクトリに置いた、システムページのコピーを削除した方が良い。これからこのページはunderlayディレクトリに置く。もし1.2以前のシステムページが<tt>wiki/data</tt>ディレクトリにある場合、最も最新システムページをかぶせてしまう。以下のとおり、手動の手順： <span id="line-61" class="anchor"></span></p>
-<ol type="1">
-<li><p>以前から1.3以降のアップグレードを行ったばかり。 <span id="line-62" class="anchor"></span></p>
-</li>
-<li><p>自分の<a href="http://moinmaster.wikiwikiweb.de/EditedSystemPages">EditedSystemPages</a>を開く。 <span id="line-63" class="anchor"></span></p>
-</li>
-<li><p>MoinMoinのシステムやヘルプページなどを探す。そのページがシステムやヘルプページであることは、自分のページではないことで分かる。 <span id="line-64" class="anchor"></span></p>
-</li>
-<li><p>削除する前の確認を行う。以下のどちらの方法とする： <span id="line-65" class="anchor"></span></p>
-<ol type="1">
-<li><p>このページの「情報」をクリックして、「"更新履歴"を表示」のページでは更新回数が1以上のこと。そうだったら、変更はあるので、削除しないで、その変更の必要性を判断する。 <span id="line-66" class="anchor"></span></p>
-</li>
-<li><p>ファイルブラウザアプリケーション（Windowsエクスプロラーなど）で、自分の<tt>wiki/data/&lt;&lt;systemPage&gt;&gt;/revisions</tt>ディレクトリにたどりつけて、変更があることを確認する。そうだったら、変更はあるので、削除しないで、その変更の必要性を判断する。 <span id="line-67" class="anchor"></span></p>
+<li><p>Delete that <tt>wiki/data/&lt;&lt;systemPage&gt;&gt;</tt> using your file browser. </p>
 </li>
 </ol>
 </li>
-<li><p>(有効な変更があれば、 <a class="www" href="http://moinmaster.wikiwikiweb.de/">MoinMoin development</a>にぜひ与えてください。) <span id="line-68" class="anchor"></span></p>
+<li><p> Japanese translation follows. </p>
 </li>
-<li><p>そのページ<tt>wiki/data/&lt;&lt;systemPage&gt;&gt;</tt>をファイルブラウザアプリケーションで削除する。 <span id="line-69" class="anchor"></span></p>
-<span id="line-70" class="anchor"></span></li>
+<li><p> 1.2以前から1.3以降のアップグレードの際、<tt>wiki/data</tt>ディレクトリに置いた、システムページのコピーを削除した方が良い。これからこのページはunderlayディレクトリに置く。もし1.2以前のシステムページが<tt>wiki/data</tt>ディレクトリにある場合、最も最新システムページをかぶせてしまう。以下のとおり、手動の手順： </p>
+<ol type="1">
+<li><p>以前から1.3以降のアップグレードを行ったばかり。 </p>
+</li>
+<li><p>自分の<a href="http://moinmaster.wikiwikiweb.de/EditedSystemPages">EditedSystemPages</a>を開く。 </p>
+</li>
+<li><p>MoinMoinのシステムやヘルプページなどを探す。そのページがシステムやヘルプページであることは、自分のページではないことで分かる。 </p>
+</li>
+<li><p>削除する前の確認を行う。以下のどちらの方法とする： </p>
+<ol type="1">
+<li><p>このページの「情報」をクリックして、「"更新履歴"を表示」のページでは更新回数が1以上のこと。そうだったら、変更はあるので、削除しないで、その変更の必要性を判断する。 </p>
+</li>
+<li><p>ファイルブラウザアプリケーション（Windowsエクスプロラーなど）で、自分の<tt>wiki/data/&lt;&lt;systemPage&gt;&gt;/revisions</tt>ディレクトリにたどりつけて、変更があることを確認する。そうだったら、変更はあるので、削除しないで、その変更の必要性を判断する。 </p>
+</li>
+</ol>
+</li>
+<li><p>(有効な変更があれば、 <a class="external" href="http://moinmaster.wikiwikiweb.de/"><img src="wiki/htdocs/modern/img/moin-www.png" alt="[WWW]" height="11" width="11"> MoinMoin development</a>にぜひ与えてください。) </p>
+</li>
+<li><p>そのページ<tt>wiki/data/&lt;&lt;systemPage&gt;&gt;</tt>をファイルブラウザアプリケーションで削除する。 </p>
+</li>
 </ol>
 </li>
 </ul>
 </dd>
 <dt>InterWiki</dt>
-<dd><p>Check that you have the newest "intermap.txt" file; If you have your own entries, you can point "shared_intermap" at a file loaded <em>before</em> the file in your data directory, which takes precedence (i.e. have global entries in the shared one, private entries the data dir file). <span id="line-71" class="anchor"></span></p>
-<span id="line-72" class="anchor"></span></dd>
+<dd><p>Check that you have the newest "intermap.txt" file; If you have your own entries, you can point "shared_intermap" at a file loaded <em>before</em> the file in your data directory, which takes precedence (i.e. have global entries in the shared one, private entries the data dir file). </p>
+</dd>
 </dl>
 
-<h3 id="head-7aa313a5b6991fdd59b559e6d7c26fb14442e8b7">Troubleshooting</h3>
+<h3 id="head-7aa313a5b6991fdd59b559e6d7c26fb14442e8b7">Troubleshooting</h4>
 
-<span id="line-73" class="anchor"></span><span id="line-74" class="anchor"></span><p>A good idea is to do a request for "moin.cgi?action=test" (which calls an internal diagnosis feature) after you installed a new release, which will spot some common errors. <span id="line-75" class="anchor"></span></p>
-<span id="line-76" class="anchor"></span><p>Depending on your installation, more tightly secured permissions are a good idea. Ideally, you assign all files in the data directory to the user the web server runs under, and then you use <tt>700</tt> or <tt>755</tt>. <span id="line-77" class="anchor"></span></p>
-<span id="line-78" class="anchor"></span>
-<h2 id="head-b3a424f875af1a1f08e21a2a771ecd7459a6d4dc">Upgrade information for specfic versions</h2>
+<p>A good idea is to do a request for "moin.cgi?action=test" (which calls an internal diagnosis feature) after you installed a new release, which will spot some common errors. </p>
+<p>Depending on your installation, more tightly secured permissions are a good idea. Ideally, you assign all files in the data directory to the user the web server runs under, and then you use <tt>700</tt> or <tt>755</tt>. </p>
 
-<span id="line-79" class="anchor"></span><span id="line-80" class="anchor"></span><p>The following sections provide information pertaining to specific versions of the software; if you jump several versions, read all the sections applying to your situation. <span id="line-81" class="anchor"></span></p>
-<span id="line-82" class="anchor"></span><span id="update-1-0" class="anchor"></span><p> <span id="line-83" class="anchor"></span></p>
+<h2 id="head-b3a424f875af1a1f08e21a2a771ecd7459a6d4dc">Upgrade information for specfic versions</h3>
 
-<h3 id="head-d45ca8cc7a44289d82ff1d58582c89bb638f3fcd">Version 1.0</h3>
+<p>The following sections provide information pertaining to specific versions of the software; if you jump several versions, read all the sections applying to your situation. </p>
+<a id="update-1-0"></a>
+<p> </p>
 
-<span id="line-84" class="anchor"></span><span id="line-85" class="anchor"></span><p>Version 1.0 is the last to support Python 1.5.2, but some optional features (like statistics) already require Python 2.0. <span id="line-86" class="anchor"></span></p>
-<span id="line-87" class="anchor"></span><span id="line-88" class="anchor"></span><span id="update-1-1" class="anchor"></span><p> <span id="line-89" class="anchor"></span></p>
+<h3 id="head-d45ca8cc7a44289d82ff1d58582c89bb638f3fcd">Version 1.0</h4>
 
-<h3 id="head-ab06519c303d7468ebd774ccade247864c85511f">Version 1.1</h3>
+<p>Version 1.0 is the last to support Python 1.5.2, but some optional features (like statistics) already require Python 2.0. </p>
+<a id="update-1-1"></a>
+<p> </p>
 
-<span id="line-90" class="anchor"></span><span id="line-91" class="anchor"></span><p>Be sure to read the above section on <em>General procedures</em> before you start upgrading. <span id="line-92" class="anchor"></span></p>
-<span id="line-93" class="anchor"></span><p><strong>Version 1.1 requires Python 2.0 or higher</strong>, we recommend to use Python 2.2 (version 2.2.2 if that is available on your host) or even better &gt;= 2.3.2 (with 2.3.x, <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> runs about 20-30% faster). <span id="line-94" class="anchor"></span></p>
-<span id="line-95" class="anchor"></span><span id="line-96" class="anchor"></span><p><strong>Upgrading your configuration</strong> <span id="line-97" class="anchor"></span></p>
-<span id="line-98" class="anchor"></span><ul>
-<li><p>If you changed the default for <tt>page_template_ending</tt>, this is now called <tt>page_template_regex</tt> and must contain a regex (defaults to '[a-z]Template$'). <span id="line-99" class="anchor"></span></p>
+<h3 id="head-ab06519c303d7468ebd774ccade247864c85511f">Version 1.1</h4>
+
+<p>Be sure to read the above section on <em>General procedures</em> before you start upgrading. </p>
+<p><strong>Version 1.1 requires Python 2.0 or higher</strong>, we recommend to use Python 2.2 (version 2.2.2 if that is available on your host) or even better &gt;= 2.3.2 (with 2.3.x, <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> runs about 20-30% faster). </p>
+<p><strong>Upgrading your configuration</strong> </p>
+<ul>
+<li><p> If you changed the default for <tt>page_template_ending</tt>, this is now called <tt>page_template_regex</tt> and must contain a regex (defaults to '[a-z]Template$'). </p>
 </li>
-<li><p>Same applies to <tt>page_form_ending</tt> now called <tt>page_form_regex</tt> (default: '[a-z]Form$') <span id="line-100" class="anchor"></span></p>
+<li><p> Same applies to <tt>page_form_ending</tt> now called <tt>page_form_regex</tt> (default: '[a-z]Form$') </p>
 </li>
-<li><p>Not a new feature, but configurable now: <tt>page_category_regex</tt> (default: '^Category[A-Z]') <span id="line-101" class="anchor"></span></p>
+<li><p> Not a new feature, but configurable now: <tt>page_category_regex</tt> (default: '^Category[A-Z]') </p>
 </li>
-<li><p>If you have added your own <tt>SecurityPolicy</tt>, the class interface for that has changed (see <tt>security.py</tt>). <span id="line-102" class="anchor"></span></p>
-<span id="line-103" class="anchor"></span></li>
+<li><p> If you have added your own <tt>SecurityPolicy</tt>, the class interface for that has changed (see <tt>security.py</tt>). </p>
+</li>
 </ul>
-<p><strong>Enabling new features</strong> <span id="line-104" class="anchor"></span></p>
-<span id="line-105" class="anchor"></span><ul>
-<li><p><tt>default_lang</tt> (default: 'en') - If user does not set a language in his user settings, this will be used. <span id="line-106" class="anchor"></span></p>
+<p><strong>Enabling new features</strong> </p>
+<ul>
+<li><p> <tt>default_lang</tt> (default: 'en') - If user does not set a language in his user settings, this will be used. </p>
 </li>
-<li><p><tt>edit_locking</tt> (default: <tt>'warn&nbsp;10'</tt>) - Editor locking policy: None, 'warn &lt;timeout in minutes&gt;', or 'lock &lt;timeout in minutes&gt;'. <span id="line-107" class="anchor"></span></p>
+<li><p> <tt>edit_locking</tt> (default: <tt>'warn&nbsp;10'</tt>) - Editor locking policy: None, 'warn &lt;timeout in minutes&gt;', or 'lock &lt;timeout in minutes&gt;'. </p>
 </li>
-<li><p><tt>hosts_deny</tt> (default: <tt>[]</tt>) - a list of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C). <span id="line-108" class="anchor"></span></p>
+<li><p> <tt>hosts_deny</tt> (default: <tt>[]</tt>) - a list of denied IPs; if an IP ends with a dot, it denies a whole subnet (class A, B or C). </p>
 </li>
-<li><p><tt>html_pagetitle</tt> (default: <tt>None</tt>) -  Allows you to set a specific HTML page title (if not set, it defaults to the value of sitename). <span id="line-109" class="anchor"></span></p>
+<li><p> <tt>html_pagetitle</tt> (default: <tt>None</tt>) -  Allows you to set a specific HTML page title (if not set, it defaults to the value of sitename). </p>
 </li>
-<li><p><tt>mail_login</tt> (default: <tt>None</tt>) - This is only needed when you use SMTP AUTH to send mail; in that case, set this to the username and password separated by a space, i.e. "user pwd". <span id="line-110" class="anchor"></span></p>
+<li><p> <tt>mail_login</tt> (default: <tt>None</tt>) - This is only needed when you use SMTP AUTH to send mail; in that case, set this to the username and password separated by a space, i.e. "user pwd". </p>
 </li>
-<li><p><tt>smileys</tt> (default: <tt>{}</tt>) -  User-defined smileys (a dict with the markup as the key and a tuple of width, height, border, image name as the value). <span id="line-111" class="anchor"></span></p>
+<li><p> <tt>smileys</tt> (default: <tt>{}</tt>) -  User-defined smileys (a dict with the markup as the key and a tuple of width, height, border, image name as the value). </p>
 </li>
-<li><p>don't forget to read the CHANGES file in the distribution archive <span id="line-112" class="anchor"></span></p>
-<span id="line-113" class="anchor"></span></li>
+<li><p> don't forget to read the CHANGES file in the distribution archive </p>
+</li>
 </ul>
-<span id="update-1-2" class="anchor"></span><p> <span id="line-114" class="anchor"></span></p>
+<a id="update-1-2"></a>
+<p> </p>
 
-<h3 id="head-b67c2d9266310861577c255faf04abda607713c7">Version 1.2</h3>
+<h3 id="head-b67c2d9266310861577c255faf04abda607713c7">Version 1.2</h4>
 
-<span id="line-115" class="anchor"></span><span id="line-116" class="anchor"></span><p><strong>Version 1.2 requires Python 2.2.2 or higher</strong>, we recommend to use Python &gt;=2.3.2 (with 2.3.x, <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> runs about 20-30% faster). <span id="line-117" class="anchor"></span></p>
-<span id="line-118" class="anchor"></span><ul>
-<li><p>the URL for the <a href="http://moinmaster.wikiwikiweb.de/RecentChanges">RecentChanges</a> RSS feed changed. It now only works with <tt>?action=rss_rc</tt>. <span id="line-119" class="anchor"></span></p>
-<span id="line-120" class="anchor"></span></li>
-<li class="gap"><p>drawings use a new applet. It saves PNG instead of GIF and can do image maps to make areas of the drawing active. On display a GIF will be searched if no PNG is found. We recommend changing all GIFs to indexed PNGs cause this fallback might disappear in later versions. <span id="line-121" class="anchor"></span>Sample code using bash &amp; ImageMagick (be sure you know what you do): <span id="line-122" class="anchor"></span>
-<span id="line-123" class="anchor"></span></p>
+<p><strong>Version 1.2 requires Python 2.2.2 or higher</strong>, we recommend to use Python &gt;=2.3.2 (with 2.3.x, <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> runs about 20-30% faster). </p>
+<ul>
+<li><p> the URL for the <a href="http://moinmaster.wikiwikiweb.de/RecentChanges">RecentChanges</a> RSS feed changed. It now only works with <tt>?action=rss_rc</tt>. </p>
+</li>
+<li class="gap"><p> drawings use a new applet. It saves PNG instead of GIF and can do image maps to make areas of the drawing active. On display a GIF will be searched if no PNG is found. We recommend changing all GIFs to indexed PNGs cause this fallback might disappear in later versions. Sample code using bash &amp; ImageMagick (be sure you know what you do): 
+</p>
 <pre>
 for draw in `find /path/to/wiki/data -name \*.draw`; do
-<span id="line-124" class="anchor"></span>    file=`dirname $draw`/`basename $draw .draw`
-<span id="line-125" class="anchor"></span>    if [ -e "${file}.gif" ]; then
-<span id="line-126" class="anchor"></span>        echo "Converting ${file}.gif to ${file}.png"
-<span id="line-127" class="anchor"></span>        convert "${file}.gif" "${file}.png"
-<span id="line-128" class="anchor"></span>    fi
-<span id="line-129" class="anchor"></span>done
-<span id="line-130" class="anchor"></span></pre>
-<span id="line-131" class="anchor"></span><span id="line-132" class="anchor"></span></li>
-<li class="gap"><p><tt>caching_formats</tt> (default: <tt>['text_html',]</tt>) - enable caching for the given output formats; enabled by default. Developers maybe want to disable this and use the empty list. <span id="line-133" class="anchor"></span></p>
-<span id="line-134" class="anchor"></span></li>
-<li class="gap"><p>Themeing and HTML/CSS cleanup <span id="line-135" class="anchor"></span></p>
+    file=`dirname $draw`/`basename $draw .draw`
+    if [ -e "${file}.gif" ]; then
+        echo "Converting ${file}.gif to ${file}.png"
+        convert "${file}.gif" "${file}.png"
+    fi
+done
+</pre>
+</li>
+<li class="gap"><p> <tt>caching_formats</tt> (default: <tt>['text_html',]</tt>) - enable caching for the given output formats; enabled by default. Developers maybe want to disable this and use the empty list. </p>
+</li>
+<li class="gap"><p> Themeing and HTML/CSS cleanup </p>
 <ul>
-<li><p>Browsers with completely broken CSS support (like e.g. Netscape 4.x) are no longer supported. If you still need to support them, do not upgrade to moin 1.2. If you still use these browsers, we recommend that you upgrade your browser first (Mozilla 1.5 has nice and standards compliant HTML and CSS support and is available as Free Software for Windows, Linux and Mac). <span id="line-136" class="anchor"></span></p>
+<li><p> Browsers with completely broken CSS support (like e.g. Netscape 4.x) are no longer supported. If you still need to support them, do not upgrade to moin 1.2. If you still use these browsers, we recommend that you upgrade your browser first (Mozilla 1.5 has nice and standards compliant HTML and CSS support and is available as Free Software for Windows, Linux and Mac). </p>
 </li>
-<li><p>If you changed any html in code or by config you will have to check if it still works. For the usual stuff, look into <tt>MoinMoin/theme/classic.py</tt> and <tt>classic/css/screen.css</tt>. For config defaults of the html fragments, read <tt>MoinMoin/config.py</tt>. If you want to modify a theme, don't simply change classic, but copy or subclass it under a new theme name. <span id="line-137" class="anchor"></span></p>
+<li><p> If you changed any html in code or by config you will have to check if it still works. For the usual stuff, look into <tt>MoinMoin/theme/classic.py</tt> and <tt>classic/css/screen.css</tt>. For config defaults of the html fragments, read <tt>MoinMoin/config.py</tt>. If you want to modify a theme, don't simply change classic, but copy or subclass it under a new theme name. </p>
 </li>
-<li><p>because of the new theme support the layout of the <tt>htdocs</tt> directory changed: <span id="line-138" class="anchor"></span></p>
+<li><p> because of the new theme support the layout of the <tt>htdocs</tt> directory changed: </p>
 <ul>
-<li><p>Instead of using icons under <tt>img/</tt> and css under <tt>css/</tt>, there will be an additional <tt>themename/</tt> directory in between, e.g. <tt>classic/img/</tt> and <tt>classic/css/</tt>. If you added own icons, you may have to copy them to the themes directory. <span id="line-139" class="anchor"></span></p>
+<li><p> Instead of using icons under <tt>img/</tt> and css under <tt>css/</tt>, there will be an additional <tt>themename/</tt> directory in between, e.g. <tt>classic/img/</tt> and <tt>classic/css/</tt>. If you added own icons, you may have to copy them to the themes directory. </p>
 </li>
-<li><p>The filename of the CSS file has changed to the media type, so the normal one used for screen output has changed name from <tt>moinmoin.css</tt> to <tt>screen.css</tt>. There also were quite some changes and enhancements to the CSS files, so better use the new ones. <span id="line-140" class="anchor"></span></p>
+<li><p> The filename of the CSS file has changed to the media type, so the normal one used for screen output has changed name from <tt>moinmoin.css</tt> to <tt>screen.css</tt>. There also were quite some changes and enhancements to the CSS files, so better use the new ones. </p>
 </li>
 </ul>
 </li>
-<li><p>config.css_url was removed <span id="line-141" class="anchor"></span></p>
-<span id="line-142" class="anchor"></span></li>
+<li><p> config.css_url was removed </p>
+</li>
 </ul>
 </li>
-<li class="gap"><p>Plugins - we use a new plugin loader that requires a correct <tt>__init__.py</tt> file in the plugin directories. See the directory <tt>wiki/data/plugin/</tt> in the distribution archive and just copy it over to your wiki's plugin directory. <span id="line-143" class="anchor"></span></p>
-<span id="line-144" class="anchor"></span></li>
-<li class="gap"><p>Do not forget to update to the new Twikidrawplugin that comes with moin 1.2. <span id="line-145" class="anchor"></span></p>
-<span id="line-146" class="anchor"></span></li>
-<li class="gap"><p>removed config variables: <span id="line-147" class="anchor"></span></p>
+<li class="gap"><p> Plugins - we use a new plugin loader that requires a correct <tt>__init__.py</tt> file in the plugin directories. See the directory <tt>wiki/data/plugin/</tt> in the distribution archive and just copy it over to your wiki's plugin directory. </p>
+</li>
+<li class="gap"><p> Do not forget to update to the new Twikidrawplugin that comes with moin 1.2. </p>
+</li>
+<li class="gap"><p> removed config variables: </p>
 <ul>
-<li><p>external_diff (not needed any more, we have internal diff now) <span id="line-148" class="anchor"></span></p>
+<li><p> external_diff (not needed any more, we have internal diff now) </p>
 </li>
-<li><p>shared_metadb (wasn't implemented for long - we will re-add it, when it is) <span id="line-149" class="anchor"></span></p>
+<li><p> shared_metadb (wasn't implemented for long - we will re-add it, when it is) </p>
 </li>
-<li><p>title1/2 (please use page_header1/2) <span id="line-150" class="anchor"></span></p>
+<li><p> title1/2 (please use page_header1/2) </p>
 </li>
-<li><p>page_icons_up <span id="line-151" class="anchor"></span></p>
-<span id="line-152" class="anchor"></span></li>
+<li><p> page_icons_up </p>
+</li>
 </ul>
 </li>
-<li class="gap"><p>changed config variables: <span id="line-153" class="anchor"></span></p>
+<li class="gap"><p> changed config variables: </p>
 <ul>
-<li><p>changed_time_fmt (removed some html and brackets around time from default) <span id="line-154" class="anchor"></span></p>
+<li><p> changed_time_fmt (removed some html and brackets around time from default) </p>
 </li>
-<li><p>html_head (default is empty string now) <span id="line-155" class="anchor"></span></p>
+<li><p> html_head (default is empty string now) </p>
 </li>
-<li><p>page_footer1/2 (default is empty string now) <span id="line-156" class="anchor"></span></p>
+<li><p> page_footer1/2 (default is empty string now) </p>
 </li>
-<li><p>page_icons (is now a list of icon names, not html any more) <span id="line-157" class="anchor"></span></p>
+<li><p> page_icons (is now a list of icon names, not html any more) </p>
 </li>
-<li><p>umask (default is 0770 now, not world r/w any more == more secure) <span id="line-158" class="anchor"></span></p>
-<span id="line-159" class="anchor"></span></li>
+<li><p> umask (default is 0770 now, not world r/w any more == more secure) </p>
+</li>
 </ul>
 </li>
-<li class="gap"><p>new config variables (see <a class="interwiki" title="MoinMaster" href="http://moinmaster.wikiwikiweb.de/HelpOnConfiguration">HelpOnConfiguration</a>): <span id="line-160" class="anchor"></span></p>
+<li class="gap"><p> new config variables (see <a class="interwiki" title="MoinMaster" href="http://moinmaster.wikiwikiweb.de/HelpOnConfiguration"><img src="wiki/htdocs/modern/img/moin-inter.png" alt="[MoinMaster]" height="16" width="16">HelpOnConfiguration</a>): </p>
 <ul>
-<li><p>cookie_lifetime <span id="line-161" class="anchor"></span></p>
+<li><p> cookie_lifetime </p>
 </li>
-<li><p>mail_login <span id="line-162" class="anchor"></span></p>
+<li><p> mail_login </p>
 </li>
-<li><p>page_credits <span id="line-163" class="anchor"></span></p>
+<li><p> page_credits </p>
 </li>
-<li><p>page_dict_regex <span id="line-164" class="anchor"></span></p>
+<li><p> page_dict_regex </p>
 </li>
-<li><p>page_group_regex <span id="line-165" class="anchor"></span></p>
+<li><p> page_group_regex </p>
 </li>
-<li><p>page_header1/2 <span id="line-166" class="anchor"></span></p>
+<li><p> page_header1/2 </p>
 </li>
-<li><p>page_iconbar  <span id="line-167" class="anchor"></span></p>
+<li><p> page_iconbar  </p>
 </li>
-<li><p>page_icons_table <span id="line-168" class="anchor"></span></p>
+<li><p> page_icons_table </p>
 </li>
-<li><p>page_license_enabled <span id="line-169" class="anchor"></span></p>
+<li><p> page_license_enabled </p>
 </li>
-<li><p>page_license_page <span id="line-170" class="anchor"></span></p>
+<li><p> page_license_page </p>
 </li>
-<li><p>theme_default <span id="line-171" class="anchor"></span></p>
+<li><p> theme_default </p>
 </li>
-<li><p>theme_force <span id="line-172" class="anchor"></span></p>
+<li><p> theme_force </p>
 </li>
-<li><p>tz_offset  <span id="line-173" class="anchor"></span></p>
-<span id="line-174" class="anchor"></span><span id="line-175" class="anchor"></span></li>
-</ul>
+<li><p> tz_offset  </p>
 </li>
 </ul>
-<span id="update-1-2-1" class="anchor"></span><p> <span id="line-176" class="anchor"></span><span id="update-1-2-2" class="anchor"></span> <span id="line-177" class="anchor"></span><span id="update-1-2-3" class="anchor"></span> <span id="line-178" class="anchor"></span></p>
+</li>
+</ul>
+<a id="update-1-2-1"></a>
+<p> <a id="update-1-2-2"></a>
+ <a id="update-1-2-3"></a>
+ </p>
 
-<h3 id="head-6b39642936e912c76ea6eec794a0ce182bf5f751">Version 1.2.1, 1.2.2, 1.2.3</h3>
+<h3 id="head-6b39642936e912c76ea6eec794a0ce182bf5f751">Version 1.2.1, 1.2.2, 1.2.3</h4>
 
-<span id="line-179" class="anchor"></span><p>As 1.2.x is primarily a bug-fix release for 1.2, there is not much special if you run 1.2 and want to update to 1.2.x. <span id="line-180" class="anchor"></span></p>
-<span id="line-181" class="anchor"></span><p>If you run a version previous to 1.2, please read above about upgrading to 1.2 first. <span id="line-182" class="anchor"></span></p>
-<span id="line-183" class="anchor"></span><p>In any case, read the <tt>CHANGES</tt> file in the toplevel directory of your moin archive - all fixes are described there and also some few new features. <span id="line-184" class="anchor"></span></p>
-<span id="line-185" class="anchor"></span><p>Be aware that except code fixes, there were also fixes in the data and htdocs directory - so please selectively copy them over to your running wiki installation. <span id="line-186" class="anchor"></span></p>
-<span id="line-187" class="anchor"></span><span id="update-1-3" class="anchor"></span><p> <span id="line-188" class="anchor"></span></p>
+<p>As 1.2.x is primarily a bug-fix release for 1.2, there is not much special if you run 1.2 and want to update to 1.2.x. </p>
+<p>If you run a version previous to 1.2, please read above about upgrading to 1.2 first. </p>
+<p>In any case, read the <tt>CHANGES</tt> file in the toplevel directory of your moin archive - all fixes are described there and also some few new features. </p>
+<p>Be aware that except code fixes, there were also fixes in the data and htdocs directory - so please selectively copy them over to your running wiki installation. </p>
+<a id="update-1-3"></a>
+<p> </p>
 
-<h3 id="head-bad7644afcfbab5ecaffd6f8fa739abf11841232">Version 1.3</h3>
+<h3 id="head-bad7644afcfbab5ecaffd6f8fa739abf11841232">Version 1.3</h4>
 
-<span id="line-189" class="anchor"></span><span id="line-190" class="anchor"></span><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> Upgrading to moin 1.3 will be non-trivial. It will definitely take you more than 5 minutes. <img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> <span id="line-191" class="anchor"></span></p>
-<span id="line-192" class="anchor"></span><p>This is because of many changes to configuration, data format, filenames and pathes. <span id="line-193" class="anchor"></span></p>
-<span id="line-194" class="anchor"></span><p>In any case, make a backup or you risk destroying your wiki's content. <span id="line-195" class="anchor"></span></p>
-<span id="line-196" class="anchor"></span><p>Please read the files <tt>CHANGES</tt> and <tt>README.migration</tt> in the toplevel directory of your moin archive for details on what changed and how to upgrade. <span id="line-197" class="anchor"></span></p>
-<span id="line-198" class="anchor"></span>
-<h3 id="head-64b74b335c0bb5764150db10b4f12dc7b9b1154f">Deprecation Note</h3>
+<p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> Upgrading to moin 1.3 will be non-trivial. It will definitely take you more than 5 minutes. <img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> </p>
+<p>This is because of many changes to configuration, data format, filenames and pathes. </p>
+<p>In any case, make a backup or you risk destroying your wiki's content. </p>
+<p>Please read the files <tt>CHANGES</tt> and <tt>README.migration</tt> in the toplevel directory of your moin archive for details on what changed and how to upgrade. </p>
 
-<span id="line-199" class="anchor"></span><span id="line-200" class="anchor"></span><p>This page is deprecated (at least the version specific stuff on it), for 1.5 it will be gone and we will use CHANGES file exclusively. <span id="line-201" class="anchor"></span></p>
+<h3 id="head-64b74b335c0bb5764150db10b4f12dc7b9b1154f">Deprecation Note</h4>
+
+<p>This page is deprecated (at least the version specific stuff on it), for 1.5 it will be gone and we will use CHANGES file exclusively. </p>
 <span id="bottom" class="anchor"></span>
 </div>
 <p id="pageinfo" class="info" lang="en" dir="ltr">last edited 2005-11-13 02:51:14 by <span title="piyo @ EAOcf-377p183.ppp15.odn.ne.jp[61.196.67.183]"><a class="nonexistent" title="piyo @ EAOcf-377p183.ppp15.odn.ne.jp[61.196.67.183]" href="http://moinmaster.wikiwikiweb.de/piyo">piyo</a></span></p>
