@@ -170,6 +170,7 @@ def execute(pagename, request):
        # request.form.get('timestamp', [None])[0]
     ok = request.form.get('ok', [0])[0]
 
+    request.http_headers()
     wikiutil.send_title(request, "Despam", pagename=pagename)    
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
