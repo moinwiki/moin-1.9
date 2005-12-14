@@ -609,6 +609,8 @@ msgstr "Esta dirección e-mail ya es usada por alguien más."
 
 msgid "User account created! You can use this account to login now..."
 msgstr ""
+"Se creó la cuenta de usuario! Puede usarla para entrar desde ya al "
+"sistema..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"

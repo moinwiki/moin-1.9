@@ -355,7 +355,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''This email already belongs to somebody else.''':
 '''Ten adres poczty elektronicznej należy do kogoś innego.''',
 '''User account created! You can use this account to login now...''':
-'''Konto czytelnika utowrzone! Możesz teraz użyć tego konta żeby się zalogować...''',
+'''Konto czytelnika utworzone! Możesz teraz użyć tego konta żeby się zalogować...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':

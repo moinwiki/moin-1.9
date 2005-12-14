@@ -572,7 +572,9 @@ msgid "Found no account matching the given email address '%(email)s'!"
 msgstr "メールアドレス'%(email)s'に該当するアカウントが見つかりません。"
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr "設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用してください。"
+msgstr ""
+"設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用して"
+"ください。"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "ユーザ名が入力されていません。ユーザ名を入力してください。"
@@ -597,7 +599,9 @@ msgid "This email already belongs to somebody else."
 msgstr "このメールアドレスはすでに利用されています。"
 
 msgid "User account created! You can use this account to login now..."
-msgstr "ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。"
+msgstr ""
+"ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインで"
+"きます。"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -800,8 +804,8 @@ msgstr "購読を利用するには、ログインしてください。"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録し"
-"てください。"
+"購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してく"
+"ださい。"
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "このページの購読を停止しました。"
@@ -1338,7 +1342,8 @@ msgstr "このwikiに参照先がないページはありません。"
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr "reStructured textを利用できません。docutilsをインストールしてください。"
+msgstr ""
+"reStructured textを利用できません。docutilsをインストールしてください。"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**インクルードの許容数を越えました**"

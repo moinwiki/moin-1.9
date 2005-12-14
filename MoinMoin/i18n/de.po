@@ -612,7 +612,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Diese E-Mail-Adresse gehört bereits jemand anderem."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1667,30 +1667,3 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
-
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Das \"Cookie\" wurde gelöscht. Sie sind jetzt abgemeldet."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Unbekannter Benutzername: {{{\"%s\"}}}. Bitte geben Sie Benutzernamen und "
-#~ "Passwort ein."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Fehlendes Passwort. Bitte Benutzername und Passwort eingeben."
-
-#~ msgid "Account \"%s\" is disabled."
-#~ msgstr "Konto \"%s\" ist deaktiviert."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Falsches Passwort."
-
-#~ msgid "Bad relogin URL."
-#~ msgstr "Ungültige Relogin-URL."
-
-#~ msgid "Unknown user."
-#~ msgstr "Unbekannter Benutzer."
-
-#~ msgid "User account created!"
-#~ msgstr "Benutzerprofil angelegt!"

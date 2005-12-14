@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 15:57+0200\n"
+"POT-Creation-Date: 2005-12-10 13:52+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -603,7 +603,8 @@ msgid "This email already belongs to somebody else."
 msgstr "Šāda e-pasta adrese jau kādam pieder."
 
 msgid "User account created! You can use this account to login now..."
-msgstr "Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu..."
+msgstr ""
+"Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
