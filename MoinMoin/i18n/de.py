@@ -354,6 +354,8 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen verlieren können Sie sie per E-Mail wieder bekommen.''',
 '''This email already belongs to somebody else.''':
 '''Diese E-Mail-Adresse gehört bereits jemand anderem.''',
+'''User account created! You can use this account to login now...''':
+'''Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Das Theme \'%(theme_name)s\' konnte nicht geladen werden!''',
 '''User preferences saved!''':

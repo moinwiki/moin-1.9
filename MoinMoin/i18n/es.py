@@ -354,6 +354,8 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''Por favor, indique su e-mail. Si pierde su información de ingreso, puede obtenerla vía e-mail.''',
 '''This email already belongs to somebody else.''':
 '''Esta dirección e-mail ya es usada por alguien más.''',
+'''User account created! You can use this account to login now...''':
+'''Se creó la cuenta de usuario! Puede usarla para entrar desde ya al sistema...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No se pudo cargar el tema \'%(theme_name)s\' !''',
 '''User preferences saved!''':

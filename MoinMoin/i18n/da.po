@@ -1339,7 +1339,8 @@ msgstr "Ingen ønskede sider i denne wiki."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr "Dannelsen af reStructured text er ikke mulig - kræver docutils installeret."
+msgstr ""
+"Dannelsen af reStructured text er ikke mulig - kræver docutils installeret."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maks. antal tilladte inkluderinger overskredet**"
