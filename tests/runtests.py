@@ -12,7 +12,7 @@ Without arguments run all the tests in the _tests package.
 @license: GNU GPL, see COPYING for details.
 """
 
-import sys
+import os, sys
 
 moinpath = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
 sys.path.insert(0, os.path.abspath(moinpath))
