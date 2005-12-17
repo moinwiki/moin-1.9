@@ -224,8 +224,8 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             if not 'aliasname' in theuser.auth_attribs:
                 # aliasname
-                theuser.aliasname = form.get('aliasname', [theuser.aliasname])[0]
-	    
+                theuser.aliasname = form.get('aliasname', [''])[0]
+
             # editor size
             theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)
                 
