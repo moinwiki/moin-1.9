@@ -35,7 +35,8 @@ XXXX Preparing for Version 1.5.0rc1:
       contained CR/LF characters (could happen when using copy&paste)
     * fixed GUI editor MoinEditorBackup page containing HTML instead of wiki
       markup
-
+    * fixed invalid HTML in FootNotes
+    * fixed HTML source in EditorBackup after canceling GUI editor
 
 Version 1.5.0beta6:
   Authentication:
