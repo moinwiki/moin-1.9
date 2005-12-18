@@ -1084,13 +1084,10 @@ class SearchResults:
     def getvalue(self):
         """ Return output in div with CSS class """
         write = self.request.write
-        # TODO: this will not work with other formatter than
-        # text_html. we should add a div/section creation method to all
-        # formatters.
         value = [
-            self.formatter.open('div', attr={'class': 'searchresults'}),
+            self.formatter.rawHTML('<div class="searchresults">'),
             self.buffer.getvalue(),
-            self.formatter.close('div'),
+            self.formatter.rawHTML('</div>'),
             ]
         return '\n'.join(value)
 
