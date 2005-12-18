@@ -87,6 +87,7 @@ class RenamePage:
 
         # Get new name from form and normalize.
         comment = form.get('comment', [u''])[0]
+        comment = wikiutil.clean_comment(comment)
         newpagename = form.get('newpagename')[0]
         newpagename = self.request.normalizePagename(newpagename)
 
