@@ -14,8 +14,20 @@ import os
 
 # Insert the path to MoinMoin in the start of the path
 import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), 
                                 os.pardir, os.pardir))
+
+print """
+Until the following bug is closed, we avoid running this script:
+
+http://moinmoin.wikiwikiweb.de/MoinMoinBugs/LupyOptimizeBreaksIndex
+
+If you like, help us finding the problem.
+
+Terminating now, doing NOTHING...
+"""
+sys.exit(1)
 
 from MoinMoin.scripts.moin_build_index import IndexScript
 from MoinMoin.request import RequestCLI
