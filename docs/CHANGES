@@ -30,6 +30,12 @@ XXXX Preparing for Version 1.5.0rc1:
     * Many (50+) tests are currently failing because they are too restrictive
       and do not match the (output of the) code they should test.
 
+  Fixes:
+    * fixed broken logs when a DeletePage (maybe also RenamePage) comment
+      contained CR/LF characters (could happen when using copy&paste)
+    * fixed GUI editor MoinEditorBackup page containing HTML instead of wiki
+      markup
+
 
 Version 1.5.0beta6:
   Authentication:
