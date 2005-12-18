@@ -42,19 +42,6 @@ class Formatter:
     def assemble_code(self, text):
         """inserts the code into the generated text
         """
-        #text = text.replace('\\', '\\\\')
-        #text = text.replace('"', '\\"')
-        text = text.split('<<<>>>', len(self.code_fragments))
-        source = self.text_cmd_begin + repr(text[0])
-        i = 0
-        for t in text[1:]:
-            source = (source + self.text_cmd_end +
-                      self.code_fragments[i] +
-                      self.text_cmd_begin + repr(text[i+1]))
-            i = i + 1
-        source = source + self.text_cmd_end
-        self.code_fragments = [] # clear code fragments to make
-                                 # this object reusable
         # Automatic invalidation due to moin code changes:
         # we are called from Page.py, so moincode_timestamp is
         # mtime of MoinMoin directory. If we detect, that the
@@ -65,13 +52,28 @@ class Formatter:
         # MoinMoin, so better do a touch if you only modified stuff
         # in a subdirectory.
         waspcode_timestamp = int(time.time())
-        source = """
+        source = ["""
 moincode_timestamp = int(os.path.getmtime(os.path.dirname(__file__)))
 if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
     raise "CacheNeedsUpdate"
-%s
-""" % (waspcode_timestamp, waspcode_timestamp, source)
-        return source
+""" % (waspcode_timestamp, waspcode_timestamp)]
+
+
+        text = text.split('<<<>>>', len(self.code_fragments))
+        source.extend([self.text_cmd_begin, repr(text[0])])
+        i = 0
+        for t in text[1:]:
+            source.extend([self.text_cmd_end,
+                           self.code_fragments[i],
+                           self.text_cmd_begin,
+                           repr(text[i+1])])
+            i = i + 1
+        source.append(self.text_cmd_end)
+        source.append(self.__adjust_formatter_state())
+        
+        self.code_fragments = [] # clear code fragments to make
+                                 # this object reusable
+        return "".join(source)
 
     def __getattr__(self, name):
         """ For every thing we have no method/attribute use the formatter
