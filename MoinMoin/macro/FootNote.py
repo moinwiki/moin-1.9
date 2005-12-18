@@ -47,36 +47,38 @@ def emit_footnotes(request, formatter):
         # inline tags will be closed, and we get correct direction.
         attr = formatter.langAttr()
         attr['class'] = 'footnotes'
-        result.append(formatter.open('div', attr=attr))
-
-        # What is that empty div for???
-        result.append('<div></div>\n')
+        attr = [' %s="%s"' % (k, v) for k, v in attr.items()]
+        result.append(formatter.rawHTML('<div%s>' % ''.join(attr)))
 
         # Add footnotes list
-        result.append('<ul>\n')
+        result.append(formatter.bullet_list(1))
         for idx in range(len(request.footnotes)):
             # Add item
+            result.append(formatter.listitem(1))
+            result.append(formatter.paragraph(1)) # see [1]
+            
             fn_id = request.footnotes[idx][1]
-            fn_no = (formatter.anchorlink(1, 'fnref' + fn_id, id = 'fndef' + fn_id) +
-                     formatter.text(str(idx+1)) +
-                     formatter.anchorlink(0))
-
-            result.append('<li><span>%s</span>' % fn_no)
+            result.append(formatter.anchorlink(1, 'fnref' + fn_id,
+                                               id='fndef' + fn_id))
+            result.append(formatter.text(str(idx+1)))
+            result.append(formatter.anchorlink(0))
+            result.append(formatter.text(" "))
                         
             out=StringIO.StringIO()
             request.redirect(out)
-            parser=wiki.Parser(request.footnotes[idx][0], request)
+            parser=wiki.Parser(request.footnotes[idx][0], request,
+                               line_anchors=False)
             parser.format(formatter)
             result.append(out.getvalue())
             request.redirect()
             del out
+            # [1] paragraph is automagically closed by wiki parser! 
+            result.append(formatter.listitem(0))
             
-            result.append('</li>\n')
-            
-        result.append('</ul>\n')
+        result.append(formatter.bullet_list(0))
 
         # Finish div
-        result.append(formatter.close('div'))
+        result.append(formatter.rawHTML('</div>'))
 
         request.footnotes = []
         return ''.join(result)
