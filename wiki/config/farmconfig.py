@@ -117,13 +117,13 @@ class FarmConfig(DefaultConfig):
     # sending forgotten passwords.
 
     # SMTP server, e.g. "mail.provider.com" (empty or None to disable mail)
-    mail_smarthost = ""
+    #mail_smarthost = ""
 
     # The return address, e.g u"Jürgen Wiki <noreply@mywiki.org>" [Unicode]
-    mail_from = u""
+    #mail_from = u""
 
     # "user pwd" if you need to use SMTP AUTH
-    mail_login = ""
+    #mail_login = ""
 
 
     # User interface ----------------------------------------------------
