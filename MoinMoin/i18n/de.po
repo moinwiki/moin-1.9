@@ -612,7 +612,8 @@ msgid "This email already belongs to somebody else."
 msgstr "Diese E-Mail-Adresse gehört bereits jemand anderem."
 
 msgid "User account created! You can use this account to login now..."
-msgstr "Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
+msgstr ""
+"Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
