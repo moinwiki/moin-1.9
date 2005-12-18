@@ -257,16 +257,30 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                     theme_name = wikiutil.escape(theme_name)
                     return _("The theme '%(theme_name)s' could not be loaded!") % locals()
 
-            # User CSS URL
-            key = 'css_url'
-            default = self.cfg.user_form_defaults[key]
-            if not key in self.cfg.user_form_disable:
-                value = form.get(key, [''])[0]
-                setattr(theuser, key, value)
-            
             # try to get the (optional) preferred language
             theuser.language = form.get('language', [''])[0]
 
+            # I want to handle all inputs from user_form_fields, but
+            # don't want to handle the cases that have already been coded
+            # above.
+            # This is a horribly fragile kludge that's begging to break.
+            # Something that might work better would be to define a
+            # handler for each form field, instead of stuffing them all in
+            # one long and inextensible method.  That would allow for
+            # plugins to provide methods to validate their fields as well.
+            already_handled = ['name', 'password', 'password2', 'email',
+                               'aliasname', 'edit_rows', 'editor_default',
+                               'editor_ui', 'tz_offset', 'datetime_fmt',
+                               'theme_name', 'language']
+            for field in self.cfg.user_form_fields:
+                key = field[0]
+                if ((key in self.cfg.user_form_disable)
+                    or (key in already_handled)):
+                    continue
+                default = self.cfg.user_form_defaults[key]
+                value = form.get(key, [default])[0]
+                setattr(theuser, key, value)
+            
             # checkbox options
             if not newuser:
                 for key, label in self.cfg.user_checkbox_fields:
