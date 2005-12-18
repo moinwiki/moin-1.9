@@ -1500,7 +1500,7 @@ msgid "Edit (Text)"
 msgstr "Redigér (tekst)"
 
 msgid "Edit (GUI)"
-msgstr "Rediger (grafisk)"
+msgstr "Redigér (grafisk)"
 
 msgid "Immutable Page"
 msgstr "Ikke-redigérbar side"

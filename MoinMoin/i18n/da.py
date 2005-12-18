@@ -879,7 +879,7 @@ rød=redigér''',
 '''Edit (Text)''':
 '''Redigér (tekst)''',
 '''Edit (GUI)''':
-'''Rediger (grafisk)''',
+'''Redigér (grafisk)''',
 '''Immutable Page''':
 '''Ikke-redigérbar side''',
 '''Remove Link''':

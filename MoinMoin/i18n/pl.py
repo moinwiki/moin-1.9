@@ -341,7 +341,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
 '''Use UserPreferences to change your settings or create an account.''':
-'''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
+'''Wejdź do PreferencjeUżytkownika aby zmienić swe ustawienia lub utworzyć konto.''',
 '''Empty user name. Please enter a user name.''':
 '''Puste pole identyfikatora. Podaj swój identyfikator''',
 '''This user name already belongs to somebody else.''':
@@ -938,7 +938,7 @@ czerwony=edycja''',
 '''HelpOnFormatting''':
 '''PomocFormatowania''',
 '''UserPreferences''':
-'''PreferencjeCzytelnika''',
+'''PreferencjeUżytkownika''',
 '''WikiLicense''':
 '''LicencjaWiki''',
 '''MissingPage''':
