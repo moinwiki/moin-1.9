@@ -563,11 +563,6 @@ def do_edit(pagename, request):
         from MoinMoin.PageEditor import PageEditor
         pg = PageEditor(request, pagename)
 
-    # Edit was canceled
-    if request.form.has_key('button_cancel'):
-        pg.sendCancel(savetext or "", rev)
-        return
-
     # is invoked without savetext start editing
     if savetext is None:
         pg.sendEditor()
@@ -581,6 +576,25 @@ def do_edit(pagename, request):
     # IMPORTANT: normalize text from the form. This should be done in
     # one place before we manipulate the text.
     savetext = pg.normalizeText(savetext, stripspaces=rstrip)
+
+
+    # Clean comment - replace CR, LF, TAB by whitespace, delete control chars
+    # TODO: move this to config, create on first call then return cached.
+    remap_chars = {
+        ord(u'\t'): u' ',
+        ord(u'\r'): u' ',
+        ord(u'\n'): u' ',
+    }
+    control_chars = u'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f' \
+                    '\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f'
+    for c in control_chars:
+        remap_chars[c] = None
+    comment = comment.translate(remap_chars)
+
+    # Edit was canceled
+    if request.form.has_key('button_cancel'):
+        pg.sendCancel(savetext or "", rev)
+        return
 
     # Add category
 
@@ -612,19 +626,6 @@ def do_edit(pagename, request):
         if savetext and savetext[-1] != u'\n':
             savetext += ' '
         savetext += category + u'\n' # Should end with newline!
-
-    # Clean comment - replace CR, LF, TAB by whitespace, delete control chars
-    # TODO: move this to config, create on first call then return cached.
-    remap_chars = {
-        ord(u'\t'): u' ',
-        ord(u'\r'): u' ',
-        ord(u'\n'): u' ',
-    }
-    control_chars = u'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x0b\x0c\x0e\x0f' \
-                    '\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f'
-    for c in control_chars:
-        remap_chars[c] = None
-    comment = comment.translate(remap_chars)
 
     # Preview, spellcheck or spellcheck add new words
     if (request.form.has_key('button_preview') or
