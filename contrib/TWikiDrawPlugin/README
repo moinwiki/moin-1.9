@@ -1,4 +1,3 @@
-
 TWikiDrawPlugin Sources
 -----------------------
 
@@ -12,6 +11,16 @@ adding:
  - indexed PNG support
  - xhtml conform image maps
  - corrects object stacking order for the map
+
+TODO:
+ * look at http://moinmoin.wikiwikiweb.de/MoinMoinTodo/Release_1.5 - see
+   the "Unfinished" section for more todo stuff relating to TWikiDraw
+ * build.xml must NOT download any stuff, but use the source archive we have
+   already in this directory.
+ * make some bash script that invokes the build process and puts the resulting
+   applet into wiki/htdocs/applets/TWikiDrawPlugin
+ * document build requirements
+ * test with some Java enabled browser if it works :)
 
 References:
  - Original site: http://twiki.org/cgi-bin/view/Plugins/TWikiDrawPlugin

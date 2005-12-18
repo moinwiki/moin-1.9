@@ -1,6 +1,36 @@
 MoinMoin Version History
 ========================
 
+XXXX Preparing for Version 1.5.0rc1:
+  This is the first release candidate of MoinMoin 1.5.0.
+  
+  It still has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
+  already better than 1.3.5 (our previous stable release), at least for the
+  features that are not new in 1.5.0.
+
+  Our release policy is not trying to make a "perfect release" (as that
+  release might NEVER get released), but to make progress and don't delay
+  releases too much.
+
+  Known main issues:
+
+    * The GUI WYSIWYG editor has still some issues and limitations.
+      If you can't live with those, you can simply switch it off by using:
+      editor_force = True
+      editor_default = 'text'  # internal default, just for completeness
+
+    * TWikiDraw has some issues - we need some JAVA guy caring for it!
+      If you want to help, see there: contrib/TWikiDrawPlugin/README
+
+    * "Backup" and especially "Restore" action (both new in 1.5) have some
+      issues, so please DON'T USE THEM except if you want to help debugging
+      and improving it and after having made a backup with some other, proven
+      method. USE BOTH ON YOUR OWN RISK!
+
+    * Many (50+) tests are currently failing because they are too restrictive
+      and do not match the (output of the) code they should test.
+
+
 Version 1.5.0beta6:
   Authentication:
     * Added SSO module for PHP based apps. Currently supported: eGroupware 1.2.
