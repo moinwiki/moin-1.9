@@ -38,6 +38,8 @@ XXXX Preparing for Version 1.5.0rc1:
     * fixed invalid HTML in FootNotes
     * fixed HTML source in EditorBackup after canceling GUI editor
     * Footnotes of included pages are not shown at the bottom of the including page.
+    * Bug in Dict handling that often breaks first entry
+
 Version 1.5.0beta6:
   Authentication:
     * Added SSO module for PHP based apps. Currently supported: eGroupware 1.2.

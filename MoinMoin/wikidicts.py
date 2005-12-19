@@ -42,11 +42,7 @@ class DictBase:
         """
         self.name = name
 
-        # Lazy compile class regex on first use. All instances share the
-        # same regex, compiled once when the first instance is created.
-        if isinstance(self.__class__.regex, (str, unicode)):
-            self.__class__.regex = re.compile(self.__class__.regex,
-                                              re.MULTILINE | re.UNICODE)
+        self.regex = re.compile(self.regex, re.MULTILINE | re.UNICODE)
 
         # Get text from page named 'name'
         p = Page.Page(request, name)
@@ -86,7 +82,7 @@ class Dict(DictBase):
        any text ignored      
     '''
     # Key:: Value - ignore all but key:: value pairs, strip whitespace
-    regex = r'^\s(?P<key>.+?)::\s(?P<val>.*?)\s*$'
+    regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$'
 
     def initFromText(self, text):
         """ Create dict from keys and values in text
@@ -97,7 +93,6 @@ class Dict(DictBase):
         for match in self.regex.finditer(text):
             key, val = match.groups()
             self._dict[key] = val
-    
 
 class Group(DictBase):
     ''' Group of users, of pages, of whatever
@@ -117,7 +112,7 @@ class Group(DictBase):
     '''
     # * Member - ignore all but first level list items, strip whitespace
     # Strip free links markup if exists
-    regex = r'^\s\*\s+(?:\[\")?(?P<member>.+?)(?:\"\])?\s*$'
+    regex = r'^ \* +(?:\[\")?(?P<member>.+?)(?:\"\])? *$'
 
     def initFromText(self, text):
         """ Create dict from group members in text
