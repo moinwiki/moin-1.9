@@ -37,7 +37,7 @@ XXXX Preparing for Version 1.5.0rc1:
       markup
     * fixed invalid HTML in FootNotes
     * fixed HTML source in EditorBackup after canceling GUI editor
-
+    * Footnotes of included pages are not shown at the bottom of the including page.
 Version 1.5.0beta6:
   Authentication:
     * Added SSO module for PHP based apps. Currently supported: eGroupware 1.2.

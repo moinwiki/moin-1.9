@@ -929,6 +929,7 @@ class Page:
         @keyword content_id: set the id of the enclosing div
         @keyword count_hit: if 1, add an event to the log
         @keyword send_missing_page: if 1, assume that page to be sent is MissingPage
+        @keyword omit_footnotes: if True, do not send footnotes (used by include macro)
         """
         from MoinMoin import i18n
         request.clock.start('send_page')
@@ -941,9 +942,10 @@ class Page:
         else:
             media = 'screen'
         content_only = keywords.get('content_only', 0)
+        omit_footnotes = keywords.get('omit_footnotes', 0)
         content_id = keywords.get('content_id', 'content')
         do_cache = keywords.get('do_cache', 1)
-        send_missing_page = keywords.get('send_missing_page', 0)        
+        send_missing_page = keywords.get('send_missing_page', 0)
         self.hilite_re = (keywords.get('hilite_re') or
                           request.form.get('highlight', [None])[0])
         if msg is None: msg = ""
@@ -1212,7 +1214,7 @@ class Page:
                                    start_line=pi_lines)
 
             # check for pending footnotes
-            if getattr(request, 'footnotes', None):
+            if getattr(request, 'footnotes', None) and not omit_footnotes:
                 from MoinMoin.macro.FootNote import emit_footnotes
                 request.write(emit_footnotes(request, self.formatter))
 
