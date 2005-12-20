@@ -208,7 +208,7 @@ class ThemeBase:
         userlinks = []
         # Add username/homepage link for registered users. We don't care
         # if it exists, the user can create it.
-        if request.user.valid:
+        if request.user.valid and request.user.name:
             interwiki = wikiutil.getInterwikiHomePage(request)
             name = request.user.name
             aliasname = request.user.aliasname
