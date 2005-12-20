@@ -286,6 +286,11 @@ class User:
         if self.language and not languages.has_key(self.language):
             self.language = 'en'
 
+    def __repr__(self):
+        return "<%s.%s at 0x%x name:%r id:%s valid:%r>" % (
+            self.__class__.__module__, self.__class__.__name__,
+            id(self), self.name, self.id, self.valid)
+
     def make_id(self):
         """ make a new unique user id """
         #!!! this should probably be a hash of REMOTE_ADDR, HTTP_USER_AGENT
