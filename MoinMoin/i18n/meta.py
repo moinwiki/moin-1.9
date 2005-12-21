@@ -23,7 +23,7 @@ languages = {
 'lv': (u'Latviešu', u'Latvian', 'utf-8', 0, """Radomirs Cirskis <nad2000@gmail.com>""",),
 'nb': (u'Norsk Bokmål', u'Norwegian Bokmal', 'utf-8', 0, """Joerg Cassens <jmt@cassens.org>""",),
 'nl': (u'Nederlands', u'Dutch', 'utf-8', 0, """Reinout van Schouwen <reinout@cs.vu.nl>""",),
-'pl': (u'Polski', u'Polish', 'utf-8', 0, """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",),
+'pl': (u'Polski', u'Polish', 'utf-8', 0, """Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>""",),
 'pt': (u'Português', u'Portuguese', 'utf-8', 0, """Leonardo Gregianin""",),
 'pt-br': (u'Português do Brasil', u'Brazillian Portuguese', 'utf-8', 0, """Leonardo Gregianin <leonardo@riseup.net>""",),
 'ro': (u'Română', u'Romanian', 'utf-8', 0, """Ovidiu Sabou <ovidiu.sabou@gmail.com>""",),

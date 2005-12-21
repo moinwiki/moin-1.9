@@ -358,6 +358,8 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan du få tillbaka dem via epost.''',
 '''This email already belongs to somebody else.''':
 '''Den här epostadressen tillhör redan någon annan.''',
+'''User account created! You can use this account to login now...''':
+'''Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Temat \'%(theme_name)s\' kunde inte laddas!''',
 '''User preferences saved!''':
@@ -787,6 +789,12 @@ Pröva ett annat namn.''',
 '''Ladda ner den här wikin som XML''',
 '''No wanted pages in this wiki.''':
 '''Inga önskade sidor i den här wikin.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Rendering av reStructured-text är inte möjlig, installera docutils först.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Maximalt antal tillåtna inkluderingar har överskridits**''',
+'''**Could not find the referenced page: %s**''':
+'''**Kunde inte hitta den refererade sidan: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Förväntade "%(wanted)s" efter "%(key)s", hittade "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -939,6 +947,8 @@ röd=ändra''',
 '''WikiLicens''',
 '''MissingPage''':
 '''SaknadSida''',
+'''MissingHomePage''':
+'''SaknadStartSida''',
 '''Mon''':
 '''mån''',
 '''Tue''':

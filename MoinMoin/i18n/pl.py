@@ -4,7 +4,7 @@
 meta = {
   'language': """Polski""",
   'elanguage': """Polish""",
-  'maintainer': """S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>""",
+  'maintainer': """Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -63,7 +63,7 @@ makropolecenie.-~
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
-'''Ktoś inny zapisał tę stronę kiedy ją edytowano!
+'''Ktoś inny zapisał tę stronę w czasie, kiedy ją modyfikowałeś!
 Przejrzyj tę stronę i wtedy zapisz. Nie zapisuj jej takiej jaka jest!
 Obejrzyj %(difflink)s aby stwierdzić, co zostało zmienione.''',
 '''[Content of new page loaded from %s]''':
@@ -117,7 +117,7 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 (!) Aby uzyskać więcej pomocy, obejrzyj HelpOnEditing lub SyntaxReference.
 ''',
 '''Edit was cancelled.''':
-'''Zmiany zostały anulowane''',
+'''Zmiany zostały anulowane.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona.''',
 '''Page "%s" was successfully deleted!''':
@@ -184,7 +184,7 @@ Now re-add your changes to the current page contents.
 the content editbox with your version of the page, because that would
 delete the changes of the other person, which is excessively rude!\'\'
 ''':
-'''Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją edytowano.
+'''Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją modyfikowałeś.
 
 Musisz teraz cofnąć się za pomocą przeglądarki, i skopiować do schowka
 Twoje zmiany. Potem ponownie rozpocznij edycję strony i wklej zawartość
@@ -213,9 +213,9 @@ możesz zniszczyć pracę innych, co może grozić wzrostem poziomu agresji!\'\'
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
-'''Ta strona została otwarta do edycji albo ostatni podglądana %(timestamp)s przez %(owner)s.[[BR]]
-\'\'\'Powinno się \'\'powstrzymać od edycji\'\' tej strony przez minimum następne %(mins_valid)d minut,
-aby zapobiec konfliktom w edycji.\'\'\'[[BR]]
+'''Ta strona została otwarta do edycji albo ostatnio podglądana %(timestamp)s przez %(owner)s.[[BR]]
+\'\'\'Powinieneś się \'\'powstrzymać od edycji\'\' tej strony przez minimum następne %(mins_valid)d minut,
+aby uniknąć konfliktów.\'\'\'[[BR]]
 Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''<unknown>''':
 '''<nieznany>''',
@@ -298,7 +298,7 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':
-'''%.2f sekund.''',
+'''%.2f sekund''',
 '''match''':
 '''porównanie''',
 '''matches''':
@@ -341,11 +341,11 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
 '''Use UserPreferences to change your settings or create an account.''':
-'''Wejdź do PreferencjeUżytkownika aby zmienić swe ustawienia lub utworzyć konto.''',
+'''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
 '''Empty user name. Please enter a user name.''':
-'''Puste pole identyfikatora. Podaj swój identyfikator''',
+'''Puste pole identyfikatora. Podaj swój identyfikator.''',
 '''This user name already belongs to somebody else.''':
-'''Niniejsza nazwa należy do kogoś innego.''',
+'''Niniejszy identyfikator należy już do kogoś innego.''',
 '''Passwords don\'t match!''':
 '''Hasła się nie zgadzają!''',
 '''Please specify a password!''':
@@ -359,7 +359,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':
-'''Ustawienia użytkownika zapisane!''',
+'''Ustawienia czytelnika zapisane!''',
 '''Default''':
 '''Domyślny''',
 '''<Browser setting>''':
@@ -453,7 +453,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''del''':
 '''usuń''',
 '''N/A''':
-'''N/D''',
+'''n/d''',
 '''Revision History''':
 '''Histora zmian''',
 '''No log entries found.''':
@@ -484,15 +484,15 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''You must log in to use subscribtions.''':
 '''Musisz się zalogować, aby móc korzystać z subskrybcji.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''Dodaj swój adres poczty eleketronicznej w UserPreferences aby użytkować subskrybcję.''',
+'''Wpisz swój adres poczty elektronicznej w PreferencjeCzytelnika aby korzystać z subskrybcji.''',
 '''Your subscribtion to this page has been removed.''':
-'''Subskrybcja tej strony przez Ciebie została usunięta.''',
+'''Twoja subskrybcja tej strony została usunięta.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nie można usunąć subskrybcji wyrażenia regularnego!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
-'''Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich UserPreferences''',
+'''Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich PreferencjeCzytelnika.''',
 '''You have been subscribed to this page.''':
-'''Rezygnacja z subskrybcji została przyjęta.''',
+'''Zasubskrybowałeś tę stronę.''',
 '''Charts are not available!''':
 '''Wykresy nie są dostępne!''',
 '''You need to provide a chart type!''':
@@ -500,7 +500,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Bad chart type "%s"!''':
 '''Nieprawidłowy rodzaj wykresu "%s"!''',
 '''Required attribute "%(attrname)s" missing''':
-'''Niezbędny brakujący atrybut "%(attrname)s"''',
+'''Brakuje niezbędnego atrybutu "%(attrname)s"''',
 '''Submitted form data:''':
 '''Dane przekazane z formularza:''',
 '''Search Titles''':
@@ -574,7 +574,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Expected a value for key "%(token)s"''':
 '''Spodziewana wartość dla klucza "%(token)s"''',
 '''Wiki Markup''':
-'''Język oznaczeń Wiki''',
+'''Język oznaczeń wiki''',
 '''Print View''':
 '''Podgląd wydruku''',
 '''[%d attachments]''':
@@ -626,7 +626,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''No file content. Delete non ASCII characters from the file name and try again.''':
 '''W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie.''',
 '''You are not allowed to delete attachments on this page.''':
-'''Nie możesz skasować załączników z tej strony.''',
+'''Nie możesz kasować załączników tej strony.''',
 '''You are not allowed to get attachments from this page.''':
 '''Nie możesz pobierać załączników z tej strony.''',
 '''You are not allowed to unzip attachments of this page.''':
@@ -634,7 +634,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''You are not allowed to install files.''':
 '''Nie możesz instalować plików.''',
 '''You are not allowed to view attachments of this page.''':
-'''Nie możesz obejrzeć załączników do tej strony.''',
+'''Nie możesz oglądać załączników tej strony.''',
 '''Unsupported upload action: %s''':
 '''Nieprzewidziany sposób poboru pliku: %s''',
 '''Attachments for "%(pagename)s"''':
@@ -672,7 +672,7 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Unknown file type, cannot display this attachment inline.''':
 '''Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''załącznik:%(filename)s z %(pagename)s''',
+'''[[Verbatim(załącznik:)]]%(filename)s z %(pagename)s''',
 '''You are not allowed to delete this page.''':
 '''Nie możesz kasować niniejszej strony.''',
 '''This page is already deleted or was never created!''':
@@ -908,7 +908,7 @@ czerwony=edycja''',
 '''User''':
 '''Czytelnik''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
-'''Przepraszam, strona nie została zachowana ze względu na to, że "%(content)s" nie są dozwolone na tej stronie''',
+'''Niestety, strona nie została zachowana ze względu na to, że "%(content)s" nie są dozwolone w tym wiki.''',
 '''Line''':
 '''Linia''',
 '''Deletions are marked like this.''':
@@ -932,17 +932,19 @@ czerwony=edycja''',
 '''FindPage''':
 '''ZnajdźStronę''',
 '''SiteNavigation''':
-'''NawigacjaWitryny''',
+'''NawigacjaSerwisu''',
 '''HelpContents''':
 '''PomocSpisTreści''',
 '''HelpOnFormatting''':
-'''PomocFormatowania''',
+'''PomocPrzyFormatowaniu''',
 '''UserPreferences''':
-'''PreferencjeUżytkownika''',
+'''PreferencjeCzytelnika''',
 '''WikiLicense''':
 '''LicencjaWiki''',
 '''MissingPage''':
 '''NieistniejącaStrona''',
+'''MissingHomePage''':
+'''NieistniejącaStronaDomowa''',
 '''Mon''':
 '''pon''',
 '''Tue''':
@@ -964,7 +966,7 @@ czerwony=edycja''',
 '''LikePages''':
 '''PodobneStrony''',
 '''LocalSiteMap''':
-'''MapaWitryny''',
+'''LokalnaMapaSerwisu''',
 '''RenamePage''':
 '''ZmieńNazwę''',
 '''SpellCheck''':

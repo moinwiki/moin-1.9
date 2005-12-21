@@ -112,7 +112,7 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
  Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; [[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts [[Verbatim(=====)]].
  Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.
  Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; URL; [URL]; [URL etiķete].
- Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;  Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
+ Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
 (!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai SintaksesIzziņa.
 ''',
 '''Edit was cancelled.''':
@@ -131,10 +131,9 @@ The following page has been changed by %(editor)s:
 ''':
 '''Godājamais Viki lietotāj,
 
-Jūs esat pierakstīts viki lapas vai kategorijas "%(sitename)s" izmaiņām.
+Jūs esat parakstījies(-usies) Viki lapas vai kategorijas "%(sitename)s" izmaiņām.
 
-Sekojošo lapu ir mainījis(-usi) %(editor)s:
-%(pagelink)s
+Lapu %(pagelink)s ir mainījis(-usi) %(editor)s:
 
 ''',
 '''The comment on the change is:
@@ -227,7 +226,7 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''UnSubscribe''':
 '''Atrakstīties''',
 '''Subscribe''':
-'''Pierakstīties''',
+'''Parakstīties''',
 '''Raw''':
 '''Nepārstrādāts''',
 '''XML''':
@@ -392,7 +391,7 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''This list does not work, unless you have entered a valid email address!''':
 '''Šis saraksts strādā tikai ar pareizu e-pasta adresi!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''Pierakstītās viki lapas (pa vienai katrā rindā)''',
+'''Parakstītās Viki lapas (pa vienai lapai rindā)''',
 '''Create Profile''':
 '''Izveidot profilu''',
 '''Mail me my account data''':
@@ -476,7 +475,7 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''A quicklink to this page has been added for you.''':
 '''Jums izveidota ātrsaite uz šo lapu.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Jūs nedrīkstat parakstīties lapai, kuru Jūs nevarat lasīt.''',
+'''Jūs nedrīkstat parakstīties uz lapu, kuru Jums nav tiesību lasīt.''',
 '''This wiki is not enabled for mail processing.''':
 '''Šajā viki pasta sūtīšana nav iespējota.''',
 '''You must log in to use subscribtions.''':
@@ -484,13 +483,13 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Add your email address in your UserPreferences to use subscriptions.''':
 '''Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi LietotājaIestatījumos.''',
 '''Your subscribtion to this page has been removed.''':
-'''Jūs vairs neesat pierakstīts uz šo lapu.''',
+'''Jūs vairs neesat parakstījies(-usies) uz šo lapu.''',
 '''Can\'t remove regular expression subscription!''':
 '''Regulāras izteiksmes pierakstu izdzēst nevar!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
 '''Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi.''',
 '''You have been subscribed to this page.''':
-'''Tagad Jūs esat pierakstīts uz šo lapu.''',
+'''Tagad Jūs esat parakstījies(-usies) uz šo lapu.''',
 '''Charts are not available!''':
 '''Diagramma nav pieejama!''',
 '''You need to provide a chart type!''':
@@ -939,6 +938,8 @@ sarkans=labot''',
 '''VikiLicence''',
 '''MissingPage''':
 '''IztrūkstošaLapa''',
+'''MissingHomePage''':
+'''IztrūkstošaMājasLapa''',
 '''Mon''':
 '''Pr''',
 '''Tue''':

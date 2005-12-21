@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-21 01:04+0100\n"
-"PO-Revision-Date: 2005-11-18 23:08+0100\n"
+"PO-Revision-Date: 2005-12-21 18:59+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -600,7 +600,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Den här epostadressen tillhör redan någon annan."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1347,14 +1347,14 @@ msgstr "Inga önskade sidor i den här wikin."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "Rendering av reStructured-text är inte möjlig, installera docutils först."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
+msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr ""
+msgstr "**Kunde inte hitta den refererade sidan: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1599,9 +1599,8 @@ msgstr "WikiLicens"
 msgid "MissingPage"
 msgstr "SaknadSida"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "SaknadSida"
+msgstr "SaknadStartSida"
 
 msgid "Mon"
 msgstr "mån"

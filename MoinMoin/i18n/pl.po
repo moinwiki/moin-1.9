@@ -14,9 +14,10 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-21 01:04+0100\n"
-"PO-Revision-Date: 2005-12-08 23:45+0100\n"
-"Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
+"PO-Revision-Date: 2005-12-21 21:30+0100\n"
+"Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
+"Language-Team-Homepage: http://moinmoin.wikiwikiweb.de/MoinDev/Translation/PolishTeam\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -119,7 +120,7 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!\n"
 "Have a look at the diff of %(difflink)s to see what has been changed."
 msgstr ""
-"Ktoś inny zapisał tę stronę kiedy ją edytowano!\n"
+"Ktoś inny zapisał tę stronę w czasie, kiedy ją modyfikowałeś!\n"
 "Przejrzyj tę stronę i wtedy zapisz. Nie zapisuj jej takiej jaka jest!\n"
 "Obejrzyj %(difflink)s aby stwierdzić, co zostało zmienione."
 
@@ -223,7 +224,7 @@ msgstr ""
 "(!) Aby uzyskać więcej pomocy, obejrzyj HelpOnEditing lub SyntaxReference.\n"
 
 msgid "Edit was cancelled."
-msgstr "Zmiany zostały anulowane"
+msgstr "Zmiany zostały anulowane."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -316,7 +317,7 @@ msgid ""
 "the content editbox with your version of the page, because that would\n"
 "delete the changes of the other person, which is excessively rude!''\n"
 msgstr ""
-"Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją edytowano.\n"
+"Przykro mi, ale ktoś inny zachował tę stronę w czasie, kiedy ją modyfikowałeś.\n"
 "\n"
 "Musisz teraz cofnąć się za pomocą przeglądarki, i skopiować do schowka\n"
 "Twoje zmiany. Potem ponownie rozpocznij edycję strony i wklej zawartość\n"
@@ -377,11 +378,11 @@ msgid ""
 "to avoid editing conflicts.'''[[BR]]\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
-"Ta strona została otwarta do edycji albo ostatni podglądana %(timestamp)s "
+"Ta strona została otwarta do edycji albo ostatnio podglądana %(timestamp)s "
 "przez %(owner)s.[[BR]]\n"
-"'''Powinno się ''powstrzymać od edycji'' tej strony przez minimum następne %"
+"'''Powinieneś się ''powstrzymać od edycji'' tej strony przez minimum następne %"
 "(mins_valid)d minut,\n"
-"aby zapobiec konfliktom w edycji.'''[[BR]]\n"
+"aby uniknąć konfliktów.'''[[BR]]\n"
 "Aby opuścić edytor, kliknij w przycisk \"Anuluj\"."
 
 msgid "<unknown>"
@@ -511,7 +512,7 @@ msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
 
 #, python-format
 msgid "%.2f seconds"
-msgstr "%.2f sekund."
+msgstr "%.2f sekund"
 
 msgid "match"
 msgstr "porównanie"
@@ -570,14 +571,14 @@ msgstr "Brak odpowiednich kont do podanego adresu '%(email)s'!"
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
-"Wejdź do PreferencjeUżytkownika aby zmienić swe ustawienia lub utworzyć "
+"Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć "
 "konto."
 
 msgid "Empty user name. Please enter a user name."
-msgstr "Puste pole identyfikatora. Podaj swój identyfikator"
+msgstr "Puste pole identyfikatora. Podaj swój identyfikator."
 
 msgid "This user name already belongs to somebody else."
-msgstr "Niniejsza nazwa należy do kogoś innego."
+msgstr "Niniejszy identyfikator należy już do kogoś innego."
 
 msgid "Passwords don't match!"
 msgstr "Hasła się nie zgadzają!"
@@ -605,7 +606,7 @@ msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Wystrój '%(theme_name)s' nie może zostać załadowany!"
 
 msgid "User preferences saved!"
-msgstr "Ustawienia użytkownika zapisane!"
+msgstr "Ustawienia czytelnika zapisane!"
 
 msgid "Default"
 msgstr "Domyślny"
@@ -754,7 +755,7 @@ msgid "del"
 msgstr "usuń"
 
 msgid "N/A"
-msgstr "N/D"
+msgstr "n/d"
 
 msgid "Revision History"
 msgstr "Histora zmian"
@@ -805,21 +806,21 @@ msgstr "Musisz się zalogować, aby móc korzystać z subskrybcji."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"Dodaj swój adres poczty eleketronicznej w UserPreferences aby użytkować "
-"subskrybcję."
+"Wpisz swój adres poczty elektronicznej w PreferencjeCzytelnika aby "
+"korzystać z subskrybcji."
 
 msgid "Your subscribtion to this page has been removed."
-msgstr "Subskrybcja tej strony przez Ciebie została usunięta."
+msgstr "Twoja subskrybcja tej strony została usunięta."
 
 msgid "Can't remove regular expression subscription!"
 msgstr "Nie można usunąć subskrybcji wyrażenia regularnego!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
-"Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich UserPreferences"
+"Edytuj subskrybcję za pomocą wyrażeń regularnych w swoich PreferencjeCzytelnika."
 
 msgid "You have been subscribed to this page."
-msgstr "Rezygnacja z subskrybcji została przyjęta."
+msgstr "Zasubskrybowałeś tę stronę."
 
 msgid "Charts are not available!"
 msgstr "Wykresy nie są dostępne!"
@@ -833,7 +834,7 @@ msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Niezbędny brakujący atrybut \"%(attrname)s\""
+msgstr "Brakuje niezbędnego atrybutu \"%(attrname)s\""
 
 msgid "Submitted form data:"
 msgstr "Dane przekazane z formularza:"
@@ -951,7 +952,7 @@ msgid "Expected a value for key \"%(token)s\""
 msgstr "Spodziewana wartość dla klucza \"%(token)s\""
 
 msgid "Wiki Markup"
-msgstr "Język oznaczeń Wiki"
+msgstr "Język oznaczeń wiki"
 
 msgid "Print View"
 msgstr "Podgląd wydruku"
@@ -1043,7 +1044,7 @@ msgstr ""
 "W pliku nie ma nic. Skasuj wszystkie dziwne znaczki i spróbuj ponownie."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "Nie możesz skasować załączników z tej strony."
+msgstr "Nie możesz kasować załączników tej strony."
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "Nie możesz pobierać załączników z tej strony."
@@ -1055,7 +1056,7 @@ msgid "You are not allowed to install files."
 msgstr "Nie możesz instalować plików."
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "Nie możesz obejrzeć załączników do tej strony."
+msgstr "Nie możesz oglądać załączników tej strony."
 
 #, python-format
 msgid "Unsupported upload action: %s"
@@ -1143,7 +1144,7 @@ msgstr "Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić."
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "załącznik:%(filename)s z %(pagename)s"
+msgstr "[[Verbatim(załącznik:)]]%(filename)s z %(pagename)s"
 
 msgid "You are not allowed to delete this page."
 msgstr "Nie możesz kasować niniejszej strony."
@@ -1547,8 +1548,8 @@ msgstr "Czytelnik"
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"Przepraszam, strona nie została zachowana ze względu na to, że \"%(content)s"
-"\" nie są dozwolone na tej stronie"
+"Niestety, strona nie została zachowana ze względu na to, że \"%(content)s"
+"\" nie są dozwolone w tym wiki."
 
 msgid "Line"
 msgstr "Linia"
@@ -1587,16 +1588,16 @@ msgid "FindPage"
 msgstr "ZnajdźStronę"
 
 msgid "SiteNavigation"
-msgstr "NawigacjaWitryny"
+msgstr "NawigacjaSerwisu"
 
 msgid "HelpContents"
 msgstr "PomocSpisTreści"
 
 msgid "HelpOnFormatting"
-msgstr "PomocFormatowania"
+msgstr "PomocPrzyFormatowaniu"
 
 msgid "UserPreferences"
-msgstr "PreferencjeUżytkownika"
+msgstr "PreferencjeCzytelnika"
 
 msgid "WikiLicense"
 msgstr "LicencjaWiki"
@@ -1604,9 +1605,8 @@ msgstr "LicencjaWiki"
 msgid "MissingPage"
 msgstr "NieistniejącaStrona"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "NieistniejącaStrona"
+msgstr "NieistniejącaStronaDomowa"
 
 msgid "Mon"
 msgstr "pon"
@@ -1639,7 +1639,7 @@ msgid "LikePages"
 msgstr "PodobneStrony"
 
 msgid "LocalSiteMap"
-msgstr "MapaWitryny"
+msgstr "LokalnaMapaSerwisu"
 
 msgid "RenamePage"
 msgstr "ZmieńNazwę"
@@ -1683,7 +1683,7 @@ msgstr "SprawdźPisownię"
 #~ "right corner to create a profile."
 #~ msgstr ""
 #~ "Nie utworzyłeś dotychczas profilu czytelnika. Wybierz "
-#~ "PreferencjeUżytkownika w prawym górnym rogu aby go utworzyć."
+#~ "PreferencjeCzytelnika w prawym górnym rogu aby go utworzyć."
 
 #~ msgid ""
 #~ "This wiki is not enabled for mail processing. Contact the owner of the "
@@ -1699,7 +1699,7 @@ msgstr "SprawdźPisownię"
 #~ "address."
 #~ msgstr ""
 #~ "Nie podano adresu poczty elektronicznej w Twoim profilu. Wybierz "
-#~ "(PreferencjeUżytkownika) w prawym górnym rogu i podaj prawidłowy adres."
+#~ "(PreferencjeCzytelnika) w prawym górnym rogu i podaj prawidłowy adres."
 
 #, fuzzy
 #~ msgid ""
