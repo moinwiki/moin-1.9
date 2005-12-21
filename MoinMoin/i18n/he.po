@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1560,6 +1560,10 @@ msgid "WikiLicense"
 msgstr "רישיון וויקי"
 
 msgid "MissingPage"
+msgstr "דף חסר"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "דף חסר"
 
 msgid "Mon"

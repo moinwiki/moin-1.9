@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1554,6 +1554,10 @@ msgid "WikiLicense"
 msgstr "维基版权"
 
 msgid "MissingPage"
+msgstr "需要网页"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "需要网页"
 
 msgid "Mon"

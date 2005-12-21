@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-12-10 22:50+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1596,6 +1596,10 @@ msgid "WikiLicense"
 msgstr "Wikiライセンス"
 
 msgid "MissingPage"
+msgstr "存在しないページ"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "存在しないページ"
 
 msgid "Mon"

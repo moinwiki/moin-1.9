@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -1584,6 +1584,10 @@ msgid "WikiLicense"
 msgstr "VikiLicenca"
 
 msgid "MissingPage"
+msgstr "NedostajućaStranica"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "NedostajućaStranica"
 
 msgid "Mon"

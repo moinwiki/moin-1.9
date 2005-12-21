@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -1594,6 +1594,10 @@ msgid "WikiLicense"
 msgstr "VikiLicence"
 
 msgid "MissingPage"
+msgstr "IztrūkstošaLapa"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "IztrūkstošaLapa"
 
 # Pirmdiena

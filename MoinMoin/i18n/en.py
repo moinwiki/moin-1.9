@@ -934,6 +934,8 @@ red=edit''',
 '''WikiLicense''',
 '''MissingPage''':
 '''MissingPage''',
+'''MissingHomePage''':
+'''MissingHomePage''',
 '''Mon''':
 '''Mon''',
 '''Tue''':

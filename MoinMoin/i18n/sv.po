@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-11-18 23:08+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -1597,6 +1597,10 @@ msgid "WikiLicense"
 msgstr "WikiLicens"
 
 msgid "MissingPage"
+msgstr "SaknadSida"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "SaknadSida"
 
 msgid "Mon"
