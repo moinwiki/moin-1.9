@@ -368,7 +368,7 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''the one preferred''':
 '''votre préféré''',
 '''free choice''':
-'''choix libre''',
+'''au choix''',
 '''Save''':
 '''Enregistrer''',
 '''Preferred theme''':
@@ -944,6 +944,8 @@ rouge=modifications''',
 '''LicenceDuWiki''',
 '''MissingPage''':
 '''PageInexistante''',
+'''MissingHomePage''':
+'''PagePersonnelleInexistante''',
 '''Mon''':
 '''Lun''',
 '''Tue''':

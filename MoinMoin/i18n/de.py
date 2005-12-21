@@ -942,6 +942,8 @@ rot=Änderungen''',
 '''WikiLizenz''',
 '''MissingPage''':
 '''FehlendeSeite''',
+'''MissingHomePage''':
+'''FehlendePersönlicheSeite''',
 '''Mon''':
 '''Mo''',
 '''Tue''':

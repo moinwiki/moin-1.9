@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-12-08 23:45+0100\n"
 "Last-Translator: S.P. <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -570,7 +570,8 @@ msgstr "Brak odpowiednich kont do podanego adresu '%(email)s'!"
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
-"Wejdź do PreferencjeUżytkownika aby zmienić swe ustawienia lub utworzyć konto."
+"Wejdź do PreferencjeUżytkownika aby zmienić swe ustawienia lub utworzyć "
+"konto."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Puste pole identyfikatora. Podaj swój identyfikator"
@@ -1601,6 +1602,10 @@ msgid "WikiLicense"
 msgstr "LicencjaWiki"
 
 msgid "MissingPage"
+msgstr "NieistniejącaStrona"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "NieistniejącaStrona"
 
 msgid "Mon"

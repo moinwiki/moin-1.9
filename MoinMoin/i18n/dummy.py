@@ -18,6 +18,7 @@ _('HelpOnFormatting')
 _('UserPreferences')
 _('WikiLicense')
 _('MissingPage')
+_('MissingHomePage')
 
 _('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat'), _('Sun')
 

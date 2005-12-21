@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1594,6 +1594,10 @@ msgid "WikiLicense"
 msgstr "اجازه نامه ویکی"
 
 msgid "MissingPage"
+msgstr "صفحه گم شده"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "صفحه گم شده"
 
 msgid "Mon"

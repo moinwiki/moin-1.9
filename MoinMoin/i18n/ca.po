@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.3.5rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-10-04 23:00+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1608,6 +1608,10 @@ msgid "WikiLicense"
 msgstr "Llicència del wiki"
 
 msgid "MissingPage"
+msgstr "Pàgina inexistent"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "Pàgina inexistent"
 
 msgid "Mon"

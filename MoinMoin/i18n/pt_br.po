@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-10 13:52+0100\n"
+"POT-Creation-Date: 2005-12-21 01:04+0100\n"
 "PO-Revision-Date: 2005-11-18 20:25 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1608,6 +1608,10 @@ msgid "WikiLicense"
 msgstr "LicençaWiki"
 
 msgid "MissingPage"
+msgstr "PáginaFaltante"
+
+#, fuzzy
+msgid "MissingHomePage"
 msgstr "PáginaFaltante"
 
 msgid "Mon"
