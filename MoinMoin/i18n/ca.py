@@ -87,6 +87,8 @@ Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar e
 '''Previsualitza''',
 '''GUI Mode''':
 '''Mode amb interfície gràfica''',
+'''Your changes are not saved!''':
+'''No s\'han desat els vostres canvis!''',
 '''Comment:''':
 '''Comentari:''',
 '''<No addition>''':
@@ -243,6 +245,8 @@ Per a abandonar l\'editor, premeu el botó Cancel·la.''',
 '''Publica el meu correu electrònic (i no la meua pàgina principal del wiki a la informació de l\'autor''',
 '''Open editor on double click''':
 '''Obre l\'editor en fer doble clic''',
+'''Jump to last visited page instead of frontpage''':
+'''Salta a l\'última pàgina visitada en comptes de la pàgina principal''',
 '''Show question mark for non-existing pagelinks''':
 '''Mostra un signe d\'interrogació per a enllaços a pàgines no existents''',
 '''Show page trail''':
@@ -336,6 +340,8 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Proveïu una adreça de correu vàlida''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un compte.''',
 '''Empty user name. Please enter a user name.''':
 '''El nom d\'usuari és buit. Introduïu un nom d\'usuari.''',
 '''This user name already belongs to somebody else.''':
@@ -348,6 +354,8 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació d\'entrada, podeu recuperar-la per correu.''',
 '''This email already belongs to somebody else.''':
 '''Aquest correu electrònic ja pertany a algú.''',
+'''User account created! You can use this account to login now...''':
+'''S\'ha creat el compte d\'usuari! Podeu utilitzar aquest compte per a entrar.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No s\'ha pogut carregar el tema «%(theme_name)s.''',
 '''User preferences saved!''':
@@ -462,16 +470,26 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Peticions i edicions de la pàgina''',
 '''You are not allowed to revert this page!''':
 '''No teniu permís per a recuperar aquesta pàgina.''',
+'''You must login to add a quicklink.''':
+'''Heu d\'entrar per a afegir un enllaç ràpid''',
 '''Your quicklink to this page has been removed.''':
 '''S\'ha suprimit el vostre enllaç ràpid a aquesta pàgina.''',
 '''A quicklink to this page has been added for you.''':
 '''S\'ha afegit un enllaç ràpid a aquesta pàgina.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No teniu permís per a subscriure a una pàgina la qual no podeu llegir.''',
+'''This wiki is not enabled for mail processing.''':
+'''Aquest wiki no té habilitat el processament de correu.''',
+'''You must log in to use subscribtions.''':
+'''Heu d\'identificar-vos per a utilitzar les subscripcions.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Afegiu la vostra adreça electrònica a les vostres PreferènciesUsuari per a utilitzar les subscripcions.''',
 '''Your subscribtion to this page has been removed.''':
 '''S\'ha cancel·lat la vostra subscripció a aquesta pàgina.''',
 '''Can\'t remove regular expression subscription!''':
 '''No es pot cancel·lar una subscripció mitjançant expressió regular!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Editeu les expressions regulars de subscripcions a les vostres PreferènciesUsuari.''',
 '''You have been subscribed to this page.''':
 '''Vos heu subscrit a aquesta pàgina.''',
 '''Charts are not available!''':
@@ -542,6 +560,8 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Habilitat''',
 '''Lupy search''':
 '''Cerca Lupy''',
+'''Active threads''':
+'''Fils actius''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}''',
 '''ERROR in regex \'%s\'''':
@@ -572,6 +592,10 @@ since this is subject to change and can break easily.''':
 com es mostra a continuació en la llista de fitxers. 
 \'\'\'No\'\'\' utilitzeu l\'URL de l\'enllaç {{{[get]}}}, 
 ja que aquest pot canviar i es pot trencar fàcilment.''',
+'''unzip''':
+'''desempaqueta''',
+'''install''':
+'''instal·la''',
 '''No attachments stored for %(pagename)s''':
 '''No hi ha cap adjunció emmagatzemada per a %(pagename)s''',
 '''Edit drawing''':
@@ -605,6 +629,10 @@ del fitxer.''',
 '''No teniu permís per a suprimir adjuncions en aquesta pàgina.''',
 '''You are not allowed to get attachments from this page.''':
 '''No teniu permís per a obtindre adjuncions des d\'aquesta pàgina.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''No teniu permís per a decomprimir les adjuncions d\'aquesta pàgina.''',
+'''You are not allowed to install files.''':
+'''No teniu permís per a instal·lar fitxers.''',
 '''You are not allowed to view attachments of this page.''':
 '''No teniu permís per a visualitzar adjuncions d\'aquesta pàgina.''',
 '''Unsupported upload action: %s''':
@@ -617,12 +645,34 @@ del fitxer.''',
 '''S\'ha desat l\'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d octets.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''S\'ha suprimit l\'adjunció «%(filename)s».''',
+'''Attachment \'%(filename)s\' installed.''':
+'''S\'ha instal·lat l\'adjunció «%(filename)s».''',
+'''Installation of \'%(filename)s\' failed.''':
+'''La instal·lació de «%(filename)s» ha fallat.''',
+'''The file %s is not a MoinMoin package file.''':
+'''El fitxer %s no és un fitxer de paquet MoinMoin.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''L\'adjunció «%(filename)s» no s\'ha pogut desempaquetar perquè els fitxers resultants serien massa grans (falten %(space)d kB).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''L\'adjunció «%(filename)s» no s\'ha pogut desempaquetar perquè hi hauria massa fitxers resultants (falten %(count)d).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''S\'ha desempaquetat l\'adjunció «%(filename)s».''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''No s\'ha desempaquetat l\'adjunció «%(filename)s» perquè els fitxers són massa grans, només fitxers .zip, ja existeixen o estan dins de carpetes.''',
+'''The file %(target)s is not a .zip file.''':
+'''El fitxer %(target)s no és un fitxer .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Adjunció «%(filename)s»''',
+'''Package script:''':
+'''Seqüència de paquet:''',
+'''File Name''':
+'''Nom del fitxer''',
+'''Modified''':
+'''Modificat''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''El tipus del fitxer és desconegut, no es pot mostrar aquesta adjunció en línia.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''attachment:%(filename)s de %(pagename)s''',
+'''[[Verbatim(attachment:)]]%(filename)s de %(pagename)s''',
 '''You are not allowed to delete this page.''':
 '''No teniu permís per a suprimir aquesta pàgina.''',
 '''This page is already deleted or was never created!''':
@@ -711,6 +761,8 @@ Proveu amb un nom diferent.''',
 '''Pujada de l\'adjuntació «%(filename)s».''',
 '''Drawing \'%(filename)s\' saved.''':
 '''S\'ha desat el dibuix «%(filename)s».''',
+'''%(mins)dm ago''':
+'''fa %(mins)dm''',
 '''(no bookmark set)''':
 '''(cap adreça d\'interès establida)''',
 '''(currently set to %s)''':
@@ -733,6 +785,8 @@ Proveu amb un nom diferent.''',
 '''Descarregueu una exportació en XML d\'aquest wiki''',
 '''No wanted pages in this wiki.''':
 '''No hi ha cap pàgina dessitjada en aquest wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''No és possible renderitzar text reStructurat. Instal·leu docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**S\'ha superat el nombre màxim de includes permès**''',
 '''**Could not find the referenced page: %s**''':
@@ -835,6 +889,10 @@ roig=edició''',
 '''Edita (interfície gràfica)''',
 '''Immutable Page''':
 '''Pàgina no modificable''',
+'''Remove Link''':
+'''Suprimeix un enllaç''',
+'''Add Link''':
+'''Afegeix un enllaç''',
 '''Attachments''':
 '''Adjuncions''',
 '''Show %s days.''':
@@ -864,27 +922,29 @@ roig=edició''',
 '''Mail sent OK''':
 '''S\'ha enviat el correu amb èxit''',
 '''FrontPage''':
-'''Pàgina principal''',
+'''PàginaPrincipal''',
 '''RecentChanges''':
-'''Canvis recents''',
+'''CanvisRecents''',
 '''TitleIndex''':
-'''Índex de títols''',
+'''ÍndexTítols''',
 '''WordIndex''':
-'''Índex de paraules''',
+'''ÍndexParaules''',
 '''FindPage''':
-'''Cerca una pàgina''',
+'''CercaUnaPàgina''',
 '''SiteNavigation''':
-'''Navegació del lloc''',
+'''NavegacióLloc''',
 '''HelpContents''':
-'''Continguts de l\'ajuda''',
+'''ContingutsAjuda''',
 '''HelpOnFormatting''':
-'''Ajuda sobre el format''',
+'''QuantAlFormat''',
 '''UserPreferences''':
-'''Preferències de l\'usuari''',
+'''PreferènciesUsuari''',
 '''WikiLicense''':
-'''Llicència del wiki''',
+'''LlicènciaDelWiki''',
 '''MissingPage''':
-'''Pàgina inexistent''',
+'''PàginaInexistent''',
+'''MissingHomePage''':
+'''PàginaInicialInexistent''',
 '''Mon''':
 '''dl''',
 '''Tue''':
@@ -900,15 +960,15 @@ roig=edició''',
 '''Sun''':
 '''dm''',
 '''AttachFile''':
-'''Adjunta un fitxer''',
+'''AdjuntaFitxer''',
 '''DeletePage''':
-'''Suprimeix la pàgina''',
+'''SuprimeixPàgina''',
 '''LikePages''':
-'''Pàgines semblants''',
+'''PàginesSemblants''',
 '''LocalSiteMap''':
-'''Mapa del lloc''',
+'''MapaDelLloc''',
 '''RenamePage''':
-'''Reanomena la pàgina''',
+'''ReanomenaPàgina''',
 '''SpellCheck''':
-'''Comprovació ortogràfica''',
+'''ComprovacióOrtogràfica''',
 }

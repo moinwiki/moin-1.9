@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: moin 0.3.5rc1\n"
+"Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-21 01:04+0100\n"
-"PO-Revision-Date: 2005-10-04 23:00+0200\n"
+"PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
 "MIME-Version: 1.0\n"
@@ -165,9 +165,8 @@ msgstr "Previsualitza"
 msgid "GUI Mode"
 msgstr "Mode amb interfície gràfica"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "No heu canviat el contingut de la pàgina, no es desa!"
+msgstr "No s'han desat els vostres canvis!"
 
 msgid "Comment:"
 msgstr "Comentari:"
@@ -433,7 +432,7 @@ msgid "Open editor on double click"
 msgstr "Obre l'editor en fer doble clic"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Salta a l'última pàgina visitada en comptes de la pàgina principal"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostra un signe d'interrogació per a enllaços a pàgines no existents"
@@ -582,6 +581,8 @@ msgstr ""
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
+"Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un "
+"compte."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "El nom d'usuari és buit. Introduïu un nom d'usuari."
@@ -607,6 +608,7 @@ msgstr "Aquest correu electrònic ja pertany a algú."
 
 msgid "User account created! You can use this account to login now..."
 msgstr ""
+"S'ha creat el compte d'usuari! Podeu utilitzar aquest compte per a entrar."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -792,7 +794,7 @@ msgid "You are not allowed to revert this page!"
 msgstr "No teniu permís per a recuperar aquesta pàgina."
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Heu d'entrar per a afegir un enllaç ràpid"
 
 msgid "Your quicklink to this page has been removed."
 msgstr "S'ha suprimit el vostre enllaç ràpid a aquesta pàgina."
@@ -803,17 +805,16 @@ msgstr "S'ha afegit un enllaç ràpid a aquesta pàgina."
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "No teniu permís per a subscriure a una pàgina la qual no podeu llegir."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Aquest wiki no té habilitat el processament de correu.\n"
-"Contacteu amb el responsable del wiki, que pot habilitar el correu."
+msgstr "Aquest wiki no té habilitat el processament de correu."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Heu d'identificar-vos per a utilitzar les subscripcions."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
+"Afegiu la vostra adreça electrònica a les vostres PreferènciesUsuari per a "
+"utilitzar les subscripcions."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "S'ha cancel·lat la vostra subscripció a aquesta pàgina."
@@ -823,6 +824,8 @@ msgstr "No es pot cancel·lar una subscripció mitjançant expressió regular!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
+"Editeu les expressions regulars de subscripcions a les vostres "
+"PreferènciesUsuari."
 
 msgid "You have been subscribed to this page."
 msgstr "Vos heu subscrit a aquesta pàgina."
@@ -936,7 +939,7 @@ msgid "Lupy search"
 msgstr "Cerca Lupy"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Fils actius"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -996,10 +999,10 @@ msgstr ""
 "ja que aquest pot canviar i es pot trencar fàcilment."
 
 msgid "unzip"
-msgstr ""
+msgstr "desempaqueta"
 
 msgid "install"
-msgstr ""
+msgstr "instal·la"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1057,13 +1060,11 @@ msgstr "No teniu permís per a suprimir adjuncions en aquesta pàgina."
 msgid "You are not allowed to get attachments from this page."
 msgstr "No teniu permís per a obtindre adjuncions des d'aquesta pàgina."
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
+msgstr "No teniu permís per a decomprimir les adjuncions d'aquesta pàgina."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "No teniu permís per a editar aquesta pàgina."
+msgstr "No teniu permís per a instal·lar fitxers."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "No teniu permís per a visualitzar adjuncions d'aquesta pàgina."
@@ -1092,57 +1093,62 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "S'ha suprimit l'adjunció «%(filename)s»."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "S'ha suprimit l'adjunció «%(filename)s»."
+msgstr "S'ha instal·lat l'adjunció «%(filename)s»."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "S'ha desat el dibuix «%(filename)s»."
+msgstr "La instal·lació de «%(filename)s» ha fallat."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "El fitxer %s no és un fitxer de paquet MoinMoin."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè els fitxers "
+"resultants serien massa grans (falten %(space)d kB)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
+"L'adjunció «%(filename)s» no s'ha pogut desempaquetar perquè hi hauria massa "
+"fitxers resultants (falten %(count)d)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "S'ha suprimit l'adjunció «%(filename)s»."
+msgstr "S'ha desempaquetat l'adjunció «%(filename)s»."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
+"No s'ha desempaquetat l'adjunció «%(filename)s» perquè els fitxers són massa "
+"grans, només fitxers .zip, ja existeixen o estan dins de carpetes."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "El fitxer %(target)s no és un fitxer .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Adjunció «%(filename)s»"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Seqüència de paquet:"
 
-#, fuzzy
 msgid "File Name"
 msgstr "Nom del fitxer"
 
 msgid "Modified"
-msgstr ""
+msgstr "Modificat"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
@@ -1151,7 +1157,7 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "attachment:%(filename)s de %(pagename)s"
+msgstr "[[Verbatim(attachment:)]]%(filename)s de %(pagename)s"
 
 msgid "You are not allowed to delete this page."
 msgstr "No teniu permís per a suprimir aquesta pàgina."
@@ -1318,9 +1324,9 @@ msgstr "Pujada de l'adjuntació «%(filename)s»."
 msgid "Drawing '%(filename)s' saved."
 msgstr "S'ha desat el dibuix «%(filename)s»."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "fa %(hours)dh %(mins)dm"
+msgstr "fa %(mins)dm"
 
 msgid "(no bookmark set)"
 msgstr "(cap adreça d'interès establida)"
@@ -1358,7 +1364,7 @@ msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "No és possible renderitzar text reStructurat. Instal·leu docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**S'ha superat el nombre màxim de includes permès**"
@@ -1525,10 +1531,10 @@ msgid "Immutable Page"
 msgstr "Pàgina no modificable"
 
 msgid "Remove Link"
-msgstr ""
+msgstr "Suprimeix un enllaç"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Afegeix un enllaç"
 
 msgid "Attachments"
 msgstr "Adjuncions"
@@ -1578,41 +1584,40 @@ msgid "Mail sent OK"
 msgstr "S'ha enviat el correu amb èxit"
 
 msgid "FrontPage"
-msgstr "Pàgina principal"
+msgstr "PàginaPrincipal"
 
 msgid "RecentChanges"
-msgstr "Canvis recents"
+msgstr "CanvisRecents"
 
 msgid "TitleIndex"
-msgstr "Índex de títols"
+msgstr "ÍndexTítols"
 
 msgid "WordIndex"
-msgstr "Índex de paraules"
+msgstr "ÍndexParaules"
 
 msgid "FindPage"
-msgstr "Cerca una pàgina"
+msgstr "CercaUnaPàgina"
 
 msgid "SiteNavigation"
-msgstr "Navegació del lloc"
+msgstr "NavegacióLloc"
 
 msgid "HelpContents"
-msgstr "Continguts de l'ajuda"
+msgstr "ContingutsAjuda"
 
 msgid "HelpOnFormatting"
-msgstr "Ajuda sobre el format"
+msgstr "QuantAlFormat"
 
 msgid "UserPreferences"
-msgstr "Preferències de l'usuari"
+msgstr "PreferènciesUsuari"
 
 msgid "WikiLicense"
-msgstr "Llicència del wiki"
+msgstr "LlicènciaDelWiki"
 
 msgid "MissingPage"
-msgstr "Pàgina inexistent"
+msgstr "PàginaInexistent"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "Pàgina inexistent"
+msgstr "PàginaInicialInexistent"
 
 msgid "Mon"
 msgstr "dl"
@@ -1636,22 +1641,22 @@ msgid "Sun"
 msgstr "dm"
 
 msgid "AttachFile"
-msgstr "Adjunta un fitxer"
+msgstr "AdjuntaFitxer"
 
 msgid "DeletePage"
-msgstr "Suprimeix la pàgina"
+msgstr "SuprimeixPàgina"
 
 msgid "LikePages"
-msgstr "Pàgines semblants"
+msgstr "PàginesSemblants"
 
 msgid "LocalSiteMap"
-msgstr "Mapa del lloc"
+msgstr "MapaDelLloc"
 
 msgid "RenamePage"
-msgstr "Reanomena la pàgina"
+msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
-msgstr "Comprovació ortogràfica"
+msgstr "ComprovacióOrtogràfica"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."

@@ -673,7 +673,7 @@ en blanc, le nom original sera conservé.''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Type de fichier inconnu, impossible d\'afficher son contenu dans la page.''',
 '''attachment:%(filename)s of %(pagename)s''':
-'''pièce jointe : %(filename)s de %(pagename)s''',
+'''[[Verbatim(attachment:)]] %(filename)s de %(pagename)s''',
 '''You are not allowed to delete this page.''':
 '''Vous n\'êtes pas autorisé à supprimer cette page.''',
 '''This page is already deleted or was never created!''':

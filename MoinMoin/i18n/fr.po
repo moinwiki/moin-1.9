@@ -1172,7 +1172,7 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "pièce jointe : %(filename)s de %(pagename)s"
+msgstr "[[Verbatim(attachment:)]] %(filename)s de %(pagename)s"
 
 msgid "You are not allowed to delete this page."
 msgstr "Vous n'êtes pas autorisé à supprimer cette page."
