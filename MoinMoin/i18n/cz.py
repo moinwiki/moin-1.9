@@ -94,6 +94,8 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Komentář:''',
 '''<No addition>''':
 '''<Žádná kategorie>''',
+'''Add to: %(category)s''':
+'''Přidat k: %(category)s''',
 '''Trivial change''':
 '''Minimální změna''',
 '''Remove trailing whitespace from each line''':
@@ -234,7 +236,7 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Up''':
 '''Nahoru''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Publikovat email v infromací o autorovi (místo domovské wiki stránky)''',
+'''Publikovat email v informacích o autorovi (místo domovské wiki stránky)''',
 '''Open editor on double click''':
 '''Otevřít editor dvojklikem''',
 '''Jump to last visited page instead of frontpage''':
@@ -261,6 +263,8 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Jméno''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Použijte JmenoPrijmeni)''',
+'''Alias-Name''':
+'''Alias''',
 '''Password''':
 '''Heslo''',
 '''Password repeat''':
@@ -294,6 +298,21 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''nález''',
 '''matches''':
 '''nálezů''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Někdo požádal o zaslání uživatelských dat na tuto e-mailovou adresu.
+
+Pokud jste zapomněli heslo, použijte níže uvedené informace a vložte
+heslo tak, jak je zde uvedeno (přes kopírovat a vložit).
+
+Po úspěšném přihlášení není od věci nastavit nové heslo.
+''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Tato wiki není upravena na posílání emailů.
@@ -316,6 +335,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Zadejte prosím Váš email. Pokud zapomenete Vaše přihlašovací informace, mohou Vám být na tento email zaslány.''',
 '''This email already belongs to somebody else.''':
 '''Tato emailová adresa patří již někomu jinému.''',
+'''User account created! You can use this account to login now...''':
+'''Účet byl vytvořen! Nyní se na něj lze přihlásit...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nemohu nahrát téma \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -518,6 +539,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Zakázáno''',
 '''Enabled''':
 '''Povoleno''',
+'''Lupy search''':
+'''Lupy search''',
+'''Active threads''':
+'''Aktivní vlákna''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Použijte prosím selektivnější vyhledávací výraz místo {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -547,6 +572,10 @@ since this is subject to change and can break easily.''':
 '''K odkazování se na přílohy ke stránce používejte \'\'\'{{{attachment:filename}}}\'\'\', jak je uvedeno na seznamu souborů níže. 
 NEPOUŽÍVEJTE url odkazu {{{[get]}}}, protože to je konstrukce, 
 která se brzy může změnit nebo dokonce zrušit.''',
+'''unzip''':
+'''rozbalit''',
+'''install''':
+'''instalovat''',
 '''No attachments stored for %(pagename)s''':
 '''Nebyly uloženy žádné přílohy ke stránce %(pagename)s.''',
 '''Edit drawing''':
@@ -706,6 +735,8 @@ Zkuste jiné jméno.''',
 '''Upload přílohy \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Obrázek \'%(filename)s\' uložen.''',
+'''%(mins)dm ago''':
+'''před %(mins)dm''',
 '''(no bookmark set)''':
 '''(žádná záložka nezaložena)''',
 '''(currently set to %s)''':
@@ -727,7 +758,9 @@ Zkuste jiné jméno.''',
 '''Download XML export of this wiki''':
 '''Download XML exportu této wiki''',
 '''No wanted pages in this wiki.''':
-'''V této wiki neexitují žádné žádoucí stránky.''',
+'''V této wiki neexistují žádné žádoucí stránky.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Zobrazení restrukturovaného textu není možné, prosím nainstalujte docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Překročen maximální počet povolených includes**''',
 '''**Could not find the referenced page: %s**''':
@@ -880,6 +913,8 @@ red=edit''':
 '''LicenceWiki''',
 '''MissingPage''':
 '''ChybejiciStranka''',
+'''MissingHomePage''':
+'''ChybejiciDomovskaStranka''',
 '''Mon''':
 '''Po''',
 '''Tue''':

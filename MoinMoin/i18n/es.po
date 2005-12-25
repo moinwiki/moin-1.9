@@ -1610,11 +1610,10 @@ msgid "WikiLicense"
 msgstr "LicenciaWiki"
 
 msgid "MissingPage"
-msgstr "PáginaPerdida"
+msgstr "PáginaInexistente"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "PáginaPerdida"
+msgstr "PáginaPersonalInexistente"
 
 msgid "Mon"
 msgstr "Lun"

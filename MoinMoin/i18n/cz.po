@@ -177,7 +177,7 @@ msgstr "<Žádná kategorie>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Přidat k: %(category)s"
 
 msgid "Trivial change"
 msgstr "Minimální změna"
@@ -419,7 +419,7 @@ msgid "Up"
 msgstr "Nahoru"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Publikovat email v infromací o autorovi (místo domovské wiki stránky)"
+msgstr "Publikovat email v informacích o autorovi (místo domovské wiki stránky)"
 
 msgid "Open editor on double click"
 msgstr "Otevřít editor dvojklikem"
@@ -461,7 +461,7 @@ msgid "(Use Firstname''''''Lastname)"
 msgstr "(Použijte JmenoPrijmeni)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Alias"
 
 msgid "Password"
 msgstr "Heslo"
@@ -538,6 +538,12 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
+"Někdo požádal o zaslání uživatelských dat na tuto e-mailovou adresu.\n"
+"\n"
+"Pokud jste zapomněli heslo, použijte níže uvedené informace a vložte\n"
+"heslo tak, jak je zde uvedeno (přes kopírovat a vložit).\n"
+"\n"
+"Po úspěšném přihlášení není od věci nastavit nové heslo.\n"
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
@@ -585,7 +591,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Tato emailová adresa patří již někomu jinému."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Účet byl vytvořen! Nyní se na něj lze přihlásit..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -906,10 +912,10 @@ msgid "Enabled"
 msgstr "Povoleno"
 
 msgid "Lupy search"
-msgstr ""
+msgstr "Lupy search"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Aktivní vlákna"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -966,10 +972,10 @@ msgstr ""
 "která se brzy může změnit nebo dokonce zrušit."
 
 msgid "unzip"
-msgstr ""
+msgstr "rozbalit"
 
 msgid "install"
-msgstr ""
+msgstr "instalovat"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1277,9 +1283,9 @@ msgstr "Upload přílohy '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Obrázek '%(filename)s' uložen."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "před %(hours)02d:%(mins)02d"
+msgstr "před %(mins)dm"
 
 msgid "(no bookmark set)"
 msgstr "(žádná záložka nezaložena)"
@@ -1313,11 +1319,12 @@ msgid "Download XML export of this wiki"
 msgstr "Download XML exportu této wiki"
 
 msgid "No wanted pages in this wiki."
-msgstr "V této wiki neexitují žádné žádoucí stránky."
+msgstr "V této wiki neexistují žádné žádoucí stránky."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
 msgstr ""
+"Zobrazení restrukturovaného textu není možné, prosím nainstalujte docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Překročen maximální počet povolených includes**"
@@ -1569,9 +1576,8 @@ msgstr "LicenceWiki"
 msgid "MissingPage"
 msgstr "ChybejiciStranka"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "ChybejiciStranka"
+msgstr "ChybejiciDomovskaStranka"
 
 msgid "Mon"
 msgstr "Po"

@@ -578,7 +578,7 @@ msgid "This email already belongs to somebody else."
 msgstr "别人已经用这个电子邮件注册过了."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "用户帐号成功创建! 即时起您就可以用此帐户登录..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1306,7 +1306,7 @@ msgstr "本维基中没有未定义的网页."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "无法正确显示reStructured文本, 请安装docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**太多的包含(include)**"
@@ -1554,11 +1554,11 @@ msgid "WikiLicense"
 msgstr "维基版权"
 
 msgid "MissingPage"
-msgstr "需要网页"
+msgstr "缺失网页"
 
-#, fuzzy
+
 msgid "MissingHomePage"
-msgstr "需要网页"
+msgstr "缺失主页"
 
 msgid "Mon"
 msgstr "星期一"

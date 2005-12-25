@@ -940,7 +940,9 @@ rojo=editar''',
 '''WikiLicense''':
 '''LicenciaWiki''',
 '''MissingPage''':
-'''PáginaPerdida''',
+'''PáginaInexistente''',
+'''MissingHomePage''':
+'''PáginaPersonalInexistente''',
 '''Mon''':
 '''Lun''',
 '''Tue''':

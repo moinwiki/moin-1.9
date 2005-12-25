@@ -599,7 +599,7 @@ msgid "This email already belongs to somebody else."
 msgstr "این ایمیل توسط شخص دیگری وارد شده است."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "نام کاربری شما ایجاد شد! شما می توانید از این نام کاربری برای ورود به سیستم استفاده کنید..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1342,14 +1342,14 @@ msgstr "در این ویکی صفحه ای مورد نیاز نیست."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "آماده سازی صفحه تغییر ساخت یافته ممکن نیست٬ لطفا docutils را نصب نمائید."
 
 msgid "**Maximum number of allowed includes exceeded**"
-msgstr ""
+msgstr "**حداکثر تعداد ورودی مجاز**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr ""
+msgstr "**صفحه ارجاع داده شده: %s یافت نشد**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1596,9 +1596,8 @@ msgstr "اجازه نامه ویکی"
 msgid "MissingPage"
 msgstr "صفحه گم شده"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "صفحه گم شده"
+msgstr "صفحه اولیه یافت نشد"
 
 msgid "Mon"
 msgstr "دوشنبه"

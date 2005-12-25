@@ -42,6 +42,8 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Pagina este imuabilă!''',
 '''Cannot edit old revisions!''':
 '''Nu se pot edita revizii vechi!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Blocarea înfiinţată de dumneavoastră a expirat, pregătiţi-vă pentru conflicte de editare!''',
 '''Page name is too long, try shorter name.''':
 '''Numele paginii este prea lung, încercaţi un nume mai mic.''',
 '''Edit "%(pagename)s"''':
@@ -53,7 +55,7 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
 '''Blocajul dumneavoastră de editare pe %(lock_page)s va expira peste # minute''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''Blocajul dumneavoastră de editare pe %(lock_page)s va expira peste # secunde''',
+'''Blocarea de editare pe %(lock_page)s va expira peste # secunde''',
 '''Someone else deleted this page while you were editing!''':
 '''Cineva a şters această pagină în timp ce aţi editat-o!''',
 '''Someone else changed this page while you were editing!''':
@@ -84,12 +86,34 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru anularea modificărilor.''',
 '''Preview''':
 '''Previzionare''',
+'''GUI Mode''':
+'''Mod GUI''',
+'''Your changes are not saved!''':
+'''Modificările dumneavoastră nu sunt salvate!''',
+'''Comment:''':
+'''Comentariu:''',
 '''<No addition>''':
 '''<Fără adăugări>''',
+'''Add to: %(category)s''':
+'''Adăugare la: %(category)s''',
 '''Trivial change''':
 '''Modificare minoră''',
 '''Remove trailing whitespace from each line''':
 '''Ştergere spaţii de la sfârşitul fiecărei linii''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Accentuare:: [[Verbatim(\'\')]]\'\'înclinare\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'îngroşare\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'îngroşare şi înclinare\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'înclinare şi\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'îngroşare\'\'\'[[Verbatim(\'\'\')]] combinate\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linie orizontală.
+ Antete:: [[Verbatim(=)]] Titlu 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titlu 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titlu 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titlu 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titlu 5 [[Verbatim(=====)]].
+ Liste:: spaţiu şi unul dintre: * buline; 1., a., A., i., I. elemente numerotate; 1.#n începere numărare de la n; spaţiul singur indentează.
+ Legături:: [[Verbatim(UnireCuvintecuIniţialăMare)]]; [[Verbatim(["paranteze drepte şi ghilimele"])]]; url; [url]; [url etichetă].
+ Tabele:: || text în celulă |||| text în celulă pe 2 coloane ||;    nu se permit caractere spaţiu după tabele sau titluri.(!) Pentru mai multe informaţii vizitaţi HelpOnEditing sau SyntaxReference.
+''',
 '''Edit was cancelled.''':
 '''Editarea a fost anulată''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -146,6 +170,8 @@ Următoarea pagină a fost schimbată de %(editor)s:
 '''Nu aveţi permisiunea de a edita această pagină!''',
 '''You cannot save empty pages.''':
 '''Nu puteţi salva pagini goale.''',
+'''You already saved this page!''':
+'''Aţi salvat deja această pagină!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -212,8 +238,12 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''Vizionare''',
 '''Up''':
 '''Sus''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publicarea adresei de email(nu a paginii personale wiki) în informaţiile despre autor''',
 '''Open editor on double click''':
 '''Deschidere editor la dublu clic''',
+'''Jump to last visited page instead of frontpage''':
+'''Salt la ultima pagină vizitată în loc de pagina principală''',
 '''Show question mark for non-existing pagelinks''':
 '''Afişare semn de întebare pentru legăturile cu pagini inexistente''',
 '''Show page trail''':
@@ -234,6 +264,10 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''Dezactivare cont curent pentru totdeauna''',
 '''Name''':
 '''Nume''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Folosiţi Primulnume\'\'\'\'\'\'Ultimulnume)''',
+'''Alias-Name''':
+'''Nume-Alias''',
 '''Password''':
 '''Parolă''',
 '''Password repeat''':
@@ -260,6 +294,8 @@ spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''Login''',
 ''' %s and try again.''':
 ''' %s şi încercaţi din nou.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d rezultate din aproximativ %(pages)d pagini.''',
 '''%.2f seconds''':
 '''%.2f secunde''',
 '''match''':
@@ -305,6 +341,8 @@ Contactaţi deţinătorul wiki-ului, care poate activa email.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Nu a fost găsit nici un cont care să se potrivească cu adresa
 de email \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Folosire PreferinţeUtilizator la schimbarea setărilor sau la crearea unui cont.''',
 '''Empty user name. Please enter a user name.''':
 '''Numele necompletat. Introduceţi un nume de utilizator''',
 '''This user name already belongs to somebody else.''':
@@ -313,8 +351,12 @@ de email \'%(email)s\'!''',
 '''Parolele nu corespund!''',
 '''Please specify a password!''':
 '''Specificaţi o parolă!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Specificaţi adresa de email. Dacă pierdeţi informaţia de login, o puteţi obţine prin email.''',
 '''This email already belongs to somebody else.''':
 '''Această adresă de email este deţinută deja de altcineva.''',
+'''User account created! You can use this account to login now...''':
+'''Contul de utilizator a fost creat! Puteţi folosi acest cont pentru login acum...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Tema \'%(theme_name)s\' nu a putut fi încărcată!''',
 '''User preferences saved!''':
@@ -323,10 +365,18 @@ de email \'%(email)s\'!''',
 '''Implicit''',
 '''<Browser setting>''':
 '''<Setare browser>''',
+'''the one preferred''':
+'''cel preferat''',
+'''free choice''':
+'''alegere liberă''',
 '''Save''':
 '''Salvare''',
 '''Preferred theme''':
 '''Tema dorită''',
+'''Editor Preference''':
+'''Preferinţe Editor''',
+'''Editor shown on UI''':
+'''Editorul afişat în UI''',
 '''Time zone''':
 '''Fus orar''',
 '''Your time is''':
@@ -421,12 +471,26 @@ de email \'%(email)s\'!''',
 '''Accesări şi editări ale paginii''',
 '''You are not allowed to revert this page!''':
 '''Nu aveţi permisiunea de a modifica această pagină la o stare anterioară''',
+'''You must login to add a quicklink.''':
+'''Trebuie să vă logaţi pentru a putea adăuga o legătură rapidă''',
+'''Your quicklink to this page has been removed.''':
+'''Legătura rapidă către această pagină a fost ştearsă.''',
+'''A quicklink to this page has been added for you.''':
+'''A fost adăugată o legătură rapidă către această pagină pentru dumnveavoastră.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''Nu aveţi permisiunea de înscriere la o pagină pe care nu o puteţi citi.''',
+'''This wiki is not enabled for mail processing.''':
+'''Acest wiki nu suportă procesarea poştei electronice.''',
+'''You must log in to use subscribtions.''':
+'''Trebuie să fiţi logaţi pentru a putea folosi înregistrările(subscriptions).''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Adăugaţi adresa dumneavoastră de email în PreferinţeUtilizator pentru a folosi înregistrările(subscribtions).''',
 '''Your subscribtion to this page has been removed.''':
 '''Nu mai sunteţi înscris(ă) pe această pagină.''',
 '''Can\'t remove regular expression subscription!''':
 '''Nu se poate şterge înregistrarea cu expresie regulară!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''Editaţi expresiile regulare pentru înregistrări(subscriptions) în pagina PreferinţeUtilizator.''',
 '''You have been subscribed to this page.''':
 '''Aţi fost înregistrat(ă) pe această pagină.''',
 '''Charts are not available!''':
@@ -464,7 +528,7 @@ de email \'%(email)s\'!''',
 '''Release %s [Revision %s]''':
 '''Seria %s [Revizia %s]''',
 '''4Suite Version''':
-'''4SuiteVersion''',
+'''4Suite Version''',
 '''Number of pages''':
 '''Număr de pagini''',
 '''Number of system pages''':
@@ -485,6 +549,10 @@ de email \'%(email)s\'!''',
 '''Acţiuni de extensie globale''',
 '''Local extension actions''':
 '''Acţiuni de extensie locale''',
+'''Global parsers''':
+'''Analizatoare(parsers) globale''',
+'''Local extension parsers''':
+'''Analizatoare(parsers) locale de extindere''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)''',
 '''Disabled''':
@@ -493,6 +561,8 @@ de email \'%(email)s\'!''',
 '''Activat''',
 '''Lupy search''':
 '''Căutare Lupy''',
+'''Active threads''':
+'''Fire(threads) active''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Folosiţi un termen de căutare mai selectiv în loc de {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
@@ -523,6 +593,10 @@ since this is subject to change and can break easily.''':
 după cum este afişat mai jos în lista de fişiere. 
 \'\'\'NU\'\'\' folosiţi URL al legăturii {{{[obţinere]}}}, 
 deoarece acesta se poate schimba şi poate cauza probleme foarte uşor.''',
+'''unzip''':
+'''dezarhivare''',
+'''install''':
+'''instalare''',
 '''No attachments stored for %(pagename)s''':
 '''Nici un ataşament stocat pentru %(pagename)s''',
 '''Edit drawing''':
@@ -555,6 +629,10 @@ Altfel, dacă "Redenumeşte în" este necompletat, va fi folosit numele original
 '''Nu aveţi permisiunea de a şterge ataşamentele de pe această pagină.''',
 '''You are not allowed to get attachments from this page.''':
 '''Nu aveţi permisiunea de a obţine ataşamentele de pe această pagină.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Nu aveţi permisiunea de a dezarhiva ataşamentele de pe această pagină.''',
+'''You are not allowed to install files.''':
+'''Nu aveţi dreptul să instalaţi fişiere.''',
 '''You are not allowed to view attachments of this page.''':
 '''Nu aveţi permisiunea de a viziona ataşamentele de pe această pagină.''',
 '''Unsupported upload action: %s''':
@@ -567,8 +645,30 @@ Altfel, dacă "Redenumeşte în" este necompletat, va fi folosit numele original
 '''Ataşamentul \'%(target)s\' (fişier la distanţă \'%(filename)s\') cu %(bytes)d octeţi a fost salvat.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Ataşamentul \'%(filename)s\' a fost şters.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''Ataşamentul \'%(filename)s\' a fost instalat.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Instalarea lui \'%(filename)s\' a eşuat.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Fişierul %s nu este un fişier pachet MoinMoin.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Ataşamentul \'%(filename)s\' nu a putut fi dezarhivat deoarece fişierele rezultate ar fi prea mari (%(space)d kB lipsesc).''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''Ataşamentul \'%(filename)s\' nu a putut fi dezarhivat deoarece fişierele rezultate ar fi prea multe (%(count)d lipsesc).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Ataşamentul \'%(filename)s\' a fost dezarhivat.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Ataşamentul \'%(filename)s\' nu a putut fi dezarhivat deoarece fişierele sunt prea mari, sunt doar fişiere .zip, există deja sau sunt poziţionate în directoare.''',
+'''The file %(target)s is not a .zip file.''':
+'''Fişierul %(target)s nu este un fişier .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Ataşament \'%(filename)s\'''',
+'''Package script:''':
+'''Script pachet:''',
+'''File Name''':
+'''Nume Fişier''',
+'''Modified''':
+'''Modificat''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Tip de fişier necunoscut; nu se poate afişa acest ataşament îninteriorul paginii.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -661,6 +761,8 @@ Try a different name.''':
 '''Trimiterea ataşamentului \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Desenul \'%(filename)s\' a fost salvat.''',
+'''%(mins)dm ago''':
+'''%(mins)dm mai devreme''',
 '''(no bookmark set)''':
 '''(nici un semn de carte setat)''',
 '''(currently set to %s)''':
@@ -683,6 +785,8 @@ Try a different name.''':
 '''Descărcare export XML pentru acest wiki''',
 '''No wanted pages in this wiki.''':
 '''Nici o pagină dorită în acest wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Randarea textului de tip reStructured nu este posibilă, instalaţi docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Numărul maxim de incluziuni acceptate a fost depăşit**''',
 '''**Could not find the referenced page: %s**''':
@@ -761,16 +865,36 @@ red=editare''',
 '''Text''',
 '''Titles''':
 '''Titluri''',
+'''Search''':
+'''Căutare''',
 '''More Actions:''':
 '''Mai Multe Acţiuni:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Text Brut''',
 '''Delete Cache''':
 '''Ştergere Cache''',
 '''Delete Page''':
 '''Ştergere Pagină''',
+'''Like Pages''':
+'''Pagini Asemănătoare''',
+'''Local Site Map''':
+'''HartaLocalăSit''',
 '''Do''':
 '''Executare''',
+'''Edit (Text)''':
+'''Editare (Text)''',
+'''Edit (GUI)''':
+'''Editare (GUI)''',
 '''Immutable Page''':
 '''Pagină Imuabilă''',
+'''Remove Link''':
+'''Ştergere Legătură''',
+'''Add Link''':
+'''Adăugare Legătură''',
+'''Attachments''':
+'''Ataşamente''',
 '''Show %s days.''':
 '''Afişare %s zile.''',
 '''EditText''':
@@ -793,6 +917,8 @@ red=editare''',
 '''Adăugările sunt marcate astfel.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Conexiunea cu serverul de email \'%(server)s\' a eşuat: %(reason)s''',
+'''Mail not sent''':
+'''Mailul nu a fost trimis''',
 '''Mail sent OK''':
 '''Mail trimis cu bine''',
 '''FrontPage''':
@@ -817,6 +943,8 @@ red=editare''',
 '''LicenţăWiki''',
 '''MissingPage''':
 '''PaginăLipsă''',
+'''MissingHomePage''':
+'''PaginaPrincipalăLipsă''',
 '''Mon''':
 '''Lun''',
 '''Tue''':
