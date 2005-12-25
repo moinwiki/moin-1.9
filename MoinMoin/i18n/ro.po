@@ -78,11 +78,8 @@ msgstr "Pagina este imuabilă!"
 msgid "Cannot edit old revisions!"
 msgstr "Nu se pot edita revizii vechi!"
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr ""
-"Blocajul pe care l-aţi înfiinţat a expirat, pregătiţi-vă pentru conflicte de "
-"editare!"
+msgstr "Blocarea înfiinţată de dumneavoastră a expirat, pregătiţi-vă pentru conflicte de editare!"
 
 msgid "Page name is too long, try shorter name."
 msgstr "Numele paginii este prea lung, încercaţi un nume mai mic."
@@ -106,8 +103,7 @@ msgstr ""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr ""
-"Blocajul dumneavoastră de editare pe %(lock_page)s va expira peste # secunde"
+msgstr "Blocarea de editare pe %(lock_page)s va expira peste # secunde"
 
 msgid "Someone else deleted this page while you were editing!"
 msgstr "Cineva a şters această pagină în timp ce aţi editat-o!"
@@ -168,22 +164,20 @@ msgid "Preview"
 msgstr "Previzionare"
 
 msgid "GUI Mode"
-msgstr ""
+msgstr "Mod GUI"
 
-#, fuzzy
 msgid "Your changes are not saved!"
-msgstr "Nu aţi modificat conţinutul paginii; nu se salvează!"
+msgstr "Modificările dumneavoastră nu sunt salvate!"
 
-#, fuzzy
 msgid "Comment:"
-msgstr "Comentariu"
+msgstr "Comentariu:"
 
 msgid "<No addition>"
 msgstr "<Fără adăugări>"
 
 #, python-format
 msgid "Add to: %(category)s"
-msgstr ""
+msgstr "Adăugare la: %(category)s"
 
 msgid "Trivial change"
 msgstr "Modificare minoră"
@@ -191,7 +185,6 @@ msgstr "Modificare minoră"
 msgid "Remove trailing whitespace from each line"
 msgstr "Ştergere spaţii de la sfârşitul fiecărei linii"
 
-#, fuzzy
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -226,6 +219,7 @@ msgstr ""
 "([\"paranteze drepte şi ghilimele\"])]]; url; [url]; [url etichetă].\n"
 " Tabele:: || text în celulă |||| text în celulă pe 2 coloane ||;    nu se "
 "permit caractere spaţiu după tabele sau titluri."
+"(!) Pentru mai multe informaţii vizitaţi HelpOnEditing sau SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Editarea a fost anulată"
@@ -306,9 +300,8 @@ msgstr "Nu aveţi permisiunea de a edita această pagină!"
 msgid "You cannot save empty pages."
 msgstr "Nu puteţi salva pagini goale."
 
-#, fuzzy
 msgid "You already saved this page!"
-msgstr "Nu aveţi permisiunea de a edita această pagină!"
+msgstr "Aţi salvat deja această pagină!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -428,13 +421,13 @@ msgid "Up"
 msgstr "Sus"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr ""
+msgstr "Publicarea adresei de email(nu a paginii personale wiki) în informaţiile despre autor"
 
 msgid "Open editor on double click"
 msgstr "Deschidere editor la dublu clic"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr ""
+msgstr "Salt la ultima pagină vizitată în loc de pagina principală"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Afişare semn de întebare pentru legăturile cu pagini inexistente"
@@ -466,12 +459,11 @@ msgstr "Dezactivare cont curent pentru totdeauna"
 msgid "Name"
 msgstr "Nume"
 
-#, fuzzy
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Folosiţi PrimulnumeUltimulnume)"
+msgstr "(Folosiţi Primulnume''''''Ultimulnume)"
 
 msgid "Alias-Name"
-msgstr ""
+msgstr "Nume-Alias"
 
 msgid "Password"
 msgstr "Parolă"
@@ -515,9 +507,9 @@ msgstr "Login"
 msgid " %s and try again."
 msgstr " %s şi încercaţi din nou."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d rezultate din %(pages)d pagini."
+msgstr "%(hits)d rezultate din aproximativ %(pages)d pagini."
 
 #, python-format
 msgid "%.2f seconds"
@@ -584,7 +576,7 @@ msgstr ""
 "de email '%(email)s'!"
 
 msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
+msgstr "Folosire PreferinţeUtilizator la schimbarea setărilor sau la crearea unui cont."
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Numele necompletat. Introduceţi un nume de utilizator"
@@ -598,19 +590,18 @@ msgstr "Parolele nu corespund!"
 msgid "Please specify a password!"
 msgstr "Specificaţi o parolă!"
 
-#, fuzzy
 msgid ""
 "Please provide your email address. If you lose your login information, you "
 "can get it by email."
 msgstr ""
-"Specificaţi adresa de email. Dacă pierdeţi informaţia de înregistrare, o "
+"Specificaţi adresa de email. Dacă pierdeţi informaţia de login, o "
 "puteţi obţine prin email."
 
 msgid "This email already belongs to somebody else."
 msgstr "Această adresă de email este deţinută deja de altcineva."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Contul de utilizator a fost creat! Puteţi folosi acest cont pentru login acum..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -626,10 +617,10 @@ msgid "<Browser setting>"
 msgstr "<Setare browser>"
 
 msgid "the one preferred"
-msgstr ""
+msgstr "cel preferat"
 
 msgid "free choice"
-msgstr ""
+msgstr "alegere liberă"
 
 msgid "Save"
 msgstr "Salvare"
@@ -637,12 +628,12 @@ msgstr "Salvare"
 msgid "Preferred theme"
 msgstr "Tema dorită"
 
-#, fuzzy
+
 msgid "Editor Preference"
-msgstr "PreferinţeUtilizator"
+msgstr "Preferinţe Editor"
 
 msgid "Editor shown on UI"
-msgstr ""
+msgstr "Editorul afişat în UI"
 
 msgid "Time zone"
 msgstr "Fus orar"
@@ -797,31 +788,26 @@ msgstr ""
 "Nu aveţi permisiunea de a modifica această pagină la o stare anterioară"
 
 msgid "You must login to add a quicklink."
-msgstr ""
+msgstr "Trebuie să vă logaţi pentru a putea adăuga o legătură rapidă"
 
-#, fuzzy
 msgid "Your quicklink to this page has been removed."
-msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
+msgstr "Legătura rapidă către această pagină a fost ştearsă."
 
-#, fuzzy
 msgid "A quicklink to this page has been added for you."
-msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
+msgstr "A fost adăugată o legătură rapidă către această pagină pentru dumnveavoastră."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr ""
 "Nu aveţi permisiunea de înscriere la o pagină pe care nu o puteţi citi."
 
-#, fuzzy
 msgid "This wiki is not enabled for mail processing."
-msgstr ""
-"Acest wiki nu permite procesare poştei electronice.\n"
-"Contactaţi deţinătorul wiki-ului, care poate activa email."
+msgstr "Acest wiki nu suportă procesarea poştei electronice."
 
 msgid "You must log in to use subscribtions."
-msgstr ""
+msgstr "Trebuie să fiţi logaţi pentru a putea folosi înregistrările(subscriptions)."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
-msgstr ""
+msgstr "Adăugaţi adresa dumneavoastră de email în PreferinţeUtilizator pentru a folosi înregistrările(subscribtions)."
 
 msgid "Your subscribtion to this page has been removed."
 msgstr "Nu mai sunteţi înscris(ă) pe această pagină."
@@ -830,7 +816,7 @@ msgid "Can't remove regular expression subscription!"
 msgstr "Nu se poate şterge înregistrarea cu expresie regulară!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr ""
+msgstr "Editaţi expresiile regulare pentru înregistrări(subscriptions) în pagina PreferinţeUtilizator."
 
 msgid "You have been subscribed to this page."
 msgstr "Aţi fost înregistrat(ă) pe această pagină."
@@ -890,7 +876,7 @@ msgid "Release %s [Revision %s]"
 msgstr "Seria %s [Revizia %s]"
 
 msgid "4Suite Version"
-msgstr "4SuiteVersion"
+msgstr "4Suite Version"
 
 msgid "Number of pages"
 msgstr "Număr de pagini"
@@ -923,13 +909,11 @@ msgstr "Acţiuni de extensie globale"
 msgid "Local extension actions"
 msgstr "Acţiuni de extensie locale"
 
-#, fuzzy
 msgid "Global parsers"
-msgstr "Analizatoare(parsers) instalate"
+msgstr "Analizatoare(parsers) globale"
 
-#, fuzzy
 msgid "Local extension parsers"
-msgstr "Extensii macro locale"
+msgstr "Analizatoare(parsers) locale de extindere"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
 msgstr "Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)"
@@ -944,7 +928,7 @@ msgid "Lupy search"
 msgstr "Căutare Lupy"
 
 msgid "Active threads"
-msgstr ""
+msgstr "Fire(threads) active"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -1004,10 +988,10 @@ msgstr ""
 "deoarece acesta se poate schimba şi poate cauza probleme foarte uşor."
 
 msgid "unzip"
-msgstr ""
+msgstr "dezarhivare"
 
 msgid "install"
-msgstr ""
+msgstr "instalare"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
@@ -1065,13 +1049,11 @@ msgstr "Nu aveţi permisiunea de a şterge ataşamentele de pe această pagină.
 msgid "You are not allowed to get attachments from this page."
 msgstr "Nu aveţi permisiunea de a obţine ataşamentele de pe această pagină."
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Nu aveţi permisiunea de a viziona ataşamentele de pe această pagină."
+msgstr "Nu aveţi permisiunea de a dezarhiva ataşamentele de pe această pagină."
 
-#, fuzzy
 msgid "You are not allowed to install files."
-msgstr "Nu aveţi dreptul să editaţi această pagină."
+msgstr "Nu aveţi dreptul să instalaţi fişiere."
 
 msgid "You are not allowed to view attachments of this page."
 msgstr "Nu aveţi permisiunea de a viziona ataşamentele de pe această pagină."
@@ -1101,57 +1083,62 @@ msgstr ""
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Ataşamentul '%(filename)s' a fost şters."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "Ataşamentul '%(filename)s' a fost şters."
+msgstr "Ataşamentul '%(filename)s' a fost instalat."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Installation of '%(filename)s' failed."
-msgstr "Desenul '%(filename)s' a fost salvat."
+msgstr "Instalarea lui '%(filename)s' a eşuat."
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr ""
+msgstr "Fişierul %s nu este un fişier pachet MoinMoin."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
+"Ataşamentul '%(filename)s' nu a putut fi dezarhivat deoarece fişierele rezultate "
+"ar fi prea mari (%(space)d kB lipsesc)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
+"Ataşamentul '%(filename)s' nu a putut fi dezarhivat deoarece fişierele rezultate "
+"ar fi prea multe (%(count)d lipsesc)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Ataşamentul '%(filename)s' a fost şters."
+msgstr "Ataşamentul '%(filename)s' a fost dezarhivat."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
+"Ataşamentul '%(filename)s' nu a putut fi dezarhivat deoarece fişierele sunt prea mari, "
+"sunt doar fişiere .zip, există deja sau sunt poziţionate în directoare."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
-msgstr ""
+msgstr "Fişierul %(target)s nu este un fişier .zip."
 
 #, python-format
 msgid "Attachment '%(filename)s'"
 msgstr "Ataşament '%(filename)s'"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Script pachet:"
 
-#, fuzzy
 msgid "File Name"
-msgstr "Nume fişier"
+msgstr "Nume Fişier"
 
 msgid "Modified"
-msgstr ""
+msgstr "Modificat"
 
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
@@ -1328,9 +1315,9 @@ msgstr "Trimiterea ataşamentului '%(filename)s'."
 msgid "Drawing '%(filename)s' saved."
 msgstr "Desenul '%(filename)s' a fost salvat."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(mins)dm ago"
-msgstr "%(hours)dh %(mins)dm mai devreme"
+msgstr "%(mins)dm mai devreme"
 
 msgid "(no bookmark set)"
 msgstr "(nici un semn de carte setat)"
@@ -1369,6 +1356,7 @@ msgstr "Nici o pagină dorită în acest wiki."
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
 msgstr ""
+"Randarea textului de tip reStructured nu este posibilă, instalaţi docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Numărul maxim de incluziuni acceptate a fost depăşit**"
@@ -1497,19 +1485,17 @@ msgstr "Text"
 msgid "Titles"
 msgstr "Titluri"
 
-#, fuzzy
 msgid "Search"
-msgstr "Căutare:"
+msgstr "Căutare"
 
 msgid "More Actions:"
 msgstr "Mai Multe Acţiuni:"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
-#, fuzzy
 msgid "Raw Text"
-msgstr "Afişare Text Brut"
+msgstr "Text Brut"
 
 msgid "Delete Cache"
 msgstr "Ştergere Cache"
@@ -1517,36 +1503,32 @@ msgstr "Ştergere Cache"
 msgid "Delete Page"
 msgstr "Ştergere Pagină"
 
-#, fuzzy
 msgid "Like Pages"
-msgstr "PaginiAsemănătoare"
+msgstr "Pagini Asemănătoare"
 
-#, fuzzy
 msgid "Local Site Map"
 msgstr "HartaLocalăSit"
 
 msgid "Do"
 msgstr "Executare"
 
-#, fuzzy
 msgid "Edit (Text)"
-msgstr "EditareText"
+msgstr "Editare (Text)"
 
 msgid "Edit (GUI)"
-msgstr ""
+msgstr "Editare (GUI)"
 
 msgid "Immutable Page"
 msgstr "Pagină Imuabilă"
 
 msgid "Remove Link"
-msgstr ""
+msgstr "Ştergere Legătură"
 
 msgid "Add Link"
-msgstr ""
+msgstr "Adăugare Legătură"
 
-#, fuzzy
 msgid "Attachments"
-msgstr "Ataşament Nou"
+msgstr "Ataşamente"
 
 #, python-format
 msgid "Show %s days."
@@ -1586,9 +1568,8 @@ msgstr "Adăugările sunt marcate astfel."
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Conexiunea cu serverul de email '%(server)s' a eşuat: %(reason)s"
 
-#, fuzzy
 msgid "Mail not sent"
-msgstr "Mail trimis cu bine"
+msgstr "Mailul nu a fost trimis"
 
 msgid "Mail sent OK"
 msgstr "Mail trimis cu bine"
@@ -1626,9 +1607,8 @@ msgstr "LicenţăWiki"
 msgid "MissingPage"
 msgstr "PaginăLipsă"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "PaginăLipsă"
+msgstr "PaginaPrincipalăLipsă"
 
 msgid "Mon"
 msgstr "Lun"
@@ -1692,9 +1672,8 @@ msgstr "VerificareOrtografie"
 #~ msgid "Remember last page visited"
 #~ msgstr "Memorare ultima pagină vizitată"
 
-#, fuzzy
 #~ msgid "Parent Page"
-#~ msgstr "PaginaPrincipală"
+#~ msgstr "Pagina Părinte"
 
 #~ msgid "Trail"
 #~ msgstr "Trail"
@@ -1723,18 +1702,6 @@ msgstr "VerificareOrtografie"
 #~ "numele dumneavoastră (PreferinţeUtilizator) în colţul din dreapta sus şi "
 #~ "introduceţi o adresă de email validă."
 
-#, fuzzy
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Pentru a renunţa, ştergeţi această pagină din lista de înregistrări din "
-#~ "profilul dumneavoastră."
-
-#, fuzzy
-#~ msgid "Quicklink"
-#~ msgstr "Legături rapide"
-
 #~ msgid "Show Print View"
 #~ msgstr "Afişare Pentru Tipărire"
 
@@ -1746,10 +1713,6 @@ msgstr "VerificareOrtografie"
 
 #~ msgid "Show Local Site Map"
 #~ msgstr "Afişare Hartă Locală Sit"
-
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Info"
 
 #~ msgid "Skip to preview"
 #~ msgstr "Salt la previzionare"

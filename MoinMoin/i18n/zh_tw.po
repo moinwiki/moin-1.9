@@ -94,15 +94,15 @@ msgstr "預覽頁面 \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
-msgstr "你在頁面 %(lock_page)s 的編輯鎖定逾時了！"
+msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定逾時了！"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "你在頁面 %(lock_page)s 的編輯鎖定，還剩下 # 分鐘。"
+msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定，還剩下 # 分鐘。"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "你在頁面 %(lock_page)s 的編輯鎖定，只剩下 # 秒了！"
+msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定，只剩下 # 秒了！"
 
 msgid "Someone else deleted this page while you were editing!"
 msgstr "有人在你編輯的時候刪除本頁了！"
@@ -133,7 +133,7 @@ msgstr "[你不能閱讀 %s]"
 
 #, python-format
 msgid "Describe %s here."
-msgstr "在這裡加入關於 %s 的說明。"
+msgstr "在這裡編輯新頁面 \"%s\""
 
 msgid "Check Spelling"
 msgstr "拼字檢查"
@@ -208,13 +208,13 @@ msgstr ""
 "(====)]] 標題4 [[Verbatim(====)]]； [[Verbatim(=====)]] 標題5 [[Verbatim"
 "(=====)]]\n"
 " 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只"
-"有空白代表縮排\n"
+"有空白則代表縮排\n"
 " 連結::  [[Verbatim(JoinCapitalizedWords)]]； [[Verbatim([\"方括號加雙引號"
 "\"])]]； url； [url]； [url 連結文字]\n"
 " 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||\n"
 "\n"
 "(!) 表格或標題尾端不可有空白[[BR]]\n"
-"(!) 更詳細的說明請參看 HelpOnEditing 或 SyntaxReference\n"
+"(!) 更詳細的說明請參看 HelpOnEditing 或 [\"語法參考\"]\n"
 
 msgid "Edit was cancelled."
 msgstr "編輯已取消。"
@@ -411,7 +411,7 @@ msgid "Jump to last visited page instead of frontpage"
 msgstr "跳到我最後瀏覽的頁面而不是系統首頁"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "不存在的頁面連結前打上問號"
+msgstr "在不存在的頁面連結前打上問號"
 
 msgid "Show page trail"
 msgstr "顯示瀏覽足跡"
@@ -581,7 +581,7 @@ msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "無法載入佈景主題 '%(theme_name)s'!"
 
 msgid "User preferences saved!"
-msgstr "使用者設定儲存好了！"
+msgstr "使用者設定已儲存！"
 
 msgid "Default"
 msgstr "預設值"
@@ -734,7 +734,7 @@ msgid "Revision History"
 msgstr "修訂記錄"
 
 msgid "No log entries found."
-msgstr "沒有編輯日誌。"
+msgstr "本頁面沒有修訂記錄。"
 
 #, python-format
 msgid "Info for \"%s\""
@@ -823,10 +823,10 @@ msgid "Go To Page"
 msgstr "跳至此頁"
 
 msgid "Include system pages"
-msgstr "包含系統頁"
+msgstr "包含系統頁面"
 
 msgid "Exclude system pages"
-msgstr "排除系統頁"
+msgstr "排除系統頁面"
 
 msgid "Plain title index"
 msgstr "一般標題索引"
@@ -838,7 +838,7 @@ msgid "Python Version"
 msgstr "Python 版本"
 
 msgid "MoinMoin Version"
-msgstr "MoinMoin 版本"
+msgstr "!MoinMoin 版本"
 
 #, python-format
 msgid "Release %s [Revision %s]"
@@ -857,7 +857,7 @@ msgid "Accumulated page sizes"
 msgstr "累計頁面大小"
 
 msgid "Entries in edit log"
-msgstr "編輯日誌項次"
+msgstr "修訂記錄項次"
 
 #, python-format
 msgid "%(logcount)s (%(logsize)s bytes)"
@@ -867,37 +867,37 @@ msgid "NONE"
 msgstr "無"
 
 msgid "Global extension macros"
-msgstr "全域擴充巨集"
+msgstr "內建擴充巨集"
 
 msgid "Local extension macros"
-msgstr "區域擴充巨集"
+msgstr "外掛擴充巨集"
 
 msgid "Global extension actions"
-msgstr "全域擴充功能"
+msgstr "內建擴充功能"
 
 msgid "Local extension actions"
-msgstr "區域擴充功能"
+msgstr "外掛擴充功能"
 
 msgid "Global parsers"
-msgstr "全域解析器"
+msgstr "內建解析器"
 
 msgid "Local extension parsers"
-msgstr "區域擴充解析器"
+msgstr "外掛解析器"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "已安裝的處理器 (*不建議使用* -- 請改用解析器)"
+msgstr "外掛處理器 (不建議使用 -- 請改用解析器)"
 
 msgid "Disabled"
-msgstr "無效"
+msgstr "停用"
 
 msgid "Enabled"
-msgstr "有效"
+msgstr "可用"
 
 msgid "Lupy search"
 msgstr "Lupy 搜尋"
 
 msgid "Active threads"
-msgstr "啟動執行緒"
+msgstr "執行緒數目"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -961,7 +961,7 @@ msgstr "安裝"
 
 #, python-format
 msgid "No attachments stored for %(pagename)s"
-msgstr "頁面 %(pagename)s 沒有附件"
+msgstr "頁面 \"%(pagename)s\" 沒有附件"
 
 msgid "Edit drawing"
 msgstr "編輯圖片"
@@ -1152,7 +1152,7 @@ msgid "Could not rename page because of file system error: %s."
 msgstr "無法更改頁面名稱。原因為檔案系統錯誤：%s。"
 
 msgid "Rename Page"
-msgstr "重新命名本頁"
+msgstr "重新命名"
 
 msgid "New name"
 msgstr "新的名稱"
@@ -1264,26 +1264,26 @@ msgstr "圖片 '%(filename)s' 已儲存。"
 
 #, python-format
 msgid "%(mins)dm ago"
-msgstr "%(mins)dm 分前"
+msgstr "%(mins)d 分前"
 
 msgid "(no bookmark set)"
-msgstr "(未設定書籤)"
+msgstr "(尚未放置)"
 
 #, python-format
 msgid "(currently set to %s)"
-msgstr "(目前設為 %s)"
+msgstr "(目前位置為 %s)"
 
 msgid "Delete Bookmark"
-msgstr "刪除書籤"
+msgstr "拿掉書籤"
 
 msgid "Set bookmark"
-msgstr "設定書籤"
+msgstr "放置書籤"
 
 msgid "set bookmark"
-msgstr "設定書籤"
+msgstr "放置書籤"
 
 msgid "[Bookmark reached]"
-msgstr "[書籤結尾]"
+msgstr "[目前書籤放置在此]"
 
 msgid "Markup"
 msgstr "標記"
@@ -1370,7 +1370,7 @@ msgid "# of pages of this size"
 msgstr "相同大小的頁面數"
 
 msgid "User agent"
-msgstr "使用者端"
+msgstr "瀏覽器類型"
 
 msgid "Others"
 msgstr "其他"
@@ -1504,10 +1504,10 @@ msgid "Line"
 msgstr "行號"
 
 msgid "Deletions are marked like this."
-msgstr "刪除的標這個顏色。"
+msgstr "這個顏色代表刪除的"
 
 msgid "Additions are marked like this."
-msgstr "增加的標這個顏色。"
+msgstr "這個顏色代表增加的"
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
@@ -1532,7 +1532,7 @@ msgid "WordIndex"
 msgstr "詞彙索引"
 
 msgid "FindPage"
-msgstr "搜尋頁面"
+msgstr "尋找頁面"
 
 msgid "SiteNavigation"
 msgstr "本站導覽"
@@ -1541,19 +1541,19 @@ msgid "HelpContents"
 msgstr "說明"
 
 msgid "HelpOnFormatting"
-msgstr "排版說明"
+msgstr "說明/排版"
 
 msgid "UserPreferences"
 msgstr "使用者設定"
 
 msgid "WikiLicense"
-msgstr "Wiki 版權"
+msgstr "Wiki版權"
 
 msgid "MissingPage"
-msgstr "不存在的頁面"
+msgstr "頁面不存在"
 
 msgid "MissingHomePage"
-msgstr "不存在的首頁"
+msgstr "首頁不存在"
 
 msgid "Mon"
 msgstr "星期一"

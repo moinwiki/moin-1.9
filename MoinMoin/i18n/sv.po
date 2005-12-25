@@ -600,7 +600,8 @@ msgid "This email already belongs to somebody else."
 msgstr "Den här epostadressen tillhör redan någon annan."
 
 msgid "User account created! You can use this account to login now..."
-msgstr "Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu..."
+msgstr ""
+"Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1347,7 +1348,8 @@ msgstr "Inga önskade sidor i den här wikin."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr "Rendering av reStructured-text är inte möjlig, installera docutils först."
+msgstr ""
+"Rendering av reStructured-text är inte möjlig, installera docutils först."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"

@@ -350,6 +350,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را از دست بدهید از طریق ایمیل این اطلاعات برای شما ارسال خواهند شد.''',
 '''This email already belongs to somebody else.''':
 '''این ایمیل توسط شخص دیگری وارد شده است.''',
+'''User account created! You can use this account to login now...''':
+'''نام کاربری شما ایجاد شد! شما می توانید از این نام کاربری برای ورود به سیستم استفاده کنید...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''تم درخواستی شما \'%(theme_name)s\' بالا نیامد!''',
 '''User preferences saved!''':
@@ -775,6 +777,12 @@ Try a different name.''':
 '''دریافت خروجی این ویکی با فرمت XML''',
 '''No wanted pages in this wiki.''':
 '''در این ویکی صفحه ای مورد نیاز نیست.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''آماده سازی صفحه تغییر ساخت یافته ممکن نیست٬ لطفا docutils را نصب نمائید.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**حداکثر تعداد ورودی مجاز**''',
+'''**Could not find the referenced page: %s**''':
+'''**صفحه ارجاع داده شده: %s یافت نشد**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Expected·"%(wanted)s"·after·"%(key)s",·got·"%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -927,6 +935,8 @@ red=edit''':
 '''اجازه نامه ویکی''',
 '''MissingPage''':
 '''صفحه گم شده''',
+'''MissingHomePage''':
+'''صفحه اولیه یافت نشد''',
 '''Mon''':
 '''دوشنبه''',
 '''Tue''':

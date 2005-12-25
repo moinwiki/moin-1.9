@@ -445,7 +445,7 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''revert''':
 '''przywróć''',
 '''Revert to revision %(rev)d.''':
-'''Przywróć wersję %(rev)d.''',
+'''Przywrócono wersję %(rev)d.''',
 '''edit''':
 '''edytuj''',
 '''get''':
@@ -758,7 +758,7 @@ Spróbuj innej nazwy.''',
 '''No quotes on %(pagename)s.''':
 '''Brak przytoczeń na %(pagename)s.''',
 '''Upload of attachment \'%(filename)s\'.''':
-'''Przekazanie załącznika \'%(filename)s\'.''',
+'''Przekazano załącznik \'%(filename)s\'.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''Rysunek \'%(filename)s\' zachowany.''',
 '''%(mins)dm ago''':

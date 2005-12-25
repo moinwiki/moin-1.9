@@ -353,6 +353,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回.''',
 '''This email already belongs to somebody else.''':
 '''别人已经用这个电子邮件注册过了.''',
+'''User account created! You can use this account to login now...''':
+'''用户帐号成功创建! 即时起您就可以用此帐户登录...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''未能装载主题\'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -780,6 +782,8 @@ Try a different name.''':
 '''下载本维基的XML输出''',
 '''No wanted pages in this wiki.''':
 '''本维基中没有未定义的网页.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''无法正确显示reStructured文本, 请安装docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**太多的包含(include)**''',
 '''**Could not find the referenced page: %s**''':
@@ -935,7 +939,9 @@ red=edit''':
 '''WikiLicense''':
 '''维基版权''',
 '''MissingPage''':
-'''需要网页''',
+'''缺失网页''',
+'''MissingHomePage''':
+'''缺失主页''',
 '''Mon''':
 '''星期一''',
 '''Tue''':

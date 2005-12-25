@@ -51,11 +51,11 @@ macro call.-~
 '''Preview of "%(pagename)s"''':
 '''預覽頁面 "%(pagename)s"''',
 '''Your edit lock on %(lock_page)s has expired!''':
-'''你在頁面 %(lock_page)s 的編輯鎖定逾時了！''',
+'''你在頁面 "%(lock_page)s" 的編輯鎖定逾時了！''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''你在頁面 %(lock_page)s 的編輯鎖定，還剩下 # 分鐘。''',
+'''你在頁面 "%(lock_page)s" 的編輯鎖定，還剩下 # 分鐘。''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''你在頁面 %(lock_page)s 的編輯鎖定，只剩下 # 秒了！''',
+'''你在頁面 "%(lock_page)s" 的編輯鎖定，只剩下 # 秒了！''',
 '''Someone else deleted this page while you were editing!''':
 '''有人在你編輯的時候刪除本頁了！''',
 '''Someone else changed this page while you were editing!''':
@@ -72,7 +72,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[You may not read %s]''':
 '''[你不能閱讀 %s]''',
 '''Describe %s here.''':
-'''在這裡加入關於 %s 的說明。''',
+'''在這裡編輯新頁面 "%s"''',
 '''Check Spelling''':
 '''拼字檢查''',
 '''Save Changes''':
@@ -109,12 +109,12 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 ''':
 ''' 強調::  [[Verbatim(\'\')]]\'\'斜體 \'\'[[Verbatim(\'\')]]； [[Verbatim(\'\'\')]]\'\'\'粗體\'\'\'[[Verbatim(\'\'\')]]； [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜體 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]； [[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗體 \'\'\'[[Verbatim(\'\'\')]]斜體 \'\'[[Verbatim(\'\')]]；[[Verbatim(----)]] 分隔線
  標題::  [[Verbatim(=)]] 標題1 [[Verbatim(=)]]； [[Verbatim(==)]] 標題2 [[Verbatim(==)]]； [[Verbatim(===)]] 標題3 [[Verbatim(===)]]； [[Verbatim(====)]] 標題4 [[Verbatim(====)]]； [[Verbatim(=====)]] 標題5 [[Verbatim(=====)]]
- 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只有空白代表縮排
+ 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只有空白則代表縮排
  連結::  [[Verbatim(JoinCapitalizedWords)]]； [[Verbatim(["方括號加雙引號"])]]； url； [url]； [url 連結文字]
  表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||
 
 (!) 表格或標題尾端不可有空白[[BR]]
-(!) 更詳細的說明請參看 HelpOnEditing 或 SyntaxReference
+(!) 更詳細的說明請參看 HelpOnEditing 或 ["語法參考"]
 ''',
 '''Edit was cancelled.''':
 '''編輯已取消。''',
@@ -244,7 +244,7 @@ To leave the editor, press the Cancel button.''':
 '''Jump to last visited page instead of frontpage''':
 '''跳到我最後瀏覽的頁面而不是系統首頁''',
 '''Show question mark for non-existing pagelinks''':
-'''不存在的頁面連結前打上問號''',
+'''在不存在的頁面連結前打上問號''',
 '''Show page trail''':
 '''顯示瀏覽足跡''',
 '''Show icon toolbar''':
@@ -356,7 +356,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''無法載入佈景主題 \'%(theme_name)s\'!''',
 '''User preferences saved!''':
-'''使用者設定儲存好了！''',
+'''使用者設定已儲存！''',
 '''Default''':
 '''預設值''',
 '''<Browser setting>''':
@@ -454,7 +454,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Revision History''':
 '''修訂記錄''',
 '''No log entries found.''':
-'''沒有編輯日誌。''',
+'''本頁面沒有修訂記錄。''',
 '''Info for "%s"''':
 '''關於 "%s"''',
 '''Show "%(title)s"''':
@@ -510,9 +510,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Go To Page''':
 '''跳至此頁''',
 '''Include system pages''':
-'''包含系統頁''',
+'''包含系統頁面''',
 '''Exclude system pages''':
-'''排除系統頁''',
+'''排除系統頁面''',
 '''Plain title index''':
 '''一般標題索引''',
 '''XML title index''':
@@ -520,7 +520,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Python Version''':
 '''Python 版本''',
 '''MoinMoin Version''':
-'''MoinMoin 版本''',
+'''!MoinMoin 版本''',
 '''Release %s [Revision %s]''':
 '''%s 版 [第 %s 號修訂]''',
 '''4Suite Version''':
@@ -532,33 +532,33 @@ Contact the owner of the wiki, who can enable email.''':
 '''Accumulated page sizes''':
 '''累計頁面大小''',
 '''Entries in edit log''':
-'''編輯日誌項次''',
+'''修訂記錄項次''',
 '''%(logcount)s (%(logsize)s bytes)''':
 '''%(logcount)s 條 (計 %(logsize)s 位元組)''',
 '''NONE''':
 '''無''',
 '''Global extension macros''':
-'''全域擴充巨集''',
+'''內建擴充巨集''',
 '''Local extension macros''':
-'''區域擴充巨集''',
+'''外掛擴充巨集''',
 '''Global extension actions''':
-'''全域擴充功能''',
+'''內建擴充功能''',
 '''Local extension actions''':
-'''區域擴充功能''',
+'''外掛擴充功能''',
 '''Global parsers''':
-'''全域解析器''',
+'''內建解析器''',
 '''Local extension parsers''':
-'''區域擴充解析器''',
+'''外掛解析器''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''已安裝的處理器 (*不建議使用* -- 請改用解析器)''',
+'''外掛處理器 (不建議使用 -- 請改用解析器)''',
 '''Disabled''':
-'''無效''',
+'''停用''',
 '''Enabled''':
-'''有效''',
+'''可用''',
 '''Lupy search''':
 '''Lupy 搜尋''',
 '''Active threads''':
-'''啟動執行緒''',
+'''執行緒數目''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''{{{"%s"}}} 找到太多資料，請輸入更精確的關鍵字！''',
 '''ERROR in regex \'%s\'''':
@@ -594,7 +594,7 @@ since this is subject to change and can break easily.''':
 '''install''':
 '''安裝''',
 '''No attachments stored for %(pagename)s''':
-'''頁面 %(pagename)s 沒有附件''',
+'''頁面 "%(pagename)s" 沒有附件''',
 '''Edit drawing''':
 '''編輯圖片''',
 '''Attached Files''':
@@ -698,7 +698,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Could not rename page because of file system error: %s.''':
 '''無法更改頁面名稱。原因為檔案系統錯誤：%s。''',
 '''Rename Page''':
-'''重新命名本頁''',
+'''重新命名''',
 '''New name''':
 '''新的名稱''',
 '''Optional reason for the renaming''':
@@ -758,19 +758,19 @@ Try a different name.''':
 '''Drawing \'%(filename)s\' saved.''':
 '''圖片 \'%(filename)s\' 已儲存。''',
 '''%(mins)dm ago''':
-'''%(mins)dm 分前''',
+'''%(mins)d 分前''',
 '''(no bookmark set)''':
-'''(未設定書籤)''',
+'''(尚未放置)''',
 '''(currently set to %s)''':
-'''(目前設為 %s)''',
+'''(目前位置為 %s)''',
 '''Delete Bookmark''':
-'''刪除書籤''',
+'''拿掉書籤''',
 '''Set bookmark''':
-'''設定書籤''',
+'''放置書籤''',
 '''set bookmark''':
-'''設定書籤''',
+'''放置書籤''',
 '''[Bookmark reached]''':
-'''[書籤結尾]''',
+'''[目前書籤放置在此]''',
 '''Markup''':
 '''標記''',
 '''Display''':
@@ -822,7 +822,7 @@ red=edit''':
 '''# of pages of this size''':
 '''相同大小的頁面數''',
 '''User agent''':
-'''使用者端''',
+'''瀏覽器類型''',
 '''Others''':
 '''其他''',
 '''Distribution of User-Agent Types''':
@@ -908,9 +908,9 @@ red=edit''':
 '''Line''':
 '''行號''',
 '''Deletions are marked like this.''':
-'''刪除的標這個顏色。''',
+'''這個顏色代表刪除的''',
 '''Additions are marked like this.''':
-'''增加的標這個顏色。''',
+'''這個顏色代表增加的''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''無法連接郵件伺服器 \'%(server)s\': %(reason)s''',
 '''Mail not sent''':
@@ -926,21 +926,21 @@ red=edit''':
 '''WordIndex''':
 '''詞彙索引''',
 '''FindPage''':
-'''搜尋頁面''',
+'''尋找頁面''',
 '''SiteNavigation''':
 '''本站導覽''',
 '''HelpContents''':
 '''說明''',
 '''HelpOnFormatting''':
-'''排版說明''',
+'''說明/排版''',
 '''UserPreferences''':
 '''使用者設定''',
 '''WikiLicense''':
-'''Wiki 版權''',
+'''Wiki版權''',
 '''MissingPage''':
-'''不存在的頁面''',
+'''頁面不存在''',
 '''MissingHomePage''':
-'''不存在的首頁''',
+'''首頁不存在''',
 '''Mon''':
 '''星期一''',
 '''Tue''':
