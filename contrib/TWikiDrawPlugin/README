@@ -12,15 +12,24 @@ adding:
  - xhtml conform image maps
  - corrects object stacking order for the map
 
+To build this plugin from sources you need the following:
+ * JDK 1.2 or later version (http://java.sun.com/downloads)
+ * Ant 1.5.4 or later version (http://ant.apache.org/)
+
+To build just run change current directory to /contrib/TWikiDrawPlugin
+and run Ant. Ant automatically loads build.xml from current directory 
+and creates a twikidraw.jar in /contrib/TWikiDrawPlugin/build directory.
+
 TODO:
  * look at http://moinmoin.wikiwikiweb.de/MoinMoinTodo/Release_1.5 - see
    the "Unfinished" section for more todo stuff relating to TWikiDraw
- * build.xml must NOT download any stuff, but use the source archive we have
-   already in this directory.
  * make some bash script that invokes the build process and puts the resulting
    applet into wiki/htdocs/applets/TWikiDrawPlugin
  * document build requirements
  * test with some Java enabled browser if it works :)
+
+Applet tested on:
+ * Windows XP SP 1 / Sun JDK 1.4.2 / IE 6.0 and Mozilla Firefox 1.5
 
 References:
  - Original site: http://twiki.org/cgi-bin/view/Plugins/TWikiDrawPlugin

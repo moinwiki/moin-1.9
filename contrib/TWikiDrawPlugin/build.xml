@@ -1,88 +1,30 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <project name="TWikiDrawPlugin" default="build" basedir=".">
-
-    <property name="repository.home" value="repository"/>
+    <property name="src.home" value="."/>
     <property name="build.home" value="build"/>
-
-    <property name="TWikiDrawPlugin.loc" 
-        value="http://twiki.org/p/pub/Plugins/TWikiDrawPlugin/"/>
-    <property name="TWikiDrawPlugin.patched.loc" 
-        value="http://moinmoin.wikiwikiweb.de/OliverGraf/TWikiDrawPlugin?action=AttachFile&amp;do=get&amp;target="/>
+    <property name="dest.home" value="build"/>
 
     <target name="-init">
-        <mkdir dir="${repository.home}"/>
+        <mkdir dir="${build.home}"/>
         <mkdir dir="${build.home}/classes"/>
+        <mkdir dir="${dest.home}"/>
     </target>
 
-    <target name="-checkfile">
-        <echo message="Checking ${file}"/>
-        <available file="${repository.home}/${file}" property="havefile"/>
-    </target>
-
-    <target name="getfile" unless="havefile" depends="-checkfile">
-        <get src="${url}${file}" dest="${repository.home}/${file}" />
-    </target>
-
-    <target name="download" depends="-init">
-        <antcall target="getfile">
-            <param name="url" value="${TWikiDrawPlugin.loc}"/>
-            <param name="file" value="TWikiDrawPlugin.zip"/>
-        </antcall>
-        <antcall target="getfile">
-            <param name="url" value="${TWikiDrawPlugin.patched.loc}"/>
-            <param name="file" value="twikidraw-sources.zip"/>
-        </antcall>
-        <antcall target="getfile">
-            <param name="url" value="${TWikiDrawPlugin.patched.loc}"/>
-            <param name="file" value="twikidraw-full.diff"/>
-        </antcall>
-        <antcall target="getfile">
-            <param name="url" value="${TWikiDrawPlugin.patched.loc}"/>
-            <param name="file" value="twikidraw-png.zip"/>
-        </antcall>
-
-        <unzip dest="${build.home}/patched"
-            src="${repository.home}/twikidraw-sources.zip"/>
-
-        <unzip src="${repository.home}/TWikiDrawPlugin.zip" dest="${build.home}">
-            <patternset>
-                <include name="lib/**/source.zip"/>
-            </patternset>
-        </unzip>
-        <unzip dest="${build.home}/current">
-            <fileset dir="${build.home}">
-                <include name="lib/**/source.zip"/>
-            </fileset>
-        </unzip>
-        <unzip dest="${build.home}/current"
-            src="${repository.home}/twikidraw-png.zip"/>
-
-        <patch patchfile="${repository.home}/twikidraw-full.diff" 
-            strip="1" dir="${build.home}/current"/>
-    </target>
-
-    <target name="build" depends="-init, download"
-            description="Build TWikiDrawPlugin JAR">
-        <javac destdir="${build.home}/classes" 
-                source="1.3" target="1.1">
-            <src path="${build.home}/patched/src"/>
-            <src path="${build.home}/patched/packages"/>
+    <target name="build" depends="-init" description="Build TWikiDrawPlugin JAR">
+        <javac destdir="${build.home}/classes" source="1.3" target="1.1">
+            <src path="${src.home}/packages"/>
+            <src path="${src.home}/src"/>
         </javac>
 
-        <jar destfile="${build.home}/twikidraw.jar">
+        <jar destfile="${dest.home}/twikidraw.jar">
             <fileset dir="${build.home}/classes"/>
         </jar>
     </target>
 
-    <target name="clean"
-            description="Remove generated files">
+    <target name="clean" description="Remove generated files">
         <delete dir="${build.home}"/>
     </target>
 
-    <target name="clean-all" depends="clean"
-            description="Remove ALL intermediate files">
-        <delete dir="${repository.home}"/>
-    </target>
-
+	<target name="rebuild" depends="clean, build" description="Rebuild TWikiDrawPlugin JAR"/>
 </project> 
