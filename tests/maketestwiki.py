@@ -24,7 +24,8 @@ def removeTestWiki():
         try:
             shutil.rmtree(os.path.join(WIKI, dir))
         except OSError, err:
-            if err.errno != errno.ENOENT:
+            if not (err.errno == errno.ENOENT or
+                    (err.errno == 3 and os.name == 'nt')):
                 raise
 
 def copyData():
@@ -48,7 +49,13 @@ def untarUnderlay():
     tar.close()
 
 
-def run():   
+def run():
+    try:
+        os.makedirs(WIKI)
+    except OSError, e:
+        if e.errno != errno.EEXIST:
+            raise
+
     removeTestWiki()
     copyData()
     untarUnderlay()
