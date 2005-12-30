@@ -306,7 +306,7 @@ class DefaultConfig:
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
     ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|google|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
-                  'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|nutbot|puf|robot|scooter|'
+                  'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|nutbot|omniexplorer|puf|robot|scooter|'
                   'search|sherlock|sitecheck|spider|teleport|wget')
 
     # Wiki identity

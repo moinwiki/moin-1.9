@@ -419,7 +419,8 @@ msgid "Up"
 msgstr "Nahoru"
 
 msgid "Publish my email (not my wiki homepage) in author info"
-msgstr "Publikovat email v informacích o autorovi (místo domovské wiki stránky)"
+msgstr ""
+"Publikovat email v informacích o autorovi (místo domovské wiki stránky)"
 
 msgid "Open editor on double click"
 msgstr "Otevřít editor dvojklikem"

@@ -67,7 +67,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 Tarkista sivu ja tallenna vasta sitten. Älä tallenna sivua tällaisenaan!
 Katso muutoksia %(difflink)s nähdäksesi mitä on muutettu.''',
 '''[Content of new page loaded from %s]''':
-'''[Sisältö uudelle sivulle ladattu sivulta %s''',
+'''[Sisältö uudelle sivulle ladattu sivulta %s]''',
 '''[Template %s not found]''':
 '''[Templaattia %s ei löytynyt]''',
 '''[You may not read %s]''':
@@ -91,7 +91,7 @@ Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muut
 '''Your changes are not saved!''':
 '''Muutoksiasi ei ole tallennettu!''',
 '''Comment:''':
-'''Kuvaus:''',
+'''Kommentti:''',
 '''<No addition>''':
 '''<ei lisäystä>''',
 '''Add to: %(category)s''':
@@ -142,7 +142,7 @@ Olet tilannut wikin "%(sitename)s" sivun tai kategorian muutosilmoitukset.
 %(comment)s
 
 ''':
-'''Muutoksen kuvaus on:
+'''Muutoksen kommenttina on:
 %(comment)s
 
 ''',
@@ -167,7 +167,7 @@ Olet tilannut wikin "%(sitename)s" sivun tai kategorian muutosilmoitukset.
 '''Page could not get locked. Unexpected error (errno=%d).''':
 '''Sivua ei saatu lukittua. Odottamaton virhe (errno=%d).''',
 '''Page could not get locked. Missing \'current\' file?''':
-'''Sivua ei saatu lukittua. Puuttuisiko \'current\' tiedosto?''',
+'''Sivua ei saatu lukittua. Puuttuisiko \'current\'-tiedosto?''',
 '''You are not allowed to edit this page!''':
 '''Sinulla ei ole oikeutta muokata tätä sivua!''',
 '''You cannot save empty pages.''':
@@ -356,6 +356,8 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
 '''This email already belongs to somebody else.''':
 '''Tämä sähköposti kuuluu jo jollekin toiselle.''',
+'''User account created! You can use this account to login now...''':
+'''Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Teemaa \'%(theme_name)s\' ei voida ladata!''',
 '''User preferences saved!''':
@@ -591,6 +593,8 @@ since this is subject to change and can break easily.''':
 '''Viitataksesi sivun liitetiedostoihin, käytä merkintää \'\'\'{{{attachment:tiedostonimi}}}\'\'\' allaolevan tiedostoluettelon mukaisesti. 
 \'\'\'ÄLÄ\'\'\' käytä {{{[hae]}}}-linkin [[Verbatim(URL:)]]ää, 
 sillä se voi muuttua, jolloin viittaus ei enää toimisi.''',
+'''unzip''':
+'''pura''',
 '''install''':
 '''asenna''',
 '''No attachments stored for %(pagename)s''':
@@ -625,6 +629,8 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta.''',
 '''You are not allowed to get attachments from this page.''':
 '''Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Sinulla ei ole oikeutta purkaa tämän sivun liitetiedostoja.''',
 '''You are not allowed to install files.''':
 '''Sinulla ei ole oikeutta asentaa tiedostoja.''',
 '''You are not allowed to view attachments of this page.''':
@@ -646,9 +652,13 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''The file %s is not a MoinMoin package file.''':
 '''Tiedosto %s ei ole MoinMoinin pakettitiedosto.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
-'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostot olisivat liian suuret (%(space)d kt puuttuu).''',
+'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostot olisivat liian suuret (%(space)d kt liikaa).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
-'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostoja olisi liian monta (%(count)d puuttuu).''',
+'''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostoja olisi liian monta (%(count)d liikaa).''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''Liitetiedosto \'%(filename)s\' purettu.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Liitett� \'%(filename)s\' ei purettu, koska sen tiedostot ovat liian suuria, .zip-tiedostoja, alihakemistoissa tai jo olemassa.''',
 '''The file %(target)s is not a .zip file.''':
 '''Tiedosto %(target)s ei ole .zip-tiedosto.''',
 '''Attachment \'%(filename)s\'''':
@@ -775,6 +785,8 @@ Kokeile eri nimeä.''',
 '''Lataa tämän wikin XML-vienti''',
 '''No wanted pages in this wiki.''':
 '''Tässä wikissä ei ole toivottu sivuja.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Ei voida n�ytt�� reStructured-teksti�, asenna docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Sisällytysten maksimimäärä ylitetty**''',
 '''**Could not find the referenced page: %s**''':
@@ -931,6 +943,8 @@ red=edit''',
 '''WikiLisenssi''',
 '''MissingPage''':
 '''PuuttuvaSivu''',
+'''MissingHomePage''':
+'''PuuttuvaKotisivu''',
 '''Mon''':
 '''ma''',
 '''Tue''':
