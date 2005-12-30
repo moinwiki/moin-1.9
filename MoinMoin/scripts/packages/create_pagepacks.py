@@ -36,7 +36,8 @@ def buildPageSets():
     """ Calculates which pages should go into which package. """
     pageSets = {}
 
-    allPages = Set(xmlrpclib.ServerProxy(master_url).getAllPages())
+    #allPages = Set(xmlrpclib.ServerProxy(master_url).getAllPages())
+    allPages = Set(request.rootpage.getPageList())
 
     systemPages = wikidicts.Group(request, "SystemPagesGroup").members()
 
