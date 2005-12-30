@@ -122,7 +122,7 @@ msgstr ""
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[Sisältö uudelle sivulle ladattu sivulta %s"
+msgstr "[Sisältö uudelle sivulle ladattu sivulta %s]"
 
 #, python-format
 msgid "[Template %s not found]"
@@ -167,7 +167,7 @@ msgid "Your changes are not saved!"
 msgstr "Muutoksiasi ei ole tallennettu!"
 
 msgid "Comment:"
-msgstr "Kuvaus:"
+msgstr "Kommentti:"
 
 msgid "<No addition>"
 msgstr "<ei lisäystä>"
@@ -255,7 +255,7 @@ msgid ""
 "%(comment)s\n"
 "\n"
 msgstr ""
-"Muutoksen kuvaus on:\n"
+"Muutoksen kommenttina on:\n"
 "%(comment)s\n"
 "\n"
 
@@ -290,7 +290,7 @@ msgid "Page could not get locked. Unexpected error (errno=%d)."
 msgstr "Sivua ei saatu lukittua. Odottamaton virhe (errno=%d)."
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr "Sivua ei saatu lukittua. Puuttuisiko 'current' tiedosto?"
+msgstr "Sivua ei saatu lukittua. Puuttuisiko 'current'-tiedosto?"
 
 msgid "You are not allowed to edit this page!"
 msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
@@ -596,7 +596,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Tämä sähköposti kuuluu jo jollekin toiselle."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -980,7 +980,7 @@ msgstr ""
 "sillä se voi muuttua, jolloin viittaus ei enää toimisi."
 
 msgid "unzip"
-msgstr ""
+msgstr "pura"
 
 msgid "install"
 msgstr "asenna"
@@ -1040,9 +1040,8 @@ msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
 msgid "You are not allowed to get attachments from this page."
 msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
 
-#, fuzzy
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
+msgstr "Sinulla ei ole oikeutta purkaa tämän sivun liitetiedostoja."
 
 msgid "You are not allowed to install files."
 msgstr "Sinulla ei ole oikeutta asentaa tiedostoja."
@@ -1094,7 +1093,7 @@ msgid ""
 "would be too large (%(space)d kB missing)."
 msgstr ""
 "Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostot olisivat "
-"liian suuret (%(space)d kt puuttuu)."
+"liian suuret (%(space)d kt liikaa)."
 
 #, python-format
 msgid ""
@@ -1102,17 +1101,19 @@ msgid ""
 "would be too many (%(count)d missing)."
 msgstr ""
 "Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostoja olisi "
-"liian monta (%(count)d puuttuu)."
+"liian monta (%(count)d liikaa)."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "Liitetiedosto '%(filename)s' poistettu."
+msgstr "Liitetiedosto '%(filename)s' purettu."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
+"Liitett� '%(filename)s' ei purettu, koska sen tiedostot ovat liian suuria, "
+".zip-tiedostoja, alihakemistoissa tai jo olemassa."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1340,6 +1341,7 @@ msgstr "Tässä wikissä ei ole toivottu sivuja."
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
 msgstr ""
+"Ei voida n�ytt�� reStructured-teksti�, asenna docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Sisällytysten maksimimäärä ylitetty**"
@@ -1592,9 +1594,8 @@ msgstr "WikiLisenssi"
 msgid "MissingPage"
 msgstr "PuuttuvaSivu"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "PuuttuvaSivu"
+msgstr "PuuttuvaKotisivu"
 
 msgid "Mon"
 msgstr "ma"
