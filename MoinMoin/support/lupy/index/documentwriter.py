@@ -5,7 +5,7 @@
 
 from StringIO import StringIO
 from array import array
-import re, unicodedata
+import re
 from MoinMoin.support.lupy.search import similarity
 from MoinMoin.support.lupy.index import field, term
 
