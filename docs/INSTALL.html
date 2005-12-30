@@ -101,7 +101,7 @@
 <span id="line-15" class="anchor"></span><p>Before you can integrate Moin<tt></tt>Moin into your web environment, you have to install the <a href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a> source code and data files using the standard Python <em>distutils</em> mechanism (<tt>setup.py</tt>). This page explains the steps you usually need to take to do this. For more details on the <em>distutils</em> installation process, consult the <a class="www" href="http://www.python.org/doc/current/inst/inst.html">Installing Python Modules</a> document in your Python documentation set. <span id="line-16" class="anchor"></span></p>
 <span id="line-17" class="anchor"></span><p>The installation is similar on Windows and Linux (and other POSIX-type systems; for simplicity, we just say "Linux" in the docs). <span id="line-18" class="anchor"></span></p>
 <span id="line-19" class="anchor"></span><ul>
-<li style="list-style-type:none"><p><img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> We use text such as <strong><tt>&gt;&nbsp;command&nbsp;arguments</tt></strong> to show what you have to type at the command prompt (also known as shell, terminal, etc.). In our examples "<tt>&gt;&nbsp;</tt>" is the prompt, you don't have to type it in, you have to type what comes after it. Lines that do not begin with "<tt>&gt;&nbsp;</tt>" are the answers to the commands you have typed. Read them carefully. <span id="line-20" class="anchor"></span></p>
+<li style="list-style-type:none"><p><img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> We use text such as <strong><tt>&gt;&nbsp;command&nbsp;arguments</tt></strong> to show what you have to type at the command prompt (also known as shell, terminal, etc.). In our examples "<tt>&gt;&nbsp;</tt>" is the prompt, you don't have to type it in, you have to type what comes after it. Lines that do not begin with "<tt>&gt;&nbsp;</tt>" are the answers to the commands you have typed. Read them carefully. <span id="line-20" class="anchor"></span></p>
 <span id="line-21" class="anchor"></span></li>
 </ul>
 
@@ -175,14 +175,14 @@
 <span id="line-83" class="anchor"></span></li>
 </ul>
 <p>The installation to a system location is easier, so choose that if possible. <span id="line-84" class="anchor"></span></p>
-<span id="line-85" class="anchor"></span><p><img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> If you have several versions of Python installed, please use the same version for setup and for running the wiki. Usually, the latest Python version will get the best results. <span id="line-86" class="anchor"></span></p>
+<span id="line-85" class="anchor"></span><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> If you have several versions of Python installed, please use the same version for setup and for running the wiki. Usually, the latest Python version will get the best results. <span id="line-86" class="anchor"></span></p>
 <span id="line-87" class="anchor"></span><p>If you have problems with the <tt>setup.py</tt> install step, try using the command: <span id="line-88" class="anchor"></span>
 <span id="line-89" class="anchor"></span></p>
 <pre>
 &gt; python -v setup.py --quiet install --record=install.log
 <span id="line-90" class="anchor"></span></pre>
 <span id="line-91" class="anchor"></span><span id="line-92" class="anchor"></span><p>The additional <tt>-v</tt> flag should provide you detailed verbose messages every step of the way. <span id="line-93" class="anchor"></span></p>
-<span id="line-94" class="anchor"></span><p><img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> On Linux, if u get an error like <tt>Invalid&nbsp;Python&nbsp;installation:&nbsp;cannot&nbsp;find&nbsp;/usr/lib/Python2.x/config/Makefile</tt>, you may not have the python module <strong><tt>distutils</tt></strong> installed, it's usually a part of the <strong>Python development libarary (<tt>python-dev</tt>)</strong>. Some Linux distributions may not have installed it by default. For example, on Mandrake you need to install the <strong><tt>python-devel</tt></strong> package, on Debian it's called <strong><tt>python-dev</tt></strong>. <span id="line-95" class="anchor"></span></p>
+<span id="line-94" class="anchor"></span><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> On Linux, if u get an error like <tt>Invalid&nbsp;Python&nbsp;installation:&nbsp;cannot&nbsp;find&nbsp;/usr/lib/Python2.x/config/Makefile</tt>, you may not have the python module <strong><tt>distutils</tt></strong> installed, it's usually a part of the <strong>Python development libarary (<tt>python-dev</tt>)</strong>. Some Linux distributions may not have installed it by default. For example, on Mandrake you need to install the <strong><tt>python-devel</tt></strong> package, on Debian it's called <strong><tt>python-dev</tt></strong>. <span id="line-95" class="anchor"></span></p>
 <span id="line-96" class="anchor"></span>
 <h2 id="head-640b21abea127e7ac4b48c938607c233b7119bd5">Installing in the default system location</h2>
 
@@ -255,7 +255,7 @@ import sys
 <h1 id="head-87a60f1d02c36fb1804b442815dba49cbc8adfe7">What has been installed</h1>
 
 <span id="line-164" class="anchor"></span><span id="line-165" class="anchor"></span><p>So, you have a ready-to-work Moin<tt></tt>Moin installation now. Congratulations! Before you go on to configuring it, take a look at the various files and directories that have been installed. <span id="line-166" class="anchor"></span></p>
-<span id="line-167" class="anchor"></span><p><img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> It is important that you understand the different locations used in a Moin<tt></tt>Moin setup, so read this carefully. <span id="line-168" class="anchor"></span></p>
+<span id="line-167" class="anchor"></span><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> It is important that you understand the different locations used in a Moin<tt></tt>Moin setup, so read this carefully. <span id="line-168" class="anchor"></span></p>
 <span id="line-169" class="anchor"></span><p>In the following descriptions, <tt>PREFIX</tt> is what you used with the <tt>setup.py</tt> command, or a default location if you didn't use the <tt>--prefix</tt> option. (Typical default values on Linux are <tt>/usr</tt> and <tt>/usr/local</tt>.) <tt>X.Y</tt> is the version of Python. Typically, this is <tt>2.3</tt> or <tt>2.4</tt>. <span id="line-170" class="anchor"></span></p>
 <span id="line-171" class="anchor"></span><p>Look into <tt>install.log</tt> to find out about following important locations: <span id="line-172" class="anchor"></span></p>
 <span id="line-173" class="anchor"></span><ul>
@@ -294,19 +294,19 @@ import sys
 <h2 id="head-6e91ed0b234e903763a945b5249e7de8b726e5d7">Security warnings</h2>
 
 <span id="line-20" class="anchor"></span><span id="line-21" class="anchor"></span><div>
-<table>
+<table style="color: red">
 <tr>
 <td>
-<p> <img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> <strong>Warning: make sure that your <tt>data</tt> directory and your configuration files are not accessible through your web server. Do not put your wiki directory in <tt>public_html</tt>, <tt>Sites</tt> or any other directory your web server can access. The web server only needs to access the file in the <tt>htdocs</tt> directory and the <tt>moin.cgi</tt> script! (Or whatever script your server uses to start Moin<tt></tt>Moin.)</strong> </p>
+<p> <img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> <strong>Warning: make sure that your <tt>data</tt> directory and your configuration files are not accessible through your web server. Do not put your wiki directory in <tt>public_html</tt>, <tt>Sites</tt> or any other directory your web server can access. The web server only needs to access the file in the <tt>htdocs</tt> directory and the <tt>moin.cgi</tt> script! (Or whatever script your server uses to start Moin<tt></tt>Moin.)</strong> </p>
 </td>
 </tr>
 <span id="line-22" class="anchor"></span></table>
 </div>
 <span id="line-23" class="anchor"></span><div>
-<table>
+<table style="color: red">
 <tr>
 <td>
-<p> <img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> <strong>Warning: make sure that the <tt>data</tt> directory and its subdirectories are not readable and not writeable by users other than the web server user. If you need to give worldwide read-write permissions to get it working, be aware that you are doing a very unsecure setup, that can be compromised by any other user or program on your computer.</strong> </p>
+<p> <img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> <strong>Warning: make sure that the <tt>data</tt> directory and its subdirectories are not readable and not writeable by users other than the web server user. If you need to give worldwide read-write permissions to get it working, be aware that you are doing a very unsecure setup, that can be compromised by any other user or program on your computer.</strong> </p>
 </td>
 </tr>
 <span id="line-24" class="anchor"></span></table>
@@ -320,7 +320,7 @@ import sys
 
 <span id="line-30" class="anchor"></span><span id="line-31" class="anchor"></span><p>Choose a unique name for the new wiki instance you want to create. It should be a short word, something that reflects what you intend to use the wiki for, like the name of your organization, of your team, of the project you are working on, etc. <span id="line-32" class="anchor"></span></p>
 <span id="line-33" class="anchor"></span><ul>
-<li style="list-style-type:none"><p><img src="/wiki/mentalhealth/img/attention.png" alt="&lt;!&gt;" height="15" width="15"> <strong>Do not use the name "wiki" - it is reserved for internal use. You would need a special setup to use this with CGI, and you can't use it at all with standalone or twisted server.</strong> <span id="line-34" class="anchor"></span></p>
+<li style="list-style-type:none"><p><img src="wiki/htdocs/modern/img/attention.png" alt="&lt;!&gt;" height="15" width="15"> <strong>Do not use the name "wiki" - it is reserved for internal use. You would need a special setup to use this with CGI, and you can't use it at all with standalone or twisted server.</strong> <span id="line-34" class="anchor"></span></p>
 <span id="line-35" class="anchor"></span></li>
 </ul>
 <p>The name "<tt>mywiki</tt>" is used as an example in the various commands below. <span id="line-36" class="anchor"></span></p>
@@ -378,7 +378,7 @@ import sys
 <span id="line-85" class="anchor"></span>&gt; cp $SHARE/config/wikiconfig.py $INSTANCE   # copy wiki configuration sample file
 <span id="line-86" class="anchor"></span></pre>
 <span id="line-87" class="anchor"></span><span id="line-88" class="anchor"></span><ul>
-<li style="list-style-type:none"><p><img src="/wiki/mentalhealth/img/alert.png" alt="/!\" height="15" width="15"> Note that you just need to keep one underlay directory on your system if you are running multiple wikis (e.g. in a farm.) <span id="line-89" class="anchor"></span></p>
+<li style="list-style-type:none"><p><img src="wiki/htdocs/modern/img/alert.png" alt="/!\" height="15" width="15"> Note that you just need to keep one underlay directory on your system if you are running multiple wikis (e.g. in a farm.) <span id="line-89" class="anchor"></span></p>
 <span id="line-90" class="anchor"></span></li>
 </ul>
 
@@ -416,7 +416,7 @@ import sys
 <h1 id="head-442871161f523855f2162b426248f0bb0523c289">Tune configuration</h1>
 
 <span id="line-120" class="anchor"></span><span id="line-121" class="anchor"></span><p>Now, you need to tune the configuration of your web server and of your wiki instance. Look at the appropriate help page for your web server, then come back here to tune the settings of your wiki instance. <span id="line-122" class="anchor"></span></p>
-<span id="line-123" class="anchor"></span><p>Edit <tt>wikiconfig.py</tt>. The default settings should work fine in most cases, but there are some things that you will probably want to change, like the name and logo of your wiki! <img src="/wiki/mentalhealth/img/smile.png" alt=":)" height="15" width="15"> Read the comments inside <tt>wikiconfig.py</tt>, they will guide you through this process.  (Start with "Wiki identity", around line 25.) <span id="line-124" class="anchor"></span></p>
+<span id="line-123" class="anchor"></span><p>Edit <tt>wikiconfig.py</tt>. The default settings should work fine in most cases, but there are some things that you will probably want to change, like the name and logo of your wiki! <img src="wiki/htdocs/modern/img/smile.png" alt=":)" height="15" width="15"> Read the comments inside <tt>wikiconfig.py</tt>, they will guide you through this process.  (Start with "Wiki identity", around line 25.) <span id="line-124" class="anchor"></span></p>
 <span id="line-125" class="anchor"></span><p><a href="http://moinmaster.wikiwikiweb.de/HelpOnConfiguration">HelpOnConfiguration</a> contains all the details about all the options, in case the comments in <tt>wikiconfig.py</tt> are not enough. <span id="line-126" class="anchor"></span></p>
 <span id="bottom_Include_HelpOnInstalling/WikiInstanceCreation" class="anchor"></span>
 </div>
@@ -546,7 +546,7 @@ import sys
 </li>
 <li><p>If that works, see if your edit is reflected on the Recent<tt></tt>Changes page. <span id="line-101" class="anchor"></span></p>
 </li>
-<li><p>If you see them, congratulations, your new wiki works! <img src="/wiki/mentalhealth/img/smile.png" alt=":)" height="15" width="15"> <span id="line-102" class="anchor"></span></p>
+<li><p>If you see them, congratulations, your new wiki works! <img src="wiki/htdocs/modern/img/smile.png" alt=":)" height="15" width="15"> <span id="line-102" class="anchor"></span></p>
 <span id="line-103" class="anchor"></span></li>
 </ul>
 <p>If something goes wrong, have a look at Troubleshooting, at the bottom of this page. <span id="line-104" class="anchor"></span></p>
@@ -607,7 +607,7 @@ import sys
 <span id="line-156" class="anchor"></span>CGI scripts work
 <span id="line-157" class="anchor"></span></pre>
 <span id="line-158" class="anchor"></span><span id="line-159" class="anchor"></span><p>If you get anything else than "<tt>CGI&nbsp;scripts&nbsp;work</tt>", then something went wrong. Check the directory permissions as above, try other names (or ask about them). The sad truth might be that you are not allowed to execute CGI scripts. You would then have to ask the administrator (root) for that permission. <span id="line-160" class="anchor"></span></p>
-<span id="line-161" class="anchor"></span><p>Once you get it, you can set up your wiki instance in the <tt>public_html</tt> directory. <img src="/wiki/mentalhealth/img/smile.png" alt=":)" height="15" width="15"> <span id="line-162" class="anchor"></span></p>
+<span id="line-161" class="anchor"></span><p>Once you get it, you can set up your wiki instance in the <tt>public_html</tt> directory. <img src="wiki/htdocs/modern/img/smile.png" alt=":)" height="15" width="15"> <span id="line-162" class="anchor"></span></p>
 <span id="line-163" class="anchor"></span>
 <h3 id="head-c27688fbe7f65d67190a47ce8d32eba244ab0d01-2">Create a wiki instance</h3>
 
@@ -676,7 +676,7 @@ def handle_request(req, env, form):
 </li>
 <li><p>If that works, see if your edit is reflected on the Recent<tt></tt>Changes page. <span id="line-223" class="anchor"></span></p>
 </li>
-<li><p>If you see them, congratulations, you have a new wiki! <img src="/wiki/mentalhealth/img/smile.png" alt=":)" height="15" width="15"> <span id="line-224" class="anchor"></span></p>
+<li><p>If you see them, congratulations, you have a new wiki! <img src="wiki/htdocs/modern/img/smile.png" alt=":)" height="15" width="15"> <span id="line-224" class="anchor"></span></p>
 <span id="line-225" class="anchor"></span></li>
 </ul>
 <p>If something goes wrong, have a look at Troubleshooting, below. <span id="line-226" class="anchor"></span></p>
@@ -1181,7 +1181,7 @@ import sys
 <p> <tt>'moin'</tt> </p>
 </td>
 <td>
-<p> Server name, used by default for log and pid files. <img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in 1.5 </p>
+<p> Server name, used by default for log and pid files. <img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in 1.5 </p>
 </td>
 </tr>
 <span id="line-44" class="anchor"></span><tr>
@@ -1258,7 +1258,7 @@ import sys
 <p> <tt>'ThreadPoolServer'</tt>, <tt>'ThreadingServer'</tt>, <tt>'ForkingServer'</tt>, <tt>'SimpleServer'</tt> </p>
 </td>
 <td>
-<p> The server type to use, see the comments in the <tt>moin.py</tt>. The default is <tt>'ThreadPoolServer'</tt>, which create a pool of threads and reuse them for new connections. <img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
+<p> The server type to use, see the comments in the <tt>moin.py</tt>. The default is <tt>'ThreadPoolServer'</tt>, which create a pool of threads and reuse them for new connections. <img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
 </td>
 </tr>
 <span id="line-51" class="anchor"></span><tr>
@@ -1269,7 +1269,7 @@ import sys
 <p> <tt>10</tt> </p>
 </td>
 <td>
-<p> How many threads to create. <img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
+<p> How many threads to create. <img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
 </td>
 </tr>
 <span id="line-52" class="anchor"></span><tr>
@@ -1280,7 +1280,7 @@ import sys
 <p> <tt>50</tt> </p>
 </td>
 <td>
-<p> The count of socket connection requests that are buffered by the operating system. <img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
+<p> The count of socket connection requests that are buffered by the operating system. <img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in 1.3.5 </p>
 </td>
 </tr>
 <span id="line-53" class="anchor"></span><tr>
@@ -1291,13 +1291,13 @@ import sys
 <p> <tt>&nbsp;{}&nbsp;</tt> </p>
 </td>
 <td>
-<p> allow overriding any request property by setting the value in this dict e.g <tt>properties&nbsp;=&nbsp;{'script_name':&nbsp;'/mywiki'</tt>}. <img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in 1.5 </p>
+<p> allow overriding any request property by setting the value in this dict e.g <tt>properties&nbsp;=&nbsp;{'script_name':&nbsp;'/mywiki'</tt>}. <img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in 1.5 </p>
 </td>
 </tr>
 <span id="line-54" class="anchor"></span></table>
 </div>
 <span id="line-55" class="anchor"></span><ul>
-<li style="list-style-type:none"><p><img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> There may be more options useful to moin developers, see the comments in <tt>moin.py</tt> <span id="line-56" class="anchor"></span></p>
+<li style="list-style-type:none"><p><img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> There may be more options useful to moin developers, see the comments in <tt>moin.py</tt> <span id="line-56" class="anchor"></span></p>
 <span id="line-57" class="anchor"></span><span id="line-58" class="anchor"></span></li>
 </ul>
 
@@ -1386,7 +1386,7 @@ $ sudo moin.py
 <span id="line-116" class="anchor"></span>sys.path.insert(0, '/path/to/moin')
 <span id="line-117" class="anchor"></span></pre>
 <span id="line-118" class="anchor"></span><span id="line-119" class="anchor"></span><ul>
-<li style="list-style-type:none"><p><img src="/wiki/mentalhealth/img/idea.png" alt="(!)" height="15" width="15"> New in release 1.5 <span id="line-120" class="anchor"></span></p>
+<li style="list-style-type:none"><p><img src="wiki/htdocs/modern/img/idea.png" alt="(!)" height="15" width="15"> New in release 1.5 <span id="line-120" class="anchor"></span></p>
 </li>
 </ul>
 <span id="bottom_Include_HelpOnInstalling/StandaloneServer" class="anchor"></span>
@@ -1558,7 +1558,7 @@ exit
 <span id="line-17" class="anchor"></span><p>Many users prefer to install software products in a folder other than the installation default. Python typically changes the default installation folder name with each point release, and Apache has changed the default installation folder name with the release of version 2.  Instead of enumerating all the possibilities at each step, this procedure will use the <strong>Reference</strong> name in the table below as the installed location for each product. Substitute your real installation location when editing configuration files and entering commands. <span id="line-18" class="anchor"></span></p>
 <span id="line-19" class="anchor"></span><div>
 <table>
-<tr>
+<tr style="background-color: #EEDDAA;">
 <td>
 <p>Reference</p>
 </td>
