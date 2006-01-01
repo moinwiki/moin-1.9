@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
     Script for doing global changes to all pages in a wiki.
 
@@ -12,7 +13,13 @@ debug = False
 
 url = "moinmaster.wikiwikiweb.de/"
 
-def do_edit(origtext):
+import sys
+sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin15') # farmconfig/wikiconfig location
+sys.path.insert(0, '../..')
+
+def do_edit(pagename, origtext):
+    if pagename in ['LocalSpellingWords','LocalBadContent',]:
+        return origtext
     language_line = format_line = masterpage = None
     acl_lines = []
     master_lines = []
@@ -47,17 +54,20 @@ def do_edit(origtext):
         language_line = '#language en'
     if not format_line:
         format_line = '#format wiki'
-    if not acl_lines and (masterpage is None or
-        masterpage not in ['FrontPage', 'WikiSandBox',] and not masterpage.endswith('Template')):
+    if not acl_lines and (
+        masterpage is None or masterpage not in ['FrontPage', 'WikiSandBox',] and not masterpage.endswith('Template')):
         acl_lines = ['#acl MoinPagesEditorGroup:read,write,delete,revert All:read']
     if not master_lines:
         master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date',]
+
+    c1old = "## Please edit (or translate) system/help pages on the moinmaster wiki ONLY."
+    c2old = "## For more information, please see MoinMaster:MoinPagesEditorGroup."
     c1 = "## Please edit system and help pages ONLY in the moinmaster wiki! For more"
     c2 = "## information, please see MoinMaster:MoinPagesEditorGroup."
-    if c1 in comment_lines:
-        comment_lines.remove(c1)
-    if c2 in comment_lines:
-        comment_lines.remove(c2)
+    for c in (c1old, c2old, c1, c2):
+        if c in comment_lines:
+            comment_lines.remove(c)
+        
     comment_lines = [c1, c2, ] + comment_lines
 
     if content_lines and content_lines[-1].strip(): # not an empty line at EOF
@@ -72,7 +82,7 @@ if __name__ == '__main__':
         import codecs
         origtext = codecs.open('origtext', 'r', 'utf-8').read()
         origtext = origtext.replace('\r\n','\n')
-        changedtext = do_edit(origtext)
+        changedtext = do_edit("", origtext)
         changedtext = changedtext.replace('\n','\r\n')
         f = codecs.open('changedtext', 'w', 'utf-8')
         f.write(changedtext)
@@ -90,7 +100,7 @@ if __name__ == '__main__':
             request = RequestCLI(url=url, pagename=pagename.encode('utf-8'))
             p = PageEditor.PageEditor(request, pagename, do_editor_backup=0)
             origtext = p.get_raw_body()
-            changedtext = do_edit(origtext)
+            changedtext = do_edit(pagename, origtext)
             if changedtext and changedtext != origtext:
                 print "Writing %s ..." % repr(pagename)
                 p._write_file(changedtext)
