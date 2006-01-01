@@ -47,6 +47,7 @@ class Page:
         #print >>sys.stderr, "page %s" % repr(page_name)
         #traceback.print_stack(limit=4, file=sys.stderr)
 
+
         if keywords.has_key('formatter'):
             self.formatter = keywords.get('formatter')
             self.default_formatter = 0
@@ -122,13 +123,17 @@ class Page:
         return rev
 
     def get_rev_dir(self, pagedir, rev=0):
-        """
-        get a revision of a page from an arbitrary pagedir.
-        does not modify page object's state, uncached, direct disk access.
-        @param pagedir: the path to the pagedir
+        """Get a revision of a page from an arbitrary pagedir.
+        
+        Does not modify page object's state, uncached, direct disk
+        access.
+
+        @param pagedir: the path to the page storage area
         @param rev: int revision to get (default is 0 and means the current
                     revision (in this case, the real revint is returned)
-        @return: (str pagefilename, int realrevint, bool exists)
+        @return: (str path to file of the revision,
+                  int realrevint,
+                  bool exists)
         """
         if rev == 0:
             rev = self.get_current_from_pagedir(pagedir)
@@ -166,13 +171,18 @@ class Page:
         self.page_name = realPath[-len(self.page_name):]
 
     def get_rev(self, use_underlay=-1, rev=0):
-        """
-        get a revision of this page
+        """Get information about a revision.
+
+        filename, number, and (existance test) of this page and revision.
+
         @param use_underlay: -1 == auto, 0 == normal, 1 == underlay
         @param rev: int revision to get (default is 0 and means the current
                     revision (in this case, the real revint is returned)
-        @return: (str pagefilename, int realrevint, bool exists)
+        @return: (str path to current revision of page,
+                  int realrevint,
+                  bool exists)
         """
+        # Figure out if we should use underlay or not, if needed.
         if use_underlay == -1:
             if self._underlay is not None and self._pagepath[self._underlay] is not None:
                 underlay = self._underlay
@@ -182,6 +192,7 @@ class Page:
         else:
             underlay, pagedir = use_underlay, self._pagepath[use_underlay]
 
+        # Find current revision, if automatic selection is requested.
         if rev == 0:
             if self._current_rev[underlay] is None:
                 realrev = self.get_current_from_pagedir(pagedir)
@@ -189,6 +200,8 @@ class Page:
             else:
                 realrev = self._current_rev[underlay]
 
+            # This restores from cache.  If they are None (uncached),
+            # they will be generated at the very end.
             _exists = self._exists[underlay]
             _realrev = self._current_rev[underlay]
             _pagefile = self._pagefile[underlay]
@@ -207,6 +220,12 @@ class Page:
         return pagefile, realrev, exists
 
     def current_rev(self):
+        """Return number of current revision.
+        
+        This is the same as get_rev()[1].
+        
+        @return: int revision
+        """
         pagefile, rev, exists = self.get_rev()
         return rev
 
@@ -231,7 +250,8 @@ class Page:
                                 '1' = use underlay page dir
                                 '0' = use standard page dir
         @rtype: string
-        @return: the full path to the storage area
+        @return: int underlay,
+                 str the full path to the storage area
         """
         standardpath, underlaypath = self._pagepath
         if underlaypath is None:
@@ -301,7 +321,8 @@ class Page:
                                (default true)
         @keyword isfile: is the last component in args a filename? (default is false)
         @rtype: string
-        @return: the full path to the storage area
+        @return: (int underlay (1 if using underlay, 0 otherwise),
+                  str the full path to the storage area )
         """
         check_create = kw.get('check_create', 1)
         isfile = kw.get('isfile', 0)
@@ -318,6 +339,8 @@ class Page:
         return underlay, fullpath
 
     def getPagePath(self, *args, **kw):
+        """Return path to the page storage area."""
+
         return self.getPageStatus(*args, **kw)[1]
 
     def split_title(self, request, force=0):
@@ -560,7 +583,8 @@ class Page:
 
     def mtime_printable(self, request):
         """
-        Get printable modification timestamp of this page.
+        Get printable (as per user's preferences) modification
+        timestamp of this page.
 
         @rtype: string
         @return: formatted string with mtime of page
@@ -737,14 +761,17 @@ class Page:
         return pages
 
     def getlines(self):
+        """Return a list of all lines in body.
+
+        @rtype list
+        @return: list of strs body_lines"""
         lines = self.get_raw_body().split('\n')
         return lines
 
     def get_raw_body(self):
-        """
-        Load the raw markup from the page file.
+        """Load the raw markup from the page file.
 
-        @rtype: string
+        @rtype str
         @return: raw page contents of this page
         """
         if self._raw_body is None:
