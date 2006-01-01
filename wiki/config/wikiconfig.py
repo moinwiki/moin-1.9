@@ -21,6 +21,9 @@
     Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
     a list of config options.
 
+    ** Please do not use this file for a wiki farm. Use the sample file 
+    from the wikifarm directory instead! **
+
     @copyright: 2000-2005 by Juergen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
