@@ -18,7 +18,6 @@ from farmconfig import FarmConfig
 # now we subclass that config (inherit from it) and change what's different:
 class Config(FarmConfig):
 
-    show_timings = 1
 
     # basic options (you normally need to change these)
     sitename = u'MoinMaster' # [Unicode]
