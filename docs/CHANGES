@@ -4,7 +4,13 @@ MoinMoin Version History
 Version 1.5.0current:
   Fixes:
     * Fix <x=y> table attributes parsing. Thanks to Reimar Bauer.
-
+    * Fixed a few bugs in the reStructured text parser. Note that you
+      need to install docutils 0.3.10 or newer (snapshot from December 2005
+      or newer) to make reStructuring parsing work:
+     * Case preservation for anonymous links
+     * MoinMoin links get the appropriate CSS class
+     * Images do not get special CSS markup anymore
+     Thanks to Matthew Gilbert.
 
 Version 1.5.0rc1:
   This is the first release candidate of MoinMoin 1.5.0.
