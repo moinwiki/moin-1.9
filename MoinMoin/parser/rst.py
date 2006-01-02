@@ -6,7 +6,7 @@
         and by Alexander Schremmer <alex AT alexanderweb DOT de>
     @license: GNU GPL, see COPYING for details.
 
-    REQUIRES docutils 0.3.3 or later
+    REQUIRES docutils 0.3.10 or later (must be later than December 30th, 2005)
 """
 
 import re
@@ -16,10 +16,13 @@ import __builtin__
 import sys
 import copy
 import types
+import os
 
 # docutils imports are below
 import MoinMoin.parser.wiki
 from MoinMoin.Page import Page
+from MoinMoin.action import AttachFile
+from MoinMoin import wikiutil
 
 Dependencies = [] # this parser just depends on the raw text
 
@@ -45,7 +48,7 @@ try:
     import docutils
     from docutils.core import publish_parts
     from docutils.writers import html4css1
-    from docutils.nodes import fully_normalize_name, reference
+    from docutils.nodes import reference
     from docutils.parsers import rst
     from docutils.parsers.rst import directives, roles
 # # # All docutils imports must be contained above here
@@ -90,7 +93,7 @@ for i in sys.modules.keys():
         sys.modules[i].open = dummyOpen
         sys.modules[i].urllib2 = dummyUrllib2
         sys.modules[i].__import__ = safe_import
-
+        
 # --- End of dummy-code --------------------------------------------------------
 
 def html_escape_unicode(node):
@@ -113,14 +116,19 @@ class MoinWriter(html4css1.Writer):
         """
             Normally an unknown reference would be an error in an reST document.
             However, this is how new documents are created in the wiki. This
-            passes on unknown references to eventually be handled by the
-            MoinMoin formatter.
+            passes on unknown references to eventually be handled by
+            MoinMoin.
         """
-        if len(node['ids']) != 0:
-            # If the node has id then its probably an internal link. Let
+        if hasattr(node, 'indirect_reference_name'):
+            node['refuri'] = node.indirect_reference_name
+        elif (len(node['ids']) != 0):
+            # If the node has an id then it's probably an internal link. Let
             # docutils generate an error.
             return False
-        node['refuri'] = node['name']
+        elif node.hasattr('name'):
+            node['refuri'] = node['name']
+        else:
+            node['refuri'] = node['refname']
         del node['refname']
         node.resolved = 1
         self.nodes.append(node)
@@ -141,6 +149,13 @@ class MoinWriter(html4css1.Writer):
         self.wikiparser.formatter = self.formatter
         self.wikiparser.hilite_re = None
         self.nodes = []
+        # Make sure it's a supported docutils version.
+        required_version = (0, 3, 10)
+        current_version = [int(i) for i in docutils.__version__.split('.')]
+        if current_version < required_version:
+            err = 'ERROR: The installed docutils version is %s;' % ('.'.join([str(i) for i in current_version]))
+            err += ' version %s or later is required.' % ('.'.join([str(i) for i in required_version]))
+            raise RuntimeError, err
 
     def translate(self):
         visitor = MoinTranslator(self.document,
@@ -151,7 +166,6 @@ class MoinWriter(html4css1.Writer):
         self.document.walkabout(visitor)
         self.visitor = visitor
         self.output = html_escape_unicode(visitor.astext())
-
 
 class Parser:
     caching = 1
@@ -178,18 +192,18 @@ class Parser:
             }
         )
 
-        text = ''
+        html = []
         if parts['title']:
-            text += formatter.rawHTML('<h2>' + parts['title'] + '</h2>')
+            html.append(formatter.rawHTML('<h2>' + parts['title'] + '</h2>'))
         # If there is only one subtitle then it is held in parts['subtitle'].
         # However, if there is more than one subtitle then this is empty and
         # fragment contains all of the subtitles.
         if parts['subtitle']:
-            text += formatter.rawHTML('<h3>' + parts['subtitle'] + '</h3>')
+            html.append(formatter.rawHTML('<h3>' + parts['subtitle'] + '</h3>'))
         if parts['docinfo']:
-            text += parts['docinfo']
-        text += parts['fragment']
-        self.request.write(html_escape_unicode(text))
+            html.append(parts['docinfo'])
+        html.append(parts['fragment'])
+        self.request.write(html_escape_unicode('\n'.join(html)))
 
 class RawHTMLList(list):
     """
@@ -215,7 +229,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
         html4css1.HTMLTranslator.__init__(self, document)
         self.formatter = formatter
         self.request = request
-        # MMG: Using our own writer when needed. Save the old one to restore
+        # Using our own writer when needed. Save the old one to restore
         # after the page has been processed by the html4css1 parser.
         self.original_write, self.request.write = self.request.write, self.capture_wiki_formatting
         self.wikiparser = parser
@@ -284,35 +298,6 @@ class MoinTranslator(html4css1.HTMLTranslator):
         self.request.write = self.original_write
         return html4css1.HTMLTranslator.astext(self)
 
-    def process_inline(self, node, uri_string):
-        """
-            Process the "inline:" link scheme. This can either come from
-            visit_reference or from visit_image. The uri_string changes
-            depending on the caller. The uri is passed to MoinMoin to handle the
-            inline link. If it is an image, the src line is extracted and passed
-            to the html4css1 writer to allow the reST image attributes.
-            Otherwise, the html from MoinMoin is inserted into the reST document
-            and SkipNode should be raised.
-
-            returns True if SkipNode should be raised; False otherwise.
-        """
-        self.process_wiki_text(node[uri_string])
-        # Only pass the src and alt parts to the writer. The reST writer
-        # inserts its own tags so we don't need the MoinMoin html markup.
-        src = re.search('src="([^"]+)"', self.wiki_text)
-        if src:
-            node['uri'] = src.groups()[0]
-            if not 'alt' in node.attributes:
-                alt = re.search('alt="([^"]*)"', self.wiki_text)
-                if alt:
-                    node['alt'] = alt.groups()[0]
-            return False
-        else:
-            # It's not an image or the image doesn't exist, so just use what is
-            # returned from MoinMoin verbatim.
-            self.add_wiki_markup()
-            return True
-
     def fixup_wiki_formatting(self, text):
         replacement = {'<p>': '', '</p>': '', '\n': '', '> ': '>'}
         for src, dst in replacement.items():
@@ -336,42 +321,58 @@ class MoinTranslator(html4css1.HTMLTranslator):
             document in the place of the original link reference.
         """
         if 'refuri' in node.attributes:
-            def is_moin_link(link):
-                moin_link_schemes = ('wiki:', 'attachment:', 'drawing:', '[[',
-                                     'inline:')
-                for i in moin_link_schemes:
-                    if link.lstrip().startswith(i):
-                        return True
-                return False
-
             refuri = node['refuri']
-
-            target = refuri
-            # If its not a uri containing a ':' then its probably destined for
-            # wiki space.
-            if ':' not in refuri and not is_moin_link(refuri):
-                target = ':%s:' % (refuri)
-
-            if target.startswith('inline:'):
-                if self.process_inline(node, 'refuri'):
-                    # process inline returns True if SkipNode should be raised
-                    raise docutils.nodes.SkipNode
-            elif target.startswith('[[') and target.endswith(']]'):
-                self.process_wiki_text(target)
-                # Don't call fixup_wiki_formatting because who knows what the
-                # macro is inserting.
+            prefix = ''
+            link = refuri
+            if ':' in refuri:
+                prefix, link = refuri.lstrip().split(':', 1)
+            
+            # First see if MoinMoin should handle completely. Exits through add_wiki_markup.
+            if ((refuri.startswith('[[') and refuri.endswith(']]')) or 
+                    (prefix == 'drawing') or
+                    (prefix == 'inline')):
+                self.process_wiki_text(refuri)
+                # Don't call fixup_wiki_formatting because who knows what
+                # MoinMoin is inserting. (exits through add_wiki_markup)
                 self.add_wiki_markup()
-                raise docutils.nodes.SkipNode
+
+            # From here down, all links are handled by docutils (except 
+            # missing attachments), just fixup node['refuri'].
+            if prefix == 'attachment':
+                attach_file = AttachFile.getFilename(self.request, 
+                        self.request.page.page_name, link)
+                if not os.path.exists(attach_file):
+                    # Attachment doesn't exist, give to MoinMoin to insert
+                    # upload text.
+                    self.process_wiki_text(refuri)
+                    self.add_wiki_markup()
+                # Attachment exists, just get a link to it.
+                node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name, 
+                        link, self.request)
+                if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
+                    node['classes'].append(prefix)                
+            elif prefix == 'wiki':
+                wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(self.request, link)
+                wikiurl = wikiutil.mapURL(self.request, wikiurl)
+                node['refuri'] = wikiutil.join_wiki(wikiurl, wikitail)
+                # Only add additional class information if the reference does
+                # not have a child image (don't want to add additional markup
+                # for images with targets).
+                if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
+                    node['classes'].append('interwiki')
+            elif prefix != '':
+                # Some link scheme (http, file, https, mailto, etc.), add class
+                # information if the reference doesn't have a child image (don't 
+                # want additional markup for images with targets). 
+                # Don't touch the refuri.
+                if not [i for i in node.children if i.__class__ == docutils.nodes.image]:
+                    node['classes'].append(prefix)
             else:
-                # Not a macro or inline so hopefully its a link. Put the target in
-                # brackets so that MoinMoin knows its a link. Allow MoinMoin to
-                # handle all links so that the link decorations get used (e.g. 
-                # icons for external pages).
-                node_text = node.astext().replace('\n', ' ')
-                self.process_wiki_text('[%s %s]' % (target, node_text))
-                self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
-                self.add_wiki_markup()
-                raise docutils.nodes.SkipNode
+                # Default case - make a link to a wiki page.
+                page = MoinMoin.Page.Page(self.request, refuri)
+                node['refuri'] = page.url(self.request)
+                if not page.exists():
+                    node['classes'].append('nonexistent')
         html4css1.HTMLTranslator.visit_reference(self, node)
 
     def visit_image(self, node):
@@ -386,14 +387,27 @@ class MoinTranslator(html4css1.HTMLTranslator):
         """
         uri = node['uri'].lstrip()
         prefix = ''          # assume no prefix
+        attach_name = uri
         if ':' in uri:
-            prefix = uri.split(':',1)[0]
+            prefix = uri.split(':', 1)[0]
+            attach_name = uri.split(':', 1)[1]
         # if prefix isn't URL, try to display in page
         if not prefix.lower() in ('file', 'http', 'https', 'ftp'):
-            # no prefix given, so fake "inline:"
-            if not prefix:
-                node['uri'] = 'inline:' + uri
-            self.process_inline(node, 'uri')
+            attach_file = AttachFile.getFilename(self.request, 
+                    self.request.page.page_name, attach_name)
+            if not os.path.exists(attach_file):
+                # Attachment doesn't exist, MoinMoin should process it
+                if prefix == '':
+                    prefix = 'inline:'
+                self.process_wiki_text(prefix + attach_name)
+                self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
+                self.add_wiki_markup()
+            # Attachment exists, get a link to it.
+            # create the url
+            node['uri'] = AttachFile.getAttachUrl(self.request.page.page_name, 
+                    attach_name, self.request, addts = 1)
+            if not node.hasattr('alt'):
+                node['alt'] = node.get('name', uri)
         html4css1.HTMLTranslator.visit_image(self, node)
 
     def create_wiki_functor(self, moin_func):
@@ -428,7 +442,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
             'literal_block': 'preformatted',
             # Simple Lists
             # bullet-lists are handled completely by docutils because it uses
-            # the node context when to decide to make a compact list 
+            # the node context to decide when to make a compact list 
             # (no <p> tags).
             'list_item': 'listitem',
             # Definition List
