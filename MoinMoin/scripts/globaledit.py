@@ -18,7 +18,7 @@ sys.path.insert(0, '/org/de.wikiwikiweb.moinmaster/bin15') # farmconfig/wikiconf
 sys.path.insert(0, '../..')
 
 def do_edit(pagename, origtext):
-    if pagename in ['LocalSpellingWords','LocalBadContent',]:
+    if pagename in ['LocalSpellingWords','LocalBadContent',] or pagename.endswith('Template'):
         return origtext
     language_line = format_line = masterpage = None
     acl_lines = []
@@ -73,7 +73,10 @@ def do_edit(pagename, origtext):
     if content_lines and content_lines[-1].strip(): # not an empty line at EOF
         content_lines.append('')
 
-    changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line,] + pragma_lines + content_lines
+    if masterpage.endswith('Template'):
+        changedtext = master_lines + [format_line, language_line,] + pragma_lines + content_lines
+    else:
+        changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line,] + pragma_lines + content_lines
     changedtext = '\n'.join(changedtext)
     return changedtext
 
