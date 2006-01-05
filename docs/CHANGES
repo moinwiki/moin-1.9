@@ -11,6 +11,7 @@ Version 1.5.0current:
      * MoinMoin links get the appropriate CSS class
      * Images do not get special CSS markup anymore
      Thanks to Matthew Gilbert.
+    * Fixed a bug in the WSGI code which led to incorrect exception handling.
 
 Version 1.5.0rc1:
   This is the first release candidate of MoinMoin 1.5.0.

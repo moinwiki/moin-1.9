@@ -2052,7 +2052,7 @@ class RequestWSGI(RequestBase):
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self, {})
         
-        except error.FatalError, err:
+        except Exception, err:
             self.fail(err)
     
     def setup_args(self, form=None):
