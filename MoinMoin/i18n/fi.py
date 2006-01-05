@@ -658,7 +658,7 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Liitetiedosto \'%(filename)s\' purettu.''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
-'''Liitett� \'%(filename)s\' ei purettu, koska sen tiedostot ovat liian suuria, .zip-tiedostoja, alihakemistoissa tai jo olemassa.''',
+'''Liitettä \'%(filename)s\' ei purettu, koska sen tiedostot ovat liian suuria, .zip-tiedostoja, alihakemistoissa tai jo olemassa.''',
 '''The file %(target)s is not a .zip file.''':
 '''Tiedosto %(target)s ei ole .zip-tiedosto.''',
 '''Attachment \'%(filename)s\'''':
@@ -786,7 +786,7 @@ Kokeile eri nimeä.''',
 '''No wanted pages in this wiki.''':
 '''Tässä wikissä ei ole toivottu sivuja.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
-'''Ei voida n�ytt�� reStructured-teksti�, asenna docutils.''',
+'''Ei voida näyttää reStructured-tekstiä, asenna docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Sisällytysten maksimimäärä ylitetty**''',
 '''**Could not find the referenced page: %s**''':
