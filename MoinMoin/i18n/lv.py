@@ -743,11 +743,11 @@ Pamēģiniet citu nosaukumu.''',
 '''Wiki''':
 '''Viki''',
 '''Slideshow''':
-'''Prezentācija''',
+'''Slīdrāde''',
 '''Start''':
-'''Sākums''',
+'''Starts''',
 '''Slide %(pos)d of %(size)d''':
-'''%(size)d slaids %(pos)d''',
+'''%(pos)d slaids no %(size)d''',
 '''No orphaned pages in this wiki.''':
 '''Šajā viki nav nevienas bāreņlapas.''',
 '''No quotes on %(pagename)s.''':

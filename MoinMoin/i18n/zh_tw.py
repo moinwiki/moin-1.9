@@ -68,7 +68,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[Content of new page loaded from %s]''':
 '''[從 %s 載入新頁面的內容]''',
 '''[Template %s not found]''':
-'''[找不到範本 %s ]''',
+'''[找不到模板 %s ]''',
 '''[You may not read %s]''':
 '''[你不能閱讀 %s]''',
 '''Describe %s here.''':
@@ -114,7 +114,7 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
  表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||
 
 (!) 表格或標題尾端不可有空白[[BR]]
-(!) 更詳細的說明請參看 HelpOnEditing 或 ["語法參考"]
+(!) 更詳細的說明請參看 ["說明/編輯頁面"] 或 ["語法參考"]
 ''',
 '''Edit was cancelled.''':
 '''編輯已取消。''',
@@ -228,7 +228,7 @@ To leave the editor, press the Cancel button.''':
 '''Subscribe''':
 '''訂閱''',
 '''Raw''':
-'''原始碼''',
+'''原始形''',
 '''XML''':
 '''XML''',
 '''Print''':
@@ -386,11 +386,11 @@ Contact the owner of the wiki, who can enable email.''':
 '''General options''':
 '''一般選項''',
 '''Quick links''':
-'''快速連結''',
+'''自訂頁面捷徑''',
 '''This list does not work, unless you have entered a valid email address!''':
 '''請提供正確的 email 地址，才收得到你訂閱的頁面！''',
 '''Subscribed wiki pages (one regex per line)''':
-'''訂閱的 wiki 頁面 (每行一個正規表達式)''',
+'''訂閱的 wiki 頁面 (每行一個正規表示式)''',
 '''Create Profile''':
 '''新使用者註冊''',
 '''Mail me my account data''':
@@ -436,11 +436,11 @@ Contact the owner of the wiki, who can enable email.''':
 '''view''':
 '''檢視''',
 '''raw''':
-'''原始碼''',
+'''原始形''',
 '''print''':
 '''列印形''',
 '''revert''':
-'''回復舊版''',
+'''回復''',
 '''Revert to revision %(rev)d.''':
 '''回復成第 %(rev)d 版。''',
 '''edit''':
@@ -468,11 +468,11 @@ Contact the owner of the wiki, who can enable email.''':
 '''You are not allowed to revert this page!''':
 '''你不能把本頁恢復成舊版！''',
 '''You must login to add a quicklink.''':
-'''登入之後才能增加快速連結。''',
+'''登入之後才能設定頁面捷徑。''',
 '''Your quicklink to this page has been removed.''':
-'''已移除本頁的快速連結。''',
+'''已取消本頁之捷徑。''',
 '''A quicklink to this page has been added for you.''':
-'''已將本頁變成快速連結。''',
+'''已設定本頁之捷徑。''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''你不能訂閱無權瀏覽的頁面。''',
 '''This wiki is not enabled for mail processing.''':
@@ -484,9 +484,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Your subscribtion to this page has been removed.''':
 '''本頁已取消訂閱。''',
 '''Can\'t remove regular expression subscription!''':
-'''無法取消用正規表達式設定的訂閱！''',
+'''無法取消用正規表示式設定的訂閱！''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
-'''請在 UserPreferences 設定正規表達式訂閱。''',
+'''請在 UserPreferences 設定正規表示式訂閱。''',
 '''You have been subscribed to this page.''':
 '''訂閱好了。''',
 '''Charts are not available!''':
@@ -502,7 +502,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Search Titles''':
 '''搜尋標題''',
 '''Display context of search results''':
-'''顯示找到頁面的內容''',
+'''顯示前後文''',
 '''Case-sensitive searching''':
 '''區分大小寫''',
 '''Search Text''':
@@ -530,9 +530,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Number of system pages''':
 '''系統頁面數''',
 '''Accumulated page sizes''':
-'''累計頁面大小''',
+'''頁面大小總計''',
 '''Entries in edit log''':
-'''修訂記錄項次''',
+'''修訂記錄總計''',
 '''%(logcount)s (%(logsize)s bytes)''':
 '''%(logcount)s 條 (計 %(logsize)s 位元組)''',
 '''NONE''':
@@ -542,9 +542,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Local extension macros''':
 '''外掛擴充巨集''',
 '''Global extension actions''':
-'''內建擴充功能''',
+'''內建擴充操作''',
 '''Local extension actions''':
-'''外掛擴充功能''',
+'''外掛擴充操作''',
 '''Global parsers''':
 '''內建解析器''',
 '''Local extension parsers''':
@@ -562,7 +562,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''{{{"%s"}}} 找到太多資料，請輸入更精確的關鍵字！''',
 '''ERROR in regex \'%s\'''':
-'''正規表達式 \'%s\' 錯誤''',
+'''正規表示式 \'%s\' 錯誤''',
 '''Bad timestamp \'%s\'''':
 '''錯誤的時間戳記 \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
@@ -570,7 +570,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Expected a value for key "%(token)s"''':
 '''"%(token)s" 應該有對應的值''',
 '''Wiki Markup''':
-'''Wiki 標記''',
+'''Wiki 標示''',
 '''Print View''':
 '''檢視列印形''',
 '''[%d attachments]''':
@@ -706,7 +706,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
 
 Try a different name.''':
-'''\'\'\'已經有一頁面叫做 {{{\'%s\'}}} 了！\'\'\'
+'''\'\'\'已經有一個頁面叫做 "{{{\'%s\'}}}" 了！\'\'\'
 
 請用別的名字。''',
 '''(including %(localwords)d %(pagelink)s)''':
@@ -738,7 +738,7 @@ Try a different name.''':
 '''Nothing found for "%s"!''':
 '''找不到 "%s"！''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
-'''不支援的導覽方案 \'%(scheme)s\'！''',
+'''不支援的導覽方案：\'%(scheme)s\'！''',
 '''No parent page found!''':
 '''找不到上層頁面！''',
 '''Wiki''':
@@ -772,7 +772,7 @@ Try a different name.''':
 '''[Bookmark reached]''':
 '''[目前書籤放置在此]''',
 '''Markup''':
-'''標記''',
+'''標示''',
 '''Display''':
 '''顯示''',
 '''Filename''':
@@ -868,7 +868,7 @@ red=edit''':
 '''------------''':
 '''------------''',
 '''Raw Text''':
-'''檢視原始碼''',
+'''檢視原始形''',
 '''Delete Cache''':
 '''刪除快取''',
 '''Delete Page''':
@@ -886,9 +886,9 @@ red=edit''':
 '''Immutable Page''':
 '''唯讀頁面''',
 '''Remove Link''':
-'''移除連結''',
+'''取消捷徑''',
 '''Add Link''':
-'''新增連結''',
+'''設為捷徑''',
 '''Attachments''':
 '''附件''',
 '''Show %s days.''':

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-21 01:04+0100\n"
-"PO-Revision-Date: 2005-03-09 15:48:42+0200\n"
+"PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1112,8 +1112,8 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
-"Liitett� '%(filename)s' ei purettu, koska sen tiedostot ovat liian suuria, "
-".zip-tiedostoja, alihakemistoissa tai jo olemassa."
+"Liitettä '%(filename)s' ei purettu, koska sen tiedostot ovat liian suuria, ."
+"zip-tiedostoja, alihakemistoissa tai jo olemassa."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1340,8 +1340,7 @@ msgstr "Tässä wikissä ei ole toivottu sivuja."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
-"Ei voida n�ytt�� reStructured-teksti�, asenna docutils."
+msgstr "Ei voida näyttää reStructured-tekstiä, asenna docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Sisällytysten maksimimäärä ylitetty**"
@@ -1635,149 +1634,3 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
-
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Eväste poistettu. Olet kirjautunut ulos."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Tuntematon käyttäjänimi: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
-
-#~ msgid "Account \"%s\" is disabled."
-#~ msgstr "Tunnus \"%s\" on pois käytöstä."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Valitettavasti salasana on väärin."
-
-#~ msgid "Bad relogin URL."
-#~ msgstr "Uudelleenkirjautumisen URL ei kelpaa."
-
-#~ msgid "Unknown user."
-#~ msgstr "Tuntematon käyttäjä."
-
-#~ msgid "User account created!"
-#~ msgstr "Käyttäjätili luotu!"
-
-#~ msgid "Remember last page visited"
-#~ msgstr "Muista viimeisin sivu"
-
-#, fuzzy
-#~ msgid "Parent Page"
-#~ msgstr "EtuSivu"
-
-#~ msgid "Trail"
-#~ msgstr "Polku"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Sinulla ei vielä ole käyttäjätietoja. Valitse KäyttäjäAsetukset oikeasta "
-#~ "yläkulmasta luodaksesi tiedot."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "Sähköpostia ei ole otettu käyttöön tässä wikissä. Ota yhteyttä wikin "
-#~ "omistajaan, joka voi joko tehdä sen tai poistaa Tilaa-kuvakkeen."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Käyttäjätiedoissasi ei ole sähköpostiosoitetta. Valitse nimesi "
-#~ "(KäyttäjäAsetukset) oikeasta yläkulmasta ja syötä kelvollinen "
-#~ "sähköpostiosoite."
-
-#, fuzzy
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Poistaaksesi tilauksen, mene tietoihisi ja poista tämä sivu tilausten "
-#~ "luettelosta."
-
-#, fuzzy
-#~ msgid "Quicklink"
-#~ msgstr "Pikalinkit"
-
-#~ msgid "Show Print View"
-#~ msgstr "Näytä tulostettavana"
-
-#~ msgid "Attach File"
-#~ msgstr "Liitä tiedosto"
-
-#~ msgid "Show Like Pages"
-#~ msgstr "Näytä samankaltaisia sivuja"
-
-#~ msgid "Show Local Site Map"
-#~ msgstr "Näytä paikallinen sivukartta"
-
-#, fuzzy
-#~ msgid "Infos"
-#~ msgstr "Tiedot"
-
-#~ msgid "Can't work out query"
-#~ msgstr "Hakua ei voida suorittaa"
-
-#, fuzzy
-#~ msgid "Add to Quicklinks"
-#~ msgstr "Pikalinkit"
-
-#~ msgid "Show Parent"
-#~ msgstr "Näytä yläsivu"
-
-#~ msgid "Show Changes"
-#~ msgstr "Näytä muutokset"
-
-#~ msgid "Get Info"
-#~ msgstr "Hae tiedot"
-
-#~ msgid "Skip to preview"
-#~ msgstr "Vieritä esikatseluversioon"
-
-#~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[sivun tämänhetkinen koko '''%(size)d''' tavua]"
-
-#~ msgid "Optional comment about this change"
-#~ msgstr "Vapaaehtoinen kuvaus tästä muutoksesta"
-
-#~ msgid "Make this page belong to category %(category)s"
-#~ msgstr "Merkitse tämä sivu kuulumaan kategoriaan %(category)s"
-
-#~ msgid "Show fancy links"
-#~ msgstr "Näytä linkit hienosti"
-
-#~ msgid "Save as"
-#~ msgstr "Tallenna nimellä"
-
-#~ msgid "XSLT option disabled!"
-#~ msgstr "XSLT-vaihtoehto pois käytöstä!"
-
-#~ msgid "RefreshCache"
-#~ msgstr "PäivitäVälimuisti"
-
-# python-format
-#~ msgid "for this page (cached %(date)s)"
-#~ msgstr " tälle sivulle (välimuistissa %(date)s)"
-
-#~ msgid "MIME Type (optional)"
-#~ msgstr "MIME-tyyppi (ei pakollinen)"
-
-#~ msgid "Refresh"
-#~ msgstr "Päivitä"
-
-#~ msgid "[\"<html>\"]"
-#~ msgstr "[\"<html>\"]"
-
-#~ msgid "Reduce editor size"
-#~ msgstr "Pienennä editointikentän kokoa"
-
-#~ msgid "Detailed Information"
-#~ msgstr "Yksityiskohtaiset tiedot"

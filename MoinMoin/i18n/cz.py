@@ -534,7 +534,7 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Local extension parsers''':
 '''Parsery lokálního rozšíření''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Instalované processory (ZAVRŽENÉ -- použijívejte parsery)''',
+'''Instalované processory (ZAVRŽENÉ -- používejte parsery)''',
 '''Disabled''':
 '''Zakázáno''',
 '''Enabled''':

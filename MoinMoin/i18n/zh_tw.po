@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-21 01:04+0100\n"
-"PO-Revision-Date: 2004-11-29 05:38+0800\n"
+"PO-Revision-Date: 2006-01-04 01:00+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +125,7 @@ msgstr "[從 %s 載入新頁面的內容]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[找不到範本 %s ]"
+msgstr "[找不到模板 %s ]"
 
 #, python-format
 msgid "[You may not read %s]"
@@ -214,7 +214,7 @@ msgstr ""
 " 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||\n"
 "\n"
 "(!) 表格或標題尾端不可有空白[[BR]]\n"
-"(!) 更詳細的說明請參看 HelpOnEditing 或 [\"語法參考\"]\n"
+"(!) 更詳細的說明請參看 [\"說明/編輯頁面\"] 或 [\"語法參考\"]\n"
 
 msgid "Edit was cancelled."
 msgstr "編輯已取消。"
@@ -387,7 +387,7 @@ msgid "Subscribe"
 msgstr "訂閱"
 
 msgid "Raw"
-msgstr "原始碼"
+msgstr "原始形"
 
 msgid "XML"
 msgstr "XML"
@@ -626,13 +626,13 @@ msgid "General options"
 msgstr "一般選項"
 
 msgid "Quick links"
-msgstr "快速連結"
+msgstr "自訂頁面捷徑"
 
 msgid "This list does not work, unless you have entered a valid email address!"
 msgstr "請提供正確的 email 地址，才收得到你訂閱的頁面！"
 
 msgid "Subscribed wiki pages (one regex per line)"
-msgstr "訂閱的 wiki 頁面 (每行一個正規表達式)"
+msgstr "訂閱的 wiki 頁面 (每行一個正規表示式)"
 
 msgid "Create Profile"
 msgstr "新使用者註冊"
@@ -706,13 +706,13 @@ msgid "view"
 msgstr "檢視"
 
 msgid "raw"
-msgstr "原始碼"
+msgstr "原始形"
 
 msgid "print"
 msgstr "列印形"
 
 msgid "revert"
-msgstr "回復舊版"
+msgstr "回復"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -758,13 +758,13 @@ msgid "You are not allowed to revert this page!"
 msgstr "你不能把本頁恢復成舊版！"
 
 msgid "You must login to add a quicklink."
-msgstr "登入之後才能增加快速連結。"
+msgstr "登入之後才能設定頁面捷徑。"
 
 msgid "Your quicklink to this page has been removed."
-msgstr "已移除本頁的快速連結。"
+msgstr "已取消本頁之捷徑。"
 
 msgid "A quicklink to this page has been added for you."
-msgstr "已將本頁變成快速連結。"
+msgstr "已設定本頁之捷徑。"
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱無權瀏覽的頁面。"
@@ -782,10 +782,10 @@ msgid "Your subscribtion to this page has been removed."
 msgstr "本頁已取消訂閱。"
 
 msgid "Can't remove regular expression subscription!"
-msgstr "無法取消用正規表達式設定的訂閱！"
+msgstr "無法取消用正規表示式設定的訂閱！"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "請在 UserPreferences 設定正規表達式訂閱。"
+msgstr "請在 UserPreferences 設定正規表示式訂閱。"
 
 msgid "You have been subscribed to this page."
 msgstr "訂閱好了。"
@@ -811,7 +811,7 @@ msgid "Search Titles"
 msgstr "搜尋標題"
 
 msgid "Display context of search results"
-msgstr "顯示找到頁面的內容"
+msgstr "顯示前後文"
 
 msgid "Case-sensitive searching"
 msgstr "區分大小寫"
@@ -854,10 +854,10 @@ msgid "Number of system pages"
 msgstr "系統頁面數"
 
 msgid "Accumulated page sizes"
-msgstr "累計頁面大小"
+msgstr "頁面大小總計"
 
 msgid "Entries in edit log"
-msgstr "修訂記錄項次"
+msgstr "修訂記錄總計"
 
 #, python-format
 msgid "%(logcount)s (%(logsize)s bytes)"
@@ -873,10 +873,10 @@ msgid "Local extension macros"
 msgstr "外掛擴充巨集"
 
 msgid "Global extension actions"
-msgstr "內建擴充功能"
+msgstr "內建擴充操作"
 
 msgid "Local extension actions"
-msgstr "外掛擴充功能"
+msgstr "外掛擴充操作"
 
 msgid "Global parsers"
 msgstr "內建解析器"
@@ -905,7 +905,7 @@ msgstr "{{{\"%s\"}}} 找到太多資料，請輸入更精確的關鍵字！"
 
 #, python-format
 msgid "ERROR in regex '%s'"
-msgstr "正規表達式 '%s' 錯誤"
+msgstr "正規表示式 '%s' 錯誤"
 
 #, python-format
 msgid "Bad timestamp '%s'"
@@ -920,7 +920,7 @@ msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" 應該有對應的值"
 
 msgid "Wiki Markup"
-msgstr "Wiki 標記"
+msgstr "Wiki 標示"
 
 msgid "Print View"
 msgstr "檢視列印形"
@@ -1166,7 +1166,7 @@ msgid ""
 "\n"
 "Try a different name."
 msgstr ""
-"'''已經有一頁面叫做 {{{'%s'}}} 了！'''\n"
+"'''已經有一個頁面叫做 \"{{{'%s'}}}\" 了！'''\n"
 "\n"
 "請用別的名字。"
 
@@ -1229,7 +1229,7 @@ msgstr "找不到 \"%s\"！"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
-msgstr "不支援的導覽方案 '%(scheme)s'！"
+msgstr "不支援的導覽方案：'%(scheme)s'！"
 
 msgid "No parent page found!"
 msgstr "找不到上層頁面！"
@@ -1286,7 +1286,7 @@ msgid "[Bookmark reached]"
 msgstr "[目前書籤放置在此]"
 
 msgid "Markup"
-msgstr "標記"
+msgstr "標示"
 
 msgid "Display"
 msgstr "顯示"
@@ -1441,7 +1441,7 @@ msgid "------------"
 msgstr "------------"
 
 msgid "Raw Text"
-msgstr "檢視原始碼"
+msgstr "檢視原始形"
 
 msgid "Delete Cache"
 msgstr "刪除快取"
@@ -1468,10 +1468,10 @@ msgid "Immutable Page"
 msgstr "唯讀頁面"
 
 msgid "Remove Link"
-msgstr "移除連結"
+msgstr "取消捷徑"
 
 msgid "Add Link"
-msgstr "新增連結"
+msgstr "設為捷徑"
 
 msgid "Attachments"
 msgstr "附件"
@@ -1648,7 +1648,7 @@ msgstr "拼字檢查"
 #~ msgstr "如果要取消訂閱，請點右上角修改個人資料，並從訂閱清單中刪除本頁。"
 
 #~ msgid "Quicklink"
-#~ msgstr "快速連結"
+#~ msgstr "頁面捷徑"
 
 #~ msgid "Show Print View"
 #~ msgstr "檢視列印形"
@@ -1669,7 +1669,7 @@ msgstr "拼字檢查"
 #~ msgstr "無法查詢"
 
 #~ msgid "Add to Quicklinks"
-#~ msgstr "新增至快速連結"
+#~ msgstr "設為頁面捷徑"
 
 #~ msgid "Show Parent"
 #~ msgstr "顯示上一層"
@@ -1735,7 +1735,7 @@ msgstr "拼字檢查"
 #~ msgstr "沒人訂閱本頁，沒有送出通知。"
 
 #~ msgid "Unknown action"
-#~ msgstr "不明動作"
+#~ msgstr "不明操作"
 
 #~ msgid "Exactly one matching page for \"%s\" found!"
 #~ msgstr "連結 \"%s\" 的剛好就這麼一頁！"
@@ -1792,13 +1792,13 @@ msgstr "拼字檢查"
 #~ msgstr "恢復舊版時發生錯誤。"
 
 #~ msgid "Alternatively, use one of these templates:"
-#~ msgstr "或是用下面其中一個範本："
+#~ msgstr "或是用下面其中一個模板："
 
 #~ msgid ""
 #~ "To create your own templates, add a page with a name matching the regex "
 #~ "\"%(page_template_regex)s\"."
 #~ msgstr ""
-#~ "如果要建立新的範本，請新增一頁。名字必須符合正規表達式 \"%"
+#~ "如果要建立新的模板，請新增一頁。名字必須符合正規表示式 \"%"
 #~ "(page_template_regex)s\"，如 MyNewTemplate。"
 
 #~ msgid "The following pages with similar names already exist..."

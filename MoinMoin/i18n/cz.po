@@ -904,7 +904,7 @@ msgid "Local extension parsers"
 msgstr "Parsery lokálního rozšíření"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Instalované processory (ZAVRŽENÉ -- použijívejte parsery)"
+msgstr "Instalované processory (ZAVRŽENÉ -- používejte parsery)"
 
 msgid "Disabled"
 msgstr "Zakázáno"
