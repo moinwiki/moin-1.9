@@ -157,19 +157,25 @@ span.sep {
 
 #pagetrail {
     clear: right;
-    display: block;
-    margin: 0.2em 0;
+    display: inline;
+    margin: 5px 11px;
     padding: 0;
     font-size: 0.88em;
 }
 
 *[dir="rtl"] #pagetrail {
     clear: left;
+    margin: 0px 11px;
 }
 
 #interwiki {
+    margin: 5px 11px;
     display: inline;
     font-size: 1em;
+}
+
+*[dir="rtl"] #interwiki {
+    margin: 0;
 }
 
 #interwiki span:after {
@@ -188,7 +194,7 @@ span.sep {
 #pagelocation {
     display: inline;
     margin: 0 0.25em;
-    padding: 0;
+    padding: 0px 3px;
     font-size: 1.5em;
 }
 
