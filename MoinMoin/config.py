@@ -75,23 +75,6 @@ smileys = {
     "{2}":   (15, 13, 0, "prio2.png"),
     "{3}":   (15, 13, 0, "prio3.png"),
 
-    # version 1.1 (flags)
-    # flags for the languages in MoinMoin.i18n
-    "{da}":  (18, 12, 1, "flag-da.png"),
-    "{de}":  (18, 12, 1, "flag-de.png"),
-    "{en}":  (24, 12, 0, "flag-en.png"),
-    "{es}":  (18, 12, 0, "flag-es.png"),
-    "{fi}":  (18, 12, 1, "flag-fi.png"),
-    "{fr}":  (18, 12, 1, "flag-fr.png"),
-    "{it}":  (18, 12, 1, "flag-it.png"),
-    "{ja}":  (18, 12, 1, "flag-ja.png"),
-    "{ko}":  (18, 12, 1, "flag-ko.png"),
-    "{nl}":  (18, 12, 1, "flag-nl.png"),
-    "{pt}":  (18, 12, 0, "flag-pt.png"),
-    "{sv}":  (18, 12, 0, "flag-sv.png"),
-    "{us}":  (20, 12, 0, "flag-us.png"),
-    "{zh}":  (18, 12, 0, "flag-zh.png"),
-
     # version 1.3.4 (stars)
     # try {*}{*}{o}
     "{*}":   (15, 15, 0, "star_on.png"),
