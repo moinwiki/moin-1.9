@@ -30,6 +30,7 @@ languages = {
 'ru': (u'Русский', u'Russian', 'utf-8', 0, """Mike Rovner <mrovner@hotmail.com>""",),
 'sr': (u'Srpski', u'Serbian', 'utf-8', 0, """Thomas W. Horna <sarman@t-online.de>""",),
 'sv': (u'Svenska', u'Swedish', 'utf-8', 0, """Per Olofsson <pelle@debian.org>""",),
+'tr': (u'Türkçe', u'Turkish', 'utf-8', 0, """Volkan Y. <yazicivo@ttnet.net.tr>""",),
 'vi': (u'Tiếng Việt', u'Vietnamese', 'utf-8', 0, """Nam T. Nguyen <nnt@nntsoft.com>""",),
 'zh': (u'简体中文', u'Simplified Chinese', 'utf-8', 0, """Jun Hu <j.hu@tue.nl>""",),
 'zh-tw': (u'繁體中文', u'Chinese/Taiwan', 'utf-8', 0, """Rux Li <rux DOT li THREE AT gmail DOT com>""",),
