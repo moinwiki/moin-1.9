@@ -1,0 +1,900 @@
+removing old wiki ...
+copying data ...
+untaring underlay ...
+testComment01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testComment02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testHeading01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testHeading02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess03 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess04 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess05 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess06 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess07 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess08 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess09 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess10 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess11 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess12 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess13 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess14 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess15 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess16 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess17 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess18 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess19 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess20 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess21 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess23 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess26 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testListSuccess28 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess29 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testListSuccess30 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testParagraph1 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testParagraph2 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... ok
+testPreSuccess1 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess2 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess3 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess4 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess5 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess6 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess7 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess8 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testPreSuccess9 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testRule1 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable03 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable04 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable05 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testTable06 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests) ... FAIL
+testList01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBrokenBrowserTests) ... ok
+testEmphasis01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis03 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis04 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis05 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis06 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis07 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis08 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis09 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis10 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testEmphasis11 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testFormatBig01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testFormatSmall01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testFormatStrike01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testFormatSub01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testFormatSup01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testFormatUnderline01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testPre01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... ok
+testWhitespace01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests) ... FAIL
+testNoWikiWord01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... FAIL
+testSmiley01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... FAIL
+testWikiWord01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... ok
+test1 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
+test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
+test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
+test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
+error: access error like a dict ... ok
+error: create with encoded string ... ok
+error: create with any object ... ok
+error: create with unicode ... ok
+testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase) ... Formatting using <class MoinMoin.formatter.dom_xml.Formatter at 0x55bd1bfc>
+[('xml', {}), ('p', {'type': 'ol'}), ('ol', {'start': None, 'type': u'1'}), ('li', {})]
+ERROR
+testQuoting (MoinMoin._tests.test_packages.QuotingTestCase) ... ok
+testBasicPackageThings (MoinMoin._tests.test_packages.UnsafePackageTestcase) ... ok
+Page: page.exists() finds existing pages only ... ok
+PageEditor: expand @USERNAME@ CamelCase ... ok
+PageEditor: expand @USERNAME@ extended name - enabled ... ok
+PageEditor: expand @MAILTO@ ... ok
+PageEditor: expand user variables ... ok
+PageEditor: expand general variables ... ok
+parser.wiki: empty lines before block element ignored ... FAIL
+parser.wiki: paragraph closed before block element ... FAIL
+parser.wiki: close open inline tag when block close ... FAIL
+parser.wiki: DateTime macro ... ok
+parser.wiki: escape html markup in getText formatted call with link ... ok
+parser.wiki: escape html markup in getText formatted call ... ok
+parser.wiki: escape html markup in GetText macro ... ok
+parser.wiki: escape html markup in getText non formatted call ... ok
+parser.wiki: escape html markup in pre ... ok
+parser.wiki: escape html markup in pre with hashbang ... ok
+parser.wiki: escape html markup in python code area ... ok
+parser.wiki: escape html markup in `tt` ... ok
+parser.wiki: escape html markup in {{{tt}}} ... ok
+parser.wiki: escape wiki table  markup in pre ... ok
+parser.wiki: escape wiki table  markup in pre with hashbang ... ok
+parser.wiki: escape wiki table markup in python code area ... ok
+parser.wiki: escape wiki table markup in `tt` ... ok
+parser.wiki: escape wiki table markup in {{{tt}}} ... ok
+parser.wiki: ignore white space around heading text ... FAIL
+parser.wiki: empty line separates paragraphs ... ok
+parser.wiki: first paragraph should be in <p> ... ok
+parser.wiki: create paragraph after block markup ... ok
+parser.wiki: ------------ long rule shortened to hr6 ... ok
+parser.wiki: --- is no rule ... ok
+parser.wiki: ---- is standard rule ... ok
+parser.wiki: ----- rules with size ... ok
+parser.wiki: TOC links to headings with white space ... ok
+parser.wiki: text formating ... ok
+pysupport: import existing wiki plugin ... ok
+pysupport: import name from existing module ... ok
+pysupport: import nonexistent attritbue raises AttributeError ... ok
+pysupport: import nonexistent module raises ImportError ... ok
+pysupport: import nonexistent wiki plugin fail ... ok
+repair_language: should replace known language ... ok
+repair_language: return crlf line endings ... ok
+repair_language: should not replace in page body ... ok
+repair_language: should not replace unknown langauge ... ok
+request: getPageNameFromQueryString: ascii ... ok
+request: getPageNameFromQueryString: non ascii ... ok
+request: getPageNameFromQueryString: under_score ... ok
+request: normalize pagename: restrict groups to alpha numeric Unicode ... ok
+request: httpDate default rfc1123 ... ok
+request: httpDate rfc850 ... ok
+request: normalize pagename: normalize slashes ... ok
+request: normalize pagename: normalize whitespace ... ok
+request: normalize pagename: remove invalid unicode chars ... ok
+request: normalize pagename: underscore convert to spaces and normalized ... ok
+search: quoting bug - unquoted terms ... ok
+search: quoting bug - quoted terms ... ok
+user: encode ascii password ... ok
+user: encode unicode password ... ok
+user: isValidName: reject group names ... ok
+user: isValidName: reject unicode non alpha numeric characters ... ok
+user: isValidName: accept names in any language, with spaces ... ok
+user: isValidName: reject leading, trailing or multiple whitespace ... ok
+user: login with ascii password ... ok
+user: login with non-ascii password in pre 1.3 user file ... ok
+user: login replace old non-ascii password in pre 1.3 user file ... ok
+user: login with non-ascii password ... ok
+util.lock: ExclusiveLock: acquire ... ok
+util.lock: ExclusiveLock: acquire after timeout ... ok
+util.lock: ExclusiveLock: lock is exclusive ... ok
+util.lock: ExclusiveLock: exists ... ok
+util.lock: ExclusiveLock: expire ... ok
+util.lock: ExclusiveLock: isExpired ... ok
+util.lock: ExclusiveLock: isLocked ... ok
+util.lock: ExclusiveLock: release ... ok
+util.lock: ExclusiveLock: raise ValueError for timeout < 2.0 ... ok
+util.mail: encode address: 'Phrase <local@domain>' ... ok
+util.mail: encode Uncode address: 'ויקי <local@domain>' ... ok
+util.mail: encode address with empty address: 'Phrase <>' ... ok
+util.mail: encode address with empty phrase: '<local@domain>' ... ok
+util.mail: encode invalid address 'Phrase <blah' ... ok
+util.mail: encode simple address: local@domain ... ok
+util.mail: decoding spam safe mail ... ok
+util.web: make query sting from argument ... ok
+util.web: make query sting from argument and keywords ... ok
+util.web: make query sting from keywords ... ok
+util.web: creating html select with non existing selection ... ok
+util.web: creating html select with selected item ... ok
+widget.html: append to and extend composite element ... ok
+widget.html: creating html widgets ... ok
+widegt.html: invalid attributes raises exception ... ok
+wikiacl: allow extra white space between entries ... ok
+wikiacl: bad guy may not allowed anything ... ok
+wikiacl: default meta acl ... ok
+wikiacl: empty acl string raise StopIteration ... ok
+wikiacl: empty names with rights ... ok
+wikiacl: empty rights ... ok
+wikiacl: ignore rights not in acl_rights_valid ... ok
+wikiacl: ignore invalid acl ... ok
+wikiacl: mixed wiki names and names with spaces ... ok
+wikiacl: acl modifiers ... ok
+wikiacl: multiple entries ... ok
+wikiacl: multiple entries with spaces ... ok
+wikiacl: multiple names with spaces ... ok
+wikiacl: single name with spaces ... ok
+wikiacl: single wiki name, single right ... ok
+wikiacl: white space acl string raise StopIteration ... ok
+wikiacl: applying acl by user name ... ok
+wikidicts: create dict from keys and values in text ... ok
+wikidict: names in SystemPagesGroup should be in request.dicts ... ok
+wikidicts: initFromText: CamelCase links ... ok
+wikidicts: initFromText: extended link ... ok
+wikidicts: initFromText: extended names ... ok
+wikidicts: initFromText: ignore anything but first level list itmes ... ok
+wikidicts: initFromText: ignore non first level items ... ok
+wikidicts: initFromText: strip whitespace around items ... ok
+wikimacro: trivial macro works ... ok
+wikiutil: good form names accepted, bad rejected ... ok
+wikiutil: good system page names accepted, bad rejected ... FAIL
+wikiutil: good template names accepted, bad rejected ... ok
+wikixml.marshal: create new marshal ... ok
+wikixml.marshal: setting marshal property ... ok
+
+======================================================================
+ERROR: test1 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1081, in test1
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
+    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
+    raise _tests.TestSkiped('xml.dom.ext module is not available')
+TestSkipped: xml.dom.ext module is not available
+
+======================================================================
+ERROR: test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1090, in test2
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
+    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
+    raise _tests.TestSkiped('xml.dom.ext module is not available')
+TestSkipped: xml.dom.ext module is not available
+
+======================================================================
+ERROR: test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1104, in test3
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
+    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
+    raise _tests.TestSkiped('xml.dom.ext module is not available')
+TestSkipped: xml.dom.ext module is not available
+
+======================================================================
+ERROR: test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1109, in test4
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
+    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
+    raise _tests.TestSkiped('xml.dom.ext module is not available')
+TestSkipped: xml.dom.ext module is not available
+
+======================================================================
+ERROR: testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_formatter.py", line 31, in testSyntaxReference
+    self.formatPage("SyntaxReference", formatter)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_formatter.py", line 45, in formatPage
+    return self.request.redirectedOutput(page.send_page, self.request)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/request.py", line 631, in redirectedOutput
+    function(*args, **kw)
+  File "../../MoinMoin/Page.py", line 1241, in send_page
+  File "../../MoinMoin/Page.py", line 1321, in send_page_content
+  File "../../MoinMoin/Page.py", line 1339, in format
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 1044, in format
+    numstart))
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 552, in _indent_to
+    close.append(self.formatter.paragraph(0))
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/formatter/dom_xml.py", line 301, in paragraph
+    return self._set_tag('p', on)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/formatter/dom_xml.py", line 159, in _set_tag
+    raise ValueError, "<%s> expected <%s> given" % (last_tag, tag)
+ValueError: <li> expected <p> given
+
+======================================================================
+FAIL: testComment01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 94, in testComment01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'##test\n' != u'\n##test\n'
+
+======================================================================
+FAIL: testComment02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 105, in testComment02
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'##test\n##test\n' != u'\n##test\n\n##test\n'
+
+======================================================================
+FAIL: testHeading01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 115, in testHeading01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'= test1 =\n\n' != u'= test1 =\n'
+
+======================================================================
+FAIL: testHeading02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 128, in testHeading02
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'= test1 =\n\n== test2 ==\n\n' != u'= test1 =\n== test2 ==\n'
+
+======================================================================
+FAIL: testListSuccess07 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 237, in testListSuccess07
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ul>\n<li><p>test </p>\n</li>\n<li class="gap"><p>test </p>\n</li>\n</ul>' != u'<ul>\n<li><p>test </p>\n</li>\n</ul>\n<ul>\n<li><p>test </p>\n</li>\n</ul>'
+
+======================================================================
+FAIL: testListSuccess08 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 256, in testListSuccess08
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ol type="1">\n<li><p>test </p>\n</li>\n<li class="gap"><p>test </p>\n</li>\n</ol>' != u'<ol type="1">\n<li><p>test </p>\n</li>\n</ol>\n<ol type="1">\n<li><p>test </p>\n</li>\n</ol>'
+
+======================================================================
+FAIL: testListSuccess09 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 277, in testListSuccess09
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<dl>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n</dl>' != u'<dl>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n</dl>\n<dl>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n</dl>'
+
+======================================================================
+FAIL: testListSuccess10 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 295, in testListSuccess10
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ul>\n<li><p>test </p>\n</li>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n</ul>' != u'<ul>\n<li><p>test </p>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n</li>\n</ul>'
+
+======================================================================
+FAIL: testListSuccess11 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 313, in testListSuccess11
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ol type="1">\n<li><p>test </p>\n</li>\n<ol type="1">\n<li><p>test </p>\n</li>\n</ol>\n</ol>' != u'<ol type="1">\n<li><p>test </p>\n<ol type="1">\n<li><p>test </p>\n</li>\n</ol>\n</li>\n</ol>'
+
+======================================================================
+FAIL: testListSuccess12 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 333, in testListSuccess12
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<dl>\n<dt>test</dt>\n<dd><p>test </p>\n<dl>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n</dl>\n</dl>' != u'<dl>\n<dt>test</dt>\n<dd><p>test </p>\n<dl>\n<dt>test</dt>\n<dd><p>test </p>\n</dd>\n</dl>\n</dd>\n</dl>'
+
+======================================================================
+FAIL: testListSuccess13 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 354, in testListSuccess13
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ul>\n<li><p>test </p>\n</li>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n<li><p>test </p>\n</li>\n</ul>' != u'<ul>\n<li><p>test </p>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n</li>\n<li><p>test </p>\n</li>\n</ul>'
+
+======================================================================
+FAIL: testListSuccess14 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 375, in testListSuccess14
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ol type="1">\n<li><p>test </p>\n</li>\n<ol type="1">\n<li><p>test </p>\n</li>\n</ol>\n<li><p>test </p>\n</li>\n</ol>' != u'<ol type="1">\n<li><p>test </p>\n<ol type="1">\n<li><p>test </p>\n</li>\n</ol>\n</li>\n<li><p>test </p>\n</li>\n</ol>'
+
+======================================================================
+FAIL: testListSuccess23 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 535, in testListSuccess23
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ol type="1">\n<li><p>test </p>\n</li>\n<ul>\n<li><p>test </p>\n</li>\n</ol>\n</ul>' != u'<ol type="1">\n<li><p>test </p>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n</li>\n</ol>'
+
+======================================================================
+FAIL: testListSuccess28 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 567, in testListSuccess28
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u' * test\n\n test\n\n' != u' * test\ntest\n\n'
+
+======================================================================
+FAIL: testListSuccess29 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 577, in testListSuccess29
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ul>\n<li><p>test </p>\n</li>\n<ul>\n<li><p>test </p>\n</li>\n</ul>\n<p>test </p>\n</ul>' != u''
+
+======================================================================
+FAIL: testListSuccess30 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 587, in testListSuccess30
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<ul>\n<li><p>test </p>\n</li>\n<ul>\n<li><p>test test </p>\n</li>\n</ul>\n</ul>' != u''
+
+======================================================================
+FAIL: testPreSuccess1 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 624, in testPreSuccess1
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'{{{\ntest\n}}}\n\n' != u'{{{\n\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess2 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 640, in testPreSuccess2
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'{{{\ntest\ntest\n}}}\n\n' != u'{{{\n\ntest\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess3 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 658, in testPreSuccess3
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'{{{\ntest\n\ntest\n}}}\n\n' != u'{{{\n\ntest\n\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess4 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 672, in testPreSuccess4
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'{{{\n * test\n}}}\n\n' != u'{{{\n\n * test\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess5 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 684, in testPreSuccess5
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'{{{\n  }}}\n\n' != u'{{{\n\n  }}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess6 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 702, in testPreSuccess6
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u' * {{{\ntest\n}}}\n\n' != u' * {{{\n\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess7 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 720, in testPreSuccess7
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u' * {{{\n   test\n   }}}\n\n' != u' * {{{\n\n   test\n   }}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess8 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 740, in testPreSuccess8
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u' * test\n {{{\ntest\n}}}\n\n' != u' * test\n{{{\n\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testPreSuccess9 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 761, in testPreSuccess9
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 87, in do
+    self.failUnlessEqual(text, out)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u' * test\n\n{{{\ntest\n}}}\n\n' != u' * test\n\n{{{\n\ntest\n}}}\n\n'
+
+======================================================================
+FAIL: testRule1 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 771, in testRule1
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<hr>\n<p> </p>' != u'<hr/>'
+
+======================================================================
+FAIL: testTable01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 789, in testTable01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td>\n<p> </p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td>\n<p> </p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testTable02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 807, in testTable02
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testTable03 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 828, in testTable03
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testTable04 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 855, in testTable04
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td>\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testTable05 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 882, in testTable05
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td colspan="2" style="text-align:center;">\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td colspan="2" style="text-align: center;">\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testTable06 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 912, in testTable06
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 85, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<table>\n<tr>\n<td colspan="2" style="text-align:center;">\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td colspan="2" style="text-align:center;">\n<p>test</p>\n</td>\n</tr>\n</table>' != u'<div>\n<table>\n<tr>\n<td colspan="2" style="text-align: center;">\n<p>test</p>\n</td>\n<td>\n<p>test</p>\n</td>\n</tr>\n<tr>\n<td>\n<p>test</p>\n</td>\n<td colspan="2" style="text-align: center;">\n<p>test</p>\n</td>\n</tr>\n</table>\n</div>'
+
+======================================================================
+FAIL: testEmphasis01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 933, in testEmphasis01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i>test</i> </p>' != u'<p><em>test</em> </p>'
+
+======================================================================
+FAIL: testEmphasis02 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 938, in testEmphasis02
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><b>test</b> </p>' != u'<p><strong>test</strong> </p>'
+
+======================================================================
+FAIL: testEmphasis03 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 943, in testEmphasis03
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i><b>test</b></i> </p>' != u'<p><em><strong>test</strong></em> </p>'
+
+======================================================================
+FAIL: testEmphasis04 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 948, in testEmphasis04
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i>test<b>test</b></i> </p>' != u'<p><em>test<strong>test</strong></em> </p>'
+
+======================================================================
+FAIL: testEmphasis05 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 953, in testEmphasis05
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><b>test<i>test</i></b> </p>' != u'<p><strong>test<em>test</em></strong> </p>'
+
+======================================================================
+FAIL: testEmphasis06 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 958, in testEmphasis06
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i>test<b>test</b>test</i> </p>' != u'<p><em>test<strong>test</strong>test</em> </p>'
+
+======================================================================
+FAIL: testEmphasis07 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 963, in testEmphasis07
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><b>test<i>test</i>test</b> </p>' != u'<p><strong>test<em>test</em>test</strong> </p>'
+
+======================================================================
+FAIL: testEmphasis08 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 968, in testEmphasis08
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i>test</i><b>test</b> </p>' != u'<p><em>test</em><strong>test</strong> </p>'
+
+======================================================================
+FAIL: testEmphasis09 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 973, in testEmphasis09
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><b>test</b><i>test</i> </p>' != u'<p><strong>test</strong><em>test</em> </p>'
+
+======================================================================
+FAIL: testEmphasis10 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 978, in testEmphasis10
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><b><i>test</i>test</b> </p>' != u'<p><strong><em>test</em>test</strong> </p>'
+
+======================================================================
+FAIL: testEmphasis11 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 983, in testEmphasis11
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i><b>test</b>test</i> </p>' != u'<p><em><strong>test</strong>test</em> </p>'
+
+======================================================================
+FAIL: testWhitespace01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineFormatRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1023, in testWhitespace01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 925, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><i>test <b>test</b></i> </p>' != u'<p><em>test <strong>test</strong></em> </p>'
+
+======================================================================
+FAIL: testNoWikiWord01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1049, in testNoWikiWord01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1036, in do
+    self.failUnlessEqual(repeat, output)
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u'<p><span style="background-color:#ffff11">!</span>WikiWord </p>' != u'<p>WikiWord </p>'
+
+======================================================================
+FAIL: testSmiley01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1054, in testSmiley01
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1037, in do
+    out = self.do_convert_real([request, page.page_name, repeat])
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 35, in do_convert_real
+    self.fail("fails with parse error: %s" % e)
+  File "/usr/lib/python2.3/unittest.py", line 270, in fail
+    raise self.failureException, msg
+AssertionError: fails with parse error: ExpatError: mismatched tag: line 376, column 83
+
+======================================================================
+FAIL: parser.wiki: empty lines before block element ignored
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_parser_wiki.py", line 450, in testEmptyLineBeforeBlock
+    'Expected "%(expected)s" but got "%(result)s"' % locals())
+  File "/usr/lib/python2.3/unittest.py", line 278, in failUnless
+    if not expr: raise self.failureException, msg
+AssertionError: Expected "<p>XXX\s*</p>\n+<hr" but got "<span id="line-1" class="anchor"></span><p>XXX <span id="line-2" class="anchor"></span></p>
+<span id="line-3" class="anchor"></span><hr>
+<p> <span id="line-4" class="anchor"></span></p>
+<span id="line-5" class="anchor"></span>"
+
+======================================================================
+FAIL: parser.wiki: paragraph closed before block element
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_parser_wiki.py", line 429, in testParagraphBeforeBlock
+    'Expected "%(expected)s" but got "%(result)s"' % locals())
+  File "/usr/lib/python2.3/unittest.py", line 278, in failUnless
+    if not expr: raise self.failureException, msg
+AssertionError: Expected "<p>XXX\s*</p>\n+<hr" but got "<span id="line-1" class="anchor"></span><p>XXX <span id="line-2" class="anchor"></span></p>
+<hr>
+<p> <span id="line-3" class="anchor"></span></p>
+<span id="line-4" class="anchor"></span>"
+
+======================================================================
+FAIL: parser.wiki: close open inline tag when block close
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_parser_wiki.py", line 243, in testCloseOneInline
+    'Expected "%(expected)s" but got "%(result)s"' % locals())
+  File "/usr/lib/python2.3/unittest.py", line 278, in failUnless
+    if not expr: raise self.failureException, msg
+AssertionError: Expected "<p>text<strong>text\s*</strong></p>" but got "<span id="line-1" class="anchor"></span><p>text<strong>text <span id="line-2" class="anchor"></span></strong></p>
+"
+
+======================================================================
+FAIL: parser.wiki: ignore white space around heading text
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_parser_wiki.py", line 117, in testIgnoreWhiteSpaceAroundHeadingText
+    'Expected "%(expected)s" but got "%(result)s"' % locals())
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: Expected "<span id="line-1" class="anchor"></span>
+<h1 id="head-c5ebc9c33963f7fc8730f19ee235cb34a6daa3a0">head</h1>
+
+" but got "<span id="line-1" class="anchor"></span>
+<h1 id="head-c5ebc9c33963f7fc8730f19ee235cb34a6daa3a0">head</h1>
+
+<span id="line-2" class="anchor"></span>"
+
+======================================================================
+FAIL: wikiutil: good system page names accepted, bad rejected
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_wikiutil.py", line 34, in testSystemPage
+    '"%(name)s" is NOT a system page' % locals())
+  File "/usr/lib/python2.3/unittest.py", line 274, in failIf
+    if expr: raise self.failureException, msg
+AssertionError: "FrontPage" is NOT a system page
+
+----------------------------------------------------------------------
+Ran 202 tests in 8.352s
+
+FAILED (failures=51, errors=5)

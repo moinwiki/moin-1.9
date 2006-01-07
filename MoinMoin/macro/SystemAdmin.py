@@ -17,9 +17,10 @@ Dependencies = ["time"]
 
 def execute(macro, args):
     _ = macro.request.getText
-
-    # do not show system admin to not admin users
-    if not macro.request.user.may.admin(macro.formatter.page.page_name):
+    request = macro.request
+    
+    # do not show system admin to users not in superuser list
+    if not request.user.name in request.cfg.superuser:
         return ''
 
     result = []
@@ -27,15 +28,13 @@ def execute(macro, args):
         'attachments': (("File attachment browser"), do_admin_browser),
         'users': (("User account browser"), do_user_browser),
     }
-    choice = macro.request.form.get('sysadm', [None])[0]
+    choice = request.form.get('sysadm', [None])[0]
 
     # TODO: unfinished!
     if 0:
-        result = wikiutil.link_tag(macro.request,
-            "?action=export", _("Download XML export of this wiki"))
+        result = wikiutil.link_tag(request, "?action=export", _("Download XML export of this wiki"))
         if pysupport.isImportable('gzip'):
-            result += " [%s]" % wikiutil.link_tag(macro.request,
-            "?action=export&compression=gzip", "gzip")
+            result += " [%s]" % wikiutil.link_tag(request, "?action=export&compression=gzip", "gzip")
 
     # create menu
     menuitems = [(label, id) for id, (label, handler) in _MENU.items()]
@@ -46,14 +45,13 @@ def execute(macro, args):
             result.append(macro.formatter.text(label))
             result.append(macro.formatter.strong(0))
         else:
-            result.append(wikiutil.link_tag(macro.request,
-                "%s?sysadm=%s" % (macro.formatter.page.page_name, id), label))
+            result.append(wikiutil.link_tag(request, "%s?sysadm=%s" % (macro.formatter.page.page_name, id), label))
         result.append('<br>')
     result.append('<br>')
 
     # add chosen content
     if _MENU.has_key(choice):
-        result.append(_MENU[choice][1](macro.request))
+        result.append(_MENU[choice][1](request))
 
     return macro.formatter.rawHTML(''.join(result))
 

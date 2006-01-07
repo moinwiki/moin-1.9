@@ -36,6 +36,7 @@ CPAN http://search.cpan.org/perldoc?
 NemWiki http://nematologists.org.au/nemwiki
 PostWiki http://www.postwiki.net/
 GentooLinux http://gentoo-wiki.com/
+Ubuntu https://wiki.ubuntu.com/
 CoLinux http://wiki.colinux.org/cgi-bin/
 LinuxMM http://linux-mm.org/
 LinuxNet http://linux-net.osdl.org/index.php/

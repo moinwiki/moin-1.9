@@ -1813,7 +1813,7 @@ Alias       /wiki/     "C:/Python/share/moin/htdocs/"
 <span id="line-12" class="anchor"></span>
 <h2 id="head-060b14babb0736cc50274d972342cb03248902b9">Requirements</h2>
 
-<span id="line-13" class="anchor"></span><span id="line-14" class="anchor"></span><p>Before you install <a class="interwiki" title="MoinMoin" href="http://moinmaster.wikiwikiweb.de/MoinMoin">MoinMoin</a>, make sure you have the necessary infra-structure in place, namely the <em>Internet Information Services</em> webserver (any version should be OK), and a <em>Python</em> installation (version 2.3 is required, the latest python release is recommended). <span id="line-15" class="anchor"></span></p>
+<span id="line-13" class="anchor"></span><span id="line-14" class="anchor"></span><p>Before you install <a class="interwiki" title="MoinMoin" href="http://moinmoin.wikiwikiweb.de/MoinMoin">MoinMoin</a>, make sure you have the necessary infra-structure in place, namely the <em>Internet Information Services</em> webserver (any version should be OK), and a <em>Python</em> installation (version 2.3 is required, the latest python release is recommended). <span id="line-15" class="anchor"></span></p>
 <span id="line-16" class="anchor"></span><p>In the following description, we assume that you have installed or will install things to these locations: <span id="line-17" class="anchor"></span></p>
 <ul>
 <li><p>IIS to its default location <span id="line-18" class="anchor"></span></p>
@@ -1975,7 +1975,7 @@ sitename = u'My Wiki'
 <span id="line-126" class="anchor"></span><ol type="1">
 <li><p>Open IIS Manager by going to Start Menu-&gt;Programs-&gt;Administrative Tools-&gt;IIS Manager. <span id="line-127" class="anchor"></span></p>
 <span id="line-128" class="anchor"></span></li>
-<li class="gap"><p>Go the the <strong>Web Service Extensions</strong> folder. <span id="line-129" class="anchor"></span></p>
+<li class="gap"><p>Go to the <strong>Web Service Extensions</strong> folder. <span id="line-129" class="anchor"></span></p>
 <span id="line-130" class="anchor"></span></li>
 <li class="gap"><p>Under the <strong>Action</strong> menu, select <strong>Add a new Web service extension...</strong>. <span id="line-131" class="anchor"></span></p>
 <span id="line-132" class="anchor"></span></li>
@@ -1986,30 +1986,47 @@ sitename = u'My Wiki'
 <li class="gap"><p>Make sure the <strong>Set extension status to Allowed</strong> checkbox is checked and click the <strong>Ok</strong> button. <span id="line-137" class="anchor"></span></p>
 <span id="line-138" class="anchor"></span></li>
 </ol>
-<p>Under Windows Server 2003, you will also need to give your IUSR_MACHINENAME account Modify access to the mywiki\data and mywiki\underlay sub-directories, as file system permissions are more restricted by default than previous Windows versions. <span id="line-139" class="anchor"></span></p>
-<span id="line-140" class="anchor"></span>
+<p>Another change that may be necessary if you are receiving HTTP Error 403 19 1314 while using IIS 6.0 is to adjust the Identity settings for the Application Pool that is being used by your site.  The following steps assume you are adjusting the Default Web Site. <span id="line-139" class="anchor"></span></p>
+<span id="line-140" class="anchor"></span><ol type="1">
+<li><p>Open IIS Manager by going to Start Menu-&gt;Programs-&gt;Administrative Tools-&gt;IIS Manager. <span id="line-141" class="anchor"></span></p>
+<span id="line-142" class="anchor"></span></li>
+<li class="gap"><p>Go to the <strong>Application Pool</strong> folder. <span id="line-143" class="anchor"></span></p>
+<span id="line-144" class="anchor"></span></li>
+<li class="gap"><p>Select the Application Pool you wish to adjust. (likely <strong>Default<tt></tt>App<tt></tt>Pool</strong> ) When you do this on the right you will see the Application pools for each site on the server.  This will include a Description (likely <strong>Default Application</strong> )and a Path (<strong>&lt;Default Web Site&gt;</strong>).  In this way you can be certain you are adjusting the appropriate Application Pool. <span id="line-145" class="anchor"></span></p>
+<span id="line-146" class="anchor"></span></li>
+<li class="gap"><p>With <strong>Default<tt></tt>App<tt></tt>Pool</strong> still selected right click and select <strong>Properties</strong>. <span id="line-147" class="anchor"></span></p>
+<span id="line-148" class="anchor"></span></li>
+<li class="gap"><p>Select the <strong>Identity</strong> tab and with <strong>Predefined</strong> clicked use the drop down box to change the <strong>Identity</strong> to <strong>Local System</strong> instead of Network Service. <span id="line-149" class="anchor"></span></p>
+<span id="line-150" class="anchor"></span></li>
+</ol>
+<ul>
+<li style="list-style-type:none"><p><em>Please be aware that this is a workaround since you SHOULD set your group settings to allow Network Service to access the cgi scripts.</em> <span id="line-151" class="anchor"></span></p>
+<span id="line-152" class="anchor"></span></li>
+</ul>
+<p>Under Windows Server 2003, you will also need to give your IUSR_MACHINENAME account Modify access to the mywiki\data and mywiki\underlay sub-directories, as file system permissions are more restricted by default than previous Windows versions. <span id="line-153" class="anchor"></span></p>
+<span id="line-154" class="anchor"></span>
 <h2 id="head-086499a2b43629c3fef3b36dc435cff210e32faa">Troubleshooting</h2>
 
-<span id="line-141" class="anchor"></span><span id="line-142" class="anchor"></span><p>If you see an error like "<tt>ImportError:&nbsp;No&nbsp;module&nbsp;named&nbsp;MoinMoin</tt>", it means that python cannot find Moin<tt></tt>Moin. See above for how to add to <tt>sys.path</tt>. <span id="line-143" class="anchor"></span></p>
-<span id="line-144" class="anchor"></span><p>If you see an error like Error 13: Permission Denied, it means that your web user permissions for the files do not have write/modify enabled. <span id="line-145" class="anchor"></span></p>
-<span id="line-146" class="anchor"></span><p>If the page never loads after hitting <tt>Save&nbsp;Changes</tt>, you should check the permissions of the <tt>data</tt> directory.  Make sure the IUSR_COMPUTERNAME user has modify permissions. <span id="line-147" class="anchor"></span></p>
-<span id="line-148" class="anchor"></span><p>If some images like <a href="http://moinmaster.wikiwikiweb.de/InterWiki">InterWiki</a> and <a class="nonexistent" href="http://moinmaster.wikiwikiweb.de/WorldWideWeb">WorldWideWeb</a> don't show up, it could have been because of incorrect permissions or a bad "<tt>url_prefix</tt>" in "<tt>wikiconfig.py</tt>" or the cached pages need to be updated by an Edit or deleting them in the data folder. Or you are using MS IE which has broken CSS :before support - try another browser. <span id="line-149" class="anchor"></span></p>
-<span id="line-150" class="anchor"></span><p>If you see an error message like: <span id="line-151" class="anchor"></span>
-<span id="line-152" class="anchor"></span></p>
+<span id="line-155" class="anchor"></span><span id="line-156" class="anchor"></span><p>If you see an error like "<tt>ImportError:&nbsp;No&nbsp;module&nbsp;named&nbsp;MoinMoin</tt>", it means that python cannot find Moin<tt></tt>Moin. See above for how to add to <tt>sys.path</tt>. <span id="line-157" class="anchor"></span></p>
+<span id="line-158" class="anchor"></span><p>If you see an error like Error 13: Permission Denied, it means that your web user permissions for the files do not have write/modify enabled. <span id="line-159" class="anchor"></span></p>
+<span id="line-160" class="anchor"></span><p>If the page never loads after hitting <tt>Save&nbsp;Changes</tt>, you should check the permissions of the <tt>data</tt> directory.  Make sure the IUSR_COMPUTERNAME user has modify permissions. <span id="line-161" class="anchor"></span></p>
+<span id="line-162" class="anchor"></span><p>If some images like <a href="http://moinmaster.wikiwikiweb.de/InterWiki">InterWiki</a> and <a class="nonexistent" href="http://moinmaster.wikiwikiweb.de/WorldWideWeb">WorldWideWeb</a> don't show up, it could have been because of incorrect permissions or a bad "<tt>url_prefix</tt>" in "<tt>wikiconfig.py</tt>" or the cached pages need to be updated by an Edit or deleting them in the data folder. Or you are using MS IE which has broken CSS :before support - try another browser. <span id="line-163" class="anchor"></span></p>
+<span id="line-164" class="anchor"></span><p>If you see an error message like: <span id="line-165" class="anchor"></span>
+<span id="line-166" class="anchor"></span></p>
 <pre>
 Check your URL regular expressions in the "wikis" list in "farmconfig.py". Content-type: text/html;charset=utf-8
-<span id="line-153" class="anchor"></span>MoinMoin Configuration Error
-<span id="line-154" class="anchor"></span>Could not find a match for url: "servername/wikiname/moin.cgi?
-<span id="line-155" class="anchor"></span>Check your URL regular expressions in the "wikis" list in "farmconfig.py".
-<span id="line-156" class="anchor"></span></pre>
-<span id="line-157" class="anchor"></span><span id="line-158" class="anchor"></span><p>and you don't intend on using a serverfarm, remove the farmconfig.py and farmconfig.pyc files and try again.  The error message shouldn't appear when you refresh the page.  <span id="line-159" class="anchor"></span></p>
-<span id="line-160" class="anchor"></span><p>If you are using URLScan, you might have to add the following setting in the file <tt>%SystemRoot%\system32\inetsrv\urlscan\urlscan.ini</tt>: 
-<span id="line-161" class="anchor"></span></p>
+<span id="line-167" class="anchor"></span>MoinMoin Configuration Error
+<span id="line-168" class="anchor"></span>Could not find a match for url: "servername/wikiname/moin.cgi?
+<span id="line-169" class="anchor"></span>Check your URL regular expressions in the "wikis" list in "farmconfig.py".
+<span id="line-170" class="anchor"></span></pre>
+<span id="line-171" class="anchor"></span><span id="line-172" class="anchor"></span><p>and you don't intend on using a serverfarm, remove the farmconfig.py and farmconfig.pyc files and try again.  The error message shouldn't appear when you refresh the page.  <span id="line-173" class="anchor"></span></p>
+<span id="line-174" class="anchor"></span><p>If you are using URLScan, you might have to add the following setting in the file <tt>%SystemRoot%\system32\inetsrv\urlscan\urlscan.ini</tt>: 
+<span id="line-175" class="anchor"></span></p>
 <pre>
 [options]
-<span id="line-162" class="anchor"></span>AllowHighBitCharacters=1
-<span id="line-163" class="anchor"></span></pre>
-<span id="line-164" class="anchor"></span><span id="bottom_Include_HelpOnInstalling/InternetInformationServer" class="anchor"></span>
+<span id="line-176" class="anchor"></span>AllowHighBitCharacters=1
+<span id="line-177" class="anchor"></span></pre>
+<span id="line-178" class="anchor"></span><span id="bottom_Include_HelpOnInstalling/InternetInformationServer" class="anchor"></span>
 </div>
  <span id="line-75" class="anchor"></span></p>
 <hr class="hr2">
