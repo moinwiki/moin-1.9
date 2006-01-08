@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-08 22:34:35 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-371
+
+    Summary:
+      rst parser: fixed docutils version check
+    Revision:
+      moin--main--1.5--patch-371
+
+    rst parser: fixed docutils version check
+    
+
+    modified files:
+     ChangeLog MoinMoin/parser/rst.py
+
+
 2006-01-08 12:30:17 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-370
 
     Summary:
