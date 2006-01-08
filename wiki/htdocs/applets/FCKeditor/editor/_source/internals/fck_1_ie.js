@@ -25,22 +25,21 @@ FCK.Description = "FCKeditor for Internet Explorer 5.5+" ;
 // errors when using a differente BaseHref.
 FCK._BehaviorsStyle =
 	'<style type="text/css" _fcktemp="true"> \
-		INPUT		{ behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/hiddenfield.htc) ; } \
-		INPUT		{ behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; } \
-		TEXTAREA	{ behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; } \
-		SELECT		{ behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; }' ;
+		INPUT { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/hiddenfield.htc) ; } ' ;
 
 if ( FCKConfig.ShowBorders )
 	FCK._BehaviorsStyle += 'TABLE { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/showtableborders.htc) ; }' ;
 
+// Disable resize handlers.
+var sNoHandlers = 'INPUT, TEXTAREA, SELECT, .FCK__Anchor, .FCK__PageBreak' ;
+
 if ( FCKConfig.DisableImageHandles )
-	FCK._BehaviorsStyle += 'IMG { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; }' ;
+	sNoHandlers += ', IMG' ;
 
 if ( FCKConfig.DisableTableHandles )
-	FCK._BehaviorsStyle += 'TABLE { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; }' ;
+	sNoHandlers += ', TABLE' ;
 
-// Disable anchors handles
-FCK._BehaviorsStyle += '.FCK__Anchor { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; }' ;
+FCK._BehaviorsStyle += sNoHandlers + ' { behavior: url(' + FCKConfig.FullBasePath + 'css/behaviors/disablehandles.htc) ; }' ;
 
 FCK._BehaviorsStyle += '</style>' ;
 
@@ -74,7 +73,6 @@ function Doc_OnKeyDown()
 {
 	var e = FCK.EditorWindow.event ;
 
-//	FCKDebug.Output( 'KeyCode: ' + e.keyCode ) ;
 
 	switch ( e.keyCode )
 	{
@@ -99,7 +97,17 @@ function Doc_OnKeyDown()
 				return false ;
 			}
 			break ;
-			
+		
+		case 8 :	// BACKSPACE
+			// We must delete a control selection by code and cancels the 
+			// keystroke, otherwise IE will execute the browser's "back" button.
+			if ( FCKSelection.GetType() == 'Control' )
+			{
+				FCKSelection.Delete() ;
+				return false ;
+			}
+			break ;
+		
 		case 9 :	// TAB
 			if ( FCKConfig.TabSpaces > 0 && !(e.ctrlKey || e.altKey || e.shiftKey) )
 			{
@@ -205,13 +213,8 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 {
 	if ( forceWYSIWYG || FCK.EditMode == FCK_EDITMODE_WYSIWYG )
 	{
-		// TODO: Wait stable version and remove the following commented lines.
-		// In IE, if you do document.body.innerHTML = '<p><hr></p>' it throws a "Unknow runtime error".
-		// To solve it we must add a fake (safe) tag before it, and then remove it.
-		// this.EditorDocument.body.innerHTML = '<div id="__fakeFCKRemove__">&nbsp;</div>' + html.replace( FCKRegexLib.AposEntity, '&#39;' ) ;
-		// this.EditorDocument.getElementById('__fakeFCKRemove__').removeNode(true) ;
-
 		html = FCKConfig.ProtectedSource.Protect( html ) ;
+		html = FCK.ProtectUrls( html ) ;
 
 		var sHtml ;
 
@@ -245,7 +248,8 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 			sHtml += '</head><body>' + html  + '</body></html>' ;
 		}
 
-		this.EditorDocument.open( '', '_self', '', true ) ;
+//		this.EditorDocument.open( '', '_self', '', true ) ;		// This one opens popups in IE 5.5 - BUG 1204220 (I was not able to reproduce the problem).
+		this.EditorDocument.open( '', 'replace' ) ;
 		this.EditorDocument.write( sHtml ) ;
 		this.EditorDocument.close() ;
 
@@ -253,13 +257,6 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 		this.EditorDocument.body.contentEditable = true ;
 
 		FCK.OnAfterSetHTML() ;
-
-		// TODO: Wait stable version and remove the following commented lines.
-//		this.EditorDocument.body.innerHTML = '' ;
-//		if ( html && html.length > 0 )
-//			this.EditorDocument.write( html ) ;
-
-//		this.EditorDocument.dir = FCKConfig.ContentLangDirection ;
 	}
 	else
 		document.getElementById('eSourceField').value = html ;
@@ -267,6 +264,9 @@ FCK.SetHTML = function( html, forceWYSIWYG )
 
 FCK.InsertHtml = function( html )
 {
+	html = FCKConfig.ProtectedSource.Protect( html ) ;
+	html = FCK.ProtectUrls( html ) ;
+
 	FCK.Focus() ;
 
 	FCKUndo.SaveUndoStep() ;
@@ -278,6 +278,15 @@ FCK.InsertHtml = function( html )
 	if ( oSel.type.toLowerCase() != "none" )
 		oSel.clear() ;
 
-	// Inset the HTML.
+	// Insert the HTML.
 	oSel.createRange().pasteHTML( html ) ;
+}
+
+FCK.SetInnerHtml = function( html )		// IE Only
+{
+	var oDoc = FCK.EditorDocument ;
+	// Using the following trick, any comment in the begining of the HTML will
+	// be preserved.
+	oDoc.body.innerHTML = '<div id="__fakeFCKRemove__">&nbsp;</div>' + html ;
+	oDoc.getElementById('__fakeFCKRemove__').removeNode( true ) ;
 }

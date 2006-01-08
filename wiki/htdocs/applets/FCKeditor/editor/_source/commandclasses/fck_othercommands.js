@@ -115,6 +115,8 @@ FCKFormatBlockCommand.prototype.Execute = function( formatName )
 {
 	if ( formatName == null || formatName == '' )
 		FCK.ExecuteNamedCommand( 'FormatBlock', '<P>' ) ;
+	else if ( formatName == 'div' && FCKBrowserInfo.IsGecko )
+		FCK.ExecuteNamedCommand( 'FormatBlock', 'div' ) ;
 	else
 		FCK.ExecuteNamedCommand( 'FormatBlock', '<' + formatName + '>' ) ;
 }
@@ -252,4 +254,30 @@ FCKRedoCommand.prototype.GetState = function()
 		return ( FCKUndo.CheckRedoState() ? FCK_TRISTATE_OFF : FCK_TRISTATE_DISABLED ) ;
 	else
 		return FCK.GetNamedCommandState( 'Redo' ) ;
+}
+
+// ### Page Break
+var FCKPageBreakCommand = function()
+{
+	this.Name = 'PageBreak' ;
+}
+
+FCKPageBreakCommand.prototype.Execute = function()
+{
+//	var e = FCK.EditorDocument.createElement( 'CENTER' ) ;
+//	e.style.pageBreakAfter = 'always' ;
+
+	// Tidy was removing the empty CENTER tags, so the following solution has 
+	// been found. It also validates correctly as XHTML 1.0 Strict.
+	var e = FCK.EditorDocument.createElement( 'DIV' ) ;
+	e.style.pageBreakAfter = 'always' ;
+	e.innerHTML = '<span style="DISPLAY:none">&nbsp;</span>' ;
+	
+	var oFakeImage = FCKDocumentProcessors_CreateFakeImage( 'FCK__PageBreak', e ) ;
+	oFakeImage	= FCK.InsertElement( oFakeImage ) ;
+}
+
+FCKPageBreakCommand.prototype.GetState = function()
+{
+	return 0 ; // FCK_TRISTATE_OFF
 }

@@ -35,15 +35,17 @@ FCK.GetNamedCommandState = function( commandName )
 // Named commands to be handled by this browsers specific implementation.
 FCK.RedirectNamedCommands = 
 {
-	// START iCM MODIFICATIONS
-	// Include list functions so we can ensure content is wrapped
-	// with P tags if not using BRs on carriage return, etc
 	Print	: true,
 	Paste	: true,
 	Cut		: true,
-	Copy	: true,
+	Copy	: true
+	// START iCM MODIFICATIONS
+	// Include list functions so we can ensure content is wrapped
+	// with P tags if not using BRs on carriage return, etc
+	/*
 	InsertOrderedList	: true,
 	InsertUnorderedList	: true
+	*/
 	// END iCM MODIFICATIONS
 }
 
@@ -56,19 +58,20 @@ FCK.ExecuteRedirectedNamedCommand = function( commandName, commandParameter )
 			FCK.EditorWindow.print() ;
 			break ;
 		case 'Paste' :
-			try			{ if ( FCK.Paste() ) FCK._BaseExecuteNamedCommand( 'Paste' ) ; }
-			catch (e)	{ alert( FCKLang.PasteErrorPaste ) ; }
+			try			{ if ( FCK.Paste() ) FCK.ExecuteNamedCommand( 'Paste', null, true ) ; }
+			catch (e)	{ alert(FCKLang.PasteErrorPaste) ; }
 			break ;
 		case 'Cut' :
-			try			{ FCK._BaseExecuteNamedCommand( 'Cut' ) ; }
-			catch (e)	{ alert( FCKLang.PasteErrorCut ) ; }
+			try			{ FCK.ExecuteNamedCommand( 'Cut', null, true ) ; }
+			catch (e)	{ alert(FCKLang.PasteErrorCut) ; }
 			break ;
 		case 'Copy' :
-			try			{ FCK._BaseExecuteNamedCommand( 'Copy' ) ; }
-			catch (e)	{ alert( FCKLang.PasteErrorCopy ) ; }
+			try			{ FCK.ExecuteNamedCommand( 'Copy', null, true ) ; }
+			catch (e)	{ alert(FCKLang.PasteErrorCopy) ; }
 			break ;
 			
 		// START iCM MODIFICATIONS
+		/*
 		case 'InsertOrderedList'   :
 		case 'InsertUnorderedList' :
 		
@@ -91,6 +94,7 @@ FCK.ExecuteRedirectedNamedCommand = function( commandName, commandParameter )
 			
 			FCK.Events.FireEvent( 'OnSelectionChange' ) ;
 			break ;
+		*/
 		// END iCM MODIFICATIONS
 			
 		default :
@@ -134,18 +138,14 @@ FCK.Paste = function()
 // selected content if any.
 FCK.InsertHtml = function( html )
 {
+	html = FCKConfig.ProtectedSource.Protect( html ) ;
+	html = FCK.ProtectUrls( html ) ;
+
 	// Delete the actual selection.
 	var oSel = FCKSelection.Delete() ;
 	
-//	var oContainer	= oSel.getRangeAt(0).startContainer ;
-//	var iOffSet		= oSel.getRangeAt(0).startOffset ;
-	
 	// Get the first available range.
 	var oRange = oSel.getRangeAt(0) ;
-	
-//	var oRange = this.EditorDocument.createRange() ;
-//	oRange.setStart( oContainer, iOffSet ) ;
-//	oRange.setEnd( oContainer, iOffSet ) ;
 	
 	// Create a fragment with the input HTML.
 	var oFragment = oRange.createContextualFragment( html ) ;
@@ -157,13 +157,9 @@ FCK.InsertHtml = function( html )
 	oRange.insertNode(oFragment) ;
 	
 	// Set the cursor after the inserted fragment.
-	oRange.setEndAfter( oLastNode ) ;
-	oRange.setStartAfter( oLastNode ) ;
+	FCKSelection.SelectNode( oLastNode ) ;
+	FCKSelection.Collapse( false ) ;
 	
-	oSel.removeAllRanges() ;
-	oSel = FCK.EditorWindow.getSelection() ;
-	oSel.addRange( oRange ) ;
-		
 	this.Focus() ;
 }
 
@@ -179,8 +175,8 @@ FCK.InsertElement = function( element )
 	oRange.insertNode( element ) ;
 	
 	// Set the cursor after the inserted fragment.
-	oRange.setEndAfter( element ) ;
-	oRange.setStartAfter( element ) ;
+	FCKSelection.SelectNode( element ) ;
+	FCKSelection.Collapse( false ) ;
 
 	this.Focus() ;
 }
@@ -236,7 +232,7 @@ FCK.CreateLink = function( url )
 }
 
 // START iCM Modifications
-
+/*
 // Ensure that behaviour of the ENTER key or the list toolbar button works correctly for a list item.
 // ENTER in empty list item at top of list should result in the empty list item being
 // removed and selection being moved out of the list into a P tag above it.
@@ -460,6 +456,6 @@ FCK.BackSpace = function()
 	}	
 	return true ; // Let default processing do its stuff
 }
-
+*/
 // END iCM Modifications
 

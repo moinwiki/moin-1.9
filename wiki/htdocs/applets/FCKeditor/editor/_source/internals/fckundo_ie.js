@@ -82,7 +82,8 @@ FCKUndo._ApplyUndoLevel = function(level)
 		return ;
 
 	// Update the editor contents with that step data.
-	FCK.EditorDocument.body.innerHTML = oData[0] ;
+	FCK.SetInnerHtml( oData[0] ) ;
+//	FCK.EditorDocument.body.innerHTML = oData[0] ;
 
 	if ( oData[1] ) 
 	{

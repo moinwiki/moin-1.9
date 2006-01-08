@@ -29,10 +29,14 @@ var FCKStyleCommand = function()
 
 FCKStyleCommand.prototype.Execute = function( styleName, styleComboItem )
 {
+	FCKUndo.SaveUndoStep() ;
+
 	if ( styleComboItem.Selected )
 		styleComboItem.Style.RemoveFromSelection() ;
 	else
 		styleComboItem.Style.ApplyToSelection() ;
+
+	FCKUndo.SaveUndoStep() ;
 
 	FCK.Focus() ;
 	

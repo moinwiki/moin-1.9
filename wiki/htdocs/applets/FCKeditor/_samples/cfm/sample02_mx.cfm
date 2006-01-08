@@ -1,9 +1,22 @@
 <cfsetting enablecfoutputonly="true">
-<!--- @Packager.Header
-<FileDescription>
-	Sample page for ColdFusion MX.
-</FileDescription>
-<Author name="Hendrik Kramer" email="hk@lwd.de" />
+<!---
+ * FCKeditor - The text editor for internet
+ * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * 
+ * Licensed under the terms of the GNU Lesser General Public License:
+ * 		http://www.opensource.org/licenses/lgpl-license.php
+ * 
+ * For further information visit:
+ * 		http://www.fckeditor.net/
+ * 
+ * "Support Open Source software. What about a donation today?"
+ * 
+ * File Name: sample02_mx.cfm
+ * 	Sample page for ColdFusion MX.
+ * 
+ * File Authors:
+ * 		Hendrik Kramer (hk@lwd.de)
+ * 		Wim Lemmens (didgiman@gmail.com)
 --->
 
 <!--- ::
@@ -14,11 +27,16 @@
 	  * <cfset APPLICATION.userFilesPath = "/UserFiles/">
 	  * OR:
 	  * <cfset SERVER.userFilesPath = "/UserFiles/">
+	  * OR:
+	  * <cfset request.FCKeditor.userFilesPath = "/UserFiles/">
+	  * OR:
+	  * <cfset application.FCKeditor.userFilesPath = "/UserFiles/">
+	  * OR:
+	  * <cfset server.FCKeditor.userFilesPath = "/UserFiles/">
 	  *
 	  * Note #1: Do _not_ set the physical directory on your server, only a path relative to your current webroot
 	  * Note #2: Directories will be automatically created
 	  :: --->
-<cfset APPLICATION.userFilesPath = "/UserFiles/">
 
 <cfoutput>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -35,32 +53,25 @@
 This sample displays a normal HTML form with a FCKeditor with full features enabled; invoked by a ColdFusion Component.<br>
 ColdFusion is a registered trademark and product of <a href="http://www.macromedia.com/software/coldfusion/" target="_blank">Macromedia, Inc</a>.
 <hr>
+
 <form method="POST" action="#cgi.script_name#">
 </cfoutput>
 
 <cfif listFirst( server.coldFusion.productVersion ) LT 6>
-	<cfoutput><br><em style="color: red;">This sample work only with a ColdFusion MX server and higher, because it uses some advantages of this version.</em></cfoutput>
+	<cfoutput><br><em style="color: red;">This sample works only with a ColdFusion MX server and higher, because it uses some advantages of this version.</em></cfoutput>
 	<cfabort>
 </cfif>
 
-<!--- 
-	Note: You must first create a mapping in your coldfusion administrator to call the component fckeditor.cfc
-	in the root folder of this zip archive.
-	A relative path is not allowed. See your coldfusion documentation for more information.
- --->
 <cfscript>
-	// create a pseudo mapping for this demo only!
-	factory = createObject('java','coldfusion.server.ServiceFactory');
-	mappings = factory.runtimeservice.getMappings();
-	mappings['/fckeditor2'] = expandPath("../.."); // fckeditor.cfc resides two paths higher than this sample file.
-	// end create a pseudo mapping for this demo only!
+	// Calculate basepath for FCKeditor. It's in the folder right above _samples
+	basePath = Left(cgi.script_name, FindNoCase('_samples', cgi.script_name)-1);
 
-	fckEditor = createObject("component", "/fckeditor2/fckeditor");
+	fckEditor = createObject("component", "#basePath#fckeditor");
 	fckEditor.instanceName	= "myEditor";
 	fckEditor.value			= 'This is some sample text. You are using <a href="http://fckeditor.net/" target="_blank">FCKeditor</a>.';
-	fckEditor.basePath		= "/fckeditor/";
+	fckEditor.basePath		= basePath;
 	fckEditor.width			= "100%";
-	fckEditor.height		= 200;
+	fckEditor.height		= 300;
 	fckEditor.create(); // create the editor.
 </cfscript>
 

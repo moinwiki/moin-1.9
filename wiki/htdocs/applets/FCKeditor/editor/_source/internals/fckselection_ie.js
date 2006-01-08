@@ -133,7 +133,7 @@ FCKSelection.Delete = function()
 	return oSel ;
 }
 // START iCM Modifications
-
+/*
 // Move the cursor position (the selection point) to a specific offset within a specific node
 // If no offset specified, the start of the node is assumed
 FCKSelection.SetCursorPosition = function ( oNode, nOffset )
@@ -145,6 +145,6 @@ FCKSelection.SetCursorPosition = function ( oNode, nOffset )
 	
 	oNode.scrollIntoView( false );	
 }
-
+*/
 // END iCM Modifications
 

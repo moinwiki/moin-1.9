@@ -1,10 +1,23 @@
 <cfsetting enablecfoutputonly="true" showdebugoutput="false">
-<!--- @Packager.Header
-<FileDescription>
-	Sample page for ColdFusion.
-</FileDescription>
-<Author name="Hendrik Kramer" email="hk@lwd.de" />
-<Author name="Mark Woods" email="mark@thickpaddy.com" />
+<!---
+ * FCKeditor - The text editor for internet
+ * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * 
+ * Licensed under the terms of the GNU Lesser General Public License:
+ * 		http://www.opensource.org/licenses/lgpl-license.php
+ * 
+ * For further information visit:
+ * 		http://www.fckeditor.net/
+ * 
+ * "Support Open Source software. What about a donation today?"
+ * 
+ * File Name: sample01.cfm
+ * 	Sample page for ColdFusion.
+ * 
+ * File Authors:
+ * 		Hendrik Kramer (hk@lwd.de)
+ * 		Mark Woods (mark@thickpaddy.com)
+ * 		Wim Lemmens (didgiman@gmail.com)
 --->
 
 <cfoutput>
@@ -29,7 +42,7 @@ ColdFusion is a registered trademark and product of <a href="http://www.macromed
 
 <cfmodule 
 	template="../../fckeditor.cfm"
-	basePath="/fckeditor/"
+	basePath="#Left(cgi.script_name, FindNoCase('_samples', cgi.script_name)-1)#"
 	instanceName="myEditor"
 	value='This is some sample text. You are using <a href="http://fckeditor.net/" target="_blank">FCKeditor</a>.'
 	width="100%"

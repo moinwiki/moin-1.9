@@ -15,6 +15,7 @@
  * 
  * File Authors:
  * 		Taehwan Kwag (thkwag@nate.com)
+ * 		Hyung-chae, Kim (chaeya@gmail.com)
  */
 
 var FCKLang =
@@ -43,8 +44,8 @@ RemoveLink			: "링크 삭제",
 Anchor				: "책갈피 삽입/변경",
 InsertImageLbl		: "이미지",
 InsertImage			: "이미지 삽입/변경",
-InsertFlashLbl		: "Flash",	//MISSING
-InsertFlash			: "Insert/Edit Flash",	//MISSING
+InsertFlashLbl		: "플래쉬",
+InsertFlash			: "플래쉬 삽입/변경",
 InsertTableLbl		: "표",
 InsertTable			: "표 삽입/변경",
 InsertLineLbl		: "수평선",
@@ -85,6 +86,8 @@ Find				: "찾기",
 Replace				: "바꾸기",
 SpellCheck			: "철자검사",
 UniversalKeyboard	: "다국어 입력기",
+PageBreakLbl		: "Page Break",	//MISSING
+PageBreak			: "Insert Page Break",	//MISSING
 
 Form			: "폼",
 Checkbox		: "체크박스",
@@ -106,10 +109,11 @@ InsertCell			: "셀 삽입",
 DeleteCells			: "셀 삭제",
 MergeCells			: "셀 합치기",
 SplitCell			: "셀 나누기",
+TableDelete			: "Delete Table",	//MISSING
 CellProperties		: "셀 속성",
 TableProperties		: "표 속성",
 ImageProperties		: "이미지 속성",
-FlashProperties		: "Flash Properties",	//MISSING
+FlashProperties		: "플래쉬 속성",
 
 AnchorProp			: "책갈피 속성",
 ButtonProp			: "버튼 속성",
@@ -134,6 +138,8 @@ UnknownCommand		: "알수없는 기능입니다. : \"%1\"",
 NotImplemented		: "기능이 실행되지 않았습니다.",
 UnknownToolbarSet	: "툴바 설정이 없습니다. : \"%1\"",
 NoActiveX			: "You browser's security settings could limit some features of the editor. You must enable the option \"Run ActiveX controls and plug-ins\". You may experience errors and notice missing features.",	//MISSING
+BrowseServerBlocked : "The resources browser could not be opened. Make sure that all popup blockers are disabled.",	//MISSING
+DialogBlocked		: "It was not possible to open the dialog window. Make sure all popup blockers are disabled.",	//MISSING
 
 // Dialogs
 DlgBtnOK			: "예",
@@ -142,8 +148,8 @@ DlgBtnClose			: "닫기",
 DlgBtnBrowseServer	: "서버 보기",
 DlgAdvancedTag		: "자세히",
 DlgOpOther			: "&lt;기타&gt;",
-DlgInfoTab			: "Info",	//MISSING
-DlgAlertUrl			: "Please insert the URL",	//MISSING
+DlgInfoTab			: "정보",
+DlgAlertUrl			: "URL을 입력하십시요",
 
 // General Dialogs Labels
 DlgGenNotSet		: "&lt;설정되지 않음&gt;",
@@ -191,14 +197,14 @@ DlgImgAlertUrl		: "이미지 URL을 입력하십시요",
 DlgImgLinkTab		: "링크",
 
 // Flash Dialog
-DlgFlashTitle		: "Flash Properties",	//MISSING
-DlgFlashChkPlay		: "Auto Play",	//MISSING
-DlgFlashChkLoop		: "Loop",	//MISSING
-DlgFlashChkMenu		: "Enable Flash Menu",	//MISSING
-DlgFlashScale		: "Scale",	//MISSING
-DlgFlashScaleAll	: "Show all",	//MISSING
-DlgFlashScaleNoBorder	: "No Border",	//MISSING
-DlgFlashScaleFit	: "Exact Fit",	//MISSING
+DlgFlashTitle		: "플래쉬 등록정보",
+DlgFlashChkPlay		: "자동재생",
+DlgFlashChkLoop		: "반복",
+DlgFlashChkMenu		: "플래쉬메뉴 가능",
+DlgFlashScale		: "영역",
+DlgFlashScaleAll	: "모두보기",
+DlgFlashScaleNoBorder	: "경계선없음",
+DlgFlashScaleFit	: "영역자동조절",
 
 // Link Dialog
 DlgLnkWindowTitle	: "링크",
@@ -278,6 +284,7 @@ DlgTableHeight		: "높이",
 DlgTableCellSpace	: "셀 간격",
 DlgTableCellPad		: "셀 여백",
 DlgTableCaption		: "캡션",
+DlgTableSummary		: "Summary",	//MISSING
 
 // Table Cell Dialog
 DlgCellTitle		: "셀 설정",
@@ -328,10 +335,10 @@ PasteErrorCopy	: "브라우저의 보안설정때문에 복사하기 기능을 �
 PasteAsText		: "텍스트로 붙여넣기",
 PasteFromWord	: "MS Word 형식에서 붙여넣기",
 
-DlgPasteMsg2	: "Please paste inside the following box using the keyboard (<STRONG>Ctrl+V</STRONG>) and hit <STRONG>OK</STRONG>.",	//MISSING
-DlgPasteIgnoreFont		: "Ignore Font Face definitions",	//MISSING
-DlgPasteRemoveStyles	: "Remove Styles definitions",	//MISSING
-DlgPasteCleanBox		: "Clean Up Box",	//MISSING
+DlgPasteMsg2	: "키보드의 (<STRONG>Ctrl+V</STRONG>) 를 이용해서 상자안에 붙여넣고 <STRONG>OK</STRONG> 를 누르세요.",
+DlgPasteIgnoreFont		: "폰트 설정 무시",
+DlgPasteRemoveStyles	: "스타일 정의 제거",
+DlgPasteCleanBox		: "글상자 제거",
 
 
 // Color Picker

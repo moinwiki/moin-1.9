@@ -90,8 +90,15 @@ FCKTools.CreateXmlObject = function( object )
 	}
 	return null ;
 }
-// START iCM Modifications
 
+FCKTools.DisableSelection = function( element )
+{
+	element.style.MozUserSelect	= 'none' ;	// Gecko only.
+	// element.style.userSelect	= 'none' ;	// CSS3 (not supported yet).
+}
+
+// START iCM Modifications
+/*
 // Starting at the specified node, find the first inline node of the sequence
 // For example, assume we have the following elements : <p>Some text <span>some more text</span> and <a href="href">some link</a> yet some more text</p>
 // If the "some link" text node is the one specified, then the "Some text" text node will be the first inline node returned.
@@ -249,6 +256,6 @@ FCKTools.ReplaceNodes = function( oParentBlockNode, oStartNode, oEndNode, oFragm
 	oRange.deleteContents() ;
 	oRange.insertNode( oFragment ) ;
 }
-
+*/
 // END iCM Modifications
 

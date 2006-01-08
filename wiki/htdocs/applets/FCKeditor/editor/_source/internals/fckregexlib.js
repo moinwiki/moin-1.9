@@ -23,13 +23,16 @@ var FCKRegexLib = new Object() ;
 FCKRegexLib.AposEntity		= /&apos;/gi ;
 
 // Used by the Styles combo to identify styles that can't be applied to text.
-FCKRegexLib.ObjectElements	= /^(?:IMG|TABLE|TR|TD|INPUT|SELECT|TEXTAREA|HR|OBJECT)$/i ;
+FCKRegexLib.ObjectElements	= /^(?:IMG|TABLE|TR|TD|TH|INPUT|SELECT|TEXTAREA|HR|OBJECT|A|UL|OL|LI)$/i ;
 
 // START iCM MODIFICATIONS
 // Added TABLE and CAPTION to the block elements for ENTER key handling
 // Block Elements.
+/*
 FCKRegexLib.BlockElements	= /^(?:P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|OL|UL|LI|TD|TABLE|CAPTION)$/i ;
+*/
 // END iCM MODIFICATIONS
+FCKRegexLib.BlockElements	= /^(?:P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|OL|UL|LI|TD|TH)$/i ;
 
 // Elements marked as empty "Empty" in the XHTML DTD.
 FCKRegexLib.EmptyElements	= /^(?:BASE|META|LINK|HR|BR|PARAM|IMG|AREA|INPUT)$/i ;
@@ -53,7 +56,7 @@ FCKRegexLib.HeadCloser		= /<\/head\s*>/i ;
 FCKRegexLib.TableBorderClass = /\s*FCK__ShowTableBorders\s*/ ;
 
 // Validate element names.
-FCKRegexLib.ElementName = /^[A-Za-z_:][\w.-:]*$/ ;
+FCKRegexLib.ElementName = /^[A-Za-z_:][\w.\-:]*$/ ;
 
 // Used in conjuction with the FCKConfig.ForceSimpleAmpersand configuration option.
 FCKRegexLib.ForceSimpleAmpersand = /___FCKAmp___/g ;
@@ -66,6 +69,7 @@ FCKRegexLib.EmptyParagraph = /^<(p|div)>\s*<\/\1>$/i ;
 FCKRegexLib.TagBody = /></ ;
 
 // START iCM MODIFICATIONS
+/*
 // HTML table cell elements
 FCKRegexLib.TableCellElements	= /^(?:TD|TH)$/i ;
 // Block elements that can themselves contain block elements - used within the FCKTools.SplitNode
@@ -77,9 +81,18 @@ FCKRegexLib.TableBlockElements	= /^(?:BODY|DIV|LI|TD|TH)$/i ;
 FCKRegexLib.ListElements	= /^(?:OL|UL)$/i ;
 // Used to remove empty tags after the split process used on ENTER key press
 FCKRegexLib.EmptyElement = /<(P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|SPAN|A)[^\>]*>\s*<\/\1>/gi ;
+*/
 // END iCM MODIFICATIONS
 
 FCKRegexLib.StrongOpener = /<STRONG([ \>])/gi ;
 FCKRegexLib.StrongCloser = /<\/STRONG>/gi ;
 FCKRegexLib.EmOpener = /<EM([ \>])/gi ;
 FCKRegexLib.EmCloser = /<\/EM>/gi ;
+
+FCKRegexLib.GeckoEntitiesMarker = /#\?-\:/g ;
+
+FCKRegexLib.ProtectUrlsAApo		= /(<a\s.*?href=)("|')(.+?)\2/gi ;
+FCKRegexLib.ProtectUrlsANoApo	= /(<a\s.*?href=)([^"'][^ >]+)/gi ;
+
+FCKRegexLib.ProtectUrlsImgApo	= /(<img\s.*?src=)("|')(.+?)\2/gi ;
+FCKRegexLib.ProtectUrlsImgNoApo	= /(<img\s.*?src=)([^"'][^ >]+)/gi ;
