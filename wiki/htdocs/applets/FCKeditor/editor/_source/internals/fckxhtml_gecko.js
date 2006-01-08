@@ -23,15 +23,10 @@ FCKXHtml._GetMainXmlString = function()
 	// Create the XMLSerializer.
 	var oSerializer = new XMLSerializer() ;
 
-	if ( FCKConfig.ProcessHTMLEntities )
-	{
-		// Return the serialized XML as a string.
-		// Due to a BUG on Gecko, the special chars sequence "#?-:" must be replaced with "&"
-		// for the XHTML entities.
-		return oSerializer.serializeToString( this.MainNode ).replace( FCKXHtmlEntities.GeckoEntitiesMarkerRegex, '&' ) ;
-	}
-	else
-		return oSerializer.serializeToString( this.MainNode ) ;
+	// Return the serialized XML as a string.
+	// Due to a BUG on Gecko, the special chars sequence "#?-:" must be replaced with "&"
+	// for the XHTML entities.
+	return oSerializer.serializeToString( this.MainNode ).replace( FCKRegexLib.GeckoEntitiesMarker, '&' ) ;
 }
 
 // There is a BUG on Gecko... createEntityReference returns null.
@@ -54,8 +49,8 @@ FCKXHtml._AppendAttributes = function( xmlNode, htmlNode, node )
 			var sAttName = oAttribute.nodeName.toLowerCase() ;
 			var sAttValue ;
 
-			// The "_fckxhtmljob" attribute is used to mark the already processed elements.
-			if ( sAttName == '_fckxhtmljob' )
+			// Ignore any attribute starting with "_fck".
+			if ( sAttName.startsWith( '_fck' ) )
 				continue ;
 			// There is a bug in Mozilla that returns '_moz_xxx' attributes as specified.
 			else if ( sAttName.indexOf( '_moz' ) == 0 )

@@ -1,6 +1,13 @@
 MoinMoin Version History
 ========================
 
+Version 1.5.current:
+  Fixes:
+    * Fixed rst parser docutils version check
+
+  Other changes:
+    * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
+
 Version 1.5.0:
   Please completely read CHANGES text until you reach the version you were
   using until now. Otherwise you might miss some important upgrading and

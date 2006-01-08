@@ -47,7 +47,7 @@ function InsertHTML()
 	if ( oEditor.EditMode == FCK_EDITMODE_WYSIWYG )
 	{
 		// Insert the desired HTML.
-		oEditor.InsertHtml( '- This is some <b>sample</b> HTML -' ) ;
+		oEditor.InsertHtml( '- This is some <a href="/Test1.html">sample</a> HTML -' ) ;
 	}
 	else
 		alert( 'You must be on WYSIWYG mode!' ) ;
@@ -110,6 +110,29 @@ function GetLength()
 	alert( 'Actual text length (without HTML markups): ' + iLength + ' characters' ) ;
 }
 
+function GetInnerHTML()
+{
+	// Get the editor instance that we want to interact with.
+	var oEditor = FCKeditorAPI.GetInstance('FCKeditor1') ;
+
+	alert( oEditor.EditorDocument.body.innerHTML ) ;
+}
+
+function CheckIsDirty()
+{
+	// Get the editor instance that we want to interact with.
+	var oEditor = FCKeditorAPI.GetInstance('FCKeditor1') ;
+	alert( oEditor.IsDirty() ) ;	
+}
+
+function ResetIsDirty()
+{
+	// Get the editor instance that we want to interact with.
+	var oEditor = FCKeditorAPI.GetInstance('FCKeditor1') ;
+	oEditor.ResetIsDirty() ;	
+	alert( 'The "IsDirty" status has been reset' ) ;
+}
+
 		</script>
 	</head>
 	<body>
@@ -149,6 +172,11 @@ oFCKeditor.Create() ;
 			<br>
 			<br>
 			<input type="button" value="Interact with the Editor Area DOM" onclick="GetLength();">
+			<input type="button" value="Get innerHTML" onclick="GetInnerHTML();">
+			<br>
+			<br>
+			<input type="button" value="Check IsDirty()" onclick="CheckIsDirty();">
+			<input type="button" value="Reset IsDirty()" onclick="ResetIsDirty();">
 		</div>
 	</body>
 </html>

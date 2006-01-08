@@ -24,11 +24,32 @@
 		<meta name="robots" content="noindex, nofollow">
 		<link href="../sample.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="../../fckeditor.js"></script>
+		<script language="javascript">
+
+function FCKeditor_OnComplete( editorInstance )
+{
+	editorInstance.Events.AttachEvent( 'OnBlur'	, FCKeditor_OnBlur ) ;
+	editorInstance.Events.AttachEvent( 'OnFocus', FCKeditor_OnFocus ) ;
+}
+
+function FCKeditor_OnBlur( editorInstance )
+{
+	editorInstance.ToolbarSet.Collapse() ;
+}
+
+function FCKeditor_OnFocus( editorInstance )
+{
+	editorInstance.ToolbarSet.Expand() ;
+}
+
+		</script>
 	</head>
 	<body>
 		<h1>FCKeditor - Javascript - Sample 9</h1>
 		This sample shows FCKeditor in a more complex form with two different 
-		instances.
+		instances.<br>
+		It also shows and interesting way of using the "OnFocus" and "OnBlur" events 
+		available in the Javascript API (IE only).
 		<hr>
 		<form action="sampleposteddata.asp" method="post" target="_blank">
 			Normal text field:<br>
@@ -44,6 +65,10 @@
 var sBasePath = document.location.pathname.substring(0,document.location.pathname.lastIndexOf('_samples')) ;
 
 var oFCKeditor = new FCKeditor( 'FCKeditor_Basic' ) ;
+
+if ( document.all )
+	oFCKeditor.Config['ToolbarStartExpanded'] = false ;
+
 oFCKeditor.BasePath		= sBasePath ;
 oFCKeditor.ToolbarSet	= 'Basic' ;
 oFCKeditor.Value		= 'This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.' ;
@@ -54,7 +79,11 @@ oFCKeditor.Create() ;
 			FCKeditor with Default toolbar:
 			<script type="text/javascript">
 <!--
-var oFCKeditor = new FCKeditor( 'FCKeditor_Default' ) ;
+oFCKeditor = new FCKeditor( 'FCKeditor_Default' ) ;
+
+if ( document.all )
+	oFCKeditor.Config['ToolbarStartExpanded'] = false ;
+
 oFCKeditor.BasePath	= sBasePath ;
 oFCKeditor.Value	= 'This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.' ;
 oFCKeditor.Create() ;
