@@ -108,7 +108,7 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
-''' Wyróżnienie:: [[Verbatim(\'\')]]\'\'kursywa\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'pogrubienie\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim\'\'\'\'\')]]\'\'\'\'\'pogrubienie kursywa\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mix \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'pogrubienia\'\'\'[[Verbatim(\'\'\')]] i kursywy\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] pozioma linia.
+''' Wyróżnienie:: [[Verbatim(\'\')]]\'\'kursywa\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'pogrubienie\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'pogrubienie kursywa\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mix \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'pogrubienia\'\'\'[[Verbatim(\'\'\')]] i kursywy\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] pozioma linia.
  Nagłówki:: [[Verbatim(=)]] Tytuł 1 [[Verbatim(=)]]; [[Verbatim(==)]] Tytuł 2 [[Verbatim(==)]]; [[Verbatim(===)]] Tytuł 3 [[Verbatim(===)]];   [[Verbatim(====)]] Tytuł 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Tytuł 5 [[Verbatim(=====)]].
  Listy:: spacja i jeden ze: * znaków; 1., a., A., i., I. numerowane pozycje; 1.#n rozpoczyna numerowanie od n; sama spacja robi wcięcie.
  Odnośniki:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["nawiasy i znaki cudzysłowia"])]]; url; [url]; [url label].

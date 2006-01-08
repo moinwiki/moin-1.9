@@ -10,6 +10,8 @@ meta = {
   'wikimarkup': True,
 }
 text = {
+'''The backed up content of this page is deprecated and will not be included in search results!''':
+'''Sayfanın yedeklenmiş içeriği eski olduğundan arama sonuçlarında listelenmeyecektir!''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s tarihine ait %(rev)d revizyonu''',
 '''Redirected from page "%(page)s"''':
@@ -31,7 +33,7 @@ makro çağrısını kullanabilirsiniz.-~
 '''You are not allowed to view this page.''':
 '''Sayfanın görüntülenmesi için yeterli izne sahip değilsiniz.''',
 '''DeleteCache''':
-'''ÖnbellegiTemizle''',
+'''ÖnbelleğiTemizle''',
 '''(cached %s)''':
 '''(%s önbelleğe aktarıldı)''',
 '''You are not allowed to edit this page.''':
@@ -40,6 +42,8 @@ makro çağrısını kullanabilirsiniz.-~
 '''Sayfa değiştirilemez!''',
 '''Cannot edit old revisions!''':
 '''Eski revizyonlar üzerinde değişiklik yapılamıyor!''',
+'''The lock you held timed out. Be prepared for editing conflicts!''':
+'''Tarafınızca tutulan sayfa kilidi zaman aşımına uğradı. Düzenleme çakışmaları yaşanabilir!''',
 '''Page name is too long, try shorter name.''':
 '''Sayfa adı çok uzun, kısa bir ad girmeyi deneyin.''',
 '''Edit "%(pagename)s"''':
@@ -47,21 +51,21 @@ makro çağrısını kullanabilirsiniz.-~
 '''Preview of "%(pagename)s"''':
 '''"%(pagename)s" için Önizleme''',
 '''Your edit lock on %(lock_page)s has expired!''':
-'''%(lock_page)s üzerindeki düzeltme kilitiniz zaman aşımına uğradı!''',
+'''%(lock_page)s üzerindeki düzenleme kilitiniz zaman aşımına uğradı!''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''%(lock_page)s üzerindeki düzeltme kilitiniz # dakika sonra zaman aşımına uğrayacak.''',
+'''%(lock_page)s üzerindeki düzenleme kilitiniz bir kaç dakika sonra zaman aşımına uğrayacak.''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''%(lock_page)s üzerindeki düzeltme kilitiniz # saniye sonra zaman aşımına uğrayacak.''',
+'''%(lock_page)s üzerindeki düzenleme kilitiniz bir kaç saniye sonra zaman aşımına uğrayacak.''',
 '''Someone else deleted this page while you were editing!''':
-'''Üzerinde değişiklik yapmış olduğunuz sayfa başka biri tarafından silindi!''',
+'''Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından silindi!''',
 '''Someone else changed this page while you were editing!''':
-'''Üzerinde düzeltme yaptığınız sayfa başka biri tarafından değiştirildi!''',
+'''Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından değiştirildi!''',
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
-'''Üzerinde düzeltme yapmakta olduğunuz sayfa başka biri tarafından değiştirildi!
+'''Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından değiştirildi!
 Lütfen sayfanın yeni halini önizleme ile görüntüledikten sonra kendi değişikliklerinizi kaydedin.
-Yapılan değişiklikleri görmek için %(difflink)s listesine bakabilirsiniz.''',
+Yapılan düzenlemeleri görmek için %(difflink)s listesine bakabilirsiniz.''',
 '''[Content of new page loaded from %s]''':
 '''[İçerik %s sayfasından yüklendi.]''',
 '''[Template %s not found]''':
@@ -78,20 +82,44 @@ Yapılan değişiklikleri görmek için %(difflink)s listesine bakabilirsiniz.''
 '''İptal''',
 '''By hitting \'\'\'%(save_button_text)s\'\'\' you put your changes under the %(license_link)s.
 If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your changes.''':
-'''\'\'\'%(save_button_text)s\'\'\' düğmesine basarak, değişikliklerinizi %(license_link)s altına koymuş olursunuz.
+'''\'\'\'%(save_button_text)s\'\'\' düğmesine basarak, deüzenlemelerinizi %(license_link)s altına koymuş olursunuz.
 Eğer bunun olmasını istemiyorsanız, \'\'\'%(cancel_button_text)s\'\'\' düğmesine basarak değişikliklerinizi iptal edebilirsiniz.''',
 '''Preview''':
 '''Önizleme''',
+'''GUI Mode''':
+'''Grafiksel Kullanıcı Arayüzü Kipi''',
+'''Your changes are not saved!''':
+'''Düzenlemeleriniz kaydedilmedi!''',
+'''Comment:''':
+'''Yorum:''',
 '''<No addition>''':
 '''<Ekleme yok>''',
+'''Add to: %(category)s''':
+'''%(category)s katagorisine ekle''',
 '''Trivial change''':
 '''Küçük değişiklik''',
 '''Remove trailing whitespace from each line''':
 '''İşe yaramayan boşluk karakterlerini temizle''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Vurgulama:: [[Verbatim(\'\')]]\'\'italik\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kalın italik\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'karışık \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]] ve italik\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] yatay çizgi.
+ Başlıklar:: [[Verbatim(=)]] Başlık 1 [[Verbatim(=)]]; [[Verbatim(==)]] Başlık 2 [[Verbatim(==)]]; [[Verbatim(===)]] Başlık 3 [[Verbatim(===)]];   [[Verbatim(====)]] Başlık 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Başlık 5 [[Verbatim(=====)]].
+ Listeler:: boşluk bıraktıktan sonra şu karakterlerden birini kullanınız: * imleçler; 1., a., A., i., I. numaralandırılmış imleçler; 1.#n numaralandırmaya n sayısından başla; sadece hizala.
+ Bağlantılar:: [[Verbatim(BasHarfiBuyukKelimleriBirlestirin)]]; [[Verbatim(["köşeli parantez ve çift tırnak"])]]; url; [url]; [url başlık].
+ Tablolar:: || hücre içeriği |||| 2 sütuna taşan hücre içeriği ||;    tablo ve başlıklardan sonra boşluk karakteri kullanılamaz.
+
+(!) Yardım için YardımBiçimHakkında veya SözdizimKılavuzu sayfalarınabakabilirsiniz.
+''',
 '''Edit was cancelled.''':
-'''Değişiklik iptal edildi.''',
+'''Düzenleme iptal edildi.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Yaptığınız değişiklik için teşekkür ederiz.''',
+'''Yaptığınız düzenlemeler için teşekkür ederiz.''',
 '''Page "%s" was successfully deleted!''':
 '''"%s" sayfası başarı ile silindi!''',
 '''Dear Wiki user,
@@ -104,9 +132,9 @@ The following page has been changed by %(editor)s:
 ''':
 '''Sayın Wiki kullanıcısı,
 
-%(sitename)s sitesinde yer alan bir wiki sayfa ya da katagorisine, değişikliklerden haberdar olmak için üye olmuşsunuz.
+%(sitename)s sitesinde yer alan bir wiki sayfa ya da katagorisine, düzenlemelerden haberdar olmak için üye olmuşsunuz.
 
-İlişikteki sayfa %(editor)s tarafından değiştirilmiştir.
+İlişikteki sayfa %(editor)s tarafından düzenlendi.
 %(pagelink)s
 
 ''',
@@ -144,6 +172,8 @@ The following page has been changed by %(editor)s:
 '''Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz!''',
 '''You cannot save empty pages.''':
 '''Boş sayfalar kaydedilemez.''',
+'''You already saved this page!''':
+'''Bu sayfayı zaten kaydettiniz!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -154,12 +184,12 @@ Now re-add your changes to the current page contents.
 the content editbox with your version of the page, because that would
 delete the changes of the other person, which is excessively rude!\'\'
 ''':
-'''Sayfa üzerinde değişiklik yaptığınız esnada, sayfa başka bir kullanıcı tarafından değiştirildi.
+'''Sayfa, üzerinde düzenleme yaptığınız esnada başka bir kullanıcı tarafından değiştirildi.
 
-Lütfen şu adımları takip ediniz: Tarayıcınızın geri butonunu kullanarak bir önceki sayfaya gidip oradan gerçekleştirmiş olduğunuz değişiklikleri kopyalayınız. Tekrar bu sayfaya gelerek metni değiştiri seçiniz.
-Ardından kopyalmış olduğunuz değişiklikleri tekrar ekleyip kaydediniz.
+Lütfen şu adımları takip ediniz: Tarayıcınızın geri butonunu kullanarak bir önceki sayfaya gidip oradan gerçekleştirmiş olduğunuz düzenlemeleri kopyalayınız. Tekrar bu sayfaya gelerek MetniDüzenle seçeneğini seçiniz.
+Ardından kopyalmış olduğunuz düzenlemeleri tekrar ekleyip kaydediniz.
 
-\'\'Kopyaladığınız eski değişiklikleri lütfen hemen tekrar kaydetmeden önce sizden önce değişiklikte bulunmuş kişinin düzeltmelerini de göz önünde bulundurunuz.
+\'\'Kopyaladığınız eski düzenlemeleri hemen tekrar kaydetmeden önce, lütfensizden önce değişiklikte bulunmuş kişinin düzeltmelerini de göz önünde bulundurunuz.
 Aksi halde onun değişiklikleri göz ardı edilip silineceğinden, bu oldukça kaba bir davranış olacaktır!\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
@@ -175,7 +205,7 @@ Aksi halde onun değişiklikleri göz ardı edilip silineceğinden, bu oldukça 
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
 '''Sayfa üzerinde değişiklik yaparken, diğer kullanıcılar bundan %(bumptime)s süresince haberdar tutulacaktır.''',
 '''Use the Preview button to extend the locking period.''':
-'''Önizleme yaparak sayfa üzerinde tuttuğunu kilitin sürecini uzatabilirsiniz.''',
+'''Önizleme yaparak sayfa üzerinde tuttuğunuz kilitin sürecini uzatabilirsiniz.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
 '''Bu sayfa %(owner)s kullanıcısı tarafından %(timestamp)starihine kadar kilitlenmiştir. (%(mins_valid)d dakika)''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
@@ -184,9 +214,9 @@ to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
 '''Bu sayfa %(owner)s kullancısı tarafından üzerinde değişiklik yapılmak üzere
 açılmış ya da en son %(timestamp)s tarihinde önizleme yapılmıştır.[[BR]]
-\'\'\'Herhangi bir düzeltme çakışmasından kaçınmanız açısından sayfa üzerinde
+\'\'\'Herhangi bir düzenleme çakışmasından kaçınmanız açısından sayfa üzerinde
 %(mins_valid)d dakikalığına değişiklik yapmamanız önerilir.\'\'\'[[BR]]
-Editörden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
+Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''<unknown>''':
 '''<bilinmiyor>''',
 '''Diffs''':
@@ -194,11 +224,11 @@ Editörden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''Info''':
 '''Bilgi''',
 '''Edit''':
-'''Düzelt''',
+'''Düzenle''',
 '''UnSubscribe''':
-'''KayitSil''',
+'''ÜyeliktenÇık''',
 '''Subscribe''':
-'''KayitOl''',
+'''ÜyeOl''',
 '''Raw''':
 '''Ham''',
 '''XML''':
@@ -206,17 +236,21 @@ Editörden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''Print''':
 '''Çıktı Al''',
 '''View''':
-'''Göster''',
+'''Görüntüle''',
 '''Up''':
 '''Yukarı''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''E-posta adresimi (wiki ev sayfasını değil) kullanıcı bilgileri ile yayınla''',
 '''Open editor on double click''':
-'''Çift tıklayınca editörü aç''',
+'''Çift tıklayınca metin düzenleyicisini aç''',
+'''Jump to last visited page instead of frontpage''':
+'''Ana sayfa yerine, son ziyaret edilen sayfayı görüntüle''',
 '''Show question mark for non-existing pagelinks''':
 '''Henüz var olamayan sayfaların bağlantıları için soru işareti kullan''',
 '''Show page trail''':
-'''Sayfa kuyruğunu göster''',
+'''Sayfa sonunu göster''',
 '''Show icon toolbar''':
-'''Araç çubuğunu göster''',
+'''Simgeli araç çubuğunu göster''',
 '''Show top/bottom links in headings''':
 '''Başlıklarda aşağı/yukarı bağlantılarını göster''',
 '''Show fancy diffs''':
@@ -231,12 +265,16 @@ Editörden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''Hesabı sonsuza dek etkisiz hale getir''',
 '''Name''':
 '''İsim''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(AdSoyad kullanınız)''',
+'''Alias-Name''':
+'''Takma İsim''',
 '''Password''':
-'''Şifre''',
+'''Parola''',
 '''Password repeat''':
-'''Şifre (Tekrar)''',
+'''Parola (Tekrar)''',
 '''(Only when changing passwords)''':
-'''(Sadece şifre değiştirirken)''',
+'''(Sadece parola değiştirirken)''',
 '''Email''':
 '''E-Posta''',
 '''User CSS URL''':
@@ -244,11 +282,11 @@ Editörden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Kullanıcı CSS seçeneğini etkisiz hale getirmek için boş bırakınız)''',
 '''Editor size''':
-'''Editör boyutu''',
+'''Metin düzenleyicisi boyutu''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
-'''Hatalı kullanıcı adı: {{{\'%s\'}}}.
+'''Geçersiz kullanıcı adı: {{{\'%s\'}}}.
 Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağlı olarak iki kelime arasında bir tek boşluk da bırakılabilir. Grupların sayfa isimlerinin kullanımına izin verilmemektedir.''',
 '''You are not allowed to do %s on this page.''':
 '''Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz.''',
@@ -256,6 +294,8 @@ Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağl�
 '''Giriş''',
 ''' %s and try again.''':
 '''%s ve tekrar deneyin.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(pages)d sayfa içinden %(hits)d sonuç bulundu''',
 '''%.2f seconds''':
 '''%.2f saniye''',
 '''match''':
@@ -270,7 +310,7 @@ Login URL: %s/?action=userform&uid=%s
 ''':
 '''Kullanıcı Adı: %s
 
-Giriş Şifresi: %s
+Giriş Parolası: %s
 
 Giriş Form için URL: %s/?action=userform&uid=%s
 ''',
@@ -284,9 +324,9 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''':
 '''Hesap bilgilerinizin bu e-posta adresine gönderilmesi istemi alındı.
 
-Eğer şifrenizi kaybettiyseniz, aşağıdaki bilgileri kullanarak belirtilen şifreyi wiki\'nin ilgili form alanına olduğu gibi giriniz. (Bunun için kopyala/yapıştır kullanabilirsiniz.)
+Eğer parolanızı kaybettiyseniz, aşağıdaki bilgileri kullanarak belirtilen parolayı wiki\'nin ilgili form alanına olduğu gibi giriniz. (Bunun için kopyala/yapıştır kullanabilirsiniz.)
 
-Başarılı bir şekilde giriş yaptıktan sonra, isteğe bağlı olarak hatırlamanız daha kolay olabilecek yeni bir şifre girebilirsiniz.
+Başarılı bir şekilde giriş yaptıktan sonra, isteğe bağlı olarak hatırlamanız daha kolay olabilecek yeni bir parola girebilirsiniz.
 ''',
 '''[%(sitename)s] Your wiki account data''':
 '''[%(sitename)s] Wiki hesap bilgileriniz''',
@@ -298,16 +338,22 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Lütfen geçerli bir e-posta adresi giriniz!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''\'%(email)s\' e-posta adresine sahip bir kullanıcı hesabı bulunamadı!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için KullanıcıÖzellikleri sayfasını kullanabilirsiniz.''',
 '''Empty user name. Please enter a user name.''':
 '''Boş kullanıcı adı. Lütfen bir kullanıcı adı seçiniz.''',
 '''This user name already belongs to somebody else.''':
 '''Bu kullanıcı adı başka bir kullanıcı tarafından alınmıştır.''',
 '''Passwords don\'t match!''':
-'''Girilen şifreler örtüşmüyor!''',
+'''Girilen parolalar örtüşmüyor!''',
 '''Please specify a password!''':
-'''Lütfen bir şifre giriniz!''',
+'''Lütfen bir parola giriniz!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lütfen e-posta adresinizi belirtiniz. Giriş bilgilerinizin kaybolması durumunda, bunları tekrar e-posta yoluyla alabilirsiniz.''',
 '''This email already belongs to somebody else.''':
 '''Bu e-posta adresi başka bir hesap tarafından kullanılmakta.''',
+'''User account created! You can use this account to login now...''':
+'''Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz artık.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''\'%(theme_name)s\' teması yüklenemiyor!''',
 '''User preferences saved!''':
@@ -316,10 +362,18 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Öntanımlı''',
 '''<Browser setting>''':
 '''<Tarayıcı ayarları>''',
+'''the one preferred''':
+'''Tercih edilen''',
+'''free choice''':
+'''İsteğe bağlı seçim''',
 '''Save''':
 '''Kaydet''',
 '''Preferred theme''':
 '''Tercih edilen tema''',
+'''Editor Preference''':
+'''Metin Düzenleyicisi Özellikleri''',
+'''Editor shown on UI''':
+'''Metin düzenleyicisinin görüntüleneceği arabirim''',
 '''Time zone''':
 '''Zaman dilimi''',
 '''Your time is''':
@@ -333,17 +387,17 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''General options''':
 '''Genel seçenekler''',
 '''Quick links''':
-'''Hızlı bağlantılar''',
+'''Hızlı erişim bağlantıları''',
 '''This list does not work, unless you have entered a valid email address!''':
 '''Geçerli bir e-posta adresi belirtmediğiniz sürece bu liste çalışmayacaktır!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''Kayıt olunan wiki sayfaları (satır başına tek bir regex)''',
+'''Kayıt olunan wiki sayfaları (satır başına tek bir düzenli ifade)''',
 '''Create Profile''':
-'''Profil Yarat''',
+'''Profil Oluştur''',
 '''Mail me my account data''':
-'''Hesap bilgilerimi postala''',
+'''Hesap bilgilerimi e-posta ile gönder''',
 '''Action''':
-'''İşlem''',
+'''İşlev''',
 '''No older revisions available!''':
 '''Eski revizyon bulunmamakta!''',
 '''Diff for "%s"''':
@@ -359,7 +413,7 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''(ignoring whitespace)''':
 '''(boşluk karakterleri gözardı ediliyor)''',
 '''Ignore changes in the amount of whitespace''':
-'''(Boşluk karakteri miktarındaki değişiklikleri gözardı et)''',
+'''Boşluk karakteri miktarındaki değişiklikleri gözardı et''',
 '''General Information''':
 '''Genel Bilgi''',
 '''Page size: %d''':
@@ -377,7 +431,7 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Diff''':
 '''Fark''',
 '''Editor''':
-'''Editör''',
+'''Düzenleyici''',
 '''Comment''':
 '''Yorum''',
 '''view''':
@@ -391,7 +445,7 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Revert to revision %(rev)d.''':
 '''%(rev)d revizyonuna geri al.''',
 '''edit''':
-'''düzelt''',
+'''düzenle''',
 '''get''':
 '''getir''',
 '''del''':
@@ -409,37 +463,51 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''General Page Infos''':
 '''Genel Sayfa Bilgileri''',
 '''Show chart "%(title)s"''':
-'''"%(title)s" grafiğini göster''',
+'''"%(title)s" çizelgesini göster''',
 '''Page hits and edits''':
-'''Sayfa ziyaret ve düzeltmeleri''',
+'''Sayfa ziyaret ve düzenlemeleri''',
 '''You are not allowed to revert this page!''':
-'''Bu sayfayı gerek almak için yeterli izne sahip değilsiniz!''',
+'''Bu sayfayı geri almak için yeterli izne sahip değilsiniz!''',
+'''You must login to add a quicklink.''':
+'''Hızlı erişim bağlantısı eklemek için giriş yapmalısınız.''',
+'''Your quicklink to this page has been removed.''':
+'''Sayfa için sahip olduğunuz hızlı erişim bağlantısı kaldırıldı.''',
+'''A quicklink to this page has been added for you.''':
+'''Sayfaya hızlı erişim için bağlantı eklendi.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Okuma iznine sahip olmadığınız bir sayfaya kayıt olmazsınız.''',
+'''Okuma iznine sahip olmadığınız bir sayfaya kayıt olamazsınız.''',
+'''This wiki is not enabled for mail processing.''':
+'''Bu wiki e-posta işlemleri için yapılandırılmadı.''',
+'''You must log in to use subscribtions.''':
+'''Sayfa üyeliği özelliğinden yararlanabilmek için giriş yapmalısınız.''',
+'''Add your email address in your UserPreferences to use subscriptions.''':
+'''Sayfa üyeliği özelliğinden yararlanabilmek için KullanıcıÖzellikleri içerisinde e-posta adresinizi belirtiniz.''',
 '''Your subscribtion to this page has been removed.''':
-'''Kaydolduğunuz sayfa üyeliğiniz kaldırılmıştır.''',
+'''Sayfa üyeliğiniz silinmiştir.''',
 '''Can\'t remove regular expression subscription!''':
 '''Düzenli ifade kullanılarak girilen kayıtlar kaldırılamıyor!''',
+'''Edit the subscription regular expressions in your UserPreferences.''':
+'''KullanıcıÖzellikleri içinde yer alan kayıtlı olunan sayfaların düzenli ifadelerini düzenle.''',
 '''You have been subscribed to this page.''':
 '''Bu sayfaya üye oldunuz.''',
 '''Charts are not available!''':
-'''Çizimler etkisiz halde!''',
+'''Çizelgeler etkisiz halde!''',
 '''You need to provide a chart type!''':
 '''Bir çizelge tipi belirtmek zorundasınız!''',
 '''Bad chart type "%s"!''':
-'''Geçersiz çizerge tipi: "%s"''',
+'''Geçersiz çizelge tipi: "%s"''',
 '''Required attribute "%(attrname)s" missing''':
-'''"%(attrname)s" niteleyicisi eksik kaldı''',
+'''Gerekli "%(attrname)s" niteleyicisi eksik''',
 '''Submitted form data:''':
-'''Girilen form verisi''',
+'''Girilen form verisi: ''',
 '''Search Titles''':
 '''Başlıkları Ara''',
 '''Display context of search results''':
 '''Arama sonuçlarının içerik gösterimi''',
 '''Case-sensitive searching''':
-'''Büyük-Küçük harf duyarlı arama''',
+'''Büyük-küçük harf duyarlı arama''',
 '''Search Text''':
-'''Katar Arama''',
+'''Metin Arama''',
 '''Go To Page''':
 '''Sayfaya Git''',
 '''Include system pages''':
@@ -465,31 +533,37 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Accumulated page sizes''':
 '''Toplanan sayfa sayısı''',
 '''Entries in edit log''':
-'''Değişiklik kayıtlarındaki girdiler''',
+'''Düzenleme kayıtlarındaki girdiler''',
 '''%(logcount)s (%(logsize)s bytes)''':
 '''%(logcount)s (%(logsize)s bayt)''',
 '''NONE''':
 '''YOK''',
 '''Global extension macros''':
-'''Küresel geliştirilmiş makrolar''',
+'''Genel geliştirilmiş makrolar''',
 '''Local extension macros''':
 '''Yerel geliştirilmiş makrolar''',
 '''Global extension actions''':
-'''Küresel geliştirilmiş işlemler''',
+'''Genel geliştirilmiş işlemler''',
 '''Local extension actions''':
 '''Yerel geliştirilmiş işlemler''',
+'''Global parsers''':
+'''Genel ayrıştırıcılar''',
+'''Local extension parsers''':
+'''Yerel geliştirilmiş makrolar''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
 '''Ayrıştırıcılar''',
 '''Disabled''':
-'''Etkisiz Halde''',
+'''Etkisiz''',
 '''Enabled''':
-'''Etkinleştirilmiş''',
+'''Etkin''',
 '''Lupy search''':
 '''Lupy arama''',
+'''Active threads''':
+'''Etkin yivler''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''{{{"%s"}}} yerine daha seçici bir arama tümcesi kullanınız.''',
 '''ERROR in regex \'%s\'''':
-'''\'%s\' katarında regex hatası''',
+'''\'%s\' metninde düzenli ifade regex hatası''',
 '''Bad timestamp \'%s\'''':
 '''Yanlış tarih bilgisi \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
@@ -497,9 +571,9 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Expected a value for key "%(token)s"''':
 '''"%(token)s" anahtarı için yanlış değer''',
 '''Wiki Markup''':
-'''Wiki Biçimleme''',
+'''Wiki İmleme''',
 '''Print View''':
-'''Çıktı Görüntüsü''',
+'''Yazıcı Çıktısı Görünümü''',
 '''[%d attachments]''':
 '''[%d tane ek]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -514,10 +588,14 @@ Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link,
 since this is subject to change and can break easily.''':
 '''Sayfada yer alan eklere referans göstermek için \'\'\'{{{attachment:dosya}}}\'\'\' ifadesini kullanabilirsiniz. (Aşağıdaki örnekte gösterildiği gibi.)
 Kesinlikle URL ile birlikte gelen {{{[get]}}} değerini bağlantıda kullanmayın. Bu değişken rahatlıkla ayarlanabilir olduğundan ekin gösterdiği dosya yolunun kırılmasına neden olabilir.''',
+'''unzip''':
+'''aç''',
+'''install''':
+'''yükle''',
 '''No attachments stored for %(pagename)s''':
 '''%(pagename)s sayfası için ek bulunmamakta.''',
 '''Edit drawing''':
-'''Çizimi değiştir''',
+'''Çizimi düzenle''',
 '''Attached Files''':
 '''Ekli Dosyalar''',
 '''You are not allowed to attach a file to this page.''':
@@ -548,20 +626,46 @@ adı kullanılacaktır.''',
 '''Sayfa üzerindeki ekleri silmek için yeterli izne sahip değilsiniz.''',
 '''You are not allowed to get attachments from this page.''':
 '''Sayfa üzerindeki eklere ulaşmak için yeterli izne sahip değilsiniz.''',
+'''You are not allowed to unzip attachments of this page.''':
+'''Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz.''',
+'''You are not allowed to install files.''':
+'''Bu sayfadan yükleme yapmak için yeterli izne sahip değilsiniz.''',
 '''You are not allowed to view attachments of this page.''':
 '''Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz.''',
 '''Unsupported upload action: %s''':
 '''Desteklenmeyen dosya gönderim işlevi: %s''',
 '''Attachments for "%(pagename)s"''':
-'''"%(pagename)s" sayfa ekleri''',
+'''"%(pagename)s" için Ekler''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''\'%(target)s\' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: \'%(filename)s\')''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''\'%(target)s\' eki (%(bytes)d bayt) kaydedildi. (Dosyanın karşı taraftaki adı: \'%(filename)s\')''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''\'%(filename)s\' eki silindi.''',
+'''Attachment \'%(filename)s\' installed.''':
+'''\'%(filename)s\' eki yüklendi.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''\'%(filename)s\' dosyası yüklenemedi.''',
+'''The file %s is not a MoinMoin package file.''':
+'''%s bir MoinMoin paket dosyası değil.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
+'''Oluşacak dosyalar çok büyük (%(space)d kB fazla) olduğundan dolayı \'%(filename)s\' eki açılamıyor.''',
+'''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
+'''.zip dosyası biçimindeki \'%(filename)s\' eki, oluşacak dosya sayısı çok fazla olduğundan açılmadı. (%(count)d adet fazla)''',
+'''Attachment \'%(filename)s\' unzipped.''':
+'''\'%(filename)s eki açıldı.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Oluşacak dosyalar çok büyük, zaten sistemde mevcut, diğer dizinlere taşıyor ya da kendi içinde .zip dosyası içerdiğinden dolayı \'%(filename)s\' eki açılmadı.''',
+'''The file %(target)s is not a .zip file.''':
+'''%(target)s dosyası .zip biçiminde değil.''',
 '''Attachment \'%(filename)s\'''':
 '''Ek \'%(filename)s\'''',
+'''Package script:''':
+'''Paket betiği: ''',
+'''File Name''':
+'''Dosya Adı''',
+'''Modified''':
+'''Değiştirildi''',
 '''Unknown file type, cannot display this attachment inline.''':
 '''Bilinmeyen dosya tipi. Ek doğrudan gösterilemiyor.''',
 '''attachment:%(filename)s of %(pagename)s''':
@@ -614,7 +718,7 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''Add checked words to dictionary''':
 '''İşaretli kelimeleri sözlüğe ekle''',
 '''No spelling errors found!''':
-'''İmla hatası bulunamadı!''',
+'''İmla hatası bulunmadı!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Okuma iznine sahip olmadığınız bir sayfa için imla denetimi gerçekleştiremezsiniz.''',
 '''Title Search: "%s"''':
@@ -624,13 +728,13 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''Full Link List for "%s"''':
 '''"%s" için Bağlantı Listesi''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Yeni bir sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte.''',
+'''Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte.''',
 '''Upload new attachment "%(filename)s"''':
-'''Yeni ek dosyası gönder "%(filename)s"''',
+'''Yeni ek dosya gönder "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Yeni çizim oluştur: "%(filename)s"''',
 '''Edit drawing %(filename)s''':
-'''%(filename)s çizimini değiştir''',
+'''%(filename)s çizimini düzenle''',
 '''Invalid include arguments "%s"!''':
 '''Geçersiniz {{{include}}} argümanları: "%s"''',
 '''Nothing found for "%s"!''':
@@ -655,18 +759,20 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''\'%(filename)s\' ekinin gönderimi.''',
 '''Drawing \'%(filename)s\' saved.''':
 '''\'%(filename)s\' çizimi kaydedildi.''',
+'''%(mins)dm ago''':
+'''%(mins)dm önce''',
 '''(no bookmark set)''':
-'''(imleç ayarlanmamış)''',
+'''(imleyici atanmamış)''',
 '''(currently set to %s)''':
 '''(şuanki değeri %s)''',
 '''Delete Bookmark''':
-'''İmleç Sil''',
+'''İmleyici Sil''',
 '''Set bookmark''':
-'''İmleç Ata''',
+'''İmleyici Ata''',
 '''set bookmark''':
-'''imleç ata''',
+'''imleyici ata''',
 '''[Bookmark reached]''':
-'''[İmlece ulaşıldı]''',
+'''[İmleyiciye ulaşıldı]''',
 '''Markup''':
 '''İm''',
 '''Display''':
@@ -677,6 +783,8 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''Bu Wiki\'nin XML çıktısını indir''',
 '''No wanted pages in this wiki.''':
 '''Wiki üzerinde aranan bir sayfa yer almamakta.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Tekrar yapılandırılan metnin çevrisi gerçekleştirilemiyor. Lütfen {{{docutils}}} paketini yükleyin.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**En fazla {{{include}}} ifadesi kullanım sayısı aşıldı**''',
 '''**Could not find the referenced page: %s**''':
@@ -696,15 +804,15 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''%(errortype)s processing error''':
 '''%(errortype)s işlem hatası''',
 '''Views/day''':
-'''Gösterim/Gün''',
+'''Gösterim Sayısı/Gün''',
 '''Edits/day''':
-'''Değişiklik/Gün''',
+'''Düzenleme Sayısı/Gün''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(filterpage)s için %(chart_title)s''',
 '''green=view
 red=edit''':
 '''yeşil=gösterim
-red=değişiklik''',
+red=düzenleme''',
 '''date''':
 '''tarih''',
 '''# of hits''':
@@ -740,31 +848,51 @@ red=değişiklik''',
 '''[TOP]''':
 '''[ÜST]''',
 '''Click to do a full-text search for this title''':
-'''Bu başlık için metin araması gerçekleştirmek için tıklayınız''',
+'''Bu başlık için tam metin araması gerçekleştirmek için tıklayınız''',
 '''Logout''':
 '''Çıkış''',
 '''Clear message''':
 '''Mesajı temizle''',
 '''last edited %(time)s by %(editor)s''':
-'''En son %(time)s tarihinde %(editor)s tarafından değiştirildi.''',
+'''En son %(time)s tarihinde %(editor)s tarafından düzenlendi.''',
 '''last modified %(time)s''':
-'''En son %(time)s tarihinde değiştirildi.''',
+'''En son %(time)s tarihinde düzenlendi.''',
 '''Search:''':
 '''Arama: ''',
 '''Text''':
 '''Metin''',
 '''Titles''':
 '''Başlıklar''',
+'''Search''':
+'''Arama''',
 '''More Actions:''':
 '''Diğer İşlevler:''',
+'''------------''':
+'''------------''',
+'''Raw Text''':
+'''Ham Metin Gösterimi''',
 '''Delete Cache''':
 '''Önbelleği Temizle''',
 '''Delete Page''':
 '''Sayfayı Sil''',
+'''Like Pages''':
+'''Benzer Sayfalar''',
+'''Local Site Map''':
+'''Yerel Site Haritası''',
 '''Do''':
 '''Gerçekleştir''',
+'''Edit (Text)''':
+'''Düzenle (Metin)''',
+'''Edit (GUI)''':
+'''Düzenle (Arayüz)''',
 '''Immutable Page''':
 '''Değiştirilemez Sayfa''',
+'''Remove Link''':
+'''Bağlantı Sil''',
+'''Add Link''':
+'''Bağlantı Ekle''',
+'''Attachments''':
+'''Ekler''',
 '''Show %s days.''':
 '''%s günlük göster.''',
 '''EditText''':
@@ -778,39 +906,43 @@ red=değişiklik''',
 '''User''':
 '''Kullanıcı''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
-'''Üzgünüz! Sayfa "%(content)s" içeriğine izin verilmediğinden dolayı kaydedilemiyor.''',
+'''Üzgünüz! "%(content)s" içeriğine izin verilmediğinden dolayı sayfa kaydedilemiyor.''',
 '''Line''':
-'''Çizgi''',
+'''Satır''',
 '''Deletions are marked like this.''':
 '''Silme işlemleri bu şekilde işaretleniyor.''',
 '''Additions are marked like this.''':
 '''Eklemeler bu şekilde işaretleniyor.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''\'%(server)s\' e-posta sunucusuna bağlanılamadı: %(reason)s''',
+'''Mail not sent''':
+'''E-posta gönderilemedi.''',
 '''Mail sent OK''':
 '''E-posta gönderildi.''',
 '''FrontPage''':
 '''AnaSayfa''',
 '''RecentChanges''':
-'''Yenilikler''',
+'''Düzenlemeler''',
 '''TitleIndex''':
-'''BaslikIndeksi''',
+'''Başlıkİndeksi''',
 '''WordIndex''':
-'''KelimeIndeksi''',
+'''Kelimeİndeksi''',
 '''FindPage''':
 '''SayfaBul''',
 '''SiteNavigation''':
-'''SiteTaramasi''',
+'''SiteGezinimi''',
 '''HelpContents''':
-'''YardimKonulari''',
+'''YardimKonuları''',
 '''HelpOnFormatting''':
-'''YardimBicimHakkinda''',
+'''YardımBiçimHakkında''',
 '''UserPreferences''':
-'''KullaniciOzellikleri''',
+'''KullanıcıÖzellikleri''',
 '''WikiLicense''':
-'''WikiLisansi''',
+'''WikiLisansı''',
 '''MissingPage''':
-'''KayipSayfalar''',
+'''KayıpSayfa''',
+'''MissingHomePage''':
+'''KayıpAnaSayfa''',
 '''Mon''':
 '''Pzt''',
 '''Tue''':
@@ -822,19 +954,19 @@ red=değişiklik''',
 '''Fri''':
 '''Cum''',
 '''Sat''':
-'''Cmt''',
+'''Cts''',
 '''Sun''':
 '''Paz''',
 '''AttachFile''':
-'''Attachments''',
+'''DosyaEkle''',
 '''DeletePage''':
 '''SayfaSil''',
 '''LikePages''':
 '''BenzerSayfalar''',
 '''LocalSiteMap''':
-'''YerelSiteHaritasi''',
+'''YerelSiteHaritası''',
 '''RenamePage''':
-'''SayfaAdlandir''',
+'''SayfaAdlandır''',
 '''SpellCheck''':
-'''ImlaDenetimi''',
+'''İmlaDenetimi''',
 }
