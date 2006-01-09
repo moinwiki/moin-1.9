@@ -210,6 +210,8 @@ only requiring a Python installation.
         'MoinMoin.scripts.reducewiki',
         'MoinMoin.scripts.unicode',
         'MoinMoin.scripts.xmlrpc-tools',
+        'MoinMoin.scripts.packages',
+        'MoinMoin.scripts.import',
         'MoinMoin.server',
         'MoinMoin.stats',
         'MoinMoin.support',
