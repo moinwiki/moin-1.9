@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-09 14:18:56 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-374
+
+    Summary:
+      Fixed FastCGI for envs where you need socket.SO_REUSEADDR
+    Revision:
+      moin--main--1.5--patch-374
+
+
+    modified files:
+     ChangeLog MoinMoin/support/thfcgi.py
+
+
 2006-01-09 14:17:25 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-373
 
     Summary:
