@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-09 14:17:25 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-373
+
+    Summary:
+      Packaged the import irc script.
+    Revision:
+      moin--main--1.5--patch-373
+
+
+    new files:
+     MoinMoin/scripts/import/.arch-ids/__init__.py.id
+     MoinMoin/scripts/import/__init__.py
+
+    modified files:
+     ChangeLog setup.py
+
+
 2006-01-09 00:07:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-372
 
     Summary:
