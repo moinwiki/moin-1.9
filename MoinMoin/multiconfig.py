@@ -290,6 +290,7 @@ class DefaultConfig:
     show_hosts = 1
     show_interwiki = 0
     show_login = 1
+    show_names = True
     show_section_numbers = 0
     show_timings = 0
     show_version = 0

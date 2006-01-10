@@ -97,7 +97,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     
     # print editor name or IP
     d['editors'] = None
-    if request.cfg.show_hosts:
+    if request.cfg.show_names:
         if len(lines) > 1:
             counters = {}
             for idx in range(len(lines)):
