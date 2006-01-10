@@ -2,6 +2,19 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-10 20:13:59 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-375
+
+    Summary:
+      Split show_hosts into show_hosts and show_names.
+    Revision:
+      moin--main--1.5--patch-375
+
+
+    modified files:
+     ChangeLog MoinMoin/macro/RecentChanges.py
+     MoinMoin/multiconfig.py MoinMoin/wikiaction.py docs/CHANGES
+
+
 2006-01-09 14:18:56 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-374
 
     Summary:

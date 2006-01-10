@@ -257,7 +257,7 @@ def do_info(pagename, request):
             Column('mtime', label=_('Date'), align='right'),
             Column('size',  label=_('Size'), align='right'),
             Column('diff', label='<input type="submit" value="%s">' % (_("Diff"))),
-            Column('editor', label=_('Editor'), hidden=not request.cfg.show_hosts),
+            Column('editor', label=_('Editor'), hidden=not request.cfg.show_names),
             Column('comment', label=_('Comment')),
             Column('action', label=_('Action')),
             ]
