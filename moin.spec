@@ -58,7 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc  README CHANGES COPYING INSTALL.html UPDATE.html
+%doc  README docs/CHANGES docs/INSTALL.html docs/licenses/COPYING
 
 %changelog
 * Fri Mar 05 2004 Florian Festi

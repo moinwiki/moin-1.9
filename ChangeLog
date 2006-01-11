@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-11 22:01:28 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-376
+
+    Summary:
+      updated i18n, small fix to moin.spec
+    Revision:
+      moin--main--1.5--patch-376
+
+    updated i18n, small fix to moin.spec
+    
+
+    new files:
+     MoinMoin/i18n/.arch-ids/sl.po.id
+     MoinMoin/i18n/.arch-ids/sl.py.id MoinMoin/i18n/sl.po
+     MoinMoin/i18n/sl.py
+
+    modified files:
+     ChangeLog MoinMoin/i18n/meta.py MoinMoin/i18n/pl.po
+     MoinMoin/i18n/tr.po MoinMoin/i18n/tr.py moin.spec
+
+
 2006-01-10 20:13:59 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-375
 
     Summary:

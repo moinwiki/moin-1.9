@@ -942,7 +942,7 @@ red=düzenleme''',
 '''MissingPage''':
 '''KayıpSayfa''',
 '''MissingHomePage''':
-'''KayıpAnaSayfa''',
+'''KayıpKişiselSayfa''',
 '''Mon''':
 '''Pzt''',
 '''Tue''':

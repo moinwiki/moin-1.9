@@ -1638,7 +1638,7 @@ msgid "MissingPage"
 msgstr "KayıpSayfa"
 
 msgid "MissingHomePage"
-msgstr "KayıpAnaSayfa"
+msgstr "KayıpKişiselSayfa"
 
 msgid "Mon"
 msgstr "Pzt"
