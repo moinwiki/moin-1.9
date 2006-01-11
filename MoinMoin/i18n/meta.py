@@ -28,6 +28,7 @@ languages = {
 'pt-br': (u'Português do Brasil', u'Brazillian Portuguese', 'utf-8', 0, """Leonardo Gregianin <leonardo@riseup.net>""",),
 'ro': (u'Română', u'Romanian', 'utf-8', 0, """Ovidiu Sabou <ovidiu.sabou@gmail.com>""",),
 'ru': (u'Русский', u'Russian', 'utf-8', 0, """Mike Rovner <mrovner@hotmail.com>""",),
+'sl': (u'Slovenščina', u'Slovenian', 'utf-8', 0, """Mark Martinec <Mark.Martinec@ijs.si>""",),
 'sr': (u'Srpski', u'Serbian', 'utf-8', 0, """Thomas W. Horna <sarman@t-online.de>""",),
 'sv': (u'Svenska', u'Swedish', 'utf-8', 0, """Per Olofsson <pelle@debian.org>""",),
 'tr': (u'Türkçe', u'Turkish', 'utf-8', 0, """Volkan Y. <yazicivo@ttnet.net.tr>""",),
