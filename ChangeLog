@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-12 22:10:47 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-377
+
+    Summary:
+      Repaired zipping, a very small typo broke it.
+    Revision:
+      moin--main--1.5--patch-377
+
+
+    modified files:
+     ChangeLog MoinMoin/action/AttachFile.py docs/CHANGES
+
+
 2006-01-11 22:01:28 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-376
 
     Summary:

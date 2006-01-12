@@ -4,6 +4,7 @@ MoinMoin Version History
 Version 1.5.current:
   Fixes:
     * Fixed rst parser docutils version check
+    * Repaired zipping feature.
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
