@@ -729,7 +729,7 @@ def unzip_file(pagename, request):
                                   available_attachments_file_count) }
             else:
                 valid_name = False
-                for (oirgname, finalname) in namelist.iteritems():
+                for (origname, finalname) in namelist.iteritems():
                     if valid_pathname(finalname):
                         zi = zf.getinfo(origname)
                         if zi.file_size < single_file_size:
