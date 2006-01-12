@@ -1072,7 +1072,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
-        self.http_headers(["Status: 302", "Location: %s" % url])
+        self.http_headers(["Status: 302 Found", "Location: %s" % url])
 
     def setHttpHeader(self, header):
         """ Save header for later send. """

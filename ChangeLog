@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-12 23:25:56 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-378
+
+    Summary:
+      fixed http status 302 header
+    Revision:
+      moin--main--1.5--patch-378
+
+    fixed http status 302 header
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-01-12 22:10:47 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-377
 
     Summary:
