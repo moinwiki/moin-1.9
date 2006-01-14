@@ -5,6 +5,7 @@ Version 1.5.current:
   Fixes:
     * Fixed rst parser docutils version check
     * Repaired zipping feature.
+    * Fixed the AddRevision command of the PackageInstaller.
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
