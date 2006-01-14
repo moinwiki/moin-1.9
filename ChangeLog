@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-14 01:02:05 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-379
+
+    Summary:
+      show attachment: samples with %20 in attachment list
+    Revision:
+      moin--main--1.5--patch-379
+
+    show attachment: samples with %20 in attachment list
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/AttachFile.py docs/CHANGES
+
+
 2006-01-12 23:25:56 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-378
 
     Summary:

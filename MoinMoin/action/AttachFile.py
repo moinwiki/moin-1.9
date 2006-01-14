@@ -244,7 +244,8 @@ def _build_filelist(request, pagename, showheader, readonly):
                         'label_unzip': label_unzip,
                         'label_install': label_install,
                         'get_url': get_url, 'label_get': label_get,
-                        'file': wikiutil.escape(file), 'fsize': fsize,
+                        'file': wikiutil.escape(file).replace(' ', '%20'),
+                        'fsize': fsize,
                         'pagename': pagename}
 
             del_link = ''

@@ -9,6 +9,8 @@ Version 1.5.current:
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
     * Split up show_hosts into show_hosts and show_names
+    * attachment:file%20with%20spaces.txt in attachment list
+
 
 Version 1.5.0:
   Please completely read CHANGES text until you reach the version you were
