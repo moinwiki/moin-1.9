@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-14 17:41:13 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-380
+
+    Summary:
+      Added a space character to satisfy those crazy KDE users.
+    Revision:
+      moin--main--1.5--patch-380
+
+
+    modified files:
+     ChangeLog MoinMoin/wikiutil.py
+
+
 2006-01-14 01:02:05 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-379
 
     Summary:

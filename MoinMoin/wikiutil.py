@@ -1299,7 +1299,7 @@ def send_title(request, text, **keywords):
             querystr = escape(makeQueryString({'action': 'edit'}))
             # TODO: remove escape=0 in 2.0
             url = page.url(request, querystr, escape=0)
-            bodyattr.append(''' ondblclick="location.href='%s'"''' % url)
+            bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
 
     # Set body to the user interface language and direction
     bodyattr.append(' %s' % request.theme.ui_lang_attr())
