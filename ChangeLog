@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-14 19:50:59 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-381
+
+    Summary:
+      Fixed the AddRevision command of the PackageInstaller.
+    Revision:
+      moin--main--1.5--patch-381
+
+
+    modified files:
+     ChangeLog MoinMoin/packages.py docs/CHANGES
+
+
 2006-01-14 17:41:13 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-380
 
     Summary:
