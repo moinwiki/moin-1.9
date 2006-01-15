@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-16 00:06:22 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-383
+
+    Summary:
+      more file:// support, fixed bracketed link icon (css class)
+    Revision:
+      moin--main--1.5--patch-383
+
+    more file:// support, fixed bracketed link icon (css class)
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/fckdialog.py MoinMoin/parser/wiki.py
+     docs/CHANGES
+     wiki/htdocs/applets/moinFCKplugins/moinlink/fck_link.js
+
+
 2006-01-15 17:05:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-382
 
     Summary:

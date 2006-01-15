@@ -15,11 +15,14 @@ Version 1.5.current:
         but differing 3600s.
         This affected pre-1.3 moin wiki servers running on win32 OS only.
         We now try to correct those inconsistencies in mig05 by fuzzy matching.
- 
+    * fixed bracketed link scheme icon (css class)
+
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
     * Split up show_hosts into show_hosts and show_names
     * attachment:file%20with%20spaces.txt in attachment list
+    * added support for file:// in GUI editor link dialogue, see also:
+      MoinMoin:FileLinks
 
 
 Version 1.5.0:

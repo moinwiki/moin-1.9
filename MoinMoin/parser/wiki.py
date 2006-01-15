@@ -427,7 +427,7 @@ class Parser:
                     self.formatter.image(title=words[0], alt=words[0], src=words[1]) +
                     self.formatter.url(0))
         else:
-            return (self.formatter.url(1, words[0], css='www', unescaped=1) +
+            return (self.formatter.url(1, words[0], css=scheme, unescaped=1) +
                     self.formatter.text(words[1]) +
                     self.formatter.url(0))
 

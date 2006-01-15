@@ -345,6 +345,7 @@ def link_dialog(request):
         <option value="http://" selected="selected">http://</option>
         <option value="https://">https://</option>
         <option value="ftp://">ftp://</option>
+        <option value="file://">file://</option>
         <option value="news://">news://</option>
         <option value="mailto:">mailto:</option>
         <option value="" fckLang="DlgLnkProtoOther">&lt;other&gt;</option>
