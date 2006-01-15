@@ -38,13 +38,13 @@ function OnDialogTabChange(tabCode)
 var oRegex = new Object();
 
 oRegex.UriProtocol = new RegExp('');
-oRegex.UriProtocol.compile('^(((http|https|ftp|news):\/\/)|mailto:)', 'gi');
+oRegex.UriProtocol.compile('^(((http|https|ftp|file|news):\/\/)|mailto:)', 'gi');
 
 oRegex.UrlOnChangeProtocol = new RegExp('');
-oRegex.UrlOnChangeProtocol.compile('^(http|https|ftp|news)://(?=.)', 'gi');
+oRegex.UrlOnChangeProtocol.compile('^(http|https|ftp|file|news)://(?=.)', 'gi');
 
 oRegex.UrlOnChangeTestOther = new RegExp('');
-oRegex.UrlOnChangeTestOther.compile('^(javascript:|#|/)', 'gi');
+oRegex.UrlOnChangeTestOther.compile('^(javascript:|#)', 'gi'); // was: (...#|/)
 
 oRegex.ReserveTarget = new RegExp('');
 oRegex.ReserveTarget.compile('^_(blank|self|top|parent)$', 'i');
