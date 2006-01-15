@@ -2,6 +2,23 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-15 17:05:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-382
+
+    Summary:
+      improved mig scripts for old moin data and working around win32 OS bugs
+    Revision:
+      moin--main--1.5--patch-382
+
+    improved mig scripts for old moin data and working around win32 OS bugs
+    
+
+    modified files:
+     ChangeLog MoinMoin/scripts/migration/12_to_13_mig01.py
+     MoinMoin/scripts/migration/12_to_13_mig04.py
+     MoinMoin/scripts/migration/12_to_13_mig05.py
+     MoinMoin/scripts/migration/12_to_13_mig09.py docs/CHANGES
+
+
 2006-01-14 19:50:59 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-381
 
     Summary:

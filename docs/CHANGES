@@ -6,7 +6,16 @@ Version 1.5.current:
     * Fixed rst parser docutils version check
     * Repaired zipping feature.
     * Fixed the AddRevision command of the PackageInstaller.
-
+    * improved the migration scripts (used to migrate pre-1.3 wikis to 1.3+):
+      * do not crash on empty lines in event log
+      * fix edit log format for very old moin data (like 0.11)
+      * workaround for an ugly win32 operating system bug leading to wiki text
+        file mtime not matching edit logs timestamp values if there was some
+        timezone change since last edit (e.g. a daylight saving tz switch),
+        but differing 3600s.
+        This affected pre-1.3 moin wiki servers running on win32 OS only.
+        We now try to correct those inconsistencies in mig05 by fuzzy matching.
+ 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
     * Split up show_hosts into show_hosts and show_names
