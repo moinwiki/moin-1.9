@@ -187,11 +187,17 @@ def gather_pagedirs(dir_from, is_backupdir=0):
                 backup_from = opj(backupdir_from, bfile)
                 bts = long(bfile) # must be long for py 2.2.x
                 for ts in lleftover:
-                    if abs(bts-ts) < 2000000: # editlog, inexact match
+                    tdiff = abs(bts-ts)
+                    if tdiff < 2000000: # editlog, inexact match
                         entry[ts][0] = backup_from
                         lleftover.remove(ts)
                         bleftover.remove(bfile)
-
+                    elif 3599000000 <= tdiff <= 3601000000: # editlog, win32 daylight saving bug
+                        entry[ts][0] = backup_from
+                        lleftover.remove(ts)
+                        bleftover.remove(bfile)
+                        print "Warning: Win32 daylight saving bug encountered & fixed!"
+                        
             if len(bleftover) == 1 and len(lleftover) == 1: # only 1 left, must be this
                 backup_from = opj(backupdir_from, bleftover[0])
                 entry[lleftover[0]][0] = backup_from
@@ -218,6 +224,7 @@ def gather_pagedirs(dir_from, is_backupdir=0):
                 
         # delete unmatching log entries
         for ts in lleftover:
+            #print "XXX Deleting leftover log entry: %r" % entry[ts]
             del entry[ts]
         
         info[pagename] = entry

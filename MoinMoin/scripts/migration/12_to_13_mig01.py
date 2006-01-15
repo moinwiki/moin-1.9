@@ -149,7 +149,9 @@ def convert_editlog(log_from, log_to, enc_from, enc_to):
             fields[0] = qf_convert_string(fields[0], enc_from, enc_to)
             fields[2] = str(wikiutil.timestamp2version(float(fields[2])))
             if len(fields) < 6:
-                fields.append('SAVE')
+                fields.append('') # comment
+            if len(fields) < 7:
+                fields.append('SAVE') # action
             fields[5] = convert_string(fields[5], enc_from, enc_to)
             line = '\t'.join(fields) + '\n'
             file_to.write(line)

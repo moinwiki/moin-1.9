@@ -59,6 +59,8 @@ def convert_eventlog(file_from, file_to):
         return
     f = open(file_to, 'a')
     for l in open(file_from):
+        if not l.strip():
+            continue
         data = l.split('\t')
         data[0] = str(convert_ts(float(data[0]))) # we want usecs
         data = '\t'.join(data)
