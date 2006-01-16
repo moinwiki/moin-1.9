@@ -6,7 +6,10 @@
     @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
     @license: GNU GPL, see COPYING for details.
 """
-import re, time, os, copy
+import re, time, os
+
+#import copy #broken, see comments at top of this file:
+from MoinMoin.support import copy
 
 # cPickle can encode normal and Unicode strings
 # see http://docs.python.org/lib/node66.html

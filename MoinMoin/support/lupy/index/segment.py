@@ -5,7 +5,9 @@
 # General Public License as published by the Free Software Foundation.
 
 from MoinMoin.support.lupy.index import term
-import copy
+
+#import copy #broken, see comments at top of this file:
+from MoinMoin.support import copy
 
 class SegmentTermEnum:
 

@@ -11,7 +11,10 @@ from array import array
 from  MoinMoin.support.lupy.util import BitVector
 
 from MoinMoin.support.lupy.index import field, term, segment
-import copy
+
+#import copy #broken, see comments at top of this file:
+from MoinMoin.support import copy
+
 from bisect import insort
 import os
 
