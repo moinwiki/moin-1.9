@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-16 20:28:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-385
+
+    Summary:
+      include a fixed copy.py, taken from Python 2.4.2
+    Revision:
+      moin--main--1.5--patch-385
+
+    include a fixed copy.py, taken from Python 2.4.2
+    
+
+    new files:
+     MoinMoin/support/.arch-ids/copy.py.id MoinMoin/support/copy.py
+
+    modified files:
+     ChangeLog MoinMoin/parser/rst.py
+     MoinMoin/support/lupy/index/segment.py
+     MoinMoin/support/lupy/index/segmentmerger.py
+     MoinMoin/wikidicts.py docs/CHANGES
+
+
 2006-01-16 01:46:43 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-384
 
     Summary:
