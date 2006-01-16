@@ -23,6 +23,8 @@ Version 1.5.current:
     * attachment:file%20with%20spaces.txt in attachment list
     * added support for file:// in GUI editor link dialogue, see also:
       MoinMoin:FileLinks
+    * cfg.mail_smarthost now supports "server:port" syntax, the default port
+      is 25, of course.
 
 
 Version 1.5.0:

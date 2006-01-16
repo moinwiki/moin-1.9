@@ -96,7 +96,8 @@ def sendmail(request, to, subject, text, **kw):
     # Send the message
     if not cfg.mail_sendmail:
         try:
-            server = smtplib.SMTP(cfg.mail_smarthost)
+            host, port = (cfg.mail_smarthost + ':25').split(':')[:2]
+            server = smtplib.SMTP(host, int(port))
             try:
                 #server.set_debuglevel(1)
                 if cfg.mail_login:
