@@ -447,23 +447,24 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         @rtype: unicode
         @return: error message
         """
-        # First save a final backup copy of the current page
-        # (recreating the page allows access to the backups again)
         _ = self._
         
         try:
+            # First save a final backup copy of the current page
+            # (recreating the page allows access to the backups again)
             msg = self.saveText(u"deleted\n", 0, comment=comment or u'')
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
+            # Then really delete it
+            try:
+                os.remove(self._text_filename())
+            except OSError, err:
+                if err.errno != errno.ENOENT:
+                    raise err
         except self.SaveError, message:
             # XXX Error handling
-            pass
-        # Then really delete it
-        try:
-            os.remove(self._text_filename())
-        except OSError, er:
-            if er.errno != errno.ENOENT: raise er
+            msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
         
         # reset page object
         self.reset()
