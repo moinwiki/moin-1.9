@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-17 08:45:18 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-386
+
+    Summary:
+      copy.py should be compatible with Python 2.3 now
+    Revision:
+      moin--main--1.5--patch-386
+
+    copy.py should be compatible with Python 2.3 now
+    
+
+    modified files:
+     ChangeLog MoinMoin/support/copy.py
+
+
 2006-01-16 20:28:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-385
 
     Summary:
