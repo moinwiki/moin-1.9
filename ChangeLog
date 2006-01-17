@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-17 09:01:41 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-387
+
+    Summary:
+      DeletePage: fix uninitialized msg attribute in case of SaveError exception
+    Revision:
+      moin--main--1.5--patch-387
+
+    DeletePage: fix uninitialized msg attribute in case of SaveError exception
+    
+
+    modified files:
+     ChangeLog MoinMoin/PageEditor.py
+
+
 2006-01-17 08:45:18 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-386
 
     Summary:
