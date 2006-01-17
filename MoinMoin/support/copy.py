@@ -1,6 +1,9 @@
-"""This is a copy of python 2.4.2 copy.py as it was broken in:
+"""This is a (modified) copy of python 2.4.2 copy.py as it was broken in:
    Python 2.3.x, x < 5
    Python 2.4.x, x < 1
+
+   Modifications done are minimal, so that same copy.py can work under 2.3
+   and 2.4 python (try: ... except: ... around some set stuff).
 
 Generic (shallow and deep) copying operations.
 
@@ -117,9 +120,14 @@ _copy_dispatch = d = {}
 def _copy_immutable(x):
     return x
 for t in (types.NoneType, int, long, float, bool, str, tuple,
-          frozenset, type, xrange, types.ClassType,
+          type, xrange, types.ClassType,
           types.BuiltinFunctionType):
     d[t] = _copy_immutable
+try:
+    d[frozenset] = _copy_immutable
+except:
+    pass
+    
 for name in ("ComplexType", "UnicodeType", "CodeType"):
     t = getattr(types, name, None)
     if t is not None:
@@ -127,8 +135,12 @@ for name in ("ComplexType", "UnicodeType", "CodeType"):
 
 def _copy_with_constructor(x):
     return type(x)(x)
-for t in (list, dict, set):
+for t in (list, dict):
     d[t] = _copy_with_constructor
+try:
+    d[set] = _copy_with_constructor
+except:
+    pass
 
 def _copy_with_copy_method(x):
     return x.copy()
