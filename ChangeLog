@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-18 14:03:07 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-390
+
+    Summary:
+      Fixed line endings in rst parser and removed the copy import.
+    Revision:
+      moin--main--1.5--patch-390
+
+
+    modified files:
+     ChangeLog MoinMoin/parser/rst.py
+
+
 2006-01-18 09:48:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-389
 
     Summary:

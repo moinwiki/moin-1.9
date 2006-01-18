@@ -15,9 +15,6 @@ import StringIO
 import __builtin__
 import sys
 
-#import copy #broken, see comments at top of this file:
-from MoinMoin.support import copy
-
 import types
 import os
 
