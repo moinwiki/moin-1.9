@@ -241,7 +241,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 dt_d_combined = UserSettings._date_formats.get(form['datetime_fmt'][0], '')
                 theuser.datetime_fmt, theuser.date_fmt = dt_d_combined.split(' & ')
             except (KeyError, ValueError):
-                pass
+                theuser.datetime_fmt = '' # default
     
             # try to get the (optional) theme
             theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
