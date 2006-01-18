@@ -4,7 +4,7 @@ MoinMoin Version History
 Version 1.5.current:
   Fixes:
     * Fixed rst parser docutils version check
-    * Repaired zipping feature.
+    * Repaired attachment unzipping feature.
     * Fixed the AddRevision command of the PackageInstaller.
     * improved the migration scripts (used to migrate pre-1.3 wikis to 1.3+):
       * do not crash on empty lines in event log
@@ -16,9 +16,10 @@ Version 1.5.current:
         This affected pre-1.3 moin wiki servers running on win32 OS only.
         We now try to correct those inconsistencies in mig05 by fuzzy matching.
     * fixed bracketed link scheme icon (css class)
-    * we included a copy of Python 2.4.2's copy.py as some previous versions
-      seem to have problems (2.3.x, x < 5 and also 2.4[.0]), see:
-      http://moinmoin.wikiwikiweb.de/MoinMoinBugs/DeepCopyError
+    * we included a modified copy of Python 2.4.2's copy.py as some previous
+      python versions seem to have problems (2.3.x, x < 5 and also 2.4[.0]),
+      see: http://moinmoin.wikiwikiweb.de/MoinMoinBugs/DeepCopyError
+      Our own copy.py was slightly modified to run on 2.3.x and 2.4.x.
     * Fixed the problem of not being able to change the date/time format back
       to "Default" (UserPreferences).
 
