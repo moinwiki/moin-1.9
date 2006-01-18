@@ -19,6 +19,8 @@ Version 1.5.current:
     * we included a copy of Python 2.4.2's copy.py as some previous versions
       seem to have problems (2.3.x, x < 5 and also 2.4[.0]), see:
       http://moinmoin.wikiwikiweb.de/MoinMoinBugs/DeepCopyError
+    * Fixed the problem of not being able to change the date/time format back
+      to "Default" (UserPreferences).
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)

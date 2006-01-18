@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-18 09:30:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-388
+
+    Summary:
+      fixed not being able to change the date/time format back to Default
+    Revision:
+      moin--main--1.5--patch-388
+
+    fixed not being able to change the date/time format back to Default
+    
+
+    modified files:
+     ChangeLog MoinMoin/userform.py docs/CHANGES
+
+
 2006-01-17 09:01:41 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-387
 
     Summary:
