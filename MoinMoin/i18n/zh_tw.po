@@ -94,15 +94,15 @@ msgstr "預覽頁面 \"%(pagename)s\""
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s has expired!"
-msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定逾時了！"
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定逾時了！"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定，還剩下 # 分鐘。"
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定，還剩下 # 分鐘。"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "你在頁面 \"%(lock_page)s\" 的編輯鎖定，只剩下 # 秒了！"
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定，只剩下 # 秒了！"
 
 msgid "Someone else deleted this page while you were editing!"
 msgstr "有人在你編輯的時候刪除本頁了！"
@@ -133,7 +133,7 @@ msgstr "[你不能閱讀 %s]"
 
 #, python-format
 msgid "Describe %s here."
-msgstr "在這裡編輯新頁面 \"%s\""
+msgstr "在這裡編輯新頁面「%s」"
 
 msgid "Check Spelling"
 msgstr "拼字檢查"
@@ -479,7 +479,7 @@ msgstr ""
 
 #, python-format
 msgid "You are not allowed to do %s on this page."
-msgstr "你無權 \"%s\" 本頁。"
+msgstr "你無權「%s」本頁。"
 
 msgid "Login"
 msgstr "登入"
@@ -842,7 +842,7 @@ msgstr "!MoinMoin 版本"
 
 #, python-format
 msgid "Release %s [Revision %s]"
-msgstr "%s 版 [第 %s 號修訂]"
+msgstr "%s 版 [%s 修訂]"
 
 msgid "4Suite Version"
 msgstr "4Suite 版本"

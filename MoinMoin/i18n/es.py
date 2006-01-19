@@ -517,9 +517,9 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''Exclude system pages''':
 '''Excluir páginas del sistema''',
 '''Plain title index''':
-'''Indice de Títulos en texto plano''',
+'''Índice de Títulos en texto plano''',
 '''XML title index''':
-'''Indice de Títulos en XML''',
+'''Índice de Títulos en XML''',
 '''Python Version''':
 '''Versión de Python''',
 '''MoinMoin Version''':
@@ -924,9 +924,9 @@ rojo=editar''',
 '''RecentChanges''':
 '''CambiosRecientes''',
 '''TitleIndex''':
-'''IndiceDeTítulos''',
+'''ÍndicePorTítulos''',
 '''WordIndex''':
-'''IndiceDePalabras''',
+'''ÍndicePorPalabras''',
 '''FindPage''':
 '''BuscarPágina''',
 '''SiteNavigation''':
