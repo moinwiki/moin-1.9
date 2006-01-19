@@ -351,6 +351,5 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                            hilite_re=badwords_re)
 
         self.request.write(self.request.formatter.endContent()) # end content div
-        self.request.theme.emit_custom_html(self.cfg.page_footer1)
-        self.request.theme.emit_custom_html(self.cfg.page_footer2)
+        wikiutil.send_footer(self.request, self.page_name)
 

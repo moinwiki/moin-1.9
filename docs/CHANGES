@@ -22,6 +22,8 @@ Version 1.5.current:
       Our own copy.py was slightly modified to run on 2.3.x and 2.4.x.
     * Fixed the problem of not being able to change the date/time format back
       to "Default" (UserPreferences).
+    * We generate the GUI editor footer now the same way as the text editor
+      footer.
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)

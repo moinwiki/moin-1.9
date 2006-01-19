@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-19 11:21:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-392
+
+    Summary:
+      make GUI editor footer the same way as text editor footer
+    Revision:
+      moin--main--1.5--patch-392
+
+    make GUI editor footer the same way as text editor footer
+    
+
+    modified files:
+     ChangeLog MoinMoin/PageGraphicalEditor.py docs/CHANGES
+
+
 2006-01-19 08:58:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-391
 
     Summary:
