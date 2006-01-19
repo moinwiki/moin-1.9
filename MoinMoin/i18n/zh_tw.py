@@ -51,11 +51,11 @@ macro call.-~
 '''Preview of "%(pagename)s"''':
 '''預覽頁面 "%(pagename)s"''',
 '''Your edit lock on %(lock_page)s has expired!''':
-'''你在頁面 "%(lock_page)s" 的編輯鎖定逾時了！''',
+'''你在頁面「%(lock_page)s」的編輯鎖定逾時了！''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''你在頁面 "%(lock_page)s" 的編輯鎖定，還剩下 # 分鐘。''',
+'''你在頁面「%(lock_page)s」的編輯鎖定，還剩下 # 分鐘。''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''你在頁面 "%(lock_page)s" 的編輯鎖定，只剩下 # 秒了！''',
+'''你在頁面「%(lock_page)s」的編輯鎖定，只剩下 # 秒了！''',
 '''Someone else deleted this page while you were editing!''':
 '''有人在你編輯的時候刪除本頁了！''',
 '''Someone else changed this page while you were editing!''':
@@ -72,7 +72,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''[You may not read %s]''':
 '''[你不能閱讀 %s]''',
 '''Describe %s here.''':
-'''在這裡編輯新頁面 "%s"''',
+'''在這裡編輯新頁面「%s」''',
 '''Check Spelling''':
 '''拼字檢查''',
 '''Save Changes''':
@@ -288,7 +288,7 @@ space between words. Group page name is not allowed.''':
 名稱可以使用 Unicode 文數字，字跟字中間可以加進一個空白，
 但不能使用群組頁面的名字。''',
 '''You are not allowed to do %s on this page.''':
-'''你無權 "%s" 本頁。''',
+'''你無權「%s」本頁。''',
 '''Login''':
 '''登入''',
 ''' %s and try again.''':
@@ -522,7 +522,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''MoinMoin Version''':
 '''!MoinMoin 版本''',
 '''Release %s [Revision %s]''':
-'''%s 版 [第 %s 號修訂]''',
+'''%s 版 [%s 修訂]''',
 '''4Suite Version''':
 '''4Suite 版本''',
 '''Number of pages''':

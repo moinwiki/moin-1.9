@@ -114,7 +114,7 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
  Links:: [[Verbatim(ZusammenGeschriebeneGroßeWorte)]]; [[Verbatim(["Klammern und doppelte  Anführungszeichen"])]]; url; [url]; [url label].
  Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    keine anhängenden Leerzeichen nach Überschriften oder Tabellen.
 
-(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference {en}.
+(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference.
 ''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',

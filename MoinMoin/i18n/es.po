@@ -864,10 +864,10 @@ msgid "Exclude system pages"
 msgstr "Excluir páginas del sistema"
 
 msgid "Plain title index"
-msgstr "Indice de Títulos en texto plano"
+msgstr "Índice de Títulos en texto plano"
 
 msgid "XML title index"
-msgstr "Indice de Títulos en XML"
+msgstr "Índice de Títulos en XML"
 
 msgid "Python Version"
 msgstr "Versión de Python"
@@ -1586,10 +1586,10 @@ msgid "RecentChanges"
 msgstr "CambiosRecientes"
 
 msgid "TitleIndex"
-msgstr "IndiceDeTítulos"
+msgstr "ÍndicePorTítulos"
 
 msgid "WordIndex"
-msgstr "IndiceDePalabras"
+msgstr "ÍndicePorPalabras"
 
 msgid "FindPage"
 msgstr "BuscarPágina"
