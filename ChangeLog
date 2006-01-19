@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-19 08:58:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-391
+
+    Summary:
+      yet another fix for date_fmt default
+    Revision:
+      moin--main--1.5--patch-391
+
+    yet another fix for date_fmt default
+    
+
+    modified files:
+     ChangeLog MoinMoin/userform.py
+
+
 2006-01-18 14:03:07 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-390
 
     Summary:
