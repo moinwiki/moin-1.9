@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-20 20:39:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-394
+
+    Summary:
+      css workaround for yet another IE rendering bug
+    Revision:
+      moin--main--1.5--patch-394
+
+    css workaround for yet another IE rendering bug
+    
+
+    modified files:
+     ChangeLog docs/CHANGES wiki/htdocs/classic/css/screen.css
+     wiki/htdocs/modern/css/screen.css
+     wiki/htdocs/rightsidebar/css/screen.css
+
+
 2006-01-19 23:15:28 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-393
 
     Summary:

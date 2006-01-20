@@ -24,6 +24,8 @@ Version 1.5.current:
       to "Default" (UserPreferences).
     * We generate the GUI editor footer now the same way as the text editor
       footer.
+    * Include a CSS workaround for yet another IE bug, see:
+      MoinMoinBugs:InternetExplorerPeekABooBugInRightSideBar
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
