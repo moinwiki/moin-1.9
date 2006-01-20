@@ -383,3 +383,11 @@ form.dialog {
  */
 * html span.anchor { display: none; }
 
+/* IE6 has a bug with rendering of float elements. We workaround this bug by
+ * assigning those elements a height attribute because we currently don't know
+ * a better solution. This results in IE calculating the correct height of the
+ * characters and displaying them correctly. We don't know any negative side
+ * effects of this workaround:
+ */
+* html div#page, * html div#header { height: 0.001%; }
+
