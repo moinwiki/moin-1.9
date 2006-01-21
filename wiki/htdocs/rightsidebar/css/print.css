@@ -24,6 +24,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+.info a {
+    color: gray;
+}
+
 pre {
 	font-size: 10pt;
 }
@@ -43,40 +47,7 @@ a.interwiki img, a.badinterwiki img {
 
 /* user interface styles */
 
-#header, #sidebar, #footer, #timings, #credits {
+#header, #sidebar, #footer, #timings, #credits, #interwiki, #pagelocation {
 	display: none;
-}
-
-#interwiki {
-    float: left;
-    margin: 0;
-    padding: 0;
-    font-size: 0.4em;
-}
-
-*[dir="rtl"] #interwiki {
-    float: right;
-}
-
-#interwiki span:after {
-    content: ": ";
-}
-
-#pagelocation {
-    clear: right;
-    display: block;
-    margin: 0;
-    padding: 0;
-    font-size: 0.4em;
-}
-
-*[dir="rtl"] #pagelocation {
-    clear: left;
-}
-
-#pagelocation li {
-    display: inline;
-    padding: 0 0.3em;
-    margin: 0;
 }
 

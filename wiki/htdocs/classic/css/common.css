@@ -134,6 +134,11 @@ hr {
 .footnotes li {
 }
 
+.info {
+    float: right;
+    font-size: 0.7em;
+    color: gray;
+}
 
 /* eye catchers */
 .warning 

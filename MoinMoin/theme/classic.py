@@ -13,6 +13,7 @@
 """
 
 from MoinMoin import wikiutil, version
+from MoinMoin import caching
 from MoinMoin.theme import ThemeBase
 from MoinMoin.Page import Page
 
@@ -32,7 +33,9 @@ class Theme(ThemeBase):
         @rtype: unicode
         @return: page footer html
         """
+        page = d['page']
         parts = [# End of page
+                 self.pageinfo(page),
                  self.endPage(),
 
                  # Pre footer custom html (not recommended!)
@@ -51,7 +54,6 @@ class Theme(ThemeBase):
         if not self.shouldShowEditbar(d['page']):
             return ''
         parts = [u'<div id="footer">',
-                 self.footer_fragments(d, **keywords),
                  self.edit_link(d, **keywords),
                  self.availableactions(d),
                  u'</div>',]
@@ -168,21 +170,7 @@ class Theme(ThemeBase):
         @return: edittext link html
         """
         page = d['page']
-        return  u'<ul class="editbar"><li>%s</li><li>%s</li></ul>' % (
-                    self.editorLink(page), self.pageinfo(page))
-
-    def footer_fragments(self, d, **keywords):
-        """
-        assemble HTML code fragments added by the page formatters
-        
-        @param d: parameter dictionary
-        @rtype: string
-        @return: footer fragments html
-        """
-        html = ''
-        if d['footer_fragments']:
-            html = ''.join(d['footer_fragments'].values())
-        return html
+        return  u'<ul class="editbar"><li>%s</li></ul>' % self.editorLink(page)
 
     def availableactions(self, d):    
         """
@@ -194,12 +182,12 @@ class Theme(ThemeBase):
         """
         request = self.request
         _ = request.getText
-        html = ''
-        available = request.getAvailableActions(d['page'])
+        html = []
+        page = d['page']
+        available = request.getAvailableActions(page)
         if available:
             available = available.keys()
             available.sort()
-            html = []
             for action in available:
                 # Always add spaces: AttachFile -> Attach File 
                 # XXX TODO do not make a page object just for split_title
@@ -210,7 +198,15 @@ class Theme(ThemeBase):
                 link = wikiutil.link_tag(request, params, title)
                 html.append(link)
                 
-            html = u'<p>%s %s</p>\n' % (_('Or try one of these actions:'),
+        title = _("DeleteCache", formatted=False)
+        params = '%s?action=%s' % (d['page_name'], 'refresh')
+        link = wikiutil.link_tag(request, params, title)
+        
+        cache = caching.CacheEntry(request, page, page.getFormatterName())
+        date = request.user.getFormattedDateTime(cache.mtime())
+        deletecache = u'<p>%s %s</p>' % (link, _('(cached %s)') % date)
+
+        html = deletecache + u'<p>%s %s</p>\n' % (_('Or try one of these actions:'),
                                        u', '.join(html))
         return html
 
