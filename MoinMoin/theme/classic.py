@@ -52,7 +52,7 @@ class Theme(ThemeBase):
             return ''
         parts = [u'<div id="footer">',
                  self.footer_fragments(d, **keywords),
-                 self.edittext_link(d, **keywords),
+                 self.edit_link(d, **keywords),
                  self.availableactions(d),
                  u'</div>',]
         return ''.join(parts)
@@ -139,6 +139,7 @@ class Theme(ThemeBase):
         dict = {
             'config_header1_html': self.emit_custom_html(self.cfg.page_header1),
             'config_header2_html': self.emit_custom_html(self.cfg.page_header2),
+            'title_html': self.title(d),
             'msg_html': self.msg(d),
             'startpage_html': self.startPage(),
         }
@@ -147,6 +148,7 @@ class Theme(ThemeBase):
         html = """
 %(config_header1_html)s
 
+%(title_html)s
 %(msg_html)s
 
 %(config_header2_html)s
@@ -157,7 +159,7 @@ class Theme(ThemeBase):
 
     # Footer stuff #######################################################
     
-    def edittext_link(self, d, **keywords):
+    def edit_link(self, d, **keywords):
         """
         Assemble EditText link (or indication that page cannot be edited)
         
@@ -165,29 +167,9 @@ class Theme(ThemeBase):
         @rtype: string
         @return: edittext link html
         """
-        _ = self.request.getText
         page = d['page']
-        if keywords.get('editable', 1):
-
-            # Add edit link
-            editable = (self.request.user.may.write(d['page_name']) and
-                        page.isWritable())
-            if editable:
-                title = _('EditText', formatted=False)
-                edit = wikiutil.link_tag(self.request, d['q_page_name'] +
-                                         '?action=edit', title)
-            else:
-                edit = _('Immutable page')
-
-            # Add last edit info
-            info = page.lastEditInfo()
-            if info:
-                if info.get('editor'):
-                    info = _("last edited %(time)s by %(editor)s") % info
-                else:
-                    info = _("last modified %(time)s") % info
-                return '<p>%s (%s)</p>' % (edit, info)
-        return ''
+        return  u'<ul class="editbar"><li>%s</li><li>%s</li></ul>' % (
+                    self.editorLink(page), self.pageinfo(page))
 
     def footer_fragments(self, d, **keywords):
         """

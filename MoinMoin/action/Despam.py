@@ -184,5 +184,5 @@ def execute(pagename, request):
 
     # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename, editable=0, showactions=0, form=request.form)
+    wikiutil.send_footer(request, pagename)
 

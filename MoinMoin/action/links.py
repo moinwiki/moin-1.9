@@ -52,7 +52,7 @@ def execute(pagename, request):
 
     if mimetype == "text/html":
         request.write('</pre>')
-        wikiutil.send_footer(request, pagename, editable=0, showactions=0, form=form)
+        wikiutil.send_footer(request, pagename)
     else:
         raise MoinMoinNoFooter
 

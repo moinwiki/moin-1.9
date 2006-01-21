@@ -255,6 +255,28 @@ pre {
 	color: black; 
 }
 
+.editbar {
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.editbar li {
+    display: inline;
+    padding: 0;
+    margin: 0 6px 0 0;
+}
+
+*[dir="rtl"] .editbar li {
+    float: right;
+}
+
+.editbar li p {
+    display: inline;
+}
+
 #message {
 	clear: both;
 	border: 2px solid #c0c0c0;

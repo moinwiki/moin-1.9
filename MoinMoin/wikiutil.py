@@ -1385,8 +1385,6 @@ def send_footer(request, pagename, **keywords):
 
     @param request: the request object
     @param pagename: WikiName of the page
-    @keyword editable: true, when page is editable (default: true)
-    @keyword showpage: true, when link back to page is wanted (default: false)
     @keyword print_mode: true, when page is displayed in Print mode
     """
     d = request.themedict

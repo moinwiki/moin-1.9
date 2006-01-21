@@ -506,7 +506,7 @@ def upload_form(pagename, request, msg=''):
     request.write('<div id="content">\n') # start content div
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename, showpage=1)
+    wikiutil.send_footer(request, pagename)
 
 
 def do_upload(pagename, request):
