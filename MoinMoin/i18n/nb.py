@@ -694,10 +694,6 @@ rød=rediger''',
 '''Siden kan ikke endres''',
 '''Show %s days.''':
 '''Vis %s dager.''',
-'''EditText''':
-'''RedigerTekst''',
-'''Immutable page''':
-'''Siden kan ikke endres''',
 '''Or try one of these actions:''':
 '''Eller prøv en av følgende operasjoner:''',
 '''Page''':

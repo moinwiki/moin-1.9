@@ -38,6 +38,7 @@ Version 1.5.current:
     * cfg.mail_smarthost now supports "server:port" syntax, the default port
       is 25, of course.
     * removed unused kwargs showpage/editable/form from wikiutil.send_footer
+    * updated i18n (translation texts, additional languages)
 
 
 Version 1.5.0:

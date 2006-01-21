@@ -890,10 +890,6 @@ rød=redigér''',
 '''Vedhæftede filer''',
 '''Show %s days.''':
 '''Vis %s dage.''',
-'''EditText''':
-'''RedigérTekst''',
-'''Immutable page''':
-'''Ikke-redigérbar side''',
 '''Or try one of these actions:''':
 '''Eller prøv en af følgende rutiner:''',
 '''Page''':

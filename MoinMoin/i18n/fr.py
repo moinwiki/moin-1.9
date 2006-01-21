@@ -898,10 +898,6 @@ rouge=modifications''',
 '''Pièces jointes''',
 '''Show %s days.''':
 '''Voir %s jours.''',
-'''EditText''':
-'''ÉditionDuTexte''',
-'''Immutable page''':
-'''Page immuable''',
 '''Or try one of these actions:''':
 '''Ou essayez l\'une de ces actions :''',
 '''Page''':

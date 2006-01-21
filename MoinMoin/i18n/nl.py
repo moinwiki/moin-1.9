@@ -720,10 +720,6 @@ rood=bewerken''',
 '''Vastliggende pagina''',
 '''Show %s days.''':
 '''Laat %s dagen zien.''',
-'''EditText''':
-'''TekstBewerken''',
-'''Immutable page''':
-'''Vastliggende pagina''',
 '''Or try one of these actions:''':
 '''Of probeer een van deze acties: ''',
 '''Page''':

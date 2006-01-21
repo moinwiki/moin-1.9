@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1518,12 +1518,6 @@ msgstr "Liitetiedostot"
 msgid "Show %s days."
 msgstr "Näytä %s päivää."
 
-msgid "EditText"
-msgstr "MuokkaaTekstiä"
-
-msgid "Immutable page"
-msgstr "Suojattu sivu"
-
 msgid "Or try one of these actions:"
 msgstr "Tai koita jotakin näistä toiminnoista:"
 
@@ -1634,3 +1628,9 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "EditText"
+#~ msgstr "MuokkaaTekstiä"
+
+#~ msgid "Immutable page"
+#~ msgstr "Suojattu sivu"

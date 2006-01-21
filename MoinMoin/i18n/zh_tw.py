@@ -893,10 +893,6 @@ red=edit''':
 '''附件''',
 '''Show %s days.''':
 '''顯示 %s 天。''',
-'''EditText''':
-'''編輯本頁''',
-'''Immutable page''':
-'''唯讀頁面''',
 '''Or try one of these actions:''':
 '''或使用下列功能：''',
 '''Page''':

@@ -894,10 +894,6 @@ red=edit''':
 '''附件''',
 '''Show %s days.''':
 '''显示%s天''',
-'''EditText''':
-'''编辑正文''',
-'''Immutable page''':
-'''只读网页''',
 '''Or try one of these actions:''':
 '''或下列操作: ''',
 '''Page''':

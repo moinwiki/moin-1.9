@@ -897,10 +897,6 @@ czerwony=edycja''',
 '''Załączniki''',
 '''Show %s days.''':
 '''Pokaż %s dni.''',
-'''EditText''':
-'''Edytuj tekst''',
-'''Immutable page''':
-'''Strona statyczna''',
 '''Or try one of these actions:''':
 '''Lub spróbuj wykonać: ''',
 '''Page''':

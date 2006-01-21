@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1484,12 +1484,6 @@ msgstr "附件"
 msgid "Show %s days."
 msgstr "显示%s天"
 
-msgid "EditText"
-msgstr "编辑正文"
-
-msgid "Immutable page"
-msgstr "只读网页"
-
 msgid "Or try one of these actions:"
 msgstr "或下列操作: "
 
@@ -1597,6 +1591,12 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "EditText"
+#~ msgstr "编辑正文"
+
+#~ msgid "Immutable page"
+#~ msgstr "只读网页"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "Cookie已经删除. 您已登出."

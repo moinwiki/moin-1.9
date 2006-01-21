@@ -604,10 +604,6 @@ crveno=obrade''',
 '''Izlogovati se''',
 '''Clear message''':
 '''Izbriši ovu poruku''',
-'''EditText''':
-'''IzmeniTekst''',
-'''Immutable page''':
-'''Neizmenjljiva stranica''',
 '''Or try one of these actions:''':
 '''Ili izaberite neke od ovih akcija:''',
 '''Page''':

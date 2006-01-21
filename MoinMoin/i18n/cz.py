@@ -867,10 +867,6 @@ red=edit''':
 '''Přílohy''',
 '''Show %s days.''':
 '''Ukázat %s dní.''',
-'''EditText''':
-'''Editace''',
-'''Immutable page''':
-'''Neměnná stránka''',
 '''Or try one of these actions:''':
 '''Nebo zkuste jednu z následujících akcí:''',
 '''Page''':

@@ -893,10 +893,6 @@ red=edit''':
 '''添付ファイル''',
 '''Show %s days.''':
 '''%s日表示''',
-'''EditText''':
-'''テキストの編集''',
-'''Immutable page''':
-'''編集不可のページ''',
 '''Or try one of these actions:''':
 '''アクション一覧:''',
 '''Page''':

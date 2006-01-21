@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -1522,12 +1522,6 @@ msgstr "Piesaistes"
 msgid "Show %s days."
 msgstr "Rādīt %s dienas."
 
-msgid "EditText"
-msgstr "LabotTekstu"
-
-msgid "Immutable page"
-msgstr "Nemaināma lapa"
-
 msgid "Or try one of these actions:"
 msgstr "Vai mēģināt kādu no darbībām:"
 
@@ -1644,6 +1638,12 @@ msgstr "PārdēvētLapu"
 
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
+
+#~ msgid "EditText"
+#~ msgstr "LabotTekstu"
+
+#~ msgid "Immutable page"
+#~ msgstr "Nemaināma lapa"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "Sīkdatne dzēsta. Jūs izgājāt no sistēmas."

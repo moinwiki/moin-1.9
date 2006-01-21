@@ -888,10 +888,6 @@ red=edit''',
 '''Add Link''',
 '''Show %s days.''':
 '''Show %s days.''',
-'''EditText''':
-'''EditText''',
-'''Immutable page''':
-'''Immutable page''',
 '''Or try one of these actions:''':
 '''Or try one of these actions:''',
 '''Page''':

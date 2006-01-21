@@ -901,10 +901,6 @@ röd=ändra''',
 '''Bilagor''',
 '''Show %s days.''':
 '''Visa %s dagar.''',
-'''EditText''':
-'''RedigeraText''',
-'''Immutable page''':
-'''Skrivskyddad sida''',
 '''Or try one of these actions:''':
 '''Eller pröva någon av de här åtgärderna:''',
 '''Page''':

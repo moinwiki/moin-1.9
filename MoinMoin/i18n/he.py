@@ -750,10 +750,6 @@ red=edit''':
 '''דף נעול''',
 '''Show %s days.''':
 '''הצג %s ימים.''',
-'''EditText''':
-'''ערוך דף''',
-'''Immutable page''':
-'''דף נעול''',
 '''Or try one of these actions:''':
 '''פעולות נוספות:''',
 '''Page''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-11-18 20:25 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1536,12 +1536,6 @@ msgstr "Anexos"
 msgid "Show %s days."
 msgstr "Mostrar %s dias."
 
-msgid "EditText"
-msgstr "EditarTexto"
-
-msgid "Immutable page"
-msgstr "Página não editável"
-
 msgid "Or try one of these actions:"
 msgstr "Ou tente uma da seguintes ações: "
 
@@ -1652,6 +1646,12 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "EditText"
+#~ msgstr "EditarTexto"
+
+#~ msgid "Immutable page"
+#~ msgstr "Página não editável"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "Você saiu com sucesso do sistema (cookie apagado)."

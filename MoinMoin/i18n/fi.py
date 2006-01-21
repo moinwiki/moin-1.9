@@ -897,10 +897,6 @@ red=edit''',
 '''Liitetiedostot''',
 '''Show %s days.''':
 '''Näytä %s päivää.''',
-'''EditText''':
-'''MuokkaaTekstiä''',
-'''Immutable page''':
-'''Suojattu sivu''',
 '''Or try one of these actions:''':
 '''Tai koita jotakin näistä toiminnoista:''',
 '''Page''':

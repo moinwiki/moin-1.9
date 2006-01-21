@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1555,12 +1555,6 @@ msgstr "Dateianhänge"
 msgid "Show %s days."
 msgstr "%s Tage anzeigen."
 
-msgid "EditText"
-msgstr "Editieren"
-
-msgid "Immutable page"
-msgstr "Geschützte Seite"
-
 msgid "Or try one of these actions:"
 msgstr "Oder benutze eine dieser Aktionen:"
 
@@ -1670,3 +1664,9 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
+
+#~ msgid "EditText"
+#~ msgstr "Editieren"
+
+#~ msgid "Immutable page"
+#~ msgstr "Geschützte Seite"

@@ -681,10 +681,6 @@ red=edit''',
 '''못 고치는 글''',
 '''Show %s days.''':
 '''변경사항 표시 (일): %s''',
-'''EditText''':
-'''글 고치기''',
-'''Immutable page''':
-'''못 고치는 글''',
 '''Or try one of these actions:''':
 '''다른 작업을 할 수도 있습니다 : ''',
 '''Page''':

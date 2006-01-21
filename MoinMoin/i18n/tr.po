@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -1563,12 +1563,6 @@ msgstr "Ekler"
 msgid "Show %s days."
 msgstr "%s günlük göster."
 
-msgid "EditText"
-msgstr "MetniDüzenle"
-
-msgid "Immutable page"
-msgstr "Değiştirilemez sayfa"
-
 msgid "Or try one of these actions:"
 msgstr "Ya da bu işlevlerden birini deneyin:"
 
@@ -1678,3 +1672,9 @@ msgstr "SayfaAdlandır"
 
 msgid "SpellCheck"
 msgstr "İmlaDenetimi"
+
+#~ msgid "EditText"
+#~ msgstr "MetniDüzenle"
+
+#~ msgid "Immutable page"
+#~ msgstr "Değiştirilemez sayfa"

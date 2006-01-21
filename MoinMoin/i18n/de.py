@@ -896,10 +896,6 @@ rot=Änderungen''',
 '''Dateianhänge''',
 '''Show %s days.''':
 '''%s Tage anzeigen.''',
-'''EditText''':
-'''Editieren''',
-'''Immutable page''':
-'''Geschützte Seite''',
 '''Or try one of these actions:''':
 '''Oder benutze eine dieser Aktionen:''',
 '''Page''':

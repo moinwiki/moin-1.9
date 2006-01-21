@@ -897,10 +897,6 @@ roig=edició''',
 '''Adjuncions''',
 '''Show %s days.''':
 '''Mostra %s dies.''',
-'''EditText''':
-'''Edita el text''',
-'''Immutable page''':
-'''Pàgina no modificable''',
 '''Or try one of these actions:''':
 '''O proveu amb una d\'aquestes accions:''',
 '''Page''':

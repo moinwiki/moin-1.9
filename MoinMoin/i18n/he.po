@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1489,12 +1489,6 @@ msgstr "קובץ מצורף חדש"
 msgid "Show %s days."
 msgstr "הצג %s ימים."
 
-msgid "EditText"
-msgstr "ערוך דף"
-
-msgid "Immutable page"
-msgstr "דף נעול"
-
 msgid "Or try one of these actions:"
 msgstr "פעולות נוספות:"
 
@@ -1604,6 +1598,12 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "EditText"
+#~ msgstr "ערוך דף"
+
+#~ msgid "Immutable page"
+#~ msgstr "דף נעול"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "קוקית נמחקה, אתם מנותקים."

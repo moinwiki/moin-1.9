@@ -721,10 +721,6 @@ vermelho=editar''',
 '''Página Imutável''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
-'''EditText''':
-'''EditarTexto''',
-'''Immutable page''':
-'''Página imutável''',
 '''Or try one of these actions:''':
 '''Tentar uma destas ações:''',
 '''Page''':
