@@ -1395,8 +1395,6 @@ def send_footer(request, pagename, **keywords):
         request.write(theme.pageinfo(d['page']))
         request.write(theme.endPage())
     else:
-        # This is used only by classic now, kill soon
-        d['footer_fragments'] = request._footer_fragments
         request.write(theme.footer(d, **keywords))
 
     

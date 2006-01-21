@@ -136,7 +136,8 @@ hr {
 }
 
 .info {
-    font-size: 0.85em;
+    float: right;
+    font-size: 0.7em;
     color: gray;
 }
 

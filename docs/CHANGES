@@ -39,6 +39,8 @@ Version 1.5.current:
       is 25, of course.
     * removed unused kwargs showpage/editable/form from wikiutil.send_footer
     * updated i18n (translation texts, additional languages)
+    * removed interwiki:pagename from print view's top of page, added it to
+      the "lasted edited" line at bottom right.
 
 
 Version 1.5.0:

@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-21 20:57:05 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-397
+
+    Summary:
+      optimized footer display and print view, removed some ancient code
+    Revision:
+      moin--main--1.5--patch-397
+
+    optimized footer display and print view, removed some ancient code
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/request.py
+     MoinMoin/theme/__init__.py MoinMoin/theme/classic.py
+     MoinMoin/wikiutil.py docs/CHANGES
+     wiki/htdocs/classic/css/common.css
+     wiki/htdocs/classic/css/print.css
+     wiki/htdocs/modern/css/common.css
+     wiki/htdocs/modern/css/print.css
+     wiki/htdocs/rightsidebar/css/common.css
+     wiki/htdocs/rightsidebar/css/print.css
+
+
 2006-01-21 17:28:02 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-396
 
     Summary:

@@ -266,7 +266,6 @@ class ThemeBase:
                 # Just use the text as is.
                 pagename = title = text
 
-
         # Handle regular pagename like "FrontPage"
         else:
             # Use localized pages for the current user
@@ -617,9 +616,9 @@ class ThemeBase:
     def pageinfo(self, page):
         """ Return html fragment with page meta data
 
-        Since page information use translated text, it use the ui
+        Since page information uses translated text, it uses the ui
         language and direction. It looks strange sometimes, but
-        translated text using page direction look worse.
+        translated text using page direction looks worse.
         
         @param page: current page
         @rtype: unicode
@@ -634,6 +633,10 @@ class ThemeBase:
                     info = _("last edited %(time)s by %(editor)s") % info
                 else:
                     info = _("last modified %(time)s") % info
+                pagename = page.page_name
+                if self.request.cfg.show_interwiki:
+                    pagename = "%s: %s" % (self.request.cfg.interwikiname, pagename)
+                info = "%s  (%s)" % (pagename, info)
                 html = '<p id="pageinfo" class="info"%(lang)s>%(info)s</p>\n' % {
                     'lang': self.ui_lang_attr(),
                     'info': info
@@ -695,7 +698,7 @@ searchBlur(e);
         """
         html = ''
         if self.cfg.show_version and not keywords.get('print_mode', 0):
-            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2005 by '
+            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2006 by '
                     'Juergen Hermann</div>') % (version.revision,)
         return html
 

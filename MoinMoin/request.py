@@ -454,7 +454,6 @@ class RequestBase(object):
         # during the rendering of a page by lang macros
         self.current_lang = self.cfg.language_default
 
-        self._footer_fragments = {}
         self._all_pages = None
         # caches unique ids
         self._page_ids = {}
@@ -505,11 +504,6 @@ class RequestBase(object):
         """
         self.content_lang = lang
         self.current_lang = lang
-
-    def add2footer(self, key, htmlcode):
-        """ Add a named HTML fragment to the footer, after the default links
-        """
-        self._footer_fragments[key] = htmlcode
 
     def getPragma(self, key, defval=None):
         """ Query a pragma value (#pragma processing instruction)

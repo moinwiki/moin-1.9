@@ -1330,7 +1330,6 @@ class Page:
                     request.log('page cache failed after creation')
                     self.format(parser)
         
-        self.updateFooterFragments(request)        
         request.clock.stop('send_page_content')
 
     def format(self, parser):
@@ -1387,19 +1386,6 @@ class Page:
         cache.update(marshal.dumps(code))
         self.cache_mtime = cache.mtime()
         return code
-
-    def updateFooterFragments(self, request):
-        """ Add a DeleteCache to footer fragments
-        
-        TODO: move this into theme (currently used only by classic)
-        """
-        _ = request.getText
-        url = wikiutil.quoteWikinameURL(self.page_name) + '?action=refresh'
-        link = wikiutil.link_tag(request, url, _("DeleteCache", formatted=0))
-        cache = caching.CacheEntry(request, self, self.getFormatterName())
-        date = request.user.getFormattedDateTime(cache.mtime())
-        fragment = link + ' ' +  _('(cached %s)') % date
-        request.add2footer('DeleteCache', fragment)
 
     def _emptyPageText(self, request):
         """
