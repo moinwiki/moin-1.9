@@ -27,7 +27,7 @@ Enter user names (comma separated): <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
 """)
-    wikiutil.send_footer(request, pagename, showpage = 1)
+    wikiutil.send_footer(request, pagename)
 
 def show_result(pagename, request):
     _ = request.getText
@@ -42,7 +42,7 @@ def show_result(pagename, request):
 
     # print result
     request.write(result)
-    wikiutil.send_footer(request, pagename, showpage=1)
+    wikiutil.send_footer(request, pagename)
 
 
 def subscribe_users(request, usernamelist, pagename, formatter):

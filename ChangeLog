@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-21 17:13:30 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-395
+
+    Summary:
+      classic theme: added GUI editor link, general: footer code cleanup
+    Revision:
+      moin--main--1.5--patch-395
+
+    classic theme: added GUI editor link, general: footer code cleanup
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/action/AttachFile.py
+     MoinMoin/action/Despam.py MoinMoin/action/SubscribeUser.py
+     MoinMoin/action/backup.py MoinMoin/action/fullsearch.py
+     MoinMoin/action/links.py MoinMoin/theme/classic.py
+     MoinMoin/wikiaction.py MoinMoin/wikiutil.py docs/CHANGES
+     wiki/htdocs/classic/css/common.css
+     wiki/htdocs/classic/css/screen.css
+
+
 2006-01-20 20:39:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-394
 
     Summary:

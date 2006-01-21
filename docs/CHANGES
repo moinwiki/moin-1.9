@@ -26,6 +26,8 @@ Version 1.5.current:
       footer.
     * Include a CSS workaround for yet another IE bug, see:
       MoinMoinBugs:InternetExplorerPeekABooBugInRightSideBar
+    * classic theme: added GUI editor link
+    * classic theme: added pagename header to editor screen
 
   Other changes:
     * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
@@ -35,6 +37,7 @@ Version 1.5.current:
       MoinMoin:FileLinks
     * cfg.mail_smarthost now supports "server:port" syntax, the default port
       is 25, of course.
+    * removed unused kwargs showpage/editable/form from wikiutil.send_footer
 
 
 Version 1.5.0:

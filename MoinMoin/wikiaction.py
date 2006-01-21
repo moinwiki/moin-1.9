@@ -190,7 +190,7 @@ def do_diff(pagename, request):
             request.write('</pre>')
 
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename, showpage=1)
+    wikiutil.send_footer(request, pagename)
 
 
 def do_info(pagename, request):
@@ -419,7 +419,7 @@ def do_info(pagename, request):
         history(page, pagename, request)
         
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename, showpage=1)
+    wikiutil.send_footer(request, pagename)
 
 
 def do_recall(pagename, request):
