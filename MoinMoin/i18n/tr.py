@@ -895,10 +895,6 @@ red=düzenleme''',
 '''Ekler''',
 '''Show %s days.''':
 '''%s günlük göster.''',
-'''EditText''':
-'''MetniDüzenle''',
-'''Immutable page''':
-'''Değiştirilemez sayfa''',
 '''Or try one of these actions:''':
 '''Ya da bu işlevlerden birini deneyin:''',
 '''Page''':

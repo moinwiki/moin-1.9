@@ -681,10 +681,6 @@ red=edit''':
 '''Trang không thể được thay đổi''',
 '''Show %s days.''':
 '''Hiện %s ngày.''',
-'''EditText''':
-'''Sửa nội dung''',
-'''Immutable page''':
-'''Trang không thể được thay đổi''',
 '''Or try one of these actions:''':
 '''Hoặc chọn các hành động sau:''',
 '''Page''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1525,12 +1525,6 @@ msgstr "ضمائم"
 msgid "Show %s days."
 msgstr "%s روز نشان بده"
 
-msgid "EditText"
-msgstr "ویرایش متن"
-
-msgid "Immutable page"
-msgstr "صفحه·تغییرناپذیر"
-
 msgid "Or try one of these actions:"
 msgstr "و یا یکی از عملیات زیر را انتخاب نمایید:"
 
@@ -1640,6 +1634,12 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+#~ msgid "EditText"
+#~ msgstr "ویرایش متن"
+
+#~ msgid "Immutable page"
+#~ msgstr "صفحه·تغییرناپذیر"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."

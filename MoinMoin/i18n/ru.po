@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-11-09 23:54-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1510,12 +1510,6 @@ msgstr "Приложения"
 msgid "Show %s days."
 msgstr "Показать изменения за %s дней."
 
-msgid "EditText"
-msgstr "ИсправитьТекст"
-
-msgid "Immutable page"
-msgstr "Неизменяемая страница"
-
 msgid "Or try one of these actions:"
 msgstr "Или попробуйте сделать"
 
@@ -1626,6 +1620,12 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#~ msgid "EditText"
+#~ msgstr "ИсправитьТекст"
+
+#~ msgid "Immutable page"
+#~ msgstr "Неизменяемая страница"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "Cookie стерты. Вы вышли."

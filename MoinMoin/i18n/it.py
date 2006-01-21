@@ -716,10 +716,6 @@ rosso=Mod''',
 '''Pagina non alterabile''',
 '''Show %s days.''':
 '''Mostra %s giorni.''',
-'''EditText''':
-'''ModificaIlTesto''',
-'''Immutable page''':
-'''Pagina non alterabile''',
 '''Or try one of these actions:''':
 '''Oppure prova una di queste azioni:''',
 '''Page''':

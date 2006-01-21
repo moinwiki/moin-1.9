@@ -740,10 +740,6 @@ piros=szerkesztés''',
 '''Nem szerkeszthető lap''',
 '''Show %s days.''':
 '''%s nap megjelenítése''',
-'''EditText''':
-'''SzövegSzerkesztése''',
-'''Immutable page''':
-'''Nem szerkeszthető lap''',
 '''Or try one of these actions:''':
 '''Vagy próbáljon ki egyet ezekből a műveletekből:''',
 '''Page''':

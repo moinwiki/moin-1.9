@@ -897,10 +897,6 @@ red=editare''',
 '''Ataşamente''',
 '''Show %s days.''':
 '''Afişare %s zile.''',
-'''EditText''':
-'''EditareText''',
-'''Immutable page''':
-'''Pagină imuabilă''',
 '''Or try one of these actions:''':
 '''Sau încercaţi una dintre aceste acţiuni:''',
 '''Page''':

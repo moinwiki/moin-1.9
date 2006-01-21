@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-12-10 22:50+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1524,12 +1524,6 @@ msgstr "添付ファイル"
 msgid "Show %s days."
 msgstr "%s日表示"
 
-msgid "EditText"
-msgstr "テキストの編集"
-
-msgid "Immutable page"
-msgstr "編集不可のページ"
-
 msgid "Or try one of these actions:"
 msgstr "アクション一覧:"
 
@@ -1640,6 +1634,12 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "EditText"
+#~ msgstr "テキストの編集"
+
+#~ msgid "Immutable page"
+#~ msgstr "編集不可のページ"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "クッキーが削除されました。ログアウト完了。"

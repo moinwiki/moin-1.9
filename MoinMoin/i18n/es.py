@@ -895,10 +895,6 @@ rojo=editar''',
 '''Adjuntos''',
 '''Show %s days.''':
 '''Mostrar %s días.''',
-'''EditText''':
-'''EditarTexto''',
-'''Immutable page''':
-'''Página inmutable''',
 '''Or try one of these actions:''':
 '''O intente una de estas acciones: ''',
 '''Page''':

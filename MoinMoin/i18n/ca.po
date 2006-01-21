@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1543,12 +1543,6 @@ msgstr "Adjuncions"
 msgid "Show %s days."
 msgstr "Mostra %s dies."
 
-msgid "EditText"
-msgstr "Edita el text"
-
-msgid "Immutable page"
-msgstr "Pàgina no modificable"
-
 msgid "Or try one of these actions:"
 msgstr "O proveu amb una d'aquestes accions:"
 
@@ -1657,6 +1651,12 @@ msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
+
+#~ msgid "EditText"
+#~ msgstr "Edita el text"
+
+#~ msgid "Immutable page"
+#~ msgstr "Pàgina no modificable"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."

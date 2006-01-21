@@ -33,7 +33,7 @@ Za uporabo tega obrazca nad neko drugo stranjo je treba dodati makro klic
 '''You are not allowed to view this page.''':
 '''Ogled te strani vam ni dovoljen.''',
 '''DeleteCache''':
-'''BrišiPredpomnilnik''',
+'''BrišiPredspomin''',
 '''(cached %s)''':
 '''(shranjeno v predpomnilnik %s)''',
 '''You are not allowed to edit this page.''':
@@ -87,13 +87,13 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Preview''':
 '''Predogled''',
 '''GUI Mode''':
-'''Način GUI (grafični uporabniški vmesnik)''',
+'''GUI urejanje (s takojšnjim prikazom)''',
 '''Your changes are not saved!''':
 '''Spremembe niso shranjene!''',
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
-'''<Brez dodatkov>''',
+'''<Ni dodatkov>''',
 '''Add to: %(category)s''':
 '''Dodaj v kategorijo %(category)s''',
 '''Trivial change''':
@@ -108,11 +108,11 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
-''' Poudarjeno:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
+''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
  Naslov:: [[Verbatim(=)]] Naslov 1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov 2 [[Verbatim(==)]]; [[Verbatim(===)]] N 3 [[Verbatim(===)]];   [[Verbatim(====)]] N 4 [[Verbatim(====)]]; [[Verbatim(=====)]] N 5 [[Verbatim(=====)]].
  Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; samostojni presledek le zamakne besedilo.
  Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["oglati oklepaji in dvojni narekovaji"])]]; url; [url]; [url label].
- Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele niso dovoljeni presledki.
+ Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
 
 (!) Več o tem: HelpOnEditing, SyntaxReference.{en}.
 ''',
@@ -198,7 +198,7 @@ Sedaj lahko svoje popravke ponovno vnesete v svežo različico dokumenta.
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''Seznama za nadzor dostopa (ACL) na tej strani ni mogoče spremeniti brez administratorjevih pravic!''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Uporabniku %(owner)s je potekla zaseženost/rezervacija strani pred %(mins_ago)d min., sedaj je rezervacija dodeljena vam.''',
+'''Uporabniku %(owner)s je potekla zaseženost/rezervacija strani pred %(mins_ago)d min., sedaj je stran dodeljena vam.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
 '''Drugim uporabnikom ne bo dovoljeno spreminjati te strani do %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
@@ -219,7 +219,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Diffs''':
 '''Razlike''',
 '''Info''':
-'''Info''',
+'''Pregled sprememb''',
 '''Edit''':
 '''Spremeni''',
 '''UnSubscribe''':
@@ -237,7 +237,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Up''':
 '''Gor''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Objavi moj e-poštni naslov (ne viki domače strani) v informacijah o avtorjih''',
+'''Objavi moj e-poštni naslov (ne domače strani) v informacijah o avtorjih''',
 '''Open editor on double click''':
 '''Odpri urejevalnik ob dvokliku''',
 '''Jump to last visited page instead of frontpage''':
@@ -259,7 +259,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Subscribe to trivial changes''':
 '''Naroči se na obvestila o neznatnih spremembah''',
 '''Disable this account forever''':
-'''Trajno zapri to uporabniško ime.''',
+'''Trajno zapri to uporabniško ime''',
 '''Name''':
 '''Ime''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
@@ -277,7 +277,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''User CSS URL''':
 '''URL uporabnikovega CSS''',
 '''(Leave it empty for disabling user CSS)''':
-'''(prazno polje izklopi uporabnikov CSS)''',
+'''(prazno polje izklopi CSS)''',
 '''Editor size''':
 '''Velikost področja za urejanje''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -362,7 +362,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Default''':
 '''Standardni''',
 '''<Browser setting>''':
-'''<Nastavitev bralnika>''',
+'''<Nastavitve bralnika>''',
 '''the one preferred''':
 '''izbrani''',
 '''free choice''':
@@ -396,7 +396,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Create Profile''':
 '''Tvori profil''',
 '''Mail me my account data''':
-'''Sporoči podatke o mojem uporabniškem imenu na moj e-poštni naslov''',
+'''Pošlji mi podatke o mojem uporabniškem imenu''',
 '''Action''':
 '''Akcija''',
 '''No older revisions available!''':
@@ -440,7 +440,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''raw''':
 '''izvorno''',
 '''print''':
-'''za-tisk''',
+'''za tisk''',
 '''revert''':
 '''prejšnje''',
 '''Revert to revision %(rev)d.''':
@@ -470,17 +470,17 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''You are not allowed to revert this page!''':
 '''Te strani vam ni dovoljeno vrniti v prejšnje stanje!''',
 '''You must login to add a quicklink.''':
-'''Za dodajanje hitre povezave se je treba najprej prijaviti.''',
+'''Za dodajanje hitre povezave se je treba prej prijaviti.''',
 '''Your quicklink to this page has been removed.''':
 '''Vaša hitra povezava na to stran je bila odstranjena.''',
 '''A quicklink to this page has been added for you.''':
 '''Hitra povezava na to stran je bila avtomatsko dodana.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''Ni se mogoče naročiti na obvestila s strani, ki vam ni dostopna.''',
+'''Ni mogoče naročiti se na obvestila s strani, ki vam ni dostopna.''',
 '''This wiki is not enabled for mail processing.''':
 '''Ta viki nima vklopljenega vmesnika do e-pošte.''',
 '''You must log in to use subscribtions.''':
-'''Za naročilo obvestil se je treba najprej prijaviti.''',
+'''Za naročilo obvestil se je treba prej prijaviti.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
 '''Vpišite svoj e-poštni naslov v uporabniško nastavitveno stran, če se želite naročiti na obvestila.''',
 '''Your subscribtion to this page has been removed.''':
@@ -716,7 +716,7 @@ Uporabite drugačno ime.''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
 '''Naslednjih %(badwords)d spodaj poudarjenih besed ni v slovarju z %(totalwords)d besedami %(localwords)s:''',
 '''Add checked words to dictionary''':
-'''Dodaj označene vesede v slovar''',
+'''Dodaj označene besede v slovar''',
 '''No spelling errors found!''':
 '''Ni očitnih tipkarskih napak!''',
 '''You can\'t check spelling on a page you can\'t read.''':
@@ -752,7 +752,7 @@ Uporabite drugačno ime.''',
 '''Slide %(pos)d of %(size)d''':
 '''Slika %(pos)d od %(size)d''',
 '''No orphaned pages in this wiki.''':
-'''V tem vikuju ni osirotelih strani (brez staršev).''',
+'''V tem vikuju ni osirotelih strani (takih brez staršev).''',
 '''No quotes on %(pagename)s.''':
 '''Na strani %(pagename)s ni citatov.''',
 '''Upload of attachment \'%(filename)s\'.''':
@@ -780,9 +780,9 @@ Uporabite drugačno ime.''',
 '''Filename''':
 '''Ime datoteke''',
 '''Download XML export of this wiki''':
-'''Pripravi vsebino tega vikija v obliki XML za izvoz''',
+'''Pripravi vsebino tega vikija za izvoz v obliki XML''',
 '''No wanted pages in this wiki.''':
-'''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave a ne obstajajo).''',
+'''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne obstajajo).''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Prikaz \'\'reStructured\'\' besedila ni mogoč, namestite \'\'docutils\'\'.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -804,9 +804,9 @@ Uporabite drugačno ime.''',
 '''%(errortype)s processing error''':
 '''Napaka pri obdelavi "%(errortype)s"''',
 '''Views/day''':
-'''Obiskov/dan''',
+'''obiskov/dan''',
 '''Edits/day''':
-'''Sprememb/dan''',
+'''oprememb/dan''',
 '''%(chart_title)s for %(filterpage)s''':
 '''%(chart_title)s za %(filterpage)s''',
 '''green=view
@@ -824,9 +824,9 @@ rdeče=sprememba''',
 '''# of pages of this size''':
 '''število strani v tem velikostnem razredu''',
 '''User agent''':
-'''Tip bralnika''',
+'''tip bralnika''',
 '''Others''':
-'''Ostalo''',
+'''ostalo''',
 '''Distribution of User-Agent Types''':
 '''Razporeditev po tipih bralnikov''',
 '''Unsubscribe''':
@@ -848,11 +848,11 @@ rdeče=sprememba''',
 '''[TOP]''':
 '''[NA-VRH]''',
 '''Click to do a full-text search for this title''':
-'''Iskanje tega naslova po polnem besedilu ostalih strani''',
+'''Iskanje tega naslova po polnem besedilu strani''',
 '''Logout''':
 '''Odjava''',
 '''Clear message''':
-'''Odstrani tole sporočilo''',
+'''Odstrani tole obvestilo''',
 '''last edited %(time)s by %(editor)s''':
 '''nazadnje spreminjano ob %(time)s, spreminjal %(editor)s''',
 '''last modified %(time)s''':
@@ -860,9 +860,9 @@ rdeče=sprememba''',
 '''Search:''':
 '''Iskanje:''',
 '''Text''':
-'''Po-besedilu''',
+'''po besedilu''',
 '''Titles''':
-'''Po-naslovih''',
+'''po naslovih''',
 '''Search''':
 '''Išči''',
 '''More Actions:''':
@@ -872,7 +872,7 @@ rdeče=sprememba''',
 '''Raw Text''':
 '''Izvorno besedilo''',
 '''Delete Cache''':
-'''Briši predpomnilnik''',
+'''Briši predspomin''',
 '''Delete Page''':
 '''Izbriši to stran''',
 '''Like Pages''':
@@ -895,10 +895,6 @@ rdeče=sprememba''',
 '''Priponke''',
 '''Show %s days.''':
 '''Prikaži %s dni.''',
-'''EditText''':
-'''Spremeni''',
-'''Immutable page''':
-'''Nespremenljiva stran''',
 '''Or try one of these actions:''':
 '''Ali pa poskusi z:''',
 '''Page''':

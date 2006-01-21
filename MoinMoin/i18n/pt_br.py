@@ -893,10 +893,6 @@ vermelho=editar''',
 '''Anexos''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
-'''EditText''':
-'''EditarTexto''',
-'''Immutable page''':
-'''Página não editável''',
 '''Or try one of these actions:''':
 '''Ou tente uma da seguintes ações: ''',
 '''Page''':

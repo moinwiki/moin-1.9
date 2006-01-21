@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 01:04+0100\n"
+"POT-Creation-Date: 2006-01-21 18:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1386,12 +1386,6 @@ msgstr ""
 
 #, python-format
 msgid "Show %s days."
-msgstr ""
-
-msgid "EditText"
-msgstr ""
-
-msgid "Immutable page"
 msgstr ""
 
 msgid "Or try one of these actions:"

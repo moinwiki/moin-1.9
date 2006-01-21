@@ -892,10 +892,6 @@ sarkans=labot''',
 '''Piesaistes''',
 '''Show %s days.''':
 '''Rādīt %s dienas.''',
-'''EditText''':
-'''LabotTekstu''',
-'''Immutable page''':
-'''Nemaināma lapa''',
 '''Or try one of these actions:''':
 '''Vai mēģināt kādu no darbībām:''',
 '''Page''':
