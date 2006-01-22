@@ -73,7 +73,7 @@ def do_edit(pagename, origtext):
     if content_lines and content_lines[-1].strip(): # not an empty line at EOF
         content_lines.append('')
 
-    if masterpage.endswith('Template'):
+    if masterpage and masterpage.endswith('Template'):
         changedtext = master_lines + [format_line, language_line,] + pragma_lines + content_lines
     else:
         changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line,] + pragma_lines + content_lines
