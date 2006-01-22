@@ -459,7 +459,7 @@ class DefaultConfig:
         self.lupy_searchers = []
 
         # check if mail is possible and set flag:
-        self.mail_enabled = not (self.mail_smarthost is None and self.mail_sendmail is None)
+        self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
 
     def _config_check(self):
         """ Check namespace and warn about unknown names

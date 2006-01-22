@@ -72,15 +72,15 @@ testWhitespace01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertIn
 testNoWikiWord01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... FAIL
 testSmiley01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... FAIL
 testWikiWord01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertInlineItemRepeatableTests) ... ok
-test1 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
-test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
-test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
-test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ERROR
+test1 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ok
+test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... FAIL
+test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ok
+test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests) ... ok
 error: access error like a dict ... ok
 error: create with encoded string ... ok
 error: create with any object ... ok
 error: create with unicode ... ok
-testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase) ... Formatting using <class MoinMoin.formatter.dom_xml.Formatter at 0x55bd1bfc>
+testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase) ... Formatting using <class MoinMoin.formatter.dom_xml.Formatter at 0x55d35b6c>
 [('xml', {}), ('p', {'type': 'ol'}), ('ol', {'start': None, 'type': u'1'}), ('li', {})]
 ERROR
 testQuoting (MoinMoin._tests.test_packages.QuotingTestCase) ... ok
@@ -207,54 +207,6 @@ wikixml.marshal: create new marshal ... ok
 wikixml.marshal: setting marshal property ... ok
 
 ======================================================================
-ERROR: test1 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1081, in test1
-    self.do(test, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
-    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
-
-======================================================================
-ERROR: test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1090, in test2
-    self.do(test, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
-    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
-
-======================================================================
-ERROR: test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1104, in test3
-    self.do(test, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
-    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
-
-======================================================================
-ERROR: test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1109, in test4
-    self.do(test, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
-    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
-
-======================================================================
 ERROR: testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -262,11 +214,14 @@ Traceback (most recent call last):
     self.formatPage("SyntaxReference", formatter)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_formatter.py", line 45, in formatPage
     return self.request.redirectedOutput(page.send_page, self.request)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/request.py", line 631, in redirectedOutput
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/request.py", line 625, in redirectedOutput
     function(*args, **kw)
-  File "../../MoinMoin/Page.py", line 1241, in send_page
-  File "../../MoinMoin/Page.py", line 1321, in send_page_content
-  File "../../MoinMoin/Page.py", line 1339, in format
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1241, in send_page
+    start_line=pi_lines)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1320, in send_page_content
+    self.format(parser)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1337, in format
+    parser.format(self.formatter)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 1044, in format
     numstart))
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 552, in _indent_to
@@ -832,6 +787,20 @@ Traceback (most recent call last):
 AssertionError: fails with parse error: ExpatError: mismatched tag: line 376, column 83
 
 ======================================================================
+FAIL: test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1090, in test2
+    self.do(test, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
+    super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1066, in do
+    self.failUnlessEqual("<?xml version='1.0' encoding='UTF-8'?>%s" % output, out.getvalue().decode("utf-8"))
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: u"<?xml version='1.0' encoding='UTF-8'?><t><z/></t>" != u"<?xml version='1.0' encoding='UTF-8'?><t>\n  <z/>\n</t>"
+
+======================================================================
 FAIL: parser.wiki: empty lines before block element ignored
 ----------------------------------------------------------------------
 Traceback (most recent call last):
@@ -895,6 +864,6 @@ Traceback (most recent call last):
 AssertionError: "FrontPage" is NOT a system page
 
 ----------------------------------------------------------------------
-Ran 202 tests in 8.352s
+Ran 202 tests in 8.106s
 
-FAILED (failures=51, errors=5)
+FAILED (failures=52, errors=1)

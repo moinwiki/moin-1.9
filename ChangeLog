@@ -2,6 +2,23 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-22 10:49:32 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-399
+
+    Summary:
+      1.5.1 release: bump revision, minor globaledit script and mail check fixes, updated test output, updated CHANGES
+    Revision:
+      moin--main--1.5--patch-399
+
+    1.5.1 release: bump revision, minor globaledit script and mail check fixes, updated test output, updated CHANGES
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py
+     MoinMoin/scripts/globaledit.py MoinMoin/version.py
+     docs/CHANGES moin.spec tests/make_test.out
+     wiki/underlay.tar.bz2
+
+
 2006-01-21 21:48:49 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-398
 
     Summary:

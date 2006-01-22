@@ -1,49 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version 1.5.current:
-  Fixes:
-    * Fixed rst parser docutils version check
-    * Repaired attachment unzipping feature.
-    * Fixed the AddRevision command of the PackageInstaller.
-    * improved the migration scripts (used to migrate pre-1.3 wikis to 1.3+):
-      * do not crash on empty lines in event log
-      * fix edit log format for very old moin data (like 0.11)
-      * workaround for an ugly win32 operating system bug leading to wiki text
-        file mtime not matching edit logs timestamp values if there was some
-        timezone change since last edit (e.g. a daylight saving tz switch),
-        but differing 3600s.
-        This affected pre-1.3 moin wiki servers running on win32 OS only.
-        We now try to correct those inconsistencies in mig05 by fuzzy matching.
-    * fixed bracketed link scheme icon (css class)
-    * we included a modified copy of Python 2.4.2's copy.py as some previous
-      python versions seem to have problems (2.3.x, x < 5 and also 2.4[.0]),
-      see: http://moinmoin.wikiwikiweb.de/MoinMoinBugs/DeepCopyError
-      Our own copy.py was slightly modified to run on 2.3.x and 2.4.x.
-    * Fixed the problem of not being able to change the date/time format back
-      to "Default" (UserPreferences).
-    * We generate the GUI editor footer now the same way as the text editor
-      footer.
-    * Include a CSS workaround for yet another IE bug, see:
-      MoinMoinBugs:InternetExplorerPeekABooBugInRightSideBar
-    * classic theme: added GUI editor link
-    * classic theme: added pagename header to editor screen
-
-  Other changes:
-    * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
-    * Split up show_hosts into show_hosts and show_names
-    * attachment:file%20with%20spaces.txt in attachment list
-    * added support for file:// in GUI editor link dialogue, see also:
-      MoinMoin:FileLinks
-    * cfg.mail_smarthost now supports "server:port" syntax, the default port
-      is 25, of course.
-    * removed unused kwargs showpage/editable/form from wikiutil.send_footer
-    * updated i18n (translation texts, additional languages)
-    * removed interwiki:pagename from print view's top of page, added it to
-      the "lasted edited" line at bottom right.
-
-
-Version 1.5.0:
+Version 1.5.1:
   Please completely read CHANGES text until you reach the version you were
   using until now. Otherwise you might miss some important upgrading and
   configuration hints.
@@ -75,6 +33,49 @@ Version 1.5.0:
       If you want to compare, I included the output of this test run:
       $ make test >tests/make_test.out
 
+  Fixes:
+    * Fixed rst parser docutils version check
+    * Repaired attachment unzipping feature.
+    * Fixed the AddRevision command of the PackageInstaller.
+    * improved the migration scripts (used to migrate pre-1.3 wikis to 1.3+):
+      * do not crash on empty lines in event log
+      * fix edit log format for very old moin data (like 0.11)
+      * workaround for an ugly win32 operating system bug leading to wiki text
+        file mtime not matching edit logs timestamp values if there was some
+        timezone change since last edit (e.g. a daylight saving tz switch),
+        but differing 3600s.
+        This affected pre-1.3 moin wiki servers running on win32 OS only.
+        We now try to correct those inconsistencies in mig05 by fuzzy matching.
+    * fixed bracketed link scheme icon (css class)
+    * we included a modified copy of Python 2.4.2's copy.py as some previous
+      python versions seem to have problems (2.3.x, x < 5 and also 2.4[.0]),
+      see: http://moinmoin.wikiwikiweb.de/MoinMoinBugs/DeepCopyError
+      Our own copy.py was slightly modified to run on 2.3.x and 2.4.x.
+    * Fixed the problem of not being able to change the date/time format back
+      to "Default" (UserPreferences).
+    * We generate the GUI editor footer now the same way as the text editor
+      footer.
+    * Include a CSS workaround for yet another IE bug, see:
+      MoinMoinBugs:InternetExplorerPeekABooBugInRightSideBar
+    * classic theme: added GUI editor link
+    * classic theme: added pagename header to editor screen
+    * the "mail enabled" check now also checks whether mail_from is set
+
+  Other changes:
+    * Updated FCKeditor to current CVS (2006-01-08 == 2.2+)
+    * Split up show_hosts into show_hosts and show_names
+    * attachment:file%20with%20spaces.txt in attachment list
+    * added support for file:// in GUI editor link dialogue, see also:
+      MoinMoin:FileLinks
+    * cfg.mail_smarthost now supports "server:port" syntax, the default port
+      is 25, of course.
+    * removed unused kwargs showpage/editable/form from wikiutil.send_footer
+    * updated i18n (translation texts, additional languages)
+    * removed interwiki:pagename from print view's top of page, added it to
+      the "lasted edited" line at bottom right.
+
+
+Version 1.5.0:
   Fixes:
     * Fix <x=y> table attributes parsing. Thanks to Reimar Bauer.
     * Fixed a few bugs in the reStructured text parser. Note that you
