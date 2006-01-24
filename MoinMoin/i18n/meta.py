@@ -19,7 +19,7 @@ languages = {
 'hu': (u'Magyar', u'Hungarian', 'utf-8', 0, """VOROSBARANYI Zoltan <http://vbzo.li/>""",),
 'it': (u'Italiano', u'Italian', 'utf-8', 0, """gian paolo ciceri <gp.ciceri@acm.org>""",),
 'ja': (u'Japanese', u'Japanese', 'utf-8', 0, """Fujio Nobori <toh@fuji-climb.org>""",),
-'ko': (u'한국어', u'Korean', 'utf-8', 0, """Hye-Shik Chang <perky@FreeBSD.org>""",),
+'ko': (u'한국어', u'Korean', 'utf-8', 0, """Seungik Lee <seungiklee@gmail.com>""",),
 'lv': (u'Latviešu', u'Latvian', 'utf-8', 0, """Radomirs Cirskis <nad2000@gmail.com>""",),
 'nb': (u'Norsk Bokmål', u'Norwegian Bokmal', 'utf-8', 0, """Joerg Cassens <jmt@cassens.org>""",),
 'nl': (u'Nederlands', u'Dutch', 'utf-8', 0, """Reinout van Schouwen <reinout@cs.vu.nl>""",),

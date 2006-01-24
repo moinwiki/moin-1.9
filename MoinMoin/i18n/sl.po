@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2006-01-21 02:30+0100\n"
+"PO-Revision-Date: 2006-01-22 02:30+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -274,7 +274,7 @@ msgid "Trivial "
 msgstr "Malenkostna "
 
 msgid "Status of sending notification mails:"
-msgstr "Stanje pošiljanja poštnih obvestil:"
+msgstr "Uspeh pošiljanja obvestil:"
 
 #, python-format
 msgid "[%(lang)s] %(recipients)s: %(status)s"
@@ -1549,10 +1549,10 @@ msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
 msgstr "Priklop na e-poštni streznik '%(server)s' ni uspel: %(reason)s"
 
 msgid "Mail not sent"
-msgstr "E-pošta ni bila odposlana"
+msgstr "sporočilo ni bilo odposlano"
 
 msgid "Mail sent OK"
-msgstr "E-pošta je bila uspešno odposlana"
+msgstr "Uspešno odposlano"
 
 msgid "FrontPage"
 msgstr "PrvaStran"
