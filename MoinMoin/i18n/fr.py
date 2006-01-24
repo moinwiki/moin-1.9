@@ -41,7 +41,7 @@ Pour utiliser ce formulaire sur d\'autres pages, insérez un appel à la macro :
 '''Page is immutable!''':
 '''Page immuable !''',
 '''Cannot edit old revisions!''':
-'''Impossible de modifier d\'anciennes versions''',
+'''Impossible de modifier d\'anciennes versions !''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Le verrou que vous déteniez à expiré. Vos modifications risquent d\'engendrer des conflits !''',
 '''Page name is too long, try shorter name.''':
@@ -488,7 +488,7 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Your subscribtion to this page has been removed.''':
 '''Votre abonnement à cette page a été supprimé.''',
 '''Can\'t remove regular expression subscription!''':
-'''Impossible de retirer un abonnement selon une expression rationnelle''',
+'''Impossible de retirer un abonnement défini par une expression rationnelle !''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
 '''Modifiez les expressions rationnelles contenues dans vos PréférencesUtilisateur.''',
 '''You have been subscribed to this page.''':

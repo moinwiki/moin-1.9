@@ -32,10 +32,6 @@ macro call.-~
 '''Create New Page''',
 '''You are not allowed to view this page.''':
 '''You are not allowed to view this page.''',
-'''DeleteCache''':
-'''DeleteCache''',
-'''(cached %s)''':
-'''(cached %s)''',
 '''You are not allowed to edit this page.''':
 '''You are not allowed to edit this page.''',
 '''Page is immutable!''':
@@ -888,6 +884,10 @@ red=edit''',
 '''Add Link''',
 '''Show %s days.''':
 '''Show %s days.''',
+'''DeleteCache''':
+'''DeleteCache''',
+'''(cached %s)''':
+'''(cached %s)''',
 '''Or try one of these actions:''':
 '''Or try one of these actions:''',
 '''Page''':

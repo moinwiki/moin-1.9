@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,13 +45,6 @@ msgid "Create New Page"
 msgstr ""
 
 msgid "You are not allowed to view this page."
-msgstr ""
-
-msgid "DeleteCache"
-msgstr ""
-
-#, python-format
-msgid "(cached %s)"
 msgstr ""
 
 msgid "You are not allowed to edit this page."
@@ -1386,6 +1379,13 @@ msgstr ""
 
 #, python-format
 msgid "Show %s days."
+msgstr ""
+
+msgid "DeleteCache"
+msgstr ""
+
+#, python-format
+msgid "(cached %s)"
 msgstr ""
 
 msgid "Or try one of these actions:"

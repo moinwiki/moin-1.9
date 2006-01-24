@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2005-12-21 01:07+0100\n"
+"PO-Revision-Date: 2006-01-22 23:03+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgid "Page is immutable!"
 msgstr "Page immuable !"
 
 msgid "Cannot edit old revisions!"
-msgstr "Impossible de modifier d'anciennes versions"
+msgstr "Impossible de modifier d'anciennes versions !"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
@@ -838,7 +838,7 @@ msgid "Your subscribtion to this page has been removed."
 msgstr "Votre abonnement à cette page a été supprimé."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Impossible de retirer un abonnement selon une expression rationnelle"
+msgstr "Impossible de retirer un abonnement défini par une expression rationnelle !"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
@@ -1677,9 +1677,3 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
-
-#~ msgid "EditText"
-#~ msgstr "ÉditionDuTexte"
-
-#~ msgid "Immutable page"
-#~ msgstr "Page immuable"

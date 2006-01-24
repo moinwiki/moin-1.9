@@ -158,7 +158,7 @@ Stran %(pagelink)s je spremenil %(editor)s:
 '''Trivial ''':
 '''Malenkostna ''',
 '''Status of sending notification mails:''':
-'''Stanje pošiljanja poštnih obvestil:''',
+'''Uspeh pošiljanja obvestil:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
@@ -912,9 +912,9 @@ rdeče=sprememba''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''Priklop na e-poštni streznik \'%(server)s\' ni uspel: %(reason)s''',
 '''Mail not sent''':
-'''E-pošta ni bila odposlana''',
+'''sporočilo ni bilo odposlano''',
 '''Mail sent OK''':
-'''E-pošta je bila uspešno odposlana''',
+'''Uspešno odposlano''',
 '''FrontPage''':
 '''PrvaStran''',
 '''RecentChanges''':
