@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-25 09:30:32 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-401
+
+    Summary:
+      Fixed MoinMoinBugs/ RewritingAndCookieUrl/
+    Revision:
+      moin--main--1.5--patch-401
+
+
+    modified files:
+     ChangeLog MoinMoin/request.py docs/CHANGES
+
+
 2006-01-24 15:08:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-400
 
     Summary:

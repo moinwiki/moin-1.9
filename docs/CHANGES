@@ -1,6 +1,12 @@
 MoinMoin Version History
 ========================
 
+Current dev version:
+
+Fixes:
+ 
+   * Fixed cookie handling wrt properties adherance.
+
 Version 1.5.1:
   Please completely read CHANGES text until you reach the version you were
   using until now. Otherwise you might miss some important upgrading and
