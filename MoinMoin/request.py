@@ -108,6 +108,7 @@ class RequestBase(object):
             self.writestack = []
             self.clock = Clock()
             # order is important here!
+            self.__dict__.update(properties)
             self._load_multi_cfg()
             
             # Set decode charsets.  Input from the user is always in
@@ -148,8 +149,6 @@ class RequestBase(object):
             self.pragma = {}
             self.mode_getpagelinks = 0
             self.no_closing_html_code = 0
-
-            self.__dict__.update(properties)
 
             self.i18n = i18n
             self.lang = i18n.requestLanguage(self) 
