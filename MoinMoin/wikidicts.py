@@ -339,8 +339,10 @@ class GroupDict(DictDict):
 
             # remove old entries when dict or group page have been deleted,
             # add entries when pages have been added
-            olddictdict = self.dictdict
-            oldgroupdict = self.groupdict
+            # use copies because the dicts are shared via cfg.DICTS_DATA
+            #  and must not be modified
+            olddictdict = self.dictdict.copy()
+            oldgroupdict = self.groupdict.copy()
             self.dictdict = {}
             self.groupdict = {}
 
