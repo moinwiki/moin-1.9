@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-26 14:30:03 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-402
+
+    Summary:
+      Wee, Thomas broke the api without fixing all implementors. That is fun.
+    Revision:
+      moin--main--1.5--patch-402
+
+
+    modified files:
+     ChangeLog MoinMoin/auth.py
+
+
 2006-01-25 09:30:32 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-401
 
     Summary:

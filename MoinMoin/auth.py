@@ -244,7 +244,7 @@ class php_session:
         self.s_prefix = s_prefix
         self.apps = apps
 
-    def __call__(self, request):
+    def __call__(self, request, **kw):
         def handle_egroupware(session):
             """ Extracts name, fullname and email from the session. """
             username = session['egw_session']['session_lid'].split("@", 1)[0]
