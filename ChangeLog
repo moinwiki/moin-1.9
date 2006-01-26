@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-26 23:39:22 GMT	Florian Festi <Florian.Festi@trick.informatik.uni-stuttgart.de>	patch-404
+
+    Summary:
+      fixed race condition in wikidicts, fixed MoinMoinBugs/WikiDictsRaisePicklingError
+    Revision:
+      moin--main--1.5--patch-404
+
+    fixed race condition in wikidicts, fixed MoinMoinBugs/WikiDictsRaisePicklingError
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikidicts.py
+
+
 2006-01-26 22:57:38 GMT	Florian Festi <Florian.Festi@trick.informatik.uni-stuttgart.de>	patch-403
 
     Summary:
