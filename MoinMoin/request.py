@@ -1324,14 +1324,14 @@ class RequestCGI(RequestBase):
 
     def __init__(self, properties={}):
         try:
-            self._setup_vars_from_std_env(os.environ)
-            RequestBase.__init__(self, properties)
-
             # force input/output to binary
             if sys.platform == "win32":
                 import msvcrt
                 msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
                 msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
+
+            self._setup_vars_from_std_env(os.environ)
+            RequestBase.__init__(self, properties)
 
         except Exception, err:
             self.fail(err)
