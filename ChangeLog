@@ -2,6 +2,23 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-27 19:47:39 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-405
+
+    Summary:
+      fix projection CSS, fix win32 request init, revert Florian's langAttr fix (already done in refactor branch)
+    Revision:
+      moin--main--1.5--patch-405
+
+    fix projection CSS, fix win32 request init, revert Florian's langAttr fix (already done in refactor branch)
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/base.py
+     MoinMoin/formatter/text_html.py MoinMoin/request.py
+     wiki/htdocs/modern/css/projection.css
+     wiki/htdocs/modern/css/screen.css
+
+
 2006-01-26 23:39:22 GMT	Florian Festi <Florian.Festi@trick.informatik.uni-stuttgart.de>	patch-404
 
     Summary:

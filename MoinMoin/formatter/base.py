@@ -41,27 +41,6 @@ class FormatterBase:
         else:
             self._highlight_re = hi_re
 
-    def langAttr(self, lang=None):
-        """ Return lang and dir attribute
-
-        Must be used on all block elements - div, p, table, etc.
-        @param lang: if defined, will return attributes for lang. if not
-            defined, will return attributes only if the current lang is
-            different from the content lang.
-        @rtype: dict
-        @retrun: language attributes
-        """
-        if not lang:
-            lang = self.request.current_lang
-            # Actions that generate content in user language should change
-            # the content lang from the default defined in cfg.
-            if lang == self.request.content_lang:
-                # lang is inherited from content div
-                return {}
-
-        attr = {'lang': lang, 'dir': i18n.getDirection(lang),}
-        return attr
-
     def lang(self, on, lang_name):
         return ""
 
