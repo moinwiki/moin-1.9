@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-29 00:13:25 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-407
+
+    Summary:
+      added surge protection code (TODO: configurability), added voyager to bot list
+    Revision:
+      moin--main--1.5--patch-407
+
+    added surge protection code (TODO: configurability), added voyager to bot list
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py MoinMoin/request.py
+
+
 2006-01-29 00:11:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-406
 
     Summary:

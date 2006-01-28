@@ -8,7 +8,8 @@
 """
 
 import os, time, sys, cgi, StringIO
-from MoinMoin import config, wikiutil, user
+import copy
+from MoinMoin import config, wikiutil, user, caching
 from MoinMoin.util import MoinMoinNoFooter, IsWin9x
 
 # Timing ---------------------------------------------------------------
@@ -74,6 +75,65 @@ class RequestBase(object):
     moin_location = 'x-moin-location'
     proxy_host = 'x-forwarded-host'
     
+    def surge_protect(self):
+        current_ip = self.remote_addr
+        current_action = self.form.get('action', ['show'])[0]
+        if current_ip.startswith('127.'): # localnet
+            return False
+        
+        cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
+        
+        limits = { # action: (count, dt)
+            'show': (20, 60),
+            'fullsearch': (5, 60),
+            'edit': (5, 60),
+            'rss_rc': (1, 20),
+        }
+        lockout_time = 3600 # secs
+        
+        now = int(time.time())
+        surgedict = {}
+        try:
+            data = cache.content()
+            data = data.split("\n")
+            for line in data:
+                try:
+                    t, ip, action = line.split(":")
+                    t = int(t)
+                    maxnum, dt = limits.get(action, (60, 60))
+                    if t >= now - dt:
+                        events = surgedict.setdefault(ip, copy.copy({}))
+                        timestamps = events.setdefault(action, copy.copy([]))
+                        timestamps.append(t)
+                except:
+                    pass
+        except:
+            pass
+
+        events = surgedict.setdefault(current_ip, copy.copy({}))
+        timestamps = events.setdefault(current_action, copy.copy([]))
+        timestamps.append(now)
+        maxnum, dt = limits.get(current_action, (60, 60))
+        surge_detected = len(timestamps) > maxnum
+        if surge_detected:
+            if len(timestamps) < maxnum*2:
+                timestamps.append(now + lockout_time) # continue like that and get locked out
+        
+        try:
+            data = []
+            for ip, events in surgedict.items():
+                for action, timestamps in events.items():
+                    for t in timestamps:
+                        data.append("%d:%s:%s" % (t, ip, action))
+            data = "\n".join(data)
+            cache.update(data)
+        except:
+            pass
+
+        #del surgedict
+        
+        return surge_detected   
+        
     def __init__(self, properties={}):
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
@@ -101,7 +161,7 @@ class RequestBase(object):
         # not on external non-Apache servers
         self.forbidden = False
         if self.request_uri.startswith('http://'):
-            self.makeForbidden()
+            self.makeForbidden403()
 
         # Init
         else:
@@ -137,6 +197,8 @@ class RequestBase(object):
             # MOVED: this was in run() method, but moved here for auth module being able to use it
             if not self.query_string.startswith('action=xmlrpc'):
                 self.args = self.form = self.setup_args()
+                if self.surge_protect():
+                    self.makeForbidden503()
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
@@ -887,14 +949,27 @@ class RequestBase(object):
         """ Get the user agent. """
         return self.http_user_agent
 
-    def makeForbidden(self):
-        self.forbidden = True
+    def makeForbidden(self, resultcode, msg):
+        statusmsg = {
+            403: 'FORBIDDEN',
+            503: 'Service unavailable',
+        }
         self.http_headers([
-            'Status: 403 FORBIDDEN',
+            'Status: %d %s' % (resultcode, statusmsg[resultcode]),
             'Content-Type: text/plain'
         ])
-        self.write('You are not allowed to access this!\r\n')
-        self.setResponseCode(403)
+        self.write(msg)
+        self.setResponseCode(resultcode)
+        self.forbidden = True
+
+    def makeForbidden403(self):
+        self.makeForbidden(403, 'You are not allowed to access this!\r\n')
+
+    def makeUnavailable503(self):
+        self.makeForbidden(503, "Warning:\r\n"
+                   "You triggered the wiki's surge protection by doing too many requests in a short time.\r\n"
+                   "Please make a short break reading the stuff you already got.\r\n"
+                   "When you restart doing requests AFTER that, slow down or you might get locked out for a longer time!\r\n")
 
     def initTheme(self):
         """ Set theme - forced theme, user theme or wiki default """
@@ -909,7 +984,7 @@ class RequestBase(object):
         if self.failed or self.forbidden:
             return self.finish()
         if self.isForbidden():
-            self.makeForbidden()
+            self.makeForbidden403()
             if self.forbidden:
                 return self.finish()
 
