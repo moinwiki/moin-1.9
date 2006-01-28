@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-29 00:40:16 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-408
+
+    Summary:
+      fixed table attribute parsing, updated CHANGES
+    Revision:
+      moin--main--1.5--patch-408
+
+    fixed table attribute parsing, updated CHANGES
+    
+
+    modified files:
+     ChangeLog MoinMoin/parser/wiki.py docs/CHANGES
+
+
 2006-01-29 00:13:25 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-407
 
     Summary:

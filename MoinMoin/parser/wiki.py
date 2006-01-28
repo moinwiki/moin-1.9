@@ -672,12 +672,8 @@ class Parser:
                         'arg': arg, 'key': key}
                 else:
                     attrs['bgcolor'] = '"#%s"' % arg
-            elif key == '=':
-                arg = parser.get_token()
-                this_key = attrdef.split('=')[0]
-                attrs[this_key] = arg
             else:
-                msg = ""
+                msg = None
             #print "key: %s\nattrs: %s" % (key, str(attrs))
             return self.formatter.rawHTML(msg)
 
