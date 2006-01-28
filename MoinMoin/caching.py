@@ -10,6 +10,10 @@ import os
 from MoinMoin import config
 from MoinMoin.util import filesys
 
+locking = 1
+if locking:
+    from MoinMoin.util import lock
+    
 class CacheEntry:
     def __init__(self, request, arena, key):
         """ init a cache entry
@@ -25,7 +29,11 @@ class CacheEntry:
             cache_dir = None
             self.arena_dir = arena.getPagePath('cache', check_create=1)
         self.key = key
-
+        if locking:
+            lock_dir = os.path.join(self.arena_dir, '__lock__')
+            self.rlock = lock.ReadLock(lock_dir, 60.0)
+            self.wlock = lock.WriteLock(lock_dir, 60.0)
+        
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
 
@@ -61,22 +69,32 @@ class CacheEntry:
 
     def copyto(self, filename):
         import shutil
-        shutil.copyfile(filename, self._filename())
-
-        try:
-            os.chmod(self._filename(), 0666 & config.umask)
-        except OSError:
-            pass
+        if not locking or locking and self.wlock.acquire(1.0):
+            try:
+                shutil.copyfile(filename, self._filename())
+                try:
+                    os.chmod(self._filename(), 0666 & config.umask)
+                except OSError:
+                    pass
+            finally:
+                if locking:
+                    self.wlock.release()
 
     def update(self, content, encode=False):
         if encode:
             content = content.encode(config.charset)
-        open(self._filename(), 'wb').write(content)
-
-        try:
-            os.chmod(self._filename(), 0666 & config.umask)
-        except OSError:
-            pass
+        if not locking or locking and self.wlock.acquire(1.0):
+            try:
+                f = open(self._filename(), 'wb')
+                f.write(content)
+                f.close()
+                try:
+                    os.chmod(self._filename(), 0666 & config.umask)
+                except OSError:
+                    pass
+            finally:
+                if locking:
+                    self.wlock.release()
 
     def remove(self):
         try:
@@ -85,7 +103,14 @@ class CacheEntry:
             pass
 
     def content(self, decode=False):
-        data = open(self._filename(), 'rb').read()
+        if not locking or locking and self.rlock.acquire(1.0):
+            try:
+                f = open(self._filename(), 'rb')
+                data = f.read()
+                f.close()
+            finally:
+                if locking:
+                    self.rlock.release()
         if decode:
             data = data.decode(config.charset)
         return data
