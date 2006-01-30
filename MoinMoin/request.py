@@ -86,7 +86,7 @@ class RequestBase(object):
         limits = { # action: (count, dt)
             'show': (20, 60),
             'fullsearch': (5, 60),
-            'edit': (5, 60),
+            'edit': (10, 120),
             'rss_rc': (1, 20),
         }
         lockout_time = 3600 # secs
@@ -198,7 +198,7 @@ class RequestBase(object):
             if not self.query_string.startswith('action=xmlrpc'):
                 self.args = self.form = self.setup_args()
                 if self.surge_protect():
-                    self.makeForbidden503()
+                    self.makeUnavailable503()
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
