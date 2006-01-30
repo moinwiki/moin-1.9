@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-30 01:27:02 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-409
+
+    Summary:
+      surgeprotect: fix wrong fn name, change edit limit
+    Revision:
+      moin--main--1.5--patch-409
+
+    surgeprotect: fix wrong fn name, change edit limit
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-01-29 00:40:16 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-408
 
     Summary:
