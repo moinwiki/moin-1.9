@@ -76,13 +76,6 @@ class RequestBase(object):
     proxy_host = 'x-forwarded-host'
     
     def surge_protect(self):
-        current_ip = self.remote_addr
-        current_action = self.form.get('action', ['show'])[0]
-        if current_ip.startswith('127.'): # localnet
-            return False
-        
-        cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
-        
         limits = { # action: (count, dt)
             'show': (20, 60),
             'fullsearch': (5, 60),
@@ -91,47 +84,52 @@ class RequestBase(object):
         }
         lockout_time = 3600 # secs
         
+        validuser = self.user.valid
+        current_id = validuser and self.user.name or self.remote_addr
+        current_action = self.form.get('action', ['show'])[0]
+        if not validuser and current_id.startswith('127.'): # localnet
+            return False
+        
         now = int(time.time())
         surgedict = {}
+        surge_detected = False
+        
         try:
+            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
             data = cache.content()
             data = data.split("\n")
             for line in data:
                 try:
-                    t, ip, action = line.split(":")
+                    id, t, action, surge_indicator = line.split("\t")
                     t = int(t)
                     maxnum, dt = limits.get(action, (60, 60))
                     if t >= now - dt:
-                        events = surgedict.setdefault(ip, copy.copy({}))
+                        events = surgedict.setdefault(id, copy.copy({}))
                         timestamps = events.setdefault(action, copy.copy([]))
-                        timestamps.append(t)
+                        timestamps.append((t, surge_indicator))
                 except:
                     pass
-        except:
-            pass
-
-        events = surgedict.setdefault(current_ip, copy.copy({}))
-        timestamps = events.setdefault(current_action, copy.copy([]))
-        timestamps.append(now)
-        maxnum, dt = limits.get(current_action, (60, 60))
-        surge_detected = len(timestamps) > maxnum
-        if surge_detected:
-            if len(timestamps) < maxnum*2:
-                timestamps.append(now + lockout_time) # continue like that and get locked out
         
-        try:
+            maxnum, dt = limits.get(current_action, (60, 60))
+            events = surgedict.setdefault(current_id, copy.copy({}))
+            timestamps = events.setdefault(current_action, copy.copy([]))
+            surge_detected = len(timestamps) > maxnum
+            surge_indicator = surge_detected and "!" or ""
+            timestamps.append((now, surge_indicator))
+            if surge_detected:
+                if len(timestamps) < maxnum*2:
+                    timestamps.append((now + lockout_time, surge_indicator)) # continue like that and get locked out
+        
             data = []
-            for ip, events in surgedict.items():
+            for id, events in surgedict.items():
                 for action, timestamps in events.items():
-                    for t in timestamps:
-                        data.append("%d:%s:%s" % (t, ip, action))
+                    for t, surge_indicator in timestamps:
+                        data.append("%s\t%d\t%s\t%s" % (id, t, action, surge_indicator))
             data = "\n".join(data)
             cache.update(data)
         except:
             pass
 
-        #del surgedict
-        
         return surge_detected   
         
     def __init__(self, properties={}):
@@ -197,13 +195,15 @@ class RequestBase(object):
             # MOVED: this was in run() method, but moved here for auth module being able to use it
             if not self.query_string.startswith('action=xmlrpc'):
                 self.args = self.form = self.setup_args()
-                if self.surge_protect():
-                    self.makeUnavailable503()
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
 
             self.user = self.get_user()
+            
+            if not self.query_string.startswith('action=xmlrpc'):
+                if self.surge_protect():
+                    self.makeUnavailable503()
 
             from MoinMoin import i18n
 
