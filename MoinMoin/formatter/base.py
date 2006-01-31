@@ -62,7 +62,7 @@ class FormatterBase:
     def endDocument(self):
         return ""
 
-    def startContent(self, content_id="content", **kwargs):
+    def startContent(self, content_id="content", **kw):
         return ""
 
     def endContent(self):
@@ -87,7 +87,7 @@ class FormatterBase:
         # call pagelink() for internal interwikilinks
         # to make shure they get counted for self.pagelinks
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
-        if wikitag=='Self' or wikitag==self.request.cfg.interwikiname:
+        if wikitag == 'Self' or wikitag == self.request.cfg.interwikiname:
             if wikitail.find('#') > -1:
                 wikitail, kw['anchor'] = wikitail.split('#', 1)
                 wikitail = wikiutil.url_unquote(wikitail)
@@ -128,30 +128,33 @@ class FormatterBase:
 
         return self.attachment_link(url, text)
 
-
     def anchordef(self, name):
         return ""
 
     def line_anchordef(self, lineno):
         return ""
 
-    def anchorlink(self, on, name='', id=None):
+    def anchorlink(self, on, name='', **kw):
         return ""
 
     def line_anchorlink(self, on, lineno=0):
         return ""
 
-    def image(self, **kw):
-        """ Take HTML <IMG> tag attributes in `attr`.
+    def image(self, src=None, **kw):
+        """An inline image.
 
-        Attribute names have to be lowercase!
+        Extra keyword arguments are according to the HTML <img> tag attributes.
+        In particular an 'alt' or 'title' argument should give a description
+        of the image.
         """
-        attrstr = u''
-        for attr, value in kw.items():
-            if attr=='html_class':
-                attr='class'
-            attrstr = attrstr + u' %s="%s"' % (attr, wikiutil.escape(value))
-        return u'<img%s>' % attrstr
+        title = src
+        for titleattr in ('title', 'html__title', 'alt', 'html__alt'):
+            if kw.has_key(titleattr):
+                title = kw[titleattr]
+                break
+        if title:
+            return '[Image:%s]' % title
+        return '[Image]'
 
     def smiley(self, text):
         return text
@@ -161,7 +164,7 @@ class FormatterBase:
 
     # Text and Text Attributes ########################################### 
     
-    def text(self, text):
+    def text(self, text, **kw):
         if not self._highlight_re:
             return self._text(text)
             
@@ -185,42 +188,42 @@ class FormatterBase:
     def _text(self, text):
         raise NotImplementedError
 
-    def strong(self, on):
+    def strong(self, on, **kw):
         raise NotImplementedError
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         raise NotImplementedError
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         raise NotImplementedError
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
         raise NotImplementedError
 
-    def sup(self, on):
+    def sup(self, on, **kw):
         raise NotImplementedError
 
-    def sub(self, on):
+    def sub(self, on, **kw):
         raise NotImplementedError
 
-    def strike(self, on):
+    def strike(self, on, **kw):
         raise NotImplementedError
 
     def code(self, on, **kw):
         raise NotImplementedError
 
-    def preformatted(self, on):
+    def preformatted(self, on, **kw):
         self.in_pre = on != 0
 
-    def small(self, on):
+    def small(self, on, **kw):
         raise NotImplementedError
 
-    def big(self, on):
+    def big(self, on, **kw):
         raise NotImplementedError
 
     # special markup for syntax highlighting #############################
 
-    def code_area(self, on, code_id, **kwargs):
+    def code_area(self, on, code_id, **kw):
         raise NotImplementedError
 
     def code_line(self, on):
@@ -234,10 +237,10 @@ class FormatterBase:
     def linebreak(self, preformatted=1):
         raise NotImplementedError
 
-    def paragraph(self, on):
-        self.in_p = (on != 0)
+    def paragraph(self, on, **kw):
+        self.in_p = on != 0
 
-    def rule(self, size=0):
+    def rule(self, size=0, **kw):
         raise NotImplementedError
 
     def icon(self, type):
@@ -245,22 +248,22 @@ class FormatterBase:
 
     # Lists ##############################################################
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
         raise NotImplementedError
 
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
         raise NotImplementedError
 
     def listitem(self, on, **kw):
         raise NotImplementedError
 
-    def definition_list(self, on):
+    def definition_list(self, on, **kw):
         raise NotImplementedError
 
-    def definition_term(self, on, compact=0):
+    def definition_term(self, on, compact=0, **kw):
         raise NotImplementedError
 
-    def definition_desc(self, on):
+    def definition_desc(self, on, **kw):
         raise NotImplementedError
 
     def heading(self, on, depth, **kw):
@@ -268,13 +271,13 @@ class FormatterBase:
 
     # Tables #############################################################
     
-    def table(self, on, attrs={}):
+    def table(self, on, attrs={}, **kw):
         raise NotImplementedError
 
-    def table_row(self, on, attrs={}):
+    def table_row(self, on, attrs={}, **kw):
         raise NotImplementedError
 
-    def table_cell(self, on, attrs={}):
+    def table_cell(self, on, attrs={}, **kw):
         raise NotImplementedError
 
     # Dynamic stuff / Plugins ############################################
@@ -284,7 +287,7 @@ class FormatterBase:
         return macro_obj.execute(name, args)    
 
     def _get_bang_args(self, line):
-        if line[:2]=='#!':
+        if line[:2] == '#!':
             try:
                 name, args = line[2:].split(None, 1)
             except ValueError:
@@ -293,7 +296,7 @@ class FormatterBase:
                 return args
         return None
 
-    def processor(self, processor_name, lines, is_parser = 0):
+    def processor(self, processor_name, lines, is_parser=0):
         """ processor_name MUST be valid!
             writes out the result instead of returning it!
         """
@@ -306,14 +309,14 @@ class FormatterBase:
                                            processor_name, "Parser")
             args = self._get_bang_args(lines[0])
             if args is not None:
-                lines=lines[1:]
-            p = parser('\n'.join(lines), self.request, format_args = args)
+                lines = lines[1:]
+            p = parser('\n'.join(lines), self.request, format_args=args)
             p.format(self)
             del p
         return ''
 
-    def dynamic_content(self, parser, callback, arg_list = [], arg_dict = {},
-                        returns_content = 1):
+    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
+                        returns_content=1):
         content = parser[callback](*arg_list, **arg_dict)
         if returns_content:
             return content
@@ -321,6 +324,14 @@ class FormatterBase:
             return ''
 
     # Other ##############################################################
+    
+    def div(self, on, **kw):
+        """ open/close a blocklevel division """
+        return ""
+    
+    def span(self, on, **kw):
+        """ open/close a inline span """
+        return ""
     
     def rawHTML(self, markup):
         """ This allows emitting pre-formatted HTML markup, and should be
@@ -342,7 +353,7 @@ class FormatterBase:
 
         return self.text(f.getvalue())
 
-    def escapedText(self, on):
+    def escapedText(self, on, **kw):
         """ This allows emitting text as-is, anything special will
             be escaped (at least in HTML, some text output format
             would possibly do nothing here)
@@ -351,3 +362,4 @@ class FormatterBase:
 
     def comment(self, text):
         return ""
+

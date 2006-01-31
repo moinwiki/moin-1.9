@@ -2,6 +2,142 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-31 22:17:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-411
+
+    Summary:
+      star-merged moin--refactor--1.5 (formatter, parser, converter fixes, see docs/CHANGES.refactor)
+    Revision:
+      moin--main--1.5--patch-411
+
+    star-merged moin--refactor--1.5 (formatter, parser, converter fixes, see docs/CHANGES.refactor)
+    
+    Patches applied:
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--base-0
+       tag of arch@arch.thinkmo.de--2003-archives/moin--main--1.5--patch-399
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-1
+       CHANGES.refactor file to read and use here
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-2
+       change version to 1.5.refactor
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-3
+       deron meranda's formatter-patch-r4.diff
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-4
+       PEP8 whitespace changes, fixed typos, comments, NO non-trivial code changes
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-5
+       text_html: use python2.3 sets instead of own code
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-6
+       some src cosmetics, removed unused code, kwargs -> kw
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-7
+       make prettyprinting and lineanchors configurable (see TOF), optimize, fix typos
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-8
+       revert text_gedit's invalid list nesting
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-9
+       converter: fixed nested lists
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-10
+       converter: made dl processing similar to ul
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-11
+       fixed hr crash in blockquote, but needs more fixes to work correctly
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-12
+       html formatter cleanup and extension (div, span), fix FootNote action, fix rst headline levels
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-13
+       use formatter.{span,div}
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-14
+       disabled xml:lang stuff, src whitespace cosmetics
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-15
+       fix for having multiple p in one li
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-16
+       fix _open/_close calls for text_gedit, new . bulletless list markup
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-17
+       updated CHANGES
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-18
+       fixed MoinMoinBugs/WikiParserThinksItIsInsidePreWhenItIsNot
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-19
+       allow hex and symbolic entities
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-20
+       removed some unused code, src cosmetics
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-21
+       fixed MoinMoinBugs/ListItemGeneratedOutsideList
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-22
+       fix for wrong p after macro
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-23
+       html formatter now know about blockquote being a block element
+    
+     * arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-24
+       GUI editor converter now also accepts relative/same server http: URLs
+    
+
+    new files:
+     docs/.arch-ids/CHANGES.refactor.id docs/CHANGES.refactor
+
+    modified files:
+     ChangeLog MoinMoin/PageEditor.py
+     MoinMoin/converter/text_html_text_x_moin.py
+     MoinMoin/formatter/__init__.py MoinMoin/formatter/base.py
+     MoinMoin/formatter/dom_xml.py MoinMoin/formatter/pagelinks.py
+     MoinMoin/formatter/text_gedit.py
+     MoinMoin/formatter/text_html.py
+     MoinMoin/formatter/text_plain.py
+     MoinMoin/formatter/text_python.py
+     MoinMoin/formatter/text_xml.py
+     MoinMoin/formatter/xml_docbook.py MoinMoin/macro/FootNote.py
+     MoinMoin/macro/Include.py MoinMoin/parser/python.py
+     MoinMoin/parser/rst.py MoinMoin/parser/wiki.py
+     MoinMoin/search.py MoinMoin/version.py MoinMoin/wikimacro.py
+     wiki/htdocs/classic/css/common.css
+     wiki/htdocs/modern/css/common.css
+     wiki/htdocs/rightsidebar/css/common.css
+
+    new patches:
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--base-0
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-1
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-2
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-3
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-4
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-5
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-6
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-7
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-8
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-9
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-10
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-11
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-12
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-13
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-14
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-15
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-16
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-17
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-18
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-19
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-20
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-21
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-22
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-23
+     arch@arch.thinkmo.de--2003-archives/moin--refactor--1.5--patch-24
+
+
 2006-01-31 22:09:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-410
 
     Summary:

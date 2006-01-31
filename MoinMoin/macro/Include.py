@@ -234,10 +234,10 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         # if no heading and not in print mode, then output a helper link
         if editlink and not (level or print_mode):
             result.extend([
-                '<div class="include-link">',
+                macro.formatter.div(1, css_class="include-link"),
                 inc_page.link_to(request, '[%s]' % (inc_name,), css_class="include-page-link"),
                 inc_page.link_to(request, '[%s]' % (_('edit'),), css_class="include-edit-link", querystr={'action': 'edit', 'backto': request._Include_backto}),
-                '</div>',
+                macro.formatter.div(0),
             ])
         # XXX page.link_to is wrong now, it escapes the edit_icon html as it escapes normal text
 

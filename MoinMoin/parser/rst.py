@@ -194,12 +194,12 @@ class Parser:
 
         html = []
         if parts['title']:
-            html.append(formatter.rawHTML('<h2>' + parts['title'] + '</h2>'))
+            html.append(formatter.rawHTML('<h1>%s</h1>' % parts['title']))
         # If there is only one subtitle then it is held in parts['subtitle'].
         # However, if there is more than one subtitle then this is empty and
         # fragment contains all of the subtitles.
         if parts['subtitle']:
-            html.append(formatter.rawHTML('<h3>' + parts['subtitle'] + '</h3>'))
+            html.append(formatter.rawHTML('<h2>%s</h2>' % parts['subtitle']))
         if parts['docinfo']:
             html.append(parts['docinfo'])
         html.append(parts['fragment'])

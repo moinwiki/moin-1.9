@@ -537,24 +537,6 @@ class convert_tree(visitor):
     def visit_text(self, node):
         self.text.append(node.data)
 
-    def process_dl(self, node):
-        self.depth += 1
-        indent = " " * self.depth
-        for i in node.childNodes:
-            if i.nodeType == Node.ELEMENT_NODE:
-                if i.localName == 'dt':
-                    self.text.append(indent)
-                    text = self.node_list_text_only(i.childNodes)
-                    self.text.append(text.replace("\n", " "))
-                elif i.localName == 'dd':
-                    self.text.append(":: ")
-                    self.process_list_item(i)
-                else:
-                    raise ConvertError("Illegal list element %s" % i.localName)
-        if self.depth == 1:
-            self.text.append("\n")
-        self.depth -= 1
-
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
         if text:
@@ -565,22 +547,54 @@ class convert_tree(visitor):
             self.text.append(self.new_line)
 
     def _get_list_item_markup(self, list, listitem):
-        markup = " " * self.depth
-        type = None
-        if list.localName == 'ol':
+        before = ""
+        #indent = str(self.depth) * self.depth # nice for debugging :)
+        indent = " " * self.depth
+        markup = ""
+        name = list.localName
+        if name == 'ol':
+            class_ = listitem.getAttribute("class")
+            if class_ == "gap":
+                before = "\n"
             if list.hasAttribute("type"):
                 type = list.getAttribute("type")
             else:
                 type = "1"
-            markup = "%s%s. " % (markup, type)
-        else:
+            markup = "%s. " % type
+        elif name == 'ul':
             class_ = listitem.getAttribute("class")
             if class_ == "gap":
-                markup = "\n" + markup
+                before = "\n"
             style = listitem.getAttribute("style")
-            if not re.match(u"list-style-type:\s*none", style, re.I):
-                markup += "* "
-        return markup
+            if re.match(u"list-style-type:\s*none", style, re.I):
+                markup = ". "
+            else:
+                markup = "* "
+        elif name == 'dl':
+            markup = ":: "
+        else:
+            raise ConvertError("Illegal list type %s" % name)
+        return before, indent, markup
+
+    def process_dl(self, node):
+        self.depth += 1
+        markup = ":: " # can there be a dl dd without dt?
+        for i in node.childNodes:
+            if i.nodeType == Node.ELEMENT_NODE:
+                name = i.localName
+                if name == 'dt':
+                    before, indent, markup = self._get_list_item_markup(node, i)
+                    self.text.append(before+indent)
+                    text = self.node_list_text_only(i.childNodes)
+                    self.text.append(text.replace("\n", " "))
+                elif name == 'dd':
+                    self.text.append(markup)
+                    self.process_list_item(i, indent)
+                else:
+                    raise ConvertError("Illegal list element %s" % i.localName)
+        self.depth -= 1
+        if self.depth == 0:
+            self.text.append("\n")
 
     def process_list(self, node):
         self.depth += 1
@@ -588,27 +602,33 @@ class convert_tree(visitor):
             if i.nodeType == Node.ELEMENT_NODE:
                 name = i.localName
                 if name == 'li':
-                    self.text.append(self._get_list_item_markup(node, i))
-                    self.process_list_item(i)
+                    before, indent, markup = self._get_list_item_markup(node, i)
+                    self.text.append(before+indent+markup)
+                    self.process_list_item(i, indent)
                 elif name in ('ol', 'ul',):
                     self.process_list(i)
                 elif name == 'dl':
                     self.process_dl(i)
                 else:
                     raise ConvertError("Illegal list element %s" % i.localName)
-        if self.depth == 1:
-            self.text.append("\n")
         self.depth -= 1
+        if self.depth == 0:
+            self.text.append("\n")
 
-    def process_list_item(self, node):
+    def process_list_item(self, node, indent):
         found = False
+        first_child = True
         for i in node.childNodes:
             name = i.localName
             if name == 'p':
+                if not first_child:
+                    self.text.append(indent)
                 self.process_paragraph_item(i)
                 self.text.append("\n")
                 found = True
             elif name == 'pre':
+                if not first_child:
+                    self.text.append(indent)
                 self.process_preformatted_item(i)
                 found = True
             elif name in ('ol', 'ul',):
@@ -618,16 +638,23 @@ class convert_tree(visitor):
                 self.process_dl(i)
                 found = True
             elif name == 'table':
+                if not first_child:
+                    self.text.append(indent)
                 self.process_table(i)
                 found = True
             #else:
             #    self.process_inline(i)
+            first_child = False
                 
         if not found:
             self.process_paragraph_item(node)
             self.text.append("\n")
 
     def process_blockquote(self, node):
+        # XXX this does not really work. e.g.:
+        # <bq>aaaaaa
+        # <hr---------->
+        # <bq>bbbbbb
         self.depth += 1
         for i in node.childNodes:
             if i.nodeType == Node.ELEMENT_NODE:
@@ -652,7 +679,9 @@ class convert_tree(visitor):
                     self.visit_node_list_element_only(i.childNodes)
                 elif name == 'blockquote':
                     self.process_blockquote(i)
-                elif name in ('br',):
+                elif name == 'hr':
+                    self.process_hr(i)
+                elif name == 'br':
                     self.process_br(i)
                 else:
                     raise ConvertError("process_blockquote: Don't support %s element" % name)
@@ -1130,7 +1159,7 @@ class convert_tree(visitor):
                     pass #print name, data, filename, alt
             raise ConvertError("Unknown smiley icon '%s'" % filename)
         # Image URL
-        elif src and src.startswith("http://") and wikiutil.isPicture(src):
+        elif src and src.startswith("http:") and wikiutil.isPicture(src):
             self.text.extend([self.white_space, src, self.white_space])
         else:
             raise ConvertError("Strange image src: '%s'" % src)

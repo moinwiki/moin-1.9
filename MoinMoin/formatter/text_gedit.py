@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - "text/html+css" Formatter
+    MoinMoin - "text/html+css" Formatter for feeding the GUI editor
 
     @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
@@ -19,7 +19,7 @@ class Formatter(text_html.Formatter):
 
     # Block elements ####################################################
 
-    def heading(self, on, depth, id = None, **kw):
+    def heading(self, on, depth, id=None, **kw):
         # remember depth of first heading, and adapt counting depth accordingly
         if not self._base_depth:
             self._base_depth = depth
@@ -29,9 +29,9 @@ class Formatter(text_html.Formatter):
 
         # closing tag, with empty line after, to make source more readable
         if not on:
-            return self.close('h%d' % heading_depth)
+            return self._close('h%d' % heading_depth)
         else:
-            return self.open('h%d' % heading_depth)
+            return self._open('h%d' % heading_depth)
 
     # Links ##############################################################
 
@@ -60,25 +60,8 @@ class Formatter(text_html.Formatter):
         return self.url(1, href, title=title, unescaped=0, css=html_class)
         # unescaped=1 was changed to 0 to make interwiki links with pages with umlauts (or other non-ascii) work
 
-    '''
-    def attachment_link(self, url, text, **kw):
-        if url==text:
-            return "attachment:%s" % url
-        else:
-            return "[attachment:%s %s]" % (url, text)
-    
-    def attachment_image(self, url, **kw):
-        return "attachment:%s" % url
-    
-    def attachment_drawing(self, url, text, **kw):
-        if url==text:
-            return "drawing:%s" % url
-        else:
-            return "[drawing:%s %s]" % (url, text)
-'''
-    
     def attachment_inlined(self, url, text, **kw):
-        if url==text:
+        if url == text:
             return '<span style="background-color:#ffff11">inline:%s</span>' % url
         else:
             return '<span style="background-color:#ffff11">[inline:%s %s]</span>' % (url, text)
@@ -123,7 +106,7 @@ class Formatter(text_html.Formatter):
             result = "[[%s]]" % name
         return '<span style="background-color:#ffff11">%s</span>' % result
 
-    def processor(self, processor_name, lines, is_parser = 0):
+    def processor(self, processor_name, lines, is_parser=0):
         """ processor_name MUST be valid!
             writes out the result instead of returning it!
         """
@@ -135,41 +118,17 @@ class Formatter(text_html.Formatter):
 
         return "".join(result)
 
-
-    # Lists ##############################################################
-
-    # Change nesting: sub lists are no longer within the <li> tags
-    
-    def number_list(self, on, type=None, start=None):
-        li = ""
-        if self._in_li: # close <li>
-            li = self.listitem(False)
-        return li + text_html.Formatter.number_list(self, on, type, start)
-
-    def bullet_list(self, on):
-        li = ""
-        if self._in_li: # close <li>
-            li = self.listitem(False)
-        return li + text_html.Formatter.bullet_list(self, on)
-
-    def listitem(self, on, **kw):
-        # only if not already closed
-        if on or self._in_li:
-            return text_html.Formatter.listitem(self, on, **kw)
-        else:
-            return ""
-
     # Other ##############################################################
 
     style2attribute = {
         'width': 'width',
         'height': 'height',
-        'background' : 'bgcolor',
-        'background-color' : 'bgcolor',
+        'background': 'bgcolor',
+        'background-color': 'bgcolor',
         #if this is used as table style="text-align: right", it doesn't work
         #if it is transformed to align="right":
-        #'text-align' : 'align',
-        #'vertical-align' : 'valign'
+        #'text-align': 'align',
+        #'vertical-align': 'valign'
         }
 
     def _style_to_attributes(self, attrs):
@@ -197,7 +156,7 @@ class Formatter(text_html.Formatter):
         attrs = text_html.Formatter._checkTableAttr(self, attrs, prefix)
         return self._style_to_attributes(attrs)
 
-    def table(self, on, attrs=None):
+    def table(self, on, attrs=None, **kw):
         """ Create table
 
         @param on: start table
@@ -214,36 +173,38 @@ class Formatter(text_html.Formatter):
                 #result.append(self.rawHTML("<!-- ATTRS1: %s -->" % repr(attrs)))
                 attrs = self._checkTableAttr(attrs, 'table')
                 #result.append(self.rawHTML("<!-- ATTRS2: %s -->" % repr(attrs)))
-            result.append(self.open('table', newline=1, attr=attrs))
+            result.append(self._open('table', newline=1, attr=attrs))
         else:
             # Close table then div
-            result.append(self.close('table'))
+            result.append(self._close('table'))
 
         return ''.join(result)    
 
-    def comment(self, text):
+    def comment(self, text, **kw):
         text = text.rstrip() # workaround for growing amount of blanks at EOL
         return self.preformatted(1, attr={'class': 'comment'}) + text + self.preformatted(0)
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         tag = 'u'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag)
+        return self._close(tag)
                     
-    def strong(self, on):
+    def strong(self, on, **kw):
         tag = 'b'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag)
+        return self._close(tag)
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         tag = 'i'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag)
+        return self._close(tag)
 
-    def code(self, on, css=None):
+    def code(self, on, css=None, **kw):
+        if not css and kw.has_key('css_class'):
+            css = kw['css_class']
         tag = 'tt'
         # Maybe we don't need this, because we have tt will be in inlineStack.
         self._in_code = on
@@ -253,8 +214,8 @@ class Formatter(text_html.Formatter):
             attrs = None
 
         if on:
-            return self.open(tag, attr=attrs)
-        return self.close(tag)
+            return self._open(tag, attr=attrs)
+        return self._close(tag)
 
     def line_anchordef(self, lineno):
         return '' # not needed for gui editor feeding

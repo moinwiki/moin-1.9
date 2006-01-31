@@ -66,7 +66,7 @@ class DocBookOutputFormatter:
         
     def getBody(self):
         body = []
-        # print all nodes inside dom behid heading
+        # print all nodes inside dom behind heading
         firstNode = self.doc.documentElement.firstChild
         while firstNode:
             if firstNode != self.domHeadNode:
@@ -116,7 +116,7 @@ class Formatter(FormatterBase):
         
         return self.outputFormatter.getHeading()
 
-    def startContent(self, content_id="content", **kwargs):
+    def startContent(self, content_id="content", **kw):
         self.cur = self.root
         return ""
 
@@ -132,7 +132,7 @@ class Formatter(FormatterBase):
     def endDocument(self):
         return self.outputFormatter.getFooter()
 
-    def text(self, text):
+    def text(self, text, **kw):
         if text == "\\n":
             srcText = "\n"
         else:
@@ -162,13 +162,13 @@ class Formatter(FormatterBase):
                     while (self.cur.nodeName != "section" and self.cur.nodeName != "article"):
                         self.cur = self.cur.parentNode
 
-# Do not understant this code - looks like unneccesery -- maybe it is used to gain some vertical space for large headings?
+# I don't understand this code - looks like unnecessary -- maybe it is used to gain some vertical space for large headings?
 #                    if len(self.cur.childNodes) < 3:
 #                       self._addEmptyNode("para")
                     
                     # check if not top-level
                     if self.cur.nodeName != "article":
-                        self.cur=self.cur.parentNode
+                        self.cur = self.cur.parentNode
 
             section = self.doc.createElement("section")
             self.cur.appendChild(section)
@@ -179,18 +179,18 @@ class Formatter(FormatterBase):
             self.cur = title
             self.curdepth = depth
         else:
-            self.cur=self.cur.parentNode
+            self.cur = self.cur.parentNode
 
         return ""
 
-    def paragraph(self, on):
+    def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
         if on:
             para = self.doc.createElement("para")
             self.cur.appendChild(para)
             self.cur = para
         else:
-            self.cur=self.cur.parentNode
+            self.cur = self.cur.parentNode
         return ""
 
     def linebreak(self, preformatted=1):
@@ -224,7 +224,7 @@ class Formatter(FormatterBase):
     def _getTableCellCount(self, attrs=()):
         cols = 1
         if attrs and attrs.has_key('colspan'):
-            s1 = (attrs['colspan'])
+            s1 = attrs['colspan']
             s1 = str(s1).replace('"','')
             cols = int(s1)
         return cols
@@ -263,46 +263,46 @@ class Formatter(FormatterBase):
 ### Inline ##########################################################
 
     def _handleFormatting(self, name, on, attributes=()):
-        #We add all the elements we create to the list of elements that should not contain a section        
+        # We add all the elements we create to the list of elements that should not contain a section        
         if name not in self.section_should_break:
             self.section_should_break.append(name)
 
         return self._handleNode(name, on, attributes)
 
-    def strong(self, on):
+    def strong(self, on, **kw):
         return self._handleFormatting("emphasis", on, (('role','strong'), ))
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         return self._handleFormatting("emphasis", on)
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         return self._handleFormatting("emphasis", on, (('role','underline'), ))
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
         return self._handleFormatting("emphasis", on, (('role','highlight'), ))
 
-    def sup(self, on):
+    def sup(self, on, **kw):
         return self._handleFormatting("superscript", on)
 
-    def sub(self, on):
+    def sub(self, on, **kw):
         return self._handleFormatting("subscript", on)
 
-    def strike(self, on):
+    def strike(self, on, **kw):
         # does not yield <strike> using the HTML XSLT files here ...
         # but seems to be correct
         return self._handleFormatting("emphasis", on,
                                       (('role','strikethrough'), ))
 
-    def code(self, on, **kwargs):
+    def code(self, on, **kw):
         return self._handleFormatting("code", on)
 
-    def preformatted(self, on):
+    def preformatted(self, on, **kw):
         return self._handleFormatting("screen", on)
 
 
 ### Lists ###########################################################
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
         docbook_ol_types = {'1': "arabic", 
                             'a': "loweralpha", 
                             'A': "upperalpha",
@@ -310,22 +310,22 @@ class Formatter(FormatterBase):
                             'I': "upperroman"}
 
         if type and docbook_ol_types.has_key(type):
-            attrs=[("numeration", docbook_ol_types[type])]
+            attrs = [("numeration", docbook_ol_types[type])]
         else:
-            attrs=[]
+            attrs = []
 
         return self._handleNode('orderedlist', on, attrs)
 
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
         return self._handleNode("itemizedlist", on)
 
-    def definition_list(self, on):
+    def definition_list(self, on, **kw):
         return self._handleNode("glosslist", on)        
 
-    '''When on is false, we back out just on level. This is
-       ok because we know definition_desc gets called, and we
-       back out two levels there'''
-    def definition_term(self, on, compact=0):
+    def definition_term(self, on, compact=0, **kw):
+       # When on is false, we back out just on level. This is
+       # ok because we know definition_desc gets called, and we
+       # back out two levels there.
         if on:
             entry=self.doc.createElement('glossentry')
             term=self.doc.createElement('glossterm')
@@ -336,8 +336,8 @@ class Formatter(FormatterBase):
             self.cur = self.cur.parentNode
         return ""
    
-    '''We backout two levels when 'on' is false, to leave the glossentry stuff'''
-    def definition_desc(self, on):
+    def definition_desc(self, on, **kw):
+        # We backout two levels when 'on' is false, to leave the glossentry stuff
         if on:
             return self._handleNode("glossdef", on)
         else:
@@ -356,13 +356,13 @@ class Formatter(FormatterBase):
 
 ### Links ###########################################################
 
-    #FIXME: This is quite crappy
+    # FIXME: This is quite crappy
     def pagelink(self, on, pagename='', page=None, **kw):
         FormatterBase.pagelink(self, on, pagename, page, **kw)
 
-        return self.interwikilink(on, 'Self', pagename) #FIXME
+        return self.interwikilink(on, 'Self', pagename) # FIXME
 
-    #FIXME: This is even more crappy
+    # FIXME: This is even more crappy
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         if not on:
             return self.url(on,kw)
@@ -381,7 +381,8 @@ class Formatter(FormatterBase):
         self._handleNode("ulink", False)
         return ""
 
-    def anchorlink(self, on, name='', id=None):
+    def anchorlink(self, on, name='', **kw):
+        id = kw.get('id',None)
         attrs = []
         if name != '':
             attrs.append(('endterm', name))
@@ -392,7 +393,7 @@ class Formatter(FormatterBase):
 
         return self._handleNode("link", on, attrs)
 
-# Attachments ######################################################
+### Attachments ######################################################
 
     def attachment_link(self, url, text, **kw):
         _ = self.request.getText
@@ -436,9 +437,11 @@ class Formatter(FormatterBase):
                                             addts=1),
                 html_class="drawing")
 
-
 ### Images and Smileys ##############################################
-    def image(self, **kw):
+
+    def image(self, src=None, **kw):
+        if src:
+            kw['src'] = src
         media = self.doc.createElement('inlinemediaobject')
 
         imagewrap = self.doc.createElement('imageobject')
@@ -452,12 +455,17 @@ class Formatter(FormatterBase):
         if kw.has_key('height'):
             image.setAttribute('depth', kw['height'])
         imagewrap.appendChild(image)
-        
-        if kw.has_key('alt'):
+
+        title = ''
+        for a in ('title', 'html_title', 'alt', 'html_alt'):
+            if kw.has_key(titleattr):
+                title = kw[a]
+                break
+        if title:
             txtcontainer = self.doc.createElement('textobject')
             media.appendChild(txtcontainer)        
             txtphrase = self.doc.createElement('phrase')
-            txtphrase.appendChild(self.doc.createTextNode(kw['alt']))
+            txtphrase.appendChild(self.doc.createTextNode(title))
             txtcontainer.appendChild(txtphrase)        
         
         self.cur.appendChild(media)
@@ -471,13 +479,13 @@ class Formatter(FormatterBase):
         return self.image(src=href, alt=text, width=str(w), height=str(h))
 
     def icon(self, type):
-        return ''#self.request.theme.make_icon(type)
+        return '' # self.request.theme.make_icon(type)
 
 ### Tables ##########################################################
 
     #FIXME: We should copy code from text_html.py for attr handling
 
-    def table(self, on, attrs=None):
+    def table(self, on, attrs=None, **kw):
         sanitized_attrs = []
         if attrs and attrs.has_key('id'):
             sanitized_attrs[id] = attrs['id']
@@ -489,14 +497,14 @@ class Formatter(FormatterBase):
         self._handleNode("tbody", on)
         return ""
     
-    def table_row(self, on, attrs=None):
+    def table_row(self, on, attrs=None, **kw):
         self.table_current_row_cells = 0
         sanitized_attrs = []
         if attrs and attrs.has_key('id'):
             sanitized_attrs[id] = attrs['id']
         return self._handleNode("row", on, sanitized_attrs)
 
-    def table_cell(self, on, attrs=None):
+    def table_cell(self, on, attrs=None, **kw):
         # Finish row definition
         sanitized_attrs = []
         if attrs and attrs.has_key('id'):
@@ -517,6 +525,7 @@ class Formatter(FormatterBase):
         return ret
 
 ### Code ############################################################
+
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         show = show and 'numbered' or 'unnumbered'
         if start < 1:
@@ -531,7 +540,7 @@ class Formatter(FormatterBase):
         return self._handleFormatting("screen", on, attrs)
 
     def code_line(self, on):
-        return '' #No clue why something should be done here
+        return '' # No clue why something should be done here
 
     def code_token(self, on, tok_type):
         toks_map = {'ID':'methodname',
@@ -561,10 +570,10 @@ class Formatter(FormatterBase):
         # At the begining text mode contain some string which is later
         # exchange for real value. There is problem that data inserted
         # as text mode are encoded to xml, e.g. < is encoded in the output as &lt;
-        text=FormatterBase.macro(self, macro_obj, name, args)
+        text = FormatterBase.macro(self, macro_obj, name, args)
         if len(text) > 0:
             # prepare identificator
-            sKey="EXCHANGESTRINGMACRO-" + str(len(self.exchangeKeys)) + "-EXCHANGESTRINGMACRO"
+            sKey = "EXCHANGESTRINGMACRO-" + str(len(self.exchangeKeys)) + "-EXCHANGESTRINGMACRO"
             self.exchangeKeys.append(sKey)
             self.exchangeValues.append(text)
             # append data to lists
@@ -572,11 +581,13 @@ class Formatter(FormatterBase):
         return u""
 
 ### Not supported ###################################################
-    def rule(self, size = 0):
+
+    def rule(self, size = 0, **kw):
         return ""
 
-    def small(self, on):
+    def small(self, on, **kw):
         return ""
 
-    def big(self, on):
+    def big(self, on, **kw):
         return ""
+

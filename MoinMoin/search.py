@@ -809,7 +809,7 @@ class SearchResults:
             for page in self.hits:
                 matchInfo = ''
                 if info:
-                    matchInfo = self.formatInfo(page)
+                    matchInfo = self.formatInfo(f, page)
                 item = [
                     f.listitem(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
@@ -852,7 +852,7 @@ class SearchResults:
             for page in self.hits:
                 matchInfo = ''
                 if info:
-                    matchInfo = self.formatInfo(page)
+                    matchInfo = self.formatInfo(f, page)
                 item = [
                     f.definition_term(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
@@ -1072,22 +1072,24 @@ class SearchResults:
         querystr = wikiutil.escape(querystr)
         return querystr
 
-    def formatInfo(self, page):
+    def formatInfo(self, formatter, page):
         """ Return formatted match info """
-        # TODO: this will not work with non-html formats
-        template = u'<span class="info"> . . . %s %s</span>'
+        template = u' . . . %s %s'
+        template = u"%s%s%s" % (formatter.span(1, css_class="info"),
+                                template,
+                                formatter.span(0))
         # Count number of unique matches in text of all types
         count = len(page.get_matches(unique=1))
         info = template % (count, self.matchLabel[count != 1])
-        return self.formatter.rawHTML(info)         
+        return info
 
     def getvalue(self):
         """ Return output in div with CSS class """
         write = self.request.write
         value = [
-            self.formatter.rawHTML('<div class="searchresults">'),
+            self.formatter.div(1, css_class='searchresults'),
             self.buffer.getvalue(),
-            self.formatter.rawHTML('</div>'),
+            self.formatter.div(0),
             ]
         return '\n'.join(value)
 

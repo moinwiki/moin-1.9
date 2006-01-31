@@ -29,8 +29,8 @@ class Formatter(FormatterBase):
                     'p', 'ol', 'ul', 'li', 'pre', 'a',
                     'table', 'td', 'tr']
 
-    need_p = [] #format_tags[:]
-    need_p.extend(['ol', 'a', 'pagelink', 'interwiki', 'macro']) #XXX add more
+    need_p = [] # format_tags[:]
+    need_p.extend(['ol', 'a', 'pagelink', 'interwiki', 'macro']) # XXX add more
 
     no_p_after = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul', 'pre',
                   'small', 'big', 'table', 'td', 'tr', 'dt',
@@ -38,25 +38,25 @@ class Formatter(FormatterBase):
                   'sysmesg']
 
     close_on_open = {
-        'h1' : ['p'],
-        'li' : ['li'],
-        'p' : ['p'],
-        #'pre' : ['p'],
+        'h1': ['p'],
+        'li': ['li'],
+        'p': ['p'],
+        #'pre': ['p'],
         }
 
-    for i in xrange(2,7):
+    for i in xrange(2, 7):
         close_on_open['h%i' % i] = close_on_open['h1']
 
     close_on_open = {} # XXX
 
     close_on_close = {
-        'table' : ['td', 'tr'],
-        'td' : ['tr'],
-        'tr' : ['td'],
-        'ol' : ['li'],
-        'ul' : ['li'],
+        'table': ['td', 'tr'],
+        'td': ['tr'],
+        'tr': ['td'],
+        'ol': ['li'],
+        'ul': ['li'],
         }
-    close_on_close = {} #XXX
+    close_on_close = {} # XXX
 
     def __init__(self, request, **kw):
         self.request = request
@@ -95,7 +95,7 @@ class Formatter(FormatterBase):
             must be the last opened tag!!!
         """
         if tag == 'p':
-            self.in_p = 0 #XXX
+            self.in_p = 0 # XXX
         if self.tag_stack[-1][0] != tag:
             raise ValueError, "<%s> expected <%s> given" % (self.tag_stack[-1][0], tag)
         self.position = self.position.parentNode
@@ -220,8 +220,8 @@ class Formatter(FormatterBase):
                 self.text('\n'.join(lines)) +
                 self._set_tag('processor', False))
 
-    def dynamic_content(self, parser, callback, arg_list = [], arg_dict = {},
-                        returns_content = 1):
+    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
+                        returns_content=1):
         content = parser[callback](*arg_list, **arg_dict)
         if returns_content:
             return content
@@ -232,7 +232,7 @@ class Formatter(FormatterBase):
         kw['href'] = str(url)
         if css:
             kw['class'] = str(css)
-        return self._set_tag('a', on,  **kw)
+        return self._set_tag('a', on, **kw)
 
     def attachment_link(self, on, url='', **kw):
         kw['href'] = url
@@ -253,7 +253,7 @@ class Formatter(FormatterBase):
         kw['type'] = 'inline'
         return self._add_tag('attachment', **kw)
 
-    def rule(self, size=0):
+    def rule(self, size=0, **kw):
         return self._add_tag('hr', size=str(size))
 
     def icon(self, type):
@@ -262,41 +262,41 @@ class Formatter(FormatterBase):
     def smiley(self, type):
         return self._add_tag('smiley', type=type)
 
-    def strong(self, on):
+    def strong(self, on, **kw):
         return self._set_tag('b', on)
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         return self._set_tag('em', on)
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
         return self._set_tag('highlight', on)
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
         return self._set_tag('ol', on, type=type, start=start)
 
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
         return self._set_tag('ul', on)
 
     def listitem(self, on, **kw):
         return self._set_tag('li', on)
 
-    def sup(self, on):
+    def sup(self, on, **kw):
         return self._set_tag('sup', on)
 
-    def sub(self, on):
+    def sub(self, on, **kw):
         return self._set_tag('sub', on)
 
-    def strike(self, on):
+    def strike(self, on, **kw):
         return self._set_tag('strike', on)
 
     def code(self, on, **kw):
         return self._set_tag('code', on)
 
-    def preformatted(self, on):
+    def preformatted(self, on, **kw):
         self.in_pre = on != 0
         return self._set_tag('pre', on)
 
-    def paragraph(self, on):
+    def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
         return self._set_tag('p', on)
 
@@ -315,31 +315,28 @@ class Formatter(FormatterBase):
             result[str(name)] = value
         return result
 
-    def table(self, on, attrs={}):
+    def table(self, on, attrs={}, **kw):
         return self._set_tag('table', on, **self._check_attrs(attrs))
         
-    def table_row(self, on, attrs={}):
+    def table_row(self, on, attrs={}, **kw):
         return self._set_tag('tr', on, **self._check_attrs(attrs))
 
-    def table_cell(self, on, attrs={}):
+    def table_cell(self, on, attrs={}, **kw):
         return self._set_tag('td', on, **self._check_attrs(attrs))
 
     def anchordef(self, name):
         return self._add_tag('anchor', name=name)
 
-    def anchorlink(self, on, name, id=None):
-        kw = {}
-        if id:
-            kw['id'] = str(id)
+    def anchorlink(self, on, name, **kw):
         return self.url(on, "#" + name, **kw)
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         return self._set_tag('u', on)
 
-    def definition_list(self, on):
+    def definition_list(self, on, **kw):
         return self._set_tag('dl', on)
 
-    def definition_term(self, on, compact=0):
+    def definition_term(self, on, compact=0, **kw):
         # XXX may be not correct
         # self._langAttr() missing
         if compact and on:
@@ -347,30 +344,32 @@ class Formatter(FormatterBase):
         else:
             return self._set_tag('dt', on)            
 
-    def definition_desc(self, on):
+    def definition_desc(self, on, **kw):
         # self._langAttr() missing
         return self._set_tag('dd', on)
 
-    def image(self, **kw):
+    def image(self, src=None, **kw):
         """ Take HTML <IMG> tag attributes in `attr`.
 
             Attribute names have to be lowercase!
         """
+        if src:
+            kw['src'] = src
         return self._add_tag('img', **kw)
 
-    def escapedText(self, text):
+    def escapedText(self, text, **kw):
         return wikiutil.escape(text)
 
-    def small(self, on):
+    def small(self, on, **kw):
         return self._set_tag('small', on)
 
-    def big(self, on):
+    def big(self, on, **kw):
         return self._set_tag('big', on)
 
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
-        kw = {'id' : code_id,
-              'type' : code_type,
-              'show' : show,
+        kw = {'id': code_id,
+              'type': code_type,
+              'show': show,
              }
         if start != -1:
             kw['start'] = start

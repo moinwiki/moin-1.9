@@ -1,13 +1,12 @@
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - pagelinks Formatter
+    MoinMoin - pagelinks Formatter
 
-@copyright: 2005 Nir Soffer <nirs@freeshell.org>
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2005 Nir Soffer <nirs@freeshell.org>
+    @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.formatter.base import FormatterBase
-
 
 class Formatter(FormatterBase):
     """ Collect pagelinks and format nothing :-) """        
@@ -57,13 +56,4 @@ class Formatter(FormatterBase):
     attachment_link = null
     attachment_image = null
     attachment_drawing = null
-    
-    # These are private additions to formatter added by text_html, and
-    # some code use or might use them.
-    open = null
-    close = null
-    formatAttributes = null
-    
-    def langAttr(self, lang=None):
-        return {}
-        
+

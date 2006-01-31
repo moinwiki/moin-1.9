@@ -26,7 +26,7 @@ class Formatter(FormatterBase):
         self._text = None # XXX does not work with links in headings!!!!!
 
     def startDocument(self, pagename):
-        line = u"*" * (len(pagename)+2) + u'\n'
+        line = u"*" * (len(pagename) + 2) + u'\n'
         return u"%s %s \n%s" % (line, pagename, line)
 
     def endDocument(self):
@@ -69,37 +69,40 @@ class Formatter(FormatterBase):
                 self._text = None
                 return u' [%s]' % (self._url)
 
-    # Attachments ######################################################
-
     def attachment_link(self, url, text, **kw):
         return "[%s]" % text
+
     def attachment_image(self, url, **kw):
-        return "[image:%s]" % url
+        title = ''
+        for a in (u'title', u'html__title', u'alt', u'html_alt'):
+            if kw.has_key(a):
+                title = ':' + kw[a]
+        return "[image:%s%s]" % (url, title)
 
     def attachment_drawing(self, url, text, **kw):
         return "[drawing:%s]" % text
     
-    def text(self, text):
+    def text(self, text, **kw):
         self._did_para = 0
         if self._text is not None:
             self._text.append(text)
         return text
 
-    def rule(self, size=0):
+    def rule(self, size=0, **kw):
         size = min(size, 10)
         ch = u"---~=*+#####"[size]
         return (ch * 79) + u'\n'
 
-    def strong(self, on):
+    def strong(self, on, **kw):
         return u'*'
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         return u'/'
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
         return u''
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
         if on:
             self._in_list = 1
             return [u'\n', u'\n\n'][not self._did_para]
@@ -110,7 +113,7 @@ class Formatter(FormatterBase):
                 return u'\n'
         return u''
 
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
         if on:
             self._in_list = -1
             return [u'\n', u'\n\n'][not self._did_para]
@@ -123,11 +126,11 @@ class Formatter(FormatterBase):
 
     def listitem(self, on, **kw):
         if on:
-            if self._in_list>0:
+            if self._in_list > 0:
                 self._in_list += 1
                 self._did_para = 1
                 return ' %d. ' % (self._in_list-1,)
-            elif self._in_list<0:
+            elif self._in_list < 0:
                 self._did_para = 1
                 return u' * '
             else:
@@ -136,20 +139,20 @@ class Formatter(FormatterBase):
             self._did_para = 1
             return u'\n'
         
-    def sup(self, on):
+    def sup(self, on, **kw):
         return u'^'
 
-    def sub(self, on):
+    def sub(self, on, **kw):
         return u'_'
 
-    def strike(self, on):
+    def strike(self, on, **kw):
         return u'__'
 
     def code(self, on, **kw):
         #return [unichr(0x60), unichr(0xb4)][not on]
         return u"'" # avoid high-ascii
 
-    def preformatted(self, on):
+    def preformatted(self, on, **kw):
         FormatterBase.preformatted(self, on)
         snip = u'---%<'
         snip = snip + (u'-' * (78 - len(snip)))
@@ -158,10 +161,10 @@ class Formatter(FormatterBase):
         else:
             return snip + u'\n'
 
-    def small(self, on):
+    def small(self, on, **kw):
         return u''
 
-    def big(self, on):
+    def big(self, on, **kw):
         return u''
 
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
@@ -182,8 +185,8 @@ class Formatter(FormatterBase):
         if not on or (on and self._in_code_line):
             res += u'\n'
         if on:
-            if self._code_area_state[0]>0:
-                res += u' %4d  ' % ( self._code_area_state[3] )
+            if self._code_area_state[0] > 0:
+                res += u' %4d  ' % self._code_area_state[3]
                 self._code_area_state[3] += self._code_area_state[2]
         self._in_code_line = on != 0
         return res
@@ -191,7 +194,7 @@ class Formatter(FormatterBase):
     def code_token(self, on, tok_type):
         return ""
 
-    def paragraph(self, on):
+    def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
         if self._did_para:
             on = 0
@@ -212,34 +215,38 @@ class Formatter(FormatterBase):
             self._text = None
             return result
 
-    def table(self, on, attrs={}):
+    def table(self, on, attrs={}, **kw):
         return u''
 
-    def table_row(self, on, attrs={}):
+    def table_row(self, on, attrs={}, **kw):
         return u''
 
-    def table_cell(self, on, attrs={}):
+    def table_cell(self, on, attrs={}, **kw):
         return u''
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         return u'_'
 
-    def definition_list(self, on):
+    def definition_list(self, on, **kw):
         return u''
 
-    def definition_term(self, on, compact=0):
+    def definition_term(self, on, compact=0, **kw):
         result = u''
-        if not compact: result = result + u'\n'
-        if not on: result = result + u':\n'
+        if not compact:
+            result = result + u'\n'
+        if not on:
+            result = result + u':\n'
         return result
 
-    def definition_desc(self, on):
+    def definition_desc(self, on, **kw):
         return [u'    ', u'\n'][not on]
 
-    def image(self, **kw):
-        if kw.has_key(u'alt'):
-            return kw[u'alt']
+    def image(self, src=None, **kw):
+        for a in (u'title', u'html__title', u'alt', u'html_alt'):
+            if kw.has_key(a):
+                return kw[a]
         return u''
 
     def lang(self, on, lang_name):
         return ''
+

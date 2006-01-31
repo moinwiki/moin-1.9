@@ -36,7 +36,7 @@ class Formatter(FormatterBase):
         result = ""
         while self._current_depth > 1:
             result += "</s%d>" % self._current_depth
-            self._current_depth = self._current_depth - 1
+            self._current_depth -= 1
         return result + '</s1>'
 
     def lang(self, on, lang_name):
@@ -60,30 +60,29 @@ class Formatter(FormatterBase):
         else:
             return '</interwiki>'
 
-
     def url(self, on, url='', css=None, **kw):
         if css:
             str = ' class="%s"' % css
-        else: str = ''
-        
+        else:
+            str = ''
         return ('<jump href="%s"%s>' % (self._escape(url), str), '</jump>') [not on]
-    # Attachments ######################################################
 
     def attachment_link(self, url, text, **kw):
         return '<attachment href="%s">%s</attachment>' % (url, text)
+
     def attachment_image(self, url, **kw):
         return '<attachmentimage href="%s"></attachmentimage>' % (url,)
-    def attachment_drawing(self, url, text, **kw):
-        return '<attachmentdrawing href="%s">%s</attachmentdrawing>' % (
-            url, text)
 
-    def text(self, text):
+    def attachment_drawing(self, url, text, **kw):
+        return '<attachmentdrawing href="%s">%s</attachmentdrawing>' % (url, text)
+
+    def text(self, text, **kw):
         if self.in_pre:
             return text.replace(']]>', ']]>]]&gt;<![CDATA[')
         return self._escape(text)
 
-    def rule(self, size=0):
-        return "\n<br/>%s<br/>\n" % ("-"*78,) # <hr/> not supported in stylebook
+    def rule(self, size=0, **kw):
+        return "\n<br/>%s<br/>\n" % ("-" * 78,) # <hr/> not supported in stylebook
         if size:
             return '<hr size="%d"/>\n' % (size,)
         else:
@@ -92,23 +91,25 @@ class Formatter(FormatterBase):
     def icon(self, type):
         return '<icon type="%s" />' % type            
 
-    def strong(self, on):
+    def strong(self, on, **kw):
         return ['<strong>', '</strong>'][not on]
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
         return ['<em>', '</em>'][not on]
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
         return ['<strong>', '</strong>'][not on]
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
         result = ''
-        if self.in_p: result = self.paragraph(0)
+        if self.in_p:
+            result = self.paragraph(0)
         return result + ['<ol>', '</ol>\n'][not on]
 
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
         result = ''
-        if self.in_p: result = self.paragraph(0)
+        if self.in_p:
+            result = self.paragraph(0)
         return result + ['<ul>', '</ul>\n'][not on]
 
     def listitem(self, on, **kw):
@@ -117,29 +118,30 @@ class Formatter(FormatterBase):
     def code(self, on, **kw):
         return ['<code>', '</code>'][not on]
 
-    def sup(self, on):
+    def sup(self, on, **kw):
         return ['<sup>', '</sup>'][not on]
 
-    def sub(self, on):
+    def sub(self, on, **kw):
         return ['<sub>', '</sub>'][not on]
 
-    def strike(self, on):
+    def strike(self, on, **kw):
         return ['<strike>', '</strike>'][not on]
 
-    def preformatted(self, on):
+    def preformatted(self, on, **kw):
         FormatterBase.preformatted(self, on)
         result = ''
-        if self.in_p: result = self.paragraph(0)
+        if self.in_p:
+            result = self.paragraph(0)
         return result + ['<source><![CDATA[', ']]></source>'][not on]
 
-    def paragraph(self, on):
+    def paragraph(self, on, **kw):
         FormatterBase.paragraph(self, on)
         return ['<p>', '</p>\n'][not on]
 
     def linebreak(self, preformatted=1):
         return ['\n', '<br/>\n'][not preformatted]
 
-    def heading(self, on, depth, id = None, **kw):
+    def heading(self, on, depth, id=None, **kw):
         if not on:
             return '">\n'
         # remember depth of first heading, and adapt current depth accordingly
@@ -151,7 +153,7 @@ class Formatter(FormatterBase):
         result = ""
         while self._current_depth >= depth:
             result = result + "</s%d>\n" % self._current_depth
-            self._current_depth = self._current_depth - 1
+            self._current_depth -= 1
         self._current_depth = depth
 
         id_text = ''
@@ -160,41 +162,43 @@ class Formatter(FormatterBase):
 
         return result + '<s%d%s title="' % (depth, id_text)
 
-    def table(self, on, attrs={}):
+    def table(self, on, attrs={}, **kw):
         return ['<table>', '</table>'][not on]
 
-    def table_row(self, on, attrs={}):
+    def table_row(self, on, attrs={}, **kw):
         return ['<tr>', '</tr>'][not on]
 
-    def table_cell(self, on, attrs={}):
+    def table_cell(self, on, attrs={}, **kw):
         return ['<td>', '</td>'][not on]
 
     def anchordef(self, id):
         return '<anchor id="%s"/>' % id
 
-    def anchorlink(self, on, name='', id=None):
+    def anchorlink(self, on, name='', **kw):
+        id = kw.get('id',None)
         extra = ''
         if id:
             extra = ' id="%s"' % id
         return ('<link anchor="%s"%s>' % (name, extra) ,'</link>') [not on]
 
-    def underline(self, on):
+    def underline(self, on, **kw):
         return self.strong(on) # no underline in StyleBook
 
-    def definition_list(self, on):
+    def definition_list(self, on, **kw):
         result = ''
-        if self.in_p: result = self.paragraph(0)
+        if self.in_p:
+            result = self.paragraph(0)
         return result + ['<gloss>', '</gloss>'][not on]
 
-    def definition_term(self, on, compact=0):
+    def definition_term(self, on, compact=0, **kw):
         return ['<label>', '</label>'][not on]
 
-    def definition_desc(self, on):
+    def definition_desc(self, on, **kw):
         return ['<item>', '</item>'][not on]
 
-    def image(self, **kw):
-        valid_attrs = ['src', 'width', 'height', 'alt']
-        attrs = {}
+    def image(self, src=None, **kw):
+        valid_attrs = ['src', 'width', 'height', 'alt', 'title']
+        attrs = {'src': src}
         for key, value in kw.items():
             if key in valid_attrs:
                 attrs[key] = value

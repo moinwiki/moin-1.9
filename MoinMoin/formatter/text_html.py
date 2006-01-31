@@ -6,10 +6,159 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os.path, re
+from sets import Set # TODO: when we require Python 2.4+ use the builtin 'set' type
 from MoinMoin.formatter.base import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
+
+line_anchors = False
+prettyprint = False
+
+# These are the HTML elements that we treat as block elements.
+_blocks = Set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+               'hr', 'li', 'ol', 'p', 'pre', 'table', 'tbody', 'td', 'tfoot', 'th',
+               'thead', 'tr', 'ul', 'blockquote', ])
+
+# These are the HTML elements which are typically only used with
+# an opening tag without a separate closing tag.  We do not
+# include 'script' or 'style' because sometimes they do have
+# content, and also IE has a parsing bug with those two elements (only)
+# when they don't have a closing tag even if valid XHTML.
+
+_self_closing_tags = Set(['area', 'base', 'br', 'col', 'frame', 'hr', 'img', 'input',
+                          'isindex', 'link', 'meta', 'param'])
+
+# These are the elements which generally should cause an increase in the
+# indention level in the html souce code.
+_indenting_tags = Set(['ol', 'ul', 'dl', 'li', 'dt', 'dd', 'tr', 'td'])
+
+# These are the elements that discard any whitespace they contain as
+# immediate child nodes.
+_space_eating_tags = Set(['colgroup', 'dl', 'frameset', 'head', 'map' 'menu',
+                          'ol', 'optgroup', 'select', 'table', 'tbody', 'tfoot',
+                          'thead', 'tr', 'ul'])
+
+# These are standard HTML attributes which are typically used without any
+# value; e.g., as boolean flags indicated by their presence.
+_html_attribute_boolflags = Set(['compact', 'disabled', 'ismap', 'nohref',
+                                 'noresize', 'noshade', 'nowrap', 'readonly',
+                                 'selected', 'wrap'])
+
+# These are all the standard HTML attributes that are allowed on any element.
+_common_attributes = Set(['accesskey', 'class', 'dir', 'disabled', 'id', 'lang',
+                          'style', 'tabindex', 'title'])
+
+
+def rewrite_attribute_name(name, default_namespace='html'):
+    """Takes an attribute name and tries to make it HTML correct.
+
+    This function takes an attribute name as a string, as it may be
+    passed in to a formatting method using a keyword-argument syntax,
+    and tries to convert it into a real attribute name.  This is
+    necessary because some attributes may conflict with Python
+    reserved words or variable syntax (such as 'for', 'class', or
+    'z-index'); and also to help with backwards compatibility with
+    older versions of MoinMoin where different names may have been
+    used (such as 'content_id' or 'css').
+
+    Returns a tuple of strings: (namespace, attribute).
+
+    Namespaces: The default namespace is always assumed to be 'html',
+    unless the input string contains a colon or a double-underscore;
+    in which case the first such occurance is assumed to separate the
+    namespace prefix from name.  So, for example, to get the HTML
+    attribute 'for' (as on a <label> element), you can pass in the
+    string 'html__for' or even '__for'.
+
+    Hyphens:  To better support hyphens (which are not allowed in Python
+    variable names), all occurances of two underscores will be replaced
+    with a hyphen.  If you use this, then you must also provide a
+    namespace since the first occurance of '__' separates a namespace
+    from the name.
+
+    Special cases: Within the 'html' namespace, mainly to preserve
+    backwards compatibility, these exceptions ars recognized:
+    'content_type', 'content_id', 'css_class', and 'css'.
+    Additionally all html attributes starting with 'on' are forced to
+    lower-case.  Also the string 'xmlns' is recognized as having
+    no namespace.
+
+    Examples:
+        'id' -> ('html', 'id')
+        'css_class' -> ('html', 'class')
+        'content_id' -> ('html', 'id')
+        'content_type' -> ('html', 'type')
+        'html__for' -> ('html', 'for)
+        'xml__space' -> ('xml', 'space')
+        '__z__index' -> ('html', 'z-index')
+        '__http__equiv' -> ('html', 'http-equiv')
+        'onChange' -> ('html', 'onchange')
+        'xmlns' -> ('', 'xmlns')
+        'xmlns__abc' -> ('xmlns', 'abc')
+
+    (In actuality we only deal with namespace prefixes, not any real
+    namespace URI...we only care about the syntax not the meanings.)
+    """
+
+    # Handle any namespaces (just in case someday we support XHTML)
+    if ':' in name:
+        ns, name = name.split(':', 1)
+    elif '__' in name:
+        ns, name = name.split('__', 1)
+    elif name == 'xmlns':
+        ns = ''
+    else:
+        ns = default_namespace
+
+    name.replace('__', '-')
+    if ns == 'html':
+        # We have an HTML attribute, fix according to DTD
+        if name == 'content_type': # MIME type such as in <a> and <link> elements
+            name =  'type'
+        elif name == 'content_id': # moin historical convention
+            name =  'id'
+        elif name in ('css_class', 'css'): # to avoid python word 'class'
+            name = 'class'
+        elif name.startswith('on'): # event handler hook
+            name = name.lower()
+    return ns, name
+
+
+def extend_attribute_dictionary(attributedict, ns, name, value):
+    """Add a new attribute to an attribute dictionary, merging values where possible.
+
+    The attributedict must be a dictionary with tuple-keys of the form:
+    (namespace, attrname).
+
+    The given ns, name, and value will be added to the dictionary.  It
+    will replace the old value if it existed, except for a few special
+    cases where the values are logically merged instead (CSS class
+    names and style rules).
+
+    As a special case, if value is None (not just ''), then the
+    attribute is actually deleted from the dictionary.
+    """
+
+    key = ns, name
+    if value is None:
+        if attributedict.has_key(key):
+            del attributedict[key]
+    else:
+        if ns == 'html' and attributedict.has_key(key):
+            if name == 'class':
+                # CSS classes are appended by space-separated list
+                value = attributedict[key] + ' ' + value
+            elif name == 'style':
+                # CSS styles are appended by semicolon-separated rules list
+                value = attributedict[key] + '; ' + value
+            elif name in _html_attribute_boolflags:
+                # All attributes must have a value. According to XHTML those
+                # traditionally used as flags should have their value set to
+                # the same as the attribute name.
+                value = name
+        attributedict[key] = value
+
 
 class Formatter(FormatterBase):
     """
@@ -17,6 +166,7 @@ class Formatter(FormatterBase):
     """
 
     hardspace = '&nbsp;'
+    indentspace = ' '
 
     def __init__(self, request, **kw):
         apply(FormatterBase.__init__, (self, request), kw)
@@ -26,8 +176,11 @@ class Formatter(FormatterBase):
         # the stack are closed.
         self._inlineStack = []
 
-        self._in_li = 0
-        self._in_code = 0
+        # stack of all tags
+        self._tag_stack = []
+        self._indent_level = 0
+
+        self._in_code = 0 # used by text_gedit
         self._in_code_area = 0
         self._in_code_line = 0
         self._code_area_num = 0
@@ -36,7 +189,7 @@ class Formatter(FormatterBase):
         self._show_section_numbers = None
         self._content_ids = []
         self.pagelink_preclosed = False
-        self._is_included = kw.get('is_included',False)
+        self._is_included = kw.get('is_included', False)
         self.request = request
         self.cfg = request.cfg
 
@@ -49,8 +202,9 @@ class Formatter(FormatterBase):
     # code clean and handle pathological cases like unclosed p and
     # inline tags.
 
-    def langAttr(self, lang=None):
+    def _langAttr(self, lang=None):
         """ Return lang and dir attribute
+        (INTERNAL USE BY HTML FORMATTER ONLY!)
 
         Must be used on all block elements - div, p, table, etc.
         @param lang: if defined, will return attributes for lang. if not
@@ -67,65 +221,159 @@ class Formatter(FormatterBase):
                 # lang is inherited from content div
                 return {}
 
+        #attr = {'xml:lang': lang, 'lang': lang, 'dir': i18n.getDirection(lang),}
         attr = {'lang': lang, 'dir': i18n.getDirection(lang),}
         return attr
 
-    def formatAttributes(self, attr=None):
-        """ Return formatted attributes string
+    def _formatAttributes(self, attr=None, allowed_attrs=None, **kw):
+        """ Return HTML attributes formatted as a single string. (INTERNAL USE BY HTML FORMATTER ONLY!)
 
         @param attr: dict containing keys and values
-        @rtype: string ?
+        @param allowed_attrs: A list of allowable attribute names
+        @param **kw: other arbitrary attributes expressed as keyword arguments.
+        @rtype: string
         @return: formated attributes or empty string
+
+        The attributes and their values can either be given in the
+        'attr' dictionary, or as extra keyword arguments.  They are
+        both merged together.  See the function
+        rewrite_attribute_name() for special notes on how to name
+        attributes.
+
+        Setting a value to None rather than a string (or string
+        coercible) will remove that attribute from the list.
+        
+        If the list of allowed_attrs is provided, then an error is
+        raised if an HTML attribute is encountered that is not in that
+        list (or is not a common attribute which is always allowed or
+        is not in another XML namespace using the double-underscore
+        syntax).
         """
+
+        # Merge the attr dict and kw dict into a single attributes
+        # dictionary (rewriting any attribute names, extracting
+        # namespaces, and merging some values like css classes).
+        attributes = {} # dict of key=(namespace,name): value=attribute_value
         if attr:
-            attr = [' %s="%s"' % (k, v) for k, v in attr.items()]           
-            return ''.join(attr)
+            for a, v in attr.items():
+                a_ns, a_name = rewrite_attribute_name(a)
+                extend_attribute_dictionary(attributes, a_ns, a_name, v)
+        if kw:
+            for a, v in kw.items():
+                a_ns, a_name = rewrite_attribute_name(a)
+                extend_attribute_dictionary(attributes, a_ns, a_name, v)
+
+        # Add title attribute if missing, but it has an alt.
+        if attributes.has_key(('html', 'alt')) and not attributes.has_key(('html', 'title')):
+            attributes[('html', 'title')] = attributes[('html', 'alt')]
+
+        # Force both lang and xml:lang to be present and identical if
+        # either exists.  The lang takes precedence over xml:lang if
+        # both exist.
+        #if attributes.has_key(('html', 'lang')):
+        #    attributes[('xml', 'lang')] = attributes[('html', 'lang')]
+        #elif attributes.has_key(('xml', 'lang')):
+        #    attributes[('html', 'lang')] = attributes[('xml', 'lang')]
+
+        # Check all the HTML attributes to see if they are known and
+        # allowed.  Ignore attributes if in non-HTML namespaces.
+        if allowed_attrs:
+            for name in [key[1] for key in attributes.keys() if key[0] == 'html']:
+                if name in _common_attributes or name in allowed_attrs:
+                    pass
+                elif name.startswith('on'):
+                    pass  # Too many event handlers to enumerate, just let them all pass.
+                else:
+                    # Unknown or unallowed attribute.
+                    err = 'Illegal HTML attribute "%s" passed to formatter' % name
+                    raise ValueError(err)
+
+        # Finally, format them all as a single string.
+        if attributes:
+            # Construct a formatted string containing all attributes
+            # with their values escaped.  Any html:* namespace
+            # attributes drop the namespace prefix.  We build this by
+            # separating the attributes into three categories:
+            #
+            #  * Those without any namespace (should only be xmlns attributes)
+            #  * Those in the HTML namespace (we drop the html: prefix for these)
+            #  * Those in any other non-HTML namespace, including xml:
+
+            xmlnslist = ['%s="%s"' % (k[1], wikiutil.escape(v, 1))
+                         for k, v in attributes.items() if not k[0]]
+            htmllist = ['%s="%s"' % (k[1], wikiutil.escape(v, 1))
+                        for k, v in attributes.items() if k[0] == 'html']
+            otherlist = ['%s:%s="%s"' % (k[0], k[1], wikiutil.escape(v, 1))
+                         for k, v in attributes.items() if k[0] and k[0] != 'html']
+
+            # Join all these lists together in a space-separated string.  Also
+            # prefix the whole thing with a space too.
+            htmllist.sort()
+            otherlist.sort()
+            all = [''] + xmlnslist + htmllist + otherlist
+            return ' '.join(all)
         return ''
 
-    # TODO: use set when we require Python 2.3
-    # TODO: The list is not complete, add missing from dtd
-    _blocks = 'p div pre table tr td ol ul dl li dt dd h1 h2 h3 h4 h5 h6 hr form'
-    _blocks = dict(zip(_blocks.split(), [1] * len(_blocks)))
-
-    def open(self, tag, newline=False, attr=None):
-        """ Open a tag with optional attributes
+    def _open(self, tag, newline=False, attr=None, allowed_attrs=None, **kw):
+        """ Open a tag with optional attributes (INTERNAL USE BY HTML FORMATTER ONLY!)
         
         @param tag: html tag, string
-        @param newline: render tag on a separate line
-        @parm attr: dict with tag attributes
+        @param newline: render tag so following data is on a separate line
+        @param attr: dict with tag attributes
+        @param allowed_attrs: list of allowed attributes for this element
+        @param kw: arbitrary attributes and values
         @rtype: string ?
-        @return: open tag with attributes
+        @return: open tag with attributes as a string
         """
-        if tag in self._blocks:
+        is_self_closing = ''
+        if tag in _self_closing_tags:
+            # Don't expect a closing tag later on.
+            is_self_closing = ' /'
+
+        if tag in _blocks:
             # Block elements
             result = []
             
             # Add language attributes, but let caller overide the default
-            attributes = self.langAttr()
+            attributes = self._langAttr()
             if attr:
                 attributes.update(attr)
             
             # Format
-            attributes = self.formatAttributes(attributes)
-            result.append('<%s%s>' % (tag, attributes))
+            attributes = self._formatAttributes(attributes, allowed_attrs=allowed_attrs, **kw)
+            result.append('<%s%s%s>' % (tag, attributes, is_self_closing))
             if newline:
-                result.append('\n')
-            return ''.join(result)
+                result.append(self._newline())
+            tagstr = ''.join(result)
         else:
             # Inline elements
             # Add to inlineStack
-            self._inlineStack.append(tag)
+            if not is_self_closing:
+                # Only push on stack if we expect a close-tag later
+                self._inlineStack.append(tag)
             # Format
-            return '<%s%s>' % (tag, self.formatAttributes(attr))
-       
-    def close(self, tag, newline=False):
-        """ Close tag
+            tagstr = '<%s%s%s>' % (tag,
+                                      self._formatAttributes(attr, allowed_attrs, **kw),
+                                      is_self_closing)
+        # XXX SENSE ???
+        #if not self.close:
+        #    self._tag_stack.append(tag)
+        #    if tag in _indenting_tags:
+        #        self._indent_level += 1
+        return tagstr
+
+    def _close(self, tag, newline=False):
+        """ Close tag (INTERNAL USE BY HTML FORMATTER ONLY!)
 
         @param tag: html tag, string
-        @rtype: string ?
-        @return: closing tag
+        @param newline: render tag so following data is on a separate line
+        @rtype: string
+        @return: closing tag as a string
         """
-        if tag in self._blocks:
+        if tag in _self_closing_tags:
+            # This tag was already closed
+            tagstr = ''
+        elif tag in _blocks:
             # Block elements
             # Close all tags in inline stack
             # Work on a copy, because close(inline) manipulate the stack
@@ -133,56 +381,78 @@ class Formatter(FormatterBase):
             stack = self._inlineStack[:]
             stack.reverse()
             for inline in stack:
-                result.append(self.close(inline))
+                result.append(self._close(inline))
             # Format with newline
             if newline:
-                result.append('\n')
-            result.append('</%s>\n' % (tag))
-            return ''.join(result)            
+                result.append(self._newline())
+            result.append('</%s>' % (tag))
+            tagstr = ''.join(result)            
         else:
             # Inline elements 
             # Pull from stack, ignore order, that is not our problem.
             # The code that calls us should keep correct calling order.
             if tag in self._inlineStack:
                 self._inlineStack.remove(tag)
-            return '</%s>' % tag
+            tagstr = '</%s>' % tag
 
+        # XXX see other place marked with "SENSE"
+        #if tag in _self_closing_tags:
+        #    self._tag_stack.pop()
+        #    if tag in _indenting_tags:
+        #        # decrease indent level
+        #        self._indent_level -= 1
+        if newline:
+            tagstr += self._newline()
+        return tagstr
 
     # Public methods ###################################################
 
-    def startContent(self, content_id='content', **kwargs):
-        """ Start page content div """
+    def startContent(self, content_id='content', newline=True, **kw):
+        """ Start page content div.
+
+        A link anchor is provided at the beginning of the div, with
+        an id of 'top' or 'top_xxxx' if the content_id argument is
+        set to 'xxxx'.
+        """
 
         # Setup id
-        if content_id!='content':
+        if content_id != 'content':
             aid = 'top_%s' % (content_id,)
         else:
             aid = 'top'
         self._content_ids.append(content_id)
         result = []
         # Use the content language
-        attr = self.langAttr(self.request.content_lang)
+        attr = self._langAttr(self.request.content_lang)
         attr['id'] = content_id
-        result.append(self.open('div', newline=1, attr=attr))
+        result.append(self._open('div', newline=False, attr=attr,
+                                 allowed_attrs=['align'], **kw))
         result.append(self.anchordef(aid))
+        if newline:
+            result.append('\n')
         return ''.join(result)
         
-    def endContent(self):
-        """ Close page content div """
+    def endContent(self, newline=True):
+        """ Close page content div.
+
+        A link anchor is provided at the end of the div, with
+        an id of 'bottom' or 'bottom_xxxx' if the content_id argument
+        to the previus startContent() call was set to 'xxxx'.
+        """
 
         # Setup id
         try:
             cid = self._content_ids.pop()
         except:
             cid = 'content'
-        if cid!='content':
+        if cid != 'content':
             aid = 'bottom_%s' % (cid,)
         else:
             aid = 'bottom'
 
         result = []
         result.append(self.anchordef(aid))
-        result.append(self.close('div', newline=1))
+        result.append(self._close('div', newline=newline))
         return ''.join(result) 
 
     def lang(self, on, lang_name):
@@ -195,19 +465,13 @@ class Formatter(FormatterBase):
         if lang_name != self.request.current_lang:
             # Enclose text in span using lang attributes
             if on:
-                attr = self.langAttr(lang=lang_name)
-                return self.open(tag, attr=attr)
-            return self.close(tag)
+                attr = self._langAttr(lang=lang_name)
+                return self._open(tag, attr=attr)
+            return self._close(tag)
 
         # Direction did not change, no need for span
         return ''            
                 
-    def sysmsg(self, on, **kw):
-        tag = 'div'
-        if on:
-            return self.open(tag, attr={'class': 'message'})
-        return self.close(tag)
-    
     # Links ##############################################################
     
     def pagelink(self, on, pagename='', page=None, **kw):
@@ -237,7 +501,7 @@ class Formatter(FormatterBase):
         @keyword title: override using the interwiki wikiname as title
         """
         if not on:
-            return '</a>'
+            return self.url(0)
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
@@ -259,44 +523,106 @@ class Formatter(FormatterBase):
             # unescaped=1 was changed to 0 to make interwiki links with pages with umlauts (or other non-ascii) work
 
     def url(self, on, url=None, css=None, **kw):
-        """
+        """ Inserts an <a> element.
+
+            Call once with on=1 to start the link, and again with on=0
+            to end it (no other arguments are needed when on==0).
+
             Keyword params:
-                title - <a> title attribute
-                attrs -  just include those <a> attrs "as is"
+                url - the URL to link to; will go through Wiki URL mapping.
+                css - a space-separated list of CSS classes
+                attrs -  just include this string verbatim inside
+                         the <a> element; can be used for arbitrary attrs;
+                         all escaping and quoting is the caller's responsibility.
+
+            Note that the 'attrs' keyword argument is for backwards compatibility
+            only.  It should not be used for new code--instead just pass
+            any attributes in as separate keyword arguments.
         """
+        if not on:
+            return self._close('a')
+        attrs = self._langAttr()
+
+        # Handle the URL mapping
+        if url is None and kw.has_key('href'):
+            url = kw['href']
+            del kw['href']
         if url is not None:
             url = wikiutil.mapURL(self.request, url)
-        title = kw.get('title', None)
-        attrs = kw.get('attrs', None)
-        if on:
-            str = '<a'
-            if css: 
-                str = '%s class="%s"' % (str, css)
-            if title:
-                str = '%s title="%s"' % (str, title)
-            if attrs:
-                str = '%s %s' % (str, attrs)
-            str = '%s href="%s">' % (str, wikiutil.escape(url, 1))
+            attrs['href'] = url
+
+        if css:
+            attrs['class'] = css
+        
+        if kw.has_key('attrs'):
+            # for backwards compatibility, raw pre-formated attribute string
+            extra_attrs = kw['attrs']
+            del kw['attrs']
         else:
-            str = '</a>'
+            extra_attrs = None
+
+        # create link
+        if on:
+            str = self._open('a', attr=attrs, **kw)
+            if extra_attrs:
+                # insert this into the tag verbatim (messy)
+                if str[-2:] == '/>':
+                    str = '%s %s />' % (str[:-2], extra_attrs)
+                else:
+                    str = '%s %s>' % (str[:-1], extra_attrs)
+        else:
+            str = self._close('a')
         return str
 
     def anchordef(self, id):
-        #return '<a id="%s"></a>' % (id, ) # this breaks PRE sections for IE
-        # do not add a \n here, it breaks pre sections with line_anchordef
-        return '<span id="%s" class="anchor"></span>' % (id, )
+        """Inserts an invisible element used as a link target.
+
+        Inserts an empty <span> element with an id attribute, used as an anchor
+        for link references.  We use <span></span> rather than <span/>
+        for browser portability.
+        """
+        # Don't add newlines, \n, as it will break pre and
+        # line-numbered code sections (from line_achordef() method).
+        #return '<a id="%s"></a>' % (id, ) # do not use - this breaks PRE sections for IE
+        return '<span class="anchor" id="%s"></span>' % wikiutil.escape(id, 1)
 
     def line_anchordef(self, lineno):
-        return self.anchordef("line-%d" % lineno)
+        if line_anchors:
+            return self.anchordef("line-%d" % lineno)
+        else:
+            return ''
 
-    def anchorlink(self, on, name='', id=None):
-        extra = ''
-        if id:
-            extra = ' id="%s"' % id
-        return ['<a href="#%s"%s>' % (name, extra), '</a>'][not on]
+    def anchorlink(self, on, name='', **kw):
+        """Insert an <a> link pointing to an anchor on the same page.
+
+        Call once with on=1 to start the link, and a second time with
+        on=0 to end it.  No other arguments are needed on the second
+        call.
+
+        The name argument should be the same as the id provided to the
+        anchordef() method, or some other elment.  It should NOT start
+        with '#' as that will be added automatically.
+
+        The id argument, if provided, is instead the id of this link
+        itself and not of the target element the link references.
+        """
+
+        attrs = self._langAttr()
+        if name:
+            attrs['href'] = '#%s' % name
+        if kw.has_key('href'):
+            del kw['href']
+        if on:
+            str = self._open('a', attr=attrs, **kw)
+        else:
+            str = self._close('a')
+        return str
 
     def line_anchorlink(self, on, lineno=0):
-        return self.anchorlink(on, name="line-%d" % lineno)
+        if line_anchors:
+            return self.anchorlink(on, name="line-%d" % lineno)
+        else:
+            return ''
 
     # Attachments ######################################################
 
@@ -373,7 +699,7 @@ class Formatter(FormatterBase):
             # we have a image map. inline it and add a map ref
             # to the img tag
             try:
-                map = open(mappath,'r').read()
+                map = file(mappath, 'r').read()
             except IOError:
                 pass
             except OSError:
@@ -383,11 +709,11 @@ class Formatter(FormatterBase):
                 # replace MAPNAME
                 map = map.replace('%MAPNAME%', mapid)
                 # add alt and title tags to areas
-                map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"',r'href="\1" alt="\1" title="\1"',map)
+                map = re.sub('href\s*=\s*"((?!%TWIKIDRAW%).+?)"', r'href="\1" alt="\1" title="\1"', map)
                 # add in edit links plus alt and title attributes
                 map = map.replace('%TWIKIDRAW%"', edit_link + '" alt="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + '" title="' + _('Edit drawing %(filename)s') % {'filename': self.text(fname)} + '"')
                 # unxml, because 4.01 concrete will not validate />
-                map = map.replace('/>','>')
+                map = map.replace('/>', '>')
                 return (map + self.image(
                     alt=drawing,
                     src=AttachFile.getAttachUrl(
@@ -409,87 +735,148 @@ class Formatter(FormatterBase):
     # Text ##############################################################
     
     def _text(self, text):
+        text = wikiutil.escape(text)
         if self._in_code:
-            return wikiutil.escape(text).replace(' ', self.hardspace)
-        return wikiutil.escape(text)
+            text = text.replace(' ', self.hardspace)
+        return text
 
     # Inline ###########################################################
         
-    def strong(self, on):
+    def strong(self, on, **kw):
+        """Creates an HTML <strong> element.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'strong'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def emphasis(self, on):
+    def emphasis(self, on, **kw):
+        """Creates an HTML <em> element.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'em'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def underline(self, on):
+    def underline(self, on, **kw):
+        """Creates a text span for underlining (css class "u").
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'span'
         if on:
-            return self.open(tag, attr={'class': 'u'})
-        return self.close(tag)
+            return self._open(tag, attr={'class': 'u'}, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def highlight(self, on):
+    def highlight(self, on, **kw):
+        """Creates a text span for highlighting (css class "highlight").
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'strong'
         if on:
-            return self.open(tag, attr={'class': 'highlight'})
-        return self.close(tag)
+            return self._open(tag, attr={'class': 'highlight'}, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def sup(self, on):
+    def sup(self, on, **kw):
+        """Creates a <sup> element for superscript text.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'sup'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def sub(self, on):
+    def sub(self, on, **kw):
+        """Creates a <sub> element for subscript text.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'sub'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def strike(self, on):
-        tag = 'strike'
+    def strike(self, on, **kw):
+        """Creates a text span for line-through (strikeout) text (css class 'strike').
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
+        # This does not use <strike> because has been deprecated in standard HTML.
+        tag = 'span'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, attr={'class': 'strike'},
+                              allowed_attrs=[], **kw)
+        return self._close(tag)
 
     def code(self, on, **kw):
+        """Creates a <tt> element for inline code or monospaced text.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+
+        Any text within this section will have spaces converted to
+        non-break spaces.
+        """
         tag = 'tt'
         # Maybe we don't need this, because we have tt will be in inlineStack.
         self._in_code = on        
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
         
-    def small(self, on):
+    def small(self, on, **kw):
+        """Creates a <small> element for smaller font.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'small'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
-    def big(self, on):
+    def big(self, on, **kw):
+        """Creates a <big> element for larger font.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         tag = 'big'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
+        return self._close(tag)
 
 
     # Block elements ####################################################
 
-    def preformatted(self, on, attr=None):
+    def preformatted(self, on, **kw):
+        """Creates a preformatted text region, with a <pre> element.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         FormatterBase.preformatted(self, on)
         tag = 'pre'
         if on:
-            return self.open(tag, newline=1, attr=attr)
-        return self.close(tag)
+            return self._open(tag, newline=1, **kw)
+        return self._close(tag)
                 
     # Use by code area
     _toggleLineNumbersScript = """
-<script type="text/JavaScript">
+<script type="text/javascript">
 function isnumbered(obj) {
   return obj.childNodes.length && obj.firstChild.childNodes.length && obj.firstChild.firstChild.className == 'LineNumber';
 }
@@ -541,6 +928,19 @@ function togglenumber(did, nstart, nstep) {
 """
     
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
+        """Creates a formatted code region, with line numbering.
+
+        This region is formatted as a <div> with a <pre> inside it.  The
+        code_id argument is assigned to the 'id' of the div element, and
+        must be unique within the document.  The show, start, and step are
+        used for line numbering.
+
+        Note this is not like most formatter methods, it can not take any
+        extra keyword arguments.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         res = []
         ci = self.request.makeUniqueID('CA-%s_%03d' % (code_id, self._code_area_num))
         if on:
@@ -551,7 +951,7 @@ function togglenumber(did, nstart, nstep) {
 
             # Open the code div - using left to right always!
             attr = {'class': 'codearea', 'lang': 'en', 'dir': 'ltr'}
-            res.append(self.open('div', attr=attr))
+            res.append(self._open('div', attr=attr))
 
             # Add the script only in the first code area on the page
             if self._code_area_js == 0 and self._code_area_state[1] >= 0:
@@ -562,7 +962,7 @@ function togglenumber(did, nstart, nstep) {
             if self._code_area_state[1] >= 0:
                 toggleLineNumbersLink = r'''
 <script type="text/javascript">
-document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
+document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 class="codenumbers">Toggle line numbers<\/a>');
 </script>
 ''' % (self._code_area_state[0], self._code_area_state[2], self._code_area_state[3])
@@ -570,14 +970,14 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
 
             # Open pre - using left to right always!
             attr = {'id': self._code_area_state[0], 'lang': 'en', 'dir': 'ltr'}
-            res.append(self.open('pre', newline=True, attr=attr))
+            res.append(self._open('pre', newline=True, attr=attr))
         else:
             # Close code area
             res = []
             if self._in_code_line:
                 res.append(self.code_line(0))
-            res.append(self.close('pre'))
-            res.append(self.close('div'))
+            res.append(self._close('pre'))
+            res.append(self._close('div'))
 
             # Update state
             self._in_code_area = 0
@@ -602,27 +1002,59 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
 
     # Paragraphs, Lines, Rules ###########################################
     
+    def _indent_spaces(self):
+        """Returns space(s) for indenting the html source so list nesting is easy to read.
+
+        Note that this mostly works, but because of caching may not always be accurate."""
+        if prettyprint:
+            return self.indentspace * self._indent_level
+        else:
+            return ''
+
+    def _newline(self):
+        """Returns the whitespace for starting a new html source line, properly indented."""
+        if prettyprint:
+            return '\n' + self._indent_spaces()
+        else:
+            return ''
+
     def linebreak(self, preformatted=1):
+        """Creates a line break in the HTML output.
+        
+        If preformatted is true a <br> element is inserted, otherwise
+        the linebreak will only be visible in the HTML source.
+        """
         if self._in_code_area:
             preformatted = 1
-        return ['\n', '<br>\n'][not preformatted]
+        return ['\n', '<br />\n'][not preformatted] + self._indent_spaces()
         
-    def paragraph(self, on):
+    def paragraph(self, on, **kw):
+        """Creates a paragraph with a <p> element.
+        
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
         if self._terse:
             return ''
         FormatterBase.paragraph(self, on)
-        if self._in_li:
-            self._in_li = self._in_li + 1
         tag = 'p'
         if on:
-            return self.open(tag)
-        return self.close(tag)
-            
-    def rule(self, size=None):
-        if size:
+            tagstr = self._open(tag, **kw)
+        else:
+            tagstr = self._close(tag)
+        return tagstr
+
+    def rule(self, size=None, **kw):
+        """Creates a horizontal rule with an <hr> element.
+
+        If size is a number in the range [1..6], the CSS class of the rule
+        is set to 'hr1' through 'hr6'.  The intent is that the larger the
+        size number the thicker or bolder the rule will be.
+        """
+        if size and 1 <= size <= 6:
             # Add hr class: hr1 - hr6
-            return self.open('hr', newline=1, attr={'class': 'hr%d' % size})
-        return self.open('hr', newline=1)
+            return self._open('hr', newline=1, attr={'class': 'hr%d' % size}, **kw)
+        return self._open('hr', newline=1, **kw)
                 
     def icon(self, type):
         return self.request.theme.make_icon(type)
@@ -634,9 +1066,29 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
             href = self.request.theme.img_url(img)
         return self.image(src=href, alt=text, width=str(w), height=str(h))
 
+    def image(self, src=None, **kw):
+        """Creates an inline image with an <img> element.
+
+        The src argument must be the URL to the image file.
+        """
+        if src:
+            kw['src'] = src
+        return self._open('img', **kw)
+
     # Lists ##############################################################
 
-    def number_list(self, on, type=None, start=None):
+    def number_list(self, on, type=None, start=None, **kw):
+        """Creates an HTML ordered list, <ol> element.
+
+        The 'type' if specified can be any legal numbered
+        list-style-type, such as 'decimal','lower-roman', etc.
+
+        The 'start' argument if specified gives the numeric value of
+        the first list item (default is 1).
+
+        Call once with on=1 to start the list, and a second time
+        with on=0 to end it.
+        """
         tag = 'ol'
         if on:
             attr = {}
@@ -644,49 +1096,81 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
                 attr['type'] = type
             if start is not None:
                 attr['start'] = start
-            return self.open(tag, newline=1, attr=attr)
-        return self.close(tag)
+            tagstr = self._open(tag, newline=1, attr=attr, **kw)
+        else:
+            tagstr = self._close(tag, newline=1)
+        return tagstr
     
-    def bullet_list(self, on):
+    def bullet_list(self, on, **kw):
+        """Creates an HTML ordered list, <ul> element.
+
+        The 'type' if specified can be any legal unnumbered
+        list-style-type, such as 'disc','square', etc.
+
+        Call once with on=1 to start the list, and a second time
+        with on=0 to end it.
+        """
         tag = 'ul'
         if on:
-            return self.open(tag, newline=1)
-        return self.close(tag)
-           
-    def listitem(self, on, **kw):
-        """ List item inherit its lang from the list. """
-        tag = 'li'
-        self._in_li = on != 0
-        if on:
-            attr = {}
-            css_class = kw.get('css_class', None)
-            if css_class:
-                attr['class'] = css_class
-            style = kw.get('style', None)
-            if style:
-                attr['style'] = style
-            return self.open(tag, attr=attr)
-        return self.close(tag)
+            tagstr = self._open(tag, newline=1, **kw)
+        else:
+            tagstr = self._close(tag, newline=1)
+        return tagstr
 
-    def definition_list(self, on):
+    def listitem(self, on, **kw):
+        """Adds a list item, <li> element, to a previously opened
+        bullet or number list.
+
+        Call once with on=1 to start the region, and a second time
+        with on=0 to end it.
+        """
+        tag = 'li'
+        if on:
+            tagstr =  self._open(tag, newline=1, **kw)
+        else:
+            tagstr = self._close(tag, newline=1)
+        return tagstr
+
+    def definition_list(self, on, **kw):
+        """Creates an HTML definition list, <dl> element.
+
+        Call once with on=1 to start the list, and a second time
+        with on=0 to end it.
+        """
         tag = 'dl'
         if on:
-            return self.open(tag, newline=1)
-        return self.close(tag)
+            tagstr = self._open(tag, newline=1, **kw)
+        else:
+            tagstr = self._close(tag, newline=1)
+        return tagstr
 
-    def definition_term(self, on):
+    def definition_term(self, on, **kw):
+        """Adds a new term to a definition list, HTML element <dt>.
+
+        Call once with on=1 to start the term, and a second time
+        with on=0 to end it.
+        """
         tag = 'dt'
         if on:
-            return self.open(tag)
-        return self.close(tag)
-        
-    def definition_desc(self, on):
+            tagstr = self._open(tag, newline=1, **kw)
+        else:
+            tagstr = self._close(tag, newline=0)
+        return tagstr
+
+    def definition_desc(self, on, **kw):
+        """Gives the definition to a definition item, HTML element <dd>.
+
+        Call once with on=1 to start the definition, and a second time
+        with on=0 to end it.
+        """
         tag = 'dd'
         if on:
-            return self.open(tag)
-        return self.close(tag)
+            tagstr = self._open(tag, newline=1, **kw)
+        else:
+            tagstr = self._close(tag, newline=0)
+        return tagstr
 
-    def heading(self, on, depth, id = None, **kw):
+    def heading(self, on, depth, **kw):
         # remember depth of first heading, and adapt counting depth accordingly
         if not self._base_depth:
             self._base_depth = depth
@@ -709,7 +1193,7 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
 
         # closing tag, with empty line after, to make source more readable
         if not on:
-            return self.close('h%d' % heading_depth) + '\n'
+            return self._close('h%d' % heading_depth) + '\n'
             
         # create section number
         number = ''
@@ -722,25 +1206,22 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
             number = '.'.join(map(str, self.request._fmt_hd_counters[self._show_section_numbers-1:]))
             if number: number += ". "
 
-        attr = {}
-        if id:
-            attr['id'] = id
         # Add space before heading, easier to check source code
-        result = '\n' + self.open('h%d' % heading_depth, attr=attr)
+        result = '\n' + self._open('h%d' % heading_depth, **kw)
 
         # TODO: convert this to readable code
         if self.request.user.show_topbottom:
             # TODO change top/bottom refs to content-specific top/bottom refs?
             result = ("%s%s%s%s%s%s%s%s" %
                       (result,
-                       kw.get('icons',''),
+                       kw.get('icons', ''),
                        self.url(1, "#bottom", unescaped=1),
                        self.icon('bottom'),
                        self.url(0),
                        self.url(1, "#top", unescaped=1),
                        self.icon('top'),
                        self.url(0)))
-        return "%s%s%s" % (result, kw.get('icons',''), number)
+        return "%s%s%s" % (result, kw.get('icons', ''), number)
 
     
     # Tables #############################################################
@@ -795,7 +1276,7 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
         return result
 
 
-    def table(self, on, attrs=None):
+    def table(self, on, attrs=None, **kw):
         """ Create table
 
         @param on: start table
@@ -807,44 +1288,80 @@ document.write('<a href="#" onClick="return togglenumber(\'%s\', %d, %d);" \
         if on:
             # Open div to get correct alignment with table width smaller
             # than 100%
-            result.append(self.open('div', newline=1))
+            result.append(self._open('div', newline=1))
 
             # Open table
             if not attrs:
                 attrs = {}
             else:
                 attrs = self._checkTableAttr(attrs, 'table')
-            result.append(self.open('table', newline=1, attr=attrs))
+            result.append(self._open('table', newline=1, attr=attrs,
+                                     allowed_attrs=self._allowed_table_attrs['table'],
+                                     **kw))
+            result.append(self._open('tbody', newline=1))
         else:
-            # Close table then div
-            result.append(self.close('table'))
-            result.append(self.close('div'))
+            # Close tbody, table, and then div
+            result.append(self._close('tbody'))
+            result.append(self._close('table'))
+            result.append(self._close('div'))
 
         return ''.join(result)    
     
-    def table_row(self, on, attrs=None):
+    def table_row(self, on, attrs=None, **kw):
         tag = 'tr'
         if on:
             if not attrs:
                 attrs = {}
             else:
                 attrs = self._checkTableAttr(attrs, 'row')
-            return self.open(tag, newline=1, attr=attrs)
-        return self.close(tag)
+            return self._open(tag, newline=1, attr=attrs,
+                             allowed_attrs=self._allowed_table_attrs['row'],
+                             **kw)
+        return self._close(tag) + '\n'
     
-    def table_cell(self, on, attrs=None):
+    def table_cell(self, on, attrs=None, **kw):
         tag = 'td'
         if on:
             if not attrs:
                 attrs = {}
             else:
                 attrs = self._checkTableAttr(attrs, '')
-            return self.open(tag, newline=1, attr=attrs)
-        return self.close(tag)
+            return '  ' + self._open(tag, attr=attrs,
+                             allowed_attrs=self._allowed_table_attrs[''],
+                             **kw)
+        return self._close(tag) + '\n'
 
-    def escapedText(self, text):
-        return wikiutil.escape(text)
+    def text(self, text, **kw):
+        txt = FormatterBase.text(self, text, **kw)
+        if kw:
+            return self._open('span', **kw) + txt + self._close('span')
+        return txt
+
+    def escapedText(self, text, **kw):
+        txt = wikiutil.escape(text)
+        if kw:
+            return self._open('span', **kw) + txt + self._close('span')
+        return txt
 
     def rawHTML(self, markup):
         return markup
+
+    def sysmsg(self, on, **kw):
+        tag = 'div'
+        if on:
+            return self._open(tag, attr={'class': 'message'}, **kw)
+        return self._close(tag)
+    
+    def div(self, on, **kw):
+        tag = 'div'
+        if on:
+            return self._open(tag, **kw)
+        return self._close(tag)
+
+    def span(self, on, **kw):
+        tag = 'span'
+        if on:
+            return self._open(tag, **kw)
+        return self._close(tag)
+    
 
