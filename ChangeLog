@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-01-31 22:09:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-410
+
+    Summary:
+      surge protection: use userid of logged in users, reorder surge-log entry format, fix error handling
+    Revision:
+      moin--main--1.5--patch-410
+
+    surge protection: use userid of logged in users, reorder surge-log entry format, fix error handling
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-01-30 01:27:02 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-409
 
     Summary:
