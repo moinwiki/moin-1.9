@@ -53,7 +53,7 @@ class Parser:
     dl_rule = ur"^\s+.*?::\s"
 
     # the big, fat, ugly one ;)
-    formatting_rules = ur"""(?P<ent_numeric>&#\d{1,5};)
+    formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
 (?:(?P<emph_ibb>'''''(?=[^']+'''))
 (?P<emph_ibi>'''''(?=[^']+''))
 (?P<emph_ib_or_bi>'{5}(?=[^']))
@@ -72,7 +72,9 @@ class Parser:
 (?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\]))
 (?P<ol>%(ol_rule)s)
 (?P<dl>%(dl_rule)s)
-(?P<li>^\s+\*?\s*)
+(?P<li>^\s+\*\s*)
+(?P<li_none>^\s+\.\s*)
+(?P<indent>^\s+)
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
@@ -83,6 +85,7 @@ class Parser:
 (?P<email>[-\w._+]+\@[\w-]+(\.[\w-]+)+)
 (?P<smiley>(?<=\s)(%(smiley)s)(?=\s))
 (?P<smileyA>^(%(smiley)s)(?=\s))
+(?P<ent_symbolic>&[a-zA-Z]+;)
 (?P<ent>[<>&])
 (?P<wikiname_bracket>\[".*?"\])
 (?P<tt_bt>`.*?`)"""  % {
@@ -96,9 +99,11 @@ class Parser:
         'smiley': u'|'.join(map(re.escape, config.smileys.keys()))}
 
     # Don't start p before these 
-    no_new_p_before = ("heading rule table tableZ tr td ul ol dl dt dd li "
-                       "processor macro pre")
-    no_new_p_before = dict(zip(no_new_p_before.split(), [1] * len(no_new_p_before)))
+    no_new_p_before = ("heading rule table tableZ tr td "
+                       "ul ol dl dt dd li li_none indent "
+                       "macro processor pre")
+    no_new_p_before = no_new_p_before.split()
+    no_new_p_before = dict(zip(no_new_p_before, [1] * len(no_new_p_before)))
 
     def __init__(self, raw, request, **kw):
         self.raw = raw
@@ -446,34 +451,47 @@ class Parser:
         #        '<': '&lt;',
         #        '>': '&gt;'}[word]
 
-
     def _ent_numeric_repl(self, word):
-        """Handle numeric SGML entities."""
+        """Handle numeric (decimal and hexadecimal) SGML entities."""
         return self.formatter.rawHTML(word)
 
-
-    def _li_repl(self, match):
-        """Handle bullet lists."""
+    def _ent_symbolic_repl(self, word):
+        """Handle symbolic SGML entities."""
+        return self.formatter.rawHTML(word)
+    
+    def _indent_repl(self, match):
+        """Handle pure indentation (no - * 1. markup)."""
         result = []
-        indented_only = (match == (" " * len(match)))
-        if indented_only and self.in_li:
-            return ''
-            
-        self._close_item(result)
-        #self.inhibit_p = 1
-        self.in_li = 1
-        css_class = ''
-        if self.line_was_empty and not self.first_list_item:
-            css_class = 'gap'
-        if indented_only:
-            result.append(self.formatter.listitem(1, css_class=css_class,
-                                                  style="list-style-type:none"))
-        else:
-            result.append(self.formatter.listitem(1, css_class=css_class))
-        # Suspected p!
-        ## result.append(self.formatter.paragraph(1))
+        if not self.in_li:
+            self._close_item(result)
+            self.in_li = 1
+            css_class = None
+            if self.line_was_empty and not self.first_list_item:
+                css_class = 'gap'
+            result.append(self.formatter.listitem(1, css_class=css_class, style="list-style-type:none"))
         return ''.join(result)
 
+    def _li_none_repl(self, match):
+        """Handle type=none (" .") lists."""
+        result = []
+        self._close_item(result)
+        self.in_li = 1
+        css_class = None
+        if self.line_was_empty and not self.first_list_item:
+            css_class = 'gap'
+        result.append(self.formatter.listitem(1, css_class=css_class, style="list-style-type:none"))
+        return ''.join(result)
+
+    def _li_repl(self, match):
+        """Handle bullet (" *") lists."""
+        result = []
+        self._close_item(result)
+        self.in_li = 1
+        css_class = None
+        if self.line_was_empty and not self.first_list_item:
+            css_class = 'gap'
+        result.append(self.formatter.listitem(1, css_class=css_class))
+        return ''.join(result)
 
     def _ol_repl(self, match):
         """Handle numbered lists."""
@@ -516,10 +534,11 @@ class Parser:
         #        self.inhibit_p = 1
     
         # Close lists while char-wise indent is greater than the current one
-        while ((self._indent_level() > new_level) or
-               ( new_level and
-                (self._indent_level() == new_level) and
-                (self.list_types[-1]) != list_type)):
+        #while ((self._indent_level() > new_level) or
+        #       ( new_level and
+        #        (self._indent_level() == new_level) and
+        #        (self.list_types[-1]) != list_type)):
+        while self._indent_level() > new_level:
             self._close_item(close)
             if self.list_types[-1] == 'ol':
                 tag = self.formatter.number_list(0)
@@ -564,6 +583,7 @@ class Parser:
             ##self.inhibit_p = 1
             self.in_li = 0
             self.in_dd = 0
+            
         # If list level changes, close an open table
         if self.in_table and (open or close):
             close[0:0] = [self.formatter.table(0)]
@@ -580,7 +600,7 @@ class Parser:
         result = []
         #result.append("<!-- _undent start -->\n")
         self._close_item(result)
-        for type in self.list_types:
+        for type in self.list_types[::-1]:
             if type == 'ol':
                 result.append(self.formatter.number_list(0))
             elif type == 'dl':
@@ -821,7 +841,7 @@ class Parser:
     def _macro_repl(self, word):
         """Handle macros ([[macroname]])."""
         macro_name = word[2:-2]
-        #self.inhibit_p = 1 # fixes UserPreferences, but makes new trouble!
+        self.inhibit_p = 1 # 0 fixes UserPreferences, but makes new trouble!
 
         # check for arguments
         args = None
@@ -852,7 +872,7 @@ class Parser:
                 ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
                 
                 if not (self.inhibit_p or self.in_pre or self.formatter.in_p):
-                    result.append(self.formatter.paragraph(1))
+                    result.append(self.formatter.paragraph(1, css_class="line879"))
                 result.append(self.formatter.text(line[lastpos:match.start()]))
             
             # Replace match with markup
@@ -864,7 +884,7 @@ class Parser:
         # No match: Add paragraph with the text of the line
         if not (self.in_pre or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
-            result.append(self.formatter.paragraph(1))
+            result.append(self.formatter.paragraph(1, css_class="line886"))
         result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
@@ -881,7 +901,7 @@ class Parser:
                     # Open p for certain types
                     if not (self.inhibit_p or self.formatter.in_p
                             or self.in_pre or (type in self.no_new_p_before)):
-                        result.append(self.formatter.paragraph(1))
+                        result.append(self.formatter.paragraph(1, css_class="line903"))
                     
                     # Get replace method and replece hit
                     replace = getattr(self, '_' + type + '_repl')
@@ -994,7 +1014,9 @@ class Parser:
                     self.processor = None
 
                     # send rest of line through regex machinery
-                    line = line[endpos+3:]                    
+                    line = line[endpos+3:]
+                    if not line.strip(): # just in the case "}}} " when we only have blanks left...
+                        continue
             else:
                 # we don't have \n as whitespace any more
                 # This is the space between lines we join to one paragraph
@@ -1007,7 +1029,7 @@ class Parser:
                         self.in_table = 0
                     # CHANGE: removed check for not self.list_types
                     # p should close on every empty line
-                    if (self.formatter.in_p):
+                    if self.formatter.in_p:
                         self.request.write(self.formatter.paragraph(0))
                     self.line_is_empty = 1
                     continue
@@ -1036,8 +1058,7 @@ class Parser:
                             indtype = "dl"
 
                 # output proper indentation tags
-                self.request.write(self._indent_to(indlen, indtype, numtype,
-                                                   numstart))
+                self.request.write(self._indent_to(indlen, indtype, numtype, numstart))
 
                 # Table mode
                 # TODO: move into function?                
@@ -1045,8 +1066,7 @@ class Parser:
                     and line[-3:] == "|| " and len(line) >= 5 + indlen):
                     # Start table
                     if self.list_types and not self.in_li:
-                        self.request.write(self.formatter.listitem
-                                           (1, style="list-style-type:none"))
+                        self.request.write(self.formatter.listitem(1, style="list-style-type:none"))
                         ## CHANGE: no automatic p on li
                         ##self.request.write(self.formatter.paragraph(1))
                         self.in_li = 1
@@ -1073,7 +1093,7 @@ class Parser:
             formatted_line = self.scan(scan_re, line)
             self.request.write(formatted_line)
 
-            if self.in_pre:
+            if self.in_pre == 3:
                 self.request.write(self.formatter.linebreak())
 
         # Close code displays, paragraphs, tables and open lists
@@ -1099,3 +1119,5 @@ class Parser:
                 self.processor_is_parser = 1
             except wikiutil.PluginMissingError:
                 self.processor = None
+
+

@@ -432,7 +432,9 @@ class Macro:
         except KeyError:
             # Wrong argument, return inline error message
             arg = self.formatter.text(args)
-            return '<span class="error">Wrong argument: %s</span>' % arg
+            return (self.formatter.span(1, css_class="error") +
+                    'Wrong argument: %s' % arg +
+                    self.formatter.span(0))
         
         count = self.request.rootpage.getPageCount(exists=exists)
         return self.formatter.text("%d" % count)

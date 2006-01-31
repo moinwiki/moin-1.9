@@ -22,7 +22,7 @@ class Formatter:
 
     defaultDependencies = ["time"]
     
-    def __init__(self, request, static = [], formatter = None, **kw):
+    def __init__(self, request, static=[], formatter=None, **kw):
         if formatter:
             self.formatter = formatter
         else:
@@ -67,7 +67,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
                            self.code_fragments[i],
                            self.text_cmd_begin,
                            repr(text[i+1])])
-            i = i + 1
+            i += 1
         source.append(self.text_cmd_end)
         source.append(self.__adjust_formatter_state())
         
@@ -88,10 +88,11 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
 
     def __is_static(self, dependencies):
         for dep in dependencies:
-            if dep not in  self.static: return False
+            if dep not in self.static:
+                return False
         return True
 
-    def __adjust_languge_state(self):
+    def __adjust_language_state(self):
         """ Add current language state changing code to the cache """
         if self.__lang != self.request.current_lang:
             self.__lang = self.request.current_lang
@@ -99,7 +100,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
         return ''
         
     def __adjust_formatter_state(self):
-        result = self.__adjust_languge_state()
+        result = self.__adjust_language_state()
         if self.__in_p != self.formatter.in_p:
             result = "%s%s.in_p = %r\n" % (result, self.__formatter,
                                            self.formatter.in_p)
@@ -110,8 +111,8 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             self.__in_pre = self.formatter.in_pre        
         return result
     
-    def dynamic_content(self, parser, callback, arg_list = [], arg_dict = {},
-                            returns_content = 1):
+    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
+                            returns_content=1):
         adjust = self.__adjust_formatter_state()
         if returns_content:
             return self.__insert_code('%srequest.write(%s.%s(*%r,**%r))' %
@@ -136,6 +137,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
         return self.__insert_code(
             'request.write(%s.attachment_link(%r, %r, **%r))' %
             (self.__formatter, url, text, kw))
+
     def attachment_image(self, url, **kw):
         return self.__insert_code(
             'request.write(%s.attachment_image(%r, **%r))' %
@@ -154,7 +156,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
     def heading(self, on, depth, **kw):        
         if on:
             code = [
-                self.__adjust_languge_state(),
+                self.__adjust_language_state(),
                 'request.write(%s.heading(%r, %r, **%r))' % (self.__formatter,
                                                              on, depth, kw),
                 ]     

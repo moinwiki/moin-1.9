@@ -70,8 +70,11 @@ class Parser:
         except tokenize.TokenError, ex:
             msg = ex[0]
             line = ex[1][0]
-            self.request.write(self.formatter.rawHTML("<b>ERROR: %s</b><br>%s\n" % (
-                msg, wikiutil.escape(self.raw[self.lines[line]:]))))
+            errmsg = (self.formatter.linebreak() + 
+                      self.formatter.strong(1) + "ERROR: %s" % msg + self.formatter.strong(0) +
+                      self.formatter.linebreak() +
+                      wikiutil.escape(self.raw[self.lines[line]:]))
+            self.request.write(errmsg)
         self.request.write(self.formatter.code_line(0))
         self.request.write(formatter.code_area(0, self._code_id))
 

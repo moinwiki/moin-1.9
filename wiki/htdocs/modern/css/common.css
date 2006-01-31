@@ -188,8 +188,9 @@ hr {
 .hr5 {height: 6pt;}
 .hr6 {height: 7pt;}
 
-/* Replacement for html 3 u tag */
+/* Replacement for deprecated html 3 <u> element and html 4 <strike> */
 .u {text-decoration: underline;}
+.strike {text-decoration: line-through;}
 
 /* eye catchers */
 .warning 

@@ -43,12 +43,7 @@ def emit_footnotes(request, formatter):
     if request.footnotes:
         result = []
 
-        # Start footnotes div. It is important to use formatter so open
-        # inline tags will be closed, and we get correct direction.
-        attr = formatter.langAttr()
-        attr['class'] = 'footnotes'
-        attr = [' %s="%s"' % (k, v) for k, v in attr.items()]
-        result.append(formatter.rawHTML('<div%s>' % ''.join(attr)))
+        result.append(formatter.div(1, css_class='footnotes'))
 
         # Add footnotes list
         result.append(formatter.bullet_list(1))
@@ -60,7 +55,7 @@ def emit_footnotes(request, formatter):
             fn_id = request.footnotes[idx][1]
             result.append(formatter.anchorlink(1, 'fnref' + fn_id,
                                                id='fndef' + fn_id))
-            result.append(formatter.text(str(idx+1)))
+            result.append(formatter.text(str(idx + 1)))
             result.append(formatter.anchorlink(0))
             result.append(formatter.text(" "))
                         
@@ -78,7 +73,7 @@ def emit_footnotes(request, formatter):
         result.append(formatter.bullet_list(0))
 
         # Finish div
-        result.append(formatter.rawHTML('</div>'))
+        result.append(formatter.div(0))
 
         request.footnotes = []
         return ''.join(result)
