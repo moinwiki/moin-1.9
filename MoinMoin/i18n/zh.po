@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -60,13 +60,6 @@ msgstr "创建网页"
 
 msgid "You are not allowed to view this page."
 msgstr "您无权阅读此页."
-
-msgid "DeleteCache"
-msgstr "删除缓存"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(%s缓存)"
 
 msgid "You are not allowed to edit this page."
 msgstr "您无权编辑此页."
@@ -1483,6 +1476,13 @@ msgstr "附件"
 #, python-format
 msgid "Show %s days."
 msgstr "显示%s天"
+
+msgid "DeleteCache"
+msgstr "删除缓存"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s缓存)"
 
 msgid "Or try one of these actions:"
 msgstr "或下列操作: "

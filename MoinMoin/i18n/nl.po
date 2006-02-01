@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -61,13 +61,6 @@ msgstr "Nieuwe pagina aanmaken"
 
 msgid "You are not allowed to view this page."
 msgstr "U hebt geen toestemming deze pagina te bekijken."
-
-msgid "DeleteCache"
-msgstr "BufferLegen"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(%s gebufferd)"
 
 msgid "You are not allowed to edit this page."
 msgstr "U hebt geen toestemming deze pagina te bewerken."
@@ -1536,6 +1529,13 @@ msgstr "Nieuwe bijlage"
 #, python-format
 msgid "Show %s days."
 msgstr "Laat %s dagen zien."
+
+msgid "DeleteCache"
+msgstr "BufferLegen"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s gebufferd)"
 
 msgid "Or try one of these actions:"
 msgstr "Of probeer een van deze acties: "

@@ -31,10 +31,6 @@ Para usar este formulário em outras páginas, insira uma macro do tipo
 '''Criar Nova Página''',
 '''You are not allowed to view this page.''':
 '''Você não tem permissão para ver esta página!''',
-'''DeleteCache''':
-'''ApagarCache''',
-'''(cached %s)''':
-'''(armazenado %s)''',
 '''You are not allowed to edit this page.''':
 '''Você não tem permissão para editar esta página!''',
 '''Page is immutable!''':
@@ -355,6 +351,8 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''Por favor informe um endereço de email. Se você perder sua informação de login, você poderá recuperá-la por email.''',
 '''This email already belongs to somebody else.''':
 '''Este email já pertence a alguém cadastrado neste site.''',
+'''User account created! You can use this account to login now...''':
+'''Conta de usuário criada! Você pode usar esta conta para se logar agora...''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Não foi possível carregar o tema \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -746,7 +744,7 @@ Tente um nome diferente.''',
 '''Wiki''':
 '''Wiki''',
 '''Slideshow''':
-'''Slideshow''',
+'''Mostra em slide''',
 '''Start''':
 '''Iniciar''',
 '''Slide %(pos)d of %(size)d''':
@@ -783,6 +781,8 @@ Tente um nome diferente.''',
 '''Baixar arquivo XML exportado desta wiki''',
 '''No wanted pages in this wiki.''':
 '''Nenhuma página solicitada neste wiki.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Renderização de texto reStructured não é possível, por favor instale o docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**O número máximo de inserções permitidas foi excedida**''',
 '''**Could not find the referenced page: %s**''':
@@ -893,6 +893,10 @@ vermelho=editar''',
 '''Anexos''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
+'''DeleteCache''':
+'''ApagarCache''',
+'''(cached %s)''':
+'''(armazenado %s)''',
 '''Or try one of these actions:''':
 '''Ou tente uma da seguintes ações: ''',
 '''Page''':
@@ -935,6 +939,8 @@ vermelho=editar''',
 '''LicençaWiki''',
 '''MissingPage''':
 '''PáginaFaltante''',
+'''MissingHomePage''':
+'''HomePageFaltante''',
 '''Mon''':
 '''Seg''',
 '''Tue''':

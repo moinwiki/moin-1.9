@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -58,13 +58,6 @@ msgstr "צור דף חדש"
 
 msgid "You are not allowed to view this page."
 msgstr "אין לכם הרשאות לצפות בדף"
-
-msgid "DeleteCache"
-msgstr "נקה מטמון"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(מטמון %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "אין לכם הרשאות לערוך את הדף"
@@ -1488,6 +1481,13 @@ msgstr "קובץ מצורף חדש"
 #, python-format
 msgid "Show %s days."
 msgstr "הצג %s ימים."
+
+msgid "DeleteCache"
+msgstr "נקה מטמון"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(מטמון %s)"
 
 msgid "Or try one of these actions:"
 msgstr "פעולות נוספות:"

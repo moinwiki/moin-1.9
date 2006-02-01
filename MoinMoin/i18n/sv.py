@@ -32,10 +32,6 @@ För att använda det här formuläret på andra sidor, skriv in ett
 '''Skapa ny sida''',
 '''You are not allowed to view this page.''':
 '''Du har inte tillåtelse att titta på den här sidan.''',
-'''DeleteCache''':
-'''RaderaCache''',
-'''(cached %s)''':
-'''(cachad %s)''',
 '''You are not allowed to edit this page.''':
 '''Du har inte tillåtelse att redigera den här sidan.''',
 '''Page is immutable!''':
@@ -901,6 +897,10 @@ röd=ändra''',
 '''Bilagor''',
 '''Show %s days.''':
 '''Visa %s dagar.''',
+'''DeleteCache''':
+'''RaderaCache''',
+'''(cached %s)''':
+'''(cachad %s)''',
 '''Or try one of these actions:''':
 '''Eller pröva någon av de här åtgärderna:''',
 '''Page''':

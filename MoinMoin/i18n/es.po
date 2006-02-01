@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-11-11 07:18+0500\n"
 "Last-Translator: Igor TAmara <igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -61,13 +61,6 @@ msgstr "Crear Nueva Página"
 
 msgid "You are not allowed to view this page."
 msgstr "No tiene permisos para ver esta página."
-
-msgid "DeleteCache"
-msgstr "EliminarCaché"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cached %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "No tiene permisos para editar esta página."
@@ -1537,6 +1530,13 @@ msgstr "Adjuntos"
 #, python-format
 msgid "Show %s days."
 msgstr "Mostrar %s días."
+
+msgid "DeleteCache"
+msgstr "EliminarCaché"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cached %s)"
 
 msgid "Or try one of these actions:"
 msgstr "O intente una de estas acciones: "

@@ -32,10 +32,6 @@ Per usare questa maschera su altre pagine, inserisci una chiamata alla macro
 '''Crea questa pagina''',
 '''You are not allowed to view this page.''':
 '''Non sei autorizzato a leggere questa pagina.''',
-'''DeleteCache''':
-'''CancellaFileTemporanei''',
-'''(cached %s)''':
-'''(%s in cache)''',
 '''You are not allowed to edit this page.''':
 '''Non ti è consentito di modificare questa pagina.''',
 '''Page is immutable!''':
@@ -716,6 +712,10 @@ rosso=Mod''',
 '''Pagina non alterabile''',
 '''Show %s days.''':
 '''Mostra %s giorni.''',
+'''DeleteCache''':
+'''CancellaFileTemporanei''',
+'''(cached %s)''':
+'''(%s in cache)''',
 '''Or try one of these actions:''':
 '''Oppure prova una di queste azioni:''',
 '''Page''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2006-01-22 23:03+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -63,13 +63,6 @@ msgstr "Créer une page"
 
 msgid "You are not allowed to view this page."
 msgstr "Vous n'êtes pas autorisé à voir cette page."
-
-msgid "DeleteCache"
-msgstr "EffacerLeCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(mémorisé dans le cache le %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Vous n'êtes pas autorisé à modifier cette page."
@@ -838,7 +831,8 @@ msgid "Your subscribtion to this page has been removed."
 msgstr "Votre abonnement à cette page a été supprimé."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "Impossible de retirer un abonnement défini par une expression rationnelle !"
+msgstr ""
+"Impossible de retirer un abonnement défini par une expression rationnelle !"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr ""
@@ -1566,6 +1560,13 @@ msgstr "Pièces jointes"
 #, python-format
 msgid "Show %s days."
 msgstr "Voir %s jours."
+
+msgid "DeleteCache"
+msgstr "EffacerLeCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(mémorisé dans le cache le %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Ou essayez l'une de ces actions :"

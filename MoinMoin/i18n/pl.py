@@ -32,10 +32,6 @@ makropolecenie.-~
 '''Utwórz nową stronę''',
 '''You are not allowed to view this page.''':
 '''Nie możesz oglądać tej strony.''',
-'''DeleteCache''':
-'''UsuńPamięćPodręczną''',
-'''(cached %s)''':
-'''(w pamięci podręcznej %s)''',
 '''You are not allowed to edit this page.''':
 '''Nie możesz zmieniać zawartości tej strony.''',
 '''Page is immutable!''':
@@ -897,6 +893,10 @@ czerwony=edycja''',
 '''Załączniki''',
 '''Show %s days.''':
 '''Pokaż %s dni.''',
+'''DeleteCache''':
+'''UsuńPamięćPodręczną''',
+'''(cached %s)''':
+'''(w pamięci podręcznej %s)''',
 '''Or try one of these actions:''':
 '''Lub spróbuj wykonać: ''',
 '''Page''':

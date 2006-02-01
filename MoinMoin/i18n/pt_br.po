@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2005-11-18 20:25 (UTC)\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
 "MIME-Version: 1.0\n"
@@ -63,13 +63,6 @@ msgstr "Criar Nova Página"
 
 msgid "You are not allowed to view this page."
 msgstr "Você não tem permissão para ver esta página!"
-
-msgid "DeleteCache"
-msgstr "ApagarCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(armazenado %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Você não tem permissão para editar esta página!"
@@ -605,7 +598,7 @@ msgid "This email already belongs to somebody else."
 msgstr "Este email já pertence a alguém cadastrado neste site."
 
 msgid "User account created! You can use this account to login now..."
-msgstr ""
+msgstr "Conta de usuário criada! Você pode usar esta conta para se logar agora..."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -1293,7 +1286,7 @@ msgid "Wiki"
 msgstr "Wiki"
 
 msgid "Slideshow"
-msgstr "Slideshow"
+msgstr "Mostra em slide"
 
 msgid "Start"
 msgstr "Iniciar"
@@ -1357,7 +1350,7 @@ msgstr "Nenhuma página solicitada neste wiki."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
+msgstr "Renderização de texto reStructured não é possível, por favor instale o docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**O número máximo de inserções permitidas foi excedida**"
@@ -1536,6 +1529,13 @@ msgstr "Anexos"
 msgid "Show %s days."
 msgstr "Mostrar %s dias."
 
+msgid "DeleteCache"
+msgstr "ApagarCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(armazenado %s)"
+
 msgid "Or try one of these actions:"
 msgstr "Ou tente uma da seguintes ações: "
 
@@ -1604,9 +1604,8 @@ msgstr "LicençaWiki"
 msgid "MissingPage"
 msgstr "PáginaFaltante"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "PáginaFaltante"
+msgstr "HomePageFaltante"
 
 msgid "Mon"
 msgstr "Seg"

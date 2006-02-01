@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2006-01-22 21:42+0900\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"PO-Revision-Date: 2006-01-25 00:34+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,13 +61,6 @@ msgstr "新しいページを作成"
 
 msgid "You are not allowed to view this page."
 msgstr "このページを読む権限がありません。"
-
-msgid "DeleteCache"
-msgstr "キャッシュの削除"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(キャッシュ作成日時 %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "このページを編集する権限がありません。"
@@ -1524,6 +1517,13 @@ msgstr "添付ファイル"
 msgid "Show %s days."
 msgstr "%s日表示"
 
+msgid "DeleteCache"
+msgstr "キャッシュの削除"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(キャッシュ作成日時 %s)"
+
 msgid "Or try one of these actions:"
 msgstr "アクション一覧:"
 
@@ -1592,9 +1592,8 @@ msgstr "Wikiライセンス"
 msgid "MissingPage"
 msgstr "存在しないページ"
 
-#, fuzzy
 msgid "MissingHomePage"
-msgstr "存在しないページ"
+msgstr "存在しないホームページ"
 
 msgid "Mon"
 msgstr "月"

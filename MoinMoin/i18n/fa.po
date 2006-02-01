@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -61,13 +61,6 @@ msgstr "صفحه جدید ایجاد نمایید"
 
 msgid "You are not allowed to view this page."
 msgstr "شما مجاز به مشاهده این صفحه نیستید"
-
-msgid "DeleteCache"
-msgstr "حافظه داده ها"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cached·%s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "شما مجاز به ویرایش این صفحه نمی باشید"
@@ -1524,6 +1517,13 @@ msgstr "ضمائم"
 #, python-format
 msgid "Show %s days."
 msgstr "%s روز نشان بده"
+
+msgid "DeleteCache"
+msgstr "حافظه داده ها"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cached·%s)"
 
 msgid "Or try one of these actions:"
 msgstr "و یا یکی از عملیات زیر را انتخاب نمایید:"

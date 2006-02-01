@@ -32,10 +32,6 @@ macro call.-~
 '''创建网页''',
 '''You are not allowed to view this page.''':
 '''您无权阅读此页.''',
-'''DeleteCache''':
-'''删除缓存''',
-'''(cached %s)''':
-'''(%s缓存)''',
 '''You are not allowed to edit this page.''':
 '''您无权编辑此页.''',
 '''Page is immutable!''':
@@ -894,6 +890,10 @@ red=edit''':
 '''附件''',
 '''Show %s days.''':
 '''显示%s天''',
+'''DeleteCache''':
+'''删除缓存''',
+'''(cached %s)''':
+'''(%s缓存)''',
 '''Or try one of these actions:''':
 '''或下列操作: ''',
 '''Page''':

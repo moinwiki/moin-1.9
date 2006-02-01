@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Text translations for Slovenščina (sl).
+# Text translations for slovenščina (sl).
 # Automatically generated - DO NOT EDIT, edit sl.po instead!
 meta = {
-  'language': """Slovenščina""",
+  'language': """slovenščina""",
   'elanguage': """Slovenian""",
   'maintainer': """Mark Martinec <Mark.Martinec@ijs.si>""",
   'encoding': 'utf-8',
@@ -32,10 +32,6 @@ Za uporabo tega obrazca nad neko drugo stranjo je treba dodati makro klic
 '''Tvori novo stran''',
 '''You are not allowed to view this page.''':
 '''Ogled te strani vam ni dovoljen.''',
-'''DeleteCache''':
-'''BrišiPredspomin''',
-'''(cached %s)''':
-'''(shranjeno v predpomnilnik %s)''',
 '''You are not allowed to edit this page.''':
 '''Te strani vam ni dovoljeno spreminjati.''',
 '''Page is immutable!''':
@@ -75,7 +71,7 @@ ne shranite strani nepopravljene! Razlike so prikazane v %(difflink)s.''',
 '''Describe %s here.''':
 '''Vnesite besedilo o %s ...''',
 '''Check Spelling''':
-'''Poišči tipkarske napake''',
+'''Preveri črkovanje''',
 '''Save Changes''':
 '''Shrani spremembe''',
 '''Cancel''':
@@ -87,13 +83,13 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Preview''':
 '''Predogled''',
 '''GUI Mode''':
-'''GUI urejanje (s takojšnjim prikazom)''',
+'''Urejanje s sprotnim prikazom (GUI)''',
 '''Your changes are not saved!''':
 '''Spremembe niso shranjene!''',
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
-'''<Ni dodatkov>''',
+'''<ne dodaj>''',
 '''Add to: %(category)s''':
 '''Dodaj v kategorijo %(category)s''',
 '''Trivial change''':
@@ -109,17 +105,17 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
 ''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
- Naslov:: [[Verbatim(=)]] Naslov 1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov 2 [[Verbatim(==)]]; [[Verbatim(===)]] N 3 [[Verbatim(===)]];   [[Verbatim(====)]] N 4 [[Verbatim(====)]]; [[Verbatim(=====)]] N 5 [[Verbatim(=====)]].
- Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; samostojni presledek le zamakne besedilo.
- Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["oglati oklepaji in dvojni narekovaji"])]]; url; [url]; [url label].
+ Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
+ Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
+ Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["oglati oklepaji in dvojni narekovaji"])]]; URL; [URL]; [URL povezava].
  Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
 
-(!) Več o tem: HelpOnEditing, SyntaxReference.{en}.
+(!) Več o tem: HelpOnEditing, SyntaxReference.
 ''',
 '''Edit was cancelled.''':
 '''Spremembe preklicane.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Hvala za popravke in za vašo natančnost.''',
+'''Hvala za popravke, cenimo vašo natančnost.''',
 '''Page "%s" was successfully deleted!''':
 '''Stran "%s" je bila uspešno izbrisana!''',
 '''Dear Wiki user,
@@ -156,7 +152,7 @@ Stran %(pagelink)s je spremenil %(editor)s:
 '''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
 '''[%(sitename)s] %(trivial)ssprememba na "%(pagename)s", spremenil: %(username)s''',
 '''Trivial ''':
-'''Malenkostna ''',
+'''Neznatna ''',
 '''Status of sending notification mails:''':
 '''Uspeh pošiljanja obvestil:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
@@ -259,7 +255,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Subscribe to trivial changes''':
 '''Naroči se na obvestila o neznatnih spremembah''',
 '''Disable this account forever''':
-'''Trajno zapri to uporabniško ime''',
+'''Trajno ukini to uporabniško ime''',
 '''Name''':
 '''Ime''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
@@ -275,7 +271,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Email''':
 '''E-poštni naslov''',
 '''User CSS URL''':
-'''URL uporabnikovega CSS''',
+'''URL uporabnikovega CSS stila''',
 '''(Leave it empty for disabling user CSS)''':
 '''(prazno polje izklopi CSS)''',
 '''Editor size''':
@@ -360,9 +356,9 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''User preferences saved!''':
 '''Uporabniške nastavitve so shranjene!''',
 '''Default''':
-'''Standardni''',
+'''standardni''',
 '''<Browser setting>''':
-'''<Nastavitve bralnika>''',
+'''<kot predlaga bralnik>''',
 '''the one preferred''':
 '''izbrani''',
 '''free choice''':
@@ -376,7 +372,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Editor shown on UI''':
 '''Izbor urejevalnika''',
 '''Time zone''':
-'''Časovna cona''',
+'''Časovni pas''',
 '''Your time is''':
 '''Lokalni čas je''',
 '''Server time is''':
@@ -396,7 +392,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Create Profile''':
 '''Tvori profil''',
 '''Mail me my account data''':
-'''Pošlji mi podatke o mojem uporabniškem imenu''',
+'''Pošlji mi podatke o mojem uporabniškem računu''',
 '''Action''':
 '''Akcija''',
 '''No older revisions available!''':
@@ -432,7 +428,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Diff''':
 '''Razlike''',
 '''Editor''':
-'''Avtor/urednik''',
+'''Spremenil''',
 '''Comment''':
 '''Opomba''',
 '''view''':
@@ -440,7 +436,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''raw''':
 '''izvorno''',
 '''print''':
-'''za tisk''',
+'''za-tisk''',
 '''revert''':
 '''prejšnje''',
 '''Revert to revision %(rev)d.''':
@@ -520,11 +516,11 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''XML title index''':
 '''Kazalo naslovov v obliki XML''',
 '''Python Version''':
-'''Različica Python''',
+'''Različica interpreterja Python''',
 '''MoinMoin Version''':
 '''Različica MoinMoin''',
 '''Release %s [Revision %s]''':
-'''Različica %s [revizija %s]''',
+'''Različica %s [revizija: %s]''',
 '''4Suite Version''':
 '''Različica 4Suite''',
 '''Number of pages''':
@@ -540,19 +536,19 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''NONE''':
 '''-''',
 '''Global extension macros''':
-'''Globalnih razširitvenih makrojev''',
+'''Globalni razširitveni makroji''',
 '''Local extension macros''':
-'''Lokalnih razširitvenih makrojev''',
+'''Lokalni razširitveni makroji''',
 '''Global extension actions''':
-'''Globalnih razširitvenih akcij''',
+'''Globalne razširitvene akcije''',
 '''Local extension actions''':
-'''Lokalnih razširitvenih akcij''',
+'''Lokalne razširitvene akcije''',
 '''Global parsers''':
-'''Globalnih sintaktičnih analizatorjev (parserjev)''',
+'''Globalni sintaktični analizatorji (parserji)''',
 '''Local extension parsers''':
-'''Lokalnih sintaktičnih analizatorjev (parserjev)''',
+'''Lokalni sintaktični analizatorji (parserji)''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Nameščenih procesorjev (zastarelo -- uporabite raje parserje)''',
+'''Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)''',
 '''Disabled''':
 '''Izklopljeno''',
 '''Enabled''':
@@ -564,7 +560,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''Uporabite selektivnejše iskalno geslo namesto {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
-'''NAPAKA v regularnem izrazu \'%s\'''',
+'''Napaka v regularnem izrazu \'%s\'''',
 '''Bad timestamp \'%s\'''':
 '''Neveljavena navedba časa \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
@@ -679,7 +675,7 @@ ki jo želite naložiti na strežnik.
 '''Please use the interactive user interface to delete pages!''':
 '''Za brisanje strani uporabite interaktivni uporabniški vmesnik!''',
 '''Really delete this page?''':
-'''Zares zbrisati to stran?''',
+'''Zares izbrisati to stran?''',
 '''Delete''':
 '''Brisanje''',
 '''Optional reason for the deletion''':
@@ -895,6 +891,10 @@ rdeče=sprememba''',
 '''Priponke''',
 '''Show %s days.''':
 '''Prikaži %s dni.''',
+'''DeleteCache''':
+'''BrišiPredspomin''',
+'''(cached %s)''':
+'''(shranjeno v predpomnilnik %s)''',
 '''Or try one of these actions:''':
 '''Ali pa poskusi z:''',
 '''Page''':
@@ -910,11 +910,11 @@ rdeče=sprememba''',
 '''Additions are marked like this.''':
 '''Dodani deli so označeni takole.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
-'''Priklop na e-poštni streznik \'%(server)s\' ni uspel: %(reason)s''',
+'''Priklop na e-poštni strežnik \'%(server)s\' ni uspel: %(reason)s''',
 '''Mail not sent''':
 '''sporočilo ni bilo odposlano''',
 '''Mail sent OK''':
-'''Uspešno odposlano''',
+'''uspešno odposlano''',
 '''FrontPage''':
 '''PrvaStran''',
 '''RecentChanges''':
@@ -926,11 +926,11 @@ rdeče=sprememba''',
 '''FindPage''':
 '''PoiščiStran''',
 '''SiteNavigation''':
-'''NavigacijaPoPredstavitvi''',
+'''Navigacija''',
 '''HelpContents''':
-'''PomočVsebina''',
+'''PomočPriVsebini''',
 '''HelpOnFormatting''':
-'''PomočOblikovanje''',
+'''PomočPriOblikovanju''',
 '''UserPreferences''':
 '''UporabniškeNastavitve''',
 '''WikiLicense''':
@@ -964,5 +964,5 @@ rdeče=sprememba''',
 '''RenamePage''':
 '''PreimenujStran''',
 '''SpellCheck''':
-'''PoiščiTipkarskeNapake''',
+'''PreveriČrkovanje''',
 }

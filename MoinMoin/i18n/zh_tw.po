@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2006-01-04 01:00+0800\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"PO-Revision-Date: 2006-01-25 09:30+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,13 +61,6 @@ msgstr "建立新頁面"
 
 msgid "You are not allowed to view this page."
 msgstr "你無權瀏覽本頁。"
-
-msgid "DeleteCache"
-msgstr "刪除快取"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(%s 的快取)"
 
 msgid "You are not allowed to edit this page."
 msgstr "你無權編輯本頁。"
@@ -1238,14 +1231,14 @@ msgid "Wiki"
 msgstr "Wiki 模式"
 
 msgid "Slideshow"
-msgstr "幻燈片模式"
+msgstr "簡報模式"
 
 msgid "Start"
 msgstr "開始"
 
 #, python-format
 msgid "Slide %(pos)d of %(size)d"
-msgstr "幻燈片 %(pos)d/%(size)d"
+msgstr "投影片 %(pos)d/%(size)d"
 
 msgid "No orphaned pages in this wiki."
 msgstr "本 wiki 沒有孤立頁面。"
@@ -1479,6 +1472,13 @@ msgstr "附件"
 #, python-format
 msgid "Show %s days."
 msgstr "顯示 %s 天。"
+
+msgid "DeleteCache"
+msgstr "刪除快取"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s 的快取)"
 
 msgid "Or try one of these actions:"
 msgstr "或使用下列功能："

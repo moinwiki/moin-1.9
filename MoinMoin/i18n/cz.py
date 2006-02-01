@@ -32,10 +32,6 @@ volání makra.-~
 '''Vytvořit novou stránku''',
 '''You are not allowed to view this page.''':
 '''Nemáte dovoleno prohlížet tuto stránku.''',
-'''DeleteCache''':
-'''SmažCache''',
-'''(cached %s)''':
-'''(kešováno %s)''',
 '''You are not allowed to edit this page.''':
 '''Nemáte dovoleno editovat tuto stránku.''',
 '''Page is immutable!''':
@@ -867,6 +863,10 @@ red=edit''':
 '''Přílohy''',
 '''Show %s days.''':
 '''Ukázat %s dní.''',
+'''DeleteCache''':
+'''SmažCache''',
+'''(cached %s)''':
+'''(kešováno %s)''',
 '''Or try one of these actions:''':
 '''Nebo zkuste jednu z následujících akcí:''',
 '''Page''':

@@ -31,10 +31,6 @@ macro call.-~
 '''צור דף חדש''',
 '''You are not allowed to view this page.''':
 '''אין לכם הרשאות לצפות בדף''',
-'''DeleteCache''':
-'''נקה מטמון''',
-'''(cached %s)''':
-'''(מטמון %s)''',
 '''You are not allowed to edit this page.''':
 '''אין לכם הרשאות לערוך את הדף''',
 '''Page is immutable!''':
@@ -750,6 +746,10 @@ red=edit''':
 '''דף נעול''',
 '''Show %s days.''':
 '''הצג %s ימים.''',
+'''DeleteCache''':
+'''נקה מטמון''',
+'''(cached %s)''':
+'''(מטמון %s)''',
 '''Or try one of these actions:''':
 '''פעולות נוספות:''',
 '''Page''':

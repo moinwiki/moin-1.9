@@ -32,10 +32,6 @@ chamada macro.-~
 '''Criar Nova Página''',
 '''You are not allowed to view this page.''':
 '''Você não tem permissão para ver esta página.''',
-'''DeleteCache''':
-'''Apagar Cache''',
-'''(cached %s)''':
-'''(cache %s)''',
 '''You are not allowed to edit this page.''':
 '''Você não tem permissão para editar esta página.''',
 '''Page is immutable!''':
@@ -721,6 +717,10 @@ vermelho=editar''',
 '''Página Imutável''',
 '''Show %s days.''':
 '''Mostrar %s dias.''',
+'''DeleteCache''':
+'''Apagar Cache''',
+'''(cached %s)''':
+'''(cache %s)''',
 '''Or try one of these actions:''':
 '''Tentar uma destas ações:''',
 '''Page''':

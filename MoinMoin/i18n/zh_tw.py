@@ -32,10 +32,6 @@ macro call.-~
 '''建立新頁面''',
 '''You are not allowed to view this page.''':
 '''你無權瀏覽本頁。''',
-'''DeleteCache''':
-'''刪除快取''',
-'''(cached %s)''':
-'''(%s 的快取)''',
 '''You are not allowed to edit this page.''':
 '''你無權編輯本頁。''',
 '''Page is immutable!''':
@@ -744,11 +740,11 @@ Try a different name.''':
 '''Wiki''':
 '''Wiki 模式''',
 '''Slideshow''':
-'''幻燈片模式''',
+'''簡報模式''',
 '''Start''':
 '''開始''',
 '''Slide %(pos)d of %(size)d''':
-'''幻燈片 %(pos)d/%(size)d''',
+'''投影片 %(pos)d/%(size)d''',
 '''No orphaned pages in this wiki.''':
 '''本 wiki 沒有孤立頁面。''',
 '''No quotes on %(pagename)s.''':
@@ -893,6 +889,10 @@ red=edit''':
 '''附件''',
 '''Show %s days.''':
 '''顯示 %s 天。''',
+'''DeleteCache''':
+'''刪除快取''',
+'''(cached %s)''':
+'''(%s 的快取)''',
 '''Or try one of these actions:''':
 '''或使用下列功能：''',
 '''Page''':

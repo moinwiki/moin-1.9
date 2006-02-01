@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-12-21 18:59+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -61,13 +61,6 @@ msgstr "Skapa ny sida"
 
 msgid "You are not allowed to view this page."
 msgstr "Du har inte tillåtelse att titta på den här sidan."
-
-msgid "DeleteCache"
-msgstr "RaderaCache"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(cachad %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Du har inte tillåtelse att redigera den här sidan."
@@ -1526,6 +1519,13 @@ msgstr "Bilagor"
 #, python-format
 msgid "Show %s days."
 msgstr "Visa %s dagar."
+
+msgid "DeleteCache"
+msgstr "RaderaCache"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(cachad %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Eller pröva någon av de här åtgärderna:"

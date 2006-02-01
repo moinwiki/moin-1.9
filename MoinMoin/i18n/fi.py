@@ -32,10 +32,6 @@ makrokutsu.-~
 '''Luo uusi sivu''',
 '''You are not allowed to view this page.''':
 '''Sinulla ei ole oikeutta katsoa tätä sivua.''',
-'''DeleteCache''':
-'''PoistaVälimuistista''',
-'''(cached %s)''':
-'''(%s välimuistissa)''',
 '''You are not allowed to edit this page.''':
 '''Sinulla ei ole oikeutta muokata tätä sivua.''',
 '''Page is immutable!''':
@@ -897,6 +893,10 @@ red=edit''',
 '''Liitetiedostot''',
 '''Show %s days.''':
 '''Näytä %s päivää.''',
+'''DeleteCache''':
+'''PoistaVälimuistista''',
+'''(cached %s)''':
+'''(%s välimuistissa)''',
 '''Or try one of these actions:''':
 '''Tai koita jotakin näistä toiminnoista:''',
 '''Page''':

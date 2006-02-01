@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -61,13 +61,6 @@ msgstr "Crea una pàgina nova"
 
 msgid "You are not allowed to view this page."
 msgstr "No teniu permís per a visualitzar aquesta pàgina."
-
-msgid "DeleteCache"
-msgstr "Suprimeix la memòria cau"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(%s a la memòria cau)"
 
 msgid "You are not allowed to edit this page."
 msgstr "No teniu permís per a editar aquesta pàgina."
@@ -1542,6 +1535,13 @@ msgstr "Adjuncions"
 #, python-format
 msgid "Show %s days."
 msgstr "Mostra %s dies."
+
+msgid "DeleteCache"
+msgstr "Suprimeix la memòria cau"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s a la memòria cau)"
 
 msgid "Or try one of these actions:"
 msgstr "O proveu amb una d'aquestes accions:"

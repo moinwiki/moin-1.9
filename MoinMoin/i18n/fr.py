@@ -32,10 +32,6 @@ Pour utiliser ce formulaire sur d\'autres pages, insérez un appel à la macro :
 '''Créer une page''',
 '''You are not allowed to view this page.''':
 '''Vous n\'êtes pas autorisé à voir cette page.''',
-'''DeleteCache''':
-'''EffacerLeCache''',
-'''(cached %s)''':
-'''(mémorisé dans le cache le %s)''',
 '''You are not allowed to edit this page.''':
 '''Vous n\'êtes pas autorisé à modifier cette page.''',
 '''Page is immutable!''':
@@ -898,6 +894,10 @@ rouge=modifications''',
 '''Pièces jointes''',
 '''Show %s days.''':
 '''Voir %s jours.''',
+'''DeleteCache''':
+'''EffacerLeCache''',
+'''(cached %s)''':
+'''(mémorisé dans le cache le %s)''',
 '''Or try one of these actions:''':
 '''Ou essayez l\'une de ces actions :''',
 '''Page''':

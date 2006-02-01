@@ -32,10 +32,6 @@ Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu
 '''Izveidot jaunu lapu''',
 '''You are not allowed to view this page.''':
 '''Jums nav tiesību aplūkot šo lapu.''',
-'''DeleteCache''':
-'''DzēstKešatmiņu''',
-'''(cached %s)''':
-'''(saglabāts %s)''',
 '''You are not allowed to edit this page.''':
 '''Jums nav tiesību labot šo lapu.''',
 '''Page is immutable!''':
@@ -892,6 +888,10 @@ sarkans=labot''',
 '''Piesaistes''',
 '''Show %s days.''':
 '''Rādīt %s dienas.''',
+'''DeleteCache''':
+'''DzēstKešatmiņu''',
+'''(cached %s)''':
+'''(saglabāts %s)''',
 '''Or try one of these actions:''':
 '''Vai mēģināt kādu no darbībām:''',
 '''Page''':

@@ -32,10 +32,6 @@ makro çağrısını kullanabilirsiniz.-~
 '''Yeni Sayfa Oluştur''',
 '''You are not allowed to view this page.''':
 '''Sayfanın görüntülenmesi için yeterli izne sahip değilsiniz.''',
-'''DeleteCache''':
-'''ÖnbelleğiTemizle''',
-'''(cached %s)''':
-'''(%s önbelleğe aktarıldı)''',
 '''You are not allowed to edit this page.''':
 '''Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz.''',
 '''Page is immutable!''':
@@ -895,6 +891,10 @@ red=düzenleme''',
 '''Ekler''',
 '''Show %s days.''':
 '''%s günlük göster.''',
+'''DeleteCache''':
+'''ÖnbelleğiTemizle''',
+'''(cached %s)''':
+'''(%s önbelleğe aktarıldı)''',
 '''Or try one of these actions:''':
 '''Ya da bu işlevlerden birini deneyin:''',
 '''Page''':

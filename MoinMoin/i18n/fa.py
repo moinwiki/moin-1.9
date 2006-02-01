@@ -32,10 +32,6 @@ macro·call.-~
 '''صفحه جدید ایجاد نمایید''',
 '''You are not allowed to view this page.''':
 '''شما مجاز به مشاهده این صفحه نیستید''',
-'''DeleteCache''':
-'''حافظه داده ها''',
-'''(cached %s)''':
-'''(cached·%s)''',
 '''You are not allowed to edit this page.''':
 '''شما مجاز به ویرایش این صفحه نمی باشید''',
 '''Page is immutable!''':
@@ -889,6 +885,10 @@ red=edit''':
 '''ضمائم''',
 '''Show %s days.''':
 '''%s روز نشان بده''',
+'''DeleteCache''':
+'''حافظه داده ها''',
+'''(cached %s)''':
+'''(cached·%s)''',
 '''Or try one of these actions:''':
 '''و یا یکی از عملیات زیر را انتخاب نمایید:''',
 '''Page''':
