@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-12-21 21:30+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -64,13 +64,6 @@ msgstr "Utwórz nową stronę"
 
 msgid "You are not allowed to view this page."
 msgstr "Nie możesz oglądać tej strony."
-
-msgid "DeleteCache"
-msgstr "UsuńPamięćPodręczną"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(w pamięci podręcznej %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Nie możesz zmieniać zawartości tej strony."
@@ -1530,6 +1523,13 @@ msgstr "Załączniki"
 #, python-format
 msgid "Show %s days."
 msgstr "Pokaż %s dni."
+
+msgid "DeleteCache"
+msgstr "UsuńPamięćPodręczną"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(w pamięci podręcznej %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Lub spróbuj wykonać: "

@@ -13,14 +13,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
-"PO-Revision-Date: 2006-01-22 02:30+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"PO-Revision-Date: 2006-02-01 01:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Language: Slovenščina\n"
+"X-Language: slovenščina\n"
 "X-Language-in-English: Slovenian\n"
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
@@ -61,13 +61,6 @@ msgstr "Tvori novo stran"
 
 msgid "You are not allowed to view this page."
 msgstr "Ogled te strani vam ni dovoljen."
-
-msgid "DeleteCache"
-msgstr "BrišiPredspomin"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(shranjeno v predpomnilnik %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Te strani vam ni dovoljeno spreminjati."
@@ -137,7 +130,7 @@ msgid "Describe %s here."
 msgstr "Vnesite besedilo o %s ..."
 
 msgid "Check Spelling"
-msgstr "Poišči tipkarske napake"
+msgstr "Preveri črkovanje"
 
 msgid "Save Changes"
 msgstr "Shrani spremembe"
@@ -160,7 +153,7 @@ msgid "Preview"
 msgstr "Predogled"
 
 msgid "GUI Mode"
-msgstr "GUI urejanje (s takojšnjim prikazom)"
+msgstr "Urejanje s sprotnim prikazom (GUI)"
 
 msgid "Your changes are not saved!"
 msgstr "Spremembe niso shranjene!"
@@ -169,7 +162,7 @@ msgid "Comment:"
 msgstr "Opomba:"
 
 msgid "<No addition>"
-msgstr "<Ni dodatkov>"
+msgstr "<ne dodaj>"
 
 #, python-format
 msgid "Add to: %(category)s"
@@ -205,25 +198,25 @@ msgstr ""
 "in kurziva'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mešano ''[[Verbatim"
 "(''')]]'''''polkrepko'''[[Verbatim(''')]] in kurziva''[[Verbatim('')]]; "
 "[[Verbatim(----)]] horizontalna črta.\n"
-" Naslov:: [[Verbatim(=)]] Naslov 1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov "
-"2 [[Verbatim(==)]]; [[Verbatim(===)]] N 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] N 4 [[Verbatim(====)]]; [[Verbatim(=====)]] N 5 [[Verbatim"
+" Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-"
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim"
 "(=====)]].\n"
 " Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. "
-"oštevilčene alineje; 1.#n začni številčenje z n; samostojni presledek le "
-"zamakne besedilo.\n"
+"oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne "
+"besedilo.\n"
 " Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim"
-"([\"oglati oklepaji in dvojni narekovaji\"])]]; url; [url]; [url label].\n"
-" Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
+"([\"oglati oklepaji in dvojni narekovaji\"])]]; URL; [URL]; [URL povezava]."
+"\n Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
 "na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.\n"
 "\n"
-"(!) Več o tem: HelpOnEditing, SyntaxReference.{en}.\n"
+"(!) Več o tem: HelpOnEditing, SyntaxReference.\n"
 
 msgid "Edit was cancelled."
 msgstr "Spremembe preklicane."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Hvala za popravke in za vašo natančnost."
+msgstr "Hvala za popravke, cenimo vašo natančnost."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -271,7 +264,7 @@ msgstr ""
 "(username)s"
 
 msgid "Trivial "
-msgstr "Malenkostna "
+msgstr "Neznatna "
 
 msgid "Status of sending notification mails:"
 msgstr "Uspeh pošiljanja obvestil:"
@@ -449,7 +442,7 @@ msgid "Subscribe to trivial changes"
 msgstr "Naroči se na obvestila o neznatnih spremembah"
 
 msgid "Disable this account forever"
-msgstr "Trajno zapri to uporabniško ime"
+msgstr "Trajno ukini to uporabniško ime"
 
 msgid "Name"
 msgstr "Ime"
@@ -473,7 +466,7 @@ msgid "Email"
 msgstr "E-poštni naslov"
 
 msgid "User CSS URL"
-msgstr "URL uporabnikovega CSS"
+msgstr "URL uporabnikovega CSS stila"
 
 msgid "(Leave it empty for disabling user CSS)"
 msgstr "(prazno polje izklopi CSS)"
@@ -607,10 +600,10 @@ msgid "User preferences saved!"
 msgstr "Uporabniške nastavitve so shranjene!"
 
 msgid "Default"
-msgstr "Standardni"
+msgstr "standardni"
 
 msgid "<Browser setting>"
-msgstr "<Nastavitve bralnika>"
+msgstr "<kot predlaga bralnik>"
 
 msgid "the one preferred"
 msgstr "izbrani"
@@ -631,7 +624,7 @@ msgid "Editor shown on UI"
 msgstr "Izbor urejevalnika"
 
 msgid "Time zone"
-msgstr "Časovna cona"
+msgstr "Časovni pas"
 
 msgid "Your time is"
 msgstr "Lokalni čas je"
@@ -661,7 +654,7 @@ msgid "Create Profile"
 msgstr "Tvori profil"
 
 msgid "Mail me my account data"
-msgstr "Pošlji mi podatke o mojem uporabniškem imenu"
+msgstr "Pošlji mi podatke o mojem uporabniškem računu"
 
 msgid "Action"
 msgstr "Akcija"
@@ -720,7 +713,7 @@ msgid "Diff"
 msgstr "Razlike"
 
 msgid "Editor"
-msgstr "Avtor/urednik"
+msgstr "Spremenil"
 
 msgid "Comment"
 msgstr "Opomba"
@@ -732,7 +725,7 @@ msgid "raw"
 msgstr "izvorno"
 
 msgid "print"
-msgstr "za tisk"
+msgstr "za-tisk"
 
 msgid "revert"
 msgstr "prejšnje"
@@ -862,14 +855,14 @@ msgid "XML title index"
 msgstr "Kazalo naslovov v obliki XML"
 
 msgid "Python Version"
-msgstr "Različica Python"
+msgstr "Različica interpreterja Python"
 
 msgid "MoinMoin Version"
 msgstr "Različica MoinMoin"
 
 #, python-format
 msgid "Release %s [Revision %s]"
-msgstr "Različica %s [revizija %s]"
+msgstr "Različica %s [revizija: %s]"
 
 msgid "4Suite Version"
 msgstr "Različica 4Suite"
@@ -894,25 +887,26 @@ msgid "NONE"
 msgstr "-"
 
 msgid "Global extension macros"
-msgstr "Globalnih razširitvenih makrojev"
+msgstr "Globalni razširitveni makroji"
 
 msgid "Local extension macros"
-msgstr "Lokalnih razširitvenih makrojev"
+msgstr "Lokalni razširitveni makroji"
 
 msgid "Global extension actions"
-msgstr "Globalnih razširitvenih akcij"
+msgstr "Globalne razširitvene akcije"
 
 msgid "Local extension actions"
-msgstr "Lokalnih razširitvenih akcij"
+msgstr "Lokalne razširitvene akcije"
 
 msgid "Global parsers"
-msgstr "Globalnih sintaktičnih analizatorjev (parserjev)"
+msgstr "Globalni sintaktični analizatorji (parserji)"
 
 msgid "Local extension parsers"
-msgstr "Lokalnih sintaktičnih analizatorjev (parserjev)"
+msgstr "Lokalni sintaktični analizatorji (parserji)"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Nameščenih procesorjev (zastarelo -- uporabite raje parserje)"
+msgstr "Nameščeni procesorji (zastarelo -- uporabite raje "
+"sintaktične analizatorje)"
 
 msgid "Disabled"
 msgstr "Izklopljeno"
@@ -932,7 +926,7 @@ msgstr "Uporabite selektivnejše iskalno geslo namesto {{{\"%s\"}}}"
 
 #, python-format
 msgid "ERROR in regex '%s'"
-msgstr "NAPAKA v regularnem izrazu '%s'"
+msgstr "Napaka v regularnem izrazu '%s'"
 
 #, python-format
 msgid "Bad timestamp '%s'"
@@ -1150,7 +1144,7 @@ msgid "Please use the interactive user interface to delete pages!"
 msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
 
 msgid "Really delete this page?"
-msgstr "Zares zbrisati to stran?"
+msgstr "Zares izbrisati to stran?"
 
 msgid "Delete"
 msgstr "Brisanje"
@@ -1519,6 +1513,13 @@ msgstr "Priponke"
 msgid "Show %s days."
 msgstr "Prikaži %s dni."
 
+msgid "DeleteCache"
+msgstr "BrišiPredspomin"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(shranjeno v predpomnilnik %s)"
+
 msgid "Or try one of these actions:"
 msgstr "Ali pa poskusi z:"
 
@@ -1546,13 +1547,13 @@ msgstr "Dodani deli so označeni takole."
 
 #, python-format
 msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Priklop na e-poštni streznik '%(server)s' ni uspel: %(reason)s"
+msgstr "Priklop na e-poštni strežnik '%(server)s' ni uspel: %(reason)s"
 
 msgid "Mail not sent"
 msgstr "sporočilo ni bilo odposlano"
 
 msgid "Mail sent OK"
-msgstr "Uspešno odposlano"
+msgstr "uspešno odposlano"
 
 msgid "FrontPage"
 msgstr "PrvaStran"
@@ -1570,13 +1571,13 @@ msgid "FindPage"
 msgstr "PoiščiStran"
 
 msgid "SiteNavigation"
-msgstr "NavigacijaPoPredstavitvi"
+msgstr "Navigacija"
 
 msgid "HelpContents"
-msgstr "PomočVsebina"
+msgstr "PomočPriVsebini"
 
 msgid "HelpOnFormatting"
-msgstr "PomočOblikovanje"
+msgstr "PomočPriOblikovanju"
 
 msgid "UserPreferences"
 msgstr "UporabniškeNastavitve"
@@ -1627,7 +1628,7 @@ msgid "RenamePage"
 msgstr "PreimenujStran"
 
 msgid "SpellCheck"
-msgstr "PoiščiTipkarskeNapake"
+msgstr "PreveriČrkovanje"
 
 #~ msgid "EditText"
 #~ msgstr "Spremeni"

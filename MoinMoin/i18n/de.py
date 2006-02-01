@@ -32,10 +32,6 @@ auf diesen Seiten platziert werden.-~
 '''Neue Seite anlegen''',
 '''You are not allowed to view this page.''':
 '''Sie dürfen diese Seite nicht ansehen.''',
-'''DeleteCache''':
-'''CacheLöschen''',
-'''(cached %s)''':
-'''(gecached %s)''',
 '''You are not allowed to edit this page.''':
 '''Sie dürfen diese Seite nicht editieren.''',
 '''Page is immutable!''':
@@ -896,6 +892,10 @@ rot=Änderungen''',
 '''Dateianhänge''',
 '''Show %s days.''':
 '''%s Tage anzeigen.''',
+'''DeleteCache''':
+'''CacheLöschen''',
+'''(cached %s)''':
+'''(gecached %s)''',
 '''Or try one of these actions:''':
 '''Oder benutze eine dieser Aktionen:''',
 '''Page''':

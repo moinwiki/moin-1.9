@@ -32,10 +32,6 @@ llamada a una macro.-~
 '''Crear Nueva Página''',
 '''You are not allowed to view this page.''':
 '''No tiene permisos para ver esta página.''',
-'''DeleteCache''':
-'''EliminarCaché''',
-'''(cached %s)''':
-'''(cached %s)''',
 '''You are not allowed to edit this page.''':
 '''No tiene permisos para editar esta página.''',
 '''Page is immutable!''':
@@ -895,6 +891,10 @@ rojo=editar''',
 '''Adjuntos''',
 '''Show %s days.''':
 '''Mostrar %s días.''',
+'''DeleteCache''':
+'''EliminarCaché''',
+'''(cached %s)''':
+'''(cached %s)''',
 '''Or try one of these actions:''':
 '''O intente una de estas acciones: ''',
 '''Page''':

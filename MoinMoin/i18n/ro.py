@@ -32,10 +32,6 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Creează Pagină Nouă''',
 '''You are not allowed to view this page.''':
 '''Nu aveţi dreptul să vizionaţi această pagină.''',
-'''DeleteCache''':
-'''ŞtergeCache''',
-'''(cached %s)''':
-'''(cached %s)''',
 '''You are not allowed to edit this page.''':
 '''Nu aveţi dreptul să editaţi această pagină.''',
 '''Page is immutable!''':
@@ -897,6 +893,10 @@ red=editare''',
 '''Ataşamente''',
 '''Show %s days.''':
 '''Afişare %s zile.''',
+'''DeleteCache''':
+'''ŞtergeCache''',
+'''(cached %s)''':
+'''(cached %s)''',
 '''Or try one of these actions:''':
 '''Sau încercaţi una dintre aceste acţiuni:''',
 '''Page''':

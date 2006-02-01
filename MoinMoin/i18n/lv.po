@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:15+0100\n"
+"POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -61,13 +61,6 @@ msgstr "Izveidot jaunu lapu"
 
 msgid "You are not allowed to view this page."
 msgstr "Jums nav tiesību aplūkot šo lapu."
-
-msgid "DeleteCache"
-msgstr "DzēstKešatmiņu"
-
-#, python-format
-msgid "(cached %s)"
-msgstr "(saglabāts %s)"
 
 msgid "You are not allowed to edit this page."
 msgstr "Jums nav tiesību labot šo lapu."
@@ -1521,6 +1514,13 @@ msgstr "Piesaistes"
 #, python-format
 msgid "Show %s days."
 msgstr "Rādīt %s dienas."
+
+msgid "DeleteCache"
+msgstr "DzēstKešatmiņu"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(saglabāts %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Vai mēģināt kādu no darbībām:"

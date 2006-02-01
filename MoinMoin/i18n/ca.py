@@ -31,10 +31,6 @@ Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de macro
 '''Crea una pàgina nova''',
 '''You are not allowed to view this page.''':
 '''No teniu permís per a visualitzar aquesta pàgina.''',
-'''DeleteCache''':
-'''Suprimeix la memòria cau''',
-'''(cached %s)''':
-'''(%s a la memòria cau)''',
 '''You are not allowed to edit this page.''':
 '''No teniu permís per a editar aquesta pàgina.''',
 '''Page is immutable!''':
@@ -897,6 +893,10 @@ roig=edició''',
 '''Adjuncions''',
 '''Show %s days.''':
 '''Mostra %s dies.''',
+'''DeleteCache''':
+'''Suprimeix la memòria cau''',
+'''(cached %s)''':
+'''(%s a la memòria cau)''',
 '''Or try one of these actions:''':
 '''O proveu amb una d\'aquestes accions:''',
 '''Page''':

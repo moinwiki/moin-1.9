@@ -32,10 +32,6 @@ Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:
 '''Új lap létrehozása''',
 '''You are not allowed to view this page.''':
 '''A lap megtekintése nem engedélyezett.''',
-'''DeleteCache''':
-'''GyorstárTörlés''',
-'''(cached %s)''':
-'''(a gyorstárba került: %s)''',
 '''You are not allowed to edit this page.''':
 '''A lap szerkesztése nem engedélyezett.''',
 '''Page is immutable!''':
@@ -740,6 +736,10 @@ piros=szerkesztés''',
 '''Nem szerkeszthető lap''',
 '''Show %s days.''':
 '''%s nap megjelenítése''',
+'''DeleteCache''':
+'''GyorstárTörlés''',
+'''(cached %s)''':
+'''(a gyorstárba került: %s)''',
 '''Or try one of these actions:''':
 '''Vagy próbáljon ki egyet ezekből a műveletekből:''',
 '''Page''':

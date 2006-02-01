@@ -31,10 +31,6 @@ for at bruge denne formular på andre sider.-~
 '''Opret ny side''',
 '''You are not allowed to view this page.''':
 '''Du har ikke lov til at se denne side.''',
-'''DeleteCache''':
-'''SletCache''',
-'''(cached %s)''':
-'''(husket %s)''',
 '''You are not allowed to edit this page.''':
 '''Du har ikke lov til at redigere denne side.''',
 '''Page is immutable!''':
@@ -890,6 +886,10 @@ rød=redigér''',
 '''Vedhæftede filer''',
 '''Show %s days.''':
 '''Vis %s dage.''',
+'''DeleteCache''':
+'''SletCache''',
+'''(cached %s)''':
+'''(husket %s)''',
 '''Or try one of these actions:''':
 '''Eller prøv en af følgende rutiner:''',
 '''Page''':

@@ -32,10 +32,6 @@ toe.-~
 '''Nieuwe pagina aanmaken''',
 '''You are not allowed to view this page.''':
 '''U hebt geen toestemming deze pagina te bekijken.''',
-'''DeleteCache''':
-'''BufferLegen''',
-'''(cached %s)''':
-'''(%s gebufferd)''',
 '''You are not allowed to edit this page.''':
 '''U hebt geen toestemming deze pagina te bewerken.''',
 '''Page is immutable!''':
@@ -720,6 +716,10 @@ rood=bewerken''',
 '''Vastliggende pagina''',
 '''Show %s days.''':
 '''Laat %s dagen zien.''',
+'''DeleteCache''':
+'''BufferLegen''',
+'''(cached %s)''':
+'''(%s gebufferd)''',
 '''Or try one of these actions:''':
 '''Of probeer een van deze acties: ''',
 '''Page''':

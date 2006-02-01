@@ -30,8 +30,6 @@ brukes.-~
 ''',
 '''You are not allowed to view this page.''':
 '''Du har ikke tillatelse til å se denne siden.''',
-'''(cached %s)''':
-'''(cachet %s)''',
 '''You are not allowed to edit this page.''':
 '''Du har ikke tillatelse til å redigere denne siden.''',
 '''Page is immutable!''':
@@ -694,6 +692,8 @@ rød=rediger''',
 '''Siden kan ikke endres''',
 '''Show %s days.''':
 '''Vis %s dager.''',
+'''(cached %s)''':
+'''(cachet %s)''',
 '''Or try one of these actions:''':
 '''Eller prøv en av følgende operasjoner:''',
 '''Page''':

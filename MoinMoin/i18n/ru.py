@@ -31,10 +31,6 @@ macro call.-~
 '''Создать страницу''',
 '''You are not allowed to view this page.''':
 '''Вам не разрешено просматривать эту страницу.''',
-'''DeleteCache''':
-'''СтеретьКеш''',
-'''(cached %s)''':
-'''(запомнен %s)''',
 '''You are not allowed to edit this page.''':
 '''Вам нельзя менять эту страницу.''',
 '''Page is immutable!''':
@@ -879,6 +875,10 @@ red=edit''':
 '''Приложения''',
 '''Show %s days.''':
 '''Показать изменения за %s дней.''',
+'''DeleteCache''':
+'''СтеретьКеш''',
+'''(cached %s)''':
+'''(запомнен %s)''',
 '''Or try one of these actions:''':
 '''Или попробуйте сделать''',
 '''Page''':

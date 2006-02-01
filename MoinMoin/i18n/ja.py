@@ -32,10 +32,6 @@ macro call.-~
 '''新しいページを作成''',
 '''You are not allowed to view this page.''':
 '''このページを読む権限がありません。''',
-'''DeleteCache''':
-'''キャッシュの削除''',
-'''(cached %s)''':
-'''(キャッシュ作成日時 %s)''',
 '''You are not allowed to edit this page.''':
 '''このページを編集する権限がありません。''',
 '''Page is immutable!''':
@@ -893,6 +889,10 @@ red=edit''':
 '''添付ファイル''',
 '''Show %s days.''':
 '''%s日表示''',
+'''DeleteCache''':
+'''キャッシュの削除''',
+'''(cached %s)''':
+'''(キャッシュ作成日時 %s)''',
 '''Or try one of these actions:''':
 '''アクション一覧:''',
 '''Page''':
@@ -935,6 +935,8 @@ red=edit''':
 '''Wikiライセンス''',
 '''MissingPage''':
 '''存在しないページ''',
+'''MissingHomePage''':
+'''存在しないホームページ''',
 '''Mon''':
 '''月''',
 '''Tue''':

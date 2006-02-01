@@ -29,8 +29,6 @@ macro call.-~
 ''',
 '''You are not allowed to view this page.''':
 '''Bạn không xem trang này được.''',
-'''(cached %s)''':
-'''(lưu %s)''',
 '''You are not allowed to edit this page.''':
 '''Bạn không thể sửa trang này.''',
 '''Page is immutable!''':
@@ -681,6 +679,8 @@ red=edit''':
 '''Trang không thể được thay đổi''',
 '''Show %s days.''':
 '''Hiện %s ngày.''',
+'''(cached %s)''':
+'''(lưu %s)''',
 '''Or try one of these actions:''':
 '''Hoặc chọn các hành động sau:''',
 '''Page''':
