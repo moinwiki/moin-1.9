@@ -238,7 +238,7 @@ To leave the editor, press the Cancel button.''':
 '''Publish my email (not my wiki homepage) in author info''':
 '''작성자 정보에 내 위키 홈페이지 대신 E-mail 주소를 사용함''',
 '''Open editor on double click''':
-'''더블 클릭해서 글 고치기로 들어감''',
+'''더블 클릭해서 글을 수정함''',
 '''Jump to last visited page instead of frontpage''':
 '''첫페이지 대신 마지막 방문 위치로 이동함''',
 '''Show question mark for non-existing pagelinks''':
@@ -248,7 +248,7 @@ To leave the editor, press the Cancel button.''':
 '''Show icon toolbar''':
 '''아이콘 툴바 표시''',
 '''Show top/bottom links in headings''':
-'''표제들 옆에 처음/끝 링크 표시''',
+'''제목 옆에 처음/끝 링크 표시''',
 '''Show fancy diffs''':
 '''꾸며진 변경사항 표시''',
 '''Add spaces to displayed wiki names''':
@@ -508,7 +508,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Search Text''':
 '''내용에서 찾기''',
 '''Go To Page''':
-'''글 보기''',
+'''글로 이동''',
 '''Include system pages''':
 '''시스템 글 포함''',
 '''Exclude system pages''':

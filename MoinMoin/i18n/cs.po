@@ -4,14 +4,14 @@
 ##master-date:None
 #acl MoinPagesEditorGroup:read,write,delete,revert All:read
 #format gettext
-#language cz
+#language cs
 
 #
-# MoinMoin cz system text translation
+# MoinMoin cs system text translation
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.3\n"
+"Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-24 15:08+0100\n"
 "PO-Revision-Date: \n"
@@ -99,10 +99,10 @@ msgid "Your edit lock on %(lock_page)s will expire in # seconds."
 msgstr "Váš editační zámek na %(lock_page)s vyprší za # sekund."
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "Během Vaší editace někdo jiný toto stránku smazal!"
+msgstr "Během Vaší editace někdo jiný tuto stránku smazal!"
 
 msgid "Someone else changed this page while you were editing!"
-msgstr "Během Vaší editace někdo jiný toto stránku změnil!"
+msgstr "Během Vaší editace někdo jiný tuto stránku změnil!"
 
 #, python-format
 msgid ""
@@ -112,7 +112,7 @@ msgid ""
 msgstr ""
 "V době, kdy jste tuto stránku editovali, ji bohužel změnil a uložil také "
 "někdo jiný!\n"
-"Neukládejte stránku tak je je teď! Zkontrolujte ji a pak teprve ji případně "
+"Neukládejte stránku tak jak je teď! Zkontrolujte ji a teprve pak ji případně "
 "uložte.\n"
 "Můžete se také podívat na rozdíly %(difflink)s."
 
@@ -292,9 +292,7 @@ msgid "You are not allowed to edit this page!"
 msgstr "Nemáte oprávnění editovat tuto stránku!"
 
 msgid "You cannot save empty pages."
-msgstr ""
-"Prázdné stránky nelze ukládat\n"
-"!"
+msgstr "Prázdné stránky nelze ukládat!"
 
 msgid "You already saved this page!"
 msgstr "Stránka je již uložena!"
@@ -452,7 +450,7 @@ msgid "Name"
 msgstr "Jméno"
 
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Použijte JmenoPrijmeni)"
+msgstr "(Použijte Jmeno``Prijmeni)"
 
 msgid "Alias-Name"
 msgstr "Alias"
@@ -470,10 +468,10 @@ msgid "Email"
 msgstr "Email"
 
 msgid "User CSS URL"
-msgstr "URL uživatelského CSS"
+msgstr "URL vlastního CSS"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Nechte prázdné nechcete-li využít uživatelské CSS)"
+msgstr "(Nechte prázdné, nechcete-li využít vlastní CSS)"
 
 msgid "Editor size"
 msgstr "Velikost editoru"
@@ -521,6 +519,11 @@ msgid ""
 "\n"
 "Login URL: %s/?action=userform&uid=%s\n"
 msgstr ""
+"Přihlašovací Jméno: %s\n"
+"\n"
+"Přihlašovací heslo: %s\n"
+"\n"
+"URL pro přihlášení: %s/?action=userform&uid=%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -541,7 +544,7 @@ msgstr ""
 
 #, python-format
 msgid "[%(sitename)s] Your wiki account data"
-msgstr ""
+msgstr "[%(sitename)s údaje o Vašem účtu"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -1015,7 +1018,7 @@ msgstr "Nemáte dostatečná práva k uložení obrázku k této stránce."
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
 "again."
-msgstr "Sobor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
+msgstr "Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu."
 
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Nemáte dostatečná práva ke smazání přílohy u této stránky!"
@@ -1093,6 +1096,7 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
+"Příloha '%(filename)s' nerozbalena. Soubory jsou buď příliš velké, nebo jsou to pouze .zip soubory, nebo už existují, nebo jsou v adresářích."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1103,7 +1107,7 @@ msgid "Attachment '%(filename)s'"
 msgstr "Příloha '%(filename)s'"
 
 msgid "Package script:"
-msgstr ""
+msgstr "Package skript:"
 
 msgid "File Name"
 msgstr "Jméno Souboru"
@@ -1163,7 +1167,8 @@ msgid "Please use the interactive user interface to rename pages!"
 msgstr "Na přejmenovávání stránek používejte prosím interaktivní rozhraní!"
 
 #, python-format
-msgid "Could not rename page because of file system error: %s."
+msgid ""
+"Could not rename page because of file system error: %s."
 msgstr ""
 "Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s."
 
@@ -1386,7 +1391,7 @@ msgid "# of pages of this size"
 msgstr "Počet stránek o této velikosti"
 
 msgid "User agent"
-msgstr ""
+msgstr "User Agent"
 
 msgid "Others"
 msgstr "Další"
@@ -1454,7 +1459,7 @@ msgid "More Actions:"
 msgstr "Další akce:"
 
 msgid "------------"
-msgstr ""
+msgstr "------------"
 
 msgid "Raw Text"
 msgstr "Zdrojový text"
@@ -1612,135 +1617,3 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
-
-#~ msgid "EditText"
-#~ msgstr "Editace"
-
-#~ msgid "Immutable page"
-#~ msgstr "Neměnná stránka"
-
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Koláček byl smazán. Nyní jste odhlášeni."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Neznámý uživatel: {{{\"%s\"}}}. Zadejte prosím Vaše uživatelské jméno a "
-#~ "heslo."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Chybějící heslo. Zadejte prosím vaše uživatelské jméno a heslo."
-
-#~ msgid "Account \"%s\" is disabled."
-#~ msgstr "Účet \"%s\" je zakázaný."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Lituji, neplatné heslo."
-
-#~ msgid "Bad relogin URL."
-#~ msgstr "Neplatné URL opětovného přihlášení."
-
-#~ msgid "Unknown user."
-#~ msgstr "Neznámý uživatel."
-
-#~ msgid "User account created!"
-#~ msgstr "Uživatelský účet vytvořen!"
-
-#~ msgid "Remember last page visited"
-#~ msgstr "Pamatovat si naposledy navštívenou stránku"
-
-#~ msgid "Parent Page"
-#~ msgstr "Mateřská Stránka"
-
-#~ msgid "Trail"
-#~ msgstr "Stopa"
-
-#~ msgid ""
-#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
-#~ "right corner to create a profile."
-#~ msgstr ""
-#~ "Dosud jste si nevytvořil uživatelský profil. Zvolte  NastaveniUzivatele v "
-#~ "pravem hornim rohu a vytvořte si ho."
-
-#~ msgid ""
-#~ "This wiki is not enabled for mail processing. Contact the owner of the "
-#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
-#~ msgstr ""
-#~ "Tato wiki není upravena na posílání emailů.Kontaktujte vlastníka wiki, "
-#~ "který může emaily povolit nebo odstranit ikonu Odebírat."
-
-#~ msgid ""
-#~ "You didn't enter an email address in your profile. Select your name "
-#~ "(UserPreferences) in the upper right corner and enter a valid email "
-#~ "address."
-#~ msgstr ""
-#~ "Nezadal jste svou emailovou adresu ve Všem profilu. Zadejte své jméno v "
-#~ "(NastaveniUzivatele) v pravém horním rohu a vložte platnou emilovou "
-#~ "adresu."
-
-#~ msgid ""
-#~ "To unsubscribe, go to your profile and delete the item matching this page "
-#~ "from the subscription list."
-#~ msgstr ""
-#~ "Pokud chcete zrušit odběr, běžte do svého profilu a smažte tuto stránku "
-#~ "ze seznamu odebíraných stránek."
-
-#~ msgid "Quicklink"
-#~ msgstr "Pohotový odkaz"
-
-#~ msgid "Show Print View"
-#~ msgstr "Náhled tisku"
-
-#~ msgid "Attach File"
-#~ msgstr "Připojit soubor"
-
-#~ msgid "Show Like Pages"
-#~ msgstr "Podobné stránky"
-
-#~ msgid "Show Local Site Map"
-#~ msgstr "Mapa lokálního umístění"
-
-#~ msgid "Infos"
-#~ msgstr "Info"
-
-#~ msgid "Can't work out query"
-#~ msgstr "Dotaz nedává smysl"
-
-#~ msgid "Add to Quicklinks"
-#~ msgstr "Přidat k Pohotovým odkazům"
-
-#~ msgid "Show Parent"
-#~ msgstr "Předek"
-
-#~ msgid "Show Changes"
-#~ msgstr "Ukázat změny"
-
-#~ msgid "Get Info"
-#~ msgstr "Další info"
-
-#~ msgid "Skip to preview"
-#~ msgstr "Přeskočit k náhledu"
-
-#~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[aktuální velikost stránky '''%(size)d''' bytů]"
-
-#~ msgid "Optional comment about this change"
-#~ msgstr "Nepovinný komentář k této změně"
-
-#~ msgid "Make this page belong to category %(category)s"
-#~ msgstr "Zařadit tuto stránku do kategorie %(category)s"
-
-#~ msgid "Show fancy links"
-#~ msgstr "Zobrazit pestré odkazy"
-
-#~ msgid "Save as"
-#~ msgstr "Uložit jako"
-
-#~ msgid "XSLT option disabled!"
-#~ msgstr "XSLT volba není dostupná!"
-
-#~ msgid "RefreshCache"
-#~ msgstr "ObnovitCache"
-
-#~ msgid "for this page (cached %(date)s)"
-#~ msgstr "u této stránky (kešováno am %(date)s)"

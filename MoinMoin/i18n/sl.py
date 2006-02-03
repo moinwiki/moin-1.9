@@ -65,7 +65,7 @@ ne shranite strani nepopravljene! Razlike so prikazane v %(difflink)s.''',
 '''[Content of new page loaded from %s]''':
 '''[Vsebina nove strani je bila naložena iz %s]''',
 '''[Template %s not found]''':
-'''[Šablona %s ne obstaja]''',
+'''[Predloga %s ne obstaja]''',
 '''[You may not read %s]''':
 '''[Strani %s vam ni dovoljeno brati]''',
 '''Describe %s here.''':
@@ -237,7 +237,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Open editor on double click''':
 '''Odpri urejevalnik ob dvokliku''',
 '''Jump to last visited page instead of frontpage''':
-'''Vstopi na zadnjo obiskano stran namesto na prvo stran''',
+'''Vstopi na zadnjo obiskano stran namesto na vstopno''',
 '''Show question mark for non-existing pagelinks''':
 '''Označi neobstoječe povezave z vprašajem''',
 '''Show page trail''':
@@ -253,13 +253,13 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Remember login information''':
 '''Shrani podatke o prijavi''',
 '''Subscribe to trivial changes''':
-'''Naroči se na obvestila o neznatnih spremembah''',
+'''Naročilo na obvestila velja tudi za neznatne spremembe''',
 '''Disable this account forever''':
-'''Trajno ukini to uporabniško ime''',
+'''Trajno ukini ta uporabniški račun''',
 '''Name''':
 '''Ime''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
-'''(uporabi obliko Ime\'\'\'\'\'\'Priimek)''',
+'''(običajno oblike Ime\'\'\'\'\'\'Priimek, z nekaj truda lahko: Ime Priimek)''',
 '''Alias-Name''':
 '''Psevdonim''',
 '''Password''':
@@ -273,7 +273,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''User CSS URL''':
 '''URL uporabnikovega CSS stila''',
 '''(Leave it empty for disabling user CSS)''':
-'''(prazno polje izklopi CSS)''',
+'''(prazno polje izklopi uporabnikov CSS)''',
 '''Editor size''':
 '''Velikost področja za urejanje''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -392,7 +392,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Create Profile''':
 '''Tvori profil''',
 '''Mail me my account data''':
-'''Pošlji mi podatke o mojem uporabniškem računu''',
+'''Pošlji mi podatke tem uporabniškem računu''',
 '''Action''':
 '''Akcija''',
 '''No older revisions available!''':
