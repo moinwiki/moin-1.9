@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Text translations for Čeština (cz).
-# Automatically generated - DO NOT EDIT, edit cz.po instead!
+# Text translations for Čeština (cs).
+# Automatically generated - DO NOT EDIT, edit cs.po instead!
 meta = {
   'language': """Čeština""",
   'elanguage': """Czech""",
@@ -53,14 +53,14 @@ volání makra.-~
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
 '''Váš editační zámek na %(lock_page)s vyprší za # sekund.''',
 '''Someone else deleted this page while you were editing!''':
-'''Během Vaší editace někdo jiný toto stránku smazal!''',
+'''Během Vaší editace někdo jiný tuto stránku smazal!''',
 '''Someone else changed this page while you were editing!''':
-'''Během Vaší editace někdo jiný toto stránku změnil!''',
+'''Během Vaší editace někdo jiný tuto stránku změnil!''',
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''V době, kdy jste tuto stránku editovali, ji bohužel změnil a uložil také někdo jiný!
-Neukládejte stránku tak je je teď! Zkontrolujte ji a pak teprve ji případně uložte.
+Neukládejte stránku tak jak je teď! Zkontrolujte ji a teprve pak ji případně uložte.
 Můžete se také podívat na rozdíly %(difflink)s.''',
 '''[Content of new page loaded from %s]''':
 '''[Obsah nové stránky nahrán z %s]''',
@@ -167,8 +167,7 @@ Následující stránku změnil uživatel %(editor)s:
 '''You are not allowed to edit this page!''':
 '''Nemáte oprávnění editovat tuto stránku!''',
 '''You cannot save empty pages.''':
-'''Prázdné stránky nelze ukládat
-!''',
+'''Prázdné stránky nelze ukládat!''',
 '''You already saved this page!''':
 '''Stránka je již uložena!''',
 '''Sorry, someone else saved the page while you edited it.
@@ -258,7 +257,7 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Name''':
 '''Jméno''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
-'''(Použijte JmenoPrijmeni)''',
+'''(Použijte Jmeno``Prijmeni)''',
 '''Alias-Name''':
 '''Alias''',
 '''Password''':
@@ -270,9 +269,9 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''Email''':
 '''Email''',
 '''User CSS URL''':
-'''URL uživatelského CSS''',
+'''URL vlastního CSS''',
 '''(Leave it empty for disabling user CSS)''':
-'''(Nechte prázdné nechcete-li využít uživatelské CSS)''',
+'''(Nechte prázdné, nechcete-li využít vlastní CSS)''',
 '''Editor size''':
 '''Velikost editoru''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -294,6 +293,18 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''nález''',
 '''matches''':
 '''nálezů''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/?action=userform&uid=%s
+''':
+'''Přihlašovací Jméno: %s
+
+Přihlašovací heslo: %s
+
+URL pro přihlášení: %s/?action=userform&uid=%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -309,6 +320,8 @@ heslo tak, jak je zde uvedeno (přes kopírovat a vložit).
 
 Po úspěšném přihlášení není od věci nastavit nové heslo.
 ''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s údaje o Vašem účtu''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
 '''Tato wiki není upravena na posílání emailů.
@@ -599,7 +612,7 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''You are not allowed to save a drawing on this page.''':
 '''Nemáte dostatečná práva k uložení obrázku k této stránce.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
-'''Sobor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu.''',
+'''Soubor bez obsahu. Smažte ne-ASCII znaky ze souboru a zkuste to znovu.''',
 '''You are not allowed to delete attachments on this page.''':
 '''Nemáte dostatečná práva ke smazání přílohy u této stránky!''',
 '''You are not allowed to get attachments from this page.''':
@@ -632,10 +645,14 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Příloha \'%(filename)s\' nemohla být rozbalena kvůli příliš velkému počtu souborů (schází %(count)d).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''Příloha \'%(filename)s\' rozbalena.''',
+'''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
+'''Příloha \'%(filename)s\' nerozbalena. Soubory jsou buď příliš velké, nebo jsou to pouze .zip soubory, nebo už existují, nebo jsou v adresářích.''',
 '''The file %(target)s is not a .zip file.''':
 '''%(target)s není platný soubor typu .zip.''',
 '''Attachment \'%(filename)s\'''':
 '''Příloha \'%(filename)s\'''',
+'''Package script:''':
+'''Package skript:''',
 '''File Name''':
 '''Jméno Souboru''',
 '''Modified''':
@@ -795,6 +812,8 @@ red=edit''':
 '''maximální velikost stránky [bytes]''',
 '''# of pages of this size''':
 '''Počet stránek o této velikosti''',
+'''User agent''':
+'''User Agent''',
 '''Others''':
 '''Další''',
 '''Distribution of User-Agent Types''':
@@ -837,6 +856,8 @@ red=edit''':
 '''Hledat:''',
 '''More Actions:''':
 '''Další akce:''',
+'''------------''':
+'''------------''',
 '''Raw Text''':
 '''Zdrojový text''',
 '''Delete Cache''':

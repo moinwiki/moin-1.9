@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-24 15:08+0100\n"
-"PO-Revision-Date: 2006-02-01 01:00+0100\n"
+"PO-Revision-Date: 2006-02-02 02:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgstr "[Vsebina nove strani je bila naložena iz %s]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[Šablona %s ne obstaja]"
+msgstr "[Predloga %s ne obstaja]"
 
 #, python-format
 msgid "[You may not read %s]"
@@ -206,8 +206,8 @@ msgstr ""
 "oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne "
 "besedilo.\n"
 " Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim"
-"([\"oglati oklepaji in dvojni narekovaji\"])]]; URL; [URL]; [URL povezava]."
-"\n Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
+"([\"oglati oklepaji in dvojni narekovaji\"])]]; URL; [URL]; [URL povezava].\n"
+" Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
 "na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.\n"
 "\n"
 "(!) Več o tem: HelpOnEditing, SyntaxReference.\n"
@@ -415,7 +415,7 @@ msgid "Open editor on double click"
 msgstr "Odpri urejevalnik ob dvokliku"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr "Vstopi na zadnjo obiskano stran namesto na prvo stran"
+msgstr "Vstopi na zadnjo obiskano stran namesto na vstopno"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Označi neobstoječe povezave z vprašajem"
@@ -439,16 +439,16 @@ msgid "Remember login information"
 msgstr "Shrani podatke o prijavi"
 
 msgid "Subscribe to trivial changes"
-msgstr "Naroči se na obvestila o neznatnih spremembah"
+msgstr "Naročilo na obvestila velja tudi za neznatne spremembe"
 
 msgid "Disable this account forever"
-msgstr "Trajno ukini to uporabniško ime"
+msgstr "Trajno ukini ta uporabniški račun"
 
 msgid "Name"
 msgstr "Ime"
 
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(uporabi obliko Ime''''''Priimek)"
+msgstr "(običajno oblike Ime''''''Priimek, z nekaj truda lahko: Ime Priimek)"
 
 msgid "Alias-Name"
 msgstr "Psevdonim"
@@ -469,7 +469,7 @@ msgid "User CSS URL"
 msgstr "URL uporabnikovega CSS stila"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(prazno polje izklopi CSS)"
+msgstr "(prazno polje izklopi uporabnikov CSS)"
 
 msgid "Editor size"
 msgstr "Velikost področja za urejanje"
@@ -654,7 +654,7 @@ msgid "Create Profile"
 msgstr "Tvori profil"
 
 msgid "Mail me my account data"
-msgstr "Pošlji mi podatke o mojem uporabniškem računu"
+msgstr "Pošlji mi podatke tem uporabniškem računu"
 
 msgid "Action"
 msgstr "Akcija"
@@ -905,8 +905,8 @@ msgid "Local extension parsers"
 msgstr "Lokalni sintaktični analizatorji (parserji)"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Nameščeni procesorji (zastarelo -- uporabite raje "
-"sintaktične analizatorje)"
+msgstr ""
+"Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)"
 
 msgid "Disabled"
 msgstr "Izklopljeno"
