@@ -747,12 +747,7 @@ def do_bookmark(pagename, request):
     Page(request, pagename).send_page(request)
   
 
-def do_formtest(pagename, request):
-    # test a user defined form
-    from MoinMoin import wikiform
-    wikiform.do_formtest(pagename, request)
-
-
+# Commented out by Florian Festi, cf. bug report about it
 # def do_macro(pagename, request):
 #     """ Execute a helper action within a macro.
 #     """
@@ -829,7 +824,6 @@ def do_format(pagename, request):
 def do_chart(pagename, request):
     """ Show page charts 
     
-    TODO: add support for text charts?
     """
     _ = request.getText
     if not request.user.may.read(pagename):
@@ -860,45 +854,6 @@ def do_dumpform(pagename, request):
 
     request.http_headers()
     request.write("<html><body>%s</body></html>" % data)
-    raise MoinMoinNoFooter
-
-
-def do_export(pagename, request):
-    import shutil, StringIO
-    from MoinMoin.wikixml import wikiexport
-
-    # Protect this with ACLs, when ready!
-
-    # get parameters
-    compression = request.form.get('compression', None)
-
-    # prepare output stream
-    fileid = time.strftime("%Y-%m-%d", request.user.getTime(time.time()))
-    filename = "wiki-export-%s.xml" % fileid 
-    outbuff = StringIO.StringIO()
-    mimetype, out = 'text/xml', outbuff
-    if compression == "gzip":
-        import gzip
-        mimetype, out = 'application/x-gzip', gzip.GzipFile(
-            filename, "wb", 9, outbuff)
-        filename = filename + '.gz'
-
-    # create export document
-    export = wikiexport.WikiExport(out, public=1)
-    export.run()
-
-    # send http headers
-    headers = [
-        "Content-Type: %s" % mimetype,
-        "Content-Length: %d" % len(outbuff.getvalue()),
-    ]
-    if mimetype != 'text/xml':
-        headers.append("Content-Disposition: attachment; filename=%s" % filename)
-    request.http_headers(headers)
-
-    # copy the body
-    outbuff.seek(0)
-    shutil.copyfileobj(outbuff, request, 8192)
     raise MoinMoinNoFooter
 
 
@@ -937,7 +892,4 @@ def getHandler(request, action, identifier="execute"):
         handler = globals().get('do_' + action)
         
     return handler
-
-    
- 
 

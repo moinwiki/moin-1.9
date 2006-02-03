@@ -11,6 +11,7 @@ Current dev version:
     * deron meranda's formatter API cleanup
     * added div and span to formatter API
     * allow hex and symbolic entities
+    * Removed old unfinished form and export code.
 
   Fixes:
    * fixed table attribute parsing

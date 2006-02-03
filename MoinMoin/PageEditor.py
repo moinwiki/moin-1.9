@@ -835,8 +835,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         #!!! rev check is not enough since internal operations use "0"
 
         # expand variables, unless it's a template or form page
-        if not (wikiutil.isTemplatePage(self.request, self.page_name) or
-                wikiutil.isFormPage(self.request, self.page_name)):
+        if not wikiutil.isTemplatePage(self.request, self.page_name): 
             newtext = self._expand_variables(newtext)
 
         msg = ""

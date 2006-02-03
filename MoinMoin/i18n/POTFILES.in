@@ -12,7 +12,6 @@ user.py
 userform.py
 version.py
 wikiaction.py
-wikiform.py
 wikimacro.py
 wikirpc.py
 wikitest.py

@@ -256,7 +256,6 @@ class DefaultConfig:
     page_local_spelling_words = u'LocalSpellingWords'
     page_category_regex = u'^Category[A-Z]'
     page_dict_regex = u'[a-z0-9]Dict$'
-    page_form_regex = u'[a-z0-9]Form$'
     page_group_regex = u'[a-z0-9]Group$'
     page_template_regex = u'[a-z0-9]Template$'
 
@@ -519,7 +518,7 @@ file. It should match the actual charset of the configuration file.
         
         decode_names = (
             'sitename', 'logo_string', 'navi_bar', 'page_front_page',
-            'page_category_regex', 'page_dict_regex', 'page_form_regex',
+            'page_category_regex', 'page_dict_regex', 
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
             'acl_rights_before', 'acl_rights_after', 'mail_from'

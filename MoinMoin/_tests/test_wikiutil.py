@@ -64,33 +64,3 @@ class TemplatePageTestCase(unittest.TestCase):
                 '"%(name)s" is NOT a valid template name' % locals())
 
 
-class FormPageTestCase(unittest.TestCase):
-    good = (
-        'aForm',
-        'MyForm',
-    )
-    bad = (
-        'Form',
-        'AForm',
-        'FormInFront',
-        'xFormInFront',
-        'XFormInFront',
-    )
-
-    # require default page_form_regex config
-    def setUp(self):
-        self.config = TestConfig(self.request,
-                                 defaults=['page_form_regex'])
-    def tearDown(self):
-        del self.config
-
-    def testFormPage(self):
-        """wikiutil: good form names accepted, bad rejected"""
-        for name in self.good:
-            self.assert_(wikiutil.isFormPage(self.request, name),
-                '"%(name)s" is a valid form name' % locals())
-        for name in self.bad:
-            self.failIf(wikiutil.isFormPage(self.request, name),
-                '"%(name)s" is NOT a valid form name' % locals())
-
-
