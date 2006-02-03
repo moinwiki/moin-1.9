@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 20:15:18 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-414
+
+    Summary:
+      fix some wrong attributes, todo: fix quoting, see comment in text_html.url
+    Revision:
+      moin--main--1.5--patch-414
+
+    fix some wrong attributes, todo: fix quoting, see comment in text_html.url
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_gedit.py
+     MoinMoin/formatter/text_html.py MoinMoin/parser/wiki.py
+     MoinMoin/userform.py MoinMoin/wikimacro.py
+
+
 2006-02-03 19:42:04 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-413
 
     Summary:

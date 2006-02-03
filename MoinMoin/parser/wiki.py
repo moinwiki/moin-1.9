@@ -428,11 +428,11 @@ class Parser:
             return self.attachment(words, pretty_url=1)
 
         if wikiutil.isPicture(words[1]) and re.match(self.url_rule, words[1]):
-            return (self.formatter.url(1, words[0], css='external', unescaped=1) +
+            return (self.formatter.url(1, words[0], css='external', do_escape=0) +
                     self.formatter.image(title=words[0], alt=words[0], src=words[1]) +
                     self.formatter.url(0))
         else:
-            return (self.formatter.url(1, words[0], css=scheme, unescaped=1) +
+            return (self.formatter.url(1, words[0], css=scheme, do_escape=0) +
                     self.formatter.text(words[1]) +
                     self.formatter.url(0))
 
