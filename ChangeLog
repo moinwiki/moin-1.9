@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:26:27 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-418
+
+    Summary:
+      line anchors reactivated
+    Revision:
+      moin--main--1.5--patch-418
+
+    line anchors reactivated
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_html.py
+
+
 2006-02-03 21:22:11 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-417
 
     Summary:
