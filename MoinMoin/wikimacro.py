@@ -583,7 +583,6 @@ class Macro:
 
         return result
 
-
     def _macro_GetVal(self, args):
         page,key = args.split(',')
         d = self.request.dicts.dict(page)

@@ -507,8 +507,7 @@ def isSystemPage(request, pagename):
     @return: true if page is a system page
     """
     return (request.dicts.has_member('SystemPagesGroup', pagename) or
-        isTemplatePage(request, pagename) or
-        isFormPage(request, pagename))
+        isTemplatePage(request, pagename))
 
 
 def isTemplatePage(request, pagename):
@@ -521,16 +520,6 @@ def isTemplatePage(request, pagename):
     filter = re.compile(request.cfg.page_template_regex, re.UNICODE)
     return filter.search(pagename) is not None
 
-
-def isFormPage(request, pagename):
-    """ Is this a form page?
-    
-    @param pagename: the page name
-    @rtype: bool
-    @return: true if page is a form page
-    """
-    filter = re.compile(request.cfg.page_form_regex, re.UNICODE)
-    return filter.search(pagename) is not None
 
 def isGroupPage(request, pagename):
     """ Is this a name of group page?

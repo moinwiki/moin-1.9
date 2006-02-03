@@ -1000,7 +1000,6 @@ class Page:
         pi_formtext = []
         pi_formfields = []
         pi_lines = 0
-        wikiform = None
 
         # check for XML content
         if body and body[:5] == '<?xml':
@@ -1091,19 +1090,6 @@ class Page:
                     pass
                 else:
                     request.setPragma(key, val)
-            elif verb == "form":
-                # ignore form PIs on non-form pages
-                if not wikiutil.isFormPage(request, self.page_name):
-                    continue
-
-                # collect form definitions
-                if not wikiform:
-                    from MoinMoin import wikiform
-                    # TODO: form probably can work with action=""
-                    pi_formtext.append('<table border="1" cellspacing="1" cellpadding="3">\n'
-                        '<form method="POST" action="%s">\n'
-                        '<input type="hidden" name="action" value="formtest">\n' % self.url(request))
-                pi_formtext.append(wikiform.parseDefinition(request, args, pi_formfields))
             elif verb == "acl":
                 # We could build it here, but there's no request.
                 pass

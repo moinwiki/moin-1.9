@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:22:11 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-417
+
+    Summary:
+      Removed form code (which had been broken since it was hacked into) and the export action (which had been in a similar state).
+    Revision:
+      moin--main--1.5--patch-417
+
+
+    removed files:
+     MoinMoin/macro/.arch-ids/Form.py.id MoinMoin/macro/Form.py
+     MoinMoin/wikixml/.arch-ids/wikiexport.py.id
+     MoinMoin/wikixml/wikiexport.py
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/PageEditor.py
+     MoinMoin/_tests/test_wikiutil.py MoinMoin/i18n/POTFILES.in
+     MoinMoin/multiconfig.py MoinMoin/wikiaction.py
+     MoinMoin/wikimacro.py MoinMoin/wikiutil.py docs/CHANGES
+
+
 2006-02-03 21:12:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-416
 
     Summary:
