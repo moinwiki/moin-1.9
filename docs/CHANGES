@@ -3,6 +3,10 @@ MoinMoin Version History
 
 Current dev version:
 
+  New features:
+    * Added FullSearchCached macro which is statically cached.
+      Use it if you do not depend on fresh search results but prefer raw speed.
+
   Other changes:
     * added surge protection (TODO: configurability)
     * added "voyager" to bot useragent list

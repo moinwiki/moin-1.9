@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:30:15 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-419
+
+    Summary:
+      Added FullSearchCached macro.
+    Revision:
+      moin--main--1.5--patch-419
+
+
+    new files:
+     MoinMoin/macro/.arch-ids/FullSearchCached.py.id
+     MoinMoin/macro/FullSearchCached.py
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-02-03 21:26:27 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-418
 
     Summary:
