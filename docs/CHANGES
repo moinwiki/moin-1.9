@@ -38,6 +38,7 @@ Current dev version:
      so it does not close it erratically when you close a inner <p>.
    * GUI editor converter now also accept http: urls without // (relative or
      same server urls)
+   * Fixed the DocBook parser in cases where the pagename was non-ascii.
 
 Version 1.5.1:
   Please completely read CHANGES text until you reach the version you were
