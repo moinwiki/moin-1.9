@@ -2,6 +2,24 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 20:53:23 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-415
+
+    Summary:
+      fixed version, surge protection configuration, merged CHANGES
+    Revision:
+      moin--main--1.5--patch-415
+
+    fixed version, surge protection configuration, merged CHANGES
+    
+
+    removed files:
+     docs/.arch-ids/CHANGES.refactor.id docs/CHANGES.refactor
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py MoinMoin/request.py
+     MoinMoin/version.py docs/CHANGES
+
+
 2006-02-03 20:15:18 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-414
 
     Summary:

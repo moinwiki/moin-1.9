@@ -75,63 +75,6 @@ class RequestBase(object):
     moin_location = 'x-moin-location'
     proxy_host = 'x-forwarded-host'
     
-    def surge_protect(self):
-        limits = { # action: (count, dt)
-            'show': (20, 60),
-            'fullsearch': (5, 60),
-            'edit': (10, 120),
-            'rss_rc': (1, 20),
-        }
-        lockout_time = 3600 # secs
-        
-        validuser = self.user.valid
-        current_id = validuser and self.user.name or self.remote_addr
-        current_action = self.form.get('action', ['show'])[0]
-        if not validuser and current_id.startswith('127.'): # localnet
-            return False
-        
-        now = int(time.time())
-        surgedict = {}
-        surge_detected = False
-        
-        try:
-            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
-            data = cache.content()
-            data = data.split("\n")
-            for line in data:
-                try:
-                    id, t, action, surge_indicator = line.split("\t")
-                    t = int(t)
-                    maxnum, dt = limits.get(action, (60, 60))
-                    if t >= now - dt:
-                        events = surgedict.setdefault(id, copy.copy({}))
-                        timestamps = events.setdefault(action, copy.copy([]))
-                        timestamps.append((t, surge_indicator))
-                except:
-                    pass
-        
-            maxnum, dt = limits.get(current_action, (60, 60))
-            events = surgedict.setdefault(current_id, copy.copy({}))
-            timestamps = events.setdefault(current_action, copy.copy([]))
-            surge_detected = len(timestamps) > maxnum
-            surge_indicator = surge_detected and "!" or ""
-            timestamps.append((now, surge_indicator))
-            if surge_detected:
-                if len(timestamps) < maxnum*2:
-                    timestamps.append((now + lockout_time, surge_indicator)) # continue like that and get locked out
-        
-            data = []
-            for id, events in surgedict.items():
-                for action, timestamps in events.items():
-                    for t, surge_indicator in timestamps:
-                        data.append("%s\t%d\t%s\t%s" % (id, t, action, surge_indicator))
-            data = "\n".join(data)
-            cache.update(data)
-        except:
-            pass
-
-        return surge_detected   
-        
     def __init__(self, properties={}):
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
@@ -222,6 +165,59 @@ class RequestBase(object):
 
             self.opened_logs = 0
             self.reset()
+        
+    def surge_protect(self):
+        """ check if someone requesting too much from us """
+        validuser = self.user.valid
+        current_id = validuser and self.user.name or self.remote_addr
+        current_action = self.form.get('action', ['show'])[0]
+        if not validuser and current_id.startswith('127.'): # localnet
+            return False
+        
+        limits = self.cfg.surge_action_limits
+        default_limit = self.cfg.surge_action_limits.get('default', (60, 60))
+        
+        now = int(time.time())
+        surgedict = {}
+        surge_detected = False
+        
+        try:
+            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
+            data = cache.content()
+            data = data.split("\n")
+            for line in data:
+                try:
+                    id, t, action, surge_indicator = line.split("\t")
+                    t = int(t)
+                    maxnum, dt = limits.get(action, default_limit)
+                    if t >= now - dt:
+                        events = surgedict.setdefault(id, copy.copy({}))
+                        timestamps = events.setdefault(action, copy.copy([]))
+                        timestamps.append((t, surge_indicator))
+                except:
+                    pass
+        
+            maxnum, dt = limits.get(current_action, default_limit)
+            events = surgedict.setdefault(current_id, copy.copy({}))
+            timestamps = events.setdefault(current_action, copy.copy([]))
+            surge_detected = len(timestamps) > maxnum
+            surge_indicator = surge_detected and "!" or ""
+            timestamps.append((now, surge_indicator))
+            if surge_detected:
+                if len(timestamps) < maxnum*2:
+                    timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
+        
+            data = []
+            for id, events in surgedict.items():
+                for action, timestamps in events.items():
+                    for t, surge_indicator in timestamps:
+                        data.append("%s\t%d\t%s\t%s" % (id, t, action, surge_indicator))
+            data = "\n".join(data)
+            cache.update(data)
+        except:
+            pass
+
+        return surge_detected   
         
     def getDicts(self):
         """ Lazy initialize the dicts on the first access """

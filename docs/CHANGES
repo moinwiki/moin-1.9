@@ -7,11 +7,30 @@ Current dev version:
     * added surge protection (TODO: configurability)
     * added "voyager" to bot useragent list
     * added locking for caching subsystem
+    * add new markup for bulletless lists: just use a "." instead of "*".
+    * deron meranda's formatter API cleanup
+    * added div and span to formatter API
+    * allow hex and symbolic entities
 
   Fixes:
    * fixed table attribute parsing
    * Fixed cookie handling wrt properties adherance.
-
+   * the new "." markup makes it possible to have a bulletless list with
+     elements on the same level. Before this change and only using indentation
+     with blanks, that would get merged into a single paragraph.
+   * it is possible now to have multiple paragraphs in the same list element
+   * fixed GAP processing for ordered lists
+   * fix text_gedit formatter's invalid list nesting
+   * fixed hr crash in blockquote (but needs more work)
+   * fixed FootNote's formatter usage
+   * fixed rst's headline levels
+   * fixed MoinMoinBugs/WikiParserThinksItIsInsidePreWhenItIsNot
+   * fixed MoinMoinBugs/ListItemGeneratedOutsideList
+   * fixed that macros were followed by a wrong <p>
+   * added <blockquote> to the block elements in the text_html formatter,
+     so it does not close it erratically when you close a inner <p>.
+   * GUI editor converter now also accept http: urls without // (relative or
+     same server urls)
 
 Version 1.5.1:
   Please completely read CHANGES text until you reach the version you were
