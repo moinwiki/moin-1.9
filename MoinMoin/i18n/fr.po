@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-01-22 23:03+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -529,13 +529,13 @@ msgstr "correspondance"
 msgid "matches"
 msgstr "correspondances"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Nom : %s\n"
 "\n"
@@ -851,13 +851,6 @@ msgstr "Vous devez fournir un type de graphique !"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Type de graphique « %s » incorrect !"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "L'attribut obligatoire « %(attrname)s » est absent"
-
-msgid "Submitted form data:"
-msgstr "Données du formulaire soumis :"
 
 msgid "Search Titles"
 msgstr "Recherche de titre"
@@ -1678,3 +1671,9 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "L'attribut obligatoire « %(attrname)s » est absent"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Données du formulaire soumis :"

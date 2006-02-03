@@ -406,10 +406,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Meg kell adnia a diagram típusát!''',
 '''Bad chart type "%s"!''':
 '''Hibás diagramtípus: "%s"''',
-'''Required attribute "%(attrname)s" missing''':
-'''A(z) "%(attrname)s" kötelező attribútum hiányzik''',
-'''Submitted form data:''':
-'''Az elküldött űrlap adatai:''',
 '''Search Titles''':
 '''Címkeresés''',
 '''Display context of search results''':

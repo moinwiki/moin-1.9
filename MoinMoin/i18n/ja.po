@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-01-25 00:34+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -513,13 +513,13 @@ msgstr "箇所一致"
 msgid "matches"
 msgstr "箇所一致"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "ログイン名: %s\n"
 "\n"
@@ -821,13 +821,6 @@ msgstr "チャートタイプを指定してください。"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "チャートタイプ\"%s\"が不正です。"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "必須項目\"%(attrname)s\"を入力してください。"
-
-msgid "Submitted form data:"
-msgstr "サブミットされたフォームデータ:"
 
 msgid "Search Titles"
 msgstr "タイトル検索"
@@ -1633,6 +1626,12 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "必須項目\"%(attrname)s\"を入力してください。"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "サブミットされたフォームデータ:"
 
 #~ msgid "EditText"
 #~ msgstr "テキストの編集"

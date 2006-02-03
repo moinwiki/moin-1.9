@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-02-02 16:35+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -505,13 +505,13 @@ msgstr " 개 포함"
 msgid "matches"
 msgstr " 개 포함"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "로그인 이름: %s\n"
 "\n"
@@ -812,13 +812,6 @@ msgstr "차트 타입을 지정하여야 합니다!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "잘못된 차트 종류 입니다: \"%s\""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "필요한 속성인 \"%(attrname)s\"가(이) 없습니다"
-
-msgid "Submitted form data:"
-msgstr "전송된 양식 데이터:"
 
 msgid "Search Titles"
 msgstr "제목 찾기"
@@ -1628,6 +1621,12 @@ msgstr "이름변경"
 
 msgid "SpellCheck"
 msgstr "철자검사"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "필요한 속성인 \"%(attrname)s\"가(이) 없습니다"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "전송된 양식 데이터:"
 
 #~ msgid "EditText"
 #~ msgstr "글 고치기"

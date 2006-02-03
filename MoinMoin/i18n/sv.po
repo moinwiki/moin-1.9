@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-12-21 18:59+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -514,13 +514,13 @@ msgstr "träff"
 msgid "matches"
 msgstr "träffar"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Inloggningsnamn: %s\n"
 "\n"
@@ -826,13 +826,6 @@ msgstr "Du måste ange en diagramtyp!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Ogiltig diagramtyp \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Obligatoriskt attribut \"%(attrname)s\" saknas"
-
-msgid "Submitted form data:"
-msgstr "Skickade formulärinfo:"
 
 msgid "Search Titles"
 msgstr "Sök titlar"
@@ -1636,6 +1629,12 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Obligatoriskt attribut \"%(attrname)s\" saknas"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Skickade formulärinfo:"
 
 #~ msgid "EditText"
 #~ msgstr "RedigeraText"

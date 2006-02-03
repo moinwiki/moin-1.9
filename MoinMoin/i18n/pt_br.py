@@ -299,18 +299,6 @@ entre as palavras. Nome de grupo de página não é permitido.''',
 '''combina''',
 '''matches''':
 '''combinam''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Usuário para Login: %s
-
-Senha para Login: %s
-
-URL do Login: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -495,10 +483,6 @@ Contate o administrador desta wiki para habilitar esta opção.''',
 '''Você precisa informar um tipo de gráfico!''',
 '''Bad chart type "%s"!''':
 '''Tipo inadequado de gráfico "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''O atributo necessário "%(attrname)s" está faltando.''',
-'''Submitted form data:''':
-'''Formulário de dados enviado:''',
 '''Search Titles''':
 '''Buscar Títulos''',
 '''Display context of search results''':

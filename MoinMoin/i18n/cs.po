@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -517,13 +517,13 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Přihlašovací Jméno: %s\n"
 "\n"
 "Přihlašovací heslo: %s\n"
 "\n"
-"URL pro přihlášení: %s/?action=userform&uid=%s\n"
+"URL pro přihlášení: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -815,13 +815,6 @@ msgstr "Musíte udat typ diagramu!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Neplatný diagram typu \"%s\"!"
 
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Chybí požadovaný atribut \"%(attrname)s\""
-
-msgid "Submitted form data:"
-msgstr "Zadaná formulářová data:"
-
 msgid "Search Titles"
 msgstr "Hledat v titulcích"
 
@@ -1096,7 +1089,8 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
-"Příloha '%(filename)s' nerozbalena. Soubory jsou buď příliš velké, nebo jsou to pouze .zip soubory, nebo už existují, nebo jsou v adresářích."
+"Příloha '%(filename)s' nerozbalena. Soubory jsou buď příliš velké, nebo jsou "
+"to pouze .zip soubory, nebo už existují, nebo jsou v adresářích."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1167,8 +1161,7 @@ msgid "Please use the interactive user interface to rename pages!"
 msgstr "Na přejmenovávání stránek používejte prosím interaktivní rozhraní!"
 
 #, python-format
-msgid ""
-"Could not rename page because of file system error: %s."
+msgid "Could not rename page because of file system error: %s."
 msgstr ""
 "Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s."
 
@@ -1617,3 +1610,9 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Chybí požadovaný atribut \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Zadaná formulářová data:"

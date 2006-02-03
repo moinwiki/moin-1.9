@@ -298,18 +298,6 @@ Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağl�
 '''eşle''',
 '''matches''':
 '''eşleniyor''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Kullanıcı Adı: %s
-
-Giriş Parolası: %s
-
-Giriş Form için URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -492,10 +480,6 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Bir çizelge tipi belirtmek zorundasınız!''',
 '''Bad chart type "%s"!''':
 '''Geçersiz çizelge tipi: "%s"''',
-'''Required attribute "%(attrname)s" missing''':
-'''Gerekli "%(attrname)s" niteleyicisi eksik''',
-'''Submitted form data:''':
-'''Girilen form verisi: ''',
 '''Search Titles''':
 '''Başlıkları Ara''',
 '''Display context of search results''':

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -446,7 +446,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 
 msgid ""
@@ -724,13 +724,6 @@ msgstr ""
 
 #, python-format
 msgid "Bad chart type \"%s\"!"
-msgstr ""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
-
-msgid "Submitted form data:"
 msgstr ""
 
 msgid "Search Titles"

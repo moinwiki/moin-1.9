@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -517,13 +517,13 @@ msgstr "saskaņa"
 msgid "matches"
 msgstr "saskaņas"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Lietotāja vārds: %s\n"
 "\n"
@@ -824,13 +824,6 @@ msgstr "Norādiet diagrammas tipu!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Slikts diagrammas tips \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Trūkst \"%(attrname)s\" atribūta"
-
-msgid "Submitted form data:"
-msgstr "Nosūtītie dati:"
 
 msgid "Search Titles"
 msgstr "Meklēt virsrakstus"
@@ -1638,6 +1631,12 @@ msgstr "PārdēvētLapu"
 
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Trūkst \"%(attrname)s\" atribūta"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Nosūtītie dati:"
 
 #~ msgid "EditText"
 #~ msgstr "LabotTekstu"

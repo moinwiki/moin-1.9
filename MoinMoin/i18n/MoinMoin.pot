@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -438,7 +438,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 
 msgid ""
@@ -716,13 +716,6 @@ msgstr ""
 
 #, python-format
 msgid "Bad chart type \"%s\"!"
-msgstr ""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
-
-msgid "Submitted form data:"
 msgstr ""
 
 msgid "Search Titles"

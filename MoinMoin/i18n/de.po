@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -527,13 +527,13 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Anmelde-Name: %s\n"
 "\n"
 "Anmelde-Passwort: %s\n"
 "\n"
-"Anmelde-URL: %s/?action=userform&uid=%s\n"
+"Anmelde-URL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -836,13 +836,6 @@ msgstr "Es muss ein Diagrammtyp angegeben werden!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Unbekannter Diagrammtyp \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Benötigtes Attribut \"%(attrname)s\" fehlt"
-
-msgid "Submitted form data:"
-msgstr "Gesendete Formulardaten:"
 
 msgid "Search Titles"
 msgstr "Titel durchsuchen"
@@ -1664,9 +1657,3 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
-
-#~ msgid "EditText"
-#~ msgstr "Editieren"
-
-#~ msgid "Immutable page"
-#~ msgstr "Geschützte Seite"

@@ -300,13 +300,13 @@ space between words. Group page name is not allowed.''',
 
 Login Password: %s
 
-Login URL: %s/?action=userform&uid=%s
+Login URL: %s/%s
 ''':
 '''Login Name: %s
 
 Login Password: %s
 
-Login URL: %s/?action=userform&uid=%s
+Login URL: %s/%s
 ''',
 '''Somebody has requested to submit your account data to this email address.
 
@@ -492,10 +492,6 @@ Contact the owner of the wiki, who can enable email.''',
 '''You need to provide a chart type!''',
 '''Bad chart type "%s"!''':
 '''Bad chart type "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Required attribute "%(attrname)s" missing''',
-'''Submitted form data:''':
-'''Submitted form data:''',
 '''Search Titles''':
 '''Search Titles''',
 '''Display context of search results''':

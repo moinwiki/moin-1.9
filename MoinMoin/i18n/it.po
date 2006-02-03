@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -529,7 +529,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 
 msgid ""
@@ -822,13 +822,6 @@ msgstr "Devi specificare un tipo di grafico!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Tipo di grafico \"%s\" non valido!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Manca l'attributo obbligatorio \"%(attrname)s\" "
-
-msgid "Submitted form data:"
-msgstr "Dati inseriti:"
 
 msgid "Search Titles"
 msgstr "Cerca per titolo"
@@ -1646,6 +1639,12 @@ msgstr "RinominaPagina"
 
 msgid "SpellCheck"
 msgstr "ControlloOrtografico"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Manca l'attributo obbligatorio \"%(attrname)s\" "
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Dati inseriti:"
 
 #~ msgid "EditText"
 #~ msgstr "ModificaIlTesto"

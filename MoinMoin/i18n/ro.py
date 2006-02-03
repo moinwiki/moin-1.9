@@ -298,18 +298,6 @@ spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''potrivire''',
 '''matches''':
 '''potriviri''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nume de înregistrare: %s
-
-Parola de înregistrare: %s
-
-URL de înregistrare: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -495,10 +483,6 @@ de email \'%(email)s\'!''',
 '''Trebuie să specificaţi tipul graficului!''',
 '''Bad chart type "%s"!''':
 '''Este invalid tipul de grafic "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Parametrul necesar "%(attrname)s" lipseşte''',
-'''Submitted form data:''':
-'''Datele din formular care au fost trimise:''',
 '''Search Titles''':
 '''Căutare Titluri''',
 '''Display context of search results''':

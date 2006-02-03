@@ -297,18 +297,6 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nombre de Ingreso: %s
-
-Contraseña de Ingreso: %s
-
-URL de Ingreso: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -494,10 +482,6 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''¡Hay que indicar un tipo de gráfico!''',
 '''Bad chart type "%s"!''':
 '''¡Tipo de gráfico incorrecto "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Falta el atributo requerido "%(attrname)s"''',
-'''Submitted form data:''':
-'''Formulario de información enviado:''',
 '''Search Titles''':
 '''Búsqueda por Títulos''',
 '''Display context of search results''':

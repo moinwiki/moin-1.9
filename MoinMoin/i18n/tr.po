@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -537,13 +537,13 @@ msgstr "eşle"
 msgid "matches"
 msgstr "eşleniyor"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Kullanıcı Adı: %s\n"
 "\n"
@@ -848,13 +848,6 @@ msgstr "Bir çizelge tipi belirtmek zorundasınız!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Geçersiz çizelge tipi: \"%s\""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Gerekli \"%(attrname)s\" niteleyicisi eksik"
-
-msgid "Submitted form data:"
-msgstr "Girilen form verisi: "
 
 msgid "Search Titles"
 msgstr "Başlıkları Ara"
@@ -1672,6 +1665,12 @@ msgstr "SayfaAdlandır"
 
 msgid "SpellCheck"
 msgstr "İmlaDenetimi"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Gerekli \"%(attrname)s\" niteleyicisi eksik"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Girilen form verisi: "
 
 #~ msgid "EditText"
 #~ msgstr "MetniDüzenle"

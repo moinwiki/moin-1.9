@@ -297,18 +297,6 @@ Les noms des pages des groupes sont interdits.''',
 '''correspondance''',
 '''matches''':
 '''correspondances''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nom : %s
-
-Mot de passe : %s
-
-URL de connexion : %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -495,10 +483,6 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Vous devez fournir un type de graphique !''',
 '''Bad chart type "%s"!''':
 '''Type de graphique « %s » incorrect !''',
-'''Required attribute "%(attrname)s" missing''':
-'''L\'attribut obligatoire « %(attrname)s » est absent''',
-'''Submitted form data:''':
-'''Données du formulaire soumis :''',
 '''Search Titles''':
 '''Recherche de titre''',
 '''Display context of search results''':

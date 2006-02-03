@@ -397,10 +397,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Você precisa indicar um tipo de gráfico!''',
 '''Bad chart type "%s"!''':
 '''Tipo de gráfico incorreto "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Falta o atributo requerido "%(attrname)s"''',
-'''Submitted form data:''':
-'''Formulário de informações enviado:''',
 '''Search Titles''':
 '''Busca por Títulos''',
 '''Display context of search results''':

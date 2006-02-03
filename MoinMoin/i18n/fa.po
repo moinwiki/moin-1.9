@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -513,13 +513,13 @@ msgstr "برابری"
 msgid "matches"
 msgstr "برابری ها"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "نام کاربری: %s\n"
 "\n"
@@ -822,13 +822,6 @@ msgstr "شما باید نوع چارت را مشخص نمایید!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "چارت \"%s\" صحیح نمی باشد!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "نسبت های مورد نیاز \"%(attrname)s\" یافت نشد"
-
-msgid "Submitted form data:"
-msgstr "اطلاعات وارد شده:"
 
 msgid "Search Titles"
 msgstr "عناوین جستجو"
@@ -1634,6 +1627,12 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "نسبت های مورد نیاز \"%(attrname)s\" یافت نشد"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "اطلاعات وارد شده:"
 
 #~ msgid "EditText"
 #~ msgstr "ویرایش متن"

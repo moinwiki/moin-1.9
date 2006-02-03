@@ -297,18 +297,6 @@ space between words. Group page name is not allowed.''':
 '''筆''',
 '''matches''':
 '''筆''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''登入名稱：%s
-
-登入密碼：%s
-
-登入 URL：%s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -491,10 +479,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''請指定圖表類型！''',
 '''Bad chart type "%s"!''':
 '''錯誤的圖表類型 "%s"！''',
-'''Required attribute "%(attrname)s" missing''':
-'''缺少必要的屬性 "%(attrname)s"''',
-'''Submitted form data:''':
-'''提交表單資料：''',
 '''Search Titles''':
 '''搜尋標題''',
 '''Display context of search results''':

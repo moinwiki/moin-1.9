@@ -303,13 +303,13 @@ Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 
 Login Password: %s
 
-Login URL: %s/?action=userform&uid=%s
+Login URL: %s/%s
 ''':
 '''Anmelde-Name: %s
 
 Anmelde-Passwort: %s
 
-Anmelde-URL: %s/?action=userform&uid=%s
+Anmelde-URL: %s/%s
 ''',
 '''Somebody has requested to submit your account data to this email address.
 
@@ -494,10 +494,6 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Es muss ein Diagrammtyp angegeben werden!''',
 '''Bad chart type "%s"!''':
 '''Unbekannter Diagrammtyp "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Benötigtes Attribut "%(attrname)s" fehlt''',
-'''Submitted form data:''':
-'''Gesendete Formulardaten:''',
 '''Search Titles''':
 '''Titel durchsuchen''',
 '''Display context of search results''':

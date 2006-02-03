@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-02-02 02:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -510,13 +510,13 @@ msgstr "zadetek"
 msgid "matches"
 msgstr "zadetkov"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Uporabniško ime: %s\n"
 "\n"
@@ -819,13 +819,6 @@ msgstr "Treba je navesti tip diagramov!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Napačen ali neznan tip diagramov \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Manjka obvezen atribut \"%(attrname)s\""
-
-msgid "Submitted form data:"
-msgstr "Podatki s poslanega obrazca:"
 
 msgid "Search Titles"
 msgstr "Iskanje po naslovih"
@@ -1629,6 +1622,12 @@ msgstr "PreimenujStran"
 
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Manjka obvezen atribut \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Podatki s poslanega obrazca:"
 
 #~ msgid "EditText"
 #~ msgstr "Spremeni"

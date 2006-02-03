@@ -297,18 +297,6 @@ Grupas lapas vārds nav atļauts.''',
 '''saskaņa''',
 '''matches''':
 '''saskaņas''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Lietotāja vārds: %s
-
-Lietotāja parole: %s
-
-Lietotāja URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -492,10 +480,6 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Norādiet diagrammas tipu!''',
 '''Bad chart type "%s"!''':
 '''Slikts diagrammas tips "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Trūkst "%(attrname)s" atribūta''',
-'''Submitted form data:''':
-'''Nosūtītie dati:''',
 '''Search Titles''':
 '''Meklēt virsrakstus''',
 '''Display context of search results''':

@@ -397,10 +397,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''U dient een grafiektype op te geven!''',
 '''Bad chart type "%s"!''':
 '''Ongeldig grafiektype "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Benodigd attribuut "%(attrname)s" ontbreekt''',
-'''Submitted form data:''':
-'''Verstuurde gegevens in het formulier:''',
 '''Search Titles''':
 '''Titels doorzoeken''',
 '''Display context of search results''':

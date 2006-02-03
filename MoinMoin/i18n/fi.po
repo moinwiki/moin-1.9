@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -511,13 +511,13 @@ msgstr "osuma"
 msgid "matches"
 msgstr "osumaa"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Kirjautumisnimi: %s\n"
 "\n"
@@ -816,13 +816,6 @@ msgstr "Sinun täytyy antaa kaavion tyyppi!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Kelvoton kaavion tyyppi \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Vaadittu tieto \"%(attrname)s\" puuttuu"
-
-msgid "Submitted form data:"
-msgstr "Lomakkeella lähetettiin tiedot:"
 
 msgid "Search Titles"
 msgstr "Etsi nimistä"
@@ -1628,6 +1621,12 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Vaadittu tieto \"%(attrname)s\" puuttuu"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Lomakkeella lähetettiin tiedot:"
 
 #~ msgid "EditText"
 #~ msgstr "MuokkaaTekstiä"
