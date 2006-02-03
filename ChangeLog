@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:54:08 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-422
+
+    Summary:
+      Really fixed the docbook bug.
+    Revision:
+      moin--main--1.5--patch-422
+
+
+    modified files:
+     ChangeLog MoinMoin/parser/xslt.py
+
+
 2006-02-03 21:50:02 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-421
 
     Summary:

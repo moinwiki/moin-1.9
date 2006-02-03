@@ -86,7 +86,7 @@ class Parser:
                                     base_scheme=self.base_scheme)
                 input_factory = InputSource.InputSourceFactory(resolver=wiki_resolver)
 
-                page_uri = wikiutil.url_quote(u"%s%s" % (self.base_uri, formatter.page.page_name))
+                page_uri = self.base_uri + wikiutil.url_quote(formatter.page.page_name)
                 raw = self.raw.strip()
 
                 self.processor = Processor()
