@@ -194,7 +194,7 @@ class RequestBase(object):
                         events = surgedict.setdefault(id, copy.copy({}))
                         timestamps = events.setdefault(action, copy.copy([]))
                         timestamps.append((t, surge_indicator))
-                except:
+                except StandardError, err:
                     pass
         
             maxnum, dt = limits.get(current_action, default_limit)
@@ -214,7 +214,7 @@ class RequestBase(object):
                         data.append("%s\t%d\t%s\t%s" % (id, t, action, surge_indicator))
             data = "\n".join(data)
             cache.update(data)
-        except:
+        except StandardError, err:
             pass
 
         return surge_detected   

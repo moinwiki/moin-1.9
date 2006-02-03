@@ -22,6 +22,7 @@ class CacheEntry:
                           page local cache area
             @param key: under which key we access the cache content
         """
+        self.request = request
         if isinstance(arena, str):
             self.arena_dir = os.path.join(request.cfg.cache_dir, arena)
             filesys.makeDirs(self.arena_dir)
@@ -30,9 +31,9 @@ class CacheEntry:
             self.arena_dir = arena.getPagePath('cache', check_create=1)
         self.key = key
         if locking:
-            lock_dir = os.path.join(self.arena_dir, '__lock__')
-            self.rlock = lock.ReadLock(lock_dir, 60.0)
-            self.wlock = lock.WriteLock(lock_dir, 60.0)
+            self.lock_dir = os.path.join(self.arena_dir, '__lock__')
+            self.rlock = lock.ReadLock(self.lock_dir, 60.0)
+            self.wlock = lock.WriteLock(self.lock_dir, 60.0)
         
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
@@ -47,7 +48,8 @@ class CacheEntry:
             return 0
 
     def needsUpdate(self, filename, attachdir=None):
-        if not self.exists(): return 1
+        if not self.exists():
+            return 1
 
         try:
             ctime = os.path.getmtime(self._filename())
@@ -79,6 +81,8 @@ class CacheEntry:
             finally:
                 if locking:
                     self.wlock.release()
+        else:
+            request.log("Can't acquire write lock in %s", self.lock_dir)
 
     def update(self, content, encode=False):
         if encode:
@@ -95,6 +99,8 @@ class CacheEntry:
             finally:
                 if locking:
                     self.wlock.release()
+        else:
+            request.log("Can't acquire write lock in %s", self.lock_dir)
 
     def remove(self):
         try:
@@ -111,6 +117,8 @@ class CacheEntry:
             finally:
                 if locking:
                     self.rlock.release()
+        else:
+            request.log("Can't acquire read lock in %s", self.lock_dir)
         if decode:
             data = data.decode(config.charset)
         return data

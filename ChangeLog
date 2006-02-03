@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:12:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-416
+
+    Summary:
+      fix some error handlers, logging for caching lock failures
+    Revision:
+      moin--main--1.5--patch-416
+
+    fix some error handlers, logging for caching lock failures
+    
+
+    modified files:
+     ChangeLog MoinMoin/caching.py MoinMoin/request.py
+
+
 2006-02-03 20:53:23 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-415
 
     Summary:
