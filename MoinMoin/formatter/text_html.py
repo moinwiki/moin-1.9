@@ -12,7 +12,7 @@ from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 
-line_anchors = False
+line_anchors = True
 prettyprint = False
 
 # These are the HTML elements that we treat as block elements.
