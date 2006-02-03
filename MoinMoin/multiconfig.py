@@ -297,6 +297,17 @@ class DefaultConfig:
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
     superuser = [] # list of unicode user names that have super powers :)
+    
+    surge_action_limits = { # allow max. <count> <action> requests per <dt> secs
+        # action: (count, dt)
+        'show': (20, 60),
+        'fullsearch': (5, 60),
+        'edit': (10, 120),
+        'rss_rc': (1, 20),
+        'default': (60, 60),
+    }
+    surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
+    
     theme_default = 'modern'
     theme_force = False
     trail_size = 5
