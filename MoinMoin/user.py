@@ -933,16 +933,31 @@ class User:
 
     def mailAccountData(self, cleartext_passwd=None):
         from MoinMoin.util import mail
+        from MoinMoin.wikiutil import getSysPage
         _ = self._request.getText
+
+        if not self.enc_password: # generate pw if there is none yet
+            from random import randint
+            import base64
+    
+            charset = 'utf-8'
+            pwd = "%s%d" % (str(time.time()), randint(0, 65535))
+            pwd = pwd.encode(charset)
+
+            pwd = sha.new(pwd).digest()
+            pwd = '{SHA}%s' % base64.encodestring(pwd).rstrip()
+    
+            self.enc_password = pwd
+            self.save()
 
         text = '\n' + _("""\
 Login Name: %s
 
 Login Password: %s
 
-Login URL: %s/?action=userform&uid=%s
+Login URL: %s/%s
 """, formatted=False) % (
-                        self.name, self.enc_password, self._request.getBaseURL(), self.id)
+                        self.name, self.enc_password, self._request.getBaseURL(), getSysPage(self._request, 'UserPreferences').page_name)
 
         text = _("""\
 Somebody has requested to submit your account data to this email address.
@@ -960,4 +975,4 @@ After successfully logging in, it is of course a good idea to set a new and know
         mailok, msg = mail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
         return msg
-        
+
