@@ -246,18 +246,6 @@ space between words. Group page name is not allowed.''':
 '''התאמה''',
 '''matches''':
 '''התאמות''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''שם משתמש: %s
-
-סיסמא: %s
-
-כתובת להתחברות אוטמטית: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -412,10 +400,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''בחרו בסוג גרף.''',
 '''Bad chart type "%s"!''':
 '''סוג גרף שגוי "%s"''',
-'''Required attribute "%(attrname)s" missing''':
-'''ערך חובה "%(attrname)s" חסר''',
-'''Submitted form data:''':
-'''תוכן הטופס נשלח:''',
 '''Search Titles''':
 '''חפש כותרות''',
 '''Display context of search results''':

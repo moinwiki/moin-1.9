@@ -295,19 +295,6 @@ space between words. Group page name is not allowed.''':
 '''برابری''',
 '''matches''':
 '''برابری ها''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''نام کاربری: %s
-
-کلمه عبور: %s
-
-آدرس ورود: %s/?action=userform&uid=%s
-
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -490,10 +477,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''شما باید نوع چارت را مشخص نمایید!''',
 '''Bad chart type "%s"!''':
 '''چارت "%s" صحیح نمی باشد!''',
-'''Required attribute "%(attrname)s" missing''':
-'''نسبت های مورد نیاز "%(attrname)s" یافت نشد''',
-'''Submitted form data:''':
-'''اطلاعات وارد شده:''',
 '''Search Titles''':
 '''عناوین جستجو''',
 '''Display context of search results''':

@@ -300,18 +300,6 @@ sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''osuma''',
 '''matches''':
 '''osumaa''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Kirjautumisnimi: %s
-
-Kirjautumissalasana: %s
-
-Kirjautumisosoite: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -496,10 +484,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sinun täytyy antaa kaavion tyyppi!''',
 '''Bad chart type "%s"!''':
 '''Kelvoton kaavion tyyppi "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Vaadittu tieto "%(attrname)s" puuttuu''',
-'''Submitted form data:''':
-'''Lomakkeella lähetettiin tiedot:''',
 '''Search Titles''':
 '''Etsi nimistä''',
 '''Display context of search results''':

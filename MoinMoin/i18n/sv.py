@@ -301,18 +301,6 @@ med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
 '''träff''',
 '''matches''':
 '''träffar''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Inloggningsnamn: %s
-
-Inloggningslösenord: %s
-
-Inloggnings-URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -498,10 +486,6 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Du måste ange en diagramtyp!''',
 '''Bad chart type "%s"!''':
 '''Ogiltig diagramtyp "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Obligatoriskt attribut "%(attrname)s" saknas''',
-'''Submitted form data:''':
-'''Skickade formulärinfo:''',
 '''Search Titles''':
 '''Sök titlar''',
 '''Display context of search results''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2006-01-25 09:30+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -495,13 +495,13 @@ msgstr "筆"
 msgid "matches"
 msgstr "筆"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "登入名稱：%s\n"
 "\n"
@@ -792,13 +792,6 @@ msgstr "請指定圖表類型！"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "錯誤的圖表類型 \"%s\"！"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "缺少必要的屬性 \"%(attrname)s\""
-
-msgid "Submitted form data:"
-msgstr "提交表單資料："
 
 msgid "Search Titles"
 msgstr "搜尋標題"
@@ -1587,6 +1580,12 @@ msgstr "重新命名"
 
 msgid "SpellCheck"
 msgstr "拼字檢查"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "缺少必要的屬性 \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "提交表單資料："
 
 #~ msgid "EditText"
 #~ msgstr "編輯本頁"

@@ -299,18 +299,6 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''porównanie''',
 '''matches''':
 '''porówniania''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Identyfikator czytelnika: %s
-
-Hasło czytelnika: %s
-
-URL logowania: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -495,10 +483,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Podaj rodzaj wykresu!''',
 '''Bad chart type "%s"!''':
 '''Nieprawidłowy rodzaj wykresu "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Brakuje niezbędnego atrybutu "%(attrname)s"''',
-'''Submitted form data:''':
-'''Dane przekazane z formularza:''',
 '''Search Titles''':
 '''Przeszukaj tytuły''',
 '''Display context of search results''':

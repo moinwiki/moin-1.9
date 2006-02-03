@@ -299,18 +299,6 @@ space between words. Group page name is not allowed.''':
 ''' 개 포함''',
 '''matches''':
 ''' 개 포함''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''로그인 이름: %s
-
-로그인 암호: %s
-
-로그인 URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -495,10 +483,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''차트 타입을 지정하여야 합니다!''',
 '''Bad chart type "%s"!''':
 '''잘못된 차트 종류 입니다: "%s"''',
-'''Required attribute "%(attrname)s" missing''':
-'''필요한 속성인 "%(attrname)s"가(이) 없습니다''',
-'''Submitted form data:''':
-'''전송된 양식 데이터:''',
 '''Search Titles''':
 '''제목 찾기''',
 '''Display context of search results''':

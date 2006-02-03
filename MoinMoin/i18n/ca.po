@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -519,13 +519,13 @@ msgstr "coincidència"
 msgid "matches"
 msgstr "coincidències"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Nom d'entrada: %s\n"
 "\n"
@@ -832,13 +832,6 @@ msgstr "Heu de proveir un tipus de gràfica."
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "El tipus de gràfica «%s» és invàlid."
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Manca l'atribut requerit «%(attrname)s»"
-
-msgid "Submitted form data:"
-msgstr "Dades del formulari enviades:"
 
 msgid "Search Titles"
 msgstr "Cerca els títols"
@@ -1651,6 +1644,12 @@ msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Manca l'atribut requerit «%(attrname)s»"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Dades del formulari enviades:"
 
 #~ msgid "EditText"
 #~ msgstr "Edita el text"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -488,13 +488,13 @@ msgstr "התאמה"
 msgid "matches"
 msgstr "התאמות"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "שם משתמש: %s\n"
 "\n"
@@ -793,13 +793,6 @@ msgstr "בחרו בסוג גרף."
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "סוג גרף שגוי \"%s\""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "ערך חובה \"%(attrname)s\" חסר"
-
-msgid "Submitted form data:"
-msgstr "תוכן הטופס נשלח:"
 
 msgid "Search Titles"
 msgstr "חפש כותרות"
@@ -1598,6 +1591,12 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "ערך חובה \"%(attrname)s\" חסר"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "תוכן הטופס נשלח:"
 
 #~ msgid "EditText"
 #~ msgstr "ערוך דף"

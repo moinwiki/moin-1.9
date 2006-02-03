@@ -383,10 +383,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Bạn cần nhập vào loại biểu đồ!''',
 '''Bad chart type "%s"!''':
 '''Không hiểu loại biểu đồ "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Không tìm thấy thuộc tính "%(attrname)s"''',
-'''Submitted form data:''':
-'''Dữ liệu đã được nhập:''',
 '''Search Titles''':
 '''Tìm tiêu đề''',
 '''Display context of search results''':

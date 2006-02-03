@@ -299,18 +299,6 @@ space between words. Group page name is not allowed.''':
 '''箇所一致''',
 '''matches''':
 '''箇所一致''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''ログイン名: %s
-
-ログインパスワード: %s
-
-ログインURL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -496,10 +484,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''チャートタイプを指定してください。''',
 '''Bad chart type "%s"!''':
 '''チャートタイプ"%s"が不正です。''',
-'''Required attribute "%(attrname)s" missing''':
-'''必須項目"%(attrname)s"を入力してください。''',
-'''Submitted form data:''':
-'''サブミットされたフォームデータ:''',
 '''Search Titles''':
 '''タイトル検索''',
 '''Display context of search results''':

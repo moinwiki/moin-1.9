@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <sarman@t-online.de>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -503,7 +503,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 
 msgid ""
@@ -796,13 +796,6 @@ msgstr "Morate odrediti vrstu grafikona!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Loš grafikon tipa \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Potreban atribut \"%(attrname)s\" nedostaje"
-
-msgid "Submitted form data:"
-msgstr "Podaci poslati u formularu:"
 
 msgid "Search Titles"
 msgstr ""
@@ -1622,6 +1615,12 @@ msgstr "PreimenitiStranicu"
 
 msgid "SpellCheck"
 msgstr "ProveraPravopisa"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Potreban atribut \"%(attrname)s\" nedostaje"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Podaci poslati u formularu:"
 
 #~ msgid "EditText"
 #~ msgstr "IzmeniTekst"

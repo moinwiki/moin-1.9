@@ -296,18 +296,6 @@ z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso dovoljen
 '''zadetek''',
 '''matches''':
 '''zadetkov''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Uporabniško ime: %s
-
-Uporabniško geslo: %s
-
-URL za prijavo: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -493,10 +481,6 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Treba je navesti tip diagramov!''',
 '''Bad chart type "%s"!''':
 '''Napačen ali neznan tip diagramov "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Manjka obvezen atribut "%(attrname)s"''',
-'''Submitted form data:''':
-'''Podatki s poslanega obrazca:''',
 '''Search Titles''':
 '''Iskanje po naslovih''',
 '''Display context of search results''':

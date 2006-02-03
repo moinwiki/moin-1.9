@@ -297,13 +297,13 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 
 Login Password: %s
 
-Login URL: %s/?action=userform&uid=%s
+Login URL: %s/%s
 ''':
 '''Přihlašovací Jméno: %s
 
 Přihlašovací heslo: %s
 
-URL pro přihlášení: %s/?action=userform&uid=%s
+URL pro přihlášení: %s/%s
 ''',
 '''Somebody has requested to submit your account data to this email address.
 
@@ -488,10 +488,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Musíte udat typ diagramu!''',
 '''Bad chart type "%s"!''':
 '''Neplatný diagram typu "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Chybí požadovaný atribut "%(attrname)s"''',
-'''Submitted form data:''':
-'''Zadaná formulářová data:''',
 '''Search Titles''':
 '''Hledat v titulcích''',
 '''Display context of search results''':

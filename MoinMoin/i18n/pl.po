@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-12-21 21:30+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -515,13 +515,13 @@ msgstr "porównanie"
 msgid "matches"
 msgstr "porówniania"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Identyfikator czytelnika: %s\n"
 "\n"
@@ -826,13 +826,6 @@ msgstr "Podaj rodzaj wykresu!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "Nieprawidłowy rodzaj wykresu \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Brakuje niezbędnego atrybutu \"%(attrname)s\""
-
-msgid "Submitted form data:"
-msgstr "Dane przekazane z formularza:"
 
 msgid "Search Titles"
 msgstr "Przeszukaj tytuły"
@@ -1642,6 +1635,12 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Brakuje niezbędnego atrybutu \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Dane przekazane z formularza:"
 
 #~ msgid "EditText"
 #~ msgstr "Edytuj tekst"

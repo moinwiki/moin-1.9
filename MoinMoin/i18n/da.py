@@ -295,18 +295,6 @@ mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
 '''resultat''',
 '''matches''':
 '''resultater''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Brugernavn: %s
-
-Adgangskode: %s
-
-Adgangs-URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -490,10 +478,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Diagram-typen skal angives!''',
 '''Bad chart type "%s"!''':
 '''Dårlig diagram-type·"%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Krævet atribut "%(attrname)s" mangler.''',
-'''Submitted form data:''':
-'''Formular-informationer sendt:''',
 '''Search Titles''':
 '''Søg i titler''',
 '''Display context of search results''':

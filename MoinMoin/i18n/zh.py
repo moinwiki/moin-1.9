@@ -299,18 +299,6 @@ space between words. Group page name is not allowed.''':
 '''次匹配''',
 '''matches''':
 '''次匹配''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''登录帐号: %s
-
-登录口令: %s
-
-登录URL: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -493,10 +481,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''请指定图表类型!''',
 '''Bad chart type "%s"!''':
 '''错误的图表类型"%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''缺少需要的属性"%(attrname)s"''',
-'''Submitted form data:''':
-'''提交表单数据:''',
 '''Search Titles''':
 '''标题搜索''',
 '''Display context of search results''':

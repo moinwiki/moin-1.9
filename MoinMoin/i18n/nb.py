@@ -394,10 +394,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''Graftypen skal angis!''',
 '''Bad chart type "%s"!''':
 '''Feil graftype "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Obligatorisk attributt "%(attrname)s" mangler.''',
-'''Submitted form data:''':
-'''Skjemadata sendt:''',
 '''Search Titles''':
 '''Søk på tittel''',
 '''Display context of search results''':

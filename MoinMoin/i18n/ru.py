@@ -293,18 +293,6 @@ space between words. Group page name is not allowed.''':
 '''совпадение''',
 '''matches''':
 '''совпадений''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Имя: %s
-
-Пароль: %s
-
-URL для входа: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -483,10 +471,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Укажите тип диаграммы!''',
 '''Bad chart type "%s"!''':
 '''Плохой тип диаграммы "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Отсутствует требуемый атрибут"%(attrname)s"''',
-'''Submitted form data:''':
-'''Отправляемые данные:''',
 '''Search Titles''':
 '''Искать по заголовкам''',
 '''Display context of search results''':

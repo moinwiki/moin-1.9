@@ -300,18 +300,6 @@ El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai opcio
 '''coincidència''',
 '''matches''':
 '''coincidències''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/?action=userform&uid=%s
-''':
-'''Nom d\'entrada: %s
-
-Contrasenya d\'entrada: %s
-
-URL d\'entrada: %s/?action=userform&uid=%s
-''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -494,10 +482,6 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Heu de proveir un tipus de gràfica.''',
 '''Bad chart type "%s"!''':
 '''El tipus de gràfica «%s» és invàlid.''',
-'''Required attribute "%(attrname)s" missing''':
-'''Manca l\'atribut requerit «%(attrname)s»''',
-'''Submitted form data:''':
-'''Dades del formulari enviades:''',
 '''Search Titles''':
 '''Cerca els títols''',
 '''Display context of search results''':

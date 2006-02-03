@@ -38,7 +38,6 @@ formatter/text_xml.py
 macro/AbandonedPages.py
 macro/BR.py
 macro/FootNote.py
-macro/Form.py
 macro/FullSearch.py
 macro/GetText.py
 macro/Include.py

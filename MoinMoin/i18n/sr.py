@@ -359,10 +359,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Morate odrediti vrstu grafikona!''',
 '''Bad chart type "%s"!''':
 '''Loš grafikon tipa "%s"!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Potreban atribut "%(attrname)s" nedostaje''',
-'''Submitted form data:''':
-'''Podaci poslati u formularu:''',
 '''Display context of search results''':
 '''Prikazati kontekst pronađenih rezultata''',
 '''Case-sensitive searching''':

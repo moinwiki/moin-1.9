@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 15:08+0100\n"
+"POT-Creation-Date: 2006-02-03 22:55+0100\n"
 "PO-Revision-Date: 2005-11-11 07:18+0500\n"
 "Last-Translator: Igor TAmara <igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -519,13 +519,13 @@ msgstr "coincidencia"
 msgid "matches"
 msgstr "coincidencias"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/?action=userform&uid=%s\n"
+"Login URL: %s/%s\n"
 msgstr ""
 "Nombre de Ingreso: %s\n"
 "\n"
@@ -827,13 +827,6 @@ msgstr "¡Hay que indicar un tipo de gráfico!"
 #, python-format
 msgid "Bad chart type \"%s\"!"
 msgstr "¡Tipo de gráfico incorrecto \"%s\"!"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Falta el atributo requerido \"%(attrname)s\""
-
-msgid "Submitted form data:"
-msgstr "Formulario de información enviado:"
 
 msgid "Search Titles"
 msgstr "Búsqueda por Títulos"
@@ -1647,6 +1640,12 @@ msgstr "RenombrarPágina"
 
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Falta el atributo requerido \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Formulario de información enviado:"
 
 #~ msgid "EditText"
 #~ msgstr "EditarTexto"

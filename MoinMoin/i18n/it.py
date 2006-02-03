@@ -391,10 +391,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Devi specificare un tipo di grafico!''',
 '''Bad chart type "%s"!''':
 '''Tipo di grafico "%s" non valido!''',
-'''Required attribute "%(attrname)s" missing''':
-'''Manca l\'attributo obbligatorio "%(attrname)s" ''',
-'''Submitted form data:''':
-'''Dati inseriti:''',
 '''Search Titles''':
 '''Cerca per titolo''',
 '''Display context of search results''':
