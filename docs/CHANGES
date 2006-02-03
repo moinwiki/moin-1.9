@@ -15,11 +15,13 @@ Current dev version:
     * deron meranda's formatter API cleanup
     * added div and span to formatter API
     * allow hex and symbolic entities
-    * Removed old unfinished form and export code.
+    * removed old unfinished form and export code.
+    * if there is a user with empty password, we just generate a random one
+      when he requests it getting sent by mail. Thanks to Reimar Bauer.
 
   Fixes:
    * fixed table attribute parsing
-   * Fixed cookie handling wrt properties adherance.
+   * fixed cookie handling wrt properties adherance.
    * the new "." markup makes it possible to have a bulletless list with
      elements on the same level. Before this change and only using indentation
      with blanks, that would get merged into a single paragraph.

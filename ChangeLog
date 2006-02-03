@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-03 21:41:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-420
+
+    Summary:
+      generate rnd password when there is none yet
+    Revision:
+      moin--main--1.5--patch-420
+
+    generate rnd password when there is none yet
+    
+
+    modified files:
+     ChangeLog MoinMoin/user.py docs/CHANGES
+
+
 2006-02-03 21:30:15 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-419
 
     Summary:
