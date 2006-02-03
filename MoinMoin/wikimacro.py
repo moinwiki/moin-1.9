@@ -310,7 +310,7 @@ class Macro:
         if 0: # if wikixml.ok: # XXX currently switched off (not implemented)
             from MoinMoin import wikixml
             index = (index + self.formatter.url(1, 
-                wikiutil.quoteWikinameURL(self.formatter.page.page_name) + "?action=rss_ti", unescaped=1) +
+                wikiutil.quoteWikinameURL(self.formatter.page.page_name) + "?action=rss_ti", do_escape=0) +
                      self.formatter.icon("rss") +
                      self.formatter.url(0))
 
@@ -567,7 +567,7 @@ class Macro:
         if self.request.user.valid:
             # decode address and generate mailto: link
             email = decodeSpamSafeEmail(email)
-            result = (self.formatter.url(1, 'mailto:' + email, css='mailto', unescaped=1) +
+            result = (self.formatter.url(1, 'mailto:' + email, css='mailto', do_escape=0) +
                       self.formatter.text(text or email) +
                       self.formatter.url(0))
         else:

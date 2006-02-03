@@ -519,14 +519,15 @@ class Formatter(FormatterBase):
             else:
                 html_class = 'interwiki'
             title = kw.get('title', wikitag)
-            return self.url(1, href, title=title, unescaped=0, css=html_class)
-            # unescaped=1 was changed to 0 to make interwiki links with pages with umlauts (or other non-ascii) work
+            return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with umlauts
 
-    def url(self, on, url=None, css=None, **kw):
+    def url(self, on, url=None, css=None, do_escape=0, **kw):
         """ Inserts an <a> element.
 
             Call once with on=1 to start the link, and again with on=0
             to end it (no other arguments are needed when on==0).
+
+            do_escape: XXX doesn't work yet
 
             Keyword params:
                 url - the URL to link to; will go through Wiki URL mapping.
@@ -549,6 +550,11 @@ class Formatter(FormatterBase):
             del kw['href']
         if url is not None:
             url = wikiutil.mapURL(self.request, url)
+            
+            # TODO just calling url_quote does not work, as it will also quote "http:" to "http%xx" X)
+            if 0: # do_escape: # protocol and server part must not get quoted, path should get quoted
+                url = wikiutil.url_quote(url)
+            
             attrs['href'] = url
 
         if css:
@@ -719,12 +725,12 @@ class Formatter(FormatterBase):
                     src=AttachFile.getAttachUrl(
                     pagename, filename, self.request,
                     addts=1),
-                    usemap='#'+mapid, html_class="drawing"))
+                    usemap='#'+mapid, css="drawing"))
         else:
             return wikiutil.link_tag(self.request,
                                      edit_link,
                                      self.image(alt=url,
-                                                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), html_class="drawing"),
+                                                src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), css="drawing"),
                                      attrs='title="%s"' % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
         
     
@@ -1215,10 +1221,10 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             result = ("%s%s%s%s%s%s%s%s" %
                       (result,
                        kw.get('icons', ''),
-                       self.url(1, "#bottom", unescaped=1),
+                       self.url(1, "#bottom", do_escape=0),
                        self.icon('bottom'),
                        self.url(0),
-                       self.url(1, "#top", unescaped=1),
+                       self.url(1, "#top", do_escape=0),
                        self.icon('top'),
                        self.url(0)))
         return "%s%s%s" % (result, kw.get('icons', ''), number)

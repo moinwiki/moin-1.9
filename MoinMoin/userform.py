@@ -606,7 +606,7 @@ def do_user_browser(request):
         data.addRow((
             #request.formatter.code(1) + uid + request.formatter.code(0),
             request.formatter.rawHTML(namelink),
-            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', unescaped=1) +
+            (request.formatter.url(1, 'mailto:' + account.email, css='mailto', do_escape=0) +
              request.formatter.text(account.email) +
              request.formatter.url(0)),
             request.page.link_to(request, text=_('Mail me my account data'),
