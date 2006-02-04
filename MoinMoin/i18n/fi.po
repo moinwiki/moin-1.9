@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -591,6 +591,11 @@ msgstr "Tämä sähköposti kuuluu jo jollekin toiselle."
 msgid "User account created! You can use this account to login now..."
 msgstr "Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Teemaa '%(theme_name)s' ei voida ladata!"
@@ -609,6 +614,9 @@ msgstr "suosikki"
 
 msgid "free choice"
 msgstr "valittavissa"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Tallenna"

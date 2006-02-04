@@ -297,6 +297,18 @@ Les noms des pages des groupes sont interdits.''',
 '''correspondance''',
 '''matches''':
 '''correspondances''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Nom : %s
+
+Mot de passe : %s
+
+URL de connexion : %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the

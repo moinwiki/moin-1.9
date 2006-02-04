@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2006-02-02 02:00+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -592,6 +592,12 @@ msgstr "Ta e-poštni naslov si že lasti nekdo drug."
 msgid "User account created! You can use this account to login now..."
 msgstr "Uporabniško ime je narejeno, sedaj se lahko prijavite..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Uporabite UserPreferences za spremembo nastavitev ali za izdelavo novega "
+"uporabniškega imena."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Teme (izgleda) '%(theme_name)s' ni možno naložiti!"
@@ -610,6 +616,9 @@ msgstr "izbrani"
 
 msgid "free choice"
 msgstr "prosta izbira"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Shrani"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -592,6 +592,9 @@ msgstr "Dit e-mailadres behoort is al in gebruik."
 msgid "User account created! You can use this account to login now..."
 msgstr ""
 
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Het thema '%(theme_name)s' kan niet worden geladen!"
@@ -609,6 +612,9 @@ msgid "the one preferred"
 msgstr ""
 
 msgid "free choice"
+msgstr ""
+
+msgid "Select User"
 msgstr ""
 
 msgid "Save"

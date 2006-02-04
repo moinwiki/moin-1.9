@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2004-11-21 22:09+0100\n"
 "Last-Translator: gian paolo ciceri <gp.ciceri@acm.org>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -591,6 +591,9 @@ msgstr "Questo indirizzo email è gia utilizzato da qualcun altro."
 msgid "User account created! You can use this account to login now..."
 msgstr ""
 
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Il tema '%(theme_name)s' no può essere caricato"
@@ -608,6 +611,9 @@ msgid "the one preferred"
 msgstr ""
 
 msgid "free choice"
+msgstr ""
+
+msgid "Select User"
 msgstr ""
 
 msgid "Save"

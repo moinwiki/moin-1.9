@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -573,6 +573,10 @@ msgstr "别人已经用这个电子邮件注册过了."
 msgid "User account created! You can use this account to login now..."
 msgstr "用户帐号成功创建! 即时起您就可以用此帐户登录..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "未能装载主题'%(theme_name)s'!"
@@ -591,6 +595,9 @@ msgstr "您喜爱的"
 
 msgid "free choice"
 msgstr "随意选择"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"

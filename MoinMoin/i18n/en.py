@@ -350,6 +350,8 @@ Contact the owner of the wiki, who can enable email.''',
 '''This email already belongs to somebody else.''',
 '''User account created! You can use this account to login now...''':
 '''User account created! You can use this account to login now...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Use UserPreferences to change settings of the selected user account''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''The theme \'%(theme_name)s\' could not be loaded!''',
 '''User preferences saved!''':
@@ -362,6 +364,8 @@ Contact the owner of the wiki, who can enable email.''',
 '''the one preferred''',
 '''free choice''':
 '''free choice''',
+'''Select User''':
+'''Select User''',
 '''Save''':
 '''Save''',
 '''Preferred theme''':

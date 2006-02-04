@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -596,6 +596,12 @@ msgstr ""
 "نام کاربری شما ایجاد شد! شما می توانید از این نام کاربری برای ورود به سیستم "
 "استفاده کنید..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"از بخش مرجع کاربران برای تغییر تنظیمات خود و یا ایجاد یک حساب جدید استفاده "
+"نمایید."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "تم درخواستی شما '%(theme_name)s' بالا نیامد!"
@@ -614,6 +620,9 @@ msgstr "مورد ترجیح داده شده"
 
 msgid "free choice"
 msgstr "گزینه رایگان"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "ذخیره کن"

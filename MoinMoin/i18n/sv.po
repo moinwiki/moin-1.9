@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-12-21 18:59+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -596,6 +596,12 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Använd AnvändarInställningar för att ändra dina inställningar eller skapa "
+"ett konto."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Temat '%(theme_name)s' kunde inte laddas!"
@@ -614,6 +620,9 @@ msgstr "den som föredras"
 
 msgid "free choice"
 msgstr "valfritt"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Spara"

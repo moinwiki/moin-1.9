@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -603,6 +603,12 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "S'ha creat el compte d'usuari! Podeu utilitzar aquest compte per a entrar."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un "
+"compte."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "No s'ha pogut carregar el tema «%(theme_name)s."
@@ -621,6 +627,9 @@ msgstr "el preferit"
 
 msgid "free choice"
 msgstr "selecció lliure"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Desa"

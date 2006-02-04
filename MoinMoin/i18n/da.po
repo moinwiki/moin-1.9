@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-11-18 21:40+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -592,6 +592,12 @@ msgstr "Denne email-adresse tilhører allerede en anden."
 msgid "User account created! You can use this account to login now..."
 msgstr "Brugerprofil oprettet. Du kan bruge denne konto til at logge på nu..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Brug BrugerProfil til at ændre dinne indstillinger eller oprette en "
+"brugerprofil."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Temaet '%(theme_name)s' kunne ikke indlæses!"
@@ -610,6 +616,9 @@ msgstr "den foretrukne"
 
 msgid "free choice"
 msgstr "frit valg"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Gem"

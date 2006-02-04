@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -604,6 +604,12 @@ msgstr ""
 "Contul de utilizator a fost creat! Puteţi folosi acest cont pentru login "
 "acum..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Folosire PreferinţeUtilizator la schimbarea setărilor sau la crearea unui "
+"cont."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Tema '%(theme_name)s' nu a putut fi încărcată!"
@@ -622,6 +628,9 @@ msgstr "cel preferat"
 
 msgid "free choice"
 msgstr "alegere liberă"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Salvare"

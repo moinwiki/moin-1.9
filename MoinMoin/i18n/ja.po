@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2006-01-25 00:34+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -596,6 +596,12 @@ msgstr ""
 "ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインで"
 "きます。"
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用して"
+"ください。"
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "テーマ'%(theme_name)s'を読み込めませんでした。"
@@ -614,6 +620,9 @@ msgstr "お好み"
 
 msgid "free choice"
 msgstr "自由選択"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
