@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 15:07:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-427
+
+    Summary:
+      switch user functionality for superuser
+    Revision:
+      moin--main--1.5--patch-427
+
+    switch user functionality for superuser
+    
+
+    modified files:
+     ChangeLog MoinMoin/userform.py docs/CHANGES
+
+
 2006-02-04 14:24:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-426
 
     Summary:

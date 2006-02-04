@@ -157,6 +157,21 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             if _debug:
                 result = result + util.dumpFormData(form)
             return result
+            
+        if form.has_key('select_user'): # Select user profile (su user)
+            if (wikiutil.checkTicket(self.request.form['ticket'][0]) and
+                self.request.user.name in self.request.cfg.superuser and
+                self.request.request_method == 'POST'):
+                su_user = form.get('selected_user', [''])[0]
+                uid = user.getUserId(self.request, su_user)
+                theuser = user.User(self.request, uid)
+                theuser.disabled = None
+                theuser.save()
+                self.request.user = theuser
+                self.request.setCookie()
+                return  _("Use UserPreferences to change settings of the selected user account")
+            else:
+                return _("Use UserPreferences to change your settings or create an account.")
 
         if form.has_key('save'): # Save user profile
             if self.request.request_method != 'POST':
@@ -386,6 +401,19 @@ class UserSettings:
                 
         return util.web.makeSelection('language', options, cur_lang)
   
+    def _user_select(self):
+        options = []
+        users = user.getUserList(self.request)
+        for uid in users:
+            name = user.User(self.request, id=uid).name
+            if name: # why do we have empty names?
+                options.append((name, name))
+        options.sort()
+
+        size = min(5, len(options))  
+        current_user = self.request.user.name
+        return util.web.makeSelection('selected_user', options, current_user, size=size)
+            
     def _theme_select(self):
         """ Create theme selection. """
         cur_theme = self.request.user.valid and self.request.user.theme_name or self.cfg.theme_default
@@ -444,6 +472,19 @@ class UserSettings:
         _ = self._
         self.make_form()
 
+        if self.request.user.name in self.request.cfg.superuser:
+            ticket = wikiutil.createTicket()
+            self.make_row(_('Select User'), [self._user_select()])
+            self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
+            buttons = [("select_user", _('Select User'))]
+            button_cell = []
+            for name, label in buttons:
+                 button_cell.extend([
+                     html.INPUT(type="submit", name=name, value=label),
+                     ' ',
+                 ])
+            self.make_row('', button_cell)
+            
         if self.request.user.valid and not create_only:
             buttons = [('save', _('Save'))]
             uf_remove = self.cfg.user_form_remove

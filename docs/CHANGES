@@ -1,7 +1,7 @@
 MoinMoin Version History
 ========================
 
-Version 1.5.2rc1:
+Version 1.5.2.current:
 
   New features:
     * Added FullSearchCached macro which is statically cached.
@@ -18,6 +18,10 @@ Version 1.5.2rc1:
     * removed old unfinished form and export code.
     * if there is a user with empty password, we just generate a random one
       when he requests it getting sent by mail. Thanks to Reimar Bauer.
+    * the superuser now can switch to another user using UserPreferences -
+      nice to help your users when they forgot their password or need other
+      help. You need to logout/relogin to use your own userid afterwards.
+      Thanks to Reimar Bauer.
 
   Fixes:
    * fixed table attribute parsing
