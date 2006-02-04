@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -590,6 +590,10 @@ msgstr "Tato emailová adresa patří již někomu jinému."
 msgid "User account created! You can use this account to login now..."
 msgstr "Účet byl vytvořen! Nyní se na něj lze přihlásit..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "Své nastavení změníte nebo účet vytvoříte v NastaveniUzivatele."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Nemohu nahrát téma '%(theme_name)s'!"
@@ -608,6 +612,9 @@ msgstr "jen oblíbený"
 
 msgid "free choice"
 msgstr "nechat možnost volby"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Uložit"

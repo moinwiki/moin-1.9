@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -607,6 +607,12 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein "
+"Konto zu erzeugen."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Das Theme '%(theme_name)s' konnte nicht geladen werden!"
@@ -625,6 +631,9 @@ msgstr "der Bevorzugte"
 
 msgid "free choice"
 msgstr "Freie Auswahl"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Speichern"

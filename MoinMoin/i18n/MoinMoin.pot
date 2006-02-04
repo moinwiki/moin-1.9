@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,6 +494,9 @@ msgstr ""
 msgid "User account created! You can use this account to login now..."
 msgstr ""
 
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr ""
@@ -511,6 +514,9 @@ msgid "the one preferred"
 msgstr ""
 
 msgid "free choice"
+msgstr ""
+
+msgid "Select User"
 msgstr ""
 
 msgid "Save"

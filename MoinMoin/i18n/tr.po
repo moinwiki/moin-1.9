@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -620,6 +620,12 @@ msgstr ""
 "Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz "
 "artık."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için "
+"KullanıcıÖzellikleri sayfasını kullanabilirsiniz."
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "'%(theme_name)s' teması yüklenemiyor!"
@@ -638,6 +644,9 @@ msgstr "Tercih edilen"
 
 msgid "free choice"
 msgstr "İsteğe bağlı seçim"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Kaydet"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 22:55+0100\n"
+"POT-Creation-Date: 2006-02-04 18:59+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -599,6 +599,12 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu..."
 
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet "
+"LietotājaIstatījumi"
+
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "Nevar ielādēt tēmu '%(theme_name)s'!"
@@ -617,6 +623,9 @@ msgstr "viens vēlamais"
 
 msgid "free choice"
 msgstr "brīva izvēle"
+
+msgid "Select User"
+msgstr ""
 
 msgid "Save"
 msgstr "Saglabāt"
