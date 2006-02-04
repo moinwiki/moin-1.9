@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 12:40:42 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-424
+
+    Summary:
+      adjusting some surge protection limits
+    Revision:
+      moin--main--1.5--patch-424
+
+    adjusting some surge protection limits
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py MoinMoin/request.py
+
+
 2006-02-03 22:49:50 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-423
 
     Summary:
