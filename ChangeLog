@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 21:31:20 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-431
+
+    Summary:
+      added a little border/margin to make classic/modern edit screen look better
+    Revision:
+      moin--main--1.5--patch-431
+
+    added a little border/margin to make classic/modern edit screen look better
+    
+
+    modified files:
+     ChangeLog wiki/htdocs/classic/css/screen.css
+     wiki/htdocs/modern/css/screen.css
+
+
 2006-02-04 21:21:16 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-430
 
     Summary:
