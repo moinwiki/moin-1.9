@@ -60,7 +60,7 @@ CarpeWiki http://carpe.com/wiki/wiki.pl?
 CommunityWiki http://www.emacswiki.org/cgi-bin/community?
 CraoWiki http://wiki.crao.net/index.php/
 CreationMatters http://www.ourpla.net/cgi-bin/wiki.pl?
-DebianforumDeWiki http://www.debianforum.de/wiki/?page=
+DebianforumDeWiki http://wiki.debianforum.de/
 Dictionary http://www.dict.org/bin/Dict?Database=*&Form=Dict1&Strategy=*&Query=
 Disinfopedia http://www.disinfopedia.org/wiki.phtml?title=
 DseWiki http://www.wikiservice.at/dse/wiki.cgi?
