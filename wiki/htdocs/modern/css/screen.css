@@ -39,8 +39,8 @@ textarea {
 /* user interface styles */
 
 #header {
-    margin: 0;
-    padding: 0;
+    margin: 1px;
+    padding: 1px;
     /* background: #3D4551; */
     background: #E7E7E7;
     line-height: 1.1em;

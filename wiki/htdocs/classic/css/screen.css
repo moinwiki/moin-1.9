@@ -35,8 +35,8 @@ pre {
 /* user interface styles */
 
 #header {
-    margin: 0;
-    padding: 0;
+    margin: 1px;
+    padding: 1px;
     line-height: 1.1em;
 }
 
