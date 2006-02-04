@@ -300,10 +300,13 @@ class DefaultConfig:
     surge_action_limits = { # allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
         'show': (20, 60),
+        'raw': (20, 40),  # some people use this for css
+        'AttachFile': (60, 60),
+        'diff': (30, 60),
         'fullsearch': (5, 60),
         'edit': (10, 120),
-        'rss_rc': (1, 20),
-        'default': (60, 60),
+        'rss_rc': (1, 60),
+        'default': (30, 60),
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
     

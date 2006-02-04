@@ -175,7 +175,7 @@ class RequestBase(object):
             return False
         
         limits = self.cfg.surge_action_limits
-        default_limit = self.cfg.surge_action_limits.get('default', (60, 60))
+        default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
         
         now = int(time.time())
         surgedict = {}
