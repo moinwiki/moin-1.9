@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 13:10:42 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-425
+
+    Summary:
+      1.5.2rc1 - bumped version, make install-docs, interwiki, underlay, pagepacks
+    Revision:
+      moin--main--1.5--patch-425
+
+    1.5.2rc1 - bumped version, make install-docs, interwiki, underlay, pagepacks
+    
+
+    modified files:
+     ChangeLog MoinMoin/version.py docs/CHANGES docs/INSTALL.html
+     moin.spec wiki/data/intermap.txt wiki/underlay.tar.bz2
+
+
 2006-02-04 12:40:42 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-424
 
     Summary:
