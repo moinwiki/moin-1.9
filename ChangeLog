@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 21:21:16 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-430
+
+    Summary:
+      make farmconfig samples easier to use for a single wiki, too
+    Revision:
+      moin--main--1.5--patch-430
+
+    make farmconfig samples easier to use for a single wiki, too
+    
+
+    modified files:
+     ChangeLog wiki/config/wikiconfig.py
+     wiki/config/wikifarm/farmconfig.py
+     wiki/config/wikifarm/mywiki.py
+
+    renamed files:
+     wiki/config/wikifarm/.arch-ids/moinmaster.py.id
+       ==> wiki/config/wikifarm/.arch-ids/mywiki.py.id
+     wiki/config/wikifarm/moinmaster.py
+       ==> wiki/config/wikifarm/mywiki.py
+
+
 2006-02-04 18:23:14 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-429
 
     Summary:
