@@ -18,18 +18,17 @@ from farmconfig import FarmConfig
 # now we subclass that config (inherit from it) and change what's different:
 class Config(FarmConfig):
 
-
     # basic options (you normally need to change these)
-    sitename = u'MoinMaster' # [Unicode]
-    interwikiname = 'MoinMaster'
+    sitename = u'MyWiki' # [Unicode]
+    interwikiname = 'MyWiki'
 
     # name of entry page / front page [Unicode], choose one of those:
-    
+
     # a) if most wiki content is in a single language
     #page_front_page = u"MyStartingPage"
-    
+
     # b) if wiki content is maintained in many languages
     page_front_page = u"FrontPage"
 
-    data_dir = '/org/de.wikiwikiweb.moinmaster/data/'
+    data_dir = '/org/mywiki/data/'
 

@@ -9,9 +9,8 @@
 """
     MoinMoin - Configuration for a wiki farm
 
-    If you run a single wiki only, you can omit this file file and just
-    use wikiconfig.py - it will be used for every request we get in that
-    case.
+    If you run a single wiki only, you can keep the "wikis" list "as is"
+    (it has a single rule mapping all requests to mywiki.py).
 
     Note that there are more config options than you'll find in
     the version of this file that is installed by default; see
@@ -20,9 +19,6 @@
 
     Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
     a list of config options.
-
-    @copyright: 2000-2005 by Juergen Hermann <jh@web.de>
-    @license: GNU GPL, see COPYING for details.
 """
 
 
@@ -44,11 +40,16 @@
 #  * in the right part, "^" means "beginning" and "$" means "end"
 
 wikis = [
-    # wikiname,     url regular expression (no protocol)
     # Standalone server needs the port e.g. localhost:8000
     # Twisted server can now use the port, too.
-    ("moinmaster",  r"^moinmaster.wikiwikiweb.de/.*$"),
-    ("moinmoin",    r"^moinmoin.wikiwikiweb.de/.*$"),
+    
+    # wikiname,     url regular expression (no protocol)
+    # ---------------------------------------------------------------
+    ("mywiki",  r".*"),   # this is ok for a single wiki
+
+    # for multiple wikis, do something like this:
+    #("moinmoin",    r"^moinmoin.wikiwikiweb.de/.*$"),
+    #("moinmaster",  r"^moinmaster.wikiwikiweb.de/.*$"),
 ]
 
 
@@ -93,26 +94,26 @@ class FarmConfig(DefaultConfig):
     # This must be '/wiki' for twisted and standalone. For CGI, it should
     # match your Apache Alias setting.
     url_prefix = '/wiki'
-    
+
 
     # Security ----------------------------------------------------------
 
     # This is checked by some rather critical and potentially harmful actions,
     # like despam or PackageInstaller action:
     #superuser = [u"YourName", ]
-    
+
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
     #acl_rights_before = u"YourName:read,write,delete,revert,admin"
-    
+
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
     #from MoinMoin.util.antispam import SecurityPolicy
 
 
     # Mail --------------------------------------------------------------
-    
+
     # Configure to enable subscribing to pages (disabled by default) or
     # sending forgotten passwords.
 
@@ -127,7 +128,7 @@ class FarmConfig(DefaultConfig):
 
 
     # User interface ----------------------------------------------------
-    
+
     # Add your wikis important pages at the end. It is not recommended to
     # remove the default links.  Leave room for user links - don't use
     # more than 6 short items.
@@ -144,7 +145,7 @@ class FarmConfig(DefaultConfig):
 
     # The default theme anonymous or new users get
     theme_default = 'modern'
-    
+
 
     # Language options --------------------------------------------------
 
@@ -157,7 +158,6 @@ class FarmConfig(DefaultConfig):
     # You must use Unicode strings here [Unicode]
     page_category_regex = u'^Category[A-Z]'
     page_dict_regex = u'[a-z]Dict$'
-    page_form_regex = u'[a-z]Form$'
     page_group_regex = u'[a-z]Group$'
     page_template_regex = u'[a-z]Template$'
 
@@ -170,7 +170,7 @@ class FarmConfig(DefaultConfig):
     # nice for farm setups or when your logo does not show the wiki's name.
     show_interwiki = 1
     logo_string = u''
-   
+
     # Enable graphical charts, requires gdchart.
     #chart_options = {'width': 600, 'height': 300}
 

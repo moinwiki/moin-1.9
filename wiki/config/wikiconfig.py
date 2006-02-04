@@ -23,9 +23,6 @@
 
     ** Please do not use this file for a wiki farm. Use the sample file 
     from the wikifarm directory instead! **
-
-    @copyright: 2000-2005 by Juergen Hermann <jh@web.de>
-    @license: GNU GPL, see COPYING for details.
 """
 
 from MoinMoin.multiconfig import DefaultConfig
@@ -44,10 +41,10 @@ class Config(DefaultConfig):
     logo_string = u'<img src="/wiki/common/moinmoin.png" alt="MoinMoin Logo">'
 
     # name of entry page / front page [Unicode], choose one of those:
-    
+
     # a) if most wiki content is in a single language
     #page_front_page = u"MyStartingPage"
-    
+
     # b) if wiki content is maintained in many languages
     #page_front_page = u"FrontPage"
 
@@ -56,8 +53,7 @@ class Config(DefaultConfig):
     # Show the interwiki name (and link it to page_front_page) in the Theme,
     # nice for farm setups or when your logo does not show the wiki's name.
     #show_interwiki = 1
-    
-    
+
 
     # Critical setup  ---------------------------------------------------
 
@@ -81,26 +77,26 @@ class Config(DefaultConfig):
     # This must be '/wiki' for twisted and standalone. For CGI, it should
     # match your Apache Alias setting.
     url_prefix = '/wiki'
-    
+
 
     # Security ----------------------------------------------------------
 
     # This is checked by some rather critical and potentially harmful actions,
     # like despam or PackageInstaller action:
     #superuser = [u"YourName", ]
-    
+
     # IMPORTANT: grant yourself admin rights! replace YourName with
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
     #acl_rights_before = u"YourName:read,write,delete,revert,admin"
-    
+
     # Link spam protection for public wikis (Uncomment to enable)
     # Needs a reliable internet connection.
     #from MoinMoin.util.antispam import SecurityPolicy
 
 
     # Mail --------------------------------------------------------------
-    
+
     # Configure to enable subscribing to pages (disabled by default)
     # or sending forgotten passwords.
 
@@ -115,7 +111,7 @@ class Config(DefaultConfig):
 
 
     # User interface ----------------------------------------------------
-    
+
     # Add your wikis important pages at the end. It is not recommended to
     # remove the default links.  Leave room for user links - don't use
     # more than 6 short items.
@@ -132,7 +128,7 @@ class Config(DefaultConfig):
 
     # The default theme anonymous or new users get
     theme_default = 'modern'
-    
+
 
     # Language options --------------------------------------------------
 
