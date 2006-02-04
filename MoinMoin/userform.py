@@ -405,9 +405,8 @@ class UserSettings:
         options = []
         users = user.getUserList(self.request)
         for uid in users:
-            name = user.User(self.request, id=uid).name
-            if name: # why do we have empty names?
-                options.append((name, name))
+            name = user.User(self.request, id=uid).name # + '_' + uid # for debugging
+            options.append((name, name))
         options.sort()
 
         size = min(5, len(options))  

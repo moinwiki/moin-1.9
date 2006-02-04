@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-04 18:23:14 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-429
+
+    Summary:
+      userlist for switch user: removed skipping of empty names
+    Revision:
+      moin--main--1.5--patch-429
+
+    userlist for switch user: removed skipping of empty names
+    
+
+    modified files:
+     ChangeLog MoinMoin/userform.py
+
+
 2006-02-04 18:15:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-428
 
     Summary:
