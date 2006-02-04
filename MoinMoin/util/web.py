@@ -51,7 +51,7 @@ def getLinkIcon(request, formatter, scheme):
 
     return request.theme.make_icon(icon)
 
-def makeSelection(name, values, selectedval=None):
+def makeSelection(name, values, selectedval=None, size=1):
     """ Make a HTML <select> element named `name` from a value list.
         The list can either be a list of strings, or a list of
         (value, label) tuples.
@@ -59,7 +59,7 @@ def makeSelection(name, values, selectedval=None):
         `selectedval` is the value that should be pre-selected.
     """
     from MoinMoin.widget import html
-    result = html.SELECT(name=name)
+    result = html.SELECT(name=name, size="%d" % int(size))
     for val in values:
         if not isinstance(val, type(())):
             val = (val, val)
