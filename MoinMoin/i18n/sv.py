@@ -301,6 +301,18 @@ med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
 '''träff''',
 '''matches''':
 '''träffar''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Inloggningsnamn: %s
+
+Inloggningslösenord: %s
+
+Inloggnings-URL: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -344,6 +356,8 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Den här epostadressen tillhör redan någon annan.''',
 '''User account created! You can use this account to login now...''':
 '''Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Använd AnvändarInställningar för att ändra inställningar för det valda användarkontot''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Temat \'%(theme_name)s\' kunde inte laddas!''',
 '''User preferences saved!''':
@@ -356,6 +370,8 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''den som föredras''',
 '''free choice''':
 '''valfritt''',
+'''Select User''':
+'''Välj användare''',
 '''Save''':
 '''Spara''',
 '''Preferred theme''':

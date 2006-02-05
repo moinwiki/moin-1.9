@@ -590,9 +590,8 @@ msgstr "Tato emailová adresa patří již někomu jinému."
 msgid "User account created! You can use this account to login now..."
 msgstr "Účet byl vytvořen! Nyní se na něj lze přihlásit..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
-msgstr "Své nastavení změníte nebo účet vytvoříte v NastaveniUzivatele."
+msgstr "Změňte nastavení vybraného účtu v NastaveniUzivatele."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -614,7 +613,7 @@ msgid "free choice"
 msgstr "nechat možnost volby"
 
 msgid "Select User"
-msgstr ""
+msgstr "Zvolit Účet"
 
 msgid "Save"
 msgstr "Uložit"

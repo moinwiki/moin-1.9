@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2005-12-21 18:59+0100\n"
+"PO-Revision-Date: 2006-02-05 14:22+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -514,7 +514,7 @@ msgstr "träff"
 msgid "matches"
 msgstr "träffar"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -526,7 +526,7 @@ msgstr ""
 "\n"
 "Inloggningslösenord: %s\n"
 "\n"
-"Inloggnings-URL: %s/?action=userform&uid=%s\n"
+"Inloggnings-URL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -596,11 +596,10 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Använd AnvändarInställningar för att ändra dina inställningar eller skapa "
-"ett konto."
+"Använd AnvändarInställningar för att ändra inställningar för det valda "
+"användarkontot"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -622,7 +621,7 @@ msgid "free choice"
 msgstr "valfritt"
 
 msgid "Select User"
-msgstr ""
+msgstr "Välj användare"
 
 msgid "Save"
 msgstr "Spara"
@@ -1638,42 +1637,3 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
-
-#~ msgid "Required attribute \"%(attrname)s\" missing"
-#~ msgstr "Obligatoriskt attribut \"%(attrname)s\" saknas"
-
-#~ msgid "Submitted form data:"
-#~ msgstr "Skickade formulärinfo:"
-
-#~ msgid "EditText"
-#~ msgstr "RedigeraText"
-
-#~ msgid "Immutable page"
-#~ msgstr "Skrivskyddad sida"
-
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Kakan togs bort. Du är nu utloggad."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Okänt användarnamn: {{{\"%s\"}}}. Var god ange ditt användarnamn och "
-#~ "lösenord."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Lösenord saknas. Var god ange ditt användarnamn och lösenord."
-
-#~ msgid "Account \"%s\" is disabled."
-#~ msgstr "Kontot \"%s\" är avstängt."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Tyvärr, felaktigt lösenord."
-
-#~ msgid "Bad relogin URL."
-#~ msgstr "Ogiltig ominloggnings-URL."
-
-#~ msgid "Unknown user."
-#~ msgstr "Okänd användare."
-
-#~ msgid "User account created!"
-#~ msgstr "Användarkonto skapat!"
