@@ -1,82 +1,86 @@
 MoinMoin Version History
 ========================
 
-Version 1.5.2.current:
+Please completely read CHANGES text until you reach the version you were
+using until now. Otherwise you might miss some important upgrading and
+configuration hints.
+
+This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
+already better than 1.3.5 (our previous stable release), at least for the
+features that are not new in 1.5.x.
+
+Our release policy is not trying to make a "perfect release" (as that
+release might NEVER get released), but to make progress and don't delay
+releases too much.
+
+Known main issues:
+
+  * The GUI WYSIWYG editor has still some issues and limitations.
+    If you can't live with those, you can simply switch it off by using:
+    editor_force = True
+    editor_default = 'text'  # internal default, just for completeness
+
+  * TWikiDraw may have some issues - we need some JAVA guy caring for it!
+
+  * "Backup" and especially "Restore" action (both new in 1.5) have some
+    issues, so please DON'T USE THEM except if you want to help debugging
+    and improving it and after having made a backup with some other, proven
+    method. USE BOTH ON YOUR OWN RISK!
+
+  * Many (50+) tests are currently failing because they are too restrictive
+    and do not match the (output of the) code they should test.
+    If you want to compare, I included the output of this test run:
+    $ make test >tests/make_test.out
+
+
+Version 1.5.2:
 
   New features:
     * Added FullSearchCached macro which is statically cached.
       Use it if you do not depend on fresh search results but prefer raw speed.
-
-  Other changes:
-    * added surge protection (TODO: configurability)
-    * added "voyager" to bot useragent list
-    * added locking for caching subsystem
-    * add new markup for bulletless lists: just use a "." instead of "*".
-    * deron meranda's formatter API cleanup
-    * added div and span to formatter API
-    * allow hex and symbolic entities
-    * removed old unfinished form and export code.
-    * if there is a user with empty password, we just generate a random one
+    * Added surge protection, see HelpOnConfiguration/SurgeProtection.
+    * Allow hex and symbolic entities.
+    * If there is a user with empty password, we just generate a random one
       when he requests it getting sent by mail. Thanks to Reimar Bauer.
-    * the superuser now can switch to another user using UserPreferences -
+    * The superuser now can switch to another user using UserPreferences -
       nice to help your users when they forgot their password or need other
       help. You need to logout/relogin to use your own userid afterwards.
       Thanks to Reimar Bauer.
+    * Add new markup for bulletless lists: just use a "." instead of "*".
+
+  Other changes:
+    * Added "voyager" to bot useragent list.
+    * Added locking for caching subsystem.
+    * Deron Meranda's formatter API cleanup.
+    * Added div and span to formatter API.
+    * Removed old unfinished form and export code.
+    * updated i18n
 
   Fixes:
-   * fixed table attribute parsing
-   * fixed cookie handling wrt properties adherance.
-   * the new "." markup makes it possible to have a bulletless list with
+   * Fixed table attribute parsing.
+   * Fixed cookie handling wrt properties adherance.
+   * The new "." list markup makes it possible to have a bulletless list with
      elements on the same level. Before this change and only using indentation
      with blanks, that would get merged into a single paragraph.
-   * it is possible now to have multiple paragraphs in the same list element
-   * fixed GAP processing for ordered lists
-   * fix text_gedit formatter's invalid list nesting
-   * fixed hr crash in blockquote (but needs more work)
-   * fixed FootNote's formatter usage
-   * fixed rst's headline levels
-   * fixed MoinMoinBugs/WikiParserThinksItIsInsidePreWhenItIsNot
-   * fixed MoinMoinBugs/ListItemGeneratedOutsideList
-   * fixed that macros were followed by a wrong <p>
-   * added <blockquote> to the block elements in the text_html formatter,
+   * It is possible now to have multiple paragraphs in the same list element,
+     just leave an empty line in between the paragraphs.
+   * Fixed GAP processing for ordered lists.
+   * Fix text_gedit formatter's invalid list nesting.
+   * Fixed hr crash in blockquote (but needs more work).
+   * Fixed FootNote's formatter usage.
+   * Fixed rst's headline levels.
+   * Fixed MoinMoinBugs/WikiParserThinksItIsInsidePreWhenItIsNot
+   * Fixed MoinMoinBugs/ListItemGeneratedOutsideList
+   * Fixed that macros were followed by a wrong <p>.
+   * Added <blockquote> to the block elements in the text_html formatter,
      so it does not close it erratically when you close a inner <p>.
    * GUI editor converter now also accept http: urls without // (relative or
-     same server urls)
+     same server urls).
    * Fixed the DocBook parser in cases where the pagename was non-ascii.
-   * fixed MoinMoinBugs/ProcessInlineDontSupportUlElement
+   * Fixed MoinMoinBugs/ProcessInlineDontSupportUlElement
+
 
 Version 1.5.1:
-  Please completely read CHANGES text until you reach the version you were
-  using until now. Otherwise you might miss some important upgrading and
-  configuration hints.
-
-  This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
-  already better than 1.3.5 (our previous stable release), at least for the
-  features that are not new in 1.5.0.
-
-  Our release policy is not trying to make a "perfect release" (as that
-  release might NEVER get released), but to make progress and don't delay
-  releases too much.
-
-  Known main issues:
-
-    * The GUI WYSIWYG editor has still some issues and limitations.
-      If you can't live with those, you can simply switch it off by using:
-      editor_force = True
-      editor_default = 'text'  # internal default, just for completeness
-
-    * TWikiDraw may have some issues - we need some JAVA guy caring for it!
-
-    * "Backup" and especially "Restore" action (both new in 1.5) have some
-      issues, so please DON'T USE THEM except if you want to help debugging
-      and improving it and after having made a backup with some other, proven
-      method. USE BOTH ON YOUR OWN RISK!
-
-    * Many unit tests are currently showing suboptimal results because they were
-      written too restrictively and some team members did not consider fixing them
-      when they changed the behaviour of some code parts (without breaking those).
-      If you want to compare, we included the output of this test run:
-      $ make test >tests/make_test.out
 
   Fixes:
     * Fixed rst parser docutils version check
