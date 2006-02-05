@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-05 13:19:27 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-432
+
+    Summary:
+      fixed MoinMoinBugs/ProcessInlineDontSupportUlElement, some converter code cleanup
+    Revision:
+      moin--main--1.5--patch-432
+
+    fixed MoinMoinBugs/ProcessInlineDontSupportUlElement, some converter code cleanup
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+     docs/CHANGES
+
+
 2006-02-04 21:31:20 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-431
 
     Summary:
