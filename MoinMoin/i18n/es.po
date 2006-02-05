@@ -519,7 +519,7 @@ msgstr "coincidencia"
 msgid "matches"
 msgstr "coincidencias"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -527,11 +527,11 @@ msgid ""
 "\n"
 "Login URL: %s/%s\n"
 msgstr ""
-"Nombre de Ingreso: %s\n"
+"Nombre de Usuario: %s\n"
 "\n"
-"Contraseña de Ingreso: %s\n"
+"Contraseña de Usuario: %s\n"
 "\n"
-"URL de Ingreso: %s/?action=userform&uid=%s\n"
+"URL de Usuario: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -604,10 +604,10 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Se creó la cuenta de usuario! Puede usarla para entrar desde ya al sistema..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Use PreferenciasDelUsuario para cambiar sus preferencias o crear una cuenta"
+"Usa PreferenciasDelUsuario para cambiar las preferencias de la cuenta del "
+"usuario seleccionado"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -629,7 +629,7 @@ msgid "free choice"
 msgstr "elección libre"
 
 msgid "Select User"
-msgstr ""
+msgstr "Seleccionar Usuario"
 
 msgid "Save"
 msgstr "Guardar"

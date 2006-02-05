@@ -346,6 +346,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Tato emailová adresa patří již někomu jinému.''',
 '''User account created! You can use this account to login now...''':
 '''Účet byl vytvořen! Nyní se na něj lze přihlásit...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Změňte nastavení vybraného účtu v NastaveniUzivatele.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nemohu nahrát téma \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -358,6 +360,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''jen oblíbený''',
 '''free choice''':
 '''nechat možnost volby''',
+'''Select User''':
+'''Zvolit Účet''',
 '''Save''':
 '''Uložit''',
 '''Preferred theme''':

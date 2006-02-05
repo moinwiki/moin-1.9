@@ -297,6 +297,18 @@ de un espacio entre palabras. No se permite usar la palabra Grupo en el nombre d
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Nombre de Usuario: %s
+
+Contraseña de Usuario: %s
+
+URL de Usuario: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -340,6 +352,8 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''Esta dirección e-mail ya es usada por alguien más.''',
 '''User account created! You can use this account to login now...''':
 '''Se creó la cuenta de usuario! Puede usarla para entrar desde ya al sistema...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Usa PreferenciasDelUsuario para cambiar las preferencias de la cuenta del usuario seleccionado''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No se pudo cargar el tema \'%(theme_name)s\' !''',
 '''User preferences saved!''':
@@ -352,6 +366,8 @@ Contacte el administrador del wiki. El es quien puede habilitar e-mails''',
 '''el/la preferido/a''',
 '''free choice''':
 '''elección libre''',
+'''Select User''':
+'''Seleccionar Usuario''',
 '''Save''':
 '''Guardar''',
 '''Preferred theme''':
