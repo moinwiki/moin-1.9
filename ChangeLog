@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-05 19:47:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-434
+
+    Summary:
+      Reworded the paragraph about the failing tests in order to facilitate positive experience by consuming the CHANGES file.
+    Revision:
+      moin--main--1.5--patch-434
+
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-02-05 16:34:54 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-433
 
     Summary:
