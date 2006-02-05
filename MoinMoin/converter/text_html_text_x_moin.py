@@ -461,7 +461,7 @@ class convert_tree(visitor):
     def do(self, tree):
         self.depth = 0
         self.text = []
-        self.process_page(tree.documentElement)
+        self.visit(tree.documentElement)
         self.check_whitespace()
         return ''.join(self.text)
 
@@ -501,25 +501,19 @@ class convert_tree(visitor):
             else:
                 i += 1
 
+    def visit_text(self, node):
+        self.text.append(node.data)
+
     def visit_element(self, node):
         name = node.localName
         if name is None: # not sure this can happen here (DOM comment node), but just for the case
             return
-        name = name.lower()
-        func = getattr(self, "process_" + name,  None)
+        func = getattr(self, "process_%s" % name,  None)
         if func:
             func(node)
-        elif name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',):
-            self.process_heading(node)
-        elif name in ('ol', 'ul',):
-            self.process_list(node)
         else:
             self.process_inline(node)
 
-    def process_br(self, node):
-            self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
-                                   # when it gets merged to float text, like word word wordword word word
-        
     def visit_node_list_element_only(self, nodelist):
         for node in nodelist:
             if node.nodeType == Node.ELEMENT_NODE:
@@ -534,9 +528,23 @@ class convert_tree(visitor):
                 result.extend(self.node_list_text_only(node.childNodes))
         return "".join(result)
 
-    def visit_text(self, node):
-        self.text.append(node.data)
+    def process_page(self, node):
+        for i in node.childNodes:
+            if i.nodeType == Node.ELEMENT_NODE:
+                self.visit_element(i)
+            elif i.nodeType == Node.TEXT_NODE: # if this is missing, all std text under a headline is dropped!
+                txt = i.data.strip() # IMPORTANT: don't leave this unstripped or there will be wrong blanks
+                if txt:
+                    self.text.append(txt)
+            #we use <pre class="comment"> now, so this is currently unused:
+            #elif i.nodeType == Node.COMMENT_NODE:
+            #    self.text.append(i.data)
+            #    self.text.append("\n")
 
+    def process_br(self, node):
+            self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
+                                   # when it gets merged to float text, like word word wordword word word
+        
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
         if text:
@@ -545,6 +553,13 @@ class convert_tree(visitor):
             self.text.append(self.new_line)
             self.text.append("%s %s %s" % (hstr, text.replace("\n", " "), hstr))
             self.text.append(self.new_line)
+    
+    process_h1 = process_heading
+    process_h2 = process_heading
+    process_h3 = process_heading
+    process_h4 = process_heading
+    process_h5 = process_heading
+    process_h6 = process_heading
 
     def _get_list_item_markup(self, list, listitem):
         before = ""
@@ -614,6 +629,9 @@ class convert_tree(visitor):
         self.depth -= 1
         if self.depth == 0:
             self.text.append("\n")
+
+    process_ul = process_list
+    process_ol = process_list
 
     def process_list_item(self, node, indent):
         found = False
@@ -687,19 +705,6 @@ class convert_tree(visitor):
                     raise ConvertError("process_blockquote: Don't support %s element" % name)
         self.depth -= 1
 
-    def process_page(self, node):
-        for i in node.childNodes:
-            if i.nodeType == Node.ELEMENT_NODE:
-                self.visit_element(i)
-            elif i.nodeType == Node.TEXT_NODE: # if this is missing, all std text under a headline is dropped!
-                txt = i.data.strip()
-                if txt:
-                    self.text.append(txt)
-            #we use <pre class="comment"> now, so this is currently unused:
-            #elif i.nodeType == Node.COMMENT_NODE:
-            #    self.text.append(i.data)
-            #    self.text.append("\n")
-
     def process_inline(self, node):
         if node.nodeType == Node.TEXT_NODE:
             self.text.append(node.data.strip('\n'))
@@ -708,7 +713,13 @@ class convert_tree(visitor):
         name = node.localName # can be None for DOM Comment nodes
         if name is None:
             return
-        func = getattr(self, "process_" + name,  None)
+
+        if name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',): # headers are not allowed here (e.g. inside a ul li),
+            text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
+            self.text.append(text)                          # so we just drop the header markup and keep the text
+            return
+        
+        func = getattr(self, "process_%s" % name,  None)
         if func:
             func(node)
             return
@@ -735,10 +746,6 @@ class convert_tree(visitor):
             command = "^"
         elif name == 'font':
             command = "" # just throw away font settings
-        elif name in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6',): # headers are not allowed here (e.g. inside a ul li),
-            text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
-            self.text.append(text)                          # so we just drop the header markup and keep the text
-            return
         else:
             raise ConvertError("process_inline: Don't support %s element" % name)
         
@@ -760,7 +767,7 @@ class convert_tree(visitor):
     def process_div(self, node):
         # ignore div tags - just descend
         for i in node.childNodes:
-            self.process_inline(i)
+            self.visit_element(i)
 
     def process_tt(self, node):
         text = self.node_list_text_only(node.childNodes).replace("\n", " ")
