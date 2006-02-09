@@ -32,6 +32,14 @@ Known main issues:
     If you want to compare, I included the output of this test run:
     $ make test >tests/make_test.out
 
+Version 1.5.current:
+  Bugfixes:
+    * cookie_lifetime didn't work comfortable for low values. The cookie was
+      created once on login and never updated afterwards. So you got logged
+      out cookie_lifetime hours later, no matter whether you were active at
+      that time or not. This has been changed, we update the cookie expiry now
+      on every request, so it will expire cookie_lifetime after your last
+      request (not after login).
 
 Version 1.5.2:
 

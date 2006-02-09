@@ -75,6 +75,8 @@ def moin_cookie(request, **kw):
         u = user.User(request, id=cookie['MOIN_ID'].value,
                       auth_method='moin_cookie', auth_attribs=())
         if u.valid:
+            request.user = u
+            request.setCookie()
             return u, False
     return None, True
 
