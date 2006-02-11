@@ -590,7 +590,7 @@ class RequestBase(object):
         """ Try to get pagename from the query string
         
         Support urls like http://netloc/script/?page_name. Allow
-        solving path_info encodig problems by calling with the page
+        solving path_info encoding problems by calling with the page
         name as a query.
         """
         pagename = wikiutil.url_unquote(self.query_string, want_unicode=False)

@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-11 16:52:39 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-438
+
+    Summary:
+      fixed a typo in a comment
+    Revision:
+      moin--main--1.5--patch-438
+
+    fixed a typo in a comment
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-02-09 19:32:19 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-437
 
     Summary:
