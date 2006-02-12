@@ -9,7 +9,7 @@ web server user.
 @copyright: 2005 by Florian Festi, Nir Soffer
 @license: GNU GPL, see COPYING for details.
 """
-
+doit = 1
 import os
 
 # Insert the path to MoinMoin in the start of the path
@@ -18,7 +18,8 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), 
                                 os.pardir, os.pardir))
 
-print """
+if not doit:
+    print """
 Until the following bug is closed, we avoid running this script:
 
 http://moinmoin.wikiwikiweb.de/MoinMoinBugs/LupyOptimizeBreaksIndex
@@ -27,7 +28,7 @@ If you like, help us finding the problem.
 
 Terminating now, doing NOTHING...
 """
-sys.exit(1)
+    sys.exit(1)
 
 from MoinMoin.scripts.moin_build_index import IndexScript
 from MoinMoin.request import RequestCLI

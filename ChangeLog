@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-12 13:06:05 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-439
+
+    Summary:
+      lupy: tokenizer adds the complete CamelCase word to the index (not only the splitted words), lowered mergeFactor, cleaner dir structure in cache directory, source cleanup
+    Revision:
+      moin--main--1.5--patch-439
+
+    lupy: tokenizer adds the complete CamelCase word to the index (not only the splitted words), lowered mergeFactor, cleaner dir structure in cache directory, source cleanup
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/fullsearch.py MoinMoin/lupy.py
+     MoinMoin/scripts/moin_optimize_index.py MoinMoin/search.py
+
+
 2006-02-11 16:52:39 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-438
 
     Summary:

@@ -65,9 +65,9 @@ class BaseExpression:
             return None
     
     def costs(self):
-        """ estimated time to calculate this term
+        """ Return estimated time to calculate this term
         
-        Number is is relative to other terms and has no real unit.
+        Number is relative to other terms and has no real unit.
         It allows to do the fast searches first.
         """ 
         return 0
@@ -81,13 +81,7 @@ class BaseExpression:
 
     def _build_re(self, pattern, use_re=False, case=False):
         """ Make a regular expression out of a text pattern """
-        if case:
-            # case sensitive
-            flags = re.U
-        else:
-            # ignore case
-            flags = re.U | re.I
-            
+        flags = case and re.U or (re.I | re.U)
         if use_re:
             try:
                 self.search_re = re.compile(pattern, flags)
@@ -135,15 +129,13 @@ class AndExpression(BaseExpression):
     def pageFilter(self):
         """ Return a page filtering function
 
-        This function is used to filter page list before we search
-        it.
+        This function is used to filter page list before we search it.
 
-        Return a function that get a page name, and return bool, or None.
+        Return a function that gets a page name, and return bool, or None.
         """
         # Sort terms by cost, then get all title searches
         self.sortByCost()
-        terms = [term for term in self._subterms
-                 if isinstance(term, TitleSearch)]
+        terms = [term for term in self._subterms if isinstance(term, TitleSearch)]
         if terms:
             # Create and return a filter function
             def filter(name):
@@ -227,16 +219,14 @@ class TextSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = case
-        self._build_re(self._pattern,
-                       use_re=use_re, case=case)
+        self._build_re(self._pattern, use_re=use_re, case=case)
         self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
         
     def costs(self):
         return 10000
     
     def __unicode__(self):
-        if self.negated: neg = '-'
-        else: neg = ''
+        neg = self.negated and '-' or ''
         return u'%s"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
@@ -271,9 +261,9 @@ class TextSearch(BaseExpression):
         or_term.add(term, False, False)
         pattern = self._pattern.lower()
         if self.use_re:
-            if pattern[0]=='^':
+            if pattern[0] == '^':
                 pattern = pattern[1:]
-            if pattern[:2]=='\b':
+            if pattern[:2] == '\b':
                 pattern = pattern[2:]
             term = RegularExpressionQuery(Term("text", pattern))
         else:
@@ -281,7 +271,7 @@ class TextSearch(BaseExpression):
             terms = [list(tokenizer(t)) for t in terms]
             term = BooleanQuery()
             for t in terms:
-                if len(t)==1:
+                if len(t) == 1:
                     term.add(CamelCaseQuery(Term("text", t[0])), True, False)
                 else:
                     phrase = PhraseQuery()
@@ -293,7 +283,8 @@ class TextSearch(BaseExpression):
             #term = TermQuery(Term("text", pattern))
         or_term.add(term, False, False)
         return or_term
-        
+
+
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
@@ -314,8 +305,7 @@ class TitleSearch(BaseExpression):
         return 100
 
     def __unicode__(self):
-        if self.negated: neg = '-'
-        else: neg = ''
+        neg = self.negated and '-' or ''
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
@@ -349,13 +339,15 @@ class TitleSearch(BaseExpression):
     def lupy_term(self):
         pattern = self._pattern.lower()
         if self.use_re:
-            if pattern[0]=='^': pattern = pattern[1:]
+            if pattern[0] == '^':
+                pattern = pattern[1:]
             term = RegularExpressionQuery(Term("title", pattern))
         else:
             term = PrefixQuery(Term("title", pattern), 3)
         #term.boost = 100.0
         return term
-    
+
+
 class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
 
@@ -379,8 +371,7 @@ class LinkSearch(BaseExpression):
 
     def _build_re(self, pattern, use_re=False, case=False):
         """ Make a regular expression out of a text pattern """
-        flags = (re.U | re.I, re.U)[case]
-
+        flags = case and re.U or (re.I | re.U)
         try:
             if not use_re:
                 raise re.error
@@ -394,7 +385,8 @@ class LinkSearch(BaseExpression):
         return 5000 # cheaper than a TextSearch
 
     def __unicode__(self):
-        return u'%s!"%s"' % (('', '-')[self.negated], unicode(self._pattern))
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
         return u"(%s)" % self._textpattern    
@@ -418,7 +410,7 @@ class LinkSearch(BaseExpression):
             if results:
                 matches.extend(results)
             else: #This happens e.g. for pages that use navigation macros
-                matches.append(TextMatch(0,0))
+                matches.append(TextMatch(0, 0))
 
         # Decide what to do with the results.
         if ((self.negated and matches) or
@@ -433,7 +425,8 @@ class LinkSearch(BaseExpression):
     def lupy_term(self):        
         pattern = self.pattern
         if self.use_re:
-            if pattern[0]=="^": pattern = pattern[1:]
+            if pattern[0] == "^":
+                pattern = pattern[1:]
             term = RegularExpressionQuery(Term("links", pattern))
         else:
             term = TermQuery(Term("links", pattern))
@@ -619,7 +612,6 @@ class FoundAttachment(FoundPage):
 ### Parse Query
 ##############################################################################
 
-
 class QueryParser:
     """
     Converts a String into a tree of Query objects
@@ -727,6 +719,7 @@ class QueryParser:
         return (text.startswith('"') and text.endswith('"') or
                 text.startswith("'") and text.endswith("'"))
 
+
 ############################################################################
 ### Search results formatting
 ############################################################################
@@ -735,7 +728,7 @@ class SearchResults:
     """ Manage search results, supply different views
 
     Search results can hold valid search results and format them for
-    many requests, until the wiki content change.
+    many requests, until the wiki content changes.
 
     For example, one might ask for full page list sorted from A to Z,
     and then ask for the same list sorted from Z to A. Or sort results
@@ -883,7 +876,7 @@ class SearchResults:
         if not page.page:
             page.page = Page(self.request, page.page_name)
         body = page.page.get_raw_body()
-        last = len(body) -1
+        last = len(body) - 1
         lineCount = 0
         output = []
         
@@ -916,7 +909,7 @@ class SearchResults:
                     break
 
             # Add all matches in context and the text between them 
-            while 1:
+            while True:
                 match = matches[j]
                 # Ignore matches behind the current position
                 if start < match.end:
@@ -1096,8 +1089,7 @@ class SearchResults:
     def _reset(self, request, formatter):
         """ Update internal state before new output
 
-        Do not calls this, it should be called only by the instance
-        code.
+        Do not call this, it should be called only by the instance code.
 
         Each request might need different translations or other user
         preferences.
@@ -1108,6 +1100,7 @@ class SearchResults:
         # Use 1 match, 2 matches...
         _ = request.getText    
         self.matchLabel = (_('match'), _('matches'))
+
 
 ##############################################################################
 ### Searching
@@ -1147,18 +1140,16 @@ class Search:
         Get a list of pages using fast lupy search and return moin
         search in those pages.
         """
+        pages = None
         index = Index(self.request)
-        if not index.exists():
-            return self._moinSearch()
-        self.request.clock.start('_lupySearch')
-        try:
-            hits = index.search(self.query.lupy_term())
-            pages = [hit.get('pagename') for hit in hits]
-        except index.LockedException:
-            pages = None
-        self.request.clock.stop('_lupySearch')
-        if pages == []:
-            return pages
+        if index.exists():
+            self.request.clock.start('_lupySearch')
+            try:
+                hits = index.search(self.query.lupy_term())
+                pages = [hit.get('pagename') for hit in hits]
+            except index.LockedException:
+                pass
+            self.request.clock.stop('_lupySearch')
         return self._moinSearch(pages)
 
     def _moinSearch(self, pages=None):
@@ -1169,7 +1160,7 @@ class Search:
         """
         self.request.clock.start('_moinSearch')
         from MoinMoin.Page import Page
-        if not pages:
+        if pages is None:
             pages = self._getPageList()
         hits = []
         for name in pages:
