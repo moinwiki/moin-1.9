@@ -515,6 +515,7 @@ class FoundPage:
 
     def __init__(self, page_name, matches=None, page=None):
         self.page_name = page_name
+        self.attachment = '' # this is not an attachment
         self.page = page
         if matches is None:
             matches = []
@@ -605,7 +606,23 @@ class FoundPage:
 
 class FoundAttachment(FoundPage):
     """ Represent an attachment in search results """
-    pass
+    
+    def __init__(self, page_name, attachment, matches=None, page=None):
+        self.page_name = page_name
+        self.attachment = attachment
+        self.page = page
+        if matches is None:
+            matches = []
+        self._matches = matches
+
+    def weight(self, unique=1):
+        return 1
+
+    def get_matches(self, unique=1, sort='start', type=Match):
+        return []
+
+    def _unique_matches(self, type=Match):
+        return []
 
 
 ##############################################################################
@@ -793,13 +810,22 @@ class SearchResults:
             list = f.number_list
         else:
             list = f.bullet_list
-        querystr = self.querystring()
-            
+
         # Add pages formatted as list
         if self.hits:
             write(list(1))
 
             for page in self.hits:
+                if page.attachment:
+                    querydict = {
+                        'action': 'AttachFile',
+                        'do': 'get',
+                        'target': page.attachment,
+                    }
+                else:
+                    querydict = None
+                querystr = self.querystring(querydict)
+            
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -836,7 +862,6 @@ class SearchResults:
         self._reset(request, formatter)
         f = formatter
         write = self.buffer.write
-        querystr = self.querystring()
         
         # Add pages formatted as definition list
         if self.hits:
@@ -846,6 +871,17 @@ class SearchResults:
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
+                if page.attachment:
+                    fmt_context = ""
+                    querydict = {
+                        'action': 'AttachFile',
+                        'do': 'get',
+                        'target': page.attachment,
+                    }
+                else:
+                    fmt_context = self.formatContext(page, context, maxlines)
+                    querydict = None
+                querystr = self.querystring(querydict)
                 item = [
                     f.definition_term(1),
                     f.pagelink(1, page.page_name, querystr=querystr),
@@ -854,7 +890,7 @@ class SearchResults:
                     matchInfo,
                     f.definition_term(0),
                     f.definition_desc(1),
-                    self.formatContext(page, context, maxlines),
+                    fmt_context,
                     f.definition_desc(0),
                     ]
                 write(''.join(item))
@@ -1031,6 +1067,13 @@ class SearchResults:
         # Add text after match
         if start < len(pagename):
             output.append(f.text(pagename[start:]))
+        
+        if page.attachment: # show the attachment that matched
+            output.extend([
+                    " ",
+                    f.strong(1),
+                    f.text("(%s)" % page.attachment),
+                    f.strong(0)])
 
         return ''.join(output)
 
@@ -1058,11 +1101,12 @@ class SearchResults:
             return ''.join(output)
         return ''
 
-    def querystring(self):
+    def querystring(self, querydict=None):
         """ Return query string, used in the page link """
-        querystr = {'highlight': self.query.highlight_re()}
-        querystr = wikiutil.makeQueryString(querystr)
-        querystr = wikiutil.escape(querystr)
+        if querydict is None:
+            querydict = {'highlight': self.query.highlight_re()}
+        querystr = wikiutil.makeQueryString(querydict)
+        #querystr = wikiutil.escape(querystr)
         return querystr
 
     def formatInfo(self, formatter, page):
@@ -1115,7 +1159,7 @@ class Search:
         self.filtered = False
 
     def run(self):
-        """ Preform search and return results object """
+        """ Perform search and return results object """
         start = time.time()
         if self.request.cfg.lupy_search:
             hits = self._lupySearch()
@@ -1125,11 +1169,17 @@ class Search:
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
+        
+        result_hits = []
+        for page, attachment, match in hits:
+            if attachment:
+                result_hits.append(FoundAttachment(page.page_name, attachment))
+            else:
+                result_hits.append(FoundPage(page.page_name, match))
             
-        hits = [FoundPage(page.page_name, match) for page, match in hits]
         elapsed = time.time() - start
         count = self.request.rootpage.getPageCount()
-        return SearchResults(self.query, hits, count, elapsed)
+        return SearchResults(self.query, result_hits, count, elapsed)
 
     # ----------------------------------------------------------------
     # Private!
@@ -1146,14 +1196,14 @@ class Search:
             self.request.clock.start('_lupySearch')
             try:
                 hits = index.search(self.query.lupy_term())
-                pages = [hit.get('pagename') for hit in hits]
+                pages = [(hit.get('pagename'), hit.get('attachment')) for hit in hits]
             except index.LockedException:
                 pass
             self.request.clock.stop('_lupySearch')
         return self._moinSearch(pages)
 
     def _moinSearch(self, pages=None):
-        """ Search pages using moin built in full text search 
+        """ Search pages using moin's built-in full text search 
         
         Return list of tuples (page, match). The list may contain
         deleted pages or pages the user may not read.
@@ -1161,13 +1211,18 @@ class Search:
         self.request.clock.start('_moinSearch')
         from MoinMoin.Page import Page
         if pages is None:
-            pages = self._getPageList()
+            # if we are not called from _lupySearch, we make a full pagelist,
+            # but don't search attachments (thus attachment name = '')
+            pages = [(p, '') for p in self._getPageList()]
         hits = []
-        for name in pages:
-            page = Page(self.request, name)
-            match = self.query.search(page)
-            if match:
-                hits.append((page, match))
+        for pagename, attachment in pages:
+            page = Page(self.request, pagename)
+            if attachment:
+               hits.append((page, attachment, None))
+            else:
+                match = self.query.search(page)
+                if match:
+                    hits.append((page, attachment, match))
         self.request.clock.stop('_moinSearch')
         return hits
 
@@ -1190,7 +1245,7 @@ class Search:
     def _filter(self, hits):
         """ Filter out deleted or acl protected pages """
         userMayRead = self.request.user.may.read
-        filtered = [(page, match) for page, match in hits
+        filtered = [(page, attachment, match) for page, attachment, match in hits
                     if page.exists() and userMayRead(page.page_name)]    
         return filtered
         
