@@ -33,6 +33,13 @@ Known main issues:
     $ make test >tests/make_test.out
 
 Version 1.5.current:
+  New features:
+    * attachment search using lupy (lupy_search = 1 in your config)
+      Title search will also search attachment filenames.
+      Full text search will also search attachment contents (filtered through
+      some very simple ASCII-only filter when the index is built - sorry, no
+      umlauts).
+
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
       created once on login and never updated afterwards. So you got logged
@@ -40,6 +47,8 @@ Version 1.5.current:
       that time or not. This has been changed, we update the cookie expiry now
       on every request, so it will expire cookie_lifetime after your last
       request (not after login).
+    * lupy search now behaves a bit less curious. Still no guarantees...
+
 
 Version 1.5.2:
 

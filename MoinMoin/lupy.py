@@ -252,16 +252,38 @@ class Index:
         return hits
 
     def update_page(self, page):
+        self.queue.append(page.page_name)
+        self._do_queued_updates_InNewThread()
+
+    def _do_queued_updates_InNewThread(self):
+        """ do queued index updates in a new thread
+        
+        Should be called from a user request. From a script, use indexPages.
+
+        TODO: tune the acquire timeout
+        """
         if not self.lock.acquire(1.0):
-            self.queue.append(page.page_name)
+            self.request.log("can't index: can't acquire lock")
             return
-        self.request.clock.start('update_page')
         try:
-            self._do_queued_updates()
-            self._update_page(page)
-        finally:
+            from threading import Thread
+            indexThread = Thread(target=self._do_queued_updates,
+                args=(self._indexingRequest(self.request), self.lock))
+            indexThread.setDaemon(True)
+            
+            # Join the index thread after current request finish, prevent
+            # Apache CGI from killing the process.
+            def joinDecorator(finish):
+                def func():
+                    finish()
+                    indexThread.join()
+                return func
+                
+            self.request.finish = joinDecorator(self.request.finish)        
+            indexThread.start()
+        except:
             self.lock.release()
-        self.request.clock.stop('update_page')
+            raise
 
     def indexPages(self):
         """ Index all pages
@@ -335,13 +357,18 @@ class Index:
     # -------------------------------------------------------------------
     # Private
 
-    def _do_queued_updates(self, amount=5):
+    def _do_queued_updates(self, request, lock=None, amount=5):
         """ Assumes that the write lock is acquired """
-        pages = self.queue.pages()[:amount]
-        for name in pages:
-            p = Page(self.request, name)
-            self._update_page(p)
-        self.queue.remove(pages)
+        try:
+            self.translate_table = self.make_transtable()
+            pages = self.queue.pages() # [:amount]
+            for name in pages:
+                p = Page(request, name)
+                self._update_page(p)
+            self.queue.remove(pages)
+        finally:
+            if lock:
+                lock.release()
 
     def _update_page(self, page):
         """ Assumes that the write lock is acquired """
@@ -352,21 +379,52 @@ class Index:
             writer = IndexWriter(self.dir, False, tokenizer)
             self._index_page(writer, page)
             writer.close()
-        
+   
+    def make_transtable(self):
+        import string
+        norm = string.maketrans('', '') # builds a list of all characters
+        non_alnum = string.translate(norm, norm, string.letters+string.digits) 
+        trans_nontext = string.maketrans(non_alnum, ' '*len(non_alnum))
+        return trans_nontext
+   
     def _index_page(self, writer, page):
         """ Assumes that the write lock is acquired """
         d = document.Document()
-        d.add(document.Keyword('pagename', page.page_name))
-        d.add(document.Text('title', page.page_name, store=False))        
+        pagename = page.page_name
+        request = page.request
+        d.add(document.Keyword('pagename', pagename))
+        d.add(document.Keyword('attachment', '')) # this is a real page, not an attachment
+        d.add(document.Text('title', pagename, store=False))        
         d.add(document.Text('text', page.get_raw_body(), store=False))
         
-        links = page.getPageLinks(page.request)
+        links = page.getPageLinks(request)
         t = document.Text('links', '', store=False)
         t.stringVal = links
         d.add(t)
         d.add(document.Text('link_text', ' '.join(links), store=False))
 
         writer.addDocument(d)
+        
+        from MoinMoin.action import AttachFile
+        def filecontent(fn):
+            f = file(fn, "rb")
+            data = f.read()
+            f.close()
+            data = data.translate(self.translate_table)
+            data = ' '.join(data.split()) # remove lots of blanks
+            return data.decode('utf-8')
+        
+        attachments = AttachFile._get_files(request, pagename)
+        for att in attachments:
+            att_content = filecontent(AttachFile.getFilename(request, pagename, att))
+            d = document.Document()
+            d.add(document.Keyword('pagename', pagename))
+            d.add(document.Keyword('attachment', att)) # this is an attachment, store its filename
+            d.add(document.Text('title', att, store=False)) # the filename is the "title" of an attachment
+            d.add(document.Text('text', att_content, store=False))
+            
+            writer.addDocument(d)
+
 
     def _index_pages(self, request, lock=None):
         """ Index all pages
@@ -386,6 +444,7 @@ class Index:
             writer.mergeFactor = 50
             pages = request.rootpage.getPageList(user='', exists=1)
             request.log("indexing all (%d) pages..." % len(pages))
+            self.translate_table = self.make_transtable()
             for pagename in pages:
                 p = Page(request, pagename)
                 # code does NOT seem to assume request.page being set any more
