@@ -343,8 +343,8 @@ class TitleSearch(BaseExpression):
                 pattern = pattern[1:]
             term = RegularExpressionQuery(Term("title", pattern))
         else:
-            term = PrefixQuery(Term("title", pattern), 3)
-        #term.boost = 100.0
+            term = PrefixQuery(Term("title", pattern), 1000000) # number of chars which are ignored behind the match
+            #term.boost = 100.0
         return term
 
 
