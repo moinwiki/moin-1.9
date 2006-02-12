@@ -108,3 +108,4 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # End content and send footer
     request.write(request.formatter.endContent())
     wikiutil.send_footer(request, pagename)
+

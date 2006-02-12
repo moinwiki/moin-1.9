@@ -20,14 +20,16 @@ from MoinMoin.support.lupy.search.indexsearcher import IndexSearcher
 ### Tokenizer
 ##############################################################################
 
-word_re = re.compile(r"\w+", re.U)
-wikiword_re = re.compile(r"^([%(u)s][%(l)s]+)+$" % {'u': config.chars_upper,
-                                                'l': config.chars_lower}, re.U)
-singleword_re = re.compile(r"[%(u)s][%(l)s]+" % {'u': config.chars_upper,
-                                             'l': config.chars_lower}, re.U)
+singleword = r"[%(u)s][%(l)s]+" % {
+                 'u': config.chars_upper,
+                 'l': config.chars_lower,
+             }
+
+singleword_re = re.compile(singleword, re.U)
+wikiword_re = re.compile(r"^(%s){2,}$" % singleword, re.U)
 
 token_re = re.compile(
-    r"(?P<company>\w+[&@]\w+)|" + #company names like AT&T and Excite@Home.
+    r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
     r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
     r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
     r"(?P<num>(\w+[-/.,])*\w*\d\w*([-/.,]\w+)*)|" + # version numbers
@@ -47,7 +49,7 @@ def tokenizer(value):
         tokenstream = re.finditer(token_re, value)
         for m in tokenstream:
             if m.group("acronym"):
-                yield m.group("acronym").replace('.','').lower()
+                yield m.group("acronym").replace('.', '').lower()
             elif m.group("company"):
                 yield m.group("company").lower()
             elif m.group("email"):
@@ -61,11 +63,12 @@ def tokenizer(value):
                 for word in dot_re.split(m.group("num").lower()):
                     yield word
             elif m.group("word"):
-                if wikiword_re.match(m.group("word")):
-                    for sm in re.finditer(singleword_re, m.group()):
+                word = m.group("word")
+                yield  word.lower()
+                # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
+                if wikiword_re.match(word):
+                    for sm in re.finditer(singleword_re, word):
                         yield sm.group().lower()
-                else:
-                    yield  m.group("word").lower()
 
 
 #############################################################################
@@ -117,7 +120,7 @@ class UpdateQueue:
         When the queue is empty, the queue file is removed, so exists()
         can tell if there is something waiting in the queue.
         
-        TODO: tune the timeout
+        TODO: tune timeout
         """
         if self.writeLock.acquire(30.0):
             try:
@@ -148,10 +151,9 @@ class UpdateQueue:
         unique = []
         seen = {}
         for name in pages:
-            if name in seen:
-                continue
-            unique.append(name)
-            seen[name] = 1
+            if not name in seen:
+                unique.append(name)
+                seen[name] = 1
         return unique
 
     def _read(self):
@@ -174,7 +176,7 @@ class UpdateQueue:
     def _write(self, pages):
         """ Write pages to queue file
         
-        Require queue write locking.
+        Requires queue write locking.
         """
         # XXX use tmpfile/move for atomic replace on real operating systems
         data = '\n'.join(pages) + '\n'
@@ -187,13 +189,14 @@ class UpdateQueue:
     def _removeFile(self):
         """ Remove queue file 
         
-        Require write locking.
+        Requires queue write locking.
         """
         try:
             os.remove(self.file)
         except OSError, err:
             if err.errno != errno.ENOENT:
                 raise
+
 
 class Index:
     class LockedException(Exception):
@@ -202,16 +205,17 @@ class Index:
     def __init__(self, request):
         self.request = request
         cache_dir = request.cfg.cache_dir
-        self.dir = os.path.join(cache_dir, 'lupy_index')
+        self.main_dir = os.path.join(cache_dir, 'lupy')
+        self.dir = os.path.join(self.main_dir, 'index')
         filesys.makeDirs(self.dir)
-        self.sig_file = os.path.join(self.dir, '__complete__')
+        self.sig_file = os.path.join(self.main_dir, 'complete')
         self.segments_file = os.path.join(self.dir, 'segments')
-        lock_dir = os.path.join(cache_dir, 'lupy_index_lock')
+        lock_dir = os.path.join(self.main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
         self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(self.dir, "__update_queue__"),
-                                 os.path.join(cache_dir, 'lupy_queue_lock'))
+        self.queue = UpdateQueue(os.path.join(self.main_dir, "update-queue"),
+                                 os.path.join(self.main_dir, 'update-queue-lock'))
         
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
@@ -232,7 +236,7 @@ class Index:
             while True:
                 try:
                     searcher, timestamp = self.request.cfg.lupy_searchers.pop()
-                    if timestamp!=self.mtime():
+                    if timestamp != self.mtime():
                         searcher.close()
                     else:
                         break
@@ -278,8 +282,7 @@ class Index:
     def indexPagesInNewThread(self):
         """ Index all pages in a new thread
         
-        Should be called from a user request. From a script, use
-        indexPages.
+        Should be called from a user request. From a script, use indexPages.
 
         TODO: tune the acquire timeout
         """
@@ -336,7 +339,8 @@ class Index:
         """ Assumes that the write lock is acquired """
         pages = self.queue.pages()[:amount]
         for name in pages:
-            self._update_page(Page(self.request, name))
+            p = Page(self.request, name)
+            self._update_page(p)
         self.queue.remove(pages)
 
     def _update_page(self, page):
@@ -367,11 +371,10 @@ class Index:
     def _index_pages(self, request, lock=None):
         """ Index all pages
         
-        This should be called from indexPages or indexPagesInNewThread
-        only!
+        This should be called from indexPages or indexPagesInNewThread only!
         
-        This may take few minutes up to few hours, depending on the
-        size of the wiki.
+        This may take few minutes up to few hours, depending on the size of
+        the wiki.
 
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
@@ -380,13 +383,14 @@ class Index:
             self._unsign()
             start = time.time()
             writer = IndexWriter(self.dir, True, tokenizer)
-            writer.mergeFactor = 200
+            writer.mergeFactor = 50
             pages = request.rootpage.getPageList(user='', exists=1)
             request.log("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
-                # Some code assumes request.page
-                request.page = Page(request, pagename)
-                self._index_page(writer, request.page)
+                p = Page(request, pagename)
+                # code does NOT seem to assume request.page being set any more
+                #request.page = p
+                self._index_page(writer, p)
             writer.close()
             request.log("indexing completed successfully in %0.2f seconds." % 
                         (time.time() - start))
@@ -398,6 +402,7 @@ class Index:
 
     def _optimize(self, request):
         """ Optimize the index """
+        self._unsign()
         start = time.time()
         request.log("optimizing index...")
         writer = IndexWriter(self.dir, False, tokenizer)
@@ -405,6 +410,7 @@ class Index:
         writer.close()
         request.log("optimizing completed successfully in %0.2f seconds." % 
                     (time.time() - start))
+        self._sign()
 
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
