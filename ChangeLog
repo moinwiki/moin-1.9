@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-12 13:15:01 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-440
+
+    Summary:
+      lupy: fixed strange search results by allowing high number of ignored chars after a match
+    Revision:
+      moin--main--1.5--patch-440
+
+    lupy: fixed strange search results by allowing high number of ignored chars after a match
+    
+
+    modified files:
+     ChangeLog MoinMoin/search.py
+
+
 2006-02-12 13:06:05 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-439
 
     Summary:
