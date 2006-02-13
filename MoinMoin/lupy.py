@@ -360,12 +360,11 @@ class Index:
     def _do_queued_updates(self, request, lock=None, amount=5):
         """ Assumes that the write lock is acquired """
         try:
-            self.translate_table = self.make_transtable()
-            pages = self.queue.pages() # [:amount]
+            pages = self.queue.pages()[:amount]
             for name in pages:
                 p = Page(request, name)
                 self._update_page(p)
-            self.queue.remove(pages)
+                self.queue.remove([name])
         finally:
             if lock:
                 lock.release()
@@ -380,12 +379,23 @@ class Index:
             self._index_page(writer, page)
             writer.close()
    
-    def make_transtable(self):
-        import string
-        norm = string.maketrans('', '') # builds a list of all characters
-        non_alnum = string.translate(norm, norm, string.letters+string.digits) 
-        trans_nontext = string.maketrans(non_alnum, ' '*len(non_alnum))
-        return trans_nontext
+    def contentfilter(self, filename):
+        """ Get a filter for content of filename and return unicode content. """
+        import wikiutil
+        request = self.request
+        fileext = os.path.splitext(filename)[1]
+        if fileext:
+            fileext = fileext[1:].lower() # skip the leading dot
+        else:
+            fileext = 'binary'
+        try:
+            execute = wikiutil.importPlugin(request.cfg, 'filter', fileext)
+        except wikiutil.PluginMissingError:
+            try:
+                execute = wikiutil.importPlugin(request.cfg, 'filter', 'binary')
+            except wikiutil.PluginMissingError:
+                raise ImportError("Cannot load filter %s" % 'binary')
+        return execute(self, filename)
    
     def _index_page(self, writer, page):
         """ Assumes that the write lock is acquired """
@@ -406,17 +416,11 @@ class Index:
         writer.addDocument(d)
         
         from MoinMoin.action import AttachFile
-        def filecontent(fn):
-            f = file(fn, "rb")
-            data = f.read()
-            f.close()
-            data = data.translate(self.translate_table)
-            data = ' '.join(data.split()) # remove lots of blanks
-            return data.decode('utf-8')
-        
+
         attachments = AttachFile._get_files(request, pagename)
         for att in attachments:
-            att_content = filecontent(AttachFile.getFilename(request, pagename, att))
+            filename = AttachFile.getFilename(request, pagename, att)
+            att_content = self.contentfilter(filename)
             d = document.Document()
             d.add(document.Keyword('pagename', pagename))
             d.add(document.Keyword('attachment', att)) # this is an attachment, store its filename
@@ -444,7 +448,6 @@ class Index:
             writer.mergeFactor = 50
             pages = request.rootpage.getPageList(user='', exists=1)
             request.log("indexing all (%d) pages..." % len(pages))
-            self.translate_table = self.make_transtable()
             for pagename in pages:
                 p = Page(request, pagename)
                 # code does NOT seem to assume request.page being set any more
