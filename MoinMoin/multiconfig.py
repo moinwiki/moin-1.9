@@ -321,7 +321,7 @@ class DefaultConfig:
     # and receive a FORBIDDEN for anything except viewing a page
     ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|google|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
                   'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|nutbot|omniexplorer|puf|robot|scooter|'
-                  'search|sherlock|sitecheck|spider|teleport|voyager|wget')
+                  'search|sherlock|sitecheck|spider|teleport|voyager|webreaper|wget')
 
     # Wiki identity
     sitename = u'Untitled Wiki'
