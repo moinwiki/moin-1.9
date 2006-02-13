@@ -2,6 +2,32 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-13 13:09:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-442
+
+    Summary:
+      lupy: filter plugins for attachment search
+    Revision:
+      moin--main--1.5--patch-442
+
+    lupy: filter plugins for attachment search
+    
+
+    new files:
+     MoinMoin/filter/.arch-ids/=id
+     MoinMoin/filter/.arch-ids/__init__.py.id
+     MoinMoin/filter/.arch-ids/binary.py.id
+     MoinMoin/filter/.arch-ids/sxw.py.id
+     MoinMoin/filter/.arch-ids/txt.py.id
+     MoinMoin/filter/__init__.py MoinMoin/filter/binary.py
+     MoinMoin/filter/sxw.py MoinMoin/filter/txt.py
+
+    modified files:
+     ChangeLog MoinMoin/lupy.py docs/CHANGES
+
+    new directories:
+     MoinMoin/filter MoinMoin/filter/.arch-ids
+
+
 2006-02-12 21:27:04 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-441
 
     Summary:
