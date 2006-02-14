@@ -145,8 +145,14 @@ class RequestBase(object):
             self.user = self.get_user()
             
             if not self.query_string.startswith('action=xmlrpc'):
-                if self.surge_protect():
+                self.clock.start('botprot')
+                if not self.forbidden and self.isForbidden():
+                    self.makeForbidden403()
+                self.clock.stop('botprot')
+                self.clock.start('surgeprot')
+                if not self.forbidden and self.surge_protect():
                     self.makeUnavailable503()
+                self.clock.stop('surgeprot')
 
             from MoinMoin import i18n
 
@@ -978,11 +984,9 @@ class RequestBase(object):
     def run(self):
         # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden:
-            return self.finish()
-        if self.isForbidden():
-            self.makeForbidden403()
             if self.forbidden:
-                return self.finish()
+                time.sleep(10) # let the sucker wait!
+            return self.finish()
 
         self.open_logs()
         _ = self.getText
