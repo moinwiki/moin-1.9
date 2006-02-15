@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-16 00:42:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-446
+
+    Summary:
+      fixed formatter.heading call, lowered Twisted timeout
+    Revision:
+      moin--main--1.5--patch-446
+
+    fixed formatter.heading call, lowered Twisted timeout
+    
+
+    modified files:
+     ChangeLog MoinMoin/macro/Include.py
+     MoinMoin/server/twistedmoin.py
+
+
 2006-02-15 08:39:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-445
 
     Summary:

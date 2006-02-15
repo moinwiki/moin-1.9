@@ -252,7 +252,7 @@ def makeApp(ConfigClass):
     root = vhost.NameVirtualHost()
     root.default = default
     # ----------------------------------------------
-    site = MoinSite(root, logPath=config.logPath, timeout=10*60) # 10 minutes timeout
+    site = MoinSite(root, logPath=config.logPath, timeout=2*60) # 2 minutes timeout
 
     # Make application
     application = service.Application("web", uid=config.uid, gid=config.gid)
