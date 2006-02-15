@@ -145,14 +145,10 @@ class RequestBase(object):
             self.user = self.get_user()
             
             if not self.query_string.startswith('action=xmlrpc'):
-                self.clock.start('botprot')
                 if not self.forbidden and self.isForbidden():
                     self.makeForbidden403()
-                self.clock.stop('botprot')
-                self.clock.start('surgeprot')
                 if not self.forbidden and self.surge_protect():
                     self.makeUnavailable503()
-                self.clock.stop('surgeprot')
 
             from MoinMoin import i18n
 
@@ -176,9 +172,9 @@ class RequestBase(object):
         """ check if someone requesting too much from us """
         validuser = self.user.valid
         current_id = validuser and self.user.name or self.remote_addr
-        current_action = self.form.get('action', ['show'])[0]
         if not validuser and current_id.startswith('127.'): # localnet
             return False
+        current_action = self.form.get('action', ['show'])[0]
         
         limits = self.cfg.surge_action_limits
         default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
@@ -207,6 +203,19 @@ class RequestBase(object):
             events = surgedict.setdefault(current_id, copy.copy({}))
             timestamps = events.setdefault(current_action, copy.copy([]))
             surge_detected = len(timestamps) > maxnum
+
+            surge_indicator = surge_detected and "!" or ""
+            timestamps.append((now, surge_indicator))
+            if surge_detected:
+                if len(timestamps) < maxnum*2:
+                    timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
+        
+            current_action = 'all' # put a total limit on user's requests
+            maxnum, dt = limits.get(current_action, default_limit)
+            events = surgedict.setdefault(current_id, copy.copy({}))
+            timestamps = events.setdefault(current_action, copy.copy([]))
+            surge_detected = surge_detected or len(timestamps) > maxnum
+            
             surge_indicator = surge_detected and "!" or ""
             timestamps.append((now, surge_indicator))
             if surge_detected:
@@ -853,8 +862,13 @@ class RequestBase(object):
         if not forbidden and self.cfg.hosts_deny:
             ip = self.remote_addr
             for host in self.cfg.hosts_deny:
-                if ip == host or host[-1] == '.' and ip.startswith(host):
+                if host[-1] == '.' and ip.startswith(host):
                     forbidden = 1
+                    #self.log("hosts_deny (net): %s" % str(forbidden))
+                    break
+                if ip == host:
+                    forbidden = 1
+                    #self.log("hosts_deny (ip): %s" % str(forbidden))
                     break
         return forbidden
 
@@ -984,8 +998,11 @@ class RequestBase(object):
     def run(self):
         # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden:
-            if self.forbidden:
-                time.sleep(10) # let the sucker wait!
+            #Don't sleep()! Seems to bind too much resources, so twisted will
+            #run out of threads, files, whatever (with low CPU load) and stop
+            #serving requests.
+            #if self.forbidden:
+            #    time.sleep(10) # let the sucker wait!
             return self.finish()
 
         self.open_logs()

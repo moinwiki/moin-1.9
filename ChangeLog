@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-15 08:39:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-445
+
+    Summary:
+      improved surge protection: dont sleep, add total requests rate
+    Revision:
+      moin--main--1.5--patch-445
+
+    improved surge protection: dont sleep, add total requests rate
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py MoinMoin/request.py
+
+
 2006-02-14 07:38:53 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-444
 
     Summary:
