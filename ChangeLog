@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-16 23:09:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-450
+
+    Summary:
+      added translator to thank-you list, use 'we' instead 'I', add MoinCoreGroup
+    Revision:
+      moin--main--1.5--patch-450
+
+    added translator to thank-you list, use 'we' instead 'I', add MoinCoreGroup
+    
+
+    modified files:
+     ChangeLog README
+
+
 2006-02-16 23:08:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-449
 
     Summary:

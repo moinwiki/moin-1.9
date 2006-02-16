@@ -1,7 +1,10 @@
 MoinMoin - a wiki engine in Python
 ==================================
 
-Copyright (c) 2000 - 2006 by Juergen Hermann <jh@web.de>
+Copyright (c) 2000-2006 by Juergen Hermann <jh@web.de>
+Copyright (c) 2006 The MoinMoin development team, see
+                   http://moinmoin.wikiwikiweb.de/MoinCoreTeamGroup
+
 All rights reserved, see docs/licenses/COPYING for details.
 
 This program is free software; you can redistribute it and/or modify
@@ -47,8 +50,8 @@ help pages contained in the distribution wiki.
 ACKNOWLEDGEMENTS
 ================
 
-I like to thank especially these people for their valuable ideas and
-contributions:
+We like to thank especially these people, groups and companies for their
+valuable ideas and contributions:
 
     Ward Cunningham <ward@c2.com> for inventing WikiWiki in the first place.
 
@@ -88,7 +91,10 @@ contributions:
 
     Arcelor S.A. for sponsoring MoinMoin v1.5 GPL development.
 
-    And all the people I forgot or that are mentioned in the code.
+    All language maintainers for translating MoinMoin to many languages and
+    keeping those translations up-to-date.
+
+    And all the people we forgot or that are mentioned in the code.
 
 
 -----------------------------------------------------------------------------
