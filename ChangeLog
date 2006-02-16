@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-16 23:08:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-449
+
+    Summary:
+      surge protection: specialcase AttachFile, fix no cache exists case
+    Revision:
+      moin--main--1.5--patch-449
+
+    surge protection: specialcase AttachFile, fix no cache exists case
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py MoinMoin/request.py
+
+
 2006-02-16 18:43:13 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-448
 
     Summary:

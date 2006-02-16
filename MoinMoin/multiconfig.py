@@ -300,11 +300,11 @@ class DefaultConfig:
     
     surge_action_limits = { # allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
-        'all': (20, 30),
-        'show': (20, 60),
+        'all': (30, 30),
+        'show': (30, 60),
         'recall': (5, 60),
         'raw': (20, 40),  # some people use this for css
-        'AttachFile': (60, 60),
+        'AttachFile': (90, 60),
         'diff': (30, 60),
         'fullsearch': (5, 60),
         'edit': (10, 120),
