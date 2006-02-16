@@ -44,14 +44,14 @@ You have to use four spaces at the beginning of the line mostly.
     return module, mtime
 
 
-def _url_re():
+def _url_re_list():
     """ Return url matching regular expression
 
-    Import wikis list from farmconfig on the first call and compile a
-    regex. Later then return the cached regex.
+    Import wikis list from farmconfig on the first call and compile the
+    regexes. Later then return the cached regex list.
 
-    @rtype: compiled re object
-    @return: url to wiki config  matching re
+    @rtype: list of tuples of (name, compiled re object)
+    @return: url to wiki config name matching list
     """
     global _url_re_cache, _farmconfig_mtime
     if _url_re_cache is None:
@@ -60,12 +60,13 @@ def _url_re():
         except ImportError:
             # Default to wikiconfig for all urls.
             _farmconfig_mtime = 0
-            _url_re_cache = re.compile(r'(?P<wikiconfig>.)')
+            _url_re_cache = [('wikiconfig', re.compile(r'.')), ] # matches everything
         else:
             try:
-                pattern = '|'.join([r'(?P<%s>%s)' % (name, regex)
-                                    for name, regex in farmconfig.wikis])
-                _url_re_cache = re.compile(pattern)
+                cache = []
+                for name, regex in farmconfig.wikis:
+                    cache.append((name, re.compile(regex)))
+                _url_re_cache = cache
             except AttributeError:
                 msg = """
 Missing required 'wikis' list in 'farmconfig.py'.
@@ -121,18 +122,18 @@ use the wikiconfig.py file from the distribution.
 
 def _getConfigName(url):
     """ Return config name for url or raise """
-    match = _url_re().match(url)
-    if not (match and match.groups()):
-        msg = '''
+    for name, regex in _url_re_list():
+        match = regex.match(url)
+        if match:
+            return name
+    # nothing matched
+    msg = '''
 Could not find a match for url: "%(url)s".
 
 Check your URL regular expressions in the "wikis" list in
 "farmconfig.py". 
 ''' % {'url': url}
-        raise error.ConfigurationError(msg)    
-    for name, value in match.groupdict().items():
-        if value: break
-    return name
+    raise error.ConfigurationError(msg)    
 
 
 def getConfig(url):
