@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-16 17:29:03 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-447
+
+    Summary:
+      fix farmconfig.wikis processing for big farms (>=50 wikis) by not using a big RE for it
+    Revision:
+      moin--main--1.5--patch-447
+
+    fix farmconfig.wikis processing for big farms (>=50 wikis) by not using a big RE for it
+    
+
+    modified files:
+     ChangeLog MoinMoin/multiconfig.py docs/CHANGES
+
+
 2006-02-16 00:42:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-446
 
     Summary:

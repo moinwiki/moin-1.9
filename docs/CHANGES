@@ -50,6 +50,12 @@ Version 1.5.current:
       on every request, so it will expire cookie_lifetime after your last
       request (not after login).
     * lupy search now behaves a bit less curious. Still no guarantees...
+    * we lowered the twisted server timeout to 2 minutes now (was: 10) because
+      it just used up too many files (open TCP connections until it timeouts)
+       on our farm.
+    * the algorithm used for processing the farmconfig.wikis list was changed
+      to work for big farms (>= 50 wikis), too. This works around the python
+      "re" module limitation of having a maximum of 100 named groups in a RE.
 
 
 Version 1.5.2:
