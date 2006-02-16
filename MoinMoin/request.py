@@ -185,20 +185,21 @@ class RequestBase(object):
         
         try:
             cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
-            data = cache.content()
-            data = data.split("\n")
-            for line in data:
-                try:
-                    id, t, action, surge_indicator = line.split("\t")
-                    t = int(t)
-                    maxnum, dt = limits.get(action, default_limit)
-                    if t >= now - dt:
-                        events = surgedict.setdefault(id, copy.copy({}))
-                        timestamps = events.setdefault(action, copy.copy([]))
-                        timestamps.append((t, surge_indicator))
-                except StandardError, err:
-                    pass
-        
+            if cache.exists():
+                data = cache.content()
+                data = data.split("\n")
+                for line in data:
+                    try:
+                        id, t, action, surge_indicator = line.split("\t")
+                        t = int(t)
+                        maxnum, dt = limits.get(action, default_limit)
+                        if t >= now - dt:
+                            events = surgedict.setdefault(id, copy.copy({}))
+                            timestamps = events.setdefault(action, copy.copy([]))
+                            timestamps.append((t, surge_indicator))
+                    except StandardError, err:
+                        pass
+                
             maxnum, dt = limits.get(current_action, default_limit)
             events = surgedict.setdefault(current_id, copy.copy({}))
             timestamps = events.setdefault(current_action, copy.copy([]))
@@ -210,17 +211,18 @@ class RequestBase(object):
                 if len(timestamps) < maxnum*2:
                     timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
         
-            current_action = 'all' # put a total limit on user's requests
-            maxnum, dt = limits.get(current_action, default_limit)
-            events = surgedict.setdefault(current_id, copy.copy({}))
-            timestamps = events.setdefault(current_action, copy.copy([]))
-            surge_detected = surge_detected or len(timestamps) > maxnum
+            if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
+                current_action = 'all' # put a total limit on user's requests
+                maxnum, dt = limits.get(current_action, default_limit)
+                events = surgedict.setdefault(current_id, copy.copy({}))
+                timestamps = events.setdefault(current_action, copy.copy([]))
+                surge_detected = surge_detected or len(timestamps) > maxnum
             
-            surge_indicator = surge_detected and "!" or ""
-            timestamps.append((now, surge_indicator))
-            if surge_detected:
-                if len(timestamps) < maxnum*2:
-                    timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
+                surge_indicator = surge_detected and "!" or ""
+                timestamps.append((now, surge_indicator))
+                if surge_detected:
+                    if len(timestamps) < maxnum*2:
+                        timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
         
             data = []
             for id, events in surgedict.items():
