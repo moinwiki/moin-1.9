@@ -56,6 +56,8 @@ Version 1.5.current:
     * the algorithm used for processing the farmconfig.wikis list was changed
       to work for big farms (>= 50 wikis), too. This works around the python
       "re" module limitation of having a maximum of 100 named groups in a RE.
+    * Fixed a TypeError which occurred for formatters that dislike None values.
+      (cf. http://moinmoin.wikiwikiweb.de/MoinMoinBugs/PythonErrorEditingFrontPage)
 
 
 Version 1.5.2:

@@ -693,7 +693,7 @@ class Parser:
                 else:
                     attrs['bgcolor'] = '"#%s"' % arg
             else:
-                msg = None
+                msg = ""
             #print "key: %s\nattrs: %s" % (key, str(attrs))
             return self.formatter.rawHTML(msg)
 
