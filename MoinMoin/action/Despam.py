@@ -161,7 +161,7 @@ def execute(pagename, request):
     # be extra paranoid in dangerous actions
     actname = __name__.split('.')[-1]
     if actname in request.cfg.actions_excluded or \
-       request.user.name not in request.cfg.superuser:
+       not request.user.isSuperUser():
         return Page.Page(request, pagename).send_page(request,
             msg = _('You are not allowed to use this action.'))
 

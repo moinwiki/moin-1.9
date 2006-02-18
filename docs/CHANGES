@@ -41,6 +41,9 @@ Version 1.5.current:
       There are not many filters yet, so most is handled by the "binary"
       filter, a very simple ASCII-only filter.
       Feel free to contribute more filter plugins!
+    * We check cfg.superuser to be a list of user names (as documented) and
+      deny superuser access if it is not. This avoids security issues by
+      wrong configuration.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was

@@ -259,7 +259,7 @@ def _build_filelist(request, pagename, showheader, readonly):
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=view&amp;target=%(urlfile)s">%(label_view)s</a>' % parmdict
 
             if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and
-                request.user.name in request.cfg.superuser):
+                request.user.isSuperUser()):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=install&amp;target=%(urlfile)s">%(label_install)s</a>' % parmdict
             elif (zipfile.is_zipfile(os.path.join(attach_dir,file).encode(config.charset)) and
                 request.user.may.read(pagename) and request.user.may.delete(pagename)
@@ -480,7 +480,7 @@ def execute(pagename, request):
          else:
             msg = _('You are not allowed to unzip attachments of this page.')
     elif request.form['do'][0] == 'install':
-         if request.user.name in request.cfg.superuser:
+         if request.user.isSuperUser():
             install_package(pagename, request)
          else:
             msg = _('You are not allowed to install files.')

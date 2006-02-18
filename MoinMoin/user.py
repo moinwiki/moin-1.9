@@ -900,6 +900,14 @@ class User:
     def isCurrentUser(self):
         return self._request.user.name == self.name
 
+    def isSuperUser(self):
+        superusers = self._request.cfg.superuser
+        # some people managed to WRONGLY assign a string instead of a list and
+        # then dumb things may happen when username is a substring of cfg.superuser
+        islisttype = isinstance(superusers, (list, tuple))
+        return self.valid and self.name and \
+                islisttype and self.name in superusers
+
     def host(self):
         """ Return user host """
         _ = self._request.getText

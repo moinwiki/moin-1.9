@@ -20,7 +20,7 @@ def execute(macro, args):
     request = macro.request
     
     # do not show system admin to users not in superuser list
-    if not request.user.name in request.cfg.superuser:
+    if not request.user.isSuperUser():
         return ''
 
     result = []
