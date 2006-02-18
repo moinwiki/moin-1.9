@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, sys, cgi, StringIO
+import os, re, time, sys, cgi, StringIO
 import copy
 from MoinMoin import config, wikiutil, user, caching
 from MoinMoin.util import MoinMoinNoFooter, IsWin9x
@@ -112,6 +112,8 @@ class RequestBase(object):
             self.__dict__.update(properties)
             self._load_multi_cfg()
             
+            self.isSpiderAgent = self.check_spider()
+        
             # Set decode charsets.  Input from the user is always in
             # config.charset, which is the page charsets. Except
             # path_info, which may use utf-8, and handled by decodePagename.
@@ -846,20 +848,29 @@ class RequestBase(object):
         """ Flush output stream.
         """
         raise NotImplementedError
-        
+
+    def check_spider(self):
+        """ check if the user agent for current request is a spider/bot """
+        isSpider = False
+        spiders = self.cfg.ua_spiders
+        if spiders:
+            ua = self.getUserAgent()
+            if ua:
+                isSpider = re.search(spiders, ua, re.I) is not None
+        return isSpider
+
     def isForbidden(self):
         """ check for web spiders and refuse anything except viewing """
         forbidden = 0
-        # we do not have a parsed query string here
-        # so we can just do simple matching
-        if ((self.query_string != '' or self.request_method != 'GET') and
-            self.query_string != 'action=rss_rc' and not
+        # we do not have a parsed query string here, so we can just do simple matching
+        qs = self.query_string
+        if ((qs != '' or self.request_method != 'GET') and
+            not 'action=rss_rc' in qs and
             # allow spiders to get attachments and do 'show'
-            (self.query_string.find('action=AttachFile') >= 0 and self.query_string.find('do=get') >= 0) and not
-            (self.query_string.find('action=show') >= 0)
+            not ('action=AttachFile' in qs and 'do=get' in qs) and
+            not 'action=show' in qs
             ):
-            from MoinMoin.util import web
-            forbidden = web.isSpiderAgent(self)
+            forbidden = self.isSpiderAgent
 
         if not forbidden and self.cfg.hosts_deny:
             ip = self.remote_addr

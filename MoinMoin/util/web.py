@@ -9,19 +9,6 @@
 import re
 from MoinMoin import config
 
-def isSpiderAgent(request):
-    """ Return True if user agent appears to be a spider.
-    """
-    if not request.cfg.ua_spiders:
-        return 0
-
-    ua = request.getUserAgent()
-    if not ua:
-        return 0
-
-    return re.search(request.cfg.ua_spiders, ua, re.I) is not None
-
-
 def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
     """ Get an integer value from a request parameter. If the value
         is out of bounds, it's made to fit into those bounds.

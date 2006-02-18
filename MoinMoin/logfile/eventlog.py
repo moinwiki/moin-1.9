@@ -26,8 +26,7 @@ class EventLog(LogFile):
         """ Write an event of type `eventtype, with optional key/value
         pairs appended (i.e. you have to pass a dict).
         """
-        # Dont log spiders XXX TODO: does it make sense? 
-        if web.isSpiderAgent(request):
+        if request.isSpiderAgent:
             return
         
         if mtime_usecs is None:
