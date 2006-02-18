@@ -437,10 +437,14 @@ class DefaultConfig:
         # Try to decode certain names which allow unicode
         self._decode()
 
-        # Make sure directories are accessible
         self._check_directories()
 
-        # Load plugin module
+        if not isinstance(self.superuser, list):
+            msg = """The superuser</b> setting in your wiki configuration is not a list
+                     (e.g. ['Sample User', 'AnotherUser']).
+                     Please change it in your wiki configuration and try again."""
+            raise error.ConfigurationError(msg)
+        
         self._loadPluginModule()
 
         # Preparse user dicts
