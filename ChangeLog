@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-18 17:58:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-454
+
+    Summary:
+      added ldap_login and smb_mount auth plugins + sample config
+    Revision:
+      moin--main--1.5--patch-454
+
+    added ldap_login and smb_mount auth plugins + sample config
+    
+
+    new files:
+     wiki/config/more_samples/.arch-ids/=id
+     wiki/config/more_samples/.arch-ids/ldap_smb_farmconfig.py.id
+     wiki/config/more_samples/ldap_smb_farmconfig.py
+
+    modified files:
+     ChangeLog MoinMoin/auth.py docs/CHANGES
+
+    new directories:
+     wiki/config/more_samples wiki/config/more_samples/.arch-ids
+
+
 2006-02-18 17:12:14 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-453
 
     Summary:
