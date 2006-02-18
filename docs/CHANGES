@@ -44,6 +44,8 @@ Version 1.5.current:
     * We check cfg.superuser to be a list of user names (as documented) and
       deny superuser access if it is not. This avoids security issues by
       wrong configuration.
+    * ldap_login and smb_mount auth methods, see MoinMoin/auth.py and
+      wiki/config/more_samples/ldap_smb_farmconfig.py
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
