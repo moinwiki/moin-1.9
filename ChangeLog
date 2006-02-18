@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-18 15:21:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-451
+
+    Summary:
+      only check once for spiders
+    Revision:
+      moin--main--1.5--patch-451
+
+    only check once for spiders
+    
+
+    modified files:
+     ChangeLog MoinMoin/logfile/eventlog.py MoinMoin/request.py
+     MoinMoin/util/web.py
+
+
 2006-02-16 23:09:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-450
 
     Summary:
