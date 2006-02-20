@@ -1283,7 +1283,22 @@ space between words. Group page name is not allowed.""") % self.user.name
         # Set Pragma for http 1.0 caches
         # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.32
         self.setHttpHeader('Pragma: no-cache')
-       
+
+    def makeCookie(self, moin_id, maxage, expires):
+        from Cookie import SimpleCookie
+        c = SimpleCookie()
+        c['MOIN_ID'] = moin_id
+        c['MOIN_ID']['max-age'] = maxage
+        if self.cfg.cookie_domain:
+            c['MOIN_ID']['domain'] = self.cfg.cookie_domain
+        if self.cfg.cookie_path:
+            c['MOIN_ID']['path'] = self.cfg.cookie_path
+        else:
+            c['MOIN_ID']['path'] = self.getScriptname()
+        # Set expires for older clients
+        c['MOIN_ID']['expires'] = self.httpDate(when=expires, rfc='850')        
+        return c.output()
+        
     def setCookie(self):
         """ Set cookie for the current user
         
@@ -1311,23 +1326,11 @@ space between words. Group page name is not allowed.""") % self.user.name
             maxage = (-lifetime)
         expires = now + maxage
         
-        # Set the cookie
-        from Cookie import SimpleCookie
-        c = SimpleCookie()
-        c['MOIN_ID'] = self.user.id
-        c['MOIN_ID']['max-age'] = maxage
-        if self.cfg.cookie_domain:
-            c['MOIN_ID']['domain'] = self.cfg.cookie_domain
-        if self.cfg.cookie_path:
-            c['MOIN_ID']['path'] = self.cfg.cookie_path
-        else:
-            c['MOIN_ID']['path'] = self.getScriptname()
-        # Set expires for older clients
-        c['MOIN_ID']['expires'] = self.httpDate(when=expires, rfc='850')        
-        self.setHttpHeader(c.output())
+        cookie = self.makeCookie(self.user.id, maxage, expires)
+        self.setHttpHeader(cookie)
 
         # Update the saved cookie, so other code works with new setup
-        self.saved_cookie = c.output()
+        self.saved_cookie = cookie
 
         # IMPORTANT: Prevent caching of current page and cookie
         self.disableHttpCaching()
@@ -1342,18 +1345,13 @@ space between words. Group page name is not allowed.""") % self.user.name
         Finally, delete the saved cookie and create a new user based on
         the new settings.
         """
-        # Set cookie
-        from Cookie import SimpleCookie
-        c = SimpleCookie()
-        c['MOIN_ID'] = ''
-        if self.cfg.cookie_domain:
-            c['MOIN_ID']['domain'] = self.cfg.cookie_domain
-        c['MOIN_ID']['path'] = self.getScriptname()
-        c['MOIN_ID']['max-age'] = 0
+        moin_id = ''
+        maxage = 0
         # Set expires to one year ago for older clients
-        yearago = time.time() - (3600 * 24 * 365)
-        c['MOIN_ID']['expires'] = self.httpDate(when=yearago, rfc='850')
-        self.setHttpHeader(c.output())
+        expires = time.time() - (3600 * 24 * 365) # 1 year ago
+        cookie = self.makeCookie(moin_id, maxage, expires) 
+        # Set cookie
+        self.setHttpHeader(cookie)
 
         # Update saved cookie and set new unregistered user
         self.saved_cookie = ''

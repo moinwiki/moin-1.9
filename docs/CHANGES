@@ -54,6 +54,7 @@ Version 1.5.current:
       that time or not. This has been changed, we update the cookie expiry now
       on every request, so it will expire cookie_lifetime after your last
       request (not after login).
+    * fixed logout problems when using cfg.cookie_path
     * lupy search now behaves a bit less curious. Still no guarantees...
     * we lowered the twisted server timeout to 2 minutes now (was: 10) because
       it just used up too many files (open TCP connections until it timeouts)
