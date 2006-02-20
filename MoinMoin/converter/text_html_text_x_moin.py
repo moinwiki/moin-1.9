@@ -1166,7 +1166,7 @@ class convert_tree(visitor):
                     pass #print name, data, filename, alt
             raise ConvertError("Unknown smiley icon '%s'" % filename)
         # Image URL
-        elif src and src.startswith("http:") and wikiutil.isPicture(src):
+        elif src and src.startswith("http") and wikiutil.isPicture(src): # matches http: and https: !
             self.text.extend([self.white_space, src, self.white_space])
         else:
             raise ConvertError("Strange image src: '%s'" % src)
