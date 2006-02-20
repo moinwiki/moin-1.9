@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-20 10:29:22 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-456
+
+    Summary:
+      fixed converter for https: image urls
+    Revision:
+      moin--main--1.5--patch-456
+
+    fixed converter for https: image urls
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+     docs/CHANGES
+
+
 2006-02-20 10:24:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-455
 
     Summary:
