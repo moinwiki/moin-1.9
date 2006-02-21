@@ -945,8 +945,9 @@ function actionsMenuInit(title) {
 
             options.append(option % data)
 
-        # Add custom actions not in the standard menu
-        more = [item for item in available if not item in titles]
+        # Add custom actions not in the standard menu, except for
+        # some actions like AttachFile (we have them on top level)
+        more = [item for item in available if not item in titles and not item in ('AttachFile',)]
         more.sort()
         if more:
             # Add separator
