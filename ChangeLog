@@ -2,6 +2,41 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-25 09:11:57 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-458
+
+    Summary:
+      changed filters to use mimetypes
+    Revision:
+      moin--main--1.5--patch-458
+
+    changed filters to use mimetypes
+    
+
+    new files:
+     MoinMoin/filter/.arch-ids/audio.py.id
+     MoinMoin/filter/.arch-ids/image.py.id
+     MoinMoin/filter/.arch-ids/video.py.id MoinMoin/filter/audio.py
+     MoinMoin/filter/image.py MoinMoin/filter/video.py
+
+    modified files:
+     ChangeLog MoinMoin/filter/text.py MoinMoin/lupy.py
+     docs/CHANGES
+
+    renamed files:
+     MoinMoin/filter/.arch-ids/binary.py.id
+       ==> MoinMoin/filter/.arch-ids/application_octet_stream.py.id
+     MoinMoin/filter/.arch-ids/sxw.py.id
+       ==> MoinMoin/filter/.arch-ids/application_vnd_sun_xml_writer.py.id
+     MoinMoin/filter/.arch-ids/txt.py.id
+       ==> MoinMoin/filter/.arch-ids/text.py.id
+     MoinMoin/filter/binary.py
+       ==> MoinMoin/filter/application_octet_stream.py
+     MoinMoin/filter/sxw.py
+       ==> MoinMoin/filter/application_vnd_sun_xml_writer.py
+     MoinMoin/filter/txt.py
+       ==> MoinMoin/filter/text.py
+
+
 2006-02-21 22:41:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-457
 
     Summary:

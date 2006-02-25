@@ -381,21 +381,30 @@ class Index:
    
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
-        import wikiutil
+        import mimetypes
+        from MoinMoin import wikiutil
         request = self.request
-        fileext = os.path.splitext(filename)[1]
-        if fileext:
-            fileext = fileext[1:].lower() # skip the leading dot
-        else:
-            fileext = 'binary'
+        mimetype, encoding = mimetypes.guess_type(filename)
+        if mimetype is None:
+            mimetype = 'application/octet-stream'
+        def mt2mn(mt): # mimetype to modulename
+            return mt.replace("/", "_").replace("-","_").replace(".", "_")
         try:
-            execute = wikiutil.importPlugin(request.cfg, 'filter', fileext)
+            _filter = mt2mn(mimetype)
+            execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
         except wikiutil.PluginMissingError:
             try:
-                execute = wikiutil.importPlugin(request.cfg, 'filter', 'binary')
+                _filter = mt2mn(mimetype.split("/", 1)[0])
+                execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
             except wikiutil.PluginMissingError:
-                raise ImportError("Cannot load filter %s" % 'binary')
-        return execute(self, filename)
+                try:
+                    _filter = mt2mn('application/octet-stream')
+                    execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
+                except wikiutil.PluginMissingError:
+                    raise ImportError("Cannot load filter %s" % binaryfilter)
+        data = execute(self, filename)
+        request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
+        return data
    
     def _index_page(self, writer, page):
         """ Assumes that the write lock is acquired """
