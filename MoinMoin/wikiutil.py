@@ -413,10 +413,8 @@ def split_wiki(wikiurl):
         try:
             wikitag, tail = wikiurl.split("/", 1)
         except ValueError:
-            wikitag = None
-            tail = None
-
-    return (wikitag, tail)
+            wikitag, tail = 'Self', wikiurl
+    return wikitag, tail
 
 
 def join_wiki(wikiurl, wikitail):
@@ -488,7 +486,7 @@ def resolve_wiki(request, wikiurl):
     wikitag, tail = split_wiki(wikiurl)
 
     # return resolved url
-    if wikitag and _interwiki_list.has_key(wikitag):
+    if _interwiki_list.has_key(wikitag):
         return (wikitag, _interwiki_list[wikitag], tail, False)
     else:
         return (wikitag, request.getScriptname(), "/InterWiki", True)
