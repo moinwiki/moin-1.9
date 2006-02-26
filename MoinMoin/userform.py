@@ -89,7 +89,7 @@ Contact the owner of the wiki, who can enable email.""")
                 return _("Use UserPreferences to change your settings or create an account.")
             # Create user profile
             if form.has_key('create'):
-                theuser = self.request.get_user()
+                theuser = self.request.get_user_from_form()
             else:
                 theuser = user.User(self.request, auth_method="request:152")
                 
@@ -179,7 +179,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
         if form.has_key('save'): # Save user profile
             if self.request.request_method != 'POST':
                 return _("Use UserPreferences to change your settings or create an account.")
-            theuser = self.request.get_user()
+            theuser = self.request.get_user_from_form()
                 
             if not 'name' in theuser.auth_attribs:
                 # Require non-empty name

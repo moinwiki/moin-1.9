@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-27 00:55:12 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-462
+
+    Summary:
+      fixing some wrong attribute references
+    Revision:
+      moin--main--1.5--patch-462
+
+    fixing some wrong attribute references
+    
+
+    modified files:
+     ChangeLog MoinMoin/caching.py MoinMoin/userform.py
+
+
 2006-02-26 20:20:17 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-461
 
     Summary:
