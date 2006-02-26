@@ -144,7 +144,7 @@ class RequestBase(object):
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
 
-            self.user = self.get_user()
+            self.user = self.get_user_from_form()
             
             if not self.query_string.startswith('action=xmlrpc'):
                 if not self.forbidden and self.isForbidden():
@@ -498,25 +498,40 @@ class RequestBase(object):
         else:
             path, query = uri, ''
         return wikiutil.url_unquote(path, want_unicode=False), query        
-                
-    def get_user(self):
-        # try to get some values from the maybe present UserPreferences form,
-        # so auth methods can use it as their user interface for login
+
+    def get_user_from_form(self):
+        """ read the maybe present UserPreferences form and call get_user with the values """
         name = self.form.get('name', [None])[0]
         password = self.form.get('password', [None])[0]
         login = self.form.has_key('login')
         logout = self.form.has_key('logout')
-
-        for auth in self.cfg.auth:
-            user_obj, continue_flag = auth(self,
-                                           name=name, password=password,
-                                           login=login, logout=logout)
-            if not continue_flag:
-                break
+        return self.get_user_default_unknown(name=name, password=password,
+                                             login=login, logout=logout,
+                                             user_obj=None)
+    
+    def get_user_default_unknown(self, **kw):
+        """ call do_auth and if it doesnt return a user object, make some "Unknown User" """
+        user_obj = self.get_user_default_None(**kw)
         if user_obj is None:
             user_obj = user.User(self, auth_method="request:427")
         return user_obj
 
+    def get_user_default_None(self, **kw):
+        """ loop over auth handlers, return a user obj or None """
+        name = kw.get('name')
+        password = kw.get('password')
+        login = kw.get('login')
+        logout = kw.get('logout')
+        user_obj = kw.get('user_obj')
+        for auth in self.cfg.auth:
+            user_obj, continue_flag = auth(self,
+                                           name=name, password=password,
+                                           login=login, logout=logout,
+                                           user_obj=user_obj)
+            if not continue_flag:
+                break
+        return user_obj
+        
     def reset(self):
         """ Reset request state.
 
@@ -1061,7 +1076,7 @@ class RequestBase(object):
                 msg = _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % self.user.name
-                self.deleteCookie()
+                request.user = self.get_user_default_unknown(name=self.user.name, logout=True)
                 page = wikiutil.getSysPage(self, 'UserPreferences')
                 page.send_page(self, msg=msg)
 
@@ -1283,82 +1298,6 @@ space between words. Group page name is not allowed.""") % self.user.name
         # Set Pragma for http 1.0 caches
         # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.32
         self.setHttpHeader('Pragma: no-cache')
-
-    def makeCookie(self, moin_id, maxage, expires):
-        from Cookie import SimpleCookie
-        c = SimpleCookie()
-        c['MOIN_ID'] = moin_id
-        c['MOIN_ID']['max-age'] = maxage
-        if self.cfg.cookie_domain:
-            c['MOIN_ID']['domain'] = self.cfg.cookie_domain
-        if self.cfg.cookie_path:
-            c['MOIN_ID']['path'] = self.cfg.cookie_path
-        else:
-            c['MOIN_ID']['path'] = self.getScriptname()
-        # Set expires for older clients
-        c['MOIN_ID']['expires'] = self.httpDate(when=expires, rfc='850')        
-        return c.output()
-        
-    def setCookie(self):
-        """ Set cookie for the current user
-        
-        cfg.cookie_lifetime and the user 'remember_me' setting set the
-        lifetime of the cookie. lifetime in int hours, see table:
-        
-        value   cookie lifetime
-        ----------------------------------------------------------------
-         = 0    forever, ignoring user 'remember_me' setting
-         > 0    n hours, or forever if user checked 'remember_me'
-         < 0    -n hours, ignoring user 'remember_me' setting
-        """
-        # Calculate cookie maxage and expires
-        lifetime = int(self.cfg.cookie_lifetime) * 3600 
-        forever = 10*365*24*3600 # 10 years
-        now = time.time()
-        if not lifetime:
-            maxage = forever
-        elif lifetime > 0:
-            if self.user.remember_me:
-                maxage = forever
-            else:
-                maxage = lifetime
-        elif lifetime < 0:
-            maxage = (-lifetime)
-        expires = now + maxage
-        
-        cookie = self.makeCookie(self.user.id, maxage, expires)
-        self.setHttpHeader(cookie)
-
-        # Update the saved cookie, so other code works with new setup
-        self.saved_cookie = cookie
-
-        # IMPORTANT: Prevent caching of current page and cookie
-        self.disableHttpCaching()
-
-    def deleteCookie(self):
-        """ Delete the user cookie by sending expired cookie with null value
-
-        According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
-        Deleted cookie should have Max-Age=0. We also have expires
-        attribute, which is probably needed for older browsers.
-
-        Finally, delete the saved cookie and create a new user based on
-        the new settings.
-        """
-        moin_id = ''
-        maxage = 0
-        # Set expires to one year ago for older clients
-        expires = time.time() - (3600 * 24 * 365) # 1 year ago
-        cookie = self.makeCookie(moin_id, maxage, expires) 
-        # Set cookie
-        self.setHttpHeader(cookie)
-
-        # Update saved cookie and set new unregistered user
-        self.saved_cookie = ''
-        self.user = user.User(self, auth_method="request:1245")
-
-        # IMPORTANT: Prevent caching of current page and cookie        
-        self.disableHttpCaching()
 
     def finish(self):
         """ General cleanup on end of request

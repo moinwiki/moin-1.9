@@ -10,6 +10,8 @@
        password: the value of the password form field (or None)
        login: True if user has clicked on Login button
        logout: True if user has clicked on Logout button
+       user_obj: the user_obj we have until now (user_obj returned from
+                 previous auth method or None for first auth method)
        (we maybe add some more here)
 
     Use code like this to get them:
@@ -20,17 +22,12 @@
         request.log("got name=%s len(password)=%d login=%r logout=%r" % (name, len(password), login, logout))
     
     The called auth method then must return a tuple (user_obj, continue_flag).
-    user_obj is either a User object or None if it could not make one.
+    user_obj can be one of:
+    * a (newly created) User object
+    * None if we want to inhibit log in from previous auth methods
+    * what we got as kw argument user_obj (meaning: no change).
     continue_flag is a boolean indication whether the auth loop shall continue
     trying other auth methods (or not).
-
-    There are the possible cases for the returned tuple:
-    user, False == we managed to authentify a user and we don't need to continue
-    user, True  == makes no sense (unused)
-    None, False == we could not authenticate the user and this is final, we
-                   don't want to try other auth methods to authenticate him
-    None, True  == we could not authentifacte the user, but we want to continue
-                   trying with other auth methods
 
     The methods give a kw arg "auth_attribs" to User.__init__ that tells
     which user attribute names are DETERMINED and set by this auth method and
@@ -43,29 +40,104 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import Cookie
+import time, Cookie
 from MoinMoin import user
+
+def log(request, **kw):
+    """ just log the call, do nothing else """
+    username = kw.get('name')
+    password = kw.get('password')
+    login = kw.get('login')
+    logout = kw.get('logout')
+    user_obj = kw.get('user_obj')
+    request.log("auth.log: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
+    return user_obj, True
+
+# some cookie functions used by moin_cookie auth
+def makeCookie(request, moin_id, maxage, expires):
+    """ calculate a MOIN_ID cookie """
+    c = Cookie.SimpleCookie()
+    cfg = request.cfg
+    c['MOIN_ID'] = moin_id
+    c['MOIN_ID']['max-age'] = maxage
+    if cfg.cookie_domain:
+        c['MOIN_ID']['domain'] = cfg.cookie_domain
+    if cfg.cookie_path:
+        c['MOIN_ID']['path'] = cfg.cookie_path
+    else:
+        c['MOIN_ID']['path'] = request.getScriptname()
+    # Set expires for older clients
+    c['MOIN_ID']['expires'] = request.httpDate(when=expires, rfc='850')        
+    return c.output()
+
+def setCookie(request, u):
+    """ Set cookie for the user obj u
+    
+    cfg.cookie_lifetime and the user 'remember_me' setting set the
+    lifetime of the cookie. lifetime in int hours, see table:
+    
+    value   cookie lifetime
+    ----------------------------------------------------------------
+     = 0    forever, ignoring user 'remember_me' setting
+     > 0    n hours, or forever if user checked 'remember_me'
+     < 0    -n hours, ignoring user 'remember_me' setting
+    """
+    # Calculate cookie maxage and expires
+    lifetime = int(request.cfg.cookie_lifetime) * 3600 
+    forever = 10*365*24*3600 # 10 years
+    now = time.time()
+    if not lifetime:
+        maxage = forever
+    elif lifetime > 0:
+        if u.remember_me:
+            maxage = forever
+        else:
+            maxage = lifetime
+    elif lifetime < 0:
+        maxage = (-lifetime)
+    expires = now + maxage
+    
+    cookie = makeCookie(request, u.id, maxage, expires)
+    # Set cookie
+    request.setHttpHeader(cookie)
+    # IMPORTANT: Prevent caching of current page and cookie
+    request.disableHttpCaching()
+
+def deleteCookie(request):
+    """ Delete the user cookie by sending expired cookie with null value
+
+    According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
+    Deleted cookie should have Max-Age=0. We also have expires
+    attribute, which is probably needed for older browsers.
+
+    Finally, delete the saved cookie and create a new user based on the new settings.
+    """
+    moin_id = ''
+    maxage = 0
+    # Set expires to one year ago for older clients
+    expires = time.time() - (3600 * 24 * 365) # 1 year ago
+    cookie = makeCookie(request, moin_id, maxage, expires) 
+    # Set cookie
+    request.setHttpHeader(cookie)
+    # IMPORTANT: Prevent caching of current page and cookie        
+    request.disableHttpCaching()
 
 def moin_cookie(request, **kw):
     """ authenticate via the MOIN_ID cookie """
-    if kw.get('login'):
-        name = kw.get('name')
-        password = kw.get('password')
-        u = user.User(request, name=name, password=password,
+    username = kw.get('name')
+    password = kw.get('password')
+    login = kw.get('login')
+    logout = kw.get('logout')
+    user_obj = kw.get('user_obj')
+    #request.log("auth.moin_cookie: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
+    if login:
+        u = user.User(request, name=username, password=password,
                       auth_method='login_userpassword')
         if u.valid:
-            request.user = u # needed by setCookie
-            request.setCookie()
-            return u, False
-        return None, True
+            setCookie(request, u)
+            return u, True # we make continuing possible, e.g. for smbmount
+        return user_obj, True
 
-    if kw.get('logout'):
-        # clear the cookie in the browser and locally. Does not
-        # check if we have a valid user logged, just make sure we
-        # don't have one after this call.
-        request.deleteCookie()
-        return None, True
-    
     try:
         cookie = Cookie.SimpleCookie(request.saved_cookie)
     except Cookie.CookieError:
@@ -74,26 +146,25 @@ def moin_cookie(request, **kw):
     if cookie and cookie.has_key('MOIN_ID'):
         u = user.User(request, id=cookie['MOIN_ID'].value,
                       auth_method='moin_cookie', auth_attribs=())
+
+        if logout:
+            u.valid = 0 # just make user invalid, but remember him
+
         if u.valid:
-            request.user = u
-            request.setCookie()
-            return u, False
-    return None, True
+            setCookie(request, u) # refreshes cookie lifetime
+            return u, True # use True to get other methods called, too
+        else: # logout or invalid user
+            deleteCookie(request)
+            return u, True # we return a invalidated user object, so that
+                           # following auth methods can get the name of
+                           # the user who logged out
+    return user_obj, True
 
 
-#
-#   idea: maybe we should call back to the request object like:
-#         username, password, authenticated, authtype = request.getUserPassAuth()
-#	 WhoEver   geheim    false          basic      (twisted, doityourself pw check)
-#	 WhoEver   None      true           basic/...  (apache)
-#	 
-#        thus, the server specific code would stay in request object implementation.
-#
-#     THIS IS NOT A WIKI PAGE ;-)
-	 
 def http(request, **kw):
     """ authenticate via http basic/digest/ntlm auth """
     from MoinMoin.request import RequestTwisted, RequestCLI
+    user_obj = kw.get('user_obj')
     u = None
     # check if we are running Twisted
     if isinstance(request, RequestTwisted):
@@ -126,18 +197,19 @@ def http(request, **kw):
     if u:
         u.create_or_update()
     if u and u.valid:
-        return u, False
+        return u, True # True to get other methods called, too
     else:
-        return None, True
+        return user_obj, True
 
 def sslclientcert(request, **kw):
     """ authenticate via SSL client certificate """
     from MoinMoin.request import RequestTwisted
+    user_obj = kw.get('user_obj')
     u = None
     changed = False
     # check if we are running Twisted
     if isinstance(request, RequestTwisted):
-        return u # not supported if we run twisted
+        return user_obj, True # not supported if we run twisted
         # Addendum: this seems to need quite some twisted insight and coding.
         # A pointer i got on #twisted: divmod's vertex.sslverify
         # If you really need this, feel free to implement and test it and
@@ -179,13 +251,13 @@ def sslclientcert(request, **kw):
     if u:
         u.create_or_update(changed)
     if u and u.valid:
-        return u, False
+        return u, True
     else:
-        return None, True
+        return user_obj, True
 
 
 def smb_mount(request, **kw):
-    """ mount a SMB server's share for username (using username/password for
+    """ (u)mount a SMB server's share for username (using username/password for
         authentication at the SMB server). This can be used if you need access
         to files on some share via the wiki, but needs more code to be useful.
         If you don't need it, don't use it.
@@ -194,38 +266,45 @@ def smb_mount(request, **kw):
     password = kw.get('password')
     login = kw.get('login')
     logout = kw.get('logout')
+    user_obj = kw.get('user_obj')
     cfg = request.cfg
     verbose = cfg.smb_verbose
     if verbose: request.log("got name=%s login=%r logout=%r" % (username, login, logout))
     
-    # we just intercept login to mount the smb share
-    if not login:
-        return None, True
-    
-    import os, pwd, subprocess
-    web_username = cfg.smb_dir_user
-    web_uid = pwd.getpwnam(web_username)[2] # XXX better just use current uid?
-    mountpoint = cfg.smb_mountpoint % username
-    mountcmd = u"sudo mount -t cifs -o user=%(user)s,domain=%(domain)s,uid=%(uid)d,dir_mode=%(dir_mode)s,file_mode=%(file_mode)s,iocharset=%(iocharset)s //%(server)s/%(share)s %(mountpoint)s >%(log)s 2>&1" % {
-        'user': username,
-        'uid': web_uid,
-        'domain': cfg.smb_domain,
-        'server': cfg.smb_server,
-        'share': cfg.smb_share,
-        'mountpoint': mountpoint,
-        'dir_mode': cfg.smb_dir_mode,
-        'file_mode': cfg.smb_file_mode,
-        'iocharset': cfg.smb_iocharset,
-        'log': cfg.smb_log,
-    }
-    try:
-        os.makedirs(mountpoint) # the dir containing the mountpoint must be writeable for us!
-    except OSError, err:
-        pass
-    env = os.environ.copy()
-    env['PASSWD'] = password.encode(cfg.smb_coding)
-    subprocess.call(mountcmd.encode(cfg.smb_coding), env=env, shell=True)
-    return None, True
+    # we just intercept login to mount and logout to umount the smb share
+    if login or logout:
+        import os, pwd, subprocess
+        web_username = cfg.smb_dir_user
+        web_uid = pwd.getpwnam(web_username)[2] # XXX better just use current uid?
+        if logout and user_obj: # logout -> we don't have username in form
+            username = user_obj.name # so we take it from previous auth method (moin_cookie e.g.)
+        mountpoint = cfg.smb_mountpoint % username
+        if login:
+            cmd = u"sudo mount -t cifs -o user=%(user)s,domain=%(domain)s,uid=%(uid)d,dir_mode=%(dir_mode)s,file_mode=%(file_mode)s,iocharset=%(iocharset)s //%(server)s/%(share)s %(mountpoint)s >>%(log)s 2>&1"
+        elif logout:
+            cmd = u"sudo umount %(mountpoint)s >>%(log)s 2>&1"
+            
+        cmd = cmd % {
+            'user': username,
+            'uid': web_uid,
+            'domain': cfg.smb_domain,
+            'server': cfg.smb_server,
+            'share': cfg.smb_share,
+            'mountpoint': mountpoint,
+            'dir_mode': cfg.smb_dir_mode,
+            'file_mode': cfg.smb_file_mode,
+            'iocharset': cfg.smb_iocharset,
+            'log': cfg.smb_log,
+        }
+        env = os.environ.copy()
+        if login:
+            try:
+                os.makedirs(mountpoint) # the dir containing the mountpoint must be writeable for us!
+            except OSError, err:
+                pass
+            env['PASSWD'] = password.encode(cfg.smb_coding)
+        subprocess.call(cmd.encode(cfg.smb_coding), env=env, shell=True)
+    return user_obj, True
 
 
 def ldap_login(request, **kw):
@@ -238,16 +317,17 @@ def ldap_login(request, **kw):
     password = kw.get('password')
     login = kw.get('login')
     logout = kw.get('logout')
-    
+    user_obj = kw.get('user_obj')
+
     cfg = request.cfg
     verbose = cfg.ldap_verbose
     
     if verbose: request.log("got name=%s login=%r logout=%r" % (username, login, logout))
     
     # we just intercept login and logout for ldap, other requests have to be
-    # handled by another auth handler, thus we return None, True.
+    # handled by another auth handler
     if not login and not logout:
-        return None, True
+        return user_obj, True
     
     import sys, re
     import ldap
@@ -275,7 +355,7 @@ def ldap_login(request, **kw):
                 request.log("LDAP: Search found more than one (%d) matches for %s." % (len(lusers), filterstr))
             if result_length == 0:
                 if verbose: request.log("LDAP: Search found no matches for %s." % (filterstr, ))
-            return None, True
+            return user_obj, True
 
         dn, ldap_dict = lusers[0]
         if verbose:
@@ -315,47 +395,46 @@ def ldap_login(request, **kw):
 
     if u:
         u.create_or_update(True)
-    return None, True # moin_cookie has to set the cookie and return the user obj
+    return user_obj, True # moin_cookie has to set the cookie and return the user obj
 
 
 def interwiki(request, **kw):
     # TODO use auth_method and auth_attribs for User object
-    # TODO use tuples as return value
-    if request.form.has_key("user"):
-        username = request.form["user"][0]
-    else:
-        return None
-    passwd = None
-    if request.form.has_key("passwd"):
-        passwd = request.form["passwd"][0]
+    username = kw.get('name')
+    password = kw.get('password')
+    login = kw.get('login')
+    logout = kw.get('logout')
+    user_obj = kw.get('user_obj')
 
-    wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(username)
+    if login:
+        wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(username)
 
-    if err or wikitag not in request.cfg.trusted_wikis:
-        return None
-    
-    if passwd:
-        import xmlrpclib
-        homewiki = xmlrpclib.Server(wikiurl + "?action=xmlrpc2")
-        account_data = homewiki.getUser(wikitail, passwd)
-        if isinstance(account_data, str):
-            # show error message
-            return None
+        if err or wikitag not in request.cfg.trusted_wikis:
+            return user_obj, True
         
-        u = user.User(request, name=username)
-        for key, value in account_data.iteritems():
-            if key not in ["may", "id", "valid", "trusted"
-                           "auth_username",
-                           "name", "aliasname",
-                           "enc_passwd"]:
-                setattr(u, key, value)
-        u.save()
-        request.user = u
-        request.setCookie()
-        return u
-    else:
-        pass
-        # XXX redirect to homewiki
+        if password:
+            import xmlrpclib
+            homewiki = xmlrpclib.Server(wikiurl + "?action=xmlrpc2")
+            account_data = homewiki.getUser(wikitail, password)
+            if isinstance(account_data, str):
+                # show error message
+                return user_obj, True
+            
+            u = user.User(request, name=username)
+            for key, value in account_data.iteritems():
+                if key not in ["may", "id", "valid", "trusted"
+                               "auth_username",
+                               "name", "aliasname",
+                               "enc_passwd"]:
+                    setattr(u, key, value)
+            u.save()
+            setCookie(request, u)
+            return u, True
+        else:
+            pass
+            # XXX redirect to homewiki
+    
+    return user_obj, True
 
 
 class php_session:
@@ -398,12 +477,11 @@ class php_session:
             
             return dec(username), dec(email), dec(name)
         
-        import Cookie
-        import urllib
+        import Cookie, urllib
         from MoinMoin.user import User
-    
         from MoinMoin.util import sessionParser
     
+        user_obj = kw.get('user_obj')
         try:
             cookie = Cookie.SimpleCookie(request.saved_cookie)
         except Cookie.CookieError: # ignore invalid cookies
@@ -417,7 +495,7 @@ class php_session:
                         username, email, name = handle_egroupware(session)
                         break
             else:
-                return None, True
+                return user_obj, True
             
             user = User(request, name=username, auth_username=username)
             
@@ -432,6 +510,6 @@ class php_session:
             if user:
                 user.create_or_update(changed)
             if user and user.valid:
-                return user, False # return user object and stop processing auth method list
-        return None, True # return None and continue with next method in auth list
+                return user, True # True to get other methods called, too
+        return user_obj, True # continue with next method in auth list
 

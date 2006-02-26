@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-26 19:21:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-460
+
+    Summary:
+      feed current user_obj to auth methods, continue auth list in most cases, moved cookie code to auth module
+    Revision:
+      moin--main--1.5--patch-460
+
+    feed current user_obj to auth methods, continue auth list in most cases, moved cookie code to auth module
+    
+
+    modified files:
+     ChangeLog MoinMoin/auth.py MoinMoin/request.py
+     MoinMoin/userform.py docs/CHANGES
+
+
 2006-02-25 13:29:22 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-459
 
     Summary:
