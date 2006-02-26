@@ -157,8 +157,10 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             if _debug:
                 result = result + util.dumpFormData(form)
             return result
-            
-        if form.has_key('select_user'): # Select user profile (su user)
+        
+        
+        # Select user profile (su user) - only works with cookie auth active.
+        if form.has_key('select_user'):
             if (wikiutil.checkTicket(self.request.form['ticket'][0]) and
                 self.request.request_method == 'POST' and
                 self.request.user.isSuperUser()):
@@ -167,8 +169,9 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 theuser = user.User(self.request, uid)
                 theuser.disabled = None
                 theuser.save()
+                from MoinMoin import auth
+                auth.setCookie(self.request, theuser)
                 self.request.user = theuser
-                self.request.setCookie()
                 return  _("Use UserPreferences to change settings of the selected user account")
             else:
                 return _("Use UserPreferences to change your settings or create an account.")

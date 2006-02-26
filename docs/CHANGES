@@ -46,6 +46,17 @@ Version 1.5.current:
       wrong configuration.
     * ldap_login and smb_mount auth methods, see MoinMoin/auth.py and
       wiki/config/more_samples/ldap_smb_farmconfig.py
+    * auth methods now get a user_obj kw argument that is either a user object
+      returned from a previous auth method or None (if no user has been made
+      up yet). The auth method should either return a user object (if it has
+      determined one) or what it got as user_obj (being "passive") or None
+      (if it wants to "veto" some user even if a previous method already has
+      made up some user object).
+    * Changed auth methods return value of continue_flag to be True in most
+      cases (except if wants to "veto" and abort).
+    * moin_cookie auth method now logs out a user by deleting the cookie and
+      setting user_obj.valid = 0. This makes it possible to still get the
+      user's name in subsequent auth method calls within the same request.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
