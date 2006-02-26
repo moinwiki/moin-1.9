@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-26 20:20:17 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-461
+
+    Summary:
+      moved action=raw implementation to Page object
+    Revision:
+      moin--main--1.5--patch-461
+
+    moved action=raw implementation to Page object
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/wikiaction.py
+
+
 2006-02-26 19:21:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-460
 
     Summary:
