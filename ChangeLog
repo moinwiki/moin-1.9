@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-27 18:44:44 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-465
+
+    Summary:
+      redirect to base url after successful login
+    Revision:
+      moin--main--1.5--patch-465
+
+    redirect to base url after successful login
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py docs/CHANGES
+
+
 2006-02-27 18:24:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-464
 
     Summary:

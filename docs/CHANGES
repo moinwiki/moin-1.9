@@ -34,6 +34,7 @@ Known main issues:
 
 Version 1.5.current:
   New features:
+    * show frontpage or last page visited after successful login
     * attachment search using lupy (lupy_search = 1 in your config)
       Title search will also search attachment filenames.
       Full text search will also search attachment contents.

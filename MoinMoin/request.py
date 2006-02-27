@@ -505,9 +505,15 @@ class RequestBase(object):
         password = self.form.get('password', [None])[0]
         login = self.form.has_key('login')
         logout = self.form.has_key('logout')
-        return self.get_user_default_unknown(name=name, password=password,
-                                             login=login, logout=logout,
-                                             user_obj=None)
+        u = self.get_user_default_unknown(name=name, password=password,
+                                          login=login, logout=logout,
+                                          user_obj=None)
+        if login and u.valid: # user login successful
+            # we redirect to base url to either show page_front_page or
+            # jump to the last page the user visited last time
+            self.http_redirect(self.getBaseURL())
+            self.finish()
+        return u
     
     def get_user_default_unknown(self, **kw):
         """ call do_auth and if it doesnt return a user object, make some "Unknown User" """
