@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-27 18:24:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-464
+
+    Summary:
+      make usage of username in smb mount point more flexible
+    Revision:
+      moin--main--1.5--patch-464
+
+    make usage of username in smb mount point more flexible
+    
+
+    modified files:
+     ChangeLog MoinMoin/auth.py
+     wiki/config/more_samples/ldap_smb_farmconfig.py
+
+
 2006-02-27 07:44:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-463
 
     Summary:

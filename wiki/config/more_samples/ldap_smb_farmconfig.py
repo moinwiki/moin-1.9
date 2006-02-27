@@ -103,7 +103,7 @@ class FarmConfig(DefaultConfig):
     smb_server = "smb.example.org" # smb server name
     smb_domain = 'DOMAIN' # smb domain name
     smb_share = 'FILESHARE' # smb share we mount
-    smb_mountpoint = u'/mnt/wiki/%s' # %s -> username we use for mounting
+    smb_mountpoint = u'/mnt/wiki/%(username)s' # where we mount the smb filesystem
     smb_display_prefix = u"S:" # where //server/share is usually mounted for your windows users (display purposes only)
     smb_dir_user = "wwwrun" # owner of the mounted directories
     smb_dir_mode = "0700" # mode of the mounted directories

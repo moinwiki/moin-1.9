@@ -278,7 +278,9 @@ def smb_mount(request, **kw):
         web_uid = pwd.getpwnam(web_username)[2] # XXX better just use current uid?
         if logout and user_obj: # logout -> we don't have username in form
             username = user_obj.name # so we take it from previous auth method (moin_cookie e.g.)
-        mountpoint = cfg.smb_mountpoint % username
+        mountpoint = cfg.smb_mountpoint % {
+            'username': username,
+        }
         if login:
             cmd = u"sudo mount -t cifs -o user=%(user)s,domain=%(domain)s,uid=%(uid)d,dir_mode=%(dir_mode)s,file_mode=%(file_mode)s,iocharset=%(iocharset)s //%(server)s/%(share)s %(mountpoint)s >>%(log)s 2>&1"
         elif logout:
