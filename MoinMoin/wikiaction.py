@@ -771,7 +771,25 @@ def do_bookmark(pagename, request):
 #############################################################################
 
 def do_raw(pagename, request):
-    Page(request, pagename).send_raw()
+    if not request.user.may.read(pagename):
+        Page(request, pagename).send_page(request)
+        return
+
+    if request.form.has_key('rev'):
+        try:
+            rev = request.form['rev'][0]
+            try:
+                rev = int(rev)
+            except StandardError:
+                rev = 0
+        except KeyError:
+            rev = 0
+        page = Page(request, pagename, rev=rev)
+    else:
+        page = Page(request, pagename)
+
+    page.send_raw()
+
 
 def do_format(pagename, request):
     # get the MIME type

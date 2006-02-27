@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-02-27 07:44:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-463
+
+    Summary:
+      action=raw: move revision detection / acl check back to wikiaction
+    Revision:
+      moin--main--1.5--patch-463
+
+    action=raw: move revision detection / acl check back to wikiaction
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/wikiaction.py
+
+
 2006-02-27 00:55:12 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-462
 
     Summary:
