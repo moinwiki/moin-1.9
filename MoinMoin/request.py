@@ -1482,6 +1482,10 @@ class RequestTwisted(RequestBase):
             
             RequestBase.__init__(self, properties)
 
+        except MoinMoinNoFooter: # might be triggered by http_redirect
+            self.http_headers() # send headers (important for sending MOIN_ID cookie)
+            self.finish()
+
         except Exception, err:
             # Wrap err inside an internal error if needed
             from MoinMoin import error
