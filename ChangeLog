@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-05 13:57:20 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-466
+
+    Summary:
+      fixing twisted redirect problem
+    Revision:
+      moin--main--1.5--patch-466
+
+    fixing twisted redirect problem
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-02-27 18:44:44 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-465
 
     Summary:
