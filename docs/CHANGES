@@ -92,6 +92,7 @@ Version 1.5.2:
     * The superuser now can switch to another user using UserPreferences -
       nice to help your users when they forgot their password or need other
       help. You need to logout/relogin to use your own userid afterwards.
+      This function only works correctly if you use moin_cookie authentication.
       Thanks to Reimar Bauer.
     * Add new markup for bulletless lists: just use a "." instead of "*".
 
