@@ -537,7 +537,7 @@ msgstr "eşle"
 msgid "matches"
 msgstr "eşleniyor"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -549,7 +549,7 @@ msgstr ""
 "\n"
 "Giriş Parolası: %s\n"
 "\n"
-"Giriş Form için URL: %s/?action=userform&uid=%s\n"
+"Giriş için URL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -620,11 +620,10 @@ msgstr ""
 "Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz "
 "artık."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için "
-"KullanıcıÖzellikleri sayfasını kullanabilirsiniz."
+"Seçilen kullanıcı hesabı üzerinde değişiklik yapmak için "
+"KullanıcıÖzellikleri bağlantısını kullanınız."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -646,7 +645,7 @@ msgid "free choice"
 msgstr "İsteğe bağlı seçim"
 
 msgid "Select User"
-msgstr ""
+msgstr "Kullanıcı Seç"
 
 msgid "Save"
 msgstr "Kaydet"

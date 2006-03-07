@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2006-02-02 02:00+0100\n"
+"PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -162,7 +162,7 @@ msgid "Comment:"
 msgstr "Opomba:"
 
 msgid "<No addition>"
-msgstr "<ne dodaj>"
+msgstr "<v nobeno>"
 
 #, python-format
 msgid "Add to: %(category)s"
@@ -205,8 +205,8 @@ msgstr ""
 " Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. "
 "oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne "
 "besedilo.\n"
-" Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim"
-"([\"oglati oklepaji in dvojni narekovaji\"])]]; URL; [URL]; [URL povezava].\n"
+" Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim([\"v "
+"oglatih oklepajih in narekovajih\"])]]; URL; [URL]; [URL sklic].\n"
 " Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    "
 "na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.\n"
 "\n"
@@ -409,7 +409,7 @@ msgstr "Gor"
 
 msgid "Publish my email (not my wiki homepage) in author info"
 msgstr ""
-"Objavi moj e-poštni naslov (ne domače strani) v informacijah o avtorjih"
+"Objavi moj e-poštni naslov (ne domače strani) pri informacijah o avtorjih"
 
 msgid "Open editor on double click"
 msgstr "Odpri urejevalnik ob dvokliku"
@@ -469,7 +469,7 @@ msgid "User CSS URL"
 msgstr "URL uporabnikovega CSS stila"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(prazno polje izklopi uporabnikov CSS)"
+msgstr "(prazno polje izklopi upor. CSS)"
 
 msgid "Editor size"
 msgstr "Velikost področja za urejanje"
@@ -510,7 +510,7 @@ msgstr "zadetek"
 msgid "matches"
 msgstr "zadetkov"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -522,7 +522,7 @@ msgstr ""
 "\n"
 "Uporabniško geslo: %s\n"
 "\n"
-"URL za prijavo: %s/?action=userform&uid=%s\n"
+"URL za prijavo: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -592,11 +592,10 @@ msgstr "Ta e-poštni naslov si že lasti nekdo drug."
 msgid "User account created! You can use this account to login now..."
 msgstr "Uporabniško ime je narejeno, sedaj se lahko prijavite..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Uporabite UserPreferences za spremembo nastavitev ali za izdelavo novega "
-"uporabniškega imena."
+"Uporabite UserPreferences za spremembo nastavitev izbranega uporabniškega "
+"računa"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -606,19 +605,19 @@ msgid "User preferences saved!"
 msgstr "Uporabniške nastavitve so shranjene!"
 
 msgid "Default"
-msgstr "standardni"
+msgstr "standardna"
 
 msgid "<Browser setting>"
 msgstr "<kot predlaga bralnik>"
 
 msgid "the one preferred"
-msgstr "izbrani"
+msgstr "izbrani-najljubši"
 
 msgid "free choice"
 msgstr "prosta izbira"
 
 msgid "Select User"
-msgstr ""
+msgstr "Izberi uporabnika"
 
 msgid "Save"
 msgstr "Shrani"
@@ -636,7 +635,7 @@ msgid "Time zone"
 msgstr "Časovni pas"
 
 msgid "Your time is"
-msgstr "Lokalni čas je"
+msgstr "Vaš lokalni čas je"
 
 msgid "Server time is"
 msgstr "Čas na strežniku je"
@@ -663,7 +662,7 @@ msgid "Create Profile"
 msgstr "Tvori profil"
 
 msgid "Mail me my account data"
-msgstr "Pošlji mi podatke tem uporabniškem računu"
+msgstr "Pošlji mi podatke o tem uporabniškem računu"
 
 msgid "Action"
 msgstr "Akcija"
@@ -817,7 +816,7 @@ msgstr ""
 "nastavitvene strani."
 
 msgid "You have been subscribed to this page."
-msgstr "Naročilo na obvestila o spremembah s te strani je sprejeto."
+msgstr "Sedaj ste naročeni na obvestila o spremembah s te strani."
 
 msgid "Charts are not available!"
 msgstr "Diagrami niso na voljo!"
@@ -1005,16 +1004,16 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Naložitev datoteke na strežnik nikoli ne prekrije obstoječe datoteke.\n"
+"Naložitev datoteke na strežnik ne prekrije obstoječe datoteke.\n"
 "Če priponka s tem imenom že obstaja, je treba preimenovati datoteko,\n"
 "ki jo želite naložiti na strežnik.\n"
 "Če je polje za preimenovanje prazno, se uporabi nespremenjeno ime datoteke."
 
 msgid "File to upload"
-msgstr "Ime datoteke, ki jo nalagate"
+msgstr "ime datoteke, ki jo nalagate:"
 
 msgid "Rename to"
-msgstr "Preimenovati v"
+msgstr "preimenovati v:"
 
 msgid "Upload"
 msgstr "Naloži na strežnik"
@@ -1121,7 +1120,7 @@ msgid "Attachment '%(filename)s'"
 msgstr "Priponka '%(filename)s'"
 
 msgid "Package script:"
-msgstr "Skript paketa:"
+msgstr "Ukazna procedura paketa:"
 
 msgid "File Name"
 msgstr "Ime datoteke"
@@ -1281,7 +1280,7 @@ msgid "Slide %(pos)d of %(size)d"
 msgstr "Slika %(pos)d od %(size)d"
 
 msgid "No orphaned pages in this wiki."
-msgstr "V tem vikuju ni osirotelih strani (takih brez staršev)."
+msgstr "V tem vikuju ni nepovezanih strani (sirot)."
 
 #, python-format
 msgid "No quotes on %(pagename)s."
@@ -1451,11 +1450,11 @@ msgstr "Odstrani tole obvestilo"
 
 #, python-format
 msgid "last edited %(time)s by %(editor)s"
-msgstr "nazadnje spreminjano ob %(time)s, spreminjal %(editor)s"
+msgstr "nazadnje spreminjano %(time)s, spreminjal %(editor)s"
 
 #, python-format
 msgid "last modified %(time)s"
-msgstr "zadnja sprememba ob %(time)s"
+msgstr "zadnja sprememba: %(time)s"
 
 msgid "Search:"
 msgstr "Iskanje:"
@@ -1479,7 +1478,7 @@ msgid "Raw Text"
 msgstr "Izvorno besedilo"
 
 msgid "Delete Cache"
-msgstr "Briši predspomin"
+msgstr "Izprazni hitro shrambo"
 
 msgid "Delete Page"
 msgstr "Izbriši to stran"
@@ -1516,11 +1515,11 @@ msgid "Show %s days."
 msgstr "Prikaži %s dni."
 
 msgid "DeleteCache"
-msgstr "BrišiPredspomin"
+msgstr "IzprazniHitroShrambo"
 
 #, python-format
 msgid "(cached %s)"
-msgstr "(shranjeno v predpomnilnik %s)"
+msgstr "(shranjeno v hitro shrambo %s)"
 
 msgid "Or try one of these actions:"
 msgstr "Ali pa poskusi z:"
@@ -1631,15 +1630,3 @@ msgstr "PreimenujStran"
 
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
-
-#~ msgid "Required attribute \"%(attrname)s\" missing"
-#~ msgstr "Manjka obvezen atribut \"%(attrname)s\""
-
-#~ msgid "Submitted form data:"
-#~ msgstr "Podatki s poslanega obrazca:"
-
-#~ msgid "EditText"
-#~ msgstr "Spremeni"
-
-#~ msgid "Immutable page"
-#~ msgstr "Nespremenljiva stran"

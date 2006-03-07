@@ -4,7 +4,7 @@
 meta = {
   'language': """Srpski""",
   'elanguage': """Serbian""",
-  'maintainer': """Thomas W. Horna <sarman@t-online.de>""",
+  'maintainer': """Thomas W. Horna <obivatelj@gmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,

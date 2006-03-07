@@ -299,6 +299,18 @@ jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''porównanie''',
 '''matches''':
 '''porówniania''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Identyfikator czytelnika: %s
+
+Hasło czytelnika: %s
+
+URL logowania: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -340,6 +352,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Ten adres poczty elektronicznej należy do kogoś innego.''',
 '''User account created! You can use this account to login now...''':
 '''Konto czytelnika utworzone! Możesz teraz użyć tego konta żeby się zalogować...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Wejdź do PreferencjeCzytelnika aby zmienić ustawienia wybranego konta.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
 '''User preferences saved!''':
@@ -352,6 +366,8 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''tylko preferowany''',
 '''free choice''':
 '''wybór dowolny''',
+'''Select User''':
+'''Wybierz czytelnika''',
 '''Save''':
 '''Zachowaj''',
 '''Preferred theme''':

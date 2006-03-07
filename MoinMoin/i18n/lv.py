@@ -297,6 +297,18 @@ Grupas lapas vārds nav atļauts.''',
 '''saskaņa''',
 '''matches''':
 '''saskaņas''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Lietotāja vārds: %s
+
+Lietotāja parole: %s
+
+Lietotāja URL: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -323,7 +335,7 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
 '''Use UserPreferences to change your settings or create an account.''':
-'''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
+'''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIestatījumi''',
 '''Empty user name. Please enter a user name.''':
 '''Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu.''',
 '''This user name already belongs to somebody else.''':
@@ -338,6 +350,8 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Šāda e-pasta adrese jau kādam pieder.''',
 '''User account created! You can use this account to login now...''':
 '''Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Nevar ielādēt tēmu \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -350,6 +364,8 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''viens vēlamais''',
 '''free choice''':
 '''brīva izvēle''',
+'''Select User''':
+'''Izvēlēties lietotāju''',
 '''Save''':
 '''Saglabāt''',
 '''Preferred theme''':

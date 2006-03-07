@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2006-02-02 16:35+0900\n"
+"PO-Revision-Date: 2006-02-08 11:43+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,8 @@ msgid ""
 "The backed up content of this page is deprecated and will not be included in "
 "search results!"
 msgstr ""
-"이 글의 백업된 본문은 더 이상 사용되지 않으며 검색 결과에 포함되지 않습니다!"
+"이 문서의 백업된 본문은 더 이상 사용되지 않으며 검색 결과에 포함되지 않습니"
+"다!"
 
 #, python-format
 msgid "Revision %(rev)d as of %(date)s"
@@ -51,30 +52,31 @@ msgid ""
 "macro call.-~\n"
 msgstr ""
 "~-이 양식을 전송하면, 결과값들이 화면에 표시됩니다.\n"
-"이 양식을 다른 글에서 사용하려면 다음 매크로 호출을 추가하세요.\n"
+"이 양식을 다른 문서에서 사용하려면 다음 매크로 호출을 추가하세요.\n"
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
 "-~\n"
 
 msgid "Create New Page"
-msgstr "새 글 작성"
+msgstr "새 문서 작성"
 
 msgid "You are not allowed to view this page."
-msgstr "이 글을 볼 수 있는 권한이 없습니다."
+msgstr "이 문서를 볼 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to edit this page."
-msgstr "이 글을 고칠 수 있는 권한이 없습니다."
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
 
 msgid "Page is immutable!"
-msgstr "이 글은 고칠 수 없습니다."
+msgstr "이 문서는 고칠 수 없습니다."
 
 msgid "Cannot edit old revisions!"
-msgstr "옛 글은 고칠 수 없습니다."
+msgstr "옛 문서는 고칠 수 없습니다."
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "글 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!"
+msgstr ""
+"문서 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!"
 
 msgid "Page name is too long, try shorter name."
-msgstr "글 이름이 너무 깁니다. 짧은 이름을 사용하세요."
+msgstr "문서 이름이 너무 깁니다. 짧은 이름을 사용하세요."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -90,17 +92,17 @@ msgstr "%(lock_page)s에 대한 잠금이 풀렸습니다!"
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # minutes."
-msgstr "%(lock_page)s에 대한 글 잠금이 # 분 후에 풀릴 예정입니다."
+msgstr "%(lock_page)s에 대한 문서 잠금이 # 분 후에 풀릴 예정입니다."
 
 #, python-format
 msgid "Your edit lock on %(lock_page)s will expire in # seconds."
-msgstr "%(lock_page)s에 대한 글 잠금이 # 초 뒤에 풀릴 예정입니다."
+msgstr "%(lock_page)s에 대한 문서 잠금이 # 초 뒤에 풀릴 예정입니다."
 
 msgid "Someone else deleted this page while you were editing!"
-msgstr "이 글을 수정하는 동안에 다른 사람이 이 글을 지워버렸습니다."
+msgstr "이 문서를 수정하는 동안에 다른 사람이 이 문서를 지워버렸습니다."
 
 msgid "Someone else changed this page while you were editing!"
-msgstr "이 글을 수정하는 동안에 다른 사람이 같은 글을 수정했습니다."
+msgstr "이 문서를 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다."
 
 #, python-format
 msgid ""
@@ -108,17 +110,18 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!\n"
 "Have a look at the diff of %(difflink)s to see what has been changed."
 msgstr ""
-"이 글을 수정하는 동안에 다른 사람이 먼저 이 글을 수정했습니다.\n"
-"글 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세요!\n"
+"이 문서를 수정하는 동안에 다른 사람이 먼저 이 문서를 수정했습니다.\n"
+"문서 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세"
+"요!\n"
 "%(difflink)s에서 어떤 것이 바뀌었는지 살펴보세요."
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
-msgstr "[%s에서 옮겨온 새 글 내용]"
+msgstr "[%s에서 옮겨온 새 문서 내용]"
 
 #, python-format
 msgid "[Template %s not found]"
-msgstr "[글틀 %s를(을) 찾을 수 없음]"
+msgstr "[양식 %s를(을) 찾을 수 없음]"
 
 #, python-format
 msgid "[You may not read %s]"
@@ -197,28 +200,28 @@ msgstr ""
 "게'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''굵게 뉘여쓰기'''''[[Verbatim"
 "(''''')]]; [[Verbatim('')]]''혼합 ''[[Verbatim(''')]]'''''굵게'''[[Verbatim"
 "(''')]] 뉘여쓰기''[[Verbatim('')]]; [[Verbatim(----)]] 가로 줄.\n"
-" 제목:: [[Verbatim(=)]] 제목 1 [[Verbatim(=)]]; [[Verbatim(==)]] 제목 2 "
-"[[Verbatim(==)]]; [[Verbatim(===)]] 제목 3 [[Verbatim(===)]];   [[Verbatim"
-"(====)]] 제목 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 제목 5 [[Verbatim"
+" 표제:: [[Verbatim(=)]] 표제 1 [[Verbatim(=)]]; [[Verbatim(==)]] 표제 2 "
+"[[Verbatim(==)]]; [[Verbatim(===)]] 표제 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] 표제 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 표제 5 [[Verbatim"
 "(=====)]].\n"
 " 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자"
 "표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.\n"
 " 링크:: 대소문자 섞어 쓰기([[Verbatim(JoinCapitalizedWords)]]); [[Verbatim"
 "([\"대괄호 안에 큰 따옴표\"])]]; URL; [URL]; [URL 이름].\n"
-" 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    제목이나 표 뒤에는 공백이 있"
-"으면 안 됩니다.\n"
+" 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으"
+"면 안 됩니다.\n"
 "\n"
 "(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.\n"
 
 msgid "Edit was cancelled."
-msgstr "글 수정을 취소했습니다."
+msgstr "문서 수정을 취소했습니다."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "글이 저장되었습니다."
+msgstr "문서가 저장되었습니다."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
-msgstr "글 \"%s\"가(이) 지워졌습니다!"
+msgstr "문서 \"%s\"가(이) 지워졌습니다!"
 
 #, python-format
 msgid ""
@@ -233,10 +236,10 @@ msgid ""
 msgstr ""
 "위키사용자님,\n"
 "\n"
-"\"%(sitename)s\" 사이트의 위키 글이나 위키 카테고리의 변경사항 메일 알림을 구"
+"\"%(sitename)s\" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구"
 "독하고 계십니다.\n"
 "\n"
-"%(editor)s님께서 다음 글을 고치셨습니다:\n"
+"%(editor)s님께서 다음 문서를 고치셨습니다:\n"
 "%(pagelink)s\n"
 "\n"
 
@@ -251,7 +254,7 @@ msgstr ""
 "\n"
 
 msgid "New page:\n"
-msgstr "새 글:\n"
+msgstr "새 문서:\n"
 
 msgid "No differences found!\n"
 msgstr "차이점이 없습니다!\n"
@@ -273,23 +276,23 @@ msgstr "[%(lang)s] %(recipients)s: %(status)s"
 
 #, python-format
 msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
-msgstr "## 글 \"%(pagename)s\"의 %(date)s 백업"
+msgstr "## 문서 \"%(pagename)s\"의 %(date)s 백업"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
-msgstr "예기치 않은 에러 때문에 글을 잠글 수 없었습니다. (에러번호=%d)"
+msgstr "예기치 않은 에러 때문에 문서를 잠글 수 없었습니다. (에러번호=%d)"
 
 msgid "Page could not get locked. Missing 'current' file?"
-msgstr "글을 잠글 수 없었습니다. 'current' 파일이 없는 것 같습니다."
+msgstr "문서를 잠글 수 없었습니다. 'current' 파일이 없는 것 같습니다."
 
 msgid "You are not allowed to edit this page!"
-msgstr "이 글을 고칠 수 있는 권한이 없습니다!"
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다!"
 
 msgid "You cannot save empty pages."
-msgstr "빈 글은 저장할 수 없습니다."
+msgstr "빈 문서는 저장할 수 없습니다."
 
 msgid "You already saved this page!"
-msgstr "이 글을 이미 저장했습니다!"
+msgstr "이 문서는 이미 저장했습니다!"
 
 msgid ""
 "Sorry, someone else saved the page while you edited it.\n"
@@ -302,15 +305,15 @@ msgid ""
 "the content editbox with your version of the page, because that would\n"
 "delete the changes of the other person, which is excessively rude!''\n"
 msgstr ""
-"이 글을 당신이 수정하는 동안에 다른 사람이 같은 글을 수정했습니다.\n"
+"이 문서를 당신이 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다.\n"
 "\n"
 "다음 지시 사항을 따라주세요: 브라우저의 \"뒤로\" 버튼을 눌러서, 수정한 부분"
 "을\n"
-"복사해 온 후, 다시 글 수정으로 가서 다른 사람이 고친 내용을 피해\n"
+"복사해 온 후, 다시 문서 수정으로 가서 다른 사람이 고친 내용을 피해\n"
 "방금 수정하려고 했던 내용을 다시 추가해서 저장해 주세요.\n"
 "\n"
-"''자신이 마지막으로 수정한 글 내용 전체를 그대로 복사해서 덮어쓰기 하지 마세"
-"요.\n"
+"''자신이 마지막으로 수정한 문서 내용 전체를 그대로 복사해서 덮어쓰기 하지 마"
+"세요.\n"
 "그러면, 다른 사람의 변경 내용이 모두 취소되며,\n"
 "이런 행위는 아주 무례한 것으로 간주됩니다.''\n"
 
@@ -319,7 +322,7 @@ msgid "A backup of your changes is [%(backup_url)s here]."
 msgstr "이번 변경 사항에 대한 백업은 [%(backup_url)s 여기]에 있습니다."
 
 msgid "You did not change the page content, not saved!"
-msgstr "글 내용을 고치지 않았으므로 저장되지 않았습니다."
+msgstr "문서 내용을 고치지 않았으므로 저장되지 않았습니다."
 
 msgid ""
 "You can't change ACLs on this page since you have no admin rights on it!"
@@ -330,20 +333,20 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"%(owner)s의 글 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 글을 잠그고 고"
-"칠 수 있습니다."
+"%(owner)s의 문서 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 문서를 잠그"
+"고 고칠 수 있습니다."
 
 #, python-format
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
-msgstr "%(bumptime)s 까지 다른 사람들은 이 글을 ''고칠 수 없습니다''."
+msgstr "%(bumptime)s 까지 다른 사람들은 이 문서를 ''고칠 수 없습니다''."
 
 #, python-format
 msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"%(bumptime)s 까지 다른 사람들이 글을 고치려고 시도하면 ''경고''가 뜹니다."
+"%(bumptime)s 까지 다른 사람들이 문서를 고치려고 시도하면 ''경고''가 뜹니다."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "잠금 기간을 연장하려면 '미리보기' 버튼을 누르세요."
@@ -353,8 +356,8 @@ msgid ""
 "This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
 "s, i.e. for %(mins_valid)d minute(s)."
 msgstr ""
-"이 글은 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 수 "
-"있도록 ''잠겨''있습니다."
+"이 문서는 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 "
+"수 있도록 ''잠겨''있습니다."
 
 #, python-format
 msgid ""
@@ -365,10 +368,10 @@ msgid ""
 "to avoid editing conflicts.'''[[BR]]\n"
 "To leave the editor, press the Cancel button."
 msgstr ""
-"%(owner)s가 %(timestamp)s에 글 고치기를 위한 잠시 잠금을 요청하였습니다."
+"%(owner)s가 %(timestamp)s에 문서 수정을 위한 잠시 잠금을 요청하였습니다."
 "[[BR]]\n"
-"'''가급적이면 최소한 %(mins_valid)d 분 동안은 글 충돌을 막기 위해서 글을 ''고"
-"치치 않는'' 것이 좋습니다.'''[[BR]]\n"
+"'''가급적이면 최소한 %(mins_valid)d 분 동안은 수정 충돌을 막기 위해서 문서를 "
+"''고치치 않는'' 것이 좋습니다.'''[[BR]]\n"
 "편집을 중단하려면 취소 버튼을 누르세요."
 
 msgid "<unknown>"
@@ -384,10 +387,10 @@ msgid "Edit"
 msgstr "수정"
 
 msgid "UnSubscribe"
-msgstr "감시 해제"
+msgstr "구독 취소"
 
 msgid "Subscribe"
-msgstr "감시"
+msgstr "구독"
 
 msgid "Raw"
 msgstr "원문"
@@ -408,22 +411,22 @@ msgid "Publish my email (not my wiki homepage) in author info"
 msgstr "작성자 정보에 내 위키 홈페이지 대신 E-mail 주소를 사용함"
 
 msgid "Open editor on double click"
-msgstr "더블 클릭해서 글을 수정함"
+msgstr "더블 클릭해서 문서를 수정함"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr "첫페이지 대신 마지막 방문 위치로 이동함"
+msgstr "대문 대신 마지막 방문 위치로 이동함"
 
 msgid "Show question mark for non-existing pagelinks"
-msgstr "존재하지 않는 글 링크 옆에 물음표 표시"
+msgstr "존재하지 않는 문서 링크 옆에 물음표 표시"
 
 msgid "Show page trail"
-msgstr "글보기 발자국 표시"
+msgstr "문서 조회 기록 표시"
 
 msgid "Show icon toolbar"
 msgstr "아이콘 툴바 표시"
 
 msgid "Show top/bottom links in headings"
-msgstr "제목 옆에 처음/끝 링크 표시"
+msgstr "표제 옆에 처음/끝 링크 표시"
 
 msgid "Show fancy diffs"
 msgstr "꾸며진 변경사항 표시"
@@ -478,11 +481,11 @@ msgid ""
 msgstr ""
 "{{{'%s'}}}는(은) 잘못된 사용자 이름입니다.\n"
 "이름에는 유니코드 알파벳 또는 숫자가 포함될 수 있고, 필요하다면 1번\n"
-"띄어 쓸 수 있습니다. 묶음 글 이름도 또한 사용할 수 없습니다."
+"띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다."
 
 #, python-format
 msgid "You are not allowed to do %s on this page."
-msgstr "이 글에 %s 작업을 할 수 있는 권한이 없습니다."
+msgstr "이 문서에 %s 작업을 할 수 있는 권한이 없습니다."
 
 msgid "Login"
 msgstr "로그인"
@@ -493,7 +496,7 @@ msgstr " %s 하고 다시 시도하세요."
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다."
+msgstr "전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다."
 
 #, python-format
 msgid "%.2f seconds"
@@ -505,7 +508,7 @@ msgstr " 개 포함"
 msgid "matches"
 msgstr " 개 포함"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -513,11 +516,11 @@ msgid ""
 "\n"
 "Login URL: %s/%s\n"
 msgstr ""
-"로그인 이름: %s\n"
+"사용자 이름: %s\n"
 "\n"
-"로그인 암호: %s\n"
+"사용자 암호: %s\n"
 "\n"
-"로그인 URL: %s/?action=userform&uid=%s\n"
+"로그인 URL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -531,7 +534,7 @@ msgid ""
 msgstr ""
 "누군가 이 메일 주소로 계정 정보를 전송하도록 요청했습니다.\n"
 "\n"
-"만약 암호를 잊었다면 아래 URL로 가서 로그인 이름와 함께 제시된 암호를 \n"
+"만약 암호를 잊었다면 아래 URL로 가서 사용자 이름와 함께 제시된 암호를 \n"
 "써 있는 그대로 입력하고 (복사해서 붙여넣기 하세요) \n"
 "로그인 하세요.\n"
 "\n"
@@ -587,11 +590,8 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "사용자 계정이 만들어졌습니다! 이 계정을 사용해서 로그인하실 수 있습니다..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"계정을 새로 만들거나 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세"
-"요."
+msgstr "선택한 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -613,7 +613,7 @@ msgid "free choice"
 msgstr "자유 선택"
 
 msgid "Select User"
-msgstr ""
+msgstr "사용자 선택"
 
 msgid "Save"
 msgstr "저장"
@@ -652,7 +652,7 @@ msgid "This list does not work, unless you have entered a valid email address!"
 msgstr "메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!"
 
 msgid "Subscribed wiki pages (one regex per line)"
-msgstr "메일 알림을 받는 글들 (한 줄에 정규식 하나씩)"
+msgstr "메일 알림을 받는 문서들 (한 줄에 정규식 하나씩)"
 
 msgid "Create Profile"
 msgstr "사용자 등록"
@@ -668,7 +668,7 @@ msgstr "옛 버전이 저장되어 있지 않습니다!"
 
 #, python-format
 msgid "Diff for \"%s\""
-msgstr "\"%s\" 글 변경사항"
+msgstr "\"%s\" 문서 변경사항"
 
 #, python-format
 msgid "Differences between revisions %d and %d"
@@ -683,7 +683,7 @@ msgstr "차이점이 없습니다!"
 
 #, python-format
 msgid "The page was saved %(count)d times, though!"
-msgstr "이 글은 %(count)d번 변경되었습니다!"
+msgstr "이 문서는 %(count)d번 변경되었습니다!"
 
 msgid "(ignoring whitespace)"
 msgstr "(공백 무시)"
@@ -696,16 +696,16 @@ msgstr "일반 정보"
 
 #, python-format
 msgid "Page size: %d"
-msgstr "글 크기: %d"
+msgstr "문서 크기: %d"
 
 msgid "SHA digest of this page's content is:"
-msgstr "이 글 내용의 SHA 해쉬 다이제스트:"
+msgstr "이 문서 내용의 SHA 해쉬 다이제스트:"
 
 msgid "The following users subscribed to this page:"
-msgstr "다음 사용자들이 이 글을 구독하고 있습니다:"
+msgstr "다음 사용자들이 이 문서를 구독하고 있습니다:"
 
 msgid "This page links to the following pages:"
-msgstr "이 글은 다음 링크들을 포함하고 있습니다:"
+msgstr "이 문서는 다음 링크들을 포함하고 있습니다:"
 
 msgid "Date"
 msgstr "날짜"
@@ -758,50 +758,50 @@ msgstr "기록이 없습니다!"
 
 #, python-format
 msgid "Info for \"%s\""
-msgstr "글 \"%s\"에 대한 정보"
+msgstr "문서 \"%s\"에 대한 정보"
 
 #, python-format
 msgid "Show \"%(title)s\""
 msgstr "\"%(title)s\" 보기"
 
 msgid "General Page Infos"
-msgstr "일반 글 정보"
+msgstr "일반 문서 정보"
 
 #, python-format
 msgid "Show chart \"%(title)s\""
 msgstr "\"%(title)s\" 차트 보기"
 
 msgid "Page hits and edits"
-msgstr "글 조회/수정 정보"
+msgstr "문서 조회/수정 정보"
 
 msgid "You are not allowed to revert this page!"
-msgstr "이 글을 되돌릴 수 있는 권한이 없습니다!"
+msgstr "이 문서를 되돌릴 수 있는 권한이 없습니다!"
 
 msgid "You must login to add a quicklink."
 msgstr "즐겨찾기를 추가하시려면 로그인을 하셔야 합니다."
 
 msgid "Your quicklink to this page has been removed."
-msgstr "이 글을 즐겨찾기에서 삭제했습니다."
+msgstr "이 문서를 즐겨찾기에서 삭제했습니다."
 
 msgid "A quicklink to this page has been added for you."
-msgstr "이 글을 즐겨찾기에 추가했습니다."
+msgstr "이 문서를 즐겨찾기에 추가했습니다."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "글의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다."
+msgstr "문서의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다."
 
 msgid "This wiki is not enabled for mail processing."
 msgstr "이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다."
 
 msgid "You must log in to use subscribtions."
-msgstr "글의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다."
+msgstr "문서의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"글의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
+"문서의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
 "요."
 
 msgid "Your subscribtion to this page has been removed."
-msgstr "이 글을 더 이상 감시하지 않습니다."
+msgstr "이 문서를 더 이상 감시하지 않습니다."
 
 msgid "Can't remove regular expression subscription!"
 msgstr "정규표현식으로 된 감시 목록은 지울 수 없습니다!"
@@ -810,7 +810,7 @@ msgid "Edit the subscription regular expressions in your UserPreferences."
 msgstr "UserPreferences에서 정규표현식으로 된 감시 목록을 수정하세요."
 
 msgid "You have been subscribed to this page."
-msgstr "이제 이 글이 변경되면 메일로 알려드리겠습니다."
+msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
 
 msgid "Charts are not available!"
 msgstr "이 위키에서는 차트 그리기가 지원되지 않습니다."
@@ -823,7 +823,7 @@ msgid "Bad chart type \"%s\"!"
 msgstr "잘못된 차트 종류 입니다: \"%s\""
 
 msgid "Search Titles"
-msgstr "제목 찾기"
+msgstr "제목에서 찾기"
 
 msgid "Display context of search results"
 msgstr "검색 결과의 본문을 보기"
@@ -835,13 +835,13 @@ msgid "Search Text"
 msgstr "내용에서 찾기"
 
 msgid "Go To Page"
-msgstr "글로 이동"
+msgstr "문서로 이동"
 
 msgid "Include system pages"
-msgstr "시스템 글 포함"
+msgstr "시스템 문서 포함"
 
 msgid "Exclude system pages"
-msgstr "시스템 글 제외"
+msgstr "시스템 문서 제외"
 
 msgid "Plain title index"
 msgstr "텍스트 제목 색인"
@@ -863,13 +863,13 @@ msgid "4Suite Version"
 msgstr "4Suite 버전"
 
 msgid "Number of pages"
-msgstr "글 개수"
+msgstr "문서 개수"
 
 msgid "Number of system pages"
-msgstr "시스템 글 개수"
+msgstr "시스템 문서 개수"
 
 msgid "Accumulated page sizes"
-msgstr "글 크기 총합"
+msgstr "문서 크기 총합"
 
 msgid "Entries in edit log"
 msgstr "수정사항 로그 길이"
@@ -948,7 +948,7 @@ msgstr "[첨부 %d개]"
 msgid ""
 "There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
 "page."
-msgstr "이 글에 <a href=\"%(link)s\">%(count)s개의 첨부 파일</a>이 있습니다."
+msgstr "이 문서에 <a href=\"%(link)s\">%(count)s개의 첨부 파일</a>이 있습니다."
 
 msgid "Filename of attachment not specified!"
 msgstr "첨부 파일 이름이 지정되지 않았습니다!"
@@ -963,7 +963,7 @@ msgid ""
 "Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
 "since this is subject to change and can break easily."
 msgstr ""
-"이 글에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 "
+"이 문서에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 "
 "'''{{{attachment:파일이름}}}''' 형식으로 쓰십시오.\n"
 "URL은 자주 바뀔 수 있으므로 {{{[받기]}}} 링크의 URL을 직접 사용하지 마세요."
 
@@ -984,7 +984,7 @@ msgid "Attached Files"
 msgstr "첨부 파일"
 
 msgid "You are not allowed to attach a file to this page."
-msgstr "이 글에 파일을 첨부할 수 있는 권한이 없습니다."
+msgstr "이 문서에 파일을 첨부할 수 있는 권한이 없습니다."
 
 msgid "New Attachment"
 msgstr "새 첨부"
@@ -1012,7 +1012,7 @@ msgid "File attachments are not allowed in this wiki!"
 msgstr "이 위키에 파일을 첨부할 수 없습니다.!"
 
 msgid "You are not allowed to save a drawing on this page."
-msgstr "이 글에 그림을 저장할 수 있는 권한이 없습니다."
+msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
 
 msgid ""
 "No file content. Delete non ASCII characters from the file name and try "
@@ -1022,19 +1022,19 @@ msgstr ""
 "보세요."
 
 msgid "You are not allowed to delete attachments on this page."
-msgstr "이 글의 첨부 파일을 지울 수 있는 권한이 없습니다."
+msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to get attachments from this page."
-msgstr "이 글의 첨부 파일을 받을 수 있는 권한이 없습니다."
+msgstr "이 문서의 첨부 파일을 받을 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "이 글에 첨부된 파일의 압축을 해제할 수 있는 권한이 없습니다."
+msgstr "이 문서에 첨부된 파일의 압축을 해제할 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to install files."
 msgstr "이 파일을 설치할 수 있는 권한이 없습니다."
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "이 글에 첨부된 파일을 볼 수 있는 권한이 없습니다."
+msgstr "이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다."
 
 #, python-format
 msgid "Unsupported upload action: %s"
@@ -1128,16 +1128,16 @@ msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "%(pagename)s의 [[Verbatim(attachment:)]]%(filename)s"
 
 msgid "You are not allowed to delete this page."
-msgstr "이 글을 지울 수 있는 권한이 없습니다."
+msgstr "이 문서를 지울 수 있는 권한이 없습니다."
 
 msgid "This page is already deleted or was never created!"
-msgstr "이 글은 이미 지워졌거나 아직 만들어지지 않았습니다!"
+msgstr "이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!"
 
 msgid "Please use the interactive user interface to delete pages!"
-msgstr "글을 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
+msgstr "문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 msgid "Really delete this page?"
-msgstr "정말로 이 글을 지우시겠습니까?"
+msgstr "정말로 이 문서를 지우시겠습니까?"
 
 msgid "Delete"
 msgstr "삭제"
@@ -1147,39 +1147,39 @@ msgstr "삭제하는 이유"
 
 #, python-format
 msgid "No pages like \"%s\"!"
-msgstr "\"%s\"가(이) 들어간 글이 없습니다."
+msgstr "\"%s\"가(이) 들어간 문서가 없습니다."
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
 msgstr ""
-"\"%s\"가(이) 들어간 페이지가 딱 하나 발견되었습니다. 그 글로 이동합니다."
+"\"%s\"가(이) 들어간 문서가 딱 하나 발견되었습니다. 해당 문서로 이동합니다."
 
 #, python-format
 msgid "Pages like \"%s\""
-msgstr "\"%s\"와 비슷한 글"
+msgstr "\"%s\"와 비슷한 문서"
 
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr ""
-"제목에 \"%(title)s\"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되"
-"었습니다."
+"문서 제목에 \"%(title)s\"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발"
+"견되었습니다."
 
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "\"%s\"의 사이트 맵"
 
 msgid "You are not allowed to rename pages in this wiki!"
-msgstr "이 위키에서는 글 이름을 바꿀 수 없습니다."
+msgstr "이 위키에서는 문서 이름을 바꿀 수 없습니다."
 
 msgid "Please use the interactive user interface to rename pages!"
-msgstr "글 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!"
+msgstr "문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 #, python-format
 msgid "Could not rename page because of file system error: %s."
-msgstr "다음 파일 시스템 에러로 인해 글 이름을 바꿀 수 없었습니다: %s."
+msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
 
 msgid "Rename Page"
-msgstr "글 이름 바꾸기"
+msgstr "문서 이름 바꾸기"
 
 msgid "New name"
 msgstr "새 이름"
@@ -1193,7 +1193,7 @@ msgid ""
 "\n"
 "Try a different name."
 msgstr ""
-"'''글 {{{\"%s\"}}}가 이미 있습니다.'''\n"
+"'''문서 {{{\"%s\"}}}가(이) 이미 있습니다.'''\n"
 "\n"
 "다른 이름으로 다시 만들어 보세요."
 
@@ -1216,7 +1216,7 @@ msgid "No spelling errors found!"
 msgstr "철자 오류가 발견되지 않았습니다!"
 
 msgid "You can't check spelling on a page you can't read."
-msgstr "읽을 수 없는 글의 철자를 검사할 수 없습니다."
+msgstr "읽을 수 없는 문서의 철자를 검사할 수 없습니다."
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1228,11 +1228,11 @@ msgstr "내용 전체에서 찾음 : \"%s\""
 
 #, python-format
 msgid "Full Link List for \"%s\""
-msgstr "\"%s\"에 연결된 모든 글 목록"
+msgstr "\"%s\"에 연결된 모든 문서 목록"
 
 msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
-msgstr "글 이름 없이 새 글을 만들 수 없습니다. 글 이름을 지정해주세요."
+msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1259,7 +1259,7 @@ msgid "Unsupported navigation scheme '%(scheme)s'!"
 msgstr "'%(scheme)s'는(은) 지원되지 않습니다."
 
 msgid "No parent page found!"
-msgstr "상위 글이 없습니다!"
+msgstr "상위 문서가 없습니다!"
 
 msgid "Wiki"
 msgstr "위키"
@@ -1275,7 +1275,7 @@ msgid "Slide %(pos)d of %(size)d"
 msgstr "슬라이드 총 %(size)d 중 %(pos)d"
 
 msgid "No orphaned pages in this wiki."
-msgstr "이 위키에는 외톨이 글이 없습니다."
+msgstr "이 위키에는 외톨이 문서가 없습니다."
 
 #, python-format
 msgid "No quotes on %(pagename)s."
@@ -1326,7 +1326,7 @@ msgstr "이 위키 전체를 XML로 변환하여 받기"
 
 msgid "No wanted pages in this wiki."
 msgstr ""
-"이 위키에는 아직 작성하지 않은 글 (링크는 있지만 내용이 없는 글) 이 없습니다."
+"이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
@@ -1337,7 +1337,7 @@ msgstr "**허용된 포함(include) 갯수를 초과했습니다**"
 
 #, python-format
 msgid "**Could not find the referenced page: %s**"
-msgstr "**다음 참조글을 찾을 수 없었습니다: %s**"
+msgstr "**다음 참조문서를 찾을 수 없었습니다: %s**"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1416,7 +1416,7 @@ msgid "Unsubscribe"
 msgstr "감시 해제"
 
 msgid "Home"
-msgstr "첫페이지"
+msgstr "대문"
 
 msgid "[RSS]"
 msgstr "[RSS]"
@@ -1428,7 +1428,7 @@ msgid "[UPDATED]"
 msgstr "[변경됨]"
 
 msgid "[NEW]"
-msgstr "[새글]"
+msgstr "[새 문서]"
 
 msgid "[DIFF]"
 msgstr "[비교]"
@@ -1440,7 +1440,7 @@ msgid "[TOP]"
 msgstr "[처음]"
 
 msgid "Click to do a full-text search for this title"
-msgstr "이 제목을 내용 전체에서 찾아보려면 여기를 누르세요"
+msgstr "이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요"
 
 msgid "Logout"
 msgstr "로그아웃"
@@ -1475,13 +1475,13 @@ msgid "------------"
 msgstr "------------"
 
 msgid "Raw Text"
-msgstr "본문 보기"
+msgstr "원문 보기"
 
 msgid "Delete Cache"
 msgstr "캐시 삭제"
 
 msgid "Delete Page"
-msgstr "글 지우기"
+msgstr "문서 삭제"
 
 msgid "Like Pages"
 msgstr "비슷한 페이지"
@@ -1499,7 +1499,7 @@ msgid "Edit (GUI)"
 msgstr "수정 (GUI)"
 
 msgid "Immutable Page"
-msgstr "못 고치는 글"
+msgstr "못 고치는 문서"
 
 msgid "Remove Link"
 msgstr "즐겨찾기 제거"
@@ -1525,7 +1525,7 @@ msgid "Or try one of these actions:"
 msgstr "다른 작업을 할 수도 있습니다 : "
 
 msgid "Page"
-msgstr "글"
+msgstr "문서"
 
 msgid "User"
 msgstr "사용자"
@@ -1534,8 +1534,8 @@ msgstr "사용자"
 msgid ""
 "Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
-"죄송합니다. \"%(content)s\"의 사용은 이 위키에서 허락되지 않았으므로 이 글을 "
-"저장할 수 없습니다."
+"죄송합니다. \"%(content)s\"의 사용은 이 위키에서 허락되지 않았으므로 이 문서"
+"를 저장할 수 없습니다."
 
 msgid "Line"
 msgstr "줄"
@@ -1560,7 +1560,7 @@ msgid "FrontPage"
 msgstr "대문"
 
 msgid "RecentChanges"
-msgstr "변경사항"
+msgstr "최근바뀜"
 
 msgid "TitleIndex"
 msgstr "제목색인"
@@ -1569,28 +1569,28 @@ msgid "WordIndex"
 msgstr "단어색인"
 
 msgid "FindPage"
-msgstr "글찾기"
+msgstr "문서찾기"
 
 msgid "SiteNavigation"
-msgstr "사이트안내도"
+msgstr "사이트맵"
 
 msgid "HelpContents"
 msgstr "도움말"
 
 msgid "HelpOnFormatting"
-msgstr "글형식도움말"
+msgstr "문서형식 도움말"
 
 msgid "UserPreferences"
-msgstr "사용자설정"
+msgstr "사용자 설정"
 
 msgid "WikiLicense"
-msgstr "위키라이센스"
+msgstr "위키 라이센스"
 
 msgid "MissingPage"
-msgstr "없는글"
+msgstr "없는 문서"
 
 msgid "MissingHomePage"
-msgstr "없는홈페이지"
+msgstr "없는 홈페이지"
 
 msgid "Mon"
 msgstr "월요일"
@@ -1614,22 +1614,22 @@ msgid "Sun"
 msgstr "일요일"
 
 msgid "AttachFile"
-msgstr "파일첨부"
+msgstr "파일 첨부"
 
 msgid "DeletePage"
-msgstr "글삭제"
+msgstr "문서 삭제"
 
 msgid "LikePages"
-msgstr "비슷한페이지"
+msgstr "비슷한 페이지"
 
 msgid "LocalSiteMap"
 msgstr "사이트맵"
 
 msgid "RenamePage"
-msgstr "이름변경"
+msgstr "이름 변경"
 
 msgid "SpellCheck"
-msgstr "철자검사"
+msgstr "철자 검사"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "필요한 속성인 \"%(attrname)s\"가(이) 없습니다"
@@ -1638,10 +1638,10 @@ msgstr "철자검사"
 #~ msgstr "전송된 양식 데이터:"
 
 #~ msgid "EditText"
-#~ msgstr "글 고치기"
+#~ msgstr "문서 고치기"
 
 #~ msgid "Immutable page"
-#~ msgstr "못 고치는 글"
+#~ msgstr "못 고치는 문서"
 
 #~ msgid "Cookie deleted. You are now logged out."
 #~ msgstr "쿠키가 지워졌습니다. 로그아웃 되었습니다."
@@ -1702,8 +1702,8 @@ msgstr "철자검사"
 #~ "To unsubscribe, go to your profile and delete the item matching this page "
 #~ "from the subscription list."
 #~ msgstr ""
-#~ "메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 글을 "
-#~ "지워 주세요."
+#~ "메일 알림을 해지하고 싶으면 계정 환경설정으로 가서 알림 목록에서 이 문서"
+#~ "를 지워 주세요."
 
 #, fuzzy
 #~ msgid "Quicklink"
@@ -1716,7 +1716,7 @@ msgstr "철자검사"
 #~ msgstr "첨부 파일"
 
 #~ msgid "Show Like Pages"
-#~ msgstr "비슷한 글 보기"
+#~ msgstr "비슷한 문서 보기"
 
 #~ msgid "Show Local Site Map"
 #~ msgstr "사이트 맵 보기"
@@ -1733,7 +1733,7 @@ msgstr "철자검사"
 #~ msgstr "빨리가기메뉴"
 
 #~ msgid "Show Parent"
-#~ msgstr "상위 글 보기"
+#~ msgstr "상위 문서 보기"
 
 #~ msgid "Show Changes"
 #~ msgstr "변경내역 보기"
@@ -1745,7 +1745,7 @@ msgstr "철자검사"
 #~ msgstr "미리보기로 건너띔"
 
 #~ msgid "[current page size '''%(size)d''' bytes]"
-#~ msgstr "[현재 글 크기 '''%(size)d''' 바이트]"
+#~ msgstr "[현재 문서 크기 '''%(size)d''' 바이트]"
 
 #~ msgid "Optional comment about this change"
 #~ msgstr "이번 변경 사항에 대한 코멘트"

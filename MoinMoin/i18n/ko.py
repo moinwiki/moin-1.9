@@ -11,7 +11,7 @@ meta = {
 }
 text = {
 '''The backed up content of this page is deprecated and will not be included in search results!''':
-'''이 글의 백업된 본문은 더 이상 사용되지 않으며 검색 결과에 포함되지 않습니다!''',
+'''이 문서의 백업된 본문은 더 이상 사용되지 않으며 검색 결과에 포함되지 않습니다!''',
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s에 수정된 %(rev)d번째 판''',
 '''Redirected from page "%(page)s"''':
@@ -24,24 +24,24 @@ To use this form on other pages, insert a
 macro call.-~
 ''':
 '''~-이 양식을 전송하면, 결과값들이 화면에 표시됩니다.
-이 양식을 다른 글에서 사용하려면 다음 매크로 호출을 추가하세요.
+이 양식을 다른 문서에서 사용하려면 다음 매크로 호출을 추가하세요.
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
 -~
 ''',
 '''Create New Page''':
-'''새 글 작성''',
+'''새 문서 작성''',
 '''You are not allowed to view this page.''':
-'''이 글을 볼 수 있는 권한이 없습니다.''',
+'''이 문서를 볼 수 있는 권한이 없습니다.''',
 '''You are not allowed to edit this page.''':
-'''이 글을 고칠 수 있는 권한이 없습니다.''',
+'''이 문서를 고칠 수 있는 권한이 없습니다.''',
 '''Page is immutable!''':
-'''이 글은 고칠 수 없습니다.''',
+'''이 문서는 고칠 수 없습니다.''',
 '''Cannot edit old revisions!''':
-'''옛 글은 고칠 수 없습니다.''',
+'''옛 문서는 고칠 수 없습니다.''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
-'''글 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!''',
+'''문서 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!''',
 '''Page name is too long, try shorter name.''':
-'''글 이름이 너무 깁니다. 짧은 이름을 사용하세요.''',
+'''문서 이름이 너무 깁니다. 짧은 이름을 사용하세요.''',
 '''Edit "%(pagename)s"''':
 '''"%(pagename)s" 수정''',
 '''Preview of "%(pagename)s"''':
@@ -49,23 +49,23 @@ macro call.-~
 '''Your edit lock on %(lock_page)s has expired!''':
 '''%(lock_page)s에 대한 잠금이 풀렸습니다!''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''%(lock_page)s에 대한 글 잠금이 # 분 후에 풀릴 예정입니다.''',
+'''%(lock_page)s에 대한 문서 잠금이 # 분 후에 풀릴 예정입니다.''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''%(lock_page)s에 대한 글 잠금이 # 초 뒤에 풀릴 예정입니다.''',
+'''%(lock_page)s에 대한 문서 잠금이 # 초 뒤에 풀릴 예정입니다.''',
 '''Someone else deleted this page while you were editing!''':
-'''이 글을 수정하는 동안에 다른 사람이 이 글을 지워버렸습니다.''',
+'''이 문서를 수정하는 동안에 다른 사람이 이 문서를 지워버렸습니다.''',
 '''Someone else changed this page while you were editing!''':
-'''이 글을 수정하는 동안에 다른 사람이 같은 글을 수정했습니다.''',
+'''이 문서를 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다.''',
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
-'''이 글을 수정하는 동안에 다른 사람이 먼저 이 글을 수정했습니다.
-글 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세요!
+'''이 문서를 수정하는 동안에 다른 사람이 먼저 이 문서를 수정했습니다.
+문서 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세요!
 %(difflink)s에서 어떤 것이 바뀌었는지 살펴보세요.''',
 '''[Content of new page loaded from %s]''':
-'''[%s에서 옮겨온 새 글 내용]''',
+'''[%s에서 옮겨온 새 문서 내용]''',
 '''[Template %s not found]''':
-'''[글틀 %s를(을) 찾을 수 없음]''',
+'''[양식 %s를(을) 찾을 수 없음]''',
 '''[You may not read %s]''':
 '''[%s를(을) 읽을 수 없음]''',
 '''Describe %s here.''':
@@ -105,19 +105,19 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
 ''' 강조:: [[Verbatim(\'\')]]\'\'뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'굵게 뉘여쓰기\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'혼합 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]] 뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 가로 줄.
- 제목:: [[Verbatim(=)]] 제목 1 [[Verbatim(=)]]; [[Verbatim(==)]] 제목 2 [[Verbatim(==)]]; [[Verbatim(===)]] 제목 3 [[Verbatim(===)]];   [[Verbatim(====)]] 제목 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 제목 5 [[Verbatim(=====)]].
+ 표제:: [[Verbatim(=)]] 표제 1 [[Verbatim(=)]]; [[Verbatim(==)]] 표제 2 [[Verbatim(==)]]; [[Verbatim(===)]] 표제 3 [[Verbatim(===)]];   [[Verbatim(====)]] 표제 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 표제 5 [[Verbatim(=====)]].
  목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.
  링크:: 대소문자 섞어 쓰기([[Verbatim(JoinCapitalizedWords)]]); [[Verbatim(["대괄호 안에 큰 따옴표"])]]; URL; [URL]; [URL 이름].
- 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    제목이나 표 뒤에는 공백이 있으면 안 됩니다.
+ 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으면 안 됩니다.
 
 (!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.
 ''',
 '''Edit was cancelled.''':
-'''글 수정을 취소했습니다.''',
+'''문서 수정을 취소했습니다.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''글이 저장되었습니다.''',
+'''문서가 저장되었습니다.''',
 '''Page "%s" was successfully deleted!''':
-'''글 "%s"가(이) 지워졌습니다!''',
+'''문서 "%s"가(이) 지워졌습니다!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -128,9 +128,9 @@ The following page has been changed by %(editor)s:
 ''':
 '''위키사용자님,
 
-"%(sitename)s" 사이트의 위키 글이나 위키 카테고리의 변경사항 메일 알림을 구독하고 계십니다.
+"%(sitename)s" 사이트의 위키 문서나 위키 카테고리의 변경사항 메일 알림을 구독하고 계십니다.
 
-%(editor)s님께서 다음 글을 고치셨습니다:
+%(editor)s님께서 다음 문서를 고치셨습니다:
 %(pagelink)s
 
 ''',
@@ -144,7 +144,7 @@ The following page has been changed by %(editor)s:
 ''',
 '''New page:
 ''':
-'''새 글:
+'''새 문서:
 ''',
 '''No differences found!
 ''':
@@ -159,17 +159,17 @@ The following page has been changed by %(editor)s:
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## 글 "%(pagename)s"의 %(date)s 백업''',
+'''## 문서 "%(pagename)s"의 %(date)s 백업''',
 '''Page could not get locked. Unexpected error (errno=%d).''':
-'''예기치 않은 에러 때문에 글을 잠글 수 없었습니다. (에러번호=%d)''',
+'''예기치 않은 에러 때문에 문서를 잠글 수 없었습니다. (에러번호=%d)''',
 '''Page could not get locked. Missing \'current\' file?''':
-'''글을 잠글 수 없었습니다. \'current\' 파일이 없는 것 같습니다.''',
+'''문서를 잠글 수 없었습니다. \'current\' 파일이 없는 것 같습니다.''',
 '''You are not allowed to edit this page!''':
-'''이 글을 고칠 수 있는 권한이 없습니다!''',
+'''이 문서를 고칠 수 있는 권한이 없습니다!''',
 '''You cannot save empty pages.''':
-'''빈 글은 저장할 수 없습니다.''',
+'''빈 문서는 저장할 수 없습니다.''',
 '''You already saved this page!''':
-'''이 글을 이미 저장했습니다!''',
+'''이 문서는 이미 저장했습니다!''',
 '''Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
@@ -180,38 +180,38 @@ Now re-add your changes to the current page contents.
 the content editbox with your version of the page, because that would
 delete the changes of the other person, which is excessively rude!\'\'
 ''':
-'''이 글을 당신이 수정하는 동안에 다른 사람이 같은 글을 수정했습니다.
+'''이 문서를 당신이 수정하는 동안에 다른 사람이 같은 문서를 수정했습니다.
 
 다음 지시 사항을 따라주세요: 브라우저의 "뒤로" 버튼을 눌러서, 수정한 부분을
-복사해 온 후, 다시 글 수정으로 가서 다른 사람이 고친 내용을 피해
+복사해 온 후, 다시 문서 수정으로 가서 다른 사람이 고친 내용을 피해
 방금 수정하려고 했던 내용을 다시 추가해서 저장해 주세요.
 
-\'\'자신이 마지막으로 수정한 글 내용 전체를 그대로 복사해서 덮어쓰기 하지 마세요.
+\'\'자신이 마지막으로 수정한 문서 내용 전체를 그대로 복사해서 덮어쓰기 하지 마세요.
 그러면, 다른 사람의 변경 내용이 모두 취소되며,
 이런 행위는 아주 무례한 것으로 간주됩니다.\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
 '''이번 변경 사항에 대한 백업은 [%(backup_url)s 여기]에 있습니다.''',
 '''You did not change the page content, not saved!''':
-'''글 내용을 고치지 않았으므로 저장되지 않았습니다.''',
+'''문서 내용을 고치지 않았으므로 저장되지 않았습니다.''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''관리자만 접근 허용 설정(ACL) 을 고칠 수 있습니다!''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''%(owner)s의 글 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 글을 잠그고 고칠 수 있습니다.''',
+'''%(owner)s의 문서 잠금이 %(mins_ago)d분 전에 풀렸습니다. 이제 이 문서를 잠그고 고칠 수 있습니다.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''%(bumptime)s 까지 다른 사람들은 이 글을 \'\'고칠 수 없습니다\'\'.''',
+'''%(bumptime)s 까지 다른 사람들은 이 문서를 \'\'고칠 수 없습니다\'\'.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''%(bumptime)s 까지 다른 사람들이 글을 고치려고 시도하면 \'\'경고\'\'가 뜹니다.''',
+'''%(bumptime)s 까지 다른 사람들이 문서를 고치려고 시도하면 \'\'경고\'\'가 뜹니다.''',
 '''Use the Preview button to extend the locking period.''':
 '''잠금 기간을 연장하려면 \'미리보기\' 버튼을 누르세요.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''이 글은 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 수 있도록 \'\'잠겨\'\'있습니다.''',
+'''이 문서는 현재 %(owner)s가 %(timestamp)s (%(mins_valid)d 분 남음)까지 고칠 수 있도록 \'\'잠겨\'\'있습니다.''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
-'''%(owner)s가 %(timestamp)s에 글 고치기를 위한 잠시 잠금을 요청하였습니다.[[BR]]
-\'\'\'가급적이면 최소한 %(mins_valid)d 분 동안은 글 충돌을 막기 위해서 글을 \'\'고치치 않는\'\' 것이 좋습니다.\'\'\'[[BR]]
+'''%(owner)s가 %(timestamp)s에 문서 수정을 위한 잠시 잠금을 요청하였습니다.[[BR]]
+\'\'\'가급적이면 최소한 %(mins_valid)d 분 동안은 수정 충돌을 막기 위해서 문서를 \'\'고치치 않는\'\' 것이 좋습니다.\'\'\'[[BR]]
 편집을 중단하려면 취소 버튼을 누르세요.''',
 '''<unknown>''':
 '''<알 수 없음>''',
@@ -222,9 +222,9 @@ To leave the editor, press the Cancel button.''':
 '''Edit''':
 '''수정''',
 '''UnSubscribe''':
-'''감시 해제''',
+'''구독 취소''',
 '''Subscribe''':
-'''감시''',
+'''구독''',
 '''Raw''':
 '''원문''',
 '''XML''':
@@ -238,17 +238,17 @@ To leave the editor, press the Cancel button.''':
 '''Publish my email (not my wiki homepage) in author info''':
 '''작성자 정보에 내 위키 홈페이지 대신 E-mail 주소를 사용함''',
 '''Open editor on double click''':
-'''더블 클릭해서 글을 수정함''',
+'''더블 클릭해서 문서를 수정함''',
 '''Jump to last visited page instead of frontpage''':
-'''첫페이지 대신 마지막 방문 위치로 이동함''',
+'''대문 대신 마지막 방문 위치로 이동함''',
 '''Show question mark for non-existing pagelinks''':
-'''존재하지 않는 글 링크 옆에 물음표 표시''',
+'''존재하지 않는 문서 링크 옆에 물음표 표시''',
 '''Show page trail''':
-'''글보기 발자국 표시''',
+'''문서 조회 기록 표시''',
 '''Show icon toolbar''':
 '''아이콘 툴바 표시''',
 '''Show top/bottom links in headings''':
-'''제목 옆에 처음/끝 링크 표시''',
+'''표제 옆에 처음/끝 링크 표시''',
 '''Show fancy diffs''':
 '''꾸며진 변경사항 표시''',
 '''Add spaces to displayed wiki names''':
@@ -284,21 +284,33 @@ Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
 '''{{{\'%s\'}}}는(은) 잘못된 사용자 이름입니다.
 이름에는 유니코드 알파벳 또는 숫자가 포함될 수 있고, 필요하다면 1번
-띄어 쓸 수 있습니다. 묶음 글 이름도 또한 사용할 수 없습니다.''',
+띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다.''',
 '''You are not allowed to do %s on this page.''':
-'''이 글에 %s 작업을 할 수 있는 권한이 없습니다.''',
+'''이 문서에 %s 작업을 할 수 있는 권한이 없습니다.''',
 '''Login''':
 '''로그인''',
 ''' %s and try again.''':
 ''' %s 하고 다시 시도하세요.''',
 '''%(hits)d results out of about %(pages)d pages.''':
-'''전체 %(pages)d 글 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
+'''전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
 '''%.2f seconds''':
 '''%.2f 초''',
 '''match''':
 ''' 개 포함''',
 '''matches''':
 ''' 개 포함''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''사용자 이름: %s
+
+사용자 암호: %s
+
+로그인 URL: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -309,7 +321,7 @@ After successfully logging in, it is of course a good idea to set a new and know
 ''':
 '''누군가 이 메일 주소로 계정 정보를 전송하도록 요청했습니다.
 
-만약 암호를 잊었다면 아래 URL로 가서 로그인 이름와 함께 제시된 암호를 
+만약 암호를 잊었다면 아래 URL로 가서 사용자 이름와 함께 제시된 암호를 
 써 있는 그대로 입력하고 (복사해서 붙여넣기 하세요) 
 로그인 하세요.
 
@@ -341,6 +353,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''이 메일 주소는 이미 다른 사람이 사용 중입니다.''',
 '''User account created! You can use this account to login now...''':
 '''사용자 계정이 만들어졌습니다! 이 계정을 사용해서 로그인하실 수 있습니다...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''선택한 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''"%(theme_name)s" 테마를 쓸 수 없습니다!''',
 '''User preferences saved!''':
@@ -353,6 +367,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''선호하는 편집기''',
 '''free choice''':
 '''자유 선택''',
+'''Select User''':
+'''사용자 선택''',
 '''Save''':
 '''저장''',
 '''Preferred theme''':
@@ -378,7 +394,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''This list does not work, unless you have entered a valid email address!''':
 '''메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''메일 알림을 받는 글들 (한 줄에 정규식 하나씩)''',
+'''메일 알림을 받는 문서들 (한 줄에 정규식 하나씩)''',
 '''Create Profile''':
 '''사용자 등록''',
 '''Mail me my account data''':
@@ -388,7 +404,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''No older revisions available!''':
 '''옛 버전이 저장되어 있지 않습니다!''',
 '''Diff for "%s"''':
-'''"%s" 글 변경사항''',
+'''"%s" 문서 변경사항''',
 '''Differences between revisions %d and %d''':
 '''개정판 %d과 %d 사이의 차이점''',
 '''(spanning %d versions)''':
@@ -396,7 +412,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''No differences found!''':
 '''차이점이 없습니다!''',
 '''The page was saved %(count)d times, though!''':
-'''이 글은 %(count)d번 변경되었습니다!''',
+'''이 문서는 %(count)d번 변경되었습니다!''',
 '''(ignoring whitespace)''':
 '''(공백 무시)''',
 '''Ignore changes in the amount of whitespace''':
@@ -404,13 +420,13 @@ Contact the owner of the wiki, who can enable email.''':
 '''General Information''':
 '''일반 정보''',
 '''Page size: %d''':
-'''글 크기: %d''',
+'''문서 크기: %d''',
 '''SHA digest of this page\'s content is:''':
-'''이 글 내용의 SHA 해쉬 다이제스트:''',
+'''이 문서 내용의 SHA 해쉬 다이제스트:''',
 '''The following users subscribed to this page:''':
-'''다음 사용자들이 이 글을 구독하고 있습니다:''',
+'''다음 사용자들이 이 문서를 구독하고 있습니다:''',
 '''This page links to the following pages:''':
-'''이 글은 다음 링크들을 포함하고 있습니다:''',
+'''이 문서는 다음 링크들을 포함하고 있습니다:''',
 '''Date''':
 '''날짜''',
 '''Size''':
@@ -444,39 +460,39 @@ Contact the owner of the wiki, who can enable email.''':
 '''No log entries found.''':
 '''기록이 없습니다!''',
 '''Info for "%s"''':
-'''글 "%s"에 대한 정보''',
+'''문서 "%s"에 대한 정보''',
 '''Show "%(title)s"''':
 '''"%(title)s" 보기''',
 '''General Page Infos''':
-'''일반 글 정보''',
+'''일반 문서 정보''',
 '''Show chart "%(title)s"''':
 '''"%(title)s" 차트 보기''',
 '''Page hits and edits''':
-'''글 조회/수정 정보''',
+'''문서 조회/수정 정보''',
 '''You are not allowed to revert this page!''':
-'''이 글을 되돌릴 수 있는 권한이 없습니다!''',
+'''이 문서를 되돌릴 수 있는 권한이 없습니다!''',
 '''You must login to add a quicklink.''':
 '''즐겨찾기를 추가하시려면 로그인을 하셔야 합니다.''',
 '''Your quicklink to this page has been removed.''':
-'''이 글을 즐겨찾기에서 삭제했습니다.''',
+'''이 문서를 즐겨찾기에서 삭제했습니다.''',
 '''A quicklink to this page has been added for you.''':
-'''이 글을 즐겨찾기에 추가했습니다.''',
+'''이 문서를 즐겨찾기에 추가했습니다.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''글의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다.''',
+'''문서의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다.''',
 '''This wiki is not enabled for mail processing.''':
 '''이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다.''',
 '''You must log in to use subscribtions.''':
-'''글의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다.''',
+'''문서의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''글의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세요.''',
+'''문서의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세요.''',
 '''Your subscribtion to this page has been removed.''':
-'''이 글을 더 이상 감시하지 않습니다.''',
+'''이 문서를 더 이상 감시하지 않습니다.''',
 '''Can\'t remove regular expression subscription!''':
 '''정규표현식으로 된 감시 목록은 지울 수 없습니다!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
 '''UserPreferences에서 정규표현식으로 된 감시 목록을 수정하세요.''',
 '''You have been subscribed to this page.''':
-'''이제 이 글이 변경되면 메일로 알려드리겠습니다.''',
+'''이제 이 문서가 변경되면 메일로 알려드리겠습니다.''',
 '''Charts are not available!''':
 '''이 위키에서는 차트 그리기가 지원되지 않습니다.''',
 '''You need to provide a chart type!''':
@@ -484,7 +500,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Bad chart type "%s"!''':
 '''잘못된 차트 종류 입니다: "%s"''',
 '''Search Titles''':
-'''제목 찾기''',
+'''제목에서 찾기''',
 '''Display context of search results''':
 '''검색 결과의 본문을 보기''',
 '''Case-sensitive searching''':
@@ -492,11 +508,11 @@ Contact the owner of the wiki, who can enable email.''':
 '''Search Text''':
 '''내용에서 찾기''',
 '''Go To Page''':
-'''글로 이동''',
+'''문서로 이동''',
 '''Include system pages''':
-'''시스템 글 포함''',
+'''시스템 문서 포함''',
 '''Exclude system pages''':
-'''시스템 글 제외''',
+'''시스템 문서 제외''',
 '''Plain title index''':
 '''텍스트 제목 색인''',
 '''XML title index''':
@@ -510,11 +526,11 @@ Contact the owner of the wiki, who can enable email.''':
 '''4Suite Version''':
 '''4Suite 버전''',
 '''Number of pages''':
-'''글 개수''',
+'''문서 개수''',
 '''Number of system pages''':
-'''시스템 글 개수''',
+'''시스템 문서 개수''',
 '''Accumulated page sizes''':
-'''글 크기 총합''',
+'''문서 크기 총합''',
 '''Entries in edit log''':
 '''수정사항 로그 길이''',
 '''%(logcount)s (%(logsize)s bytes)''':
@@ -560,7 +576,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''[%d attachments]''':
 '''[첨부 %d개]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
-'''이 글에 <a href="%(link)s">%(count)s개의 첨부 파일</a>이 있습니다.''',
+'''이 문서에 <a href="%(link)s">%(count)s개의 첨부 파일</a>이 있습니다.''',
 '''Filename of attachment not specified!''':
 '''첨부 파일 이름이 지정되지 않았습니다!''',
 '''Attachment \'%(filename)s\' does not exist!''':
@@ -569,7 +585,7 @@ Contact the owner of the wiki, who can enable email.''':
 as shown below in the list of files. 
 Do \'\'\'NOT\'\'\' use the URL of the {{{[get]}}} link, 
 since this is subject to change and can break easily.''':
-'''이 글에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 \'\'\'{{{attachment:파일이름}}}\'\'\' 형식으로 쓰십시오.
+'''이 문서에서 첨부를 링크하려면, 아래의 파일 목록 옆에 있는 것 처럼 \'\'\'{{{attachment:파일이름}}}\'\'\' 형식으로 쓰십시오.
 URL은 자주 바뀔 수 있으므로 {{{[받기]}}} 링크의 URL을 직접 사용하지 마세요.''',
 '''unzip''':
 '''압축해제''',
@@ -582,7 +598,7 @@ URL은 자주 바뀔 수 있으므로 {{{[받기]}}} 링크의 URL을 직접 사
 '''Attached Files''':
 '''첨부 파일''',
 '''You are not allowed to attach a file to this page.''':
-'''이 글에 파일을 첨부할 수 있는 권한이 없습니다.''',
+'''이 문서에 파일을 첨부할 수 있는 권한이 없습니다.''',
 '''New Attachment''':
 '''새 첨부''',
 '''An upload will never overwrite an existing file. If there is a name
@@ -600,19 +616,19 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''File attachments are not allowed in this wiki!''':
 '''이 위키에 파일을 첨부할 수 없습니다.!''',
 '''You are not allowed to save a drawing on this page.''':
-'''이 글에 그림을 저장할 수 있는 권한이 없습니다.''',
+'''이 문서에 그림을 저장할 수 있는 권한이 없습니다.''',
 '''No file content. Delete non ASCII characters from the file name and try again.''':
 '''파일 내용이 전송되지 않았습니다. ASCII 문자만으로 이루어진 파일 이름을 사용해보세요.''',
 '''You are not allowed to delete attachments on this page.''':
-'''이 글의 첨부 파일을 지울 수 있는 권한이 없습니다.''',
+'''이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다.''',
 '''You are not allowed to get attachments from this page.''':
-'''이 글의 첨부 파일을 받을 수 있는 권한이 없습니다.''',
+'''이 문서의 첨부 파일을 받을 수 있는 권한이 없습니다.''',
 '''You are not allowed to unzip attachments of this page.''':
-'''이 글에 첨부된 파일의 압축을 해제할 수 있는 권한이 없습니다.''',
+'''이 문서에 첨부된 파일의 압축을 해제할 수 있는 권한이 없습니다.''',
 '''You are not allowed to install files.''':
 '''이 파일을 설치할 수 있는 권한이 없습니다.''',
 '''You are not allowed to view attachments of this page.''':
-'''이 글에 첨부된 파일을 볼 수 있는 권한이 없습니다.''',
+'''이 문서에 첨부된 파일을 볼 수 있는 권한이 없습니다.''',
 '''Unsupported upload action: %s''':
 '''지원되지 않는 업로드 액션: %s''',
 '''Attachments for "%(pagename)s"''':
@@ -652,35 +668,35 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''attachment:%(filename)s of %(pagename)s''':
 '''%(pagename)s의 [[Verbatim(attachment:)]]%(filename)s''',
 '''You are not allowed to delete this page.''':
-'''이 글을 지울 수 있는 권한이 없습니다.''',
+'''이 문서를 지울 수 있는 권한이 없습니다.''',
 '''This page is already deleted or was never created!''':
-'''이 글은 이미 지워졌거나 아직 만들어지지 않았습니다!''',
+'''이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!''',
 '''Please use the interactive user interface to delete pages!''':
-'''글을 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
+'''문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
 '''Really delete this page?''':
-'''정말로 이 글을 지우시겠습니까?''',
+'''정말로 이 문서를 지우시겠습니까?''',
 '''Delete''':
 '''삭제''',
 '''Optional reason for the deletion''':
 '''삭제하는 이유''',
 '''No pages like "%s"!''':
-'''"%s"가(이) 들어간 글이 없습니다.''',
+'''"%s"가(이) 들어간 문서가 없습니다.''',
 '''Exactly one page like "%s" found, redirecting to page.''':
-'''"%s"가(이) 들어간 페이지가 딱 하나 발견되었습니다. 그 글로 이동합니다.''',
+'''"%s"가(이) 들어간 문서가 딱 하나 발견되었습니다. 해당 문서로 이동합니다.''',
 '''Pages like "%s"''':
-'''"%s"와 비슷한 글''',
+'''"%s"와 비슷한 문서''',
 '''%(matchcount)d %(matches)s for "%(title)s"''':
-'''제목에 "%(title)s"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되었습니다.''',
+'''문서 제목에 "%(title)s"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되었습니다.''',
 '''Local Site Map for "%s"''':
 '''"%s"의 사이트 맵''',
 '''You are not allowed to rename pages in this wiki!''':
-'''이 위키에서는 글 이름을 바꿀 수 없습니다.''',
+'''이 위키에서는 문서 이름을 바꿀 수 없습니다.''',
 '''Please use the interactive user interface to rename pages!''':
-'''글 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!''',
+'''문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!''',
 '''Could not rename page because of file system error: %s.''':
-'''다음 파일 시스템 에러로 인해 글 이름을 바꿀 수 없었습니다: %s.''',
+'''다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s.''',
 '''Rename Page''':
-'''글 이름 바꾸기''',
+'''문서 이름 바꾸기''',
 '''New name''':
 '''새 이름''',
 '''Optional reason for the renaming''':
@@ -688,7 +704,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
 
 Try a different name.''':
-'''\'\'\'글 {{{"%s"}}}가 이미 있습니다.\'\'\'
+'''\'\'\'문서 {{{"%s"}}}가(이) 이미 있습니다.\'\'\'
 
 다른 이름으로 다시 만들어 보세요.''',
 '''(including %(localwords)d %(pagelink)s)''':
@@ -700,15 +716,15 @@ Try a different name.''':
 '''No spelling errors found!''':
 '''철자 오류가 발견되지 않았습니다!''',
 '''You can\'t check spelling on a page you can\'t read.''':
-'''읽을 수 없는 글의 철자를 검사할 수 없습니다.''',
+'''읽을 수 없는 문서의 철자를 검사할 수 없습니다.''',
 '''Title Search: "%s"''':
 '''제목 "%s" 찾기''',
 '''Full Text Search: "%s"''':
 '''내용 전체에서 찾음 : "%s"''',
 '''Full Link List for "%s"''':
-'''"%s"에 연결된 모든 글 목록''',
+'''"%s"에 연결된 모든 문서 목록''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
-'''글 이름 없이 새 글을 만들 수 없습니다. 글 이름을 지정해주세요.''',
+'''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
 '''Upload new attachment "%(filename)s"''':
 '''새 첨부 "%(filename)s"를(을) 업로드''',
 '''Create new drawing "%(filename)s"''':
@@ -722,7 +738,7 @@ Try a different name.''':
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''\'%(scheme)s\'는(은) 지원되지 않습니다.''',
 '''No parent page found!''':
-'''상위 글이 없습니다!''',
+'''상위 문서가 없습니다!''',
 '''Wiki''':
 '''위키''',
 '''Slideshow''':
@@ -732,7 +748,7 @@ Try a different name.''':
 '''Slide %(pos)d of %(size)d''':
 '''슬라이드 총 %(size)d 중 %(pos)d''',
 '''No orphaned pages in this wiki.''':
-'''이 위키에는 외톨이 글이 없습니다.''',
+'''이 위키에는 외톨이 문서가 없습니다.''',
 '''No quotes on %(pagename)s.''':
 '''%(pagename)s에 인용할 문구가 없음.''',
 '''Upload of attachment \'%(filename)s\'.''':
@@ -762,13 +778,13 @@ Try a different name.''':
 '''Download XML export of this wiki''':
 '''이 위키 전체를 XML로 변환하여 받기''',
 '''No wanted pages in this wiki.''':
-'''이 위키에는 아직 작성하지 않은 글 (링크는 있지만 내용이 없는 글) 이 없습니다.''',
+'''이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''ReStructured text를 처리할 수 없습니다. docutils를 설치해주세요.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**허용된 포함(include) 갯수를 초과했습니다**''',
 '''**Could not find the referenced page: %s**''':
-'''**다음 참조글을 찾을 수 없었습니다: %s**''',
+'''**다음 참조문서를 찾을 수 없었습니다: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''"%(key)s"뒤에는 "%(wanted)s"가(이) 필요하지만 "%(token)s"가(이) 발견되었습니다.''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -812,7 +828,7 @@ red=edit''',
 '''Unsubscribe''':
 '''감시 해제''',
 '''Home''':
-'''첫페이지''',
+'''대문''',
 '''[RSS]''':
 '''[RSS]''',
 '''[DELETED]''':
@@ -820,7 +836,7 @@ red=edit''',
 '''[UPDATED]''':
 '''[변경됨]''',
 '''[NEW]''':
-'''[새글]''',
+'''[새 문서]''',
 '''[DIFF]''':
 '''[비교]''',
 '''[BOTTOM]''':
@@ -828,7 +844,7 @@ red=edit''',
 '''[TOP]''':
 '''[처음]''',
 '''Click to do a full-text search for this title''':
-'''이 제목을 내용 전체에서 찾아보려면 여기를 누르세요''',
+'''이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요''',
 '''Logout''':
 '''로그아웃''',
 '''Clear message''':
@@ -850,11 +866,11 @@ red=edit''',
 '''------------''':
 '''------------''',
 '''Raw Text''':
-'''본문 보기''',
+'''원문 보기''',
 '''Delete Cache''':
 '''캐시 삭제''',
 '''Delete Page''':
-'''글 지우기''',
+'''문서 삭제''',
 '''Like Pages''':
 '''비슷한 페이지''',
 '''Local Site Map''':
@@ -866,7 +882,7 @@ red=edit''',
 '''Edit (GUI)''':
 '''수정 (GUI)''',
 '''Immutable Page''':
-'''못 고치는 글''',
+'''못 고치는 문서''',
 '''Remove Link''':
 '''즐겨찾기 제거''',
 '''Add Link''':
@@ -882,11 +898,11 @@ red=edit''',
 '''Or try one of these actions:''':
 '''다른 작업을 할 수도 있습니다 : ''',
 '''Page''':
-'''글''',
+'''문서''',
 '''User''':
 '''사용자''',
 '''Sorry, can not save page because "%(content)s" is not allowed in this wiki.''':
-'''죄송합니다. "%(content)s"의 사용은 이 위키에서 허락되지 않았으므로 이 글을 저장할 수 없습니다.''',
+'''죄송합니다. "%(content)s"의 사용은 이 위키에서 허락되지 않았으므로 이 문서를 저장할 수 없습니다.''',
 '''Line''':
 '''줄''',
 '''Deletions are marked like this.''':
@@ -902,27 +918,27 @@ red=edit''',
 '''FrontPage''':
 '''대문''',
 '''RecentChanges''':
-'''변경사항''',
+'''최근바뀜''',
 '''TitleIndex''':
 '''제목색인''',
 '''WordIndex''':
 '''단어색인''',
 '''FindPage''':
-'''글찾기''',
+'''문서찾기''',
 '''SiteNavigation''':
-'''사이트안내도''',
+'''사이트맵''',
 '''HelpContents''':
 '''도움말''',
 '''HelpOnFormatting''':
-'''글형식도움말''',
+'''문서형식 도움말''',
 '''UserPreferences''':
-'''사용자설정''',
+'''사용자 설정''',
 '''WikiLicense''':
-'''위키라이센스''',
+'''위키 라이센스''',
 '''MissingPage''':
-'''없는글''',
+'''없는 문서''',
 '''MissingHomePage''':
-'''없는홈페이지''',
+'''없는 홈페이지''',
 '''Mon''':
 '''월요일''',
 '''Tue''':
@@ -938,15 +954,15 @@ red=edit''',
 '''Sun''':
 '''일요일''',
 '''AttachFile''':
-'''파일첨부''',
+'''파일 첨부''',
 '''DeletePage''':
-'''글삭제''',
+'''문서 삭제''',
 '''LikePages''':
-'''비슷한페이지''',
+'''비슷한 페이지''',
 '''LocalSiteMap''':
 '''사이트맵''',
 '''RenamePage''':
-'''이름변경''',
+'''이름 변경''',
 '''SpellCheck''':
-'''철자검사''',
+'''철자 검사''',
 }

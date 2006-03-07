@@ -89,7 +89,7 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
-'''<ne dodaj>''',
+'''<v nobeno>''',
 '''Add to: %(category)s''':
 '''Dodaj v kategorijo %(category)s''',
 '''Trivial change''':
@@ -107,7 +107,7 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 ''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
  Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
  Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
- Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["oglati oklepaji in dvojni narekovaji"])]]; URL; [URL]; [URL povezava].
+ Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
  Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
 
 (!) Več o tem: HelpOnEditing, SyntaxReference.
@@ -233,7 +233,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Up''':
 '''Gor''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Objavi moj e-poštni naslov (ne domače strani) v informacijah o avtorjih''',
+'''Objavi moj e-poštni naslov (ne domače strani) pri informacijah o avtorjih''',
 '''Open editor on double click''':
 '''Odpri urejevalnik ob dvokliku''',
 '''Jump to last visited page instead of frontpage''':
@@ -273,7 +273,7 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''User CSS URL''':
 '''URL uporabnikovega CSS stila''',
 '''(Leave it empty for disabling user CSS)''':
-'''(prazno polje izklopi uporabnikov CSS)''',
+'''(prazno polje izklopi upor. CSS)''',
 '''Editor size''':
 '''Velikost področja za urejanje''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -296,6 +296,18 @@ z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso dovoljen
 '''zadetek''',
 '''matches''':
 '''zadetkov''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Uporabniško ime: %s
+
+Uporabniško geslo: %s
+
+URL za prijavo: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -339,18 +351,22 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Ta e-poštni naslov si že lasti nekdo drug.''',
 '''User account created! You can use this account to login now...''':
 '''Uporabniško ime je narejeno, sedaj se lahko prijavite...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Uporabite UserPreferences za spremembo nastavitev izbranega uporabniškega računa''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Teme (izgleda) \'%(theme_name)s\' ni možno naložiti!''',
 '''User preferences saved!''':
 '''Uporabniške nastavitve so shranjene!''',
 '''Default''':
-'''standardni''',
+'''standardna''',
 '''<Browser setting>''':
 '''<kot predlaga bralnik>''',
 '''the one preferred''':
-'''izbrani''',
+'''izbrani-najljubši''',
 '''free choice''':
 '''prosta izbira''',
+'''Select User''':
+'''Izberi uporabnika''',
 '''Save''':
 '''Shrani''',
 '''Preferred theme''':
@@ -362,7 +378,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Time zone''':
 '''Časovni pas''',
 '''Your time is''':
-'''Lokalni čas je''',
+'''Vaš lokalni čas je''',
 '''Server time is''':
 '''Čas na strežniku je''',
 '''Date format''':
@@ -380,7 +396,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Create Profile''':
 '''Tvori profil''',
 '''Mail me my account data''':
-'''Pošlji mi podatke tem uporabniškem računu''',
+'''Pošlji mi podatke o tem uporabniškem računu''',
 '''Action''':
 '''Akcija''',
 '''No older revisions available!''':
@@ -474,7 +490,7 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Edit the subscription regular expressions in your UserPreferences.''':
 '''Regularni izraz za naročilo obvestil je mogoče spreminjati le z uporabniške nastavitvene strani.''',
 '''You have been subscribed to this page.''':
-'''Naročilo na obvestila o spremembah s te strani je sprejeto.''',
+'''Sedaj ste naročeni na obvestila o spremembah s te strani.''',
 '''Charts are not available!''':
 '''Diagrami niso na voljo!''',
 '''You need to provide a chart type!''':
@@ -588,14 +604,14 @@ oblika tega URL-ja se namreč lahko kadarkoli spremeni in povezava bo tako preki
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Naložitev datoteke na strežnik nikoli ne prekrije obstoječe datoteke.
+'''Naložitev datoteke na strežnik ne prekrije obstoječe datoteke.
 Če priponka s tem imenom že obstaja, je treba preimenovati datoteko,
 ki jo želite naložiti na strežnik.
 Če je polje za preimenovanje prazno, se uporabi nespremenjeno ime datoteke.''',
 '''File to upload''':
-'''Ime datoteke, ki jo nalagate''',
+'''ime datoteke, ki jo nalagate:''',
 '''Rename to''':
-'''Preimenovati v''',
+'''preimenovati v:''',
 '''Upload''':
 '''Naloži na strežnik''',
 '''File attachments are not allowed in this wiki!''':
@@ -643,7 +659,7 @@ ki jo želite naložiti na strežnik.
 '''Attachment \'%(filename)s\'''':
 '''Priponka \'%(filename)s\'''',
 '''Package script:''':
-'''Skript paketa:''',
+'''Ukazna procedura paketa:''',
 '''File Name''':
 '''Ime datoteke''',
 '''Modified''':
@@ -732,7 +748,7 @@ Uporabite drugačno ime.''',
 '''Slide %(pos)d of %(size)d''':
 '''Slika %(pos)d od %(size)d''',
 '''No orphaned pages in this wiki.''':
-'''V tem vikuju ni osirotelih strani (takih brez staršev).''',
+'''V tem vikuju ni nepovezanih strani (sirot).''',
 '''No quotes on %(pagename)s.''':
 '''Na strani %(pagename)s ni citatov.''',
 '''Upload of attachment \'%(filename)s\'.''':
@@ -834,9 +850,9 @@ rdeče=sprememba''',
 '''Clear message''':
 '''Odstrani tole obvestilo''',
 '''last edited %(time)s by %(editor)s''':
-'''nazadnje spreminjano ob %(time)s, spreminjal %(editor)s''',
+'''nazadnje spreminjano %(time)s, spreminjal %(editor)s''',
 '''last modified %(time)s''':
-'''zadnja sprememba ob %(time)s''',
+'''zadnja sprememba: %(time)s''',
 '''Search:''':
 '''Iskanje:''',
 '''Text''':
@@ -852,7 +868,7 @@ rdeče=sprememba''',
 '''Raw Text''':
 '''Izvorno besedilo''',
 '''Delete Cache''':
-'''Briši predspomin''',
+'''Izprazni hitro shrambo''',
 '''Delete Page''':
 '''Izbriši to stran''',
 '''Like Pages''':
@@ -876,9 +892,9 @@ rdeče=sprememba''',
 '''Show %s days.''':
 '''Prikaži %s dni.''',
 '''DeleteCache''':
-'''BrišiPredspomin''',
+'''IzprazniHitroShrambo''',
 '''(cached %s)''':
-'''(shranjeno v predpomnilnik %s)''',
+'''(shranjeno v hitro shrambo %s)''',
 '''Or try one of these actions:''':
 '''Ali pa poskusi z:''',
 '''Page''':

@@ -355,7 +355,7 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''This email already belongs to somebody else.''':
 '''Den här epostadressen tillhör redan någon annan.''',
 '''User account created! You can use this account to login now...''':
-'''Anvädarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
+'''Användarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
 '''Use UserPreferences to change settings of the selected user account''':
 '''Använd AnvändarInställningar för att ändra inställningar för det valda användarkontot''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':

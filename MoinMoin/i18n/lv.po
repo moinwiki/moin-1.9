@@ -517,7 +517,7 @@ msgstr "saskaņa"
 msgid "matches"
 msgstr "saskaņas"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -529,7 +529,7 @@ msgstr ""
 "\n"
 "Lietotāja parole: %s\n"
 "\n"
-"Lietotāja URL: %s/?action=userform&uid=%s\n"
+"Lietotāja URL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -571,7 +571,7 @@ msgstr "Netika atrasts neviens lietotājs ar tādu e-pasta adresi '%(email)s'!"
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 "Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet "
-"LietotājaIstatījumi"
+"LietotājaIestatījumi"
 
 msgid "Empty user name. Please enter a user name."
 msgstr "Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu."
@@ -599,11 +599,10 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet "
-"LietotājaIstatījumi"
+"Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, "
+"izmantojiet LietotājaIstatījumi"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -625,7 +624,7 @@ msgid "free choice"
 msgstr "brīva izvēle"
 
 msgid "Select User"
-msgstr ""
+msgstr "Izvēlēties lietotāju"
 
 msgid "Save"
 msgstr "Saglabāt"

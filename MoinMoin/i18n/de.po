@@ -215,7 +215,7 @@ msgstr ""
 " Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    "
 "keine anhängenden Leerzeichen nach Überschriften oder Tabellen.\n"
 "\n"
-"(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference.\n"
+"(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReferenz.\n"
 
 msgid "Edit was cancelled."
 msgstr "Editierung wurde abgebrochen."
@@ -607,11 +607,10 @@ msgid "User account created! You can use this account to login now..."
 msgstr ""
 "Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein "
-"Konto zu erzeugen."
+"Benutzen Sie BenutzerEinstellungen, um die Einstellungen des ausgewählten "
+"Benutzers zu ändern."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -633,7 +632,7 @@ msgid "free choice"
 msgstr "Freie Auswahl"
 
 msgid "Select User"
-msgstr ""
+msgstr "Benutzer auswählen"
 
 msgid "Save"
 msgstr "Speichern"

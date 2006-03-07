@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2006-01-25 00:34+0900\n"
+"PO-Revision-Date: 2006-02-06 15:44+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -513,7 +513,7 @@ msgstr "箇所一致"
 msgid "matches"
 msgstr "箇所一致"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -525,7 +525,7 @@ msgstr ""
 "\n"
 "ログインパスワード: %s\n"
 "\n"
-"ログインURL: %s/?action=userform&uid=%s\n"
+"ログインURL: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -596,10 +596,9 @@ msgstr ""
 "ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインで"
 "きます。"
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"設定変更やアカウント作成をおこなうには、[\"ユーザプレファレンス\"]を利用して"
+"選択したユーザの設定変更をおこなうには、[\"ユーザプレファレンス\"]を利用して"
 "ください。"
 
 #, python-format
@@ -622,7 +621,7 @@ msgid "free choice"
 msgstr "自由選択"
 
 msgid "Select User"
-msgstr ""
+msgstr "ユーザ選択"
 
 msgid "Save"
 msgstr "保存"

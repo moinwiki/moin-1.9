@@ -236,6 +236,8 @@ To leave the editor, press the Cancel button.''':
 '''Показывать мой почтовый адрес (вместо домашней страницы) в информации об авторе''',
 '''Open editor on double click''':
 '''Открывать редактор по двойному клику''',
+'''Jump to last visited page instead of frontpage''':
+'''Открывать с последней просмотренной страницы а не с начала''',
 '''Show question mark for non-existing pagelinks''':
 '''Показывать ? для незаполненных страниц''',
 '''Show page trail''':
@@ -293,6 +295,18 @@ space between words. Group page name is not allowed.''':
 '''совпадение''',
 '''matches''':
 '''совпадений''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Имя: %s
+
+Пароль: %s
+
+URL для входа: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -317,6 +331,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Пожалуйста укажите правильный почтовый адрес!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Не найдено пользователя с таким адресом \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Для создания пользователя или его изменения нажмите на ВашиНастройки.''',
 '''Empty user name. Please enter a user name.''':
 '''Имя не указано. Пожалуйста введите имя пользователя.''',
 '''This user name already belongs to somebody else.''':
@@ -329,6 +345,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
 '''This email already belongs to somebody else.''':
 '''Это чужой адрес.''',
+'''User account created! You can use this account to login now...''':
+'''Пользователь создан! Можно входить...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''ВашиНастройки можно изменить для выбранного пользователя''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Не могу загрузать макияж \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -341,6 +361,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''предпочтительно''',
 '''free choice''':
 '''по выбору''',
+'''Select User''':
+'''Выберите пользователя''',
 '''Save''':
 '''Записать''',
 '''Preferred theme''':
@@ -753,6 +775,12 @@ Try a different name.''':
 '''Сохранить XML версию этого вики''',
 '''No wanted pages in this wiki.''':
 '''В этом вики нет требуемых страниц.''',
+'''Rendering of reStructured text is not possible, please install docutils.''':
+'''Форматирование структурированного (reStructured) текста невозможно без установки docutils.''',
+'''**Maximum number of allowed includes exceeded**''':
+'''**Слишком много include**''',
+'''**Could not find the referenced page: %s**''':
+'''**Страница не найдена: %s**''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Нужно "%(wanted)s" после "%(key)s", а не "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -905,6 +933,8 @@ red=edit''':
 '''ВикиЛицензия''',
 '''MissingPage''':
 '''НетСтраницы''',
+'''MissingHomePage''':
+'''НетДомашнейСтраницы''',
 '''Mon''':
 '''Пон''',
 '''Tue''':
