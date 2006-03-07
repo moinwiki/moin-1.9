@@ -458,7 +458,7 @@ class Formatter(FormatterBase):
 
         title = ''
         for a in ('title', 'html_title', 'alt', 'html_alt'):
-            if kw.has_key(titleattr):
+            if kw.has_key(a):
                 title = kw[a]
                 break
         if title:

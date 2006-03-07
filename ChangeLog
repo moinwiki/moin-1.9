@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-07 18:27:57 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-470
+
+    Summary:
+      fix broken smileys for docbook formatter
+    Revision:
+      moin--main--1.5--patch-470
+
+    fix broken smileys for docbook formatter
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/xml_docbook.py
+
+
 2006-03-07 10:13:30 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-469
 
     Summary:
