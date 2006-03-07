@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-07 08:05:29 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-467
+
+    Summary:
+      fixing yet another bug in error logging calls
+    Revision:
+      moin--main--1.5--patch-467
+
+    fixing yet another bug in error logging calls
+    
+
+    modified files:
+     ChangeLog MoinMoin/caching.py
+
+
 2006-03-05 13:57:20 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-466
 
     Summary:
