@@ -82,7 +82,7 @@ class CacheEntry:
                 if locking:
                     self.wlock.release()
         else:
-            self.request.log("Can't acquire write lock in %s", self.lock_dir)
+            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def update(self, content, encode=False):
         if encode:
@@ -100,7 +100,7 @@ class CacheEntry:
                 if locking:
                     self.wlock.release()
         else:
-            self.request.log("Can't acquire write lock in %s", self.lock_dir)
+            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def remove(self):
         try:
@@ -118,7 +118,7 @@ class CacheEntry:
                 if locking:
                     self.rlock.release()
         else:
-            self.request.log("Can't acquire read lock in %s", self.lock_dir)
+            self.request.log("Can't acquire read lock in %s" % self.lock_dir)
         if decode:
             data = data.decode(config.charset)
         return data
