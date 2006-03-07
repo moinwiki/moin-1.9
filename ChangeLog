@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-07 08:33:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-468
+
+    Summary:
+      added note about moin_cookie being required by su-functionality
+    Revision:
+      moin--main--1.5--patch-468
+
+    added note about moin_cookie being required by su-functionality
+    
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-03-07 08:05:29 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-467
 
     Summary:
