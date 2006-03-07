@@ -110,7 +110,7 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
  Links:: [[Verbatim(ZusammenGeschriebeneGroßeWorte)]]; [[Verbatim(["Klammern und doppelte  Anführungszeichen"])]]; url; [url]; [url label].
  Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    keine anhängenden Leerzeichen nach Überschriften oder Tabellen.
 
-(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReference.
+(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReferenz.
 ''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',
@@ -352,6 +352,8 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Diese E-Mail-Adresse gehört bereits jemand anderem.''',
 '''User account created! You can use this account to login now...''':
 '''Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Benutzen Sie BenutzerEinstellungen, um die Einstellungen des ausgewählten Benutzers zu ändern.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Das Theme \'%(theme_name)s\' konnte nicht geladen werden!''',
 '''User preferences saved!''':
@@ -364,6 +366,8 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''der Bevorzugte''',
 '''free choice''':
 '''Freie Auswahl''',
+'''Select User''':
+'''Benutzer auswählen''',
 '''Save''':
 '''Speichern''',
 '''Preferred theme''':

@@ -353,6 +353,8 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Cette adresse électronique appartient déjà à quelqu\'un d\'autre.''',
 '''User account created! You can use this account to login now...''':
 '''Compte utilisateur créé ! Vous pouvez l\'utiliser dès à présent pour vous connecter...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Utilisez les PréférencesUtilisateur pour modifier les paramètres du compte sélectionné''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Le thème « %(theme_name)s » n\'a pu être chargé !''',
 '''User preferences saved!''':
@@ -365,6 +367,8 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''votre préféré''',
 '''free choice''':
 '''au choix''',
+'''Select User''':
+'''Choix du compte''',
 '''Save''':
 '''Enregistrer''',
 '''Preferred theme''':

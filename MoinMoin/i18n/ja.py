@@ -299,6 +299,18 @@ space between words. Group page name is not allowed.''':
 '''箇所一致''',
 '''matches''':
 '''箇所一致''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''ログイン名: %s
+
+ログインパスワード: %s
+
+ログインURL: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -342,6 +354,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''このメールアドレスはすでに利用されています。''',
 '''User account created! You can use this account to login now...''':
 '''ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''選択したユーザの設定変更をおこなうには、["ユーザプレファレンス"]を利用してください。''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
 '''User preferences saved!''':
@@ -354,6 +368,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''お好み''',
 '''free choice''':
 '''自由選択''',
+'''Select User''':
+'''ユーザ選択''',
 '''Save''':
 '''保存''',
 '''Preferred theme''':

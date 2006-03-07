@@ -1003,7 +1003,7 @@ msgid "File to upload"
 msgstr "Soubor k uploadu"
 
 msgid "Rename to"
-msgstr "Přejmenovat stránku"
+msgstr "Přejmenovat na"
 
 msgid "Upload"
 msgstr "Upload"

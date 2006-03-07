@@ -298,6 +298,18 @@ Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağl�
 '''eşle''',
 '''matches''':
 '''eşleniyor''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Kullanıcı Adı: %s
+
+Giriş Parolası: %s
+
+Giriş için URL: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -338,6 +350,8 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Bu e-posta adresi başka bir hesap tarafından kullanılmakta.''',
 '''User account created! You can use this account to login now...''':
 '''Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz artık.''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Seçilen kullanıcı hesabı üzerinde değişiklik yapmak için KullanıcıÖzellikleri bağlantısını kullanınız.''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''\'%(theme_name)s\' teması yüklenemiyor!''',
 '''User preferences saved!''':
@@ -350,6 +364,8 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Tercih edilen''',
 '''free choice''':
 '''İsteğe bağlı seçim''',
+'''Select User''':
+'''Kullanıcı Seç''',
 '''Save''':
 '''Kaydet''',
 '''Preferred theme''':

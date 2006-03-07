@@ -297,6 +297,18 @@ space between words. Group page name is not allowed.''':
 '''筆''',
 '''matches''':
 '''筆''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''登入名稱：%s
+
+登入密碼：%s
+
+登入 URL：%s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -337,6 +349,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''這個 email 地址已經有人用了。''',
 '''User account created! You can use this account to login now...''':
 '''使用者帳號已經建立！你可以用此帳號登入...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''請到 ["使用者設定"] 改變所選定使用者的帳號資料''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''無法載入佈景主題 \'%(theme_name)s\'!''',
 '''User preferences saved!''':
@@ -349,6 +363,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''只有我偏好的''',
 '''free choice''':
 '''列出所有選擇''',
+'''Select User''':
+'''選擇使用者''',
 '''Save''':
 '''存檔''',
 '''Preferred theme''':

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2005-12-21 21:30+0100\n"
+"PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
 "MIME-Version: 1.0\n"
@@ -515,7 +515,7 @@ msgstr "porównanie"
 msgid "matches"
 msgstr "porówniania"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -527,7 +527,7 @@ msgstr ""
 "\n"
 "Hasło czytelnika: %s\n"
 "\n"
-"URL logowania: %s/?action=userform&uid=%s\n"
+"URL logowania: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -595,10 +595,8 @@ msgstr ""
 "Konto czytelnika utworzone! Możesz teraz użyć tego konta żeby się "
 "zalogować..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto."
+msgstr "Wejdź do PreferencjeCzytelnika aby zmienić ustawienia wybranego konta."
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -620,7 +618,7 @@ msgid "free choice"
 msgstr "wybór dowolny"
 
 msgid "Select User"
-msgstr ""
+msgstr "Wybierz czytelnika"
 
 msgid "Save"
 msgstr "Zachowaj"

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-04 18:59+0100\n"
-"PO-Revision-Date: 2006-01-25 09:30+0800\n"
+"PO-Revision-Date: 2006-02-06 17:00+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -495,7 +495,7 @@ msgstr "筆"
 msgid "matches"
 msgstr "筆"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -507,7 +507,7 @@ msgstr ""
 "\n"
 "登入密碼：%s\n"
 "\n"
-"登入 URL：%s/?action=userform&uid=%s\n"
+"登入 URL：%s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -569,9 +569,8 @@ msgstr "這個 email 地址已經有人用了。"
 msgid "User account created! You can use this account to login now..."
 msgstr "使用者帳號已經建立！你可以用此帳號登入..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
-msgstr "請到 UserPreferences 改變設定或新建帳號"
+msgstr "請到 [\"使用者設定\"] 改變所選定使用者的帳號資料"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -593,7 +592,7 @@ msgid "free choice"
 msgstr "列出所有選擇"
 
 msgid "Select User"
-msgstr ""
+msgstr "選擇使用者"
 
 msgid "Save"
 msgstr "存檔"

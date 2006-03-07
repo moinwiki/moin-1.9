@@ -2,6 +2,30 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-07 10:13:30 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-469
+
+    Summary:
+      updated i18n
+    Revision:
+      moin--main--1.5--patch-469
+
+    updated i18n
+    
+
+    modified files:
+     ChangeLog MoinMoin/i18n/cs.po MoinMoin/i18n/cs.py
+     MoinMoin/i18n/de.po MoinMoin/i18n/de.py MoinMoin/i18n/es.po
+     MoinMoin/i18n/es.py MoinMoin/i18n/fr.po MoinMoin/i18n/fr.py
+     MoinMoin/i18n/it.po MoinMoin/i18n/it.py MoinMoin/i18n/ja.po
+     MoinMoin/i18n/ja.py MoinMoin/i18n/ko.po MoinMoin/i18n/ko.py
+     MoinMoin/i18n/lv.po MoinMoin/i18n/lv.py MoinMoin/i18n/meta.py
+     MoinMoin/i18n/pl.po MoinMoin/i18n/pl.py MoinMoin/i18n/ru.po
+     MoinMoin/i18n/ru.py MoinMoin/i18n/sl.po MoinMoin/i18n/sl.py
+     MoinMoin/i18n/sr.po MoinMoin/i18n/sr.py MoinMoin/i18n/sv.po
+     MoinMoin/i18n/sv.py MoinMoin/i18n/tr.po MoinMoin/i18n/tr.py
+     MoinMoin/i18n/zh_tw.po MoinMoin/i18n/zh_tw.py
+
+
 2006-03-07 08:33:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-468
 
     Summary:

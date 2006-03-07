@@ -604,7 +604,7 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''File to upload''':
 '''Soubor k uploadu''',
 '''Rename to''':
-'''Přejmenovat stránku''',
+'''Přejmenovat na''',
 '''Upload''':
 '''Upload''',
 '''File attachments are not allowed in this wiki!''':
