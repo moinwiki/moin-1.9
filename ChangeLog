@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-08 11:59:52 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-471
+
+    Summary:
+      Added file entry to POTFILES.in
+    Revision:
+      moin--main--1.5--patch-471
+
+
+    modified files:
+     ChangeLog MoinMoin/i18n/POTFILES.in
+
+
 2006-03-07 18:27:57 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-470
 
     Summary:

@@ -28,6 +28,7 @@ action/links.py
 action/newpage.py
 action/rss_rc.py
 action/titleindex.py
+action/SubscribeUser.py
 
 formatter/base.py
 formatter/text_html.py
