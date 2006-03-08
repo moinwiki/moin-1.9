@@ -30,12 +30,6 @@ def execute(macro, args):
     }
     choice = request.form.get('sysadm', [None])[0]
 
-    # TODO: unfinished!
-    if 0:
-        result = wikiutil.link_tag(request, "?action=export", _("Download XML export of this wiki"))
-        if pysupport.isImportable('gzip'):
-            result += " [%s]" % wikiutil.link_tag(request, "?action=export&compression=gzip", "gzip")
-
     # create menu
     menuitems = [(label, id) for id, (label, handler) in _MENU.items()]
     menuitems.sort()
