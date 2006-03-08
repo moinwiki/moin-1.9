@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-08 22:30:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-472
+
+    Summary:
+      Removed export-action-code left over.
+    Revision:
+      moin--main--1.5--patch-472
+
+
+    modified files:
+     ChangeLog MoinMoin/macro/SystemAdmin.py
+
+
 2006-03-08 11:59:52 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-471
 
     Summary:
