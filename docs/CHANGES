@@ -80,6 +80,9 @@ Version 1.5.current:
     * ThemeBase (use by modern/rightsidebar): removed duplicate AttachFile from
       actions menu (we already have it in editbar)
 
+  Other:
+    * Added css classes for the rst admonitions. Thanks to TiagoMacambira!
+
 Version 1.5.2:
 
   New features:

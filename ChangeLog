@@ -2,6 +2,27 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-13 00:47:29 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-473
+
+    Summary:
+      Added rst admonition class patch by TiagoMacambira
+    Revision:
+      moin--main--1.5--patch-473
+
+
+    new files:
+     contrib/stylesheets/.arch-ids/=id
+     contrib/stylesheets/.arch-ids/readme.txt.id
+     contrib/stylesheets/.arch-ids/speed.css.id
+     contrib/stylesheets/readme.txt contrib/stylesheets/speed.css
+
+    modified files:
+     ChangeLog MoinMoin/parser/rst.py docs/CHANGES
+
+    new directories:
+     contrib/stylesheets contrib/stylesheets/.arch-ids
+
+
 2006-03-08 22:30:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-472
 
     Summary:
