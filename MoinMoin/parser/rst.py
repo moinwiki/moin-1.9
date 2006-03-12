@@ -243,6 +243,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
         # function (see visit_image for an example).
         self.wiki_text = ''
         self.setup_wiki_handlers()
+        self.setup_admonitions_handlers()
         
         # Make all internal lists RawHTMLLists, see RawHTMLList class
         # comment for more information.
@@ -447,8 +448,6 @@ class MoinTranslator(html4css1.HTMLTranslator):
             'list_item': 'listitem',
             # Definition List
             'definition_list': 'definition_list',
-            # Admonitions
-            'warning': 'highlight'
         }
         for rest_func, moin_func in handlers.items():
             visit_func, depart_func = self.create_wiki_functor(moin_func)
@@ -467,6 +466,45 @@ class MoinTranslator(html4css1.HTMLTranslator):
         self.wiki_text = ''
         self.request.write(self.formatter.number_list(0))
         self.body.append(self.wiki_text)
+
+    # Admonitions are handled here -=- tmacam
+    def create_admonition_functor(self, admotion_class):
+        tag_class = 'admonition_' + admotion_class
+        def visit_func(self, node):
+            self.wiki_text = ''
+            self.request.write(self.formatter.div(1,
+                                                  attr={'class': tag_class},
+                                                  allowed_attrs=[]))
+            self.body.append(self.wiki_text)
+        def depart_func(self, node):
+            self.wiki_text = ''
+            self.request.write(self.formatter.div(0))
+            self.body.append(self.wiki_text)
+            
+        return visit_func, depart_func 
+
+    def setup_admonitions_handlers(self):
+        """
+            Admonitions are handled here... We basically surround admonitions
+            in a div with class admonition_{name of the admonition}.
+        """
+        handled_admonitions = [
+            'attention',
+            'caution',
+            'danger',
+            'error',
+            'hint',
+            'important',
+            'note',
+            'tip',
+            'warning',
+        ]
+        for adm in handled_admonitions:
+            visit_func, depart_func = self.create_admonition_functor(adm)
+            visit_func = new.instancemethod(visit_func, self, MoinTranslator)
+            depart_func = new.instancemethod(depart_func, self, MoinTranslator)
+            setattr(self, 'visit_%s' % (adm), visit_func)
+            setattr(self, 'depart_%s' % (adm), depart_func)
 
 
 class MoinDirectives:
@@ -555,3 +593,4 @@ class MoinDirectives:
 
 if ErrorParser: # fixup in case of missing docutils
     Parser = ErrorParser
+
