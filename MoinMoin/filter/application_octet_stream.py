@@ -3,33 +3,54 @@
     MoinMoin - binary file Filter
     
     Processes any binary file and extracts ASCII content from it.
+    
+    We ignore any file with a file extension on the blacklist, because
+    we either can't handle it or it usually has no indexable content.
+    
+    Due to speed reasons, we only read the first maxread bytes from a file.
+    
+    For reducing the amount of trash, we only return words with
+    length >= minwordlen.
+    
+    Depends on: nothing (pure python)
 
     @copyright: 2006 by ThomasWaldmann MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, string
+maxread = 10000
+minwordlen = 4
 
-# we don't want or are not able to process those:
-blacklist = ('.exe', '.com', '.cab',
-             '.iso',
-             '.zip', '.gz', '.tgz', '.bz2', '.tb2', )
+blacklist = ('.iso', # CD/DVD images, TODO: add nero/... stuff
+             '.zip', '.rar', '.lzh', '.lha',
+             '.tar', '.gz', '.tgz', '.bz2', '.tb2',
+             '.exe', '.com', '.dll', '.cab', '.msi', '.bin', # windows
+             '.rpm', '.deb', # linux
+             '.hqx', '.dmg', '.sit', # mac
+             '.jar', '.class', # java
+            )
+
+import os, string
 
 # builds a list of all characters:
 norm = string.maketrans('', '')
+
 # builds a list of all non-alphanumeric characters:
 non_alnum = string.translate(norm, norm, string.letters+string.digits) 
+
 # translate table that replaces all non-alphanumeric by blanks:
 trans_nontext = string.maketrans(non_alnum, ' '*len(non_alnum))
 
 def execute(indexobj, filename):
     fileext = os.path.splitext(filename)[1]
-    if fileext in blacklist:
+    if fileext.lower() in blacklist:
         return u''
     f = file(filename, "rb")
-    data = f.read()
+    data = f.read(maxread)
     f.close()
-    data = data.translate(trans_nontext)
-    data = ' '.join(data.split()) # remove lots of blanks
+    data = data.translate(trans_nontext) # replace non-ascii by blanks
+    data = data.split() # removes lots of blanks
+    data = [s for s in data if len(s) >= minwordlen] # throw away too short stuff
+    data = ' '.join(data)
     return data.decode('ascii')
 

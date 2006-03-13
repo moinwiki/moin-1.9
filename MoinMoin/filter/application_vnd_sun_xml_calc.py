@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - OpenOffice.org Writer Filter
+    MoinMoin - OpenOffice.org Calc Filter
 
     Depends on: nothing (only python with zlib)
 

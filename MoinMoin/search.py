@@ -1157,6 +1157,7 @@ class Search:
         self.request = request
         self.query = query
         self.filtered = False
+        self.fs_rootpage = "FS" # XXX FS hardcoded
 
     def run(self):
         """ Perform search and return results object """
@@ -1215,10 +1216,15 @@ class Search:
             # but don't search attachments (thus attachment name = '')
             pages = [(p, '') for p in self._getPageList()]
         hits = []
+        fs_rootpage = self.fs_rootpage
         for pagename, attachment in pages:
             page = Page(self.request, pagename)
             if attachment:
-               hits.append((page, attachment, None))
+                if pagename == fs_rootpage: # not really an attachment
+                    page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
+                    hits.append((page, None, None))
+                else:
+                    hits.append((page, attachment, None))
             else:
                 match = self.query.search(page)
                 if match:
@@ -1245,8 +1251,9 @@ class Search:
     def _filter(self, hits):
         """ Filter out deleted or acl protected pages """
         userMayRead = self.request.user.may.read
+        fs_rootpage = self.fs_rootpage + "/"
         filtered = [(page, attachment, match) for page, attachment, match in hits
-                    if page.exists() and userMayRead(page.page_name)]    
+                    if page.exists() and userMayRead(page.page_name) or page.page_name.startswith(fs_rootpage)]    
         return filtered
         
         

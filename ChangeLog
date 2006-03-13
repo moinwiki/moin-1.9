@@ -2,6 +2,43 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-13 20:31:36 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-474
+
+    Summary:
+      lupy: some filters, update mode
+    Revision:
+      moin--main--1.5--patch-474
+
+    lupy: some filters, update mode
+    
+
+    new files:
+     MoinMoin/filter/.arch-ids/EXIF.py.id
+     MoinMoin/filter/.arch-ids/application_msword.py.id
+     MoinMoin/filter/.arch-ids/application_pdf.py.id
+     MoinMoin/filter/.arch-ids/application_vnd_ms_excel.py.id
+     MoinMoin/filter/.arch-ids/application_vnd_sun_xml.py.id
+     MoinMoin/filter/.arch-ids/application_vnd_sun_xml_calc.py.id
+     MoinMoin/filter/.arch-ids/image_jpeg.py.id
+     MoinMoin/filter/.arch-ids/text_html.py.id
+     MoinMoin/filter/.arch-ids/text_rtf.py.id
+     MoinMoin/filter/.arch-ids/text_xml.py.id
+     MoinMoin/filter/EXIF.py MoinMoin/filter/application_msword.py
+     MoinMoin/filter/application_pdf.py
+     MoinMoin/filter/application_vnd_ms_excel.py
+     MoinMoin/filter/application_vnd_sun_xml.py
+     MoinMoin/filter/application_vnd_sun_xml_calc.py
+     MoinMoin/filter/image_jpeg.py MoinMoin/filter/text_html.py
+     MoinMoin/filter/text_rtf.py MoinMoin/filter/text_xml.py
+
+    modified files:
+     ChangeLog MoinMoin/filter/__init__.py
+     MoinMoin/filter/application_octet_stream.py
+     MoinMoin/filter/application_vnd_sun_xml_writer.py
+     MoinMoin/lupy.py MoinMoin/scripts/moin_build_index.py
+     MoinMoin/search.py docs/CHANGES
+
+
 2006-03-13 00:47:29 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-473
 
     Summary:

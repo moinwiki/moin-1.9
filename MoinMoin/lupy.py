@@ -2,19 +2,23 @@
 """
     MoinMoin - lupy indexing search engine
 
-    @copyright: 2005 by Florian Festi, Nir Soffer
+    @copyright: 2005 by Florian Festi, Nir Soffer, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, re, codecs, errno, time
 
 from MoinMoin.Page import Page
-from MoinMoin import config
+from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
 from MoinMoin.support.lupy.index.term import Term
 from MoinMoin.support.lupy import document
 from MoinMoin.support.lupy.index.indexwriter import IndexWriter
 from MoinMoin.support.lupy.search.indexsearcher import IndexSearcher
+
+from MoinMoin.support.lupy.index.term import Term
+from MoinMoin.support.lupy.search.term import TermQuery
+from MoinMoin.support.lupy.search.boolean import BooleanQuery
 
 ##############################################################################
 ### Tokenizer
@@ -85,10 +89,7 @@ class UpdateQueue:
         return os.path.exists(self.file)
 
     def append(self, pagename):
-        """ Append a page to queue 
-        
-        TODO: tune timeout
-        """
+        """ Append a page to queue """
         if not self.writeLock.acquire(60.0):
             request.log("can't add %r to lupy update queue: can't lock queue" %
                         pagename)
@@ -103,10 +104,7 @@ class UpdateQueue:
             self.writeLock.release()
 
     def pages(self):
-        """ Return list of pages in the queue 
-        
-        TODO: tune timeout
-        """
+        """ Return list of pages in the queue """
         if self.readLock.acquire(1.0):
             try:
                 return self._decode(self._read())
@@ -119,8 +117,6 @@ class UpdateQueue:
         
         When the queue is empty, the queue file is removed, so exists()
         can tell if there is something waiting in the queue.
-        
-        TODO: tune timeout
         """
         if self.writeLock.acquire(30.0):
             try:
@@ -229,24 +225,29 @@ class Index:
     def mtime(self):
         return os.path.getmtime(self.segments_file)
 
+    def _search(self, query):
+        """ read lock must be acquired """
+        while True:
+            try:
+                searcher, timestamp = self.request.cfg.lupy_searchers.pop()
+                if timestamp != self.mtime():
+                    searcher.close()
+                else:
+                    break
+            except IndexError:
+                searcher = IndexSearcher(self.dir)
+                timestamp = self.mtime()
+                break
+            
+        hits = list(searcher.search(query))
+        self.request.cfg.lupy_searchers.append((searcher, timestamp))
+        return hits
+    
     def search(self, query):
         if not self.read_lock.acquire(1.0):
             raise self.LockedException
         try:
-            while True:
-                try:
-                    searcher, timestamp = self.request.cfg.lupy_searchers.pop()
-                    if timestamp != self.mtime():
-                        searcher.close()
-                    else:
-                        break
-                except IndexError:
-                    searcher = IndexSearcher(self.dir)
-                    timestamp = self.mtime()
-                    break
-                
-            hits = list(searcher.search(query))
-            self.request.cfg.lupy_searchers.append((searcher, timestamp))
+            hits = self._search(query)
         finally:
             self.read_lock.release()
         return hits
@@ -259,8 +260,6 @@ class Index:
         """ do queued index updates in a new thread
         
         Should be called from a user request. From a script, use indexPages.
-
-        TODO: tune the acquire timeout
         """
         if not self.lock.acquire(1.0):
             self.request.log("can't index: can't acquire lock")
@@ -285,28 +284,27 @@ class Index:
             self.lock.release()
             raise
 
-    def indexPages(self):
-        """ Index all pages
+    def indexPages(self, files=None, update=True):
+        """ Index all pages (and files, if given)
         
         Can be called only from a script. To index pages during a user
-        request, use indexPagesInNewThread. 
-        
-        TODO: tune the acquire timeout
+        request, use indexPagesInNewThread.
+        @arg files: iterator or list of files to index additionally
+        @arg update: True = update an existing index, False = reindex everything
         """
         if not self.lock.acquire(1.0):
             self.request.log("can't index: can't acquire lock")
             return
         try:
-            self._index_pages(self._indexingRequest(self.request))
+            request = self._indexingRequest(self.request)
+            self._index_pages(request, None, files, update)
         finally:
             self.lock.release()
     
-    def indexPagesInNewThread(self):
+    def indexPagesInNewThread(self, files=None, update=True):
         """ Index all pages in a new thread
         
         Should be called from a user request. From a script, use indexPages.
-
-        TODO: tune the acquire timeout
         """
         if not self.lock.acquire(1.0):
             self.request.log("can't index: can't acquire lock")
@@ -318,7 +316,7 @@ class Index:
                 return
             from threading import Thread
             indexThread = Thread(target=self._index_pages,
-                args=(self._indexingRequest(self.request), self.lock))
+                args=(self._indexingRequest(self.request), self.lock, files, update))
             indexThread.setDaemon(True)
             
             # Join the index thread after current request finish, prevent
@@ -376,7 +374,7 @@ class Index:
         reader.close()
         if page.exists():
             writer = IndexWriter(self.dir, False, tokenizer)
-            self._index_page(writer, page)
+            self._index_page(writer, page, False) # we don't need to check whether it is updated
             writer.close()
    
     def contentfilter(self, filename):
@@ -402,45 +400,113 @@ class Index:
                     execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
                 except wikiutil.PluginMissingError:
                     raise ImportError("Cannot load filter %s" % binaryfilter)
-        data = execute(self, filename)
-        request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
+        try:
+            data = execute(self, filename)
+            request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
+        except (OSError, IOError), err:
+            data = ''
+            request.log("Filter %s threw error '%s' for file %s" % (_filter, str(err), filename))
         return data
    
-    def _index_page(self, writer, page):
-        """ Assumes that the write lock is acquired """
-        d = document.Document()
+    def test(self, request):
+        query = BooleanQuery()
+        query.add(TermQuery(Term("text", 'suchmich')), True, False)
+        docs = self._search(query)
+        for d in docs:
+            request.log("%r %r %r" % (d, d.get('attachment'), d.get('pagename')))
+
+    def _index_file(self, request, writer, filename, update):
+        """ index a file as it were a page named pagename
+            Assumes that the write lock is acquired
+        """
+        fs_rootpage = 'FS' # XXX FS hardcoded
+        try:
+            mtime = os.path.getmtime(filename)
+            mtime = wikiutil.timestamp2version(mtime)
+            if update:
+                query = BooleanQuery()
+                query.add(TermQuery(Term("pagename", fs_rootpage)), True, False)
+                query.add(TermQuery(Term("attachment", filename)), True, False)
+                docs = self._search(query)
+                updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
+            else:
+                updated = True
+            request.log("%s %r" % (filename, updated))
+            if updated:
+                file_content = self.contentfilter(filename)
+                d = document.Document()
+                d.add(document.Keyword('pagename', fs_rootpage))
+                d.add(document.Keyword('mtime', str(mtime)))
+                d.add(document.Keyword('attachment', filename)) # XXX we should treat files like real pages, not attachments
+                pagename = " ".join(os.path.join(fs_rootpage, filename).split("/"))
+                d.add(document.Text('title', pagename, store=False))        
+                d.add(document.Text('text', file_content, store=False))
+                writer.addDocument(d)
+        except (OSError, IOError), err:
+            pass
+
+    def _index_page(self, writer, page, update):
+        """ Index a page - assumes that the write lock is acquired
+            @arg writer: the index writer object
+            @arg page: a page object
+            @arg update: False = index in any case, True = index only when changed
+        """
         pagename = page.page_name
         request = page.request
-        d.add(document.Keyword('pagename', pagename))
-        d.add(document.Keyword('attachment', '')) # this is a real page, not an attachment
-        d.add(document.Text('title', pagename, store=False))        
-        d.add(document.Text('text', page.get_raw_body(), store=False))
-        
-        links = page.getPageLinks(request)
-        t = document.Text('links', '', store=False)
-        t.stringVal = links
-        d.add(t)
-        d.add(document.Text('link_text', ' '.join(links), store=False))
+        mtime = page.mtime_usecs()
+        if update:
+            query = BooleanQuery()
+            query.add(TermQuery(Term("pagename", pagename)), True, False)
+            query.add(TermQuery(Term("attachment", "")), True, False)
+            docs = self._search(query)
+            updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
+        else:
+            updated = True
+        request.log("%s %r" % (pagename, updated))
+        if updated:
+            d = document.Document()
+            d.add(document.Keyword('pagename', pagename))
+            d.add(document.Keyword('mtime', str(mtime)))
+            d.add(document.Keyword('attachment', '')) # this is a real page, not an attachment
+            d.add(document.Text('title', pagename, store=False))        
+            d.add(document.Text('text', page.get_raw_body(), store=False))
+            
+            links = page.getPageLinks(request)
+            t = document.Text('links', '', store=False)
+            t.stringVal = links
+            d.add(t)
+            d.add(document.Text('link_text', ' '.join(links), store=False))
 
-        writer.addDocument(d)
+            writer.addDocument(d)
         
         from MoinMoin.action import AttachFile
 
         attachments = AttachFile._get_files(request, pagename)
         for att in attachments:
             filename = AttachFile.getFilename(request, pagename, att)
-            att_content = self.contentfilter(filename)
-            d = document.Document()
-            d.add(document.Keyword('pagename', pagename))
-            d.add(document.Keyword('attachment', att)) # this is an attachment, store its filename
-            d.add(document.Text('title', att, store=False)) # the filename is the "title" of an attachment
-            d.add(document.Text('text', att_content, store=False))
-            
-            writer.addDocument(d)
+            mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
+            if update:
+                query = BooleanQuery()
+                query.add(TermQuery(Term("pagename", pagename)), True, False)
+                query.add(TermQuery(Term("attachment", att)), True, False)
+                docs = self._search(query)
+                updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
+            else:
+                updated = True
+            request.log("%s %s %r" % (pagename, att, updated))
+            if updated:
+                att_content = self.contentfilter(filename)
+                d = document.Document()
+                d.add(document.Keyword('pagename', pagename))
+                d.add(document.Keyword('mtime', str(mtime)))
+                d.add(document.Keyword('attachment', att)) # this is an attachment, store its filename
+                d.add(document.Text('title', att, store=False)) # the filename is the "title" of an attachment
+                d.add(document.Text('text', att_content, store=False))
+                writer.addDocument(d)
 
 
-    def _index_pages(self, request, lock=None):
-        """ Index all pages
+    def _index_pages(self, request, lock=None, files=None, update=True):
+        """ Index all pages (and all given files)
         
         This should be called from indexPages or indexPagesInNewThread only!
         
@@ -453,7 +519,7 @@ class Index:
         try:
             self._unsign()
             start = time.time()
-            writer = IndexWriter(self.dir, True, tokenizer)
+            writer = IndexWriter(self.dir, not update, tokenizer)
             writer.mergeFactor = 50
             pages = request.rootpage.getPageList(user='', exists=1)
             request.log("indexing all (%d) pages..." % len(pages))
@@ -461,7 +527,12 @@ class Index:
                 p = Page(request, pagename)
                 # code does NOT seem to assume request.page being set any more
                 #request.page = p
-                self._index_page(writer, p)
+                self._index_page(writer, p, update)
+            if files:
+                request.log("indexing all files...")
+                for fname in files:
+                    fname = fname.strip()
+                    self._index_file(request, writer, fname, update)
             writer.close()
             request.log("indexing completed successfully in %0.2f seconds." % 
                         (time.time() - start))
