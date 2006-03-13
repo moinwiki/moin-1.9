@@ -215,24 +215,24 @@ class ThemeBase:
             if not aliasname:
                 aliasname = name
             title = "%s @ %s" % (aliasname, interwiki[0])
-            homelink = (request.formatter.interwikilink(1, title=title, *interwiki) +
+            homelink = (request.formatter.interwikilink(1, title=title, id="userhome", *interwiki) +
                         request.formatter.text(name) +
                         request.formatter.interwikilink(0))
             userlinks.append(homelink)        
             # Set pref page to localized Preferences page
             title = preferencesPage.split_title(request)
-            userlinks.append(preferencesPage.link_to(request, text=title))
+            userlinks.append(preferencesPage.link_to(request, text=title, id="userprefs"))
             
         if request.cfg.show_login:
             if request.user.valid:
                 userlinks.append("""\
-<form action="" method="POST">
+<form id="logout" action="" method="POST">
 <input type="hidden" name="action" value="userform">
 <input type="submit" name="logout" value="%(logout)s">
 </form>
 """ % { 'logout': _('Logout') })
             else:
-                userlinks.append(preferencesPage.link_to(request, text=_("Login")))
+                userlinks.append(preferencesPage.link_to(request, text=_("Login"), id="login"))
 
         userlinks = [u'<li>%s</li>' % link for link in userlinks]
         html = u'<ul id="username">%s</ul>' % ''.join(userlinks)

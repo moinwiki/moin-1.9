@@ -988,6 +988,8 @@ def isPicture(url):
 def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     """ Create a link.
 
+    TODO: cleanup css_class
+
     @param request: the request object
     @param params: parameter string appended to the URL after the scriptname/
     @param text: text / inner part of the <a>...</a> link - does NOT get
@@ -999,6 +1001,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     @return: formatted link tag
     """
     css_class = kw.get('css_class', None)
+    id = kw.get('id', None)
     if text is None:
         text = params # default
     if formatter:
@@ -1016,6 +1019,8 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
         attrs += ' ' + kw['attrs']
     if css_class:
         attrs += ' class="%s"' % css_class
+    if id:
+        attrs += ' id="%s"' % id
     result = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
     if on:
         return result

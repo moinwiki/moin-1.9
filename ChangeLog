@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-13 21:05:27 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-475
+
+    Summary:
+      added header element ids: userhome, userprefs, login, logout
+    Revision:
+      moin--main--1.5--patch-475
+
+    added header element ids: userhome, userprefs, login, logout
+    
+
+    modified files:
+     ChangeLog MoinMoin/theme/__init__.py MoinMoin/wikiutil.py
+
+
 2006-03-13 20:31:36 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-474
 
     Summary:
