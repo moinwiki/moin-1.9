@@ -39,9 +39,18 @@ Version 1.5.current:
       Title search will also search attachment filenames.
       Full text search will also search attachment contents.
     * indexing filter plugins, see MoinMoin:FiltersForIndexing
-      There are not many filters yet, so most is handled by the
-      "application/octet-stream" filter, a very simple ASCII-only filter.
-      Feel free to contribute more filter plugins!
+      Some filters depend on external converters that might not be available
+      for any platform (see Depends: line in filter plugin).
+      Feel free to contribute more filter plugins, especially if you wrote
+      some nice platform independant filter in Python for some popular file
+      format! Filters implemented so far (depending on):
+      MS Word, RTF, MS Excel (antiword, catdoc)
+      PDF (pdftotext)
+      OpenOffice.org XML based data formats (-)
+      XML, HTML (-)
+      text/* (-)
+      JPEG's EXIF data (-)
+      Binary generic (-)
     * We check cfg.superuser to be a list of user names (as documented) and
       deny superuser access if it is not. This avoids security issues by
       wrong configuration.
@@ -70,7 +79,7 @@ Version 1.5.current:
     * lupy search now behaves a bit less curious. Still no guarantees...
     * we lowered the twisted server timeout to 2 minutes now (was: 10) because
       it just used up too many files (open TCP connections until it timeouts)
-       on our farm.
+      on our farm.
     * the algorithm used for processing the farmconfig.wikis list was changed
       to work for big farms (>= 50 wikis), too. This works around the python
       "re" module limitation of having a maximum of 100 named groups in a RE.

@@ -36,10 +36,17 @@ class IndexScript(_util.Script):
             "--wiki-url", metavar="WIKIURL", dest="wiki_url",
             help="URL of wiki e.g. localhost/mywiki/ [default: CLI]"
         )
+        self.parser.add_option(
+            "--files", metavar="FILES", dest="file_list",
+            help="filename of file list, e.g. files.lst (one file per line)"
+        )
+        self.parser.add_option(
+            "--update", action="store_true", dest="update",
+            help="when given, update an existing index"
+        )
     
     def mainloop(self):
-        # Insert config dir or the current directory to the start of the
-        # path.
+        # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
         if config_dir and not os.path.isdir(config_dir):
             _util.fatal("bad path given to --config-dir option")
@@ -50,11 +57,19 @@ class IndexScript(_util.Script):
             self.request = RequestCLI(self.options.wiki_url)
         else:
             self.request = RequestCLI()
+
+        # Do we have additional files to index?
+        if self.options.file_list:
+            self.files = file(self.options.file_list)
+        else:
+            self.files = None
+
         self.command()
 
 class BuildIndex(IndexScript):
     def command(self):
-        Index(self.request).indexPages()
+        Index(self.request).indexPages(self.files, self.options.update)
+        #Index(self.request).test(self.request)
 
 
 def run():
