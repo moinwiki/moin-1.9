@@ -294,11 +294,12 @@ class GroupDict(DictDict):
     def scandicts(self):
         """scan all pages matching the dict / group regex and init the dictdict"""
         dump = 0
+        request = self.request
 
         # Save now in our internal version format
         now = wikiutil.timestamp2version(int(time.time()))
         try:
-            lastchange = EditLog(self.request).date()
+            lastchange = EditLog(request).date()
         except logfile.LogMissing:
             lastchange = 0
             dump = 1
@@ -309,7 +310,7 @@ class GroupDict(DictDict):
             self.__dict__.update(self.cfg.DICTS_DATA)
         except AttributeError:
             try:
-                cache = caching.CacheEntry(self.request, arena, key)
+                cache = caching.CacheEntry(request, arena, key)
                 data = pickle.loads(cache.content())
                 self.__dict__.update(data)
                 
@@ -321,67 +322,62 @@ class GroupDict(DictDict):
                 self.reset()
                 dump = 1
 
-        # everything is ok and nothing changed
-        if lastchange < self.namespace_timestamp and dump==0:
-            return
+        if lastchange >= self.namespace_timestamp or dump:
+            isdict = re.compile(self.cfg.page_dict_regex, re.UNICODE).search
+            isgroup = re.compile(self.cfg.page_group_regex, re.UNICODE).search
 
-        isdict = re.compile(self.cfg.page_dict_regex, re.UNICODE).search
-        isgroup = re.compile(self.cfg.page_group_regex, re.UNICODE).search
+            # check for new groups / dicts from time to time...
+            if now - self.namespace_timestamp >= wikiutil.timestamp2version(60): # 60s
+                # Get all pages in the wiki - without user filtering using filter
+                #function - this make the page list about 10 times faster.
+                dictpages = request.rootpage.getPageList(user='', filter=isdict)
+                grouppages = request.rootpage.getPageList(user='', filter=isgroup)
 
-        # check for new groups / dicts from time to time...
-        if now - self.namespace_timestamp >= wikiutil.timestamp2version(60): # 60s
+                # remove old entries when dict or group page have been deleted,
+                # add entries when pages have been added
+                # use copies because the dicts are shared via cfg.DICTS_DATA
+                #  and must not be modified
+                olddictdict = self.dictdict.copy()
+                oldgroupdict = self.groupdict.copy()
+                self.dictdict = {}
+                self.groupdict = {}
 
-            # Get all pages in the wiki - without user filtering using
-            # filter function - this make the page list about 10 times
-            # faster.
-            dictpages = self.request.rootpage.getPageList(user='', filter=isdict)
-            grouppages = self.request.rootpage.getPageList(user='', filter=isgroup)
+                for pagename in dictpages:
+                    if olddictdict.has_key(pagename):
+                        # keep old
+                        self.dictdict[pagename] = olddictdict[pagename]
+                        del olddictdict[pagename]
+                    else:
+                        self.adddict(request, pagename)
+                        dump = 1
 
-            # remove old entries when dict or group page have been deleted,
-            # add entries when pages have been added
-            # use copies because the dicts are shared via cfg.DICTS_DATA
-            #  and must not be modified
-            olddictdict = self.dictdict.copy()
-            oldgroupdict = self.groupdict.copy()
-            self.dictdict = {}
-            self.groupdict = {}
+                for pagename in grouppages:
+                    if olddictdict.has_key(pagename):
+                        # keep old
+                        self.dictdict[pagename] = olddictdict[pagename]
+                        self.groupdict[pagename] = oldgroupdict[pagename]
+                        del olddictdict[pagename]
+                    else:
+                        self.addgroup(request, pagename)
+                        dump = 1
 
-            for pagename in dictpages:
-                if olddictdict.has_key(pagename):
-                    # keep old
-                    self.dictdict[pagename] = olddictdict[pagename]
-                    del olddictdict[pagename]
-                else:
-                    self.adddict(self.request, pagename)
+                if olddictdict: # dict page was deleted
                     dump = 1
 
-            for pagename in grouppages:
-                if olddictdict.has_key(pagename):
-                    # keep old
-                    self.dictdict[pagename] = olddictdict[pagename]
-                    self.groupdict[pagename] = oldgroupdict[pagename]
-                    del olddictdict[pagename]
-                else:
-                    self.addgroup(self.request, pagename)
+                self.namespace_timestamp = now
+
+            # check if groups / dicts have been modified on disk
+            for pagename in self.dictdict.keys():
+                if Page.Page(request, pagename).mtime_usecs() >= self.pageupdate_timestamp:
+                    if isdict(pagename):
+                        self.adddict(request, pagename)
+                    elif isgroup(pagename):
+                        self.addgroup(request, pagename)
                     dump = 1
-
-            if olddictdict: # dict page was deleted
-                dump = 1
-
-            self.namespace_timestamp = now
-
-        # check if groups / dicts have been modified on disk
-        for pagename in self.dictdict.keys():
-            if Page.Page(self.request, pagename).mtime_usecs() >= self.pageupdate_timestamp:
-                if isdict(pagename):
-                    self.adddict(self.request, pagename)
-                elif isgroup(pagename):
-                    self.addgroup(self.request, pagename)
-                dump = 1
-        self.pageupdate_timestamp = now
-        
-        if not self.base_timestamp:
-            self.base_timestamp = int(time.time())
+            self.pageupdate_timestamp = now
+            
+            if not self.base_timestamp:
+                self.base_timestamp = int(time.time())
 
         data = {
             "namespace_timestamp": self.namespace_timestamp,
@@ -391,6 +387,7 @@ class GroupDict(DictDict):
             "groupdict": self.groupdict,
             "picklever": self.picklever
         }
+        
         if dump:
             # copy unexpanded groups to self.dictdict
             for name, grp in self.groupdict.items():
@@ -399,9 +396,9 @@ class GroupDict(DictDict):
             for name in self.groupdict:
                 self.dictdict[name].expandgroups(self)
 
-        cache = caching.CacheEntry(self.request, arena, key)
-        cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
-        
+            cache = caching.CacheEntry(request, arena, key)
+            cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
+            
         # remember it (persistent environments)
         self.cfg.DICTS_DATA = data
 

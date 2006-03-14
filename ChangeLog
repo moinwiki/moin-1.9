@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-14 20:49:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-476
+
+    Summary:
+      fix/speedup scandicts for persistent servers
+    Revision:
+      moin--main--1.5--patch-476
+
+    fix/speedup scandicts for persistent servers
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikidicts.py docs/CHANGES
+
+
 2006-03-13 21:05:27 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-475
 
     Summary:
