@@ -88,6 +88,7 @@ Version 1.5.current:
     * fixed converter error for https:... image urls
     * ThemeBase (use by modern/rightsidebar): removed duplicate AttachFile from
       actions menu (we already have it in editbar)
+    * speedup group/dicts scanning for persistent servers
 
   Other:
     * Added css classes for the rst admonitions. Thanks to TiagoMacambira!
