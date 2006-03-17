@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-17 10:34:24 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-479
+
+    Summary:
+      added some __repr__ to wikidicts to make debugging easier
+    Revision:
+      moin--main--1.5--patch-479
+
+    added some __repr__ to wikidicts to make debugging easier
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikidicts.py
+
+
 2006-03-17 08:10:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-478
 
     Summary:

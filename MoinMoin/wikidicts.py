@@ -70,7 +70,9 @@ class DictBase:
     def __getitem__(self, key):
         return self._dict[key]
     
-    
+    def __repr__(self):
+        return "<DictBase name=%r items=%r>" % (self.name, self._dict.items())
+
 class Dict(DictBase):
     ''' Mapping of keys to values in a wiki page
 
@@ -96,6 +98,9 @@ class Dict(DictBase):
         for match in self.regex.finditer(text):
             key, val = match.groups()
             self._dict[key] = val
+
+    def __repr__(self):
+        return "<Dict name=%r items=%r>" % (self.name, self._dict.items())
 
 class Group(DictBase):
     ''' Group of users, of pages, of whatever
@@ -178,6 +183,9 @@ class Group(DictBase):
     def expandgroups(self, groupdict):
         """ Invoke _expandgroup to recursively expand groups """
         self._dict = self._expandgroup(groupdict, self.name)
+
+    def __repr__(self):
+        return "<Group name=%r items=%r>" % (self.name, self._dict.keys())
 
 
 class DictDict:
