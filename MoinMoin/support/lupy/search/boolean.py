@@ -177,9 +177,9 @@ class BooleanScorer:
         if self.coordFactors is None:
             self.computeCoordFactors()
         for t in self.scorers:
-            #print "SCORER", t.scorer
+            #print "SCORER %r" % t.scorer
             for d,score in t.scorer.score(maxDoc):
-                #print "DOCUMENT"
+                #print "DOCUMENT %r %r" % (d, score)
                 self.collect(d,score,t.mask)
         return self.collectHits()
     
@@ -190,7 +190,11 @@ class BooleanScorer:
                 # if prohibited and required check out
                 # add to results
                 #print "CollectHits:", doc, score, self.coordFactors, coord
-                yield (doc, score * self.coordFactors[coord])
+                try:
+                    scorecf = score * self.coordFactors[coord]
+                except IndexError, err: # XXX ugly way to avoid it crashing 8(
+                    scorecf = 0.0
+                yield (doc, scorecf)
         del self.validList[:]
             
                 
