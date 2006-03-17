@@ -9,7 +9,7 @@
 """
 
 import sys, os
-sys.path.append("YOUR CONFIG DIRECTORY HERE")
+#sys.path.append("YOUR CONFIG DIRECTORY HERE")
 
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
@@ -39,9 +39,8 @@ def show_result(pagename, request):
     formatter = Formatter(request)
     
     result = subscribe_users(request, request.form['users'][0].split(","), pagename, formatter)
-
-    # print result
     request.write(result)
+
     wikiutil.send_footer(request, pagename)
 
 
@@ -119,10 +118,11 @@ Example:
 
     # Setup MoinMoin environment
     from MoinMoin.request import RequestCLI
-    request = RequestCLI(url = request_url)
+    request = RequestCLI(url=request_url)
     request.form = request.args = request.setup_args()
 
     from MoinMoin.formatter.text_plain import Formatter
     formatter = Formatter(request)
 
     print subscribe_users(request, usernames.split(","), pagename, formatter)
+
