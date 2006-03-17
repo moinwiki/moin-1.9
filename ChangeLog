@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-17 08:10:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-478
+
+    Summary:
+      SubscribeUser: fix: do not put silly path into pythonpath
+    Revision:
+      moin--main--1.5--patch-478
+
+    SubscribeUser: fix: do not put silly path into pythonpath
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/SubscribeUser.py
+
+
 2006-03-17 08:04:49 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-477
 
     Summary:
