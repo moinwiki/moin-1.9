@@ -85,7 +85,8 @@
         * fixed CSS for IE users
         * fix javascript for IE4
         * do a correct calculation of "today" using user's timezone
-
+    * 2.2:
+        * added template argument for specifying an edit template for new pages
 
     Usage:
         [[MonthCalendar(BasePage,year,month,monthoffset,monthoffset2,height6)]]
@@ -138,6 +139,10 @@ Anniversary Calendars: (no year data)
 This creates calendars of the format Yearly/MM-DD 
 By leaving out the year, you can set birthdays, and anniversaries in this 
 calendar and not have to re-enter each year.
+
+This creates a calendar which uses MonthCalendarTemplate for directly editing
+nonexisting day pages:
+[[MonthCalendar(,,,,,,MonthCalendarTemplate)]]
 """
 
 Dependencies = ['namespace','time']
@@ -173,7 +178,7 @@ def yearmonthplusoffset(year, month, offset):
         year = year + 1
     return year, month
 
-def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary):
+def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defheight6, defanniversary, deftemplate):
     strpagename = args.group('basepage')
     if strpagename:
         parmpagename = wikiutil.unquoteWikiname(strpagename)
@@ -218,7 +223,12 @@ def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defhe
     else:
         parmanniversary = defanniversary
 
-    return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary
+    strtemplate = args.group('template')
+    if strtemplate:
+        parmtemplate = wikiutil.unquoteWikiname(strtemplate)
+    else:
+        parmtemplate = deftemplate
+    return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate
         
 # FIXME:                          vvvvvv is there a better way for matching a pagename ?
 _arg_basepage = r'\s*(?P<basepage>[^, ]+)?\s*'
@@ -228,9 +238,10 @@ _arg_offset = r',\s*(?P<offset>[+-]?\d+)?\s*'
 _arg_offset2 = r',\s*(?P<offset2>[+-]?\d+)?\s*'
 _arg_height6 = r',\s*(?P<height6>[+-]?\d+)?\s*'
 _arg_anniversary =  r',\s*(?P<anniversary>[+-]?\d+)?\s*'
-_args_re_pattern = r'^(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?$' % \
+_arg_template = r',\s*(?P<template>[^, ]+)?\s*' # XXX see basepage comment
+_args_re_pattern = r'^(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?$' % \
                      (_arg_basepage,_arg_year,_arg_month, \
-                      _arg_offset,_arg_offset2,_arg_height6,_arg_anniversary)
+                      _arg_offset,_arg_offset2,_arg_height6,_arg_anniversary,_arg_template)
 
 
 def execute(macro, text):
@@ -254,22 +265,22 @@ def execute(macro, text):
             return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar calparms "%s"!')) % (text2,)
         else:
             has_calparms = 1 # yes!
-            cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary = \
-                parseargs(args2, thispage, currentyear, currentmonth, 0, 0, 0, 0)
+            cparmpagename, cparmyear, cparmmonth, cparmoffset, cparmoffset2, cparmheight6, cparmanniversary, cparmtemplate = \
+                parseargs(args2, thispage, currentyear, currentmonth, 0, 0, 0, 0, '')
     else:
         has_calparms = 0
 
     if text is None: # macro call without parameters
-        parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary = \
-            [thispage], currentyear, currentmonth, 0, 0, 0, 0
+        parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
+            [thispage], currentyear, currentmonth, 0, 0, 0, 0, ''
     else:
         # parse and check arguments
         args = args_re.match(text)
         if not args:
             return ('<p><strong class="error">%s</strong></p>' % _('Invalid MonthCalendar arguments "%s"!')) % (text,)
         else:
-            parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary = \
-                parseargs(args, thispage, currentyear, currentmonth, 0, 0, 0, 0)
+            parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, anniversary, parmtemplate = \
+                parseargs(args, thispage, currentyear, currentmonth, 0, 0, 0, 0, '')
 
     # does url have calendar params and is THIS the right calendar to modify (we can have multiple
     # calendars on the same page)?
@@ -279,6 +290,7 @@ def execute(macro, text):
     if has_calparms and cparmpagename == parmpagename:
         year,month = yearmonthplusoffset(parmyear, parmmonth, parmoffset + cparmoffset2)
         parmoffset2 = cparmoffset2
+        parmtemplate = cparmtemplate
     else:
         year,month = yearmonthplusoffset(parmyear, parmmonth, parmoffset)
 
@@ -298,11 +310,12 @@ def execute(macro, text):
     colorstep = 85
     p = Page(request, thispage)
     qpagenames = '*'.join(map(wikiutil.quoteWikinameURL, parmpagename))
-    querystr = "calparms=%%s,%d,%d,%d,%%d" % (parmyear, parmmonth, parmoffset)
-    prevlink  = p.url(request, querystr % (qpagenames, parmoffset2 - 1), 0)
-    nextlink  = p.url(request, querystr % (qpagenames, parmoffset2 + 1), 0)
-    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12), 0)
-    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12), 0)
+    qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
+    querystr = "calparms=%s,%d,%d,%d,%%d,%s" % (qpagenames, parmyear, parmmonth, parmoffset, qtemplate)
+    prevlink  = p.url(request, querystr % (parmoffset2 - 1), 0)
+    nextlink  = p.url(request, querystr % (parmoffset2 + 1), 0)
+    prevylink = p.url(request, querystr % (parmoffset2 - 12), 0)
+    nextylink = p.url(request, querystr % (parmoffset2 + 12), 0)
     prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
     nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
     prevyear  = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
@@ -378,6 +391,7 @@ def execute(macro, text):
                 daypage = Page(request, link)
                 if daypage.exists():
                     csslink = "cal-usedday"
+                    query = {}
                     r, g, b, u = (255, 0, 0, 1)
                     daycontent = daypage.get_raw_body()
                     header1_re = re.compile(r'^\s*=\s(.*)\s=$', re.MULTILINE) # re.UNICODE
@@ -394,6 +408,10 @@ def execute(macro, text):
                     onmouse = '''onMouseOver="tip('%s')" onMouseOut="untip()"''' % tipname
                 else:
                     csslink = "cal-emptyday"
+                    if parmtemplate:
+                        query = {'action': 'edit', 'template': parmtemplate}
+                    else:
+                        query = {}
                     r, g, b, u = (255, 255, 255, 0)
                     if wkday in wkend:
                         csslink = "cal-weekend"
@@ -409,7 +427,7 @@ def execute(macro, text):
                             r, g, b = (r, g+colorstep, b)
                 r, g, b = cliprgb(r, g, b)
                 style = 'background-color:#%02x%02x%02x' % (r, g, b)
-                fmtlink = formatter.url(1, daypage.url(request), csslink, attrs=onmouse) + str(day) + formatter.url(0)
+                fmtlink = formatter.url(1, daypage.url(request, query), csslink, attrs=onmouse) + str(day) + formatter.url(0)
                 if day == currentday and month == currentmonth and year == currentyear:
                     cssday = "cal-today"
                     fmtlink = "<b>%s</b>" % fmtlink # for browser with CSS probs
