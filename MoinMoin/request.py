@@ -980,7 +980,7 @@ class RequestBase(object):
 
         Already qualified urls are returned unchanged.
 
-        @param uri: server rootted uri e.g /scriptname/pagename. It
+        @param uri: server rooted uri e.g /scriptname/pagename. It
             must start with a slash. Must be ascii and url encoded.
         """
         import urlparse
@@ -988,8 +988,8 @@ class RequestBase(object):
         if scheme:
             return uri
 
-        schema = ('http', 'https')[self.is_ssl]
-        result = "%s://%s%s" % (schema, self.http_host, uri)
+        scheme = ('http', 'https')[self.is_ssl]
+        result = "%s://%s%s" % (scheme, self.http_host, uri)
 
         # This might break qualified urls in redirects!
         # e.g. mapping 'http://netloc' -> '/'
