@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-18 13:05:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-481
+
+    Summary:
+      fixed antispam for python 2.5a xmlrpclib
+    Revision:
+      moin--main--1.5--patch-481
+
+    fixed antispam for python 2.5a xmlrpclib
+    
+
+    modified files:
+     ChangeLog MoinMoin/util/antispam.py
+
+
 2006-03-18 12:56:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-480
 
     Summary:

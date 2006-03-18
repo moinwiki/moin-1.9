@@ -13,7 +13,7 @@
 # give some log entries to stderr
 debug = 1
 
-import re, sys, time
+import re, sys, time, datetime
 import sets
 
 if __name__ == '__main__':
@@ -108,7 +108,14 @@ def getblacklist(request, pagename, do_update):
                 
                 # Compare date against local BadContent copy
                 masterdate = response['lastModified']
-                mydate = xmlrpclib.DateTime(tuple(time.gmtime(mymtime)))
+
+                if isinstance(masterdate, datetime.datetime): 
+                    # for python 2.5a
+                    mydate = datetime.datetime(*tuple(time.gmtime(mymtime))[0:6])
+                else:
+                    # for python <= 2.4.x
+                    mydate = xmlrpclib.DateTime(tuple(time.gmtime(mymtime)))
+                                                    
                 dprint("master: %s mine: %s" % (masterdate, mydate))
                 if mydate < masterdate:
                     # Get new copy and save
@@ -210,7 +217,7 @@ def main():
     """
     import urllib
     mtbl = urllib.urlopen("http://www.jayallen.org/comment_spam/blacklist.txt").read()
-    mmbl = urllib.urlopen("http://moinmaster.wikiwikiweb.de:8000/BadContent?action=raw").read()
+    mmbl = urllib.urlopen("http://moinmaster.wikiwikiweb.de/BadContent?action=raw").read()
     mtbl = makelist(mtbl)
     mmbl = makelist(mmbl)
     print "#format plain"
