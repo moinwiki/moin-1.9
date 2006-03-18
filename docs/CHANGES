@@ -70,6 +70,8 @@ Version 1.5.current:
     * MonthCalendar now takes an additional argument for specifying a template
       to use to directly invoke the page editor when clicking on non-existing
       day pages.
+    * Added ImageLink macro. Thanks to Jeff Kunce, Marcin Zalewski, Reimar
+      Bauer and Chong-Dae Park for working on it.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
