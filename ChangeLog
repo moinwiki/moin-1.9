@@ -2,6 +2,31 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-18 12:56:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-480
+
+    Summary:
+      MoinMoin.util.datetime -> timefuncs to avoid conflict/confusion with stdlib datetime, also moved util.W3CDate there
+    Revision:
+      moin--main--1.5--patch-480
+
+    MoinMoin.util.datetime -> timefuncs to avoid conflict/confusion with stdlib datetime, also moved util.W3CDate there
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/PageEditor.py
+     MoinMoin/PageGraphicalEditor.py MoinMoin/action/rss_rc.py
+     MoinMoin/i18n/POTFILES.in MoinMoin/server/standalone.py
+     MoinMoin/stats/hitcounts.py MoinMoin/user.py
+     MoinMoin/userform.py MoinMoin/util/__init__.py
+     MoinMoin/util/timefuncs.py
+
+    renamed files:
+     MoinMoin/util/.arch-ids/datetime.py.id
+       ==> MoinMoin/util/.arch-ids/timefuncs.py.id
+     MoinMoin/util/datetime.py
+       ==> MoinMoin/util/timefuncs.py
+
+
 2006-03-17 10:34:24 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-479
 
     Summary:

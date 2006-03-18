@@ -10,8 +10,7 @@ import StringIO, os, re, random, codecs
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys, MoinMoinNoFooter
-from MoinMoin.util.datetime import formathttpdate
+from MoinMoin.util import filesys, MoinMoinNoFooter, timefuncs
 
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
@@ -1138,7 +1137,7 @@ class Page:
                     # use the correct last-modified value from the on-disk file
                     # to ensure cacheability where supported
                     request.http_headers(["Last-Modified: " +
-                         formathttpdate(os.path.getmtime(self._text_filename()))])
+                         timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
 
             else:
                 request.http_headers(['Status: 404 NOTFOUND'])

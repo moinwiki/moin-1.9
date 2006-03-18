@@ -8,9 +8,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 import StringIO, re, os, time
-from MoinMoin import wikixml, config, wikiutil, util
+from MoinMoin import wikixml, config, wikiutil
 from MoinMoin.logfile import editlog
-from MoinMoin.util.datetime import formathttpdate
+from MoinMoin.util import timefuncs
 from MoinMoin.Page import Page
 from MoinMoin.wikixml.util import RssGenerator
 
@@ -68,7 +68,7 @@ def execute(pagename, request):
             ((line.pagename in pages) and unique)): continue
         #if log.dayChanged() and log.daycount > _MAX_DAYS: break
         line.editor = line.getInterwikiEditorData(request)
-        line.time = util.datetime.tmtuple(wikiutil.version2timestamp(line.ed_time_usecs)) # UTC
+        line.time = timefuncs.tmtuple(wikiutil.version2timestamp(line.ed_time_usecs)) # UTC
         logdata.append(line)
         pages[line.pagename] = None
 
@@ -149,7 +149,7 @@ def execute(pagename, request):
         else:
             handler.simpleNode('link', link)
             
-        handler.simpleNode(('dc', 'date'), util.W3CDate(item.time))
+        handler.simpleNode(('dc', 'date'), timefuncs.W3CDate(item.time))
 
         # description
         desc_text = item.comment
@@ -208,15 +208,15 @@ def execute(pagename, request):
 
     # generate an Expires header, using whatever setting the admin
     # defined for suggested cache lifetime of the RecentChanges RSS doc
-    expires = formathttpdate(time.time() + cfg.rss_cache)
+    expires = timefuncs.formathttpdate(time.time() + cfg.rss_cache)
 
     httpheaders = ["Content-Type: text/xml; charset=%s" % config.charset,
-                        "Expires: "+expires]
+                   "Expires: %s" % expires]
 
     # use a correct Last-Modified header, set to whatever the mod date
     # on the most recent page was; if there were no mods, don't send one
     if lastmod:
-        httpheaders.append("Last-Modified: "+formathttpdate(lastmod))
+        httpheaders.append("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
 
     # send the generated XML document
     request.http_headers(httpheaders)

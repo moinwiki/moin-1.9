@@ -13,10 +13,9 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
-from MoinMoin.util import filesys
+from MoinMoin.util import filesys, timefuncs
 import MoinMoin.util.web
 import MoinMoin.util.mail
-import MoinMoin.util.datetime
 
 
 #############################################################################
@@ -583,7 +582,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         """
         # TODO: Allow addition of variables via wikiconfig or a global
         # wiki dict.
-        now = time.strftime("%Y-%m-%dT%H:%M:%SZ", util.datetime.tmtuple())
+        now = time.strftime("%Y-%m-%dT%H:%M:%SZ", timefuncs.tmtuple())
         user = self.request.user
         signature = user.signature()
         variables = {

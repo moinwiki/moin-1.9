@@ -34,15 +34,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# Imports
 import os, sys, time, socket, errno, shutil
 import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
-# MoinMoin imports
 from MoinMoin import version, wikiutil
 from MoinMoin.server import Config, switchUID
 from MoinMoin.request import RequestStandAlone
-from MoinMoin.util.datetime import formathttpdate
+from MoinMoin.util import timefuncs
 
 # Server globals
 httpd = None
@@ -371,7 +369,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.expires:
             now = time.time()
             expires = now + self.expires
-            self.send_header('Expires', formathttpdate(expires))
+            self.send_header('Expires', timefuncs.formathttpdate(expires))
         SimpleHTTPServer.SimpleHTTPRequestHandler.end_headers(self)
         
     def copyfile(self, source, outputfile):

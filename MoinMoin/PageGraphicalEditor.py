@@ -17,7 +17,6 @@ from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys
 import MoinMoin.util.web
 import MoinMoin.util.mail
-import MoinMoin.util.datetime
 from MoinMoin.parser.wiki import Parser
 
 from StringIO import StringIO
