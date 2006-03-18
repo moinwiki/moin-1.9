@@ -67,6 +67,9 @@ Version 1.5.current:
     * moin_cookie auth method now logs out a user by deleting the cookie and
       setting user_obj.valid = 0. This makes it possible to still get the
       user's name in subsequent auth method calls within the same request.
+    * MonthCalendar now takes an additional argument for specifying a template
+      to use to directly invoke the page editor when clicking on non-existing
+      day pages.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was

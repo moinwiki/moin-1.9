@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-18 18:10:20 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-483
+
+    Summary:
+      MonthCalendar can take an additional template page argument for creating new day pages
+    Revision:
+      moin--main--1.5--patch-483
+
+    MonthCalendar can take an additional template page argument for creating new day pages
+    
+
+    modified files:
+     ChangeLog MoinMoin/macro/MonthCalendar.py docs/CHANGES
+
+
 2006-03-18 16:20:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-482
 
     Summary:
