@@ -65,7 +65,10 @@ def makeCookie(request, moin_id, maxage, expires):
     if cfg.cookie_path:
         c['MOIN_ID']['path'] = cfg.cookie_path
     else:
-        c['MOIN_ID']['path'] = request.getScriptname()
+        path = request.getScriptname()
+        if not path:
+            path = '/'
+        c['MOIN_ID']['path'] = path
     # Set expires for older clients
     c['MOIN_ID']['expires'] = request.httpDate(when=expires, rfc='850')        
     return c.output()
