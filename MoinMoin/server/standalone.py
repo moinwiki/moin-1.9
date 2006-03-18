@@ -266,8 +266,8 @@ class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
     
 class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
-    bufferSize = 8 * 1024 # used to server static files
-    staticExpire =  7 * 24 * 3600 # 1 week
+    bufferSize = 8 * 1024 # used to serve static files
+    staticExpire =  7 * 24 * 3600 # 1 week expiry for static files
     
     def __init__(self, request, client_address, server):
         self.server_version = "MoinMoin %s %s" % (version.revision,
@@ -283,18 +283,15 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.server._abort:
             self.log_error("Shutting down")
 
-    def do_POST(self):
-        self.serve_moin()
-
-    def do_GET(self):
-        """ Handle GET requests
+    def do_ALL(self):
+        """ Handle requests (request type GET/HEAD/POST is in self.command)
 
         Separate between wiki pages and css and image url by similar
         system as cgi and twisted, the '/wiki/' url prefix.
 
-        TODO: should use request.cfg.url_prefix - and not a constant but
+        TODO: should use url_prefix - and not a constant but
         request is not available at this time.  Should be fixed by
-        loading config earlier.
+        having url_prefix in a server config.
         """
         if self.path.startswith('/wiki/'):
             self.path = self.path[5:]
@@ -303,21 +300,24 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.serve_static_file()
         else:
             self.serve_moin()
+        
+    do_POST = do_ALL
+    do_GET = do_ALL
+    do_HEAD = do_ALL
 
     # -------------------------------------------------------------------    
     # Serve methods
     
     def serve_static_file(self):
         """ Serve files from the htdocs directory """
-        # 1 week expiry for static files
         self.expires = self.staticExpire
         path = self.path.split("?", 1)
         if len(path) > 1:
-            self.path = path[0]
-            # XXXXXX params
+            self.path = path[0] # XXX ?params
             
-        try: 
-            SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
+        try:
+            fn = getattr(SimpleHTTPServer.SimpleHTTPRequestHandler, 'do_' + self.command)
+            fn(self)
         except socket.error, err:
             # Ignore certain errors
             if err.args[0] not in [errno.EPIPE, errno.ECONNABORTED]:
@@ -376,7 +376,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """Copy all data between two file objects.
         
         Modify the base class method to change the buffer size. Test
-        show that for the typical static files we serve, 8K buffer is
+        shows that for the typical static files we serve, 8K buffer is
         faster than the default 16K buffer.
         """
         shutil.copyfileobj(source, outputfile, length=self.bufferSize)
@@ -511,4 +511,4 @@ def run(configClass):
         switchUID(config.uid, config.gid)
     
     httpd.serve_forever()
-        
+

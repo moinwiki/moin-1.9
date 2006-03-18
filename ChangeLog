@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-18 16:20:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-482
+
+    Summary:
+      implemented HEAD requests for StandAlone server
+    Revision:
+      moin--main--1.5--patch-482
+
+    implemented HEAD requests for StandAlone server
+    
+
+    modified files:
+     ChangeLog MoinMoin/server/standalone.py docs/CHANGES
+
+
 2006-03-18 13:05:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-481
 
     Summary:
