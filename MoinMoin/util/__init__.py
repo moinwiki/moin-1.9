@@ -7,10 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
-import sys
-import re
-import time
+import os, sys, re
 
 #############################################################################
 ### XML helper functions
@@ -82,13 +79,6 @@ def rangelist(numbers):
         return pattern[1:-1]
     return pattern[1:]
 
-
-def W3CDate(tm=None):
-    """ Return time string according to http://www.w3.org/TR/NOTE-datetime
-    """
-    if not tm: tm = time.gmtime()
-    return time.strftime("%Y-%m-%dT%H:%M:%S", tm) + "Z"
-
 def dumpFormData(form):
     """ Dump the form data for debugging purposes
     """
@@ -129,3 +119,4 @@ class simpleIO:
 
     def close(self):
         self.buffer = None
+

@@ -7,8 +7,7 @@
 """
 
 # we guarantee that time is always imported!
-import time
-import re
+import re, time
 from email.Utils import formatdate
 
 def tmtuple(tmsecs=None):
@@ -29,4 +28,11 @@ def formathttpdate(tmsecs=None):
     # replace non-standard "-0000" at end with http-mandated "GMT"
     stamp = re.match('^(.*) [\-\+]0000$', stamp).group(1) + " GMT"
     return stamp
+
+def W3CDate(tmsecs=None):
+    """ Return UTC time string according to http://www.w3.org/TR/NOTE-datetime
+    """
+    if not tmsecs:
+        tmsecs = time.gmtime()
+    return time.strftime("%Y-%m-%dT%H:%M:%S", tmsecs) + "Z"
 

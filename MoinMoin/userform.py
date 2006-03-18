@@ -8,7 +8,7 @@
 
 import string, time, re
 from MoinMoin import user, util, wikiutil
-from MoinMoin.util import web, mail, datetime
+from MoinMoin.util import web, mail, timefuncs
 from MoinMoin.widget import html
 
 _debug = 0
@@ -364,7 +364,7 @@ class UserSettings:
             options.append((
                 str(offset),
                 '%s [%s%s:%s]' % (
-                    time.strftime(self.cfg.datetime_fmt, util.datetime.tmtuple(t)),
+                    time.strftime(self.cfg.datetime_fmt, timefuncs.tmtuple(t)),
                     "+-"[offset < 0],
                     string.zfill("%d" % (abs(offset) / 3600), 2),
                     string.zfill("%d" % (abs(offset) % 3600 / 60), 2),
@@ -523,7 +523,7 @@ class UserSettings:
                     self._tz_select(),
                     html.BR(),
                     _('Server time is'), ' ',
-                    time.strftime(self.cfg.datetime_fmt, util.datetime.tmtuple()),
+                    time.strftime(self.cfg.datetime_fmt, timefuncs.tmtuple()),
                     ' (UTC)',
                 ])
 

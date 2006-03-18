@@ -76,8 +76,6 @@ theme/classic.py
 theme/rightsidebar.py
 theme/modern.py
 
-util/antispam.py
-
 webapi/color.py
 
 widget/base.py
@@ -85,13 +83,14 @@ widget/browser.py
 widget/html.py
 
 util/__init__.py
+util/antispam.py
 util/dataset.py
-util/datetime.py
 util/diff.py
 util/diff3.py
 util/filesys.py
 util/mail.py
 util/pysupport.py
+util/timefuncs.py
 util/web.py
 util/wikiext.py
 

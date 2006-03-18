@@ -17,7 +17,7 @@ except ImportError:
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
 from MoinMoin import config, caching, wikiutil
-from MoinMoin.util import datetime, filesys
+from MoinMoin.util import filesys, timefuncs
 
 
 def getUserList(request):
@@ -538,7 +538,7 @@ class User:
         @rtype: int
         @return: tm tuple adjusted for user's timezone
         """
-        return datetime.tmtuple(tm + self.tz_offset)
+        return timefuncs.tmtuple(tm + self.tz_offset)
 
 
     def getFormattedDate(self, tm):
