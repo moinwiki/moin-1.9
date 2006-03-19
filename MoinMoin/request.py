@@ -508,11 +508,6 @@ class RequestBase(object):
         u = self.get_user_default_unknown(name=name, password=password,
                                           login=login, logout=logout,
                                           user_obj=None)
-        if login and u.valid: # user login successful
-            # we redirect to base url to either show page_front_page or
-            # jump to the last page the user visited last time
-            self.http_redirect(self.getBaseURL())
-            self.finish()
         return u
     
     def get_user_default_unknown(self, **kw):

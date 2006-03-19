@@ -2,6 +2,29 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-19 02:21:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-487
+
+    Summary:
+      Login macro, login/logout/UserPreferences actions
+    Revision:
+      moin--main--1.5--patch-487
+
+    Login macro, login/logout/UserPreferences actions
+    
+
+    new files:
+     MoinMoin/action/.arch-ids/UserPreferences.py.id
+     MoinMoin/action/.arch-ids/login.py.id
+     MoinMoin/action/.arch-ids/logout.py.id
+     MoinMoin/action/UserPreferences.py MoinMoin/action/login.py
+     MoinMoin/action/logout.py MoinMoin/macro/.arch-ids/Login.py.id
+     MoinMoin/macro/Login.py
+
+    modified files:
+     ChangeLog MoinMoin/request.py MoinMoin/theme/__init__.py
+     MoinMoin/userform.py docs/CHANGES
+
+
 2006-03-18 23:24:02 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-486
 
     Summary:

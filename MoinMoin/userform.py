@@ -581,7 +581,7 @@ class UserSettings:
             buttons = [
                 # IMPORTANT: login should be first to be the default
                 # button when a user hits ENTER.
-                ('login', _('Login')),
+                #('login', _('Login')),  # we now have a Login macro
                 ("create", _('Create Profile')),
             ]
             for key, label, type, length, textafter in self.cfg.user_form_fields:
@@ -617,6 +617,66 @@ def getUserForm(request, create_only=False):
     """ Return HTML code for the user settings. """
     return UserSettings(request).asHTML(create_only=create_only)
 
+
+class Login:
+    """ User login. """
+
+    def __init__(self, request):
+        """ Initialize user settings form.
+        """
+        self.request = request
+        self._ = request.getText
+        self.cfg = request.cfg
+
+    def make_row(self, label, cell, **kw):
+        """ Create a row in the form table.
+        """
+        self._table.append(html.TR().extend([
+            html.TD(**kw).extend([html.B().append(label), '   ']),
+            html.TD().extend(cell),
+        ]))
+
+
+    def asHTML(self):
+        """ Create the complete HTML form code. """
+        _ = self._
+        sn = self.request.getScriptname()
+        pi = self.request.getPathinfo()
+        action = u"%s%s" % (sn, pi)
+        self._form = html.FORM(action=action)
+        self._table = html.TABLE(border="0")
+
+        # Use the user interface language and direction
+        lang_attr = self.request.theme.ui_lang_attr()
+        self._form.append(html.Raw('<div class="userprefs"%s>' % lang_attr))
+
+        self._form.append(html.INPUT(type="hidden", name="action", value="login"))
+        self._form.append(self._table)
+        self._form.append(html.Raw("</div>"))
+
+        self.make_row(_('Name'), [
+            html.INPUT(
+                type="text", size="32", name="name",
+            ),
+        ])
+
+        self.make_row(_('Password'), [
+            html.INPUT(
+                type="password", size="32", name="password",
+            ),
+        ])
+
+        self.make_row('', [
+            html.INPUT(
+                type="submit", name='login', value=_('Login')
+            ),
+        ])
+
+        return unicode(self._form)
+
+def getLogin(request):
+    """ Return HTML code for the login. """
+    return Login(request).asHTML()
 
 #############################################################################
 ### User account administration

@@ -34,7 +34,14 @@ Known main issues:
 
 Version 1.5.current:
   New features:
-    * show frontpage or last page visited after successful login
+    * Login and Logout are actions now, therefore you stay on the page where
+      you were before.
+    * UserPreferences is also an action now and moved from top border (in
+      modern theme) to the "more actions" dropdown menu. You also stay on the
+      same page.
+    * There is also a [[Login]] macro now. You can put it on any page you want
+      and if the user is not logged in, it renders the login form. If the user
+      is logged in, it doesn't render anything.
     * attachment search using lupy (lupy_search = 1 in your config)
       Title search will also search attachment filenames.
       Full text search will also search attachment contents.
