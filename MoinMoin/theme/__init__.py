@@ -203,7 +203,6 @@ class ThemeBase:
         """
         request = self.request
         _ = request.getText
-        preferencesPage = wikiutil.getSysPage(request, 'UserPreferences')
         
         userlinks = []
         # Add username/homepage link for registered users. We don't care
@@ -219,20 +218,14 @@ class ThemeBase:
                         request.formatter.text(name) +
                         request.formatter.interwikilink(0))
             userlinks.append(homelink)        
-            # Set pref page to localized Preferences page
-            title = preferencesPage.split_title(request)
-            userlinks.append(preferencesPage.link_to(request, text=title, id="userprefs"))
             
         if request.cfg.show_login:
             if request.user.valid:
-                userlinks.append("""\
-<form id="logout" action="" method="POST">
-<input type="hidden" name="action" value="userform">
-<input type="submit" name="logout" value="%(logout)s">
-</form>
-""" % { 'logout': _('Logout') })
+                userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
+                                                   querystr={'action': 'logout', 'logout': 'logout'}, id="logout"))
             else:
-                userlinks.append(preferencesPage.link_to(request, text=_("Login"), id="login"))
+                userlinks.append(d['page'].link_to(request, text=_("Login", formatted=False),
+                                                   querystr={'action': 'login'}, id="login"))
 
         userlinks = [u'<li>%s</li>' % link for link in userlinks]
         html = u'<ul id="username">%s</ul>' % ''.join(userlinks)
