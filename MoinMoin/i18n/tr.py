@@ -775,8 +775,6 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''Göster''',
 '''Filename''':
 '''Dosya Adı''',
-'''Download XML export of this wiki''':
-'''Bu Wiki\'nin XML çıktısını indir''',
 '''No wanted pages in this wiki.''':
 '''Wiki üzerinde aranan bir sayfa yer almamakta.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

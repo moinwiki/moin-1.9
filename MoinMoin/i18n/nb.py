@@ -626,8 +626,6 @@ Prøv igjen med et annet navn.''',
 '''Vis''',
 '''Filename''':
 '''Filnavn''',
-'''Download XML export of this wiki''':
-'''Last ned XML-eksporten av denne wikien''',
 '''No wanted pages in this wiki.''':
 '''Ingen ønskede sider i denne wikien.''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':

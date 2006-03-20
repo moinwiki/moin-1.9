@@ -771,8 +771,6 @@ Try a different name.''':
 '''Просмотр''',
 '''Filename''':
 '''Файл''',
-'''Download XML export of this wiki''':
-'''Сохранить XML версию этого вики''',
 '''No wanted pages in this wiki.''':
 '''В этом вики нет требуемых страниц.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

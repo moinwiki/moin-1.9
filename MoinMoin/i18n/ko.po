@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-08 11:43+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -660,6 +660,12 @@ msgstr "사용자 등록"
 msgid "Mail me my account data"
 msgstr "계정 정보를 메일로 발송"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "액션"
 
@@ -1234,6 +1240,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "사소한 변경사항도 감시"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "구독"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "새 첨부 \"%(filename)s\"를(을) 업로드"
@@ -1320,9 +1341,6 @@ msgstr "보기"
 
 msgid "Filename"
 msgstr "파일이름"
-
-msgid "Download XML export of this wiki"
-msgstr "이 위키 전체를 XML로 변환하여 받기"
 
 msgid "No wanted pages in this wiki."
 msgstr ""
@@ -1630,6 +1648,9 @@ msgstr "이름 변경"
 
 msgid "SpellCheck"
 msgstr "철자 검사"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "이 위키 전체를 XML로 변환하여 받기"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "필요한 속성인 \"%(attrname)s\"가(이) 없습니다"

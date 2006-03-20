@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-06 15:44+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -668,6 +668,12 @@ msgstr "プロファイル作成"
 msgid "Mail me my account data"
 msgstr "アカウント情報をメールする"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "アクション"
 
@@ -1241,6 +1247,21 @@ msgid ""
 msgstr ""
 "名前の無いページを作成することはできません。ページ名を指定してください。"
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "ささいな変更の通知も受ける"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "購読"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "このページを編集する権限がありません。"
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "添付ファイル\"%(filename)s\"のアップロード"
@@ -1327,9 +1348,6 @@ msgstr "表示"
 
 msgid "Filename"
 msgstr "ファイル名"
-
-msgid "Download XML export of this wiki"
-msgstr "このwikiのXML exportをダウンロード"
 
 msgid "No wanted pages in this wiki."
 msgstr "このwikiに参照先がないページはありません。"
@@ -1634,6 +1652,9 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "このwikiのXML exportをダウンロード"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "必須項目\"%(attrname)s\"を入力してください。"

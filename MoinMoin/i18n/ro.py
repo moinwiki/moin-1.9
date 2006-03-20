@@ -761,8 +761,6 @@ Try a different name.''':
 '''Afişare''',
 '''Filename''':
 '''Nume fişier''',
-'''Download XML export of this wiki''':
-'''Descărcare export XML pentru acest wiki''',
 '''No wanted pages in this wiki.''':
 '''Nici o pagină dorită în acest wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

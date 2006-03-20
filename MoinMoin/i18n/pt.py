@@ -629,8 +629,6 @@ Tente um nome diferente.''',
 '''Visualizar''',
 '''Filename''':
 '''Nome do Arquivo''',
-'''Download XML export of this wiki''':
-'''Download do XML exportado deste wiki''',
 '''No wanted pages in this wiki.''':
 '''Não existem páginas-a-criar neste wiki.''',
 '''**Maximum number of allowed includes exceeded**''':

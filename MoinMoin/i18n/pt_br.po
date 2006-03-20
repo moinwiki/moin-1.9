@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -674,6 +674,12 @@ msgstr "Criar Perfil"
 msgid "Mail me my account data"
 msgstr "Envie os dados de minha conta por email"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Ação"
 
@@ -1258,6 +1264,21 @@ msgstr ""
 "Não é possível criar uma página sem um nome. Por favor, especifique um nome "
 "para a página."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Subscrever alterações superficiais"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Subscrever"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Você não tem permissão para editar esta página!"
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Enviar novo arquivo anexado \"%(filename)s\""
@@ -1344,9 +1365,6 @@ msgstr "Mostrar"
 
 msgid "Filename"
 msgstr "Nome do arquivo"
-
-msgid "Download XML export of this wiki"
-msgstr "Baixar arquivo XML exportado desta wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Nenhuma página solicitada neste wiki."
@@ -1650,6 +1668,9 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Baixar arquivo XML exportado desta wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "O atributo necessário \"%(attrname)s\" está faltando."

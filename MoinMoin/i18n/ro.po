@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -678,6 +678,12 @@ msgstr "Creează profil"
 msgid "Mail me my account data"
 msgstr "Trimitere prin email datele contului"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Acţiune"
 
@@ -1269,6 +1275,21 @@ msgstr ""
 "Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele "
 "paginii."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Înscriere la modificări minore"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Înscriere"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Nu aveţi dreptul să editaţi această pagină."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Trimitere ataşament nou \"%(filename)s\""
@@ -1355,9 +1376,6 @@ msgstr "Afişare"
 
 msgid "Filename"
 msgstr "Nume fişier"
-
-msgid "Download XML export of this wiki"
-msgstr "Descărcare export XML pentru acest wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Nici o pagină dorită în acest wiki."
@@ -1658,6 +1676,9 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Descărcare export XML pentru acest wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Parametrul necesar \"%(attrname)s\" lipseşte"

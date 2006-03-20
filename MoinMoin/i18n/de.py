@@ -398,6 +398,8 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Benutzer anlegen''',
 '''Mail me my account data''':
 '''E-Mail mit den Zugangsdaten senden''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Siehe Seite %(userprefslink)s, um einen Account anzulegen oder ein verlorenes Passwort wieder zu erhalten.''',
 '''Action''':
 '''Aktion''',
 '''No older revisions available!''':
@@ -726,6 +728,14 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Liste aller Seitenverweise für "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen Seitennamen an.''',
+'''Subscribe users to the page %s''':
+'''Seite %s für Benutzer abonnieren''',
+'''Subscribed for %s:''':
+'''Abonnenten von %s:''',
+'''Not a user:''':
+'''Kein Benutzer:''',
+'''You are not allowed to perform this action.''':
+'''Sie dürfen diese Aktion nicht ausführen.''',
 '''Upload new attachment "%(filename)s"''':
 '''Neuen Dateianhang "%(filename)s" hochladen''',
 '''Create new drawing "%(filename)s"''':
@@ -776,8 +786,6 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Anzeige''',
 '''Filename''':
 '''Dateiname''',
-'''Download XML export of this wiki''':
-'''XML-Export des Wiki-Inhalts herunter laden''',
 '''No wanted pages in this wiki.''':
 '''Es existieren keine gewünschten Seiten in diesem Wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

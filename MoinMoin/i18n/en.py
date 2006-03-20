@@ -396,6 +396,8 @@ Contact the owner of the wiki, who can enable email.''',
 '''Create Profile''',
 '''Mail me my account data''':
 '''Mail me my account data''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''',
 '''Action''':
 '''Action''',
 '''No older revisions available!''':
@@ -720,6 +722,14 @@ Try a different name.''',
 '''Full Link List for "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Cannot create a new page without a page name.  Please specify a page name.''',
+'''Subscribe users to the page %s''':
+'''Subscribe users to the page %s''',
+'''Subscribed for %s:''':
+'''Subscribed for %s:''',
+'''Not a user:''':
+'''Not a user:''',
+'''You are not allowed to perform this action.''':
+'''You are not allowed to perform this action.''',
 '''Upload new attachment "%(filename)s"''':
 '''Upload new attachment "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -770,8 +780,6 @@ Try a different name.''',
 '''Display''',
 '''Filename''':
 '''Filename''',
-'''Download XML export of this wiki''':
-'''Download XML export of this wiki''',
 '''No wanted pages in this wiki.''':
 '''No wanted pages in this wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

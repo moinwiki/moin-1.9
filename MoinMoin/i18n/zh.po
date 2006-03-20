@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -644,6 +644,12 @@ msgstr "新用户注册"
 msgid "Mail me my account data"
 msgstr "把帐号资料寄给我"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "操作"
 
@@ -1204,6 +1210,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "订阅细小改动"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "订阅"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "您无权编辑此页."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "上载新附件\"%(filename)s\""
@@ -1290,9 +1311,6 @@ msgstr "显示"
 
 msgid "Filename"
 msgstr "文件名"
-
-msgid "Download XML export of this wiki"
-msgstr "下载本维基的XML输出"
 
 msgid "No wanted pages in this wiki."
 msgstr "本维基中没有未定义的网页."
@@ -1591,6 +1609,9 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "下载本维基的XML输出"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "缺少需要的属性\"%(attrname)s\""

@@ -560,8 +560,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Prikaz''',
 '''Filename''':
 '''Ime fajla''',
-'''Download XML export of this wiki''':
-'''Skinuti XML eksport ovog vikija''',
 '''No wanted pages in this wiki.''':
 '''Nema željenih stranica u ovom vikiju.''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':

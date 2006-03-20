@@ -636,8 +636,6 @@ Try a different name.''':
 '''תצוגה''',
 '''Filename''':
 '''שם קובץ''',
-'''Download XML export of this wiki''':
-'''יצא את תוכן הוויקי במבנה XML''',
 '''No wanted pages in this wiki.''':
 '''אין בוויקי הזה קישורים לדפים חסרים.''',
 '''**Maximum number of allowed includes exceeded**''':

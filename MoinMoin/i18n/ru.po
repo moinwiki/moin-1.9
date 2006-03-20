@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -658,6 +658,12 @@ msgstr "Создать настройки"
 msgid "Mail me my account data"
 msgstr "Отправить мне настройки почтой"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Действие"
 
@@ -1229,6 +1235,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Не могу создать страницу без имени. Укажите имя страницы."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Подписаться на малые исправления"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Подписка"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Вам нельзя менять эту страницу."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Приложить \"%(filename)s\""
@@ -1315,9 +1336,6 @@ msgstr "Просмотр"
 
 msgid "Filename"
 msgstr "Файл"
-
-msgid "Download XML export of this wiki"
-msgstr "Сохранить XML версию этого вики"
 
 msgid "No wanted pages in this wiki."
 msgstr "В этом вики нет требуемых страниц."
@@ -1620,3 +1638,6 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Сохранить XML версию этого вики"

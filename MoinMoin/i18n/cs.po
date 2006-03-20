@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -660,6 +660,12 @@ msgstr "Vytvořit profil"
 msgid "Mail me my account data"
 msgstr "Zašli mi má data k účtu"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Akce"
 
@@ -1226,6 +1232,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. "
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Odebírat při minimálních změnách"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Odebírat"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Nemáte dovoleno editovat tuto stránku."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Upload nové přílohy \"%(filename)s\" hochladen"
@@ -1312,9 +1333,6 @@ msgstr "Display"
 
 msgid "Filename"
 msgstr "JmenoSouboru"
-
-msgid "Download XML export of this wiki"
-msgstr "Download XML exportu této wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "V této wiki neexistují žádné žádoucí stránky."
@@ -1616,6 +1634,9 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Download XML exportu této wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Chybí požadovaný atribut \"%(attrname)s\""

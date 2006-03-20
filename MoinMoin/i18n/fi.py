@@ -761,8 +761,6 @@ Kokeile eri nimeä.''',
 '''Näytä''',
 '''Filename''':
 '''Tiedostonimi''',
-'''Download XML export of this wiki''':
-'''Lataa tämän wikin XML-vienti''',
 '''No wanted pages in this wiki.''':
 '''Tässä wikissä ei ole toivottu sivuja.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

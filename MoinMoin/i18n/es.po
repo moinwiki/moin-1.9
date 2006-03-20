@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-01-02 17:48-0300\n"
 "Last-Translator: Eduardo Mercovich <eduardo.mercovich@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -218,7 +218,7 @@ msgid "Edit was cancelled."
 msgstr "Has cancelado tu edición."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
-msgstr "Gracias por sus aportes. Se aprecia tu preocupación por los detalles."
+msgstr "Gracias por tus aportes. Se aprecia tu preocupación por los detalles."
 
 #, python-format
 msgid "Page \"%s\" was successfully deleted!"
@@ -263,11 +263,10 @@ msgstr "¡No se encontraron diferencias!\n"
 #, python-format
 msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
 msgstr ""
-"[%(sitename)s]  Actualización %(trivial)s de \"%(pagename)s\" por %(username)"
-"s"
+"[%(sitename)s]  Actualización %(trivial)sde \"%(pagename)s\" por %(username)s"
 
 msgid "Trivial "
-msgstr "Trivial"
+msgstr "Trivial "
 
 msgid "Status of sending notification mails:"
 msgstr "Estado del envío de e-mails de notificación:"
@@ -357,7 +356,7 @@ msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"Los otros usuarios ''serán advertidos'' hasta %(bumptime)s que estás "
+"El resto de los usuarios ''serán advertidos'' hasta %(bumptime)s que estás "
 "editando esta página."
 
 msgid "Use the Preview button to extend the locking period."
@@ -529,7 +528,7 @@ msgstr "coincidencia"
 msgid "matches"
 msgstr "coincidencias"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Login Name: %s\n"
 "\n"
@@ -541,7 +540,7 @@ msgstr ""
 "\n"
 "Contraseña de Ingreso: %s\n"
 "\n"
-"URL de Ingreso: %s/?action=userform&uid=%s\n"
+"URL de Ingreso: %s/%s\n"
 
 msgid ""
 "Somebody has requested to submit your account data to this email address.\n"
@@ -553,7 +552,7 @@ msgid ""
 "After successfully logging in, it is of course a good idea to set a new and "
 "known password.\n"
 msgstr ""
-"Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-"
+"Alguien ha solicitado enviar los datos de tu cuenta a esta dirección de e-"
 "mail.\n"
 "\n"
 "Si perdiste tu contraseña, por favor usa la siguiente información\n"
@@ -615,11 +614,10 @@ msgstr ""
 "¡Se creó la cuenta de usuario! Puedes usarla para entrar ahora mismo al "
 "sistema..."
 
-#, fuzzy
 msgid "Use UserPreferences to change settings of the selected user account"
 msgstr ""
-"Usa las PreferenciasDelUsuario para cambiar tus preferencias o crear una "
-"cuenta nueva"
+"Usa las PreferenciasDelUsuario para cambiar las preferencias de la cuenta "
+"del usuario elegido"
 
 #, python-format
 msgid "The theme '%(theme_name)s' could not be loaded!"
@@ -641,7 +639,7 @@ msgid "free choice"
 msgstr "elección libre"
 
 msgid "Select User"
-msgstr ""
+msgstr "Elegir usuario"
 
 msgid "Save"
 msgstr "Guardar"
@@ -687,6 +685,12 @@ msgstr "Crear perfil de Usuario"
 
 msgid "Mail me my account data"
 msgstr "Envíame los datos de mi cuenta "
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
 
 msgid "Action"
 msgstr "Acción"
@@ -821,7 +825,7 @@ msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "No tienes permisos para suscribirte a una página que no puedes ver."
 
 msgid "This wiki is not enabled for mail processing."
-msgstr "Este wiki no tienes activado el procesamiento de e-mails."
+msgstr "Este wiki no tiene activado el procesamiento de e-mails."
 
 msgid "You must log in to use subscribtions."
 msgstr ""
@@ -892,7 +896,7 @@ msgid "Release %s [Revision %s]"
 msgstr "Versión (release) %s [Revisión %s]"
 
 msgid "4Suite Version"
-msgstr "Versión 4Suite"
+msgstr "Versión de 4Suite"
 
 msgid "Number of pages"
 msgstr "Cantidad de páginas"
@@ -1171,7 +1175,7 @@ msgstr "Esta página ya ha sido borrada o nunca se creó"
 
 msgid "Please use the interactive user interface to delete pages!"
 msgstr ""
-"¡Por favor, use la interfaz de usuario interactiva para eliminar páginas!"
+"¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!"
 
 msgid "Really delete this page?"
 msgstr "¿Realmente deseas eliminar esta página?"
@@ -1237,7 +1241,7 @@ msgstr ""
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(incluir %(localwords)d %(pagelink)s)"
+msgstr "(incluídas %(localwords)d %(pagelink)s)"
 
 #, python-format
 msgid ""
@@ -1248,14 +1252,14 @@ msgstr ""
 "de %(totalwords)d palabras%(localwords)s y aparecen marcadas abajo:"
 
 msgid "Add checked words to dictionary"
-msgstr "Añadir palabras revisadas al diccionario"
+msgstr "Añadir palabras seleccionadas al diccionario"
 
 msgid "No spelling errors found!"
 msgstr "¡No se encontraron errores de ortografía!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
-"No puede realizar corección ortográfica en una página que no puede leer."
+"No puedes realizar corrección ortográfica en una página que no puedes leer."
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1275,6 +1279,21 @@ msgstr ""
 "No es posible crear una página sin nombre. Por favor, dále un nombre a la "
 "página."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Avisar de cualquier cambio de contenido (incluso los triviales)"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Suscribirse"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "No tienes permisos para editar esta página."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Subir nuevo adjunto \"%(filename)s\""
@@ -1293,7 +1312,7 @@ msgstr "Argumentos include no válidos \"%s\"!"
 
 #, python-format
 msgid "Nothing found for \"%s\"!"
-msgstr "¡No se encontró coincidencias de \"%s\"!"
+msgstr "¡No se encontraron coincidencias de \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1361,9 +1380,6 @@ msgstr "Mostrar"
 
 msgid "Filename"
 msgstr "Nombre de archivo"
-
-msgid "Download XML export of this wiki"
-msgstr "Bajar XML exportado de este wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "No existen páginas-por-crear en este wiki."
@@ -1478,7 +1494,7 @@ msgstr "[INICIO]"
 
 msgid "Click to do a full-text search for this title"
 msgstr ""
-"Efectuar una búsqueda páginas que linkean a ésta (este título en contenidos)"
+"Efectuar una búsqueda páginas que enlazan a ésta (este título en contenidos)"
 
 msgid "Logout"
 msgstr "Salir"
@@ -1669,6 +1685,9 @@ msgstr "RenombrarPágina"
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
 
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Bajar XML exportado de este wiki"
+
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Falta el atributo requerido \"%(attrname)s\""
 
@@ -1723,7 +1742,7 @@ msgstr "CorrecciónOrtográfica"
 #~ "You didn't create a user profile yet. Select UserPreferences in the upper "
 #~ "right corner to create a profile."
 #~ msgstr ""
-#~ "Aún no ha creado un perfil de usuario. Seleccione PreferenciasDelUsuario "
+#~ "Aún no has creado un perfil de usuario. Selecciona PreferenciasDelUsuario "
 #~ "para crear un perfil."
 
 #~ msgid ""
