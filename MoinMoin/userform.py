@@ -640,18 +640,23 @@ class Login:
     def asHTML(self):
         """ Create the complete HTML form code. """
         _ = self._
-        sn = self.request.getScriptname()
-        pi = self.request.getPathinfo()
+        request = self.request
+        sn = request.getScriptname()
+        pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
+        userprefslink = wikiutil.getSysPage(request, "UserPreferences").link_to(request)
+        hint = _("To create an account or recover a lost password, see the %(userprefslink)s page.") % {
+               'userprefslink': userprefslink}
         self._form = html.FORM(action=action)
         self._table = html.TABLE(border="0")
 
         # Use the user interface language and direction
-        lang_attr = self.request.theme.ui_lang_attr()
+        lang_attr = request.theme.ui_lang_attr()
         self._form.append(html.Raw('<div class="userprefs"%s>' % lang_attr))
 
         self._form.append(html.INPUT(type="hidden", name="action", value="login"))
         self._form.append(self._table)
+        self._form.append(html.P().append(hint))
         self._form.append(html.Raw("</div>"))
 
         self.make_row(_('Name'), [

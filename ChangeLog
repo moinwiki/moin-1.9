@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-20 20:15:44 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-488
+
+    Summary:
+      login page: add a hint with a link to UserPreferences page
+    Revision:
+      moin--main--1.5--patch-488
+
+    login page: add a hint with a link to UserPreferences page
+    
+
+    modified files:
+     ChangeLog MoinMoin/userform.py
+
+
 2006-03-19 02:21:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-487
 
     Summary:
