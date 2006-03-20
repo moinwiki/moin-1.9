@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -654,6 +654,12 @@ msgstr "Tạo Profile"
 msgid "Mail me my account data"
 msgstr "Gửi cho tôi thông tin về account cá nhân"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Công việc"
 
@@ -1227,6 +1233,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Đăng ký vào các thay đổi nhỏ nhặt"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Đăng ký"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Bạn không thể sửa trang này."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Tải lên file \"%(filename)s\""
@@ -1313,9 +1334,6 @@ msgstr "Hiển thị"
 
 msgid "Filename"
 msgstr "Tên file"
-
-msgid "Download XML export of this wiki"
-msgstr "Tải về theo dạng XML của trang này"
 
 msgid "No wanted pages in this wiki."
 msgstr "Không có trang cần tạo trong wiki này."
@@ -1629,6 +1647,9 @@ msgstr "RenamePage"
 
 msgid "SpellCheck"
 msgstr "SpellCheck"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Tải về theo dạng XML của trang này"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Không tìm thấy thuộc tính \"%(attrname)s\""

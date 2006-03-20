@@ -772,8 +772,6 @@ Pamēģiniet citu nosaukumu.''',
 '''Caurskats''',
 '''Filename''':
 '''Faila nosaukums''',
-'''Download XML export of this wiki''':
-'''Lejupielādēt XML eksportu no šī wiki''',
 '''No wanted pages in this wiki.''':
 '''Šajā viki pieprasīto lapu nav.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

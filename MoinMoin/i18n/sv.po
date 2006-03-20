@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-08 15:49+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -669,6 +669,12 @@ msgstr "Skapa profil"
 msgid "Mail me my account data"
 msgstr "Eposta mig information om mitt konto"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Anrop"
 
@@ -1247,6 +1253,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Prenumerera på triviala ändringar"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Prenumerera"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Du har inte tillåtelse att redigera den här sidan."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Ladda upp ny bilaga \"%(filename)s\""
@@ -1333,9 +1354,6 @@ msgstr "Visa"
 
 msgid "Filename"
 msgstr "Filnamn"
-
-msgid "Download XML export of this wiki"
-msgstr "Ladda ner den här wikin som XML"
 
 msgid "No wanted pages in this wiki."
 msgstr "Inga önskade sidor i den här wikin."
@@ -1637,3 +1655,6 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Ladda ner den här wikin som XML"

@@ -752,8 +752,6 @@ Try a different name.''':
 '''نشان بده''',
 '''Filename''':
 '''نام فایل''',
-'''Download XML export of this wiki''':
-'''دریافت خروجی این ویکی با فرمت XML''',
 '''No wanted pages in this wiki.''':
 '''در این ویکی صفحه ای مورد نیاز نیست.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

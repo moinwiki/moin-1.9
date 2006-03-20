@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -664,6 +664,12 @@ msgstr "Tvori profil"
 msgid "Mail me my account data"
 msgstr "Pošlji mi podatke o tem uporabniškem računu"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Akcija"
 
@@ -1239,6 +1245,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nove strani s praznim imenom ni mogoče narediti, navedite ime."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Naročilo na obvestila velja tudi za neznatne spremembe"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Naroči se"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Te strani vam ni dovoljeno spreminjati."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Naloži novo priponko \"%(filename)s\" na strežnik"
@@ -1325,9 +1346,6 @@ msgstr "Prikaz"
 
 msgid "Filename"
 msgstr "Ime datoteke"
-
-msgid "Download XML export of this wiki"
-msgstr "Pripravi vsebino tega vikija za izvoz v obliki XML"
 
 msgid "No wanted pages in this wiki."
 msgstr ""
@@ -1630,3 +1648,6 @@ msgstr "PreimenujStran"
 
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Pripravi vsebino tega vikija za izvoz v obliki XML"

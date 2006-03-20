@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -572,6 +572,12 @@ msgstr ""
 msgid "Mail me my account data"
 msgstr ""
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr ""
 
@@ -1118,6 +1124,20 @@ msgid ""
 msgstr ""
 
 #, python-format
+msgid "Subscribe users to the page %s"
+msgstr ""
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr ""
+
+msgid "Not a user:"
+msgstr ""
+
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr ""
 
@@ -1202,9 +1222,6 @@ msgid "Display"
 msgstr ""
 
 msgid "Filename"
-msgstr ""
-
-msgid "Download XML export of this wiki"
 msgstr ""
 
 msgid "No wanted pages in this wiki."

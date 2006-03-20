@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -661,6 +661,12 @@ msgstr "Profil létrehozása"
 msgid "Mail me my account data"
 msgstr "Kérem a felhasználói adataim elküldését levélben"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Művelet"
 
@@ -1237,6 +1243,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!"
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Előfizetés a lényegtelen változásokra"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Előfizetés"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "A lap szerkesztése nem engedélyezett."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "A(z) \"%(filename)s\" melléklet feltöltése"
@@ -1323,9 +1344,6 @@ msgstr "Megjelenítés"
 
 msgid "Filename"
 msgstr "Állománynév"
-
-msgid "Download XML export of this wiki"
-msgstr "A wiki XML-exportjának letöltése"
 
 msgid "No wanted pages in this wiki."
 msgstr "Ebben a wikiben nincsenek kívánt lapok."
@@ -1640,6 +1658,9 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "A wiki XML-exportjának letöltése"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "A(z) \"%(attrname)s\" kötelező attribútum hiányzik"

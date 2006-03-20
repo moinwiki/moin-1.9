@@ -758,8 +758,6 @@ Try a different name.''':
 '''显示''',
 '''Filename''':
 '''文件名''',
-'''Download XML export of this wiki''':
-'''下载本维基的XML输出''',
 '''No wanted pages in this wiki.''':
 '''本维基中没有未定义的网页.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

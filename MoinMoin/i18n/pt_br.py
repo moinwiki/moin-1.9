@@ -761,8 +761,6 @@ Tente um nome diferente.''',
 '''Mostrar''',
 '''Filename''':
 '''Nome do arquivo''',
-'''Download XML export of this wiki''':
-'''Baixar arquivo XML exportado desta wiki''',
 '''No wanted pages in this wiki.''':
 '''Nenhuma página solicitada neste wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

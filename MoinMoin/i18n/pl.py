@@ -777,8 +777,6 @@ Spróbuj innej nazwy.''',
 '''Pokaż''',
 '''Filename''':
 '''Nazwa pliku''',
-'''Download XML export of this wiki''':
-'''Zgraj wersję XML tego wiki''',
 '''No wanted pages in this wiki.''':
 '''Brak poszukiwanych stron w tym wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

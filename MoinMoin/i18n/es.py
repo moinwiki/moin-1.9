@@ -113,7 +113,7 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Edit was cancelled.''':
 '''Has cancelado tu edición.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Gracias por sus aportes. Se aprecia tu preocupación por los detalles.''',
+'''Gracias por tus aportes. Se aprecia tu preocupación por los detalles.''',
 '''Page "%s" was successfully deleted!''':
 '''¡La página "%s" se eliminó exitosamente!''',
 '''Dear Wiki user,
@@ -149,9 +149,9 @@ La siguiente página ha sido modificada por %(editor)s:
 '''¡No se encontraron diferencias!
 ''',
 '''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
-'''[%(sitename)s]  Actualización %(trivial)s de "%(pagename)s" por %(username)s''',
+'''[%(sitename)s]  Actualización %(trivial)sde "%(pagename)s" por %(username)s''',
 '''Trivial ''':
-'''Trivial''',
+'''Trivial ''',
 '''Status of sending notification mails:''':
 '''Estado del envío de e-mails de notificación:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
@@ -198,7 +198,7 @@ lo que no reflejaría buena educación!\'\'
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
 '''Se \'\'bloqueará\'\' la edición de está página a los otros usuarios hasta %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Los otros usuarios \'\'serán advertidos\'\' hasta %(bumptime)s que estás editando esta página.''',
+'''El resto de los usuarios \'\'serán advertidos\'\' hasta %(bumptime)s que estás editando esta página.''',
 '''Use the Preview button to extend the locking period.''':
 '''Usa el botón \'\'Vista Previa\'\' para extender el tiempo de protección.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
@@ -297,6 +297,18 @@ de un espacio entre palabras (no recomendado). No se permite usar la palabra Gru
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Nombre de Ingreso: %s
+
+Contraseña de Ingreso: %s
+
+URL de Ingreso: %s/%s
+''',
 '''Somebody has requested to submit your account data to this email address.
 
 If you lost your password, please use the data below and just enter the
@@ -305,7 +317,7 @@ for that).
 
 After successfully logging in, it is of course a good idea to set a new and known password.
 ''':
-'''Alguien ha solicitado incorporar tus datos de cuenta en esta dirección e-mail.
+'''Alguien ha solicitado enviar los datos de tu cuenta a esta dirección de e-mail.
 
 Si perdiste tu contraseña, por favor usa la siguiente información
 e ingresa la contraseña, TAL CUAL APARECE, en el campo de contraseña del wiki
@@ -340,6 +352,8 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Esta dirección e-mail ya es usada por otra persona.''',
 '''User account created! You can use this account to login now...''':
 '''¡Se creó la cuenta de usuario! Puedes usarla para entrar ahora mismo al sistema...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Usa las PreferenciasDelUsuario para cambiar las preferencias de la cuenta del usuario elegido''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''No se pudo cargar el tema \'%(theme_name)s\' !''',
 '''User preferences saved!''':
@@ -352,6 +366,8 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''el/la preferido/a''',
 '''free choice''':
 '''elección libre''',
+'''Select User''':
+'''Elegir usuario''',
 '''Save''':
 '''Guardar''',
 '''Preferred theme''':
@@ -463,7 +479,7 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No tienes permisos para suscribirte a una página que no puedes ver.''',
 '''This wiki is not enabled for mail processing.''':
-'''Este wiki no tienes activado el procesamiento de e-mails.''',
+'''Este wiki no tiene activado el procesamiento de e-mails.''',
 '''You must log in to use subscribtions.''':
 '''Debes entrar al sistema (identificarte) para poder suscribirse. Puedes hacerlo desde PreferenciasDelUsuario.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
@@ -507,7 +523,7 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Release %s [Revision %s]''':
 '''Versión (release) %s [Revisión %s]''',
 '''4Suite Version''':
-'''Versión 4Suite''',
+'''Versión de 4Suite''',
 '''Number of pages''':
 '''Cantidad de páginas''',
 '''Number of system pages''':
@@ -656,7 +672,7 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''This page is already deleted or was never created!''':
 '''Esta página ya ha sido borrada o nunca se creó''',
 '''Please use the interactive user interface to delete pages!''':
-'''¡Por favor, use la interfaz de usuario interactiva para eliminar páginas!''',
+'''¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!''',
 '''Really delete this page?''':
 '''¿Realmente deseas eliminar esta página?''',
 '''Delete''':
@@ -692,15 +708,15 @@ Try a different name.''':
 
 Intenta con un nombre distinto.''',
 '''(including %(localwords)d %(pagelink)s)''':
-'''(incluir %(localwords)d %(pagelink)s)''',
+'''(incluídas %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
 '''Las siguientes %(badwords)d palabras no fueron encontradas en el diccionario de %(totalwords)d palabras%(localwords)s y aparecen marcadas abajo:''',
 '''Add checked words to dictionary''':
-'''Añadir palabras revisadas al diccionario''',
+'''Añadir palabras seleccionadas al diccionario''',
 '''No spelling errors found!''':
 '''¡No se encontraron errores de ortografía!''',
 '''You can\'t check spelling on a page you can\'t read.''':
-'''No puede realizar corección ortográfica en una página que no puede leer.''',
+'''No puedes realizar corrección ortográfica en una página que no puedes leer.''',
 '''Title Search: "%s"''':
 '''Buscar por título: "%s"''',
 '''Full Text Search: "%s"''':
@@ -718,7 +734,7 @@ Intenta con un nombre distinto.''',
 '''Invalid include arguments "%s"!''':
 '''Argumentos include no válidos "%s"!''',
 '''Nothing found for "%s"!''':
-'''¡No se encontró coincidencias de "%s"!''',
+'''¡No se encontraron coincidencias de "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''¡Esquema de navegación \'%(scheme)s\' no soportado!''',
 '''No parent page found!''':
@@ -759,8 +775,6 @@ Intenta con un nombre distinto.''',
 '''Mostrar''',
 '''Filename''':
 '''Nombre de archivo''',
-'''Download XML export of this wiki''':
-'''Bajar XML exportado de este wiki''',
 '''No wanted pages in this wiki.''':
 '''No existen páginas-por-crear en este wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
@@ -828,7 +842,7 @@ rojo=editar''',
 '''[TOP]''':
 '''[INICIO]''',
 '''Click to do a full-text search for this title''':
-'''Efectuar una búsqueda páginas que linkean a ésta (este título en contenidos)''',
+'''Efectuar una búsqueda páginas que enlazan a ésta (este título en contenidos)''',
 '''Logout''':
 '''Salir''',
 '''Clear message''':

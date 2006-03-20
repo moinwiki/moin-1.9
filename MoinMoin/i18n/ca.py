@@ -761,8 +761,6 @@ Proveu amb un nom diferent.''',
 '''Visualització''',
 '''Filename''':
 '''Nom del fitxer''',
-'''Download XML export of this wiki''':
-'''Descarregueu una exportació en XML d\'aquest wiki''',
 '''No wanted pages in this wiki.''':
 '''No hi ha cap pàgina dessitjada en aquest wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

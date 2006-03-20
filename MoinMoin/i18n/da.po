@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-11-18 21:40+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -666,6 +666,12 @@ msgstr "Opret brugerprofil"
 msgid "Mail me my account data"
 msgstr "Send mig mine adgangsoplysninger pr. email"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Rutine"
 
@@ -1239,6 +1245,21 @@ msgid ""
 msgstr ""
 "Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Abonnér på simple rettelser"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Abonnér"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Du har ikke lov til at redigere denne side."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Overfør ny vedhæftet fil \"%(filename)s\""
@@ -1325,9 +1346,6 @@ msgstr "Vis"
 
 msgid "Filename"
 msgstr "Filnavn"
-
-msgid "Download XML export of this wiki"
-msgstr "Hent XML-eksport af denne wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Ingen ønskede sider i denne wiki."
@@ -1630,6 +1648,9 @@ msgstr "OmdøbSide"
 
 msgid "SpellCheck"
 msgstr "StaveKontrol"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Hent XML-eksport af denne wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Krævet atribut \"%(attrname)s\" mangler."

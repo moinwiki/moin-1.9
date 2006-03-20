@@ -775,8 +775,6 @@ Try a different name.''':
 '''보기''',
 '''Filename''':
 '''파일이름''',
-'''Download XML export of this wiki''':
-'''이 위키 전체를 XML로 변환하여 받기''',
 '''No wanted pages in this wiki.''':
 '''이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

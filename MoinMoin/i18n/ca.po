@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -678,6 +678,12 @@ msgstr "Crea un perfil"
 msgid "Mail me my account data"
 msgstr "Envia'm les dades del meu compte"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Acció"
 
@@ -1264,6 +1270,21 @@ msgid ""
 msgstr ""
 "No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Subscriu-me a canvis trivials"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Subscriu-me"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "No teniu permís per a editar aquesta pàgina."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Apuja una nova adjunció «%(filename)s»"
@@ -1350,9 +1371,6 @@ msgstr "Visualització"
 
 msgid "Filename"
 msgstr "Nom del fitxer"
-
-msgid "Download XML export of this wiki"
-msgstr "Descarregueu una exportació en XML d'aquest wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "No hi ha cap pàgina dessitjada en aquest wiki."
@@ -1653,6 +1671,9 @@ msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Descarregueu una exportació en XML d'aquest wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Manca l'atribut requerit «%(attrname)s»"

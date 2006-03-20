@@ -611,8 +611,6 @@ Vui lòng dùng tên khác.''',
 '''Hiển thị''',
 '''Filename''':
 '''Tên file''',
-'''Download XML export of this wiki''':
-'''Tải về theo dạng XML của trang này''',
 '''No wanted pages in this wiki.''':
 '''Không có trang cần tạo trong wiki này.''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':

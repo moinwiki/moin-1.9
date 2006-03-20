@@ -646,8 +646,6 @@ Prova un nome differente.''',
 '''Mostra''',
 '''Filename''':
 '''Nome del file''',
-'''Download XML export of this wiki''':
-'''Scarica una versione XML di questo wiki''',
 '''No wanted pages in this wiki.''':
 '''Non ci sono pagine "non scritte" in questo wiki.''',
 '''**Maximum number of allowed includes exceeded**''':

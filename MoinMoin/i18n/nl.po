@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -663,6 +663,12 @@ msgstr "Profiel aanmaken"
 msgid "Mail me my account data"
 msgstr "Stuur me mijn accountgegevens per e-mail"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Actie"
 
@@ -1246,6 +1252,21 @@ msgid ""
 msgstr ""
 "Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Abonneren op triviale wijzigingen"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Abonneren"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "U hebt geen toestemming deze pagina te bewerken."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Verstuur een nieuwe bijlage \"%(filename)s\""
@@ -1332,9 +1353,6 @@ msgstr "Uiterlijk"
 
 msgid "Filename"
 msgstr "Bestandsnaam"
-
-msgid "Download XML export of this wiki"
-msgstr "Download een export naar XML van deze wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Geen gewenste pagina's in deze wiki."
@@ -1647,6 +1665,9 @@ msgstr "PaginaHernoemen"
 
 msgid "SpellCheck"
 msgstr "Spellingscontrole"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Download een export naar XML van deze wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Benodigd attribuut \"%(attrname)s\" ontbreekt"

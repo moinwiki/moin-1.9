@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-06 00:20+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -692,6 +692,12 @@ msgstr "Créer un profil"
 msgid "Mail me my account data"
 msgstr "Envoi par courrier électronique de mes identifiants de connexion"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Action"
 
@@ -1279,6 +1285,21 @@ msgid ""
 msgstr ""
 "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "S'abonner aux modifications mineures"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "S'abonner"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Vous n'êtes pas autorisé à modifier cette page."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Envoyer la nouvelle pièce jointe « %(filename)s »"
@@ -1365,9 +1386,6 @@ msgstr "Affichage"
 
 msgid "Filename"
 msgstr "Nom du fichier"
-
-msgid "Download XML export of this wiki"
-msgstr "Télécharger un export XML de ce wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Aucune page référencée ne reste à créer."
@@ -1679,3 +1697,6 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Télécharger un export XML de ce wiki"

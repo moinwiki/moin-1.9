@@ -775,8 +775,6 @@ Uporabite drugačno ime.''',
 '''Prikaz''',
 '''Filename''':
 '''Ime datoteke''',
-'''Download XML export of this wiki''':
-'''Pripravi vsebino tega vikija za izvoz v obliki XML''',
 '''No wanted pages in this wiki.''':
 '''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne obstajajo).''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

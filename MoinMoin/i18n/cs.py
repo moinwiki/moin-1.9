@@ -768,8 +768,6 @@ Zkuste jiné jméno.''',
 '''Display''',
 '''Filename''':
 '''JmenoSouboru''',
-'''Download XML export of this wiki''':
-'''Download XML exportu této wiki''',
 '''No wanted pages in this wiki.''':
 '''V této wiki neexistují žádné žádoucí stránky.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

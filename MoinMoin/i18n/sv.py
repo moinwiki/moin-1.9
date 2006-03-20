@@ -781,8 +781,6 @@ Pröva ett annat namn.''',
 '''Visa''',
 '''Filename''':
 '''Filnamn''',
-'''Download XML export of this wiki''':
-'''Ladda ner den här wikin som XML''',
 '''No wanted pages in this wiki.''':
 '''Inga önskade sidor i den här wikin.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

@@ -628,8 +628,6 @@ Probeer een andere naam.''',
 '''Uiterlijk''',
 '''Filename''':
 '''Bestandsnaam''',
-'''Download XML export of this wiki''':
-'''Download een export naar XML van deze wiki''',
 '''No wanted pages in this wiki.''':
 '''Geen gewenste pagina\'s in deze wiki.''',
 '''**Maximum number of allowed includes exceeded**''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -671,6 +671,12 @@ msgstr "پروفایل بسازید"
 msgid "Mail me my account data"
 msgstr "اطلاعات حساب من را ایمیل کن"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "حرکت"
 
@@ -1244,6 +1250,21 @@ msgstr ""
 "سیستم نمی تواند صفحه جدید بدون نام ایجاد نماید.  لطفا یک نام صفحه مشخص "
 "نمایید."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "عضویت در گزارش تغییرات جزئی"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "عضویت"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "شما مجاز به ویرایش این صفحه نمی باشید"
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "ضمیمه جدید \"%(filename)s\" را بفرست"
@@ -1330,9 +1351,6 @@ msgstr "نشان بده"
 
 msgid "Filename"
 msgstr "نام فایل"
-
-msgid "Download XML export of this wiki"
-msgstr "دریافت خروجی این ویکی با فرمت XML"
 
 msgid "No wanted pages in this wiki."
 msgstr "در این ویکی صفحه ای مورد نیاز نیست."
@@ -1636,6 +1654,9 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "دریافت خروجی این ویکی با فرمت XML"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "نسبت های مورد نیاز \"%(attrname)s\" یافت نشد"

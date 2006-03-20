@@ -778,8 +778,6 @@ Essayez un autre nom.''',
 '''Affichage''',
 '''Filename''':
 '''Nom du fichier''',
-'''Download XML export of this wiki''':
-'''Télécharger un export XML de ce wiki''',
 '''No wanted pages in this wiki.''':
 '''Aucune page référencée ne reste à créer.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

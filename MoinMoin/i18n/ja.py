@@ -773,8 +773,6 @@ Try a different name.''':
 '''表示''',
 '''Filename''':
 '''ファイル名''',
-'''Download XML export of this wiki''':
-'''このwikiのXML exportをダウンロード''',
 '''No wanted pages in this wiki.''':
 '''このwikiに参照先がないページはありません。''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -667,6 +667,12 @@ msgstr "Utwórz profil"
 msgid "Mail me my account data"
 msgstr "Prześlij do mnie moje dane"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Akcja"
 
@@ -1246,6 +1252,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Zasubksrybuj drobne zmiany"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Zasubskrybuj"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Nie możesz zmieniać zawartości tej strony."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Wgraj nowy załącznik \"%(filename)s\""
@@ -1332,9 +1353,6 @@ msgstr "Pokaż"
 
 msgid "Filename"
 msgstr "Nazwa pliku"
-
-msgid "Download XML export of this wiki"
-msgstr "Zgraj wersję XML tego wiki"
 
 msgid "No wanted pages in this wiki."
 msgstr "Brak poszukiwanych stron w tym wiki."
@@ -1641,6 +1659,9 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Zgraj wersję XML tego wiki"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Brakuje niezbędnego atrybutu \"%(attrname)s\""

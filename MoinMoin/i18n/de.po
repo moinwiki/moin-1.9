@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -681,6 +681,13 @@ msgstr "Benutzer anlegen"
 msgid "Mail me my account data"
 msgstr "E-Mail mit den Zugangsdaten senden"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr "Siehe Seite %(userprefslink)s, um einen Account anzulegen oder ein "
+"verlorenes Passwort wieder zu erhalten."
+
 msgid "Action"
 msgstr "Aktion"
 
@@ -1273,6 +1280,20 @@ msgstr ""
 "Seitennamen an."
 
 #, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Seite %s für Benutzer abonnieren"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Abonnenten von %s:"
+
+msgid "Not a user:"
+msgstr "Kein Benutzer:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Sie dürfen diese Aktion nicht ausführen."
+
+#, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Neuen Dateianhang \"%(filename)s\" hochladen"
 
@@ -1358,9 +1379,6 @@ msgstr "Anzeige"
 
 msgid "Filename"
 msgstr "Dateiname"
-
-msgid "Download XML export of this wiki"
-msgstr "XML-Export des Wiki-Inhalts herunter laden"
 
 msgid "No wanted pages in this wiki."
 msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."

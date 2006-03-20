@@ -754,8 +754,6 @@ Prøv et andet navn.''',
 '''Vis''',
 '''Filename''':
 '''Filnavn''',
-'''Download XML export of this wiki''':
-'''Hent XML-eksport af denne wiki''',
 '''No wanted pages in this wiki.''':
 '''Ingen ønskede sider i denne wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':

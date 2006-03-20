@@ -638,8 +638,6 @@ Próbáljon más nevet adni a lapnak.''',
 '''Megjelenítés''',
 '''Filename''':
 '''Állománynév''',
-'''Download XML export of this wiki''':
-'''A wiki XML-exportjának letöltése''',
 '''No wanted pages in this wiki.''':
 '''Ebben a wikiben nincsenek kívánt lapok.''',
 '''**Maximum number of allowed includes exceeded**''':

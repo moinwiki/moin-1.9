@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -663,6 +663,12 @@ msgstr "Luo profiili"
 msgid "Mail me my account data"
 msgstr "Sähköpostita minulle käyttäjätietoni"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "Toiminto"
 
@@ -1239,6 +1245,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Tilaa vähäisetkin muutokset"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Tilaa"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Lähetä uusi liitetiedosto \"%(filename)s\""
@@ -1325,9 +1346,6 @@ msgstr "Näytä"
 
 msgid "Filename"
 msgstr "Tiedostonimi"
-
-msgid "Download XML export of this wiki"
-msgstr "Lataa tämän wikin XML-vienti"
 
 msgid "No wanted pages in this wiki."
 msgstr "Tässä wikissä ei ole toivottu sivuja."
@@ -1629,6 +1647,9 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Lataa tämän wikin XML-vienti"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Vaadittu tieto \"%(attrname)s\" puuttuu"

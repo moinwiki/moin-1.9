@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -635,6 +635,12 @@ msgstr "הרשם"
 msgid "Mail me my account data"
 msgstr "שלח לי את פרטי המשתמש"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "פעולה"
 
@@ -1201,6 +1207,21 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "עשה מנוי לשינויים פעוטים"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "עשה מנוי"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "אין לכם הרשאות לערוך את הדף"
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "שליחת קובץ מצורף חדש \"%(filename)s\""
@@ -1287,9 +1308,6 @@ msgstr "תצוגה"
 
 msgid "Filename"
 msgstr "שם קובץ"
-
-msgid "Download XML export of this wiki"
-msgstr "יצא את תוכן הוויקי במבנה XML"
 
 msgid "No wanted pages in this wiki."
 msgstr "אין בוויקי הזה קישורים לדפים חסרים."
@@ -1597,6 +1615,9 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "יצא את תוכן הוויקי במבנה XML"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "ערך חובה \"%(attrname)s\" חסר"

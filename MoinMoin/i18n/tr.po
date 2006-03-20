@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-04 18:59+0100\n"
+"POT-Creation-Date: 2006-03-20 21:16+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -693,6 +693,12 @@ msgstr "Profil Oluştur"
 msgid "Mail me my account data"
 msgstr "Hesap bilgilerimi e-posta ile gönder"
 
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
 msgid "Action"
 msgstr "İşlev"
 
@@ -1279,6 +1285,22 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte."
 
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Küçük değişikliklerden haberdar ol"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "ÜyeOl"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr ""
+"Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
+
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Yeni ek dosya gönder \"%(filename)s\""
@@ -1365,9 +1387,6 @@ msgstr "Göster"
 
 msgid "Filename"
 msgstr "Dosya Adı"
-
-msgid "Download XML export of this wiki"
-msgstr "Bu Wiki'nin XML çıktısını indir"
 
 msgid "No wanted pages in this wiki."
 msgstr "Wiki üzerinde aranan bir sayfa yer almamakta."
@@ -1673,6 +1692,9 @@ msgstr "SayfaAdlandır"
 
 msgid "SpellCheck"
 msgstr "İmlaDenetimi"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Bu Wiki'nin XML çıktısını indir"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Gerekli \"%(attrname)s\" niteleyicisi eksik"
