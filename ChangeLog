@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-21 09:59:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-491
+
+    Summary:
+      avoid crashing on non-ASCII hostnames
+    Revision:
+      moin--main--1.5--patch-491
+
+    avoid crashing on non-ASCII hostnames
+    
+
+    modified files:
+     ChangeLog MoinMoin/logfile/editlog.py docs/CHANGES
+
+
 2006-03-21 09:36:53 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-490
 
     Summary:
