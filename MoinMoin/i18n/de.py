@@ -742,6 +742,8 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Neue Zeichnung "%(filename)s" anlegen''',
 '''Edit drawing %(filename)s''':
 '''Zeichnung %(filename)s bearbeiten''',
+'''Toggle line numbers''':
+'''Zeilennummern ein/ausschalten''',
 '''Invalid include arguments "%s"!''':
 '''Ungültige "Include"-Argumente: "%s"!''',
 '''Nothing found for "%s"!''':

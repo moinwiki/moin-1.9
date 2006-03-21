@@ -2,6 +2,33 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-21 09:36:53 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-490
+
+    Summary:
+      i18ned the linenumber toggle string
+    Revision:
+      moin--main--1.5--patch-490
+
+    i18ned the linenumber toggle string
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_html.py
+     MoinMoin/i18n/MoinMoin.pot MoinMoin/i18n/ca.po
+     MoinMoin/i18n/cs.po MoinMoin/i18n/da.po MoinMoin/i18n/de.po
+     MoinMoin/i18n/de.py MoinMoin/i18n/en.po MoinMoin/i18n/en.py
+     MoinMoin/i18n/es.po MoinMoin/i18n/es.py MoinMoin/i18n/fa.po
+     MoinMoin/i18n/fi.po MoinMoin/i18n/fr.po MoinMoin/i18n/fr.py
+     MoinMoin/i18n/he.po MoinMoin/i18n/hu.po MoinMoin/i18n/it.po
+     MoinMoin/i18n/ja.po MoinMoin/i18n/ko.po MoinMoin/i18n/ko.py
+     MoinMoin/i18n/lv.po MoinMoin/i18n/nb.po MoinMoin/i18n/nl.po
+     MoinMoin/i18n/pl.po MoinMoin/i18n/pt.po MoinMoin/i18n/pt_br.po
+     MoinMoin/i18n/ro.po MoinMoin/i18n/ru.po MoinMoin/i18n/sl.po
+     MoinMoin/i18n/sr.po MoinMoin/i18n/sv.po MoinMoin/i18n/sv.py
+     MoinMoin/i18n/tr.po MoinMoin/i18n/vi.po MoinMoin/i18n/zh.po
+     MoinMoin/i18n/zh_tw.po
+
+
 2006-03-20 21:27:42 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-489
 
     Summary:

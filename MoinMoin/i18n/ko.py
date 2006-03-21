@@ -256,7 +256,7 @@ To leave the editor, press the Cancel button.''':
 '''Remember login information''':
 '''로그인 정보를 기억함''',
 '''Subscribe to trivial changes''':
-'''사소한 변경사항도 감시''',
+'''사소한 변경사항도 구독''',
 '''Disable this account forever''':
 '''이 계정을 더 이상 사용하지 않음''',
 '''Name''':
@@ -399,6 +399,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''사용자 등록''',
 '''Mail me my account data''':
 '''계정 정보를 메일로 발송''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보세요.''',
 '''Action''':
 '''액션''',
 '''No older revisions available!''':
@@ -478,19 +480,19 @@ Contact the owner of the wiki, who can enable email.''':
 '''A quicklink to this page has been added for you.''':
 '''이 문서를 즐겨찾기에 추가했습니다.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
-'''문서의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다.''',
+'''문서의 변경 사항을 구독하기 위해서는 읽기 권한이 필요합니다.''',
 '''This wiki is not enabled for mail processing.''':
 '''이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다.''',
 '''You must log in to use subscribtions.''':
-'''문서의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다.''',
+'''문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''문서의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세요.''',
+'''문서의 변경 사항을 구독하기 위해서는 UserPreferences에 이메일 주소를 입력하세요.''',
 '''Your subscribtion to this page has been removed.''':
-'''이 문서를 더 이상 감시하지 않습니다.''',
+'''이 문서를 더 이상 구독하지 않습니다.''',
 '''Can\'t remove regular expression subscription!''':
-'''정규표현식으로 된 감시 목록은 지울 수 없습니다!''',
+'''정규표현식으로 된 구독 목록은 지울 수 없습니다!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
-'''UserPreferences에서 정규표현식으로 된 감시 목록을 수정하세요.''',
+'''UserPreferences에서 정규표현식으로 된 구독 목록을 수정하세요.''',
 '''You have been subscribed to this page.''':
 '''이제 이 문서가 변경되면 메일로 알려드리겠습니다.''',
 '''Charts are not available!''':
@@ -725,12 +727,22 @@ Try a different name.''':
 '''"%s"에 연결된 모든 문서 목록''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
+'''Subscribe users to the page %s''':
+'''문서 %s 를(을) 구독하는 사용자''',
+'''Subscribed for %s:''':
+'''%s 를(을) 구독:''',
+'''Not a user:''':
+'''사용자가 아님:''',
+'''You are not allowed to perform this action.''':
+'''이 작업을 수행할 수 있는 권한이 없습니다.''',
 '''Upload new attachment "%(filename)s"''':
 '''새 첨부 "%(filename)s"를(을) 업로드''',
 '''Create new drawing "%(filename)s"''':
 '''새 그림 "%(filename)s" 그리기''',
 '''Edit drawing %(filename)s''':
 '''그림 "%(filename)s" 수정하기''',
+'''Toggle line numbers''':
+'''줄 번호 보이기/숨기기''',
 '''Invalid include arguments "%s"!''':
 '''"%s"는(은) 잘못된 인자입니다!''',
 '''Nothing found for "%s"!''':
@@ -824,7 +836,7 @@ red=edit''',
 '''Distribution of User-Agent Types''':
 '''Distribution of User-Agent Types''',
 '''Unsubscribe''':
-'''감시 해제''',
+'''구독 해제''',
 '''Home''':
 '''대문''',
 '''[RSS]''':

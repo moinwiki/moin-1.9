@@ -947,6 +947,7 @@ function togglenumber(did, nstart, nstep) {
         Call once with on=1 to start the region, and a second time
         with on=0 to end it.
         """
+        _ = self.request.getText
         res = []
         ci = self.request.makeUniqueID('CA-%s_%03d' % (code_id, self._code_area_num))
         if on:
@@ -969,9 +970,10 @@ function togglenumber(did, nstart, nstep) {
                 toggleLineNumbersLink = r'''
 <script type="text/javascript">
 document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
-                class="codenumbers">Toggle line numbers<\/a>');
+                class="codenumbers">%s<\/a>');
 </script>
-''' % (self._code_area_state[0], self._code_area_state[2], self._code_area_state[3])
+''' % (self._code_area_state[0], self._code_area_state[2], self._code_area_state[3],
+       _("Toggle line numbers"))
                 res.append(toggleLineNumbersLink)
 
             # Open pre - using left to right always!

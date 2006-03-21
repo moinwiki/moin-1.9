@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2006-02-08 11:43+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -438,7 +438,7 @@ msgid "Remember login information"
 msgstr "로그인 정보를 기억함"
 
 msgid "Subscribe to trivial changes"
-msgstr "사소한 변경사항도 감시"
+msgstr "사소한 변경사항도 구독"
 
 msgid "Disable this account forever"
 msgstr "이 계정을 더 이상 사용하지 않음"
@@ -664,7 +664,7 @@ msgstr "계정 정보를 메일로 발송"
 msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
-msgstr ""
+msgstr "계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보세요."
 
 msgid "Action"
 msgstr "액션"
@@ -793,27 +793,27 @@ msgid "A quicklink to this page has been added for you."
 msgstr "이 문서를 즐겨찾기에 추가했습니다."
 
 msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "문서의 변경 사항을 감시하기 위해서는 읽기 권한이 필요합니다."
+msgstr "문서의 변경 사항을 구독하기 위해서는 읽기 권한이 필요합니다."
 
 msgid "This wiki is not enabled for mail processing."
 msgstr "이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다."
 
 msgid "You must log in to use subscribtions."
-msgstr "문서의 변경 사항을 감시하기 위해서는 로그인을 하셔야 합니다."
+msgstr "문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
-"문서의 변경 사항을 감시하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
+"문서의 변경 사항을 구독하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
 "요."
 
 msgid "Your subscribtion to this page has been removed."
-msgstr "이 문서를 더 이상 감시하지 않습니다."
+msgstr "이 문서를 더 이상 구독하지 않습니다."
 
 msgid "Can't remove regular expression subscription!"
-msgstr "정규표현식으로 된 감시 목록은 지울 수 없습니다!"
+msgstr "정규표현식으로 된 구독 목록은 지울 수 없습니다!"
 
 msgid "Edit the subscription regular expressions in your UserPreferences."
-msgstr "UserPreferences에서 정규표현식으로 된 감시 목록을 수정하세요."
+msgstr "UserPreferences에서 정규표현식으로 된 구독 목록을 수정하세요."
 
 msgid "You have been subscribed to this page."
 msgstr "이제 이 문서가 변경되면 메일로 알려드리겠습니다."
@@ -1240,20 +1240,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "사소한 변경사항도 감시"
+msgstr "문서 %s 를(을) 구독하는 사용자"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "구독"
+msgstr "%s 를(을) 구독:"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "사용자가 아님:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "이 문서를 고칠 수 있는 권한이 없습니다."
+msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1266,6 +1265,9 @@ msgstr "새 그림 \"%(filename)s\" 그리기"
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "그림 \"%(filename)s\" 수정하기"
+
+msgid "Toggle line numbers"
+msgstr "줄 번호 보이기/숨기기"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1431,7 +1433,7 @@ msgid "Distribution of User-Agent Types"
 msgstr "Distribution of User-Agent Types"
 
 msgid "Unsubscribe"
-msgstr "감시 해제"
+msgstr "구독 해제"
 
 msgid "Home"
 msgstr "대문"
@@ -1688,9 +1690,8 @@ msgstr "철자 검사"
 #~ msgid "Remember last page visited"
 #~ msgstr "마지막 방문을 기억해둠"
 
-#, fuzzy
 #~ msgid "Parent Page"
-#~ msgstr "대문"
+#~ msgstr "상위 문서"
 
 #~ msgid "Trail"
 #~ msgstr "흔적"

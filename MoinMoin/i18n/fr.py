@@ -399,6 +399,8 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Créer un profil''',
 '''Mail me my account data''':
 '''Envoi par courrier électronique de mes identifiants de connexion''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Pour créer un compte ou récupérer un mot de passe perdu, consultez la page des %(userprefslink)s.''',
 '''Action''':
 '''Action''',
 '''No older revisions available!''':
@@ -728,12 +730,22 @@ Essayez un autre nom.''',
 '''Liste de tout les liens pour « %s »''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossible de créer une page sans nom. Veuillez indiquer un nom de page.''',
+'''Subscribe users to the page %s''':
+'''Abonner les utilisateurs à la page %s''',
+'''Subscribed for %s:''':
+'''Abonné à %s''',
+'''Not a user:''':
+'''N\'est pas un utilisateur :''',
+'''You are not allowed to perform this action.''':
+'''Vous n\'êtes pas autorisé à réaliser cette action.''',
 '''Upload new attachment "%(filename)s"''':
 '''Envoyer la nouvelle pièce jointe « %(filename)s »''',
 '''Create new drawing "%(filename)s"''':
 '''Création nouveau dessin « %(filename)s »''',
 '''Edit drawing %(filename)s''':
 '''Édition du dessin %(filename)s''',
+'''Toggle line numbers''':
+'''Afficher/masquer les numéros de lignes''',
 '''Invalid include arguments "%s"!''':
 '''Les arguments du include ne sont pas valides : « %s » !''',
 '''Nothing found for "%s"!''':

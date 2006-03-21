@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
-"PO-Revision-Date: 2006-02-06 00:20+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"PO-Revision-Date: 2006-03-20 23:03+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -697,6 +697,8 @@ msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
 msgstr ""
+"Pour créer un compte ou récupérer un mot de passe perdu, consultez la page "
+"des %(userprefslink)s."
 
 msgid "Action"
 msgstr "Action"
@@ -1285,20 +1287,19 @@ msgid ""
 msgstr ""
 "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "S'abonner aux modifications mineures"
+msgstr "Abonner les utilisateurs à la page %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "S'abonner"
+msgstr "Abonné à %s"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "N'est pas un utilisateur :"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Vous n'êtes pas autorisé à modifier cette page."
+msgstr "Vous n'êtes pas autorisé à réaliser cette action."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1311,6 +1312,9 @@ msgstr "Création nouveau dessin « %(filename)s »"
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "Édition du dessin %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "Afficher/masquer les numéros de lignes"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1697,6 +1701,3 @@ msgstr "RenommerLaPage"
 
 msgid "SpellCheck"
 msgstr "Orthographe"
-
-#~ msgid "Download XML export of this wiki"
-#~ msgstr "Télécharger un export XML de ce wiki"
