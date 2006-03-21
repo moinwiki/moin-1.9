@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-21 20:56:04 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-493
+
+    Summary:
+      fixed (wrong) cyclic usage exception
+    Revision:
+      moin--main--1.5--patch-493
+
+    fixed (wrong) cyclic usage exception
+    
+
+    modified files:
+     ChangeLog MoinMoin/i18n/__init__.py docs/CHANGES
+
+
 2006-03-21 17:40:32 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-492
 
     Summary:

@@ -105,6 +105,7 @@ Version 1.5.current:
       the strange effects happening when using "Save as" on attachments.
     * Not a moin bug, but rather a workaround for non-standard non-ASCII DNS
       hostnames: we just use the IP instead of crashing now.
+    * Spurious cyclic error in i18n fixed.
 
   Other:
     * Added css classes for the rst admonitions. Thanks to TiagoMacambira!

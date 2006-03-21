@@ -25,6 +25,7 @@
     @copyright: 2005 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
+debug = 0
 
 import os
 
@@ -50,9 +51,6 @@ _text_cache = {}
 
 # also cache the unformatted strings...
 _unformatted_text_cache = {}
-
-# remember what has been marked up correctly already
-_done_markups = {}
 
 def filename(lang):
     """
@@ -123,13 +121,17 @@ def loadLanguage(request, lang):
 
     """
     from MoinMoin import caching
+    # farm notice: for persistent servers, only the first wiki requesting some language
+    # gets its cache updated - a bit strange and redundant, but no problem.
     cache = caching.CacheEntry(request, arena='i18n', key=lang)
     langfilename = os.path.join(os.path.dirname(__file__), filename(lang) + '.py')
     needsupdate = cache.needsUpdate(langfilename)
+    if debug: request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
     if not needsupdate:
         try:
             (uc_texts, uc_unformatted) = pickle.loads(cache.content())
-        except (IOError,ValueError,pickle.UnpicklingError): # bad pickle data, no pickle
+        except (IOError, ValueError, pickle.UnpicklingError): # bad pickle data, no pickle
+            if debug: request.log("i18n: pickle %s load failed" % lang)
             needsupdate = 1
 
     if needsupdate:    
@@ -139,37 +141,35 @@ def loadLanguage(request, lang):
             # Language module without text dict will raise AttributeError
             texts = pysupport.importName(lang_module, "text")
         except ImportError:
-            return (None, None)
+            if debug: request.log("i18n: import of module %s failed." % lang_module)
+            return None, None
         meta = pysupport.importName(lang_module, "meta") 
         encoding = meta['encoding']
 
         # convert to unicode
-        uc_texts = {}
+        if debug: request.log("i18n: processing unformatted texts of lang %s" % lang)
+        uc_unformatted = {}
         for idx in texts:
             uidx = idx.decode(encoding)
             utxt = texts[idx].decode(encoding)
-            uc_texts[uidx] = utxt
-        uc_unformatted = uc_texts.copy()
+            uc_unformatted[uidx] = utxt
 
-        # is this already on wiki markup?
         if meta.get('wikimarkup', False):
+            if debug: request.log("i18n: processing formatted texts of lang %s" % lang)
             # use the wiki parser now to replace some wiki markup with html
-            text = ""
-            global _done_markups
-            if not _done_markups.has_key(lang):
-                _done_markups[lang] = 1
-                for key in uc_texts:
-                    text = uc_texts[key]
+            uc_texts = {}
+            for key, text in uc_unformatted.items():
+                try:
                     uc_texts[key] = formatMarkup(request, text)
-                _done_markups[lang] = 2
-            else:
-                if _done_markups[lang] == 1:
-                    raise Exception("Cyclic usage detected; you cannot have translated texts include translated texts again! "
-                                    "This error might also occur because of things that are interpreted wiki-like inside translated strings. "
-                                    "This time the error occurred while formatting %s." % text)
+                except: # infinite recursion or crash
+                    request.log("i18n: crashes in language %s on string: %s" % (lang, text))
+                    uc_texts[key] = "FIXME: %s" % text
+        else:
+            uc_texts = uc_unformatted
+        if debug: request.log("i18n: dumping lang %s" % lang)
         cache.update(pickle.dumps((uc_texts, uc_unformatted), PICKLE_PROTOCOL))
 
-    return (uc_texts, uc_unformatted)
+    return uc_texts, uc_unformatted
 
 
 def requestLanguage(request):
