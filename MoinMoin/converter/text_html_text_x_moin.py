@@ -5,7 +5,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
+import re, os
 import xml.dom.minidom
 from xml.dom import Node
 
@@ -1172,17 +1172,23 @@ class convert_tree(visitor):
             raise ConvertError("Strange image src: '%s'" % src)
 
 
-def parse(text):
+def parse(request, text):
     text = u'<?xml version="1.0"?>%s%s' % (dtd, text)
     text = text.encode(config.charset)
     try:
         return xml.dom.minidom.parseString(text)
     except xml.parsers.expat.ExpatError, msg:
-        raise ConvertError('ExpatError: %s' % msg)
+        # this sometimes crashes when it should not, so save the stuff to analyze it:
+        logname = os.path.join(request.cfg.data_dir, "expaterror.log")
+        f = file(logname, "w")
+        f.write(text)
+        f.write("\n" + "-"*80 + "\n" + msg)
+        f.close()
+        raise ConvertError('ExpatError: %s (see dump in %s)' % (msg, logname))
 
 def convert(request, pagename, text):
     text = u"<page>%s</page>" % text
-    tree = parse(text)
+    tree = parse(request, text)
     strip_whitespace().do(tree)
     return convert_tree(request, pagename).do(tree)
 
