@@ -150,7 +150,8 @@ class EditLog(LogFile):
                 
             try:
                 hostname = socket.gethostbyaddr(host)[0]
-            except socket.error:
+                hostname = unicode(hostname, config.charset)
+            except (socket.error, UnicodeError), err:
                 hostname = host
 
             remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ',}

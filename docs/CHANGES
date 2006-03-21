@@ -103,6 +103,8 @@ Version 1.5.current:
     * Speedup group/dicts scanning for persistent servers.
     * Implemented HEAD requests for standalone server, this should fix some of
       the strange effects happening when using "Save as" on attachments.
+    * Not a moin bug, but rather a workaround for non-standard non-ASCII DNS
+      hostnames: we just use the IP instead of crashing now.
 
   Other:
     * Added css classes for the rst admonitions. Thanks to TiagoMacambira!
