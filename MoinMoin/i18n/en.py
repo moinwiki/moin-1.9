@@ -736,6 +736,8 @@ Try a different name.''',
 '''Create new drawing "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Edit drawing %(filename)s''',
+'''Toggle line numbers''':
+'''Toggle line numbers''',
 '''Invalid include arguments "%s"!''':
 '''Invalid include arguments "%s"!''',
 '''Nothing found for "%s"!''':

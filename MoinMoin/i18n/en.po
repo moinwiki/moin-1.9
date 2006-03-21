@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1147,6 +1147,9 @@ msgstr ""
 
 #, python-format
 msgid "Edit drawing %(filename)s"
+msgstr ""
+
+msgid "Toggle line numbers"
 msgstr ""
 
 #, python-format

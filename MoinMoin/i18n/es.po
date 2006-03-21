@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2006-01-02 17:48-0300\n"
 "Last-Translator: Eduardo Mercovich <eduardo.mercovich@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -691,6 +691,8 @@ msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
 msgstr ""
+"Para crear una cuenta o recuperar una contraseña olvidada, vea la página %"
+"(userprefslink)s"
 
 msgid "Action"
 msgstr "Acción"
@@ -1305,6 +1307,9 @@ msgstr "Crear nuevo dibujo \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "Editar dibujo %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "[des]activar nros. de línea"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"

@@ -402,6 +402,8 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Skapa profil''',
 '''Mail me my account data''':
 '''Eposta mig information om mitt konto''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''För att skapa ett konto eller återfå ett förlorat lösenord, använd sidan %(userprefslink)s.''',
 '''Action''':
 '''Anrop''',
 '''No older revisions available!''':
@@ -731,12 +733,22 @@ Pröva ett annat namn.''',
 '''Full länklista för "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
+'''Subscribe users to the page %s''':
+'''Teckna en prenumeration på sidan %s åt användarna''',
+'''Subscribed for %s:''':
+'''Prenumererar på %s:''',
+'''Not a user:''':
+'''Inte en användare:''',
+'''You are not allowed to perform this action.''':
+'''Du har inte tillåtelse att utföra den här åtgärden.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ladda upp ny bilaga "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Skapa ny teckning "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Skapa ny teckning "%(filename)s"''',
+'''Toggle line numbers''':
+'''Slå av/på radnumrering''',
 '''Invalid include arguments "%s"!''':
 '''Felaktigt inkluderingsargument "%s"!''',
 '''Nothing found for "%s"!''':

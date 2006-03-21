@@ -398,6 +398,8 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Crear perfil de Usuario''',
 '''Mail me my account data''':
 '''Envíame los datos de mi cuenta ''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Para crear una cuenta o recuperar una contraseña olvidada, vea la página %(userprefslink)s''',
 '''Action''':
 '''Acción''',
 '''No older revisions available!''':
@@ -731,6 +733,8 @@ Intenta con un nombre distinto.''',
 '''Crear nuevo dibujo "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Editar dibujo %(filename)s''',
+'''Toggle line numbers''':
+'''[des]activar nros. de línea''',
 '''Invalid include arguments "%s"!''':
 '''Argumentos include no válidos "%s"!''',
 '''Nothing found for "%s"!''':

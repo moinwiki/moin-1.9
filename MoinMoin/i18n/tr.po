@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -1312,6 +1312,9 @@ msgstr "Yeni çizim oluştur: \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "%(filename)s çizimini düzenle"
+
+msgid "Toggle line numbers"
+msgstr ""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"

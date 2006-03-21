@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
-"PO-Revision-Date: 2006-02-08 15:49+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"PO-Revision-Date: 2006-03-21 00:03+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -674,6 +674,8 @@ msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
 msgstr ""
+"För att skapa ett konto eller återfå ett förlorat lösenord, använd sidan %"
+"(userprefslink)s."
 
 msgid "Action"
 msgstr "Anrop"
@@ -1253,20 +1255,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Prenumerera på triviala ändringar"
+msgstr "Teckna en prenumeration på sidan %s åt användarna"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "Prenumerera"
+msgstr "Prenumererar på %s:"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "Inte en användare:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Du har inte tillåtelse att redigera den här sidan."
+msgstr "Du har inte tillåtelse att utföra den här åtgärden."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1279,6 +1280,9 @@ msgstr "Skapa ny teckning \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "Skapa ny teckning \"%(filename)s\""
+
+msgid "Toggle line numbers"
+msgstr "Slå av/på radnumrering"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1655,6 +1659,3 @@ msgstr "BytNamn"
 
 msgid "SpellCheck"
 msgstr "StavningsKontroll"
-
-#~ msgid "Download XML export of this wiki"
-#~ msgstr "Ladda ner den här wikin som XML"

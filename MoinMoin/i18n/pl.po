@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -1278,6 +1278,9 @@ msgstr "Utwórz nowy rysunek \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "Edytuj rysunek %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr ""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"

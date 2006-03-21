@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1258,6 +1258,9 @@ msgstr "Vytvořit nový obrázek \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "Editace obrázku %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr ""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 21:16+0100\n"
+"POT-Creation-Date: 2006-03-20 22:52+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -1233,6 +1233,9 @@ msgstr "צור איור חדש \"%(filename)s\""
 #, python-format
 msgid "Edit drawing %(filename)s"
 msgstr "ערוך איור \"%(filename)s\""
+
+msgid "Toggle line numbers"
+msgstr ""
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
