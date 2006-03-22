@@ -1078,7 +1078,7 @@ class RequestBase(object):
                 msg = _("""Invalid user name {{{'%s'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % self.user.name
-                request.user = self.get_user_default_unknown(name=self.user.name, logout=True)
+                self.user = self.get_user_default_unknown(name=self.user.name, logout=True)
                 page = wikiutil.getSysPage(self, 'UserPreferences')
                 page.send_page(self, msg=msg)
 
