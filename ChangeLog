@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-22 12:55:29 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-498
+
+    Summary:
+      update CHANGES
+    Revision:
+      moin--main--1.5--patch-498
+
+    update CHANGES
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py docs/CHANGES
+
+
 2006-03-22 12:41:52 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-497
 
     Summary:
