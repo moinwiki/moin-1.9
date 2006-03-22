@@ -24,16 +24,17 @@
 base = "." # directory containing the data directory
 fnames = ['text_html', 'pagelinks', ] # cache filenames to delete
 
-import sys, os
-
-pagesdir = os.path.join(base, 'data', 'pages')
-for f in os.listdir(pagesdir):
-    for fname in fnames:
-        cachefile = os.path.join(pagesdir, f, 'cache', fname)
-        try:
-            os.remove(cachefile)
-        except:
-            pass
+def run():
+    import os
+    pagesdir = os.path.join(base, 'data', 'pages')
+    for f in os.listdir(pagesdir):
+        for fname in fnames:
+            cachefile = os.path.join(pagesdir, f, 'cache', fname)
+            try:
+                os.remove(cachefile)
+            except:
+                pass
     
-# EOF
+if __name__ == '__main__':
+    run()
 

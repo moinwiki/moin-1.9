@@ -18,17 +18,21 @@
     @copyright: 2005 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
     @license: GNU GPL, see COPYING for details.
 """
+def run():
+    import sys
+    from hotshot import stats
 
-import sys
-from hotshot import stats
+    if len(sys.argv) != 2:
+        print __doc__
+        sys.exit()
+        
+    # Load and print stats 
+    s = stats.load(sys.argv[1])
+    s.strip_dirs()
+    s.sort_stats('cumulative', 'time', 'calls')
+    s.print_stats(40)
+    s.print_callers(40)
 
-if len(sys.argv) != 2:
-    print __doc__
-    sys.exit()
-    
-# Load and print stats 
-s = stats.load(sys.argv[1])
-s.strip_dirs()
-s.sort_stats('cumulative', 'time', 'calls')
-s.print_stats(40)
-s.print_callers(40)
+if __name__ == "__main__":
+    run()
+

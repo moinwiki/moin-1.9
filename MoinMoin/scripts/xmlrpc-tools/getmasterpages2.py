@@ -31,14 +31,18 @@ def transferpage(srcurlformat, dstwiki, pagename):
     rc = dstwiki.putPage(pagename, pagedata)
     print "Transferred %s. Len = %d, rc = %s" % (pagename.encode('ascii','replace'), len(pagedata), str(rc))
 
-allsystempagesgroup = 'AllSystemPagesGroup'
-transferpage(srcurlformat, dstwiki, allsystempagesgroup)
-allgrouppages = dstwiki.listLinks(allsystempagesgroup)
+def run():
+    allsystempagesgroup = 'AllSystemPagesGroup'
+    transferpage(srcurlformat, dstwiki, allsystempagesgroup)
+    allgrouppages = dstwiki.listLinks(allsystempagesgroup)
 
-for langgrouppage in allgrouppages:
-    pagename = langgrouppage['name']
-    transferpage(srcurlformat, dstwiki, pagename)
-    pages = dstwiki.listLinks(pagename)
-    for page in pages:
-        transferpage(srcurlformat, dstwiki, page['name'])
+    for langgrouppage in allgrouppages:
+        pagename = langgrouppage['name']
+        transferpage(srcurlformat, dstwiki, pagename)
+        pages = dstwiki.listLinks(pagename)
+        for page in pages:
+            transferpage(srcurlformat, dstwiki, page['name'])
+
+if __name__ == "__main__":
+    run()
 

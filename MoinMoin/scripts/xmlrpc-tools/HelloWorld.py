@@ -7,8 +7,11 @@ It calls the HelloWorld.py xmlrpc plugin.
 GPL software, 2003-08-10 Thomas Waldmann
 """
 
-import xmlrpclib
-srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2")
+def run():
+    import xmlrpclib
+    srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de:8000/?action=xmlrpc2")
+    print srcwiki.HelloWorld("Hello Wiki User!\n")
 
-print srcwiki.HelloWorld("Hello Wiki User!\n")
+if __name__ == "__main__":
+    run()
 

@@ -8,16 +8,19 @@ the srcwiki with auth = [http, moin_cookie] in its wikiconfig.
 GPL software, 2005 Thomas Waldmann
 """
 
-user = "ThomasWaldmann"
-password = "wrong"
+def run():
+    user = "ThomasWaldmann"
+    password = "wrong"
 
-import sys, xmlrpclib
-sys.path.insert(0, '../../..')
-from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
+    import sys, xmlrpclib
+    sys.path.insert(0, '../../..')
+    from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 
-srctrans = BasicAuthTransport(user, password)
-srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2", transport=srctrans)
+    srctrans = BasicAuthTransport(user, password)
+    srcwiki = xmlrpclib.ServerProxy("http://moinmaster.wikiwikiweb.de/?action=xmlrpc2", transport=srctrans)
 
-print srcwiki.WhoAmI()
+    print srcwiki.WhoAmI()
 
+if __name__ == "__main__":
+    run()
 

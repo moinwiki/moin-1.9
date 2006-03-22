@@ -22,13 +22,17 @@ def transferpage(srcwiki, dstwiki, pagename):
     dstwiki.putPage(pagename, pagedata)
     print "Transferred %s." % pagename.encode('ascii', 'replace')
 
-allsystempagesgroup = 'AllSystemPagesGroup'
-transferpage(srcwiki, dstwiki, allsystempagesgroup)
-allgrouppages = srcwiki.listLinks(allsystempagesgroup)
-for langgrouppage in allgrouppages:
-    pagename = langgrouppage['name']
-    transferpage(srcwiki, dstwiki, pagename)
-    pages = srcwiki.listLinks(pagename)
-    for page in pages:
-        transferpage(srcwiki, dstwiki, page['name'])
+def run():
+    allsystempagesgroup = 'AllSystemPagesGroup'
+    transferpage(srcwiki, dstwiki, allsystempagesgroup)
+    allgrouppages = srcwiki.listLinks(allsystempagesgroup)
+    for langgrouppage in allgrouppages:
+        pagename = langgrouppage['name']
+        transferpage(srcwiki, dstwiki, pagename)
+        pages = srcwiki.listLinks(pagename)
+        for page in pages:
+            transferpage(srcwiki, dstwiki, page['name'])
+
+if __name__ == "__main__":
+    run()
 

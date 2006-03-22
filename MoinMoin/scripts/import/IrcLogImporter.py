@@ -47,23 +47,28 @@ def decodeLinewise(text):
         resultList.append(decoded_line)
     return '\n'.join(resultList)
 
-request = RequestCLI(url=url) #pagename necessary here?
+def run():
+    request = RequestCLI(url=url) #pagename necessary here?
 
-for root, dirs, files in os.walk(local_dir):
-    files.sort()
-    for filename in files[:-1]: # do not push the last file as it is constantly written to
-        pagename = base_page + filename_function(filename)
-        print "Pushing %r as %r" % (filename, pagename)
-        p = PageEditor(request, pagename,
-                       do_editor_backup=0, uid_override=author)
-        if p.exists():
-            continue
-                    
-        fileObj = open(os.path.join(root, filename), 'rb')
-        try:
-            p.saveText("#format plain\n" + decodeLinewise(fileObj.read()), 0)
-        except PageEditor.SaveError, e:
-            print "Got %r" % (e, )
-        fileObj.close()
+    for root, dirs, files in os.walk(local_dir):
+        files.sort()
+        for filename in files[:-1]: # do not push the last file as it is constantly written to
+            pagename = base_page + filename_function(filename)
+            print "Pushing %r as %r" % (filename, pagename)
+            p = PageEditor(request, pagename,
+                           do_editor_backup=0, uid_override=author)
+            if p.exists():
+                continue
+                        
+            fileObj = open(os.path.join(root, filename), 'rb')
+            try:
+                p.saveText("#format plain\n" + decodeLinewise(fileObj.read()), 0)
+            except PageEditor.SaveError, e:
+                print "Got %r" % (e, )
+            fileObj.close()
 
-print "Finished."
+    print "Finished."
+
+if __name__ == "__main__":
+    run()
+
