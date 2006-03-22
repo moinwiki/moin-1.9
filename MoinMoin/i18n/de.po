@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1545,6 +1545,24 @@ msgstr "Ähnliche Seiten"
 
 msgid "Local Site Map"
 msgstr "ÜbersichtsKarte"
+
+msgid "User Preferences"
+msgstr "Benutzer-Einstellungen"
+
+msgid "My Pages"
+msgstr "Meine Seiten"
+
+msgid "Subscribe User"
+msgstr "Abo für Benutzer"
+
+msgid "Remove Spam"
+msgstr "Spam entfernen"
+
+msgid "Package Pages"
+msgstr "Seiten paketieren"
+
+msgid "Render as Docbook"
+msgstr "Docbook ausgeben"
 
 msgid "Do"
 msgstr "Los!"

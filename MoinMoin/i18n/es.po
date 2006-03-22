@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-01-02 17:48-0300\n"
 "Last-Translator: Eduardo Mercovich <eduardo.mercovich@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -1292,7 +1292,6 @@ msgstr "Suscrit@ en %s:"
 msgid "Not a user:"
 msgstr "No es un usuario:"
 
-
 msgid "You are not allowed to perform this action."
 msgstr "No tienes permisos para hacer esta acción."
 
@@ -1547,6 +1546,29 @@ msgstr "Páginas similares"
 
 msgid "Local Site Map"
 msgstr "Mapa del sitio"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PreferenciasDelUsuario"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Página"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Suscribirse"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Eliminar enlace"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Páginas similares"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Hacer"

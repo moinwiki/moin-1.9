@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1533,6 +1533,29 @@ msgstr "Pàgines semblants"
 
 msgid "Local Site Map"
 msgstr "Mapa del lloc"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PreferènciesUsuari"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Pàgina"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Subscriu-me"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Suprimeix un enllaç"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Pàgines semblants"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Fes"

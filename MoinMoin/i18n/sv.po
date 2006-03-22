@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-03-21 00:03+0100\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -1517,6 +1517,29 @@ msgstr "Liknande sidor"
 
 msgid "Local Site Map"
 msgstr "Lokal översiktskarta"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "AnvändarInställningar"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Sida"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Prenumerera"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Ta bort länk"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Liknande sidor"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Gör"

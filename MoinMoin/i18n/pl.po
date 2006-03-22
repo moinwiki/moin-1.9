@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -1518,6 +1518,29 @@ msgstr "Podobne strony"
 
 msgid "Local Site Map"
 msgstr "Lokalna mapa witryny"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PreferencjeCzytelnika"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Strona"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Zasubskrybuj"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Usuń skrót"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Podobne strony"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Wykonaj"

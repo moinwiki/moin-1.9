@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1529,6 +1529,29 @@ msgstr "Páginas Semelhantes"
 
 msgid "Local Site Map"
 msgstr "Mapa do Site Local"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PreferênciasDoUsuário"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Página"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Subscrever"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Remover Link"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Páginas Semelhantes"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Fazer"

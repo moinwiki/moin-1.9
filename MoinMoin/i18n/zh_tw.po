@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-06 17:00+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -1467,6 +1467,29 @@ msgstr "相似頁面"
 
 msgid "Local Site Map"
 msgstr "連結地圖"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "使用者設定"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "頁面"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "訂閱"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "取消捷徑"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "相似頁面"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "執行"
