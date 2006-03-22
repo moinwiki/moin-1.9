@@ -836,7 +836,7 @@ red=edit''',
 '''Distribution of User-Agent Types''':
 '''Distribution of User-Agent Types''',
 '''Unsubscribe''':
-'''구독 해제''',
+'''구독 취소''',
 '''Home''':
 '''대문''',
 '''[RSS]''':
