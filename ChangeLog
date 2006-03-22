@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-23 00:19:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-499
+
+    Summary:
+      fix wrong object reference in request.py
+    Revision:
+      moin--main--1.5--patch-499
+
+    fix wrong object reference in request.py
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py
+
+
 2006-03-22 12:55:29 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-498
 
     Summary:
