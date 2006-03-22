@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -1499,6 +1499,29 @@ msgstr "LignendeSider"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "LokalOversikt"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "BrukerProfil"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Side"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Abonner"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Hurtiglenker"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "LignendeSider"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Utfør"

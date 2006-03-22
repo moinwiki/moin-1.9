@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-21 19:19+0200\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -675,7 +675,9 @@ msgstr "Atsūtīt mana sistēmas konta datus"
 msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
-msgstr "Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %(userprefslink)s"
+msgstr ""
+"Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %"
+"(userprefslink)s"
 
 msgid "Action"
 msgstr "Darbība"
@@ -1510,6 +1512,29 @@ msgstr "Līdzīgas lapas"
 
 msgid "Local Site Map"
 msgstr "Lokālā vietnes karte"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "JūsuIestatījumi"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Lapa"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Parakstīties"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Dzēst saiti"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Līdzīgas lapas"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Veikt"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1373,6 +1373,24 @@ msgid "Like Pages"
 msgstr ""
 
 msgid "Local Site Map"
+msgstr ""
+
+msgid "User Preferences"
+msgstr ""
+
+msgid "My Pages"
+msgstr ""
+
+msgid "Subscribe User"
+msgstr ""
+
+msgid "Remove Spam"
+msgstr ""
+
+msgid "Package Pages"
+msgstr ""
+
+msgid "Render as Docbook"
 msgstr ""
 
 msgid "Do"

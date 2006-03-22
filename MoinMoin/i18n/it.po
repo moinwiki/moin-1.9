@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-15 22:09+0100\n"
 "Last-Translator: Paolo Patruno <p.patruno@iperbole.bologna.it>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -1520,6 +1520,29 @@ msgstr "PagineSimili"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "MappaLocaleSito"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PreferenzeUtente"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Pagina"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Sottoscrivi"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Collegamenti rapidi"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "PagineSimili"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Vai"

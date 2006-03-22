@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-06 15:44+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1513,6 +1513,29 @@ msgstr "似たページ"
 
 msgid "Local Site Map"
 msgstr "ローカルサイトマップ"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "ユーザプレファレンス"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "ページ"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "購読"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "リンクを削除"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "似たページ"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "実行"

@@ -882,6 +882,7 @@ function actionsMenuInit(title) {
         menu = [
             'raw',
             'print',
+            'RenderAsDocbook',
             'refresh',
             '__separator__',
             'SpellCheck',
@@ -890,6 +891,13 @@ function actionsMenuInit(title) {
             '__separator__',
             'RenamePage',
             'DeletePage',
+            '__separator__',
+            'UserPreferences',
+            'MyPages',
+            'SubscribeUser',
+            '__separator__',
+            'Despam',
+            'PackagePages',
             ]
 
         titles = {
@@ -905,6 +913,12 @@ function actionsMenuInit(title) {
             'DeletePage': _('Delete Page', formatted=False),
             'LikePages': _('Like Pages', formatted=False),
             'LocalSiteMap': _('Local Site Map', formatted=False),
+            'UserPreferences': _('User Preferences', formatted=False),
+            'MyPages': _('My Pages', formatted=False),
+            'SubscribeUser': _('Subscribe User', formatted=False),
+            'Despam': _('Remove Spam', formatted=False),
+            'PackagePages': _('Package Pages', formatted=False),
+            'RenderAsDocbook': _('Render as Docbook', formatted=False),
             }
 
         options = []

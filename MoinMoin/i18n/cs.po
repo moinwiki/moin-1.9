@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1495,6 +1495,29 @@ msgstr "Podobné Stránky"
 
 msgid "Local Site Map"
 msgstr "Lokální Mapa Stránek"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "NastaveniUzivatele"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Stránka"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Odebírat"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Odstranit Odkaz"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Podobné Stránky"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Proveď!"

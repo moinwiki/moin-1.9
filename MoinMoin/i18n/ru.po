@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -1499,6 +1499,29 @@ msgstr "Похожие Страницы"
 
 msgid "Local Site Map"
 msgstr "Карта Окресностей"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "ВашиНастройки"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Страница"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Подписка"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Убрать из закладок"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Похожие Страницы"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Выполняй!"

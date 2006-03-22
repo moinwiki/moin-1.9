@@ -2,6 +2,31 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-22 12:41:52 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-497
+
+    Summary:
+      make some action menu entries translatable
+    Revision:
+      moin--main--1.5--patch-497
+
+    make some action menu entries translatable
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py MoinMoin/i18n/MoinMoin.pot
+     MoinMoin/i18n/ca.po MoinMoin/i18n/cs.po MoinMoin/i18n/da.po
+     MoinMoin/i18n/de.po MoinMoin/i18n/de.py MoinMoin/i18n/en.po
+     MoinMoin/i18n/en.py MoinMoin/i18n/es.po MoinMoin/i18n/fa.po
+     MoinMoin/i18n/fi.po MoinMoin/i18n/fr.po MoinMoin/i18n/he.po
+     MoinMoin/i18n/hu.po MoinMoin/i18n/it.po MoinMoin/i18n/ja.po
+     MoinMoin/i18n/ko.po MoinMoin/i18n/lv.po MoinMoin/i18n/nb.po
+     MoinMoin/i18n/nl.po MoinMoin/i18n/pl.po MoinMoin/i18n/pt.po
+     MoinMoin/i18n/pt_br.po MoinMoin/i18n/ro.po MoinMoin/i18n/ru.po
+     MoinMoin/i18n/sl.po MoinMoin/i18n/sr.po MoinMoin/i18n/sv.po
+     MoinMoin/i18n/tr.po MoinMoin/i18n/vi.po MoinMoin/i18n/zh.po
+     MoinMoin/i18n/zh_tw.po MoinMoin/theme/__init__.py
+
+
 2006-03-22 11:50:49 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-496
 
     Summary:

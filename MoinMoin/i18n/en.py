@@ -880,6 +880,18 @@ red=edit''',
 '''Like Pages''',
 '''Local Site Map''':
 '''Local Site Map''',
+'''User Preferences''':
+'''User Preferences''',
+'''My Pages''':
+'''My Pages''',
+'''Subscribe User''':
+'''Subscribe User''',
+'''Remove Spam''':
+'''Remove Spam''',
+'''Package Pages''':
+'''Package Pages''',
+'''Render as Docbook''':
+'''Render as Docbook''',
 '''Do''':
 '''Do''',
 '''Edit (Text)''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1472,6 +1472,29 @@ msgstr "相似网页"
 
 msgid "Local Site Map"
 msgstr "本站地图"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "用户设置"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "网页"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "订阅"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "删除链接"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "相似网页"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "执行"

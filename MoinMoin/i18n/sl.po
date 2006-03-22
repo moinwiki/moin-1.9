@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1509,6 +1509,29 @@ msgstr "Podobne strani"
 
 msgid "Local Site Map"
 msgstr "Struktura predstavitve"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "UporabniškeNastavitve"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Stran"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Naroči se"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Odstrani povezavo"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Podobne strani"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Izvedi!"

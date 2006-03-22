@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -1553,6 +1553,29 @@ msgstr "Benzer Sayfalar"
 
 msgid "Local Site Map"
 msgstr "Yerel Site Haritası"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "KullanıcıÖzellikleri"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Sayfa"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "ÜyeOl"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Bağlantı Sil"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Benzer Sayfalar"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Gerçekleştir"

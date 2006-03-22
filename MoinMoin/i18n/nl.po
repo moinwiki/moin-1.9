@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1521,6 +1521,29 @@ msgstr "GelijkendePaginas"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "LokaleWegwijzer"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "GebruikersVoorkeuren"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Pagina"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Abonneren"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Snelkoppelingen"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "GelijkendePaginas"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Uitvoeren"

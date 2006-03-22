@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-03-22 09:10+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -1510,6 +1510,29 @@ msgstr "비슷한 페이지"
 
 msgid "Local Site Map"
 msgstr "사이트맵"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "사용자 설정"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "문서"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "구독"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "즐겨찾기 제거"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "비슷한 페이지"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "확인"

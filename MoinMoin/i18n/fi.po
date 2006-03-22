@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1507,6 +1507,29 @@ msgstr "Samankaltaisia sivuja"
 
 msgid "Local Site Map"
 msgstr "Paikallinen sivukartta"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "KäyttäjäAsetukset"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Sivu"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "Tilaa"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Poista linkki"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Samankaltaisia sivuja"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Tee"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2006-03-20 23:03+0100\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -1558,6 +1558,29 @@ msgstr "Pages similaires"
 
 msgid "Local Site Map"
 msgstr "Carte locale du site"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "PréférencesUtilisateur"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Page"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "S'abonner"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Enlever le lien"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Pages similaires"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "Exécuter"

@@ -886,6 +886,18 @@ rot=Änderungen''',
 '''Ähnliche Seiten''',
 '''Local Site Map''':
 '''ÜbersichtsKarte''',
+'''User Preferences''':
+'''Benutzer-Einstellungen''',
+'''My Pages''':
+'''Meine Seiten''',
+'''Subscribe User''':
+'''Abo für Benutzer''',
+'''Remove Spam''':
+'''Spam entfernen''',
+'''Package Pages''':
+'''Seiten paketieren''',
+'''Render as Docbook''':
+'''Docbook ausgeben''',
 '''Do''':
 '''Los!''',
 '''Edit (Text)''':

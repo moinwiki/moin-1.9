@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-22 13:19+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -1515,6 +1515,29 @@ msgstr "مانند صفحات"
 
 msgid "Local Site Map"
 msgstr "نقشه سایت محلی"
+
+#, fuzzy
+msgid "User Preferences"
+msgstr "مشخصات کاربر"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "صفحه"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "عضویت"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "حذف لینک"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "مانند صفحات"
+
+msgid "Render as Docbook"
+msgstr ""
 
 msgid "Do"
 msgstr "انجام بده"
