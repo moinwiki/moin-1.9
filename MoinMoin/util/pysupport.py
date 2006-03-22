@@ -80,7 +80,7 @@ def makeThreadSafe(function, lock=None):
     @param function: function to make thread safe
     @param lock: threading.Lock instance or None
     @rtype: function
-    @retrun: function decorated with locking
+    @return: function decorated with locking
     """
     if lock is None:
         import threading

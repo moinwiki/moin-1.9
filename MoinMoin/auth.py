@@ -455,10 +455,10 @@ class php_session:
     """
 
     def __init__(self, apps=['egw'], s_path="/tmp", s_prefix="sess_"):
-        """ @param apps A list of the enabled applications. See above for
+        """ @param apps: A list of the enabled applications. See above for
             possible keys.
-            @param s_path The path where the PHP sessions are stored.
-            @param s_prefix The prefix of the session files.
+            @param s_path: The path where the PHP sessions are stored.
+            @param s_prefix: The prefix of the session files.
         """
         
         self.s_path = s_path

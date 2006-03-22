@@ -62,7 +62,7 @@ class TestConfig:
     and when the TestConfig is deleted, they are restored automatically.
     
     Typical Usage
-    ------------
+    -------------
     ::
         from MoinMoin._tests import TestConfig
         class SomeTestCase(unittest.TestCase):
@@ -80,7 +80,7 @@ class TestConfig:
 
         @param request: current request
         @param defaults: list of keys that should use the default value
-        @param **custom: other keys using non default values, or new keys
+        @param custom: other keys using non default values, or new keys
                that request.cfg does not have already
         """
         self.request = request

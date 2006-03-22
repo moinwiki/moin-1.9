@@ -1084,7 +1084,7 @@ class SearchResults:
         text. Matches behind location are ignored and an empty string is
         returned.
 
-        @param text: text containing match
+        @param body: text containing match
         @param match: search match in text
         @param location: current location in text
         @rtype: unicode

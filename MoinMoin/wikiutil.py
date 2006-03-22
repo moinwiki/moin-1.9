@@ -82,7 +82,7 @@ def decodeUserInput(s, charsets=[config.charset]):
     Decodes input from the user.
     
     @param s: the string to unquote
-    @param charset: the charset to assume the string is in
+    @param charsets: list of charsets to assume the string is in
     @rtype: unicode
     @return: the unquoted string as unicode
     """
@@ -202,9 +202,9 @@ def quoteWikinameURL(pagename, charset=config.charset):
     Use urllib.quote to quote any character that is not always safe. 
 
     @param pagename: the original pagename (unicode)
-    @charset: url text encoding, 'utf-8' recommended. Other charsert
-              might not be able to encode the page name and raise
-              UnicodeError. (default config.charset ('utf-8')).
+    @param charset: url text encoding, 'utf-8' recommended. Other charsert
+                    might not be able to encode the page name and raise
+                    UnicodeError. (default config.charset ('utf-8')).
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
@@ -331,7 +331,7 @@ def unquoteWikiname(filename, charsets=[config.charset]):
     Todo: search clients of unquoteWikiname and check for exceptions. 
 
     @param filename: string using charset and possibly quoted parts
-    @param charset: charset used by string
+    @param charsets: list of charsets used by string
     @rtype: Unicode String
     @return: WikiName
     """
@@ -995,7 +995,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     @param text: text / inner part of the <a>...</a> link - does NOT get
                  escaped, so you can give HTML here and it will be used verbatim
     @param formatter: the formatter object to use
-    @keyword on: opening/closing tag only
+    @param on: opening/closing tag only
     @keyword attrs: additional attrs (HTMLified string)
     @rtype: string
     @return: formatted link tag

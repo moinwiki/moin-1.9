@@ -39,7 +39,7 @@ def parse_start_step(request, args):
     calling parser to extract further arguments.
 
     @param request: a request instance
-    @param arg: the argument string
+    @param args: the argument string
 
     @returns: numbers, start, step, attrdict
     """

@@ -79,7 +79,7 @@ class Formatter(FormatterBase):
         """ low level function: opens tag right now
 
         @param tag: tag name, string
-        @param attr: attributes keywords, ascii or unicode
+        @param attrs: attributes keywords, ascii or unicode
         """
         self.tag_stack.append((tag, attrs))
         node = self.document.createElement(tag)

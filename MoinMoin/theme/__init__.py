@@ -134,7 +134,6 @@ class ThemeBase:
         admin inserted in the config file. Everything it enclosed inside
         a div with id="logo".
         
-        @param d: parameter dictionary
         @rtype: unicode
         @return: logo html
         """
@@ -319,7 +318,7 @@ class ThemeBase:
         If you don't like to do this in your theme, or want to use
         different algorithm, override this method.
         
-        @param text: page name, unicode
+        @param name: page name, unicode
         @rtype: unicode
         @return: shortened version.
         """

@@ -113,7 +113,8 @@ def findMatches(pagename, request, s_re=None, e_re=None,):
 
 
 def wikiMatches(pagename, pages, start_re=None, end_re=None):
-    """ Get pages that starts or ends with same word as this page
+    """
+    Get pages that starts or ends with same word as this page
 
     Matches are ranked like this:
         4 - page is subpage of pagename

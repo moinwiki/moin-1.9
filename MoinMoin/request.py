@@ -563,10 +563,11 @@ class RequestBase(object):
 
         @param theme_name: the name of the theme
         @type theme_name: str
-        @returns: 0 on success, 1 if user theme could not be loaded,
-                  2 if a hard fallback to modern theme was required.
         @rtype: int
         @return: success code
+                 0 on success
+                 1 if user theme could not be loaded,
+                 2 if a hard fallback to modern theme was required.
         """
         fallback = 0
         if theme_name == "<default>":
@@ -925,9 +926,9 @@ class RequestBase(object):
         Create the args from a standard cgi.FieldStorage or from given
         form. Each key contain a list of values.
 
-        @keyword form: a cgi.FieldStorage
+        @param form: a cgi.FieldStorage
         @rtype: dict
-        @return dict with form keys, each contains a list of values
+        @return: dict with form keys, each contains a list of values
         """
         if form is None:
             form = cgi.FieldStorage()
@@ -1979,7 +1980,7 @@ class RequestModPy(RequestBase):
         """ Sends out headers and possibly sets default content-type
             and status.
 
-            @keyword more_headers: list of strings, defaults to []
+            @param more_headers: list of strings, defaults to []
         """
         for header in more_headers + getattr(self, 'user_headers', []):
             self.setHttpHeader(header)
