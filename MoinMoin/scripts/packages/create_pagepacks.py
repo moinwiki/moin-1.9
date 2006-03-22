@@ -173,26 +173,30 @@ def getMasterPages():
             #print "Scheduled %s." % repr(t)
         sleep(1)
 
-request = RequestCLI(url='localhost/')
-request.form = request.args = request.setup_args()
+def run():
+    request = RequestCLI(url='localhost/')
+    request.form = request.args = request.setup_args()
 
-gd = wikidicts.GroupDict(request)
-gd.reset()
+    gd = wikidicts.GroupDict(request)
+    gd.reset()
 
-#getMasterPages()
-print "Building page sets ..."
-pageSets = buildPageSets()
+    #getMasterPages()
+    print "Building page sets ..."
+    pageSets = buildPageSets()
 
-print "Creating packages ..."
-generate_filename = lambda name: os.path.join('testwiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
+    print "Creating packages ..."
+    generate_filename = lambda name: os.path.join('testwiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
 
-packageCompoundInstaller(pageSets, generate_filename(ALL))
+    packageCompoundInstaller(pageSets, generate_filename(ALL))
 
-[packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") 
-    for name, pages in pageSets.items() if not name in (u'English', ALL, NODIST)]
+    [packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") 
+        for name, pages in pageSets.items() if not name in (u'English', ALL, NODIST)]
 
-[removePages(list(pages)) 
-    for name, pages in pageSets.items() if not name in (u'English', ALL)]
+    [removePages(list(pages)) 
+        for name, pages in pageSets.items() if not name in (u'English', ALL)]
 
-print "Finished."
+    print "Finished."
+
+if __name__ == "__main__":
+    run()
 

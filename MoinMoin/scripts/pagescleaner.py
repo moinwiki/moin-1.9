@@ -48,15 +48,17 @@ def qualify(p):
 
     return 'ok'
 
-for p in os.listdir(pagebasedir):
-    pagedir = os.path.join(pagebasedir, p)
-    status = qualify(pagedir)
-    if status in ['trash', 'empty', ]:
-        print "mv '%s' trash # %s" % (pagedir,status)
-    elif status in ['deleted', ]:
-        print "mv '%s' deleted # %s" % (pagedir,status)
-    else:
-        print "# %s: '%s'" % (status, pagedir)
+def run():
+    for p in os.listdir(pagebasedir):
+        pagedir = os.path.join(pagebasedir, p)
+        status = qualify(pagedir)
+        if status in ['trash', 'empty', ]:
+            print "mv '%s' trash # %s" % (pagedir,status)
+        elif status in ['deleted', ]:
+            print "mv '%s' deleted # %s" % (pagedir,status)
+        else:
+            print "# %s: '%s'" % (status, pagedir)
 
-# EOF
+if __name__ == "__main__":
+    run()
 

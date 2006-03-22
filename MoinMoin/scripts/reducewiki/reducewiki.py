@@ -77,12 +77,15 @@ def copypage(request, rootdir, pagename):
             dest_file = os.path.join(dest_dir, filename)
             shutil.copyfile(source_file, dest_file)
 
+def run():
+    request = RequestCLI(url=url)
+    request.form = request.args = request.setup_args()
 
-request = RequestCLI(url=url)
-request.form = request.args = request.setup_args()
+    pagelist = list(request.rootpage.getPageList(user=''))
+    for pagename in pagelist:
+        copypage(request, destdir, pagename)
+        
 
-pagelist = list(request.rootpage.getPageList(user=''))
-for pagename in pagelist:
-    copypage(request, destdir, pagename)
-    
+if __name__ == "__main__":
+    run()
 

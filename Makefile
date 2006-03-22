@@ -32,7 +32,8 @@ check-tabs:
 	@python -c 'import tabnanny ; tabnanny.check("MoinMoin")'
 
 # Create documentation
-epydoc:
+epydoc: patchlevel
+	@MoinMoin/version.py update
 	@epydoc -o ../html -n MoinMoin -u http://moinmoin.wikiwikiweb.de MoinMoin
 
 # Create new underlay directory from MoinMaster

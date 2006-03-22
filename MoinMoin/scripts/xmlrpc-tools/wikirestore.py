@@ -19,28 +19,31 @@ So this is definitely NOT a complete restore.
 
 GPL software, 2003-10-24 Thomas Waldmann
 """
+def run():
+    import xmlrpclib
+    from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
 
-import xmlrpclib
-from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
+    user = "ThomasWaldmann"
+    password = "xxxxxxxxxxxx"
+    dsttrans = BasicAuthTransport(user,password)
+    dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
+    #dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
 
-user = "ThomasWaldmann"
-password = "xxxxxxxxxxxx"
-dsttrans = BasicAuthTransport(user,password)
-dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
-#dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
+    try:
+        import cPickle as pickle
+    except ImportError:
+        import pickle
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
+    backupfile = open("wikibackup.pickle","r")
+    backup = pickle.load(backupfile)
+    backupfile.close()
 
-backupfile = open("wikibackup.pickle","r")
-backup = pickle.load(backupfile)
-backupfile.close()
+    allpages = backup.keys()
+    for pagename in allpages:
+        pagedata = backup[pagename]
+        dstwiki.putPage(pagename, pagedata) # TODO: add error check
+        print "Put %s." % pagename
 
-allpages = backup.keys()
-for pagename in allpages:
-    pagedata = backup[pagename]
-    dstwiki.putPage(pagename, pagedata) # TODO: add error check
-    print "Put %s." % pagename
+if __name__ == "__main__":
+    run()
 

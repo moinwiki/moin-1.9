@@ -5,17 +5,18 @@
 
     for f in *.po; do ./prepend.py $f; done
 """
-import sys, codecs
-fname = sys.argv[1]
+def run():
+    import sys, codecs
+    fname = sys.argv[1]
 
-lang = fname.replace('.po_', '').replace('.po', '')
-lang = lang.replace('_', '-') # module names use _ instead of -
+    lang = fname.replace('.po_', '').replace('.po', '')
+    lang = lang.replace('_', '-') # module names use _ instead of -
 
-f = codecs.open(fname, 'r', 'utf-8')
-data = f.read()
-f.close()
+    f = codecs.open(fname, 'r', 'utf-8')
+    data = f.read()
+    f.close()
 
-data = u"""\
+    data = u"""\
 ## Please edit system and help pages ONLY in the moinmaster wiki! For more
 ## information, please see MoinMaster:MoinPagesEditorGroup.
 ##master-page:None
@@ -26,7 +27,10 @@ data = u"""\
 
 %s""" % (lang, data)
 
-f = codecs.open(fname, 'w', 'utf-8')
-f.write(data)
-f.close()
+    f = codecs.open(fname, 'w', 'utf-8')
+    f.write(data)
+    f.close()
+
+if __name__ == "__main__":
+    run()
 

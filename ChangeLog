@@ -2,6 +2,44 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-22 10:55:32 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-495
+
+    Summary:
+      add run() methods to scripts, include version info into MoinMoin/__init__.py for epydoc
+    Revision:
+      moin--main--1.5--patch-495
+
+    add run() methods to scripts, include version info into MoinMoin/__init__.py for epydoc
+    
+
+    removed files:
+     MoinMoin/i18n/.arch-ids/linkpo2wiki.py.id
+     MoinMoin/i18n/linkpo2wiki.py
+
+    modified files:
+     ChangeLog Makefile MoinMoin/__init__.py
+     MoinMoin/i18n/build_lang_py MoinMoin/i18n/build_meta_py
+     MoinMoin/i18n/po2wiki.py MoinMoin/i18n/prepend.py
+     MoinMoin/i18n/recode.py MoinMoin/i18n/wiki2po.py
+     MoinMoin/scripts/cachecleaner.py
+     MoinMoin/scripts/import/IrcLogImporter.py
+     MoinMoin/scripts/packages/create_pagepacks.py
+     MoinMoin/scripts/pagescleaner.py
+     MoinMoin/scripts/print_stats.py
+     MoinMoin/scripts/reducewiki/reducewiki.py
+     MoinMoin/scripts/xmlrpc-tools/HelloWorld.py
+     MoinMoin/scripts/xmlrpc-tools/UpdateGroupTest.py
+     MoinMoin/scripts/xmlrpc-tools/WhoAmI.py
+     MoinMoin/scripts/xmlrpc-tools/get_es_pages.py
+     MoinMoin/scripts/xmlrpc-tools/getmasterpages2.py
+     MoinMoin/scripts/xmlrpc-tools/getsystempages.py
+     MoinMoin/scripts/xmlrpc-tools/getsystempages2.py
+     MoinMoin/scripts/xmlrpc-tools/putPageTest.py
+     MoinMoin/scripts/xmlrpc-tools/wikibackup.py
+     MoinMoin/scripts/xmlrpc-tools/wikirestore.py
+     MoinMoin/version.py
+
+
 2006-03-22 10:03:08 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-494
 
     Summary:

@@ -142,15 +142,19 @@ text = {
 
   outfile.write('}\n')
 
-for i in sys.argv[1:]:
-  lang = i
-  infilename = "%s.po" % lang
-  outfilename = "%s.py" % lang
-  infile = file(infilename, "r")
-  outfile = file(outfilename, "w")
-  try:
-    do(lang, infile, outfile)
-  except:
-    os.unlink(outfilename)
-    raise
+def run():
+    for i in sys.argv[1:]:
+      lang = i
+      infilename = "%s.po" % lang
+      outfilename = "%s.py" % lang
+      infile = file(infilename, "r")
+      outfile = file(outfilename, "w")
+      try:
+        do(lang, infile, outfile)
+      except:
+        os.unlink(outfilename)
+        raise
+
+if __name__ == "__main__":
+    run()
 

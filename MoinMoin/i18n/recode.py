@@ -38,20 +38,23 @@ import sys
 def error(msg):
     sys.stderr.write(msg + '\n')
     
+def run():
+    try:
+        cmd, src_enc, dst_enc = sys.argv
 
-try:
-    cmd, src_enc, dst_enc = sys.argv
+        for line in sys.stdin:
+            line = unicode(line, src_enc).encode(dst_enc)
+            sys.stdout.write(line)
 
-    for line in sys.stdin:
-        line = unicode(line, src_enc).encode(dst_enc)
-        sys.stdout.write(line)
+    except UnicodeError, err:
+        error("Can't recode: %s" % str(err))
+    except LookupError, err:
+        error(str(err))
+    except ValueError:
+        error("Wrong number of arguments")
+        error(__doc__)
 
-except UnicodeError, err:
-    error("Can't recode: %s" % str(err))
-except LookupError, err:
-    error(str(err))
-except ValueError:
-    error("Wrong number of arguments")
-    error(__doc__)
 
+if __name__ == "__main__":
+    run()
 
