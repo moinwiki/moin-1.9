@@ -105,12 +105,13 @@ class ScriptEngine:
         self.ignoreExceptions = self._toBoolean(boolean)
 
     def do_ensureversion(self, version, lines=0):
-        """ Ensures that the version of MoinMoin is greater or equal than
-            version. If lines is unspecified, the script aborts. Otherwise,
-            the next lines (amount specified by lines) are not executed.
+        """
+        Ensures that the version of MoinMoin is greater or equal than
+        version. If lines is unspecified, the script aborts. Otherwise,
+        the next lines (amount specified by lines) are not executed.
 
         @param version: required version of MoinMoin (e.g. "1.3.4")
-        @param lines:   lines to ignore
+        @param lines: lines to ignore
         """
         from MoinMoin.version import release
         version_int = [int(x) for x in version.split(".")]
@@ -230,8 +231,9 @@ class ScriptEngine:
         page.deletePage(comment)
 
     def do_replaceunderlay(self, filename, pagename):
-        """ Overwrites underlay pages. Implementational detail: This needs to be
-            kept in sync with the page class.
+        """
+        Overwrites underlay pages. Implementational detail: This needs to be
+        kept in sync with the page class.
 
         @param filename: name of the file in the package
         @param pagename: page to be overwritten
@@ -361,8 +363,8 @@ class ZipPackage(Package, ScriptEngine):
     def __init__(self, request, filename):
         """ Initialise the package.
 
-        @param request RequestBase instance
-        @param filename filename of the .zip file
+        @param request: RequestBase instance
+        @param filename: filename of the .zip file
         """
 
         Package.__init__(self, request)

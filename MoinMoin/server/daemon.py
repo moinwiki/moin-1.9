@@ -64,7 +64,7 @@ class Daemon:
     def __init__(self, name, function, *args, **kw):
         """ Create a daemon
         
-        @param pidFile: the pid file for this server.
+        @param name: name of the process (determines pid filename, too)
         @param function: the server main function, will block until the
             server is done.
         @param args: arguments to pass to function

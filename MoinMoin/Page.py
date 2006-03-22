@@ -605,7 +605,7 @@ class Page:
         If you want to get a more accurate number, call with
         exists=1. This will be about 100 times slower though.
 
-        @param exits: filter existing pages
+        @param exists: filter existing pages
         @rtype: int
         @return: number of pages
         """
@@ -623,7 +623,7 @@ class Page:
         return count
 
     def getPageList(self, user=None, exists=1, filter=None):
-        ''' List user readable pages under current page
+        """ List user readable pages under current page
 
         Currently only request.rootpage is used to list pages, but if we
         have true sub pages, any page can list its sub pages.
@@ -647,10 +647,10 @@ class Page:
 
         @param user: the user requesting the pages (MoinMoin.user.User)
         @param filter: filter function
-        @param exits: filter existing pages
+        @param exists: filter existing pages
         @rtype: list of unicode strings
         @return: user readable wiki page names
-        '''
+        """
         request = self.request
         request.clock.start('getPageList')
         # Check input
@@ -702,7 +702,7 @@ class Page:
 
         @param user: the user requesting the pages
         @param filter: filter function
-        @param exits: only existing pages
+        @param exists: only existing pages
         @rtype: dict {unicode: Page}
         @return: user readable pages
         """
@@ -760,17 +760,17 @@ class Page:
         return pages
 
     def getlines(self):
-        """Return a list of all lines in body.
+        """ Return a list of all lines in body.
 
-        @rtype list
+        @rtype: list
         @return: list of strs body_lines"""
         lines = self.get_raw_body().split('\n')
         return lines
 
     def get_raw_body(self):
-        """Load the raw markup from the page file.
+        """ Load the raw markup from the page file.
 
-        @rtype str
+        @rtype: str
         @return: raw page contents of this page
         """
         if self._raw_body is None:
@@ -816,7 +816,7 @@ class Page:
         @param request: the request object
         @param querystr: the query string to add after a "?" after the url
             (str or dict, see wikiutil.makeQueryString)
-        @param escpae: escape url for html, to be backward compatible
+        @param escape: escape url for html, to be backward compatible
             with old code (bool)
         @rtype: str
         @return: complete url of this page, including scriptname

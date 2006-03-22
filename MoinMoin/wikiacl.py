@@ -251,7 +251,7 @@ class ACLStringIterator:
         """ Initialize acl iterator
 
         @param rights: the acl rights to consider when parsing
-        @param aclstirng: string to parse
+        @param aclstring: string to parse
         """
         self.rights = rights
         self.rest = aclstring.strip()

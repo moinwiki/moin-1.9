@@ -646,7 +646,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         Replace text of the user UserName/MoinEditorBackup with newtext.
 
         @param newtext: new text of the page
-        @keyword: none used currently
+        @param kw: no keyword args used currently
         @rtype: unicode
         @return: url of page backup or None
         """

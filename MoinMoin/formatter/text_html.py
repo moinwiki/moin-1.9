@@ -51,7 +51,8 @@ _common_attributes = Set(['accesskey', 'class', 'dir', 'disabled', 'id', 'lang',
 
 
 def rewrite_attribute_name(name, default_namespace='html'):
-    """Takes an attribute name and tries to make it HTML correct.
+    """
+    Takes an attribute name and tries to make it HTML correct.
 
     This function takes an attribute name as a string, as it may be
     passed in to a formatting method using a keyword-argument syntax,
@@ -211,7 +212,7 @@ class Formatter(FormatterBase):
             defined, will return attributes only if the current lang is
             different from the content lang.
         @rtype: dict
-        @retrun: language attributes
+        @return: language attributes
         """
         if not lang:
             lang = self.request.current_lang
@@ -230,7 +231,7 @@ class Formatter(FormatterBase):
 
         @param attr: dict containing keys and values
         @param allowed_attrs: A list of allowable attribute names
-        @param **kw: other arbitrary attributes expressed as keyword arguments.
+        @param kw: other arbitrary attributes expressed as keyword arguments.
         @rtype: string
         @return: formated attributes or empty string
 
@@ -522,23 +523,24 @@ class Formatter(FormatterBase):
             return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with umlauts
 
     def url(self, on, url=None, css=None, do_escape=0, **kw):
-        """ Inserts an <a> element.
+        """
+        Inserts an <a> element.
 
-            Call once with on=1 to start the link, and again with on=0
-            to end it (no other arguments are needed when on==0).
+        Call once with on=1 to start the link, and again with on=0
+        to end it (no other arguments are needed when on==0).
 
-            do_escape: XXX doesn't work yet
+        do_escape: XXX doesn't work yet
 
-            Keyword params:
-                url - the URL to link to; will go through Wiki URL mapping.
-                css - a space-separated list of CSS classes
-                attrs -  just include this string verbatim inside
-                         the <a> element; can be used for arbitrary attrs;
-                         all escaping and quoting is the caller's responsibility.
+        Keyword params:
+            url - the URL to link to; will go through Wiki URL mapping.
+            css - a space-separated list of CSS classes
+            attrs -  just include this string verbatim inside
+                     the <a> element; can be used for arbitrary attrs;
+                     all escaping and quoting is the caller's responsibility.
 
-            Note that the 'attrs' keyword argument is for backwards compatibility
-            only.  It should not be used for new code--instead just pass
-            any attributes in as separate keyword arguments.
+        Note that the 'attrs' keyword argument is for backwards compatibility
+        only.  It should not be used for new code--instead just pass
+        any attributes in as separate keyword arguments.
         """
         if not on:
             return self._close('a')
@@ -1247,7 +1249,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
 
         @param attrs: attribute dict
         @param prefix: used in wiki table attributes
-        @rtyp: dict
+        @rtype: dict
         @return: valid table attributes
         """
         if not attrs:
