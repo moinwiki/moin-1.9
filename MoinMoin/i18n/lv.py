@@ -396,6 +396,8 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Izveidot profilu''',
 '''Mail me my account data''':
 '''Atsūtīt mana sistēmas konta datus''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %(userprefslink)s''',
 '''Action''':
 '''Darbība''',
 '''No older revisions available!''':
@@ -435,13 +437,13 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Comment''':
 '''Komentārs''',
 '''view''':
-'''Skats''',
+'''skats''',
 '''raw''':
-'''neapstrādāts''',
+'''jēlteksts''',
 '''print''':
-'''drukāt''',
+'''izdruka''',
 '''revert''':
-'''atgriezties''',
+'''atgriezt''',
 '''Revert to revision %(rev)d.''':
 '''Versijas %(rev)d atgriešana.''',
 '''edit''':
@@ -453,7 +455,7 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''N/A''':
 '''Nav pieejams''',
 '''Revision History''':
-'''Pārskatīšanas vēsture''',
+'''Versiju vēsture''',
 '''No log entries found.''':
 '''Ieraksti par labojumiem netika atrasti.''',
 '''Info for "%s"''':
@@ -722,12 +724,22 @@ Pamēģiniet citu nosaukumu.''',
 '''Visu saišu saraksts "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
+'''Subscribe users to the page %s''':
+'''Parakstīt lietotājus lapas %s izmaiņām''',
+'''Subscribed for %s:''':
+'''Lapas %s izmaiņām parakstījušies:''',
+'''Not a user:''':
+'''Nav lietotājs:''',
+'''You are not allowed to perform this action.''':
+'''Jums nav tiesību veikt šo darbību.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ielādēt jaunu piesaisti "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Izveidot jaunu attēlu "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Labot attēlu %(filename)s''',
+'''Toggle line numbers''':
+'''Pārslēgt rindu numerāciju''',
 '''Invalid include arguments "%s"!''':
 '''Nepareizs iekļaušanas arguments "%s"!''',
 '''Nothing found for "%s"!''':

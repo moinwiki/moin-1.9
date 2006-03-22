@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-20 22:52+0100\n"
+"POT-Creation-Date: 2006-03-21 19:19+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -675,7 +675,7 @@ msgstr "Atsūtīt mana sistēmas konta datus"
 msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
-msgstr ""
+msgstr "Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %(userprefslink)s"
 
 msgid "Action"
 msgstr "Darbība"
@@ -740,16 +740,16 @@ msgid "Comment"
 msgstr "Komentārs"
 
 msgid "view"
-msgstr "Skats"
+msgstr "skats"
 
 msgid "raw"
-msgstr "neapstrādāts"
+msgstr "jēlteksts"
 
 msgid "print"
-msgstr "drukāt"
+msgstr "izdruka"
 
 msgid "revert"
-msgstr "atgriezties"
+msgstr "atgriezt"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
@@ -768,7 +768,7 @@ msgid "N/A"
 msgstr "Nav pieejams"
 
 msgid "Revision History"
-msgstr "Pārskatīšanas vēsture"
+msgstr "Versiju vēsture"
 
 msgid "No log entries found."
 msgstr "Ieraksti par labojumiem netika atrasti."
@@ -1247,20 +1247,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Parakstīties uz maznozīmīgām izmaiņām"
+msgstr "Parakstīt lietotājus lapas %s izmaiņām"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "Parakstīties"
+msgstr "Lapas %s izmaiņām parakstījušies:"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "Nav lietotājs:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Jums nav tiesību labot šo lapu."
+msgstr "Jums nav tiesību veikt šo darbību."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1275,7 +1274,7 @@ msgid "Edit drawing %(filename)s"
 msgstr "Labot attēlu %(filename)s"
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "Pārslēgt rindu numerāciju"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"

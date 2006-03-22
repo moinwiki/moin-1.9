@@ -1281,20 +1281,20 @@ msgstr ""
 "No es posible crear una página sin nombre. Por favor, dále un nombre a la "
 "página."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Avisar de cualquier cambio de contenido (incluso los triviales)"
+msgstr "Suscribir usuarios a la página %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "Suscribirse"
+msgstr "Suscrit@ en %s:"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "No es un usuario:"
 
-#, fuzzy
+
 msgid "You are not allowed to perform this action."
-msgstr "No tienes permisos para editar esta página."
+msgstr "No tienes permisos para hacer esta acción."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""

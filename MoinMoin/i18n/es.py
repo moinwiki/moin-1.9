@@ -727,6 +727,14 @@ Intenta con un nombre distinto.''',
 '''Lista completa de enlaces para "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
+'''Subscribe users to the page %s''':
+'''Suscribir usuarios a la página %s''',
+'''Subscribed for %s:''':
+'''Suscrit@ en %s:''',
+'''Not a user:''':
+'''No es un usuario:''',
+'''You are not allowed to perform this action.''':
+'''No tienes permisos para hacer esta acción.''',
 '''Upload new attachment "%(filename)s"''':
 '''Subir nuevo adjunto "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
