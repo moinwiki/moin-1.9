@@ -14,6 +14,13 @@ from MoinMoin import config
 ### Misc Helpers
 #############################################################################
 
+def chmod(name, mode, catchexception=True):
+    try:
+        return os.chmod(name, mode)
+    except OSError:
+        if not catchexception:
+            raise
+
 def makedirs(name, mode=0777):
     """ Super-mkdir; create a leaf directory and all intermediate ones.
     

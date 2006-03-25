@@ -7,9 +7,10 @@
 """
     
 import os, re, difflib, urllib, cgi
+import codecs
 
 from MoinMoin import util, version, config
-from MoinMoin.util import pysupport
+from MoinMoin.util import pysupport, filesys
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -37,7 +38,6 @@ def decodeWindowsPath(text):
     """
 
     import locale
-    import codecs
     cur_charset = locale.getdefaultlocale()[1]
     try:
         return unicode(text, 'utf-8')
@@ -393,7 +393,91 @@ def version2timestamp(v):
         This must ONLY be used for display purposes.
     """
     return v/1000000.0
+
+
+# This is the list of meta attribute names to be treated as integers.
+# IMPORTANT: do not use any meta attribute names with "-" (or any other chars
+# invalid in python attribute names), use e.g. _ instead.
+INTEGER_METAS = ['current', 'revision', # for page storage (moin 2.0)
+                 'data_format_revision', # for data_dir format spec (use by mig scripts)
+                ]
+
+class MetaDict(dict):
+    """ store meta informations as a dict """
+    def __init__(self, metafilename):
+        """ create a MetaDict from metafilename """
+        dict.__init__(self)
+        self.metafilename = metafilename
+        self.dirty = False
+        self.loaded = False
+
+    def _get_meta(self):
+        """ get the meta dict from an arbitrary filename.
+            does not keep state, does uncached, direct disk access.
+            @param metafilename: the name of the file to read
+            @return: dict with all values or {} if empty or error
+        """
+        # XXX what does happen if the metafile is being written to in another process?
+        try:
+            metafile = codecs.open(self.metafilename, "r", "utf-8")
+            meta = metafile.read() # this is much faster than the file's line-by-line iterator
+            metafile.close()
+        except IOError:
+            meta = u''
+        for line in meta.splitlines():
+            key, value = line.split(':', 1)
+            value = value.strip()
+            if key in INTEGER_METAS:
+                value = int(value)
+            dict.__setitem__(self, key, value)
+        self.loaded = True
     
+    def _put_meta(self):
+        """ put the meta dict into an arbitrary filename.
+            does not keep or modify state, does uncached, direct disk access.
+            @param metafilename: the name of the file to write
+            @param metadata: dict of the data to write to the file
+        """
+        meta = []
+        for key, value in self.items():
+            if key in INTEGER_METAS:
+                value = str(value)
+            meta.append("%s: %s" % (key, value))
+        meta = '\n'.join(meta)
+        # XXX what does happen if the metafile is being read or written to in another process?
+        metafile = codecs.open(self.metafilename, "w", "utf-8")
+        metafile.write(meta)
+        metafile.close()
+        filesys.chmod(self.metafilename, 0666 & config.umask)
+        self.dirty = False
+
+    def sync(self, mtime_usecs=None):
+        """ sync the in-memory dict to disk (if dirty) """
+        if self.dirty:
+            if not mtime_usecs is None:
+                self.__setitem__('mtime', str(mtime_usecs))
+            self._put_meta()
+
+    def __getitem__(self, key):
+        try:
+            return dict.__getitem__(self, key)
+        except KeyError:
+            if not self.loaded:
+                self._get_meta() # lazy loading of metadata
+                return dict.__getitem__(self, key)
+            else:
+                raise
+
+    def __setitem__(self, key, value):
+        try:
+            oldvalue = dict.__getitem__(self, key)
+        except KeyError:
+            oldvalue = None
+        if value != oldvalue:
+            dict.__setitem__(self, key, value)
+            self.dirty = True
+
+
 #############################################################################
 ### InterWiki
 #############################################################################
@@ -719,7 +803,7 @@ def importPlugin(cfg, kind, name, function="execute"):
         return importBuiltinPlugin(kind, name, function)
 
 
-def importWikiPlugin(cfg, kind, name, function):
+def importWikiPlugin(cfg, kind, name, function="execute"):
     """ Import plugin from the wiki data directory
     
     See importPlugin docstring.
@@ -730,7 +814,7 @@ def importWikiPlugin(cfg, kind, name, function):
     return importNameFromPlugin(moduleName, function)
 
 
-def importBuiltinPlugin(kind, name, function):
+def importBuiltinPlugin(kind, name, function="execute"):
     """ Import builtin plugin from MoinMoin package 
     
     See importPlugin docstring.

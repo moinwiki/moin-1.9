@@ -1,10 +1,42 @@
-1.3 to 1.5 migration
+Post 1.5.3 new style migration
+==============================
+
+First you have to do all steps described in the sections below or it won't work.
+
+After you have switched to new style migration, the procedure will be the same
+with every moin upgrade, simply run a command similar to this:
+
+sudo -u www-data moin --config-dir=/path/to/config_dir --wiki-url=wiki.example.org/ migration data 
+
+The new style mig stuff will then load the config for that wiki, get into its
+data_dir, read the meta file content and determine what it has to do internally.
+
+1.5.3 migration
+===============
+
+First make sure you have run all the old mig scripts ONCE (and only once) on
+your data dirs.
+
+The old style stuff moved here: MoinMoin/script/old/migration/
+
+In that directory, there is also a new 152_to_1050300.py mig script - you
+need to run it as the last mig script to switch to new style mig scripts.
+It puts a file "meta" in your data dirs that hold the data_format_revision
+value. The new style mig scripts use that value to make it much simpler for
+you in future.
+
+After this, please continue in section "Post 1.5.3 new style migration".
+
+1.3.4/1.3.5 migration
+=====================
+We added some mig scripts in moin 1.3.4. So if you have done the 1.2 to 1.3
+migration with some earlier moin version (like 1.3.3), then please run the
+new scripts, too:
+ * 12_to_13_mig10.py
+ * 12_to_13_mig11.py
+
+1.2 to 1.3 migration
 ====================
-
-Just read CHANGES, you don't need to read the stuff below.
-
-1.2 to 1.3 migration docs
-=========================
 
 Migration from 1.2 to 1.3 is done by those basic steps:
  1. make a backup
