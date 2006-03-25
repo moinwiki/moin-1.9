@@ -2,6 +2,224 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-25 23:31:55 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-501
+
+    Summary:
+      new scripting method, using 'moin' command. new style migration scripts.
+    Revision:
+      moin--main--1.5--patch-501
+
+    new scripting method, using 'moin' command. new style migration scripts.
+    
+
+    new files:
+     MoinMoin/script/.arch-ids/moin.py.id
+     MoinMoin/script/cli/.arch-ids/=id
+     MoinMoin/script/cli/.arch-ids/__init__.py.id
+     MoinMoin/script/cli/.arch-ids/show.py.id
+     MoinMoin/script/cli/__init__.py MoinMoin/script/cli/show.py
+     MoinMoin/script/export/.arch-ids/=id
+     MoinMoin/script/export/.arch-ids/__init__.py.id
+     MoinMoin/script/export/__init__.py
+     MoinMoin/script/import/.arch-ids/=id
+     MoinMoin/script/import/.arch-ids/__init__.py.id
+     MoinMoin/script/import/__init__.py
+     MoinMoin/script/lupy/.arch-ids/=id
+     MoinMoin/script/lupy/.arch-ids/__init__.py.id
+     MoinMoin/script/lupy/__init__.py
+     MoinMoin/script/migration/.arch-ids/1050300.py.id
+     MoinMoin/script/migration/.arch-ids/1050301.py.id
+     MoinMoin/script/migration/.arch-ids/data.py.id
+     MoinMoin/script/migration/1050300.py
+     MoinMoin/script/migration/1050301.py
+     MoinMoin/script/migration/data.py MoinMoin/script/moin.py
+     MoinMoin/script/old/.arch-ids/=id
+
+    removed files:
+     MoinMoin/scripts/.arch-ids/moin.id
+     MoinMoin/scripts/import/.arch-ids/=id
+     MoinMoin/scripts/import/.arch-ids/__init__.py.id
+     MoinMoin/scripts/import/__init__.py
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig01.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig02.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig03.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig04.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig05.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig06.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig07.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig08.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig09.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig10.py.id
+     MoinMoin/scripts/migration/.arch-ids/12_to_13_mig11.py.id
+     MoinMoin/scripts/migration/12_to_13_mig01.py
+     MoinMoin/scripts/migration/12_to_13_mig02.py
+     MoinMoin/scripts/migration/12_to_13_mig03.py
+     MoinMoin/scripts/migration/12_to_13_mig04.py
+     MoinMoin/scripts/migration/12_to_13_mig05.py
+     MoinMoin/scripts/migration/12_to_13_mig06.py
+     MoinMoin/scripts/migration/12_to_13_mig07.py
+     MoinMoin/scripts/migration/12_to_13_mig08.py
+     MoinMoin/scripts/migration/12_to_13_mig09.py
+     MoinMoin/scripts/migration/12_to_13_mig10.py
+     MoinMoin/scripts/migration/12_to_13_mig11.py
+     MoinMoin/scripts/moin
+
+    modified files:
+     ChangeLog MoinMoin/_tests/test_repair_language.py
+     MoinMoin/script/__init__.py MoinMoin/script/_util.py
+     MoinMoin/script/export/dump.py
+     MoinMoin/script/import/irclog.py MoinMoin/script/lupy/build.py
+     MoinMoin/script/lupy/optimize.py
+     MoinMoin/script/migration/__init__.py
+     MoinMoin/script/old/accounts/moin_usercheck-jh-new.py
+     MoinMoin/userform.py MoinMoin/util/filesys.py
+     MoinMoin/wikiutil.py docs/CHANGES docs/README.migration
+     setup.py
+
+    renamed files:
+     MoinMoin/scripts/.arch-ids/.cvsignore.id
+       ==> MoinMoin/script/.arch-ids/.cvsignore.id
+     MoinMoin/scripts/.arch-ids/=id
+       ==> MoinMoin/script/.arch-ids/=id
+     MoinMoin/scripts/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/.arch-ids/__init__.py.id
+     MoinMoin/scripts/.arch-ids/_util.py.id
+       ==> MoinMoin/script/.arch-ids/_util.py.id
+     MoinMoin/scripts/.arch-ids/cachecleaner.py.id
+       ==> MoinMoin/script/old/.arch-ids/cachecleaner.py.id
+     MoinMoin/scripts/.arch-ids/globaledit.py.id
+       ==> MoinMoin/script/old/.arch-ids/globaledit.py.id
+     MoinMoin/scripts/.arch-ids/moin_build_index.py.id
+       ==> MoinMoin/script/lupy/.arch-ids/build.py.id
+     MoinMoin/scripts/.arch-ids/moin_dump.py.id
+       ==> MoinMoin/script/export/.arch-ids/dump.py.id
+     MoinMoin/scripts/.arch-ids/moin_optimize_index.py.id
+       ==> MoinMoin/script/lupy/.arch-ids/optimize.py.id
+     MoinMoin/scripts/.arch-ids/pagescleaner.py.id
+       ==> MoinMoin/script/old/.arch-ids/pagescleaner.py.id
+     MoinMoin/scripts/.arch-ids/print_stats.py.id
+       ==> MoinMoin/script/old/.arch-ids/print_stats.py.id
+     MoinMoin/scripts/.arch-ids/repair_language.py.id
+       ==> MoinMoin/script/old/.arch-ids/repair_language.py.id
+     MoinMoin/scripts/accounts/.arch-ids/.cvsignore.id
+       ==> MoinMoin/script/old/accounts/.arch-ids/.cvsignore.id
+     MoinMoin/scripts/accounts/.arch-ids/=id
+       ==> MoinMoin/script/old/accounts/.arch-ids/=id
+     MoinMoin/scripts/accounts/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/old/accounts/.arch-ids/__init__.py.id
+     MoinMoin/scripts/accounts/.arch-ids/moin_usercheck-jh-new.py.id
+       ==> MoinMoin/script/old/accounts/.arch-ids/moin_usercheck-jh-new.py.id
+     MoinMoin/scripts/accounts/.arch-ids/moin_usercheck.py.id
+       ==> MoinMoin/script/old/accounts/.arch-ids/moin_usercheck.py.id
+     MoinMoin/scripts/cachecleaner.py
+       ==> MoinMoin/script/old/cachecleaner.py
+     MoinMoin/scripts/globaledit.py
+       ==> MoinMoin/script/old/globaledit.py
+     MoinMoin/scripts/import/.arch-ids/IrcLogImporter.py.id
+       ==> MoinMoin/script/import/.arch-ids/irclog.py.id
+     MoinMoin/scripts/import/IrcLogImporter.py
+       ==> MoinMoin/script/import/irclog.py
+     MoinMoin/scripts/migration/.arch-ids/=id
+       ==> MoinMoin/script/migration/.arch-ids/=id
+     MoinMoin/scripts/migration/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/migration/.arch-ids/__init__.py.id
+     MoinMoin/scripts/migration/.arch-ids/migutil.py.id
+       ==> MoinMoin/script/migration/.arch-ids/migutil.py.id
+     MoinMoin/scripts/moin_build_index.py
+       ==> MoinMoin/script/lupy/build.py
+     MoinMoin/scripts/moin_dump.py
+       ==> MoinMoin/script/export/dump.py
+     MoinMoin/scripts/moin_optimize_index.py
+       ==> MoinMoin/script/lupy/optimize.py
+     MoinMoin/scripts/packages/.arch-ids/=id
+       ==> MoinMoin/script/old/packages/.arch-ids/=id
+     MoinMoin/scripts/packages/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/old/packages/.arch-ids/__init__.py.id
+     MoinMoin/scripts/packages/.arch-ids/create_pagepacks.py.id
+       ==> MoinMoin/script/old/packages/.arch-ids/create_pagepacks.py.id
+     MoinMoin/scripts/pagescleaner.py
+       ==> MoinMoin/script/old/pagescleaner.py
+     MoinMoin/scripts/print_stats.py
+       ==> MoinMoin/script/old/print_stats.py
+     MoinMoin/scripts/reducewiki/.arch-ids/=id
+       ==> MoinMoin/script/old/reducewiki/.arch-ids/=id
+     MoinMoin/scripts/reducewiki/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/old/reducewiki/.arch-ids/__init__.py.id
+     MoinMoin/scripts/reducewiki/.arch-ids/reducewiki.py.id
+       ==> MoinMoin/script/old/reducewiki/.arch-ids/reducewiki.py.id
+     MoinMoin/scripts/repair_language.py
+       ==> MoinMoin/script/old/repair_language.py
+     MoinMoin/scripts/unicode/.arch-ids/=id
+       ==> MoinMoin/script/old/unicode/.arch-ids/=id
+     MoinMoin/scripts/unicode/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/old/unicode/.arch-ids/__init__.py.id
+     MoinMoin/scripts/unicode/.arch-ids/mk_chartypes.py.id
+       ==> MoinMoin/script/old/unicode/.arch-ids/mk_chartypes.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/.cvsignore.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/.cvsignore.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/=id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/=id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/HelloWorld.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/HelloWorld.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/UpdateGroupTest.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/UpdateGroupTest.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/WhoAmI.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/WhoAmI.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/__init__.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/__init__.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/get_es_pages.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/get_es_pages.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/getmasterpages2.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/getmasterpages2.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/getsystempages.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/getsystempages.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/getsystempages2.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/getsystempages2.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/putPageTest.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/putPageTest.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/wikibackup.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/wikibackup.py.id
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids/wikirestore.py.id
+       ==> MoinMoin/script/old/xmlrpc-tools/.arch-ids/wikirestore.py.id
+
+    new directories:
+     MoinMoin/script/.arch-ids MoinMoin/script/cli
+     MoinMoin/script/cli/.arch-ids MoinMoin/script/export
+     MoinMoin/script/export/.arch-ids MoinMoin/script/import
+     MoinMoin/script/import/.arch-ids MoinMoin/script/lupy
+     MoinMoin/script/lupy/.arch-ids
+     MoinMoin/script/migration/.arch-ids MoinMoin/script/old
+     MoinMoin/script/old/.arch-ids
+     MoinMoin/script/old/accounts/.arch-ids
+     MoinMoin/script/old/packages/.arch-ids
+     MoinMoin/script/old/reducewiki/.arch-ids
+     MoinMoin/script/old/unicode/.arch-ids
+     MoinMoin/script/old/xmlrpc-tools/.arch-ids
+
+    removed directories:
+     MoinMoin/scripts/.arch-ids MoinMoin/scripts/accounts/.arch-ids
+     MoinMoin/scripts/import MoinMoin/scripts/import/.arch-ids
+     MoinMoin/scripts/migration/.arch-ids
+     MoinMoin/scripts/packages/.arch-ids
+     MoinMoin/scripts/reducewiki/.arch-ids
+     MoinMoin/scripts/unicode/.arch-ids
+     MoinMoin/scripts/xmlrpc-tools/.arch-ids
+
+    renamed directories:
+     MoinMoin/scripts
+       ==> MoinMoin/script
+     MoinMoin/scripts/accounts
+       ==> MoinMoin/script/old/accounts
+     MoinMoin/scripts/packages
+       ==> MoinMoin/script/old/packages
+     MoinMoin/scripts/reducewiki
+       ==> MoinMoin/script/old/reducewiki
+     MoinMoin/scripts/unicode
+       ==> MoinMoin/script/old/unicode
+     MoinMoin/scripts/xmlrpc-tools
+       ==> MoinMoin/script/old/xmlrpc-tools
+
+
 2006-03-25 12:18:58 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-500
 
     Summary:

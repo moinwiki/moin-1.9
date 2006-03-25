@@ -36,6 +36,7 @@ Known main issues:
 Version 1.5.current:
 
   New features:
+    * HINT: please read README.migration
     * Login and Logout are actions now, therefore you stay on the page where
       you were before.
     * UserPreferences is also an action now and moved from top border (in
@@ -69,8 +70,6 @@ Version 1.5.current:
     * Added ImageLink macro. Thanks to Jeff Kunce, Marcin Zalewski, Reimar
       Bauer and Chong-Dae Park for working on it.
     * Lupy stuff (still experimental, partly broken and disabled by default):
-      HINT: Please update your data/plugin/ directory with the "filter" directory
-            as you see in wiki/data/plugin/filter.
       * Attachment search using lupy (lupy_search = 1 in your config)
         Title search will also search attachment filenames.
         Full text search will also search attachment contents.
@@ -93,6 +92,22 @@ Version 1.5.current:
         If we succeed, we will replace Lupy stuff by some Xapian interface
         code in moin.
         But: the filters will likely stay, as we also need them with Xapian.
+      * A new MoinMoin script interface was introduced:
+        
+        Syntax: moin [options] <cmdmodule> <cmdname> [options]
+        
+        For example:
+        moin --config-dir=/my/cfgdir --wiki-url=wiki.example.org/ \
+             export dump --page=WikiSandBox
+        
+        This will call the "moin" script, which will use the --config-dir and
+        --wiki-url options to initialize, then it will go to MoinMoin.script
+        module, import the export.dump module from there and run it, providing
+        the additional --page value to it.
+
+        The old scripts that have not been migrated to this new interface can
+        still be found in MoinMoin/script/old/ - including the old migration
+        scripts.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was

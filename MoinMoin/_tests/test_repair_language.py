@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    MoinMoin - MoinMoin.scripts.repair_language tests
+    MoinMoin - MoinMoin.script.repair_language tests
 
     @copyright: 2003-2004 by Nir Soffer <nirs@freeshell.org>
     @license: GNU GPL, see COPYING for details.
@@ -8,7 +8,7 @@
 
 import unittest
 
-from MoinMoin.scripts.repair_language import repairText
+from MoinMoin.script.repair_language import repairText
 
 
 class RepairTestCase(unittest.TestCase):

@@ -1,25 +1,21 @@
-#!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 """
-MoinMoin - Dump a MoinMoin wiki to static pages
+    MoinMoin - Dump a MoinMoin wiki to static pages
 
-You must run this script as owner of the wiki files, usually this is the
-web server user.
+    You must run this script as owner of the wiki files, usually this is the
+    web server user.
 
-@copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
-@copyright: 2005 Thomas Waldmann
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>,
+                2005-2006 by Thomas Waldmann
+    @license: GNU GPL, see COPYING for details.
+
 """
 
 import sys, os, time, StringIO, codecs, shutil, re, errno
 
-# Insert the path to MoinMoin in the start of the path
-sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), 
-                                os.pardir, os.pardir))
-
 from MoinMoin import config, wikiutil, Page
-from MoinMoin.scripts import _util
-from MoinMoin.request import RequestCLI
+from MoinMoin.script import _util
+from MoinMoin.script._util import MoinScript
 from MoinMoin.action import AttachFile
 
 url_prefix = "."
@@ -78,34 +74,21 @@ def _attachment(request, pagename, filename, outputdir):
         return ""
   
 
-class MoinDump(_util.Script):
+class PluginScript(MoinScript):
+    """ Dump script class """
     
-    def __init__(self):
-        _util.Script.__init__(self, __name__, "[options] <target-directory>")
+    def __init__(self, argv=None, def_values=None):
+        MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
-            "--config-dir", metavar="DIR", dest="config_dir",
-            help=("Path to the directory containing the wiki "
-                  "configuration files. [default: current directory]")
-        )
-        self.parser.add_option(
-            "--wiki-url", metavar="WIKIURL", dest="wiki_url",
-            help="URL of wiki e.g. localhost/mywiki/ [default: CLI]"
-        )
-        self.parser.add_option(
-            "--page", metavar="NAME", dest="page",
-            help="Dump a single page (with possibly broken links)"
+            "-t", "--target-dir", dest="target_dir",
+            help="Write html dump to DIRECTORY"
         )
 
     def mainloop(self):
         """ moin-dump's main code. """
 
-        if len(sys.argv) == 1:
-            self.parser.print_help()
-            sys.exit(1)
-
         # Prepare output directory
-        outputdir = self.args[0]
-        outputdir = os.path.abspath(outputdir)
+        outputdir = os.path.abspath(self.options.target_dir)
         try:
             os.mkdir(outputdir)
             _util.log("Created output directory '%s'!" % outputdir)
@@ -121,11 +104,8 @@ class MoinDump(_util.Script):
             _util.fatal("bad path given to --config-dir option")
         sys.path.insert(0, os.path.abspath(config_dir or os.curdir))
 
-        # Create request 
-        if self.options.wiki_url:
-            request = RequestCLI(self.options.wiki_url)
-        else:
-            request = RequestCLI()
+        self.init_request()
+        request = self.request
 
         # fix url_prefix so we get relative paths in output html
         original_url_prefix = request.cfg.url_prefix
@@ -200,12 +180,4 @@ class MoinDump(_util.Script):
         errlog.close()
         if errcnt:
             print >>sys.stderr, "*** %d error(s) occurred, see '%s'!" % (errcnt, errfile)
-
-
-def run():
-    MoinDump().run()
-
-
-if __name__ == "__main__":
-    run()
 

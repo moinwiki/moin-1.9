@@ -103,7 +103,7 @@ class build_scripts_create(build_scripts):
         The scripts are created in an uniform scheme: they start the
         run() function in the module
 
-            <packagename>.scripts.<mangled_scriptname>
+            <packagename>.script.<mangled_scriptname>
 
         The mangling of script names replaces '-' and '/' characters
         with '-' and '.', so that they are valid module paths. 
@@ -145,12 +145,12 @@ class build_scripts_create(build_scripts):
             try:
                 if sys.platform == "win32":
                     file.write('@echo off\n'
-                        'if NOT "%%_4ver%%" == "" %(python)s -c "from %(package)s.scripts.%(module)s import run; run()" %%$\n'
-                        'if     "%%_4ver%%" == "" %(python)s -c "from %(package)s.scripts.%(module)s import run; run()" %%*\n'
+                        'if NOT "%%_4ver%%" == "" %(python)s -c "from %(package)s.script.%(module)s import run; run()" %%$\n'
+                        'if     "%%_4ver%%" == "" %(python)s -c "from %(package)s.script.%(module)s import run; run()" %%*\n'
                         % script_vars)
                 else:
                     file.write('#! %(python)s\n'
-                        'from %(package)s.scripts.%(module)s import run\n'
+                        'from %(package)s.script.%(module)s import run\n'
                         'run()\n'
                         % script_vars)
             finally:
@@ -173,7 +173,7 @@ def scriptname(path):
     return script
 
 # build list of scripts from their implementation modules
-moin_scripts = map(scriptname, glob.glob('MoinMoin/scripts/[!_]*.py'))
+moin_scripts = map(scriptname, glob.glob('MoinMoin/script/[!_]*.py'))
 
 
 #############################################################################
@@ -198,20 +198,22 @@ only requiring a Python installation.
         'MoinMoin',
         'MoinMoin.action',
         'MoinMoin.converter',
+        'MoinMoin.filter',
         'MoinMoin.formatter',
         'MoinMoin.i18n',
         'MoinMoin.logfile',
         'MoinMoin.macro',
         'MoinMoin.parser',
         'MoinMoin.processor',
-        'MoinMoin.scripts',
-        'MoinMoin.scripts.accounts',
-        'MoinMoin.scripts.migration',
-        'MoinMoin.scripts.reducewiki',
-        'MoinMoin.scripts.unicode',
-        'MoinMoin.scripts.xmlrpc-tools',
-        'MoinMoin.scripts.packages',
-        'MoinMoin.scripts.import',
+        'MoinMoin.script',
+        'MoinMoin.script.accounts',
+        'MoinMoin.script.cli',
+        'MoinMoin.script.migration',
+        'MoinMoin.script.reducewiki',
+        'MoinMoin.script.unicode',
+        'MoinMoin.script.xmlrpc-tools',
+        'MoinMoin.script.packages',
+        'MoinMoin.script.import',
         'MoinMoin.server',
         'MoinMoin.stats',
         'MoinMoin.support',

@@ -138,7 +138,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
 
-            # Email should be unique - see also MoinMoin/scripts/moin_usercheck.py
+            # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
             if theuser.email and self.request.cfg.user_email_unique:
                 users = user.getUserList(self.request)
                 for uid in users:
@@ -230,7 +230,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 return _("Please provide your email address. If you lose your"
                          " login information, you can get it by email.")
 
-            # Email should be unique - see also MoinMoin/scripts/moin_usercheck.py
+            # Email should be unique - see also MoinMoin/script/accounts/moin_usercheck.py
             if theuser.email and self.request.cfg.user_email_unique:
                 users = user.getUserList(self.request)
                 for uid in users:

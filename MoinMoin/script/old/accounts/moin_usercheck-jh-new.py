@@ -55,7 +55,7 @@ magicpages = [
 ]
 
 # ----------------------------------------------------------------------------
-from MoinMoin.scripts import _util
+from MoinMoin.script import _util
 config = None
 
 
