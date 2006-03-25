@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-25 12:18:58 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-500
+
+    Summary:
+      reordered CHANGES, added some upgrade HINTs to CHANGES, added filter plugin dir
+    Revision:
+      moin--main--1.5--patch-500
+
+    reordered CHANGES, added some upgrade HINTs to CHANGES, added filter plugin dir
+    
+
+    new files:
+     wiki/data/plugin/filter/.arch-ids/=id
+     wiki/data/plugin/filter/.arch-ids/__init__.py.id
+     wiki/data/plugin/filter/__init__.py
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+    new directories:
+     wiki/data/plugin/filter wiki/data/plugin/filter/.arch-ids
+
+
 2006-03-23 00:19:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-499
 
     Summary:

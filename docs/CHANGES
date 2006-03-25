@@ -5,13 +5,14 @@ Please completely read CHANGES text until you reach the version you were
 using until now. Otherwise you might miss some important upgrading and
 configuration hints.
 
-This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
-already better than 1.3.5 (our previous stable release), at least for the
-features that are not new in 1.5.x.
+Starting with 1.5.3, update installation hints are marked with HINT.
+They assume you are upgrading from the last release version before (e.g. from
+1.5.2 to 1.5.3).
 
-Our release policy is not trying to make a "perfect release" (as that
-release might NEVER get released), but to make progress and don't delay
-releases too much.
+This release has known bugs (see MoinMoin:MoinMoinBugs), but we think it is
+already better than the previous stable release. Our release policy is not
+trying to make a "perfect release" (as that release might NEVER get released),
+but to make progress and don't delay releases too much.
 
 Known main issues:
 
@@ -33,6 +34,7 @@ Known main issues:
     $ make test >tests/make_test.out
 
 Version 1.5.current:
+
   New features:
     * Login and Logout are actions now, therefore you stay on the page where
       you were before.
@@ -42,11 +44,37 @@ Version 1.5.current:
     * There is also a [[Login]] macro now. You can put it on any page you want
       and if the user is not logged in, it renders the login form. If the user
       is logged in, it doesn't render anything.
+    * We check cfg.superuser to be a list of user names (as documented) and
+      deny superuser access if it is not. This avoids security issues by
+      wrong configuration.
+    * auth methods changed:
+      HINT: if you wrote own auth methods, please change them as you see in
+            MoinMoin/auth.py and test them again before relying on them.
+      * now get a user_obj kw argument that is either a user object returned
+        from a previous auth method or None (if no user has been made up yet).
+        The auth method should either return a user object (if it has
+        determined one) or what it got as user_obj (being "passive") or None
+        (if it wants to "veto" some user even if a previous method already has
+        made up some user object).
+      * return value of continue_flag is now True in most cases (except if
+        it wants to "veto" and abort).
+      * moin_cookie auth method now logs out a user by deleting the cookie and
+        setting user_obj.valid = 0. This makes it possible to still get the
+        user's name in subsequent auth method calls within the same request.
+      * added ldap_login and smb_mount auth methods, see MoinMoin/auth.py and
+        wiki/config/more_samples/ldap_smb_farmconfig.py
+    * MonthCalendar now takes an additional argument for specifying a template
+      to use to directly invoke the page editor when clicking on non-existing
+      day pages.
+    * Added ImageLink macro. Thanks to Jeff Kunce, Marcin Zalewski, Reimar
+      Bauer and Chong-Dae Park for working on it.
     * Lupy stuff (still experimental, partly broken and disabled by default):
-      * attachment search using lupy (lupy_search = 1 in your config)
+      HINT: Please update your data/plugin/ directory with the "filter" directory
+            as you see in wiki/data/plugin/filter.
+      * Attachment search using lupy (lupy_search = 1 in your config)
         Title search will also search attachment filenames.
         Full text search will also search attachment contents.
-      * indexing filter plugins, see MoinMoin:FiltersForIndexing
+      * Indexing filter plugins, see MoinMoin:FiltersForIndexing
         Some filters depend on external converters that might not be available
         for any platform (see Depends: line in filter plugin).
         Feel free to contribute more filter plugins, especially if you wrote
@@ -59,27 +87,12 @@ Version 1.5.current:
         text/* (-)
         JPEG's EXIF data (-)
         Binary generic (-)
-    * We check cfg.superuser to be a list of user names (as documented) and
-      deny superuser access if it is not. This avoids security issues by
-      wrong configuration.
-    * ldap_login and smb_mount auth methods, see MoinMoin/auth.py and
-      wiki/config/more_samples/ldap_smb_farmconfig.py
-    * auth methods now get a user_obj kw argument that is either a user object
-      returned from a previous auth method or None (if no user has been made
-      up yet). The auth method should either return a user object (if it has
-      determined one) or what it got as user_obj (being "passive") or None
-      (if it wants to "veto" some user even if a previous method already has
-      made up some user object).
-    * Changed auth methods return value of continue_flag to be True in most
-      cases (except if wants to "veto" and abort).
-    * moin_cookie auth method now logs out a user by deleting the cookie and
-      setting user_obj.valid = 0. This makes it possible to still get the
-      user's name in subsequent auth method calls within the same request.
-    * MonthCalendar now takes an additional argument for specifying a template
-      to use to directly invoke the page editor when clicking on non-existing
-      day pages.
-    * Added ImageLink macro. Thanks to Jeff Kunce, Marcin Zalewski, Reimar
-      Bauer and Chong-Dae Park for working on it.
+      * As you might know, Lupy is "retired" (that means it isn't developped
+        by its authors any more). We are currently evaluating Xapian as new
+        indexing search engine in moin.
+        If we succeed, we will replace Lupy stuff by some Xapian interface
+        code in moin.
+        But: the filters will likely stay, as we also need them with Xapian.
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
@@ -88,29 +101,29 @@ Version 1.5.current:
       that time or not. This has been changed, we update the cookie expiry now
       on every request, so it will expire cookie_lifetime after your last
       request (not after login).
-    * fixed logout problems when using cfg.cookie_path
-    * fixed cookie_path for root url wikis
-    * lupy search now behaves a bit less curious. Still no guarantees...
-    * we lowered the twisted server timeout to 2 minutes now (was: 10) because
+    * Fixed logout problems when using cfg.cookie_path.
+    * Fixed cookie_path for root url wikis.
+    * Lupy search now behaves a bit less curious. Still no guarantees...
+    * We lowered the twisted server timeout to 2 minutes now (was: 10) because
       it just used up too many files (open TCP connections until it timeouts)
       on our farm.
-    * the algorithm used for processing the farmconfig.wikis list was changed
+    * The algorithm used for processing the farmconfig.wikis list was changed
       to work for big farms (>= 50 wikis), too. This works around the python
       "re" module limitation of having a maximum of 100 named groups in a RE.
     * Fixed a TypeError which occurred for formatters that dislike None values.
       (cf. http://moinmoin.wikiwikiweb.de/MoinMoinBugs/PythonErrorEditingFrontPage)
-    * fixed converter error for https:... image urls
+    * Fixed GUI editor converter error for https:... image URLs.
     * ThemeBase (use by modern/rightsidebar): removed duplicate AttachFile from
-      actions menu (we already have it in editbar)
+      actions menu (we already have it in editbar).
     * Speedup group/dicts scanning for persistent servers.
     * Implemented HEAD requests for standalone server, this should fix some of
       the strange effects happening when using "Save as" on attachments.
     * Not a moin bug, but rather a workaround for non-standard non-ASCII DNS
       hostnames: we just use the IP instead of crashing now.
     * Spurious cyclic usage error in i18n fixed.
-    * fixed antispam for python 2.5a xmlrpclib
-    * i18n for linenumber toggle in listings
-    * all action menu entries are translatable now
+    * Fixed antispam for python 2.5a xmlrpclib.
+    * I18n for linenumber toggle in listings.
+    * All action menu entries are translatable now.
 
   Other:
     * Added css classes for the rst admonitions. Thanks to TiagoMacambira!
@@ -208,6 +221,12 @@ Version 1.5.1:
 
 
 Version 1.5.0:
+  HINT: 1.5.0 uses the same data/pages format as 1.3.x. The only thing you want
+        to check is whether the 1.5.x version you are upgrading to has NEW mig
+        scripts compared to the version you are running now (e.g. in 1.3.5 we
+        added some scripts that fixed some small problems).
+        See the MoinMoin/scripts/migration/ directory.
+        You must run every mig script in sequence and only ONCE ever.
   Fixes:
     * Fix <x=y> table attributes parsing. Thanks to Reimar Bauer.
     * Fixed a few bugs in the reStructured text parser. Note that you
@@ -1138,7 +1157,7 @@ Version 1.3.0 (2004-12-06, Revision moin--main--1.3--patch-400)
     !!! scripts or you will get data corruption or other problems.      !!!
     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    Upgrading your wiki - critical information
+    HINT: Upgrading your wiki - critical information
 
       If you are NOT starting from scratch, you MUST convert your existing
       data - see README.migration for details.
