@@ -12,7 +12,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, time
+import re, time, os
 from MoinMoin import action, config, macro, util
 from MoinMoin import wikiutil, wikiaction, i18n
 from MoinMoin.Page import Page
@@ -347,12 +347,34 @@ class Macro:
 
         return self.formatter.rawHTML(buf.getvalue())
 
-
     def _macro_SystemInfo(self, args):
         import operator, sys
         from StringIO import StringIO
         from MoinMoin import parser, processor, version
         from MoinMoin.logfile import editlog, eventlog
+        def _formatInReadableUnits(size):
+            size = float(size)
+            unit = u' Byte'
+            if size > 9999:
+                unit = u' KiB'
+                size /= 1024
+            if size > 9999:
+                unit = u' MiB'
+                size /= 1024
+            if size > 9999:
+                unit = u' GiB'
+                size /= 1024
+            return u"%.1f %s" % (size, unit)
+
+        def _getDirectorySize(path):
+            try:
+                dirsize = 0
+                for root, dirs, files in os.walk(path):
+                    dirsize += sum(os.path.getsize(os.path.join(root, name)) for name in files)
+            except EnvironmentError, e:
+                dirsize = -1
+            return dirsize
+
         _ = self._
         # check for 4XSLT
         try:
@@ -384,21 +406,24 @@ class Macro:
         row(_('MoinMoin Version'), _('Release %s [Revision %s]') % (version.release, version.revision))
         if ftversion:
             row(_('4Suite Version'), ftversion)
-        row(_('Number of pages'), str(len(pagelist)))
         systemPages = [page for page in pagelist
                        if wikiutil.isSystemPage(self.request, page)]
+        row(_('Number of pages'), str(len(pagelist)-len(systemPages)))
         row(_('Number of system pages'), str(len(systemPages)))
-        row(_('Accumulated page sizes'), str(totalsize))
+        row(_('Accumulated page sizes'), _formatInReadableUnits(totalsize))
+        data_dir = self.request.cfg.data_dir
+        row(_('Disk usage of %(data_dir)s/pages/') % {'data_dir': data_dir},
+            _formatInReadableUnits(_getDirectorySize(os.path.join(data_dir, 'pages'))))
+        row(_('Disk usage of %(data_dir)s/') % {'data_dir': data_dir},
+            _formatInReadableUnits(_getDirectorySize(data_dir)))
 
         edlog = editlog.EditLog(self.request)
-        row(_('Entries in edit log'),
-            _("%(logcount)s (%(logsize)s bytes)") %
-            {'logcount': edlog.lines(), 'logsize': edlog.size()})
+        row(_('Entries in edit log'), "%s (%s)" % (edlog.lines(), _formatInReadableUnits(edlog.size())))
 
         # This puts a heavy load on the server when the log is large
         eventlogger = eventlog.EventLog(self.request)
         nonestr = _("NONE")
-        row('Event log', "%s bytes" % eventlogger.size())
+        row('Event log', _formatInReadableUnits(eventlogger.size()))
         row(_('Global extension macros'), ', '.join(macro.extension_macros) or nonestr)
         row(_('Local extension macros'), 
             ', '.join(wikiutil.wikiPlugins('macro', self.cfg)) or nonestr)
