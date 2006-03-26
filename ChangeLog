@@ -2,6 +2,40 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 17:19:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-509
+
+    Summary:
+      moin maint mkpagepacks, moin maint globaledit
+    Revision:
+      moin--main--1.5--patch-509
+
+    moin maint mkpagepacks, moin maint globaledit
+    
+
+    removed files:
+     MoinMoin/script/old/packages/.arch-ids/=id
+     MoinMoin/script/old/packages/.arch-ids/__init__.py.id
+     MoinMoin/script/old/packages/__init__.py
+
+    modified files:
+     ChangeLog Makefile MoinMoin/script/maint/globaledit.py
+     MoinMoin/script/maint/mkpagepacks.py wiki/underlay.tar.bz2
+
+    renamed files:
+     MoinMoin/script/old/.arch-ids/globaledit.py.id
+       ==> MoinMoin/script/maint/.arch-ids/globaledit.py.id
+     MoinMoin/script/old/globaledit.py
+       ==> MoinMoin/script/maint/globaledit.py
+     MoinMoin/script/old/packages/.arch-ids/create_pagepacks.py.id
+       ==> MoinMoin/script/maint/.arch-ids/mkpagepacks.py.id
+     MoinMoin/script/old/packages/create_pagepacks.py
+       ==> MoinMoin/script/maint/mkpagepacks.py
+
+    removed directories:
+     MoinMoin/script/old/packages
+     MoinMoin/script/old/packages/.arch-ids
+
+
 2006-03-26 14:30:19 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-508
 
     Summary:
