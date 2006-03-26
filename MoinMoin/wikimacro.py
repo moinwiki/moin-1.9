@@ -370,7 +370,7 @@ class Macro:
             try:
                 dirsize = 0
                 for root, dirs, files in os.walk(path):
-                    dirsize += sum(os.path.getsize(os.path.join(root, name)) for name in files)
+                    dirsize += sum([os.path.getsize(os.path.join(root, name)) for name in files])
             except EnvironmentError, e:
                 dirsize = -1
             return dirsize

@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 23:08:43 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-517
+
+    Summary:
+      fixed bug in SystemInfo
+    Revision:
+      moin--main--1.5--patch-517
+
+    fixed bug in SystemInfo
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikimacro.py
+
+
 2006-03-26 21:50:56 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-516
 
     Summary:
