@@ -2,6 +2,32 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 13:38:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-506
+
+    Summary:
+      moin maint cleancache
+    Revision:
+      moin--main--1.5--patch-506
+
+    moin maint cleancache
+    
+
+    new files:
+     MoinMoin/script/maint/.arch-ids/=id
+
+    modified files:
+     ChangeLog MoinMoin/script/maint/cleancache.py docs/CHANGES
+
+    renamed files:
+     MoinMoin/script/old/.arch-ids/cachecleaner.py.id
+       ==> MoinMoin/script/maint/.arch-ids/cleancache.py.id
+     MoinMoin/script/old/cachecleaner.py
+       ==> MoinMoin/script/maint/cleancache.py
+
+    new directories:
+     MoinMoin/script/maint MoinMoin/script/maint/.arch-ids
+
+
 2006-03-26 13:23:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-505
 
     Summary:

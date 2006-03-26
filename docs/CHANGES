@@ -110,7 +110,8 @@ Version 1.5.current:
         scripts.
       * moin ... account create --name=JoeDoe --email=joe@doe.org
       * moin ... account disable --name=JoeDoe
-      * moin ... acount check    <-- this is what usercheck script was before
+      * moin ... acount check     <-- this is what usercheck script was before
+      * moin ... maint cleancache <-- this is what cachecleaner script was
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
