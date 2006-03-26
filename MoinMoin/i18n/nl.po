@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -885,12 +885,16 @@ msgstr "Aantal systeempagina's"
 msgid "Accumulated page sizes"
 msgstr "Totale grootte van alle pagina's"
 
-msgid "Entries in edit log"
-msgstr "Boekingen in het bewerkingslog"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Boekingen in het bewerkingslog"
 
 msgid "NONE"
 msgstr "GEEN"
@@ -1471,6 +1475,10 @@ msgstr "[BOVEN]"
 msgid "Click to do a full-text search for this title"
 msgstr "Klik hier om in de hele tekst te zoeken naar deze titel"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "GebruikersVoorkeuren"
+
 msgid "Logout"
 msgstr "Uitloggen"
 
@@ -1521,10 +1529,6 @@ msgstr "GelijkendePaginas"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "LokaleWegwijzer"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "GebruikersVoorkeuren"
 
 #, fuzzy
 msgid "My Pages"
@@ -1691,6 +1695,13 @@ msgstr "PaginaHernoemen"
 
 msgid "SpellCheck"
 msgstr "Spellingscontrole"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bytes)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "GebruikersVoorkeuren"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Download een export naar XML van deze wiki"

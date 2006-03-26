@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -902,12 +902,16 @@ msgstr "Anzahl der Systemseiten"
 msgid "Accumulated page sizes"
 msgstr "Kumulierte Seitengrößen"
 
-msgid "Entries in edit log"
-msgstr "Einträge in der Änderungshistorie"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s Bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Einträge in der Änderungshistorie"
 
 msgid "NONE"
 msgstr "KEINE"
@@ -1499,6 +1503,9 @@ msgstr "[KOPF]"
 msgid "Click to do a full-text search for this title"
 msgstr "Hier klicken für eine Liste der Seiten, die auf diese verweisen"
 
+msgid "Preferences"
+msgstr "Einstellungen"
+
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -1545,9 +1552,6 @@ msgstr "Ähnliche Seiten"
 
 msgid "Local Site Map"
 msgstr "ÜbersichtsKarte"
-
-msgid "User Preferences"
-msgstr "Benutzer-Einstellungen"
 
 msgid "My Pages"
 msgstr "Meine Seiten"
@@ -1705,3 +1709,9 @@ msgstr "SeiteUmbenennen"
 
 msgid "SpellCheck"
 msgstr "RechtSchreibung"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s Bytes)"
+
+#~ msgid "User Preferences"
+#~ msgstr "Benutzer-Einstellungen"

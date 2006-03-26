@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -873,12 +873,16 @@ msgstr "Antall systemsider"
 msgid "Accumulated page sizes"
 msgstr "Sammenlagt sidestørrelse"
 
-msgid "Entries in edit log"
-msgstr "Emner i endringsloggen"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s byte)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Emner i endringsloggen"
 
 msgid "NONE"
 msgstr "INGEN"
@@ -1448,6 +1452,10 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "Klikk her for å kjøre et fritekstsøk etter denne tittelen"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "BrukerProfil"
+
 msgid "Logout"
 msgstr "Logg ut"
 
@@ -1499,10 +1507,6 @@ msgstr "LignendeSider"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "LokalOversikt"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "BrukerProfil"
 
 #, fuzzy
 msgid "My Pages"
@@ -1671,6 +1675,13 @@ msgstr "EndreSidenavn"
 
 msgid "SpellCheck"
 msgstr "StaveKontroll"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s byte)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "BrukerProfil"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Last ned XML-eksporten av denne wikien"

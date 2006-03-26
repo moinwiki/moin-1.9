@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-03-23 14:53+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -887,12 +887,16 @@ msgstr "システムページ数"
 msgid "Accumulated page sizes"
 msgstr "ページサイズの合計"
 
-msgid "Entries in edit log"
-msgstr "編集ログ中のエントリー数"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)sバイト)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "編集ログ中のエントリー数"
 
 msgid "NONE"
 msgstr "なし"
@@ -1468,6 +1472,10 @@ msgstr "画面上へ"
 msgid "Click to do a full-text search for this title"
 msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "ユーザプレファレンス"
+
 msgid "Logout"
 msgstr "ログアウト"
 
@@ -1514,9 +1522,6 @@ msgstr "似たページ"
 
 msgid "Local Site Map"
 msgstr "ローカルサイトマップ"
-
-msgid "User Preferences"
-msgstr "ユーザプレファレンス"
 
 msgid "My Pages"
 msgstr "マイページ"
@@ -1674,6 +1679,12 @@ msgstr "ページ名変更"
 
 msgid "SpellCheck"
 msgstr "スペルチェック"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)sバイト)"
+
+#~ msgid "User Preferences"
+#~ msgstr "ユーザプレファレンス"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "このwikiのXML exportをダウンロード"

@@ -535,8 +535,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''문서 크기 총합''',
 '''Entries in edit log''':
 '''수정사항 로그 길이''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s 바이트)''',
 '''NONE''':
 '''없음''',
 '''Global extension macros''':
@@ -885,8 +883,6 @@ red=edit''',
 '''비슷한 페이지''',
 '''Local Site Map''':
 '''사이트맵''',
-'''User Preferences''':
-'''사용자 설정''',
 '''My Pages''':
 '''내문서''',
 '''Subscribe User''':

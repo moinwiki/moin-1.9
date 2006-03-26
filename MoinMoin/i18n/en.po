@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -787,11 +787,15 @@ msgstr ""
 msgid "Accumulated page sizes"
 msgstr ""
 
-msgid "Entries in edit log"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
 msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
 msgstr ""
 
 msgid "NONE"
@@ -1336,6 +1340,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr ""
 
+msgid "Preferences"
+msgstr ""
+
 msgid "Logout"
 msgstr ""
 
@@ -1381,9 +1388,6 @@ msgid "Like Pages"
 msgstr ""
 
 msgid "Local Site Map"
-msgstr ""
-
-msgid "User Preferences"
 msgstr ""
 
 msgid "My Pages"

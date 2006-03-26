@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -897,12 +897,16 @@ msgstr "Nombre de pàgines del sistema"
 msgid "Accumulated page sizes"
 msgstr "Mida acumulada de les pàgines"
 
-msgid "Entries in edit log"
-msgstr "Entrades al registre d'edició"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s octets)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Entrades al registre d'edició"
 
 msgid "NONE"
 msgstr "CAP"
@@ -1487,6 +1491,10 @@ msgstr "[SUPERIOR]"
 msgid "Click to do a full-text search for this title"
 msgstr "Feu clic per a fer una cerca del text complet per a aquest títol"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "PreferènciesUsuari"
+
 msgid "Logout"
 msgstr "Surt"
 
@@ -1533,10 +1541,6 @@ msgstr "Pàgines semblants"
 
 msgid "Local Site Map"
 msgstr "Mapa del lloc"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "PreferènciesUsuari"
 
 #, fuzzy
 msgid "My Pages"
@@ -1697,6 +1701,13 @@ msgstr "ReanomenaPàgina"
 
 msgid "SpellCheck"
 msgstr "ComprovacióOrtogràfica"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s octets)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "PreferènciesUsuari"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Descarregueu una exportació en XML d'aquest wiki"

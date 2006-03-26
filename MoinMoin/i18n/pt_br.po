@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -893,12 +893,16 @@ msgstr "Número de páginas de sistema"
 msgid "Accumulated page sizes"
 msgstr "Total acumulado dos tamanhos de páginas"
 
-msgid "Entries in edit log"
-msgstr "Entradas no registro de edição"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Entradas no registro de edição"
 
 msgid "NONE"
 msgstr "NENHUM"
@@ -1483,6 +1487,10 @@ msgstr "[TOPO]"
 msgid "Click to do a full-text search for this title"
 msgstr "Clique aqui para fazer uma busca completa para este título"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "PreferênciasDoUsuário"
+
 msgid "Logout"
 msgstr "Sair"
 
@@ -1529,10 +1537,6 @@ msgstr "Páginas Semelhantes"
 
 msgid "Local Site Map"
 msgstr "Mapa do Site Local"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "PreferênciasDoUsuário"
 
 #, fuzzy
 msgid "My Pages"
@@ -1694,6 +1698,13 @@ msgstr "RenomearPágina"
 
 msgid "SpellCheck"
 msgstr "VerificaçãoOrtográfica"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bytes)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "PreferênciasDoUsuário"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Baixar arquivo XML exportado desta wiki"

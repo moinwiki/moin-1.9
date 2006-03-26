@@ -528,8 +528,6 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Souhrnná velikost stránek''',
 '''Entries in edit log''':
 '''Záznamy v edit-logu''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytů)''',
 '''NONE''':
 '''ŽÁDNÝ (NONE)''',
 '''Global extension macros''':
@@ -878,8 +876,6 @@ red=edit''':
 '''Podobné Stránky''',
 '''Local Site Map''':
 '''Lokální Mapa Stránek''',
-'''User Preferences''':
-'''Nastaveni Uzivatele''',
 '''My Pages''':
 '''Moje Stránky''',
 '''Subscribe User''':

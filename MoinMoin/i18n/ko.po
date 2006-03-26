@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-03-22 09:10+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -879,12 +879,16 @@ msgstr "시스템 문서 개수"
 msgid "Accumulated page sizes"
 msgstr "문서 크기 총합"
 
-msgid "Entries in edit log"
-msgstr "수정사항 로그 길이"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s 바이트)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "수정사항 로그 길이"
 
 msgid "NONE"
 msgstr "없음"
@@ -1464,6 +1468,10 @@ msgstr "[처음]"
 msgid "Click to do a full-text search for this title"
 msgstr "이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "사용자 설정"
+
 msgid "Logout"
 msgstr "로그아웃"
 
@@ -1510,9 +1518,6 @@ msgstr "비슷한 페이지"
 
 msgid "Local Site Map"
 msgstr "사이트맵"
-
-msgid "User Preferences"
-msgstr "사용자 설정"
 
 msgid "My Pages"
 msgstr "내문서"
@@ -1670,6 +1675,12 @@ msgstr "이름 변경"
 
 msgid "SpellCheck"
 msgstr "철자 검사"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s 바이트)"
+
+#~ msgid "User Preferences"
+#~ msgstr "사용자 설정"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "이 위키 전체를 XML로 변환하여 받기"

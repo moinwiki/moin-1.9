@@ -511,8 +511,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''حجم صفحات جمع شده''',
 '''Entries in edit log''':
 '''محتویات گزارش ویرایش''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s·(%(logsize)s·bytes)''',
 '''NONE''':
 '''هیچ یک''',
 '''Global extension macros''':

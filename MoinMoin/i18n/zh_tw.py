@@ -531,8 +531,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''頁面大小總計''',
 '''Entries in edit log''':
 '''修訂記錄總計''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s 條 (計 %(logsize)s 位元組)''',
 '''NONE''':
 '''無''',
 '''Global extension macros''':
@@ -883,8 +881,6 @@ red=edit''':
 '''相似頁面''',
 '''Local Site Map''':
 '''連結地圖''',
-'''User Preferences''':
-'''使用者設定''',
 '''My Pages''':
 '''我的頁面''',
 '''Subscribe User''':

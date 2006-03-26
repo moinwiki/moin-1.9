@@ -534,8 +534,6 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Tamaño acumulado de las páginas''',
 '''Entries in edit log''':
 '''Entradas en el registro de edición''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
 '''NINGUNO''',
 '''Global extension macros''':

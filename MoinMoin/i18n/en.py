@@ -530,10 +530,12 @@ Contact the owner of the wiki, who can enable email.''',
 '''Number of system pages''',
 '''Accumulated page sizes''':
 '''Accumulated page sizes''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Disk usage of %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Disk usage of %(data_dir)s/''',
 '''Entries in edit log''':
 '''Entries in edit log''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
 '''NONE''',
 '''Global extension macros''':
@@ -850,6 +852,8 @@ red=edit''',
 '''[TOP]''',
 '''Click to do a full-text search for this title''':
 '''Click to do a full-text search for this title''',
+'''Preferences''':
+'''Preferences''',
 '''Logout''':
 '''Logout''',
 '''Clear message''':
@@ -880,8 +884,6 @@ red=edit''',
 '''Like Pages''',
 '''Local Site Map''':
 '''Local Site Map''',
-'''User Preferences''':
-'''User Preferences''',
 '''My Pages''':
 '''My Pages''',
 '''Subscribe User''':

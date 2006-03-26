@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -912,12 +912,16 @@ msgstr "Sistem sayfası sayısı"
 msgid "Accumulated page sizes"
 msgstr "Toplanan sayfa sayısı"
 
-msgid "Entries in edit log"
-msgstr "Düzenleme kayıtlarındaki girdiler"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bayt)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Düzenleme kayıtlarındaki girdiler"
 
 msgid "NONE"
 msgstr "YOK"
@@ -1507,6 +1511,10 @@ msgstr "[ÜST]"
 msgid "Click to do a full-text search for this title"
 msgstr "Bu başlık için tam metin araması gerçekleştirmek için tıklayınız"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "KullanıcıÖzellikleri"
+
 msgid "Logout"
 msgstr "Çıkış"
 
@@ -1553,10 +1561,6 @@ msgstr "Benzer Sayfalar"
 
 msgid "Local Site Map"
 msgstr "Yerel Site Haritası"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "KullanıcıÖzellikleri"
 
 #, fuzzy
 msgid "My Pages"
@@ -1718,6 +1722,13 @@ msgstr "SayfaAdlandır"
 
 msgid "SpellCheck"
 msgstr "İmlaDenetimi"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bayt)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "KullanıcıÖzellikleri"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Bu Wiki'nin XML çıktısını indir"

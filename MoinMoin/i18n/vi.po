@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -874,12 +874,16 @@ msgstr "Số trang hệ thống"
 msgid "Accumulated page sizes"
 msgstr "Tổng kích thước"
 
-msgid "Entries in edit log"
-msgstr "Các mục trong edit log"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Các mục trong edit log"
 
 msgid "NONE"
 msgstr "NONE"
@@ -1453,6 +1457,10 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr "Nhấn vào đây để thực hiện tìm kiếm theo nội dung với tiêu đề này"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "Sở thích cá nhân"
+
 msgid "Logout"
 msgstr "Thoát"
 
@@ -1504,10 +1512,6 @@ msgstr "LikePages"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "LocalSiteMap"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "Sở thích cá nhân"
 
 #, fuzzy
 msgid "My Pages"
@@ -1673,6 +1677,13 @@ msgstr "RenamePage"
 
 msgid "SpellCheck"
 msgstr "SpellCheck"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bytes)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "Sở thích cá nhân"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Tải về theo dạng XML của trang này"

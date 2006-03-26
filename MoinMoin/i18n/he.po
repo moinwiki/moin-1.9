@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -855,12 +855,16 @@ msgstr "מספר דפי מערכת"
 msgid "Accumulated page sizes"
 msgstr "גודל דפים מצטבר"
 
-msgid "Entries in edit log"
-msgstr "רשומות בדו\"ח העריכה"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s בתים)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "רשומות בדו\"ח העריכה"
 
 msgid "NONE"
 msgstr "אין"
@@ -1423,6 +1427,10 @@ msgstr "למעלה"
 msgid "Click to do a full-text search for this title"
 msgstr "חפשו דפים הקשורים לדף זה"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "העדפות משתמש"
+
 msgid "Logout"
 msgstr "התנתק"
 
@@ -1473,10 +1481,6 @@ msgstr "דפים דומים"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "מפת אתר מקומית"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "העדפות משתמש"
 
 #, fuzzy
 msgid "My Pages"
@@ -1641,6 +1645,13 @@ msgstr "שנה שם דף"
 
 msgid "SpellCheck"
 msgstr "בדוק איות"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s בתים)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "העדפות משתמש"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "יצא את תוכן הוויקי במבנה XML"

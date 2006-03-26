@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-03-24 15:00+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -854,12 +854,16 @@ msgstr "系統頁面數"
 msgid "Accumulated page sizes"
 msgstr "頁面大小總計"
 
-msgid "Entries in edit log"
-msgstr "修訂記錄總計"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s 條 (計 %(logsize)s 位元組)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "修訂記錄總計"
 
 msgid "NONE"
 msgstr "無"
@@ -1420,6 +1424,10 @@ msgstr "[頂部]"
 msgid "Click to do a full-text search for this title"
 msgstr "點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "使用者設定"
+
 msgid "Logout"
 msgstr "登出"
 
@@ -1466,9 +1474,6 @@ msgstr "相似頁面"
 
 msgid "Local Site Map"
 msgstr "連結地圖"
-
-msgid "User Preferences"
-msgstr "使用者設定"
 
 msgid "My Pages"
 msgstr "我的頁面"
@@ -1624,6 +1629,12 @@ msgstr "重新命名"
 
 msgid "SpellCheck"
 msgstr "拼字檢查"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s 條 (計 %(logsize)s 位元組)"
+
+#~ msgid "User Preferences"
+#~ msgstr "使用者設定"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "以 XML 格式匯出本 wiki"

@@ -518,8 +518,6 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sivujen koko yhteensä''',
 '''Entries in edit log''':
 '''Merkintöjä muutoslokissa''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s tavua)''',
 '''NONE''':
 '''EI''',
 '''Global extension macros''':

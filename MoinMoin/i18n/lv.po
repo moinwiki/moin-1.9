@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -890,12 +890,16 @@ msgstr "Sistēmas lapu skaits"
 msgid "Accumulated page sizes"
 msgstr "Visu lapu izmērs"
 
-msgid "Entries in edit log"
-msgstr "Ierakstīt izmaiņu protokolā"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s baiti)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Ierakstīt izmaiņu protokolā"
 
 msgid "NONE"
 msgstr "NEKAS"
@@ -1466,6 +1470,10 @@ msgstr "[AUGŠA]"
 msgid "Click to do a full-text search for this title"
 msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "JūsuIestatījumi"
+
 msgid "Logout"
 msgstr "Iziet"
 
@@ -1512,9 +1520,6 @@ msgstr "Līdzīgas lapas"
 
 msgid "Local Site Map"
 msgstr "Lokālā vietnes karte"
-
-msgid "User Preferences"
-msgstr "Lietotāja Iestatījumi"
 
 msgid "My Pages"
 msgstr "Manas Lapas"
@@ -1679,6 +1684,12 @@ msgstr "PārdēvētLapu"
 
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s baiti)"
+
+#~ msgid "User Preferences"
+#~ msgstr "Lietotāja Iestatījumi"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Lejupielādēt XML eksportu no šī wiki"

@@ -387,8 +387,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Ukupne veličine stranica''',
 '''Entries in edit log''':
 '''Broj zapisa u istoriji promena''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bajta)''',
 '''NONE''':
 '''NIJEDAN''',
 '''Global extension macros''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -881,12 +881,16 @@ msgstr "Rendszerlapok száma"
 msgid "Accumulated page sizes"
 msgstr "Összesített lapméretek"
 
-msgid "Entries in edit log"
-msgstr "Bejegyzések a szerkesztési naplóban"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s byte)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Bejegyzések a szerkesztési naplóban"
 
 msgid "NONE"
 msgstr "NINCS"
@@ -1462,6 +1466,10 @@ msgstr "[FELÜLRE]"
 msgid "Click to do a full-text search for this title"
 msgstr "Kattintson a cím teljes szöveges kereséséért"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "FelhasználóiBeállítások"
+
 msgid "Logout"
 msgstr "Kilépés"
 
@@ -1512,10 +1520,6 @@ msgstr "HasonlóLapok"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "HelyiLaptérkép"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "FelhasználóiBeállítások"
 
 #, fuzzy
 msgid "My Pages"
@@ -1684,6 +1688,13 @@ msgstr "LapÁtnevezés"
 
 msgid "SpellCheck"
 msgstr "HelyesírásEllenőrzés"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s byte)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "FelhasználóiBeállítások"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "A wiki XML-exportjának letöltése"

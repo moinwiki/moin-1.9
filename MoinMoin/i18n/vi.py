@@ -417,8 +417,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Tổng kích thước''',
 '''Entries in edit log''':
 '''Các mục trong edit log''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
 '''NONE''',
 '''Global extension macros''':

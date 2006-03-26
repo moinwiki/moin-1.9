@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -874,12 +874,16 @@ msgstr "Число служебных страниц"
 msgid "Accumulated page sizes"
 msgstr "Размер всех страниц"
 
-msgid "Entries in edit log"
-msgstr "Записей в протоколе изменений"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s байт)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Записей в протоколе изменений"
 
 msgid "NONE"
 msgstr "НЕТ"
@@ -1453,6 +1457,10 @@ msgstr "[ВВЕРХ]"
 msgid "Click to do a full-text search for this title"
 msgstr "Нажмите сюда для поиска этого названия везде"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "ВашиНастройки"
+
 msgid "Logout"
 msgstr "Выйти"
 
@@ -1499,10 +1507,6 @@ msgstr "Похожие Страницы"
 
 msgid "Local Site Map"
 msgstr "Карта Окресностей"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "ВашиНастройки"
 
 #, fuzzy
 msgid "My Pages"
@@ -1664,6 +1668,13 @@ msgstr "Переименовать"
 
 msgid "SpellCheck"
 msgstr "Правописание"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s байт)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "ВашиНастройки"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Сохранить XML версию этого вики"

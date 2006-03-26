@@ -219,7 +219,7 @@ class ThemeBase:
                         request.formatter.interwikilink(0))
             userlinks.append(homelink)        
             # link to userprefs action
-            userlinks.append(d['page'].link_to(request, text=_('User Preferences'),
+            userlinks.append(d['page'].link_to(request, text=_('Preferences'),
                                                querystr={'action': 'userprefs'}, id="userprefs"))
            
         if request.cfg.show_login:

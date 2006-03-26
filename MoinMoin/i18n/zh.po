@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -859,12 +859,16 @@ msgstr "系统网页数"
 msgid "Accumulated page sizes"
 msgstr "累计网页大小"
 
-msgid "Entries in edit log"
-msgstr "编辑日志项次"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s次 (%(logsize)s字节)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "编辑日志项次"
 
 msgid "NONE"
 msgstr "无"
@@ -1426,6 +1430,10 @@ msgstr "[顶部]"
 msgid "Click to do a full-text search for this title"
 msgstr "点击对这个标题进行全文检索"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "用户设置"
+
 msgid "Logout"
 msgstr "登出"
 
@@ -1472,10 +1480,6 @@ msgstr "相似网页"
 
 msgid "Local Site Map"
 msgstr "本站地图"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "用户设置"
 
 #, fuzzy
 msgid "My Pages"
@@ -1635,6 +1639,13 @@ msgstr "改名"
 
 msgid "SpellCheck"
 msgstr "拼写检查"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s次 (%(logsize)s字节)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "用户设置"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "下载本维基的XML输出"
