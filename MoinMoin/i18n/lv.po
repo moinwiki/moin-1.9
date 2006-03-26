@@ -1513,28 +1513,23 @@ msgstr "Līdzīgas lapas"
 msgid "Local Site Map"
 msgstr "Lokālā vietnes karte"
 
-#, fuzzy
 msgid "User Preferences"
-msgstr "JūsuIestatījumi"
+msgstr "Lietotāja Iestatījumi"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "Lapa"
+msgstr "Manas Lapas"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "Parakstīties"
+msgstr "Parakstīt Lietotāju"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "Dzēst saiti"
+msgstr "Atsārņot"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "Līdzīgas lapas"
+msgstr "Iesaiņot Lapas"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Sniegt Docbook formātā"
 
 msgid "Do"
 msgstr "Veikt"

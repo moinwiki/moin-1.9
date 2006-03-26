@@ -888,6 +888,18 @@ rouge=modifications''',
 '''Pages similaires''',
 '''Local Site Map''':
 '''Carte locale du site''',
+'''User Preferences''':
+'''Préférences utilisateur''',
+'''My Pages''':
+'''Ma page''',
+'''Subscribe User''':
+'''Abonner un utilisateur''',
+'''Remove Spam''':
+'''Dépolluer''',
+'''Package Pages''':
+'''Pages des paquets''',
+'''Render as Docbook''':
+'''Rendu Docbook''',
 '''Do''':
 '''Exécuter''',
 '''Edit (Text)''':

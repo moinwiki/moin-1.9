@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-22 13:19+0100\n"
-"PO-Revision-Date: 2006-02-06 15:44+0900\n"
+"PO-Revision-Date: 2006-03-23 14:53+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -673,6 +673,8 @@ msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
 msgstr ""
+"アカウントを作成したり、忘れてしまったパスワードを復活する際には %"
+"(userprefslink)s を参照してください。"
 
 msgid "Action"
 msgstr "アクション"
@@ -1247,20 +1249,19 @@ msgid ""
 msgstr ""
 "名前の無いページを作成することはできません。ページ名を指定してください。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "ささいな変更の通知も受ける"
+msgstr "ユーザをページ\"%s\"の購読者に追加"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "購読"
+msgstr "\"%s\"の購読者に追加されたユーザ"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "存在しないユーザ:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "このページを編集する権限がありません。"
+msgstr "このアクションを行う権限がありません。"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1275,7 +1276,7 @@ msgid "Edit drawing %(filename)s"
 msgstr "drawing\"%(filename)s\"を編集"
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "行番号表示/非表示切替"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1514,28 +1515,23 @@ msgstr "似たページ"
 msgid "Local Site Map"
 msgstr "ローカルサイトマップ"
 
-#, fuzzy
 msgid "User Preferences"
 msgstr "ユーザプレファレンス"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "ページ"
+msgstr "マイページ"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "購読"
+msgstr "購読ユーザ追加"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "リンクを削除"
+msgstr "スパムを削除"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "似たページ"
+msgstr "ページのパッケージ化"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Docbookとして描画"
 
 msgid "Do"
 msgstr "実行"

@@ -1511,28 +1511,23 @@ msgstr "비슷한 페이지"
 msgid "Local Site Map"
 msgstr "사이트맵"
 
-#, fuzzy
 msgid "User Preferences"
 msgstr "사용자 설정"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "문서"
+msgstr "내문서"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "구독"
+msgstr "구독 중인 사용자"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "즐겨찾기 제거"
+msgstr "스팸 제거"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "비슷한 페이지"
+msgstr "문서 묶기"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Dockbook으로 보여주기"
 
 msgid "Do"
 msgstr "확인"

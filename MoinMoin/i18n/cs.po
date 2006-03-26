@@ -664,7 +664,7 @@ msgstr "Zašli mi má data k účtu"
 msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
-msgstr ""
+msgstr "Vytvořit účet nebo zjistit zapomenuté heslo lze v %(userprefslink)s."
 
 msgid "Action"
 msgstr "Akce"
@@ -1232,20 +1232,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. "
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Odebírat při minimálních změnách"
+msgstr "Přihlásit uživatele k odebírání stránky %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "Odebírat"
+msgstr "Uživatelé odebírající %s"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "Není uživatel:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Nemáte dovoleno editovat tuto stránku."
+msgstr "Nemáte dovoleno provést tuto akci."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1260,7 +1259,7 @@ msgid "Edit drawing %(filename)s"
 msgstr "Editace obrázku %(filename)s"
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "Přepnout zobrazení čísel řádků"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1496,28 +1495,23 @@ msgstr "Podobné Stránky"
 msgid "Local Site Map"
 msgstr "Lokální Mapa Stránek"
 
-#, fuzzy
 msgid "User Preferences"
-msgstr "NastaveniUzivatele"
+msgstr "Nastaveni Uzivatele"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "Stránka"
+msgstr "Moje Stránky"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "Odebírat"
+msgstr "Přihlásit uživatele k odběru"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "Odstranit Odkaz"
+msgstr "Odstranit Spam"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "Podobné Stránky"
+msgstr "Vytvořit balík stránek"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Zobrazit jako Docbook"
 
 msgid "Do"
 msgstr "Proveď!"

@@ -2,6 +2,27 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 18:11:22 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-512
+
+    Summary:
+      updated i18n, bumped rev to 1.5.3-rc1
+    Revision:
+      moin--main--1.5--patch-512
+
+    updated i18n, bumped rev to 1.5.3-rc1
+    
+
+    modified files:
+     ChangeLog MoinMoin/i18n/cs.po MoinMoin/i18n/cs.py
+     MoinMoin/i18n/fr.po MoinMoin/i18n/fr.py MoinMoin/i18n/ja.po
+     MoinMoin/i18n/ja.py MoinMoin/i18n/ko.po MoinMoin/i18n/ko.py
+     MoinMoin/i18n/lv.po MoinMoin/i18n/lv.py MoinMoin/i18n/sv.po
+     MoinMoin/i18n/sv.py MoinMoin/i18n/zh_tw.po
+     MoinMoin/i18n/zh_tw.py MoinMoin/script/cli/show.py
+     MoinMoin/script/import/irclog.py MoinMoin/version.py
+     docs/CHANGES moin.spec
+
+
 2006-03-26 17:44:55 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-511
 
     Summary:
