@@ -2,6 +2,35 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 17:22:23 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-510
+
+    Summary:
+      move chartypes.py creation script besides the result
+    Revision:
+      moin--main--1.5--patch-510
+
+    move chartypes.py creation script besides the result
+    
+
+    removed files:
+     MoinMoin/script/old/unicode/.arch-ids/=id
+     MoinMoin/script/old/unicode/.arch-ids/__init__.py.id
+     MoinMoin/script/old/unicode/__init__.py
+
+    modified files:
+     ChangeLog
+
+    renamed files:
+     MoinMoin/script/old/unicode/.arch-ids/mk_chartypes.py.id
+       ==> MoinMoin/util/.arch-ids/chartypes_create.py.id
+     MoinMoin/script/old/unicode/mk_chartypes.py
+       ==> MoinMoin/util/chartypes_create.py
+
+    removed directories:
+     MoinMoin/script/old/unicode
+     MoinMoin/script/old/unicode/.arch-ids
+
+
 2006-03-26 17:19:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-509
 
     Summary:
