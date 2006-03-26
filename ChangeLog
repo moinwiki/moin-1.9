@@ -2,6 +2,40 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 14:30:19 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-508
+
+    Summary:
+      moin maint reducewiki
+    Revision:
+      moin--main--1.5--patch-508
+
+    moin maint reducewiki
+    
+
+    new files:
+     MoinMoin/script/maint/.arch-ids/__init__.py.id
+     MoinMoin/script/maint/__init__.py
+
+    removed files:
+     MoinMoin/script/old/reducewiki/.arch-ids/=id
+     MoinMoin/script/old/reducewiki/.arch-ids/__init__.py.id
+     MoinMoin/script/old/reducewiki/__init__.py
+
+    modified files:
+     ChangeLog Makefile MoinMoin/script/maint/reducewiki.py
+     wiki/underlay.tar.bz2
+
+    renamed files:
+     MoinMoin/script/old/reducewiki/.arch-ids/reducewiki.py.id
+       ==> MoinMoin/script/maint/.arch-ids/reducewiki.py.id
+     MoinMoin/script/old/reducewiki/reducewiki.py
+       ==> MoinMoin/script/maint/reducewiki.py
+
+    removed directories:
+     MoinMoin/script/old/reducewiki
+     MoinMoin/script/old/reducewiki/.arch-ids
+
+
 2006-03-26 13:49:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-507
 
     Summary:
