@@ -80,8 +80,8 @@ error: access error like a dict ... ok
 error: create with encoded string ... ok
 error: create with any object ... ok
 error: create with unicode ... ok
-testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase) ... Formatting using <class MoinMoin.formatter.dom_xml.Formatter at 0x55b782fc>
-[('xml', {}), ('p', {'type': 'ol'}), ('ol', {'start': None, 'type': u'1'}), ('li', {})]
+testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase) ... Formatting using <class MoinMoin.formatter.dom_xml.Formatter at 0x55bbdbfc>
+[('xml', {}), ('ul', {}), ('li', {}), ('p', {}), ('attachment', {'href': u'filename.txt'})]
 ERROR
 testQuoting (MoinMoin._tests.test_packages.QuotingTestCase) ... ok
 testBasicPackageThings (MoinMoin._tests.test_packages.UnsafePackageTestcase) ... ok
@@ -124,10 +124,6 @@ pysupport: import name from existing module ... ok
 pysupport: import nonexistent attritbue raises AttributeError ... ok
 pysupport: import nonexistent module raises ImportError ... ok
 pysupport: import nonexistent wiki plugin fail ... ok
-repair_language: should replace known language ... ok
-repair_language: return crlf line endings ... ok
-repair_language: should not replace in page body ... ok
-repair_language: should not replace unknown langauge ... ok
 request: getPageNameFromQueryString: ascii ... ok
 request: getPageNameFromQueryString: non ascii ... ok
 request: getPageNameFromQueryString: under_score ... ok
@@ -213,9 +209,9 @@ Traceback (most recent call last):
     self.do(test, output)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
     super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1058, in do
+    tree = converter.parse(text)
+TypeError: parse() takes exactly 2 arguments (1 given)
 
 ======================================================================
 ERROR: test2 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
@@ -225,9 +221,9 @@ Traceback (most recent call last):
     self.do(test, output)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
     super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1058, in do
+    tree = converter.parse(text)
+TypeError: parse() takes exactly 2 arguments (1 given)
 
 ======================================================================
 ERROR: test3 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
@@ -237,9 +233,9 @@ Traceback (most recent call last):
     self.do(test, output)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
     super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1058, in do
+    tree = converter.parse(text)
+TypeError: parse() takes exactly 2 arguments (1 given)
 
 ======================================================================
 ERROR: test4 (MoinMoin._tests.test_converter_text_html_text_x_moin.StripWhitespaceTests)
@@ -249,9 +245,9 @@ Traceback (most recent call last):
     self.do(test, output)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1074, in do
     super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1064, in do
-    raise _tests.TestSkiped('xml.dom.ext module is not available')
-TestSkipped: xml.dom.ext module is not available
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_converter_text_html_text_x_moin.py", line 1058, in do
+    tree = converter.parse(text)
+TypeError: parse() takes exactly 2 arguments (1 given)
 
 ======================================================================
 ERROR: testSyntaxReference (MoinMoin._tests.test_formatter.FormatterTestCase)
@@ -261,20 +257,21 @@ Traceback (most recent call last):
     self.formatPage("SyntaxReference", formatter)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/_tests/test_formatter.py", line 45, in formatPage
     return self.request.redirectedOutput(page.send_page, self.request)
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/request.py", line 682, in redirectedOutput
+  File "MoinMoin/script/../../MoinMoin/request.py", line 718, in redirectedOutput
     function(*args, **kw)
-  File "../../MoinMoin/Page.py", line 1227, in send_page
-  File "../../MoinMoin/Page.py", line 1306, in send_page_content
-  File "../../MoinMoin/Page.py", line 1323, in format
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 1061, in format
-    self.request.write(self._indent_to(indlen, indtype, numtype, numstart))
-  File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 571, in _indent_to
-    close.append(self.formatter.paragraph(0))
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1235, in send_page
+    start_line=pi_lines)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1314, in send_page_content
+    self.format(parser)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/Page.py", line 1331, in format
+    parser.format(self.formatter)
+  File "/srv/moin_tw/moin--main--1.5/MoinMoin/parser/wiki.py", line 1033, in format
+    self.request.write(self.formatter.paragraph(0))
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/formatter/dom_xml.py", line 301, in paragraph
     return self._set_tag('p', on)
   File "/srv/moin_tw/moin--main--1.5/MoinMoin/formatter/dom_xml.py", line 159, in _set_tag
     raise ValueError, "<%s> expected <%s> given" % (last_tag, tag)
-ValueError: <li> expected <p> given
+ValueError: <attachment> expected <p> given
 
 ======================================================================
 FAIL: testComment01 (MoinMoin._tests.test_converter_text_html_text_x_moin.ConvertBlockRepeatableTests)
@@ -1241,6 +1238,6 @@ Traceback (most recent call last):
 AssertionError: "FrontPage" is NOT a system page
 
 ----------------------------------------------------------------------
-Ran 201 tests in 9.665s
+Ran 197 tests in 6.962s
 
 FAILED (failures=82, errors=5)
