@@ -39,8 +39,8 @@ epydoc: patchlevel
 # Create new underlay directory from MoinMaster
 # Should be used only on TW machine
 underlay:
-	cd $(share) ; rm -rf underlay
-	cd $(share) ; PYTHONPATH=.. ../MoinMoin/scripts/reducewiki/reducewiki.py
+	rm -rf $(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin15 --wiki-url=moinmaster.wikiwikiweb.de/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap/
 	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \
 	    $(share)/underlay/pages/MoinPagesEditorGroup/revisions/00000001
