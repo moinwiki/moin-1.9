@@ -533,10 +533,12 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Nombre de pages systèmes''',
 '''Accumulated page sizes''':
 '''Taille cumulée des pages''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Utilisation disque de %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Utilisation disque de %(data_dir)s/''',
 '''Entries in edit log''':
 '''Entrées dans le journal des modifications''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s octets)''',
 '''NONE''':
 '''RIEN''',
 '''Global extension macros''':
@@ -858,6 +860,8 @@ rouge=modifications''',
 '''[HAUT]''',
 '''Click to do a full-text search for this title''':
 '''Cliquez ici pour faire une recherche de ce titre dans les pages''',
+'''Preferences''':
+'''Préférences''',
 '''Logout''':
 '''Déconnexion''',
 '''Clear message''':
@@ -888,8 +892,6 @@ rouge=modifications''',
 '''Pages similaires''',
 '''Local Site Map''':
 '''Carte locale du site''',
-'''User Preferences''':
-'''Préférences utilisateur''',
 '''My Pages''':
 '''Ma page''',
 '''Subscribe User''':

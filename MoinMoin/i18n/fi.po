@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -880,12 +880,16 @@ msgstr "Järjestelmäsivujen lukumäärä"
 msgid "Accumulated page sizes"
 msgstr "Sivujen koko yhteensä"
 
-msgid "Entries in edit log"
-msgstr "Merkintöjä muutoslokissa"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s tavua)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Merkintöjä muutoslokissa"
 
 msgid "NONE"
 msgstr "EI"
@@ -1461,6 +1465,10 @@ msgstr "[ALKUUN]"
 msgid "Click to do a full-text search for this title"
 msgstr "Napsauta tehdäksesi tekstihaun tälle nimelle"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "KäyttäjäAsetukset"
+
 msgid "Logout"
 msgstr "Kirjaudu ulos "
 
@@ -1507,10 +1515,6 @@ msgstr "Samankaltaisia sivuja"
 
 msgid "Local Site Map"
 msgstr "Paikallinen sivukartta"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "KäyttäjäAsetukset"
 
 #, fuzzy
 msgid "My Pages"
@@ -1673,6 +1677,13 @@ msgstr "UudelleennimeäSivu"
 
 msgid "SpellCheck"
 msgstr "OikoLue"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s tavua)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "KäyttäjäAsetukset"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Lataa tämän wikin XML-vienti"

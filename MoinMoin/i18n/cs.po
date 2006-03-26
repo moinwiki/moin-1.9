@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -876,12 +876,16 @@ msgstr "Počet systémových stránek"
 msgid "Accumulated page sizes"
 msgstr "Souhrnná velikost stránek"
 
-msgid "Entries in edit log"
-msgstr "Záznamy v edit-logu"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bytů)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Záznamy v edit-logu"
 
 msgid "NONE"
 msgstr "ŽÁDNÝ (NONE)"
@@ -1448,6 +1452,10 @@ msgstr "[ZÁHLAVÍ]"
 msgid "Click to do a full-text search for this title"
 msgstr "Fulltextové prohledávání na tento název stránky"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "NastaveniUzivatele"
+
 msgid "Logout"
 msgstr "Odhlásit"
 
@@ -1494,9 +1502,6 @@ msgstr "Podobné Stránky"
 
 msgid "Local Site Map"
 msgstr "Lokální Mapa Stránek"
-
-msgid "User Preferences"
-msgstr "Nastaveni Uzivatele"
 
 msgid "My Pages"
 msgstr "Moje Stránky"
@@ -1654,6 +1659,12 @@ msgstr "PřejmenovatStránku"
 
 msgid "SpellCheck"
 msgstr "KontrolaPravopisu"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bytů)"
+
+#~ msgid "User Preferences"
+#~ msgstr "Nastaveni Uzivatele"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Download XML exportu této wiki"

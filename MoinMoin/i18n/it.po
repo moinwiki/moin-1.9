@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-02-15 22:09+0100\n"
 "Last-Translator: Paolo Patruno <p.patruno@iperbole.bologna.it>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -884,12 +884,16 @@ msgstr "Numero di pagine di sistema"
 msgid "Accumulated page sizes"
 msgstr "Dimensione complessiva delle pagine"
 
-msgid "Entries in edit log"
-msgstr "Voci nel registro delle modifiche"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s byte)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Voci nel registro delle modifiche"
 
 msgid "NONE"
 msgstr "Nessuno"
@@ -1470,6 +1474,10 @@ msgstr "[INIZIO]"
 msgid "Click to do a full-text search for this title"
 msgstr "Clicca qui per effettuare una ricerca full-text per questo titolo"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "PreferenzeUtente"
+
 msgid "Logout"
 msgstr "Logout"
 
@@ -1520,10 +1528,6 @@ msgstr "PagineSimili"
 #, fuzzy
 msgid "Local Site Map"
 msgstr "MappaLocaleSito"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "PreferenzeUtente"
 
 #, fuzzy
 msgid "My Pages"
@@ -1689,6 +1693,13 @@ msgstr "RinominaPagina"
 
 msgid "SpellCheck"
 msgstr "ControlloOrtografico"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s byte)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "PreferenzeUtente"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Scarica una versione XML di questo wiki"

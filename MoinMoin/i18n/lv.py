@@ -532,8 +532,6 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Visu lapu izmērs''',
 '''Entries in edit log''':
 '''Ierakstīt izmaiņu protokolā''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s baiti)''',
 '''NONE''':
 '''NEKAS''',
 '''Global extension macros''':
@@ -882,8 +880,6 @@ sarkans=labot''',
 '''Līdzīgas lapas''',
 '''Local Site Map''':
 '''Lokālā vietnes karte''',
-'''User Preferences''':
-'''Lietotāja Iestatījumi''',
 '''My Pages''':
 '''Manas Lapas''',
 '''Subscribe User''':

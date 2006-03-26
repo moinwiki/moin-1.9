@@ -533,8 +533,6 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Zakumulowana wielkość stron''',
 '''Entries in edit log''':
 '''Pozycji w dzienniku zmian''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bajtów)''',
 '''NONE''':
 '''BRAK''',
 '''Global extension macros''':

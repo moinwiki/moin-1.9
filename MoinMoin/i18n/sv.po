@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
-"PO-Revision-Date: 2006-03-22 16:58+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
+"PO-Revision-Date: 2006-03-26 23:39+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -892,12 +892,16 @@ msgstr "Antal systemsidor"
 msgid "Accumulated page sizes"
 msgstr "Ackumulerade sidstorlekar"
 
-msgid "Entries in edit log"
-msgstr "Poster i editloggen"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Diskutrymme använt av %(data_dir)s/pages/"
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s byte)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Diskutrymme använt av %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Poster i editloggen"
 
 msgid "NONE"
 msgstr "INGEN"
@@ -1471,6 +1475,9 @@ msgstr "[BÖRJAN]"
 msgid "Click to do a full-text search for this title"
 msgstr "Klicka här för att göra en fulltextsökning på den här titeln"
 
+msgid "Preferences"
+msgstr "Inställningar"
+
 msgid "Logout"
 msgstr "Logga ut"
 
@@ -1517,9 +1524,6 @@ msgstr "Liknande sidor"
 
 msgid "Local Site Map"
 msgstr "Lokal översiktskarta"
-
-msgid "User Preferences"
-msgstr "Användarinställningar"
 
 msgid "My Pages"
 msgstr "Mina sidor"

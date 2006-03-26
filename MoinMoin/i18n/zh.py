@@ -515,8 +515,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''累计网页大小''',
 '''Entries in edit log''':
 '''编辑日志项次''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s次 (%(logsize)s字节)''',
 '''NONE''':
 '''无''',
 '''Global extension macros''':

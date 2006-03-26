@@ -516,8 +516,6 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Mida acumulada de les pàgines''',
 '''Entries in edit log''':
 '''Entrades al registre d\'edició''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s octets)''',
 '''NONE''':
 '''CAP''',
 '''Global extension macros''':

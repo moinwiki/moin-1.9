@@ -428,8 +428,6 @@ e-post eller fjerne Abonner-knappen.''',
 '''Sammenlagt sidestørrelse''',
 '''Entries in edit log''':
 '''Emner i endringsloggen''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s byte)''',
 '''NONE''':
 '''INGEN''',
 '''Global extension macros''':

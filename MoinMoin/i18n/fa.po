@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -887,12 +887,16 @@ msgstr "تعداد صفحات سیستمی"
 msgid "Accumulated page sizes"
 msgstr "حجم صفحات جمع شده"
 
-msgid "Entries in edit log"
-msgstr "محتویات گزارش ویرایش"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s·(%(logsize)s·bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "محتویات گزارش ویرایش"
 
 msgid "NONE"
 msgstr "هیچ یک"
@@ -1469,6 +1473,10 @@ msgstr "[ابتدا]"
 msgid "Click to do a full-text search for this title"
 msgstr "برای انجام جستجوی کامل این موضوع کلیک نمایید"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "مشخصات کاربر"
+
 msgid "Logout"
 msgstr "خروج"
 
@@ -1515,10 +1523,6 @@ msgstr "مانند صفحات"
 
 msgid "Local Site Map"
 msgstr "نقشه سایت محلی"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "مشخصات کاربر"
 
 #, fuzzy
 msgid "My Pages"
@@ -1680,6 +1684,13 @@ msgstr "تغییرنام صفحه"
 
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s·(%(logsize)s·bytes)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "مشخصات کاربر"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "دریافت خروجی این ویکی با فرمت XML"

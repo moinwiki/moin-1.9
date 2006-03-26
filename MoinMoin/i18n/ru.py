@@ -527,8 +527,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Размер всех страниц''',
 '''Entries in edit log''':
 '''Записей в протоколе изменений''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s байт)''',
 '''NONE''':
 '''НЕТ''',
 '''Global extension macros''':

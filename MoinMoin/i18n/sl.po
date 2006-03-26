@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -883,12 +883,16 @@ msgstr "Število sistemskih strani"
 msgid "Accumulated page sizes"
 msgstr "Skupna velikost strani"
 
-msgid "Entries in edit log"
-msgstr "Vpisov v dnevniku"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s znakov)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Vpisov v dnevniku"
 
 msgid "NONE"
 msgstr "-"
@@ -1463,6 +1467,10 @@ msgstr "[NA-VRH]"
 msgid "Click to do a full-text search for this title"
 msgstr "Iskanje tega naslova po polnem besedilu strani"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "UporabniškeNastavitve"
+
 msgid "Logout"
 msgstr "Odjava"
 
@@ -1509,10 +1517,6 @@ msgstr "Podobne strani"
 
 msgid "Local Site Map"
 msgstr "Struktura predstavitve"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "UporabniškeNastavitve"
 
 #, fuzzy
 msgid "My Pages"
@@ -1674,6 +1678,13 @@ msgstr "PreimenujStran"
 
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s znakov)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "UporabniškeNastavitve"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Pripravi vsebino tega vikija za izvoz v obliki XML"

@@ -431,8 +431,6 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Totale grootte van alle pagina\'s''',
 '''Entries in edit log''':
 '''Boekingen in het bewerkingslog''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
 '''GEEN''',
 '''Global extension macros''':

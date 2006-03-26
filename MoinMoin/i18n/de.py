@@ -534,8 +534,6 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Kumulierte Seitengrößen''',
 '''Entries in edit log''':
 '''Einträge in der Änderungshistorie''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s Bytes)''',
 '''NONE''':
 '''KEINE''',
 '''Global extension macros''':
@@ -856,6 +854,8 @@ rot=Änderungen''',
 '''[KOPF]''',
 '''Click to do a full-text search for this title''':
 '''Hier klicken für eine Liste der Seiten, die auf diese verweisen''',
+'''Preferences''':
+'''Einstellungen''',
 '''Logout''':
 '''Abmelden''',
 '''Clear message''':
@@ -886,8 +886,6 @@ rot=Änderungen''',
 '''Ähnliche Seiten''',
 '''Local Site Map''':
 '''ÜbersichtsKarte''',
-'''User Preferences''':
-'''Benutzer-Einstellungen''',
 '''My Pages''':
 '''Meine Seiten''',
 '''Subscribe User''':

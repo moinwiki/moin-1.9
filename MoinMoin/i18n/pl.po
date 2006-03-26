@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -888,12 +888,16 @@ msgstr "Ilość stron systemowych"
 msgid "Accumulated page sizes"
 msgstr "Zakumulowana wielkość stron"
 
-msgid "Entries in edit log"
-msgstr "Pozycji w dzienniku zmian"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s bajtów)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Pozycji w dzienniku zmian"
 
 msgid "NONE"
 msgstr "BRAK"
@@ -1472,6 +1476,10 @@ msgstr "[POCZĄTEK STRONY]"
 msgid "Click to do a full-text search for this title"
 msgstr "Kliknij aby poszukać tytułu metodą pełnotekstową"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "PreferencjeCzytelnika"
+
 msgid "Logout"
 msgstr "Wyjdź"
 
@@ -1518,10 +1526,6 @@ msgstr "Podobne strony"
 
 msgid "Local Site Map"
 msgstr "Lokalna mapa witryny"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "PreferencjeCzytelnika"
 
 #, fuzzy
 msgid "My Pages"
@@ -1685,6 +1689,13 @@ msgstr "ZmieńNazwę"
 
 msgid "SpellCheck"
 msgstr "SprawdźPisownię"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s bajtów)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "PreferencjeCzytelnika"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Zgraj wersję XML tego wiki"

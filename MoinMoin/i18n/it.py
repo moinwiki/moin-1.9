@@ -447,8 +447,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Dimensione complessiva delle pagine''',
 '''Entries in edit log''':
 '''Voci nel registro delle modifiche''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s byte)''',
 '''NONE''':
 '''Nessuno''',
 '''Global extension macros''':

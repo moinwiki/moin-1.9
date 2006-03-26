@@ -517,8 +517,6 @@ de email \'%(email)s\'!''',
 '''Mărimile acumulate ale paginilor''',
 '''Entries in edit log''':
 '''Intrări în jurnalul de editare''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s octeţi)''',
 '''NONE''':
 '''NIMIC''',
 '''Global extension macros''':

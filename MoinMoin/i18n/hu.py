@@ -440,8 +440,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''Összesített lapméretek''',
 '''Entries in edit log''':
 '''Bejegyzések a szerkesztési naplóban''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s byte)''',
 '''NONE''':
 '''NINCS''',
 '''Global extension macros''':

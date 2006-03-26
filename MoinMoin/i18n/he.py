@@ -434,8 +434,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''גודל דפים מצטבר''',
 '''Entries in edit log''':
 '''רשומות בדו"ח העריכה''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s בתים)''',
 '''NONE''':
 '''אין''',
 '''Global extension macros''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -901,12 +901,16 @@ msgstr "Număr de pagini sistem"
 msgid "Accumulated page sizes"
 msgstr "Mărimile acumulate ale paginilor"
 
-msgid "Entries in edit log"
-msgstr "Intrări în jurnalul de editare"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
-msgstr "%(logcount)s (%(logsize)s octeţi)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Intrări în jurnalul de editare"
 
 msgid "NONE"
 msgstr "NIMIC"
@@ -1492,6 +1496,10 @@ msgstr "[SUS]"
 msgid "Click to do a full-text search for this title"
 msgstr "Clic aici pentru a face o căutare full-text pentru acest titlu"
 
+#, fuzzy
+msgid "Preferences"
+msgstr "PreferinţeUtilizator"
+
 msgid "Logout"
 msgstr "Logout"
 
@@ -1538,10 +1546,6 @@ msgstr "Pagini Asemănătoare"
 
 msgid "Local Site Map"
 msgstr "HartaLocalăSit"
-
-#, fuzzy
-msgid "User Preferences"
-msgstr "PreferinţeUtilizator"
 
 #, fuzzy
 msgid "My Pages"
@@ -1702,6 +1706,13 @@ msgstr "RedenumirePagină"
 
 msgid "SpellCheck"
 msgstr "VerificareOrtografie"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s octeţi)"
+
+#, fuzzy
+#~ msgid "User Preferences"
+#~ msgstr "PreferinţeUtilizator"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "Descărcare export XML pentru acest wiki"

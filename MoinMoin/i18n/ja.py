@@ -536,8 +536,6 @@ Contact the owner of the wiki, who can enable email.''':
 '''ページサイズの合計''',
 '''Entries in edit log''':
 '''編集ログ中のエントリー数''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)sバイト)''',
 '''NONE''':
 '''なし''',
 '''Global extension macros''':
@@ -883,8 +881,6 @@ red=edit''':
 '''似たページ''',
 '''Local Site Map''':
 '''ローカルサイトマップ''',
-'''User Preferences''':
-'''ユーザプレファレンス''',
 '''My Pages''':
 '''マイページ''',
 '''Subscribe User''':

@@ -536,10 +536,12 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Antal systemsidor''',
 '''Accumulated page sizes''':
 '''Ackumulerade sidstorlekar''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Diskutrymme använt av %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Diskutrymme använt av %(data_dir)s/''',
 '''Entries in edit log''':
 '''Poster i editloggen''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s byte)''',
 '''NONE''':
 '''INGEN''',
 '''Global extension macros''':
@@ -861,6 +863,8 @@ röd=ändra''',
 '''[BÖRJAN]''',
 '''Click to do a full-text search for this title''':
 '''Klicka här för att göra en fulltextsökning på den här titeln''',
+'''Preferences''':
+'''Inställningar''',
 '''Logout''':
 '''Logga ut''',
 '''Clear message''':
@@ -891,8 +895,6 @@ röd=ändra''',
 '''Liknande sidor''',
 '''Local Site Map''':
 '''Lokal översiktskarta''',
-'''User Preferences''':
-'''Användarinställningar''',
 '''My Pages''':
 '''Mina sidor''',
 '''Subscribe User''':

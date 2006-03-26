@@ -531,8 +531,6 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Skupna velikost strani''',
 '''Entries in edit log''':
 '''Vpisov v dnevniku''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s znakov)''',
 '''NONE''':
 '''-''',
 '''Global extension macros''':

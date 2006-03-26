@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-22 13:19+0100\n"
+"POT-Creation-Date: 2006-03-26 23:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -779,11 +779,15 @@ msgstr ""
 msgid "Accumulated page sizes"
 msgstr ""
 
-msgid "Entries in edit log"
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
 msgstr ""
 
 #, python-format
-msgid "%(logcount)s (%(logsize)s bytes)"
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
 msgstr ""
 
 msgid "NONE"
@@ -1328,6 +1332,9 @@ msgstr ""
 msgid "Click to do a full-text search for this title"
 msgstr ""
 
+msgid "Preferences"
+msgstr ""
+
 msgid "Logout"
 msgstr ""
 
@@ -1373,9 +1380,6 @@ msgid "Like Pages"
 msgstr ""
 
 msgid "Local Site Map"
-msgstr ""
-
-msgid "User Preferences"
 msgstr ""
 
 msgid "My Pages"

@@ -512,8 +512,6 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Sammenlagte sidestørrelser''',
 '''Entries in edit log''':
 '''Emner i redigerings-log''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s·(%(logsize)s·bytes)''',
 '''NONE''':
 '''INGEN''',
 '''Global extension macros''':

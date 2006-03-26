@@ -530,8 +530,6 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Toplanan sayfa sayısı''',
 '''Entries in edit log''':
 '''Düzenleme kayıtlarındaki girdiler''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bayt)''',
 '''NONE''':
 '''YOK''',
 '''Global extension macros''':

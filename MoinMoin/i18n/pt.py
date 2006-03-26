@@ -431,8 +431,6 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Tamanhos acumulados das páginas''',
 '''Entries in edit log''':
 '''Entradas de logs editáveis''',
-'''%(logcount)s (%(logsize)s bytes)''':
-'''%(logcount)s (%(logsize)s bytes)''',
 '''NONE''':
 '''NENHUM''',
 '''Global extension macros''':
