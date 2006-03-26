@@ -112,6 +112,7 @@ Version 1.5.current:
       * moin ... account disable --name=JoeDoe
       * moin ... acount check     <-- this is what usercheck script was before
       * moin ... maint cleancache <-- this is what cachecleaner script was
+      * moin ... maint cleanpage  <-- this is what pagescleaner script was
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
