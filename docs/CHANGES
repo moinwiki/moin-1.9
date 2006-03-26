@@ -108,6 +108,9 @@ Version 1.5.current:
         The old scripts that have not been migrated to this new interface can
         still be found in MoinMoin/script/old/ - including the old migration
         scripts.
+      * moin ... account create --name=JoeDoe --email=joe@doe.org
+      * moin ... account disable --name=JoeDoe
+      * moin ... acount check    <-- this is what usercheck script was before
 
   Bugfixes:
     * cookie_lifetime didn't work comfortable for low values. The cookie was
