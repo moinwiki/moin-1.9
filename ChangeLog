@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 10:55:35 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-502
+
+    Summary:
+      temp fix for setup.py (old script stuff)
+    Revision:
+      moin--main--1.5--patch-502
+
+    temp fix for setup.py (old script stuff)
+    
+
+    modified files:
+     ChangeLog setup.py
+
+
 2006-03-25 23:31:55 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-501
 
     Summary:
