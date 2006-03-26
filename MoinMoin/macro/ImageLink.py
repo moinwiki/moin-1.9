@@ -32,21 +32,25 @@
         [[ImageLink(example.png,alt=whateveryouwant(üצה))]]
 
     History:
-        Jeff Kunce: wrote the first published version of this macro in 2001.
-
-        Marcin Zalewski:
-        Implemented wikiutil.link_tag and macro.formatter.pagelink.
-        Added title attribute to the created link. One could generalize that to
-        add arbitrary attributes.
-
-        One could also add class attributes to <a> and/or <img> elements.
-        I do not see the need for such modifications. If however this is
-        to be done in the future one would need to add 'html_class' key to the kw dictionary
-        with a corresponding value to add class to <img> element. To add class to <a> element
-        one needs to add 'css_class' key with a corresponding value to the dictionary passed to
-        pagelink call.
+        Jeff Kunce: 
+            wrote the first published version of this macro in 2001.
         
         Reimar Bauer:
+            2004 intitial new version for MoinMoin 1.2
+        
+        Marcin Zalewski:   
+            Implemented wikiutil.link_tag and macro.formatter.pagelink.
+            Added title attribute to the created link. One could generalize that to
+            add arbitrary attributes.
+
+            One could also add class attributes to <a> and/or <img> elements.
+            I do not see the need for such modifications. If however this is
+            to be done in the future one would need to add 'html_class' key to the kw dictionary
+            with a corresponding value to add class to <img> element. To add class to <a> element
+            one needs to add 'css_class' key with a corresponding value to the dictionary passed to
+            pagelink call.
+        
+       Reimar Bauer:    
             2004-12-23 Adapted to MoinMoin Version 1.3.1-1
             2004-12-23 Syntax change Version 1.3.1-2
                    width and height and probably other keywords must be given as keywords (e.g. height=20)
@@ -76,9 +80,10 @@
       Thomas Waldmann
             2006-03-10 code refactored
 
-    @copyright: 2001 Jeff Kunce
-    @copyright: 2004-2006 by Reimar Bauer (R.Bauer@fz-juelich.de)
-    @copyright: 2006 refactoring by Thomas Waldmann
+    @copyright: 2001 by Jeff Kunce,
+                2004 by Marcin Zalewski,
+                2004-2006 by Reimar Bauer (R.Bauer@fz-juelich.de),
+                2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 

@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 19:15:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-513
+
+    Summary:
+      fixed ImageLink macro comments/history
+    Revision:
+      moin--main--1.5--patch-513
+
+    fixed ImageLink macro comments/history
+    
+
+    modified files:
+     ChangeLog MoinMoin/macro/ImageLink.py
+
+
 2006-03-26 18:11:22 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-512
 
     Summary:
