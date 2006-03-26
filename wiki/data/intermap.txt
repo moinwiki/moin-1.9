@@ -89,7 +89,7 @@ MoinMoin http://moinmoin.wikiwikiweb.de/
 OddMuse http://www.oddmuse.org/
 OPAG http://opag.ca/wiki?
 OpenMind http://www2.iro.umontreal.ca/~paquetse/cgi-bin/om.cgi?
-OpenWiki http://openwiki.com/?
+OpenWiki http://openwiki.com/ow.asp?
 OrgPatterns http://www.easycomp.org/cgi-bin/OrgPatterns?
 PeriPeri http://www.srcf.ucam.org/~cjp39/Peri/
 PersonalTelco http://www.personaltelco.net/index.cgi/

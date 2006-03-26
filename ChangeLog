@@ -2,6 +2,31 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 17:44:55 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-511
+
+    Summary:
+      make interwiki install-docs test, misc cleanup
+    Revision:
+      moin--main--1.5--patch-511
+
+    make interwiki install-docs test, misc cleanup
+    
+
+    new files:
+     MoinMoin/script/old/.arch-ids/__init__.py.id
+     MoinMoin/script/old/__init__.py
+     MoinMoin/script/old/migration/.arch-ids/__init__.py.id
+     MoinMoin/script/old/migration/__init__.py
+
+    removed files:
+     MoinMoin/_tests/.arch-ids/test_repair_language.py.id
+     MoinMoin/_tests/test_repair_language.py
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py docs/INSTALL.html setup.py
+     tests/make_test.out wiki/data/intermap.txt
+
+
 2006-03-26 17:22:23 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-510
 
     Summary:
