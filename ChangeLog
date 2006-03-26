@@ -2,6 +2,49 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 13:23:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-505
+
+    Summary:
+      moin account {check,create,disable} script commands
+    Revision:
+      moin--main--1.5--patch-505
+
+    moin account {check,create,disable} script commands
+    
+
+    new files:
+     MoinMoin/script/account/.arch-ids/=id
+     MoinMoin/script/account/.arch-ids/__init__.py.id
+     MoinMoin/script/account/.arch-ids/check.py.id
+     MoinMoin/script/account/.arch-ids/create.py.id
+     MoinMoin/script/account/.arch-ids/disable.py.id
+     MoinMoin/script/account/__init__.py
+     MoinMoin/script/account/check.py
+     MoinMoin/script/account/create.py
+     MoinMoin/script/account/disable.py
+
+    removed files:
+     MoinMoin/script/old/accounts/.arch-ids/.cvsignore.id
+     MoinMoin/script/old/accounts/.arch-ids/=id
+     MoinMoin/script/old/accounts/.arch-ids/__init__.py.id
+     MoinMoin/script/old/accounts/.arch-ids/moin_usercheck-jh-new.py.id
+     MoinMoin/script/old/accounts/.arch-ids/moin_usercheck.py.id
+     MoinMoin/script/old/accounts/.cvsignore
+     MoinMoin/script/old/accounts/__init__.py
+     MoinMoin/script/old/accounts/moin_usercheck-jh-new.py
+     MoinMoin/script/old/accounts/moin_usercheck.py
+
+    modified files:
+     ChangeLog docs/CHANGES setup.py
+
+    new directories:
+     MoinMoin/script/account MoinMoin/script/account/.arch-ids
+
+    removed directories:
+     MoinMoin/script/old/accounts
+     MoinMoin/script/old/accounts/.arch-ids
+
+
 2006-03-26 11:01:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-504
 
     Summary:
