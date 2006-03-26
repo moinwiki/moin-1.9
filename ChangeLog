@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 19:52:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-514
+
+    Summary:
+      human readable SystemInfo, added disk usage
+    Revision:
+      moin--main--1.5--patch-514
+
+    human readable SystemInfo, added disk usage
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikimacro.py docs/CHANGES
+
+
 2006-03-26 19:15:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-513
 
     Summary:
