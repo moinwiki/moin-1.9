@@ -2,6 +2,27 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 21:19:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-515
+
+    Summary:
+      moved UserPreferences back to header, add Cancel button
+    Revision:
+      moin--main--1.5--patch-515
+
+    moved UserPreferences back to header, add Cancel button
+    
+
+    modified files:
+     ChangeLog MoinMoin/theme/__init__.py MoinMoin/userform.py
+     docs/CHANGES
+
+    renamed files:
+     MoinMoin/action/.arch-ids/UserPreferences.py.id
+       ==> MoinMoin/action/.arch-ids/userprefs.py.id
+     MoinMoin/action/UserPreferences.py
+       ==> MoinMoin/action/userprefs.py
+
+
 2006-03-26 19:52:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-514
 
     Summary:

@@ -213,11 +213,15 @@ class ThemeBase:
             if not aliasname:
                 aliasname = name
             title = "%s @ %s" % (aliasname, interwiki[0])
+            # link to (interwiki) user homepage
             homelink = (request.formatter.interwikilink(1, title=title, id="userhome", *interwiki) +
                         request.formatter.text(name) +
                         request.formatter.interwikilink(0))
             userlinks.append(homelink)        
-            
+            # link to userprefs action
+            userlinks.append(d['page'].link_to(request, text=_('User Preferences'),
+                                               querystr={'action': 'userprefs'}, id="userprefs"))
+           
         if request.cfg.show_login:
             if request.user.valid:
                 userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
@@ -892,7 +896,6 @@ function actionsMenuInit(title) {
             'RenamePage',
             'DeletePage',
             '__separator__',
-            'UserPreferences',
             'MyPages',
             'SubscribeUser',
             '__separator__',
@@ -913,7 +916,6 @@ function actionsMenuInit(title) {
             'DeletePage': _('Delete Page', formatted=False),
             'LikePages': _('Like Pages', formatted=False),
             'LocalSiteMap': _('Local Site Map', formatted=False),
-            'UserPreferences': _('User Preferences', formatted=False),
             'MyPages': _('My Pages', formatted=False),
             'SubscribeUser': _('Subscribe User', formatted=False),
             'Despam': _('Remove Spam', formatted=False),

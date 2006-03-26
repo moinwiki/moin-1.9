@@ -36,7 +36,11 @@ Known main issues:
 Version 1.5.3-current:
   New Features:
     * modified SystemInfo macro to give human readable units and disk usage
-
+  
+  Other changes:
+    * moved back UserPreferences action link from menu to top of page,
+      added "Cancel" button to make it possible to return to the previous page
+      without saving preferences.
 
 Version 1.5.3-rc1:
 

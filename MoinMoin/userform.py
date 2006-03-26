@@ -64,6 +64,9 @@ class UserSettingsHandler:
         _ = self._
         form = self.request.form
     
+        if form.has_key('cancel'):
+            return
+
         if form.has_key('account_sendmail'):
             if not self.cfg.mail_enabled:
                 return _("""This wiki is not enabled for mail processing.
@@ -488,7 +491,7 @@ class UserSettings:
             self.make_row('', button_cell)
             
         if self.request.user.valid and not create_only:
-            buttons = [('save', _('Save'))]
+            buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
             uf_disable = self.cfg.user_form_disable
             for attr in self.request.user.auth_attribs:
@@ -582,7 +585,8 @@ class UserSettings:
                 # IMPORTANT: login should be first to be the default
                 # button when a user hits ENTER.
                 #('login', _('Login')),  # we now have a Login macro
-                ("create", _('Create Profile')),
+                ('create', _('Create Profile')),
+                ('cancel', _('Cancel')),
             ]
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 if key in ('name', 'password', 'password2', 'email'):
