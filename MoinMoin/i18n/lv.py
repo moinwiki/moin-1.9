@@ -882,6 +882,18 @@ sarkans=labot''',
 '''Līdzīgas lapas''',
 '''Local Site Map''':
 '''Lokālā vietnes karte''',
+'''User Preferences''':
+'''Lietotāja Iestatījumi''',
+'''My Pages''':
+'''Manas Lapas''',
+'''Subscribe User''':
+'''Parakstīt Lietotāju''',
+'''Remove Spam''':
+'''Atsārņot''',
+'''Package Pages''':
+'''Iesaiņot Lapas''',
+'''Render as Docbook''':
+'''Sniegt Docbook formātā''',
 '''Do''':
 '''Veikt''',
 '''Edit (Text)''':

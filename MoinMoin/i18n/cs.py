@@ -392,6 +392,8 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Vytvořit profil''',
 '''Mail me my account data''':
 '''Zašli mi má data k účtu''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Vytvořit účet nebo zjistit zapomenuté heslo lze v %(userprefslink)s.''',
 '''Action''':
 '''Akce''',
 '''No older revisions available!''':
@@ -718,12 +720,22 @@ Zkuste jiné jméno.''',
 '''Všechny stránky, které se odkazují na: "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
+'''Subscribe users to the page %s''':
+'''Přihlásit uživatele k odebírání stránky %s''',
+'''Subscribed for %s:''':
+'''Uživatelé odebírající %s''',
+'''Not a user:''':
+'''Není uživatel:''',
+'''You are not allowed to perform this action.''':
+'''Nemáte dovoleno provést tuto akci.''',
 '''Upload new attachment "%(filename)s"''':
 '''Upload nové přílohy "%(filename)s" hochladen''',
 '''Create new drawing "%(filename)s"''':
 '''Vytvořit nový obrázek "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Editace obrázku %(filename)s''',
+'''Toggle line numbers''':
+'''Přepnout zobrazení čísel řádků''',
 '''Invalid include arguments "%s"!''':
 '''Neplatný argument include: "%s"!''',
 '''Nothing found for "%s"!''':
@@ -866,6 +878,18 @@ red=edit''':
 '''Podobné Stránky''',
 '''Local Site Map''':
 '''Lokální Mapa Stránek''',
+'''User Preferences''':
+'''Nastaveni Uzivatele''',
+'''My Pages''':
+'''Moje Stránky''',
+'''Subscribe User''':
+'''Přihlásit uživatele k odběru''',
+'''Remove Spam''':
+'''Odstranit Spam''',
+'''Package Pages''':
+'''Vytvořit balík stránek''',
+'''Render as Docbook''':
+'''Zobrazit jako Docbook''',
 '''Do''':
 '''Proveď!''',
 '''Edit (Text)''':

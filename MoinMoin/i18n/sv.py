@@ -891,6 +891,18 @@ röd=ändra''',
 '''Liknande sidor''',
 '''Local Site Map''':
 '''Lokal översiktskarta''',
+'''User Preferences''':
+'''Användarinställningar''',
+'''My Pages''':
+'''Mina sidor''',
+'''Subscribe User''':
+'''Skapa prenumeration åt användare''',
+'''Remove Spam''':
+'''Ta bort spam''',
+'''Package Pages''':
+'''Paketsidor''',
+'''Render as Docbook''':
+'''Rendera som Docbook''',
 '''Do''':
 '''Gör''',
 '''Edit (Text)''':

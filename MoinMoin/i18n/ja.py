@@ -400,6 +400,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''プロファイル作成''',
 '''Mail me my account data''':
 '''アカウント情報をメールする''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''アカウントを作成したり、忘れてしまったパスワードを復活する際には %(userprefslink)s を参照してください。''',
 '''Action''':
 '''アクション''',
 '''No older revisions available!''':
@@ -723,12 +725,22 @@ Try a different name.''':
 '''"%s"の全リンクリスト''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''名前の無いページを作成することはできません。ページ名を指定してください。''',
+'''Subscribe users to the page %s''':
+'''ユーザをページ"%s"の購読者に追加''',
+'''Subscribed for %s:''':
+'''"%s"の購読者に追加されたユーザ''',
+'''Not a user:''':
+'''存在しないユーザ:''',
+'''You are not allowed to perform this action.''':
+'''このアクションを行う権限がありません。''',
 '''Upload new attachment "%(filename)s"''':
 '''添付ファイル"%(filename)s"のアップロード''',
 '''Create new drawing "%(filename)s"''':
 '''drawing"%(filename)s"の新規作成''',
 '''Edit drawing %(filename)s''':
 '''drawing"%(filename)s"を編集''',
+'''Toggle line numbers''':
+'''行番号表示/非表示切替''',
 '''Invalid include arguments "%s"!''':
 '''引数"%s"が不正です。''',
 '''Nothing found for "%s"!''':
@@ -871,6 +883,18 @@ red=edit''':
 '''似たページ''',
 '''Local Site Map''':
 '''ローカルサイトマップ''',
+'''User Preferences''':
+'''ユーザプレファレンス''',
+'''My Pages''':
+'''マイページ''',
+'''Subscribe User''':
+'''購読ユーザ追加''',
+'''Remove Spam''':
+'''スパムを削除''',
+'''Package Pages''':
+'''ページのパッケージ化''',
+'''Render as Docbook''':
+'''Docbookとして描画''',
 '''Do''':
 '''実行''',
 '''Edit (Text)''':

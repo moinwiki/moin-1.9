@@ -885,6 +885,18 @@ red=edit''',
 '''비슷한 페이지''',
 '''Local Site Map''':
 '''사이트맵''',
+'''User Preferences''':
+'''사용자 설정''',
+'''My Pages''':
+'''내문서''',
+'''Subscribe User''':
+'''구독 중인 사용자''',
+'''Remove Spam''':
+'''스팸 제거''',
+'''Package Pages''':
+'''문서 묶기''',
+'''Render as Docbook''':
+'''Dockbook으로 보여주기''',
 '''Do''':
 '''확인''',
 '''Edit (Text)''':

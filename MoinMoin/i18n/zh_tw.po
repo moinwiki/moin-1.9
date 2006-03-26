@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-22 13:19+0100\n"
-"PO-Revision-Date: 2006-02-06 17:00+0800\n"
+"PO-Revision-Date: 2006-03-24 15:00+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -643,7 +643,7 @@ msgstr "把帳號資料寄給我"
 msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
-msgstr ""
+msgstr "新使用者註冊或要重設密碼，請到 %(userprefslink)s。"
 
 msgid "Action"
 msgstr "功能"
@@ -1205,20 +1205,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "必須有頁面名稱才能建立頁面。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "訂閱的頁面即使只有些微改變也要寄信通知"
+msgstr "為使用者訂閱頁面 \"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "訂閱"
+msgstr "已為 %s 訂閱"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "不是合法帳號:"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "你無權編輯本頁。"
+msgstr "你無權執行本項操作。"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1233,7 +1232,7 @@ msgid "Edit drawing %(filename)s"
 msgstr "編輯圖片 \"%(filename)s\""
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "行號切換"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1468,28 +1467,23 @@ msgstr "相似頁面"
 msgid "Local Site Map"
 msgstr "連結地圖"
 
-#, fuzzy
 msgid "User Preferences"
 msgstr "使用者設定"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "頁面"
+msgstr "我的頁面"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "訂閱"
+msgstr "訂閱使用者"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "取消捷徑"
+msgstr "移除垃圾"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "相似頁面"
+msgstr "打包頁面"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "檢視 DocBook"
 
 msgid "Do"
 msgstr "執行"

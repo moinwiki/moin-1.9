@@ -395,6 +395,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''新使用者註冊''',
 '''Mail me my account data''':
 '''把帳號資料寄給我''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''新使用者註冊或要重設密碼，請到 %(userprefslink)s。''',
 '''Action''':
 '''功能''',
 '''No older revisions available!''':
@@ -723,12 +725,22 @@ Try a different name.''':
 '''引用頁面 "%s" 的頁面列表''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''必須有頁面名稱才能建立頁面。''',
+'''Subscribe users to the page %s''':
+'''為使用者訂閱頁面 "%s"''',
+'''Subscribed for %s:''':
+'''已為 %s 訂閱''',
+'''Not a user:''':
+'''不是合法帳號:''',
+'''You are not allowed to perform this action.''':
+'''你無權執行本項操作。''',
 '''Upload new attachment "%(filename)s"''':
 '''上傳新附件 "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''建立新圖 "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''編輯圖片 "%(filename)s"''',
+'''Toggle line numbers''':
+'''行號切換''',
 '''Invalid include arguments "%s"!''':
 '''錯誤的插入參數 "%s"！''',
 '''Nothing found for "%s"!''':
@@ -871,6 +883,18 @@ red=edit''':
 '''相似頁面''',
 '''Local Site Map''':
 '''連結地圖''',
+'''User Preferences''':
+'''使用者設定''',
+'''My Pages''':
+'''我的頁面''',
+'''Subscribe User''':
+'''訂閱使用者''',
+'''Remove Spam''':
+'''移除垃圾''',
+'''Package Pages''':
+'''打包頁面''',
+'''Render as Docbook''':
+'''檢視 DocBook''',
 '''Do''':
 '''執行''',
 '''Edit (Text)''':
