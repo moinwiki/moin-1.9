@@ -211,6 +211,7 @@ only requiring a Python installation.
         'MoinMoin.script.import',
         'MoinMoin.script.old',
         'MoinMoin.script.old.accounts',
+        'MoinMoin.script.old.migration',
         'MoinMoin.script.old.reducewiki',
         'MoinMoin.script.old.unicode',
         'MoinMoin.script.old.xmlrpc-tools',

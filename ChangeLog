@@ -2,6 +2,51 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 10:57:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-503
+
+    Summary:
+      add old migration scripts
+    Revision:
+      moin--main--1.5--patch-503
+
+    add old migration scripts
+    
+
+    new files:
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig01.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig02.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig03.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig04.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig05.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig06.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig07.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig08.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig09.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig10.py.id
+     MoinMoin/script/old/migration/.arch-ids/12_to_13_mig11.py.id
+     MoinMoin/script/old/migration/.arch-ids/152_to_1050300.py.id
+     MoinMoin/script/old/migration/.arch-ids/=id
+     MoinMoin/script/old/migration/12_to_13_mig01.py
+     MoinMoin/script/old/migration/12_to_13_mig02.py
+     MoinMoin/script/old/migration/12_to_13_mig03.py
+     MoinMoin/script/old/migration/12_to_13_mig04.py
+     MoinMoin/script/old/migration/12_to_13_mig05.py
+     MoinMoin/script/old/migration/12_to_13_mig06.py
+     MoinMoin/script/old/migration/12_to_13_mig07.py
+     MoinMoin/script/old/migration/12_to_13_mig08.py
+     MoinMoin/script/old/migration/12_to_13_mig09.py
+     MoinMoin/script/old/migration/12_to_13_mig10.py
+     MoinMoin/script/old/migration/12_to_13_mig11.py
+     MoinMoin/script/old/migration/152_to_1050300.py
+
+    modified files:
+     ChangeLog setup.py
+
+    new directories:
+     MoinMoin/script/old/migration
+     MoinMoin/script/old/migration/.arch-ids
+
+
 2006-03-26 10:55:35 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-502
 
     Summary:
