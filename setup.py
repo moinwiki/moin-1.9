@@ -208,6 +208,7 @@ only requiring a Python installation.
         'MoinMoin.script',
         'MoinMoin.script.account',
         'MoinMoin.script.cli',
+        'MoinMoin.script.maint',
         'MoinMoin.script.migration',
         'MoinMoin.script.import',
         'MoinMoin.script.old',

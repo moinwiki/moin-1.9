@@ -2,6 +2,27 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 13:49:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-507
+
+    Summary:
+      moin maint cleanpage
+    Revision:
+      moin--main--1.5--patch-507
+
+    moin maint cleanpage
+    
+
+    modified files:
+     ChangeLog MoinMoin/script/maint/cleanpage.py docs/CHANGES
+     setup.py
+
+    renamed files:
+     MoinMoin/script/old/.arch-ids/pagescleaner.py.id
+       ==> MoinMoin/script/maint/.arch-ids/cleanpage.py.id
+     MoinMoin/script/old/pagescleaner.py
+       ==> MoinMoin/script/maint/cleanpage.py
+
+
 2006-03-26 13:38:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-506
 
     Summary:
