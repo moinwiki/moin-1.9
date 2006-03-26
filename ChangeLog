@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-26 11:01:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-504
+
+    Summary:
+      avoid indexing to crash because of EXIF TypeErrors
+    Revision:
+      moin--main--1.5--patch-504
+
+    avoid indexing to crash because of EXIF TypeErrors
+    
+
+    modified files:
+     ChangeLog MoinMoin/filter/image_jpeg.py
+
+
 2006-03-26 10:57:07 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-503
 
     Summary:
