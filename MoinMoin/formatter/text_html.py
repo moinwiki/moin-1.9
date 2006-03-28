@@ -484,7 +484,6 @@ class Formatter(FormatterBase):
             See wikiutil.link_tag() for possible keyword parameters.
         """
         apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
-        self.pagelink_preclosed = False
         if page is None:
             page = Page(self.request, pagename, formatter=self);
         if self.request.user.show_nonexist_qm and on and not page.exists():
@@ -493,6 +492,7 @@ class Formatter(FormatterBase):
                     self.text("?") +
                     page.link_to(self.request, on=0, **kw))
         elif not on and self.pagelink_preclosed:
+            self.pagelink_preclosed = False
             return ""
         else:
             return page.link_to(self.request, on=on, **kw)
