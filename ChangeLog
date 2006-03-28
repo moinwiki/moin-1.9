@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-28 23:07:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-520
+
+    Summary:
+      fixed double </a> with qm_noexist
+    Revision:
+      moin--main--1.5--patch-520
+
+    fixed double </a> with qm_noexist
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_html.py docs/CHANGES
+
+
 2006-03-28 22:52:01 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-519
 
     Summary:
