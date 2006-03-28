@@ -2,10 +2,10 @@
 """
     MoinMoin - Internationalization
 
-    This subpackage controls the access to the language modules
-    contained in it. Each language is in a module with a dictionary
-    storing the original texts as keys and their translation in the
-    values. Other supporting modules start with an underscore.
+    This subpackage controls the access to the language modules contained in
+    it. Each language is in a module with a dictionary storing the original
+    texts as keys and their translation in the values. Other supporting modules
+    start with an underscore.
 
     Public attributes:
         languages -- languages that MoinMoin knows about
@@ -19,16 +19,14 @@
         browserLanguages() -- return the browser accepted languages
         getDirection(lang) -- return the lang direction either 'ltr' or 'rtl'
         getText(str, request) -- return str translation
-        canRecode(input, output, strict) -- check recode ability
     
-    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
-    @copyright: 2005 by Thomas Waldmann
+    @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>,
+                2005-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 debug = 0
 
 import os
-
 try:
     import cPickle as pickle
 except ImportError:
@@ -63,8 +61,7 @@ def filename(lang):
     filename = filename.lower()
     return filename
 
-
-def formatMarkup(request, text, currentStack = []):
+def formatMarkup(request, text, currentStack=[]):
     """
     Formats the text passed according to wiki markup.
     This raises an exception if a text needs itself to be translated,
@@ -85,7 +82,7 @@ def formatMarkup(request, text, currentStack = []):
     out = StringIO.StringIO()
     request.redirect(out)
     parser = Parser(text, request, line_anchors=False)
-    formatter = Formatter(request, terse = True)
+    formatter = Formatter(request, terse=True)
     reqformatter = None
     if hasattr(request, 'formatter'):
         reqformatter = request.formatter
@@ -103,7 +100,6 @@ def formatMarkup(request, text, currentStack = []):
     text = text.strip()
     return text
 
-
 def loadLanguage(request, lang):
     """
     Load text dictionary for a specific language.
@@ -118,13 +114,12 @@ def loadLanguage(request, lang):
     need a text in the same language. That means you cannot use
     the GetText macro in translated strings, nor any wiki markup
     that requires translated strings (eg. "attachment:").
-
     """
     from MoinMoin import caching
     # farm notice: for persistent servers, only the first wiki requesting some language
     # gets its cache updated - a bit strange and redundant, but no problem.
     cache = caching.CacheEntry(request, arena='i18n', key=lang)
-    langfilename = os.path.join(os.path.dirname(__file__), filename(lang) + '.py')
+    langfilename = os.path.join(os.path.dirname(__file__), '%s.py' % filename(lang))
     needsupdate = cache.needsUpdate(langfilename)
     if debug: request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
     if not needsupdate:
@@ -136,7 +131,7 @@ def loadLanguage(request, lang):
 
     if needsupdate:    
         from MoinMoin.util import pysupport
-        lang_module = "MoinMoin.i18n." + filename(lang)
+        lang_module = "MoinMoin.i18n.%s" % filename(lang)
         try:
             # Language module without text dict will raise AttributeError
             texts = pysupport.importName(lang_module, "text")
@@ -149,10 +144,10 @@ def loadLanguage(request, lang):
         # convert to unicode
         if debug: request.log("i18n: processing unformatted texts of lang %s" % lang)
         uc_unformatted = {}
-        for idx in texts:
-            uidx = idx.decode(encoding)
-            utxt = texts[idx].decode(encoding)
-            uc_unformatted[uidx] = utxt
+        for key, text in texts.items():
+            ukey = key.decode(encoding)
+            utext = text.decode(encoding)
+            uc_unformatted[ukey] = utext
 
         if meta.get('wikimarkup', False):
             if debug: request.log("i18n: processing formatted texts of lang %s" % lang)
@@ -163,14 +158,13 @@ def loadLanguage(request, lang):
                     uc_texts[key] = formatMarkup(request, text)
                 except: # infinite recursion or crash
                     request.log("i18n: crashes in language %s on string: %s" % (lang, text))
-                    uc_texts[key] = "FIXME: %s" % text
+                    uc_texts[key] = "%s*" % text
         else:
             uc_texts = uc_unformatted
         if debug: request.log("i18n: dumping lang %s" % lang)
         cache.update(pickle.dumps((uc_texts, uc_unformatted), PICKLE_PROTOCOL))
 
     return uc_texts, uc_unformatted
-
 
 def requestLanguage(request):
     """ 
@@ -180,8 +174,8 @@ def requestLanguage(request):
     registered users, or request environment, or the default language of
     the wiki, or English.
 
-    This should be called once per request, then you should get the
-    value from request object lang attribute.
+    This should be called once per request, then you should get the value from
+    request object lang attribute.
     
     Unclear what this means: "Until the code for get
     text is fixed, we are caching the request language locally."
@@ -192,7 +186,6 @@ def requestLanguage(request):
     @rtype: string
     @return: ISO language code, e.g. 'en'
     """
-
     # Return the user language preferences for registered users
     if request.user.valid and request.user.language:
         return request.user.language
@@ -210,13 +203,10 @@ def requestLanguage(request):
     # Or return the wiki default language...
     if available.has_key(request.cfg.language_default):
         lang = request.cfg.language_default
-
     # If everything else fails, read the manual... or return 'en'
     else:
         lang = 'en'
-
     return lang
-
 
 def wikiLanguages():
     """
@@ -225,29 +215,22 @@ def wikiLanguages():
     """
     return languages
 
-
 def browserLanguages(request):
     """
     Return the accepted languages as set in the user browser.
     
-    Parse the HTTP headers and extract the accepted languages,
-    according to
+    Parse the HTTP headers and extract the accepted languages, according to:
     http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
 
-    Return a list of languages and base languages - as they are
-    specified in the request, normalizing to lower case.
+    Return a list of languages and base languages - as they are specified in
+    the request, normalizing to lower case.
     """
-    
     fallback = []
-    
     accepted = request.http_accept_language
-
     if accepted:
         # Extract the languages names from the string
         accepted = accepted.split(',')
-
         accepted = map(lambda x: x.split(';')[0], accepted)
-
         # Add base language for each sub language. If the user specified
         # a sub language like "en-us", we will try to to provide it or
         # a least the base language "en" in this case.
@@ -257,19 +240,14 @@ def browserLanguages(request):
             if '-' in lang:
                 baselang = lang.split('-')[0]
                 fallback.append(baselang)
-
     return fallback
 
-
 def getDirection(lang):
-    """Return the text direction for a language, either 'ltr' or 'rtl'."""
+    """ Return the text direction for a language, either 'ltr' or 'rtl'. """
     return ('ltr', 'rtl')[languages[lang][DIRECTION]]
 
-
 def getText(str, request, lang, formatted=True):
-    """
-    Return a translation of text in the user's language.
-    """
+    """ Return a translation of text in the user's language. """
     # TODO: Should move this into a language instance. request.lang should be a language instance.
 
     # load texts if needed
@@ -281,7 +259,6 @@ def getText(str, request, lang, formatted=True):
         _unformatted_text_cache[lang] = unformatted
 
     # get the matching entry in the mapping table
-
     trans = str
     try:
         if formatted:
@@ -303,51 +280,4 @@ def getText(str, request, lang, formatted=True):
             if lang != 'en':
                 trans = getText(str, request, 'en', formatted)
     return trans
-
-
-def canRecode(input, output, strict=1):
-    """ Check if we can recode text from input to output.
-
-    @param input: the input encoding codec name or alias
-    @param output: the output encoding codec name or alias
-    @param strict: Are you going to recode using errors='strict' or you can
-                   get with 'ignore', 'replace' or other error levels?
-    @rtype: bool
-    @return: True if we can probably recode from one charset to another or
-             False if the charset are not known or compatible.
-    """
-
-    import codecs
-
-    # First normalize case - our client could have funny ideas about case
-    input = input.lower()
-    output = output.lower()
-
-    # Check for known encodings
-    try:
-        encoder = codecs.getencoder(output)
-        decoder = codecs.getdecoder(input)          
-    except LookupError:
-        # Unknown encoding - forget about it!
-        return False
-    
-    # We assume that any charset that Python knows about, can be recoded
-    # into any Unicode charset. Because codecs have many aliases, we
-    # check the codec name itself
-    if encoder.__name__.startswith('utf'):
-        # This is a unicode encoding, so input could be anything.
-        return True
-
-    # We know both encodings but we don't know if we can actually recode
-    # any text from one to another. For example, we can recode from
-    # iso-8859-8 to cp1255, because the first is a subset of the last,
-    # but not the other way around.
-    # We choose our answer according to the strict keyword argument
-    if strict:
-        # We are not sure, so NO
-        return False
-    else:
-        # Probably you can recode using 'replace' or 'ignore' or other
-        # encodings error level and be happy with the results, so YES
-        return True
 
