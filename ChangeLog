@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-28 22:52:01 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-519
+
+    Summary:
+      fixed double CSS class attribute for nonexistent links, removed ugly formatter.url attrs keyword handling code
+    Revision:
+      moin--main--1.5--patch-519
+
+    fixed double CSS class attribute for nonexistent links, removed ugly formatter.url attrs keyword handling code
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_html.py
+     MoinMoin/macro/MonthCalendar.py MoinMoin/theme/__init__.py
+     MoinMoin/wikiutil.py docs/CHANGES
+
+
 2006-03-28 20:47:18 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-518
 
     Summary:

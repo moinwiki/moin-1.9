@@ -405,7 +405,8 @@ def execute(macro, text):
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
                     maketip_js.append("maketip('%s','%s','%s');" % (tipname, tiptitle, tiptext))
-                    onmouse = '''onMouseOver="tip('%s')" onMouseOut="untip()"''' % tipname
+                    onmouse = {'onMouseOver': "tip('%s')" % tipname,
+                               'onMouseOut':  "untip()"}
                 else:
                     csslink = "cal-emptyday"
                     if parmtemplate:
@@ -415,7 +416,7 @@ def execute(macro, text):
                     r, g, b, u = (255, 255, 255, 0)
                     if wkday in wkend:
                         csslink = "cal-weekend"
-                    onmouse = ''
+                    onmouse = {}
                 for otherpage in parmpagename[1:]:
                     otherlink = "%s/%4d-%02d-%02d" % (otherpage, year, month, day)
                     otherdaypage = Page(request, otherlink)
@@ -427,7 +428,7 @@ def execute(macro, text):
                             r, g, b = (r, g+colorstep, b)
                 r, g, b = cliprgb(r, g, b)
                 style = 'background-color:#%02x%02x%02x' % (r, g, b)
-                fmtlink = formatter.url(1, daypage.url(request, query), csslink, attrs=onmouse) + str(day) + formatter.url(0)
+                fmtlink = formatter.url(1, daypage.url(request, query), csslink, **onmouse) + str(day) + formatter.url(0)
                 if day == currentday and month == currentmonth and year == currentyear:
                     cssday = "cal-today"
                     fmtlink = "<b>%s</b>" % fmtlink # for browser with CSS probs

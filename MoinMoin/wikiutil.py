@@ -1080,11 +1080,15 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                  escaped, so you can give HTML here and it will be used verbatim
     @param formatter: the formatter object to use
     @param on: opening/closing tag only
-    @keyword attrs: additional attrs (HTMLified string)
+    @keyword attrs: additional attrs (HTMLified string) (removed in 1.5.3)
     @rtype: string
     @return: formatted link tag
     """
-    css_class = kw.get('css_class', None)
+    if kw.has_key('css_class'):
+        css_class = kw['css_class']
+        del kw['css_class'] # one time is enough
+    else:
+        css_class = None
     id = kw.get('id', None)
     if text is None:
         text = params # default
@@ -1099,8 +1103,6 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
         return '</a>'
     
     attrs = ''
-    if kw.has_key('attrs'):
-        attrs += ' ' + kw['attrs']
     if css_class:
         attrs += ' class="%s"' % css_class
     if id:

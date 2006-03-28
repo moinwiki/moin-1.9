@@ -539,48 +539,32 @@ class Formatter(FormatterBase):
                      all escaping and quoting is the caller's responsibility.
 
         Note that the 'attrs' keyword argument is for backwards compatibility
-        only.  It should not be used for new code--instead just pass
+        only.  It should not be used for new code -- instead just pass
         any attributes in as separate keyword arguments.
+
+        1.5.3: removed ugly "attrs" keyword argument handling code
         """
-        if not on:
-            return self._close('a')
-        attrs = self._langAttr()
-
-        # Handle the URL mapping
-        if url is None and kw.has_key('href'):
-            url = kw['href']
-            del kw['href']
-        if url is not None:
-            url = wikiutil.mapURL(self.request, url)
-            
-            # TODO just calling url_quote does not work, as it will also quote "http:" to "http%xx" X)
-            if 0: # do_escape: # protocol and server part must not get quoted, path should get quoted
-                url = wikiutil.url_quote(url)
-            
-            attrs['href'] = url
-
-        if css:
-            attrs['class'] = css
-        
-        if kw.has_key('attrs'):
-            # for backwards compatibility, raw pre-formated attribute string
-            extra_attrs = kw['attrs']
-            del kw['attrs']
-        else:
-            extra_attrs = None
-
-        # create link
         if on:
-            str = self._open('a', attr=attrs, **kw)
-            if extra_attrs:
-                # insert this into the tag verbatim (messy)
-                if str[-2:] == '/>':
-                    str = '%s %s />' % (str[:-2], extra_attrs)
-                else:
-                    str = '%s %s>' % (str[:-1], extra_attrs)
+            attrs = self._langAttr()
+
+            # Handle the URL mapping
+            if url is None and kw.has_key('href'):
+                url = kw['href']
+                del kw['href']
+            if url is not None:
+                url = wikiutil.mapURL(self.request, url)
+                # TODO just calling url_quote does not work, as it will also quote "http:" to "http%xx" X)
+                if 0: # do_escape: # protocol and server part must not get quoted, path should get quoted
+                    url = wikiutil.url_quote(url)
+                attrs['href'] = url
+
+            if css:
+                attrs['class'] = css
+            
+            markup = self._open('a', attr=attrs, **kw)
         else:
-            str = self._close('a')
-        return str
+            markup = self._close('a')
+        return markup
 
     def anchordef(self, id):
         """Inserts an invisible element used as a link target.
@@ -733,7 +717,7 @@ class Formatter(FormatterBase):
                                      edit_link,
                                      self.image(alt=url,
                                                 src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), css="drawing"),
-                                     attrs='title="%s"' % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
+                                     title="%s" % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
         
     
     # def attachment_inlined(self, url, text, **kw):
