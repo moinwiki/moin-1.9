@@ -36,12 +36,17 @@ Known main issues:
 Version 1.5.3-current:
   New Features:
     * modified SystemInfo macro to give human readable units and disk usage
+
+  Bugfixes:
+    * fixed double class attribute for nonexistent links
   
   Other changes:
     * moved back UserPreferences action link from menu to top of page (renaming
       it to "Preferences"), added "Cancel" button to make it possible to return
       to the previous page without saving preferences.
-
+    * removed formatter.url "attrs" keyword arg that took premade html, we use
+      separate kw args per attribute now.
+ 
 Version 1.5.3-rc1:
 
   New features:

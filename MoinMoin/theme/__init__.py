@@ -467,7 +467,7 @@ class ThemeBase:
         d['title'] = title % d
         d['i18ntitle'] = self.request.getText(d['title'], formatted=False)
         img_src = self.make_icon(icon, d)
-        return wikiutil.link_tag(self.request, page_params % d, img_src, attrs='title="%(i18ntitle)s"' % d)
+        return wikiutil.link_tag(self.request, page_params % d, img_src, title="%(i18ntitle)s" % d)
 
     def msg(self, d):
         """ Assemble the msg display
@@ -1089,18 +1089,18 @@ actionsMenuInit('%(label)s');
         if self.showBothEditLinks() and guiworks:
             text = _('Edit (Text)', formatted=False)
             params = params + 'text'
-            attrs = 'name="texteditlink"'
+            attrs = {'name': "texteditlink"}
         else:
             text = _('Edit', formatted=False)
             if guiworks:
                 # 'textonly' will be upgraded dynamically to 'guipossible' by JS
                 params = params + 'textonly'
-                attrs = 'name="editlink"'
+                attrs = {'name': "editlink"}
             else:
                 params = params + 'text'
-                attrs = 'name="texteditlink"'
+                attrs = {'name': "texteditlink"}
         
-        return wikiutil.link_tag(self.request, params, text, attrs=attrs)
+        return wikiutil.link_tag(self.request, params, text, **attrs)
 
     def showBothEditLinks(self):
         """ Return True if both edit links should be displayed """
