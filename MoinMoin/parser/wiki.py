@@ -638,7 +638,14 @@ class Parser:
 
         # extension for special table markup
         def table_extension(key, parser, attrs, wiki_parser=self):
+            """ returns: tuple (found_flag, msg)
+                found_flag: whether we found something and were able to process it here
+                  true for special stuff like 100% or - or #AABBCC
+                  false for style xxx="yyy" attributes
+                msg: "" or an error msg
+            """
             _ = wiki_parser._
+            found = False
             msg = ''
             if key[0] in "0123456789":
                 token = parser.get_token()
@@ -653,6 +660,7 @@ class Parser:
                         msg = _('Expected an integer "%(key)s" before "%(token)s"') % {
                             'key': key, 'token': token}
                     else:
+                        found = True
                         attrs['width'] = '"%s%%"' % key
             elif key == '-':
                 arg = parser.get_token()
@@ -662,6 +670,7 @@ class Parser:
                     msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
+                    found = True
                     attrs['colspan'] = '"%s"' % arg
             elif key == '|':
                 arg = parser.get_token()
@@ -671,16 +680,22 @@ class Parser:
                     msg = _('Expected an integer "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
+                    found = True
                     attrs['rowspan'] = '"%s"' % arg
             elif key == '(':
+                found = True
                 attrs['align'] = '"left"'
             elif key == ':':
+                found = True
                 attrs['align'] = '"center"'
             elif key == ')':
+                found = True
                 attrs['align'] = '"right"'
             elif key == '^':
+                found = True
                 attrs['valign'] = '"top"'
             elif key == 'v':
+                found = True
                 attrs['valign'] = '"bottom"'
             elif key == '#':
                 arg = parser.get_token()
@@ -691,16 +706,14 @@ class Parser:
                     msg = _('Expected a color value "%(arg)s" after "%(key)s"') % {
                         'arg': arg, 'key': key}
                 else:
+                    found = True
                     attrs['bgcolor'] = '"#%s"' % arg
-            else:
-                msg = ""
-            #print "key: %s\nattrs: %s" % (key, str(attrs))
-            return self.formatter.rawHTML(msg)
+            return found, self.formatter.rawHTML(msg)
 
         # scan attributes
         attr, msg = wikiutil.parseAttributes(self.request, attrdef, '>', table_extension)
         if msg: msg = '<strong class="highlight">%s</strong>' % msg
-        #print attr
+        #self.request.log("parseAttributes returned %r" % attr)
         return attr, msg
 
     def _tableZ_repl(self, word):

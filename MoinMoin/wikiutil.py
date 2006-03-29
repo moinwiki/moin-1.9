@@ -928,8 +928,8 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
     Parse a list of attributes and return a dict plus a possible
     error message.
     If extension is passed, it has to be a callable that returns
-    None when it was not interested into the token, '' when all was OK
-    and it did eat the token, and any other string to return an error
+    a tuple (found_flag, msg). found_flag is whether it did find and process
+    something, msg is '' when all was OK or any other string to return an error
     message.
     
     @param request: the request object
@@ -960,9 +960,13 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
 
         # call extension function with the current token, the parser, and the dict
         if extension:
-            msg = extension(key, parser, attrs)
-            if msg == '': continue
-            if msg: break
+            found_flag, msg = extension(key, parser, attrs)
+            #request.log("%r = extension(%r, parser, %r)" % (msg, key, attrs))
+            if found_flag:
+                continue
+            elif msg:
+                break
+            #else (we found nothing, but also didn't have an error msg) we just continue below:
 
         try:
             eq = parser.get_token()
