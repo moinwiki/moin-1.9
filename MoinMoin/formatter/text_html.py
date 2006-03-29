@@ -1267,6 +1267,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 result['style'] += s
             else:
                 result['style'] = s
+        #self.request.log("_checkTableAttr returns %r" % result)
         return result
 
 
