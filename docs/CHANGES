@@ -41,6 +41,9 @@ Version 1.5.3-current:
     * fixed double class attribute for nonexistent links
     * fixed double </a> with qm_noexist option
     * fixed table xxx="yyy" style attribute parsing
+    * if not (editor_force and editor_default == 'text') then display GUI mode
+      switch button (this is only a partial fix, but enough to deny the GUI
+      mode to your users completely)
   
   Other changes:
     * moved back UserPreferences action link from menu to top of page (renaming

@@ -313,15 +313,22 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                      'license_link': wikiutil.getSysPage(self.request, self.cfg.page_license_page).link_to(self.request),
             }, '</em></p>')
 
+
         self.request.write('''
 <input class="button" type="submit" name="button_save" value="%s" onClick="flgChange = false;">
 <input class="button" type="submit" name="button_preview" value="%s" onClick="flgChange = false;">
-<input id="switch2gui" style="display: none;" class="button" type="submit"     
-    name="button_switch" value="%s">
+''' % (save_button_text, _('Preview'),))
+        
+        if not (self.request.cfg.editor_force and self.request.cfg.editor_default == 'text'):
+            self.request.write('''
+<input id="switch2gui" style="display: none;" class="button" type="submit" name="button_switch" value="%s">
+''' % (_('GUI Mode'),))
+            
+        self.request.write('''
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="text">
-''' % (save_button_text, _('Preview'), _('GUI Mode'), button_spellcheck, cancel_button_text,))
+''' % (button_spellcheck, cancel_button_text,))
 
         # Add textarea with page text
 
