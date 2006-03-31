@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-26 23:23+0200\n"
+"POT-Creation-Date: 2006-03-28 18:00+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -669,6 +669,8 @@ msgid ""
 "To create an account or recover a lost password, see the %(userprefslink)s "
 "page."
 msgstr ""
+"Glej %(userprefslink)s za pridobitev novega uporabniškega računa ali za "
+"rešitev izgubljenega gesla."
 
 msgid "Action"
 msgstr "Akcija"
@@ -885,11 +887,11 @@ msgstr "Skupna velikost strani"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "Zasedenost diska %(data_dir)s/strani/"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "Zasedenost diska %(data_dir)s/"
 
 msgid "Entries in edit log"
 msgstr "Vpisov v dnevniku"
@@ -1249,20 +1251,19 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nove strani s praznim imenom ni mogoče narediti, navedite ime."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribe users to the page %s"
-msgstr "Naročilo na obvestila velja tudi za neznatne spremembe"
+msgstr "Naroči uporabnike na obvestila s strani %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Subscribed for %s:"
-msgstr "Naroči se"
+msgstr "Naročen na %s:"
 
 msgid "Not a user:"
-msgstr ""
+msgstr "Ni uporabnik"
 
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Te strani vam ni dovoljeno spreminjati."
+msgstr "Te akcije vam ni dovoljeno izvesti."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1277,7 +1278,7 @@ msgid "Edit drawing %(filename)s"
 msgstr "Spremeni risbo %(filename)s"
 
 msgid "Toggle line numbers"
-msgstr ""
+msgstr "Vklopi/izklopi številke vrstic"
 
 #, python-format
 msgid "Invalid include arguments \"%s\"!"
@@ -1467,7 +1468,6 @@ msgstr "[NA-VRH]"
 msgid "Click to do a full-text search for this title"
 msgstr "Iskanje tega naslova po polnem besedilu strani"
 
-#, fuzzy
 msgid "Preferences"
 msgstr "UporabniškeNastavitve"
 
@@ -1518,24 +1518,20 @@ msgstr "Podobne strani"
 msgid "Local Site Map"
 msgstr "Struktura predstavitve"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "Stran"
+msgstr "Moje strani"
 
-#, fuzzy
 msgid "Subscribe User"
 msgstr "Naroči se"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "Odstrani povezavo"
+msgstr "Odstrani spam"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "Podobne strani"
+msgstr "Zapakiraj strani v ZIP"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Prikaži kot Docbook"
 
 msgid "Do"
 msgstr "Izvedi!"
@@ -1678,13 +1674,3 @@ msgstr "PreimenujStran"
 
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
-
-#~ msgid "%(logcount)s (%(logsize)s bytes)"
-#~ msgstr "%(logcount)s (%(logsize)s znakov)"
-
-#, fuzzy
-#~ msgid "User Preferences"
-#~ msgstr "UporabniškeNastavitve"
-
-#~ msgid "Download XML export of this wiki"
-#~ msgstr "Pripravi vsebino tega vikija za izvoz v obliki XML"

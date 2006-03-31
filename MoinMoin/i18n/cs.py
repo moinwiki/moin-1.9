@@ -526,6 +526,10 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Počet systémových stránek''',
 '''Accumulated page sizes''':
 '''Souhrnná velikost stránek''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Obsazení disku %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Obsazení disku %(data_dir)s/''',
 '''Entries in edit log''':
 '''Záznamy v edit-logu''',
 '''NONE''':
@@ -846,6 +850,8 @@ red=edit''':
 '''[ZÁHLAVÍ]''',
 '''Click to do a full-text search for this title''':
 '''Fulltextové prohledávání na tento název stránky''',
+'''Preferences''':
+'''Nastaveni''',
 '''Logout''':
 '''Odhlásit''',
 '''Clear message''':

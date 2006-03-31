@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-26 23:23+0200\n"
-"PO-Revision-Date: 2006-03-23 14:53+0900\n"
+"PO-Revision-Date: 2006-03-31 13:43+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -889,11 +889,11 @@ msgstr "ページサイズの合計"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "%(data_dir)s/pages/ のディスク使用量"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "%(data_dir)s/ のディスク使用量"
 
 msgid "Entries in edit log"
 msgstr "編集ログ中のエントリー数"
@@ -1472,9 +1472,8 @@ msgstr "画面上へ"
 msgid "Click to do a full-text search for this title"
 msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
 
-#, fuzzy
 msgid "Preferences"
-msgstr "ユーザプレファレンス"
+msgstr "プレファレンス"
 
 msgid "Logout"
 msgstr "ログアウト"

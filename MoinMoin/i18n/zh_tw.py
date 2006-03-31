@@ -396,7 +396,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Mail me my account data''':
 '''把帳號資料寄給我''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''新使用者註冊或要重設密碼，請到 %(userprefslink)s。''',
+'''要註冊新帳號或忘了密碼，請到 %(userprefslink)s。''',
 '''Action''':
 '''功能''',
 '''No older revisions available!''':
@@ -529,6 +529,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''系統頁面數''',
 '''Accumulated page sizes''':
 '''頁面大小總計''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''硬碟使用量 (目錄 %(data_dir)s/pages)''',
+'''Disk usage of %(data_dir)s/''':
+'''硬碟使用量 (目錄 %(data_dir)s)''',
 '''Entries in edit log''':
 '''修訂記錄總計''',
 '''NONE''':
@@ -724,7 +728,7 @@ Try a different name.''':
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''必須有頁面名稱才能建立頁面。''',
 '''Subscribe users to the page %s''':
-'''為使用者訂閱頁面 "%s"''',
+'''新增頁面 "%s" 的訂閱戶''',
 '''Subscribed for %s:''':
 '''已為 %s 訂閱''',
 '''Not a user:''':
@@ -738,7 +742,7 @@ Try a different name.''':
 '''Edit drawing %(filename)s''':
 '''編輯圖片 "%(filename)s"''',
 '''Toggle line numbers''':
-'''行號切換''',
+'''切換行號''',
 '''Invalid include arguments "%s"!''':
 '''錯誤的插入參數 "%s"！''',
 '''Nothing found for "%s"!''':
@@ -851,6 +855,8 @@ red=edit''':
 '''[頂部]''',
 '''Click to do a full-text search for this title''':
 '''點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面''',
+'''Preferences''':
+'''使用者設定''',
 '''Logout''':
 '''登出''',
 '''Clear message''':
@@ -884,13 +890,13 @@ red=edit''':
 '''My Pages''':
 '''我的頁面''',
 '''Subscribe User''':
-'''訂閱使用者''',
+'''新增訂戶''',
 '''Remove Spam''':
 '''移除垃圾''',
 '''Package Pages''':
 '''打包頁面''',
 '''Render as Docbook''':
-'''檢視 DocBook''',
+'''DocBook 格式''',
 '''Do''':
 '''執行''',
 '''Edit (Text)''':
