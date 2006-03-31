@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-03-31 20:12:59 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-522
+
+    Summary:
+      partial fix for the gui switch button problem (at least it is not then when forced text is active)
+    Revision:
+      moin--main--1.5--patch-522
+
+    partial fix for the gui switch button problem (at least it is not then when forced text is active)
+    
+
+    modified files:
+     ChangeLog MoinMoin/PageEditor.py docs/CHANGES
+
+
 2006-03-29 08:12:28 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-521
 
     Summary:
