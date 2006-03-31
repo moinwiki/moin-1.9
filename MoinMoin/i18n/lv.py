@@ -530,6 +530,10 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Sistēmas lapu skaits''',
 '''Accumulated page sizes''':
 '''Visu lapu izmērs''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''%(data_dir)s/pages/ diskatmiņas patēriņš''',
+'''Disk usage of %(data_dir)s/''':
+'''%(data_dir)s/ diskatmiņas patēriņš''',
 '''Entries in edit log''':
 '''Ierakstīt izmaiņu protokolā''',
 '''NONE''':
@@ -850,6 +854,8 @@ sarkans=labot''',
 '''[AUGŠA]''',
 '''Click to do a full-text search for this title''':
 '''Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā''',
+'''Preferences''':
+'''Iestatījumi''',
 '''Logout''':
 '''Iziet''',
 '''Clear message''':

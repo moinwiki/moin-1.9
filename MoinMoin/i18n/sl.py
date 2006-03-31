@@ -397,6 +397,8 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Tvori profil''',
 '''Mail me my account data''':
 '''Pošlji mi podatke o tem uporabniškem računu''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Glej %(userprefslink)s za pridobitev novega uporabniškega računa ali za rešitev izgubljenega gesla.''',
 '''Action''':
 '''Akcija''',
 '''No older revisions available!''':
@@ -529,6 +531,10 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Število sistemskih strani''',
 '''Accumulated page sizes''':
 '''Skupna velikost strani''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Zasedenost diska %(data_dir)s/strani/''',
+'''Disk usage of %(data_dir)s/''':
+'''Zasedenost diska %(data_dir)s/''',
 '''Entries in edit log''':
 '''Vpisov v dnevniku''',
 '''NONE''':
@@ -723,12 +729,22 @@ Uporabite drugačno ime.''',
 '''Celotni seznam povezav za "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
+'''Subscribe users to the page %s''':
+'''Naroči uporabnike na obvestila s strani %s''',
+'''Subscribed for %s:''':
+'''Naročen na %s:''',
+'''Not a user:''':
+'''Ni uporabnik''',
+'''You are not allowed to perform this action.''':
+'''Te akcije vam ni dovoljeno izvesti.''',
 '''Upload new attachment "%(filename)s"''':
 '''Naloži novo priponko "%(filename)s" na strežnik''',
 '''Create new drawing "%(filename)s"''':
 '''Tvori novo risbo "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Spremeni risbo %(filename)s''',
+'''Toggle line numbers''':
+'''Vklopi/izklopi številke vrstic''',
 '''Invalid include arguments "%s"!''':
 '''Neveljavni argumenti pri "Include": "%s"!''',
 '''Nothing found for "%s"!''':
@@ -841,6 +857,8 @@ rdeče=sprememba''',
 '''[NA-VRH]''',
 '''Click to do a full-text search for this title''':
 '''Iskanje tega naslova po polnem besedilu strani''',
+'''Preferences''':
+'''UporabniškeNastavitve''',
 '''Logout''':
 '''Odjava''',
 '''Clear message''':
@@ -871,6 +889,16 @@ rdeče=sprememba''',
 '''Podobne strani''',
 '''Local Site Map''':
 '''Struktura predstavitve''',
+'''My Pages''':
+'''Moje strani''',
+'''Subscribe User''':
+'''Naroči se''',
+'''Remove Spam''':
+'''Odstrani spam''',
+'''Package Pages''':
+'''Zapakiraj strani v ZIP''',
+'''Render as Docbook''':
+'''Prikaži kot Docbook''',
 '''Do''':
 '''Izvedi!''',
 '''Edit (Text)''':

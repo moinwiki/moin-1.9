@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-26 23:23+0200\n"
+"POT-Creation-Date: 2006-03-27 11:45+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -892,11 +892,11 @@ msgstr "Visu lapu izmērs"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "%(data_dir)s/pages/ diskatmiņas patēriņš"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "%(data_dir)s/ diskatmiņas patēriņš"
 
 msgid "Entries in edit log"
 msgstr "Ierakstīt izmaiņu protokolā"
@@ -1470,9 +1470,8 @@ msgstr "[AUGŠA]"
 msgid "Click to do a full-text search for this title"
 msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
 
-#, fuzzy
 msgid "Preferences"
-msgstr "JūsuIestatījumi"
+msgstr "Iestatījumi"
 
 msgid "Logout"
 msgstr "Iziet"

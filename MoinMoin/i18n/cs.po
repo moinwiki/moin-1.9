@@ -878,11 +878,11 @@ msgstr "Souhrnná velikost stránek"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "Obsazení disku %(data_dir)s/pages/"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "Obsazení disku %(data_dir)s/"
 
 msgid "Entries in edit log"
 msgstr "Záznamy v edit-logu"
@@ -1452,9 +1452,8 @@ msgstr "[ZÁHLAVÍ]"
 msgid "Click to do a full-text search for this title"
 msgstr "Fulltextové prohledávání na tento název stránky"
 
-#, fuzzy
 msgid "Preferences"
-msgstr "NastaveniUzivatele"
+msgstr "Nastaveni"
 
 msgid "Logout"
 msgstr "Odhlásit"

@@ -534,6 +534,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''システムページ数''',
 '''Accumulated page sizes''':
 '''ページサイズの合計''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''%(data_dir)s/pages/ のディスク使用量''',
+'''Disk usage of %(data_dir)s/''':
+'''%(data_dir)s/ のディスク使用量''',
 '''Entries in edit log''':
 '''編集ログ中のエントリー数''',
 '''NONE''':
@@ -851,6 +855,8 @@ red=edit''':
 '''画面上へ''',
 '''Click to do a full-text search for this title''':
 '''このタイトルでテキスト検索するには、ここをクリックしてください''',
+'''Preferences''':
+'''プレファレンス''',
 '''Logout''':
 '''ログアウト''',
 '''Clear message''':
