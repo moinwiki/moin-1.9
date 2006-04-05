@@ -315,7 +315,6 @@ class Parser:
 
     def _rule_repl(self, word):
         """Handle sequences of dashes."""
-        ##self.inhibit_p = 1
         result = self._undent() + self._closeP()
         if len(word) <= 4:
             result = result + self.formatter.rule()
@@ -462,7 +461,7 @@ class Parser:
     def _indent_repl(self, match):
         """Handle pure indentation (no - * 1. markup)."""
         result = []
-        if not self.in_li:
+        if not (self.in_li or self.in_dd):
             self._close_item(result)
             self.in_li = 1
             css_class = None
@@ -497,20 +496,16 @@ class Parser:
         """Handle numbered lists."""
         return self._li_repl(match)
 
-
     def _dl_repl(self, match):
         """Handle definition lists."""
         result = []
         self._close_item(result)
-        #self.inhibit_p = 1
         self.in_dd = 1
         result.extend([
             self.formatter.definition_term(1),
             self.formatter.text(match[1:-3].lstrip(' ')),
             self.formatter.definition_term(0),
             self.formatter.definition_desc(1),
-            ## CHANGE: no automatic paragraph
-            ##self.formatter.paragraph(1)
         ])
         return ''.join(result)
 
@@ -528,16 +523,7 @@ class Parser:
         if self._indent_level() != new_level and self.in_table:
             close.append(self.formatter.table(0))
             self.in_table = 0
-        #    #self._close_item(close)
-        #else:
-        #    if not self.line_was_empty:
-        #        self.inhibit_p = 1
-    
-        # Close lists while char-wise indent is greater than the current one
-        #while ((self._indent_level() > new_level) or
-        #       ( new_level and
-        #        (self._indent_level() == new_level) and
-        #        (self.list_types[-1]) != list_type)):
+        
         while self._indent_level() > new_level:
             self._close_item(close)
             if self.list_types[-1] == 'ol':
@@ -548,14 +534,9 @@ class Parser:
                 tag = self.formatter.bullet_list(0)
             close.append(tag)
 
-            del(self.list_indents[-1])
-            del(self.list_types[-1])
+            del self.list_indents[-1]
+            del self.list_types[-1]
             
-            #if new_level:
-            #    self.inhibit_p = 1
-            #else:
-            #    self.inhibit_p = 0
-
             if self.list_types: # we are still in a list
                 if self.list_types[-1] == 'dl':
                     self.in_dd = 1
@@ -579,8 +560,6 @@ class Parser:
             open.append(tag)
             
             self.first_list_item = 1
-            ## Maybe this prevent p creation in lists?
-            ##self.inhibit_p = 1
             self.in_li = 0
             self.in_dd = 0
             
@@ -589,9 +568,6 @@ class Parser:
             close[0:0] = [self.formatter.table(0)]
             self.in_table = 0
         
-        ## Maybe this prevent p creation in lists?
-        ##self.inhibit_p = bool(self.list_types)
-
         return ''.join(close) + ''.join(open)
 
 
@@ -764,8 +740,6 @@ class Parser:
         """Handle section headings."""
         import sha
 
-        ##self.inhibit_p = 1
-
         h = word.strip()
         level = 1
         while h[level:level+1] == '=':
@@ -827,7 +801,6 @@ class Parser:
         word = word.strip()
         if word == '{{{' and not self.in_pre:
             self.in_pre = 3
-            ##self.inhibit_p = 1
             return self._closeP() + self.formatter.preformatted(self.in_pre)
         elif word == '}}}' and self.in_pre:
             self.in_pre = 0

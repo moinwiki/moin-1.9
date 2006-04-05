@@ -2,6 +2,27 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-05 19:46:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-525
+
+    Summary:
+      fixed dl indenting, some cosmetic issues
+    Revision:
+      moin--main--1.5--patch-525
+
+    fixed dl indenting, some cosmetic issues
+    
+
+    modified files:
+     ChangeLog MoinMoin/parser/wiki.py
+     MoinMoin/script/export/dump.py MoinMoin/script/lupy/build.py
+     MoinMoin/script/lupy/optimize.py
+     MoinMoin/script/maint/cleancache.py
+     MoinMoin/script/maint/cleanpage.py
+     MoinMoin/script/maint/globaledit.py
+     MoinMoin/script/maint/mkpagepacks.py
+     MoinMoin/script/maint/reducewiki.py docs/CHANGES
+
+
 2006-04-05 09:32:20 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-524
 
     Summary:
