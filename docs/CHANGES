@@ -46,7 +46,8 @@ Version 1.5.3-current:
       mode to your users completely)
     * Fixed XSS issue which could lead to cookie theft etc.
     * Fixed definition list "same level" indenting.
-  
+    * Fixed pagename in log for PackagePages action.
+
   Other changes:
     * moved back UserPreferences action link from menu to top of page (renaming
       it to "Preferences"), added "Cancel" button to make it possible to return

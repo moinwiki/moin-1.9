@@ -114,7 +114,7 @@ class PackagePages:
 
         os.chmod(fpath, 0666 & config.umask)
 
-        _addLogEntry(self.request, 'ATTNEW', pagename, target)
+        _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
         
         raise ActionError(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
 
