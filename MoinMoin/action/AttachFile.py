@@ -644,7 +644,7 @@ def get_file(pagename, request):
         "Content-Length: %d" % os.path.getsize(fpath),
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
         # There is no solution that is compatible to IE except stripping non-ascii chars
-        "Content-Disposition: inline; filename=\"%s\"" % filename.encode(config.charset),
+        "Content-Disposition: attachment; filename=\"%s\"" % filename.encode(config.charset),
     ])
 
     # send data

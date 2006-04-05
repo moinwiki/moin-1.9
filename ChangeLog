@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-05 09:32:20 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-524
+
+    Summary:
+      Fixed XSS issue which could lead to cookie theft etc. Thanks to the CAcert Security Team!
+    Revision:
+      moin--main--1.5--patch-524
+
+
+    modified files:
+     ChangeLog MoinMoin/action/AttachFile.py docs/CHANGES
+
+
 2006-03-31 20:56:30 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-523
 
     Summary:
