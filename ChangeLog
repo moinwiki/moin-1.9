@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-05 19:53:19 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-526
+
+    Summary:
+      use correct pagename for PackagePages logging
+    Revision:
+      moin--main--1.5--patch-526
+
+    use correct pagename for PackagePages logging
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/PackagePages.py docs/CHANGES
+
+
 2006-04-05 19:46:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-525
 
     Summary:
