@@ -45,6 +45,7 @@ Version 1.5.3-current:
       switch button (this is only a partial fix, but enough to deny the GUI
       mode to your users completely)
     * Fixed XSS issue which could lead to cookie theft etc.
+    * Fixed definition list "same level" indenting.
   
   Other changes:
     * moved back UserPreferences action link from menu to top of page (renaming
