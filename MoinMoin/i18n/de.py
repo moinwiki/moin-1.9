@@ -532,6 +532,10 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''Anzahl der Systemseiten''',
 '''Accumulated page sizes''':
 '''Kumulierte Seitengrößen''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Plattenbelegung von %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Plattenbelegung von %(data_dir)s/''',
 '''Entries in edit log''':
 '''Einträge in der Änderungshistorie''',
 '''NONE''':

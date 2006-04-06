@@ -922,7 +922,7 @@ msgid "Expected a value for key \"%(token)s\""
 msgstr "\"%(token)s\" 應該有對應的值"
 
 msgid "Wiki Markup"
-msgstr "Wiki 標示"
+msgstr "Wiki 標記"
 
 msgid "Print View"
 msgstr "檢視列印形"
@@ -1305,7 +1305,7 @@ msgid "[Bookmark reached]"
 msgstr "[目前書籤放置在此]"
 
 msgid "Markup"
-msgstr "標示"
+msgstr "標記"
 
 msgid "Display"
 msgstr "顯示"
