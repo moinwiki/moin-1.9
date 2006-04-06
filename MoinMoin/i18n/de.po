@@ -904,11 +904,11 @@ msgstr "Kumulierte Seitengrößen"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "Plattenbelegung von %(data_dir)s/pages/"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "Plattenbelegung von %(data_dir)s/"
 
 msgid "Entries in edit log"
 msgstr "Einträge in der Änderungshistorie"

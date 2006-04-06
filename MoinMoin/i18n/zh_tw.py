@@ -570,7 +570,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Expected a value for key "%(token)s"''':
 '''"%(token)s" 應該有對應的值''',
 '''Wiki Markup''':
-'''Wiki 標示''',
+'''Wiki 標記''',
 '''Print View''':
 '''檢視列印形''',
 '''[%d attachments]''':
@@ -782,7 +782,7 @@ Try a different name.''':
 '''[Bookmark reached]''':
 '''[目前書籤放置在此]''',
 '''Markup''':
-'''標示''',
+'''標記''',
 '''Display''':
 '''顯示''',
 '''Filename''':
