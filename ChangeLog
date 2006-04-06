@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-06 18:43:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-528
+
+    Summary:
+      non-empty converter/__init__.py (just for the case)
+    Revision:
+      moin--main--1.5--patch-528
+
+    non-empty converter/__init__.py (just for the case)
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/__init__.py
+
+
 2006-04-06 01:25:43 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-527
 
     Summary:
