@@ -95,22 +95,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Малое изменение''',
 '''Remove trailing whitespace from each line''':
 '''Стереть хвостовые пробелы из каждой строки''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Выделить:: [[Verbatim(\'\')]]\'\'курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'жирным курсивом\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'смешаным \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]] и курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] горизонтальной чертой.
- Заголовки:: [[Verbatim(=)]] Уровня 1 [[Verbatim(=)]]; [[Verbatim(==)]] Уровня 2 [[Verbatim(==)]]; [[Verbatim(===)]] Уровня 3 [[Verbatim(===)]]; [[Verbatim(====)]] Уровня 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Уровня 5 [[Verbatim(=====)]].
- Списки:: пробел и один из: * - ненумерованный список; 1., a., A., i., I. - нумерованный список; 1.#n - начать нумерацию с n; только пробел(ы) дают отступ.
- Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim(["скобки и двойные кавычки"])]]; url; [url]; [url метка].
- Таблицы:: || текст клетки |||| текст клетки растянутый на 2 колонки ||; после таблиц и заголовков нельзя оставлять пробелы.
-
-(!) Подробная помощь КакРедактировать и СправочникПоСинтаксису.
-''',
 '''Edit was cancelled.''':
 '''Исправления отменены.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -212,6 +196,22 @@ To leave the editor, press the Cancel button.''':
 Чтобы выйти из редактора нажмите кнопку \'Отмена\'.''',
 '''<unknown>''':
 '''<???>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Выделить:: [[Verbatim(\'\')]]\'\'курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'жирным курсивом\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'смешаным \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'жирным\'\'\'[[Verbatim(\'\'\')]] и курсивом\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] горизонтальной чертой.
+ Заголовки:: [[Verbatim(=)]] Уровня 1 [[Verbatim(=)]]; [[Verbatim(==)]] Уровня 2 [[Verbatim(==)]]; [[Verbatim(===)]] Уровня 3 [[Verbatim(===)]]; [[Verbatim(====)]] Уровня 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Уровня 5 [[Verbatim(=====)]].
+ Списки:: пробел и один из: * - ненумерованный список; 1., a., A., i., I. - нумерованный список; 1.#n - начать нумерацию с n; только пробел(ы) дают отступ.
+ Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim(["скобки и двойные кавычки"])]]; url; [url]; [url метка].
+ Таблицы:: || текст клетки |||| текст клетки растянутый на 2 колонки ||; после таблиц и заголовков нельзя оставлять пробелы.
+
+(!) Подробная помощь КакРедактировать и СправочникПоСинтаксису.
+''',
 '''Diffs''':
 '''Изменения''',
 '''Info''':

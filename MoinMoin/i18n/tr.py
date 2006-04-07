@@ -96,22 +96,6 @@ Eğer bunun olmasını istemiyorsanız, \'\'\'%(cancel_button_text)s\'\'\' düğ
 '''Küçük değişiklik''',
 '''Remove trailing whitespace from each line''':
 '''İşe yaramayan boşluk karakterlerini temizle''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Vurgulama:: [[Verbatim(\'\')]]\'\'italik\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kalın italik\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'karışık \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]] ve italik\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] yatay çizgi.
- Başlıklar:: [[Verbatim(=)]] Başlık 1 [[Verbatim(=)]]; [[Verbatim(==)]] Başlık 2 [[Verbatim(==)]]; [[Verbatim(===)]] Başlık 3 [[Verbatim(===)]];   [[Verbatim(====)]] Başlık 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Başlık 5 [[Verbatim(=====)]].
- Listeler:: boşluk bıraktıktan sonra şu karakterlerden birini kullanınız: * imleçler; 1., a., A., i., I. numaralandırılmış imleçler; 1.#n numaralandırmaya n sayısından başla; sadece hizala.
- Bağlantılar:: [[Verbatim(BasHarfiBuyukKelimleriBirlestirin)]]; [[Verbatim(["köşeli parantez ve çift tırnak"])]]; url; [url]; [url başlık].
- Tablolar:: || hücre içeriği |||| 2 sütuna taşan hücre içeriği ||;    tablo ve başlıklardan sonra boşluk karakteri kullanılamaz.
-
-(!) Yardım için YardımBiçimHakkında veya SözdizimKılavuzu sayfalarınabakabilirsiniz.
-''',
 '''Edit was cancelled.''':
 '''Düzenleme iptal edildi.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -215,6 +199,22 @@ açılmış ya da en son %(timestamp)s tarihinde önizleme yapılmıştır.[[BR]
 Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
 '''<unknown>''':
 '''<bilinmiyor>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Vurgulama:: [[Verbatim(\'\')]]\'\'italik\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kalın italik\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'karışık \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'kalın\'\'\'[[Verbatim(\'\'\')]] ve italik\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] yatay çizgi.
+ Başlıklar:: [[Verbatim(=)]] Başlık 1 [[Verbatim(=)]]; [[Verbatim(==)]] Başlık 2 [[Verbatim(==)]]; [[Verbatim(===)]] Başlık 3 [[Verbatim(===)]];   [[Verbatim(====)]] Başlık 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Başlık 5 [[Verbatim(=====)]].
+ Listeler:: boşluk bıraktıktan sonra şu karakterlerden birini kullanınız: * imleçler; 1., a., A., i., I. numaralandırılmış imleçler; 1.#n numaralandırmaya n sayısından başla; sadece hizala.
+ Bağlantılar:: [[Verbatim(BasHarfiBuyukKelimleriBirlestirin)]]; [[Verbatim(["köşeli parantez ve çift tırnak"])]]; url; [url]; [url başlık].
+ Tablolar:: || hücre içeriği |||| 2 sütuna taşan hücre içeriği ||;    tablo ve başlıklardan sonra boşluk karakteri kullanılamaz.
+
+(!) Yardım için YardımBiçimHakkında veya SözdizimKılavuzu sayfalarınabakabilirsiniz.
+''',
 '''Diffs''':
 '''Farklar''',
 '''Info''':

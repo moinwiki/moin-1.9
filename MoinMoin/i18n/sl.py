@@ -96,22 +96,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Neznatna sprememba''',
 '''Remove trailing whitespace from each line''':
 '''Odstrani presledke s koncev vrstic''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
- Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
- Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
- Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
- Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
-
-(!) Več o tem: HelpOnEditing, SyntaxReference.
-''',
 '''Edit was cancelled.''':
 '''Spremembe preklicane.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -212,6 +196,22 @@ To leave the editor, press the Cancel button.''':
 Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''<unknown>''':
 '''<neznano>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
+ Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
+ Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
+ Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
+ Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
+
+(!) Več o tem: HelpOnEditing, SyntaxReference.
+''',
 '''Diffs''':
 '''Razlike''',
 '''Info''':

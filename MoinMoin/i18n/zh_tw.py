@@ -95,23 +95,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''只有些微改變''',
 '''Remove trailing whitespace from each line''':
 '''去掉行尾空白''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' 強調::  [[Verbatim(\'\')]]\'\'斜體 \'\'[[Verbatim(\'\')]]； [[Verbatim(\'\'\')]]\'\'\'粗體\'\'\'[[Verbatim(\'\'\')]]； [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜體 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]； [[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗體 \'\'\'[[Verbatim(\'\'\')]]斜體 \'\'[[Verbatim(\'\')]]；[[Verbatim(----)]] 分隔線
- 標題::  [[Verbatim(=)]] 標題1 [[Verbatim(=)]]； [[Verbatim(==)]] 標題2 [[Verbatim(==)]]； [[Verbatim(===)]] 標題3 [[Verbatim(===)]]； [[Verbatim(====)]] 標題4 [[Verbatim(====)]]； [[Verbatim(=====)]] 標題5 [[Verbatim(=====)]]
- 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只有空白則代表縮排
- 連結::  [[Verbatim(JoinCapitalizedWords)]]； [[Verbatim(["方括號加雙引號"])]]； url； [url]； [url 連結文字]
- 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||
-
-(!) 表格或標題尾端不可有空白[[BR]]
-(!) 更詳細的說明請參看 ["說明/編輯頁面"] 或 ["語法參考"]
-''',
 '''Edit was cancelled.''':
 '''編輯已取消。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -213,6 +196,23 @@ To leave the editor, press the Cancel button.''':
 按下「取消」鍵，便可離開編輯模式。''',
 '''<unknown>''':
 '''<不明>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' 強調::  [[Verbatim(\'\')]]\'\'斜體 \'\'[[Verbatim(\'\')]]； [[Verbatim(\'\'\')]]\'\'\'粗體\'\'\'[[Verbatim(\'\'\')]]； [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜體 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]； [[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗體 \'\'\'[[Verbatim(\'\'\')]]斜體 \'\'[[Verbatim(\'\')]]；[[Verbatim(----)]] 分隔線
+ 標題::  [[Verbatim(=)]] 標題1 [[Verbatim(=)]]； [[Verbatim(==)]] 標題2 [[Verbatim(==)]]； [[Verbatim(===)]] 標題3 [[Verbatim(===)]]； [[Verbatim(====)]] 標題4 [[Verbatim(====)]]； [[Verbatim(=====)]] 標題5 [[Verbatim(=====)]]
+ 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只有空白則代表縮排
+ 連結::  [[Verbatim(JoinCapitalizedWords)]]； [[Verbatim(["方括號加雙引號"])]]； url； [url]； [url 連結文字]
+ 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||
+
+(!) 表格或標題尾端不可有空白[[BR]]
+(!) 更詳細的說明請參看 ["說明/編輯頁面"] 或 ["語法參考"]
+''',
 '''Diffs''':
 '''版本比較''',
 '''Info''':

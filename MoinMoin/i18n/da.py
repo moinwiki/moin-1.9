@@ -95,22 +95,6 @@ Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·
 '''Simpel ændring''',
 '''Remove trailing whitespace from each line''':
 '''Fjern mellemrum sidst i hver linje''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Fremhævelser:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fed\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'fed kursiv\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandet \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fed\'\'\'\'\'[[Verbatim(\'\'\')]] og kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vandret streg.
- Overskrifter:: [[Verbatim(=)]] Titel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titel 5 [[Verbatim(=====)]].
- Lister:: mellemrum og enten * asterisker; 1., a., A., i., I. nummererede emner; 1.#n begynd nummerering ved n; mellemrum alene giver indryk.
- Links:: [[Verbatim(SammenSatteOrd)]]; [[Verbatim(["lodrette klammer og dobbelte citationstegn"])]]; url; [url]; [url beskrivende navn].
- Tabeller:: || celletekst |||| celletekst over to kolonner ||;    efterfølgende mellemrum er ikke tiladt efter tabeller eller titler.
-
-(!) For yderligere hjælp, se HjælpTilRedigering eller SyntaksReference.
-''',
 '''Edit was cancelled.''':
 '''Redigeringen blev afbrudt.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -211,6 +195,22 @@ for at undgå redigeringskonflikter.\'\'\'[[BR]]
 Tryk Annullér for at afbryde redigeringen.''',
 '''<unknown>''':
 '''<ukendt>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Fremhævelser:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fed\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'fed kursiv\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandet \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fed\'\'\'\'\'[[Verbatim(\'\'\')]] og kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vandret streg.
+ Overskrifter:: [[Verbatim(=)]] Titel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titel 5 [[Verbatim(=====)]].
+ Lister:: mellemrum og enten * asterisker; 1., a., A., i., I. nummererede emner; 1.#n begynd nummerering ved n; mellemrum alene giver indryk.
+ Links:: [[Verbatim(SammenSatteOrd)]]; [[Verbatim(["lodrette klammer og dobbelte citationstegn"])]]; url; [url]; [url beskrivende navn].
+ Tabeller:: || celletekst |||| celletekst over to kolonner ||;    efterfølgende mellemrum er ikke tiladt efter tabeller eller titler.
+
+(!) For yderligere hjælp, se HjælpTilRedigering eller SyntaksReference.
+''',
 '''Diffs''':
 '''forskelle''',
 '''Info''':

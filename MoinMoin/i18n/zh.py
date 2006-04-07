@@ -96,22 +96,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''小修改''',
 '''Remove trailing whitespace from each line''':
 '''去掉每行尾部空白''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' 强调:: [[Verbatim(\'\')]]\'\'斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'粗体\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜体 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'混合\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗\'\'\'[[Verbatim(\'\'\')]]斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 横线.
- 标题:: [[Verbatim(=)]] 标题 1 [[Verbatim(=)]]; [[Verbatim(==)]] 标题 2 [[Verbatim(==)]]; [[Verbatim(===)]] 标题 3 [[Verbatim(===)]];   [[Verbatim(====)]] 标题 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 标题 5 [[Verbatim(=====)]].
- 列表:: 空格加下列符号之一: * 代表圆点; 1., a., A., i., I. 代表编号; 1.#n 从n开始编号; 空格本身代表缩进.
- 链接:: [[Verbatim(JoinCapitalizedWords两个以上大写开头字)]]; [[Verbatim(["方括号加双引号"])]]; url; [url]; [url 说明].
- 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空格.
-
-(!) 更多帮助见["帮助-编辑"]["语法参考"], or see HelpOnEditing or SyntaxReference.
-''',
 '''Edit was cancelled.''':
 '''编辑取消了.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -215,6 +199,22 @@ To leave the editor, press the Cancel button.''':
 请按\'\'\'取消\'\'\'按钮退出编辑.''',
 '''<unknown>''':
 '''不明''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' 强调:: [[Verbatim(\'\')]]\'\'斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'粗体\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'粗斜体 \'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'混合\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'粗\'\'\'[[Verbatim(\'\'\')]]斜体\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 横线.
+ 标题:: [[Verbatim(=)]] 标题 1 [[Verbatim(=)]]; [[Verbatim(==)]] 标题 2 [[Verbatim(==)]]; [[Verbatim(===)]] 标题 3 [[Verbatim(===)]];   [[Verbatim(====)]] 标题 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 标题 5 [[Verbatim(=====)]].
+ 列表:: 空格加下列符号之一: * 代表圆点; 1., a., A., i., I. 代表编号; 1.#n 从n开始编号; 空格本身代表缩进.
+ 链接:: [[Verbatim(JoinCapitalizedWords两个以上大写开头字)]]; [[Verbatim(["方括号加双引号"])]]; url; [url]; [url 说明].
+ 表格:: || 单元格文字 |||| 单元格文字横跨两列 ||;    表格或标题后不可以有空格.
+
+(!) 更多帮助见["帮助-编辑"]["语法参考"], or see HelpOnEditing or SyntaxReference.
+''',
 '''Diffs''':
 '''版本比较''',
 '''Info''':

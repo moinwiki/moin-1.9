@@ -96,22 +96,6 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Minimální změna''',
 '''Remove trailing whitespace from each line''':
 '''Odstraň koncové mezery u každého řádku''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Zvýraznění:: [[Verbatim(\'\')]]\'\'kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'tučně kurzíva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'smíšené \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]] a kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vodorovná čára.
- Nadpisy:: [[Verbatim(=)]] Nadpis 1 [[Verbatim(=)]]; [[Verbatim(==)]] Nadpis 2 [[Verbatim(==)]]; [[Verbatim(===)]] Nadpis 3 [[Verbatim(===)]];   [[Verbatim(====)]] Nadpis 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Nadpis 5 [[Verbatim(=====)]].
- Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.
- Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim(["hranaté závorky a dvojité uvozovky"])]]; url; [url]; [url text].
- Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny mezery za nadpisy a tabulkami.
-
-(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
-''',
 '''Edit was cancelled.''':
 '''Editace byla zrušena.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -210,6 +194,22 @@ To leave the editor, press the Cancel button.''':
 Stiskněte tlačítko Zrušit na opuštění editoru.''',
 '''<unknown>''':
 '''<neznámý>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Zvýraznění:: [[Verbatim(\'\')]]\'\'kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'tučně kurzíva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'smíšené \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]] a kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vodorovná čára.
+ Nadpisy:: [[Verbatim(=)]] Nadpis 1 [[Verbatim(=)]]; [[Verbatim(==)]] Nadpis 2 [[Verbatim(==)]]; [[Verbatim(===)]] Nadpis 3 [[Verbatim(===)]];   [[Verbatim(====)]] Nadpis 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Nadpis 5 [[Verbatim(=====)]].
+ Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.
+ Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim(["hranaté závorky a dvojité uvozovky"])]]; url; [url]; [url text].
+ Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny mezery za nadpisy a tabulkami.
+
+(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
+''',
 '''Diffs''':
 '''Rozdíly''',
 '''Info''':

@@ -96,22 +96,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''사소한 변경''',
 '''Remove trailing whitespace from each line''':
 '''줄 끝에 붙은 공백을 지움''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' 강조:: [[Verbatim(\'\')]]\'\'뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'굵게 뉘여쓰기\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'혼합 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]] 뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 가로 줄.
- 표제:: [[Verbatim(=)]] 표제 1 [[Verbatim(=)]]; [[Verbatim(==)]] 표제 2 [[Verbatim(==)]]; [[Verbatim(===)]] 표제 3 [[Verbatim(===)]];   [[Verbatim(====)]] 표제 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 표제 5 [[Verbatim(=====)]].
- 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.
- 링크:: 대소문자 섞어 쓰기([[Verbatim(JoinCapitalizedWords)]]); [[Verbatim(["대괄호 안에 큰 따옴표"])]]; URL; [URL]; [URL 이름].
- 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으면 안 됩니다.
-
-(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.
-''',
 '''Edit was cancelled.''':
 '''문서 수정을 취소했습니다.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -215,6 +199,22 @@ To leave the editor, press the Cancel button.''':
 편집을 중단하려면 취소 버튼을 누르세요.''',
 '''<unknown>''':
 '''<알 수 없음>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' 강조:: [[Verbatim(\'\')]]\'\'뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'굵게 뉘여쓰기\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'혼합 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'굵게\'\'\'[[Verbatim(\'\'\')]] 뉘여쓰기\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] 가로 줄.
+ 표제:: [[Verbatim(=)]] 표제 1 [[Verbatim(=)]]; [[Verbatim(==)]] 표제 2 [[Verbatim(==)]]; [[Verbatim(===)]] 표제 3 [[Verbatim(===)]];   [[Verbatim(====)]] 표제 4 [[Verbatim(====)]]; [[Verbatim(=====)]] 표제 5 [[Verbatim(=====)]].
+ 목록:: 공백 이후에 다음 글자 중의 하나: * 순서표시; 1., a., A., i., I. 숫자표시; 1.#n 로 쓰면 n부터 시작; 공백만 앞에 쓰면 들여 씀.
+ 링크:: 대소문자 섞어 쓰기([[Verbatim(JoinCapitalizedWords)]]); [[Verbatim(["대괄호 안에 큰 따옴표"])]]; URL; [URL]; [URL 이름].
+ 표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으면 안 됩니다.
+
+(!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.
+''',
 '''Diffs''':
 '''차이점 비교''',
 '''Info''':

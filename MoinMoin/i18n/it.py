@@ -87,22 +87,6 @@ Se non vuoi questo, premi \'\'\'%(cancel_button_text)s\'\'\' per cancellare le t
 '''Cambiamento banale''',
 '''Remove trailing whitespace from each line''':
 '''Rimuovi gli spazi in fondo a ogni riga di testo''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Enfasi:: [[Verbatim(\'\')]]\'\'italico\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'grassetto\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'grassetto corsivo\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'misto \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'grassetto\'\'\'[[Verbatim(\'\'\')]] e corsivo\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linea orizzontale.
- Intestazioni:: [[Verbatim(=)]] Titolo 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titolo 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titolo 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titolo 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titolo 5 [[Verbatim(=====)]].
- Liste:: spazio e uno di: * elenco puntato; 1., a., A., i., I. per elenco numerato; 1.#n inizia la numerazione da n; lo spazio da solo indenta.
- Collegamenti:: [[Verbatim(ParoleConLettereMaiuscole)]]; [[Verbatim(["parentesi quadre e doppie virgolette"])]]; url; [url]; [url label].
- Tabelle:: || cela di testo |||| cella su due colonne ||;    non sono consentiti spazi dopo la tabella o il titolo.
-
-(!) Per ulteriore aiuto, vedi AiutoSuModificaPagina o AiutoSuFormattazione.
-''',
 '''Edit was cancelled.''':
 '''Le modifiche sono state annullate.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -201,6 +185,22 @@ To leave the editor, press the Cancel button.''':
 Premi il pulsante Annulla per lasciare l\'editor.''',
 '''<unknown>''':
 '''<informazione non disponibile>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Enfasi:: [[Verbatim(\'\')]]\'\'italico\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'grassetto\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'grassetto corsivo\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'misto \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'grassetto\'\'\'[[Verbatim(\'\'\')]] e corsivo\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] linea orizzontale.
+ Intestazioni:: [[Verbatim(=)]] Titolo 1 [[Verbatim(=)]]; [[Verbatim(==)]] Titolo 2 [[Verbatim(==)]]; [[Verbatim(===)]] Titolo 3 [[Verbatim(===)]];   [[Verbatim(====)]] Titolo 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Titolo 5 [[Verbatim(=====)]].
+ Liste:: spazio e uno di: * elenco puntato; 1., a., A., i., I. per elenco numerato; 1.#n inizia la numerazione da n; lo spazio da solo indenta.
+ Collegamenti:: [[Verbatim(ParoleConLettereMaiuscole)]]; [[Verbatim(["parentesi quadre e doppie virgolette"])]]; url; [url]; [url label].
+ Tabelle:: || cela di testo |||| cella su due colonne ||;    non sono consentiti spazi dopo la tabella o il titolo.
+
+(!) Per ulteriore aiuto, vedi AiutoSuModificaPagina o AiutoSuFormattazione.
+''',
 '''Diffs''':
 '''differenze''',
 '''Info''':
