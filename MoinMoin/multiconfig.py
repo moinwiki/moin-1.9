@@ -207,6 +207,36 @@ class DefaultConfig:
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
+    editor_quickhelp = { # editor markup hints quickhelp 
+        'wiki': _("""\
+ Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+"""),
+        'rst': _("""\
+Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numered items.
+</pre>
+<br/>
+(!) For more help, see 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>
+"""),
+    }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_rows = 20
                 

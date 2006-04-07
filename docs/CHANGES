@@ -36,6 +36,9 @@ Known main issues:
 Version 1.5.3-current:
   New Features:
     * modified SystemInfo macro to give human readable units and disk usage
+    * cfg.editor_quickhelp makes the quick help below the editor configurable
+      (at least as far as the default_markup is concerned). If set to None,
+      it doesn't display any quickhelp.
 
   Bugfixes:
     * fixed double class attribute for nonexistent links

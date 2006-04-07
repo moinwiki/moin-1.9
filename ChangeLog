@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 17:44:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-530
+
+    Summary:
+      cfg.editor_quickhelp to make quickhelp work correctly and configurably for default markup at least
+    Revision:
+      moin--main--1.5--patch-530
+
+    cfg.editor_quickhelp to make quickhelp work correctly and configurably for default markup at least
+    
+
+    modified files:
+     ChangeLog MoinMoin/PageEditor.py MoinMoin/multiconfig.py
+     docs/CHANGES
+
+
 2006-04-07 17:33:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-529
 
     Summary:
