@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 17:46:36 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-531
+
+    Summary:
+      forgot credits for editor_quickhelp
+    Revision:
+      moin--main--1.5--patch-531
+
+    forgot credits for editor_quickhelp
+    
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-04-07 17:44:15 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-530
 
     Summary:
