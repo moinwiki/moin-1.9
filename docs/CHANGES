@@ -54,6 +54,7 @@ Version 1.5.3-current:
       Martin Wilck for the patch. I didn't apply the <ol> patch, because this
       is no real problem, just a problem of a bad standard.
     * Fixed gui editor *bgcolor crash.
+    * Support/Fix tableclass attr with gui editor.
 
   Other changes:
     * Moved back UserPreferences action link from menu to top of page (renaming

@@ -866,6 +866,8 @@ class convert_tree(visitor):
             result.append('tablealign="%s"' % value)
         if node.hasAttribute("style"):
             result.append('tablestyle="%s"' % node.getAttribute("style"))
+        if node.hasAttribute("class"):
+            result.append('tableclass="%s"' % node.getAttribute("class"))
         return " ".join(result)
 
     def _row_style(self, node):

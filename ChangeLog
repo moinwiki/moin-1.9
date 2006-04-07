@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 21:45:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-535
+
+    Summary:
+      fix tableclass attr for gui editor
+    Revision:
+      moin--main--1.5--patch-535
+
+    fix tableclass attr for gui editor
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+     MoinMoin/formatter/text_gedit.py docs/CHANGES
+
+
 2006-04-07 20:41:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-534
 
     Summary:

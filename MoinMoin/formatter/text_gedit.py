@@ -128,7 +128,7 @@ class Formatter(text_html.Formatter):
 
     def _style_to_attributes(self, attrs):
         if not attrs.has_key('style'):
-            return
+            return attrs
         unknown = []
         for entry in attrs['style'].split(';'):
             try:
@@ -148,8 +148,12 @@ class Formatter(text_html.Formatter):
         return attrs
 
     def _checkTableAttr(self, attrs, prefix):
+        #self.request.log(repr(attrs))
         attrs = text_html.Formatter._checkTableAttr(self, attrs, prefix)
-        return self._style_to_attributes(attrs)
+        #self.request.log(repr(attrs))
+        attrs = self._style_to_attributes(attrs)
+        #self.request.log(repr(attrs))
+        return attrs
 
     _allowed_table_attrs = {
         'table': ['class', 'id', 'style', 'bgcolor', 'width', ],
