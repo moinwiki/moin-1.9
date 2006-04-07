@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 20:23:56 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-533
+
+    Summary:
+      fix table *bgcolor trouble, cleanup style synth, fix html_gedit api
+    Revision:
+      moin--main--1.5--patch-533
+
+    fix table *bgcolor trouble, cleanup style synth, fix html_gedit api
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_gedit.py
+     MoinMoin/formatter/text_html.py MoinMoin/parser/wiki.py
+     docs/CHANGES
+
+
 2006-04-07 18:35:19 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-532
 
     Summary:

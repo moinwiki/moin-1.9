@@ -1240,7 +1240,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             return {}
 
         result = {}
-        s = "" # we collect synthesized style in s
+        s = [] # we collect synthesized style in s
         for key, val in attrs.items():
             # Ignore keys that don't start with prefix
             if prefix and key[:len(prefix)] != prefix:
@@ -1249,25 +1249,31 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             val = val.strip('"')
             # remove invalid attrs from dict and synthesize style
             if key == 'width':
-                s += "width: %s;" % val
+                s.append("width: %s" % val)
             elif key == 'height':
-                s += "height: %s;" % val
+                s.append("height: %s" % val)
             elif key == 'bgcolor':
-                s += "background-color: %s;" % val
+                s.append("background-color: %s" % val)
             elif key == 'align':
-                s += "text-align: %s;" % val
+                s.append("text-align: %s" % val)
             elif key == 'valign':
-                s += "vertical-align: %s;" % val
+                s.append("vertical-align: %s" % val)
             # Ignore unknown keys
             if key not in self._allowed_table_attrs[prefix]:
                 continue
             result[key] = val
-        if s:
-            if result.has_key('style'):
-                result['style'] += s
-            else:
-                result['style'] = s
-        #self.request.log("_checkTableAttr returns %r" % result)
+        st = result.get('style', '').split(';')
+        st = '; '.join(st + s)
+        st = st.strip(';')
+        st = st.strip()
+        if not st:
+            try:
+                del result['style'] # avoid empty style attr
+            except:
+                pass
+        else:
+            result['style'] = st
+        self.request.log("_checkTableAttr returns %r" % result)
         return result
 
 

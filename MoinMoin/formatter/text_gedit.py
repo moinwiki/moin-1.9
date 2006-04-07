@@ -17,7 +17,7 @@ class Formatter(text_html.Formatter):
 
     # Block elements ####################################################
 
-    def heading(self, on, depth, id=None, **kw):
+    def heading(self, on, depth, **kw):
         # remember depth of first heading, and adapt counting depth accordingly
         if not self._base_depth:
             self._base_depth = depth
@@ -29,7 +29,7 @@ class Formatter(text_html.Formatter):
         if not on:
             return self._close('h%d' % heading_depth)
         else:
-            return self._open('h%d' % heading_depth)
+            return self._open('h%d' % heading_depth, **kw)
 
     # Links ##############################################################
 
@@ -51,7 +51,7 @@ class Formatter(text_html.Formatter):
         @keyword title: override using the interwiki wikiname as title
         """
         if not on:
-            return '</a>'
+            return self.url(0) # return '</a>'
         html_class = 'badinterwiki' # we use badinterwiki in any case to simplify reverse conversion
         href = wikiutil.quoteWikinameURL(pagename)
         title = kw.get('title', interwiki)
@@ -67,9 +67,7 @@ class Formatter(text_html.Formatter):
         _ = self.request.getText
         pagename = self.page.page_name
         target = AttachFile.getAttachUrl(pagename, url, self.request)
-        return (self.url(
-            1, target,
-            title="attachment:%s" % wikiutil.quoteWikinameURL(url)) +
+        return (self.url(1, target, title="attachment:%s" % wikiutil.quoteWikinameURL(url)) +
                 self.text(text) +
                 self.url(0))
     
@@ -153,6 +151,12 @@ class Formatter(text_html.Formatter):
         attrs = text_html.Formatter._checkTableAttr(self, attrs, prefix)
         return self._style_to_attributes(attrs)
 
+    _allowed_table_attrs = {
+        'table': ['class', 'id', 'style', 'bgcolor', ],
+        'row': ['class', 'id', 'style', 'bgcolor', ],
+        '': ['colspan', 'rowspan', 'class', 'id', 'style', 'bgcolor', ],
+    }
+
     def table(self, on, attrs=None, **kw):
         """ Create table
 
@@ -170,7 +174,9 @@ class Formatter(text_html.Formatter):
                 #result.append(self.rawHTML("<!-- ATTRS1: %s -->" % repr(attrs)))
                 attrs = self._checkTableAttr(attrs, 'table')
                 #result.append(self.rawHTML("<!-- ATTRS2: %s -->" % repr(attrs)))
-            result.append(self._open('table', newline=1, attr=attrs))
+            result.append(self._open('table', newline=1, attr=attrs,
+                                     allowed_attrs=self._allowed_table_attrs['table'],
+                                     **kw))
         else:
             # Close table then div
             result.append(self._close('table'))
@@ -179,41 +185,26 @@ class Formatter(text_html.Formatter):
 
     def comment(self, text, **kw):
         text = text.rstrip() # workaround for growing amount of blanks at EOL
-        return self.preformatted(1, attr={'class': 'comment'}) + text + self.preformatted(0)
+        return self.preformatted(1, css_class='comment') + text + self.preformatted(0)
 
-    def underline(self, on, **kw):
-        tag = 'u'
-        if on:
-            return self._open(tag)
-        return self._close(tag)
-                    
     def strong(self, on, **kw):
         tag = 'b'
         if on:
-            return self._open(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
 
     def emphasis(self, on, **kw):
         tag = 'i'
         if on:
-            return self._open(tag)
+            return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
 
-    def code(self, on, css=None, **kw):
-        if not css and kw.has_key('css_class'):
-            css = kw['css_class']
-        tag = 'tt'
-        # Maybe we don't need this, because we have tt will be in inlineStack.
-        self._in_code = on
-        if css:
-            attrs = {"css":css}
-        else:
-            attrs = None
-
+    def underline(self, on, **kw):
+        tag = 'u'
         if on:
-            return self._open(tag, attr=attrs)
+            return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
-
+                    
     def line_anchordef(self, lineno):
         return '' # not needed for gui editor feeding
         

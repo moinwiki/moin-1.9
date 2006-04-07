@@ -688,7 +688,8 @@ class Parser:
 
         # scan attributes
         attr, msg = wikiutil.parseAttributes(self.request, attrdef, '>', table_extension)
-        if msg: msg = '<strong class="highlight">%s</strong>' % msg
+        if msg:
+            msg = '<strong class="highlight">%s</strong>' % msg
         #self.request.log("parseAttributes returned %r" % attr)
         return attr, msg
 

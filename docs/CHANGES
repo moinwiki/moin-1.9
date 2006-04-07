@@ -35,30 +35,31 @@ Known main issues:
 
 Version 1.5.3-current:
   New Features:
-    * modified SystemInfo macro to give human readable units and disk usage
+    * Modified SystemInfo macro to give human readable units and disk usage
     * cfg.editor_quickhelp makes the quick help below the editor configurable
       (at least as far as the default_markup is concerned). If set to None,
       it doesn't display any quickhelp. Thanks to Seth Falcon for the patch.
 
   Bugfixes:
-    * fixed double class attribute for nonexistent links
-    * fixed double </a> with qm_noexist option
-    * fixed table xxx="yyy" style attribute parsing
-    * if not (editor_force and editor_default == 'text') then display GUI mode
+    * Fixed double class attribute for nonexistent links
+    * Fixed double </a> with qm_noexist option
+    * Fixed table xxx="yyy" style attribute parsing
+    * If not (editor_force and editor_default == 'text') then display GUI mode
       switch button (this is only a partial fix, but enough to deny the GUI
       mode to your users completely)
     * Fixed XSS issue which could lead to cookie theft etc.
     * Fixed definition list "same level" indenting.
     * Fixed pagename in log for PackagePages action.
-    * made <p> self-closing and line-anchors more well-behaved, thanks to
+    * Made <p> self-closing and line-anchors more well-behaved, thanks to
       Martin Wilck for the patch. I didn't apply the <ol> patch, because this
       is no real problem, just a problem of a bad standard.
+    * Fixed gui editor *bgcolor crash.
 
   Other changes:
-    * moved back UserPreferences action link from menu to top of page (renaming
+    * Moved back UserPreferences action link from menu to top of page (renaming
       it to "Preferences"), added "Cancel" button to make it possible to return
       to the previous page without saving preferences.
-    * removed formatter.url "attrs" keyword arg that took premade html, we use
+    * Removed formatter.url "attrs" keyword arg that took premade html, we use
       separate kw args per attribute now.
  
 Version 1.5.3-rc1:
