@@ -731,6 +731,7 @@ class Parser:
 
             # return the complete cell markup
             result.append(self.formatter.table_cell(1, attrs) + attrerr)         
+            result.append(self._line_anchordef())
             return ''.join(result) 
         else:
             return self.formatter.text(word)
@@ -902,6 +903,13 @@ class Parser:
 
         return ""
 
+    def _line_anchordef(self):
+        if self.line_anchors and not self.line_anchor_printed:
+            self.line_anchor_printed = 1
+            return self.formatter.line_anchordef(self.lineno)
+        else:
+            return ''
+
     def format(self, formatter):
         """ For each line, scan through looking for magic
             strings, outputting verbatim any intervening text.
@@ -937,8 +945,9 @@ class Parser:
         # Main loop
         for line in self.lines:
             self.lineno += 1
-            if self.line_anchors:
-                self.request.write(self.formatter.line_anchordef(self.lineno))
+            self.line_anchor_printed = 0
+            if not self.in_table:
+                self.request.write(self._line_anchordef())
             self.table_rowstart = 1
             self.line_was_empty = self.line_is_empty
             self.line_is_empty = 0
@@ -1012,6 +1021,7 @@ class Parser:
                 if not line.strip():
                     if self.in_table:
                         self.request.write(self.formatter.table(0))
+                        self.request.write(self._line_anchordef())
                         self.in_table = 0
                     # CHANGE: removed check for not self.list_types
                     # p should close on every empty line
@@ -1073,6 +1083,7 @@ class Parser:
                     
                     # Close table
                     self.request.write(self.formatter.table(0))
+                    self.request.write(self._line_anchordef())
                     self.in_table = 0
                                             
             # Scan line, format and write

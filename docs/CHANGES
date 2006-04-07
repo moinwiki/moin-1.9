@@ -47,6 +47,9 @@ Version 1.5.3-current:
     * Fixed XSS issue which could lead to cookie theft etc.
     * Fixed definition list "same level" indenting.
     * Fixed pagename in log for PackagePages action.
+    * made <p> self-closing and line-anchors more well-behaved, thanks to
+      Martin Wilck for the patch. I didn't apply the <ol> patch, because this
+      is no real problem, just a problem of a bad standard.
 
   Other changes:
     * moved back UserPreferences action link from menu to top of page (renaming

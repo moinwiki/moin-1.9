@@ -27,7 +27,7 @@ _blocks = Set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h
 # when they don't have a closing tag even if valid XHTML.
 
 _self_closing_tags = Set(['area', 'base', 'br', 'col', 'frame', 'hr', 'img', 'input',
-                          'isindex', 'link', 'meta', 'param'])
+                          'isindex', 'link', 'meta', 'param', 'p'])
 
 # These are the elements which generally should cause an increase in the
 # indention level in the html souce code.

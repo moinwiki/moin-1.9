@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 17:33:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-529
+
+    Summary:
+      make <p> self-closing, line-anchors more well-behaved
+    Revision:
+      moin--main--1.5--patch-529
+
+    make <p> self-closing, line-anchors more well-behaved
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_html.py
+     MoinMoin/parser/wiki.py docs/CHANGES
+
+
 2006-04-06 18:43:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-528
 
     Summary:
