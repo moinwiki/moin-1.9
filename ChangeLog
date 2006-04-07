@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-07 20:41:47 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-534
+
+    Summary:
+      allow width attribute for text_gedit formatter
+    Revision:
+      moin--main--1.5--patch-534
+
+    allow width attribute for text_gedit formatter
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_gedit.py
+
+
 2006-04-07 20:23:56 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-533
 
     Summary:

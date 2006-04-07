@@ -152,9 +152,9 @@ class Formatter(text_html.Formatter):
         return self._style_to_attributes(attrs)
 
     _allowed_table_attrs = {
-        'table': ['class', 'id', 'style', 'bgcolor', ],
-        'row': ['class', 'id', 'style', 'bgcolor', ],
-        '': ['colspan', 'rowspan', 'class', 'id', 'style', 'bgcolor', ],
+        'table': ['class', 'id', 'style', 'bgcolor', 'width', ],
+        'row': ['class', 'id', 'style', 'bgcolor', 'width', ],
+        '': ['colspan', 'rowspan', 'class', 'id', 'style', 'bgcolor', 'width', ],
     }
 
     def table(self, on, attrs=None, **kw):
