@@ -228,13 +228,13 @@ Links: TrailingUnderscore_ `multi word with backticks`_ external_
 
 .. _external: http://external-site.net/foo/
 
-Lists: * bullets; 1., a. numered items.
+Lists: * bullets; 1., a. numbered items.
 </pre>
 <br/>
-(!) For more help, see 
+(!) For more help, see the 
 <a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
 reStructuredText Quick Reference
-</a>
+</a>.
 """),
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'

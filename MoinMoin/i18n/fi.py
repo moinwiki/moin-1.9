@@ -96,22 +96,6 @@ Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muut
 '''Vähäinen muutos''',
 '''Remove trailing whitespace from each line''':
 '''Poista rivien lopusta tyhjämerkit''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Korostus:: [[Verbatim(\'\')]]\'\'kursiivi\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'lihavoitu\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'lihavoitu kursiivi\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'sekä \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'lihavoitua\'\'\'[[Verbatim(\'\'\')]] että kursiivia\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vaakaviiva.
- Otsikot:: [[Verbatim(=)]] Otsikko 1 [[Verbatim(=)]]; [[Verbatim(==)]] Otsikko 2 [[Verbatim(==)]]; [[Verbatim(===)]] Otsikko 3 [[Verbatim(===)]]; [[Verbatim(====)]] Otsikko 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Otsikko 5 [[Verbatim(=====)]].
- Luettelot:: väli ja jokin näistä: * numeroimaton kohta; 1., a., A., i., I. numeroitu kohta; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.
- Linkit:: [[Verbatim(YhteenIsollaKirjoitetut)]]; [[Verbatim(["hakasulkeissa ja lainausmerkeissä"])]]; url; [url]; [url nimi].
- Taulukot:: || solun teksti |||| kahden sarakkeen solun teksti ||; tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen.
-
-(!) Lisää apua sivuilla HelpOnEditing ja SyntaxReference.
-''',
 '''Edit was cancelled.''':
 '''Muokkaus peruttu.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -216,6 +200,22 @@ välttääksesi muokkausristiriidat.\'\'\'[[BR]]
 Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''<unknown>''':
 '''<tuntematon>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Korostus:: [[Verbatim(\'\')]]\'\'kursiivi\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'lihavoitu\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'lihavoitu kursiivi\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'sekä \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'lihavoitua\'\'\'[[Verbatim(\'\'\')]] että kursiivia\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vaakaviiva.
+ Otsikot:: [[Verbatim(=)]] Otsikko 1 [[Verbatim(=)]]; [[Verbatim(==)]] Otsikko 2 [[Verbatim(==)]]; [[Verbatim(===)]] Otsikko 3 [[Verbatim(===)]]; [[Verbatim(====)]] Otsikko 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Otsikko 5 [[Verbatim(=====)]].
+ Luettelot:: väli ja jokin näistä: * numeroimaton kohta; 1., a., A., i., I. numeroitu kohta; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.
+ Linkit:: [[Verbatim(YhteenIsollaKirjoitetut)]]; [[Verbatim(["hakasulkeissa ja lainausmerkeissä"])]]; url; [url]; [url nimi].
+ Taulukot:: || solun teksti |||| kahden sarakkeen solun teksti ||; tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen.
+
+(!) Lisää apua sivuilla HelpOnEditing ja SyntaxReference.
+''',
 '''Diffs''':
 '''Erot''',
 '''Info''':

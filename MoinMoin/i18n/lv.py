@@ -96,21 +96,6 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 '''Maznozīmīgas izmaiņas''',
 '''Remove trailing whitespace from each line''':
 '''Dzēst tukšumus rindu beigās''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Uzvērt:: [[Verbatim(\'\')]]\'\'kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'treknā kursīvā\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'jaukti \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]] un kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontāla svītra.
- Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; [[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts [[Verbatim(=====)]].
- Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.
- Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; URL; [URL]; [URL etiķete].
- Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
-(!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai SintaksesIzziņa.
-''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -213,6 +198,21 @@ Lai neveidotos konflikts, \'\'\'Jums nevajadzētu\'\' labot\'\' šo lapu vēl vi
 Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''<unknown>''':
 '''<nezināms>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Uzvērt:: [[Verbatim(\'\')]]\'\'kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'treknā kursīvā\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'jaukti \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'treknrakstā\'\'\'[[Verbatim(\'\'\')]] un kursīvā\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontāla svītra.
+ Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; [[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts [[Verbatim(=====)]].
+ Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.
+ Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["kvadrātiekavas un pēdiņas"])]]; URL; [URL]; [URL etiķete].
+ Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
+(!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai SintaksesIzziņa.
+''',
 '''Diffs''':
 '''Atšķirības''',
 '''Info''':

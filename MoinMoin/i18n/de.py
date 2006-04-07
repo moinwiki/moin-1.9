@@ -96,22 +96,6 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 '''Triviale Änderung''',
 '''Remove trailing whitespace from each line''':
 '''Leerzeichen am Ende jeder Zeile entfernen''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Betonung:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fett\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'fett und kursiv\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'gemischt \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fett\'\'\'[[Verbatim(\'\'\')]] und kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontaler Balken.
- Überschriften:: [[Verbatim(=)]] Überschrift 1 [[Verbatim(=)]]; [[Verbatim(==)]] Überschrift 2 [[Verbatim(==)]]; [[Verbatim(===)]] Ü 3 [[Verbatim(===)]];   [[Verbatim(====)]] Ü 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Ü 5 [[Verbatim(=====)]].
- Listen:: Leerzeichen und eins von: * Punkte; 1., a., A., i., I. nummerierte Punkte; 1.#n starte Nummerierung bei n; nur Leerzeichen rückt ein.
- Links:: [[Verbatim(ZusammenGeschriebeneGroßeWorte)]]; [[Verbatim(["Klammern und doppelte  Anführungszeichen"])]]; url; [url]; [url label].
- Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    keine anhängenden Leerzeichen nach Überschriften oder Tabellen.
-
-(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReferenz.
-''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -215,6 +199,58 @@ oder in der Vorschau angezeigt.[[BR]]
 Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''<unknown>''':
 '''<unbekannt>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Betonung:: [[Verbatim(\'\')]]\'\'kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fett\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'fett und kursiv\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'gemischt \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fett\'\'\'[[Verbatim(\'\'\')]] und kursiv\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontaler Balken.
+ Überschriften:: [[Verbatim(=)]] Überschrift 1 [[Verbatim(=)]]; [[Verbatim(==)]] Überschrift 2 [[Verbatim(==)]]; [[Verbatim(===)]] Ü 3 [[Verbatim(===)]];   [[Verbatim(====)]] Ü 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Ü 5 [[Verbatim(=====)]].
+ Listen:: Leerzeichen und eins von: * Punkte; 1., a., A., i., I. nummerierte Punkte; 1.#n starte Nummerierung bei n; nur Leerzeichen rückt ein.
+ Links:: [[Verbatim(ZusammenGeschriebeneGroßeWorte)]]; [[Verbatim(["Klammern und doppelte  Anführungszeichen"])]]; url; [url]; [url label].
+ Tabellen:: || Zellentext |||| Zellentext, 2 Zellen überspannend ||;    keine anhängenden Leerzeichen nach Überschriften oder Tabellen.
+
+(!) Weitere Hilfe finden Sie unter HilfeZumEditieren oder SyntaxReferenz.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Betonung: <i>*kursiv*</i> <b>**fett**</b> ``gleiche Zeichenbreite``<br/>
+<br/><pre>
+Überschriften: Überschrift 1  Überschrift 2  Überschrift 3
+               =============  -------------  ~~~~~~~~~~~~~
+
+Horizontale Linie: ---- 
+Links: AngehängterUnterstrich_ `mehrere Worte mit Rückwärtsapostroph`_ extern_ 
+
+.. _extern: http://externe-seite.de/
+
+Listen: * Punkte; 1., a. nummerierte Punkte.
+</pre>
+<br/>
+(!) Für mehr Hilfe siehe die 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''',
 '''Diffs''':
 '''DifferenzAnzeige''',
 '''Info''':

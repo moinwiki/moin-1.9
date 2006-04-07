@@ -13,9 +13,7 @@ from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 
 class Formatter(text_html.Formatter):
-    """
-        Send HTML data.
-    """
+    """ Send HTML data for the GUI editor """
 
     # Block elements ####################################################
 

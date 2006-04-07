@@ -96,22 +96,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''ささいな変更''',
 '''Remove trailing whitespace from each line''':
 '''行末の空白を削除''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' 強調:: [[Verbatim(\'\')]]\'\'イタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(\'\'\')]]\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]、[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'ボールドイタリック\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]、[[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]とイタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(----)]] 水平線。
- 表題:: [[Verbatim(=)]] タイトル1 [[Verbatim(=)]]、[[Verbatim(==)]] タイトル2 [[Verbatim(==)]]、[[Verbatim(===)]] タイトル3 [[Verbatim(===)]]、[[Verbatim(====)]] タイトル4 [[Verbatim(====)]]、[[Verbatim(=====)]] タイトル5 [[Verbatim(=====)]]。
- リスト:: 半角スペースに続けて: * ビュレット、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。
- リンク:: [[Verbatim(JoinCapitalizedWords)]]、[[Verbatim(["大括弧と二重引用符"])]]; url; [url]; [url ラベル]。
- 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。
-
-(!) 詳細はHelpOnEditingや ["シンタックスリファレンス"]を参照してください。
-''',
 '''Edit was cancelled.''':
 '''編集はキャンセルされました。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -216,6 +200,22 @@ To leave the editor, press the Cancel button.''':
 キャンセルボタンで編集を中断できます。''',
 '''<unknown>''':
 '''<不明>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' 強調:: [[Verbatim(\'\')]]\'\'イタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(\'\'\')]]\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]、[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'ボールドイタリック\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]、[[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]とイタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(----)]] 水平線。
+ 表題:: [[Verbatim(=)]] タイトル1 [[Verbatim(=)]]、[[Verbatim(==)]] タイトル2 [[Verbatim(==)]]、[[Verbatim(===)]] タイトル3 [[Verbatim(===)]]、[[Verbatim(====)]] タイトル4 [[Verbatim(====)]]、[[Verbatim(=====)]] タイトル5 [[Verbatim(=====)]]。
+ リスト:: 半角スペースに続けて: * ビュレット、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。
+ リンク:: [[Verbatim(JoinCapitalizedWords)]]、[[Verbatim(["大括弧と二重引用符"])]]; url; [url]; [url ラベル]。
+ 表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。
+
+(!) 詳細はHelpOnEditingや ["シンタックスリファレンス"]を参照してください。
+''',
 '''Diffs''':
 '''差分''',
 '''Info''':

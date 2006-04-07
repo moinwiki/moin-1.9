@@ -96,22 +96,6 @@ Si vous ne le souhaitez pas, utilisez \'\'\'%(cancel_button_text)s\'\'\' pour an
 '''Modification mineure''',
 '''Remove trailing whitespace from each line''':
 '''Supprimer les espaces en fin de ligne''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Mise en relief:: [[Verbatim(\'\')]]\'\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(\'\'\')]]\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] ; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'gras italique\'\'\'\'\'[[Verbatim(\'\'\'\'\')]] ; [[Verbatim(\'\')]]\'\'mélange de \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] et d\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(----)]] filet horizontal.
- Titres:: [[Verbatim(=)]] Titre 1 [[Verbatim(=)]] ; [[Verbatim(==)]] Titre 2 [[Verbatim(==)]] ; [[Verbatim(===)]] Titre 3 [[Verbatim(===)]] ;   [[Verbatim(====)]] Titre 4 [[Verbatim(====)]] ; [[Verbatim(=====)]] Titre 5 [[Verbatim(=====)]].
- Listes:: une espace suivi de : « * » puces ; « 1. », « a. », « A. », « i. », « I. » énumérations ; « 1.#n » énumération commençant à n ; une espace seule ajoute une indentation.
- Liens:: [[Verbatim(MotsAccolésAvecMajusculesInitiales)]] ; [[Verbatim(["crochets et petits guillemets"])]] ; url ; [url] ; [url intitulé].
- Tables:: || texte de la cellule |||| texte s\'étendant sur 2 colonnes || ; aucune espace ne doit suivre la fin d\'un tableau ou d\'un titre.
-
-(!) Pour plus d\'informations, reportez-vous à l\'["AideDeL\'Édition"] ou au RésuméDeLaSyntaxe.
-''',
 '''Edit was cancelled.''':
 '''Modification annulée.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -212,6 +196,22 @@ To leave the editor, press the Cancel button.''':
 Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
 '''<unknown>''':
 '''<inconnu>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Mise en relief:: [[Verbatim(\'\')]]\'\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(\'\'\')]]\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] ; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'gras italique\'\'\'\'\'[[Verbatim(\'\'\'\'\')]] ; [[Verbatim(\'\')]]\'\'mélange de \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'gras\'\'\'[[Verbatim(\'\'\')]] et d\'italique\'\'[[Verbatim(\'\')]] ; [[Verbatim(----)]] filet horizontal.
+ Titres:: [[Verbatim(=)]] Titre 1 [[Verbatim(=)]] ; [[Verbatim(==)]] Titre 2 [[Verbatim(==)]] ; [[Verbatim(===)]] Titre 3 [[Verbatim(===)]] ;   [[Verbatim(====)]] Titre 4 [[Verbatim(====)]] ; [[Verbatim(=====)]] Titre 5 [[Verbatim(=====)]].
+ Listes:: une espace suivi de : « * » puces ; « 1. », « a. », « A. », « i. », « I. » énumérations ; « 1.#n » énumération commençant à n ; une espace seule ajoute une indentation.
+ Liens:: [[Verbatim(MotsAccolésAvecMajusculesInitiales)]] ; [[Verbatim(["crochets et petits guillemets"])]] ; url ; [url] ; [url intitulé].
+ Tables:: || texte de la cellule |||| texte s\'étendant sur 2 colonnes || ; aucune espace ne doit suivre la fin d\'un tableau ou d\'un titre.
+
+(!) Pour plus d\'informations, reportez-vous à l\'["AideDeL\'Édition"] ou au RésuméDeLaSyntaxe.
+''',
 '''Diffs''':
 '''Différences''',
 '''Info''':

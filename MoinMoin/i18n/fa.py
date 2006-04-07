@@ -96,22 +96,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''تغییرات جزئی''',
 '''Remove trailing whitespace from each line''':
 '''جاهای خالی را از هر خط حذف کن''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-'''پررنگ::·[[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]];·[[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]];·[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold·italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]];·[[Verbatim(\'\')]]\'\'mixed·\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]·and·italics\'\'[[Verbatim(\'\')]];·[[Verbatim(----)]]·horizontal·rule.
-سرنویس ها::·[[Verbatim(=)]]·Title·1·[[Verbatim(=)]];·[[Verbatim(==)]]·Title·2·[[Verbatim(==)]];·[[Verbatim(===)]]·Title·3·[[Verbatim(===)]];···[[Verbatim(====)]]·Title·4·[[Verbatim(====)]];·[[Verbatim(=====)]]·Title·5·[[Verbatim(=====)]].
-لیست ها::·space·and·one·of:·*·bullets;·1.,·a.,·A.,·i.,·I.·numbered·items;·1.#n·start·numbering·at·n;·space·alone·indents.
-لینک ها::·[[Verbatim(JoinCapitalizedWords)]];·[[Verbatim(["brackets·and·double·quotes"])]];·url;·[url];·[url·label].
-·Tables::·||·cell·text·||||·cell·text·spanning·2·columns·||;····no·trailing·white·space·allowed·after·tables·or·titles.
-
-(!)·برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.
-''',
 '''Edit was cancelled.''':
 '''ویرایش لغو شد.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -211,6 +195,22 @@ To leave the editor, press the Cancel button.''':
 برای خروج از محیط ویرایش دکمه لغو را فشار دهید.''',
 '''<unknown>''':
 '''<نامشخص>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+'''پررنگ::·[[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]];·[[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]];·[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold·italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]];·[[Verbatim(\'\')]]\'\'mixed·\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]·and·italics\'\'[[Verbatim(\'\')]];·[[Verbatim(----)]]·horizontal·rule.
+سرنویس ها::·[[Verbatim(=)]]·Title·1·[[Verbatim(=)]];·[[Verbatim(==)]]·Title·2·[[Verbatim(==)]];·[[Verbatim(===)]]·Title·3·[[Verbatim(===)]];···[[Verbatim(====)]]·Title·4·[[Verbatim(====)]];·[[Verbatim(=====)]]·Title·5·[[Verbatim(=====)]].
+لیست ها::·space·and·one·of:·*·bullets;·1.,·a.,·A.,·i.,·I.·numbered·items;·1.#n·start·numbering·at·n;·space·alone·indents.
+لینک ها::·[[Verbatim(JoinCapitalizedWords)]];·[[Verbatim(["brackets·and·double·quotes"])]];·url;·[url];·[url·label].
+·Tables::·||·cell·text·||||·cell·text·spanning·2·columns·||;····no·trailing·white·space·allowed·after·tables·or·titles.
+
+(!)·برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.
+''',
 '''Diffs''':
 '''تغییرات''',
 '''Info''':

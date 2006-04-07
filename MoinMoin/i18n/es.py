@@ -96,20 +96,6 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Cambio trivial''',
 '''Remove trailing whitespace from each line''':
 '''Eliminar espacios en blanco al final de cada línea''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Énfasis:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrilla cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mezclada \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]] y cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] línea horizontal.
- Encabezados:: [[Verbatim(=)]] Título de nivel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título de nivel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título de nivel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título de nivel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título de nivel 5 [[Verbatim(=====)]].
- Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos numerados; 1.#n comienza la numeración en n; un \'espacio\' produce sangría o indentado.
- Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
- Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de las tablas o los títulos.
-''',
 '''Edit was cancelled.''':
 '''Has cancelado tu edición.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -213,6 +199,20 @@ para evitar conflictos.\'\'\'[[BR]]
 Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
 '''<unknown>''':
 '''<desconocido>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Énfasis:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrilla cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mezclada \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]] y cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] línea horizontal.
+ Encabezados:: [[Verbatim(=)]] Título de nivel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título de nivel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título de nivel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título de nivel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título de nivel 5 [[Verbatim(=====)]].
+ Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos numerados; 1.#n comienza la numeración en n; un \'espacio\' produce sangría o indentado.
+ Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
+ Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de las tablas o los títulos.
+''',
 '''Diffs''':
 '''Diferencias''',
 '''Info''':

@@ -95,22 +95,6 @@ Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar e
 '''Canvi trivial''',
 '''Remove trailing whitespace from each line''':
 '''Suprimeix els espais del final de les línies''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Ènfasi:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negreta\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negreta cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'combinació \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negreta\'\'\'[[Verbatim(\'\'\')]] i cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] regla horitzontal.
- Encapçalaments:: [[Verbatim(=)]] Títol 1 [[Verbatim(=)]]; [[Verbatim(==)]] Títol 2 [[Verbatim(==)]]; [[Verbatim(===)]] Títol 3 [[Verbatim(===)]];   [[Verbatim(====)]] Títol 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Títol 5 [[Verbatim(=====)]].
- Llistes:: espai i algun dels següents: asteriscs *; 1., a., A., i., I. llistes numerades; 1.#n comença a numerar des de n; només espai sagna.
- Enllaços:: [[Verbatim(JuntaParaulesAmbMajúscules)]]; [[Verbatim(["claus i cometes dobles"])]]; url; [url]; [etiqueta de l\'url].
- Taules:: || text de la cel·la |||| text de ce·les que ocupen dos columnes ||;    no s\'admet espai en blanc després de taules o títols.
-
-(!) Per a obtindre més ajuda, vegeu HelpOnEditing o SyntaxReference.
-''',
 '''Edit was cancelled.''':
 '''S\'ha cancel·lat l\'edició.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -217,6 +201,22 @@ per a evitar conflictes d\'edició.\'\'\'[[BR]]
 Per a abandonar l\'editor, premeu el botó Cancel·la.''',
 '''<unknown>''':
 '''<desconegut>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Ènfasi:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negreta\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negreta cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'combinació \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negreta\'\'\'[[Verbatim(\'\'\')]] i cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] regla horitzontal.
+ Encapçalaments:: [[Verbatim(=)]] Títol 1 [[Verbatim(=)]]; [[Verbatim(==)]] Títol 2 [[Verbatim(==)]]; [[Verbatim(===)]] Títol 3 [[Verbatim(===)]];   [[Verbatim(====)]] Títol 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Títol 5 [[Verbatim(=====)]].
+ Llistes:: espai i algun dels següents: asteriscs *; 1., a., A., i., I. llistes numerades; 1.#n comença a numerar des de n; només espai sagna.
+ Enllaços:: [[Verbatim(JuntaParaulesAmbMajúscules)]]; [[Verbatim(["claus i cometes dobles"])]]; url; [url]; [etiqueta de l\'url].
+ Taules:: || text de la cel·la |||| text de ce·les que ocupen dos columnes ||;    no s\'admet espai en blanc després de taules o títols.
+
+(!) Per a obtindre més ajuda, vegeu HelpOnEditing o SyntaxReference.
+''',
 '''Diffs''':
 '''Diferències''',
 '''Info''':

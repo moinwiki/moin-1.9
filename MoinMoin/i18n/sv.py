@@ -96,22 +96,6 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Trivial ändring''',
 '''Remove trailing whitespace from each line''':
 '''Eliminera efterföljande mellanslag från varje rad''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Emfas:: [[Verbatim(\'\')]]\'\'kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kursiv fetstil\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandad \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]] och kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horisontell linje.
- Rubriker:: [[Verbatim(=)]] Rubrik 1 [[Verbatim(=)]]; [[Verbatim(==)]] Rubrik 2 [[Verbatim(==)]]; [[Verbatim(===)]] Rubrik 3 [[Verbatim(===)]];   [[Verbatim(====)]] Rubrik 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Rubrik 5 [[Verbatim(=====)]].
- Listor:: mellanslag och en av: * punkter; 1., a., A., i., I. numrerade paragrafer; 1.#n börja numrering på n; enbart mellanslag indenterar.
- Länkar:: [[Verbatim(IhopskrivnaOrd)]]; [[Verbatim(["hakparenteser och citattecken"])]]; url; [url]; [url etikett].
- Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;    inga avslutande blanksteg tillåtna efter tabeller och titlar.
-
-(!) För mer hjälp, se HjälpOmRedigering och SyntaxReferens.
-''',
 '''Edit was cancelled.''':
 '''Redigeringen avbröts.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -217,6 +201,22 @@ för att undvika redigeringskonflikter.\'\'\'[[BR]]
 För att lämna redigeringen, tryck på "Avbryt".''',
 '''<unknown>''':
 '''<okänd>''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Emfas:: [[Verbatim(\'\')]]\'\'kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'kursiv fetstil\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'blandad \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'fetstil\'\'\'[[Verbatim(\'\'\')]] och kursivering\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horisontell linje.
+ Rubriker:: [[Verbatim(=)]] Rubrik 1 [[Verbatim(=)]]; [[Verbatim(==)]] Rubrik 2 [[Verbatim(==)]]; [[Verbatim(===)]] Rubrik 3 [[Verbatim(===)]];   [[Verbatim(====)]] Rubrik 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Rubrik 5 [[Verbatim(=====)]].
+ Listor:: mellanslag och en av: * punkter; 1., a., A., i., I. numrerade paragrafer; 1.#n börja numrering på n; enbart mellanslag indenterar.
+ Länkar:: [[Verbatim(IhopskrivnaOrd)]]; [[Verbatim(["hakparenteser och citattecken"])]]; url; [url]; [url etikett].
+ Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;    inga avslutande blanksteg tillåtna efter tabeller och titlar.
+
+(!) För mer hjälp, se HjälpOmRedigering och SyntaxReferens.
+''',
 '''Diffs''':
 '''Skillnader''',
 '''Info''':
