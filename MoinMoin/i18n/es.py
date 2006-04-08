@@ -213,6 +213,42 @@ Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
  Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
  Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de las tablas o los títulos.
 ''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Énfasis: <i>*itálica*</i> <b>**negrilla**</b> ``monoespaciada``<br/>
+<br/><pre>
+Encabezados: Encabezado 1  Encabezado 2  Encabezado 3
+             ============  ------------  ~~~~~~~~~~~~
+
+Línea horizontal: ---- 
+Enlaces: LineaAlPisoFinal_ `varias palabras con comillas`_ externos_ 
+
+.. _externos: http://en-el-exterior.net/foo/
+
+Listas: * viñetas; 1., a. enumeraciones.
+</pre>
+<br/>
+(!) Para obtener más ayuda, ve a 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+Referencia rápida de reStructuredText
+</a>.
+''',
 '''Diffs''':
 '''Diferencias''',
 '''Info''':
@@ -532,6 +568,10 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Cantidad de páginas del sistema''',
 '''Accumulated page sizes''':
 '''Tamaño acumulado de las páginas''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Disco usado por %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Disco usado por %(data_dir)s/''',
 '''Entries in edit log''':
 '''Entradas en el registro de edición''',
 '''NONE''':
@@ -853,6 +893,8 @@ rojo=editar''',
 '''[INICIO]''',
 '''Click to do a full-text search for this title''':
 '''Efectuar una búsqueda páginas que enlazan a ésta (este título en contenidos)''',
+'''Preferences''':
+'''Preferencias''',
 '''Logout''':
 '''Salir''',
 '''Clear message''':
@@ -883,6 +925,16 @@ rojo=editar''',
 '''Páginas similares''',
 '''Local Site Map''':
 '''Mapa del sitio''',
+'''My Pages''':
+'''Mis Páginas''',
+'''Subscribe User''':
+'''Suscribir Usuario''',
+'''Remove Spam''':
+'''Eliminar Spam''',
+'''Package Pages''':
+'''Páginas de paquetes''',
+'''Render as Docbook''':
+'''Mostrar en Docbook''',
 '''Do''':
 '''Hacer''',
 '''Edit (Text)''':

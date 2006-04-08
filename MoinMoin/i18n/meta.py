@@ -6,6 +6,7 @@
 """
 # lang: (longname, longname-in-english, encoding, direction, maintainer)
 languages = {
+'bg': (u'Български', u'Bulgarian', 'utf-8', 0, """Hristo Iliev <hristo@phys.uni-sofia.bg>""",),
 'ca': (u'català', u'Catalan', 'utf-8', 0, """Jordi Mallach <jordi@sindominio.net>""",),
 'cs': (u'Čeština', u'Czech', 'utf-8', 0, """Jan Blaha <Jan.Blaha@unet.cz>""",),
 'da': (u'Dansk', u'Danish', 'utf-8', 0, """Jonas Smedegaard <dr@jones.dk>""",),

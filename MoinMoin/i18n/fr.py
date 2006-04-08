@@ -212,6 +212,42 @@ Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
 
 (!) Pour plus d\'informations, reportez-vous à l\'["AideDeL\'Édition"] ou au RésuméDeLaSyntaxe.
 ''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Mise en relief : <i>*italique*</i> <b>**gras**</b> ``à chasse fixe``<br/>
+<br/><pre>
+Titres : Titre 1  Titre 2  Titre 3
+         =======  -------  ~~~~~~~
+
+Filet horizontal : ---- 
+Liens : SoulignéFinal_ `multi-mot encadré d\'accents graves`_ externes_ 
+
+.. _externe : http://exemple.fr.invalid/blabla/
+
+Listes : * puces ; 1., a. numérotées.
+</pre>
+<br/>
+(!) Pour en savoir plus, consultez le 
+l\'<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+Guide de référence rapide de reStructuredText
+</a> (en anglais).
+''',
 '''Diffs''':
 '''Différences''',
 '''Info''':

@@ -408,6 +408,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"Énfasis: <i>*itálica*</i> <b>**negrilla**</b> ``monoespaciada``<br/>\n"
+"<br/><pre>\n"
+"Encabezados: Encabezado 1  Encabezado 2  Encabezado 3\n"
+"             ============  ------------  ~~~~~~~~~~~~\n"
+"\n"
+"Línea horizontal: ---- \n"
+"Enlaces: LineaAlPisoFinal_ `varias palabras con comillas`_ externos_ \n"
+"\n"
+".. _externos: http://en-el-exterior.net/foo/\n"
+"\n"
+"Listas: * viñetas; 1., a. enumeraciones.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Para obtener más ayuda, ve a \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"Referencia rápida de reStructuredText\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "Diferencias"
@@ -931,11 +948,11 @@ msgstr "Tamaño acumulado de las páginas"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
+msgstr "Disco usado por %(data_dir)s/pages/"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr ""
+msgstr "Disco usado por %(data_dir)s/"
 
 msgid "Entries in edit log"
 msgstr "Entradas en el registro de edición"
@@ -1524,9 +1541,8 @@ msgid "Click to do a full-text search for this title"
 msgstr ""
 "Efectuar una búsqueda páginas que enlazan a ésta (este título en contenidos)"
 
-#, fuzzy
 msgid "Preferences"
-msgstr "PreferenciasDelUsuario"
+msgstr "Preferencias"
 
 msgid "Logout"
 msgstr "Salir"
@@ -1575,24 +1591,20 @@ msgstr "Páginas similares"
 msgid "Local Site Map"
 msgstr "Mapa del sitio"
 
-#, fuzzy
 msgid "My Pages"
-msgstr "Página"
+msgstr "Mis Páginas"
 
-#, fuzzy
 msgid "Subscribe User"
-msgstr "Suscribirse"
+msgstr "Suscribir Usuario"
 
-#, fuzzy
 msgid "Remove Spam"
-msgstr "Eliminar enlace"
+msgstr "Eliminar Spam"
 
-#, fuzzy
 msgid "Package Pages"
-msgstr "Páginas similares"
+msgstr "Páginas de paquetes"
 
 msgid "Render as Docbook"
-msgstr ""
+msgstr "Mostrar en Docbook"
 
 msgid "Do"
 msgstr "Hacer"
@@ -1739,7 +1751,6 @@ msgstr "CorrecciónOrtográfica"
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bytes)"
 
-#, fuzzy
 #~ msgid "User Preferences"
 #~ msgstr "PreferenciasDelUsuario"
 
