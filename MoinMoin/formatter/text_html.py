@@ -1273,7 +1273,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 pass
         else:
             result['style'] = st
-        self.request.log("_checkTableAttr returns %r" % result)
+        #self.request.log("_checkTableAttr returns %r" % result)
         return result
 
 

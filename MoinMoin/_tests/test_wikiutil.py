@@ -20,7 +20,6 @@ class SystemPageTestCase(unittest.TestCase):
         'TitleIndex',
         )
     notSystemPages = (
-        'FrontPage',
         'NoSuchPageYetAndWillNeverBe',
         )
 

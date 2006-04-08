@@ -2,6 +2,43 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-08 19:24:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-538
+
+    Summary:
+      fix some easy test bugs, disable the severely broken tests
+    Revision:
+      moin--main--1.5--patch-538
+
+    fix some easy test bugs, disable the severely broken tests
+    
+
+    new files:
+     MoinMoin/_tests/broken/.arch-ids/=id
+
+    modified files:
+     ChangeLog MoinMoin/_tests/test_util_web.py
+     MoinMoin/_tests/test_wikiutil.py
+     MoinMoin/formatter/text_html.py docs/CHANGES
+     tests/make_test.out
+
+    renamed files:
+     MoinMoin/_tests/.arch-ids/test_converter_text_html_text_x_moin.py.id
+       ==> MoinMoin/_tests/broken/.arch-ids/test_converter_text_html_text_x_moin.py.id
+     MoinMoin/_tests/.arch-ids/test_formatter.py.id
+       ==> MoinMoin/_tests/broken/.arch-ids/test_formatter.py.id
+     MoinMoin/_tests/.arch-ids/test_parser_wiki.py.id
+       ==> MoinMoin/_tests/broken/.arch-ids/test_parser_wiki.py.id
+     MoinMoin/_tests/test_converter_text_html_text_x_moin.py
+       ==> MoinMoin/_tests/broken/test_converter_text_html_text_x_moin.py
+     MoinMoin/_tests/test_formatter.py
+       ==> MoinMoin/_tests/broken/test_formatter.py
+     MoinMoin/_tests/test_parser_wiki.py
+       ==> MoinMoin/_tests/broken/test_parser_wiki.py
+
+    new directories:
+     MoinMoin/_tests/broken MoinMoin/_tests/broken/.arch-ids
+
+
 2006-04-08 18:58:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-537
 
     Summary:

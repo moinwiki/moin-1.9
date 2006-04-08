@@ -64,7 +64,7 @@ class MakeSelectionTestCase(unittest.TestCase):
     def setUp(self):
         html._SORT_ATTRS = 1
         self.expected = (
-        u'<select name="test">'
+        u'<select name="test" size="1">'
         u'<option value="one">one</option>'
         u'<option value="two">two</option>'
         u'<option value="simple">simple</option>'
@@ -75,21 +75,21 @@ class MakeSelectionTestCase(unittest.TestCase):
     def testMakeSelectNoSelection(self):
         """util.web: creating html select with no selection"""
         expected = self.expected
-        result = unicode(web.makeSelection('test', self.values))
+        result = unicode(web.makeSelection('test', self.values, size=1))
         self.assertEqual(result, expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
-    def testMakeSelectNoSelection(self):
+    def testMakeSelectNoSelection2(self):
         """util.web: creating html select with non existing selection"""
         expected = self.expected
-        result = unicode(web.makeSelection('test', self.values, 'three'))
+        result = unicode(web.makeSelection('test', self.values, 'three', size=1))
         self.assertEqual(result, expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
         
     def testMakeSelectWithSelectedItem(self):
         """util.web: creating html select with selected item"""
         expected = self.expected.replace('value="two"', 'selected value="two"')
-        result = unicode(web.makeSelection('test', self.values, 'two'))
+        result = unicode(web.makeSelection('test', self.values, 'two', size=1))
         self.assertEqual(result, expected,
                          'Expected "%(expected)s" but got "%(result)s"' % locals())
 
