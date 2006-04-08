@@ -210,6 +210,42 @@ Stiskněte tlačítko Zrušit na opuštění editoru.''',
 
 (!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
 ''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Zvýraznění: <i>*kurzíva*</i> <b>**tučně</b> ``monospace``<br/>
+<br/><pre>
+Nadpisy: Nadpis 1  Nadpis 2  Nadpis 3
+         ========  --------  ~~~~~~~~
+
+Vodorovná linka: ---- 
+Odkazy: PřipojenéPodtržítko_ `více slov ve zpětném apostrofu`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Seznamy: * bodové odrážky; 1., a. číslované seznamy.
+</pre>
+<br/>
+(!) Více informací viz 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''',
 '''Diffs''':
 '''Rozdíly''',
 '''Info''':

@@ -213,6 +213,42 @@ To leave the editor, press the Cancel button.''':
 (!) 表格或標題尾端不可有空白[[BR]]
 (!) 更詳細的說明請參看 ["說明/編輯頁面"] 或 ["語法參考"]
 ''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''強調: <i>*斜體*</i> <b>**粗體**</b> ``打字機體``<br/>
+<br/><pre>
+標題: 標題1  標題2  標題3
+      =====  -----  ~~~~~
+
+分隔線: ---- 
+連結: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+條列: * 符號式; 1., a. 編號式.
+</pre>
+<br/>
+(!) 更深入的說明在 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText 快速參考
+</a>.
+''',
 '''Diffs''':
 '''版本比較''',
 '''Info''':

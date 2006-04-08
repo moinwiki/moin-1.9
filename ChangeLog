@@ -2,6 +2,28 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-08 18:51:46 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-536
+
+    Summary:
+      updated i18n, added bg
+    Revision:
+      moin--main--1.5--patch-536
+
+    updated i18n, added bg
+    
+
+    new files:
+     MoinMoin/i18n/.arch-ids/bg.po.id
+     MoinMoin/i18n/.arch-ids/bg.py.id MoinMoin/i18n/bg.po
+     MoinMoin/i18n/bg.py
+
+    modified files:
+     ChangeLog MoinMoin/i18n/cs.po MoinMoin/i18n/cs.py
+     MoinMoin/i18n/es.po MoinMoin/i18n/es.py MoinMoin/i18n/fr.po
+     MoinMoin/i18n/fr.py MoinMoin/i18n/meta.py
+     MoinMoin/i18n/zh_tw.po MoinMoin/i18n/zh_tw.py
+
+
 2006-04-07 21:45:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-535
 
     Summary:
