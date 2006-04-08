@@ -8,6 +8,9 @@ with every moin upgrade, simply run a command similar to this:
 
 sudo -u www-data moin --config-dir=/path/to/config_dir --wiki-url=wiki.example.org/ migration data 
 
+Note: If you did not use setup.py, you can call the moin script directly. It is located
+      in MoinMoin/scripts/moin.py
+
 The new style mig stuff will then load the config for that wiki, get into its
 data_dir, read the meta file content and determine what it has to do internally.
 
