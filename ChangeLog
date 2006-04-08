@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-08 19:53:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-539
+
+    Summary:
+      update underlay, fix typo
+    Revision:
+      moin--main--1.5--patch-539
+
+    update underlay, fix typo
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py
+     MoinMoin/script/maint/reducewiki.py wiki/underlay.tar.bz2
+
+
 2006-04-08 19:24:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-538
 
     Summary:

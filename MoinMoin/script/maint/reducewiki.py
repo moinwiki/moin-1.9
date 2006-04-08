@@ -45,7 +45,7 @@ class PluginScript(MoinScript):
         pagedir = os.path.join(rootdir, 'pages', wikiutil.quoteWikinameFS(pagename))
         os.makedirs(pagedir)
         
-        # writte a "current" file with content "00000001"
+        # write a "current" file with content "00000001"
         revstr = '%08d' % 1
         cf = os.path.join(pagedir, 'current')
         file(cf, 'w').write(revstr+'\n')
