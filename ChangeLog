@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-08 18:58:40 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-537
+
+    Summary:
+      make install-docs
+    Revision:
+      moin--main--1.5--patch-537
+
+    make install-docs
+    
+
+    modified files:
+     ChangeLog docs/INSTALL.html
+
+
 2006-04-08 18:51:46 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-536
 
     Summary:
