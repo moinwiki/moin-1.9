@@ -28,11 +28,6 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
-  * Many (50+) tests are currently failing because they are too restrictive
-    and do not match the (output of the) code they should test.
-    If you want to compare, I included the output of this test run:
-    $ make test >tests/make_test.out
-
 Version 1.5.3-current:
   New Features:
     * Modified SystemInfo macro to give human readable units and disk usage
@@ -62,6 +57,11 @@ Version 1.5.3-current:
       to the previous page without saving preferences.
     * Removed formatter.url "attrs" keyword arg that took premade html, we use
       separate kw args per attribute now.
+    * Moved broken tests to MoinMoin/_tests/broken (= disabling them).
+      All "active" tests run ok now.
+      If you want to compare, I included the output of this test run:
+      $ make test >tests/make_test.out
+
  
 Version 1.5.3-rc1:
 
