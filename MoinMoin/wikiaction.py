@@ -567,22 +567,29 @@ def do_edit(pagename, request):
     if savetext is None:
         pg.sendEditor()
         return
+  
+    # did user hit cancel button?
+    cancelled = request.form.has_key('button_cancel')
 
     # convert input from Graphical editor
-    if lasteditor == 'gui':
-        from MoinMoin.converter.text_html_text_x_moin import convert
-        savetext = convert(request, pagename, savetext) # XXX error handling
+    from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
+    try:
+        if lasteditor == 'gui':
+            savetext = convert(request, pagename, savetext) # XXX error handling
+                
+        # IMPORTANT: normalize text from the form. This should be done in
+        # one place before we manipulate the text.
+        savetext = pg.normalizeText(savetext, stripspaces=rstrip)
+    except ConvertError:
+        # we don't want to throw an exception if user cancelled anyway
+        if not cancelled:
+            raise
 
-    # IMPORTANT: normalize text from the form. This should be done in
-    # one place before we manipulate the text.
-    savetext = pg.normalizeText(savetext, stripspaces=rstrip)
-
-    comment = wikiutil.clean_comment(comment)
-
-    # Edit was canceled
-    if request.form.has_key('button_cancel'):
+    if cancelled:
         pg.sendCancel(savetext or "", rev)
         return
+
+    comment = wikiutil.clean_comment(comment)
 
     # Add category
 
