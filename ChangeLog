@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-09 12:00:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-542
+
+    Summary:
+      Rephrased the mig instructions
+    Revision:
+      moin--main--1.5--patch-542
+
+
+    modified files:
+     ChangeLog docs/README.migration
+
+
 2006-04-08 20:32:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-541
 
     Summary:
