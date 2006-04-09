@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-09 13:05:08 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-545
+
+    Summary:
+      fix missing gui editor link bug (added 'name' attr handling), some debug code
+    Revision:
+      moin--main--1.5--patch-545
+
+    fix missing gui editor link bug (added 'name' attr handling), some debug code
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikiutil.py wiki/htdocs/common/js/common.js
+
+
 2006-04-09 12:30:52 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-544
 
     Summary:

@@ -1094,6 +1094,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     else:
         css_class = None
     id = kw.get('id', None)
+    name = kw.get('name', None)
     if text is None:
         text = params # default
     if formatter:
@@ -1111,6 +1112,8 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
         attrs += ' class="%s"' % css_class
     if id:
         attrs += ' id="%s"' % id
+    if name:
+        attrs += ' name="%s"' % name
     result = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
     if on:
         return result

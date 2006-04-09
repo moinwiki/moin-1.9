@@ -4,6 +4,7 @@
 
 // use this instead of assigning to window.onload directly:
 function addLoadEvent(func) {
+  // alert("addLoadEvent " + func)
   var oldonload = window.onload;
   if (typeof window.onload != 'function') {
     window.onload = func;
@@ -41,13 +42,16 @@ function can_use_gui_editor() {
 
 function update_edit_links() {
     // Update editlink according if if the browser is compatible
-    if (can_use_gui_editor() == false) return;
-
+    if (can_use_gui_editor() == false){
+        //alert("update_edit_links: can't use gui editor");
+        return;
+    }
     var editlinks = document.getElementsByName("editlink");
     for (i = 0; i < editlinks.length; i++) {
         var link = editlinks[i];
         href = link.href.replace('editor=textonly','editor=guipossible');
         link.href = href;
+        //alert("update_edit_links: modified to guipossible");
     }
 }
 
@@ -56,9 +60,15 @@ function add_gui_editor_links() {
     // Add gui editor link after the text editor link
     
     // If the variable is not set or browser is not compatible, exit
-    try {gui_editor_link_href} catch (e) {return}
-    if (can_use_gui_editor() == false) return;
-    
+    try {gui_editor_link_href}
+    catch (e) {
+        //alert("add_gui_editor_links: gui_editor_link_href not here");
+        return
+    }
+    if (can_use_gui_editor() == false){
+        //alert("add_gui_editor_links: can't use gui_editor");
+        return;
+    }
     var all = document.getElementsByName('texteditlink');
     for (i = 0; i < all.length; i++) {
         var textEditorLink = all[i];
@@ -73,9 +83,10 @@ function add_gui_editor_links() {
         var editbar = textEditorLink.parentNode.parentNode
         var nextListItem = textEditorLink.parentNode.nextSibling;
         editbar.insertBefore(listItem, nextListItem);
+        //alert("add_gui_editor_links: added gui editor link");
     }
 }
-  
+ 
 
 function show_switch2gui() {
     // Show switch to gui editor link if the browser is compatible
