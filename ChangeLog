@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-09 13:31:35 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-546
+
+    Summary:
+      confirm leaving JS added to gui editor, TODO: add flgChange update JS code
+    Revision:
+      moin--main--1.5--patch-546
+
+    confirm leaving JS added to gui editor, TODO: add flgChange update JS code
+    
+
+    modified files:
+     ChangeLog MoinMoin/PageEditor.py
+     MoinMoin/PageGraphicalEditor.py
+
+
 2006-04-09 13:05:08 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-545
 
     Summary:

@@ -242,6 +242,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="hidden" name="editor" value="gui">
 ''' % (save_button_text, _('Preview'), _('Text mode'), button_spellcheck, cancel_button_text,))
 
+        self.sendconfirmleaving() # TODO update state of flgChange to make this work, see PageEditor
+
         # Add textarea with page text
 
         # TODO: currently self.language is None at this point. We have

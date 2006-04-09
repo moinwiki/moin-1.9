@@ -111,6 +111,19 @@ class PageEditor(Page):
 
         return False
 
+    def sendconfirmleaving(self):
+        """ to prevent moving away from the page without saving it """
+        _ = self._
+        self.request.write(u'''\
+<script type="text/javascript">
+    var flgChange = false;
+    function confirmleaving() {
+        if ( flgChange )
+            return "%s";
+    }
+</script>
+''' % _("Your changes are not saved!"))
+        
     def sendEditor(self, **kw):
         """
         Send the editor form page.
@@ -337,16 +350,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         # language into meta file.
         lang = self.language or self.request.cfg.language_default
 
-        # to prevent moving away from the page without saving it
-        self.request.write(u'''\
-<script type="text/javascript">
-    var flgChange = false;
-    function confirmleaving() {
-        if ( flgChange )
-            return "%s";
-    }
-</script>
-''' % _("Your changes are not saved!"))
+        self.sendconfirmleaving()
 
         self.request.write(
             u'''\
