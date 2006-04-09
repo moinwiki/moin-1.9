@@ -14,7 +14,7 @@ with every moin upgrade, simply follow these steps:
       moin --config-dir=/path/to/config_dir --wiki-url=wiki.example.org/ migration data 
 
       Note: If you did not use setup.py, you can call the moin script directly. It is
-      located in MoinMoin/scripts/moin.py
+      located in MoinMoin/script/moin.py
 
 The new style mig stuff will then load the config for that wiki, get into its
 data_dir, read the meta file content and determine what it has to do internally.
@@ -78,8 +78,8 @@ See INSTALL.html.
 5. Converting your data/ directory
 ==================================
 
-Scripts see MoinMoin/scripts/migration/12_to_13_migN.py (in your MoinMoin code
-directory, e.g. /usr[/local]/lib/python2.x/site-packages/MoinMoin).
+Scripts see MoinMoin/script/old/migration/12_to_13_migN.py (in your MoinMoin
+code directory, e.g. /usr[/local]/lib/python2.x/site-packages/MoinMoin).
 
 Those are some scripts that convert your wiki data to the current MoinMoin
 version. You must use them AFTER stopping your old wiki code and BEFORE
