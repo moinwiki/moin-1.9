@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-09 12:21:32 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-543
+
+    Summary:
+      ignore ConvertErrors when user cancelled editing
+    Revision:
+      moin--main--1.5--patch-543
+
+    ignore ConvertErrors when user cancelled editing
+    
+
+    modified files:
+     ChangeLog MoinMoin/wikiaction.py docs/CHANGES
+
+
 2006-04-09 12:00:00 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-542
 
     Summary:
