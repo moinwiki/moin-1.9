@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-10 12:46:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-551
+
+    Summary:
+      avoid <p> directly after <table> tag
+    Revision:
+      moin--main--1.5--patch-551
+
+    avoid <p> directly after <table> tag
+    
+
+    modified files:
+     ChangeLog MoinMoin/parser/wiki.py
+
+
 2006-04-10 12:27:21 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-550
 
     Summary:

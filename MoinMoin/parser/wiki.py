@@ -863,7 +863,7 @@ class Parser:
                 result.append(self.formatter.text(line[lastpos:match.start()]))
             
             # Replace match with markup
-            if not (self.inhibit_p or self.in_pre or self.formatter.in_p):
+            if not (self.inhibit_p or self.in_pre or self.formatter.in_p or self.in_table):
                 result.append(self.formatter.paragraph(1, css_class="line867"))
             result.append(self.replace(match))
             lastpos = match.end()
