@@ -829,7 +829,7 @@ class Parser:
     def _macro_repl(self, word):
         """Handle macros ([[macroname]])."""
         macro_name = word[2:-2]
-        self.inhibit_p = 1 # 0 fixes UserPreferences, but makes new trouble!
+        self.inhibit_p = 0 # 1 fixes UserPreferences, 0 fixes paragraph formatting for macros
 
         # check for arguments
         args = None
@@ -845,8 +845,7 @@ class Parser:
     def scan(self, scan_re, line):
         """ Scans one line
         
-        Append text before match, invoke replace() with match, and 
-        add text after match.
+        Append text before match, invoke replace() with match, and add text after match.
         """
         result = []
         lastpos = 0
@@ -860,19 +859,21 @@ class Parser:
                 ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
                 
                 if not (self.inhibit_p or self.in_pre or self.formatter.in_p):
-                    result.append(self.formatter.paragraph(1, css_class="line879"))
+                    result.append(self.formatter.paragraph(1, css_class="line862"))
                 result.append(self.formatter.text(line[lastpos:match.start()]))
             
             # Replace match with markup
+            if not (self.inhibit_p or self.in_pre or self.formatter.in_p):
+                result.append(self.formatter.paragraph(1, css_class="line867"))
             result.append(self.replace(match))
             lastpos = match.end()
         
         ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
         
-        # No match: Add paragraph with the text of the line
+        # Add paragraph with the remainder of the line
         if not (self.in_pre or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
-            result.append(self.formatter.paragraph(1, css_class="line886"))
+            result.append(self.formatter.paragraph(1, css_class="line874"))
         result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
@@ -889,7 +890,7 @@ class Parser:
                     # Open p for certain types
                     if not (self.inhibit_p or self.formatter.in_p
                             or self.in_pre or (type in self.no_new_p_before)):
-                        result.append(self.formatter.paragraph(1, css_class="line903"))
+                        result.append(self.formatter.paragraph(1, css_class="line891"))
                     
                     # Get replace method and replece hit
                     replace = getattr(self, '_' + type + '_repl')

@@ -94,7 +94,6 @@ class Formatter(text_html.Formatter):
     # Dynamic stuff / Plugins ############################################
     
     def macro(self, macro_obj, name, args):
-        # call the macro
         if args is not None:
             result =  "[[%s(%s)]]" % (name, args)    
         else:
@@ -103,7 +102,6 @@ class Formatter(text_html.Formatter):
 
     def processor(self, processor_name, lines, is_parser=0):
         """ processor_name MUST be valid!
-            writes out the result instead of returning it!
         """
         result = [self.preformatted(1)]
         for line in lines:
