@@ -707,7 +707,9 @@ msgid "The theme name is not set."
 msgstr "Theme-Name ist nicht gesetzt."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Das Installieren von Theme-Dateien wird nur für Server-Typ standalone unterstützt."
+msgstr ""
+"Das Installieren von Theme-Dateien wird nur für Server-Typ standalone "
+"unterstützt."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."

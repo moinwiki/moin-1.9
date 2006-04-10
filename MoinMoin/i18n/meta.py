@@ -12,7 +12,7 @@ languages = {
 'da': (u'Dansk', u'Danish', 'utf-8', 0, """Jonas Smedegaard <dr@jones.dk>""",),
 'de': (u'Deutsch', u'German', 'utf-8', 0, """Thomas Waldmann <tw-public@gmx.de>""",),
 'en': (u'English', u'English', 'utf-8', 0, """Thomas Waldmann <tw-public@gmx.de>""",),
-'es': (u'Español', u'Spanish', 'utf-8', 0, """Eduardo Mercovich <eduardo.mercovich@gmail.com>""",),
+'es': (u'Español', u'Spanish', 'utf-8', 0, """Ramiro Morales <cramm0@gmail.com>""",),
 'fa': (u'Farsi', u'Persian', 'utf-8', 1, """Mehdi Hassanpour <h.mehdi@gmail.com>""",),
 'fi': (u'Suomi', u'Finnish', 'utf-8', 0, """Tuukka Hastrup <Tuukka.Hastrup@iki.fi>""",),
 'fr': (u'Français', u'French', 'utf-8', 0, """JPG <fevrier@tigreraye.org>""",),

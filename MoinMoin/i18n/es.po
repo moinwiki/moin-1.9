@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-10 13:56+0200\n"
-"PO-Revision-Date: 2006-01-02 17:48-0300\n"
-"Last-Translator: Eduardo Mercovich <eduardo.mercovich@gmail.com>\n"
+"PO-Revision-Date: 2006-04-10 11:46-0300\n"
+"Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -153,9 +153,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Vista Previa"
 
-#, fuzzy
 msgid "Text mode"
-msgstr "Texto"
+msgstr "Modo texto"
 
 msgid "Comment:"
 msgstr "Comentario"
@@ -702,13 +701,15 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "El paquete requiere una versión más reciente de MoinMoin (al menos %s)"
 
+#, fuzzy
 msgid "The theme name is not set."
-msgstr ""
+msgstr "No se ha especificado el nombre del tema"
 
+#, fuzzy
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "La instalación de archivos de temas sólo es soportada en servidores de tipo standalone"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -718,23 +719,23 @@ msgstr "La instalación de '%(filename)s' falló."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "El archivo %s no es un paquete de MoinMoin"
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "¡El adjunto '%(filename)s' no existe!"
+msgstr "¡La página %s no existe!"
 
 msgid "Invalid package file header."
 msgstr ""
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "Formato de archivo de paquete no soportado"
 
 #, python-format
 msgid "Unknown function %s in line %i."
-msgstr ""
+msgstr "Función %s desconocida en línea %i."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "El archivo %s no es un paquete de MoinMoin"
+msgstr "No se ha encontrado el archivo %s en el paquete."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1073,9 +1074,9 @@ msgstr "Esta página ya ha sido borrada o nunca se creó"
 msgid "No pages like \"%s\"!"
 msgstr "Ninguna página similar a \"%s\"!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid filename \"%s\"!"
-msgstr "Argumentos include no válidos \"%s\"!"
+msgstr "Nombre de archivo no válido \"%s\"!"
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -1083,18 +1084,16 @@ msgstr "El adjunto '%(target)s' (nombre remoto '%(filename)s') ya existe."
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
-msgstr ""
+msgstr "Se creó el paquete %s conteniendo las páginas %s"
 
-#, fuzzy
 msgid "Package pages"
-msgstr "Páginas de paquetes"
+msgstr "Páginas del paquete"
 
-#, fuzzy
 msgid "Package name"
-msgstr "Páginas de paquetes"
+msgstr "Nombre del paquete"
 
 msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
+msgstr "Lista de nombres de página - separados por <tt>,</tt>"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1132,9 +1131,9 @@ msgid "Please log in first."
 msgstr ""
 
 msgid "Please first create a homepage before creating additional pages."
-msgstr ""
+msgstr "Por favor crea una página personal antes de crear páginas adicionales."
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -1161,9 +1160,36 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
+"Aquí puedes agregar algunas sub-páginas adicionales a tu página personal "
+"ya existente.\n"
+"\n"
+"Puedes decidir cuán abiertas a otros lectores o editores serán dichas páginas,\n"
+"el acceso se controla mediante la pertenencia a grupos de la página de grupo "
+"correspondiente.\n"
+"\n"
+"Simplemente ingresa el nombre de la sub-página y haz click en el botón para crear "
+"una nueva página.\n"
+"\n"
+"Antes de crear páginas con proteción de acceso, asegúrate que la página de grupo "
+"correspondiente\n"
+"existe y contiene los miembros apropiados. Usa HomepageGroupsTemplate para "
+"crear\n"
+"páginas de grupo.\n"
+"\n"
+"||'''Agregar una nueva página personal:'''||'''Grupo lista control acceso "
+"asociado:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s unicamente||\n"
+"\n"
 
+
+#, fuzzy
 msgid "MyPages management"
-msgstr ""
+msgstr "Administración de MyPages"
 
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "¡No tienes permisos para renombrar páginas en este wiki!"
@@ -1236,20 +1262,17 @@ msgstr ""
 "No es posible crear una página sin nombre. Por favor, dále un nombre a la "
 "página."
 
-#, fuzzy
 msgid "Pages"
-msgstr "Página"
+msgstr "Páginas"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "Elegir usuario"
+msgstr "Elegir autor"
 
 msgid "Revert all!"
 msgstr ""
 
-#, fuzzy
 msgid "You are not allowed to use this action."
-msgstr "No tienes permisos para hacer esta acción."
+msgstr "No tienes permisos para usar esta acción."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -1257,7 +1280,7 @@ msgstr "Suscribir usuarios a la página %s"
 
 #, python-format
 msgid "Subscribed for %s:"
-msgstr "Suscrit@ en %s:"
+msgstr "Suscrit@ a %s:"
 
 msgid "Not a user:"
 msgstr "No es un usuario:"
@@ -1265,9 +1288,8 @@ msgstr "No es un usuario:"
 msgid "You are not allowed to perform this action."
 msgstr "No tienes permisos para hacer esta acción."
 
-#, fuzzy
 msgid "You are now logged out."
-msgstr "Cookie borrada. Has salido del sistema."
+msgstr "Has salido del sistema."
 
 msgid "You are not allowed to delete this page."
 msgstr "No tienes permisos para borrar esta página."
@@ -1294,9 +1316,9 @@ msgstr ""
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
-
+#, fuzzy
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "Respaldo / Restaración de Wiki"
 
 msgid ""
 "Some hints:\n"
@@ -1316,16 +1338,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#, fuzzy
 msgid "Backup"
-msgstr "Formato"
+msgstr "Copia de respaldo"
 
 msgid "Restore"
-msgstr ""
+msgstr "Restaurar"
 
-#, fuzzy
 msgid "You are not allowed to do remote backup."
-msgstr "No tienes permisos para hacer %s en esta página."
+msgstr "No tienes permisos para hacer respaldos remotos."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
@@ -1602,11 +1622,11 @@ msgstr "CorrecciónOrtográfica"
 
 #, fuzzy, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
-msgstr "Argumentos include no válidos \"%s\"!"
+msgstr "Parámetros calendario MonthCalendar no válidos \"%s\"!"
 
 #, fuzzy, python-format
 msgid "Invalid MonthCalendar arguments \"%s\"!"
-msgstr "Argumentos include no válidos \"%s\"!"
+msgstr "Argumentos MonthCalendar no válidos \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
