@@ -40,6 +40,8 @@ macro call.-~
 '''ویرایش های قبلی قابل ویرایش مجدد نمی باشند!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''مدت زمان ویرایش شما به پایان رسیده است. آماده ویرایش مجدد باشید!''',
+'''Page name is too long, try shorter name.''':
+'''نام این صفحه طولانی است٬ لطفا نام کوتاه تری انتخاب نمایید.''',
 '''Edit "%(pagename)s"''':
 '''ویرایش "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -80,6 +82,10 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 در صورت عدم تمایل٬ برای لغو تغییرات خود دکمه \'\'\'%(cancel_button_text)s\'\'\' را فشار دهید.''',
 '''Preview''':
 '''پیش نمایش''',
+'''GUI Mode''':
+'''ویرایش گرافیکی''',
+'''Your changes are not saved!''':
+'''تغییرات شما ذخیره نشد!''',
 '''Comment:''':
 '''نظرات:''',
 '''<No addition>''':
@@ -90,218 +96,22 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''تغییرات جزئی''',
 '''Remove trailing whitespace from each line''':
 '''جاهای خالی را از هر خط حذف کن''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''نام کاربری غیر قابل قبول {{{\'%s\'}}}.
-نام کاربری میتواند شامل کلیه کاراکترهای حرفی عددی Unicode با یک فاصله بین کلمات باشد.
-نام صفحات گروهی قابل قبول نیست.''',
-'''You are not allowed to do %s on this page.''':
-'''شما مجاز به %s روی این صفحه نمی باشید.''',
-'''Login''':
-'''ورود''',
-''' %s and try again.''':
-'''لطفا %s نموده و مجددا سعی نمایید.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d نتیجه بدست آمده حاصل از جستجوی %(pages)d صفحه''',
-'''%.2f seconds''':
-'''%.2f ثانیه''',
-'''match''':
-'''نتیجه''',
-'''matches''':
-'''نتایج''',
-'''<unknown>''':
-'''<نامشخص>''',
-'''Login Name: %s
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
 
-Login Password: %s
-
-Login URL: %s/%s
+(!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
-'''نام کاربری: %s
+''' پررنگ و مورب سازی:: [[Verbatim(\'\')]]\'\'مورب سازی\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'پررنگ\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'پررنگ و مورب\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'مخلوط \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'پررنگ\'\'\'[[Verbatim(\'\'\')]] و مورب\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] خط افقی زیر پاراگراف.
+ عنوان ها:: [[Verbatim(=)]] عنوان ۱ [[Verbatim(=)]]; [[Verbatim(==)]] عنوان ۲ [[Verbatim(==)]]; [[Verbatim(===)]] عنوان ۳ [[Verbatim(===)]];   [[Verbatim(====)]] عنوان ۴ [[Verbatim(====)]]; [[Verbatim(=====)]] عنوان ۵ [[Verbatim(=====)]].
+ لیستها:: یک فاصله در ابتدای خط و سپس یکی از کاراکترهای: * برای لیست گلوله ای و 1, a, A, i, I برای لیستهای عددی و آیتمی. 
+ لینکها:: [[Verbatim(آدرس های اینترنتی در این سایت با حروف بزرگ شروع میشوند٬ این کلمات را جدا از هم ننویسید.)]]; [[Verbatim(["براکت و دو علامت quote"])]]; آدرس اینترنتی; [آدرس اینترنتی]; [برچسب آدرس اینترنتی].
+ جدولها:: || متن درون یک سلول جدول |||| متن درون یک سلول با دو ستون ||;     پس از جدول ها و عنوان ها نباید فاصله خالی بگذارید.
 
-کلمه رمز: %s
-
-آدرس ورود: %s/%s
+(!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.
 ''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''شخصی درخواست نموده است تا اطلاعات کاربری شما به این آدرس ایمیل ارسال شود.
-
-در صورتی که کلمه عبور خود را فراموش نموده اید از اطلاعات زیر استفاده نموده و کلمه عبور را به صورتی که ذکر شده در قسمت کلمه عبور بنویسید.
-
-پس از ورود به سیستم می توانید کلمه عبور خود را تغییر دهید.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] اطلاعات مربوط به حساب کاربری شما''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''گزینه جابجایی ایمیل در این ویکی فعال نمی باشد.
-از مدیر ویکی بخواهید تا این امکان را فراهم نماید.''',
-'''Please provide a valid email address!''':
-'''لطفا یک آدرس ایمیل معتبر وارد نمایید!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''حساب کاربری با آدرس ایمیل \'%(email)s\' یافت نشد!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''از بخش UserPreferences برای تغییر تنظیمات جاری و یا ایجاد یک حساب جدید استفاده نمایید.''',
-'''Empty user name. Please enter a user name.''':
-'''محل نام کاربری خالی است. لطفا یک نام کاربری وارد نمایید.''',
-'''This user name already belongs to somebody else.''':
-'''این نام کاربری توسط شخص دیگری ثبت شده است.''',
-'''Passwords don\'t match!''':
-'''کلمات عبور وارد شده یکی نیستند!''',
-'''Please specify a password!''':
-'''لطفا یک کلمه عبور وارد نمایید!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را فراموش کنید این اطلاعات برای شما ایمیل خواهند شد.''',
-'''This email already belongs to somebody else.''':
-'''این ایمیل توسط شخص دیگری ثبت شده است.''',
-'''User account created! You can use this account to login now...''':
-'''حساب کاربری شما ایجاد شد! شما می توانید از این حساب کاربری برای ورود به سیستم استفاده نمائید...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''از بخش UserPreferences برای تغییر تنظیمات جاری و یا ایجاد یک حساب جدید استفاده نمایید.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''قالب گرافیکی درخواستی شما \'%(theme_name)s\' قابل استفاده نمی باشد!''',
-'''User preferences saved!''':
-'''مشخصات کاربری شما ذخیره شدند!''',
-'''Default''':
-'''پیش گزینه''',
-'''<Browser setting>''':
-'''<تنظیمات مرورگر>''',
-'''the one preferred''':
-'''گزینه ارجح''',
-'''free choice''':
-'''گزینه آزاد''',
-'''Select User''':
-'''انتخاب کاربر''',
-'''Save''':
-'''ثبت''',
-'''Preferred theme''':
-'''قالب گرافیکی ارجح''',
-'''Editor Preference''':
-'''نوع ویرایشگر''',
-'''Editor shown on UI''':
-'''ویرایشگر قابل نمایش در UI''',
-'''Time zone''':
-'''موقعیت زمانی''',
-'''Your time is''':
-'''ساعت به وقت شما''',
-'''Server time is''':
-'''ساعت سرویس دهنده''',
-'''Date format''':
-'''الگوی تاریخ''',
-'''Preferred language''':
-'''زبان نمایش ویکی''',
-'''General options''':
-'''گزینه های عمومی''',
-'''Quick links''':
-'''لینکهای دسترسی سریع''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''این لیست تا زمانی که شما یک شما یک آدرس ایمیل معتبر وارد ننمایید کار نخواهد کرد!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''صفحات ویکی که در آنها عضو می باشید (یک صفحه در هر خط)''',
-'''Create Profile''':
-'''ثبت کاربر جدید''',
-'''Mail me my account data''':
-'''اطلاعات حساب من را ایمیل کن''',
-'''Email''':
-'''آدرس ایمیل''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''برای ایجاد حساب کاربری جدید و یا بازیافت کلمه رمز خود صفحه %(userprefslink)s را ببینید.''',
-'''Name''':
-'''نام''',
-'''Password''':
-'''کلمه عبور''',
-'''Action''':
-'''عملیات''',
-'''Required attribute "%(attrname)s" missing''':
-'''نسبت های مورد نیاز "%(attrname)s" یافت نشد''',
-'''Submitted form data:''':
-'''اطلاعات وارد شده:''',
-'''Search Titles''':
-'''عناوین جستجو''',
-'''Display context of search results''':
-'''نتایج جستجو را نشان بده''',
-'''Case-sensitive searching''':
-'''جستجوی حساس به حروف بزرگ و کوچک''',
-'''Search Text''':
-'''جستجوی درون متن''',
-'''Go To Page''':
-'''برو به صفحه''',
-'''Include system pages''':
-'''با·در·نظر·گرفتن·صفحات·سیستمی''',
-'''Exclude system pages''':
-'''بدون در نظر گرفتن صفحات سیستمی''',
-'''Plain title index''':
-'''فهرست عناوین به صورت متن ساده''',
-'''XML title index''':
-'''فهرست عنواین بصورت XML''',
-'''Python Version''':
-'''نسخه python''',
-'''MoinMoin Version''':
-'''نسخه MoinMoin''',
-'''Release %s [Revision %s]''':
-'''انتشار %s·[Revision·%s]''',
-'''4Suite Version''':
-'''نسخه 4Suite''',
-'''Number of pages''':
-'''تعداد صفحات''',
-'''Number of system pages''':
-'''تعداد صفحات سیستمی''',
-'''Accumulated page sizes''':
-'''حجم صفحات جمع شده''',
-'''Entries in edit log''':
-'''محتویات گزارشات ویرایشهای صورت گرفته''',
-'''NONE''':
-'''هیچ یک''',
-'''Global extension macros''':
-'''extension macro های عمومی''',
-'''Local extension macros''':
-'''extension macro های محلی''',
-'''Global extension actions''':
-'''کاربری های extension های عمومی''',
-'''Local extension actions''':
-'''کاربری های extension های محلی''',
-'''Global parsers''':
-'''تجزیه کننده های عمومی''',
-'''Local extension parsers''':
-'''تجزیه کننده های extension های محلی''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''پردازشگرهای نصب شده (DEPRECATED·--·use·Parsers·instead)''',
-'''Disabled''':
-'''غیرفعال''',
-'''Enabled''':
-'''فعال''',
-'''Lupy search''':
-'''جستجوی Lupy''',
-'''Active threads''':
-'''مباحث فعال''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''لطفا به جای {{{"%s"}}} جستجوی گزیده تری انجام دهید''',
-'''ERROR in regex \'%s\'''':
-'''خطا regex·\'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''timestamp·\'%s\' غیر قابل قبول''',
-'''Expected "=" to follow "%(token)s"''':
-'''به جای علامت "=" عبارت "%(token)s" مشاهده شد''',
-'''Expected a value for key "%(token)s"''':
-'''عبارت "%(token)s" در اینجا صحیح نیست''',
-'''Wiki Markup''':
-'''زبان نوشتاری ویکی''',
-'''Print View''':
-'''مشاهده صفحه قابل چاپ''',
-'''Your changes are not saved!''':
-'''تغییرات شما ذخیره نشد!''',
-'''Page name is too long, try shorter name.''':
-'''نام این صفحه طولانی است٬ لطفا نام کوتاه تری انتخاب نمایید.''',
-'''GUI Mode''':
-'''ویرایش گرافیکی''',
 '''Edit was cancelled.''':
 '''ویرایش لغو شد.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -399,26 +209,8 @@ To leave the editor, press the Cancel button.''':
 باز شده است.برای جلوگیری از ناسازگاریهای ناخواسته٬ از ویرایش این صفحه حداقل تا %(mins_valid)d·دقیقه(s),
 دیگر خودداری نمایید.\'\'\'[[BR]]
 برای خروج از محیط ویرایش دکمه لغو را فشار دهید.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''نصب فایل \'%(filename)s\' با ایراد مواجه شد.''',
-'''The file %s is not a MoinMoin package file.''':
-'''فایل %s از فایلهای  بسته MoinMoin نیست.''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-'''پررنگ::·[[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]];·[[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]];·[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold·italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]];·[[Verbatim(\'\')]]\'\'mixed·\'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]·and·italics\'\'[[Verbatim(\'\')]];·[[Verbatim(----)]]·horizontal·rule.
-سرنویس ها::·[[Verbatim(=)]]·Title·1·[[Verbatim(=)]];·[[Verbatim(==)]]·Title·2·[[Verbatim(==)]];·[[Verbatim(===)]]·Title·3·[[Verbatim(===)]];···[[Verbatim(====)]]·Title·4·[[Verbatim(====)]];·[[Verbatim(=====)]]·Title·5·[[Verbatim(=====)]].
-لیست ها::·space·and·one·of:·*·bullets;·1.,·a.,·A.,·i.,·I.·numbered·items;·1.#n·start·numbering·at·n;·space·alone·indents.
-لینک ها::·[[Verbatim(JoinCapitalizedWords)]];·[[Verbatim(["brackets·and·double·quotes"])]];·url;·[url];·[url·label].
-·Tables::·||·cell·text·||||·cell·text·spanning·2·columns·||;····no·trailing·white·space·allowed·after·tables·or·titles.
-
-(!)·برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.
-''',
+'''<unknown>''':
+'''<نامشخص>''',
 '''Diffs''':
 '''تغییرات''',
 '''Info''':
@@ -463,20 +255,148 @@ To leave the editor, press the Cancel button.''':
 '''عضویت در گزارش تغییرات جزئی''',
 '''Disable this account forever''':
 '''این حساب کاربری را برای همیشه غیرفعال کن''',
+'''Name''':
+'''نام''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(از نام \'\'\'\'\'\' و نام خانوادگی استفاده نمایید)''',
 '''Alias-Name''':
 '''نام مستعار''',
+'''Password''':
+'''کلمه عبور''',
 '''Password repeat''':
 '''تکرار کلمه عبور''',
 '''(Only when changing passwords)''':
 '''(فقط برای زمانی که میخواهید کلمه عبور خود را تغییر دهید)''',
+'''Email''':
+'''آدرس ایمیل''',
 '''User CSS URL''':
 '''آدرس CSS کاربر''',
 '''(Leave it empty for disabling user CSS)''':
 '''(جهت غیر فعال نمودن CSS کاربر٬ این قسمت را خالی بگذارید)''',
 '''Editor size''':
 '''اندازه ویرایشگر''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''نام کاربری غیر قابل قبول {{{\'%s\'}}}.
+نام کاربری میتواند شامل کلیه کاراکترهای حرفی عددی Unicode با یک فاصله بین کلمات باشد.
+نام صفحات گروهی قابل قبول نیست.''',
+'''You are not allowed to do %s on this page.''':
+'''شما مجاز به %s روی این صفحه نمی باشید.''',
+'''Login''':
+'''ورود''',
+''' %s and try again.''':
+'''لطفا پس از %s به سایت مجددا سعی نمایید.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d نتیجه بدست آمده حاصل از جستجوی %(pages)d صفحه''',
+'''%.2f seconds''':
+'''%.2f ثانیه''',
+'''match''':
+'''نتیجه''',
+'''matches''':
+'''نتایج''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''نام کاربری: %s
+
+کلمه رمز: %s
+
+آدرس ورود: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''شخصی درخواست نموده است تا اطلاعات کاربری شما به این آدرس ایمیل ارسال شود.
+
+در صورتی که کلمه عبور خود را فراموش نموده اید از اطلاعات زیر استفاده نموده و کلمه عبور را به صورتی که ذکر شده در قسمت کلمه عبور بنویسید.
+
+پس از ورود به سیستم می توانید کلمه عبور خود را تغییر دهید.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] اطلاعات مربوط به حساب کاربری شما''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''گزینه جابجایی ایمیل در این ویکی فعال نمی باشد.
+از مدیر ویکی بخواهید تا این امکان را فراهم نماید.''',
+'''Please provide a valid email address!''':
+'''لطفا یک آدرس ایمیل معتبر وارد نمایید!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''حساب کاربری با آدرس ایمیل \'%(email)s\' یافت نشد!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''جهت تغییر تنظیمات جاری و یا ایجاد یک حساب جدید از مرجع اطلاعات کاربری استفاده نمایید.''',
+'''Empty user name. Please enter a user name.''':
+'''محل نام کاربری خالی است. لطفا یک نام کاربری وارد نمایید.''',
+'''This user name already belongs to somebody else.''':
+'''این نام کاربری توسط شخص دیگری ثبت شده است.''',
+'''Passwords don\'t match!''':
+'''کلمات عبور وارد شده یکی نیستند!''',
+'''Please specify a password!''':
+'''لطفا یک کلمه عبور وارد نمایید!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''لطفا آدرس ایمیل خود را وارد نمایید. در صورتی که اطلاعات حساب کاربری خود را فراموش کنید این اطلاعات برای شما ایمیل خواهند شد.''',
+'''This email already belongs to somebody else.''':
+'''این ایمیل توسط شخص دیگری ثبت شده است.''',
+'''User account created! You can use this account to login now...''':
+'''حساب کاربری شما ایجاد شد! شما می توانید از این حساب کاربری برای ورود به سیستم استفاده نمائید...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''از مرجع اطلاعات کاربری برای تغییر تنظیمات جاری و یا ایجاد یک حساب جدید استفاده نمایید.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''قالب گرافیکی درخواستی شما \'%(theme_name)s\' قابل استفاده نمی باشد!''',
+'''User preferences saved!''':
+'''اطلاعات کاربری شما ذخیره شد!''',
+'''Default''':
+'''پیش گزینه''',
+'''<Browser setting>''':
+'''<بر اساس تنظیمات مرورگر>''',
+'''the one preferred''':
+'''گزینه ارجح''',
+'''free choice''':
+'''گزینه آزاد''',
+'''Select User''':
+'''انتخاب کاربر''',
+'''Save''':
+'''ثبت''',
+'''Preferred theme''':
+'''قالب گرافیکی ارجح''',
+'''Editor Preference''':
+'''نوع ویرایشگر''',
+'''Editor shown on UI''':
+'''ویرایشگر قابل نمایش در UI''',
+'''Time zone''':
+'''موقعیت زمانی''',
+'''Your time is''':
+'''ساعت به وقت شما''',
+'''Server time is''':
+'''ساعت سرویس دهنده''',
+'''Date format''':
+'''الگوی تاریخ''',
+'''Preferred language''':
+'''زبان نمایش ویکی''',
+'''General options''':
+'''گزینه های عمومی''',
+'''Quick links''':
+'''لینکهای دسترسی سریع''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''این لیست تا زمانی که شما یک شما یک آدرس ایمیل معتبر وارد ننمایید کار نخواهد کرد!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''صفحات ویکی که در آنها عضو می باشید (یک صفحه در هر خط)''',
+'''Create Profile''':
+'''ثبت کاربر جدید''',
+'''Mail me my account data''':
+'''اطلاعات حساب من را ایمیل کن''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''برای ایجاد حساب کاربری جدید و یا بازیافت کلمه رمز خود صفحه %(userprefslink)s را ببینید.''',
+'''Action''':
+'''امکانات''',
 '''No older revisions available!''':
 '''ویرایش قدیمی تری موجود نیست!''',
 '''Diff for "%s"''':
@@ -510,19 +430,19 @@ To leave the editor, press the Cancel button.''':
 '''Diff''':
 '''تغییرات''',
 '''Editor''':
-'''ویرایشگر''',
+'''ویرایش توسط''',
 '''Comment''':
-'''نظر''',
+'''توضیحات''',
 '''view''':
-'''مشاهده''',
+'''نمایش''',
 '''raw''':
 '''نسخه خام''',
 '''print''':
 '''چاپ''',
 '''revert''':
-'''رجوع''',
+'''بازیابی این نسخه''',
 '''Revert to revision %(rev)d.''':
-'''رجوع به نسخه %(rev)d''',
+'''نسخه %(rev)d بازیابی شد''',
 '''edit''':
 '''ویرایش''',
 '''get''':
@@ -536,13 +456,13 @@ To leave the editor, press the Cancel button.''':
 '''No log entries found.''':
 '''گزارشی دریافت نشد.''',
 '''Info for "%s"''':
-'''اطلاعات مربوط به "%s"''',
+'''گزارشات مربوط به "%s"''',
 '''Show "%(title)s"''':
 '''"%(title)s" را نشان بده''',
 '''General Page Infos''':
 '''اطلاعات صفحات عمومی''',
 '''Show chart "%(title)s"''':
-'''چارت "%(title)s" را نشان بده''',
+'''جدول "%(title)s" را نشان بده''',
 '''Page hits and edits''':
 '''مشاهدات و ویرایش های صفحه''',
 '''You are not allowed to revert this page!''':
@@ -560,13 +480,13 @@ To leave the editor, press the Cancel button.''':
 '''You must log in to use subscribtions.''':
 '''برای استفاده از امکانات اعضا حتما باید وارد سیستم شوید.''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
-'''برای استفاده از امکانات عضویت٬ آدرس ایمیل خود را در قسمت مشخصلت کاربر اضافه نمایید.''',
+'''جهت استفاده از امکانات اعضاء٬ آدرس ایمیل خود را در مرجع اطلاعات کاربری اضافه نمایید.''',
 '''Your subscribtion to this page has been removed.''':
 '''عضویت شما از این صفحه حذف شد.''',
 '''Can\'t remove regular expression subscription!''':
 '''عضویت در اصطلاحات عمومی قابل حذف نمی باشد!''',
 '''Edit the subscription regular expressions in your UserPreferences.''':
-'''اصطلاحات عمومی عضویت را در بخش مشخصات کاربری ویرایش نمایید.''',
+'''اصطلاحات عمومی عضویت را در مرجع اطلاعات کاربری ویرایش نمایید.''',
 '''You have been subscribed to this page.''':
 '''شما در این صفحه عضو شدید.''',
 '''Charts are not available!''':
@@ -575,80 +495,84 @@ To leave the editor, press the Cancel button.''':
 '''شما باید نوع چارت را مشخص نمایید!''',
 '''Bad chart type "%s"!''':
 '''چارت "%s" صحیح نمی باشد!''',
-'''This page is already deleted or was never created!''':
-'''این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!''',
-'''No pages like "%s"!''':
-'''هیچ صفحه ای شبیه "%s" یافت نشد!''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''ضمیمه \'%(target)s\' (به نام \'%(filename)s\') در حال حاضر وجود دارد.''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید. ''',
-'''Missing password. Please enter user name and password.''':
-'''کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید.''',
-'''Sorry, wrong password.''':
-'''متاسفم٬ کلمه عبور اشتباه می باشد.''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''یک صفحه شبیه "%s" پیدا شد٬ اکنون به آن صفحه میروید.''',
-'''Pages like "%s"''':
-'''صفحات شبیه "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d·%(matches)s·برای·"%(title)s"''',
-'''Local Site Map for "%s"''':
-'''نقشه سایت محلی برای "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''شما مجاز به تغییر نام صفحات این ویکی نمی باشید!''',
-'''Please use the interactive user interface to rename pages!''':
-'''لطفا برای تغییر نام صفحات از صفحه کاربری interactive استفاده نمایید!''',
-'''Could not rename page because of file system error: %s.''':
-'''بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد.''',
-'''Rename Page''':
-'''تغیر نام صفحه''',
-'''New name''':
-'''نام جدید''',
-'''Optional reason for the renaming''':
-'''توضیحات اختیاری برای تغببر نام صفحه''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'صفحه ای با نام {{{\'%s\'}}} وجود دارد.\'\'\'
-
-لطفا نام دیگری انتخاب نمایید.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(شامل·%(localwords)d·%(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''کلمات %(badwords)d در مرجع لغات %(totalwords)d لغات %(localwords)s یافت نشدند و در زیر مشخص شده اند:''',
-'''Add checked words to dictionary''':
-'''لغات تیک دار را به مرجع لغات اضافه نما''',
-'''No spelling errors found!''':
-'''اشتباه املایی یافت نشد!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید.''',
-'''Title Search: "%s"''':
-'''جستجوی عنوان: "%s"''',
-'''Full Text Search: "%s"''':
-'''جستجوی کامل متن: "%s"''',
-'''Full Link List for "%s"''':
-'''لیست کامل لینکها برای "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید.''',
-'''Subscribe users to the page %s''':
-'''کاربران را عضو این صفحه نما %s''',
-'''Subscribed for %s:''':
-'''عضو %s شدند:''',
-'''Not a user:''':
-'''کاربر ثبت نشده:''',
-'''You are not allowed to perform this action.''':
-'''عملیات غیر مجاز''',
-'''You are not allowed to delete this page.''':
-'''شما مجاز به حذف این صفحه نمی باشید.''',
-'''Please use the interactive user interface to delete pages!''':
-'''لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!''',
-'''Really delete this page?''':
-'''اطمینان دارید که این صفحه می بایست حذف شود؟''',
-'''Delete''':
-'''حذف''',
-'''Optional reason for the deletion''':
-'''توضیحات دلخواه برای این حذف''',
+'''Search Titles''':
+'''عناوین جستجو''',
+'''Display context of search results''':
+'''نتایج جستجو را نشان بده''',
+'''Case-sensitive searching''':
+'''جستجوی حساس به حروف بزرگ و کوچک''',
+'''Search Text''':
+'''جستجوی درون متن''',
+'''Go To Page''':
+'''برو به صفحه''',
+'''Include system pages''':
+'''با·در·نظر·گرفتن·صفحات·سیستمی''',
+'''Exclude system pages''':
+'''بدون در نظر گرفتن صفحات سیستمی''',
+'''Plain title index''':
+'''فهرست عناوین به صورت متن ساده''',
+'''XML title index''':
+'''فهرست عنواین بصورت XML''',
+'''Python Version''':
+'''نسخه python''',
+'''MoinMoin Version''':
+'''نسخه MoinMoin''',
+'''Release %s [Revision %s]''':
+'''انتشار %s·[Revision·%s]''',
+'''4Suite Version''':
+'''4Suite Version''',
+'''Number of pages''':
+'''تعداد صفحات''',
+'''Number of system pages''':
+'''تعداد صفحات سیستمی''',
+'''Accumulated page sizes''':
+'''حجم صفحات جمع شده''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''فضای اشغال شده روی دیسک توسط صفحات %(data_dir)s/''',
+'''Disk usage of %(data_dir)s/''':
+'''فضای اشغال شده روی دیسک توسط %(data_dir)s/''',
+'''Entries in edit log''':
+'''محتویات گزارشات ویرایشهای صورت گرفته''',
+'''%(logcount)s (%(logsize)s bytes)''':
+'''%(logcount)s·(%(logsize)s·bytes)''',
+'''NONE''':
+'''هیچ یک''',
+'''Global extension macros''':
+'''Global extension macros''',
+'''Local extension macros''':
+'''Local extension macros''',
+'''Global extension actions''':
+'''Global extension actions''',
+'''Local extension actions''':
+'''Local extension actions''',
+'''Global parsers''':
+'''Global parsers''',
+'''Local extension parsers''':
+'''Local extension parsers''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Installed processors (DEPRECATED·--·use·Parsers·instead)''',
+'''Disabled''':
+'''غیرفعال''',
+'''Enabled''':
+'''فعال''',
+'''Lupy search''':
+'''Lupy search''',
+'''Active threads''':
+'''مباحث فعال''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''لطفا به جای {{{"%s"}}} جستجوی گزیده تری انجام دهید''',
+'''ERROR in regex \'%s\'''':
+'''خطا regex·\'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''timestamp·\'%s\' غیر قابل قبول''',
+'''Expected "=" to follow "%(token)s"''':
+'''به جای علامت "=" عبارت "%(token)s" مشاهده شد''',
+'''Expected a value for key "%(token)s"''':
+'''عبارت "%(token)s" در اینجا صحیح نیست''',
+'''Wiki Markup''':
+'''زبان نوشتاری ویکی''',
+'''Print View''':
+'''مشاهده صفحه قابل چاپ''',
 '''[%d attachments]''':
 '''[%d·attachments]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -708,12 +632,18 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ارسال غیر مجاز: %s''',
 '''Attachments for "%(pagename)s"''':
 '''ضمیمه های صفحه "%(pagename)s"''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''ضمیمه \'%(target)s\' (به نام \'%(filename)s\') در حال حاضر وجود دارد.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''ضمیمه \'%(target)s\' (به نام·\'%(filename)s\') به حجم %(bytes)d بایت ذخیره شد.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''ضمیمه \'%(filename)s\' حذف شد.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''ضمیمه \'%(filename)s\' نصب شد.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''نصب فایل \'%(filename)s\' با ایراد مواجه شد.''',
+'''The file %s is not a MoinMoin package file.''':
+'''فایل %s از فایلهای  بسته MoinMoin نیست.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''ضمیمه \'%(filename)s\' به دلیل اینکه پس از باز شدن حجم زیادی دارد٬ باز نشد (%(space)d kB missing).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -736,6 +666,72 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''نوع فایل نامشخص است٬ این فایل ضمیمه قابل نمایش نمی باشد.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''فایل ضمیمه: فایل %(filename)s از صفحه %(pagename)s''',
+'''You are not allowed to delete this page.''':
+'''شما مجاز به حذف این صفحه نمی باشید.''',
+'''This page is already deleted or was never created!''':
+'''این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!''',
+'''Please use the interactive user interface to delete pages!''':
+'''لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!''',
+'''Really delete this page?''':
+'''اطمینان دارید که این صفحه می بایست حذف شود؟''',
+'''Delete''':
+'''حذف''',
+'''Optional reason for the deletion''':
+'''توضیحات دلخواه برای این حذف''',
+'''No pages like "%s"!''':
+'''هیچ صفحه ای شبیه "%s" یافت نشد!''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''یک صفحه شبیه "%s" پیدا شد٬ اکنون به آن صفحه میروید.''',
+'''Pages like "%s"''':
+'''صفحات شبیه "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d·%(matches)s·برای·"%(title)s"''',
+'''Local Site Map for "%s"''':
+'''نقشه سایت محلی برای "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''شما مجاز به تغییر نام صفحات این ویکی نمی باشید!''',
+'''Please use the interactive user interface to rename pages!''':
+'''لطفا برای تغییر نام صفحات از صفحه کاربری interactive استفاده نمایید!''',
+'''Could not rename page because of file system error: %s.''':
+'''بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد.''',
+'''Rename Page''':
+'''تغیر نام صفحه''',
+'''New name''':
+'''نام جدید''',
+'''Optional reason for the renaming''':
+'''توضیحات اختیاری برای تغببر نام صفحه''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'صفحه ای با نام {{{\'%s\'}}} وجود دارد.\'\'\'
+
+لطفا نام دیگری انتخاب نمایید.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''این %(badwords)d لغت در مرجع لغات %(totalwords)d لغتی شما %(localwords)s یافت نشدند٬ در صورت تمایل می توانید آنها را به مرجع لغات خود اضافه نمایید:''',
+'''Add checked words to dictionary''':
+'''لغات تیک دار را به مرجع لغات اضافه نما''',
+'''No spelling errors found!''':
+'''اشتباه املایی یافت نشد!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید.''',
+'''Title Search: "%s"''':
+'''جستجوی عنوان: "%s"''',
+'''Full Text Search: "%s"''':
+'''جستجوی کامل متن: "%s"''',
+'''Full Link List for "%s"''':
+'''لیست کامل لینکها برای "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید.''',
+'''Subscribe users to the page %s''':
+'''کاربران را عضو این صفحه نما %s''',
+'''Subscribed for %s:''':
+'''عضو %s شدند:''',
+'''Not a user:''':
+'''کاربر ثبت نشده:''',
+'''You are not allowed to perform this action.''':
+'''عملیات غیر مجاز''',
 '''Upload new attachment "%(filename)s"''':
 '''ارسال ضمیمه جدید "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -744,56 +740,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ویرایش ترسیم %(filename)s''',
 '''Toggle line numbers''':
 '''شماره خطوط حذف شود''',
-'''FrontPage''':
-'''صفحه اولیه''',
-'''RecentChanges''':
-'''آخرین تغییرات''',
-'''TitleIndex''':
-'''فهرست موضوعات''',
-'''WordIndex''':
-'''فهرست لغات''',
-'''FindPage''':
-'''جستجوی صفحه''',
-'''SiteNavigation''':
-'''نوع سایت''',
-'''HelpContents''':
-'''فهرست راهنما''',
-'''HelpOnFormatting''':
-'''راهنمای فرمت ها''',
-'''UserPreferences''':
-'''مشخصات کاربر''',
-'''WikiLicense''':
-'''اجازه نامه ویکی''',
-'''MissingPage''':
-'''صفحه گم شده''',
-'''MissingHomePage''':
-'''صفحه خانگی یافت نشد''',
-'''Mon''':
-'''دوشنبه''',
-'''Tue''':
-'''سه شنبه''',
-'''Wed''':
-'''چهارشنبه''',
-'''Thu''':
-'''پنج شنبه''',
-'''Fri''':
-'''جمعه''',
-'''Sat''':
-'''شنبه''',
-'''Sun''':
-'''یکشنبه''',
-'''AttachFile''':
-'''انضمام فایل''',
-'''DeletePage''':
-'''حذف صفحه''',
-'''LikePages''':
-'''شبیه صفحات''',
-'''LocalSiteMap''':
-'''نقشه سایت محلی''',
-'''RenamePage''':
-'''تغییرنام صفحه''',
-'''SpellCheck''':
-'''تصحیح املایی''',
+'''Invalid include arguments "%s"!''':
+'''عبارت "%s" غیر مجاز است!''',
+'''Nothing found for "%s"!''':
+'''برای "%s" چیزی یافت نشد!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''طرح \'%(scheme)s\' پشتیبانی نشده است!''',
 '''No parent page found!''':
@@ -828,18 +778,14 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''نشان·bookmark·بگذار''',
 '''[Bookmark reached]''':
 '''[به نشان bookmark رسید]''',
-'''No wanted pages in this wiki.''':
-'''در این ویکی صفحه ای مورد نیاز نیست.''',
-'''Invalid include arguments "%s"!''':
-'''عبارت "%s" غیر مجاز است!''',
-'''Nothing found for "%s"!''':
-'''برای "%s" چیزی یافت نشد!''',
 '''Markup''':
-'''علامت گذاری''',
+'''نوع علامت''',
 '''Display''':
-'''نشان بده''',
+'''نمایش''',
 '''Filename''':
 '''نام فایل''',
+'''No wanted pages in this wiki.''':
+'''در این ویکی صفحه ای مورد نیاز نیست.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''آماده سازی صفحه تغییر ساخت یافته ممکن نیست٬ لطفا docutils را نصب نمائید.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -906,6 +852,8 @@ red=edit''':
 '''[ابتدای صفحه]''',
 '''Click to do a full-text search for this title''':
 '''برای انجام جستجوی کامل این موضوع کلیک نمایید''',
+'''Preferences''':
+'''مرجع اطلاعات کاربری''',
 '''Logout''':
 '''خروج''',
 '''Clear message''':
@@ -917,11 +865,11 @@ red=edit''':
 '''Search:''':
 '''جستجو:''',
 '''Text''':
-'''در متن ها''',
+'''متن''',
 '''Titles''':
-'''در عنوان ها''',
+'''عنوان''',
 '''Search''':
-'''جستجو''',
+'''جستجو در''',
 '''More Actions:''':
 '''امکانات بیشتر:''',
 '''------------''':
@@ -936,16 +884,18 @@ red=edit''':
 '''شبیه صفحات''',
 '''Local Site Map''':
 '''نقشه سایت محلی''',
+'''User Preferences''':
+'''مرجع اطلاعات کاربری''',
 '''My Pages''':
 '''صفحات من''',
 '''Subscribe User''':
-'''عضویت''',
+'''عضویت کاربران در این صفحه''',
 '''Remove Spam''':
 '''حذف هرزصفحه''',
 '''Package Pages''':
 '''تهیه بسته صفحات''',
 '''Render as Docbook''':
-'''نمایش به صورت Docbook''',
+'''نمایش با ساختار XML''',
 '''Do''':
 '''انجام بده''',
 '''Edit (Text)''':
@@ -977,13 +927,63 @@ red=edit''':
 '''Line''':
 '''خط''',
 '''Deletions are marked like this.''':
-'''حذفیات به این ترتیب مشخص میشوند.''',
+'''حذفیات در این ستون و با این رنگ نمایش داده میشوند.''',
 '''Additions are marked like this.''':
-'''اضافات به این صورت مشخص میشوند.''',
+'''اضافات در این ستون و با این رنگ نمایش داده میشوند.''',
 '''Connection to mailserver \'%(server)s\' failed: %(reason)s''':
 '''ارتباط با سرویس دهنده ایمیل \'%(server)s\' مقدور نمی باشد: %(reason)s''',
 '''Mail not sent''':
 '''پیغام شما فرستاده نشد''',
 '''Mail sent OK''':
 '''پیغام با موفقیت ارسال شد''',
+'''FrontPage''':
+'''صفحه اولیه''',
+'''RecentChanges''':
+'''آخرین تغییرات''',
+'''TitleIndex''':
+'''فهرست موضوعات''',
+'''WordIndex''':
+'''فهرست لغات''',
+'''FindPage''':
+'''جستجوی صفحه''',
+'''SiteNavigation''':
+'''نوع سایت''',
+'''HelpContents''':
+'''فهرست راهنما''',
+'''HelpOnFormatting''':
+'''راهنمای فرمت ها''',
+'''UserPreferences''':
+'''مرجع اطلاعات کاربری''',
+'''WikiLicense''':
+'''اجازه نامه ویکی''',
+'''MissingPage''':
+'''صفحه گم شده''',
+'''MissingHomePage''':
+'''صفحه خانگی یافت نشد''',
+'''Mon''':
+'''دوشنبه''',
+'''Tue''':
+'''سه شنبه''',
+'''Wed''':
+'''چهارشنبه''',
+'''Thu''':
+'''پنج شنبه''',
+'''Fri''':
+'''جمعه''',
+'''Sat''':
+'''شنبه''',
+'''Sun''':
+'''یکشنبه''',
+'''AttachFile''':
+'''انضمام فایل''',
+'''DeletePage''':
+'''حذف صفحه''',
+'''LikePages''':
+'''شبیه صفحات''',
+'''LocalSiteMap''':
+'''نقشه سایت محلی''',
+'''RenamePage''':
+'''تغییرنام صفحه''',
+'''SpellCheck''':
+'''تصحیح املایی''',
 }

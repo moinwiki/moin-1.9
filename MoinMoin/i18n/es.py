@@ -4,7 +4,7 @@
 meta = {
   'language': """Español""",
   'elanguage': """Spanish""",
-  'maintainer': """Eduardo Mercovich <eduardo.mercovich@gmail.com>""",
+  'maintainer': """Ramiro Morales <cramm0@gmail.com>""",
   'encoding': 'utf-8',
   'direction': 'ltr',
   'wikimarkup': True,
@@ -80,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus cambios.''',
 '''Preview''':
 '''Vista Previa''',
+'''Text mode''':
+'''Modo texto''',
 '''Comment:''':
 '''Comentario''',
 '''<No addition>''':
@@ -410,10 +412,20 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Deberías \'\'evitar editar\'\' esta página durante al menos otros %(mins_valid)d minuto(s),
 para evitar conflictos.\'\'\'[[BR]]
 Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''El paquete requiere una versión más reciente de MoinMoin (al menos %s)''',
 '''Installation of \'%(filename)s\' failed.''':
 '''La instalación de \'%(filename)s\' falló.''',
 '''The file %s is not a MoinMoin package file.''':
 '''El archivo %s no es un paquete de MoinMoin''',
+'''The page %s does not exist.''':
+'''¡La página %s no existe!''',
+'''Package file format unsupported.''':
+'''Formato de archivo de paquete no soportado''',
+'''Unknown function %s in line %i.''':
+'''Función %s desconocida en línea %i.''',
+'''The file %s was not found in the package.''':
+'''No se ha encontrado el archivo %s en el paquete.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -624,8 +636,18 @@ Referencia rápida de reStructuredText
 '''Esta página ya ha sido borrada o nunca se creó''',
 '''No pages like "%s"!''':
 '''Ninguna página similar a "%s"!''',
+'''Invalid filename "%s"!''':
+'''Nombre de archivo no válido "%s"!''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''El adjunto \'%(target)s\' (nombre remoto \'%(filename)s\') ya existe.''',
+'''Created the package %s containing the pages %s.''':
+'''Se creó el paquete %s conteniendo las páginas %s''',
+'''Package pages''':
+'''Páginas del paquete''',
+'''Package name''':
+'''Nombre del paquete''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Lista de nombres de página - separados por <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':
@@ -640,6 +662,8 @@ Referencia rápida de reStructuredText
 '''%(matchcount)d %(matches)s de "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Mapa local del sitio "%s"''',
+'''Please first create a homepage before creating additional pages.''':
+'''Por favor crea una página personal antes de crear páginas adicionales.''',
 '''You are not allowed to rename pages in this wiki!''':
 '''¡No tienes permisos para renombrar páginas en este wiki!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -676,14 +700,22 @@ Intenta con un nombre distinto.''',
 '''Lista completa de enlaces para "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
+'''Pages''':
+'''Páginas''',
+'''Select Author''':
+'''Elegir autor''',
+'''You are not allowed to use this action.''':
+'''No tienes permisos para usar esta acción.''',
 '''Subscribe users to the page %s''':
 '''Suscribir usuarios a la página %s''',
 '''Subscribed for %s:''':
-'''Suscrit@ en %s:''',
+'''Suscrit@ a %s:''',
 '''Not a user:''':
 '''No es un usuario:''',
 '''You are not allowed to perform this action.''':
 '''No tienes permisos para hacer esta acción.''',
+'''You are now logged out.''':
+'''Has salido del sistema.''',
 '''You are not allowed to delete this page.''':
 '''No tienes permisos para borrar esta página.''',
 '''Please use the interactive user interface to delete pages!''':
@@ -694,6 +726,12 @@ Intenta con un nombre distinto.''',
 '''Eliminar''',
 '''Optional reason for the deletion''':
 '''Razón para la eliminación (opcional)''',
+'''Backup''':
+'''Copia de respaldo''',
+'''Restore''':
+'''Restaurar''',
+'''You are not allowed to do remote backup.''':
+'''No tienes permisos para hacer respaldos remotos.''',
 '''[%d attachments]''':
 '''[%d adjuntos]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

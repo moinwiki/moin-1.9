@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-10 16:46:41 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-552
+
+    Summary:
+      i18n updated
+    Revision:
+      moin--main--1.5--patch-552
+
+    i18n updated
+    
+
+    modified files:
+     ChangeLog MoinMoin/i18n/de.po MoinMoin/i18n/es.po
+     MoinMoin/i18n/es.py MoinMoin/i18n/fa.po MoinMoin/i18n/fa.py
+     MoinMoin/i18n/meta.py
+
+
 2006-04-10 12:46:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-551
 
     Summary:
