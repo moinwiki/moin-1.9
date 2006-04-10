@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-10 06:38:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-548
+
+    Summary:
+      converter: fix table/row/cell style spaces
+    Revision:
+      moin--main--1.5--patch-548
+
+    converter: fix table/row/cell style spaces
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+
+
 2006-04-10 06:26:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-547
 
     Summary:
