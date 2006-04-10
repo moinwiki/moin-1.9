@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -61,6 +61,10 @@ msgstr "Tạo trang này"
 
 msgid "You are not allowed to view this page."
 msgstr "Bạn không xem trang này được."
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "Bạn chưa thay đổi nội dung trang nên không cần lưu lại!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Bạn không thể sửa trang này."
@@ -159,10 +163,6 @@ msgstr "Xem qua"
 
 msgid "GUI Mode"
 msgstr ""
-
-#, fuzzy
-msgid "Your changes are not saved!"
-msgstr "Bạn chưa thay đổi nội dung trang nên không cần lưu lại!"
 
 #, fuzzy
 msgid "Comment:"
@@ -343,6 +343,10 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<không rõ>"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "Nội dung"
 
 #, fuzzy
 msgid ""
@@ -1190,6 +1194,62 @@ msgstr "%(matchcount)d %(matches)s ở trang \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "Bản đồ liên kết nội bộ cho \"%s\""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Không hiểu tham số \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "LikePages"
+
+#, fuzzy
+msgid "Package name"
+msgstr "LikePages"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Bạn không thể đổi tên trang trong wiki này!"
 
@@ -1241,22 +1301,6 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
 
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Tìm theo tiêu đề \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Tìm nội dung: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Danh sách liên kết đầy đủ trong \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-
 #, fuzzy, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Đăng ký vào các thay đổi nhỏ nhặt"
@@ -1271,6 +1315,84 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to perform this action."
 msgstr "Bạn không thể sửa trang này."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Tìm theo tiêu đề \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Tìm nội dung: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Đánh dấu"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Bạn không thể %s vào trang này."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Việc không rõ"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Danh sách liên kết đầy đủ trong \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
+"khẩu."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
+
+msgid "Sorry, wrong password."
+msgstr "Xin lỗi, sai mật khẩu."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1294,6 +1416,14 @@ msgstr "Không hiểu tham số \"%s\"!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Không tìm thấy \"%s\""
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Không hiểu tham số \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Không hiểu tham số \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1720,21 +1850,6 @@ msgstr "SpellCheck"
 #~ msgid "Immutable page"
 #~ msgstr "Trang không thể được thay đổi"
 
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Không biết người dùng: {{{\"%s\"}}}. Vui lòng nhập tên người dùng và mật "
-#~ "khẩu."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Xin lỗi, sai mật khẩu."
-
 #~ msgid "Bad relogin URL."
 #~ msgstr "URL đăng nhập lại không chính xác."
 
@@ -1865,9 +1980,6 @@ msgstr "SpellCheck"
 
 #~ msgid "Nobody subscribed to this page, no mail sent."
 #~ msgstr "Không ai đăng ký vào trang này, chưa có thư được gửi."
-
-#~ msgid "Unknown action"
-#~ msgstr "Việc không rõ"
 
 #~ msgid "Needed %(timer).1f seconds."
 #~ msgstr "Tốn %(timer).1f giây."

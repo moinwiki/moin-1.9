@@ -586,6 +586,12 @@ Próbáljon más nevet adni a lapnak.''',
 '''Keresés a teljes szövegben, minta: "%s"''',
 '''Full Link List for "%s"''':
 '''Teljes kapocslista (link-lista), minta: "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
+'''Missing password. Please enter user name and password.''':
+'''Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót.''',
+'''Sorry, wrong password.''':
+'''Sajnos rossz a jelszó.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!''',
 '''Upload new attachment "%(filename)s"''':

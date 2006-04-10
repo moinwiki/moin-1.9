@@ -32,6 +32,8 @@ makro çağrısını kullanabilirsiniz.-~
 '''Yeni Sayfa Oluştur''',
 '''You are not allowed to view this page.''':
 '''Sayfanın görüntülenmesi için yeterli izne sahip değilsiniz.''',
+'''Your changes are not saved!''':
+'''Düzenlemeleriniz kaydedilmedi!''',
 '''You are not allowed to edit this page.''':
 '''Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Eğer bunun olmasını istemiyorsanız, \'\'\'%(cancel_button_text)s\'\'\' düğ
 '''Önizleme''',
 '''GUI Mode''':
 '''Grafiksel Kullanıcı Arayüzü Kipi''',
-'''Your changes are not saved!''':
-'''Düzenlemeleriniz kaydedilmedi!''',
 '''Comment:''':
 '''Yorum:''',
 '''<No addition>''':

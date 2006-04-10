@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -63,6 +63,9 @@ msgstr "Criar Nova Página"
 
 msgid "You are not allowed to view this page."
 msgstr "Você não tem permissão para ver esta página!"
+
+msgid "Your changes are not saved!"
+msgstr "Suas mudanças não foram gravadas!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Você não tem permissão para editar esta página!"
@@ -158,9 +161,6 @@ msgstr "Previsão"
 
 msgid "GUI Mode"
 msgstr "Visualização Gráfica"
-
-msgid "Your changes are not saved!"
-msgstr "Suas mudanças não foram gravadas!"
 
 msgid "Comment:"
 msgstr "Comentário:"
@@ -348,6 +348,10 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<desconhecido>"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "Texto"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1217,6 +1221,62 @@ msgstr "%(matchcount)d %(matches)s para \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa local do site para \"%s\""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Parâmetros de inclusão inválidos \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "Páginas Semelhantes"
+
+#, fuzzy
+msgid "Package name"
+msgstr "Páginas Semelhantes"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Você não tem permissão para renomear páginas nesta wiki!"
 
@@ -1270,24 +1330,6 @@ msgstr ""
 "Você não pode verificar a ortografia de uma página que você não tem "
 "permissão para visualizar."
 
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Buscar Título: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Busca Completa de Texto: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Lista completa de links para \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Não é possível criar uma página sem um nome. Por favor, especifique um nome "
-"para a página."
-
 #, fuzzy, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Subscrever alterações superficiais"
@@ -1302,6 +1344,86 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to perform this action."
 msgstr "Você não tem permissão para editar esta página!"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Buscar Título: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Busca Completa de Texto: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Markup"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Você não tem permissão para fazer %s nesta página."
+
+#, fuzzy, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Ação desconhecida"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Lista completa de links para \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Nome de usuário desconhecido: {{{\"%s\"}}}. Por favor, informe o nome do "
+"usuário e senha."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Senha não foi informada. Por favor, informe o nome do usuário e senha."
+
+msgid "Sorry, wrong password."
+msgstr "Desculpe. Senha errada."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Você saiu com sucesso do sistema (cookie apagado)."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Não é possível criar uma página sem um nome. Por favor, especifique um nome "
+"para a página."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1325,6 +1447,14 @@ msgstr "Parâmetros de inclusão inválidos \"%s\"!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Nada encontrado para \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Parâmetros de inclusão inválidos \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Parâmetros de inclusão inválidos \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1741,24 +1871,8 @@ msgstr "VerificaçãoOrtográfica"
 #~ msgid "Immutable page"
 #~ msgstr "Página não editável"
 
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Você saiu com sucesso do sistema (cookie apagado)."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Nome de usuário desconhecido: {{{\"%s\"}}}. Por favor, informe o nome do "
-#~ "usuário e senha."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr ""
-#~ "Senha não foi informada. Por favor, informe o nome do usuário e senha."
-
 #~ msgid "Account \"%s\" is disabled."
 #~ msgstr "Conta \"%s\" desabilitada."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Desculpe. Senha errada."
 
 #~ msgid "Bad relogin URL."
 #~ msgstr "URL inválida para novo login."
@@ -1874,9 +1988,6 @@ msgstr "VerificaçãoOrtográfica"
 
 #~ msgid "Nobody subscribed to this page, no mail sent."
 #~ msgstr "Ninguém cadastrado a esta página, nenhuma mensagem enviada."
-
-#~ msgid "Unknown action"
-#~ msgstr "Ação desconhecida"
 
 #~ msgid "Multiple matches for \"%s...%s\""
 #~ msgstr "Múltiplos resultados para \"%s...%s\""

@@ -577,6 +577,12 @@ Tente um nome diferente.''',
 '''Buscar por conteúdo: "%s"''',
 '''Full Link List for "%s"''':
 '''Lista completa de links em "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, insira usuário e senha novamente.''',
+'''Missing password. Please enter user name and password.''':
+'''Senha inválida. Por favor, insira usuário e senha novamente.''',
+'''Sorry, wrong password.''':
+'''Desculpe, senha inválida.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Não é possível criar uma página sem nome. Por favor, especifique o nome da página.''',
 '''Upload new attachment "%(filename)s"''':

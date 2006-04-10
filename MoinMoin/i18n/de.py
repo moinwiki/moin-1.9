@@ -32,6 +32,8 @@ auf diesen Seiten platziert werden.-~
 '''Neue Seite anlegen''',
 '''You are not allowed to view this page.''':
 '''Sie dürfen diese Seite nicht ansehen.''',
+'''Your changes are not saved!''':
+'''Ihre Änderungen sind nicht gesichert!''',
 '''You are not allowed to edit this page.''':
 '''Sie dürfen diese Seite nicht editieren.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Wenn Sie das nicht wollen, klicken Sie auf \'\'\'%(cancel_button_text)s\'\'\', u
 '''Vorschau anzeigen''',
 '''GUI Mode''':
 '''GUI-Modus''',
-'''Your changes are not saved!''':
-'''Ihre Änderungen sind nicht gesichert!''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -199,6 +199,8 @@ oder in der Vorschau angezeigt.[[BR]]
 Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''<unknown>''':
 '''<unbekannt>''',
+'''Text mode''':
+'''Text-Modus''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -731,6 +733,54 @@ Ansonsten kann das Feld "Speichern unter..." leer bleiben und es wird der origin
 '''%(matchcount)d %(matches)s passen zu "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokale Seitenverweise für "%s"''',
+'''Please log in first.''':
+'''Bitte melden Sie sich vorher an.''',
+'''Please first create a homepage before creating additional pages.''':
+'''Bitte erzeugen Sie zuerst eine Homepage, bevor Sie weitere Seiten anlegen.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Hier können Sie zusätzliche Unterseiten zu Ihrer bereits existierenden Homepage hinzufügen.
+
+Sie können wählen, wie offen diese Seiten für andere Leser oder Autoren sein sollen,
+der Zugriff wird über Gruppenmitgliedschaft in der entsprechenden Gruppe kontrolliert.
+
+Geben Sie einfach den Namen der Unterseite ein und klicken Sie auf den Knopf, um eine neue Seite zu erzeugen.
+
+Bevor Sie zugriffsgeschützte Seiten erzeugen, stellen Sie sicher, dass die entsprechende Gruppenseite existiert und die richtigen Mitglieder hat. Benutzen Sie HomepageGroupsTemplate für das Erzeugen der Gruppenseiten.
+
+||\'\'\'Neue persönliche Seite hinzufügen:\'\'\'||\'\'\'Zugeordnete ACL-Gruppe:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,Seite (read/write),%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,Seite (read-only),%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,Seite (privat),%(username)s)]]||nur %(username)s||
+
+''',
+'''MyPages management''':
+'''Verwaltung meiner Seiten''',
+'''Invalid filename "%s"!''':
+'''Ungültiger Dateiname "%s"!''',
+'''Created the package %s containing the pages %s.''':
+'''Paket %s, das die Seiten %s enthält wurde erzeugt.''',
+'''Package pages''':
+'''Seiten paketieren''',
+'''Package name''':
+'''Paketname''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Liste von Seitennamen - getrennt durch <tt>,</tt>''',
 '''You are not allowed to rename pages in this wiki!''':
 '''Sie dürfen in diesem Wiki keine Seiten umbenennen!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -758,14 +808,6 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Keine Rechtschreibfehler gefunden!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Sie dürfen keine Seite auf Rechtschreibung prüfen, die Sie nicht lesen können.''',
-'''Title Search: "%s"''':
-'''Titelsuche: "%s"''',
-'''Full Text Search: "%s"''':
-'''Volltextsuche: "%s"''',
-'''Full Link List for "%s"''':
-'''Liste aller Seitenverweise für "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen Seitennamen an.''',
 '''Subscribe users to the page %s''':
 '''Seite %s für Benutzer abonnieren''',
 '''Subscribed for %s:''':
@@ -774,6 +816,63 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Kein Benutzer:''',
 '''You are not allowed to perform this action.''':
 '''Sie dürfen diese Aktion nicht ausführen.''',
+'''Title Search: "%s"''':
+'''Titelsuche: "%s"''',
+'''Full Text Search: "%s"''':
+'''Volltextsuche: "%s"''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Wiederhergestelltes Backup: %(filename)s nach Zielverzeichnis: %(targetdir)s.
+Dateien: %(filecount)d, Verzeichnisse: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Wiederherstellen von Backup %(filename)s in das Zielverzeichnis %(targetdir)s fehlgeschlagen.''',
+'''Wiki Backup / Restore''':
+'''Wiki Sicherung / Wiederherstellung''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Some hints:
+ * Um ein Backup wiederherzustellen:
+  * Das Wiederherstellen eines Backups wird bestehende Daten überschreiben, also seien Sie vorsichtig.
+  * Benennen Sie es auf <siteid>.tar.<compression> um (entfernen Sie --date--time--UTC).
+  * Legen Sie die Backupdatei in das backup_storage_dir (mit scp, ftp, ...).
+  * Drücken Sie unten auf [[GetText(Restore)]]-Knopf unten.
+
+ * Um ein Backup zu erstellen, drücken Sie einfach auf den [[GetText(Backup)]]-Knopf und sichern Sie die Datei,
+   die Sie erhalten an eine sichere Stelle.
+
+Bitte stellen Sie sicher, dass die backup_* Werte in Ihrer Wiki-Konfiguration korrekt und vollständig sind.
+''',
+'''Backup''':
+'''Datensicherung''',
+'''Restore''':
+'''Datenwiederherstellung''',
+'''You are not allowed to do remote backup.''':
+'''Sie dürfen kein Remote-Backup ausführen.''',
+'''Unknown backup subaction: %s.''':
+'''Unbekannte backup Unteraktion: %s.''',
+'''Full Link List for "%s"''':
+'''Liste aller Seitenverweise für "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzername und Passwort ein.''',
+'''Missing password. Please enter user name and password.''':
+'''Fehlendes Passwort. Bitte geben Sie Benutzername und Passwort ein.''',
+'''Sorry, wrong password.''':
+'''Falsches Passwort.''',
+'''You are now logged out.''':
+'''Sie sind nun abgemeldet.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen Seitennamen an.''',
 '''Upload new attachment "%(filename)s"''':
 '''Neuen Dateianhang "%(filename)s" hochladen''',
 '''Create new drawing "%(filename)s"''':
@@ -786,6 +885,10 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Ungültige "Include"-Argumente: "%s"!''',
 '''Nothing found for "%s"!''':
 '''Textmarkierung "%s" nicht gefunden!''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Ungültige MonthCalendaer calparms "%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Ungültige MonthCalendar-Argumente: "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Nicht bekanntes Navigationsschema \'%(scheme)s\'!''',
 '''No parent page found!''':

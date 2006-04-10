@@ -584,6 +584,12 @@ Try a different name.''':
 '''חיפוש מלל: "%s"''',
 '''Full Link List for "%s"''':
 '''רשימת קישורים מלאה של "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''משתמש לא קיים: {{{"%s"}}}. אנא הכנס שם משתמש וסיסמא.''',
+'''Missing password. Please enter user name and password.''':
+'''סיסמא חסרה. אנא הכנס שם משתמש וסיסמא.''',
+'''Sorry, wrong password.''':
+'''מצטער, סיסמא לא נכונה.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף.''',
 '''Upload new attachment "%(filename)s"''':

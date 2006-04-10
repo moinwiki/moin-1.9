@@ -576,6 +576,12 @@ Probeer een andere naam.''',
 '''Volledige tekst doorzoeken op: "%s"''',
 '''Full Link List for "%s"''':
 '''Volledige verwijzingenlijst voor "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Onbekende gebruikersnaam: {{{"%s"}}}. Geef een gebruikersnaam en wachtwoord op.''',
+'''Missing password. Please enter user name and password.''':
+'''Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op.''',
+'''Sorry, wrong password.''':
+'''Sorry, foutief wachtwoord.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
 '''Upload new attachment "%(filename)s"''':

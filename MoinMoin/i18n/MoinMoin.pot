@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,9 @@ msgid "Create New Page"
 msgstr ""
 
 msgid "You are not allowed to view this page."
+msgstr ""
+
+msgid "Your changes are not saved!"
 msgstr ""
 
 msgid "You are not allowed to edit this page."
@@ -132,9 +135,6 @@ msgid "Preview"
 msgstr ""
 
 msgid "GUI Mode"
-msgstr ""
-
-msgid "Your changes are not saved!"
 msgstr ""
 
 msgid "Comment:"
@@ -282,6 +282,9 @@ msgid ""
 msgstr ""
 
 msgid "<unknown>"
+msgstr ""
+
+msgid "Text mode"
 msgstr ""
 
 msgid ""
@@ -1078,6 +1081,60 @@ msgstr ""
 msgid "Local Site Map for \"%s\""
 msgstr ""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+msgid "Package pages"
+msgstr ""
+
+msgid "Package name"
+msgstr ""
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr ""
 
@@ -1124,22 +1181,6 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 
 #, python-format
-msgid "Title Search: \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr ""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr ""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-
-#, python-format
 msgid "Subscribe users to the page %s"
 msgstr ""
 
@@ -1151,6 +1192,79 @@ msgid "Not a user:"
 msgstr ""
 
 msgid "You are not allowed to perform this action."
+msgstr ""
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "You are not allowed to do remote backup."
+msgstr ""
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+
+msgid "Sorry, wrong password."
+msgstr ""
+
+msgid "You are now logged out."
+msgstr ""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
 msgstr ""
 
 #, python-format
@@ -1174,6 +1288,14 @@ msgstr ""
 
 #, python-format
 msgid "Nothing found for \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
 msgstr ""
 
 #, python-format

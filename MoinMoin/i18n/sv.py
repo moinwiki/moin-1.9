@@ -32,6 +32,8 @@ För att använda det här formuläret på andra sidor, skriv in ett
 '''Skapa ny sida''',
 '''You are not allowed to view this page.''':
 '''Du har inte tillåtelse att titta på den här sidan.''',
+'''Your changes are not saved!''':
+'''Dina ändringar sparas inte!''',
 '''You are not allowed to edit this page.''':
 '''Du har inte tillåtelse att redigera den här sidan.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Förhandsgranska''',
 '''GUI Mode''':
 '''Grafiskt läge''',
-'''Your changes are not saved!''':
-'''Dina ändringar sparas inte!''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -201,6 +201,8 @@ för att undvika redigeringskonflikter.\'\'\'[[BR]]
 För att lämna redigeringen, tryck på "Avbryt".''',
 '''<unknown>''':
 '''<okänd>''',
+'''Text mode''':
+'''Textläge''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -216,6 +218,42 @@ För att lämna redigeringen, tryck på "Avbryt".''',
  Tabeller:: || celltext |||| celltext som sträcker sig över 2 kolumner ||;    inga avslutande blanksteg tillåtna efter tabeller och titlar.
 
 (!) För mer hjälp, se HjälpOmRedigering och SyntaxReferens.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Emfas: <i>*kursiv*</i> <b>**fetstil**</b> ``monospace``<br/>
+<br/><pre>
+Rubriker: Rubrik 1  Rubrik 2  Rubrik 3
+          ========  --------  ~~~~~~~~
+
+Horisontell linje: ---- 
+Länkar: AvslutandeUnderstrykning_ `flera ord med backticks`_ extern_ 
+
+.. _extern: http://extern-sajt.net/foo/
+
+Listor: * punktlista; 1., a. numrerad lista.
+</pre>
+<br/>
+(!) För mer hjälp, se
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
 ''',
 '''Diffs''':
 '''Skillnader''',
@@ -699,6 +737,56 @@ att användas.''',
 '''%(matchcount)d %(matches)s för "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokal Sajtkarta för "%s"''',
+'''Please log in first.''':
+'''Var god logga in först.''',
+'''Please first create a homepage before creating additional pages.''':
+'''Var god skapa en hemsida innan du skapar övriga sidor.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Du kan lägga till undersidor till din redan existerande hemsida här.
+
+Du kan välja vilka andra som ska kunna läsa och ändra sidorna. Åtkomst
+bestäms av medlemskap i motsvarande gruppsida.
+
+Ange undersidans namn och tryck på knappen för att skapa en ny sida.
+
+Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida
+existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för
+att skapa gruppsidor.
+
+||\'\'\'Lägg till en ny personlig sida:\'\'\'||\'\'\'Relaterade åtkomstlistgrupper:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''Hantering av MinaSidor''',
+'''Invalid filename "%s"!''':
+'''Ogiltigt filnamn "%s"!''',
+'''Created the package %s containing the pages %s.''':
+'''Skapade paketet %s som innehåller sidorna %s.''',
+'''Package pages''':
+'''Paketsidor''',
+'''Package name''':
+'''Paketnamn''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Lista på sidnamn - separerade med <tt>,</tt>''',
 '''You are not allowed to rename pages in this wiki!''':
 '''Du har inte tillålse att radera sidor i den här wikin!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -727,14 +815,6 @@ Pröva ett annat namn.''',
 '''Inga felstavningar funna!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Du kan inte stavningskontrollera en sida som du inte kan läsa.''',
-'''Title Search: "%s"''':
-'''Titelsökning: "%s"''',
-'''Full Text Search: "%s"''':
-'''Fulltextsökning: "%s"''',
-'''Full Link List for "%s"''':
-'''Full länklista för "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
 '''Subscribe users to the page %s''':
 '''Teckna en prenumeration på sidan %s åt användarna''',
 '''Subscribed for %s:''':
@@ -743,6 +823,63 @@ Pröva ett annat namn.''',
 '''Inte en användare:''',
 '''You are not allowed to perform this action.''':
 '''Du har inte tillåtelse att utföra den här åtgärden.''',
+'''Title Search: "%s"''':
+'''Titelsökning: "%s"''',
+'''Full Text Search: "%s"''':
+'''Fulltextsökning: "%s"''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Säkerhetskopia återlagrad: %(filename)s till målkatalog: %(targetdir)s.
+Filer: %(filecount)d, Kataloger: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Återlagring av säkerhetskopia: %(filename)s till målkatalog: %(targetdir)s misslyckades.''',
+'''Wiki Backup / Restore''':
+'''Wiki säkerhetskopiering / återlagring''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Några tips:
+ * För att återlagra en säkerhetskopia:
+  * Att återlagra en säkerhetskopia kommer att skriva över existerande data så var försiktig.
+  * Byt namn på den till <sajtid>.tar.<kompression> (ta bort --date--time--UTC-grejerna).
+  * Lägg säkerhetskopian i backup_storage_dir (använd scp, ftp, ...).
+  * Tryck på [[GetText(Restore)]]-knappen nedan.
+
+ * För att göra en backup tryck på [[GetText(Backup)]]-knappen och spara filen på ett säkert ställe.
+
+Se till att din wikikonfigurations backup_*-värden är korrekta och kompletta.
+
+''',
+'''Backup''':
+'''Säkerhetskopiera''',
+'''Restore''':
+'''Återställ''',
+'''You are not allowed to do remote backup.''':
+'''Du har inte tillåtelse att göra fjärrbackup.''',
+'''Unknown backup subaction: %s.''':
+'''Okänd backup-underåtgärd: %s.''',
+'''Full Link List for "%s"''':
+'''Full länklista för "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Okänt användarnamn: {{{"%s"}}}. Var god ange användarnamn och lösenord.''',
+'''Missing password. Please enter user name and password.''':
+'''Lösenord saknas. Var god ange användarnamn och lösenord.''',
+'''Sorry, wrong password.''':
+'''Tyvärr, fel lösenord.''',
+'''You are now logged out.''':
+'''Du är nu utloggad.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ladda upp ny bilaga "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -755,6 +892,10 @@ Pröva ett annat namn.''',
 '''Felaktigt inkluderingsargument "%s"!''',
 '''Nothing found for "%s"!''':
 '''Inget hittat för "%s"!''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Ogiltiga MonthCalendar-calparms "%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Ogiltiga MonthCalendar-argument "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Inget stöd för navigationsschemat \'%(scheme)s\'!''',
 '''No parent page found!''':

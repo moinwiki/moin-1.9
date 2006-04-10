@@ -32,6 +32,8 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Creează Pagină Nouă''',
 '''You are not allowed to view this page.''':
 '''Nu aveţi dreptul să vizionaţi această pagină.''',
+'''Your changes are not saved!''':
+'''Modificările dumneavoastră nu sunt salvate!''',
 '''You are not allowed to edit this page.''':
 '''Nu aveţi dreptul să editaţi această pagină.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru an
 '''Previzionare''',
 '''GUI Mode''':
 '''Mod GUI''',
-'''Your changes are not saved!''':
-'''Modificările dumneavoastră nu sunt salvate!''',
 '''Comment:''':
 '''Comentariu:''',
 '''<No addition>''':
@@ -707,6 +707,12 @@ Try a different name.''':
 '''Căutare Text Complet: "%s"''',
 '''Full Link List for "%s"''':
 '''Lista Completă de Legături pentru "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nume de utilizator necunoscut: {{{"%s"}}}. Introduceţi nume şi parolă''',
+'''Missing password. Please enter user name and password.''':
+'''Parola lipseşte. Introduceti nume şi parolă''',
+'''Sorry, wrong password.''':
+'''Parolă greşită.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele paginii.''',
 '''Upload new attachment "%(filename)s"''':

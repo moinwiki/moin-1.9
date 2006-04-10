@@ -31,6 +31,8 @@ Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de macro
 '''Crea una pàgina nova''',
 '''You are not allowed to view this page.''':
 '''No teniu permís per a visualitzar aquesta pàgina.''',
+'''Your changes are not saved!''':
+'''No s\'han desat els vostres canvis!''',
 '''You are not allowed to edit this page.''':
 '''No teniu permís per a editar aquesta pàgina.''',
 '''Page is immutable!''':
@@ -83,8 +85,6 @@ Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar e
 '''Previsualitza''',
 '''GUI Mode''':
 '''Mode amb interfície gràfica''',
-'''Your changes are not saved!''':
-'''No s\'han desat els vostres canvis!''',
 '''Comment:''':
 '''Comentari:''',
 '''<No addition>''':
@@ -707,6 +707,12 @@ Proveu amb un nom diferent.''',
 '''Cerca de text sencer: «%s»''',
 '''Full Link List for "%s"''':
 '''Llista completa d\'enllaços per a «%s»''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''El nom d\'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d\'usuari i contrasenya.''',
+'''Missing password. Please enter user name and password.''':
+'''Manca la contrasenya. Introduïu el nom d\'usuari i contrasenya.''',
+'''Sorry, wrong password.''':
+'''Contrasenya errònia.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom.''',
 '''Upload new attachment "%(filename)s"''':

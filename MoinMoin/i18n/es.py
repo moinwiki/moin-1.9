@@ -32,6 +32,8 @@ llamada a una macro.-~
 '''Crear una nueva página''',
 '''You are not allowed to view this page.''':
 '''No tienes permisos para ver esta página.''',
+'''Your changes are not saved!''':
+'''¡Tus cambios NO se han grabado!''',
 '''You are not allowed to edit this page.''':
 '''No tienes permisos para editar esta página.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Vista Previa''',
 '''GUI Mode''':
 '''Modo gráfico''',
-'''Your changes are not saved!''':
-'''¡Tus cambios NO se han grabado!''',
 '''Comment:''':
 '''Comentario''',
 '''<No addition>''':
@@ -757,14 +757,6 @@ Intenta con un nombre distinto.''',
 '''¡No se encontraron errores de ortografía!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''No puedes realizar corrección ortográfica en una página que no puedes leer.''',
-'''Title Search: "%s"''':
-'''Buscar por título: "%s"''',
-'''Full Text Search: "%s"''':
-'''Búsqueda en contenidos: "%s"''',
-'''Full Link List for "%s"''':
-'''Lista completa de enlaces para "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
 '''Subscribe users to the page %s''':
 '''Suscribir usuarios a la página %s''',
 '''Subscribed for %s:''':
@@ -773,6 +765,20 @@ Intenta con un nombre distinto.''',
 '''No es un usuario:''',
 '''You are not allowed to perform this action.''':
 '''No tienes permisos para hacer esta acción.''',
+'''Title Search: "%s"''':
+'''Buscar por título: "%s"''',
+'''Full Text Search: "%s"''':
+'''Búsqueda en contenidos: "%s"''',
+'''Full Link List for "%s"''':
+'''Lista completa de enlaces para "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
+'''Missing password. Please enter user name and password.''':
+'''Faltó ingresar la password. Por favor, ingresa el nombre de usuario y password''',
+'''Sorry, wrong password.''':
+'''Lo lamento, clave errónea''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
 '''Upload new attachment "%(filename)s"''':
 '''Subir nuevo adjunto "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':

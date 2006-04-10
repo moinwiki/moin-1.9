@@ -32,6 +32,8 @@ volání makra.-~
 '''Vytvořit novou stránku''',
 '''You are not allowed to view this page.''':
 '''Nemáte dovoleno prohlížet tuto stránku.''',
+'''Your changes are not saved!''':
+'''Provedené změny nejsou uloženy!''',
 '''You are not allowed to edit this page.''':
 '''Nemáte dovoleno editovat tuto stránku.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Náhled''',
 '''GUI Mode''':
 '''GUI Mód''',
-'''Your changes are not saved!''':
-'''Provedené změny nejsou uloženy!''',
 '''Comment:''':
 '''Komentář:''',
 '''<No addition>''':
@@ -750,14 +750,6 @@ Zkuste jiné jméno.''',
 '''Žádné pravopisné chyby nenalezeny.''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Nemůžete kontrolovat pravopis na stránce, kterou nemůžete číst.''',
-'''Title Search: "%s"''':
-'''Hledání stránek: "%s"''',
-'''Full Text Search: "%s"''':
-'''Fulltextové vyhledávání: "%s"''',
-'''Full Link List for "%s"''':
-'''Všechny stránky, které se odkazují na: "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
 '''Subscribe users to the page %s''':
 '''Přihlásit uživatele k odebírání stránky %s''',
 '''Subscribed for %s:''':
@@ -766,6 +758,14 @@ Zkuste jiné jméno.''',
 '''Není uživatel:''',
 '''You are not allowed to perform this action.''':
 '''Nemáte dovoleno provést tuto akci.''',
+'''Title Search: "%s"''':
+'''Hledání stránek: "%s"''',
+'''Full Text Search: "%s"''':
+'''Fulltextové vyhledávání: "%s"''',
+'''Full Link List for "%s"''':
+'''Všechny stránky, které se odkazují na: "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
 '''Upload new attachment "%(filename)s"''':
 '''Upload nové přílohy "%(filename)s" hochladen''',
 '''Create new drawing "%(filename)s"''':

@@ -561,6 +561,12 @@ Vui lòng dùng tên khác.''',
 '''Tìm nội dung: "%s"''',
 '''Full Link List for "%s"''':
 '''Danh sách liên kết đầy đủ trong "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Không biết người dùng: {{{"%s"}}}. Vui lòng nhập tên người dùng và mật khẩu.''',
+'''Missing password. Please enter user name and password.''':
+'''Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu.''',
+'''Sorry, wrong password.''':
+'''Xin lỗi, sai mật khẩu.''',
 '''Upload new attachment "%(filename)s"''':
 '''Tải lên file "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':

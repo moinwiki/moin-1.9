@@ -32,6 +32,8 @@ Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu
 '''Izveidot jaunu lapu''',
 '''You are not allowed to view this page.''':
 '''Jums nav tiesību aplūkot šo lapu.''',
+'''Your changes are not saved!''':
+'''Jūs izmaiņas nav saglabātas!''',
 '''You are not allowed to edit this page.''':
 '''Jums nav tiesību labot šo lapu.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 '''Pirmskats''',
 '''GUI Mode''':
 '''Grafiskais režīms''',
-'''Your changes are not saved!''':
-'''Jūs izmaiņas nav saglabātas!''',
 '''Comment:''':
 '''Komentārs:''',
 '''<No addition>''':
@@ -718,14 +718,6 @@ Pamēģiniet citu nosaukumu.''',
 '''Pareizrakstības kļūdas nav atrastas!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt.''',
-'''Title Search: "%s"''':
-'''Meklēt pēc virsrakstiem: "%s"''',
-'''Full Text Search: "%s"''':
-'''Visa teksta meklēšana: "%s"''',
-'''Full Link List for "%s"''':
-'''Visu saišu saraksts "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
 '''Subscribe users to the page %s''':
 '''Parakstīt lietotājus lapas %s izmaiņām''',
 '''Subscribed for %s:''':
@@ -734,6 +726,20 @@ Pamēģiniet citu nosaukumu.''',
 '''Nav lietotājs:''',
 '''You are not allowed to perform this action.''':
 '''Jums nav tiesību veikt šo darbību.''',
+'''Title Search: "%s"''':
+'''Meklēt pēc virsrakstiem: "%s"''',
+'''Full Text Search: "%s"''':
+'''Visa teksta meklēšana: "%s"''',
+'''Full Link List for "%s"''':
+'''Visu saišu saraksts "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
+'''Missing password. Please enter user name and password.''':
+'''Trūkst paroles. Lūdzu, ievadiet vārdu un paroli.''',
+'''Sorry, wrong password.''':
+'''Piedodiet, nepareiza parole.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ielādēt jaunu piesaisti "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':

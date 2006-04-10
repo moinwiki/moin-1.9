@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -61,6 +61,9 @@ msgstr "Luo uusi sivu"
 
 msgid "You are not allowed to view this page."
 msgstr "Sinulla ei ole oikeutta katsoa tätä sivua."
+
+msgid "Your changes are not saved!"
+msgstr "Muutoksiasi ei ole tallennettu!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
@@ -155,9 +158,6 @@ msgstr "Esikatsele"
 
 msgid "GUI Mode"
 msgstr "GUI-tila"
-
-msgid "Your changes are not saved!"
-msgstr "Muutoksiasi ei ole tallennettu!"
 
 msgid "Comment:"
 msgstr "Kommentti:"
@@ -342,6 +342,10 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<tuntematon>"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "Teksteistä"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1201,6 +1205,62 @@ msgstr "%(matchcount)d %(matches)s nimelle \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "Paikallinen sivukartta sivulta \"%s\""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "Samankaltaisia sivuja"
+
+#, fuzzy
+msgid "Package name"
+msgstr "Samankaltaisia sivuja"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!"
 
@@ -1253,22 +1313,6 @@ msgstr "Ei löytynyt kirjoitusvirheitä!"
 msgid "You can't check spelling on a page you can't read."
 msgstr "Et voi oikolukea sivua jota et voi lukea."
 
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Nimihaku: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Tekstihaku: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Täysi linkkilista haulle \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi."
-
 #, fuzzy, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Tilaa vähäisetkin muutokset"
@@ -1283,6 +1327,82 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to perform this action."
 msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Nimihaku: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Tekstihaku: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Merkkaa"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Sinulla ei ole oikeutta toimintoon %s tälle sivulle."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Täysi linkkilista haulle \"%s\""
+
+#, fuzzy, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "Tyhjä käyttäjänimi. Anna käyttäjänimi."
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+
+msgid "Sorry, wrong password."
+msgstr ""
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Sinulla ei ole oikeutta asentaa tiedostoja."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1306,6 +1426,14 @@ msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Ei löytynyt mitään haulle \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"

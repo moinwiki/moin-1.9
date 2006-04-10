@@ -32,6 +32,8 @@ Za uporabo tega obrazca nad neko drugo stranjo je treba dodati makro klic
 '''Tvori novo stran''',
 '''You are not allowed to view this page.''':
 '''Ogled te strani vam ni dovoljen.''',
+'''Your changes are not saved!''':
+'''Spremembe niso shranjene!''',
 '''You are not allowed to edit this page.''':
 '''Te strani vam ni dovoljeno spreminjati.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Predogled''',
 '''GUI Mode''':
 '''Urejanje s sprotnim prikazom (GUI)''',
-'''Your changes are not saved!''':
-'''Spremembe niso shranjene!''',
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
@@ -721,14 +721,6 @@ Uporabite drugačno ime.''',
 '''Ni očitnih tipkarskih napak!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak.''',
-'''Title Search: "%s"''':
-'''Iskanje po naslovih: "%s"''',
-'''Full Text Search: "%s"''':
-'''Iskanje po polnem besedilu: "%s"''',
-'''Full Link List for "%s"''':
-'''Celotni seznam povezav za "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
 '''Subscribe users to the page %s''':
 '''Naroči uporabnike na obvestila s strani %s''',
 '''Subscribed for %s:''':
@@ -737,6 +729,14 @@ Uporabite drugačno ime.''',
 '''Ni uporabnik''',
 '''You are not allowed to perform this action.''':
 '''Te akcije vam ni dovoljeno izvesti.''',
+'''Title Search: "%s"''':
+'''Iskanje po naslovih: "%s"''',
+'''Full Text Search: "%s"''':
+'''Iskanje po polnem besedilu: "%s"''',
+'''Full Link List for "%s"''':
+'''Celotni seznam povezav za "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
 '''Upload new attachment "%(filename)s"''':
 '''Naloži novo priponko "%(filename)s" na strežnik''',
 '''Create new drawing "%(filename)s"''':

@@ -32,6 +32,8 @@ macro call.-~
 '''새 문서 작성''',
 '''You are not allowed to view this page.''':
 '''이 문서를 볼 수 있는 권한이 없습니다.''',
+'''Your changes are not saved!''':
+'''변경 사항이 저장되지 않았습니다!''',
 '''You are not allowed to edit this page.''':
 '''이 문서를 고칠 수 있는 권한이 없습니다.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''미리보기''',
 '''GUI Mode''':
 '''GUI 모드''',
-'''Your changes are not saved!''':
-'''변경 사항이 저장되지 않았습니다!''',
 '''Comment:''':
 '''설명:''',
 '''<No addition>''':
@@ -717,14 +717,6 @@ Try a different name.''':
 '''철자 오류가 발견되지 않았습니다!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''읽을 수 없는 문서의 철자를 검사할 수 없습니다.''',
-'''Title Search: "%s"''':
-'''제목 "%s" 찾기''',
-'''Full Text Search: "%s"''':
-'''내용 전체에서 찾음 : "%s"''',
-'''Full Link List for "%s"''':
-'''"%s"에 연결된 모든 문서 목록''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
 '''Subscribe users to the page %s''':
 '''문서 %s 를(을) 구독하는 사용자''',
 '''Subscribed for %s:''':
@@ -733,6 +725,20 @@ Try a different name.''':
 '''사용자가 아님:''',
 '''You are not allowed to perform this action.''':
 '''이 작업을 수행할 수 있는 권한이 없습니다.''',
+'''Title Search: "%s"''':
+'''제목 "%s" 찾기''',
+'''Full Text Search: "%s"''':
+'''내용 전체에서 찾음 : "%s"''',
+'''Full Link List for "%s"''':
+'''"%s"에 연결된 모든 문서 목록''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
+'''Missing password. Please enter user name and password.''':
+'''비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
+'''Sorry, wrong password.''':
+'''비밀번호가 틀렸습니다.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
 '''Upload new attachment "%(filename)s"''':
 '''새 첨부 "%(filename)s"를(을) 업로드''',
 '''Create new drawing "%(filename)s"''':

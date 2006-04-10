@@ -594,6 +594,12 @@ Prova un nome differente.''',
 '''Ricerca nel contenuto per "%s"''',
 '''Full Link List for "%s"''':
 '''Elenco completo dei collegamenti per "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nome utente sconosciuto: {{{"%s"}}}. Inserisci nome utente e password''',
+'''Missing password. Please enter user name and password.''':
+'''Password mancante. Inserisci nome utente e password''',
+'''Sorry, wrong password.''':
+'''Spiacente, password errata.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossibile creare una nuova pagina senza nome.  Inserire il nome della pagina''',
 '''Upload new attachment "%(filename)s"''':

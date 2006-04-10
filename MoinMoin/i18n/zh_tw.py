@@ -32,6 +32,8 @@ macro call.-~
 '''建立新頁面''',
 '''You are not allowed to view this page.''':
 '''你無權瀏覽本頁。''',
+'''Your changes are not saved!''':
+'''你的修改沒有儲存！''',
 '''You are not allowed to edit this page.''':
 '''你無權編輯本頁。''',
 '''Page is immutable!''':
@@ -83,8 +85,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''預覽''',
 '''GUI Mode''':
 '''GUI 模式''',
-'''Your changes are not saved!''':
-'''你的修改沒有儲存！''',
 '''Comment:''':
 '''說明欄：''',
 '''<No addition>''':
@@ -196,6 +196,8 @@ To leave the editor, press the Cancel button.''':
 按下「取消」鍵，便可離開編輯模式。''',
 '''<unknown>''':
 '''<不明>''',
+'''Text mode''':
+'''Text 模式''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -727,6 +729,22 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''共有 %(matchcount)d %(matches)s 連向 "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''頁面 "%s" 的連結地圖''',
+'''Please log in first.''':
+'''請先登入。''',
+'''Please first create a homepage before creating additional pages.''':
+'''建立其他頁面之前，請先建立個人首頁。''',
+'''MyPages management''':
+'''管理我的頁面''',
+'''Invalid filename "%s"!''':
+'''不合法的檔名 "%s"！''',
+'''Created the package %s containing the pages %s.''':
+'''包裹 %s 已打包，包含頁面 %s。''',
+'''Package pages''':
+'''打包頁面''',
+'''Package name''':
+'''包裹名稱''',
+'''List of page names - separated by <tt>,</tt>''':
+'''輸入頁面名稱 (以「<tt>,</tt>」分開)''',
 '''You are not allowed to rename pages in this wiki!''':
 '''你無權重新命名頁面！''',
 '''Please use the interactive user interface to rename pages!''':
@@ -755,14 +773,6 @@ Try a different name.''':
 '''沒有拼字錯誤！''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''不能檢查無權瀏覽的頁面。''',
-'''Title Search: "%s"''':
-'''搜尋標題："%s"''',
-'''Full Text Search: "%s"''':
-'''全文檢索："%s"''',
-'''Full Link List for "%s"''':
-'''引用頁面 "%s" 的頁面列表''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''必須有頁面名稱才能建立頁面。''',
 '''Subscribe users to the page %s''':
 '''新增頁面 "%s" 的訂閱戶''',
 '''Subscribed for %s:''':
@@ -771,6 +781,56 @@ Try a different name.''':
 '''不是合法帳號:''',
 '''You are not allowed to perform this action.''':
 '''你無權執行本項操作。''',
+'''Title Search: "%s"''':
+'''搜尋標題："%s"''',
+'''Full Text Search: "%s"''':
+'''全文檢索："%s"''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''提示：
+ * 若要進行備份復原：
+  * 執行備份復原會覆蓋現有的資料，請小心操作。
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案
+   到安全的地方即可。
+
+請確定你的 Wiki 的 backup_* 設定值是正確且完整。
+
+''',
+'''Backup''':
+'''備份''',
+'''Restore''':
+'''復原''',
+'''You are not allowed to do remote backup.''':
+'''你無權進行遠端備份。''',
+'''Unknown backup subaction: %s.''':
+'''不明的備份子操作：%s。''',
+'''Full Link List for "%s"''':
+'''引用頁面 "%s" 的頁面列表''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''找不到使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
+'''Missing password. Please enter user name and password.''':
+'''沒輸入密碼。請輸入名稱及密碼。''',
+'''Sorry, wrong password.''':
+'''密碼錯了！''',
+'''You are now logged out.''':
+'''你已經登出了。''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''必須有頁面名稱才能建立頁面。''',
 '''Upload new attachment "%(filename)s"''':
 '''上傳新附件 "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -783,6 +843,10 @@ Try a different name.''':
 '''錯誤的插入參數 "%s"！''',
 '''Nothing found for "%s"!''':
 '''找不到 "%s"！''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''MonthCalendar 的 calparms 參數錯誤 "%s"！''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''MonthCalendar 的參數錯誤 "%s"！''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''不支援的導覽方案：\'%(scheme)s\'！''',
 '''No parent page found!''':

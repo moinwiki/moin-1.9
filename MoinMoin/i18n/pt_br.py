@@ -31,6 +31,8 @@ Para usar este formulário em outras páginas, insira uma macro do tipo
 '''Criar Nova Página''',
 '''You are not allowed to view this page.''':
 '''Você não tem permissão para ver esta página!''',
+'''Your changes are not saved!''':
+'''Suas mudanças não foram gravadas!''',
 '''You are not allowed to edit this page.''':
 '''Você não tem permissão para editar esta página!''',
 '''Page is immutable!''':
@@ -83,8 +85,6 @@ Se você discorda, aperte o botão \'\'\'%(cancel_button_text)s\'\'\' para cance
 '''Previsão''',
 '''GUI Mode''':
 '''Visualização Gráfica''',
-'''Your changes are not saved!''':
-'''Suas mudanças não foram gravadas!''',
 '''Comment:''':
 '''Comentário:''',
 '''<No addition>''':
@@ -707,6 +707,12 @@ Tente um nome diferente.''',
 '''Busca Completa de Texto: "%s"''',
 '''Full Link List for "%s"''':
 '''Lista completa de links para "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, informe o nome do usuário e senha.''',
+'''Missing password. Please enter user name and password.''':
+'''Senha não foi informada. Por favor, informe o nome do usuário e senha.''',
+'''Sorry, wrong password.''':
+'''Desculpe. Senha errada.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Não é possível criar uma página sem um nome. Por favor, especifique um nome para a página.''',
 '''Upload new attachment "%(filename)s"''':
