@@ -868,7 +868,7 @@ class convert_tree(visitor):
             result.append('tablestyle="%s"' % node.getAttribute("style"))
         if node.hasAttribute("class"):
             result.append('tableclass="%s"' % node.getAttribute("class"))
-        return " ".join(result)
+        return " ".join(result).strip()
 
     def _row_style(self, node):
         result = []
@@ -884,11 +884,9 @@ class convert_tree(visitor):
                 result.append('rowbgcolor="%s"' % value)
         if node.hasAttribute("style"):
             result.append('rowstyle="%s"' % node.getAttribute("style"))
-        return "".join(result)
+        return " ".join(result).strip()
 
     def _cell_style(self, node):
-        align = ""
-
         if node.hasAttribute("rowspan"):
             rowspan = ("|%s" % node.getAttribute("rowspan"))
         else:
@@ -901,8 +899,8 @@ class convert_tree(visitor):
 
         spanning = rowspan or colspan > 1
         
+        align = ""
         result = []
-
         if  node.hasAttribute("bgcolor"):
             value = node.getAttribute("bgcolor")
             match = re.match(r"rgb\((\d+),\s*(\d+),\s*(\d+)\)", value)
@@ -941,9 +939,7 @@ class convert_tree(visitor):
         if align:
             result[0:0] = "%s" % align
         result.append(rowspan)
-        result = "".join(result)
-        #print result
-        return result
+        return " ".join(result).strip()
 
     def process_table(self, node, style=""):
         self.new_table = True
