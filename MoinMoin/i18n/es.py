@@ -32,8 +32,6 @@ llamada a una macro.-~
 '''Crear una nueva página''',
 '''You are not allowed to view this page.''':
 '''No tienes permisos para ver esta página.''',
-'''Your changes are not saved!''':
-'''¡Tus cambios NO se han grabado!''',
 '''You are not allowed to edit this page.''':
 '''No tienes permisos para editar esta página.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ llamada a una macro.-~
 '''¡No puedes editar versiones antiguas!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''La protección de tu edición ha expirado.¡Podría encontrar algún conflicto de edición!''',
-'''Page name is too long, try shorter name.''':
-'''El nombre de la página es muy largo, intenta usar uno más corto''',
 '''Edit "%(pagename)s"''':
 '''Editar "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus cambios.''',
 '''Preview''':
 '''Vista Previa''',
-'''GUI Mode''':
-'''Modo gráfico''',
 '''Comment:''':
 '''Comentario''',
 '''<No addition>''':
@@ -96,223 +90,6 @@ Si no quieres eso, pulsa \'\'\'%(cancel_button_text)s\'\'\' para cancelar tus ca
 '''Cambio trivial''',
 '''Remove trailing whitespace from each line''':
 '''Eliminar espacios en blanco al final de cada línea''',
-'''Edit was cancelled.''':
-'''Has cancelado tu edición.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Gracias por tus aportes. Se aprecia tu preocupación por los detalles.''',
-'''Page "%s" was successfully deleted!''':
-'''¡La página "%s" se eliminó exitosamente!''',
-'''Dear Wiki user,
-
-You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
-
-The following page has been changed by %(editor)s:
-%(pagelink)s
-
-''':
-'''Estimado Usuario del Wiki,
-
-Te has suscrito a una página o categoría del Wiki en "%(sitename)s" para que te sean notificados los cambios por correo.
-
-La siguiente página ha sido modificada por %(editor)s:
-%(pagelink)s
-
-''',
-'''The comment on the change is:
-%(comment)s
-
-''':
-'''El comentario del cambio es:
-%(comment)s
-
-''',
-'''New page:
-''':
-'''Nueva página:
-''',
-'''No differences found!
-''':
-'''¡No se encontraron diferencias!
-''',
-'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
-'''[%(sitename)s]  Actualización %(trivial)sde "%(pagename)s" por %(username)s''',
-'''Trivial ''':
-'''Trivial ''',
-'''Status of sending notification mails:''':
-'''Estado del envío de e-mails de notificación:''',
-'''[%(lang)s] %(recipients)s: %(status)s''':
-'''[%(lang)s] %(recipients)s: %(status)s''',
-'''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## copia de seguridad la página "%(pagename)s" enviado %(date)s''',
-'''Page could not get locked. Unexpected error (errno=%d).''':
-'''La página no pudo ser protegida para la edición. Ha ocurrido un error inesperado (errno=%d).''',
-'''Page could not get locked. Missing \'current\' file?''':
-'''La página no pudo ser protegida para la edición. No se encuentra el archivo \'current\'''',
-'''You are not allowed to edit this page!''':
-'''¡No tienes permisos para editar esta página!''',
-'''You cannot save empty pages.''':
-'''No puedes guardar páginas vacías.''',
-'''You already saved this page!''':
-'''¡Ya guardaste los cambios de esta página!''',
-'''Sorry, someone else saved the page while you edited it.
-
-Please do the following: Use the back button of your browser, and cut&paste
-your changes from there. Then go forward to here, and click EditText again.
-Now re-add your changes to the current page contents.
-
-\'\'Do not just replace
-the content editbox with your version of the page, because that would
-delete the changes of the other person, which is excessively rude!\'\'
-''':
-'''Lo sentimos, alguien guardó la página mientras la editabas.
-Por favor haz lo siguiente: usa el botón "Volver" de tu navegador, y copia&pega
-los cambios desde allí. Luego, regresa hasta aquí y haz click en EditarTexto nuevamente.
-Ahora vuelve a hacer los cambios sobre los contenidos actualizados de la página.
-
-\'\'¡No sobreescribas el contenido del cuadro de edición con tu
-versión de la página porque eso eliminaría los cambios de la otra persona,
-lo que no reflejaría buena educación!\'\'
-''',
-'''A backup of your changes is [%(backup_url)s here].''':
-'''Una copia de seguridad de tus cambios se encuentra en [%(backup_url)s .''',
-'''You did not change the page content, not saved!''':
-'''¡No has modificado el contenido de la página. Nada que guardar!''',
-'''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''¡No tienes permisos para cambiar el ACL en esta página porque no posees derechos de administrador sobre ella!''',
-'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''El seguro de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha concedido la protección de edición de esta página.''',
-'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''Se \'\'bloqueará\'\' la edición de está página a los otros usuarios hasta %(bumptime)s.''',
-'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''El resto de los usuarios \'\'serán advertidos\'\' hasta %(bumptime)s que estás editando esta página.''',
-'''Use the Preview button to extend the locking period.''':
-'''Usa el botón \'\'Vista Previa\'\' para extender el tiempo de protección.''',
-'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''La edición de esta página se encuentra actualmente \'\'bloqueada\'\' por %(owner)s hasta %(timestamp)s, esto es, durante %(mins_valid)d minuto(s).''',
-'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
-\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
-to avoid editing conflicts.\'\'\'[[BR]]
-To leave the editor, press the Cancel button.''':
-'''Esta página ha sido abierta para editarla o fue previsualizada el %(timestamp)s por %(owner)s.[[BR]]
-\'\'\'Deberías \'\'evitar editar\'\' esta página durante al menos otros %(mins_valid)d minuto(s),
-para evitar conflictos.\'\'\'[[BR]]
-Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
-'''<unknown>''':
-'''<desconocido>''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Énfasis:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrilla cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mezclada \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]] y cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] línea horizontal.
- Encabezados:: [[Verbatim(=)]] Título de nivel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título de nivel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título de nivel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título de nivel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título de nivel 5 [[Verbatim(=====)]].
- Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos numerados; 1.#n comienza la numeración en n; un \'espacio\' produce sangría o indentado.
- Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
- Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de las tablas o los títulos.
-''',
-'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
-<br/><pre>
-Headings: Heading 1  Heading 2  Heading 3
-          =========  ---------  ~~~~~~~~~
-
-Horizontal rule: ---- 
-Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
-
-.. _external: http://external-site.net/foo/
-
-Lists: * bullets; 1., a. numbered items.
-</pre>
-<br/>
-(!) For more help, see the 
-<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
-reStructuredText Quick Reference
-</a>.
-''':
-'''Énfasis: <i>*itálica*</i> <b>**negrilla**</b> ``monoespaciada``<br/>
-<br/><pre>
-Encabezados: Encabezado 1  Encabezado 2  Encabezado 3
-             ============  ------------  ~~~~~~~~~~~~
-
-Línea horizontal: ---- 
-Enlaces: LineaAlPisoFinal_ `varias palabras con comillas`_ externos_ 
-
-.. _externos: http://en-el-exterior.net/foo/
-
-Listas: * viñetas; 1., a. enumeraciones.
-</pre>
-<br/>
-(!) Para obtener más ayuda, ve a 
-<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
-Referencia rápida de reStructuredText
-</a>.
-''',
-'''Diffs''':
-'''Diferencias''',
-'''Info''':
-'''Información''',
-'''Edit''':
-'''Editar''',
-'''UnSubscribe''':
-'''Des-suscribirse''',
-'''Subscribe''':
-'''Suscribirse''',
-'''Raw''':
-'''Sin formato''',
-'''XML''':
-'''XML''',
-'''Print''':
-'''Imprimir''',
-'''View''':
-'''Ver''',
-'''Up''':
-'''Arriba''',
-'''Publish my email (not my wiki homepage) in author info''':
-'''Publicar mi e-Mail (no mi página wiki) en la información de autor''',
-'''Open editor on double click''':
-'''Abrir el editor con doble click''',
-'''Jump to last visited page instead of frontpage''':
-'''Ir a la última página visitada en lugar de la página inicial''',
-'''Show question mark for non-existing pagelinks''':
-'''Mostrar signo de interrogación en enlaces a páginas inexistentes''',
-'''Show page trail''':
-'''Mostrar \'\'camino\'\' de últimas páginas visitadas''',
-'''Show icon toolbar''':
-'''Mostrar íconos de la barra de herramientas''',
-'''Show top/bottom links in headings''':
-'''Mostrar enlaces arriba/abajo en las cabeceras''',
-'''Show fancy diffs''':
-'''Mostrar diferencias adornadas''',
-'''Add spaces to displayed wiki names''':
-'''Añadir espacios entre los NombresWiki mostrados''',
-'''Remember login information''':
-'''Recordar tu información de ingreso (no será necesario volver a ingresar usuario y password, pero puede ser un problema de seguridad en computadoras compartidas)''',
-'''Subscribe to trivial changes''':
-'''Avisar de cualquier cambio de contenido (incluso los triviales)''',
-'''Disable this account forever''':
-'''Desactivar esta cuenta para siempre (usualmente, sólo lo hace un administrador)''',
-'''Name''':
-'''Nombre''',
-'''(Use Firstname\'\'\'\'\'\'Lastname)''':
-'''(Usa Nombre\'\'\'\'\'\'Apellido \'\'\'pegados\'\'\' y con Mayúsculas en las iniciales para hacer un NombreWiki)''',
-'''Alias-Name''':
-'''Alias-Nombre''',
-'''Password''':
-'''Contraseña''',
-'''Password repeat''':
-'''Repetir contraseña para validarla''',
-'''(Only when changing passwords)''':
-'''(Sólo cuando cambies tu contraseña)''',
-'''Email''':
-'''e-Mail''',
-'''User CSS URL''':
-'''URL de CSS del usuario (si no sabes qué es CSS, déjala en blanco)''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Vacío para desactivar el CSS del usuario)''',
-'''Editor size''':
-'''Tamaño del Editor''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -333,6 +110,8 @@ de un espacio entre palabras (no recomendado). No se permite usar la palabra Gru
 '''coincidencia''',
 '''matches''':
 '''coincidencias''',
+'''<unknown>''':
+'''<desconocido>''',
 '''Login Name: %s
 
 Login Password: %s
@@ -434,10 +213,315 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Crear perfil de Usuario''',
 '''Mail me my account data''':
 '''Envíame los datos de mi cuenta ''',
+'''Email''':
+'''e-Mail''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
 '''Para crear una cuenta o recuperar una contraseña olvidada, vea la página %(userprefslink)s''',
+'''Name''':
+'''Nombre''',
+'''Password''':
+'''Contraseña''',
 '''Action''':
 '''Acción''',
+'''Required attribute "%(attrname)s" missing''':
+'''Falta el atributo requerido "%(attrname)s"''',
+'''Submitted form data:''':
+'''Formulario de información enviado:''',
+'''Search Titles''':
+'''Búsqueda por títulos''',
+'''Display context of search results''':
+'''Mostrar el contexto de los resultados de la búsqueda''',
+'''Case-sensitive searching''':
+'''Búsqueda sensible a mayúsculas y minúsculas''',
+'''Search Text''':
+'''Búsqueda por texto''',
+'''Go To Page''':
+'''Ir a la página''',
+'''Include system pages''':
+'''Incluir páginas del sistema''',
+'''Exclude system pages''':
+'''Excluir páginas del sistema''',
+'''Plain title index''':
+'''Índice de títulos en texto plano''',
+'''XML title index''':
+'''Índice de Títulos en XML''',
+'''Python Version''':
+'''Versión de Python''',
+'''MoinMoin Version''':
+'''Versión de MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Versión (release) %s [Revisión %s]''',
+'''4Suite Version''':
+'''Versión de 4Suite''',
+'''Number of pages''':
+'''Cantidad de páginas''',
+'''Number of system pages''':
+'''Cantidad de páginas del sistema''',
+'''Accumulated page sizes''':
+'''Tamaño acumulado de las páginas''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Disco usado por %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Disco usado por %(data_dir)s/''',
+'''Entries in edit log''':
+'''Entradas en el registro de edición''',
+'''NONE''':
+'''NINGUNO''',
+'''Global extension macros''':
+'''Macros de extensión global''',
+'''Local extension macros''':
+'''Macros de extensión local''',
+'''Global extension actions''':
+'''Acciones de extensión global''',
+'''Local extension actions''':
+'''Acciones de extensión local''',
+'''Global parsers''':
+'''Parsers globales''',
+'''Local extension parsers''':
+'''Parsers de extensión local''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Procesadores instalados (OBSOLETO -- mejor utilice Parsers)''',
+'''Disabled''':
+'''Desactivado''',
+'''Enabled''':
+'''Activado''',
+'''Lupy search''':
+'''Búsqueda''',
+'''Active threads''':
+'''Hilos (conversaciones) activos''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Por favor, usa un término de búsqueda más específico que {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''ERROR en regex \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Marca de fecha-hora errónea \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Se espera "=" luego de "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Se esperaba un valor para la llave "%(token)s"''',
+'''Wiki Markup''':
+'''Formato Wiki''',
+'''Print View''':
+'''Vista de impresión''',
+'''Your changes are not saved!''':
+'''¡Tus cambios NO se han grabado!''',
+'''Page name is too long, try shorter name.''':
+'''El nombre de la página es muy largo, intenta usar uno más corto''',
+'''GUI Mode''':
+'''Modo gráfico''',
+'''Edit was cancelled.''':
+'''Has cancelado tu edición.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Gracias por tus aportes. Se aprecia tu preocupación por los detalles.''',
+'''Page "%s" was successfully deleted!''':
+'''¡La página "%s" se eliminó exitosamente!''',
+'''Dear Wiki user,
+
+You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
+
+The following page has been changed by %(editor)s:
+%(pagelink)s
+
+''':
+'''Estimado Usuario del Wiki,
+
+Te has suscrito a una página o categoría del Wiki en "%(sitename)s" para que te sean notificados los cambios por correo.
+
+La siguiente página ha sido modificada por %(editor)s:
+%(pagelink)s
+
+''',
+'''The comment on the change is:
+%(comment)s
+
+''':
+'''El comentario del cambio es:
+%(comment)s
+
+''',
+'''New page:
+''':
+'''Nueva página:
+''',
+'''No differences found!
+''':
+'''¡No se encontraron diferencias!
+''',
+'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
+'''[%(sitename)s]  Actualización %(trivial)sde "%(pagename)s" por %(username)s''',
+'''Trivial ''':
+'''Trivial ''',
+'''Status of sending notification mails:''':
+'''Estado del envío de e-mails de notificación:''',
+'''[%(lang)s] %(recipients)s: %(status)s''':
+'''[%(lang)s] %(recipients)s: %(status)s''',
+'''## backup of page "%(pagename)s" submitted %(date)s''':
+'''## copia de seguridad la página "%(pagename)s" enviado %(date)s''',
+'''Page could not get locked. Unexpected error (errno=%d).''':
+'''La página no pudo ser protegida para la edición. Ha ocurrido un error inesperado (errno=%d).''',
+'''Page could not get locked. Missing \'current\' file?''':
+'''La página no pudo ser protegida para la edición. No se encuentra el archivo \'current\'''',
+'''You are not allowed to edit this page!''':
+'''¡No tienes permisos para editar esta página!''',
+'''You cannot save empty pages.''':
+'''No puedes guardar páginas vacías.''',
+'''You already saved this page!''':
+'''¡Ya guardaste los cambios de esta página!''',
+'''Sorry, someone else saved the page while you edited it.
+
+Please do the following: Use the back button of your browser, and cut&paste
+your changes from there. Then go forward to here, and click EditText again.
+Now re-add your changes to the current page contents.
+
+\'\'Do not just replace
+the content editbox with your version of the page, because that would
+delete the changes of the other person, which is excessively rude!\'\'
+''':
+'''Lo sentimos, alguien guardó la página mientras la editabas.
+Por favor haz lo siguiente: usa el botón "Volver" de tu navegador, y copia&pega
+los cambios desde allí. Luego, regresa hasta aquí y haz click en EditarTexto nuevamente.
+Ahora vuelve a hacer los cambios sobre los contenidos actualizados de la página.
+
+\'\'¡No sobreescribas el contenido del cuadro de edición con tu
+versión de la página porque eso eliminaría los cambios de la otra persona,
+lo que no reflejaría buena educación!\'\'
+''',
+'''A backup of your changes is [%(backup_url)s here].''':
+'''Una copia de seguridad de tus cambios se encuentra en [%(backup_url)s .''',
+'''You did not change the page content, not saved!''':
+'''¡No has modificado el contenido de la página. Nada que guardar!''',
+'''You can\'t change ACLs on this page since you have no admin rights on it!''':
+'''¡No tienes permisos para cambiar el ACL en esta página porque no posees derechos de administrador sobre ella!''',
+'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
+'''El seguro de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha concedido la protección de edición de esta página.''',
+'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
+'''Se \'\'bloqueará\'\' la edición de está página a los otros usuarios hasta %(bumptime)s.''',
+'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
+'''El resto de los usuarios \'\'serán advertidos\'\' hasta %(bumptime)s que estás editando esta página.''',
+'''Use the Preview button to extend the locking period.''':
+'''Usa el botón \'\'Vista Previa\'\' para extender el tiempo de protección.''',
+'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
+'''La edición de esta página se encuentra actualmente \'\'bloqueada\'\' por %(owner)s hasta %(timestamp)s, esto es, durante %(mins_valid)d minuto(s).''',
+'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
+\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
+to avoid editing conflicts.\'\'\'[[BR]]
+To leave the editor, press the Cancel button.''':
+'''Esta página ha sido abierta para editarla o fue previsualizada el %(timestamp)s por %(owner)s.[[BR]]
+\'\'\'Deberías \'\'evitar editar\'\' esta página durante al menos otros %(mins_valid)d minuto(s),
+para evitar conflictos.\'\'\'[[BR]]
+Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''La instalación de \'%(filename)s\' falló.''',
+'''The file %s is not a MoinMoin package file.''':
+'''El archivo %s no es un paquete de MoinMoin''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Énfasis:: [[Verbatim(\'\')]]\'\'cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'negrilla cursiva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mezclada \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'negrilla\'\'\'[[Verbatim(\'\'\')]] y cursiva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] línea horizontal.
+ Encabezados:: [[Verbatim(=)]] Título de nivel 1 [[Verbatim(=)]]; [[Verbatim(==)]] Título de nivel 2 [[Verbatim(==)]]; [[Verbatim(===)]] Título de nivel 3 [[Verbatim(===)]];   [[Verbatim(====)]] Título de nivel 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Título de nivel 5 [[Verbatim(=====)]].
+ Listas:: espacio y uno de estos: * viñetas; 1., a., A., i., I. elementos numerados; 1.#n comienza la numeración en n; un \'espacio\' produce sangría o indentado.
+ Enlaces:: [[Verbatim(JuntaPalabrasConMayúscula)]]; [[Verbatim(["corchetes y comillas dobles"])]]; url; [url]; [url etiqueta].
+ Tablas:: || texto de celda |||| texto de celda que ocupa dos columnas ||;    no se permiten espacios después de las tablas o los títulos.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Énfasis: <i>*itálica*</i> <b>**negrilla**</b> ``monoespaciada``<br/>
+<br/><pre>
+Encabezados: Encabezado 1  Encabezado 2  Encabezado 3
+             ============  ------------  ~~~~~~~~~~~~
+
+Línea horizontal: ---- 
+Enlaces: LineaAlPisoFinal_ `varias palabras con comillas`_ externos_ 
+
+.. _externos: http://en-el-exterior.net/foo/
+
+Listas: * viñetas; 1., a. enumeraciones.
+</pre>
+<br/>
+(!) Para obtener más ayuda, ve a 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+Referencia rápida de reStructuredText
+</a>.
+''',
+'''Diffs''':
+'''Diferencias''',
+'''Info''':
+'''Información''',
+'''Edit''':
+'''Editar''',
+'''UnSubscribe''':
+'''Des-suscribirse''',
+'''Subscribe''':
+'''Suscribirse''',
+'''Raw''':
+'''Sin formato''',
+'''XML''':
+'''XML''',
+'''Print''':
+'''Imprimir''',
+'''View''':
+'''Ver''',
+'''Up''':
+'''Arriba''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publicar mi e-Mail (no mi página wiki) en la información de autor''',
+'''Open editor on double click''':
+'''Abrir el editor con doble click''',
+'''Jump to last visited page instead of frontpage''':
+'''Ir a la última página visitada en lugar de la página inicial''',
+'''Show question mark for non-existing pagelinks''':
+'''Mostrar signo de interrogación en enlaces a páginas inexistentes''',
+'''Show page trail''':
+'''Mostrar \'\'camino\'\' de últimas páginas visitadas''',
+'''Show icon toolbar''':
+'''Mostrar íconos de la barra de herramientas''',
+'''Show top/bottom links in headings''':
+'''Mostrar enlaces arriba/abajo en las cabeceras''',
+'''Show fancy diffs''':
+'''Mostrar diferencias adornadas''',
+'''Add spaces to displayed wiki names''':
+'''Añadir espacios entre los NombresWiki mostrados''',
+'''Remember login information''':
+'''Recordar tu información de ingreso (no será necesario volver a ingresar usuario y password, pero puede ser un problema de seguridad en computadoras compartidas)''',
+'''Subscribe to trivial changes''':
+'''Avisar de cualquier cambio de contenido (incluso los triviales)''',
+'''Disable this account forever''':
+'''Desactivar esta cuenta para siempre (usualmente, sólo lo hace un administrador)''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Usa Nombre\'\'\'\'\'\'Apellido \'\'\'pegados\'\'\' y con Mayúsculas en las iniciales para hacer un NombreWiki)''',
+'''Alias-Name''':
+'''Alias-Nombre''',
+'''Password repeat''':
+'''Repetir contraseña para validarla''',
+'''(Only when changing passwords)''':
+'''(Sólo cuando cambies tu contraseña)''',
+'''User CSS URL''':
+'''URL de CSS del usuario (si no sabes qué es CSS, déjala en blanco)''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Vacío para desactivar el CSS del usuario)''',
+'''Editor size''':
+'''Tamaño del Editor''',
 '''No older revisions available!''':
 '''¡No hay revisiones anteriores disponibles!''',
 '''Diff for "%s"''':
@@ -536,82 +620,80 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Debes indicar un tipo de gráfico''',
 '''Bad chart type "%s"!''':
 '''¡Tipo de gráfico incorrecto "%s"!''',
-'''Search Titles''':
-'''Búsqueda por títulos''',
-'''Display context of search results''':
-'''Mostrar el contexto de los resultados de la búsqueda''',
-'''Case-sensitive searching''':
-'''Búsqueda sensible a mayúsculas y minúsculas''',
-'''Search Text''':
-'''Búsqueda por texto''',
-'''Go To Page''':
-'''Ir a la página''',
-'''Include system pages''':
-'''Incluir páginas del sistema''',
-'''Exclude system pages''':
-'''Excluir páginas del sistema''',
-'''Plain title index''':
-'''Índice de títulos en texto plano''',
-'''XML title index''':
-'''Índice de Títulos en XML''',
-'''Python Version''':
-'''Versión de Python''',
-'''MoinMoin Version''':
-'''Versión de MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Versión (release) %s [Revisión %s]''',
-'''4Suite Version''':
-'''Versión de 4Suite''',
-'''Number of pages''':
-'''Cantidad de páginas''',
-'''Number of system pages''':
-'''Cantidad de páginas del sistema''',
-'''Accumulated page sizes''':
-'''Tamaño acumulado de las páginas''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''Disco usado por %(data_dir)s/pages/''',
-'''Disk usage of %(data_dir)s/''':
-'''Disco usado por %(data_dir)s/''',
-'''Entries in edit log''':
-'''Entradas en el registro de edición''',
-'''NONE''':
-'''NINGUNO''',
-'''Global extension macros''':
-'''Macros de extensión global''',
-'''Local extension macros''':
-'''Macros de extensión local''',
-'''Global extension actions''':
-'''Acciones de extensión global''',
-'''Local extension actions''':
-'''Acciones de extensión local''',
-'''Global parsers''':
-'''Parsers globales''',
-'''Local extension parsers''':
-'''Parsers de extensión local''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Procesadores instalados (OBSOLETO -- mejor utilice Parsers)''',
-'''Disabled''':
-'''Desactivado''',
-'''Enabled''':
-'''Activado''',
-'''Lupy search''':
-'''Búsqueda''',
-'''Active threads''':
-'''Hilos (conversaciones) activos''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Por favor, usa un término de búsqueda más específico que {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''ERROR en regex \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Marca de fecha-hora errónea \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Se espera "=" luego de "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Se esperaba un valor para la llave "%(token)s"''',
-'''Wiki Markup''':
-'''Formato Wiki''',
-'''Print View''':
-'''Vista de impresión''',
+'''This page is already deleted or was never created!''':
+'''Esta página ya ha sido borrada o nunca se creó''',
+'''No pages like "%s"!''':
+'''Ninguna página similar a "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''El adjunto \'%(target)s\' (nombre remoto \'%(filename)s\') ya existe.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
+'''Missing password. Please enter user name and password.''':
+'''Faltó ingresar la password. Por favor, ingresa el nombre de usuario y password''',
+'''Sorry, wrong password.''':
+'''Lo lamento, clave errónea''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Se encontró una sola página similar a "%s" encontrada. Redireccionando a esa página.''',
+'''Pages like "%s"''':
+'''Páginas similares a "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s de "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Mapa local del sitio "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''¡No tienes permisos para renombrar páginas en este wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''¡Por favor, usa la interfaz de usuario interactiva para renombrar páginas!''',
+'''Could not rename page because of file system error: %s.''':
+'''No se pudo renombrar la página debido a error del sitema de archivos: %s.''',
+'''Rename Page''':
+'''Renombrar Página''',
+'''New name''':
+'''Nombre nuevo''',
+'''Optional reason for the renaming''':
+'''Razón para renombrar (opcional)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Ya existe un página con el nombre {{{\'%s\'}}} \'\'\'
+
+Intenta con un nombre distinto.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(incluídas %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Las siguientes %(badwords)d palabras no fueron encontradas en el diccionario de %(totalwords)d palabras%(localwords)s y aparecen marcadas abajo:''',
+'''Add checked words to dictionary''':
+'''Añadir palabras seleccionadas al diccionario''',
+'''No spelling errors found!''':
+'''¡No se encontraron errores de ortografía!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''No puedes realizar corrección ortográfica en una página que no puedes leer.''',
+'''Title Search: "%s"''':
+'''Buscar por título: "%s"''',
+'''Full Text Search: "%s"''':
+'''Búsqueda en contenidos: "%s"''',
+'''Full Link List for "%s"''':
+'''Lista completa de enlaces para "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
+'''Subscribe users to the page %s''':
+'''Suscribir usuarios a la página %s''',
+'''Subscribed for %s:''':
+'''Suscrit@ en %s:''',
+'''Not a user:''':
+'''No es un usuario:''',
+'''You are not allowed to perform this action.''':
+'''No tienes permisos para hacer esta acción.''',
+'''You are not allowed to delete this page.''':
+'''No tienes permisos para borrar esta página.''',
+'''Please use the interactive user interface to delete pages!''':
+'''¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!''',
+'''Really delete this page?''':
+'''¿Realmente deseas eliminar esta página?''',
+'''Delete''':
+'''Eliminar''',
+'''Optional reason for the deletion''':
+'''Razón para la eliminación (opcional)''',
 '''[%d attachments]''':
 '''[%d adjuntos]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -673,18 +755,12 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''La acción para subir archivos al servidor no está soportada: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Adjuntos para "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''El adjunto \'%(target)s\' (nombre remoto \'%(filename)s\') ya existe.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Adjunto \'%(target)s\' (nombre remoto \'%(filename)s\') con %(bytes)d bytes se guardó.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''El adjunto \'%(filename)s\' fue eliminado.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''El adjunto \'%(filename)s\' fue instalado.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''La instalación de \'%(filename)s\' falló.''',
-'''The file %s is not a MoinMoin package file.''':
-'''El archivo %s no es un paquete de MoinMoin''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''El adjunto \'%(filename)s\' no pudo ser descomprimido porque los archivos resultantes serían demasiado largos (faltan %(space)d kB de espacio en disco).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -707,78 +783,6 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''Tipo de archivo desconocido, no se puede mostrar este adjunto.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''adjunto:%(filename)s de %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''No tienes permisos para borrar esta página.''',
-'''This page is already deleted or was never created!''':
-'''Esta página ya ha sido borrada o nunca se creó''',
-'''Please use the interactive user interface to delete pages!''':
-'''¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!''',
-'''Really delete this page?''':
-'''¿Realmente deseas eliminar esta página?''',
-'''Delete''':
-'''Eliminar''',
-'''Optional reason for the deletion''':
-'''Razón para la eliminación (opcional)''',
-'''No pages like "%s"!''':
-'''Ninguna página similar a "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Se encontró una sola página similar a "%s" encontrada. Redireccionando a esa página.''',
-'''Pages like "%s"''':
-'''Páginas similares a "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s de "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Mapa local del sitio "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''¡No tienes permisos para renombrar páginas en este wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''¡Por favor, usa la interfaz de usuario interactiva para renombrar páginas!''',
-'''Could not rename page because of file system error: %s.''':
-'''No se pudo renombrar la página debido a error del sitema de archivos: %s.''',
-'''Rename Page''':
-'''Renombrar Página''',
-'''New name''':
-'''Nombre nuevo''',
-'''Optional reason for the renaming''':
-'''Razón para renombrar (opcional)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Ya existe un página con el nombre {{{\'%s\'}}} \'\'\'
-
-Intenta con un nombre distinto.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(incluídas %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Las siguientes %(badwords)d palabras no fueron encontradas en el diccionario de %(totalwords)d palabras%(localwords)s y aparecen marcadas abajo:''',
-'''Add checked words to dictionary''':
-'''Añadir palabras seleccionadas al diccionario''',
-'''No spelling errors found!''':
-'''¡No se encontraron errores de ortografía!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''No puedes realizar corrección ortográfica en una página que no puedes leer.''',
-'''Subscribe users to the page %s''':
-'''Suscribir usuarios a la página %s''',
-'''Subscribed for %s:''':
-'''Suscrit@ en %s:''',
-'''Not a user:''':
-'''No es un usuario:''',
-'''You are not allowed to perform this action.''':
-'''No tienes permisos para hacer esta acción.''',
-'''Title Search: "%s"''':
-'''Buscar por título: "%s"''',
-'''Full Text Search: "%s"''':
-'''Búsqueda en contenidos: "%s"''',
-'''Full Link List for "%s"''':
-'''Lista completa de enlaces para "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
-'''Missing password. Please enter user name and password.''':
-'''Faltó ingresar la password. Por favor, ingresa el nombre de usuario y password''',
-'''Sorry, wrong password.''':
-'''Lo lamento, clave errónea''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''No es posible crear una página sin nombre. Por favor, dále un nombre a la página.''',
 '''Upload new attachment "%(filename)s"''':
 '''Subir nuevo adjunto "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -787,10 +791,56 @@ Intenta con un nombre distinto.''',
 '''Editar dibujo %(filename)s''',
 '''Toggle line numbers''':
 '''[des]activar nros. de línea''',
-'''Invalid include arguments "%s"!''':
-'''Argumentos include no válidos "%s"!''',
-'''Nothing found for "%s"!''':
-'''¡No se encontraron coincidencias de "%s"!''',
+'''FrontPage''':
+'''PáginaInicial''',
+'''RecentChanges''':
+'''CambiosRecientes''',
+'''TitleIndex''':
+'''ÍndicePorTítulos''',
+'''WordIndex''':
+'''ÍndicePorPalabras''',
+'''FindPage''':
+'''BuscarPágina''',
+'''SiteNavigation''':
+'''NavegaciónDelSitio''',
+'''HelpContents''':
+'''ContenidosDeAyuda''',
+'''HelpOnFormatting''':
+'''AyudaSobreFormato''',
+'''UserPreferences''':
+'''PreferenciasDelUsuario''',
+'''WikiLicense''':
+'''LicenciaWiki''',
+'''MissingPage''':
+'''PáginaInexistente''',
+'''MissingHomePage''':
+'''PáginaPersonalInexistente''',
+'''Mon''':
+'''Lun''',
+'''Tue''':
+'''Mar''',
+'''Wed''':
+'''Mié''',
+'''Thu''':
+'''Jue''',
+'''Fri''':
+'''Vie''',
+'''Sat''':
+'''Sáb''',
+'''Sun''':
+'''Dom''',
+'''AttachFile''':
+'''AdjuntarArchivo''',
+'''DeletePage''':
+'''EliminarPágina''',
+'''LikePages''':
+'''PáginasSimilares''',
+'''LocalSiteMap''':
+'''MapaDelSitio''',
+'''RenamePage''':
+'''RenombrarPágina''',
+'''SpellCheck''':
+'''CorrecciónOrtográfica''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''¡Esquema de navegación \'%(scheme)s\' no soportado!''',
 '''No parent page found!''':
@@ -825,14 +875,18 @@ Intenta con un nombre distinto.''',
 '''establecer enlace personal''',
 '''[Bookmark reached]''':
 '''[enlace personal alcanzado]''',
+'''No wanted pages in this wiki.''':
+'''No existen páginas-por-crear en este wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Argumentos include no válidos "%s"!''',
+'''Nothing found for "%s"!''':
+'''¡No se encontraron coincidencias de "%s"!''',
 '''Markup''':
 '''Formato''',
 '''Display''':
 '''Mostrar''',
 '''Filename''':
 '''Nombre de archivo''',
-'''No wanted pages in this wiki.''':
-'''No existen páginas-por-crear en este wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''No se pudo mostrar el texto reEstructurado, por favor instala docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -981,54 +1035,4 @@ rojo=editar''',
 '''e-Mail NO enviado''',
 '''Mail sent OK''':
 '''e-Mail enviado OK''',
-'''FrontPage''':
-'''PáginaInicial''',
-'''RecentChanges''':
-'''CambiosRecientes''',
-'''TitleIndex''':
-'''ÍndicePorTítulos''',
-'''WordIndex''':
-'''ÍndicePorPalabras''',
-'''FindPage''':
-'''BuscarPágina''',
-'''SiteNavigation''':
-'''NavegaciónDelSitio''',
-'''HelpContents''':
-'''ContenidosDeAyuda''',
-'''HelpOnFormatting''':
-'''AyudaSobreFormato''',
-'''UserPreferences''':
-'''PreferenciasDelUsuario''',
-'''WikiLicense''':
-'''LicenciaWiki''',
-'''MissingPage''':
-'''PáginaInexistente''',
-'''MissingHomePage''':
-'''PáginaPersonalInexistente''',
-'''Mon''':
-'''Lun''',
-'''Tue''':
-'''Mar''',
-'''Wed''':
-'''Mié''',
-'''Thu''':
-'''Jue''',
-'''Fri''':
-'''Vie''',
-'''Sat''':
-'''Sáb''',
-'''Sun''':
-'''Dom''',
-'''AttachFile''':
-'''AdjuntarArchivo''',
-'''DeletePage''':
-'''EliminarPágina''',
-'''LikePages''':
-'''PáginasSimilares''',
-'''LocalSiteMap''':
-'''MapaDelSitio''',
-'''RenamePage''':
-'''RenombrarPágina''',
-'''SpellCheck''':
-'''CorrecciónOrtográfica''',
 }

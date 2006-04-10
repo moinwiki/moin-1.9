@@ -32,8 +32,6 @@ volání makra.-~
 '''Vytvořit novou stránku''',
 '''You are not allowed to view this page.''':
 '''Nemáte dovoleno prohlížet tuto stránku.''',
-'''Your changes are not saved!''':
-'''Provedené změny nejsou uloženy!''',
 '''You are not allowed to edit this page.''':
 '''Nemáte dovoleno editovat tuto stránku.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ volání makra.-~
 '''Staré verze se nedají editovat''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Váš časový zámek vypršel, buďte připraveni na možné editační spory!''',
-'''Page name is too long, try shorter name.''':
-'''Název stránky je příliš dlouhý, zvolte kratší název.''',
 '''Edit "%(pagename)s"''':
 '''Editovat "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše změny se neuloží.''',
 '''Preview''':
 '''Náhled''',
-'''GUI Mode''':
-'''GUI Mód''',
 '''Comment:''':
 '''Komentář:''',
 '''<No addition>''':
@@ -96,220 +90,6 @@ Pokud si to nepřejete, klikněte na \'\'\'%(cancel_button_text)s\'\'\', a Vaše
 '''Minimální změna''',
 '''Remove trailing whitespace from each line''':
 '''Odstraň koncové mezery u každého řádku''',
-'''Edit was cancelled.''':
-'''Editace byla zrušena.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku.''',
-'''Page "%s" was successfully deleted!''':
-'''Stránka "%s" byla úspěšně smazána!''',
-'''Dear Wiki user,
-
-You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
-
-The following page has been changed by %(editor)s:
-%(pagelink)s
-
-''':
-'''Vážený uživateli Wiki,
-
-Objednal jste si zasílání změn wiki stránky nebo kategorie na "%(sitename)s" .
-
-Následující stránku změnil uživatel %(editor)s:
-%(pagelink)s
-
-''',
-'''The comment on the change is:
-%(comment)s
-
-''':
-'''Komentář ke změně zní:
-%(comment)s
-
-''',
-'''New page:
-''':
-'''Nová stránka:
-''',
-'''No differences found!
-''':
-'''Nenalezeny žádné změny!
-''',
-'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
-'''[%(sitename)s] %(trivial)sZměna stránky "%(pagename)s" uživatelem %(username)s''',
-'''Trivial ''':
-'''Minimální ''',
-'''Status of sending notification mails:''':
-'''Stav zaslání oznamovacích emailů:''',
-'''[%(lang)s] %(recipients)s: %(status)s''':
-'''[%(lang)s] %(recipients)s: %(status)s''',
-'''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## záloha stránky "%(pagename)s" od %(date)s''',
-'''Page could not get locked. Unexpected error (errno=%d).''':
-'''Stránka se nedá zamknout. Neočekávaná chyba (errno=%d).''',
-'''Page could not get locked. Missing \'current\' file?''':
-'''Stránka se nedá zamknout. Chybějící soubor \'current\'?''',
-'''You are not allowed to edit this page!''':
-'''Nemáte oprávnění editovat tuto stránku!''',
-'''You cannot save empty pages.''':
-'''Prázdné stránky nelze ukládat!''',
-'''You already saved this page!''':
-'''Stránka je již uložena!''',
-'''Sorry, someone else saved the page while you edited it.
-
-Please do the following: Use the back button of your browser, and cut&paste
-your changes from there. Then go forward to here, and click EditText again.
-Now re-add your changes to the current page contents.
-
-\'\'Do not just replace
-the content editbox with your version of the page, because that would
-delete the changes of the other person, which is excessively rude!\'\'
-''':
-'''Sorry, někdo jiný uložil tuto stránku, zatímco vy jste editoval.
-
-Prosíme o následující: Vraťte se pomocí tlačítka Zpět ve vašem prohlížeči a použijte Vyjmout na vaše změny. Vraťte se pak zpátky sem a klikněte znovu na Editace. Vložte ze schránky Vaše změny k aktuálnímu obsahu.
-\'\'Nenahrazujte celý obsah vaší verzí stránky, protože byste tak smazali změny jiného člověka, což je velmi nezdvořilé!\'\'
-''',
-'''A backup of your changes is [%(backup_url)s here].''':
-'''Záložní kopie Vašich změn je [%(backup_url)s zde].''',
-'''You did not change the page content, not saved!''':
-'''Neudělal jste žádnou změnu, stránka neuložena!''',
-'''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Nemůžete měnit žádná ACL práva na této stránce, protože nemáte práva admin''',
-'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Zámek uživatele %(owner)s vypršel před %(mins_ago)d minutami. Nyní máte Vy zajištěn zámek na tuto stránku.''',
-'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''Ostatní uživatelé \'\'nebudou moci změnit\'\' tuto stránku až do %(bumptime)s.''',
-'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Ostatní uživatelé budou \'\'varováni\'\' až do %(bumptime)s, že tuto stránku nyní editujete Vy.''',
-'''Use the Preview button to extend the locking period.''':
-'''Použijte tlačítko Náhled na prodloužení doby zamčení stránky.''',
-'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''Tato stránka je nyní \'\'zamčena\'\' kvůli editaci uživatele %(owner)s až do %(timestamp)s, tzn. na maximálně dalších %(mins_valid)d minut.''',
-'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
-\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
-to avoid editing conflicts.\'\'\'[[BR]]
-To leave the editor, press the Cancel button.''':
-'''Tato stránka byla otevřena na editaci v %(timestamp)s uživatelem %(owner)s.  [[BR]]
-\'\'\'Neměli byste tuto stránku dalších nejméně  %(mins_valid)d Minute(n) \'\'editovat\'\', aby nedošlo ke konfiktu verzí.\'\'\'[[BR]]
-Stiskněte tlačítko Zrušit na opuštění editoru.''',
-'''<unknown>''':
-'''<neznámý>''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Zvýraznění:: [[Verbatim(\'\')]]\'\'kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'tučně kurzíva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'smíšené \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]] a kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vodorovná čára.
- Nadpisy:: [[Verbatim(=)]] Nadpis 1 [[Verbatim(=)]]; [[Verbatim(==)]] Nadpis 2 [[Verbatim(==)]]; [[Verbatim(===)]] Nadpis 3 [[Verbatim(===)]];   [[Verbatim(====)]] Nadpis 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Nadpis 5 [[Verbatim(=====)]].
- Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.
- Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim(["hranaté závorky a dvojité uvozovky"])]]; url; [url]; [url text].
- Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny mezery za nadpisy a tabulkami.
-
-(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
-''',
-'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
-<br/><pre>
-Headings: Heading 1  Heading 2  Heading 3
-          =========  ---------  ~~~~~~~~~
-
-Horizontal rule: ---- 
-Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
-
-.. _external: http://external-site.net/foo/
-
-Lists: * bullets; 1., a. numbered items.
-</pre>
-<br/>
-(!) For more help, see the 
-<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
-reStructuredText Quick Reference
-</a>.
-''':
-'''Zvýraznění: <i>*kurzíva*</i> <b>**tučně</b> ``monospace``<br/>
-<br/><pre>
-Nadpisy: Nadpis 1  Nadpis 2  Nadpis 3
-         ========  --------  ~~~~~~~~
-
-Vodorovná linka: ---- 
-Odkazy: PřipojenéPodtržítko_ `více slov ve zpětném apostrofu`_ external_ 
-
-.. _external: http://external-site.net/foo/
-
-Seznamy: * bodové odrážky; 1., a. číslované seznamy.
-</pre>
-<br/>
-(!) Více informací viz 
-<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
-reStructuredText Quick Reference
-</a>.
-''',
-'''Diffs''':
-'''Rozdíly''',
-'''Info''':
-'''Info''',
-'''Edit''':
-'''Editovat''',
-'''UnSubscribe''':
-'''Odhlásit''',
-'''Subscribe''':
-'''Odebírat''',
-'''Raw''':
-'''Zdroj''',
-'''XML''':
-'''XML''',
-'''Print''':
-'''Tisk''',
-'''View''':
-'''Náhled''',
-'''Up''':
-'''Nahoru''',
-'''Publish my email (not my wiki homepage) in author info''':
-'''Publikovat email v informacích o autorovi (místo domovské wiki stránky)''',
-'''Open editor on double click''':
-'''Otevřít editor dvojklikem''',
-'''Jump to last visited page instead of frontpage''':
-'''Jít na naposledy navštívenou stránku místo na hlavní stránku''',
-'''Show question mark for non-existing pagelinks''':
-'''Zobrazit otazník u neexistujících odkazů''',
-'''Show page trail''':
-'''Zobrazit stopu stránek''',
-'''Show icon toolbar''':
-'''Zobrazit lištu s ikonami''',
-'''Show top/bottom links in headings''':
-'''Zobrazit u Nadpisů odkazy nahoru/dolu''',
-'''Show fancy diffs''':
-'''Zobrazit rozdíly pestře''',
-'''Add spaces to displayed wiki names''':
-'''Vkládat mezery do zobrazovaných Wiki Jmen''',
-'''Remember login information''':
-'''Zapamatuj si mne''',
-'''Subscribe to trivial changes''':
-'''Odebírat při minimálních změnách''',
-'''Disable this account forever''':
-'''Zablokovat navždy tento účet''',
-'''Name''':
-'''Jméno''',
-'''(Use Firstname\'\'\'\'\'\'Lastname)''':
-'''(Použijte Jmeno``Prijmeni)''',
-'''Alias-Name''':
-'''Alias''',
-'''Password''':
-'''Heslo''',
-'''Password repeat''':
-'''Opakovat heslo''',
-'''(Only when changing passwords)''':
-'''(Jen při změně hesla)''',
-'''Email''':
-'''Email''',
-'''User CSS URL''':
-'''URL vlastního CSS''',
-'''(Leave it empty for disabling user CSS)''':
-'''(Nechte prázdné, nechcete-li využít vlastní CSS)''',
-'''Editor size''':
-'''Velikost editoru''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -329,6 +109,8 @@ Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou meze
 '''nález''',
 '''matches''':
 '''nálezů''',
+'''<unknown>''':
+'''<neznámý>''',
 '''Login Name: %s
 
 Login Password: %s
@@ -428,10 +210,312 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Vytvořit profil''',
 '''Mail me my account data''':
 '''Zašli mi má data k účtu''',
+'''Email''':
+'''Email''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
 '''Vytvořit účet nebo zjistit zapomenuté heslo lze v %(userprefslink)s.''',
+'''Name''':
+'''Jméno''',
+'''Password''':
+'''Heslo''',
 '''Action''':
 '''Akce''',
+'''Required attribute "%(attrname)s" missing''':
+'''Chybí požadovaný atribut "%(attrname)s"''',
+'''Submitted form data:''':
+'''Zadaná formulářová data:''',
+'''Search Titles''':
+'''Hledat v titulcích''',
+'''Display context of search results''':
+'''Zobrazit výsledek výhledávání''',
+'''Case-sensitive searching''':
+'''Rozlišovat velikost písmen''',
+'''Search Text''':
+'''Hledat v textu''',
+'''Go To Page''':
+'''Jít na stránku''',
+'''Include system pages''':
+'''Včetně systémových stránek''',
+'''Exclude system pages''':
+'''Vyjma systémových stránek''',
+'''Plain title index''':
+'''Rejstřík stránek v čistém textu''',
+'''XML title index''':
+'''Rejstřík stránek v XML''',
+'''Python Version''':
+'''Verze Python''',
+'''MoinMoin Version''':
+'''Verze MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Verze %s [Revision %s]''',
+'''4Suite Version''':
+'''Verze 4Suite''',
+'''Number of pages''':
+'''Počet stránek''',
+'''Number of system pages''':
+'''Počet systémových stránek''',
+'''Accumulated page sizes''':
+'''Souhrnná velikost stránek''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Obsazení disku %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Obsazení disku %(data_dir)s/''',
+'''Entries in edit log''':
+'''Záznamy v edit-logu''',
+'''NONE''':
+'''ŽÁDNÝ (NONE)''',
+'''Global extension macros''':
+'''Makra globálního rozšíření''',
+'''Local extension macros''':
+'''Makra lokálního rozšíření''',
+'''Global extension actions''':
+'''Akce globálního rozšíření''',
+'''Local extension actions''':
+'''Akce lokálního rozšíření''',
+'''Global parsers''':
+'''Globální parsery.''',
+'''Local extension parsers''':
+'''Parsery lokálního rozšíření''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Instalované processory (ZAVRŽENÉ -- používejte parsery)''',
+'''Disabled''':
+'''Zakázáno''',
+'''Enabled''':
+'''Povoleno''',
+'''Lupy search''':
+'''Lupy search''',
+'''Active threads''':
+'''Aktivní vlákna''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Použijte prosím selektivnější vyhledávací výraz místo {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''CHYBA v regulárním výrazu \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Neplatný časový údaj \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Za "%(token)s"  je očekáván "=" ''',
+'''Expected a value for key "%(token)s"''':
+'''JE očekávána hodnota klíče "%(token)s"''',
+'''Wiki Markup''':
+'''Značkování Wiki''',
+'''Print View''':
+'''Náhled tisku''',
+'''Your changes are not saved!''':
+'''Provedené změny nejsou uloženy!''',
+'''Page name is too long, try shorter name.''':
+'''Název stránky je příliš dlouhý, zvolte kratší název.''',
+'''GUI Mode''':
+'''GUI Mód''',
+'''Edit was cancelled.''':
+'''Editace byla zrušena.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku.''',
+'''Page "%s" was successfully deleted!''':
+'''Stránka "%s" byla úspěšně smazána!''',
+'''Dear Wiki user,
+
+You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
+
+The following page has been changed by %(editor)s:
+%(pagelink)s
+
+''':
+'''Vážený uživateli Wiki,
+
+Objednal jste si zasílání změn wiki stránky nebo kategorie na "%(sitename)s" .
+
+Následující stránku změnil uživatel %(editor)s:
+%(pagelink)s
+
+''',
+'''The comment on the change is:
+%(comment)s
+
+''':
+'''Komentář ke změně zní:
+%(comment)s
+
+''',
+'''New page:
+''':
+'''Nová stránka:
+''',
+'''No differences found!
+''':
+'''Nenalezeny žádné změny!
+''',
+'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
+'''[%(sitename)s] %(trivial)sZměna stránky "%(pagename)s" uživatelem %(username)s''',
+'''Trivial ''':
+'''Minimální ''',
+'''Status of sending notification mails:''':
+'''Stav zaslání oznamovacích emailů:''',
+'''[%(lang)s] %(recipients)s: %(status)s''':
+'''[%(lang)s] %(recipients)s: %(status)s''',
+'''## backup of page "%(pagename)s" submitted %(date)s''':
+'''## záloha stránky "%(pagename)s" od %(date)s''',
+'''Page could not get locked. Unexpected error (errno=%d).''':
+'''Stránka se nedá zamknout. Neočekávaná chyba (errno=%d).''',
+'''Page could not get locked. Missing \'current\' file?''':
+'''Stránka se nedá zamknout. Chybějící soubor \'current\'?''',
+'''You are not allowed to edit this page!''':
+'''Nemáte oprávnění editovat tuto stránku!''',
+'''You cannot save empty pages.''':
+'''Prázdné stránky nelze ukládat!''',
+'''You already saved this page!''':
+'''Stránka je již uložena!''',
+'''Sorry, someone else saved the page while you edited it.
+
+Please do the following: Use the back button of your browser, and cut&paste
+your changes from there. Then go forward to here, and click EditText again.
+Now re-add your changes to the current page contents.
+
+\'\'Do not just replace
+the content editbox with your version of the page, because that would
+delete the changes of the other person, which is excessively rude!\'\'
+''':
+'''Sorry, někdo jiný uložil tuto stránku, zatímco vy jste editoval.
+
+Prosíme o následující: Vraťte se pomocí tlačítka Zpět ve vašem prohlížeči a použijte Vyjmout na vaše změny. Vraťte se pak zpátky sem a klikněte znovu na Editace. Vložte ze schránky Vaše změny k aktuálnímu obsahu.
+\'\'Nenahrazujte celý obsah vaší verzí stránky, protože byste tak smazali změny jiného člověka, což je velmi nezdvořilé!\'\'
+''',
+'''A backup of your changes is [%(backup_url)s here].''':
+'''Záložní kopie Vašich změn je [%(backup_url)s zde].''',
+'''You did not change the page content, not saved!''':
+'''Neudělal jste žádnou změnu, stránka neuložena!''',
+'''You can\'t change ACLs on this page since you have no admin rights on it!''':
+'''Nemůžete měnit žádná ACL práva na této stránce, protože nemáte práva admin''',
+'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
+'''Zámek uživatele %(owner)s vypršel před %(mins_ago)d minutami. Nyní máte Vy zajištěn zámek na tuto stránku.''',
+'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
+'''Ostatní uživatelé \'\'nebudou moci změnit\'\' tuto stránku až do %(bumptime)s.''',
+'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
+'''Ostatní uživatelé budou \'\'varováni\'\' až do %(bumptime)s, že tuto stránku nyní editujete Vy.''',
+'''Use the Preview button to extend the locking period.''':
+'''Použijte tlačítko Náhled na prodloužení doby zamčení stránky.''',
+'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
+'''Tato stránka je nyní \'\'zamčena\'\' kvůli editaci uživatele %(owner)s až do %(timestamp)s, tzn. na maximálně dalších %(mins_valid)d minut.''',
+'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
+\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
+to avoid editing conflicts.\'\'\'[[BR]]
+To leave the editor, press the Cancel button.''':
+'''Tato stránka byla otevřena na editaci v %(timestamp)s uživatelem %(owner)s.  [[BR]]
+\'\'\'Neměli byste tuto stránku dalších nejméně  %(mins_valid)d Minute(n) \'\'editovat\'\', aby nedošlo ke konfiktu verzí.\'\'\'[[BR]]
+Stiskněte tlačítko Zrušit na opuštění editoru.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Instalace \'%(filename)s\' selhala.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Soubor %s není MoinMoin balík.''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Zvýraznění:: [[Verbatim(\'\')]]\'\'kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'tučně kurzíva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'smíšené \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'tučně\'\'\'[[Verbatim(\'\'\')]] a kurzíva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] vodorovná čára.
+ Nadpisy:: [[Verbatim(=)]] Nadpis 1 [[Verbatim(=)]]; [[Verbatim(==)]] Nadpis 2 [[Verbatim(==)]]; [[Verbatim(===)]] Nadpis 3 [[Verbatim(===)]];   [[Verbatim(====)]] Nadpis 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Nadpis 5 [[Verbatim(=====)]].
+ Seznamy:: mezera a jeden z: * odrážky; 1., a., A., i., I. číslované odrážky; 1.#n začít číslovat u n; sama mezera odsazuje.
+ Odkazy:: [[Verbatim(SpojenaSlovasVelkymiPocatecnimiPismeny)]]; [[Verbatim(["hranaté závorky a dvojité uvozovky"])]]; url; [url]; [url text].
+ Tabulky:: || text buněk |||| text 2 spojených buněk ||;    nejsou dovoleny mezery za nadpisy a tabulkami.
+
+(!) Další nápověda viz HelpOnEditing nebo SyntaxReference.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Zvýraznění: <i>*kurzíva*</i> <b>**tučně</b> ``monospace``<br/>
+<br/><pre>
+Nadpisy: Nadpis 1  Nadpis 2  Nadpis 3
+         ========  --------  ~~~~~~~~
+
+Vodorovná linka: ---- 
+Odkazy: PřipojenéPodtržítko_ `více slov ve zpětném apostrofu`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Seznamy: * bodové odrážky; 1., a. číslované seznamy.
+</pre>
+<br/>
+(!) Více informací viz 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''',
+'''Diffs''':
+'''Rozdíly''',
+'''Info''':
+'''Info''',
+'''Edit''':
+'''Editovat''',
+'''UnSubscribe''':
+'''Odhlásit''',
+'''Subscribe''':
+'''Odebírat''',
+'''Raw''':
+'''Zdroj''',
+'''XML''':
+'''XML''',
+'''Print''':
+'''Tisk''',
+'''View''':
+'''Náhled''',
+'''Up''':
+'''Nahoru''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Publikovat email v informacích o autorovi (místo domovské wiki stránky)''',
+'''Open editor on double click''':
+'''Otevřít editor dvojklikem''',
+'''Jump to last visited page instead of frontpage''':
+'''Jít na naposledy navštívenou stránku místo na hlavní stránku''',
+'''Show question mark for non-existing pagelinks''':
+'''Zobrazit otazník u neexistujících odkazů''',
+'''Show page trail''':
+'''Zobrazit stopu stránek''',
+'''Show icon toolbar''':
+'''Zobrazit lištu s ikonami''',
+'''Show top/bottom links in headings''':
+'''Zobrazit u Nadpisů odkazy nahoru/dolu''',
+'''Show fancy diffs''':
+'''Zobrazit rozdíly pestře''',
+'''Add spaces to displayed wiki names''':
+'''Vkládat mezery do zobrazovaných Wiki Jmen''',
+'''Remember login information''':
+'''Zapamatuj si mne''',
+'''Subscribe to trivial changes''':
+'''Odebírat při minimálních změnách''',
+'''Disable this account forever''':
+'''Zablokovat navždy tento účet''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(Použijte Jmeno``Prijmeni)''',
+'''Alias-Name''':
+'''Alias''',
+'''Password repeat''':
+'''Opakovat heslo''',
+'''(Only when changing passwords)''':
+'''(Jen při změně hesla)''',
+'''User CSS URL''':
+'''URL vlastního CSS''',
+'''(Leave it empty for disabling user CSS)''':
+'''(Nechte prázdné, nechcete-li využít vlastní CSS)''',
+'''Editor size''':
+'''Velikost editoru''',
 '''No older revisions available!''':
 '''Starší verze nejsou k dispozici!''',
 '''Diff for "%s"''':
@@ -530,82 +614,73 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''Musíte udat typ diagramu!''',
 '''Bad chart type "%s"!''':
 '''Neplatný diagram typu "%s"!''',
-'''Search Titles''':
-'''Hledat v titulcích''',
-'''Display context of search results''':
-'''Zobrazit výsledek výhledávání''',
-'''Case-sensitive searching''':
-'''Rozlišovat velikost písmen''',
-'''Search Text''':
-'''Hledat v textu''',
-'''Go To Page''':
-'''Jít na stránku''',
-'''Include system pages''':
-'''Včetně systémových stránek''',
-'''Exclude system pages''':
-'''Vyjma systémových stránek''',
-'''Plain title index''':
-'''Rejstřík stránek v čistém textu''',
-'''XML title index''':
-'''Rejstřík stránek v XML''',
-'''Python Version''':
-'''Verze Python''',
-'''MoinMoin Version''':
-'''Verze MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Verze %s [Revision %s]''',
-'''4Suite Version''':
-'''Verze 4Suite''',
-'''Number of pages''':
-'''Počet stránek''',
-'''Number of system pages''':
-'''Počet systémových stránek''',
-'''Accumulated page sizes''':
-'''Souhrnná velikost stránek''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''Obsazení disku %(data_dir)s/pages/''',
-'''Disk usage of %(data_dir)s/''':
-'''Obsazení disku %(data_dir)s/''',
-'''Entries in edit log''':
-'''Záznamy v edit-logu''',
-'''NONE''':
-'''ŽÁDNÝ (NONE)''',
-'''Global extension macros''':
-'''Makra globálního rozšíření''',
-'''Local extension macros''':
-'''Makra lokálního rozšíření''',
-'''Global extension actions''':
-'''Akce globálního rozšíření''',
-'''Local extension actions''':
-'''Akce lokálního rozšíření''',
-'''Global parsers''':
-'''Globální parsery.''',
-'''Local extension parsers''':
-'''Parsery lokálního rozšíření''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Instalované processory (ZAVRŽENÉ -- používejte parsery)''',
-'''Disabled''':
-'''Zakázáno''',
-'''Enabled''':
-'''Povoleno''',
-'''Lupy search''':
-'''Lupy search''',
-'''Active threads''':
-'''Aktivní vlákna''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Použijte prosím selektivnější vyhledávací výraz místo {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''CHYBA v regulárním výrazu \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Neplatný časový údaj \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Za "%(token)s"  je očekáván "=" ''',
-'''Expected a value for key "%(token)s"''':
-'''JE očekávána hodnota klíče "%(token)s"''',
-'''Wiki Markup''':
-'''Značkování Wiki''',
-'''Print View''':
-'''Náhled tisku''',
+'''This page is already deleted or was never created!''':
+'''Tato stránka již byla smazána nebo nebyla nikdy vytvořena!''',
+'''No pages like "%s"!''':
+'''Žádné stránky podobné "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Příloha \'%(target)s\' (původní jméno \'%(filename)s\') již existuje.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Nalezena přesně jedna stránka jako "%s", přesměrovávám přímo.''',
+'''Pages like "%s"''':
+'''Stránky podobné "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s pro "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Lokální mapa umístění pro "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Nemáte dostaetčná práva na přejmenování stránek v této wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Na přejmenovávání stránek používejte prosím interaktivní rozhraní!''',
+'''Could not rename page because of file system error: %s.''':
+'''Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s.''',
+'''Rename Page''':
+'''Přejmenovat stránku''',
+'''New name''':
+'''Nové jméno''',
+'''Optional reason for the renaming''':
+'''Nepovinný důvod pro přejmenovávání''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Stránka se jménem {{{\'%s\'}}}již existuje.\'\'\'
+Zkuste jiné jméno.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(včetně %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy%(localwords)s nalezena a jsou zvýrazněna níže:''',
+'''Add checked words to dictionary''':
+'''Přidat označená slova do slovníku''',
+'''No spelling errors found!''':
+'''Žádné pravopisné chyby nenalezeny.''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Nemůžete kontrolovat pravopis na stránce, kterou nemůžete číst.''',
+'''Title Search: "%s"''':
+'''Hledání stránek: "%s"''',
+'''Full Text Search: "%s"''':
+'''Fulltextové vyhledávání: "%s"''',
+'''Full Link List for "%s"''':
+'''Všechny stránky, které se odkazují na: "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
+'''Subscribe users to the page %s''':
+'''Přihlásit uživatele k odebírání stránky %s''',
+'''Subscribed for %s:''':
+'''Uživatelé odebírající %s''',
+'''Not a user:''':
+'''Není uživatel:''',
+'''You are not allowed to perform this action.''':
+'''Nemáte dovoleno provést tuto akci.''',
+'''You are not allowed to delete this page.''':
+'''Nemáte dostatečná práva ke smazání této stránky.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!''',
+'''Really delete this page?''':
+'''Akutečně smazat tuto stránku?''',
+'''Delete''':
+'''Smazat''',
+'''Optional reason for the deletion''':
+'''Nepovinné důvody pro mazání''',
 '''[%d attachments]''':
 '''[%d přílohy]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -667,18 +742,12 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Nepodporovaná akce uploadu: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Přílohy k  "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Příloha \'%(target)s\' (původní jméno \'%(filename)s\') již existuje.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Příloha \'%(target)s\' (vzdálené jméno \'%(filename)s\') s %(bytes)d byty uložena.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Příloha \'%(filename)s\' smazána.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Příloha \'%(filename)s\' úspěšně instalována.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Instalace \'%(filename)s\' selhala.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Soubor %s není MoinMoin balík.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Příloha \'%(filename)s\' nemohla být rozbalena kvůli nedostatku místa (schází %(space)d kB.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -701,71 +770,6 @@ Pokud  zůstané prázdné "Uložit jako", bude použito jméno původního soub
 '''Neznámy typ souboru, nemohu tuto přílohu přímo zobrazit.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s k %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Nemáte dostatečná práva ke smazání této stránky.''',
-'''This page is already deleted or was never created!''':
-'''Tato stránka již byla smazána nebo nebyla nikdy vytvořena!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!''',
-'''Really delete this page?''':
-'''Akutečně smazat tuto stránku?''',
-'''Delete''':
-'''Smazat''',
-'''Optional reason for the deletion''':
-'''Nepovinné důvody pro mazání''',
-'''No pages like "%s"!''':
-'''Žádné stránky podobné "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Nalezena přesně jedna stránka jako "%s", přesměrovávám přímo.''',
-'''Pages like "%s"''':
-'''Stránky podobné "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s pro "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Lokální mapa umístění pro "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nemáte dostaetčná práva na přejmenování stránek v této wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Na přejmenovávání stránek používejte prosím interaktivní rozhraní!''',
-'''Could not rename page because of file system error: %s.''':
-'''Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s.''',
-'''Rename Page''':
-'''Přejmenovat stránku''',
-'''New name''':
-'''Nové jméno''',
-'''Optional reason for the renaming''':
-'''Nepovinný důvod pro přejmenovávání''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Stránka se jménem {{{\'%s\'}}}již existuje.\'\'\'
-Zkuste jiné jméno.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(včetně %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Následující slova %(badwords)d nebyla ve slovníku se %(totalwords)d slovy%(localwords)s nalezena a jsou zvýrazněna níže:''',
-'''Add checked words to dictionary''':
-'''Přidat označená slova do slovníku''',
-'''No spelling errors found!''':
-'''Žádné pravopisné chyby nenalezeny.''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Nemůžete kontrolovat pravopis na stránce, kterou nemůžete číst.''',
-'''Subscribe users to the page %s''':
-'''Přihlásit uživatele k odebírání stránky %s''',
-'''Subscribed for %s:''':
-'''Uživatelé odebírající %s''',
-'''Not a user:''':
-'''Není uživatel:''',
-'''You are not allowed to perform this action.''':
-'''Nemáte dovoleno provést tuto akci.''',
-'''Title Search: "%s"''':
-'''Hledání stránek: "%s"''',
-'''Full Text Search: "%s"''':
-'''Fulltextové vyhledávání: "%s"''',
-'''Full Link List for "%s"''':
-'''Všechny stránky, které se odkazují na: "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nelze vytvořit stránku bez jména. Zadejte prosím jméno stránky. ''',
 '''Upload new attachment "%(filename)s"''':
 '''Upload nové přílohy "%(filename)s" hochladen''',
 '''Create new drawing "%(filename)s"''':
@@ -774,10 +778,56 @@ Zkuste jiné jméno.''',
 '''Editace obrázku %(filename)s''',
 '''Toggle line numbers''':
 '''Přepnout zobrazení čísel řádků''',
-'''Invalid include arguments "%s"!''':
-'''Neplatný argument include: "%s"!''',
-'''Nothing found for "%s"!''':
-'''Pro "%s" nic nenalezeno!''',
+'''FrontPage''':
+'''HlavniStranka''',
+'''RecentChanges''':
+'''PosledniZmeny''',
+'''TitleIndex''':
+'''RejstrikStranek''',
+'''WordIndex''':
+'''RejstrikSlov''',
+'''FindPage''':
+'''NajdiStranku''',
+'''SiteNavigation''':
+'''StromUmisteni''',
+'''HelpContents''':
+'''HelpObsah''',
+'''HelpOnFormatting''':
+'''HelpFormatovani''',
+'''UserPreferences''':
+'''NastaveniUzivatele''',
+'''WikiLicense''':
+'''LicenceWiki''',
+'''MissingPage''':
+'''ChybejiciStranka''',
+'''MissingHomePage''':
+'''ChybejiciDomovskaStranka''',
+'''Mon''':
+'''Po''',
+'''Tue''':
+'''Út''',
+'''Wed''':
+'''St''',
+'''Thu''':
+'''Čt''',
+'''Fri''':
+'''Pá''',
+'''Sat''':
+'''So''',
+'''Sun''':
+'''Ne''',
+'''AttachFile''':
+'''PřipojitSoubor''',
+'''DeletePage''':
+'''SmazatStránku''',
+'''LikePages''':
+'''PodobnéStránky''',
+'''LocalSiteMap''':
+'''MapaUmístění''',
+'''RenamePage''':
+'''PřejmenovatStránku''',
+'''SpellCheck''':
+'''KontrolaPravopisu''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Nepodporované navigační schéma \'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -812,14 +862,18 @@ Zkuste jiné jméno.''',
 '''vytvořit záložku''',
 '''[Bookmark reached]''':
 '''[Záložka dosažena]''',
+'''No wanted pages in this wiki.''':
+'''V této wiki neexistují žádné žádoucí stránky.''',
+'''Invalid include arguments "%s"!''':
+'''Neplatný argument include: "%s"!''',
+'''Nothing found for "%s"!''':
+'''Pro "%s" nic nenalezeno!''',
 '''Markup''':
 '''Markup''',
 '''Display''':
 '''Display''',
 '''Filename''':
 '''JmenoSouboru''',
-'''No wanted pages in this wiki.''':
-'''V této wiki neexistují žádné žádoucí stránky.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Zobrazení restrukturovaného textu není možné, prosím nainstalujte docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -968,54 +1022,4 @@ red=edit''':
 '''Email NEbyl odeslán!''',
 '''Mail sent OK''':
 '''Email byl odeslán''',
-'''FrontPage''':
-'''HlavniStranka''',
-'''RecentChanges''':
-'''PosledniZmeny''',
-'''TitleIndex''':
-'''RejstrikStranek''',
-'''WordIndex''':
-'''RejstrikSlov''',
-'''FindPage''':
-'''NajdiStranku''',
-'''SiteNavigation''':
-'''StromUmisteni''',
-'''HelpContents''':
-'''HelpObsah''',
-'''HelpOnFormatting''':
-'''HelpFormatovani''',
-'''UserPreferences''':
-'''NastaveniUzivatele''',
-'''WikiLicense''':
-'''LicenceWiki''',
-'''MissingPage''':
-'''ChybejiciStranka''',
-'''MissingHomePage''':
-'''ChybejiciDomovskaStranka''',
-'''Mon''':
-'''Po''',
-'''Tue''':
-'''Út''',
-'''Wed''':
-'''St''',
-'''Thu''':
-'''Čt''',
-'''Fri''':
-'''Pá''',
-'''Sat''':
-'''So''',
-'''Sun''':
-'''Ne''',
-'''AttachFile''':
-'''PřipojitSoubor''',
-'''DeletePage''':
-'''SmazatStránku''',
-'''LikePages''':
-'''PodobnéStránky''',
-'''LocalSiteMap''':
-'''MapaUmístění''',
-'''RenamePage''':
-'''PřejmenovatStránku''',
-'''SpellCheck''':
-'''KontrolaPravopisu''',
 }

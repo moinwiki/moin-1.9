@@ -37,8 +37,6 @@ macro call.-~
 '''הדף נעול''',
 '''Cannot edit old revisions!''':
 '''אין אפשרות לערוך גרסאות קודמות''',
-'''Page name is too long, try shorter name.''':
-'''שם הדף ארוך מידי, נסה שם קצר יותר.''',
 '''Edit "%(pagename)s"''':
 '''ערוך "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,6 +82,172 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''שינוי פעוט''',
 '''Remove trailing whitespace from each line''':
 '''הסר רווחים מסופי שורות''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''שם משתמש לא חוקי {{{\'%s\'}}}. שם יכול להכיל כל תו יוניקוד אלפא נומרי, עם רווח אופציונלי אחד בין מילים. שם קבוצה אסור.''',
+'''You are not allowed to do %s on this page.''':
+'''אין לכם הרשאות לבצע %s בדף זה''',
+'''Login''':
+'''התחבר''',
+''' %s and try again.''':
+''' %s ונסה שוב.''',
+'''%.2f seconds''':
+'''%.2f שניות''',
+'''match''':
+'''התאמה''',
+'''matches''':
+'''התאמות''',
+'''<unknown>''':
+'''<לא ידוע>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''מישהו ביקש לשלוח אליך את פרטי המשתמש.
+
+אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.
+
+לאחר התחברות, מומלץ להחליף את הסיסמא.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] פרטי המשתמש שלך''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''דואר אלקטרוני לא מאופשר בוויקי הזה
+.פנה למנהל המערכת.''',
+'''Please provide a valid email address!''':
+'''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
+'''Empty user name. Please enter a user name.''':
+'''שם משתמש ריק. אנא הכנס שם משתמש.''',
+'''This user name already belongs to somebody else.''':
+'''שם המשתמש שייך למישהו אחר.''',
+'''Passwords don\'t match!''':
+'''הסיסמאות לא תואמות.''',
+'''Please specify a password!''':
+'''אנא הכנס סיסמא.''',
+'''This email already belongs to somebody else.''':
+'''כתובת הדואר האלקטרוני הזאת שייכת למישהו אחר.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''אין אפשרות להשתמש בעיצוב \'%(theme_name)s\'.''',
+'''User preferences saved!''':
+'''העדפות משתמש נשמרו.''',
+'''Default''':
+'''ברירת מחדל''',
+'''<Browser setting>''':
+'''העדפת דפדפן''',
+'''Save''':
+'''שמור''',
+'''Preferred theme''':
+'''עיצוב''',
+'''Time zone''':
+'''איזור זמן''',
+'''Your time is''':
+'''הזמן אצלך הוא''',
+'''Server time is''':
+'''זמן השרת הוא''',
+'''Date format''':
+'''מבנה תאריך''',
+'''Preferred language''':
+'''שפה מועדפת''',
+'''General options''':
+'''אפשרויות כלליות''',
+'''Quick links''':
+'''סימניות''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''תקבל הודעות על שינויים רק אם רשמת כתובת דואר אמיתית''',
+'''Subscribed wiki pages (one regex per line)''':
+'''מנוי לדפים (שם אחד לשורה)''',
+'''Create Profile''':
+'''הרשם''',
+'''Mail me my account data''':
+'''שלח לי את פרטי המשתמש''',
+'''Email''':
+'''דואר אלקטרוני''',
+'''Name''':
+'''שם''',
+'''Password''':
+'''סיסמא''',
+'''Action''':
+'''פעולה''',
+'''Required attribute "%(attrname)s" missing''':
+'''ערך חובה "%(attrname)s" חסר''',
+'''Submitted form data:''':
+'''תוכן הטופס נשלח:''',
+'''Search Titles''':
+'''חפש כותרות''',
+'''Display context of search results''':
+'''הצג את ההקשר של תוצאות חיפוש''',
+'''Case-sensitive searching''':
+'''הבדל בין אותיות גדולות וקטנות''',
+'''Search Text''':
+'''חפש מלל''',
+'''Go To Page''':
+'''בקר בדף''',
+'''Include system pages''':
+'''הצג דפי מערכת''',
+'''Exclude system pages''':
+'''הסתר דפי מערכת''',
+'''Plain title index''':
+'''אינדקס פשוט לפי כותרות''',
+'''XML title index''':
+'''אינדקס כותרות במבנה XML''',
+'''Python Version''':
+'''גרסת פייתון''',
+'''MoinMoin Version''':
+'''גרסת מוין מוין''',
+'''Release %s [Revision %s]''':
+'''גרסה %s [תת גרסה %s]''',
+'''4Suite Version''':
+'''גרסת 4Suite''',
+'''Number of pages''':
+'''מספר דפים''',
+'''Number of system pages''':
+'''מספר דפי מערכת''',
+'''Accumulated page sizes''':
+'''גודל דפים מצטבר''',
+'''Entries in edit log''':
+'''רשומות בדו"ח העריכה''',
+'''NONE''':
+'''אין''',
+'''Global extension macros''':
+'''פקודות מקרו כלליות''',
+'''Local extension macros''':
+'''פקודות מקרו מקומיות''',
+'''Global extension actions''':
+'''פעולות כלליות''',
+'''Local extension actions''':
+'''פעולות מקומיות''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''מעבדים (השתמש במפרשים במקום)''',
+'''Disabled''':
+'''מבוטל''',
+'''Enabled''':
+'''מאופשר''',
+'''Lupy search''':
+'''חיפוש מהיר''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''השתמשו במונח חיפוש בררני יותר מאשר {{{"%s"}}}.''',
+'''ERROR in regex \'%s\'''':
+'''טעות בביטוי רגולרי \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''חתימת זמן שגוייה \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''ציפיתי ל "=" אחרי "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''ציפיתי לערך למפתח "%(token)s"''',
+'''Wiki Markup''':
+'''תיוג וויקי''',
+'''Print View''':
+'''תצוגת הדפסה''',
+'''Page name is too long, try shorter name.''':
+'''שם הדף ארוך מידי, נסה שם קצר יותר.''',
 '''Edit was cancelled.''':
 '''עריכה בוטלה.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -172,8 +336,6 @@ delete the changes of the other person, which is excessively rude!\'\'
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
 '''הדף נפתח לעריכה לאחרונה ב–%(timestamp)s על ידי %(owner)s. הימנעו מעריכה של הדף לפחות עוד %(mins_valid)d דקות על מנת למנוע התנגשויות עריכה.''',
-'''<unknown>''':
-'''<לא ידוע>''',
 '''Diffs''':
 '''הבדלים''',
 '''Info''':
@@ -214,108 +376,16 @@ To leave the editor, press the Cancel button.''':
 '''עשה מנוי לשינויים פעוטים''',
 '''Disable this account forever''':
 '''בטל הרשמה''',
-'''Name''':
-'''שם''',
-'''Password''':
-'''סיסמא''',
 '''Password repeat''':
 '''הסיסמא שוב''',
 '''(Only when changing passwords)''':
 '''(רק כאשר מחליפים סיסמא)''',
-'''Email''':
-'''דואר אלקטרוני''',
 '''User CSS URL''':
 '''קובץ CSS אישי''',
 '''(Leave it empty for disabling user CSS)''':
 '''השאר ריק לברירת מחדל''',
 '''Editor size''':
 '''גודל תיבת עריכה''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''שם משתמש לא חוקי {{{\'%s\'}}}. שם יכול להכיל כל תו יוניקוד אלפא נומרי, עם רווח אופציונלי אחד בין מילים. שם קבוצה אסור.''',
-'''You are not allowed to do %s on this page.''':
-'''אין לכם הרשאות לבצע %s בדף זה''',
-'''Login''':
-'''התחבר''',
-''' %s and try again.''':
-''' %s ונסה שוב.''',
-'''%.2f seconds''':
-'''%.2f שניות''',
-'''match''':
-'''התאמה''',
-'''matches''':
-'''התאמות''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''מישהו ביקש לשלוח אליך את פרטי המשתמש.
-
-אם אבדת את הסיסמא, אנא השתמש בסיסמא כפי שנשלחה אליך במכתב זה.
-
-לאחר התחברות, מומלץ להחליף את הסיסמא.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] פרטי המשתמש שלך''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''דואר אלקטרוני לא מאופשר בוויקי הזה
-.פנה למנהל המערכת.''',
-'''Please provide a valid email address!''':
-'''אנא רשום כתובת דואר אלקטרוני אמיתית.''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''לא נמצא משתמש עם כתובת הדואר האלקטרוני "%(email)s".''',
-'''Empty user name. Please enter a user name.''':
-'''שם משתמש ריק. אנא הכנס שם משתמש.''',
-'''This user name already belongs to somebody else.''':
-'''שם המשתמש שייך למישהו אחר.''',
-'''Passwords don\'t match!''':
-'''הסיסמאות לא תואמות.''',
-'''Please specify a password!''':
-'''אנא הכנס סיסמא.''',
-'''This email already belongs to somebody else.''':
-'''כתובת הדואר האלקטרוני הזאת שייכת למישהו אחר.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''אין אפשרות להשתמש בעיצוב \'%(theme_name)s\'.''',
-'''User preferences saved!''':
-'''העדפות משתמש נשמרו.''',
-'''Default''':
-'''ברירת מחדל''',
-'''<Browser setting>''':
-'''העדפת דפדפן''',
-'''Save''':
-'''שמור''',
-'''Preferred theme''':
-'''עיצוב''',
-'''Time zone''':
-'''איזור זמן''',
-'''Your time is''':
-'''הזמן אצלך הוא''',
-'''Server time is''':
-'''זמן השרת הוא''',
-'''Date format''':
-'''מבנה תאריך''',
-'''Preferred language''':
-'''שפה מועדפת''',
-'''General options''':
-'''אפשרויות כלליות''',
-'''Quick links''':
-'''סימניות''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''תקבל הודעות על שינויים רק אם רשמת כתובת דואר אמיתית''',
-'''Subscribed wiki pages (one regex per line)''':
-'''מנוי לדפים (שם אחד לשורה)''',
-'''Create Profile''':
-'''הרשם''',
-'''Mail me my account data''':
-'''שלח לי את פרטי המשתמש''',
-'''Action''':
-'''פעולה''',
 '''No older revisions available!''':
 '''אין גרסאות ישנות יותר.''',
 '''Diff for "%s"''':
@@ -400,72 +470,70 @@ Contact the owner of the wiki, who can enable email.''':
 '''בחרו בסוג גרף.''',
 '''Bad chart type "%s"!''':
 '''סוג גרף שגוי "%s"''',
-'''Search Titles''':
-'''חפש כותרות''',
-'''Display context of search results''':
-'''הצג את ההקשר של תוצאות חיפוש''',
-'''Case-sensitive searching''':
-'''הבדל בין אותיות גדולות וקטנות''',
-'''Search Text''':
-'''חפש מלל''',
-'''Go To Page''':
-'''בקר בדף''',
-'''Include system pages''':
-'''הצג דפי מערכת''',
-'''Exclude system pages''':
-'''הסתר דפי מערכת''',
-'''Plain title index''':
-'''אינדקס פשוט לפי כותרות''',
-'''XML title index''':
-'''אינדקס כותרות במבנה XML''',
-'''Python Version''':
-'''גרסת פייתון''',
-'''MoinMoin Version''':
-'''גרסת מוין מוין''',
-'''Release %s [Revision %s]''':
-'''גרסה %s [תת גרסה %s]''',
-'''4Suite Version''':
-'''גרסת 4Suite''',
-'''Number of pages''':
-'''מספר דפים''',
-'''Number of system pages''':
-'''מספר דפי מערכת''',
-'''Accumulated page sizes''':
-'''גודל דפים מצטבר''',
-'''Entries in edit log''':
-'''רשומות בדו"ח העריכה''',
-'''NONE''':
-'''אין''',
-'''Global extension macros''':
-'''פקודות מקרו כלליות''',
-'''Local extension macros''':
-'''פקודות מקרו מקומיות''',
-'''Global extension actions''':
-'''פעולות כלליות''',
-'''Local extension actions''':
-'''פעולות מקומיות''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''מעבדים (השתמש במפרשים במקום)''',
-'''Disabled''':
-'''מבוטל''',
-'''Enabled''':
-'''מאופשר''',
-'''Lupy search''':
-'''חיפוש מהיר''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''השתמשו במונח חיפוש בררני יותר מאשר {{{"%s"}}}.''',
-'''ERROR in regex \'%s\'''':
-'''טעות בביטוי רגולרי \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''חתימת זמן שגוייה \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''ציפיתי ל "=" אחרי "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''ציפיתי לערך למפתח "%(token)s"''',
-'''Wiki Markup''':
-'''תיוג וויקי''',
-'''Print View''':
-'''תצוגת הדפסה''',
+'''This page is already deleted or was never created!''':
+'''דף זה כבר נמחק או שמעולם לא נוצר.''',
+'''No pages like "%s"!''':
+'''אין דפים דומים ל–"%s".''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''קובץ מצורף "%(target)s" (שם מרוחק "%(filename)s") כבר קיים.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''משתמש לא קיים: {{{"%s"}}}. אנא הכנס שם משתמש וסיסמא.''',
+'''Missing password. Please enter user name and password.''':
+'''סיסמא חסרה. אנא הכנס שם משתמש וסיסמא.''',
+'''Sorry, wrong password.''':
+'''מצטער, סיסמא לא נכונה.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''בדיוק דף אחד דומה ל–"%s", מעביר לדף.''',
+'''Pages like "%s"''':
+'''דפים דומים ל–"%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s ל-"%(title)s"''',
+'''Local Site Map for "%s"''':
+'''מפת אתר מקומית של "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''אין לכם הרשאות לשנות שם דפים בוויק הזה.''',
+'''Please use the interactive user interface to rename pages!''':
+'''השתמשו במנשק המשתמש לשינוי שמות דפים.''',
+'''Could not rename page because of file system error: %s.''':
+'''שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s.''',
+'''Rename Page''':
+'''שנה שם דף''',
+'''New name''':
+'''שם חדש''',
+'''Optional reason for the renaming''':
+'''סיבה לשינוי שם''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''דף בשם {{{\'%s\'}}} כבר קיים. נסה שם אחר.''',
+'''(including %(localwords)d %(pagelink)s)''':
+''' (כולל %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''%(badwords)d מילים אלו לא נמצאו במילון הכולל %(totalwords)d מילים %(localwords)s:''',
+'''Add checked words to dictionary''':
+'''הוסף למילון''',
+'''No spelling errors found!''':
+'''לא נמצאו טעויות איות.''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה.''',
+'''Title Search: "%s"''':
+'''חיפוש כותרות: "%s"''',
+'''Full Text Search: "%s"''':
+'''חיפוש מלל: "%s"''',
+'''Full Link List for "%s"''':
+'''רשימת קישורים מלאה של "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף.''',
+'''You are not allowed to delete this page.''':
+'''אין לכם הרשאות למחוק את הדף.''',
+'''Please use the interactive user interface to delete pages!''':
+'''השתמשו במנשק המשתמש למחיקת דפים.''',
+'''Really delete this page?''':
+'''באמת למחוק את הדף?''',
+'''Delete''':
+'''מחק''',
+'''Optional reason for the deletion''':
+'''סיבה למחיקה''',
 '''[%d attachments]''':
 '''[%d קבצים מצורפים]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -518,8 +586,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''שליחת קובץ לא נתמכת: %s''',
 '''Attachments for "%(pagename)s"''':
 '''קבצים מצורפים ל–"%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''קובץ מצורף "%(target)s" (שם מרוחק "%(filename)s") כבר קיים.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''קובץ מצורף "%(target)s" (שם מרוחק "%(filename)s") בגודל %(bytes)d בתים נשמר.''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -530,78 +596,60 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''סוג קובץ לא ידוע, אי אפשר להציג אותו בתוך הדף.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''קובץ מצורף: %(filename)s של %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''אין לכם הרשאות למחוק את הדף.''',
-'''This page is already deleted or was never created!''':
-'''דף זה כבר נמחק או שמעולם לא נוצר.''',
-'''Please use the interactive user interface to delete pages!''':
-'''השתמשו במנשק המשתמש למחיקת דפים.''',
-'''Really delete this page?''':
-'''באמת למחוק את הדף?''',
-'''Delete''':
-'''מחק''',
-'''Optional reason for the deletion''':
-'''סיבה למחיקה''',
-'''No pages like "%s"!''':
-'''אין דפים דומים ל–"%s".''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''בדיוק דף אחד דומה ל–"%s", מעביר לדף.''',
-'''Pages like "%s"''':
-'''דפים דומים ל–"%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s ל-"%(title)s"''',
-'''Local Site Map for "%s"''':
-'''מפת אתר מקומית של "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''אין לכם הרשאות לשנות שם דפים בוויק הזה.''',
-'''Please use the interactive user interface to rename pages!''':
-'''השתמשו במנשק המשתמש לשינוי שמות דפים.''',
-'''Could not rename page because of file system error: %s.''':
-'''שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s.''',
-'''Rename Page''':
-'''שנה שם דף''',
-'''New name''':
-'''שם חדש''',
-'''Optional reason for the renaming''':
-'''סיבה לשינוי שם''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''דף בשם {{{\'%s\'}}} כבר קיים. נסה שם אחר.''',
-'''(including %(localwords)d %(pagelink)s)''':
-''' (כולל %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''%(badwords)d מילים אלו לא נמצאו במילון הכולל %(totalwords)d מילים %(localwords)s:''',
-'''Add checked words to dictionary''':
-'''הוסף למילון''',
-'''No spelling errors found!''':
-'''לא נמצאו טעויות איות.''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה.''',
-'''Title Search: "%s"''':
-'''חיפוש כותרות: "%s"''',
-'''Full Text Search: "%s"''':
-'''חיפוש מלל: "%s"''',
-'''Full Link List for "%s"''':
-'''רשימת קישורים מלאה של "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''משתמש לא קיים: {{{"%s"}}}. אנא הכנס שם משתמש וסיסמא.''',
-'''Missing password. Please enter user name and password.''':
-'''סיסמא חסרה. אנא הכנס שם משתמש וסיסמא.''',
-'''Sorry, wrong password.''':
-'''מצטער, סיסמא לא נכונה.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף.''',
 '''Upload new attachment "%(filename)s"''':
 '''שליחת קובץ מצורף חדש "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''צור איור חדש "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''ערוך איור "%(filename)s"''',
-'''Invalid include arguments "%s"!''':
-'''ארגומנטים לא חוקיים "%s".''',
-'''Nothing found for "%s"!''':
-'''לא נמצא "%s".''',
+'''FrontPage''':
+'''פתיחה''',
+'''RecentChanges''':
+'''שינויים אחרונים''',
+'''TitleIndex''':
+'''מפתח כותרות''',
+'''WordIndex''':
+'''מפתח מילים''',
+'''FindPage''':
+'''חיפוש''',
+'''SiteNavigation''':
+'''ניווט באתר''',
+'''HelpContents''':
+'''עזרה''',
+'''HelpOnFormatting''':
+'''עזרה בעריכה''',
+'''UserPreferences''':
+'''העדפות משתמש''',
+'''WikiLicense''':
+'''רישיון וויקי''',
+'''MissingPage''':
+'''דף חסר''',
+'''Mon''':
+'''שני''',
+'''Tue''':
+'''שלישי''',
+'''Wed''':
+'''רביעי''',
+'''Thu''':
+'''חמישי''',
+'''Fri''':
+'''שישי''',
+'''Sat''':
+'''שבת''',
+'''Sun''':
+'''ראשון''',
+'''AttachFile''':
+'''קבצים מצורפים''',
+'''DeletePage''':
+'''מחק דף''',
+'''LikePages''':
+'''דפים דומים''',
+'''LocalSiteMap''':
+'''מפת אתר מקומית''',
+'''RenamePage''':
+'''שנה שם דף''',
+'''SpellCheck''':
+'''בדוק איות''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''סכימת ניווט לא נתמכת "%(scheme)s".''',
 '''No parent page found!''':
@@ -634,14 +682,18 @@ Try a different name.''':
 '''קבע סימנייה''',
 '''[Bookmark reached]''':
 '''[סימנייה]''',
+'''No wanted pages in this wiki.''':
+'''אין בוויקי הזה קישורים לדפים חסרים.''',
+'''Invalid include arguments "%s"!''':
+'''ארגומנטים לא חוקיים "%s".''',
+'''Nothing found for "%s"!''':
+'''לא נמצא "%s".''',
 '''Markup''':
 '''תיוג''',
 '''Display''':
 '''תצוגה''',
 '''Filename''':
 '''שם קובץ''',
-'''No wanted pages in this wiki.''':
-'''אין בוויקי הזה קישורים לדפים חסרים.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**מספר גדול מידי של קבצים מוכללים**''',
 '''**Could not find the referenced page: %s**''':
@@ -754,52 +806,4 @@ red=edit''':
 '''החיבור לשרת הדואר "%(server)s" נכשל: %(reason)s''',
 '''Mail sent OK''':
 '''דואר נשלח בהצלחה.''',
-'''FrontPage''':
-'''פתיחה''',
-'''RecentChanges''':
-'''שינויים אחרונים''',
-'''TitleIndex''':
-'''מפתח כותרות''',
-'''WordIndex''':
-'''מפתח מילים''',
-'''FindPage''':
-'''חיפוש''',
-'''SiteNavigation''':
-'''ניווט באתר''',
-'''HelpContents''':
-'''עזרה''',
-'''HelpOnFormatting''':
-'''עזרה בעריכה''',
-'''UserPreferences''':
-'''העדפות משתמש''',
-'''WikiLicense''':
-'''רישיון וויקי''',
-'''MissingPage''':
-'''דף חסר''',
-'''Mon''':
-'''שני''',
-'''Tue''':
-'''שלישי''',
-'''Wed''':
-'''רביעי''',
-'''Thu''':
-'''חמישי''',
-'''Fri''':
-'''שישי''',
-'''Sat''':
-'''שבת''',
-'''Sun''':
-'''ראשון''',
-'''AttachFile''':
-'''קבצים מצורפים''',
-'''DeletePage''':
-'''מחק דף''',
-'''LikePages''':
-'''דפים דומים''',
-'''LocalSiteMap''':
-'''מפת אתר מקומית''',
-'''RenamePage''':
-'''שנה שם דף''',
-'''SpellCheck''':
-'''בדוק איות''',
 }

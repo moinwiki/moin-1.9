@@ -31,8 +31,6 @@ for at bruge denne formular på andre sider.-~
 '''Opret ny side''',
 '''You are not allowed to view this page.''':
 '''Du har ikke lov til at se denne side.''',
-'''Your changes are not saved!''':
-'''Dine ændringer er ikke gemt!''',
 '''You are not allowed to edit this page.''':
 '''Du har ikke lov til at redigere denne side.''',
 '''Page is immutable!''':
@@ -41,8 +39,6 @@ for at bruge denne formular på andre sider.-~
 '''Kan ikke redigere gamle udgaver!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Låsen du holdt udløb. Vær forberedt på redigeringskonflikter!''',
-'''Page name is too long, try shorter name.''':
-'''Sidenavn er for langt, prøv et kortere navn.''',
 '''Edit "%(pagename)s"''':
 '''Redigér "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -83,8 +79,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·at annullere dine ændringer.''',
 '''Preview''':
 '''Smugkig''',
-'''GUI Mode''':
-'''Grafisk redigering''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -95,6 +89,201 @@ Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·
 '''Simpel ændring''',
 '''Remove trailing whitespace from each line''':
 '''Fjern mellemrum sidst i hver linje''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Forkert brugernavn {{{\'%s\'}}}.
+Navn må kun indeholde Unicode alfanumeriske tegn, evt. med eet
+mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
+'''You are not allowed to do %s on this page.''':
+'''Du har ikke lov til at %s på denne side.''',
+'''Login''':
+'''Log ind''',
+''' %s and try again.''':
+''' %s og prøv igen.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d resultater ud af cirka %(pages)d sider.''',
+'''%.2f seconds''':
+'''%.2f sekunder''',
+'''match''':
+'''resultat''',
+'''matches''':
+'''resultater''',
+'''<unknown>''':
+'''<ukendt>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Nogen har bedt om at dine adgangsdata bliver tilsendt denne email-adresse.
+
+Hvis du har mistet din adgangskode, kan du bruge informationerne nedenfor og blot angive
+adgangskoden PRÆCIST SOM VIST i wiki\'ens adgangskode-formularfelt.
+
+Når du er korrekt logget ind, er det naturligvis en god idé at ændre adgangskoden.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Dine wiki brugerprofil-oplysninger''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Denne wiki har ikke aktiveret email-håndtering.
+Kontakt ejeren af wiki\'en, som kan aktivere email.''',
+'''Please provide a valid email address!''':
+'''Angiv venligst en korrekt email-adresse!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Ingen brugerprofil blev fundet med den angivne email-adresse \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Brug BrugerProfil til at ændre dinne indstillinger eller oprette en brugerprofil.''',
+'''Empty user name. Please enter a user name.''':
+'''Blankt brugernavn. Angiv venligst et brugernavn.''',
+'''This user name already belongs to somebody else.''':
+'''Dette brugernavn tilhører allerede en anden.''',
+'''Passwords don\'t match!''':
+'''Adgangskoderne er ikke ens!''',
+'''Please specify a password!''':
+'''Angiv venligst en adgangskode!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Oplys venligst din email-adresse. Hvis du mister dine adgangsoplysninger, kan du få dem tilsendt pr. email.''',
+'''This email already belongs to somebody else.''':
+'''Denne email-adresse tilhører allerede en anden.''',
+'''User account created! You can use this account to login now...''':
+'''Brugerprofil oprettet. Du kan bruge denne konto til at logge på nu...''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Temaet \'%(theme_name)s\' kunne ikke indlæses!''',
+'''User preferences saved!''':
+'''Brugerprofil gemt!''',
+'''Default''':
+'''Standard''',
+'''<Browser setting>''':
+'''<Browser opsætning>''',
+'''the one preferred''':
+'''den foretrukne''',
+'''free choice''':
+'''frit valg''',
+'''Save''':
+'''Gem''',
+'''Preferred theme''':
+'''Ønsket tema''',
+'''Editor Preference''':
+'''Foretrukne redigeringsprogram''',
+'''Editor shown on UI''':
+'''Redigeringsprogram vist på brugerfladen''',
+'''Time zone''':
+'''Tidszone''',
+'''Your time is''':
+'''Din tid er''',
+'''Server time is''':
+'''Serverens tid er''',
+'''Date format''':
+'''Datoformat''',
+'''Preferred language''':
+'''Foretrukne sprog''',
+'''General options''':
+'''Generelle valg''',
+'''Quick links''':
+'''Genveje''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Denne liste fungerer ikke, medmindre du har angivet en korrekt email-adresse!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Registrerede wiki-sider (ét regulært udtryk (regex) pr. linje)''',
+'''Create Profile''':
+'''Opret brugerprofil''',
+'''Mail me my account data''':
+'''Send mig mine adgangsoplysninger pr. email''',
+'''Email''':
+'''Email-adresse''',
+'''Name''':
+'''Navn''',
+'''Password''':
+'''Adgangskode''',
+'''Action''':
+'''Rutine''',
+'''Required attribute "%(attrname)s" missing''':
+'''Krævet atribut "%(attrname)s" mangler.''',
+'''Submitted form data:''':
+'''Formular-informationer sendt:''',
+'''Search Titles''':
+'''Søg i titler''',
+'''Display context of search results''':
+'''Vis omkringliggende tekst i søgeresultater''',
+'''Case-sensitive searching''':
+'''Søgning med skelnen mellem STORE og små bogstaver''',
+'''Search Text''':
+'''Søg i tekst''',
+'''Go To Page''':
+'''Gå til siden''',
+'''Include system pages''':
+'''Medtag systemsider''',
+'''Exclude system pages''':
+'''Udelad systemsider''',
+'''Plain title index''':
+'''Titelliste som tekst''',
+'''XML title index''':
+'''XML titelliste''',
+'''Python Version''':
+'''Python-version''',
+'''MoinMoin Version''':
+'''MoinMoin-version''',
+'''Release %s [Revision %s]''':
+'''Version %s [Udgave %s]''',
+'''4Suite Version''':
+'''4Suite-version''',
+'''Number of pages''':
+'''Antal sider''',
+'''Number of system pages''':
+'''Antal systemsider''',
+'''Accumulated page sizes''':
+'''Sammenlagte sidestørrelser''',
+'''Entries in edit log''':
+'''Emner i redigerings-log''',
+'''NONE''':
+'''INGEN''',
+'''Global extension macros''':
+'''Globale udvidelsesmakroer''',
+'''Local extension macros''':
+'''Lokale udvidelsesmakroer''',
+'''Global extension actions''':
+'''Globale udvidelsesrutiner''',
+'''Local extension actions''':
+'''Lokale udvidelsesrutiner''',
+'''Global parsers''':
+'''Globale fortolkere''',
+'''Local extension parsers''':
+'''Lokale udvidelsesfortolkere''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Installerede processorer (FORÆLDET -- brug fortolkere istedet)''',
+'''Disabled''':
+'''Deaktiveret''',
+'''Enabled''':
+'''Aktiveret''',
+'''Lupy search''':
+'''Lupy søgning''',
+'''Active threads''':
+'''Aktive tråde''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Formulér venligst søgningen mere specifikt end {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''FEJL i regulære udtryk (regex) \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Forkert datostempel \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Forventede et "=" efter "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Forventede en værdi for variablen "%(token)s"''',
+'''Wiki Markup''':
+'''Wiki-opmærkning''',
+'''Print View''':
+'''Printer-venlig''',
+'''Your changes are not saved!''':
+'''Dine ændringer er ikke gemt!''',
+'''Page name is too long, try shorter name.''':
+'''Sidenavn er for langt, prøv et kortere navn.''',
+'''GUI Mode''':
+'''Grafisk redigering''',
 '''Edit was cancelled.''':
 '''Redigeringen blev afbrudt.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -193,8 +382,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Du bør \'\'undgå at redigere\'\' denne side ihvertfald %(mins_valid)d minut(ter) endnu,
 for at undgå redigeringskonflikter.\'\'\'[[BR]]
 Tryk Annullér for at afbryde redigeringen.''',
-'''<unknown>''':
-'''<ukendt>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Installation af \'%(filename)s\' fejlede.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Filen %s er ikke en MoinMoin pakkefil.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -255,131 +446,20 @@ Tryk Annullér for at afbryde redigeringen.''',
 '''Abonnér på simple rettelser''',
 '''Disable this account forever''':
 '''Luk denne brugerprofil permanent''',
-'''Name''':
-'''Navn''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Brug Fornavn\'\'\'\'\'\'Efternavn)''',
 '''Alias-Name''':
 '''Kælenavn''',
-'''Password''':
-'''Adgangskode''',
 '''Password repeat''':
 '''Adgangskode gentaget''',
 '''(Only when changing passwords)''':
 '''(Kun ved ændring af adgangskode)''',
-'''Email''':
-'''Email-adresse''',
 '''User CSS URL''':
 '''Personlig CSS URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Efterlad blankt for at deaktivere bruger-CSS)''',
 '''Editor size''':
 '''Redigeringsvinduestørrelse''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Forkert brugernavn {{{\'%s\'}}}.
-Navn må kun indeholde Unicode alfanumeriske tegn, evt. med eet
-mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
-'''You are not allowed to do %s on this page.''':
-'''Du har ikke lov til at %s på denne side.''',
-'''Login''':
-'''Log ind''',
-''' %s and try again.''':
-''' %s og prøv igen.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d resultater ud af cirka %(pages)d sider.''',
-'''%.2f seconds''':
-'''%.2f sekunder''',
-'''match''':
-'''resultat''',
-'''matches''':
-'''resultater''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Nogen har bedt om at dine adgangsdata bliver tilsendt denne email-adresse.
-
-Hvis du har mistet din adgangskode, kan du bruge informationerne nedenfor og blot angive
-adgangskoden PRÆCIST SOM VIST i wiki\'ens adgangskode-formularfelt.
-
-Når du er korrekt logget ind, er det naturligvis en god idé at ændre adgangskoden.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Dine wiki brugerprofil-oplysninger''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Denne wiki har ikke aktiveret email-håndtering.
-Kontakt ejeren af wiki\'en, som kan aktivere email.''',
-'''Please provide a valid email address!''':
-'''Angiv venligst en korrekt email-adresse!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Ingen brugerprofil blev fundet med den angivne email-adresse \'%(email)s\'!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Brug BrugerProfil til at ændre dinne indstillinger eller oprette en brugerprofil.''',
-'''Empty user name. Please enter a user name.''':
-'''Blankt brugernavn. Angiv venligst et brugernavn.''',
-'''This user name already belongs to somebody else.''':
-'''Dette brugernavn tilhører allerede en anden.''',
-'''Passwords don\'t match!''':
-'''Adgangskoderne er ikke ens!''',
-'''Please specify a password!''':
-'''Angiv venligst en adgangskode!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Oplys venligst din email-adresse. Hvis du mister dine adgangsoplysninger, kan du få dem tilsendt pr. email.''',
-'''This email already belongs to somebody else.''':
-'''Denne email-adresse tilhører allerede en anden.''',
-'''User account created! You can use this account to login now...''':
-'''Brugerprofil oprettet. Du kan bruge denne konto til at logge på nu...''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Temaet \'%(theme_name)s\' kunne ikke indlæses!''',
-'''User preferences saved!''':
-'''Brugerprofil gemt!''',
-'''Default''':
-'''Standard''',
-'''<Browser setting>''':
-'''<Browser opsætning>''',
-'''the one preferred''':
-'''den foretrukne''',
-'''free choice''':
-'''frit valg''',
-'''Save''':
-'''Gem''',
-'''Preferred theme''':
-'''Ønsket tema''',
-'''Editor Preference''':
-'''Foretrukne redigeringsprogram''',
-'''Editor shown on UI''':
-'''Redigeringsprogram vist på brugerfladen''',
-'''Time zone''':
-'''Tidszone''',
-'''Your time is''':
-'''Din tid er''',
-'''Server time is''':
-'''Serverens tid er''',
-'''Date format''':
-'''Datoformat''',
-'''Preferred language''':
-'''Foretrukne sprog''',
-'''General options''':
-'''Generelle valg''',
-'''Quick links''':
-'''Genveje''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Denne liste fungerer ikke, medmindre du har angivet en korrekt email-adresse!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Registrerede wiki-sider (ét regulært udtryk (regex) pr. linje)''',
-'''Create Profile''':
-'''Opret brugerprofil''',
-'''Mail me my account data''':
-'''Send mig mine adgangsoplysninger pr. email''',
-'''Action''':
-'''Rutine''',
 '''No older revisions available!''':
 '''Ingen ældre udgaver tilgængelige!''',
 '''Diff for "%s"''':
@@ -478,78 +558,72 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Diagram-typen skal angives!''',
 '''Bad chart type "%s"!''':
 '''Dårlig diagram-type·"%s"!''',
-'''Search Titles''':
-'''Søg i titler''',
-'''Display context of search results''':
-'''Vis omkringliggende tekst i søgeresultater''',
-'''Case-sensitive searching''':
-'''Søgning med skelnen mellem STORE og små bogstaver''',
-'''Search Text''':
-'''Søg i tekst''',
-'''Go To Page''':
-'''Gå til siden''',
-'''Include system pages''':
-'''Medtag systemsider''',
-'''Exclude system pages''':
-'''Udelad systemsider''',
-'''Plain title index''':
-'''Titelliste som tekst''',
-'''XML title index''':
-'''XML titelliste''',
-'''Python Version''':
-'''Python-version''',
-'''MoinMoin Version''':
-'''MoinMoin-version''',
-'''Release %s [Revision %s]''':
-'''Version %s [Udgave %s]''',
-'''4Suite Version''':
-'''4Suite-version''',
-'''Number of pages''':
-'''Antal sider''',
-'''Number of system pages''':
-'''Antal systemsider''',
-'''Accumulated page sizes''':
-'''Sammenlagte sidestørrelser''',
-'''Entries in edit log''':
-'''Emner i redigerings-log''',
-'''NONE''':
-'''INGEN''',
-'''Global extension macros''':
-'''Globale udvidelsesmakroer''',
-'''Local extension macros''':
-'''Lokale udvidelsesmakroer''',
-'''Global extension actions''':
-'''Globale udvidelsesrutiner''',
-'''Local extension actions''':
-'''Lokale udvidelsesrutiner''',
-'''Global parsers''':
-'''Globale fortolkere''',
-'''Local extension parsers''':
-'''Lokale udvidelsesfortolkere''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Installerede processorer (FORÆLDET -- brug fortolkere istedet)''',
-'''Disabled''':
-'''Deaktiveret''',
-'''Enabled''':
-'''Aktiveret''',
-'''Lupy search''':
-'''Lupy søgning''',
-'''Active threads''':
-'''Aktive tråde''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Formulér venligst søgningen mere specifikt end {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''FEJL i regulære udtryk (regex) \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Forkert datostempel \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Forventede et "=" efter "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Forventede en værdi for variablen "%(token)s"''',
-'''Wiki Markup''':
-'''Wiki-opmærkning''',
-'''Print View''':
-'''Printer-venlig''',
+'''This page is already deleted or was never created!''':
+'''Denne side er allerede slettet eller har aldrig eksisteret!''',
+'''No pages like "%s"!''':
+'''Ingen sider ligner "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Vedhæftet fil \'%(target)s\' (eksternt navn \'%(filename)s\') eksisterer allerede.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Ukendt brugernavn: [[["%s"}}}. Angiv venligst brugernavn og adgangskode.''',
+'''Missing password. Please enter user name and password.''':
+'''Manglende adgangskode. Angiv venligst brugernavn og adgangskode.''',
+'''Sorry, wrong password.''':
+'''Desværre, forkert adgangskode.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Nøjagtigt een side fundet som ligner "%s" - omdirigerer til siden.''',
+'''Pages like "%s"''':
+'''Sider der ligner "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d·%(matches)s·for·"%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Lokal oversigt over "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Du har ikke lov til at omdøbe sider i denne wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!''',
+'''Could not rename page because of file system error: %s.''':
+'''Kunne ikke omdøbe side på grund af systemfejl: %s.''',
+'''Rename Page''':
+'''Omdøb side''',
+'''New name''':
+'''Nyt navn''',
+'''Optional reason for the renaming''':
+'''Årsag til omdøbning (valgfrit)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'En side med navnet {{{\'%s\'}}} eksisterer allerede.\'\'\'
+
+Prøv et andet navn.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(inklusive %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Følgende %(badwords)d ord blev ikke fundet i den %(totalwords)d ord store ordliste %(localwords)s og er fremhævet herunder:''',
+'''Add checked words to dictionary''':
+'''Tilføj de markerede ord til ordlisten''',
+'''No spelling errors found!''':
+'''Ingen stavefejl fundet!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Du kan ikke stavekontrollere en side du ikke kan læse.''',
+'''Title Search: "%s"''':
+'''Titelsøgning: "%s"''',
+'''Full Text Search: "%s"''':
+'''Fritekst-søgning: "%s"''',
+'''Full Link List for "%s"''':
+'''Fuld lænke-liste for "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn.''',
+'''You are not allowed to delete this page.''':
+'''Du har ikke lov til at slette denne side!''',
+'''Please use the interactive user interface to delete pages!''':
+'''Anvend venligst den interaktive brugergrænseflade til at slette sider!''',
+'''Really delete this page?''':
+'''Er du sikker på at denne side skal slettes?''',
+'''Delete''':
+'''Slet''',
+'''Optional reason for the deletion''':
+'''Årsag til denne sletning (valgfri)''',
 '''[%d attachments]''':
 '''[%d·vedhæftede filer]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -610,18 +684,12 @@ Alternativt, hvis "Omdøb" er blank, anvendes det originale filnavn.''',
 '''Overførselsrutine ikke understøttet: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Filer vedhæftet "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Vedhæftet fil \'%(target)s\' (eksternt navn \'%(filename)s\') eksisterer allerede.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Vedhæftet fil \'%(target)s\' (eksternt navn \'%(filename)s\') på %(bytes)d bytes gemt.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Vedhæftet fil \'%(filename)s\' slettet.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Vedhæftet fil \'%(filename)s\' installeret.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Installation af \'%(filename)s\' fejlede.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Filen %s er ikke en MoinMoin pakkefil.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Den vedhæftede fil \'%(filename)s\' kunne ikke udpakkes fordi indholdet ville fylde for meget (%(space)d kB mangler).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -644,80 +712,60 @@ Alternativt, hvis "Omdøb" er blank, anvendes det originale filnavn.''',
 '''Ukendt filtype. Kan ikke vise denne vedhæftede fil direkte.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''vedhæftet fil:%(filename)s til %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Du har ikke lov til at slette denne side!''',
-'''This page is already deleted or was never created!''':
-'''Denne side er allerede slettet eller har aldrig eksisteret!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Anvend venligst den interaktive brugergrænseflade til at slette sider!''',
-'''Really delete this page?''':
-'''Er du sikker på at denne side skal slettes?''',
-'''Delete''':
-'''Slet''',
-'''Optional reason for the deletion''':
-'''Årsag til denne sletning (valgfri)''',
-'''No pages like "%s"!''':
-'''Ingen sider ligner "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Nøjagtigt een side fundet som ligner "%s" - omdirigerer til siden.''',
-'''Pages like "%s"''':
-'''Sider der ligner "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d·%(matches)s·for·"%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Lokal oversigt over "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Du har ikke lov til at omdøbe sider i denne wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kunne ikke omdøbe side på grund af systemfejl: %s.''',
-'''Rename Page''':
-'''Omdøb side''',
-'''New name''':
-'''Nyt navn''',
-'''Optional reason for the renaming''':
-'''Årsag til omdøbning (valgfrit)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'En side med navnet {{{\'%s\'}}} eksisterer allerede.\'\'\'
-
-Prøv et andet navn.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(inklusive %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Følgende %(badwords)d ord blev ikke fundet i den %(totalwords)d ord store ordliste %(localwords)s og er fremhævet herunder:''',
-'''Add checked words to dictionary''':
-'''Tilføj de markerede ord til ordlisten''',
-'''No spelling errors found!''':
-'''Ingen stavefejl fundet!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Du kan ikke stavekontrollere en side du ikke kan læse.''',
-'''Title Search: "%s"''':
-'''Titelsøgning: "%s"''',
-'''Full Text Search: "%s"''':
-'''Fritekst-søgning: "%s"''',
-'''Full Link List for "%s"''':
-'''Fuld lænke-liste for "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Ukendt brugernavn: [[["%s"}}}. Angiv venligst brugernavn og adgangskode.''',
-'''Missing password. Please enter user name and password.''':
-'''Manglende adgangskode. Angiv venligst brugernavn og adgangskode.''',
-'''Sorry, wrong password.''':
-'''Desværre, forkert adgangskode.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn.''',
 '''Upload new attachment "%(filename)s"''':
 '''Overfør ny vedhæftet fil "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Opret ny tegning "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Redigér tegning "%(filename)s"''',
-'''Invalid include arguments "%s"!''':
-'''Forkerte inkluderingsargumenter "%s"!''',
-'''Nothing found for "%s"!''':
-'''Intet fundet for "%s"''',
+'''FrontPage''':
+'''ForSide''',
+'''RecentChanges''':
+'''SenesteRettelser''',
+'''TitleIndex''':
+'''TitelListe''',
+'''WordIndex''':
+'''OrdListe''',
+'''FindPage''':
+'''FindSide''',
+'''SiteNavigation''':
+'''SiteNavigering''',
+'''HelpContents''':
+'''HjælpIndhold''',
+'''HelpOnFormatting''':
+'''HjælpTilFormatering''',
+'''UserPreferences''':
+'''BrugerProfil''',
+'''WikiLicense''':
+'''WikiLicens''',
+'''MissingPage''':
+'''ManglendeSide''',
+'''Mon''':
+'''man''',
+'''Tue''':
+'''tir''',
+'''Wed''':
+'''ons''',
+'''Thu''':
+'''tor''',
+'''Fri''':
+'''fre''',
+'''Sat''':
+'''lør''',
+'''Sun''':
+'''søn''',
+'''AttachFile''':
+'''VedhæftFil''',
+'''DeletePage''':
+'''SletSide''',
+'''LikePages''':
+'''LignendeSide''',
+'''LocalSiteMap''':
+'''LokalOversigt''',
+'''RenamePage''':
+'''OmdøbSide''',
+'''SpellCheck''':
+'''StaveKontrol''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Navigationsskema \'%(scheme)s\' ikke understøttet!''',
 '''No parent page found!''':
@@ -752,14 +800,18 @@ Prøv et andet navn.''',
 '''sæt bogmærke''',
 '''[Bookmark reached]''':
 '''[Bogmærke nået]''',
+'''No wanted pages in this wiki.''':
+'''Ingen ønskede sider i denne wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Forkerte inkluderingsargumenter "%s"!''',
+'''Nothing found for "%s"!''':
+'''Intet fundet for "%s"''',
 '''Markup''':
 '''Opmærkning''',
 '''Display''':
 '''Vis''',
 '''Filename''':
 '''Filnavn''',
-'''No wanted pages in this wiki.''':
-'''Ingen ønskede sider i denne wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Dannelsen af reStructured text er ikke mulig - kræver docutils installeret.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -896,52 +948,4 @@ rød=redigér''',
 '''Email ikke sendt''',
 '''Mail sent OK''':
 '''Email sendt OK''',
-'''FrontPage''':
-'''ForSide''',
-'''RecentChanges''':
-'''SenesteRettelser''',
-'''TitleIndex''':
-'''TitelListe''',
-'''WordIndex''':
-'''OrdListe''',
-'''FindPage''':
-'''FindSide''',
-'''SiteNavigation''':
-'''SiteNavigering''',
-'''HelpContents''':
-'''HjælpIndhold''',
-'''HelpOnFormatting''':
-'''HjælpTilFormatering''',
-'''UserPreferences''':
-'''BrugerProfil''',
-'''WikiLicense''':
-'''WikiLicens''',
-'''MissingPage''':
-'''ManglendeSide''',
-'''Mon''':
-'''man''',
-'''Tue''':
-'''tir''',
-'''Wed''':
-'''ons''',
-'''Thu''':
-'''tor''',
-'''Fri''':
-'''fre''',
-'''Sat''':
-'''lør''',
-'''Sun''':
-'''søn''',
-'''AttachFile''':
-'''VedhæftFil''',
-'''DeletePage''':
-'''SletSide''',
-'''LikePages''':
-'''LignendeSide''',
-'''LocalSiteMap''':
-'''LokalOversigt''',
-'''RenamePage''':
-'''OmdøbSide''',
-'''SpellCheck''':
-'''StaveKontrol''',
 }

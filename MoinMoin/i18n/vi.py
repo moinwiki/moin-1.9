@@ -81,6 +81,148 @@ Nếu bạn không muốn vậy, nhấn \'\'\'%(cancel_button_text)s\'\'\' để
 '''Thay đổi nhỏ nhặt''',
 '''Remove trailing whitespace from each line''':
 '''Xoá khoảng trắng ở cuối dòng''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Tên người dùng không hợp lệ {{{\'%s\'}}}.
+Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng không bắt buộc ở giữa. Bạn không thể dùng tên cho nhóm.''',
+'''You are not allowed to do %s on this page.''':
+'''Bạn không thể %s vào trang này.''',
+'''Login''':
+'''Đăng nhập''',
+''' %s and try again.''':
+''' %s và thử lại.''',
+'''%.2f seconds''':
+'''%.2f giây''',
+'''match''':
+'''phù hợp''',
+'''matches''':
+'''phù hợp''',
+'''<unknown>''':
+'''<không rõ>''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người có thể kích hoạt chức năng này.''',
+'''Please provide a valid email address!''':
+'''Vui lòng cho biết địa chỉ thư điện tử hợp lệ!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Không tìm thấy account có địa chỉ thư điện tử \'%(email)s\'!''',
+'''Empty user name. Please enter a user name.''':
+'''Tên người dùng trống. Vui lòng nhập vào tên người dùng.''',
+'''This user name already belongs to somebody else.''':
+'''Tên người dùng này đã được đăng ký.''',
+'''Passwords don\'t match!''':
+'''Mật khẩu không đúng!''',
+'''Please specify a password!''':
+'''Vui lòng cho biết mật khẩu!''',
+'''This email already belongs to somebody else.''':
+'''Địa chỉ thư điện tử này đã được đăng ký.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Kiểu \'%(theme_name)s\' không thể đuợc nạp!''',
+'''User preferences saved!''':
+'''Sở thích của bạn đã được lưu!''',
+'''Default''':
+'''Mặc định''',
+'''<Browser setting>''':
+'''<Theo trình duyệt>''',
+'''Save''':
+'''Lưu''',
+'''Preferred theme''':
+'''Theme mặc định''',
+'''Time zone''':
+'''Múi giờ''',
+'''Your time is''':
+'''Giờ hiện tại''',
+'''Server time is''':
+'''Giờ ở máy chủ''',
+'''Date format''':
+'''Định dạng ngày''',
+'''Preferred language''':
+'''Ngôn ngữ mặc định''',
+'''General options''':
+'''Các lựa chọn chung''',
+'''Quick links''':
+'''Các liên kết thường dùng''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Danh sách này không hoạt động cho đến khi bạn nhập vào địa chỉ thư hợp lệ!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Các trang đã đăng ký (một regex trong một dòng)''',
+'''Create Profile''':
+'''Tạo Profile''',
+'''Mail me my account data''':
+'''Gửi cho tôi thông tin về account cá nhân''',
+'''Email''':
+'''Thư điện tử''',
+'''Name''':
+'''Tên''',
+'''Password''':
+'''Mật khẩu''',
+'''Action''':
+'''Công việc''',
+'''Required attribute "%(attrname)s" missing''':
+'''Không tìm thấy thuộc tính "%(attrname)s"''',
+'''Submitted form data:''':
+'''Dữ liệu đã được nhập:''',
+'''Search Titles''':
+'''Tìm tiêu đề''',
+'''Display context of search results''':
+'''Hiển thị kết quả tìm kiếm''',
+'''Case-sensitive searching''':
+'''Tìm kiếm phân biệt chữ hoa và chữ thường''',
+'''Search Text''':
+'''Tìm nội dung''',
+'''Go To Page''':
+'''Tới trang''',
+'''Include system pages''':
+'''Bao gồm các trang hệ thống''',
+'''Exclude system pages''':
+'''Bỏ các trang hệ thống''',
+'''Plain title index''':
+'''Chỉ mục đơn giản''',
+'''XML title index''':
+'''Chỉ mục dạng XML''',
+'''Python Version''':
+'''Phiên bản Python''',
+'''MoinMoin Version''':
+'''Phiên bản MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Phiên bản %s [bản sửa %s]''',
+'''4Suite Version''':
+'''Phiên bản 4Suite''',
+'''Number of pages''':
+'''Tổng số trang''',
+'''Number of system pages''':
+'''Số trang hệ thống''',
+'''Accumulated page sizes''':
+'''Tổng kích thước''',
+'''Entries in edit log''':
+'''Các mục trong edit log''',
+'''NONE''':
+'''NONE''',
+'''Global extension macros''':
+'''Macro bổ trợ toàn cục''',
+'''Local extension macros''':
+'''Macro bổ trợ nội bộ''',
+'''Global extension actions''':
+'''Action bổ trợ toàn cục''',
+'''Local extension actions''':
+'''Action bổ trợ nội bộ''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Processor đã cài (KHÔNG CÒN DÙNG -- dùng parser)''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Vui lòng dùng từ khoá tìm kiếm khác thay cho {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Có lỗi trong regex \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Không hiểu timestamp \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Dự đoán "=" sẽ theo sau "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Dự đoán "%(token)s" sẽ chứa giá trị nào đó''',
+'''Wiki Markup''':
+'''Đánh dấu kiểu wiki''',
+'''Print View''':
+'''Xem bản in''',
 '''Edit was cancelled.''':
 '''Các chỉnh sửa đã bị huỷ.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -173,8 +315,6 @@ To leave the editor, press the Cancel button.''':
 '''Trang này đang được thay đổi, hoặc xem qua trước lần cuối cùng lúc %(timestamp)s bởi %(owner)s.[[BR]]
 \'\'\'Để tránh sự cố, bạn nên \'\'chờ\'\' ít nhất %(mins_valid)d phút nữa.\'\'\'[[BR]]
 Để thoát khung soạn thảo, nhấn nút Huỷ bỏ.''',
-'''<unknown>''':
-'''<không rõ>''',
 '''Diffs''':
 '''Các bản diff''',
 '''Info''':
@@ -215,92 +355,16 @@ To leave the editor, press the Cancel button.''':
 '''Đăng ký vào các thay đổi nhỏ nhặt''',
 '''Disable this account forever''':
 '''Huỷ bỏ account này''',
-'''Name''':
-'''Tên''',
-'''Password''':
-'''Mật khẩu''',
 '''Password repeat''':
 '''Lập lại mật khẩu''',
 '''(Only when changing passwords)''':
 '''(Chỉ khi nào đổi mật khẩu)''',
-'''Email''':
-'''Thư điện tử''',
 '''User CSS URL''':
 '''CSS URL riêng''',
 '''(Leave it empty for disabling user CSS)''':
 '''(để trống nếu không dùng CSS)''',
 '''Editor size''':
 '''Kích thước khung soạn thảo''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Tên người dùng không hợp lệ {{{\'%s\'}}}.
-Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng không bắt buộc ở giữa. Bạn không thể dùng tên cho nhóm.''',
-'''You are not allowed to do %s on this page.''':
-'''Bạn không thể %s vào trang này.''',
-'''Login''':
-'''Đăng nhập''',
-''' %s and try again.''':
-''' %s và thử lại.''',
-'''%.2f seconds''':
-'''%.2f giây''',
-'''match''':
-'''phù hợp''',
-'''matches''':
-'''phù hợp''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Wiki này không hỗ trợ việc xử lý thư. Mong bạn thông báo cho chủ wiki, người có thể kích hoạt chức năng này.''',
-'''Please provide a valid email address!''':
-'''Vui lòng cho biết địa chỉ thư điện tử hợp lệ!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Không tìm thấy account có địa chỉ thư điện tử \'%(email)s\'!''',
-'''Empty user name. Please enter a user name.''':
-'''Tên người dùng trống. Vui lòng nhập vào tên người dùng.''',
-'''This user name already belongs to somebody else.''':
-'''Tên người dùng này đã được đăng ký.''',
-'''Passwords don\'t match!''':
-'''Mật khẩu không đúng!''',
-'''Please specify a password!''':
-'''Vui lòng cho biết mật khẩu!''',
-'''This email already belongs to somebody else.''':
-'''Địa chỉ thư điện tử này đã được đăng ký.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Kiểu \'%(theme_name)s\' không thể đuợc nạp!''',
-'''User preferences saved!''':
-'''Sở thích của bạn đã được lưu!''',
-'''Default''':
-'''Mặc định''',
-'''<Browser setting>''':
-'''<Theo trình duyệt>''',
-'''Save''':
-'''Lưu''',
-'''Preferred theme''':
-'''Theme mặc định''',
-'''Time zone''':
-'''Múi giờ''',
-'''Your time is''':
-'''Giờ hiện tại''',
-'''Server time is''':
-'''Giờ ở máy chủ''',
-'''Date format''':
-'''Định dạng ngày''',
-'''Preferred language''':
-'''Ngôn ngữ mặc định''',
-'''General options''':
-'''Các lựa chọn chung''',
-'''Quick links''':
-'''Các liên kết thường dùng''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Danh sách này không hoạt động cho đến khi bạn nhập vào địa chỉ thư hợp lệ!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Các trang đã đăng ký (một regex trong một dòng)''',
-'''Create Profile''':
-'''Tạo Profile''',
-'''Mail me my account data''':
-'''Gửi cho tôi thông tin về account cá nhân''',
-'''Action''':
-'''Công việc''',
 '''No older revisions available!''':
 '''Không có phiên bản cũ hơn!''',
 '''Diff for "%s"''':
@@ -383,66 +447,68 @@ Contact the owner of the wiki, who can enable email.''':
 '''Bạn cần nhập vào loại biểu đồ!''',
 '''Bad chart type "%s"!''':
 '''Không hiểu loại biểu đồ "%s"!''',
-'''Search Titles''':
-'''Tìm tiêu đề''',
-'''Display context of search results''':
-'''Hiển thị kết quả tìm kiếm''',
-'''Case-sensitive searching''':
-'''Tìm kiếm phân biệt chữ hoa và chữ thường''',
-'''Search Text''':
-'''Tìm nội dung''',
-'''Go To Page''':
-'''Tới trang''',
-'''Include system pages''':
-'''Bao gồm các trang hệ thống''',
-'''Exclude system pages''':
-'''Bỏ các trang hệ thống''',
-'''Plain title index''':
-'''Chỉ mục đơn giản''',
-'''XML title index''':
-'''Chỉ mục dạng XML''',
-'''Python Version''':
-'''Phiên bản Python''',
-'''MoinMoin Version''':
-'''Phiên bản MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Phiên bản %s [bản sửa %s]''',
-'''4Suite Version''':
-'''Phiên bản 4Suite''',
-'''Number of pages''':
-'''Tổng số trang''',
-'''Number of system pages''':
-'''Số trang hệ thống''',
-'''Accumulated page sizes''':
-'''Tổng kích thước''',
-'''Entries in edit log''':
-'''Các mục trong edit log''',
-'''NONE''':
-'''NONE''',
-'''Global extension macros''':
-'''Macro bổ trợ toàn cục''',
-'''Local extension macros''':
-'''Macro bổ trợ nội bộ''',
-'''Global extension actions''':
-'''Action bổ trợ toàn cục''',
-'''Local extension actions''':
-'''Action bổ trợ nội bộ''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Processor đã cài (KHÔNG CÒN DÙNG -- dùng parser)''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Vui lòng dùng từ khoá tìm kiếm khác thay cho {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Có lỗi trong regex \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Không hiểu timestamp \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Dự đoán "=" sẽ theo sau "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Dự đoán "%(token)s" sẽ chứa giá trị nào đó''',
-'''Wiki Markup''':
-'''Đánh dấu kiểu wiki''',
-'''Print View''':
-'''Xem bản in''',
+'''This page is already deleted or was never created!''':
+'''Trang này đã bị xoá hoặc chưa bao giờ tồn tại!''',
+'''No pages like "%s"!''':
+'''Không có trang giống "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''File gửi kèm \'%(target)s\' (tên ở máy chủ \'%(filename)s\') đã tồn tại.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Không biết người dùng: {{{"%s"}}}. Vui lòng nhập tên người dùng và mật khẩu.''',
+'''Missing password. Please enter user name and password.''':
+'''Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu.''',
+'''Sorry, wrong password.''':
+'''Xin lỗi, sai mật khẩu.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Tìm thấy chính xác một trang tương tự "%s", đang tự chuyển tới.''',
+'''Pages like "%s"''':
+'''Trang giống "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s ở trang "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Bản đồ liên kết nội bộ cho "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Bạn không thể đổi tên trang trong wiki này!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Vui lòng sử dụng giao diện người dùng để đổi tên trang!''',
+'''Rename Page''':
+'''Đổi tên trang''',
+'''New name''':
+'''Tên mới''',
+'''Optional reason for the renaming''':
+'''Lý do đổi tên (nếu có)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Đã có trang {{{\'%s\'}}}.\'\'\'
+
+Vui lòng dùng tên khác.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(bao gồm cả %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''%(badwords)d từ không có trong từ điển (%(totalwords)d từ)%(localwords)s và được đánh dấu bên dưới:''',
+'''Add checked words to dictionary''':
+'''Thêm các từ đã kiểm tra vào từ điển''',
+'''No spelling errors found!''':
+'''Không có lỗi chính tả!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem.''',
+'''Title Search: "%s"''':
+'''Tìm theo tiêu đề "%s"''',
+'''Full Text Search: "%s"''':
+'''Tìm nội dung: "%s"''',
+'''Full Link List for "%s"''':
+'''Danh sách liên kết đầy đủ trong "%s"''',
+'''You are not allowed to delete this page.''':
+'''Bạn không thể xoá trang này.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Vui lòng sử dụng giao diện người dùng để xoá trang!''',
+'''Really delete this page?''':
+'''Thật sự xoá trang này?''',
+'''Delete''':
+'''Xóa''',
+'''Optional reason for the deletion''':
+'''Lý do xoá trang (nếu có)''',
 '''[%d attachments]''':
 '''[%d attachments]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -495,8 +561,6 @@ cần phải đổi tên file bạn sắp tải lên. Mặc khác, nếu ô "Đ�
 '''Không thể thực hiện việc tải lên: %s''',
 '''Attachments for "%(pagename)s"''':
 '''File gửi kèm trong trang "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''File gửi kèm \'%(target)s\' (tên ở máy chủ \'%(filename)s\') đã tồn tại.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''File gửi kèm \'%(target)s\' (tên ở máy chủ \'%(filename)s\') kích thước %(bytes)d bytes đã được lưu.''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -507,76 +571,60 @@ cần phải đổi tên file bạn sắp tải lên. Mặc khác, nếu ô "Đ�
 '''Không hiểu kiểu file, không thể hiện file gửi kèm này trong văn bản.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s trong trang %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Bạn không thể xoá trang này.''',
-'''This page is already deleted or was never created!''':
-'''Trang này đã bị xoá hoặc chưa bao giờ tồn tại!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Vui lòng sử dụng giao diện người dùng để xoá trang!''',
-'''Really delete this page?''':
-'''Thật sự xoá trang này?''',
-'''Delete''':
-'''Xóa''',
-'''Optional reason for the deletion''':
-'''Lý do xoá trang (nếu có)''',
-'''No pages like "%s"!''':
-'''Không có trang giống "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Tìm thấy chính xác một trang tương tự "%s", đang tự chuyển tới.''',
-'''Pages like "%s"''':
-'''Trang giống "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s ở trang "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Bản đồ liên kết nội bộ cho "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Bạn không thể đổi tên trang trong wiki này!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Vui lòng sử dụng giao diện người dùng để đổi tên trang!''',
-'''Rename Page''':
-'''Đổi tên trang''',
-'''New name''':
-'''Tên mới''',
-'''Optional reason for the renaming''':
-'''Lý do đổi tên (nếu có)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Đã có trang {{{\'%s\'}}}.\'\'\'
-
-Vui lòng dùng tên khác.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(bao gồm cả %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''%(badwords)d từ không có trong từ điển (%(totalwords)d từ)%(localwords)s và được đánh dấu bên dưới:''',
-'''Add checked words to dictionary''':
-'''Thêm các từ đã kiểm tra vào từ điển''',
-'''No spelling errors found!''':
-'''Không có lỗi chính tả!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem.''',
-'''Title Search: "%s"''':
-'''Tìm theo tiêu đề "%s"''',
-'''Full Text Search: "%s"''':
-'''Tìm nội dung: "%s"''',
-'''Full Link List for "%s"''':
-'''Danh sách liên kết đầy đủ trong "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Không biết người dùng: {{{"%s"}}}. Vui lòng nhập tên người dùng và mật khẩu.''',
-'''Missing password. Please enter user name and password.''':
-'''Thiếu mật khẩu. Vui lòng nhập tên người dùng và mật khẩu.''',
-'''Sorry, wrong password.''':
-'''Xin lỗi, sai mật khẩu.''',
 '''Upload new attachment "%(filename)s"''':
 '''Tải lên file "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Tạo bản vẽ "%(filename)s" mới''',
 '''Edit drawing %(filename)s''':
 '''Sửa bản vẽ "%(filename)s"''',
-'''Invalid include arguments "%s"!''':
-'''Không hiểu tham số "%s"!''',
-'''Nothing found for "%s"!''':
-'''Không tìm thấy "%s"''',
+'''FrontPage''':
+'''Trang đầu''',
+'''RecentChanges''':
+'''Các thay đổi gần đây''',
+'''TitleIndex''':
+'''Tựa chỉ mục''',
+'''WordIndex''':
+'''Từ chỉ mục''',
+'''FindPage''':
+'''Tìm trang''',
+'''SiteNavigation''':
+'''SiteNavigation''',
+'''HelpContents''':
+'''Trang chỉ dẫn''',
+'''HelpOnFormatting''':
+'''Chỉ dẫn cách định dạng''',
+'''UserPreferences''':
+'''Sở thích cá nhân''',
+'''WikiLicense''':
+'''Wiki License''',
+'''MissingPage''':
+'''MissingPage''',
+'''Mon''':
+'''Thứ Hai''',
+'''Tue''':
+'''Thứ Ba''',
+'''Wed''':
+'''Thứ Tư''',
+'''Thu''':
+'''Thứ Năm''',
+'''Fri''':
+'''Thứ Sáu''',
+'''Sat''':
+'''Thứ Bảy''',
+'''Sun''':
+'''Chủ Nhật''',
+'''AttachFile''':
+'''AttachFile''',
+'''DeletePage''':
+'''DeletePage''',
+'''LikePages''':
+'''LikePages''',
+'''LocalSiteMap''':
+'''LocalSiteMap''',
+'''RenamePage''':
+'''RenamePage''',
+'''SpellCheck''':
+'''SpellCheck''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Không hiểu cách hoạt động \'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -609,14 +657,18 @@ Vui lòng dùng tên khác.''',
 '''đưa vào bookmark''',
 '''[Bookmark reached]''':
 '''[Đã tới bookmark]''',
+'''No wanted pages in this wiki.''':
+'''Không có trang cần tạo trong wiki này.''',
+'''Invalid include arguments "%s"!''':
+'''Không hiểu tham số "%s"!''',
+'''Nothing found for "%s"!''':
+'''Không tìm thấy "%s"''',
 '''Markup''':
 '''Đánh dấu''',
 '''Display''':
 '''Hiển thị''',
 '''Filename''':
 '''Tên file''',
-'''No wanted pages in this wiki.''':
-'''Không có trang cần tạo trong wiki này.''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Dự đoán "%(wanted)s" theo sau "%(key)s", nhưng lại là "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -695,52 +747,4 @@ red=edit''':
 '''Kết nối tới mailserver \'%(server)s\' bị ngắt quảng vì lý do: %(reason)s''',
 '''Mail sent OK''':
 '''Thư đã được gửi''',
-'''FrontPage''':
-'''Trang đầu''',
-'''RecentChanges''':
-'''Các thay đổi gần đây''',
-'''TitleIndex''':
-'''Tựa chỉ mục''',
-'''WordIndex''':
-'''Từ chỉ mục''',
-'''FindPage''':
-'''Tìm trang''',
-'''SiteNavigation''':
-'''SiteNavigation''',
-'''HelpContents''':
-'''Trang chỉ dẫn''',
-'''HelpOnFormatting''':
-'''Chỉ dẫn cách định dạng''',
-'''UserPreferences''':
-'''Sở thích cá nhân''',
-'''WikiLicense''':
-'''Wiki License''',
-'''MissingPage''':
-'''MissingPage''',
-'''Mon''':
-'''Thứ Hai''',
-'''Tue''':
-'''Thứ Ba''',
-'''Wed''':
-'''Thứ Tư''',
-'''Thu''':
-'''Thứ Năm''',
-'''Fri''':
-'''Thứ Sáu''',
-'''Sat''':
-'''Thứ Bảy''',
-'''Sun''':
-'''Chủ Nhật''',
-'''AttachFile''':
-'''AttachFile''',
-'''DeletePage''':
-'''DeletePage''',
-'''LikePages''':
-'''LikePages''',
-'''LocalSiteMap''':
-'''LocalSiteMap''',
-'''RenamePage''':
-'''RenamePage''',
-'''SpellCheck''':
-'''SpellCheck''',
 }

@@ -32,8 +32,6 @@ macro call.-~
 '''创建网页''',
 '''You are not allowed to view this page.''':
 '''您无权阅读此页.''',
-'''Your changes are not saved!''':
-'''您的改动有保存!''',
 '''You are not allowed to edit this page.''':
 '''您无权编辑此页.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ macro call.-~
 '''不能编辑旧版网页!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''你的编辑锁定超时. 可能会发生编辑冲突!''',
-'''Page name is too long, try shorter name.''':
-'''网页名称太长, 试试短一些的名称''',
 '''Edit "%(pagename)s"''':
 '''编辑"%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 如果你不同意, 按 \'\'\'%(cancel_button_text)s\'\'\' 取消您的修改.''',
 '''Preview''':
 '''预览''',
-'''GUI Mode''':
-'''图形界面模式''',
 '''Comment:''':
 '''备注:''',
 '''<No addition>''':
@@ -96,6 +90,200 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''小修改''',
 '''Remove trailing whitespace from each line''':
 '''去掉每行尾部空白''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''无效的用户名{{{\'%s\'}}}.
+用户名可以包含Unicode编码内的任何字母和数字, 并允许词与词之间有一个空格.
+组页(Group page)名不能用作用户名.''',
+'''You are not allowed to do %s on this page.''':
+'''您不可以对此页进行%s操作.''',
+'''Login''':
+'''登录''',
+''' %s and try again.''':
+'''%s后再试.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''在大约%(pages)d页中找到%(hits)d个结果.''',
+'''%.2f seconds''':
+'''%.2f秒''',
+'''match''':
+'''次匹配''',
+'''matches''':
+'''次匹配''',
+'''<unknown>''':
+'''不明''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''有人要求将他的帐号资料寄到这个电子邮件地址.
+
+如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表中. 
+您可以用拷贝粘贴的方法.
+
+成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. 
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] 您的维基帐号资料''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
+'''Please provide a valid email address!''':
+'''请提供一个有效的电子邮件地址!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''找不到用\'%(email)s\'登记的帐户!!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''请到用户设置(UserPreferences)修改您的设置或创建新的帐号.''',
+'''Empty user name. Please enter a user name.''':
+'''请输入用户名.''',
+'''This user name already belongs to somebody else.''':
+'''这个用户名已经被别人占用了''',
+'''Passwords don\'t match!''':
+'''两次输入的密码不符!''',
+'''Please specify a password!''':
+'''请输入一个密码!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回.''',
+'''This email already belongs to somebody else.''':
+'''别人已经用这个电子邮件注册过了.''',
+'''User account created! You can use this account to login now...''':
+'''用户帐号成功创建! 即时起您就可以用此帐户登录...''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''未能装载主题\'%(theme_name)s\'!''',
+'''User preferences saved!''':
+'''用户设置已保存!''',
+'''Default''':
+'''缺省''',
+'''<Browser setting>''':
+'''<根据浏览器设置>''',
+'''the one preferred''':
+'''您喜爱的''',
+'''free choice''':
+'''随意选择''',
+'''Save''':
+'''保存''',
+'''Preferred theme''':
+'''主题''',
+'''Editor Preference''':
+'''编辑器喜好''',
+'''Editor shown on UI''':
+'''界面上显示的编辑器''',
+'''Time zone''':
+'''时区''',
+'''Your time is''':
+'''您的当地时间是''',
+'''Server time is''':
+'''服务器时间是''',
+'''Date format''':
+'''日期格式''',
+'''Preferred language''':
+'''界面语言''',
+'''General options''':
+'''一般选项''',
+'''Quick links''':
+'''快捷链接''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''请输入一个有效的电子邮件地址, 否则本订阅列表不起作用.''',
+'''Subscribed wiki pages (one regex per line)''':
+'''订阅的维基网页(每行一个正规表达式)''',
+'''Create Profile''':
+'''新用户注册''',
+'''Mail me my account data''':
+'''把帐号资料寄给我''',
+'''Email''':
+'''电子邮件''',
+'''Name''':
+'''用户名''',
+'''Password''':
+'''密码''',
+'''Action''':
+'''操作''',
+'''Required attribute "%(attrname)s" missing''':
+'''缺少需要的属性"%(attrname)s"''',
+'''Submitted form data:''':
+'''提交表单数据:''',
+'''Search Titles''':
+'''标题搜索''',
+'''Display context of search results''':
+'''显示找到网页的内容''',
+'''Case-sensitive searching''':
+'''大小写敏感搜索''',
+'''Search Text''':
+'''正文检索''',
+'''Go To Page''':
+'''转到网页''',
+'''Include system pages''':
+'''包括系统网页''',
+'''Exclude system pages''':
+'''不包括系统网页''',
+'''Plain title index''':
+'''标题索引''',
+'''XML title index''':
+'''XML标题索引''',
+'''Python Version''':
+'''Python版本''',
+'''MoinMoin Version''':
+'''MoinMoin版本''',
+'''Release %s [Revision %s]''':
+'''版本%s [修订版本 %s]''',
+'''4Suite Version''':
+'''4Suite版本''',
+'''Number of pages''':
+'''总网页数''',
+'''Number of system pages''':
+'''系统网页数''',
+'''Accumulated page sizes''':
+'''累计网页大小''',
+'''Entries in edit log''':
+'''编辑日志项次''',
+'''NONE''':
+'''无''',
+'''Global extension macros''':
+'''全局扩充宏''',
+'''Local extension macros''':
+'''本地扩充宏''',
+'''Global extension actions''':
+'''全局扩充操作''',
+'''Local extension actions''':
+'''本地扩充操作''',
+'''Global parsers''':
+'''全局分析插件(parsers)''',
+'''Local extension parsers''':
+'''本地扩充分析插件(parsers)''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''已安装的处理插件(processors, 不再支持，请使用分析插件)''',
+'''Disabled''':
+'''不再有效''',
+'''Enabled''':
+'''有效''',
+'''Lupy search''':
+'''Lupy搜索''',
+'''Active threads''':
+'''活跃线程''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''请输入比{{{"%s"}}}更精确的关键字!!''',
+'''ERROR in regex \'%s\'''':
+'''正规表达式\'%s\'错误''',
+'''Bad timestamp \'%s\'''':
+'''错误的时间标记 \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"%(token)s"后面应该有个 "="''',
+'''Expected a value for key "%(token)s"''':
+'''键"%(token)s"应该有对应的值''',
+'''Wiki Markup''':
+'''维基标记''',
+'''Print View''':
+'''打印视图''',
+'''Your changes are not saved!''':
+'''您的改动有保存!''',
+'''Page name is too long, try shorter name.''':
+'''网页名称太长, 试试短一些的名称''',
+'''GUI Mode''':
+'''图形界面模式''',
 '''Edit was cancelled.''':
 '''编辑取消了.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -197,8 +385,10 @@ To leave the editor, press the Cancel button.''':
 '''%(owner)s从%(timestamp)s 开始编辑或预览此页.[[BR]]
 \'\'\'为了避免编辑冲突, \'\'请尽量不要\'\'在%(mins_valid)d分钟内编辑此页\'\'\'.[[BR]]
 请按\'\'\'取消\'\'\'按钮退出编辑.''',
-'''<unknown>''':
-'''不明''',
+'''Installation of \'%(filename)s\' failed.''':
+'''文件\'%(filename)s\'安装失败''',
+'''The file %s is not a MoinMoin package file.''':
+'''文件%s不是MoinMoin包.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -259,130 +449,20 @@ To leave the editor, press the Cancel button.''':
 '''订阅细小改动''',
 '''Disable this account forever''':
 '''永久停用此帐户''',
-'''Name''':
-'''用户名''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(请用Firstname\'\'\'\'\'\'Lastname, 或者汉语拼音Xing\'\'\'\'\'\'Ming)''',
 '''Alias-Name''':
 '''别名''',
-'''Password''':
-'''密码''',
 '''Password repeat''':
 '''重复密码''',
 '''(Only when changing passwords)''':
 '''(只在改变密码时)''',
-'''Email''':
-'''电子邮件''',
 '''User CSS URL''':
 '''自选CSS的URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(空白表示不用自选的CSS)''',
 '''Editor size''':
 '''编辑器大小''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''无效的用户名{{{\'%s\'}}}.
-用户名可以包含Unicode编码内的任何字母和数字, 并允许词与词之间有一个空格.
-组页(Group page)名不能用作用户名.''',
-'''You are not allowed to do %s on this page.''':
-'''您不可以对此页进行%s操作.''',
-'''Login''':
-'''登录''',
-''' %s and try again.''':
-'''%s后再试.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''在大约%(pages)d页中找到%(hits)d个结果.''',
-'''%.2f seconds''':
-'''%.2f秒''',
-'''match''':
-'''次匹配''',
-'''matches''':
-'''次匹配''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''有人要求将他的帐号资料寄到这个电子邮件地址.
-
-如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表中. 
-您可以用拷贝粘贴的方法.
-
-成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. 
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] 您的维基帐号资料''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能.''',
-'''Please provide a valid email address!''':
-'''请提供一个有效的电子邮件地址!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''找不到用\'%(email)s\'登记的帐户!!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''请到用户设置(UserPreferences)修改您的设置或创建新的帐号.''',
-'''Empty user name. Please enter a user name.''':
-'''请输入用户名.''',
-'''This user name already belongs to somebody else.''':
-'''这个用户名已经被别人占用了''',
-'''Passwords don\'t match!''':
-'''两次输入的密码不符!''',
-'''Please specify a password!''':
-'''请输入一个密码!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回.''',
-'''This email already belongs to somebody else.''':
-'''别人已经用这个电子邮件注册过了.''',
-'''User account created! You can use this account to login now...''':
-'''用户帐号成功创建! 即时起您就可以用此帐户登录...''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''未能装载主题\'%(theme_name)s\'!''',
-'''User preferences saved!''':
-'''用户设置已保存!''',
-'''Default''':
-'''缺省''',
-'''<Browser setting>''':
-'''<根据浏览器设置>''',
-'''the one preferred''':
-'''您喜爱的''',
-'''free choice''':
-'''随意选择''',
-'''Save''':
-'''保存''',
-'''Preferred theme''':
-'''主题''',
-'''Editor Preference''':
-'''编辑器喜好''',
-'''Editor shown on UI''':
-'''界面上显示的编辑器''',
-'''Time zone''':
-'''时区''',
-'''Your time is''':
-'''您的当地时间是''',
-'''Server time is''':
-'''服务器时间是''',
-'''Date format''':
-'''日期格式''',
-'''Preferred language''':
-'''界面语言''',
-'''General options''':
-'''一般选项''',
-'''Quick links''':
-'''快捷链接''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''请输入一个有效的电子邮件地址, 否则本订阅列表不起作用.''',
-'''Subscribed wiki pages (one regex per line)''':
-'''订阅的维基网页(每行一个正规表达式)''',
-'''Create Profile''':
-'''新用户注册''',
-'''Mail me my account data''':
-'''把帐号资料寄给我''',
-'''Action''':
-'''操作''',
 '''No older revisions available!''':
 '''没有旧版''',
 '''Diff for "%s"''':
@@ -481,78 +561,72 @@ Contact the owner of the wiki, who can enable email.''':
 '''请指定图表类型!''',
 '''Bad chart type "%s"!''':
 '''错误的图表类型"%s"!''',
-'''Search Titles''':
-'''标题搜索''',
-'''Display context of search results''':
-'''显示找到网页的内容''',
-'''Case-sensitive searching''':
-'''大小写敏感搜索''',
-'''Search Text''':
-'''正文检索''',
-'''Go To Page''':
-'''转到网页''',
-'''Include system pages''':
-'''包括系统网页''',
-'''Exclude system pages''':
-'''不包括系统网页''',
-'''Plain title index''':
-'''标题索引''',
-'''XML title index''':
-'''XML标题索引''',
-'''Python Version''':
-'''Python版本''',
-'''MoinMoin Version''':
-'''MoinMoin版本''',
-'''Release %s [Revision %s]''':
-'''版本%s [修订版本 %s]''',
-'''4Suite Version''':
-'''4Suite版本''',
-'''Number of pages''':
-'''总网页数''',
-'''Number of system pages''':
-'''系统网页数''',
-'''Accumulated page sizes''':
-'''累计网页大小''',
-'''Entries in edit log''':
-'''编辑日志项次''',
-'''NONE''':
-'''无''',
-'''Global extension macros''':
-'''全局扩充宏''',
-'''Local extension macros''':
-'''本地扩充宏''',
-'''Global extension actions''':
-'''全局扩充操作''',
-'''Local extension actions''':
-'''本地扩充操作''',
-'''Global parsers''':
-'''全局分析插件(parsers)''',
-'''Local extension parsers''':
-'''本地扩充分析插件(parsers)''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''已安装的处理插件(processors, 不再支持，请使用分析插件)''',
-'''Disabled''':
-'''不再有效''',
-'''Enabled''':
-'''有效''',
-'''Lupy search''':
-'''Lupy搜索''',
-'''Active threads''':
-'''活跃线程''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''请输入比{{{"%s"}}}更精确的关键字!!''',
-'''ERROR in regex \'%s\'''':
-'''正规表达式\'%s\'错误''',
-'''Bad timestamp \'%s\'''':
-'''错误的时间标记 \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"%(token)s"后面应该有个 "="''',
-'''Expected a value for key "%(token)s"''':
-'''键"%(token)s"应该有对应的值''',
-'''Wiki Markup''':
-'''维基标记''',
-'''Print View''':
-'''打印视图''',
+'''This page is already deleted or was never created!''':
+'''此页已被删除或根本就不存在!''',
+'''No pages like "%s"!''':
+'''"%s"没有相似网页!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''附件\'%(target)s\'已经存在(远端名称 \'%(filename)s\').''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
+'''Missing password. Please enter user name and password.''':
+'''需要密码, 请输入用户名和密码.''',
+'''Sorry, wrong password.''':
+'''对不起, 无效密码.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''刚好有一个网页和"%s"相似，重定向到该页.''',
+'''Pages like "%s"''':
+'''"%s"的相似网页''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''共发现%(matchcount)d%(matches)s与"%(title)s"相似的页''',
+'''Local Site Map for "%s"''':
+'''"%s"的本地站点图''',
+'''You are not allowed to rename pages in this wiki!''':
+'''本维基不开放网页改名!''',
+'''Please use the interactive user interface to rename pages!''':
+'''请使用用户界面交互地为网页改名!''',
+'''Could not rename page because of file system error: %s.''':
+'''网页改名失败, 文件系统异常: %s.''',
+'''Rename Page''':
+'''改名''',
+'''New name''':
+'''新名称''',
+'''Optional reason for the renaming''':
+'''改名的原因(可选)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'已经有一页叫做{{{\'%s\'}}} 了.\'\'\'
+
+试用一个不同的网页名.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(其中包括%(localwords)d个%(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''下列%(badwords)d个词, 没有收录在词典中(总词数%(totalwords)d词, %(localwords)s).这些词在正文中特别标出:''',
+'''Add checked words to dictionary''':
+'''将选中的词加入词典''',
+'''No spelling errors found!''':
+'''没有拼写错误!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''不能对无权阅读的网页进行拼写检查.''',
+'''Title Search: "%s"''':
+'''标题搜索："%s"''',
+'''Full Text Search: "%s"''':
+'''全文检索: "%s"''',
+'''Full Link List for "%s"''':
+'''连向"%s"的网页''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''没有网页名就无法创建新网页. 请指定一个网页名.''',
+'''You are not allowed to delete this page.''':
+'''您不能删除此页!''',
+'''Please use the interactive user interface to delete pages!''':
+'''请使用用户界面交互删除网页!''',
+'''Really delete this page?''':
+'''真的要删除此页?''',
+'''Delete''':
+'''删除''',
+'''Optional reason for the deletion''':
+'''删除此页的理由(可选)''',
 '''[%d attachments]''':
 '''[%d个附件]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -614,18 +688,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''不支持的上载功能: %s''',
 '''Attachments for "%(pagename)s"''':
 '''网页"%(pagename)s"的附件''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''附件\'%(target)s\'已经存在(远端名称 \'%(filename)s\').''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''附件\'%(target)s\'(远端名称\'%(filename)s\')已上载, 共计%(bytes)d字节.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''附件\'%(filename)s\'已删除.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''附件\'%(filename)s\'已安装.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''文件\'%(filename)s\'安装失败''',
-'''The file %s is not a MoinMoin package file.''':
-'''文件%s不是MoinMoin包.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''附件\'%(filename)s\'解压缩失败, 原因是文件解包后太大 (缺%(space)d kB的空间).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -648,80 +716,62 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''不明文件类型, 不能内嵌在正文中.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''附件:%(pagename)s的%(filename)s''',
-'''You are not allowed to delete this page.''':
-'''您不能删除此页!''',
-'''This page is already deleted or was never created!''':
-'''此页已被删除或根本就不存在!''',
-'''Please use the interactive user interface to delete pages!''':
-'''请使用用户界面交互删除网页!''',
-'''Really delete this page?''':
-'''真的要删除此页?''',
-'''Delete''':
-'''删除''',
-'''Optional reason for the deletion''':
-'''删除此页的理由(可选)''',
-'''No pages like "%s"!''':
-'''"%s"没有相似网页!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''刚好有一个网页和"%s"相似，重定向到该页.''',
-'''Pages like "%s"''':
-'''"%s"的相似网页''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''共发现%(matchcount)d%(matches)s与"%(title)s"相似的页''',
-'''Local Site Map for "%s"''':
-'''"%s"的本地站点图''',
-'''You are not allowed to rename pages in this wiki!''':
-'''本维基不开放网页改名!''',
-'''Please use the interactive user interface to rename pages!''':
-'''请使用用户界面交互地为网页改名!''',
-'''Could not rename page because of file system error: %s.''':
-'''网页改名失败, 文件系统异常: %s.''',
-'''Rename Page''':
-'''改名''',
-'''New name''':
-'''新名称''',
-'''Optional reason for the renaming''':
-'''改名的原因(可选)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'已经有一页叫做{{{\'%s\'}}} 了.\'\'\'
-
-试用一个不同的网页名.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(其中包括%(localwords)d个%(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''下列%(badwords)d个词, 没有收录在词典中(总词数%(totalwords)d词, %(localwords)s).这些词在正文中特别标出:''',
-'''Add checked words to dictionary''':
-'''将选中的词加入词典''',
-'''No spelling errors found!''':
-'''没有拼写错误!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''不能对无权阅读的网页进行拼写检查.''',
-'''Title Search: "%s"''':
-'''标题搜索："%s"''',
-'''Full Text Search: "%s"''':
-'''全文检索: "%s"''',
-'''Full Link List for "%s"''':
-'''连向"%s"的网页''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
-'''Missing password. Please enter user name and password.''':
-'''需要密码, 请输入用户名和密码.''',
-'''Sorry, wrong password.''':
-'''对不起, 无效密码.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''没有网页名就无法创建新网页. 请指定一个网页名.''',
 '''Upload new attachment "%(filename)s"''':
 '''上载新附件"%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''创建新图片"%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''编辑图片"%(filename)s"''',
-'''Invalid include arguments "%s"!''':
-'''无效的include参数"%s"!''',
-'''Nothing found for "%s"!''':
-'''找不到"%s"!''',
+'''FrontPage''':
+'''首页''',
+'''RecentChanges''':
+'''最新改动''',
+'''TitleIndex''':
+'''标题索引''',
+'''WordIndex''':
+'''词汇索引''',
+'''FindPage''':
+'''查找网页''',
+'''SiteNavigation''':
+'''站点导航''',
+'''HelpContents''':
+'''帮助目录''',
+'''HelpOnFormatting''':
+'''帮助-排版''',
+'''UserPreferences''':
+'''用户设置''',
+'''WikiLicense''':
+'''维基版权''',
+'''MissingPage''':
+'''缺失网页''',
+'''MissingHomePage''':
+'''缺失主页''',
+'''Mon''':
+'''星期一''',
+'''Tue''':
+'''星期二''',
+'''Wed''':
+'''星期三''',
+'''Thu''':
+'''星期四''',
+'''Fri''':
+'''星期五''',
+'''Sat''':
+'''星期六''',
+'''Sun''':
+'''星期日''',
+'''AttachFile''':
+'''附件''',
+'''DeletePage''':
+'''删除''',
+'''LikePages''':
+'''相似网页''',
+'''LocalSiteMap''':
+'''本站地图''',
+'''RenamePage''':
+'''改名''',
+'''SpellCheck''':
+'''拼写检查''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''不支持的导航方案\'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -756,14 +806,18 @@ Try a different name.''':
 '''设置书签''',
 '''[Bookmark reached]''':
 '''书签结尾''',
+'''No wanted pages in this wiki.''':
+'''本维基中没有未定义的网页.''',
+'''Invalid include arguments "%s"!''':
+'''无效的include参数"%s"!''',
+'''Nothing found for "%s"!''':
+'''找不到"%s"!''',
 '''Markup''':
 '''标记''',
 '''Display''':
 '''显示''',
 '''Filename''':
 '''文件名''',
-'''No wanted pages in this wiki.''':
-'''本维基中没有未定义的网页.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''无法正确显示reStructured文本, 请安装docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -900,54 +954,4 @@ red=edit''':
 '''邮件发送失败''',
 '''Mail sent OK''':
 '''邮件成功发送''',
-'''FrontPage''':
-'''首页''',
-'''RecentChanges''':
-'''最新改动''',
-'''TitleIndex''':
-'''标题索引''',
-'''WordIndex''':
-'''词汇索引''',
-'''FindPage''':
-'''查找网页''',
-'''SiteNavigation''':
-'''站点导航''',
-'''HelpContents''':
-'''帮助目录''',
-'''HelpOnFormatting''':
-'''帮助-排版''',
-'''UserPreferences''':
-'''用户设置''',
-'''WikiLicense''':
-'''维基版权''',
-'''MissingPage''':
-'''缺失网页''',
-'''MissingHomePage''':
-'''缺失主页''',
-'''Mon''':
-'''星期一''',
-'''Tue''':
-'''星期二''',
-'''Wed''':
-'''星期三''',
-'''Thu''':
-'''星期四''',
-'''Fri''':
-'''星期五''',
-'''Sat''':
-'''星期六''',
-'''Sun''':
-'''星期日''',
-'''AttachFile''':
-'''附件''',
-'''DeletePage''':
-'''删除''',
-'''LikePages''':
-'''相似网页''',
-'''LocalSiteMap''':
-'''本站地图''',
-'''RenamePage''':
-'''改名''',
-'''SpellCheck''':
-'''拼写检查''',
 }

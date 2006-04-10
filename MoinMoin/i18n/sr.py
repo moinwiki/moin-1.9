@@ -79,6 +79,122 @@ Ako to ne želite, kliknite na \'\'\'%(cancel_button_text)s\'\'\' , da biste Va�
 '''<Nema dodataka>''',
 '''Remove trailing whitespace from each line''':
 '''Skini blankove sa kraja svake linije''',
+'''Login''':
+'''Ulogovati se''',
+'''match''':
+'''pronađen''',
+'''matches''':
+'''pronađenih''',
+'''<unknown>''':
+'''<nepoznato>''',
+'''Please provide a valid email address!''':
+'''Molimo vas da upišete ispravnu mejl adresu!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nalog koji odgovara datoj mejl adresi , \'%(email)s\' , ne postoji!''',
+'''This user name already belongs to somebody else.''':
+'''Neko drugi već poseduje ovo korisničko ime.''',
+'''Passwords don\'t match!''':
+'''Lozinka nije ispravna!''',
+'''Please specify a password!''':
+'''Molimo vas da ukucate lozinku.''',
+'''This email already belongs to somebody else.''':
+'''Neko drugi već poseduje ovu mejl adresu''',
+'''User preferences saved!''':
+'''Korisničke Postavke snimljene!''',
+'''Default''':
+'''Standard''',
+'''<Browser setting>''':
+'''<postavke Brauzera>''',
+'''Save''':
+'''Snimiti''',
+'''Preferred theme''':
+'''Omiljena tema''',
+'''Time zone''':
+'''Vremenska zona''',
+'''Your time is''':
+'''Vaše vreme je''',
+'''Server time is''':
+'''Vreme Servera je''',
+'''Date format''':
+'''Datumski format''',
+'''Preferred language''':
+'''Omiljeni jezik''',
+'''General options''':
+'''Glavne opcije''',
+'''Quick links''':
+'''Linkovi''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Ova lista ne funkcioniše ako niste ukucali pravilnu mejl adresu!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Pretpisane viki stranice (jedan regularni izraz u redu)''',
+'''Create Profile''':
+'''stvoriti profil''',
+'''Mail me my account data''':
+'''poslati mi moje podatke putem mejla''',
+'''Email''':
+'''Mejl adresa''',
+'''Name''':
+'''Ime''',
+'''Password''':
+'''Lozinka''',
+'''Action''':
+'''Akcija''',
+'''Required attribute "%(attrname)s" missing''':
+'''Potreban atribut "%(attrname)s" nedostaje''',
+'''Submitted form data:''':
+'''Podaci poslati u formularu:''',
+'''Display context of search results''':
+'''Prikazati kontekst pronađenih rezultata''',
+'''Case-sensitive searching''':
+'''Potraga sa razlikovanjem velikih i malih slova''',
+'''Include system pages''':
+'''Uključiti i sistemske stranice''',
+'''Exclude system pages''':
+'''Isključiti sistemske stranice''',
+'''Plain title index''':
+'''Jednostavni naslovni sadržaj''',
+'''XML title index''':
+'''XML naslovni sadržaj''',
+'''Python Version''':
+'''Python verzija''',
+'''MoinMoin Version''':
+'''MoinMoin verzija''',
+'''Release %s [Revision %s]''':
+'''Izdanje %s [Revizija %s]''',
+'''4Suite Version''':
+'''4Suite verzija''',
+'''Number of pages''':
+'''Broj stranica''',
+'''Number of system pages''':
+'''Broja sistemskih stranica''',
+'''Accumulated page sizes''':
+'''Ukupne veličine stranica''',
+'''Entries in edit log''':
+'''Broj zapisa u istoriji promena''',
+'''NONE''':
+'''NIJEDAN''',
+'''Global extension macros''':
+'''Globalni makroi ekstenzija''',
+'''Local extension macros''':
+'''Lokalni makroi ekstenzija''',
+'''Global extension actions''':
+'''Globalne akcije ekstenzija''',
+'''Local extension actions''':
+'''Lokalne akcije ekstenzija''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Instalirani procesori (ZAPOSTAVLJENO -- koristite pretraživače)''',
+'''ERROR in regex \'%s\'''':
+'''GREŠKA u regularnom izrazu \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Pogrešan datum \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"=" hvali posle "%(token)s" atributa''',
+'''Expected a value for key "%(token)s"''':
+'''"%(token)s" atributu nije pridana vrednost''',
+'''Wiki Markup''':
+'''Wiki izvorni tekst''',
+'''Print View''':
+'''Pregled za štampanje''',
 '''Edit was cancelled.''':
 '''Izmena je prekinuta.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -171,8 +287,6 @@ To leave the editor, press the Cancel button.''':
 ili prikazana u Pregledu.[[BR]]
 \'\'\'Nemojte \'\'obrađivati\'\' ovu stranicu u sledećih %(mins_valid)d minuta, da bi se izbegli konflikti.\'\'\'[[BR]]
 Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
-'''<unknown>''':
-'''<nepoznato>''',
 '''Diffs''':
 '''Razlike''',
 '''Info''':
@@ -213,74 +327,16 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Pretpisati se na SVE izmene''',
 '''Disable this account forever''':
 '''Deaktivirati ovaj nalog zauvek''',
-'''Name''':
-'''Ime''',
-'''Password''':
-'''Lozinka''',
 '''Password repeat''':
 '''ponovi lozinku''',
 '''(Only when changing passwords)''':
 '''(Samo kad menjate lozinku)''',
-'''Email''':
-'''Mejl adresa''',
 '''User CSS URL''':
 '''CSS URL korisnika''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Ostavite prazno ako nećete CSS)''',
 '''Editor size''':
 '''Veličina editora''',
-'''Login''':
-'''Ulogovati se''',
-'''match''':
-'''pronađen''',
-'''matches''':
-'''pronađenih''',
-'''Please provide a valid email address!''':
-'''Molimo vas da upišete ispravnu mejl adresu!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nalog koji odgovara datoj mejl adresi , \'%(email)s\' , ne postoji!''',
-'''This user name already belongs to somebody else.''':
-'''Neko drugi već poseduje ovo korisničko ime.''',
-'''Passwords don\'t match!''':
-'''Lozinka nije ispravna!''',
-'''Please specify a password!''':
-'''Molimo vas da ukucate lozinku.''',
-'''This email already belongs to somebody else.''':
-'''Neko drugi već poseduje ovu mejl adresu''',
-'''User preferences saved!''':
-'''Korisničke Postavke snimljene!''',
-'''Default''':
-'''Standard''',
-'''<Browser setting>''':
-'''<postavke Brauzera>''',
-'''Save''':
-'''Snimiti''',
-'''Preferred theme''':
-'''Omiljena tema''',
-'''Time zone''':
-'''Vremenska zona''',
-'''Your time is''':
-'''Vaše vreme je''',
-'''Server time is''':
-'''Vreme Servera je''',
-'''Date format''':
-'''Datumski format''',
-'''Preferred language''':
-'''Omiljeni jezik''',
-'''General options''':
-'''Glavne opcije''',
-'''Quick links''':
-'''Linkovi''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Ova lista ne funkcioniše ako niste ukucali pravilnu mejl adresu!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Pretpisane viki stranice (jedan regularni izraz u redu)''',
-'''Create Profile''':
-'''stvoriti profil''',
-'''Mail me my account data''':
-'''poslati mi moje podatke putem mejla''',
-'''Action''':
-'''Akcija''',
 '''No older revisions available!''':
 '''Prethodne revizije ne postoje!''',
 '''Diff for "%s"''':
@@ -359,58 +415,44 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Morate odrediti vrstu grafikona!''',
 '''Bad chart type "%s"!''':
 '''Loš grafikon tipa "%s"!''',
-'''Display context of search results''':
-'''Prikazati kontekst pronađenih rezultata''',
-'''Case-sensitive searching''':
-'''Potraga sa razlikovanjem velikih i malih slova''',
-'''Include system pages''':
-'''Uključiti i sistemske stranice''',
-'''Exclude system pages''':
-'''Isključiti sistemske stranice''',
-'''Plain title index''':
-'''Jednostavni naslovni sadržaj''',
-'''XML title index''':
-'''XML naslovni sadržaj''',
-'''Python Version''':
-'''Python verzija''',
-'''MoinMoin Version''':
-'''MoinMoin verzija''',
-'''Release %s [Revision %s]''':
-'''Izdanje %s [Revizija %s]''',
-'''4Suite Version''':
-'''4Suite verzija''',
-'''Number of pages''':
-'''Broj stranica''',
-'''Number of system pages''':
-'''Broja sistemskih stranica''',
-'''Accumulated page sizes''':
-'''Ukupne veličine stranica''',
-'''Entries in edit log''':
-'''Broj zapisa u istoriji promena''',
-'''NONE''':
-'''NIJEDAN''',
-'''Global extension macros''':
-'''Globalni makroi ekstenzija''',
-'''Local extension macros''':
-'''Lokalni makroi ekstenzija''',
-'''Global extension actions''':
-'''Globalne akcije ekstenzija''',
-'''Local extension actions''':
-'''Lokalne akcije ekstenzija''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Instalirani procesori (ZAPOSTAVLJENO -- koristite pretraživače)''',
-'''ERROR in regex \'%s\'''':
-'''GREŠKA u regularnom izrazu \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Pogrešan datum \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"=" hvali posle "%(token)s" atributa''',
-'''Expected a value for key "%(token)s"''':
-'''"%(token)s" atributu nije pridana vrednost''',
-'''Wiki Markup''':
-'''Wiki izvorni tekst''',
-'''Print View''':
-'''Pregled za štampanje''',
+'''This page is already deleted or was never created!''':
+'''Ova stranica je već izbrisan ili nikad nije stvorena!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Prilog  \'%(target)s\' (prvobitno ime \'%(filename)s\') već postoji.''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s odgovaraju "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Lokalni lista stranica za "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Vama nije dozvoljeno da preimenujete stranice u ovom vikiju!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Molimo Vas koristite interaktivni korisnički interfejs za preimenovanje stranica''',
+'''New name''':
+'''Novo ime''',
+'''Optional reason for the renaming''':
+'''Razlog za preimenovanje''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(uključujući %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Sledeće %(badwords)d reči u Rečniku sa %(totalwords)d reči%(localwords)s nisu pronađene u tekstu i markirane su:''',
+'''Add checked words to dictionary''':
+'''Dodajte markirane reči u Rečnik''',
+'''No spelling errors found!''':
+'''Nema pravopisnih grešaka!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Ne možete proveravati pravopis na stranici koju ne možete čitati.''',
+'''Full Link List for "%s"''':
+'''Lista svih linkova za "%s"''',
+'''You are not allowed to delete this page.''':
+'''Vama nije dozvoljeno da izbrišete ovu stranicu''',
+'''Please use the interactive user interface to delete pages!''':
+'''Molimo Vas koristite interaktivni korisnički interfejs da brišete stranice!''',
+'''Really delete this page?''':
+'''Stvarno izbrisati ovu stranicu?''',
+'''Delete''':
+'''Izbrisati''',
+'''Optional reason for the deletion''':
+'''Razlog za brisanje''',
 '''[%d attachments]''':
 '''[%d priloga]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -462,8 +504,6 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Prilog nije dozvoljen: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Prilozi za "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Prilog  \'%(target)s\' (prvobitno ime \'%(filename)s\') već postoji.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Prilog  \'%(target)s\' (prvobitno ime \'%(filename)s\') sa %(bytes)d bajtova je snimljen.''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -474,52 +514,60 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''Nepoznat tip fajla, nemoguć prikaz''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s za %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Vama nije dozvoljeno da izbrišete ovu stranicu''',
-'''This page is already deleted or was never created!''':
-'''Ova stranica je već izbrisan ili nikad nije stvorena!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Molimo Vas koristite interaktivni korisnički interfejs da brišete stranice!''',
-'''Really delete this page?''':
-'''Stvarno izbrisati ovu stranicu?''',
-'''Delete''':
-'''Izbrisati''',
-'''Optional reason for the deletion''':
-'''Razlog za brisanje''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s odgovaraju "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Lokalni lista stranica za "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Vama nije dozvoljeno da preimenujete stranice u ovom vikiju!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Molimo Vas koristite interaktivni korisnički interfejs za preimenovanje stranica''',
-'''New name''':
-'''Novo ime''',
-'''Optional reason for the renaming''':
-'''Razlog za preimenovanje''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(uključujući %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Sledeće %(badwords)d reči u Rečniku sa %(totalwords)d reči%(localwords)s nisu pronađene u tekstu i markirane su:''',
-'''Add checked words to dictionary''':
-'''Dodajte markirane reči u Rečnik''',
-'''No spelling errors found!''':
-'''Nema pravopisnih grešaka!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Ne možete proveravati pravopis na stranici koju ne možete čitati.''',
-'''Full Link List for "%s"''':
-'''Lista svih linkova za "%s"''',
 '''Upload new attachment "%(filename)s"''':
 '''Dodati novi prilog "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Stvoriti novi crtež "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Obraditi crtež %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Nevažeći include-argumenti: "%s"!''',
-'''Nothing found for "%s"!''':
-'''Markirani tekst "%s" nije pronađen!''',
+'''FrontPage''':
+'''NaslovnaStrana''',
+'''RecentChanges''':
+'''PoslednjePromene''',
+'''TitleIndex''':
+'''IndeksStranica''',
+'''WordIndex''':
+'''IndeksReči''',
+'''FindPage''':
+'''NaćiStranicu''',
+'''SiteNavigation''':
+'''PutoKazi''',
+'''HelpContents''':
+'''PomoćniTekstovi''',
+'''HelpOnFormatting''':
+'''PomoćPriFormatiranju''',
+'''UserPreferences''':
+'''KorisničkePostavke''',
+'''WikiLicense''':
+'''VikiLicenca''',
+'''MissingPage''':
+'''NedostajućaStranica''',
+'''Mon''':
+'''Ponedeljak''',
+'''Tue''':
+'''Utorak''',
+'''Wed''':
+'''Sreda''',
+'''Thu''':
+'''Četvrtak''',
+'''Fri''':
+'''Petak''',
+'''Sat''':
+'''Subota''',
+'''Sun''':
+'''Nedelja''',
+'''AttachFile''':
+'''Prikačiti fajl''',
+'''DeletePage''':
+'''IzbrisatiStranicu''',
+'''LikePages''':
+'''SličneStranice''',
+'''LocalSiteMap''':
+'''LokalnaListaStranica''',
+'''RenamePage''':
+'''PreimenitiStranicu''',
+'''SpellCheck''':
+'''ProveraPravopisa''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Navigaciona šema \'%(scheme)s\' nije podržana!''',
 '''No parent page found!''':
@@ -552,14 +600,18 @@ Inače, možete polje "Snimit kao" ostaviti praznim, i tako će originalno ime f
 '''aktiviraj obeleživač''',
 '''[Bookmark reached]''':
 '''[Kraj obeleživača]''',
+'''No wanted pages in this wiki.''':
+'''Nema željenih stranica u ovom vikiju.''',
+'''Invalid include arguments "%s"!''':
+'''Nevažeći include-argumenti: "%s"!''',
+'''Nothing found for "%s"!''':
+'''Markirani tekst "%s" nije pronađen!''',
 '''Markup''':
 '''Izvorni tekst''',
 '''Display''':
 '''Prikaz''',
 '''Filename''':
 '''Ime fajla''',
-'''No wanted pages in this wiki.''':
-'''Nema željenih stranica u ovom vikiju.''',
 '''Expected "%(wanted)s" after "%(key)s", got "%(token)s"''':
 '''Očekivane "%(wanted)s" posle "%(key)s", dobi "%(token)s"''',
 '''Expected an integer "%(key)s" before "%(token)s"''':
@@ -612,52 +664,4 @@ crveno=obrade''',
 '''Veza sa mejlserverom \'%(server)s\' nije uspela: %(reason)s''',
 '''Mail sent OK''':
 '''Mejl je uspešno poslan''',
-'''FrontPage''':
-'''NaslovnaStrana''',
-'''RecentChanges''':
-'''PoslednjePromene''',
-'''TitleIndex''':
-'''IndeksStranica''',
-'''WordIndex''':
-'''IndeksReči''',
-'''FindPage''':
-'''NaćiStranicu''',
-'''SiteNavigation''':
-'''PutoKazi''',
-'''HelpContents''':
-'''PomoćniTekstovi''',
-'''HelpOnFormatting''':
-'''PomoćPriFormatiranju''',
-'''UserPreferences''':
-'''KorisničkePostavke''',
-'''WikiLicense''':
-'''VikiLicenca''',
-'''MissingPage''':
-'''NedostajućaStranica''',
-'''Mon''':
-'''Ponedeljak''',
-'''Tue''':
-'''Utorak''',
-'''Wed''':
-'''Sreda''',
-'''Thu''':
-'''Četvrtak''',
-'''Fri''':
-'''Petak''',
-'''Sat''':
-'''Subota''',
-'''Sun''':
-'''Nedelja''',
-'''AttachFile''':
-'''Prikačiti fajl''',
-'''DeletePage''':
-'''IzbrisatiStranicu''',
-'''LikePages''':
-'''SličneStranice''',
-'''LocalSiteMap''':
-'''LokalnaListaStranica''',
-'''RenamePage''':
-'''PreimenitiStranicu''',
-'''SpellCheck''':
-'''ProveraPravopisa''',
 }

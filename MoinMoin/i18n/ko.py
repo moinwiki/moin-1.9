@@ -32,8 +32,6 @@ macro call.-~
 '''새 문서 작성''',
 '''You are not allowed to view this page.''':
 '''이 문서를 볼 수 있는 권한이 없습니다.''',
-'''Your changes are not saved!''':
-'''변경 사항이 저장되지 않았습니다!''',
 '''You are not allowed to edit this page.''':
 '''이 문서를 고칠 수 있는 권한이 없습니다.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ macro call.-~
 '''옛 문서는 고칠 수 없습니다.''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''문서 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!''',
-'''Page name is too long, try shorter name.''':
-'''문서 이름이 너무 깁니다. 짧은 이름을 사용하세요.''',
 '''Edit "%(pagename)s"''':
 '''"%(pagename)s" 수정''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 동의하지 않는 경우에는 \'\'\'%(cancel_button_text)s\'\'\'를 눌러서 변경사항을 취소할 수 있습니다.''',
 '''Preview''':
 '''미리보기''',
-'''GUI Mode''':
-'''GUI 모드''',
 '''Comment:''':
 '''설명:''',
 '''<No addition>''':
@@ -96,6 +90,220 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''사소한 변경''',
 '''Remove trailing whitespace from each line''':
 '''줄 끝에 붙은 공백을 지움''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''{{{\'%s\'}}}는(은) 잘못된 사용자 이름입니다.
+이름에는 유니코드 알파벳 또는 숫자가 포함될 수 있고, 필요하다면 1번
+띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다.''',
+'''You are not allowed to do %s on this page.''':
+'''이 문서에 %s 작업을 할 수 있는 권한이 없습니다.''',
+'''Login''':
+'''로그인''',
+''' %s and try again.''':
+''' %s 하고 다시 시도하세요.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
+'''%.2f seconds''':
+'''%.2f 초''',
+'''match''':
+''' 개 포함''',
+'''matches''':
+''' 개 포함''',
+'''<unknown>''':
+'''<알 수 없음>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''사용자 이름: %s
+
+사용자 암호: %s
+
+로그인 URL: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''누군가 이 메일 주소로 계정 정보를 전송하도록 요청했습니다.
+
+만약 암호를 잊었다면 아래 URL로 가서 사용자 이름와 함께 제시된 암호를 
+써 있는 그대로 입력하고 (복사해서 붙여넣기 하세요) 
+로그인 하세요.
+
+성공적으로 로그인하신 후에는 기억하기 쉬운 새로운 암호로 변경할 것을 권장합니다.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] 위키 계정 정보''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 
+위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요.''',
+'''Please provide a valid email address!''':
+'''올바른 메일 주소를 써주세요!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''메일 주소가 \'%(email)s\'로 되어있는 계정이 없습니다!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''계정을 새로 만들거나 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
+'''Empty user name. Please enter a user name.''':
+'''이름을 입력하세요.''',
+'''This user name already belongs to somebody else.''':
+'''이 이름은 이미 다른 사람이 사용 중입니다.''',
+'''Passwords don\'t match!''':
+'''확인 암호가 일치하지 않습니다!''',
+'''Please specify a password!''':
+'''암호를 입력하세요!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''이메일 주소를 입력해주세요. 계정 정보를 잊었을 때 해당 계정 정보를 이메일로 전송받을 수 있습니다.''',
+'''This email already belongs to somebody else.''':
+'''이 메일 주소는 이미 다른 사람이 사용 중입니다.''',
+'''User account created! You can use this account to login now...''':
+'''사용자 계정이 만들어졌습니다! 이 계정을 사용해서 로그인하실 수 있습니다...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''선택한 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''"%(theme_name)s" 테마를 쓸 수 없습니다!''',
+'''User preferences saved!''':
+'''계정 환경설정이 저장되었습니다!''',
+'''Default''':
+'''기본값''',
+'''<Browser setting>''':
+'''<브라우저 설정>''',
+'''the one preferred''':
+'''선호하는 편집기''',
+'''free choice''':
+'''자유 선택''',
+'''Select User''':
+'''사용자 선택''',
+'''Save''':
+'''저장''',
+'''Preferred theme''':
+'''선호하는 테마''',
+'''Editor Preference''':
+'''선호하는 편집기''',
+'''Editor shown on UI''':
+'''표시할 편집기''',
+'''Time zone''':
+'''시간대''',
+'''Your time is''':
+'''기준 시간:''',
+'''Server time is''':
+'''서버 시간:''',
+'''Date format''':
+'''날짜 형식''',
+'''Preferred language''':
+'''선호하는 언어''',
+'''General options''':
+'''일반 옵션''',
+'''Quick links''':
+'''즐겨찾기''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''메일 알림을 받는 문서들 (한 줄에 정규식 하나씩)''',
+'''Create Profile''':
+'''사용자 등록''',
+'''Mail me my account data''':
+'''계정 정보를 메일로 발송''',
+'''Email''':
+'''Email''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보세요.''',
+'''Name''':
+'''이름''',
+'''Password''':
+'''암호''',
+'''Action''':
+'''액션''',
+'''Required attribute "%(attrname)s" missing''':
+'''필요한 속성인 "%(attrname)s"가(이) 없습니다''',
+'''Submitted form data:''':
+'''전송된 양식 데이터:''',
+'''Search Titles''':
+'''제목에서 찾기''',
+'''Display context of search results''':
+'''검색 결과의 본문을 보기''',
+'''Case-sensitive searching''':
+'''대소문자 구별''',
+'''Search Text''':
+'''내용에서 찾기''',
+'''Go To Page''':
+'''문서로 이동''',
+'''Include system pages''':
+'''시스템 문서 포함''',
+'''Exclude system pages''':
+'''시스템 문서 제외''',
+'''Plain title index''':
+'''텍스트 제목 색인''',
+'''XML title index''':
+'''XML 제목 색인''',
+'''Python Version''':
+'''파이썬 버전''',
+'''MoinMoin Version''':
+'''모인모인 버전''',
+'''Release %s [Revision %s]''':
+'''버전 %s [리비젼 %s]''',
+'''4Suite Version''':
+'''4Suite 버전''',
+'''Number of pages''':
+'''문서 개수''',
+'''Number of system pages''':
+'''시스템 문서 개수''',
+'''Accumulated page sizes''':
+'''문서 크기 총합''',
+'''Entries in edit log''':
+'''수정사항 로그 길이''',
+'''NONE''':
+'''없음''',
+'''Global extension macros''':
+'''기본 확장 매크로''',
+'''Local extension macros''':
+'''로컬 확장 매크로''',
+'''Global extension actions''':
+'''기본 확장 액션''',
+'''Local extension actions''':
+'''로컬 확장 액션''',
+'''Global parsers''':
+'''기본 파서''',
+'''Local extension parsers''':
+'''로컬 확장 파서''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''설치된 프로세서 (낡음 -- 대신 파서를 쓰세요)''',
+'''Disabled''':
+'''사용 불가''',
+'''Enabled''':
+'''사용 가능''',
+'''Lupy search''':
+'''루피 검색''',
+'''Active threads''':
+'''사용 중인 쓰레드 개수''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''{{{"%s"}}} 대신 좀 더 구체적인 단어를 이용해서 검색해주세요!''',
+'''ERROR in regex \'%s\'''':
+'''정규식 \'%s\'의 에러''',
+'''Bad timestamp \'%s\'''':
+'''잘못된 책갈피 시간 \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"%(token)s"뒤에는 "="이 와야 합니다''',
+'''Expected a value for key "%(token)s"''':
+'''"%(token)s"뒤에는 값이 필요합니다.''',
+'''Wiki Markup''':
+'''위키 부호''',
+'''Print View''':
+'''인쇄용 화면''',
+'''Your changes are not saved!''':
+'''변경 사항이 저장되지 않았습니다!''',
+'''Page name is too long, try shorter name.''':
+'''문서 이름이 너무 깁니다. 짧은 이름을 사용하세요.''',
+'''GUI Mode''':
+'''GUI 모드''',
 '''Edit was cancelled.''':
 '''문서 수정을 취소했습니다.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -197,8 +405,10 @@ To leave the editor, press the Cancel button.''':
 '''%(owner)s가 %(timestamp)s에 문서 수정을 위한 잠시 잠금을 요청하였습니다.[[BR]]
 \'\'\'가급적이면 최소한 %(mins_valid)d 분 동안은 수정 충돌을 막기 위해서 문서를 \'\'고치치 않는\'\' 것이 좋습니다.\'\'\'[[BR]]
 편집을 중단하려면 취소 버튼을 누르세요.''',
-'''<unknown>''':
-'''<알 수 없음>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''\'%(filename)s\'를(을) 설치하는데 실패했습니다.''',
+'''The file %s is not a MoinMoin package file.''':
+'''파일 %s 는(은) 모인모인 패키지 파일이 아닙니다.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -259,150 +469,20 @@ To leave the editor, press the Cancel button.''':
 '''사소한 변경사항도 구독''',
 '''Disable this account forever''':
 '''이 계정을 더 이상 사용하지 않음''',
-'''Name''':
-'''이름''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Hong\'\'\'\'\'\'Gildong 식)''',
 '''Alias-Name''':
 '''별명''',
-'''Password''':
-'''암호''',
 '''Password repeat''':
 '''암호 (확인)''',
 '''(Only when changing passwords)''':
 '''(암호 변경 시)''',
-'''Email''':
-'''Email''',
 '''User CSS URL''':
 '''사용자 CSS URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(사용자 CSS를 사용하지 않으려면 비워두세요)''',
 '''Editor size''':
 '''편집기 크기''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''{{{\'%s\'}}}는(은) 잘못된 사용자 이름입니다.
-이름에는 유니코드 알파벳 또는 숫자가 포함될 수 있고, 필요하다면 1번
-띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다.''',
-'''You are not allowed to do %s on this page.''':
-'''이 문서에 %s 작업을 할 수 있는 권한이 없습니다.''',
-'''Login''':
-'''로그인''',
-''' %s and try again.''':
-''' %s 하고 다시 시도하세요.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
-'''%.2f seconds''':
-'''%.2f 초''',
-'''match''':
-''' 개 포함''',
-'''matches''':
-''' 개 포함''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''사용자 이름: %s
-
-사용자 암호: %s
-
-로그인 URL: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''누군가 이 메일 주소로 계정 정보를 전송하도록 요청했습니다.
-
-만약 암호를 잊었다면 아래 URL로 가서 사용자 이름와 함께 제시된 암호를 
-써 있는 그대로 입력하고 (복사해서 붙여넣기 하세요) 
-로그인 하세요.
-
-성공적으로 로그인하신 후에는 기억하기 쉬운 새로운 암호로 변경할 것을 권장합니다.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] 위키 계정 정보''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''이 위키는 메일 처리를 할 수 없도록 되어 있습니다. 
-위키 관리자에게 연락하여 메일을 쓸 수 있도록 요청하세요.''',
-'''Please provide a valid email address!''':
-'''올바른 메일 주소를 써주세요!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''메일 주소가 \'%(email)s\'로 되어있는 계정이 없습니다!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''계정을 새로 만들거나 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
-'''Empty user name. Please enter a user name.''':
-'''이름을 입력하세요.''',
-'''This user name already belongs to somebody else.''':
-'''이 이름은 이미 다른 사람이 사용 중입니다.''',
-'''Passwords don\'t match!''':
-'''확인 암호가 일치하지 않습니다!''',
-'''Please specify a password!''':
-'''암호를 입력하세요!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''이메일 주소를 입력해주세요. 계정 정보를 잊었을 때 해당 계정 정보를 이메일로 전송받을 수 있습니다.''',
-'''This email already belongs to somebody else.''':
-'''이 메일 주소는 이미 다른 사람이 사용 중입니다.''',
-'''User account created! You can use this account to login now...''':
-'''사용자 계정이 만들어졌습니다! 이 계정을 사용해서 로그인하실 수 있습니다...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''선택한 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''"%(theme_name)s" 테마를 쓸 수 없습니다!''',
-'''User preferences saved!''':
-'''계정 환경설정이 저장되었습니다!''',
-'''Default''':
-'''기본값''',
-'''<Browser setting>''':
-'''<브라우저 설정>''',
-'''the one preferred''':
-'''선호하는 편집기''',
-'''free choice''':
-'''자유 선택''',
-'''Select User''':
-'''사용자 선택''',
-'''Save''':
-'''저장''',
-'''Preferred theme''':
-'''선호하는 테마''',
-'''Editor Preference''':
-'''선호하는 편집기''',
-'''Editor shown on UI''':
-'''표시할 편집기''',
-'''Time zone''':
-'''시간대''',
-'''Your time is''':
-'''기준 시간:''',
-'''Server time is''':
-'''서버 시간:''',
-'''Date format''':
-'''날짜 형식''',
-'''Preferred language''':
-'''선호하는 언어''',
-'''General options''':
-'''일반 옵션''',
-'''Quick links''':
-'''즐겨찾기''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''메일 알림은 올바른 올바른 주소를 입력하지 않으면 동작하지 않습니다!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''메일 알림을 받는 문서들 (한 줄에 정규식 하나씩)''',
-'''Create Profile''':
-'''사용자 등록''',
-'''Mail me my account data''':
-'''계정 정보를 메일로 발송''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보세요.''',
-'''Action''':
-'''액션''',
 '''No older revisions available!''':
 '''옛 버전이 저장되어 있지 않습니다!''',
 '''Diff for "%s"''':
@@ -501,78 +581,80 @@ Contact the owner of the wiki, who can enable email.''':
 '''차트 타입을 지정하여야 합니다!''',
 '''Bad chart type "%s"!''':
 '''잘못된 차트 종류 입니다: "%s"''',
-'''Search Titles''':
-'''제목에서 찾기''',
-'''Display context of search results''':
-'''검색 결과의 본문을 보기''',
-'''Case-sensitive searching''':
-'''대소문자 구별''',
-'''Search Text''':
-'''내용에서 찾기''',
-'''Go To Page''':
-'''문서로 이동''',
-'''Include system pages''':
-'''시스템 문서 포함''',
-'''Exclude system pages''':
-'''시스템 문서 제외''',
-'''Plain title index''':
-'''텍스트 제목 색인''',
-'''XML title index''':
-'''XML 제목 색인''',
-'''Python Version''':
-'''파이썬 버전''',
-'''MoinMoin Version''':
-'''모인모인 버전''',
-'''Release %s [Revision %s]''':
-'''버전 %s [리비젼 %s]''',
-'''4Suite Version''':
-'''4Suite 버전''',
-'''Number of pages''':
-'''문서 개수''',
-'''Number of system pages''':
-'''시스템 문서 개수''',
-'''Accumulated page sizes''':
-'''문서 크기 총합''',
-'''Entries in edit log''':
-'''수정사항 로그 길이''',
-'''NONE''':
-'''없음''',
-'''Global extension macros''':
-'''기본 확장 매크로''',
-'''Local extension macros''':
-'''로컬 확장 매크로''',
-'''Global extension actions''':
-'''기본 확장 액션''',
-'''Local extension actions''':
-'''로컬 확장 액션''',
-'''Global parsers''':
-'''기본 파서''',
-'''Local extension parsers''':
-'''로컬 확장 파서''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''설치된 프로세서 (낡음 -- 대신 파서를 쓰세요)''',
-'''Disabled''':
-'''사용 불가''',
-'''Enabled''':
-'''사용 가능''',
-'''Lupy search''':
-'''루피 검색''',
-'''Active threads''':
-'''사용 중인 쓰레드 개수''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''{{{"%s"}}} 대신 좀 더 구체적인 단어를 이용해서 검색해주세요!''',
-'''ERROR in regex \'%s\'''':
-'''정규식 \'%s\'의 에러''',
-'''Bad timestamp \'%s\'''':
-'''잘못된 책갈피 시간 \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"%(token)s"뒤에는 "="이 와야 합니다''',
-'''Expected a value for key "%(token)s"''':
-'''"%(token)s"뒤에는 값이 필요합니다.''',
-'''Wiki Markup''':
-'''위키 부호''',
-'''Print View''':
-'''인쇄용 화면''',
+'''This page is already deleted or was never created!''':
+'''이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!''',
+'''No pages like "%s"!''':
+'''"%s"가(이) 들어간 문서가 없습니다.''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''첨부 파일 \'%(target)s\' (하드디스크에서의 이름 \'%(filename)s\') 가(이) 이미 있습니다.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
+'''Missing password. Please enter user name and password.''':
+'''비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
+'''Sorry, wrong password.''':
+'''비밀번호가 틀렸습니다.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''"%s"가(이) 들어간 문서가 딱 하나 발견되었습니다. 해당 문서로 이동합니다.''',
+'''Pages like "%s"''':
+'''"%s"와 비슷한 문서''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''문서 제목에 "%(title)s"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되었습니다.''',
+'''Local Site Map for "%s"''':
+'''"%s"의 사이트 맵''',
+'''You are not allowed to rename pages in this wiki!''':
+'''이 위키에서는 문서 이름을 바꿀 수 없습니다.''',
+'''Please use the interactive user interface to rename pages!''':
+'''문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!''',
+'''Could not rename page because of file system error: %s.''':
+'''다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s.''',
+'''Rename Page''':
+'''문서 이름 바꾸기''',
+'''New name''':
+'''새 이름''',
+'''Optional reason for the renaming''':
+'''이름을 바꾸는 이유''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'문서 {{{"%s"}}}가(이) 이미 있습니다.\'\'\'
+
+다른 이름으로 다시 만들어 보세요.''',
+'''(including %(localwords)d %(pagelink)s)''':
+''' (%(pagelink)s를 %(localwords)d개 포함)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''다음 %(badwords)d 개의 단어는 사전에 있는 전체 %(totalwords)d 개의 단어 %(localwords)s 중에서 찾을 수 없었으며, 본문에도 표시되었습니다.:''',
+'''Add checked words to dictionary''':
+'''사전에 체크된 단어들을 추가''',
+'''No spelling errors found!''':
+'''철자 오류가 발견되지 않았습니다!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''읽을 수 없는 문서의 철자를 검사할 수 없습니다.''',
+'''Title Search: "%s"''':
+'''제목 "%s" 찾기''',
+'''Full Text Search: "%s"''':
+'''내용 전체에서 찾음 : "%s"''',
+'''Full Link List for "%s"''':
+'''"%s"에 연결된 모든 문서 목록''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
+'''Subscribe users to the page %s''':
+'''문서 %s 를(을) 구독하는 사용자''',
+'''Subscribed for %s:''':
+'''%s 를(을) 구독:''',
+'''Not a user:''':
+'''사용자가 아님:''',
+'''You are not allowed to perform this action.''':
+'''이 작업을 수행할 수 있는 권한이 없습니다.''',
+'''You are not allowed to delete this page.''':
+'''이 문서를 지울 수 있는 권한이 없습니다.''',
+'''Please use the interactive user interface to delete pages!''':
+'''문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
+'''Really delete this page?''':
+'''정말로 이 문서를 지우시겠습니까?''',
+'''Delete''':
+'''삭제''',
+'''Optional reason for the deletion''':
+'''삭제하는 이유''',
 '''[%d attachments]''':
 '''[첨부 %d개]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -633,18 +715,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''지원되지 않는 업로드 액션: %s''',
 '''Attachments for "%(pagename)s"''':
 '''"%(pagename)s"의 첨부파일들''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''첨부 파일 \'%(target)s\' (하드디스크에서의 이름 \'%(filename)s\') 가(이) 이미 있습니다.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''첨부 파일 \'%(target)s\' (하드디스크에서의 이름 \'%(filename)s\', 크기 %(bytes)d 바이트) 가(이) 저장되었습니다.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''첨부 파일 \'%(filename)s\'를(을) 지움''',
 '''Attachment \'%(filename)s\' installed.''':
 '''첨부 파일 \'%(filename)s\'를(을) 설치함''',
-'''Installation of \'%(filename)s\' failed.''':
-'''\'%(filename)s\'를(을) 설치하는데 실패했습니다.''',
-'''The file %s is not a MoinMoin package file.''':
-'''파일 %s 는(은) 모인모인 패키지 파일이 아닙니다.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''첨부 파일 \'%(filename)s\' 가(이) 압축 해제되지 못했습니다. 디스크의 용량이 부족한 것 같습니다. (%(space)d kB 모자람).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -667,78 +743,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''알 수 없는 파일 형식입니다. 이 첨부 파일을 내용 안에 같이 보여줄 수 없습니다.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''%(pagename)s의 [[Verbatim(attachment:)]]%(filename)s''',
-'''You are not allowed to delete this page.''':
-'''이 문서를 지울 수 있는 권한이 없습니다.''',
-'''This page is already deleted or was never created!''':
-'''이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!''',
-'''Please use the interactive user interface to delete pages!''':
-'''문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
-'''Really delete this page?''':
-'''정말로 이 문서를 지우시겠습니까?''',
-'''Delete''':
-'''삭제''',
-'''Optional reason for the deletion''':
-'''삭제하는 이유''',
-'''No pages like "%s"!''':
-'''"%s"가(이) 들어간 문서가 없습니다.''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''"%s"가(이) 들어간 문서가 딱 하나 발견되었습니다. 해당 문서로 이동합니다.''',
-'''Pages like "%s"''':
-'''"%s"와 비슷한 문서''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''문서 제목에 "%(title)s"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되었습니다.''',
-'''Local Site Map for "%s"''':
-'''"%s"의 사이트 맵''',
-'''You are not allowed to rename pages in this wiki!''':
-'''이 위키에서는 문서 이름을 바꿀 수 없습니다.''',
-'''Please use the interactive user interface to rename pages!''':
-'''문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!''',
-'''Could not rename page because of file system error: %s.''':
-'''다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s.''',
-'''Rename Page''':
-'''문서 이름 바꾸기''',
-'''New name''':
-'''새 이름''',
-'''Optional reason for the renaming''':
-'''이름을 바꾸는 이유''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'문서 {{{"%s"}}}가(이) 이미 있습니다.\'\'\'
-
-다른 이름으로 다시 만들어 보세요.''',
-'''(including %(localwords)d %(pagelink)s)''':
-''' (%(pagelink)s를 %(localwords)d개 포함)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''다음 %(badwords)d 개의 단어는 사전에 있는 전체 %(totalwords)d 개의 단어 %(localwords)s 중에서 찾을 수 없었으며, 본문에도 표시되었습니다.:''',
-'''Add checked words to dictionary''':
-'''사전에 체크된 단어들을 추가''',
-'''No spelling errors found!''':
-'''철자 오류가 발견되지 않았습니다!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''읽을 수 없는 문서의 철자를 검사할 수 없습니다.''',
-'''Subscribe users to the page %s''':
-'''문서 %s 를(을) 구독하는 사용자''',
-'''Subscribed for %s:''':
-'''%s 를(을) 구독:''',
-'''Not a user:''':
-'''사용자가 아님:''',
-'''You are not allowed to perform this action.''':
-'''이 작업을 수행할 수 있는 권한이 없습니다.''',
-'''Title Search: "%s"''':
-'''제목 "%s" 찾기''',
-'''Full Text Search: "%s"''':
-'''내용 전체에서 찾음 : "%s"''',
-'''Full Link List for "%s"''':
-'''"%s"에 연결된 모든 문서 목록''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
-'''Missing password. Please enter user name and password.''':
-'''비밀번호가 없습니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
-'''Sorry, wrong password.''':
-'''비밀번호가 틀렸습니다.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
 '''Upload new attachment "%(filename)s"''':
 '''새 첨부 "%(filename)s"를(을) 업로드''',
 '''Create new drawing "%(filename)s"''':
@@ -747,10 +751,56 @@ Try a different name.''':
 '''그림 "%(filename)s" 수정하기''',
 '''Toggle line numbers''':
 '''줄 번호 보이기/숨기기''',
-'''Invalid include arguments "%s"!''':
-'''"%s"는(은) 잘못된 인자입니다!''',
-'''Nothing found for "%s"!''':
-'''"%s"는(은) 발견되지 않았습니다.''',
+'''FrontPage''':
+'''대문''',
+'''RecentChanges''':
+'''최근바뀜''',
+'''TitleIndex''':
+'''제목색인''',
+'''WordIndex''':
+'''단어색인''',
+'''FindPage''':
+'''문서찾기''',
+'''SiteNavigation''':
+'''사이트맵''',
+'''HelpContents''':
+'''도움말''',
+'''HelpOnFormatting''':
+'''문서형식 도움말''',
+'''UserPreferences''':
+'''사용자 설정''',
+'''WikiLicense''':
+'''위키 라이센스''',
+'''MissingPage''':
+'''없는 문서''',
+'''MissingHomePage''':
+'''없는 홈페이지''',
+'''Mon''':
+'''월요일''',
+'''Tue''':
+'''화요일''',
+'''Wed''':
+'''수요일''',
+'''Thu''':
+'''목요일''',
+'''Fri''':
+'''금요일''',
+'''Sat''':
+'''토요일''',
+'''Sun''':
+'''일요일''',
+'''AttachFile''':
+'''파일 첨부''',
+'''DeletePage''':
+'''문서 삭제''',
+'''LikePages''':
+'''비슷한 페이지''',
+'''LocalSiteMap''':
+'''사이트맵''',
+'''RenamePage''':
+'''이름 변경''',
+'''SpellCheck''':
+'''철자 검사''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''\'%(scheme)s\'는(은) 지원되지 않습니다.''',
 '''No parent page found!''':
@@ -785,14 +835,18 @@ Try a different name.''':
 '''책갈피 두기''',
 '''[Bookmark reached]''':
 '''[여기까지 책갈피]''',
+'''No wanted pages in this wiki.''':
+'''이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다.''',
+'''Invalid include arguments "%s"!''':
+'''"%s"는(은) 잘못된 인자입니다!''',
+'''Nothing found for "%s"!''':
+'''"%s"는(은) 발견되지 않았습니다.''',
 '''Markup''':
 '''위키 부호''',
 '''Display''':
 '''보기''',
 '''Filename''':
 '''파일이름''',
-'''No wanted pages in this wiki.''':
-'''이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''ReStructured text를 처리할 수 없습니다. docutils를 설치해주세요.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -939,54 +993,4 @@ red=edit''',
 '''메일 전송 실패''',
 '''Mail sent OK''':
 '''메일 전송 성공''',
-'''FrontPage''':
-'''대문''',
-'''RecentChanges''':
-'''최근바뀜''',
-'''TitleIndex''':
-'''제목색인''',
-'''WordIndex''':
-'''단어색인''',
-'''FindPage''':
-'''문서찾기''',
-'''SiteNavigation''':
-'''사이트맵''',
-'''HelpContents''':
-'''도움말''',
-'''HelpOnFormatting''':
-'''문서형식 도움말''',
-'''UserPreferences''':
-'''사용자 설정''',
-'''WikiLicense''':
-'''위키 라이센스''',
-'''MissingPage''':
-'''없는 문서''',
-'''MissingHomePage''':
-'''없는 홈페이지''',
-'''Mon''':
-'''월요일''',
-'''Tue''':
-'''화요일''',
-'''Wed''':
-'''수요일''',
-'''Thu''':
-'''목요일''',
-'''Fri''':
-'''금요일''',
-'''Sat''':
-'''토요일''',
-'''Sun''':
-'''일요일''',
-'''AttachFile''':
-'''파일 첨부''',
-'''DeletePage''':
-'''문서 삭제''',
-'''LikePages''':
-'''비슷한 페이지''',
-'''LocalSiteMap''':
-'''사이트맵''',
-'''RenamePage''':
-'''이름 변경''',
-'''SpellCheck''':
-'''철자 검사''',
 }

@@ -32,8 +32,6 @@ macro call.-~
 '''新しいページを作成''',
 '''You are not allowed to view this page.''':
 '''このページを読む権限がありません。''',
-'''Your changes are not saved!''':
-'''このページに対する変更は保存されませんでした。''',
 '''You are not allowed to edit this page.''':
 '''このページを編集する権限がありません。''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ macro call.-~
 '''古いリビジョンを編集することはできません。''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''ページのロックが期限切れになりました。他のユーザが行う編集と衝突する可能性があります。''',
-'''Page name is too long, try shorter name.''':
-'''ページ名が長すぎます。短い名前を指定してください。''',
 '''Edit "%(pagename)s"''':
 '''"%(pagename)s"を編集''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 編集をキャンセルする場合には\'\'\'%(cancel_button_text)s\'\'\'をクリックしてください。''',
 '''Preview''':
 '''プレビュー''',
-'''GUI Mode''':
-'''GUIモード''',
+'''Text mode''':
+'''テキストモード''',
 '''Comment:''':
 '''コメント:''',
 '''<No addition>''':
@@ -96,6 +92,224 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''ささいな変更''',
 '''Remove trailing whitespace from each line''':
 '''行末の空白を削除''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''{{{\'%s\'}}}は、不正なユーザ名です。
+ユーザ名には、すべてのUnicode英数文字(単語の間に1個のスペースを入れることも可)が使用できます。グループ名を利用することはできません。''',
+'''You are not allowed to do %s on this page.''':
+'''このページを%sする権限がありません。''',
+'''Login''':
+'''ログイン''',
+''' %s and try again.''':
+'''%sして、もう一度試してみてください。''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''約%(pages)dページ中%(hits)d箇所一致しました。''',
+'''%.2f seconds''':
+'''%.2f秒''',
+'''match''':
+'''箇所一致''',
+'''matches''':
+'''箇所一致''',
+'''<unknown>''':
+'''<不明>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''ログイン名: %s
+
+ログインパスワード: %s
+
+ログインURL: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''要求により、あなたのアカウント情報をこのメールアドレスに送信しました。
+
+パスワードを忘れてしまった場合には、下に書かれている情報を利用して、
+Wikiのパスワード入力欄にパスワードを入力してください。
+(コピー＆ペーストを利用して、表示されているとおりのパスワードを
+入力してください。)
+
+ログインに成功したあとは、新たにパスワードを設定し直すことをお勧めします。
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] アカウント情報''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''このwikiではメールが利用できません。
+管理者に問い合わせてください。''',
+'''Please provide a valid email address!''':
+'''正しいメールアドレスを入力してください。''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''設定変更やアカウント作成をおこなうには、["ユーザプレファレンス"]を利用してください。''',
+'''Empty user name. Please enter a user name.''':
+'''ユーザ名が入力されていません。ユーザ名を入力してください。''',
+'''This user name already belongs to somebody else.''':
+'''このユーザ名はすでに利用されています。''',
+'''Passwords don\'t match!''':
+'''パスワードが一致していません。''',
+'''Please specify a password!''':
+'''パスワードを入力してください。''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''メールアドレスを入力してください。ログイン情報を忘れてしまった際、メールにてお知らせするために必要となります。''',
+'''This email already belongs to somebody else.''':
+'''このメールアドレスはすでに利用されています。''',
+'''User account created! You can use this account to login now...''':
+'''ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''選択したユーザの設定変更をおこなうには、["ユーザプレファレンス"]を利用してください。''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
+'''User preferences saved!''':
+'''User preferencesを保存しました。''',
+'''Default''':
+'''デフォルト''',
+'''<Browser setting>''':
+'''<ブラウザの設定>''',
+'''the one preferred''':
+'''お好み''',
+'''free choice''':
+'''自由選択''',
+'''Select User''':
+'''ユーザ選択''',
+'''Save''':
+'''保存''',
+'''Preferred theme''':
+'''テーマ''',
+'''Editor Preference''':
+'''エディタの好み''',
+'''Editor shown on UI''':
+'''UIで表示されるエディタ''',
+'''Time zone''':
+'''タイムゾーン''',
+'''Your time is''':
+'''あなたの時間''',
+'''Server time is''':
+'''サーバの時間''',
+'''Date format''':
+'''日付の形式''',
+'''Preferred language''':
+'''言語''',
+'''General options''':
+'''一般的なオプション''',
+'''Quick links''':
+'''クイックリンク''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''このリストは、有効なメールアドレスを入力しなければ利用できません。''',
+'''Subscribed wiki pages (one regex per line)''':
+'''購読中のwikiページ[[BR]](1行あたりひとつの正規表現)''',
+'''Create Profile''':
+'''プロファイル作成''',
+'''Mail me my account data''':
+'''アカウント情報をメールする''',
+'''Email''':
+'''メールアドレス''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''アカウントを作成したり、忘れてしまったパスワードを復活する際には %(userprefslink)s を参照してください。''',
+'''Name''':
+'''名前''',
+'''Password''':
+'''パスワード''',
+'''Action''':
+'''アクション''',
+'''Required attribute "%(attrname)s" missing''':
+'''必須項目"%(attrname)s"を入力してください。''',
+'''Submitted form data:''':
+'''サブミットされたフォームデータ:''',
+'''Search Titles''':
+'''タイトル検索''',
+'''Display context of search results''':
+'''検索結果のコンテキストを表示''',
+'''Case-sensitive searching''':
+'''大文字/小文字を区別して検索''',
+'''Search Text''':
+'''テキスト検索''',
+'''Go To Page''':
+'''ページへ移動''',
+'''Include system pages''':
+'''システムページを含める''',
+'''Exclude system pages''':
+'''システムページを含めない''',
+'''Plain title index''':
+'''タイトルインデックス''',
+'''XML title index''':
+'''タイトルインデックス(XML)''',
+'''Python Version''':
+'''Pythonのバージョン''',
+'''MoinMoin Version''':
+'''MoinMoinのバージョン''',
+'''Release %s [Revision %s]''':
+'''リリース %s [リビジョン %s]''',
+'''4Suite Version''':
+'''4Suiteのバージョン''',
+'''Number of pages''':
+'''ページ数''',
+'''Number of system pages''':
+'''システムページ数''',
+'''Accumulated page sizes''':
+'''ページサイズの合計''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''%(data_dir)s/pages/ のディスク使用量''',
+'''Disk usage of %(data_dir)s/''':
+'''%(data_dir)s/ のディスク使用量''',
+'''Entries in edit log''':
+'''編集ログ中のエントリー数''',
+'''NONE''':
+'''なし''',
+'''Global extension macros''':
+'''グローバル拡張マクロ''',
+'''Local extension macros''':
+'''ローカル拡張マクロ''',
+'''Global extension actions''':
+'''グローバル拡張アクション''',
+'''Local extension actions''':
+'''ローカル拡張アクション''',
+'''Global parsers''':
+'''グローバルパーサ''',
+'''Local extension parsers''':
+'''ローカル拡張パーサ''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''インストールされているプロセッサ(現在はパーサの利用を推奨)''',
+'''Disabled''':
+'''無効''',
+'''Enabled''':
+'''有効''',
+'''Lupy search''':
+'''Lupyによる検索''',
+'''Active threads''':
+'''アクティブなスレッド''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''検索キーワード{{{"%s"}}}が適切ではありません。他のキーワードでやり直してください。''',
+'''ERROR in regex \'%s\'''':
+'''正規表現\'%s\'に誤りがあります。''',
+'''Bad timestamp \'%s\'''':
+'''不正なタイムスタンプ \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"%(token)s"の後に"="がありません。''',
+'''Expected a value for key "%(token)s"''':
+'''"%(token)s"キーに値がありません。''',
+'''Wiki Markup''':
+'''Wikiマークアップ''',
+'''Print View''':
+'''印刷ビュー''',
+'''Your changes are not saved!''':
+'''このページに対する変更は保存されませんでした。''',
+'''Page name is too long, try shorter name.''':
+'''ページ名が長すぎます。短い名前を指定してください。''',
+'''GUI Mode''':
+'''GUIモード''',
 '''Edit was cancelled.''':
 '''編集はキャンセルされました。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -198,10 +412,10 @@ To leave the editor, press the Cancel button.''':
 '''このページは%(timestamp)sに%(owner)sによって編集が開始された、またはプレビューされました。[[BR]]
 \'\'\'編集の衝突を避けるため、あと%(mins_valid)d分は\'\'編集を行わないでください。\'\'\'\'\'[[BR]]
 キャンセルボタンで編集を中断できます。''',
-'''<unknown>''':
-'''<不明>''',
-'''Text mode''':
-'''テキストモード''',
+'''Installation of \'%(filename)s\' failed.''':
+'''%(filename)s\'のインストールに失敗しました。''',
+'''The file %s is not a MoinMoin package file.''':
+'''%sはMoinMoinのパッケージファイルではありません。''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -298,150 +512,20 @@ reStructuredText Quick Reference
 '''ささいな変更の通知も受ける''',
 '''Disable this account forever''':
 '''このアカウントを無効にする''',
-'''Name''':
-'''名前''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Firstname\'\'\'\'\'\'Lastname 形式)''',
 '''Alias-Name''':
 '''別名''',
-'''Password''':
-'''パスワード''',
 '''Password repeat''':
 '''パスワード(もう一度)''',
 '''(Only when changing passwords)''':
 '''(パスワード変更時のみ)''',
-'''Email''':
-'''メールアドレス''',
 '''User CSS URL''':
 '''CSSのURL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(CSSを無効にするには空にする)''',
 '''Editor size''':
 '''エディタのサイズ''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''{{{\'%s\'}}}は、不正なユーザ名です。
-ユーザ名には、すべてのUnicode英数文字(単語の間に1個のスペースを入れることも可)が使用できます。グループ名を利用することはできません。''',
-'''You are not allowed to do %s on this page.''':
-'''このページを%sする権限がありません。''',
-'''Login''':
-'''ログイン''',
-''' %s and try again.''':
-'''%sして、もう一度試してみてください。''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''約%(pages)dページ中%(hits)d箇所一致しました。''',
-'''%.2f seconds''':
-'''%.2f秒''',
-'''match''':
-'''箇所一致''',
-'''matches''':
-'''箇所一致''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''ログイン名: %s
-
-ログインパスワード: %s
-
-ログインURL: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''要求により、あなたのアカウント情報をこのメールアドレスに送信しました。
-
-パスワードを忘れてしまった場合には、下に書かれている情報を利用して、
-Wikiのパスワード入力欄にパスワードを入力してください。
-(コピー＆ペーストを利用して、表示されているとおりのパスワードを
-入力してください。)
-
-ログインに成功したあとは、新たにパスワードを設定し直すことをお勧めします。
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] アカウント情報''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''このwikiではメールが利用できません。
-管理者に問い合わせてください。''',
-'''Please provide a valid email address!''':
-'''正しいメールアドレスを入力してください。''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''メールアドレス\'%(email)s\'に該当するアカウントが見つかりません。''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''設定変更やアカウント作成をおこなうには、["ユーザプレファレンス"]を利用してください。''',
-'''Empty user name. Please enter a user name.''':
-'''ユーザ名が入力されていません。ユーザ名を入力してください。''',
-'''This user name already belongs to somebody else.''':
-'''このユーザ名はすでに利用されています。''',
-'''Passwords don\'t match!''':
-'''パスワードが一致していません。''',
-'''Please specify a password!''':
-'''パスワードを入力してください。''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''メールアドレスを入力してください。ログイン情報を忘れてしまった際、メールにてお知らせするために必要となります。''',
-'''This email already belongs to somebody else.''':
-'''このメールアドレスはすでに利用されています。''',
-'''User account created! You can use this account to login now...''':
-'''ユーザアカウントが作成されました。このアカウントを利用して、すぐにログインできます。''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''選択したユーザの設定変更をおこなうには、["ユーザプレファレンス"]を利用してください。''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
-'''User preferences saved!''':
-'''User preferencesを保存しました。''',
-'''Default''':
-'''デフォルト''',
-'''<Browser setting>''':
-'''<ブラウザの設定>''',
-'''the one preferred''':
-'''お好み''',
-'''free choice''':
-'''自由選択''',
-'''Select User''':
-'''ユーザ選択''',
-'''Save''':
-'''保存''',
-'''Preferred theme''':
-'''テーマ''',
-'''Editor Preference''':
-'''エディタの好み''',
-'''Editor shown on UI''':
-'''UIで表示されるエディタ''',
-'''Time zone''':
-'''タイムゾーン''',
-'''Your time is''':
-'''あなたの時間''',
-'''Server time is''':
-'''サーバの時間''',
-'''Date format''':
-'''日付の形式''',
-'''Preferred language''':
-'''言語''',
-'''General options''':
-'''一般的なオプション''',
-'''Quick links''':
-'''クイックリンク''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''このリストは、有効なメールアドレスを入力しなければ利用できません。''',
-'''Subscribed wiki pages (one regex per line)''':
-'''購読中のwikiページ[[BR]](1行あたりひとつの正規表現)''',
-'''Create Profile''':
-'''プロファイル作成''',
-'''Mail me my account data''':
-'''アカウント情報をメールする''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''アカウントを作成したり、忘れてしまったパスワードを復活する際には %(userprefslink)s を参照してください。''',
-'''Action''':
-'''アクション''',
 '''No older revisions available!''':
 '''古いリビジョンはありません。''',
 '''Diff for "%s"''':
@@ -540,82 +624,172 @@ Contact the owner of the wiki, who can enable email.''':
 '''チャートタイプを指定してください。''',
 '''Bad chart type "%s"!''':
 '''チャートタイプ"%s"が不正です。''',
-'''Search Titles''':
-'''タイトル検索''',
-'''Display context of search results''':
-'''検索結果のコンテキストを表示''',
-'''Case-sensitive searching''':
-'''大文字/小文字を区別して検索''',
-'''Search Text''':
-'''テキスト検索''',
-'''Go To Page''':
-'''ページへ移動''',
-'''Include system pages''':
-'''システムページを含める''',
-'''Exclude system pages''':
-'''システムページを含めない''',
-'''Plain title index''':
-'''タイトルインデックス''',
-'''XML title index''':
-'''タイトルインデックス(XML)''',
-'''Python Version''':
-'''Pythonのバージョン''',
-'''MoinMoin Version''':
-'''MoinMoinのバージョン''',
-'''Release %s [Revision %s]''':
-'''リリース %s [リビジョン %s]''',
-'''4Suite Version''':
-'''4Suiteのバージョン''',
-'''Number of pages''':
-'''ページ数''',
-'''Number of system pages''':
-'''システムページ数''',
-'''Accumulated page sizes''':
-'''ページサイズの合計''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''%(data_dir)s/pages/ のディスク使用量''',
-'''Disk usage of %(data_dir)s/''':
-'''%(data_dir)s/ のディスク使用量''',
-'''Entries in edit log''':
-'''編集ログ中のエントリー数''',
-'''NONE''':
-'''なし''',
-'''Global extension macros''':
-'''グローバル拡張マクロ''',
-'''Local extension macros''':
-'''ローカル拡張マクロ''',
-'''Global extension actions''':
-'''グローバル拡張アクション''',
-'''Local extension actions''':
-'''ローカル拡張アクション''',
-'''Global parsers''':
-'''グローバルパーサ''',
-'''Local extension parsers''':
-'''ローカル拡張パーサ''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''インストールされているプロセッサ(現在はパーサの利用を推奨)''',
-'''Disabled''':
-'''無効''',
-'''Enabled''':
-'''有効''',
-'''Lupy search''':
-'''Lupyによる検索''',
-'''Active threads''':
-'''アクティブなスレッド''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''検索キーワード{{{"%s"}}}が適切ではありません。他のキーワードでやり直してください。''',
-'''ERROR in regex \'%s\'''':
-'''正規表現\'%s\'に誤りがあります。''',
-'''Bad timestamp \'%s\'''':
-'''不正なタイムスタンプ \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"%(token)s"の後に"="がありません。''',
-'''Expected a value for key "%(token)s"''':
-'''"%(token)s"キーに値がありません。''',
-'''Wiki Markup''':
-'''Wikiマークアップ''',
-'''Print View''':
-'''印刷ビュー''',
+'''This page is already deleted or was never created!''':
+'''このページは既に削除された、またはまだ作られていません。''',
+'''No pages like "%s"!''':
+'''"%s"のようなページはありません。''',
+'''Invalid filename "%s"!''':
+'''ファイル名"%s"が不正です。''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''添付ファイル\'%(target)s\'(サーバでのファイル名\'%(filename)s\')はすでに存在します。''',
+'''Created the package %s containing the pages %s.''':
+'''パッケージ %s を作成しました。(ページ %s を含む)''',
+'''Package pages''':
+'''ページのパッケージ化''',
+'''Package name''':
+'''パッケージ名''',
+'''List of page names - separated by <tt>,</tt>''':
+'''ページ名のリスト (<tt>,</tt>区切り)''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
+'''Missing password. Please enter user name and password.''':
+'''パスワードが入力されていません。ユーザ名とパスワードを入力してください。''',
+'''Sorry, wrong password.''':
+'''不正なパスワードです。''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''"%s"のようなページがひとつ見つかりました。リダイレクトします。''',
+'''Pages like "%s"''':
+'''"%s"のようなページ''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''"%(title)s"において%(matchcount)d %(matches)s''',
+'''Local Site Map for "%s"''':
+'''"%s"のローカルサイトマップ''',
+'''Please log in first.''':
+'''ログインが必要です。''',
+'''Please first create a homepage before creating additional pages.''':
+'''最初にホームページを作成してください。''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''作成済のホームページに、サブページを追加することができます。
+
+これらのページの読み込み権限や書き込み権限の設定も行えます。
+権限の設定は該当するグループページのグループメンバーによって行います。
+
+サブページの名前を入力し、ページの新規作成ボタンをクリックしてください。
+
+アクセス制限を行うページを作成する際には、該当するグループページが存在し、
+適切なメンバーが含まれていることを確認してください。
+グループページの作成には、 HomepageGroupsTemplate を利用すると便利です。
+
+||\'\'\'新しいパーソナルページの追加:\'\'\'||\'\'\'関連するアクセスコントロールリストグループ:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''マイページの管理''',
+'''You are not allowed to rename pages in this wiki!''':
+'''ページ名を変更する権限がありません。''',
+'''Please use the interactive user interface to rename pages!''':
+'''対話的なユーザインターフェースからページ名を変更してください。''',
+'''Could not rename page because of file system error: %s.''':
+'''ファイルシステムエラー(%s)により、ページ名を変更できませんでした。''',
+'''Rename Page''':
+'''ページ名の変更''',
+'''New name''':
+'''新しい名前''',
+'''Optional reason for the renaming''':
+'''名前の変更についてのコメント(省略可)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''ページ名{{{\'%s\'}}}のページがすでに存在します。
+違う名前を利用してください。''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''%(localwords)d語の%(pagelink)sを含む)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''次の%(badwords)d語(ハイライト表示)は、%(totalwords)d語の辞書%(localwords)s中に見つかりませんでした。''',
+'''Add checked words to dictionary''':
+'''チェックした単語を辞書に追加''',
+'''No spelling errors found!''':
+'''スペルの誤りは見つかりませんでした。''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''読む権限がないページのスペルチェックはできません。''',
+'''Title Search: "%s"''':
+'''タイトル検索: "%s"''',
+'''Full Text Search: "%s"''':
+'''テキスト検索: "%s"''',
+'''Full Link List for "%s"''':
+'''"%s"の全リンクリスト''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''名前の無いページを作成することはできません。ページ名を指定してください。''',
+'''Subscribe users to the page %s''':
+'''ユーザをページ"%s"の購読者に追加''',
+'''Subscribed for %s:''':
+'''"%s"の購読者に追加されたユーザ''',
+'''Not a user:''':
+'''存在しないユーザ:''',
+'''You are not allowed to perform this action.''':
+'''このアクションを行う権限がありません。''',
+'''You are now logged out.''':
+'''ログアウト完了です。''',
+'''You are not allowed to delete this page.''':
+'''このページを削除する権限がありません。''',
+'''Please use the interactive user interface to delete pages!''':
+'''対話的なユーザインターフェースからページを削除してください。''',
+'''Really delete this page?''':
+'''このページを本当に削除しますか？''',
+'''Delete''':
+'''削除''',
+'''Optional reason for the deletion''':
+'''削除についてのコメント(省略可)''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''バックアップ: %(filename)s をディレクトリ: %(targetdir)s へリストア。
+ファイル数: %(filecount)d, ディレクトリ数: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''バックアップ: %(filename)s のディレクトリ: %(targetdir)s へのリストアに失敗しました。''',
+'''Wiki Backup / Restore''':
+'''Wiki バックアップ/リストア''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''ヒント:
+ * バックアップのリストアについて:
+  * バックアップをリストアすると、存在するデータは上書きされますので注意してください。
+  * <siteid>.tar.<compression> にリネームしてください(--date--time--UTC は削除してください)。
+  * バックアップファイルを backup_storage_dir に置いてください(scpやftpなどを利用)。
+  * 下の [[GetText(Restore)]] ボタンをクリックしてください。
+
+ * バックアップを作成するには、[[GetText(Backup)]] をクリックし、取得したファイルを安全な場所に保存してください。
+
+Wiki設定中の backup_* が正しいことを確認してください。
+
+''',
+'''Backup''':
+'''バックアップ''',
+'''Restore''':
+'''リストア''',
+'''You are not allowed to do remote backup.''':
+'''このページをリモートバックアップする権限がありません。''',
+'''Unknown backup subaction: %s.''':
+'''未定義のバックアップサブアクション: %s 。''',
 '''[%d attachments]''':
 '''[添付ファイル数: %d]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -674,18 +848,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''サポートされていないアップロードアクション: %s''',
 '''Attachments for "%(pagename)s"''':
 '''"%(pagename)s の添付ファイル"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''添付ファイル\'%(target)s\'(サーバでのファイル名\'%(filename)s\')はすでに存在します。''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''添付ファイル\'%(target)s\'(サーバでのファイル名\'%(filename)s\'、%(bytes)d)を保存しました。''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''添付ファイル\'%(filename)s\'を削除しました。''',
 '''Attachment \'%(filename)s\' installed.''':
 '''添付ファイル\'%(filename)s\'をインストールしました。''',
-'''Installation of \'%(filename)s\' failed.''':
-'''%(filename)s\'のインストールに失敗しました。''',
-'''The file %s is not a MoinMoin package file.''':
-'''%sはMoinMoinのパッケージファイルではありません。''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''添付ファイル\'%(filename)s\'はunzipされませんでした。原因は展開されたファイルが大きすぎるためです(%(space)d kB足りません)。''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -708,170 +876,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ファイルタイプが不明なため、添付ファイルをインラインで表示できません。''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''%(pagename)sの添付ファイル:%(filename)s''',
-'''You are not allowed to delete this page.''':
-'''このページを削除する権限がありません。''',
-'''This page is already deleted or was never created!''':
-'''このページは既に削除された、またはまだ作られていません。''',
-'''Please use the interactive user interface to delete pages!''':
-'''対話的なユーザインターフェースからページを削除してください。''',
-'''Really delete this page?''':
-'''このページを本当に削除しますか？''',
-'''Delete''':
-'''削除''',
-'''Optional reason for the deletion''':
-'''削除についてのコメント(省略可)''',
-'''No pages like "%s"!''':
-'''"%s"のようなページはありません。''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''"%s"のようなページがひとつ見つかりました。リダイレクトします。''',
-'''Pages like "%s"''':
-'''"%s"のようなページ''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''"%(title)s"において%(matchcount)d %(matches)s''',
-'''Local Site Map for "%s"''':
-'''"%s"のローカルサイトマップ''',
-'''Please log in first.''':
-'''ログインが必要です。''',
-'''Please first create a homepage before creating additional pages.''':
-'''最初にホームページを作成してください。''',
-'''You can add some additional sub pages to your already existing homepage here.
-
-You can choose how open to other readers or writers those pages shall be,
-access is controlled by group membership of the corresponding group page.
-
-Just enter the sub page\'s name and click on the button to create a new page.
-
-Before creating access protected pages, make sure the corresponding group page
-exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
-the group pages.
-
-||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
-||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
-||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
-||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
-
-''':
-'''作成済のホームページに、サブページを追加することができます。
-
-これらのページの読み込み権限や書き込み権限の設定も行えます。
-権限の設定は該当するグループページのグループメンバーによって行います。
-
-サブページの名前を入力し、ページの新規作成ボタンをクリックしてください。
-
-アクセス制限を行うページを作成する際には、該当するグループページが存在し、
-適切なメンバーが含まれていることを確認してください。
-グループページの作成には、 HomepageGroupsTemplate を利用すると便利です。
-
-||\'\'\'新しいパーソナルページの追加:\'\'\'||\'\'\'関連するアクセスコントロールリストグループ:\'\'\'||
-||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
-||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
-||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
-
-''',
-'''MyPages management''':
-'''マイページの管理''',
-'''Invalid filename "%s"!''':
-'''ファイル名"%s"が不正です。''',
-'''Created the package %s containing the pages %s.''':
-'''パッケージ %s を作成しました。(ページ %s を含む)''',
-'''Package pages''':
-'''ページのパッケージ化''',
-'''Package name''':
-'''パッケージ名''',
-'''List of page names - separated by <tt>,</tt>''':
-'''ページ名のリスト (<tt>,</tt>区切り)''',
-'''You are not allowed to rename pages in this wiki!''':
-'''ページ名を変更する権限がありません。''',
-'''Please use the interactive user interface to rename pages!''':
-'''対話的なユーザインターフェースからページ名を変更してください。''',
-'''Could not rename page because of file system error: %s.''':
-'''ファイルシステムエラー(%s)により、ページ名を変更できませんでした。''',
-'''Rename Page''':
-'''ページ名の変更''',
-'''New name''':
-'''新しい名前''',
-'''Optional reason for the renaming''':
-'''名前の変更についてのコメント(省略可)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''ページ名{{{\'%s\'}}}のページがすでに存在します。
-違う名前を利用してください。''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''%(localwords)d語の%(pagelink)sを含む)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''次の%(badwords)d語(ハイライト表示)は、%(totalwords)d語の辞書%(localwords)s中に見つかりませんでした。''',
-'''Add checked words to dictionary''':
-'''チェックした単語を辞書に追加''',
-'''No spelling errors found!''':
-'''スペルの誤りは見つかりませんでした。''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''読む権限がないページのスペルチェックはできません。''',
-'''Subscribe users to the page %s''':
-'''ユーザをページ"%s"の購読者に追加''',
-'''Subscribed for %s:''':
-'''"%s"の購読者に追加されたユーザ''',
-'''Not a user:''':
-'''存在しないユーザ:''',
-'''You are not allowed to perform this action.''':
-'''このアクションを行う権限がありません。''',
-'''Title Search: "%s"''':
-'''タイトル検索: "%s"''',
-'''Full Text Search: "%s"''':
-'''テキスト検索: "%s"''',
-'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
-Files: %(filecount)d, Directories: %(dircount)d''':
-'''バックアップ: %(filename)s をディレクトリ: %(targetdir)s へリストア。
-ファイル数: %(filecount)d, ディレクトリ数: %(dircount)d''',
-'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
-'''バックアップ: %(filename)s のディレクトリ: %(targetdir)s へのリストアに失敗しました。''',
-'''Wiki Backup / Restore''':
-'''Wiki バックアップ/リストア''',
-'''Some hints:
- * To restore a backup:
-  * Restoring a backup will overwrite existing data, so be careful.
-  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
-  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
-
- * To make a backup, just hit the [[GetText(Backup)]] button and save the file
-   you get to a secure place.
-
-Please make sure your wiki configuration backup_* values are correct and complete.
-
-''':
-'''ヒント:
- * バックアップのリストアについて:
-  * バックアップをリストアすると、存在するデータは上書きされますので注意してください。
-  * <siteid>.tar.<compression> にリネームしてください(--date--time--UTC は削除してください)。
-  * バックアップファイルを backup_storage_dir に置いてください(scpやftpなどを利用)。
-  * 下の [[GetText(Restore)]] ボタンをクリックしてください。
-
- * バックアップを作成するには、[[GetText(Backup)]] をクリックし、取得したファイルを安全な場所に保存してください。
-
-Wiki設定中の backup_* が正しいことを確認してください。
-
-''',
-'''Backup''':
-'''バックアップ''',
-'''Restore''':
-'''リストア''',
-'''You are not allowed to do remote backup.''':
-'''このページをリモートバックアップする権限がありません。''',
-'''Unknown backup subaction: %s.''':
-'''未定義のバックアップサブアクション: %s 。''',
-'''Full Link List for "%s"''':
-'''"%s"の全リンクリスト''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
-'''Missing password. Please enter user name and password.''':
-'''パスワードが入力されていません。ユーザ名とパスワードを入力してください。''',
-'''Sorry, wrong password.''':
-'''不正なパスワードです。''',
-'''You are now logged out.''':
-'''ログアウト完了です。''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''名前の無いページを作成することはできません。ページ名を指定してください。''',
 '''Upload new attachment "%(filename)s"''':
 '''添付ファイル"%(filename)s"のアップロード''',
 '''Create new drawing "%(filename)s"''':
@@ -880,10 +884,56 @@ Wiki設定中の backup_* が正しいことを確認してください。
 '''drawing"%(filename)s"を編集''',
 '''Toggle line numbers''':
 '''行番号表示/非表示切替''',
-'''Invalid include arguments "%s"!''':
-'''引数"%s"が不正です。''',
-'''Nothing found for "%s"!''':
-'''"%s"に対しては、何も見つかりませんでした。''',
+'''FrontPage''':
+'''フロントページ''',
+'''RecentChanges''':
+'''更新履歴''',
+'''TitleIndex''':
+'''タイトルインデックス''',
+'''WordIndex''':
+'''単語インデックス''',
+'''FindPage''':
+'''ページ検索''',
+'''SiteNavigation''':
+'''サイトナビゲーション''',
+'''HelpContents''':
+'''ヘルプの目次''',
+'''HelpOnFormatting''':
+'''書式のヘルプ''',
+'''UserPreferences''':
+'''ユーザプレファレンス''',
+'''WikiLicense''':
+'''Wikiライセンス''',
+'''MissingPage''':
+'''存在しないページ''',
+'''MissingHomePage''':
+'''存在しないホームページ''',
+'''Mon''':
+'''月''',
+'''Tue''':
+'''火''',
+'''Wed''':
+'''水''',
+'''Thu''':
+'''木''',
+'''Fri''':
+'''金''',
+'''Sat''':
+'''土''',
+'''Sun''':
+'''日''',
+'''AttachFile''':
+'''添付ファイル''',
+'''DeletePage''':
+'''ページ削除''',
+'''LikePages''':
+'''似たページ''',
+'''LocalSiteMap''':
+'''ローカルサイトマップ''',
+'''RenamePage''':
+'''ページ名変更''',
+'''SpellCheck''':
+'''スペルチェック''',
 '''Invalid MonthCalendar calparms "%s"!''':
 '''MonthCalendarのcalparms"%s"が不正です。''',
 '''Invalid MonthCalendar arguments "%s"!''':
@@ -922,14 +972,18 @@ Wiki設定中の backup_* が正しいことを確認してください。
 '''ブックマークをセット''',
 '''[Bookmark reached]''':
 '''[以下、ブックマークのタイムスタンプ以前の更新のため非表示]''',
+'''No wanted pages in this wiki.''':
+'''このwikiに参照先がないページはありません。''',
+'''Invalid include arguments "%s"!''':
+'''引数"%s"が不正です。''',
+'''Nothing found for "%s"!''':
+'''"%s"に対しては、何も見つかりませんでした。''',
 '''Markup''':
 '''マークアップ''',
 '''Display''':
 '''表示''',
 '''Filename''':
 '''ファイル名''',
-'''No wanted pages in this wiki.''':
-'''このwikiに参照先がないページはありません。''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''reStructured textを利用できません。docutilsをインストールしてください。''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -1078,54 +1132,4 @@ red=edit''':
 '''メール送信失敗。''',
 '''Mail sent OK''':
 '''メール送信完了。''',
-'''FrontPage''':
-'''フロントページ''',
-'''RecentChanges''':
-'''更新履歴''',
-'''TitleIndex''':
-'''タイトルインデックス''',
-'''WordIndex''':
-'''単語インデックス''',
-'''FindPage''':
-'''ページ検索''',
-'''SiteNavigation''':
-'''サイトナビゲーション''',
-'''HelpContents''':
-'''ヘルプの目次''',
-'''HelpOnFormatting''':
-'''書式のヘルプ''',
-'''UserPreferences''':
-'''ユーザプレファレンス''',
-'''WikiLicense''':
-'''Wikiライセンス''',
-'''MissingPage''':
-'''存在しないページ''',
-'''MissingHomePage''':
-'''存在しないホームページ''',
-'''Mon''':
-'''月''',
-'''Tue''':
-'''火''',
-'''Wed''':
-'''水''',
-'''Thu''':
-'''木''',
-'''Fri''':
-'''金''',
-'''Sat''':
-'''土''',
-'''Sun''':
-'''日''',
-'''AttachFile''':
-'''添付ファイル''',
-'''DeletePage''':
-'''ページ削除''',
-'''LikePages''':
-'''似たページ''',
-'''LocalSiteMap''':
-'''ローカルサイトマップ''',
-'''RenamePage''':
-'''ページ名変更''',
-'''SpellCheck''':
-'''スペルチェック''',
 }

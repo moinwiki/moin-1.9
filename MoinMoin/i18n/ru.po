@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"POT-Creation-Date: 2006-04-10 13:56+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -59,9 +59,6 @@ msgstr "Создать страницу"
 msgid "You are not allowed to view this page."
 msgstr "Вам не разрешено просматривать эту страницу."
 
-msgid "Your changes are not saved!"
-msgstr "Ваши исправления не сохранились!"
-
 msgid "You are not allowed to edit this page."
 msgstr "Вам нельзя менять эту страницу."
 
@@ -73,9 +70,6 @@ msgstr "Старые версии нельзя изменять!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Привилегия на изменения истекла, приготовьтесь к конфликтам!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Слишком длинное имя страницы, попробуйте что-нибудь покороче."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -153,8 +147,9 @@ msgstr ""
 msgid "Preview"
 msgstr "Показать макет"
 
-msgid "GUI Mode"
-msgstr "Графический редактор"
+#, fuzzy
+msgid "Text mode"
+msgstr "По тексту"
 
 msgid "Comment:"
 msgstr "Комментарий:"
@@ -171,6 +166,350 @@ msgstr "Малое изменение"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Стереть хвостовые пробелы из каждой строки"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Недопустимое имя пользователя {{{'%s'}}}.\n"
+"Имя может содержать буквы и цифры любого языка и по жеданию один пробел "
+"между словами. Нельзя использовать имя группы."
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "Вам нельзя %s эту страницу."
+
+msgid "Login"
+msgstr "Войти"
+
+#, python-format
+msgid " %s and try again."
+msgstr " %s и попробуйте еще раз."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d результатов из %(pages)d просмотренных страниц."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f секунд"
+
+msgid "match"
+msgstr "совпадение"
+
+msgid "matches"
+msgstr "совпадений"
+
+msgid "<unknown>"
+msgstr "<???>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s\n"
+msgstr ""
+"Имя: %s\n"
+"\n"
+"Пароль: %s\n"
+"\n"
+"URL для входа: %s/%s\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Кто-то запросил выслать свои данные на этот адрес.\n"
+"\n"
+"Если вы забыли пароль, используйте эти данные и введите пароль КАК ЗДЕСЬ "
+"НАПИСАНО\n"
+"(воспользуйтесь операциями Copy/Paste для точного переноса).\n"
+"\n"
+"После успешного входа в систему неплохо бы поменять пароль на ваш "
+"собственный.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Ваша запись пользователя"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
+"может разрешить отправку."
+
+msgid "Please provide a valid email address!"
+msgstr "Пожалуйста укажите правильный почтовый адрес!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr "Для создания пользователя или его изменения нажмите на ВашиНастройки."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Имя не указано. Пожалуйста введите имя пользователя."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Это имя уже занято."
+
+msgid "Passwords don't match!"
+msgstr "Пароли не совпадают!"
+
+msgid "Please specify a password!"
+msgstr "Пожалуйста укажите пароль!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для "
+"регистрации (входа в вики), вы сможете получить их по почте."
+
+msgid "This email already belongs to somebody else."
+msgstr "Это чужой адрес."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "Пользователь создан! Можно входить..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "ВашиНастройки можно изменить для выбранного пользователя"
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Не могу загрузать макияж '%(theme_name)s'!"
+
+msgid "User preferences saved!"
+msgstr "Настройки записаны!"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "<Browser setting>"
+msgstr "<Настройки браузера>"
+
+msgid "the one preferred"
+msgstr "предпочтительно"
+
+msgid "free choice"
+msgstr "по выбору"
+
+msgid "Select User"
+msgstr "Выберите пользователя"
+
+msgid "Save"
+msgstr "Записать"
+
+msgid "Preferred theme"
+msgstr "Предпочитаемый стиль"
+
+msgid "Editor Preference"
+msgstr "Настройки редактора"
+
+msgid "Editor shown on UI"
+msgstr "Показывать графический редактор"
+
+msgid "Time zone"
+msgstr "Часовой пояс"
+
+msgid "Your time is"
+msgstr "Ваше время"
+
+msgid "Server time is"
+msgstr "Время на сервере"
+
+msgid "Date format"
+msgstr "Формат даты"
+
+msgid "Preferred language"
+msgstr "Предпочитаемый язык"
+
+msgid "General options"
+msgstr "Общие параметры"
+
+msgid "Quick links"
+msgstr "Закладки"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "Этот список работает только при правильном почтовом адресе!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Список подписки на страницы вики (один образец на строчку)"
+
+msgid "Create Profile"
+msgstr "Создать настройки"
+
+msgid "Mail me my account data"
+msgstr "Отправить мне настройки почтой"
+
+msgid "Email"
+msgstr "Почтовый адрес"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
+msgid "Name"
+msgstr "Полное имя"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Action"
+msgstr "Действие"
+
+#, python-format
+msgid "Required attribute \"%(attrname)s\" missing"
+msgstr ""
+
+#, fuzzy
+msgid "Submitted form data:"
+msgstr "Подписка"
+
+msgid "Search Titles"
+msgstr "Искать по заголовкам"
+
+msgid "Display context of search results"
+msgstr "Показывать расширенные результаты поиска"
+
+msgid "Case-sensitive searching"
+msgstr "Поиск с учетом регистра"
+
+msgid "Search Text"
+msgstr "Искать по тексту"
+
+msgid "Go To Page"
+msgstr "Открыть страницу"
+
+msgid "Include system pages"
+msgstr "Показать служебные страницы"
+
+msgid "Exclude system pages"
+msgstr "Убрать служебные страницы"
+
+msgid "Plain title index"
+msgstr "Показать как текст"
+
+msgid "XML title index"
+msgstr "Показать как XML"
+
+msgid "Python Version"
+msgstr "Версия Python"
+
+msgid "MoinMoin Version"
+msgstr "Версия МойнМойн"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Release %s [Revision %s]"
+
+msgid "4Suite Version"
+msgstr "Версия 4Suite"
+
+msgid "Number of pages"
+msgstr "Всего страниц"
+
+msgid "Number of system pages"
+msgstr "Число служебных страниц"
+
+msgid "Accumulated page sizes"
+msgstr "Размер всех страниц"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Записей в протоколе изменений"
+
+msgid "NONE"
+msgstr "НЕТ"
+
+msgid "Global extension macros"
+msgstr "Общие дополнительные макросы"
+
+msgid "Local extension macros"
+msgstr "Местные дополнительные макросы"
+
+msgid "Global extension actions"
+msgstr "Общие дополнительные действия"
+
+msgid "Local extension actions"
+msgstr "Местные дополнительные действия"
+
+msgid "Global parsers"
+msgstr "Общие парсеры"
+
+msgid "Local extension parsers"
+msgstr "Местные дополнительные парсеры"
+
+msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+msgstr "Доступные процессоры (УСТАРЕЛО - используйте парсеры)"
+
+msgid "Disabled"
+msgstr "Выключен"
+
+msgid "Enabled"
+msgstr "Включен"
+
+msgid "Lupy search"
+msgstr "Общий поиск"
+
+msgid "Active threads"
+msgstr "Активных потоков"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Пожалуйста уточните что искать вместо {{{\"%s\"}}}"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "ОШИБКА в образце поиска '%s'"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Плохая отметка времени '%s'"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Нужен \"=\" после \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Нужно значение для ключа \"%(token)s\""
+
+msgid "Wiki Markup"
+msgstr "Вики-разметка"
+
+msgid "Print View"
+msgstr "Для печати"
+
+msgid "Your changes are not saved!"
+msgstr "Ваши исправления не сохранились!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Слишком длинное имя страницы, попробуйте что-нибудь покороче."
+
+msgid "GUI Mode"
+msgstr "Графический редактор"
 
 msgid "Edit was cancelled."
 msgstr "Исправления отменены."
@@ -335,12 +674,41 @@ msgstr ""
 "для избежания конфликтов.'''[[BR]]\n"
 "Чтобы выйти из редактора нажмите кнопку 'Отмена'."
 
-msgid "<unknown>"
-msgstr "<???>"
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
 
-#, fuzzy
-msgid "Text mode"
-msgstr "По тексту"
+msgid "The theme name is not set."
+msgstr ""
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Установка '%(filename)s' не удалась."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Файл %s не является пакетом МойнМойн."
+
+#, fuzzy, python-format
+msgid "The page %s does not exist."
+msgstr "Приложение '%(filename)s' не существует!"
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %s in line %i."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The file %s was not found in the package."
+msgstr "Файл %s не является пакетом МойнМойн."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -468,26 +836,17 @@ msgstr "Подписаться на малые исправления"
 msgid "Disable this account forever"
 msgstr "Забыть меня навсегда"
 
-msgid "Name"
-msgstr "Полное имя"
-
 msgid "(Use Firstname''''''Lastname)"
 msgstr "(используйте Имя''''''Фамилия)"
 
 msgid "Alias-Name"
 msgstr "Короткое имя"
 
-msgid "Password"
-msgstr "Пароль"
-
 msgid "Password repeat"
 msgstr "Пароль снова"
 
 msgid "(Only when changing passwords)"
 msgstr "(Только при изменении пароля)"
-
-msgid "Email"
-msgstr "Почтовый адрес"
 
 msgid "User CSS URL"
 msgstr "Использовать CSS из URL"
@@ -497,199 +856,6 @@ msgstr "(Оставьте пустым для использования сис�
 
 msgid "Editor size"
 msgstr "Размер окна редактирования"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Недопустимое имя пользователя {{{'%s'}}}.\n"
-"Имя может содержать буквы и цифры любого языка и по жеданию один пробел "
-"между словами. Нельзя использовать имя группы."
-
-#, python-format
-msgid "You are not allowed to do %s on this page."
-msgstr "Вам нельзя %s эту страницу."
-
-msgid "Login"
-msgstr "Войти"
-
-#, python-format
-msgid " %s and try again."
-msgstr " %s и попробуйте еще раз."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d результатов из %(pages)d просмотренных страниц."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f секунд"
-
-msgid "match"
-msgstr "совпадение"
-
-msgid "matches"
-msgstr "совпадений"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s\n"
-msgstr ""
-"Имя: %s\n"
-"\n"
-"Пароль: %s\n"
-"\n"
-"URL для входа: %s/%s\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Кто-то запросил выслать свои данные на этот адрес.\n"
-"\n"
-"Если вы забыли пароль, используйте эти данные и введите пароль КАК ЗДЕСЬ "
-"НАПИСАНО\n"
-"(воспользуйтесь операциями Copy/Paste для точного переноса).\n"
-"\n"
-"После успешного входа в систему неплохо бы поменять пароль на ваш "
-"собственный.\n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Ваша запись пользователя"
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который "
-"может разрешить отправку."
-
-msgid "Please provide a valid email address!"
-msgstr "Пожалуйста укажите правильный почтовый адрес!"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Не найдено пользователя с таким адресом '%(email)s'!"
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr "Для создания пользователя или его изменения нажмите на ВашиНастройки."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Имя не указано. Пожалуйста введите имя пользователя."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Это имя уже занято."
-
-msgid "Passwords don't match!"
-msgstr "Пароли не совпадают!"
-
-msgid "Please specify a password!"
-msgstr "Пожалуйста укажите пароль!"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для "
-"регистрации (входа в вики), вы сможете получить их по почте."
-
-msgid "This email already belongs to somebody else."
-msgstr "Это чужой адрес."
-
-msgid "User account created! You can use this account to login now..."
-msgstr "Пользователь создан! Можно входить..."
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr "ВашиНастройки можно изменить для выбранного пользователя"
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Не могу загрузать макияж '%(theme_name)s'!"
-
-msgid "User preferences saved!"
-msgstr "Настройки записаны!"
-
-msgid "Default"
-msgstr "По умолчанию"
-
-msgid "<Browser setting>"
-msgstr "<Настройки браузера>"
-
-msgid "the one preferred"
-msgstr "предпочтительно"
-
-msgid "free choice"
-msgstr "по выбору"
-
-msgid "Select User"
-msgstr "Выберите пользователя"
-
-msgid "Save"
-msgstr "Записать"
-
-msgid "Preferred theme"
-msgstr "Предпочитаемый стиль"
-
-msgid "Editor Preference"
-msgstr "Настройки редактора"
-
-msgid "Editor shown on UI"
-msgstr "Показывать графический редактор"
-
-msgid "Time zone"
-msgstr "Часовой пояс"
-
-msgid "Your time is"
-msgstr "Ваше время"
-
-msgid "Server time is"
-msgstr "Время на сервере"
-
-msgid "Date format"
-msgstr "Формат даты"
-
-msgid "Preferred language"
-msgstr "Предпочитаемый язык"
-
-msgid "General options"
-msgstr "Общие параметры"
-
-msgid "Quick links"
-msgstr "Закладки"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr "Этот список работает только при правильном почтовом адресе!"
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Список подписки на страницы вики (один образец на строчку)"
-
-msgid "Create Profile"
-msgstr "Создать настройки"
-
-msgid "Mail me my account data"
-msgstr "Отправить мне настройки почтой"
-
-#, python-format
-msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
-msgstr ""
-
-msgid "Action"
-msgstr "Действие"
 
 msgid "No older revisions available!"
 msgstr "Нет более старых версий!"
@@ -849,127 +1015,262 @@ msgstr "Укажите тип диаграммы!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Плохой тип диаграммы \"%s\"!"
 
-msgid "Search Titles"
-msgstr "Искать по заголовкам"
-
-msgid "Display context of search results"
-msgstr "Показывать расширенные результаты поиска"
-
-msgid "Case-sensitive searching"
-msgstr "Поиск с учетом регистра"
-
-msgid "Search Text"
-msgstr "Искать по тексту"
-
-msgid "Go To Page"
-msgstr "Открыть страницу"
-
-msgid "Include system pages"
-msgstr "Показать служебные страницы"
-
-msgid "Exclude system pages"
-msgstr "Убрать служебные страницы"
-
-msgid "Plain title index"
-msgstr "Показать как текст"
-
-msgid "XML title index"
-msgstr "Показать как XML"
-
-msgid "Python Version"
-msgstr "Версия Python"
-
-msgid "MoinMoin Version"
-msgstr "Версия МойнМойн"
+msgid "This page is already deleted or was never created!"
+msgstr "Такая страница уже стерта или никогда не существовала!"
 
 #, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Release %s [Revision %s]"
+msgid "No pages like \"%s\"!"
+msgstr "Нет страниц похожих на \"%s\"!"
 
-msgid "4Suite Version"
-msgstr "Версия 4Suite"
-
-msgid "Number of pages"
-msgstr "Всего страниц"
-
-msgid "Number of system pages"
-msgstr "Число служебных страниц"
-
-msgid "Accumulated page sizes"
-msgstr "Размер всех страниц"
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Неправильные аргументы для include \"%s\"!"
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Приложение '%(target)s' (из файла '%(filename)s') уже существует."
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "Похожие Страницы"
+
+#, fuzzy
+msgid "Package name"
+msgstr "Похожие Страницы"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "Имя не указано. Пожалуйста введите имя пользователя."
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+
+msgid "Sorry, wrong password."
 msgstr ""
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/"
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Найдена ровно одна страница похожая на \"%s\", открываю..."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Страницы похожие на \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Карта сайта около \"%s\""
+
+msgid "Please log in first."
 msgstr ""
 
-msgid "Entries in edit log"
-msgstr "Записей в протоколе изменений"
-
-msgid "NONE"
-msgstr "НЕТ"
-
-msgid "Global extension macros"
-msgstr "Общие дополнительные макросы"
-
-msgid "Local extension macros"
-msgstr "Местные дополнительные макросы"
-
-msgid "Global extension actions"
-msgstr "Общие дополнительные действия"
-
-msgid "Local extension actions"
-msgstr "Местные дополнительные действия"
-
-msgid "Global parsers"
-msgstr "Общие парсеры"
-
-msgid "Local extension parsers"
-msgstr "Местные дополнительные парсеры"
-
-msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Доступные процессоры (УСТАРЕЛО - используйте парсеры)"
-
-msgid "Disabled"
-msgstr "Выключен"
-
-msgid "Enabled"
-msgstr "Включен"
-
-msgid "Lupy search"
-msgstr "Общий поиск"
-
-msgid "Active threads"
-msgstr "Активных потоков"
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
 
 #, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Пожалуйста уточните что искать вместо {{{\"%s\"}}}"
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+msgid "You are not allowed to rename pages in this wiki!"
+msgstr "Вам нельзя переименовывать страницы в этом вики!"
+
+msgid "Please use the interactive user interface to rename pages!"
+msgstr ""
+"Пожалуйста воспользуйтесь интерфейсом пользователя для переименования "
+"страниц!"
 
 #, python-format
-msgid "ERROR in regex '%s'"
-msgstr "ОШИБКА в образце поиска '%s'"
+msgid "Could not rename page because of file system error: %s."
+msgstr "Страница не была переименована из-за системной ошибки: %s."
+
+msgid "Rename Page"
+msgstr "Переименовать"
+
+msgid "New name"
+msgstr "Новое имя"
+
+msgid "Optional reason for the renaming"
+msgstr "Можете указать причину для переименования"
 
 #, python-format
-msgid "Bad timestamp '%s'"
-msgstr "Плохая отметка времени '%s'"
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Страница с именем {{{'%s'}}} уже есть.'''\n"
+"\n"
+"Попробуйте другое имя."
 
 #, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Нужен \"=\" после \"%(token)s\""
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(включая %(localwords)d %(pagelink)s)"
 
 #, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Нужно значение для ключа \"%(token)s\""
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d слов(а) не найдено в словаре из %(totalwords)d слов %"
+"(localwords)s и показано здесь:"
 
-msgid "Wiki Markup"
-msgstr "Вики-разметка"
+msgid "Add checked words to dictionary"
+msgstr "Добавить отмеченные слова в словарь"
 
-msgid "Print View"
-msgstr "Для печати"
+msgid "No spelling errors found!"
+msgstr "Ошибок правописания не найдено!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Нельзя проверять страницу которую запрещено читать."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Поиск по заголовкам: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Поиск по тексту: \"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Полный список ссылок для \"%s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Не могу создать страницу без имени. Укажите имя страницы."
+
+#, fuzzy
+msgid "Pages"
+msgstr "Страница"
+
+#, fuzzy
+msgid "Select Author"
+msgstr "Выберите пользователя"
+
+msgid "Revert all!"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "Вам нельзя менять эту страницу."
+
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Подписаться на малые исправления"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "Подписка"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "Вам нельзя менять эту страницу."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Вам нельзя устанавливать файлы."
+
+msgid "You are not allowed to delete this page."
+msgstr "Вам нельзя стереть эту страницу."
+
+msgid "Please use the interactive user interface to delete pages!"
+msgstr ""
+"Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!"
+
+msgid "Really delete this page?"
+msgstr "Точно стереть эту страницу?"
+
+msgid "Delete"
+msgstr "Стереть"
+
+msgid "Optional reason for the deletion"
+msgstr "Можете указать причину для удаления"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Разметка"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Вам нельзя %s эту страницу."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"
@@ -1079,10 +1380,6 @@ msgid "Attachments for \"%(pagename)s\""
 msgstr "Приложения к \"%(pagename)s\""
 
 #, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Приложение '%(target)s' (из файла '%(filename)s') уже существует."
-
-#, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
@@ -1097,14 +1394,6 @@ msgstr "Приложение '%(filename)s' стерто."
 #, python-format
 msgid "Attachment '%(filename)s' installed."
 msgstr "Приложение '%(filename)s' установлено."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Установка '%(filename)s' не удалась."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Файл %s не является пакетом МойнМойн."
 
 #, python-format
 msgid ""
@@ -1156,244 +1445,6 @@ msgstr "Незнакомый тип файла, не могу показать �
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "приложение:%(filename)s к %(pagename)s"
 
-msgid "You are not allowed to delete this page."
-msgstr "Вам нельзя стереть эту страницу."
-
-msgid "This page is already deleted or was never created!"
-msgstr "Такая страница уже стерта или никогда не существовала!"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!"
-
-msgid "Really delete this page?"
-msgstr "Точно стереть эту страницу?"
-
-msgid "Delete"
-msgstr "Стереть"
-
-msgid "Optional reason for the deletion"
-msgstr "Можете указать причину для удаления"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Нет страниц похожих на \"%s\"!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Найдена ровно одна страница похожая на \"%s\", открываю..."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Страницы похожие на \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Карта сайта около \"%s\""
-
-msgid "Please log in first."
-msgstr ""
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-
-msgid "MyPages management"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Неправильные аргументы для include \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr ""
-
-#, fuzzy
-msgid "Package pages"
-msgstr "Похожие Страницы"
-
-#, fuzzy
-msgid "Package name"
-msgstr "Похожие Страницы"
-
-msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
-
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Вам нельзя переименовывать страницы в этом вики!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Пожалуйста воспользуйтесь интерфейсом пользователя для переименования "
-"страниц!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Страница не была переименована из-за системной ошибки: %s."
-
-msgid "Rename Page"
-msgstr "Переименовать"
-
-msgid "New name"
-msgstr "Новое имя"
-
-msgid "Optional reason for the renaming"
-msgstr "Можете указать причину для переименования"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Страница с именем {{{'%s'}}} уже есть.'''\n"
-"\n"
-"Попробуйте другое имя."
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(включая %(localwords)d %(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"%(badwords)d слов(а) не найдено в словаре из %(totalwords)d слов %"
-"(localwords)s и показано здесь:"
-
-msgid "Add checked words to dictionary"
-msgstr "Добавить отмеченные слова в словарь"
-
-msgid "No spelling errors found!"
-msgstr "Ошибок правописания не найдено!"
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "Нельзя проверять страницу которую запрещено читать."
-
-#, fuzzy, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Подписаться на малые исправления"
-
-#, fuzzy, python-format
-msgid "Subscribed for %s:"
-msgstr "Подписка"
-
-msgid "Not a user:"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to perform this action."
-msgstr "Вам нельзя менять эту страницу."
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Поиск по заголовкам: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Поиск по тексту: \"%s\""
-
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
-msgstr ""
-
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-msgstr ""
-
-msgid "Wiki Backup / Restore"
-msgstr ""
-
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
-"\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
-
-#, fuzzy
-msgid "Backup"
-msgstr "Разметка"
-
-msgid "Restore"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to do remote backup."
-msgstr "Вам нельзя %s эту страницу."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr ""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Полный список ссылок для \"%s\""
-
-#, fuzzy, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Имя не указано. Пожалуйста введите имя пользователя."
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr ""
-
-#, fuzzy
-msgid "You are now logged out."
-msgstr "Вам нельзя устанавливать файлы."
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Не могу создать страницу без имени. Укажите имя страницы."
-
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Приложить \"%(filename)s\""
@@ -1409,13 +1460,80 @@ msgstr "Изменить рисунок %(filename)s"
 msgid "Toggle line numbers"
 msgstr ""
 
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Неправильные аргументы для include \"%s\"!"
+msgid "FrontPage"
+msgstr "Начало"
 
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Ничего не найдено для \"%s\"!"
+msgid "RecentChanges"
+msgstr "Новости"
+
+msgid "TitleIndex"
+msgstr "АлфавитныйУказатель"
+
+msgid "WordIndex"
+msgstr "ПредметныйУказатель"
+
+msgid "FindPage"
+msgstr "НайтиСтраницу"
+
+msgid "SiteNavigation"
+msgstr "ПойтиПоСайту"
+
+msgid "HelpContents"
+msgstr "ПомощьПоГлавам"
+
+msgid "HelpOnFormatting"
+msgstr "КакФорматировать"
+
+msgid "UserPreferences"
+msgstr "ВашиНастройки"
+
+msgid "WikiLicense"
+msgstr "ВикиЛицензия"
+
+msgid "MissingPage"
+msgstr "НетСтраницы"
+
+msgid "MissingHomePage"
+msgstr "НетДомашнейСтраницы"
+
+msgid "Mon"
+msgstr "Пон"
+
+msgid "Tue"
+msgstr "Вто"
+
+msgid "Wed"
+msgstr "Сре"
+
+msgid "Thu"
+msgstr "Чет"
+
+msgid "Fri"
+msgstr "Пят"
+
+msgid "Sat"
+msgstr "Суб"
+
+msgid "Sun"
+msgstr "Вос"
+
+msgid "AttachFile"
+msgstr "Приложить"
+
+msgid "DeletePage"
+msgstr "Стереть"
+
+msgid "LikePages"
+msgstr "ПохожиеСтраницы"
+
+msgid "LocalSiteMap"
+msgstr "КартаОкресностей"
+
+msgid "RenamePage"
+msgstr "Переименовать"
+
+msgid "SpellCheck"
+msgstr "Правописание"
 
 #, fuzzy, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -1483,6 +1601,17 @@ msgstr "заложить здесь"
 msgid "[Bookmark reached]"
 msgstr "[Здесь лежит закладка]"
 
+msgid "No wanted pages in this wiki."
+msgstr "В этом вики нет требуемых страниц."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Неправильные аргументы для include \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Ничего не найдено для \"%s\"!"
+
 msgid "Markup"
 msgstr "Разметка"
 
@@ -1491,9 +1620,6 @@ msgstr "Просмотр"
 
 msgid "Filename"
 msgstr "Файл"
-
-msgid "No wanted pages in this wiki."
-msgstr "В этом вики нет требуемых страниц."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
@@ -1741,81 +1867,6 @@ msgstr "Почта не ушла."
 
 msgid "Mail sent OK"
 msgstr "Почта ушла."
-
-msgid "FrontPage"
-msgstr "Начало"
-
-msgid "RecentChanges"
-msgstr "Новости"
-
-msgid "TitleIndex"
-msgstr "АлфавитныйУказатель"
-
-msgid "WordIndex"
-msgstr "ПредметныйУказатель"
-
-msgid "FindPage"
-msgstr "НайтиСтраницу"
-
-msgid "SiteNavigation"
-msgstr "ПойтиПоСайту"
-
-msgid "HelpContents"
-msgstr "ПомощьПоГлавам"
-
-msgid "HelpOnFormatting"
-msgstr "КакФорматировать"
-
-msgid "UserPreferences"
-msgstr "ВашиНастройки"
-
-msgid "WikiLicense"
-msgstr "ВикиЛицензия"
-
-msgid "MissingPage"
-msgstr "НетСтраницы"
-
-msgid "MissingHomePage"
-msgstr "НетДомашнейСтраницы"
-
-msgid "Mon"
-msgstr "Пон"
-
-msgid "Tue"
-msgstr "Вто"
-
-msgid "Wed"
-msgstr "Сре"
-
-msgid "Thu"
-msgstr "Чет"
-
-msgid "Fri"
-msgstr "Пят"
-
-msgid "Sat"
-msgstr "Суб"
-
-msgid "Sun"
-msgstr "Вос"
-
-msgid "AttachFile"
-msgstr "Приложить"
-
-msgid "DeletePage"
-msgstr "Стереть"
-
-msgid "LikePages"
-msgstr "ПохожиеСтраницы"
-
-msgid "LocalSiteMap"
-msgstr "КартаОкресностей"
-
-msgid "RenamePage"
-msgstr "Переименовать"
-
-msgid "SpellCheck"
-msgstr "Правописание"
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s байт)"

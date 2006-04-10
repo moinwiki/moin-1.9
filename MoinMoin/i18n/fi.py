@@ -32,8 +32,6 @@ makrokutsu.-~
 '''Luo uusi sivu''',
 '''You are not allowed to view this page.''':
 '''Sinulla ei ole oikeutta katsoa tätä sivua.''',
-'''Your changes are not saved!''':
-'''Muutoksiasi ei ole tallennettu!''',
 '''You are not allowed to edit this page.''':
 '''Sinulla ei ole oikeutta muokata tätä sivua.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ makrokutsu.-~
 '''Vanhoja versioita ei voi muokata!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Lukkosi sivuun vanheni. Varaudu päällekkäisiin muokkauksiin!''',
-'''Page name is too long, try shorter name.''':
-'''Sivun nimi on liian pitkä, kokeile lyhyempää nimeä.''',
 '''Edit "%(pagename)s"''':
 '''Muokkaa "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muutoksesi.''',
 '''Preview''':
 '''Esikatsele''',
-'''GUI Mode''':
-'''GUI-tila''',
 '''Comment:''':
 '''Kommentti:''',
 '''<No addition>''':
@@ -96,6 +90,202 @@ Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muut
 '''Vähäinen muutos''',
 '''Remove trailing whitespace from each line''':
 '''Poista rivien lopusta tyhjämerkit''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''{{{\'%s\'}}} on kelvoton käyttäjänimi.
+Nimi voi muodostua mistä tahansa Unicoden kirjain- ja numeromerkeistä, ja 
+sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
+'''You are not allowed to do %s on this page.''':
+'''Sinulla ei ole oikeutta toimintoon %s tälle sivulle.''',
+'''Login''':
+'''Kirjaudu sisään''',
+''' %s and try again.''':
+''' %s ja yritä uudelleen.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d tulosta noin %(pages)d sivusta.''',
+'''%.2f seconds''':
+'''%.2f sekuntia''',
+'''match''':
+'''osuma''',
+'''matches''':
+'''osumaa''',
+'''<unknown>''':
+'''<tuntematon>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Joku on pyytänyt lähettämään tunnustietosi tähän sähköpostiosoitteeseen.
+
+Jos kadotit salasanasi, käytä alla olevia tietoja ja kirjoita annettu
+salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä 
+leikkausta ja liimausta).
+
+Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva salasana.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Wikitunnuksesi tiedot''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Sähköpostia ei ole otettu käyttöön tässä wikissä.
+Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
+'''Please provide a valid email address!''':
+'''Anna kelvollinen sähköpostiosoite!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Sähköpostiosoitetta \'%(email)s\' vastaavaa käyttäjää ei löytynyt!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen.''',
+'''Empty user name. Please enter a user name.''':
+'''Tyhjä käyttäjänimi. Anna käyttäjänimi.''',
+'''This user name already belongs to somebody else.''':
+'''Tämä käyttäjänimi kuuluu jo jollekin toiselle.''',
+'''Passwords don\'t match!''':
+'''Salasanat eivät vastaa!''',
+'''Please specify a password!''':
+'''Mainitse salasana!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
+'''This email already belongs to somebody else.''':
+'''Tämä sähköposti kuuluu jo jollekin toiselle.''',
+'''User account created! You can use this account to login now...''':
+'''Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen...''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Teemaa \'%(theme_name)s\' ei voida ladata!''',
+'''User preferences saved!''':
+'''Käyttäjäasetukset tallennettu!''',
+'''Default''':
+'''oletusarvo''',
+'''<Browser setting>''':
+'''<selaimen asetus>''',
+'''the one preferred''':
+'''suosikki''',
+'''free choice''':
+'''valittavissa''',
+'''Save''':
+'''Tallenna''',
+'''Preferred theme''':
+'''Suosikkiulkoasu''',
+'''Editor Preference''':
+'''Suosikkimuokkaustapa''',
+'''Editor shown on UI''':
+'''Käytettävä muokkaustapa''',
+'''Time zone''':
+'''Aikavyöhyke''',
+'''Your time is''':
+'''Aikasi on''',
+'''Server time is''':
+'''Palvelimen aika on''',
+'''Date format''':
+'''Päivämäärän muoto''',
+'''Preferred language''':
+'''Suosikkikieli''',
+'''General options''':
+'''Yleiset asetukset''',
+'''Quick links''':
+'''Pikalinkit''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Tämä lista ei toimi, ellet ole antanut kelpoa sähköpostiosoitetta!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Tilatut wikisivut (yksi regex per rivi)''',
+'''Create Profile''':
+'''Luo profiili''',
+'''Mail me my account data''':
+'''Sähköpostita minulle käyttäjätietoni''',
+'''Email''':
+'''Sähköpostiosoite''',
+'''Name''':
+'''Nimi''',
+'''Password''':
+'''Salasana''',
+'''Action''':
+'''Toiminto''',
+'''Required attribute "%(attrname)s" missing''':
+'''Vaadittu tieto "%(attrname)s" puuttuu''',
+'''Submitted form data:''':
+'''Lomakkeella lähetettiin tiedot:''',
+'''Search Titles''':
+'''Etsi nimistä''',
+'''Display context of search results''':
+'''Näytä hakutulosten ympäristö''',
+'''Case-sensitive searching''':
+'''Aakkoslajit erottava haku''',
+'''Search Text''':
+'''Etsi teksteistä''',
+'''Go To Page''':
+'''Mene sivulle''',
+'''Include system pages''':
+'''Sisällytä järjestelmäsivut''',
+'''Exclude system pages''':
+'''Ohita järjestelmäsivut''',
+'''Plain title index''':
+'''Paljas sivuhakemisto''',
+'''XML title index''':
+'''XML-sivuhakemisto''',
+'''Python Version''':
+'''Python versio''',
+'''MoinMoin Version''':
+'''MoinMoin versio''',
+'''Release %s [Revision %s]''':
+'''Julkaisu %s [versio %s]''',
+'''4Suite Version''':
+'''4Suite versio''',
+'''Number of pages''':
+'''Sivujen lukumäärä''',
+'''Number of system pages''':
+'''Järjestelmäsivujen lukumäärä''',
+'''Accumulated page sizes''':
+'''Sivujen koko yhteensä''',
+'''Entries in edit log''':
+'''Merkintöjä muutoslokissa''',
+'''NONE''':
+'''EI''',
+'''Global extension macros''':
+'''Yleisiä laajennusmakroja''',
+'''Local extension macros''':
+'''Paikallisia laajennusmakroja''',
+'''Global extension actions''':
+'''Yleisiä laajennustoimintoja''',
+'''Local extension actions''':
+'''Paikallisia laajennustoimintoja''',
+'''Global parsers''':
+'''Yleiset jäsentimet''',
+'''Local extension parsers''':
+'''Paikalliset laajennusjäsentimet''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)''',
+'''Disabled''':
+'''Poissa''',
+'''Enabled''':
+'''Käytössä''',
+'''Lupy search''':
+'''Lupy-haku''',
+'''Active threads''':
+'''Aktiiviset säikeet''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''käytä tarkempaa hakuehtoa kuin {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Virhe regexissä \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Kelvoton aikaleima \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Odototettiin =-merkin seuraavan sanasta "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Odotettiin arvoa avaimelle "%(token)s"''',
+'''Wiki Markup''':
+'''Wiki-merkintä''',
+'''Print View''':
+'''Tulostettavana''',
+'''Your changes are not saved!''':
+'''Muutoksiasi ei ole tallennettu!''',
+'''Page name is too long, try shorter name.''':
+'''Sivun nimi on liian pitkä, kokeile lyhyempää nimeä.''',
+'''GUI Mode''':
+'''GUI-tila''',
 '''Edit was cancelled.''':
 '''Muokkaus peruttu.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -198,8 +388,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Sinun pitäisi \'\'pidättyä muokkaamasta\'\' tätä sivua ainakin seuraavat %(mins_valid)d minuuttia,
 välttääksesi muokkausristiriidat.\'\'\'[[BR]]
 Jättääksesi muokkauksen, paina Peruuta-nappia.''',
-'''<unknown>''':
-'''<tuntematon>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Tiedoston \'%(filename)s\' asennus ei onnistunut.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Tiedosto %s ei ole MoinMoinin pakettitiedosto.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -260,132 +452,20 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''Tilaa vähäisetkin muutokset''',
 '''Disable this account forever''':
 '''Sulje tämä käyttäjätunnus pysyvästi''',
-'''Name''':
-'''Nimi''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(muodossa Etunimi\'\'\'\'\'\'Sukunimi)''',
 '''Alias-Name''':
 '''Peitenimi''',
-'''Password''':
-'''Salasana''',
 '''Password repeat''':
 '''Salasana uudestaan''',
 '''(Only when changing passwords)''':
 '''(varmistukseksi salasanaa valittaessa)''',
-'''Email''':
-'''Sähköpostiosoite''',
 '''User CSS URL''':
 '''Käyttäjän CSS:n URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(jätä tyhjäksi poistaaksesi käytöstä)''',
 '''Editor size''':
 '''Muokkauskentässä rivejä''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''{{{\'%s\'}}} on kelvoton käyttäjänimi.
-Nimi voi muodostua mistä tahansa Unicoden kirjain- ja numeromerkeistä, ja 
-sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
-'''You are not allowed to do %s on this page.''':
-'''Sinulla ei ole oikeutta toimintoon %s tälle sivulle.''',
-'''Login''':
-'''Kirjaudu sisään''',
-''' %s and try again.''':
-''' %s ja yritä uudelleen.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d tulosta noin %(pages)d sivusta.''',
-'''%.2f seconds''':
-'''%.2f sekuntia''',
-'''match''':
-'''osuma''',
-'''matches''':
-'''osumaa''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Joku on pyytänyt lähettämään tunnustietosi tähän sähköpostiosoitteeseen.
-
-Jos kadotit salasanasi, käytä alla olevia tietoja ja kirjoita annettu
-salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä 
-leikkausta ja liimausta).
-
-Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva salasana.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Wikitunnuksesi tiedot''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Sähköpostia ei ole otettu käyttöön tässä wikissä.
-Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
-'''Please provide a valid email address!''':
-'''Anna kelvollinen sähköpostiosoite!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Sähköpostiosoitetta \'%(email)s\' vastaavaa käyttäjää ei löytynyt!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen.''',
-'''Empty user name. Please enter a user name.''':
-'''Tyhjä käyttäjänimi. Anna käyttäjänimi.''',
-'''This user name already belongs to somebody else.''':
-'''Tämä käyttäjänimi kuuluu jo jollekin toiselle.''',
-'''Passwords don\'t match!''':
-'''Salasanat eivät vastaa!''',
-'''Please specify a password!''':
-'''Mainitse salasana!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne sähköpostitse.''',
-'''This email already belongs to somebody else.''':
-'''Tämä sähköposti kuuluu jo jollekin toiselle.''',
-'''User account created! You can use this account to login now...''':
-'''Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen...''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Teemaa \'%(theme_name)s\' ei voida ladata!''',
-'''User preferences saved!''':
-'''Käyttäjäasetukset tallennettu!''',
-'''Default''':
-'''oletusarvo''',
-'''<Browser setting>''':
-'''<selaimen asetus>''',
-'''the one preferred''':
-'''suosikki''',
-'''free choice''':
-'''valittavissa''',
-'''Save''':
-'''Tallenna''',
-'''Preferred theme''':
-'''Suosikkiulkoasu''',
-'''Editor Preference''':
-'''Suosikkimuokkaustapa''',
-'''Editor shown on UI''':
-'''Käytettävä muokkaustapa''',
-'''Time zone''':
-'''Aikavyöhyke''',
-'''Your time is''':
-'''Aikasi on''',
-'''Server time is''':
-'''Palvelimen aika on''',
-'''Date format''':
-'''Päivämäärän muoto''',
-'''Preferred language''':
-'''Suosikkikieli''',
-'''General options''':
-'''Yleiset asetukset''',
-'''Quick links''':
-'''Pikalinkit''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Tämä lista ei toimi, ellet ole antanut kelpoa sähköpostiosoitetta!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Tilatut wikisivut (yksi regex per rivi)''',
-'''Create Profile''':
-'''Luo profiili''',
-'''Mail me my account data''':
-'''Sähköpostita minulle käyttäjätietoni''',
-'''Action''':
-'''Toiminto''',
 '''No older revisions available!''':
 '''Ei vanhempia versioita saatavilla!''',
 '''Diff for "%s"''':
@@ -484,78 +564,66 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''Sinun täytyy antaa kaavion tyyppi!''',
 '''Bad chart type "%s"!''':
 '''Kelvoton kaavion tyyppi "%s"!''',
-'''Search Titles''':
-'''Etsi nimistä''',
-'''Display context of search results''':
-'''Näytä hakutulosten ympäristö''',
-'''Case-sensitive searching''':
-'''Aakkoslajit erottava haku''',
-'''Search Text''':
-'''Etsi teksteistä''',
-'''Go To Page''':
-'''Mene sivulle''',
-'''Include system pages''':
-'''Sisällytä järjestelmäsivut''',
-'''Exclude system pages''':
-'''Ohita järjestelmäsivut''',
-'''Plain title index''':
-'''Paljas sivuhakemisto''',
-'''XML title index''':
-'''XML-sivuhakemisto''',
-'''Python Version''':
-'''Python versio''',
-'''MoinMoin Version''':
-'''MoinMoin versio''',
-'''Release %s [Revision %s]''':
-'''Julkaisu %s [versio %s]''',
-'''4Suite Version''':
-'''4Suite versio''',
-'''Number of pages''':
-'''Sivujen lukumäärä''',
-'''Number of system pages''':
-'''Järjestelmäsivujen lukumäärä''',
-'''Accumulated page sizes''':
-'''Sivujen koko yhteensä''',
-'''Entries in edit log''':
-'''Merkintöjä muutoslokissa''',
-'''NONE''':
-'''EI''',
-'''Global extension macros''':
-'''Yleisiä laajennusmakroja''',
-'''Local extension macros''':
-'''Paikallisia laajennusmakroja''',
-'''Global extension actions''':
-'''Yleisiä laajennustoimintoja''',
-'''Local extension actions''':
-'''Paikallisia laajennustoimintoja''',
-'''Global parsers''':
-'''Yleiset jäsentimet''',
-'''Local extension parsers''':
-'''Paikalliset laajennusjäsentimet''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)''',
-'''Disabled''':
-'''Poissa''',
-'''Enabled''':
-'''Käytössä''',
-'''Lupy search''':
-'''Lupy-haku''',
-'''Active threads''':
-'''Aktiiviset säikeet''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''käytä tarkempaa hakuehtoa kuin {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Virhe regexissä \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Kelvoton aikaleima \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Odototettiin =-merkin seuraavan sanasta "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Odotettiin arvoa avaimelle "%(token)s"''',
-'''Wiki Markup''':
-'''Wiki-merkintä''',
-'''Print View''':
-'''Tulostettavana''',
+'''This page is already deleted or was never created!''':
+'''Tämä sivu on jo poistettu tai sitä ei ollutkaan!''',
+'''No pages like "%s"!''':
+'''Ei sivuja kuten "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Liitetiedosto \'%(target)s\' (alkuperäinen nimi \'%(filename)s\') oli jo olemassa.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Täsmälleen yksi sivu kuten "%s" löytyi, edelleenohjataan sivulle.''',
+'''Pages like "%s"''':
+'''Sivut kuten "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s nimelle "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Paikallinen sivukartta sivulta "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Käytä sivujen uudelleennimeämiseen vuorovaikutteista käyttöliittymää!''',
+'''Could not rename page because of file system error: %s.''':
+'''Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %s.''',
+'''Rename Page''':
+'''Nimeä sivu uudelleen''',
+'''New name''':
+'''Uusi nimi''',
+'''Optional reason for the renaming''':
+'''Vapaaehtoinen uudelleennimeämisen syy''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Nimellä {{{\'%s\'}}} on jo sivu.\'\'\'
+
+Kokeile eri nimeä.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(sisältää %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Seuraavia %(badwords)d sanaa ei löytynyt %(totalwords)d sanan%(localwords)s ja ne on korostettu alla:''',
+'''Add checked words to dictionary''':
+'''Lisää merkityt sanat sanakirjaan''',
+'''No spelling errors found!''':
+'''Ei löytynyt kirjoitusvirheitä!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Et voi oikolukea sivua jota et voi lukea.''',
+'''Title Search: "%s"''':
+'''Nimihaku: "%s"''',
+'''Full Text Search: "%s"''':
+'''Tekstihaku: "%s"''',
+'''Full Link List for "%s"''':
+'''Täysi linkkilista haulle "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi.''',
+'''You are not allowed to delete this page.''':
+'''Sinulla ei ole oikeutta poistaa tätä sivua.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!''',
+'''Really delete this page?''':
+'''Haluatko varmasti poistaa tämän sivun?''',
+'''Delete''':
+'''Poista''',
+'''Optional reason for the deletion''':
+'''Vapaaehtoinen poiston syy''',
 '''[%d attachments]''':
 '''[liitetiedostoja %d]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -617,18 +685,12 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Tiedostonlähetystoiminto ei ole tuettu: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Liitetiedostot sivulla %(pagename)s''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Liitetiedosto \'%(target)s\' (alkuperäinen nimi \'%(filename)s\') oli jo olemassa.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Liitetiedosto \'%(target)s\' (alkuperäinen nimi \'%(filename)s\'), %(bytes)d tavua tallennettu.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Liitetiedosto \'%(filename)s\' poistettu.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Liitetiedosto \'%(filename)s\' asennettu.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Tiedoston \'%(filename)s\' asennus ei onnistunut.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Tiedosto %s ei ole MoinMoinin pakettitiedosto.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Liitetiedostoa \'%(filename)s\' ei voitu purkaa koska tulostiedostot olisivat liian suuret (%(space)d kt liikaa).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -651,74 +713,62 @@ Muutoin, jos "Tallenna nimellä" on tyhjä, tiedosto lähetetään alkuperäisel
 '''Tuntematon tiedostotyyppi, liitettä ei voida näyttää sivulla.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s / %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Sinulla ei ole oikeutta poistaa tätä sivua.''',
-'''This page is already deleted or was never created!''':
-'''Tämä sivu on jo poistettu tai sitä ei ollutkaan!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!''',
-'''Really delete this page?''':
-'''Haluatko varmasti poistaa tämän sivun?''',
-'''Delete''':
-'''Poista''',
-'''Optional reason for the deletion''':
-'''Vapaaehtoinen poiston syy''',
-'''No pages like "%s"!''':
-'''Ei sivuja kuten "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Täsmälleen yksi sivu kuten "%s" löytyi, edelleenohjataan sivulle.''',
-'''Pages like "%s"''':
-'''Sivut kuten "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s nimelle "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Paikallinen sivukartta sivulta "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Käytä sivujen uudelleennimeämiseen vuorovaikutteista käyttöliittymää!''',
-'''Could not rename page because of file system error: %s.''':
-'''Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %s.''',
-'''Rename Page''':
-'''Nimeä sivu uudelleen''',
-'''New name''':
-'''Uusi nimi''',
-'''Optional reason for the renaming''':
-'''Vapaaehtoinen uudelleennimeämisen syy''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Nimellä {{{\'%s\'}}} on jo sivu.\'\'\'
-
-Kokeile eri nimeä.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(sisältää %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Seuraavia %(badwords)d sanaa ei löytynyt %(totalwords)d sanan%(localwords)s ja ne on korostettu alla:''',
-'''Add checked words to dictionary''':
-'''Lisää merkityt sanat sanakirjaan''',
-'''No spelling errors found!''':
-'''Ei löytynyt kirjoitusvirheitä!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Et voi oikolukea sivua jota et voi lukea.''',
-'''Title Search: "%s"''':
-'''Nimihaku: "%s"''',
-'''Full Text Search: "%s"''':
-'''Tekstihaku: "%s"''',
-'''Full Link List for "%s"''':
-'''Täysi linkkilista haulle "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi.''',
 '''Upload new attachment "%(filename)s"''':
 '''Lähetä uusi liitetiedosto "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Luo uusi piirros "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Muokkaa piirrosta %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Kelvottomat sisällytysargumentit "%s"!''',
-'''Nothing found for "%s"!''':
-'''Ei löytynyt mitään haulle "%s"!''',
+'''FrontPage''':
+'''EtuSivu''',
+'''RecentChanges''':
+'''UusimmatMuutokset''',
+'''TitleIndex''':
+'''SivuHakemisto''',
+'''WordIndex''':
+'''SanaHakemisto''',
+'''FindPage''':
+'''EtsiSivu''',
+'''SiteNavigation''':
+'''TienViittoja''',
+'''HelpContents''':
+'''OhjeSisällys''',
+'''HelpOnFormatting''':
+'''ApuaMuotoiluun''',
+'''UserPreferences''':
+'''KäyttäjäAsetukset''',
+'''WikiLicense''':
+'''WikiLisenssi''',
+'''MissingPage''':
+'''PuuttuvaSivu''',
+'''MissingHomePage''':
+'''PuuttuvaKotisivu''',
+'''Mon''':
+'''ma''',
+'''Tue''':
+'''ti''',
+'''Wed''':
+'''ke''',
+'''Thu''':
+'''to''',
+'''Fri''':
+'''pe''',
+'''Sat''':
+'''la''',
+'''Sun''':
+'''su''',
+'''AttachFile''':
+'''LiitäTiedostot''',
+'''DeletePage''':
+'''PoistaSivu''',
+'''LikePages''':
+'''SamankaltaisiaSivuja''',
+'''LocalSiteMap''':
+'''PaikallinenSivukartta''',
+'''RenamePage''':
+'''UudelleennimeäSivu''',
+'''SpellCheck''':
+'''OikoLue''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Selausmenetelmä \'%(scheme)s ei ole tuettu!''',
 '''No parent page found!''':
@@ -753,14 +803,18 @@ Kokeile eri nimeä.''',
 '''aseta kirjanmerkki''',
 '''[Bookmark reached]''':
 '''[Kirjanmerkki saavutettu]''',
+'''No wanted pages in this wiki.''':
+'''Tässä wikissä ei ole toivottu sivuja.''',
+'''Invalid include arguments "%s"!''':
+'''Kelvottomat sisällytysargumentit "%s"!''',
+'''Nothing found for "%s"!''':
+'''Ei löytynyt mitään haulle "%s"!''',
 '''Markup''':
 '''Merkkaa''',
 '''Display''':
 '''Näytä''',
 '''Filename''':
 '''Tiedostonimi''',
-'''No wanted pages in this wiki.''':
-'''Tässä wikissä ei ole toivottu sivuja.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Ei voida näyttää reStructured-tekstiä, asenna docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -897,54 +951,4 @@ red=edit''',
 '''Ei lähetetty sähköpostia''',
 '''Mail sent OK''':
 '''Sähköposti lähetetty onnistuneesti''',
-'''FrontPage''':
-'''EtuSivu''',
-'''RecentChanges''':
-'''UusimmatMuutokset''',
-'''TitleIndex''':
-'''SivuHakemisto''',
-'''WordIndex''':
-'''SanaHakemisto''',
-'''FindPage''':
-'''EtsiSivu''',
-'''SiteNavigation''':
-'''TienViittoja''',
-'''HelpContents''':
-'''OhjeSisällys''',
-'''HelpOnFormatting''':
-'''ApuaMuotoiluun''',
-'''UserPreferences''':
-'''KäyttäjäAsetukset''',
-'''WikiLicense''':
-'''WikiLisenssi''',
-'''MissingPage''':
-'''PuuttuvaSivu''',
-'''MissingHomePage''':
-'''PuuttuvaKotisivu''',
-'''Mon''':
-'''ma''',
-'''Tue''':
-'''ti''',
-'''Wed''':
-'''ke''',
-'''Thu''':
-'''to''',
-'''Fri''':
-'''pe''',
-'''Sat''':
-'''la''',
-'''Sun''':
-'''su''',
-'''AttachFile''':
-'''LiitäTiedostot''',
-'''DeletePage''':
-'''PoistaSivu''',
-'''LikePages''':
-'''SamankaltaisiaSivuja''',
-'''LocalSiteMap''':
-'''PaikallinenSivukartta''',
-'''RenamePage''':
-'''UudelleennimeäSivu''',
-'''SpellCheck''':
-'''OikoLue''',
 }
