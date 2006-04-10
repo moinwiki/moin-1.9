@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
-"PO-Revision-Date: 2006-04-08 11:00+0800\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"PO-Revision-Date: 2006-04-10 10:30+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,9 @@ msgstr "建立新頁面"
 
 msgid "You are not allowed to view this page."
 msgstr "你無權瀏覽本頁。"
+
+msgid "Your changes are not saved!"
+msgstr "你的修改沒有儲存！"
 
 msgid "You are not allowed to edit this page."
 msgstr "你無權編輯本頁。"
@@ -153,9 +156,6 @@ msgstr "預覽"
 
 msgid "GUI Mode"
 msgstr "GUI 模式"
-
-msgid "Your changes are not saved!"
-msgstr "你的修改沒有儲存！"
 
 msgid "Comment:"
 msgstr "說明欄："
@@ -327,6 +327,9 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<不明>"
+
+msgid "Text mode"
+msgstr "Text 模式"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1180,6 +1183,60 @@ msgstr "共有 %(matchcount)d %(matches)s 連向 \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "頁面 \"%s\" 的連結地圖"
 
+msgid "Please log in first."
+msgstr "請先登入。"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "建立其他頁面之前，請先建立個人首頁。"
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr "管理我的頁面"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "不合法的檔名 \"%s\"！"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "包裹 %s 已打包，包含頁面 %s。"
+
+msgid "Package pages"
+msgstr "打包頁面"
+
+msgid "Package name"
+msgstr "包裹名稱"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr "輸入頁面名稱 (以「<tt>,</tt>」分開)"
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "你無權重新命名頁面！"
 
@@ -1231,22 +1288,6 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "不能檢查無權瀏覽的頁面。"
 
 #, python-format
-msgid "Title Search: \"%s\""
-msgstr "搜尋標題：\"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "全文檢索：\"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "引用頁面 \"%s\" 的頁面列表"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "必須有頁面名稱才能建立頁面。"
-
-#, python-format
 msgid "Subscribe users to the page %s"
 msgstr "新增頁面 \"%s\" 的訂閱戶"
 
@@ -1259,6 +1300,92 @@ msgstr "不是合法帳號:"
 
 msgid "You are not allowed to perform this action."
 msgstr "你無權執行本項操作。"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "搜尋標題：\"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "全文檢索：\"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"提示：\n"
+" * 若要進行備份復原：\n"
+"  * 執行備份復原會覆蓋現有的資料，請小心操作。\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案\n"
+"   到安全的地方即可。\n"
+"\n"
+"請確定你的 Wiki 的 backup_* 設定值是正確且完整。\n"
+"\n"
+
+msgid "Backup"
+msgstr "備份"
+
+msgid "Restore"
+msgstr "復原"
+
+msgid "You are not allowed to do remote backup."
+msgstr "你無權進行遠端備份。"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "不明的備份子操作：%s。"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "引用頁面 \"%s\" 的頁面列表"
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "找不到使用者：{{{\"%s\"}}}。請輸入名稱及密碼。"
+
+msgid "Missing password. Please enter user name and password."
+msgstr "沒輸入密碼。請輸入名稱及密碼。"
+
+msgid "Sorry, wrong password."
+msgstr "密碼錯了！"
+
+msgid "You are now logged out."
+msgstr "你已經登出了。"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "必須有頁面名稱才能建立頁面。"
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1282,6 +1409,14 @@ msgstr "錯誤的插入參數 \"%s\"！"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "找不到 \"%s\"！"
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "MonthCalendar 的 calparms 參數錯誤 \"%s\"！"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "MonthCalendar 的參數錯誤 \"%s\"！"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1687,19 +1822,6 @@ msgstr "拼字檢查"
 #~ msgid "Immutable page"
 #~ msgstr "唯讀頁面"
 
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Cookie 已經刪除。你登出了。"
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr "找不到使用者：{{{\"%s\"}}}。請輸入名稱及密碼。"
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "沒輸入密碼。請輸入名稱及密碼。"
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "密碼錯了！"
-
 #~ msgid "Bad relogin URL."
 #~ msgstr "錯誤的重新登入 URL。"
 
@@ -1826,9 +1948,6 @@ msgstr "拼字檢查"
 
 #~ msgid "Nobody subscribed to this page, no mail sent."
 #~ msgstr "沒人訂閱本頁，沒有送出通知。"
-
-#~ msgid "Unknown action"
-#~ msgstr "不明操作"
 
 #~ msgid "Exactly one matching page for \"%s\" found!"
 #~ msgstr "連結 \"%s\" 的剛好就這麼一頁！"

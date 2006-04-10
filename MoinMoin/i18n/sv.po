@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
-"PO-Revision-Date: 2006-03-26 23:39+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"PO-Revision-Date: 2006-04-09 19:02+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,9 @@ msgstr "Skapa ny sida"
 
 msgid "You are not allowed to view this page."
 msgstr "Du har inte tillåtelse att titta på den här sidan."
+
+msgid "Your changes are not saved!"
+msgstr "Dina ändringar sparas inte!"
 
 msgid "You are not allowed to edit this page."
 msgstr "Du har inte tillåtelse att redigera den här sidan."
@@ -156,9 +159,6 @@ msgstr "Förhandsgranska"
 
 msgid "GUI Mode"
 msgstr "Grafiskt läge"
-
-msgid "Your changes are not saved!"
-msgstr "Dina ändringar sparas inte!"
 
 msgid "Comment:"
 msgstr "Kommentar:"
@@ -345,6 +345,9 @@ msgstr ""
 msgid "<unknown>"
 msgstr "<okänd>"
 
+msgid "Text mode"
+msgstr "Textläge"
+
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
@@ -401,6 +404,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"Emfas: <i>*kursiv*</i> <b>**fetstil**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"Rubriker: Rubrik 1  Rubrik 2  Rubrik 3\n"
+"          ========  --------  ~~~~~~~~\n"
+"\n"
+"Horisontell linje: ---- \n"
+"Länkar: AvslutandeUnderstrykning_ `flera ord med backticks`_ extern_ \n"
+"\n"
+".. _extern: http://extern-sajt.net/foo/\n"
+"\n"
+"Listor: * punktlista; 1., a. numrerad lista.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) För mer hjälp, se\n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "Skillnader"
@@ -1211,6 +1231,80 @@ msgstr "%(matchcount)d %(matches)s för \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "Lokal Sajtkarta för \"%s\""
 
+msgid "Please log in first."
+msgstr "Var god logga in först."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Var god skapa en hemsida innan du skapar övriga sidor."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Du kan lägga till undersidor till din redan existerande hemsida här.\n"
+"\n"
+"Du kan välja vilka andra som ska kunna läsa och ändra sidorna. Åtkomst\n"
+"bestäms av medlemskap i motsvarande gruppsida.\n"
+"\n"
+"Ange undersidans namn och tryck på knappen för att skapa en ny sida.\n"
+"\n"
+"Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida\n"
+"existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för\n"
+"att skapa gruppsidor.\n"
+"\n"
+"||'''Lägg till en ny personlig sida:'''||'''Relaterade "
+"åtkomstlistgrupper:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,%(username)"
+"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Hantering av MinaSidor"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ogiltigt filnamn \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Skapade paketet %s som innehåller sidorna %s."
+
+msgid "Package pages"
+msgstr "Paketsidor"
+
+msgid "Package name"
+msgstr "Paketnamn"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr "Lista på sidnamn - separerade med <tt>,</tt>"
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Du har inte tillålse att radera sidor i den här wikin!"
 
@@ -1264,22 +1358,6 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
 
 #, python-format
-msgid "Title Search: \"%s\""
-msgstr "Titelsökning: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Fulltextsökning: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Full länklista för \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
-
-#, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Teckna en prenumeration på sidan %s åt användarna"
 
@@ -1292,6 +1370,99 @@ msgstr "Inte en användare:"
 
 msgid "You are not allowed to perform this action."
 msgstr "Du har inte tillåtelse att utföra den här åtgärden."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Titelsökning: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Fulltextsökning: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Säkerhetskopia återlagrad: %(filename)s till målkatalog: %(targetdir)s.\n"
+"Filer: %(filecount)d, Kataloger: %(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Återlagring av säkerhetskopia: %(filename)s till målkatalog: %(targetdir)s "
+"misslyckades."
+
+msgid "Wiki Backup / Restore"
+msgstr "Wiki säkerhetskopiering / återlagring"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Några tips:\n"
+" * För att återlagra en säkerhetskopia:\n"
+"  * Att återlagra en säkerhetskopia kommer att skriva över existerande data "
+"så var försiktig.\n"
+"  * Byt namn på den till <sajtid>.tar.<kompression> (ta bort --date--time--"
+"UTC-grejerna).\n"
+"  * Lägg säkerhetskopian i backup_storage_dir (använd scp, ftp, ...).\n"
+"  * Tryck på [[GetText(Restore)]]-knappen nedan.\n"
+"\n"
+" * För att göra en backup tryck på [[GetText(Backup)]]-knappen och spara "
+"filen på ett säkert ställe.\n"
+"\n"
+"Se till att din wikikonfigurations backup_*-värden är korrekta och "
+"kompletta.\n"
+"\n"
+
+msgid "Backup"
+msgstr "Säkerhetskopiera"
+
+msgid "Restore"
+msgstr "Återställ"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Du har inte tillåtelse att göra fjärrbackup."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Okänd backup-underåtgärd: %s."
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Full länklista för \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Okänt användarnamn: {{{\"%s\"}}}. Var god ange användarnamn och lösenord."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
+
+msgid "Sorry, wrong password."
+msgstr "Tyvärr, fel lösenord."
+
+msgid "You are now logged out."
+msgstr "Du är nu utloggad."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1315,6 +1486,14 @@ msgstr "Felaktigt inkluderingsargument \"%s\"!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Inget hittat för \"%s\"!"
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Ogiltiga MonthCalendar-calparms \"%s\"!"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Ogiltiga MonthCalendar-argument \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"

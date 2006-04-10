@@ -32,6 +32,8 @@ macro call.-~
 '''新しいページを作成''',
 '''You are not allowed to view this page.''':
 '''このページを読む権限がありません。''',
+'''Your changes are not saved!''':
+'''このページに対する変更は保存されませんでした。''',
 '''You are not allowed to edit this page.''':
 '''このページを編集する権限がありません。''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''プレビュー''',
 '''GUI Mode''':
 '''GUIモード''',
-'''Your changes are not saved!''':
-'''このページに対する変更は保存されませんでした。''',
 '''Comment:''':
 '''コメント:''',
 '''<No addition>''':
@@ -200,6 +200,8 @@ To leave the editor, press the Cancel button.''':
 キャンセルボタンで編集を中断できます。''',
 '''<unknown>''':
 '''<不明>''',
+'''Text mode''':
+'''テキストモード''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -209,12 +211,48 @@ To leave the editor, press the Cancel button.''':
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
 ''' 強調:: [[Verbatim(\'\')]]\'\'イタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(\'\'\')]]\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]、[[Verbatim(\'\'\'\'\')]]\'\'\'\'\'ボールドイタリック\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]、[[Verbatim(\'\')]]\'\'混合 \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'ボールド\'\'\'[[Verbatim(\'\'\')]]とイタリック\'\'[[Verbatim(\'\')]]、[[Verbatim(----)]] 水平線。
- 表題:: [[Verbatim(=)]] タイトル1 [[Verbatim(=)]]、[[Verbatim(==)]] タイトル2 [[Verbatim(==)]]、[[Verbatim(===)]] タイトル3 [[Verbatim(===)]]、[[Verbatim(====)]] タイトル4 [[Verbatim(====)]]、[[Verbatim(=====)]] タイトル5 [[Verbatim(=====)]]。
- リスト:: 半角スペースに続けて: * ビュレット、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。
+ 見出し:: [[Verbatim(=)]] タイトル1 [[Verbatim(=)]]、[[Verbatim(==)]] タイトル2 [[Verbatim(==)]]、[[Verbatim(===)]] タイトル3 [[Verbatim(===)]]、[[Verbatim(====)]] タイトル4 [[Verbatim(====)]]、[[Verbatim(=====)]] タイトル5 [[Verbatim(=====)]]。
+ リスト:: 半角スペースに続けて: * 小丸、1., a., A., i., I. 番号付アイテム、1.#n nから番号開始、半角スペースのみでインデント。
  リンク:: [[Verbatim(JoinCapitalizedWords)]]、[[Verbatim(["大括弧と二重引用符"])]]; url; [url]; [url ラベル]。
  表:: || セルテキスト |||| 2列にわたるセルテキスト ||、表やタイトルのあとには空白を入力しないでください。
 
 (!) 詳細はHelpOnEditingや ["シンタックスリファレンス"]を参照してください。
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''強調: <i>*イタリック*</i> <b>**ボールド**</b> ``等幅``<br/>
+<br/><pre>
+見出し: 見出し1  見出し2  見出し3
+        =======  -------  ~~~~~~~
+
+水平線: ---- 
+リンク: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+リスト: * 小丸; 1., a. 番号付アイテム
+</pre>
+<br/>
+(!) 詳細は
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>を参照してください。
 ''',
 '''Diffs''':
 '''差分''',
@@ -249,7 +287,7 @@ To leave the editor, press the Cancel button.''':
 '''Show icon toolbar''':
 '''アイコンツールバーを表示する''',
 '''Show top/bottom links in headings''':
-'''表題に先頭/末尾へのリンクを表示する''',
+'''見出しに先頭/末尾へのリンクを表示する''',
 '''Show fancy diffs''':
 '''差分を飾り付きで表示する''',
 '''Add spaces to displayed wiki names''':
@@ -692,6 +730,56 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''"%(title)s"において%(matchcount)d %(matches)s''',
 '''Local Site Map for "%s"''':
 '''"%s"のローカルサイトマップ''',
+'''Please log in first.''':
+'''ログインが必要です。''',
+'''Please first create a homepage before creating additional pages.''':
+'''最初にホームページを作成してください。''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''作成済のホームページに、サブページを追加することができます。
+
+これらのページの読み込み権限や書き込み権限の設定も行えます。
+権限の設定は該当するグループページのグループメンバーによって行います。
+
+サブページの名前を入力し、ページの新規作成ボタンをクリックしてください。
+
+アクセス制限を行うページを作成する際には、該当するグループページが存在し、
+適切なメンバーが含まれていることを確認してください。
+グループページの作成には、 HomepageGroupsTemplate を利用すると便利です。
+
+||\'\'\'新しいパーソナルページの追加:\'\'\'||\'\'\'関連するアクセスコントロールリストグループ:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''マイページの管理''',
+'''Invalid filename "%s"!''':
+'''ファイル名"%s"が不正です。''',
+'''Created the package %s containing the pages %s.''':
+'''パッケージ %s を作成しました。(ページ %s を含む)''',
+'''Package pages''':
+'''ページのパッケージ化''',
+'''Package name''':
+'''パッケージ名''',
+'''List of page names - separated by <tt>,</tt>''':
+'''ページ名のリスト (<tt>,</tt>区切り)''',
 '''You are not allowed to rename pages in this wiki!''':
 '''ページ名を変更する権限がありません。''',
 '''Please use the interactive user interface to rename pages!''':
@@ -719,14 +807,6 @@ Try a different name.''':
 '''スペルの誤りは見つかりませんでした。''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''読む権限がないページのスペルチェックはできません。''',
-'''Title Search: "%s"''':
-'''タイトル検索: "%s"''',
-'''Full Text Search: "%s"''':
-'''テキスト検索: "%s"''',
-'''Full Link List for "%s"''':
-'''"%s"の全リンクリスト''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''名前の無いページを作成することはできません。ページ名を指定してください。''',
 '''Subscribe users to the page %s''':
 '''ユーザをページ"%s"の購読者に追加''',
 '''Subscribed for %s:''':
@@ -735,6 +815,63 @@ Try a different name.''':
 '''存在しないユーザ:''',
 '''You are not allowed to perform this action.''':
 '''このアクションを行う権限がありません。''',
+'''Title Search: "%s"''':
+'''タイトル検索: "%s"''',
+'''Full Text Search: "%s"''':
+'''テキスト検索: "%s"''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''バックアップ: %(filename)s をディレクトリ: %(targetdir)s へリストア。
+ファイル数: %(filecount)d, ディレクトリ数: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''バックアップ: %(filename)s のディレクトリ: %(targetdir)s へのリストアに失敗しました。''',
+'''Wiki Backup / Restore''':
+'''Wiki バックアップ/リストア''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''ヒント:
+ * バックアップのリストアについて:
+  * バックアップをリストアすると、存在するデータは上書きされますので注意してください。
+  * <siteid>.tar.<compression> にリネームしてください(--date--time--UTC は削除してください)。
+  * バックアップファイルを backup_storage_dir に置いてください(scpやftpなどを利用)。
+  * 下の [[GetText(Restore)]] ボタンをクリックしてください。
+
+ * バックアップを作成するには、[[GetText(Backup)]] をクリックし、取得したファイルを安全な場所に保存してください。
+
+Wiki設定中の backup_* が正しいことを確認してください。
+
+''',
+'''Backup''':
+'''バックアップ''',
+'''Restore''':
+'''リストア''',
+'''You are not allowed to do remote backup.''':
+'''このページをリモートバックアップする権限がありません。''',
+'''Unknown backup subaction: %s.''':
+'''未定義のバックアップサブアクション: %s 。''',
+'''Full Link List for "%s"''':
+'''"%s"の全リンクリスト''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
+'''Missing password. Please enter user name and password.''':
+'''パスワードが入力されていません。ユーザ名とパスワードを入力してください。''',
+'''Sorry, wrong password.''':
+'''不正なパスワードです。''',
+'''You are now logged out.''':
+'''ログアウト完了です。''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''名前の無いページを作成することはできません。ページ名を指定してください。''',
 '''Upload new attachment "%(filename)s"''':
 '''添付ファイル"%(filename)s"のアップロード''',
 '''Create new drawing "%(filename)s"''':
@@ -747,6 +884,10 @@ Try a different name.''':
 '''引数"%s"が不正です。''',
 '''Nothing found for "%s"!''':
 '''"%s"に対しては、何も見つかりませんでした。''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''MonthCalendarのcalparms"%s"が不正です。''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''MonthCalendarの引数"%s"が不正です。''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''サポートされていないナビゲーションスキーム\'%(scheme)s\'です。''',
 '''No parent page found!''':

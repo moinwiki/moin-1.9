@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
-"PO-Revision-Date: 2006-04-08 00:16+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"PO-Revision-Date: 2006-04-09 18:05+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -63,6 +63,9 @@ msgstr "Créer une page"
 
 msgid "You are not allowed to view this page."
 msgstr "Vous n'êtes pas autorisé à voir cette page."
+
+msgid "Your changes are not saved!"
+msgstr "Vos modifications ne sont pas enregistrées !"
 
 msgid "You are not allowed to edit this page."
 msgstr "Vous n'êtes pas autorisé à modifier cette page."
@@ -160,9 +163,6 @@ msgstr "Aperçu"
 
 msgid "GUI Mode"
 msgstr "Mode graphique"
-
-msgid "Your changes are not saved!"
-msgstr "Vos modifications ne sont pas enregistrées !"
 
 msgid "Comment:"
 msgstr "Commentaire :"
@@ -354,6 +354,9 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<inconnu>"
+
+msgid "Text mode"
+msgstr "Mode texte"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1257,6 +1260,85 @@ msgstr "%(matchcount)d %(matches)s pour « %(title)s »"
 msgid "Local Site Map for \"%s\""
 msgstr "Carte locale du site pour « %s »"
 
+msgid "Please log in first."
+msgstr "Veuillez d'abord vous identifier."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Veuillez créer une page personnelle avant de créer d'autres pages."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Cette page vous permet d'ajouter des sous-pages à votre page personnelle.\n"
+"\n"
+"Vous pouvez choisir le niveau d'accès à cette page que vous donnerez aux\n"
+"autres rédacteurs et lecteurs. L'accès est contrôlé par l'appartenance à un\n"
+"groupe, qui est défini par la page correspondante.\n"
+"\n"
+"Indiquez simplement le nom de la sous-page et cliquez sur le bouton pour\n"
+"créer une nouvelle page.\n"
+"\n"
+"Avant de créer des pages dont l'accès est protégé, assurez-vous d'avoir "
+"créé\n"
+"la page de groupe correspondante et qu'elle contienne les membres "
+"souhaités.\n"
+"Utilisez le ModèleDeGroupeDePagePersonnelle lors de la création des pages\n"
+"correspondant aux groupes.\n"
+"\n"
+"||'''Ajout d'une nouvelle page personnelle :'''||'''Groupes utilisés pour "
+"les listes de contrôle d'accès :'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,page ouverte en écriture,%"
+"(username)s)]]||[\"%(username)s/GroupeDesRédacteurs\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,page en lecture seule,%(username)s)]]||"
+"[\"%(username)s/GroupeDesLecteurs\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,page privée,%(username)s)]]||"
+"Uniquement (username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Gestion de MesPages"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Nomde fichier non valide : « %s » !"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Page %s créée contenant les pages %s."
+
+msgid "Package pages"
+msgstr "Pages du paquet"
+
+msgid "Package name"
+msgstr "Nom du paquet"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr "Liste des noms de pages - séparées par des virgules"
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Vous n'êtes pas autorisé à renommer les pages dans ce wiki !"
 
@@ -1312,23 +1394,6 @@ msgstr ""
 "lire."
 
 #, python-format
-msgid "Title Search: \"%s\""
-msgstr "Recherche de « %s » dans les titres"
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Recherche de « %s » dans les textes"
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Liste de tout les liens pour « %s »"
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
-
-#, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Abonner les utilisateurs à la page %s"
 
@@ -1341,6 +1406,104 @@ msgstr "N'est pas un utilisateur :"
 
 msgid "You are not allowed to perform this action."
 msgstr "Vous n'êtes pas autorisé à réaliser cette action."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Recherche de « %s » dans les titres"
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Recherche de « %s » dans les textes"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Sauvegarde restaurée : %(filename)s dans le répertoire : %(targetdir)s.\n"
+"Fichiers : %(filecount)d ; répertoires : %(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Restauration de sauvegarde : échec de la restauration de %(filename)s vers %"
+"(targetdir)s."
+
+msgid "Wiki Backup / Restore"
+msgstr "Sauvegarde et restauration du wiki"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Quelques astuces :\n"
+" * Pour restaurer une sauvegarde :\n"
+"  * Restaurer une sauvegarde effacera les données existantes. Soyez "
+"prudents.\n"
+"  * Renommez-la en <identifiant_site>.tar.<compression> (enlevez les --date--"
+"heure--UTC).\n"
+"  * Placez le fichier de sauvegarde dans le répertoire backup_storage_dir "
+"(via scp, ftp, ...).\n"
+"  * Cliquez sur le bouton [[GetText(Restore)]] ci-dessous.\n"
+"\n"
+" * Pour réaliser une sauvegarde, cliquez simplement sur le bouton [[GetText"
+"(Backup)]]\n"
+"et sauvegardez le fichier obtenu dans un endroit sûr.\n"
+"\n"
+"Assurez-vous que les paramètres backup_* du wiki sont définis et corrects.\n"
+"\n"
+
+msgid "Backup"
+msgstr "Sauvegarde"
+
+msgid "Restore"
+msgstr "Restauration"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Vous n'êtes pas autorisé à réaliser une sauvegarde à distance."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Sous-action de sauvegarde inconnue : %s."
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Liste de tout les liens pour « %s »"
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Nom d'utilisateur inconnu : {{{\"%s\"}}}. Veuillez indiquer un nom "
+"d'utilisateur et un mot de passe."
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+"Mot de passe manquant. Veuillez indiquer un nom d'utilisateur et un mot de "
+"passe."
+
+msgid "Sorry, wrong password."
+msgstr "Désolé, mauvais mot de passe."
+
+msgid "You are now logged out."
+msgstr "Vous êtes maintenant déconnecté."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1364,6 +1527,14 @@ msgstr "Les arguments du include ne sont pas valides : « %s » !"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Rien n'a été trouvé sur « %s » !"
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Le calparms de MonthCalendar n'est pas valide : « %s » !"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Les arguments de MonthCalendar ne sont pas valides : « %s » !"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"

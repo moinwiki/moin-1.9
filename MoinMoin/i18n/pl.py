@@ -32,6 +32,8 @@ makropolecenie.-~
 '''Utwórz nową stronę''',
 '''You are not allowed to view this page.''':
 '''Nie możesz oglądać tej strony.''',
+'''Your changes are not saved!''':
+'''Nic nie zapisano!''',
 '''You are not allowed to edit this page.''':
 '''Nie możesz zmieniać zawartości tej strony.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 '''Podgląd''',
 '''GUI Mode''':
 '''Tryb GUI''',
-'''Your changes are not saved!''':
-'''Nic nie zapisano!''',
 '''Comment:''':
 '''Komentarz:''',
 '''<No addition>''':
@@ -723,6 +723,12 @@ Spróbuj innej nazwy.''',
 '''Przeszukiwanie pełnotekstowe: "%s"''',
 '''Full Link List for "%s"''':
 '''Pełna lista odnośników dla "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
+'''Missing password. Please enter user name and password.''':
+'''Zapomniano o haśle. Podaj identyfikator i hasło.''',
+'''Sorry, wrong password.''':
+'''Przykro mi, nieprawidłowe hasło.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony.''',
 '''Upload new attachment "%(filename)s"''':

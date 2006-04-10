@@ -574,6 +574,12 @@ Prøv igjen med et annet navn.''',
 '''Fritekst-søk etter "%s"''',
 '''Full Link List for "%s"''':
 '''Fullstendig liste over lenker for "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Ukjent brukernavn: {{{"%s"}}}. Oppgi brukernavn og passord.''',
+'''Missing password. Please enter user name and password.''':
+'''Passordet mangler. Oppgi et passord.''',
+'''Sorry, wrong password.''':
+'''Du har oppgitt feil passord.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke opprette en ny side uten navn. Oppgi navn på siden.''',
 '''Upload new attachment "%(filename)s"''':

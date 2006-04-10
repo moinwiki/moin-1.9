@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -59,6 +59,9 @@ msgstr "ایجاد صفحه جدید"
 
 msgid "You are not allowed to view this page."
 msgstr "شما مجاز به مشاهده این صفحه نمی باشید"
+
+msgid "Your changes are not saved!"
+msgstr "تغییرات شما ذخیره نشد!"
 
 msgid "You are not allowed to edit this page."
 msgstr "شما مجاز به ویرایش این صفحه نمی باشید"
@@ -156,9 +159,6 @@ msgstr "پیش نمایش"
 
 msgid "GUI Mode"
 msgstr "ویرایش گرافیکی"
-
-msgid "Your changes are not saved!"
-msgstr "تغییرات شما ذخیره نشد!"
 
 msgid "Comment:"
 msgstr "نظرات:"
@@ -341,6 +341,10 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<نامشخص>"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "در متن ها"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1199,6 +1203,62 @@ msgstr "%(matchcount)d·%(matches)s·برای·\"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "نقشه سایت محلی برای \"%s\""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "عبارت \"%s\" غیر مجاز است!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "تهیه بسته صفحات"
+
+#, fuzzy
+msgid "Package name"
+msgstr "تهیه بسته صفحات"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "شما مجاز به تغییر نام صفحات این ویکی نمی باشید!"
 
@@ -1251,23 +1311,6 @@ msgstr ""
 "شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید."
 
 #, python-format
-msgid "Title Search: \"%s\""
-msgstr "جستجوی عنوان: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "جستجوی کامل متن: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "لیست کامل لینکها برای \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید."
-
-#, python-format
 msgid "Subscribe users to the page %s"
 msgstr "کاربران را عضو این صفحه نما %s"
 
@@ -1280,6 +1323,86 @@ msgstr "کاربر ثبت نشده:"
 
 msgid "You are not allowed to perform this action."
 msgstr "عملیات غیر مجاز"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "جستجوی عنوان: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "جستجوی کامل متن: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "علامت گذاری"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "شما مجاز به %s روی این صفحه نمی باشید."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "لیست کامل لینکها برای \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد "
+"نمایید. "
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+"کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید."
+
+msgid "Sorry, wrong password."
+msgstr "متاسفم٬ کلمه عبور اشتباه می باشد."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1303,6 +1426,14 @@ msgstr "عبارت \"%s\" غیر مجاز است!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "برای \"%s\" چیزی یافت نشد!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "عبارت \"%s\" غیر مجاز است!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "عبارت \"%s\" غیر مجاز است!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1716,24 +1847,8 @@ msgstr "تصحیح املایی"
 #~ msgid "Immutable page"
 #~ msgstr "صفحه·تغییرناپذیر"
 
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "نام کاربری {{{\"%s\"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد "
-#~ "نمایید. "
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr ""
-#~ "کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید."
-
 #~ msgid "Account \"%s\" is disabled."
 #~ msgstr "حساب کاربری \"%s\" خیر فعال شده است."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "متاسفم٬ کلمه عبور اشتباه می باشد."
 
 #~ msgid "Bad relogin URL."
 #~ msgstr "آدرس ورود مجدد اشتباه است."

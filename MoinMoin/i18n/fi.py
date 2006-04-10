@@ -32,6 +32,8 @@ makrokutsu.-~
 '''Luo uusi sivu''',
 '''You are not allowed to view this page.''':
 '''Sinulla ei ole oikeutta katsoa tätä sivua.''',
+'''Your changes are not saved!''':
+'''Muutoksiasi ei ole tallennettu!''',
 '''You are not allowed to edit this page.''':
 '''Sinulla ei ole oikeutta muokata tätä sivua.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ Jos et halua tätä, napsauta \'\'\'%(cancel_button_text)s\'\'\' peruaksesi muut
 '''Esikatsele''',
 '''GUI Mode''':
 '''GUI-tila''',
-'''Your changes are not saved!''':
-'''Muutoksiasi ei ole tallennettu!''',
 '''Comment:''':
 '''Kommentti:''',
 '''<No addition>''':

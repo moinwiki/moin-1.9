@@ -31,6 +31,8 @@ macro call.-~
 '''Създайте страница''',
 '''You are not allowed to view this page.''':
 '''Не Ви е позволено да разглеждате тази страница.''',
+'''Your changes are not saved!''':
+'''Вашите промени не са записани!''',
 '''You are not allowed to edit this page.''':
 '''Не можете да редактирате тази страница.''',
 '''Page is immutable!''':
@@ -83,8 +85,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Предварителен изглед''',
 '''GUI Mode''':
 '''Графичен редактор''',
-'''Your changes are not saved!''':
-'''Вашите промени не са записани!''',
 '''Comment:''':
 '''Коментар:''',
 '''<No addition>''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 20:22+0200\n"
+"POT-Creation-Date: 2006-04-09 16:00+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -61,6 +61,10 @@ msgstr "Nieuwe pagina aanmaken"
 
 msgid "You are not allowed to view this page."
 msgstr "U hebt geen toestemming deze pagina te bekijken."
+
+#, fuzzy
+msgid "Your changes are not saved!"
+msgstr "U hebt niets veranderd. Niet opgeslagen!"
 
 msgid "You are not allowed to edit this page."
 msgstr "U hebt geen toestemming deze pagina te bewerken."
@@ -162,10 +166,6 @@ msgstr "Proeflezing"
 
 msgid "GUI Mode"
 msgstr ""
-
-#, fuzzy
-msgid "Your changes are not saved!"
-msgstr "U hebt niets veranderd. Niet opgeslagen!"
 
 #, fuzzy
 msgid "Comment:"
@@ -353,6 +353,10 @@ msgstr ""
 
 msgid "<unknown>"
 msgstr "<onbekend>"
+
+#, fuzzy
+msgid "Text mode"
+msgstr "Tekst"
 
 #, fuzzy
 msgid ""
@@ -1208,6 +1212,62 @@ msgstr "%(matchcount)d %(matches)s op \"%(title)s\""
 msgid "Local Site Map for \"%s\""
 msgstr "Lokale wegwijzer voor \"%s\""
 
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "GelijkendePaginas"
+
+#, fuzzy
+msgid "Package name"
+msgstr "GelijkendePaginas"
+
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
+
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "U hebt geen toestemming in deze wiki pagina's van naam te veranderen!"
 
@@ -1259,23 +1319,6 @@ msgstr "Geen spelfouten gevonden!"
 msgid "You can't check spelling on a page you can't read."
 msgstr "U kunt geen spelling controleren op een pagina die u niet kunt lezen."
 
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "In titels zoeken op: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Volledige tekst doorzoeken op: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Volledige verwijzingenlijst voor \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op."
-
 #, fuzzy, python-format
 msgid "Subscribe users to the page %s"
 msgstr "Abonneren op triviale wijzigingen"
@@ -1290,6 +1333,85 @@ msgstr ""
 #, fuzzy
 msgid "You are not allowed to perform this action."
 msgstr "U hebt geen toestemming deze pagina te bewerken."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "In titels zoeken op: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Volledige tekst doorzoeken op: \"%s\""
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Opmaak"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Het is u niet toegestaan om %s op deze pagina te doen."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Volledige verwijzingenlijst voor \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Onbekende gebruikersnaam: {{{\"%s\"}}}. Geef een gebruikersnaam en "
+"wachtwoord op."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
+
+msgid "Sorry, wrong password."
+msgstr "Sorry, foutief wachtwoord."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Cookie verwijderd. U bent nu uitgelogd."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1313,6 +1435,14 @@ msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
 #, python-format
 msgid "Nothing found for \"%s\"!"
 msgstr "Niets gevonden voor \"%s\""
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
+
+#, fuzzy, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Ongeldige argumenten voor invoegen \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"
@@ -1737,21 +1867,6 @@ msgstr "Spellingscontrole"
 
 #~ msgid "Immutable page"
 #~ msgstr "Vastliggende pagina"
-
-#~ msgid "Cookie deleted. You are now logged out."
-#~ msgstr "Cookie verwijderd. U bent nu uitgelogd."
-
-#~ msgid ""
-#~ "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-#~ msgstr ""
-#~ "Onbekende gebruikersnaam: {{{\"%s\"}}}. Geef een gebruikersnaam en "
-#~ "wachtwoord op."
-
-#~ msgid "Missing password. Please enter user name and password."
-#~ msgstr "Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op."
-
-#~ msgid "Sorry, wrong password."
-#~ msgstr "Sorry, foutief wachtwoord."
 
 #~ msgid "Bad relogin URL."
 #~ msgstr "Onjuiste herlogin URL."

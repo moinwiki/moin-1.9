@@ -2,6 +2,7 @@
 
 Page.py
 PageEditor.py
+PageGraphicalEditor.py
 caching.py
 config.py
 multiconfig.py
@@ -21,14 +22,21 @@ action/AttachFile.py
 action/DeletePage.py
 action/LikePages.py
 action/LocalSiteMap.py
+action/MyPages.py
+action/PackagePages.py
 action/RenamePage.py
+action/RenderAsDocbook.py
 action/SpellCheck.py
+action/SubscribeUser.py
 action/fullsearch.py
+action/backup.py
 action/links.py
+action/login.py
+action/logout.py
 action/newpage.py
 action/rss_rc.py
+action/userprefs.py
 action/titleindex.py
-action/SubscribeUser.py
 
 formatter/base.py
 formatter/text_html.py
@@ -41,11 +49,15 @@ macro/BR.py
 macro/FootNote.py
 macro/FullSearch.py
 macro/GetText.py
+macro/ImageLink.py
 macro/Include.py
+macro/Login.py
+macro/MonthCalendar.py
 macro/Navigation.py
 macro/NewPage.py
 macro/OrphanedPages.py
 macro/PageSize.py
+macro/PageHits.py
 macro/RandomPage.py
 macro/RandomQuote.py
 macro/RecentChanges.py
@@ -94,7 +106,7 @@ util/timefuncs.py
 util/web.py
 util/wikiext.py
 
-_tests/test_parser_wiki.py
+#_tests/test_parser_wiki.py
 
 i18n/dummy.py
 

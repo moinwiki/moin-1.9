@@ -32,6 +32,8 @@ macro call.-~
 '''创建网页''',
 '''You are not allowed to view this page.''':
 '''您无权阅读此页.''',
+'''Your changes are not saved!''':
+'''您的改动有保存!''',
 '''You are not allowed to edit this page.''':
 '''您无权编辑此页.''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''预览''',
 '''GUI Mode''':
 '''图形界面模式''',
-'''Your changes are not saved!''':
-'''您的改动有保存!''',
 '''Comment:''':
 '''备注:''',
 '''<No addition>''':
@@ -704,6 +704,12 @@ Try a different name.''':
 '''全文检索: "%s"''',
 '''Full Link List for "%s"''':
 '''连向"%s"的网页''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''无效用户名: {{{"%s"}}}. 请输入用户名和密码.''',
+'''Missing password. Please enter user name and password.''':
+'''需要密码, 请输入用户名和密码.''',
+'''Sorry, wrong password.''':
+'''对不起, 无效密码.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''没有网页名就无法创建新网页. 请指定一个网页名.''',
 '''Upload new attachment "%(filename)s"''':

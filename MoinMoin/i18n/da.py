@@ -31,6 +31,8 @@ for at bruge denne formular på andre sider.-~
 '''Opret ny side''',
 '''You are not allowed to view this page.''':
 '''Du har ikke lov til at se denne side.''',
+'''Your changes are not saved!''':
+'''Dine ændringer er ikke gemt!''',
 '''You are not allowed to edit this page.''':
 '''Du har ikke lov til at redigere denne side.''',
 '''Page is immutable!''':
@@ -83,8 +85,6 @@ Hvis du ikke ønsker dette,·så tryk·\'\'\'%(cancel_button_text)s\'\'\'·for·
 '''Smugkig''',
 '''GUI Mode''':
 '''Grafisk redigering''',
-'''Your changes are not saved!''':
-'''Dine ændringer er ikke gemt!''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -700,6 +700,12 @@ Prøv et andet navn.''',
 '''Fritekst-søgning: "%s"''',
 '''Full Link List for "%s"''':
 '''Fuld lænke-liste for "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Ukendt brugernavn: [[["%s"}}}. Angiv venligst brugernavn og adgangskode.''',
+'''Missing password. Please enter user name and password.''':
+'''Manglende adgangskode. Angiv venligst brugernavn og adgangskode.''',
+'''Sorry, wrong password.''':
+'''Desværre, forkert adgangskode.''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn.''',
 '''Upload new attachment "%(filename)s"''':

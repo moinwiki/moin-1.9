@@ -2,6 +2,41 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-10 06:26:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-547
+
+    Summary:
+      updated POTFILES.in, updated i18n
+    Revision:
+      moin--main--1.5--patch-547
+
+    updated POTFILES.in, updated i18n
+    
+
+    modified files:
+     ChangeLog MoinMoin/i18n/MoinMoin.pot MoinMoin/i18n/POTFILES.in
+     MoinMoin/i18n/bg.po MoinMoin/i18n/bg.py MoinMoin/i18n/ca.po
+     MoinMoin/i18n/ca.py MoinMoin/i18n/cs.po MoinMoin/i18n/cs.py
+     MoinMoin/i18n/da.po MoinMoin/i18n/da.py MoinMoin/i18n/de.po
+     MoinMoin/i18n/de.py MoinMoin/i18n/en.po MoinMoin/i18n/en.py
+     MoinMoin/i18n/es.po MoinMoin/i18n/es.py MoinMoin/i18n/fa.po
+     MoinMoin/i18n/fa.py MoinMoin/i18n/fi.po MoinMoin/i18n/fi.py
+     MoinMoin/i18n/fr.po MoinMoin/i18n/fr.py MoinMoin/i18n/he.po
+     MoinMoin/i18n/he.py MoinMoin/i18n/hu.po MoinMoin/i18n/hu.py
+     MoinMoin/i18n/it.po MoinMoin/i18n/it.py MoinMoin/i18n/ja.po
+     MoinMoin/i18n/ja.py MoinMoin/i18n/ko.po MoinMoin/i18n/ko.py
+     MoinMoin/i18n/lv.po MoinMoin/i18n/lv.py MoinMoin/i18n/nb.po
+     MoinMoin/i18n/nb.py MoinMoin/i18n/nl.po MoinMoin/i18n/nl.py
+     MoinMoin/i18n/pl.po MoinMoin/i18n/pl.py MoinMoin/i18n/pt.po
+     MoinMoin/i18n/pt.py MoinMoin/i18n/pt_br.po
+     MoinMoin/i18n/pt_br.py MoinMoin/i18n/ro.po MoinMoin/i18n/ro.py
+     MoinMoin/i18n/ru.po MoinMoin/i18n/ru.py MoinMoin/i18n/sl.po
+     MoinMoin/i18n/sl.py MoinMoin/i18n/sr.po MoinMoin/i18n/sv.po
+     MoinMoin/i18n/sv.py MoinMoin/i18n/tr.po MoinMoin/i18n/tr.py
+     MoinMoin/i18n/vi.po MoinMoin/i18n/vi.py MoinMoin/i18n/zh.po
+     MoinMoin/i18n/zh.py MoinMoin/i18n/zh_tw.po
+     MoinMoin/i18n/zh_tw.py
+
+
 2006-04-09 13:31:35 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-546
 
     Summary:

@@ -32,6 +32,8 @@ macro call.-~
 '''ایجاد صفحه جدید''',
 '''You are not allowed to view this page.''':
 '''شما مجاز به مشاهده این صفحه نمی باشید''',
+'''Your changes are not saved!''':
+'''تغییرات شما ذخیره نشد!''',
 '''You are not allowed to edit this page.''':
 '''شما مجاز به ویرایش این صفحه نمی باشید''',
 '''Page is immutable!''':
@@ -84,8 +86,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''پیش نمایش''',
 '''GUI Mode''':
 '''ویرایش گرافیکی''',
-'''Your changes are not saved!''':
-'''تغییرات شما ذخیره نشد!''',
 '''Comment:''':
 '''نظرات:''',
 '''<No addition>''':
@@ -710,14 +710,6 @@ Try a different name.''':
 '''اشتباه املایی یافت نشد!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید.''',
-'''Title Search: "%s"''':
-'''جستجوی عنوان: "%s"''',
-'''Full Text Search: "%s"''':
-'''جستجوی کامل متن: "%s"''',
-'''Full Link List for "%s"''':
-'''لیست کامل لینکها برای "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید.''',
 '''Subscribe users to the page %s''':
 '''کاربران را عضو این صفحه نما %s''',
 '''Subscribed for %s:''':
@@ -726,6 +718,20 @@ Try a different name.''':
 '''کاربر ثبت نشده:''',
 '''You are not allowed to perform this action.''':
 '''عملیات غیر مجاز''',
+'''Title Search: "%s"''':
+'''جستجوی عنوان: "%s"''',
+'''Full Text Search: "%s"''':
+'''جستجوی کامل متن: "%s"''',
+'''Full Link List for "%s"''':
+'''لیست کامل لینکها برای "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید. ''',
+'''Missing password. Please enter user name and password.''':
+'''کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید.''',
+'''Sorry, wrong password.''':
+'''متاسفم٬ کلمه عبور اشتباه می باشد.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید.''',
 '''Upload new attachment "%(filename)s"''':
 '''ارسال ضمیمه جدید "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':

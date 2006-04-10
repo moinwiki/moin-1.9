@@ -32,6 +32,8 @@ macro call.-~
 '''Create New Page''',
 '''You are not allowed to view this page.''':
 '''You are not allowed to view this page.''',
+'''Your changes are not saved!''':
+'''Your changes are not saved!''',
 '''You are not allowed to edit this page.''':
 '''You are not allowed to edit this page.''',
 '''Page is immutable!''':
@@ -82,8 +84,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Preview''',
 '''GUI Mode''':
 '''GUI Mode''',
-'''Your changes are not saved!''':
-'''Your changes are not saved!''',
 '''Comment:''':
 '''Comment:''',
 '''<No addition>''':
@@ -198,6 +198,8 @@ to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''',
 '''<unknown>''':
 '''<unknown>''',
+'''Text mode''':
+'''Text mode''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -724,6 +726,56 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''%(matchcount)d %(matches)s for "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Local Site Map for "%s"''',
+'''Please log in first.''':
+'''Please log in first.''',
+'''Please first create a homepage before creating additional pages.''':
+'''Please first create a homepage before creating additional pages.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''MyPages management''',
+'''Invalid filename "%s"!''':
+'''Invalid filename "%s"!''',
+'''Created the package %s containing the pages %s.''':
+'''Created the package %s containing the pages %s.''',
+'''Package pages''':
+'''Package pages''',
+'''Package name''':
+'''Package name''',
+'''List of page names - separated by <tt>,</tt>''':
+'''List of page names - separated by <tt>,</tt>''',
 '''You are not allowed to rename pages in this wiki!''':
 '''You are not allowed to rename pages in this wiki!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -752,14 +804,6 @@ Try a different name.''',
 '''No spelling errors found!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''You can\'t check spelling on a page you can\'t read.''',
-'''Title Search: "%s"''':
-'''Title Search: "%s"''',
-'''Full Text Search: "%s"''':
-'''Full Text Search: "%s"''',
-'''Full Link List for "%s"''':
-'''Full Link List for "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Cannot create a new page without a page name.  Please specify a page name.''',
 '''Subscribe users to the page %s''':
 '''Subscribe users to the page %s''',
 '''Subscribed for %s:''':
@@ -768,6 +812,64 @@ Try a different name.''',
 '''Not a user:''',
 '''You are not allowed to perform this action.''':
 '''You are not allowed to perform this action.''',
+'''Title Search: "%s"''':
+'''Title Search: "%s"''',
+'''Full Text Search: "%s"''':
+'''Full Text Search: "%s"''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''',
+'''Wiki Backup / Restore''':
+'''Wiki Backup / Restore''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''',
+'''Backup''':
+'''Backup''',
+'''Restore''':
+'''Restore''',
+'''You are not allowed to do remote backup.''':
+'''You are not allowed to do remote backup.''',
+'''Unknown backup subaction: %s.''':
+'''Unknown backup subaction: %s.''',
+'''Full Link List for "%s"''':
+'''Full Link List for "%s"''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''',
+'''Missing password. Please enter user name and password.''':
+'''Missing password. Please enter user name and password.''',
+'''Sorry, wrong password.''':
+'''Sorry, wrong password.''',
+'''You are now logged out.''':
+'''You are now logged out.''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Cannot create a new page without a page name.  Please specify a page name.''',
 '''Upload new attachment "%(filename)s"''':
 '''Upload new attachment "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -780,6 +882,10 @@ Try a different name.''',
 '''Invalid include arguments "%s"!''',
 '''Nothing found for "%s"!''':
 '''Nothing found for "%s"!''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Invalid MonthCalendar calparms "%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Invalid MonthCalendar arguments "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Unsupported navigation scheme \'%(scheme)s\'!''',
 '''No parent page found!''':
