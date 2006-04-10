@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-10 11:38:45 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-549
+
+    Summary:
+      change <p> generation for macros, update some comments
+    Revision:
+      moin--main--1.5--patch-549
+
+    change <p> generation for macros, update some comments
+    
+
+    modified files:
+     ChangeLog MoinMoin/formatter/text_gedit.py
+     MoinMoin/parser/wiki.py
+
+
 2006-04-10 06:38:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-548
 
     Summary:
