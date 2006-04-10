@@ -32,8 +32,6 @@ För att använda det här formuläret på andra sidor, skriv in ett
 '''Skapa ny sida''',
 '''You are not allowed to view this page.''':
 '''Du har inte tillåtelse att titta på den här sidan.''',
-'''Your changes are not saved!''':
-'''Dina ändringar sparas inte!''',
 '''You are not allowed to edit this page.''':
 '''Du har inte tillåtelse att redigera den här sidan.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ För att använda det här formuläret på andra sidor, skriv in ett
 '''Kan inte redigera gamla versioner!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Låset du höll har gått ut. Förbered dig för redigeringskonflikter!''',
-'''Page name is too long, try shorter name.''':
-'''Sidnamnet är för långt, pröva ett kortare namn.''',
 '''Edit "%(pagename)s"''':
 '''Redigera "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att avbryta redigeringen.''',
 '''Preview''':
 '''Förhandsgranska''',
-'''GUI Mode''':
-'''Grafiskt läge''',
+'''Text mode''':
+'''Textläge''',
 '''Comment:''':
 '''Kommentar:''',
 '''<No addition>''':
@@ -96,6 +92,221 @@ Om du motsätter dig det, tryck på \'\'\'%(cancel_button_text)s\'\'\' för att 
 '''Trivial ändring''',
 '''Remove trailing whitespace from each line''':
 '''Eliminera efterföljande mellanslag från varje rad''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Ogiltigt användarnamn {{{\'%s\'}}}.
+Namnet kan innehålla vilket alfanumeriskt tecken ur Unicode som helst,
+med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
+'''You are not allowed to do %s on this page.''':
+'''Du har inte tillåtelse att göra %s på den här sidan.''',
+'''Login''':
+'''Logga in''',
+''' %s and try again.''':
+''' %s och försök igen.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d resultat av ungefär %(pages)d sidor.''',
+'''%.2f seconds''':
+'''%.2f sekunder''',
+'''match''':
+'''träff''',
+'''matches''':
+'''träffar''',
+'''<unknown>''':
+'''<okänd>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Inloggningsnamn: %s
+
+Inloggningslösenord: %s
+
+Inloggnings-URL: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Någon har begärt din kontoinformation till den här epostadressen.
+
+Om du har förlorat ditt lösenord, använd informationen nedanför och
+ange lösenordet SOM VISAS i wikins lösenordsfält (använd klipp och
+klistra).
+
+Efter att du loggat in är det förstås en god idé att välja ett nytt
+lösenord.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Din wiki-kontoinformation''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Den här wikin har inte eposthantering påslagen.
+För att få eposthantering påslagen, kontakta wikins ägare.''',
+'''Please provide a valid email address!''':
+'''Var god ange en korrekt epostadress!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Kunde inte hitta något konto med epostadressen "%(email)s"!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Använd AnvändarInställningar för att ändra dina inställningar eller skapa ett konto.''',
+'''Empty user name. Please enter a user name.''':
+'''Tomt användarnamn. Var god ange ett användarnamn.''',
+'''This user name already belongs to somebody else.''':
+'''Det här användarnamnet tillhör redan någon annan.''',
+'''Passwords don\'t match!''':
+'''Lösenorden är inte likadana!''',
+'''Please specify a password!''':
+'''Var god ange ett lösenord!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan du få tillbaka dem via epost.''',
+'''This email already belongs to somebody else.''':
+'''Den här epostadressen tillhör redan någon annan.''',
+'''User account created! You can use this account to login now...''':
+'''Användarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Använd AnvändarInställningar för att ändra inställningar för det valda användarkontot''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Temat \'%(theme_name)s\' kunde inte laddas!''',
+'''User preferences saved!''':
+'''Användarinställningar sparade!''',
+'''Default''':
+'''Förval''',
+'''<Browser setting>''':
+'''<Webbläsarinställning>''',
+'''the one preferred''':
+'''den som föredras''',
+'''free choice''':
+'''valfritt''',
+'''Select User''':
+'''Välj användare''',
+'''Save''':
+'''Spara''',
+'''Preferred theme''':
+'''Önskat tema''',
+'''Editor Preference''':
+'''Editorns inställningar''',
+'''Editor shown on UI''':
+'''Editor som visas i gränsittet''',
+'''Time zone''':
+'''Tidszon''',
+'''Your time is''':
+'''Din tid är''',
+'''Server time is''':
+'''Servertiden är''',
+'''Date format''':
+'''Datumformat''',
+'''Preferred language''':
+'''Önskat språk''',
+'''General options''':
+'''Översiktiga alternativ''',
+'''Quick links''':
+'''Snabblänkar''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Den här listan fungerar inte om du inte skriver in en korrekt epostadress!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Prenumerera på wikisidor (en regex per rad)''',
+'''Create Profile''':
+'''Skapa profil''',
+'''Mail me my account data''':
+'''Eposta mig information om mitt konto''',
+'''Email''':
+'''Epost''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''För att skapa ett konto eller återfå ett förlorat lösenord, använd sidan %(userprefslink)s.''',
+'''Name''':
+'''Namn''',
+'''Password''':
+'''Lösenord''',
+'''Action''':
+'''Anrop''',
+'''Search Titles''':
+'''Sök titlar''',
+'''Display context of search results''':
+'''Visa sökningsträffarnas sammanhang''',
+'''Case-sensitive searching''':
+'''Sökning känslig för gemener/VERSALER''',
+'''Search Text''':
+'''Sök i text''',
+'''Go To Page''':
+'''Gå till sida''',
+'''Include system pages''':
+'''Inkludera systemsidor''',
+'''Exclude system pages''':
+'''Exkludera systemsidor''',
+'''Plain title index''':
+'''Titelindex i textform''',
+'''XML title index''':
+'''XML-titelindex''',
+'''Python Version''':
+'''Python-version''',
+'''MoinMoin Version''':
+'''MoinMoin-version''',
+'''Release %s [Revision %s]''':
+'''Release %s [revision %s]''',
+'''4Suite Version''':
+'''4Suite-Version''',
+'''Number of pages''':
+'''Antal sidor''',
+'''Number of system pages''':
+'''Antal systemsidor''',
+'''Accumulated page sizes''':
+'''Ackumulerade sidstorlekar''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Diskutrymme använt av %(data_dir)s/pages/''',
+'''Disk usage of %(data_dir)s/''':
+'''Diskutrymme använt av %(data_dir)s/''',
+'''Entries in edit log''':
+'''Poster i editloggen''',
+'''NONE''':
+'''INGEN''',
+'''Global extension macros''':
+'''Globala utökningsmakron''',
+'''Local extension macros''':
+'''Lokala utökningsmakron''',
+'''Global extension actions''':
+'''Globala utökningsaktioner''',
+'''Local extension actions''':
+'''Lokala utökningsaktioner''',
+'''Global parsers''':
+'''Globala parsers''',
+'''Local extension parsers''':
+'''Lokala utökningsparsers''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Installerade processors (AVRÅDES - använd Parsers i stället)''',
+'''Disabled''':
+'''Avaktiverad''',
+'''Enabled''':
+'''Aktiverad''',
+'''Lupy search''':
+'''Lupy-sökning''',
+'''Active threads''':
+'''Aktiva trådar''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Var god använd en mer specifik sökterm än {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Fel i regex \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Inkorrekt tidsstämpel \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Förväntade "=" följa "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Förväntade ett värde för nyckel "%(token)s"''',
+'''Wiki Markup''':
+'''Wiki-märkning''',
+'''Print View''':
+'''Utskriftsvy''',
+'''Your changes are not saved!''':
+'''Dina ändringar sparas inte!''',
+'''Page name is too long, try shorter name.''':
+'''Sidnamnet är för långt, pröva ett kortare namn.''',
+'''GUI Mode''':
+'''Grafiskt läge''',
 '''Edit was cancelled.''':
 '''Redigeringen avbröts.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -199,10 +410,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Du bör \'\'undvika att redigera\'\' den här sidan i åtminstone %(mins_valid)d minut(er)
 för att undvika redigeringskonflikter.\'\'\'[[BR]]
 För att lämna redigeringen, tryck på "Avbryt".''',
-'''<unknown>''':
-'''<okänd>''',
-'''Text mode''':
-'''Textläge''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Installeringen av "%(filename)s" misslyckades.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Filen %s är inte en MoinMoin-paketfil.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -299,151 +510,20 @@ reStructuredText Quick Reference
 '''Prenumerera på triviala ändringar''',
 '''Disable this account forever''':
 '''Stäng av det här kontot för alltid''',
-'''Name''':
-'''Namn''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Använd Förnamn\'\'\'\'\'\'Efternamn)''',
 '''Alias-Name''':
 '''Alias-namn''',
-'''Password''':
-'''Lösenord''',
 '''Password repeat''':
 '''Upprepa lösenord''',
 '''(Only when changing passwords)''':
 '''(Bara när du ändrar lösenord)''',
-'''Email''':
-'''Epost''',
 '''User CSS URL''':
 '''Användar-CSS-URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Lämna fältet tomt för att avaktivera användar-CSS-URL)''',
 '''Editor size''':
 '''Editorstorlek''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Ogiltigt användarnamn {{{\'%s\'}}}.
-Namnet kan innehålla vilket alfanumeriskt tecken ur Unicode som helst,
-med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
-'''You are not allowed to do %s on this page.''':
-'''Du har inte tillåtelse att göra %s på den här sidan.''',
-'''Login''':
-'''Logga in''',
-''' %s and try again.''':
-''' %s och försök igen.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d resultat av ungefär %(pages)d sidor.''',
-'''%.2f seconds''':
-'''%.2f sekunder''',
-'''match''':
-'''träff''',
-'''matches''':
-'''träffar''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''Inloggningsnamn: %s
-
-Inloggningslösenord: %s
-
-Inloggnings-URL: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Någon har begärt din kontoinformation till den här epostadressen.
-
-Om du har förlorat ditt lösenord, använd informationen nedanför och
-ange lösenordet SOM VISAS i wikins lösenordsfält (använd klipp och
-klistra).
-
-Efter att du loggat in är det förstås en god idé att välja ett nytt
-lösenord.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Din wiki-kontoinformation''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Den här wikin har inte eposthantering påslagen.
-För att få eposthantering påslagen, kontakta wikins ägare.''',
-'''Please provide a valid email address!''':
-'''Var god ange en korrekt epostadress!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Kunde inte hitta något konto med epostadressen "%(email)s"!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Använd AnvändarInställningar för att ändra dina inställningar eller skapa ett konto.''',
-'''Empty user name. Please enter a user name.''':
-'''Tomt användarnamn. Var god ange ett användarnamn.''',
-'''This user name already belongs to somebody else.''':
-'''Det här användarnamnet tillhör redan någon annan.''',
-'''Passwords don\'t match!''':
-'''Lösenorden är inte likadana!''',
-'''Please specify a password!''':
-'''Var god ange ett lösenord!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Var god ange din epostadress. Om du förlorar dina inloggningsuppgifter kan du få tillbaka dem via epost.''',
-'''This email already belongs to somebody else.''':
-'''Den här epostadressen tillhör redan någon annan.''',
-'''User account created! You can use this account to login now...''':
-'''Användarkonto skapat! Du kan använda det här kontot för att logga in nu...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''Använd AnvändarInställningar för att ändra inställningar för det valda användarkontot''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Temat \'%(theme_name)s\' kunde inte laddas!''',
-'''User preferences saved!''':
-'''Användarinställningar sparade!''',
-'''Default''':
-'''Förval''',
-'''<Browser setting>''':
-'''<Webbläsarinställning>''',
-'''the one preferred''':
-'''den som föredras''',
-'''free choice''':
-'''valfritt''',
-'''Select User''':
-'''Välj användare''',
-'''Save''':
-'''Spara''',
-'''Preferred theme''':
-'''Önskat tema''',
-'''Editor Preference''':
-'''Editorns inställningar''',
-'''Editor shown on UI''':
-'''Editor som visas i gränsittet''',
-'''Time zone''':
-'''Tidszon''',
-'''Your time is''':
-'''Din tid är''',
-'''Server time is''':
-'''Servertiden är''',
-'''Date format''':
-'''Datumformat''',
-'''Preferred language''':
-'''Önskat språk''',
-'''General options''':
-'''Översiktiga alternativ''',
-'''Quick links''':
-'''Snabblänkar''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Den här listan fungerar inte om du inte skriver in en korrekt epostadress!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Prenumerera på wikisidor (en regex per rad)''',
-'''Create Profile''':
-'''Skapa profil''',
-'''Mail me my account data''':
-'''Eposta mig information om mitt konto''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''För att skapa ett konto eller återfå ett förlorat lösenord, använd sidan %(userprefslink)s.''',
-'''Action''':
-'''Anrop''',
 '''No older revisions available!''':
 '''Inga äldre versioner tillgängliga!''',
 '''Diff for "%s"''':
@@ -542,82 +622,173 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Du måste ange en diagramtyp!''',
 '''Bad chart type "%s"!''':
 '''Ogiltig diagramtyp "%s"!''',
-'''Search Titles''':
-'''Sök titlar''',
-'''Display context of search results''':
-'''Visa sökningsträffarnas sammanhang''',
-'''Case-sensitive searching''':
-'''Sökning känslig för gemener/VERSALER''',
-'''Search Text''':
-'''Sök i text''',
-'''Go To Page''':
-'''Gå till sida''',
-'''Include system pages''':
-'''Inkludera systemsidor''',
-'''Exclude system pages''':
-'''Exkludera systemsidor''',
-'''Plain title index''':
-'''Titelindex i textform''',
-'''XML title index''':
-'''XML-titelindex''',
-'''Python Version''':
-'''Python-version''',
-'''MoinMoin Version''':
-'''MoinMoin-version''',
-'''Release %s [Revision %s]''':
-'''Release %s [revision %s]''',
-'''4Suite Version''':
-'''4Suite-Version''',
-'''Number of pages''':
-'''Antal sidor''',
-'''Number of system pages''':
-'''Antal systemsidor''',
-'''Accumulated page sizes''':
-'''Ackumulerade sidstorlekar''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''Diskutrymme använt av %(data_dir)s/pages/''',
-'''Disk usage of %(data_dir)s/''':
-'''Diskutrymme använt av %(data_dir)s/''',
-'''Entries in edit log''':
-'''Poster i editloggen''',
-'''NONE''':
-'''INGEN''',
-'''Global extension macros''':
-'''Globala utökningsmakron''',
-'''Local extension macros''':
-'''Lokala utökningsmakron''',
-'''Global extension actions''':
-'''Globala utökningsaktioner''',
-'''Local extension actions''':
-'''Lokala utökningsaktioner''',
-'''Global parsers''':
-'''Globala parsers''',
-'''Local extension parsers''':
-'''Lokala utökningsparsers''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Installerade processors (AVRÅDES - använd Parsers i stället)''',
-'''Disabled''':
-'''Avaktiverad''',
-'''Enabled''':
-'''Aktiverad''',
-'''Lupy search''':
-'''Lupy-sökning''',
-'''Active threads''':
-'''Aktiva trådar''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Var god använd en mer specifik sökterm än {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Fel i regex \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Inkorrekt tidsstämpel \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Förväntade "=" följa "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Förväntade ett värde för nyckel "%(token)s"''',
-'''Wiki Markup''':
-'''Wiki-märkning''',
-'''Print View''':
-'''Utskriftsvy''',
+'''This page is already deleted or was never created!''':
+'''Den här sidan är redan raderad eller existerade aldrig!''',
+'''No pages like "%s"!''':
+'''Inga sidor liknar "%s"!''',
+'''Invalid filename "%s"!''':
+'''Ogiltigt filnamn "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Bilagan "%(target)s" (fjärrnamn "%(filename)s") existerar redan.''',
+'''Created the package %s containing the pages %s.''':
+'''Skapade paketet %s som innehåller sidorna %s.''',
+'''Package pages''':
+'''Paketsidor''',
+'''Package name''':
+'''Paketnamn''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Lista på sidnamn - separerade med <tt>,</tt>''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Okänt användarnamn: {{{"%s"}}}. Var god ange användarnamn och lösenord.''',
+'''Missing password. Please enter user name and password.''':
+'''Lösenord saknas. Var god ange användarnamn och lösenord.''',
+'''Sorry, wrong password.''':
+'''Tyvärr, fel lösenord.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Exakt en sida som liknar "%s" funnen, dirigerar om till sidan.''',
+'''Pages like "%s"''':
+'''Sidor som liknar "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s för "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Lokal Sajtkarta för "%s"''',
+'''Please log in first.''':
+'''Var god logga in först.''',
+'''Please first create a homepage before creating additional pages.''':
+'''Var god skapa en hemsida innan du skapar övriga sidor.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Du kan lägga till undersidor till din redan existerande hemsida här.
+
+Du kan välja vilka andra som ska kunna läsa och ändra sidorna. Åtkomst
+bestäms av medlemskap i motsvarande gruppsida.
+
+Ange undersidans namn och tryck på knappen för att skapa en ny sida.
+
+Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida
+existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för
+att skapa gruppsidor.
+
+||\'\'\'Lägg till en ny personlig sida:\'\'\'||\'\'\'Relaterade åtkomstlistgrupper:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''Hantering av MinaSidor''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Du har inte tillålse att radera sidor i den här wikin!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Var god använd det interaktiva användargränsnittet för att byta namn på sidor!''',
+'''Could not rename page because of file system error: %s.''':
+'''Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s.''',
+'''Rename Page''':
+'''Byt namn på sida''',
+'''New name''':
+'''Nytt namn''',
+'''Optional reason for the renaming''':
+'''Skäl till namnbyte (ej obligatoriskt)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'En sida med namnet {{{\'%s\'}}} existerar redan.\'\'\'
+
+Pröva ett annat namn.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(inklusive %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Följande %(badwords)d ord kunde inte hittas i ordlistan av %(totalwords)d antal ord  s%(localwords)s och de är markerade här under:''',
+'''Add checked words to dictionary''':
+'''Addera förkryssade ord till ordlistan''',
+'''No spelling errors found!''':
+'''Inga felstavningar funna!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Du kan inte stavningskontrollera en sida som du inte kan läsa.''',
+'''Title Search: "%s"''':
+'''Titelsökning: "%s"''',
+'''Full Text Search: "%s"''':
+'''Fulltextsökning: "%s"''',
+'''Full Link List for "%s"''':
+'''Full länklista för "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
+'''Subscribe users to the page %s''':
+'''Teckna en prenumeration på sidan %s åt användarna''',
+'''Subscribed for %s:''':
+'''Prenumererar på %s:''',
+'''Not a user:''':
+'''Inte en användare:''',
+'''You are not allowed to perform this action.''':
+'''Du har inte tillåtelse att utföra den här åtgärden.''',
+'''You are now logged out.''':
+'''Du är nu utloggad.''',
+'''You are not allowed to delete this page.''':
+'''Du har inte tillåtelse att radera den här sidan.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Var god använd det interaktiva användargränsnittet för att radera sidor!''',
+'''Really delete this page?''':
+'''Radera den här sidan, är du säker?''',
+'''Delete''':
+'''Radera''',
+'''Optional reason for the deletion''':
+'''Anledning för borttagande (valfri)''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Säkerhetskopia återlagrad: %(filename)s till målkatalog: %(targetdir)s.
+Filer: %(filecount)d, Kataloger: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Återlagring av säkerhetskopia: %(filename)s till målkatalog: %(targetdir)s misslyckades.''',
+'''Wiki Backup / Restore''':
+'''Wiki säkerhetskopiering / återlagring''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Några tips:
+ * För att återlagra en säkerhetskopia:
+  * Att återlagra en säkerhetskopia kommer att skriva över existerande data så var försiktig.
+  * Byt namn på den till <sajtid>.tar.<kompression> (ta bort --date--time--UTC-grejerna).
+  * Lägg säkerhetskopian i backup_storage_dir (använd scp, ftp, ...).
+  * Tryck på [[GetText(Restore)]]-knappen nedan.
+
+ * För att göra en backup tryck på [[GetText(Backup)]]-knappen och spara filen på ett säkert ställe.
+
+Se till att din wikikonfigurations backup_*-värden är korrekta och kompletta.
+
+''',
+'''Backup''':
+'''Säkerhetskopiera''',
+'''Restore''':
+'''Återställ''',
+'''You are not allowed to do remote backup.''':
+'''Du har inte tillåtelse att göra fjärrbackup.''',
+'''Unknown backup subaction: %s.''':
+'''Okänd backup-underåtgärd: %s.''',
 '''[%d attachments]''':
 '''[%d bilagor]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -681,18 +852,12 @@ att användas.''',
 '''Okänd uppladningsförfrågan: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Bilagor till "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Bilagan "%(target)s" (fjärrnamn "%(filename)s") existerar redan.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Bilagan \'%(target)s\' (fjärrnamn \'%(filename)s\') med %(bytes)d byte sparade.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Bilagan \'%(filename)s\' raderad.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Bilagan \'%(filename)s\' installerad.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Installeringen av "%(filename)s" misslyckades.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Filen %s är inte en MoinMoin-paketfil.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Bilagan "%(filename)s" kunde inte packas upp eftersom de resulterande filerna skulle bli för stora (%(space)d kB saknas).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -715,171 +880,6 @@ att användas.''',
 '''Okänd filtyp, kan inte visa bilagan direkt.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''bilaga:%(filename)s för %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Du har inte tillåtelse att radera den här sidan.''',
-'''This page is already deleted or was never created!''':
-'''Den här sidan är redan raderad eller existerade aldrig!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Var god använd det interaktiva användargränsnittet för att radera sidor!''',
-'''Really delete this page?''':
-'''Radera den här sidan, är du säker?''',
-'''Delete''':
-'''Radera''',
-'''Optional reason for the deletion''':
-'''Anledning för borttagande (valfri)''',
-'''No pages like "%s"!''':
-'''Inga sidor liknar "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Exakt en sida som liknar "%s" funnen, dirigerar om till sidan.''',
-'''Pages like "%s"''':
-'''Sidor som liknar "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s för "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Lokal Sajtkarta för "%s"''',
-'''Please log in first.''':
-'''Var god logga in först.''',
-'''Please first create a homepage before creating additional pages.''':
-'''Var god skapa en hemsida innan du skapar övriga sidor.''',
-'''You can add some additional sub pages to your already existing homepage here.
-
-You can choose how open to other readers or writers those pages shall be,
-access is controlled by group membership of the corresponding group page.
-
-Just enter the sub page\'s name and click on the button to create a new page.
-
-Before creating access protected pages, make sure the corresponding group page
-exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
-the group pages.
-
-||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
-||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
-||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
-||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
-
-''':
-'''Du kan lägga till undersidor till din redan existerande hemsida här.
-
-Du kan välja vilka andra som ska kunna läsa och ändra sidorna. Åtkomst
-bestäms av medlemskap i motsvarande gruppsida.
-
-Ange undersidans namn och tryck på knappen för att skapa en ny sida.
-
-Innan du skapar åtkomstskyddade sidor, se till att motsvarande gruppsida
-existerar och har rätt medlemmar angivna. Använd HemsidaGruppMall för
-att skapa gruppsidor.
-
-||\'\'\'Lägg till en ny personlig sida:\'\'\'||\'\'\'Relaterade åtkomstlistgrupper:\'\'\'||
-||[[NewPage(HomepageReadWritePageTemplate,läs- och skrivbar sida,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
-||[[NewPage(HomepageReadPageTemplate,endast läsbar sida,%(username)s)]]||["%(username)s/ReadGroup"]||
-||[[NewPage(HomepagePrivatePageTemplate,privat sida,%(username)s)]]||%(username)s only||
-
-''',
-'''MyPages management''':
-'''Hantering av MinaSidor''',
-'''Invalid filename "%s"!''':
-'''Ogiltigt filnamn "%s"!''',
-'''Created the package %s containing the pages %s.''':
-'''Skapade paketet %s som innehåller sidorna %s.''',
-'''Package pages''':
-'''Paketsidor''',
-'''Package name''':
-'''Paketnamn''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Lista på sidnamn - separerade med <tt>,</tt>''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Du har inte tillålse att radera sidor i den här wikin!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Var god använd det interaktiva användargränsnittet för att byta namn på sidor!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s.''',
-'''Rename Page''':
-'''Byt namn på sida''',
-'''New name''':
-'''Nytt namn''',
-'''Optional reason for the renaming''':
-'''Skäl till namnbyte (ej obligatoriskt)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'En sida med namnet {{{\'%s\'}}} existerar redan.\'\'\'
-
-Pröva ett annat namn.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(inklusive %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Följande %(badwords)d ord kunde inte hittas i ordlistan av %(totalwords)d antal ord  s%(localwords)s och de är markerade här under:''',
-'''Add checked words to dictionary''':
-'''Addera förkryssade ord till ordlistan''',
-'''No spelling errors found!''':
-'''Inga felstavningar funna!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Du kan inte stavningskontrollera en sida som du inte kan läsa.''',
-'''Subscribe users to the page %s''':
-'''Teckna en prenumeration på sidan %s åt användarna''',
-'''Subscribed for %s:''':
-'''Prenumererar på %s:''',
-'''Not a user:''':
-'''Inte en användare:''',
-'''You are not allowed to perform this action.''':
-'''Du har inte tillåtelse att utföra den här åtgärden.''',
-'''Title Search: "%s"''':
-'''Titelsökning: "%s"''',
-'''Full Text Search: "%s"''':
-'''Fulltextsökning: "%s"''',
-'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
-Files: %(filecount)d, Directories: %(dircount)d''':
-'''Säkerhetskopia återlagrad: %(filename)s till målkatalog: %(targetdir)s.
-Filer: %(filecount)d, Kataloger: %(dircount)d''',
-'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
-'''Återlagring av säkerhetskopia: %(filename)s till målkatalog: %(targetdir)s misslyckades.''',
-'''Wiki Backup / Restore''':
-'''Wiki säkerhetskopiering / återlagring''',
-'''Some hints:
- * To restore a backup:
-  * Restoring a backup will overwrite existing data, so be careful.
-  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
-  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
-
- * To make a backup, just hit the [[GetText(Backup)]] button and save the file
-   you get to a secure place.
-
-Please make sure your wiki configuration backup_* values are correct and complete.
-
-''':
-'''Några tips:
- * För att återlagra en säkerhetskopia:
-  * Att återlagra en säkerhetskopia kommer att skriva över existerande data så var försiktig.
-  * Byt namn på den till <sajtid>.tar.<kompression> (ta bort --date--time--UTC-grejerna).
-  * Lägg säkerhetskopian i backup_storage_dir (använd scp, ftp, ...).
-  * Tryck på [[GetText(Restore)]]-knappen nedan.
-
- * För att göra en backup tryck på [[GetText(Backup)]]-knappen och spara filen på ett säkert ställe.
-
-Se till att din wikikonfigurations backup_*-värden är korrekta och kompletta.
-
-''',
-'''Backup''':
-'''Säkerhetskopiera''',
-'''Restore''':
-'''Återställ''',
-'''You are not allowed to do remote backup.''':
-'''Du har inte tillåtelse att göra fjärrbackup.''',
-'''Unknown backup subaction: %s.''':
-'''Okänd backup-underåtgärd: %s.''',
-'''Full Link List for "%s"''':
-'''Full länklista för "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Okänt användarnamn: {{{"%s"}}}. Var god ange användarnamn och lösenord.''',
-'''Missing password. Please enter user name and password.''':
-'''Lösenord saknas. Var god ange användarnamn och lösenord.''',
-'''Sorry, wrong password.''':
-'''Tyvärr, fel lösenord.''',
-'''You are now logged out.''':
-'''Du är nu utloggad.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ladda upp ny bilaga "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -888,10 +888,56 @@ Se till att din wikikonfigurations backup_*-värden är korrekta och kompletta.
 '''Skapa ny teckning "%(filename)s"''',
 '''Toggle line numbers''':
 '''Slå av/på radnumrering''',
-'''Invalid include arguments "%s"!''':
-'''Felaktigt inkluderingsargument "%s"!''',
-'''Nothing found for "%s"!''':
-'''Inget hittat för "%s"!''',
+'''FrontPage''':
+'''StartSida''',
+'''RecentChanges''':
+'''SenasteÄndringar''',
+'''TitleIndex''':
+'''TitelRegister''',
+'''WordIndex''':
+'''OrdRegister''',
+'''FindPage''':
+'''SökSida''',
+'''SiteNavigation''':
+'''PlatsNavigering''',
+'''HelpContents''':
+'''HjälpInnehåll''',
+'''HelpOnFormatting''':
+'''HjälpMedFormatering''',
+'''UserPreferences''':
+'''AnvändarInställningar''',
+'''WikiLicense''':
+'''WikiLicens''',
+'''MissingPage''':
+'''SaknadSida''',
+'''MissingHomePage''':
+'''SaknadStartSida''',
+'''Mon''':
+'''mån''',
+'''Tue''':
+'''tis''',
+'''Wed''':
+'''ons''',
+'''Thu''':
+'''tor''',
+'''Fri''':
+'''fre''',
+'''Sat''':
+'''lör''',
+'''Sun''':
+'''sön''',
+'''AttachFile''':
+'''BifogaFil''',
+'''DeletePage''':
+'''RaderaSida''',
+'''LikePages''':
+'''LiknandeSidor''',
+'''LocalSiteMap''':
+'''LokalÖversiktsKarta''',
+'''RenamePage''':
+'''BytNamn''',
+'''SpellCheck''':
+'''StavningsKontroll''',
 '''Invalid MonthCalendar calparms "%s"!''':
 '''Ogiltiga MonthCalendar-calparms "%s"!''',
 '''Invalid MonthCalendar arguments "%s"!''':
@@ -930,14 +976,18 @@ Se till att din wikikonfigurations backup_*-värden är korrekta och kompletta.
 '''sätt bokmärke''',
 '''[Bookmark reached]''':
 '''[Bokmärke nått]''',
+'''No wanted pages in this wiki.''':
+'''Inga önskade sidor i den här wikin.''',
+'''Invalid include arguments "%s"!''':
+'''Felaktigt inkluderingsargument "%s"!''',
+'''Nothing found for "%s"!''':
+'''Inget hittat för "%s"!''',
 '''Markup''':
 '''Märkning''',
 '''Display''':
 '''Visa''',
 '''Filename''':
 '''Filnamn''',
-'''No wanted pages in this wiki.''':
-'''Inga önskade sidor i den här wikin.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Rendering av reStructured-text är inte möjlig, installera docutils först.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -1086,54 +1136,4 @@ röd=ändra''',
 '''Epost inte skickad''',
 '''Mail sent OK''':
 '''Epost skickad korrekt''',
-'''FrontPage''':
-'''StartSida''',
-'''RecentChanges''':
-'''SenasteÄndringar''',
-'''TitleIndex''':
-'''TitelRegister''',
-'''WordIndex''':
-'''OrdRegister''',
-'''FindPage''':
-'''SökSida''',
-'''SiteNavigation''':
-'''PlatsNavigering''',
-'''HelpContents''':
-'''HjälpInnehåll''',
-'''HelpOnFormatting''':
-'''HjälpMedFormatering''',
-'''UserPreferences''':
-'''AnvändarInställningar''',
-'''WikiLicense''':
-'''WikiLicens''',
-'''MissingPage''':
-'''SaknadSida''',
-'''MissingHomePage''':
-'''SaknadStartSida''',
-'''Mon''':
-'''mån''',
-'''Tue''':
-'''tis''',
-'''Wed''':
-'''ons''',
-'''Thu''':
-'''tor''',
-'''Fri''':
-'''fre''',
-'''Sat''':
-'''lör''',
-'''Sun''':
-'''sön''',
-'''AttachFile''':
-'''BifogaFil''',
-'''DeletePage''':
-'''RaderaSida''',
-'''LikePages''':
-'''LiknandeSidor''',
-'''LocalSiteMap''':
-'''LokalÖversiktsKarta''',
-'''RenamePage''':
-'''BytNamn''',
-'''SpellCheck''':
-'''StavningsKontroll''',
 }

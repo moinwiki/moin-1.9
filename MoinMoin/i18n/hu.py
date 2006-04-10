@@ -38,8 +38,6 @@ Ha más lapon is kívánja használni az űrlapot illessze be ezt a makrót:
 '''A lap nem szerkeszthető!''',
 '''Cannot edit old revisions!''':
 '''A régi módosításokat nem lehet szerkeszteni!''',
-'''Page name is too long, try shorter name.''':
-'''A lap neve től hosszú, kérjük adjon meg egy rövidebbet!''',
 '''Edit "%(pagename)s"''':
 '''A(z) "%(pagename)s" lap szerkesztése''',
 '''Preview of "%(pagename)s"''':
@@ -87,6 +85,166 @@ Ha nem ezt kívánja, akkor a \'\'\'%(cancel_button_text)s\'\'\' gombot nyomja m
 '''Lényegtelen változtatás''',
 '''Remove trailing whitespace from each line''':
 '''A sorvégi szóközök eltávolítása''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Érvénytelen felhasználói név: {{{\'%s\'}}}.
+A névben bármilyen Unicode alfanumerikus karakter szerepelhet, opcionálisan
+egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlapok neve.''',
+'''You are not allowed to do %s on this page.''':
+'''A(z) %s műveletet nem hajthatja végre ezen a lapon.''',
+'''Login''':
+'''Belépés''',
+''' %s and try again.''':
+''' %s, majd próbálja újra.''',
+'''%.2f seconds''':
+'''%.2f s''',
+'''match''':
+'''találat''',
+'''matches''':
+'''találatok''',
+'''<unknown>''':
+'''<ismeretlen>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Valaki kérte, hogy küldjük el az Ön felhasználói adatait erre a címre.
+
+Ha elvesztette a jelszavát kérjük az alábbiakban megadott jelszót írja be PONTOSAN
+a jelszó-mezőbe (legcélszerűbb ha bemásolja).
+
+Miután sikeresen belépett kérjük írja át a jelszót!
+''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
+'''Please provide a valid email address!''':
+'''Kérjük, hogy érvényes levélcímet adjon meg!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
+'''Empty user name. Please enter a user name.''':
+'''Üres felhasználónév. Kérjük adja meg a felhasználónevet.''',
+'''This user name already belongs to somebody else.''':
+'''Ez a felhasználónév már foglalt.''',
+'''Passwords don\'t match!''':
+'''A jelszavak nem egyeznek!''',
+'''Please specify a password!''':
+'''Kérjük adja meg a jelszót!''',
+'''This email already belongs to somebody else.''':
+'''Ezt a levélcímet már más bejegyezte.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''A(z) \'%(theme_name)s\' nevű témát nem lehet betölteni!''',
+'''User preferences saved!''':
+'''A felhasználói beállításokat elmentettük!''',
+'''Default''':
+'''Alapértelmezés''',
+'''<Browser setting>''':
+'''<Böngésző beállításai>''',
+'''Save''':
+'''Mentés''',
+'''Preferred theme''':
+'''Kedvenc téma''',
+'''Time zone''':
+'''Időzóna''',
+'''Your time is''':
+'''Az Ön ideje''',
+'''Server time is''':
+'''A kiszolgáló ideje''',
+'''Date format''':
+'''Dátumformátum''',
+'''Preferred language''':
+'''Kedvenc nyelv''',
+'''General options''':
+'''Általános opciók''',
+'''Quick links''':
+'''Gyorskapcsok (-linkek)''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Ez a lista csak akkor működik, ha megadta a levélcímét!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Az előfizetett wiki-lapok (soronként egy reguláris kifejezés)''',
+'''Create Profile''':
+'''Profil létrehozása''',
+'''Mail me my account data''':
+'''Kérem a felhasználói adataim elküldését levélben''',
+'''Email''':
+'''E-levél''',
+'''Name''':
+'''Név''',
+'''Password''':
+'''Jelszó''',
+'''Action''':
+'''Művelet''',
+'''Required attribute "%(attrname)s" missing''':
+'''A(z) "%(attrname)s" kötelező attribútum hiányzik''',
+'''Submitted form data:''':
+'''Az elküldött űrlap adatai:''',
+'''Search Titles''':
+'''Címkeresés''',
+'''Display context of search results''':
+'''A keresések környezetének megjelenítése''',
+'''Case-sensitive searching''':
+'''Keresésnél a kis/nagybetű számít''',
+'''Search Text''':
+'''Szövegkeresés''',
+'''Go To Page''':
+'''Ugrás a laphoz''',
+'''Include system pages''':
+'''A rendszerlapok szerepeljenek''',
+'''Exclude system pages''':
+'''A rendszerlapok ne szerepeljenek''',
+'''Plain title index''':
+'''Egyszerű címjegyzék''',
+'''XML title index''':
+'''XML-címjegyzék''',
+'''Python Version''':
+'''Python változat''',
+'''MoinMoin Version''':
+'''MoinMoin (MoinMoinLap) változat''',
+'''Release %s [Revision %s]''':
+'''%s kiadás [%s módosítás]''',
+'''4Suite Version''':
+'''4Suite változat''',
+'''Number of pages''':
+'''Lapok száma''',
+'''Number of system pages''':
+'''Rendszerlapok száma''',
+'''Accumulated page sizes''':
+'''Összesített lapméretek''',
+'''Entries in edit log''':
+'''Bejegyzések a szerkesztési naplóban''',
+'''NONE''':
+'''NINCS''',
+'''Global extension macros''':
+'''Globális kiterjesztőmakrók''',
+'''Local extension macros''':
+'''Lokális kiterjesztőmakrók''',
+'''Global extension actions''':
+'''Globális kiterjesztőműveletek''',
+'''Local extension actions''':
+'''Lokális kiterjesztőműveletek''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Telepített processzorok (ELAVULTAK -- használjon inkább pásztázókat)''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Kérjük a(z) {{{"%s"}}} helyett használjon szelektívebb kifejezést!''',
+'''ERROR in regex \'%s\'''':
+'''HIBA a(z) \'%s\' reguláris kifejezésben''',
+'''Bad timestamp \'%s\'''':
+'''Rossz időbélyeg: \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''A(z) "%(token)s" után "=" kell''',
+'''Expected a value for key "%(token)s"''':
+'''A(z) "%(token)s" értéke hiányzik''',
+'''Wiki Markup''':
+'''Wiki-jelölés''',
+'''Print View''':
+'''Nyomtatási nézet''',
+'''Page name is too long, try shorter name.''':
+'''A lap neve től hosszú, kérjük adjon meg egy rövidebbet!''',
 '''Edit was cancelled.''':
 '''A szerkesztés visszavonva.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -178,8 +336,6 @@ to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
 '''Ezt a lapot %(owner)s %(timestamp)s-kor nyitotta meg vagy ekkor választotta ki a Nézetet utoljára.[[BR]]
 \'\'\'Ha el szeretné kerülni a szerkesztői ütközéseket \'\'ne szerkessze\'\' ezt az oldalt legalább még %(mins_valid)d percig!\'\'\'A szerkesztő elhagyásához nyomja meg a Visszavonás gombot.''',
-'''<unknown>''':
-'''<ismeretlen>''',
 '''Diffs''':
 '''Különbségek''',
 '''Info''':
@@ -220,108 +376,16 @@ To leave the editor, press the Cancel button.''':
 '''Előfizetés a lényegtelen változásokra''',
 '''Disable this account forever''':
 '''Tiltsuk le ezt a felhasználói azonosítót örökre''',
-'''Name''':
-'''Név''',
-'''Password''':
-'''Jelszó''',
 '''Password repeat''':
 '''Jelszó mégegyszer''',
 '''(Only when changing passwords)''':
 '''(Csak jelszóváltoztatásnál)''',
-'''Email''':
-'''E-levél''',
 '''User CSS URL''':
 '''A felhasználói CSS URL-je''',
 '''(Leave it empty for disabling user CSS)''':
 '''(A felhasználói CSS letiltásához hagyja üresen)''',
 '''Editor size''':
 '''Szerkesztő mérete''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Érvénytelen felhasználói név: {{{\'%s\'}}}.
-A névben bármilyen Unicode alfanumerikus karakter szerepelhet, opcionálisan
-egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlapok neve.''',
-'''You are not allowed to do %s on this page.''':
-'''A(z) %s műveletet nem hajthatja végre ezen a lapon.''',
-'''Login''':
-'''Belépés''',
-''' %s and try again.''':
-''' %s, majd próbálja újra.''',
-'''%.2f seconds''':
-'''%.2f s''',
-'''match''':
-'''találat''',
-'''matches''':
-'''találatok''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Valaki kérte, hogy küldjük el az Ön felhasználói adatait erre a címre.
-
-Ha elvesztette a jelszavát kérjük az alábbiakban megadott jelszót írja be PONTOSAN
-a jelszó-mezőbe (legcélszerűbb ha bemásolja).
-
-Miután sikeresen belépett kérjük írja át a jelszót!
-''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''A levélküldés nincs beállítva ebben a wikiben. Kérjük lépjen kapcsolatba a wiki rendszergazdájával, aki engedélyezheti a levélküldést!''',
-'''Please provide a valid email address!''':
-'''Kérjük, hogy érvényes levélcímet adjon meg!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nem találtunk a megadott \'%(email)s\' címhez felhasználói azonosítót!''',
-'''Empty user name. Please enter a user name.''':
-'''Üres felhasználónév. Kérjük adja meg a felhasználónevet.''',
-'''This user name already belongs to somebody else.''':
-'''Ez a felhasználónév már foglalt.''',
-'''Passwords don\'t match!''':
-'''A jelszavak nem egyeznek!''',
-'''Please specify a password!''':
-'''Kérjük adja meg a jelszót!''',
-'''This email already belongs to somebody else.''':
-'''Ezt a levélcímet már más bejegyezte.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''A(z) \'%(theme_name)s\' nevű témát nem lehet betölteni!''',
-'''User preferences saved!''':
-'''A felhasználói beállításokat elmentettük!''',
-'''Default''':
-'''Alapértelmezés''',
-'''<Browser setting>''':
-'''<Böngésző beállításai>''',
-'''Save''':
-'''Mentés''',
-'''Preferred theme''':
-'''Kedvenc téma''',
-'''Time zone''':
-'''Időzóna''',
-'''Your time is''':
-'''Az Ön ideje''',
-'''Server time is''':
-'''A kiszolgáló ideje''',
-'''Date format''':
-'''Dátumformátum''',
-'''Preferred language''':
-'''Kedvenc nyelv''',
-'''General options''':
-'''Általános opciók''',
-'''Quick links''':
-'''Gyorskapcsok (-linkek)''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Ez a lista csak akkor működik, ha megadta a levélcímét!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Az előfizetett wiki-lapok (soronként egy reguláris kifejezés)''',
-'''Create Profile''':
-'''Profil létrehozása''',
-'''Mail me my account data''':
-'''Kérem a felhasználói adataim elküldését levélben''',
-'''Action''':
-'''Művelet''',
 '''No older revisions available!''':
 '''Nincsenek régebbi módosítások!''',
 '''Diff for "%s"''':
@@ -406,66 +470,72 @@ Contact the owner of the wiki, who can enable email.''':
 '''Meg kell adnia a diagram típusát!''',
 '''Bad chart type "%s"!''':
 '''Hibás diagramtípus: "%s"''',
-'''Search Titles''':
-'''Címkeresés''',
-'''Display context of search results''':
-'''A keresések környezetének megjelenítése''',
-'''Case-sensitive searching''':
-'''Keresésnél a kis/nagybetű számít''',
-'''Search Text''':
-'''Szövegkeresés''',
-'''Go To Page''':
-'''Ugrás a laphoz''',
-'''Include system pages''':
-'''A rendszerlapok szerepeljenek''',
-'''Exclude system pages''':
-'''A rendszerlapok ne szerepeljenek''',
-'''Plain title index''':
-'''Egyszerű címjegyzék''',
-'''XML title index''':
-'''XML-címjegyzék''',
-'''Python Version''':
-'''Python változat''',
-'''MoinMoin Version''':
-'''MoinMoin (MoinMoinLap) változat''',
-'''Release %s [Revision %s]''':
-'''%s kiadás [%s módosítás]''',
-'''4Suite Version''':
-'''4Suite változat''',
-'''Number of pages''':
-'''Lapok száma''',
-'''Number of system pages''':
-'''Rendszerlapok száma''',
-'''Accumulated page sizes''':
-'''Összesített lapméretek''',
-'''Entries in edit log''':
-'''Bejegyzések a szerkesztési naplóban''',
-'''NONE''':
-'''NINCS''',
-'''Global extension macros''':
-'''Globális kiterjesztőmakrók''',
-'''Local extension macros''':
-'''Lokális kiterjesztőmakrók''',
-'''Global extension actions''':
-'''Globális kiterjesztőműveletek''',
-'''Local extension actions''':
-'''Lokális kiterjesztőműveletek''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Telepített processzorok (ELAVULTAK -- használjon inkább pásztázókat)''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Kérjük a(z) {{{"%s"}}} helyett használjon szelektívebb kifejezést!''',
-'''ERROR in regex \'%s\'''':
-'''HIBA a(z) \'%s\' reguláris kifejezésben''',
-'''Bad timestamp \'%s\'''':
-'''Rossz időbélyeg: \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''A(z) "%(token)s" után "=" kell''',
-'''Expected a value for key "%(token)s"''':
-'''A(z) "%(token)s" értéke hiányzik''',
-'''Wiki Markup''':
-'''Wiki-jelölés''',
-'''Print View''':
-'''Nyomtatási nézet''',
+'''This page is already deleted or was never created!''':
+'''Ezt a lapot már törölték, vagy soha nem is hozták létre!''',
+'''No pages like "%s"!''':
+'''A(z) "%s" laphoz nincs hasonló!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''A(z) \'%(target)s\' (a távoli neve \'%(filename)s\') melléklet már létezik.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
+'''Missing password. Please enter user name and password.''':
+'''Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót.''',
+'''Sorry, wrong password.''':
+'''Sajnos rossz a jelszó.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Pontosan egy hasonló lap van a(z) "%s" laphoz, átirányítva oda.''',
+'''Pages like "%s"''':
+'''A(z) "%s" laphoz hasonlóak''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s a(z) "%(title)s" mintához''',
+'''Local Site Map for "%s"''':
+'''Helyi térkép a(z) "%s" laphoz''',
+'''You are not allowed to rename pages in this wiki!''':
+'''A lapok átnevezése nem engedélyezett!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Kérjük a lap átnevezéséhez az interaktív felületet használja!''',
+'''Could not rename page because of file system error: %s.''':
+'''Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés.''',
+'''Rename Page''':
+'''Lap átnevezése''',
+'''New name''':
+'''Új név''',
+'''Optional reason for the renaming''':
+'''Az átnevezés indoka (nem kötelező kitölteni)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''A(z) {{{\'%s\'}}} nevű lap már létezik!
+
+Próbáljon más nevet adni a lapnak.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(beleértve %(localwords)d szót a(z) %(pagelink)s lapról)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''A következő %(badwords)d szót nem lehet megtalálni a(z) %(totalwords)d szót tartalmazó szótárból%(localwords)s. Ezek a szavak kiemelve szerepelnek a lapon:''',
+'''Add checked words to dictionary''':
+'''A bejelölt szavak hozzáadása a szótárhoz''',
+'''No spelling errors found!''':
+'''Nem találtunk helyesírási hibát.''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Nem ellenőrizheti a helyesírást olyan lapon, amelyet nem olvashat.''',
+'''Title Search: "%s"''':
+'''Címkeresés, minta: "%s"''',
+'''Full Text Search: "%s"''':
+'''Keresés a teljes szövegben, minta: "%s"''',
+'''Full Link List for "%s"''':
+'''Teljes kapocslista (link-lista), minta: "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!''',
+'''You are not allowed to delete this page.''':
+'''A lap törlése nem engedélyezett.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Kérjük a lap törléséhez az interaktív felületet használja!''',
+'''Really delete this page?''':
+'''Törölni kívánja ezt a lapot?''',
+'''Delete''':
+'''Törlés''',
+'''Optional reason for the deletion''':
+'''A törlés indoka (nem kötelező kitölteni)''',
 '''[%d attachments]''':
 '''[%d melléklet]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -518,8 +588,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Nem támogatott föltöltési művelet: %s''',
 '''Attachments for "%(pagename)s"''':
 '''A(z) "%(pagename)s" lap mellékletei''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''A(z) \'%(target)s\' (a távoli neve \'%(filename)s\') melléklet már létezik.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''A(z) \'%(target)s\' (a távoli neve \'%(filename)s\') melléklet elmentve, hossza %(bytes)d byte''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -530,80 +598,60 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Ismeretlen állománytípus: nem lehet beágyazva megjeleníteni.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''A(z) %(pagename)s lap melléklete: [[Verbatim(attachment:)]]%(filename)s''',
-'''You are not allowed to delete this page.''':
-'''A lap törlése nem engedélyezett.''',
-'''This page is already deleted or was never created!''':
-'''Ezt a lapot már törölték, vagy soha nem is hozták létre!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Kérjük a lap törléséhez az interaktív felületet használja!''',
-'''Really delete this page?''':
-'''Törölni kívánja ezt a lapot?''',
-'''Delete''':
-'''Törlés''',
-'''Optional reason for the deletion''':
-'''A törlés indoka (nem kötelező kitölteni)''',
-'''No pages like "%s"!''':
-'''A(z) "%s" laphoz nincs hasonló!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Pontosan egy hasonló lap van a(z) "%s" laphoz, átirányítva oda.''',
-'''Pages like "%s"''':
-'''A(z) "%s" laphoz hasonlóak''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s a(z) "%(title)s" mintához''',
-'''Local Site Map for "%s"''':
-'''Helyi térkép a(z) "%s" laphoz''',
-'''You are not allowed to rename pages in this wiki!''':
-'''A lapok átnevezése nem engedélyezett!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Kérjük a lap átnevezéséhez az interaktív felületet használja!''',
-'''Could not rename page because of file system error: %s.''':
-'''Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés.''',
-'''Rename Page''':
-'''Lap átnevezése''',
-'''New name''':
-'''Új név''',
-'''Optional reason for the renaming''':
-'''Az átnevezés indoka (nem kötelező kitölteni)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''A(z) {{{\'%s\'}}} nevű lap már létezik!
-
-Próbáljon más nevet adni a lapnak.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(beleértve %(localwords)d szót a(z) %(pagelink)s lapról)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''A következő %(badwords)d szót nem lehet megtalálni a(z) %(totalwords)d szót tartalmazó szótárból%(localwords)s. Ezek a szavak kiemelve szerepelnek a lapon:''',
-'''Add checked words to dictionary''':
-'''A bejelölt szavak hozzáadása a szótárhoz''',
-'''No spelling errors found!''':
-'''Nem találtunk helyesírási hibát.''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Nem ellenőrizheti a helyesírást olyan lapon, amelyet nem olvashat.''',
-'''Title Search: "%s"''':
-'''Címkeresés, minta: "%s"''',
-'''Full Text Search: "%s"''':
-'''Keresés a teljes szövegben, minta: "%s"''',
-'''Full Link List for "%s"''':
-'''Teljes kapocslista (link-lista), minta: "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Ismeretlen felhasználónév: {{{"%s"}}}. Kérjük adja meg a felhasználónevet és a jelszót.''',
-'''Missing password. Please enter user name and password.''':
-'''Hiányzik a jelszó. Kérjük adja meg a felhasználónevet és a jelszót.''',
-'''Sorry, wrong password.''':
-'''Sajnos rossz a jelszó.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!''',
 '''Upload new attachment "%(filename)s"''':
 '''A(z) "%(filename)s" melléklet feltöltése''',
 '''Create new drawing "%(filename)s"''':
 '''"%(filename)s" nevű új rajz készítése''',
 '''Edit drawing %(filename)s''':
 '''A(z) %(filename)s nevű rajz szerkesztése''',
-'''Invalid include arguments "%s"!''':
-'''Érvénytelen include-paraméter: "%s"''',
-'''Nothing found for "%s"!''':
-'''Nincs találat a(z) "%s" mintához!''',
+'''FrontPage''':
+'''KezdőLap''',
+'''RecentChanges''':
+'''ÚjabbVáltozások''',
+'''TitleIndex''':
+'''CímJegyzék''',
+'''WordIndex''':
+'''SzóJegyzék''',
+'''FindPage''':
+'''KeresőLap''',
+'''SiteNavigation''':
+'''HelyiNavigáció''',
+'''HelpContents''':
+'''SegédletTartalomjegyzék''',
+'''HelpOnFormatting''':
+'''FormázásiSegédlet''',
+'''UserPreferences''':
+'''FelhasználóiBeállítások''',
+'''WikiLicense''':
+'''WikiEngedélyek''',
+'''MissingPage''':
+'''HiányzóLap''',
+'''Mon''':
+'''Hétfő''',
+'''Tue''':
+'''Kedd''',
+'''Wed''':
+'''Szerda''',
+'''Thu''':
+'''Csütörtök''',
+'''Fri''':
+'''Péntek''',
+'''Sat''':
+'''Szombat''',
+'''Sun''':
+'''Vasárnap''',
+'''AttachFile''':
+'''ÁllományCsatolás''',
+'''DeletePage''':
+'''LapTörlés''',
+'''LikePages''':
+'''HasonlóLapok''',
+'''LocalSiteMap''':
+'''HelyiLaptérkép''',
+'''RenamePage''':
+'''LapÁtnevezés''',
+'''SpellCheck''':
+'''HelyesírásEllenőrzés''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''A(z) \'%(scheme)s\' navigációs sémához nincs támogatás!''',
 '''No parent page found!''':
@@ -636,14 +684,18 @@ Próbáljon más nevet adni a lapnak.''',
 '''könyvjelző hozzáadása''',
 '''[Bookmark reached]''':
 '''[Könyvjelző]''',
+'''No wanted pages in this wiki.''':
+'''Ebben a wikiben nincsenek kívánt lapok.''',
+'''Invalid include arguments "%s"!''':
+'''Érvénytelen include-paraméter: "%s"''',
+'''Nothing found for "%s"!''':
+'''Nincs találat a(z) "%s" mintához!''',
 '''Markup''':
 '''Jelölés''',
 '''Display''':
 '''Megjelenítés''',
 '''Filename''':
 '''Állománynév''',
-'''No wanted pages in this wiki.''':
-'''Ebben a wikiben nincsenek kívánt lapok.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''Az beágyazott dokumentumok (include-ok) száma több, mint amennyi engedélyezett**''',
 '''**Could not find the referenced page: %s**''':
@@ -756,52 +808,4 @@ piros=szerkesztés''',
 '''A(z) \'%(server)s\' levelező-kiszolgálóhoz nem sikerült kapcsolódni, ok: %(reason)s''',
 '''Mail sent OK''':
 '''A levelet sikerült elküldeni.''',
-'''FrontPage''':
-'''KezdőLap''',
-'''RecentChanges''':
-'''ÚjabbVáltozások''',
-'''TitleIndex''':
-'''CímJegyzék''',
-'''WordIndex''':
-'''SzóJegyzék''',
-'''FindPage''':
-'''KeresőLap''',
-'''SiteNavigation''':
-'''HelyiNavigáció''',
-'''HelpContents''':
-'''SegédletTartalomjegyzék''',
-'''HelpOnFormatting''':
-'''FormázásiSegédlet''',
-'''UserPreferences''':
-'''FelhasználóiBeállítások''',
-'''WikiLicense''':
-'''WikiEngedélyek''',
-'''MissingPage''':
-'''HiányzóLap''',
-'''Mon''':
-'''Hétfő''',
-'''Tue''':
-'''Kedd''',
-'''Wed''':
-'''Szerda''',
-'''Thu''':
-'''Csütörtök''',
-'''Fri''':
-'''Péntek''',
-'''Sat''':
-'''Szombat''',
-'''Sun''':
-'''Vasárnap''',
-'''AttachFile''':
-'''ÁllományCsatolás''',
-'''DeletePage''':
-'''LapTörlés''',
-'''LikePages''':
-'''HasonlóLapok''',
-'''LocalSiteMap''':
-'''HelyiLaptérkép''',
-'''RenamePage''':
-'''LapÁtnevezés''',
-'''SpellCheck''':
-'''HelyesírásEllenőrzés''',
 }

@@ -32,8 +32,6 @@ Za uporabo tega obrazca nad neko drugo stranjo je treba dodati makro klic
 '''Tvori novo stran''',
 '''You are not allowed to view this page.''':
 '''Ogled te strani vam ni dovoljen.''',
-'''Your changes are not saved!''':
-'''Spremembe niso shranjene!''',
 '''You are not allowed to edit this page.''':
 '''Te strani vam ni dovoljeno spreminjati.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ Za uporabo tega obrazca nad neko drugo stranjo je treba dodati makro klic
 '''Starih različic ni mogoče spreminjati!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Zaseženost strani je potekla, možni so neusklajeni popravki!''',
-'''Page name is too long, try shorter name.''':
-'''Ime strani je predolgo, uporabite krajše ime.''',
 '''Edit "%(pagename)s"''':
 '''Spremeni stran "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Če vam to ne ustreza, lahko s preklicem \'\'\'%(cancel_button_text)s\'\'\' umaknete/uničite svoje spremembe.''',
 '''Preview''':
 '''Predogled''',
-'''GUI Mode''':
-'''Urejanje s sprotnim prikazom (GUI)''',
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
@@ -96,186 +90,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Neznatna sprememba''',
 '''Remove trailing whitespace from each line''':
 '''Odstrani presledke s koncev vrstic''',
-'''Edit was cancelled.''':
-'''Spremembe preklicane.''',
-'''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Hvala za popravke, cenimo vašo natančnost.''',
-'''Page "%s" was successfully deleted!''':
-'''Stran "%s" je bila uspešno izbrisana!''',
-'''Dear Wiki user,
-
-You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
-
-The following page has been changed by %(editor)s:
-%(pagelink)s
-
-''':
-'''Dragi uporabnik vikija,
-
-Naročeni ste na obvestila o spremembah viki strani ali viki kategorije na strežniku "%(sitename)s".
-
-Stran %(pagelink)s je spremenil %(editor)s:
-
-''',
-'''The comment on the change is:
-%(comment)s
-
-''':
-'''Opomba ob spremembi je:
-%(comment)s
-
-''',
-'''New page:
-''':
-'''Nova stran:
-''',
-'''No differences found!
-''':
-'''Ni razlik!
-''',
-'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
-'''[%(sitename)s] %(trivial)ssprememba na "%(pagename)s", spremenil: %(username)s''',
-'''Trivial ''':
-'''Neznatna ''',
-'''Status of sending notification mails:''':
-'''Uspeh pošiljanja obvestil:''',
-'''[%(lang)s] %(recipients)s: %(status)s''':
-'''[%(lang)s] %(recipients)s: %(status)s''',
-'''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## varnostna kopija strani "%(pagename)s" zahtevana ob %(date)s''',
-'''Page could not get locked. Unexpected error (errno=%d).''':
-'''Strani ni bilo možno zaseči. Nepričakovana napaka (errno=%d).''',
-'''Page could not get locked. Missing \'current\' file?''':
-'''Strani ni bilo možno zaseči. Morda manjka datoteka \'current\'?''',
-'''You are not allowed to edit this page!''':
-'''Te strani vam ni dovoljeno spreminjati!''',
-'''You cannot save empty pages.''':
-'''Prazne strani ni dovoljeno shraniti!''',
-'''You already saved this page!''':
-'''To stran ste že prej shranili!''',
-'''Sorry, someone else saved the page while you edited it.
-
-Please do the following: Use the back button of your browser, and cut&paste
-your changes from there. Then go forward to here, and click EditText again.
-Now re-add your changes to the current page contents.
-
-\'\'Do not just replace
-the content editbox with your version of the page, because that would
-delete the changes of the other person, which is excessively rude!\'\'
-''':
-'''Žal je nekdo drug shranil to stran med vašim spreminjanjem.
-
-Takole lahko storite: s tipko "nazaj" v vašem bralniku se vrnite v urejevalnik in s "cut/paste" rešite vaše popravke.
-Nato se z "naprej" vrnite sem in ponovno izberite "Spreminjanje".
-Sedaj lahko svoje popravke ponovno vnesete v svežo različico dokumenta.
-
-\'\'Slepo prekriti tuje popravke z lastnimi brez premisleka bi bilo neotesano!\'\'
-''',
-'''A backup of your changes is [%(backup_url)s here].''':
-'''Tu je shranjena [%(backup_url)s kopija vaših sprememb].''',
-'''You did not change the page content, not saved!''':
-'''Vsebine niste spremenili, shranitev ni potrebna!''',
-'''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Seznama za nadzor dostopa (ACL) na tej strani ni mogoče spremeniti brez administratorjevih pravic!''',
-'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Uporabniku %(owner)s je potekla zaseženost/rezervacija strani pred %(mins_ago)d min., sedaj je stran dodeljena vam.''',
-'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''Drugim uporabnikom ne bo dovoljeno spreminjati te strani do %(bumptime)s.''',
-'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Do %(bumptime)s bodo ostali uporabniki opozorjeni, da spreminjate to stran.''',
-'''Use the Preview button to extend the locking period.''':
-'''Z ukazom za predogled lahko podaljšate trajanje zaseženosti strani.''',
-'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
-'''Ta stran je trenutno zaklenjena pred spreminjanjem, ker jo spreminja %(owner)s. Rezervacija velja do %(timestamp)s, to je nadaljnjih %(mins_valid)d minut.''',
-'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
-\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
-to avoid editing conflicts.\'\'\'[[BR]]
-To leave the editor, press the Cancel button.''':
-'''Ob %(timestamp)s je to stran vzel v delo %(owner)s (začetek spreminjanja ali zadnji predogled).[[BR]]
-\'\'\'Nadaljnjih %(mins_valid)d minut prosimo, da \'\'ne spreminjate\'\' te strani, da se izognete konfliktnim popravkom.\'\'\'[[BR]]
-Z ukazom "Preklic" lahko zapustite urejevalnik.''',
-'''<unknown>''':
-'''<neznano>''',
-''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
- Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
- Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
- Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
- Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
-
-(!) For more help, see HelpOnEditing or SyntaxReference.
-''':
-''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
- Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
- Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
- Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
- Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
-
-(!) Več o tem: HelpOnEditing, SyntaxReference.
-''',
-'''Diffs''':
-'''Razlike''',
-'''Info''':
-'''Pregled sprememb''',
-'''Edit''':
-'''Spremeni''',
-'''UnSubscribe''':
-'''Preklic naročenosti''',
-'''Subscribe''':
-'''Naroči se''',
-'''Raw''':
-'''Izvorno''',
-'''XML''':
-'''XML''',
-'''Print''':
-'''Tiskanje''',
-'''View''':
-'''Ogled''',
-'''Up''':
-'''Gor''',
-'''Publish my email (not my wiki homepage) in author info''':
-'''Objavi moj e-poštni naslov (ne domače strani) pri informacijah o avtorjih''',
-'''Open editor on double click''':
-'''Odpri urejevalnik ob dvokliku''',
-'''Jump to last visited page instead of frontpage''':
-'''Vstopi na zadnjo obiskano stran namesto na vstopno''',
-'''Show question mark for non-existing pagelinks''':
-'''Označi neobstoječe povezave z vprašajem''',
-'''Show page trail''':
-'''Prikazuj seznam zadnjih obiskanih strani''',
-'''Show icon toolbar''':
-'''V orodni vrstici prikazuj ikone''',
-'''Show top/bottom links in headings''':
-'''Naslovu dodaj povezavi na začetek in konec strani''',
-'''Show fancy diffs''':
-'''Prikazuj razlike z barvnimi označbami''',
-'''Add spaces to displayed wiki names''':
-'''Dodaj presledke v prikazana viki imena''',
-'''Remember login information''':
-'''Shrani podatke o prijavi''',
-'''Subscribe to trivial changes''':
-'''Naročilo na obvestila velja tudi za neznatne spremembe''',
-'''Disable this account forever''':
-'''Trajno ukini ta uporabniški račun''',
-'''Name''':
-'''Ime''',
-'''(Use Firstname\'\'\'\'\'\'Lastname)''':
-'''(običajno oblike Ime\'\'\'\'\'\'Priimek, z nekaj truda lahko: Ime Priimek)''',
-'''Alias-Name''':
-'''Psevdonim''',
-'''Password''':
-'''Geslo''',
-'''Password repeat''':
-'''Geslo (ponovno)''',
-'''(Only when changing passwords)''':
-'''(samo ob spremembi gesla)''',
-'''Email''':
-'''E-poštni naslov''',
-'''User CSS URL''':
-'''URL uporabnikovega CSS stila''',
-'''(Leave it empty for disabling user CSS)''':
-'''(prazno polje izklopi upor. CSS)''',
-'''Editor size''':
-'''Velikost področja za urejanje''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -296,6 +110,8 @@ z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso dovoljen
 '''zadetek''',
 '''matches''':
 '''zadetkov''',
+'''<unknown>''':
+'''<neznano>''',
 '''Login Name: %s
 
 Login Password: %s
@@ -397,10 +213,274 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Tvori profil''',
 '''Mail me my account data''':
 '''Pošlji mi podatke o tem uporabniškem računu''',
+'''Email''':
+'''E-poštni naslov''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
 '''Glej %(userprefslink)s za pridobitev novega uporabniškega računa ali za rešitev izgubljenega gesla.''',
+'''Name''':
+'''Ime''',
+'''Password''':
+'''Geslo''',
 '''Action''':
 '''Akcija''',
+'''Search Titles''':
+'''Iskanje po naslovih''',
+'''Display context of search results''':
+'''Prikaži kontekst rezultatov iskanja''',
+'''Case-sensitive searching''':
+'''Loči med velikimi in malimi črkami pri iskanju''',
+'''Search Text''':
+'''Iskanje po polnem besedilu''',
+'''Go To Page''':
+'''Pojdi na stran''',
+'''Include system pages''':
+'''Vključno s sistemskimi stranmi''',
+'''Exclude system pages''':
+'''Brez sistemskih strani''',
+'''Plain title index''':
+'''Kazalo naslovov v obliki navadnega besedila''',
+'''XML title index''':
+'''Kazalo naslovov v obliki XML''',
+'''Python Version''':
+'''Različica interpreterja Python''',
+'''MoinMoin Version''':
+'''Različica MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Različica %s [revizija: %s]''',
+'''4Suite Version''':
+'''Različica 4Suite''',
+'''Number of pages''':
+'''Število strani''',
+'''Number of system pages''':
+'''Število sistemskih strani''',
+'''Accumulated page sizes''':
+'''Skupna velikost strani''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''Zasedenost diska %(data_dir)s/strani/''',
+'''Disk usage of %(data_dir)s/''':
+'''Zasedenost diska %(data_dir)s/''',
+'''Entries in edit log''':
+'''Vpisov v dnevniku''',
+'''NONE''':
+'''-''',
+'''Global extension macros''':
+'''Globalni razširitveni makroji''',
+'''Local extension macros''':
+'''Lokalni razširitveni makroji''',
+'''Global extension actions''':
+'''Globalne razširitvene akcije''',
+'''Local extension actions''':
+'''Lokalne razširitvene akcije''',
+'''Global parsers''':
+'''Globalni sintaktični analizatorji (parserji)''',
+'''Local extension parsers''':
+'''Lokalni sintaktični analizatorji (parserji)''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)''',
+'''Disabled''':
+'''Izklopljeno''',
+'''Enabled''':
+'''Vklopljeno''',
+'''Lupy search''':
+'''Iskanje Lupy''',
+'''Active threads''':
+'''Aktivne niti''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Uporabite selektivnejše iskalno geslo namesto {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Napaka v regularnem izrazu \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Neveljavena navedba časa \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Atributu "%(token)s" mora slediti "="''',
+'''Expected a value for key "%(token)s"''':
+'''Atribut "%(token)s" mora imeti navedeno vrednost''',
+'''Wiki Markup''':
+'''Označevanje viki''',
+'''Print View''':
+'''Izgled za tiskanje''',
+'''Your changes are not saved!''':
+'''Spremembe niso shranjene!''',
+'''Page name is too long, try shorter name.''':
+'''Ime strani je predolgo, uporabite krajše ime.''',
+'''GUI Mode''':
+'''Urejanje s sprotnim prikazom (GUI)''',
+'''Edit was cancelled.''':
+'''Spremembe preklicane.''',
+'''Thank you for your changes. Your attention to detail is appreciated.''':
+'''Hvala za popravke, cenimo vašo natančnost.''',
+'''Page "%s" was successfully deleted!''':
+'''Stran "%s" je bila uspešno izbrisana!''',
+'''Dear Wiki user,
+
+You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
+
+The following page has been changed by %(editor)s:
+%(pagelink)s
+
+''':
+'''Dragi uporabnik vikija,
+
+Naročeni ste na obvestila o spremembah viki strani ali viki kategorije na strežniku "%(sitename)s".
+
+Stran %(pagelink)s je spremenil %(editor)s:
+
+''',
+'''The comment on the change is:
+%(comment)s
+
+''':
+'''Opomba ob spremembi je:
+%(comment)s
+
+''',
+'''New page:
+''':
+'''Nova stran:
+''',
+'''No differences found!
+''':
+'''Ni razlik!
+''',
+'''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
+'''[%(sitename)s] %(trivial)ssprememba na "%(pagename)s", spremenil: %(username)s''',
+'''Trivial ''':
+'''Neznatna ''',
+'''Status of sending notification mails:''':
+'''Uspeh pošiljanja obvestil:''',
+'''[%(lang)s] %(recipients)s: %(status)s''':
+'''[%(lang)s] %(recipients)s: %(status)s''',
+'''## backup of page "%(pagename)s" submitted %(date)s''':
+'''## varnostna kopija strani "%(pagename)s" zahtevana ob %(date)s''',
+'''Page could not get locked. Unexpected error (errno=%d).''':
+'''Strani ni bilo možno zaseči. Nepričakovana napaka (errno=%d).''',
+'''Page could not get locked. Missing \'current\' file?''':
+'''Strani ni bilo možno zaseči. Morda manjka datoteka \'current\'?''',
+'''You are not allowed to edit this page!''':
+'''Te strani vam ni dovoljeno spreminjati!''',
+'''You cannot save empty pages.''':
+'''Prazne strani ni dovoljeno shraniti!''',
+'''You already saved this page!''':
+'''To stran ste že prej shranili!''',
+'''Sorry, someone else saved the page while you edited it.
+
+Please do the following: Use the back button of your browser, and cut&paste
+your changes from there. Then go forward to here, and click EditText again.
+Now re-add your changes to the current page contents.
+
+\'\'Do not just replace
+the content editbox with your version of the page, because that would
+delete the changes of the other person, which is excessively rude!\'\'
+''':
+'''Žal je nekdo drug shranil to stran med vašim spreminjanjem.
+
+Takole lahko storite: s tipko "nazaj" v vašem bralniku se vrnite v urejevalnik in s "cut/paste" rešite vaše popravke.
+Nato se z "naprej" vrnite sem in ponovno izberite "Spreminjanje".
+Sedaj lahko svoje popravke ponovno vnesete v svežo različico dokumenta.
+
+\'\'Slepo prekriti tuje popravke z lastnimi brez premisleka bi bilo neotesano!\'\'
+''',
+'''A backup of your changes is [%(backup_url)s here].''':
+'''Tu je shranjena [%(backup_url)s kopija vaših sprememb].''',
+'''You did not change the page content, not saved!''':
+'''Vsebine niste spremenili, shranitev ni potrebna!''',
+'''You can\'t change ACLs on this page since you have no admin rights on it!''':
+'''Seznama za nadzor dostopa (ACL) na tej strani ni mogoče spremeniti brez administratorjevih pravic!''',
+'''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
+'''Uporabniku %(owner)s je potekla zaseženost/rezervacija strani pred %(mins_ago)d min., sedaj je stran dodeljena vam.''',
+'''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
+'''Drugim uporabnikom ne bo dovoljeno spreminjati te strani do %(bumptime)s.''',
+'''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
+'''Do %(bumptime)s bodo ostali uporabniki opozorjeni, da spreminjate to stran.''',
+'''Use the Preview button to extend the locking period.''':
+'''Z ukazom za predogled lahko podaljšate trajanje zaseženosti strani.''',
+'''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
+'''Ta stran je trenutno zaklenjena pred spreminjanjem, ker jo spreminja %(owner)s. Rezervacija velja do %(timestamp)s, to je nadaljnjih %(mins_valid)d minut.''',
+'''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
+\'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
+to avoid editing conflicts.\'\'\'[[BR]]
+To leave the editor, press the Cancel button.''':
+'''Ob %(timestamp)s je to stran vzel v delo %(owner)s (začetek spreminjanja ali zadnji predogled).[[BR]]
+\'\'\'Nadaljnjih %(mins_valid)d minut prosimo, da \'\'ne spreminjate\'\' te strani, da se izognete konfliktnim popravkom.\'\'\'[[BR]]
+Z ukazom "Preklic" lahko zapustite urejevalnik.''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Namestitev datoteke \'%(filename)s\' ni uspela.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Datoteka %s ne vsebuje MoinMoin paketa.''',
+''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
+ Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
+ Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
+ Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim(["brackets and double quotes"])]]; url; [url]; [url label].
+ Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing white space allowed after tables or titles.
+
+(!) For more help, see HelpOnEditing or SyntaxReference.
+''':
+''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
+ Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
+ Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
+ Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
+ Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
+
+(!) Več o tem: HelpOnEditing, SyntaxReference.
+''',
+'''Diffs''':
+'''Razlike''',
+'''Info''':
+'''Pregled sprememb''',
+'''Edit''':
+'''Spremeni''',
+'''UnSubscribe''':
+'''Preklic naročenosti''',
+'''Subscribe''':
+'''Naroči se''',
+'''Raw''':
+'''Izvorno''',
+'''XML''':
+'''XML''',
+'''Print''':
+'''Tiskanje''',
+'''View''':
+'''Ogled''',
+'''Up''':
+'''Gor''',
+'''Publish my email (not my wiki homepage) in author info''':
+'''Objavi moj e-poštni naslov (ne domače strani) pri informacijah o avtorjih''',
+'''Open editor on double click''':
+'''Odpri urejevalnik ob dvokliku''',
+'''Jump to last visited page instead of frontpage''':
+'''Vstopi na zadnjo obiskano stran namesto na vstopno''',
+'''Show question mark for non-existing pagelinks''':
+'''Označi neobstoječe povezave z vprašajem''',
+'''Show page trail''':
+'''Prikazuj seznam zadnjih obiskanih strani''',
+'''Show icon toolbar''':
+'''V orodni vrstici prikazuj ikone''',
+'''Show top/bottom links in headings''':
+'''Naslovu dodaj povezavi na začetek in konec strani''',
+'''Show fancy diffs''':
+'''Prikazuj razlike z barvnimi označbami''',
+'''Add spaces to displayed wiki names''':
+'''Dodaj presledke v prikazana viki imena''',
+'''Remember login information''':
+'''Shrani podatke o prijavi''',
+'''Subscribe to trivial changes''':
+'''Naročilo na obvestila velja tudi za neznatne spremembe''',
+'''Disable this account forever''':
+'''Trajno ukini ta uporabniški račun''',
+'''(Use Firstname\'\'\'\'\'\'Lastname)''':
+'''(običajno oblike Ime\'\'\'\'\'\'Priimek, z nekaj truda lahko: Ime Priimek)''',
+'''Alias-Name''':
+'''Psevdonim''',
+'''Password repeat''':
+'''Geslo (ponovno)''',
+'''(Only when changing passwords)''':
+'''(samo ob spremembi gesla)''',
+'''User CSS URL''':
+'''URL uporabnikovega CSS stila''',
+'''(Leave it empty for disabling user CSS)''':
+'''(prazno polje izklopi upor. CSS)''',
+'''Editor size''':
+'''Velikost področja za urejanje''',
 '''No older revisions available!''':
 '''Ta stran nima starejših različic!''',
 '''Diff for "%s"''':
@@ -499,82 +579,73 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Treba je navesti tip diagramov!''',
 '''Bad chart type "%s"!''':
 '''Napačen ali neznan tip diagramov "%s"!''',
-'''Search Titles''':
-'''Iskanje po naslovih''',
-'''Display context of search results''':
-'''Prikaži kontekst rezultatov iskanja''',
-'''Case-sensitive searching''':
-'''Loči med velikimi in malimi črkami pri iskanju''',
-'''Search Text''':
-'''Iskanje po polnem besedilu''',
-'''Go To Page''':
-'''Pojdi na stran''',
-'''Include system pages''':
-'''Vključno s sistemskimi stranmi''',
-'''Exclude system pages''':
-'''Brez sistemskih strani''',
-'''Plain title index''':
-'''Kazalo naslovov v obliki navadnega besedila''',
-'''XML title index''':
-'''Kazalo naslovov v obliki XML''',
-'''Python Version''':
-'''Različica interpreterja Python''',
-'''MoinMoin Version''':
-'''Različica MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Različica %s [revizija: %s]''',
-'''4Suite Version''':
-'''Različica 4Suite''',
-'''Number of pages''':
-'''Število strani''',
-'''Number of system pages''':
-'''Število sistemskih strani''',
-'''Accumulated page sizes''':
-'''Skupna velikost strani''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''Zasedenost diska %(data_dir)s/strani/''',
-'''Disk usage of %(data_dir)s/''':
-'''Zasedenost diska %(data_dir)s/''',
-'''Entries in edit log''':
-'''Vpisov v dnevniku''',
-'''NONE''':
-'''-''',
-'''Global extension macros''':
-'''Globalni razširitveni makroji''',
-'''Local extension macros''':
-'''Lokalni razširitveni makroji''',
-'''Global extension actions''':
-'''Globalne razširitvene akcije''',
-'''Local extension actions''':
-'''Lokalne razširitvene akcije''',
-'''Global parsers''':
-'''Globalni sintaktični analizatorji (parserji)''',
-'''Local extension parsers''':
-'''Lokalni sintaktični analizatorji (parserji)''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)''',
-'''Disabled''':
-'''Izklopljeno''',
-'''Enabled''':
-'''Vklopljeno''',
-'''Lupy search''':
-'''Iskanje Lupy''',
-'''Active threads''':
-'''Aktivne niti''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Uporabite selektivnejše iskalno geslo namesto {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Napaka v regularnem izrazu \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Neveljavena navedba časa \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Atributu "%(token)s" mora slediti "="''',
-'''Expected a value for key "%(token)s"''':
-'''Atribut "%(token)s" mora imeti navedeno vrednost''',
-'''Wiki Markup''':
-'''Označevanje viki''',
-'''Print View''':
-'''Izgled za tiskanje''',
+'''This page is already deleted or was never created!''':
+'''Ta stran je že izbrisana ali pa ni nikoli obstajala!''',
+'''No pages like "%s"!''':
+'''Nobena stran ni podobna "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Priponka \'%(target)s\' (ime \'%(filename)s\') že obstaja na strežniku.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Natanko ena stran je podobna "%s", preusmerjanje tja ...''',
+'''Pages like "%s"''':
+'''Strani, ki so podobne "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s za "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Struktura spletne predstavitve na "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Na tem vikiju ni dovoljeno preimenovanje strani!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!''',
+'''Could not rename page because of file system error: %s.''':
+'''Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s.''',
+'''Rename Page''':
+'''Preimenuj stran''',
+'''New name''':
+'''Novo ime''',
+'''Optional reason for the renaming''':
+'''Razlog za preimenovanje (neobvezno)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Stran z imenom {{{\'%s\'}}} že obstaja.\'\'\'
+Uporabite drugačno ime.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(vključno z %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Naslednjih %(badwords)d spodaj poudarjenih besed ni v slovarju z %(totalwords)d besedami %(localwords)s:''',
+'''Add checked words to dictionary''':
+'''Dodaj označene besede v slovar''',
+'''No spelling errors found!''':
+'''Ni očitnih tipkarskih napak!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak.''',
+'''Title Search: "%s"''':
+'''Iskanje po naslovih: "%s"''',
+'''Full Text Search: "%s"''':
+'''Iskanje po polnem besedilu: "%s"''',
+'''Full Link List for "%s"''':
+'''Celotni seznam povezav za "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
+'''Subscribe users to the page %s''':
+'''Naroči uporabnike na obvestila s strani %s''',
+'''Subscribed for %s:''':
+'''Naročen na %s:''',
+'''Not a user:''':
+'''Ni uporabnik''',
+'''You are not allowed to perform this action.''':
+'''Te akcije vam ni dovoljeno izvesti.''',
+'''You are not allowed to delete this page.''':
+'''Te strani vam ni dovoljeno izbrisati.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Za brisanje strani uporabite interaktivni uporabniški vmesnik!''',
+'''Really delete this page?''':
+'''Zares izbrisati to stran?''',
+'''Delete''':
+'''Brisanje''',
+'''Optional reason for the deletion''':
+'''Razlog za brisanje (neobvezno)''',
 '''[%d attachments]''':
 '''[%d priponk]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -638,18 +709,12 @@ ki jo želite naložiti na strežnik.
 '''Akcija %s pri nalaganju na strežnik ni podprta''',
 '''Attachments for "%(pagename)s"''':
 '''Priponke na strani "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Priponka \'%(target)s\' (ime \'%(filename)s\') že obstaja na strežniku.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Priponka \'%(target)s\' je shranjena pod imenom \'%(filename)s\', %(bytes)d znakov.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Priponka \'%(filename)s\' izbrisana.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Priponka \'%(filename)s\' nameščena.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Namestitev datoteke \'%(filename)s\' ni uspela.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Datoteka %s ne vsebuje MoinMoin paketa.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''ZIP priponke \'%(filename)s\' ni bilo mogoče razpakirati, ker bi nastale datoteke zavzele preveč prostora (zmanjka %(space)d kB).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -672,71 +737,6 @@ ki jo želite naložiti na strežnik.
 '''Neznan tip priponke, zato je ni mogoče neposredno vključiti v stran.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s na strani %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Te strani vam ni dovoljeno izbrisati.''',
-'''This page is already deleted or was never created!''':
-'''Ta stran je že izbrisana ali pa ni nikoli obstajala!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Za brisanje strani uporabite interaktivni uporabniški vmesnik!''',
-'''Really delete this page?''':
-'''Zares izbrisati to stran?''',
-'''Delete''':
-'''Brisanje''',
-'''Optional reason for the deletion''':
-'''Razlog za brisanje (neobvezno)''',
-'''No pages like "%s"!''':
-'''Nobena stran ni podobna "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Natanko ena stran je podobna "%s", preusmerjanje tja ...''',
-'''Pages like "%s"''':
-'''Strani, ki so podobne "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s za "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Struktura spletne predstavitve na "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Na tem vikiju ni dovoljeno preimenovanje strani!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!''',
-'''Could not rename page because of file system error: %s.''':
-'''Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s.''',
-'''Rename Page''':
-'''Preimenuj stran''',
-'''New name''':
-'''Novo ime''',
-'''Optional reason for the renaming''':
-'''Razlog za preimenovanje (neobvezno)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Stran z imenom {{{\'%s\'}}} že obstaja.\'\'\'
-Uporabite drugačno ime.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(vključno z %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Naslednjih %(badwords)d spodaj poudarjenih besed ni v slovarju z %(totalwords)d besedami %(localwords)s:''',
-'''Add checked words to dictionary''':
-'''Dodaj označene besede v slovar''',
-'''No spelling errors found!''':
-'''Ni očitnih tipkarskih napak!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak.''',
-'''Subscribe users to the page %s''':
-'''Naroči uporabnike na obvestila s strani %s''',
-'''Subscribed for %s:''':
-'''Naročen na %s:''',
-'''Not a user:''':
-'''Ni uporabnik''',
-'''You are not allowed to perform this action.''':
-'''Te akcije vam ni dovoljeno izvesti.''',
-'''Title Search: "%s"''':
-'''Iskanje po naslovih: "%s"''',
-'''Full Text Search: "%s"''':
-'''Iskanje po polnem besedilu: "%s"''',
-'''Full Link List for "%s"''':
-'''Celotni seznam povezav za "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
 '''Upload new attachment "%(filename)s"''':
 '''Naloži novo priponko "%(filename)s" na strežnik''',
 '''Create new drawing "%(filename)s"''':
@@ -745,10 +745,56 @@ Uporabite drugačno ime.''',
 '''Spremeni risbo %(filename)s''',
 '''Toggle line numbers''':
 '''Vklopi/izklopi številke vrstic''',
-'''Invalid include arguments "%s"!''':
-'''Neveljavni argumenti pri "Include": "%s"!''',
-'''Nothing found for "%s"!''':
-'''Ni takih označb "%s"!''',
+'''FrontPage''':
+'''PrvaStran''',
+'''RecentChanges''':
+'''ZadnjeSpremembe''',
+'''TitleIndex''':
+'''KazaloNaslovov''',
+'''WordIndex''':
+'''KazaloBesed''',
+'''FindPage''':
+'''PoiščiStran''',
+'''SiteNavigation''':
+'''Navigacija''',
+'''HelpContents''':
+'''PomočPriVsebini''',
+'''HelpOnFormatting''':
+'''PomočPriOblikovanju''',
+'''UserPreferences''':
+'''UporabniškeNastavitve''',
+'''WikiLicense''':
+'''VikiLicenca''',
+'''MissingPage''':
+'''ManjkajočeStrani''',
+'''MissingHomePage''':
+'''ManjkajočeOsebneStrani''',
+'''Mon''':
+'''pon''',
+'''Tue''':
+'''tor''',
+'''Wed''':
+'''sre''',
+'''Thu''':
+'''čet''',
+'''Fri''':
+'''pet''',
+'''Sat''':
+'''sob''',
+'''Sun''':
+'''ned''',
+'''AttachFile''':
+'''PripniDatoteko''',
+'''DeletePage''':
+'''BrišiStran''',
+'''LikePages''':
+'''PodobneStrani''',
+'''LocalSiteMap''':
+'''StrukturaPredstavitve''',
+'''RenamePage''':
+'''PreimenujStran''',
+'''SpellCheck''':
+'''PreveriČrkovanje''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Nepoznana ali nepodprta navigacijska shema \'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -783,14 +829,18 @@ Uporabite drugačno ime.''',
 '''postavi knjižni zaznamek''',
 '''[Bookmark reached]''':
 '''[Prišli smo do knjižnega zaznamka]''',
+'''No wanted pages in this wiki.''':
+'''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne obstajajo).''',
+'''Invalid include arguments "%s"!''':
+'''Neveljavni argumenti pri "Include": "%s"!''',
+'''Nothing found for "%s"!''':
+'''Ni takih označb "%s"!''',
 '''Markup''':
 '''Označevanje''',
 '''Display''':
 '''Prikaz''',
 '''Filename''':
 '''Ime datoteke''',
-'''No wanted pages in this wiki.''':
-'''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne obstajajo).''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Prikaz \'\'reStructured\'\' besedila ni mogoč, namestite \'\'docutils\'\'.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -939,54 +989,4 @@ rdeče=sprememba''',
 '''sporočilo ni bilo odposlano''',
 '''Mail sent OK''':
 '''uspešno odposlano''',
-'''FrontPage''':
-'''PrvaStran''',
-'''RecentChanges''':
-'''ZadnjeSpremembe''',
-'''TitleIndex''':
-'''KazaloNaslovov''',
-'''WordIndex''':
-'''KazaloBesed''',
-'''FindPage''':
-'''PoiščiStran''',
-'''SiteNavigation''':
-'''Navigacija''',
-'''HelpContents''':
-'''PomočPriVsebini''',
-'''HelpOnFormatting''':
-'''PomočPriOblikovanju''',
-'''UserPreferences''':
-'''UporabniškeNastavitve''',
-'''WikiLicense''':
-'''VikiLicenca''',
-'''MissingPage''':
-'''ManjkajočeStrani''',
-'''MissingHomePage''':
-'''ManjkajočeOsebneStrani''',
-'''Mon''':
-'''pon''',
-'''Tue''':
-'''tor''',
-'''Wed''':
-'''sre''',
-'''Thu''':
-'''čet''',
-'''Fri''':
-'''pet''',
-'''Sat''':
-'''sob''',
-'''Sun''':
-'''ned''',
-'''AttachFile''':
-'''PripniDatoteko''',
-'''DeletePage''':
-'''BrišiStran''',
-'''LikePages''':
-'''PodobneStrani''',
-'''LocalSiteMap''':
-'''StrukturaPredstavitve''',
-'''RenamePage''':
-'''PreimenujStran''',
-'''SpellCheck''':
-'''PreveriČrkovanje''',
 }

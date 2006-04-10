@@ -32,8 +32,6 @@ makro çağrısını kullanabilirsiniz.-~
 '''Yeni Sayfa Oluştur''',
 '''You are not allowed to view this page.''':
 '''Sayfanın görüntülenmesi için yeterli izne sahip değilsiniz.''',
-'''Your changes are not saved!''':
-'''Düzenlemeleriniz kaydedilmedi!''',
 '''You are not allowed to edit this page.''':
 '''Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ makro çağrısını kullanabilirsiniz.-~
 '''Eski revizyonlar üzerinde değişiklik yapılamıyor!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Tarafınızca tutulan sayfa kilidi zaman aşımına uğradı. Düzenleme çakışmaları yaşanabilir!''',
-'''Page name is too long, try shorter name.''':
-'''Sayfa adı çok uzun, kısa bir ad girmeyi deneyin.''',
 '''Edit "%(pagename)s"''':
 '''%(pagename)s Sayfasını Düzelt''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Eğer bunun olmasını istemiyorsanız, \'\'\'%(cancel_button_text)s\'\'\' düğmesine basarak değişikliklerinizi iptal edebilirsiniz.''',
 '''Preview''':
 '''Önizleme''',
-'''GUI Mode''':
-'''Grafiksel Kullanıcı Arayüzü Kipi''',
 '''Comment:''':
 '''Yorum:''',
 '''<No addition>''':
@@ -96,6 +90,215 @@ Eğer bunun olmasını istemiyorsanız, \'\'\'%(cancel_button_text)s\'\'\' düğ
 '''Küçük değişiklik''',
 '''Remove trailing whitespace from each line''':
 '''İşe yaramayan boşluk karakterlerini temizle''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Geçersiz kullanıcı adı: {{{\'%s\'}}}.
+Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağlı olarak iki kelime arasında bir tek boşluk da bırakılabilir. Grupların sayfa isimlerinin kullanımına izin verilmemektedir.''',
+'''You are not allowed to do %s on this page.''':
+'''Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz.''',
+'''Login''':
+'''Giriş''',
+''' %s and try again.''':
+'''%s ve tekrar deneyin.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(pages)d sayfa içinden %(hits)d sonuç bulundu''',
+'''%.2f seconds''':
+'''%.2f saniye''',
+'''match''':
+'''eşle''',
+'''matches''':
+'''eşleniyor''',
+'''<unknown>''':
+'''<bilinmiyor>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Kullanıcı Adı: %s
+
+Giriş Parolası: %s
+
+Giriş için URL: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Hesap bilgilerinizin bu e-posta adresine gönderilmesi istemi alındı.
+
+Eğer parolanızı kaybettiyseniz, aşağıdaki bilgileri kullanarak belirtilen parolayı wiki\'nin ilgili form alanına olduğu gibi giriniz. (Bunun için kopyala/yapıştır kullanabilirsiniz.)
+
+Başarılı bir şekilde giriş yaptıktan sonra, isteğe bağlı olarak hatırlamanız daha kolay olabilecek yeni bir parola girebilirsiniz.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Wiki hesap bilgileriniz''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Bu wiki e-posta işlemleri için yapılandırılmadı.
+Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
+'''Please provide a valid email address!''':
+'''Lütfen geçerli bir e-posta adresi giriniz!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''\'%(email)s\' e-posta adresine sahip bir kullanıcı hesabı bulunamadı!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için KullanıcıÖzellikleri sayfasını kullanabilirsiniz.''',
+'''Empty user name. Please enter a user name.''':
+'''Boş kullanıcı adı. Lütfen bir kullanıcı adı seçiniz.''',
+'''This user name already belongs to somebody else.''':
+'''Bu kullanıcı adı başka bir kullanıcı tarafından alınmıştır.''',
+'''Passwords don\'t match!''':
+'''Girilen parolalar örtüşmüyor!''',
+'''Please specify a password!''':
+'''Lütfen bir parola giriniz!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lütfen e-posta adresinizi belirtiniz. Giriş bilgilerinizin kaybolması durumunda, bunları tekrar e-posta yoluyla alabilirsiniz.''',
+'''This email already belongs to somebody else.''':
+'''Bu e-posta adresi başka bir hesap tarafından kullanılmakta.''',
+'''User account created! You can use this account to login now...''':
+'''Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz artık.''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Seçilen kullanıcı hesabı üzerinde değişiklik yapmak için KullanıcıÖzellikleri bağlantısını kullanınız.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''\'%(theme_name)s\' teması yüklenemiyor!''',
+'''User preferences saved!''':
+'''Kullanıcı özellikleri kaydedildi!''',
+'''Default''':
+'''Öntanımlı''',
+'''<Browser setting>''':
+'''<Tarayıcı ayarları>''',
+'''the one preferred''':
+'''Tercih edilen''',
+'''free choice''':
+'''İsteğe bağlı seçim''',
+'''Select User''':
+'''Kullanıcı Seç''',
+'''Save''':
+'''Kaydet''',
+'''Preferred theme''':
+'''Tercih edilen tema''',
+'''Editor Preference''':
+'''Metin Düzenleyicisi Özellikleri''',
+'''Editor shown on UI''':
+'''Metin düzenleyicisinin görüntüleneceği arabirim''',
+'''Time zone''':
+'''Zaman dilimi''',
+'''Your time is''':
+'''Şu an saatiniz''',
+'''Server time is''':
+'''Sunucu saati''',
+'''Date format''':
+'''Tarih biçimi''',
+'''Preferred language''':
+'''Tercih edilen dil''',
+'''General options''':
+'''Genel seçenekler''',
+'''Quick links''':
+'''Hızlı erişim bağlantıları''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Geçerli bir e-posta adresi belirtmediğiniz sürece bu liste çalışmayacaktır!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Kayıt olunan wiki sayfaları (satır başına tek bir düzenli ifade)''',
+'''Create Profile''':
+'''Profil Oluştur''',
+'''Mail me my account data''':
+'''Hesap bilgilerimi e-posta ile gönder''',
+'''Email''':
+'''E-Posta''',
+'''Name''':
+'''İsim''',
+'''Password''':
+'''Parola''',
+'''Action''':
+'''İşlev''',
+'''Required attribute "%(attrname)s" missing''':
+'''Gerekli "%(attrname)s" niteleyicisi eksik''',
+'''Submitted form data:''':
+'''Girilen form verisi: ''',
+'''Search Titles''':
+'''Başlıkları Ara''',
+'''Display context of search results''':
+'''Arama sonuçlarının içerik gösterimi''',
+'''Case-sensitive searching''':
+'''Büyük-küçük harf duyarlı arama''',
+'''Search Text''':
+'''Metin Arama''',
+'''Go To Page''':
+'''Sayfaya Git''',
+'''Include system pages''':
+'''Sistem sayfalarını içer''',
+'''Exclude system pages''':
+'''Sistem sayfalarını çıkar''',
+'''Plain title index''':
+'''Düz başlık indeksi''',
+'''XML title index''':
+'''XML başlık indeksi''',
+'''Python Version''':
+'''Python Sürümü''',
+'''MoinMoin Version''':
+'''MoinMoin Sürümü''',
+'''Release %s [Revision %s]''':
+'''Sürüm %s [Revizyon %s]''',
+'''4Suite Version''':
+'''4Suite Sürümü''',
+'''Number of pages''':
+'''Sayfa sayısı''',
+'''Number of system pages''':
+'''Sistem sayfası sayısı''',
+'''Accumulated page sizes''':
+'''Toplanan sayfa sayısı''',
+'''Entries in edit log''':
+'''Düzenleme kayıtlarındaki girdiler''',
+'''NONE''':
+'''YOK''',
+'''Global extension macros''':
+'''Genel geliştirilmiş makrolar''',
+'''Local extension macros''':
+'''Yerel geliştirilmiş makrolar''',
+'''Global extension actions''':
+'''Genel geliştirilmiş işlemler''',
+'''Local extension actions''':
+'''Yerel geliştirilmiş işlemler''',
+'''Global parsers''':
+'''Genel ayrıştırıcılar''',
+'''Local extension parsers''':
+'''Yerel geliştirilmiş makrolar''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Ayrıştırıcılar''',
+'''Disabled''':
+'''Etkisiz''',
+'''Enabled''':
+'''Etkin''',
+'''Lupy search''':
+'''Lupy arama''',
+'''Active threads''':
+'''Etkin yivler''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''{{{"%s"}}} yerine daha seçici bir arama tümcesi kullanınız.''',
+'''ERROR in regex \'%s\'''':
+'''\'%s\' metninde düzenli ifade regex hatası''',
+'''Bad timestamp \'%s\'''':
+'''Yanlış tarih bilgisi \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"%(token)s" tümcesi için "=" karakteri girilmeliydi.''',
+'''Expected a value for key "%(token)s"''':
+'''"%(token)s" anahtarı için yanlış değer''',
+'''Wiki Markup''':
+'''Wiki İmleme''',
+'''Print View''':
+'''Yazıcı Çıktısı Görünümü''',
+'''Your changes are not saved!''':
+'''Düzenlemeleriniz kaydedilmedi!''',
+'''Page name is too long, try shorter name.''':
+'''Sayfa adı çok uzun, kısa bir ad girmeyi deneyin.''',
+'''GUI Mode''':
+'''Grafiksel Kullanıcı Arayüzü Kipi''',
 '''Edit was cancelled.''':
 '''Düzenleme iptal edildi.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -197,8 +400,10 @@ açılmış ya da en son %(timestamp)s tarihinde önizleme yapılmıştır.[[BR]
 \'\'\'Herhangi bir düzenleme çakışmasından kaçınmanız açısından sayfa üzerinde
 %(mins_valid)d dakikalığına değişiklik yapmamanız önerilir.\'\'\'[[BR]]
 Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz.''',
-'''<unknown>''':
-'''<bilinmiyor>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''\'%(filename)s\' dosyası yüklenemedi.''',
+'''The file %s is not a MoinMoin package file.''':
+'''%s bir MoinMoin paket dosyası değil.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -259,145 +464,20 @@ Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz.''
 '''Küçük değişikliklerden haberdar ol''',
 '''Disable this account forever''':
 '''Hesabı sonsuza dek etkisiz hale getir''',
-'''Name''':
-'''İsim''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(AdSoyad kullanınız)''',
 '''Alias-Name''':
 '''Takma İsim''',
-'''Password''':
-'''Parola''',
 '''Password repeat''':
 '''Parola (Tekrar)''',
 '''(Only when changing passwords)''':
 '''(Sadece parola değiştirirken)''',
-'''Email''':
-'''E-Posta''',
 '''User CSS URL''':
 '''Kullanıcı CSS şablonu için URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Kullanıcı CSS seçeneğini etkisiz hale getirmek için boş bırakınız)''',
 '''Editor size''':
 '''Metin düzenleyicisi boyutu''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Geçersiz kullanıcı adı: {{{\'%s\'}}}.
-Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağlı olarak iki kelime arasında bir tek boşluk da bırakılabilir. Grupların sayfa isimlerinin kullanımına izin verilmemektedir.''',
-'''You are not allowed to do %s on this page.''':
-'''Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz.''',
-'''Login''':
-'''Giriş''',
-''' %s and try again.''':
-'''%s ve tekrar deneyin.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(pages)d sayfa içinden %(hits)d sonuç bulundu''',
-'''%.2f seconds''':
-'''%.2f saniye''',
-'''match''':
-'''eşle''',
-'''matches''':
-'''eşleniyor''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''Kullanıcı Adı: %s
-
-Giriş Parolası: %s
-
-Giriş için URL: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Hesap bilgilerinizin bu e-posta adresine gönderilmesi istemi alındı.
-
-Eğer parolanızı kaybettiyseniz, aşağıdaki bilgileri kullanarak belirtilen parolayı wiki\'nin ilgili form alanına olduğu gibi giriniz. (Bunun için kopyala/yapıştır kullanabilirsiniz.)
-
-Başarılı bir şekilde giriş yaptıktan sonra, isteğe bağlı olarak hatırlamanız daha kolay olabilecek yeni bir parola girebilirsiniz.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Wiki hesap bilgileriniz''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Bu wiki e-posta işlemleri için yapılandırılmadı.
-Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
-'''Please provide a valid email address!''':
-'''Lütfen geçerli bir e-posta adresi giriniz!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''\'%(email)s\' e-posta adresine sahip bir kullanıcı hesabı bulunamadı!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için KullanıcıÖzellikleri sayfasını kullanabilirsiniz.''',
-'''Empty user name. Please enter a user name.''':
-'''Boş kullanıcı adı. Lütfen bir kullanıcı adı seçiniz.''',
-'''This user name already belongs to somebody else.''':
-'''Bu kullanıcı adı başka bir kullanıcı tarafından alınmıştır.''',
-'''Passwords don\'t match!''':
-'''Girilen parolalar örtüşmüyor!''',
-'''Please specify a password!''':
-'''Lütfen bir parola giriniz!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Lütfen e-posta adresinizi belirtiniz. Giriş bilgilerinizin kaybolması durumunda, bunları tekrar e-posta yoluyla alabilirsiniz.''',
-'''This email already belongs to somebody else.''':
-'''Bu e-posta adresi başka bir hesap tarafından kullanılmakta.''',
-'''User account created! You can use this account to login now...''':
-'''Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz artık.''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''Seçilen kullanıcı hesabı üzerinde değişiklik yapmak için KullanıcıÖzellikleri bağlantısını kullanınız.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''\'%(theme_name)s\' teması yüklenemiyor!''',
-'''User preferences saved!''':
-'''Kullanıcı özellikleri kaydedildi!''',
-'''Default''':
-'''Öntanımlı''',
-'''<Browser setting>''':
-'''<Tarayıcı ayarları>''',
-'''the one preferred''':
-'''Tercih edilen''',
-'''free choice''':
-'''İsteğe bağlı seçim''',
-'''Select User''':
-'''Kullanıcı Seç''',
-'''Save''':
-'''Kaydet''',
-'''Preferred theme''':
-'''Tercih edilen tema''',
-'''Editor Preference''':
-'''Metin Düzenleyicisi Özellikleri''',
-'''Editor shown on UI''':
-'''Metin düzenleyicisinin görüntüleneceği arabirim''',
-'''Time zone''':
-'''Zaman dilimi''',
-'''Your time is''':
-'''Şu an saatiniz''',
-'''Server time is''':
-'''Sunucu saati''',
-'''Date format''':
-'''Tarih biçimi''',
-'''Preferred language''':
-'''Tercih edilen dil''',
-'''General options''':
-'''Genel seçenekler''',
-'''Quick links''':
-'''Hızlı erişim bağlantıları''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Geçerli bir e-posta adresi belirtmediğiniz sürece bu liste çalışmayacaktır!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Kayıt olunan wiki sayfaları (satır başına tek bir düzenli ifade)''',
-'''Create Profile''':
-'''Profil Oluştur''',
-'''Mail me my account data''':
-'''Hesap bilgilerimi e-posta ile gönder''',
-'''Action''':
-'''İşlev''',
 '''No older revisions available!''':
 '''Eski revizyon bulunmamakta!''',
 '''Diff for "%s"''':
@@ -496,78 +576,67 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Bir çizelge tipi belirtmek zorundasınız!''',
 '''Bad chart type "%s"!''':
 '''Geçersiz çizelge tipi: "%s"''',
-'''Search Titles''':
-'''Başlıkları Ara''',
-'''Display context of search results''':
-'''Arama sonuçlarının içerik gösterimi''',
-'''Case-sensitive searching''':
-'''Büyük-küçük harf duyarlı arama''',
-'''Search Text''':
-'''Metin Arama''',
-'''Go To Page''':
-'''Sayfaya Git''',
-'''Include system pages''':
-'''Sistem sayfalarını içer''',
-'''Exclude system pages''':
-'''Sistem sayfalarını çıkar''',
-'''Plain title index''':
-'''Düz başlık indeksi''',
-'''XML title index''':
-'''XML başlık indeksi''',
-'''Python Version''':
-'''Python Sürümü''',
-'''MoinMoin Version''':
-'''MoinMoin Sürümü''',
-'''Release %s [Revision %s]''':
-'''Sürüm %s [Revizyon %s]''',
-'''4Suite Version''':
-'''4Suite Sürümü''',
-'''Number of pages''':
-'''Sayfa sayısı''',
-'''Number of system pages''':
-'''Sistem sayfası sayısı''',
-'''Accumulated page sizes''':
-'''Toplanan sayfa sayısı''',
-'''Entries in edit log''':
-'''Düzenleme kayıtlarındaki girdiler''',
-'''NONE''':
-'''YOK''',
-'''Global extension macros''':
-'''Genel geliştirilmiş makrolar''',
-'''Local extension macros''':
-'''Yerel geliştirilmiş makrolar''',
-'''Global extension actions''':
-'''Genel geliştirilmiş işlemler''',
-'''Local extension actions''':
-'''Yerel geliştirilmiş işlemler''',
-'''Global parsers''':
-'''Genel ayrıştırıcılar''',
-'''Local extension parsers''':
-'''Yerel geliştirilmiş makrolar''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Ayrıştırıcılar''',
-'''Disabled''':
-'''Etkisiz''',
-'''Enabled''':
-'''Etkin''',
-'''Lupy search''':
-'''Lupy arama''',
-'''Active threads''':
-'''Etkin yivler''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''{{{"%s"}}} yerine daha seçici bir arama tümcesi kullanınız.''',
-'''ERROR in regex \'%s\'''':
-'''\'%s\' metninde düzenli ifade regex hatası''',
-'''Bad timestamp \'%s\'''':
-'''Yanlış tarih bilgisi \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"%(token)s" tümcesi için "=" karakteri girilmeliydi.''',
-'''Expected a value for key "%(token)s"''':
-'''"%(token)s" anahtarı için yanlış değer''',
-'''Wiki Markup''':
-'''Wiki İmleme''',
-'''Print View''':
-'''Yazıcı Çıktısı Görünümü''',
+'''This page is already deleted or was never created!''':
+'''Bu sayfa daha önceden silindi ya da hiçbir zaman yaratılmadı!''',
+'''No pages like "%s"!''':
+'''"%s" adında bir sayfa yok!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''\'%(target)s\' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: \'%(filename)s\')''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''"%s" adına benzer tek bir sayfa bulundu; oraya yönlendiriliyorsunuz.''',
+'''Pages like "%s"''':
+'''"%s" sayfasına benzer sayfalar''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''"%(title)s" için %(matchcount)d sonuç: %(matches)s''',
+'''Local Site Map for "%s"''':
+'''"%s" için Yerel Site Haritası''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Wiki üzerindeki sayfaları yeniden adlandırmak için yeterli izne sahip değilsiniz!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Lütfen sayfa adlarını değiştirmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
+'''Could not rename page because of file system error: %s.''':
+'''İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! Hata: %s''',
+'''Rename Page''':
+'''Sayfayı Yeniden Adlandır''',
+'''New name''':
+'''Yeni ad''',
+'''Optional reason for the renaming''':
+'''İsteğe bağlı yeniden adlandırma için yorum''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'{{{\'%s\'}}} adından bir sayfa zaten mevcut.\'\'\'
+
+Başka bir ad deneyiniz.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(içerilen %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''İlgili %(badwords)d·kelime sözlükteki %(totalwords)d·tane %(localwords)skelime
+arasından bulunamayıp aşağıda işaretlenmiştir.''',
+'''Add checked words to dictionary''':
+'''İşaretli kelimeleri sözlüğe ekle''',
+'''No spelling errors found!''':
+'''İmla hatası bulunmadı!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Okuma iznine sahip olmadığınız bir sayfa için imla denetimi gerçekleştiremezsiniz.''',
+'''Title Search: "%s"''':
+'''Başlık Arama: "%s"''',
+'''Full Text Search: "%s"''':
+'''Metin Arama: "%s"''',
+'''Full Link List for "%s"''':
+'''"%s" için Bağlantı Listesi''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte.''',
+'''You are not allowed to delete this page.''':
+'''Bu sayfayı silmek için yeterli izne sahip değilsiniz.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
+'''Really delete this page?''':
+'''Bu sayfayı silmek istediğinize emin misiniz?''',
+'''Delete''':
+'''Sil''',
+'''Optional reason for the deletion''':
+'''İsteğe bağlı silinme nedeni''',
 '''[%d attachments]''':
 '''[%d tane ek]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -630,18 +699,12 @@ adı kullanılacaktır.''',
 '''Desteklenmeyen dosya gönderim işlevi: %s''',
 '''Attachments for "%(pagename)s"''':
 '''"%(pagename)s" için Ekler''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''\'%(target)s\' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: \'%(filename)s\')''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''\'%(target)s\' eki (%(bytes)d bayt) kaydedildi. (Dosyanın karşı taraftaki adı: \'%(filename)s\')''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''\'%(filename)s\' eki silindi.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''\'%(filename)s\' eki yüklendi.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''\'%(filename)s\' dosyası yüklenemedi.''',
-'''The file %s is not a MoinMoin package file.''':
-'''%s bir MoinMoin paket dosyası değil.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Oluşacak dosyalar çok büyük (%(space)d kB fazla) olduğundan dolayı \'%(filename)s\' eki açılamıyor.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -664,75 +727,62 @@ adı kullanılacaktır.''',
 '''Bilinmeyen dosya tipi. Ek doğrudan gösterilemiyor.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s of %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Bu sayfayı silmek için yeterli izne sahip değilsiniz.''',
-'''This page is already deleted or was never created!''':
-'''Bu sayfa daha önceden silindi ya da hiçbir zaman yaratılmadı!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
-'''Really delete this page?''':
-'''Bu sayfayı silmek istediğinize emin misiniz?''',
-'''Delete''':
-'''Sil''',
-'''Optional reason for the deletion''':
-'''İsteğe bağlı silinme nedeni''',
-'''No pages like "%s"!''':
-'''"%s" adında bir sayfa yok!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''"%s" adına benzer tek bir sayfa bulundu; oraya yönlendiriliyorsunuz.''',
-'''Pages like "%s"''':
-'''"%s" sayfasına benzer sayfalar''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''"%(title)s" için %(matchcount)d sonuç: %(matches)s''',
-'''Local Site Map for "%s"''':
-'''"%s" için Yerel Site Haritası''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Wiki üzerindeki sayfaları yeniden adlandırmak için yeterli izne sahip değilsiniz!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Lütfen sayfa adlarını değiştirmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
-'''Could not rename page because of file system error: %s.''':
-'''İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! Hata: %s''',
-'''Rename Page''':
-'''Sayfayı Yeniden Adlandır''',
-'''New name''':
-'''Yeni ad''',
-'''Optional reason for the renaming''':
-'''İsteğe bağlı yeniden adlandırma için yorum''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'{{{\'%s\'}}} adından bir sayfa zaten mevcut.\'\'\'
-
-Başka bir ad deneyiniz.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(içerilen %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''İlgili %(badwords)d·kelime sözlükteki %(totalwords)d·tane %(localwords)skelime
-arasından bulunamayıp aşağıda işaretlenmiştir.''',
-'''Add checked words to dictionary''':
-'''İşaretli kelimeleri sözlüğe ekle''',
-'''No spelling errors found!''':
-'''İmla hatası bulunmadı!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Okuma iznine sahip olmadığınız bir sayfa için imla denetimi gerçekleştiremezsiniz.''',
-'''Title Search: "%s"''':
-'''Başlık Arama: "%s"''',
-'''Full Text Search: "%s"''':
-'''Metin Arama: "%s"''',
-'''Full Link List for "%s"''':
-'''"%s" için Bağlantı Listesi''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte.''',
 '''Upload new attachment "%(filename)s"''':
 '''Yeni ek dosya gönder "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Yeni çizim oluştur: "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''%(filename)s çizimini düzenle''',
-'''Invalid include arguments "%s"!''':
-'''Geçersiniz {{{include}}} argümanları: "%s"''',
-'''Nothing found for "%s"!''':
-'''"%s" için sonuç bulunamadı.''',
+'''FrontPage''':
+'''AnaSayfa''',
+'''RecentChanges''':
+'''Düzenlemeler''',
+'''TitleIndex''':
+'''Başlıkİndeksi''',
+'''WordIndex''':
+'''Kelimeİndeksi''',
+'''FindPage''':
+'''SayfaBul''',
+'''SiteNavigation''':
+'''SiteGezinimi''',
+'''HelpContents''':
+'''YardimKonuları''',
+'''HelpOnFormatting''':
+'''YardımBiçimHakkında''',
+'''UserPreferences''':
+'''KullanıcıÖzellikleri''',
+'''WikiLicense''':
+'''WikiLisansı''',
+'''MissingPage''':
+'''KayıpSayfa''',
+'''MissingHomePage''':
+'''KayıpKişiselSayfa''',
+'''Mon''':
+'''Pzt''',
+'''Tue''':
+'''Sal''',
+'''Wed''':
+'''Çrş''',
+'''Thu''':
+'''Prş''',
+'''Fri''':
+'''Cum''',
+'''Sat''':
+'''Cts''',
+'''Sun''':
+'''Paz''',
+'''AttachFile''':
+'''DosyaEkle''',
+'''DeletePage''':
+'''SayfaSil''',
+'''LikePages''':
+'''BenzerSayfalar''',
+'''LocalSiteMap''':
+'''YerelSiteHaritası''',
+'''RenamePage''':
+'''SayfaAdlandır''',
+'''SpellCheck''':
+'''İmlaDenetimi''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Desteklenmeyen tarama şeması: \'%(scheme)s\'''',
 '''No parent page found!''':
@@ -767,14 +817,18 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''imleyici ata''',
 '''[Bookmark reached]''':
 '''[İmleyiciye ulaşıldı]''',
+'''No wanted pages in this wiki.''':
+'''Wiki üzerinde aranan bir sayfa yer almamakta.''',
+'''Invalid include arguments "%s"!''':
+'''Geçersiniz {{{include}}} argümanları: "%s"''',
+'''Nothing found for "%s"!''':
+'''"%s" için sonuç bulunamadı.''',
 '''Markup''':
 '''İm''',
 '''Display''':
 '''Göster''',
 '''Filename''':
 '''Dosya Adı''',
-'''No wanted pages in this wiki.''':
-'''Wiki üzerinde aranan bir sayfa yer almamakta.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Tekrar yapılandırılan metnin çevrisi gerçekleştirilemiyor. Lütfen {{{docutils}}} paketini yükleyin.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -911,54 +965,4 @@ red=düzenleme''',
 '''E-posta gönderilemedi.''',
 '''Mail sent OK''':
 '''E-posta gönderildi.''',
-'''FrontPage''':
-'''AnaSayfa''',
-'''RecentChanges''':
-'''Düzenlemeler''',
-'''TitleIndex''':
-'''Başlıkİndeksi''',
-'''WordIndex''':
-'''Kelimeİndeksi''',
-'''FindPage''':
-'''SayfaBul''',
-'''SiteNavigation''':
-'''SiteGezinimi''',
-'''HelpContents''':
-'''YardimKonuları''',
-'''HelpOnFormatting''':
-'''YardımBiçimHakkında''',
-'''UserPreferences''':
-'''KullanıcıÖzellikleri''',
-'''WikiLicense''':
-'''WikiLisansı''',
-'''MissingPage''':
-'''KayıpSayfa''',
-'''MissingHomePage''':
-'''KayıpKişiselSayfa''',
-'''Mon''':
-'''Pzt''',
-'''Tue''':
-'''Sal''',
-'''Wed''':
-'''Çrş''',
-'''Thu''':
-'''Prş''',
-'''Fri''':
-'''Cum''',
-'''Sat''':
-'''Cts''',
-'''Sun''':
-'''Paz''',
-'''AttachFile''':
-'''DosyaEkle''',
-'''DeletePage''':
-'''SayfaSil''',
-'''LikePages''':
-'''BenzerSayfalar''',
-'''LocalSiteMap''':
-'''YerelSiteHaritası''',
-'''RenamePage''':
-'''SayfaAdlandır''',
-'''SpellCheck''':
-'''İmlaDenetimi''',
 }

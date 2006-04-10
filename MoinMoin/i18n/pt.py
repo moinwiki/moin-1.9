@@ -85,6 +85,150 @@ Se você não quiser isso, clique \'\'\'%(cancel_button_text)s\'\'\' para cancel
 '''Mudança trivial''',
 '''Remove trailing whitespace from each line''':
 '''Remover espaço em branco no final de cada linha''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Nome de usuário inválido {{{\'%s\'}}}.
+O nome pode conter caracteres alfa-numéricos Unicode, com a opção
+de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o nome da página''',
+'''You are not allowed to do %s on this page.''':
+'''Você não tem permissão para fazer %s nesta página.''',
+'''Login''':
+'''Login''',
+''' %s and try again.''':
+''' %s e tente novamente.''',
+'''%.2f seconds''':
+'''%.2f segundos''',
+'''match''':
+'''coincidência''',
+'''matches''':
+'''coincidências''',
+'''<unknown>''':
+'''<desconhecido>''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Este wiki não tem ativado o envio automático de e-mails.
+Contacte a administração deste wiki para que habilite esta opção''',
+'''Please provide a valid email address!''':
+'''Por favor, coloque um e-mail válido!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Não existe uma conta que coincida com o e-mail \'%(email)s\'!''',
+'''Empty user name. Please enter a user name.''':
+'''Nome de usuário em branco. Por favor, coloque um nome de usuário válido.''',
+'''This user name already belongs to somebody else.''':
+'''Este nome de usuário já é utilizado por alguém.''',
+'''Passwords don\'t match!''':
+'''As duas senhas não coincidem!''',
+'''Please specify a password!''':
+'''Por favor, especifique uma senha!''',
+'''This email already belongs to somebody else.''':
+'''Este endereço de e-mail já é utilizado por alguém.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Não é possível carregar o tema \'%(theme_name)s\' !''',
+'''User preferences saved!''':
+'''Preferências do usuário gravadas!''',
+'''Default''':
+'''Predeterminado''',
+'''<Browser setting>''':
+'''<Configuração do seu Navegador>''',
+'''Save''':
+'''Salvar''',
+'''Preferred theme''':
+'''Tema preferido''',
+'''Time zone''':
+'''Fuso horário''',
+'''Your time is''':
+'''Seu horário é''',
+'''Server time is''':
+'''Horário do servidor é''',
+'''Date format''':
+'''Formato de data''',
+'''Preferred language''':
+'''Idioma preferido''',
+'''General options''':
+'''Opções gerais''',
+'''Quick links''':
+'''Links rápidos''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Esta lista não funciona, salvo se introduzir um e-mail válido!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Inscrição de páginas (uma por linha)''',
+'''Create Profile''':
+'''Criar Perfil de Usuário''',
+'''Mail me my account data''':
+'''Enviar os dados por e-mail''',
+'''Email''':
+'''Email''',
+'''Name''':
+'''Nome''',
+'''Password''':
+'''Senha''',
+'''Action''':
+'''Ação''',
+'''Required attribute "%(attrname)s" missing''':
+'''Falta o atributo requerido "%(attrname)s"''',
+'''Submitted form data:''':
+'''Formulário de informações enviado:''',
+'''Search Titles''':
+'''Busca por Títulos''',
+'''Display context of search results''':
+'''Mostrar o contexto dos resultados de busca''',
+'''Case-sensitive searching''':
+'''Busca sensível a maiúsculas e minúsculas''',
+'''Search Text''':
+'''Busca por Texto''',
+'''Go To Page''':
+'''Ir a Página''',
+'''Include system pages''':
+'''Incluir páginas do sistema''',
+'''Exclude system pages''':
+'''Excluir páginas do sistema''',
+'''Plain title index''':
+'''Índice de Títulos em texto plano''',
+'''XML title index''':
+'''Índice de Títulos em XML''',
+'''Python Version''':
+'''Versão do Python''',
+'''MoinMoin Version''':
+'''Versão do MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Versão %s [Revisão %s]''',
+'''4Suite Version''':
+'''Versão 4Suite''',
+'''Number of pages''':
+'''Número de páginas''',
+'''Number of system pages''':
+'''Número de páginas do sistema''',
+'''Accumulated page sizes''':
+'''Tamanhos acumulados das páginas''',
+'''Entries in edit log''':
+'''Entradas de logs editáveis''',
+'''NONE''':
+'''NENHUM''',
+'''Global extension macros''':
+'''Macros de extensão global''',
+'''Local extension macros''':
+'''Macros de extensão local''',
+'''Global extension actions''':
+'''Ações de extensão global''',
+'''Local extension actions''':
+'''Ações de extensão local''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Processadores instalados (OBSOLETO -- melhor utilizar Parsers)''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Por favor, utilize um termo de busca mais específico que {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''ERRO em regex \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Timestamp errôneo \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Espera-se "=" seguido de "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Espera-se um valor para a chave "%(token)s"''',
+'''Wiki Markup''':
+'''Formato Wiki''',
+'''Print View''':
+'''Previsão de Impressão''',
 '''Edit was cancelled.''':
 '''Sua edição está cancelada.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -183,8 +327,6 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Deveria \'\'evitar de editar\'\' esta página durante um tempo de %(mins_valid)d minuto(s),
 para não acontecer conflitos de edição.\'\'\'[[BR]]
 Para abandonar a edição, pressione o botão Cancelar.''',
-'''<unknown>''':
-'''<desconhecido>''',
 '''Diffs''':
 '''Diferenças''',
 '''Info''':
@@ -225,94 +367,16 @@ Para abandonar a edição, pressione o botão Cancelar.''',
 '''Inscrever para receber mudanças triviais''',
 '''Disable this account forever''':
 '''Desativar esta conta para sempre''',
-'''Name''':
-'''Nome''',
-'''Password''':
-'''Senha''',
 '''Password repeat''':
 '''Repetir senha''',
 '''(Only when changing passwords)''':
 '''(Somente quando mudar sua senha)''',
-'''Email''':
-'''Email''',
 '''User CSS URL''':
 '''URL de CSS do Usuário''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Deixá-lo vazio para desativar CSS do Usuário)''',
 '''Editor size''':
 '''Tamanho do Editor''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Nome de usuário inválido {{{\'%s\'}}}.
-O nome pode conter caracteres alfa-numéricos Unicode, com a opção
-de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o nome da página''',
-'''You are not allowed to do %s on this page.''':
-'''Você não tem permissão para fazer %s nesta página.''',
-'''Login''':
-'''Login''',
-''' %s and try again.''':
-''' %s e tente novamente.''',
-'''%.2f seconds''':
-'''%.2f segundos''',
-'''match''':
-'''coincidência''',
-'''matches''':
-'''coincidências''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Este wiki não tem ativado o envio automático de e-mails.
-Contacte a administração deste wiki para que habilite esta opção''',
-'''Please provide a valid email address!''':
-'''Por favor, coloque um e-mail válido!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Não existe uma conta que coincida com o e-mail \'%(email)s\'!''',
-'''Empty user name. Please enter a user name.''':
-'''Nome de usuário em branco. Por favor, coloque um nome de usuário válido.''',
-'''This user name already belongs to somebody else.''':
-'''Este nome de usuário já é utilizado por alguém.''',
-'''Passwords don\'t match!''':
-'''As duas senhas não coincidem!''',
-'''Please specify a password!''':
-'''Por favor, especifique uma senha!''',
-'''This email already belongs to somebody else.''':
-'''Este endereço de e-mail já é utilizado por alguém.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Não é possível carregar o tema \'%(theme_name)s\' !''',
-'''User preferences saved!''':
-'''Preferências do usuário gravadas!''',
-'''Default''':
-'''Predeterminado''',
-'''<Browser setting>''':
-'''<Configuração do seu Navegador>''',
-'''Save''':
-'''Salvar''',
-'''Preferred theme''':
-'''Tema preferido''',
-'''Time zone''':
-'''Fuso horário''',
-'''Your time is''':
-'''Seu horário é''',
-'''Server time is''':
-'''Horário do servidor é''',
-'''Date format''':
-'''Formato de data''',
-'''Preferred language''':
-'''Idioma preferido''',
-'''General options''':
-'''Opções gerais''',
-'''Quick links''':
-'''Links rápidos''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Esta lista não funciona, salvo se introduzir um e-mail válido!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Inscrição de páginas (uma por linha)''',
-'''Create Profile''':
-'''Criar Perfil de Usuário''',
-'''Mail me my account data''':
-'''Enviar os dados por e-mail''',
-'''Action''':
-'''Ação''',
 '''No older revisions available!''':
 '''Não existe revisões anteriores disponíveis!''',
 '''Diff for "%s"''':
@@ -397,66 +461,72 @@ Contacte a administração deste wiki para que habilite esta opção''',
 '''Você precisa indicar um tipo de gráfico!''',
 '''Bad chart type "%s"!''':
 '''Tipo de gráfico incorreto "%s"!''',
-'''Search Titles''':
-'''Busca por Títulos''',
-'''Display context of search results''':
-'''Mostrar o contexto dos resultados de busca''',
-'''Case-sensitive searching''':
-'''Busca sensível a maiúsculas e minúsculas''',
-'''Search Text''':
-'''Busca por Texto''',
-'''Go To Page''':
-'''Ir a Página''',
-'''Include system pages''':
-'''Incluir páginas do sistema''',
-'''Exclude system pages''':
-'''Excluir páginas do sistema''',
-'''Plain title index''':
-'''Índice de Títulos em texto plano''',
-'''XML title index''':
-'''Índice de Títulos em XML''',
-'''Python Version''':
-'''Versão do Python''',
-'''MoinMoin Version''':
-'''Versão do MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Versão %s [Revisão %s]''',
-'''4Suite Version''':
-'''Versão 4Suite''',
-'''Number of pages''':
-'''Número de páginas''',
-'''Number of system pages''':
-'''Número de páginas do sistema''',
-'''Accumulated page sizes''':
-'''Tamanhos acumulados das páginas''',
-'''Entries in edit log''':
-'''Entradas de logs editáveis''',
-'''NONE''':
-'''NENHUM''',
-'''Global extension macros''':
-'''Macros de extensão global''',
-'''Local extension macros''':
-'''Macros de extensão local''',
-'''Global extension actions''':
-'''Ações de extensão global''',
-'''Local extension actions''':
-'''Ações de extensão local''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Processadores instalados (OBSOLETO -- melhor utilizar Parsers)''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Por favor, utilize um termo de busca mais específico que {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''ERRO em regex \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Timestamp errôneo \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Espera-se "=" seguido de "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Espera-se um valor para a chave "%(token)s"''',
-'''Wiki Markup''':
-'''Formato Wiki''',
-'''Print View''':
-'''Previsão de Impressão''',
+'''This page is already deleted or was never created!''':
+'''Esta página já foi eliminada ou nunca foi criada!''',
+'''No pages like "%s"!''':
+'''Nenhuma página similar a "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Anexo \'%(target)s\' (nome remoto \'%(filename)s\') já existe.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, insira usuário e senha novamente.''',
+'''Missing password. Please enter user name and password.''':
+'''Senha inválida. Por favor, insira usuário e senha novamente.''',
+'''Sorry, wrong password.''':
+'''Desculpe, senha inválida.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Página similar a "%s" encontrada. Redirecionando a esta página.''',
+'''Pages like "%s"''':
+'''Páginas similares a "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s de "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Mapa local do site "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Você não tem permissão para renomear páginas neste wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Por favor, use a interface interativa de usuário para renomear páginas!''',
+'''Could not rename page because of file system error: %s.''':
+'''Não se pode renomear a página devido um erro de sistema no arquivo: %s.''',
+'''Rename Page''':
+'''Renomear Página''',
+'''New name''':
+'''Novo nome''',
+'''Optional reason for the renaming''':
+'''Razão opcional para renomear''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Já existe uma página com este nome {{{\'%s\'}}} \'\'\'
+
+Tente um nome diferente.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(incluir %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''As seguintes %(badwords)d palavras não foram encontradas no dicionário de %(totalwords)d palavras%(localwords)s e aparecem marcadas abaixo:''',
+'''Add checked words to dictionary''':
+'''Adicionar palavras revisadas pelo dicionário''',
+'''No spelling errors found!''':
+'''Não foram encontrados erros!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Não pode realizar a correção ortográfica em uma página que não pode ler.''',
+'''Title Search: "%s"''':
+'''Buscar por título: "%s"''',
+'''Full Text Search: "%s"''':
+'''Buscar por conteúdo: "%s"''',
+'''Full Link List for "%s"''':
+'''Lista completa de links em "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Não é possível criar uma página sem nome. Por favor, especifique o nome da página.''',
+'''You are not allowed to delete this page.''':
+'''Você não tem permissão para eliminar esta página.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Por favor, use uma interface interativa de usuário para eliminar páginas!''',
+'''Really delete this page?''':
+'''Realmente deseja eliminar esta página?''',
+'''Delete''':
+'''Eliminar''',
+'''Optional reason for the deletion''':
+'''Razão opcional para a eliminação''',
 '''[%d attachments]''':
 '''[%d anexos]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -509,8 +579,6 @@ Do contrário: se o campo "Mudar nome a" estiver vazio, usará o nome original d
 '''Esta ação não será suportada: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Anexos para "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Anexo \'%(target)s\' (nome remoto \'%(filename)s\') já existe.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Anexo \'%(target)s\' (nome remoto \'%(filename)s\') com %(bytes)d bytes guardados.''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -521,80 +589,60 @@ Do contrário: se o campo "Mudar nome a" estiver vazio, usará o nome original d
 '''Tipo de arquivo desconhecido, não é possível mostrar este anexo.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s de %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Você não tem permissão para eliminar esta página.''',
-'''This page is already deleted or was never created!''':
-'''Esta página já foi eliminada ou nunca foi criada!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Por favor, use uma interface interativa de usuário para eliminar páginas!''',
-'''Really delete this page?''':
-'''Realmente deseja eliminar esta página?''',
-'''Delete''':
-'''Eliminar''',
-'''Optional reason for the deletion''':
-'''Razão opcional para a eliminação''',
-'''No pages like "%s"!''':
-'''Nenhuma página similar a "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Página similar a "%s" encontrada. Redirecionando a esta página.''',
-'''Pages like "%s"''':
-'''Páginas similares a "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s de "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Mapa local do site "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Você não tem permissão para renomear páginas neste wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Por favor, use a interface interativa de usuário para renomear páginas!''',
-'''Could not rename page because of file system error: %s.''':
-'''Não se pode renomear a página devido um erro de sistema no arquivo: %s.''',
-'''Rename Page''':
-'''Renomear Página''',
-'''New name''':
-'''Novo nome''',
-'''Optional reason for the renaming''':
-'''Razão opcional para renomear''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Já existe uma página com este nome {{{\'%s\'}}} \'\'\'
-
-Tente um nome diferente.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(incluir %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''As seguintes %(badwords)d palavras não foram encontradas no dicionário de %(totalwords)d palavras%(localwords)s e aparecem marcadas abaixo:''',
-'''Add checked words to dictionary''':
-'''Adicionar palavras revisadas pelo dicionário''',
-'''No spelling errors found!''':
-'''Não foram encontrados erros!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Não pode realizar a correção ortográfica em uma página que não pode ler.''',
-'''Title Search: "%s"''':
-'''Buscar por título: "%s"''',
-'''Full Text Search: "%s"''':
-'''Buscar por conteúdo: "%s"''',
-'''Full Link List for "%s"''':
-'''Lista completa de links em "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nome de usuário desconhecido: {{{"%s"}}}. Por favor, insira usuário e senha novamente.''',
-'''Missing password. Please enter user name and password.''':
-'''Senha inválida. Por favor, insira usuário e senha novamente.''',
-'''Sorry, wrong password.''':
-'''Desculpe, senha inválida.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Não é possível criar uma página sem nome. Por favor, especifique o nome da página.''',
 '''Upload new attachment "%(filename)s"''':
 '''Fazer Upload do novo anexo "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Criar novo desenho "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Editar desenho %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Argumentos incluídos não são válidos "%s"!''',
-'''Nothing found for "%s"!''':
-'''Não foi encontrado coincidências de "%s"!''',
+'''FrontPage''':
+'''PáginaPrincipal''',
+'''RecentChanges''':
+'''MudançasRecentes''',
+'''TitleIndex''':
+'''ÍndiceDeTítulos''',
+'''WordIndex''':
+'''ÍndiceDePalavras''',
+'''FindPage''':
+'''BuscaPágina''',
+'''SiteNavigation''':
+'''NavegaçãoDoSite''',
+'''HelpContents''':
+'''ConteúdoDeAjuda''',
+'''HelpOnFormatting''':
+'''AjudaNaFormatação''',
+'''UserPreferences''':
+'''PreferênciasDoUsuário''',
+'''WikiLicense''':
+'''LicençaWiki''',
+'''MissingPage''':
+'''PáginaPerdida''',
+'''Mon''':
+'''Seg''',
+'''Tue''':
+'''Ter''',
+'''Wed''':
+'''Qua''',
+'''Thu''':
+'''Qui''',
+'''Fri''':
+'''Sex''',
+'''Sat''':
+'''Sáb''',
+'''Sun''':
+'''Dom''',
+'''AttachFile''':
+'''ArquivoAnexo''',
+'''DeletePage''':
+'''EliminarPágina''',
+'''LikePages''':
+'''PáginasSimilares''',
+'''LocalSiteMap''':
+'''MapaDoSite''',
+'''RenamePage''':
+'''RenomearPágina''',
+'''SpellCheck''':
+'''CorreçãoOrtográfica''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Suporte de navegação \'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -627,14 +675,18 @@ Tente um nome diferente.''',
 '''marcar como favorito''',
 '''[Bookmark reached]''':
 '''[Favorito alcançado]''',
+'''No wanted pages in this wiki.''':
+'''Não existem páginas-a-criar neste wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Argumentos incluídos não são válidos "%s"!''',
+'''Nothing found for "%s"!''':
+'''Não foi encontrado coincidências de "%s"!''',
 '''Markup''':
 '''Formato''',
 '''Display''':
 '''Visualizar''',
 '''Filename''':
 '''Nome do Arquivo''',
-'''No wanted pages in this wiki.''':
-'''Não existem páginas-a-criar neste wiki.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Excedido o número máximo de \'inclusões\' permitidas''',
 '''**Could not find the referenced page: %s**''':
@@ -737,52 +789,4 @@ vermelho=editar''',
 '''A conexão com o servidor de e-mail \'%(server)s\' falhou: %(reason)s''',
 '''Mail sent OK''':
 '''E-mail enviado!''',
-'''FrontPage''':
-'''PáginaPrincipal''',
-'''RecentChanges''':
-'''MudançasRecentes''',
-'''TitleIndex''':
-'''ÍndiceDeTítulos''',
-'''WordIndex''':
-'''ÍndiceDePalavras''',
-'''FindPage''':
-'''BuscaPágina''',
-'''SiteNavigation''':
-'''NavegaçãoDoSite''',
-'''HelpContents''':
-'''ConteúdoDeAjuda''',
-'''HelpOnFormatting''':
-'''AjudaNaFormatação''',
-'''UserPreferences''':
-'''PreferênciasDoUsuário''',
-'''WikiLicense''':
-'''LicençaWiki''',
-'''MissingPage''':
-'''PáginaPerdida''',
-'''Mon''':
-'''Seg''',
-'''Tue''':
-'''Ter''',
-'''Wed''':
-'''Qua''',
-'''Thu''':
-'''Qui''',
-'''Fri''':
-'''Sex''',
-'''Sat''':
-'''Sáb''',
-'''Sun''':
-'''Dom''',
-'''AttachFile''':
-'''ArquivoAnexo''',
-'''DeletePage''':
-'''EliminarPágina''',
-'''LikePages''':
-'''PáginasSimilares''',
-'''LocalSiteMap''':
-'''MapaDoSite''',
-'''RenamePage''':
-'''RenomearPágina''',
-'''SpellCheck''':
-'''CorreçãoOrtográfica''',
 }

@@ -31,8 +31,6 @@ Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de macro
 '''Crea una pàgina nova''',
 '''You are not allowed to view this page.''':
 '''No teniu permís per a visualitzar aquesta pàgina.''',
-'''Your changes are not saved!''':
-'''No s\'han desat els vostres canvis!''',
 '''You are not allowed to edit this page.''':
 '''No teniu permís per a editar aquesta pàgina.''',
 '''Page is immutable!''':
@@ -41,8 +39,6 @@ Per a utilitzar aquest formulari en altres pàgines, inseriu una crida de macro
 '''No es poden editar les revisions antigues!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''El blocatge que mantenieu ha expirat. Prepareu-vos per als conflictes d\'edició!''',
-'''Page name is too long, try shorter name.''':
-'''El nom de la pàgina és massa llarg, proveu un nom més curt.''',
 '''Edit "%(pagename)s"''':
 '''Edita «%(pagename)s»''',
 '''Preview of "%(pagename)s"''':
@@ -83,8 +79,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar els vostres canvis.''',
 '''Preview''':
 '''Previsualitza''',
-'''GUI Mode''':
-'''Mode amb interfície gràfica''',
 '''Comment:''':
 '''Comentari:''',
 '''<No addition>''':
@@ -95,6 +89,199 @@ Si no voleu això, polseu \'\'\'%(cancel_button_text)s\'\'\' per a cancel·lar e
 '''Canvi trivial''',
 '''Remove trailing whitespace from each line''':
 '''Suprimeix els espais del final de les línies''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''El nom d\'usuari {{{«%s»}}} és invàlid.
+El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai opcional entre paraules. Noms de grups de pàgines no estan permesos.''',
+'''You are not allowed to do %s on this page.''':
+'''No teniu permís per a %s aquesta pàgina.''',
+'''Login''':
+'''Entrada''',
+''' %s and try again.''':
+''' %s i torneu a provar.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d resultats d\'alrededor de %(pages)d pàgines.''',
+'''%.2f seconds''':
+'''%.2f segons''',
+'''match''':
+'''coincidència''',
+'''matches''':
+'''coincidències''',
+'''<unknown>''':
+'''<desconegut>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Algú ha demanat que s\'envien les dades del vostre compte a aquesta adreça de correu.
+
+Si heu perdut la vostra contrasenya, utilitzeu les següents dades i simplement introduïu la contrasenya TAL I COM ES MOSTRA al camp de contrasenya del wiki (utilitzeu copia i enganxa per a fer-ho).
+
+Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu recordar.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Les dades del vostre compte wiki''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Aquest wiki no té habilitat el processament de correu.
+Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
+'''Please provide a valid email address!''':
+'''Proveïu una adreça de correu vàlida''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un compte.''',
+'''Empty user name. Please enter a user name.''':
+'''El nom d\'usuari és buit. Introduïu un nom d\'usuari.''',
+'''This user name already belongs to somebody else.''':
+'''Aquest nom d\'usuari ja pertany a algú.''',
+'''Passwords don\'t match!''':
+'''Les contrasenyes no concorden!''',
+'''Please specify a password!''':
+'''Especifiqueu una contrasenya.''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació d\'entrada, podeu recuperar-la per correu.''',
+'''This email already belongs to somebody else.''':
+'''Aquest correu electrònic ja pertany a algú.''',
+'''User account created! You can use this account to login now...''':
+'''S\'ha creat el compte d\'usuari! Podeu utilitzar aquest compte per a entrar.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''No s\'ha pogut carregar el tema «%(theme_name)s.''',
+'''User preferences saved!''':
+'''S\'han desat les preferències de l\'usuari!''',
+'''Default''':
+'''Per defecte''',
+'''<Browser setting>''':
+'''<Configuració del navegador>''',
+'''the one preferred''':
+'''el preferit''',
+'''free choice''':
+'''selecció lliure''',
+'''Save''':
+'''Desa''',
+'''Preferred theme''':
+'''Tema preferit''',
+'''Editor Preference''':
+'''Preferències de l\'editor''',
+'''Editor shown on UI''':
+'''Mostra l\'editor a la interfície''',
+'''Time zone''':
+'''Fus horari''',
+'''Your time is''':
+'''L\'hora actual és''',
+'''Server time is''':
+'''L\'hora al servidor és''',
+'''Date format''':
+'''Format de la data''',
+'''Preferred language''':
+'''Llengua preferida''',
+'''General options''':
+'''Opcions generals''',
+'''Quick links''':
+'''Enllaços ràpids''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Aquesta llista no funciona, a no ser que hagueu introduït una adreça de correu electrònic vàlida.''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Pàgines de wiki subscrites (una expressió regular per línia)''',
+'''Create Profile''':
+'''Crea un perfil''',
+'''Mail me my account data''':
+'''Envia\'m les dades del meu compte''',
+'''Email''':
+'''Correu electrònic''',
+'''Name''':
+'''Nom''',
+'''Password''':
+'''Contrasenya''',
+'''Action''':
+'''Acció''',
+'''Required attribute "%(attrname)s" missing''':
+'''Manca l\'atribut requerit «%(attrname)s»''',
+'''Submitted form data:''':
+'''Dades del formulari enviades:''',
+'''Search Titles''':
+'''Cerca els títols''',
+'''Display context of search results''':
+'''Mostra el context dels resultats de la recerca''',
+'''Case-sensitive searching''':
+'''Recerques amb diferència entre majúscules i minúscules''',
+'''Search Text''':
+'''Text a cercar''',
+'''Go To Page''':
+'''Vés a la pàgina''',
+'''Include system pages''':
+'''Inclou les pàgines del sistema''',
+'''Exclude system pages''':
+'''Exclou les pàgines del sistema''',
+'''Plain title index''':
+'''Índex pla de títols''',
+'''XML title index''':
+'''Índex XML de títols''',
+'''Python Version''':
+'''Versió de Python''',
+'''MoinMoin Version''':
+'''Versió de MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Llançament %s [Revisió %s]''',
+'''4Suite Version''':
+'''Versió de 4Suite''',
+'''Number of pages''':
+'''Nombre de pàgines''',
+'''Number of system pages''':
+'''Nombre de pàgines del sistema''',
+'''Accumulated page sizes''':
+'''Mida acumulada de les pàgines''',
+'''Entries in edit log''':
+'''Entrades al registre d\'edició''',
+'''NONE''':
+'''CAP''',
+'''Global extension macros''':
+'''Macros d\'extensions globals''',
+'''Local extension macros''':
+'''Macros d\'extensions locals''',
+'''Global extension actions''':
+'''Accions d\'extensions globals''',
+'''Local extension actions''':
+'''Accions d\'extensions locals''',
+'''Global parsers''':
+'''Analitzadors globals''',
+'''Local extension parsers''':
+'''Analitzadors d\'extensions locals''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Processadors instal·lats (OBSOLET -- utilitzeu els analitzadors en el seu lloc)''',
+'''Disabled''':
+'''Inhabilitat''',
+'''Enabled''':
+'''Habilitat''',
+'''Lupy search''':
+'''Cerca Lupy''',
+'''Active threads''':
+'''Fils actius''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}''',
+'''ERROR in regex \'%s\'''':
+'''ERROR en l\'expressió regular «%s»''',
+'''Bad timestamp \'%s\'''':
+'''Marca de temps «%s» invàlida''',
+'''Expected "=" to follow "%(token)s"''':
+'''S\'esperava que «=» seguira a «%(token)s»''',
+'''Expected a value for key "%(token)s"''':
+'''S\'esperava un valor per a la clau «%(token)s»''',
+'''Wiki Markup''':
+'''Marcat del Wiki''',
+'''Print View''':
+'''Previsualització d\'impressió''',
+'''Your changes are not saved!''':
+'''No s\'han desat els vostres canvis!''',
+'''Page name is too long, try shorter name.''':
+'''El nom de la pàgina és massa llarg, proveu un nom més curt.''',
+'''GUI Mode''':
+'''Mode amb interfície gràfica''',
 '''Edit was cancelled.''':
 '''S\'ha cancel·lat l\'edició.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -199,8 +386,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Haurieu d\'\'\'evitar editar\'\' aquesta pàgina durant almenys els pròxims %(mins_valid)d minuts,
 per a evitar conflictes d\'edició.\'\'\'[[BR]]
 Per a abandonar l\'editor, premeu el botó Cancel·la.''',
-'''<unknown>''':
-'''<desconegut>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''La instal·lació de «%(filename)s» ha fallat.''',
+'''The file %s is not a MoinMoin package file.''':
+'''El fitxer %s no és un fitxer de paquet MoinMoin.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -261,129 +450,20 @@ Per a abandonar l\'editor, premeu el botó Cancel·la.''',
 '''Subscriu-me a canvis trivials''',
 '''Disable this account forever''':
 '''Inhabilita aquest compte permanentment''',
-'''Name''':
-'''Nom''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Useu Nom\'\'\'\'\'\'Cognom)''',
 '''Alias-Name''':
 '''Sobrenom''',
-'''Password''':
-'''Contrasenya''',
 '''Password repeat''':
 '''Contrasenya (comprovació)''',
 '''(Only when changing passwords)''':
 '''(Només quan es canvia la contrasenya)''',
-'''Email''':
-'''Correu electrònic''',
 '''User CSS URL''':
 '''URL del CSS de l\'usuari''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Deixeu-ho en blanc per a inhabilitar el CSS de l\'usuari)''',
 '''Editor size''':
 '''Mida de l\'editor''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''El nom d\'usuari {{{«%s»}}} és invàlid.
-El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai opcional entre paraules. Noms de grups de pàgines no estan permesos.''',
-'''You are not allowed to do %s on this page.''':
-'''No teniu permís per a %s aquesta pàgina.''',
-'''Login''':
-'''Entrada''',
-''' %s and try again.''':
-''' %s i torneu a provar.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d resultats d\'alrededor de %(pages)d pàgines.''',
-'''%.2f seconds''':
-'''%.2f segons''',
-'''match''':
-'''coincidència''',
-'''matches''':
-'''coincidències''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Algú ha demanat que s\'envien les dades del vostre compte a aquesta adreça de correu.
-
-Si heu perdut la vostra contrasenya, utilitzeu les següents dades i simplement introduïu la contrasenya TAL I COM ES MOSTRA al camp de contrasenya del wiki (utilitzeu copia i enganxa per a fer-ho).
-
-Quan hagueu entrat, és una bona idea establir una contrasenya nova que pogueu recordar.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Les dades del vostre compte wiki''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Aquest wiki no té habilitat el processament de correu.
-Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
-'''Please provide a valid email address!''':
-'''Proveïu una adreça de correu vàlida''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''No s\'ha trobat cap compte que concorde amb l\'adreça de correu «%(email)s».''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Utilitzeu PreferènciesUsuari per a canviar els vostres paràmetres o crear un compte.''',
-'''Empty user name. Please enter a user name.''':
-'''El nom d\'usuari és buit. Introduïu un nom d\'usuari.''',
-'''This user name already belongs to somebody else.''':
-'''Aquest nom d\'usuari ja pertany a algú.''',
-'''Passwords don\'t match!''':
-'''Les contrasenyes no concorden!''',
-'''Please specify a password!''':
-'''Especifiqueu una contrasenya.''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Doneu la vostra adreça de correu electrònic. Si perdeu la vostra informació d\'entrada, podeu recuperar-la per correu.''',
-'''This email already belongs to somebody else.''':
-'''Aquest correu electrònic ja pertany a algú.''',
-'''User account created! You can use this account to login now...''':
-'''S\'ha creat el compte d\'usuari! Podeu utilitzar aquest compte per a entrar.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''No s\'ha pogut carregar el tema «%(theme_name)s.''',
-'''User preferences saved!''':
-'''S\'han desat les preferències de l\'usuari!''',
-'''Default''':
-'''Per defecte''',
-'''<Browser setting>''':
-'''<Configuració del navegador>''',
-'''the one preferred''':
-'''el preferit''',
-'''free choice''':
-'''selecció lliure''',
-'''Save''':
-'''Desa''',
-'''Preferred theme''':
-'''Tema preferit''',
-'''Editor Preference''':
-'''Preferències de l\'editor''',
-'''Editor shown on UI''':
-'''Mostra l\'editor a la interfície''',
-'''Time zone''':
-'''Fus horari''',
-'''Your time is''':
-'''L\'hora actual és''',
-'''Server time is''':
-'''L\'hora al servidor és''',
-'''Date format''':
-'''Format de la data''',
-'''Preferred language''':
-'''Llengua preferida''',
-'''General options''':
-'''Opcions generals''',
-'''Quick links''':
-'''Enllaços ràpids''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Aquesta llista no funciona, a no ser que hagueu introduït una adreça de correu electrònic vàlida.''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Pàgines de wiki subscrites (una expressió regular per línia)''',
-'''Create Profile''':
-'''Crea un perfil''',
-'''Mail me my account data''':
-'''Envia\'m les dades del meu compte''',
-'''Action''':
-'''Acció''',
 '''No older revisions available!''':
 '''No hi ha revisions més velles disponibles.''',
 '''Diff for "%s"''':
@@ -482,78 +562,72 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Heu de proveir un tipus de gràfica.''',
 '''Bad chart type "%s"!''':
 '''El tipus de gràfica «%s» és invàlid.''',
-'''Search Titles''':
-'''Cerca els títols''',
-'''Display context of search results''':
-'''Mostra el context dels resultats de la recerca''',
-'''Case-sensitive searching''':
-'''Recerques amb diferència entre majúscules i minúscules''',
-'''Search Text''':
-'''Text a cercar''',
-'''Go To Page''':
-'''Vés a la pàgina''',
-'''Include system pages''':
-'''Inclou les pàgines del sistema''',
-'''Exclude system pages''':
-'''Exclou les pàgines del sistema''',
-'''Plain title index''':
-'''Índex pla de títols''',
-'''XML title index''':
-'''Índex XML de títols''',
-'''Python Version''':
-'''Versió de Python''',
-'''MoinMoin Version''':
-'''Versió de MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Llançament %s [Revisió %s]''',
-'''4Suite Version''':
-'''Versió de 4Suite''',
-'''Number of pages''':
-'''Nombre de pàgines''',
-'''Number of system pages''':
-'''Nombre de pàgines del sistema''',
-'''Accumulated page sizes''':
-'''Mida acumulada de les pàgines''',
-'''Entries in edit log''':
-'''Entrades al registre d\'edició''',
-'''NONE''':
-'''CAP''',
-'''Global extension macros''':
-'''Macros d\'extensions globals''',
-'''Local extension macros''':
-'''Macros d\'extensions locals''',
-'''Global extension actions''':
-'''Accions d\'extensions globals''',
-'''Local extension actions''':
-'''Accions d\'extensions locals''',
-'''Global parsers''':
-'''Analitzadors globals''',
-'''Local extension parsers''':
-'''Analitzadors d\'extensions locals''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Processadors instal·lats (OBSOLET -- utilitzeu els analitzadors en el seu lloc)''',
-'''Disabled''':
-'''Inhabilitat''',
-'''Enabled''':
-'''Habilitat''',
-'''Lupy search''':
-'''Cerca Lupy''',
-'''Active threads''':
-'''Fils actius''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Utilitzeu un terme més selectiu en comptes de {{{«%s»}}}''',
-'''ERROR in regex \'%s\'''':
-'''ERROR en l\'expressió regular «%s»''',
-'''Bad timestamp \'%s\'''':
-'''Marca de temps «%s» invàlida''',
-'''Expected "=" to follow "%(token)s"''':
-'''S\'esperava que «=» seguira a «%(token)s»''',
-'''Expected a value for key "%(token)s"''':
-'''S\'esperava un valor per a la clau «%(token)s»''',
-'''Wiki Markup''':
-'''Marcat del Wiki''',
-'''Print View''':
-'''Previsualització d\'impressió''',
+'''This page is already deleted or was never created!''':
+'''Aquesta pàgina ja està suprimida o mai s\'ha creat.''',
+'''No pages like "%s"!''':
+'''No hi ha cap pàgina semblant a «%s».''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''L\'adjunció «%(target)s» (remote name «%(filename)s») ja existeix.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''El nom d\'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d\'usuari i contrasenya.''',
+'''Missing password. Please enter user name and password.''':
+'''Manca la contrasenya. Introduïu el nom d\'usuari i contrasenya.''',
+'''Sorry, wrong password.''':
+'''Contrasenya errònia.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Hi ha exactament una pàgina semblant a «%s», s\'està redirigint a la pàgina.''',
+'''Pages like "%s"''':
+'''Pàgines semblants a «%s»''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s per a «%(title)s»''',
+'''Local Site Map for "%s"''':
+'''Mapa del lloc local per a «%s»''',
+'''You are not allowed to rename pages in this wiki!''':
+'''No teniu permís per a canviar el nom de pàgines en aquest wiki''',
+'''Please use the interactive user interface to rename pages!''':
+'''Utilitzeu la interfície d\'usuari interactiva per a canviar el nom de les pàgines.''',
+'''Could not rename page because of file system error: %s.''':
+'''No s\'ha pogut canviar el nom de la pàgina degut a un error del sistema de fitxers: %s.''',
+'''Rename Page''':
+'''Canvia el nom de la pàgina''',
+'''New name''':
+'''Nom nou''',
+'''Optional reason for the renaming''':
+'''Raó opcional per al canvi de nom''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Ja existeix una pàgina amb el nom {{{%s}}}.\'\'\'
+
+Proveu amb un nom diferent.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(incloent %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''No s\'han trobat les següents %(badwords)d paraules al diccionari de %(totalwords)d paraules%(localwords)s i es ressalten a continuació:''',
+'''Add checked words to dictionary''':
+'''S\'han afegit les paraules comprovades al diccionari''',
+'''No spelling errors found!''':
+'''No s\'han trobat errors d\'ortografia.''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''No podeu comprovar l\'ortografia d\'una pàgina que no podeu llegir.''',
+'''Title Search: "%s"''':
+'''Cerca de títols: «%s»''',
+'''Full Text Search: "%s"''':
+'''Cerca de text sencer: «%s»''',
+'''Full Link List for "%s"''':
+'''Llista completa d\'enllaços per a «%s»''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom.''',
+'''You are not allowed to delete this page.''':
+'''No teniu permís per a suprimir aquesta pàgina.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Utilitzeu la interfície d\'usuari interactiva per a suprimir pàgines.''',
+'''Really delete this page?''':
+'''Esteu segur de voler suprimir aquesta pàgina?''',
+'''Delete''':
+'''Suprimeix''',
+'''Optional reason for the deletion''':
+'''Raó opcional per a la supressió''',
 '''[%d attachments]''':
 '''[%d adjuncions]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -617,18 +691,12 @@ del fitxer.''',
 '''Acció de pujada no implementada: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Adjuncions per a «%(pagename)s»''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''L\'adjunció «%(target)s» (remote name «%(filename)s») ja existeix.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''S\'ha desat l\'adjunció «%(target)s» (nom remot «%(filename)s») amb %(bytes)d octets.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''S\'ha suprimit l\'adjunció «%(filename)s».''',
 '''Attachment \'%(filename)s\' installed.''':
 '''S\'ha instal·lat l\'adjunció «%(filename)s».''',
-'''Installation of \'%(filename)s\' failed.''':
-'''La instal·lació de «%(filename)s» ha fallat.''',
-'''The file %s is not a MoinMoin package file.''':
-'''El fitxer %s no és un fitxer de paquet MoinMoin.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''L\'adjunció «%(filename)s» no s\'ha pogut desempaquetar perquè els fitxers resultants serien massa grans (falten %(space)d kB).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -651,80 +719,62 @@ del fitxer.''',
 '''El tipus del fitxer és desconegut, no es pot mostrar aquesta adjunció en línia.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(attachment:)]]%(filename)s de %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''No teniu permís per a suprimir aquesta pàgina.''',
-'''This page is already deleted or was never created!''':
-'''Aquesta pàgina ja està suprimida o mai s\'ha creat.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Utilitzeu la interfície d\'usuari interactiva per a suprimir pàgines.''',
-'''Really delete this page?''':
-'''Esteu segur de voler suprimir aquesta pàgina?''',
-'''Delete''':
-'''Suprimeix''',
-'''Optional reason for the deletion''':
-'''Raó opcional per a la supressió''',
-'''No pages like "%s"!''':
-'''No hi ha cap pàgina semblant a «%s».''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Hi ha exactament una pàgina semblant a «%s», s\'està redirigint a la pàgina.''',
-'''Pages like "%s"''':
-'''Pàgines semblants a «%s»''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s per a «%(title)s»''',
-'''Local Site Map for "%s"''':
-'''Mapa del lloc local per a «%s»''',
-'''You are not allowed to rename pages in this wiki!''':
-'''No teniu permís per a canviar el nom de pàgines en aquest wiki''',
-'''Please use the interactive user interface to rename pages!''':
-'''Utilitzeu la interfície d\'usuari interactiva per a canviar el nom de les pàgines.''',
-'''Could not rename page because of file system error: %s.''':
-'''No s\'ha pogut canviar el nom de la pàgina degut a un error del sistema de fitxers: %s.''',
-'''Rename Page''':
-'''Canvia el nom de la pàgina''',
-'''New name''':
-'''Nom nou''',
-'''Optional reason for the renaming''':
-'''Raó opcional per al canvi de nom''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Ja existeix una pàgina amb el nom {{{%s}}}.\'\'\'
-
-Proveu amb un nom diferent.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(incloent %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''No s\'han trobat les següents %(badwords)d paraules al diccionari de %(totalwords)d paraules%(localwords)s i es ressalten a continuació:''',
-'''Add checked words to dictionary''':
-'''S\'han afegit les paraules comprovades al diccionari''',
-'''No spelling errors found!''':
-'''No s\'han trobat errors d\'ortografia.''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''No podeu comprovar l\'ortografia d\'una pàgina que no podeu llegir.''',
-'''Title Search: "%s"''':
-'''Cerca de títols: «%s»''',
-'''Full Text Search: "%s"''':
-'''Cerca de text sencer: «%s»''',
-'''Full Link List for "%s"''':
-'''Llista completa d\'enllaços per a «%s»''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''El nom d\'usuari és desconegut: {{{«%s»}}}. Introduïu un nom d\'usuari i contrasenya.''',
-'''Missing password. Please enter user name and password.''':
-'''Manca la contrasenya. Introduïu el nom d\'usuari i contrasenya.''',
-'''Sorry, wrong password.''':
-'''Contrasenya errònia.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom.''',
 '''Upload new attachment "%(filename)s"''':
 '''Apuja una nova adjunció «%(filename)s»''',
 '''Create new drawing "%(filename)s"''':
 '''Crea un dibuix nou «%(filename)s»''',
 '''Edit drawing %(filename)s''':
 '''Edita el dibuix %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Els arguments «%s» no són vàlids per a include.''',
-'''Nothing found for "%s"!''':
-'''No s\'ha trobat res per a «%s».''',
+'''FrontPage''':
+'''PàginaPrincipal''',
+'''RecentChanges''':
+'''CanvisRecents''',
+'''TitleIndex''':
+'''ÍndexTítols''',
+'''WordIndex''':
+'''ÍndexParaules''',
+'''FindPage''':
+'''CercaUnaPàgina''',
+'''SiteNavigation''':
+'''NavegacióLloc''',
+'''HelpContents''':
+'''ContingutsAjuda''',
+'''HelpOnFormatting''':
+'''QuantAlFormat''',
+'''UserPreferences''':
+'''PreferènciesUsuari''',
+'''WikiLicense''':
+'''LlicènciaDelWiki''',
+'''MissingPage''':
+'''PàginaInexistent''',
+'''MissingHomePage''':
+'''PàginaInicialInexistent''',
+'''Mon''':
+'''dl''',
+'''Tue''':
+'''dm''',
+'''Wed''':
+'''dc''',
+'''Thu''':
+'''dj''',
+'''Fri''':
+'''dv''',
+'''Sat''':
+'''ds''',
+'''Sun''':
+'''dm''',
+'''AttachFile''':
+'''AdjuntaFitxer''',
+'''DeletePage''':
+'''SuprimeixPàgina''',
+'''LikePages''':
+'''PàginesSemblants''',
+'''LocalSiteMap''':
+'''MapaDelLloc''',
+'''RenamePage''':
+'''ReanomenaPàgina''',
+'''SpellCheck''':
+'''ComprovacióOrtogràfica''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''L\'esquema de navegació «%(scheme)s» no està implementat.''',
 '''No parent page found!''':
@@ -759,14 +809,18 @@ Proveu amb un nom diferent.''',
 '''estableix l\'adreça d\'interès''',
 '''[Bookmark reached]''':
 '''[S\'ha arribat a una adreça d\'interès]''',
+'''No wanted pages in this wiki.''':
+'''No hi ha cap pàgina dessitjada en aquest wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Els arguments «%s» no són vàlids per a include.''',
+'''Nothing found for "%s"!''':
+'''No s\'ha trobat res per a «%s».''',
 '''Markup''':
 '''Marcat''',
 '''Display''':
 '''Visualització''',
 '''Filename''':
 '''Nom del fitxer''',
-'''No wanted pages in this wiki.''':
-'''No hi ha cap pàgina dessitjada en aquest wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''No és possible renderitzar text reStructurat. Instal·leu docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -903,54 +957,4 @@ roig=edició''',
 '''No s\'ha enviat el correu''',
 '''Mail sent OK''':
 '''S\'ha enviat el correu amb èxit''',
-'''FrontPage''':
-'''PàginaPrincipal''',
-'''RecentChanges''':
-'''CanvisRecents''',
-'''TitleIndex''':
-'''ÍndexTítols''',
-'''WordIndex''':
-'''ÍndexParaules''',
-'''FindPage''':
-'''CercaUnaPàgina''',
-'''SiteNavigation''':
-'''NavegacióLloc''',
-'''HelpContents''':
-'''ContingutsAjuda''',
-'''HelpOnFormatting''':
-'''QuantAlFormat''',
-'''UserPreferences''':
-'''PreferènciesUsuari''',
-'''WikiLicense''':
-'''LlicènciaDelWiki''',
-'''MissingPage''':
-'''PàginaInexistent''',
-'''MissingHomePage''':
-'''PàginaInicialInexistent''',
-'''Mon''':
-'''dl''',
-'''Tue''':
-'''dm''',
-'''Wed''':
-'''dc''',
-'''Thu''':
-'''dj''',
-'''Fri''':
-'''dv''',
-'''Sat''':
-'''ds''',
-'''Sun''':
-'''dm''',
-'''AttachFile''':
-'''AdjuntaFitxer''',
-'''DeletePage''':
-'''SuprimeixPàgina''',
-'''LikePages''':
-'''PàginesSemblants''',
-'''LocalSiteMap''':
-'''MapaDelLloc''',
-'''RenamePage''':
-'''ReanomenaPàgina''',
-'''SpellCheck''':
-'''ComprovacióOrtogràfica''',
 }

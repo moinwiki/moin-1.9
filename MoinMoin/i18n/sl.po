@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"POT-Creation-Date: 2006-04-10 13:56+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -62,9 +62,6 @@ msgstr "Tvori novo stran"
 msgid "You are not allowed to view this page."
 msgstr "Ogled te strani vam ni dovoljen."
 
-msgid "Your changes are not saved!"
-msgstr "Spremembe niso shranjene!"
-
 msgid "You are not allowed to edit this page."
 msgstr "Te strani vam ni dovoljeno spreminjati."
 
@@ -76,9 +73,6 @@ msgstr "Starih različic ni mogoče spreminjati!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "Zaseženost strani je potekla, možni so neusklajeni popravki!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Ime strani je predolgo, uporabite krajše ime."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -155,8 +149,9 @@ msgstr ""
 msgid "Preview"
 msgstr "Predogled"
 
-msgid "GUI Mode"
-msgstr "Urejanje s sprotnim prikazom (GUI)"
+#, fuzzy
+msgid "Text mode"
+msgstr "po besedilu"
 
 msgid "Comment:"
 msgstr "Opomba:"
@@ -173,6 +168,359 @@ msgstr "Neznatna sprememba"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Odstrani presledke s koncev vrstic"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Neveljavno uporabniško ime {{{'%s'}}}.\n"
+"Ime lahko vsebuje poljuben alfanumeričen znak iz nabora Unicode,\n"
+"z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso "
+"dovoljena."
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "Na tej strani vam ni dovoljeno \"%s\"."
+
+msgid "Login"
+msgstr "Prijava"
+
+#, python-format
+msgid " %s and try again."
+msgstr " %s in poskusite ponovno."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d zadetkov od približno %(pages)d preiskanih strani."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekund"
+
+msgid "match"
+msgstr "zadetek"
+
+msgid "matches"
+msgstr "zadetkov"
+
+msgid "<unknown>"
+msgstr "<neznano>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s\n"
+msgstr ""
+"Uporabniško ime: %s\n"
+"\n"
+"Uporabniško geslo: %s\n"
+"\n"
+"URL za prijavo: %s/%s\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Zahtevano je bilo, da se podatki o uporabniškem imenu (računu) pošljejo\n"
+"na vaš poštni naslov.\n"
+"\n"
+"Če ste izgubili svoje geslo, lahko uporabite priloženi niz znakov in ga\n"
+"vnesete TOČNO TAKO, KOT JE PRIKAZAN v polje za geslo ob prijavi\n"
+"(uporabite lahko ukaze za kopiranje z zaslona - cut/paste).\n"
+"\n"
+"Po uspešni prijavi je geslo pametno spremeniti.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Ta viki nima nastavljenega vmesnika za e-pošto.\n"
+"Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če "
+"to želi."
+
+msgid "Please provide a valid email address!"
+msgstr "Prosimo vpišite veljaven e-poštni naslov!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Nobeno uporabniško ime se ne ujema z e-poštnim naslovom '%(email)s'!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
+"Uporabite UserPreferences za spremembo nastavitev ali za izdelavo novega "
+"uporabniškega imena."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Uporabniško ime je prazno, prosimo vpišite ga."
+
+msgid "This user name already belongs to somebody else."
+msgstr "To uporabniško ime že obstaja."
+
+msgid "Passwords don't match!"
+msgstr "Gesli se ne ujemata!"
+
+msgid "Please specify a password!"
+msgstr "Prosimo vpišite geslo!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Prosimo vpišite svoj e-poštni naslov. Izgubljene podatke za prijavo lahko po "
+"potrebi prejmete naknadno na ta naslov."
+
+msgid "This email already belongs to somebody else."
+msgstr "Ta e-poštni naslov si že lasti nekdo drug."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "Uporabniško ime je narejeno, sedaj se lahko prijavite..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Uporabite UserPreferences za spremembo nastavitev izbranega uporabniškega "
+"računa"
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Teme (izgleda) '%(theme_name)s' ni možno naložiti!"
+
+msgid "User preferences saved!"
+msgstr "Uporabniške nastavitve so shranjene!"
+
+msgid "Default"
+msgstr "standardna"
+
+msgid "<Browser setting>"
+msgstr "<kot predlaga bralnik>"
+
+msgid "the one preferred"
+msgstr "izbrani-najljubši"
+
+msgid "free choice"
+msgstr "prosta izbira"
+
+msgid "Select User"
+msgstr "Izberi uporabnika"
+
+msgid "Save"
+msgstr "Shrani"
+
+msgid "Preferred theme"
+msgstr "Najljubša tema (izgled)"
+
+msgid "Editor Preference"
+msgstr "Najljubši urejevalnik"
+
+msgid "Editor shown on UI"
+msgstr "Izbor urejevalnika"
+
+msgid "Time zone"
+msgstr "Časovni pas"
+
+msgid "Your time is"
+msgstr "Vaš lokalni čas je"
+
+msgid "Server time is"
+msgstr "Čas na strežniku je"
+
+msgid "Date format"
+msgstr "Oblika datuma"
+
+msgid "Preferred language"
+msgstr "Najljubši jezik"
+
+msgid "General options"
+msgstr "Druge nastavitve"
+
+msgid "Quick links"
+msgstr "Hitre povezave"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "Brez veljavnega e-poštnega naslova ta seznam ne deluje!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Naročen na naslednje viki strani (en regularni izraz na vrstico)"
+
+msgid "Create Profile"
+msgstr "Tvori profil"
+
+msgid "Mail me my account data"
+msgstr "Pošlji mi podatke o tem uporabniškem računu"
+
+msgid "Email"
+msgstr "E-poštni naslov"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+"Glej %(userprefslink)s za pridobitev novega uporabniškega računa ali za "
+"rešitev izgubljenega gesla."
+
+msgid "Name"
+msgstr "Ime"
+
+msgid "Password"
+msgstr "Geslo"
+
+msgid "Action"
+msgstr "Akcija"
+
+#, python-format
+msgid "Required attribute \"%(attrname)s\" missing"
+msgstr ""
+
+#, fuzzy
+msgid "Submitted form data:"
+msgstr "Naročen na %s:"
+
+msgid "Search Titles"
+msgstr "Iskanje po naslovih"
+
+msgid "Display context of search results"
+msgstr "Prikaži kontekst rezultatov iskanja"
+
+msgid "Case-sensitive searching"
+msgstr "Loči med velikimi in malimi črkami pri iskanju"
+
+msgid "Search Text"
+msgstr "Iskanje po polnem besedilu"
+
+msgid "Go To Page"
+msgstr "Pojdi na stran"
+
+msgid "Include system pages"
+msgstr "Vključno s sistemskimi stranmi"
+
+msgid "Exclude system pages"
+msgstr "Brez sistemskih strani"
+
+msgid "Plain title index"
+msgstr "Kazalo naslovov v obliki navadnega besedila"
+
+msgid "XML title index"
+msgstr "Kazalo naslovov v obliki XML"
+
+msgid "Python Version"
+msgstr "Različica interpreterja Python"
+
+msgid "MoinMoin Version"
+msgstr "Različica MoinMoin"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Različica %s [revizija: %s]"
+
+msgid "4Suite Version"
+msgstr "Različica 4Suite"
+
+msgid "Number of pages"
+msgstr "Število strani"
+
+msgid "Number of system pages"
+msgstr "Število sistemskih strani"
+
+msgid "Accumulated page sizes"
+msgstr "Skupna velikost strani"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Zasedenost diska %(data_dir)s/strani/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Zasedenost diska %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Vpisov v dnevniku"
+
+msgid "NONE"
+msgstr "-"
+
+msgid "Global extension macros"
+msgstr "Globalni razširitveni makroji"
+
+msgid "Local extension macros"
+msgstr "Lokalni razširitveni makroji"
+
+msgid "Global extension actions"
+msgstr "Globalne razširitvene akcije"
+
+msgid "Local extension actions"
+msgstr "Lokalne razširitvene akcije"
+
+msgid "Global parsers"
+msgstr "Globalni sintaktični analizatorji (parserji)"
+
+msgid "Local extension parsers"
+msgstr "Lokalni sintaktični analizatorji (parserji)"
+
+msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+msgstr ""
+"Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)"
+
+msgid "Disabled"
+msgstr "Izklopljeno"
+
+msgid "Enabled"
+msgstr "Vklopljeno"
+
+msgid "Lupy search"
+msgstr "Iskanje Lupy"
+
+msgid "Active threads"
+msgstr "Aktivne niti"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Uporabite selektivnejše iskalno geslo namesto {{{\"%s\"}}}"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "Napaka v regularnem izrazu '%s'"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Neveljavena navedba časa '%s'"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Atributu \"%(token)s\" mora slediti \"=\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Atribut \"%(token)s\" mora imeti navedeno vrednost"
+
+msgid "Wiki Markup"
+msgstr "Označevanje viki"
+
+msgid "Print View"
+msgstr "Izgled za tiskanje"
+
+msgid "Your changes are not saved!"
+msgstr "Spremembe niso shranjene!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Ime strani je predolgo, uporabite krajše ime."
+
+msgid "GUI Mode"
+msgstr "Urejanje s sprotnim prikazom (GUI)"
 
 msgid "Edit was cancelled."
 msgstr "Spremembe preklicane."
@@ -336,12 +684,41 @@ msgstr ""
 "da se izognete konfliktnim popravkom.'''[[BR]]\n"
 "Z ukazom \"Preklic\" lahko zapustite urejevalnik."
 
-msgid "<unknown>"
-msgstr "<neznano>"
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
 
-#, fuzzy
-msgid "Text mode"
-msgstr "po besedilu"
+msgid "The theme name is not set."
+msgstr ""
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Namestitev datoteke '%(filename)s' ni uspela."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Datoteka %s ne vsebuje MoinMoin paketa."
+
+#, fuzzy, python-format
+msgid "The page %s does not exist."
+msgstr "Priponka '%(filename)s' ne obstaja!"
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %s in line %i."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The file %s was not found in the package."
+msgstr "Datoteka %s ne vsebuje MoinMoin paketa."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -468,26 +845,17 @@ msgstr "Naročilo na obvestila velja tudi za neznatne spremembe"
 msgid "Disable this account forever"
 msgstr "Trajno ukini ta uporabniški račun"
 
-msgid "Name"
-msgstr "Ime"
-
 msgid "(Use Firstname''''''Lastname)"
 msgstr "(običajno oblike Ime''''''Priimek, z nekaj truda lahko: Ime Priimek)"
 
 msgid "Alias-Name"
 msgstr "Psevdonim"
 
-msgid "Password"
-msgstr "Geslo"
-
 msgid "Password repeat"
 msgstr "Geslo (ponovno)"
 
 msgid "(Only when changing passwords)"
 msgstr "(samo ob spremembi gesla)"
-
-msgid "Email"
-msgstr "E-poštni naslov"
 
 msgid "User CSS URL"
 msgstr "URL uporabnikovega CSS stila"
@@ -497,207 +865,6 @@ msgstr "(prazno polje izklopi upor. CSS)"
 
 msgid "Editor size"
 msgstr "Velikost področja za urejanje"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Neveljavno uporabniško ime {{{'%s'}}}.\n"
-"Ime lahko vsebuje poljuben alfanumeričen znak iz nabora Unicode,\n"
-"z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso "
-"dovoljena."
-
-#, python-format
-msgid "You are not allowed to do %s on this page."
-msgstr "Na tej strani vam ni dovoljeno \"%s\"."
-
-msgid "Login"
-msgstr "Prijava"
-
-#, python-format
-msgid " %s and try again."
-msgstr " %s in poskusite ponovno."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d zadetkov od približno %(pages)d preiskanih strani."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekund"
-
-msgid "match"
-msgstr "zadetek"
-
-msgid "matches"
-msgstr "zadetkov"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s\n"
-msgstr ""
-"Uporabniško ime: %s\n"
-"\n"
-"Uporabniško geslo: %s\n"
-"\n"
-"URL za prijavo: %s/%s\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Zahtevano je bilo, da se podatki o uporabniškem imenu (računu) pošljejo\n"
-"na vaš poštni naslov.\n"
-"\n"
-"Če ste izgubili svoje geslo, lahko uporabite priloženi niz znakov in ga\n"
-"vnesete TOČNO TAKO, KOT JE PRIKAZAN v polje za geslo ob prijavi\n"
-"(uporabite lahko ukaze za kopiranje z zaslona - cut/paste).\n"
-"\n"
-"Po uspešni prijavi je geslo pametno spremeniti.\n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Podatki o vašem viki uporabniškem imenu (računu)"
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"Ta viki nima nastavljenega vmesnika za e-pošto.\n"
-"Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če "
-"to želi."
-
-msgid "Please provide a valid email address!"
-msgstr "Prosimo vpišite veljaven e-poštni naslov!"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "Nobeno uporabniško ime se ne ujema z e-poštnim naslovom '%(email)s'!"
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
-"Uporabite UserPreferences za spremembo nastavitev ali za izdelavo novega "
-"uporabniškega imena."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Uporabniško ime je prazno, prosimo vpišite ga."
-
-msgid "This user name already belongs to somebody else."
-msgstr "To uporabniško ime že obstaja."
-
-msgid "Passwords don't match!"
-msgstr "Gesli se ne ujemata!"
-
-msgid "Please specify a password!"
-msgstr "Prosimo vpišite geslo!"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Prosimo vpišite svoj e-poštni naslov. Izgubljene podatke za prijavo lahko po "
-"potrebi prejmete naknadno na ta naslov."
-
-msgid "This email already belongs to somebody else."
-msgstr "Ta e-poštni naslov si že lasti nekdo drug."
-
-msgid "User account created! You can use this account to login now..."
-msgstr "Uporabniško ime je narejeno, sedaj se lahko prijavite..."
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"Uporabite UserPreferences za spremembo nastavitev izbranega uporabniškega "
-"računa"
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Teme (izgleda) '%(theme_name)s' ni možno naložiti!"
-
-msgid "User preferences saved!"
-msgstr "Uporabniške nastavitve so shranjene!"
-
-msgid "Default"
-msgstr "standardna"
-
-msgid "<Browser setting>"
-msgstr "<kot predlaga bralnik>"
-
-msgid "the one preferred"
-msgstr "izbrani-najljubši"
-
-msgid "free choice"
-msgstr "prosta izbira"
-
-msgid "Select User"
-msgstr "Izberi uporabnika"
-
-msgid "Save"
-msgstr "Shrani"
-
-msgid "Preferred theme"
-msgstr "Najljubša tema (izgled)"
-
-msgid "Editor Preference"
-msgstr "Najljubši urejevalnik"
-
-msgid "Editor shown on UI"
-msgstr "Izbor urejevalnika"
-
-msgid "Time zone"
-msgstr "Časovni pas"
-
-msgid "Your time is"
-msgstr "Vaš lokalni čas je"
-
-msgid "Server time is"
-msgstr "Čas na strežniku je"
-
-msgid "Date format"
-msgstr "Oblika datuma"
-
-msgid "Preferred language"
-msgstr "Najljubši jezik"
-
-msgid "General options"
-msgstr "Druge nastavitve"
-
-msgid "Quick links"
-msgstr "Hitre povezave"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr "Brez veljavnega e-poštnega naslova ta seznam ne deluje!"
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Naročen na naslednje viki strani (en regularni izraz na vrstico)"
-
-msgid "Create Profile"
-msgstr "Tvori profil"
-
-msgid "Mail me my account data"
-msgstr "Pošlji mi podatke o tem uporabniškem računu"
-
-#, python-format
-msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
-msgstr ""
-"Glej %(userprefslink)s za pridobitev novega uporabniškega računa ali za "
-"rešitev izgubljenega gesla."
-
-msgid "Action"
-msgstr "Akcija"
 
 msgid "No older revisions available!"
 msgstr "Ta stran nima starejših različic!"
@@ -860,128 +1027,258 @@ msgstr "Treba je navesti tip diagramov!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Napačen ali neznan tip diagramov \"%s\"!"
 
-msgid "Search Titles"
-msgstr "Iskanje po naslovih"
-
-msgid "Display context of search results"
-msgstr "Prikaži kontekst rezultatov iskanja"
-
-msgid "Case-sensitive searching"
-msgstr "Loči med velikimi in malimi črkami pri iskanju"
-
-msgid "Search Text"
-msgstr "Iskanje po polnem besedilu"
-
-msgid "Go To Page"
-msgstr "Pojdi na stran"
-
-msgid "Include system pages"
-msgstr "Vključno s sistemskimi stranmi"
-
-msgid "Exclude system pages"
-msgstr "Brez sistemskih strani"
-
-msgid "Plain title index"
-msgstr "Kazalo naslovov v obliki navadnega besedila"
-
-msgid "XML title index"
-msgstr "Kazalo naslovov v obliki XML"
-
-msgid "Python Version"
-msgstr "Različica interpreterja Python"
-
-msgid "MoinMoin Version"
-msgstr "Različica MoinMoin"
+msgid "This page is already deleted or was never created!"
+msgstr "Ta stran je že izbrisana ali pa ni nikoli obstajala!"
 
 #, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Različica %s [revizija: %s]"
+msgid "No pages like \"%s\"!"
+msgstr "Nobena stran ni podobna \"%s\"!"
 
-msgid "4Suite Version"
-msgstr "Različica 4Suite"
-
-msgid "Number of pages"
-msgstr "Število strani"
-
-msgid "Number of system pages"
-msgstr "Število sistemskih strani"
-
-msgid "Accumulated page sizes"
-msgstr "Skupna velikost strani"
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Zasedenost diska %(data_dir)s/strani/"
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Priponka '%(target)s' (ime '%(filename)s') že obstaja na strežniku."
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Zasedenost diska %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "Vpisov v dnevniku"
-
-msgid "NONE"
-msgstr "-"
-
-msgid "Global extension macros"
-msgstr "Globalni razširitveni makroji"
-
-msgid "Local extension macros"
-msgstr "Lokalni razširitveni makroji"
-
-msgid "Global extension actions"
-msgstr "Globalne razširitvene akcije"
-
-msgid "Local extension actions"
-msgstr "Lokalne razširitvene akcije"
-
-msgid "Global parsers"
-msgstr "Globalni sintaktični analizatorji (parserji)"
-
-msgid "Local extension parsers"
-msgstr "Lokalni sintaktični analizatorji (parserji)"
-
-msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+msgid "Created the package %s containing the pages %s."
 msgstr ""
-"Nameščeni procesorji (zastarelo -- uporabite raje sintaktične analizatorje)"
 
-msgid "Disabled"
-msgstr "Izklopljeno"
+#, fuzzy
+msgid "Package pages"
+msgstr "Zapakiraj strani v ZIP"
 
-msgid "Enabled"
-msgstr "Vklopljeno"
+#, fuzzy
+msgid "Package name"
+msgstr "Zapakiraj strani v ZIP"
 
-msgid "Lupy search"
-msgstr "Iskanje Lupy"
+msgid "List of page names - separated by <tt>,</tt>"
+msgstr ""
 
-msgid "Active threads"
-msgstr "Aktivne niti"
+#, fuzzy, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "Uporabniško ime je prazno, prosimo vpišite ga."
 
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "Uporabite selektivnejše iskalno geslo namesto {{{\"%s\"}}}"
+msgid "Missing password. Please enter user name and password."
+msgstr ""
 
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr "Napaka v regularnem izrazu '%s'"
-
-#, python-format
-msgid "Bad timestamp '%s'"
-msgstr "Neveljavena navedba časa '%s'"
+msgid "Sorry, wrong password."
+msgstr ""
 
 #, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "Atributu \"%(token)s\" mora slediti \"=\""
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Natanko ena stran je podobna \"%s\", preusmerjanje tja ..."
 
 #, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Atribut \"%(token)s\" mora imeti navedeno vrednost"
+msgid "Pages like \"%s\""
+msgstr "Strani, ki so podobne \"%s\""
 
-msgid "Wiki Markup"
-msgstr "Označevanje viki"
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s za \"%(title)s\""
 
-msgid "Print View"
-msgstr "Izgled za tiskanje"
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Struktura spletne predstavitve na \"%s\""
+
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+msgid "You are not allowed to rename pages in this wiki!"
+msgstr "Na tem vikiju ni dovoljeno preimenovanje strani!"
+
+msgid "Please use the interactive user interface to rename pages!"
+msgstr "Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!"
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s."
+
+msgid "Rename Page"
+msgstr "Preimenuj stran"
+
+msgid "New name"
+msgstr "Novo ime"
+
+msgid "Optional reason for the renaming"
+msgstr "Razlog za preimenovanje (neobvezno)"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Stran z imenom {{{'%s'}}} že obstaja.'''\n"
+"Uporabite drugačno ime."
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(vključno z %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Naslednjih %(badwords)d spodaj poudarjenih besed ni v slovarju z %"
+"(totalwords)d besedami %(localwords)s:"
+
+msgid "Add checked words to dictionary"
+msgstr "Dodaj označene besede v slovar"
+
+msgid "No spelling errors found!"
+msgstr "Ni očitnih tipkarskih napak!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Iskanje po naslovih: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Iskanje po polnem besedilu: \"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Celotni seznam povezav za \"%s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Nove strani s praznim imenom ni mogoče narediti, navedite ime."
+
+#, fuzzy
+msgid "Pages"
+msgstr "Stran"
+
+#, fuzzy
+msgid "Select Author"
+msgstr "Izberi uporabnika"
+
+msgid "Revert all!"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "Te akcije vam ni dovoljeno izvesti."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Naroči uporabnike na obvestila s strani %s"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Naročen na %s:"
+
+msgid "Not a user:"
+msgstr "Ni uporabnik"
+
+msgid "You are not allowed to perform this action."
+msgstr "Te akcije vam ni dovoljeno izvesti."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Za namestitev datotek nimate pooblastil."
+
+msgid "You are not allowed to delete this page."
+msgstr "Te strani vam ni dovoljeno izbrisati."
+
+msgid "Please use the interactive user interface to delete pages!"
+msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
+
+msgid "Really delete this page?"
+msgstr "Zares izbrisati to stran?"
+
+msgid "Delete"
+msgstr "Brisanje"
+
+msgid "Optional reason for the deletion"
+msgstr "Razlog za brisanje (neobvezno)"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "Označevanje"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Na tej strani vam ni dovoljeno \"%s\"."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"
@@ -1091,10 +1388,6 @@ msgid "Attachments for \"%(pagename)s\""
 msgstr "Priponke na strani \"%(pagename)s\""
 
 #, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "Priponka '%(target)s' (ime '%(filename)s') že obstaja na strežniku."
-
-#, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
@@ -1109,14 +1402,6 @@ msgstr "Priponka '%(filename)s' izbrisana."
 #, python-format
 msgid "Attachment '%(filename)s' installed."
 msgstr "Priponka '%(filename)s' nameščena."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Namestitev datoteke '%(filename)s' ni uspela."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Datoteka %s ne vsebuje MoinMoin paketa."
 
 #, python-format
 msgid ""
@@ -1171,240 +1456,6 @@ msgstr "Neznan tip priponke, zato je ni mogoče neposredno vključiti v stran."
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "[[Verbatim(attachment:)]]%(filename)s na strani %(pagename)s"
 
-msgid "You are not allowed to delete this page."
-msgstr "Te strani vam ni dovoljeno izbrisati."
-
-msgid "This page is already deleted or was never created!"
-msgstr "Ta stran je že izbrisana ali pa ni nikoli obstajala!"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
-
-msgid "Really delete this page?"
-msgstr "Zares izbrisati to stran?"
-
-msgid "Delete"
-msgstr "Brisanje"
-
-msgid "Optional reason for the deletion"
-msgstr "Razlog za brisanje (neobvezno)"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Nobena stran ni podobna \"%s\"!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Natanko ena stran je podobna \"%s\", preusmerjanje tja ..."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Strani, ki so podobne \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s za \"%(title)s\""
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Struktura spletne predstavitve na \"%s\""
-
-msgid "Please log in first."
-msgstr ""
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-
-msgid "MyPages management"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr ""
-
-#, fuzzy
-msgid "Package pages"
-msgstr "Zapakiraj strani v ZIP"
-
-#, fuzzy
-msgid "Package name"
-msgstr "Zapakiraj strani v ZIP"
-
-msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
-
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Na tem vikiju ni dovoljeno preimenovanje strani!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s."
-
-msgid "Rename Page"
-msgstr "Preimenuj stran"
-
-msgid "New name"
-msgstr "Novo ime"
-
-msgid "Optional reason for the renaming"
-msgstr "Razlog za preimenovanje (neobvezno)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Stran z imenom {{{'%s'}}} že obstaja.'''\n"
-"Uporabite drugačno ime."
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(vključno z %(localwords)d %(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"Naslednjih %(badwords)d spodaj poudarjenih besed ni v slovarju z %"
-"(totalwords)d besedami %(localwords)s:"
-
-msgid "Add checked words to dictionary"
-msgstr "Dodaj označene besede v slovar"
-
-msgid "No spelling errors found!"
-msgstr "Ni očitnih tipkarskih napak!"
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Naroči uporabnike na obvestila s strani %s"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Naročen na %s:"
-
-msgid "Not a user:"
-msgstr "Ni uporabnik"
-
-msgid "You are not allowed to perform this action."
-msgstr "Te akcije vam ni dovoljeno izvesti."
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Iskanje po naslovih: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Iskanje po polnem besedilu: \"%s\""
-
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
-msgstr ""
-
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-msgstr ""
-
-msgid "Wiki Backup / Restore"
-msgstr ""
-
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
-"\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
-
-#, fuzzy
-msgid "Backup"
-msgstr "Označevanje"
-
-msgid "Restore"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to do remote backup."
-msgstr "Na tej strani vam ni dovoljeno \"%s\"."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr ""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Celotni seznam povezav za \"%s\""
-
-#, fuzzy, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Uporabniško ime je prazno, prosimo vpišite ga."
-
-msgid "Missing password. Please enter user name and password."
-msgstr ""
-
-msgid "Sorry, wrong password."
-msgstr ""
-
-#, fuzzy
-msgid "You are now logged out."
-msgstr "Za namestitev datotek nimate pooblastil."
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "Nove strani s praznim imenom ni mogoče narediti, navedite ime."
-
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "Naloži novo priponko \"%(filename)s\" na strežnik"
@@ -1420,13 +1471,80 @@ msgstr "Spremeni risbo %(filename)s"
 msgid "Toggle line numbers"
 msgstr "Vklopi/izklopi številke vrstic"
 
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
+msgid "FrontPage"
+msgstr "PrvaStran"
 
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Ni takih označb \"%s\"!"
+msgid "RecentChanges"
+msgstr "ZadnjeSpremembe"
+
+msgid "TitleIndex"
+msgstr "KazaloNaslovov"
+
+msgid "WordIndex"
+msgstr "KazaloBesed"
+
+msgid "FindPage"
+msgstr "PoiščiStran"
+
+msgid "SiteNavigation"
+msgstr "Navigacija"
+
+msgid "HelpContents"
+msgstr "PomočPriVsebini"
+
+msgid "HelpOnFormatting"
+msgstr "PomočPriOblikovanju"
+
+msgid "UserPreferences"
+msgstr "UporabniškeNastavitve"
+
+msgid "WikiLicense"
+msgstr "VikiLicenca"
+
+msgid "MissingPage"
+msgstr "ManjkajočeStrani"
+
+msgid "MissingHomePage"
+msgstr "ManjkajočeOsebneStrani"
+
+msgid "Mon"
+msgstr "pon"
+
+msgid "Tue"
+msgstr "tor"
+
+msgid "Wed"
+msgstr "sre"
+
+msgid "Thu"
+msgstr "čet"
+
+msgid "Fri"
+msgstr "pet"
+
+msgid "Sat"
+msgstr "sob"
+
+msgid "Sun"
+msgstr "ned"
+
+msgid "AttachFile"
+msgstr "PripniDatoteko"
+
+msgid "DeletePage"
+msgstr "BrišiStran"
+
+msgid "LikePages"
+msgstr "PodobneStrani"
+
+msgid "LocalSiteMap"
+msgstr "StrukturaPredstavitve"
+
+msgid "RenamePage"
+msgstr "PreimenujStran"
+
+msgid "SpellCheck"
+msgstr "PreveriČrkovanje"
 
 #, fuzzy, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -1494,6 +1612,19 @@ msgstr "postavi knjižni zaznamek"
 msgid "[Bookmark reached]"
 msgstr "[Prišli smo do knjižnega zaznamka]"
 
+msgid "No wanted pages in this wiki."
+msgstr ""
+"V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne "
+"obstajajo)."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Ni takih označb \"%s\"!"
+
 msgid "Markup"
 msgstr "Označevanje"
 
@@ -1502,11 +1633,6 @@ msgstr "Prikaz"
 
 msgid "Filename"
 msgstr "Ime datoteke"
-
-msgid "No wanted pages in this wiki."
-msgstr ""
-"V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne "
-"obstajajo)."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
@@ -1747,78 +1873,3 @@ msgstr "sporočilo ni bilo odposlano"
 
 msgid "Mail sent OK"
 msgstr "uspešno odposlano"
-
-msgid "FrontPage"
-msgstr "PrvaStran"
-
-msgid "RecentChanges"
-msgstr "ZadnjeSpremembe"
-
-msgid "TitleIndex"
-msgstr "KazaloNaslovov"
-
-msgid "WordIndex"
-msgstr "KazaloBesed"
-
-msgid "FindPage"
-msgstr "PoiščiStran"
-
-msgid "SiteNavigation"
-msgstr "Navigacija"
-
-msgid "HelpContents"
-msgstr "PomočPriVsebini"
-
-msgid "HelpOnFormatting"
-msgstr "PomočPriOblikovanju"
-
-msgid "UserPreferences"
-msgstr "UporabniškeNastavitve"
-
-msgid "WikiLicense"
-msgstr "VikiLicenca"
-
-msgid "MissingPage"
-msgstr "ManjkajočeStrani"
-
-msgid "MissingHomePage"
-msgstr "ManjkajočeOsebneStrani"
-
-msgid "Mon"
-msgstr "pon"
-
-msgid "Tue"
-msgstr "tor"
-
-msgid "Wed"
-msgstr "sre"
-
-msgid "Thu"
-msgstr "čet"
-
-msgid "Fri"
-msgstr "pet"
-
-msgid "Sat"
-msgstr "sob"
-
-msgid "Sun"
-msgstr "ned"
-
-msgid "AttachFile"
-msgstr "PripniDatoteko"
-
-msgid "DeletePage"
-msgstr "BrišiStran"
-
-msgid "LikePages"
-msgstr "PodobneStrani"
-
-msgid "LocalSiteMap"
-msgstr "StrukturaPredstavitve"
-
-msgid "RenamePage"
-msgstr "PreimenujStran"
-
-msgid "SpellCheck"
-msgstr "PreveriČrkovanje"

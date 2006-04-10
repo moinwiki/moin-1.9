@@ -32,8 +32,6 @@ Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu
 '''Izveidot jaunu lapu''',
 '''You are not allowed to view this page.''':
 '''Jums nav tiesību aplūkot šo lapu.''',
-'''Your changes are not saved!''':
-'''Jūs izmaiņas nav saglabātas!''',
 '''You are not allowed to edit this page.''':
 '''Jums nav tiesību labot šo lapu.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu
 '''Vecās versijas labot nedrīkst!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Lapas slēgšanas laika kvota ir izsmelta. Iespējams labošanas konflikts!''',
-'''Page name is too long, try shorter name.''':
-'''Lapas nosaukums ir pārāks garš, pamēģiniet ko īsāku.''',
 '''Edit "%(pagename)s"''':
 '''Labot "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsauktu savas izmaiņas.''',
 '''Preview''':
 '''Pirmskats''',
-'''GUI Mode''':
-'''Grafiskais režīms''',
+'''Text mode''':
+'''Teksta režīms''',
 '''Comment:''':
 '''Komentārs:''',
 '''<No addition>''':
@@ -96,6 +92,223 @@ Ja Jūs to nevēlaties, nospiediet \'\'\'%(cancel_button_text)s\'\'\', lai atsau
 '''Maznozīmīgas izmaiņas''',
 '''Remove trailing whitespace from each line''':
 '''Dzēst tukšumus rindu beigās''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Kļūdains lietotāja vārds {{{\'%s\'}}}.
+Lietotāja vārds drīkst saturēt \'\'Unicode\'\' burtzīmes un ciparus un, ja nepieciešams, vienu atstarpi starp vārdiem.
+Grupas lapas vārds nav atļauts.''',
+'''You are not allowed to do %s on this page.''':
+'''Jūs nedrīkstat veikt %s ar šo lapu.''',
+'''Login''':
+'''Ieiet''',
+''' %s and try again.''':
+'''%s un mēģiniet vēlreiz.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām.''',
+'''%.2f seconds''':
+'''%.2f sekundes''',
+'''match''':
+'''saskaņa''',
+'''matches''':
+'''saskaņas''',
+'''<unknown>''':
+'''<nezināms>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Lietotāja vārds: %s
+
+Lietotāja parole: %s
+
+Lietotāja URL: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Kāds pieprasīja izsūtīt savus konta datus uz šo e-pasta adresi.
+
+Ja Jūs esat aizmirsis paroli, lūdzu ievadiet šos datus un paroli KĀ ŠEIT NORĀDĪTS
+ (izmantojiet kopēt/ielīmēt(copy/paste), lai dati būtu precīzi).
+
+Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli un izveidotu sev jaunu.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Jūsu viki konta dati''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Šajā viki pasta sūtīšana ir aizliegta.
+Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
+'''Please provide a valid email address!''':
+'''Lūdzu, norādiet pareizu e-pasta adresi!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIestatījumi''',
+'''Empty user name. Please enter a user name.''':
+'''Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu.''',
+'''This user name already belongs to somebody else.''':
+'''Tāds lietotāja vārds jau kādam pieder.''',
+'''Passwords don\'t match!''':
+'''Paroles nesakrīt!''',
+'''Please specify a password!''':
+'''Lūdzu, norādiet paroli!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas informāciju, to varēs izsutīt uz norādīto e-pasta adresi.''',
+'''This email already belongs to somebody else.''':
+'''Šāda e-pasta adrese jau kādam pieder.''',
+'''User account created! You can use this account to login now...''':
+'''Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Nevar ielādēt tēmu \'%(theme_name)s\'!''',
+'''User preferences saved!''':
+'''Lietotāja uzstādījumi saglabāti!''',
+'''Default''':
+'''Noklusējums''',
+'''<Browser setting>''':
+'''<Pārlūkprogrammas iestatījumi>''',
+'''the one preferred''':
+'''viens vēlamais''',
+'''free choice''':
+'''brīva izvēle''',
+'''Select User''':
+'''Izvēlēties lietotāju''',
+'''Save''':
+'''Saglabāt''',
+'''Preferred theme''':
+'''Vēlamā tēma''',
+'''Editor Preference''':
+'''Redaktora iestatījumi''',
+'''Editor shown on UI''':
+'''Lietotāja saskarnē redzamais redaktors''',
+'''Time zone''':
+'''Laika josla''',
+'''Your time is''':
+'''Jūsu laiks ir''',
+'''Server time is''':
+'''Servera laiks ir''',
+'''Date format''':
+'''Datuma formāts''',
+'''Preferred language''':
+'''Vēlamā valoda''',
+'''General options''':
+'''Vispārējas opcijas''',
+'''Quick links''':
+'''Ātrsaites''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Šis saraksts strādā tikai ar pareizu e-pasta adresi!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Parakstītās Viki lapas (pa vienai lapai rindā)''',
+'''Create Profile''':
+'''Izveidot profilu''',
+'''Mail me my account data''':
+'''Atsūtīt mana sistēmas konta datus''',
+'''Email''':
+'''E-pasts''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %(userprefslink)s''',
+'''Name''':
+'''Vārds''',
+'''Password''':
+'''Parole''',
+'''Action''':
+'''Darbība''',
+'''Required attribute "%(attrname)s" missing''':
+'''Trūkst "%(attrname)s" atribūta''',
+'''Submitted form data:''':
+'''Nosūtītie dati:''',
+'''Search Titles''':
+'''Meklēt virsrakstus''',
+'''Display context of search results''':
+'''Attēlot meklēšanas rezultātu kontekstu''',
+'''Case-sensitive searching''':
+'''Rakstzīmju jūtīga meklēšana''',
+'''Search Text''':
+'''Meklēt tekstā''',
+'''Go To Page''':
+'''Iet uz lapu''',
+'''Include system pages''':
+'''Iekļaut sistēmas lapas''',
+'''Exclude system pages''':
+'''Aizvākt sistēmas lapas''',
+'''Plain title index''':
+'''Rādīt kā tekstu''',
+'''XML title index''':
+'''Rādīt kā XML''',
+'''Python Version''':
+'''Python versija''',
+'''MoinMoin Version''':
+'''MoinMoin versija''',
+'''Release %s [Revision %s]''':
+'''Laidiens %s [Revīzija %s]''',
+'''4Suite Version''':
+'''4Suite versija''',
+'''Number of pages''':
+'''Lapu skaits''',
+'''Number of system pages''':
+'''Sistēmas lapu skaits''',
+'''Accumulated page sizes''':
+'''Visu lapu izmērs''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''%(data_dir)s/pages/ diskatmiņas patēriņš''',
+'''Disk usage of %(data_dir)s/''':
+'''%(data_dir)s/ diskatmiņas patēriņš''',
+'''Entries in edit log''':
+'''Ierakstīt izmaiņu protokolā''',
+'''NONE''':
+'''NEKAS''',
+'''Global extension macros''':
+'''Kopējie papildus makrosi''',
+'''Local extension macros''':
+'''Lokālie papildus makrosi''',
+'''Global extension actions''':
+'''Globālās papildus darbības''',
+'''Local extension actions''':
+'''Lokālās papildus darbības''',
+'''Global parsers''':
+'''Globālie parsētāji''',
+'''Local extension parsers''':
+'''Lokālo paplašinājumu parsētāji''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)''',
+'''Disabled''':
+'''Izslēgts''',
+'''Enabled''':
+'''Ieslēgts''',
+'''Lupy search''':
+'''Kopējā meklēšana''',
+'''Active threads''':
+'''Aktīvie pavedieni''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Lūdzu, norādiet konkrētāku meklējamo terminu {{{"%s"}}} vietā''',
+'''ERROR in regex \'%s\'''':
+'''KĻŪDA meklēšanas paraugā \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Slikta laika atzīme \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Nepieciešams "=" pēc "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Nepieciešma vērtība atslēgai "%(token)s"''',
+'''Wiki Markup''':
+'''Viki marķējums''',
+'''Print View''':
+'''Drukāšanai''',
+'''Your changes are not saved!''':
+'''Jūs izmaiņas nav saglabātas!''',
+'''Page name is too long, try shorter name.''':
+'''Lapas nosaukums ir pārāks garš, pamēģiniet ko īsāku.''',
+'''GUI Mode''':
+'''Grafiskais režīms''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -196,8 +409,10 @@ To leave the editor, press the Cancel button.''':
 Lai neveidotos konflikts, \'\'\'Jums nevajadzētu\'\' labot\'\' šo lapu vēl vismaz %(mins_valid)d minūtes.\'\'\'[[BR]]
 
 Lai izietu no labošanas, nospiediet pogu Atcelt.''',
-'''<unknown>''':
-'''<nezināms>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Nesekmīga faila \'%(filename)s\' instalēšana.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Fails %s nav MoinMoin pakotnes fails.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -257,149 +472,20 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Parakstīties uz maznozīmīgām izmaiņām''',
 '''Disable this account forever''':
 '''Aizmirst par mani uz visiem laikiem''',
-'''Name''':
-'''Vārds''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Ievadiet Vārdu\'\'\'\'\'\'Uzvārdu)''',
 '''Alias-Name''':
 '''Aliass-Vārds''',
-'''Password''':
-'''Parole''',
 '''Password repeat''':
 '''Atkārtot paroli''',
 '''(Only when changing passwords)''':
 '''(Tikai mainot paroli)''',
-'''Email''':
-'''E-pasts''',
 '''User CSS URL''':
 '''Lietotāja CSS URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Atstāt tukšu, lai varētu lietot CSS)''',
 '''Editor size''':
 '''Labošanas loga izmērs''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Kļūdains lietotāja vārds {{{\'%s\'}}}.
-Lietotāja vārds drīkst saturēt \'\'Unicode\'\' burtzīmes un ciparus un, ja nepieciešams, vienu atstarpi starp vārdiem.
-Grupas lapas vārds nav atļauts.''',
-'''You are not allowed to do %s on this page.''':
-'''Jūs nedrīkstat veikt %s ar šo lapu.''',
-'''Login''':
-'''Ieiet''',
-''' %s and try again.''':
-'''%s un mēģiniet vēlreiz.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām.''',
-'''%.2f seconds''':
-'''%.2f sekundes''',
-'''match''':
-'''saskaņa''',
-'''matches''':
-'''saskaņas''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''Lietotāja vārds: %s
-
-Lietotāja parole: %s
-
-Lietotāja URL: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Kāds pieprasīja izsūtīt savus konta datus uz šo e-pasta adresi.
-
-Ja Jūs esat aizmirsis paroli, lūdzu ievadiet šos datus un paroli KĀ ŠEIT NORĀDĪTS
- (izmantojiet kopēt/ielīmēt(copy/paste), lai dati būtu precīzi).
-
-Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli un izveidotu sev jaunu.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Jūsu viki konta dati''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Šajā viki pasta sūtīšana ir aizliegta.
-Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu.''',
-'''Please provide a valid email address!''':
-'''Lūdzu, norādiet pareizu e-pasta adresi!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Netika atrasts neviens lietotājs ar tādu e-pasta adresi \'%(email)s\'!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIestatījumi''',
-'''Empty user name. Please enter a user name.''':
-'''Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu.''',
-'''This user name already belongs to somebody else.''':
-'''Tāds lietotāja vārds jau kādam pieder.''',
-'''Passwords don\'t match!''':
-'''Paroles nesakrīt!''',
-'''Please specify a password!''':
-'''Lūdzu, norādiet paroli!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas informāciju, to varēs izsutīt uz norādīto e-pasta adresi.''',
-'''This email already belongs to somebody else.''':
-'''Šāda e-pasta adrese jau kādam pieder.''',
-'''User account created! You can use this account to login now...''':
-'''Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, izmantojiet LietotājaIstatījumi''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Nevar ielādēt tēmu \'%(theme_name)s\'!''',
-'''User preferences saved!''':
-'''Lietotāja uzstādījumi saglabāti!''',
-'''Default''':
-'''Noklusējums''',
-'''<Browser setting>''':
-'''<Pārlūkprogrammas iestatījumi>''',
-'''the one preferred''':
-'''viens vēlamais''',
-'''free choice''':
-'''brīva izvēle''',
-'''Select User''':
-'''Izvēlēties lietotāju''',
-'''Save''':
-'''Saglabāt''',
-'''Preferred theme''':
-'''Vēlamā tēma''',
-'''Editor Preference''':
-'''Redaktora iestatījumi''',
-'''Editor shown on UI''':
-'''Lietotāja saskarnē redzamais redaktors''',
-'''Time zone''':
-'''Laika josla''',
-'''Your time is''':
-'''Jūsu laiks ir''',
-'''Server time is''':
-'''Servera laiks ir''',
-'''Date format''':
-'''Datuma formāts''',
-'''Preferred language''':
-'''Vēlamā valoda''',
-'''General options''':
-'''Vispārējas opcijas''',
-'''Quick links''':
-'''Ātrsaites''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Šis saraksts strādā tikai ar pareizu e-pasta adresi!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Parakstītās Viki lapas (pa vienai lapai rindā)''',
-'''Create Profile''':
-'''Izveidot profilu''',
-'''Mail me my account data''':
-'''Atsūtīt mana sistēmas konta datus''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %(userprefslink)s''',
-'''Action''':
-'''Darbība''',
 '''No older revisions available!''':
 '''Vecākas versijas nav!''',
 '''Diff for "%s"''':
@@ -498,82 +584,106 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Norādiet diagrammas tipu!''',
 '''Bad chart type "%s"!''':
 '''Slikts diagrammas tips "%s"!''',
-'''Search Titles''':
-'''Meklēt virsrakstus''',
-'''Display context of search results''':
-'''Attēlot meklēšanas rezultātu kontekstu''',
-'''Case-sensitive searching''':
-'''Rakstzīmju jūtīga meklēšana''',
-'''Search Text''':
-'''Meklēt tekstā''',
-'''Go To Page''':
-'''Iet uz lapu''',
-'''Include system pages''':
-'''Iekļaut sistēmas lapas''',
-'''Exclude system pages''':
-'''Aizvākt sistēmas lapas''',
-'''Plain title index''':
-'''Rādīt kā tekstu''',
-'''XML title index''':
-'''Rādīt kā XML''',
-'''Python Version''':
-'''Python versija''',
-'''MoinMoin Version''':
-'''MoinMoin versija''',
-'''Release %s [Revision %s]''':
-'''Laidiens %s [Revīzija %s]''',
-'''4Suite Version''':
-'''4Suite versija''',
-'''Number of pages''':
-'''Lapu skaits''',
-'''Number of system pages''':
-'''Sistēmas lapu skaits''',
-'''Accumulated page sizes''':
-'''Visu lapu izmērs''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''%(data_dir)s/pages/ diskatmiņas patēriņš''',
-'''Disk usage of %(data_dir)s/''':
-'''%(data_dir)s/ diskatmiņas patēriņš''',
-'''Entries in edit log''':
-'''Ierakstīt izmaiņu protokolā''',
-'''NONE''':
-'''NEKAS''',
-'''Global extension macros''':
-'''Kopējie papildus makrosi''',
-'''Local extension macros''':
-'''Lokālie papildus makrosi''',
-'''Global extension actions''':
-'''Globālās papildus darbības''',
-'''Local extension actions''':
-'''Lokālās papildus darbības''',
-'''Global parsers''':
-'''Globālie parsētāji''',
-'''Local extension parsers''':
-'''Lokālo paplašinājumu parsētāji''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)''',
-'''Disabled''':
-'''Izslēgts''',
-'''Enabled''':
-'''Ieslēgts''',
-'''Lupy search''':
-'''Kopējā meklēšana''',
-'''Active threads''':
-'''Aktīvie pavedieni''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Lūdzu, norādiet konkrētāku meklējamo terminu {{{"%s"}}} vietā''',
-'''ERROR in regex \'%s\'''':
-'''KĻŪDA meklēšanas paraugā \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Slikta laika atzīme \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Nepieciešams "=" pēc "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Nepieciešma vērtība atslēgai "%(token)s"''',
-'''Wiki Markup''':
-'''Viki marķējums''',
-'''Print View''':
-'''Drukāšanai''',
+'''This page is already deleted or was never created!''':
+'''Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!''',
+'''No pages like "%s"!''':
+'''"%s" līdzīgu lapu nav!''',
+'''Invalid filename "%s"!''':
+'''Nepareizs faila nosaukums "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Piesaite \'%(target)s\' (veidota no faila \'%(filename)s\') jau eksistē.''',
+'''Created the package %s containing the pages %s.''':
+'''Izveidots sainis %s, kas satur lapas %s.''',
+'''Package pages''':
+'''Iesaiņot lapas''',
+'''Package name''':
+'''Saiņa nosaukums''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Lapu saraksts, atdalīts ar <tt>,</tt>''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
+'''Missing password. Please enter user name and password.''':
+'''Trūkst paroles. Lūdzu, ievadiet vārdu un paroli.''',
+'''Sorry, wrong password.''':
+'''Piedodiet, nepareiza parole.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Atrasta tieši viena "%s" līdzīga lapa; pāradresēju uz to.''',
+'''Pages like "%s"''':
+'''"%s" līdzīgas lapas''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s for "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''"%s" vietnes karte''',
+'''Please log in first.''':
+'''Lūdzu, sākumā pieslēdzieties''',
+'''Please first create a homepage before creating additional pages.''':
+'''Lūdzu, pirms veidot papildus lapas, izveidojiet mājas lapu.''',
+'''MyPages management''':
+'''MyPages pārvaldīšana''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Šajā viki Jums nav tiesību pārdēvēt lapas!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja saskarni!''',
+'''Could not rename page because of file system error: %s.''':
+'''Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts.''',
+'''Rename Page''':
+'''Pārdēvēt lapu''',
+'''New name''':
+'''Jauns nosaukums''',
+'''Optional reason for the renaming''':
+'''Pārdēvēšanas iemesls (neobligāts)''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Lapa ar nosaukumu {{{\'%s\'}}} jau eksistē.\'\'\'
+
+Pamēģiniet citu nosaukumu.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(including %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''%(badwords)d vārdi netika atrasti %(totalwords)d %(localwords)s vārdnīcā un ir izcelti šeit:''',
+'''Add checked words to dictionary''':
+'''Pievienot atzīmētos vārdus vārdnīcai''',
+'''No spelling errors found!''':
+'''Pareizrakstības kļūdas nav atrastas!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt.''',
+'''Title Search: "%s"''':
+'''Meklēt pēc virsrakstiem: "%s"''',
+'''Full Text Search: "%s"''':
+'''Visa teksta meklēšana: "%s"''',
+'''Full Link List for "%s"''':
+'''Visu saišu saraksts "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
+'''Subscribe users to the page %s''':
+'''Parakstīt lietotājus lapas %s izmaiņām''',
+'''Subscribed for %s:''':
+'''Lapas %s izmaiņām parakstījušies:''',
+'''Not a user:''':
+'''Nav lietotājs:''',
+'''You are not allowed to perform this action.''':
+'''Jums nav tiesību veikt šo darbību.''',
+'''You are now logged out.''':
+'''Jūs esat atslēgts(-a).''',
+'''You are not allowed to delete this page.''':
+'''Jūs nedrīkstat dzēst šo lapu.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!''',
+'''Really delete this page?''':
+'''Jūs tiešām vēlaties dzēst šo lapu?''',
+'''Delete''':
+'''Dzēst''',
+'''Optional reason for the deletion''':
+'''Ja vēlaties, norādiet lapas dzēšanas iemeslu''',
+'''Backup''':
+'''Veidot rezerves kopiju''',
+'''Restore''':
+'''Atjaunot''',
+'''You are not allowed to do remote backup.''':
+'''Jūs nedrīkstat veikt attālinātu rezerves kopēšanu.''',
+'''Unknown backup subaction: %s.''':
+'''Nezināma rezerves kopēšanas apakšdarbība: %s.''',
 '''[%d attachments]''':
 '''[%d piesaistes]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -634,18 +744,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Nestrādājoša ielāde: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Lapas "%(pagename)s" piesaistes''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Piesaite \'%(target)s\' (veidota no faila \'%(filename)s\') jau eksistē.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Piesaiste \'%(target)s\' (no faila \'%(filename)s\') ar izmēru %(bytes)d baiti pievienota.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Piesaiste \'%(filename)s\' izdzēsta.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Piesaiste \'%(filename)s\' ir uzinstalēta.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Nesekmīga faila \'%(filename)s\' instalēšana.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Fails %s nav MoinMoin pakotnes fails.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Nevar atpakot piesaisti \'%(filename)s\' - rezultējošie faili var būt pārāk lieli (pietrūkst %(space)d kB).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -668,78 +772,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Nezināms faila tips, nevar attēlot iestarpināto piesaisti.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''piesaiste:%(filename)s lapai %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Jūs nedrīkstat dzēst šo lapu.''',
-'''This page is already deleted or was never created!''':
-'''Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!''',
-'''Really delete this page?''':
-'''Jūs tiešām vēlaties dzēst šo lapu?''',
-'''Delete''':
-'''Dzēst''',
-'''Optional reason for the deletion''':
-'''Ja vēlaties, norādiet lapas dzēšanas iemeslu''',
-'''No pages like "%s"!''':
-'''"%s" līdzīgu lapu nav!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Atrasta tieši viena "%s" līdzīga lapa; pāradresēju uz to.''',
-'''Pages like "%s"''':
-'''"%s" līdzīgas lapas''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s for "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''"%s" vietnes karte''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Šajā viki Jums nav tiesību pārdēvēt lapas!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja saskarni!''',
-'''Could not rename page because of file system error: %s.''':
-'''Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts.''',
-'''Rename Page''':
-'''Pārdēvēt lapu''',
-'''New name''':
-'''Jauns nosaukums''',
-'''Optional reason for the renaming''':
-'''Pārdēvēšanas iemesls (neobligāts)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Lapa ar nosaukumu {{{\'%s\'}}} jau eksistē.\'\'\'
-
-Pamēģiniet citu nosaukumu.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(including %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''%(badwords)d vārdi netika atrasti %(totalwords)d %(localwords)s vārdnīcā un ir izcelti šeit:''',
-'''Add checked words to dictionary''':
-'''Pievienot atzīmētos vārdus vārdnīcai''',
-'''No spelling errors found!''':
-'''Pareizrakstības kļūdas nav atrastas!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt.''',
-'''Subscribe users to the page %s''':
-'''Parakstīt lietotājus lapas %s izmaiņām''',
-'''Subscribed for %s:''':
-'''Lapas %s izmaiņām parakstījušies:''',
-'''Not a user:''':
-'''Nav lietotājs:''',
-'''You are not allowed to perform this action.''':
-'''Jums nav tiesību veikt šo darbību.''',
-'''Title Search: "%s"''':
-'''Meklēt pēc virsrakstiem: "%s"''',
-'''Full Text Search: "%s"''':
-'''Visa teksta meklēšana: "%s"''',
-'''Full Link List for "%s"''':
-'''Visu saišu saraksts "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
-'''Missing password. Please enter user name and password.''':
-'''Trūkst paroles. Lūdzu, ievadiet vārdu un paroli.''',
-'''Sorry, wrong password.''':
-'''Piedodiet, nepareiza parole.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
 '''Upload new attachment "%(filename)s"''':
 '''Ielādēt jaunu piesaisti "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -748,10 +780,60 @@ Pamēģiniet citu nosaukumu.''',
 '''Labot attēlu %(filename)s''',
 '''Toggle line numbers''':
 '''Pārslēgt rindu numerāciju''',
-'''Invalid include arguments "%s"!''':
-'''Nepareizs iekļaušanas arguments "%s"!''',
-'''Nothing found for "%s"!''':
-'''Neko neatradu no "%s"!''',
+'''FrontPage''':
+'''SākumLapa''',
+'''RecentChanges''':
+'''PēdējāsIzmaiņas''',
+'''TitleIndex''':
+'''VirsrakstuRādītājs''',
+'''WordIndex''':
+'''PriekšmetuRādītājs''',
+'''FindPage''':
+'''AtrastLapu''',
+'''SiteNavigation''':
+'''LapasNavigācija''',
+'''HelpContents''':
+'''PamācībasSaturaRādītājs''',
+'''HelpOnFormatting''':
+'''PalīdzētFormatēt''',
+'''UserPreferences''':
+'''JūsuIestatījumi''',
+'''WikiLicense''':
+'''VikiLicence''',
+'''MissingPage''':
+'''IztrūkstošaLapa''',
+'''MissingHomePage''':
+'''IztrūkstošaMājasLapa''',
+'''Mon''':
+'''Pr''',
+'''Tue''':
+'''Ot''',
+'''Wed''':
+'''Tr''',
+'''Thu''':
+'''Ce''',
+'''Fri''':
+'''Pk''',
+'''Sat''':
+'''Se''',
+'''Sun''':
+'''Sv''',
+'''AttachFile''':
+'''PievienotFailu''',
+'''DeletePage''':
+'''DzēstLapu''',
+'''LikePages''':
+'''LīdzīgasLapas''',
+'''LocalSiteMap''':
+'''LokālāVietnesKarte''',
+'''RenamePage''':
+'''PārdēvētLapu''',
+'''SpellCheck''':
+'''Pareizrakstība''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Nepareizi MonthCalendar carlparms parametri "%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Nepareizi MonthCalendar argumenti "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Navigācijas shēma \'%(scheme)s\' nav pieejama!''',
 '''No parent page found!''':
@@ -786,14 +868,18 @@ Pamēģiniet citu nosaukumu.''',
 '''ielikt grāmatzīmi''',
 '''[Bookmark reached]''':
 '''[Šeit ielikta grāmatzīme]''',
+'''No wanted pages in this wiki.''':
+'''Šajā viki pieprasīto lapu nav.''',
+'''Invalid include arguments "%s"!''':
+'''Nepareizs iekļaušanas arguments "%s"!''',
+'''Nothing found for "%s"!''':
+'''Neko neatradu no "%s"!''',
 '''Markup''':
 '''Iezīmēt''',
 '''Display''':
 '''Caurskats''',
 '''Filename''':
 '''Faila nosaukums''',
-'''No wanted pages in this wiki.''':
-'''Šajā viki pieprasīto lapu nav.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''\'\'reStructured\'\' teksta attēlošana nav iespējama. Lūdzu, instalējiet \'\'docutils\'\'.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -942,54 +1028,4 @@ sarkans=labot''',
 '''E-pasts nav nosūtīts''',
 '''Mail sent OK''':
 '''E-pasts nosūtīts''',
-'''FrontPage''':
-'''SākumLapa''',
-'''RecentChanges''':
-'''PēdējāsIzmaiņas''',
-'''TitleIndex''':
-'''VirsrakstuRādītājs''',
-'''WordIndex''':
-'''PriekšmetuRādītājs''',
-'''FindPage''':
-'''AtrastLapu''',
-'''SiteNavigation''':
-'''LapasNavigācija''',
-'''HelpContents''':
-'''PamācībasSaturaRādītājs''',
-'''HelpOnFormatting''':
-'''PalīdzētFormatēt''',
-'''UserPreferences''':
-'''JūsuIestatījumi''',
-'''WikiLicense''':
-'''VikiLicence''',
-'''MissingPage''':
-'''IztrūkstošaLapa''',
-'''MissingHomePage''':
-'''IztrūkstošaMājasLapa''',
-'''Mon''':
-'''Pr''',
-'''Tue''':
-'''Ot''',
-'''Wed''':
-'''Tr''',
-'''Thu''':
-'''Ce''',
-'''Fri''':
-'''Pk''',
-'''Sat''':
-'''Se''',
-'''Sun''':
-'''Sv''',
-'''AttachFile''':
-'''PievienotFailu''',
-'''DeletePage''':
-'''DzēstLapu''',
-'''LikePages''':
-'''LīdzīgasLapas''',
-'''LocalSiteMap''':
-'''LokālāVietnesKarte''',
-'''RenamePage''':
-'''PārdēvētLapu''',
-'''SpellCheck''':
-'''Pareizrakstība''',
 }

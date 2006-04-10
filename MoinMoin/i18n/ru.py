@@ -31,8 +31,6 @@ macro call.-~
 '''Создать страницу''',
 '''You are not allowed to view this page.''':
 '''Вам не разрешено просматривать эту страницу.''',
-'''Your changes are not saved!''':
-'''Ваши исправления не сохранились!''',
 '''You are not allowed to edit this page.''':
 '''Вам нельзя менять эту страницу.''',
 '''Page is immutable!''':
@@ -41,8 +39,6 @@ macro call.-~
 '''Старые версии нельзя изменять!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Привилегия на изменения истекла, приготовьтесь к конфликтам!''',
-'''Page name is too long, try shorter name.''':
-'''Слишком длинное имя страницы, попробуйте что-нибудь покороче.''',
 '''Edit "%(pagename)s"''':
 '''Правка "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -83,8 +79,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Если вы с этим не согласны, нажмите \'\'\'%(cancel_button_text)s\'\'\' для отмены своих изменений.''',
 '''Preview''':
 '''Показать макет''',
-'''GUI Mode''':
-'''Графический редактор''',
 '''Comment:''':
 '''Комментарий:''',
 '''<No addition>''':
@@ -95,6 +89,211 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Малое изменение''',
 '''Remove trailing whitespace from each line''':
 '''Стереть хвостовые пробелы из каждой строки''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Недопустимое имя пользователя {{{\'%s\'}}}.
+Имя может содержать буквы и цифры любого языка и по жеданию один пробел между словами. Нельзя использовать имя группы.''',
+'''You are not allowed to do %s on this page.''':
+'''Вам нельзя %s эту страницу.''',
+'''Login''':
+'''Войти''',
+''' %s and try again.''':
+''' %s и попробуйте еще раз.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d результатов из %(pages)d просмотренных страниц.''',
+'''%.2f seconds''':
+'''%.2f секунд''',
+'''match''':
+'''совпадение''',
+'''matches''':
+'''совпадений''',
+'''<unknown>''':
+'''<???>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Имя: %s
+
+Пароль: %s
+
+URL для входа: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Кто-то запросил выслать свои данные на этот адрес.
+
+Если вы забыли пароль, используйте эти данные и введите пароль КАК ЗДЕСЬ НАПИСАНО
+(воспользуйтесь операциями Copy/Paste для точного переноса).
+
+После успешного входа в систему неплохо бы поменять пароль на ваш собственный.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Ваша запись пользователя''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
+'''Please provide a valid email address!''':
+'''Пожалуйста укажите правильный почтовый адрес!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Для создания пользователя или его изменения нажмите на ВашиНастройки.''',
+'''Empty user name. Please enter a user name.''':
+'''Имя не указано. Пожалуйста введите имя пользователя.''',
+'''This user name already belongs to somebody else.''':
+'''Это имя уже занято.''',
+'''Passwords don\'t match!''':
+'''Пароли не совпадают!''',
+'''Please specify a password!''':
+'''Пожалуйста укажите пароль!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
+'''This email already belongs to somebody else.''':
+'''Это чужой адрес.''',
+'''User account created! You can use this account to login now...''':
+'''Пользователь создан! Можно входить...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''ВашиНастройки можно изменить для выбранного пользователя''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Не могу загрузать макияж \'%(theme_name)s\'!''',
+'''User preferences saved!''':
+'''Настройки записаны!''',
+'''Default''':
+'''По умолчанию''',
+'''<Browser setting>''':
+'''<Настройки браузера>''',
+'''the one preferred''':
+'''предпочтительно''',
+'''free choice''':
+'''по выбору''',
+'''Select User''':
+'''Выберите пользователя''',
+'''Save''':
+'''Записать''',
+'''Preferred theme''':
+'''Предпочитаемый стиль''',
+'''Editor Preference''':
+'''Настройки редактора''',
+'''Editor shown on UI''':
+'''Показывать графический редактор''',
+'''Time zone''':
+'''Часовой пояс''',
+'''Your time is''':
+'''Ваше время''',
+'''Server time is''':
+'''Время на сервере''',
+'''Date format''':
+'''Формат даты''',
+'''Preferred language''':
+'''Предпочитаемый язык''',
+'''General options''':
+'''Общие параметры''',
+'''Quick links''':
+'''Закладки''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Этот список работает только при правильном почтовом адресе!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Список подписки на страницы вики (один образец на строчку)''',
+'''Create Profile''':
+'''Создать настройки''',
+'''Mail me my account data''':
+'''Отправить мне настройки почтой''',
+'''Email''':
+'''Почтовый адрес''',
+'''Name''':
+'''Полное имя''',
+'''Password''':
+'''Пароль''',
+'''Action''':
+'''Действие''',
+'''Search Titles''':
+'''Искать по заголовкам''',
+'''Display context of search results''':
+'''Показывать расширенные результаты поиска''',
+'''Case-sensitive searching''':
+'''Поиск с учетом регистра''',
+'''Search Text''':
+'''Искать по тексту''',
+'''Go To Page''':
+'''Открыть страницу''',
+'''Include system pages''':
+'''Показать служебные страницы''',
+'''Exclude system pages''':
+'''Убрать служебные страницы''',
+'''Plain title index''':
+'''Показать как текст''',
+'''XML title index''':
+'''Показать как XML''',
+'''Python Version''':
+'''Версия Python''',
+'''MoinMoin Version''':
+'''Версия МойнМойн''',
+'''Release %s [Revision %s]''':
+'''Release %s [Revision %s]''',
+'''4Suite Version''':
+'''Версия 4Suite''',
+'''Number of pages''':
+'''Всего страниц''',
+'''Number of system pages''':
+'''Число служебных страниц''',
+'''Accumulated page sizes''':
+'''Размер всех страниц''',
+'''Entries in edit log''':
+'''Записей в протоколе изменений''',
+'''NONE''':
+'''НЕТ''',
+'''Global extension macros''':
+'''Общие дополнительные макросы''',
+'''Local extension macros''':
+'''Местные дополнительные макросы''',
+'''Global extension actions''':
+'''Общие дополнительные действия''',
+'''Local extension actions''':
+'''Местные дополнительные действия''',
+'''Global parsers''':
+'''Общие парсеры''',
+'''Local extension parsers''':
+'''Местные дополнительные парсеры''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Доступные процессоры (УСТАРЕЛО - используйте парсеры)''',
+'''Disabled''':
+'''Выключен''',
+'''Enabled''':
+'''Включен''',
+'''Lupy search''':
+'''Общий поиск''',
+'''Active threads''':
+'''Активных потоков''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Пожалуйста уточните что искать вместо {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''ОШИБКА в образце поиска \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Плохая отметка времени \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Нужен "=" после "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Нужно значение для ключа "%(token)s"''',
+'''Wiki Markup''':
+'''Вики-разметка''',
+'''Print View''':
+'''Для печати''',
+'''Your changes are not saved!''':
+'''Ваши исправления не сохранились!''',
+'''Page name is too long, try shorter name.''':
+'''Слишком длинное имя страницы, попробуйте что-нибудь покороче.''',
+'''GUI Mode''':
+'''Графический редактор''',
 '''Edit was cancelled.''':
 '''Исправления отменены.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -194,8 +393,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Вам следует \'\'воздержаться от исправления\'\' этой страницы как минимум на %(mins_valid)d минут(ы)
 для избежания конфликтов.\'\'\'[[BR]]
 Чтобы выйти из редактора нажмите кнопку \'Отмена\'.''',
-'''<unknown>''':
-'''<???>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Установка \'%(filename)s\' не удалась.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Файл %s не является пакетом МойнМойн.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -256,145 +457,20 @@ To leave the editor, press the Cancel button.''':
 '''Подписаться на малые исправления''',
 '''Disable this account forever''':
 '''Забыть меня навсегда''',
-'''Name''':
-'''Полное имя''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(используйте Имя\'\'\'\'\'\'Фамилия)''',
 '''Alias-Name''':
 '''Короткое имя''',
-'''Password''':
-'''Пароль''',
 '''Password repeat''':
 '''Пароль снова''',
 '''(Only when changing passwords)''':
 '''(Только при изменении пароля)''',
-'''Email''':
-'''Почтовый адрес''',
 '''User CSS URL''':
 '''Использовать CSS из URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Оставьте пустым для использования системной CSS)''',
 '''Editor size''':
 '''Размер окна редактирования''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Недопустимое имя пользователя {{{\'%s\'}}}.
-Имя может содержать буквы и цифры любого языка и по жеданию один пробел между словами. Нельзя использовать имя группы.''',
-'''You are not allowed to do %s on this page.''':
-'''Вам нельзя %s эту страницу.''',
-'''Login''':
-'''Войти''',
-''' %s and try again.''':
-''' %s и попробуйте еще раз.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d результатов из %(pages)d просмотренных страниц.''',
-'''%.2f seconds''':
-'''%.2f секунд''',
-'''match''':
-'''совпадение''',
-'''matches''':
-'''совпадений''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''Имя: %s
-
-Пароль: %s
-
-URL для входа: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Кто-то запросил выслать свои данные на этот адрес.
-
-Если вы забыли пароль, используйте эти данные и введите пароль КАК ЗДЕСЬ НАПИСАНО
-(воспользуйтесь операциями Copy/Paste для точного переноса).
-
-После успешного входа в систему неплохо бы поменять пароль на ваш собственный.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Ваша запись пользователя''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''В этом вики запрещена отправка почты. Свяжитесь с владельцем вики, который может разрешить отправку.''',
-'''Please provide a valid email address!''':
-'''Пожалуйста укажите правильный почтовый адрес!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Не найдено пользователя с таким адресом \'%(email)s\'!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Для создания пользователя или его изменения нажмите на ВашиНастройки.''',
-'''Empty user name. Please enter a user name.''':
-'''Имя не указано. Пожалуйста введите имя пользователя.''',
-'''This user name already belongs to somebody else.''':
-'''Это имя уже занято.''',
-'''Passwords don\'t match!''':
-'''Пароли не совпадают!''',
-'''Please specify a password!''':
-'''Пожалуйста укажите пароль!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Пожалуйста укажите ваш почтовый адрес. Если вы потеряете данные для регистрации (входа в вики), вы сможете получить их по почте.''',
-'''This email already belongs to somebody else.''':
-'''Это чужой адрес.''',
-'''User account created! You can use this account to login now...''':
-'''Пользователь создан! Можно входить...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''ВашиНастройки можно изменить для выбранного пользователя''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Не могу загрузать макияж \'%(theme_name)s\'!''',
-'''User preferences saved!''':
-'''Настройки записаны!''',
-'''Default''':
-'''По умолчанию''',
-'''<Browser setting>''':
-'''<Настройки браузера>''',
-'''the one preferred''':
-'''предпочтительно''',
-'''free choice''':
-'''по выбору''',
-'''Select User''':
-'''Выберите пользователя''',
-'''Save''':
-'''Записать''',
-'''Preferred theme''':
-'''Предпочитаемый стиль''',
-'''Editor Preference''':
-'''Настройки редактора''',
-'''Editor shown on UI''':
-'''Показывать графический редактор''',
-'''Time zone''':
-'''Часовой пояс''',
-'''Your time is''':
-'''Ваше время''',
-'''Server time is''':
-'''Время на сервере''',
-'''Date format''':
-'''Формат даты''',
-'''Preferred language''':
-'''Предпочитаемый язык''',
-'''General options''':
-'''Общие параметры''',
-'''Quick links''':
-'''Закладки''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Этот список работает только при правильном почтовом адресе!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Список подписки на страницы вики (один образец на строчку)''',
-'''Create Profile''':
-'''Создать настройки''',
-'''Mail me my account data''':
-'''Отправить мне настройки почтой''',
-'''Action''':
-'''Действие''',
 '''No older revisions available!''':
 '''Нет более старых версий!''',
 '''Diff for "%s"''':
@@ -493,78 +569,66 @@ Contact the owner of the wiki, who can enable email.''':
 '''Укажите тип диаграммы!''',
 '''Bad chart type "%s"!''':
 '''Плохой тип диаграммы "%s"!''',
-'''Search Titles''':
-'''Искать по заголовкам''',
-'''Display context of search results''':
-'''Показывать расширенные результаты поиска''',
-'''Case-sensitive searching''':
-'''Поиск с учетом регистра''',
-'''Search Text''':
-'''Искать по тексту''',
-'''Go To Page''':
-'''Открыть страницу''',
-'''Include system pages''':
-'''Показать служебные страницы''',
-'''Exclude system pages''':
-'''Убрать служебные страницы''',
-'''Plain title index''':
-'''Показать как текст''',
-'''XML title index''':
-'''Показать как XML''',
-'''Python Version''':
-'''Версия Python''',
-'''MoinMoin Version''':
-'''Версия МойнМойн''',
-'''Release %s [Revision %s]''':
-'''Release %s [Revision %s]''',
-'''4Suite Version''':
-'''Версия 4Suite''',
-'''Number of pages''':
-'''Всего страниц''',
-'''Number of system pages''':
-'''Число служебных страниц''',
-'''Accumulated page sizes''':
-'''Размер всех страниц''',
-'''Entries in edit log''':
-'''Записей в протоколе изменений''',
-'''NONE''':
-'''НЕТ''',
-'''Global extension macros''':
-'''Общие дополнительные макросы''',
-'''Local extension macros''':
-'''Местные дополнительные макросы''',
-'''Global extension actions''':
-'''Общие дополнительные действия''',
-'''Local extension actions''':
-'''Местные дополнительные действия''',
-'''Global parsers''':
-'''Общие парсеры''',
-'''Local extension parsers''':
-'''Местные дополнительные парсеры''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Доступные процессоры (УСТАРЕЛО - используйте парсеры)''',
-'''Disabled''':
-'''Выключен''',
-'''Enabled''':
-'''Включен''',
-'''Lupy search''':
-'''Общий поиск''',
-'''Active threads''':
-'''Активных потоков''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Пожалуйста уточните что искать вместо {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''ОШИБКА в образце поиска \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Плохая отметка времени \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Нужен "=" после "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Нужно значение для ключа "%(token)s"''',
-'''Wiki Markup''':
-'''Вики-разметка''',
-'''Print View''':
-'''Для печати''',
+'''This page is already deleted or was never created!''':
+'''Такая страница уже стерта или никогда не существовала!''',
+'''No pages like "%s"!''':
+'''Нет страниц похожих на "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Приложение \'%(target)s\' (из файла \'%(filename)s\') уже существует.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Найдена ровно одна страница похожая на "%s", открываю...''',
+'''Pages like "%s"''':
+'''Страницы похожие на "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s для "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Карта сайта около "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Вам нельзя переименовывать страницы в этом вики!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Пожалуйста воспользуйтесь интерфейсом пользователя для переименования страниц!''',
+'''Could not rename page because of file system error: %s.''':
+'''Страница не была переименована из-за системной ошибки: %s.''',
+'''Rename Page''':
+'''Переименовать''',
+'''New name''':
+'''Новое имя''',
+'''Optional reason for the renaming''':
+'''Можете указать причину для переименования''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Страница с именем {{{\'%s\'}}} уже есть.\'\'\'
+
+Попробуйте другое имя.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(включая %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''%(badwords)d слов(а) не найдено в словаре из %(totalwords)d слов %(localwords)s и показано здесь:''',
+'''Add checked words to dictionary''':
+'''Добавить отмеченные слова в словарь''',
+'''No spelling errors found!''':
+'''Ошибок правописания не найдено!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Нельзя проверять страницу которую запрещено читать.''',
+'''Title Search: "%s"''':
+'''Поиск по заголовкам: "%s"''',
+'''Full Text Search: "%s"''':
+'''Поиск по тексту: "%s"''',
+'''Full Link List for "%s"''':
+'''Полный список ссылок для "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Не могу создать страницу без имени. Укажите имя страницы.''',
+'''You are not allowed to delete this page.''':
+'''Вам нельзя стереть эту страницу.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!''',
+'''Really delete this page?''':
+'''Точно стереть эту страницу?''',
+'''Delete''':
+'''Стереть''',
+'''Optional reason for the deletion''':
+'''Можете указать причину для удаления''',
 '''[%d attachments]''':
 '''[%d приложений]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -627,18 +691,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Неработающее действие загрузки: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Приложения к "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Приложение \'%(target)s\' (из файла \'%(filename)s\') уже существует.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Приложение \'%(target)s\' (из файла \'%(filename)s\') длиной %(bytes)d байт записано.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Приложение \'%(filename)s\' стерто.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Приложение \'%(filename)s\' установлено.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Установка \'%(filename)s\' не удалась.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Файл %s не является пакетом МойнМойн.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Приложение \'%(filename)s\' не распаковано, т.к. не хватает места (%(space)d Кб).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -661,74 +719,62 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Незнакомый тип файла, не могу показать приложение в тексте.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''приложение:%(filename)s к %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Вам нельзя стереть эту страницу.''',
-'''This page is already deleted or was never created!''':
-'''Такая страница уже стерта или никогда не существовала!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!''',
-'''Really delete this page?''':
-'''Точно стереть эту страницу?''',
-'''Delete''':
-'''Стереть''',
-'''Optional reason for the deletion''':
-'''Можете указать причину для удаления''',
-'''No pages like "%s"!''':
-'''Нет страниц похожих на "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Найдена ровно одна страница похожая на "%s", открываю...''',
-'''Pages like "%s"''':
-'''Страницы похожие на "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s для "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Карта сайта около "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Вам нельзя переименовывать страницы в этом вики!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Пожалуйста воспользуйтесь интерфейсом пользователя для переименования страниц!''',
-'''Could not rename page because of file system error: %s.''':
-'''Страница не была переименована из-за системной ошибки: %s.''',
-'''Rename Page''':
-'''Переименовать''',
-'''New name''':
-'''Новое имя''',
-'''Optional reason for the renaming''':
-'''Можете указать причину для переименования''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Страница с именем {{{\'%s\'}}} уже есть.\'\'\'
-
-Попробуйте другое имя.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(включая %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''%(badwords)d слов(а) не найдено в словаре из %(totalwords)d слов %(localwords)s и показано здесь:''',
-'''Add checked words to dictionary''':
-'''Добавить отмеченные слова в словарь''',
-'''No spelling errors found!''':
-'''Ошибок правописания не найдено!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Нельзя проверять страницу которую запрещено читать.''',
-'''Title Search: "%s"''':
-'''Поиск по заголовкам: "%s"''',
-'''Full Text Search: "%s"''':
-'''Поиск по тексту: "%s"''',
-'''Full Link List for "%s"''':
-'''Полный список ссылок для "%s"''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Не могу создать страницу без имени. Укажите имя страницы.''',
 '''Upload new attachment "%(filename)s"''':
 '''Приложить "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Нарисовать "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Изменить рисунок %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Неправильные аргументы для include "%s"!''',
-'''Nothing found for "%s"!''':
-'''Ничего не найдено для "%s"!''',
+'''FrontPage''':
+'''Начало''',
+'''RecentChanges''':
+'''Новости''',
+'''TitleIndex''':
+'''АлфавитныйУказатель''',
+'''WordIndex''':
+'''ПредметныйУказатель''',
+'''FindPage''':
+'''НайтиСтраницу''',
+'''SiteNavigation''':
+'''ПойтиПоСайту''',
+'''HelpContents''':
+'''ПомощьПоГлавам''',
+'''HelpOnFormatting''':
+'''КакФорматировать''',
+'''UserPreferences''':
+'''ВашиНастройки''',
+'''WikiLicense''':
+'''ВикиЛицензия''',
+'''MissingPage''':
+'''НетСтраницы''',
+'''MissingHomePage''':
+'''НетДомашнейСтраницы''',
+'''Mon''':
+'''Пон''',
+'''Tue''':
+'''Вто''',
+'''Wed''':
+'''Сре''',
+'''Thu''':
+'''Чет''',
+'''Fri''':
+'''Пят''',
+'''Sat''':
+'''Суб''',
+'''Sun''':
+'''Вос''',
+'''AttachFile''':
+'''Приложить''',
+'''DeletePage''':
+'''Стереть''',
+'''LikePages''':
+'''ПохожиеСтраницы''',
+'''LocalSiteMap''':
+'''КартаОкресностей''',
+'''RenamePage''':
+'''Переименовать''',
+'''SpellCheck''':
+'''Правописание''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Схема обхода \'%(scheme)s\' недоступна!''',
 '''No parent page found!''':
@@ -763,14 +809,18 @@ Try a different name.''':
 '''заложить здесь''',
 '''[Bookmark reached]''':
 '''[Здесь лежит закладка]''',
+'''No wanted pages in this wiki.''':
+'''В этом вики нет требуемых страниц.''',
+'''Invalid include arguments "%s"!''':
+'''Неправильные аргументы для include "%s"!''',
+'''Nothing found for "%s"!''':
+'''Ничего не найдено для "%s"!''',
 '''Markup''':
 '''Разметка''',
 '''Display''':
 '''Просмотр''',
 '''Filename''':
 '''Файл''',
-'''No wanted pages in this wiki.''':
-'''В этом вики нет требуемых страниц.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Форматирование структурированного (reStructured) текста невозможно без установки docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -907,54 +957,4 @@ red=edit''':
 '''Почта не ушла.''',
 '''Mail sent OK''':
 '''Почта ушла.''',
-'''FrontPage''':
-'''Начало''',
-'''RecentChanges''':
-'''Новости''',
-'''TitleIndex''':
-'''АлфавитныйУказатель''',
-'''WordIndex''':
-'''ПредметныйУказатель''',
-'''FindPage''':
-'''НайтиСтраницу''',
-'''SiteNavigation''':
-'''ПойтиПоСайту''',
-'''HelpContents''':
-'''ПомощьПоГлавам''',
-'''HelpOnFormatting''':
-'''КакФорматировать''',
-'''UserPreferences''':
-'''ВашиНастройки''',
-'''WikiLicense''':
-'''ВикиЛицензия''',
-'''MissingPage''':
-'''НетСтраницы''',
-'''MissingHomePage''':
-'''НетДомашнейСтраницы''',
-'''Mon''':
-'''Пон''',
-'''Tue''':
-'''Вто''',
-'''Wed''':
-'''Сре''',
-'''Thu''':
-'''Чет''',
-'''Fri''':
-'''Пят''',
-'''Sat''':
-'''Суб''',
-'''Sun''':
-'''Вос''',
-'''AttachFile''':
-'''Приложить''',
-'''DeletePage''':
-'''Стереть''',
-'''LikePages''':
-'''ПохожиеСтраницы''',
-'''LocalSiteMap''':
-'''КартаОкресностей''',
-'''RenamePage''':
-'''Переименовать''',
-'''SpellCheck''':
-'''Правописание''',
 }

@@ -31,8 +31,6 @@ macro call.-~
 '''Създайте страница''',
 '''You are not allowed to view this page.''':
 '''Не Ви е позволено да разглеждате тази страница.''',
-'''Your changes are not saved!''':
-'''Вашите промени не са записани!''',
 '''You are not allowed to edit this page.''':
 '''Не можете да редактирате тази страница.''',
 '''Page is immutable!''':
@@ -41,8 +39,6 @@ macro call.-~
 '''Стари версии не могат да се редактират!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Привилегията Ви да редактирате изтече. Гответе се за конфликти!''',
-'''Page name is too long, try shorter name.''':
-'''Твърде дълго име на страницата, опитайте с нещо по-кратко.''',
 '''Edit "%(pagename)s"''':
 '''Редактиране на "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -83,8 +79,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Ако не сте съгласни с това, натиснете \'\'\'%(cancel_button_text)s\'\'\' за да отменте вашите промени.''',
 '''Preview''':
 '''Предварителен изглед''',
-'''GUI Mode''':
-'''Графичен редактор''',
 '''Comment:''':
 '''Коментар:''',
 '''<No addition>''':
@@ -95,6 +89,72 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Малка промяна''',
 '''Remove trailing whitespace from each line''':
 '''Премахване на крайните интервали от всеки един ред''',
+'''Login''':
+'''Вход''',
+'''%.2f seconds''':
+'''%.2f секунди''',
+'''match''':
+'''съвпадение''',
+'''matches''':
+'''съвпадения''',
+'''<unknown>''':
+'''<неизвестен>''',
+'''Save''':
+'''Запис''',
+'''Time zone''':
+'''Часова зона''',
+'''Your time is''':
+'''Времето при вас е''',
+'''Server time is''':
+'''Времето на сървъра е''',
+'''Date format''':
+'''Формат на датата''',
+'''Preferred language''':
+'''Предпочитан език''',
+'''General options''':
+'''Общи настройки''',
+'''Quick links''':
+'''Бързи връзки''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Този списък не работи, освен ако не сте въвели валиден email адрес''',
+'''Create Profile''':
+'''Създайте профил''',
+'''Mail me my account data''':
+'''Изпрати ми моите данни по пощата''',
+'''Email''':
+'''Еmail''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''За да създадете акаунт или да възстановите забравена парола, вижте страницата %(userprefslink)s.''',
+'''Name''':
+'''Име''',
+'''Password''':
+'''Парола''',
+'''Action''':
+'''Действие''',
+'''Release %s [Revision %s]''':
+'''Издание %s [Ревизия %s]''',
+'''4Suite Version''':
+'''Версия на 4Suite''',
+'''Number of pages''':
+'''Брой на страниците''',
+'''Number of system pages''':
+'''Брой на служебните страници''',
+'''Accumulated page sizes''':
+'''Размер на всички страници''',
+'''NONE''':
+'''НЕ''',
+'''Disabled''':
+'''Изключен''',
+'''Enabled''':
+'''Включен''',
+'''Print View''':
+'''Изглед за печат''',
+'''Your changes are not saved!''':
+'''Вашите промени не са записани!''',
+'''Page name is too long, try shorter name.''':
+'''Твърде дълго име на страницата, опитайте с нещо по-кратко.''',
+'''GUI Mode''':
+'''Графичен редактор''',
 '''Edit was cancelled.''':
 '''Редактирането беше отменено.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -153,8 +213,6 @@ The following page has been changed by %(editor)s:
 '''Не можете да записвате празни страници.''',
 '''You already saved this page!''':
 '''Вече сте записали тази страница!''',
-'''<unknown>''':
-'''<неизвестен>''',
 '''Edit''':
 '''Редакция''',
 '''XML''':
@@ -165,54 +223,14 @@ The following page has been changed by %(editor)s:
 '''Изглед''',
 '''Up''':
 '''Нагоре''',
-'''Name''':
-'''Име''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(използвайте Име\'\'\'\'\'\'Фамилия)''',
 '''Alias-Name''':
 '''Псведоним''',
-'''Password''':
-'''Парола''',
 '''Password repeat''':
 '''Паролата отново''',
 '''(Only when changing passwords)''':
 '''(Само при промяна на паролата)''',
-'''Email''':
-'''Еmail''',
-'''Login''':
-'''Вход''',
-'''%.2f seconds''':
-'''%.2f секунди''',
-'''match''':
-'''съвпадение''',
-'''matches''':
-'''съвпадения''',
-'''Save''':
-'''Запис''',
-'''Time zone''':
-'''Часова зона''',
-'''Your time is''':
-'''Времето при вас е''',
-'''Server time is''':
-'''Времето на сървъра е''',
-'''Date format''':
-'''Формат на датата''',
-'''Preferred language''':
-'''Предпочитан език''',
-'''General options''':
-'''Общи настройки''',
-'''Quick links''':
-'''Бързи връзки''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Този списък не работи, освен ако не сте въвели валиден email адрес''',
-'''Create Profile''':
-'''Създайте профил''',
-'''Mail me my account data''':
-'''Изпрати ми моите данни по пощата''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''За да създадете акаунт или да възстановите забравена парола, вижте страницата %(userprefslink)s.''',
-'''Action''':
-'''Действие''',
 '''No older revisions available!''':
 '''Няма по-стари версии!''',
 '''Diff for "%s"''':
@@ -279,24 +297,20 @@ The following page has been changed by %(editor)s:
 '''Покажи диаграма "%(title)s"''',
 '''Page hits and edits''':
 '''Попадения и редакции на страницата''',
-'''Release %s [Revision %s]''':
-'''Издание %s [Ревизия %s]''',
-'''4Suite Version''':
-'''Версия на 4Suite''',
-'''Number of pages''':
-'''Брой на страниците''',
-'''Number of system pages''':
-'''Брой на служебните страници''',
-'''Accumulated page sizes''':
-'''Размер на всички страници''',
-'''NONE''':
-'''НЕ''',
-'''Disabled''':
-'''Изключен''',
-'''Enabled''':
-'''Включен''',
-'''Print View''':
-'''Изглед за печат''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s за "%(title)s"''',
+'''Rename Page''':
+'''Переименувай''',
+'''New name''':
+'''Ново име''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(включително %(localwords)d %(pagelink)s)''',
+'''Title Search: "%s"''':
+'''Търсене по заголавие: "%s"''',
+'''Full Text Search: "%s"''':
+'''Търесен по текст: "%s"''',
+'''Delete''':
+'''Изтрий''',
 '''[%d attachments]''':
 '''[%d приложения]''',
 '''unzip''':
@@ -321,26 +335,58 @@ The following page has been changed by %(editor)s:
 '''Файл''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''приложение:%(filename)s към %(pagename)s''',
-'''Delete''':
-'''Изтрий''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s за "%(title)s"''',
-'''Rename Page''':
-'''Переименувай''',
-'''New name''':
-'''Ново име''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(включително %(localwords)d %(pagelink)s)''',
-'''Title Search: "%s"''':
-'''Търсене по заголавие: "%s"''',
-'''Full Text Search: "%s"''':
-'''Търесен по текст: "%s"''',
 '''Toggle line numbers''':
 '''Превключи показването на номерата на редовете''',
-'''Invalid include arguments "%s"!''':
-'''Неправилни аргументи на include "%s"!''',
-'''Nothing found for "%s"!''':
-'''Не е намерено нищо за "%s"!''',
+'''FrontPage''':
+'''Начало''',
+'''RecentChanges''':
+'''СкорошниПромени''',
+'''TitleIndex''':
+'''АзбученУказател''',
+'''WordIndex''':
+'''ПредметенУказател''',
+'''FindPage''':
+'''НамериСтраница''',
+'''SiteNavigation''':
+'''НавигацияПоСайта''',
+'''HelpContents''':
+'''ПомощСъдържание''',
+'''HelpOnFormatting''':
+'''ПомощПриФорматиране''',
+'''UserPreferences''':
+'''ВашитеПредпочитания''',
+'''WikiLicense''':
+'''УикиЛиценз''',
+'''MissingPage''':
+'''ЛипсваСтраница''',
+'''MissingHomePage''':
+'''ЛипсваДомашнаСтраница''',
+'''Mon''':
+'''Пон''',
+'''Tue''':
+'''Вто''',
+'''Wed''':
+'''Сря''',
+'''Thu''':
+'''Чет''',
+'''Fri''':
+'''Пет''',
+'''Sat''':
+'''Съб''',
+'''Sun''':
+'''Нед''',
+'''AttachFile''':
+'''ПрикачиФайл''',
+'''DeletePage''':
+'''Изтрий''',
+'''LikePages''':
+'''ПодобниСтраници''',
+'''LocalSiteMap''':
+'''КартаНаОколността''',
+'''RenamePage''':
+'''Преименувай''',
+'''SpellCheck''':
+'''Правопис''',
 '''Wiki''':
 '''Уики''',
 '''Slideshow''':
@@ -351,6 +397,10 @@ The following page has been changed by %(editor)s:
 '''Кадър %(pos)d от %(size)d''',
 '''%(mins)dm ago''':
 '''преди %(mins)dm''',
+'''Invalid include arguments "%s"!''':
+'''Неправилни аргументи на include "%s"!''',
+'''Nothing found for "%s"!''':
+'''Не е намерено нищо за "%s"!''',
 '''Display''':
 '''Преглед''',
 '''Filename''':
@@ -443,54 +493,4 @@ red=edit''':
 '''Пощата не е изпратена.''',
 '''Mail sent OK''':
 '''Пощата е изпратена успешно.''',
-'''FrontPage''':
-'''Начало''',
-'''RecentChanges''':
-'''СкорошниПромени''',
-'''TitleIndex''':
-'''АзбученУказател''',
-'''WordIndex''':
-'''ПредметенУказател''',
-'''FindPage''':
-'''НамериСтраница''',
-'''SiteNavigation''':
-'''НавигацияПоСайта''',
-'''HelpContents''':
-'''ПомощСъдържание''',
-'''HelpOnFormatting''':
-'''ПомощПриФорматиране''',
-'''UserPreferences''':
-'''ВашитеПредпочитания''',
-'''WikiLicense''':
-'''УикиЛиценз''',
-'''MissingPage''':
-'''ЛипсваСтраница''',
-'''MissingHomePage''':
-'''ЛипсваДомашнаСтраница''',
-'''Mon''':
-'''Пон''',
-'''Tue''':
-'''Вто''',
-'''Wed''':
-'''Сря''',
-'''Thu''':
-'''Чет''',
-'''Fri''':
-'''Пет''',
-'''Sat''':
-'''Съб''',
-'''Sun''':
-'''Нед''',
-'''AttachFile''':
-'''ПрикачиФайл''',
-'''DeletePage''':
-'''Изтрий''',
-'''LikePages''':
-'''ПодобниСтраници''',
-'''LocalSiteMap''':
-'''КартаНаОколността''',
-'''RenamePage''':
-'''Преименувай''',
-'''SpellCheck''':
-'''Правопис''',
 }

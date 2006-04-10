@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 16:00+0200\n"
+"POT-Creation-Date: 2006-04-10 13:56+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -61,9 +61,6 @@ msgstr "创建网页"
 msgid "You are not allowed to view this page."
 msgstr "您无权阅读此页."
 
-msgid "Your changes are not saved!"
-msgstr "您的改动有保存!"
-
 msgid "You are not allowed to edit this page."
 msgstr "您无权编辑此页."
 
@@ -75,9 +72,6 @@ msgstr "不能编辑旧版网页!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "你的编辑锁定超时. 可能会发生编辑冲突!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "网页名称太长, 试试短一些的名称"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -154,8 +148,9 @@ msgstr ""
 msgid "Preview"
 msgstr "预览"
 
-msgid "GUI Mode"
-msgstr "图形界面模式"
+#, fuzzy
+msgid "Text mode"
+msgstr "正文"
 
 msgid "Comment:"
 msgstr "备注:"
@@ -172,6 +167,346 @@ msgstr "小修改"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "去掉每行尾部空白"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"无效的用户名{{{'%s'}}}.\n"
+"用户名可以包含Unicode编码内的任何字母和数字, 并允许词与词之间有一个空格.\n"
+"组页(Group page)名不能用作用户名."
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "您不可以对此页进行%s操作."
+
+msgid "Login"
+msgstr "登录"
+
+#, python-format
+msgid " %s and try again."
+msgstr "%s后再试."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "在大约%(pages)d页中找到%(hits)d个结果."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f秒"
+
+msgid "match"
+msgstr "次匹配"
+
+msgid "matches"
+msgstr "次匹配"
+
+msgid "<unknown>"
+msgstr "不明"
+
+#, fuzzy, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s\n"
+msgstr ""
+"登录帐号: %s\n"
+"\n"
+"登录口令: %s\n"
+"\n"
+"登录URL: %s/?action=userform&uid=%s\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"有人要求将他的帐号资料寄到这个电子邮件地址.\n"
+"\n"
+"如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表"
+"中. \n"
+"您可以用拷贝粘贴的方法.\n"
+"\n"
+"成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. \n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] 您的维基帐号资料"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能."
+
+msgid "Please provide a valid email address!"
+msgstr "请提供一个有效的电子邮件地址!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "找不到用'%(email)s'登记的帐户!!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "请输入用户名."
+
+msgid "This user name already belongs to somebody else."
+msgstr "这个用户名已经被别人占用了"
+
+msgid "Passwords don't match!"
+msgstr "两次输入的密码不符!"
+
+msgid "Please specify a password!"
+msgstr "请输入一个密码!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回."
+
+msgid "This email already belongs to somebody else."
+msgstr "别人已经用这个电子邮件注册过了."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "用户帐号成功创建! 即时起您就可以用此帐户登录..."
+
+#, fuzzy
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "未能装载主题'%(theme_name)s'!"
+
+msgid "User preferences saved!"
+msgstr "用户设置已保存!"
+
+msgid "Default"
+msgstr "缺省"
+
+msgid "<Browser setting>"
+msgstr "<根据浏览器设置>"
+
+msgid "the one preferred"
+msgstr "您喜爱的"
+
+msgid "free choice"
+msgstr "随意选择"
+
+msgid "Select User"
+msgstr ""
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Preferred theme"
+msgstr "主题"
+
+msgid "Editor Preference"
+msgstr "编辑器喜好"
+
+msgid "Editor shown on UI"
+msgstr "界面上显示的编辑器"
+
+msgid "Time zone"
+msgstr "时区"
+
+msgid "Your time is"
+msgstr "您的当地时间是"
+
+msgid "Server time is"
+msgstr "服务器时间是"
+
+msgid "Date format"
+msgstr "日期格式"
+
+msgid "Preferred language"
+msgstr "界面语言"
+
+msgid "General options"
+msgstr "一般选项"
+
+msgid "Quick links"
+msgstr "快捷链接"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "请输入一个有效的电子邮件地址, 否则本订阅列表不起作用."
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "订阅的维基网页(每行一个正规表达式)"
+
+msgid "Create Profile"
+msgstr "新用户注册"
+
+msgid "Mail me my account data"
+msgstr "把帐号资料寄给我"
+
+msgid "Email"
+msgstr "电子邮件"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
+msgid "Name"
+msgstr "用户名"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Action"
+msgstr "操作"
+
+#, python-format
+msgid "Required attribute \"%(attrname)s\" missing"
+msgstr "缺少需要的属性\"%(attrname)s\""
+
+msgid "Submitted form data:"
+msgstr "提交表单数据:"
+
+msgid "Search Titles"
+msgstr "标题搜索"
+
+msgid "Display context of search results"
+msgstr "显示找到网页的内容"
+
+msgid "Case-sensitive searching"
+msgstr "大小写敏感搜索"
+
+msgid "Search Text"
+msgstr "正文检索"
+
+msgid "Go To Page"
+msgstr "转到网页"
+
+msgid "Include system pages"
+msgstr "包括系统网页"
+
+msgid "Exclude system pages"
+msgstr "不包括系统网页"
+
+msgid "Plain title index"
+msgstr "标题索引"
+
+msgid "XML title index"
+msgstr "XML标题索引"
+
+msgid "Python Version"
+msgstr "Python版本"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin版本"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "版本%s [修订版本 %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite版本"
+
+msgid "Number of pages"
+msgstr "总网页数"
+
+msgid "Number of system pages"
+msgstr "系统网页数"
+
+msgid "Accumulated page sizes"
+msgstr "累计网页大小"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "编辑日志项次"
+
+msgid "NONE"
+msgstr "无"
+
+msgid "Global extension macros"
+msgstr "全局扩充宏"
+
+msgid "Local extension macros"
+msgstr "本地扩充宏"
+
+msgid "Global extension actions"
+msgstr "全局扩充操作"
+
+msgid "Local extension actions"
+msgstr "本地扩充操作"
+
+msgid "Global parsers"
+msgstr "全局分析插件(parsers)"
+
+msgid "Local extension parsers"
+msgstr "本地扩充分析插件(parsers)"
+
+msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+msgstr "已安装的处理插件(processors, 不再支持，请使用分析插件)"
+
+msgid "Disabled"
+msgstr "不再有效"
+
+msgid "Enabled"
+msgstr "有效"
+
+msgid "Lupy search"
+msgstr "Lupy搜索"
+
+msgid "Active threads"
+msgstr "活跃线程"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "请输入比{{{\"%s\"}}}更精确的关键字!!"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "正规表达式'%s'错误"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "错误的时间标记 '%s'"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"%(token)s\"后面应该有个 \"=\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "键\"%(token)s\"应该有对应的值"
+
+msgid "Wiki Markup"
+msgstr "维基标记"
+
+msgid "Print View"
+msgstr "打印视图"
+
+msgid "Your changes are not saved!"
+msgstr "您的改动有保存!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "网页名称太长, 试试短一些的名称"
+
+msgid "GUI Mode"
+msgstr "图形界面模式"
 
 msgid "Edit was cancelled."
 msgstr "编辑取消了."
@@ -327,12 +662,41 @@ msgstr ""
 "'''为了避免编辑冲突, ''请尽量不要''在%(mins_valid)d分钟内编辑此页'''.[[BR]]\n"
 "请按'''取消'''按钮退出编辑."
 
-msgid "<unknown>"
-msgstr "不明"
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
 
-#, fuzzy
-msgid "Text mode"
-msgstr "正文"
+msgid "The theme name is not set."
+msgstr ""
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "文件'%(filename)s'安装失败"
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "文件%s不是MoinMoin包."
+
+#, fuzzy, python-format
+msgid "The page %s does not exist."
+msgstr "附件'%(filename)s'不存在!"
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %s in line %i."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The file %s was not found in the package."
+msgstr "文件%s不是MoinMoin包."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -457,26 +821,17 @@ msgstr "订阅细小改动"
 msgid "Disable this account forever"
 msgstr "永久停用此帐户"
 
-msgid "Name"
-msgstr "用户名"
-
 msgid "(Use Firstname''''''Lastname)"
 msgstr "(请用Firstname''''''Lastname, 或者汉语拼音Xing''''''Ming)"
 
 msgid "Alias-Name"
 msgstr "别名"
 
-msgid "Password"
-msgstr "密码"
-
 msgid "Password repeat"
 msgstr "重复密码"
 
 msgid "(Only when changing passwords)"
 msgstr "(只在改变密码时)"
-
-msgid "Email"
-msgstr "电子邮件"
 
 msgid "User CSS URL"
 msgstr "自选CSS的URL"
@@ -486,196 +841,6 @@ msgstr "(空白表示不用自选的CSS)"
 
 msgid "Editor size"
 msgstr "编辑器大小"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"无效的用户名{{{'%s'}}}.\n"
-"用户名可以包含Unicode编码内的任何字母和数字, 并允许词与词之间有一个空格.\n"
-"组页(Group page)名不能用作用户名."
-
-#, python-format
-msgid "You are not allowed to do %s on this page."
-msgstr "您不可以对此页进行%s操作."
-
-msgid "Login"
-msgstr "登录"
-
-#, python-format
-msgid " %s and try again."
-msgstr "%s后再试."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "在大约%(pages)d页中找到%(hits)d个结果."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f秒"
-
-msgid "match"
-msgstr "次匹配"
-
-msgid "matches"
-msgstr "次匹配"
-
-#, fuzzy, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s\n"
-msgstr ""
-"登录帐号: %s\n"
-"\n"
-"登录口令: %s\n"
-"\n"
-"登录URL: %s/?action=userform&uid=%s\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"有人要求将他的帐号资料寄到这个电子邮件地址.\n"
-"\n"
-"如果您忘了您的口令, 请使用下列资料并将下面的口令一字不落地输入到维基口令表"
-"中. \n"
-"您可以用拷贝粘贴的方法.\n"
-"\n"
-"成功登录后, 当然最好是立即设置一个新的, 您能记住的口令. \n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] 您的维基帐号资料"
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr "本维基不支持邮件处理, 请联系管理员, 他可以决定是否要启动邮寄功能."
-
-msgid "Please provide a valid email address!"
-msgstr "请提供一个有效的电子邮件地址!"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "找不到用'%(email)s'登记的帐户!!"
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "请输入用户名."
-
-msgid "This user name already belongs to somebody else."
-msgstr "这个用户名已经被别人占用了"
-
-msgid "Passwords don't match!"
-msgstr "两次输入的密码不符!"
-
-msgid "Please specify a password!"
-msgstr "请输入一个密码!"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"请输入电子邮件地址. 当您忘了您的帐号信息时候, 就可以通过用电子邮件取回."
-
-msgid "This email already belongs to somebody else."
-msgstr "别人已经用这个电子邮件注册过了."
-
-msgid "User account created! You can use this account to login now..."
-msgstr "用户帐号成功创建! 即时起您就可以用此帐户登录..."
-
-#, fuzzy
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr "请到用户设置(UserPreferences)修改您的设置或创建新的帐号."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "未能装载主题'%(theme_name)s'!"
-
-msgid "User preferences saved!"
-msgstr "用户设置已保存!"
-
-msgid "Default"
-msgstr "缺省"
-
-msgid "<Browser setting>"
-msgstr "<根据浏览器设置>"
-
-msgid "the one preferred"
-msgstr "您喜爱的"
-
-msgid "free choice"
-msgstr "随意选择"
-
-msgid "Select User"
-msgstr ""
-
-msgid "Save"
-msgstr "保存"
-
-msgid "Preferred theme"
-msgstr "主题"
-
-msgid "Editor Preference"
-msgstr "编辑器喜好"
-
-msgid "Editor shown on UI"
-msgstr "界面上显示的编辑器"
-
-msgid "Time zone"
-msgstr "时区"
-
-msgid "Your time is"
-msgstr "您的当地时间是"
-
-msgid "Server time is"
-msgstr "服务器时间是"
-
-msgid "Date format"
-msgstr "日期格式"
-
-msgid "Preferred language"
-msgstr "界面语言"
-
-msgid "General options"
-msgstr "一般选项"
-
-msgid "Quick links"
-msgstr "快捷链接"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr "请输入一个有效的电子邮件地址, 否则本订阅列表不起作用."
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "订阅的维基网页(每行一个正规表达式)"
-
-msgid "Create Profile"
-msgstr "新用户注册"
-
-msgid "Mail me my account data"
-msgstr "把帐号资料寄给我"
-
-#, python-format
-msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
-msgstr ""
-
-msgid "Action"
-msgstr "操作"
 
 msgid "No older revisions available!"
 msgstr "没有旧版"
@@ -834,127 +999,258 @@ msgstr "请指定图表类型!"
 msgid "Bad chart type \"%s\"!"
 msgstr "错误的图表类型\"%s\"!"
 
-msgid "Search Titles"
-msgstr "标题搜索"
-
-msgid "Display context of search results"
-msgstr "显示找到网页的内容"
-
-msgid "Case-sensitive searching"
-msgstr "大小写敏感搜索"
-
-msgid "Search Text"
-msgstr "正文检索"
-
-msgid "Go To Page"
-msgstr "转到网页"
-
-msgid "Include system pages"
-msgstr "包括系统网页"
-
-msgid "Exclude system pages"
-msgstr "不包括系统网页"
-
-msgid "Plain title index"
-msgstr "标题索引"
-
-msgid "XML title index"
-msgstr "XML标题索引"
-
-msgid "Python Version"
-msgstr "Python版本"
-
-msgid "MoinMoin Version"
-msgstr "MoinMoin版本"
+msgid "This page is already deleted or was never created!"
+msgstr "此页已被删除或根本就不存在!"
 
 #, python-format
-msgid "Release %s [Revision %s]"
-msgstr "版本%s [修订版本 %s]"
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\"没有相似网页!"
 
-msgid "4Suite Version"
-msgstr "4Suite版本"
-
-msgid "Number of pages"
-msgstr "总网页数"
-
-msgid "Number of system pages"
-msgstr "系统网页数"
-
-msgid "Accumulated page sizes"
-msgstr "累计网页大小"
+#, fuzzy, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "无效的include参数\"%s\"!"
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "附件'%(target)s'已经存在(远端名称 '%(filename)s')."
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+#, fuzzy
+msgid "Package pages"
+msgstr "相似网页"
+
+#, fuzzy
+msgid "Package name"
+msgstr "相似网页"
+
+msgid "List of page names - separated by <tt>,</tt>"
 msgstr ""
 
 #, python-format
-msgid "Disk usage of %(data_dir)s/"
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "需要密码, 请输入用户名和密码."
+
+msgid "Sorry, wrong password."
+msgstr "对不起, 无效密码."
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "刚好有一个网页和\"%s\"相似，重定向到该页."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "\"%s\"的相似网页"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "共发现%(matchcount)d%(matches)s与\"%(title)s\"相似的页"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "\"%s\"的本地站点图"
+
+msgid "Please log in first."
 msgstr ""
 
-msgid "Entries in edit log"
-msgstr "编辑日志项次"
-
-msgid "NONE"
-msgstr "无"
-
-msgid "Global extension macros"
-msgstr "全局扩充宏"
-
-msgid "Local extension macros"
-msgstr "本地扩充宏"
-
-msgid "Global extension actions"
-msgstr "全局扩充操作"
-
-msgid "Local extension actions"
-msgstr "本地扩充操作"
-
-msgid "Global parsers"
-msgstr "全局分析插件(parsers)"
-
-msgid "Local extension parsers"
-msgstr "本地扩充分析插件(parsers)"
-
-msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "已安装的处理插件(processors, 不再支持，请使用分析插件)"
-
-msgid "Disabled"
-msgstr "不再有效"
-
-msgid "Enabled"
-msgstr "有效"
-
-msgid "Lupy search"
-msgstr "Lupy搜索"
-
-msgid "Active threads"
-msgstr "活跃线程"
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
 
 #, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr "请输入比{{{\"%s\"}}}更精确的关键字!!"
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+msgid "You are not allowed to rename pages in this wiki!"
+msgstr "本维基不开放网页改名!"
+
+msgid "Please use the interactive user interface to rename pages!"
+msgstr "请使用用户界面交互地为网页改名!"
 
 #, python-format
-msgid "ERROR in regex '%s'"
-msgstr "正规表达式'%s'错误"
+msgid "Could not rename page because of file system error: %s."
+msgstr "网页改名失败, 文件系统异常: %s."
+
+msgid "Rename Page"
+msgstr "改名"
+
+msgid "New name"
+msgstr "新名称"
+
+msgid "Optional reason for the renaming"
+msgstr "改名的原因(可选)"
 
 #, python-format
-msgid "Bad timestamp '%s'"
-msgstr "错误的时间标记 '%s'"
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''已经有一页叫做{{{'%s'}}} 了.'''\n"
+"\n"
+"试用一个不同的网页名."
 
 #, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "\"%(token)s\"后面应该有个 \"=\""
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(其中包括%(localwords)d个%(pagelink)s)"
 
 #, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "键\"%(token)s\"应该有对应的值"
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"下列%(badwords)d个词, 没有收录在词典中(总词数%(totalwords)d词, %(localwords)"
+"s).这些词在正文中特别标出:"
 
-msgid "Wiki Markup"
-msgstr "维基标记"
+msgid "Add checked words to dictionary"
+msgstr "将选中的词加入词典"
 
-msgid "Print View"
-msgstr "打印视图"
+msgid "No spelling errors found!"
+msgstr "没有拼写错误!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "不能对无权阅读的网页进行拼写检查."
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "标题搜索：\"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "全文检索: \"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "连向\"%s\"的网页"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
+
+#, fuzzy
+msgid "Pages"
+msgstr "网页"
+
+msgid "Select Author"
+msgstr ""
+
+msgid "Revert all!"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr "您无权编辑此页."
+
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "订阅细小改动"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "订阅"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr "您无权编辑此页."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Cookie已经删除. 您已登出."
+
+msgid "You are not allowed to delete this page."
+msgstr "您不能删除此页!"
+
+msgid "Please use the interactive user interface to delete pages!"
+msgstr "请使用用户界面交互删除网页!"
+
+msgid "Really delete this page?"
+msgstr "真的要删除此页?"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Optional reason for the deletion"
+msgstr "删除此页的理由(可选)"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+#, fuzzy
+msgid "Backup"
+msgstr "标记"
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "您不可以对此页进行%s操作."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
 
 #, python-format
 msgid "[%d attachments]"
@@ -1059,10 +1355,6 @@ msgid "Attachments for \"%(pagename)s\""
 msgstr "网页\"%(pagename)s\"的附件"
 
 #, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
-msgstr "附件'%(target)s'已经存在(远端名称 '%(filename)s')."
-
-#, python-format
 msgid ""
 "Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
 "saved."
@@ -1075,14 +1367,6 @@ msgstr "附件'%(filename)s'已删除."
 #, python-format
 msgid "Attachment '%(filename)s' installed."
 msgstr "附件'%(filename)s'已安装."
-
-#, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "文件'%(filename)s'安装失败"
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "文件%s不是MoinMoin包."
 
 #, python-format
 msgid ""
@@ -1134,241 +1418,6 @@ msgstr "不明文件类型, 不能内嵌在正文中."
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "附件:%(pagename)s的%(filename)s"
 
-msgid "You are not allowed to delete this page."
-msgstr "您不能删除此页!"
-
-msgid "This page is already deleted or was never created!"
-msgstr "此页已被删除或根本就不存在!"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "请使用用户界面交互删除网页!"
-
-msgid "Really delete this page?"
-msgstr "真的要删除此页?"
-
-msgid "Delete"
-msgstr "删除"
-
-msgid "Optional reason for the deletion"
-msgstr "删除此页的理由(可选)"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "\"%s\"没有相似网页!"
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "刚好有一个网页和\"%s\"相似，重定向到该页."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "\"%s\"的相似网页"
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "共发现%(matchcount)d%(matches)s与\"%(title)s\"相似的页"
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "\"%s\"的本地站点图"
-
-msgid "Please log in first."
-msgstr ""
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s only||\n"
-"\n"
-msgstr ""
-
-msgid "MyPages management"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "无效的include参数\"%s\"!"
-
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr ""
-
-#, fuzzy
-msgid "Package pages"
-msgstr "相似网页"
-
-#, fuzzy
-msgid "Package name"
-msgstr "相似网页"
-
-msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
-
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "本维基不开放网页改名!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "请使用用户界面交互地为网页改名!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "网页改名失败, 文件系统异常: %s."
-
-msgid "Rename Page"
-msgstr "改名"
-
-msgid "New name"
-msgstr "新名称"
-
-msgid "Optional reason for the renaming"
-msgstr "改名的原因(可选)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''已经有一页叫做{{{'%s'}}} 了.'''\n"
-"\n"
-"试用一个不同的网页名."
-
-#, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(其中包括%(localwords)d个%(pagelink)s)"
-
-#, python-format
-msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
-msgstr ""
-"下列%(badwords)d个词, 没有收录在词典中(总词数%(totalwords)d词, %(localwords)"
-"s).这些词在正文中特别标出:"
-
-msgid "Add checked words to dictionary"
-msgstr "将选中的词加入词典"
-
-msgid "No spelling errors found!"
-msgstr "没有拼写错误!"
-
-msgid "You can't check spelling on a page you can't read."
-msgstr "不能对无权阅读的网页进行拼写检查."
-
-#, fuzzy, python-format
-msgid "Subscribe users to the page %s"
-msgstr "订阅细小改动"
-
-#, fuzzy, python-format
-msgid "Subscribed for %s:"
-msgstr "订阅"
-
-msgid "Not a user:"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to perform this action."
-msgstr "您无权编辑此页."
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "标题搜索：\"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "全文检索: \"%s\""
-
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
-msgstr ""
-
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-msgstr ""
-
-msgid "Wiki Backup / Restore"
-msgstr ""
-
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
-"\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
-
-#, fuzzy
-msgid "Backup"
-msgstr "标记"
-
-msgid "Restore"
-msgstr ""
-
-#, fuzzy
-msgid "You are not allowed to do remote backup."
-msgstr "您不可以对此页进行%s操作."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr ""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "连向\"%s\"的网页"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
-
-msgid "Missing password. Please enter user name and password."
-msgstr "需要密码, 请输入用户名和密码."
-
-msgid "Sorry, wrong password."
-msgstr "对不起, 无效密码."
-
-#, fuzzy
-msgid "You are now logged out."
-msgstr "Cookie已经删除. 您已登出."
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr "没有网页名就无法创建新网页. 请指定一个网页名."
-
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
 msgstr "上载新附件\"%(filename)s\""
@@ -1384,13 +1433,80 @@ msgstr "编辑图片\"%(filename)s\""
 msgid "Toggle line numbers"
 msgstr ""
 
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "无效的include参数\"%s\"!"
+msgid "FrontPage"
+msgstr "首页"
 
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "找不到\"%s\"!"
+msgid "RecentChanges"
+msgstr "最新改动"
+
+msgid "TitleIndex"
+msgstr "标题索引"
+
+msgid "WordIndex"
+msgstr "词汇索引"
+
+msgid "FindPage"
+msgstr "查找网页"
+
+msgid "SiteNavigation"
+msgstr "站点导航"
+
+msgid "HelpContents"
+msgstr "帮助目录"
+
+msgid "HelpOnFormatting"
+msgstr "帮助-排版"
+
+msgid "UserPreferences"
+msgstr "用户设置"
+
+msgid "WikiLicense"
+msgstr "维基版权"
+
+msgid "MissingPage"
+msgstr "缺失网页"
+
+msgid "MissingHomePage"
+msgstr "缺失主页"
+
+msgid "Mon"
+msgstr "星期一"
+
+msgid "Tue"
+msgstr "星期二"
+
+msgid "Wed"
+msgstr "星期三"
+
+msgid "Thu"
+msgstr "星期四"
+
+msgid "Fri"
+msgstr "星期五"
+
+msgid "Sat"
+msgstr "星期六"
+
+msgid "Sun"
+msgstr "星期日"
+
+msgid "AttachFile"
+msgstr "附件"
+
+msgid "DeletePage"
+msgstr "删除"
+
+msgid "LikePages"
+msgstr "相似网页"
+
+msgid "LocalSiteMap"
+msgstr "本站地图"
+
+msgid "RenamePage"
+msgstr "改名"
+
+msgid "SpellCheck"
+msgstr "拼写检查"
 
 #, fuzzy, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -1458,6 +1574,17 @@ msgstr "设置书签"
 msgid "[Bookmark reached]"
 msgstr "书签结尾"
 
+msgid "No wanted pages in this wiki."
+msgstr "本维基中没有未定义的网页."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "无效的include参数\"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "找不到\"%s\"!"
+
 msgid "Markup"
 msgstr "标记"
 
@@ -1466,9 +1593,6 @@ msgstr "显示"
 
 msgid "Filename"
 msgstr "文件名"
-
-msgid "No wanted pages in this wiki."
-msgstr "本维基中没有未定义的网页."
 
 msgid ""
 "Rendering of reStructured text is not possible, please install docutils."
@@ -1713,81 +1837,6 @@ msgstr "邮件发送失败"
 msgid "Mail sent OK"
 msgstr "邮件成功发送"
 
-msgid "FrontPage"
-msgstr "首页"
-
-msgid "RecentChanges"
-msgstr "最新改动"
-
-msgid "TitleIndex"
-msgstr "标题索引"
-
-msgid "WordIndex"
-msgstr "词汇索引"
-
-msgid "FindPage"
-msgstr "查找网页"
-
-msgid "SiteNavigation"
-msgstr "站点导航"
-
-msgid "HelpContents"
-msgstr "帮助目录"
-
-msgid "HelpOnFormatting"
-msgstr "帮助-排版"
-
-msgid "UserPreferences"
-msgstr "用户设置"
-
-msgid "WikiLicense"
-msgstr "维基版权"
-
-msgid "MissingPage"
-msgstr "缺失网页"
-
-msgid "MissingHomePage"
-msgstr "缺失主页"
-
-msgid "Mon"
-msgstr "星期一"
-
-msgid "Tue"
-msgstr "星期二"
-
-msgid "Wed"
-msgstr "星期三"
-
-msgid "Thu"
-msgstr "星期四"
-
-msgid "Fri"
-msgstr "星期五"
-
-msgid "Sat"
-msgstr "星期六"
-
-msgid "Sun"
-msgstr "星期日"
-
-msgid "AttachFile"
-msgstr "附件"
-
-msgid "DeletePage"
-msgstr "删除"
-
-msgid "LikePages"
-msgstr "相似网页"
-
-msgid "LocalSiteMap"
-msgstr "本站地图"
-
-msgid "RenamePage"
-msgstr "改名"
-
-msgid "SpellCheck"
-msgstr "拼写检查"
-
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s次 (%(logsize)s字节)"
 
@@ -1797,12 +1846,6 @@ msgstr "拼写检查"
 
 #~ msgid "Download XML export of this wiki"
 #~ msgstr "下载本维基的XML输出"
-
-#~ msgid "Required attribute \"%(attrname)s\" missing"
-#~ msgstr "缺少需要的属性\"%(attrname)s\""
-
-#~ msgid "Submitted form data:"
-#~ msgstr "提交表单数据:"
 
 #~ msgid "EditText"
 #~ msgstr "编辑正文"

@@ -32,8 +32,6 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Creează Pagină Nouă''',
 '''You are not allowed to view this page.''':
 '''Nu aveţi dreptul să vizionaţi această pagină.''',
-'''Your changes are not saved!''':
-'''Modificările dumneavoastră nu sunt salvate!''',
 '''You are not allowed to edit this page.''':
 '''Nu aveţi dreptul să editaţi această pagină.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ Pentru a folosi acest formular pe alte pagini, inseraţi apelul macro:
 '''Nu se pot edita revizii vechi!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Blocarea înfiinţată de dumneavoastră a expirat, pregătiţi-vă pentru conflicte de editare!''',
-'''Page name is too long, try shorter name.''':
-'''Numele paginii este prea lung, încercaţi un nume mai mic.''',
 '''Edit "%(pagename)s"''':
 '''Editare "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru anularea modificărilor.''',
 '''Preview''':
 '''Previzionare''',
-'''GUI Mode''':
-'''Mod GUI''',
 '''Comment:''':
 '''Comentariu:''',
 '''<No addition>''':
@@ -96,6 +90,203 @@ Dacă nu doriţi aceasta, apăsaţi \'\'\'%(cancel_button_text)s\'\'\' pentru an
 '''Modificare minoră''',
 '''Remove trailing whitespace from each line''':
 '''Ştergere spaţii de la sfârşitul fiecărei linii''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Nume de utilizator invalid {{{\'%s\'}}}.
+Numele poate conţine orice caractere Unicode alfanumerice , cu un
+spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
+'''You are not allowed to do %s on this page.''':
+'''Pe această pagină nu puteţi face %s''',
+'''Login''':
+'''Login''',
+''' %s and try again.''':
+''' %s şi încercaţi din nou.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d rezultate din aproximativ %(pages)d pagini.''',
+'''%.2f seconds''':
+'''%.2f secunde''',
+'''match''':
+'''potrivire''',
+'''matches''':
+'''potriviri''',
+'''<unknown>''':
+'''<necunoscut>''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Cineva a cerut trimiterea datelor contului dumneavoastră la această adresă de email.
+
+Dacă aţi pierdut parola, folosiţi datele de mai jos şi introduceţi
+parola exact cum este ea în formularul wiki-ului de introducere a 
+parolei(folosiţi copiere&lipire pentru aceasta).
+
+După înregistrarea cu succes, este recomandată modificarea parolei în una cunoscută.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Datele contului wiki al dumneavoastră''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Acest wiki nu permite procesare poştei electronice.
+Contactaţi deţinătorul wiki-ului, care poate activa email.''',
+'''Please provide a valid email address!''':
+'''Introduceţi o adresă de email validă!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Nu a fost găsit nici un cont care să se potrivească cu adresa
+de email \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Folosire PreferinţeUtilizator la schimbarea setărilor sau la crearea unui cont.''',
+'''Empty user name. Please enter a user name.''':
+'''Numele necompletat. Introduceţi un nume de utilizator''',
+'''This user name already belongs to somebody else.''':
+'''Acest nume de utilizator este deja alocat.''',
+'''Passwords don\'t match!''':
+'''Parolele nu corespund!''',
+'''Please specify a password!''':
+'''Specificaţi o parolă!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Specificaţi adresa de email. Dacă pierdeţi informaţia de login, o puteţi obţine prin email.''',
+'''This email already belongs to somebody else.''':
+'''Această adresă de email este deţinută deja de altcineva.''',
+'''User account created! You can use this account to login now...''':
+'''Contul de utilizator a fost creat! Puteţi folosi acest cont pentru login acum...''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Tema \'%(theme_name)s\' nu a putut fi încărcată!''',
+'''User preferences saved!''':
+'''Preferinţele au fost salvate!''',
+'''Default''':
+'''Implicit''',
+'''<Browser setting>''':
+'''<Setare browser>''',
+'''the one preferred''':
+'''cel preferat''',
+'''free choice''':
+'''alegere liberă''',
+'''Save''':
+'''Salvare''',
+'''Preferred theme''':
+'''Tema dorită''',
+'''Editor Preference''':
+'''Preferinţe Editor''',
+'''Editor shown on UI''':
+'''Editorul afişat în UI''',
+'''Time zone''':
+'''Fus orar''',
+'''Your time is''':
+'''Ora locală pentru dumneavoastră este''',
+'''Server time is''':
+'''Ora locală a server-ului este''',
+'''Date format''':
+'''Formatul datei''',
+'''Preferred language''':
+'''Limba dorită''',
+'''General options''':
+'''Opţiuni generale''',
+'''Quick links''':
+'''Legături rapide''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Această listă nu funcţionează până când introduceţi o adresă de email validă!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Înscris la următoarele pagini wiki(o expresie regulară per linie)''',
+'''Create Profile''':
+'''Creează profil''',
+'''Mail me my account data''':
+'''Trimitere prin email datele contului''',
+'''Email''':
+'''Email''',
+'''Name''':
+'''Nume''',
+'''Password''':
+'''Parolă''',
+'''Action''':
+'''Acţiune''',
+'''Required attribute "%(attrname)s" missing''':
+'''Parametrul necesar "%(attrname)s" lipseşte''',
+'''Submitted form data:''':
+'''Datele din formular care au fost trimise:''',
+'''Search Titles''':
+'''Căutare Titluri''',
+'''Display context of search results''':
+'''Afişează contextul rezultatelor căutării''',
+'''Case-sensitive searching''':
+'''Căutare case-sensitive''',
+'''Search Text''':
+'''Căutare Text''',
+'''Go To Page''':
+'''Mergi La Pagina''',
+'''Include system pages''':
+'''Includere pagini sistem''',
+'''Exclude system pages''':
+'''Excludere pagini sistem''',
+'''Plain title index''':
+'''Index exclusiv cu titluri''',
+'''XML title index''':
+'''Index XML cu tituri''',
+'''Python Version''':
+'''Versiunea Python''',
+'''MoinMoin Version''':
+'''Versiunea MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Seria %s [Revizia %s]''',
+'''4Suite Version''':
+'''4Suite Version''',
+'''Number of pages''':
+'''Număr de pagini''',
+'''Number of system pages''':
+'''Număr de pagini sistem''',
+'''Accumulated page sizes''':
+'''Mărimile acumulate ale paginilor''',
+'''Entries in edit log''':
+'''Intrări în jurnalul de editare''',
+'''NONE''':
+'''NIMIC''',
+'''Global extension macros''':
+'''Extensii macro globale''',
+'''Local extension macros''':
+'''Extensii macro locale''',
+'''Global extension actions''':
+'''Acţiuni de extensie globale''',
+'''Local extension actions''':
+'''Acţiuni de extensie locale''',
+'''Global parsers''':
+'''Analizatoare(parsers) globale''',
+'''Local extension parsers''':
+'''Analizatoare(parsers) locale de extindere''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)''',
+'''Disabled''':
+'''Dezactivat''',
+'''Enabled''':
+'''Activat''',
+'''Lupy search''':
+'''Căutare Lupy''',
+'''Active threads''':
+'''Fire(threads) active''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Folosiţi un termen de căutare mai selectiv în loc de {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Eroare în expresia regulară \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Dată invalidă: \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Este necesar ca "=" să urmeze după "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Este necesară o valoare pentru cheia "%(token)s"''',
+'''Wiki Markup''':
+'''Text Sursă Wiki''',
+'''Print View''':
+'''Vizualizare Tipărire''',
+'''Your changes are not saved!''':
+'''Modificările dumneavoastră nu sunt salvate!''',
+'''Page name is too long, try shorter name.''':
+'''Numele paginii este prea lung, încercaţi un nume mai mic.''',
+'''GUI Mode''':
+'''Mod GUI''',
 '''Edit was cancelled.''':
 '''Editarea a fost anulată''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -198,8 +389,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Ar trebui \'\'să nu editaţi\'\' această pagină pentru cel puţin încă %(mins_valid)d minut(e),
 pentru a evita conflictele de editare.\'\'\'[[BR]]
 Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
-'''<unknown>''':
-'''<necunoscut>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Instalarea lui \'%(filename)s\' a eşuat.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Fişierul %s nu este un fişier pachet MoinMoin.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -258,133 +451,20 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''Înscriere la modificări minore''',
 '''Disable this account forever''':
 '''Dezactivare cont curent pentru totdeauna''',
-'''Name''':
-'''Nume''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Folosiţi Primulnume\'\'\'\'\'\'Ultimulnume)''',
 '''Alias-Name''':
 '''Nume-Alias''',
-'''Password''':
-'''Parolă''',
 '''Password repeat''':
 '''Repetare parolă''',
 '''(Only when changing passwords)''':
 '''(Doar la schimbarea parolelor)''',
-'''Email''':
-'''Email''',
 '''User CSS URL''':
 '''URL pentru CSS al utilizatorului''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Lăsaţi gol pentru a dezactiva CSS-ul utilizatorului)''',
 '''Editor size''':
 '''Dimensiunea editorului''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Nume de utilizator invalid {{{\'%s\'}}}.
-Numele poate conţine orice caractere Unicode alfanumerice , cu un
-spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
-'''You are not allowed to do %s on this page.''':
-'''Pe această pagină nu puteţi face %s''',
-'''Login''':
-'''Login''',
-''' %s and try again.''':
-''' %s şi încercaţi din nou.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d rezultate din aproximativ %(pages)d pagini.''',
-'''%.2f seconds''':
-'''%.2f secunde''',
-'''match''':
-'''potrivire''',
-'''matches''':
-'''potriviri''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Cineva a cerut trimiterea datelor contului dumneavoastră la această adresă de email.
-
-Dacă aţi pierdut parola, folosiţi datele de mai jos şi introduceţi
-parola exact cum este ea în formularul wiki-ului de introducere a 
-parolei(folosiţi copiere&lipire pentru aceasta).
-
-După înregistrarea cu succes, este recomandată modificarea parolei în una cunoscută.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Datele contului wiki al dumneavoastră''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Acest wiki nu permite procesare poştei electronice.
-Contactaţi deţinătorul wiki-ului, care poate activa email.''',
-'''Please provide a valid email address!''':
-'''Introduceţi o adresă de email validă!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Nu a fost găsit nici un cont care să se potrivească cu adresa
-de email \'%(email)s\'!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Folosire PreferinţeUtilizator la schimbarea setărilor sau la crearea unui cont.''',
-'''Empty user name. Please enter a user name.''':
-'''Numele necompletat. Introduceţi un nume de utilizator''',
-'''This user name already belongs to somebody else.''':
-'''Acest nume de utilizator este deja alocat.''',
-'''Passwords don\'t match!''':
-'''Parolele nu corespund!''',
-'''Please specify a password!''':
-'''Specificaţi o parolă!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Specificaţi adresa de email. Dacă pierdeţi informaţia de login, o puteţi obţine prin email.''',
-'''This email already belongs to somebody else.''':
-'''Această adresă de email este deţinută deja de altcineva.''',
-'''User account created! You can use this account to login now...''':
-'''Contul de utilizator a fost creat! Puteţi folosi acest cont pentru login acum...''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Tema \'%(theme_name)s\' nu a putut fi încărcată!''',
-'''User preferences saved!''':
-'''Preferinţele au fost salvate!''',
-'''Default''':
-'''Implicit''',
-'''<Browser setting>''':
-'''<Setare browser>''',
-'''the one preferred''':
-'''cel preferat''',
-'''free choice''':
-'''alegere liberă''',
-'''Save''':
-'''Salvare''',
-'''Preferred theme''':
-'''Tema dorită''',
-'''Editor Preference''':
-'''Preferinţe Editor''',
-'''Editor shown on UI''':
-'''Editorul afişat în UI''',
-'''Time zone''':
-'''Fus orar''',
-'''Your time is''':
-'''Ora locală pentru dumneavoastră este''',
-'''Server time is''':
-'''Ora locală a server-ului este''',
-'''Date format''':
-'''Formatul datei''',
-'''Preferred language''':
-'''Limba dorită''',
-'''General options''':
-'''Opţiuni generale''',
-'''Quick links''':
-'''Legături rapide''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Această listă nu funcţionează până când introduceţi o adresă de email validă!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Înscris la următoarele pagini wiki(o expresie regulară per linie)''',
-'''Create Profile''':
-'''Creează profil''',
-'''Mail me my account data''':
-'''Trimitere prin email datele contului''',
-'''Action''':
-'''Acţiune''',
 '''No older revisions available!''':
 '''Nici o revizie mai veche nu este disponibilă!''',
 '''Diff for "%s"''':
@@ -483,78 +563,72 @@ de email \'%(email)s\'!''',
 '''Trebuie să specificaţi tipul graficului!''',
 '''Bad chart type "%s"!''':
 '''Este invalid tipul de grafic "%s"!''',
-'''Search Titles''':
-'''Căutare Titluri''',
-'''Display context of search results''':
-'''Afişează contextul rezultatelor căutării''',
-'''Case-sensitive searching''':
-'''Căutare case-sensitive''',
-'''Search Text''':
-'''Căutare Text''',
-'''Go To Page''':
-'''Mergi La Pagina''',
-'''Include system pages''':
-'''Includere pagini sistem''',
-'''Exclude system pages''':
-'''Excludere pagini sistem''',
-'''Plain title index''':
-'''Index exclusiv cu titluri''',
-'''XML title index''':
-'''Index XML cu tituri''',
-'''Python Version''':
-'''Versiunea Python''',
-'''MoinMoin Version''':
-'''Versiunea MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Seria %s [Revizia %s]''',
-'''4Suite Version''':
-'''4Suite Version''',
-'''Number of pages''':
-'''Număr de pagini''',
-'''Number of system pages''':
-'''Număr de pagini sistem''',
-'''Accumulated page sizes''':
-'''Mărimile acumulate ale paginilor''',
-'''Entries in edit log''':
-'''Intrări în jurnalul de editare''',
-'''NONE''':
-'''NIMIC''',
-'''Global extension macros''':
-'''Extensii macro globale''',
-'''Local extension macros''':
-'''Extensii macro locale''',
-'''Global extension actions''':
-'''Acţiuni de extensie globale''',
-'''Local extension actions''':
-'''Acţiuni de extensie locale''',
-'''Global parsers''':
-'''Analizatoare(parsers) globale''',
-'''Local extension parsers''':
-'''Analizatoare(parsers) locale de extindere''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Procesoare instalate (ÎNVECHIT -- folosiţi Parsers)''',
-'''Disabled''':
-'''Dezactivat''',
-'''Enabled''':
-'''Activat''',
-'''Lupy search''':
-'''Căutare Lupy''',
-'''Active threads''':
-'''Fire(threads) active''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Folosiţi un termen de căutare mai selectiv în loc de {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Eroare în expresia regulară \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Dată invalidă: \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Este necesar ca "=" să urmeze după "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Este necesară o valoare pentru cheia "%(token)s"''',
-'''Wiki Markup''':
-'''Text Sursă Wiki''',
-'''Print View''':
-'''Vizualizare Tipărire''',
+'''This page is already deleted or was never created!''':
+'''Această pagină este deja ştearsă sau nu a fost creată niciodată!''',
+'''No pages like "%s"!''':
+'''Nici o pagină de genul "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Ataşamentul \'%(target)s\' (fişier la distanţă \'%(filename)s\') există deja.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nume de utilizator necunoscut: {{{"%s"}}}. Introduceţi nume şi parolă''',
+'''Missing password. Please enter user name and password.''':
+'''Parola lipseşte. Introduceti nume şi parolă''',
+'''Sorry, wrong password.''':
+'''Parolă greşită.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''A fost găsită exact o pagină de genul "%s", urmează redirecţionarea spre pagină.''',
+'''Pages like "%s"''':
+'''Pagini de genul "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s pentru "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Harta Locală a Sitului "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Nu aveţi permisiunea de a redenumi pagini în acest wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Folosiţi interfaţa interactivă cu utilizatorul pentru a redenumi pagini!''',
+'''Could not rename page because of file system error: %s.''':
+'''Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s.''',
+'''Rename Page''':
+'''Redenumire Pagină''',
+'''New name''':
+'''Nume nou''',
+'''Optional reason for the renaming''':
+'''Motiv opţional referitor la redenumire.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'O pagină cu numele {{{\'%s\'}}} există deja.\'\'\'
+
+Încercaţi un nume diferit.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(inclusiv %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Următoarele %(badwords)d cuvinte nu au putut fi găsite în dicţionarul de %(totalwords)d cuvinte%(localwords)s şi sunt scoase în evidenţă mai jos:''',
+'''Add checked words to dictionary''':
+'''Adăugare cuvinte verificate în dicţionar''',
+'''No spelling errors found!''':
+'''Nu a fost găsită nici o greşeală de ortografie!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o puteţi citi.''',
+'''Title Search: "%s"''':
+'''Căutare Titlu: "%s"''',
+'''Full Text Search: "%s"''':
+'''Căutare Text Complet: "%s"''',
+'''Full Link List for "%s"''':
+'''Lista Completă de Legături pentru "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele paginii.''',
+'''You are not allowed to delete this page.''':
+'''Nu aveţi permisiunea de a şterge această pagină.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!''',
+'''Really delete this page?''':
+'''Sigur doriţi ştergerea acestei pagini ?''',
+'''Delete''':
+'''Ştergere''',
+'''Optional reason for the deletion''':
+'''Motiv opţional referitor la ştergere''',
 '''[%d attachments]''':
 '''[%d ataşamente]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -617,18 +691,12 @@ Altfel, dacă "Redenumeşte în" este necompletat, va fi folosit numele original
 '''Este nepermisă acţiunea de trimitere date: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Ataşamente pentru "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Ataşamentul \'%(target)s\' (fişier la distanţă \'%(filename)s\') există deja.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Ataşamentul \'%(target)s\' (fişier la distanţă \'%(filename)s\') cu %(bytes)d octeţi a fost salvat.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Ataşamentul \'%(filename)s\' a fost şters.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Ataşamentul \'%(filename)s\' a fost instalat.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Instalarea lui \'%(filename)s\' a eşuat.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Fişierul %s nu este un fişier pachet MoinMoin.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Ataşamentul \'%(filename)s\' nu a putut fi dezarhivat deoarece fişierele rezultate ar fi prea mari (%(space)d kB lipsesc).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -651,80 +719,62 @@ Altfel, dacă "Redenumeşte în" este necompletat, va fi folosit numele original
 '''Tip de fişier necunoscut; nu se poate afişa acest ataşament îninteriorul paginii.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''ataşament:%(filename)s al %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Nu aveţi permisiunea de a şterge această pagină.''',
-'''This page is already deleted or was never created!''':
-'''Această pagină este deja ştearsă sau nu a fost creată niciodată!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!''',
-'''Really delete this page?''':
-'''Sigur doriţi ştergerea acestei pagini ?''',
-'''Delete''':
-'''Ştergere''',
-'''Optional reason for the deletion''':
-'''Motiv opţional referitor la ştergere''',
-'''No pages like "%s"!''':
-'''Nici o pagină de genul "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''A fost găsită exact o pagină de genul "%s", urmează redirecţionarea spre pagină.''',
-'''Pages like "%s"''':
-'''Pagini de genul "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s pentru "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Harta Locală a Sitului "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nu aveţi permisiunea de a redenumi pagini în acest wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Folosiţi interfaţa interactivă cu utilizatorul pentru a redenumi pagini!''',
-'''Could not rename page because of file system error: %s.''':
-'''Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s.''',
-'''Rename Page''':
-'''Redenumire Pagină''',
-'''New name''':
-'''Nume nou''',
-'''Optional reason for the renaming''':
-'''Motiv opţional referitor la redenumire.''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'O pagină cu numele {{{\'%s\'}}} există deja.\'\'\'
-
-Încercaţi un nume diferit.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(inclusiv %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Următoarele %(badwords)d cuvinte nu au putut fi găsite în dicţionarul de %(totalwords)d cuvinte%(localwords)s şi sunt scoase în evidenţă mai jos:''',
-'''Add checked words to dictionary''':
-'''Adăugare cuvinte verificate în dicţionar''',
-'''No spelling errors found!''':
-'''Nu a fost găsită nici o greşeală de ortografie!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o puteţi citi.''',
-'''Title Search: "%s"''':
-'''Căutare Titlu: "%s"''',
-'''Full Text Search: "%s"''':
-'''Căutare Text Complet: "%s"''',
-'''Full Link List for "%s"''':
-'''Lista Completă de Legături pentru "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nume de utilizator necunoscut: {{{"%s"}}}. Introduceţi nume şi parolă''',
-'''Missing password. Please enter user name and password.''':
-'''Parola lipseşte. Introduceti nume şi parolă''',
-'''Sorry, wrong password.''':
-'''Parolă greşită.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele paginii.''',
 '''Upload new attachment "%(filename)s"''':
 '''Trimitere ataşament nou "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Creare desen nou "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Editare desen %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Argumente de includere "%s" sunt invalide!''',
-'''Nothing found for "%s"!''':
-'''Nimic nu a fost găsit pentru "%s"!''',
+'''FrontPage''':
+'''PaginaPrincipală''',
+'''RecentChanges''':
+'''ModificăriRecente''',
+'''TitleIndex''':
+'''IndexTitluri''',
+'''WordIndex''':
+'''IndexCuvinte''',
+'''FindPage''':
+'''CăutarePagină''',
+'''SiteNavigation''':
+'''NavigareSit''',
+'''HelpContents''':
+'''Ajutor''',
+'''HelpOnFormatting''':
+'''AjutorLaFormatare''',
+'''UserPreferences''':
+'''PreferinţeUtilizator''',
+'''WikiLicense''':
+'''LicenţăWiki''',
+'''MissingPage''':
+'''PaginăLipsă''',
+'''MissingHomePage''':
+'''PaginaPrincipalăLipsă''',
+'''Mon''':
+'''Lun''',
+'''Tue''':
+'''Mar''',
+'''Wed''':
+'''Mie''',
+'''Thu''':
+'''Joi''',
+'''Fri''':
+'''Vin''',
+'''Sat''':
+'''Sâm''',
+'''Sun''':
+'''Dum''',
+'''AttachFile''':
+'''AtaşareFişier''',
+'''DeletePage''':
+'''ŞtergerePagină''',
+'''LikePages''':
+'''PaginiAsemănătoare''',
+'''LocalSiteMap''':
+'''HartaLocalăSit''',
+'''RenamePage''':
+'''RedenumirePagină''',
+'''SpellCheck''':
+'''VerificareOrtografie''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Schema de navigare \'%(scheme)s\' nu este posibilă!''',
 '''No parent page found!''':
@@ -759,14 +809,18 @@ Try a different name.''':
 '''setare semn de carte''',
 '''[Bookmark reached]''':
 '''[Semn de carte accesat]''',
+'''No wanted pages in this wiki.''':
+'''Nici o pagină dorită în acest wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Argumente de includere "%s" sunt invalide!''',
+'''Nothing found for "%s"!''':
+'''Nimic nu a fost găsit pentru "%s"!''',
 '''Markup''':
 '''Marcare''',
 '''Display''':
 '''Afişare''',
 '''Filename''':
 '''Nume fişier''',
-'''No wanted pages in this wiki.''':
-'''Nici o pagină dorită în acest wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Randarea textului de tip reStructured nu este posibilă, instalaţi docutils.''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -903,54 +957,4 @@ red=editare''',
 '''Mailul nu a fost trimis''',
 '''Mail sent OK''':
 '''Mail trimis cu bine''',
-'''FrontPage''':
-'''PaginaPrincipală''',
-'''RecentChanges''':
-'''ModificăriRecente''',
-'''TitleIndex''':
-'''IndexTitluri''',
-'''WordIndex''':
-'''IndexCuvinte''',
-'''FindPage''':
-'''CăutarePagină''',
-'''SiteNavigation''':
-'''NavigareSit''',
-'''HelpContents''':
-'''Ajutor''',
-'''HelpOnFormatting''':
-'''AjutorLaFormatare''',
-'''UserPreferences''':
-'''PreferinţeUtilizator''',
-'''WikiLicense''':
-'''LicenţăWiki''',
-'''MissingPage''':
-'''PaginăLipsă''',
-'''MissingHomePage''':
-'''PaginaPrincipalăLipsă''',
-'''Mon''':
-'''Lun''',
-'''Tue''':
-'''Mar''',
-'''Wed''':
-'''Mie''',
-'''Thu''':
-'''Joi''',
-'''Fri''':
-'''Vin''',
-'''Sat''':
-'''Sâm''',
-'''Sun''':
-'''Dum''',
-'''AttachFile''':
-'''AtaşareFişier''',
-'''DeletePage''':
-'''ŞtergerePagină''',
-'''LikePages''':
-'''PaginiAsemănătoare''',
-'''LocalSiteMap''':
-'''HartaLocalăSit''',
-'''RenamePage''':
-'''RedenumirePagină''',
-'''SpellCheck''':
-'''VerificareOrtografie''',
 }

@@ -32,8 +32,6 @@ macro call.-~
 '''建立新頁面''',
 '''You are not allowed to view this page.''':
 '''你無權瀏覽本頁。''',
-'''Your changes are not saved!''':
-'''你的修改沒有儲存！''',
 '''You are not allowed to edit this page.''':
 '''你無權編輯本頁。''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ macro call.-~
 '''不能編輯舊版頁面！''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''你的編輯鎖定逾時，可能會有編輯衝突需要處理！''',
-'''Page name is too long, try shorter name.''':
-'''頁面的名稱太長，請改用短一點的。''',
 '''Edit "%(pagename)s"''':
 '''編輯 "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -83,8 +79,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 如果你不同意的話，請按 \'\'\'%(cancel_button_text)s\'\'\' 以放棄本次編輯。''',
 '''Preview''':
 '''預覽''',
-'''GUI Mode''':
-'''GUI 模式''',
+'''Text mode''':
+'''Text 模式''',
 '''Comment:''':
 '''說明欄：''',
 '''<No addition>''':
@@ -95,6 +91,222 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''只有些微改變''',
 '''Remove trailing whitespace from each line''':
 '''去掉行尾空白''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''無效的使用者名稱：{{{\'%s\'}}}。
+名稱可以使用 Unicode 文數字，字跟字中間可以加進一個空白，
+但不能使用群組頁面的名字。''',
+'''You are not allowed to do %s on this page.''':
+'''你無權「%s」本頁。''',
+'''Login''':
+'''登入''',
+''' %s and try again.''':
+''' %s 後再試一次。''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''在 %(pages)d 頁中找到 %(hits)d 筆。''',
+'''%.2f seconds''':
+'''%.2f 秒''',
+'''match''':
+'''筆''',
+'''matches''':
+'''筆''',
+'''<unknown>''':
+'''<不明>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''登入名稱：%s
+
+登入密碼：%s
+
+登入 URL：%s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''有人要求將你的帳號資料寄到這個信箱來。
+
+如果是你忘了密碼，請使用以下的資料登入。
+
+成功登入之後，請重新設定一次密碼！
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] 你的 wiki 帳號資料''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''本 wiki 不支援郵寄工作。
+請連絡管理員，看他要不要啟動郵寄功能。''',
+'''Please provide a valid email address!''':
+'''請輸入合法的 email 地址！''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''找不到登記為 \'%(email)s\' 的帳號！''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''請到 UserPreferences 改變設定或新建帳號''',
+'''Empty user name. Please enter a user name.''':
+'''請輸入使用者名稱！''',
+'''This user name already belongs to somebody else.''':
+'''這個使用者名稱已經有人用了。''',
+'''Passwords don\'t match!''':
+'''兩次輸入的密碼不符！''',
+'''Please specify a password!''':
+'''請輸入密碼！''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''請輸入 email 地址，不然你忘記名稱或密碼的時候，就不能用 email 取回了。''',
+'''This email already belongs to somebody else.''':
+'''這個 email 地址已經有人用了。''',
+'''User account created! You can use this account to login now...''':
+'''使用者帳號已經建立！你可以用此帳號登入...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''請到 ["使用者設定"] 改變所選定使用者的帳號資料''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''無法載入佈景主題 \'%(theme_name)s\'!''',
+'''User preferences saved!''':
+'''使用者設定已儲存！''',
+'''Default''':
+'''預設值''',
+'''<Browser setting>''':
+'''<依瀏覽器而定>''',
+'''the one preferred''':
+'''只有我偏好的''',
+'''free choice''':
+'''列出所有選擇''',
+'''Select User''':
+'''選擇使用者''',
+'''Save''':
+'''存檔''',
+'''Preferred theme''':
+'''佈景主題''',
+'''Editor Preference''':
+'''偏好的編輯器''',
+'''Editor shown on UI''':
+'''顯示的編輯器選項''',
+'''Time zone''':
+'''時區''',
+'''Your time is''':
+'''你當地的時間：''',
+'''Server time is''':
+'''伺服器的時間：''',
+'''Date format''':
+'''日期格式''',
+'''Preferred language''':
+'''語言偏好''',
+'''General options''':
+'''一般選項''',
+'''Quick links''':
+'''自訂頁面捷徑''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''請提供正確的 email 地址，才收得到你訂閱的頁面！''',
+'''Subscribed wiki pages (one regex per line)''':
+'''訂閱的 wiki 頁面 (每行一個正規表示式)''',
+'''Create Profile''':
+'''新使用者註冊''',
+'''Mail me my account data''':
+'''把帳號資料寄給我''',
+'''Email''':
+'''Email''',
+'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
+'''要註冊新帳號或忘了密碼，請到 %(userprefslink)s。''',
+'''Name''':
+'''名稱''',
+'''Password''':
+'''密碼''',
+'''Action''':
+'''功能''',
+'''Required attribute "%(attrname)s" missing''':
+'''缺少必要的屬性 "%(attrname)s"''',
+'''Submitted form data:''':
+'''提交表單資料：''',
+'''Search Titles''':
+'''搜尋標題''',
+'''Display context of search results''':
+'''顯示前後文''',
+'''Case-sensitive searching''':
+'''區分大小寫''',
+'''Search Text''':
+'''全文檢索''',
+'''Go To Page''':
+'''跳至此頁''',
+'''Include system pages''':
+'''包含系統頁面''',
+'''Exclude system pages''':
+'''排除系統頁面''',
+'''Plain title index''':
+'''一般標題索引''',
+'''XML title index''':
+'''XML 標題索引''',
+'''Python Version''':
+'''Python 版本''',
+'''MoinMoin Version''':
+'''!MoinMoin 版本''',
+'''Release %s [Revision %s]''':
+'''%s 版 [%s 修訂]''',
+'''4Suite Version''':
+'''4Suite 版本''',
+'''Number of pages''':
+'''總頁面數''',
+'''Number of system pages''':
+'''系統頁面數''',
+'''Accumulated page sizes''':
+'''頁面大小總計''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''硬碟使用量 (目錄 %(data_dir)s/pages)''',
+'''Disk usage of %(data_dir)s/''':
+'''硬碟使用量 (目錄 %(data_dir)s)''',
+'''Entries in edit log''':
+'''修訂記錄總計''',
+'''NONE''':
+'''無''',
+'''Global extension macros''':
+'''內建擴充巨集''',
+'''Local extension macros''':
+'''外掛擴充巨集''',
+'''Global extension actions''':
+'''內建擴充操作''',
+'''Local extension actions''':
+'''外掛擴充操作''',
+'''Global parsers''':
+'''內建解析器''',
+'''Local extension parsers''':
+'''外掛解析器''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''外掛處理器 (不建議使用 -- 請改用解析器)''',
+'''Disabled''':
+'''停用''',
+'''Enabled''':
+'''可用''',
+'''Lupy search''':
+'''Lupy 搜尋''',
+'''Active threads''':
+'''執行緒數目''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''{{{"%s"}}} 找到太多資料，請輸入更精確的關鍵字！''',
+'''ERROR in regex \'%s\'''':
+'''正規表示式 \'%s\' 錯誤''',
+'''Bad timestamp \'%s\'''':
+'''錯誤的時間戳記 \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''"%(token)s" 後面應該有個 "="''',
+'''Expected a value for key "%(token)s"''':
+'''"%(token)s" 應該有對應的值''',
+'''Wiki Markup''':
+'''Wiki 標記''',
+'''Print View''':
+'''檢視列印形''',
+'''Your changes are not saved!''':
+'''你的修改沒有儲存！''',
+'''Page name is too long, try shorter name.''':
+'''頁面的名稱太長，請改用短一點的。''',
+'''GUI Mode''':
+'''GUI 模式''',
 '''Edit was cancelled.''':
 '''編輯已取消。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -194,10 +406,10 @@ To leave the editor, press the Cancel button.''':
 '''%(owner)s 從 %(timestamp)s 開始編輯或預覽本頁。[[BR]]
 \'\'\'為了避免編輯衝突，請儘量不要在 %(mins_valid)d 分鐘內編輯本頁。\'\'\'[[BR]]
 按下「取消」鍵，便可離開編輯模式。''',
-'''<unknown>''':
-'''<不明>''',
-'''Text mode''':
-'''Text 模式''',
+'''Installation of \'%(filename)s\' failed.''':
+'''安裝 \'%(filename)s\' 失敗！''',
+'''The file %s is not a MoinMoin package file.''':
+'''檔案 %s 不是 MoinMoin 包裝檔！''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -295,148 +507,20 @@ reStructuredText 快速參考
 '''訂閱的頁面即使只有些微改變也要寄信通知''',
 '''Disable this account forever''':
 '''永遠停用本帳號''',
-'''Name''':
-'''名稱''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(請用 Firstname\'\'\'\'\'\'Lastname 形式)''',
 '''Alias-Name''':
 '''別名''',
-'''Password''':
-'''密碼''',
 '''Password repeat''':
 '''密碼(再一次)''',
 '''(Only when changing passwords)''':
 '''(變更密碼才要重覆輸入)''',
-'''Email''':
-'''Email''',
 '''User CSS URL''':
 '''自訂 CSS 的 URL''',
 '''(Leave it empty for disabling user CSS)''':
 '''(空白表示不要自訂 CSS)''',
 '''Editor size''':
 '''編輯框列數''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''無效的使用者名稱：{{{\'%s\'}}}。
-名稱可以使用 Unicode 文數字，字跟字中間可以加進一個空白，
-但不能使用群組頁面的名字。''',
-'''You are not allowed to do %s on this page.''':
-'''你無權「%s」本頁。''',
-'''Login''':
-'''登入''',
-''' %s and try again.''':
-''' %s 後再試一次。''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''在 %(pages)d 頁中找到 %(hits)d 筆。''',
-'''%.2f seconds''':
-'''%.2f 秒''',
-'''match''':
-'''筆''',
-'''matches''':
-'''筆''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''登入名稱：%s
-
-登入密碼：%s
-
-登入 URL：%s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''有人要求將你的帳號資料寄到這個信箱來。
-
-如果是你忘了密碼，請使用以下的資料登入。
-
-成功登入之後，請重新設定一次密碼！
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] 你的 wiki 帳號資料''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''本 wiki 不支援郵寄工作。
-請連絡管理員，看他要不要啟動郵寄功能。''',
-'''Please provide a valid email address!''':
-'''請輸入合法的 email 地址！''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''找不到登記為 \'%(email)s\' 的帳號！''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''請到 UserPreferences 改變設定或新建帳號''',
-'''Empty user name. Please enter a user name.''':
-'''請輸入使用者名稱！''',
-'''This user name already belongs to somebody else.''':
-'''這個使用者名稱已經有人用了。''',
-'''Passwords don\'t match!''':
-'''兩次輸入的密碼不符！''',
-'''Please specify a password!''':
-'''請輸入密碼！''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''請輸入 email 地址，不然你忘記名稱或密碼的時候，就不能用 email 取回了。''',
-'''This email already belongs to somebody else.''':
-'''這個 email 地址已經有人用了。''',
-'''User account created! You can use this account to login now...''':
-'''使用者帳號已經建立！你可以用此帳號登入...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''請到 ["使用者設定"] 改變所選定使用者的帳號資料''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''無法載入佈景主題 \'%(theme_name)s\'!''',
-'''User preferences saved!''':
-'''使用者設定已儲存！''',
-'''Default''':
-'''預設值''',
-'''<Browser setting>''':
-'''<依瀏覽器而定>''',
-'''the one preferred''':
-'''只有我偏好的''',
-'''free choice''':
-'''列出所有選擇''',
-'''Select User''':
-'''選擇使用者''',
-'''Save''':
-'''存檔''',
-'''Preferred theme''':
-'''佈景主題''',
-'''Editor Preference''':
-'''偏好的編輯器''',
-'''Editor shown on UI''':
-'''顯示的編輯器選項''',
-'''Time zone''':
-'''時區''',
-'''Your time is''':
-'''你當地的時間：''',
-'''Server time is''':
-'''伺服器的時間：''',
-'''Date format''':
-'''日期格式''',
-'''Preferred language''':
-'''語言偏好''',
-'''General options''':
-'''一般選項''',
-'''Quick links''':
-'''自訂頁面捷徑''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''請提供正確的 email 地址，才收得到你訂閱的頁面！''',
-'''Subscribed wiki pages (one regex per line)''':
-'''訂閱的 wiki 頁面 (每行一個正規表示式)''',
-'''Create Profile''':
-'''新使用者註冊''',
-'''Mail me my account data''':
-'''把帳號資料寄給我''',
-'''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''要註冊新帳號或忘了密碼，請到 %(userprefslink)s。''',
-'''Action''':
-'''功能''',
 '''No older revisions available!''':
 '''沒有舊版！''',
 '''Diff for "%s"''':
@@ -535,82 +619,132 @@ Contact the owner of the wiki, who can enable email.''':
 '''請指定圖表類型！''',
 '''Bad chart type "%s"!''':
 '''錯誤的圖表類型 "%s"！''',
-'''Search Titles''':
-'''搜尋標題''',
-'''Display context of search results''':
-'''顯示前後文''',
-'''Case-sensitive searching''':
-'''區分大小寫''',
-'''Search Text''':
-'''全文檢索''',
-'''Go To Page''':
-'''跳至此頁''',
-'''Include system pages''':
-'''包含系統頁面''',
-'''Exclude system pages''':
-'''排除系統頁面''',
-'''Plain title index''':
-'''一般標題索引''',
-'''XML title index''':
-'''XML 標題索引''',
-'''Python Version''':
-'''Python 版本''',
-'''MoinMoin Version''':
-'''!MoinMoin 版本''',
-'''Release %s [Revision %s]''':
-'''%s 版 [%s 修訂]''',
-'''4Suite Version''':
-'''4Suite 版本''',
-'''Number of pages''':
-'''總頁面數''',
-'''Number of system pages''':
-'''系統頁面數''',
-'''Accumulated page sizes''':
-'''頁面大小總計''',
-'''Disk usage of %(data_dir)s/pages/''':
-'''硬碟使用量 (目錄 %(data_dir)s/pages)''',
-'''Disk usage of %(data_dir)s/''':
-'''硬碟使用量 (目錄 %(data_dir)s)''',
-'''Entries in edit log''':
-'''修訂記錄總計''',
-'''NONE''':
-'''無''',
-'''Global extension macros''':
-'''內建擴充巨集''',
-'''Local extension macros''':
-'''外掛擴充巨集''',
-'''Global extension actions''':
-'''內建擴充操作''',
-'''Local extension actions''':
-'''外掛擴充操作''',
-'''Global parsers''':
-'''內建解析器''',
-'''Local extension parsers''':
-'''外掛解析器''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''外掛處理器 (不建議使用 -- 請改用解析器)''',
-'''Disabled''':
-'''停用''',
-'''Enabled''':
-'''可用''',
-'''Lupy search''':
-'''Lupy 搜尋''',
-'''Active threads''':
-'''執行緒數目''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''{{{"%s"}}} 找到太多資料，請輸入更精確的關鍵字！''',
-'''ERROR in regex \'%s\'''':
-'''正規表示式 \'%s\' 錯誤''',
-'''Bad timestamp \'%s\'''':
-'''錯誤的時間戳記 \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''"%(token)s" 後面應該有個 "="''',
-'''Expected a value for key "%(token)s"''':
-'''"%(token)s" 應該有對應的值''',
-'''Wiki Markup''':
-'''Wiki 標記''',
-'''Print View''':
-'''檢視列印形''',
+'''This page is already deleted or was never created!''':
+'''本頁已經刪除或還沒建立！''',
+'''No pages like "%s"!''':
+'''沒有類似 "%s" 的頁面！''',
+'''Invalid filename "%s"!''':
+'''不合法的檔名 "%s"！''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''附件 \'%(target)s\' 已經存在 (遠端名稱 \'%(filename)s\')''',
+'''Created the package %s containing the pages %s.''':
+'''包裹 %s 已打包，包含頁面 %s。''',
+'''Package pages''':
+'''打包頁面''',
+'''Package name''':
+'''包裹名稱''',
+'''List of page names - separated by <tt>,</tt>''':
+'''輸入頁面名稱 (以「<tt>,</tt>」分開)''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''找不到使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
+'''Missing password. Please enter user name and password.''':
+'''沒輸入密碼。請輸入名稱及密碼。''',
+'''Sorry, wrong password.''':
+'''密碼錯了！''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''只有一頁類似 "%s"，轉向至該頁。''',
+'''Pages like "%s"''':
+'''類似 "%s" 的頁面：''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''共有 %(matchcount)d %(matches)s 連向 "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''頁面 "%s" 的連結地圖''',
+'''Please log in first.''':
+'''請先登入。''',
+'''Please first create a homepage before creating additional pages.''':
+'''建立其他頁面之前，請先建立個人首頁。''',
+'''MyPages management''':
+'''管理我的頁面''',
+'''You are not allowed to rename pages in this wiki!''':
+'''你無權重新命名頁面！''',
+'''Please use the interactive user interface to rename pages!''':
+'''請使用互動式介面為頁面重新命名！''',
+'''Could not rename page because of file system error: %s.''':
+'''無法更改頁面名稱。原因為檔案系統錯誤：%s。''',
+'''Rename Page''':
+'''重新命名''',
+'''New name''':
+'''新的名稱''',
+'''Optional reason for the renaming''':
+'''重新命名的理由：''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'已經有一個頁面叫做 "{{{\'%s\'}}}" 了！\'\'\'
+
+請用別的名字。''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(其中包含 %(localwords)d 個 %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''下列 %(badwords)d 個詞沒有收錄在總詞數 %(totalwords)d 個的詞典中%(localwords)s。未收錄的詞會在內文中特別標示：''',
+'''Add checked words to dictionary''':
+'''把勾選的詞加進詞典''',
+'''No spelling errors found!''':
+'''沒有拼字錯誤！''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''不能檢查無權瀏覽的頁面。''',
+'''Title Search: "%s"''':
+'''搜尋標題："%s"''',
+'''Full Text Search: "%s"''':
+'''全文檢索："%s"''',
+'''Full Link List for "%s"''':
+'''引用頁面 "%s" 的頁面列表''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''必須有頁面名稱才能建立頁面。''',
+'''Subscribe users to the page %s''':
+'''新增頁面 "%s" 的訂閱戶''',
+'''Subscribed for %s:''':
+'''已為 %s 訂閱''',
+'''Not a user:''':
+'''不是合法帳號:''',
+'''You are not allowed to perform this action.''':
+'''你無權執行本項操作。''',
+'''You are now logged out.''':
+'''你已經登出了。''',
+'''You are not allowed to delete this page.''':
+'''你無權刪除本頁。''',
+'''Please use the interactive user interface to delete pages!''':
+'''請使用互動式介面刪除頁面！''',
+'''Really delete this page?''':
+'''真的要刪除本頁？''',
+'''Delete''':
+'''刪除''',
+'''Optional reason for the deletion''':
+'''刪除本頁的理由：''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''提示：
+ * 若要進行備份復原：
+  * 執行備份復原會覆蓋現有的資料，請小心操作。
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案
+   到安全的地方即可。
+
+請確定你的 Wiki 的 backup_* 設定值是正確且完整。
+
+''',
+'''Backup''':
+'''備份''',
+'''Restore''':
+'''復原''',
+'''You are not allowed to do remote backup.''':
+'''你無權進行遠端備份。''',
+'''Unknown backup subaction: %s.''':
+'''不明的備份子操作：%s。''',
 '''[%d attachments]''':
 '''[%d 個附件]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -673,18 +807,12 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''未支援的上傳功能：%s''',
 '''Attachments for "%(pagename)s"''':
 '''"%(pagename)s" 的附件''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''附件 \'%(target)s\' 已經存在 (遠端名稱 \'%(filename)s\')''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''附件 \'%(target)s\' (遠端名稱 \'%(filename)s\') 儲存好了，共計 %(bytes)d 位元組。''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''附件 \'%(filename)s\' 已刪除。''',
 '''Attachment \'%(filename)s\' installed.''':
 '''附件 \'%(filename)s\' 已安裝。''',
-'''Installation of \'%(filename)s\' failed.''':
-'''安裝 \'%(filename)s\' 失敗！''',
-'''The file %s is not a MoinMoin package file.''':
-'''檔案 %s 不是 MoinMoin 包裝檔！''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''因結果檔案太大，附件 \'%(filename)s\' 無法解壓縮 (缺 %(space)d kB)。''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -707,130 +835,6 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''不明的檔案類型，不能內嵌在內文中。''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''%(pagename)s 的附件 [[Verbatim(attachment:)]]%(filename)s''',
-'''You are not allowed to delete this page.''':
-'''你無權刪除本頁。''',
-'''This page is already deleted or was never created!''':
-'''本頁已經刪除或還沒建立！''',
-'''Please use the interactive user interface to delete pages!''':
-'''請使用互動式介面刪除頁面！''',
-'''Really delete this page?''':
-'''真的要刪除本頁？''',
-'''Delete''':
-'''刪除''',
-'''Optional reason for the deletion''':
-'''刪除本頁的理由：''',
-'''No pages like "%s"!''':
-'''沒有類似 "%s" 的頁面！''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''只有一頁類似 "%s"，轉向至該頁。''',
-'''Pages like "%s"''':
-'''類似 "%s" 的頁面：''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''共有 %(matchcount)d %(matches)s 連向 "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''頁面 "%s" 的連結地圖''',
-'''Please log in first.''':
-'''請先登入。''',
-'''Please first create a homepage before creating additional pages.''':
-'''建立其他頁面之前，請先建立個人首頁。''',
-'''MyPages management''':
-'''管理我的頁面''',
-'''Invalid filename "%s"!''':
-'''不合法的檔名 "%s"！''',
-'''Created the package %s containing the pages %s.''':
-'''包裹 %s 已打包，包含頁面 %s。''',
-'''Package pages''':
-'''打包頁面''',
-'''Package name''':
-'''包裹名稱''',
-'''List of page names - separated by <tt>,</tt>''':
-'''輸入頁面名稱 (以「<tt>,</tt>」分開)''',
-'''You are not allowed to rename pages in this wiki!''':
-'''你無權重新命名頁面！''',
-'''Please use the interactive user interface to rename pages!''':
-'''請使用互動式介面為頁面重新命名！''',
-'''Could not rename page because of file system error: %s.''':
-'''無法更改頁面名稱。原因為檔案系統錯誤：%s。''',
-'''Rename Page''':
-'''重新命名''',
-'''New name''':
-'''新的名稱''',
-'''Optional reason for the renaming''':
-'''重新命名的理由：''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'已經有一個頁面叫做 "{{{\'%s\'}}}" 了！\'\'\'
-
-請用別的名字。''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(其中包含 %(localwords)d 個 %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''下列 %(badwords)d 個詞沒有收錄在總詞數 %(totalwords)d 個的詞典中%(localwords)s。未收錄的詞會在內文中特別標示：''',
-'''Add checked words to dictionary''':
-'''把勾選的詞加進詞典''',
-'''No spelling errors found!''':
-'''沒有拼字錯誤！''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''不能檢查無權瀏覽的頁面。''',
-'''Subscribe users to the page %s''':
-'''新增頁面 "%s" 的訂閱戶''',
-'''Subscribed for %s:''':
-'''已為 %s 訂閱''',
-'''Not a user:''':
-'''不是合法帳號:''',
-'''You are not allowed to perform this action.''':
-'''你無權執行本項操作。''',
-'''Title Search: "%s"''':
-'''搜尋標題："%s"''',
-'''Full Text Search: "%s"''':
-'''全文檢索："%s"''',
-'''Some hints:
- * To restore a backup:
-  * Restoring a backup will overwrite existing data, so be careful.
-  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
-  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
-
- * To make a backup, just hit the [[GetText(Backup)]] button and save the file
-   you get to a secure place.
-
-Please make sure your wiki configuration backup_* values are correct and complete.
-
-''':
-'''提示：
- * 若要進行備份復原：
-  * 執行備份復原會覆蓋現有的資料，請小心操作。
-  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
-  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
-
- * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案
-   到安全的地方即可。
-
-請確定你的 Wiki 的 backup_* 設定值是正確且完整。
-
-''',
-'''Backup''':
-'''備份''',
-'''Restore''':
-'''復原''',
-'''You are not allowed to do remote backup.''':
-'''你無權進行遠端備份。''',
-'''Unknown backup subaction: %s.''':
-'''不明的備份子操作：%s。''',
-'''Full Link List for "%s"''':
-'''引用頁面 "%s" 的頁面列表''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''找不到使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
-'''Missing password. Please enter user name and password.''':
-'''沒輸入密碼。請輸入名稱及密碼。''',
-'''Sorry, wrong password.''':
-'''密碼錯了！''',
-'''You are now logged out.''':
-'''你已經登出了。''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''必須有頁面名稱才能建立頁面。''',
 '''Upload new attachment "%(filename)s"''':
 '''上傳新附件 "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
@@ -839,10 +843,56 @@ Please make sure your wiki configuration backup_* values are correct and complet
 '''編輯圖片 "%(filename)s"''',
 '''Toggle line numbers''':
 '''切換行號''',
-'''Invalid include arguments "%s"!''':
-'''錯誤的插入參數 "%s"！''',
-'''Nothing found for "%s"!''':
-'''找不到 "%s"！''',
+'''FrontPage''':
+'''首頁''',
+'''RecentChanges''':
+'''最新更動''',
+'''TitleIndex''':
+'''標題索引''',
+'''WordIndex''':
+'''詞彙索引''',
+'''FindPage''':
+'''尋找頁面''',
+'''SiteNavigation''':
+'''本站導覽''',
+'''HelpContents''':
+'''說明''',
+'''HelpOnFormatting''':
+'''說明/排版''',
+'''UserPreferences''':
+'''使用者設定''',
+'''WikiLicense''':
+'''Wiki版權''',
+'''MissingPage''':
+'''頁面不存在''',
+'''MissingHomePage''':
+'''首頁不存在''',
+'''Mon''':
+'''星期一''',
+'''Tue''':
+'''星期二''',
+'''Wed''':
+'''星期三''',
+'''Thu''':
+'''星期四''',
+'''Fri''':
+'''星期五''',
+'''Sat''':
+'''星期六''',
+'''Sun''':
+'''星期日''',
+'''AttachFile''':
+'''附件''',
+'''DeletePage''':
+'''刪除頁面''',
+'''LikePages''':
+'''相似頁面''',
+'''LocalSiteMap''':
+'''連結地圖''',
+'''RenamePage''':
+'''重新命名''',
+'''SpellCheck''':
+'''拼字檢查''',
 '''Invalid MonthCalendar calparms "%s"!''':
 '''MonthCalendar 的 calparms 參數錯誤 "%s"！''',
 '''Invalid MonthCalendar arguments "%s"!''':
@@ -881,14 +931,18 @@ Please make sure your wiki configuration backup_* values are correct and complet
 '''放置書籤''',
 '''[Bookmark reached]''':
 '''[目前書籤放置在此]''',
+'''No wanted pages in this wiki.''':
+'''本 wiki 沒有未定義的頁面。''',
+'''Invalid include arguments "%s"!''':
+'''錯誤的插入參數 "%s"！''',
+'''Nothing found for "%s"!''':
+'''找不到 "%s"！''',
 '''Markup''':
 '''標記''',
 '''Display''':
 '''顯示''',
 '''Filename''':
 '''檔名''',
-'''No wanted pages in this wiki.''':
-'''本 wiki 沒有未定義的頁面。''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''無法呈現 reStructured text，請安裝 docutils。''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -1037,54 +1091,4 @@ red=edit''':
 '''郵件未送出''',
 '''Mail sent OK''':
 '''郵件已送出''',
-'''FrontPage''':
-'''首頁''',
-'''RecentChanges''':
-'''最新更動''',
-'''TitleIndex''':
-'''標題索引''',
-'''WordIndex''':
-'''詞彙索引''',
-'''FindPage''':
-'''尋找頁面''',
-'''SiteNavigation''':
-'''本站導覽''',
-'''HelpContents''':
-'''說明''',
-'''HelpOnFormatting''':
-'''說明/排版''',
-'''UserPreferences''':
-'''使用者設定''',
-'''WikiLicense''':
-'''Wiki版權''',
-'''MissingPage''':
-'''頁面不存在''',
-'''MissingHomePage''':
-'''首頁不存在''',
-'''Mon''':
-'''星期一''',
-'''Tue''':
-'''星期二''',
-'''Wed''':
-'''星期三''',
-'''Thu''':
-'''星期四''',
-'''Fri''':
-'''星期五''',
-'''Sat''':
-'''星期六''',
-'''Sun''':
-'''星期日''',
-'''AttachFile''':
-'''附件''',
-'''DeletePage''':
-'''刪除頁面''',
-'''LikePages''':
-'''相似頁面''',
-'''LocalSiteMap''':
-'''連結地圖''',
-'''RenamePage''':
-'''重新命名''',
-'''SpellCheck''':
-'''拼字檢查''',
 }

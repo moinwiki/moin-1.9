@@ -32,8 +32,6 @@ makropolecenie.-~
 '''Utwórz nową stronę''',
 '''You are not allowed to view this page.''':
 '''Nie możesz oglądać tej strony.''',
-'''Your changes are not saved!''':
-'''Nic nie zapisano!''',
 '''You are not allowed to edit this page.''':
 '''Nie możesz zmieniać zawartości tej strony.''',
 '''Page is immutable!''':
@@ -42,8 +40,6 @@ makropolecenie.-~
 '''Nie można zmieniać starych wersji!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
 '''Blokada tej strony wygasła, bądź przygotowany na ewentualne konflikty edycji!''',
-'''Page name is too long, try shorter name.''':
-'''Nazwa strony jest zbyt długa, spróbuj krótszej.''',
 '''Edit "%(pagename)s"''':
 '''Modyfikuj "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -84,8 +80,6 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygnować z wprowadzenia zmian.''',
 '''Preview''':
 '''Podgląd''',
-'''GUI Mode''':
-'''Tryb GUI''',
 '''Comment:''':
 '''Komentarz:''',
 '''<No addition>''':
@@ -96,6 +90,217 @@ Jeżeli tego nie chcesz, kliknij \'\'\'%(cancel_button_text)s\'\'\' aby zrezygno
 '''Drobna zmiana''',
 '''Remove trailing whitespace from each line''':
 '''Usuń znaki spacji z końca każdej linii''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Nieprawidłowy identyfikator czytelnika {{{\'%s\'}}}.
+Identyfikator może zawierać alfanumeryczne znaki unikodu, z opcjonalnie
+jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
+'''You are not allowed to do %s on this page.''':
+'''Nie możesz wykonać %s na tej stronie.''',
+'''Login''':
+'''Login''',
+''' %s and try again.''':
+''' %s i spróbuj ponownie.''',
+'''%(hits)d results out of about %(pages)d pages.''':
+'''%(hits)d rezultatów z liczby %(pages)d stron.''',
+'''%.2f seconds''':
+'''%.2f sekund''',
+'''match''':
+'''porównanie''',
+'''matches''':
+'''porówniania''',
+'''<unknown>''':
+'''<nieznany>''',
+'''Login Name: %s
+
+Login Password: %s
+
+Login URL: %s/%s
+''':
+'''Identyfikator czytelnika: %s
+
+Hasło czytelnika: %s
+
+URL logowania: %s/%s
+''',
+'''Somebody has requested to submit your account data to this email address.
+
+If you lost your password, please use the data below and just enter the
+password AS SHOWN into the wiki\'s password form field (use copy and paste
+for that).
+
+After successfully logging in, it is of course a good idea to set a new and known password.
+''':
+'''Ktoś zlecił wysłanie Twoich danych czytelnika na ten adres e-mail.
+
+Jeśli zapomniałeś swego hasła, użyj tych danych wpisując w pole hasła
+na stronie logowania DOKŁADNIE TO CO PONIŻEJ (skopiuj i wklej).
+
+Wskazane jest, aby po zalogowaniu się ustawić inne, nowe hasło.
+''',
+'''[%(sitename)s] Your wiki account data''':
+'''[%(sitename)s] Twoje dane czytelnika''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
+Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
+'''Please provide a valid email address!''':
+'''Podaj prawidłowy adres poczty elektronicznej!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
+'''Use UserPreferences to change your settings or create an account.''':
+'''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
+'''Empty user name. Please enter a user name.''':
+'''Puste pole identyfikatora. Podaj swój identyfikator.''',
+'''This user name already belongs to somebody else.''':
+'''Niniejszy identyfikator należy już do kogoś innego.''',
+'''Passwords don\'t match!''':
+'''Hasła się nie zgadzają!''',
+'''Please specify a password!''':
+'''Proszę podać hasło!''',
+'''Please provide your email address. If you lose your login information, you can get it by email.''':
+'''Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
+'''This email already belongs to somebody else.''':
+'''Ten adres poczty elektronicznej należy do kogoś innego.''',
+'''User account created! You can use this account to login now...''':
+'''Konto czytelnika utworzone! Możesz teraz użyć tego konta żeby się zalogować...''',
+'''Use UserPreferences to change settings of the selected user account''':
+'''Wejdź do PreferencjeCzytelnika aby zmienić ustawienia wybranego konta.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
+'''User preferences saved!''':
+'''Ustawienia czytelnika zapisane!''',
+'''Default''':
+'''Domyślny''',
+'''<Browser setting>''':
+'''<Ustawienia przeglądarki>''',
+'''the one preferred''':
+'''tylko preferowany''',
+'''free choice''':
+'''wybór dowolny''',
+'''Select User''':
+'''Wybierz czytelnika''',
+'''Save''':
+'''Zachowaj''',
+'''Preferred theme''':
+'''Ulubiony wystrój''',
+'''Editor Preference''':
+'''Ulubiony edytor''',
+'''Editor shown on UI''':
+'''Pokazywany edytor''',
+'''Time zone''':
+'''Strefa czasowa''',
+'''Your time is''':
+'''U Ciebie jest teraz''',
+'''Server time is''':
+'''Na serwerze jest teraz''',
+'''Date format''':
+'''Format daty''',
+'''Preferred language''':
+'''Ulubiony język''',
+'''General options''':
+'''Główne opcje''',
+'''Quick links''':
+'''Szybkie skróty''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Ta lista nie działa, dopóki nie podasz prawidłowego adresu poczty elektronicznej!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Zasubskrybowane strony wiki (jedno wyrażenie regularne w linii)''',
+'''Create Profile''':
+'''Utwórz profil''',
+'''Mail me my account data''':
+'''Prześlij do mnie moje dane''',
+'''Email''':
+'''E-mail''',
+'''Name''':
+'''Nazwa''',
+'''Password''':
+'''Hasło''',
+'''Action''':
+'''Akcja''',
+'''Required attribute "%(attrname)s" missing''':
+'''Brakuje niezbędnego atrybutu "%(attrname)s"''',
+'''Submitted form data:''':
+'''Dane przekazane z formularza:''',
+'''Search Titles''':
+'''Przeszukaj tytuły''',
+'''Display context of search results''':
+'''Pokaż kontekst rezultatu poszukiwań''',
+'''Case-sensitive searching''':
+'''Przeszukiwanie z uwzględnieniem wielkości liter''',
+'''Search Text''':
+'''Szukaj frazy''',
+'''Go To Page''':
+'''Idź do strony''',
+'''Include system pages''':
+'''Uwzględnij strony systemowe''',
+'''Exclude system pages''':
+'''Pomiń strony systemowe''',
+'''Plain title index''':
+'''Indeks tytułów''',
+'''XML title index''':
+'''Indeks tytułów XML''',
+'''Python Version''':
+'''Wersja języka Python''',
+'''MoinMoin Version''':
+'''Wersja MoinMoin''',
+'''Release %s [Revision %s]''':
+'''Wydanie %s [Korekta %s]''',
+'''4Suite Version''':
+'''Wersja 4Suite''',
+'''Number of pages''':
+'''Ilość stron''',
+'''Number of system pages''':
+'''Ilość stron systemowych''',
+'''Accumulated page sizes''':
+'''Zakumulowana wielkość stron''',
+'''Entries in edit log''':
+'''Pozycji w dzienniku zmian''',
+'''NONE''':
+'''BRAK''',
+'''Global extension macros''':
+'''Globalne rozszerzenia makropoleceń''',
+'''Local extension macros''':
+'''Lokalne rozszerzenia makropoleceń''',
+'''Global extension actions''':
+'''Globalne rozszerzenia operacji''',
+'''Local extension actions''':
+'''Lokalne rozszerzenia operacji''',
+'''Global parsers''':
+'''Globalne analizatory składni''',
+'''Local extension parsers''':
+'''Lokalne rozszerzenia analizatorów składni''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)''',
+'''Disabled''':
+'''Wyłączone''',
+'''Enabled''':
+'''Włączone''',
+'''Lupy search''':
+'''Wyszukiwanie przez Lupy''',
+'''Active threads''':
+'''Aktywne wątki''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{"%s"}}}''',
+'''ERROR in regex \'%s\'''':
+'''Błąd w wyrażeniu \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Nieprawidłowy datownik binarny \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Za "%(token)s" powinno być "="''',
+'''Expected a value for key "%(token)s"''':
+'''Spodziewana wartość dla klucza "%(token)s"''',
+'''Wiki Markup''':
+'''Język oznaczeń wiki''',
+'''Print View''':
+'''Podgląd wydruku''',
+'''Your changes are not saved!''':
+'''Nic nie zapisano!''',
+'''Page name is too long, try shorter name.''':
+'''Nazwa strony jest zbyt długa, spróbuj krótszej.''',
+'''GUI Mode''':
+'''Tryb GUI''',
 '''Edit was cancelled.''':
 '''Zmiany zostały anulowane.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -197,8 +402,10 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Powinieneś się \'\'powstrzymać od edycji\'\' tej strony przez minimum następne %(mins_valid)d minut,
 aby uniknąć konfliktów.\'\'\'[[BR]]
 Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
-'''<unknown>''':
-'''<nieznany>''',
+'''Installation of \'%(filename)s\' failed.''':
+'''Nie udało się zainstalować \'%(filename)s\'.''',
+'''The file %s is not a MoinMoin package file.''':
+'''Plik %s nie jest pakietem MoinMoin.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -259,147 +466,20 @@ Aby opuścić edytor, kliknij w przycisk "Anuluj".''',
 '''Zasubksrybuj drobne zmiany''',
 '''Disable this account forever''':
 '''Wyłącz to konto na zawsze''',
-'''Name''':
-'''Nazwa''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Użyj postaci Imię\'\'\'\'\'\'Nazwisko''',
 '''Alias-Name''':
 '''Nazwa aliasu''',
-'''Password''':
-'''Hasło''',
 '''Password repeat''':
 '''Powtórz hasło''',
 '''(Only when changing passwords)''':
 '''(Tylko podczas zmiany hasła)''',
-'''Email''':
-'''E-mail''',
 '''User CSS URL''':
 '''Podaj odnośnik do pliku CSS''',
 '''(Leave it empty for disabling user CSS)''':
 '''(pozostaw pole puste, aby wyłączyć CSS użytkownika)''',
 '''Editor size''':
 '''Rozmiar edytora''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Nieprawidłowy identyfikator czytelnika {{{\'%s\'}}}.
-Identyfikator może zawierać alfanumeryczne znaki unikodu, z opcjonalnie
-jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
-'''You are not allowed to do %s on this page.''':
-'''Nie możesz wykonać %s na tej stronie.''',
-'''Login''':
-'''Login''',
-''' %s and try again.''':
-''' %s i spróbuj ponownie.''',
-'''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d rezultatów z liczby %(pages)d stron.''',
-'''%.2f seconds''':
-'''%.2f sekund''',
-'''match''':
-'''porównanie''',
-'''matches''':
-'''porówniania''',
-'''Login Name: %s
-
-Login Password: %s
-
-Login URL: %s/%s
-''':
-'''Identyfikator czytelnika: %s
-
-Hasło czytelnika: %s
-
-URL logowania: %s/%s
-''',
-'''Somebody has requested to submit your account data to this email address.
-
-If you lost your password, please use the data below and just enter the
-password AS SHOWN into the wiki\'s password form field (use copy and paste
-for that).
-
-After successfully logging in, it is of course a good idea to set a new and known password.
-''':
-'''Ktoś zlecił wysłanie Twoich danych czytelnika na ten adres e-mail.
-
-Jeśli zapomniałeś swego hasła, użyj tych danych wpisując w pole hasła
-na stronie logowania DOKŁADNIE TO CO PONIŻEJ (skopiuj i wklej).
-
-Wskazane jest, aby po zalogowaniu się ustawić inne, nowe hasło.
-''',
-'''[%(sitename)s] Your wiki account data''':
-'''[%(sitename)s] Twoje dane czytelnika''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''W tym wiki nie uruchomiono przetwarzania poczty elektronicznej.
-Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
-'''Please provide a valid email address!''':
-'''Podaj prawidłowy adres poczty elektronicznej!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Brak odpowiednich kont do podanego adresu \'%(email)s\'!''',
-'''Use UserPreferences to change your settings or create an account.''':
-'''Wejdź do PreferencjeCzytelnika aby zmienić swe ustawienia lub utworzyć konto.''',
-'''Empty user name. Please enter a user name.''':
-'''Puste pole identyfikatora. Podaj swój identyfikator.''',
-'''This user name already belongs to somebody else.''':
-'''Niniejszy identyfikator należy już do kogoś innego.''',
-'''Passwords don\'t match!''':
-'''Hasła się nie zgadzają!''',
-'''Please specify a password!''':
-'''Proszę podać hasło!''',
-'''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Lepiej podaj swój adres poczty elektronicznej. Jeśli nie podasz, a zapomnisz identyfikatora albo hasła, nie dostaniesz podpowiedzi pocztą.''',
-'''This email already belongs to somebody else.''':
-'''Ten adres poczty elektronicznej należy do kogoś innego.''',
-'''User account created! You can use this account to login now...''':
-'''Konto czytelnika utworzone! Możesz teraz użyć tego konta żeby się zalogować...''',
-'''Use UserPreferences to change settings of the selected user account''':
-'''Wejdź do PreferencjeCzytelnika aby zmienić ustawienia wybranego konta.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Wystrój \'%(theme_name)s\' nie może zostać załadowany!''',
-'''User preferences saved!''':
-'''Ustawienia czytelnika zapisane!''',
-'''Default''':
-'''Domyślny''',
-'''<Browser setting>''':
-'''<Ustawienia przeglądarki>''',
-'''the one preferred''':
-'''tylko preferowany''',
-'''free choice''':
-'''wybór dowolny''',
-'''Select User''':
-'''Wybierz czytelnika''',
-'''Save''':
-'''Zachowaj''',
-'''Preferred theme''':
-'''Ulubiony wystrój''',
-'''Editor Preference''':
-'''Ulubiony edytor''',
-'''Editor shown on UI''':
-'''Pokazywany edytor''',
-'''Time zone''':
-'''Strefa czasowa''',
-'''Your time is''':
-'''U Ciebie jest teraz''',
-'''Server time is''':
-'''Na serwerze jest teraz''',
-'''Date format''':
-'''Format daty''',
-'''Preferred language''':
-'''Ulubiony język''',
-'''General options''':
-'''Główne opcje''',
-'''Quick links''':
-'''Szybkie skróty''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Ta lista nie działa, dopóki nie podasz prawidłowego adresu poczty elektronicznej!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Zasubskrybowane strony wiki (jedno wyrażenie regularne w linii)''',
-'''Create Profile''':
-'''Utwórz profil''',
-'''Mail me my account data''':
-'''Prześlij do mnie moje dane''',
-'''Action''':
-'''Akcja''',
 '''No older revisions available!''':
 '''Nie ma starszych wersji!''',
 '''Diff for "%s"''':
@@ -499,78 +579,72 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Podaj rodzaj wykresu!''',
 '''Bad chart type "%s"!''':
 '''Nieprawidłowy rodzaj wykresu "%s"!''',
-'''Search Titles''':
-'''Przeszukaj tytuły''',
-'''Display context of search results''':
-'''Pokaż kontekst rezultatu poszukiwań''',
-'''Case-sensitive searching''':
-'''Przeszukiwanie z uwzględnieniem wielkości liter''',
-'''Search Text''':
-'''Szukaj frazy''',
-'''Go To Page''':
-'''Idź do strony''',
-'''Include system pages''':
-'''Uwzględnij strony systemowe''',
-'''Exclude system pages''':
-'''Pomiń strony systemowe''',
-'''Plain title index''':
-'''Indeks tytułów''',
-'''XML title index''':
-'''Indeks tytułów XML''',
-'''Python Version''':
-'''Wersja języka Python''',
-'''MoinMoin Version''':
-'''Wersja MoinMoin''',
-'''Release %s [Revision %s]''':
-'''Wydanie %s [Korekta %s]''',
-'''4Suite Version''':
-'''Wersja 4Suite''',
-'''Number of pages''':
-'''Ilość stron''',
-'''Number of system pages''':
-'''Ilość stron systemowych''',
-'''Accumulated page sizes''':
-'''Zakumulowana wielkość stron''',
-'''Entries in edit log''':
-'''Pozycji w dzienniku zmian''',
-'''NONE''':
-'''BRAK''',
-'''Global extension macros''':
-'''Globalne rozszerzenia makropoleceń''',
-'''Local extension macros''':
-'''Lokalne rozszerzenia makropoleceń''',
-'''Global extension actions''':
-'''Globalne rozszerzenia operacji''',
-'''Local extension actions''':
-'''Lokalne rozszerzenia operacji''',
-'''Global parsers''':
-'''Globalne analizatory składni''',
-'''Local extension parsers''':
-'''Lokalne rozszerzenia analizatorów składni''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Zainstalowane procesory (NIEAKTUALNE -- użyj analizatorów składni)''',
-'''Disabled''':
-'''Wyłączone''',
-'''Enabled''':
-'''Włączone''',
-'''Lupy search''':
-'''Wyszukiwanie przez Lupy''',
-'''Active threads''':
-'''Aktywne wątki''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Spróbuj bardziej selektywnego sposobu poszukiwań zamiast {{{"%s"}}}''',
-'''ERROR in regex \'%s\'''':
-'''Błąd w wyrażeniu \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Nieprawidłowy datownik binarny \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Za "%(token)s" powinno być "="''',
-'''Expected a value for key "%(token)s"''':
-'''Spodziewana wartość dla klucza "%(token)s"''',
-'''Wiki Markup''':
-'''Język oznaczeń wiki''',
-'''Print View''':
-'''Podgląd wydruku''',
+'''This page is already deleted or was never created!''':
+'''Niniejsza strona została już skasowana albo nigdy jej nie było!''',
+'''No pages like "%s"!''':
+'''Brak stron w rodzaju "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') już istnieje.''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
+'''Missing password. Please enter user name and password.''':
+'''Zapomniano o haśle. Podaj identyfikator i hasło.''',
+'''Sorry, wrong password.''':
+'''Przykro mi, nieprawidłowe hasło.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Dokładnie jedna strona typu "%s" została znaleziona, przekazuję Cię na tę stronę.''',
+'''Pages like "%s"''':
+'''Stron w rodzaju "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s dla "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Mapa "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''Nie możesz zmieniać nazw stron na tym wiki!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Użyj interaktywnego interfejsu aby zmieniać nazwy stron!''',
+'''Could not rename page because of file system error: %s.''':
+'''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
+'''Rename Page''':
+'''Zmień nazwę strony''',
+'''New name''':
+'''Nowa nazwa''',
+'''Optional reason for the renaming''':
+'''Opcjonalna przyczyna zmiany nazwy''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Strona o nazwie {{{\'%s\'}}} już istnieje.\'\'\'
+
+Spróbuj innej nazwy.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(zawarto  %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''Następujące %(badwords)d wyrazy nie zostały odnalezione w słowniku z %(totalwords)d words%(localwords)s i zostały podświetlone poniżej:''',
+'''Add checked words to dictionary''':
+'''Dodaj sprawdzone słowa do słownika''',
+'''No spelling errors found!''':
+'''Nie znaleziono błędów!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''Nie możesz sprawdzać stron, których nie możesz czytać.''',
+'''Title Search: "%s"''':
+'''Przeszukiwanie tytułów: "%s"''',
+'''Full Text Search: "%s"''':
+'''Przeszukiwanie pełnotekstowe: "%s"''',
+'''Full Link List for "%s"''':
+'''Pełna lista odnośników dla "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony.''',
+'''You are not allowed to delete this page.''':
+'''Nie możesz kasować niniejszej strony.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Użyj interaktywnego interfejsu aby usuwać strony!''',
+'''Really delete this page?''':
+'''Czy na pewno usunąć niniejszą stronę?''',
+'''Delete''':
+'''Usunąć''',
+'''Optional reason for the deletion''':
+'''Opcjonalna przyczyna usunięcia''',
 '''[%d attachments]''':
 '''[%d załączników]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -633,18 +707,12 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Nieprzewidziany sposób poboru pliku: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Załączniki do "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') już istnieje.''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Załącznik \'%(target)s\' (nazwa zdalna \'%(filename)s\') o wielkości %(bytes)d bajtów zapisany.''',
 '''Attachment \'%(filename)s\' deleted.''':
 '''Załącznik \'%(filename)s\' usunięty.''',
 '''Attachment \'%(filename)s\' installed.''':
 '''Załącznik \'%(filename)s\' zachowano.''',
-'''Installation of \'%(filename)s\' failed.''':
-'''Nie udało się zainstalować \'%(filename)s\'.''',
-'''The file %s is not a MoinMoin package file.''':
-'''Plik %s nie jest pakietem MoinMoin.''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
 '''Załącznik \'%(filename)s\' nie mógł zostać rozpakowany, ponieważ powstałe pliki byłyby zbyt duże (zabrakło %(space)d kB).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
@@ -667,80 +735,62 @@ W przeciwnym wypadku, kiedy pole "Zmień nazwę" jest puste, zostanie użyta naz
 '''Nieznany rodzaj pliku, nie potrafię go tutaj wyświetlić.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''[[Verbatim(załącznik:)]]%(filename)s z %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''Nie możesz kasować niniejszej strony.''',
-'''This page is already deleted or was never created!''':
-'''Niniejsza strona została już skasowana albo nigdy jej nie było!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Użyj interaktywnego interfejsu aby usuwać strony!''',
-'''Really delete this page?''':
-'''Czy na pewno usunąć niniejszą stronę?''',
-'''Delete''':
-'''Usunąć''',
-'''Optional reason for the deletion''':
-'''Opcjonalna przyczyna usunięcia''',
-'''No pages like "%s"!''':
-'''Brak stron w rodzaju "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Dokładnie jedna strona typu "%s" została znaleziona, przekazuję Cię na tę stronę.''',
-'''Pages like "%s"''':
-'''Stron w rodzaju "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s dla "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Mapa "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nie możesz zmieniać nazw stron na tym wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Użyj interaktywnego interfejsu aby zmieniać nazwy stron!''',
-'''Could not rename page because of file system error: %s.''':
-'''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
-'''Rename Page''':
-'''Zmień nazwę strony''',
-'''New name''':
-'''Nowa nazwa''',
-'''Optional reason for the renaming''':
-'''Opcjonalna przyczyna zmiany nazwy''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Strona o nazwie {{{\'%s\'}}} już istnieje.\'\'\'
-
-Spróbuj innej nazwy.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(zawarto  %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''Następujące %(badwords)d wyrazy nie zostały odnalezione w słowniku z %(totalwords)d words%(localwords)s i zostały podświetlone poniżej:''',
-'''Add checked words to dictionary''':
-'''Dodaj sprawdzone słowa do słownika''',
-'''No spelling errors found!''':
-'''Nie znaleziono błędów!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''Nie możesz sprawdzać stron, których nie możesz czytać.''',
-'''Title Search: "%s"''':
-'''Przeszukiwanie tytułów: "%s"''',
-'''Full Text Search: "%s"''':
-'''Przeszukiwanie pełnotekstowe: "%s"''',
-'''Full Link List for "%s"''':
-'''Pełna lista odnośników dla "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nieznana nazwa konta: {{{"%s"}}}. Podaj identyfikator i hasło.''',
-'''Missing password. Please enter user name and password.''':
-'''Zapomniano o haśle. Podaj identyfikator i hasło.''',
-'''Sorry, wrong password.''':
-'''Przykro mi, nieprawidłowe hasło.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony.''',
 '''Upload new attachment "%(filename)s"''':
 '''Wgraj nowy załącznik "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Utwórz nowy rysunek "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Edytuj rysunek %(filename)s''',
-'''Invalid include arguments "%s"!''':
-'''Nieprawidłowe argumenty "%s"!''',
-'''Nothing found for "%s"!''':
-'''Nic nie znaleziono dla "%s"!''',
+'''FrontPage''':
+'''StronaGłówna''',
+'''RecentChanges''':
+'''OstatnieZmiany''',
+'''TitleIndex''':
+'''IndeksTytułów''',
+'''WordIndex''':
+'''IndeksSłów''',
+'''FindPage''':
+'''ZnajdźStronę''',
+'''SiteNavigation''':
+'''NawigacjaSerwisu''',
+'''HelpContents''':
+'''PomocSpisTreści''',
+'''HelpOnFormatting''':
+'''PomocPrzyFormatowaniu''',
+'''UserPreferences''':
+'''PreferencjeCzytelnika''',
+'''WikiLicense''':
+'''LicencjaWiki''',
+'''MissingPage''':
+'''NieistniejącaStrona''',
+'''MissingHomePage''':
+'''NieistniejącaStronaDomowa''',
+'''Mon''':
+'''pon''',
+'''Tue''':
+'''wto''',
+'''Wed''':
+'''śro''',
+'''Thu''':
+'''czw''',
+'''Fri''':
+'''pią''',
+'''Sat''':
+'''sob''',
+'''Sun''':
+'''nie''',
+'''AttachFile''':
+'''ZałączPlik''',
+'''DeletePage''':
+'''UsuńStronę''',
+'''LikePages''':
+'''PodobneStrony''',
+'''LocalSiteMap''':
+'''LokalnaMapaSerwisu''',
+'''RenamePage''':
+'''ZmieńNazwę''',
+'''SpellCheck''':
+'''SprawdźPisownię''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Nieobsługiwany schemat nawigacyjny \'%(scheme)s\'!''',
 '''No parent page found!''':
@@ -775,14 +825,18 @@ Spróbuj innej nazwy.''',
 '''ustaw zakładkę''',
 '''[Bookmark reached]''':
 '''[Zakładka osiągnięta]''',
+'''No wanted pages in this wiki.''':
+'''Brak poszukiwanych stron w tym wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Nieprawidłowe argumenty "%s"!''',
+'''Nothing found for "%s"!''':
+'''Nic nie znaleziono dla "%s"!''',
 '''Markup''':
 '''Znacznik''',
 '''Display''':
 '''Pokaż''',
 '''Filename''':
 '''Nazwa pliku''',
-'''No wanted pages in this wiki.''':
-'''Brak poszukiwanych stron w tym wiki.''',
 '''Rendering of reStructured text is not possible, please install docutils.''':
 '''Przetwarzanie tekstu w formacie reStructured jest niemożliwe, proszę doinstalować pakiet "docutils".''',
 '''**Maximum number of allowed includes exceeded**''':
@@ -919,54 +973,4 @@ czerwony=edycja''',
 '''Poczta nie została wysłana''',
 '''Mail sent OK''':
 '''Poczta została wysłana''',
-'''FrontPage''':
-'''StronaGłówna''',
-'''RecentChanges''':
-'''OstatnieZmiany''',
-'''TitleIndex''':
-'''IndeksTytułów''',
-'''WordIndex''':
-'''IndeksSłów''',
-'''FindPage''':
-'''ZnajdźStronę''',
-'''SiteNavigation''':
-'''NawigacjaSerwisu''',
-'''HelpContents''':
-'''PomocSpisTreści''',
-'''HelpOnFormatting''':
-'''PomocPrzyFormatowaniu''',
-'''UserPreferences''':
-'''PreferencjeCzytelnika''',
-'''WikiLicense''':
-'''LicencjaWiki''',
-'''MissingPage''':
-'''NieistniejącaStrona''',
-'''MissingHomePage''':
-'''NieistniejącaStronaDomowa''',
-'''Mon''':
-'''pon''',
-'''Tue''':
-'''wto''',
-'''Wed''':
-'''śro''',
-'''Thu''':
-'''czw''',
-'''Fri''':
-'''pią''',
-'''Sat''':
-'''sob''',
-'''Sun''':
-'''nie''',
-'''AttachFile''':
-'''ZałączPlik''',
-'''DeletePage''':
-'''UsuńStronę''',
-'''LikePages''':
-'''PodobneStrony''',
-'''LocalSiteMap''':
-'''LokalnaMapaSerwisu''',
-'''RenamePage''':
-'''ZmieńNazwę''',
-'''SpellCheck''':
-'''SprawdźPisownię''',
 }

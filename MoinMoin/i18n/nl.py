@@ -84,6 +84,150 @@ Als u dat niet wilt, klik \'\'\'%(cancel_button_text)s\'\'\' om u veranderingen 
 '''Triviale wijziging''',
 '''Remove trailing whitespace from each line''':
 '''Witruimte verwijderen aan het einde van elke regel''',
+'''Invalid user name {{{\'%s\'}}}.
+Name may contain any Unicode alpha numeric character, with optional one
+space between words. Group page name is not allowed.''':
+'''Foutieve gebruikersnaam {{{\'%s\'}}}.
+Gebruikersnaam mag ieder Unicode alpha-numeriek karakter bevatten, met optioneel een
+spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
+'''You are not allowed to do %s on this page.''':
+'''Het is u niet toegestaan om %s op deze pagina te doen.''',
+'''Login''':
+'''Inloggen''',
+''' %s and try again.''':
+''' %s en probeer opnieuw''',
+'''%.2f seconds''':
+'''%.2f seconden''',
+'''match''':
+''' overeenkomst''',
+'''matches''':
+''' overeenkomsten''',
+'''<unknown>''':
+'''<onbekend>''',
+'''This wiki is not enabled for mail processing.
+Contact the owner of the wiki, who can enable email.''':
+'''Deze wiki is niet ingesteld op het afhandelen van e-mail.
+Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
+'''Please provide a valid email address!''':
+'''Geef een geldig e-mailadres op!''',
+'''Found no account matching the given email address \'%(email)s\'!''':
+'''Geen account gevonden dat overeenkomt met het opgegeven e-mailadres \'%(email)s\'!''',
+'''Empty user name. Please enter a user name.''':
+'''Geen gebruikersnaam. Geef een gebruikersnaam!''',
+'''This user name already belongs to somebody else.''':
+'''Deze gebruikersnaam is al in gebruik.''',
+'''Passwords don\'t match!''':
+'''De wachtwoorden komen niet overeen!''',
+'''Please specify a password!''':
+'''Geef een wachtwoord!''',
+'''This email already belongs to somebody else.''':
+'''Dit e-mailadres behoort is al in gebruik.''',
+'''The theme \'%(theme_name)s\' could not be loaded!''':
+'''Het thema \'%(theme_name)s\' kan niet worden geladen!''',
+'''User preferences saved!''':
+'''Voorkeuren van gebruiker bewaard!''',
+'''Default''':
+'''Standaard''',
+'''<Browser setting>''':
+'''<Browserinstelling>''',
+'''Save''':
+'''Opslaan''',
+'''Preferred theme''':
+'''Verkozen opmaak''',
+'''Time zone''':
+'''Tijdzone''',
+'''Your time is''':
+'''Uw tijd is''',
+'''Server time is''':
+'''Tijd op de server is''',
+'''Date format''':
+'''Datumformaat''',
+'''Preferred language''':
+'''Voorkeurstaal''',
+'''General options''':
+'''Algemene opties''',
+'''Quick links''':
+'''Snelkoppelingen''',
+'''This list does not work, unless you have entered a valid email address!''':
+'''Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!''',
+'''Subscribed wiki pages (one regex per line)''':
+'''Geabonneerde wikipagina\'s (één reguliere expressie per regel)''',
+'''Create Profile''':
+'''Profiel aanmaken''',
+'''Mail me my account data''':
+'''Stuur me mijn accountgegevens per e-mail''',
+'''Email''':
+'''E-mail''',
+'''Name''':
+'''Naam''',
+'''Password''':
+'''Wachtwoord''',
+'''Action''':
+'''Actie''',
+'''Required attribute "%(attrname)s" missing''':
+'''Benodigd attribuut "%(attrname)s" ontbreekt''',
+'''Submitted form data:''':
+'''Verstuurde gegevens in het formulier:''',
+'''Search Titles''':
+'''Titels doorzoeken''',
+'''Display context of search results''':
+'''Context van de zoekresultaten tonen''',
+'''Case-sensitive searching''':
+'''Hoodletter-gevoelig zoeken''',
+'''Search Text''':
+'''Tekst doorzoeken''',
+'''Go To Page''':
+'''Ga naar Pagina''',
+'''Include system pages''':
+'''Inclusief systeempagina\'s''',
+'''Exclude system pages''':
+'''Exclusief systeempagina\'s''',
+'''Plain title index''':
+'''Eenvoudige titelindex''',
+'''XML title index''':
+'''Titelindex XML''',
+'''Python Version''':
+'''Python versie''',
+'''MoinMoin Version''':
+'''MoinMoin versie''',
+'''Release %s [Revision %s]''':
+'''Uitgave %s [Revisie %s]''',
+'''4Suite Version''':
+'''4Suite versie''',
+'''Number of pages''':
+'''Aantal pagina\'s''',
+'''Number of system pages''':
+'''Aantal systeempagina\'s''',
+'''Accumulated page sizes''':
+'''Totale grootte van alle pagina\'s''',
+'''Entries in edit log''':
+'''Boekingen in het bewerkingslog''',
+'''NONE''':
+'''GEEN''',
+'''Global extension macros''':
+'''Globale uitbreidingsmacros''',
+'''Local extension macros''':
+'''Lokale uitbreidingsmacros''',
+'''Global extension actions''':
+'''Globale uitbreidingsacties''',
+'''Local extension actions''':
+'''Lokale uitbreidingsacties''',
+'''Installed processors (DEPRECATED -- use Parsers instead)''':
+'''Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)''',
+'''Please use a more selective search term instead of {{{"%s"}}}''':
+'''Gebruik een specifiekere zoekterm dan {{{"%s"}}}!''',
+'''ERROR in regex \'%s\'''':
+'''FOUT in reguliere expressie \'%s\'''',
+'''Bad timestamp \'%s\'''':
+'''Ongeldig datumkenmerk \'%s\'''',
+'''Expected "=" to follow "%(token)s"''':
+'''Verwacht "=" volgend op "%(token)s"''',
+'''Expected a value for key "%(token)s"''':
+'''Verwacht een waarde voor sleutel "%(token)s"''',
+'''Wiki Markup''':
+'''Wikiopmaak''',
+'''Print View''':
+'''Afdrukvoorbeeld''',
 '''Edit was cancelled.''':
 '''Bewerking werd geannuleerd.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
@@ -183,8 +327,6 @@ To leave the editor, press the Cancel button.''':
 \'\'\'U dient nog tenminste %(mins_valid)d minuten te \'\'wachten met bewerken\'\'
 van deze pagina om bewerkingsconflicten te voorkomen.\'\'\'[[BR]]
 Klik op Annuleren om de bewerking te staken.''',
-'''<unknown>''':
-'''<onbekend>''',
 '''Diffs''':
 '''Verschillen''',
 '''Info''':
@@ -225,94 +367,16 @@ Klik op Annuleren om de bewerking te staken.''',
 '''Abonneren op triviale wijzigingen''',
 '''Disable this account forever''':
 '''Dit account permanent uitschakelen.''',
-'''Name''':
-'''Naam''',
-'''Password''':
-'''Wachtwoord''',
 '''Password repeat''':
 '''Wachtwoord herhalen''',
 '''(Only when changing passwords)''':
 '''(Alleen bij veranderen van wachtwoord)''',
-'''Email''':
-'''E-mail''',
 '''User CSS URL''':
 '''URL van CSS van gebruiker''',
 '''(Leave it empty for disabling user CSS)''':
 '''(Leeglaten om geen CSS van gebruiker toe te passen)''',
 '''Editor size''':
 '''Grootte van de editor''',
-'''Invalid user name {{{\'%s\'}}}.
-Name may contain any Unicode alpha numeric character, with optional one
-space between words. Group page name is not allowed.''':
-'''Foutieve gebruikersnaam {{{\'%s\'}}}.
-Gebruikersnaam mag ieder Unicode alpha-numeriek karakter bevatten, met optioneel een
-spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
-'''You are not allowed to do %s on this page.''':
-'''Het is u niet toegestaan om %s op deze pagina te doen.''',
-'''Login''':
-'''Inloggen''',
-''' %s and try again.''':
-''' %s en probeer opnieuw''',
-'''%.2f seconds''':
-'''%.2f seconden''',
-'''match''':
-''' overeenkomst''',
-'''matches''':
-''' overeenkomsten''',
-'''This wiki is not enabled for mail processing.
-Contact the owner of the wiki, who can enable email.''':
-'''Deze wiki is niet ingesteld op het afhandelen van e-mail.
-Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
-'''Please provide a valid email address!''':
-'''Geef een geldig e-mailadres op!''',
-'''Found no account matching the given email address \'%(email)s\'!''':
-'''Geen account gevonden dat overeenkomt met het opgegeven e-mailadres \'%(email)s\'!''',
-'''Empty user name. Please enter a user name.''':
-'''Geen gebruikersnaam. Geef een gebruikersnaam!''',
-'''This user name already belongs to somebody else.''':
-'''Deze gebruikersnaam is al in gebruik.''',
-'''Passwords don\'t match!''':
-'''De wachtwoorden komen niet overeen!''',
-'''Please specify a password!''':
-'''Geef een wachtwoord!''',
-'''This email already belongs to somebody else.''':
-'''Dit e-mailadres behoort is al in gebruik.''',
-'''The theme \'%(theme_name)s\' could not be loaded!''':
-'''Het thema \'%(theme_name)s\' kan niet worden geladen!''',
-'''User preferences saved!''':
-'''Voorkeuren van gebruiker bewaard!''',
-'''Default''':
-'''Standaard''',
-'''<Browser setting>''':
-'''<Browserinstelling>''',
-'''Save''':
-'''Opslaan''',
-'''Preferred theme''':
-'''Verkozen opmaak''',
-'''Time zone''':
-'''Tijdzone''',
-'''Your time is''':
-'''Uw tijd is''',
-'''Server time is''':
-'''Tijd op de server is''',
-'''Date format''':
-'''Datumformaat''',
-'''Preferred language''':
-'''Voorkeurstaal''',
-'''General options''':
-'''Algemene opties''',
-'''Quick links''':
-'''Snelkoppelingen''',
-'''This list does not work, unless you have entered a valid email address!''':
-'''Deze lijst werkt alleen als u een geldig e-mailadres hebt ingevoerd!''',
-'''Subscribed wiki pages (one regex per line)''':
-'''Geabonneerde wikipagina\'s (één reguliere expressie per regel)''',
-'''Create Profile''':
-'''Profiel aanmaken''',
-'''Mail me my account data''':
-'''Stuur me mijn accountgegevens per e-mail''',
-'''Action''':
-'''Actie''',
 '''No older revisions available!''':
 '''Geen oudere versies aanwezig!''',
 '''Diff for "%s"''':
@@ -397,66 +461,72 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''U dient een grafiektype op te geven!''',
 '''Bad chart type "%s"!''':
 '''Ongeldig grafiektype "%s"!''',
-'''Search Titles''':
-'''Titels doorzoeken''',
-'''Display context of search results''':
-'''Context van de zoekresultaten tonen''',
-'''Case-sensitive searching''':
-'''Hoodletter-gevoelig zoeken''',
-'''Search Text''':
-'''Tekst doorzoeken''',
-'''Go To Page''':
-'''Ga naar Pagina''',
-'''Include system pages''':
-'''Inclusief systeempagina\'s''',
-'''Exclude system pages''':
-'''Exclusief systeempagina\'s''',
-'''Plain title index''':
-'''Eenvoudige titelindex''',
-'''XML title index''':
-'''Titelindex XML''',
-'''Python Version''':
-'''Python versie''',
-'''MoinMoin Version''':
-'''MoinMoin versie''',
-'''Release %s [Revision %s]''':
-'''Uitgave %s [Revisie %s]''',
-'''4Suite Version''':
-'''4Suite versie''',
-'''Number of pages''':
-'''Aantal pagina\'s''',
-'''Number of system pages''':
-'''Aantal systeempagina\'s''',
-'''Accumulated page sizes''':
-'''Totale grootte van alle pagina\'s''',
-'''Entries in edit log''':
-'''Boekingen in het bewerkingslog''',
-'''NONE''':
-'''GEEN''',
-'''Global extension macros''':
-'''Globale uitbreidingsmacros''',
-'''Local extension macros''':
-'''Lokale uitbreidingsmacros''',
-'''Global extension actions''':
-'''Globale uitbreidingsacties''',
-'''Local extension actions''':
-'''Lokale uitbreidingsacties''',
-'''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Geïnstalleerde processors (VEROUDERD -- gebruik Parsers)''',
-'''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Gebruik een specifiekere zoekterm dan {{{"%s"}}}!''',
-'''ERROR in regex \'%s\'''':
-'''FOUT in reguliere expressie \'%s\'''',
-'''Bad timestamp \'%s\'''':
-'''Ongeldig datumkenmerk \'%s\'''',
-'''Expected "=" to follow "%(token)s"''':
-'''Verwacht "=" volgend op "%(token)s"''',
-'''Expected a value for key "%(token)s"''':
-'''Verwacht een waarde voor sleutel "%(token)s"''',
-'''Wiki Markup''':
-'''Wikiopmaak''',
-'''Print View''':
-'''Afdrukvoorbeeld''',
+'''This page is already deleted or was never created!''':
+'''Deze pagina is al gewist of heeft nooit bestaan!''',
+'''No pages like "%s"!''':
+'''Geen pagina\'s lijken op "%s"!''',
+'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
+'''Bijlage \'%(target)s\' bestaat al (naam op de server \'%(filename)s\').''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Onbekende gebruikersnaam: {{{"%s"}}}. Geef een gebruikersnaam en wachtwoord op.''',
+'''Missing password. Please enter user name and password.''':
+'''Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op.''',
+'''Sorry, wrong password.''':
+'''Sorry, foutief wachtwoord.''',
+'''Exactly one page like "%s" found, redirecting to page.''':
+'''Zoeken op "%s" gaf precies een resultaat, u wordt er nu heengebracht''',
+'''Pages like "%s"''':
+'''Pagina\'s zoals "%s"''',
+'''%(matchcount)d %(matches)s for "%(title)s"''':
+'''%(matchcount)d %(matches)s op "%(title)s"''',
+'''Local Site Map for "%s"''':
+'''Lokale wegwijzer voor "%s"''',
+'''You are not allowed to rename pages in this wiki!''':
+'''U hebt geen toestemming in deze wiki pagina\'s van naam te veranderen!''',
+'''Please use the interactive user interface to rename pages!''':
+'''Gebruik de interactieve gebruikersinterface om pagina\'s te hernoemen!''',
+'''Could not rename page because of file system error: %s.''':
+'''Kon paginanaam niet wijzigen vanwege systeemfout: %s.''',
+'''Rename Page''':
+'''Pagina hernoemen''',
+'''New name''':
+'''Nieuwe naam''',
+'''Optional reason for the renaming''':
+'''Eventueel de reden voor deze hernoeming''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Een pagina met de naam {{{\'%s\'}}} bestaat al.\'\'\'
+
+Probeer een andere naam.''',
+'''(including %(localwords)d %(pagelink)s)''':
+'''(inclusief %(localwords)d %(pagelink)s)''',
+'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
+'''De volgende %(badwords)d woorden konden niet gevonden worden in het woordenboek van %(totalwords)d woorden %(localwords)s en zijn hieronder gemarkeerd:''',
+'''Add checked words to dictionary''':
+'''Voeg geselecteerde woorden toe aan het woordenboek''',
+'''No spelling errors found!''':
+'''Geen spelfouten gevonden!''',
+'''You can\'t check spelling on a page you can\'t read.''':
+'''U kunt geen spelling controleren op een pagina die u niet kunt lezen.''',
+'''Title Search: "%s"''':
+'''In titels zoeken op: "%s"''',
+'''Full Text Search: "%s"''':
+'''Volledige tekst doorzoeken op: "%s"''',
+'''Full Link List for "%s"''':
+'''Volledige verwijzingenlijst voor "%s"''',
+'''Cannot create a new page without a page name.  Please specify a page name.''':
+'''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
+'''You are not allowed to delete this page.''':
+'''U hebt geen toestemming deze pagina te verwijderen.''',
+'''Please use the interactive user interface to delete pages!''':
+'''Gebruik de interactieve gebruikersinterface om pagina\'s te verwijderen!''',
+'''Really delete this page?''':
+'''Deze pagina werkelijk verwijderen?''',
+'''Delete''':
+'''Verwijderen''',
+'''Optional reason for the deletion''':
+'''Eventueel de reden voor deze verwijdering''',
 '''[%d attachments]''':
 '''[%d bijlagen]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -508,8 +578,6 @@ is dan zul u het bestand dat u wilt inzenden een andere naam moeten geven.Anders
 '''Opsturen niet ondersteund: %s''',
 '''Attachments for "%(pagename)s"''':
 '''Bijlages voor "%(pagename)s"''',
-'''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
-'''Bijlage \'%(target)s\' bestaat al (naam op de server \'%(filename)s\').''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') with %(bytes)d bytes saved.''':
 '''Bijlage \'%(target)s\' opgeslagen (naam op de server \'%(filename)s\', %(bytes)d bytes).''',
 '''Attachment \'%(filename)s\' deleted.''':
@@ -520,80 +588,60 @@ is dan zul u het bestand dat u wilt inzenden een andere naam moeten geven.Anders
 '''Onbekend bestandstype. Deze bijlage kan niet inline worden getoond.''',
 '''attachment:%(filename)s of %(pagename)s''':
 '''bijlage:%(filename)s bij %(pagename)s''',
-'''You are not allowed to delete this page.''':
-'''U hebt geen toestemming deze pagina te verwijderen.''',
-'''This page is already deleted or was never created!''':
-'''Deze pagina is al gewist of heeft nooit bestaan!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Gebruik de interactieve gebruikersinterface om pagina\'s te verwijderen!''',
-'''Really delete this page?''':
-'''Deze pagina werkelijk verwijderen?''',
-'''Delete''':
-'''Verwijderen''',
-'''Optional reason for the deletion''':
-'''Eventueel de reden voor deze verwijdering''',
-'''No pages like "%s"!''':
-'''Geen pagina\'s lijken op "%s"!''',
-'''Exactly one page like "%s" found, redirecting to page.''':
-'''Zoeken op "%s" gaf precies een resultaat, u wordt er nu heengebracht''',
-'''Pages like "%s"''':
-'''Pagina\'s zoals "%s"''',
-'''%(matchcount)d %(matches)s for "%(title)s"''':
-'''%(matchcount)d %(matches)s op "%(title)s"''',
-'''Local Site Map for "%s"''':
-'''Lokale wegwijzer voor "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''U hebt geen toestemming in deze wiki pagina\'s van naam te veranderen!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Gebruik de interactieve gebruikersinterface om pagina\'s te hernoemen!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kon paginanaam niet wijzigen vanwege systeemfout: %s.''',
-'''Rename Page''':
-'''Pagina hernoemen''',
-'''New name''':
-'''Nieuwe naam''',
-'''Optional reason for the renaming''':
-'''Eventueel de reden voor deze hernoeming''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Een pagina met de naam {{{\'%s\'}}} bestaat al.\'\'\'
-
-Probeer een andere naam.''',
-'''(including %(localwords)d %(pagelink)s)''':
-'''(inclusief %(localwords)d %(pagelink)s)''',
-'''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
-'''De volgende %(badwords)d woorden konden niet gevonden worden in het woordenboek van %(totalwords)d woorden %(localwords)s en zijn hieronder gemarkeerd:''',
-'''Add checked words to dictionary''':
-'''Voeg geselecteerde woorden toe aan het woordenboek''',
-'''No spelling errors found!''':
-'''Geen spelfouten gevonden!''',
-'''You can\'t check spelling on a page you can\'t read.''':
-'''U kunt geen spelling controleren op een pagina die u niet kunt lezen.''',
-'''Title Search: "%s"''':
-'''In titels zoeken op: "%s"''',
-'''Full Text Search: "%s"''':
-'''Volledige tekst doorzoeken op: "%s"''',
-'''Full Link List for "%s"''':
-'''Volledige verwijzingenlijst voor "%s"''',
-'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Onbekende gebruikersnaam: {{{"%s"}}}. Geef een gebruikersnaam en wachtwoord op.''',
-'''Missing password. Please enter user name and password.''':
-'''Geen wachtwoord. Geef een gebruikersnaam en wachtwoord op.''',
-'''Sorry, wrong password.''':
-'''Sorry, foutief wachtwoord.''',
-'''Cannot create a new page without a page name.  Please specify a page name.''':
-'''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
 '''Upload new attachment "%(filename)s"''':
 '''Verstuur een nieuwe bijlage "%(filename)s"''',
 '''Create new drawing "%(filename)s"''':
 '''Nieuwe tekening maken "%(filename)s"''',
 '''Edit drawing %(filename)s''':
 '''Tekening bewerken "%(filename)s"''',
-'''Invalid include arguments "%s"!''':
-'''Ongeldige argumenten voor invoegen "%s"!''',
-'''Nothing found for "%s"!''':
-'''Niets gevonden voor "%s"''',
+'''FrontPage''':
+'''VoorPagina''',
+'''RecentChanges''':
+'''RecenteWijzigingen''',
+'''TitleIndex''':
+'''IndexVanTitels''',
+'''WordIndex''':
+'''IndexVanWoorden''',
+'''FindPage''':
+'''PaginaZoeken''',
+'''SiteNavigation''':
+'''WegWijzer''',
+'''HelpContents''':
+'''HelpInhoud''',
+'''HelpOnFormatting''':
+'''HelpBijOpmaak''',
+'''UserPreferences''':
+'''GebruikersVoorkeuren''',
+'''WikiLicense''':
+'''WikiLicentie''',
+'''MissingPage''':
+'''OntbrekendePagina''',
+'''Mon''':
+'''Maa''',
+'''Tue''':
+'''Din''',
+'''Wed''':
+'''Woe''',
+'''Thu''':
+'''Don''',
+'''Fri''':
+'''Vrij''',
+'''Sat''':
+'''Zat''',
+'''Sun''':
+'''Zon''',
+'''AttachFile''':
+'''BijlageToevoegen''',
+'''DeletePage''':
+'''PaginaVerwijderen''',
+'''LikePages''':
+'''GelijkendePaginas''',
+'''LocalSiteMap''':
+'''LokaleWegwijzer''',
+'''RenamePage''':
+'''PaginaHernoemen''',
+'''SpellCheck''':
+'''Spellingscontrole''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Navigitiemethode \'%(scheme)s\' niet ondersteund!''',
 '''No parent page found!''':
@@ -626,14 +674,18 @@ Probeer een andere naam.''',
 '''bladwijzer instellen''',
 '''[Bookmark reached]''':
 '''[Bladwijzer bereikt]''',
+'''No wanted pages in this wiki.''':
+'''Geen gewenste pagina\'s in deze wiki.''',
+'''Invalid include arguments "%s"!''':
+'''Ongeldige argumenten voor invoegen "%s"!''',
+'''Nothing found for "%s"!''':
+'''Niets gevonden voor "%s"''',
 '''Markup''':
 '''Opmaak''',
 '''Display''':
 '''Uiterlijk''',
 '''Filename''':
 '''Bestandsnaam''',
-'''No wanted pages in this wiki.''':
-'''Geen gewenste pagina\'s in deze wiki.''',
 '''**Maximum number of allowed includes exceeded**''':
 '''**Maximum aantal toegestane includes overschreden**''',
 '''**Could not find the referenced page: %s**''':
@@ -736,52 +788,4 @@ rood=bewerken''',
 '''Verbinding met de mailserver \'%(server)s\' mislukt: %(reason)s''',
 '''Mail sent OK''':
 '''E-mail correct verzonden''',
-'''FrontPage''':
-'''VoorPagina''',
-'''RecentChanges''':
-'''RecenteWijzigingen''',
-'''TitleIndex''':
-'''IndexVanTitels''',
-'''WordIndex''':
-'''IndexVanWoorden''',
-'''FindPage''':
-'''PaginaZoeken''',
-'''SiteNavigation''':
-'''WegWijzer''',
-'''HelpContents''':
-'''HelpInhoud''',
-'''HelpOnFormatting''':
-'''HelpBijOpmaak''',
-'''UserPreferences''':
-'''GebruikersVoorkeuren''',
-'''WikiLicense''':
-'''WikiLicentie''',
-'''MissingPage''':
-'''OntbrekendePagina''',
-'''Mon''':
-'''Maa''',
-'''Tue''':
-'''Din''',
-'''Wed''':
-'''Woe''',
-'''Thu''':
-'''Don''',
-'''Fri''':
-'''Vrij''',
-'''Sat''':
-'''Zat''',
-'''Sun''':
-'''Zon''',
-'''AttachFile''':
-'''BijlageToevoegen''',
-'''DeletePage''':
-'''PaginaVerwijderen''',
-'''LikePages''':
-'''GelijkendePaginas''',
-'''LocalSiteMap''':
-'''LokaleWegwijzer''',
-'''RenamePage''':
-'''PaginaHernoemen''',
-'''SpellCheck''':
-'''Spellingscontrole''',
 }
