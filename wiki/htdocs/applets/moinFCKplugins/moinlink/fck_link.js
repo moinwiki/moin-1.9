@@ -166,6 +166,9 @@ function LoadSelection()
  {
   sType = 'wiki';
   sHRef = sHRef.remove(0, FCKConfig['WikiBasePath'].length);
+  // make links to subpages of own page relative links
+  if (sHRef.startsWith(FCKConfig['WikiPage']))
+      sHRef = sHRef.remove(0, FCKConfig['WikiPage'].length);
   GetE('txtPagename').value = decodeUrl(sHRef);
  }
  else     // It is another type of link.
@@ -227,8 +230,12 @@ function Ok()
     alert(FCKLang.DlnLnkMsgNoUrl);
     return false;
    }
-    
    sText = sUri;
+   // pages starting with "/" are sub pages of current page, e.g. /SubPage 
+   if (sUri[0] == '/')
+   {
+      sUri = GetE('basepage').value + sUri
+   }
    sUri = FCKConfig['WikiBasePath'] + encodeUrl(sUri);
    break;
 

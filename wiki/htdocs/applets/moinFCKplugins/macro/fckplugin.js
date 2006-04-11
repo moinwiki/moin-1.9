@@ -3,14 +3,14 @@ var oMacroItem;
 if (1 || !FCKBrowserInfo.IsIE){
 
 // Register the related command.
-FCKCommands.RegisterCommand('Macro', new FCKDialogCommand('Macro', FCKLang.MacroDlgTitle, FCKConfig.WikiBasePath + '?action=fckdialog&dialog=macro', 440, 300, FCKSelection.CheckForNodeNames, noFormat));
+FCKCommands.RegisterCommand('Macro', new FCKDialogCommand('Macro', FCKLang.MacroDlgTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=macro', 440, 300, FCKSelection.CheckForNodeNames, noFormat));
 
 oMacroItem = new FCKToolbarButton('Macro', FCKLang.MacroBtn, null, 
                                       null, false, true);
 }
 else
 {
-FCKCommands.RegisterCommand('Macro', new FCKDialogCommand('Macro', FCKLang.MacroDlgTitle, FCKConfig.WikiBasePath + '?action=fckdialog&dialog=macro', 440, 300, null, null));
+FCKCommands.RegisterCommand('Macro', new FCKDialogCommand('Macro', FCKLang.MacroDlgTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=macro', 440, 300, null, null));
 oMacroItem = new FCKToolbarButton('Macro', FCKLang.MacroBtn, null, 
                                       null, false, false);
 }

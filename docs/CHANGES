@@ -30,6 +30,10 @@ Known main issues:
 
 Version 1.5.3-current:
   New Features:
+
+  Bug Fixes:
+    * Fixed handling of subpages in gui editor.
+
   Other Changes:
     * We catch and ignore html to wiki conversion errors in case of hitting
       the cancel button, so you can get out of the error screen.

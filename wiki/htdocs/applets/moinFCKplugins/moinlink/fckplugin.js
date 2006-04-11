@@ -13,11 +13,11 @@ function LinkState()
 }
 
 // Register the related command.
-FCKCommands.RegisterCommand('Link', new FCKDialogCommand( 'Link', FCKLang.DlgLnkWindowTitle, FCKConfig['WikiBasePath'] + '?action=fckdialog&dialog=link', 400, 330, LinkState, 'CreateLink')) ;
+FCKCommands.RegisterCommand('Link', new FCKDialogCommand( 'Link', FCKLang.DlgLnkWindowTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=link', 400, 330, LinkState, 'CreateLink')) ;
 
 } 
 else
 {
-FCKCommands.RegisterCommand('Link', new FCKDialogCommand( 'Link', FCKLang.DlgLnkWindowTitle, FCKConfig['WikiBasePath'] + '?action=fckdialog&dialog=link', 400, 330, FCK.GetNamedCommandState, 'CreateLink')) ;
+FCKCommands.RegisterCommand('Link', new FCKDialogCommand( 'Link', FCKLang.DlgLnkWindowTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=link', 400, 330, FCK.GetNamedCommandState, 'CreateLink')) ;
 
 }

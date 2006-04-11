@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
+from MoinMoin import config, wikiutil
 import re
 
 ##############################################################################
@@ -250,6 +250,7 @@ def link_dialog(request):
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
+    basepage = request.page.page_name.encode(config.charset)
     request.http_headers()
     request.write('''
 <!--
@@ -300,6 +301,7 @@ def link_dialog(request):
        <form action=%(action)s method="GET">
        <input type="hidden" name="action" value="fckdialog">
        <input type="hidden" name="dialog" value="link">
+       <input type="hidden" id="basepage" name="basepage" value="%(basepage)s">
        <table cellSpacing="0" cellPadding="0" align="center" border="0">
         <tr>
          <td>
