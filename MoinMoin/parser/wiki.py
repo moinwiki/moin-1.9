@@ -120,8 +120,9 @@ class Parser:
         self.is_u = 0
         self.is_strike = 0
         self.lineno = 0
-        self.in_li = 0
-        self.in_dd = 0
+        self.in_list = 0 # between <ul/ol/dl> and </ul/ol/dl>
+        self.in_li = 0 # between <li> and </li>
+        self.in_dd = 0 # between <dd> and </dd>
         self.in_pre = 0
         self.in_table = 0
         self.is_big = False
@@ -568,6 +569,7 @@ class Parser:
             close[0:0] = [self.formatter.table(0)]
             self.in_table = 0
         
+        self.in_list = self.list_types != []
         return ''.join(close) + ''.join(open)
 
 
@@ -863,7 +865,8 @@ class Parser:
                 result.append(self.formatter.text(line[lastpos:match.start()]))
             
             # Replace match with markup
-            if not (self.inhibit_p or self.in_pre or self.formatter.in_p or self.in_table):
+            if not (self.inhibit_p or self.in_pre or self.formatter.in_p or
+                    self.in_table or self.in_list):
                 result.append(self.formatter.paragraph(1, css_class="line867"))
             result.append(self.replace(match))
             lastpos = match.end()
@@ -871,7 +874,7 @@ class Parser:
         ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
         
         # Add paragraph with the remainder of the line
-        if not (self.in_pre or self.inhibit_p or
+        if not (self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
         result.append(self.formatter.text(line[lastpos:]))
