@@ -102,7 +102,8 @@ def format_page_edits(macro, lines, bookmark_usecs):
             counters = {}
             for idx in range(len(lines)):
                 name = lines[idx].getEditor(request)
-                if not counters.has_key(name): counters[name] = []
+                if not name in counters:
+                    counters[name] = []
                 counters[name].append(idx+1)
             poslist = map(None,  counters.values(), counters.keys())
             poslist.sort()
@@ -324,7 +325,7 @@ def execute(macro, args, **kw):
             # new day but no changes
             this_day = day
 
-        if ignore_pages.has_key(line.pagename):
+        if line.pagename in ignore_pages:
             continue
         
         # end listing by default if user has a bookmark and we reached it
@@ -332,7 +333,7 @@ def execute(macro, args, **kw):
             msg = _('[Bookmark reached]')
             break
 
-        if pages.has_key(line.pagename):
+        if line.pagename in pages:
             pages[line.pagename].append(line)
         else:
             pages[line.pagename] = [line]

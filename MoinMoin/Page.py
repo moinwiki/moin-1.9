@@ -933,7 +933,8 @@ class Page:
 
             if subscriber.isSubscribedTo(pageList):
                 lang = subscriber.language or 'en'
-                if not subscriber_list.has_key(lang): subscriber_list[lang] = []
+                if not lang in subscriber_list:
+                    subscriber_list[lang] = []
                 if return_users:
                     subscriber_list[lang].append(subscriber)
                 else:

@@ -42,7 +42,7 @@ def execute(pagename, request):
         for link in pages[name].getPageLinks(request):
             request.write(" ")
             if mimetype == "text/html":
-                if pages.has_key(link):
+                if link in pages:
                     request.write(pages[link].link_to(request))
                 else:
                     _emit(request, link)

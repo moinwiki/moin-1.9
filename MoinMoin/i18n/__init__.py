@@ -195,13 +195,13 @@ def requestLanguage(request):
     available = wikiLanguages()
     if not request.cfg.language_ignore_browser:
         for lang in browserLanguages(request):
-            if available.has_key(lang):
+            if lang in available:
                 if request.http_accept_language:
                     request.setHttpHeader('Vary: Accept-Language')
                 return lang
     
     # Or return the wiki default language...
-    if available.has_key(request.cfg.language_default):
+    if request.cfg.language_default in available:
         lang = request.cfg.language_default
     # If everything else fails, read the manual... or return 'en'
     else:
@@ -252,7 +252,7 @@ def getText(str, request, lang, formatted=True):
 
     # load texts if needed
     global _text_cache
-    if not _text_cache.has_key(lang):
+    if not lang in _text_cache:
         (texts, unformatted) = loadLanguage(request, lang)
         # XXX add error handling
         _text_cache[lang] = texts

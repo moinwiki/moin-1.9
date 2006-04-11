@@ -32,7 +32,7 @@ def show_editors(request, pagename, timestamp):
             continue
         
         editor = line.getEditor(request)
-        if not pages.has_key(line.pagename):
+        if not line.pagename in pages:
             pages[line.pagename] = 1
             editors[editor] = editors.get(editor, 0) + 1
             
@@ -75,7 +75,7 @@ def show_pages(request, pagename, editor, timestamp):
         if not request.user.may.read(line.pagename):
             continue
 
-        if not pages.has_key(line.pagename):
+        if not line.pagename in pages:
             pages[line.pagename] = 1
             if line.getEditor(request) == editor:
                 line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
@@ -142,7 +142,7 @@ def revert_pages(request, editor, timestamp):
         if not request.user.may.read(line.pagename):
             continue
 
-        if not pages.has_key(line.pagename):
+        if not line.pagename in pages:
             pages[line.pagename] = 1
             if line.getEditor(request) == editor:
                 revertpages.append(line.pagename)

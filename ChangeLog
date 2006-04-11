@@ -2,6 +2,24 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-11 10:59:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-555
+
+    Summary:
+      refactored some d.has_key(k) to k in d (faster)
+    Revision:
+      moin--main--1.5--patch-555
+
+    refactored some d.has_key(k) to k in d (faster)
+    
+
+    modified files:
+     ChangeLog MoinMoin/Page.py MoinMoin/action/Despam.py
+     MoinMoin/action/links.py MoinMoin/i18n/__init__.py
+     MoinMoin/macro/OrphanedPages.py
+     MoinMoin/macro/RecentChanges.py MoinMoin/macro/WantedPages.py
+     MoinMoin/script/account/check.py
+
+
 2006-04-11 10:38:38 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-554
 
     Summary:
