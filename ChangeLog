@@ -2,6 +2,25 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-11 15:16:13 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-556
+
+    Summary:
+      fixed subpage links in gui editor, call fckdialog action from current page, not base url
+    Revision:
+      moin--main--1.5--patch-556
+
+    fixed subpage links in gui editor, call fckdialog action from current page, not base url
+    
+
+    modified files:
+     ChangeLog MoinMoin/action/fckdialog.py docs/CHANGES
+     wiki/htdocs/applets/moinFCKplugins/macro/fckplugin.js
+     wiki/htdocs/applets/moinFCKplugins/moinattachment/fckplugin.js
+     wiki/htdocs/applets/moinFCKplugins/moinimage/fckplugin.js
+     wiki/htdocs/applets/moinFCKplugins/moinlink/fck_link.js
+     wiki/htdocs/applets/moinFCKplugins/moinlink/fckplugin.js
+
+
 2006-04-11 10:59:11 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-555
 
     Summary:

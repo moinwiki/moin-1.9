@@ -20,7 +20,7 @@ function ImageState()
 if (1 || !FCKBrowserInfo.IsIE){
 
 // Register the related command.
-FCKCommands.RegisterCommand('Image', new FCKDialogCommand( 'Image', FCKLang.DlgImgTitle, FCKConfig['WikiBasePath'] + '?action=fckdialog&dialog=image', 400, 230, ImageState, 'Image')) ;
+FCKCommands.RegisterCommand('Image', new FCKDialogCommand( 'Image', FCKLang.DlgImgTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=image', 400, 230, ImageState, 'Image')) ;
 
 FCKToolbarItems.RegisterItem('Image', new FCKToolbarButton
   ('Image', FCKLang.InsertImageLbl, FCKLang.InsertImage, null, false, true));
@@ -28,5 +28,5 @@ FCKToolbarItems.RegisterItem('Image', new FCKToolbarButton
 }
 else
 {
-FCKCommands.RegisterCommand('Image', new FCKDialogCommand( 'Image', FCKLang.DlgImgTitle, FCKConfig['WikiBasePath'] + '?action=fckdialog&dialog=image', 400, 230, FCK.GetNamedCommandState, 'Image')) ;
+FCKCommands.RegisterCommand('Image', new FCKDialogCommand( 'Image', FCKLang.DlgImgTitle, FCKConfig.WikiBasePath + FCKConfig.WikiPage + '?action=fckdialog&dialog=image', 400, 230, FCK.GetNamedCommandState, 'Image')) ;
 }
