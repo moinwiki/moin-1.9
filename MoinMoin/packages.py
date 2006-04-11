@@ -303,8 +303,9 @@ class ScriptEngine:
             try:
                 fn = getattr(self, "do_" + fnname)
             except AttributeError:
-                self.msg += u"Exception RuntimeScriptException (line %i): %s\n" % (
-                    lineno, _("Unknown function %s in line %i.") % (elements[0], lineno))
+                self.msg += u"Exception RuntimeScriptException: %s\n" % (
+                        _("Unknown function %(func)s in line %(lineno)i.") %
+                        {'func': elements[0], 'lineno': lineno}, )
                 success = False
                 break
 

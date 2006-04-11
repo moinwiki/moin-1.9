@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-11 10:38:38 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-554
+
+    Summary:
+      Changed i18ned string to have named arguments.
+    Revision:
+      moin--main--1.5--patch-554
+
+
+    modified files:
+     ChangeLog MoinMoin/packages.py
+
+
 2006-04-11 10:00:38 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-553
 
     Summary:
