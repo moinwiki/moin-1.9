@@ -21,7 +21,7 @@ def execute(macro, args):
     for page in pages.values():
         links = page.getPageLinks(macro.request)
         for link in links:
-            if orphaned.has_key(link):
+            if link in orphaned:
                 del orphaned[link]
 
     # check for the extreme case

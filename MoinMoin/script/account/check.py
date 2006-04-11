@@ -113,14 +113,14 @@ class PluginScript(MoinScript):
             self.users[uid] = u
     
             # collect name duplicates:
-            if self.names.has_key(u.name):
+            if u.name in self.names:
                 self.names[u.name].append(uid)
             else:
                 self.names[u.name] = [uid]
     
             # collect email duplicates:
             if u.email:
-                if self.emails.has_key(u.email):
+                if u.email in self.emails:
                     self.emails[u.email].append(uid)
                 else:
                     self.emails[u.email] = [uid]
