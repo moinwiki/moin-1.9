@@ -709,7 +709,9 @@ msgstr "No se ha especificado el nombre del tema"
 
 #, fuzzy
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr "La instalación de archivos de temas sólo es soportada en servidores de tipo standalone"
+msgstr ""
+"La instalación de archivos de temas sólo es soportada en servidores de tipo "
+"standalone"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -1160,18 +1162,19 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
-"Aquí puedes agregar algunas sub-páginas adicionales a tu página personal "
-"ya existente.\n"
+"Aquí puedes agregar algunas sub-páginas adicionales a tu página personal ya "
+"existente.\n"
 "\n"
-"Puedes decidir cuán abiertas a otros lectores o editores serán dichas páginas,\n"
+"Puedes decidir cuán abiertas a otros lectores o editores serán dichas "
+"páginas,\n"
 "el acceso se controla mediante la pertenencia a grupos de la página de grupo "
 "correspondiente.\n"
 "\n"
-"Simplemente ingresa el nombre de la sub-página y haz click en el botón para crear "
-"una nueva página.\n"
+"Simplemente ingresa el nombre de la sub-página y haz click en el botón para "
+"crear una nueva página.\n"
 "\n"
-"Antes de crear páginas con proteción de acceso, asegúrate que la página de grupo "
-"correspondiente\n"
+"Antes de crear páginas con proteción de acceso, asegúrate que la página de "
+"grupo correspondiente\n"
 "existe y contiene los miembros apropiados. Usa HomepageGroupsTemplate para "
 "crear\n"
 "páginas de grupo.\n"
@@ -1185,7 +1188,6 @@ msgstr ""
 "||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
 "(username)s unicamente||\n"
 "\n"
-
 
 #, fuzzy
 msgid "MyPages management"
@@ -1316,6 +1318,7 @@ msgstr ""
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+
 #, fuzzy
 msgid "Wiki Backup / Restore"
 msgstr "Respaldo / Restaración de Wiki"

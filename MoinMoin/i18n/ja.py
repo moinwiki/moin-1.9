@@ -173,7 +173,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''テーマ\'%(theme_name)s\'を読み込めませんでした。''',
 '''User preferences saved!''':
-'''User preferencesを保存しました。''',
+'''ユーザプレファレンスを保存しました。''',
 '''Default''':
 '''デフォルト''',
 '''<Browser setting>''':
@@ -412,10 +412,26 @@ To leave the editor, press the Cancel button.''':
 '''このページは%(timestamp)sに%(owner)sによって編集が開始された、またはプレビューされました。[[BR]]
 \'\'\'編集の衝突を避けるため、あと%(mins_valid)d分は\'\'編集を行わないでください。\'\'\'\'\'[[BR]]
 キャンセルボタンで編集を中断できます。''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''このパッケージには新しいバージョン(%s以上)のMoinMoinが必要です。''',
+'''The theme name is not set.''':
+'''テーマ名が設定されていません。''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''テーマファイルをインストールできるのは、standaloneタイプのサーバだけです。''',
 '''Installation of \'%(filename)s\' failed.''':
 '''%(filename)s\'のインストールに失敗しました。''',
 '''The file %s is not a MoinMoin package file.''':
 '''%sはMoinMoinのパッケージファイルではありません。''',
+'''The page %s does not exist.''':
+'''ページ %s は存在しません。''',
+'''Invalid package file header.''':
+'''パッケージファイルのへッダが不正です。''',
+'''Package file format unsupported.''':
+'''パッケージファイルフォーマットはサポートされていません。''',
+'''Unknown function %s in line %i.''':
+'''不明な関数%sがあります (%i行目)。''',
+'''The file %s was not found in the package.''':
+'''ファイル %s はパッケージ内に存在しません。''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -729,6 +745,14 @@ Try a different name.''':
 '''"%s"の全リンクリスト''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''名前の無いページを作成することはできません。ページ名を指定してください。''',
+'''Pages''':
+'''ページ''',
+'''Select Author''':
+'''作成者選択''',
+'''Revert all!''':
+'''すべて前のバージョンに戻す''',
+'''You are not allowed to use this action.''':
+'''このアクションを行う権限がありません。''',
 '''Subscribe users to the page %s''':
 '''ユーザをページ"%s"の購読者に追加''',
 '''Subscribed for %s:''':

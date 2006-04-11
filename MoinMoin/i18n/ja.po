@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-10 13:56+0200\n"
-"PO-Revision-Date: 2006-04-10 11:34+0900\n"
+"PO-Revision-Date: 2006-04-11 10:06+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -302,7 +302,7 @@ msgid "The theme '%(theme_name)s' could not be loaded!"
 msgstr "テーマ'%(theme_name)s'を読み込めませんでした。"
 
 msgid "User preferences saved!"
-msgstr "User preferencesを保存しました。"
+msgstr "ユーザプレファレンスを保存しました。"
 
 msgid "Default"
 msgstr "デフォルト"
@@ -690,13 +690,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "このパッケージには新しいバージョン(%s以上)のMoinMoinが必要です。"
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "テーマ名が設定されていません。"
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "テーマファイルをインストールできるのは、standaloneタイプのサーバだけです。"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -706,23 +706,23 @@ msgstr "%(filename)s'のインストールに失敗しました。"
 msgid "The file %s is not a MoinMoin package file."
 msgstr "%sはMoinMoinのパッケージファイルではありません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "添付するファイル'%(filename)s'は存在しません。"
+msgstr "ページ %s は存在しません。"
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "パッケージファイルのへッダが不正です。"
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "パッケージファイルフォーマットはサポートされていません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %s in line %i."
-msgstr "未定義のバックアップサブアクション: %s 。"
+msgstr "不明な関数%sがあります (%i行目)。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "%sはMoinMoinのパッケージファイルではありません。"
+msgstr "ファイル %s はパッケージ内に存在しません。"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1225,18 +1225,15 @@ msgid ""
 msgstr ""
 "名前の無いページを作成することはできません。ページ名を指定してください。"
 
-#, fuzzy
 msgid "Pages"
 msgstr "ページ"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "ユーザ選択"
+msgstr "作成者選択"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "すべて前のバージョンに戻す"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
 msgstr "このアクションを行う権限がありません。"
 
