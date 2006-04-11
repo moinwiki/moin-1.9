@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-10 20:26+0300\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -690,13 +690,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "Pakotnei nepieciešama jaunāka MoinMoin versija (vismaz %s)."
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "Tēmas nosaukums nav uzstādīts."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") serveriem."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -706,23 +706,23 @@ msgstr "Nesekmīga faila '%(filename)s' instalēšana."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Fails %s nav MoinMoin pakotnes fails."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "Piesaiste '%(filename)s' neeksistē!"
+msgstr "Lapa %s neeksistē!"
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "Nekorekta pakotnes faila galvene."
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "Neatbalstīts pakotnes faila formāts."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %s in line %i."
-msgstr "Nezināma rezerves kopēšanas apakšdarbība: %s."
+msgstr "Nedefinēta funkcija %s rindā %i."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "Fails %s nav MoinMoin pakotnes fails."
+msgstr "Fails %s pakotnē netika atrasts."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1189,20 +1189,17 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu."
 
-#, fuzzy
 msgid "Pages"
-msgstr "Lapa"
+msgstr "Lapas"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "Izvēlēties lietotāju"
+msgstr "Izvēlēties Autoru"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "Atgriezt visu!"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
-msgstr "Jums nav tiesību veikt šo darbību."
+msgstr "Jums nav tiesību lietot šo darbību."
 
 #, python-format
 msgid "Subscribe users to the page %s"

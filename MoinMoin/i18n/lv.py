@@ -409,10 +409,26 @@ To leave the editor, press the Cancel button.''':
 Lai neveidotos konflikts, \'\'\'Jums nevajadzētu\'\' labot\'\' šo lapu vēl vismaz %(mins_valid)d minūtes.\'\'\'[[BR]]
 
 Lai izietu no labošanas, nospiediet pogu Atcelt.''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''Pakotnei nepieciešama jaunāka MoinMoin versija (vismaz %s).''',
+'''The theme name is not set.''':
+'''Tēmas nosaukums nav uzstādīts.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''Tēmu failu instalēšana ir atbalstīta tikai savrupiem ("standalone") serveriem.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Nesekmīga faila \'%(filename)s\' instalēšana.''',
 '''The file %s is not a MoinMoin package file.''':
 '''Fails %s nav MoinMoin pakotnes fails.''',
+'''The page %s does not exist.''':
+'''Lapa %s neeksistē!''',
+'''Invalid package file header.''':
+'''Nekorekta pakotnes faila galvene.''',
+'''Package file format unsupported.''':
+'''Neatbalstīts pakotnes faila formāts.''',
+'''Unknown function %s in line %i.''':
+'''Nedefinēta funkcija %s rindā %i.''',
+'''The file %s was not found in the package.''':
+'''Fails %s pakotnē netika atrasts.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -656,6 +672,14 @@ Pamēģiniet citu nosaukumu.''',
 '''Visu saišu saraksts "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu.''',
+'''Pages''':
+'''Lapas''',
+'''Select Author''':
+'''Izvēlēties Autoru''',
+'''Revert all!''':
+'''Atgriezt visu!''',
+'''You are not allowed to use this action.''':
+'''Jums nav tiesību lietot šo darbību.''',
 '''Subscribe users to the page %s''':
 '''Parakstīt lietotājus lapas %s izmaiņām''',
 '''Subscribed for %s:''':
