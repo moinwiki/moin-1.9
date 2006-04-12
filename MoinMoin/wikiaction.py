@@ -575,7 +575,7 @@ def do_edit(pagename, request):
     from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
     try:
         if lasteditor == 'gui':
-            savetext = convert(request, pagename, savetext) # XXX error handling
+            savetext = convert(request, pagename, savetext)
                 
         # IMPORTANT: normalize text from the form. This should be done in
         # one place before we manipulate the text.
