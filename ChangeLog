@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-12 16:08:46 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-558
+
+    Summary:
+      fixed Makefile, setup.py, comments
+    Revision:
+      moin--main--1.5--patch-558
+
+    fixed Makefile, setup.py, comments
+    
+
+    modified files:
+     ChangeLog Makefile MoinMoin/wikiaction.py setup.py
+
+
 2006-04-11 15:50:04 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-557
 
     Summary:

@@ -76,7 +76,7 @@ update-underlay:
 # Merge from main branch
 # Ignore error in the merge and update underlay
 merge:
-	tla star-merge arch@arch.thinkmo.de--2003-archives/moin--main--1.3
+	tla star-merge arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 
 test: 
 	@python tests/maketestwiki.py
