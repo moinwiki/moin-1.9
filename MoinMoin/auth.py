@@ -227,7 +227,7 @@ def sslclientcert(request, **kw):
             commonname = env.get('SSL_CLIENT_S_DN_CN', '')
             commonname_lower = commonname.lower()
             if email_lower or commonname_lower:
-                for uid in user.getUserList():
+                for uid in user.getUserList(request):
                     u = user.User(request, uid,
                                   auth_method='sslclientcert', auth_attribs=())
                     if email_lower and u.email.lower() == email_lower:
@@ -250,6 +250,9 @@ def sslclientcert(request, **kw):
                         break
                 else:
                     u = None
+                if u is None:
+                    # user wasn't found, so let's create a new user object
+                    u = user.User(request, name=commonname_lower, auth_username=commonname_lower)
 
     if u:
         u.create_or_update(changed)
