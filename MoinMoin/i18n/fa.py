@@ -80,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 در صورت عدم تمایل٬ برای لغو تغییرات خود دکمه \'\'\'%(cancel_button_text)s\'\'\' را فشار دهید.''',
 '''Preview''':
 '''پیش نمایش''',
+'''Text mode''':
+'''ویرایش متنی''',
 '''Comment:''':
 '''نظرات:''',
 '''<No addition>''':
@@ -89,7 +91,7 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Trivial change''':
 '''تغییرات جزئی''',
 '''Remove trailing whitespace from each line''':
-'''جاهای خالی را از هر خط حذف کن''',
+'''جاهای خالی را از هر خط حذف نما''',
 '''Invalid user name {{{\'%s\'}}}.
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
@@ -403,10 +405,24 @@ To leave the editor, press the Cancel button.''':
 باز شده است.برای جلوگیری از ناسازگاریهای ناخواسته٬ از ویرایش این صفحه حداقل تا %(mins_valid)d·دقیقه(s),
 دیگر خودداری نمایید.\'\'\'[[BR]]
 برای خروج از محیط ویرایش دکمه لغو را فشار دهید.''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''این بسته نیاز به MoinMoin نسخه جدیدتری دارد (نسخه %s یا بالاتر).''',
+'''The theme name is not set.''':
+'''قالب گرافیکی تنظیم نشده است.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''نصب فایلهای قالب گرافیکی تنها در سرویس دهنده های standalone پشتیبانی میشود.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''نصب فایل \'%(filename)s\' با ایراد مواجه شد.''',
 '''The file %s is not a MoinMoin package file.''':
 '''فایل %s از فایلهای  بسته MoinMoin نیست.''',
+'''The page %s does not exist.''':
+'''صفحه %s وجود ندارد.''',
+'''Invalid package file header.''':
+'''بسته غیرمجاز.''',
+'''Package file format unsupported.''':
+'''نوع فایل این بسته پشتیبانی نمیشود.''',
+'''The file %s was not found in the package.''':
+'''فایل %s در بسته یافت نشد.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -422,6 +438,42 @@ To leave the editor, press the Cancel button.''':
  جدولها:: || متن درون یک سلول جدول |||| متن درون یک سلول با دو ستون ||;     پس از جدول ها و عنوان ها نباید فاصله خالی بگذارید.
 
 (!) برای راهنمایی بیشتر HelpOnEditing و یا SyntaxReference را ببینید.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''پررنگ: <i>*مورب سازی*</i> <b>**پررنگ**</b> ``monospace``<br/>
+<br/><pre>
+سرنویسها: سرنویس ۱  سرنویس ۲  سرنویس ۳
+          =========  ---------  ~~~~~~~~~
+
+خط افقی: ---- 
+لینکها: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+لیستها: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) برای راهنمایی بیشتر این صفحه را ببینید 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
 ''',
 '''Diffs''':
 '''تغییرات''',
@@ -583,8 +635,18 @@ To leave the editor, press the Cancel button.''':
 '''این صفحه یا اخیرا حذف شده و یا هرگز وجود نداشته است!''',
 '''No pages like "%s"!''':
 '''هیچ صفحه ای شبیه "%s" یافت نشد!''',
+'''Invalid filename "%s"!''':
+'''نام فایل "%s" نامشخص است !''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''ضمیمه \'%(target)s\' (به نام \'%(filename)s\') در حال حاضر وجود دارد.''',
+'''Created the package %s containing the pages %s.''':
+'''بسته %s شامل صفحات %s ساخته شد.''',
+'''Package pages''':
+'''بسته صفحات''',
+'''Package name''':
+'''نام بسته''',
+'''List of page names - separated by <tt>,</tt>''':
+'''لیست نام صفحات - جدا شده با <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید. ''',
 '''Missing password. Please enter user name and password.''':
@@ -599,6 +661,45 @@ To leave the editor, press the Cancel button.''':
 '''%(matchcount)d·%(matches)s·برای·"%(title)s"''',
 '''Local Site Map for "%s"''':
 '''نقشه سایت محلی برای "%s"''',
+'''Please log in first.''':
+'''لطفا وارد سیستم شوید.''',
+'''Please first create a homepage before creating additional pages.''':
+'''لطفا پیش از ساخت صفحات در این سایت٬ یک صفحه خانگی برای خود بسازید.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''شما میتوانید به صفحه خانگی خود تعدادی زیر صفحه نیز اضافه نمایید.
+
+شما به دلخواه خود میتوانید مجوز خواندن و نوشتن این صفحات توسط کاربران دیگر را تنظیم نمایید,
+این دسترسی ها توسط اعضای گروه نویسندگان این صفحه قابل تنظیم می باشند.
+
+فقط کافیست نام زیر صفحه مورد نظر خود را نوشته و روی ایجاد صفحه جدید کلیک نمایید.
+ 
+پیش از ایجاد این صفحات٬ صفحه اسامی گروه نویسندگان دارای حق دسترسی به این صفحه را نیز ایجاد نموده و اسامی کاربران دارای حق ویرایش را در ان صفحه ذکر نمایید
+ جهت ساخت این صفحات گروهی میتوانید از الگوی HomepageGroupsTemplate استفاده نمایید.
+
+||\'\'\'صفحه شخصی جدید:\'\'\'||\'\'\'حق دسترسی های مربوطه:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''مدیریت صفحات من''',
 '''You are not allowed to rename pages in this wiki!''':
 '''شما مجاز به تغییر نام صفحات این ویکی نمی باشید!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -635,6 +736,14 @@ Try a different name.''':
 '''لیست کامل لینکها برای "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید.''',
+'''Pages''':
+'''صفحات''',
+'''Select Author''':
+'''انتخاب نویسنده''',
+'''Revert all!''':
+'''کلیه ویرایش ها بازگردانی شود!''',
+'''You are not allowed to use this action.''':
+'''عملیات غیر مجاز''',
 '''Subscribe users to the page %s''':
 '''کاربران را عضو این صفحه نما %s''',
 '''Subscribed for %s:''':
@@ -643,6 +752,8 @@ Try a different name.''':
 '''کاربر ثبت نشده:''',
 '''You are not allowed to perform this action.''':
 '''عملیات غیر مجاز''',
+'''You are now logged out.''':
+'''شما از سیستم خارج شدید.''',
 '''You are not allowed to delete this page.''':
 '''شما مجاز به حذف این صفحه نمی باشید.''',
 '''Please use the interactive user interface to delete pages!''':
@@ -653,6 +764,48 @@ Try a different name.''':
 '''حذف''',
 '''Optional reason for the deletion''':
 '''توضیحات دلخواه برای این حذف''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''نسخه پشتیبان بازیابی شد: %(filename)s در پوشه مقصد: %(targetdir)s.
+فایلها: %(filecount)d, پوشه ها: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''بازیابی نسخه پشتیبان: %(filename)s در پوشه مقصد: %(targetdir)s موفق نبود.''',
+'''Wiki Backup / Restore''':
+'''پشتیبان گیری / بازیافت ویکی''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''',
+'''Backup''':
+'''پشتیبان گیری''',
+'''Restore''':
+'''بازیافت''',
+'''You are not allowed to do remote backup.''':
+'''شما مجاز به پشتیبان گیری از راه دور نیستید.''',
+'''Unknown backup subaction: %s.''':
+'''عملیات ناشناخته %s در پشتیبان گیری.''',
 '''[%d attachments]''':
 '''[%d·attachments]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -798,6 +951,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''تغییرنام صفحه''',
 '''SpellCheck''':
 '''تصحیح املایی''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''پارامترهای غیرمجاز "%s" برای تقویم ماهانه !''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''آرگومانهای غیرمجاز "%s" تقویم ماهانه !''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''طرح \'%(scheme)s\' پشتیبانی نشده است!''',
 '''No parent page found!''':

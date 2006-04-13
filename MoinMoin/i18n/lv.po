@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 20:26+0300\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -696,7 +696,9 @@ msgid "The theme name is not set."
 msgstr "Tēmas nosaukums nav uzstādīts."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr "Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") serveriem."
+msgstr ""
+"Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
+"serveriem."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -716,8 +718,8 @@ msgstr "Nekorekta pakotnes faila galvene."
 msgid "Package file format unsupported."
 msgstr "Neatbalstīts pakotnes faila formāts."
 
-#, python-format
-msgid "Unknown function %s in line %i."
+#, fuzzy, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr "Nedefinēta funkcija %s rindā %i."
 
 #, python-format

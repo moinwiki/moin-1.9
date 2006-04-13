@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2006-04-10 11:46-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -703,15 +703,15 @@ msgstr ""
 msgid "The package needs a newer version of MoinMoin (at least %s)."
 msgstr "El paquete requiere una versión más reciente de MoinMoin (al menos %s)"
 
-#, fuzzy
+# 
 msgid "The theme name is not set."
-msgstr "No se ha especificado el nombre del tema"
+msgstr "No se ha especificado el nombre del tema."
 
-#, fuzzy
+# 
 msgid "Installing theme files is only supported for standalone type servers."
 msgstr ""
 "La instalación de archivos de temas sólo es soportada en servidores de tipo "
-"standalone"
+"independiente(standalone)."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -726,13 +726,13 @@ msgid "The page %s does not exist."
 msgstr "¡La página %s no existe!"
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "Encabezado de archivo de paquete inválido."
 
 msgid "Package file format unsupported."
 msgstr "Formato de archivo de paquete no soportado"
 
-#, python-format
-msgid "Unknown function %s in line %i."
+#, fuzzy, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr "Función %s desconocida en línea %i."
 
 #, python-format
@@ -1130,12 +1130,12 @@ msgid "Local Site Map for \"%s\""
 msgstr "Mapa local del sitio \"%s\""
 
 msgid "Please log in first."
-msgstr ""
+msgstr "Por favor ingresa primero al sistema."
 
 msgid "Please first create a homepage before creating additional pages."
 msgstr "Por favor crea una página personal antes de crear páginas adicionales."
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "You can add some additional sub pages to your already existing homepage "
 "here.\n"
@@ -1163,9 +1163,9 @@ msgid ""
 "\n"
 msgstr ""
 "Aquí puedes agregar algunas sub-páginas adicionales a tu página personal ya "
-"existente.\n"
+"creada.\n"
 "\n"
-"Puedes decidir cuán abiertas a otros lectores o editores serán dichas "
+"Puedes decidir cuán abiertas a otros lectores o editores estarán tus "
 "páginas,\n"
 "el acceso se controla mediante la pertenencia a grupos de la página de grupo "
 "correspondiente.\n"
@@ -1186,12 +1186,12 @@ msgstr ""
 "||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
 "(username)s/ReadGroup\"]||\n"
 "||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s unicamente||\n"
+"(username)s únicamente||\n"
 "\n"
 
-#, fuzzy
+# 
 msgid "MyPages management"
-msgstr "Administración de MyPages"
+msgstr "Administración de MisPáginas"
 
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "¡No tienes permisos para renombrar páginas en este wiki!"
@@ -1271,7 +1271,7 @@ msgid "Select Author"
 msgstr "Elegir autor"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "¡Deshacer todos los cambios!"
 
 msgid "You are not allowed to use this action."
 msgstr "No tienes permisos para usar esta acción."
@@ -1314,12 +1314,16 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"Copia de seguridad restaurada %(filename)s al directorio: %(targetdir)s.\n"
+"Archivos: %(filecount)d, Directorios: %(dircount)d"
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+"Ocurrió un fallo al tratar de restaurar la copia de seguridad: %(filename)s "
+"al directorio: %(targetdir)s ."
 
-#, fuzzy
+# 
 msgid "Wiki Backup / Restore"
 msgstr "Respaldo / Restaración de Wiki"
 
@@ -1340,6 +1344,23 @@ msgid ""
 "complete.\n"
 "\n"
 msgstr ""
+"Algunas recomendaciones:\n"
+" * Para restaurar una copia de seguridad:\n"
+"  * El restaurar una copia sobreescribirá los datos existentes, se "
+"cauteloso.\n"
+"  * Renómbralo a <idsitio>.tar.<compresión> (remueve la parte de  --date--"
+"time--UTC).\n"
+"  * Coloca el archivo de respaldo en el directorio backup_storage_dir (usa "
+"scp, ftp, ...).\n"
+"  * Oprime el botón [[GetText(Restore)]] ubicado abajo.\n"
+"\n"
+" * Para hacer una copia de seguridad emplea el botón [[GetText(Backup)]] y "
+"almacena el archivo\n"
+"   que obtengas en un sitio seguro.\n"
+"\n"
+"Por favor asegúrate que los valores de configuración de backup_* sean "
+"correctos y completos.\n"
+"\n"
 
 msgid "Backup"
 msgstr "Copia de respaldo"
@@ -1352,7 +1373,7 @@ msgstr "No tienes permisos para hacer respaldos remotos."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "Subacción de copia de seguridad desconocida: %s."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1623,11 +1644,11 @@ msgstr "RenombrarPágina"
 msgid "SpellCheck"
 msgstr "CorrecciónOrtográfica"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
 msgstr "Parámetros calendario MonthCalendar no válidos \"%s\"!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar arguments \"%s\"!"
 msgstr "Argumentos MonthCalendar no válidos \"%s\"!"
 

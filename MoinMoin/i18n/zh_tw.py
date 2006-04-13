@@ -286,7 +286,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Lupy search''':
 '''Lupy 搜尋''',
 '''Active threads''':
-'''執行緒數目''',
+'''緒程數目''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
 '''{{{"%s"}}} 找到太多資料，請輸入更精確的關鍵字！''',
 '''ERROR in regex \'%s\'''':
@@ -325,7 +325,7 @@ The following page has been changed by %(editor)s:
 
 你在 "%(sitename)s" 網站訂閱了 wiki 頁面或 wiki 類別的修訂通知服務。
 
-本信件通知你 %(editor)s 修訂了以下頁面：
+在此通知你以下頁面被 %(editor)s 編輯過了：
 %(pagelink)s
 
 ''',
@@ -350,7 +350,7 @@ The following page has been changed by %(editor)s:
 '''Trivial ''':
 '''些微''',
 '''Status of sending notification mails:''':
-'''發送修訂通知的情況如下：''',
+'''發送修訂通知的狀況如下：''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
@@ -384,7 +384,7 @@ delete the changes of the other person, which is excessively rude!\'\'
 那樣的話會蓋掉別人改過的內容。這樣是很不禮貌的！\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
-'''你的修改備份在[%(backup_url)s 這裡]。''',
+'''你的修改備份在 [%(backup_url)s 這裡]。''',
 '''You did not change the page content, not saved!''':
 '''本頁內容沒變，所以沒有存檔！''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
@@ -406,10 +406,24 @@ To leave the editor, press the Cancel button.''':
 '''%(owner)s 從 %(timestamp)s 開始編輯或預覽本頁。[[BR]]
 \'\'\'為了避免編輯衝突，請儘量不要在 %(mins_valid)d 分鐘內編輯本頁。\'\'\'[[BR]]
 按下「取消」鍵，便可離開編輯模式。''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''此包裹檔需要較新版的 MoinMoin (至少 %s)。''',
+'''The theme name is not set.''':
+'''佈景主題的名稱尚未設定。''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''只有獨立運作式 (standalone type) 的伺服器才能安裝佈景主題。''',
 '''Installation of \'%(filename)s\' failed.''':
 '''安裝 \'%(filename)s\' 失敗！''',
 '''The file %s is not a MoinMoin package file.''':
-'''檔案 %s 不是 MoinMoin 包裝檔！''',
+'''檔案 \'%s\' 不是 MoinMoin 的包裹檔！''',
+'''The page %s does not exist.''':
+'''頁面 \'%s\' 不存在！''',
+'''Invalid package file header.''':
+'''包裹檔的檔頭錯誤。''',
+'''Package file format unsupported.''':
+'''不支援此包裹檔的格式。''',
+'''The file %s was not found in the package.''':
+'''檔案 \'%s\' 不在此包裹檔內！''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -450,7 +464,7 @@ reStructuredText Quick Reference
 標題: 標題1  標題2  標題3
       =====  -----  ~~~~~
 
-分隔線: ---- 
+分隔線: ----
 連結: TrailingUnderscore_ `multi word with backticks`_ external_ 
 
 .. _external: http://external-site.net/foo/
@@ -458,7 +472,7 @@ reStructuredText Quick Reference
 條列: * 符號式; 1., a. 編號式.
 </pre>
 <br/>
-(!) 更深入的說明在 
+(!) 更完整的說明在 
 <a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
 reStructuredText 快速參考
 </a>.
@@ -590,7 +604,7 @@ reStructuredText 快速參考
 '''Page hits and edits''':
 '''人氣和編輯次數''',
 '''You are not allowed to revert this page!''':
-'''你不能把本頁恢復成舊版！''',
+'''你無權回復本頁！''',
 '''You must login to add a quicklink.''':
 '''登入之後才能設定頁面捷徑。''',
 '''Your quicklink to this page has been removed.''':
@@ -600,7 +614,7 @@ reStructuredText 快速參考
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''你不能訂閱無權瀏覽的頁面。''',
 '''This wiki is not enabled for mail processing.''':
-'''本 wiki 不支援郵寄處理。''',
+'''本 wiki 站不支援郵寄處理。''',
 '''You must log in to use subscribtions.''':
 '''登入之後才能訂閱''',
 '''Add your email address in your UserPreferences to use subscriptions.''':
@@ -628,7 +642,7 @@ reStructuredText 快速參考
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''附件 \'%(target)s\' 已經存在 (遠端名稱 \'%(filename)s\')''',
 '''Created the package %s containing the pages %s.''':
-'''包裹 %s 已打包，包含頁面 %s。''',
+'''包裹檔 %s 已打包，包含頁面 %s。''',
 '''Package pages''':
 '''打包頁面''',
 '''Package name''':
@@ -636,7 +650,7 @@ reStructuredText 快速參考
 '''List of page names - separated by <tt>,</tt>''':
 '''輸入頁面名稱 (以「<tt>,</tt>」分開)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''找不到使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
+'''不明的使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
 '''Missing password. Please enter user name and password.''':
 '''沒輸入密碼。請輸入名稱及密碼。''',
 '''Sorry, wrong password.''':
@@ -653,6 +667,38 @@ reStructuredText 快速參考
 '''請先登入。''',
 '''Please first create a homepage before creating additional pages.''':
 '''建立其他頁面之前，請先建立個人首頁。''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''請在此為你建好的個人首頁增加子頁面。
+
+你可以選擇子頁面的存取權限，也可以編輯這些存取權限的授權名單。
+
+請在適當的位置輸入子頁面的名稱，然後按右邊的按鈕來建立新的子頁面。
+
+在建立有存取權限的頁面之前，請先確認相對應的授權名單已經存在且包含合適的成員在內。
+新建授權名單時，請選用 HomepageGroupsTemplate 模板。
+
+||\'\'\'新增個人子頁面\'\'\'||\'\'\'授權名單頁面\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,可讀寫頁面,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,唯讀頁面,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,私人頁面,%(username)s)]]||%(username)s 自用||
+
+''',
 '''MyPages management''':
 '''管理我的頁面''',
 '''You are not allowed to rename pages in this wiki!''':
@@ -691,12 +737,20 @@ Try a different name.''':
 '''引用頁面 "%s" 的頁面列表''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''必須有頁面名稱才能建立頁面。''',
+'''Pages''':
+'''頁面''',
+'''Select Author''':
+'''選擇作者''',
+'''Revert all!''':
+'''全部回復''',
+'''You are not allowed to use this action.''':
+'''你無權使用本項操作。''',
 '''Subscribe users to the page %s''':
 '''新增頁面 "%s" 的訂閱戶''',
 '''Subscribed for %s:''':
 '''已為 %s 訂閱''',
 '''Not a user:''':
-'''不是合法帳號:''',
+'''不合法帳號:''',
 '''You are not allowed to perform this action.''':
 '''你無權執行本項操作。''',
 '''You are now logged out.''':
@@ -711,6 +765,14 @@ Try a different name.''':
 '''刪除''',
 '''Optional reason for the deletion''':
 '''刪除本頁的理由：''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''復原備份：%(filename)s 至目的目錄：%(targetdir)s。
+檔案數：%(filecount)d，目錄數：%(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''復原備份：%(filename)s 至目的目錄：%(targetdir)s 失敗！''',
+'''Wiki Backup / Restore''':
+'''Wiki 備份 / 復原''',
 '''Some hints:
  * To restore a backup:
   * Restoring a backup will overwrite existing data, so be careful.
@@ -725,11 +787,11 @@ Please make sure your wiki configuration backup_* values are correct and complet
 
 ''':
 '''提示：
- * 若要進行備份復原：
+ * 欲進行復原：
   * 執行備份復原會覆蓋現有的資料，請小心操作。
-  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
-  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
-  * Hit the [[GetText(Restore)]] button below.
+  * 請先將備份檔重新命名為 <siteid>.tar.<compression> (亦即刪除 --date--time--UTC 的部分)。
+  * 將備份檔放在 backup_storage_dir (可使用 scp、ftp、 ...)。
+  * 再按以下的「[[GetText(Restore)]]」按鈕
 
  * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案
    到安全的地方即可。
@@ -826,7 +888,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Attachment \'%(filename)s\'''':
 '''附件 \'%(filename)s\'''',
 '''Package script:''':
-'''包裝腳本：''',
+'''打包腳本：''',
 '''File Name''':
 '''檔名''',
 '''Modified''':
@@ -1050,7 +1112,7 @@ red=edit''':
 '''Package Pages''':
 '''打包頁面''',
 '''Render as Docbook''':
-'''DocBook 格式''',
+'''DocBook 形''',
 '''Do''':
 '''執行''',
 '''Edit (Text)''':

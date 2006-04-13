@@ -414,16 +414,20 @@ para evitar conflictos.\'\'\'[[BR]]
 Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
 '''The package needs a newer version of MoinMoin (at least %s).''':
 '''El paquete requiere una versión más reciente de MoinMoin (al menos %s)''',
+'''The theme name is not set.''':
+'''No se ha especificado el nombre del tema.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''La instalación de archivos de temas sólo es soportada en servidores de tipo independiente(standalone).''',
 '''Installation of \'%(filename)s\' failed.''':
 '''La instalación de \'%(filename)s\' falló.''',
 '''The file %s is not a MoinMoin package file.''':
 '''El archivo %s no es un paquete de MoinMoin''',
 '''The page %s does not exist.''':
 '''¡La página %s no existe!''',
+'''Invalid package file header.''':
+'''Encabezado de archivo de paquete inválido.''',
 '''Package file format unsupported.''':
 '''Formato de archivo de paquete no soportado''',
-'''Unknown function %s in line %i.''':
-'''Función %s desconocida en línea %i.''',
 '''The file %s was not found in the package.''':
 '''No se ha encontrado el archivo %s en el paquete.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -662,8 +666,46 @@ Referencia rápida de reStructuredText
 '''%(matchcount)d %(matches)s de "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Mapa local del sitio "%s"''',
+'''Please log in first.''':
+'''Por favor ingresa primero al sistema.''',
 '''Please first create a homepage before creating additional pages.''':
 '''Por favor crea una página personal antes de crear páginas adicionales.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Aquí puedes agregar algunas sub-páginas adicionales a tu página personal ya creada.
+
+Puedes decidir cuán abiertas a otros lectores o editores estarán tus páginas,
+el acceso se controla mediante la pertenencia a grupos de la página de grupo correspondiente.
+
+Simplemente ingresa el nombre de la sub-página y haz click en el botón para crear una nueva página.
+
+Antes de crear páginas con proteción de acceso, asegúrate que la página de grupo correspondiente
+existe y contiene los miembros apropiados. Usa HomepageGroupsTemplate para crear
+páginas de grupo.
+
+||\'\'\'Agregar una nueva página personal:\'\'\'||\'\'\'Grupo lista control acceso asociado:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s únicamente||
+
+''',
+'''MyPages management''':
+'''Administración de MisPáginas''',
 '''You are not allowed to rename pages in this wiki!''':
 '''¡No tienes permisos para renombrar páginas en este wiki!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -704,6 +746,8 @@ Intenta con un nombre distinto.''',
 '''Páginas''',
 '''Select Author''':
 '''Elegir autor''',
+'''Revert all!''':
+'''¡Deshacer todos los cambios!''',
 '''You are not allowed to use this action.''':
 '''No tienes permisos para usar esta acción.''',
 '''Subscribe users to the page %s''':
@@ -726,12 +770,48 @@ Intenta con un nombre distinto.''',
 '''Eliminar''',
 '''Optional reason for the deletion''':
 '''Razón para la eliminación (opcional)''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Copia de seguridad restaurada %(filename)s al directorio: %(targetdir)s.
+Archivos: %(filecount)d, Directorios: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Ocurrió un fallo al tratar de restaurar la copia de seguridad: %(filename)s al directorio: %(targetdir)s .''',
+'''Wiki Backup / Restore''':
+'''Respaldo / Restaración de Wiki''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Algunas recomendaciones:
+ * Para restaurar una copia de seguridad:
+  * El restaurar una copia sobreescribirá los datos existentes, se cauteloso.
+  * Renómbralo a <idsitio>.tar.<compresión> (remueve la parte de  --date--time--UTC).
+  * Coloca el archivo de respaldo en el directorio backup_storage_dir (usa scp, ftp, ...).
+  * Oprime el botón [[GetText(Restore)]] ubicado abajo.
+
+ * Para hacer una copia de seguridad emplea el botón [[GetText(Backup)]] y almacena el archivo
+   que obtengas en un sitio seguro.
+
+Por favor asegúrate que los valores de configuración de backup_* sean correctos y completos.
+
+''',
 '''Backup''':
 '''Copia de respaldo''',
 '''Restore''':
 '''Restaurar''',
 '''You are not allowed to do remote backup.''':
 '''No tienes permisos para hacer respaldos remotos.''',
+'''Unknown backup subaction: %s.''':
+'''Subacción de copia de seguridad desconocida: %s.''',
 '''[%d attachments]''':
 '''[%d adjuntos]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -879,6 +959,10 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''RenombrarPágina''',
 '''SpellCheck''':
 '''CorrecciónOrtográfica''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Parámetros calendario MonthCalendar no válidos "%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Argumentos MonthCalendar no válidos "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''¡Esquema de navegación \'%(scheme)s\' no soportado!''',
 '''No parent page found!''':

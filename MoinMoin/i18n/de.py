@@ -426,8 +426,8 @@ Benutzen Sie "Abbrechen" zum Verlassen des Editors.''',
 '''Ungültiger Paket-Datei-Header.''',
 '''Package file format unsupported.''':
 '''Paket-Datei-Format nicht unterstützt.''',
-'''Unknown function %s in line %i.''':
-'''Unbekannte Funktion %s in Zeile %i.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Unbekannte Funktion %(func)s in Zeile %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''Die Datei %s wurde im Paket nicht gefunden.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.

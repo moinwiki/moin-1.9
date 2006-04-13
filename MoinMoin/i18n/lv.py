@@ -425,8 +425,6 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Nekorekta pakotnes faila galvene.''',
 '''Package file format unsupported.''':
 '''Neatbalstīts pakotnes faila formāts.''',
-'''Unknown function %s in line %i.''':
-'''Nedefinēta funkcija %s rindā %i.''',
 '''The file %s was not found in the package.''':
 '''Fails %s pakotnē netika atrasts.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
