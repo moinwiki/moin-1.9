@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -713,7 +713,7 @@ msgid "Package file format unsupported."
 msgstr ""
 
 #, python-format
-msgid "Unknown function %s in line %i."
+msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr ""
 
 #, fuzzy, python-format

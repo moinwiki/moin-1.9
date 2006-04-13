@@ -428,8 +428,6 @@ To leave the editor, press the Cancel button.''':
 '''パッケージファイルのへッダが不正です。''',
 '''Package file format unsupported.''':
 '''パッケージファイルフォーマットはサポートされていません。''',
-'''Unknown function %s in line %i.''':
-'''不明な関数%sがあります (%i行目)。''',
 '''The file %s was not found in the package.''':
 '''ファイル %s はパッケージ内に存在しません。''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.

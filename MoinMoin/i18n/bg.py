@@ -34,7 +34,7 @@ macro call.-~
 '''You are not allowed to edit this page.''':
 '''Не можете да редактирате тази страница.''',
 '''Page is immutable!''':
-'''Неизменима страница!''',
+'''Страницата е неизменима!''',
 '''Cannot edit old revisions!''':
 '''Стари версии не могат да се редактират!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
@@ -189,6 +189,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Предпочитана тема''',
 '''Editor Preference''':
 '''Предпочитания за редактор''',
+'''Editor shown on UI''':
+'''Редактор, показан на интерфейса''',
 '''Time zone''':
 '''Часова зона''',
 '''Your time is''':
@@ -225,6 +227,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Липсва задължителен атрибут "%(attrname)s"''',
 '''Submitted form data:''':
 '''Данни в изпратената форма:''',
+'''Search Titles''':
+'''Търсене в заглавията''',
 '''Display context of search results''':
 '''Показвай контекста на резултатите от търсенето''',
 '''Case-sensitive searching''':
@@ -281,6 +285,8 @@ Contact the owner of the wiki, who can enable email.''':
 '''Изключен''',
 '''Enabled''':
 '''Включен''',
+'''Lupy search''':
+'''Търсене чрез Lupy''',
 '''Active threads''':
 '''Активни нишки''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
@@ -421,8 +427,6 @@ To leave the editor, press the Cancel button.''':
 '''Невалидно файлово заглавие на пакета.''',
 '''Package file format unsupported.''':
 '''Форматът на файла не се поддържа.''',
-'''Unknown function %s in line %i.''':
-'''Неизвестна функция %s на ред %i.''',
 '''The file %s was not found in the package.''':
 '''Файлът %s не беше открит в пакета.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -505,6 +509,8 @@ reStructuredText Quick Reference
 '''Отваряне на последната посетена страница вместо началната''',
 '''Show question mark for non-existing pagelinks''':
 '''Показване на въпросителни знаци за връзки към несъществуващи страници''',
+'''Show page trail''':
+'''Показване на последните посетени страници''',
 '''Show icon toolbar''':
 '''Показване на лента с икони''',
 '''Show top/bottom links in headings''':
@@ -708,7 +714,7 @@ the group pages.
 '''Could not rename page because of file system error: %s.''':
 '''Не може да се преименува страницата поради грешка на файловата система: %s.''',
 '''Rename Page''':
-'''Переименувай''',
+'''Преименувай''',
 '''New name''':
 '''Ново име''',
 '''Optional reason for the renaming''':
@@ -730,9 +736,9 @@ Try a different name.''':
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Не можете да проверявате правописа на страници, които не можете да четете!''',
 '''Title Search: "%s"''':
-'''Търсене по заголавие: "%s"''',
+'''Търсене в заглавие: "%s"''',
 '''Full Text Search: "%s"''':
-'''Търесен по текст: "%s"''',
+'''Търсене на текст: "%s"''',
 '''Full Link List for "%s"''':
 '''Пълен списък от връзки за "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
@@ -955,6 +961,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ПреименувайСтраница''',
 '''SpellCheck''':
 '''ПроверкаПравопис''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Неправилни параметри на MonthCalendar "%s"!''',
 '''Invalid MonthCalendar arguments "%s"!''':
 '''Неправилни аргументи на MonthCalendar "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
@@ -981,6 +989,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''преди %(mins)dm''',
 '''(no bookmark set)''':
 '''(не е поставена отметка)''',
+'''(currently set to %s)''':
+'''(в момента е поставена за %s)''',
 '''Delete Bookmark''':
 '''Изтриване на отметка''',
 '''Set bookmark''':

@@ -80,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 Če vam to ne ustreza, lahko s preklicem \'\'\'%(cancel_button_text)s\'\'\' umaknete/uničite svoje spremembe.''',
 '''Preview''':
 '''Predogled''',
+'''Text mode''':
+'''Urejanje izvornega besedila''',
 '''Comment:''':
 '''Opomba:''',
 '''<No addition>''':
@@ -223,6 +225,10 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Geslo''',
 '''Action''':
 '''Akcija''',
+'''Required attribute "%(attrname)s" missing''':
+'''Manjka potrebni atribut "%(attrname)s"''',
+'''Submitted form data:''':
+'''Prejeti podatki iz obrazca:''',
 '''Search Titles''':
 '''Iskanje po naslovih''',
 '''Display context of search results''':
@@ -403,10 +409,24 @@ To leave the editor, press the Cancel button.''':
 '''Ob %(timestamp)s je to stran vzel v delo %(owner)s (začetek spreminjanja ali zadnji predogled).[[BR]]
 \'\'\'Nadaljnjih %(mins_valid)d minut prosimo, da \'\'ne spreminjate\'\' te strani, da se izognete konfliktnim popravkom.\'\'\'[[BR]]
 Z ukazom "Preklic" lahko zapustite urejevalnik.''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''Paket potrebuje novejšo inačico MoinMoin (vsaj %s).''',
+'''The theme name is not set.''':
+'''Ime teme (izgleda) ni nastavljeno.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''Namestitev datotek teme je podprto le za samostoječi tip strežnikov.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Namestitev datoteke \'%(filename)s\' ni uspela.''',
 '''The file %s is not a MoinMoin package file.''':
 '''Datoteka %s ne vsebuje MoinMoin paketa.''',
+'''The page %s does not exist.''':
+'''Stran %s ne obstaja.''',
+'''Invalid package file header.''':
+'''Neveljavna glava paketne datoteke.''',
+'''Package file format unsupported.''':
+'''Format paketa ni podprt.''',
+'''The file %s was not found in the package.''':
+'''Datoteke %s ni v paketu.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -416,12 +436,48 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 (!) For more help, see HelpOnEditing or SyntaxReference.
 ''':
 ''' Poudarki:: [[Verbatim(\'\')]]\'\'kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'polkrepko in kurziva\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mešano \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'polkrepko\'\'\'[[Verbatim(\'\'\')]] in kurziva\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontalna črta.
- Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
+ Naslovi:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim(=====)]].
  Seznami:: presledek in en znak izmed: * pike; 1., a., A., i., I. oštevilčene alineje; 1.#n začni številčenje z n; en presledek zamakne besedilo.
  Povezave:: [[Verbatim(SkupajPisaneKapitaliziraneBesede)]]; [[Verbatim(["v oglatih oklepajih in narekovajih"])]]; URL; [URL]; [URL sklic].
  Tabele:: || besedilo celice |||| besedilo celice prek dveh stolpcev ||;    na koncu vrstic z naslovi ali elementi tabele presledki niso dovoljeni.
 
 (!) Več o tem: HelpOnEditing, SyntaxReference.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Poudarek: <i>*kurziva*</i> <b>**krepko**</b> ``znaki enake širine``<br/>
+<br/><pre>
+Naslovi: Naslov 1  Naslov 2  Naslov 3
+         ========  --------  ~~~~~~~~
+
+Vodoravna črta: ---- 
+Povezave: PodčrtajNaKoncu_ `več besed med krativci`_ zunanja_ 
+
+.. _zunanja: http://zunanji-streznik.example.net/bla/
+
+Seznami: * pike;  1., a. oštevilčene alineje.
+</pre>
+<br/>
+(!) Dodatna navodila na: 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
 ''',
 '''Diffs''':
 '''Razlike''',
@@ -583,8 +639,24 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Ta stran je že izbrisana ali pa ni nikoli obstajala!''',
 '''No pages like "%s"!''':
 '''Nobena stran ni podobna "%s"!''',
+'''Invalid filename "%s"!''':
+'''Neveljavno ime datoteke "%s"!''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''Priponka \'%(target)s\' (ime \'%(filename)s\') že obstaja na strežniku.''',
+'''Created the package %s containing the pages %s.''':
+'''Tvorjen je paket %s, ki vsebuje strani %s.''',
+'''Package pages''':
+'''Zapakiraj strani v ZIP''',
+'''Package name''':
+'''Ime ZIP paketa''',
+'''List of page names - separated by <tt>,</tt>''':
+'''Seznam imen strani, ločen s <tt>,</tt>''',
+'''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
+'''Neznano uporabniško ime: {{{"%s"}}}. Prosimo vnesite uporabniško ime in geslo.''',
+'''Missing password. Please enter user name and password.''':
+'''Manjka geslo. Prosimo vnesite uporabniško ime in geslo.''',
+'''Sorry, wrong password.''':
+'''Žal je geslo napačno.''',
 '''Exactly one page like "%s" found, redirecting to page.''':
 '''Natanko ena stran je podobna "%s", preusmerjanje tja ...''',
 '''Pages like "%s"''':
@@ -593,6 +665,47 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''%(matchcount)d %(matches)s za "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Struktura spletne predstavitve na "%s"''',
+'''Please log in first.''':
+'''Prosimo, da se najprej prijavite.''',
+'''Please first create a homepage before creating additional pages.''':
+'''Prosimo, da naredite domačo stran preden dodajate druge strani.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Tu lahko dodate podstrani k obstoječi domači strani.
+
+Izberete lahko, do kolikšne mere naj bodo te strani odprte do ostalih
+bralcev in do spreminjanja, pravica dostopa je določena z uvrstitvijo
+strani v primerno skupinsko stran (group page).
+
+Vnesite ime podstrani in z gumbom lahko zahtevate njeno tvorjenje.
+
+Pred izdelavo strani zaščitene pred dostopom preverite, da ustrezna
+stran skupine zares obstaja in da vsebuje primerne člane.
+Uporabite predlogo HomepageGroupsTemplate za tvorjenje novih skupin.
+
+||\'\'\'Dodaj novo osebno stran:\'\'\'||\'\'\'Skupina s seznamom za nadzor dostopa:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''',
+'''MyPages management''':
+'''Upravljanje z MyPages''',
 '''You are not allowed to rename pages in this wiki!''':
 '''Na tem vikiju ni dovoljeno preimenovanje strani!''',
 '''Please use the interactive user interface to rename pages!''':
@@ -628,6 +741,14 @@ Uporabite drugačno ime.''',
 '''Celotni seznam povezav za "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nove strani s praznim imenom ni mogoče narediti, navedite ime.''',
+'''Pages''':
+'''Strani''',
+'''Select Author''':
+'''Izberi avtorja''',
+'''Revert all!''':
+'''Vrni vse v prejšnje stanje!''',
+'''You are not allowed to use this action.''':
+'''Te akcije vam ni dovoljeno izvesti.''',
 '''Subscribe users to the page %s''':
 '''Naroči uporabnike na obvestila s strani %s''',
 '''Subscribed for %s:''':
@@ -636,6 +757,8 @@ Uporabite drugačno ime.''',
 '''Ni uporabnik''',
 '''You are not allowed to perform this action.''':
 '''Te akcije vam ni dovoljeno izvesti.''',
+'''You are now logged out.''':
+'''Odjavljeni ste.''',
 '''You are not allowed to delete this page.''':
 '''Te strani vam ni dovoljeno izbrisati.''',
 '''Please use the interactive user interface to delete pages!''':
@@ -646,6 +769,47 @@ Uporabite drugačno ime.''',
 '''Brisanje''',
 '''Optional reason for the deletion''':
 '''Razlog za brisanje (neobvezno)''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Vrnjeno iz varnostne kopije %(filename)s v datotečni imenik: %(targetdir)s.
+Datotek: %(filecount)d, Imenikov: %(dircount)d''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Vrnitev vsebine iz varnostne kopije %(filename)s v imenik datotek %(targetdir)s ni uspela.''',
+'''Wiki Backup / Restore''':
+'''Varnostna kopija vikija: shranitev / vrnitev''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Nekaj nasvetov:
+ * Za vrnitev stanja iz varnostne kopije (arhiva):
+  * Restavriranje iz varnostne kopije prekrije obstoječe podatke, zato bodite pazljivi.
+  * Preimenujte jo v <imestrežnika>.tar.<kompresija> (odstranite --date--time--UTC navlako).
+  * Prestavite datoteko z arhivom v backup_storage_dir (uporabite scp, ftp, ...).
+  * Restavriranje zaženete z gumbom [[GetText(Restore)]] spodaj.
+
+ * Za pripravo varnostne kopije izberite gumb [[GetText(Backup)]] in shranite dobljeno arhivsko datoteko na varno mesto.
+
+Prosimo prepričajte se, da so nastavitve backup_* v viki konfiguraciji pravilne in popolne.
+
+''',
+'''Backup''':
+'''Shranitev v varnostno kopijo''',
+'''Restore''':
+'''Vrnitev iz varnostne kopije''',
+'''You are not allowed to do remote backup.''':
+'''Izdelava varnostne kopije ni dovoljena z oddaljene lokacije.''',
+'''Unknown backup subaction: %s.''':
+'''Neznana podakcija pri upravljanju z varnostno kopijo: %s''',
 '''[%d attachments]''':
 '''[%d priponk]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -795,6 +959,10 @@ ki jo želite naložiti na strežnik.
 '''PreimenujStran''',
 '''SpellCheck''':
 '''PreveriČrkovanje''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''Neveljavni parameter calparms pri MonthCalendar"%s"!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''Neveljavni argumenti pri MonthCalendar "%s"!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''Nepoznana ali nepodprta navigacijska shema \'%(scheme)s\'!''',
 '''No parent page found!''':

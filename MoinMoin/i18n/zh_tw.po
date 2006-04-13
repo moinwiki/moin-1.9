@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
-"PO-Revision-Date: 2006-04-10 10:30+0800\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"PO-Revision-Date: 2006-04-13 13:13+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -468,7 +468,7 @@ msgid "Lupy search"
 msgstr "Lupy 搜尋"
 
 msgid "Active threads"
-msgstr "執行緒數目"
+msgstr "緒程數目"
 
 #, python-format
 msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
@@ -530,7 +530,7 @@ msgstr ""
 "\n"
 "你在 \"%(sitename)s\" 網站訂閱了 wiki 頁面或 wiki 類別的修訂通知服務。\n"
 "\n"
-"本信件通知你 %(editor)s 修訂了以下頁面：\n"
+"在此通知你以下頁面被 %(editor)s 編輯過了：\n"
 "%(pagelink)s\n"
 "\n"
 
@@ -558,7 +558,7 @@ msgid "Trivial "
 msgstr "些微"
 
 msgid "Status of sending notification mails:"
-msgstr "發送修訂通知的情況如下："
+msgstr "發送修訂通知的狀況如下："
 
 #, python-format
 msgid "[%(lang)s] %(recipients)s: %(status)s"
@@ -605,7 +605,7 @@ msgstr ""
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
-msgstr "你的修改備份在[%(backup_url)s 這裡]。"
+msgstr "你的修改備份在 [%(backup_url)s 這裡]。"
 
 msgid "You did not change the page content, not saved!"
 msgstr "本頁內容沒變，所以沒有存檔！"
@@ -659,13 +659,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "此包裹檔需要較新版的 MoinMoin (至少 %s)。"
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "佈景主題的名稱尚未設定。"
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "只有獨立運作式 (standalone type) 的伺服器才能安裝佈景主題。"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -673,25 +673,25 @@ msgstr "安裝 '%(filename)s' 失敗！"
 
 #, python-format
 msgid "The file %s is not a MoinMoin package file."
-msgstr "檔案 %s 不是 MoinMoin 包裝檔！"
+msgstr "檔案 '%s' 不是 MoinMoin 的包裹檔！"
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "附件 '%(filename)s' 不存在！"
+msgstr "頁面 '%s' 不存在！"
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "包裹檔的檔頭錯誤。"
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "不支援此包裹檔的格式。"
 
 #, fuzzy, python-format
-msgid "Unknown function %s in line %i."
-msgstr "不明的備份子操作：%s。"
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "不明的操作：%s，行號：%i。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "檔案 %s 不是 MoinMoin 包裝檔！"
+msgstr "檔案 '%s' 不在此包裹檔內！"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -753,7 +753,7 @@ msgstr ""
 "標題: 標題1  標題2  標題3\n"
 "      =====  -----  ~~~~~\n"
 "\n"
-"分隔線: ---- \n"
+"分隔線: ----\n"
 "連結: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
 "\n"
 ".. _external: http://external-site.net/foo/\n"
@@ -761,7 +761,7 @@ msgstr ""
 "條列: * 符號式; 1., a. 編號式.\n"
 "</pre>\n"
 "<br/>\n"
-"(!) 更深入的說明在 \n"
+"(!) 更完整的說明在 \n"
 "<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
 "reStructuredText 快速參考\n"
 "</a>.\n"
@@ -965,7 +965,7 @@ msgid "Page hits and edits"
 msgstr "人氣和編輯次數"
 
 msgid "You are not allowed to revert this page!"
-msgstr "你不能把本頁恢復成舊版！"
+msgstr "你無權回復本頁！"
 
 msgid "You must login to add a quicklink."
 msgstr "登入之後才能設定頁面捷徑。"
@@ -980,7 +980,7 @@ msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "你不能訂閱無權瀏覽的頁面。"
 
 msgid "This wiki is not enabled for mail processing."
-msgstr "本 wiki 不支援郵寄處理。"
+msgstr "本 wiki 站不支援郵寄處理。"
 
 msgid "You must log in to use subscribtions."
 msgstr "登入之後才能訂閱"
@@ -1027,7 +1027,7 @@ msgstr "附件 '%(target)s' 已經存在 (遠端名稱 '%(filename)s')"
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
-msgstr "包裹 %s 已打包，包含頁面 %s。"
+msgstr "包裹檔 %s 已打包，包含頁面 %s。"
 
 msgid "Package pages"
 msgstr "打包頁面"
@@ -1040,7 +1040,7 @@ msgstr "輸入頁面名稱 (以「<tt>,</tt>」分開)"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "找不到使用者：{{{\"%s\"}}}。請輸入名稱及密碼。"
+msgstr "不明的使用者：{{{\"%s\"}}}。請輸入名稱及密碼。"
 
 msgid "Missing password. Please enter user name and password."
 msgstr "沒輸入密碼。請輸入名稱及密碼。"
@@ -1097,6 +1097,24 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
+"請在此為你建好的個人首頁增加子頁面。\n"
+"\n"
+"你可以選擇子頁面的存取權限，也可以編輯這些存取權限的授權名單。\n"
+"\n"
+"請在適當的位置輸入子頁面的名稱，然後按右邊的按鈕來建立新的子頁面。\n"
+"\n"
+"在建立有存取權限的頁面之前，請先確認相對應的授權名單已經存在且包含合適的成員"
+"在內。\n"
+"新建授權名單時，請選用 HomepageGroupsTemplate 模板。\n"
+"\n"
+"||'''新增個人子頁面'''||'''授權名單頁面'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,可讀寫頁面,%(username)s)]]||[\"%"
+"(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,唯讀頁面,%(username)s)]]||[\"%(username)"
+"s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,私人頁面,%(username)s)]]||%(username)"
+"s 自用||\n"
+"\n"
 
 msgid "MyPages management"
 msgstr "管理我的頁面"
@@ -1167,20 +1185,17 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "必須有頁面名稱才能建立頁面。"
 
-#, fuzzy
 msgid "Pages"
 msgstr "頁面"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "選擇使用者"
+msgstr "選擇作者"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "全部回復"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
-msgstr "你無權執行本項操作。"
+msgstr "你無權使用本項操作。"
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -1191,7 +1206,7 @@ msgid "Subscribed for %s:"
 msgstr "已為 %s 訂閱"
 
 msgid "Not a user:"
-msgstr "不是合法帳號:"
+msgstr "不合法帳號:"
 
 msgid "You are not allowed to perform this action."
 msgstr "你無權執行本項操作。"
@@ -1219,13 +1234,15 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"復原備份：%(filename)s 至目的目錄：%(targetdir)s。\n"
+"檔案數：%(filecount)d，目錄數：%(dircount)d"
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-msgstr ""
+msgstr "復原備份：%(filename)s 至目的目錄：%(targetdir)s 失敗！"
 
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "Wiki 備份 / 復原"
 
 msgid ""
 "Some hints:\n"
@@ -1245,12 +1262,12 @@ msgid ""
 "\n"
 msgstr ""
 "提示：\n"
-" * 若要進行備份復原：\n"
+" * 欲進行復原：\n"
 "  * 執行備份復原會覆蓋現有的資料，請小心操作。\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
+"  * 請先將備份檔重新命名為 <siteid>.tar.<compression> (亦即刪除 --date--"
+"time--UTC 的部分)。\n"
+"  * 將備份檔放在 backup_storage_dir (可使用 scp、ftp、 ...)。\n"
+"  * 再按以下的「[[GetText(Restore)]]」按鈕\n"
 "\n"
 " * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案\n"
 "   到安全的地方即可。\n"
@@ -1422,7 +1439,7 @@ msgid "Attachment '%(filename)s'"
 msgstr "附件 '%(filename)s'"
 
 msgid "Package script:"
-msgstr "包裝腳本："
+msgstr "打包腳本："
 
 msgid "File Name"
 msgstr "檔名"
@@ -1784,7 +1801,7 @@ msgid "Package Pages"
 msgstr "打包頁面"
 
 msgid "Render as Docbook"
-msgstr "DocBook 格式"
+msgstr "DocBook 形"
 
 msgid "Do"
 msgstr "執行"
@@ -1870,7 +1887,7 @@ msgstr "郵件已送出"
 #~ msgstr "錯誤的重新登入 URL。"
 
 #~ msgid "Unknown user."
-#~ msgstr "使用者名稱錯誤。"
+#~ msgstr "不明的使用者名稱。"
 
 #~ msgid "Remember last page visited"
 #~ msgstr "記住上次看的最後一頁"

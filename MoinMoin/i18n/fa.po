@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -151,9 +151,8 @@ msgstr ""
 msgid "Preview"
 msgstr "پیش نمایش"
 
-#, fuzzy
 msgid "Text mode"
-msgstr "متن"
+msgstr "ویرایش متنی"
 
 msgid "Comment:"
 msgstr "نظرات:"
@@ -169,7 +168,7 @@ msgid "Trivial change"
 msgstr "تغییرات جزئی"
 
 msgid "Remove trailing whitespace from each line"
-msgstr "جاهای خالی را از هر خط حذف کن"
+msgstr "جاهای خالی را از هر خط حذف نما"
 
 #, python-format
 msgid ""
@@ -688,13 +687,14 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "این بسته نیاز به MoinMoin نسخه جدیدتری دارد (نسخه %s یا بالاتر)."
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "قالب گرافیکی تنظیم نشده است."
 
 msgid "Installing theme files is only supported for standalone type servers."
 msgstr ""
+"نصب فایلهای قالب گرافیکی تنها در سرویس دهنده های standalone پشتیبانی میشود."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -704,23 +704,23 @@ msgstr "نصب فایل '%(filename)s' با ایراد مواجه شد."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "فایل %s از فایلهای  بسته MoinMoin نیست."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "ضمیمه '%(filename)s' وجود ندارد!"
+msgstr "صفحه %s وجود ندارد."
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "بسته غیرمجاز."
 
 msgid "Package file format unsupported."
-msgstr ""
-
-#, python-format
-msgid "Unknown function %s in line %i."
-msgstr ""
+msgstr "نوع فایل این بسته پشتیبانی نمیشود."
 
 #, fuzzy, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "تابع غیر مجاز %s در خط %i."
+
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "فایل %s از فایلهای  بسته MoinMoin نیست."
+msgstr "فایل %s در بسته یافت نشد."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -779,6 +779,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"پررنگ: <i>*مورب سازی*</i> <b>**پررنگ**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"سرنویسها: سرنویس ۱  سرنویس ۲  سرنویس ۳\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"خط افقی: ---- \n"
+"لینکها: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"لیستها: * bullets; 1., a. numbered items.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) برای راهنمایی بیشتر این صفحه را ببینید \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "تغییرات"
@@ -1033,9 +1050,9 @@ msgstr "این صفحه یا اخیرا حذف شده و یا هرگز وجود 
 msgid "No pages like \"%s\"!"
 msgstr "هیچ صفحه ای شبیه \"%s\" یافت نشد!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid filename \"%s\"!"
-msgstr "عبارت \"%s\" غیر مجاز است!"
+msgstr "نام فایل \"%s\" نامشخص است !"
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -1043,18 +1060,16 @@ msgstr "ضمیمه '%(target)s' (به نام '%(filename)s') در حال حاض�
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
-msgstr ""
+msgstr "بسته %s شامل صفحات %s ساخته شد."
 
-#, fuzzy
 msgid "Package pages"
-msgstr "تهیه بسته صفحات"
+msgstr "بسته صفحات"
 
-#, fuzzy
 msgid "Package name"
-msgstr "تهیه بسته صفحات"
+msgstr "نام بسته"
 
 msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
+msgstr "لیست نام صفحات - جدا شده با <tt>,</tt>"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1086,10 +1101,10 @@ msgid "Local Site Map for \"%s\""
 msgstr "نقشه سایت محلی برای \"%s\""
 
 msgid "Please log in first."
-msgstr ""
+msgstr "لطفا وارد سیستم شوید."
 
 msgid "Please first create a homepage before creating additional pages."
-msgstr ""
+msgstr "لطفا پیش از ساخت صفحات در این سایت٬ یک صفحه خانگی برای خود بسازید."
 
 #, python-format
 msgid ""
@@ -1118,9 +1133,32 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
+"شما میتوانید به صفحه خانگی خود تعدادی زیر صفحه نیز اضافه نمایید.\n"
+"\n"
+"شما به دلخواه خود میتوانید مجوز خواندن و نوشتن این صفحات توسط کاربران دیگر "
+"را تنظیم نمایید,\n"
+"این دسترسی ها توسط اعضای گروه نویسندگان این صفحه قابل تنظیم می باشند.\n"
+"\n"
+"فقط کافیست نام زیر صفحه مورد نظر خود را نوشته و روی ایجاد صفحه جدید کلیک "
+"نمایید.\n"
+" \n"
+"پیش از ایجاد این صفحات٬ صفحه اسامی گروه نویسندگان دارای حق دسترسی به این "
+"صفحه را نیز ایجاد نموده و اسامی کاربران دارای حق ویرایش را در ان صفحه ذکر "
+"نمایید\n"
+" جهت ساخت این صفحات گروهی میتوانید از الگوی HomepageGroupsTemplate استفاده "
+"نمایید.\n"
+"\n"
+"||'''صفحه شخصی جدید:'''||'''حق دسترسی های مربوطه:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
 
 msgid "MyPages management"
-msgstr ""
+msgstr "مدیریت صفحات من"
 
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "شما مجاز به تغییر نام صفحات این ویکی نمی باشید!"
@@ -1190,18 +1228,15 @@ msgid ""
 msgstr ""
 "سیستم نمی تواند صفحه جدید بدون نام ایجاد کند.  لطفا یک نام صفحه مشخص نمایید."
 
-#, fuzzy
 msgid "Pages"
-msgstr "صفحه"
+msgstr "صفحات"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "انتخاب کاربر"
+msgstr "انتخاب نویسنده"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "کلیه ویرایش ها بازگردانی شود!"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
 msgstr "عملیات غیر مجاز"
 
@@ -1219,9 +1254,8 @@ msgstr "کاربر ثبت نشده:"
 msgid "You are not allowed to perform this action."
 msgstr "عملیات غیر مجاز"
 
-#, fuzzy
 msgid "You are now logged out."
-msgstr "کوکی ها پاک شدند و شما اکنون از سیستم خارج شده اید."
+msgstr "شما از سیستم خارج شدید."
 
 msgid "You are not allowed to delete this page."
 msgstr "شما مجاز به حذف این صفحه نمی باشید."
@@ -1243,13 +1277,16 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"نسخه پشتیبان بازیابی شد: %(filename)s در پوشه مقصد: %(targetdir)s.\n"
+"فایلها: %(filecount)d, پوشه ها: %(dircount)d"
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+"بازیابی نسخه پشتیبان: %(filename)s در پوشه مقصد: %(targetdir)s موفق نبود."
 
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "پشتیبان گیری / بازیافت ویکی"
 
 msgid ""
 "Some hints:\n"
@@ -1268,21 +1305,34 @@ msgid ""
 "complete.\n"
 "\n"
 msgstr ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
 
-#, fuzzy
 msgid "Backup"
-msgstr "نوع علامت"
+msgstr "پشتیبان گیری"
 
 msgid "Restore"
-msgstr ""
+msgstr "بازیافت"
 
-#, fuzzy
 msgid "You are not allowed to do remote backup."
-msgstr "شما مجاز به %s روی این صفحه نمی باشید."
+msgstr "شما مجاز به پشتیبان گیری از راه دور نیستید."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "عملیات ناشناخته %s در پشتیبان گیری."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1545,13 +1595,13 @@ msgstr "تغییرنام صفحه"
 msgid "SpellCheck"
 msgstr "تصحیح املایی"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
-msgstr "عبارت \"%s\" غیر مجاز است!"
+msgstr "پارامترهای غیرمجاز \"%s\" برای تقویم ماهانه !"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar arguments \"%s\"!"
-msgstr "عبارت \"%s\" غیر مجاز است!"
+msgstr "آرگومانهای غیرمجاز \"%s\" تقویم ماهانه !"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"

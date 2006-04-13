@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -149,9 +149,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Predogled"
 
-#, fuzzy
 msgid "Text mode"
-msgstr "po besedilu"
+msgstr "Urejanje izvornega besedila"
 
 msgid "Comment:"
 msgstr "Opomba:"
@@ -384,11 +383,10 @@ msgstr "Akcija"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
+msgstr "Manjka potrebni atribut \"%(attrname)s\""
 
-#, fuzzy
 msgid "Submitted form data:"
-msgstr "Naročen na %s:"
+msgstr "Prejeti podatki iz obrazca:"
 
 msgid "Search Titles"
 msgstr "Iskanje po naslovih"
@@ -686,13 +684,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "Paket potrebuje novejšo inačico MoinMoin (vsaj %s)."
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "Ime teme (izgleda) ni nastavljeno."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "Namestitev datotek teme je podprto le za samostoječi tip strežnikov."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -702,23 +700,23 @@ msgstr "Namestitev datoteke '%(filename)s' ni uspela."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Datoteka %s ne vsebuje MoinMoin paketa."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "Priponka '%(filename)s' ne obstaja!"
+msgstr "Stran %s ne obstaja."
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "Neveljavna glava paketne datoteke."
 
 msgid "Package file format unsupported."
-msgstr ""
-
-#, python-format
-msgid "Unknown function %s in line %i."
-msgstr ""
+msgstr "Format paketa ni podprt."
 
 #, fuzzy, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Neznana funkcija %s v vrstici %i."
+
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "Datoteka %s ne vsebuje MoinMoin paketa."
+msgstr "Datoteke %s ni v paketu."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -744,7 +742,7 @@ msgstr ""
 "in kurziva'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mešano ''[[Verbatim"
 "(''')]]'''''polkrepko'''[[Verbatim(''')]] in kurziva''[[Verbatim('')]]; "
 "[[Verbatim(----)]] horizontalna črta.\n"
-" Naslov:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-"
+" Naslovi:: [[Verbatim(=)]] Naslov-1 [[Verbatim(=)]]; [[Verbatim(==)]] Naslov-"
 "2 [[Verbatim(==)]]; [[Verbatim(===)]] N-3 [[Verbatim(===)]];   [[Verbatim"
 "(====)]] N-4 [[Verbatim(====)]]; [[Verbatim(=====)]] N-5 [[Verbatim"
 "(=====)]].\n"
@@ -777,6 +775,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"Poudarek: <i>*kurziva*</i> <b>**krepko**</b> ``znaki enake širine``<br/>\n"
+"<br/><pre>\n"
+"Naslovi: Naslov 1  Naslov 2  Naslov 3\n"
+"         ========  --------  ~~~~~~~~\n"
+"\n"
+"Vodoravna črta: ---- \n"
+"Povezave: PodčrtajNaKoncu_ `več besed med krativci`_ zunanja_ \n"
+"\n"
+".. _zunanja: http://zunanji-streznik.example.net/bla/\n"
+"\n"
+"Seznami: * pike;  1., a. oštevilčene alineje.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Dodatna navodila na: \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "Razlike"
@@ -1034,9 +1049,9 @@ msgstr "Ta stran je že izbrisana ali pa ni nikoli obstajala!"
 msgid "No pages like \"%s\"!"
 msgstr "Nobena stran ni podobna \"%s\"!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid filename \"%s\"!"
-msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
+msgstr "Neveljavno ime datoteke \"%s\"!"
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
@@ -1044,28 +1059,28 @@ msgstr "Priponka '%(target)s' (ime '%(filename)s') že obstaja na strežniku."
 
 #, python-format
 msgid "Created the package %s containing the pages %s."
-msgstr ""
+msgstr "Tvorjen je paket %s, ki vsebuje strani %s."
 
-#, fuzzy
 msgid "Package pages"
 msgstr "Zapakiraj strani v ZIP"
 
-#, fuzzy
 msgid "Package name"
-msgstr "Zapakiraj strani v ZIP"
+msgstr "Ime ZIP paketa"
 
 msgid "List of page names - separated by <tt>,</tt>"
-msgstr ""
+msgstr "Seznam imen strani, ločen s <tt>,</tt>"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
-msgstr "Uporabniško ime je prazno, prosimo vpišite ga."
+msgstr ""
+"Neznano uporabniško ime: {{{\"%s\"}}}. Prosimo vnesite uporabniško ime in "
+"geslo."
 
 msgid "Missing password. Please enter user name and password."
-msgstr ""
+msgstr "Manjka geslo. Prosimo vnesite uporabniško ime in geslo."
 
 msgid "Sorry, wrong password."
-msgstr ""
+msgstr "Žal je geslo napačno."
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
@@ -1084,10 +1099,10 @@ msgid "Local Site Map for \"%s\""
 msgstr "Struktura spletne predstavitve na \"%s\""
 
 msgid "Please log in first."
-msgstr ""
+msgstr "Prosimo, da se najprej prijavite."
 
 msgid "Please first create a homepage before creating additional pages."
-msgstr ""
+msgstr "Prosimo, da naredite domačo stran preden dodajate druge strani."
 
 #, python-format
 msgid ""
@@ -1116,9 +1131,30 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
+"Tu lahko dodate podstrani k obstoječi domači strani.\n"
+"\n"
+"Izberete lahko, do kolikšne mere naj bodo te strani odprte do ostalih\n"
+"bralcev in do spreminjanja, pravica dostopa je določena z uvrstitvijo\n"
+"strani v primerno skupinsko stran (group page).\n"
+"\n"
+"Vnesite ime podstrani in z gumbom lahko zahtevate njeno tvorjenje.\n"
+"\n"
+"Pred izdelavo strani zaščitene pred dostopom preverite, da ustrezna\n"
+"stran skupine zares obstaja in da vsebuje primerne člane.\n"
+"Uporabite predlogo HomepageGroupsTemplate za tvorjenje novih skupin.\n"
+"\n"
+"||'''Dodaj novo osebno stran:'''||'''Skupina s seznamom za nadzor "
+"dostopa:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
 
 msgid "MyPages management"
-msgstr ""
+msgstr "Upravljanje z MyPages"
 
 msgid "You are not allowed to rename pages in this wiki!"
 msgstr "Na tem vikiju ni dovoljeno preimenovanje strani!"
@@ -1186,18 +1222,15 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Nove strani s praznim imenom ni mogoče narediti, navedite ime."
 
-#, fuzzy
 msgid "Pages"
-msgstr "Stran"
+msgstr "Strani"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "Izberi uporabnika"
+msgstr "Izberi avtorja"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "Vrni vse v prejšnje stanje!"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
 msgstr "Te akcije vam ni dovoljeno izvesti."
 
@@ -1215,9 +1248,8 @@ msgstr "Ni uporabnik"
 msgid "You are not allowed to perform this action."
 msgstr "Te akcije vam ni dovoljeno izvesti."
 
-#, fuzzy
 msgid "You are now logged out."
-msgstr "Za namestitev datotek nimate pooblastil."
+msgstr "Odjavljeni ste."
 
 msgid "You are not allowed to delete this page."
 msgstr "Te strani vam ni dovoljeno izbrisati."
@@ -1239,13 +1271,17 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"Vrnjeno iz varnostne kopije %(filename)s v datotečni imenik: %(targetdir)s.\n"
+"Datotek: %(filecount)d, Imenikov: %(dircount)d"
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+"Vrnitev vsebine iz varnostne kopije %(filename)s v imenik datotek %"
+"(targetdir)s ni uspela."
 
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "Varnostna kopija vikija: shranitev / vrnitev"
 
 msgid ""
 "Some hints:\n"
@@ -1264,21 +1300,35 @@ msgid ""
 "complete.\n"
 "\n"
 msgstr ""
+"Nekaj nasvetov:\n"
+" * Za vrnitev stanja iz varnostne kopije (arhiva):\n"
+"  * Restavriranje iz varnostne kopije prekrije obstoječe podatke, zato "
+"bodite pazljivi.\n"
+"  * Preimenujte jo v <imestrežnika>.tar.<kompresija> (odstranite --date--"
+"time--UTC navlako).\n"
+"  * Prestavite datoteko z arhivom v backup_storage_dir (uporabite scp, "
+"ftp, ...).\n"
+"  * Restavriranje zaženete z gumbom [[GetText(Restore)]] spodaj.\n"
+"\n"
+" * Za pripravo varnostne kopije izberite gumb [[GetText(Backup)]] in "
+"shranite dobljeno arhivsko datoteko na varno mesto.\n"
+"\n"
+"Prosimo prepričajte se, da so nastavitve backup_* v viki konfiguraciji "
+"pravilne in popolne.\n"
+"\n"
 
-#, fuzzy
 msgid "Backup"
-msgstr "Označevanje"
+msgstr "Shranitev v varnostno kopijo"
 
 msgid "Restore"
-msgstr ""
+msgstr "Vrnitev iz varnostne kopije"
 
-#, fuzzy
 msgid "You are not allowed to do remote backup."
-msgstr "Na tej strani vam ni dovoljeno \"%s\"."
+msgstr "Izdelava varnostne kopije ni dovoljena z oddaljene lokacije."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "Neznana podakcija pri upravljanju z varnostno kopijo: %s"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1546,13 +1596,13 @@ msgstr "PreimenujStran"
 msgid "SpellCheck"
 msgstr "PreveriČrkovanje"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
-msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
+msgstr "Neveljavni parameter calparms pri MonthCalendar\"%s\"!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid MonthCalendar arguments \"%s\"!"
-msgstr "Neveljavni argumenti pri \"Include\": \"%s\"!"
+msgstr "Neveljavni argumenti pri MonthCalendar \"%s\"!"
 
 #, python-format
 msgid "Unsupported navigation scheme '%(scheme)s'!"

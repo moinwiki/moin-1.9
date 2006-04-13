@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2006-04-11 10:06+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -696,7 +696,8 @@ msgid "The theme name is not set."
 msgstr "テーマ名が設定されていません。"
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr "テーマファイルをインストールできるのは、standaloneタイプのサーバだけです。"
+msgstr ""
+"テーマファイルをインストールできるのは、standaloneタイプのサーバだけです。"
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -716,8 +717,8 @@ msgstr "パッケージファイルのへッダが不正です。"
 msgid "Package file format unsupported."
 msgstr "パッケージファイルフォーマットはサポートされていません。"
 
-#, python-format
-msgid "Unknown function %s in line %i."
+#, fuzzy, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr "不明な関数%sがあります (%i行目)。"
 
 #, python-format

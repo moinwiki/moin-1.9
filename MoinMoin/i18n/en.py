@@ -424,8 +424,8 @@ To leave the editor, press the Cancel button.''',
 '''Invalid package file header.''',
 '''Package file format unsupported.''':
 '''Package file format unsupported.''',
-'''Unknown function %s in line %i.''':
-'''Unknown function %s in line %i.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Unknown function %(func)s in line %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''The file %s was not found in the package.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 13:56+0200\n"
+"POT-Creation-Date: 2006-04-13 09:47+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -685,7 +685,7 @@ msgid "Package file format unsupported."
 msgstr ""
 
 #, python-format
-msgid "Unknown function %s in line %i."
+msgid "Unknown function %(func)s in line %(lineno)i."
 msgstr ""
 
 #, python-format
