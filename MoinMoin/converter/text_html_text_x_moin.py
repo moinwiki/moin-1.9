@@ -707,7 +707,7 @@ class convert_tree(visitor):
 
     def process_inline(self, node):
         if node.nodeType == Node.TEXT_NODE:
-            self.text.append(node.data.strip('\n'))
+            self.text.append(node.data.strip('\n').replace('\n',' '))
             return
 
         name = node.localName # can be None for DOM Comment nodes
@@ -754,7 +754,7 @@ class convert_tree(visitor):
             if i.nodeType == Node.ELEMENT_NODE:
                 self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
-                self.text.append(i.data.strip('\n'))
+                self.text.append(i.data.strip('\n').replace('\n',' '))
         if command_close:
             command = command_close
         self.text.append(command)
@@ -796,7 +796,7 @@ class convert_tree(visitor):
             if i.nodeType == Node.ELEMENT_NODE:
                 self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
-                self.text.append(i.data.strip('\n'))
+                self.text.append(i.data.strip('\n').replace('\n', ' '))
 
     def process_pre(self, node):
         self.process_preformatted_item(node)
@@ -1013,7 +1013,7 @@ class convert_tree(visitor):
                     self.process_inline(i)
                     found = True
                 elif i.nodeType == Node.TEXT_NODE:
-                    data = i.data.strip('\n')
+                    data = i.data.strip('\n').replace('\n',' ')
                     if data:
                         found = True
                         self.text.append(data)
