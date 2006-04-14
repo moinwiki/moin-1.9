@@ -652,7 +652,7 @@ reStructuredText Quick Reference
 '''Package name''':
 '''Ime ZIP paketa''',
 '''List of page names - separated by <tt>,</tt>''':
-'''Seznam imen strani, ločen s <tt>,</tt>''',
+'''Seznam imen strani, ločenih z vejicami''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Neznano uporabniško ime: {{{"%s"}}}. Prosimo vnesite uporabniško ime in geslo.''',
 '''Missing password. Please enter user name and password.''':
@@ -999,6 +999,8 @@ ki jo želite naložiti na strežnik.
 '''postavi knjižni zaznamek''',
 '''[Bookmark reached]''':
 '''[Prišli smo do knjižnega zaznamka]''',
+'''Contents''':
+'''Vsebina''',
 '''No wanted pages in this wiki.''':
 '''V tem vikiju ni pogrešanih strani (na katere so usmerjene povezave, a ne obstajajo).''',
 '''Invalid include arguments "%s"!''':

@@ -421,6 +421,8 @@ To leave the editor, press the Cancel button.''':
 '''بسته غیرمجاز.''',
 '''Package file format unsupported.''':
 '''نوع فایل این بسته پشتیبانی نمیشود.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''تابع غیر مجاز %(func)s در خط %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''فایل %s در بسته یافت نشد.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -989,6 +991,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''نشان·bookmark·بگذار''',
 '''[Bookmark reached]''':
 '''[به نشان bookmark رسید]''',
+'''Contents''':
+'''فهرست''',
 '''No wanted pages in this wiki.''':
 '''در این ویکی صفحه ای مورد نیاز نیست.''',
 '''Invalid include arguments "%s"!''':

@@ -40,6 +40,7 @@ epydoc: patchlevel
 # Should be used only on TW machine
 underlay:
 	rm -rf $(share)/underlay
+	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin15 --wiki-url=moinmaster.wikiwikiweb.de/ maint globaledit
 	MoinMoin/script/moin.py --config-dir=/srv/de.wikiwikiweb.moinmaster/bin15 --wiki-url=moinmaster.wikiwikiweb.de/ maint reducewiki --target-dir=$(share)/underlay
 	rm -rf $(share)/underlay/pages/InterWikiMap/
 	echo -ne "#acl All:read\r\nSee MoinMoin:EditingOnMoinMaster.\r\n" > \

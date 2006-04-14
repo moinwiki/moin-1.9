@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 13:50+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -1068,7 +1068,7 @@ msgid "Package name"
 msgstr "Ime ZIP paketa"
 
 msgid "List of page names - separated by <tt>,</tt>"
-msgstr "Seznam imen strani, ločen s <tt>,</tt>"
+msgstr "Seznam imen strani, ločenih z vejicami"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1661,6 +1661,9 @@ msgstr "postavi knjižni zaznamek"
 
 msgid "[Bookmark reached]"
 msgstr "[Prišli smo do knjižnega zaznamka]"
+
+msgid "Contents"
+msgstr "Vsebina"
 
 msgid "No wanted pages in this wiki."
 msgstr ""

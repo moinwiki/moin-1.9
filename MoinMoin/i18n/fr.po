@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-04-09 18:05+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -1711,6 +1711,10 @@ msgstr "placer un signet"
 
 msgid "[Bookmark reached]"
 msgstr "[Signet atteint]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "SommaireDeL'Aide"
 
 msgid "No wanted pages in this wiki."
 msgstr "Aucune page référencée ne reste à créer."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -1608,6 +1608,10 @@ msgstr "aseta kirjanmerkki"
 
 msgid "[Bookmark reached]"
 msgstr "[Kirjanmerkki saavutettu]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "OhjeSisällys"
 
 msgid "No wanted pages in this wiki."
 msgstr "Tässä wikissä ei ole toivottu sivuja."

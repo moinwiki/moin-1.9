@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -1651,6 +1651,10 @@ msgstr "imleyici ata"
 
 msgid "[Bookmark reached]"
 msgstr "[İmleyiciye ulaşıldı]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "YardimKonuları"
 
 msgid "No wanted pages in this wiki."
 msgstr "Wiki üzerinde aranan bir sayfa yer almamakta."

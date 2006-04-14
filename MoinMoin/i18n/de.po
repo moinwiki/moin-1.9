@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -1701,6 +1701,10 @@ msgstr "Lesezeichen setzen"
 
 msgid "[Bookmark reached]"
 msgstr "[Lesezeichen erreicht]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "HilfeInhalt"
 
 msgid "No wanted pages in this wiki."
 msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."

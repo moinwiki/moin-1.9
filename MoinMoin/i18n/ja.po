@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-04-14 10:26+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -1661,6 +1661,10 @@ msgstr "ブックマークをセット"
 
 msgid "[Bookmark reached]"
 msgstr "[以下、ブックマークのタイムスタンプ以前の更新のため非表示]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "ヘルプの目次"
 
 msgid "No wanted pages in this wiki."
 msgstr "このwikiに参照先がないページはありません。"
