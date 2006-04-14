@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -1635,6 +1635,10 @@ msgstr "estableix l'adreça d'interès"
 
 msgid "[Bookmark reached]"
 msgstr "[S'ha arribat a una adreça d'interès]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "ContingutsAjuda"
 
 msgid "No wanted pages in this wiki."
 msgstr "No hi ha cap pàgina dessitjada en aquest wiki."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -1573,6 +1573,10 @@ msgstr "设置书签"
 
 msgid "[Bookmark reached]"
 msgstr "书签结尾"
+
+#, fuzzy
+msgid "Contents"
+msgstr "帮助目录"
 
 msgid "No wanted pages in this wiki."
 msgstr "本维基中没有未定义的网页."

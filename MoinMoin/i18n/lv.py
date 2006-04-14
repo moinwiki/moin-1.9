@@ -280,7 +280,7 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Local extension parsers''':
 '''Lokālo paplašinājumu parsētāji''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)''',
+'''Ievietotie procesori (NOVECOJA -- to vietā jāizmanto "Parser")''',
 '''Disabled''':
 '''Izslēgts''',
 '''Enabled''':
@@ -425,6 +425,8 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Nekorekta pakotnes faila galvene.''',
 '''Package file format unsupported.''':
 '''Neatbalstīts pakotnes faila formāts.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Rindā %(lineno)i nedefinēta funkcija %(func)s.''',
 '''The file %s was not found in the package.''':
 '''Fails %s pakotnē netika atrasts.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -698,6 +700,14 @@ Pamēģiniet citu nosaukumu.''',
 '''Dzēst''',
 '''Optional reason for the deletion''':
 '''Ja vēlaties, norādiet lapas dzēšanas iemeslu''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''Rezerves kopija %(filename)s atjaunota direktorijā %(targetdir)s.
+Atjaunoti %(filecount)d faili un %(dircount)d direktorijas.''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''Kļūda veicot rezerves kopijas %(filename)s atjaunošanu direktorijā %(targetdir)s.''',
+'''Wiki Backup / Restore''':
+'''Viki rezerves kopēšana / atjaunošana''',
 '''Backup''':
 '''Veidot rezerves kopiju''',
 '''Restore''':
@@ -890,6 +900,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ielikt grāmatzīmi''',
 '''[Bookmark reached]''':
 '''[Šeit ielikta grāmatzīme]''',
+'''Contents''':
+'''Satura rādītājs''',
 '''No wanted pages in this wiki.''':
 '''Šajā viki pieprasīto lapu nav.''',
 '''Invalid include arguments "%s"!''':

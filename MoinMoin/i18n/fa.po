@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -714,9 +714,9 @@ msgstr "بسته غیرمجاز."
 msgid "Package file format unsupported."
 msgstr "نوع فایل این بسته پشتیبانی نمیشود."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "تابع غیر مجاز %s در خط %i."
+msgstr "تابع غیر مجاز %(func)s در خط %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
@@ -1660,6 +1660,9 @@ msgstr "نشان·bookmark·بگذار"
 
 msgid "[Bookmark reached]"
 msgstr "[به نشان bookmark رسید]"
+
+msgid "Contents"
+msgstr "فهرست"
 
 msgid "No wanted pages in this wiki."
 msgstr "در این ویکی صفحه ای مورد نیاز نیست."

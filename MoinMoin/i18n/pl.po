@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -1616,6 +1616,10 @@ msgstr "ustaw zakładkę"
 
 msgid "[Bookmark reached]"
 msgstr "[Zakładka osiągnięta]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "PomocSpisTreści"
 
 msgid "No wanted pages in this wiki."
 msgstr "Brak poszukiwanych stron w tym wiki."

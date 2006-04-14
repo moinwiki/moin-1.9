@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -1612,6 +1612,10 @@ msgstr "vytvořit záložku"
 
 msgid "[Bookmark reached]"
 msgstr "[Záložka dosažena]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "HelpObsah"
 
 msgid "No wanted pages in this wiki."
 msgstr "V této wiki neexistují žádné žádoucí stránky."

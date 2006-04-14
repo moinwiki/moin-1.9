@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -477,7 +477,7 @@ msgid "Local extension parsers"
 msgstr "Lokālo paplašinājumu parsētāji"
 
 msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr "Ievietotie procesori (NOVECOJA -- izmantot Parsers tā vietā)"
+msgstr "Ievietotie procesori (NOVECOJA -- to vietā jāizmanto \"Parser\")"
 
 msgid "Disabled"
 msgstr "Izslēgts"
@@ -718,9 +718,9 @@ msgstr "Nekorekta pakotnes faila galvene."
 msgid "Package file format unsupported."
 msgstr "Neatbalstīts pakotnes faila formāts."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Nedefinēta funkcija %s rindā %i."
+msgstr "Rindā %(lineno)i nedefinēta funkcija %(func)s."
 
 #, python-format
 msgid "The file %s was not found in the package."
@@ -1240,13 +1240,17 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"Rezerves kopija %(filename)s atjaunota direktorijā %(targetdir)s.\n"
+"Atjaunoti %(filecount)d faili un %(dircount)d direktorijas."
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+"Kļūda veicot rezerves kopijas %(filename)s atjaunošanu direktorijā %"
+"(targetdir)s."
 
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "Viki rezerves kopēšana / atjaunošana"
 
 msgid ""
 "Some hints:\n"
@@ -1613,6 +1617,9 @@ msgstr "ielikt grāmatzīmi"
 
 msgid "[Bookmark reached]"
 msgstr "[Šeit ielikta grāmatzīme]"
+
+msgid "Contents"
+msgstr "Satura rādītājs"
 
 msgid "No wanted pages in this wiki."
 msgstr "Šajā viki pieprasīto lapu nav."

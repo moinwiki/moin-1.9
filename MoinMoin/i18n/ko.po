@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-04-13 19:10+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -682,7 +682,8 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "해당 패키지는 더 최근 버전의 MoinMoin (적어도 %s) 에서 사용 가능합니다."
+msgstr ""
+"해당 패키지는 더 최근 버전의 MoinMoin (적어도 %s) 에서 사용 가능합니다."
 
 msgid "The theme name is not set."
 msgstr "테마의 이름이 지정되지 않았습니다."
@@ -1598,6 +1599,10 @@ msgstr "책갈피 두기"
 
 msgid "[Bookmark reached]"
 msgstr "[여기까지 책갈피]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "도움말"
 
 msgid "No wanted pages in this wiki."
 msgstr ""

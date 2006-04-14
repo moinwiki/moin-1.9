@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-04-10 11:46-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -1709,6 +1709,10 @@ msgstr "establecer enlace personal"
 
 msgid "[Bookmark reached]"
 msgstr "[enlace personal alcanzado]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "ContenidosDeAyuda"
 
 msgid "No wanted pages in this wiki."
 msgstr "No existen páginas-por-crear en este wiki."

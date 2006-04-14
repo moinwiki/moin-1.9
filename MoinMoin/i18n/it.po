@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-02-15 22:09+0100\n"
 "Last-Translator: Paolo Patruno <p.patruno@iperbole.bologna.it>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -1616,6 +1616,10 @@ msgstr "imposta segnalibro"
 
 msgid "[Bookmark reached]"
 msgstr "[Limite indicato dal segnalibro]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "AiutoContenuti"
 
 msgid "No wanted pages in this wiki."
 msgstr "Non ci sono pagine \"non scritte\" in questo wiki."

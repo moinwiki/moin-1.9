@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-14 12:33+0200\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -1629,6 +1629,10 @@ msgstr "ajustar bookmark"
 
 msgid "[Bookmark reached]"
 msgstr "[Bookmark atingido]"
+
+#, fuzzy
+msgid "Contents"
+msgstr "ConteúdoDaAjuda"
 
 msgid "No wanted pages in this wiki."
 msgstr "Nenhuma página solicitada neste wiki."
