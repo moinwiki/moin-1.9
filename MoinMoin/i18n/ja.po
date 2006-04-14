@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-13 09:47+0200\n"
-"PO-Revision-Date: 2006-04-11 10:06+0900\n"
+"PO-Revision-Date: 2006-04-14 10:26+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -717,9 +717,9 @@ msgstr "パッケージファイルのへッダが不正です。"
 msgid "Package file format unsupported."
 msgstr "パッケージファイルフォーマットはサポートされていません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "不明な関数%sがあります (%i行目)。"
+msgstr "%(lineno)i行目に不明な関数 %(func)s があります。"
 
 #, python-format
 msgid "The file %s was not found in the package."

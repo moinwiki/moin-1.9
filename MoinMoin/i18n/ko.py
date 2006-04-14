@@ -80,6 +80,8 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 동의하지 않는 경우에는 \'\'\'%(cancel_button_text)s\'\'\'를 눌러서 변경사항을 취소할 수 있습니다.''',
 '''Preview''':
 '''미리보기''',
+'''Text mode''':
+'''Text 모드''',
 '''Comment:''':
 '''설명:''',
 '''<No addition>''':
@@ -258,6 +260,10 @@ Contact the owner of the wiki, who can enable email.''':
 '''시스템 문서 개수''',
 '''Accumulated page sizes''':
 '''문서 크기 총합''',
+'''Disk usage of %(data_dir)s/pages/''':
+'''%(data_dir)s/pages/ 의 디스크 사용량''',
+'''Disk usage of %(data_dir)s/''':
+'''%(data_dir)s/ 의 디스크 사용량''',
 '''Entries in edit log''':
 '''수정사항 로그 길이''',
 '''NONE''':
@@ -405,10 +411,26 @@ To leave the editor, press the Cancel button.''':
 '''%(owner)s가 %(timestamp)s에 문서 수정을 위한 잠시 잠금을 요청하였습니다.[[BR]]
 \'\'\'가급적이면 최소한 %(mins_valid)d 분 동안은 수정 충돌을 막기 위해서 문서를 \'\'고치치 않는\'\' 것이 좋습니다.\'\'\'[[BR]]
 편집을 중단하려면 취소 버튼을 누르세요.''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''해당 패키지는 더 최근 버전의 MoinMoin (적어도 %s) 에서 사용 가능합니다.''',
+'''The theme name is not set.''':
+'''테마의 이름이 지정되지 않았습니다.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''테마 파일의 설치는 독립 실행형 서버에서만 지원됩니다.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''\'%(filename)s\'를(을) 설치하는데 실패했습니다.''',
 '''The file %s is not a MoinMoin package file.''':
 '''파일 %s 는(은) 모인모인 패키지 파일이 아닙니다.''',
+'''The page %s does not exist.''':
+'''문서 \'%s\'가(이) 존재하지 않습니다.''',
+'''Invalid package file header.''':
+'''잘못된 패키지 파일 헤더입니다.''',
+'''Package file format unsupported.''':
+'''지원되지 않는 패키지 파일 형식입니다.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''라인 %(lineno)i: 알 수 없는 함수 \'%(func)s\'''',
+'''The file %s was not found in the package.''':
+'''파일 %s 를(을) 패키지에서 찾을 수 없었습니다.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -585,8 +607,18 @@ To leave the editor, press the Cancel button.''':
 '''이 문서는 이미 지워졌거나 아직 만들어지지 않았습니다!''',
 '''No pages like "%s"!''':
 '''"%s"가(이) 들어간 문서가 없습니다.''',
+'''Invalid filename "%s"!''':
+'''"%s"는(은) 잘못된 파일 이름입니다!''',
 '''Attachment \'%(target)s\' (remote name \'%(filename)s\') already exists.''':
 '''첨부 파일 \'%(target)s\' (하드디스크에서의 이름 \'%(filename)s\') 가(이) 이미 있습니다.''',
+'''Created the package %s containing the pages %s.''':
+'''문서 %s를(을) 포함하는 패키지 %s를(을) 생성했습니다.''',
+'''Package pages''':
+'''문서 묶기''',
+'''Package name''':
+'''패키지 이름''',
+'''List of page names - separated by <tt>,</tt>''':
+'''문서 리스트 - <tt>,</tt>로 구분됨''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
 '''Missing password. Please enter user name and password.''':
@@ -601,6 +633,12 @@ To leave the editor, press the Cancel button.''':
 '''문서 제목에 "%(title)s"를(을) 포함하는 것이 %(matchcount)d %(matches)s개 발견되었습니다.''',
 '''Local Site Map for "%s"''':
 '''"%s"의 사이트 맵''',
+'''Please log in first.''':
+'''먼저 로그인해주세요.''',
+'''Please first create a homepage before creating additional pages.''':
+'''다른 문서를 만들기 전에 홈페이지부터 만들어주세요.''',
+'''MyPages management''':
+'''MyPages 관리''',
 '''You are not allowed to rename pages in this wiki!''':
 '''이 위키에서는 문서 이름을 바꿀 수 없습니다.''',
 '''Please use the interactive user interface to rename pages!''':
@@ -637,6 +675,14 @@ Try a different name.''':
 '''"%s"에 연결된 모든 문서 목록''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''문서 이름 없이 새 문서를 만들 수 없습니다. 문서 이름을 지정해주세요.''',
+'''Pages''':
+'''문서''',
+'''Select Author''':
+'''저자 선택''',
+'''Revert all!''':
+'''모두 되돌리기!''',
+'''You are not allowed to use this action.''':
+'''이 작업을 수행할 수 있는 권한이 없습니다.''',
 '''Subscribe users to the page %s''':
 '''문서 %s 를(을) 구독하는 사용자''',
 '''Subscribed for %s:''':
@@ -645,6 +691,8 @@ Try a different name.''':
 '''사용자가 아님:''',
 '''You are not allowed to perform this action.''':
 '''이 작업을 수행할 수 있는 권한이 없습니다.''',
+'''You are now logged out.''':
+'''로그아웃 되었습니다.''',
 '''You are not allowed to delete this page.''':
 '''이 문서를 지울 수 있는 권한이 없습니다.''',
 '''Please use the interactive user interface to delete pages!''':
@@ -655,6 +703,10 @@ Try a different name.''':
 '''삭제''',
 '''Optional reason for the deletion''':
 '''삭제하는 이유''',
+'''Backup''':
+'''백업''',
+'''You are not allowed to do remote backup.''':
+'''원격 백업을 할 수 있는 권한이 없습니다.''',
 '''[%d attachments]''':
 '''[첨부 %d개]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -801,6 +853,10 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''이름 변경''',
 '''SpellCheck''':
 '''철자 검사''',
+'''Invalid MonthCalendar calparms "%s"!''':
+'''"%s"는(은) 잘못된 MonthCalendar 인수입니다!''',
+'''Invalid MonthCalendar arguments "%s"!''':
+'''"%s"는(은) 잘못된 MonthCalendar 인수입니다!''',
 '''Unsupported navigation scheme \'%(scheme)s\'!''':
 '''\'%(scheme)s\'는(은) 지원되지 않습니다.''',
 '''No parent page found!''':
@@ -913,6 +969,8 @@ red=edit''',
 '''[처음]''',
 '''Click to do a full-text search for this title''':
 '''이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요''',
+'''Preferences''':
+'''사용자 설정''',
 '''Logout''':
 '''로그아웃''',
 '''Clear message''':
