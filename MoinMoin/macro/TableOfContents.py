@@ -38,6 +38,7 @@ class TableOfContents:
 
     def __init__(self, macro, args):
         self.macro = macro
+        self._ = self.macro.request.getText
         
         self.inc_re = re.compile(r"^\[\[Include\((.*)\)\]\]")
         self.arg_re = re.compile(_args_re_pattern)
@@ -69,12 +70,19 @@ class TableOfContents:
         return self.pre_re.sub('',apply(self.include_macro, args, kwargs)).split('\n')
 
     def run(self):
+        _ = self._
+        self.result.append(self.macro.formatter.div(1, css_class="table-of-contents"))
+        self.result.append(self.macro.formatter.paragraph(1, css_class="table-of-contents-heading"))
+        self.result.append(self.macro.formatter.escapedText(_('Contents')))
+        self.result.append(self.macro.formatter.paragraph(0))
+
         self.process_lines(self.pre_re.sub('',self.macro.parser.raw).split('\n'),
                            self.macro.formatter.page.page_name)
         # Close pending lists
         for i in range(self.baseindent, self.indent):
             self.result.append(self.macro.formatter.listitem(0))
             self.result.append(self.macro.formatter.number_list(0))
+        self.result.append(self.macro.formatter.div(0))
         return ''.join(self.result)
 
     def process_lines(self, lines, pagename):

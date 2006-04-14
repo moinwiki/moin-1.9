@@ -2,6 +2,23 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-14 10:28:44 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-561
+
+    Summary:
+      added css classes for TableOfContents macro
+    Revision:
+      moin--main--1.5--patch-561
+
+    added css classes for TableOfContents macro
+    
+
+    modified files:
+     ChangeLog MoinMoin/macro/TableOfContents.py
+     wiki/htdocs/classic/css/common.css
+     wiki/htdocs/modern/css/common.css
+     wiki/htdocs/rightsidebar/css/common.css
+
+
 2006-04-13 16:55:52 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-560
 
     Summary:

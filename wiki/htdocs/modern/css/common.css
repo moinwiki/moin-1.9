@@ -143,6 +143,20 @@ td p {
 	padding: 0;
 }
 
+/* TableOfContents macro */
+.table-of-contents { border: 1px solid #bbbbbb;
+                     color: black; background-color: #eeeeee;
+                     font-size: small;
+                     text-align:left;
+                     margin: 0.5em; padding-left: 2em;
+                     width:50%; }
+.table-of-contents ol { margin:0; margin-left:1em;
+                        list-style-type:decimal; }
+.table-of-contents ul { margin:0;
+                        list-style-type:none; }
+.table-of-contents-heading { font-weight:bold; padding:0; margin:0; }
+
+
 .footnotes div {
 	width: 5em;
 	border-top: 1pt solid gray;
