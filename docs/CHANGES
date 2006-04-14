@@ -30,9 +30,19 @@ Known main issues:
 
 Version 1.5.3-current:
   New Features:
+    * Added CSS classes for TableOfContents macro.
 
   Bug Fixes:
-    * Fixed handling of subpages in gui editor.
+    * GUI editor / GUI editor converter:
+      * Fixed missing GUI editor link in edit bar.
+      * Fixed table/row/cell style spaces.
+      * Changed <p> generation for macros.
+      * Fixed handling of subpages.
+      * Fixed processing of complex list elements (thanks to Craig Markwardt).
+      * Fixed processing of html \n (thanks to Craig Markwardt).
+    * Fixed sslclientcert auth.
+    * Added some missing files to i18n processing, translatable strings more
+      complete now.
 
   Other Changes:
     * We catch and ignore html to wiki conversion errors in case of hitting

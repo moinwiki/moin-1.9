@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-14 11:17:31 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-565
+
+    Summary:
+      updated CHANGES
+    Revision:
+      moin--main--1.5--patch-565
+
+    updated CHANGES
+    
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-04-14 11:03:29 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-564
 
     Summary:
