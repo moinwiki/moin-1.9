@@ -633,19 +633,37 @@ class convert_tree(visitor):
     process_ul = process_list
     process_ol = process_list
 
+    def empty_paragraph_queue(self, nodelist, indent, need_indent):
+        if need_indent:
+            self.text.append(indent)
+        for i in nodelist:
+            if i.nodeType == Node.ELEMENT_NODE:
+                self.process_inline(i)
+            elif i.nodeType == Node.TEXT_NODE:
+                self.text.append(i.data.strip('\n').replace('\n', ' '))
+        self.text.append('\n')
+        del nodelist[:]
+
     def process_list_item(self, node, indent):
         found = False
-        first_child = True
+        need_indent = False
+
+        pending = []
         for i in node.childNodes:
             name = i.localName
+
+            if name in ('p', 'pre', 'ol', 'ul', 'dl', 'table',) and pending:
+                self.empty_paragraph_queue(pending, indent, need_indent)
+                need_indent = True
+                
             if name == 'p':
-                if not first_child:
+                if need_indent:
                     self.text.append(indent)
                 self.process_paragraph_item(i)
                 self.text.append("\n")
                 found = True
             elif name == 'pre':
-                if not first_child:
+                if need_indent:
                     self.text.append(indent)
                 self.process_preformatted_item(i)
                 found = True
@@ -656,17 +674,18 @@ class convert_tree(visitor):
                 self.process_dl(i)
                 found = True
             elif name == 'table':
-                if not first_child:
+                if need_indent:
                     self.text.append(indent)
                 self.process_table(i)
                 found = True
-            #else:
-            #    self.process_inline(i)
-            first_child = False
-                
-        if not found:
-            self.process_paragraph_item(node)
-            self.text.append("\n")
+            else:
+                pending.append(i)
+
+            if found:
+                need_indent = True
+
+        if pending:
+            self.empty_paragraph_queue(pending, indent, need_indent)
 
     def process_blockquote(self, node):
         # XXX this does not really work. e.g.:
