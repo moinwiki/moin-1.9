@@ -422,6 +422,8 @@ To leave the editor, press the Cancel button.''':
 '''包裹檔的檔頭錯誤。''',
 '''Package file format unsupported.''':
 '''不支援此包裹檔的格式。''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''行號 %(lineno)i 有不明的操作 %(func)s。''',
 '''The file %s was not found in the package.''':
 '''檔案 \'%s\' 不在此包裹檔內！''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -648,7 +650,7 @@ reStructuredText 快速參考
 '''Package name''':
 '''包裹名稱''',
 '''List of page names - separated by <tt>,</tt>''':
-'''輸入頁面名稱 (以「<tt>,</tt>」分開)''',
+'''輸入頁面名稱 (以逗號分開)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''不明的使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
 '''Missing password. Please enter user name and password.''':

@@ -425,6 +425,8 @@ Z ukazom "Preklic" lahko zapustite urejevalnik.''',
 '''Neveljavna glava paketne datoteke.''',
 '''Package file format unsupported.''':
 '''Format paketa ni podprt.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Neznana funkcija %(func)s v vrstici %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''Datoteke %s ni v paketu.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.

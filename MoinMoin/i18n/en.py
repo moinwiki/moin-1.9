@@ -994,6 +994,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''',
 '''set bookmark''',
 '''[Bookmark reached]''':
 '''[Bookmark reached]''',
+'''Contents''':
+'''Contents''',
 '''No wanted pages in this wiki.''':
 '''No wanted pages in this wiki.''',
 '''Invalid include arguments "%s"!''':

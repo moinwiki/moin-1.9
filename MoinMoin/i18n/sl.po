@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 09:47+0200\n"
+"POT-Creation-Date: 2006-04-13 13:50+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -710,9 +710,9 @@ msgstr "Neveljavna glava paketne datoteke."
 msgid "Package file format unsupported."
 msgstr "Format paketa ni podprt."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Neznana funkcija %s v vrstici %i."
+msgstr "Neznana funkcija %(func)s v vrstici %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
