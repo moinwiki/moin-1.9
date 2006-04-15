@@ -135,7 +135,7 @@ class PackagePages:
             'package': _('Package pages'),
             'cancel': _('Cancel'),
             'newname_label': _("Package name"),
-            'list_label': _("List of page names - separated by <tt>,</tt>"),
+            'list_label': _("List of page names - separated by a comma"),
         }
         form = '''
 %(error)s

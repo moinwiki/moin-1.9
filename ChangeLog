@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 16:13:25 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-570
+
+    Summary:
+      Changed i18n string in PackagePages
+    Revision:
+      moin--main--1.5--patch-570
+
+
+    modified files:
+     ChangeLog MoinMoin/action/PackagePages.py
+
+
 2006-04-15 16:09:09 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-569
 
     Summary:
