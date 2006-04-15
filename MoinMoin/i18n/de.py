@@ -790,7 +790,7 @@ Dateien: %(filecount)d, Verzeichnisse: %(dircount)d''',
 Please make sure your wiki configuration backup_* values are correct and complete.
 
 ''':
-'''Some hints:
+'''Hinweise:
  * Um ein Backup wiederherzustellen:
   * Das Wiederherstellen eines Backups wird bestehende Daten überschreiben, also seien Sie vorsichtig.
   * Benennen Sie es auf <siteid>.tar.<compression> um (entfernen Sie --date--time--UTC).

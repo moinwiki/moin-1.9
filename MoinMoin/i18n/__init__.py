@@ -157,7 +157,8 @@ def loadLanguage(request, lang):
                 try:
                     uc_texts[key] = formatMarkup(request, text)
                 except: # infinite recursion or crash
-                    request.log("i18n: crashes in language %s on string: %s" % (lang, text))
+                    if debug:
+                        request.log("i18n: crashes in language %s on string: %s" % (lang, text))
                     uc_texts[key] = "%s*" % text
         else:
             uc_texts = uc_unformatted

@@ -52,7 +52,8 @@ the group pages.
 ||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
 ||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
 
-""") % locals()
+""", formatted=False)
+    pagecontent = pagecontent % locals()
 
     pagecontent = pagecontent.replace('\n', '\r\n')
 

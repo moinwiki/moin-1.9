@@ -2,6 +2,22 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 21:34:43 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-576
+
+    Summary:
+      fixed MyPages, disabled i18n debug output
+    Revision:
+      moin--main--1.5--patch-576
+
+    fixed MyPages, disabled i18n debug output
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py MoinMoin/action/MyPages.py
+     MoinMoin/i18n/__init__.py MoinMoin/i18n/de.po
+     MoinMoin/i18n/de.py
+
+
 2006-04-15 20:01:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-575
 
     Summary:
