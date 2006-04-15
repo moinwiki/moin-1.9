@@ -821,6 +821,11 @@ class Parser:
 
 
     def _comment_repl(self, word):
+        # if we are in a paragraph, we must close it so that normal text following
+        # in the line below the comment will reopen a new paragraph.
+        if self.formatter.in_p:
+            self.formatter.paragraph(0)
+        self.line_is_empty = 1 # markup following comment lines treats them as if they were empty
         return self.formatter.comment(word)
 
     def _closeP(self):
