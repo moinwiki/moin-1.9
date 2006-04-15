@@ -197,7 +197,7 @@ class Parser:
               
         return (self.formatter.interwikilink(1, tag, tail) + 
                 self.formatter.text(text) +
-                self.formatter.interwikilink(0))
+                self.formatter.interwikilink(0, tag, tail))
 
     def attachment(self, url_and_text, **kw):
         """ This gets called on attachment URLs.
@@ -350,7 +350,7 @@ class Parser:
         anchor = ""
         if len(parts)==2:
             word, anchor = parts
-            
+
         return (self.formatter.pagelink(1, word, anchor=anchor) +
                 self.formatter.text(text) +
                 self.formatter.pagelink(0, word))

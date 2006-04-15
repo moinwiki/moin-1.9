@@ -84,8 +84,11 @@ class FormatterBase:
             self.pagelinks.append(pagename)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
-        # call pagelink() for internal interwikilinks
-        # to make shure they get counted for self.pagelinks
+        """ calls pagelink() for internal interwikilinks
+            to make sure they get counted for self.pagelinks.
+            IMPORTANT: on and off must be called with same parameters, see
+                       also the text_html formatter.
+        """
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
         if wikitag == 'Self' or wikitag == self.request.cfg.interwikiname:
             if wikitail.find('#') > -1:

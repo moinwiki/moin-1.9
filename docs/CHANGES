@@ -49,6 +49,8 @@ Version 1.5.3-current:
     * Fix eating of newline before tables.
     * Fixed incorrect login hint for not logged-in users trying a disallowed
       action.
+    * Fixed nasty missing or double </a> formatter bug (mostly happening when
+      user has enabled questionmarks for nonexisting pages).
 
   Other Changes:
     * We catch and ignore html to wiki conversion errors in case of hitting
