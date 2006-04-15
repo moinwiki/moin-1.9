@@ -542,9 +542,9 @@ class convert_tree(visitor):
             #    self.text.append("\n")
 
     def process_br(self, node):
-            self.text.append('\n') # without this, std multi-line text below some heading misses a whitespace
-                                   # when it gets merged to float text, like word word wordword word word
-        
+            self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
+                                            # when it gets merged to float text, like word word wordword word word
+
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
         if text:
@@ -609,7 +609,7 @@ class convert_tree(visitor):
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
         if self.depth == 0:
-            self.text.append("\n")
+            self.text.append(self.new_line)
 
     def process_list(self, node):
         self.depth += 1
@@ -628,7 +628,7 @@ class convert_tree(visitor):
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
         if self.depth == 0:
-            self.text.append("\n")
+            self.text.append(self.new_line)
 
     process_ul = process_list
     process_ol = process_list
@@ -641,13 +641,12 @@ class convert_tree(visitor):
                 self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
                 self.text.append(i.data.strip('\n').replace('\n', ' '))
-        self.text.append('\n')
+        self.text.append(self.new_line)
         del nodelist[:]
 
     def process_list_item(self, node, indent):
         found = False
         need_indent = False
-
         pending = []
         for i in node.childNodes:
             name = i.localName
@@ -660,7 +659,7 @@ class convert_tree(visitor):
                 if need_indent:
                     self.text.append(indent)
                 self.process_paragraph_item(i)
-                self.text.append("\n")
+                self.text.append(self.new_line)
                 found = True
             elif name == 'pre':
                 if need_indent:
@@ -808,7 +807,7 @@ class convert_tree(visitor):
 
     def process_p(self, node):
         self.process_paragraph_item(node)
-        self.text.append("\n\n")
+        self.text.append("\n\n") # do not use self.new_line here!
 
     def process_paragraph_item(self, node):
         for i in node.childNodes:
@@ -819,7 +818,7 @@ class convert_tree(visitor):
 
     def process_pre(self, node):
         self.process_preformatted_item(node)
-        self.text.append("\n")
+        self.text.append(self.new_line)
 
     def process_preformatted_item(self, node):
         if node.hasAttribute("class"):
@@ -832,7 +831,7 @@ class convert_tree(visitor):
                     self.text.append(i.data)
                     #print "'%s'" % i.data
                 elif i.localName == 'br':
-                    self.text.append("\n")
+                    self.text.append(self.new_line)
                 else:
                     pass
                     #print i.localName
@@ -843,11 +842,11 @@ class convert_tree(visitor):
                     self.text.append(i.data)
                     #print "'%s'" % i.data
                 elif i.localName == 'br':
-                    self.text.append("\n")
+                    self.text.append(self.new_line)
                 else:
                     pass
                     #print i.localName
-            self.text.append("}}}\n")
+            self.text.extend(["}}}", self.new_line])
 
     _alignment = {"left" : "(",
                   "center" : ":",
@@ -961,8 +960,7 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def process_table(self, node, style=""):
-        if self.text[-1].strip(' ') != "\n":
-            self.text.append("\n")
+        self.text.append(self.new_line)
         self.new_table = True
         style += self._table_style(node)
         for i in node.childNodes:
@@ -980,7 +978,7 @@ class convert_tree(visitor):
                     raise ConvertError("process_table: Don't support %s element" % name)
             #else:
             #    raise ConvertError("Unexpected node: %r" % i)
-        self.text.append("\n")
+        self.text.append(self.new_line)
 
     def process_caption(self, table, node, style=""):
         # get first row
@@ -1008,7 +1006,7 @@ class convert_tree(visitor):
             colspan = 1
         text = self.node_list_text_only(node.childNodes).replace('\n', ' ').strip()
         if text:
-            self.text.append("%s'''%s%s'''||\n" % ('||' * colspan, style, text))
+            self.text.extend(["%s'''%s%s'''||" % ('||' * colspan, style, text), self.new_line])
 
     def process_table_data(self, node, style=""):
         if node.hasAttribute("colspan"):
@@ -1055,7 +1053,7 @@ class convert_tree(visitor):
                     style = ""
                 else:
                     raise ConvertError("process_table_record: Don't support %s element" % name)
-        self.text.append("||\n")
+        self.text.extend(["||", self.new_line])
 
     def process_a(self, node):
         scriptname = self.request.getScriptname()
@@ -1209,5 +1207,7 @@ def convert(request, pagename, text):
     text = u"<page>%s</page>" % text
     tree = parse(request, text)
     strip_whitespace().do(tree)
-    return convert_tree(request, pagename).do(tree)
+    text = convert_tree(request, pagename).do(tree)
+    text = '\n'.join([s.rstrip() for s in text.splitlines()] + ['']) # remove trailing blanks
+    return text
 
