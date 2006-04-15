@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 20:01:34 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-575
+
+    Summary:
+      bumped version to 1.5.3 release, updated underlay
+    Revision:
+      moin--main--1.5--patch-575
+
+    bumped version to 1.5.3 release, updated underlay
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py MoinMoin/version.py
+     docs/CHANGES moin.spec wiki/underlay.tar.bz2
+
+
 2006-04-15 19:47:10 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-574
 
     Summary:
