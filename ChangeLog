@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 21:42:39 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-577
+
+    Summary:
+      fixed gui editor formatter table height attribute
+    Revision:
+      moin--main--1.5--patch-577
+
+    fixed gui editor formatter table height attribute
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py
+     MoinMoin/formatter/text_gedit.py docs/CHANGES
+
+
 2006-04-15 21:34:43 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-576
 
     Summary:

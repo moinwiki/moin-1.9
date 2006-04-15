@@ -154,8 +154,8 @@ class Formatter(text_html.Formatter):
         return attrs
 
     _allowed_table_attrs = {
-        'table': ['class', 'id', 'style', 'bgcolor', 'width', ],
-        'row': ['class', 'id', 'style', 'bgcolor', 'width', ],
+        'table': ['class', 'id', 'style', 'bgcolor', 'width', 'height', ],
+        'row': ['class', 'id', 'style', 'bgcolor', 'width', 'height', ],
         '': ['colspan', 'rowspan', 'class', 'id', 'style', 'bgcolor', 'width', ],
     }
 

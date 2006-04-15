@@ -41,6 +41,7 @@ Version 1.5.3:
       * Fixed processing of complex list elements (thanks to Craig Markwardt).
       * Fixed processing of html \n (thanks to Craig Markwardt).
       * Fixed joining of comment lines with text below them.
+      * Fixed table height attribute crash.
     * Fixed sslclientcert auth.
     * Added some missing files to i18n processing, translatable strings more
       complete now.
