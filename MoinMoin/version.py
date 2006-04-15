@@ -14,7 +14,7 @@ except:
     patchlevel = 'release'
 
 project = "MoinMoin"
-release  = '1.5.3-rc2'
+release  = '1.5.3'
 revision = patchlevel
 
 def update():
