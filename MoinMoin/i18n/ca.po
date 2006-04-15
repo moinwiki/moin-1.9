@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -186,12 +186,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "No teniu permís per a %s aquesta pàgina."
 
-msgid "Login"
-msgstr "Entrada"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s i torneu a provar."
+
+msgid "Login"
+msgstr "Entrada"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1066,7 +1066,7 @@ msgstr "Pàgines semblants"
 msgid "Package name"
 msgstr "Pàgines semblants"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

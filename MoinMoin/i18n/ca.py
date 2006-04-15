@@ -96,10 +96,10 @@ space between words. Group page name is not allowed.''':
 El nom pot contenir qualsevol caràcter alfanumèric Unicode, amb un espai opcional entre paraules. Noms de grups de pàgines no estan permesos.''',
 '''You are not allowed to do %s on this page.''':
 '''No teniu permís per a %s aquesta pàgina.''',
-'''Login''':
-'''Entrada''',
 ''' %s and try again.''':
 ''' %s i torneu a provar.''',
+'''Login''':
+'''Entrada''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d resultats d\'alrededor de %(pages)d pàgines.''',
 '''%.2f seconds''':

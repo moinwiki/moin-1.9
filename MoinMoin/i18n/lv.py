@@ -100,10 +100,10 @@ Lietotāja vārds drīkst saturēt \'\'Unicode\'\' burtzīmes un ciparus un, ja 
 Grupas lapas vārds nav atļauts.''',
 '''You are not allowed to do %s on this page.''':
 '''Jūs nedrīkstat veikt %s ar šo lapu.''',
-'''Login''':
-'''Ieiet''',
 ''' %s and try again.''':
 '''%s un mēģiniet vēlreiz.''',
+'''Login''':
+'''Ieiet''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām.''',
 '''%.2f seconds''':
@@ -444,6 +444,42 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
  Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc tabulām un virsrakstiem nedrīkst sekot atstarpes.
 (!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai SintaksesIzziņa.
 ''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''Uzsvērt: <i>*kursīvā*</i> <b>**treknrakstā**</b> ``mašīnraksts``<br/>
+<br/><pre>
+Virsraksti: Virsraksts 1  Virsraksts 2  Virsraksts 3
+            ============  ------------  ~~~~~~~~~~~~
+
+Horizontāla līnija: ---- 
+Saites: SekojošaZemsvītra_ `vairāki vārdi ieverti atapostrofos`_ ārēja_ 
+
+.. _ārēja: http://ārēja-saite.lv/jebkas/
+
+Saraksti: * atzīmes; 1., a. numurēti elementi.
+</pre>
+<br/>
+(!) Detalizētākai pamācībai apmeklējiet 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''',
 '''Diffs''':
 '''Atšķirības''',
 '''Info''':
@@ -614,8 +650,6 @@ Lai izietu no labošanas, nospiediet pogu Atcelt.''',
 '''Iesaiņot lapas''',
 '''Package name''':
 '''Saiņa nosaukums''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Lapu saraksts, atdalīts ar <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
 '''Missing password. Please enter user name and password.''':

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
-"PO-Revision-Date: 2006-04-14 10:26+0900\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"PO-Revision-Date: 2006-04-15 22:55+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -185,12 +185,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "このページを%sする権限がありません。"
 
-msgid "Login"
-msgstr "ログイン"
-
 #, python-format
 msgid " %s and try again."
 msgstr "%sして、もう一度試してみてください。"
+
+msgid "Login"
+msgstr "ログイン"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1073,7 +1073,8 @@ msgstr "ページのパッケージ化"
 msgid "Package name"
 msgstr "パッケージ名"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "ページ名のリスト (<tt>,</tt>区切り)"
 
 #, python-format
@@ -1662,9 +1663,8 @@ msgstr "ブックマークをセット"
 msgid "[Bookmark reached]"
 msgstr "[以下、ブックマークのタイムスタンプ以前の更新のため非表示]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "ヘルプの目次"
+msgstr "目次"
 
 msgid "No wanted pages in this wiki."
 msgstr "このwikiに参照先がないページはありません。"

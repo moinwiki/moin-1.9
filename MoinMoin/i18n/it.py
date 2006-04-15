@@ -92,10 +92,10 @@ space between words. Group page name is not allowed.''':
 Il nome può contenere ogni carattere alfanumerico Unicode , con opzionale unospazio tra le parole. Non è permesso raggruppare i nomi pagina.''',
 '''You are not allowed to do %s on this page.''':
 '''Non ti è consentito di %s questa pagina.''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s e prova ancora.''',
+'''Login''':
+'''Login''',
 '''%.2f seconds''':
 '''%.2f secondi''',
 '''match''':

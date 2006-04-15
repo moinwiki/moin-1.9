@@ -96,10 +96,10 @@ space between words. Group page name is not allowed.''':
 Имя может содержать буквы и цифры любого языка и по жеданию один пробел между словами. Нельзя использовать имя группы.''',
 '''You are not allowed to do %s on this page.''':
 '''Вам нельзя %s эту страницу.''',
-'''Login''':
-'''Войти''',
 ''' %s and try again.''':
 ''' %s и попробуйте еще раз.''',
+'''Login''':
+'''Войти''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d результатов из %(pages)d просмотренных страниц.''',
 '''%.2f seconds''':

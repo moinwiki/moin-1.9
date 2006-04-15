@@ -98,10 +98,10 @@ Identyfikator może zawierać alfanumeryczne znaki unikodu, z opcjonalnie
 jedną spacją pomiędzy słowami. Grupowa nazwa strony jest niedozwolona.''',
 '''You are not allowed to do %s on this page.''':
 '''Nie możesz wykonać %s na tej stronie.''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s i spróbuj ponownie.''',
+'''Login''':
+'''Login''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d rezultatów z liczby %(pages)d stron.''',
 '''%.2f seconds''':

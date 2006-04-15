@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -189,12 +189,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Nie możesz wykonać %s na tej stronie."
 
-msgid "Login"
-msgstr "Login"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s i spróbuj ponownie."
+
+msgid "Login"
+msgstr "Login"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1055,7 +1055,7 @@ msgstr "Podobne strony"
 msgid "Package name"
 msgstr "Podobne strony"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

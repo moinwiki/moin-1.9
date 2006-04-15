@@ -93,10 +93,10 @@ O nome pode conter caracteres alfa-numéricos Unicode, com a opção
 de um espaço entre palavras. Não é permitido utilizar a palavra Grupo para o nome da página''',
 '''You are not allowed to do %s on this page.''':
 '''Você não tem permissão para fazer %s nesta página.''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
+'''Login''':
+'''Login''',
 '''%.2f seconds''':
 '''%.2f segundos''',
 '''match''':

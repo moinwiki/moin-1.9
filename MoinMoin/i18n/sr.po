@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <obivatelj@gmail.com>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -188,12 +188,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Nije Vam dozvoljeno da obrađujete ovu stranicu."
 
-msgid "Login"
-msgstr "Ulogovati se"
-
 #, python-format
 msgid " %s and try again."
 msgstr ""
+
+msgid "Login"
+msgstr "Ulogovati se"
 
 #, fuzzy, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1027,7 +1027,7 @@ msgstr "SličneStranice"
 msgid "Package name"
 msgstr "SličneStranice"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

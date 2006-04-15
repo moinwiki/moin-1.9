@@ -100,10 +100,10 @@ Der Name darf beliebige alphanumerische Unicode-Zeichen enthalten, mit optional 
 Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt.''',
 '''You are not allowed to do %s on this page.''':
 '''Sie dürfen die Aktion %s nicht ausführen auf dieser Seite.''',
-'''Login''':
-'''Anmelden''',
 ''' %s and try again.''':
 ''' %s und probieren Sie es noch einmal.''',
+'''Login''':
+'''Anmelden''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten.''',
 '''%.2f seconds''':
@@ -652,8 +652,6 @@ reStructuredText Quick Reference
 '''Seiten paketieren''',
 '''Package name''':
 '''Paketname''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Liste von Seitennamen - getrennt durch <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzername und Passwort ein.''',
 '''Missing password. Please enter user name and password.''':

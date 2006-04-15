@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -187,12 +187,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "A(z) %s műveletet nem hajthatja végre ezen a lapon."
 
-msgid "Login"
-msgstr "Belépés"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s, majd próbálja újra."
+
+msgid "Login"
+msgstr "Belépés"
 
 #, fuzzy, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1051,7 +1051,7 @@ msgstr "HasonlóLapok"
 msgid "Package name"
 msgstr "HasonlóLapok"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

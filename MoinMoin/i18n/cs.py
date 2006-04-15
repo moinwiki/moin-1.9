@@ -97,10 +97,10 @@ space between words. Group page name is not allowed.''':
 Jména mohou obsahovat jakékoliv Unicode znaky i čísla s možnou jedinou mezerou mezi slovy. Jména skupin nejsou povolena.''',
 '''You are not allowed to do %s on this page.''':
 '''Nemáte oprávnění dělat %s na této stránce.''',
-'''Login''':
-'''Přihlášení''',
 ''' %s and try again.''':
 ''' %s a zkuste to znovu.''',
+'''Login''':
+'''Přihlášení''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d nálezů na celkem %(pages)d stránkách.''',
 '''%.2f seconds''':

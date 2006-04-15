@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -185,12 +185,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "شما مجاز به %s روی این صفحه نمی باشید."
 
-msgid "Login"
-msgstr "ورود"
-
 #, python-format
 msgid " %s and try again."
 msgstr "لطفا پس از %s به سایت مجددا سعی نمایید."
+
+msgid "Login"
+msgstr "ورود"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1068,7 +1068,8 @@ msgstr "بسته صفحات"
 msgid "Package name"
 msgstr "نام بسته"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "لیست نام صفحات - جدا شده با <tt>,</tt>"
 
 #, python-format

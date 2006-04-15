@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,11 +158,11 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr ""
 
-msgid "Login"
-msgstr ""
-
 #, python-format
 msgid " %s and try again."
+msgstr ""
+
+msgid "Login"
 msgstr ""
 
 #, python-format
@@ -943,7 +943,7 @@ msgstr ""
 msgid "Package name"
 msgstr ""
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

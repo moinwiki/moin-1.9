@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -184,12 +184,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Sinulla ei ole oikeutta toimintoon %s tälle sivulle."
 
-msgid "Login"
-msgstr "Kirjaudu sisään"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s ja yritä uudelleen."
+
+msgid "Login"
+msgstr "Kirjaudu sisään"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1049,7 +1049,7 @@ msgstr "Samankaltaisia sivuja"
 msgid "Package name"
 msgstr "Samankaltaisia sivuja"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, fuzzy, python-format

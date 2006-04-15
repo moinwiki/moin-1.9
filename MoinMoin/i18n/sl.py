@@ -100,10 +100,10 @@ Ime lahko vsebuje poljuben alfanumeričen znak iz nabora Unicode,
 z neobveznim enim presledkom med besedami. Imena skupin (...Group) niso dovoljena.''',
 '''You are not allowed to do %s on this page.''':
 '''Na tej strani vam ni dovoljeno "%s".''',
-'''Login''':
-'''Prijava''',
 ''' %s and try again.''':
 ''' %s in poskusite ponovno.''',
+'''Login''':
+'''Prijava''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d zadetkov od približno %(pages)d preiskanih strani.''',
 '''%.2f seconds''':
@@ -651,8 +651,6 @@ reStructuredText Quick Reference
 '''Zapakiraj strani v ZIP''',
 '''Package name''':
 '''Ime ZIP paketa''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Seznam imen strani, ločenih z vejicami''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Neznano uporabniško ime: {{{"%s"}}}. Prosimo vnesite uporabniško ime in geslo.''',
 '''Missing password. Please enter user name and password.''':

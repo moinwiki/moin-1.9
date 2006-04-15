@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -189,12 +189,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Pe această pagină nu puteţi face %s"
 
-msgid "Login"
-msgstr "Login"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s şi încercaţi din nou."
+
+msgid "Login"
+msgstr "Login"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1069,7 +1069,7 @@ msgstr "Pagini Asemănătoare"
 msgid "Package name"
 msgstr "Pagini Asemănătoare"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

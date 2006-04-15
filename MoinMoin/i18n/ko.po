@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
-"PO-Revision-Date: 2006-04-13 19:10+0900\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"PO-Revision-Date: 2006-04-15 22:10+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -38,11 +38,11 @@ msgstr "%(date)s에 수정된 %(rev)d번째 판"
 
 #, python-format
 msgid "Redirected from page \"%(page)s\""
-msgstr "\"%(page)s\"로부터 옮겨 옴"
+msgstr "\"%(page)s\"(으)로부터 옮겨 옴"
 
 #, python-format
 msgid "This page redirects to page \"%(page)s\""
-msgstr "\"%(page)s\"로 이동합니다."
+msgstr "\"%(page)s\"(으)로 이동합니다."
 
 #, python-format
 msgid ""
@@ -144,10 +144,10 @@ msgid ""
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
-"'''%(save_button_text)s'''을 누르면 지금의 변경사항에 %(license_link)s가(이)"
-"적용된다는 것을 확인해 주세요.\n"
-"동의하지 않는 경우에는 '''%(cancel_button_text)s'''를 눌러서 변경사항을 취소"
-"할 수 있습니다."
+"'''%(save_button_text)s'''를(을) 누르면 지금의 변경사항에 %(license_link)s가"
+"(이)적용된다는 것을 확인해 주세요.\n"
+"동의하지 않는 경우에는 '''%(cancel_button_text)s'''를(을) 눌러서 변경사항을 "
+"취소할 수 있습니다."
 
 msgid "Preview"
 msgstr "미리보기"
@@ -185,12 +185,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "이 문서에 %s 작업을 할 수 있는 권한이 없습니다."
 
-msgid "Login"
-msgstr "로그인"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s 하고 다시 시도하세요."
+
+msgid "Login"
+msgstr "로그인"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -258,7 +258,7 @@ msgstr "올바른 메일 주소를 써주세요!"
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
-msgstr "메일 주소가 '%(email)s'로 되어있는 계정이 없습니다!"
+msgstr "메일 주소가 '%(email)s'(으)로 되어있는 계정이 없습니다!"
 
 msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
@@ -498,11 +498,11 @@ msgstr "잘못된 책갈피 시간 '%s'"
 
 #, python-format
 msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "\"%(token)s\"뒤에는 \"=\"이 와야 합니다"
+msgstr "\"%(token)s\" 뒤에는 \"=\"이 와야 합니다"
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
-msgstr "\"%(token)s\"뒤에는 값이 필요합니다."
+msgstr "\"%(token)s\" 뒤에는 값이 필요합니다."
 
 msgid "Wiki Markup"
 msgstr "위키 부호"
@@ -582,7 +582,7 @@ msgstr "[%(lang)s] %(recipients)s: %(status)s"
 
 #, python-format
 msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
-msgstr "## 문서 \"%(pagename)s\"의 %(date)s 백업"
+msgstr "## %(date)s에 만들어진 문서 \"%(pagename)s\"의 백업"
 
 #, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
@@ -772,6 +772,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"강조: <i>*뉘여쓰기*</i> <b>**굵게**</b> ``타자체``<br/>\n"
+"<br/><pre>\n"
+"표제: 표제 1  표제 2  표제 3\n"
+"     =====  ------  ~~~~~\n"
+"\n"
+"가로 줄: ---- \n"
+"링크: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"목록: * 글머리표; 1., a. 번호매기기.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) 더 많은 정보를 원하시면 아래 링크를 참고하세요. \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "차이점 비교"
@@ -1046,7 +1063,8 @@ msgstr "문서 묶기"
 msgid "Package name"
 msgstr "패키지 이름"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "문서 리스트 - <tt>,</tt>로 구분됨"
 
 #, python-format
@@ -1232,13 +1250,16 @@ msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
+"백업: %(filename)s 가(이) 다음 디렉토리로 복원됨: %(targetdir)s.\n"
+"파일: %(filecount)d 개, 디렉토리: %(dircount)d 개"
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
+"백업: %(filename)s 를(을) 디렉토리: %(targetdir)s 로 복원하는데 실패했습니다."
 
 msgid "Wiki Backup / Restore"
-msgstr ""
+msgstr "위키 백업/복원"
 
 msgid ""
 "Some hints:\n"
@@ -1257,19 +1278,34 @@ msgid ""
 "complete.\n"
 "\n"
 msgstr ""
+"도움말:\n"
+" * 백업 데이터를 복원하실 때:\n"
+"  * 복원 데이터는 이미 존재하는 데이터를 덮어쓰므로 주의하셔야 합니다.\n"
+"  * 파일의 이름은 <siteid>.tar.<compression> 형태로 하세요. (--date--time--"
+"UTC 같은 것들은 빼버리세요.).\n"
+"  * 백업 파일을 backup_storage_dir 디렉토리에 두세요 (scp, ftp 등을 사용하시"
+"면 됩니다).\n"
+"  * 아래의 [[GetText(Restore)]] 버튼을 누르세요.\n"
+"\n"
+" * 백업을 하실 때는 [[GetText(Backup)]] 버튼을 누른 후 생성된 파일을\n"
+"   안전한 장소에 보관하시면 됩니다.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
 
 msgid "Backup"
 msgstr "백업"
 
 msgid "Restore"
-msgstr ""
+msgstr "복원"
 
 msgid "You are not allowed to do remote backup."
 msgstr "원격 백업을 할 수 있는 권한이 없습니다."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr ""
+msgstr "알 수 없는 백업 하위 작업: %s"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1396,16 +1432,16 @@ msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too large (%(space)d kB missing)."
 msgstr ""
-"첨부 파일 '%(filename)s' 가(이) 압축 해제되지 못했습니다. 디스크의 용량이 부"
-"족한 것 같습니다. (%(space)d kB 모자람)."
+"첨부 파일 '%(filename)s'의 압축을 해제하지 못했습니다. 디스크의 용량이 부족"
+"한 것 같습니다. (%(space)d kB 모자람)."
 
 #, python-format
 msgid ""
 "Attachment '%(filename)s' could not be unzipped because the resulting files "
 "would be too many (%(count)d missing)."
 msgstr ""
-"첨부 파일 '%(filename)s' 가(이) 압축 해제되지 못했습니다. 압축 해제될 파일의 "
-"갯수가 너무 많은 것 같습니다. (%(count)d개 빠짐)."
+"첨부 파일 '%(filename)s'의 압축을 해제하지 못했습니다. 압축 해제될 파일의 갯"
+"수가 너무 많은 것 같습니다. (%(count)d개 빠짐)."
 
 #, python-format
 msgid "Attachment '%(filename)s' unzipped."
@@ -1416,8 +1452,8 @@ msgid ""
 "Attachment '%(filename)s' not unzipped because the files are too big, .zip "
 "files only, exist already or reside in folders."
 msgstr ""
-"첨부 파일 '%(filename)s' 는(은 압축 해제될 수 없었습니다. 파일이 너무 크거"
-"나 .zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다."
+"첨부 파일 '%(filename)s'의 압축을 해제할 수 없었습니다. 파일이 너무 크거나 ."
+"zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다."
 
 #, python-format
 msgid "The file %(target)s is not a .zip file."
@@ -1600,9 +1636,8 @@ msgstr "책갈피 두기"
 msgid "[Bookmark reached]"
 msgstr "[여기까지 책갈피]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "도움말"
+msgstr "차례"
 
 msgid "No wanted pages in this wiki."
 msgstr ""

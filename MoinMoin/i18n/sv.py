@@ -100,10 +100,10 @@ Namnet kan innehålla vilket alfanumeriskt tecken ur Unicode som helst,
 med ett valfritt mellanslag mellan orden. Gruppsidsnamn är inte tillåtna.''',
 '''You are not allowed to do %s on this page.''':
 '''Du har inte tillåtelse att göra %s på den här sidan.''',
-'''Login''':
-'''Logga in''',
 ''' %s and try again.''':
 ''' %s och försök igen.''',
+'''Login''':
+'''Logga in''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d resultat av ungefär %(pages)d sidor.''',
 '''%.2f seconds''':
@@ -636,8 +636,6 @@ reStructuredText Quick Reference
 '''Paketsidor''',
 '''Package name''':
 '''Paketnamn''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Lista på sidnamn - separerade med <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Okänt användarnamn: {{{"%s"}}}. Var god ange användarnamn och lösenord.''',
 '''Missing password. Please enter user name and password.''':

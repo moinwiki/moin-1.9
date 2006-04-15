@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -193,12 +193,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Het is u niet toegestaan om %s op deze pagina te doen."
 
-msgid "Login"
-msgstr "Inloggen"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s en probeer opnieuw"
+
+msgid "Login"
+msgstr "Inloggen"
 
 #, fuzzy, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1054,7 +1054,7 @@ msgstr "GelijkendePaginas"
 msgid "Package name"
 msgstr "GelijkendePaginas"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format
