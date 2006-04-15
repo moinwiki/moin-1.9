@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 16:22:16 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-571
+
+    Summary:
+      Fixed Login hint incorrectly linking to UserPreferences page
+    Revision:
+      moin--main--1.5--patch-571
+
+    Fixed Login hint incorrectly linking to UserPreferences page
+    
+
+    modified files:
+     ChangeLog MoinMoin/request.py docs/CHANGES
+
+
 2006-04-15 16:13:25 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-570
 
     Summary:
