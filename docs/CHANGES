@@ -47,6 +47,8 @@ Version 1.5.3-current:
     * Change <p> generation from self-closing (<p />) to auto-closing (only
       emit <p>, let browser find place for </p>).
     * Fix eating of newline before tables.
+    * Fixed incorrect login hint for not logged-in users trying a disallowed
+      action.
 
   Other Changes:
     * We catch and ignore html to wiki conversion errors in case of hitting

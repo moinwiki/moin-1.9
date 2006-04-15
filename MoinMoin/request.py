@@ -1127,9 +1127,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                     msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action)
                     if not self.user.valid:
                         # Suggest non valid user to login
-                        login = wikiutil.getSysPage(self, 'UserPreferences')
-                        login = login.link_to(self, _('Login'))
-                        msg += _(" %s and try again.", formatted=0) % login
+                        msg += _(" %s and try again.", formatted=0) % _('Login') # XXX merge into 1 string after 1.5.3 release
                     self.page.send_page(self, msg=msg)
 
                 # Try action
