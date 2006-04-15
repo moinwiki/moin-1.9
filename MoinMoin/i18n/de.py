@@ -652,6 +652,8 @@ reStructuredText Quick Reference
 '''Seiten paketieren''',
 '''Package name''':
 '''Paketname''',
+'''List of page names - separated by a comma''':
+'''Liste von Seitennamen - getrennt durch ein Komma''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unbekannter Benutzername: {{{"%s"}}}. Bitte geben Sie Benutzername und Passwort ein.''',
 '''Missing password. Please enter user name and password.''':
@@ -995,6 +997,8 @@ Ansonsten kann das Feld "Speichern unter..." leer bleiben und es wird der origin
 '''Lesezeichen setzen''',
 '''[Bookmark reached]''':
 '''[Lesezeichen erreicht]''',
+'''Contents''':
+'''Inhaltsverzeichnis''',
 '''No wanted pages in this wiki.''':
 '''Es existieren keine gewünschten Seiten in diesem Wiki.''',
 '''Invalid include arguments "%s"!''':

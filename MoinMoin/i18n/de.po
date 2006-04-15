@@ -1090,9 +1090,8 @@ msgstr "Seiten paketieren"
 msgid "Package name"
 msgstr "Paketname"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "Liste von Seitennamen - getrennt durch <tt>,</tt>"
+msgstr "Liste von Seitennamen - getrennt durch ein Komma"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1703,9 +1702,8 @@ msgstr "Lesezeichen setzen"
 msgid "[Bookmark reached]"
 msgstr "[Lesezeichen erreicht]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "HilfeInhalt"
+msgstr "Inhaltsverzeichnis"
 
 msgid "No wanted pages in this wiki."
 msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."

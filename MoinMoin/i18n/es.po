@@ -731,9 +731,9 @@ msgstr "Encabezado de archivo de paquete inválido."
 msgid "Package file format unsupported."
 msgstr "Formato de archivo de paquete no soportado"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Función %s desconocida en línea %i."
+msgstr "Función %(func)s desconocida en la línea %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
@@ -1094,9 +1094,8 @@ msgstr "Páginas del paquete"
 msgid "Package name"
 msgstr "Nombre del paquete"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "Lista de nombres de página - separados por <tt>,</tt>"
+msgstr "Lista de nombres de página - separados por coma"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1711,9 +1710,8 @@ msgstr "establecer enlace personal"
 msgid "[Bookmark reached]"
 msgstr "[enlace personal alcanzado]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "ContenidosDeAyuda"
+msgstr "AyudaDeContenidos"
 
 msgid "No wanted pages in this wiki."
 msgstr "No existen páginas-por-crear en este wiki."
