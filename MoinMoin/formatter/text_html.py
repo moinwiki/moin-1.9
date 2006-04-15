@@ -27,7 +27,10 @@ _blocks = Set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h
 # when they don't have a closing tag even if valid XHTML.
 
 _self_closing_tags = Set(['area', 'base', 'br', 'col', 'frame', 'hr', 'img', 'input',
-                          'isindex', 'link', 'meta', 'param', 'p'])
+                          'isindex', 'link', 'meta', 'param'])
+
+# We only open those tags and let the browser auto-close them:
+_auto_closing_tags = Set(['p'])
 
 # These are the elements which generally should cause an increase in the
 # indention level in the html souce code.
@@ -326,10 +329,8 @@ class Formatter(FormatterBase):
         @rtype: string ?
         @return: open tag with attributes as a string
         """
-        is_self_closing = ''
-        if tag in _self_closing_tags:
-            # Don't expect a closing tag later on.
-            is_self_closing = ' /'
+        # If it is self-closing, then don't expect a closing tag later on.
+        is_self_closing = (tag in _self_closing_tags) and ' /' or ''
 
         if tag in _blocks:
             # Block elements
@@ -371,7 +372,7 @@ class Formatter(FormatterBase):
         @rtype: string
         @return: closing tag as a string
         """
-        if tag in _self_closing_tags:
+        if tag in _self_closing_tags or tag in _auto_closing_tags:
             # This tag was already closed
             tagstr = ''
         elif tag in _blocks:

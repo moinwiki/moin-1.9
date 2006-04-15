@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 14:10:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-567
+
+    Summary:
+      change p generation from self-closing to auto-closing, add \n before table for gui converter
+    Revision:
+      moin--main--1.5--patch-567
+
+    change p generation from self-closing to auto-closing, add \n before table for gui converter
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+     MoinMoin/formatter/text_html.py docs/CHANGES
+
+
 2006-04-14 16:35:52 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-566
 
     Summary:

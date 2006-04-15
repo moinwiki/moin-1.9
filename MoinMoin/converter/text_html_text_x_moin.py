@@ -961,6 +961,8 @@ class convert_tree(visitor):
         return " ".join(result).strip()
 
     def process_table(self, node, style=""):
+        if self.text[-1].strip(' ') != "\n":
+            self.text.append("\n")
         self.new_table = True
         style += self._table_style(node)
         for i in node.childNodes:
