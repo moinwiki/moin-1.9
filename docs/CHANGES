@@ -43,6 +43,9 @@ Version 1.5.3-current:
     * Fixed sslclientcert auth.
     * Added some missing files to i18n processing, translatable strings more
       complete now.
+    * Change <p> generation from self-closing (<p />) to auto-closing (only
+      emit <p>, let browser find place for </p>).
+    * Fix eating of newline before tables.
 
   Other Changes:
     * We catch and ignore html to wiki conversion errors in case of hitting
