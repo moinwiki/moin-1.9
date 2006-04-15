@@ -502,26 +502,30 @@ class Formatter(FormatterBase):
         """
         @keyword title: override using the interwiki wikiname as title
         """
-        if not on:
-            return self.url(0)
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
-            if wikitail.find('#') > -1:
-                wikitail, kw['anchor'] = wikitail.split('#', 1)
-            wikitail = wikiutil.url_unquote(wikitail)
-            try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
-                return apply(self.pagelink, (on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)), kw)
-            except:
-                return apply(self.pagelink, (on, wikitail), kw)
-        else: # return InterWiki hyperlink
-            href = wikiutil.join_wiki(wikiurl, wikitail)
-            if wikitag_bad:
-                html_class = 'badinterwiki'
+            if on:
+                if wikitail.find('#') > -1:
+                    wikitail, kw['anchor'] = wikitail.split('#', 1)
+                wikitail = wikiutil.url_unquote(wikitail)
+                try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
+                    return apply(self.pagelink, (on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)), kw)
+                except:
+                    return apply(self.pagelink, (on, wikitail), kw)
             else:
-                html_class = 'interwiki'
-            title = kw.get('title', wikitag)
-            return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with umlauts
+                return self.pagelink(0)
+        else: # return InterWiki hyperlink
+            if on:
+                href = wikiutil.join_wiki(wikiurl, wikitail)
+                if wikitag_bad:
+                    html_class = 'badinterwiki'
+                else:
+                    html_class = 'interwiki'
+                title = kw.get('title', wikitag)
+                return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with umlauts
+            else:
+                return self.url(0)
 
     def url(self, on, url=None, css=None, do_escape=0, **kw):
         """

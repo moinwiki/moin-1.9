@@ -216,7 +216,7 @@ class ThemeBase:
             # link to (interwiki) user homepage
             homelink = (request.formatter.interwikilink(1, title=title, id="userhome", *interwiki) +
                         request.formatter.text(name) +
-                        request.formatter.interwikilink(0))
+                        request.formatter.interwikilink(0, title=title, id="userhome", *interwiki))
             userlinks.append(homelink)        
             # link to userprefs action
             userlinks.append(d['page'].link_to(request, text=_('Preferences'),
@@ -297,7 +297,7 @@ class ThemeBase:
                 return (pagename,
                         self.request.formatter.interwikilink(True, interwiki, page) +
                         page +
-                        self.request.formatter.interwikilink(False)
+                        self.request.formatter.interwikilink(False, interwiki, page)
                         )
         
         except ValueError:
@@ -516,10 +516,9 @@ class ThemeBase:
                         # links, using _ for spaces.
                         page = page.replace('_', ' ')
                         if request.cfg.interwikiname != interwiki:
-                            link = (self.request.formatter.interwikilink(
-                                True, interwiki, page) +
+                            link = (self.request.formatter.interwikilink(True, interwiki, page) +
                                     self.shortenPagename(page) +
-                                    self.request.formatter.interwikilink(False))
+                                    self.request.formatter.interwikilink(False, interwiki, page))
                             items.append('<li>%s</li>' % link)
                             continue
                         else:
