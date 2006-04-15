@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-15 15:16:33 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-568
+
+    Summary:
+      gui converter: use (soft) new_line object more, strip trailing ws
+    Revision:
+      moin--main--1.5--patch-568
+
+    gui converter: use (soft) new_line object more, strip trailing ws
+    
+
+    modified files:
+     ChangeLog MoinMoin/converter/text_html_text_x_moin.py
+
+
 2006-04-15 14:10:51 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-567
 
     Summary:
