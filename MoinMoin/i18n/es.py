@@ -428,6 +428,8 @@ Para abandonar el editor, presiona el botón \'\'Cancelar\'\'.''',
 '''Encabezado de archivo de paquete inválido.''',
 '''Package file format unsupported.''':
 '''Formato de archivo de paquete no soportado''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Función %(func)s desconocida en la línea %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''No se ha encontrado el archivo %s en el paquete.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -650,6 +652,8 @@ Referencia rápida de reStructuredText
 '''Páginas del paquete''',
 '''Package name''':
 '''Nombre del paquete''',
+'''List of page names - separated by a comma''':
+'''Lista de nombres de página - separados por coma''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':
@@ -995,6 +999,8 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''establecer enlace personal''',
 '''[Bookmark reached]''':
 '''[enlace personal alcanzado]''',
+'''Contents''':
+'''AyudaDeContenidos''',
 '''No wanted pages in this wiki.''':
 '''No existen páginas-por-crear en este wiki.''',
 '''Invalid include arguments "%s"!''':
