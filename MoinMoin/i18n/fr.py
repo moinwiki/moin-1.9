@@ -101,10 +101,10 @@ alphanumérique, avec éventuellement un espace entre les mots.
 Les noms des pages des groupes sont interdits.''',
 '''You are not allowed to do %s on this page.''':
 '''Vous n\'êtes pas autorisé à %s pour cette page.''',
-'''Login''':
-'''Connexion''',
 ''' %s and try again.''':
 '''%s et essayez à nouveau.''',
+'''Login''':
+'''Connexion''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d pages trouvées parmi environ %(pages)d pages.''',
 '''%.2f seconds''':
@@ -633,8 +633,6 @@ Guide de référence rapide de reStructuredText
 '''Pages du paquet''',
 '''Package name''':
 '''Nom du paquet''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Liste des noms de pages - séparées par des virgules''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nom d\'utilisateur inconnu : {{{"%s"}}}. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
 '''Missing password. Please enter user name and password.''':

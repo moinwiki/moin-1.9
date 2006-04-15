@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-04-09 18:05+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -189,12 +189,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Vous n'êtes pas autorisé à %s pour cette page."
 
-msgid "Login"
-msgstr "Connexion"
-
 #, python-format
 msgid " %s and try again."
 msgstr "%s et essayez à nouveau."
+
+msgid "Login"
+msgstr "Connexion"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1100,7 +1100,8 @@ msgstr "Pages du paquet"
 msgid "Package name"
 msgstr "Nom du paquet"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "Liste des noms de pages - séparées par des virgules"
 
 #, python-format

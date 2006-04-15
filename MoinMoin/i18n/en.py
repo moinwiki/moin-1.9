@@ -98,10 +98,10 @@ Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''',
 '''You are not allowed to do %s on this page.''':
 '''You are not allowed to do %s on this page.''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s and try again.''',
+'''Login''':
+'''Login''',
 '''%.2f seconds''':
 '''%.2f seconds''',
 '''match''':
@@ -650,8 +650,8 @@ reStructuredText Quick Reference
 '''Package pages''',
 '''Package name''':
 '''Package name''',
-'''List of page names - separated by <tt>,</tt>''':
-'''List of page names - separated by <tt>,</tt>''',
+'''List of page names - separated by a comma''':
+'''List of page names - separated by a comma''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''',
 '''Missing password. Please enter user name and password.''':

@@ -99,10 +99,10 @@ space between words. Group page name is not allowed.''':
 ユーザ名には、すべてのUnicode英数文字(単語の間に1個のスペースを入れることも可)が使用できます。グループ名を利用することはできません。''',
 '''You are not allowed to do %s on this page.''':
 '''このページを%sする権限がありません。''',
-'''Login''':
-'''ログイン''',
 ''' %s and try again.''':
 '''%sして、もう一度試してみてください。''',
+'''Login''':
+'''ログイン''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''約%(pages)dページ中%(hits)d箇所一致しました。''',
 '''%.2f seconds''':
@@ -654,8 +654,6 @@ reStructuredText Quick Reference
 '''ページのパッケージ化''',
 '''Package name''':
 '''パッケージ名''',
-'''List of page names - separated by <tt>,</tt>''':
-'''ページ名のリスト (<tt>,</tt>区切り)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
 '''Missing password. Please enter user name and password.''':
@@ -996,6 +994,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''ブックマークをセット''',
 '''[Bookmark reached]''':
 '''[以下、ブックマークのタイムスタンプ以前の更新のため非表示]''',
+'''Contents''':
+'''目次''',
 '''No wanted pages in this wiki.''':
 '''このwikiに参照先がないページはありません。''',
 '''Invalid include arguments "%s"!''':

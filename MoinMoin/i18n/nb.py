@@ -90,10 +90,10 @@ Navn kan bare inneholde alfanumeriske Unicode-tegn, eventuelt med et mellomrom
 mellom ordene. Gruppenavn er ikke tillatt.''',
 '''You are not allowed to do %s on this page.''':
 '''Du har ikke tillatelse til å %s denne siden!''',
-'''Login''':
-'''Logg inn''',
 ''' %s and try again.''':
 ''' %s og prøv igjen.''',
+'''Login''':
+'''Logg inn''',
 '''%.2f seconds''':
 '''%.2f sekunder''',
 '''match''':

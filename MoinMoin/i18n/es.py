@@ -100,10 +100,10 @@ El nombre puede tener caracteres alfa-numéricos Unicode, con la opción
 de un espacio entre palabras (no recomendado). No se permite usar la palabra Grupo en el nombre de una página.''',
 '''You are not allowed to do %s on this page.''':
 '''No tienes permisos para hacer %s en esta página.''',
-'''Login''':
-'''Ingresar''',
 ''' %s and try again.''':
 ''' %s e inténtalo nuevamente.''',
+'''Login''':
+'''Ingresar''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d resultantes entre %(pages)d páginas revisadas.''',
 '''%.2f seconds''':
@@ -650,8 +650,6 @@ Referencia rápida de reStructuredText
 '''Páginas del paquete''',
 '''Package name''':
 '''Nombre del paquete''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Lista de nombres de página - separados por <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
 '''Missing password. Please enter user name and password.''':

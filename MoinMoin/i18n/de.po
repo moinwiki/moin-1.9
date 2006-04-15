@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -188,12 +188,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Sie dürfen die Aktion %s nicht ausführen auf dieser Seite."
 
-msgid "Login"
-msgstr "Anmelden"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s und probieren Sie es noch einmal."
+
+msgid "Login"
+msgstr "Anmelden"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1090,7 +1090,8 @@ msgstr "Seiten paketieren"
 msgid "Package name"
 msgstr "Paketname"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "Liste von Seitennamen - getrennt durch <tt>,</tt>"
 
 #, python-format

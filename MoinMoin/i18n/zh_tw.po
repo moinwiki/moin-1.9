@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-04-14 16:30+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -181,12 +181,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "你無權「%s」本頁。"
 
-msgid "Login"
-msgstr "登入"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s 後再試一次。"
+
+msgid "Login"
+msgstr "登入"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1035,7 +1035,8 @@ msgstr "打包頁面"
 msgid "Package name"
 msgstr "包裹名稱"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "輸入頁面名稱 (以逗號分開)"
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -182,12 +182,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "您不可以对此页进行%s操作."
 
-msgid "Login"
-msgstr "登录"
-
 #, python-format
 msgid " %s and try again."
 msgstr "%s后再试."
+
+msgid "Login"
+msgstr "登录"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1026,7 +1026,7 @@ msgstr "相似网页"
 msgid "Package name"
 msgstr "相似网页"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

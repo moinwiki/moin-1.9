@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -187,12 +187,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Nemáte oprávnění dělat %s na této stránce."
 
-msgid "Login"
-msgstr "Přihlášení"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s a zkuste to znovu."
+
+msgid "Login"
+msgstr "Přihlášení"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1060,7 +1060,7 @@ msgstr "Vytvořit balík stránek"
 msgid "Package name"
 msgstr "Vytvořit balík stránek"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, fuzzy, python-format

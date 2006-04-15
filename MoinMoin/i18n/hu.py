@@ -93,10 +93,10 @@ A névben bármilyen Unicode alfanumerikus karakter szerepelhet, opcionálisan
 egy szóköz helyezhető a szavak közé. Nem használható viszont a csoportlapok neve.''',
 '''You are not allowed to do %s on this page.''':
 '''A(z) %s műveletet nem hajthatja végre ezen a lapon.''',
-'''Login''':
-'''Belépés''',
 ''' %s and try again.''':
 ''' %s, majd próbálja újra.''',
+'''Login''':
+'''Belépés''',
 '''%.2f seconds''':
 '''%.2f s''',
 '''match''':

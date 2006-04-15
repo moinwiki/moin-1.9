@@ -97,10 +97,10 @@ space between words. Group page name is not allowed.''':
 Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağlı olarak iki kelime arasında bir tek boşluk da bırakılabilir. Grupların sayfa isimlerinin kullanımına izin verilmemektedir.''',
 '''You are not allowed to do %s on this page.''':
 '''Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz.''',
-'''Login''':
-'''Giriş''',
 ''' %s and try again.''':
 '''%s ve tekrar deneyin.''',
+'''Login''':
+'''Giriş''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(pages)d sayfa içinden %(hits)d sonuç bulundu''',
 '''%.2f seconds''':

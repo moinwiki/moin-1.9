@@ -92,10 +92,10 @@ Gebruikersnaam mag ieder Unicode alpha-numeriek karakter bevatten, met optioneel
 spatie tussen woorden. Groeps paginanaam is niet toegestaan.''',
 '''You are not allowed to do %s on this page.''':
 '''Het is u niet toegestaan om %s op deze pagina te doen.''',
-'''Login''':
-'''Inloggen''',
 ''' %s and try again.''':
 ''' %s en probeer opnieuw''',
+'''Login''':
+'''Inloggen''',
 '''%.2f seconds''':
 '''%.2f seconden''',
 '''match''':

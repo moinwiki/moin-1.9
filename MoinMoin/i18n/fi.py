@@ -98,10 +98,10 @@ Nimi voi muodostua mistä tahansa Unicoden kirjain- ja numeromerkeistä, ja
 sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita.''',
 '''You are not allowed to do %s on this page.''':
 '''Sinulla ei ole oikeutta toimintoon %s tälle sivulle.''',
-'''Login''':
-'''Kirjaudu sisään''',
 ''' %s and try again.''':
 ''' %s ja yritä uudelleen.''',
+'''Login''':
+'''Kirjaudu sisään''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d tulosta noin %(pages)d sivusta.''',
 '''%.2f seconds''':

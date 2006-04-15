@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-01-26 08:53 (UTC)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -188,12 +188,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Você não tem permissão para fazer %s nesta página."
 
-msgid "Login"
-msgstr "Login"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s e tente novamente."
+
+msgid "Login"
+msgstr "Login"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1060,7 +1060,7 @@ msgstr "Páginas Semelhantes"
 msgid "Package name"
 msgstr "Páginas Semelhantes"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

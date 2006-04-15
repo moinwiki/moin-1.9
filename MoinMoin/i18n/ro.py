@@ -98,10 +98,10 @@ Numele poate conţine orice caractere Unicode alfanumerice , cu un
 spaţiu opţional între cuvinte. Nume de grup de pagini nu este permis.''',
 '''You are not allowed to do %s on this page.''':
 '''Pe această pagină nu puteţi face %s''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s şi încercaţi din nou.''',
+'''Login''':
+'''Login''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d rezultate din aproximativ %(pages)d pagini.''',
 '''%.2f seconds''':

@@ -97,10 +97,10 @@ O nome pode conter qualquer caractere alfanumérico Unicode, com um espaço opci
 entre as palavras. Nome de grupo de página não é permitido.''',
 '''You are not allowed to do %s on this page.''':
 '''Você não tem permissão para fazer %s nesta página.''',
-'''Login''':
-'''Login''',
 ''' %s and try again.''':
 ''' %s e tente novamente.''',
+'''Login''':
+'''Login''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d páginas localizadas de %(pages)d páginas.''',
 '''%.2f seconds''':

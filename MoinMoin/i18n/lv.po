@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -190,12 +190,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Jūs nedrīkstat veikt %s ar šo lapu."
 
-msgid "Login"
-msgstr "Ieiet"
-
 #, python-format
 msgid " %s and try again."
 msgstr "%s un mēģiniet vēlreiz."
+
+msgid "Login"
+msgstr "Ieiet"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -783,6 +783,23 @@ msgid ""
 "reStructuredText Quick Reference\n"
 "</a>.\n"
 msgstr ""
+"Uzsvērt: <i>*kursīvā*</i> <b>**treknrakstā**</b> ``mašīnraksts``<br/>\n"
+"<br/><pre>\n"
+"Virsraksti: Virsraksts 1  Virsraksts 2  Virsraksts 3\n"
+"            ============  ------------  ~~~~~~~~~~~~\n"
+"\n"
+"Horizontāla līnija: ---- \n"
+"Saites: SekojošaZemsvītra_ `vairāki vārdi ieverti atapostrofos`_ ārēja_ \n"
+"\n"
+".. _ārēja: http://ārēja-saite.lv/jebkas/\n"
+"\n"
+"Saraksti: * atzīmes; 1., a. numurēti elementi.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Detalizētākai pamācībai apmeklējiet \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
 
 msgid "Diffs"
 msgstr "Atšķirības"
@@ -1056,7 +1073,8 @@ msgstr "Iesaiņot lapas"
 msgid "Package name"
 msgstr "Saiņa nosaukums"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "Lapu saraksts, atdalīts ar <tt>,</tt>"
 
 #, python-format

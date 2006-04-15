@@ -88,10 +88,10 @@ space between words. Group page name is not allowed.''':
 Tên có thể dùng mọi chữ số Unicode, với một khoảng trắng không bắt buộc ở giữa. Bạn không thể dùng tên cho nhóm.''',
 '''You are not allowed to do %s on this page.''':
 '''Bạn không thể %s vào trang này.''',
-'''Login''':
-'''Đăng nhập''',
 ''' %s and try again.''':
 ''' %s và thử lại.''',
+'''Login''':
+'''Đăng nhập''',
 '''%.2f seconds''':
 '''%.2f giây''',
 '''match''':

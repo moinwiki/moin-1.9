@@ -99,10 +99,10 @@ space between words. Group page name is not allowed.''':
 但不能使用群組頁面的名字。''',
 '''You are not allowed to do %s on this page.''':
 '''你無權「%s」本頁。''',
-'''Login''':
-'''登入''',
 ''' %s and try again.''':
 ''' %s 後再試一次。''',
+'''Login''':
+'''登入''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''在 %(pages)d 頁中找到 %(hits)d 筆。''',
 '''%.2f seconds''':
@@ -649,8 +649,6 @@ reStructuredText 快速參考
 '''打包頁面''',
 '''Package name''':
 '''包裹名稱''',
-'''List of page names - separated by <tt>,</tt>''':
-'''輸入頁面名稱 (以逗號分開)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''不明的使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
 '''Missing password. Please enter user name and password.''':

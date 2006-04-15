@@ -15,9 +15,9 @@ text = {
 '''Revision %(rev)d as of %(date)s''':
 '''%(date)s에 수정된 %(rev)d번째 판''',
 '''Redirected from page "%(page)s"''':
-'''"%(page)s"로부터 옮겨 옴''',
+'''"%(page)s"(으)로부터 옮겨 옴''',
 '''This page redirects to page "%(page)s"''':
-'''"%(page)s"로 이동합니다.''',
+'''"%(page)s"(으)로 이동합니다.''',
 '''~-If you submit this form, the submitted values will be displayed.
 To use this form on other pages, insert a
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
@@ -76,8 +76,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''취소''',
 '''By hitting \'\'\'%(save_button_text)s\'\'\' you put your changes under the %(license_link)s.
 If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your changes.''':
-'''\'\'\'%(save_button_text)s\'\'\'을 누르면 지금의 변경사항에 %(license_link)s가(이)적용된다는 것을 확인해 주세요.
-동의하지 않는 경우에는 \'\'\'%(cancel_button_text)s\'\'\'를 눌러서 변경사항을 취소할 수 있습니다.''',
+'''\'\'\'%(save_button_text)s\'\'\'를(을) 누르면 지금의 변경사항에 %(license_link)s가(이)적용된다는 것을 확인해 주세요.
+동의하지 않는 경우에는 \'\'\'%(cancel_button_text)s\'\'\'를(을) 눌러서 변경사항을 취소할 수 있습니다.''',
 '''Preview''':
 '''미리보기''',
 '''Text mode''':
@@ -100,10 +100,10 @@ space between words. Group page name is not allowed.''':
 띄어 쓸 수 있습니다. 묶음 문서 이름도 또한 사용할 수 없습니다.''',
 '''You are not allowed to do %s on this page.''':
 '''이 문서에 %s 작업을 할 수 있는 권한이 없습니다.''',
-'''Login''':
-'''로그인''',
 ''' %s and try again.''':
 ''' %s 하고 다시 시도하세요.''',
+'''Login''':
+'''로그인''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''전체 %(pages)d 문서 중에 조건에 맞는 것이 %(hits)d개 발견되었습니다.''',
 '''%.2f seconds''':
@@ -151,7 +151,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Please provide a valid email address!''':
 '''올바른 메일 주소를 써주세요!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
-'''메일 주소가 \'%(email)s\'로 되어있는 계정이 없습니다!''',
+'''메일 주소가 \'%(email)s\'(으)로 되어있는 계정이 없습니다!''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''계정을 새로 만들거나 계정 정보를 수정하기 위해서는 UserPreferences를 이용하세요.''',
 '''Empty user name. Please enter a user name.''':
@@ -297,9 +297,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Bad timestamp \'%s\'''':
 '''잘못된 책갈피 시간 \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
-'''"%(token)s"뒤에는 "="이 와야 합니다''',
+'''"%(token)s" 뒤에는 "="이 와야 합니다''',
 '''Expected a value for key "%(token)s"''':
-'''"%(token)s"뒤에는 값이 필요합니다.''',
+'''"%(token)s" 뒤에는 값이 필요합니다.''',
 '''Wiki Markup''':
 '''위키 부호''',
 '''Print View''':
@@ -357,7 +357,7 @@ The following page has been changed by %(editor)s:
 '''[%(lang)s] %(recipients)s: %(status)s''':
 '''[%(lang)s] %(recipients)s: %(status)s''',
 '''## backup of page "%(pagename)s" submitted %(date)s''':
-'''## 문서 "%(pagename)s"의 %(date)s 백업''',
+'''## %(date)s에 만들어진 문서 "%(pagename)s"의 백업''',
 '''Page could not get locked. Unexpected error (errno=%d).''':
 '''예기치 않은 에러 때문에 문서를 잠글 수 없었습니다. (에러번호=%d)''',
 '''Page could not get locked. Missing \'current\' file?''':
@@ -446,6 +446,42 @@ To leave the editor, press the Cancel button.''':
  표:: || 칸 내용 |||| 2칸을 차지하는 내용 ||;    표제나 표 뒤에는 공백이 있으면 안 됩니다.
 
 (!) 보다 자세한 정보는 HelpOnEditing 또는 SyntaxReference를 참고하세요.
+''',
+'''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
+<br/><pre>
+Headings: Heading 1  Heading 2  Heading 3
+          =========  ---------  ~~~~~~~~~
+
+Horizontal rule: ---- 
+Links: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+Lists: * bullets; 1., a. numbered items.
+</pre>
+<br/>
+(!) For more help, see the 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
+''':
+'''강조: <i>*뉘여쓰기*</i> <b>**굵게**</b> ``타자체``<br/>
+<br/><pre>
+표제: 표제 1  표제 2  표제 3
+     =====  ------  ~~~~~
+
+가로 줄: ---- 
+링크: TrailingUnderscore_ `multi word with backticks`_ external_ 
+
+.. _external: http://external-site.net/foo/
+
+목록: * 글머리표; 1., a. 번호매기기.
+</pre>
+<br/>
+(!) 더 많은 정보를 원하시면 아래 링크를 참고하세요. 
+<a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">
+reStructuredText Quick Reference
+</a>.
 ''',
 '''Diffs''':
 '''차이점 비교''',
@@ -617,8 +653,6 @@ To leave the editor, press the Cancel button.''':
 '''문서 묶기''',
 '''Package name''':
 '''패키지 이름''',
-'''List of page names - separated by <tt>,</tt>''':
-'''문서 리스트 - <tt>,</tt>로 구분됨''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
 '''Missing password. Please enter user name and password.''':
@@ -703,10 +737,48 @@ Try a different name.''':
 '''삭제''',
 '''Optional reason for the deletion''':
 '''삭제하는 이유''',
+'''Restored Backup: %(filename)s to target dir: %(targetdir)s.
+Files: %(filecount)d, Directories: %(dircount)d''':
+'''백업: %(filename)s 가(이) 다음 디렉토리로 복원됨: %(targetdir)s.
+파일: %(filecount)d 개, 디렉토리: %(dircount)d 개''',
+'''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
+'''백업: %(filename)s 를(을) 디렉토리: %(targetdir)s 로 복원하는데 실패했습니다.''',
+'''Wiki Backup / Restore''':
+'''위키 백업/복원''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''도움말:
+ * 백업 데이터를 복원하실 때:
+  * 복원 데이터는 이미 존재하는 데이터를 덮어쓰므로 주의하셔야 합니다.
+  * 파일의 이름은 <siteid>.tar.<compression> 형태로 하세요. (--date--time--UTC 같은 것들은 빼버리세요.).
+  * 백업 파일을 backup_storage_dir 디렉토리에 두세요 (scp, ftp 등을 사용하시면 됩니다).
+  * 아래의 [[GetText(Restore)]] 버튼을 누르세요.
+
+ * 백업을 하실 때는 [[GetText(Backup)]] 버튼을 누른 후 생성된 파일을
+   안전한 장소에 보관하시면 됩니다.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''',
 '''Backup''':
 '''백업''',
+'''Restore''':
+'''복원''',
 '''You are not allowed to do remote backup.''':
 '''원격 백업을 할 수 있는 권한이 없습니다.''',
+'''Unknown backup subaction: %s.''':
+'''알 수 없는 백업 하위 작업: %s''',
 '''[%d attachments]''':
 '''[첨부 %d개]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -774,13 +846,13 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Attachment \'%(filename)s\' installed.''':
 '''첨부 파일 \'%(filename)s\'를(을) 설치함''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too large (%(space)d kB missing).''':
-'''첨부 파일 \'%(filename)s\' 가(이) 압축 해제되지 못했습니다. 디스크의 용량이 부족한 것 같습니다. (%(space)d kB 모자람).''',
+'''첨부 파일 \'%(filename)s\'의 압축을 해제하지 못했습니다. 디스크의 용량이 부족한 것 같습니다. (%(space)d kB 모자람).''',
 '''Attachment \'%(filename)s\' could not be unzipped because the resulting files would be too many (%(count)d missing).''':
-'''첨부 파일 \'%(filename)s\' 가(이) 압축 해제되지 못했습니다. 압축 해제될 파일의 갯수가 너무 많은 것 같습니다. (%(count)d개 빠짐).''',
+'''첨부 파일 \'%(filename)s\'의 압축을 해제하지 못했습니다. 압축 해제될 파일의 갯수가 너무 많은 것 같습니다. (%(count)d개 빠짐).''',
 '''Attachment \'%(filename)s\' unzipped.''':
 '''첨부 파일 \'%(filename)s\'의 압축을 해제함''',
 '''Attachment \'%(filename)s\' not unzipped because the files are too big, .zip files only, exist already or reside in folders.''':
-'''첨부 파일 \'%(filename)s\' 는(은 압축 해제될 수 없었습니다. 파일이 너무 크거나 .zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다.''',
+'''첨부 파일 \'%(filename)s\'의 압축을 해제할 수 없었습니다. 파일이 너무 크거나 .zip 파일들만 있거나 이미 존재하는 폴더인 것 같습니다.''',
 '''The file %(target)s is not a .zip file.''':
 '''파일 %(target)s 는(은) .zip 파일이 아닙니다.''',
 '''Attachment \'%(filename)s\'''':
@@ -891,6 +963,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''책갈피 두기''',
 '''[Bookmark reached]''':
 '''[여기까지 책갈피]''',
+'''Contents''':
+'''차례''',
 '''No wanted pages in this wiki.''':
 '''이 위키에는 수배중인 문서 (링크는 있지만 내용이 없는 문서) 가 없습니다.''',
 '''Invalid include arguments "%s"!''':

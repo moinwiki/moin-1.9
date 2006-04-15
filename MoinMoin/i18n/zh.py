@@ -98,10 +98,10 @@ space between words. Group page name is not allowed.''':
 组页(Group page)名不能用作用户名.''',
 '''You are not allowed to do %s on this page.''':
 '''您不可以对此页进行%s操作.''',
-'''Login''':
-'''登录''',
 ''' %s and try again.''':
 '''%s后再试.''',
+'''Login''':
+'''登录''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''在大约%(pages)d页中找到%(hits)d个结果.''',
 '''%.2f seconds''':

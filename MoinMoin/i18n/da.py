@@ -97,10 +97,10 @@ Navn må kun indeholde Unicode alfanumeriske tegn, evt. med eet
 mellemrum mellem ordene. Navne på gruppesider er ikke tilladt.''',
 '''You are not allowed to do %s on this page.''':
 '''Du har ikke lov til at %s på denne side.''',
-'''Login''':
-'''Log ind''',
 ''' %s and try again.''':
 ''' %s og prøv igen.''',
+'''Login''':
+'''Log ind''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d resultater ud af cirka %(pages)d sider.''',
 '''%.2f seconds''':

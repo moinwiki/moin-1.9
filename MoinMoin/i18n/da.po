@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2005-11-18 21:40+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -184,12 +184,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Du har ikke lov til at %s på denne side."
 
-msgid "Login"
-msgstr "Log ind"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s og prøv igen."
+
+msgid "Login"
+msgstr "Log ind"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1051,7 +1051,7 @@ msgstr "Lignende sider"
 msgid "Package name"
 msgstr "Lignende sider"
 
-msgid "List of page names - separated by <tt>,</tt>"
+msgid "List of page names - separated by a comma"
 msgstr ""
 
 #, python-format

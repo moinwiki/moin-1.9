@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-14 12:33+0200\n"
+"POT-Creation-Date: 2006-04-15 18:22+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Hristo Iliev <hristo@phys.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <moin-devel@lists.sourceforge.net>\n"
@@ -183,12 +183,12 @@ msgstr ""
 msgid "You are not allowed to do %s on this page."
 msgstr "Не Ви е позволено да правите %s на тази страница."
 
-msgid "Login"
-msgstr "Вход"
-
 #, python-format
 msgid " %s and try again."
 msgstr " %s и опитайте отново."
+
+msgid "Login"
+msgstr "Вход"
 
 #, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
@@ -1078,7 +1078,8 @@ msgstr "Страници в пакета"
 msgid "Package name"
 msgstr "Име на пакета"
 
-msgid "List of page names - separated by <tt>,</tt>"
+#, fuzzy
+msgid "List of page names - separated by a comma"
 msgstr "Списък от имена на страници - разделени с <tt>,</tt>"
 
 #, python-format

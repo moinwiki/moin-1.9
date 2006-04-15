@@ -99,10 +99,10 @@ space between words. Group page name is not allowed.''':
 интервал между думите. Не е позволено да ползвате имена на групови страници.''',
 '''You are not allowed to do %s on this page.''':
 '''Не Ви е позволено да правите %s на тази страница.''',
-'''Login''':
-'''Вход''',
 ''' %s and try again.''':
 ''' %s и опитайте отново.''',
+'''Login''':
+'''Вход''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d резултата от около %(pages)d страници.''',
 '''%.2f seconds''':
@@ -651,8 +651,6 @@ reStructuredText Quick Reference
 '''Страници в пакета''',
 '''Package name''':
 '''Име на пакета''',
-'''List of page names - separated by <tt>,</tt>''':
-'''Списък от имена на страници - разделени с <tt>,</tt>''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Непознато потребителско име: {{{"%s"}}}. Моля, въведете потребителско име и парола.''',
 '''Missing password. Please enter user name and password.''':
