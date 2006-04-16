@@ -2,6 +2,20 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-16 16:31:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-578
+
+    Summary:
+      SF 1.5.3 release archive patchlevel
+    Revision:
+      moin--main--1.5--patch-578
+
+    SF 1.5.3 release archive patchlevel
+    
+
+    modified files:
+     ChangeLog MoinMoin/__init__.py
+
+
 2006-04-15 21:42:39 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-577
 
     Summary:
