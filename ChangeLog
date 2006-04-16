@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-16 22:41:32 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-579
+
+    Summary:
+      Moved a section in CHANGES onto another level
+    Revision:
+      moin--main--1.5--patch-579
+
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-04-16 16:31:06 GMT	Thomas Waldmann <tw@waldmann-edv.de>	patch-578
 
     Summary:
