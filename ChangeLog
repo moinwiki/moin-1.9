@@ -2,6 +2,18 @@
 # arch-tag: automatic-ChangeLog--arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 #
 
+2006-04-17 12:50:10 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-580
+
+    Summary:
+      Fixed minor false friend in CHANGES.
+    Revision:
+      moin--main--1.5--patch-580
+
+
+    modified files:
+     ChangeLog docs/CHANGES
+
+
 2006-04-16 22:41:32 GMT	Alexander Schremmer <alex@alexanderweb.de.tla>	patch-579
 
     Summary:
