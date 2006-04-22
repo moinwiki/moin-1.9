@@ -21,8 +21,8 @@ SpackOrg http://www.spack.org/index.cgi/
 ESW http://esw.w3.org/topic/
 OSPedia http://ospedia.osdir.com/
 MsgID http://groups.google.com/groups?as_umsgid=
-MoinCVS http://arch.thinkmo.de/cgi-bin/archzoom.cgi/arch@arch.thinkmo.de--2003-archives/moin--main--1.3--LATEST/
-MoinSrc http://arch.thinkmo.de/cgi-bin/archzoom.cgi/arch@arch.thinkmo.de--2003-archives/moin--main--1.3--LATEST/
+MoinCVS http://hg.thinkmo.de/moin/1.5?f=-1;file=
+MoinSrc http://hg.thinkmo.de/moin/1.5?f=-1;file=
 PyWebMail http://pywebmail.sourceforge.net/cgi-bin/moin.cgi/
 BcWireless http://www.bcwireless.net/moin.cgi/
 DebianBug http://bugs.debian.org/
