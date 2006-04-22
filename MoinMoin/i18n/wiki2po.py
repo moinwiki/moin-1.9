@@ -6,7 +6,7 @@ def run():
     import sys, xmlrpclib
     sys.path.insert(0, '../..')
 
-    excluded = ["en",] # languages managed in tla repository, not in wiki
+    excluded = ["en",] # languages managed in repository, not in wiki
 
     langfname = sys.argv[1]
     lang = langfname.replace('_', '-') # module names use _ instead of -

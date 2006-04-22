@@ -67,17 +67,12 @@ check-i18n:
 
 # Update the current tree from `tla my-default-archive`
 update:
-	tla update
+	hg pull -u
 	$(MAKE) patchlevel
 
 # Update underlay directory from the tarball
 update-underlay:
 	cd $(share); rm -rf underlay; tar xjf underlay.tar.bz2
-
-# Merge from main branch
-# Ignore error in the merge and update underlay
-merge:
-	tla star-merge arch@arch.thinkmo.de--2003-archives/moin--main--1.5
 
 test: 
 	@python tests/maketestwiki.py
@@ -93,6 +88,6 @@ clean-pyc:
 	find . -name "*.pyc" -exec rm -rf "{}" \; 
 
 .PHONY: all dist install-docs check-tabs epydoc underlay patchlevel \
-	check-i18n update update-underlay merge test testwiki clean \
+	check-i18n update update-underlay test testwiki clean \
 	clean-testwiki clean-pyc
 
