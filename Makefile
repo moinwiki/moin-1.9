@@ -59,7 +59,7 @@ dist:
 
 # Create patchlevel module
 patchlevel:
-	@echo -e patchlevel = "\"`tla logs | tail -n1`\"\n" >MoinMoin/patchlevel.py
+	@echo -e patchlevel = "\"`hg identify`\"\n" >MoinMoin/patchlevel.py
 
 # Report translations status
 check-i18n:
