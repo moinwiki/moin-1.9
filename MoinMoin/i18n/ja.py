@@ -654,6 +654,8 @@ reStructuredText Quick Reference
 '''ページのパッケージ化''',
 '''Package name''':
 '''パッケージ名''',
+'''List of page names - separated by a comma''':
+'''ページ名のリスト (カンマ区切り)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}は不正なユーザ名です。正しいユーザ名を入力してください。''',
 '''Missing password. Please enter user name and password.''':

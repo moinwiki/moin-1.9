@@ -227,6 +227,10 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Mot de passe''',
 '''Action''':
 '''Action''',
+'''Required attribute "%(attrname)s" missing''':
+'''L\'attribut « %(attrname)s » requis est manquant''',
+'''Submitted form data:''':
+'''Données du formulaire envoyé :''',
 '''Search Titles''':
 '''Recherche de titre''',
 '''Display context of search results''':
@@ -407,10 +411,26 @@ to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
 '''%(owner)s a commencé d\'éditer ou de prévisualiser cette page pour la dernière fois le %(timestamp)s.[[BR]] \'\'\'Afin d\'éviter des conflits d\'édition,  vous \'\'ne\'\' devriez \'\'pas\'\' éditer cette page avant au moins %(mins_valid)d nouvelles minutes.\'\'\'[[BR]]
 Pour quitter l\'éditeur, utilisez le bouton « Annuler ».''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''Ce paquet a besoin d\'une version plus récente de MoinMoin (au minimum %s).''',
+'''The theme name is not set.''':
+'''Le nom du thème n\'est pas défini.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''L\'installation de fichiers de thème n\'est compatible qu\'avec les serveurs de type autonome.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Enregistrement du dessin « %(filename)s ».''',
 '''The file %s is not a MoinMoin package file.''':
 '''Le fichier %s n\'est pas un paquet MoinMoin.''',
+'''The page %s does not exist.''':
+'''La page %s n\'existe pas.''',
+'''Invalid package file header.''':
+'''Fichier d\'en-tête du paquet non valide.''',
+'''Package file format unsupported.''':
+'''Format de paquet non compatible.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Fonction %(func)s inconnue à la ligne %(lineno)i.''',
+'''The file %s was not found in the package.''':
+'''Le fichier %s n\'est pas présent dans ce paquet.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -633,6 +653,8 @@ Guide de référence rapide de reStructuredText
 '''Pages du paquet''',
 '''Package name''':
 '''Nom du paquet''',
+'''List of page names - separated by a comma''':
+'''Liste des noms de pages - séparées par des virgules''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nom d\'utilisateur inconnu : {{{"%s"}}}. Veuillez indiquer un nom d\'utilisateur et un mot de passe.''',
 '''Missing password. Please enter user name and password.''':
@@ -726,6 +748,14 @@ Essayez un autre nom.''',
 '''Liste de tout les liens pour « %s »''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossible de créer une page sans nom. Veuillez indiquer un nom de page.''',
+'''Pages''':
+'''Pages''',
+'''Select Author''':
+'''Choix de l\'auteur''',
+'''Revert all!''':
+'''Tout restaurer !''',
+'''You are not allowed to use this action.''':
+'''Vous n\'êtes pas autorisé à utiliser cette action.''',
 '''Subscribe users to the page %s''':
 '''Abonner les utilisateurs à la page %s''',
 '''Subscribed for %s:''':
@@ -975,6 +1005,8 @@ en blanc, le nom original sera conservé.''',
 '''placer un signet''',
 '''[Bookmark reached]''':
 '''[Signet atteint]''',
+'''Contents''':
+'''Sommaire''',
 '''No wanted pages in this wiki.''':
 '''Aucune page référencée ne reste à créer.''',
 '''Invalid include arguments "%s"!''':

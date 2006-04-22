@@ -100,10 +100,10 @@ space between words. Group page name is not allowed.''':
 نام صفحات گروهی قابل قبول نیست.''',
 '''You are not allowed to do %s on this page.''':
 '''شما مجاز به %s روی این صفحه نمی باشید.''',
-''' %s and try again.''':
-'''لطفا پس از %s به سایت مجددا سعی نمایید.''',
 '''Login''':
 '''ورود''',
+''' %s and try again.''':
+'''لطفا پس از %s به سایت مجددا سعی نمایید.''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d نتیجه بدست آمده حاصل از جستجوی %(pages)d صفحه''',
 '''%.2f seconds''':
@@ -215,9 +215,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Email''':
 '''آدرس ایمیل''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''برای ایجاد حساب کاربری جدید و یا بازیافت کلمه رمز خود صفحه %(userprefslink)s را ببینید.''',
+'''جهت ایجاد حساب کاربری جدید و یا بازیافت کلمه رمز خود صفحه %(userprefslink)s را ببینید.''',
 '''Name''':
-'''نام''',
+'''نام کاربری''',
 '''Password''':
 '''کلمه عبور''',
 '''Action''':
@@ -227,13 +227,13 @@ Contact the owner of the wiki, who can enable email.''':
 '''Submitted form data:''':
 '''اطلاعات وارد شده:''',
 '''Search Titles''':
-'''عناوین جستجو''',
+'''جستجو در عناوین''',
 '''Display context of search results''':
 '''نتایج جستجو را نشان بده''',
 '''Case-sensitive searching''':
 '''جستجوی حساس به حروف بزرگ و کوچک''',
 '''Search Text''':
-'''جستجوی درون متن''',
+'''جستجو در متون''',
 '''Go To Page''':
 '''برو به صفحه''',
 '''Include system pages''':
@@ -647,10 +647,12 @@ reStructuredText Quick Reference
 '''بسته صفحات''',
 '''Package name''':
 '''نام بسته''',
+'''List of page names - separated by a comma''':
+'''لیست نام صفحات - نام صفحات با کاما جدا شوند''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''نام کاربری {{{"%s"}}} یافت نشد. لطفا نام کاربری و کلمه عبور را وارد نمایید. ''',
 '''Missing password. Please enter user name and password.''':
-'''کلمه رمز از دست رفته است. لطفا نام کاربری و کلمه عبور خود را وارد نمایید.''',
+'''کلمه رمز وارد نشده است. لطفا نام کاربری و کلمه عبور صحیح خود را مجددا وارد نمایید.''',
 '''Sorry, wrong password.''':
 '''متاسفم٬ کلمه عبور اشتباه می باشد.''',
 '''Exactly one page like "%s" found, redirecting to page.''':
@@ -998,7 +1000,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Nothing found for "%s"!''':
 '''برای "%s" چیزی یافت نشد!''',
 '''Markup''':
-'''نوع علامت''',
+'''علائم نگارشی''',
 '''Display''':
 '''نمایش''',
 '''Filename''':
@@ -1056,9 +1058,9 @@ red=edit''':
 '''[RSS]''':
 '''[RSS]''',
 '''[DELETED]''':
-'''[حذف شد]''',
+'''[حذف شده]''',
 '''[UPDATED]''':
-'''[به روزآوری شد]''',
+'''[به روزآوری شده]''',
 '''[NEW]''':
 '''[جدید]''',
 '''[DIFF]''':
@@ -1068,9 +1070,9 @@ red=edit''':
 '''[TOP]''':
 '''[ابتدای صفحه]''',
 '''Click to do a full-text search for this title''':
-'''برای انجام جستجوی کامل این موضوع کلیک نمایید''',
+'''جهت جستجوی کامل این موضوع در سایت کلیک نمایید''',
 '''Preferences''':
-'''مرجع اطلاعات کاربری''',
+'''اطلاعات کاربری''',
 '''Logout''':
 '''خروج''',
 '''Clear message''':

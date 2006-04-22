@@ -651,6 +651,8 @@ reStructuredText Quick Reference
 '''Zapakiraj strani v ZIP''',
 '''Package name''':
 '''Ime ZIP paketa''',
+'''List of page names - separated by a comma''':
+'''Seznam imen strani, ločenih z vejicami''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Neznano uporabniško ime: {{{"%s"}}}. Prosimo vnesite uporabniško ime in geslo.''',
 '''Missing password. Please enter user name and password.''':

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-09 18:05+0200\n"
+"PO-Revision-Date: 2006-04-17 23:52+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -398,11 +398,10 @@ msgstr "Action"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
+msgstr "L'attribut « %(attrname)s » requis est manquant"
 
-#, fuzzy
 msgid "Submitted form data:"
-msgstr "Abonné à %s"
+msgstr "Données du formulaire envoyé :"
 
 msgid "Search Titles"
 msgstr "Recherche de titre"
@@ -709,13 +708,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "Ce paquet a besoin d'une version plus récente de MoinMoin (au minimum %s)."
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "Le nom du thème n'est pas défini."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "L'installation de fichiers de thème n'est compatible qu'avec les serveurs de type autonome."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -725,23 +724,23 @@ msgstr "Enregistrement du dessin « %(filename)s »."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Le fichier %s n'est pas un paquet MoinMoin."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "La pièce jointe '%(filename)s' n'existe pas !"
+msgstr "La page %s n'existe pas."
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "Fichier d'en-tête du paquet non valide."
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "Format de paquet non compatible."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Sous-action de sauvegarde inconnue : %s."
+msgstr "Fonction %(func)s inconnue à la ligne %(lineno)i."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "Le fichier %s n'est pas un paquet MoinMoin."
+msgstr "Le fichier %s n'est pas présent dans ce paquet."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1100,7 +1099,6 @@ msgstr "Pages du paquet"
 msgid "Package name"
 msgstr "Nom du paquet"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
 msgstr "Liste des noms de pages - séparées par des virgules"
 
@@ -1268,20 +1266,17 @@ msgid ""
 msgstr ""
 "Impossible de créer une page sans nom. Veuillez indiquer un nom de page."
 
-#, fuzzy
 msgid "Pages"
-msgstr "Page"
+msgstr "Pages"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "Choix du compte"
+msgstr "Choix de l'auteur"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "Tout restaurer !"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
-msgstr "Vous n'êtes pas autorisé à réaliser cette action."
+msgstr "Vous n'êtes pas autorisé à utiliser cette action."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -1713,9 +1708,8 @@ msgstr "placer un signet"
 msgid "[Bookmark reached]"
 msgstr "[Signet atteint]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "SommaireDeL'Aide"
+msgstr "Sommaire"
 
 msgid "No wanted pages in this wiki."
 msgstr "Aucune page référencée ne reste à créer."

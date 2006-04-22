@@ -17,6 +17,7 @@ languages = {
 'fi': (u'Suomi', u'Finnish', 'utf-8', 0, """Tuukka Hastrup <Tuukka.Hastrup@iki.fi>""",),
 'fr': (u'Français', u'French', 'utf-8', 0, """JPG <fevrier@tigreraye.org>""",),
 'he': (u'עברית', u'Hebrew', 'utf-8', 1, """Nir Soffer <nirs@freeshell.org>""",),
+'hr': (u'hrvatski', u'Croatian', 'utf-8', 0, """Jure Kodzoman <kodzoman@gmail.com>""",),
 'hu': (u'Magyar', u'Hungarian', 'utf-8', 0, """VOROSBARANYI Zoltan <http://vbzo.li/>""",),
 'it': (u'Italiano', u'Italian', 'utf-8', 0, """Paolo Patruno <p.patruno@iperbole.bologna.it>""",),
 'ja': (u'Japanese', u'Japanese', 'utf-8', 0, """Fujio Nobori <toh@fuji-climb.org>""",),

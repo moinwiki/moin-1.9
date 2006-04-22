@@ -1067,7 +1067,6 @@ msgstr "Zapakiraj strani v ZIP"
 msgid "Package name"
 msgstr "Ime ZIP paketa"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
 msgstr "Seznam imen strani, ločenih z vejicami"
 

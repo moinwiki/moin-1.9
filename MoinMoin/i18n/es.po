@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-10 11:46-0300\n"
+"PO-Revision-Date: 2006-04-22 17:39-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -73,8 +73,8 @@ msgstr "¡No puedes editar versiones antiguas!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"La protección de tu edición ha expirado.¡Podría encontrar algún conflicto de "
-"edición!"
+"La protección de edición que tenías ha expirado.¡Es posible que "
+"encuentres algún conflicto de edición!"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -259,7 +259,7 @@ msgstr ""
 "Contacta al administrador del wiki. Él es quien puede habilitar los e-mails"
 
 msgid "Please provide a valid email address!"
-msgstr "Por favor, proporciona una dirección de e-mail válido."
+msgstr "Por favor, proporciona una dirección de e-mail válida."
 
 #, python-format
 msgid "Found no account matching the given email address '%(email)s'!"
@@ -358,7 +358,9 @@ msgid "Quick links"
 msgstr "Enlaces rápidos"
 
 msgid "This list does not work, unless you have entered a valid email address!"
-msgstr "¡Esta lista no funciona, salvo que ingreses un e-mail válido!"
+msgstr ""
+"¡Esta lista no funciona, salvo que ingreses una dirección de e-mail "
+"válida!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Páginas wiki suscritas (una expresión regular por línea)"
@@ -654,8 +656,8 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"El seguro de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha "
-"concedido la protección de edición de esta página."
+"La protección de edición de %(owner)s ha expirado hace %(mins_ago)d "
+"minuto(s), y se te ha concedido la protección de edición de esta página."
 
 #, python-format
 msgid ""
@@ -872,7 +874,7 @@ msgstr "Añadir espacios entre los NombresWiki mostrados"
 msgid "Remember login information"
 msgstr ""
 "Recordar tu información de ingreso (no será necesario volver a ingresar "
-"usuario y password, pero puede ser un problema de seguridad en computadoras "
+"usuario y contraseña, pero puede ser un problema de seguridad en computadoras "
 "compartidas)"
 
 msgid "Subscribe to trivial changes"
@@ -969,7 +971,7 @@ msgid "view"
 msgstr "ver"
 
 msgid "raw"
-msgstr "sin formato (texto plano)"
+msgstr "sin formato"
 
 msgid "print"
 msgstr "imprimir"
@@ -979,7 +981,7 @@ msgstr "revertir"
 
 #, python-format
 msgid "Revert to revision %(rev)d."
-msgstr "Volver a la revisión del %(rev)d."
+msgstr "Se revierte a revisión %(rev)d."
 
 msgid "edit"
 msgstr "editar"
@@ -994,7 +996,7 @@ msgid "N/A"
 msgstr "Sin información"
 
 msgid "Revision History"
-msgstr "Revisión de historia"
+msgstr "Historia de revisiones"
 
 msgid "No log entries found."
 msgstr "¡No se encontraron entradas en el registro!"
@@ -1005,7 +1007,7 @@ msgstr "Información de \"%s\""
 
 #, python-format
 msgid "Show \"%(title)s\""
-msgstr "Mostrar \"%(title)s\""
+msgstr "Ver \"%(title)s\""
 
 msgid "General Page Infos"
 msgstr "Información general de la página"
@@ -1015,7 +1017,7 @@ msgid "Show chart \"%(title)s\""
 msgstr "Mostrar gráficos \"%(title)s\""
 
 msgid "Page hits and edits"
-msgstr "Pedidos (lecturas) y ediciones de la página"
+msgstr "Accesos a y ediciones de la página"
 
 msgid "You are not allowed to revert this page!"
 msgstr ""
@@ -1030,7 +1032,7 @@ msgid "Your quicklink to this page has been removed."
 msgstr "Se eliminó tu enlace rápido a esta página."
 
 msgid "A quicklink to this page has been added for you."
-msgstr "Se te añadió un enlace rápido a esta página."
+msgstr "Se añadió un enlace a esta página a tu lista de enlaces rápidos."
 
 msgid "You are not allowed to subscribe to a page you can't read."
 msgstr "No tienes permisos para suscribirte a una página que no puedes ver."
@@ -1089,7 +1091,7 @@ msgid "Created the package %s containing the pages %s."
 msgstr "Se creó el paquete %s conteniendo las páginas %s"
 
 msgid "Package pages"
-msgstr "Páginas del paquete"
+msgstr "Empaquetar páginas"
 
 msgid "Package name"
 msgstr "Nombre del paquete"
@@ -1101,15 +1103,15 @@ msgstr "Lista de nombres de página - separados por coma"
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
 msgstr ""
 "Nombre de usuario desconocido: {{{\"%s\"}}}. Por favor, ingresa tu nombre de "
-"usuario y password"
+"usuario y contraseña"
 
 msgid "Missing password. Please enter user name and password."
 msgstr ""
-"Faltó ingresar la password. Por favor, ingresa el nombre de usuario y "
-"password"
+"Faltó ingresar la contraseña. Por favor, ingresa el nombre de usuario y "
+"contraseña"
 
 msgid "Sorry, wrong password."
-msgstr "Lo lamento, clave errónea"
+msgstr "Lo lamento, constraseña errónea"
 
 #, python-format
 msgid "Exactly one page like \"%s\" found, redirecting to page."
@@ -1711,7 +1713,7 @@ msgid "[Bookmark reached]"
 msgstr "[enlace personal alcanzado]"
 
 msgid "Contents"
-msgstr "AyudaDeContenidos"
+msgstr "Tabla de Contenidos"
 
 msgid "No wanted pages in this wiki."
 msgstr "No existen páginas-por-crear en este wiki."
@@ -1905,7 +1907,7 @@ msgid "Remove Spam"
 msgstr "Eliminar Spam"
 
 msgid "Package Pages"
-msgstr "Páginas de paquetes"
+msgstr "Empaquetar Páginas"
 
 msgid "Render as Docbook"
 msgstr "Mostrar en Docbook"

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-15 22:10+0900\n"
+"PO-Revision-Date: 2006-04-16 10:33+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1063,9 +1063,8 @@ msgstr "문서 묶기"
 msgid "Package name"
 msgstr "패키지 이름"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "문서 리스트 - <tt>,</tt>로 구분됨"
+msgstr "문서 리스트 - 쉼표로 구분됨"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."

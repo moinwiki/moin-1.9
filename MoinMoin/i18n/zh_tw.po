@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-14 16:30+0800\n"
+"PO-Revision-Date: 2006-04-16 12:21+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1035,7 +1035,6 @@ msgstr "打包頁面"
 msgid "Package name"
 msgstr "包裹名稱"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
 msgstr "輸入頁面名稱 (以逗號分開)"
 
@@ -1611,9 +1610,8 @@ msgstr "放置書籤"
 msgid "[Bookmark reached]"
 msgstr "[目前書籤放置在此]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "說明"
+msgstr "目 錄"
 
 msgid "No wanted pages in this wiki."
 msgstr "本 wiki 沒有未定義的頁面。"

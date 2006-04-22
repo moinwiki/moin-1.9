@@ -301,10 +301,10 @@ msgid "<Browser setting>"
 msgstr "<Настройки браузера>"
 
 msgid "the one preferred"
-msgstr "предпочтительно"
+msgstr "редактором по умолчанию"
 
 msgid "free choice"
-msgstr "по выбору"
+msgstr "предлагать на выбор"
 
 msgid "Select User"
 msgstr "Выберите пользователя"
@@ -316,10 +316,10 @@ msgid "Preferred theme"
 msgstr "Предпочитаемый стиль"
 
 msgid "Editor Preference"
-msgstr "Настройки редактора"
+msgstr "Редактор по умолчанию"
 
 msgid "Editor shown on UI"
-msgstr "Показывать графический редактор"
+msgstr "Предлагать редактирование"
 
 msgid "Time zone"
 msgstr "Часовой пояс"
@@ -807,7 +807,7 @@ msgid "Open editor on double click"
 msgstr "Открывать редактор по двойному клику"
 
 msgid "Jump to last visited page instead of frontpage"
-msgstr "Открывать с последней просмотренной страницы а не с начала"
+msgstr "Открывать с последней просмотренной страницы, а не с начала"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Показывать ? для незаполненных страниц"
@@ -1330,10 +1330,9 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Ваше приложение никогда не сотрет уже имеющееся. Если такое имя уже есть, \n"
-"вы должны переименовать свой файл для загрузки.\n"
-"Или же, если поле \"Записать в\" оставить пустым, будет использовано имя "
-"вашего файла."
+"Новое приложение не может перезаписать имеющиеся приложения. Если приложение с таким\n"
+"именем уже существует, вы должны переименовать свой файл перед загрузкой.\n"
+"Если поле \"Переименовать в\" оставить пустым, будет использовано имя вашего файла."
 
 msgid "File to upload"
 msgstr "Приложить файл"

@@ -39,7 +39,7 @@ llamada a una macro.-~
 '''Cannot edit old revisions!''':
 '''¡No puedes editar versiones antiguas!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
-'''La protección de tu edición ha expirado.¡Podría encontrar algún conflicto de edición!''',
+'''La protección de edición que tenías ha expirado.¡Es posible que encuentres algún conflicto de edición!''',
 '''Edit "%(pagename)s"''':
 '''Editar "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -150,7 +150,7 @@ Contact the owner of the wiki, who can enable email.''':
 '''Este wiki no tiene activado el procesamiento de e-mails.
 Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Please provide a valid email address!''':
-'''Por favor, proporciona una dirección de e-mail válido.''',
+'''Por favor, proporciona una dirección de e-mail válida.''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''No se encontró una cuenta que coincida con el e-mail \'%(email)s\'''',
 '''Use UserPreferences to change your settings or create an account.''':
@@ -208,7 +208,7 @@ Contacta al administrador del wiki. Él es quien puede habilitar los e-mails''',
 '''Quick links''':
 '''Enlaces rápidos''',
 '''This list does not work, unless you have entered a valid email address!''':
-'''¡Esta lista no funciona, salvo que ingreses un e-mail válido!''',
+'''¡Esta lista no funciona, salvo que ingreses una dirección de e-mail válida!''',
 '''Subscribed wiki pages (one regex per line)''':
 '''Páginas wiki suscritas (una expresión regular por línea)''',
 '''Create Profile''':
@@ -395,7 +395,7 @@ lo que no reflejaría buena educación!\'\'
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
 '''¡No tienes permisos para cambiar el ACL en esta página porque no posees derechos de administrador sobre ella!''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''El seguro de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha concedido la protección de edición de esta página.''',
+'''La protección de edición de %(owner)s ha expirado hace %(mins_ago)d minuto(s), y se te ha concedido la protección de edición de esta página.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
 '''Se \'\'bloqueará\'\' la edición de está página a los otros usuarios hasta %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
@@ -521,7 +521,7 @@ Referencia rápida de reStructuredText
 '''Add spaces to displayed wiki names''':
 '''Añadir espacios entre los NombresWiki mostrados''',
 '''Remember login information''':
-'''Recordar tu información de ingreso (no será necesario volver a ingresar usuario y password, pero puede ser un problema de seguridad en computadoras compartidas)''',
+'''Recordar tu información de ingreso (no será necesario volver a ingresar usuario y contraseña, pero puede ser un problema de seguridad en computadoras compartidas)''',
 '''Subscribe to trivial changes''':
 '''Avisar de cualquier cambio de contenido (incluso los triviales)''',
 '''Disable this account forever''':
@@ -579,13 +579,13 @@ Referencia rápida de reStructuredText
 '''view''':
 '''ver''',
 '''raw''':
-'''sin formato (texto plano)''',
+'''sin formato''',
 '''print''':
 '''imprimir''',
 '''revert''':
 '''revertir''',
 '''Revert to revision %(rev)d.''':
-'''Volver a la revisión del %(rev)d.''',
+'''Se revierte a revisión %(rev)d.''',
 '''edit''':
 '''editar''',
 '''get''':
@@ -595,19 +595,19 @@ Referencia rápida de reStructuredText
 '''N/A''':
 '''Sin información''',
 '''Revision History''':
-'''Revisión de historia''',
+'''Historia de revisiones''',
 '''No log entries found.''':
 '''¡No se encontraron entradas en el registro!''',
 '''Info for "%s"''':
 '''Información de "%s"''',
 '''Show "%(title)s"''':
-'''Mostrar "%(title)s"''',
+'''Ver "%(title)s"''',
 '''General Page Infos''':
 '''Información general de la página''',
 '''Show chart "%(title)s"''':
 '''Mostrar gráficos "%(title)s"''',
 '''Page hits and edits''':
-'''Pedidos (lecturas) y ediciones de la página''',
+'''Accesos a y ediciones de la página''',
 '''You are not allowed to revert this page!''':
 '''¡No tienes permisos para revertir a una versión anterior de esta página!''',
 '''You must login to add a quicklink.''':
@@ -615,7 +615,7 @@ Referencia rápida de reStructuredText
 '''Your quicklink to this page has been removed.''':
 '''Se eliminó tu enlace rápido a esta página.''',
 '''A quicklink to this page has been added for you.''':
-'''Se te añadió un enlace rápido a esta página.''',
+'''Se añadió un enlace a esta página a tu lista de enlaces rápidos.''',
 '''You are not allowed to subscribe to a page you can\'t read.''':
 '''No tienes permisos para suscribirte a una página que no puedes ver.''',
 '''This wiki is not enabled for mail processing.''':
@@ -649,17 +649,17 @@ Referencia rápida de reStructuredText
 '''Created the package %s containing the pages %s.''':
 '''Se creó el paquete %s conteniendo las páginas %s''',
 '''Package pages''':
-'''Páginas del paquete''',
+'''Empaquetar páginas''',
 '''Package name''':
 '''Nombre del paquete''',
 '''List of page names - separated by a comma''':
 '''Lista de nombres de página - separados por coma''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
-'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y password''',
+'''Nombre de usuario desconocido: {{{"%s"}}}. Por favor, ingresa tu nombre de usuario y contraseña''',
 '''Missing password. Please enter user name and password.''':
-'''Faltó ingresar la password. Por favor, ingresa el nombre de usuario y password''',
+'''Faltó ingresar la contraseña. Por favor, ingresa el nombre de usuario y contraseña''',
 '''Sorry, wrong password.''':
-'''Lo lamento, clave errónea''',
+'''Lo lamento, constraseña errónea''',
 '''Exactly one page like "%s" found, redirecting to page.''':
 '''Se encontró una sola página similar a "%s" encontrada. Redireccionando a esa página.''',
 '''Pages like "%s"''':
@@ -1000,7 +1000,7 @@ De lo contrario; si el campo "Cambiar nombre a" queda vacío, se usará el nombr
 '''[Bookmark reached]''':
 '''[enlace personal alcanzado]''',
 '''Contents''':
-'''AyudaDeContenidos''',
+'''Tabla de Contenidos''',
 '''No wanted pages in this wiki.''':
 '''No existen páginas-por-crear en este wiki.''',
 '''Invalid include arguments "%s"!''':
@@ -1118,7 +1118,7 @@ rojo=editar''',
 '''Remove Spam''':
 '''Eliminar Spam''',
 '''Package Pages''':
-'''Páginas de paquetes''',
+'''Empaquetar Páginas''',
 '''Render as Docbook''':
 '''Mostrar en Docbook''',
 '''Do''':

@@ -653,6 +653,8 @@ reStructuredText Quick Reference
 '''문서 묶기''',
 '''Package name''':
 '''패키지 이름''',
+'''List of page names - separated by a comma''':
+'''문서 리스트 - 쉼표로 구분됨''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''{{{"%s"}}}는 등록되지 않은 사용자 이름입니다. 사용자 이름과 비밀번호를 다시 입력하세요.''',
 '''Missing password. Please enter user name and password.''':
