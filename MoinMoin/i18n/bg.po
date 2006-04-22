@@ -721,9 +721,9 @@ msgstr "Невалидно файлово заглавие на пакета."
 msgid "Package file format unsupported."
 msgstr "Форматът на файла не се поддържа."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Неизвестна функция %s на ред %i."
+msgstr "Неизвестна функция %(func)s на ред %(lineno)i."
 
 #, python-format
 msgid "The file %s was not found in the package."
@@ -1078,9 +1078,8 @@ msgstr "Страници в пакета"
 msgid "Package name"
 msgstr "Име на пакета"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "Списък от имена на страници - разделени с <tt>,</tt>"
+msgstr "Списък от имена на страници - разделени със запетая"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1686,9 +1685,8 @@ msgstr "постави отметка"
 msgid "[Bookmark reached]"
 msgstr "[Достигната е отметка]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "ПомощСъдържание"
+msgstr "Съдържание"
 
 msgid "No wanted pages in this wiki."
 msgstr "Няма искани страници в това уики."

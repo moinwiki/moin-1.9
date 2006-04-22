@@ -185,7 +185,6 @@ xmlrpc/WhoAmI.py
 filter/__init__.py
 filter/image.py
 filter/text.py
-filter/pdfdevel/pdffile.py
 filter/audio.py
 filter/video.py
 filter/EXIF.py

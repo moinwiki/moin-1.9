@@ -427,6 +427,8 @@ To leave the editor, press the Cancel button.''':
 '''Невалидно файлово заглавие на пакета.''',
 '''Package file format unsupported.''':
 '''Форматът на файла не се поддържа.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Неизвестна функция %(func)s на ред %(lineno)i.''',
 '''The file %s was not found in the package.''':
 '''Файлът %s не беше открит в пакета.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
@@ -651,6 +653,8 @@ reStructuredText Quick Reference
 '''Страници в пакета''',
 '''Package name''':
 '''Име на пакета''',
+'''List of page names - separated by a comma''':
+'''Списък от имена на страници - разделени със запетая''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Непознато потребителско име: {{{"%s"}}}. Моля, въведете потребителско име и парола.''',
 '''Missing password. Please enter user name and password.''':
@@ -997,6 +1001,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''постави отметка''',
 '''[Bookmark reached]''':
 '''[Достигната е отметка]''',
+'''Contents''':
+'''Съдържание''',
 '''No wanted pages in this wiki.''':
 '''Няма искани страници в това уики.''',
 '''Invalid include arguments "%s"!''':

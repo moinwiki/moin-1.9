@@ -649,6 +649,8 @@ reStructuredText 快速參考
 '''打包頁面''',
 '''Package name''':
 '''包裹名稱''',
+'''List of page names - separated by a comma''':
+'''輸入頁面名稱 (以逗號分開)''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''不明的使用者：{{{"%s"}}}。請輸入名稱及密碼。''',
 '''Missing password. Please enter user name and password.''':
@@ -993,6 +995,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''放置書籤''',
 '''[Bookmark reached]''':
 '''[目前書籤放置在此]''',
+'''Contents''':
+'''目 錄''',
 '''No wanted pages in this wiki.''':
 '''本 wiki 沒有未定義的頁面。''',
 '''Invalid include arguments "%s"!''':

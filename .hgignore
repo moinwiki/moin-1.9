@@ -1,2 +1,4 @@
 \{arch\}
 .*\.arch-ids/.*
+.*\.py[co]
+

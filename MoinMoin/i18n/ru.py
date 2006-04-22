@@ -173,9 +173,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''<Browser setting>''':
 '''<Настройки браузера>''',
 '''the one preferred''':
-'''предпочтительно''',
+'''редактором по умолчанию''',
 '''free choice''':
-'''по выбору''',
+'''предлагать на выбор''',
 '''Select User''':
 '''Выберите пользователя''',
 '''Save''':
@@ -183,9 +183,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''Preferred theme''':
 '''Предпочитаемый стиль''',
 '''Editor Preference''':
-'''Настройки редактора''',
+'''Редактор по умолчанию''',
 '''Editor shown on UI''':
-'''Показывать графический редактор''',
+'''Предлагать редактирование''',
 '''Time zone''':
 '''Часовой пояс''',
 '''Your time is''':
@@ -438,7 +438,7 @@ To leave the editor, press the Cancel button.''':
 '''Open editor on double click''':
 '''Открывать редактор по двойному клику''',
 '''Jump to last visited page instead of frontpage''':
-'''Открывать с последней просмотренной страницы а не с начала''',
+'''Открывать с последней просмотренной страницы, а не с начала''',
 '''Show question mark for non-existing pagelinks''':
 '''Показывать ? для незаполненных страниц''',
 '''Show page trail''':
@@ -662,9 +662,9 @@ since this is subject to change and can break easily.''':
 '''An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.''':
-'''Ваше приложение никогда не сотрет уже имеющееся. Если такое имя уже есть, 
-вы должны переименовать свой файл для загрузки.
-Или же, если поле "Записать в" оставить пустым, будет использовано имя вашего файла.''',
+'''Новое приложение не может перезаписать имеющиеся приложения. Если приложение с таким
+именем уже существует, вы должны переименовать свой файл перед загрузкой.
+Если поле "Переименовать в" оставить пустым, будет использовано имя вашего файла.''',
 '''File to upload''':
 '''Приложить файл''',
 '''Rename to''':

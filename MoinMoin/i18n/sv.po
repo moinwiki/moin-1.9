@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-09 19:02+0200\n"
+"PO-Revision-Date: 2006-04-17 17:10+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -385,11 +385,10 @@ msgstr "Anrop"
 
 #, python-format
 msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
+msgstr "Obligatoriskt attribut \"%(attrname)s\" saknas"
 
-#, fuzzy
 msgid "Submitted form data:"
-msgstr "Prenumererar på %s:"
+msgstr "Inskickad formulärdata:"
 
 msgid "Search Titles"
 msgstr "Sök titlar"
@@ -690,13 +689,13 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr ""
+msgstr "Paketet kräver en nyare version av MoinMoin (minst %s)."
 
 msgid "The theme name is not set."
-msgstr ""
+msgstr "Temanamnet är inte angivet."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr ""
+msgstr "Installation av temafiler stöds bara på servrar av fristående typ."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."
@@ -706,23 +705,23 @@ msgstr "Installeringen av \"%(filename)s\" misslyckades."
 msgid "The file %s is not a MoinMoin package file."
 msgstr "Filen %s är inte en MoinMoin-paketfil."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The page %s does not exist."
-msgstr "Bilagan \"%(filename)s\" existerar inte!"
+msgstr "Sidan %s existerar inte."
 
 msgid "Invalid package file header."
-msgstr ""
+msgstr "Ogiltigt paketfilshuvud."
 
 msgid "Package file format unsupported."
-msgstr ""
+msgstr "Paketfilformatet stöds inte."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Okänd backup-underåtgärd: %s."
+msgstr "Okänd funktion %(func)s på rad %(lineno)i."
 
-#, fuzzy, python-format
+#, python-format
 msgid "The file %s was not found in the package."
-msgstr "Filen %s är inte en MoinMoin-paketfil."
+msgstr "Filen %s hittades inte i paketet."
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -1074,9 +1073,8 @@ msgstr "Paketsidor"
 msgid "Package name"
 msgstr "Paketnamn"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "Lista på sidnamn - separerade med <tt>,</tt>"
+msgstr "Lista på sidnamn - separerade med komma"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1230,20 +1228,17 @@ msgid ""
 "Cannot create a new page without a page name.  Please specify a page name."
 msgstr "Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn."
 
-#, fuzzy
 msgid "Pages"
-msgstr "Sida"
+msgstr "Sidor"
 
-#, fuzzy
 msgid "Select Author"
-msgstr "Välj användare"
+msgstr "Välj författare"
 
 msgid "Revert all!"
-msgstr ""
+msgstr "Återgå allt!"
 
-#, fuzzy
 msgid "You are not allowed to use this action."
-msgstr "Du har inte tillåtelse att utföra den här åtgärden."
+msgstr "Du har inte tillåtelse att använda den här åtgärden."
 
 #, python-format
 msgid "Subscribe users to the page %s"
@@ -1672,9 +1667,8 @@ msgstr "sätt bokmärke"
 msgid "[Bookmark reached]"
 msgstr "[Bokmärke nått]"
 
-#, fuzzy
 msgid "Contents"
-msgstr "HjälpInnehåll"
+msgstr "Innehåll"
 
 msgid "No wanted pages in this wiki."
 msgstr "Inga önskade sidor i den här wikin."

@@ -225,6 +225,10 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Lösenord''',
 '''Action''':
 '''Anrop''',
+'''Required attribute "%(attrname)s" missing''':
+'''Obligatoriskt attribut "%(attrname)s" saknas''',
+'''Submitted form data:''':
+'''Inskickad formulärdata:''',
 '''Search Titles''':
 '''Sök titlar''',
 '''Display context of search results''':
@@ -410,10 +414,26 @@ To leave the editor, press the Cancel button.''':
 \'\'\'Du bör \'\'undvika att redigera\'\' den här sidan i åtminstone %(mins_valid)d minut(er)
 för att undvika redigeringskonflikter.\'\'\'[[BR]]
 För att lämna redigeringen, tryck på "Avbryt".''',
+'''The package needs a newer version of MoinMoin (at least %s).''':
+'''Paketet kräver en nyare version av MoinMoin (minst %s).''',
+'''The theme name is not set.''':
+'''Temanamnet är inte angivet.''',
+'''Installing theme files is only supported for standalone type servers.''':
+'''Installation av temafiler stöds bara på servrar av fristående typ.''',
 '''Installation of \'%(filename)s\' failed.''':
 '''Installeringen av "%(filename)s" misslyckades.''',
 '''The file %s is not a MoinMoin package file.''':
 '''Filen %s är inte en MoinMoin-paketfil.''',
+'''The page %s does not exist.''':
+'''Sidan %s existerar inte.''',
+'''Invalid package file header.''':
+'''Ogiltigt paketfilshuvud.''',
+'''Package file format unsupported.''':
+'''Paketfilformatet stöds inte.''',
+'''Unknown function %(func)s in line %(lineno)i.''':
+'''Okänd funktion %(func)s på rad %(lineno)i.''',
+'''The file %s was not found in the package.''':
+'''Filen %s hittades inte i paketet.''',
 ''' Emphasis:: [[Verbatim(\'\')]]\'\'italics\'\'[[Verbatim(\'\')]]; [[Verbatim(\'\'\')]]\'\'\'bold\'\'\'[[Verbatim(\'\'\')]]; [[Verbatim(\'\'\'\'\')]]\'\'\'\'\'bold italics\'\'\'\'\'[[Verbatim(\'\'\'\'\')]]; [[Verbatim(\'\')]]\'\'mixed \'\'[[Verbatim(\'\'\')]]\'\'\'\'\'bold\'\'\'[[Verbatim(\'\'\')]] and italics\'\'[[Verbatim(\'\')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
  Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1.#n start numbering at n; space alone indents.
@@ -636,6 +656,8 @@ reStructuredText Quick Reference
 '''Paketsidor''',
 '''Package name''':
 '''Paketnamn''',
+'''List of page names - separated by a comma''':
+'''Lista på sidnamn - separerade med komma''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Okänt användarnamn: {{{"%s"}}}. Var god ange användarnamn och lösenord.''',
 '''Missing password. Please enter user name and password.''':
@@ -726,6 +748,14 @@ Pröva ett annat namn.''',
 '''Full länklista för "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan inte skapa en ny sida utan ett sidnamn. Var god ange ett sidnamn.''',
+'''Pages''':
+'''Sidor''',
+'''Select Author''':
+'''Välj författare''',
+'''Revert all!''':
+'''Återgå allt!''',
+'''You are not allowed to use this action.''':
+'''Du har inte tillåtelse att använda den här åtgärden.''',
 '''Subscribe users to the page %s''':
 '''Teckna en prenumeration på sidan %s åt användarna''',
 '''Subscribed for %s:''':
@@ -974,6 +1004,8 @@ att användas.''',
 '''sätt bokmärke''',
 '''[Bookmark reached]''':
 '''[Bokmärke nått]''',
+'''Contents''':
+'''Innehåll''',
 '''No wanted pages in this wiki.''':
 '''Inga önskade sidor i den här wikin.''',
 '''Invalid include arguments "%s"!''':

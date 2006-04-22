@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-15 18:22+0200\n"
-"PO-Revision-Date: 2006-04-15 22:55+0900\n"
+"PO-Revision-Date: 2006-04-16 18:35+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1073,9 +1073,8 @@ msgstr "ページのパッケージ化"
 msgid "Package name"
 msgstr "パッケージ名"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "ページ名のリスト (<tt>,</tt>区切り)"
+msgstr "ページ名のリスト (カンマ区切り)"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
