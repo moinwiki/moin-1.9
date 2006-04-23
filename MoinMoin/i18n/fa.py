@@ -100,10 +100,10 @@ space between words. Group page name is not allowed.''':
 نام صفحات گروهی قابل قبول نیست.''',
 '''You are not allowed to do %s on this page.''':
 '''شما مجاز به %s روی این صفحه نمی باشید.''',
-'''Login''':
-'''ورود''',
 ''' %s and try again.''':
 '''لطفا پس از %s به سایت مجددا سعی نمایید.''',
+'''Login''':
+'''ورود''',
 '''%(hits)d results out of about %(pages)d pages.''':
 '''%(hits)d نتیجه بدست آمده حاصل از جستجوی %(pages)d صفحه''',
 '''%.2f seconds''':
