@@ -20,23 +20,23 @@ class Formatter(FormatterBase):
         while navigational elements (HTML page header/footer) and the like
         can be printed directly without violating output abstraction.
     """
-
     hardspace = ' '
 
+    # those tags will be automatically reopened if they were auto-closed due to
+    # an enclosing tag being closed:
     format_tags = ['b', 'em', 'highlight', 'sup', 'sub', 'strike', 'code', 'u']
 
-    unbreakables = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                    'p', 'ol', 'ul', 'li', 'pre', 'a',
-                    'table', 'td', 'tr']
-
+    # those tags want a <p> around them:
     need_p = [] # format_tags[:]
     need_p.extend(['ol', 'a', 'pagelink', 'interwiki', 'macro']) # XXX add more
 
+    # those tags inhibit auto-generation of a <p> after them:
     no_p_after = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul', 'pre',
                   'small', 'big', 'table', 'td', 'tr', 'dt',
                   'codearea', 'codeline', 'codetoken',
                   'sysmesg']
 
+    # if key tag is opened, auto-close all tags in value list if they are open
     close_on_open = {
         'h1': ['p'],
         'li': ['li'],
@@ -47,16 +47,18 @@ class Formatter(FormatterBase):
     for i in xrange(2, 7):
         close_on_open['h%i' % i] = close_on_open['h1']
 
-    close_on_open = {} # XXX
-
+    # if key tag is closed, auto-close all tags in value list if they are open
     close_on_close = {
         'table': ['td', 'tr'],
-        'td': ['tr'],
+        'td': ['tr'], # XXX WTF?
         'tr': ['td'],
         'ol': ['li'],
         'ul': ['li'],
         }
-    close_on_close = {} # XXX
+    
+    # XXX XXX XXX this overrides the values defined above - SENSE == ??? XXX XXX XXX
+    close_on_open = {}
+    close_on_close = {}
 
     def __init__(self, request, **kw):
         self.request = request
@@ -154,7 +156,7 @@ class Formatter(FormatterBase):
                 elif last_tag in self.format_tags:
                     tags_to_reopen.append(self._close_tag(last_tag))
                 else:
-                    print self.tag_stack
+                    self.request.write("tag_stack: %r\n" % self.tag_stack)
                     self.request.write(self.document.documentElement.toprettyxml(" "))
                     raise ValueError, "<%s> expected <%s> given" % (last_tag, tag)
             self._close_tag(tag)
@@ -177,8 +179,7 @@ class Formatter(FormatterBase):
     def sysmsg(self, on, **kw):
         """ Emit a system message (embed it into the page).
 
-            Normally used to indicate disabled options, or invalid
-            markup.
+            Normally used to indicate disabled options, or invalid markup.
         """
         return self._set_tag('sysmesg', on, **kw)
 
@@ -220,8 +221,7 @@ class Formatter(FormatterBase):
                 self.text('\n'.join(lines)) +
                 self._set_tag('processor', False))
 
-    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
-                        returns_content=1):
+    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={}, returns_content=1):
         content = parser[callback](*arg_list, **arg_dict)
         if returns_content:
             return content
