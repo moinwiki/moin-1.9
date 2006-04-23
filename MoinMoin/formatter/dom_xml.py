@@ -6,6 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+line_anchors = True
+
 from xml.dom import minidom
 from MoinMoin.formatter.base import FormatterBase
 
@@ -56,19 +58,13 @@ class Formatter(FormatterBase):
         'ul': ['li'],
         }
     
-    # XXX XXX XXX this overrides the values defined above - SENSE == ??? XXX XXX XXX
+    # FIXME - this overrides the values defined above - FIXME XXX
     close_on_open = {}
     close_on_close = {}
 
     def __init__(self, request, **kw):
-        self.request = request
-        self._ = request.getText
+        FormatterBase.__init__(self, request, **kw)
 
-        self._store_pagelinks = kw.get('store_pagelinks', 0)
-        self._highlight_re = None
-        self.pagelinks = []
-        self.in_p = 0
-        self.in_pre = 0
         self.document = minidom.Document()
         self.document.documentElement = self.document.createElement('xml')
         self.position = self.document.documentElement
@@ -83,6 +79,8 @@ class Formatter(FormatterBase):
         @param tag: tag name, string
         @param attrs: attributes keywords, ascii or unicode
         """
+        if tag == 'p':
+            FormatterBase.paragraph(self, 1)
         self.tag_stack.append((tag, attrs))
         node = self.document.createElement(tag)
         for name, value in attrs.items():
@@ -97,9 +95,9 @@ class Formatter(FormatterBase):
             must be the last opened tag!!!
         """
         if tag == 'p':
-            self.in_p = 0 # XXX
+            FormatterBase.paragraph(self, 0)
         if self.tag_stack[-1][0] != tag:
-            raise ValueError, "<%s> expected <%s> given" % (self.tag_stack[-1][0], tag)
+            raise ValueError, "closing of <%s> expected, but <%s> closed" % (self.tag_stack[-1][0], tag)
         self.position = self.position.parentNode
         return self.tag_stack.pop()
 
@@ -125,7 +123,7 @@ class Formatter(FormatterBase):
         if on:
             close_on_open = self.close_on_open.get(tag, [])
             tags_to_reopen = []
-            while 1:
+            while True:
                 last_tag = self.tag_stack[-1][0]
                 if last_tag in close_on_open:
                     self._close_tag(last_tag)
@@ -158,7 +156,7 @@ class Formatter(FormatterBase):
                 else:
                     self.request.write("tag_stack: %r\n" % self.tag_stack)
                     self.request.write(self.document.documentElement.toprettyxml(" "))
-                    raise ValueError, "<%s> expected <%s> given" % (last_tag, tag)
+                    raise ValueError, "closing of <%s> expected, but <%s> closed" % (last_tag, tag)
             self._close_tag(tag)
             tags_to_reopen.reverse()
             for tag_name, args in tags_to_reopen:
@@ -173,7 +171,6 @@ class Formatter(FormatterBase):
                 return
         if self.in_p:
             return
-        self.in_p = 1
         self._open_tag('p', type=str(opening_tag))
 
     def sysmsg(self, on, **kw):
@@ -234,9 +231,10 @@ class Formatter(FormatterBase):
             kw['class'] = str(css)
         return self._set_tag('a', on, **kw)
 
-    def attachment_link(self, on, url='', **kw):
+    def attachment_link(self, url, text, **kw):
         kw['href'] = url
-        return self._set_tag('attachment', on, **kw)
+        kw['type'] = 'link'
+        return self._set_tag('attachment', 1, **kw) + self.text(text) + self._set_tag('attachment', 0, **kw)
     
     def attachment_image(self, url, **kw):
         kw['href'] = url
@@ -329,6 +327,12 @@ class Formatter(FormatterBase):
 
     def anchorlink(self, on, name, **kw):
         return self.url(on, "#" + name, **kw)
+
+    def line_anchordef(self, lineno):
+        if line_anchors:
+            return self.anchordef("line-%d" % lineno)
+        else:
+            return ''
 
     def underline(self, on, **kw):
         return self._set_tag('u', on)
