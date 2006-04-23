@@ -708,13 +708,16 @@ msgstr ""
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Ce paquet a besoin d'une version plus récente de MoinMoin (au minimum %s)."
+msgstr ""
+"Ce paquet a besoin d'une version plus récente de MoinMoin (au minimum %s)."
 
 msgid "The theme name is not set."
 msgstr "Le nom du thème n'est pas défini."
 
 msgid "Installing theme files is only supported for standalone type servers."
-msgstr "L'installation de fichiers de thème n'est compatible qu'avec les serveurs de type autonome."
+msgstr ""
+"L'installation de fichiers de thème n'est compatible qu'avec les serveurs de "
+"type autonome."
 
 #, python-format
 msgid "Installation of '%(filename)s' failed."

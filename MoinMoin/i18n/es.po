@@ -73,8 +73,8 @@ msgstr "¡No puedes editar versiones antiguas!"
 
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
-"La protección de edición que tenías ha expirado.¡Es posible que "
-"encuentres algún conflicto de edición!"
+"La protección de edición que tenías ha expirado.¡Es posible que encuentres "
+"algún conflicto de edición!"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -359,8 +359,7 @@ msgstr "Enlaces rápidos"
 
 msgid "This list does not work, unless you have entered a valid email address!"
 msgstr ""
-"¡Esta lista no funciona, salvo que ingreses una dirección de e-mail "
-"válida!"
+"¡Esta lista no funciona, salvo que ingreses una dirección de e-mail válida!"
 
 msgid "Subscribed wiki pages (one regex per line)"
 msgstr "Páginas wiki suscritas (una expresión regular por línea)"
@@ -656,8 +655,8 @@ msgid ""
 "The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
 "granted the lock for this page."
 msgstr ""
-"La protección de edición de %(owner)s ha expirado hace %(mins_ago)d "
-"minuto(s), y se te ha concedido la protección de edición de esta página."
+"La protección de edición de %(owner)s ha expirado hace %(mins_ago)d minuto"
+"(s), y se te ha concedido la protección de edición de esta página."
 
 #, python-format
 msgid ""
@@ -874,8 +873,8 @@ msgstr "Añadir espacios entre los NombresWiki mostrados"
 msgid "Remember login information"
 msgstr ""
 "Recordar tu información de ingreso (no será necesario volver a ingresar "
-"usuario y contraseña, pero puede ser un problema de seguridad en computadoras "
-"compartidas)"
+"usuario y contraseña, pero puede ser un problema de seguridad en "
+"computadoras compartidas)"
 
 msgid "Subscribe to trivial changes"
 msgstr "Avisar de cualquier cambio de contenido (incluso los triviales)"
