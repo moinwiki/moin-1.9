@@ -43,4 +43,4 @@ class FormatterTestCase(TestCase):
         #page.hilite_re = None
         
         return self.request.redirectedOutput(page.send_page, self.request)
-    
+
