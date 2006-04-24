@@ -53,11 +53,12 @@ page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://ww
 '''
 
 def _attachment(request, pagename, filename, outputdir):
+    filename = filename.encode(config.charset)
     source_dir = AttachFile.getAttachDir(request, pagename)
     source_file = os.path.join(source_dir, filename)
     dest_dir = os.path.join(outputdir, "attachments", wikiutil.quoteWikinameFS(pagename))
     dest_file = os.path.join(dest_dir, filename)
-    dest_url = "attachments/%s/%s" % (wikiutil.quoteWikinameFS(pagename), filename)
+    dest_url = "attachments/%s/%s" % (wikiutil.quoteWikinameFS(pagename), wikiutil.url_quote(filename))
     if os.access(source_file, os.R_OK):
         if not os.access(dest_dir, os.F_OK):
             try:
