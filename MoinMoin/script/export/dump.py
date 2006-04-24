@@ -19,6 +19,7 @@ from MoinMoin.script._util import MoinScript
 from MoinMoin.action import AttachFile
 
 url_prefix = "."
+logo_html = '<img src="logo.png">'
 HTML_SUFFIX = ".html"
 
 page_template = u'''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -109,7 +110,6 @@ class PluginScript(MoinScript):
         request = self.request
 
         # fix url_prefix so we get relative paths in output html
-        original_url_prefix = request.cfg.url_prefix
         request.cfg.url_prefix = url_prefix
 
         if self.options.page:
@@ -154,7 +154,6 @@ class PluginScript(MoinScript):
                     import traceback
                     traceback.print_exc(None, errlog)
             finally:
-                logo_html = re.sub(original_url_prefix + "/?", "", request.cfg.logo_string)
                 timestamp = time.strftime("%Y-%m-%d %H:%M")
                 filepath = os.path.join(outputdir, file)
                 fileout = codecs.open(filepath, 'w', config.charset)
