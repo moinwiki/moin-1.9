@@ -656,7 +656,8 @@ class Formatter(FormatterBase):
                 linktext % {'filename': self.text(fname)})
         return self.image(
             title="attachment:%s" % url,
-            src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1))
+            src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
+            css="attachment")
     
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
