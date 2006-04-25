@@ -40,30 +40,39 @@ class ScriptExit(Exception):
 
 # Parsing and (un)quoting for script files
 def packLine(list, separator="|"):
+    """ Packs a list into a string that is separated by `separator`. """
     return '|'.join([x.replace('\\', '\\\\').replace(separator, '\\' + separator) for x in list])
 
 def unpackLine(string, separator="|"):
+    """ Unpacks a string that was packed by packLine. """
     result = []
     token = None
     escaped = False
-    for x in string:
+    for char in string:
         if token is None:
             token = ""
-        if escaped and x in ('\\', separator):
-            token += x
+        if escaped and char in ('\\', separator):
+            token += char
             escaped = False
             continue
-        escaped = (x == '\\')
+        escaped = (char == '\\')
         if escaped:
             continue
-        if x == separator:
+        if char == separator:
             result.append(token)
             token = ""
         else:
-            token += x
+            token += char
     if token is not None:
         result.append(token)
     return result
+
+def str2boolean(string):
+    """
+    Converts the parameter to a boolean value by recognising different
+    truth literals.
+    """
+    return (string.lower() in ('yes', 'true', '1'))
 
 class ScriptEngine:
     """
@@ -71,25 +80,21 @@ class ScriptEngine:
     script.
     """
 
-    def _toBoolean(string):
-        """
-        Converts the parameter to a boolean value by recognising different
-        truth literals.
-        """
-        return (string.lower() in ('yes', 'true', '1'))
-    _toBoolean = staticmethod(_toBoolean)
-
     def _extractToFile(self, source, target):
         """ Extracts source and writes the contents into target. """
         # TODO, add file dates
-        f = open(target, "wb")
-        f.write(self.extract_file(source))
-        f.close()
+        target_file = open(target, "wb")
+        target_file.write(self.extract_file(source))
+        target_file.close()
 
     def __init__(self):
         self.themename = None
         self.ignoreExceptions = False
         self.goto = 0
+        
+        #Satisfy pylint
+        self.msg = getattr(self, "msg", "")
+        self.request = getattr(self, "request", None)
 
     def do_print(self, *param):
         """ Prints the parameters into output of the script. """
@@ -102,7 +107,7 @@ class ScriptEngine:
     def do_ignoreexceptions(self, boolean):
         """ Sets the ignore exceptions setting. If exceptions are ignored, the
         script does not stop if one is encountered. """
-        self.ignoreExceptions = self._toBoolean(boolean)
+        self.ignoreExceptions = str2boolean(boolean)
 
     def do_ensureversion(self, version, lines=0):
         """
@@ -113,6 +118,8 @@ class ScriptEngine:
         @param version: required version of MoinMoin (e.g. "1.3.4")
         @param lines: lines to ignore
         """
+        _ = self.request.getText
+        
         from MoinMoin.version import release
         version_int = [int(x) for x in version.split(".")]
         release = [int(x) for x in release.split(".")]
@@ -128,12 +135,12 @@ class ScriptEngine:
         """ Sets the name of the theme which will be altered next. """
         self.themename = wikiutil.taintfilename(str(themename))
 
-    def do_copythemefile(self, filename, type, target):
+    def do_copythemefile(self, filename, ftype, target):
         """ Copies a theme-related file (CSS, PNG, etc.) into a directory of the
         current theme.
 
         @param filename: name of the file in this package
-        @param type:   the subdirectory of the theme directory, e.g. "css"
+        @param ftype:   the subdirectory of the theme directory, e.g. "css"
         @param target: filename, e.g. "screen.css"
         """
         _ = self.request.getText
@@ -145,7 +152,7 @@ class ScriptEngine:
                                            "for standalone type servers."))
         htdocs_dir = sa.server.htdocs
         theme_file = os.path.join(htdocs_dir, self.themename,
-                                  wikiutil.taintfilename(type),
+                                  wikiutil.taintfilename(ftype),
                                   wikiutil.taintfilename(target))
         theme_dir = os.path.dirname(theme_file)
         if not os.path.exists(theme_dir):
@@ -207,7 +214,7 @@ class ScriptEngine:
         @param trivial:  boolean, if it is a trivial edit
         """
         _ = self.request.getText
-        trivial = self._toBoolean(trivial)
+        trivial = str2boolean(trivial)
 
         page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
         try:
@@ -250,9 +257,9 @@ class ScriptEngine:
             os.mkdir(revdir)
             os.chmod(revdir, 0777 & config.umask)
 
-        f = open(cfn, 'w')
-        f.write(revstr + "\n")
-        f.close()
+        currentf = open(cfn, 'w')
+        currentf.write(revstr + "\n")
+        currentf.close()
         os.chmod(cfn, 0666 & config.umask)
 
         pagefile = os.path.join(revdir, revstr)
@@ -349,11 +356,11 @@ class Package:
 
     def extract_file(self, filename):
         """ Returns the contents of a file in the package. """
-        raise NotImplementedException
+        raise NotImplementedError
 
     def filelist(self):
         """ Returns a list of all files. """
-        raise NotImplementedException
+        raise NotImplementedError
 
     def isPackage(self):
         """ Returns true if this package is recognised. """
@@ -394,10 +401,10 @@ class ZipPackage(Package, ScriptEngine):
         """ Returns true if this package is recognised. """
         return self._isZipfile and MOIN_PACKAGE_FILE in self.zipfile.namelist()
 
-if __name__ == '__main__':
+def main():
     args = sys.argv
     if len(args)-1 not in (2, 3) or args[1] not in ('l', 'i'):
-        print >>sys.stderr, """MoinMoin Package Installer v%(version)i
+        print >> sys.stderr, """MoinMoin Package Installer v%(version)i
 
 %(myname)s action packagefile [request URL]
 
@@ -438,3 +445,6 @@ Example:
             print "Installation failed."
         if package.msg:
             print package.msg
+    
+if __name__ == '__main__':
+    main()
