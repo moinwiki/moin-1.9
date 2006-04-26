@@ -1199,7 +1199,7 @@ def parse(request, text):
         logname = os.path.join(request.cfg.data_dir, "expaterror.log")
         f = file(logname, "w")
         f.write(text)
-        f.write("\n" + "-"*80 + "\n" + msg)
+        f.write("\n" + "-"*80 + "\n" + str(msg))
         f.close()
         raise ConvertError('ExpatError: %s (see dump in %s)' % (msg, logname))
 
