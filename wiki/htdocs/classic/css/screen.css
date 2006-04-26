@@ -361,7 +361,7 @@ form.dialog {
 }
 
 #preview, #previewbelow {
-	border: 1px solid #gray;
+	border: 1px solid gray;
 	padding: .5em;
 	background: url(../img/draft.png);
 }
