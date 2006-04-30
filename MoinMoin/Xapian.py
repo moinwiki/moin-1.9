@@ -1,24 +1,22 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - lupy indexing search engine
+    MoinMoin - xapian indexing search engine
 
-    @copyright: 2005 by Florian Festi, Nir Soffer, Thomas Waldmann
+    @copyright: 2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
+debug = False
 
-import os, re, codecs, errno, time
+import sys, os, re, codecs, errno, time
+from pprint import pprint
+
+from MoinMoin.support.xapwrap import document as xapdoc
+from MoinMoin.support.xapwrap import index as xapidx
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
-from MoinMoin.support.lupy.index.term import Term
-from MoinMoin.support.lupy import document
-from MoinMoin.support.lupy.index.indexwriter import IndexWriter
-from MoinMoin.support.lupy.search.indexsearcher import IndexSearcher
 
-from MoinMoin.support.lupy.index.term import Term
-from MoinMoin.support.lupy.search.term import TermQuery
-from MoinMoin.support.lupy.search.boolean import BooleanQuery
 
 ##############################################################################
 ### Tokenizer
@@ -91,7 +89,7 @@ class UpdateQueue:
     def append(self, pagename):
         """ Append a page to queue """
         if not self.writeLock.acquire(60.0):
-            request.log("can't add %r to lupy update queue: can't lock queue" %
+            request.log("can't add %r to xapian update queue: can't lock queue" %
                         pagename)
             return
         try:
@@ -201,11 +199,10 @@ class Index:
     def __init__(self, request):
         self.request = request
         cache_dir = request.cfg.cache_dir
-        self.main_dir = os.path.join(cache_dir, 'lupy')
+        self.main_dir = os.path.join(cache_dir, 'xapian')
         self.dir = os.path.join(self.main_dir, 'index')
         filesys.makeDirs(self.dir)
         self.sig_file = os.path.join(self.main_dir, 'complete')
-        self.segments_file = os.path.join(self.dir, 'segments')
         lock_dir = os.path.join(self.main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
@@ -218,29 +215,60 @@ class Index:
         ## if not self.exists():
         ##    self.indexPagesInNewThread(request)
 
+        self.indexValueMap = {
+            # mapping the value names we can easily fetch from the index to
+            # integers required by xapian. 0 and 1 are reserved by xapwrap!
+            'pagename': 2,
+            'attachment': 3,
+            'mtime': 4,
+        }
+        self.prefixMap = { # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
+            'author': 'A',
+            'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
+                           #G   newsGroup (or similar entity - e.g. a web forum name)
+            'hostname': 'H',
+            'keyword': 'K',
+            'lang': 'L',   # ISO Language code
+                           #M   Month (numeric format: YYYYMM)
+                           #N   ISO couNtry code (or domaiN name)
+                           #P   Pathname
+                           #Q   uniQue id
+                           #R   Raw (i.e. unstemmed) term
+            'title': 'S',  # Subject (or title)
+            'mimetype': 'T',
+            'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
+                           # characters, a hashing scheme is used to prevent overflowing
+                           # the Xapian term length limit (see omindex for how to do this).
+                           #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
+                           #  the D term, and changing the last digit to a '2' if it's a '3')
+                           #X   longer prefix for user-defined use
+                           #Y   year (four digits)
+        }
+        
     def exists(self):
         """ Check if index exists """        
         return os.path.exists(self.sig_file)
                 
     def mtime(self):
-        return os.path.getmtime(self.segments_file)
+        return os.path.getmtime(self.dir)
 
     def _search(self, query):
         """ read lock must be acquired """
         while True:
             try:
-                searcher, timestamp = self.request.cfg.lupy_searchers.pop()
+                searcher, timestamp = self.request.cfg.xapian_searchers.pop()
                 if timestamp != self.mtime():
                     searcher.close()
                 else:
                     break
             except IndexError:
-                searcher = IndexSearcher(self.dir)
+                searcher = xapidx.ReadOnlyIndex(self.dir)
+                searcher.configure(self.prefixMap, self.indexValueMap)
                 timestamp = self.mtime()
                 break
             
-        hits = list(searcher.search(query))
-        self.request.cfg.lupy_searchers.append((searcher, timestamp))
+        hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+        self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
     def search(self, query):
@@ -255,6 +283,60 @@ class Index:
     def update_page(self, page):
         self.queue.append(page.page_name)
         self._do_queued_updates_InNewThread()
+
+    def indexPages(self, files=None, mode='update'):
+        """ Index all pages (and files, if given)
+        
+        Can be called only from a script. To index pages during a user
+        request, use indexPagesInNewThread.
+        @arg files: iterator or list of files to index additionally
+        """
+        if not self.lock.acquire(1.0):
+            self.request.log("can't index: can't acquire lock")
+            return
+        try:
+            request = self._indexingRequest(self.request)
+            self._index_pages(request, None, files, mode)
+        finally:
+            self.lock.release()
+    
+    def indexPagesInNewThread(self, files=None, mode='update'):
+        """ Index all pages in a new thread
+        
+        Should be called from a user request. From a script, use indexPages.
+        """
+        if not self.lock.acquire(1.0):
+            self.request.log("can't index: can't acquire lock")
+            return
+        try:
+            # Prevent rebuilding the index just after it was finished
+            if self.exists():
+                self.lock.release()
+                return
+            from threading import Thread
+            indexThread = Thread(target=self._index_pages,
+                args=(self._indexingRequest(self.request), self.lock, files, mode))
+            indexThread.setDaemon(True)
+            
+            # Join the index thread after current request finish, prevent
+            # Apache CGI from killing the process.
+            def joinDecorator(finish):
+                def func():
+                    finish()
+                    indexThread.join()
+                return func
+
+            self.request.finish = joinDecorator(self.request.finish)        
+            indexThread.start()
+        except:
+            self.lock.release()
+            raise
+
+    def optimize(self):
+        pass
+
+    # -------------------------------------------------------------------
+    # Private
 
     def _do_queued_updates_InNewThread(self):
         """ do queued index updates in a new thread
@@ -284,109 +366,32 @@ class Index:
             self.lock.release()
             raise
 
-    def indexPages(self, files=None, update=True):
-        """ Index all pages (and files, if given)
-        
-        Can be called only from a script. To index pages during a user
-        request, use indexPagesInNewThread.
-        @arg files: iterator or list of files to index additionally
-        @arg update: True = update an existing index, False = reindex everything
-        """
-        if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
-            return
-        try:
-            request = self._indexingRequest(self.request)
-            self._index_pages(request, None, files, update)
-        finally:
-            self.lock.release()
-    
-    def indexPagesInNewThread(self, files=None, update=True):
-        """ Index all pages in a new thread
-        
-        Should be called from a user request. From a script, use indexPages.
-        """
-        if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
-            return
-        try:
-            # Prevent rebuilding the index just after it was finished
-            if self.exists():
-                self.lock.release()
-                return
-            from threading import Thread
-            indexThread = Thread(target=self._index_pages,
-                args=(self._indexingRequest(self.request), self.lock, files, update))
-            indexThread.setDaemon(True)
-            
-            # Join the index thread after current request finish, prevent
-            # Apache CGI from killing the process.
-            def joinDecorator(finish):
-                def func():
-                    finish()
-                    indexThread.join()
-                return func
-                
-            self.request.finish = joinDecorator(self.request.finish)        
-            indexThread.start()
-        except:
-            self.lock.release()
-            raise
-
-    def optimize(self):
-        """ Optimize the index
-        
-        This may take from few seconds to few hours, depending on the
-        size of the wiki. Currently it's usable only from a script.
-        
-        TODO: needs special locking, so the index is readable until the
-        optimization is finished.
-        """
-        if not self.exists():
-            raise RuntimeError("Index does not exist or is not finished")
-        if not self.lock.acquire(1.0):
-            self.request.log("can't lock the index for optimization")
-            return
-        try:
-            self._optimize(self.request)
-        finally:
-            self.lock.release()
-
-    # -------------------------------------------------------------------
-    # Private
-
     def _do_queued_updates(self, request, lock=None, amount=5):
         """ Assumes that the write lock is acquired """
         try:
+            writer = xapidx.Index(self.dir, True)
+            writer.configure(self.prefixMap, self.indexValueMap)
             pages = self.queue.pages()[:amount]
             for name in pages:
                 p = Page(request, name)
-                self._update_page(p)
+                self._index_page(writer, p, mode='update')
                 self.queue.remove([name])
         finally:
+            writer.close()
             if lock:
                 lock.release()
 
-    def _update_page(self, page):
-        """ Assumes that the write lock is acquired """
-        reader = IndexSearcher(self.dir)
-        reader.reader.deleteTerm(Term('pagename', page.page_name))
-        reader.close()
-        if page.exists():
-            writer = IndexWriter(self.dir, False, tokenizer)
-            self._index_page(writer, page, False) # we don't need to check whether it is updated
-            writer.close()
-   
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
+        
+        def mt2mn(mt): # mimetype to modulename
+            return mt.replace("/", "_").replace("-","_").replace(".", "_")
+
         import mimetypes
-        from MoinMoin import wikiutil
         request = self.request
         mimetype, encoding = mimetypes.guess_type(filename)
         if mimetype is None:
             mimetype = 'application/octet-stream'
-        def mt2mn(mt): # mimetype to modulename
-            return mt.replace("/", "_").replace("-","_").replace(".", "_")
         try:
             _filter = mt2mn(mimetype)
             execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
@@ -402,20 +407,20 @@ class Index:
                     raise ImportError("Cannot load filter %s" % binaryfilter)
         try:
             data = execute(self, filename)
-            request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
+            if debug: request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
         except (OSError, IOError), err:
             data = ''
             request.log("Filter %s threw error '%s' for file %s" % (_filter, str(err), filename))
         return data
    
     def test(self, request):
-        query = BooleanQuery()
-        query.add(TermQuery(Term("text", 'suchmich')), True, False)
-        docs = self._search(query)
-        for d in docs:
-            request.log("%r %r %r" % (d, d.get('attachment'), d.get('pagename')))
+        idx = xapidx.ReadOnlyIndex(self.dir)
+        idx.configure(self.prefixMap, self.indexValueMap)
+        print idx.search("is")
+        #for d in docs:
+        #    request.log("%r %r %r" % (d, d.get('attachment'), d.get('pagename')))
 
-    def _index_file(self, request, writer, filename, update):
+    def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
             Assumes that the write lock is acquired
         """
@@ -423,95 +428,151 @@ class Index:
         try:
             mtime = os.path.getmtime(filename)
             mtime = wikiutil.timestamp2version(mtime)
-            if update:
-                query = BooleanQuery()
-                query.add(TermQuery(Term("pagename", fs_rootpage)), True, False)
-                query.add(TermQuery(Term("attachment", filename)), True, False)
-                docs = self._search(query)
-                updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
-            else:
+            if mode == 'update':
+                title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
+                #        query.add(TermQuery(Term("pagename", fs_rootpage)), True, False)
+                #        query.add(TermQuery(Term("attachment", filename)), True, False)
+                query = xapidx.RawQuery(xapdoc.makePairForWrite('title', title))
+                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                if docs:
+                    doc = docs[0] # there should be only one
+                    uid = doc['uid']
+                    docmtime = long(doc['values']['mtime'])
+                    updated = mtime > docmtime
+                    if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                else:
+                    uid = None
+                    updated = True
+            elif mode == 'add':
                 updated = True
-            request.log("%s %r" % (filename, updated))
+            if debug: request.log("%s %r" % (filename, updated))
             if updated:
                 file_content = self.contentfilter(filename)
-                d = document.Document()
-                d.add(document.Keyword('pagename', fs_rootpage))
-                d.add(document.Keyword('mtime', str(mtime)))
-                d.add(document.Keyword('attachment', filename)) # XXX we should treat files like real pages, not attachments
-                pagename = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                d.add(document.Text('title', pagename, store=False))        
-                d.add(document.Text('text', file_content, store=False))
-                writer.addDocument(d)
+                pname = xapdoc.SortKey('pagename', fs_rootpage)
+                attachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
+                mtime = xapdoc.SortKey('mtime', mtime)
+                title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
+                title = xapdoc.Keyword('title', title)
+                content = xapdoc.TextField('content', file_content)
+                doc = xapdoc.Document(textFields=(content,),
+                                      keywords=(title, ),
+                                      sortFields=(pname, attachment, mtime,),
+                                     )
+                if mode == 'update':
+                    if debug: request.log("%s (replace %r)" % (filename, uid))
+                    doc.uid = uid
+                    id = writer.index(doc)
+                elif mode == 'add':
+                    if debug: request.log("%s (add)" % (filename,))
+                    id = writer.index(doc)
         except (OSError, IOError), err:
             pass
 
-    def _index_page(self, writer, page, update):
+    def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
             @arg page: a page object
-            @arg update: False = index in any case, True = index only when changed
-        """
-        pagename = page.page_name
-        request = page.request
-        mtime = page.mtime_usecs()
-        if update:
-            query = BooleanQuery()
-            query.add(TermQuery(Term("pagename", pagename)), True, False)
-            query.add(TermQuery(Term("attachment", "")), True, False)
-            docs = self._search(query)
-            updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
-        else:
-            updated = True
-        request.log("%s %r" % (pagename, updated))
-        if updated:
-            d = document.Document()
-            d.add(document.Keyword('pagename', pagename))
-            d.add(document.Keyword('mtime', str(mtime)))
-            d.add(document.Keyword('attachment', '')) # this is a real page, not an attachment
-            d.add(document.Text('title', pagename, store=False))        
-            d.add(document.Text('text', page.get_raw_body(), store=False))
+            @arg mode: 'add' = just add, no checks
+                       'update' = check if already in index and update if needed (mtime)
             
-            links = page.getPageLinks(request)
-            t = document.Text('links', '', store=False)
-            t.stringVal = links
-            d.add(t)
-            d.add(document.Text('link_text', ' '.join(links), store=False))
+        """
+        request = page.request
+        pagename = page.page_name
+        mtime = page.mtime_usecs()
+        if mode == 'update':
+            query = xapidx.RawQuery(xapdoc.makePairForWrite('title', pagename))
+            docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+            if docs:
+                doc = docs[0] # there should be only one
+                uid = doc['uid']
+                docmtime = long(doc['values']['mtime'])
+                updated = mtime > docmtime
+                if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+            else:
+                uid = None
+                updated = True
+        elif mode == 'add':
+            updated = True
+        if debug: request.log("%s %r" % (pagename, updated))
+        if updated:
+            pname = xapdoc.SortKey('pagename', pagename)
+            attachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
+            mtime = xapdoc.SortKey('mtime', mtime)
+            title = xapdoc.Keyword('title', pagename)
+            links = xapdoc.Keyword('link_text', ' '.join(page.getPageLinks(request)))
+            content = xapdoc.TextField('content', page.get_raw_body())
+            doc = xapdoc.Document(textFields=(content,),
+                                  keywords=(title, links,),
+                                  sortFields=(pname, attachment, mtime,),
+                                 )
+            #search_db_language = "english"
+            #stemmer = xapian.Stem(search_db_language)
+            #pagetext = page.get_raw_body().lower()
+            #words = re.finditer(r"\w+", pagetext)
+            #count = 0
+            #for wordmatch in words:
+            #    count += 1
+            #    word = wordmatch.group().encode(config.charset)
+            #    document.add_posting('R' + stemmer.stem_word(word), count) # count should be term position in document (starting at 1)
+            
+            if mode == 'update':
+                if debug: request.log("%s (replace %r)" % (pagename, uid))
+                doc.uid = uid
+                id = writer.index(doc)
+            elif mode == 'add':
+                if debug: request.log("%s (add)" % (pagename,))
+                id = writer.index(doc)
 
-            writer.addDocument(d)
-        
         from MoinMoin.action import AttachFile
 
         attachments = AttachFile._get_files(request, pagename)
         for att in attachments:
             filename = AttachFile.getFilename(request, pagename, att)
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
-            if update:
-                query = BooleanQuery()
-                query.add(TermQuery(Term("pagename", pagename)), True, False)
-                query.add(TermQuery(Term("attachment", att)), True, False)
-                docs = self._search(query)
-                updated = len(docs) == 0 or mtime > int(docs[0].get('mtime'))
-            else:
+            if mode == 'update':
+                query = xapidx.RawQuery(xapdoc.makePairForWrite('title', '%s/%s' % (pagename, att)))
+                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                if debug: request.log("##%r %r" % (filename, docs))
+                if docs:
+                    doc = docs[0] # there should be only one
+                    uid = doc['uid']
+                    docmtime = long(doc['values']['mtime'])
+                    updated = mtime > docmtime
+                    if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
+                else:
+                    uid = None
+                    updated = True
+            elif mode == 'add':
                 updated = True
-            request.log("%s %s %r" % (pagename, att, updated))
+            if debug: request.log("%s %s %r" % (pagename, att, updated))
             if updated:
+                pname = xapdoc.SortKey('pagename', pagename)
+                attachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
+                mtime = xapdoc.SortKey('mtime', mtime)
+                title = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 att_content = self.contentfilter(filename)
-                d = document.Document()
-                d.add(document.Keyword('pagename', pagename))
-                d.add(document.Keyword('mtime', str(mtime)))
-                d.add(document.Keyword('attachment', att)) # this is an attachment, store its filename
-                d.add(document.Text('title', att, store=False)) # the filename is the "title" of an attachment
-                d.add(document.Text('text', att_content, store=False))
-                writer.addDocument(d)
+                content = xapdoc.TextField('content', att_content)
+                doc = xapdoc.Document(textFields=(content,),
+                                      keywords=(title, ),
+                                      sortFields=(pname, attachment, mtime,),
+                                     )
+                if mode == 'update':
+                    if debug: request.log("%s (replace %r)" % (pagename, uid))
+                    doc.uid = uid
+                    id = writer.index(doc)
+                elif mode == 'add':
+                    if debug: request.log("%s (add)" % (pagename,))
+                    id = writer.index(doc)
+        #writer.flush()
+        
 
-
-    def _index_pages(self, request, lock=None, files=None, update=True):
+    def _index_pages(self, request, lock=None, files=None, mode='update'):
         """ Index all pages (and all given files)
         
         This should be called from indexPages or indexPagesInNewThread only!
         
-        This may take few minutes up to few hours, depending on the size of
-        the wiki.
+        This may take some time, depending on the size of the wiki and speed
+        of the machine.
 
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
@@ -519,40 +580,30 @@ class Index:
         try:
             self._unsign()
             start = time.time()
-            writer = IndexWriter(self.dir, not update, tokenizer)
-            writer.mergeFactor = 50
+            writer = xapidx.Index(self.dir, True)
+            writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)
             request.log("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 p = Page(request, pagename)
-                # code does NOT seem to assume request.page being set any more
-                #request.page = p
-                self._index_page(writer, p, update)
+                self._index_page(writer, p, mode)
             if files:
                 request.log("indexing all files...")
                 for fname in files:
                     fname = fname.strip()
-                    self._index_file(request, writer, fname, update)
+                    self._index_file(request, writer, fname, mode)
             writer.close()
             request.log("indexing completed successfully in %0.2f seconds." % 
                         (time.time() - start))
-            self._optimize(request)
             self._sign()
         finally:
+            writer.__del__()
             if lock:
                 lock.release()
 
     def _optimize(self, request):
         """ Optimize the index """
-        self._unsign()
-        start = time.time()
-        request.log("optimizing index...")
-        writer = IndexWriter(self.dir, False, tokenizer)
-        writer.optimize()
-        writer.close()
-        request.log("optimizing completed successfully in %0.2f seconds." % 
-                    (time.time() - start))
-        self._sign()
+        pass
 
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
@@ -585,4 +636,35 @@ class Index:
             f.write('')
         finally:
             f.close()
+#---------------------------------------------------------
+
+def run_query(query, db):
+    enquire = xapian.Enquire(db)
+    parser = xapian.QueryParser()
+    query = parser.parse_query(query)
+    print query.get_description()
+    enquire.set_query(query)
+    return enquire.get_mset(0, 10)
+
+def run(request):
+    pass
+    #print "Begin"
+    #db = xapian.WritableDatabase(xapian.open('test.db',
+    #                                         xapian.DB_CREATE_OR_OPEN))
+    #
+    # index_data(db) ???
+    #del db
+    #mset = run_query(sys.argv[1], db)
+    #print mset.get_matches_estimated()
+    #iterator = mset.begin()
+    #while iterator != mset.end():
+    #    print iterator.get_document().get_data()
+    #    iterator.next()
+    #for i in xrange(1,170):
+    #    doc = db.get_document(i)
+    #    print doc.get_data()
+
+if __name__ == '__main__':
+    run()
+
 

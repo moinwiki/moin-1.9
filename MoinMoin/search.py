@@ -2,9 +2,10 @@
 """
     MoinMoin - search engine
     
-    @copyright: 2005 MoinMoin:FlorianFesti
-    @copyright: 2005 MoinMoin:NirSoffer
-    @copyright: 2005 MoinMoin:AlexanderSchremmer
+    @copyright: 2005 MoinMoin:FlorianFesti,
+                2005 MoinMoin:NirSoffer,
+                2005 MoinMoin:AlexanderSchremmer,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 """
 
@@ -12,15 +13,7 @@ import re, time, sys, StringIO
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
-from MoinMoin.support.lupy.search.term import TermQuery
-from MoinMoin.support.lupy.search.phrase import PhraseQuery
-from MoinMoin.support.lupy.search.boolean import BooleanQuery, BooleanScorer
-from MoinMoin.support.lupy.search.prefix import PrefixQuery
-from MoinMoin.support.lupy.search.camelcase import CamelCaseQuery
-from MoinMoin.support.lupy.search.regularexpression import RegularExpressionQuery
-from MoinMoin.support.lupy.index.term import Term
-
-from MoinMoin.lupy import Index, tokenizer
+import Xapian
 
 #############################################################################
 ### query objects
@@ -173,12 +166,8 @@ class AndExpression(BaseExpression):
             
         return '|'.join(result)
 
-    def lupy_term(self):
-        required = self.operator== " "
-        lupy_term = BooleanQuery()
-        for term in self._subterms:
-            lupy_term.add(term.lupy_term(), required, term.negated)
-        return lupy_term
+    def xapian_term(self):
+        return "(%s)" % " AND ".join([term.xapian_term() for term in self._subterms])
 
 
 class OrExpression(AndExpression):
@@ -199,6 +188,9 @@ class OrExpression(AndExpression):
             if result:
                 matches.extend(result)
         return matches
+
+    def xapian_term(self):
+        return "(%s)" % " OR ".join([term.xapian_term() for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -255,34 +247,17 @@ class TextSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):
-        or_term = BooleanQuery()
-        term = self.titlesearch.lupy_term()
-        or_term.add(term, False, False)
+    def xapian_term(self):
         pattern = self._pattern.lower()
         if self.use_re:
-            if pattern[0] == '^':
-                pattern = pattern[1:]
-            if pattern[:2] == '\b':
-                pattern = pattern[2:]
-            term = RegularExpressionQuery(Term("text", pattern))
+            return '' # xapian can't do regex search
         else:
             terms = pattern.lower().split()
-            terms = [list(tokenizer(t)) for t in terms]
-            term = BooleanQuery()
+            terms = [list(Xapian.tokenizer(t)) for t in terms]
+            term = []
             for t in terms:
-                if len(t) == 1:
-                    term.add(CamelCaseQuery(Term("text", t[0])), True, False)
-                else:
-                    phrase = PhraseQuery()
-                    for w in t:
-                        phrase.add(Term("text", w))
-                    term.add(phrase, True, False)
-            #term = CamelCaseQuery(Term("text", pattern))
-            #term = PrefixQuery(Term("text", pattern), 3)
-            #term = TermQuery(Term("text", pattern))
-        or_term.add(term, False, False)
-        return or_term
+                term.append(" AND ".join(t))
+        return "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
 
 
 class TitleSearch(BaseExpression):
@@ -336,16 +311,12 @@ class TitleSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):
+    def xapian_term(self):
         pattern = self._pattern.lower()
         if self.use_re:
-            if pattern[0] == '^':
-                pattern = pattern[1:]
-            term = RegularExpressionQuery(Term("title", pattern))
+            return '' # xapian doesn't support regex search
         else:
-            term = PrefixQuery(Term("title", pattern), 1000000) # number of chars which are ignored behind the match
-            #term.boost = 100.0
-        return term
+            return 'title:%s' % pattern
 
 
 class LinkSearch(BaseExpression):
@@ -422,16 +393,12 @@ class LinkSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):        
+    def xapian_term(self):
         pattern = self.pattern
         if self.use_re:
-            if pattern[0] == "^":
-                pattern = pattern[1:]
-            term = RegularExpressionQuery(Term("links", pattern))
+            return '' # xapian doesnt support regex search
         else:
-            term = TermQuery(Term("links", pattern))
-        term.boost = 10.0
-        return term
+            return 'linkto:%s' % pattern
 
 ############################################################################
 ### Results
@@ -1162,8 +1129,8 @@ class Search:
     def run(self):
         """ Perform search and return results object """
         start = time.time()
-        if self.request.cfg.lupy_search:
-            hits = self._lupySearch()
+        if self.request.cfg.xapian_search:
+            hits = self._xapianSearch()
         else:
             hits = self._moinSearch()
             
@@ -1185,22 +1152,28 @@ class Search:
     # ----------------------------------------------------------------
     # Private!
 
-    def _lupySearch(self):
-        """ Search using lupy
+    def _xapianSearch(self):
+        """ Search using Xapian
         
-        Get a list of pages using fast lupy search and return moin
-        search in those pages.
+        Get a list of pages using fast xapian search and
+        return moin search in those pages.
         """
         pages = None
-        index = Index(self.request)
+        index = Xapian.Index(self.request)
         if index.exists():
-            self.request.clock.start('_lupySearch')
+            self.request.clock.start('_xapianSearch')
             try:
-                hits = index.search(self.query.lupy_term())
-                pages = [(hit.get('pagename'), hit.get('attachment')) for hit in hits]
+                from MoinMoin.support import xapwrap
+                query = self.query.xapian_term().encode(config.charset)
+                self.request.log("xapianSearch: query = %s" % query)
+                query = xapwrap.index.ParsedQuery(query)
+                hits = index.search(query)
+                self.request.log("xapianSearch: finds: %r" % hits)
+                pages = [(hit['values']['pagename'], hit['values']['attachment']) for hit in hits]
+                self.request.log("xapianSearch: finds pages: %r" % pages)
             except index.LockedException:
                 pass
-            self.request.clock.stop('_lupySearch')
+            self.request.clock.stop('_xapianSearch')
         return self._moinSearch(pages)
 
     def _moinSearch(self, pages=None):
@@ -1212,7 +1185,7 @@ class Search:
         self.request.clock.start('_moinSearch')
         from MoinMoin.Page import Page
         if pages is None:
-            # if we are not called from _lupySearch, we make a full pagelist,
+            # if we are not called from _xapianSearch, we make a full pagelist,
             # but don't search attachments (thus attachment name = '')
             pages = [(p, '') for p in self._getPageList()]
         hits = []

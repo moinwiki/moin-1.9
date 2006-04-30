@@ -438,7 +438,7 @@ class Macro:
         row(_('Installed processors (DEPRECATED -- use Parsers instead)'), 
             ', '.join(processor.processors) or nonestr)
         state = (_('Disabled'), _('Enabled'))
-        row(_('Lupy search'), state[self.request.cfg.lupy_search])
+        row(_('Xapian search'), state[self.request.cfg.xapian_search])
         row(_('Active threads'), t_count or 'N/A')
         buf.write(u'</dl>')
 
