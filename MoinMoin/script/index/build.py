@@ -22,10 +22,10 @@ class IndexScript(MoinScript):
             "--files", metavar="FILES", dest="file_list",
             help="filename of file list, e.g. files.lst (one file per line)"
         )
-        #self.parser.add_option(
-        #    "--update", action="store_true", dest="update",
-        #    help="when given, update an existing index"
-        #)
+        self.parser.add_option(
+            "--mode", metavar="MODE", dest="mode",
+            help="either add (unconditionally add to index) or update (update an existing index)"
+        )
     
     def mainloop(self):
         self.init_request()
@@ -40,6 +40,6 @@ class PluginScript(IndexScript):
     """ Xapian index build script class """
 
     def command(self):
-        Index(self.request).indexPages(self.files) # , self.options.update)
+        Index(self.request).indexPages(self.files, self.options.mode)
         #Index(self.request).test(self.request)
 

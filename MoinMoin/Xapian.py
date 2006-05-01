@@ -387,9 +387,8 @@ class Index:
         def mt2mn(mt): # mimetype to modulename
             return mt.replace("/", "_").replace("-","_").replace(".", "_")
 
-        import mimetypes
         request = self.request
-        mimetype, encoding = mimetypes.guess_type(filename)
+        mimetype, encoding = wikiutil.guess_type(filename)
         if mimetype is None:
             mimetype = 'application/octet-stream'
         try:
@@ -480,6 +479,7 @@ class Index:
         pagename = page.page_name
         mtime = page.mtime_usecs()
         if mode == 'update':
+            # from #xapian: if you generate a special "unique id" term, you can just call database.replace_document(uid_term, doc)
             query = xapidx.RawQuery(xapdoc.makePairForWrite('title', pagename))
             docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
             if docs:
@@ -498,11 +498,11 @@ class Index:
             pname = xapdoc.SortKey('pagename', pagename)
             attachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
             mtime = xapdoc.SortKey('mtime', mtime)
-            title = xapdoc.Keyword('title', pagename)
+            title = xapdoc.TextField('title', pagename, True) # prefixed
             links = xapdoc.Keyword('link_text', ' '.join(page.getPageLinks(request)))
             content = xapdoc.TextField('content', page.get_raw_body())
-            doc = xapdoc.Document(textFields=(content,),
-                                  keywords=(title, links,),
+            doc = xapdoc.Document(textFields=(content, title),
+                                  keywords=(links,),
                                   sortFields=(pname, attachment, mtime,),
                                  )
             #search_db_language = "english"
@@ -641,7 +641,7 @@ class Index:
 def run_query(query, db):
     enquire = xapian.Enquire(db)
     parser = xapian.QueryParser()
-    query = parser.parse_query(query)
+    query = parser.parse_query(query, xapian.QueryParser.FLAG_WILDCARD)
     print query.get_description()
     enquire.set_query(query)
     return enquire.get_mset(0, 10)

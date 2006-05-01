@@ -26,7 +26,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, mimetypes, time, zipfile
+import os, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import MoinMoinNoFooter, filesys
@@ -544,15 +544,15 @@ def do_upload(pagename, request):
     target = wikiutil.taintfilename(target)
 
     # set mimetype from extension, or from given mimetype
-    #type, encoding = mimetypes.guess_type(target)
+    #type, encoding = wikiutil.guess_type(target)
     #if not type:
     #    ext = None
     #    if request.form.has_key('mime'):
-    #        ext = mimetypes.guess_extension(request.form['mime'][0])
+    #        ext = wikiutil.guess_extension(request.form['mime'][0])
     #    if not ext:
-    #        type, encoding = mimetypes.guess_type(filename)
+    #        type, encoding = wikiutil.guess_type(filename)
     #        if type:
-    #            ext = mimetypes.guess_extension(type)
+    #            ext = wikiutil.guess_extension(type)
     #        else:
     #            ext = ''
     #    target = target + ext
@@ -634,7 +634,7 @@ def get_file(pagename, request):
     if not filename: return # error msg already sent in _access_file
 
     # get mimetype
-    type, enc = mimetypes.guess_type(filename)
+    type, enc = wikiutil.guess_type(filename)
     if not type:
         type = "application/octet-stream"
 
@@ -766,7 +766,7 @@ def send_viewfile(pagename, request):
 
     request.write('<h2>' + _("Attachment '%(filename)s'") % {'filename': filename} + '</h2>')
 
-    type, enc = mimetypes.guess_type(filename)
+    type, enc = wikiutil.guess_type(filename)
     if type:
         if type[:5] == 'image':
             timestamp = htdocs_access(request) and "?%s" % time.time() or ''

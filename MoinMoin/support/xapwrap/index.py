@@ -525,7 +525,7 @@ class ReadOnlyIndex:
                     V = v.upper()
                 else:
                     V = k.upper()
-                self.qp.set_prefix(k, V)
+                self.qp.add_prefix(k, V)
 
     def configure(self, prefixMap = None, indexValueMap = None):
         if prefixMap is not None:

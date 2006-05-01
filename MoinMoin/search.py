@@ -252,13 +252,13 @@ class TextSearch(BaseExpression):
         if self.use_re:
             return '' # xapian can't do regex search
         else:
-            terms = pattern.lower().split()
+            terms = pattern.split()
             terms = [list(Xapian.tokenizer(t)) for t in terms]
             term = []
             for t in terms:
                 term.append(" AND ".join(t))
-        return "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
-
+            term = "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
+            return "%s %s" % (self.negated and "NOT" or "", term)
 
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
@@ -1169,7 +1169,8 @@ class Search:
                 query = xapwrap.index.ParsedQuery(query)
                 hits = index.search(query)
                 self.request.log("xapianSearch: finds: %r" % hits)
-                pages = [(hit['values']['pagename'], hit['values']['attachment']) for hit in hits]
+                pages = [(hit['values']['pagename'].decode(config.charset),
+                          hit['values']['attachment'].decode(config.charset)) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
             except index.LockedException:
                 pass
