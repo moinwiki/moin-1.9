@@ -932,7 +932,7 @@ class Page:
             if not UserPerms(subscriber).read(self.page_name): continue
 
             if subscriber.isSubscribedTo(pageList):
-                lang = subscriber.language or 'en'
+                lang = subscriber.language or request.cfg.language_default
                 if not lang in subscriber_list:
                     subscriber_list[lang] = []
                 if return_users:
