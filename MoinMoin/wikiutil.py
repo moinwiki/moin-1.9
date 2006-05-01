@@ -46,7 +46,7 @@ _our_types = {
  '.otp': 'application/vnd.oasis.opendocument.presentation-template',
  '.otg': 'application/vnd.oasis.opendocument.graphics-template',
 }
-[mimetypes.add_type(mimetype, ext, True) for ext, mimetype in our_types.items()]
+[mimetypes.add_type(mimetype, ext, True) for ext, mimetype in _our_types.items()]
 
 #############################################################################
 ### Getting data from user/Sending data to user
