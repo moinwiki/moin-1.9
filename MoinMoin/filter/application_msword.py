@@ -11,5 +11,5 @@
 from MoinMoin import filter
 
 def execute(indexobj, filename):
-    return filter.execfilter("antiword %s", filename)
+    return filter.execfilter("HOME=/tmp antiword %s", filename) # no HOME makes antiword complain
 
