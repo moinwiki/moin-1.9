@@ -142,7 +142,7 @@ class Document:
 
         return length
 
-    def toXapianDocument(self, indexValueMap):
+    def toXapianDocument(self, indexValueMap, prefixMap=None):
         d = xapian.Document()
         position = 1
         analyzer = self.analyzerFactory()
@@ -165,14 +165,14 @@ class Document:
                     # XXX FIXME: slight loss of efficiency here: token is
                     # already known to be in UTF-8 and we convert it
                     # back to unicode and then back to UTF-8 again...
-                    term = makePairForWrite(prefix, token)
+                    term = makePairForWrite(prefix, token, prefixMap)
                     d.add_posting(term, position)
                     position += 1
                 position += INTER_FIELD_POSITION_GAP
 
         # add keyword fields
         for field in self.keywords:
-            term = makePairForWrite(field.name, field.value)
+            term = makePairForWrite(field.name, field.value, prefixMap)
             d.add_term(term)
 
         # add non positional terms
@@ -281,7 +281,7 @@ def cleanInputText(unknownText, returnUnicode = False):
         return originalText.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
 
 
-def makePairForWrite(prefix, token):
+def makePairForWrite(prefix, token, prefixMap=None):
     # prefixes must be uppercase; if the prefix given to us is a str
     # that happens to be UTF-8 encoded, bad things will happen when we
     # uppercase it, so we convert everything to unicode first
@@ -290,7 +290,12 @@ def makePairForWrite(prefix, token):
     if isinstance(token, str):
         token = token.decode(UNICODE_ENCODING, UNICODE_ERROR_POLICY) # XXX hardcoded UTF-8, make param
 
-    result = prefix.upper() + token
+    if prefixMap is None:
+        prefix = prefix.upper()
+    else: # we have a map, so first translate it using the map (e.g. 'title' -> 'S')
+        prefix = prefixMap.get(prefix, prefix.upper())
+
+    result = prefix + token
     # since return value is going into the db, it must be encoded as UTF-8
     result = result.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
     return checkKeyLen(result)

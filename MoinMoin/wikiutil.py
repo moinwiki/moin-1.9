@@ -48,6 +48,10 @@ _our_types = {
 }
 [mimetypes.add_type(mimetype, ext, True) for ext, mimetype in _our_types.items()]
 
+def mimetype2modulename(mimetype):
+    """ convert an original mimetype to a string usable as python module name """
+    return mimetype.replace("/", "_").replace("-","_").replace(".", "_")
+
 #############################################################################
 ### Getting data from user/Sending data to user
 #############################################################################

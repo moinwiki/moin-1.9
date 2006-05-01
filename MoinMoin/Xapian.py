@@ -383,11 +383,8 @@ class Index:
 
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
-        
-        def mt2mn(mt): # mimetype to modulename
-            return mt.replace("/", "_").replace("-","_").replace(".", "_")
-
         request = self.request
+        mt2mn = wikiutil.mimetype2modulename
         mimetype, encoding = wikiutil.guess_type(filename)
         if mimetype is None:
             mimetype = 'application/octet-stream'
@@ -410,7 +407,7 @@ class Index:
         except (OSError, IOError), err:
             data = ''
             request.log("Filter %s threw error '%s' for file %s" % (_filter, str(err), filename))
-        return data
+        return mimetype, data
    
     def test(self, request):
         idx = xapidx.ReadOnlyIndex(self.dir)
@@ -446,14 +443,15 @@ class Index:
                 updated = True
             if debug: request.log("%s %r" % (filename, updated))
             if updated:
-                file_content = self.contentfilter(filename)
+                mimetype, file_content = self.contentfilter(filename)
                 pname = xapdoc.SortKey('pagename', fs_rootpage)
                 attachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
                 mtime = xapdoc.SortKey('mtime', mtime)
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 title = xapdoc.Keyword('title', title)
+                mimetype = xapdoc.TextField('mimetype', mimetype, True)
                 content = xapdoc.TextField('content', file_content)
-                doc = xapdoc.Document(textFields=(content,),
+                doc = xapdoc.Document(textFields=(content, mimetype, ),
                                       keywords=(title, ),
                                       sortFields=(pname, attachment, mtime,),
                                      )
@@ -550,9 +548,10 @@ class Index:
                 attachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 mtime = xapdoc.SortKey('mtime', mtime)
                 title = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
-                att_content = self.contentfilter(filename)
+                mimetype, att_content = self.contentfilter(filename)
+                mimetype = xapdoc.TextField('mimetype', mimetype, True)
                 content = xapdoc.TextField('content', att_content)
-                doc = xapdoc.Document(textFields=(content,),
+                doc = xapdoc.Document(textFields=(content, mimetype, ),
                                       keywords=(title, ),
                                       sortFields=(pname, attachment, mtime,),
                                      )
