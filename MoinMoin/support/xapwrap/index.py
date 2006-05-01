@@ -809,7 +809,7 @@ class Index(ReadOnlyIndex):
             uid = int(doc.uid)
             doc.sortFields.append(SortKey('uid', uid))
             doc.keywords.append(Keyword('uid', str(uid)))
-            xapDoc = doc.toXapianDocument(self.indexValueMap)
+            xapDoc = doc.toXapianDocument(self.indexValueMap, self.prefixMap)
             self.replace_document(uid, xapDoc)
         else:
             # We need to know the uid of the doc we're going to add
@@ -823,12 +823,12 @@ class Index(ReadOnlyIndex):
             uid = self.get_lastdocid() + 1
             doc.sortFields.append(SortKey('uid', uid))
             doc.keywords.append(Keyword('uid', str(uid)))
-            xapDoc = doc.toXapianDocument(self.indexValueMap)
+            xapDoc = doc.toXapianDocument(self.indexValueMap, self.prefixMap)
             newUID = self.add_document(xapDoc)
             if newUID != uid:
                 doc.sortFields.append(SortKey('uid', newUID))
                 doc.keywords.append(Keyword('uid', str(newUID)))
-                xapDoc = doc.toXapianDocument(self.indexValueMap)
+                xapDoc = doc.toXapianDocument(self.indexValueMap, self.prefixMap)
                 self.replace_document(newUID, xapDoc)
 
             # a simpler alternative would be to add an empty document

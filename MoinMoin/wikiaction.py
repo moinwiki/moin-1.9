@@ -806,14 +806,14 @@ def do_format(pagename, request):
         mimetype = u"text/plain"
 
     # try to load the formatter
-    formatterName = mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'})
+    formatterName = wikiutil.mimetype2modulename(mimetype)
     try:
-        Formatter = wikiutil.importPlugin(request.cfg, "formatter",
-                                          formatterName, "Formatter")
+        Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
     except wikiutil.PluginMissingError:
         # default to plain text formatter
         mimetype = "text/plain"
-        from MoinMoin.formatter.text_plain import Formatter
+        formatterName = wikiutil.mimetype2modulename(mimetype)
+        Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
 
     if "xml" in mimetype:
         mimetype = "text/xml"
