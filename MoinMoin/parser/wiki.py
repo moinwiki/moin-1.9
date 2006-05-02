@@ -29,7 +29,6 @@ class Parser:
     Dependencies = []
 
     # some common strings
-    PARENT_PREFIX = wikiutil.PARENT_PREFIX
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
     url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc|' +
@@ -41,8 +40,9 @@ class Parser:
         'u': config.chars_upper,
         'l': config.chars_lower,
         'subpages': wikiutil.CHILD_PREFIX + '?',
-        'parent': ur'(?:%s)?' % re.escape(PARENT_PREFIX),
+        'parent': ur'(?:%s)?' % re.escape(wikiutil.PARENT_PREFIX),
     }
+
     url_rule = ur'%(url_guard)s(%(url)s)\:([^\s\<%(punct)s]|([%(punct)s][^\s\<%(punct)s]))+' % {
         'url_guard': u'(^|(?<!\w))',
         'url': url_pattern,

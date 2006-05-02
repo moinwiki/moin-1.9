@@ -12,6 +12,7 @@ from pprint import pprint
 
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
+from MoinMoin.parser.wiki import Parser as WikiParser
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
@@ -22,55 +23,65 @@ from MoinMoin.util import filesys, lock
 ### Tokenizer
 ##############################################################################
 
-singleword = r"[%(u)s][%(l)s]+" % {
-                 'u': config.chars_upper,
-                 'l': config.chars_lower,
-             }
+class WikiAnalyzer:
+    singleword = r"[%(u)s][%(l)s]+" % {
+                     'u': config.chars_upper,
+                     'l': config.chars_lower,
+                 }
 
-singleword_re = re.compile(singleword, re.U)
-wikiword_re = re.compile(r"^(%s){2,}$" % singleword, re.U)
+    singleword_re = re.compile(singleword, re.U)
+    wikiword_re = re.compile(WikiParser.word_rule, re.U)
 
-token_re = re.compile(
-    r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
-    r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
-    r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
-    r"(?P<num>(\w+[-/.,])*\w*\d\w*([-/.,]\w+)*)|" + # version numbers
-    r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
-    r"(?P<word>\w+)",                   # words
-    re.U)
+    token_re = re.compile(
+        r"(?P<company>\w+[&@]\w+)|" + # company names like AT&T and Excite@Home.
+        r"(?P<email>\w+([.-]\w+)*@\w+([.-]\w+)*)|" +    # email addresses
+        r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
+        r"(?P<num>(\w+[-/.,])*\w*\d\w*([-/.,]\w+)*)|" + # version numbers
+        r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
+        r"(?P<word>\w+)",                   # words
+        re.U)
 
-dot_re = re.compile(r"[-_/,.]")
-mail_re = re.compile(r"[-_/,.]|(@)")
+    dot_re = re.compile(r"[-_/,.]")
+    mail_re = re.compile(r"[-_/,.]|(@)")
+    
+    # XXX limit stuff above to xapdoc.MAX_KEY_LEN
+    # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
-def tokenizer(value):
-    """Yield a stream of lower cased words from a string."""
-    if isinstance(value, list): # used for page links
-        for v in value:
-            yield v
-    else:
-        tokenstream = re.finditer(token_re, value)
-        for m in tokenstream:
-            if m.group("acronym"):
-                yield m.group("acronym").replace('.', '').lower()
-            elif m.group("company"):
-                yield m.group("company").lower()
-            elif m.group("email"):
-                for word in mail_re.split(m.group("email").lower()):
-                    if word:
-                        yield word
-            elif m.group("hostname"):                
-                for word in dot_re.split(m.group("hostname").lower()):
-                    yield word
-            elif m.group("num"):
-                for word in dot_re.split(m.group("num").lower()):
-                    yield word
-            elif m.group("word"):
-                word = m.group("word")
-                yield  word.lower()
-                # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
-                if wikiword_re.match(word):
-                    for sm in re.finditer(singleword_re, word):
-                        yield sm.group().lower()
+    def tokenize(self, value):
+        """Yield a stream of lower cased words from a string.
+           value must be an UNICODE object or a list of unicode objects
+        """
+        def enc(uc):
+            lower = uc.lower()
+            return lower
+            
+        if isinstance(value, list): # used for page links
+            for v in value:
+                yield enc(v)
+        else:
+            tokenstream = re.finditer(self.token_re, value)
+            for m in tokenstream:
+                if m.group("acronym"):
+                    yield enc(m.group("acronym").replace('.', ''))
+                elif m.group("company"):
+                    yield enc(m.group("company"))
+                elif m.group("email"):
+                    for word in self.mail_re.split(m.group("email")):
+                        if word:
+                            yield enc(word)
+                elif m.group("hostname"):                
+                    for word in self.dot_re.split(m.group("hostname")):
+                        yield enc(word)
+                elif m.group("num"):
+                    for word in self.dot_re.split(m.group("num")):
+                        yield enc(word)
+                elif m.group("word"):
+                    word = m.group("word")
+                    yield  enc(word)
+                    # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
+                    if self.wikiword_re.match(word):
+                        for sm in re.finditer(self.singleword_re, word):
+                            yield enc(sm.group())
 
 
 #############################################################################
@@ -455,6 +466,7 @@ class Index:
                                       keywords=(title, ),
                                       sortFields=(pname, attachment, mtime,),
                                      )
+                doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (filename, uid))
                     doc.uid = uid
@@ -497,12 +509,15 @@ class Index:
             attachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
             mtime = xapdoc.SortKey('mtime', mtime)
             title = xapdoc.TextField('title', pagename, True) # prefixed
-            links = xapdoc.Keyword('link_text', ' '.join(page.getPageLinks(request)))
+            keywords = []
+            for pagelink in page.getPageLinks(request):
+                keywords.append(xapdoc.Keyword('linkto', pagelink.lower()))
             content = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(content, title),
-                                  keywords=(links,),
+                                  keywords=keywords,
                                   sortFields=(pname, attachment, mtime,),
                                  )
+            doc.analyzerFactory = WikiAnalyzer
             #search_db_language = "english"
             #stemmer = xapian.Stem(search_db_language)
             #pagetext = page.get_raw_body().lower()
@@ -555,6 +570,7 @@ class Index:
                                       keywords=(title, ),
                                       sortFields=(pname, attachment, mtime,),
                                      )
+                doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid

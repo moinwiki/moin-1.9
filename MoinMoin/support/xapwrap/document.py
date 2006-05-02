@@ -34,13 +34,8 @@ class StandardAnalyzer:
         # OS/libc/$LC_CTYPE dependant result
         text = originalText.lower()
         for match in self.WORD_RE.finditer(text):
-            # the xapian swig bindings don't like unicode objects, so we
-            # decode terms to UTF-8 before indexing. this is fine as
-            # long as all data that goes into the db (whether for
-            # indexing or search) is converted to UTF-8 string and all
-            # data coming from the db (.get_value(), .get_data()) is
-            # decoded as UTF-8.
-            yield match.group().encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
+            # we yield unicode ONLY
+            yield match.group()
 
 
 class TextField(object):
@@ -150,6 +145,13 @@ class Document:
         # add text fields
         for field in self.textFields:
             for token in analyzer.tokenize(field.text):
+                # the xapian swig bindings don't like unicode objects, so we
+                # decode terms to UTF-8 before indexing. this is fine as
+                # long as all data that goes into the db (whether for
+                # indexing or search) is converted to UTF-8 string and all
+                # data coming from the db (.get_value(), .get_data()) is
+                # decoded as UTF-8.
+                token = token.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
                 # the tokenizer cannot guarantee that token length is
                 # below MAX_KEY_LEN since the regexp is done with
                 # unicode and the result is later converted to UTF-8. In
@@ -162,9 +164,8 @@ class Document:
             if field.prefix:
                 prefix = field.name
                 for token in analyzer.tokenize(field.text):
-                    # XXX FIXME: slight loss of efficiency here: token is
-                    # already known to be in UTF-8 and we convert it
-                    # back to unicode and then back to UTF-8 again...
+                    # token is unicode, but gets converted to UTF-8
+                    # by makePairForWrite:
                     term = makePairForWrite(prefix, token, prefixMap)
                     d.add_posting(term, position)
                     position += 1
