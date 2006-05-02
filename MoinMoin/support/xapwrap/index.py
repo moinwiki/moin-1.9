@@ -862,6 +862,9 @@ class ParsedQuery(Query):
     def __init__(self, queryString):
         if isinstance(queryString, unicode):
             queryString = queryString.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
+        # as of xapian 0.9.5 the query parser makes trouble with utf-8. but it
+        # also doesnt work with iso-8859-15, so we just live with ascii-only search
+        # for now... - a utf8 fix seems to be planned for the near future!
         self.queryString = queryString
 
     def prepare(self, queryParser):

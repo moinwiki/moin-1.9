@@ -232,6 +232,7 @@ class Index:
             'pagename': 2,
             'attachment': 3,
             'mtime': 4,
+            'wikiname': 5,
         }
         self.prefixMap = { # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
             'author': 'A',
@@ -278,7 +279,7 @@ class Index:
                 timestamp = self.mtime()
                 break
             
-        hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+        hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname'])
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
@@ -411,7 +412,7 @@ class Index:
                     _filter = mt2mn('application/octet-stream')
                     execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
                 except wikiutil.PluginMissingError:
-                    raise ImportError("Cannot load filter %s" % binaryfilter)
+                    raise ImportError("Cannot load filter %s" % _filter)
         try:
             data = execute(self, filename)
             if debug: request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
@@ -455,6 +456,7 @@ class Index:
             if debug: request.log("%s %r" % (filename, updated))
             if updated:
                 mimetype, file_content = self.contentfilter(filename)
+                wname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
                 pname = xapdoc.SortKey('pagename', fs_rootpage)
                 attachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
                 mtime = xapdoc.SortKey('mtime', mtime)
@@ -464,7 +466,7 @@ class Index:
                 content = xapdoc.TextField('content', file_content)
                 doc = xapdoc.Document(textFields=(content, mimetype, ),
                                       keywords=(title, ),
-                                      sortFields=(pname, attachment, mtime,),
+                                      sortFields=(pname, attachment, mtime, wname, ),
                                      )
                 doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
@@ -505,6 +507,7 @@ class Index:
             updated = True
         if debug: request.log("%s %r" % (pagename, updated))
         if updated:
+            wname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
             pname = xapdoc.SortKey('pagename', pagename)
             attachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
             mtime = xapdoc.SortKey('mtime', mtime)
@@ -515,7 +518,7 @@ class Index:
             content = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(content, title),
                                   keywords=keywords,
-                                  sortFields=(pname, attachment, mtime,),
+                                  sortFields=(pname, attachment, mtime, wname, ),
                                  )
             doc.analyzerFactory = WikiAnalyzer
             #search_db_language = "english"
@@ -568,7 +571,7 @@ class Index:
                 content = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(content, mimetype, ),
                                       keywords=(title, ),
-                                      sortFields=(pname, attachment, mtime,),
+                                      sortFields=(pname, attachment, mtime, wname, ),
                                      )
                 doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
