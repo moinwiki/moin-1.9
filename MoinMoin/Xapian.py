@@ -255,6 +255,7 @@ class Index:
                            #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
                            #  the D term, and changing the last digit to a '2' if it's a '3')
                            #X   longer prefix for user-defined use
+            'linkto': 'XLINKTO', # this document links to that document
                            #Y   year (four digits)
         }
         
