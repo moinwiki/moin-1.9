@@ -121,6 +121,7 @@ future version will.
 import cPickle, sets, glob, os
 import xapian
 from document import makePairForWrite, StandardAnalyzer, Document, SortKey, Keyword
+from document import UNICODE_ENCODING, UNICODE_ERROR_POLICY
 
 try:
     from atop.tpython import FilesystemLock
@@ -571,7 +572,7 @@ class ReadOnlyIndex:
 
         # TODO - allow a simple way to get Keywords out
         self.setupDB()
-        if isinstance(query, str):
+        if isinstance(query, (str, unicode)):
             query = ParsedQuery(query)
         elif not(isinstance(query, Query)):
             raise ValueError("query %s must be either a string or a "
@@ -859,6 +860,8 @@ class Query:
 
 class ParsedQuery(Query):
     def __init__(self, queryString):
+        if isinstance(queryString, unicode):
+            queryString = queryString.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
         self.queryString = queryString
 
     def prepare(self, queryParser):

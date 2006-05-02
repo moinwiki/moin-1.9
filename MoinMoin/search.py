@@ -248,12 +248,12 @@ class TextSearch(BaseExpression):
             return [Match()]
 
     def xapian_term(self):
-        pattern = self._pattern.lower()
         if self.use_re:
             return '' # xapian can't do regex search
         else:
-            terms = pattern.split()
-            terms = [list(Xapian.tokenizer(t)) for t in terms]
+            analyzer = Xapian.WikiAnalyzer()
+            terms = self._pattern.split()
+            terms = [list(analyzer.tokenize(t)) for t in terms]
             term = []
             for t in terms:
                 term.append(" AND ".join(t))
@@ -312,12 +312,17 @@ class TitleSearch(BaseExpression):
             return [Match()]
 
     def xapian_term(self):
-        pattern = self._pattern.lower()
         if self.use_re:
             return '' # xapian doesn't support regex search
         else:
-            return 'title:%s' % pattern
-
+            analyzer = Xapian.WikiAnalyzer()
+            terms = self._pattern.split()
+            terms = [list(analyzer.tokenize(t)) for t in terms]
+            term = []
+            for t in terms:
+                term.append(" AND ".join(t))
+            term = '%s title:(%s)' % (self.negated and "NOT" or "", " AND ".join(term))
+            return term
 
 class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
@@ -398,7 +403,8 @@ class LinkSearch(BaseExpression):
         if self.use_re:
             return '' # xapian doesnt support regex search
         else:
-            return 'linkto:%s' % pattern
+            term = '%s linkto:%s' % (self.negated and "NOT" or "", pattern.lower())
+            return term
 
 ############################################################################
 ### Results
@@ -613,7 +619,9 @@ class QueryParser:
         self.regex = kw.get('regex', 0)
 
     def parse_query(self, query):
-        """ transform an string into a tree of Query objects"""
+        """ transform an string into a tree of Query objects """
+        if isinstance(query, str):
+            query = query.decode(config.charset)
         self._query = query
         result = self._or_expression()
         if result is None:
@@ -650,7 +658,7 @@ class QueryParser:
                  r'(?P<OPS>\(|\)|(or\b(?!$)))|' +  # or, (, )
                  r'(?P<MOD>(\w+:)*)' +
                  r'(?P<TERM>("[^"]+")|' +
-                  r"('[^']+')|(\S+)))")             # search word itself
+                 r"('[^']+')|(\S+)))")             # search word itself
         self._query = self._query.strip()
         match = re.match(regex, self._query, re.U)
         if not match:
@@ -1164,8 +1172,8 @@ class Search:
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
-                query = self.query.xapian_term().encode(config.charset)
-                self.request.log("xapianSearch: query = %s" % query)
+                query = self.query.xapian_term()
+                self.request.log("xapianSearch: query = %r" % query)
                 query = xapwrap.index.ParsedQuery(query)
                 hits = index.search(query)
                 self.request.log("xapianSearch: finds: %r" % hits)
