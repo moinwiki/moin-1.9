@@ -598,6 +598,28 @@ class FoundAttachment(FoundPage):
         return []
 
 
+class FoundRemote(FoundPage):
+    """ Represent an attachment in search results """
+    
+    def __init__(self, wikiname, page_name, attachment, matches=None, page=None):
+        self.wikiname = wikiname
+        self.page_name = page_name
+        self.attachment = attachment
+        self.page = page
+        if matches is None:
+            matches = []
+        self._matches = matches
+
+    def weight(self, unique=1):
+        return 1
+
+    def get_matches(self, unique=1, sort='start', type=Match):
+        return []
+
+    def _unique_matches(self, type=Match):
+        return []
+
+
 ##############################################################################
 ### Parse Query
 ##############################################################################
@@ -1147,12 +1169,14 @@ class Search:
             hits = self._filter(hits)
         
         result_hits = []
-        for page, attachment, match in hits:
-            if attachment:
-                result_hits.append(FoundAttachment(page.page_name, attachment))
+        for wikiname, page, attachment, match in hits:
+            if wikiname in (self.request.cfg.interwikiname, 'Self'): # a local match
+                if attachment:
+                    result_hits.append(FoundAttachment(page.page_name, attachment))
+                else:
+                    result_hits.append(FoundPage(page.page_name, match))
             else:
-                result_hits.append(FoundPage(page.page_name, match))
-            
+                result_hits.append(FoundRemote(wikiname, page, attachment, match))
         elapsed = time.time() - start
         count = self.request.rootpage.getPageCount()
         return SearchResults(self.query, result_hits, count, elapsed)
@@ -1177,8 +1201,12 @@ class Search:
                 query = xapwrap.index.ParsedQuery(query)
                 hits = index.search(query)
                 self.request.log("xapianSearch: finds: %r" % hits)
-                pages = [(hit['values']['pagename'].decode(config.charset),
-                          hit['values']['attachment'].decode(config.charset)) for hit in hits]
+                def dict_decode(d):
+                    """ decode dict values to unicode """
+                    for k, v in d.items():
+                        d[k] = d[k].decode(config.charset)
+                    return d
+                pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
             except index.LockedException:
                 pass
@@ -1196,21 +1224,27 @@ class Search:
         if pages is None:
             # if we are not called from _xapianSearch, we make a full pagelist,
             # but don't search attachments (thus attachment name = '')
-            pages = [(p, '') for p in self._getPageList()]
+            pages = [{'pagename': p, 'attachment': '', 'wikiname': 'Self', } for p in self._getPageList()]
         hits = []
         fs_rootpage = self.fs_rootpage
-        for pagename, attachment in pages:
-            page = Page(self.request, pagename)
-            if attachment:
-                if pagename == fs_rootpage: # not really an attachment
-                    page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
-                    hits.append((page, None, None))
+        for valuedict in pages:
+            wikiname = valuedict['wikiname']
+            pagename = valuedict['pagename']
+            attachment = valuedict['attachment']
+            if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
+                page = Page(self.request, pagename)
+                if attachment:
+                    if pagename == fs_rootpage: # not really an attachment
+                        page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
+                        hits.append((wikiname, page, None, None))
+                    else:
+                        hits.append((wikiname, page, attachment, None))
                 else:
-                    hits.append((page, attachment, None))
-            else:
-                match = self.query.search(page)
-                if match:
-                    hits.append((page, attachment, match))
+                    match = self.query.search(page)
+                    if match:
+                        hits.append((wikiname, page, attachment, match))
+            else: # other wiki
+                hits.append((wikiname, pagename, attachment, None))
         self.request.clock.stop('_moinSearch')
         return hits
 
@@ -1234,8 +1268,11 @@ class Search:
         """ Filter out deleted or acl protected pages """
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
-        filtered = [(page, attachment, match) for page, attachment, match in hits
-                    if page.exists() and userMayRead(page.page_name) or page.page_name.startswith(fs_rootpage)]    
+        thiswiki = (self.request.cfg.interwikiname, 'Self')
+        filtered = [(wikiname, page, attachment, match) for wikiname, page, attachment, match in hits
+                    if not wikiname in thiswiki or
+                       page.exists() and userMayRead(page.page_name) or
+                       page.page_name.startswith(fs_rootpage)]    
         return filtered
         
         
