@@ -5,7 +5,7 @@
     @copyright: 2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
-debug = False
+debug = True
 
 import sys, os, re, codecs, errno, time
 from pprint import pprint
@@ -435,14 +435,13 @@ class Index:
         """
         fs_rootpage = 'FS' # XXX FS hardcoded
         try:
+            wikiname = request.cfg.interwikiname or 'Self'
+            itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
             mtime = os.path.getmtime(filename)
             mtime = wikiutil.timestamp2version(mtime)
             if mode == 'update':
-                title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                #        query.add(TermQuery(Term("pagename", fs_rootpage)), True, False)
-                #        query.add(TermQuery(Term("attachment", filename)), True, False)
-                query = xapidx.RawQuery(xapdoc.makePairForWrite('title', title))
-                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
+                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
                 if docs:
                     doc = docs[0] # there should be only one
                     uid = doc['uid']
@@ -456,18 +455,19 @@ class Index:
                 updated = True
             if debug: request.log("%s %r" % (filename, updated))
             if updated:
+                xitemid = xapdoc.Keyword('itemid', itemid)
                 mimetype, file_content = self.contentfilter(filename)
-                wname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
-                pname = xapdoc.SortKey('pagename', fs_rootpage)
-                attachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
-                mtime = xapdoc.SortKey('mtime', mtime)
+                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
+                xpname = xapdoc.SortKey('pagename', fs_rootpage)
+                xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
+                xmtime = xapdoc.SortKey('mtime', mtime)
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
-                title = xapdoc.Keyword('title', title)
-                mimetype = xapdoc.TextField('mimetype', mimetype, True)
-                content = xapdoc.TextField('content', file_content)
-                doc = xapdoc.Document(textFields=(content, mimetype, ),
-                                      keywords=(title, ),
-                                      sortFields=(pname, attachment, mtime, wname, ),
+                xtitle = xapdoc.Keyword('title', title)
+                xmimetype = xapdoc.TextField('mimetype', mimetype, True)
+                xcontent = xapdoc.TextField('content', file_content)
+                doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
+                                      keywords=(xtitle, xitemid, ),
+                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
                 doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
@@ -489,12 +489,14 @@ class Index:
             
         """
         request = page.request
+        wikiname = request.cfg.interwikiname or "Self"
         pagename = page.page_name
         mtime = page.mtime_usecs()
+        itemid = "%s:%s" % (wikiname, pagename)
         if mode == 'update':
             # from #xapian: if you generate a special "unique id" term, you can just call database.replace_document(uid_term, doc)
-            query = xapidx.RawQuery(xapdoc.makePairForWrite('title', pagename))
-            docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+            query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
+            docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
             if docs:
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
@@ -508,18 +510,18 @@ class Index:
             updated = True
         if debug: request.log("%s %r" % (pagename, updated))
         if updated:
-            wname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
-            pname = xapdoc.SortKey('pagename', pagename)
-            attachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
-            mtime = xapdoc.SortKey('mtime', mtime)
-            title = xapdoc.TextField('title', pagename, True) # prefixed
-            keywords = []
+            xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
+            xpname = xapdoc.SortKey('pagename', pagename)
+            xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
+            xmtime = xapdoc.SortKey('mtime', mtime)
+            xtitle = xapdoc.TextField('title', pagename, True) # prefixed
+            xkeywords = [xapdoc.Keyword('itemid', itemid)]
             for pagelink in page.getPageLinks(request):
-                keywords.append(xapdoc.Keyword('linkto', pagelink.lower()))
-            content = xapdoc.TextField('content', page.get_raw_body())
-            doc = xapdoc.Document(textFields=(content, title),
-                                  keywords=keywords,
-                                  sortFields=(pname, attachment, mtime, wname, ),
+                xkeywords.append(xapdoc.Keyword('linkto', pagelink.lower()))
+            xcontent = xapdoc.TextField('content', page.get_raw_body())
+            doc = xapdoc.Document(textFields=(xcontent, xtitle),
+                                  keywords=xkeywords,
+                                  sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
             doc.analyzerFactory = WikiAnalyzer
             #search_db_language = "english"
@@ -545,9 +547,10 @@ class Index:
         attachments = AttachFile._get_files(request, pagename)
         for att in attachments:
             filename = AttachFile.getFilename(request, pagename, att)
+            att_itemid = "%s//%s" % (itemid, att)
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             if mode == 'update':
-                query = xapidx.RawQuery(xapdoc.makePairForWrite('title', '%s/%s' % (pagename, att)))
+                query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
                 docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
                 if debug: request.log("##%r %r" % (filename, docs))
                 if docs:
@@ -563,16 +566,17 @@ class Index:
                 updated = True
             if debug: request.log("%s %s %r" % (pagename, att, updated))
             if updated:
-                pname = xapdoc.SortKey('pagename', pagename)
-                attachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
-                mtime = xapdoc.SortKey('mtime', mtime)
-                title = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
+                xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
+                xpname = xapdoc.SortKey('pagename', pagename)
+                xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
+                xmtime = xapdoc.SortKey('mtime', mtime)
+                xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 mimetype, att_content = self.contentfilter(filename)
-                mimetype = xapdoc.TextField('mimetype', mimetype, True)
-                content = xapdoc.TextField('content', att_content)
-                doc = xapdoc.Document(textFields=(content, mimetype, ),
-                                      keywords=(title, ),
-                                      sortFields=(pname, attachment, mtime, wname, ),
+                xmimetype = xapdoc.TextField('mimetype', mimetype, True)
+                xcontent = xapdoc.TextField('content', att_content)
+                doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
+                                      keywords=(xatt_itemid, xtitle, ),
+                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
                 doc.analyzerFactory = WikiAnalyzer
                 if mode == 'update':
