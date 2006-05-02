@@ -38,7 +38,7 @@ class WikiAnalyzer:
         r"(?P<hostname>\w+(\.\w+)+)|" +                 # hostnames
         r"(?P<num>(\w+[-/.,])*\w*\d\w*([-/.,]\w+)*)|" + # version numbers
         r"(?P<acronym>(\w\.)+)|" +          # acronyms: U.S.A., I.B.M., etc.
-        r"(?P<word>\w+)",                   # words
+        r"(?P<word>\w+)",                   # words (including WikiWords)
         re.U)
 
     dot_re = re.compile(r"[-_/,.]")
@@ -52,6 +52,7 @@ class WikiAnalyzer:
            value must be an UNICODE object or a list of unicode objects
         """
         def enc(uc):
+            """ 'encode' unicode results into whatever xapian / xapwrap wants """
             lower = uc.lower()
             return lower
             
@@ -347,8 +348,7 @@ class Index:
     def optimize(self):
         pass
 
-    # -------------------------------------------------------------------
-    # Private
+    # Private ----------------------------------------------------------------
 
     def _do_queued_updates_InNewThread(self):
         """ do queued index updates in a new thread
@@ -654,7 +654,7 @@ class Index:
             f.write('')
         finally:
             f.close()
-#---------------------------------------------------------
+
 
 def run_query(query, db):
     enquire = xapian.Enquire(db)
