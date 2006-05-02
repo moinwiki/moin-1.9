@@ -1496,7 +1496,8 @@ class Page:
             links = self.parsePageLinks(request)
             cache.update('\n'.join(links) + '\n', True)
             return links
-        return cache.content(True).split('\n')
+        links = cache.content(True).split('\n')
+        return [link for link in links if link]
 
     def parsePageLinks(self, request):
         """ Parse page links by formatting with a pagelinks formatter 
