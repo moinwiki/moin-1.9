@@ -166,6 +166,12 @@ class AndExpression(BaseExpression):
             
         return '|'.join(result)
 
+    def xapian_wanted(self):
+        wanted = True
+        for term in self._subterms:
+            wanted = wanted and term.xapian_wanted()
+        return wanted
+
     def xapian_term(self):
         return "(%s)" % " AND ".join([term.xapian_term() for term in self._subterms])
 
@@ -247,6 +253,9 @@ class TextSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
+    def xapian_wanted(self):
+        return not self.use_re
+
     def xapian_term(self):
         if self.use_re:
             return '' # xapian can't do regex search
@@ -310,6 +319,9 @@ class TitleSearch(BaseExpression):
         else:
             # XXX why not return None or empty list?
             return [Match()]
+
+    def xapian_wanted(self):
+        return not self.use_re
 
     def xapian_term(self):
         if self.use_re:
@@ -397,6 +409,9 @@ class LinkSearch(BaseExpression):
         else:
             # XXX why not return None or empty list?
             return [Match()]
+
+    def xapian_wanted(self):
+        return not self.use_re
 
     def xapian_term(self):
         pattern = self.pattern
@@ -1192,7 +1207,7 @@ class Search:
         """
         pages = None
         index = Xapian.Index(self.request)
-        if index.exists():
+        if index.exists() and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
