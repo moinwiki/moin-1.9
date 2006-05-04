@@ -11,44 +11,44 @@ meta = {
 }
 text = {
 '''The backed up content of this page is deprecated and will not be included in search results!''':
-'''Съхранената версия на тази страница е твърде остаряла и няма да бъде включена в резултатите от търсенето!''',
+'''Архивното съдържание на тази страница е твърде остаряло и няма да бъде включено в резултатите от търсенето!''',
 '''Revision %(rev)d as of %(date)s''':
 '''Версия %(rev)d от %(date)s''',
 '''Redirected from page "%(page)s"''':
-'''Пренасочени сте от страница "%(page)s"''',
+'''Пренасочена от страница "%(page)s"''',
 '''This page redirects to page "%(page)s"''':
-'''Тази страница препраща към "%(page)s"''',
+'''Тази страница пренасочва към "%(page)s"''',
 '''~-If you submit this form, the submitted values will be displayed.
 To use this form on other pages, insert a
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
 macro call.-~
 ''':
-'''~-При изпращане на тази форма ще бъдат показани изпращаните стойности.
-За да използвате тази форма в други страници използвайте макроса:
+'''~-При изпращане на тази форма въведените стойности ще бъдат видими.
+За да използвате тази форма в други страници, използвайте макроса
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]-~
 ''',
 '''Create New Page''':
-'''Създайте страница''',
+'''Създай нова страница''',
 '''You are not allowed to view this page.''':
-'''Не Ви е позволено да разглеждате тази страница.''',
+'''Не е позволено да разглеждате тази страница.''',
 '''You are not allowed to edit this page.''':
-'''Не можете да редактирате тази страница.''',
+'''Не е позволено да редактирате тази страница.''',
 '''Page is immutable!''':
 '''Страницата е неизменима!''',
 '''Cannot edit old revisions!''':
 '''Стари версии не могат да се редактират!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
-'''Привилегията Ви да редактирате изтече. Гответе се за конфликти!''',
+'''Привилегията да редактирате изтече. Гответе се за конфликти!''',
 '''Edit "%(pagename)s"''':
-'''Редактиране на "%(pagename)s"''',
+'''Редактирай "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
 '''Предваритен изглед на "%(pagename)s"''',
 '''Your edit lock on %(lock_page)s has expired!''':
-'''Привилегията Ви за редактиране на %(lock_page)s изтече!''',
+'''Привилегията да редактирате %(lock_page)s изтече!''',
 '''Your edit lock on %(lock_page)s will expire in # minutes.''':
-'''Привилегията Ви за редактиране на %(lock_page)s изтича след # минути.''',
+'''Привилегията да редактирате %(lock_page)s изтича след # минути.''',
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
-'''Привилегията Ви за редактиране на %(lock_page)s изтича след # секунди.''',
+'''Привилегията да редактирате %(lock_page)s изтича след # секунди.''',
 '''Someone else deleted this page while you were editing!''':
 '''Някой друг е изтрил тази страница докато сте я редактирали!''',
 '''Someone else changed this page while you were editing!''':
@@ -58,25 +58,25 @@ Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
 '''Някой друг е записал тази страница докато сте я редактирали!
 Моля, първо прегледайте страницата и едва тогава я съхранете. Недейте просто да я записвате!
-Прегледайте разликите %(difflink)s за да видите какво се е променило.''',
+Прегледайте разликите %(difflink)s и вижте какво е било променено.''',
 '''[Content of new page loaded from %s]''':
 '''[Съдържанието на новата страница е заредено от %s]''',
 '''[Template %s not found]''':
-'''[Шаблонът %s не е намерен]''',
+'''[Шаблон %s не е намерен]''',
 '''[You may not read %s]''':
 '''[Не можете да четете %s]''',
 '''Describe %s here.''':
 '''Тук опишете %s.''',
 '''Check Spelling''':
-'''Проверка на правописа''',
+'''Провери правописа''',
 '''Save Changes''':
-'''Запис на промените''',
+'''Запиши промените''',
 '''Cancel''':
-'''Отказ''',
+'''Откажи''',
 '''By hitting \'\'\'%(save_button_text)s\'\'\' you put your changes under the %(license_link)s.
 If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your changes.''':
-'''Натискайки \'\'\'%(save_button_text)s\'\'\' Вие се поставяте вашите промени под %(license_link)s.
-Ако не сте съгласни с това, натиснете \'\'\'%(cancel_button_text)s\'\'\' за да отменте вашите промени.''',
+'''Натискайки \'\'\'%(save_button_text)s\'\'\' поставяте вашите промени под %(license_link)s.
+Ако не сте съгласни с това, натиснете \'\'\'%(cancel_button_text)s\'\'\' за да откажете промените.''',
 '''Preview''':
 '''Предварителен изглед''',
 '''Text mode''':
@@ -84,11 +84,11 @@ If you don\'t want that, hit \'\'\'%(cancel_button_text)s\'\'\' to cancel your c
 '''Comment:''':
 '''Коментар:''',
 '''<No addition>''':
-'''<Не добавяй>''',
+'''<нищо>''',
 '''Add to: %(category)s''':
 '''Добави към: %(category)s''',
 '''Trivial change''':
-'''Малка промяна''',
+'''Лека промяна''',
 '''Remove trailing whitespace from each line''':
 '''Премахване на крайните интервали от всеки един ред''',
 '''Invalid user name {{{\'%s\'}}}.
@@ -96,9 +96,9 @@ Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.''':
 '''Невалидно потребителско име {{{\'%s\'}}}.
 Името може да съдържа произволни Unicode букви и цифри, по желание с един
-интервал между думите. Не е позволено да ползвате имена на групови страници.''',
+интервал между думите. Не е позволено да се използват имена на групови страници.''',
 '''You are not allowed to do %s on this page.''':
-'''Не Ви е позволено да правите %s на тази страница.''',
+'''Не е позволено да правите %s на тази страница.''',
 ''' %s and try again.''':
 ''' %s и опитайте отново.''',
 '''Login''':
@@ -136,7 +136,7 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''Някой е поискал да бъдат изпратени данните за Вашия акаунт на този email адрес.
 
 Ако сте загубили паролата си, моля използвайте данните по-долу и просто въведете
-пароалта КАКТО Е ПОКАЗАНА в полето за парола на уикито (използвайте копиране и
+паролата така, КАКТО Е ПОКАЗАНА, в полето за парола за вход (използвайте копиране и
 лепене за целта).
 
 Разбира се, добра идея е, след като влезете успешно, да сложите нова парола, която да запомните.
@@ -145,30 +145,30 @@ After successfully logging in, it is of course a good idea to set a new and know
 '''[%(sitename)s] Данни за Вашия уики акаунт''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
-'''Това уики не поддържа обработка на електронна поща.
-Свържете се със собственика му, който може да разреши поддръжката.''',
+'''Това уики не поддържа работа с електронна поща.
+Свържете се със собственика му, който може да я включи.''',
 '''Please provide a valid email address!''':
-'''Моля, въведете валиден email адрес!''',
+'''Моля въведете валиден email адрес!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
 '''Не е открит акаунт, който да отговаря на email адреса \'%(email)s\'!''',
 '''Use UserPreferences to change your settings or create an account.''':
 '''Използвайте ПотребителскиНастройки за да промените вашите настройки или да създадете акаунт.''',
 '''Empty user name. Please enter a user name.''':
-'''Потребителското име е празно. Моля, въведете потребителско име.''',
+'''Празно потребителско име. Моля въведете потребителско име.''',
 '''This user name already belongs to somebody else.''':
 '''Това потребителско име вече принадлежи на някой друг.''',
 '''Passwords don\'t match!''':
 '''Паролите не съвпадат!''',
 '''Please specify a password!''':
-'''Моля, въведете парола!''',
+'''Моля въведете парола!''',
 '''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Моля, въведете Вашия email адрес. Ако загубите информацията за Вашия акаунт, то можете да я изискате по email.''',
+'''Моля въведете Вашия email адрес. Ако загубите информацията за акаунта си, то ще можете да я получите по email.''',
 '''This email already belongs to somebody else.''':
 '''Този email вече принадлежи на някой друг.''',
 '''User account created! You can use this account to login now...''':
-'''Потребителският акаунт е създаден! Можете да го използвате и да се включите сега...''',
+'''Потребителският акаунт е създаден! Вече може да влизате с него...''',
 '''Use UserPreferences to change settings of the selected user account''':
-'''Използвайте ПотребителскиНастройки за да промените настройките на избрания потребителски акаунт''',
+'''Използвайте ПотребителскиНастройки за промяна на настройките на избрания потребителски акаунт''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Темата \'%(theme_name)s\' не може да бъде заредена!''',
 '''User preferences saved!''':
@@ -176,25 +176,25 @@ Contact the owner of the wiki, who can enable email.''':
 '''Default''':
 '''Подразбиращ се''',
 '''<Browser setting>''':
-'''<Настройки на браузъра>''',
+'''<Настройка на браузъра>''',
 '''the one preferred''':
 '''предпочитания''',
 '''free choice''':
 '''свободен избор''',
 '''Select User''':
-'''Изберете потребител''',
+'''Избери потребител''',
 '''Save''':
-'''Запис''',
+'''Запиши''',
 '''Preferred theme''':
 '''Предпочитана тема''',
 '''Editor Preference''':
-'''Предпочитания за редактор''',
+'''Предпочитан редактор''',
 '''Editor shown on UI''':
-'''Редактор, показан на интерфейса''',
+'''Редактор, показван при бутоните''',
 '''Time zone''':
 '''Часова зона''',
 '''Your time is''':
-'''Времето при вас е''',
+'''Времето при Вас е''',
 '''Server time is''':
 '''Времето на сървъра е''',
 '''Date format''':
@@ -210,13 +210,13 @@ Contact the owner of the wiki, who can enable email.''':
 '''Subscribed wiki pages (one regex per line)''':
 '''Абонаменти за уики страници (по един шаблон на ред)''',
 '''Create Profile''':
-'''Създайте профил''',
+'''Създай профил''',
 '''Mail me my account data''':
 '''Изпрати ми моите данни по пощата''',
 '''Email''':
 '''Еmail''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
-'''За да създадете акаунт или да възстановите забравена парола, вижте страницата %(userprefslink)s.''',
+'''За създаване на акаунт или възстановяване на забравена парола, вижте страницата %(userprefslink)s.''',
 '''Name''':
 '''Име''',
 '''Password''':
@@ -228,19 +228,19 @@ Contact the owner of the wiki, who can enable email.''':
 '''Submitted form data:''':
 '''Данни в изпратената форма:''',
 '''Search Titles''':
-'''Търсене в заглавията''',
+'''Търси в заглавията''',
 '''Display context of search results''':
 '''Показвай контекста на резултатите от търсенето''',
 '''Case-sensitive searching''':
-'''Чувствително към големината на буквите''',
+'''Чувствителност към големината на буквите''',
 '''Search Text''':
-'''Търсене на текст''',
+'''Търси в текста''',
 '''Go To Page''':
 '''Отиди на страница''',
 '''Include system pages''':
 '''Включи системните страници''',
 '''Exclude system pages''':
-'''Без системните страници''',
+'''Прескочи системните страници''',
 '''Plain title index''':
 '''Обикновен индекс на заглавията''',
 '''XML title index''':
@@ -254,9 +254,9 @@ Contact the owner of the wiki, who can enable email.''':
 '''4Suite Version''':
 '''Версия на 4Suite''',
 '''Number of pages''':
-'''Брой на страниците''',
+'''Брой страници''',
 '''Number of system pages''':
-'''Брой на служебните страници''',
+'''Брой служебни страници''',
 '''Accumulated page sizes''':
 '''Размер на всички страници''',
 '''Disk usage of %(data_dir)s/pages/''':
@@ -268,19 +268,19 @@ Contact the owner of the wiki, who can enable email.''':
 '''NONE''':
 '''НЯМА''',
 '''Global extension macros''':
-'''Глобални допълнителни макроси''',
+'''Глобални разширения-макроси''',
 '''Local extension macros''':
-'''Локални допълнителни макроси''',
+'''Локални разширения-макроси''',
 '''Global extension actions''':
-'''Глобални допълнителни действия''',
+'''Глобални разширения-действия''',
 '''Local extension actions''':
-'''Локални допълнителни действия''',
+'''Локални разширения-действия''',
 '''Global parsers''':
 '''Глобални парсери''',
 '''Local extension parsers''':
-'''Локални допълнителни парсери''',
+'''Локални разширения-парсери''',
 '''Installed processors (DEPRECATED -- use Parsers instead)''':
-'''Инсталирани процесори (ОСТАРЕЛИ -- използвайте парсери вместо това)''',
+'''Инсталирани процесори (ОСТАРЯЛО -- използвайте парсери вместо това)''',
 '''Disabled''':
 '''Изключен''',
 '''Enabled''':
@@ -290,13 +290,13 @@ Contact the owner of the wiki, who can enable email.''':
 '''Active threads''':
 '''Активни нишки''',
 '''Please use a more selective search term instead of {{{"%s"}}}''':
-'''Моля, използвайте по-специфични термини за търсене вместо {{{"%s"}}}''',
+'''Моля използвайте по-избирателни термини за търсене вместо {{{"%s"}}}''',
 '''ERROR in regex \'%s\'''':
 '''ГРЕШКА в шаблона \'%s\'''',
 '''Bad timestamp \'%s\'''':
 '''Лош времеви маркер \'%s\'''',
 '''Expected "=" to follow "%(token)s"''':
-'''Очаква се "=" да следва "%(token)s"''',
+'''Очаква се "=" след "%(token)s"''',
 '''Expected a value for key "%(token)s"''':
 '''Очаква се стойност на ключа "%(token)s"''',
 '''Wiki Markup''':
@@ -308,13 +308,21 @@ Contact the owner of the wiki, who can enable email.''':
 '''Page name is too long, try shorter name.''':
 '''Твърде дълго име на страницата, опитайте с нещо по-кратко.''',
 '''GUI Mode''':
-'''Графичен редактор''',
+'''Графичен режим''',
 '''Edit was cancelled.''':
-'''Редактирането беше отменено.''',
+'''Редакцията беше отменена.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Страница с име {{{\'%s\'}}} вече съществува.\'\'\'
+
+Опитайте с друго име.''',
+'''Could not rename page because of file system error: %s.''':
+'''Не може да се преименува страницата поради грешка на файловата система: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
-'''Благодарим Ви за промените. Детайлното Ви внимание е високо ценено.''',
+'''Благодарим за промените. Оценяваме високо детайлното Ви внимание.''',
 '''Page "%s" was successfully deleted!''':
-'''Страницата "%s" беше изтрита успешно!''',
+'''Страница "%s" беше изтрита успешно!''',
 '''Dear Wiki user,
 
 You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.
@@ -335,7 +343,7 @@ The following page has been changed by %(editor)s:
 %(comment)s
 
 ''':
-'''Коментарът на промяната е:
+'''Коментарът към промяната е:
 %(comment)s
 
 ''',
@@ -350,7 +358,7 @@ The following page has been changed by %(editor)s:
 '''[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s''':
 '''[%(sitename)s] %(trivial)sПромяна на "%(pagename)s" от %(username)s''',
 '''Trivial ''':
-'''Малка ''',
+'''Лека ''',
 '''Status of sending notification mails:''':
 '''Състояние на изпратените уведомителни писма:''',
 '''[%(lang)s] %(recipients)s: %(status)s''':
@@ -358,11 +366,11 @@ The following page has been changed by %(editor)s:
 '''## backup of page "%(pagename)s" submitted %(date)s''':
 '''## архив на страница "%(pagename)s", изпратен на %(date)s''',
 '''Page could not get locked. Unexpected error (errno=%d).''':
-'''Страницата ни може да бъде заключена. Неочаквана грешка (errno=%d).''',
+'''Страницата нe може да бъде заключена. Неочаквана грешка (errno=%d).''',
 '''Page could not get locked. Missing \'current\' file?''':
-'''Страницата ни може да бъде заключена. Липсващ файл \'current\'?''',
+'''Страницата нe може да бъде заключена. Липсва файл \'current\'?''',
 '''You are not allowed to edit this page!''':
-'''Не Ви се позволява да редактирате тази страница!''',
+'''Не е позволено да редактирате тази страница!''',
 '''You cannot save empty pages.''':
 '''Не можете да записвате празни страници.''',
 '''You already saved this page!''':
@@ -379,38 +387,38 @@ delete the changes of the other person, which is excessively rude!\'\'
 ''':
 '''Съжаляваме, но някой друг е съхранил страницата докато сте я редактирали.
 
-Моля, направете следното: Използвайте бутона на браузъра Ви и се върнете назад,
-след което изкопирайте промените си. Елате тук и отново натиснете РедакцияНаТекста.
-Сега добавете отново Вашите промени към текущото съдържание на страницата.
+Моля, направете следното: Върнете се назад чрез бутона на браузъра и копирайте
+промените в клипборда. След това преминете напред до тук и отново натиснете РедакцияНаТекста.
+Сега наново направете Вашите промени към текущото съдържание на страницата.
 
-\'\'Недейте подменяйте направо
+\'\'Не подменяйте директно
 съдържанието на полето за редактиране с Вашата версия на страницата, тъй като
-това ще изтрие промените на другия човек, което ще е изключително грубо!\'\'
+това ще унищожи промените на другия човек, което ще е изключително грубо!\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
 '''Архив на вашите промени има [%(backup_url)s тук].''',
 '''You did not change the page content, not saved!''':
-'''Не сте направили промени по съдържанието, така че нищо не е записано!''',
+'''Не сте променили съдържанието, така че нищо не е записано!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
-'''Не можете да променята ACL-ите на тази страница, тъй като нямате административни привилегии на нея!''',
+'''Не можете да променята ACL-ите на тази страница, тъй като нямате админски права върху нея!''',
 '''The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were granted the lock for this page.''':
-'''Заключването на %(owner)s изтече преди %(mins_ago)d минута(и), така че на Вас Ви се дава заключване на тази страница.''',
+'''Привилегията на %(owner)s изтече преди %(mins_ago)d минута(и), така че Вие получавате привилегия върху тази страница.''',
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
-'''Възможностите на други потребители да редактират тази страница ще бъдат \'\'блокирани\'\' до %(bumptime)s.''',
+'''Възможността на други потребители да редактират тази страница ще бъде \'\'блокирана\'\' до %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
 '''Другите потребители ще бъдат \'\'предупреждавани\'\' до %(bumptime)s, че Вие редактирате тази страница.''',
 '''Use the Preview button to extend the locking period.''':
-'''Използвайте бутона ПредварителенИзглед за да разширите периода на заключване.''',
+'''Използвайте бутона Предварителен изглед за разширяване периода на привилегията.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
 '''Страницата в момента е \'\'заключена\'\' за редактиране от %(owner)s до %(timestamp)s, т.е. за %(mins_valid)d минута(и).''',
 '''This page was opened for editing or last previewed at %(timestamp)s by %(owner)s.[[BR]]
 \'\'\'You should \'\'refrain from editing\'\' this page for at least another %(mins_valid)d minute(s),
 to avoid editing conflicts.\'\'\'[[BR]]
 To leave the editor, press the Cancel button.''':
-'''Тази страница е отворена за редактиране или последно е била за предварителен преглед в %(timestamp)s от %(owner)s.[[BR]]
-\'\'\'Вие трябва \'\'да се въздържате от редактиране\'\' на тази страница поне още %(mins_valid)d минута(и),
+'''Тази страница е отворена за редактиране или последно е била предварително преглеждана в %(timestamp)s от %(owner)s.[[BR]]
+\'\'\'Вие трябва да се \'\'въздържате от редактиране\'\' на тази страница поне още %(mins_valid)d минута(и),
 за да избегнете конфликти.\'\'\'[[BR]]
-За да напуснете редактора, натиснете бутона Отказ.''',
+За да напуснете редактора, натиснете бутона Откажи.''',
 '''The package needs a newer version of MoinMoin (at least %s).''':
 '''Този пакет изисква по-нова версия на MoinMoin (поне %s).''',
 '''The theme name is not set.''':
@@ -709,24 +717,12 @@ the group pages.
 ''',
 '''MyPages management''':
 '''Управление на МоитеСтраници''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Не Ви е позволено да променяте имената на страници в това уики!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Моля, използвайте интерактивния интерфейс за промяна на имената на страници!''',
-'''Could not rename page because of file system error: %s.''':
-'''Не може да се преименува страницата поради грешка на файловата система: %s.''',
 '''Rename Page''':
 '''Преименувай''',
 '''New name''':
 '''Ново име''',
 '''Optional reason for the renaming''':
 '''Незадължителна причина за преименуването''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Страница с име {{{\'%s\'}}} вече съществува.\'\'\'
-
-Опитайте с друго име.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(включително %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -763,16 +759,12 @@ Try a different name.''':
 '''Не Ви е позволено да извършвате това действие.''',
 '''You are now logged out.''':
 '''Вие излязохте успешно.''',
-'''You are not allowed to delete this page.''':
-'''Не Ви е позволено да изтривате тази страница.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Моля, използвайте интерактивния интерфейс за изтриване на страници!''',
-'''Really delete this page?''':
-'''Наистина ли искате да изтриете тази страница?''',
 '''Delete''':
 '''Изтрий''',
 '''Optional reason for the deletion''':
 '''Незадължителна причина за изтриването''',
+'''Really delete this page?''':
+'''Наистина ли искате да изтриете тази страница?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Възстановен архив: %(filename)s в директория: %(targetdir)s.

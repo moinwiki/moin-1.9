@@ -250,6 +250,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''שם הדף ארוך מידי, נסה שם קצר יותר.''',
 '''Edit was cancelled.''':
 '''עריכה בוטלה.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''דף בשם {{{\'%s\'}}} כבר קיים. נסה שם אחר.''',
+'''Could not rename page because of file system error: %s.''':
+'''שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''תודה על השינויים שעשיתם.''',
 '''Page "%s" was successfully deleted!''':
@@ -490,22 +496,12 @@ To leave the editor, press the Cancel button.''':
 '''%(matchcount)d %(matches)s ל-"%(title)s"''',
 '''Local Site Map for "%s"''':
 '''מפת אתר מקומית של "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''אין לכם הרשאות לשנות שם דפים בוויק הזה.''',
-'''Please use the interactive user interface to rename pages!''':
-'''השתמשו במנשק המשתמש לשינוי שמות דפים.''',
-'''Could not rename page because of file system error: %s.''':
-'''שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s.''',
 '''Rename Page''':
 '''שנה שם דף''',
 '''New name''':
 '''שם חדש''',
 '''Optional reason for the renaming''':
 '''סיבה לשינוי שם''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''דף בשם {{{\'%s\'}}} כבר קיים. נסה שם אחר.''',
 '''(including %(localwords)d %(pagelink)s)''':
 ''' (כולל %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -524,16 +520,12 @@ Try a different name.''':
 '''רשימת קישורים מלאה של "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''אין אפשרות ליצור דף חדש ללא שם דף. אנא הכנס שם דף.''',
-'''You are not allowed to delete this page.''':
-'''אין לכם הרשאות למחוק את הדף.''',
-'''Please use the interactive user interface to delete pages!''':
-'''השתמשו במנשק המשתמש למחיקת דפים.''',
-'''Really delete this page?''':
-'''באמת למחוק את הדף?''',
 '''Delete''':
 '''מחק''',
 '''Optional reason for the deletion''':
 '''סיבה למחיקה''',
+'''Really delete this page?''':
+'''באמת למחוק את הדף?''',
 '''[%d attachments]''':
 '''[%d קבצים מצורפים]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

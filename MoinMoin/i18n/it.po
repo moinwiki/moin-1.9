@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-02-15 22:09+0100\n"
 "Last-Translator: Paolo Patruno <p.patruno@iperbole.bologna.it>\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -519,6 +519,24 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "Le modifiche sono state annullate."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Non puoi salvare pagine vuote."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Una pagina con il nome {{{'%s'}}} esiste già.'''\n"
+"\n"
+"Prova un nome differente."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Impossibile rinominare la pagina per un errore del file system: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -1120,16 +1138,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Non sei autorizzato a rinominare pagine in questo wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Per favore usa l'interfaccia interattiva per rinominare le pagine!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Impossibile rinominare la pagina per un errore del file system: %s."
-
 msgid "Rename Page"
 msgstr "Rinomina Pagina"
 
@@ -1138,16 +1146,6 @@ msgstr "Nuovo nome"
 
 msgid "Optional reason for the renaming"
 msgstr "Ragione facoltativa per la rinominazione"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Una pagina con il nome {{{'%s'}}} esiste già.'''\n"
-"\n"
-"Prova un nome differente."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1171,6 +1169,25 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Non puoi effettuare il controllo ortografica sulle pagine che non puoi "
 "leggere."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Non sei autorizzato a salvare un disegno in questa pagina!"
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Per favore usa l'interfaccia interattiva per cancellare le pagine!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1223,20 +1240,14 @@ msgstr "Non ti è consentito di modificare questa pagina."
 msgid "You are now logged out."
 msgstr "Il Cookie è stato cancellato! Sei stato disconnesso."
 
-msgid "You are not allowed to delete this page."
-msgstr "Non ti è consentito cancellare questa pagina."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Per favore usa l'interfaccia interattiva per cancellare le pagine!"
-
-msgid "Really delete this page?"
-msgstr "Vuoi veramente cancellare questa pagina?"
-
 msgid "Delete"
 msgstr "Cancella"
 
 msgid "Optional reason for the deletion"
 msgstr "Ragione facoltativa per la cancellazione"
+
+msgid "Really delete this page?"
+msgstr "Vuoi veramente cancellare questa pagina?"
 
 #, python-format
 msgid ""
@@ -1895,6 +1906,15 @@ msgstr "Mail spedita correttamente"
 
 msgid "Mail sent OK"
 msgstr "Mail spedita correttamente"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Non sei autorizzato a rinominare pagine in questo wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Per favore usa l'interfaccia interattiva per rinominare le pagine!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Non ti è consentito cancellare questa pagina."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s byte)"

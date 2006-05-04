@@ -308,6 +308,13 @@ Kontaktujte vlastníka wiki, který to může změnit.''',
 '''GUI Mód''',
 '''Edit was cancelled.''':
 '''Editace byla zrušena.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Stránka se jménem {{{\'%s\'}}}již existuje.\'\'\'
+Zkuste jiné jméno.''',
+'''Could not rename page because of file system error: %s.''':
+'''Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku.''',
 '''Page "%s" was successfully deleted!''':
@@ -628,23 +635,12 @@ reStructuredText Quick Reference
 '''%(matchcount)d %(matches)s pro "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokální mapa umístění pro "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nemáte dostaetčná práva na přejmenování stránek v této wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Na přejmenovávání stránek používejte prosím interaktivní rozhraní!''',
-'''Could not rename page because of file system error: %s.''':
-'''Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s.''',
 '''Rename Page''':
 '''Přejmenovat stránku''',
 '''New name''':
 '''Nové jméno''',
 '''Optional reason for the renaming''':
 '''Nepovinný důvod pro přejmenovávání''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Stránka se jménem {{{\'%s\'}}}již existuje.\'\'\'
-Zkuste jiné jméno.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(včetně %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -671,16 +667,12 @@ Zkuste jiné jméno.''',
 '''Není uživatel:''',
 '''You are not allowed to perform this action.''':
 '''Nemáte dovoleno provést tuto akci.''',
-'''You are not allowed to delete this page.''':
-'''Nemáte dostatečná práva ke smazání této stránky.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!''',
-'''Really delete this page?''':
-'''Akutečně smazat tuto stránku?''',
 '''Delete''':
 '''Smazat''',
 '''Optional reason for the deletion''':
 '''Nepovinné důvody pro mazání''',
+'''Really delete this page?''':
+'''Akutečně smazat tuto stránku?''',
 '''[%d attachments]''':
 '''[%d přílohy]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

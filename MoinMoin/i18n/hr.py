@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Text translations for hrvatski (hr).
+# Text translations for Hrvatski (hr).
 # Automatically generated - DO NOT EDIT, edit hr.po instead!
 meta = {
-  'language': """hrvatski""",
+  'language': """Hrvatski""",
   'elanguage': """Croatian""",
   'maintainer': """Jure Kodzoman <kodzoman@gmail.com>""",
   'encoding': 'utf-8',
@@ -24,7 +24,7 @@ To use this form on other pages, insert a
 macro call.-~
 ''':
 '''~-Nakon potvrde unosa unesene će vrijednosti biti prikazane.
-Ukoliko želite koristiti ovaj obrazac na nekoj drugoj stranici potrebno je dodati sljedeci makro poziv 
+Ukoliko želite koristiti ovaj obrazac na nekoj drugoj stranici potrebno je dodati sljedeći makro poziv 
 [[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
 .-~
 ''',
@@ -33,13 +33,13 @@ Ukoliko želite koristiti ovaj obrazac na nekoj drugoj stranici potrebno je doda
 '''You are not allowed to view this page.''':
 '''Nije vam dopušteno pregledavanje ove stranice.''',
 '''You are not allowed to edit this page.''':
-'''Nije vam dopušteno mijenjanje ove stranice.''',
+'''Nije vam dopušteno mijenjati ovu stranicu.''',
 '''Page is immutable!''':
 '''Stranica je nepromijenjiva!''',
 '''Cannot edit old revisions!''':
 '''Nije moguce mijenjati stare inačice!''',
 '''The lock you held timed out. Be prepared for editing conflicts!''':
-'''Vaše rezervirano vrijeme je iteklo, mogući su konflikti!''',
+'''Vaša rezervacija je istekla, mogući su konflikti!''',
 '''Edit "%(pagename)s"''':
 '''Izmijeni stranicu "%(pagename)s"''',
 '''Preview of "%(pagename)s"''':
@@ -51,9 +51,9 @@ Ukoliko želite koristiti ovaj obrazac na nekoj drugoj stranici potrebno je doda
 '''Your edit lock on %(lock_page)s will expire in # seconds.''':
 '''Vaša rezervacija stranice %(lock_page)s ističe za # sekundi.''',
 '''Someone else deleted this page while you were editing!''':
-'''Drugi korisnik je izbrisao stranicu na kojoj ste vršili promjene!''',
+'''Drugi korisnik je izbrisao stranicu na kojoj ste vršili izmjene!''',
 '''Someone else changed this page while you were editing!''':
-'''Drugi korisnik je spremio stranicu na kojoj ste vršili promjene!''',
+'''Drugi korisnik je spremio stranicu na kojoj ste vršili izmjene!''',
 '''Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!
 Have a look at the diff of %(difflink)s to see what has been changed.''':
@@ -85,7 +85,7 @@ Ukoliko van to ne odgovara, klikom na \'\'\'%(cancel_button_text)s\'\'\' odustaj
 '''Comment:''':
 '''Komentar:''',
 '''<No addition>''':
-'''<U nijednu>''',
+'''<Bez izmjena>''',
 '''Add to: %(category)s''':
 '''Dodaj u kategoriju: %(category)s''',
 '''Trivial change''':
@@ -105,7 +105,7 @@ sa neobaveznim jednim razmakom među riječima. Imena grupa (...Grupa) nisu dozv
 '''Login''':
 '''Prijava''',
 '''%(hits)d results out of about %(pages)d pages.''':
-'''%(hits)d pogodaka od približno %(pages)d prtraženih stranica.''',
+'''%(hits)d pogodaka od približno %(pages)d pretraženih stranica.''',
 '''%.2f seconds''':
 '''%.2f sekundi''',
 '''match''':
@@ -135,7 +135,7 @@ for that).
 After successfully logging in, it is of course a good idea to set a new and known password.
 ''':
 '''Netko je zatražio da se podaci o korisničkom računu pošalju
-na vaš e-mail.
+u vaš sandučić elektronske pošte.
 
 Ako ste izgubili svoju lozinku, možete koristiti priloženi niz znakova
 unesite ga TOČNO TAKO, KAKO JE PRIKAZAN u polje za lozinku pri prijavi
@@ -147,30 +147,30 @@ Po uspješnoj prijavi pametno je promijeniti lozinku.
 '''[%(sitename)s] Podaci o vašem korisničkom računu''',
 '''This wiki is not enabled for mail processing.
 Contact the owner of the wiki, who can enable email.''':
-'''Ovaj Wiki nema podešen sustav za e-mail.
-Pokušajte upitati administratora postoji li mogućnost uključivanja e-maila.''',
+'''Ovaj Wiki nema podešen sustav za obradu elektroničke pošte.
+Pokušajte upitati administratora postoji li mogućnost uključivanja takvog sustava.''',
 '''Please provide a valid email address!''':
-'''Molimo upišitei važeću adresu elektroničke pošte!''',
+'''Molimo upišite važeću adresu elektroničke pošte!''',
 '''Found no account matching the given email address \'%(email)s\'!''':
-'''Niti jedno korisničko ime se ne podudara sa navedenom adresom elektroničke pošte \'%(email)s\'!''',
+'''Ni jedno korisničko ime se ne podudara sa navedenom adresom elektroničke pošte \'%(email)s\'!''',
 '''Use UserPreferences to change your settings or create an account.''':
-'''Koristite KorisničkiProfil za podešavanje postavki ili za kreiranje novog korisničkog računa.''',
+'''Koristite %(userprefslink)s za podešavanje postavki ili za kreiranje novog korisničkog računa.''',
 '''Empty user name. Please enter a user name.''':
-'''Niste upisali korisničko ime, molimo da ga upišete.''',
+'''Niste upisali korisničko ime, molimo Vas upišite ga.''',
 '''This user name already belongs to somebody else.''':
-'''To korisničko ime već postoji.''',
+'''Korisničko ime je već u upotrebi.''',
 '''Passwords don\'t match!''':
 '''Lozinke se ne podudaraju!''',
 '''Please specify a password!''':
 '''Molimo upišite lozinu!''',
 '''Please provide your email address. If you lose your login information, you can get it by email.''':
-'''Molimo upišite svoju adresu elektroničke pošte. Na tu adresu poslati ćemo vam podatke za prijavu, ako bude potrebno.''',
+'''Molimo upišite svoju adresu elektroničke pošte. Ako bude potrebno, na tu adresu poslati ćemo vam podatke za prijavu.''',
 '''This email already belongs to somebody else.''':
-'''Ta adresa elektroničke pošte je već u upotrebi.''',
+'''Ta adresa elektroničke pošte već je u upotrebi.''',
 '''User account created! You can use this account to login now...''':
 '''Korisničko ime je otvoreno, sada se možete prijaviti...''',
 '''Use UserPreferences to change settings of the selected user account''':
-'''Koristite ["Korisničke_postavkel"] za promijenu postavki odabranog korisničkog računa''',
+'''Koristite %(userprefslink)s za promijenu postavki odabranog korisničkog računa''',
 '''The theme \'%(theme_name)s\' could not be loaded!''':
 '''Temu \'%(theme_name)s\' nije moguće uključiti!''',
 '''User preferences saved!''':
@@ -208,15 +208,15 @@ Pokušajte upitati administratora postoji li mogućnost uključivanja e-maila.''
 '''Quick links''':
 '''Brze poveznice''',
 '''This list does not work, unless you have entered a valid email address!''':
-'''Bez važeće adrese elektroničke pošte ovah popis ne djeluje!''',
+'''Bez važeće adrese elektroničke pošte ovaj popis ne djeluje!''',
 '''Subscribed wiki pages (one regex per line)''':
-'''Pretplata na slijedeće stranice (jedan naziv u svakom redu)''',
+'''Pretplata na sljedeće stranice (jedan naziv u svakom redu)''',
 '''Create Profile''':
 '''Stvori korisnika''',
 '''Mail me my account data''':
-'''Pošalji mi podatke o tom korisničkom računu''',
+'''Pošalji podatke o korisničkom računu''',
 '''Email''':
-'''E-mail''',
+'''Adresa elektroničke pošte''',
 '''To create an account or recover a lost password, see the %(userprefslink)s page.''':
 '''Kako bi kreirali korisnički račun ili dobili izgubljenu lozinku, pogledajte %(userprefslink)s stranicu.''',
 '''Name''':
@@ -310,9 +310,16 @@ Pokušajte upitati administratora postoji li mogućnost uključivanja e-maila.''
 '''Page name is too long, try shorter name.''':
 '''Ime stranice je predugačko, pokušajte kraće ime.''',
 '''GUI Mode''':
-'''GUI način''',
+'''Grafičko sučelje''',
 '''Edit was cancelled.''':
 '''Izmjene odbačene.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Stranica imena {{{\'%s\'}}} već postoji.\'\'\'
+Probajte neko drugo ime.''',
+'''Could not rename page because of file system error: %s.''':
+'''Preimenovanje stranice nije uspijelo, zbog pogreške datotečnog sustava: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Hvala za izmjene, cijenimo Vašu preciznost.''',
 '''Page "%s" was successfully deleted!''':
@@ -397,7 +404,7 @@ Sada ponovo unesite svoje prepravke u novu stranicu.
 '''Other users will be \'\'blocked\'\' from editing this page until %(bumptime)s.''':
 '''Drugim korisnicima će biti onemogućeno mjenjanje stranice do %(bumptime)s.''',
 '''Other users will be \'\'warned\'\' until %(bumptime)s that you are editing this page.''':
-'''Do %(bumptime)s ostali će korisnici biti obavješteni da Vi vršite izmjene na stranici.''',
+'''Do %(bumptime)s ostali će korisnici biti obaviješteni da vršite izmjene na stranici.''',
 '''Use the Preview button to extend the locking period.''':
 '''Ako želite produžiti vrijeme rezervacije koristite Pregled.''',
 '''This page is currently \'\'locked\'\' for editing by %(owner)s until %(timestamp)s, i.e. for %(mins_valid)d minute(s).''':
@@ -443,7 +450,7 @@ Klikom na "Odustani" možete izaći iz uređivača.''',
  Poveznica:: [[Verbatim(ZajednoPisaneRiječiVelikimSlovima)]]; [[Verbatim(["v uglatih zagrada i navodnika"])]]; URL; [URL]; [URL adresa].
  Tablice:: || tekst u ćeliji |||| tekst u ćeliji preko dva stupca ||;    praznine iza tablica ili naslova nisu dozvoljene.
 
-(!) Više o tome: KakoUređivati, SyntaxReference.
+(!) Više o tome: ["Kako uređivati"], ["Sintaksa"].
 ''',
 '''Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>
 <br/><pre>
@@ -502,29 +509,29 @@ reStructuredText Quick Reference
 '''Up''':
 '''Gore''',
 '''Publish my email (not my wiki homepage) in author info''':
-'''Objavi moju  e-mail adresu (ne osobne stranice) kao informacije o autoru''',
+'''Objavi moju adresu elektroničke pošte (ne osobne stranice) kao informacije o autoru''',
 '''Open editor on double click''':
 '''Pokreni uređivanje dvoklikom''',
 '''Jump to last visited page instead of frontpage''':
-'''Po ulasku idi na zadnju posjećenu stranicu a ne na početnu''',
+'''Na ulasku prikaži zadnju posjećenu stranicu, a ne početnu''',
 '''Show question mark for non-existing pagelinks''':
-'''Nepostojeće linkove označi upitnikom''',
+'''Nepostojeće poveznice označi upitnikom''',
 '''Show page trail''':
 '''Prikaži popis posjećenih stranica''',
 '''Show icon toolbar''':
-'''Prikaži ikonice''',
+'''Prikaži traku s ikonama''',
 '''Show top/bottom links in headings''':
 '''U naslov uključi linkove na početak/kraj''',
 '''Show fancy diffs''':
-'''Prikazuj razlike rezličitim bojama''',
+'''Prikaži razlike rezličitim bojama''',
 '''Add spaces to displayed wiki names''':
 '''Dodaj razmake u Wiki imena''',
 '''Remember login information''':
-'''Sačuvaj podatke o prijavi''',
+'''Zapamti podatke o prijavi''',
 '''Subscribe to trivial changes''':
-'''Pretplata važi i za neznatne promjene''',
+'''Pretplata i na neznatne promjene''',
 '''Disable this account forever''':
-'''Trajno ukini taj korinički račun''',
+'''Trajno ukini ovaj korinički račun''',
 '''(Use Firstname\'\'\'\'\'\'Lastname)''':
 '''(Koristi oblik Ime\'\'\'\'\'\'Prezime)''',
 '''Alias-Name''':
@@ -707,23 +714,12 @@ stranica grupe.
 ''',
 '''MyPages management''':
 '''Uređivanje mojih stranica''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Na ovom wikiju nije dozvoljeno mijenjati imena stranica!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Za preimenovanje stranice upotrijebite interaktivno korisničko sučelje!''',
-'''Could not rename page because of file system error: %s.''':
-'''Preimenovanje stranice nije uspijelo, pogreška datotečnog sustava: %s.''',
 '''Rename Page''':
 '''Preimenuj stranicu''',
 '''New name''':
 '''Novo ime''',
 '''Optional reason for the renaming''':
 '''Razlog za preimenovanje (neobvezno)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Stranica imena {{{\'%s\'}}} već postoji.\'\'\'
-Probajte neko drugo ime.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(uključujući %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -760,16 +756,12 @@ Probajte neko drugo ime.''',
 '''Tu akciju vam nije dozvoljeno izvesti.''',
 '''You are now logged out.''':
 '''Uspješno ste se odjavili.''',
-'''You are not allowed to delete this page.''':
-'''Ne možete izbrisati ovu stranicu!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Za brisanje stranice upotrijebite interaktivno korisničko sučelje!''',
-'''Really delete this page?''':
-'''Zaista želite obrisati ovu stranicu?''',
 '''Delete''':
 '''Brisanje''',
 '''Optional reason for the deletion''':
 '''Razlog za brisanje (neobvezno)''',
+'''Really delete this page?''':
+'''Zaista želite obrisati ovu stranicu?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Povraćena arhiva: %(filename)s u ciljnu mapu: %(targetdir)s.
@@ -801,7 +793,7 @@ Please make sure your wiki configuration backup_* values are correct and complet
  * Kako bi izveli arhiviranje pritisnite [[GetText(Backup)]] gumb i spremite datoteku
    koju dobijete na sigurno.
 
-Pripazire da su vrijednosti vaše konfiguracije backup_* točne i potpune.
+Pripazite da su vrijednosti vaše konfiguracije backup_* točne i potpune.
 
 ''',
 '''Backup''':
@@ -811,7 +803,7 @@ Pripazire da su vrijednosti vaše konfiguracije backup_* točne i potpune.
 '''You are not allowed to do remote backup.''':
 '''Nije vam dozvoljeno raditi udaljeno arhiviranje.''',
 '''Unknown backup subaction: %s.''':
-'''Nepoznata podakcija arhiviranja: %s.''',
+'''Nepoznata akcija arhiviranja: %s.''',
 '''[%d attachments]''':
 '''[%d privitaka]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -916,11 +908,11 @@ Ako je polje za preimenovanje prazno, koristi se nepromijenjeno ime datoteke.'''
 '''RecentChanges''':
 '''Novosti''',
 '''TitleIndex''':
-'''Kazalo_naslova''',
+'''Kazalo naslova''',
 '''WordIndex''':
-'''Kazalo_riječi''',
+'''Kazalo riječi''',
 '''FindPage''':
-'''Pronađi_stranicu''',
+'''Pronađi stranicu''',
 '''SiteNavigation''':
 '''Navigacija''',
 '''HelpContents''':
@@ -930,7 +922,7 @@ Ako je polje za preimenovanje prazno, koristi se nepromijenjeno ime datoteke.'''
 '''UserPreferences''':
 '''Korisničke postavke''',
 '''WikiLicense''':
-'''Wiki_uvjeti''',
+'''Wiki uvjeti''',
 '''MissingPage''':
 '''Nedostajuće_stranice''',
 '''MissingHomePage''':
@@ -1048,7 +1040,7 @@ crveno=izmjena''',
 '''# of hits''':
 '''broj čitanja''',
 '''Page Size Distribution''':
-'''Raspoređenje po veličinii stranice''',
+'''Raspoređenje po veličini stranice''',
 '''page size upper bound [bytes]''':
 '''Gornja granica veličine stranice [znakova]''',
 '''# of pages of this size''':
@@ -1104,7 +1096,7 @@ crveno=izmjena''',
 '''Raw Text''':
 '''Izvorni tekst''',
 '''Delete Cache''':
-'''Osviježi''',
+'''Osvježi''',
 '''Delete Page''':
 '''Izbriši stranicu''',
 '''Like Pages''':
@@ -1118,15 +1110,15 @@ crveno=izmjena''',
 '''Remove Spam''':
 '''Ukloni Spam''',
 '''Package Pages''':
-'''Zapakiraj u ZIP datoteku''',
+'''Zapakiraj stranice''',
 '''Render as Docbook''':
-'''Prikažii kao Docbook''',
+'''Prikaži kao Docbook''',
 '''Do''':
 '''Izvedi!''',
 '''Edit (Text)''':
 '''Izmijeni''',
 '''Edit (GUI)''':
-'''Izmijeni (GUI)''',
+'''Izmijeni (Grafički)''',
 '''Immutable Page''':
 '''Nepromijenjiva stranica''',
 '''Remove Link''':

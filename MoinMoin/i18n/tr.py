@@ -301,6 +301,14 @@ Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz.''',
 '''Grafiksel Kullanıcı Arayüzü Kipi''',
 '''Edit was cancelled.''':
 '''Düzenleme iptal edildi.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'{{{\'%s\'}}} adından bir sayfa zaten mevcut.\'\'\'
+
+Başka bir ad deneyiniz.''',
+'''Could not rename page because of file system error: %s.''':
+'''İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! Hata: %s''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Yaptığınız düzenlemeler için teşekkür ederiz.''',
 '''Page "%s" was successfully deleted!''':
@@ -590,24 +598,12 @@ Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz.''
 '''"%(title)s" için %(matchcount)d sonuç: %(matches)s''',
 '''Local Site Map for "%s"''':
 '''"%s" için Yerel Site Haritası''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Wiki üzerindeki sayfaları yeniden adlandırmak için yeterli izne sahip değilsiniz!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Lütfen sayfa adlarını değiştirmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
-'''Could not rename page because of file system error: %s.''':
-'''İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! Hata: %s''',
 '''Rename Page''':
 '''Sayfayı Yeniden Adlandır''',
 '''New name''':
 '''Yeni ad''',
 '''Optional reason for the renaming''':
 '''İsteğe bağlı yeniden adlandırma için yorum''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'{{{\'%s\'}}} adından bir sayfa zaten mevcut.\'\'\'
-
-Başka bir ad deneyiniz.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(içerilen %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -627,16 +623,12 @@ arasından bulunamayıp aşağıda işaretlenmiştir.''',
 '''"%s" için Bağlantı Listesi''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte.''',
-'''You are not allowed to delete this page.''':
-'''Bu sayfayı silmek için yeterli izne sahip değilsiniz.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız.''',
-'''Really delete this page?''':
-'''Bu sayfayı silmek istediğinize emin misiniz?''',
 '''Delete''':
 '''Sil''',
 '''Optional reason for the deletion''':
 '''İsteğe bağlı silinme nedeni''',
+'''Really delete this page?''':
+'''Bu sayfayı silmek istediğinize emin misiniz?''',
 '''[%d attachments]''':
 '''[%d tane ek]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

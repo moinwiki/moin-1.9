@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -511,6 +511,24 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen ble avbrutt."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Du kan ikke lagre tomme sider."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''En side med navnet \"%s\" finnes allerede!'''\n"
+"\n"
+"Prøv igjen med et annet navn."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Navn ikke endret på grunn av filsystemfeil: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Takk for dine endringer. Ditt bidrag er verdsatt."
@@ -1108,16 +1126,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Du har ikke tillatelse til å endre navn på sidene i denne wikien!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Bruk det interaktive brukergrensesnittet til å endre navn på sider!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Navn ikke endret på grunn av filsystemfeil: %s."
-
 msgid "Rename Page"
 msgstr "Endre sidenavn"
 
@@ -1126,16 +1134,6 @@ msgstr "Nytt navn"
 
 msgid "Optional reason for the renaming"
 msgstr "Årsak til nytt navn (valgfritt)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''En side med navnet \"%s\" finnes allerede!'''\n"
-"\n"
-"Prøv igjen med et annet navn."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1157,6 +1155,25 @@ msgstr "Ingen stavefeil funnet."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Du kan ikke bruke stavekontrollen på en side du ikke kan lese."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Du har ikke tillatelse til å lagre en tegning på denne siden."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Bruk det interaktive brukergrensesnittet for å slette sider!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1207,20 +1224,14 @@ msgstr "Du har ikke tillatelse til å redigere denne siden."
 msgid "You are now logged out."
 msgstr "Cookie slettet. Du er nå logget ut."
 
-msgid "You are not allowed to delete this page."
-msgstr "Du har ikke tillatelse til å slette denne siden."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Bruk det interaktive brukergrensesnittet for å slette sider!"
-
-msgid "Really delete this page?"
-msgstr "Er du sikker på at denne siden skal slettes?"
-
 msgid "Delete"
 msgstr "Slett"
 
 msgid "Optional reason for the deletion"
 msgstr "Årsak til slettingen (valgfri)"
+
+msgid "Really delete this page?"
+msgstr "Er du sikker på at denne siden skal slettes?"
 
 #, python-format
 msgid ""
@@ -1876,6 +1887,15 @@ msgstr "E-post sendt OK"
 
 msgid "Mail sent OK"
 msgstr "E-post sendt OK"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Du har ikke tillatelse til å endre navn på sidene i denne wikien!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Bruk det interaktive brukergrensesnittet til å endre navn på sider!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Du har ikke tillatelse til å slette denne siden."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s byte)"

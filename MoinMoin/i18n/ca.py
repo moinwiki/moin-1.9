@@ -284,6 +284,14 @@ Contacteu amb el responsable del wiki, que pot habilitar el correu.''',
 '''Mode amb interfície gràfica''',
 '''Edit was cancelled.''':
 '''S\'ha cancel·lat l\'edició.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Ja existeix una pàgina amb el nom {{{%s}}}.\'\'\'
+
+Proveu amb un nom diferent.''',
+'''Could not rename page because of file system error: %s.''':
+'''No s\'ha pogut canviar el nom de la pàgina degut a un error del sistema de fitxers: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Gràcies pels vostres canvis. S\'aprecia la vostra atenció als detalls.''',
 '''Page "%s" was successfully deleted!''':
@@ -582,24 +590,12 @@ Per a abandonar l\'editor, premeu el botó Cancel·la.''',
 '''%(matchcount)d %(matches)s per a «%(title)s»''',
 '''Local Site Map for "%s"''':
 '''Mapa del lloc local per a «%s»''',
-'''You are not allowed to rename pages in this wiki!''':
-'''No teniu permís per a canviar el nom de pàgines en aquest wiki''',
-'''Please use the interactive user interface to rename pages!''':
-'''Utilitzeu la interfície d\'usuari interactiva per a canviar el nom de les pàgines.''',
-'''Could not rename page because of file system error: %s.''':
-'''No s\'ha pogut canviar el nom de la pàgina degut a un error del sistema de fitxers: %s.''',
 '''Rename Page''':
 '''Canvia el nom de la pàgina''',
 '''New name''':
 '''Nom nou''',
 '''Optional reason for the renaming''':
 '''Raó opcional per al canvi de nom''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Ja existeix una pàgina amb el nom {{{%s}}}.\'\'\'
-
-Proveu amb un nom diferent.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(incloent %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -618,16 +614,12 @@ Proveu amb un nom diferent.''',
 '''Llista completa d\'enllaços per a «%s»''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''No es pot crear una pàgina nova sense un nom de pàgina. Especifiqueu un nom.''',
-'''You are not allowed to delete this page.''':
-'''No teniu permís per a suprimir aquesta pàgina.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Utilitzeu la interfície d\'usuari interactiva per a suprimir pàgines.''',
-'''Really delete this page?''':
-'''Esteu segur de voler suprimir aquesta pàgina?''',
 '''Delete''':
 '''Suprimeix''',
 '''Optional reason for the deletion''':
 '''Raó opcional per a la supressió''',
+'''Really delete this page?''':
+'''Esteu segur de voler suprimir aquesta pàgina?''',
 '''[%d attachments]''':
 '''[%d adjuncions]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-01-02 01:13+0200\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -518,6 +518,26 @@ msgstr "GUI-tila"
 
 msgid "Edit was cancelled."
 msgstr "Muokkaus peruttu."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Tyhjää sivua ei voi tallentaa."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Nimellä {{{'%s'}}} on jo sivu.'''\n"
+"\n"
+"Kokeile eri nimeä."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %"
+"s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Kiitos tekemistäsi muutoksista. Huolellisuuttasi arvostetaan."
@@ -1115,18 +1135,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Käytä sivujen uudelleennimeämiseen vuorovaikutteista käyttöliittymää!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %"
-"s."
-
 msgid "Rename Page"
 msgstr "Nimeä sivu uudelleen"
 
@@ -1135,16 +1143,6 @@ msgstr "Uusi nimi"
 
 msgid "Optional reason for the renaming"
 msgstr "Vapaaehtoinen uudelleennimeämisen syy"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Nimellä {{{'%s'}}} on jo sivu.'''\n"
-"\n"
-"Kokeile eri nimeä."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1166,6 +1164,25 @@ msgstr "Ei löytynyt kirjoitusvirheitä!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Et voi oikolukea sivua jota et voi lukea."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sinulla ei ole oikeutta tallentaa piirrosta tälle sivulle."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1216,20 +1233,14 @@ msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
 msgid "You are now logged out."
 msgstr "Sinulla ei ole oikeutta asentaa tiedostoja."
 
-msgid "You are not allowed to delete this page."
-msgstr "Sinulla ei ole oikeutta poistaa tätä sivua."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!"
-
-msgid "Really delete this page?"
-msgstr "Haluatko varmasti poistaa tämän sivun?"
-
 msgid "Delete"
 msgstr "Poista"
 
 msgid "Optional reason for the deletion"
 msgstr "Vapaaehtoinen poiston syy"
+
+msgid "Really delete this page?"
+msgstr "Haluatko varmasti poistaa tämän sivun?"
 
 #, python-format
 msgid ""
@@ -1878,6 +1889,16 @@ msgstr "Ei lähetetty sähköpostia"
 
 msgid "Mail sent OK"
 msgstr "Sähköposti lähetetty onnistuneesti"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Käytä sivujen uudelleennimeämiseen vuorovaikutteista käyttöliittymää!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Sinulla ei ole oikeutta poistaa tätä sivua."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s tavua)"

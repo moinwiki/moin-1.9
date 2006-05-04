@@ -315,6 +315,14 @@ Contactez le propriétaire de ce wiki, qui pourra l\'activer.''',
 '''Mode graphique''',
 '''Edit was cancelled.''':
 '''Modification annulée.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Une page ayant pour nom {{{\'%s\'}}} existe déjà.\'\'\'
+
+Essayez un autre nom.''',
+'''Could not rename page because of file system error: %s.''':
+'''Impossible de renommer la page à cause d\'une erreur du système de fichier : %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Merci pour vos modifications. Nous apprécions le soin que vous apportez aux détails.''',
 '''Page "%s" was successfully deleted!''':
@@ -712,24 +720,12 @@ correspondant aux groupes.
 ''',
 '''MyPages management''':
 '''Gestion de MesPages''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Vous n\'êtes pas autorisé à renommer les pages dans ce wiki !''',
-'''Please use the interactive user interface to rename pages!''':
-'''Utilisez l\'interface interactive pour renommer des pages !''',
-'''Could not rename page because of file system error: %s.''':
-'''Impossible de renommer la page à cause d\'une erreur du système de fichier : %s.''',
 '''Rename Page''':
 '''Renommer la page''',
 '''New name''':
 '''Nouveau nom''',
 '''Optional reason for the renaming''':
 '''Raison de ce changement de nom (optionnelle)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Une page ayant pour nom {{{\'%s\'}}} existe déjà.\'\'\'
-
-Essayez un autre nom.''',
 '''(including %(localwords)d %(pagelink)s)''':
 ''' (inclusion de %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -766,16 +762,12 @@ Essayez un autre nom.''',
 '''Vous n\'êtes pas autorisé à réaliser cette action.''',
 '''You are now logged out.''':
 '''Vous êtes maintenant déconnecté.''',
-'''You are not allowed to delete this page.''':
-'''Vous n\'êtes pas autorisé à supprimer cette page.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Utilisez l\'interface interactive pour la suppression de pages !''',
-'''Really delete this page?''':
-'''Voulez-vous vraiment supprimer cette page ?''',
 '''Delete''':
 '''Supprimer''',
 '''Optional reason for the deletion''':
 '''Raison de cette suppression (optionnelle)''',
+'''Really delete this page?''':
+'''Voulez-vous vraiment supprimer cette page ?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Sauvegarde restaurée : %(filename)s dans le répertoire : %(targetdir)s.

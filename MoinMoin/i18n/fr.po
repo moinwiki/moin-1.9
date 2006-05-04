@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-17 23:52+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -536,6 +536,26 @@ msgstr "Mode graphique"
 
 msgid "Edit was cancelled."
 msgstr "Modification annulée."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Vous ne pouvez pas enregistrer de pages vides."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Une page ayant pour nom {{{'%s'}}} existe déjà.'''\n"
+"\n"
+"Essayez un autre nom."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Impossible de renommer la page à cause d'une erreur du système de fichier : %"
+"s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -1198,18 +1218,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Gestion de MesPages"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Vous n'êtes pas autorisé à renommer les pages dans ce wiki !"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Utilisez l'interface interactive pour renommer des pages !"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"Impossible de renommer la page à cause d'une erreur du système de fichier : %"
-"s."
-
 msgid "Rename Page"
 msgstr "Renommer la page"
 
@@ -1218,16 +1226,6 @@ msgstr "Nouveau nom"
 
 msgid "Optional reason for the renaming"
 msgstr "Raison de ce changement de nom (optionnelle)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Une page ayant pour nom {{{'%s'}}} existe déjà.'''\n"
-"\n"
-"Essayez un autre nom."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1251,6 +1249,25 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Vous ne pouvez pas vérifier l'orthographe d'une page que vous ne pouvez pas "
 "lire."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Vous n'êtes pas autorisé à enregistrer un dessin dans cette page."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Utilisez l'interface interactive pour la suppression de pages !"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1298,20 +1315,14 @@ msgstr "Vous n'êtes pas autorisé à réaliser cette action."
 msgid "You are now logged out."
 msgstr "Vous êtes maintenant déconnecté."
 
-msgid "You are not allowed to delete this page."
-msgstr "Vous n'êtes pas autorisé à supprimer cette page."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Utilisez l'interface interactive pour la suppression de pages !"
-
-msgid "Really delete this page?"
-msgstr "Voulez-vous vraiment supprimer cette page ?"
-
 msgid "Delete"
 msgstr "Supprimer"
 
 msgid "Optional reason for the deletion"
 msgstr "Raison de cette suppression (optionnelle)"
+
+msgid "Really delete this page?"
+msgstr "Voulez-vous vraiment supprimer cette page ?"
 
 #, python-format
 msgid ""
@@ -1984,3 +1995,12 @@ msgstr "Courrier non envoyé"
 
 msgid "Mail sent OK"
 msgstr "Courrier envoyé avec succès"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Vous n'êtes pas autorisé à renommer les pages dans ce wiki !"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Utilisez l'interface interactive pour renommer des pages !"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Vous n'êtes pas autorisé à supprimer cette page."

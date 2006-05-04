@@ -303,6 +303,14 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''Tryb GUI''',
 '''Edit was cancelled.''':
 '''Zmiany zostały anulowane.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Strona o nazwie {{{\'%s\'}}} już istnieje.\'\'\'
+
+Spróbuj innej nazwy.''',
+'''Could not rename page because of file system error: %s.''':
+'''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Dziękujemy za Twe zmiany. Twoja troska poświęcona detalom jest nieoceniona.''',
 '''Page "%s" was successfully deleted!''':
@@ -599,24 +607,12 @@ Skontaktuj się z właścicielem, który może tę opcję włączyć.''',
 '''%(matchcount)d %(matches)s dla "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Mapa "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nie możesz zmieniać nazw stron na tym wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Użyj interaktywnego interfejsu aby zmieniać nazwy stron!''',
-'''Could not rename page because of file system error: %s.''':
-'''Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s.''',
 '''Rename Page''':
 '''Zmień nazwę strony''',
 '''New name''':
 '''Nowa nazwa''',
 '''Optional reason for the renaming''':
 '''Opcjonalna przyczyna zmiany nazwy''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Strona o nazwie {{{\'%s\'}}} już istnieje.\'\'\'
-
-Spróbuj innej nazwy.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(zawarto  %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -635,16 +631,12 @@ Spróbuj innej nazwy.''',
 '''Pełna lista odnośników dla "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nie można utworzyć strony bez nazwy. Proszę podać nazwę strony.''',
-'''You are not allowed to delete this page.''':
-'''Nie możesz kasować niniejszej strony.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Użyj interaktywnego interfejsu aby usuwać strony!''',
-'''Really delete this page?''':
-'''Czy na pewno usunąć niniejszą stronę?''',
 '''Delete''':
 '''Usunąć''',
 '''Optional reason for the deletion''':
 '''Opcjonalna przyczyna usunięcia''',
+'''Really delete this page?''':
+'''Czy na pewno usunąć niniejszą stronę?''',
 '''[%d attachments]''':
 '''[%d załączników]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

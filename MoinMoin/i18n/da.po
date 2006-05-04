@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-11-18 21:40+0100\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -522,6 +522,24 @@ msgstr "Grafisk redigering"
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen blev afbrudt."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Du kan ikke gemme tomme sider."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''En side med navnet {{{'%s'}}} eksisterer allerede.'''\n"
+"\n"
+"Prøv et andet navn."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Kunne ikke omdøbe side på grund af systemfejl: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Tak for dine rettelser - de er værdsat."
@@ -1118,16 +1136,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Du har ikke lov til at omdøbe sider i denne wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Kunne ikke omdøbe side på grund af systemfejl: %s."
-
 msgid "Rename Page"
 msgstr "Omdøb side"
 
@@ -1136,16 +1144,6 @@ msgstr "Nyt navn"
 
 msgid "Optional reason for the renaming"
 msgstr "Årsag til omdøbning (valgfrit)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''En side med navnet {{{'%s'}}} eksisterer allerede.'''\n"
-"\n"
-"Prøv et andet navn."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1167,6 +1165,25 @@ msgstr "Ingen stavefejl fundet!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Du kan ikke stavekontrollere en side du ikke kan læse."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Du har ikke lov til at gemme en tegning på denne side!"
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Anvend venligst den interaktive brugergrænseflade til at slette sider!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1218,20 +1235,14 @@ msgstr "Du har ikke lov til at redigere denne side."
 msgid "You are now logged out."
 msgstr "Infokage slettet. Du er nu logget ud."
 
-msgid "You are not allowed to delete this page."
-msgstr "Du har ikke lov til at slette denne side!"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Anvend venligst den interaktive brugergrænseflade til at slette sider!"
-
-msgid "Really delete this page?"
-msgstr "Er du sikker på at denne side skal slettes?"
-
 msgid "Delete"
 msgstr "Slet"
 
 msgid "Optional reason for the deletion"
 msgstr "Årsag til denne sletning (valgfri)"
+
+msgid "Really delete this page?"
+msgstr "Er du sikker på at denne side skal slettes?"
 
 #, python-format
 msgid ""
@@ -1880,6 +1891,16 @@ msgstr "Email ikke sendt"
 
 msgid "Mail sent OK"
 msgstr "Email sendt OK"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Du har ikke lov til at omdøbe sider i denne wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Du har ikke lov til at slette denne side!"
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s·(%(logsize)s·bytes)"

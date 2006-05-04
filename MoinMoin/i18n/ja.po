@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-16 18:35+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
@@ -526,6 +526,23 @@ msgstr "GUIモード"
 
 msgid "Edit was cancelled."
 msgstr "編集はキャンセルされました。"
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "空のページは保存できません。"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"ページ名{{{'%s'}}}のページがすでに存在します。\n"
+"違う名前を利用してください。"
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "ファイルシステムエラー(%s)により、ページ名を変更できませんでした。"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "ページが更新されました。Thank you!"
@@ -1160,16 +1177,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "マイページの管理"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "ページ名を変更する権限がありません。"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "対話的なユーザインターフェースからページ名を変更してください。"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "ファイルシステムエラー(%s)により、ページ名を変更できませんでした。"
-
 msgid "Rename Page"
 msgstr "ページ名の変更"
 
@@ -1178,15 +1185,6 @@ msgstr "新しい名前"
 
 msgid "Optional reason for the renaming"
 msgstr "名前の変更についてのコメント(省略可)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"ページ名{{{'%s'}}}のページがすでに存在します。\n"
-"違う名前を利用してください。"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1208,6 +1206,25 @@ msgstr "スペルの誤りは見つかりませんでした。"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "読む権限がないページのスペルチェックはできません。"
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "このページにdrawingを保存する権限がありません。"
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "対話的なユーザインターフェースからページを削除してください。"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1255,20 +1272,14 @@ msgstr "このアクションを行う権限がありません。"
 msgid "You are now logged out."
 msgstr "ログアウト完了です。"
 
-msgid "You are not allowed to delete this page."
-msgstr "このページを削除する権限がありません。"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "対話的なユーザインターフェースからページを削除してください。"
-
-msgid "Really delete this page?"
-msgstr "このページを本当に削除しますか？"
-
 msgid "Delete"
 msgstr "削除"
 
 msgid "Optional reason for the deletion"
 msgstr "削除についてのコメント(省略可)"
+
+msgid "Really delete this page?"
+msgstr "このページを本当に削除しますか？"
 
 #, python-format
 msgid ""
@@ -1928,6 +1939,15 @@ msgstr "メール送信失敗。"
 
 msgid "Mail sent OK"
 msgstr "メール送信完了。"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "ページ名を変更する権限がありません。"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "対話的なユーザインターフェースからページ名を変更してください。"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "このページを削除する権限がありません。"
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)sバイト)"
