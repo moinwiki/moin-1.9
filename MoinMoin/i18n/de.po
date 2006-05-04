@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -534,6 +534,23 @@ msgstr "GUI-Modus"
 
 msgid "Edit was cancelled."
 msgstr "Editierung wurde abgebrochen."
+
+msgid "You can't rename to an empty pagename."
+msgstr "Sie können eine Seite nicht auf einen leeren Seitennamen umbenennen."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Es gibt bereits eine Seite mit dem Namen {{{'%s'}}}.'''\n"
+"Versuchen Sie es mit einem anderen Namen."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Konnte die Seite nicht umbenennen wegen eines Dateisystem-Fehlercodes: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Danke für die Änderung und die Sorgfalt beim Editieren."
@@ -1182,18 +1199,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Verwaltung meiner Seiten"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Sie dürfen in diesem Wiki keine Seiten umbenennen!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Zum Umbenennen von Seiten bitte nur die vorgesehenen Webseiten benutzen!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"Konnte die Seite nicht umbenennen wegen eines Dateisystem-Fehlercodes: %s."
-
 msgid "Rename Page"
 msgstr "Seite umbenennen"
 
@@ -1202,15 +1207,6 @@ msgstr "Neuer Name"
 
 msgid "Optional reason for the renaming"
 msgstr "Optionale Begründung für das Umbenennen"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Es gibt bereits eine Seite mit dem Namen {{{'%s'}}}.'''\n"
-"Versuchen Sie es mit einem anderen Namen."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1235,6 +1231,25 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Sie dürfen keine Seite auf Rechtschreibung prüfen, die Sie nicht lesen "
 "können."
+
+msgid "Do it."
+msgstr "Ausführen"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Aktion %(actionname)s ausführen?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Aktion %(actionname)s ist ausgeschlossen in diesem Wiki!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1283,20 +1298,14 @@ msgstr "Sie dürfen diese Aktion nicht ausführen."
 msgid "You are now logged out."
 msgstr "Sie sind nun abgemeldet."
 
-msgid "You are not allowed to delete this page."
-msgstr "Sie dürfen diese Seite nicht löschen."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Zum Löschen von Seiten bitte nur die vorgesehenen Webseiten benutzen!"
-
-msgid "Really delete this page?"
-msgstr "Diese Seite wirklich löschen?"
-
 msgid "Delete"
 msgstr "Löschen"
 
 msgid "Optional reason for the deletion"
 msgstr "Optionale Begründung für die Löschung"
+
+msgid "Really delete this page?"
+msgstr "Diese Seite wirklich löschen?"
 
 #, python-format
 msgid ""

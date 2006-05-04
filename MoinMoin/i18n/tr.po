@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -535,6 +535,26 @@ msgstr "Grafiksel Kullanıcı Arayüzü Kipi"
 
 msgid "Edit was cancelled."
 msgstr "Düzenleme iptal edildi."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Boş sayfalar kaydedilemez."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''{{{'%s'}}} adından bir sayfa zaten mevcut.'''\n"
+"\n"
+"Başka bir ad deneyiniz."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! "
+"Hata: %s"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Yaptığınız düzenlemeler için teşekkür ederiz."
@@ -1147,22 +1167,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr ""
-"Wiki üzerindeki sayfaları yeniden adlandırmak için yeterli izne sahip "
-"değilsiniz!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Lütfen sayfa adlarını değiştirmek için etkileşimli kullanıcı arayüzünü "
-"kullanınız."
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! "
-"Hata: %s"
-
 msgid "Rename Page"
 msgstr "Sayfayı Yeniden Adlandır"
 
@@ -1171,16 +1175,6 @@ msgstr "Yeni ad"
 
 msgid "Optional reason for the renaming"
 msgstr "İsteğe bağlı yeniden adlandırma için yorum"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''{{{'%s'}}} adından bir sayfa zaten mevcut.'''\n"
-"\n"
-"Başka bir ad deneyiniz."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1205,6 +1199,25 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Okuma iznine sahip olmadığınız bir sayfa için imla denetimi "
 "gerçekleştiremezsiniz."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız."
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1258,20 +1271,14 @@ msgstr ""
 msgid "You are now logged out."
 msgstr "Bu sayfadan yükleme yapmak için yeterli izne sahip değilsiniz."
 
-msgid "You are not allowed to delete this page."
-msgstr "Bu sayfayı silmek için yeterli izne sahip değilsiniz."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız."
-
-msgid "Really delete this page?"
-msgstr "Bu sayfayı silmek istediğinize emin misiniz?"
-
 msgid "Delete"
 msgstr "Sil"
 
 msgid "Optional reason for the deletion"
 msgstr "İsteğe bağlı silinme nedeni"
+
+msgid "Really delete this page?"
+msgstr "Bu sayfayı silmek istediğinize emin misiniz?"
 
 #, python-format
 msgid ""
@@ -1925,6 +1932,19 @@ msgstr "E-posta gönderilemedi."
 
 msgid "Mail sent OK"
 msgstr "E-posta gönderildi."
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr ""
+#~ "Wiki üzerindeki sayfaları yeniden adlandırmak için yeterli izne sahip "
+#~ "değilsiniz!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Lütfen sayfa adlarını değiştirmek için etkileşimli kullanıcı arayüzünü "
+#~ "kullanınız."
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Bu sayfayı silmek için yeterli izne sahip değilsiniz."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bayt)"

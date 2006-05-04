@@ -308,6 +308,16 @@ Contact the owner of the wiki, who can enable email.''',
 '''GUI Mode''',
 '''Edit was cancelled.''':
 '''Edit was cancelled.''',
+'''You can\'t rename to an empty pagename.''':
+'''You can\'t rename to an empty pagename.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''',
+'''Could not rename page because of file system error: %s.''':
+'''Could not rename page because of file system error: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Thank you for your changes. Your attention to detail is appreciated.''',
 '''Page "%s" was successfully deleted!''':
@@ -706,24 +716,12 @@ the group pages.
 ''',
 '''MyPages management''':
 '''MyPages management''',
-'''You are not allowed to rename pages in this wiki!''':
-'''You are not allowed to rename pages in this wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Please use the interactive user interface to rename pages!''',
-'''Could not rename page because of file system error: %s.''':
-'''Could not rename page because of file system error: %s.''',
 '''Rename Page''':
 '''Rename Page''',
 '''New name''':
 '''New name''',
 '''Optional reason for the renaming''':
 '''Optional reason for the renaming''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(including %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -734,6 +732,16 @@ Try a different name.''',
 '''No spelling errors found!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''You can\'t check spelling on a page you can\'t read.''',
+'''Do it.''':
+'''Do it.''',
+'''Execute action %(actionname)s?''':
+'''Execute action %(actionname)s?''',
+'''Action %(actionname)s is excluded in this wiki!''':
+'''Action %(actionname)s is excluded in this wiki!''',
+'''You are not allowed to use action %(actionname)s on this page!''':
+'''You are not allowed to use action %(actionname)s on this page!''',
+'''Please use the interactive user interface to use action %(actionname)s!''':
+'''Please use the interactive user interface to use action %(actionname)s!''',
 '''Title Search: "%s"''':
 '''Title Search: "%s"''',
 '''Full Text Search: "%s"''':
@@ -760,16 +768,12 @@ Try a different name.''',
 '''You are not allowed to perform this action.''',
 '''You are now logged out.''':
 '''You are now logged out.''',
-'''You are not allowed to delete this page.''':
-'''You are not allowed to delete this page.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Please use the interactive user interface to delete pages!''',
-'''Really delete this page?''':
-'''Really delete this page?''',
 '''Delete''':
 '''Delete''',
 '''Optional reason for the deletion''':
 '''Optional reason for the deletion''',
+'''Really delete this page?''':
+'''Really delete this page?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.

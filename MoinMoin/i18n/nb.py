@@ -229,6 +229,14 @@ e-post eller fjerne Abonner-knappen.''',
 '''Utskriftsvisning''',
 '''Edit was cancelled.''':
 '''Redigeringen ble avbrutt.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'En side med navnet "%s" finnes allerede!\'\'\'
+
+Prøv igjen med et annet navn.''',
+'''Could not rename page because of file system error: %s.''':
+'''Navn ikke endret på grunn av filsystemfeil: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Takk for dine endringer. Ditt bidrag er verdsatt.''',
 '''Page "%s" was successfully deleted!''':
@@ -478,24 +486,12 @@ Trykk på Avbryt hvis du ikke vil redigere.''',
 '''%(matchcount)d %(matches)s for "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokal oversikt for "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Du har ikke tillatelse til å endre navn på sidene i denne wikien!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Bruk det interaktive brukergrensesnittet til å endre navn på sider!''',
-'''Could not rename page because of file system error: %s.''':
-'''Navn ikke endret på grunn av filsystemfeil: %s.''',
 '''Rename Page''':
 '''Endre sidenavn''',
 '''New name''':
 '''Nytt navn''',
 '''Optional reason for the renaming''':
 '''Årsak til nytt navn (valgfritt)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'En side med navnet "%s" finnes allerede!\'\'\'
-
-Prøv igjen med et annet navn.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inkludert %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -514,16 +510,12 @@ Prøv igjen med et annet navn.''',
 '''Fullstendig liste over lenker for "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke opprette en ny side uten navn. Oppgi navn på siden.''',
-'''You are not allowed to delete this page.''':
-'''Du har ikke tillatelse til å slette denne siden.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Bruk det interaktive brukergrensesnittet for å slette sider!''',
-'''Really delete this page?''':
-'''Er du sikker på at denne siden skal slettes?''',
 '''Delete''':
 '''Slett''',
 '''Optional reason for the deletion''':
 '''Årsak til slettingen (valgfri)''',
+'''Really delete this page?''':
+'''Er du sikker på at denne siden skal slettes?''',
 '''[%d attachments]''':
 '''[%d vedlegg]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-01-8 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -479,6 +479,20 @@ msgid "GUI Mode"
 msgstr ""
 
 msgid "Edit was cancelled."
+msgstr ""
+
+msgid "You can't rename to an empty pagename."
+msgstr ""
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
 msgstr ""
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
@@ -1017,16 +1031,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr ""
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-
 msgid "Rename Page"
 msgstr ""
 
@@ -1034,13 +1038,6 @@ msgid "New name"
 msgstr ""
 
 msgid "Optional reason for the renaming"
-msgstr ""
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
 msgstr ""
 
 #, python-format
@@ -1060,6 +1057,25 @@ msgid "No spelling errors found!"
 msgstr ""
 
 msgid "You can't check spelling on a page you can't read."
+msgstr ""
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
 msgstr ""
 
 #, python-format
@@ -1107,19 +1123,13 @@ msgstr ""
 msgid "You are now logged out."
 msgstr ""
 
-msgid "You are not allowed to delete this page."
-msgstr ""
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-
-msgid "Really delete this page?"
-msgstr ""
-
 msgid "Delete"
 msgstr ""
 
 msgid "Optional reason for the deletion"
+msgstr ""
+
+msgid "Really delete this page?"
 msgstr ""
 
 #, python-format

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: Nir Soffer <nirs@freeshell.org>\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -512,6 +512,21 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "עריכה בוטלה."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "אי אפשר לשמור דף ריק, הוסיפו תוכן ושימרו שוב."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr "דף בשם {{{'%s'}}} כבר קיים. נסה שם אחר."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "תודה על השינויים שעשיתם."
@@ -1090,16 +1105,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "אין לכם הרשאות לשנות שם דפים בוויק הזה."
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "השתמשו במנשק המשתמש לשינוי שמות דפים."
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "שינוי שם הדף נכשל בגלל טעות במערכת הקבצים: %s."
-
 msgid "Rename Page"
 msgstr "שנה שם דף"
 
@@ -1108,13 +1113,6 @@ msgstr "שם חדש"
 
 msgid "Optional reason for the renaming"
 msgstr "סיבה לשינוי שם"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr "דף בשם {{{'%s'}}} כבר קיים. נסה שם אחר."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1136,6 +1134,25 @@ msgstr "לא נמצאו טעויות איות."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "אתה לא יכול לבדוק איות בדף שאין לך הרשאות קריאה."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "אין לכם הרשאות לשמור איור בדף."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "השתמשו במנשק המשתמש למחיקת דפים."
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1186,20 +1203,14 @@ msgstr "אין לכם הרשאות לערוך את הדף"
 msgid "You are now logged out."
 msgstr "קוקית נמחקה, אתם מנותקים."
 
-msgid "You are not allowed to delete this page."
-msgstr "אין לכם הרשאות למחוק את הדף."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "השתמשו במנשק המשתמש למחיקת דפים."
-
-msgid "Really delete this page?"
-msgstr "באמת למחוק את הדף?"
-
 msgid "Delete"
 msgstr "מחק"
 
 msgid "Optional reason for the deletion"
 msgstr "סיבה למחיקה"
+
+msgid "Really delete this page?"
+msgstr "באמת למחוק את הדף?"
 
 #, python-format
 msgid ""
@@ -1846,6 +1857,15 @@ msgstr "דואר נשלח בהצלחה."
 
 msgid "Mail sent OK"
 msgstr "דואר נשלח בהצלחה."
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "אין לכם הרשאות לשנות שם דפים בוויק הזה."
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "השתמשו במנשק המשתמש לשינוי שמות דפים."
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "אין לכם הרשאות למחוק את הדף."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s בתים)"

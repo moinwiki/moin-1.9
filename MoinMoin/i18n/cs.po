@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -518,6 +518,24 @@ msgstr "GUI Mód"
 
 msgid "Edit was cancelled."
 msgstr "Editace byla zrušena."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Prázdné stránky nelze ukládat!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Stránka se jménem {{{'%s'}}}již existuje.'''\n"
+"Zkuste jiné jméno."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Děkujeme za Vaše úpravy i za pečlivost. Ceníme si Vašeho příspěvku."
@@ -1126,17 +1144,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Nemáte dostaetčná práva na přejmenování stránek v této wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Na přejmenovávání stránek používejte prosím interaktivní rozhraní!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"Stránka nemohla být přejmenována z důvodu chyby souborového systému: %s."
-
 msgid "Rename Page"
 msgstr "Přejmenovat stránku"
 
@@ -1145,15 +1152,6 @@ msgstr "Nové jméno"
 
 msgid "Optional reason for the renaming"
 msgstr "Nepovinný důvod pro přejmenovávání"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Stránka se jménem {{{'%s'}}}již existuje.'''\n"
-"Zkuste jiné jméno."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1175,6 +1173,25 @@ msgstr "Žádné pravopisné chyby nenalezeny."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Nemůžete kontrolovat pravopis na stránce, kterou nemůžete číst."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Nemáte dostatečná práva k uložení obrázku k této stránce."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1225,20 +1242,14 @@ msgstr "Nemáte dovoleno provést tuto akci."
 msgid "You are now logged out."
 msgstr "Nemáte dovoleno instalovat soubory."
 
-msgid "You are not allowed to delete this page."
-msgstr "Nemáte dostatečná práva ke smazání této stránky."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Na mazání stránek používejte prosím interaktivní uživatelské rozhraní!"
-
-msgid "Really delete this page?"
-msgstr "Akutečně smazat tuto stránku?"
-
 msgid "Delete"
 msgstr "Smazat"
 
 msgid "Optional reason for the deletion"
 msgstr "Nepovinné důvody pro mazání"
+
+msgid "Really delete this page?"
+msgstr "Akutečně smazat tuto stránku?"
 
 #, python-format
 msgid ""
@@ -1877,6 +1888,15 @@ msgstr "Email NEbyl odeslán!"
 
 msgid "Mail sent OK"
 msgstr "Email byl odeslán"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Nemáte dostaetčná práva na přejmenování stránek v této wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Na přejmenovávání stránek používejte prosím interaktivní rozhraní!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Nemáte dostatečná práva ke smazání této stránky."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bytů)"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-16 10:33+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
@@ -521,6 +521,24 @@ msgstr "GUI 모드"
 
 msgid "Edit was cancelled."
 msgstr "문서 수정을 취소했습니다."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "빈 문서는 저장할 수 없습니다."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''문서 {{{\"%s\"}}}가(이) 이미 있습니다.'''\n"
+"\n"
+"다른 이름으로 다시 만들어 보세요."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "문서가 저장되었습니다."
@@ -1134,16 +1152,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "MyPages 관리"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "이 위키에서는 문서 이름을 바꿀 수 없습니다."
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
-
 msgid "Rename Page"
 msgstr "문서 이름 바꾸기"
 
@@ -1152,16 +1160,6 @@ msgstr "새 이름"
 
 msgid "Optional reason for the renaming"
 msgstr "이름을 바꾸는 이유"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''문서 {{{\"%s\"}}}가(이) 이미 있습니다.'''\n"
-"\n"
-"다른 이름으로 다시 만들어 보세요."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1183,6 +1181,25 @@ msgstr "철자 오류가 발견되지 않았습니다!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "읽을 수 없는 문서의 철자를 검사할 수 없습니다."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1229,20 +1246,14 @@ msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 msgid "You are now logged out."
 msgstr "로그아웃 되었습니다."
 
-msgid "You are not allowed to delete this page."
-msgstr "이 문서를 지울 수 있는 권한이 없습니다."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
-
-msgid "Really delete this page?"
-msgstr "정말로 이 문서를 지우시겠습니까?"
-
 msgid "Delete"
 msgstr "삭제"
 
 msgid "Optional reason for the deletion"
 msgstr "삭제하는 이유"
+
+msgid "Really delete this page?"
+msgstr "정말로 이 문서를 지우시겠습니까?"
 
 #, python-format
 msgid ""
@@ -1836,7 +1847,7 @@ msgid "Package Pages"
 msgstr "문서 묶기"
 
 msgid "Render as Docbook"
-msgstr "Dockbook으로 보여주기"
+msgstr "Dockbook으로 보기"
 
 msgid "Do"
 msgstr "확인"
@@ -1904,6 +1915,15 @@ msgstr "메일 전송 실패"
 
 msgid "Mail sent OK"
 msgstr "메일 전송 성공"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "이 위키에서는 문서 이름을 바꿀 수 없습니다."
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "이 문서를 지울 수 있는 권한이 없습니다."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s 바이트)"

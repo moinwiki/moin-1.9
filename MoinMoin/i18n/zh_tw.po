@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-16 12:21+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -507,6 +507,24 @@ msgstr "GUI 模式"
 
 msgid "Edit was cancelled."
 msgstr "編輯已取消。"
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "你不能儲存空白頁。"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''已經有一個頁面叫做 \"{{{'%s'}}}\" 了！'''\n"
+"\n"
+"請用別的名字。"
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "無法更改頁面名稱。原因為檔案系統錯誤：%s。"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "感謝你的細心修改。"
@@ -1119,16 +1137,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "管理我的頁面"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "你無權重新命名頁面！"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "請使用互動式介面為頁面重新命名！"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "無法更改頁面名稱。原因為檔案系統錯誤：%s。"
-
 msgid "Rename Page"
 msgstr "重新命名"
 
@@ -1137,16 +1145,6 @@ msgstr "新的名稱"
 
 msgid "Optional reason for the renaming"
 msgstr "重新命名的理由："
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''已經有一個頁面叫做 \"{{{'%s'}}}\" 了！'''\n"
-"\n"
-"請用別的名字。"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1168,6 +1166,25 @@ msgstr "沒有拼字錯誤！"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "不能檢查無權瀏覽的頁面。"
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "你無權在本頁儲存圖片。"
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "請使用互動式介面刪除頁面！"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1214,20 +1231,14 @@ msgstr "你無權執行本項操作。"
 msgid "You are now logged out."
 msgstr "你已經登出了。"
 
-msgid "You are not allowed to delete this page."
-msgstr "你無權刪除本頁。"
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "請使用互動式介面刪除頁面！"
-
-msgid "Really delete this page?"
-msgstr "真的要刪除本頁？"
-
 msgid "Delete"
 msgstr "刪除"
 
 msgid "Optional reason for the deletion"
 msgstr "刪除本頁的理由："
+
+msgid "Really delete this page?"
+msgstr "真的要刪除本頁？"
 
 #, python-format
 msgid ""
@@ -1870,6 +1881,15 @@ msgstr "郵件未送出"
 
 msgid "Mail sent OK"
 msgstr "郵件已送出"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "你無權重新命名頁面！"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "請使用互動式介面為頁面重新命名！"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "你無權刪除本頁。"
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s 條 (計 %(logsize)s 位元組)"

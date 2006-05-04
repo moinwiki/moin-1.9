@@ -311,6 +311,15 @@ Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen einschal
 '''GUI-Modus''',
 '''Edit was cancelled.''':
 '''Editierung wurde abgebrochen.''',
+'''You can\'t rename to an empty pagename.''':
+'''Sie können eine Seite nicht auf einen leeren Seitennamen umbenennen.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Es gibt bereits eine Seite mit dem Namen {{{\'%s\'}}}.\'\'\'
+Versuchen Sie es mit einem anderen Namen.''',
+'''Could not rename page because of file system error: %s.''':
+'''Konnte die Seite nicht umbenennen wegen eines Dateisystem-Fehlercodes: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Danke für die Änderung und die Sorgfalt beim Editieren.''',
 '''Page "%s" was successfully deleted!''':
@@ -706,23 +715,12 @@ Bevor Sie zugriffsgeschützte Seiten erzeugen, stellen Sie sicher, dass die ents
 ''',
 '''MyPages management''':
 '''Verwaltung meiner Seiten''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Sie dürfen in diesem Wiki keine Seiten umbenennen!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Zum Umbenennen von Seiten bitte nur die vorgesehenen Webseiten benutzen!''',
-'''Could not rename page because of file system error: %s.''':
-'''Konnte die Seite nicht umbenennen wegen eines Dateisystem-Fehlercodes: %s.''',
 '''Rename Page''':
 '''Seite umbenennen''',
 '''New name''':
 '''Neuer Name''',
 '''Optional reason for the renaming''':
 '''Optionale Begründung für das Umbenennen''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Es gibt bereits eine Seite mit dem Namen {{{\'%s\'}}}.\'\'\'
-Versuchen Sie es mit einem anderen Namen.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inklusive %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -733,6 +731,16 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Keine Rechtschreibfehler gefunden!''',
 '''You can\'t check spelling on a page you can\'t read.''':
 '''Sie dürfen keine Seite auf Rechtschreibung prüfen, die Sie nicht lesen können.''',
+'''Do it.''':
+'''Ausführen''',
+'''Execute action %(actionname)s?''':
+'''Aktion %(actionname)s ausführen?''',
+'''Action %(actionname)s is excluded in this wiki!''':
+'''Aktion %(actionname)s ist ausgeschlossen in diesem Wiki!''',
+'''You are not allowed to use action %(actionname)s on this page!''':
+'''Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!''',
+'''Please use the interactive user interface to use action %(actionname)s!''':
+'''Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!''',
 '''Title Search: "%s"''':
 '''Titelsuche: "%s"''',
 '''Full Text Search: "%s"''':
@@ -759,16 +767,12 @@ Versuchen Sie es mit einem anderen Namen.''',
 '''Sie dürfen diese Aktion nicht ausführen.''',
 '''You are now logged out.''':
 '''Sie sind nun abgemeldet.''',
-'''You are not allowed to delete this page.''':
-'''Sie dürfen diese Seite nicht löschen.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Zum Löschen von Seiten bitte nur die vorgesehenen Webseiten benutzen!''',
-'''Really delete this page?''':
-'''Diese Seite wirklich löschen?''',
 '''Delete''':
 '''Löschen''',
 '''Optional reason for the deletion''':
 '''Optionale Begründung für die Löschung''',
+'''Really delete this page?''':
+'''Diese Seite wirklich löschen?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Wiederhergestelltes Backup: %(filename)s nach Zielverzeichnis: %(targetdir)s.

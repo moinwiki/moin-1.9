@@ -296,6 +296,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''Графический редактор''',
 '''Edit was cancelled.''':
 '''Исправления отменены.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Страница с именем {{{\'%s\'}}} уже есть.\'\'\'
+
+Попробуйте другое имя.''',
+'''Could not rename page because of file system error: %s.''':
+'''Страница не была переименована из-за системной ошибки: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям.''',
 '''Page "%s" was successfully deleted!''':
@@ -584,24 +592,12 @@ To leave the editor, press the Cancel button.''':
 '''%(matchcount)d %(matches)s для "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Карта сайта около "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Вам нельзя переименовывать страницы в этом вики!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Пожалуйста воспользуйтесь интерфейсом пользователя для переименования страниц!''',
-'''Could not rename page because of file system error: %s.''':
-'''Страница не была переименована из-за системной ошибки: %s.''',
 '''Rename Page''':
 '''Переименовать''',
 '''New name''':
 '''Новое имя''',
 '''Optional reason for the renaming''':
 '''Можете указать причину для переименования''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Страница с именем {{{\'%s\'}}} уже есть.\'\'\'
-
-Попробуйте другое имя.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(включая %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -620,16 +616,12 @@ Try a different name.''':
 '''Полный список ссылок для "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Не могу создать страницу без имени. Укажите имя страницы.''',
-'''You are not allowed to delete this page.''':
-'''Вам нельзя стереть эту страницу.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!''',
-'''Really delete this page?''':
-'''Точно стереть эту страницу?''',
 '''Delete''':
 '''Стереть''',
 '''Optional reason for the deletion''':
 '''Можете указать причину для удаления''',
+'''Really delete this page?''':
+'''Точно стереть эту страницу?''',
 '''[%d attachments]''':
 '''[%d приложений]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

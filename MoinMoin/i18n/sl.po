@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-02-15 16:50+0100\n"
 "Last-Translator: Mark Martinec <Mark.Martinec@ijs.si>\n"
 "Language-Team: \n"
@@ -522,6 +522,23 @@ msgstr "Urejanje s sprotnim prikazom (GUI)"
 
 msgid "Edit was cancelled."
 msgstr "Spremembe preklicane."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Prazne strani ni dovoljeno shraniti!"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Stran z imenom {{{'%s'}}} že obstaja.'''\n"
+"Uporabite drugačno ime."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Hvala za popravke, cenimo vašo natančnost."
@@ -1156,16 +1173,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Upravljanje z MyPages"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Na tem vikiju ni dovoljeno preimenovanje strani!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s."
-
 msgid "Rename Page"
 msgstr "Preimenuj stran"
 
@@ -1174,15 +1181,6 @@ msgstr "Novo ime"
 
 msgid "Optional reason for the renaming"
 msgstr "Razlog za preimenovanje (neobvezno)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Stran z imenom {{{'%s'}}} že obstaja.'''\n"
-"Uporabite drugačno ime."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1205,6 +1203,25 @@ msgstr "Ni očitnih tipkarskih napak!"
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Na to stran ni dovoljeno shraniti risb."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1251,20 +1268,14 @@ msgstr "Te akcije vam ni dovoljeno izvesti."
 msgid "You are now logged out."
 msgstr "Odjavljeni ste."
 
-msgid "You are not allowed to delete this page."
-msgstr "Te strani vam ni dovoljeno izbrisati."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
-
-msgid "Really delete this page?"
-msgstr "Zares izbrisati to stran?"
-
 msgid "Delete"
 msgstr "Brisanje"
 
 msgid "Optional reason for the deletion"
 msgstr "Razlog za brisanje (neobvezno)"
+
+msgid "Really delete this page?"
+msgstr "Zares izbrisati to stran?"
 
 #, python-format
 msgid ""
@@ -1926,3 +1937,12 @@ msgstr "sporočilo ni bilo odposlano"
 
 msgid "Mail sent OK"
 msgstr "uspešno odposlano"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Na tem vikiju ni dovoljeno preimenovanje strani!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Te strani vam ni dovoljeno izbrisati."

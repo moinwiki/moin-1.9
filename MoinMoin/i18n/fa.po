@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -525,6 +525,24 @@ msgstr "ویرایش گرافیکی"
 msgid "Edit was cancelled."
 msgstr "ویرایش لغو شد."
 
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "ذخیره صفحات خالی مجاز نیست."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''صفحه ای با نام {{{'%s'}}} وجود دارد.'''\n"
+"\n"
+"لطفا نام دیگری انتخاب نمایید."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد."
+
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "تغییرات مورد نظر شما اعمال شد."
 
@@ -986,7 +1004,7 @@ msgid "Show \"%(title)s\""
 msgstr "\"%(title)s\" را نشان بده"
 
 msgid "General Page Infos"
-msgstr "اطلاعات صفحات عمومی"
+msgstr "اطلاعات عمومی صفحه"
 
 #, python-format
 msgid "Show chart \"%(title)s\""
@@ -1161,16 +1179,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "مدیریت صفحات من"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "شما مجاز به تغییر نام صفحات این ویکی نمی باشید!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "لطفا برای تغییر نام صفحات از صفحه کاربری interactive استفاده نمایید!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد."
-
 msgid "Rename Page"
 msgstr "تغیر نام صفحه"
 
@@ -1179,16 +1187,6 @@ msgstr "نام جدید"
 
 msgid "Optional reason for the renaming"
 msgstr "توضیحات اختیاری برای تغببر نام صفحه"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''صفحه ای با نام {{{'%s'}}} وجود دارد.'''\n"
-"\n"
-"لطفا نام دیگری انتخاب نمایید."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1211,6 +1209,25 @@ msgstr "اشتباه املایی یافت نشد!"
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "شما نمی توانید صفحه ای که مجاز به خواندن آن نیستید را تصحیح املایی نمایید."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "شما مجاز به ذخیره ترسیمات برای این صفحه نیستید."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1258,20 +1275,14 @@ msgstr "عملیات غیر مجاز"
 msgid "You are now logged out."
 msgstr "شما از سیستم خارج شدید."
 
-msgid "You are not allowed to delete this page."
-msgstr "شما مجاز به حذف این صفحه نمی باشید."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!"
-
-msgid "Really delete this page?"
-msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
-
 msgid "Delete"
 msgstr "حذف"
 
 msgid "Optional reason for the deletion"
 msgstr "توضیحات دلخواه برای این حذف"
+
+msgid "Really delete this page?"
+msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
 
 #, python-format
 msgid ""
@@ -1929,6 +1940,16 @@ msgstr "پیغام شما فرستاده نشد"
 
 msgid "Mail sent OK"
 msgstr "پیغام با موفقیت ارسال شد"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "شما مجاز به تغییر نام صفحات این ویکی نمی باشید!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "لطفا برای تغییر نام صفحات از صفحه کاربری interactive استفاده نمایید!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "شما مجاز به حذف این صفحه نمی باشید."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s·(%(logsize)s·bytes)"

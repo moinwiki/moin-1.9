@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-07-01 13:20+0200\n"
 "Last-Translator: VOROSBARANYI Zoltan <http://vbzo.li/>\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -520,6 +520,24 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "A szerkesztés visszavonva."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Nem menthet el üres lapot."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"A(z) {{{'%s'}}} nevű lap már létezik!\n"
+"\n"
+"Próbáljon más nevet adni a lapnak."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez."
@@ -1119,16 +1137,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "A lapok átnevezése nem engedélyezett!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Kérjük a lap átnevezéséhez az interaktív felületet használja!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés."
-
 msgid "Rename Page"
 msgstr "Lap átnevezése"
 
@@ -1137,16 +1145,6 @@ msgstr "Új név"
 
 msgid "Optional reason for the renaming"
 msgstr "Az átnevezés indoka (nem kötelező kitölteni)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"A(z) {{{'%s'}}} nevű lap már létezik!\n"
-"\n"
-"Próbáljon más nevet adni a lapnak."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1169,6 +1167,25 @@ msgstr "Nem találtunk helyesírási hibát."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Nem ellenőrizheti a helyesírást olyan lapon, amelyet nem olvashat."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "A rajz elmentése nem engedélyezett ezen a lapon."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Kérjük a lap törléséhez az interaktív felületet használja!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1219,20 +1236,14 @@ msgstr "A lap szerkesztése nem engedélyezett."
 msgid "You are now logged out."
 msgstr "A sütit letöröltük. Ön kilépett."
 
-msgid "You are not allowed to delete this page."
-msgstr "A lap törlése nem engedélyezett."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Kérjük a lap törléséhez az interaktív felületet használja!"
-
-msgid "Really delete this page?"
-msgstr "Törölni kívánja ezt a lapot?"
-
 msgid "Delete"
 msgstr "Törlés"
 
 msgid "Optional reason for the deletion"
 msgstr "A törlés indoka (nem kötelező kitölteni)"
+
+msgid "Really delete this page?"
+msgstr "Törölni kívánja ezt a lapot?"
 
 #, python-format
 msgid ""
@@ -1891,6 +1902,15 @@ msgstr "A levelet sikerült elküldeni."
 
 msgid "Mail sent OK"
 msgstr "A levelet sikerült elküldeni."
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "A lapok átnevezése nem engedélyezett!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Kérjük a lap átnevezéséhez az interaktív felületet használja!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "A lap törlése nem engedélyezett."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s byte)"
