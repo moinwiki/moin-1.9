@@ -446,6 +446,57 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         page = backto and Page(self.request, backto) or self
         page.send_page(self.request, msg=_('Edit was cancelled.'))
 
+    def renamePage(self, newpagename, comment=None):
+        """
+        Rename the current version of the page (making a backup before deletion
+        and keeping the backups, logs and attachments).
+        
+        @param comment: Comment given by user
+        @rtype: unicode
+        @return: success flag, error message
+        """
+        _ = self._
+        if not newpagename:
+            return False, _("You can't rename to an empty pagename.")
+
+        newpage = PageEditor(self.request, newpagename)
+
+        pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
+
+Try a different name.""") % (newpagename,)
+
+        # Check whether a page with the new name already exists
+        if newpage.exists(includeDeleted=1):
+            return False, pageexists_error
+        
+        # Get old page text
+        savetext = self.get_raw_body()
+
+        oldpath = self.getPagePath(check_create=0)
+        newpath = newpage.getPagePath(check_create=0)
+
+        # Rename page
+
+        # NOTE: might fail if another process created newpagename just
+        # NOW, while you read this comment. Rename is atomic for files -
+        # but for directories, rename will fail if the directory
+        # exists. We should have global edit-lock to avoid this.
+        # See http://docs.python.org/lib/os-file-dir.html
+        try:
+            os.rename(oldpath, newpath)
+            self.error = None
+            # Save page text with a comment about the old name
+            savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
+            newpage.saveText(savetext, 0, comment=comment)
+            return True, None
+        except OSError, err:
+            # Try to understand what happened. Maybe its better to check
+            # the error code, but I just reused the available code above...
+            if newpage.exists(includeDeleted=1):
+                return False, pageexists_error
+            else:
+                return False, _('Could not rename page because of file system error: %s.') % unicode(err)
+
     def deletePage(self, comment=None):
         """
         Delete the current version of the page (making a backup before deletion
@@ -453,10 +504,10 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         
         @param comment: Comment given by user
         @rtype: unicode
-        @return: error message
+        @return: success flag, error message
         """
         _ = self._
-        
+        success = True
         try:
             # First save a final backup copy of the current page
             # (recreating the page allows access to the backups again)
@@ -472,6 +523,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                     raise err
         except self.SaveError, message:
             # XXX Error handling
+            success = False
             msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
         
         # reset page object
@@ -495,7 +547,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             key = formatter_name
             cache = caching.CacheEntry(self.request, arena, key)
             cache.remove()
-        return msg
+        return success, msg
 
     def _sendNotification(self, comment, emails, email_lang, revisions, trivial):
         """

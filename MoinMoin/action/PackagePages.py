@@ -4,6 +4,8 @@
 
     This action allows you to package pages.
 
+    TODO: use ActionBase class
+
     @copyright: 2005 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
 """
