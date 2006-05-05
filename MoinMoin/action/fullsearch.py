@@ -10,7 +10,6 @@
 
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
-from MoinMoin.util import MoinMoinNoFooter
 
 
 def isTitleSearch(request):
@@ -73,7 +72,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             url = page.url(request, querystr={'highlight': query.highlight_re()},
                            escape=0)
             request.http_redirect(url)
-            raise MoinMoinNoFooter
+            return
 
     # send http headers
     request.http_headers()

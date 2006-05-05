@@ -22,7 +22,7 @@
 import os, re, time
 from MoinMoin import config, util, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter, pysupport
+from MoinMoin.util import pysupport
 from MoinMoin.logfile import editlog
 
 #############################################################################
@@ -33,8 +33,6 @@ def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
     request.http_redirect(Page(request, target).url(request))
-    request.finish()
-    raise MoinMoinNoFooter
 
 def do_diff(pagename, request):
     """ Handle "action=diff"
