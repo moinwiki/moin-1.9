@@ -28,6 +28,7 @@ Enter user names (comma separated): <input type="text" name="users" size="50">
 </form>
 """)
     request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 def show_result(pagename, request):
     _ = request.getText
@@ -42,7 +43,7 @@ def show_result(pagename, request):
     request.write(result)
 
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 def subscribe_users(request, usernamelist, pagename, formatter):
     _ = request.getText
@@ -87,6 +88,7 @@ def execute(pagename, request):
     if not request.user.may.admin(pagename):
         request.http_headers()
         request.theme.send_title(_("You are not allowed to perform this action."), pagename=pagename)
+        request.theme.send_closing_html()
     elif not request.form.has_key('users'):
         show_form(pagename, request)
     else:

@@ -87,5 +87,5 @@ the group pages.
 
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 

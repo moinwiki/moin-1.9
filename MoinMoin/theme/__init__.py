@@ -1379,26 +1379,6 @@ var gui_editor_link_text = "%(text)s";
         lang = self.request.content_lang
         return ' lang="%s" dir="%s"' % (lang, i18n.getDirection(lang))
 
-    # stuff moved from request.py
-    def send_closing_html(self):
-        """ generate timing info html and closing html tag """
-        request = self.request
-
-        # as this is the last chance to emit some html, we stop the clocks:
-        request.clock.stop('run')
-        request.clock.stop('total')
-
-        # Close html code
-        if not request.no_closing_html_code:
-            if (request.cfg.show_timings and
-                request.form.get('action', [None])[0] != 'print'):
-                request.write('<ul id="timings">\n')
-                for t in request.clock.dump():
-                    request.write('<li>%s</li>\n' % t)
-                request.write('</ul>\n')
-            #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
-            request.write('</body>\n</html>\n\n')
-
     # stuff from wikiutil.py
     def send_title(self, text, **keywords):
         """
@@ -1659,4 +1639,28 @@ var gui_editor_link_text = "%(text)s";
             request.write(self.endPage())
         else:
             request.write(self.footer(d, **keywords))
+
+    # stuff moved from request.py
+    def send_closing_html(self):
+        """ generate timing info html and closing html tag,
+            everyone calling send_title must call this at the end to close
+            the body and html tags.
+        """
+        request = self.request
+
+        # as this is the last chance to emit some html, we stop the clocks:
+        request.clock.stop('run')
+        request.clock.stop('total')
+
+        # Close html code
+        if not request.no_closing_html_code:
+            if (request.cfg.show_timings and
+                request.form.get('action', [None])[0] != 'print'):
+                request.write('<ul id="timings">\n')
+                for t in request.clock.dump():
+                    request.write('<li>%s</li>\n' % t)
+                request.write('</ul>\n')
+            #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
+            request.write('</body>\n</html>\n\n')
+
 

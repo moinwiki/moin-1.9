@@ -429,7 +429,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         self.request.write(self.request.formatter.endContent())
         self.request.theme.send_footer(self.page_name)
-        
+        self.request.theme.send_closing_html()
+
     def sendCancel(self, newtext, rev):
         """
         User clicked on Cancel button. If edit locking is active,

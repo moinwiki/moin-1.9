@@ -67,7 +67,7 @@ space between words. Group page name is not allowed.""") % name
             
             request.write(userform.getLogin(request))
             
-            # End content and send footer
             request.write(request.formatter.endContent())
             request.theme.send_footer(self.pagename)
+            request.theme.send_closing_html()
 

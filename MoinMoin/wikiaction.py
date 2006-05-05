@@ -198,7 +198,7 @@ def do_diff(pagename, request):
 
     request.write('</div>\n') # end content div
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 def do_info(pagename, request):
     if not request.user.may.read(pagename):
@@ -427,7 +427,7 @@ def do_info(pagename, request):
         
     request.write('</div>\n') # end content div
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 def do_recall(pagename, request):
     # We must check if the current page has different ACLs.
@@ -493,7 +493,6 @@ def do_content(pagename, request):
     page = Page(request, pagename)
     request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
     page.send_page(request, count_hit=0, content_only=1)
-    raise MoinMoinNoFooter
 
 
 def do_revert(pagename, request):
@@ -827,7 +826,6 @@ def do_format(pagename, request):
     request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
 
     Page(request, pagename, formatter=Formatter(request)).send_page(request)
-    raise MoinMoinNoFooter
 
 
 def do_chart(pagename, request):
@@ -855,7 +853,6 @@ def do_chart(pagename, request):
         return request.page.send_page(request, msg=msg)
     
     func(pagename, request)
-    raise MoinMoinNoFooter
 
 
 def do_dumpform(pagename, request):
@@ -863,7 +860,6 @@ def do_dumpform(pagename, request):
 
     request.http_headers()
     request.write("<html><body>%s</body></html>" % data)
-    raise MoinMoinNoFooter
 
 
 def do_test(pagename, request):
@@ -871,7 +867,6 @@ def do_test(pagename, request):
     request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
     request.write('MoinMoin Diagnosis\n======================\n\n')
     runTest(request)
-    raise MoinMoinNoFooter
 
 
 #############################################################################

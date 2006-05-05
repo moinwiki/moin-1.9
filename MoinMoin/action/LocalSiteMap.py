@@ -43,7 +43,7 @@ def execute(pagename, request):
 
     request.write(request.formatter.endContent()) # end content div
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 class LocalSiteMap:
     def __init__(self, name):

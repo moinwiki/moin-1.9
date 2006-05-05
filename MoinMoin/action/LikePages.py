@@ -55,7 +55,7 @@ def execute(pagename, request):
     # End content and send footer
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
-        
+    request.theme.send_closing_html()
 
 def findMatches(pagename, request, s_re=None, e_re=None,):
     """ Find like pages
