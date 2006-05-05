@@ -10,7 +10,14 @@
 import os, re, time, sys, cgi, StringIO
 import copy
 from MoinMoin import config, wikiutil, user, caching
-from MoinMoin.util import MoinMoinNoFooter, IsWin9x
+from MoinMoin.util import IsWin9x
+
+
+# Exceptions -----------------------------------------------------------
+
+class MoinMoinFinish(Exception):
+    """ Raised to jump directly to end of run() function, where finish is called """
+    pass
 
 # Timing ---------------------------------------------------------------
 
@@ -1109,7 +1116,7 @@ space between words. Group page name is not allowed.""") % self.user.name
             # every action that didn't use to raise MoinMoinNoFooter must call this now:
             # self.theme.send_closing_html()
 
-        except MoinMoinNoFooter:
+        except MoinMoinFinish:
             pass
         except Exception, err:
             self.fail(err)
@@ -1405,7 +1412,7 @@ class RequestTwisted(RequestBase):
             
             RequestBase.__init__(self, properties)
 
-        except MoinMoinNoFooter: # might be triggered by http_redirect
+        except MoinMoinFinish: # might be triggered by http_redirect
             self.http_headers() # send headers (important for sending MOIN_ID cookie)
             self.finish()
 
@@ -1507,7 +1514,7 @@ class RequestTwisted(RequestBase):
         # calling finish here will send the rest of the data to the next
         # request. leave the finish call to run()
         #self.twistd.finish()
-        raise MoinMoinNoFooter
+        raise MoinMoinFinish
 
     def setResponseCode(self, code, message=None):
         self.twistd.setResponseCode(code, message)
