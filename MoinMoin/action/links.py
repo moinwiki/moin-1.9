@@ -7,10 +7,7 @@
     @copyright: 2001 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-
 from MoinMoin import config, wikiutil
-from MoinMoin.util import MoinMoinNoFooter
-
 
 def execute(pagename, request):
     _ = request.getText
@@ -52,8 +49,7 @@ def execute(pagename, request):
     if mimetype == "text/html":
         request.write('</pre>')
         request.theme.send_footer(pagename)
-    else:
-        raise MoinMoinNoFooter
+        request.theme.send_closing_html()
 
 def _emit(request, pagename):
     """ Send pagename, encode it if it contains spaces

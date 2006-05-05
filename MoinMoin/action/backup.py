@@ -13,7 +13,6 @@
 import os, re, time, tarfile
 import cStringIO
 from MoinMoin import wikiutil
-from MoinMoin.util import MoinMoinNoFooter
 
 def addFiles(path, tar, exclude):
     """ Add files in path to tar """
@@ -40,7 +39,6 @@ def sendBackup(request):
     for path in request.cfg.backup_include:
         addFiles(path, tar, exclude)
     tar.close()
-    raise MoinMoinNoFooter
 
 def restoreBackup(request, pagename):
     _ = request.getText
@@ -113,6 +111,7 @@ Please make sure your wiki configuration backup_* values are correct and complet
     
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 def sendMsg(request, pagename, msg):
     from MoinMoin import Page

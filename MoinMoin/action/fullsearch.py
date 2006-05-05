@@ -106,7 +106,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         output = results.pageList(request, request.formatter, info=info)        
     request.write(output)
 
-    # End content and send footer
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 

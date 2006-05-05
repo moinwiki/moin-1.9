@@ -16,7 +16,6 @@ _debug = 0
 
 from MoinMoin import caching, config, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter
 from MoinMoin.formatter.text_html import Formatter
 from MoinMoin.logfile import eventlog, logfile
 
@@ -251,5 +250,4 @@ def draw(pagename, request):
     # copy the image
     image.reset()
     shutil.copyfileobj(image, request, 8192)
-    raise MoinMoinNoFooter
 

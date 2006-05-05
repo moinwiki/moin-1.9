@@ -29,7 +29,7 @@
 import os, mimetypes, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter, filesys
+from MoinMoin.util import filesys
 
 action_name = __name__.split('.')[-1]
 
@@ -507,7 +507,7 @@ def upload_form(pagename, request, msg=''):
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 def do_upload(pagename, request):
     _ = request.getText
@@ -649,8 +649,6 @@ def get_file(pagename, request):
 
     # send data
     shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
-
-    raise MoinMoinNoFooter
 
 def install_package(pagename, request):
     _ = request.getText
@@ -826,9 +824,8 @@ def view_file(pagename, request):
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
 
-    # send footer
     request.theme.send_footer(pagename)
-
+    request.theme.send_closing_html()
 
 #############################################################################
 ### File attachment administration

@@ -185,4 +185,5 @@ def execute(pagename, request):
     # End content and send footer
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 

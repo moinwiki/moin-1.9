@@ -1072,7 +1072,6 @@ space between words. Group page name is not allowed.""") % self.user.name
                 from MoinMoin.action.AttachFile import execute
                 # TODO: what if pagename is None?
                 execute(pagename, self)
-                raise MoinMoinNoFooter           
 
             # 4. Or handle action
             else:
@@ -1107,8 +1106,8 @@ space between words. Group page name is not allowed.""") % self.user.name
                     handler = getHandler(self, action)
                     handler(self.page.page_name, self)
 
-            # XXX temporary, to be removed later
-            self.theme.send_closing_html()
+            # every action that didn't use to raise MoinMoinNoFooter must call this now:
+            # self.theme.send_closing_html()
 
         except MoinMoinNoFooter:
             pass

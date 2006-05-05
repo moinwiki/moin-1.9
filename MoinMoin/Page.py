@@ -10,7 +10,7 @@ import StringIO, os, re, random, codecs
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys, MoinMoinNoFooter, timefuncs
+from MoinMoin.util import filesys, timefuncs
 
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
@@ -949,7 +949,6 @@ class Page:
         text = self.get_raw_body()
         text = self.encodeTextMimeType(text)
         self.request.write(text)
-        raise MoinMoinNoFooter
 
 
     def send_page(self, request, msg=None, **keywords):
@@ -1260,6 +1259,7 @@ class Page:
                 cache.update('\n'.join(links) + '\n', True)
 
         request.clock.stop('send_page')
+        request.theme.send_closing_html()
 
     def getFormatterName(self):
         """ Return a formatter name as used in the caching system
