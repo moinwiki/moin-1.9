@@ -15,7 +15,6 @@ from MoinMoin.util.dataset import TupleDataset, Column
 from MoinMoin.widget.browser import DataBrowserWidget
 from MoinMoin import wikiutil, Page, PageEditor
 from MoinMoin.macro import RecentChanges
-from MoinMoin.formatter.text_html import Formatter
 
 def show_editors(request, pagename, timestamp):
     _ =  request.getText
@@ -65,7 +64,7 @@ def show_pages(request, pagename, editor, timestamp):
     #  mimic macro object for use of RecentChanges subfunctions
     macro = tmp()
     macro.request = request
-    macro.formatter = Formatter(request)
+    macro.formatter = request.html_formatter
 
     request.write("<table>")
     for line in log.reverse():

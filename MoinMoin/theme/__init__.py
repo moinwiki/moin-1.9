@@ -1010,7 +1010,7 @@ actionsMenuInit('%(label)s');
         @rtype: unicode
         @return: iconbar html
         """
-        page = d['page']       
+        page = d['page']
         if not self.shouldShowEditbar(page):
             return ''
 

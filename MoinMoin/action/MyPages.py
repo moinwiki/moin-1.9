@@ -19,8 +19,7 @@ def execute(pagename, request):
         username = ''
 
     if not username:
-        return thispage.send_page(request,
-            msg = _('Please log in first.'))
+        return thispage.send_page(request, msg=_('Please log in first.'))
 
     userhomewiki = request.cfg.user_homewiki
     if userhomewiki != 'Self' and userhomewiki != request.cfg.interwikiname:
@@ -59,33 +58,21 @@ the group pages.
 
     from MoinMoin.Page import Page
     from MoinMoin.parser.wiki import Parser
-    from MoinMoin.formatter.text_html import Formatter
-    pagename = username
     request.http_headers()
     
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
-    request.theme.send_title(_('MyPages management'), pagename=pagename)
+    request.theme.send_title(_('MyPages management'), page=homepage)
         
-    # Start content - IMPORTANT - without content div, there is no
-    # direction support!
+    # Start content - IMPORTANT - without content div, there is no direction support!
     request.write(request.formatter.startContent("content"))
 
     parser = Parser(pagecontent, request)
-    formatter = Formatter(request)
-    reqformatter = None
-    if hasattr(request, 'formatter'):
-        reqformatter = request.formatter
-    request.formatter = formatter
     p = Page(request, "$$$")
-    formatter.setPage(p)
-    parser.format(formatter)
-    if reqformatter == None:
-        del request.formatter
-    else:
-        request.formatter = reqformatter
-
+    request.formatter.setPage(p)
+    parser.format(request.formatter)
+    
     request.write(request.formatter.endContent())
-    request.theme.send_footer(pagename)
+    request.theme.send_footer(homepage.page_name)
     request.theme.send_closing_html()
 

@@ -1021,6 +1021,9 @@ class RequestBase(object):
         self.clock.start('run')
 
         from MoinMoin.Page import Page
+        from MoinMoin.formatter.text_html import Formatter
+        self.html_formatter = Formatter(self)
+        self.formatter = self.html_formatter
 
         if self.query_string == 'action=xmlrpc':
             from MoinMoin.wikirpc import xmlrpc
