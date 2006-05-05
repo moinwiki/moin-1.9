@@ -1430,7 +1430,7 @@ var gui_editor_link_text = "%(text)s";
 
         # include charset information - needed for moin_dump or any other case
         # when reading the html without a web server
-        user_head.append('''<meta http-equiv="Content-Type" content="text/html;charset=%s">\n''' % config.charset)
+        user_head.append('''<meta http-equiv="Content-Type" content="%s;charset=%s">\n''' % (page.output_mimetype, page.output_charset))
 
         meta_keywords = request.getPragma('keywords')
         meta_desc = request.getPragma('description')

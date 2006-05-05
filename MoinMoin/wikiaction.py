@@ -51,28 +51,42 @@ def do_raw(pagename, request):
 
     page.send_raw()
 
-def do_format(pagename, request):
-    """ send a page using a specific formatter given by mimetype form key """
-    # get the MIME type
-    if request.form.has_key('mimetype'):
-        mimetype = request.form['mimetype'][0]
+def do_show(pagename, request, count_hit=1, cacheable=1):
+    """ show a page, either current revision or the revision given by rev form value.
+        if count_hit is non-zero, we count the request for statistics.
+    """
+    # We must check if the current page has different ACLs.
+    if not request.user.may.read(pagename):
+        Page(request, pagename).send_page(request)
+        return
+
+    mimetype = request.form.get('mimetype', [u"text/html"])[0]
+        
+    if request.form.has_key('rev'):
+        try:
+            rev = request.form['rev'][0]
+            try:
+                rev = int(rev)
+            except StandardError:
+                rev = 0
+        except KeyError:
+            rev = 0
+        Page(request, pagename, rev=rev, formatter=mimetype).send_page(request, count_hit=count_hit)
     else:
-        mimetype = u"text/plain"
+        request.cacheable = cacheable
+        Page(request, pagename, formatter=mimetype).send_page(request, count_hit=count_hit)
 
-    # try to load the formatter
-    formatterName = mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'})
-    try:
-        Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
-    except wikiutil.PluginMissingError:
-        # default to plain text formatter
-        mimetype = "text/plain"
-        from MoinMoin.formatter.text_plain import Formatter
-
-    if "xml" in mimetype:
-        mimetype = "text/xml"
-
-    request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
-    Page(request, pagename, formatter=Formatter(request)).send_page(request)
+def do_format(pagename, request):
+    """ send a page using a specific formatter given by mimetype form key.
+        Since 5.5.2006 this functionality is also done by do_show, but do_format
+        has a default of text/plain when no format is given.
+        It also does not count in statistics and also does not set the cacheable flag.
+        TODO: remove this action when we don't need it any more for compatibility.
+    """
+    # get the MIME type
+    if not request.form.has_key('mimetype'):
+        request.form['mimetype'] = [u"text/plain"]
+    do_show(pagename, request, count_hit=0, cacheable=0)
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
@@ -88,29 +102,6 @@ def do_print(pagename, request):
 def do_recall(pagename, request):
     """ same as do_show, but never caches and never counts hits """
     do_show(pagename, request, count_hit=0, cacheable=0)
-
-def do_show(pagename, request, count_hit=1, cacheable=1):
-    """ show a page, either current revision or the revision given by rev form value.
-        if count_hit is non-zero, we count the request for statistics.
-    """
-    # We must check if the current page has different ACLs.
-    if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
-        return
-
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        Page(request, pagename, rev=rev).send_page(request, count_hit=count_hit)
-    else:
-        request.cacheable = cacheable
-        Page(request, pagename).send_page(request, count_hit=count_hit)
 
 def do_refresh(pagename, request):
     """ Handle refresh action """
