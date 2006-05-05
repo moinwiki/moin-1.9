@@ -809,9 +809,6 @@ def getHandler(request, action, identifier="execute"):
     if action in request.cfg.actions_excluded:
         return None
 
-    from MoinMoin.formatter.text_html import Formatter
-    request.formatter = Formatter(request)
-
     try:
         handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:

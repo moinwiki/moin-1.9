@@ -46,10 +46,10 @@ class Page:
         #print >>sys.stderr, "page %s" % repr(page_name)
         #traceback.print_stack(limit=4, file=sys.stderr)
 
-
         formatter = kw.get('formatter', None)
         if isinstance(formatter, (str, unicode)): # mimetype given
             mimetype = str(formatter)
+            self.formatter = None
             self.output_mimetype = mimetype
             self.default_formatter = mimetype == "text/html"
         elif formatter is not None: # formatter instance given
@@ -57,6 +57,7 @@ class Page:
             self.default_formatter = 0
             self.output_mimetype = "text/todo" # TODO where do we get this value from?
         else:
+            self.formatter = None
             self.default_formatter = 1
             self.output_mimetype = "text/html"
 
@@ -1006,7 +1007,7 @@ class Page:
             from MoinMoin.formatter.text_html import Formatter
             self.formatter = Formatter(request, store_pagelinks=1)
         elif not self.formatter:
-            formatterName = self.output_mimetype.translate({ord('/'): '_', ord('.'): '_'}) # XXX use existing fn for that
+            formatterName = self.output_mimetype.replace('/', '_').replace('.', '_') # XXX use existing fn for that
             try:
                 Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
                 self.formatter = Formatter(request)
@@ -1014,13 +1015,12 @@ class Page:
                 from MoinMoin.formatter.text_html import Formatter
                 self.formatter = Formatter(request, store_pagelinks=1)
                 self.output_mimetype = "text/html"
-            
-        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
-
+        request.formatter = self.formatter
         self.formatter.setPage(self)
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
-        request.formatter = self.formatter
+        
+        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
 
         # default is wiki markup
         pi_format = self.cfg.default_markup or "wiki"
@@ -1289,7 +1289,7 @@ class Page:
         @rtype: string
         @return: formatter name as used in caching
         """
-        if not hasattr(self, 'formatter'):
+        if not hasattr(self, 'formatter') or self.formatter is None:
             return ''
         module = self.formatter.__module__
         return module[module.rfind('.') + 1:]

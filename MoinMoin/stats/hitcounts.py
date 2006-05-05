@@ -16,7 +16,6 @@ _debug = 0
 
 from MoinMoin import caching, config, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.formatter.text_html import Formatter
 from MoinMoin.logfile import eventlog, logfile
 
 
@@ -24,7 +23,6 @@ def linkto(pagename, request, params=''):
     _ = request.getText
 
     if not request.cfg.chart_options:
-        request.formatter = Formatter(request)
         return text(pagename, request, params)
 
     if _debug:
