@@ -3,8 +3,8 @@
     MoinMoin - Action Handlers
 
     Actions are triggered by the user clicking on special links on the page
-    (like the icons in the title, or the "EditText" link at the bottom). The
-    name of the action is passed in the "action" CGI parameter.
+    (e.g. the "edit" link). The name of the action is passed in the "action"
+    CGI parameter.
 
     The sub-package "MoinMoin.action" contains external actions, you can
     place your own extensions there (similar to extension macros). User
@@ -15,7 +15,8 @@
     together with a user macro; those actions a likely to work only if
     invoked BY that macro, and are thus hidden from the user interface.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -28,6 +29,283 @@ from MoinMoin.logfile import editlog
 #############################################################################
 ### Misc Actions
 #############################################################################
+
+def do_raw(pagename, request):
+    """ send raw content of a page (e.g. wiki markup) """
+    if not request.user.may.read(pagename):
+        Page(request, pagename).send_page(request)
+        return
+
+    if request.form.has_key('rev'):
+        try:
+            rev = request.form['rev'][0]
+            try:
+                rev = int(rev)
+            except StandardError:
+                rev = 0
+        except KeyError:
+            rev = 0
+        page = Page(request, pagename, rev=rev)
+    else:
+        page = Page(request, pagename)
+
+    page.send_raw()
+
+def do_format(pagename, request):
+    """ send a page using a specific formatter given by mimetype form key """
+    # get the MIME type
+    if request.form.has_key('mimetype'):
+        mimetype = request.form['mimetype'][0]
+    else:
+        mimetype = u"text/plain"
+
+    # try to load the formatter
+    formatterName = mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'})
+    try:
+        Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
+    except wikiutil.PluginMissingError:
+        # default to plain text formatter
+        mimetype = "text/plain"
+        from MoinMoin.formatter.text_plain import Formatter
+
+    if "xml" in mimetype:
+        mimetype = "text/xml"
+
+    request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    Page(request, pagename, formatter=Formatter(request)).send_page(request)
+
+def do_content(pagename, request):
+    """ same as do_show, but we only show the content """
+    request.http_headers()
+    page = Page(request, pagename)
+    request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
+    page.send_page(request, count_hit=0, content_only=1)
+
+def do_print(pagename, request):
+    """ same as do_show, but send_page will notice the print mode """
+    do_show(pagename, request)
+
+def do_recall(pagename, request):
+    """ same as do_show, but never caches and never counts hits """
+    do_show(pagename, request, count_hit=0, cacheable=0)
+
+def do_show(pagename, request, count_hit=1, cacheable=1):
+    """ show a page, either current revision or the revision given by rev form value.
+        if count_hit is non-zero, we count the request for statistics.
+    """
+    # We must check if the current page has different ACLs.
+    if not request.user.may.read(pagename):
+        Page(request, pagename).send_page(request)
+        return
+
+    if request.form.has_key('rev'):
+        try:
+            rev = request.form['rev'][0]
+            try:
+                rev = int(rev)
+            except StandardError:
+                rev = 0
+        except KeyError:
+            rev = 0
+        Page(request, pagename, rev=rev).send_page(request, count_hit=count_hit)
+    else:
+        request.cacheable = cacheable
+        Page(request, pagename).send_page(request, count_hit=count_hit)
+
+def do_refresh(pagename, request):
+    """ Handle refresh action """
+    # Without arguments, refresh action will refresh the page text_html cache.
+    arena = request.form.get('arena', ['Page.py'])[0]
+    if arena == 'Page.py':
+        arena = Page(request, pagename)
+    key = request.form.get('key', ['text_html'])[0]
+
+    # Remove cache entry (if exists), and send the page
+    from MoinMoin import caching
+    caching.CacheEntry(request, arena, key).remove()
+    caching.CacheEntry(request, arena, "pagelinks").remove()
+    do_show(pagename, request)
+
+def do_revert(pagename, request):
+    """ restore another revision of a page as a new current revision """
+    from MoinMoin.PageEditor import PageEditor
+    _ = request.getText
+
+    if not request.user.may.revert(pagename):
+        return Page(request, pagename).send_page(request,
+            msg = _('You are not allowed to revert this page!'))
+
+    rev = int(request.form['rev'][0])
+    revstr = '%08d' % rev
+    oldpg = Page(request, pagename, rev=rev)
+    pg = PageEditor(request, pagename)
+
+    try:
+        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=revstr,
+                              action="SAVE/REVERT")
+    except pg.SaveError, msg:
+        # msg contain a unicode string
+        savemsg = unicode(msg)
+    request.reset()
+    pg.send_page(request, msg=savemsg)
+    return None
+
+def do_edit(pagename, request):
+    """ edit a page """
+    _ = request.getText
+
+    if not request.user.may.write(pagename):
+        Page(request, pagename).send_page(request,
+            msg = _('You are not allowed to edit this page.'))
+        return
+
+    valideditors = ['text', 'gui',]
+    editor = ''
+    if request.user.valid:
+        editor = request.user.editor_default
+    if editor not in valideditors:
+        editor = request.cfg.editor_default
+    
+    editorparam = request.form.get('editor', [editor])[0]
+    if editorparam == "guipossible":
+        lasteditor = editor
+    elif editorparam == "textonly":
+        editor = lasteditor = 'text'
+    else:
+        editor = lasteditor = editorparam
+
+    if request.cfg.editor_force:
+        editor = request.cfg.editor_default
+
+    # if it is still nothing valid, we just use the text editor
+    if editor not in valideditors:
+        editor = 'text'
+            
+    savetext = request.form.get('savetext', [None])[0]
+    rev = int(request.form.get('rev', ['0'])[0])
+    comment = request.form.get('comment', [u''])[0]
+    category = request.form.get('category', [None])[0]
+    rstrip = int(request.form.get('rstrip', ['0'])[0])
+    trivial = int(request.form.get('trivial', ['0'])[0])
+
+    if request.form.has_key('button_switch'):
+        if editor == 'text':
+            editor = 'gui'
+        else: # 'gui'
+            editor = 'text'
+
+    # load right editor class
+    if editor == 'gui':
+        from MoinMoin.PageGraphicalEditor import PageGraphicalEditor
+        pg = PageGraphicalEditor(request, pagename)
+    else: # 'text'
+        from MoinMoin.PageEditor import PageEditor
+        pg = PageEditor(request, pagename)
+
+    # is invoked without savetext start editing
+    if savetext is None:
+        pg.sendEditor()
+        return
+  
+    # did user hit cancel button?
+    cancelled = request.form.has_key('button_cancel')
+
+    # convert input from Graphical editor
+    from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
+    try:
+        if lasteditor == 'gui':
+            savetext = convert(request, pagename, savetext)
+                
+        # IMPORTANT: normalize text from the form. This should be done in
+        # one place before we manipulate the text.
+        savetext = pg.normalizeText(savetext, stripspaces=rstrip)
+    except ConvertError:
+        # we don't want to throw an exception if user cancelled anyway
+        if not cancelled:
+            raise
+
+    if cancelled:
+        pg.sendCancel(savetext or "", rev)
+        return
+
+    comment = wikiutil.clean_comment(comment)
+
+    # Add category
+
+    # TODO: this code does not work with extended links, and is doing
+    # things behind your back, and in general not needed. Either we have
+    # a full interface for categories (add, delete) or just add them by
+    # markup.
+    
+    if category and category != _('<No addition>', formatted=False): # opera 8.5 needs this
+        # strip trailing whitespace
+        savetext = savetext.rstrip()
+
+        # Add category separator if last non-empty line contains
+        # non-categories.
+        lines = filter(None, savetext.splitlines())
+        if lines:
+            
+            #TODO: this code is broken, will not work for extended links
+            #categories, e.g ["category hebrew"]
+            categories = lines[-1].split()
+            
+            if categories:
+                confirmed = wikiutil.filterCategoryPages(request, categories)
+                if len(confirmed) < len(categories):
+                    # This was not a categories line, add separator
+                    savetext += u'\n----\n'
+
+        # Add new category
+        if savetext and savetext[-1] != u'\n':
+            savetext += ' '
+        savetext += category + u'\n' # Should end with newline!
+
+    # Preview, spellcheck or spellcheck add new words
+    if (request.form.has_key('button_preview') or
+        request.form.has_key('button_spellcheck') or
+        request.form.has_key('button_newwords')):
+        pg.sendEditor(preview=savetext, comment=comment)
+    
+    # Preview with mode switch
+    elif request.form.has_key('button_switch'):
+        pg.sendEditor(preview=savetext, comment=comment, staytop=1)
+    
+    # Save new text
+    else:
+        try:
+            savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
+        except pg.EditConflict, msg:
+            # Handle conflict and send editor
+
+            # TODO: conflict messages are duplicated from PageEditor,
+            # refactor to one place only.
+            conflict_msg = _('Someone else changed this page while you were editing!')
+            pg.set_raw_body(savetext, modified=1)
+            if pg.mergeEditConflict(rev):
+                conflict_msg = _("""Someone else saved this page while you were editing!
+Please review the page and save then. Do not save this page as it is!
+Have a look at the diff of %(difflink)s to see what has been changed.""") % {
+                    'difflink': pg.link_to(pg.request,
+                                           querystr='action=diff&rev=%d' % rev)
+                    }
+                # We don't send preview when we do merge conflict
+                pg.sendEditor(msg=conflict_msg, comment=comment)
+                return
+            else:
+                savemsg = conflict_msg
+        
+        except pg.SaveError, msg:
+            # msg contain a unicode string
+            savemsg = unicode(msg)
+
+        # Send new page after save or after unsuccessful conflict merge.
+        request.reset()
+        backto = request.form.get('backto', [None])[0]
+        if backto:
+            pg = Page(request, backto)
+
+        pg.send_page(request, msg=savemsg)
 
 def do_goto(pagename, request):
     """ redirect to another page """
@@ -199,6 +477,7 @@ def do_diff(pagename, request):
     request.theme.send_closing_html()
 
 def do_info(pagename, request):
+    """ show misc. infos about a page """
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page(request)
         return
@@ -247,13 +526,11 @@ def do_info(pagename, request):
                 request.write("%s%s " % (Page(request, linkedpage).link_to(request), ",."[linkedpage == links[-1]]))
             request.write("</p>")
 
-
     def history(page, pagename, request):
         # show history as default
         _ = request.getText
 
         # open log for this page
-        from MoinMoin.logfile import editlog
         from MoinMoin.util.dataset import TupleDataset, Column
 
         history = TupleDataset()
@@ -386,7 +663,7 @@ def do_info(pagename, request):
         request.write('</div>\n')
         request.write('</form>\n')
 
-
+    # main function
     _ = request.getText
     page = Page(request, pagename)
     qpagename = wikiutil.quoteWikinameURL(pagename)
@@ -427,252 +704,6 @@ def do_info(pagename, request):
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
-def do_recall(pagename, request):
-    # We must check if the current page has different ACLs.
-    if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
-        return
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        Page(request, pagename, rev=rev).send_page(request)
-    else:
-        Page(request, pagename).send_page(request)
-
-
-def do_show(pagename, request):
-    # We must check if the current page has different ACLs.
-    if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
-        return
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        Page(request, pagename, rev=rev).send_page(request, count_hit=1)
-    else:
-        request.cacheable = 1
-        Page(request, pagename).send_page(request, count_hit=1)
-
-
-def do_refresh(pagename, request):
-    """ Handle refresh action """
-    # Without arguments, refresh action will refresh the page text_html
-    # cache.
-    arena = request.form.get('arena', ['Page.py'])[0]
-    if arena == 'Page.py':
-        arena = Page(request, pagename)
-    key = request.form.get('key', ['text_html'])[0]
-
-    # Remove cache entry (if exists), and send the page
-    from MoinMoin import caching
-    caching.CacheEntry(request, arena, key).remove()
-    caching.CacheEntry(request, arena, "pagelinks").remove()
-    do_show(pagename, request)
-
-
-def do_print(pagename, request):
-    do_show(pagename, request)
-
-
-def do_content(pagename, request):
-    request.http_headers()
-    page = Page(request, pagename)
-    request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
-    page.send_page(request, count_hit=0, content_only=1)
-
-
-def do_revert(pagename, request):
-    from MoinMoin.PageEditor import PageEditor
-    _ = request.getText
-
-    if not request.user.may.revert(pagename):
-        return Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to revert this page!'))
-
-    rev = int(request.form['rev'][0])
-    revstr = '%08d' % rev
-    oldpg = Page(request, pagename, rev=rev)
-    pg = PageEditor(request, pagename)
-
-    try:
-        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=revstr,
-                              action="SAVE/REVERT")
-    except pg.SaveError, msg:
-        # msg contain a unicode string
-        savemsg = unicode(msg)
-    request.reset()
-    pg.send_page(request, msg=savemsg)
-    return None
-
-def do_edit(pagename, request):
-    _ = request.getText
-
-    if not request.user.may.write(pagename):
-        Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to edit this page.'))
-        return
-
-    valideditors = ['text', 'gui',]
-    editor = ''
-    if request.user.valid:
-        editor = request.user.editor_default
-    if editor not in valideditors:
-        editor = request.cfg.editor_default
-    
-    editorparam = request.form.get('editor', [editor])[0]
-    if editorparam == "guipossible":
-        lasteditor = editor
-    elif editorparam == "textonly":
-        editor = lasteditor = 'text'
-    else:
-        editor = lasteditor = editorparam
-
-    if request.cfg.editor_force:
-        editor = request.cfg.editor_default
-
-    # if it is still nothing valid, we just use the text editor
-    if editor not in valideditors:
-        editor = 'text'
-            
-    savetext = request.form.get('savetext', [None])[0]
-    rev = int(request.form.get('rev', ['0'])[0])
-    comment = request.form.get('comment', [u''])[0]
-    category = request.form.get('category', [None])[0]
-    rstrip = int(request.form.get('rstrip', ['0'])[0])
-    trivial = int(request.form.get('trivial', ['0'])[0])
-
-    if request.form.has_key('button_switch'):
-        if editor == 'text':
-            editor = 'gui'
-        else: # 'gui'
-            editor = 'text'
-
-    # load right editor class
-    if editor == 'gui':
-        from MoinMoin.PageGraphicalEditor import PageGraphicalEditor
-        pg = PageGraphicalEditor(request, pagename)
-    else: # 'text'
-        from MoinMoin.PageEditor import PageEditor
-        pg = PageEditor(request, pagename)
-
-    # is invoked without savetext start editing
-    if savetext is None:
-        pg.sendEditor()
-        return
-  
-    # did user hit cancel button?
-    cancelled = request.form.has_key('button_cancel')
-
-    # convert input from Graphical editor
-    from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
-    try:
-        if lasteditor == 'gui':
-            savetext = convert(request, pagename, savetext)
-                
-        # IMPORTANT: normalize text from the form. This should be done in
-        # one place before we manipulate the text.
-        savetext = pg.normalizeText(savetext, stripspaces=rstrip)
-    except ConvertError:
-        # we don't want to throw an exception if user cancelled anyway
-        if not cancelled:
-            raise
-
-    if cancelled:
-        pg.sendCancel(savetext or "", rev)
-        return
-
-    comment = wikiutil.clean_comment(comment)
-
-    # Add category
-
-    # TODO: this code does not work with extended links, and is doing
-    # things behind your back, and in general not needed. Either we have
-    # a full interface for categories (add, delete) or just add them by
-    # markup.
-    
-    if category and category != _('<No addition>', formatted=False): # opera 8.5 needs this
-        # strip trailing whitespace
-        savetext = savetext.rstrip()
-
-        # Add category separator if last non-empty line contains
-        # non-categories.
-        lines = filter(None, savetext.splitlines())
-        if lines:
-            
-            #TODO: this code is broken, will not work for extended links
-            #categories, e.g ["category hebrew"]
-            categories = lines[-1].split()
-            
-            if categories:
-                confirmed = wikiutil.filterCategoryPages(request, categories)
-                if len(confirmed) < len(categories):
-                    # This was not a categories line, add separator
-                    savetext += u'\n----\n'
-
-        # Add new category
-        if savetext and savetext[-1] != u'\n':
-            savetext += ' '
-        savetext += category + u'\n' # Should end with newline!
-
-    # Preview, spellcheck or spellcheck add new words
-    if (request.form.has_key('button_preview') or
-        request.form.has_key('button_spellcheck') or
-        request.form.has_key('button_newwords')):
-        pg.sendEditor(preview=savetext, comment=comment)
-    
-    # Preview with mode switch
-    elif request.form.has_key('button_switch'):
-        pg.sendEditor(preview=savetext, comment=comment, staytop=1)
-    
-    # Save new text
-    else:
-        try:
-            savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
-        except pg.EditConflict, msg:
-            # Handle conflict and send editor
-
-            # TODO: conflict messages are duplicated from PageEditor,
-            # refactor to one place only.
-            conflict_msg = _('Someone else changed this page while you were editing!')
-            pg.set_raw_body(savetext, modified=1)
-            if pg.mergeEditConflict(rev):
-                conflict_msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!
-Have a look at the diff of %(difflink)s to see what has been changed.""") % {
-                    'difflink': pg.link_to(pg.request,
-                                           querystr='action=diff&rev=%d' % rev)
-                    }
-                # We don't send preview when we do merge conflict
-                pg.sendEditor(msg=conflict_msg, comment=comment)
-                return
-            else:
-                savemsg = conflict_msg
-        
-        except pg.SaveError, msg:
-            # msg contain a unicode string
-            savemsg = unicode(msg)
-
-        # Send new page after save or after unsuccessful conflict merge.
-        request.reset()
-        backto = request.form.get('backto', [None])[0]
-        if backto:
-            pg = Page(request, backto)
-
-        pg.send_page(request, msg=savemsg)
-        
-
 def do_quicklink(pagename, request):
     """ Add the current wiki page to the user quicklinks 
     
@@ -691,7 +722,6 @@ def do_quicklink(pagename, request):
             msg = _('A quicklink to this page has been added for you.')
 
     Page(request, pagename).send_page(request, msg=msg)
-
 
 def do_subscribe(pagename, request):
     """ Subscribe or unsubscribe the user to pagename
@@ -733,13 +763,14 @@ def do_subscribe(pagename, request):
 
     Page(request, pagename).send_page(request, msg=msg)
 
-
 def do_userform(pagename, request):
+    """ save data posted from UserPreferences """
     from MoinMoin import userform
     savemsg = userform.savedata(request)
     Page(request, pagename).send_page(request, msg=savemsg)
 
 def do_bookmark(pagename, request):
+    """ set bookmarks (in time) for RecentChanges or delete them """
     if request.form.has_key('time'):
         if request.form['time'][0] == 'del':
             tm = None
@@ -758,78 +789,12 @@ def do_bookmark(pagename, request):
     Page(request, pagename).send_page(request)
   
 
-# Commented out by Florian Festi, cf. bug report about it
-# def do_macro(pagename, request):
-#     """ Execute a helper action within a macro.
-#     """
-
-#     from MoinMoin import wikimacro
-#     from MoinMoin.formatter.text_html import Formatter
-#     from MoinMoin.parser.wiki import Parser
-#     from MoinMoin.Page import Page
-#     macro_name = request.form["macro"][0]
-#     args = request.form.get('args', [''])[0]
-    
-#     parser = Parser('', request)
-#     parser.formatter = Formatter(request)
-#     parser.formatter.page = Page(request, 'dummy')
-#     request.http_headers()
-#     request.write(wikimacro.Macro(parser).execute(macro_name, args))
-#     request.finish()
-    
 #############################################################################
 ### Special Actions
 #############################################################################
 
-def do_raw(pagename, request):
-    if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
-        return
-
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        page = Page(request, pagename, rev=rev)
-    else:
-        page = Page(request, pagename)
-
-    page.send_raw()
-
-
-def do_format(pagename, request):
-    # get the MIME type
-    if request.form.has_key('mimetype'):
-        mimetype = request.form['mimetype'][0]
-    else:
-        mimetype = u"text/plain"
-
-    # try to load the formatter
-    formatterName = mimetype.translate({ord(u'/'): u'_', ord(u'.'): u'_'})
-    try:
-        Formatter = wikiutil.importPlugin(request.cfg, "formatter",
-                                          formatterName, "Formatter")
-    except wikiutil.PluginMissingError:
-        # default to plain text formatter
-        mimetype = "text/plain"
-        from MoinMoin.formatter.text_plain import Formatter
-
-    if "xml" in mimetype:
-        mimetype = "text/xml"
-    request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
-
-    Page(request, pagename, formatter=Formatter(request)).send_page(request)
-
-
 def do_chart(pagename, request):
-    """ Show page charts 
-    
-    """
+    """ Show page charts """
     _ = request.getText
     if not request.user.may.read(pagename):
         msg = _("You are not allowed to view this page.")
@@ -852,15 +817,15 @@ def do_chart(pagename, request):
     
     func(pagename, request)
 
-
 def do_dumpform(pagename, request):
+    """ dump the form data we received in this request for debugging """
     data = util.dumpFormData(request.form)
 
     request.http_headers()
     request.write("<html><body>%s</body></html>" % data)
 
-
 def do_test(pagename, request):
+    """ run the unit tests """
     from MoinMoin.wikitest import runTest
     request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
     request.write('MoinMoin Diagnosis\n======================\n\n')
@@ -872,14 +837,15 @@ def do_test(pagename, request):
 #############################################################################
 
 def getPlugins(request):
+    """ return the path to the action plugin directory and a list of plugins there """
     dir = os.path.join(request.cfg.plugin_dir, 'action')
     plugins = []
     if os.path.isdir(dir):
         plugins = pysupport.getPackageModules(os.path.join(dir, 'dummy'))
     return dir, plugins
 
-
 def getHandler(request, action, identifier="execute"):
+    """ return a handler function for a given action or None """
     # check for excluded actions
     if action in request.cfg.actions_excluded:
         return None
@@ -888,8 +854,7 @@ def getHandler(request, action, identifier="execute"):
     request.formatter = Formatter(request)
 
     try:
-        handler = wikiutil.importPlugin(request.cfg, "action", action,
-                                        identifier)
+        handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:
         handler = globals().get('do_' + action)
         
