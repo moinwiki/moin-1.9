@@ -20,7 +20,7 @@ class Page:
     # Header regular expression, used to get header boundaries
     header_re = r'(^#+.*(?:\n\s*)+)+'
 
-    def __init__(self, request, page_name, **keywords):
+    def __init__(self, request, page_name, **kw):
         """
         Create page object.
 
@@ -30,16 +30,16 @@ class Page:
 
         @param page_name: WikiName of the page
         @keyword rev: number of older revision
-        @keyword formatter: formatter instance
+        @keyword formatter: formatter instance or mimetype str,
+                            None or no kw arg will use default formatter
         @keyword include_self: if 1, include current user (default: 0)
         """
-        self.rev = keywords.get('rev', 0) # revision of this page
-        self.is_rootpage = keywords.get('is_rootpage', 0) # is this __init__ of rootpage?
-        self.include_self = keywords.get('include_self', 0)
         self.request = request
         self.cfg = request.cfg
-
         self.page_name = page_name
+        self.rev = kw.get('rev', 0) # revision of this page
+        self.is_rootpage = kw.get('is_rootpage', 0) # is this __init__ of rootpage?
+        self.include_self = kw.get('include_self', 0)
 
         # XXX uncomment to see how many pages we create....
         #import sys, traceback
@@ -47,12 +47,21 @@ class Page:
         #traceback.print_stack(limit=4, file=sys.stderr)
 
 
-        if keywords.has_key('formatter'):
-            self.formatter = keywords.get('formatter')
+        formatter = kw.get('formatter', None)
+        if isinstance(formatter, (str, unicode)): # mimetype given
+            mimetype = str(formatter)
+            self.output_mimetype = mimetype
+            self.default_formatter = mimetype == "text/html"
+        elif formatter is not None: # formatter instance given
+            self.formatter = formatter
             self.default_formatter = 0
+            self.output_mimetype = "text/todo" # TODO where do we get this value from?
         else:
             self.default_formatter = 1
+            self.output_mimetype = "text/html"
 
+        self.output_charset = config.charset # correct for wiki pages
+        
         self._raw_body = None
         self._raw_body_modified = 0
         self.hilite_re = None
@@ -992,12 +1001,25 @@ class Page:
         # load the text
         body = self.get_raw_body()
 
-        # if necessary, load the default formatter
+        # if necessary, load the formatter
         if self.default_formatter:
             from MoinMoin.formatter.text_html import Formatter
             self.formatter = Formatter(request, store_pagelinks=1)
+        elif not self.formatter:
+            formatterName = self.output_mimetype.translate({ord('/'): '_', ord('.'): '_'}) # XXX use existing fn for that
+            try:
+                Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
+                self.formatter = Formatter(request)
+            except wikiutil.PluginMissingError:
+                from MoinMoin.formatter.text_html import Formatter
+                self.formatter = Formatter(request, store_pagelinks=1)
+                self.output_mimetype = "text/html"
+            
+        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
+
         self.formatter.setPage(self)
-        if self.hilite_re: self.formatter.set_highlight_re(self.hilite_re)
+        if self.hilite_re:
+            self.formatter.set_highlight_re(self.hilite_re)
         request.formatter = self.formatter
 
         # default is wiki markup
@@ -1173,7 +1195,6 @@ class Page:
                         _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi_redirect)},
                         msg)
 
-
                 # Page trail
                 trail = None
                 if not print_mode:
@@ -1259,7 +1280,8 @@ class Page:
                 cache.update('\n'.join(links) + '\n', True)
 
         request.clock.stop('send_page')
-        request.theme.send_closing_html()
+        if not content_only and self.default_formatter:
+            request.theme.send_closing_html()
 
     def getFormatterName(self):
         """ Return a formatter name as used in the caching system
