@@ -205,7 +205,8 @@ class Macro:
         html = [
             u'<form method="get" action="">',
             u'<div>',
-            u'<input type="text" name="goto" size="30">',
+            u'<input type="hidden" name="action" value="goto">',
+            u'<input type="text" name="target" size="30">',
             u'<input type="submit" value="%s">' % _("Go To Page"),
             u'</div>',
             u'</form>',
