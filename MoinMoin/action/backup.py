@@ -75,7 +75,7 @@ def sendBackupForm(request, pagename):
     request.http_headers()
     request.setContentLanguage(request.lang)
     title = _('Wiki Backup / Restore')
-    wikiutil.send_title(request, title, form=request.form, pagename=pagename)
+    request.theme.send_title(title, form=request.form, pagename=pagename)
     request.write(request.formatter.startContent("content"))
     
     request.write(_("""Some hints:
@@ -112,7 +112,7 @@ Please make sure your wiki configuration backup_* values are correct and complet
 })
     
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 def sendMsg(request, pagename, msg):
     from MoinMoin import Page

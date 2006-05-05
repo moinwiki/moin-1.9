@@ -113,7 +113,7 @@ def do_diff(pagename, request):
     request.setContentLanguage(request.lang)
 
     request.http_headers()
-    wikiutil.send_title(request, _('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
+    request.theme.send_title(_('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
   
     if (rev1>0 and rev2>0 and rev1>rev2) or (rev1==0 and rev2>0):
         rev1,rev2 = rev2,rev1
@@ -197,7 +197,7 @@ def do_diff(pagename, request):
             request.write('</pre>')
 
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 
 def do_info(pagename, request):
@@ -402,7 +402,7 @@ def do_info(pagename, request):
     lang = page.language or request.cfg.language_default
     request.setContentLanguage(lang)
     
-    wikiutil.send_title(request, _('Info for "%s"') % (title,), pagename=pagename)
+    request.theme.send_title(_('Info for "%s"') % (title,), pagename=pagename)
 
     historylink =  wikiutil.link_tag(request, '%s?action=info' % qpagename,
         _('Show "%(title)s"') % {'title': _('Revision History')})
@@ -426,7 +426,7 @@ def do_info(pagename, request):
         history(page, pagename, request)
         
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 
 def do_recall(pagename, request):

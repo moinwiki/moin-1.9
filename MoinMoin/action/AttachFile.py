@@ -502,11 +502,11 @@ def upload_form(pagename, request, msg=''):
     request.http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
-    wikiutil.send_title(request, _('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
+    request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
     request.write('<div id="content">\n') # start content div
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 
 def do_upload(pagename, request):
@@ -817,7 +817,7 @@ def view_file(pagename, request):
     request.setContentLanguage(request.lang)
     title = _('attachment:%(filename)s of %(pagename)s', formatted=True) % {
         'filename': filename, 'pagename': pagename}
-    wikiutil.send_title(request, title, pagename=pagename)
+    request.theme.send_title(title, pagename=pagename)
 
     # send body
     # TODO: use formatter startContent?
@@ -827,7 +827,7 @@ def view_file(pagename, request):
     request.write('</div>\n') # end content div
 
     # send footer
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 
 #############################################################################

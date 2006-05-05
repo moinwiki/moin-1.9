@@ -18,7 +18,7 @@ from MoinMoin import user
 def show_form(pagename, request):
     _ = request.getText
     request.http_headers()
-    wikiutil.send_title(request, _("Subscribe users to the page %s") % pagename, pagename=pagename)
+    request.theme.send_title(_("Subscribe users to the page %s") % pagename, pagename=pagename)
 
     request.write("""
 <form action="" method="POST" enctype="multipart/form-data">
@@ -27,13 +27,13 @@ Enter user names (comma separated): <input type="text" name="users" size="50">
 <input type="submit" value="Subscribe">
 </form>
 """)
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 def show_result(pagename, request):
     _ = request.getText
     request.http_headers()
 
-    wikiutil.send_title(request, _("Subscribed for %s:") % pagename, pagename=pagename)
+    request.theme.send_title(_("Subscribed for %s:") % pagename, pagename=pagename)
 
     from MoinMoin.formatter.text_html import Formatter
     formatter = Formatter(request)
@@ -41,7 +41,7 @@ def show_result(pagename, request):
     result = subscribe_users(request, request.form['users'][0].split(","), pagename, formatter)
     request.write(result)
 
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 
 def subscribe_users(request, usernamelist, pagename, formatter):
@@ -86,7 +86,7 @@ def execute(pagename, request):
     _ = request.getText
     if not request.user.may.admin(pagename):
         request.http_headers()
-        wikiutil.send_title(request, _("You are not allowed to perform this action."), pagename=pagename)
+        request.theme.send_title(_("You are not allowed to perform this action."), pagename=pagename)
     elif not request.form.has_key('users'):
         show_form(pagename, request)
     else:

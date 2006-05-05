@@ -89,8 +89,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         title = _('Full Text Search: "%s"')
         results.sortByWeight() 
 
-    wikiutil.send_title(request, title % needle, form=request.form,
-                        pagename=pagename)
+    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
     
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
@@ -109,5 +108,5 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
     # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 

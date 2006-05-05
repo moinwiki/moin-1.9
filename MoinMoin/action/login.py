@@ -61,7 +61,7 @@ space between words. Group page name is not allowed.""") % name
         
         else: # show login form
             request.http_headers()
-            wikiutil.send_title(request, _("Login"), pagename=self.pagename)
+            request.theme.send_title(_("Login"), pagename=self.pagename)
             # Start content (important for RTL support)
             request.write(request.formatter.startContent("content"))
             
@@ -69,5 +69,5 @@ space between words. Group page name is not allowed.""") % name
             
             # End content and send footer
             request.write(request.formatter.endContent())
-            wikiutil.send_footer(request, self.pagename)
+            request.theme.send_footer(self.pagename)
 
