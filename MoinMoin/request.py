@@ -905,8 +905,8 @@ class RequestBase(object):
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
         
-        Create the args from a standard cgi.FieldStorage or from given
-        form. Each key contain a list of values.
+        Create the args from a standard cgi.FieldStorage or from given form.
+        Each key contain a list of values.
 
         @param form: a cgi.FieldStorage
         @rtype: dict
@@ -1070,8 +1070,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 return self.finish()
             
             # 3. Or save drawing
-            elif (self.form.has_key('filepath') and
-                self.form.has_key('noredirect')):
+            elif self.form.has_key('filepath') and self.form.has_key('noredirect'):
                 # looks like user wants to save a drawing
                 from MoinMoin.action.AttachFile import execute
                 # TODO: what if pagename is None?
@@ -1092,13 +1091,12 @@ space between words. Group page name is not allowed.""") % self.user.name
                     self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action))
 
                 # Disallow non available actions
-                elif (action[0].isupper() and
-                      not action in self.getAvailableActions(self.page)):
+                elif action[0].isupper() and not action in self.getAvailableActions(self.page):
                     # Send page with error
                     msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action)
                     if not self.user.valid:
                         # Suggest non valid user to login
-                        msg += _(" %s and try again.", formatted=0) % _('Login') # XXX merge into 1 string after 1.5.3 release
+                        msg += " " + _("Login and try again.", formatted=0)
                     self.page.send_page(self, msg=msg)
 
                 # Try action
@@ -1124,10 +1122,9 @@ space between words. Group page name is not allowed.""") % self.user.name
                 self.page = Page(self, pagename)
                 self.page.send_page(self, count_hit=1)
 
-            # generate page footer (actions that do not want this footer
-            # use raise util.MoinMoinNoFooter to break out of the
-            # default execution path, see the "except MoinMoinNoFooter"
-            # below)
+            # generate page footer (actions that do not want this footer use
+            # raise util.MoinMoinNoFooter to break out of the default execution
+            # path, see the "except MoinMoinNoFooter" below)
 
             self.clock.stop('run')
             self.clock.stop('total')
@@ -1639,16 +1636,6 @@ class RequestStandAlone(RequestBase):
             self.headers = sa.headers
             self.is_ssl = 0
             
-            # TODO: remove in 1.5
-            #accept = []
-            #for line in sa.headers.getallmatchingheaders('accept'):
-            #    if line[:1] in string.whitespace:
-            #        accept.append(line.strip())
-            #    else:
-            #        accept = accept + line[7:].split(',')
-            #
-            #env['HTTP_ACCEPT'] = ','.join(accept)
-
             # Copy headers
             self.http_accept_language = (sa.headers.getheader('accept-language') 
                                          or self.http_accept_language)
@@ -1668,17 +1655,6 @@ class RequestStandAlone(RequestBase):
             self.setHttpReferer(sa.headers.getheader('referer'))
             self.setHost(sa.headers.getheader('host'))
             self.setURL(sa.headers)
-
-            # TODO: remove in 1.5
-            # from standalone script:
-            # XXX AUTH_TYPE
-            # XXX REMOTE_USER
-            # XXX REMOTE_IDENT
-            #env['PATH_TRANSLATED'] = uqrest #self.translate_path(uqrest)
-            #host = self.address_string()
-            #if host != self.client_address[0]:
-            #    env['REMOTE_HOST'] = host
-            # env['SERVER_PROTOCOL'] = self.protocol_version
 
             ##self.debugEnvironment(sa.headers)
             
