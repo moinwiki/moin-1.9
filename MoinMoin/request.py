@@ -3,7 +3,7 @@
     MoinMoin - Data associated with a single Request
 
     @copyright: 2001-2003 by Jürgen Hermann <jh@web.de>
-    @copyright: 2003-2004 by Thomas Waldmann
+    @copyright: 2003-2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -29,7 +29,7 @@ class Clock:
         self.timings[timer] = time.time() - self.timings[timer]
 
     def value(self, timer):
-        return "%.3f" % (self.timings[timer],)
+        return "%.3f" % (self.timings[timer], )
 
     def dump(self):
         outlist = []
@@ -137,7 +137,6 @@ class RequestBase(object):
             self.args = {}
             self.form = {}
 
-            # MOVED: this was in run() method, but moved here for auth module being able to use it
             if not self.query_string.startswith('action=xmlrpc'):
                 self.args = self.form = self.setup_args()
 
@@ -161,9 +160,8 @@ class RequestBase(object):
 
             self.i18n = i18n
             self.lang = i18n.requestLanguage(self) 
-            # Language for content. Page content should use the wiki
-            # default lang, but generated content like search results
-            # should use the user language.
+            # Language for content. Page content should use the wiki default lang,
+            # but generated content like search results should use the user language.
             self.content_lang = self.cfg.language_default
             self.getText = lambda text, i18n=self.i18n, request=self, lang=self.lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
 
@@ -210,7 +208,7 @@ class RequestBase(object):
             surge_indicator = surge_detected and "!" or ""
             timestamps.append((now, surge_indicator))
             if surge_detected:
-                if len(timestamps) < maxnum*2:
+                if len(timestamps) < maxnum * 2:
                     timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
         
             if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
@@ -223,7 +221,7 @@ class RequestBase(object):
                 surge_indicator = surge_detected and "!" or ""
                 timestamps.append((now, surge_indicator))
                 if surge_detected:
-                    if len(timestamps) < maxnum*2:
+                    if len(timestamps) < maxnum * 2:
                         timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
         
             data = []
@@ -263,8 +261,7 @@ class RequestBase(object):
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
 
-        Set self.accepted_charsets to an ordered list based on
-        http_accept_charset. 
+        Set self.accepted_charsets to an ordered list based on http_accept_charset. 
         
         Reference: http://www.w3.org/Protocols/rfc2616/rfc2616.txt
 
@@ -298,8 +295,8 @@ class RequestBase(object):
     def _setup_vars_from_std_env(self, env):
         """ Set common request variables from CGI environment
         
-        Parse a standard CGI environment as created by common web
-        servers. Reference: http://www.faqs.org/rfcs/rfc3875.html
+        Parse a standard CGI environment as created by common web servers.
+        Reference: http://www.faqs.org/rfcs/rfc3875.html
 
         @param env: dict like object containing cgi meta variables
         """
@@ -409,8 +406,7 @@ class RequestBase(object):
         
         This is the place to manipulate url parts as needed.
         
-        @param env: dict like object containing cgi meta variables or
-            http headers.
+        @param env: dict like object containing cgi meta variables or http headers.
         """
         # If we serve on localhost:8000 and use a proxy on
         # example.com/wiki, our urls will be example.com/wiki/pagename
@@ -428,15 +424,13 @@ class RequestBase(object):
         Get the proxy host using 'X-Forwarded-Host' header, added by
         Apache 2 and other proxy software.
         
-        TODO: Will not work for Apache 1 or others that don't add this
-        header.
+        TODO: Will not work for Apache 1 or others that don't add this header.
         
         TODO: If we want to add an option to disable this feature it
         should be in the server script, because the config is not
         loaded at this point, and must be loaded after url is set.
         
-        @param env: dict like object containing cgi meta variables or
-            http headers.
+        @param env: dict like object containing cgi meta variables or http headers.
         """
         proxy_host = (env.get(self.proxy_host) or
                       env.get(cgiMetaVariable(self.proxy_host)))
@@ -460,8 +454,7 @@ class RequestBase(object):
         TODO: does not work for Apache 1 and others that do not allow
         setting custom headers per request.
         
-        @param env: dict like object containing cgi meta variables or
-            http headers.
+        @param env: dict like object containing cgi meta variables or http headers.
         """
         location = (env.get(self.moin_location) or 
                     env.get(cgiMetaVariable(self.moin_location)))
@@ -490,8 +483,7 @@ class RequestBase(object):
     def splitURI(self, uri):
         """ Return path and query splited from uri
         
-        Just like CGI environment, the path is unquoted, the query is
-        not.
+        Just like CGI environment, the path is unquoted, the query is not.
         """
         if '?' in uri:
             path, query = uri.split('?', 1)
@@ -525,10 +517,8 @@ class RequestBase(object):
         logout = kw.get('logout')
         user_obj = kw.get('user_obj')
         for auth in self.cfg.auth:
-            user_obj, continue_flag = auth(self,
-                                           name=name, password=password,
-                                           login=login, logout=logout,
-                                           user_obj=user_obj)
+            user_obj, continue_flag = auth(self, name=name, password=password,
+                                           login=login, logout=logout, user_obj=user_obj)
             if not continue_flag:
                 break
         return user_obj
@@ -551,8 +541,7 @@ class RequestBase(object):
         self._page_ids = {}
         # keeps track of pagename/heading combinations
         # parsers should use this dict and not a local one, so that
-        # macros like TableOfContents in combination with Include
-        # can work
+        # macros like TableOfContents in combination with Include can work
         self._page_headings = {}
 
         if hasattr(self, "_fmt_hd_counters"):
@@ -574,13 +563,11 @@ class RequestBase(object):
             theme_name = self.cfg.theme_default
         
         try:
-            Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name,
-                                          'Theme')
+            Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name, 'Theme')
         except wikiutil.PluginMissingError:
             fallback = 1
             try:
-                Theme = wikiutil.importPlugin(self.cfg, 'theme',
-                                              self.cfg.theme_default, 'Theme')
+                Theme = wikiutil.importPlugin(self.cfg, 'theme', self.cfg.theme_default, 'Theme')
             except wikiutil.PluginMissingError:
                 fallback = 2
                 from MoinMoin.theme.modern import Theme
@@ -647,8 +634,7 @@ class RequestBase(object):
         except AttributeError:
             from MoinMoin import wikiaction
             # Add built in  actions from wikiaction
-            actions = [name[3:] for name in wikiaction.__dict__
-                       if name.startswith('do_')]
+            actions = [name[3:] for name in wikiaction.__dict__ if name.startswith('do_')]
 
             # Add plugins           
             dummy, plugins = wikiaction.getPlugins(self)
@@ -668,8 +654,8 @@ class RequestBase(object):
     def getAvailableActions(self, page):
         """ Get list of avaiable actions for this request
 
-        The dict does not contain actions that starts with lower
-        case. Themes use this dict to display the actions to the user.
+        The dict does not contain actions that starts with lower case.
+        Themes use this dict to display the actions to the user.
 
         @param page: current page, Page object
         @rtype: dict
@@ -678,8 +664,7 @@ class RequestBase(object):
         if self._available_actions is None:
             # Add actions for existing pages only, including deleted pages.
             # Fix *OnNonExistingPage bugs.
-            if not (page.exists(includeDeleted=1) and
-                    self.user.may.read(page.page_name)):
+            if not (page.exists(includeDeleted=1) and self.user.may.read(page.page_name)):
                 return []
 
             # Filter non ui actions (starts with lower case letter)
@@ -700,7 +685,7 @@ class RequestBase(object):
                 not self.user.may.delete(page.page_name)):
                 # Prevent modification of underlay only pages, or pages
                 # the user can't write and can't delete
-                excluded = [u'RenamePage', u'DeletePage',] # AttachFile must NOT be here!
+                excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
             for key in excluded:
                 if key in actions:
                     del actions[key]                
@@ -818,8 +803,7 @@ class RequestBase(object):
         whitespace that might confuse the users or abuse the wiki, or
         just does not make sense.
 
-        Restrict even more group pages, so they can be used inside acl
-        lines.
+        Restrict even more group pages, so they can be used inside acl lines.
         
         @param name: page name, unicode
         @rtype: unicode
@@ -905,13 +889,11 @@ class RequestBase(object):
     def setup_args(self, form=None):
         """ Return args dict 
         
-        In POST request, invoke _setup_args_from_cgi_form to handle
-        possible file uploads. For other request simply parse the query
-        string.
+        In POST request, invoke _setup_args_from_cgi_form to handle possible
+        file uploads. For other request simply parse the query string.
         
-        Warning: calling with a form might fail, depending on the type
-        of the request! Only the request know which kind of form it can
-        handle.
+        Warning: calling with a form might fail, depending on the type of the
+        request! Only the request know which kind of form it can handle.
         
         TODO: The form argument should be removed in 1.5.
         """
@@ -963,8 +945,7 @@ class RequestBase(object):
             elif key.endswith('__filename__'):
                 result[key] = decode(args[key], self.decode_charsets)
             else:
-                result[key] = [decode(value, self.decode_charsets)
-                               for value in args[key]]
+                result[key] = [decode(value, self.decode_charsets) for value in args[key]]
         return result
 
     def getBaseURL(self):
@@ -976,8 +957,8 @@ class RequestBase(object):
 
         Already qualified urls are returned unchanged.
 
-        @param uri: server rooted uri e.g /scriptname/pagename. It
-            must start with a slash. Must be ascii and url encoded.
+        @param uri: server rooted uri e.g /scriptname/pagename.
+                    It must start with a slash. Must be ascii and url encoded.
         """
         import urlparse
         scheme = urlparse.urlparse(uri)[0]
@@ -1028,18 +1009,13 @@ class RequestBase(object):
     def run(self):
         # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden:
-            #Don't sleep()! Seems to bind too much resources, so twisted will
-            #run out of threads, files, whatever (with low CPU load) and stop
-            #serving requests.
-            #if self.forbidden:
-            #    time.sleep(10) # let the sucker wait!
+            # Don't sleep() here, it binds too much of our resources!
             return self.finish()
 
         self.open_logs()
         _ = self.getText
         self.clock.start('run')
 
-        # Imports
         from MoinMoin.Page import Page
 
         if self.query_string == 'action=xmlrpc':
@@ -1056,13 +1032,8 @@ class RequestBase(object):
         try:
             self.initTheme()
             
-            # MOVED: moved to __init__() for auth module being able to use it
-            #self.args = self.setup_args()
-            #self.form = self.args    
-            
-            action = self.form.get('action',[None])[0]
+            action = self.form.get('action', [None])[0]
 
-            # Get pagename
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
             if path.startswith('/'):
@@ -1216,8 +1187,7 @@ space between words. Group page name is not allowed.""") % self.user.name
 
     def makeUniqueID(self, base):
         """
-        Generates a unique ID using a given base name. Appends a
-        running count to the base.
+        Generates a unique ID using a given base name. Appends a running count to the base.
 
         @param base: the base of the id
         @type base: unicode
@@ -1302,10 +1272,8 @@ space between words. Group page name is not allowed.""") % self.user.name
     def finish(self):
         """ General cleanup on end of request
         
-        Delete circular references - all object that we create using
-        self.name = class(self)
-        This helps Python to collect these objects and keep our
-        memory footprint lower
+        Delete circular references - all object that we create using self.name = class(self).
+        This helps Python to collect these objects and keep our memory footprint lower.
         """
         try:
             del self.user
@@ -1314,8 +1282,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         except:
             pass
 
-    # ------------------------------------------------------------------
-    # Debug
+    # Debug ------------------------------------------------------------
 
     def debugEnvironment(self, env):
         """ Environment debugging aid """
@@ -1339,8 +1306,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         names.sort()
         attributes = []
         for name in names:
-            attributes.append('  %s = %r\n' % (name, 
-                                               getattr(self, name, None)))
+            attributes.append('  %s = %r\n' % (name, getattr(self, name, None)))
         attributes = ''.join(attributes)
         
         environment = []
@@ -1350,9 +1316,8 @@ space between words. Group page name is not allowed.""") % self.user.name
             environment.append('  %s = %r\n' % (key, env[key]))
         environment = ''.join(environment)
         
-        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes,
-                                                             environment)        
-        f = open('/tmp/env.log','a')
+        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)        
+        f = open('/tmp/env.log', 'a')
         try:
             f.write(data)
         finally:
@@ -1385,16 +1350,14 @@ class RequestCGI(RequestBase):
             self.opened_logs = 1
 
     def read(self, n=None):
-        """ Read from input stream.
-        """
+        """ Read from input stream. """
         if n is None:
             return sys.stdin.read()
         else:
             return sys.stdin.read(n)
 
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         sys.stdout.write(self.encode(data))
 
     def flush(self):
@@ -1504,8 +1467,7 @@ class RequestTwisted(RequestBase):
         return self.decodeArgs(self.twistd.args)
         
     def read(self, n=None):
-        """ Read from input stream.
-        """
+        """ Read from input stream. """
         # XXX why is that wrong?:
         #rd = self.reactor.callFromThread(self.twistd.read)
         
@@ -1520,8 +1482,7 @@ class RequestTwisted(RequestBase):
         return rd
     
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         #print "request.RequestTwisted.write: data=\n" + wd
         self.reactor.callFromThread(self.twistd.write, self.encode(data))
 
@@ -1544,10 +1505,10 @@ class RequestTwisted(RequestBase):
     def __setHttpHeader(self, header):
         if type(header) is unicode:
             header = header.encode('ascii')
-        key, value = header.split(':',1)
+        key, value = header.split(':', 1)
         value = value.lstrip()
         if key.lower() == 'set-cookie':
-            key, value = value.split('=',1)
+            key, value = value.split('=', 1)
             self.twistd.addCookie(key, value)
         else:
             self.twistd.setHeader(key, value)
@@ -1608,16 +1569,14 @@ class RequestCLI(RequestBase):
         self.initTheme() # usually request.run() does this, but we don't use it
   
     def read(self, n=None):
-        """ Read from input stream.
-        """
+        """ Read from input stream. """
         if n is None:
             return sys.stdin.read()
         else:
             return sys.stdin.read(n)
 
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         sys.stdout.write(self.encode(data))
 
     def flush(self):
@@ -1642,7 +1601,7 @@ class RequestCLI(RequestBase):
         """ Return a full URL starting with schema and host
         
         TODO: does this create correct pages when you render wiki pages
-        within a cli request?!
+              within a cli request?!
         """
         return uri
 
@@ -1665,9 +1624,7 @@ class RequestCLI(RequestBase):
 # StandAlone Server ----------------------------------------------------
 
 class RequestStandAlone(RequestBase):
-    """
-    specialized on StandAlone Server (MoinMoin.server.standalone) requests
-    """
+    """ specialized on StandAlone Server (MoinMoin.server.standalone) requests """
     script_name = ''
     
     def __init__(self, sa, properties={}):
@@ -1732,16 +1689,13 @@ class RequestStandAlone(RequestBase):
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Override to create standlone form """
-        form = cgi.FieldStorage(self.rfile,
-                                headers=self.headers,
-                                environ={'REQUEST_METHOD': 'POST'})
+        form = cgi.FieldStorage(self.rfile, headers=self.headers, environ={'REQUEST_METHOD': 'POST'})
         return RequestBase._setup_args_from_cgi_form(self, form)
         
     def read(self, n=None):
         """ Read from input stream
         
-        Since self.rfile.read() will block, content-length will be used
-        instead.
+        Since self.rfile.read() will block, content-length will be used instead.
         
         TODO: test with n > content length, or when calling several times
         with smaller n but total over content length.
@@ -1757,8 +1711,7 @@ class RequestStandAlone(RequestBase):
         return self.rfile.read(n)
 
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         self.wfile.write(self.encode(data))
 
     def flush(self):
@@ -1782,7 +1735,7 @@ class RequestStandAlone(RequestBase):
         for header in more_headers + user_headers:
             if header.lower().startswith("status:"):
                 try:
-                    our_status = int(header.split(':',1)[1].strip().split(" ", 1)[0]) 
+                    our_status = int(header.split(':', 1)[1].strip().split(" ", 1)[0]) 
                 except:
                     pass
                 # there should be only one!
@@ -1832,7 +1785,7 @@ class RequestModPy(RequestBase):
             self.mpyreq = req
             # some mod_python 2.7.X has no get method for table objects,
             # so we make a real dict out of it first.
-            if not hasattr(req.subprocess_env,'get'):
+            if not hasattr(req.subprocess_env, 'get'):
                 env=dict(req.subprocess_env)
             else:
                 env=req.subprocess_env
@@ -1918,26 +1871,22 @@ class RequestModPy(RequestBase):
         return RequestBase.run(self)
 
     def read(self, n=None):
-        """ Read from input stream.
-        """
+        """ Read from input stream. """
         if n is None:
             return self.mpyreq.read()
         else:
             return self.mpyreq.read(n)
 
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         self.mpyreq.write(self.encode(data))
 
     def flush(self):
-        """ We can't flush it, so do nothing.
-        """
+        """ We can't flush it, so do nothing. """
         pass
         
     def finish(self):
-        """ Just return apache.OK. Status is set in req.status.
-        """
+        """ Just return apache.OK. Status is set in req.status. """
         RequestBase.finish(self)
         # is it possible that we need to return something else here?
         from mod_python import apache
@@ -1954,7 +1903,7 @@ class RequestModPy(RequestBase):
         """
         if type(header) is unicode:
             header = header.encode('ascii')
-        key, value = header.split(':',1)
+        key, value = header.split(':', 1)
         value = value.lstrip()
         if key.lower() == 'content-type':
             # save content-type for http_headers
@@ -1965,7 +1914,7 @@ class RequestModPy(RequestBase):
         elif key.lower() == 'status':
             # save status for finish
             try:
-                self.mpyreq.status = int(value.split(' ',1)[0])
+                self.mpyreq.status = int(value.split(' ', 1)[0])
             except:
                 pass
             else:
@@ -2021,35 +1970,29 @@ class RequestFastCGI(RequestBase):
         return RequestBase._setup_args_from_cgi_form(self, form)
 
     def read(self, n=None):
-        """ Read from input stream.
-        """
+        """ Read from input stream. """
         if n is None:
             return self.fcgreq.stdin.read()
         else:
             return self.fcgreq.stdin.read(n)
 
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         self.fcgreq.out.write(self.encode(data))
 
     def flush(self):
-        """ Flush output stream.
-        """
+        """ Flush output stream. """
         self.fcgreq.flush_out()
 
     def finish(self):
-        """ Call finish method of FastCGI request to finish handling
-            of this request.
-        """
+        """ Call finish method of FastCGI request to finish handling of this request. """
         RequestBase.finish(self)
         self.fcgreq.finish()
 
     # Headers ----------------------------------------------------------
 
     def http_headers(self, more_headers=[]):
-        """ Send out HTTP headers. Possibly set a default content-type.
-        """
+        """ Send out HTTP headers. Possibly set a default content-type. """
         if getattr(self, 'sent_headers', None):
             return
         self.sent_headers = 1
