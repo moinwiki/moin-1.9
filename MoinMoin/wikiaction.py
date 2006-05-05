@@ -34,22 +34,12 @@ def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page(request)
-        return
-
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        page = Page(request, pagename, rev=rev)
     else:
-        page = Page(request, pagename)
-
-    page.send_raw()
+        try:
+            rev = int(request.form.get('rev', [0])[0])
+        except StandardError:
+            rev = 0
+        Page(request, pagename, rev=rev).send_raw()
 
 def do_show(pagename, request, count_hit=1, cacheable=1):
     """ show a page, either current revision or the revision given by rev form value.
@@ -58,23 +48,15 @@ def do_show(pagename, request, count_hit=1, cacheable=1):
     # We must check if the current page has different ACLs.
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page(request)
-        return
-
-    mimetype = request.form.get('mimetype', [u"text/html"])[0]
-        
-    if request.form.has_key('rev'):
-        try:
-            rev = request.form['rev'][0]
-            try:
-                rev = int(rev)
-            except StandardError:
-                rev = 0
-        except KeyError:
-            rev = 0
-        Page(request, pagename, rev=rev, formatter=mimetype).send_page(request, count_hit=count_hit)
     else:
-        request.cacheable = cacheable
-        Page(request, pagename, formatter=mimetype).send_page(request, count_hit=count_hit)
+        mimetype = request.form.get('mimetype', [u"text/html"])[0]
+        try:
+            rev = int(request.form.get('rev', [0])[0])
+        except StandardError:
+            rev = 0
+        if rev == 0:
+            request.cacheable = cacheable
+        Page(request, pagename, rev=rev, formatter=mimetype).send_page(request, count_hit=count_hit)
 
 def do_format(pagename, request):
     """ send a page using a specific formatter given by mimetype form key.
@@ -322,38 +304,22 @@ def do_diff(pagename, request):
         date = 0
 
     try:
-        rev1 = request.form['rev1'][0]
-        try:
-            rev1 = int(rev1)
-        except StandardError:
-            rev1 = 0
-    except KeyError:
-        rev1 = -1
-
+        rev1 = int(request.form.get('rev1', [-1])[0])
+    except StandardError:
+        rev1 = 0
     try:
-        rev2 = request.form['rev2'][0]
-        try:
-            rev2 = int(rev2)
-        except StandardError:
-            rev2 = 0
-    except KeyError:
-        rev2 = 0
+        rev2 = int(request.form.get('rev2', [0])[0])
+    except StandardError:
+        rev1 = 0
 
     if rev1 == -1 and rev2 == 0:
         try:
-            rev1 = request.form['rev'][0]
-            try:
-                rev1 = int(rev1)
-            except StandardError:
-                rev1 = -1
-        except KeyError:
+            rev1 = int(request.form.get('rev', [-1])[0])
+        except StandardError:
             rev1 = -1
  
     # spacing flag?
-    try:
-        ignorews = int(request.form['ignorews'][0])
-    except (KeyError, ValueError, TypeError):
-        ignorews = 0
+    ignorews = int(request.form.get('ignorews', [0])[0])
 
     _ = request.getText
     
@@ -382,25 +348,26 @@ def do_diff(pagename, request):
     request.http_headers()
     request.theme.send_title(_('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
   
-    if (rev1>0 and rev2>0 and rev1>rev2) or (rev1==0 and rev2>0):
-        rev1,rev2 = rev2,rev1
+    if rev1 > 0 and rev2 > 0 and rev1 > rev2 or rev1 == 0 and rev2 > 0:
+        rev1, rev2 = rev2, rev1
           
-    oldrev1,oldcount1 = None,0
-    oldrev2,oldcount2 = None,0
+    oldrev1, oldcount1 = None, 0
+    oldrev2, oldcount2 = None, 0
+    
     # get the filename of the version to compare to
     edit_count = 0
     for rev in revisions:
         edit_count += 1
         if rev <= rev1: 
-            oldrev1,oldcount1 = rev,edit_count
+            oldrev1, oldcount1 = rev, edit_count
         if rev2 and rev >= rev2: 
-            oldrev2,oldcount2 = rev,edit_count
-        if (oldrev1 and oldrev2) or (oldrev1 and not rev2):
+            oldrev2, oldcount2 = rev, edit_count
+        if oldrev1 and oldrev2 or oldrev1 and not rev2:
             break
     
     if rev1 == -1:
         oldpage = Page(request, pagename, rev=revisions[1])
-        oldcount1 = oldcount1 - 1
+        oldcount1 -= 1
     elif rev1 == 0:
         oldpage = currentpage
         # oldcount1 is still on init value 0
@@ -746,7 +713,7 @@ def do_subscribe(pagename, request):
             msg = _("Can't remove regular expression subscription!") + u' ' + \
                   _("Edit the subscription regular expressions in your "
                     "UserPreferences.")
-            
+
     else:
         # Try to subscribe
         if request.user.subscribe(pagename):
@@ -762,12 +729,13 @@ def do_userform(pagename, request):
 
 def do_bookmark(pagename, request):
     """ set bookmarks (in time) for RecentChanges or delete them """
-    if request.form.has_key('time'):
-        if request.form['time'][0] == 'del':
+    timestamp = request.form.get('time', [None])[0]
+    if timestamp is not None:
+        if timestamp == 'del':
             tm = None
         else:
             try:
-                tm = long(request.form["time"][0]) # must be long for py 2.2.x
+                tm = int(timestamp)
             except StandardError:
                 tm = wikiutil.timestamp2version(time.time())
     else:
