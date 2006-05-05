@@ -171,7 +171,7 @@ def execute(pagename, request):
     ok = request.form.get('ok', [0])[0]
 
     request.http_headers()
-    wikiutil.send_title(request, "Despam", pagename=pagename)    
+    request.theme.send_title("Despam", pagename=pagename)    
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
     
@@ -184,5 +184,5 @@ def execute(pagename, request):
 
     # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 

@@ -1181,7 +1181,7 @@ class Page:
                     request.user.addTrail(self.page_name)
                     trail = request.user.getTrail()
 
-                wikiutil.send_title(request, title,  page=self, link=link, msg=msg,
+                request.theme.send_title(title,  page=self, link=link, msg=msg,
                                     pagename=self.page_name, print_mode=print_mode,
                                     media=media, pi_refresh=pi_refresh,
                                     allow_doubleclick=1, trail=trail,
@@ -1248,7 +1248,7 @@ class Page:
         if not content_only:
             # send the page footer
             if self.default_formatter:
-                wikiutil.send_footer(request, self.page_name, print_mode=print_mode)
+                request.theme.send_footer(self.page_name, print_mode=print_mode)
 
             request.write(doc_trailer)
 

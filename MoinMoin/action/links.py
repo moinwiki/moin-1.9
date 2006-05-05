@@ -25,8 +25,7 @@ def execute(pagename, request):
     request.http_headers(["Content-Type: %s; charset=%s" % (mimetype,config.charset)])
 
     if mimetype == "text/html":
-        wikiutil.send_title(request,
-                            _('Full Link List for "%s"') % request.cfg.sitename)
+        request.theme.send_title(_('Full Link List for "%s"') % request.cfg.sitename)
         request.write('<pre>')
 
     # Get page dict readable by current user
@@ -52,7 +51,7 @@ def execute(pagename, request):
 
     if mimetype == "text/html":
         request.write('</pre>')
-        wikiutil.send_footer(request, pagename)
+        request.theme.send_footer(pagename)
     else:
         raise MoinMoinNoFooter
 

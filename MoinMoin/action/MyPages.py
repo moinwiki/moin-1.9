@@ -65,8 +65,7 @@ the group pages.
     
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
-
-    wikiutil.send_title(request, _('MyPages management'), pagename=pagename)
+    request.theme.send_title(_('MyPages management'), pagename=pagename)
         
     # Start content - IMPORTANT - without content div, there is no
     # direction support!
@@ -86,8 +85,7 @@ the group pages.
     else:
         request.formatter = reqformatter
 
-    # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
 
 

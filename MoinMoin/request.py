@@ -735,8 +735,7 @@ class RequestBase(object):
         sys.stderr.write(msg)
     
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         raise NotImplementedError
 
     def encode(self, data):
@@ -841,13 +840,11 @@ class RequestBase(object):
         return name
         
     def read(self, n):
-        """ Read n bytes from input stream.
-        """
+        """ Read n bytes from input stream. """
         raise NotImplementedError
 
     def flush(self):
-        """ Flush output stream.
-        """
+        """ Flush output stream. """
         raise NotImplementedError
 
     def check_spider(self):
@@ -1110,24 +1107,9 @@ space between words. Group page name is not allowed.""") % self.user.name
                     handler = getHandler(self, action)
                     handler(self.page.page_name, self)
 
-            # generate page footer (actions that do not want this footer use
-            # raise util.MoinMoinNoFooter to break out of the default execution
-            # path, see the "except MoinMoinNoFooter" below)
+            # XXX temporary, to be removed later
+            self.theme.send_closing_html()
 
-            self.clock.stop('run')
-            self.clock.stop('total')
-
-            # Close html code
-            if not self.no_closing_html_code:
-                if (self.cfg.show_timings and
-                    self.form.get('action', [None])[0] != 'print'):
-                    self.write('<ul id="timings">\n')
-                    for t in self.clock.dump():
-                        self.write('<li>%s</li>\n' % t)
-                    self.write('</ul>\n')
-                #self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
-                self.write('</body>\n</html>\n\n')
-            
         except MoinMoinNoFooter:
             pass
         except Exception, err:
