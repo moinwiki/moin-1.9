@@ -1077,8 +1077,18 @@ space between words. Group page name is not allowed.""") % self.user.name
                 execute(pagename, self)
                 raise MoinMoinNoFooter           
 
-            # 4. Or handle action
-            elif action:
+            # 4. Or redirect to another page
+            elif self.form.has_key('goto'):
+                self.http_redirect(Page(self, self.form['goto'][0]).url(self))
+                return self.finish()
+
+            # 5. Or handle action
+            else:
+                if action is None:
+                    action = 'show'
+                if not pagename and self.query_string:
+                    pagename = self.getPageNameFromQueryString()
+                # pagename could be empty after normalization e.g. '///' -> ''
                 # Use localized FrontPage if pagename is empty
                 if not pagename:
                     self.page = wikiutil.getFrontPage(self)
@@ -1104,23 +1114,6 @@ space between words. Group page name is not allowed.""") % self.user.name
                     from MoinMoin.wikiaction import getHandler
                     handler = getHandler(self, action)
                     handler(self.page.page_name, self)
-
-            # 5. Or redirect to another page
-            elif self.form.has_key('goto'):
-                self.http_redirect(Page(self, self.form['goto'][0]).url(self))
-                return self.finish()
-
-            # 6. Or (at last) visit pagename
-            else:
-                if not pagename and self.query_string:
-                    pagename = self.getPageNameFromQueryString()                    
-                # pagename could be empty after normalization e.g. '///' -> ''
-                if not pagename:
-                    pagename = wikiutil.getFrontPage(self).page_name
-
-                # Visit pagename
-                self.page = Page(self, pagename)
-                self.page.send_page(self, count_hit=1)
 
             # generate page footer (actions that do not want this footer use
             # raise util.MoinMoinNoFooter to break out of the default execution
