@@ -1077,12 +1077,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 execute(pagename, self)
                 raise MoinMoinNoFooter           
 
-            # 4. Or redirect to another page
-            elif self.form.has_key('goto'):
-                self.http_redirect(Page(self, self.form['goto'][0]).url(self))
-                return self.finish()
-
-            # 5. Or handle action
+            # 4. Or handle action
             else:
                 if action is None:
                     action = 'show'

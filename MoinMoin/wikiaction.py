@@ -29,6 +29,13 @@ from MoinMoin.logfile import editlog
 ### Misc Actions
 #############################################################################
 
+def do_goto(pagename, request):
+    """ redirect to another page """
+    target = request.form.get('target', [''])[0]
+    request.http_redirect(Page(request, target).url(request))
+    request.finish()
+    raise MoinMoinNoFooter
+
 def do_diff(pagename, request):
     """ Handle "action=diff"
         checking for either a "rev=formerrevision" parameter
