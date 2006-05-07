@@ -44,8 +44,7 @@ def execute(pagename, request):
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
 
-    wikiutil.send_title(request, _('Pages like "%s"') % (pagename),
-                        pagename=pagename)
+    request.theme.send_title(_('Pages like "%s"') % (pagename), pagename=pagename)
         
     # Start content - IMPORTANT - without content div, there is no
     # direction support!
@@ -55,8 +54,8 @@ def execute(pagename, request):
 
     # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
-        
+    request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 def findMatches(pagename, request, s_re=None, e_re=None,):
     """ Find like pages

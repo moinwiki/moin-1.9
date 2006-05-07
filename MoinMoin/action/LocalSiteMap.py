@@ -33,8 +33,7 @@ def execute(pagename, request):
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
 
-    wikiutil.send_title(request, _('Local Site Map for "%s"') % (pagename),  
-        pagename=pagename)
+    request.theme.send_title(_('Local Site Map for "%s"') % (pagename), pagename=pagename)
 
     # Start content - IMPORTANT - witout content div, there is no
     # direction support!
@@ -42,11 +41,9 @@ def execute(pagename, request):
 
     request.write(LocalSiteMap(pagename).output(request))
 
-    # End content
     request.write(request.formatter.endContent()) # end content div
-    # Footer
-    wikiutil.send_footer(request, pagename)
-
+    request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 class LocalSiteMap:
     def __init__(self, name):

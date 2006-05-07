@@ -17,7 +17,6 @@ from datetime import datetime
 from MoinMoin import wikiutil, config, user
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter
 from MoinMoin.action.AttachFile import _addLogEntry
 from MoinMoin.packages import MOIN_PACKAGE_FILE, packLine, unpackLine
 

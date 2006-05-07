@@ -30,7 +30,6 @@ from MoinMoin import config, user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
-from MoinMoin.formatter import text_html
 
 _debug = 0
 
@@ -389,7 +388,7 @@ class XmlRpcBase:
         from MoinMoin import search
         query = search.QueryParser().parse_query(query_string)
         results = search.searchPages(self.request, query)
-        results.formatter = text_html.Formatter(self.request)
+        results.formatter = self.request.html_formatter
         results.request = self.request
         return [(self._outstr(hit.page_name),
                  self._outstr(results.formatContext(hit, 180, 1)))
