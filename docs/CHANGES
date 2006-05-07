@@ -39,6 +39,8 @@ Version 1.5.current:
       specific terms
     * Fix the forgotten password email login URL and also properly encode the
       email body. Thanks to Robin Dunn for the patch.
+    * Applied a patch by Matthew Gilbert for increased compatiblity with
+      latest docutils.
 
 
 Version 1.5.3:

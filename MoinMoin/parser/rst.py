@@ -165,6 +165,11 @@ class MoinWriter(html4css1.Writer):
                                  self)
         self.document.walkabout(visitor)
         self.visitor = visitor
+        # Docutils 0.5.0 and later require the writer to have the visitor 
+        # attributes.
+        if (hasattr(html4css1.Writer, 'visitor_attributes')):
+            for attr in html4css1.Writer.visitor_attributes:
+                setattr(self, attr, getattr(visitor, attr))
         self.output = html_escape_unicode(visitor.astext())
 
 class Parser:
@@ -189,6 +194,7 @@ class Parser:
                 'file_insertion_enabled': 0,
                 'raw_enabled': 0,
                 'stylesheet_path': '',
+                'template': '',
             }
         )
 
