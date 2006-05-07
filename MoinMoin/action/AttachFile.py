@@ -348,7 +348,10 @@ def send_hotdraw(pagename, request):
     querystr = wikiutil.escape(wikiutil.makeQueryString(querystr))
     pagelink = '%s/%s?%s' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), querystr)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-    savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
+    querystr = {'action': 'AttachFile', 'do': 'savedrawing'}
+    querystr = wikiutil.escape(wikiutil.makeQueryString(querystr))
+    savelink = '%s/%s?%s' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), querystr)
+    #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
                                            # request, {'savename': request.form['drawing'][0]+'.draw'}
     #savelink = '/cgi-bin/dumpform.bat'
 
@@ -445,15 +448,15 @@ def execute(pagename, request):
     msg = None
     if action_name in request.cfg.actions_excluded:
         msg = _('File attachments are not allowed in this wiki!')
-    elif request.form.has_key('filepath'):
+    elif not request.form.has_key('do'):
+        upload_form(pagename, request)
+    elif request.form['do'][0] == 'savedrawing':
         if request.user.may.write(pagename):
             save_drawing(pagename, request)
             request.http_headers()
             request.write("OK")
         else:
             msg = _('You are not allowed to save a drawing on this page.')
-    elif not request.form.has_key('do'):
-        upload_form(pagename, request)
     elif request.form['do'][0] == 'upload':
         if request.user.may.write(pagename):
             if request.form.has_key('file'):
@@ -494,7 +497,6 @@ def execute(pagename, request):
 
     if msg:
         error_msg(pagename, request, msg)
-
 
 def upload_form(pagename, request, msg=''):
     _ = request.getText
