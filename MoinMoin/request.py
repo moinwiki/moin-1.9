@@ -10,7 +10,14 @@
 import os, re, time, sys, cgi, StringIO
 import copy
 from MoinMoin import config, wikiutil, user, caching
-from MoinMoin.util import MoinMoinNoFooter, IsWin9x
+from MoinMoin.util import IsWin9x
+
+
+# Exceptions -----------------------------------------------------------
+
+class MoinMoinFinish(Exception):
+    """ Raised to jump directly to end of run() function, where finish is called """
+    pass
 
 # Timing ---------------------------------------------------------------
 
@@ -735,8 +742,7 @@ class RequestBase(object):
         sys.stderr.write(msg)
     
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         raise NotImplementedError
 
     def encode(self, data):
@@ -841,13 +847,11 @@ class RequestBase(object):
         return name
         
     def read(self, n):
-        """ Read n bytes from input stream.
-        """
+        """ Read n bytes from input stream. """
         raise NotImplementedError
 
     def flush(self):
-        """ Flush output stream.
-        """
+        """ Flush output stream. """
         raise NotImplementedError
 
     def check_spider(self):
@@ -888,19 +892,24 @@ class RequestBase(object):
 
     def setup_args(self, form=None):
         """ Return args dict 
-        
-        In POST request, invoke _setup_args_from_cgi_form to handle possible
-        file uploads. For other request simply parse the query string.
+        First, we parse the query string (usually this is used in GET methods,
+        but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
+        Second, we update what we got in first step by the stuff we get from
+        the form (or by a POST). We invoke _setup_args_from_cgi_form to handle
+        possible file uploads.
         
         Warning: calling with a form might fail, depending on the type of the
-        request! Only the request know which kind of form it can handle.
+        request! Only the request knows which kind of form it can handle.
         
         TODO: The form argument should be removed in 1.5.
         """
-        if form is not None or self.request_method == 'POST':
-            return self._setup_args_from_cgi_form(form)
         args = cgi.parse_qs(self.query_string, keep_blank_values=1)
-        return self.decodeArgs(args)
+        args = self.decodeArgs(args)
+        # if we have form data (e.g. in a POST), those override the stuff we already have:
+        if form is not None or self.request_method == 'POST':
+            postargs = self._setup_args_from_cgi_form(form)
+            args.update(postargs)
+        return args
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
@@ -1017,6 +1026,9 @@ class RequestBase(object):
         self.clock.start('run')
 
         from MoinMoin.Page import Page
+        from MoinMoin.formatter.text_html import Formatter
+        self.html_formatter = Formatter(self)
+        self.formatter = self.html_formatter
 
         if self.query_string == 'action=xmlrpc':
             from MoinMoin.wikirpc import xmlrpc
@@ -1069,15 +1081,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 self.http_redirect(url)
                 return self.finish()
             
-            # 3. Or save drawing
-            elif self.form.has_key('filepath') and self.form.has_key('noredirect'):
-                # looks like user wants to save a drawing
-                from MoinMoin.action.AttachFile import execute
-                # TODO: what if pagename is None?
-                execute(pagename, self)
-                raise MoinMoinNoFooter           
-
-            # 4. Or handle action
+            # 3. Or handle action
             else:
                 if action is None:
                     action = 'show'
@@ -1110,25 +1114,10 @@ space between words. Group page name is not allowed.""") % self.user.name
                     handler = getHandler(self, action)
                     handler(self.page.page_name, self)
 
-            # generate page footer (actions that do not want this footer use
-            # raise util.MoinMoinNoFooter to break out of the default execution
-            # path, see the "except MoinMoinNoFooter" below)
+            # every action that didn't use to raise MoinMoinNoFooter must call this now:
+            # self.theme.send_closing_html()
 
-            self.clock.stop('run')
-            self.clock.stop('total')
-
-            # Close html code
-            if not self.no_closing_html_code:
-                if (self.cfg.show_timings and
-                    self.form.get('action', [None])[0] != 'print'):
-                    self.write('<ul id="timings">\n')
-                    for t in self.clock.dump():
-                        self.write('<li>%s</li>\n' % t)
-                    self.write('</ul>\n')
-                #self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
-                self.write('</body>\n</html>\n\n')
-            
-        except MoinMoinNoFooter:
+        except MoinMoinFinish:
             pass
         except Exception, err:
             self.fail(err)
@@ -1424,7 +1413,7 @@ class RequestTwisted(RequestBase):
             
             RequestBase.__init__(self, properties)
 
-        except MoinMoinNoFooter: # might be triggered by http_redirect
+        except MoinMoinFinish: # might be triggered by http_redirect
             self.http_headers() # send headers (important for sending MOIN_ID cookie)
             self.finish()
 
@@ -1447,8 +1436,10 @@ class RequestTwisted(RequestBase):
         """ Return args dict 
         
         Twisted already parsed args, including __filename__ hacking,
-        but did not decoded the values.
+        but did not decode the values.
         """
+        # TODO: check if for a POST this included query_string args (needed for
+        # TwikiDraw's action=AttachFile&do=savedrawing)
         return self.decodeArgs(self.twistd.args)
         
     def read(self, n=None):
@@ -1526,7 +1517,7 @@ class RequestTwisted(RequestBase):
         # calling finish here will send the rest of the data to the next
         # request. leave the finish call to run()
         #self.twistd.finish()
-        raise MoinMoinNoFooter
+        raise MoinMoinFinish
 
     def setResponseCode(self, code, message=None):
         self.twistd.setResponseCode(code, message)
@@ -1652,7 +1643,7 @@ class RequestStandAlone(RequestBase):
             self.fail(err)
 
     def _setup_args_from_cgi_form(self, form=None):
-        """ Override to create standlone form """
+        """ Override to create standalone form """
         form = cgi.FieldStorage(self.rfile, headers=self.headers, environ={'REQUEST_METHOD': 'POST'})
         return RequestBase._setup_args_from_cgi_form(self, form)
         
@@ -1997,11 +1988,13 @@ class RequestWSGI(RequestBase):
             
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self, {})
-        
+
         except Exception, err:
             self.fail(err)
     
     def setup_args(self, form=None):
+        # TODO: does this include query_string args for POST requests?
+        # see also how CGI works now
         if form is None:
             form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
         return self._setup_args_from_cgi_form(form)
