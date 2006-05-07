@@ -892,19 +892,24 @@ class RequestBase(object):
 
     def setup_args(self, form=None):
         """ Return args dict 
-        
-        In POST request, invoke _setup_args_from_cgi_form to handle possible
-        file uploads. For other request simply parse the query string.
+        First, we parse the query string (usually this is used in GET methods,
+        but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
+        Second, we update what we got in first step by the stuff we get from
+        the form (or by a POST). We invoke _setup_args_from_cgi_form to handle
+        possible file uploads.
         
         Warning: calling with a form might fail, depending on the type of the
-        request! Only the request know which kind of form it can handle.
+        request! Only the request knows which kind of form it can handle.
         
         TODO: The form argument should be removed in 1.5.
         """
-        if form is not None or self.request_method == 'POST':
-            return self._setup_args_from_cgi_form(form)
         args = cgi.parse_qs(self.query_string, keep_blank_values=1)
-        return self.decodeArgs(args)
+        args = self.decodeArgs(args)
+        # if we have form data (e.g. in a POST), those override the stuff we already have:
+        if form is not None or self.request_method == 'POST':
+            postargs = self._setup_args_from_cgi_form(form)
+            args.update(postargs)
+        return args
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
@@ -1076,14 +1081,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 self.http_redirect(url)
                 return self.finish()
             
-            # 3. Or save drawing
-            elif self.form.has_key('filepath') and self.form.has_key('noredirect'):
-                # looks like user wants to save a drawing
-                from MoinMoin.action.AttachFile import execute
-                # TODO: what if pagename is None?
-                execute(pagename, self)
-
-            # 4. Or handle action
+            # 3. Or handle action
             else:
                 if action is None:
                     action = 'show'
@@ -1438,8 +1436,10 @@ class RequestTwisted(RequestBase):
         """ Return args dict 
         
         Twisted already parsed args, including __filename__ hacking,
-        but did not decoded the values.
+        but did not decode the values.
         """
+        # TODO: check if for a POST this included query_string args (needed for
+        # TwikiDraw's action=AttachFile&do=savedrawing)
         return self.decodeArgs(self.twistd.args)
         
     def read(self, n=None):
@@ -1643,7 +1643,7 @@ class RequestStandAlone(RequestBase):
             self.fail(err)
 
     def _setup_args_from_cgi_form(self, form=None):
-        """ Override to create standlone form """
+        """ Override to create standalone form """
         form = cgi.FieldStorage(self.rfile, headers=self.headers, environ={'REQUEST_METHOD': 'POST'})
         return RequestBase._setup_args_from_cgi_form(self, form)
         
@@ -1988,11 +1988,13 @@ class RequestWSGI(RequestBase):
             
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self, {})
-        
+
         except Exception, err:
             self.fail(err)
     
     def setup_args(self, form=None):
+        # TODO: does this include query_string args for POST requests?
+        # see also how CGI works now
         if form is None:
             form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
         return self._setup_args_from_cgi_form(form)
