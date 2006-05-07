@@ -75,7 +75,7 @@ def sendmail(request, to, subject, text, **kw):
     charset.header_encoding = QP
     charset.body_encoding = QP
     msg.set_charset(charset)    
-    msg.set_payload(text)
+    msg.set_payload(charset.body_encode(text))
     
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we

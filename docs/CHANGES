@@ -37,6 +37,9 @@ Version 1.5.current:
     * fix MonthCalendar macro for non-ASCII pagenames (thanks to Jonas Smedegaard)
     * remove 'search' and 'google' from bot user agent list and add some more
       specific terms
+    * Fix the forgotten password email login URL and also properly encode the
+      email body. Thanks to Robin Dunn for the patch.
+
 
 Version 1.5.3:
   New Features:

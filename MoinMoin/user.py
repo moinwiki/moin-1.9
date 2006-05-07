@@ -960,7 +960,7 @@ Login Name: %s
 
 Login Password: %s
 
-Login URL: %s/%s
+Login URL: %s/%s?action=login
 """, formatted=False) % (
                         self.name, self.enc_password, self._request.getBaseURL(), getSysPage(self._request, 'UserPreferences').page_name)
 
