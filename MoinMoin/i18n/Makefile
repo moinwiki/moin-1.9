@@ -79,10 +79,12 @@ metapy: $(CATALOGS)
 	./build_meta_py $$langs
 
 update-po:
-	$(MAKE) $(DOMAIN).pot-update
-	$(MAKE) $(UPDATEPOFILES)
-	$(MAKE) $(CATALOGS)
-	$(MAKE) metapy
+	@echo "Edit Makefile and reenable this after finally closing 1.5.x branch,"
+	@echo "no 1.5.x i18n updates will be possible once this is run in 1.6."
+	#$(MAKE) $(DOMAIN).pot-update
+	#$(MAKE) $(UPDATEPOFILES)
+	#$(MAKE) $(CATALOGS)
+	#$(MAKE) metapy
 
 stats:
 	@files="$(POFILES)"; \
