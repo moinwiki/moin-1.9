@@ -33,9 +33,14 @@ Version 1.6.current:
     critical stuff gets committed with -m "... (backport to 1.5)" and then
     backported to 1.5. :) Commits to 1.5 done in any other way are likely to
     get reverted.
-  * refactored some actions to use ActionBase base class
-  * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
 
+  Developer notes:
+    * refactored some actions to use ActionBase base class
+    * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
+
+  Bugfixes:
+    * on action "info" page, "revert" link will not be displayed for empty page
+      revisions (but you just can delete the current page to get an empty rev.)
 
 Version 1.5.current:
   Developer notes:
