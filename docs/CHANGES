@@ -41,6 +41,7 @@ Version 1.6.current:
     * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
     * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
+    * moved wikitest.py stuff to action/test.py (only used from there)
 
 
   Bugfixes:
