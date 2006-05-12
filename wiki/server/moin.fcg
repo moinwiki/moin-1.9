@@ -40,11 +40,11 @@ from MoinMoin import config
 config.use_threads = use_threads
 del config
 
-from MoinMoin.request import RequestFastCGI
+from MoinMoin.request import FCGI
 from MoinMoin.support import thfcgi
 
 def handle_request(req, env, form):
-    request = RequestFastCGI(req, env, form)
+    request = FCGI.Request(req, env, form)
     request.run()
 
 if __name__ == '__main__':
