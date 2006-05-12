@@ -413,7 +413,7 @@ class Page:
     def last_edit(self, request):
         """
         Return the last edit.
-        This is used by wikirpc(2).py.
+        This is used by MoinMoin/xmlrpc/__init__.py.
 
         @param request: the request object
         @rtype: dict

@@ -37,9 +37,10 @@ Version 1.6.current:
   Developer notes:
     * refactored some actions to use ActionBase base class
     * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
-    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
+    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
+    * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
 
 
   Bugfixes:

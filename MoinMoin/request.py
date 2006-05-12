@@ -1030,13 +1030,13 @@ class RequestBase(object):
         self.formatter = self.html_formatter
 
         if self.query_string == 'action=xmlrpc':
-            from MoinMoin.wikirpc import xmlrpc
-            xmlrpc(self)
+            from MoinMoin import xmlrpc
+            xmlrpc.xmlrpc(self)
             return self.finish()
         
         if self.query_string == 'action=xmlrpc2':
-            from MoinMoin.wikirpc import xmlrpc2
-            xmlrpc2(self)
+            from MoinMoin import xmlrpc
+            xmlrpc.xmlrpc2(self)
             return self.finish()
 
         # parse request data
