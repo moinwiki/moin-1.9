@@ -166,11 +166,11 @@ def moin_cookie(request, **kw):
 
 def http(request, **kw):
     """ authenticate via http basic/digest/ntlm auth """
-    from MoinMoin.request import RequestTwisted, RequestCLI
+    from MoinMoin.request import TWISTED, CLI
     user_obj = kw.get('user_obj')
     u = None
     # check if we are running Twisted
-    if isinstance(request, RequestTwisted):
+    if isinstance(request, TWISTED.Request):
         username = request.twistd.getUser()
         password = request.twistd.getPassword()
         # when using Twisted http auth, we use username and password from
@@ -178,7 +178,7 @@ def http(request, **kw):
         u = user.User(request, auth_username=username, password=password,
                       auth_method='http', auth_attribs=())
 
-    elif not isinstance(request, RequestCLI):
+    elif not isinstance(request, CLI.Request):
         env = request.env
         auth_type = env.get('AUTH_TYPE','')
         if auth_type in ['Basic', 'Digest', 'NTLM', 'Negotiate',]:
@@ -206,12 +206,12 @@ def http(request, **kw):
 
 def sslclientcert(request, **kw):
     """ authenticate via SSL client certificate """
-    from MoinMoin.request import RequestTwisted
+    from MoinMoin.request import TWISTED
     user_obj = kw.get('user_obj')
     u = None
     changed = False
     # check if we are running Twisted
-    if isinstance(request, RequestTwisted):
+    if isinstance(request, TWISTED.Request):
         return user_obj, True # not supported if we run twisted
         # Addendum: this seems to need quite some twisted insight and coding.
         # A pointer i got on #twisted: divmod's vertex.sslverify

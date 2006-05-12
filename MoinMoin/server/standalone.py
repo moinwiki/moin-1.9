@@ -39,7 +39,7 @@ import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
 from MoinMoin import version, wikiutil
 from MoinMoin.server import Config, switchUID
-from MoinMoin.request import RequestStandAlone
+from MoinMoin.request import STANDALONE
 from MoinMoin.util import timefuncs
 
 # Server globals
@@ -329,7 +329,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.expires = 0
 
         try:
-            req = RequestStandAlone(self, properties=config.properties)
+            req = STANDALONE.Request(self, properties=config.properties)
             req.run()
         except socket.error, err:
             # Ignore certain errors

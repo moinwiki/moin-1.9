@@ -427,8 +427,8 @@ Example:
         request_url = "localhost/"
 
     # Setup MoinMoin environment
-    from MoinMoin.request import RequestCLI
-    request = RequestCLI(url = 'localhost/')
+    from MoinMoin.request import CLI
+    request = CLI.Request(url = 'localhost/')
     request.form = request.args = request.setup_args()
 
     package = ZipPackage(request, packagefile)

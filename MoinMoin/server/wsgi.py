@@ -5,10 +5,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.request import RequestWSGI
+from MoinMoin.request import WSGI
 
 def moinmoinApp(environ, start_response):
-    request = RequestWSGI(environ)
+    request = WSGI.Request(environ)
     request.run()
     start_response(request.status, request.headers)
     return [request.output()]

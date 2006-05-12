@@ -177,9 +177,9 @@ def run(request=None, names=None):
         e.g MoinMoin._tests.test_error
     """
     if request is None:
-        from MoinMoin.request import RequestCLI
+        from MoinMoin.request import CLI
         from MoinMoin.user import User
-        request = RequestCLI()   
+        request = CLI.Request()   
         request.form = request.args = request.setup_args()
         request.user = User(request)
         
