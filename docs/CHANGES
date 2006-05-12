@@ -37,8 +37,10 @@ Version 1.6.current:
   Developer notes:
     * refactored some actions to use ActionBase base class
     * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
+    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
+
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

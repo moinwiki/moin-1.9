@@ -639,17 +639,16 @@ class RequestBase(object):
         try:
             self.cfg._known_actions # check
         except AttributeError:
-            from MoinMoin import wikiaction
-            # Add built in  actions from wikiaction
-            actions = [name[3:] for name in wikiaction.__dict__ if name.startswith('do_')]
+            from MoinMoin import action
+            # Add built in actions
+            actions = [name[3:] for name in action.__dict__ if name.startswith('do_')]
 
             # Add plugins           
-            dummy, plugins = wikiaction.getPlugins(self)
+            dummy, plugins = action.getPlugins(self)
             actions.extend(plugins)
 
             # Add extensions
-            from MoinMoin.action import extension_actions
-            actions.extend(extension_actions)           
+            actions.extend(action.extension_actions)           
            
             # TODO: Use set when we require Python 2.3
             actions = dict(zip(actions, [''] * len(actions)))            
@@ -1044,7 +1043,7 @@ class RequestBase(object):
         try:
             self.initTheme()
             
-            action = self.form.get('action', [None])[0]
+            action_name = self.form.get('action', [None])[0]
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
@@ -1066,7 +1065,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 page.send_page(self, msg=msg)
 
             # 2. Or jump to page where user left off
-            elif not pagename and not action and self.user.remember_last_visit:
+            elif not pagename and not action_name and self.user.remember_last_visit:
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
@@ -1083,8 +1082,8 @@ space between words. Group page name is not allowed.""") % self.user.name
             
             # 3. Or handle action
             else:
-                if action is None:
-                    action = 'show'
+                if action_name is None:
+                    action_name = 'show'
                 if not pagename and self.query_string:
                     pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
@@ -1095,14 +1094,14 @@ space between words. Group page name is not allowed.""") % self.user.name
                     self.page = Page(self, pagename)
 
                 # Complain about unknown actions
-                if not action in self.getKnownActions():
+                if not action_name in self.getKnownActions():
                     self.http_headers()
-                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action))
+                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action_name))
 
                 # Disallow non available actions
-                elif action[0].isupper() and not action in self.getAvailableActions(self.page):
+                elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
                     # Send page with error
-                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action)
+                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action_name)
                     if not self.user.valid:
                         # Suggest non valid user to login
                         msg += " " + _("Login and try again.", formatted=0)
@@ -1110,8 +1109,8 @@ space between words. Group page name is not allowed.""") % self.user.name
 
                 # Try action
                 else:
-                    from MoinMoin.wikiaction import getHandler
-                    handler = getHandler(self, action)
+                    from MoinMoin import action
+                    handler = action.getHandler(self, action_name)
                     handler(self.page.page_name, self)
 
             # every action that didn't use to raise MoinMoinNoFooter must call this now:

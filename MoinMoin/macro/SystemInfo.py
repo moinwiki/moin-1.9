@@ -14,7 +14,7 @@ import operator, sys, os
 from StringIO import StringIO
 
 from MoinMoin import wikiutil, version
-from MoinMoin import action, wikiaction, macro, parser, processor
+from MoinMoin import action, macro, parser, processor
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.Page import Page
 
@@ -105,7 +105,7 @@ def execute(Macro, args):
                    if not x in request.cfg.actions_excluded]
     row(_('Global extension actions'), ', '.join(ext_actions) or nonestr)
     row(_('Local extension actions'), 
-        ', '.join(wikiaction.getPlugins(request)[1]) or nonestr)
+        ', '.join(action.getPlugins(request)[1]) or nonestr)
     
     row(_('Global parsers'), ', '.join(parser.modules) or nonestr)
     row(_('Local extension parsers'), 
