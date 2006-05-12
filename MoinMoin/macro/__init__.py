@@ -23,7 +23,7 @@ modules = extension_macros
 
 import re, time, os
 from MoinMoin import action, config, util
-from MoinMoin import wikiutil, wikiaction, i18n
+from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.util import pysupport
 
