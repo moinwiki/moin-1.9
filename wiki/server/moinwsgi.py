@@ -21,3 +21,4 @@ if __name__ == '__main__':
     server = WSGIServer(moinmoinApp, bindAddress=unixSocketPath)
     server.run()
     os.unlink(unixSocketPath)
+
