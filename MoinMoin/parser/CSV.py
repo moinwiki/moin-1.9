@@ -2,9 +2,7 @@
 """
     MoinMoin - Parser for CSV data
 
-    This is just a copy of the old CSV processor.
-    I think it is intended as an example, cause it
-    lacks to flexibility to read arbitary csv dialects.
+    This parser lacks to flexibility to read arbitary csv dialects.
 
     Perhaps this should be rewritten using another CSV lib
     because the standard module csv does not support unicode.
