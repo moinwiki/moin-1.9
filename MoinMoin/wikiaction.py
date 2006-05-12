@@ -515,6 +515,7 @@ def do_info(pagename, request):
             rev = int(line.rev)
             actions = ""
             if line.action in ['SAVE','SAVENEW','SAVE/REVERT',]:
+                size = page.size(rev=rev)
                 if count == 0: # latest page
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('view'),
@@ -535,7 +536,7 @@ def do_info(pagename, request):
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('print'),
                         querystr='action=print&rev=%d' % rev))
-                    if may_revert:
+                    if may_revert and size: # you can only revert to nonempty revisions
                         actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                             text=_('revert'),
                             querystr='action=revert&rev=%d' % (rev,)))
@@ -548,11 +549,9 @@ def do_info(pagename, request):
                 else:
                     lchecked = rchecked = ''
                 diff = '<input type="radio" name="rev1" value="%d"%s><input type="radio" name="rev2" value="%d"%s>' % (rev,lchecked,rev,rchecked)
-      
                 comment = line.comment
                 if not comment and line.action.find('/REVERT') != -1:
                         comment = _("Revert to revision %(rev)d.") % {'rev': int(line.extra)}
-                size = page.size(rev=rev)
             else: # ATT*
                 rev = '-'
                 diff = '-'
