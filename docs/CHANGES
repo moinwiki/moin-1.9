@@ -44,6 +44,16 @@ Version 1.6.current:
     * moved wikitest.py stuff to action/test.py (only used from there)
     * killed "processors" (finally), formatter method changed to:
       formatter.parser(parsername, lines)
+    * moved / splitted request.py into MoinMoin/request/*
+      Most stuff will be broken, please help fixing it (usually some imports
+      will be missing and the adaptor script will need a change maybe):
+      CGI works
+      CLI works
+      STANDALONE not
+      MODPY not
+      WSGI not
+      FCGI not
+      TWISTED not
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
