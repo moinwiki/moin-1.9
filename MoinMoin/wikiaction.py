@@ -783,13 +783,6 @@ def do_dumpform(pagename, request):
     request.http_headers()
     request.write("<html><body>%s</body></html>" % data)
 
-def do_test(pagename, request):
-    """ run the unit tests """
-    from MoinMoin.wikitest import runTest
-    request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
-    request.write('MoinMoin Diagnosis\n======================\n\n')
-    runTest(request)
-
 
 #############################################################################
 ### Dispatching
