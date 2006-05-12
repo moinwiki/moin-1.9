@@ -1,21 +1,22 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.wikimacro Tests
+    MoinMoin - MoinMoin.macro Tests
 
-    @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import unittest, os
 
-from MoinMoin import wikimacro, wikiutil
+from MoinMoin import macro, wikiutil
 from MoinMoin.parser.plain import Parser
 from MoinMoin.formatter.text_html import Formatter
 
 
 class MacroTestCase(unittest.TestCase):
     def testTrivialMacro(self):
-        """wikimacro: trivial macro works"""
+        """macro: trivial macro works"""
         m = self._make_macro()
         expected = m.formatter.linebreak(0)
         result = m.execute("BR", "")
@@ -28,5 +29,5 @@ class MacroTestCase(unittest.TestCase):
         p.formatter = Formatter(self.request)
         self.request.formatter = p.formatter
         p.form = self.request.form
-        m = wikimacro.Macro(p)
+        m = macro.Macro(p)
         return m

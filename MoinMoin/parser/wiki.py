@@ -7,7 +7,7 @@
 """
 
 import os, re
-from MoinMoin import config, wikimacro, wikiutil
+from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
 from MoinMoin.util import web
 
@@ -134,7 +134,7 @@ class Parser:
         self.list_indents = []
         self.list_types = []
         
-        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(wikimacro.getNames(self.cfg))}
+        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(macro.getNames(self.cfg))}
 
     def _close_item(self, result):
         #result.append("<!-- close item begin -->\n")
@@ -846,7 +846,7 @@ class Parser:
 
         # create macro instance
         if self.macro is None:
-            self.macro = wikimacro.Macro(self)
+            self.macro = macro.Macro(self)
         return self.formatter.macro(self.macro, macro_name, args)
 
     def scan(self, scan_re, line):

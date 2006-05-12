@@ -1356,8 +1356,8 @@ class Page:
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """            
         formatter = self.formatter
-        from MoinMoin import wikimacro        
-        macro_obj = wikimacro.Macro(parser)        
+        from MoinMoin.macro import Macro
+        macro_obj = Macro(parser)        
         # Fix __file__ when running from a zip package
         import MoinMoin
         if hasattr(MoinMoin, '__loader__'):
