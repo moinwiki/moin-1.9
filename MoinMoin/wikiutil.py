@@ -782,9 +782,8 @@ def importPlugin(cfg, kind, name, function="execute"):
     imported, raise PluginMissingError. If function is missing, raise
     PluginAttributeError.
 
-    kind may be one of 'action', 'formatter', 'macro', 'processor',
-    'parser' or any other directory that exist in MoinMoin or
-    data/plugin
+    kind may be one of 'action', 'formatter', 'macro', 'parser' or any other
+    directory that exist in MoinMoin or data/plugin.
 
     Wiki plugins will always override builtin plugins. If you want
     specific plugin, use either importWikiPlugin or importBuiltinPlugin

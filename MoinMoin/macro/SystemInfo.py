@@ -14,7 +14,7 @@ import operator, sys, os
 from StringIO import StringIO
 
 from MoinMoin import wikiutil, version
-from MoinMoin import action, macro, parser, processor
+from MoinMoin import action, macro, parser
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.Page import Page
 
@@ -110,8 +110,6 @@ def execute(Macro, args):
     row(_('Global parsers'), ', '.join(parser.modules) or nonestr)
     row(_('Local extension parsers'), 
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
-    row(_('Installed processors (DEPRECATED -- use Parsers instead)'), 
-        ', '.join(processor.processors) or nonestr)
     
     state = (_('Disabled'), _('Enabled'))
     row(_('Lupy search'), state[request.cfg.lupy_search])

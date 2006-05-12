@@ -100,8 +100,8 @@ class Formatter(text_html.Formatter):
             result = "[[%s]]" % name
         return '<span style="background-color:#ffff11">%s</span>' % result
 
-    def processor(self, processor_name, lines, is_parser=0):
-        """ processor_name MUST be valid!
+    def parser(self, parser_name, lines):
+        """ parser_name MUST be valid!
         """
         result = [self.preformatted(1)]
         for line in lines:

@@ -4,7 +4,7 @@
 
     The stuff in this module is especially geared towards
     writing extensions / plugins, i.e. additional actions,
-    macros, processors, parsers and formatters.
+    macros, parsers and formatters.
 
     See MoinMoin.wikiutil for more.
 
