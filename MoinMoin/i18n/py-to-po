@@ -1,0 +1,75 @@
+#!/usr/bin/python
+from de import text
+import re, os, sys, time
+
+def out(text, fd):
+  list = text.split('\n')
+  i = 0
+  while i < len(list):
+    text = re.sub('"', r'\"', list[i])
+    if not text:
+      pass
+    elif i < (len(list) - 1):
+      fd.write(r'"%s\n"' % text)
+    else:
+      fd.write(r'"%s"' % text)
+    fd.write('\n')
+    i += 1
+
+def do(lang):
+  lang_file = re.sub('-', '_', lang)
+  text = pysupport.importName("MoinMoin.i18n." + lang_file, "text")
+
+  fd = file('tmp', 'w')
+  fd.write(r"""# MoinMoin translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.2\n"
+"Report-Msgid-Bugs-To: moin-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2004-01-10 21:44+0100\n"
+"PO-Revision-Date: %s+0100\n"
+"Last-Translator: %s\n"
+"Language-Team: %s <moin-devel@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=%s\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Direction: %s\n"
+""" % (
+  time.strftime("%Y-%m-%d %H:%M"),
+  re.sub('"', '', i18n.languages[lang][i18n.MAINTAINER]),
+  i18n.languages[lang][i18n.NAME],
+  i18n.languages[lang][i18n.ENCODING],
+  i18n.getDirection(lang),
+))
+
+  for i in text.keys():
+    if i == text[i]:
+      continue
+    fd.write('''
+#: old'
+#, python-format'
+msgid ""
+''')
+    out(i, fd)
+    fd.write('''msgstr ""
+''')
+    out(text[i], fd)
+
+  fd.close()
+  os.system('msgmerge -o %s.po.new tmp MoinMoin.pot' % lang_file)
+  os.unlink('tmp')
+    
+sys.path.insert(0, '../..')
+from MoinMoin import i18n
+from MoinMoin.util import pysupport
+
+if sys.argv[1:]:
+  languages = sys.argv[1:]
+else:
+  languages = i18n.languages.keys()
+if 'en' in languages:
+  languages.remove('en')
+languages.sort()
+for lang in languages:
+  do(lang)
