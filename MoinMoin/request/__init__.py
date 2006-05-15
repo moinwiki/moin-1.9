@@ -1,16 +1,23 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Data associated with a single Request
+    MoinMoin - RequestBase Implementation
 
-    @copyright: 2001-2003 by Jürgen Hermann <jh@web.de>
-    @copyright: 2003-2006 by Thomas Waldmann
+    @copyright: 2001-2003 by Jürgen Hermann <jh@web.de>,
+                2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
 import os, re, time, sys, cgi, StringIO
 import copy
 from MoinMoin import config, wikiutil, user, caching
-from MoinMoin.util import MoinMoinNoFooter, IsWin9x
+from MoinMoin.util import IsWin9x
+
+
+# Exceptions -----------------------------------------------------------
+
+class MoinMoinFinish(Exception):
+    """ Raised to jump directly to end of run() function, where finish is called """
+    pass
 
 # Timing ---------------------------------------------------------------
 
@@ -632,17 +639,16 @@ class RequestBase(object):
         try:
             self.cfg._known_actions # check
         except AttributeError:
-            from MoinMoin import wikiaction
-            # Add built in  actions from wikiaction
-            actions = [name[3:] for name in wikiaction.__dict__ if name.startswith('do_')]
+            from MoinMoin import action
+            # Add built in actions
+            actions = [name[3:] for name in action.__dict__ if name.startswith('do_')]
 
             # Add plugins           
-            dummy, plugins = wikiaction.getPlugins(self)
+            dummy, plugins = action.getPlugins(self)
             actions.extend(plugins)
 
             # Add extensions
-            from MoinMoin.action import extension_actions
-            actions.extend(extension_actions)           
+            actions.extend(action.extension_actions)           
            
             # TODO: Use set when we require Python 2.3
             actions = dict(zip(actions, [''] * len(actions)))            
@@ -735,8 +741,7 @@ class RequestBase(object):
         sys.stderr.write(msg)
     
     def write(self, *data):
-        """ Write to output stream.
-        """
+        """ Write to output stream. """
         raise NotImplementedError
 
     def encode(self, data):
@@ -841,13 +846,11 @@ class RequestBase(object):
         return name
         
     def read(self, n):
-        """ Read n bytes from input stream.
-        """
+        """ Read n bytes from input stream. """
         raise NotImplementedError
 
     def flush(self):
-        """ Flush output stream.
-        """
+        """ Flush output stream. """
         raise NotImplementedError
 
     def check_spider(self):
@@ -888,19 +891,24 @@ class RequestBase(object):
 
     def setup_args(self, form=None):
         """ Return args dict 
-        
-        In POST request, invoke _setup_args_from_cgi_form to handle possible
-        file uploads. For other request simply parse the query string.
+        First, we parse the query string (usually this is used in GET methods,
+        but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
+        Second, we update what we got in first step by the stuff we get from
+        the form (or by a POST). We invoke _setup_args_from_cgi_form to handle
+        possible file uploads.
         
         Warning: calling with a form might fail, depending on the type of the
-        request! Only the request know which kind of form it can handle.
+        request! Only the request knows which kind of form it can handle.
         
         TODO: The form argument should be removed in 1.5.
         """
-        if form is not None or self.request_method == 'POST':
-            return self._setup_args_from_cgi_form(form)
         args = cgi.parse_qs(self.query_string, keep_blank_values=1)
-        return self.decodeArgs(args)
+        args = self.decodeArgs(args)
+        # if we have form data (e.g. in a POST), those override the stuff we already have:
+        if form is not None or self.request_method == 'POST':
+            postargs = self._setup_args_from_cgi_form(form)
+            args.update(postargs)
+        return args
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
@@ -1017,22 +1025,25 @@ class RequestBase(object):
         self.clock.start('run')
 
         from MoinMoin.Page import Page
+        from MoinMoin.formatter.text_html import Formatter
+        self.html_formatter = Formatter(self)
+        self.formatter = self.html_formatter
 
         if self.query_string == 'action=xmlrpc':
-            from MoinMoin.wikirpc import xmlrpc
-            xmlrpc(self)
+            from MoinMoin import xmlrpc
+            xmlrpc.xmlrpc(self)
             return self.finish()
         
         if self.query_string == 'action=xmlrpc2':
-            from MoinMoin.wikirpc import xmlrpc2
-            xmlrpc2(self)
+            from MoinMoin import xmlrpc
+            xmlrpc.xmlrpc2(self)
             return self.finish()
 
         # parse request data
         try:
             self.initTheme()
             
-            action = self.form.get('action', [None])[0]
+            action_name = self.form.get('action', [None])[0]
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
@@ -1054,7 +1065,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 page.send_page(self, msg=msg)
 
             # 2. Or jump to page where user left off
-            elif not pagename and not action and self.user.remember_last_visit:
+            elif not pagename and not action_name and self.user.remember_last_visit:
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
@@ -1069,18 +1080,10 @@ space between words. Group page name is not allowed.""") % self.user.name
                 self.http_redirect(url)
                 return self.finish()
             
-            # 3. Or save drawing
-            elif self.form.has_key('filepath') and self.form.has_key('noredirect'):
-                # looks like user wants to save a drawing
-                from MoinMoin.action.AttachFile import execute
-                # TODO: what if pagename is None?
-                execute(pagename, self)
-                raise MoinMoinNoFooter           
-
-            # 4. Or handle action
+            # 3. Or handle action
             else:
-                if action is None:
-                    action = 'show'
+                if action_name is None:
+                    action_name = 'show'
                 if not pagename and self.query_string:
                     pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
@@ -1091,14 +1094,14 @@ space between words. Group page name is not allowed.""") % self.user.name
                     self.page = Page(self, pagename)
 
                 # Complain about unknown actions
-                if not action in self.getKnownActions():
+                if not action_name in self.getKnownActions():
                     self.http_headers()
-                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action))
+                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action_name))
 
                 # Disallow non available actions
-                elif action[0].isupper() and not action in self.getAvailableActions(self.page):
+                elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
                     # Send page with error
-                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action)
+                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action_name)
                     if not self.user.valid:
                         # Suggest non valid user to login
                         msg += " " + _("Login and try again.", formatted=0)
@@ -1106,29 +1109,14 @@ space between words. Group page name is not allowed.""") % self.user.name
 
                 # Try action
                 else:
-                    from MoinMoin.wikiaction import getHandler
-                    handler = getHandler(self, action)
+                    from MoinMoin import action
+                    handler = action.getHandler(self, action_name)
                     handler(self.page.page_name, self)
 
-            # generate page footer (actions that do not want this footer use
-            # raise util.MoinMoinNoFooter to break out of the default execution
-            # path, see the "except MoinMoinNoFooter" below)
+            # every action that didn't use to raise MoinMoinNoFooter must call this now:
+            # self.theme.send_closing_html()
 
-            self.clock.stop('run')
-            self.clock.stop('total')
-
-            # Close html code
-            if not self.no_closing_html_code:
-                if (self.cfg.show_timings and
-                    self.form.get('action', [None])[0] != 'print'):
-                    self.write('<ul id="timings">\n')
-                    for t in self.clock.dump():
-                        self.write('<li>%s</li>\n' % t)
-                    self.write('</ul>\n')
-                #self.write('<!-- auth_method == %s -->' % repr(self.user.auth_method))
-                self.write('</body>\n</html>\n\n')
-            
-        except MoinMoinNoFooter:
+        except MoinMoinFinish:
             pass
         except Exception, err:
             self.fail(err)
@@ -1308,751 +1296,3 @@ space between words. Group page name is not allowed.""") % self.user.name
         finally:
             f.close()
   
-
-# CGI ---------------------------------------------------------------
-
-class RequestCGI(RequestBase):
-    """ specialized on CGI requests """
-
-    def __init__(self, properties={}):
-        try:
-            # force input/output to binary
-            if sys.platform == "win32":
-                import msvcrt
-                msvcrt.setmode(sys.stdin.fileno(), os.O_BINARY)
-                msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
-
-            self._setup_vars_from_std_env(os.environ)
-            RequestBase.__init__(self, properties)
-
-        except Exception, err:
-            self.fail(err)
-            
-    def open_logs(self):
-        # create log file for catching stderr output
-        if not self.opened_logs:
-            sys.stderr = open(os.path.join(self.cfg.data_dir, 'error.log'), 'at')
-            self.opened_logs = 1
-
-    def read(self, n=None):
-        """ Read from input stream. """
-        if n is None:
-            return sys.stdin.read()
-        else:
-            return sys.stdin.read(n)
-
-    def write(self, *data):
-        """ Write to output stream. """
-        sys.stdout.write(self.encode(data))
-
-    def flush(self):
-        sys.stdout.flush()
-        
-    def finish(self):
-        RequestBase.finish(self)
-        # flush the output, ignore errors caused by the user closing the socket
-        try:
-            sys.stdout.flush()
-        except IOError, ex:
-            import errno
-            if ex.errno != errno.EPIPE: raise
-
-    # Headers ----------------------------------------------------------
-    
-    def http_headers(self, more_headers=[]):
-        # Send only once
-        if getattr(self, 'sent_headers', None):
-            return
-        
-        self.sent_headers = 1
-        have_ct = 0
-
-        # send http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-            if type(header) is unicode:
-                header = header.encode('ascii')
-            self.write("%s\r\n" % header)
-
-        if not have_ct:
-            self.write("Content-type: text/html;charset=%s\r\n" % config.charset)
-
-        self.write('\r\n')
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(more_headers))
-        #sys.stderr.write(pformat(self.user_headers))
-
-
-# Twisted -----------------------------------------------------------
-
-class RequestTwisted(RequestBase):
-    """ specialized on Twisted requests """
-
-    def __init__(self, twistedRequest, pagename, reactor, properties={}):
-        try:
-            self.twistd = twistedRequest
-            self.reactor = reactor
-            
-            # Copy headers
-            self.http_accept_language = self.twistd.getHeader('Accept-Language')
-            self.saved_cookie = self.twistd.getHeader('Cookie')
-            self.http_user_agent = self.twistd.getHeader('User-Agent')
-            
-            # Copy values from twisted request
-            self.server_protocol = self.twistd.clientproto
-            self.server_name = self.twistd.getRequestHostname().split(':')[0]
-            self.server_port = str(self.twistd.getHost()[2])
-            self.is_ssl = self.twistd.isSecure()
-            self.path_info = '/' + '/'.join([pagename] + self.twistd.postpath)
-            self.request_method = self.twistd.method
-            self.remote_host = self.twistd.getClient()
-            self.remote_addr = self.twistd.getClientIP()
-            self.request_uri = self.twistd.uri
-            self.script_name = "/" + '/'.join(self.twistd.prepath[:-1])
-
-            # Values that need more work
-            self.query_string = self.splitURI(self.twistd.uri)[1]
-            self.setHttpReferer(self.twistd.getHeader('Referer'))
-            self.setHost()
-            self.setURL(self.twistd.getAllHeaders())
-
-            ##self.debugEnvironment(twistedRequest.getAllHeaders())
-            
-            RequestBase.__init__(self, properties)
-
-        except MoinMoinNoFooter: # might be triggered by http_redirect
-            self.http_headers() # send headers (important for sending MOIN_ID cookie)
-            self.finish()
-
-        except Exception, err:
-            # Wrap err inside an internal error if needed
-            from MoinMoin import error
-            if isinstance(err, error.FatalError):
-                self.delayedError = err
-            else:
-                self.delayedError = error.InternalError(str(err))
-
-    def run(self):
-        """ Handle delayed errors then invoke base class run """
-        if hasattr(self, 'delayedError'):
-            self.fail(self.delayedError)
-            return self.finish()
-        RequestBase.run(self)
-            
-    def setup_args(self, form=None):
-        """ Return args dict 
-        
-        Twisted already parsed args, including __filename__ hacking,
-        but did not decoded the values.
-        """
-        return self.decodeArgs(self.twistd.args)
-        
-    def read(self, n=None):
-        """ Read from input stream. """
-        # XXX why is that wrong?:
-        #rd = self.reactor.callFromThread(self.twistd.read)
-        
-        # XXX do we need self.reactor.callFromThread with that?
-        # XXX if yes, why doesn't it work?
-        self.twistd.content.seek(0, 0)
-        if n is None:
-            rd = self.twistd.content.read()
-        else:
-            rd = self.twistd.content.read(n)
-        #print "request.RequestTwisted.read: data=\n" + str(rd)
-        return rd
-    
-    def write(self, *data):
-        """ Write to output stream. """
-        #print "request.RequestTwisted.write: data=\n" + wd
-        self.reactor.callFromThread(self.twistd.write, self.encode(data))
-
-    def flush(self):
-        pass # XXX is there a flush in twisted?
-
-    def finish(self):
-        RequestBase.finish(self)
-        self.reactor.callFromThread(self.twistd.finish)
-
-    def open_logs(self):
-        return
-        # create log file for catching stderr output
-        if not self.opened_logs:
-            sys.stderr = open(os.path.join(self.cfg.data_dir, 'error.log'), 'at')
-            self.opened_logs = 1
-
-    # Headers ----------------------------------------------------------
-
-    def __setHttpHeader(self, header):
-        if type(header) is unicode:
-            header = header.encode('ascii')
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'set-cookie':
-            key, value = value.split('=', 1)
-            self.twistd.addCookie(key, value)
-        else:
-            self.twistd.setHeader(key, value)
-        #print "request.RequestTwisted.setHttpHeader: %s" % header
-
-    def http_headers(self, more_headers=[]):
-        if getattr(self, 'sent_headers', None):
-            return
-        self.sent_headers = 1
-        have_ct = 0
-
-        # set http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-            self.__setHttpHeader(header)
-
-        if not have_ct:
-            self.__setHttpHeader("Content-type: text/html;charset=%s" % config.charset)
-
-    def http_redirect(self, url):
-        """ Redirect to a fully qualified, or server-rooted URL 
-        
-        @param url: relative or absolute url, ascii using url encoding.
-        """
-        url = self.getQualifiedURL(url)
-        self.twistd.redirect(url)
-        # calling finish here will send the rest of the data to the next
-        # request. leave the finish call to run()
-        #self.twistd.finish()
-        raise MoinMoinNoFooter
-
-    def setResponseCode(self, code, message=None):
-        self.twistd.setResponseCode(code, message)
-        
-# CLI ------------------------------------------------------------------
-
-class RequestCLI(RequestBase):
-    """ specialized on command line interface and script requests """
-
-    def __init__(self, url='CLI', pagename='', properties={}):
-        self.saved_cookie = ''
-        self.path_info = '/' + pagename
-        self.query_string = ''
-        self.remote_addr = '127.0.0.1'
-        self.is_ssl = 0
-        self.http_user_agent = 'CLI/Script'
-        self.url = url
-        self.request_method = 'GET'
-        self.request_uri = '/' + pagename # TODO check
-        self.http_host = 'localhost'
-        self.http_referer = ''
-        self.script_name = '.'
-        RequestBase.__init__(self, properties)
-        self.cfg.caching_formats = [] # don't spoil the cache
-        self.initTheme() # usually request.run() does this, but we don't use it
-  
-    def read(self, n=None):
-        """ Read from input stream. """
-        if n is None:
-            return sys.stdin.read()
-        else:
-            return sys.stdin.read(n)
-
-    def write(self, *data):
-        """ Write to output stream. """
-        sys.stdout.write(self.encode(data))
-
-    def flush(self):
-        sys.stdout.flush()
-        
-    def finish(self):
-        RequestBase.finish(self)
-        # flush the output, ignore errors caused by the user closing the socket
-        try:
-            sys.stdout.flush()
-        except IOError, ex:
-            import errno
-            if ex.errno != errno.EPIPE: raise
-
-    def isForbidden(self):
-        """ Nothing is forbidden """
-        return 0
-
-    # Accessors --------------------------------------------------------
-
-    def getQualifiedURL(self, uri=None):
-        """ Return a full URL starting with schema and host
-        
-        TODO: does this create correct pages when you render wiki pages
-              within a cli request?!
-        """
-        return uri
-
-    # Headers ----------------------------------------------------------
-
-    def setHttpHeader(self, header):
-        pass
-
-    def http_headers(self, more_headers=[]):
-        pass
-
-    def http_redirect(self, url):
-        """ Redirect to a fully qualified, or server-rooted URL 
-        
-        TODO: Does this work for rendering redirect pages?
-        """
-        raise Exception("Redirect not supported for command line tools!")
-
-
-# StandAlone Server ----------------------------------------------------
-
-class RequestStandAlone(RequestBase):
-    """ specialized on StandAlone Server (MoinMoin.server.standalone) requests """
-    script_name = ''
-    
-    def __init__(self, sa, properties={}):
-        """
-        @param sa: stand alone server object
-        @param properties: ...
-        """
-        try:
-            self.sareq = sa
-            self.wfile = sa.wfile
-            self.rfile = sa.rfile
-            self.headers = sa.headers
-            self.is_ssl = 0
-            
-            # Copy headers
-            self.http_accept_language = (sa.headers.getheader('accept-language') 
-                                         or self.http_accept_language)
-            self.http_user_agent = sa.headers.getheader('user-agent', '')            
-            co = filter(None, sa.headers.getheaders('cookie'))
-            self.saved_cookie = ', '.join(co) or ''
-            
-            # Copy rest from standalone request   
-            self.server_name = sa.server.server_name
-            self.server_port = str(sa.server.server_port)
-            self.request_method = sa.command
-            self.request_uri = sa.path
-            self.remote_addr = sa.client_address[0]
-
-            # Values that need more work                        
-            self.path_info, self.query_string = self.splitURI(sa.path)
-            self.setHttpReferer(sa.headers.getheader('referer'))
-            self.setHost(sa.headers.getheader('host'))
-            self.setURL(sa.headers)
-
-            ##self.debugEnvironment(sa.headers)
-            
-            RequestBase.__init__(self, properties)
-
-        except Exception, err:
-            self.fail(err)
-
-    def _setup_args_from_cgi_form(self, form=None):
-        """ Override to create standlone form """
-        form = cgi.FieldStorage(self.rfile, headers=self.headers, environ={'REQUEST_METHOD': 'POST'})
-        return RequestBase._setup_args_from_cgi_form(self, form)
-        
-    def read(self, n=None):
-        """ Read from input stream
-        
-        Since self.rfile.read() will block, content-length will be used instead.
-        
-        TODO: test with n > content length, or when calling several times
-        with smaller n but total over content length.
-        """
-        if n is None:
-            try:
-                n = int(self.headers.get('content-length'))
-            except (TypeError, ValueError):
-                import warnings
-                warnings.warn("calling request.read() when content-length is "
-                              "not available will block")
-                return self.rfile.read()
-        return self.rfile.read(n)
-
-    def write(self, *data):
-        """ Write to output stream. """
-        self.wfile.write(self.encode(data))
-
-    def flush(self):
-        self.wfile.flush()
-        
-    def finish(self):
-        RequestBase.finish(self)
-        self.wfile.flush()
-
-    # Headers ----------------------------------------------------------
-
-    def http_headers(self, more_headers=[]):
-        if getattr(self, 'sent_headers', None):
-            return
-        
-        self.sent_headers = 1
-        user_headers = getattr(self, 'user_headers', [])
-        
-        # check for status header and send it
-        our_status = 200
-        for header in more_headers + user_headers:
-            if header.lower().startswith("status:"):
-                try:
-                    our_status = int(header.split(':', 1)[1].strip().split(" ", 1)[0]) 
-                except:
-                    pass
-                # there should be only one!
-                break
-        # send response
-        self.sareq.send_response(our_status)
-
-        # send http headers
-        have_ct = 0
-        for header in more_headers + user_headers:
-            if type(header) is unicode:
-                header = header.encode('ascii')
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-
-            self.write("%s\r\n" % header)
-
-        if not have_ct:
-            self.write("Content-type: text/html;charset=%s\r\n" % config.charset)
-
-        self.write('\r\n')
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(more_headers))
-        #sys.stderr.write(pformat(self.user_headers))
-
-# mod_python/Apache ----------------------------------------------------
-
-class RequestModPy(RequestBase):
-    """ specialized on mod_python requests """
-
-    def __init__(self, req):
-        """ Saves mod_pythons request and sets basic variables using
-            the req.subprocess_env, cause this provides a standard
-            way to access the values we need here.
-
-            @param req: the mod_python request instance
-        """
-        try:
-            # flags if headers sent out contained content-type or status
-            self._have_ct = 0
-            self._have_status = 0
-
-            req.add_common_vars()
-            self.mpyreq = req
-            # some mod_python 2.7.X has no get method for table objects,
-            # so we make a real dict out of it first.
-            if not hasattr(req.subprocess_env, 'get'):
-                env=dict(req.subprocess_env)
-            else:
-                env=req.subprocess_env
-            self._setup_vars_from_std_env(env)
-            RequestBase.__init__(self)
-
-        except Exception, err:
-            self.fail(err)
-            
-    def fixURI(self, env):
-        """ Fix problems with script_name and path_info using
-        PythonOption directive to rewrite URI.
-        
-        This is needed when using Apache 1 or other server which does
-        not support adding custom headers per request. With mod_python we
-        can use the PythonOption directive:
-        
-            <Location /url/to/mywiki/>
-                PythonOption X-Moin-Location /url/to/mywiki/
-            </location>
-
-        Note that *neither* script_name *nor* path_info can be trusted
-        when Moin is invoked as a mod_python handler with apache1, so we
-        must build both using request_uri and the provided PythonOption.
-        """
-        # Be compatible with release 1.3.5 "Location" option 
-        # TODO: Remove in later release, we should have one option only.
-        old_location = 'Location'
-        options_table = self.mpyreq.get_options()
-        if not hasattr(options_table, 'get'):
-            options = dict(options_table)
-        else:
-            options = options_table
-        location = options.get(self.moin_location) or options.get(old_location)
-        if location:
-            env[self.moin_location] = location
-            # Try to recreate script_name and path_info from request_uri.
-            import urlparse
-            scriptAndPath = urlparse.urlparse(self.request_uri)[2]
-            self.script_name = location.rstrip('/')
-            path = scriptAndPath.replace(self.script_name, '', 1)            
-            self.path_info = wikiutil.url_unquote(path, want_unicode=False)
-
-        RequestBase.fixURI(self, env)
-
-    def _setup_args_from_cgi_form(self, form=None):
-        """ Override to use mod_python.util.FieldStorage 
-        
-        Its little different from cgi.FieldStorage, so we need to
-        duplicate the conversion code.
-        """
-        from mod_python import util
-        if form is None:
-            form = util.FieldStorage(self.mpyreq)
-
-        args = {}
-        for key in form.keys():
-            values = form[key]
-            if not isinstance(values, list):
-                values = [values]
-            fixedResult = []
-
-            for item in values:
-                # Remember filenames with a name hack
-                if hasattr(item, 'filename') and item.filename:
-                    args[key + '__filename__'] = item.filename
-                # mod_python 2.7 might return strings instead of Field
-                # objects.
-                if hasattr(item, 'value'):
-                    item = item.value
-                fixedResult.append(item)                
-            args[key] = fixedResult
-            
-        return self.decodeArgs(args)
-
-    def run(self, req):
-        """ mod_python calls this with its request object. We don't
-            need it cause its already passed to __init__. So ignore
-            it and just return RequestBase.run.
-
-            @param req: the mod_python request instance
-        """
-        return RequestBase.run(self)
-
-    def read(self, n=None):
-        """ Read from input stream. """
-        if n is None:
-            return self.mpyreq.read()
-        else:
-            return self.mpyreq.read(n)
-
-    def write(self, *data):
-        """ Write to output stream. """
-        self.mpyreq.write(self.encode(data))
-
-    def flush(self):
-        """ We can't flush it, so do nothing. """
-        pass
-        
-    def finish(self):
-        """ Just return apache.OK. Status is set in req.status. """
-        RequestBase.finish(self)
-        # is it possible that we need to return something else here?
-        from mod_python import apache
-        return apache.OK
-
-    # Headers ----------------------------------------------------------
-
-    def setHttpHeader(self, header):
-        """ Filters out content-type and status to set them directly
-            in the mod_python request. Rest is put into the headers_out
-            member of the mod_python request.
-
-            @param header: string, containing valid HTTP header.
-        """
-        if type(header) is unicode:
-            header = header.encode('ascii')
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'content-type':
-            # save content-type for http_headers
-            if not self._have_ct:
-                # we only use the first content-type!
-                self.mpyreq.content_type = value
-                self._have_ct = 1
-        elif key.lower() == 'status':
-            # save status for finish
-            try:
-                self.mpyreq.status = int(value.split(' ', 1)[0])
-            except:
-                pass
-            else:
-                self._have_status = 1
-        else:
-            # this is a header we sent out
-            self.mpyreq.headers_out[key]=value
-
-    def http_headers(self, more_headers=[]):
-        """ Sends out headers and possibly sets default content-type
-            and status.
-
-            @param more_headers: list of strings, defaults to []
-        """
-        for header in more_headers + getattr(self, 'user_headers', []):
-            self.setHttpHeader(header)
-        # if we don't had an content-type header, set text/html
-        if self._have_ct == 0:
-            self.mpyreq.content_type = "text/html;charset=%s" % config.charset
-        # if we don't had a status header, set 200
-        if self._have_status == 0:
-            self.mpyreq.status = 200
-        # this is for mod_python 2.7.X, for 3.X it's a NOP
-        self.mpyreq.send_http_header()
-
-# FastCGI -----------------------------------------------------------
-
-class RequestFastCGI(RequestBase):
-    """ specialized on FastCGI requests """
-
-    def __init__(self, fcgRequest, env, form, properties={}):
-        """ Initializes variables from FastCGI environment and saves
-            FastCGI request and form for further use.
-
-            @param fcgRequest: the FastCGI request instance.
-            @param env: environment passed by FastCGI.
-            @param form: FieldStorage passed by FastCGI.
-        """
-        try:
-            self.fcgreq = fcgRequest
-            self.fcgenv = env
-            self.fcgform = form
-            self._setup_vars_from_std_env(env)
-            RequestBase.__init__(self, properties)
-
-        except Exception, err:
-            self.fail(err)
-
-    def _setup_args_from_cgi_form(self, form=None):
-        """ Override to use FastCGI form """
-        if form is None:
-            form = self.fcgform
-        return RequestBase._setup_args_from_cgi_form(self, form)
-
-    def read(self, n=None):
-        """ Read from input stream. """
-        if n is None:
-            return self.fcgreq.stdin.read()
-        else:
-            return self.fcgreq.stdin.read(n)
-
-    def write(self, *data):
-        """ Write to output stream. """
-        self.fcgreq.out.write(self.encode(data))
-
-    def flush(self):
-        """ Flush output stream. """
-        self.fcgreq.flush_out()
-
-    def finish(self):
-        """ Call finish method of FastCGI request to finish handling of this request. """
-        RequestBase.finish(self)
-        self.fcgreq.finish()
-
-    # Headers ----------------------------------------------------------
-
-    def http_headers(self, more_headers=[]):
-        """ Send out HTTP headers. Possibly set a default content-type. """
-        if getattr(self, 'sent_headers', None):
-            return
-        self.sent_headers = 1
-        have_ct = 0
-
-        # send http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
-            if type(header) is unicode:
-                header = header.encode('ascii')
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-            self.write("%s\r\n" % header)
-
-        if not have_ct:
-            self.write("Content-type: text/html;charset=%s\r\n" % config.charset)
-
-        self.write('\r\n')
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(more_headers))
-        #sys.stderr.write(pformat(self.user_headers))
-
-# WSGI --------------------------------------------------------------
-
-class RequestWSGI(RequestBase):
-    def __init__(self, env):
-        try:
-            self.env = env
-            self.hasContentType = False
-            
-            self.stdin = env['wsgi.input']
-            self.stdout = StringIO.StringIO()
-            
-            self.status = '200 OK'
-            self.headers = []
-            
-            self._setup_vars_from_std_env(env)
-            RequestBase.__init__(self, {})
-        
-        except Exception, err:
-            self.fail(err)
-    
-    def setup_args(self, form=None):
-        if form is None:
-            form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
-        return self._setup_args_from_cgi_form(form)
-    
-    def read(self, n=None):
-        if n is None:
-            return self.stdin.read()
-        else:
-            return self.stdin.read(n)
-    
-    def write(self, *data):
-        self.stdout.write(self.encode(data))
-    
-    def reset_output(self):
-        self.stdout = StringIO.StringIO()
-    
-    def setHttpHeader(self, header):
-        if type(header) is unicode:
-            header = header.encode('ascii')
-        
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'content-type':
-            # save content-type for http_headers
-            if self.hasContentType:
-                # we only use the first content-type!
-                return
-            else:
-                self.hasContentType = True
-        
-        elif key.lower() == 'status':
-            # save status for finish
-            self.status = value
-            return
-            
-        self.headers.append((key, value))
-    
-    def http_headers(self, more_headers=[]):
-        for header in more_headers:
-            self.setHttpHeader(header)
-        
-        if not self.hasContentType:
-            self.headers.insert(0, ('Content-Type', 'text/html;charset=%s' % config.charset))
-    
-    def flush(self):
-        pass
-    
-    def finish(self):
-        pass
-    
-    def output(self):
-        return self.stdout.getvalue()
-
-

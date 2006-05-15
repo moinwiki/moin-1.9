@@ -299,23 +299,17 @@ class FormatterBase:
                 return args
         return None
 
-    def processor(self, processor_name, lines, is_parser=0):
-        """ processor_name MUST be valid!
+    def parser(self, parser_name, lines):
+        """ parser_name MUST be valid!
             writes out the result instead of returning it!
         """
-        if not is_parser:
-            processor = wikiutil.importPlugin(self.request.cfg, "processor",
-                                              processor_name, "process")
-            processor(self.request, self, lines)
-        else:
-            parser = wikiutil.importPlugin(self.request.cfg, "parser",
-                                           processor_name, "Parser")
-            args = self._get_bang_args(lines[0])
-            if args is not None:
-                lines = lines[1:]
-            p = parser('\n'.join(lines), self.request, format_args=args)
-            p.format(self)
-            del p
+        parser = wikiutil.importPlugin(self.request.cfg, "parser", parser_name, "Parser")
+        args = self._get_bang_args(lines[0])
+        if args is not None:
+            lines = lines[1:]
+        p = parser('\n'.join(lines), self.request, format_args=args)
+        p.format(self)
+        del p
         return ''
 
     def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},

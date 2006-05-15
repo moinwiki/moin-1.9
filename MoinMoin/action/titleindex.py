@@ -38,5 +38,3 @@ def execute(pagename, request):
         for name in pages:
             request.write(name+'\r\n')
 
-    raise util.MoinMoinNoFooter
-

@@ -138,8 +138,8 @@ function OnChange( sMacro )
 ''')
         
 def macro_list(request):
-    from MoinMoin import wikimacro
-    macros = wikimacro.getNames(request.cfg)
+    from MoinMoin import macro
+    macros = macro.getNames(request.cfg)
     macros.sort()
     return macros
 

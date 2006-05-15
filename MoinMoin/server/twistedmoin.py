@@ -36,7 +36,7 @@ from twisted.python import threadable
 threadable.init(1)
 
 # MoinMoin imports
-from MoinMoin.request import RequestTwisted
+from MoinMoin.request import TWISTED
 from MoinMoin.server import Config
 
 # Set threads flag, so other code can use proper locking
@@ -76,8 +76,7 @@ class WikiRoot(resource.Resource):
         else:
             if config.memoryProfile:
                 config.memoryProfile.addRequest()
-            req = RequestTwisted(request, name, reactor,
-                                 properties=config.properties)
+            req = TWISTED.Request(request, name, reactor, properties=config.properties)
             if config.hotshotProfile:
                 threads.deferToThread(config.hotshotProfile.runcall, req.run)
             else:

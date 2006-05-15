@@ -28,6 +28,37 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+Version 1.6.current:
+    This is the active development branch. All changes get done here and
+    critical stuff gets committed with -m "... (backport to 1.5)" and then
+    backported to 1.5. :) Commits to 1.5 done in any other way are likely to
+    get reverted.
+
+  Developer notes:
+    * refactored some actions to use ActionBase base class
+    * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
+    * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
+    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
+    * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
+    * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
+    * moved wikitest.py stuff to action/test.py (only used from there)
+    * killed "processors" (finally), formatter method changed to:
+      formatter.parser(parsername, lines)
+    * moved / splitted request.py into MoinMoin/request/*
+      Most stuff will be broken, please help fixing it (usually some imports
+      will be missing and the adaptor script will need a change maybe):
+      CGI works
+      CLI works
+      STANDALONE not
+      MODPY not
+      WSGI not
+      FCGI not
+      TWISTED not
+
+  Bugfixes:
+    * on action "info" page, "revert" link will not be displayed for empty page
+      revisions (but you just can delete the current page to get an empty rev.)
+
 Version 1.5.current:
   Developer notes:
     * We switched to Mercurial SCM, see here for more infos:

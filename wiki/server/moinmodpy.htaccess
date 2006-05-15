@@ -39,6 +39,6 @@
 #  PythonPath "['/path/to/moin/lib/python','/path/to/wikiconfig']+sys.path"
 #
 #  # choose the ModPy Request class as handler
-#  PythonHandler MoinMoin.request::RequestModPy.run
+#  PythonHandler MoinMoin.request.MODPY::Request.run
 #
 #</Files>

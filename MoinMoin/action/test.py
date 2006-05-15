@@ -1,25 +1,26 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Installation tests
+    MoinMoin - test action
 
-    Note that this module tests a wiki instance for errors, and
-    does not unit-test the code or something.
+    This action allows you to run some tests and show some data about your system.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    If you don't want this action to be available due to system privacy reasons,
+    do this in your wiki/farm config:
+
+    actions_excluded = ["test"]
+    
+    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+import os, sys
+
+from MoinMoin import config, version
+from MoinMoin.action import ActionBase
+from MoinMoin.logfile import editlog, eventlog
+
 
 def runTest(request):
-    """ This is used by moin.cgi to test the configuration, after MoinMoin
-        is successfully imported. It should request.write(a plain text diagnosis
-        to stdout.
-    """
-    # Note that importing here makes a difference, namely the request
-    # object is already created
-    import os, sys
-    from MoinMoin import version, config
-    from MoinMoin.logfile import editlog, eventlog
-
     request.write('Release %s\n' % version.release)
     request.write('Revision %s\n' % version.revision)
     request.write('Python version %s\n' % sys.version)
@@ -28,10 +29,9 @@ def runTest(request):
     # Try xml
     try:
         import xml
-        request.write('PyXML is %sinstalled\n' %
-                      ('NOT ', '')[xml.__file__.find('_xmlplus') != -1])
+        request.write('PyXML is %sinstalled\n' % ('NOT ', '')[xml.__file__.find('_xmlplus') != -1])
     except ImportError:
-        request.write('xml is missing\n')
+        request.write('PyXML is missing\n')
 
     request.write('Python Path:\n')
     for dir in sys.path:
@@ -96,4 +96,25 @@ def runTest(request):
             request.write("    *** The unit tests are not available ***")
         else:
             _tests.run(request)
+
+class test(ActionBase):
+    """ test and show info action
+
+    Note: the action name is the class name
+    """
+    def do_action(self):
+        """ run tests """
+        request = self.request
+        request.http_headers(["Content-type: text/plain; charset=%s" % config.charset])
+        request.write('MoinMoin Diagnosis\n======================\n\n')
+        runTest(request)
+        return True, ""
+
+    def do_action_finish(self, success):
+        """ we don't want to do the default stuff, but just NOTHING """
+        pass
+
+def execute(pagename, request):
+    """ Glue code for actions """
+    test(pagename, request).render()
 
