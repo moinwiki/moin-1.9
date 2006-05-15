@@ -779,8 +779,13 @@ class convert_tree(visitor):
 
     def process_span(self, node):
         # ignore span tags - just descend
+        is_strike = node.getAttribute("class") == "strike"
+        if is_strike:
+            self.text.append("--(")
         for i in node.childNodes:
             self.process_inline(i)
+        if is_strike:
+            self.text.append(")--")
 
     def process_div(self, node):
         # ignore div tags - just descend

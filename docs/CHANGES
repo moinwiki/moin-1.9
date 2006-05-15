@@ -58,6 +58,7 @@ Version 1.6.current:
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
       revisions (but you just can delete the current page to get an empty rev.)
+    * fix vanishing strike markup after gui editor usage
 
 Version 1.5.current:
   Developer notes:
