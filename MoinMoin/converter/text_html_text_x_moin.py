@@ -1093,6 +1093,8 @@ class convert_tree(visitor):
                 else: 
                     raise ConvertError("Invalid InterWiki link: '%s'" % href)
             elif class_ == "badinterwiki" and title:
+                if href == "/": # we used this as replacement for empty href
+                    href = ""
                 pagename = href
                 interwikiname = "%s:%s" % (title, href)
             if interwikiname and pagename == text: 
