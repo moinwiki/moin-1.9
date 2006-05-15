@@ -470,7 +470,7 @@ reStructuredText Quick Reference
         self._check_directories()
 
         if not isinstance(self.superuser, list):
-            msg = """The superuser</b> setting in your wiki configuration is not a list
+            msg = """The superuser setting in your wiki configuration is not a list
                      (e.g. ['Sample User', 'AnotherUser']).
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)
