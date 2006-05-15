@@ -4,8 +4,8 @@
 This script is just an example how to put data into a wiki using xmlrpc.
 We use wiki rpc v2 here.
 
-This script only works if you edited MoinMoin/wikirpc.py (see the comment
-in the putPage handler) to not require http auth (trusted user) and to
+This script only works if you edited MoinMoin/xmlrpc/__init__.py (see the
+comment in the putPage handler) to not require http auth (trusted user) and to
 really use the pagename we give.
 
 This can be done for migrating data into an offline moin wiki running on

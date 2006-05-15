@@ -170,7 +170,7 @@ class DefaultConfig:
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
     
-    actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage']
+    actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_cookie]

@@ -46,14 +46,6 @@ def TranslateText(text):
 
 
 #############################################################################
-### Exceptions
-#############################################################################
-
-class MoinMoinNoFooter(Exception):
-    """Raised by actions to prevent output of a page footer (with timings)."""
-    pass
-
-#############################################################################
 ### Misc
 #############################################################################
 
@@ -97,7 +89,7 @@ def IsWin9x():
     if hasattr(sys, 'getwindowsversion'):
         if sys.getwindowsversion()[3] == 1:
             return True
-    elif os.environ.get('comspec', '').find('command'):
+    elif 'command' in os.environ.get('comspec', ''):
         return True
     return False
 

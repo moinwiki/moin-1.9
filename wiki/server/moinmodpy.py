@@ -54,9 +54,9 @@ config.use_threads = 1
 del config
 
 
-from MoinMoin.request import RequestModPy
+from MoinMoin.request import MODPY
 
 def handler(request):
-    moinreq = RequestModPy(request)
+    moinreq = MODPY.Request(request)
     return moinreq.run(request)
 

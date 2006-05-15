@@ -243,7 +243,7 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
         status = ' '.join(status)
         status = Status(self.request, content=status)
         
-        wikiutil.send_title(self.request,
+        self.request.theme.send_title(
             title % {'pagename': self.split_title(self.request),},
             page=self,
             pagename=self.page_name, msg=status,
@@ -428,8 +428,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                            hilite_re=badwords_re)
 
         self.request.write(self.request.formatter.endContent())
-        wikiutil.send_footer(self.request, self.page_name)
-        
+        self.request.theme.send_footer(self.page_name)
+        self.request.theme.send_closing_html()
+
     def sendCancel(self, newtext, rev):
         """
         User clicked on Cancel button. If edit locking is active,
