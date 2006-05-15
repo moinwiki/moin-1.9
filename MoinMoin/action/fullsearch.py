@@ -10,7 +10,6 @@
 
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
-from MoinMoin.util import MoinMoinNoFooter
 
 
 def isTitleSearch(request):
@@ -73,7 +72,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             url = page.url(request, querystr={'highlight': query.highlight_re()},
                            escape=0)
             request.http_redirect(url)
-            raise MoinMoinNoFooter
+            return
 
     # send http headers
     request.http_headers()
@@ -89,8 +88,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         title = _('Full Text Search: "%s"')
         results.sortByWeight() 
 
-    wikiutil.send_title(request, title % needle, form=request.form,
-                        pagename=pagename)
+    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
     
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
@@ -107,7 +105,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         output = results.pageList(request, request.formatter, info=info)        
     request.write(output)
 
-    # End content and send footer
     request.write(request.formatter.endContent())
-    wikiutil.send_footer(request, pagename)
+    request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 

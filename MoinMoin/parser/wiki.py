@@ -7,7 +7,7 @@
 """
 
 import os, re
-from MoinMoin import config, wikimacro, wikiutil
+from MoinMoin import config, wikiutil, macro
 from MoinMoin.Page import Page
 from MoinMoin.util import web
 
@@ -62,7 +62,7 @@ class Parser:
 (?P<sup>\^.*?\^)
 (?P<sub>,,[^,]{1,40},,)
 (?P<tt>\{\{\{.*?\}\}\})
-(?P<processor>(\{\{\{(#!.*|\s*$)))
+(?P<parser>(\{\{\{(#!.*|\s*$)))
 (?P<pre>(\{\{\{ ?|\}\}\}))
 (?P<small>(\~- ?|-\~))
 (?P<big>(\~\+ ?|\+\~))
@@ -101,7 +101,7 @@ class Parser:
     # Don't start p before these 
     no_new_p_before = ("heading rule table tableZ tr td "
                        "ul ol dl dt dd li li_none indent "
-                       "macro processor pre")
+                       "macro parser pre")
     no_new_p_before = no_new_p_before.split()
     no_new_p_before = dict(zip(no_new_p_before, [1] * len(no_new_p_before)))
 
@@ -134,7 +134,7 @@ class Parser:
         self.list_indents = []
         self.list_types = []
         
-        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(wikimacro.getNames(self.cfg))}
+        self.formatting_rules = self.formatting_rules % {'macronames': u'|'.join(macro.getNames(self.cfg))}
 
     def _close_item(self, result):
         #result.append("<!-- close item begin -->\n")
@@ -767,14 +767,13 @@ class Parser:
         return (result + self.formatter.text(title_text) +
                 self.formatter.heading(0, depth))
     
-    def _processor_repl(self, word):
-        """Handle processed code displays."""
+    def _parser_repl(self, word):
+        """Handle parsed code displays."""
         if word[:3] == '{{{':
             word = word[3:]
 
-        self.processor = None
-        self.processor_name = None
-        self.processor_is_parser = 0
+        self.parser = None
+        self.parser_name = None
         s_word = word.strip()
         if s_word == '#!':
             # empty bang paths lead to a normal code display
@@ -783,14 +782,14 @@ class Parser:
             self.in_pre = 3
             return self._closeP() + self.formatter.preformatted(1)
         elif s_word[:2] == '#!':
-            # First try to find a processor for this (will go away in 2.0)
-            processor_name = s_word[2:].split()[0]
-            self.setProcessor(processor_name)
+            # First try to find a parser for this (will go away in 2.0)
+            parser_name = s_word[2:].split()[0]
+            self.setParser(parser_name)
 
-        if self.processor:
-            self.processor_name = processor_name
+        if self.parser:
+            self.parser_name = parser_name
             self.in_pre = 2
-            self.colorize_lines = [word]
+            self.parser_lines = [word]
             return ''
         elif s_word:
             self.in_pre = 3
@@ -846,7 +845,7 @@ class Parser:
 
         # create macro instance
         if self.macro is None:
-            self.macro = wikimacro.Macro(self)
+            self.macro = macro.Macro(self)
         return self.formatter.macro(self.macro, macro_name, args)
 
     def scan(self, scan_re, line):
@@ -982,17 +981,16 @@ class Parser:
                 # still looking for processing instructions
                 # TODO: use strings for pre state, not numbers
                 if self.in_pre == 1:
-                    self.processor = None
-                    self.processor_is_parser = 0
-                    processor_name = ''
+                    self.parser = None
+                    parser_name = ''
                     if (line.strip()[:2] == "#!"):
-                        processor_name = line.strip()[2:].split()[0]
-                        self.setProcessor(processor_name)
+                        parser_name = line.strip()[2:].split()[0]
+                        self.setParser(parser_name)
 
-                    if self.processor:
+                    if self.parser:
                         self.in_pre = 2
-                        self.colorize_lines = [line]
-                        self.processor_name = processor_name
+                        self.parser_lines = [line]
+                        self.parser_name = parser_name
                         continue
                     else:
                         self.request.write(self._closeP() +
@@ -1002,21 +1000,19 @@ class Parser:
                     # processing mode
                     endpos = line.find("}}}")
                     if endpos == -1:
-                        self.colorize_lines.append(line)
+                        self.parser_lines.append(line)
                         continue
                     if line[:endpos]:
-                        self.colorize_lines.append(line[:endpos])
+                        self.parser_lines.append(line[:endpos])
                     
-                    # Close p before calling processor
+                    # Close p before calling parser
                     # TODO: do we really need this?
                     self.request.write(self._closeP())
-                    res = self.formatter.processor(self.processor_name,
-                                                   self.colorize_lines, 
-                                                   self.processor_is_parser)
+                    res = self.formatter.parser(self.parser_name, self.parser_lines)
                     self.request.write(res)
-                    del self.colorize_lines
+                    del self.parser_lines
                     self.in_pre = 0
-                    self.processor = None
+                    self.parser = None
 
                     # send rest of line through regex machinery
                     line = line[endpos+3:]
@@ -1109,22 +1105,13 @@ class Parser:
         if self.formatter.in_p: self.request.write(self.formatter.paragraph(0))
         if self.in_table: self.request.write(self.formatter.table(0))
 
-    # --------------------------------------------------------------------
-    # Private helpers
+    # Private helpers ------------------------------------------------------------
     
-    def setProcessor(self, name):
-        """ Set processer to either processor or parser named 'name' """
-        cfg = self.request.cfg
+    def setParser(self, name):
+        """ Set parser to parser named 'name' """
         try:
-            self.processor = wikiutil.importPlugin(cfg, "processor", name,
-                                                   "process")
-            self.processor_is_parser = 0
+            self.parser = wikiutil.importPlugin(self.request.cfg, "parser", name, "Parser")
         except wikiutil.PluginMissingError:
-            try:
-                self.processor = wikiutil.importPlugin(cfg, "parser", name,
-                                                   "Parser")
-                self.processor_is_parser = 1
-            except wikiutil.PluginMissingError:
-                self.processor = None
+            self.parser = None
 
 

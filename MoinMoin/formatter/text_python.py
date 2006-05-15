@@ -180,22 +180,19 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
                 (self.__adjust_formatter_state(),
                  self.__formatter, name, args))
             
-    def processor(self, processor_name, lines, is_parser=0):
-        """ processor_name MUST be valid!
-        prints out the result insted of returning it!
+    def parser(self, parser_name, lines):
+        """ parser_name MUST be valid!
+            prints out the result instead of returning it!
         """
-        type = ["processor", "parser"][is_parser]
         try:
-            Dependencies = wikiutil.importPlugin(self.request.cfg, type,
-                                                 processor_name,
-                                                 "Dependencies")
+            Dependencies = wikiutil.importPlugin(self.request.cfg, "parser", parser_name, "Dependencies")
         except wikiutil.PluginAttributeError:
             Dependencies = self.defaultDependencies
         if self.__is_static(Dependencies):
-            return self.formatter.processor(processor_name, lines, is_parser)
+            return self.formatter.parser(parser_name, lines)
         else:
-            return self.__insert_code('%s%s.processor(%r, %r, %r)' %
+            return self.__insert_code('%s%s.parser(%r, %r)' %
                                       (self.__adjust_formatter_state(),
                                        self.__formatter,
-                                       processor_name, lines, is_parser))
+                                       parser_name, lines))
 

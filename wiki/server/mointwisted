@@ -25,3 +25,4 @@ class TwistedScript(daemon.DaemonScript):
 
 script = TwistedScript(Config.name, None)
 script.run()
+
