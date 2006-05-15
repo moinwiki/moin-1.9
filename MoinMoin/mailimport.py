@@ -1,5 +1,8 @@
 """
     MoinMoin - E-Mail Import
+    
+    Just call this script with the URL of the wiki as a single argument
+    and feed the mail into stdin.
 
     @copyright: 2006 by MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
@@ -164,12 +167,12 @@ def get_pagename_content(msg, email_subpage_template):
 
     return {'pagename': pagename, 'content': content, 'generate_summary': generate_summary}
 
-def import_mail_from_file(input):
+def import_mail_from_file(input, url):
     """ Reads an RFC 822 message from the file `input` and imports it to
         the wiki. """
     msg = process_message(email.message_from_file(input))
 
-    request = RequestCLI(url = 'localhost/')
+    request = RequestCLI(url=url)
     email_subpage_template = request.cfg.email_subpage_template
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
@@ -240,7 +243,12 @@ def import_mail_from_file(input):
         page.saveText(content, 0, comment=comment)
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+    else:
+        url = 'localhost/'
+
     try:
-        import_mail_from_file(input)
+        import_mail_from_file(input, url)
     except ProcessingError, e:
         print >>sys.stderr, "An error occured while processing the message:", e.args
