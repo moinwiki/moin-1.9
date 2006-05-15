@@ -29,6 +29,6 @@ class Parser:
             self.request.write(formatter.rawHTML(Markup(self.raw).sanitize()))
         except HTMLParseError, e:
             self.request.write(formatter.sysmsg(1) + 
-                formatter.text('HTML parsing error: %s in %r' % (e.msg,
+                formatter.text(u'HTML parsing error: %s in "%s"' % (e.msg,
                                   self.raw.splitlines()[e.lineno - 1].strip())) +
                 formatter.sysmsg(0))

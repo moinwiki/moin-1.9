@@ -34,9 +34,10 @@ Version 1.6.current:
     backported to 1.5. :) Commits to 1.5 done in any other way are likely to
     get reverted.
 
-  Developer notes:
+  Developer notes (these should be moved to the end in the release):
     * refactored some actions to use ActionBase base class
-    * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
+    * moved "test" action from wikiaction to MoinMoin/action/
+      (and use ActionBase)
     * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
     * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
@@ -54,6 +55,11 @@ Version 1.6.current:
       WSGI not
       FCGI not
       TWISTED not
+
+  New Features:
+
+    * HTML parser (called "html") that allows you to use HTML on the page.
+      Thanks to the trac team for the nice code.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
