@@ -36,7 +36,6 @@ fname = (
     r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute.msg.txt"
         )
 #input = file(fname)
-
 input = sys.stdin
 
 debug = False
@@ -68,7 +67,6 @@ def decode_2044(header):
     chunks_decoded = []
     for i in chunks:
         chunks_decoded.append(i[0].decode(i[1] or 'ascii'))
-        chunks_decoded.append(u" ") # workaround for python bug #1467619
     return u''.join(chunks_decoded).strip()
 
 def generate_unique_name(name, old_names):
@@ -131,7 +129,7 @@ def get_pagename_content(msg, email_subpage_template):
         that can be found on MoinMoin:FeatureRequests/WikiEMoinMoin\mailintegration """
 
     generate_summary = False
-    choose_html = False
+    choose_html = True
     
     pagename_tpl = msg['to_addr'][0]
     if not pagename_tpl:
