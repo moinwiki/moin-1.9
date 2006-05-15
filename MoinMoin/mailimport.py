@@ -5,26 +5,23 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# TODO: check XXX, auf welchen seiten soll
-# eine uebersicht generiert werden?
-
 import os
 import re
 import sys
 import email
 import time
 from email.Utils import parseaddr, parsedate_tz, mktime_tz
-# python, at least up to 2.4, ships a broken parser for headers
 
 # XXX debugging
-sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail\sa")
-sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail")
+#sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail\sa")
+#sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail")
 
 from MoinMoin import user, wikiutil, config
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.request.CLI import Request as RequestCLI
+# python, at least up to 2.4, ships a broken parser for headers
 from MoinMoin.support.HeaderFixed import decode_header
 
 #XXX debugging
@@ -32,12 +29,12 @@ fname = (
     #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\testmsg.txt"
     #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\rf-mime-torture-test-1.0.msg.txt"
     #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\torture-test.msg.txt"
-    r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute2.msg.txt"
-    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute.msg.txt"
+    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute2.msg.txt"
+    r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute.msg.txt"
         )
-input = file(fname)
-#XXX
-#input = sys.stdin
+#input = file(fname)
+
+input = sys.stdin
 
 debug = False
 
