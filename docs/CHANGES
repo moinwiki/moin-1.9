@@ -55,6 +55,10 @@ Version 1.6.current:
       WSGI not
       FCGI not
       TWISTED not
+    * added wikiutil.MimeType class (works internally with sanitized mime
+      types because the official ones suck)
+    * renamed parsers to module names representing sane mimetypes, e.g.:
+      parser.wiki -> parser.text_moin_wiki
 
   New Features:
 

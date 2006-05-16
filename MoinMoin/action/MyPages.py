@@ -57,7 +57,7 @@ the group pages.
     pagecontent = pagecontent.replace('\n', '\r\n')
 
     from MoinMoin.Page import Page
-    from MoinMoin.parser.wiki import Parser
+    from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
     request.http_headers()
     
     # This action generate data using the user language
@@ -67,7 +67,7 @@ the group pages.
     # Start content - IMPORTANT - without content div, there is no direction support!
     request.write(request.formatter.startContent("content"))
 
-    parser = Parser(pagecontent, request)
+    parser = WikiParser(pagecontent, request)
     p = Page(request, "$$$")
     request.formatter.setPage(p)
     parser.format(request.formatter)
