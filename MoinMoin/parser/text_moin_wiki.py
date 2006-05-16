@@ -1109,9 +1109,14 @@ class Parser:
     
     def setParser(self, name):
         """ Set parser to parser named 'name' """
-        try:
-            self.parser = wikiutil.importPlugin(self.request.cfg, "parser", name, "Parser")
-        except wikiutil.PluginMissingError:
-            self.parser = None
-
+        mt = wikiutil.MimeType(name)
+        self.parser = None
+        for module_name in mt.module_name():
+            try:
+                self.parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
+                break
+            except wikiutil.PluginMissingError:
+                pass
+        else:
+            raise "Parser not found!" # XXX what now?
 

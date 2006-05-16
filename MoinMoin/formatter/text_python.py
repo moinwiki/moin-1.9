@@ -184,9 +184,14 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
         """ parser_name MUST be valid!
             prints out the result instead of returning it!
         """
-        try:
-            Dependencies = wikiutil.importPlugin(self.request.cfg, "parser", parser_name, "Dependencies")
-        except wikiutil.PluginAttributeError:
+        mt = wikiutil.MimeType(parser_name)
+        for module_name in mt.module_name():
+            try:
+                Dependencies = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Dependencies")
+                break
+            except wikiutil.PluginAttributeError:
+                pass
+        else:
             Dependencies = self.defaultDependencies
         if self.__is_static(Dependencies):
             return self.formatter.parser(parser_name, lines)
