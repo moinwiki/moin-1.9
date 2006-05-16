@@ -8,10 +8,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# known bugs:
-# does not generate a table on the parent page
-# HTML does not really work because it should retain the <body> only     
-
 import os
 import re
 import sys
@@ -194,10 +190,8 @@ def import_mail_from_file(input, url):
                 break
 
     # build an attachment link table for the page with the e-mail
-    attachment_table = [""]
     escape_link = lambda x: x.replace(" ", "%20")
-    for x in attachments:
-        attachment_table.append(u" * [attachment:%s attachment:%s]" % tuple([escape_link(x)] * 2))
+    attachment_links = [""] + [u"[attachment:%s attachment:%s]" % tuple([escape_link(u"%s/%s" % (pagename, x))] * 2) for x in attachments]
 
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
@@ -205,7 +199,7 @@ def import_mail_from_file(input, url):
         new_content = u"%s\n-----\n%s" % (old_content, d['content'], )
     else:
         new_content = d['content']
-    new_content += u"\n".join(attachment_table)
+    new_content += "\n" + u"\n * ".join(attachment_links)
 
     try:
         page.saveText(new_content, 0, comment=comment)
@@ -214,9 +208,31 @@ def import_mail_from_file(input, url):
     
     if generate_summary and "/" in pagename:
         parent_page = u"/".join(pagename.split("/")[:-1])
-        mail_table = "Here will be added a table with links to the mail later on."
-        content = "%s\n\n%s" % (Page(request, parent_page).get_raw_body(), mail_table)
-        # XXX Append a table "from / to / subj / date / link to content / link(s) to attachments" to the end of the parent page
+        old_content = Page(request, parent_page).get_raw_body().splitlines()
+        
+        found_table = None
+        table_ends = None
+        for lineno, line in enumerate(old_content):
+            if line.startswith("## mail_overview") and old_content[lineno+1].startswith("||"):
+                found_table = lineno
+            elif found_table is not None and line.startswith("||"):
+                table_ends = lineno + 1
+        
+        table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
+                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                       )
+        new_line = u'|| %s || %s || %s || ["%s"] || %s ||' % (
+            msg['from_addr'][0] or msg['from_addr'][1],
+            msg['subject'],
+            msg['date'],
+            pagename,
+            " ".join(attachment_links),
+                                                               )
+        if found_table:
+            content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
+        else:
+            content = "\n".join(old_content) + table_header + new_line
+
         page = PageEditor(request, parent_page, do_editor_backup=0)
         page.saveText(content, 0, comment=comment)
 
