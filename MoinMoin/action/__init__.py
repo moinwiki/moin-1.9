@@ -364,7 +364,7 @@ def do_edit(pagename, request):
     cancelled = request.form.has_key('button_cancel')
 
     # convert input from Graphical editor
-    from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
+    from MoinMoin.converter.text_html_text_moin_wiki import convert, ConvertError
     try:
         if lasteditor == 'gui':
             savetext = convert(request, pagename, savetext)
