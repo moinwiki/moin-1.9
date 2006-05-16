@@ -8,6 +8,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+# known bugs:
+# does not generate a table on the parent page
+# HTML does not really work because it should retain the <body> only     
+
 import os
 import re
 import sys
@@ -69,17 +73,6 @@ def decode_2044(header):
         chunks_decoded.append(i[0].decode(i[1] or 'ascii'))
     return u''.join(chunks_decoded).strip()
 
-def generate_unique_name(name, old_names):
-    """ Is used to generate unique names among attachments. """
-    if name not in old_names:
-        return name
-    i = 0
-    while 1:
-        i += 1
-        new_name = name + "-" + str(i)
-        if new_name not in old_names:
-            return new_name
-
 def process_message(message):
     """ Processes the read message and decodes attachments. """
     attachments = []
@@ -118,7 +111,7 @@ def process_message(message):
             elif ct == 'text/html':
                 html_data.append(payload.decode(cs))
             elif not part.is_multipart():
-                print "Unknown mail part", repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), ))
+                log("Unknown mail part", repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
             'attachments': attachments, 'to_addr': to_addr, 'from_addr': from_addr,
@@ -222,7 +215,7 @@ def import_mail_from_file(input, url):
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
     if old_content:
-        new_content = u"%s-----\n%s" % (old_content, d['content'], )
+        new_content = u"%s\n-----\n%s" % (old_content, d['content'], )
     else:
         new_content = d['content']
     new_content += u"\n".join(attachment_table)
