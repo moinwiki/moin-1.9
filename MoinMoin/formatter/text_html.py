@@ -7,7 +7,7 @@
 """
 import os.path, re
 from sets import Set # TODO: when we require Python 2.4+ use the builtin 'set' type
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
@@ -726,10 +726,6 @@ class Formatter(FormatterBase):
                                      title="%s" % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
         
     
-    # def attachment_inlined(self, url, text, **kw):
-    # moved to MoinMoin/formatter/base.py
-
-
     # Text ##############################################################
     
     def _text(self, text):

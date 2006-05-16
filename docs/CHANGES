@@ -43,6 +43,7 @@ Version 1.6.current:
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
     * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
     * moved wikitest.py stuff to action/test.py (only used from there)
+    * moved formatter/base.py to formatter/__init__.py (FormatterBase)
     * killed "processors" (finally), formatter method changed to:
       formatter.parser(parsername, lines)
     * moved / splitted request.py into MoinMoin/request/*

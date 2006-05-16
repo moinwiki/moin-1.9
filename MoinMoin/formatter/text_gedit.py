@@ -6,8 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.formatter import text_html
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase, text_html
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile

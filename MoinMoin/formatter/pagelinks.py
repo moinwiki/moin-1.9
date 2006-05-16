@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 
 class Formatter(FormatterBase):
     """ Collect pagelinks and format nothing :-) """        

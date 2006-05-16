@@ -11,7 +11,7 @@
 
 import sys, traceback, os
 
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, config
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile

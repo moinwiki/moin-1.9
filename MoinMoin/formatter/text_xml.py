@@ -7,7 +7,7 @@
 """
 
 from xml.sax import saxutils
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 from MoinMoin import config
 from MoinMoin.Page import Page
 
