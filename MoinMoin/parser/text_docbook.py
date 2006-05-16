@@ -36,8 +36,8 @@ import cPickle
 import re
 
 from MoinMoin import caching, config, wikiutil, Page
-from MoinMoin.parser.xslt import Parser as XsltParser
-from MoinMoin.parser.wiki import Parser as WikiParser
+from MoinMoin.parser.text_xslt import Parser as XsltParser
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 Dependencies = []
 

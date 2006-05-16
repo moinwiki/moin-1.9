@@ -2,8 +2,8 @@
 """
     MoinMoin - Macro Implementation
 
-    These macros are used by the parser/wiki.py module
-    to implement complex and/or dynamic page content.
+    These macros are used by the wiki parser module to implement complex
+    and/or dynamic page content.
 
     The canonical interface to plugin macros is their execute() function,
     which gets passed an instance of the Macro class. Such an instance

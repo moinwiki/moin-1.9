@@ -1221,15 +1221,17 @@ class Page:
                     ) % {'pagename': self.formatter.text(self.page_name)})
                     request.write(''.join(pi_formtext))
 
-        # Load the parser, or default to plain text parser that will
-        # just show the page raw source.
-        # TODO: do we need this magic? any effect on debugging?
-        try:
-            Parser = wikiutil.importPlugin(self.request.cfg, "parser", 
-                                           self.pi_format, "Parser")
-        except wikiutil.PluginMissingError:
-            from MoinMoin.parser.plain import Parser
-
+        # Load the parser
+        mt = wikiutil.MimeType(self.pi_format)
+        for module_name in mt.module_name():
+            try:
+                Parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
+                break
+            except wikiutil.PluginMissingError:
+                pass
+        else:
+            raise "No matching parser" # XXX what do we use if nothing at all matches?
+            
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
 
@@ -1312,11 +1314,15 @@ class Page:
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
             if parser is None:
-                try:
-                    parser = wikiutil.importPlugin(self.request.cfg, "parser",
-                                                   self.pi_format, "Parser")
-                except wikiutil.PluginMissingError:
-                    pass
+                mt = wikiutil.MimeType(self.pi_format)
+                for module_name in mt.module_name():
+                    try:
+                        parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
+                        break
+                    except wikiutil.PluginMissingError:
+                        pass
+                else:
+                    raise "no matching parser" # XXX what now?
             return getattr(parser, 'caching', False)
         return False
 
