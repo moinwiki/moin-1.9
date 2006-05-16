@@ -88,6 +88,8 @@ class Request(RequestBase):
 
         args = {}
         for key in form.keys():
+            if key is None:
+                continue
             values = form[key]
             if not isinstance(values, list):
                 values = [values]
