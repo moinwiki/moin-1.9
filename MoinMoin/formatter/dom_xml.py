@@ -9,7 +9,7 @@
 line_anchors = True
 
 from xml.dom import minidom
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 
 #def print_dom(element, indent=''):
 #    print indent + element.tagName
