@@ -76,12 +76,10 @@ Contact the owner of the wiki, who can enable email.""")
             except KeyError:
                 return _("Please provide a valid email address!")
     
-            users = user.getUserList(self.request)
-            for uid in users:
-                theuser = user.User(self.request, uid)
-                if theuser.valid and theuser.email.lower() == email:
-                    msg = theuser.mailAccountData()
-                    return wikiutil.escape(msg)
+            u = user.get_by_email_address(self.request, email)
+            if u:
+                msg = u.mailAccountData()
+                return wikiutil.escape(msg)
 
             return _("Found no account matching the given email address '%(email)s'!") % {'email': wikiutil.escape(email)}
 

@@ -239,6 +239,7 @@ reStructuredText Quick Reference
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_rows = 20
+    email_subpage_template = u"$from-$date-$subj" # used for mail import
                 
     hacks = {} # { 'feature1': value1, ... }
                # Configuration for features still in development.
