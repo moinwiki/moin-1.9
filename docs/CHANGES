@@ -34,14 +34,16 @@ Version 1.6.current:
     backported to 1.5. :) Commits to 1.5 done in any other way are likely to
     get reverted.
 
-  Developer notes:
+  Developer notes (these should be moved to the end in the release):
     * refactored some actions to use ActionBase base class
-    * moved "test" action from wikiaction to MoinMoin/action/ (and use ActionBase)
+    * moved "test" action from wikiaction to MoinMoin/action/
+      (and use ActionBase)
     * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
     * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
     * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
     * moved wikitest.py stuff to action/test.py (only used from there)
+    * moved formatter/base.py to formatter/__init__.py (FormatterBase)
     * killed "processors" (finally), formatter method changed to:
       formatter.parser(parsername, lines)
     * moved / splitted request.py into MoinMoin/request/*
@@ -54,10 +56,21 @@ Version 1.6.current:
       WSGI not
       FCGI not
       TWISTED not
+    * added wikiutil.MimeType class (works internally with sanitized mime
+      types because the official ones suck)
+    * renamed parsers to module names representing sane mimetypes, e.g.:
+      parser.wiki -> parser.text_moin_wiki
+
+  New Features:
+
+    * HTML parser (called "html") that allows you to use HTML on the page.
+      Thanks to the trac team for the nice code.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
       revisions (but you just can delete the current page to get an empty rev.)
+    * fix vanishing strike markup after gui editor usage
+    * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
 
 Version 1.5.current:
   Developer notes:

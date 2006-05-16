@@ -26,13 +26,13 @@ class ImportNameFromMoinTestCase(unittest.TestCase):
     def testNonExistingAttribute(self):
         """ pysupport: import nonexistent attritbue raises AttributeError """
         self.assertRaises(AttributeError, pysupport.importName,
-                          'MoinMoin.parser.wiki','NoSuchParser')
+                          'MoinMoin.parser.text_moin_wiki','NoSuchParser')
 
     def testExisting(self):
         """ pysupport: import name from existing module """
-        from MoinMoin.parser import wiki
-        Parser = pysupport.importName('MoinMoin.parser.wiki', 'Parser')
-        self.failUnless(Parser is wiki.Parser)
+        from MoinMoin.parser import text_moin_wiki
+        Parser = pysupport.importName('MoinMoin.parser.text_moin_wiki', 'Parser')
+        self.failUnless(Parser is text_moin_wiki.Parser)
    
 
 class ImportNameFromPlugin(unittest.TestCase):
@@ -42,11 +42,9 @@ class ImportNameFromPlugin(unittest.TestCase):
     
     def setUp(self):
         """ Check for valid plugin package """
-        self.pluginDirectory = os.path.join(self.request.cfg.data_dir,
-                                            'plugin', 'parser')
+        self.pluginDirectory = os.path.join(self.request.cfg.data_dir, 'plugin', 'parser')
         self.checkPackage(self.pluginDirectory)
-        self.pluginModule = (self.request.cfg.siteid + '.plugin.parser.' +
-                             self.plugin)
+        self.pluginModule = (self.request.cfg.siteid + '.plugin.parser.' + self.plugin)
 
     def checkPackage(self, path):
         for item in (path, os.path.join(path, '__init__.py')):
@@ -124,5 +122,4 @@ class Parser:
             except OSError, err:
                 if err.errno != errno.ENOENT:
                     raise
-    
-            
+

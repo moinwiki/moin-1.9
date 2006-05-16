@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-MoinMoin - MoinMoin.text_html_text_x_moin Tests
+MoinMoin - MoinMoin.text_html_text_moin_wiki Tests
 
 @copyright: 2005 by Bastian Blank, ThomasWaldmann
 @license: GNU GPL, see COPYING for details.
@@ -10,7 +10,7 @@ import unittest
 from MoinMoin import _tests
 
 from cStringIO import StringIO
-from MoinMoin.converter import text_html_text_x_moin as converter
+from MoinMoin.converter import text_html_text_moin_wiki as converter
 from MoinMoin.parser.wiki import Parser
 from MoinMoin.formatter.text_gedit import Formatter
 from MoinMoin.request import Clock

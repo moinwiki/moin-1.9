@@ -11,7 +11,6 @@ import re
 from StringIO import StringIO
 from MoinMoin._tests import TestConfig
 from MoinMoin.Page import Page
-from MoinMoin.parser.wiki import Parser
 from MoinMoin import wikiutil
 
 

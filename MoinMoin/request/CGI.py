@@ -9,6 +9,7 @@
 """
 import sys, os
 
+from MoinMoin import config
 from MoinMoin.request import RequestBase
 
 class Request(RequestBase):

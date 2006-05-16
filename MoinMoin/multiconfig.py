@@ -309,7 +309,7 @@ reStructuredText Quick Reference
         'unsubscribe': ("%(q_page_name)s?action=subscribe", _("UnSubscribe"), "unsubscribe"),
         'subscribe':   ("%(q_page_name)s?action=subscribe", _("Subscribe"), "subscribe"),
         'raw':         ("%(q_page_name)s?action=raw", _("Raw"), "raw"),
-        'xml':         ("%(q_page_name)s?action=format&amp;mimetype=text/xml", _("XML"), "xml"),
+        'xml':         ("%(q_page_name)s?action=show&amp;mimetype=text/xml", _("XML"), "xml"),
         'print':       ("%(q_page_name)s?action=print", _("Print"), "print"),
         'view':        ("%(q_page_name)s", _("View"), "view"),
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
@@ -470,7 +470,7 @@ reStructuredText Quick Reference
         self._check_directories()
 
         if not isinstance(self.superuser, list):
-            msg = """The superuser</b> setting in your wiki configuration is not a list
+            msg = """The superuser setting in your wiki configuration is not a list
                      (e.g. ['Sample User', 'AnotherUser']).
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)

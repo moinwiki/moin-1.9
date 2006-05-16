@@ -5,7 +5,6 @@ auth.py
 caching.py
 config.py
 error.py
-request.py
 search.py
 security.py
 user.py
@@ -13,9 +12,6 @@ userform.py
 version.py
 wikiacl.py
 wikiform.py
-wikimacro.py
-wikirpc.py
-wikitest.py
 wikiutil.py
 wikidicts.py
 failure.py
@@ -23,8 +19,8 @@ patchlevel.py
 PageEditor.py
 packages.py
 multiconfig.py
-wikiaction.py
 
+action/__init__.py
 action/PackagePages.py
 action/login.py
 action/LikePages.py
@@ -32,7 +28,6 @@ action/LocalSiteMap.py
 action/MyPages.py
 action/RenamePage.py
 action/SpellCheck.py
-action/__init__.py
 action/fckdialog.py
 action/fullsearch.py
 action/links.py
@@ -49,17 +44,16 @@ action/AttachFile.py
 action/userprefs.py
 
 converter/__init__.py
-converter/text_html_text_x_moin.py
+converter/text_html_text_moin_wiki.py
 
 formatter/__init__.py
-formatter/base.py
+formatter/pagelinks.py
 formatter/dom_xml.py
 formatter/text_plain.py
 formatter/text_html.py
 formatter/text_xml.py
-formatter/xml_docbook.py
+formatter/text_docbook.py
 formatter/text_gedit.py
-formatter/pagelinks.py
 formatter/text_python.py
 
 i18n/__init__.py
@@ -70,7 +64,7 @@ logfile/editlog.py
 logfile/eventlog.py
 logfile/logfile.py
 
-
+macro/__init__.py
 macro/AbandonedPages.py
 macro/Action.py
 macro/AttachInfo.py
@@ -99,25 +93,22 @@ macro/TableOfContents.py
 macro/TeudView.py
 macro/Verbatim.py
 macro/WantedPages.py
-macro/__init__.py
 macro/StatsChart.py
 macro/Include.py
 macro/ShowSmileys.py
 
-parser/CSV.py
 parser/__init__.py
-parser/cplusplus.py
-parser/docbook.py
-parser/irc.py
-parser/java.py
-parser/pascal.py
-parser/plain.py
-parser/python.py
-parser/rst.py
-parser/wiki.py
-parser/xslt.py
-
-processor/__init__.py
+parser/text.py
+parser/text_csv.py
+parser/text_cplusplus.py
+parser/text_docbook.py
+parser/text_irssi.py
+parser/text_java.py
+parser/text_pascal.py
+parser/text_python.py
+parser/text_rst.py
+parser/text_moin_wiki.py
+parser/text_xslt.py
 
 server/__init__.py
 server/daemon.py
@@ -176,9 +167,9 @@ wikixml/marshal.py
 wikixml/util.py
 wikixml/xsltutil.py
 
+xmlrpc/__init__.py
 xmlrpc/HelloWorld.py
 xmlrpc/UpdateGroup.py
-xmlrpc/__init__.py
 xmlrpc/putClientInfo.py
 xmlrpc/WhoAmI.py
 
@@ -199,4 +190,15 @@ filter/text_xml.py
 filter/application_vnd_sun_xml_calc.py
 filter/application_vnd_sun_xml_writer.py
 filter/application_octet_stream.py
+
+request/__init__.py
+request/CGI.py
+request/FCGI.py
+request/CLI.py
+request/WSGI.py
+request/MODPYTHON.py
+request/TWISTED.py
+request/STANDALONE.py
+
+script/moin.py
 

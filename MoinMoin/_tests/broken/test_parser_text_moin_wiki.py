@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.parser.wiki Tests
+    MoinMoin - MoinMoin.parser.text_moin_wiki Tests
 
     TODO: these are actually parser+formatter tests. We should have
     parser only tests here.
