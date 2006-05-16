@@ -11,7 +11,7 @@
 
 import sha, StringIO
 from MoinMoin import config
-from MoinMoin.parser import wiki
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 Dependencies = ["time"] # footnote macro cannot be cached
 
@@ -61,7 +61,7 @@ def emit_footnotes(request, formatter):
                         
             out=StringIO.StringIO()
             request.redirect(out)
-            parser=wiki.Parser(request.footnotes[idx][0], request,
+            parser = WikiParser(request.footnotes[idx][0], request,
                                line_anchors=False)
             parser.format(formatter)
             result.append(out.getvalue())

@@ -19,7 +19,7 @@ import types
 import os
 
 # docutils imports are below
-import MoinMoin.parser.wiki
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 from MoinMoin import wikiutil
@@ -145,7 +145,7 @@ class MoinWriter(html4css1.Writer):
         self.unknown_reference_resolvers = [self.wiki_resolver]
         # We create a new parser to process MoinMoin wiki style links in the
         # reST.
-        self.wikiparser = MoinMoin.parser.wiki.Parser('', self.request)
+        self.wikiparser = WikiParser('', self.request)
         self.wikiparser.formatter = self.formatter
         self.wikiparser.hilite_re = None
         self.nodes = []
