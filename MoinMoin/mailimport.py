@@ -19,10 +19,6 @@ import email
 import time
 from email.Utils import parseaddr, parsedate_tz, mktime_tz
 
-# XXX debugging
-#sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail\sa")
-#sys.path.append(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-mail")
-
 from MoinMoin import user, wikiutil, config
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
@@ -31,15 +27,6 @@ from MoinMoin.request.CLI import Request as RequestCLI
 # python, at least up to 2.4, ships a broken parser for headers
 from MoinMoin.support.HeaderFixed import decode_header
 
-#XXX debugging
-fname = (
-    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\testmsg.txt"
-    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\rf-mime-torture-test-1.0.msg.txt"
-    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\torture-test.msg.txt"
-    #r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute2.msg.txt"
-    r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\mailint\umlaute.msg.txt"
-        )
-#input = file(fname)
 input = sys.stdin
 
 debug = False
@@ -175,7 +162,7 @@ def import_mail_from_file(input, url):
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
-    comment = u"Imported mail from %s re %s" % (msg['from_addr'][0], msg['subject'])
+    comment = u"Imported mail from '%s' re '%s'" % (msg['from_addr'][0], msg['subject'])
     
     page = PageEditor(request, pagename, do_editor_backup=0)
     
