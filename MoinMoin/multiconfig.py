@@ -309,7 +309,7 @@ reStructuredText Quick Reference
         'unsubscribe': ("%(q_page_name)s?action=subscribe", _("UnSubscribe"), "unsubscribe"),
         'subscribe':   ("%(q_page_name)s?action=subscribe", _("Subscribe"), "subscribe"),
         'raw':         ("%(q_page_name)s?action=raw", _("Raw"), "raw"),
-        'xml':         ("%(q_page_name)s?action=format&amp;mimetype=text/xml", _("XML"), "xml"),
+        'xml':         ("%(q_page_name)s?action=show&amp;mimetype=text/xml", _("XML"), "xml"),
         'print':       ("%(q_page_name)s?action=print", _("Print"), "print"),
         'view':        ("%(q_page_name)s", _("View"), "view"),
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),

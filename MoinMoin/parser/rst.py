@@ -216,7 +216,7 @@ class RawHTMLList(list):
         RawHTMLList catches all html appended to internal HTMLTranslator lists.
         It passes the HTML through the MoinMoin rawHTML formatter to strip 
         markup when necessary. This is to support other formatting outputs
-        (such as ?action=format&mimetype=text/plain).
+        (such as ?action=show&mimetype=text/plain).
     """
     
     def __init__(self, formatter):
