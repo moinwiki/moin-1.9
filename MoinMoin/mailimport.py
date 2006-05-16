@@ -106,7 +106,7 @@ def process_message(message):
 
 def get_pagename_content(msg, email_subpage_template, wiki_address):
     """ Generates pagename and content according to the specification
-        that can be found on MoinMoin:FeatureRequests/WikiEMoinMoin\mailintegration """
+        that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
 
     generate_summary = False
     choose_html = True
@@ -226,6 +226,8 @@ def import_mail_from_file(input, url):
                 found_table = lineno
             elif found_table is not None and line.startswith("||"):
                 table_ends = lineno + 1
+            elif table_ends is not None and not line.startswith("||"):
+                break
         
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
                         u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
