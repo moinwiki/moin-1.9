@@ -204,6 +204,8 @@ class HTMLSanitizer(HTMLParser):
         'span', 'src', 'start', 'style', 'summary', 'tabindex',
         'target', 'title', 'type', 'usemap', 'valign', 'value',
         'vspace', 'width'])
+    ignore_tags = frozenset(['html', 'body'])
+    
     uri_attrs = frozenset(['action', 'background', 'dynsrc', 'href',
                            'lowsrc', 'src'])
     safe_schemes = frozenset(['file', 'ftp', 'http', 'https', 'mailto',
@@ -217,6 +219,9 @@ class HTMLSanitizer(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if self.waiting_for:
             return
+        if tag in self.ignore_tags:
+            return
+        
         if tag not in self.safe_tags:
             self.waiting_for = tag
             return
@@ -268,6 +273,9 @@ class HTMLSanitizer(HTMLParser):
             self.out.write(escape(data, quotes=False))
 
     def handle_endtag(self, tag):
+        if tag in self.ignore_tags:
+            return
+
         if self.waiting_for:
             if self.waiting_for == tag:
                 self.waiting_for = None
