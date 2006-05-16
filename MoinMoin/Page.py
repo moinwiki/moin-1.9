@@ -1007,14 +1007,16 @@ class Page:
             from MoinMoin.formatter.text_html import Formatter
             self.formatter = Formatter(request, store_pagelinks=1)
         elif not self.formatter:
-            formatterName = self.output_mimetype.replace('/', '_').replace('.', '_') # XXX use existing fn for that
-            try:
-                Formatter = wikiutil.importPlugin(request.cfg, "formatter", formatterName, "Formatter")
-                self.formatter = Formatter(request)
-            except wikiutil.PluginMissingError:
-                from MoinMoin.formatter.text_html import Formatter
-                self.formatter = Formatter(request, store_pagelinks=1)
-                self.output_mimetype = "text/html"
+            omt = wikiutil.MimeType(self.output_mimetype)
+            for module_name in omt.module_name():
+                try:
+                    Formatter = wikiutil.importPlugin(request.cfg, "formatter", module_name, "Formatter")
+                    self.formatter = Formatter(request)
+                    break
+                except wikiutil.PluginMissingError:
+                    pass
+            else:
+                raise "Plugin missing error!" # XXX what now?
         request.formatter = self.formatter
         self.formatter.setPage(self)
         if self.hilite_re:
