@@ -779,8 +779,13 @@ class convert_tree(visitor):
 
     def process_span(self, node):
         # ignore span tags - just descend
+        is_strike = node.getAttribute("class") == "strike"
+        if is_strike:
+            self.text.append("--(")
         for i in node.childNodes:
             self.process_inline(i)
+        if is_strike:
+            self.text.append(")--")
 
     def process_div(self, node):
         # ignore div tags - just descend
@@ -1088,6 +1093,8 @@ class convert_tree(visitor):
                 else: 
                     raise ConvertError("Invalid InterWiki link: '%s'" % href)
             elif class_ == "badinterwiki" and title:
+                if href == "/": # we used this as replacement for empty href
+                    href = ""
                 pagename = href
                 interwikiname = "%s:%s" % (title, href)
             if interwikiname and pagename == text: 

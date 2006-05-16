@@ -244,9 +244,8 @@ def do_format(pagename, request):
         Since 5.5.2006 this functionality is also done by do_show, but do_format
         has a default of text/plain when no format is given.
         It also does not count in statistics and also does not set the cacheable flag.
-        TODO: remove this action when we don't need it any more for compatibility.
+        DEPRECATED: remove this action when we don't need it any more for compatibility.
     """
-    # get the MIME type
     if not request.form.has_key('mimetype'):
         request.form['mimetype'] = [u"text/plain"]
     do_show(pagename, request, count_hit=0, cacheable=0)
@@ -365,7 +364,7 @@ def do_edit(pagename, request):
     cancelled = request.form.has_key('button_cancel')
 
     # convert input from Graphical editor
-    from MoinMoin.converter.text_html_text_x_moin import convert, ConvertError
+    from MoinMoin.converter.text_html_text_moin_wiki import convert, ConvertError
     try:
         if lasteditor == 'gui':
             savetext = convert(request, pagename, savetext)
