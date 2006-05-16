@@ -64,6 +64,9 @@ def process_message(message):
    
     to_addr = parseaddr(decode_2044(message['To']))
     from_addr = parseaddr(decode_2044(message['From']))
+    cc_addr = parseaddr(decode_2044(message['Cc']))
+    bcc_addr = parseaddr(decode_2044(message['Bcc']))
+    
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%d %H:%M", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
     
@@ -94,20 +97,25 @@ def process_message(message):
             elif ct == 'text/html':
                 html_data.append(payload.decode(cs))
             elif not part.is_multipart():
-                log("Unknown mail part", repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
+                log("Unknown mail part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
-            'attachments': attachments, 'to_addr': to_addr, 'from_addr': from_addr,
+            'attachments': attachments,
+            'to_addr': to_addr, 'from_addr': from_addr, 'cc_addr': cc_addr, 'bcc_addr': bcc_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(msg, email_subpage_template):
+def get_pagename_content(msg, email_subpage_template, wiki_address):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEMoinMoin\mailintegration """
 
     generate_summary = False
     choose_html = True
     
-    pagename_tpl = msg['to_addr'][0]
+    pagename_tpl = ""
+    for addr in ('to_addr', 'cc_addr', 'bcc_addr'):
+        if msg[addr][1].strip().lower() == wiki_address:
+            pagename_tpl = msg[addr][0]
+
     if not pagename_tpl:
         m = re_subject.match(msg['subject'])
         if m:
@@ -148,13 +156,14 @@ def import_mail_from_file(input, url):
 
     request = RequestCLI(url=url)
     email_subpage_template = request.cfg.email_subpage_template
+    wiki_address = request.cfg.email_wiki_address or request.cfg.mail_from
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
     
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(msg, email_subpage_template)
+    d = get_pagename_content(msg, email_subpage_template, wiki_address)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
@@ -219,10 +228,11 @@ def import_mail_from_file(input, url):
                 table_ends = lineno + 1
         
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
-                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
-        new_line = u'|| %s || %s || %s || ["%s"] || %s ||' % (
+        new_line = u'|| %s || %s || %s || %s || ["%s"] || %s ||' % (
             msg['from_addr'][0] or msg['from_addr'][1],
+            msg['to_addr'][0] or msg['to_addr'][1],
             msg['subject'],
             msg['date'],
             pagename,
