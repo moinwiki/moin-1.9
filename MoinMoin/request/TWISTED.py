@@ -9,7 +9,7 @@
 import sys, os
 
 from MoinMoin import config
-from MoinMoin.request import RequestBase
+from MoinMoin.request import RequestBase, MoinMoinFinish
 
 class Request(RequestBase):
     """ specialized on Twisted requests """

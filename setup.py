@@ -204,7 +204,7 @@ only requiring a Python installation.
         'MoinMoin.logfile',
         'MoinMoin.macro',
         'MoinMoin.parser',
-        'MoinMoin.processor',
+        'MoinMoin.request',
         'MoinMoin.script',
         'MoinMoin.script.account',
         'MoinMoin.script.cli',
