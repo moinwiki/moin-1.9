@@ -71,6 +71,7 @@ Version 1.6.current:
       revisions (but you just can delete the current page to get an empty rev.)
     * fix vanishing strike markup after gui editor usage
     * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
+    * fix mod_python attachment upload bug (thanks to Nick Phillips)
 
 Version 1.5.current:
   Developer notes:
