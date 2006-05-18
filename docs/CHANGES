@@ -72,6 +72,7 @@ Version 1.6.current:
     * fix vanishing strike markup after gui editor usage
     * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
     * fix mod_python attachment upload bug (thanks to Nick Phillips)
+    * fix show_version to show it in the same way as SystemInfo
 
 Version 1.5.current:
   Developer notes:
