@@ -693,10 +693,10 @@ searchBlur(e);
         """
         html = ''
         if self.cfg.show_version and not keywords.get('print_mode', 0):
-            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2006 by '
-                    'Juergen Hermann</div>') % (version.revision,)
+            html = (u'<div id="version">MoinMoin Release %s [Revision %s], '
+                     'Copyright 2000-2006 by Juergen Hermann</div>') % (version.release, version.revision, )
         return html
-
+    
     def headscript(self, d):
         """ Return html head script with common functions
 
