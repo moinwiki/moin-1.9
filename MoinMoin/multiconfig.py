@@ -241,6 +241,7 @@ reStructuredText Quick Reference
     edit_rows = 20
     email_subpage_template = u"$from-$date-$subj" # used for mail import
     email_wiki_address = None # the e-mail address for e-mails that should go into the wiki
+    email_secret = ""
                 
     hacks = {} # { 'feature1': value1, ... }
                # Configuration for features still in development.
