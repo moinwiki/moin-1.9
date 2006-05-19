@@ -286,6 +286,14 @@ Kontakt ejeren af wiki\'en, som kan aktivere email.''',
 '''Grafisk redigering''',
 '''Edit was cancelled.''':
 '''Redigeringen blev afbrudt.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'En side med navnet {{{\'%s\'}}} eksisterer allerede.\'\'\'
+
+Prøv et andet navn.''',
+'''Could not rename page because of file system error: %s.''':
+'''Kunne ikke omdøbe side på grund af systemfejl: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Tak for dine rettelser - de er værdsat.''',
 '''Page "%s" was successfully deleted!''':
@@ -578,24 +586,12 @@ Tryk Annullér for at afbryde redigeringen.''',
 '''%(matchcount)d·%(matches)s·for·"%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokal oversigt over "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Du har ikke lov til at omdøbe sider i denne wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Anvend venligst den interaktive brugergrænseflade til at omdøbe sider!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kunne ikke omdøbe side på grund af systemfejl: %s.''',
 '''Rename Page''':
 '''Omdøb side''',
 '''New name''':
 '''Nyt navn''',
 '''Optional reason for the renaming''':
 '''Årsag til omdøbning (valgfrit)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'En side med navnet {{{\'%s\'}}} eksisterer allerede.\'\'\'
-
-Prøv et andet navn.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inklusive %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -614,16 +610,12 @@ Prøv et andet navn.''',
 '''Fuld lænke-liste for "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan ikke oprette en ny side uden et sidenavn. Angiv venligst et sidenavn.''',
-'''You are not allowed to delete this page.''':
-'''Du har ikke lov til at slette denne side!''',
-'''Please use the interactive user interface to delete pages!''':
-'''Anvend venligst den interaktive brugergrænseflade til at slette sider!''',
-'''Really delete this page?''':
-'''Er du sikker på at denne side skal slettes?''',
 '''Delete''':
 '''Slet''',
 '''Optional reason for the deletion''':
 '''Årsag til denne sletning (valgfri)''',
+'''Really delete this page?''':
+'''Er du sikker på at denne side skal slettes?''',
 '''[%d attachments]''':
 '''[%d·vedhæftede filer]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

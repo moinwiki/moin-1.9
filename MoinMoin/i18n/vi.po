@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -513,6 +513,24 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "Các chỉnh sửa đã bị huỷ."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Bạn không thể lưu trang trắng."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Đã có trang {{{'%s'}}}.'''\n"
+"\n"
+"Vui lòng dùng tên khác."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Cám ơn bạn vì những sửa đổi. Sự quan tâm của bạn rất được cảm kích."
@@ -1111,16 +1129,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Bạn không thể đổi tên trang trong wiki này!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Vui lòng sử dụng giao diện người dùng để đổi tên trang!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-
 msgid "Rename Page"
 msgstr "Đổi tên trang"
 
@@ -1129,16 +1137,6 @@ msgstr "Tên mới"
 
 msgid "Optional reason for the renaming"
 msgstr "Lý do đổi tên (nếu có)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Đã có trang {{{'%s'}}}.'''\n"
-"\n"
-"Vui lòng dùng tên khác."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1161,6 +1159,25 @@ msgstr "Không có lỗi chính tả!"
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Bạn không thể kiểm tra lỗi chính tả trong một trang mà bạn không thể xem."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Bạn không thể tạo một bản vẽ ở trang này."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1211,20 +1228,14 @@ msgstr "Bạn không thể sửa trang này."
 msgid "You are now logged out."
 msgstr "Cookie đã được xoá. Bạn đã thoát ra khỏi hệ thống."
 
-msgid "You are not allowed to delete this page."
-msgstr "Bạn không thể xoá trang này."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Vui lòng sử dụng giao diện người dùng để xoá trang!"
-
-msgid "Really delete this page?"
-msgstr "Thật sự xoá trang này?"
-
 msgid "Delete"
 msgstr "Xóa"
 
 msgid "Optional reason for the deletion"
 msgstr "Lý do xoá trang (nếu có)"
+
+msgid "Really delete this page?"
+msgstr "Thật sự xoá trang này?"
 
 #, python-format
 msgid ""
@@ -1880,6 +1891,15 @@ msgstr "Thư đã được gửi"
 
 msgid "Mail sent OK"
 msgstr "Thư đã được gửi"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Bạn không thể đổi tên trang trong wiki này!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Vui lòng sử dụng giao diện người dùng để đổi tên trang!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Bạn không thể xoá trang này."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bytes)"

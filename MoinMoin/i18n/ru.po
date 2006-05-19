@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-02-11 12:20-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -514,6 +514,24 @@ msgstr "Графический редактор"
 msgid "Edit was cancelled."
 msgstr "Исправления отменены."
 
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Нельзя записать пустую страницу."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Страница с именем {{{'%s'}}} уже есть.'''\n"
+"\n"
+"Попробуйте другое имя."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Страница не была переименована из-за системной ошибки: %s."
+
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Спасибо за ваши исправления. Мы приветствуем ваше внимание к деталям."
 
@@ -741,8 +759,9 @@ msgstr ""
 " Списки:: пробел и один из: * - ненумерованный список; 1., a., A., i., I. - "
 "нумерованный список; 1.#n - начать нумерацию с n.\n"
 " Отступ:: каждый пробел перед началом абзаца увеличивет отступ абзаца\n"
-" Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim([:ЗаглавныеСловаСлитно:описание])]]; "
-"[[Verbatim([\"скобки и двойные кавычки \"])]]; url; [url]; [url метка].\n"
+" Ссылки:: `ЗаглавныеСловаСлитно`; [[Verbatim([:ЗаглавныеСловаСлитно:"
+"описание])]]; [[Verbatim([\"скобки и двойные кавычки \"])]]; url; [url]; "
+"[url метка].\n"
 " Таблицы:: || текст клетки |||| текст клетки растянутый на 2 колонки ||; "
 "после таблиц и заголовков нельзя оставлять пробелы.\n"
 "\n"
@@ -1108,18 +1127,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Вам нельзя переименовывать страницы в этом вики!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Пожалуйста воспользуйтесь интерфейсом пользователя для переименования "
-"страниц!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Страница не была переименована из-за системной ошибки: %s."
-
 msgid "Rename Page"
 msgstr "Переименовать"
 
@@ -1128,16 +1135,6 @@ msgstr "Новое имя"
 
 msgid "Optional reason for the renaming"
 msgstr "Можете указать причину для переименования"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Страница с именем {{{'%s'}}} уже есть.'''\n"
-"\n"
-"Попробуйте другое имя."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1159,6 +1156,26 @@ msgstr "Ошибок правописания не найдено!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Нельзя проверять страницу которую запрещено читать."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Вам нельзя делать рисунки на этой странице."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1210,21 +1227,14 @@ msgstr "Вам нельзя менять эту страницу."
 msgid "You are now logged out."
 msgstr "Вам нельзя устанавливать файлы."
 
-msgid "You are not allowed to delete this page."
-msgstr "Вам нельзя стереть эту страницу."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"Пожалуйста воспользуйтесь интерфейсом пользователя для удаления страниц!"
-
-msgid "Really delete this page?"
-msgstr "Точно стереть эту страницу?"
-
 msgid "Delete"
 msgstr "Стереть"
 
 msgid "Optional reason for the deletion"
 msgstr "Можете указать причину для удаления"
+
+msgid "Really delete this page?"
+msgstr "Точно стереть эту страницу?"
 
 #, python-format
 msgid ""
@@ -1330,7 +1340,8 @@ msgid ""
 "Otherwise, if \"Rename to\" is left blank, the original filename will be "
 "used."
 msgstr ""
-"Новое приложение не может перезаписать имеющиеся приложения. Если приложение\n"
+"Новое приложение не может перезаписать имеющиеся приложения. Если "
+"приложение\n"
 "с таким именем уже существует, дайте новому приложению другое имя.\n"
 "Используете для этого поле \"Переименовать в\" - в нем можно указать\n"
 "имя, с которым приложение будет загружено на страницу. Если поле\n"
@@ -1872,6 +1883,17 @@ msgstr "Почта не ушла."
 
 msgid "Mail sent OK"
 msgstr "Почта ушла."
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Вам нельзя переименовывать страницы в этом вики!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Пожалуйста воспользуйтесь интерфейсом пользователя для переименования "
+#~ "страниц!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Вам нельзя стереть эту страницу."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s байт)"

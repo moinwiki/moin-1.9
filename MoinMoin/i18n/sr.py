@@ -423,10 +423,6 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''%(matchcount)d %(matches)s odgovaraju "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokalni lista stranica za "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Vama nije dozvoljeno da preimenujete stranice u ovom vikiju!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Molimo Vas koristite interaktivni korisnički interfejs za preimenovanje stranica''',
 '''New name''':
 '''Novo ime''',
 '''Optional reason for the renaming''':
@@ -443,16 +439,12 @@ Koristite \'\'Prekinuti\'\' da bi ste napustili Editor.''',
 '''Ne možete proveravati pravopis na stranici koju ne možete čitati.''',
 '''Full Link List for "%s"''':
 '''Lista svih linkova za "%s"''',
-'''You are not allowed to delete this page.''':
-'''Vama nije dozvoljeno da izbrišete ovu stranicu''',
-'''Please use the interactive user interface to delete pages!''':
-'''Molimo Vas koristite interaktivni korisnički interfejs da brišete stranice!''',
-'''Really delete this page?''':
-'''Stvarno izbrisati ovu stranicu?''',
 '''Delete''':
 '''Izbrisati''',
 '''Optional reason for the deletion''':
 '''Razlog za brisanje''',
+'''Really delete this page?''':
+'''Stvarno izbrisati ovu stranicu?''',
 '''[%d attachments]''':
 '''[%d priloga]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

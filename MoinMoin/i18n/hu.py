@@ -247,6 +247,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''A lap neve től hosszú, kérjük adjon meg egy rövidebbet!''',
 '''Edit was cancelled.''':
 '''A szerkesztés visszavonva.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''A(z) {{{\'%s\'}}} nevű lap már létezik!
+
+Próbáljon más nevet adni a lapnak.''',
+'''Could not rename page because of file system error: %s.''':
+'''Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Köszönjük, hogy változtatásaival hozzájárult a lap tökéletesítéséhez.''',
 '''Page "%s" was successfully deleted!''':
@@ -490,24 +498,12 @@ To leave the editor, press the Cancel button.''':
 '''%(matchcount)d %(matches)s a(z) "%(title)s" mintához''',
 '''Local Site Map for "%s"''':
 '''Helyi térkép a(z) "%s" laphoz''',
-'''You are not allowed to rename pages in this wiki!''':
-'''A lapok átnevezése nem engedélyezett!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Kérjük a lap átnevezéséhez az interaktív felületet használja!''',
-'''Could not rename page because of file system error: %s.''':
-'''Állományrendszer-hiba (%s) miatt nem sikerült az átnevezés.''',
 '''Rename Page''':
 '''Lap átnevezése''',
 '''New name''':
 '''Új név''',
 '''Optional reason for the renaming''':
 '''Az átnevezés indoka (nem kötelező kitölteni)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''A(z) {{{\'%s\'}}} nevű lap már létezik!
-
-Próbáljon más nevet adni a lapnak.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(beleértve %(localwords)d szót a(z) %(pagelink)s lapról)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -526,16 +522,12 @@ Próbáljon más nevet adni a lapnak.''',
 '''Teljes kapocslista (link-lista), minta: "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Név nélküli lapot nem lehet létrehozni. Kérjük adja meg a lap nevét!''',
-'''You are not allowed to delete this page.''':
-'''A lap törlése nem engedélyezett.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Kérjük a lap törléséhez az interaktív felületet használja!''',
-'''Really delete this page?''':
-'''Törölni kívánja ezt a lapot?''',
 '''Delete''':
 '''Törlés''',
 '''Optional reason for the deletion''':
 '''A törlés indoka (nem kötelező kitölteni)''',
+'''Really delete this page?''':
+'''Törölni kívánja ezt a lapot?''',
 '''[%d attachments]''':
 '''[%d melléklet]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

@@ -310,6 +310,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''ویرایش گرافیکی''',
 '''Edit was cancelled.''':
 '''ویرایش لغو شد.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'صفحه ای با نام {{{\'%s\'}}} وجود دارد.\'\'\'
+
+لطفا نام دیگری انتخاب نمایید.''',
+'''Could not rename page because of file system error: %s.''':
+'''بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''تغییرات مورد نظر شما اعمال شد.''',
 '''Page "%s" was successfully deleted!''':
@@ -598,7 +606,7 @@ reStructuredText Quick Reference
 '''Show "%(title)s"''':
 '''"%(title)s" را نشان بده''',
 '''General Page Infos''':
-'''اطلاعات صفحات عمومی''',
+'''اطلاعات عمومی صفحه''',
 '''Show chart "%(title)s"''':
 '''جدول "%(title)s" را نشان بده''',
 '''Page hits and edits''':
@@ -702,24 +710,12 @@ the group pages.
 ''',
 '''MyPages management''':
 '''مدیریت صفحات من''',
-'''You are not allowed to rename pages in this wiki!''':
-'''شما مجاز به تغییر نام صفحات این ویکی نمی باشید!''',
-'''Please use the interactive user interface to rename pages!''':
-'''لطفا برای تغییر نام صفحات از صفحه کاربری interactive استفاده نمایید!''',
-'''Could not rename page because of file system error: %s.''':
-'''بدلیل ایراد سیستمی %s نام صفحه تغییر نکرد.''',
 '''Rename Page''':
 '''تغیر نام صفحه''',
 '''New name''':
 '''نام جدید''',
 '''Optional reason for the renaming''':
 '''توضیحات اختیاری برای تغببر نام صفحه''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'صفحه ای با نام {{{\'%s\'}}} وجود دارد.\'\'\'
-
-لطفا نام دیگری انتخاب نمایید.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''( مرجع لغت %(pagelink)s دارای %(localwords)d لغت )''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -756,16 +752,12 @@ Try a different name.''':
 '''عملیات غیر مجاز''',
 '''You are now logged out.''':
 '''شما از سیستم خارج شدید.''',
-'''You are not allowed to delete this page.''':
-'''شما مجاز به حذف این صفحه نمی باشید.''',
-'''Please use the interactive user interface to delete pages!''':
-'''لطفا برای حذف صفحات از صفحات کاربری interactive استفاده نمایید!''',
-'''Really delete this page?''':
-'''اطمینان دارید که این صفحه می بایست حذف شود؟''',
 '''Delete''':
 '''حذف''',
 '''Optional reason for the deletion''':
 '''توضیحات دلخواه برای این حذف''',
+'''Really delete this page?''':
+'''اطمینان دارید که این صفحه می بایست حذف شود؟''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''نسخه پشتیبان بازیابی شد: %(filename)s در پوشه مقصد: %(targetdir)s.

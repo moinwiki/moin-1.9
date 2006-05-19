@@ -28,7 +28,7 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
-Branch moin-1.5-hg-xapian:
+Branch moin-1.6-xapian:
   New Features:
     * Added Xapian (see http://xapian.org/) based indexed search code.
       Our implementation is still buggy, only use it if you want to help
@@ -55,10 +55,66 @@ Branch moin-1.5-hg-xapian:
       use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
 
 
+Version 1.6.current:
+    This is the active development branch. All changes get done here and
+    critical stuff gets committed with -m "... (backport to 1.5)" and then
+    backported to 1.5. :) Commits to 1.5 done in any other way are likely to
+    get reverted.
+
+  Developer notes (these should be moved to the end in the release):
+    * refactored some actions to use ActionBase base class
+    * moved "test" action from wikiaction to MoinMoin/action/
+      (and use ActionBase)
+    * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
+    * moved wikiaction.py stuff to MoinMoin/action/__init__.py
+    * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
+    * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
+    * moved wikitest.py stuff to action/test.py (only used from there)
+    * moved formatter/base.py to formatter/__init__.py (FormatterBase)
+    * killed "processors" (finally), formatter method changed to:
+      formatter.parser(parsername, lines)
+    * moved / splitted request.py into MoinMoin/request/*
+      Most stuff will be broken, please help fixing it (usually some imports
+      will be missing and the adaptor script will need a change maybe):
+      CGI works
+      CLI works
+      STANDALONE not
+      MODPY not
+      WSGI not
+      FCGI not
+      TWISTED not
+    * added wikiutil.MimeType class (works internally with sanitized mime
+      types because the official ones suck)
+    * renamed parsers to module names representing sane mimetypes, e.g.:
+      parser.wiki -> parser.text_moin_wiki
+
+  New Features:
+
+    * HTML parser (called "html") that allows you to use HTML on the page.
+      Thanks to the trac team for the nice code.
+
+  Bugfixes:
+    * on action "info" page, "revert" link will not be displayed for empty page
+      revisions (but you just can delete the current page to get an empty rev.)
+    * fix vanishing strike markup after gui editor usage
+    * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
+    * fix mod_python attachment upload bug (thanks to Nick Phillips)
+    * fix show_version to show it in the same way as SystemInfo
+
 Version 1.5.current:
   Developer notes:
     * We switched to Mercurial SCM, see here for more infos:
       http://moinmoin.wikiwikiweb.de/MoinDev/MercurialGuide
+
+  Bugfixes:
+    * fix MonthCalendar macro for non-ASCII pagenames (thanks to Jonas Smedegaard)
+    * remove 'search' and 'google' from bot user agent list and add some more
+      specific terms
+    * Fix the forgotten password email login URL and also properly encode the
+      email body. Thanks to Robin Dunn for the patch.
+    * Applied a patch by Matthew Gilbert for increased compatiblity with
+      latest docutils.
+
 
 Version 1.5.3:
   New Features:

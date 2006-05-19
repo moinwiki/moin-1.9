@@ -312,6 +312,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''GUI 모드''',
 '''Edit was cancelled.''':
 '''문서 수정을 취소했습니다.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'문서 {{{"%s"}}}가(이) 이미 있습니다.\'\'\'
+
+다른 이름으로 다시 만들어 보세요.''',
+'''Could not rename page because of file system error: %s.''':
+'''다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''문서가 저장되었습니다.''',
 '''Page "%s" was successfully deleted!''':
@@ -675,24 +683,12 @@ reStructuredText Quick Reference
 '''다른 문서를 만들기 전에 홈페이지부터 만들어주세요.''',
 '''MyPages management''':
 '''MyPages 관리''',
-'''You are not allowed to rename pages in this wiki!''':
-'''이 위키에서는 문서 이름을 바꿀 수 없습니다.''',
-'''Please use the interactive user interface to rename pages!''':
-'''문서 이름을 바꾸기 위해서는 명령행 프로그램을 사용해 주세요!''',
-'''Could not rename page because of file system error: %s.''':
-'''다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s.''',
 '''Rename Page''':
 '''문서 이름 바꾸기''',
 '''New name''':
 '''새 이름''',
 '''Optional reason for the renaming''':
 '''이름을 바꾸는 이유''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'문서 {{{"%s"}}}가(이) 이미 있습니다.\'\'\'
-
-다른 이름으로 다시 만들어 보세요.''',
 '''(including %(localwords)d %(pagelink)s)''':
 ''' (%(pagelink)s를 %(localwords)d개 포함)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -729,16 +725,12 @@ Try a different name.''':
 '''이 작업을 수행할 수 있는 권한이 없습니다.''',
 '''You are now logged out.''':
 '''로그아웃 되었습니다.''',
-'''You are not allowed to delete this page.''':
-'''이 문서를 지울 수 있는 권한이 없습니다.''',
-'''Please use the interactive user interface to delete pages!''':
-'''문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!''',
-'''Really delete this page?''':
-'''정말로 이 문서를 지우시겠습니까?''',
 '''Delete''':
 '''삭제''',
 '''Optional reason for the deletion''':
 '''삭제하는 이유''',
+'''Really delete this page?''':
+'''정말로 이 문서를 지우시겠습니까?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''백업: %(filename)s 가(이) 다음 디렉토리로 복원됨: %(targetdir)s.
@@ -1086,7 +1078,7 @@ red=edit''',
 '''Package Pages''':
 '''문서 묶기''',
 '''Render as Docbook''':
-'''Dockbook으로 보여주기''',
+'''Dockbook으로 보기''',
 '''Do''':
 '''확인''',
 '''Edit (Text)''':

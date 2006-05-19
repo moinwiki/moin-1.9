@@ -74,14 +74,14 @@ def formatMarkup(request, text, currentStack=[]):
         pass
     currentStack.append(text)
 
-    from MoinMoin.parser.wiki import Parser
+    from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
     from MoinMoin.formatter.text_html import Formatter
     import StringIO
 
     origtext = text
     out = StringIO.StringIO()
     request.redirect(out)
-    parser = Parser(text, request, line_anchors=False)
+    parser = WikiParser(text, request, line_anchors=False)
     formatter = Formatter(request, terse=True)
     reqformatter = None
     if hasattr(request, 'formatter'):

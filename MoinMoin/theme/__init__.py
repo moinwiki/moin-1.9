@@ -693,10 +693,10 @@ searchBlur(e);
         """
         html = ''
         if self.cfg.show_version and not keywords.get('print_mode', 0):
-            html = (u'<div id="version">MoinMoin %s, Copyright 2000-2006 by '
-                    'Juergen Hermann</div>') % (version.revision,)
+            html = (u'<div id="version">MoinMoin Release %s [Revision %s], '
+                     'Copyright 2000-2006 by Juergen Hermann</div>') % (version.release, version.revision, )
         return html
-
+    
     def headscript(self, d):
         """ Return html head script with common functions
 
@@ -1010,7 +1010,7 @@ actionsMenuInit('%(label)s');
         @rtype: unicode
         @return: iconbar html
         """
-        page = d['page']       
+        page = d['page']
         if not self.shouldShowEditbar(page):
             return ''
 
@@ -1378,4 +1378,289 @@ var gui_editor_link_text = "%(text)s";
         """
         lang = self.request.content_lang
         return ' lang="%s" dir="%s"' % (lang, i18n.getDirection(lang))
+
+    # stuff from wikiutil.py
+    def send_title(self, text, **keywords):
+        """
+        Output the page header (and title).
+
+        TODO: check all code that call us and add page keyword for the
+        current page being rendered.
+        
+        @param text: the title text
+        @keyword link: URL for the title
+        @keyword msg: additional message (after saving)
+        @keyword pagename: 'PageName'
+        @keyword page: the page instance that called us.
+        @keyword print_mode: 1 (or 0)
+        @keyword editor_mode: 1 (or 0)
+        @keyword media: css media type, defaults to 'screen'
+        @keyword allow_doubleclick: 1 (or 0)
+        @keyword html_head: additional <head> code
+        @keyword body_attr: additional <body> attributes
+        @keyword body_onload: additional "onload" JavaScript code
+        """
+        request = self.request
+        _ = request.getText
+        
+        if keywords.has_key('page'):
+            page = keywords['page']
+            pagename = page.page_name
+        else:
+            pagename = keywords.get('pagename', '')
+            page = Page(request, pagename)
+        
+        scriptname = request.getScriptname()
+        pagename_quoted = wikiutil.quoteWikinameURL(pagename)
+
+        # get name of system pages
+        page_front_page = wikiutil.getFrontPage(request).page_name
+        page_help_contents = wikiutil.getSysPage(request, 'HelpContents').page_name
+        page_title_index = wikiutil.getSysPage(request, 'TitleIndex').page_name
+        page_site_navigation = wikiutil.getSysPage(request, 'SiteNavigation').page_name
+        page_word_index = wikiutil.getSysPage(request, 'WordIndex').page_name
+        page_user_prefs = wikiutil.getSysPage(request, 'UserPreferences').page_name
+        page_help_formatting = wikiutil.getSysPage(request, 'HelpOnFormatting').page_name
+        page_find_page = wikiutil.getSysPage(request, 'FindPage').page_name
+        home_page = wikiutil.getInterwikiHomePage(request) # XXX sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
+        page_parent_page = getattr(page.getParentPage(), 'page_name', None)
+        
+        # Prepare the HTML <head> element
+        user_head = [request.cfg.html_head]
+
+        # include charset information - needed for moin_dump or any other case
+        # when reading the html without a web server
+        user_head.append('''<meta http-equiv="Content-Type" content="%s;charset=%s">\n''' % (page.output_mimetype, page.output_charset))
+
+        meta_keywords = request.getPragma('keywords')
+        meta_desc = request.getPragma('description')
+        if meta_keywords:
+            user_head.append('<meta name="keywords" content="%s">\n' % escape(meta_keywords, 1))
+        if meta_desc:
+            user_head.append('<meta name="description" content="%s">\n' % escape(meta_desc, 1))
+
+        # search engine precautions / optimization:
+        # if it is an action or edit/search, send query headers (noindex,nofollow):
+        if request.query_string:
+            user_head.append(request.cfg.html_head_queries)
+        elif request.request_method == 'POST':
+            user_head.append(request.cfg.html_head_posts)
+        # if it is a special page, index it and follow the links - we do it
+        # for the original, English pages as well as for (the possibly
+        # modified) frontpage:
+        elif pagename in [page_front_page, request.cfg.page_front_page,
+                          page_title_index, 'TitleIndex',
+                          page_find_page, 'FindPage',
+                          page_site_navigation, 'SiteNavigation',
+                          'RecentChanges',]:
+            user_head.append(request.cfg.html_head_index)
+        # if it is a normal page, index it, but do not follow the links, because
+        # there are a lot of illegal links (like actions) or duplicates:
+        else:
+            user_head.append(request.cfg.html_head_normal)
+
+        if keywords.has_key('pi_refresh') and keywords['pi_refresh']:
+            user_head.append('<meta http-equiv="refresh" content="%(delay)d;URL=%(url)s">' % keywords['pi_refresh'])
+        
+        # output buffering increases latency but increases throughput as well
+        output = []
+        # later: <html xmlns=\"http://www.w3.org/1999/xhtml\">
+        output.append("""\
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+%s
+%s
+%s
+""" % (
+            ''.join(user_head),
+            self.html_head({
+                'page': page,
+                'title': wikiutil.escape(text),
+                'sitename': wikiutil.escape(request.cfg.html_pagetitle or request.cfg.sitename),
+                'print_mode': keywords.get('print_mode', False),
+                'media': keywords.get('media', 'screen'),
+            }),
+            keywords.get('html_head', ''),
+        ))
+
+        # Links
+        output.append('<link rel="Start" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_front_page)))
+        if pagename:
+            output.append('<link rel="Alternate" title="%s" href="%s/%s?action=raw">\n' % (
+                _('Wiki Markup'), scriptname, pagename_quoted,))
+            output.append('<link rel="Alternate" media="print" title="%s" href="%s/%s?action=print">\n' % (
+                _('Print View'), scriptname, pagename_quoted,))
+
+            # !!! currently disabled due to Mozilla link prefetching, see
+            # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html
+            #~ all_pages = request.getPageList()
+            #~ if all_pages:
+            #~     try:
+            #~         pos = all_pages.index(pagename)
+            #~     except ValueError:
+            #~         # this shopuld never happend in theory, but let's be sure
+            #~         pass
+            #~     else:
+            #~         request.write('<link rel="First" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[0]))
+            #~         if pos > 0:
+            #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos-1])))
+            #~         if pos+1 < len(all_pages):
+            #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos+1])))
+            #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[-1])))
+
+            if page_parent_page:
+                output.append('<link rel="Up" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_parent_page)))
+
+        # write buffer because we call AttachFile
+        request.write(''.join(output))
+        output = []
+
+        if pagename:
+            from MoinMoin.action import AttachFile
+            AttachFile.send_link_rel(request, pagename)
+
+        output.extend([
+            '<link rel="Search" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_find_page)),
+            '<link rel="Index" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_title_index)),
+            '<link rel="Glossary" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_word_index)),
+            '<link rel="Help" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_help_formatting)),
+                      ])
+        
+        output.append("</head>\n")
+        request.write(''.join(output))
+        output = []
+        request.flush()
+
+        # start the <body>
+        bodyattr = []
+        if keywords.has_key('body_attr'):
+            bodyattr.append(' ')
+            bodyattr.append(keywords['body_attr'])
+
+        # Add doubleclick edit action
+        if (pagename and keywords.get('allow_doubleclick', 0) and
+            not keywords.get('print_mode', 0) and
+            request.user.edit_on_doubleclick):
+            if request.user.may.write(pagename): # separating this gains speed
+                querystr = wikiutil.escape(makeQueryString({'action': 'edit'}))
+                # TODO: remove escape=0 in 2.0
+                url = page.url(request, querystr, escape=0)
+                bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
+
+        # Set body to the user interface language and direction
+        bodyattr.append(' %s' % self.ui_lang_attr())
+        
+        body_onload = keywords.get('body_onload', '')
+        if body_onload:
+            bodyattr.append(''' onload="%s"''' % body_onload)
+        output.append('\n<body%s>\n' % ''.join(bodyattr))
+
+        # Output -----------------------------------------------------------
+
+        # If in print mode, start page div and emit the title
+        if keywords.get('print_mode', 0):
+            d = {'title_text': text, 'title_link': None, 'page': page,}
+            request.themedict = d
+            output.append(self.startPage())
+            output.append(self.interwiki(d))      
+            output.append(self.title(d))      
+
+        # In standard mode, emit theme.header
+        else:
+            # prepare dict for theme code:
+            d = {
+                'theme': self.name,
+                'script_name': scriptname,
+                'title_text': text,
+                'title_link': keywords.get('link', ''),
+                'logo_string': request.cfg.logo_string,
+                'site_name': request.cfg.sitename,
+                'page': page,
+                'pagesize': pagename and page.size() or 0,
+                'last_edit_info': pagename and page.lastEditInfo() or '',
+                'page_name': pagename or '',
+                'page_find_page': page_find_page,
+                'page_front_page': page_front_page,
+                'home_page': home_page,
+                'page_help_contents': page_help_contents,
+                'page_help_formatting': page_help_formatting,
+                'page_parent_page': page_parent_page,
+                'page_title_index': page_title_index,
+                'page_word_index': page_word_index,
+                'page_user_prefs': page_user_prefs,
+                'user_name': request.user.name,
+                'user_valid': request.user.valid,
+                'user_prefs': (page_user_prefs, request.user.name)[request.user.valid],
+                'msg': keywords.get('msg', ''),
+                'trail': keywords.get('trail', None),
+                # Discontinued keys, keep for a while for 3rd party theme developers
+                'titlesearch': 'use self.searchform(d)',
+                'textsearch': 'use self.searchform(d)',
+                'navibar': ['use self.navibar(d)'],
+                'available_actions': ['use self.request.availableActions(page)'],
+            }
+
+            # add quoted versions of pagenames
+            newdict = {}
+            for key in d:
+                if key.startswith('page_'):
+                    if not d[key] is None:
+                        newdict['q_'+key] = wikiutil.quoteWikinameURL(d[key])
+                    else:
+                        newdict['q_'+key] = None
+            d.update(newdict)
+            request.themedict = d
+
+            # now call the theming code to do the rendering
+            if keywords.get('editor_mode', 0):
+                output.append(self.editorheader(d))
+            else:
+                output.append(self.header(d))
+        
+        # emit it
+        request.write(''.join(output))
+        output = []
+        request.flush()
+
+    def send_footer(self, pagename, **keywords):
+        """
+        Output the page footer.
+
+        @param pagename: WikiName of the page
+        @keyword print_mode: true, when page is displayed in Print mode
+        """
+        request = self.request
+        d = request.themedict
+
+        # Emit end of page in print mode, or complete footer in standard mode
+        if keywords.get('print_mode', 0):
+            request.write(self.pageinfo(d['page']))
+            request.write(self.endPage())
+        else:
+            request.write(self.footer(d, **keywords))
+
+    # stuff moved from request.py
+    def send_closing_html(self):
+        """ generate timing info html and closing html tag,
+            everyone calling send_title must call this at the end to close
+            the body and html tags.
+        """
+        request = self.request
+
+        # as this is the last chance to emit some html, we stop the clocks:
+        request.clock.stop('run')
+        request.clock.stop('total')
+
+        # Close html code
+        if not request.no_closing_html_code:
+            if (request.cfg.show_timings and
+                request.form.get('action', [None])[0] != 'print'):
+                request.write('<ul id="timings">\n')
+                for t in request.clock.dump():
+                    request.write('<li>%s</li>\n' % t)
+                request.write('</ul>\n')
+            #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
+            request.write('</body>\n</html>\n\n')
+
 

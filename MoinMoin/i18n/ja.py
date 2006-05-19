@@ -312,6 +312,13 @@ Contact the owner of the wiki, who can enable email.''':
 '''GUIモード''',
 '''Edit was cancelled.''':
 '''編集はキャンセルされました。''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''ページ名{{{\'%s\'}}}のページがすでに存在します。
+違う名前を利用してください。''',
+'''Could not rename page because of file system error: %s.''':
+'''ファイルシステムエラー(%s)により、ページ名を変更できませんでした。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''ページが更新されました。Thank you!''',
 '''Page "%s" was successfully deleted!''':
@@ -710,23 +717,12 @@ the group pages.
 ''',
 '''MyPages management''':
 '''マイページの管理''',
-'''You are not allowed to rename pages in this wiki!''':
-'''ページ名を変更する権限がありません。''',
-'''Please use the interactive user interface to rename pages!''':
-'''対話的なユーザインターフェースからページ名を変更してください。''',
-'''Could not rename page because of file system error: %s.''':
-'''ファイルシステムエラー(%s)により、ページ名を変更できませんでした。''',
 '''Rename Page''':
 '''ページ名の変更''',
 '''New name''':
 '''新しい名前''',
 '''Optional reason for the renaming''':
 '''名前の変更についてのコメント(省略可)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''ページ名{{{\'%s\'}}}のページがすでに存在します。
-違う名前を利用してください。''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''%(localwords)d語の%(pagelink)sを含む)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -763,16 +759,12 @@ Try a different name.''':
 '''このアクションを行う権限がありません。''',
 '''You are now logged out.''':
 '''ログアウト完了です。''',
-'''You are not allowed to delete this page.''':
-'''このページを削除する権限がありません。''',
-'''Please use the interactive user interface to delete pages!''':
-'''対話的なユーザインターフェースからページを削除してください。''',
-'''Really delete this page?''':
-'''このページを本当に削除しますか？''',
 '''Delete''':
 '''削除''',
 '''Optional reason for the deletion''':
 '''削除についてのコメント(省略可)''',
+'''Really delete this page?''':
+'''このページを本当に削除しますか？''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''バックアップ: %(filename)s をディレクトリ: %(targetdir)s へリストア。

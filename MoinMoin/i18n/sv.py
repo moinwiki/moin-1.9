@@ -313,6 +313,14 @@ För att få eposthantering påslagen, kontakta wikins ägare.''',
 '''Grafiskt läge''',
 '''Edit was cancelled.''':
 '''Redigeringen avbröts.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'En sida med namnet {{{\'%s\'}}} existerar redan.\'\'\'
+
+Pröva ett annat namn.''',
+'''Could not rename page because of file system error: %s.''':
+'''Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Tack för dina ändringar. Ditt sinne för detaljer är uppskattat.''',
 '''Page "%s" was successfully deleted!''':
@@ -712,24 +720,12 @@ att skapa gruppsidor.
 ''',
 '''MyPages management''':
 '''Hantering av MinaSidor''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Du har inte tillålse att radera sidor i den här wikin!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Var god använd det interaktiva användargränsnittet för att byta namn på sidor!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s.''',
 '''Rename Page''':
 '''Byt namn på sida''',
 '''New name''':
 '''Nytt namn''',
 '''Optional reason for the renaming''':
 '''Skäl till namnbyte (ej obligatoriskt)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'En sida med namnet {{{\'%s\'}}} existerar redan.\'\'\'
-
-Pröva ett annat namn.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inklusive %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -766,16 +762,12 @@ Pröva ett annat namn.''',
 '''Du har inte tillåtelse att utföra den här åtgärden.''',
 '''You are now logged out.''':
 '''Du är nu utloggad.''',
-'''You are not allowed to delete this page.''':
-'''Du har inte tillåtelse att radera den här sidan.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Var god använd det interaktiva användargränsnittet för att radera sidor!''',
-'''Really delete this page?''':
-'''Radera den här sidan, är du säker?''',
 '''Delete''':
 '''Radera''',
 '''Optional reason for the deletion''':
 '''Anledning för borttagande (valfri)''',
+'''Really delete this page?''':
+'''Radera den här sidan, är du säker?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Säkerhetskopia återlagrad: %(filename)s till målkatalog: %(targetdir)s.

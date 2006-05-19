@@ -225,6 +225,12 @@ Contact the owner of the wiki, who can enable email.''':
 '''Xem bản in''',
 '''Edit was cancelled.''':
 '''Các chỉnh sửa đã bị huỷ.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Đã có trang {{{\'%s\'}}}.\'\'\'
+
+Vui lòng dùng tên khác.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Cám ơn bạn vì những sửa đổi. Sự quan tâm của bạn rất được cảm kích.''',
 '''Page "%s" was successfully deleted!''':
@@ -467,22 +473,12 @@ To leave the editor, press the Cancel button.''':
 '''%(matchcount)d %(matches)s ở trang "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Bản đồ liên kết nội bộ cho "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Bạn không thể đổi tên trang trong wiki này!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Vui lòng sử dụng giao diện người dùng để đổi tên trang!''',
 '''Rename Page''':
 '''Đổi tên trang''',
 '''New name''':
 '''Tên mới''',
 '''Optional reason for the renaming''':
 '''Lý do đổi tên (nếu có)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Đã có trang {{{\'%s\'}}}.\'\'\'
-
-Vui lòng dùng tên khác.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(bao gồm cả %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -499,16 +495,12 @@ Vui lòng dùng tên khác.''',
 '''Tìm nội dung: "%s"''',
 '''Full Link List for "%s"''':
 '''Danh sách liên kết đầy đủ trong "%s"''',
-'''You are not allowed to delete this page.''':
-'''Bạn không thể xoá trang này.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Vui lòng sử dụng giao diện người dùng để xoá trang!''',
-'''Really delete this page?''':
-'''Thật sự xoá trang này?''',
 '''Delete''':
 '''Xóa''',
 '''Optional reason for the deletion''':
 '''Lý do xoá trang (nếu có)''',
+'''Really delete this page?''':
+'''Thật sự xoá trang này?''',
 '''[%d attachments]''':
 '''[%d attachments]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

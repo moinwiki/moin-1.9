@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -523,6 +523,24 @@ msgstr "Tryb GUI"
 
 msgid "Edit was cancelled."
 msgstr "Zmiany zostały anulowane."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Nie możesz zapisywać pustych stron."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Strona o nazwie {{{'%s'}}} już istnieje.'''\n"
+"\n"
+"Spróbuj innej nazwy."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -1123,16 +1141,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Nie możesz zmieniać nazw stron na tym wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Użyj interaktywnego interfejsu aby zmieniać nazwy stron!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Nie mogę zmienić nazwy strony ze względu na błąd systemu plików: %s."
-
 msgid "Rename Page"
 msgstr "Zmień nazwę strony"
 
@@ -1141,16 +1149,6 @@ msgstr "Nowa nazwa"
 
 msgid "Optional reason for the renaming"
 msgstr "Opcjonalna przyczyna zmiany nazwy"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Strona o nazwie {{{'%s'}}} już istnieje.'''\n"
-"\n"
-"Spróbuj innej nazwy."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1172,6 +1170,25 @@ msgstr "Nie znaleziono błędów!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Nie możesz sprawdzać stron, których nie możesz czytać."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Nie możesz zachowywać rysunków na niniejszej stronie."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Użyj interaktywnego interfejsu aby usuwać strony!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1223,20 +1240,14 @@ msgstr "Nie możesz zmieniać zawartości tej strony."
 msgid "You are now logged out."
 msgstr "Ciasteczko skasowane. Wylogowano."
 
-msgid "You are not allowed to delete this page."
-msgstr "Nie możesz kasować niniejszej strony."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Użyj interaktywnego interfejsu aby usuwać strony!"
-
-msgid "Really delete this page?"
-msgstr "Czy na pewno usunąć niniejszą stronę?"
-
 msgid "Delete"
 msgstr "Usunąć"
 
 msgid "Optional reason for the deletion"
 msgstr "Opcjonalna przyczyna usunięcia"
+
+msgid "Really delete this page?"
+msgstr "Czy na pewno usunąć niniejszą stronę?"
 
 #, python-format
 msgid ""
@@ -1891,6 +1902,15 @@ msgstr "Poczta nie została wysłana"
 
 msgid "Mail sent OK"
 msgstr "Poczta została wysłana"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Nie możesz zmieniać nazw stron na tym wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "Użyj interaktywnego interfejsu aby zmieniać nazwy stron!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Nie możesz kasować niniejszej strony."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bajtów)"

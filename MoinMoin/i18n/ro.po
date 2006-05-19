@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -531,6 +531,24 @@ msgstr "Mod GUI"
 
 msgid "Edit was cancelled."
 msgstr "Editarea a fost anulată"
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Nu puteţi salva pagini goale."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''O pagină cu numele {{{'%s'}}} există deja.'''\n"
+"\n"
+"Încercaţi un nume diferit."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
@@ -1138,17 +1156,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Nu aveţi permisiunea de a redenumi pagini în acest wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Folosiţi interfaţa interactivă cu utilizatorul pentru a redenumi pagini!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s."
-
 msgid "Rename Page"
 msgstr "Redenumire Pagină"
 
@@ -1157,16 +1164,6 @@ msgstr "Nume nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Motiv opţional referitor la redenumire."
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''O pagină cu numele {{{'%s'}}} există deja.'''\n"
-"\n"
-"Încercaţi un nume diferit."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1190,6 +1187,25 @@ msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "Nu aveţi permisiunea de a verifica ortografia pe o pagină pe care nu o "
 "puteţi citi."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Nu aveţi permisiunea de a salva un desen pe această pagină."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1242,20 +1258,14 @@ msgstr "Nu aveţi dreptul să editaţi această pagină."
 msgid "You are now logged out."
 msgstr "Prăjitura(cookie) a fost ştearsă. Acum sunteţi neînregistrat(ă)."
 
-msgid "You are not allowed to delete this page."
-msgstr "Nu aveţi permisiunea de a şterge această pagină."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!"
-
-msgid "Really delete this page?"
-msgstr "Sigur doriţi ştergerea acestei pagini ?"
-
 msgid "Delete"
 msgstr "Ştergere"
 
 msgid "Optional reason for the deletion"
 msgstr "Motiv opţional referitor la ştergere"
+
+msgid "Really delete this page?"
+msgstr "Sigur doriţi ştergerea acestei pagini ?"
 
 #, python-format
 msgid ""
@@ -1908,6 +1918,16 @@ msgstr "Mailul nu a fost trimis"
 
 msgid "Mail sent OK"
 msgstr "Mail trimis cu bine"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Nu aveţi permisiunea de a redenumi pagini în acest wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Folosiţi interfaţa interactivă cu utilizatorul pentru a redenumi pagini!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Nu aveţi permisiunea de a şterge această pagină."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s octeţi)"

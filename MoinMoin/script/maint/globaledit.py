@@ -99,7 +99,7 @@ class PluginScript(MoinScript):
             pagelist = request.rootpage.getPageList(user='')
 
             for pagename in pagelist:
-                #request = RequestCLI(url=url, pagename=pagename.encode('utf-8'))
+                #request = CLI.Request(url=url, pagename=pagename.encode('utf-8'))
                 p = PageEditor.PageEditor(request, pagename, do_editor_backup=0)
                 origtext = p.get_raw_body()
                 changedtext = self.do_edit(pagename, origtext)

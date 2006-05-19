@@ -9,7 +9,7 @@
 line_anchors = True
 
 from xml.dom import minidom
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase
 
 #def print_dom(element, indent=''):
 #    print indent + element.tagName
@@ -206,17 +206,16 @@ class Formatter(FormatterBase):
         # call the macro
         return self._add_tag('macro', name=name, args=(args or ''))
 
-    def processor(self, processor_name, lines, is_parser=0):
-        """ processor_name MUST be valid!
+    def parser(self, parser_name, lines):
+        """ parser_name MUST be valid!
             writes out the result instead of returning it!
         """
-        node = self.document.createElement('processor')
-        node.setAttribute('name', processor_name)
-        node.setAttribute('isparser', is_parser)
+        node = self.document.createElement('parser')
+        node.setAttribute('name', parser_name)
         node.appendChild(self.document.createTextNode('\n'.join(lines)))
-        return (self._set_tag('processor', True, name=processor_name, isparser=is_parser) +
+        return (self._set_tag('parser', True, name=parser_name) +
                 self.text('\n'.join(lines)) +
-                self._set_tag('processor', False))
+                self._set_tag('parser', False))
 
     def dynamic_content(self, parser, callback, arg_list=[], arg_dict={}, returns_content=1):
         content = parser[callback](*arg_list, **arg_dict)

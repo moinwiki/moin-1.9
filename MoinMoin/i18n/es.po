@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-22 17:39-0300\n"
 "Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
@@ -530,6 +530,25 @@ msgstr "Modo gráfico"
 
 msgid "Edit was cancelled."
 msgstr "Has cancelado tu edición."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "No puedes guardar páginas vacías."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Ya existe un página con el nombre {{{'%s'}}} '''\n"
+"\n"
+"Intenta con un nombre distinto."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"No se pudo renombrar la página debido a error del sitema de archivos: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Gracias por tus aportes. Se aprecia tu preocupación por los detalles."
@@ -1194,18 +1213,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Administración de MisPáginas"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "¡No tienes permisos para renombrar páginas en este wiki!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"¡Por favor, usa la interfaz de usuario interactiva para renombrar páginas!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"No se pudo renombrar la página debido a error del sitema de archivos: %s."
-
 msgid "Rename Page"
 msgstr "Renombrar Página"
 
@@ -1214,16 +1221,6 @@ msgstr "Nombre nuevo"
 
 msgid "Optional reason for the renaming"
 msgstr "Razón para renombrar (opcional)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Ya existe un página con el nombre {{{'%s'}}} '''\n"
-"\n"
-"Intenta con un nombre distinto."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1246,6 +1243,26 @@ msgstr "¡No se encontraron errores de ortografía!"
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 "No puedes realizar corrección ortográfica en una página que no puedes leer."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "No tienes permisos para guardar dibujos en esta página."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1294,21 +1311,14 @@ msgstr "No tienes permisos para hacer esta acción."
 msgid "You are now logged out."
 msgstr "Has salido del sistema."
 
-msgid "You are not allowed to delete this page."
-msgstr "No tienes permisos para borrar esta página."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"¡Por favor, usa la interfaz de usuario interactiva para eliminar páginas!"
-
-msgid "Really delete this page?"
-msgstr "¿Realmente deseas eliminar esta página?"
-
 msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Optional reason for the deletion"
 msgstr "Razón para la eliminación (opcional)"
+
+msgid "Really delete this page?"
+msgstr "¿Realmente deseas eliminar esta página?"
 
 #, python-format
 msgid ""
@@ -1977,6 +1987,16 @@ msgstr "e-Mail NO enviado"
 
 msgid "Mail sent OK"
 msgstr "e-Mail enviado OK"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "¡No tienes permisos para renombrar páginas en este wiki!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "¡Por favor, usa la interfaz de usuario interactiva para renombrar páginas!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "No tienes permisos para borrar esta página."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bytes)"

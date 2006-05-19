@@ -18,16 +18,6 @@ text = {
 '''Pāradresēts no lapas "%(page)s"''',
 '''This page redirects to page "%(page)s"''':
 '''Šī lapa pāradresē uz lapu "%(page)s"''',
-'''~-If you submit this form, the submitted values will be displayed.
-To use this form on other pages, insert a
-[[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
-macro call.-~
-''':
-'''~-Nosūtot (\'\'submit\'\') šo formu, tiks attēlotas nosūtāmās vērtības.
-Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu 
-[[BR]][[BR]]\'\'\'{{{    [[Form("%(pagename)s")]]}}}\'\'\'[[BR]][[BR]]
--~
-''',
 '''Create New Page''':
 '''Izveidot jaunu lapu''',
 '''You are not allowed to view this page.''':
@@ -311,6 +301,14 @@ Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pa
 '''Grafiskais režīms''',
 '''Edit was cancelled.''':
 '''Labošana tika atsaukta.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Lapa ar nosaukumu {{{\'%s\'}}} jau eksistē.\'\'\'
+
+Pamēģiniet citu nosaukumu.''',
+'''Could not rename page because of file system error: %s.''':
+'''Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta.''',
 '''Page "%s" was successfully deleted!''':
@@ -386,7 +384,7 @@ Tagad atkārtoti veiciet izmaiņas jaunajā lapā.
 Tas būtu ļoti nekrietni no Jūsu puses!\'\'
 ''',
 '''A backup of your changes is [%(backup_url)s here].''':
-'''Labojumu rezerves kopija atrodas [%(backup_url)s here].''',
+'''Jūsu labojumu dublējums atrodas [%(backup_url)s šeit].''',
 '''You did not change the page content, not saved!''':
 '''Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!''',
 '''You can\'t change ACLs on this page since you have no admin rights on it!''':
@@ -650,6 +648,8 @@ reStructuredText Quick Reference
 '''Iesaiņot lapas''',
 '''Package name''':
 '''Saiņa nosaukums''',
+'''List of page names - separated by a comma''':
+'''Lapu saraksts, atdalīts ar komatiem''',
 '''Unknown user name: {{{"%s"}}}. Please enter user name and password.''':
 '''Nezināms lietotāja vārds: {{{"%s"}}}. Lūdzu, ievadiet vārdu un paroli.''',
 '''Missing password. Please enter user name and password.''':
@@ -668,26 +668,46 @@ reStructuredText Quick Reference
 '''Lūdzu, sākumā pieslēdzieties''',
 '''Please first create a homepage before creating additional pages.''':
 '''Lūdzu, pirms veidot papildus lapas, izveidojiet mājas lapu.''',
+'''You can add some additional sub pages to your already existing homepage here.
+
+You can choose how open to other readers or writers those pages shall be,
+access is controlled by group membership of the corresponding group page.
+
+Just enter the sub page\'s name and click on the button to create a new page.
+
+Before creating access protected pages, make sure the corresponding group page
+exists and has the appropriate members in it. Use HomepageGroupsTemplate for creating
+the group pages.
+
+||\'\'\'Add a new personal page:\'\'\'||\'\'\'Related access control list group:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%(username)s only||
+
+''':
+'''Šeit Jūs varat pievienot apakšlapas Jūsu esksistējošai mājas lapai. 
+
+Jūs varat noteikt šo lapu pieejamību citem lietotājiem,
+pieeju kontrolē atbilstošās grupas lapas grupas piederība.
+
+Lai izveidotu apakšlapu, evadiet apakšlapas nosaukumu un nospiediet pogu.
+
+Pirms veidot aizsargātas pieejas lapas, pārliecinieties, ka atbilstošas grupas lapa eksistē 
+un tajā ir atbilstoši lietotāji. Izmantojiet MājaslapasGrupasVeidne, veidojot grupas lapas2.
+||\'\'\'Pievienot jaunu personisku lapu:\'\'\'||\'\'\'Sastīta pieejas kontroles saraksta grupa:\'\'\'||
+||[[NewPage(HomepageReadWritePageTemplate,lasāma-rakstāma lapa,%(username)s)]]||["%(username)s/ReadWriteGroup"]||
+||[[NewPage(HomepageReadPageTemplate,tikai-lasāma lapa,%(username)s)]]||["%(username)s/ReadGroup"]||
+||[[NewPage(HomepagePrivatePageTemplate,privāta lapa,%(username)s)]]||Tikai %(username)s||
+
+''',
 '''MyPages management''':
 '''MyPages pārvaldīšana''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Šajā viki Jums nav tiesību pārdēvēt lapas!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja saskarni!''',
-'''Could not rename page because of file system error: %s.''':
-'''Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts.''',
 '''Rename Page''':
 '''Pārdēvēt lapu''',
 '''New name''':
 '''Jauns nosaukums''',
 '''Optional reason for the renaming''':
 '''Pārdēvēšanas iemesls (neobligāts)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Lapa ar nosaukumu {{{\'%s\'}}} jau eksistē.\'\'\'
-
-Pamēģiniet citu nosaukumu.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(including %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -724,32 +744,53 @@ Pamēģiniet citu nosaukumu.''',
 '''Jums nav tiesību veikt šo darbību.''',
 '''You are now logged out.''':
 '''Jūs esat atslēgts(-a).''',
-'''You are not allowed to delete this page.''':
-'''Jūs nedrīkstat dzēst šo lapu.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!''',
-'''Really delete this page?''':
-'''Jūs tiešām vēlaties dzēst šo lapu?''',
 '''Delete''':
 '''Dzēst''',
 '''Optional reason for the deletion''':
 '''Ja vēlaties, norādiet lapas dzēšanas iemeslu''',
+'''Really delete this page?''':
+'''Jūs tiešām vēlaties dzēst šo lapu?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
-'''Rezerves kopija %(filename)s atjaunota direktorijā %(targetdir)s.
+'''Dublējums %(filename)s atjaunots direktorijā %(targetdir)s.
 Atjaunoti %(filecount)d faili un %(dircount)d direktorijas.''',
 '''Restoring backup: %(filename)s to target dir: %(targetdir)s failed.''':
-'''Kļūda veicot rezerves kopijas %(filename)s atjaunošanu direktorijā %(targetdir)s.''',
+'''Kļūda veicot dublējuma %(filename)s atjaunošanu direktorijā %(targetdir)s.''',
 '''Wiki Backup / Restore''':
-'''Viki rezerves kopēšana / atjaunošana''',
+'''Viki dublēšana / atjaunošana''',
+'''Some hints:
+ * To restore a backup:
+  * Restoring a backup will overwrite existing data, so be careful.
+  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC stuff).
+  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).
+  * Hit the [[GetText(Restore)]] button below.
+
+ * To make a backup, just hit the [[GetText(Backup)]] button and save the file
+   you get to a secure place.
+
+Please make sure your wiki configuration backup_* values are correct and complete.
+
+''':
+'''Daži padomi:
+ * Lai atjaunotu dublējumu:
+  * Dublējuma atjaunošana dzēsīs esošos datus. Esiet piesardzīgi.
+  * Pārdēvējiet to par <siteid>.tar.<compression> (nodzēsiet --date--time--UTC daļu).
+  * Ievietojiet dublējuma failu direktorijā \'\'backup_storage_dir\'\' (izmantojot \'\'scp\'\', \'\'ftp\'\', ...).
+  * Nospiediet pogu [[GetText(Restore)]], zemāk.
+
+ * Lai izveidotu dublējumu, nospiediet pogu [[GetText(Backup)]] un saglabājiet drošā vietā failu,    kuru Jūs iegūsiet.
+
+Lūdzu pārliecinieties, ka Jūsus Viki konfigurācijas \'\'backup_*\'\' vērtības ir korektas.
+
+''',
 '''Backup''':
-'''Veidot rezerves kopiju''',
+'''Dublēt''',
 '''Restore''':
 '''Atjaunot''',
 '''You are not allowed to do remote backup.''':
-'''Jūs nedrīkstat veikt attālinātu rezerves kopēšanu.''',
+'''Jūs nedrīkstat veikt attālinātu dublēšanu.''',
 '''Unknown backup subaction: %s.''':
-'''Nezināma rezerves kopēšanas apakšdarbība: %s.''',
+'''Nezināma dublēšanas apakšdarbība: %s.''',
 '''[%d attachments]''':
 '''[%d piesaistes]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':
@@ -855,13 +896,13 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''WordIndex''':
 '''PriekšmetuRādītājs''',
 '''FindPage''':
-'''AtrastLapu''',
+'''MeklētLapu''',
 '''SiteNavigation''':
-'''LapasNavigācija''',
+'''VietnesNavigācija''',
 '''HelpContents''':
-'''PamācībasSaturaRādītājs''',
+'''PalīdzībasSaturaRādītājs''',
 '''HelpOnFormatting''':
-'''PalīdzētFormatēt''',
+'''FormatēšanasPalīdzība''',
 '''UserPreferences''':
 '''JūsuIestatījumi''',
 '''WikiLicense''':
@@ -963,7 +1004,7 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.''':
 '''Expected a color value "%(arg)s" after "%(key)s"''':
 '''Nepieciešams krāsas kods "%(arg)s" pēc "%(key)s"''',
 '''XSLT option disabled, please look at HelpOnConfiguration.''':
-'''XSLT izslēgts; lūdzu, skatieties PalīdzētUzstādīt.''',
+'''XSLT izslēgts; lūdzu, skatieties KonfigurēšanasPalīdzība.''',
 '''XSLT processing is not available, please install 4suite 1.x.''':
 '''XSLT apstrāde neiespējama, lūdzu, instalējiet 4suite 1.x.''',
 '''%(errortype)s processing error''':

@@ -170,7 +170,7 @@ class DefaultConfig:
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
     
-    actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage']
+    actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_cookie]
@@ -309,7 +309,7 @@ reStructuredText Quick Reference
         'unsubscribe': ("%(q_page_name)s?action=subscribe", _("UnSubscribe"), "unsubscribe"),
         'subscribe':   ("%(q_page_name)s?action=subscribe", _("Subscribe"), "subscribe"),
         'raw':         ("%(q_page_name)s?action=raw", _("Raw"), "raw"),
-        'xml':         ("%(q_page_name)s?action=format&amp;mimetype=text/xml", _("XML"), "xml"),
+        'xml':         ("%(q_page_name)s?action=show&amp;mimetype=text/xml", _("XML"), "xml"),
         'print':       ("%(q_page_name)s?action=print", _("Print"), "print"),
         'view':        ("%(q_page_name)s", _("View"), "view"),
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
@@ -352,9 +352,9 @@ reStructuredText Quick Reference
 
     # a regex of HTTP_USER_AGENTS that should be excluded from logging
     # and receive a FORBIDDEN for anything except viewing a page
-    ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|google|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
+    ua_spiders = ('archiver|cfetch|crawler|curl|gigabot|googlebot|holmes|htdig|httrack|httpunit|jeeves|larbin|leech|'
                   'linkbot|linkmap|linkwalk|mercator|mirror|msnbot|nutbot|omniexplorer|puf|robot|scooter|'
-                  'search|sherlock|sitecheck|spider|teleport|voyager|webreaper|wget')
+                  'sherlock|slurp|sitecheck|spider|teleport|voyager|webreaper|wget')
 
     # Wiki identity
     sitename = u'Untitled Wiki'
@@ -470,7 +470,7 @@ reStructuredText Quick Reference
         self._check_directories()
 
         if not isinstance(self.superuser, list):
-            msg = """The superuser</b> setting in your wiki configuration is not a list
+            msg = """The superuser setting in your wiki configuration is not a list
                      (e.g. ['Sample User', 'AnotherUser']).
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)

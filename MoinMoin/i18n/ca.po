@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -529,6 +529,26 @@ msgstr "Mode amb interfície gràfica"
 
 msgid "Edit was cancelled."
 msgstr "S'ha cancel·lat l'edició."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "No podeu desar pàgines buides."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
+"\n"
+"Proveu amb un nom diferent."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"No s'ha pogut canviar el nom de la pàgina degut a un error del sistema de "
+"fitxers: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Gràcies pels vostres canvis. S'aprecia la vostra atenció als detalls."
@@ -1135,20 +1155,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "No teniu permís per a canviar el nom de pàgines en aquest wiki"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Utilitzeu la interfície d'usuari interactiva per a canviar el nom de les "
-"pàgines."
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr ""
-"No s'ha pogut canviar el nom de la pàgina degut a un error del sistema de "
-"fitxers: %s."
-
 msgid "Rename Page"
 msgstr "Canvia el nom de la pàgina"
 
@@ -1157,16 +1163,6 @@ msgstr "Nom nou"
 
 msgid "Optional reason for the renaming"
 msgstr "Raó opcional per al canvi de nom"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Ja existeix una pàgina amb el nom {{{%s}}}.'''\n"
-"\n"
-"Proveu amb un nom diferent."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1188,6 +1184,25 @@ msgstr "No s'han trobat errors d'ortografia."
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "No podeu comprovar l'ortografia d'una pàgina que no podeu llegir."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "No teniu permís per a desar un dibuix en aquesta pàgina."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Utilitzeu la interfície d'usuari interactiva per a suprimir pàgines."
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1239,20 +1254,14 @@ msgstr "No teniu permís per a editar aquesta pàgina."
 msgid "You are now logged out."
 msgstr "S'ha suprimit la galeta. Heu eixit del vostre compte."
 
-msgid "You are not allowed to delete this page."
-msgstr "No teniu permís per a suprimir aquesta pàgina."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Utilitzeu la interfície d'usuari interactiva per a suprimir pàgines."
-
-msgid "Really delete this page?"
-msgstr "Esteu segur de voler suprimir aquesta pàgina?"
-
 msgid "Delete"
 msgstr "Suprimeix"
 
 msgid "Optional reason for the deletion"
 msgstr "Raó opcional per a la supressió"
+
+msgid "Really delete this page?"
+msgstr "Esteu segur de voler suprimir aquesta pàgina?"
 
 #, python-format
 msgid ""
@@ -1904,6 +1913,17 @@ msgstr "No s'ha enviat el correu"
 
 msgid "Mail sent OK"
 msgstr "S'ha enviat el correu amb èxit"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "No teniu permís per a canviar el nom de pàgines en aquest wiki"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Utilitzeu la interfície d'usuari interactiva per a canviar el nom de les "
+#~ "pàgines."
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "No teniu permís per a suprimir aquesta pàgina."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s octets)"

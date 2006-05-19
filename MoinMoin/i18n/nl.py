@@ -230,6 +230,14 @@ Neem contact op met de eigenaar van de wiki, die e-mail kan aanzetten.''',
 '''Afdrukvoorbeeld''',
 '''Edit was cancelled.''':
 '''Bewerking werd geannuleerd.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Een pagina met de naam {{{\'%s\'}}} bestaat al.\'\'\'
+
+Probeer een andere naam.''',
+'''Could not rename page because of file system error: %s.''':
+'''Kon paginanaam niet wijzigen vanwege systeemfout: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd.''',
 '''Page "%s" was successfully deleted!''':
@@ -481,24 +489,12 @@ Klik op Annuleren om de bewerking te staken.''',
 '''%(matchcount)d %(matches)s op "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Lokale wegwijzer voor "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''U hebt geen toestemming in deze wiki pagina\'s van naam te veranderen!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Gebruik de interactieve gebruikersinterface om pagina\'s te hernoemen!''',
-'''Could not rename page because of file system error: %s.''':
-'''Kon paginanaam niet wijzigen vanwege systeemfout: %s.''',
 '''Rename Page''':
 '''Pagina hernoemen''',
 '''New name''':
 '''Nieuwe naam''',
 '''Optional reason for the renaming''':
 '''Eventueel de reden voor deze hernoeming''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Een pagina met de naam {{{\'%s\'}}} bestaat al.\'\'\'
-
-Probeer een andere naam.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inclusief %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -517,16 +513,12 @@ Probeer een andere naam.''',
 '''Volledige verwijzingenlijst voor "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Kan geen nieuwe pagina aanmaken zonder paginanaam. Geef een paginanaam op.''',
-'''You are not allowed to delete this page.''':
-'''U hebt geen toestemming deze pagina te verwijderen.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Gebruik de interactieve gebruikersinterface om pagina\'s te verwijderen!''',
-'''Really delete this page?''':
-'''Deze pagina werkelijk verwijderen?''',
 '''Delete''':
 '''Verwijderen''',
 '''Optional reason for the deletion''':
 '''Eventueel de reden voor deze verwijdering''',
+'''Really delete this page?''':
+'''Deze pagina werkelijk verwijderen?''',
 '''[%d attachments]''':
 '''[%d bijlagen]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

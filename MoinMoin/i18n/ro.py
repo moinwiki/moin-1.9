@@ -289,6 +289,14 @@ de email \'%(email)s\'!''',
 '''Mod GUI''',
 '''Edit was cancelled.''':
 '''Editarea a fost anulată''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'O pagină cu numele {{{\'%s\'}}} există deja.\'\'\'
+
+Încercaţi un nume diferit.''',
+'''Could not rename page because of file system error: %s.''':
+'''Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Mulţumim pentru modificări. Atenţia dumneavoastră la detalii este apreciată.''',
 '''Page "%s" was successfully deleted!''':
@@ -583,24 +591,12 @@ Pentru a părăsi editorul, apăsaţi butonul Cancel.''',
 '''%(matchcount)d %(matches)s pentru "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Harta Locală a Sitului "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Nu aveţi permisiunea de a redenumi pagini în acest wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Folosiţi interfaţa interactivă cu utilizatorul pentru a redenumi pagini!''',
-'''Could not rename page because of file system error: %s.''':
-'''Nu s-a putut redenumi pagina datorită erorii de sistem de fişiere: %s.''',
 '''Rename Page''':
 '''Redenumire Pagină''',
 '''New name''':
 '''Nume nou''',
 '''Optional reason for the renaming''':
 '''Motiv opţional referitor la redenumire.''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'O pagină cu numele {{{\'%s\'}}} există deja.\'\'\'
-
-Încercaţi un nume diferit.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(inclusiv %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -619,16 +615,12 @@ Try a different name.''':
 '''Lista Completă de Legături pentru "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Nu se poate crea o pagină nouă fără numele paginii.  Specificaţi numele paginii.''',
-'''You are not allowed to delete this page.''':
-'''Nu aveţi permisiunea de a şterge această pagină.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Folosiţi interfaţa interactivă cu utilizatorul pentru a şterge pagini!''',
-'''Really delete this page?''':
-'''Sigur doriţi ştergerea acestei pagini ?''',
 '''Delete''':
 '''Ştergere''',
 '''Optional reason for the deletion''':
 '''Motiv opţional referitor la ştergere''',
+'''Really delete this page?''':
+'''Sigur doriţi ştergerea acestei pagini ?''',
 '''[%d attachments]''':
 '''[%d ataşamente]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

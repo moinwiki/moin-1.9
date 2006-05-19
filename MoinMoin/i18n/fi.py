@@ -288,6 +288,14 @@ Ota yhteyttä wikin omistajaan, joka voi tehdä sen.''',
 '''GUI-tila''',
 '''Edit was cancelled.''':
 '''Muokkaus peruttu.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Nimellä {{{\'%s\'}}} on jo sivu.\'\'\'
+
+Kokeile eri nimeä.''',
+'''Could not rename page because of file system error: %s.''':
+'''Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Kiitos tekemistäsi muutoksista. Huolellisuuttasi arvostetaan.''',
 '''Page "%s" was successfully deleted!''':
@@ -578,24 +586,12 @@ Jättääksesi muokkauksen, paina Peruuta-nappia.''',
 '''%(matchcount)d %(matches)s nimelle "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Paikallinen sivukartta sivulta "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Sinulla ei ole oikeutta nimetä sivuja uudelleen tässä wikissä!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Käytä sivujen uudelleennimeämiseen vuorovaikutteista käyttöliittymää!''',
-'''Could not rename page because of file system error: %s.''':
-'''Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %s.''',
 '''Rename Page''':
 '''Nimeä sivu uudelleen''',
 '''New name''':
 '''Uusi nimi''',
 '''Optional reason for the renaming''':
 '''Vapaaehtoinen uudelleennimeämisen syy''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Nimellä {{{\'%s\'}}} on jo sivu.\'\'\'
-
-Kokeile eri nimeä.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(sisältää %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -614,16 +610,12 @@ Kokeile eri nimeä.''',
 '''Täysi linkkilista haulle "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Uutta sivua ei voi luoda ilman sivun nimeä. Kerro sivulle nimi.''',
-'''You are not allowed to delete this page.''':
-'''Sinulla ei ole oikeutta poistaa tätä sivua.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Käytä sivujen poistoon vuorovaikutteista käyttöliittymää!''',
-'''Really delete this page?''':
-'''Haluatko varmasti poistaa tämän sivun?''',
 '''Delete''':
 '''Poista''',
 '''Optional reason for the deletion''':
 '''Vapaaehtoinen poiston syy''',
+'''Really delete this page?''':
+'''Haluatko varmasti poistaa tämän sivun?''',
 '''[%d attachments]''':
 '''[liitetiedostoja %d]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

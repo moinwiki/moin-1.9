@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2006-04-17 17:10+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -523,6 +523,24 @@ msgstr "Grafiskt läge"
 
 msgid "Edit was cancelled."
 msgstr "Redigeringen avbröts."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Du kan inte spara tomma sidor."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''En sida med namnet {{{'%s'}}} existerar redan.'''\n"
+"\n"
+"Pröva ett annat namn."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Tack för dina ändringar. Ditt sinne för detaljer är uppskattat."
@@ -1160,18 +1178,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr "Hantering av MinaSidor"
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Du har inte tillålse att radera sidor i den här wikin!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Var god använd det interaktiva användargränsnittet för att byta namn på "
-"sidor!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Kunde inte byta namn på sidan på grund av ett filsystemsfel: %s."
-
 msgid "Rename Page"
 msgstr "Byt namn på sida"
 
@@ -1180,16 +1186,6 @@ msgstr "Nytt namn"
 
 msgid "Optional reason for the renaming"
 msgstr "Skäl till namnbyte (ej obligatoriskt)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''En sida med namnet {{{'%s'}}} existerar redan.'''\n"
-"\n"
-"Pröva ett annat namn."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1211,6 +1207,26 @@ msgstr "Inga felstavningar funna!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Du kan inte stavningskontrollera en sida som du inte kan läsa."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Du har inte tillåtelse att spara en teckning på den här sidan."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Var god använd det interaktiva användargränsnittet för att radera sidor!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1257,21 +1273,14 @@ msgstr "Du har inte tillåtelse att utföra den här åtgärden."
 msgid "You are now logged out."
 msgstr "Du är nu utloggad."
 
-msgid "You are not allowed to delete this page."
-msgstr "Du har inte tillåtelse att radera den här sidan."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"Var god använd det interaktiva användargränsnittet för att radera sidor!"
-
-msgid "Really delete this page?"
-msgstr "Radera den här sidan, är du säker?"
-
 msgid "Delete"
 msgstr "Radera"
 
 msgid "Optional reason for the deletion"
 msgstr "Anledning för borttagande (valfri)"
+
+msgid "Really delete this page?"
+msgstr "Radera den här sidan, är du säker?"
 
 #, python-format
 msgid ""
@@ -1930,3 +1939,14 @@ msgstr "Epost inte skickad"
 
 msgid "Mail sent OK"
 msgstr "Epost skickad korrekt"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Du har inte tillålse att radera sidor i den här wikin!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Var god använd det interaktiva användargränsnittet för att byta namn på "
+#~ "sidor!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Du har inte tillåtelse att radera den här sidan."

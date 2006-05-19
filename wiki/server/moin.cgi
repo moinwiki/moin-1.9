@@ -36,9 +36,10 @@ if hotshotProfiler:
     prof = hotshot.Profile("moin.prof")
     prof.start()
 
-from MoinMoin.request import RequestCGI
-request = RequestCGI()
+from MoinMoin.request import CGI
+request = CGI.Request()
 request.run()
 
 if hotshotProfiler:
     prof.close()
+

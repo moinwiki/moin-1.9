@@ -6,8 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.formatter import text_html
-from MoinMoin.formatter.base import FormatterBase
+from MoinMoin.formatter import FormatterBase, text_html
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
@@ -53,7 +52,7 @@ class Formatter(text_html.Formatter):
         if not on:
             return self.url(0) # return '</a>'
         html_class = 'badinterwiki' # we use badinterwiki in any case to simplify reverse conversion
-        href = wikiutil.quoteWikinameURL(pagename)
+        href = wikiutil.quoteWikinameURL(pagename) or "/" # FCKeditor behaves strange on empty href
         title = kw.get('title', interwiki)
         return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with pages with umlauts
 
@@ -100,8 +99,8 @@ class Formatter(text_html.Formatter):
             result = "[[%s]]" % name
         return '<span style="background-color:#ffff11">%s</span>' % result
 
-    def processor(self, processor_name, lines, is_parser=0):
-        """ processor_name MUST be valid!
+    def parser(self, parser_name, lines):
+        """ parser_name MUST be valid!
         """
         result = [self.preformatted(1)]
         for line in lines:

@@ -309,6 +309,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''GUI 模式''',
 '''Edit was cancelled.''':
 '''編輯已取消。''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'已經有一個頁面叫做 "{{{\'%s\'}}}" 了！\'\'\'
+
+請用別的名字。''',
+'''Could not rename page because of file system error: %s.''':
+'''無法更改頁面名稱。原因為檔案系統錯誤：%s。''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''感謝你的細心修改。''',
 '''Page "%s" was successfully deleted!''':
@@ -703,24 +711,12 @@ the group pages.
 ''',
 '''MyPages management''':
 '''管理我的頁面''',
-'''You are not allowed to rename pages in this wiki!''':
-'''你無權重新命名頁面！''',
-'''Please use the interactive user interface to rename pages!''':
-'''請使用互動式介面為頁面重新命名！''',
-'''Could not rename page because of file system error: %s.''':
-'''無法更改頁面名稱。原因為檔案系統錯誤：%s。''',
 '''Rename Page''':
 '''重新命名''',
 '''New name''':
 '''新的名稱''',
 '''Optional reason for the renaming''':
 '''重新命名的理由：''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'已經有一個頁面叫做 "{{{\'%s\'}}}" 了！\'\'\'
-
-請用別的名字。''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(其中包含 %(localwords)d 個 %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -757,16 +753,12 @@ Try a different name.''':
 '''你無權執行本項操作。''',
 '''You are now logged out.''':
 '''你已經登出了。''',
-'''You are not allowed to delete this page.''':
-'''你無權刪除本頁。''',
-'''Please use the interactive user interface to delete pages!''':
-'''請使用互動式介面刪除頁面！''',
-'''Really delete this page?''':
-'''真的要刪除本頁？''',
 '''Delete''':
 '''刪除''',
 '''Optional reason for the deletion''':
 '''刪除本頁的理由：''',
+'''Really delete this page?''':
+'''真的要刪除本頁？''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''復原備份：%(filename)s 至目的目錄：%(targetdir)s。

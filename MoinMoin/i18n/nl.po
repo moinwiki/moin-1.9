@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -518,6 +518,24 @@ msgstr ""
 
 msgid "Edit was cancelled."
 msgstr "Bewerking werd geannuleerd."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "U kunt een lege pagina niet opslaan."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Een pagina met de naam {{{'%s'}}} bestaat al.'''\n"
+"\n"
+"Probeer een andere naam."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Kon paginanaam niet wijzigen vanwege systeemfout: %s."
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Dank voor de wijzigingen. Uw aandacht voor detail wordt gewaardeerd."
@@ -1122,16 +1140,6 @@ msgstr ""
 msgid "MyPages management"
 msgstr ""
 
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "U hebt geen toestemming in deze wiki pagina's van naam te veranderen!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr "Gebruik de interactieve gebruikersinterface om pagina's te hernoemen!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Kon paginanaam niet wijzigen vanwege systeemfout: %s."
-
 msgid "Rename Page"
 msgstr "Pagina hernoemen"
 
@@ -1140,16 +1148,6 @@ msgstr "Nieuwe naam"
 
 msgid "Optional reason for the renaming"
 msgstr "Eventueel de reden voor deze hernoeming"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Een pagina met de naam {{{'%s'}}} bestaat al.'''\n"
-"\n"
-"Probeer een andere naam."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1172,6 +1170,26 @@ msgstr "Geen spelfouten gevonden!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "U kunt geen spelling controleren op een pagina die u niet kunt lezen."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "U hebt geen toestemming een afbeelding op deze pagina te bewaren."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Gebruik de interactieve gebruikersinterface om pagina's te verwijderen!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1223,21 +1241,14 @@ msgstr "U hebt geen toestemming deze pagina te bewerken."
 msgid "You are now logged out."
 msgstr "Cookie verwijderd. U bent nu uitgelogd."
 
-msgid "You are not allowed to delete this page."
-msgstr "U hebt geen toestemming deze pagina te verwijderen."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr ""
-"Gebruik de interactieve gebruikersinterface om pagina's te verwijderen!"
-
-msgid "Really delete this page?"
-msgstr "Deze pagina werkelijk verwijderen?"
-
 msgid "Delete"
 msgstr "Verwijderen"
 
 msgid "Optional reason for the deletion"
 msgstr "Eventueel de reden voor deze verwijdering"
+
+msgid "Really delete this page?"
+msgstr "Deze pagina werkelijk verwijderen?"
 
 #, python-format
 msgid ""
@@ -1898,6 +1909,17 @@ msgstr "E-mail correct verzonden"
 
 msgid "Mail sent OK"
 msgstr "E-mail correct verzonden"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr ""
+#~ "U hebt geen toestemming in deze wiki pagina's van naam te veranderen!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Gebruik de interactieve gebruikersinterface om pagina's te hernoemen!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "U hebt geen toestemming deze pagina te verwijderen."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s bytes)"

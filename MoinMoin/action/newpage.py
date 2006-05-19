@@ -9,9 +9,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.util import MoinMoinNoFooter
-from MoinMoin.Page import Page
 import time
+from MoinMoin.Page import Page
 
 class NewPage:
     """ Open editor for a new page, using template """
@@ -93,7 +92,6 @@ class NewPage:
 
             url = Page(self.request, pagename).url(self.request, query, 0)
             self.request.http_redirect(url)
-            raise MoinMoinNoFooter
 
         return ''
 

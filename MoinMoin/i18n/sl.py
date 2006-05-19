@@ -313,6 +313,13 @@ Poskusite se obrniti na upravitelja tega vikija, ta lahko vklopi e-pošto, če t
 '''Urejanje s sprotnim prikazom (GUI)''',
 '''Edit was cancelled.''':
 '''Spremembe preklicane.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Stran z imenom {{{\'%s\'}}} že obstaja.\'\'\'
+Uporabite drugačno ime.''',
+'''Could not rename page because of file system error: %s.''':
+'''Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Hvala za popravke, cenimo vašo natančnost.''',
 '''Page "%s" was successfully deleted!''':
@@ -708,23 +715,12 @@ Uporabite predlogo HomepageGroupsTemplate za tvorjenje novih skupin.
 ''',
 '''MyPages management''':
 '''Upravljanje z MyPages''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Na tem vikiju ni dovoljeno preimenovanje strani!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Za preimenovanje strani uporabite interaktivni uporabniški vmesnik!''',
-'''Could not rename page because of file system error: %s.''':
-'''Preimenovanje strani ni uspelo, napaka datotečnega sistema: %s.''',
 '''Rename Page''':
 '''Preimenuj stran''',
 '''New name''':
 '''Novo ime''',
 '''Optional reason for the renaming''':
 '''Razlog za preimenovanje (neobvezno)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Stran z imenom {{{\'%s\'}}} že obstaja.\'\'\'
-Uporabite drugačno ime.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(vključno z %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -761,16 +757,12 @@ Uporabite drugačno ime.''',
 '''Te akcije vam ni dovoljeno izvesti.''',
 '''You are now logged out.''':
 '''Odjavljeni ste.''',
-'''You are not allowed to delete this page.''':
-'''Te strani vam ni dovoljeno izbrisati.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Za brisanje strani uporabite interaktivni uporabniški vmesnik!''',
-'''Really delete this page?''':
-'''Zares izbrisati to stran?''',
 '''Delete''':
 '''Brisanje''',
 '''Optional reason for the deletion''':
 '''Razlog za brisanje (neobvezno)''',
+'''Really delete this page?''':
+'''Zares izbrisati to stran?''',
 '''Restored Backup: %(filename)s to target dir: %(targetdir)s.
 Files: %(filecount)d, Directories: %(dircount)d''':
 '''Vrnjeno iz varnostne kopije %(filename)s v datotečni imenik: %(targetdir)s.

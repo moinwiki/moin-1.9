@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-15 18:22+0200\n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -44,7 +44,7 @@ msgstr "Pāradresēts no lapas \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Šī lapa pāradresē uz lapu \"%(page)s\""
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "~-If you submit this form, the submitted values will be displayed.\n"
 "To use this form on other pages, insert a\n"
@@ -529,6 +529,24 @@ msgstr "Grafiskais režīms"
 msgid "Edit was cancelled."
 msgstr "Labošana tika atsaukta."
 
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Tukšas lapas saglabāt nedrīkst."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Lapa ar nosaukumu {{{'%s'}}} jau eksistē.'''\n"
+"\n"
+"Pamēģiniet citu nosaukumu."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts."
+
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta."
 
@@ -629,7 +647,7 @@ msgstr ""
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
-msgstr "Labojumu rezerves kopija atrodas [%(backup_url)s here]."
+msgstr "Jūsu labojumu dublējums atrodas [%(backup_url)s šeit]."
 
 msgid "You did not change the page content, not saved!"
 msgstr "Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!"
@@ -1073,9 +1091,8 @@ msgstr "Iesaiņot lapas"
 msgid "Package name"
 msgstr "Saiņa nosaukums"
 
-#, fuzzy
 msgid "List of page names - separated by a comma"
-msgstr "Lapu saraksts, atdalīts ar <tt>,</tt>"
+msgstr "Lapu saraksts, atdalīts ar komatiem"
 
 #, python-format
 msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
@@ -1137,21 +1154,29 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
+"Šeit Jūs varat pievienot apakšlapas Jūsu esksistējošai mājas lapai. \n"
+"\n"
+"Jūs varat noteikt šo lapu pieejamību citem lietotājiem,\n"
+"pieeju kontrolē atbilstošās grupas lapas grupas piederība.\n"
+"\n"
+"Lai izveidotu apakšlapu, evadiet apakšlapas nosaukumu un nospiediet pogu.\n"
+"\n"
+"Pirms veidot aizsargātas pieejas lapas, pārliecinieties, ka atbilstošas "
+"grupas lapa eksistē \n"
+"un tajā ir atbilstoši lietotāji. Izmantojiet MājaslapasGrupasVeidne, "
+"veidojot grupas lapas2.\n"
+"||'''Pievienot jaunu personisku lapu:'''||'''Sastīta pieejas kontroles "
+"saraksta grupa:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,lasāma-rakstāma lapa,%(username)"
+"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,tikai-lasāma lapa,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,privāta lapa,%(username)s)]]||Tikai %"
+"(username)s||\n"
+"\n"
 
 msgid "MyPages management"
 msgstr "MyPages pārvaldīšana"
-
-msgid "You are not allowed to rename pages in this wiki!"
-msgstr "Šajā viki Jums nav tiesību pārdēvēt lapas!"
-
-msgid "Please use the interactive user interface to rename pages!"
-msgstr ""
-"Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja "
-"saskarni!"
-
-#, python-format
-msgid "Could not rename page because of file system error: %s."
-msgstr "Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts."
 
 msgid "Rename Page"
 msgstr "Pārdēvēt lapu"
@@ -1161,16 +1186,6 @@ msgstr "Jauns nosaukums"
 
 msgid "Optional reason for the renaming"
 msgstr "Pārdēvēšanas iemesls (neobligāts)"
-
-#, python-format
-msgid ""
-"'''A page with the name {{{'%s'}}} already exists.'''\n"
-"\n"
-"Try a different name."
-msgstr ""
-"'''Lapa ar nosaukumu {{{'%s'}}} jau eksistē.'''\n"
-"\n"
-"Pamēģiniet citu nosaukumu."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1192,6 +1207,25 @@ msgstr "Pareizrakstības kļūdas nav atrastas!"
 
 msgid "You can't check spelling on a page you can't read."
 msgstr "Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1238,37 +1272,30 @@ msgstr "Jums nav tiesību veikt šo darbību."
 msgid "You are now logged out."
 msgstr "Jūs esat atslēgts(-a)."
 
-msgid "You are not allowed to delete this page."
-msgstr "Jūs nedrīkstat dzēst šo lapu."
-
-msgid "Please use the interactive user interface to delete pages!"
-msgstr "Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!"
-
-msgid "Really delete this page?"
-msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
-
 msgid "Delete"
 msgstr "Dzēst"
 
 msgid "Optional reason for the deletion"
 msgstr "Ja vēlaties, norādiet lapas dzēšanas iemeslu"
 
+msgid "Really delete this page?"
+msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
+
 #, python-format
 msgid ""
 "Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
 "Files: %(filecount)d, Directories: %(dircount)d"
 msgstr ""
-"Rezerves kopija %(filename)s atjaunota direktorijā %(targetdir)s.\n"
+"Dublējums %(filename)s atjaunots direktorijā %(targetdir)s.\n"
 "Atjaunoti %(filecount)d faili un %(dircount)d direktorijas."
 
 #, python-format
 msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
 msgstr ""
-"Kļūda veicot rezerves kopijas %(filename)s atjaunošanu direktorijā %"
-"(targetdir)s."
+"Kļūda veicot dublējuma %(filename)s atjaunošanu direktorijā %(targetdir)s."
 
 msgid "Wiki Backup / Restore"
-msgstr "Viki rezerves kopēšana / atjaunošana"
+msgstr "Viki dublēšana / atjaunošana"
 
 msgid ""
 "Some hints:\n"
@@ -1287,19 +1314,34 @@ msgid ""
 "complete.\n"
 "\n"
 msgstr ""
+"Daži padomi:\n"
+" * Lai atjaunotu dublējumu:\n"
+"  * Dublējuma atjaunošana dzēsīs esošos datus. Esiet piesardzīgi.\n"
+"  * Pārdēvējiet to par <siteid>.tar.<compression> (nodzēsiet --date--time--"
+"UTC daļu).\n"
+"  * Ievietojiet dublējuma failu direktorijā "
+"''backup_storage_dir'' (izmantojot ''scp'', ''ftp'', ...).\n"
+"  * Nospiediet pogu [[GetText(Restore)]], zemāk.\n"
+"\n"
+" * Lai izveidotu dublējumu, nospiediet pogu [[GetText(Backup)]] un "
+"saglabājiet drošā vietā failu,    kuru Jūs iegūsiet.\n"
+"\n"
+"Lūdzu pārliecinieties, ka Jūsus Viki konfigurācijas ''backup_*'' vērtības ir "
+"korektas.\n"
+"\n"
 
 msgid "Backup"
-msgstr "Veidot rezerves kopiju"
+msgstr "Dublēt"
 
 msgid "Restore"
 msgstr "Atjaunot"
 
 msgid "You are not allowed to do remote backup."
-msgstr "Jūs nedrīkstat veikt attālinātu rezerves kopēšanu."
+msgstr "Jūs nedrīkstat veikt attālinātu dublēšanu."
 
 #, python-format
 msgid "Unknown backup subaction: %s."
-msgstr "Nezināma rezerves kopēšanas apakšdarbība: %s."
+msgstr "Nezināma dublēšanas apakšdarbība: %s."
 
 #, python-format
 msgid "[%d attachments]"
@@ -1501,16 +1543,16 @@ msgid "WordIndex"
 msgstr "PriekšmetuRādītājs"
 
 msgid "FindPage"
-msgstr "AtrastLapu"
+msgstr "MeklētLapu"
 
 msgid "SiteNavigation"
-msgstr "LapasNavigācija"
+msgstr "VietnesNavigācija"
 
 msgid "HelpContents"
-msgstr "PamācībasSaturaRādītājs"
+msgstr "PalīdzībasSaturaRādītājs"
 
 msgid "HelpOnFormatting"
-msgstr "PalīdzētFormatēt"
+msgstr "FormatēšanasPalīdzība"
 
 msgid "UserPreferences"
 msgstr "JūsuIestatījumi"
@@ -1689,7 +1731,7 @@ msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Nepieciešams krāsas kods \"%(arg)s\" pēc \"%(key)s\""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
-msgstr "XSLT izslēgts; lūdzu, skatieties PalīdzētUzstādīt."
+msgstr "XSLT izslēgts; lūdzu, skatieties KonfigurēšanasPalīdzība."
 
 msgid "XSLT processing is not available, please install 4suite 1.x."
 msgstr "XSLT apstrāde neiespējama, lūdzu, instalējiet 4suite 1.x."
@@ -1900,6 +1942,17 @@ msgstr "E-pasts nav nosūtīts"
 
 msgid "Mail sent OK"
 msgstr "E-pasts nosūtīts"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Šajā viki Jums nav tiesību pārdēvēt lapas!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja "
+#~ "saskarni!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Jūs nedrīkstat dzēst šo lapu."
 
 #~ msgid "%(logcount)s (%(logsize)s bytes)"
 #~ msgstr "%(logcount)s (%(logsize)s baiti)"

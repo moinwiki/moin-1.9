@@ -29,7 +29,7 @@
 import os, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
-from MoinMoin.util import MoinMoinNoFooter, filesys
+from MoinMoin.util import filesys
 
 action_name = __name__.split('.')[-1]
 
@@ -348,7 +348,10 @@ def send_hotdraw(pagename, request):
     querystr = wikiutil.escape(wikiutil.makeQueryString(querystr))
     pagelink = '%s/%s?%s' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), querystr)
     helplink = Page(request, "HelpOnActions/AttachFile").url(request)
-    savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
+    querystr = {'action': 'AttachFile', 'do': 'savedrawing'}
+    querystr = wikiutil.escape(wikiutil.makeQueryString(querystr))
+    savelink = '%s/%s?%s' % (request.getScriptname(), wikiutil.quoteWikinameURL(pagename), querystr)
+    #savelink = Page(request, pagename).url(request) # XXX include target filename param here for twisted
                                            # request, {'savename': request.form['drawing'][0]+'.draw'}
     #savelink = '/cgi-bin/dumpform.bat'
 
@@ -445,15 +448,15 @@ def execute(pagename, request):
     msg = None
     if action_name in request.cfg.actions_excluded:
         msg = _('File attachments are not allowed in this wiki!')
-    elif request.form.has_key('filepath'):
+    elif not request.form.has_key('do'):
+        upload_form(pagename, request)
+    elif request.form['do'][0] == 'savedrawing':
         if request.user.may.write(pagename):
             save_drawing(pagename, request)
             request.http_headers()
             request.write("OK")
         else:
             msg = _('You are not allowed to save a drawing on this page.')
-    elif not request.form.has_key('do'):
-        upload_form(pagename, request)
     elif request.form['do'][0] == 'upload':
         if request.user.may.write(pagename):
             if request.form.has_key('file'):
@@ -495,19 +498,18 @@ def execute(pagename, request):
     if msg:
         error_msg(pagename, request, msg)
 
-
 def upload_form(pagename, request, msg=''):
     _ = request.getText
 
     request.http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
-    wikiutil.send_title(request, _('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
+    request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
     request.write('<div id="content">\n') # start content div
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
-    wikiutil.send_footer(request, pagename)
-
+    request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 def do_upload(pagename, request):
     _ = request.getText
@@ -649,8 +651,6 @@ def get_file(pagename, request):
 
     # send data
     shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
-
-    raise MoinMoinNoFooter
 
 def install_package(pagename, request):
     _ = request.getText
@@ -817,7 +817,7 @@ def view_file(pagename, request):
     request.setContentLanguage(request.lang)
     title = _('attachment:%(filename)s of %(pagename)s', formatted=True) % {
         'filename': filename, 'pagename': pagename}
-    wikiutil.send_title(request, title, pagename=pagename)
+    request.theme.send_title(title, pagename=pagename)
 
     # send body
     # TODO: use formatter startContent?
@@ -826,9 +826,8 @@ def view_file(pagename, request):
     send_uploadform(pagename, request)
     request.write('</div>\n') # end content div
 
-    # send footer
-    wikiutil.send_footer(request, pagename)
-
+    request.theme.send_footer(pagename)
+    request.theme.send_closing_html()
 
 #############################################################################
 ### File attachment administration

@@ -286,6 +286,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''图形界面模式''',
 '''Edit was cancelled.''':
 '''编辑取消了.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'已经有一页叫做{{{\'%s\'}}} 了.\'\'\'
+
+试用一个不同的网页名.''',
+'''Could not rename page because of file system error: %s.''':
+'''网页改名失败, 文件系统异常: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''谢谢您的细心修改.''',
 '''Page "%s" was successfully deleted!''':
@@ -581,24 +589,12 @@ To leave the editor, press the Cancel button.''':
 '''共发现%(matchcount)d%(matches)s与"%(title)s"相似的页''',
 '''Local Site Map for "%s"''':
 '''"%s"的本地站点图''',
-'''You are not allowed to rename pages in this wiki!''':
-'''本维基不开放网页改名!''',
-'''Please use the interactive user interface to rename pages!''':
-'''请使用用户界面交互地为网页改名!''',
-'''Could not rename page because of file system error: %s.''':
-'''网页改名失败, 文件系统异常: %s.''',
 '''Rename Page''':
 '''改名''',
 '''New name''':
 '''新名称''',
 '''Optional reason for the renaming''':
 '''改名的原因(可选)''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'已经有一页叫做{{{\'%s\'}}} 了.\'\'\'
-
-试用一个不同的网页名.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(其中包括%(localwords)d个%(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -617,16 +613,12 @@ Try a different name.''':
 '''连向"%s"的网页''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''没有网页名就无法创建新网页. 请指定一个网页名.''',
-'''You are not allowed to delete this page.''':
-'''您不能删除此页!''',
-'''Please use the interactive user interface to delete pages!''':
-'''请使用用户界面交互删除网页!''',
-'''Really delete this page?''':
-'''真的要删除此页?''',
 '''Delete''':
 '''删除''',
 '''Optional reason for the deletion''':
 '''删除此页的理由(可选)''',
+'''Really delete this page?''':
+'''真的要删除此页?''',
 '''[%d attachments]''':
 '''[%d个附件]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

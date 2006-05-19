@@ -784,11 +784,139 @@ def AbsPageName(request, context, pagename):
 
 def pagelinkmarkup(pagename):
     """ return markup that can be used as link to page <pagename> """
-    from MoinMoin.parser.wiki import Parser
+    from MoinMoin.parser.text_moin_wiki import Parser
     if re.match(Parser.word_rule + "$", pagename):
         return pagename
     else:
         return u'["%s"]' % pagename
+
+# mimetype stuff ------------------------------------------------------------
+class MimeType(object):
+    """ represents a mimetype like text/plain """
+    sanitize_mapping = {
+        # this stuff is text, but got application/* for unknown reasons
+        ('application', 'docbook+xml'): ('text', 'docbook'),
+        ('application', 'x-latex'): ('text', 'latex'),
+        ('application', 'x-tex'): ('text', 'tex'),
+        ('application', 'javascript'): ('text', 'javascript'),
+    }
+    spoil_mapping = {} # inverse mapping of above
+    
+    def __init__(self, mimestr=None, filename=None):
+        self.major = self.minor = None # sanitized mime type and subtype
+        self.params = {} # parameters like "charset" or others
+        self.charset = None # this stays None until we know for sure!
+
+        for key, value in self.sanitize_mapping.items():
+            self.spoil_mapping[value] = key
+
+        if mimestr:
+            self.parse_mimetype(mimestr)
+        elif filename:
+            self.parse_filename(filename)
+    
+    def parse_filename(self, filename):
+        import mimetypes
+        mtype, encoding = mimetypes.guess_type()
+        if mtype is None:
+            mtype = 'application/octet-stream'
+        self.parse_mimetype(mtype)
+        
+    def parse_mimetype(self, mimestr):
+        """ take a string like used in content-type and parse it into components,
+            alternatively it also can process some abbreviated string like "wiki"
+        """
+        parameters = mimestr.split(";")
+        parameters = [p.strip() for p in parameters]
+        mimetype, parameters = parameters[0], parameters[1:]
+        mimetype = mimetype.split('/')
+        if len(mimetype) >= 2:
+            major, minor = mimetype[:2] # we just ignore more than 2 parts
+        else:
+            major, minor = self.parse_format(mimetype[0])
+        self.major = major.lower()
+        self.minor = minor.lower()
+        for param in parameters:
+            key, value = param.split('=')
+            if value[0] == '"' and value[-1] == '"': # remove quotes
+                value = value[1:-1]
+            self.params[key.lower()] = value
+        if self.params.has_key('charset'):
+            self.charset = self.params['charset'].lower()
+        self.sanitize()
+            
+    def parse_format(self, format):
+        """ maps from what we currently use on-page in a #format xxx processing
+            instruction to a sanitized mimetype major, minor tuple.
+            can also be user later for easier entry by the user, so he can just
+            type "wiki" instead of "text/moin-wiki".
+        """
+        format = format.lower()
+        if format in ('plain', 'csv', 'rst', 'docbook', 'latex', 'tex', 'html', 'css',
+                      'xml', 'python', 'perl', 'php', 'ruby', 'javascript',
+                      'cplusplus', 'java', 'pascal', 'diff', 'gettext', 'xslt', ):
+            mimetype = 'text', format
+        else:
+            mapping = {
+                'wiki': ('text', 'moin-wiki'),
+                'irc': ('text', 'irssi'),
+            }
+            try:
+                mimetype = mapping[format]
+            except KeyError:
+                mimetype = 'text', 'x-%s' % format
+        return mimetype
+
+    def sanitize(self):
+        """ convert to some representation that makes sense - this is not necessarily
+            conformant to /etc/mime.types or IANA listing, but if something is
+            readable text, we will return some text/* mimetype, not application/*,
+            because we need text/plain as fallback and not application/octet-stream.
+        """
+        self.major, self.minor = self.sanitize_mapping.get((self.major, self.minor), (self.major, self.minor))
+
+    def spoil(self):
+        """ this returns something conformant to /etc/mime.type or IANA as a string,
+            kind of inverse operation of sanitize(), but doesn't change self
+        """
+        major, minor = self.spoil_mapping.get((self.major, self.minor), (self.major, self.minor))
+        return self.content_type(major, minor)
+
+    def content_type(self, major=None, minor=None, charset=None, params=None):
+        """ return a string suitable for Content-Type header
+        """
+        major = major or self.major
+        minor = minor or self.minor
+        params = params or self.params or {}
+        if major == 'text':
+            charset = charset or self.charset or params.get('charset', config.charset)
+            params['charset'] = charset
+        mimestr = "%s/%s" % (major, minor)
+        params = ['%s="%s"' % (key.lower(), value) for key, value in params.items()]
+        params.insert(0, mimestr)
+        return "; ".join(params)
+
+    def mime_type(self):
+        """ return a string major/minor only, no params """
+        return "%s/%s" % (self.major, self.minor)
+
+    def module_name(self):
+        """ convert this mimetype to a string useable as python module name,
+            we yield the exact module name first and then proceed to shorter
+            module names (useful for falling back to them, if the more special
+            module is not found) - e.g. first "text_python", next "text".
+            Finally, we yield "application_octet_stream" as the most general
+            mimetype we have.
+            Hint: the fallback handler module for text/* should be implemented
+                  in module "text" (not "text_plain")
+        """
+        mimetype = self.mime_type()
+        modname = mimetype.replace("/", "_").replace("-", "_").replace(".", "_")
+        fragments = modname.split('_')
+        for length in range(len(fragments), 0, -1):
+            yield "_".join(fragments[:length])
+        yield "application_octet_stream"
+
 
 #############################################################################
 ### Plugins
@@ -811,9 +939,8 @@ def importPlugin(cfg, kind, name, function="execute"):
     imported, raise PluginMissingError. If function is missing, raise
     PluginAttributeError.
 
-    kind may be one of 'action', 'formatter', 'macro', 'processor',
-    'parser' or any other directory that exist in MoinMoin or
-    data/plugin
+    kind may be one of 'action', 'formatter', 'macro', 'parser' or any other
+    directory that exist in MoinMoin or data/plugin.
 
     Wiki plugins will always override builtin plugins. If you want
     specific plugin, use either importWikiPlugin or importBuiltinPlugin
@@ -1240,278 +1367,6 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     return lines
  
 
-#############################################################################
-### Page header / footer
-#############################################################################
-
-# FIXME - this is theme code, move to theme
-# Could be simplified by using a template
-
-def send_title(request, text, **keywords):
-    """
-    Output the page header (and title).
-
-    TODO: check all code that call us and add page keyword for the
-    current page being rendered.
-    
-    @param request: the request object
-    @param text: the title text
-    @keyword link: URL for the title
-    @keyword msg: additional message (after saving)
-    @keyword pagename: 'PageName'
-    @keyword page: the page instance that called us.
-    @keyword print_mode: 1 (or 0)
-    @keyword editor_mode: 1 (or 0)
-    @keyword media: css media type, defaults to 'screen'
-    @keyword allow_doubleclick: 1 (or 0)
-    @keyword html_head: additional <head> code
-    @keyword body_attr: additional <body> attributes
-    @keyword body_onload: additional "onload" JavaScript code
-    """
-    from MoinMoin.Page import Page
-    _ = request.getText
-    
-    if keywords.has_key('page'):
-        page = keywords['page']
-        pagename = page.page_name
-    else:
-        pagename = keywords.get('pagename', '')
-        page = Page(request, pagename)
-    
-    scriptname = request.getScriptname()
-    pagename_quoted = quoteWikinameURL(pagename)
-
-    # get name of system pages
-    page_front_page = getFrontPage(request).page_name
-    page_help_contents = getSysPage(request, 'HelpContents').page_name
-    page_title_index = getSysPage(request, 'TitleIndex').page_name
-    page_site_navigation = getSysPage(request, 'SiteNavigation').page_name
-    page_word_index = getSysPage(request, 'WordIndex').page_name
-    page_user_prefs = getSysPage(request, 'UserPreferences').page_name
-    page_help_formatting = getSysPage(request, 'HelpOnFormatting').page_name
-    page_find_page = getSysPage(request, 'FindPage').page_name
-    home_page = getInterwikiHomePage(request) # XXX sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
-    page_parent_page = getattr(page.getParentPage(), 'page_name', None)
-    
-    # Prepare the HTML <head> element
-    user_head = [request.cfg.html_head]
-
-    # include charset information - needed for moin_dump or any other case
-    # when reading the html without a web server
-    user_head.append('''<meta http-equiv="Content-Type" content="text/html;charset=%s">\n''' % config.charset)
-
-    meta_keywords = request.getPragma('keywords')
-    meta_desc = request.getPragma('description')
-    if meta_keywords:
-        user_head.append('<meta name="keywords" content="%s">\n' % escape(meta_keywords, 1))
-    if meta_desc:
-        user_head.append('<meta name="description" content="%s">\n' % escape(meta_desc, 1))
-
-    # search engine precautions / optimization:
-    # if it is an action or edit/search, send query headers (noindex,nofollow):
-    if request.query_string:
-        user_head.append(request.cfg.html_head_queries)
-    elif request.request_method == 'POST':
-        user_head.append(request.cfg.html_head_posts)
-    # if it is a special page, index it and follow the links - we do it
-    # for the original, English pages as well as for (the possibly
-    # modified) frontpage:
-    elif pagename in [page_front_page, request.cfg.page_front_page,
-                      page_title_index, 'TitleIndex',
-                      page_find_page, 'FindPage',
-                      page_site_navigation, 'SiteNavigation',
-                      'RecentChanges',]:
-        user_head.append(request.cfg.html_head_index)
-    # if it is a normal page, index it, but do not follow the links, because
-    # there are a lot of illegal links (like actions) or duplicates:
-    else:
-        user_head.append(request.cfg.html_head_normal)
-
-    if keywords.has_key('pi_refresh') and keywords['pi_refresh']:
-        user_head.append('<meta http-equiv="refresh" content="%(delay)d;URL=%(url)s">' % keywords['pi_refresh'])
-    
-    # output buffering increases latency but increases throughput as well
-    output = []
-    # later: <html xmlns=\"http://www.w3.org/1999/xhtml\">
-    output.append("""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-%s
-%s
-%s
-""" % (
-        ''.join(user_head),
-        request.theme.html_head({
-            'page': page,
-            'title': escape(text),
-            'sitename': escape(request.cfg.html_pagetitle or request.cfg.sitename),
-            'print_mode': keywords.get('print_mode', False),
-            'media': keywords.get('media', 'screen'),
-        }),
-        keywords.get('html_head', ''),
-    ))
-
-    # Links
-    output.append('<link rel="Start" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_front_page)))
-    if pagename:
-        output.append('<link rel="Alternate" title="%s" href="%s/%s?action=raw">\n' % (
-            _('Wiki Markup'), scriptname, pagename_quoted,))
-        output.append('<link rel="Alternate" media="print" title="%s" href="%s/%s?action=print">\n' % (
-            _('Print View'), scriptname, pagename_quoted,))
-
-        # !!! currently disabled due to Mozilla link prefetching, see
-        # http://www.mozilla.org/projects/netlib/Link_Prefetching_FAQ.html
-        #~ all_pages = request.getPageList()
-        #~ if all_pages:
-        #~     try:
-        #~         pos = all_pages.index(pagename)
-        #~     except ValueError:
-        #~         # this shopuld never happend in theory, but let's be sure
-        #~         pass
-        #~     else:
-        #~         request.write('<link rel="First" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[0]))
-        #~         if pos > 0:
-        #~             request.write('<link rel="Previous" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos-1])))
-        #~         if pos+1 < len(all_pages):
-        #~             request.write('<link rel="Next" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[pos+1])))
-        #~         request.write('<link rel="Last" href="%s/%s">\n' % (request.getScriptname(), quoteWikinameURL(all_pages[-1])))
-
-        if page_parent_page:
-            output.append('<link rel="Up" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_parent_page)))
-
-    # write buffer because we call AttachFile
-    request.write(''.join(output))
-    output = []
-
-    if pagename:
-        from MoinMoin.action import AttachFile
-        AttachFile.send_link_rel(request, pagename)
-
-    output.extend([
-        '<link rel="Search" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_find_page)),
-        '<link rel="Index" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_title_index)),
-        '<link rel="Glossary" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_word_index)),
-        '<link rel="Help" href="%s/%s">\n' % (scriptname, quoteWikinameURL(page_help_formatting)),
-                  ])
-    
-    output.append("</head>\n")
-    request.write(''.join(output))
-    output = []
-    request.flush()
-
-    # start the <body>
-    bodyattr = []
-    if keywords.has_key('body_attr'):
-        bodyattr.append(' ')
-        bodyattr.append(keywords['body_attr'])
-
-    # Add doubleclick edit action
-    if (pagename and keywords.get('allow_doubleclick', 0) and
-        not keywords.get('print_mode', 0) and
-        request.user.edit_on_doubleclick):
-        if request.user.may.write(pagename): # separating this gains speed
-            querystr = escape(makeQueryString({'action': 'edit'}))
-            # TODO: remove escape=0 in 2.0
-            url = page.url(request, querystr, escape=0)
-            bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
-
-    # Set body to the user interface language and direction
-    bodyattr.append(' %s' % request.theme.ui_lang_attr())
-    
-    body_onload = keywords.get('body_onload', '')
-    if body_onload:
-        bodyattr.append(''' onload="%s"''' % body_onload)
-    output.append('\n<body%s>\n' % ''.join(bodyattr))
-
-    # Output -----------------------------------------------------------
-
-    theme = request.theme
-    
-    # If in print mode, start page div and emit the title
-    if keywords.get('print_mode', 0):
-        d = {'title_text': text, 'title_link': None, 'page': page,}
-        request.themedict = d
-        output.append(theme.startPage())
-        output.append(theme.interwiki(d))      
-        output.append(theme.title(d))      
-
-    # In standard mode, emit theme.header
-    else:
-        # prepare dict for theme code:
-        d = {
-            'theme': theme.name,
-            'script_name': scriptname,
-            'title_text': text,
-            'title_link': keywords.get('link', ''),
-            'logo_string': request.cfg.logo_string,
-            'site_name': request.cfg.sitename,
-            'page': page,
-            'pagesize': pagename and page.size() or 0,
-            'last_edit_info': pagename and page.lastEditInfo() or '',
-            'page_name': pagename or '',
-            'page_find_page': page_find_page,
-            'page_front_page': page_front_page,
-            'home_page': home_page,
-            'page_help_contents': page_help_contents,
-            'page_help_formatting': page_help_formatting,
-            'page_parent_page': page_parent_page,
-            'page_title_index': page_title_index,
-            'page_word_index': page_word_index,
-            'page_user_prefs': page_user_prefs,
-            'user_name': request.user.name,
-            'user_valid': request.user.valid,
-            'user_prefs': (page_user_prefs, request.user.name)[request.user.valid],
-            'msg': keywords.get('msg', ''),
-            'trail': keywords.get('trail', None),
-            # Discontinued keys, keep for a while for 3rd party theme developers
-            'titlesearch': 'use self.searchform(d)',
-            'textsearch': 'use self.searchform(d)',
-            'navibar': ['use self.navibar(d)'],
-            'available_actions': ['use self.request.availableActions(page)'],
-        }
-
-        # add quoted versions of pagenames
-        newdict = {}
-        for key in d:
-            if key.startswith('page_'):
-                if not d[key] is None:
-                    newdict['q_'+key] = quoteWikinameURL(d[key])
-                else:
-                    newdict['q_'+key] = None
-        d.update(newdict)
-        request.themedict = d
-
-        # now call the theming code to do the rendering
-        if keywords.get('editor_mode', 0):
-            output.append(theme.editorheader(d))
-        else:
-            output.append(theme.header(d))
-    
-    # emit it
-    request.write(''.join(output))
-    output = []
-    request.flush()
-
-
-def send_footer(request, pagename, **keywords):
-    """
-    Output the page footer.
-
-    @param request: the request object
-    @param pagename: WikiName of the page
-    @keyword print_mode: true, when page is displayed in Print mode
-    """
-    d = request.themedict
-    theme = request.theme
-
-    # Emit end of page in print mode, or complete footer in standard mode
-    if keywords.get('print_mode', 0):
-        request.write(theme.pageinfo(d['page']))
-        request.write(theme.endPage())
-    else:
-        request.write(theme.footer(d, **keywords))
-
-    
 ########################################################################
 ### Tickets - used by RenamePage and DeletePage
 ########################################################################

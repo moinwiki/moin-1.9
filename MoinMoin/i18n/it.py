@@ -231,6 +231,14 @@ Contact the owner of the wiki, who can enable email.''':
 '''Il nome della pagina è troppo lungo, provane uno più corto''',
 '''Edit was cancelled.''':
 '''Le modifiche sono state annullate.''',
+'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
+
+Try a different name.''':
+'''\'\'\'Una pagina con il nome {{{\'%s\'}}} esiste già.\'\'\'
+
+Prova un nome differente.''',
+'''Could not rename page because of file system error: %s.''':
+'''Impossibile rinominare la pagina per un errore del file system: %s.''',
 '''Thank you for your changes. Your attention to detail is appreciated.''':
 '''Grazie per il tuo contributo. La tua attenzione ai dettagli è apprezzata.''',
 '''Page "%s" was successfully deleted!''':
@@ -497,24 +505,12 @@ Premi il pulsante Annulla per lasciare l\'editor.''',
 '''%(matchcount)d %(matches)s per "%(title)s"''',
 '''Local Site Map for "%s"''':
 '''Mappa del sito per "%s"''',
-'''You are not allowed to rename pages in this wiki!''':
-'''Non sei autorizzato a rinominare pagine in questo wiki!''',
-'''Please use the interactive user interface to rename pages!''':
-'''Per favore usa l\'interfaccia interattiva per rinominare le pagine!''',
-'''Could not rename page because of file system error: %s.''':
-'''Impossibile rinominare la pagina per un errore del file system: %s.''',
 '''Rename Page''':
 '''Rinomina Pagina''',
 '''New name''':
 '''Nuovo nome''',
 '''Optional reason for the renaming''':
 '''Ragione facoltativa per la rinominazione''',
-'''\'\'\'A page with the name {{{\'%s\'}}} already exists.\'\'\'
-
-Try a different name.''':
-'''\'\'\'Una pagina con il nome {{{\'%s\'}}} esiste già.\'\'\'
-
-Prova un nome differente.''',
 '''(including %(localwords)d %(pagelink)s)''':
 '''(includendo %(localwords)d %(pagelink)s)''',
 '''The following %(badwords)d words could not be found in the dictionary of %(totalwords)d words%(localwords)s and are highlighted below:''':
@@ -533,16 +529,12 @@ Prova un nome differente.''',
 '''Elenco completo dei collegamenti per "%s"''',
 '''Cannot create a new page without a page name.  Please specify a page name.''':
 '''Impossibile creare una nuova pagina senza nome.  Inserire il nome della pagina''',
-'''You are not allowed to delete this page.''':
-'''Non ti è consentito cancellare questa pagina.''',
-'''Please use the interactive user interface to delete pages!''':
-'''Per favore usa l\'interfaccia interattiva per cancellare le pagine!''',
-'''Really delete this page?''':
-'''Vuoi veramente cancellare questa pagina?''',
 '''Delete''':
 '''Cancella''',
 '''Optional reason for the deletion''':
 '''Ragione facoltativa per la cancellazione''',
+'''Really delete this page?''':
+'''Vuoi veramente cancellare questa pagina?''',
 '''[%d attachments]''':
 '''[%d allegati]''',
 '''There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.''':

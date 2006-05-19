@@ -10,7 +10,7 @@ import StringIO, os, re, random, codecs
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys, MoinMoinNoFooter, timefuncs
+from MoinMoin.util import filesys, timefuncs
 
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
@@ -20,7 +20,7 @@ class Page:
     # Header regular expression, used to get header boundaries
     header_re = r'(^#+.*(?:\n\s*)+)+'
 
-    def __init__(self, request, page_name, **keywords):
+    def __init__(self, request, page_name, **kw):
         """
         Create page object.
 
@@ -30,29 +30,39 @@ class Page:
 
         @param page_name: WikiName of the page
         @keyword rev: number of older revision
-        @keyword formatter: formatter instance
+        @keyword formatter: formatter instance or mimetype str,
+                            None or no kw arg will use default formatter
         @keyword include_self: if 1, include current user (default: 0)
         """
-        self.rev = keywords.get('rev', 0) # revision of this page
-        self.is_rootpage = keywords.get('is_rootpage', 0) # is this __init__ of rootpage?
-        self.include_self = keywords.get('include_self', 0)
         self.request = request
         self.cfg = request.cfg
-
         self.page_name = page_name
+        self.rev = kw.get('rev', 0) # revision of this page
+        self.is_rootpage = kw.get('is_rootpage', 0) # is this __init__ of rootpage?
+        self.include_self = kw.get('include_self', 0)
 
         # XXX uncomment to see how many pages we create....
         #import sys, traceback
         #print >>sys.stderr, "page %s" % repr(page_name)
         #traceback.print_stack(limit=4, file=sys.stderr)
 
-
-        if keywords.has_key('formatter'):
-            self.formatter = keywords.get('formatter')
+        formatter = kw.get('formatter', None)
+        if isinstance(formatter, (str, unicode)): # mimetype given
+            mimetype = str(formatter)
+            self.formatter = None
+            self.output_mimetype = mimetype
+            self.default_formatter = mimetype == "text/html"
+        elif formatter is not None: # formatter instance given
+            self.formatter = formatter
             self.default_formatter = 0
+            self.output_mimetype = "text/todo" # TODO where do we get this value from?
         else:
+            self.formatter = None
             self.default_formatter = 1
+            self.output_mimetype = "text/html"
 
+        self.output_charset = config.charset # correct for wiki pages
+        
         self._raw_body = None
         self._raw_body_modified = 0
         self.hilite_re = None
@@ -403,7 +413,7 @@ class Page:
     def last_edit(self, request):
         """
         Return the last edit.
-        This is used by wikirpc(2).py.
+        This is used by MoinMoin/xmlrpc/__init__.py.
 
         @param request: the request object
         @rtype: dict
@@ -932,7 +942,7 @@ class Page:
             if not UserPerms(subscriber).read(self.page_name): continue
 
             if subscriber.isSubscribedTo(pageList):
-                lang = subscriber.language or 'en'
+                lang = subscriber.language or request.cfg.language_default
                 if not lang in subscriber_list:
                     subscriber_list[lang] = []
                 if return_users:
@@ -949,7 +959,6 @@ class Page:
         text = self.get_raw_body()
         text = self.encodeTextMimeType(text)
         self.request.write(text)
-        raise MoinMoinNoFooter
 
 
     def send_page(self, request, msg=None, **keywords):
@@ -993,13 +1002,27 @@ class Page:
         # load the text
         body = self.get_raw_body()
 
-        # if necessary, load the default formatter
+        # if necessary, load the formatter
         if self.default_formatter:
             from MoinMoin.formatter.text_html import Formatter
             self.formatter = Formatter(request, store_pagelinks=1)
-        self.formatter.setPage(self)
-        if self.hilite_re: self.formatter.set_highlight_re(self.hilite_re)
+        elif not self.formatter:
+            omt = wikiutil.MimeType(self.output_mimetype)
+            for module_name in omt.module_name():
+                try:
+                    Formatter = wikiutil.importPlugin(request.cfg, "formatter", module_name, "Formatter")
+                    self.formatter = Formatter(request)
+                    break
+                except wikiutil.PluginMissingError:
+                    pass
+            else:
+                raise "Plugin missing error!" # XXX what now?
         request.formatter = self.formatter
+        self.formatter.setPage(self)
+        if self.hilite_re:
+            self.formatter.set_highlight_re(self.hilite_re)
+        
+        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
 
         # default is wiki markup
         pi_format = self.cfg.default_markup or "wiki"
@@ -1174,14 +1197,13 @@ class Page:
                         _('This page redirects to page "%(page)s"') % {'page': wikiutil.escape(pi_redirect)},
                         msg)
 
-
                 # Page trail
                 trail = None
                 if not print_mode:
                     request.user.addTrail(self.page_name)
                     trail = request.user.getTrail()
 
-                wikiutil.send_title(request, title,  page=self, link=link, msg=msg,
+                request.theme.send_title(title,  page=self, link=link, msg=msg,
                                     pagename=self.page_name, print_mode=print_mode,
                                     media=media, pi_refresh=pi_refresh,
                                     allow_doubleclick=1, trail=trail,
@@ -1201,15 +1223,17 @@ class Page:
                     ) % {'pagename': self.formatter.text(self.page_name)})
                     request.write(''.join(pi_formtext))
 
-        # Load the parser, or default to plain text parser that will
-        # just show the page raw source.
-        # TODO: do we need this magic? any effect on debugging?
-        try:
-            Parser = wikiutil.importPlugin(self.request.cfg, "parser", 
-                                           self.pi_format, "Parser")
-        except wikiutil.PluginMissingError:
-            from MoinMoin.parser.plain import Parser
-
+        # Load the parser
+        mt = wikiutil.MimeType(self.pi_format)
+        for module_name in mt.module_name():
+            try:
+                Parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
+                break
+            except wikiutil.PluginMissingError:
+                pass
+        else:
+            raise "No matching parser" # XXX what do we use if nothing at all matches?
+            
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
 
@@ -1248,7 +1272,7 @@ class Page:
         if not content_only:
             # send the page footer
             if self.default_formatter:
-                wikiutil.send_footer(request, self.page_name, print_mode=print_mode)
+                request.theme.send_footer(self.page_name, print_mode=print_mode)
 
             request.write(doc_trailer)
 
@@ -1260,6 +1284,8 @@ class Page:
                 cache.update('\n'.join(links) + '\n', True)
 
         request.clock.stop('send_page')
+        if not content_only and self.default_formatter:
+            request.theme.send_closing_html()
 
     def getFormatterName(self):
         """ Return a formatter name as used in the caching system
@@ -1267,7 +1293,7 @@ class Page:
         @rtype: string
         @return: formatter name as used in caching
         """
-        if not hasattr(self, 'formatter'):
+        if not hasattr(self, 'formatter') or self.formatter is None:
             return ''
         module = self.formatter.__module__
         return module[module.rfind('.') + 1:]
@@ -1290,11 +1316,15 @@ class Page:
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
             if parser is None:
-                try:
-                    parser = wikiutil.importPlugin(self.request.cfg, "parser",
-                                                   self.pi_format, "Parser")
-                except wikiutil.PluginMissingError:
-                    pass
+                mt = wikiutil.MimeType(self.pi_format)
+                for module_name in mt.module_name():
+                    try:
+                        parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
+                        break
+                    except wikiutil.PluginMissingError:
+                        pass
+                else:
+                    raise "no matching parser" # XXX what now?
             return getattr(parser, 'caching', False)
         return False
 
@@ -1334,8 +1364,8 @@ class Page:
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """            
         formatter = self.formatter
-        from MoinMoin import wikimacro        
-        macro_obj = wikimacro.Macro(parser)        
+        from MoinMoin.macro import Macro
+        macro_obj = Macro(parser)        
         # Fix __file__ when running from a zip package
         import MoinMoin
         if hasattr(MoinMoin, '__loader__'):
