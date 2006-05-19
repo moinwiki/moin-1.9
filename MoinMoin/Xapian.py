@@ -12,7 +12,7 @@ from pprint import pprint
 
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
-from MoinMoin.parser.wiki import Parser as WikiParser
+from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
@@ -397,29 +397,21 @@ class Index:
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
         request = self.request
-        mt2mn = wikiutil.mimetype2modulename
-        mimetype, encoding = wikiutil.guess_type(filename)
-        if mimetype is None:
-            mimetype = 'application/octet-stream'
-        try:
-            _filter = mt2mn(mimetype)
-            execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
-        except wikiutil.PluginMissingError:
+        mt = wikiutil.MimeType(filename=filename)
+        for modulename in mt.module_name():
             try:
-                _filter = mt2mn(mimetype.split("/", 1)[0])
-                execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
+                execute = wikiutil.importPlugin(request.cfg, 'filter', modulename)
             except wikiutil.PluginMissingError:
-                try:
-                    _filter = mt2mn('application/octet-stream')
-                    execute = wikiutil.importPlugin(request.cfg, 'filter', _filter)
-                except wikiutil.PluginMissingError:
-                    raise ImportError("Cannot load filter %s" % _filter)
+                pass
+        else:
+            raise "Cannot load filter for mimetype." # XXX
         try:
             data = execute(self, filename)
-            if debug: request.log("Filter %s returned %d characters for file %s" % (_filter, len(data), filename))
+            if debug:
+                request.log("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
         except (OSError, IOError), err:
             data = ''
-            request.log("Filter %s threw error '%s' for file %s" % (_filter, str(err), filename))
+            request.log("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
         return mimetype, data
    
     def test(self, request):
