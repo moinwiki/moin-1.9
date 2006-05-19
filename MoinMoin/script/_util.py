@@ -17,7 +17,7 @@ script_module = '__main__'
 
 def fatal(msgtext, **kw):
     """ Print error msg to stderr and exit. """
-    sys.stderr.write("FATAL ERROR: " + msgtext + "\n")
+    sys.stderr.write("\n\nFATAL ERROR: " + msgtext + "\n")
     if kw.get('usage', 0):
         maindict = vars(sys.modules[script_module])
         if maindict.has_key('usage'):
@@ -51,12 +51,13 @@ class Script:
         import optparse
         from MoinMoin import version
 
+        # what does this code do? at least it does not work.
         cmd = self.script_module.__name__.split('.')[-1].replace('_', '-')
         rev = "%s %s [%s]" % (version.project, version.release, version.revision)
-        sys.argv[0] = cmd
+        #sys.argv[0] = cmd
 
         self.parser = optparse.OptionParser(
-            usage="%(cmd)s %(usage)s\n\n" % {'cmd': cmd, 'usage': usage, },
+            usage="%(cmd)s [command] %(usage)s" % {'cmd': os.path.basename(sys.argv[0]), 'usage': usage, },
             version=rev)
         self.parser.allow_interspersed_args = False
         if def_values:
@@ -132,11 +133,14 @@ class MoinScript(Script):
 
         args = self.args
         if len(args) < 2:
-            self.parser.error("you must specify a command module and name.")
-            sys.exit(1)
+            self.parser.print_help()
+            fatal("You must specify a command module and name.")
 
         cmd_module, cmd_name = args[:2]
         from MoinMoin import wikiutil
-        plugin_class = wikiutil.importBuiltinPlugin('script.%s' % cmd_module, cmd_name, 'PluginScript')
+        try:
+            plugin_class = wikiutil.importBuiltinPlugin('script.%s' % cmd_module, cmd_name, 'PluginScript')
+        except wikiutil.PluginMissingError:
+            fatal("Command plugin %r, command %r was not found." % (cmd_module, cmd_name))
         plugin_class(args[2:], self.options).run() # all starts again there
 
