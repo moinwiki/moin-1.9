@@ -24,6 +24,35 @@ CHILD_PREFIX = "/"
 CHILD_PREFIX_LEN = len(CHILD_PREFIX)
 
 #############################################################################
+### mimetype support
+#############################################################################
+import mimetypes
+guess_type = mimetypes.guess_type
+guess_extension = mimetypes.guess_extension
+
+_our_types = {
+ # OpenOffice 2.x & others
+ '.odt': 'application/vnd.oasis.opendocument.text',
+ '.ods': 'application/vnd.oasis.opendocument.spreadsheet',
+ '.odp': 'application/vnd.oasis.opendocument.presentation',
+ '.odg': 'application/vnd.oasis.opendocument.graphics',
+ '.odc': 'application/vnd.oasis.opendocument.chart',
+ '.odf': 'application/vnd.oasis.opendocument.formula',
+ '.odb': 'application/vnd.oasis.opendocument.database',
+ '.odi': 'application/vnd.oasis.opendocument.image',
+ '.odm': 'application/vnd.oasis.opendocument.text-master',
+ '.ott': 'application/vnd.oasis.opendocument.text-template',
+ '.ots': 'application/vnd.oasis.opendocument.spreadsheet-template',
+ '.otp': 'application/vnd.oasis.opendocument.presentation-template',
+ '.otg': 'application/vnd.oasis.opendocument.graphics-template',
+}
+[mimetypes.add_type(mimetype, ext, True) for ext, mimetype in _our_types.items()]
+
+def mimetype2modulename(mimetype):
+    """ convert an original mimetype to a string usable as python module name """
+    return mimetype.replace("/", "_").replace("-","_").replace(".", "_")
+
+#############################################################################
 ### Getting data from user/Sending data to user
 #############################################################################
 
