@@ -20,7 +20,7 @@
 import os
 
 from MoinMoin import wikiutil
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
     """ Migration script class """
