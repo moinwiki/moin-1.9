@@ -1047,7 +1047,7 @@ def getParserForExtension(cfg, extension):
 
 
 #############################################################################
-### Misc
+### Parameter parsing
 #############################################################################
 
 def parseAttributes(request, attrstring, endtoken=None, extension=None):
@@ -1126,6 +1126,9 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
     return attrs, msg or ''
 
 
+#############################################################################
+### Misc
+#############################################################################
 def taintfilename(basename):
     """
     Make a filename that is supposed to be a plain name secure, i.e.
