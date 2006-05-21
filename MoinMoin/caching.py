@@ -21,6 +21,10 @@ class CacheEntry:
             @param arena: either a string or a page object, when we want to use
                           page local cache area
             @param key: under which key we access the cache content
+            @param scope: the scope where we are caching:
+                          'item' - an item local cache
+                          'wiki' - a wiki local cache
+                          'farm' - a cache for the whole farm
         """
         self.request = request
         if scope == 'page_or_wiki': # XXX split and refactor later
@@ -29,6 +33,12 @@ class CacheEntry:
                 filesys.makeDirs(self.arena_dir)
             else: # arena is in fact a page object
                 self.arena_dir = arena.getPagePath('cache', check_create=1)
+        elif scope == 'item': # arena is a Page instance
+            # we could move cache out of the page directory and store it to cache_dir
+            self.arena_dir = arena.getPagePath('cache', check_create=1)
+        elif scope == 'wiki':
+            self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
+            filesys.makeDirs(self.arena_dir)
         elif scope == 'farm':
             self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
             filesys.makeDirs(self.arena_dir)

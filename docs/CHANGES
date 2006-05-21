@@ -63,7 +63,9 @@ Version 1.6.current:
     * Added thread_monitor. It can be activated using:
       from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
     * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
-      will cache into a common directory for all wikis in the same farm.
+      will cache into a common directory for all wikis in the same farm, if you
+      specify 'wiki', it will use a cache directory per wiki and if you specify
+      'item', it will use a cache directory per item (== per page).
 
   New Features:
 
