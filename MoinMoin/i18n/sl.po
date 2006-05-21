@@ -523,9 +523,8 @@ msgstr "Urejanje s sprotnim prikazom (GUI)"
 msgid "Edit was cancelled."
 msgstr "Spremembe preklicane."
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "Prazne strani ni dovoljeno shraniti!"
+msgstr "Preimenovanje v prazno ime strani ni mogoče."
 
 #, python-format
 msgid ""
@@ -1205,23 +1204,23 @@ msgstr ""
 "Na strani, ki vam ni dostopna za branje, ne morete iskati tipkarskih napak."
 
 msgid "Do it."
-msgstr ""
+msgstr "Izvrši."
 
 #, python-format
 msgid "Execute action %(actionname)s?"
-msgstr ""
+msgstr "Ali naj se izvede akcija %(actionname)s?"
 
 #, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
+msgstr "Akcije %(actionname)s ta viki ne dovoljuje!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Na to stran ni dovoljeno shraniti risb."
+msgstr "Akcija %(actionname)s nad to stranjo vam ni dovoljena!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Za brisanje strani uporabite interaktivni uporabniški vmesnik!"
+msgstr "Za akcijo %(actionname)s uporabite interaktivni uporabniški vmesnik!"
 
 #, python-format
 msgid "Title Search: \"%s\""

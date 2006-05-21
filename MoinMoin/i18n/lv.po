@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 16:44+0200\n"
+"POT-Creation-Date: 2006-05-05 13:35+0300\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -44,14 +44,14 @@ msgstr "Pāradresēts no lapas \"%(page)s\""
 msgid "This page redirects to page \"%(page)s\""
 msgstr "Šī lapa pāradresē uz lapu \"%(page)s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "~-If you submit this form, the submitted values will be displayed.\n"
 "To use this form on other pages, insert a\n"
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
 "macro call.-~\n"
 msgstr ""
-"~-Nosūtot (''submit'') šo formu, tiks attēlotas nosūtāmās vērtības.\n"
+"~-Nosūtot (''submit'') šo formu, tiks attēlotas sūtītās vērtības.\n"
 "Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu \n"
 "[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
 "-~\n"
@@ -529,9 +529,8 @@ msgstr "Grafiskais režīms"
 msgid "Edit was cancelled."
 msgstr "Labošana tika atsaukta."
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "Tukšas lapas saglabāt nedrīkst."
+msgstr "Lapas nosaukums nedrīkst būt tukšs."
 
 #, python-format
 msgid ""
@@ -1209,27 +1208,27 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt."
 
 msgid "Do it."
-msgstr ""
+msgstr "Dari to"
 
 #, python-format
 msgid "Execute action %(actionname)s?"
-msgstr ""
+msgstr "Vai veikt darbību %(actionname)s?"
 
 #, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
+msgstr "Darbība %(actionname)s ir veikta šajā Viki!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+msgstr "Jums nav tiesību izmantot darbību %(actionname)s šajā lapā."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!"
+msgstr "Darbību %(actionname)s, lūdzu, izmantojiet interaktīvi!"
 
 #, python-format
 msgid "Title Search: \"%s\""
-msgstr "Meklēt pēc virsrakstiem: \"%s\""
+msgstr "Meklēt virsrakstus: \"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""

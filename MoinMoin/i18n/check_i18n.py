@@ -18,6 +18,8 @@ package lives, or from MoinMoin/i18n where this script lives.
 TextFinder class based on code by Seo Sanghyeon and the python compiler
 package.
 
+TODO: fix it for the changed i18n stuff of moin 1.6
+
 @copyright: 2003 Florian Festi, Nir Soffer, Thomas Waldmann
 @license: GNU GPL, see COPYING for details.
 """

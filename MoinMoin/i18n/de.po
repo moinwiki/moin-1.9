@@ -1249,7 +1249,8 @@ msgstr "Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
+msgstr ""
+"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
 
 #, python-format
 msgid "Title Search: \"%s\""

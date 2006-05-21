@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-04 16:44+0200\n"
-"PO-Revision-Date: 2006-04-16 10:33+0900\n"
+"PO-Revision-Date: 2006-05-11 18:50+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -201,7 +201,7 @@ msgid "%.2f seconds"
 msgstr "%.2f 초"
 
 msgid "match"
-msgstr " 개 포함"
+msgstr "개 포함"
 
 msgid "matches"
 msgstr " 개 포함"
@@ -522,9 +522,8 @@ msgstr "GUI 모드"
 msgid "Edit was cancelled."
 msgstr "문서 수정을 취소했습니다."
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "빈 문서는 저장할 수 없습니다."
+msgstr "문서 이름을 지정하셔야 합니다."
 
 #, python-format
 msgid ""
@@ -1193,13 +1192,13 @@ msgstr ""
 msgid "Action %(actionname)s is excluded in this wiki!"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "이 문서에 그림을 저장할 수 있는 권한이 없습니다."
+msgstr "이 문서에 %(actionname)s 작업을 수행할 수 있는 권한이 없습니다!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "문서를 지우기 위해서는 명령행 프로그램을 사용해 주세요!"
+msgstr "%(actionname)s 작업을 수행하기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1847,7 +1846,7 @@ msgid "Package Pages"
 msgstr "문서 묶기"
 
 msgid "Render as Docbook"
-msgstr "Dockbook으로 보기"
+msgstr "Dockbook 보기"
 
 msgid "Do"
 msgstr "확인"

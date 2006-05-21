@@ -282,7 +282,7 @@ class User:
             from security import Default
             self.may = Default(self)
         
-        from MoinMoin.i18n.meta import languages
+        from MoinMoin.i18n import languages
         if self.language and not languages.has_key(self.language):
             self.language = 'en'
 

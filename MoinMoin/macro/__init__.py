@@ -33,7 +33,6 @@ names = ["TitleSearch", "WordIndex", "TitleIndex",
          "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
          "TemplateList",
 ]
-names.extend(i18n.languages.keys())
 
 #############################################################################
 ### Helpers
@@ -44,7 +43,9 @@ def getNames(cfg):
         return cfg.macro_names
     else:
         lnames = names[:]
+        lnames.extend(i18n.languages.keys())
         lnames.extend(wikiutil.getPlugins('macro', cfg))
+        cfg.macro_names = lnames # remember it
         return lnames
 
 def _make_index_key(index_letters, additional_html=""):
