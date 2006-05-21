@@ -202,6 +202,7 @@ only requiring a Python installation.
         'MoinMoin.formatter',
         'MoinMoin.i18n',
         'MoinMoin.i18n.mo',
+        'MoinMoin.i18n.tools',
         'MoinMoin.logfile',
         'MoinMoin.macro',
         'MoinMoin.parser',
