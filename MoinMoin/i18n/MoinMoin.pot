@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-04 16:44+0200\n"
+"POT-Creation-Date: 2006-05-21 23:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,24 +148,6 @@ msgid "Remove trailing whitespace from each line"
 msgstr ""
 
 #, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to do %s on this page."
-msgstr ""
-
-#, python-format
-msgid " %s and try again."
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-#, python-format
 msgid "%(hits)d results out of about %(pages)d pages."
 msgstr ""
 
@@ -188,7 +170,7 @@ msgid ""
 "\n"
 "Login Password: %s\n"
 "\n"
-"Login URL: %s/%s\n"
+"Login URL: %s/%s?action=login\n"
 msgstr ""
 
 msgid ""
@@ -222,6 +204,13 @@ msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
 
 msgid "Empty user name. Please enter a user name."
+msgstr ""
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
 msgstr ""
 
 msgid "This user name already belongs to somebody else."
@@ -329,122 +318,10 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+msgid "Login"
+msgstr ""
+
 msgid "Action"
-msgstr ""
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr ""
-
-msgid "Submitted form data:"
-msgstr ""
-
-msgid "Search Titles"
-msgstr ""
-
-msgid "Display context of search results"
-msgstr ""
-
-msgid "Case-sensitive searching"
-msgstr ""
-
-msgid "Search Text"
-msgstr ""
-
-msgid "Go To Page"
-msgstr ""
-
-msgid "Include system pages"
-msgstr ""
-
-msgid "Exclude system pages"
-msgstr ""
-
-msgid "Plain title index"
-msgstr ""
-
-msgid "XML title index"
-msgstr ""
-
-msgid "Python Version"
-msgstr ""
-
-msgid "MoinMoin Version"
-msgstr ""
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr ""
-
-msgid "4Suite Version"
-msgstr ""
-
-msgid "Number of pages"
-msgstr ""
-
-msgid "Number of system pages"
-msgstr ""
-
-msgid "Accumulated page sizes"
-msgstr ""
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr ""
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr ""
-
-msgid "Entries in edit log"
-msgstr ""
-
-msgid "NONE"
-msgstr ""
-
-msgid "Global extension macros"
-msgstr ""
-
-msgid "Local extension macros"
-msgstr ""
-
-msgid "Global extension actions"
-msgstr ""
-
-msgid "Local extension actions"
-msgstr ""
-
-msgid "Global parsers"
-msgstr ""
-
-msgid "Local extension parsers"
-msgstr ""
-
-msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr ""
-
-msgid "Disabled"
-msgstr ""
-
-msgid "Enabled"
-msgstr ""
-
-msgid "Lupy search"
-msgstr ""
-
-msgid "Active threads"
-msgstr ""
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr ""
-
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr ""
-
-#, python-format
-msgid "Bad timestamp '%s'"
 msgstr ""
 
 #, python-format
@@ -453,12 +330,6 @@ msgstr ""
 
 #, python-format
 msgid "Expected a value for key \"%(token)s\""
-msgstr ""
-
-msgid "Wiki Markup"
-msgstr ""
-
-msgid "Print View"
 msgstr ""
 
 msgid "Your changes are not saved!"
@@ -775,6 +646,28 @@ msgstr ""
 msgid "Editor size"
 msgstr ""
 
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr ""
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+
+msgid "You are not allowed to revert this page!"
+msgstr ""
+
 msgid "No older revisions available!"
 msgstr ""
 
@@ -884,9 +777,6 @@ msgid "Show chart \"%(title)s\""
 msgstr ""
 
 msgid "Page hits and edits"
-msgstr ""
-
-msgid "You are not allowed to revert this page!"
 msgstr ""
 
 msgid "You must login to add a quicklink."
@@ -1051,23 +941,8 @@ msgstr ""
 msgid "You can't check spelling on a page you can't read."
 msgstr ""
 
-msgid "Do it."
-msgstr ""
-
 #, python-format
-msgid "Execute action %(actionname)s?"
-msgstr ""
-
-#, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
 msgstr ""
 
 #, python-format
@@ -1414,6 +1289,41 @@ msgstr ""
 msgid "SpellCheck"
 msgstr ""
 
+msgid "Search Titles"
+msgstr ""
+
+msgid "Display context of search results"
+msgstr ""
+
+msgid "Case-sensitive searching"
+msgstr ""
+
+msgid "Search Text"
+msgstr ""
+
+msgid "Go To Page"
+msgstr ""
+
+msgid "Include system pages"
+msgstr ""
+
+msgid "Exclude system pages"
+msgstr ""
+
+msgid "Plain title index"
+msgstr ""
+
+msgid "XML title index"
+msgstr ""
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr ""
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr ""
+
 #, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
 msgstr ""
@@ -1647,6 +1557,9 @@ msgstr ""
 msgid "Raw Text"
 msgstr ""
 
+msgid "Print View"
+msgstr ""
+
 msgid "Delete Cache"
 msgstr ""
 
@@ -1699,6 +1612,9 @@ msgstr ""
 msgid "Show %s days."
 msgstr ""
 
+msgid "Wiki Markup"
+msgstr ""
+
 msgid "DeleteCache"
 msgstr ""
 
@@ -1737,4 +1653,11 @@ msgid "Mail not sent"
 msgstr ""
 
 msgid "Mail sent OK"
+msgstr ""
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr ""
+
+msgid "Login and try again."
 msgstr ""

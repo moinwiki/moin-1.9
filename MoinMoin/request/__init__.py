@@ -158,14 +158,14 @@ class RequestBase(object):
                 if not self.forbidden and self.surge_protect():
                     self.makeUnavailable503()
 
-            from MoinMoin import i18n
-
             self.logger = None
             self.pragma = {}
             self.mode_getpagelinks = 0
             self.no_closing_html_code = 0
 
+            from MoinMoin import i18n
             self.i18n = i18n
+            i18n.i18n_init(self)
             self.lang = i18n.requestLanguage(self) 
             # Language for content. Page content should use the wiki default lang,
             # but generated content like search results should use the user language.
