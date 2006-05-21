@@ -16,7 +16,7 @@
 """
 
 import gdchart
-from MoinMoin.webapi.color import Color
+from MoinMoin.util.web import Color
 
 
 class ChartData:

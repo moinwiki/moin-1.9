@@ -12,7 +12,7 @@
 debug = False
 
 from MoinMoin import PageEditor
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):

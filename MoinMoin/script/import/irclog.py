@@ -24,7 +24,7 @@ def filename_function(filename):
 import os
 
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 
 def decodeLinewise(text):
     resultList = []
