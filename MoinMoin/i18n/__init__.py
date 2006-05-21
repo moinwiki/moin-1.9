@@ -116,9 +116,7 @@ def loadLanguage(request, lang):
     that requires translated strings (eg. "attachment:").
     """
     from MoinMoin import caching
-    # farm notice: for persistent servers, only the first wiki requesting some language
-    # gets its cache updated - a bit strange and redundant, but no problem.
-    cache = caching.CacheEntry(request, arena='i18n', key=lang)
+    cache = caching.CacheEntry(request, arena='i18n', key=lang, scope='farm')
     langfilename = os.path.join(os.path.dirname(__file__), '%s.py' % filename(lang))
     needsupdate = cache.needsUpdate(langfilename)
     if debug: request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))

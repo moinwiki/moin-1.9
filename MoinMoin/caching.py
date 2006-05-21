@@ -15,7 +15,7 @@ if locking:
     from MoinMoin.util import lock
     
 class CacheEntry:
-    def __init__(self, request, arena, key):
+    def __init__(self, request, arena, key, scope='page_or_wiki'):
         """ init a cache entry
             @param request: the request object
             @param arena: either a string or a page object, when we want to use
@@ -23,12 +23,15 @@ class CacheEntry:
             @param key: under which key we access the cache content
         """
         self.request = request
-        if isinstance(arena, str):
-            self.arena_dir = os.path.join(request.cfg.cache_dir, arena)
+        if scope == 'page_or_wiki': # XXX split and refactor later
+            if isinstance(arena, str):
+                self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
+                filesys.makeDirs(self.arena_dir)
+            else: # arena is in fact a page object
+                self.arena_dir = arena.getPagePath('cache', check_create=1)
+        elif scope == 'farm':
+            self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
             filesys.makeDirs(self.arena_dir)
-        else: # arena is in fact a page object
-            cache_dir = None
-            self.arena_dir = arena.getPagePath('cache', check_create=1)
         self.key = key
         if locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
