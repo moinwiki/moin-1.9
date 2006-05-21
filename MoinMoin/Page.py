@@ -955,10 +955,24 @@ class Page:
 
     def send_raw(self):
         """ Output the raw page data (action=raw) """
-        self.request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
-        text = self.get_raw_body()
-        text = self.encodeTextMimeType(text)
-        self.request.write(text)
+        request = self.request
+        request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
+        if self.exists():
+            if not request.cacheable:
+                request.http_headers(request.nocache)
+            else:
+                # use the correct last-modified value from the on-disk file
+                # to ensure cacheability where supported
+                request.http_headers(["Last-Modified: " +
+                     timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
+
+            text = self.get_raw_body()
+            text = self.encodeTextMimeType(text)
+            request.write(text)
+        else:
+            request.http_headers(['Status: 404 NOTFOUND'])
+            request.setResponseCode(404)
+            request.write(u"Page %s not found." % self.page_name)
 
 
     def send_page(self, request, msg=None, **keywords):
