@@ -62,11 +62,16 @@ Version 1.6.current:
       parser.wiki -> parser.text_moin_wiki
     * Added thread_monitor. It can be activated using:
       from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
+    * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
+      will cache into a common directory for all wikis in the same farm.
 
   New Features:
 
     * HTML parser (called "html") that allows you to use HTML on the page.
       Thanks to the trac team for the nice code.
+    * You can have a common cache_dir for your farm (will save a bit space
+      and cpu time as it shares some stuff).
+      You need to set "cache_dir = '/some/farm/cachedir' in your farmconfig.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
