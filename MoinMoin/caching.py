@@ -27,7 +27,7 @@ class CacheEntry:
                           'farm' - a cache for the whole farm
         """
         self.request = request
-        if scope == 'page_or_wiki': # XXX split and refactor later
+        if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
             if isinstance(arena, str):
                 self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
                 filesys.makeDirs(self.arena_dir)

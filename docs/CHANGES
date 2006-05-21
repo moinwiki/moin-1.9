@@ -66,6 +66,7 @@ Version 1.6.current:
       will cache into a common directory for all wikis in the same farm, if you
       specify 'wiki', it will use a cache directory per wiki and if you specify
       'item', it will use a cache directory per item (== per page).
+      Creating a CacheEntry without explicit scope is DEPRECATED.
 
   New Features:
 
