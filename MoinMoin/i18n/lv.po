@@ -1,0 +1,2126 @@
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language lv
+
+#
+# MoinMoin lv system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-04 16:44+0200\n"
+"PO-Revision-Date: 2005-09-07 20:50+0200\n"
+"Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
+"Language-Team: Latvian <r.cirskis@datapro.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: Latviešu\n"
+"X-Language-in-English: Latvian\n"
+"X-HasWikiMarkup: True\n"
+"X-Direction: ltr\n"
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+"Saglabātais lapas saturs ir novecojis un netiks iekļauts meklēšanas "
+"rezultātā!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "%(rev)d.versija %(date)s datumā"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Pāradresēts no lapas \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Šī lapa pāradresē uz lapu \"%(page)s\""
+
+#, fuzzy, python-format
+msgid ""
+"~-If you submit this form, the submitted values will be displayed.\n"
+"To use this form on other pages, insert a\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"macro call.-~\n"
+msgstr ""
+"~-Nosūtot (''submit'') šo formu, tiks attēlotas nosūtāmās vērtības.\n"
+"Lai izmantotu šo formu citās lapās, pievienojiet makro izsaukumu \n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"-~\n"
+
+msgid "Create New Page"
+msgstr "Izveidot jaunu lapu"
+
+msgid "You are not allowed to view this page."
+msgstr "Jums nav tiesību aplūkot šo lapu."
+
+msgid "You are not allowed to edit this page."
+msgstr "Jums nav tiesību labot šo lapu."
+
+msgid "Page is immutable!"
+msgstr "Nemaināma lapa!"
+
+msgid "Cannot edit old revisions!"
+msgstr "Vecās versijas labot nedrīkst!"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
+"Lapas slēgšanas laika kvota ir izsmelta. Iespējams labošanas konflikts!"
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "Labot \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "\"%(pagename)s\" pirmskats"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "Jūsu labošanas slēgšanas kvota lapai %(lock_page)s beigusies!"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr ""
+"Jūsu labošanas slēgšanas termiņš lapai %(lock_page)s izbeigsies pēc # "
+"minūtēm."
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr ""
+"Jūsu labošanas slēgšanas termiņš lapai %(lock_page)s izbeigsies pēc # "
+"sekundēm."
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "Kāds cits ir izdzēsis šo lapu, kamēr Jūs to labojāt!"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "Kāds cits ir izmainījis šo lapu, kamēr Jūs to labojāt!"
+
+#, python-format
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!\n"
+"Have a look at the diff of %(difflink)s to see what has been changed."
+msgstr ""
+"Kāds cits ir saglabājis šo lapu, kamēr Jūs to labojāt!\n"
+"Lūdzu, pārskatiet izmaiņas lapā un saglabājiet to. Nesaglabājiet to šajā "
+"variantā!\n"
+"Caurskatiet atšķirības %(difflink)s, lai redzētu, kas ir mainīts."
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[Jaunās lapas saturs ielādēts no %s]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[Veidne %s nav atrasta]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[Jūs nedrīkstat lasīt %s]"
+
+#, python-format
+msgid "Describe %s here."
+msgstr "Aprakstiet %s šeit."
+
+msgid "Check Spelling"
+msgstr "Pārbaudīt pareizrakstību"
+
+msgid "Save Changes"
+msgstr "Saglabāt izmaiņas"
+
+msgid "Cancel"
+msgstr "Atsaukt"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"Nospiežot '''%(save_button_text)s''', Jūs pakļaujat izmaiņas %(license_link)"
+"s.\n"
+"Ja Jūs to nevēlaties, nospiediet '''%(cancel_button_text)s''', lai atsauktu "
+"savas izmaiņas."
+
+msgid "Preview"
+msgstr "Pirmskats"
+
+msgid "Text mode"
+msgstr "Teksta režīms"
+
+msgid "Comment:"
+msgstr "Komentārs:"
+
+msgid "<No addition>"
+msgstr "<Nepievienot>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "Pievienot: %(category)s"
+
+msgid "Trivial change"
+msgstr "Maznozīmīgas izmaiņas"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "Dzēst tukšumus rindu beigās"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Kļūdains lietotāja vārds {{{'%s'}}}.\n"
+"Lietotāja vārds drīkst saturēt ''Unicode'' burtzīmes un ciparus un, ja "
+"nepieciešams, vienu atstarpi starp vārdiem.\n"
+"Grupas lapas vārds nav atļauts."
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "Jūs nedrīkstat veikt %s ar šo lapu."
+
+#, python-format
+msgid " %s and try again."
+msgstr "%s un mēģiniet vēlreiz."
+
+msgid "Login"
+msgstr "Ieiet"
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekundes"
+
+msgid "match"
+msgstr "saskaņa"
+
+msgid "matches"
+msgstr "saskaņas"
+
+msgid "<unknown>"
+msgstr "<nezināms>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s\n"
+msgstr ""
+"Lietotāja vārds: %s\n"
+"\n"
+"Lietotāja parole: %s\n"
+"\n"
+"Lietotāja URL: %s/%s\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Kāds pieprasīja izsūtīt savus konta datus uz šo e-pasta adresi.\n"
+"\n"
+"Ja Jūs esat aizmirsis paroli, lūdzu ievadiet šos datus un paroli KĀ ŠEIT "
+"NORĀDĪTS\n"
+" (izmantojiet kopēt/ielīmēt(copy/paste), lai dati būtu precīzi).\n"
+"\n"
+"Pēc veiksmīgas ieiešanas sistēmā būtu labi, ja Jūs nomainītu veco paroli un "
+"izveidotu sev jaunu.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Jūsu viki konta dati"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Šajā viki pasta sūtīšana ir aizliegta.\n"
+"Sazinieties ar viki īpašnieku, lai viņš piešķir jums tiesības lietot e-pastu."
+
+msgid "Please provide a valid email address!"
+msgstr "Lūdzu, norādiet pareizu e-pasta adresi!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Netika atrasts neviens lietotājs ar tādu e-pasta adresi '%(email)s'!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
+"Lai mainītu savus iestatījumus vai izveidotu lietotāja kontu, izmantojiet "
+"LietotājaIestatījumi"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Trūkst lietotāja vārda. Lūdzu, ievadiet lietotāja vārdu."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Tāds lietotāja vārds jau kādam pieder."
+
+msgid "Passwords don't match!"
+msgstr "Paroles nesakrīt!"
+
+msgid "Please specify a password!"
+msgstr "Lūdzu, norādiet paroli!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Lūdzu, norādiet savu e-pasta adresi. Ja aizmirsīsiet savu ieejas "
+"informāciju, to varēs izsutīt uz norādīto e-pasta adresi."
+
+msgid "This email already belongs to somebody else."
+msgstr "Šāda e-pasta adrese jau kādam pieder."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Lietotāja konts ir izveidots! Tagad Jūs varat pieslēgties ar šo kontu..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Lai mainītu lietotāja iestatījumus vai izveidotu lietotāja kontu, "
+"izmantojiet LietotājaIstatījumi"
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Nevar ielādēt tēmu '%(theme_name)s'!"
+
+msgid "User preferences saved!"
+msgstr "Lietotāja uzstādījumi saglabāti!"
+
+msgid "Default"
+msgstr "Noklusējums"
+
+msgid "<Browser setting>"
+msgstr "<Pārlūkprogrammas iestatījumi>"
+
+msgid "the one preferred"
+msgstr "viens vēlamais"
+
+msgid "free choice"
+msgstr "brīva izvēle"
+
+msgid "Select User"
+msgstr "Izvēlēties lietotāju"
+
+msgid "Save"
+msgstr "Saglabāt"
+
+msgid "Preferred theme"
+msgstr "Vēlamā tēma"
+
+msgid "Editor Preference"
+msgstr "Redaktora iestatījumi"
+
+msgid "Editor shown on UI"
+msgstr "Lietotāja saskarnē redzamais redaktors"
+
+msgid "Time zone"
+msgstr "Laika josla"
+
+msgid "Your time is"
+msgstr "Jūsu laiks ir"
+
+msgid "Server time is"
+msgstr "Servera laiks ir"
+
+msgid "Date format"
+msgstr "Datuma formāts"
+
+msgid "Preferred language"
+msgstr "Vēlamā valoda"
+
+msgid "General options"
+msgstr "Vispārējas opcijas"
+
+msgid "Quick links"
+msgstr "Ātrsaites"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "Šis saraksts strādā tikai ar pareizu e-pasta adresi!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Parakstītās Viki lapas (pa vienai lapai rindā)"
+
+msgid "Create Profile"
+msgstr "Izveidot profilu"
+
+msgid "Mail me my account data"
+msgstr "Atsūtīt mana sistēmas konta datus"
+
+msgid "Email"
+msgstr "E-pasts"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+"Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %"
+"(userprefslink)s"
+
+msgid "Name"
+msgstr "Vārds"
+
+msgid "Password"
+msgstr "Parole"
+
+msgid "Action"
+msgstr "Darbība"
+
+#, python-format
+msgid "Required attribute \"%(attrname)s\" missing"
+msgstr "Trūkst \"%(attrname)s\" atribūta"
+
+msgid "Submitted form data:"
+msgstr "Nosūtītie dati:"
+
+msgid "Search Titles"
+msgstr "Meklēt virsrakstus"
+
+msgid "Display context of search results"
+msgstr "Attēlot meklēšanas rezultātu kontekstu"
+
+msgid "Case-sensitive searching"
+msgstr "Rakstzīmju jūtīga meklēšana"
+
+msgid "Search Text"
+msgstr "Meklēt tekstā"
+
+msgid "Go To Page"
+msgstr "Iet uz lapu"
+
+msgid "Include system pages"
+msgstr "Iekļaut sistēmas lapas"
+
+msgid "Exclude system pages"
+msgstr "Aizvākt sistēmas lapas"
+
+msgid "Plain title index"
+msgstr "Rādīt kā tekstu"
+
+msgid "XML title index"
+msgstr "Rādīt kā XML"
+
+msgid "Python Version"
+msgstr "Python versija"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin versija"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Laidiens %s [Revīzija %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite versija"
+
+msgid "Number of pages"
+msgstr "Lapu skaits"
+
+msgid "Number of system pages"
+msgstr "Sistēmas lapu skaits"
+
+msgid "Accumulated page sizes"
+msgstr "Visu lapu izmērs"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "%(data_dir)s/pages/ diskatmiņas patēriņš"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "%(data_dir)s/ diskatmiņas patēriņš"
+
+msgid "Entries in edit log"
+msgstr "Ierakstīt izmaiņu protokolā"
+
+msgid "NONE"
+msgstr "NEKAS"
+
+msgid "Global extension macros"
+msgstr "Kopējie papildus makrosi"
+
+msgid "Local extension macros"
+msgstr "Lokālie papildus makrosi"
+
+msgid "Global extension actions"
+msgstr "Globālās papildus darbības"
+
+msgid "Local extension actions"
+msgstr "Lokālās papildus darbības"
+
+msgid "Global parsers"
+msgstr "Globālie parsētāji"
+
+msgid "Local extension parsers"
+msgstr "Lokālo paplašinājumu parsētāji"
+
+msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+msgstr "Ievietotie procesori (NOVECOJA -- to vietā jāizmanto \"Parser\")"
+
+msgid "Disabled"
+msgstr "Izslēgts"
+
+msgid "Enabled"
+msgstr "Ieslēgts"
+
+msgid "Lupy search"
+msgstr "Kopējā meklēšana"
+
+msgid "Active threads"
+msgstr "Aktīvie pavedieni"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "Lūdzu, norādiet konkrētāku meklējamo terminu {{{\"%s\"}}} vietā"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "KĻŪDA meklēšanas paraugā '%s'"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Slikta laika atzīme '%s'"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Nepieciešams \"=\" pēc \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Nepieciešma vērtība atslēgai \"%(token)s\""
+
+msgid "Wiki Markup"
+msgstr "Viki marķējums"
+
+msgid "Print View"
+msgstr "Drukāšanai"
+
+msgid "Your changes are not saved!"
+msgstr "Jūs izmaiņas nav saglabātas!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Lapas nosaukums ir pārāks garš, pamēģiniet ko īsāku."
+
+msgid "GUI Mode"
+msgstr "Grafiskais režīms"
+
+msgid "Edit was cancelled."
+msgstr "Labošana tika atsaukta."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Tukšas lapas saglabāt nedrīkst."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Lapa ar nosaukumu {{{'%s'}}} jau eksistē.'''\n"
+"\n"
+"Pamēģiniet citu nosaukumu."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts."
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Lapa \"%s\" veiksmīgi dzēsta!"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The following page has been changed by %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+msgstr ""
+"Godājamais Viki lietotāj,\n"
+"\n"
+"Jūs esat parakstījies(-usies) Viki lapas vai kategorijas \"%(sitename)s\" "
+"izmaiņām.\n"
+"\n"
+"Lapu %(pagelink)s ir mainījis(-usi) %(editor)s:\n"
+"\n"
+
+#, python-format
+msgid ""
+"The comment on the change is:\n"
+"%(comment)s\n"
+"\n"
+msgstr ""
+"Komentārs par izmaiņām:\n"
+"%(comment)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Jauna lapa:\n"
+
+msgid "No differences found!\n"
+msgstr "Izmaiņas nav atrastas!\n"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr "[%(sitename)s] %(trivial)sAtjaunoja \"%(pagename)s\" %(username)s"
+
+msgid "Trivial "
+msgstr "Maznozīmīgs "
+
+msgid "Status of sending notification mails:"
+msgstr "Notifikāciju e-pasta ziņojumu sūtīšanas statuss:"
+
+#, python-format
+msgid "[%(lang)s] %(recipients)s: %(status)s"
+msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#, python-format
+msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+msgstr "## lapas dublējums \"%(pagename)s\" arhivēts %(date)s"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "Nevar nobloķēt lapu. Neapstrādājama kļūda (errno=%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "Nevar nobloķēt lapu. Trūkst 'aktuālā' faila?"
+
+msgid "You are not allowed to edit this page!"
+msgstr "Jums nav tiesību labot šo lapu!"
+
+msgid "You cannot save empty pages."
+msgstr "Tukšas lapas saglabāt nedrīkst."
+
+msgid "You already saved this page!"
+msgstr "Lapa jau ir saglabāta!"
+
+msgid ""
+"Sorry, someone else saved the page while you edited it.\n"
+"\n"
+"Please do the following: Use the back button of your browser, and cut&paste\n"
+"your changes from there. Then go forward to here, and click EditText again.\n"
+"Now re-add your changes to the current page contents.\n"
+"\n"
+"''Do not just replace\n"
+"the content editbox with your version of the page, because that would\n"
+"delete the changes of the other person, which is excessively rude!''\n"
+msgstr ""
+" Piedodiet, bet kāds cits jau saglabāja lapu, kamēr Jūs to labojāt.\n"
+"\n"
+"Lūdzu, izdariet sekojošo: Pārlūkprogrammā nospiediet pogu atpakaļ(back) un "
+"izgrieziet un ielīmējiet (cut&paste)\n"
+"Jūsu veiktās izmaiņas. Tad atgriezieties šeit un nospiediet Labot tekstu "
+"(EditText) vēlreiz.\n"
+"Tagad atkārtoti veiciet izmaiņas jaunajā lapā.\n"
+"\n"
+"''Nemainiet visu tekstu pilnībā, jo tas izdzēsīs cita cilvēka labojumus.\n"
+"Tas būtu ļoti nekrietni no Jūsu puses!''\n"
+
+#, python-format
+msgid "A backup of your changes is [%(backup_url)s here]."
+msgstr "Jūsu labojumu dublējums atrodas [%(backup_url)s šeit]."
+
+msgid "You did not change the page content, not saved!"
+msgstr "Jūs neveicāt nekādas izmaiņas; lapa netiek saglabāta!"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr "Jūs nevarat mainīt pieejas tiesības, Jums nav adminstratora tiesību!"
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"Prioritāte %(owner)s beidzās pirms %(mins_ago)d minūtēm, un Jums šai lapai "
+"tika piešķirta lapas slēgšanas laika kvota."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr ""
+"Citiem lietotājiem tiks ''liegta pieeja'' šīs lapas labošanai līdz %"
+"(bumptime)s."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"Kamēr Jūs labosiet šo lapu, citi lietotāji tiks ''brīdināti'' līdz %"
+"(bumptime)s."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "Lai paildzinātu pieejas liegšanas periodu, nospiediet pirmskata pogu"
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"Pašlaik %(owner)s ir ''liedzis pieeju'' labošanai līdz %(timestamp)s, t.i., %"
+"(mins_valid)d minūtēm."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.[[BR]]\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''[[BR]]\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"Šī lapa pēdējoreiz tika atvērta labošanai vai pirmskatīta %(timestamp)s %"
+"(owner)s.[[BR]]\n"
+"Lai neveidotos konflikts, '''Jums nevajadzētu'' labot'' šo lapu vēl vismaz %"
+"(mins_valid)d minūtes.'''[[BR]]\n"
+"\n"
+"Lai izietu no labošanas, nospiediet pogu Atcelt."
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Pakotnei nepieciešama jaunāka MoinMoin versija (vismaz %s)."
+
+msgid "The theme name is not set."
+msgstr "Tēmas nosaukums nav uzstādīts."
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+"Tēmu failu instalēšana ir atbalstīta tikai savrupiem (\"standalone\") "
+"serveriem."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Nesekmīga faila '%(filename)s' instalēšana."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Fails %s nav MoinMoin pakotnes fails."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Lapa %s neeksistē!"
+
+msgid "Invalid package file header."
+msgstr "Nekorekta pakotnes faila galvene."
+
+msgid "Package file format unsupported."
+msgstr "Neatbalstīts pakotnes faila formāts."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Rindā %(lineno)i nedefinēta funkcija %(func)s."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Fails %s pakotnē netika atrasts."
+
+msgid ""
+" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontal rule.\n"
+" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
+"(=====)]].\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+"double quotes\"])]]; url; [url]; [url label].\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+" Uzvērt:: [[Verbatim('')]]''kursīvā''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''treknrakstā'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''treknā "
+"kursīvā'''''[[Verbatim(''''')]]; [[Verbatim('')]]''jaukti ''[[Verbatim"
+"(''')]]'''''treknrakstā'''[[Verbatim(''')]] un kursīvā''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontāla svītra.\n"
+" Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; "
+"[[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] 3."
+"līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa "
+"virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts "
+"[[Verbatim(=====)]].\n"
+" Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. "
+"numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.\n"
+" Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"kvadrātiekavas "
+"un pēdiņas\"])]]; URL; [URL]; [URL etiķete].\n"
+" Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc "
+"tabulām un virsrakstiem nedrīkst sekot atstarpes.\n"
+"(!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai "
+"SintaksesIzziņa.\n"
+
+msgid ""
+"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ---- \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) For more help, see the \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+msgstr ""
+"Uzsvērt: <i>*kursīvā*</i> <b>**treknrakstā**</b> ``mašīnraksts``<br/>\n"
+"<br/><pre>\n"
+"Virsraksti: Virsraksts 1  Virsraksts 2  Virsraksts 3\n"
+"            ============  ------------  ~~~~~~~~~~~~\n"
+"\n"
+"Horizontāla līnija: ---- \n"
+"Saites: SekojošaZemsvītra_ `vairāki vārdi ieverti atapostrofos`_ ārēja_ \n"
+"\n"
+".. _ārēja: http://ārēja-saite.lv/jebkas/\n"
+"\n"
+"Saraksti: * atzīmes; 1., a. numurēti elementi.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Detalizētākai pamācībai apmeklējiet \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+
+msgid "Diffs"
+msgstr "Atšķirības"
+
+msgid "Info"
+msgstr "Informācija"
+
+msgid "Edit"
+msgstr "Labot"
+
+msgid "UnSubscribe"
+msgstr "Atrakstīties"
+
+msgid "Subscribe"
+msgstr "Parakstīties"
+
+msgid "Raw"
+msgstr "Nepārstrādāts"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Drukāt"
+
+msgid "View"
+msgstr "Skats"
+
+msgid "Up"
+msgstr "Augšup"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"Publiskot manu e-pasta adresi (bez manas viki mājas lapas) autora informācijā"
+
+msgid "Open editor on double click"
+msgstr "Labot ar dubultklikšķi"
+
+msgid "Jump to last visited page instead of frontpage"
+msgstr "Pāriet uz pēdējo apmeklēto lapu SākumLapas vietā"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Rādīt jautājuma zīmi neeksistējošu lapu saitēm"
+
+msgid "Show page trail"
+msgstr "Rādīt caurskatīto lapu sarakstu"
+
+msgid "Show icon toolbar"
+msgstr "Rādīt ikonu rindu"
+
+msgid "Show top/bottom links in headings"
+msgstr "Rādīt augšā/lejā saites virsrakstos"
+
+msgid "Show fancy diffs"
+msgstr "Rādīt stilizētas atšķirības"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Atdalīt viki vārdus ar atstarpēm"
+
+msgid "Remember login information"
+msgstr "Atcerēties ieejas informāciju"
+
+msgid "Subscribe to trivial changes"
+msgstr "Parakstīties uz maznozīmīgām izmaiņām"
+
+msgid "Disable this account forever"
+msgstr "Aizmirst par mani uz visiem laikiem"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(Ievadiet Vārdu''''''Uzvārdu)"
+
+msgid "Alias-Name"
+msgstr "Aliass-Vārds"
+
+msgid "Password repeat"
+msgstr "Atkārtot paroli"
+
+msgid "(Only when changing passwords)"
+msgstr "(Tikai mainot paroli)"
+
+msgid "User CSS URL"
+msgstr "Lietotāja CSS URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Atstāt tukšu, lai varētu lietot CSS)"
+
+msgid "Editor size"
+msgstr "Labošanas loga izmērs"
+
+msgid "No older revisions available!"
+msgstr "Vecākas versijas nav!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Salīdzināt pēc \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Atšķirības starp %d un versiju %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(pēc %d versijām)"
+
+msgid "No differences found!"
+msgstr "Atšķirības nav atrastas!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Lapa saglabāta %(count)d reizes!"
+
+msgid "(ignoring whitespace)"
+msgstr "(Atstarpes(probeli) ignorētas)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ignorēt atstarpju(probelu) starpību"
+
+msgid "General Information"
+msgstr "Vispārēja informācija"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Lapas izmērs: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "Lapas satura SHA īssavilkums:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Sekojoši lietotāji ir parakstījušies uz šo lapu:"
+
+msgid "This page links to the following pages:"
+msgstr "Šajā lapā ir saites uz sekojošām lapām:"
+
+msgid "Date"
+msgstr "Datums"
+
+msgid "Size"
+msgstr "Izmērs"
+
+msgid "Diff"
+msgstr "Atšķirība"
+
+msgid "Editor"
+msgstr "Redaktors"
+
+msgid "Comment"
+msgstr "Komentārs"
+
+msgid "view"
+msgstr "skats"
+
+msgid "raw"
+msgstr "jēlteksts"
+
+msgid "print"
+msgstr "izdruka"
+
+msgid "revert"
+msgstr "atgriezt"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Versijas %(rev)d atgriešana."
+
+msgid "edit"
+msgstr "labot"
+
+msgid "get"
+msgstr "dabūt"
+
+msgid "del"
+msgstr "dzēst"
+
+msgid "N/A"
+msgstr "Nav pieejams"
+
+msgid "Revision History"
+msgstr "Versiju vēsture"
+
+msgid "No log entries found."
+msgstr "Ieraksti par labojumiem netika atrasti."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Informācija par \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Rādīt \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Vispārēja lapas informācija"
+
+#, python-format
+msgid "Show chart \"%(title)s\""
+msgstr "Rādīt diagramu \"%(title)s\""
+
+msgid "Page hits and edits"
+msgstr "Apmeklējumi un labojumi"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
+
+msgid "You must login to add a quicklink."
+msgstr "Lai izveidotu ātrsaiti, Jums jāpieslēdzas."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Jūsu ātrsaite uz šo lapu ir dzēsta."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Jums izveidota ātrsaite uz šo lapu."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Jūs nedrīkstat parakstīties uz lapu, kuru Jums nav tiesību lasīt."
+
+msgid "This wiki is not enabled for mail processing."
+msgstr "Šajā viki pasta sūtīšana nav iespējota."
+
+msgid "You must log in to use subscribtions."
+msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas"
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
+"Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi "
+"LietotājaIestatījumos."
+
+msgid "Your subscribtion to this page has been removed."
+msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Regulāras izteiksmes pierakstu izdzēst nevar!"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "Labojiet parasktīšanās regulāras izteiksmes savā LietotājaIstatījumi."
+
+msgid "You have been subscribed to this page."
+msgstr "Tagad Jūs esat parakstījies(-usies) uz šo lapu."
+
+msgid "Charts are not available!"
+msgstr "Diagramma nav pieejama!"
+
+msgid "You need to provide a chart type!"
+msgstr "Norādiet diagrammas tipu!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Slikts diagrammas tips \"%s\"!"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Šāda lapa jau ir izdzēsta vai nekad nav eksistējusi!"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\" līdzīgu lapu nav!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Nepareizs faila nosaukums \"%s\"!"
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "Piesaite '%(target)s' (veidota no faila '%(filename)s') jau eksistē."
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Izveidots sainis %s, kas satur lapas %s."
+
+msgid "Package pages"
+msgstr "Iesaiņot lapas"
+
+msgid "Package name"
+msgstr "Saiņa nosaukums"
+
+msgid "List of page names - separated by a comma"
+msgstr "Lapu saraksts, atdalīts ar komatiem"
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Nezināms lietotāja vārds: {{{\"%s\"}}}. Lūdzu, ievadiet vārdu un paroli."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Trūkst paroles. Lūdzu, ievadiet vārdu un paroli."
+
+msgid "Sorry, wrong password."
+msgstr "Piedodiet, nepareiza parole."
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Atrasta tieši viena \"%s\" līdzīga lapa; pāradresēju uz to."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "\"%s\" līdzīgas lapas"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "\"%s\" vietnes karte"
+
+msgid "Please log in first."
+msgstr "Lūdzu, sākumā pieslēdzieties"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Lūdzu, pirms veidot papildus lapas, izveidojiet mājas lapu."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Šeit Jūs varat pievienot apakšlapas Jūsu esksistējošai mājas lapai. \n"
+"\n"
+"Jūs varat noteikt šo lapu pieejamību citem lietotājiem,\n"
+"pieeju kontrolē atbilstošās grupas lapas grupas piederība.\n"
+"\n"
+"Lai izveidotu apakšlapu, evadiet apakšlapas nosaukumu un nospiediet pogu.\n"
+"\n"
+"Pirms veidot aizsargātas pieejas lapas, pārliecinieties, ka atbilstošas "
+"grupas lapa eksistē \n"
+"un tajā ir atbilstoši lietotāji. Izmantojiet MājaslapasGrupasVeidne, "
+"veidojot grupas lapas2.\n"
+"||'''Pievienot jaunu personisku lapu:'''||'''Sastīta pieejas kontroles "
+"saraksta grupa:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,lasāma-rakstāma lapa,%(username)"
+"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,tikai-lasāma lapa,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,privāta lapa,%(username)s)]]||Tikai %"
+"(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "MyPages pārvaldīšana"
+
+msgid "Rename Page"
+msgstr "Pārdēvēt lapu"
+
+msgid "New name"
+msgstr "Jauns nosaukums"
+
+msgid "Optional reason for the renaming"
+msgstr "Pārdēvēšanas iemesls (neobligāts)"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(including %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"%(badwords)d vārdi netika atrasti %(totalwords)d %(localwords)s vārdnīcā un "
+"ir izcelti šeit:"
+
+msgid "Add checked words to dictionary"
+msgstr "Pievienot atzīmētos vārdus vārdnīcai"
+
+msgid "No spelling errors found!"
+msgstr "Pareizrakstības kļūdas nav atrastas!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Jūs nevarat pārbaudīt pareizrakstību lapā, kuru nedrīkstat lasīt."
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Lūdzu, lapu dzēšanai izmantojiet interaktīvo lietotāja saskarni!"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Meklēt pēc virsrakstiem: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Visa teksta meklēšana: \"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Visu saišu saraksts \"%s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Nevaru izveidot lapu bez nosaukuma. Lūdzu, norādiet lapas nosaukumu."
+
+msgid "Pages"
+msgstr "Lapas"
+
+msgid "Select Author"
+msgstr "Izvēlēties Autoru"
+
+msgid "Revert all!"
+msgstr "Atgriezt visu!"
+
+msgid "You are not allowed to use this action."
+msgstr "Jums nav tiesību lietot šo darbību."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Parakstīt lietotājus lapas %s izmaiņām"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Lapas %s izmaiņām parakstījušies:"
+
+msgid "Not a user:"
+msgstr "Nav lietotājs:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Jums nav tiesību veikt šo darbību."
+
+msgid "You are now logged out."
+msgstr "Jūs esat atslēgts(-a)."
+
+msgid "Delete"
+msgstr "Dzēst"
+
+msgid "Optional reason for the deletion"
+msgstr "Ja vēlaties, norādiet lapas dzēšanas iemeslu"
+
+msgid "Really delete this page?"
+msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Dublējums %(filename)s atjaunots direktorijā %(targetdir)s.\n"
+"Atjaunoti %(filecount)d faili un %(dircount)d direktorijas."
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Kļūda veicot dublējuma %(filename)s atjaunošanu direktorijā %(targetdir)s."
+
+msgid "Wiki Backup / Restore"
+msgstr "Viki dublēšana / atjaunošana"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Daži padomi:\n"
+" * Lai atjaunotu dublējumu:\n"
+"  * Dublējuma atjaunošana dzēsīs esošos datus. Esiet piesardzīgi.\n"
+"  * Pārdēvējiet to par <siteid>.tar.<compression> (nodzēsiet --date--time--"
+"UTC daļu).\n"
+"  * Ievietojiet dublējuma failu direktorijā "
+"''backup_storage_dir'' (izmantojot ''scp'', ''ftp'', ...).\n"
+"  * Nospiediet pogu [[GetText(Restore)]], zemāk.\n"
+"\n"
+" * Lai izveidotu dublējumu, nospiediet pogu [[GetText(Backup)]] un "
+"saglabājiet drošā vietā failu,    kuru Jūs iegūsiet.\n"
+"\n"
+"Lūdzu pārliecinieties, ka Jūsus Viki konfigurācijas ''backup_*'' vērtības ir "
+"korektas.\n"
+"\n"
+
+msgid "Backup"
+msgstr "Dublēt"
+
+msgid "Restore"
+msgstr "Atjaunot"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Jūs nedrīkstat veikt attālinātu dublēšanu."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Nezināma dublēšanas apakšdarbība: %s."
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d piesaistes]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr "Šai lapai ir <a href=\"%(link)s\">%(count)s piesaistes</a>. "
+
+msgid "Filename of attachment not specified!"
+msgstr "Nav norādīts piesaistes faila vārds!"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "Piesaiste '%(filename)s' neeksistē!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Atsaucei uz piesaisti, rakstiet lapas tekstā '''{{{piesaiste:faila "
+"nosaukums}}}''', \n"
+"kā redzams zemāk sarakstā. \n"
+"'''NEIZMANTOJIET''' saites {{{[get]}}} URL. \n"
+"Tas var tikt mainīts."
+
+msgid "unzip"
+msgstr "atspiest"
+
+msgid "install"
+msgstr "instalēt"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "Lapai %(pagename)s nav piesaistes"
+
+msgid "Edit drawing"
+msgstr "Labot attēlu"
+
+msgid "Attached Files"
+msgstr "Piesaistītie faili"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Jūs nedrīkstat veidot piesaistes šai lapai."
+
+msgid "New Attachment"
+msgstr "Jauna Piesaiste"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"Ja lapai jau ir piesaistes fails ar šādu nosaukumu, ievadlaukā \"Pārdēvēt\" "
+"norādiet citu piesaistes faila nosaukumu."
+
+msgid "File to upload"
+msgstr "Augšupielādējamais fails"
+
+msgid "Rename to"
+msgstr "Pārdēvēt par"
+
+msgid "Upload"
+msgstr "Ielādēt"
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "Šajā Viki lapu piesaistes ir aizliegti!"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Šajā lapā Jūs nedrīkstat veidot attēlus."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Tukšs faila saturs. Nodzēsiet visus NE ASCII simbolus un mēģiniet vēlreiz."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Jūs nedrīkstat ņemt šīs lapas piesaistes."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Jūs nav tiesību atspiest šīs lapas piesaistes."
+
+msgid "You are not allowed to install files."
+msgstr "Jums nav tiesību instalēt failus."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Jūs nedrīkstat skatīties šīs lapas piesaistes."
+
+#, python-format
+msgid "Unsupported upload action: %s"
+msgstr "Nestrādājoša ielāde: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Lapas \"%(pagename)s\" piesaistes"
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Piesaiste '%(target)s' (no faila '%(filename)s') ar izmēru %(bytes)d baiti "
+"pievienota."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Piesaiste '%(filename)s' izdzēsta."
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Piesaiste '%(filename)s' ir uzinstalēta."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošie faili var būt pārāk "
+"lieli (pietrūkst %(space)d kB)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Nevar atpakot piesaisti '%(filename)s' - rezultējošo failu būs pārāk daudz "
+"(pietrūkst %(count)d)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Piesaiste '%(filename)s' atspiesta."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Piesaiste '%(filename)s' nav atpakota, jo faili ir pārāk lieli, tikai .zip "
+"faili, jau ekstistē vai atrodas mapēs."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "Fails %(target)s nav .zip fails."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Piesaiste '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Pakotnes skripts:"
+
+msgid "File Name"
+msgstr "Faila nosaukums"
+
+msgid "Modified"
+msgstr "Modificēts"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Nezināms faila tips, nevar attēlot iestarpināto piesaisti."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "piesaiste:%(filename)s lapai %(pagename)s"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Ielādēt jaunu piesaisti \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Izveidot jaunu attēlu \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Labot attēlu %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "Pārslēgt rindu numerāciju"
+
+msgid "FrontPage"
+msgstr "SākumLapa"
+
+msgid "RecentChanges"
+msgstr "PēdējāsIzmaiņas"
+
+msgid "TitleIndex"
+msgstr "VirsrakstuRādītājs"
+
+msgid "WordIndex"
+msgstr "PriekšmetuRādītājs"
+
+msgid "FindPage"
+msgstr "MeklētLapu"
+
+msgid "SiteNavigation"
+msgstr "VietnesNavigācija"
+
+msgid "HelpContents"
+msgstr "PalīdzībasSaturaRādītājs"
+
+msgid "HelpOnFormatting"
+msgstr "FormatēšanasPalīdzība"
+
+msgid "UserPreferences"
+msgstr "JūsuIestatījumi"
+
+msgid "WikiLicense"
+msgstr "VikiLicence"
+
+msgid "MissingPage"
+msgstr "IztrūkstošaLapa"
+
+msgid "MissingHomePage"
+msgstr "IztrūkstošaMājasLapa"
+
+# Pirmdiena
+msgid "Mon"
+msgstr "Pr"
+
+# Otrdiena
+msgid "Tue"
+msgstr "Ot"
+
+# Trešdiena
+msgid "Wed"
+msgstr "Tr"
+
+# Ceturtdiena
+msgid "Thu"
+msgstr "Ce"
+
+# Piektdiena
+msgid "Fri"
+msgstr "Pk"
+
+# Sestdiena
+msgid "Sat"
+msgstr "Se"
+
+# Svētdiena
+msgid "Sun"
+msgstr "Sv"
+
+msgid "AttachFile"
+msgstr "PievienotFailu"
+
+msgid "DeletePage"
+msgstr "DzēstLapu"
+
+msgid "LikePages"
+msgstr "LīdzīgasLapas"
+
+msgid "LocalSiteMap"
+msgstr "LokālāVietnesKarte"
+
+msgid "RenamePage"
+msgstr "PārdēvētLapu"
+
+msgid "SpellCheck"
+msgstr "Pareizrakstība"
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Nepareizi MonthCalendar carlparms parametri \"%s\"!"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Nepareizi MonthCalendar argumenti \"%s\"!"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Navigācijas shēma '%(scheme)s' nav pieejama!"
+
+msgid "No parent page found!"
+msgstr "Virslapa nav atrasta!"
+
+msgid "Wiki"
+msgstr "Viki"
+
+msgid "Slideshow"
+msgstr "Slīdrāde"
+
+msgid "Start"
+msgstr "Starts"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "%(pos)d slaids no %(size)d"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Šajā viki nav nevienas bāreņlapas."
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Lapā %(pagename)s citātu nav."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Piesaistes '%(filename)s' augšupielāde."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Attēls '%(filename)s' saglabāts."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "Pirms %(mins)d min"
+
+msgid "(no bookmark set)"
+msgstr "(nav grāmatzīmes)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(pašlaik %s)"
+
+msgid "Delete Bookmark"
+msgstr "Dzēst grāmatzīmi"
+
+msgid "Set bookmark"
+msgstr "Ielikt grāmatzīmi"
+
+msgid "set bookmark"
+msgstr "ielikt grāmatzīmi"
+
+msgid "[Bookmark reached]"
+msgstr "[Šeit ielikta grāmatzīme]"
+
+msgid "Contents"
+msgstr "Satura rādītājs"
+
+msgid "No wanted pages in this wiki."
+msgstr "Šajā viki pieprasīto lapu nav."
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Nepareizs iekļaušanas arguments \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Neko neatradu no \"%s\"!"
+
+msgid "Markup"
+msgstr "Iezīmēt"
+
+msgid "Display"
+msgstr "Caurskats"
+
+msgid "Filename"
+msgstr "Faila nosaukums"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install docutils."
+msgstr ""
+"''reStructured'' teksta attēlošana nav iespējama. Lūdzu, instalējiet "
+"''docutils''."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Pārsniegts maksimālais pieļaujamo iekļaušanu skaits**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Nevaru atrast lapu pēc atsauces: %s**"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Nepieciešams \"%(wanted)s\" pēc \"%(key)s\", nevis \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Nepieciešams skaitlis \"%(key)s\" pirms \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Nepieciešams skaitlis \"%(arg)s\" pēc \"%(key)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Nepieciešams krāsas kods \"%(arg)s\" pēc \"%(key)s\""
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT izslēgts; lūdzu, skatieties KonfigurēšanasPalīdzība."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT apstrāde neiespējama, lūdzu, instalējiet 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s apstrādes kļūda"
+
+msgid "Views/day"
+msgstr "Skatīta (dienā)"
+
+msgid "Edits/day"
+msgstr "Labota (dienā)"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s no %(filterpage)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"zaļš=skats\n"
+"sarkans=labot"
+
+msgid "date"
+msgstr "datums"
+
+msgid "# of hits"
+msgstr "# apmeklējumi"
+
+msgid "Page Size Distribution"
+msgstr "Lapas izmēra sadale"
+
+msgid "page size upper bound [bytes]"
+msgstr "pieļaujamais lapas izmērs [baitos]"
+
+msgid "# of pages of this size"
+msgstr "# lapas ar šādu izmēru"
+
+msgid "User agent"
+msgstr "Lietotāja aģents"
+
+msgid "Others"
+msgstr "Citi"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Lietotāju aģentu sadale pa tipiem"
+
+msgid "Unsubscribe"
+msgstr "Atrakstīties"
+
+msgid "Home"
+msgstr "Māja"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[DZĒSTS]"
+
+msgid "[UPDATED]"
+msgstr "[ATJAUNINĀTS]"
+
+msgid "[NEW]"
+msgstr "[JAUNS]"
+
+msgid "[DIFF]"
+msgstr "[ATŠĶIRĪBAS]"
+
+msgid "[BOTTOM]"
+msgstr "[APAKŠA]"
+
+msgid "[TOP]"
+msgstr "[AUGŠA]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
+
+msgid "Preferences"
+msgstr "Iestatījumi"
+
+msgid "Logout"
+msgstr "Iziet"
+
+msgid "Clear message"
+msgstr "Notīrīt ziņojumu"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "pēdējais labojums %(time)s %(editor)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "pēdējā modifikācija %(time)s"
+
+msgid "Search:"
+msgstr "Meklēt:"
+
+msgid "Text"
+msgstr "Tekstā"
+
+msgid "Titles"
+msgstr "Virsrakstos"
+
+msgid "Search"
+msgstr "Meklēt"
+
+msgid "More Actions:"
+msgstr "Citas darbības:"
+
+msgid "------------"
+msgstr "------------"
+
+msgid "Raw Text"
+msgstr "Rādīt jēltekstu"
+
+msgid "Delete Cache"
+msgstr "Dzēst kešatmiņu"
+
+msgid "Delete Page"
+msgstr "Dzēst lapu"
+
+msgid "Like Pages"
+msgstr "Līdzīgas lapas"
+
+msgid "Local Site Map"
+msgstr "Lokālā vietnes karte"
+
+msgid "My Pages"
+msgstr "Manas Lapas"
+
+msgid "Subscribe User"
+msgstr "Parakstīt Lietotāju"
+
+msgid "Remove Spam"
+msgstr "Atsārņot"
+
+msgid "Package Pages"
+msgstr "Iesaiņot Lapas"
+
+msgid "Render as Docbook"
+msgstr "Sniegt Docbook formātā"
+
+msgid "Do"
+msgstr "Veikt"
+
+msgid "Edit (Text)"
+msgstr "Labot tekstu"
+
+msgid "Edit (GUI)"
+msgstr "Labot grafiski"
+
+msgid "Immutable Page"
+msgstr "Nemaināma Lapa"
+
+msgid "Remove Link"
+msgstr "Dzēst saiti"
+
+msgid "Add Link"
+msgstr "Pievienot saiti"
+
+msgid "Attachments"
+msgstr "Piesaistes"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Rādīt %s dienas."
+
+msgid "DeleteCache"
+msgstr "DzēstKešatmiņu"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(saglabāts %s)"
+
+msgid "Or try one of these actions:"
+msgstr "Vai mēģināt kādu no darbībām:"
+
+msgid "Page"
+msgstr "Lapa"
+
+msgid "User"
+msgstr "Lietotājs"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Piedodiet, Jūs nevarat saglabāt lapu, jo \"%(content)s\" šajā viki nav "
+"atļauts."
+
+msgid "Line"
+msgstr "Rinda"
+
+msgid "Deletions are marked like this."
+msgstr "Dzēstie atzīmēti šādi."
+
+msgid "Additions are marked like this."
+msgstr "Pievienotie atzīmēti šādi"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Pievienoties e-pasta serverim '%(server)s' nedrīkst: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "E-pasts nav nosūtīts"
+
+msgid "Mail sent OK"
+msgstr "E-pasts nosūtīts"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "Šajā viki Jums nav tiesību pārdēvēt lapas!"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr ""
+#~ "Lai pārdēvētu lapu nosaukumus, lūdzu, izmantojiet interaktīvo lietotāja "
+#~ "saskarni!"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "Jūs nedrīkstat dzēst šo lapu."
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s (%(logsize)s baiti)"
+
+#~ msgid "User Preferences"
+#~ msgstr "Lietotāja Iestatījumi"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "Lejupielādēt XML eksportu no šī wiki"
+
+#~ msgid "EditText"
+#~ msgstr "LabotTekstu"
+
+#~ msgid "Immutable page"
+#~ msgstr "Nemaināma lapa"
+
+#~ msgid "Account \"%s\" is disabled."
+#~ msgstr "Konts \"%s\" ir atslēgts."
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "Nepareizs atkārtotas ieejas URL"
+
+#~ msgid "Unknown user."
+#~ msgstr "Nezināms lietotājs"
+
+#~ msgid "User account created!"
+#~ msgstr "Lietotāja konts izveidots!"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "Atcerēties pēdējo apmeklēto lapu"
+
+#~ msgid "Parent Page"
+#~ msgstr "Virslapa"
+
+#~ msgid "Trail"
+#~ msgstr "Noslēgums"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr ""
+#~ "Jūs vēl neesat izveidojis sava profila iestatījumus. Lai uzstādītu "
+#~ "iestatījumus, izvēlieties JūsuIestatījumi labajā augšējā stūrī."
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "Šajā viki e-pasta sūtīšana ir aizliegta. Sazinieties ar viki īpašnieku, "
+#~ "kurš var atļaut Jums sūtīšanu vai noņemt pogu \"Parakstīšanās\"."
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "Iestatījumos nav norādīta e-pasta adrese. Uzkliķējiet uz sava vārda "
+#~ "labajā augšējā stūrī un ievadiet pareizu e-pasta adresi."
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr ""
+#~ "Lai atrakstītos, atveriet savu profilu un pierakstu sarakstā izdzēsiet "
+#~ "ierakstus, kas saskan ar šo lapu."
+
+#~ msgid "Quicklink"
+#~ msgstr "Ātrsaite"
+
+#~ msgid "Show Print View"
+#~ msgstr "Rādīt drukas skatu"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "Rādīt līdzīgās lapas"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "Rādīt vietnes karti"
+
+#~ msgid "Infos"
+#~ msgstr "Informācija"
+
+#~ msgid "Attach File"
+#~ msgstr "Piesaistes"
+
+#~ msgid "Refresh"
+#~ msgstr "Atsvaidzināt"
+
+#~ msgid "Skip to preview"
+#~ msgstr "Izlaist pirmskatu"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[lapas izmērs ir '''%(size)d''' baiti]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "Neobligāts komentārs par šo izmaiņu"
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "Pievienot lapu kategorijai %(category)s"
+
+#~ msgid "Can't work out query"
+#~ msgstr "Pieprasījumu nevaru izpildīt"
+
+#~ msgid "Show fancy links"
+#~ msgstr "Rādīt modernas saites"
+
+#~ msgid "Show Parent"
+#~ msgstr "Virslapa"
+
+#~ msgid "Show Changes"
+#~ msgstr "Izmaiņas"
+
+#~ msgid "Get Info"
+#~ msgstr "Informācija"
+
+#~ msgid "(Use FirstnameLastname)"
+#~ msgstr "(Lietojiet VārdsUzvārds)"
+
+#~ msgid ""
+#~ " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+#~ "(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+#~ "italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+#~ "(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+#~ "[[Verbatim(----)]] horizontal rule.\n"
+#~ " Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] "
+#~ "Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   "
+#~ "[[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title "
+#~ "5 [[Verbatim(=====)]].\n"
+#~ " Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; "
+#~ "1.#n start numbering at n; space alone indents.\n"
+#~ " Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+#~ "double quotes\"])]]; url; [url]; [url label].\n"
+#~ " Tables:: || cell text |||| cell text spanning 2 columns ||;    no "
+#~ "trailing white space allowed after tables or titles."
+#~ msgstr ""
+#~ " Uzsvērt:: [[Verbatim('')]]''kursīvā''[[Verbatim('')]]; [[Verbatim"
+#~ "(''')]]'''treknrakstā'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''treknā "
+#~ "kursīvā'''''[[Verbatim(''''')]]; [[Verbatim('')]]''jaukti ''[[Verbatim"
+#~ "(''')]]'''''treknrakstā'''[[Verbatim(''')]] un kursīvā''[[Verbatim('')]]; "
+#~ "[[Verbatim(----)]] horizontāla svītra.\n"
+#~ " Virsraksti:: [[Verbatim(=)]] 1. līmeņa virsraksts [[Verbatim(=)]]; "
+#~ "[[Verbatim(==)]] 2.līmeņa virsraksts [[Verbatim(==)]]; [[Verbatim(===)]] "
+#~ "3.līmeņa virsraksts [[Verbatim(===)]];   [[Verbatim(====)]] 4.līmeņa "
+#~ "virsraksts [[Verbatim(====)]]; [[Verbatim(=====)]] 5.līmeņa virsraksts "
+#~ "[[Verbatim(=====)]].\n"
+#~ " Saraksti:: Tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. "
+#~ "numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.\n"
+#~ " Saites:: [[Verbatim(SavienotiVārdiLielajiemSākumBurtiem)]]; [[Verbatim"
+#~ "([\"kvadrātiekavas un pēdiņas\"])]]; URL; [URL]; [URL etiķete].\n"
+#~ " Tabulas:: || šūnas teksts |||| pa 2 ailēm izvērsts šūnas teksts ||;  Pēc "
+#~ "tabulām un virsrakstiem nedrīkst sekot atstarpes."
+
+#~ msgid "Save as"
+#~ msgstr "Pārdēvēt par"
+
+#~ msgid "MIME Type (optional)"
+#~ msgstr "MIME tips (nav obligāts)"
+
+#~ msgid "Recommend page to"
+#~ msgstr "Ieteikt lapu"
+
+#~ msgid "Recommend Page"
+#~ msgstr "Ieteikt lapu"
+
+#~ msgid "Show Raw Text"
+#~ msgstr "Rādīt jēltekstu"
+
+#~ msgid "Installed parsers"
+#~ msgstr "Uzstādītie parsētāji"
+
+#~ msgid "Event log"
+#~ msgstr "Sistēmas žurnālfails"

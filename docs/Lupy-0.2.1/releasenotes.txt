@@ -1,0 +1,22 @@
+0.2.0 Release notes
+
+This release brings major reorganization of the code, grouping classes
+into larger modules instead of the original Java style, as well as
+rewriting several of the classes to be more Pythonic, removing
+extraneous data structures and so forth; overall, the code has been
+reduced by 20%. The public interface, indexer.py, has not changed;
+other classes have not been changed significantly, other than being
+moved to new modules.
+
+Also, this release changes the interface for analyzers: they are now
+iterable objects that take one argument, the string to be tokenized,
+and produce tokens, rather than the analysis classes ported from
+Lucene. This improves performance while simplifying the code. If an
+analyzer is not specified, lupy.index.documentwriter.standardTokenizer
+is used. The regex used by that generator is re.compile("\\w+", re.U),
+and the tokens are downcased before being stored.
+
+Along with this improvement in tokenization comes better Unicode
+support; all text is now handled as Unicode strings.  There is a
+simple test for the indexing and retrieval of documents containing
+non-ASCII data.
