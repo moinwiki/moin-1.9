@@ -191,7 +191,8 @@ class RequestBase(object):
         surge_detected = False
         
         try:
-            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
+            # if we have common farm users, we could also use scope='farm':
+            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log', scope='wiki')
             if cache.exists():
                 data = cache.content()
                 data = data.split("\n")

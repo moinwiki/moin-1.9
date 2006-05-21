@@ -115,7 +115,7 @@ class Parser:
                 self.request.write(text.decode(config.charset))
             else:
                 self.request.write(result)
-                cache = caching.CacheEntry(self.request, formatter.page, self.key)
+                cache = caching.CacheEntry(self.request, formatter.page, self.key, scope='item')
                 cache.update(result)
 
     def _resolve_page(self, uri, base):
