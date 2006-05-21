@@ -19,13 +19,13 @@ POTFILES: POTFILES.in
 .nop.po-update:
 	@lang=`echo $@ | sed -e 's/\.po-update$$//'`; \
 	echo "$$lang:"; \
-	./wiki2po.py $${lang}; \
+	tools/wiki2po.py $${lang}; \
 	echo "msgmerge $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
 	if msgmerge $$lang.po $(DOMAIN).pot -o $$lang.new.po; then \
 	  if cmp $$lang.po $$lang.new.po >/dev/null 2>&1; then \
 	    rm -f $$lang.new.po; \
 	  else \
-	    echo XXX ./po2wiki.py $$lang <$$lang.new.po; \
+	    echo XXX tools/po2wiki.py $$lang <$$lang.new.po; \
 	    rm -f $$lang.new.po; \
 	  fi; \
 	else \
@@ -60,10 +60,10 @@ $(DOMAIN).pot:
 
 $(POFILES):
 	@lang=`echo $@ | sed -e 's,.*/,,' -e 's/\.po$$//'`; \
-	./wiki2po.py $${lang}; \
+	tools/wiki2po.py $${lang}; \
 	echo msgmerge $${lang}.po $(DOMAIN).pot -o $${lang}.new.po; \
 	msgmerge $${lang}.po $(DOMAIN).pot -o $${lang}.new.po; \
-	echo XXX ./po2wiki.py $${lang} <$$lang.new.po; \
+	echo XXX tools/po2wiki.py $${lang} <$$lang.new.po; \
 	rm -f $$lang.new.po
 	
 
