@@ -60,6 +60,8 @@ Version 1.6.current:
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
       parser.wiki -> parser.text_moin_wiki
+    * Added thread_monitor. It can be activated using:
+      from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
 
   New Features:
 
