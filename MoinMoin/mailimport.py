@@ -8,11 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
-import re
-import sys
+import os, sys, re, time
 import email
-import time
 from email.Utils import parseaddr, parsedate_tz, mktime_tz
 
 from MoinMoin import user, wikiutil, config
@@ -49,7 +46,7 @@ def log(text):
         print >>sys.stderr, text
 
 def decode_2044(header):
-    """ Decodes header field. Compare RFC 2044. """
+    """ Decodes header field. See RFC 2044. """
     chunks = decode_header(header)
     chunks_decoded = []
     for i in chunks:
@@ -132,7 +129,7 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
     if not pagename_tpl:
         pagename_tpl = email_subpage_template
 
-    # rewrite using string.formatter when python 2.4 is mandantory
+    # rewrite using string.formatter when python 2.4 is mandatory
     pagename = (pagename_tpl.replace("$from", msg['from_addr'][0]).
                 replace("$date", msg['date']).
                 replace("$subj", msg['subject']))
@@ -249,7 +246,7 @@ def import_mail_from_message(request, message):
             msg['date'],
             pagename,
             " ".join(attachment_links),
-                                                               )
+            )
         if found_table:
             content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
         else:
@@ -270,3 +267,4 @@ if __name__ == "__main__":
         import_mail_from_file(request, input)
     except ProcessingError, e:
         print >>sys.stderr, "An error occured while processing the message:", e.args
+
