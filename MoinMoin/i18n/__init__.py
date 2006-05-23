@@ -36,7 +36,6 @@ except ImportError:
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
 from MoinMoin import caching
-from MoinMoin.Page import Page
 
 # This is a global for a reason: in persistent environments all languages in
 # use will be cached; Note: you have to restart if you update language data.
@@ -73,7 +72,12 @@ def i18n_init(request):
                 language, domain, ext = os.path.basename(mo_file).split('.')
                 t = Translation(language, domain)
                 t.load_mo(mo_file)
-                _languages[language] = t.info
+                request.log("load translation %r" % language)
+                encoding = 'utf-8'
+                _languages[language] = {}
+                for key, value in t.info.items():
+                    request.log("meta key %s value %r" % (key, value))
+                    _languages[language][key] = value.decode(encoding)
             meta_cache.update(pickle.dumps(_languages))
 
     if languages is None: # another tread maybe has done it before us
@@ -117,6 +121,7 @@ class Translation(object):
             pass
         currentStack.append(text)
 
+        from MoinMoin.Page import Page
         from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
         from MoinMoin.formatter.text_html import Formatter
         import StringIO
@@ -191,6 +196,9 @@ def getDirection(lang):
 
 def getText(original, request, lang, formatted=True):
     """ Return a translation of text in the user's language. """
+    if original == u"":
+        return u"" # we don't want to get *.po files metadata!
+
     global translations
     if not lang in translations: # load translation if needed
         t = Translation(lang)
@@ -207,6 +215,7 @@ def getText(original, request, lang, formatted=True):
         translated = trans_table[original]
     except KeyError:
         try:
+            from MoinMoin.Page import Page
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language
             if Page(request, dictpagename).exists():

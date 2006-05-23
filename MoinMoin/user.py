@@ -16,7 +16,7 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import config, caching, wikiutil
+from MoinMoin import config, caching, wikiutil, i18n
 from MoinMoin.util import filesys, timefuncs
 
 
@@ -282,8 +282,7 @@ class User:
             from security import Default
             self.may = Default(self)
         
-        from MoinMoin.i18n import languages
-        if self.language and not languages.has_key(self.language):
+        if self.language and not i18n.language_supported(self.language):
             self.language = 'en'
 
     def __repr__(self):

@@ -150,6 +150,10 @@ class RequestBase(object):
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
 
+            from MoinMoin import i18n
+            self.i18n = i18n
+            i18n.i18n_init(self)
+
             self.user = self.get_user_from_form()
             
             if not self.query_string.startswith('action=xmlrpc'):
@@ -163,9 +167,6 @@ class RequestBase(object):
             self.mode_getpagelinks = 0
             self.no_closing_html_code = 0
 
-            from MoinMoin import i18n
-            self.i18n = i18n
-            i18n.i18n_init(self)
             self.lang = i18n.requestLanguage(self) 
             # Language for content. Page content should use the wiki default lang,
             # but generated content like search results should use the user language.
