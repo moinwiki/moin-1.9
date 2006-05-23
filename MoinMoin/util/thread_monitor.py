@@ -1,3 +1,4 @@
+# -*- coding: ascii -*-
 """
 Thread monitor - Check the state of all threads.
 
@@ -5,8 +6,8 @@ Just call activate_hook() as early as possible in program execution.
 Then you can trigger the output of tracebacks of all threads
 by calling trigger_dump().
 
-Copyright: 2006 Alexander Schremmer <alex AT alexanderweb DOT de>
-License: GNU GPL Version 2
+@copyright: 2006 Alexander Schremmer <alex AT alexanderweb DOT de>
+@license: GNU GPL Version 2
 """
 
 import sys
@@ -70,7 +71,7 @@ def activate_hook():
     hook_enabled = True
 
 def dump_regularly(seconds):
-    """ Dumps the tracebacks every `seconds` seconds. """
+    """ Dumps the tracebacks every 'seconds' seconds. """
     activate_hook()
 
     def background_dumper(seconds):
