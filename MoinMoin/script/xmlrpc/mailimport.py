@@ -32,7 +32,7 @@ class PluginScript(MoinScript):
         
         s = xmlrpclib.ServerProxy(url)
 
-        result = s.ProcessMail(secret, input.read())
+        result = s.ProcessMail(secret, xmlrpclib.Binary(input.read()))
         
         if result != "OK":
             print >>sys.stderr, result

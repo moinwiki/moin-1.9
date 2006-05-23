@@ -11,10 +11,12 @@ from MoinMoin import mailimport
 def execute(xmlrpcobj, secret, mail):
     request = xmlrpcobj.request
     secret = xmlrpcobj._instr(secret)
-    # hmm, repeated re-encoding looks suboptimal in terms of speed
-    mail = xmlrpcobj._instr(mail).encode("utf-8") 
+    mail = str(mail)
     
-    if request.cfg.email_secret != secret:
+    if not request.cfg.mail_import_secret:
+        return u"No password set"
+    
+    if request.cfg.mail_import_secret != secret:
         return u"Invalid password"
     
     try:

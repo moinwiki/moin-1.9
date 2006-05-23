@@ -239,9 +239,6 @@ reStructuredText Quick Reference
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_rows = 20
-    email_subpage_template = u"$from-$date-$subject" # used for mail import
-    email_wiki_address = None # the e-mail address for e-mails that should go into the wiki
-    email_secret = ""
                 
     hacks = {} # { 'feature1': value1, ... }
                # Configuration for features still in development.
@@ -270,7 +267,11 @@ reStructuredText Quick Reference
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
     mail_smarthost = None
-    mail_from = None # u'Jrgen Wiki <noreply@jhwiki.org>'
+    mail_from = None # u'Juergen Wiki <noreply@jhwiki.org>'
+
+    mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
+    mail_import_wiki_address = None # the e-mail address for e-mails that should go into the wiki
+    mail_import_secret = ""
     
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = 0
