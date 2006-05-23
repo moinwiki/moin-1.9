@@ -56,7 +56,7 @@ def get_data(pagename, request, filterpage=None):
     
     cache_days, cache_views, cache_edits = [], [], []
     cache_date = 0
-    cache = caching.CacheEntry(request, arena, 'hitcounts')
+    cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki')
     if cache.exists():
         try:
             cache_date, cache_days, cache_views, cache_edits = eval(cache.content())

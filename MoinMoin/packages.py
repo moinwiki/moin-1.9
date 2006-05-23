@@ -272,7 +272,7 @@ class ScriptEngine:
         except AttributeError:
             pass
         self.request.pages = {}
-        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups').remove()
+        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
         page.clean_acl_cache()
 
     def runScript(self, commands):

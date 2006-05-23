@@ -33,7 +33,6 @@ names = ["TitleSearch", "WordIndex", "TitleIndex",
          "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
          "TemplateList",
 ]
-names.extend(i18n.languages.keys())
 
 #############################################################################
 ### Helpers
@@ -44,7 +43,9 @@ def getNames(cfg):
         return cfg.macro_names
     else:
         lnames = names[:]
+        lnames.extend(i18n.wikiLanguages().keys())
         lnames.extend(wikiutil.getPlugins('macro', cfg))
+        cfg.macro_names = lnames # remember it
         return lnames
 
 def _make_index_key(index_letters, additional_html=""):
@@ -92,7 +93,7 @@ class Macro:
 
     # we need the lang macros to execute when html is generated,
     # to have correct dir and lang html attributes
-    for lang in i18n.languages.keys():
+    for lang in i18n.wikiLanguages().keys():
         Dependencies[lang] = []
     
 
@@ -121,7 +122,7 @@ class Macro:
                 builtins = self.__class__
                 execute = getattr(builtins, '_macro_' + macro_name)
             except AttributeError:
-                if macro_name in i18n.languages:
+                if macro_name in i18n.wikiLanguages():
                     execute = builtins._m_lang
                 else:
                     raise ImportError("Cannot load macro %s" % macro_name)

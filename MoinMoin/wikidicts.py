@@ -318,7 +318,7 @@ class GroupDict(DictDict):
             self.__dict__.update(self.cfg.DICTS_DATA)
         except AttributeError:
             try:
-                cache = caching.CacheEntry(request, arena, key)
+                cache = caching.CacheEntry(request, arena, key, scope='wiki')
                 data = pickle.loads(cache.content())
                 self.__dict__.update(data)
                 
@@ -404,7 +404,7 @@ class GroupDict(DictDict):
             for name in self.groupdict:
                 self.dictdict[name].expandgroups(self)
 
-            cache = caching.CacheEntry(request, arena, key)
+            cache = caching.CacheEntry(request, arena, key, scope='wiki')
             cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
             
         # remember it (persistent environments)

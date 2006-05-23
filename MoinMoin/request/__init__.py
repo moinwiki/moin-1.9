@@ -150,6 +150,10 @@ class RequestBase(object):
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
 
+            from MoinMoin import i18n
+            self.i18n = i18n
+            i18n.i18n_init(self)
+
             self.user = self.get_user_from_form()
             
             if not self.query_string.startswith('action=xmlrpc'):
@@ -158,14 +162,11 @@ class RequestBase(object):
                 if not self.forbidden and self.surge_protect():
                     self.makeUnavailable503()
 
-            from MoinMoin import i18n
-
             self.logger = None
             self.pragma = {}
             self.mode_getpagelinks = 0
             self.no_closing_html_code = 0
 
-            self.i18n = i18n
             self.lang = i18n.requestLanguage(self) 
             # Language for content. Page content should use the wiki default lang,
             # but generated content like search results should use the user language.
@@ -191,7 +192,8 @@ class RequestBase(object):
         surge_detected = False
         
         try:
-            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log')
+            # if we have common farm users, we could also use scope='farm':
+            cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log', scope='wiki')
             if cache.exists():
                 data = cache.content()
                 data = data.split("\n")
