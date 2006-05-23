@@ -33,6 +33,13 @@ def getUserList(request):
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
+def get_by_email_address(request, email_address):
+    """ Searches for a user with a particular e-mail address and
+        returns it."""
+    for uid in getUserList(request):
+        theuser = User(request, uid)
+        if theuser.valid and theuser.email.lower() == email_address.lower():
+            return theuser
 
 def getUserId(request, searchName):
     """
