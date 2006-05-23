@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+"""
+moin - control MoinMoin Standalone server
+
+If you want to use this to put standalone in daemon mode,
+you also need moin.py which is the standalone moin script itself.
+                      
+@copyright: 2004-2005 Thomas Waldmann, Nir Soffer
+@license: GNU GPL, see COPYING for details.
+"""
+
+# Add the path to moin.py directory 
+## import sys
+## sys.path.insert(0, '/path/to/moin')
+
+from MoinMoin.server import daemon
+from moin import Config, run
+
+script = daemon.DaemonScript(Config.name, run, Config)
+script.run()
+
