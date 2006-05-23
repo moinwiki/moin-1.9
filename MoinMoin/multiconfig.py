@@ -2,7 +2,7 @@
 """
     MoinMoin - Multiple configuration handler and Configuration defaults class
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -239,6 +239,9 @@ reStructuredText Quick Reference
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_rows = 20
+    email_subpage_template = u"$from-$date-$subj" # used for mail import
+    email_wiki_address = None # the e-mail address for e-mails that should go into the wiki
+    email_secret = ""
                 
     hacks = {} # { 'feature1': value1, ... }
                # Configuration for features still in development.
@@ -267,7 +270,7 @@ reStructuredText Quick Reference
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
     mail_smarthost = None
-    mail_from = None # u'Jürgen Wiki <noreply@jhwiki.org>'
+    mail_from = None # u'Jrgen Wiki <noreply@jhwiki.org>'
     
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = 0
