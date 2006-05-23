@@ -132,7 +132,7 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
     # rewrite using string.formatter when python 2.4 is mandatory
     pagename = (pagename_tpl.replace("$from", msg['from_addr'][0]).
                 replace("$date", msg['date']).
-                replace("$subj", msg['subject']))
+                replace("$subject", msg['subject']))
 
     if pagename.startswith("+ ") and "/" in pagename:
         generate_summary = True
