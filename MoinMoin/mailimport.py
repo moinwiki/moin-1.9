@@ -65,7 +65,7 @@ def process_message(message):
     bcc_addr = parseaddr(decode_2044(message['Bcc']))
     
     subject = decode_2044(message['Subject'])
-    date = time.strftime("%Y-%m-%d %H:%M", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
+    date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
     
     log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addr, from_addr, subject))
     
@@ -162,8 +162,8 @@ def import_mail_from_message(request, message):
         to the wiki. """
     msg = process_message(message)
 
-    email_subpage_template = request.cfg.email_subpage_template
-    wiki_address = request.cfg.email_wiki_address or request.cfg.mail_from
+    email_subpage_template = request.cfg.mail_import_subpage_template
+    wiki_address = request.cfg.mail_import_wiki_address or request.cfg.mail_from
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
     
@@ -174,7 +174,7 @@ def import_mail_from_message(request, message):
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
-    comment = u"Imported mail from '%s' re '%s'" % (msg['from_addr'][0], msg['subject'])
+    comment = u"Mail: '%s'" % (msg['subject'], )
     
     page = PageEditor(request, pagename, do_editor_backup=0)
     
@@ -239,7 +239,7 @@ def import_mail_from_message(request, message):
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
                         u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
-        new_line = u'|| %s || %s || %s || %s || ["%s"] || %s ||' % (
+        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || ["%s"] || %s ||' % (
             msg['from_addr'][0] or msg['from_addr'][1],
             msg['to_addr'][0] or msg['to_addr'][1],
             msg['subject'],
@@ -247,7 +247,7 @@ def import_mail_from_message(request, message):
             pagename,
             " ".join(attachment_links),
             )
-        if found_table:
+        if found_table is not None:
             content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
         else:
             content = "\n".join(old_content) + table_header + new_line
