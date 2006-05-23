@@ -1,17 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Extension Script Package
+    MoinMoin - Command line utilities
 
-    @copyright: 2000-2002 by Jürgen Hermann <jh@web.de>,
-                2006 by MoinMoin:ThomasWaldmann
+    @copyright: 2000, 2001, 2002 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-
-from MoinMoin.util import pysupport
-
-# create a list of extension scripts from the subpackage directory
-extension_scripts = pysupport.getPackageModules(__file__)
-modules = extension_scripts
 
 import os, sys, time
 
