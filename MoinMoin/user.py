@@ -282,7 +282,7 @@ class User:
             from security import Default
             self.may = Default(self)
         
-        if self.language and not i18n.language_supported(self.language):
+        if self.language and not self.language in i18n.wikiLanguages():
             self.language = 'en'
 
     def __repr__(self):
