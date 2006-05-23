@@ -100,7 +100,8 @@ class Translation(object):
         
     def load_mo(self, filename):
         """ load the mo file, setup some attributes from metadata """
-        self.translation = gettext.GNUTranslations(file(filename))
+        # binary files have to be opened in the binary file mode!
+        self.translation = gettext.GNUTranslations(file(filename, "rb"))
         self.info = info = self.translation.info()
         self.name = info['x-language']
         self.ename = info['x-language-in-english']
