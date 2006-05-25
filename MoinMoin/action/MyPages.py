@@ -62,7 +62,7 @@ the group pages.
     
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
-    request.theme.send_title(_('MyPages management'), page=homepage)
+    request.theme.send_title(_('MyPages management', formatted=False), page=homepage)
         
     # Start content - IMPORTANT - without content div, there is no direction support!
     request.write(request.formatter.startContent("content"))
