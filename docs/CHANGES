@@ -70,6 +70,7 @@ Version 1.6.current:
 
   New Features:
 
+    * FeatureRequests/WikiEmailIntegration TODO:make some help page when stable
     * HTML parser (called "html") that allows you to use HTML on the page.
       Thanks to the trac team for the nice code.
     * You can have a common cache_dir for your farm (will save a bit space
