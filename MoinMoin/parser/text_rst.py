@@ -68,11 +68,11 @@ except ImportError:
     
         def format(self, formatter):
             _ = self.request.getText
-            from MoinMoin.parser import plain
+            from MoinMoin.parser.text import Parser as TextParser
             self.request.write(formatter.sysmsg(1) +
                                formatter.rawHTML(_('Rendering of reStructured text is not possible, ''please'' install docutils.')) +
                                formatter.sysmsg(0))
-            plain.Parser(self.raw, self.request).format(formatter)
+            TextParser(self.raw, self.request).format(formatter)
     
     # Create a pseudo docutils environment
     docutils = html4css1 = dummyUrllib2()
