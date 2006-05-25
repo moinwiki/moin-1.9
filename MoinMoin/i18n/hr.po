@@ -527,9 +527,8 @@ msgstr "Grafičko sučelje"
 msgid "Edit was cancelled."
 msgstr "Izmjene odbačene."
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "Ne možete spremati prazne stranice!"
+msgstr "Ne možete promijeniti ime u prazno."
 
 #, python-format
 msgid ""
@@ -677,8 +676,7 @@ msgid ""
 "Other users will be ''warned'' until %(bumptime)s that you are editing this "
 "page."
 msgstr ""
-"Do %(bumptime)s ostali će korisnici biti obaviješteni da vršite izmjene na "
-"stranici."
+"Do %(bumptime)s ostali će korisnici biti obaviješteni da mijenjate stranicu."
 
 msgid "Use the Preview button to extend the locking period."
 msgstr "Ako želite produžiti vrijeme rezervacije koristite Pregled."
@@ -774,7 +772,7 @@ msgstr ""
 " Liste:: praznina i jedan znak : * ; 1., a., A., i., I. obrojčene stavke; 1."
 "#n počni obrojčavanje s n; jedna praznina za uvlačenje.\n"
 " Poveznica:: [[Verbatim(ZajednoPisaneRiječiVelikimSlovima)]]; [[Verbatim"
-"([\"v uglatih zagrada i navodnika\"])]]; URL; [URL]; [URL adresa].\n"
+"([\"u uglatim zagrada i navodnicima\"])]]; URL; [URL]; [URL adresa].\n"
 " Tablice:: || tekst u ćeliji |||| tekst u ćeliji preko dva stupca ||;    "
 "praznine iza tablica ili naslova nisu dozvoljene.\n"
 "\n"
@@ -821,7 +819,7 @@ msgid "Diffs"
 msgstr "Razlike"
 
 msgid "Info"
-msgstr "Info"
+msgstr "Povijest"
 
 msgid "Edit"
 msgstr "Uredi"
@@ -1214,23 +1212,23 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "Na stranici koju ne možete čitati, ne možete ni provjeriti pravopis."
 
 msgid "Do it."
-msgstr ""
+msgstr "Izvrši."
 
 #, python-format
 msgid "Execute action %(actionname)s?"
-msgstr ""
+msgstr "Izvrši akciju %(actionname)s"
 
 #, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
+msgstr "Akcija %(actionname)s nije uključena na ovom wikiju!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Na ovoj stranici nije dozvoljeno spremati crteže."
+msgstr "Ne možete koristiti akciju %(actionname)s na ovoj stranici."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "Za brisanje stranice upotrijebite interaktivno korisničko sučelje!"
+msgstr "Koristite interaktivno korisničko sučelje za akciju %(actionname)s!"
 
 #, python-format
 msgid "Title Search: \"%s\""
@@ -1541,10 +1539,10 @@ msgid "Toggle line numbers"
 msgstr "Uključi/isključi obrojčavanje redova"
 
 msgid "FrontPage"
-msgstr "Naslovnica"
+msgstr "Početna"
 
 msgid "RecentChanges"
-msgstr "Novosti"
+msgstr "Zadnje izmjene"
 
 msgid "TitleIndex"
 msgstr "Kazalo naslova"
@@ -1553,16 +1551,16 @@ msgid "WordIndex"
 msgstr "Kazalo riječi"
 
 msgid "FindPage"
-msgstr "Pronađi stranicu"
+msgstr "Traženje"
 
 msgid "SiteNavigation"
 msgstr "Navigacija"
 
 msgid "HelpContents"
-msgstr "Pomoć sadržaj"
+msgstr "Kako sadržaj"
 
 msgid "HelpOnFormatting"
-msgstr "Pomoć pri oblikovanju"
+msgstr "Kako oblikovati"
 
 msgid "UserPreferences"
 msgstr "Korisničke postavke"
@@ -1571,10 +1569,10 @@ msgid "WikiLicense"
 msgstr "Wiki uvjeti"
 
 msgid "MissingPage"
-msgstr "Nedostajuće_stranice"
+msgstr "Prazna stranica"
 
 msgid "MissingHomePage"
-msgstr "Nedostajuće_osobne_stranice"
+msgstr "Prazna osobna stranica"
 
 msgid "Mon"
 msgstr "pon"
@@ -1598,22 +1596,22 @@ msgid "Sun"
 msgstr "ned"
 
 msgid "AttachFile"
-msgstr "Privij_datoteku"
+msgstr "Privij datoteku"
 
 msgid "DeletePage"
-msgstr "Briši_stranicu"
+msgstr "Obriši stranicu"
 
 msgid "LikePages"
-msgstr "Slične_stranice"
+msgstr "Slične stranice"
 
 msgid "LocalSiteMap"
-msgstr "Struktura_stranica"
+msgstr "Struktura stranica"
 
 msgid "RenamePage"
-msgstr "Preimenuj_stranicu"
+msgstr "Preimenuj stranicu"
 
 msgid "SpellCheck"
-msgstr "Pravopisna_provjera"
+msgstr "Pravopisna provjera"
 
 #, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
@@ -1663,23 +1661,23 @@ msgid "%(mins)dm ago"
 msgstr "pred %(mins)dm"
 
 msgid "(no bookmark set)"
-msgstr "(knjižna oznaka nije postavljena)"
+msgstr "(oznaka nije postavljena)"
 
 #, python-format
 msgid "(currently set to %s)"
 msgstr "(trenutno namješteno na %s)"
 
 msgid "Delete Bookmark"
-msgstr "Obriši knjižnu oznaku"
+msgstr "Obriši oznaku"
 
 msgid "Set bookmark"
-msgstr "Postavi knjižnu oznaku"
+msgstr "Postavi oznaku"
 
 msgid "set bookmark"
-msgstr "postavi knjižnu oznaku"
+msgstr "postavi oznaku"
 
 msgid "[Bookmark reached]"
-msgstr "[Došli smo do knjižne oznake]"
+msgstr "[Došli smo do oznake]"
 
 msgid "Contents"
 msgstr "Sadržaj"
@@ -1815,7 +1813,7 @@ msgid "Click to do a full-text search for this title"
 msgstr "Traženje ovog naslova u sadržaju stranica"
 
 msgid "Preferences"
-msgstr "Korisničke postavke"
+msgstr "Postavke"
 
 msgid "Logout"
 msgstr "Odjava"
@@ -1905,7 +1903,7 @@ msgid "Show %s days."
 msgstr "Prikaži %s dana."
 
 msgid "DeleteCache"
-msgstr "Osviježi"
+msgstr "Osvježi"
 
 #, python-format
 msgid "(cached %s)"
@@ -1946,13 +1944,3 @@ msgstr "Poruka nije poslana"
 
 msgid "Mail sent OK"
 msgstr "Poruka uspješno poslana"
-
-#~ msgid "You are not allowed to rename pages in this wiki!"
-#~ msgstr "Na ovom wikiju nije dozvoljeno mijenjati imena stranica!"
-
-#~ msgid "Please use the interactive user interface to rename pages!"
-#~ msgstr ""
-#~ "Za preimenovanje stranice upotrijebite interaktivno korisničko sučelje!"
-
-#~ msgid "You are not allowed to delete this page."
-#~ msgstr "Ne možete izbrisati ovu stranicu!"

@@ -533,7 +533,7 @@ Try a different name.""") % (newpagename,)
         # delete pagelinks
         arena = self
         key = 'pagelinks'
-        cache = caching.CacheEntry(self.request, arena, key)
+        cache = caching.CacheEntry(self.request, arena, key, scope='item')
         cache.remove()
 
         # forget in-memory page text
@@ -546,7 +546,7 @@ Try a different name.""") % (newpagename,)
         for formatter_name in self.cfg.caching_formats:
             arena = self
             key = formatter_name
-            cache = caching.CacheEntry(self.request, arena, key)
+            cache = caching.CacheEntry(self.request, arena, key, scope='item')
             cache.remove()
         return success, msg
 

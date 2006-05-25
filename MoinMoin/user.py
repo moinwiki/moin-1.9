@@ -16,7 +16,7 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import config, caching, wikiutil
+from MoinMoin import config, caching, wikiutil, i18n
 from MoinMoin.util import filesys, timefuncs
 
 
@@ -33,6 +33,13 @@ def getUserList(request):
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
+def get_by_email_address(request, email_address):
+    """ Searches for a user with a particular e-mail address and
+        returns it."""
+    for uid in getUserList(request):
+        theuser = User(request, uid)
+        if theuser.valid and theuser.email.lower() == email_address.lower():
+            return theuser
 
 def getUserId(request, searchName):
     """
@@ -50,7 +57,7 @@ def getUserId(request, searchName):
     except AttributeError:
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key)
+        cache = caching.CacheEntry(request, arena, key, scope='wiki')
         try:
             _name2id = pickle.loads(cache.content())
         except (pickle.UnpicklingError, IOError, EOFError, ValueError):
@@ -64,7 +71,7 @@ def getUserId(request, searchName):
         cfg._name2id = _name2id
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key)
+        cache = caching.CacheEntry(request, arena, key, scope='wiki')
         cache.update(pickle.dumps(_name2id, PICKLE_PROTOCOL))
         id = _name2id.get(searchName, None)
     return id
@@ -282,8 +289,7 @@ class User:
             from security import Default
             self.may = Default(self)
         
-        from MoinMoin.i18n.meta import languages
-        if self.language and not languages.has_key(self.language):
+        if self.language and not self.language in i18n.wikiLanguages():
             self.language = 'en'
 
     def __repr__(self):

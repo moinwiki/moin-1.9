@@ -78,7 +78,7 @@ def getblacklist(request, pagename, do_update):
     if do_update:
         tooold = time.time() - 3600
         mymtime = wikiutil.version2timestamp(p.mtime_usecs())
-        failure = caching.CacheEntry(request, "antispam", "failure")
+        failure = caching.CacheEntry(request, "antispam", "failure", scope='wiki')
         fail_time = failure.mtime() # only update if no failure in last hour
         if (mymtime < tooold) and (fail_time < tooold):
             dprint("%d *BadContent too old, have to check for an update..." % tooold)

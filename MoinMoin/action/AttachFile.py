@@ -41,6 +41,9 @@ def htdocs_access(request):
 ### External interface - these are called from the core code
 #############################################################################
 
+class AttachmentAlreadyExists(Exception):
+    pass
+
 def getBasePath(request):
     """ Get base path where page dirs for attachments are stored.
     """
@@ -154,6 +157,42 @@ def info(pagename, request):
         'link': wikiutil.escape(link)
         }
     return "\n<p>\n%s\n</p>\n" % attach_info
+
+def add_attachment(request, pagename, target, filecontent):
+    # replace illegal chars
+    target = wikiutil.taintfilename(target)
+
+    # set mimetype from extension, or from given mimetype
+    #type, encoding = wikiutil.guess_type(target)
+    #if not type:
+    #    ext = None
+    #    if request.form.has_key('mime'):
+    #        ext = wikiutil.guess_extension(request.form['mime'][0])
+    #    if not ext:
+    #        type, encoding = wikiutil.guess_type(filename)
+    #        if type:
+    #            ext = wikiutil.guess_extension(type)
+    #        else:
+    #            ext = ''
+    #    target = target + ext
+
+    # get directory, and possibly create it
+    attach_dir = getAttachDir(request, pagename, create=1)
+    # save file
+    fpath = os.path.join(attach_dir, target).encode(config.charset)
+    if os.path.exists(fpath):
+        raise AttachmentAlreadyExists
+    else:
+        stream = open(fpath, 'wb')
+        try:
+            stream.write(filecontent)
+        finally:
+            stream.close()
+        os.chmod(fpath, 0666 & config.umask)
+
+        _addLogEntry(request, 'ATTNEW', pagename, target)
+        
+        return target
 
 
 #############################################################################
@@ -536,49 +575,23 @@ def do_upload(pagename, request):
     filecontent = request.form['file'][0]
 
     # preprocess the filename
-    # 1. strip leading drive and path (IE misbehaviour)
+    # strip leading drive and path (IE misbehaviour)
     if len(target) > 1 and (target[1] == ':' or target[0] == '\\'): # C:.... or \path... or \\server\...
         bsindex = target.rfind('\\')
         if bsindex >= 0:
             target = target[bsindex+1:]
-        
-    # 2. replace illegal chars
-    target = wikiutil.taintfilename(target)
-
-    # set mimetype from extension, or from given mimetype
-    #type, encoding = wikiutil.guess_type(target)
-    #if not type:
-    #    ext = None
-    #    if request.form.has_key('mime'):
-    #        ext = wikiutil.guess_extension(request.form['mime'][0])
-    #    if not ext:
-    #        type, encoding = wikiutil.guess_type(filename)
-    #        if type:
-    #            ext = wikiutil.guess_extension(type)
-    #        else:
-    #            ext = ''
-    #    target = target + ext
-
-    # get directory, and possibly create it
-    attach_dir = getAttachDir(request, pagename, create=1)
-    # save file
-    fpath = os.path.join(attach_dir, target).encode(config.charset)
-    if os.path.exists(fpath):
-        msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-            'target': target, 'filename': filename}
-    else:
-        stream = open(fpath, 'wb')
-        try:
-            stream.write(filecontent)
-        finally:
-            stream.close()
-        os.chmod(fpath, 0666 & config.umask)
+    
+    # add the attachment
+    try:
+        add_attachment(request, pagename, target, filecontent)
 
         bytes = len(filecontent)
         msg = _("Attachment '%(target)s' (remote name '%(filename)s')"
                 " with %(bytes)d bytes saved.") % {
                 'target': target, 'filename': filename, 'bytes': bytes}
-        _addLogEntry(request, 'ATTNEW', pagename, target)
+    except AttachmentAlreadyExists:
+        msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
+            'target': target, 'filename': filename}
 
     # return attachment list
     upload_form(pagename, request, msg)

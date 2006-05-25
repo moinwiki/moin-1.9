@@ -87,11 +87,22 @@ Version 1.6.current:
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
       parser.wiki -> parser.text_moin_wiki
+    * Added thread_monitor. It can be activated using:
+      from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
+    * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
+      will cache into a common directory for all wikis in the same farm, if you
+      specify 'wiki', it will use a cache directory per wiki and if you specify
+      'item', it will use a cache directory per item (== per page).
+      Creating a CacheEntry without explicit scope is DEPRECATED.
 
   New Features:
 
+    * FeatureRequests/WikiEmailIntegration TODO:make some help page when stable
     * HTML parser (called "html") that allows you to use HTML on the page.
       Thanks to the trac team for the nice code.
+    * You can have a common cache_dir for your farm (will save a bit space
+      and cpu time as it shares some stuff).
+      You need to set "cache_dir = '/some/farm/cachedir' in your farmconfig.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

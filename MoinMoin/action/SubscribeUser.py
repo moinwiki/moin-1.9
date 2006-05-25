@@ -86,9 +86,8 @@ def subscribe_users(request, usernamelist, pagename, formatter):
 def execute(pagename, request):
     _ = request.getText
     if not request.user.may.admin(pagename):
-        request.http_headers()
-        request.theme.send_title(_("You are not allowed to perform this action."), pagename=pagename)
-        request.theme.send_closing_html()
+        thispage = Page(request, pagename)
+        return thispage.send_page(request, msg=_("You are not allowed to perform this action."))
     elif not request.form.has_key('users'):
         show_form(pagename, request)
     else:

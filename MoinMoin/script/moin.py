@@ -11,8 +11,8 @@
 """
 
 def run():
-    from MoinMoin.script import _util
-    _util.MoinScript().run(showtime=0)
+    from MoinMoin.script import MoinScript
+    MoinScript().run(showtime=0)
     
 if __name__ == "__main__":
     # Insert the path to MoinMoin in the start of the path

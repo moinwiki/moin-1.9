@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-04 16:44+0200\n"
-"PO-Revision-Date: 2006-04-16 18:35+0900\n"
+"PO-Revision-Date: 2006-05-07 22:35+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -527,9 +527,8 @@ msgstr "GUIモード"
 msgid "Edit was cancelled."
 msgstr "編集はキャンセルされました。"
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "空のページは保存できません。"
+msgstr "変更後のページ名が指定されていません。"
 
 #, python-format
 msgid ""
@@ -1208,23 +1207,23 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "読む権限がないページのスペルチェックはできません。"
 
 msgid "Do it."
-msgstr ""
+msgstr "実行する。"
 
 #, python-format
 msgid "Execute action %(actionname)s?"
-msgstr ""
+msgstr "アクション %(actionname)s を実行しますか？"
 
 #, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
+msgstr "アクション %(actionname)s はこのWikiに含まれていません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "このページにdrawingを保存する権限がありません。"
+msgstr "このページでアクション %(actionname)s を使用する権限がありません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "対話的なユーザインターフェースからページを削除してください。"
+msgstr "アクション %(actionname)s を使用するには、対話的なユーザインターフェースから行ってください。"
 
 #, python-format
 msgid "Title Search: \"%s\""

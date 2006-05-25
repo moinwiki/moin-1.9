@@ -275,8 +275,8 @@ def do_refresh(pagename, request):
 
     # Remove cache entry (if exists), and send the page
     from MoinMoin import caching
-    caching.CacheEntry(request, arena, key).remove()
-    caching.CacheEntry(request, arena, "pagelinks").remove()
+    caching.CacheEntry(request, arena, key, scope='item').remove()
+    caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
     do_show(pagename, request)
 
 def do_revert(pagename, request):

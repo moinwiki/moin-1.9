@@ -10,7 +10,7 @@
 import unittest, os
 
 from MoinMoin import macro, wikiutil
-from MoinMoin.parser.plain import Parser
+from MoinMoin.parser.text import Parser
 from MoinMoin.formatter.text_html import Formatter
 
 

@@ -2,7 +2,7 @@
 """
     MoinMoin - Multiple configuration handler and Configuration defaults class
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -267,7 +267,11 @@ reStructuredText Quick Reference
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
     mail_smarthost = None
-    mail_from = None # u'Jürgen Wiki <noreply@jhwiki.org>'
+    mail_from = None # u'Juergen Wiki <noreply@jhwiki.org>'
+
+    mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
+    mail_import_wiki_address = None # the e-mail address for e-mails that should go into the wiki
+    mail_import_secret = ""
     
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = 0

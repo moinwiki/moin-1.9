@@ -202,7 +202,7 @@ class Theme(ThemeBase):
         params = '%s?action=%s' % (d['page_name'], 'refresh')
         link = wikiutil.link_tag(request, params, title)
         
-        cache = caching.CacheEntry(request, page, page.getFormatterName())
+        cache = caching.CacheEntry(request, page, page.getFormatterName(), scope='item')
         date = request.user.getFormattedDateTime(cache.mtime())
         deletecache = u'<p>%s %s</p>' % (link, _('(cached %s)') % date)
 
