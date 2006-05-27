@@ -33,7 +33,6 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@MoinMoin/version.py update
 	@epydoc -o ../html -n MoinMoin -u http://moinmoin.wikiwikiweb.de MoinMoin
 
 # Create new underlay directory from MoinMaster
@@ -60,6 +59,7 @@ dist:
 # Create patchlevel module
 patchlevel:
 	@echo -e patchlevel = "\"`hg identify`\"\n" >MoinMoin/patchlevel.py
+	@MoinMoin/version.py update
 
 # Report translations status
 check-i18n:
