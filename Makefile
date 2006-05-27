@@ -65,7 +65,7 @@ patchlevel:
 check-i18n:
 	MoinMoin/i18n/check_i18n.py
 
-# Update the current tree from `tla my-default-archive`
+# Update the workdir from the default pull repo
 update:
 	hg pull -u
 	$(MAKE) patchlevel
