@@ -16,7 +16,6 @@ use_threads = False
 # benefit for the user.
 # IMPORTANT: use only lowercase 'utf-8'!
 charset = 'utf-8'
-##charset = 'iso-8859-1'
 
 # Invalid characters - invisible characters that should not be in page
 # names. Prevent user confusion and wiki abuse, e.g u'\u202aFrontPage'.
