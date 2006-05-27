@@ -28,6 +28,33 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+Branch moin-1.6-xapian:
+  New Features:
+    * Added Xapian (see http://xapian.org/) based indexed search code.
+      Our implementation is still buggy, only use it if you want to help
+      debugging it or to implement / test indexing filters (see
+      MoinMoin/filter/). To use this:
+      * Install xapian-core and xapian-bindings on your machine.
+        We used 0.9.4, but newer code should hopefully work, too.
+      * cfg.xapian_search = True
+      * Execute this to build the index:
+        $ moin ... index build   # indexes pages and attachments
+        $ moin ... index build --files=files.lst  # same plus a list of files
+        You should run those commands as the same user you use for your wiki,
+        usually this is the webserver userid, e.g.:
+        $ sudo -u www-data moin --config=... --wiki-url=wiki.example.org/ \
+               index build --files=files.lst
+  ToDo:
+    * fix/improve query parsing (xapian_term member functions)
+    * fix/improve evaluation of search result
+    * maybe add some "xapian native query" mode (can we make it working without
+      the _moinSearch post-processing (not possible as it uses the same query))
+
+  Other Changes:
+    * Removed Lupy based indexed search code. If you were brave enough to
+      use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
+
+
 Version 1.6.current:
     This is the active development branch. All changes get done here and
     critical stuff gets committed with -m "... (backport to 1.5)" and then

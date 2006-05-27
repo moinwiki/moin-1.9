@@ -2,9 +2,10 @@
 """
     MoinMoin - search engine
     
-    @copyright: 2005 MoinMoin:FlorianFesti
-    @copyright: 2005 MoinMoin:NirSoffer
-    @copyright: 2005 MoinMoin:AlexanderSchremmer
+    @copyright: 2005 MoinMoin:FlorianFesti,
+                2005 MoinMoin:NirSoffer,
+                2005 MoinMoin:AlexanderSchremmer,
+                2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details
 """
 
@@ -12,15 +13,7 @@ import re, time, sys, StringIO
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
-from MoinMoin.support.lupy.search.term import TermQuery
-from MoinMoin.support.lupy.search.phrase import PhraseQuery
-from MoinMoin.support.lupy.search.boolean import BooleanQuery, BooleanScorer
-from MoinMoin.support.lupy.search.prefix import PrefixQuery
-from MoinMoin.support.lupy.search.camelcase import CamelCaseQuery
-from MoinMoin.support.lupy.search.regularexpression import RegularExpressionQuery
-from MoinMoin.support.lupy.index.term import Term
-
-from MoinMoin.lupy import Index, tokenizer
+import Xapian
 
 #############################################################################
 ### query objects
@@ -173,12 +166,14 @@ class AndExpression(BaseExpression):
             
         return '|'.join(result)
 
-    def lupy_term(self):
-        required = self.operator== " "
-        lupy_term = BooleanQuery()
+    def xapian_wanted(self):
+        wanted = True
         for term in self._subterms:
-            lupy_term.add(term.lupy_term(), required, term.negated)
-        return lupy_term
+            wanted = wanted and term.xapian_wanted()
+        return wanted
+
+    def xapian_term(self):
+        return "(%s)" % " AND ".join([term.xapian_term() for term in self._subterms])
 
 
 class OrExpression(AndExpression):
@@ -199,6 +194,9 @@ class OrExpression(AndExpression):
             if result:
                 matches.extend(result)
         return matches
+
+    def xapian_term(self):
+        return "(%s)" % " OR ".join([term.xapian_term() for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -255,35 +253,21 @@ class TextSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):
-        or_term = BooleanQuery()
-        term = self.titlesearch.lupy_term()
-        or_term.add(term, False, False)
-        pattern = self._pattern.lower()
-        if self.use_re:
-            if pattern[0] == '^':
-                pattern = pattern[1:]
-            if pattern[:2] == '\b':
-                pattern = pattern[2:]
-            term = RegularExpressionQuery(Term("text", pattern))
-        else:
-            terms = pattern.lower().split()
-            terms = [list(tokenizer(t)) for t in terms]
-            term = BooleanQuery()
-            for t in terms:
-                if len(t) == 1:
-                    term.add(CamelCaseQuery(Term("text", t[0])), True, False)
-                else:
-                    phrase = PhraseQuery()
-                    for w in t:
-                        phrase.add(Term("text", w))
-                    term.add(phrase, True, False)
-            #term = CamelCaseQuery(Term("text", pattern))
-            #term = PrefixQuery(Term("text", pattern), 3)
-            #term = TermQuery(Term("text", pattern))
-        or_term.add(term, False, False)
-        return or_term
+    def xapian_wanted(self):
+        return not self.use_re
 
+    def xapian_term(self):
+        if self.use_re:
+            return '' # xapian can't do regex search
+        else:
+            analyzer = Xapian.WikiAnalyzer()
+            terms = self._pattern.split()
+            terms = [list(analyzer.tokenize(t)) for t in terms]
+            term = []
+            for t in terms:
+                term.append(" AND ".join(t))
+            term = "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
+            return "%s %s" % (self.negated and "NOT" or "", term)
 
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
@@ -336,17 +320,21 @@ class TitleSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):
-        pattern = self._pattern.lower()
-        if self.use_re:
-            if pattern[0] == '^':
-                pattern = pattern[1:]
-            term = RegularExpressionQuery(Term("title", pattern))
-        else:
-            term = PrefixQuery(Term("title", pattern), 1000000) # number of chars which are ignored behind the match
-            #term.boost = 100.0
-        return term
+    def xapian_wanted(self):
+        return not self.use_re
 
+    def xapian_term(self):
+        if self.use_re:
+            return '' # xapian doesn't support regex search
+        else:
+            analyzer = Xapian.WikiAnalyzer()
+            terms = self._pattern.split()
+            terms = [list(analyzer.tokenize(t)) for t in terms]
+            term = []
+            for t in terms:
+                term.append(" AND ".join(t))
+            term = '%s title:(%s)' % (self.negated and "NOT" or "", " AND ".join(term))
+            return term
 
 class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
@@ -422,16 +410,16 @@ class LinkSearch(BaseExpression):
             # XXX why not return None or empty list?
             return [Match()]
 
-    def lupy_term(self):        
+    def xapian_wanted(self):
+        return not self.use_re
+
+    def xapian_term(self):
         pattern = self.pattern
         if self.use_re:
-            if pattern[0] == "^":
-                pattern = pattern[1:]
-            term = RegularExpressionQuery(Term("links", pattern))
+            return '' # xapian doesnt support regex search
         else:
-            term = TermQuery(Term("links", pattern))
-        term.boost = 10.0
-        return term
+            term = '%s linkto:%s' % (self.negated and "NOT" or "", pattern.lower())
+            return term
 
 ############################################################################
 ### Results
@@ -625,6 +613,28 @@ class FoundAttachment(FoundPage):
         return []
 
 
+class FoundRemote(FoundPage):
+    """ Represent an attachment in search results """
+    
+    def __init__(self, wikiname, page_name, attachment, matches=None, page=None):
+        self.wikiname = wikiname
+        self.page_name = page_name
+        self.attachment = attachment
+        self.page = page
+        if matches is None:
+            matches = []
+        self._matches = matches
+
+    def weight(self, unique=1):
+        return 1
+
+    def get_matches(self, unique=1, sort='start', type=Match):
+        return []
+
+    def _unique_matches(self, type=Match):
+        return []
+
+
 ##############################################################################
 ### Parse Query
 ##############################################################################
@@ -646,7 +656,9 @@ class QueryParser:
         self.regex = kw.get('regex', 0)
 
     def parse_query(self, query):
-        """ transform an string into a tree of Query objects"""
+        """ transform an string into a tree of Query objects """
+        if isinstance(query, str):
+            query = query.decode(config.charset)
         self._query = query
         result = self._or_expression()
         if result is None:
@@ -683,7 +695,7 @@ class QueryParser:
                  r'(?P<OPS>\(|\)|(or\b(?!$)))|' +  # or, (, )
                  r'(?P<MOD>(\w+:)*)' +
                  r'(?P<TERM>("[^"]+")|' +
-                  r"('[^']+')|(\S+)))")             # search word itself
+                 r"('[^']+')|(\S+)))")             # search word itself
         self._query = self._query.strip()
         match = re.match(regex, self._query, re.U)
         if not match:
@@ -1162,8 +1174,8 @@ class Search:
     def run(self):
         """ Perform search and return results object """
         start = time.time()
-        if self.request.cfg.lupy_search:
-            hits = self._lupySearch()
+        if self.request.cfg.xapian_search:
+            hits = self._xapianSearch()
         else:
             hits = self._moinSearch()
             
@@ -1172,12 +1184,14 @@ class Search:
             hits = self._filter(hits)
         
         result_hits = []
-        for page, attachment, match in hits:
-            if attachment:
-                result_hits.append(FoundAttachment(page.page_name, attachment))
+        for wikiname, page, attachment, match in hits:
+            if wikiname in (self.request.cfg.interwikiname, 'Self'): # a local match
+                if attachment:
+                    result_hits.append(FoundAttachment(page.page_name, attachment))
+                else:
+                    result_hits.append(FoundPage(page.page_name, match))
             else:
-                result_hits.append(FoundPage(page.page_name, match))
-            
+                result_hits.append(FoundRemote(wikiname, page, attachment, match))
         elapsed = time.time() - start
         count = self.request.rootpage.getPageCount()
         return SearchResults(self.query, result_hits, count, elapsed)
@@ -1185,22 +1199,33 @@ class Search:
     # ----------------------------------------------------------------
     # Private!
 
-    def _lupySearch(self):
-        """ Search using lupy
+    def _xapianSearch(self):
+        """ Search using Xapian
         
-        Get a list of pages using fast lupy search and return moin
-        search in those pages.
+        Get a list of pages using fast xapian search and
+        return moin search in those pages.
         """
         pages = None
-        index = Index(self.request)
-        if index.exists():
-            self.request.clock.start('_lupySearch')
+        index = Xapian.Index(self.request)
+        if index.exists() and self.query.xapian_wanted():
+            self.request.clock.start('_xapianSearch')
             try:
-                hits = index.search(self.query.lupy_term())
-                pages = [(hit.get('pagename'), hit.get('attachment')) for hit in hits]
+                from MoinMoin.support import xapwrap
+                query = self.query.xapian_term()
+                self.request.log("xapianSearch: query = %r" % query)
+                query = xapwrap.index.ParsedQuery(query)
+                hits = index.search(query)
+                self.request.log("xapianSearch: finds: %r" % hits)
+                def dict_decode(d):
+                    """ decode dict values to unicode """
+                    for k, v in d.items():
+                        d[k] = d[k].decode(config.charset)
+                    return d
+                pages = [dict_decode(hit['values']) for hit in hits]
+                self.request.log("xapianSearch: finds pages: %r" % pages)
             except index.LockedException:
                 pass
-            self.request.clock.stop('_lupySearch')
+            self.request.clock.stop('_xapianSearch')
         return self._moinSearch(pages)
 
     def _moinSearch(self, pages=None):
@@ -1212,23 +1237,29 @@ class Search:
         self.request.clock.start('_moinSearch')
         from MoinMoin.Page import Page
         if pages is None:
-            # if we are not called from _lupySearch, we make a full pagelist,
+            # if we are not called from _xapianSearch, we make a full pagelist,
             # but don't search attachments (thus attachment name = '')
-            pages = [(p, '') for p in self._getPageList()]
+            pages = [{'pagename': p, 'attachment': '', 'wikiname': 'Self', } for p in self._getPageList()]
         hits = []
         fs_rootpage = self.fs_rootpage
-        for pagename, attachment in pages:
-            page = Page(self.request, pagename)
-            if attachment:
-                if pagename == fs_rootpage: # not really an attachment
-                    page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
-                    hits.append((page, None, None))
+        for valuedict in pages:
+            wikiname = valuedict['wikiname']
+            pagename = valuedict['pagename']
+            attachment = valuedict['attachment']
+            if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
+                page = Page(self.request, pagename)
+                if attachment:
+                    if pagename == fs_rootpage: # not really an attachment
+                        page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
+                        hits.append((wikiname, page, None, None))
+                    else:
+                        hits.append((wikiname, page, attachment, None))
                 else:
-                    hits.append((page, attachment, None))
-            else:
-                match = self.query.search(page)
-                if match:
-                    hits.append((page, attachment, match))
+                    match = self.query.search(page)
+                    if match:
+                        hits.append((wikiname, page, attachment, match))
+            else: # other wiki
+                hits.append((wikiname, pagename, attachment, None))
         self.request.clock.stop('_moinSearch')
         return hits
 
@@ -1252,8 +1283,11 @@ class Search:
         """ Filter out deleted or acl protected pages """
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
-        filtered = [(page, attachment, match) for page, attachment, match in hits
-                    if page.exists() and userMayRead(page.page_name) or page.page_name.startswith(fs_rootpage)]    
+        thiswiki = (self.request.cfg.interwikiname, 'Self')
+        filtered = [(wikiname, page, attachment, match) for wikiname, page, attachment, match in hits
+                    if not wikiname in thiswiki or
+                       page.exists() and userMayRead(page.page_name) or
+                       page.page_name.startswith(fs_rootpage)]    
         return filtered
         
         
