@@ -84,6 +84,8 @@ Version 1.6.current:
     * fix deletion of empty Interwiki links ([wiki:MoinMaster: mm entry page])
     * fix mod_python attachment upload bug (thanks to Nick Phillips)
     * fix show_version to show it in the same way as SystemInfo
+    * allow "-" in usernames (fixes "Invalid user name" msg)
+
 
 Version 1.5.current:
   Developer notes:
