@@ -141,6 +141,8 @@ Have a look at the diff of %(difflink)s to see what has been changed.""") % {
             # page creation
             rev = 0
 
+        self.setConflict(bool(conflict_msg))
+        
         # Page editing is done using user language
         self.request.setContentLanguage(self.request.lang)
 

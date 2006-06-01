@@ -109,6 +109,7 @@ class PageEditor(Page):
             self.set_raw_body(verynewtext)
             return True
 
+        # this should never happen, except for empty pages
         return False
 
     def sendconfirmleaving(self):
@@ -923,7 +924,10 @@ Try a different name.""") % (newpagename,)
                 if newtext==saved_page.get_raw_body():
                     msg = _("You already saved this page!")
                     return msg
-                
+                else:
+                    msg = _("You already edited this page! Please do not use the back button.")
+                    raise self.EditConflict, msg
+
             msg = _("""Sorry, someone else saved the page while you edited it.
 
 Please do the following: Use the back button of your browser, and cut&paste
