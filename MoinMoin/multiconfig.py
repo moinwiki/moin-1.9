@@ -424,7 +424,7 @@ reStructuredText Quick Reference
         ('name', _('Name'), "text", "36", _("(Use Firstname''''''Lastname)")),
         ('aliasname', _('Alias-Name'), "text", "36", ''),
         ('password', _('Password'), "password", "36", ''),
-        ('password2', _('Password repeat'), "password", "36", _('(Only when changing passwords)')),
+        ('password2', _('Password repeat'), "password", "36", _('(Only for password change or new account)')),
         ('email', _('Email'), "text", "36", ''),
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
         ('edit_rows', _('Editor size'), "text", "3", ''),
