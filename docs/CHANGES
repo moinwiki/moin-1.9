@@ -89,6 +89,12 @@ Version 1.6.current:
     * fixed smiley caching bug (smileys didn't change theme)
     * fixed backtrace when user removed css_url entry from user_form_fields
 
+  Other changes:
+    * we use (again) the same browser compatibility check as FCKeditor uses
+      internally, too. So if GUI editor invocation is broken due to browser
+      compatibility issues or a wrong browser version check, please file a bug
+      at FCKeditor development or browser development.
+
 Version 1.5.current:
   Developer notes:
     * We switched to Mercurial SCM, see here for more infos:
