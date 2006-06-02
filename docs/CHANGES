@@ -67,6 +67,7 @@ Version 1.6.current:
       specify 'wiki', it will use a cache directory per wiki and if you specify
       'item', it will use a cache directory per item (== per page).
       Creating a CacheEntry without explicit scope is DEPRECATED.
+    * smileys moved from MoinMoin.config to MoinMoin.theme
 
   New Features:
 
@@ -85,7 +86,7 @@ Version 1.6.current:
     * fix mod_python attachment upload bug (thanks to Nick Phillips)
     * fix show_version to show it in the same way as SystemInfo
     * allow "-" in usernames (fixes "Invalid user name" msg)
-
+    * fixed smiley caching bug (smileys didn't change theme)
 
 Version 1.5.current:
   Developer notes:

@@ -64,6 +64,50 @@ class ThemeBase:
         # search forms
         'searchbutton': ("[?]",                  "moin-search.png", 12, 12),
         'interwiki':  ("[%(wikitag)s]",          "moin-inter.png",  16, 16),
+    
+        # smileys (this is CONTENT, but good looking smileys depend on looking
+        # adapted to the theme background color and theme style in general)
+        #vvv    ==      vvv  this must be the same for GUI editor converter
+        'X-(':        ("X-(",                    'angry.png',       15, 15),
+        ':D':         (":D",                     'biggrin.png',     15, 15),
+        '<:(':        ("<:(",                    'frown.png',       15, 15),
+        ':o':         (":o",                     'redface.png',     15, 15),
+        ':(':         (":(",                     'sad.png',         15, 15),
+        ':)':         (":)",                     'smile.png',       15, 15),
+        'B)':         ("B)",                     'smile2.png',      15, 15),
+        ':))':        (":))",                    'smile3.png',      15, 15),
+        ';)':         (";)",                     'smile4.png',      15, 15),
+        '/!\\':       ("/!\\",                   'alert.png',       15, 15),
+        '<!>':        ("<!>",                    'attention.png',   15, 15),
+        '(!)':        ("(!)",                    'idea.png',        15, 15),
+
+        # copied 2001-11-16 from http://pikie.darktech.org/cgi/pikie.py?EmotIcon
+        ':-?':        (":-?",                    'tongue.png',      15, 15),
+        ':\\':        (":\\",                    'ohwell.png',      15, 15),
+        '>:>':        (">:>",                    'devil.png',       15, 15),
+        '|)':         ("|)",                     'tired.png',       15, 15),
+        
+        # some folks use noses in their emoticons
+        ':-(':        (":-(",                    'sad.png',         15, 15),
+        ':-)':        (":-)",                    'smile.png',       15, 15),
+        'B-)':        ("B-)",                    'smile2.png',      15, 15),
+        ':-))':       (":-))",                   'smile3.png',      15, 15),
+        ';-)':        (";-)",                    'smile4.png',      15, 15),
+        '|-)':        ("|-)",                    'tired.png',       15, 15),
+        
+        # version 1.0
+        '(./)':       ("(./)",                   'checkmark.png',   20, 15),
+        '{OK}':       ("{OK}",                   'thumbs-up.png',   14, 12),
+        '{X}':        ("{X}",                    'icon-error.png',  16, 16),
+        '{i}':        ("{i}",                    'icon-info.png',   16, 16),
+        '{1}':        ("{1}",                    'prio1.png',       15, 13),
+        '{2}':        ("{2}",                    'prio2.png',       15, 13),
+        '{3}':        ("{3}",                    'prio3.png',       15, 13),
+
+        # version 1.3.4 (stars)
+        # try {*}{*}{o}
+        '{*}':        ("{*}",                    'star_on.png',     15, 15),
+        '{o}':        ("{o}",                    'star_off.png',    15, 15),
     }
     del _
 
@@ -406,7 +450,7 @@ class ThemeBase:
         @return: alt (unicode), href (string), width, height (int)
         """
         if icon in self.icons:
-            alt, filename, w, h = self.icons[icon]
+            alt, icon, w, h = self.icons[icon]
         else:
             # Create filenames to icon data mapping on first call, then
             # cache in class for next calls.
@@ -417,19 +461,18 @@ class ThemeBase:
                 self.__class__.iconsByFile = d
 
             # Try to get icon data by file name
-            filename = icon.replace('.gif','.png')
-            if filename in self.iconsByFile:
-                alt, filename, w, h = self.iconsByFile[filename]
+            if icon in self.iconsByFile:
+                alt, icon, w, h = self.iconsByFile[icon]
             else:
-                alt, filename, w, h = '', icon, '', ''
+                alt, icon, w, h = '', icon, '', ''
                 
-        return alt, self.img_url(filename), w, h
+        return alt, self.img_url(icon), w, h
    
     def make_icon(self, icon, vars=None):
         """
         This is the central routine for making <img> tags for icons!
-        All icons stuff except the top left logo, smileys and search
-        field icons are handled here.
+        All icons stuff except the top left logo and search field icons are
+        handled here.
         
         @param icon: icon id (dict key)
         @param vars: ...
