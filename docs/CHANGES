@@ -87,6 +87,7 @@ Version 1.6.current:
     * fix show_version to show it in the same way as SystemInfo
     * allow "-" in usernames (fixes "Invalid user name" msg)
     * fixed smiley caching bug (smileys didn't change theme)
+    * fixed backtrace when user removed css_url entry from user_form_fields
 
 Version 1.5.current:
   Developer notes:

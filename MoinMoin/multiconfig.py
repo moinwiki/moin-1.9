@@ -428,15 +428,9 @@ reStructuredText Quick Reference
         ('email', _('Email'), "text", "36", ''),
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
         ('edit_rows', _('Editor size'), "text", "3", ''),
-        ##('theme', _('Preferred theme'), [self._theme_select()])
-        ##('', _('Editor Preference'), [self._editor_default_select()])
-        ##('', _('Editor shown on UI'), [self._editor_ui_select()])
-        ##('', _('Time zone'), [self._tz_select()])
-        ##('', _('Date format'), [self._dtfmt_select()])
-        ##('', _('Preferred language'), [self._lang_select()])
     ]
     
-    user_form_defaults = { # key: default
+    user_form_defaults = { # key: default - do NOT remove keys from here!
         'name': '',
         'aliasname': '',
         'password': '',

@@ -223,11 +223,8 @@ class User:
         self.auth_attribs = kw.get('auth_attribs', ())
                                        
         # create some vars automatically
-        for tuple in self._cfg.user_form_fields:
-            key = tuple[0]
-            default = self._cfg.user_form_defaults.get(key, '')
-            setattr(self, key, default)
-       
+        self.__dict__.update(self._cfg.user_form_defaults)
+
         if name:
             self.name = name
         elif auth_username: # this is needed for user_autocreate
