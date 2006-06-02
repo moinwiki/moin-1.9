@@ -70,4 +70,3 @@ class RssGenerator(XMLGenerator):
         self.endElementNS((self.xmlns['rdf'], 'RDF'), 'rdf:RDF')
         XMLGenerator.endDocument(self)
 
-
