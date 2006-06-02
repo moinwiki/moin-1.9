@@ -451,9 +451,9 @@ class Formatter(FormatterBase):
         if kw.has_key('src'):
             image.setAttribute('fileref', kw['src'])
         if kw.has_key('width'):
-            image.setAttribute('width', kw['width'])
+            image.setAttribute('width', str(kw['width']))
         if kw.has_key('height'):
-            image.setAttribute('depth', kw['height'])
+            image.setAttribute('depth', str(kw['height']))
         imagewrap.appendChild(image)
 
         title = ''
@@ -472,11 +472,7 @@ class Formatter(FormatterBase):
         return ""        
  
     def smiley(self, text):
-        w, h, b, img = config.smileys[text.strip()]
-        href = img
-        if not href.startswith('/'):
-            href = self.request.theme.img_url(img)
-        return self.image(src=href, alt=text, width=str(w), height=str(h))
+        return self.request.theme.make_icon(text)
 
     def icon(self, type):
         return '' # self.request.theme.make_icon(type)
