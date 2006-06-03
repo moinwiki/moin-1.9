@@ -107,6 +107,100 @@ class XmlRpcBase:
             '\n'.join(traceback.format_tb(sys.exc_info()[2])),
         )
 
+    def process(self):
+        """ xmlrpc v1 and v2 dispatcher """
+        try:
+            data = self.request.read()
+            params, method = xmlrpclib.loads(data)
+    
+            if _debug:
+                sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
+                sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
+            
+            response = self.dispatch(method, params)
+            
+        except:
+            # report exception back to server
+            response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
+        else:
+            # wrap response in a singleton tuple
+            response = (response,)
+
+            # serialize it
+            response = xmlrpclib.dumps(response, methodresponse=1)
+
+        self.request.http_headers([
+            "Content-Type: text/xml;charset=utf-8",
+            "Content-Length: %d" % len(response),
+        ])
+        self.request.write(response)
+
+        if _debug:
+            sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
+            sys.stderr.write(response + '\n\n')
+
+    def dispatch(self, method, params):
+        method = method.replace(".", "_")
+        
+        try:
+            fn = getattr(self, 'xmlrpc_' + method)
+        except AttributeError:
+            try:
+                fn = wikiutil.importPlugin(self.request.cfg, 'xmlrpc',
+                                           method, 'execute')
+            except wikiutil.PluginMissingError:
+                response = xmlrpclib.Fault(1, "No such method: %s." %
+                                           method)
+            else:
+                response = fn(self, *params)
+        else:
+            response = fn(*params)
+        
+        return response
+
+    # Common faults -----------------------------------------------------
+    
+    def notAllowedFault(self):
+        return xmlrpclib.Fault(1, "You are not allowed to read this page.")
+
+    def noSuchPageFault(self):
+        return xmlrpclib.Fault(1, "No such page was found.")        
+
+    #############################################################################
+    ### System methods
+    #############################################################################
+
+    def xmlrpc_system_multicall(self, call_list):
+        """system.multicall([{'methodName': 'add', 'params': [2, 2]}, ...]) => [[4], ...]
+
+        Allows the caller to package multiple XML-RPC calls into a single
+        request.
+
+        See http://www.xmlrpc.com/discuss/msgReader$1208
+        
+        Copied from SimpleXMLRPCServer.py
+        """
+
+        results = []
+        for call in call_list:
+            method_name = call['methodName']
+            params = call['params']
+
+            try:
+                # XXX A marshalling error in any response will fail the entire
+                # multicall. If someone cares they should fix this.
+                results.append([self.dispatch(method_name, params)])
+            except xmlrpclib.Fault, fault:
+                results.append(
+                    {'faultCode' : fault.faultCode,
+                     'faultString' : fault.faultString}
+                    )
+            except:
+                results.append(
+                    {'faultCode' : 1,
+                     'faultString' : "%s:%s" % (sys.exc_type, sys.exc_value)}
+                    )
+        return results
 
     #############################################################################
     ### Interface implementation
@@ -396,57 +490,6 @@ class XmlRpcBase:
         return [(self._outstr(hit.page_name),
                  self._outstr(results.formatContext(hit, 180, 1)))
                 for hit in results.hits]
-
-    def process(self):
-        """ xmlrpc v1 and v2 dispatcher """
-        try:
-            data = self.request.read()
-            params, method = xmlrpclib.loads(data)
-    
-            if _debug:
-                sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
-                sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
-            
-            try:
-                fn = getattr(self, 'xmlrpc_' + method)
-            except AttributeError:
-                try:
-                    fn = wikiutil.importPlugin(self.request.cfg, 'xmlrpc',
-                                               method, 'execute')
-                except wikiutil.PluginMissingError:
-                    response = xmlrpclib.Fault(1, "No such method: %s." %
-                                               method)
-                else:
-                    response = fn(self, *params)
-            else:
-                response = fn(*params)
-        except:
-            # report exception back to server
-            response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
-        else:
-            # wrap response in a singleton tuple
-            response = (response,)
-
-            # serialize it
-            response = xmlrpclib.dumps(response, methodresponse=1)
-
-        self.request.http_headers([
-            "Content-Type: text/xml;charset=utf-8",
-            "Content-Length: %d" % len(response),
-        ])
-        self.request.write(response)
-
-        if _debug:
-            sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
-            sys.stderr.write(response + '\n\n')
-
-    # Common faults -----------------------------------------------------
-    
-    def notAllowedFault(self):
-        return xmlrpclib.Fault(1, "You are not allowed to read this page.")
-
-    def noSuchPageFault(self):
-        return xmlrpclib.Fault(1, "No such page was found.")        
 
 
 class XmlRpc1(XmlRpcBase):
