@@ -491,6 +491,9 @@ class XmlRpcBase:
                  self._outstr(results.formatContext(hit, 180, 1)))
                 for hit in results.hits]
 
+    def xmlrpc_getMoinVersion(self):
+        from MoinMoin import version
+        return (version.project, version.release, version.revision)
 
 class XmlRpc1(XmlRpcBase):
     
