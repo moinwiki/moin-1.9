@@ -61,7 +61,8 @@ def format_page_edits(macro, lines, bookmark_usecs):
         # indicate page was deleted
         html_link = request.theme.make_icon('deleted')
     elif page.isConflict():
-        img = request.theme.make_icon('help') # XXX introduce new icon
+        img = macro.formatter.smiley("/!\\")
+        #img = request.theme.make_icon('help')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(pagename) + "?action=edit",
                                       img, formatter=macro.formatter)
