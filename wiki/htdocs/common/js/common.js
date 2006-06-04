@@ -17,26 +17,33 @@ function addLoadEvent(func) {
 }
 
 function can_use_gui_editor() {
-    var sAgent = navigator.userAgent.toLowerCase();
- 
-    if (sAgent.indexOf("msie") != -1 && sAgent.indexOf("mac") == -1 &&
-        sAgent.indexOf("opera") == -1 ) {
-        // Internet Explorer
-        var sBrowserVersion = navigator.appVersion.match(/MSIE (.\..)/)[1];
-        return ( sBrowserVersion >= 5.5 );
-    } else if (navigator.product == "Gecko" && 
-               navigator.productSub >= 20030210) {
-        // Gecko
-        return true;
+    var sAgent = navigator.userAgent.toLowerCase() ;
+
+    // Internet Explorer
+    if ( sAgent.indexOf("msie") != -1 && sAgent.indexOf("mac") == -1 && sAgent.indexOf("opera") == -1 )
+    {   
+        var sBrowserVersion = navigator.appVersion.match(/MSIE (.\..)/)[1] ;
+        return ( sBrowserVersion >= 5.5 ) ;
     }
-    // else if (sAgent.indexOf("safari") != -1 ) {
-    //    // Safari - build must be at least 312 (1.3)
-    //    return (sAgent.match( /safari\/(\d+)/ )[1] >= 312 );
-    // } 
-    else {
-        // Unknown browser, assume gui editor is not compatible
-        return false;
+    
+    // Gecko
+    if ( navigator.product == "Gecko" && navigator.productSub >= 20030210 )
+        return true ;
+
+    // Opera
+    if ( this.EnableOpera )
+    {   
+        var aMatch = sAgent.match( /^opera\/(\d+\.\d+)/ ) ;
+        if ( aMatch && aMatch[1] >= 9.0 )
+            return true ;
     }
+    
+    // Safari
+    if ( this.EnableSafari && sAgent.indexOf( 'safari' ) != -1 )
+        return ( sAgent.match( /safari\/(\d+)/ )[1] >= 312 ) ;  // Build must be at least 312 (1.3)
+
+    return false ;
+
 }
 
 
