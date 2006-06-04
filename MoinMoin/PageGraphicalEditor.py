@@ -124,11 +124,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
                 conflict_msg = _('Someone else changed this page while you were editing!')
                 if self.mergeEditConflict(rev):
                     conflict_msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!
-Have a look at the diff of %(difflink)s to see what has been changed.""") % {
-                        'difflink': self.link_to(self.request,
-                                                 querystr='action=diff&rev=%d' % rev)
-                        }
+Please review the page and save then. Do not save this page as it is!""")
                     rev = self.current_rev()
             if conflict_msg:
                 # We don't show preview when in conflict
