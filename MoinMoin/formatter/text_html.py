@@ -1055,12 +1055,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
     def icon(self, type):
         return self.request.theme.make_icon(type)
 
-    def smiley(self, text):
-        w, h, b, img = config.smileys[text.strip()]
-        href = img
-        if not href.startswith('/'):
-            href = self.request.theme.img_url(img)
-        return self.image(src=href, alt=text, width=str(w), height=str(h))
+    smiley = icon
 
     def image(self, src=None, **kw):
         """Creates an inline image with an <img> element.
