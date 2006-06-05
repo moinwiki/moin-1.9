@@ -382,6 +382,74 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         shutil.copyfileobj(source, outputfile, length=self.bufferSize)
 
 
+try:
+    from tlslite.api import TLSSocketServerMixIn, X509, X509CertChain, SessionCache, parsePEMKey, TLSError
+    from tlslite.TLSConnection import TLSConnection
+except ImportError:
+    pass
+else:
+    class SecureRequestRedirect(BaseHTTPServer.BaseHTTPRequestHandler):
+        def handle(self):
+            self.close_connection = 1
+            try:
+                self.raw_requestline = self.rfile.readline()
+            except socket.error:
+                return
+            if self.parse_request():
+                host = self.headers.get('Host', socket.gethostname())
+                path = self.path
+            else:
+                host = '%s:%s' % (socket.gethostname(), 
+                        self.request.getsockname()[1])
+                path = '/'
+                
+            self.requestline = 'ERROR: Redirecting to https://%s/%s' % (host, path)
+            self.request_version = 'HTTP/1.1'
+            self.command = 'GET'
+            self.send_response(301, 'Document Moved')
+            self.send_header('Date', self.date_time_string())
+            self.send_header('Location', 'https://%s%s' % (host, path))
+            self.send_header('Connection', 'close')
+            self.send_header('Content-Length', '0')
+            self.wfile.write('\r\n')
+            
+    class SecureThreadPoolServer(TLSSocketServerMixIn, ThreadPoolServer):
+        def __init__(self, config):
+            ThreadPoolServer.__init__(self, config)
+            
+            cert = open(config.cert_path).read()
+            x509 = X509()
+            x509.parse(cert)
+            self.certChain = X509CertChain([x509])
+            
+            priv = open(config.priv_path).read()
+            self.privateKey = parsePEMKey(priv, private=True)
+            
+            self.sessionCache = SessionCache()
+            
+        def finish_request(self, sock, client_address):
+            # Peek into the packet, if it starts with GET or POS(T) then
+            # redirect, otherwise let TLSLite handle the connection.
+            peek = sock.recv(3, socket.MSG_PEEK)
+            if peek.lower() == 'get' or peek.lower() == 'pos':
+                response = SecureRequestRedirect(sock, client_address, self)
+            tlsConnection = TLSConnection(sock)
+            if self.handshake(tlsConnection) == True:
+                self.RequestHandlerClass(tlsConnection, client_address, self)
+            else:
+                response = SecureRequestRedirect(sock, client_address, self)
+                
+        def handshake(self, tlsConnection):
+            try:
+                tlsConnection.handshakeServer(certChain = self.certChain,
+                        privateKey = self.privateKey,
+                        sessionCache = self.sessionCache)
+                tlsConnection.ignoreAbruptClose = True
+                return True
+            except:
+                return False
+
+                
 def memoryProfileDecorator(func, profile):
     """ Return a profiled function """
     def profiledFunction(*args, **kw):
