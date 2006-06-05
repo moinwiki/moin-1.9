@@ -171,6 +171,8 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             return self.__insert_code('request.write(%s.icon(%r))' %
                                       (self.__formatter, type))
 
+    smiley = icon
+
     def macro(self, macro_obj, name, args):
         if self.__is_static(macro_obj.get_dependencies(name)):
             return macro_obj.execute(name, args)

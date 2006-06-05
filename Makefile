@@ -33,7 +33,6 @@ check-tabs:
 
 # Create documentation
 epydoc: patchlevel
-	@MoinMoin/version.py update
 	@epydoc -o ../html -n MoinMoin -u http://moinmoin.wikiwikiweb.de MoinMoin
 
 # Create new underlay directory from MoinMaster
@@ -60,12 +59,13 @@ dist:
 # Create patchlevel module
 patchlevel:
 	@echo -e patchlevel = "\"`hg identify`\"\n" >MoinMoin/patchlevel.py
+	@MoinMoin/version.py update
 
 # Report translations status
 check-i18n:
 	MoinMoin/i18n/check_i18n.py
 
-# Update the current tree from `tla my-default-archive`
+# Update the workdir from the default pull repo
 update:
 	hg pull -u
 	$(MAKE) patchlevel
