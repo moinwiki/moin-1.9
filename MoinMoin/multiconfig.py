@@ -164,7 +164,7 @@ def _(text): return text
 class DefaultConfig:
     """ default config values """
     
-    # All acl_right lines must use unicode!
+    # All acl_rights_* lines must use unicode!
     acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
     acl_rights_before = u""
     acl_rights_after = u""
@@ -190,20 +190,27 @@ class DefaultConfig:
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
+
     # chars_{upper,lower,digits,spaces} see MoinMoin/util/chartypes.py
+
     # if you have gdchart, add something like
     # chart_options = {'width = 720, 'height': 540}
     chart_options = None
+    
     config_check_enabled = 0
     cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
     cookie_lifetime = 12 # 12 hours from now
+    
     data_dir = './data/'
     data_underlay_dir = './underlay/'
+    
     date_fmt = '%Y-%m-%d'
     datetime_fmt = '%Y-%m-%d %H:%M:%S'
+    
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
+    
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
@@ -249,6 +256,7 @@ reStructuredText Quick Reference
                # A non-existing hack key should ever mean False, None, "", [] or {}!
 
     hosts_deny = []
+    
     html_head = ''
     html_head_queries = '''<meta name="robots" content="noindex,nofollow">\n'''
     html_head_posts   = '''<meta name="robots" content="noindex,nofollow">\n'''
@@ -318,6 +326,7 @@ reStructuredText Quick Reference
         'view':        ("%(q_page_name)s", _("View"), "view"),
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
         }
+    
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
@@ -349,8 +358,10 @@ reStructuredText Quick Reference
     
     theme_default = 'modern'
     theme_force = False
+    
     trail_size = 5
     tz_offset = 0.0 # default time zone offset in hours from UTC
+    
     user_autocreate = False # do we auto-create user profiles
     user_email_unique = True # do we check whether a user's email is unique?
 
@@ -386,6 +397,7 @@ reStructuredText Quick Reference
         # id -> username for page info and recent changes, but it
         # is not usable for the user any more:
     ]
+    
     user_checkbox_defaults = {'mailto_author':       0,
                               'edit_on_doubleclick': 0,
                               'remember_last_visit': 0,
@@ -398,6 +410,7 @@ reStructuredText Quick Reference
                               'remember_me':         1,
                               'want_trivial':        0,
                              }
+    
     # don't let the user change those
     # user_checkbox_disable = ['disabled', 'want_trivial']
     user_checkbox_disable = []
@@ -411,18 +424,13 @@ reStructuredText Quick Reference
         ('name', _('Name'), "text", "36", _("(Use Firstname''''''Lastname)")),
         ('aliasname', _('Alias-Name'), "text", "36", ''),
         ('password', _('Password'), "password", "36", ''),
-        ('password2', _('Password repeat'), "password", "36", _('(Only when changing passwords)')),
+        ('password2', _('Password repeat'), "password", "36", _('(Only for password change or new account)')),
         ('email', _('Email'), "text", "36", ''),
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
         ('edit_rows', _('Editor size'), "text", "3", ''),
-        ##('theme', _('Preferred theme'), [self._theme_select()])
-        ##('', _('Editor Preference'), [self._editor_default_select()])
-        ##('', _('Editor shown on UI'), [self._editor_ui_select()])
-        ##('', _('Time zone'), [self._tz_select()])
-        ##('', _('Date format'), [self._dtfmt_select()])
-        ##('', _('Preferred language'), [self._lang_select()])
     ]
-    user_form_defaults = { # key: default
+    
+    user_form_defaults = { # key: default - do NOT remove keys from here!
         'name': '',
         'aliasname': '',
         'password': '',
@@ -431,6 +439,7 @@ reStructuredText Quick Reference
         'css_url': '',
         'edit_rows': "20",
     }
+    
     # don't let the user change those, but show them:
     #user_form_disable = ['name', 'aliasname', 'email',]
     user_form_disable = []

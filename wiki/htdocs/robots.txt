@@ -1,1 +1,6 @@
-# You can define rules for nice robots here
+# if you want to add own robot rules, do it BEFORE the final rule matching *
+
+User-agent: *
+Crawl-delay: 20
+Disallow:
+

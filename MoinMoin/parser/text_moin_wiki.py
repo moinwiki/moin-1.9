@@ -96,7 +96,7 @@ class Parser:
         'dl_rule': dl_rule,
         'url_rule': url_rule,
         'word_rule': word_rule,
-        'smiley': u'|'.join(map(re.escape, config.smileys.keys()))}
+        'smiley': u'|'.join(map(re.escape, config.smileys))}
 
     # Don't start p before these 
     no_new_p_before = ("heading rule table tableZ tr td "
