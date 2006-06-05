@@ -78,6 +78,7 @@ Version 1.6.current:
       and cpu time as it shares some stuff).
       You need to set "cache_dir = '/some/farm/cachedir' in your farmconfig.
     * Added XMLRPC methods for attachment handling. Thanks to Matthew Gilbert.
+    * Added TLS/SSL support to the standalone server. Thanks to Matthew Gilbert.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
