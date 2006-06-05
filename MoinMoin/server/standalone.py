@@ -417,12 +417,12 @@ else:
         def __init__(self, config):
             ThreadPoolServer.__init__(self, config)
             
-            cert = open(config.cert_path).read()
+            cert = open(config.certificatePath).read()
             x509 = X509()
             x509.parse(cert)
             self.certChain = X509CertChain([x509])
             
-            priv = open(config.priv_path).read()
+            priv = open(config.privateKeyPath).read()
             self.privateKey = parsePEMKey(priv, private=True)
             
             self.sessionCache = SessionCache()
