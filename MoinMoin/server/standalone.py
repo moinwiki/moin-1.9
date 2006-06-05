@@ -437,6 +437,9 @@ else:
             if self.handshake(tlsConnection) == True:
                 self.RequestHandlerClass(tlsConnection, client_address, self)
             else:
+                # This will probably fail because the TLSConnection has 
+                # already written SSL stuff to the socket. But not sure what
+                # else we should do.
                 response = SecureRequestRedirect(sock, client_address, self)
                 
         def handshake(self, tlsConnection):
