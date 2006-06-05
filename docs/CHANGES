@@ -79,6 +79,9 @@ Version 1.6.current:
       You need to set "cache_dir = '/some/farm/cachedir' in your farmconfig.
     * Added XMLRPC methods for attachment handling. Thanks to Matthew Gilbert.
     * Added TLS/SSL support to the standalone server. Thanks to Matthew Gilbert.
+      To use TLS/SSL support you must also install the TLSLite library
+      (http://trevp.net/tlslite/). Version 0.3.8 was used for development and
+      testing.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
