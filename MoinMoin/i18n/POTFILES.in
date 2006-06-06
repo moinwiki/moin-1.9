@@ -9,7 +9,6 @@ search.py
 user.py
 userform.py
 version.py
-wikiacl.py
 wikiutil.py
 wikidicts.py
 failure.py

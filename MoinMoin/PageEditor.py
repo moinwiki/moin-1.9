@@ -943,7 +943,7 @@ delete the changes of the other person, which is excessively rude!''
             msg = _('You did not change the page content, not saved!')
             raise self.Unchanged, msg
         else:
-            from wikiacl import parseACL
+            from MoinMoin.security import parseACL
             # Get current ACL and compare to new ACL from newtext. If
             # they are not the sames, the user must have admin
             # rights. This is a good place to update acl cache - instead

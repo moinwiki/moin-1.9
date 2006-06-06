@@ -58,7 +58,8 @@ Version 1.6.current:
       TWISTED not
     * moved util/antispam.py to security/antispam.py,
       moved util/autoadmin.py to security/autoadmin.py,
-      moved security.py to security/__init__.py
+      moved security.py to security/__init__.py,
+      moved wikiacl.py to security/__init__.py.
     * added wikiutil.MimeType class (works internally with sanitized mime
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
