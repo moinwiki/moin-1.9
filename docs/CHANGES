@@ -56,6 +56,9 @@ Version 1.6.current:
       WSGI not
       FCGI not
       TWISTED not
+    * moved util/antispam.py to security/antispam.py,
+      moved util/autoadmin.py to security/autoadmin.py,
+      moved security.py to security/__init__.py
     * added wikiutil.MimeType class (works internally with sanitized mime
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
@@ -660,7 +663,7 @@ Version 1.5.0beta1:
        did not allow attachments, you now have to use:
        actions_excluded = ['AttachFile']
      * special users (All, Known, Trusted) in Groups are now supported
-     * MoinMoin.util.autoadmin SecurityPolicy added
+     * MoinMoin.security.autoadmin SecurityPolicy added
        When using this security policy, a user will get admin rights on his
        homepage (where pagename == username) and its sub pages. This is needed
        for the MyPages action, but can also get used for manual ACL changes.
@@ -1708,7 +1711,7 @@ Other changes:
       Nevertheless it is a very good idea to use a non-broken and more secure
       browser like Mozilla, Firefox or Opera!
 
-    * from MoinMoin.util.antispam import SecurityPolicy in your
+    * from MoinMoin.security.antispam import SecurityPolicy in your
       moin_config.py will protect your wiki from at least the known spammers.
       See MoinMoin:AntiSpamGlobalSolution for details.
 
