@@ -109,7 +109,7 @@ class FarmConfig(DefaultConfig):
 
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
-    #from MoinMoin.util.antispam import SecurityPolicy
+    #from MoinMoin.security.antispam import SecurityPolicy
 
 
     # Mail --------------------------------------------------------------
