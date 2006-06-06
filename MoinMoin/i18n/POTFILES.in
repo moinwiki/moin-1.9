@@ -105,6 +105,7 @@ parser/text_python.py
 parser/text_rst.py
 parser/text_moin_wiki.py
 parser/text_xslt.py
+parser/ParserBase.py
 
 security/__init__.py
 security/antispam.py
@@ -133,7 +134,6 @@ theme/classic.py
 theme/modern.py
 theme/rightsidebar.py
 
-util/ParserBase.py
 util/__init__.py
 util/chartypes.py
 util/dataset.py
