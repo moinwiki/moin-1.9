@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.util.ParserBase import ParserBase
+from MoinMoin.parser.ParserBase import ParserBase
 
 Dependencies = []
 

@@ -7,7 +7,7 @@
 
 """
 
-from MoinMoin.util.ParserBase import ParserBase
+from MoinMoin.parser.ParserBase import ParserBase
 
 Dependencies = []
 
