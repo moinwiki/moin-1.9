@@ -487,7 +487,7 @@ class php_session:
         
         import Cookie, urllib
         from MoinMoin.user import User
-        from MoinMoin.util import sessionParser
+        from MoinMoin.auth import _PHPsessionParser
     
         user_obj = kw.get('user_obj')
         try:
@@ -497,7 +497,7 @@ class php_session:
         if cookie:
             for cookiename in cookie.keys():
                 cookievalue = urllib.unquote(cookie[cookiename].value).decode('iso-8859-1')
-                session = sessionParser.loadSession(cookievalue, path=self.s_path, prefix=self.s_prefix)
+                session = _PHPsessionParser.loadSession(cookievalue, path=self.s_path, prefix=self.s_prefix)
                 if session:
                     if "egw" in self.apps and session.get('egw_session', None):
                         username, email, name = handle_egroupware(session)
