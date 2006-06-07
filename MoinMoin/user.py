@@ -940,7 +940,7 @@ class User:
         return markup
 
     def mailAccountData(self, cleartext_passwd=None):
-        from MoinMoin.util import mail
+        from MoinMoin.mail import sendmail
         from MoinMoin.wikiutil import getSysPage
         _ = self._request.getText
 
@@ -980,7 +980,7 @@ After successfully logging in, it is of course a good idea to set a new and know
 
         subject = _('[%(sitename)s] Your wiki account data',
                     formatted=False) % {'sitename': self._cfg.sitename or "Wiki"}
-        mailok, msg = mail.sendmail(self._request, [self.email], subject,
+        mailok, msg = sendmail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
         return msg
 
