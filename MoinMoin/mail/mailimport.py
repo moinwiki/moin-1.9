@@ -1,5 +1,5 @@
 """
-    MoinMoin - E-Mail Import
+    MoinMoin - E-Mail Import into wiki
     
     Just call this script with the URL of the wiki as a single argument
     and feed the mail into stdin.

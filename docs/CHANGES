@@ -62,6 +62,8 @@ Version 1.6.current:
       moved security.py to security/__init__.py,
       moved wikiacl.py to security/__init__.py.
     * moved logfile/logfile.py to logfile/__init__.py
+    * moved mailimport.py to mail/mailimport.py,
+      moved util/mail.py to mail/sendmail.py
     * added wikiutil.MimeType class (works internally with sanitized mime
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:

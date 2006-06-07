@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import mailimport
+from MoinMoin.mail import mailimport
 
 def execute(xmlrpcobj, secret, mail):
     request = xmlrpcobj.request
