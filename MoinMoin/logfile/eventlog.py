@@ -5,7 +5,7 @@
 """
 
 import os.path, time
-from logfile import LogFile
+from MoinMoin.logfile import LogFile
 from MoinMoin import util, config, wikiutil
 from MoinMoin.util import web
 
