@@ -5,7 +5,7 @@
     If you want to use wikirpc function "putPage", read the comments in
     xmlrpc_putPage or it won't work!
     
-    Parts of this code are based on Jürgen Hermann's wikirpc.py,
+    Parts of this code are based on Jrgen Hermann's wikirpc.py,
     Les Orchard's "xmlrpc.cgi" and further work by Gustavo Niemeyer.
 
     See http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=WikiRPCInterface
@@ -27,12 +27,13 @@ from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
 
-import sys, time, xmlrpclib
+import os, sys, time, xmlrpclib
 
 from MoinMoin import config, user, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.logfile import editlog
+from MoinMoin.action import AttachFile
 
 _debug = 0
 
@@ -494,6 +495,72 @@ class XmlRpcBase:
     def xmlrpc_getMoinVersion(self):
         from MoinMoin import version
         return (version.project, version.release, version.revision)
+
+    def xmlrpc_listAttachments(self, pagename):
+        """ Get all attachments associated with pagename
+        
+        @param pagename: pagename (utf-8)
+        @rtype: list
+        @return: a list of utf-8 attachment names
+        """    
+        pagename = self._instr(pagename)
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+        
+        result = AttachFile._get_files(self.request, pagename)
+        return result
+        
+    def xmlrpc_getAttachment(self, pagename, attachname):
+        """ Get attachname associated with pagename
+        
+        @param pagename: pagename (utf-8)
+        @param attachname: attachment name (utf-8)
+        @rtype base64
+        @return base64 data
+        """
+        pagename = self._instr(pagename)
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+        
+        filename = wikiutil.taintfilename(filename)
+        filename = AttachFile.getFilename(self.request, pagename, attachname)
+        if not os.path.isfile(filename):
+            return self.noSuchPageFault()
+        return self._outlob(open(filename, 'rb').read())
+        
+    def xmlrpc_putAttachment(self, pagename, attachname, data):
+        """ Set attachname associated with pagename to data
+        
+        @param pagename: pagename (utf-8)
+        @param attachname: attachment name (utf-8)
+        @param data: file data (base64)
+        @rtype boolean
+        @return True if attachment was set
+        """
+        pagename = self._instr(pagename)
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+
+        if not self.request.cfg.xmlrpc_putpage_enabled:
+            return xmlrpclib.Boolean(0)
+        if self.request.cfg.xmlrpc_putpage_trusted_only and not self.request.user.trusted:
+            return xmlrpclib.Fault(1, "You are not allowed to edit this page")
+        # also check ACLs
+        if not self.request.user.may.write(pagename):
+            return xmlrpclib.Fault(1, "You are not allowed to edit this page")
+        
+        attachname = wikiutil.taintfilename(attachname)
+        filename = AttachFile.getFilename(self.request, pagename, attachname)
+        if os.path.exists(filename) and not os.path.isfile(filename):
+            return self.noSuchPageFault()
+        open(filename, 'wb+').write(data.data)
+        os.chmod(filename, 0666 & config.umask)
+        AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
+        return xmlrpclib.Boolean(1)
+
 
 class XmlRpc1(XmlRpcBase):
     
