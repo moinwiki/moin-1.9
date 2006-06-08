@@ -103,6 +103,7 @@ Version 1.6.current:
     * allow "-" in usernames (fixes "Invalid user name" msg)
     * fixed smiley caching bug (smileys didn't change theme)
     * fixed backtrace when user removed css_url entry from user_form_fields
+    * Fixed the output of macro and "attachment:" usages of the rst parser.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
