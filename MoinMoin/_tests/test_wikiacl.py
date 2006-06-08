@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - MoinMoin.wikiacl Tests
+    MoinMoin - MoinMoin.security Tests
 
     @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
@@ -8,9 +8,9 @@
 
 import unittest
 from MoinMoin._tests import TestConfig
-from MoinMoin import config, wikiacl, _tests
+from MoinMoin import config, security, _tests
 
-acliter = wikiacl.ACLStringIterator
+acliter = security.ACLStringIterator
 
 class ACLStringIteratorTestCase(unittest.TestCase):
     
@@ -22,51 +22,46 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         del self.config
         
     def testEmpty(self):
-        """ wikiacl: empty acl string raise StopIteration """
+        """ security: empty acl string raise StopIteration """
         iter = acliter(self.request.cfg.acl_rights_valid, '')
         self.failUnlessRaises(StopIteration, iter.next)
 
     def testWhiteSpace(self):
-        """ wikiacl: white space acl string raise StopIteration """
+        """ security: white space acl string raise StopIteration """
         iter = acliter(self.request.cfg.acl_rights_valid, '       ')
         self.failUnlessRaises(StopIteration, iter.next)
             
     def testDefault(self):
-        """ wikiacl: default meta acl """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'Default Default')
+        """ security: default meta acl """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'Default Default')
         for mod, entries, rights in iter:
             self.assertEqual(entries, ['Default'])
             self.assertEqual(rights, [])
                 
     def testEmptyRights(self):
-        """ wikiacl: empty rights """    
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'WikiName:')
+        """ security: empty rights """    
+        iter = acliter(self.request.cfg.acl_rights_valid, 'WikiName:')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['WikiName'])
         self.assertEqual(rights, [])
 
     def testSingleWikiNameSingleWrite(self):
-        """ wikiacl: single wiki name, single right """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'WikiName:read')
+        """ security: single wiki name, single right """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'WikiName:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['WikiName'])
         self.assertEqual(rights, ['read'])
 
     def testMultipleWikiNameAndRights(self):
-        """ wikiacl: multiple wiki names and rights """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne,UserTwo:read,write')
+        """ security: multiple wiki names and rights """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne,UserTwo:read,write')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne', 'UserTwo'])
         self.assertEqual(rights, ['read', 'write'])      
         
     def testMultipleEntries(self):
-        """ wikiacl: multiple entries """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne:read,write UserTwo:read All:')
+        """ security: multiple entries """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read,write UserTwo:read All:')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne'])
         self.assertEqual(rights, ['read', 'write'])      
@@ -78,25 +73,22 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, [])      
        
     def testNameWithSpaces(self):
-        """ wikiacl: single name with spaces """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'user one:read')
+        """ security: single name with spaces """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'user one:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['user one'])
         self.assertEqual(rights, ['read'])
 
     def testMultipleWikiNameAndRights(self):
-        """ wikiacl: multiple names with spaces """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'user one,user two:read')
+        """ security: multiple names with spaces """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'user one,user two:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['user one', 'user two'])
         self.assertEqual(rights, ['read'])      
         
     def testMultipleEntriesWithSpaces(self):
-        """ wikiacl: multiple entries with spaces """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'user one:read,write user two:read')
+        """ security: multiple entries with spaces """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'user one:read,write user two:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['user one'])
         self.assertEqual(rights, ['read', 'write'])      
@@ -105,9 +97,8 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, ['read'])      
          
     def testMixedNames(self):
-        """ wikiacl: mixed wiki names and names with spaces """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne,user two:read,write user three,UserFour:read')
+        """ security: mixed wiki names and names with spaces """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne,user two:read,write user three,UserFour:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne', 'user two'])
         self.assertEqual(rights, ['read', 'write'])      
@@ -116,9 +107,8 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, ['read'])      
 
     def testModifier(self):
-        """ wikiacl: acl modifiers """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       '+UserOne:read -UserTwo:')
+        """ security: acl modifiers """
+        iter = acliter(self.request.cfg.acl_rights_valid, '+UserOne:read -UserTwo:')
         mod, entries, rights = iter.next()
         self.assertEqual(mod, '+')
         self.assertEqual(entries, ['UserOne'])
@@ -129,26 +119,24 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, [])
         
     def testIgnoreInvalidACL(self):
-        """ wikiacl: ignore invalid acl
+        """ security: ignore invalid acl
 
         The last part of this acl can not be parsed. If it ends with :
         then it will be parsed as one name with spaces.
         """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne:read user two is ignored')
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read user two is ignored')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne'])
         self.assertEqual(rights, ['read'])
         self.failUnlessRaises(StopIteration, iter.next)
         
     def testEmptyNamesWithRight(self):
-        """ wikiacl: empty names with rights
+        """ security: empty names with rights
 
         The documents does not talk about this case, may() should ignore
         the rights because there is no entry.
         """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne:read :read All:')
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read :read All:')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne'])
         self.assertEqual(rights, ['read'])
@@ -160,28 +148,25 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(rights, [])
 
     def testIgnodeInvalidRights(self):
-        """ wikiacl: ignore rights not in acl_rights_valid """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne:read,sing,write,drink,sleep')
+        """ security: ignore rights not in acl_rights_valid """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read,sing,write,drink,sleep')
         mod, entries, rights = iter.next()
         self.assertEqual(rights, ['read', 'write'])        
 
     def testBadGuy(self):
-        """ wikiacl: bad guy may not allowed anything
+        """ security: bad guy may not allowed anything
 
         This test was failing on the apply acl rights test.
         """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne:read,write BadGuy: All:read')
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read,write BadGuy: All:read')
         mod, entries, rights = iter.next()
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['BadGuy'])
         self.assertEqual(rights, [])
 
     def testAllowExtraWhitespace(self):
-        """ wikiacl: allow extra white space between entries """
-        iter = acliter(self.request.cfg.acl_rights_valid,
-                       'UserOne,user two:read,write   user three,UserFour:read  All:')
+        """ security: allow extra white space between entries """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne,user two:read,write   user three,UserFour:read  All:')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['UserOne', 'user two'])
         self.assertEqual(rights, ['read', 'write'])      
@@ -194,14 +179,13 @@ class ACLStringIteratorTestCase(unittest.TestCase):
        
 
 class AclTestCase(unittest.TestCase):
-    """wikiacl: testing access control list
+    """ security: testing access control list
 
     TO DO: test unknown user?
     """
     def setUp(self):
         # Backup user
-        self.config = TestConfig(self.request,
-                                 defaults=['acl_rights_valid', 'acl_rights_before'])
+        self.config = TestConfig(self.request, defaults=['acl_rights_valid', 'acl_rights_before'])
         self.savedUser = self.request.user.name
         
     def tearDown(self):
@@ -210,7 +194,7 @@ class AclTestCase(unittest.TestCase):
         del self.config
         
     def testApplyACLByUser(self):
-        """wikiacl: applying acl by user name"""
+        """ security: applying acl by user name"""
         # This acl string...
         acl_rights = [
             "Admin1,Admin2:read,write,delete,revert,admin  "
@@ -221,7 +205,7 @@ class AclTestCase(unittest.TestCase):
             "BadGuy:  "
             "All:read  "
             ]
-        acl = wikiacl.AccessControlList(self.request, acl_rights)
+        acl = security.AccessControlList(self.request, acl_rights)
 
         # Should apply these rights:
         users = (

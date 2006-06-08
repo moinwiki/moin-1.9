@@ -16,7 +16,6 @@ from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.util import filesys
 import MoinMoin.util.web
-import MoinMoin.util.mail
 from MoinMoin.parser.text_moin_wiki import Parser
 
 from StringIO import StringIO

@@ -11,8 +11,7 @@
 
 import os
 
-from MoinMoin.script import _util
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 from MoinMoin.request import RequestCLI
 from MoinMoin.lupy import Index
 

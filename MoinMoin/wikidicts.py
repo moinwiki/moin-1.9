@@ -21,9 +21,8 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
  
-from MoinMoin import config, caching, wikiutil, Page
+from MoinMoin import config, caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
-from MoinMoin.logfile import logfile
 
 # Version of the internal data structure which is pickled
 # Please increment if you have changed the structure
@@ -318,7 +317,7 @@ class GroupDict(DictDict):
             self.__dict__.update(self.cfg.DICTS_DATA)
         except AttributeError:
             try:
-                cache = caching.CacheEntry(request, arena, key)
+                cache = caching.CacheEntry(request, arena, key, scope='wiki')
                 data = pickle.loads(cache.content())
                 self.__dict__.update(data)
                 
@@ -404,7 +403,7 @@ class GroupDict(DictDict):
             for name in self.groupdict:
                 self.dictdict[name].expandgroups(self)
 
-            cache = caching.CacheEntry(request, arena, key)
+            cache = caching.CacheEntry(request, arena, key, scope='wiki')
             cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
             
         # remember it (persistent environments)

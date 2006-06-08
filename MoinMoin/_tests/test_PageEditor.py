@@ -151,7 +151,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
     def deleteCaches(self):
         """ Force the wiki to scan the test page into the dicts """
         from MoinMoin import caching
-        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups').remove()
+        caching.CacheEntry(self.request, 'wikidicts', 'dicts_groups', scope='wiki').remove()
         if hasattr(self.request, 'dicts'):
             del self.request.dicts
         if hasattr(self.request.cfg, 'DICTS_DATA'):

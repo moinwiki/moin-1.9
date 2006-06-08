@@ -14,8 +14,7 @@
 import sys, os, time, StringIO, codecs, shutil, re, errno
 
 from MoinMoin import config, wikiutil, Page
-from MoinMoin.script import _util
-from MoinMoin.script._util import MoinScript
+from MoinMoin import script
 from MoinMoin.action import AttachFile
 
 url_prefix = "."
@@ -65,22 +64,22 @@ def _attachment(request, pagename, filename, outputdir):
             try:
                 os.makedirs(dest_dir)
             except:
-                _util.fatal("Cannot create attachment directory '%s'" % dest_dir)
+                script.fatal("Cannot create attachment directory '%s'" % dest_dir)
         elif not os.path.isdir(dest_dir):
-            _util.fatal("'%s' is not a directory" % dest_dir)
+            script.fatal("'%s' is not a directory" % dest_dir)
 
         shutil.copyfile(source_file, dest_file)
-        _util.log('Writing "%s"...' % dest_url)
+        script.log('Writing "%s"...' % dest_url)
         return dest_url
     else:
         return ""
   
 
-class PluginScript(MoinScript):
+class PluginScript(script.MoinScript):
     """ Dump script class """
     
     def __init__(self, argv=None, def_values=None):
-        MoinScript.__init__(self, argv, def_values)
+        script.MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
             "-t", "--target-dir", dest="target_dir",
             help="Write html dump to DIRECTORY"
@@ -93,17 +92,17 @@ class PluginScript(MoinScript):
         outputdir = os.path.abspath(self.options.target_dir)
         try:
             os.mkdir(outputdir)
-            _util.log("Created output directory '%s'!" % outputdir)
+            script.log("Created output directory '%s'!" % outputdir)
         except OSError, err:
             if err.errno != errno.EEXIST:
-                _util.fatal("Cannot create output directory '%s'!" % outputdir)
+                script.fatal("Cannot create output directory '%s'!" % outputdir)
 
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
         if config_dir and os.path.isfile(config_dir):
             config_dir = os.path.dirname(config_dir)
         if config_dir and not os.path.isdir(config_dir):
-            _util.fatal("bad path given to --config-dir option")
+            script.fatal("bad path given to --config-dir option")
         sys.path.insert(0, os.path.abspath(config_dir or os.curdir))
 
         self.init_request()
@@ -138,7 +137,7 @@ class PluginScript(MoinScript):
         for pagename in pages:
             # we have the same name in URL and FS
             file = wikiutil.quoteWikinameURL(pagename) 
-            _util.log('Writing "%s"...' % file)
+            script.log('Writing "%s"...' % file)
             try:
                 pagehtml = ''
                 page = Page.Page(request, pagename)

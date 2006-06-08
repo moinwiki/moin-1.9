@@ -6,16 +6,12 @@ caching.py
 config.py
 error.py
 search.py
-security.py
 user.py
 userform.py
 version.py
-wikiacl.py
-wikiform.py
 wikiutil.py
 wikidicts.py
 failure.py
-patchlevel.py
 PageEditor.py
 packages.py
 multiconfig.py
@@ -109,6 +105,11 @@ parser/text_python.py
 parser/text_rst.py
 parser/text_moin_wiki.py
 parser/text_xslt.py
+parser/ParserBase.py
+
+security/__init__.py
+security/antispam.py
+security/autoadmin.py
 
 server/__init__.py
 server/daemon.py
@@ -133,10 +134,7 @@ theme/classic.py
 theme/modern.py
 theme/rightsidebar.py
 
-util/ParserBase.py
 util/__init__.py
-util/antispam.py
-util/autoadmin.py
 util/chartypes.py
 util/dataset.py
 util/diff.py
@@ -144,17 +142,12 @@ util/diff3.py
 util/filesys.py
 util/lock.py
 util/mail.py
-util/parameterparser.py
 util/profile.py
 util/pysupport.py
 util/web.py
-util/wikiext.py
 util/timefuncs.py
 util/sessionParser.py
 util/chartypes_create.py
-
-webapi/__init__.py
-webapi/color.py
 
 widget/__init__.py
 widget/base.py

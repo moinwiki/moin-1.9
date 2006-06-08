@@ -66,7 +66,7 @@ magicpages = [
 
 import os
 
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 from MoinMoin import user, wikiutil
 
 class PluginScript(MoinScript):

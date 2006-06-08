@@ -33,7 +33,6 @@ names = ["TitleSearch", "WordIndex", "TitleIndex",
          "Icon", "PageList", "Date", "DateTime", "Anchor", "MailTo", "GetVal",
          "TemplateList",
 ]
-names.extend(i18n.languages.keys())
 
 #############################################################################
 ### Helpers
@@ -44,16 +43,10 @@ def getNames(cfg):
         return cfg.macro_names
     else:
         lnames = names[:]
+        lnames.extend(i18n.wikiLanguages().keys())
         lnames.extend(wikiutil.getPlugins('macro', cfg))
+        cfg.macro_names = lnames # remember it
         return lnames
-
-def _make_index_key(index_letters, additional_html=""):
-    index_letters.sort()
-    links = map(lambda ch:
-                    '<a href="#%s">%s</a>' %
-                    (wikiutil.quoteWikinameURL(ch), ch.replace('~', 'Others')),
-                index_letters)
-    return "<p>%s%s</p>" % (' | '.join(links), additional_html)
 
 
 #############################################################################
@@ -92,7 +85,7 @@ class Macro:
 
     # we need the lang macros to execute when html is generated,
     # to have correct dir and lang html attributes
-    for lang in i18n.languages.keys():
+    for lang in i18n.wikiLanguages().keys():
         Dependencies[lang] = []
     
 
@@ -121,7 +114,7 @@ class Macro:
                 builtins = self.__class__
                 execute = getattr(builtins, '_macro_' + macro_name)
             except AttributeError:
-                if macro_name in i18n.languages:
+                if macro_name in i18n.wikiLanguages():
                     execute = builtins._m_lang
                 else:
                     raise ImportError("Cannot load macro %s" % macro_name)
@@ -222,7 +215,21 @@ class Macro:
         html = u'\n'.join(html)
         return self.formatter.rawHTML(html)
 
-    def _macro_WordIndex(self, args):
+    def _make_index(self, args, word_re=u'.+'):
+        """ make an index page (used for TitleIndex and WordIndex macro)
+
+            word_re is a regex used for splitting a pagename into fragments
+            matched by it (used for WordIndex). For TitleIndex, we just match
+            the whole page name, so we only get one fragment that is the same
+            as the pagename.
+
+            TODO: later this can get a macro on its own, more powerful and less
+                  special than WordIndex and TitleIndex.
+                  It should be able to filter for specific mimetypes, maybe match
+                  pagenames by regex (replace PageList?), etc.
+
+                  it should use the formatter asap
+        """
         _ = self._
         allpages = int(self.form.get('allpages', [0])[0]) != 0
         # Get page list readable by current user
@@ -234,8 +241,9 @@ class Macro:
             def filter(name):
                 return not wikiutil.isSystemPage(self.request, name)
             pages = self.request.rootpage.getPageList(filter=filter)
+        
+        word_re = re.compile(word_re, re.UNICODE)
         map = {}
-        word_re = re.compile(u'[%s][%s]+' % (config.chars_upper, config.chars_lower), re.UNICODE)
         for name in pages:
             for word in word_re.findall(name):
                 try:
@@ -244,8 +252,12 @@ class Macro:
                 except KeyError:
                     map[word] = [name]
 
+        # Sort ignoring case
         all_words = map.keys()
-        all_words.sort()
+        tmp = [(word.upper(), word) for word in all_words]
+        tmp.sort()
+        all_words = [item[1] for item in tmp]
+
         index_letters = []
         current_letter = None
         html = []
@@ -253,88 +265,74 @@ class Macro:
             letter = wikiutil.getUnicodeIndexGroup(word)
             if letter != current_letter:
                 #html.append(self.formatter.anchordef()) # XXX no text param available!
-                html.append(u'<a name="%s"><h3>%s</h3></a>' % (
+                html.append(u'<a name="%s"><h2>%s</h2></a>' % (
                     wikiutil.quoteWikinameURL(letter), letter.replace('~', 'Others')))
                 current_letter = letter
             if letter not in index_letters:
                 index_letters.append(letter)
-
-            html.append(self.formatter.strong(1))
-            html.append(word)
-            html.append(self.formatter.strong(0))
-            html.append(self.formatter.bullet_list(1))
             links = map[word]
+            if len(links) and links[0] != word: # show word fragment as on WordIndex
+                html.append(self.formatter.strong(1))
+                html.append(word)
+                html.append(self.formatter.strong(0))
+            
+            html.append(self.formatter.bullet_list(1))
             links.sort()
             last_page = None
             for name in links:
                 if name == last_page:
                     continue
                 html.append(self.formatter.listitem(1))
-                html.append(Page(self.request, name).link_to(self.request))
+                html.append(Page(self.request, name).link_to(self.request, attachment_indicator=1))
                 html.append(self.formatter.listitem(0))
             html.append(self.formatter.bullet_list(0))
         
+        def _make_index_key(index_letters, additional_html=''):
+            index_letters.sort()
+            def letter_link(ch):
+                return '<a href="#%s">%s</a>' % (wikiutil.quoteWikinameURL(ch), ch.replace('~', 'Others'))
+            links = [letter_link(letter) for letter in index_letters]
+            return "<p>%s%s</p>" % (' | '.join(links), additional_html)
+
         qpagename = wikiutil.quoteWikinameURL(self.formatter.page.page_name)
+        allpages_txt = (_('Include system pages'), _('Exclude system pages'))[allpages]
         index = _make_index_key(index_letters, u"""<br>
 <a href="%s?allpages=%d">%s</a>
-""" % (qpagename, not allpages, (_('Include system pages'), _('Exclude system pages'))[allpages]) )
+""" % (qpagename, not allpages, allpages_txt) )
+        # ?action=titleindex and ?action=titleindex&mimetype=text/xml removed
+
         return u'%s%s' % (index, u''.join(html)) 
 
 
     def _macro_TitleIndex(self, args):
+        return self._make_index(args)
+
+    def _macro_WordIndex(self, args):
+        word_re = u'[%s][%s]+' % (config.chars_upper, config.chars_lower)
+        return self._make_index(args, word_re=word_re)
+
+
+    def _macro_PageList(self, needle):
+        from MoinMoin import search
         _ = self._
-        html = []
-        index_letters = []
-        allpages = int(self.form.get('allpages', [0])[0]) != 0
-        # Get page list readable by current user
-        # Filter by isSystemPage if needed
-        if allpages:
-            # TODO: make this fast by caching full page list
-            pages = self.request.rootpage.getPageList()
-        else:
-            def filter(name):
-                return not wikiutil.isSystemPage(self.request, name)
-            pages = self.request.rootpage.getPageList(filter=filter)
+        literal = 0
+        case = 0
 
-        # Sort ignoring case
-        tmp = [(name.upper(), name) for name in pages]
-        tmp.sort()
-        pages = [item[1] for item in tmp]
-                
-        current_letter = None
-        for name in pages:
-            letter = wikiutil.getUnicodeIndexGroup(name)
-            if letter not in index_letters:
-                index_letters.append(letter)
-            if letter != current_letter:
-                html.append(u'<a name="%s"><h3>%s</h3></a>' % (
-                    wikiutil.quoteWikinameURL(letter), letter.replace('~', 'Others')))
-                current_letter = letter
-            else:
-                html.append(u'<br>')
-            html.append(u'%s\n' % Page(self.request, name).link_to(self.request, attachment_indicator=1))
+        # If called with empty or no argument, default to regex search for .+, the full page list.
+        if not needle:
+            needle = 'regex:.+'
 
-        # add rss link
-        index = ''
-        if 0: # if wikixml.ok: # XXX currently switched off (not implemented)
-            from MoinMoin import wikixml
-            index = (index + self.formatter.url(1, 
-                wikiutil.quoteWikinameURL(self.formatter.page.page_name) + "?action=rss_ti", do_escape=0) +
-                     self.formatter.icon("rss") +
-                     self.formatter.url(0))
-
-        qpagename = wikiutil.quoteWikinameURL(self.formatter.page.page_name)
-        index = index + _make_index_key(index_letters, u"""<br>
-<a href="%s?allpages=%d">%s</a>&nbsp;|
-<a href="%s?action=titleindex">%s</a>&nbsp;|
-<a href="%s?action=titleindex&amp;mimetype=text/xml">%s</a>
-""" % (qpagename, not allpages, (_('Include system pages'), _('Exclude system pages'))[allpages],
-       qpagename, _('Plain title index'),
-       qpagename, _('XML title index')) )
-
-        return u'%s%s' % (index, u''.join(html)) 
-
-
+        # With whitespace argument, return same error message as FullSearch
+        elif needle.isspace():
+            err = _('Please use a more selective search term instead of {{{"%s"}}}') %  needle
+            return '<span class="error">%s</span>' % err
+            
+        # Return a title search for needle, sorted by name.
+        query = search.QueryParser(literal=literal, titlesearch=1, case=case).parse_query(needle)
+        results = search.searchPages(self.request, query)
+        results.sortByPagename()
+        return results.pageList(self.request, self.formatter)
+        
     def _macro_InterWiki(self, args):
         from StringIO import StringIO
 
@@ -380,30 +378,6 @@ class Macro:
         icon = args.lower()
         return self.formatter.icon(icon)
 
-    def _macro_PageList(self, needle):
-        from MoinMoin import search
-        _ = self._
-        literal=0
-        case=0
-
-        # If called with empty or no argument, default to regex search for .+,
-        # the full page list.
-        if not needle:
-            needle = 'regex:.+'
-
-        # With whitespace argument, return same error message as FullSearch
-        elif needle.isspace():
-            err = _('Please use a more selective search term instead of '
-                    '{{{"%s"}}}') %  needle
-            return '<span class="error">%s</span>' % err
-            
-        # Return a title search for needle, sorted by name.
-        query = search.QueryParser(literal=literal, titlesearch=1,
-                                   case=case).parse_query(needle)
-        results = search.searchPages(self.request, query)
-        results.sortByPagename()
-        return results.pageList(self.request, self.formatter)
-        
     def _macro_TemplateList(self, args):
         _ = self._
         try:
@@ -490,7 +464,7 @@ class Macro:
         return self.formatter.anchordef(args or "anchor")
 
     def _macro_MailTo(self, args):
-        from MoinMoin.util.mail import decodeSpamSafeEmail
+        from MoinMoin.mail.sendmail import decodeSpamSafeEmail
 
         args = args or ''
         if args.find(',') == -1:

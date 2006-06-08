@@ -1182,9 +1182,9 @@ class convert_tree(visitor):
         # Smiley
         elif src and (self.request.cfg.url_prefix in src or '../' in src) and "img/" in src: # XXX this is dirty!
             filename = src.split("/")[-1]
-            for name, data in config.smileys.iteritems():
-                if data[3] == filename:
-                    self.text.extend([self.white_space, name, self.white_space])
+            for markup, data in self.request.theme.icons.iteritems():
+                if data[1] == filename:
+                    self.text.extend([self.white_space, markup, self.white_space])
                     return
                 else:
                     pass #print name, data, filename, alt
@@ -1193,7 +1193,7 @@ class convert_tree(visitor):
         elif src and src.startswith("http") and wikiutil.isPicture(src): # matches http: and https: !
             self.text.extend([self.white_space, src, self.white_space])
         else:
-            raise ConvertError("Strange image src: '%s'" % src)
+            raise ConvertError("Strange image src: '%s' alt == '%r'" % (src, alt))
 
 
 def parse(request, text):

@@ -13,9 +13,9 @@
 
 _debug = 0
 
-from MoinMoin import wikiutil, caching 
+from MoinMoin import wikiutil, caching, logfile 
 from MoinMoin.Page import Page
-from MoinMoin.logfile import eventlog, logfile
+from MoinMoin.logfile import eventlog
 
 
 def linkto(pagename, request, params=''):
@@ -46,7 +46,7 @@ def linkto(pagename, request, params=''):
 
 def get_data(request):
     # get results from cache
-    cache = caching.CacheEntry(request, 'charts', 'useragents')
+    cache = caching.CacheEntry(request, 'charts', 'useragents', scope='wiki')
     cache_date, data = 0, {}
     if cache.exists():
         try:

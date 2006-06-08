@@ -955,10 +955,24 @@ class Page:
 
     def send_raw(self):
         """ Output the raw page data (action=raw) """
-        self.request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
-        text = self.get_raw_body()
-        text = self.encodeTextMimeType(text)
-        self.request.write(text)
+        request = self.request
+        request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
+        if self.exists():
+            if not request.cacheable:
+                request.http_headers(request.nocache)
+            else:
+                # use the correct last-modified value from the on-disk file
+                # to ensure cacheability where supported
+                request.http_headers(["Last-Modified: " +
+                     timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
+
+            text = self.get_raw_body()
+            text = self.encodeTextMimeType(text)
+            request.write(text)
+        else:
+            request.http_headers(['Status: 404 NOTFOUND'])
+            request.setResponseCode(404)
+            request.write(u"Page %s not found." % self.page_name)
 
 
     def send_page(self, request, msg=None, **keywords):
@@ -1278,7 +1292,7 @@ class Page:
 
         # cache the pagelinks
         if do_cache and self.default_formatter and page_exists:
-            cache = caching.CacheEntry(request, self, 'pagelinks')
+            cache = caching.CacheEntry(request, self, 'pagelinks', scope='item')
             if cache.needsUpdate(self._text_filename()):
                 links = self.formatter.pagelinks
                 cache.update('\n'.join(links) + '\n', True)
@@ -1374,7 +1388,7 @@ class Page:
 
     def loadCache(self, request):
         """ Return page content cache or raises 'CacheNeedsUpdate' """
-        cache = caching.CacheEntry(request, self, self.getFormatterName())
+        cache = caching.CacheEntry(request, self, self.getFormatterName(), scope='item')
         attachmentsPath = self.getPagePath('attachments', check_create=0)
         if cache.needsUpdate(self._text_filename(), attachmentsPath):
             raise 'CacheNeedsUpdate'
@@ -1407,7 +1421,7 @@ class Page:
         src = formatter.assemble_code(text)
         code = compile(src.encode(config.charset),
                        self.page_name.encode(config.charset), 'exec')
-        cache = caching.CacheEntry(request, self, self.getFormatterName())
+        cache = caching.CacheEntry(request, self, self.getFormatterName(), scope='item')
         cache.update(marshal.dumps(code))
         self.cache_mtime = cache.mtime()
         return code
@@ -1521,7 +1535,7 @@ class Page:
         """
         if not self.exists():
             return []
-        cache = caching.CacheEntry(request, self, 'pagelinks')
+        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item')
         if cache.needsUpdate(self._text_filename()):
             links = self.parsePageLinks(request)
             cache.update('\n'.join(links) + '\n', True)
@@ -1589,10 +1603,9 @@ class Page:
         Return cached ACL or invoke parseACL and update the cache.
 
         @param request: the request object
-        @rtype: MoinMoin.wikiacl.AccessControlList
+        @rtype: MoinMoin.security.AccessControlList
         @return: ACL of this page
         """
-        import wikiacl
         request.clock.start('getACL')
         # Try the cache or parse acl and update the cache
         currentRevision = self.current_rev()
@@ -1614,16 +1627,16 @@ class Page:
         The effective ACL is always from the last revision, even if
         you access an older revision.
         """
-        import wikiacl
+        from MoinMoin import security
         if self.exists() and self.rev == 0:
-            return wikiacl.parseACL(self.request, self.get_raw_body())
+            return security.parseACL(self.request, self.get_raw_body())
         try:
             lastRevision = self.getRevList()[0]
         except IndexError:
-            return wikiacl.AccessControlList(self.request)
+            return security.AccessControlList(self.request)
         body = Page(self.request, self.page_name,
                     rev=lastRevision).get_raw_body()
-        return wikiacl.parseACL(self.request, body)
+        return security.parseACL(self.request, body)
 
     def clean_acl_cache(self):
         """
