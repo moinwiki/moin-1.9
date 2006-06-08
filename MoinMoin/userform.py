@@ -8,7 +8,7 @@
 
 import string, time, re
 from MoinMoin import user, util, wikiutil
-from MoinMoin.util import web, mail, timefuncs
+from MoinMoin.util import web, timefuncs
 from MoinMoin.widget import html
 
 _debug = 0
