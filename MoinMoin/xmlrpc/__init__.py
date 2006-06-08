@@ -398,6 +398,12 @@ class XmlRpcBase:
                  self._outstr(results.formatContext(hit, 180, 1)))
                 for hit in results.hits]
 
+    # XXX BEGIN WARNING XXX
+    # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
+    # they are neither standard nor are they what we need when we have switched
+    # attachments (1.5 style) to mimetype items (hopefully in 1.6).
+    # They are likely to get removed again when we remove AttachFile module.
+    # So use them on your own risk.
     def xmlrpc_listAttachments(self, pagename):
         """ Get all attachments associated with pagename
         
@@ -462,6 +468,8 @@ class XmlRpcBase:
         os.chmod(filename, 0666 & config.umask)
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
+    
+    # XXX END WARNING XXX
 
     def process(self):
         """ xmlrpc v1 and v2 dispatcher """
