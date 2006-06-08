@@ -412,7 +412,7 @@ class XmlRpcBase:
         
         result = AttachFile._get_files(self.request, pagename)
         return result
-        
+
     def xmlrpc_getAttachment(self, pagename, attachname):
         """ Get attachname associated with pagename
         
@@ -425,13 +425,13 @@ class XmlRpcBase:
         # User may read page?
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
-        
-        filename = wikiutil.taintfilename(filename)
-        filename = AttachFile.getFilename(self.request, pagename, attachname)
+
+        filename = wikiutil.taintfilename(self._instr(attachname))
+        filename = AttachFile.getFilename(self.request, pagename, filename)
         if not os.path.isfile(filename):
             return self.noSuchPageFault()
         return self._outlob(open(filename, 'rb').read())
-        
+
     def xmlrpc_putAttachment(self, pagename, attachname, data):
         """ Set attachname associated with pagename to data
         
