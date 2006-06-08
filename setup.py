@@ -235,6 +235,15 @@ only requiring a Python installation.
         'MoinMoin._tests',
     ],
 
+    # TODO package_dir and package_data only works for python >= 2.4
+    # in case we don't require python >= 2.4 for 1.6 release, we need to find
+    # a solution for python 2.3.x
+    'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
+    'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
+                                        '*.po',
+                                        'mo/*',
+                                        'tools/*',], },
+
     # Override certain command classes with our own ones
     'cmdclass': {
         'build_scripts': build_scripts_moin,
