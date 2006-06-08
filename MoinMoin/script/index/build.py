@@ -9,8 +9,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.script import _util
-from MoinMoin.script._util import MoinScript
+from MoinMoin.script import MoinScript
 from MoinMoin.Xapian import Index
 
 class IndexScript(MoinScript):
