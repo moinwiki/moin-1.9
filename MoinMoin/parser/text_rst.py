@@ -306,13 +306,16 @@ class MoinTranslator(html4css1.HTMLTranslator):
         return html4css1.HTMLTranslator.astext(self)
 
     def fixup_wiki_formatting(self, text):
-        replacement = {'<p>': '', '</p>': '', '\n': '', '> ': '>'}
+        replacement = {'\n': '', '> ': '>'}
         for src, dst in replacement.items():
             text = text.replace(src, dst)
-        # Everything seems to have a space ending the text block. We want to
-        # get rid of this
-        if text and text[-1] == ' ':
-            text = text[:-1]
+        # Fixup extraneous markup
+        # Removes any empty span tags
+        text = re.sub(r'\s*<\s*span.*?>\s*<\s*/\s*span\s*>', '', text)
+        # Removes the first paragraph tag
+        text = re.sub(r'^\s*<\s*p[^>]*?>', '', text)
+        # Removes the ending paragraph close tag and any remaining whitespace
+        text = re.sub(r'<\s*/\s*p\s*>\s*$', '', text)
         return text
 
     def visit_reference(self, node):
@@ -339,8 +342,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     (prefix == 'drawing') or
                     (prefix == 'inline')):
                 self.process_wiki_text(refuri)
-                # Don't call fixup_wiki_formatting because who knows what
-                # MoinMoin is inserting. (exits through add_wiki_markup)
+                self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                 self.add_wiki_markup()
 
             # From here down, all links are handled by docutils (except 
@@ -352,6 +354,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     # Attachment doesn't exist, give to MoinMoin to insert
                     # upload text.
                     self.process_wiki_text(refuri)
+                    self.wiki_text = self.fixup_wiki_formatting(self.wiki_text)
                     self.add_wiki_markup()
                 # Attachment exists, just get a link to it.
                 node['refuri'] = AttachFile.getAttachUrl(self.request.page.page_name, 
