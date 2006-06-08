@@ -74,7 +74,7 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         self.request.user = self.saved_user
                 
         # Remove user name to id cache, or next test will fail
-        caching.CacheEntry(self.request, 'user', 'name2id').remove()
+        caching.CacheEntry(self.request, 'user', 'name2id', scope='wiki').remove()
         del self.request.cfg._name2id
         
         # Prevent user list caching - we create and delete users too

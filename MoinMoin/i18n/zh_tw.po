@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-05-04 16:44+0200\n"
-"PO-Revision-Date: 2006-04-16 12:21+0800\n"
+"PO-Revision-Date: 2006-05-05 00:22+0800\n"
 "Last-Translator: Rux Li <rux DOT li THREE AT gmail DOT com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -508,9 +508,8 @@ msgstr "GUI 模式"
 msgid "Edit was cancelled."
 msgstr "編輯已取消。"
 
-#, fuzzy
 msgid "You can't rename to an empty pagename."
-msgstr "你不能儲存空白頁。"
+msgstr "新的名稱不能是空的！"
 
 #, python-format
 msgid ""
@@ -1168,23 +1167,23 @@ msgid "You can't check spelling on a page you can't read."
 msgstr "不能檢查無權瀏覽的頁面。"
 
 msgid "Do it."
-msgstr ""
+msgstr "執行"
 
 #, python-format
 msgid "Execute action %(actionname)s?"
-msgstr ""
+msgstr "要執行「%(actionname)s」操作嗎？"
 
 #, python-format
 msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr ""
+msgstr "本 Wiki 站不使用「%(actionname)s」操作！"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "你無權在本頁儲存圖片。"
+msgstr "你無權在本頁進行「%(actionname)s」操作。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr "請使用互動式介面刪除頁面！"
+msgstr "請使用互動式介面進行「%(actionname)s」操作！"
 
 #, python-format
 msgid "Title Search: \"%s\""

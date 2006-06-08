@@ -42,13 +42,13 @@ class Parser:
         _ = self._
 
         if not self.request.cfg.allow_xslt:
-            # use plain parser if XSLT is not allowed
+            # use plain text parser if XSLT is not allowed
             # can be activated in wikiconfig.py
-            from MoinMoin.parser import plain
+            from MoinMoin.parser.text import Parser as TextParser
             self.request.write(formatter.sysmsg(1) +
                                formatter.rawHTML(_('XSLT option disabled, please look at HelpOnConfiguration.')) +
                                formatter.sysmsg(0))
-            plain.Parser(self.raw, self.request).format(formatter)
+            TextParser(self.raw, self.request).format(formatter)
             return
 
         try:
@@ -115,7 +115,7 @@ class Parser:
                 self.request.write(text.decode(config.charset))
             else:
                 self.request.write(result)
-                cache = caching.CacheEntry(self.request, formatter.page, self.key)
+                cache = caching.CacheEntry(self.request, formatter.page, self.key, scope='item')
                 cache.update(result)
 
     def _resolve_page(self, uri, base):

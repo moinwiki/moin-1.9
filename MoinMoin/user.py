@@ -16,7 +16,7 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import config, caching, wikiutil
+from MoinMoin import config, caching, wikiutil, i18n
 from MoinMoin.util import filesys, timefuncs
 
 
@@ -33,6 +33,13 @@ def getUserList(request):
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
+def get_by_email_address(request, email_address):
+    """ Searches for a user with a particular e-mail address and
+        returns it."""
+    for uid in getUserList(request):
+        theuser = User(request, uid)
+        if theuser.valid and theuser.email.lower() == email_address.lower():
+            return theuser
 
 def getUserId(request, searchName):
     """
@@ -50,7 +57,7 @@ def getUserId(request, searchName):
     except AttributeError:
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key)
+        cache = caching.CacheEntry(request, arena, key, scope='wiki')
         try:
             _name2id = pickle.loads(cache.content())
         except (pickle.UnpicklingError, IOError, EOFError, ValueError):
@@ -64,7 +71,7 @@ def getUserId(request, searchName):
         cfg._name2id = _name2id
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key)
+        cache = caching.CacheEntry(request, arena, key, scope='wiki')
         cache.update(pickle.dumps(_name2id, PICKLE_PROTOCOL))
         id = _name2id.get(searchName, None)
     return id
@@ -130,8 +137,8 @@ def normalizeName(name):
     @return: user name that can be used in acl lines
     """
     name = name.replace('_', ' ') # we treat _ as a blank
-    username_allowedchars = "'@." # ' for names like O'Brian or email addresses.
-                                  # "," and ":" must not be allowed (ACL delimiters).
+    username_allowedchars = "'@.-" # ' for names like O'Brian or email addresses.
+                                   # "," and ":" must not be allowed (ACL delimiters).
     # Strip non alpha numeric characters (except username_allowedchars), keep white space
     name = ''.join([c for c in name if c.isalnum() or c.isspace() or c in username_allowedchars])
 
@@ -216,11 +223,8 @@ class User:
         self.auth_attribs = kw.get('auth_attribs', ())
                                        
         # create some vars automatically
-        for tuple in self._cfg.user_form_fields:
-            key = tuple[0]
-            default = self._cfg.user_form_defaults.get(key, '')
-            setattr(self, key, default)
-       
+        self.__dict__.update(self._cfg.user_form_defaults)
+
         if name:
             self.name = name
         elif auth_username: # this is needed for user_autocreate
@@ -282,8 +286,7 @@ class User:
             from security import Default
             self.may = Default(self)
         
-        from MoinMoin.i18n.meta import languages
-        if self.language and not languages.has_key(self.language):
+        if self.language and not self.language in i18n.wikiLanguages():
             self.language = 'en'
 
     def __repr__(self):
@@ -937,7 +940,7 @@ class User:
         return markup
 
     def mailAccountData(self, cleartext_passwd=None):
-        from MoinMoin.util import mail
+        from MoinMoin.mail import sendmail
         from MoinMoin.wikiutil import getSysPage
         _ = self._request.getText
 
@@ -977,7 +980,7 @@ After successfully logging in, it is of course a good idea to set a new and know
 
         subject = _('[%(sitename)s] Your wiki account data',
                     formatted=False) % {'sitename': self._cfg.sitename or "Wiki"}
-        mailok, msg = mail.sendmail(self._request, [self.email], subject,
+        mailok, msg = sendmail.sendmail(self._request, [self.email], subject,
                                     text, mail_from=self._cfg.mail_from)
         return msg
 

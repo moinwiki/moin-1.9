@@ -24,12 +24,12 @@ class Marshal:
         Default is to omit all properties starting with an underscore.
 
         TAG_MAP is a translation table for tag names, and is empty by
-        default. It can also be used to surpress certain properties by
+        default. It can also be used to suppress certain properties by
         mapping a tag name to `None`.
     """
 
-    # Convenience: Standard-XML-Deklaration
-    XML_DECL = '<?xml version="1.0" encoding="ISO-8859-1"?>\n'
+    # Convenience: Standard XML declaration
+    XML_DECL = '<?xml version="1.0" encoding="utf-8"?>\n'
 
     # Container Tags
     ROOT_CONTAINER = "data"
@@ -65,18 +65,15 @@ class Marshal:
             content = "<none/>"
 
         elif isinstance(data, types.StringType):
-            # String
             content = (data.replace("&", "&amp;") # Must be done first!
                            .replace("<", "&lt;")
                            .replace(">", "&gt;"))
 
         elif isinstance(data, types.DictionaryType):
-            # Dictionary
             for key, value in data.items():
                 add_content(self.__toXML(key, value))
 
         elif isinstance(data, types.ListType) or isinstance(data, types.TupleType):
-            # List or Tuple
             for item in data:
                 add_content(self.__toXML(self.ITEM_CONTAINER, item))
 
@@ -87,7 +84,6 @@ class Marshal:
             add_content(self.__toXML(self.ROOT_CONTAINER, data.__dict__))
 
         else:
-            # Everything else
             content = (str(data).replace("&", "&amp;") # Must be done first!
                                 .replace("<", "&lt;")
                                 .replace(">", "&gt;"))

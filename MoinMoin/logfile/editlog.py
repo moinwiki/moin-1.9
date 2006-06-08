@@ -5,7 +5,7 @@
 """
 
 import os.path
-from logfile import LogFile
+from MoinMoin.logfile import LogFile
 from MoinMoin import wikiutil, user, config
 from MoinMoin.Page import Page
 

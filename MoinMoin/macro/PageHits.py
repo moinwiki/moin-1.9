@@ -15,9 +15,9 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import caching, config
+from MoinMoin import caching, config, logfile
 from MoinMoin.Page import Page
-from MoinMoin.logfile import eventlog, logfile
+from MoinMoin.logfile import eventlog
 
 
 class PageHits:
@@ -25,8 +25,7 @@ class PageHits:
     def __init__(self, macro, args):
         self.macro = macro
         self.request = macro.request
-        self.cache = cache = caching.CacheEntry(self.request, 'charts',
-                                                'pagehits')
+        self.cache = cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki')
 
     def execute(self):
         """ Execute the macro and return output """
