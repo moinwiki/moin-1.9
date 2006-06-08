@@ -5,7 +5,8 @@
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
                 2005 MoinMoin:AlexanderSchremmer,
-                2006 MoinMoin:ThomasWaldmann
+                2006 MoinMoin:ThomasWaldmann,
+                2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details
 """
 
@@ -639,6 +640,40 @@ class FoundRemote(FoundPage):
 ### Parse Query
 ##############################################################################
 
+from pyparsing import Word, alphas, nums, oneOf, Optional, Suppress, \
+        ZeroOrMore, Group, Forward
+
+def get_parser():
+    # TODO: regexs, utf-8
+    text = (Word(alphas + nums) |
+            Suppress('"') + Word(alphas + + nums ' ') + Suppress('"'))
+    text.setName('text')
+
+    # TODO: abbreviation to any length...
+    prefix = oneOf(('regex', 'title', 'case', 'linkto'), caseless=True) + \
+            Suppress(':')
+    prefix.setName('prefix')
+
+    prefixedText = Optional(prefix) + text
+    prefixedText.setName('prefixedText')
+
+    logOp = Optional(oneOf(('and', 'or'), caseless=True))
+    logOp.setParseAction(lambda x, y, z: not z and 'and' or z)
+    logOp.setName('logOp')
+
+    negation = oneOf(('not', '-'), caseless=True)
+    negation.setName('negation')
+
+    term = Forward()
+    bracketedTerm = Suppress('(') + term + Suppress(')')
+    term << (Optional(negation) + Group(prefixedText | bracketedTerm))
+    term.setName('term')
+
+    expression = term + ZeroOrMore(logOp + term)
+    expression.setName('expression')
+
+    return expression
+
 class QueryParser:
     """
     Converts a String into a tree of Query objects
@@ -660,10 +695,68 @@ class QueryParser:
         if isinstance(query, str):
             query = query.decode(config.charset)
         self._query = query
+        #parsed_query = get_parser().parseString(query)
+        #result = self._build_tree(parsed_query)
         result = self._or_expression()
         if result is None:
             result = BaseExpression()
         return result
+
+    def _build_tree(self, query, neg=False):
+        n = len(query)
+
+        if query.getName() == 'prefixedName':
+            if n == 1:      # single word
+                prefix = None
+                text = query[0]
+            elif n == 2:    # prefixed word
+                prefix, text = q
+            else:
+                raise Exception         # XXX
+
+            title_search = self.titlesearch
+            regex = self.regex
+            case = self.case
+            linkto = False
+
+            if prefix:
+                if prefix == 'title':
+                    title_search = True
+                elif prefix == 'regex':
+                    regex = True
+                elif prefix == 'case':
+                    case = True
+                elif prefix == 'linkto':
+                    linkto = True
+                else:
+                    raise Exception     # XXX
+
+            if linkto:
+                obj = LinkSearch(text, use_re=regex, case=case)
+            elif title_search:
+                obj = TitleSearch(text, use_re=regex, case=case)
+            else:
+                obj = TextSearch(text, use_re=regex, case=case)
+
+            if neg:
+                obj.negate()
+
+            return obj
+
+        result = None
+        for q in query:
+            name = q.getName()
+            if name == 'term':
+                conj = [AndExpression()]
+                for i in q:
+                    if i.getName() == 'logOp':
+                        if i == 'or':
+                            conj = [OrExpression(conj[-1]), AndExpression()]
+                    else:
+                        i = self._build_tree(i)
+
+        return x
+
   
     def _or_expression(self):
         result = self._and_expression()
