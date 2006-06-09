@@ -34,7 +34,12 @@
     must not get changed by the user using the UserPreferences form.
     It also gives a kw arg "auth_method" that tells the name of the auth
     method that authentified the user.
-    
+
+    TODO: do we need cfg.moin_session_cookie_name?
+          check against other cookie work (see wiki)  
+          kill unsecure MOIN_ID cookie?
+          reduce amount of XXX
+          
     @copyright: 2005-2006 Bastian Blank, Florian Festi, Thomas Waldmann
     @copyright: 2005-2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details.
@@ -85,13 +90,13 @@ def setCookie(request, u, cookie_name='MOIN_ID', cookie_string=None):
      > 0    n hours, or forever if user checked 'remember_me'
      < 0    -n hours, ignoring user 'remember_me' setting
     """
-    if cookie_string == None:
+    if cookie_string is None:
         # For moin_cookie
         cookie_string = u.id
     
     # Calculate cookie maxage and expires
     lifetime = int(request.cfg.cookie_lifetime) * 3600 
-    forever = 10*365*24*3600 # 10 years
+    forever = 10 * 365 * 24 * 3600 # 10 years
     now = time.time()
     if not lifetime:
         maxage = forever
@@ -113,8 +118,7 @@ def setCookie(request, u, cookie_name='MOIN_ID', cookie_string=None):
 def setSessionCookie(request, u):
     """ Set moin_session cookie for user obj u
     """
-    import base64
-    import hmac
+    import base64, hmac
     cfg = request.cfg
     cookie_name = 'MOIN_ID'
     if hasattr(cfg, 'moin_session_cookie_name'):
@@ -131,8 +135,8 @@ def deleteCookie(request, cookie_name='MOIN_ID'):
     """ Delete the user cookie by sending expired cookie with null value
 
     According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
-    Deleted cookie should have Max-Age=0. We also have expires
-    attribute, which is probably needed for older browsers.
+    Deleted cookie should have Max-Age=0. We also have expires attribute,
+    which is probably needed for older browsers.
 
     Finally, delete the saved cookie and create a new user based on the new settings.
     """
@@ -156,7 +160,7 @@ def moin_cookie(request, **kw):
 
     cfg = request.cfg
     verbose = False
-    if hasattr(cfg,'moin_cookie_verbose'):
+    if hasattr(cfg, 'moin_cookie_verbose'):
         verbose = cfg.moin_cookie_verbose
     
     #request.log("auth.moin_cookie: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
@@ -196,14 +200,12 @@ def moin_cookie(request, **kw):
 
 
 def moin_session(request, **kw):
+    """ Authenticate via cookie.
+    
+    We don't handle initial logins (except to set the appropriate cookie), just
+    ongoing sessions, and logout. Use another method for initial login.
     """
-    Authenticate via cookie.
-    We don't handle initial logins (except to set the appropriate
-    cookie), just ongoing sessions, and logout. Use another method
-    for initial login.
-    """
-    import hmac
-    import base64
+    import hmac, base64
     
     username = kw.get('name')
     login = kw.get('login')
@@ -212,9 +214,10 @@ def moin_session(request, **kw):
 
     cfg = request.cfg
     verbose = False
-    cookie_name = 'MOIN_ID'
-    if hasattr(cfg,'moin_session_verbose'):
+    if hasattr(cfg, 'moin_session_verbose'):
         verbose = cfg.moin_session_verbose
+
+    cookie_name = 'MOIN_ID'
     if hasattr(cfg, 'moin_session_cookie_name'):
         cookie_name = cfg.moin_session_cookie_name
     
@@ -224,7 +227,7 @@ def moin_session(request, **kw):
         if verbose: request.log("moin_session performing login action")
 
         # Has any other method successfully authenticated?
-        if user_obj != None and user_obj.valid:
+        if user_obj is not None and user_obj.valid:
             # Yes - set up session cookie
             if verbose: request.log("moin_session got valid user from previous auth method, setting cookie...")
             if verbose: request.log("moin_session got auth_username %s." % user_obj.auth_username)
@@ -244,13 +247,13 @@ def moin_session(request, **kw):
         if verbose: request.log("caught Cookie.CookieError")
         cookie = None
 
-    if not (cookie != None and cookie.has_key(cookie_name)):
+    if not (cookie is not None and cookie.has_key(cookie_name)):
         # No valid cookie
         if verbose: request.log("either no cookie or no %s key" % cookie_name)
         return user_obj, True
     
     try:
-        cookie_hmac, cookie_body = cookie[cookie_name].value.split(':',1)
+        cookie_hmac, cookie_body = cookie[cookie_name].value.split(':', 1)
     except ValueError:
         # Invalid cookie
         if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
@@ -261,20 +264,20 @@ def moin_session(request, **kw):
         # XXX Cookie clear here???
         if verbose: request.log("cookie recovered had invalid hmac")
         return user_obj, True
-        
-    # We can trust cookie
+
+    # We can trust the cookie
     if verbose: request.log("Cookie OK, authenticated.")
     params = { 'username': '', 'id': '' }
     cookie_pairs = cookie_body.split(":")
-    for key, value in [pair.split("=",1) for pair in cookie_pairs]:
-        params[key] = value
+    for key, value in [pair.split("=", 1) for pair in cookie_pairs]:
+        params[key] = base64.decodestring(value) # assuming all values are base64 encoded
     # XXX Should check expiry from cookie
     # XXX Should name be in auth_attribs?
     u = user.User(request,
-                  id=base64.decodestring(params['id']),
-                  auth_username=base64.decodestring(params['username']),
+                  id=params['id'],
+                  auth_username=params['username'],
                   auth_method='moin_session',
-                  auth_attribs=()
+                  auth_attribs=(),
                   )
         
     if logout:
@@ -646,8 +649,8 @@ class php_session:
         return user_obj, True # continue with next method in auth list
 
 def mysql_group(request, **kw):
-    """
-    Authorize via MySQL group DB.
+    """ Authorize via MySQL group DB.
+    
     We require an already-authenticated user_obj.
     We don't worry about the type of request (login, logout, neither).
     We just check user is part of authorized group.
@@ -662,25 +665,25 @@ def mysql_group(request, **kw):
     cfg = request.cfg
     verbose = False
 
-    if hasattr(cfg,'mysql_group_verbose'):
+    if hasattr(cfg, 'mysql_group_verbose'):
         verbose = cfg.mysql_group_verbose
     
     if verbose: request.log("auth.mysql_group: name=%s user_obj=%r" % (username, user_obj))
 
     # Has any other method successfully authenticated?
-    if user_obj != None and user_obj.valid:
+    if user_obj is not None and user_obj.valid:
         # Yes - we can do stuff!
         if verbose: request.log("mysql_group got valid user from previous auth method, trying authz...")
         if verbose: request.log("mysql_group got auth_username %s." % user_obj.auth_username)
 
-        # Check auth_username for dodgy chars (should be none as it is authenticated, but...)
+        # XXX Check auth_username for dodgy chars (should be none as it is authenticated, but...)
 
         # OK, now check mysql!
         try:
             m = MySQLdb.connect(host=cfg.mysql_group_dbhost,
                                 user=cfg.mysql_group_dbuser,
                                 passwd=cfg.mysql_group_dbpass,
-                                db=cfg.mysql_group_dbname
+                                db=cfg.mysql_group_dbname,
                                 )
         except:
             import sys
@@ -693,7 +696,7 @@ def mysql_group(request, **kw):
         c = m.cursor()
         c.execute(cfg.mysql_group_query, user_obj.auth_username)
         results = c.fetchall()
-        if len(results) > 0:
+        if results:
             # Checked out OK
             if verbose: request.log("mysql_group got %d results -- authorized!" % len(results))
             return user_obj, True # we make continuing possible, e.g. for smbmount
