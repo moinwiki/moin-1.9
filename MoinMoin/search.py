@@ -147,7 +147,7 @@ class AndExpression(BaseExpression):
     def sortByCost(self):
         tmp = [(term.costs(), term) for term in self._subterms]
         tmp.sort()
-        self._subterms = [item[1] for item in tmp]       
+        self._subterms = [item[1] for item in tmp]
 
     def search(self, page):
         """ Search for each term, cheap searches first """
@@ -175,8 +175,33 @@ class AndExpression(BaseExpression):
         return wanted
 
     def xapian_term(self):
-        #return xapian.Query(xapian.Query.OP_AND, [term.xapian_term() for term in self._subterms])
-        return "(%s)" % " AND ".join([term.xapian_term() for term in self._subterms])
+        # sort negated terms
+        terms = []
+        not_terms = []
+        for term in self._subterms:
+            if not term.negated:
+                terms.append(term.xapian_term())
+            else:
+                not_terms.append(term.xapian_term())
+
+        # prepare query for not negated terms
+        if len(terms) == 1:
+            t1 = xapian.Query(terms[0])
+        else:
+            t1 = xapian.Query(xapian.Query.OP_AND, terms)
+
+        # negated terms?
+        if not not_terms:
+            # no, just return query for not negated terms
+            return t1
+        
+        # yes, link not negated and negated terms' query with a AND_NOT query
+        if len(not_terms) == 1:
+            t2 = xapian.Query(not_terms[0])
+        else:
+            t2 = xapian.Query(xapian.Query.OP_AND, not_terms)
+
+        return xapian.Query(xapian.Query.OP_AND_NOT, t1, t2)
 
 
 class OrExpression(AndExpression):
@@ -199,8 +224,8 @@ class OrExpression(AndExpression):
         return matches
 
     def xapian_term(self):
-        #return xapian.Query(xapian.Query.OP_OR, [term.xapian_term() for term in self._subterms])
-        return "(%s)" % " OR ".join([term.xapian_term() for term in self._subterms])
+        # XXX: negated terms managed by _moinSearch?
+        return xapian.Query(xapian.Query.OP_OR, [term.xapian_term() for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -267,28 +292,22 @@ class TextSearch(BaseExpression):
             analyzer = Xapian.WikiAnalyzer()
             terms = self._pattern.split()
             
-            term = []
-            for t in terms:
-                term.append(" AND ".join(t))
-            term = "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
-            return "%s %s" % (self.negated and "NOT" or "", term)
-            
             # all parsed wikiwords, AND'ed
-            terms = reduce(operator.add,
-                    [xapian.Query(
-                        xapian.Query.OP_AND,
-                        list(analyzer.tokenize(t))
-                     ) for t in terms])
+            queries = []
+            for t in terms:
+                t = [i.encode('utf-8') for i in list(analyzer.tokenize(t))]
+                if len(t) < 2:
+                    queries.append(xapian.Query(t[0]))
+                else:
+                    queries.append(xapian.Query(xapian.Query.OP_AND, t))
 
             # titlesearch OR parsed wikiwords
             term = xapian.Query(xapian.Query.OP_OR,
                     (self.titlesearch.xapian_term(),
-                        xapian.Query(xapian.Query.OP_AND, terms)))
+                        xapian.Query(xapian.Query.OP_AND, queries)))
 
-            # TODO: proper negation?!
-            return (not self.negated and term or
-                    xapian.Query(xapian.Query.OP_AND_NOT,
-                    ('U_CANT_MATCH_THIS', term)))
+            return term
+
 
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
@@ -351,24 +370,20 @@ class TitleSearch(BaseExpression):
             analyzer = Xapian.WikiAnalyzer()
             terms = self._pattern.split()
             terms = [list(analyzer.tokenize(t)) for t in terms]
-            term = []
-            for t in terms:
-                term.append(" AND ".join(t))
-            term = '%s title:(%s)' % (self.negated and "NOT" or "", " AND ".join(term))
-            return term
 
             # all parsed wikiwords, AND'ed
-            terms = reduce(operator.add,
-                    [xapian.Query(
-                        xapian.Query.OP_AND,
-                        list(analyzer.tokenize(t))
-                     ) for t in terms])
+            queries = []
+            for t in terms:
+                t = [i.encode('utf-8') for i in list(analyzer.tokenize(t))]
+                t = ['title:%s' % i for i in t]
+                if len(t) < 2:
+                    queries.append(xapian.Query(t[0]))
+                else:
+                    queries.append(xapian.Query(xapian.Query.OP_AND, t))
 
-            # titlesearch
-            #term = 
+            term = xapian.Query(xapian.Query.OP_AND, queries)
 
-            # no titlesearch for now
-            raise Exception
+            return term
 
 
 class LinkSearch(BaseExpression):
@@ -412,7 +427,7 @@ class LinkSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._textpattern    
+        return u"(%s)" % self._textpattern
 
     def search(self, page):
         # Get matches in page name
@@ -451,9 +466,9 @@ class LinkSearch(BaseExpression):
     def xapian_term(self):
         pattern = self.pattern
         if self.use_re:
-            return '' # xapian doesnt support regex search
+            return None # xapian doesnt support regex search
         else:
-            term = '%s linkto:%s' % (self.negated and "NOT" or "", pattern.lower())
+            term = xapian.Query(('linkto:%s' % pattern.lower()).encode('utf-8'))
             return term
 
 ############################################################################
@@ -674,39 +689,6 @@ class FoundRemote(FoundPage):
 ### Parse Query
 ##############################################################################
 
-from pyparsing import Word, alphas, nums, oneOf, Optional, Suppress, \
-        ZeroOrMore, Group, Forward
-
-def get_parser():
-    # TODO: regexs, utf-8
-    text = (Word(alphas + nums) |
-            Suppress('"') + Word(alphas + nums + ' ') + Suppress('"'))
-    text.setName('text')
-
-    # TODO: abbreviation to any length...
-    prefix = oneOf(('regex', 'title', 'case', 'linkto'), caseless=True) + \
-            Suppress(':')
-    prefix.setName('prefix')
-
-    prefixedText = Optional(prefix) + text
-    prefixedText.setName('prefixedText')
-
-    logOp = Optional(oneOf(('and', 'or'), caseless=True))
-    logOp.setParseAction(lambda x, y, z: not z and 'and' or z)
-    logOp.setName('logOp')
-
-    negation = oneOf(('not', '-'), caseless=True)
-    negation.setName('negation')
-
-    term = Forward()
-    bracketedTerm = Suppress('(') + term + Suppress(')')
-    term << (Optional(negation) + Group(prefixedText | bracketedTerm))
-    term.setName('term')
-
-    expression = term + ZeroOrMore(logOp + term)
-    expression.setName('expression')
-
-    return expression
 
 class QueryParser:
     """
@@ -729,68 +711,10 @@ class QueryParser:
         if isinstance(query, str):
             query = query.decode(config.charset)
         self._query = query
-        #parsed_query = get_parser().parseString(query)
-        #result = self._build_tree(parsed_query)
         result = self._or_expression()
         if result is None:
             result = BaseExpression()
         return result
-
-    def _build_tree(self, query, neg=False):
-        n = len(query)
-
-        if query.getName() == 'prefixedName':
-            if n == 1:      # single word
-                prefix = None
-                text = query[0]
-            elif n == 2:    # prefixed word
-                prefix, text = q
-            else:
-                raise Exception         # XXX
-
-            title_search = self.titlesearch
-            regex = self.regex
-            case = self.case
-            linkto = False
-
-            if prefix:
-                if prefix == 'title':
-                    title_search = True
-                elif prefix == 'regex':
-                    regex = True
-                elif prefix == 'case':
-                    case = True
-                elif prefix == 'linkto':
-                    linkto = True
-                else:
-                    raise Exception     # XXX
-
-            if linkto:
-                obj = LinkSearch(text, use_re=regex, case=case)
-            elif title_search:
-                obj = TitleSearch(text, use_re=regex, case=case)
-            else:
-                obj = TextSearch(text, use_re=regex, case=case)
-
-            if neg:
-                obj.negate()
-
-            return obj
-
-        result = None
-        for q in query:
-            name = q.getName()
-            if name == 'term':
-                conj = [AndExpression()]
-                for i in q:
-                    # TODO
-                    if i.getName() == 'logOp':
-                        if i == 'or':
-                            conj = [OrExpression(conj[-1]), AndExpression()]
-                    else:
-                        i = self._build_tree(i)
-
-        return x
 
     def _or_expression(self):
         result = self._and_expression()
@@ -866,7 +790,7 @@ class QueryParser:
 
         if match.group("NEG"):
             obj.negate()
-        return obj                
+        return obj
 
     def isQuoted(self, text):
         # Empty string '' is not considered quoted
@@ -976,7 +900,7 @@ class SearchResults:
                     matchInfo,
                     f.listitem(0),
                     ]
-                write(''.join(item))           
+                write(''.join(item))
             write(list(0))
 
         return self.getvalue()
@@ -1339,8 +1263,9 @@ class Search:
             try:
                 from MoinMoin.support import xapwrap
                 query = self.query.xapian_term()
-                self.request.log("xapianSearch: query = %r" % query)
-                query = xapwrap.index.ParsedQuery(query)
+                self.request.log("xapianSearch: query = %r" %
+                        query.get_description())
+                query = xapwrap.index.QObjQuery(query)
                 hits = index.search(query)
                 self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):

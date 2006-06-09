@@ -70,7 +70,7 @@ class WikiAnalyzer:
                     for word in self.mail_re.split(m.group("email")):
                         if word:
                             yield enc(word)
-                elif m.group("hostname"):                
+                elif m.group("hostname"):
                     for word in self.dot_re.split(m.group("hostname")):
                         yield enc(word)
                 elif m.group("num"):
@@ -109,7 +109,7 @@ class UpdateQueue:
             try:
                 f.write(pagename + "\n")
             finally:
-                f.close()                
+                f.close()
         finally:
             self.writeLock.release()
 
@@ -119,7 +119,7 @@ class UpdateQueue:
             try:
                 return self._decode(self._read())
             finally:
-                self.readLock.release()            
+                self.readLock.release()
         return []
 
     def remove(self, pages):
@@ -190,7 +190,7 @@ class UpdateQueue:
         try:
             f.write(data)
         finally:
-            f.close()            
+            f.close()
 
     def _removeFile(self):
         """ Remove queue file 
@@ -280,7 +280,7 @@ class Index:
                 searcher.configure(self.prefixMap, self.indexValueMap)
                 timestamp = self.mtime()
                 break
-            
+        
         hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname'])
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
@@ -403,8 +403,8 @@ class Index:
                 execute = wikiutil.importPlugin(request.cfg, 'filter', modulename)
             except wikiutil.PluginMissingError:
                 pass
-        else:
-            raise "Cannot load filter for mimetype." # XXX
+            #else:
+            #    raise "Cannot load filter for mimetype." + modulename  # XXX
         try:
             data = execute(self, filename)
             if debug:
@@ -412,7 +412,7 @@ class Index:
         except (OSError, IOError), err:
             data = ''
             request.log("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
-        return mimetype, data
+        return mt.mime_type(), data
    
     def test(self, request):
         idx = xapidx.ReadOnlyIndex(self.dir)
