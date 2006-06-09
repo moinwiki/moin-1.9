@@ -35,8 +35,7 @@
     It also gives a kw arg "auth_method" that tells the name of the auth
     method that authentified the user.
 
-    TODO: do we need cfg.moin_session_cookie_name?
-          check against other cookie work (see wiki)  
+    TODO: check against other cookie work (see wiki)  
           kill unsecure MOIN_ID cookie?
           reduce amount of XXX
           
@@ -47,6 +46,10 @@
 
 import time, Cookie
 from MoinMoin import user
+
+# cookie names
+MOIN_SESSION = 'MOIN_SESSION'
+MOIN_ID = 'MOIN_ID'
 
 def log(request, **kw):
     """ just log the call, do nothing else """
@@ -78,7 +81,7 @@ def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     c[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')        
     return c.output()
 
-def setCookie(request, u, cookie_name='MOIN_ID', cookie_string=None):
+def setCookie(request, u, cookie_name=MOIN_ID, cookie_string=None):
     """ Set cookie for the user obj u
     
     cfg.cookie_lifetime and the user 'remember_me' setting set the
@@ -120,18 +123,16 @@ def setSessionCookie(request, u):
     """
     import base64, hmac
     cfg = request.cfg
-    cookie_name = 'MOIN_ID'
-    if hasattr(cfg, 'moin_session_cookie_name'):
-        cookie_name = cfg.moin_session_cookie_name
+    cookie_name = MOIN_SESSION
     enc_username = base64.encodestring(u.auth_username)
     enc_id = base64.encodestring(u.id)
     # XXX - should include expiry!
     cookie_body = "username=%s:id=%s" % (enc_username, enc_id)
-    cookie_hmac = hmac.new(cfg.moin_session_secret, cookie_body).hexdigest()
+    cookie_hmac = hmac.new(cfg.cookie_secret, cookie_body).hexdigest()
     cookie_string = ':'.join([cookie_hmac, cookie_body])
     setCookie(request, u, cookie_name, cookie_string)
 
-def deleteCookie(request, cookie_name='MOIN_ID'):
+def deleteCookie(request, cookie_name=MOIN_ID):
     """ Delete the user cookie by sending expired cookie with null value
 
     According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
@@ -181,8 +182,8 @@ def moin_cookie(request, **kw):
     except Cookie.CookieError:
         # ignore invalid cookies, else user can't relogin
         cookie = None
-    if cookie and cookie.has_key('MOIN_ID'):
-        u = user.User(request, id=cookie['MOIN_ID'].value,
+    if cookie and cookie.has_key(MOIN_ID):
+        u = user.User(request, id=cookie[MOIN_ID].value,
                       auth_method='moin_cookie', auth_attribs=())
 
         if logout:
@@ -217,9 +218,7 @@ def moin_session(request, **kw):
     if hasattr(cfg, 'moin_session_verbose'):
         verbose = cfg.moin_session_verbose
 
-    cookie_name = 'MOIN_ID'
-    if hasattr(cfg, 'moin_session_cookie_name'):
-        cookie_name = cfg.moin_session_cookie_name
+    cookie_name = MOIN_SESSION
     
     if verbose: request.log("auth.moin_session: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
 
@@ -259,7 +258,7 @@ def moin_session(request, **kw):
         if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
         return user_obj, True
     
-    if cookie_hmac != hmac.new(cfg.moin_session_secret, cookie_body).hexdigest():
+    if cookie_hmac != hmac.new(cfg.cookie_secret, cookie_body).hexdigest():
         # Invalid cookie
         # XXX Cookie clear here???
         if verbose: request.log("cookie recovered had invalid hmac")
