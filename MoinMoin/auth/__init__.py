@@ -39,7 +39,8 @@
           reduce amount of XXX
           
     @copyright: 2005-2006 Bastian Blank, Florian Festi, MoinMoin:ThomasWaldmann,
-                          MoinMoin:AlexanderSchremmer, Nick Phillips
+                          MoinMoin:AlexanderSchremmer, Nick Phillips,
+                          MoinMoin:FrankieChow, MoinMoin:NirSoffer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -48,6 +49,20 @@ from MoinMoin import user
 
 # cookie names
 MOIN_SESSION = 'MOIN_SESSION'
+
+import hmac, random
+
+def generate_security_string(length):
+    """ generate a random length (length/2 .. length) string with random content """
+    random_length = random.randint(length/2, length)
+    safe = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-'
+    return ''.join([random.choice(safe) for i in range(random_length)])
+
+def make_security_hash(request, data, securitystring=''):
+    """ generate a hash string based on site configuration's cfg.cookie_security,
+        securitystring and the data.
+    """
+    return hmac.new(request.cfg.cookie_security + securitystring, data).hexdigest()
 
 def log(request, **kw):
     """ just log the call, do nothing else """
@@ -59,7 +74,6 @@ def log(request, **kw):
     request.log("auth.log: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
     return user_obj, True
 
-# some cookie functions used by moin_cookie and moin_session auth
 def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     """ create an appropriate cookie """
     c = Cookie.SimpleCookie()
@@ -114,14 +128,14 @@ def setCookie(request, u, cookie_name, cookie_string):
 
 def setSessionCookie(request, u):
     """ Set moin_session cookie for user obj u """
-    import base64, hmac
+    import base64
     cfg = request.cfg
     enc_username = base64.encodestring(u.auth_username)
     enc_id = base64.encodestring(u.id)
     # XXX - should include expiry!
     cookie_body = "username=%s:id=%s" % (enc_username, enc_id)
-    cookie_hmac = hmac.new(cfg.cookie_secret, cookie_body).hexdigest()
-    cookie_string = ':'.join([cookie_hmac, cookie_body])
+    cookie_hash = make_security_hash(request, cookie_body)
+    cookie_string = ':'.join([cookie_hash, cookie_body])
     setCookie(request, u, MOIN_SESSION, cookie_string)
 
 def deleteCookie(request, cookie_name):
@@ -169,14 +183,13 @@ def moin_login(request, **kw):
 
     return user_obj, True
 
-
 def moin_session(request, **kw):
     """ Authenticate via cookie.
     
     We don't handle initial logins (except to set the appropriate cookie), just
     ongoing sessions, and logout. Use another method for initial login.
     """
-    import hmac, base64
+    import base64
     
     username = kw.get('name')
     login = kw.get('login')
@@ -222,16 +235,16 @@ def moin_session(request, **kw):
         return user_obj, True
     
     try:
-        cookie_hmac, cookie_body = cookie[cookie_name].value.split(':', 1)
+        cookie_hash, cookie_body = cookie[cookie_name].value.split(':', 1)
     except ValueError:
         # Invalid cookie
         if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
         return user_obj, True
     
-    if cookie_hmac != hmac.new(cfg.cookie_secret, cookie_body).hexdigest():
+    if cookie_hash != make_security_hash(request, cookie_body):
         # Invalid cookie
         # XXX Cookie clear here???
-        if verbose: request.log("cookie recovered had invalid hmac")
+        if verbose: request.log("cookie recovered had invalid hash")
         return user_obj, True
 
     # We can trust the cookie
@@ -258,7 +271,6 @@ def moin_session(request, **kw):
                        # the user who logged out
     setSessionCookie(request, u) # refreshes cookie lifetime
     return u, True # use True to get other methods called, too
-
 
 def http(request, **kw):
     """ authenticate via http basic/digest/ntlm auth """
@@ -357,7 +369,6 @@ def sslclientcert(request, **kw):
     else:
         return user_obj, True
 
-
 def smb_mount(request, **kw):
     """ (u)mount a SMB server's share for username (using username/password for
         authentication at the SMB server). This can be used if you need access
@@ -409,7 +420,6 @@ def smb_mount(request, **kw):
             env['PASSWD'] = password.encode(cfg.smb_coding)
         subprocess.call(cmd.encode(cfg.smb_coding), env=env, shell=True)
     return user_obj, True
-
 
 def ldap_login(request, **kw):
     """ get authentication data from form, authenticate against LDAP (or Active Directory),
@@ -501,7 +511,6 @@ def ldap_login(request, **kw):
         u.create_or_update(True)
     return u, True # moin_cookie has to set the cookie and return the user obj
 
-
 def interwiki(request, **kw):
     # TODO use auth_method and auth_attribs for User object
     username = kw.get('name')
@@ -540,7 +549,6 @@ def interwiki(request, **kw):
     
     return user_obj, True
 
-
 class php_session:
     """ Authentication module for PHP based frameworks
         Authenticates via PHP session cookie. Currently supported systems:
@@ -552,7 +560,6 @@ class php_session:
         @copyright: 2005 by MoinMoin:AlexanderSchremmer
             - Thanks to Spreadshirt
     """
-
     def __init__(self, apps=['egw'], s_path="/tmp", s_prefix="sess_"):
         """ @param apps: A list of the enabled applications. See above for
             possible keys.
@@ -676,5 +683,4 @@ def mysql_group(request, **kw):
         # No other method succeeded, so we cannot authorize -- must fail
         if verbose: request.log("mysql_group did not get valid user from previous auth method, cannot authorize")
         return None, False
-
 
