@@ -878,6 +878,13 @@ class RawQuery(Query):
     def prepare(self, queryParser):
         return xapian.Query(self.queryString)
 
+class QObjQuery(Query):
+    def __init__(self, query):
+        assert isinstance(query, xapian.Query)
+        self.query = query
+
+    def prepare(self, queryParser):
+        return self.query
 
 class SmartIndex(Index):
     documentFactory = Document
