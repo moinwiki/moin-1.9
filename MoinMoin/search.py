@@ -10,11 +10,12 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import re, time, sys, StringIO
+import re, time, sys, StringIO, operator
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
 import Xapian
+import xapian
 
 #############################################################################
 ### query objects
@@ -174,6 +175,7 @@ class AndExpression(BaseExpression):
         return wanted
 
     def xapian_term(self):
+        #return xapian.Query(xapian.Query.OP_AND, [term.xapian_term() for term in self._subterms])
         return "(%s)" % " AND ".join([term.xapian_term() for term in self._subterms])
 
 
@@ -197,6 +199,7 @@ class OrExpression(AndExpression):
         return matches
 
     def xapian_term(self):
+        #return xapian.Query(xapian.Query.OP_OR, [term.xapian_term() for term in self._subterms])
         return "(%s)" % " OR ".join([term.xapian_term() for term in self._subterms])
 
 
@@ -259,16 +262,33 @@ class TextSearch(BaseExpression):
 
     def xapian_term(self):
         if self.use_re:
-            return '' # xapian can't do regex search
+            return None # xapian can't do regex search
         else:
             analyzer = Xapian.WikiAnalyzer()
             terms = self._pattern.split()
-            terms = [list(analyzer.tokenize(t)) for t in terms]
+            
             term = []
             for t in terms:
                 term.append(" AND ".join(t))
             term = "(%s OR %s)" % (self.titlesearch.xapian_term(), " AND ".join(term))
             return "%s %s" % (self.negated and "NOT" or "", term)
+            
+            # all parsed wikiwords, AND'ed
+            terms = reduce(operator.add,
+                    [xapian.Query(
+                        xapian.Query.OP_AND,
+                        list(analyzer.tokenize(t))
+                     ) for t in terms])
+
+            # titlesearch OR parsed wikiwords
+            term = xapian.Query(xapian.Query.OP_OR,
+                    (self.titlesearch.xapian_term(),
+                        xapian.Query(xapian.Query.OP_AND, terms)))
+
+            # TODO: proper negation?!
+            return (not self.negated and term or
+                    xapian.Query(xapian.Query.OP_AND_NOT,
+                    ('U_CANT_MATCH_THIS', term)))
 
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
@@ -294,7 +314,7 @@ class TitleSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._pattern    
+        return u"(%s)" % self._pattern
 
     def pageFilter(self):
         """ Page filter function for single title search """
@@ -326,7 +346,7 @@ class TitleSearch(BaseExpression):
 
     def xapian_term(self):
         if self.use_re:
-            return '' # xapian doesn't support regex search
+            return None # xapian doesn't support regex search
         else:
             analyzer = Xapian.WikiAnalyzer()
             terms = self._pattern.split()
@@ -336,6 +356,20 @@ class TitleSearch(BaseExpression):
                 term.append(" AND ".join(t))
             term = '%s title:(%s)' % (self.negated and "NOT" or "", " AND ".join(term))
             return term
+
+            # all parsed wikiwords, AND'ed
+            terms = reduce(operator.add,
+                    [xapian.Query(
+                        xapian.Query.OP_AND,
+                        list(analyzer.tokenize(t))
+                     ) for t in terms])
+
+            # titlesearch
+            #term = 
+
+            # no titlesearch for now
+            raise Exception
+
 
 class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
@@ -646,7 +680,7 @@ from pyparsing import Word, alphas, nums, oneOf, Optional, Suppress, \
 def get_parser():
     # TODO: regexs, utf-8
     text = (Word(alphas + nums) |
-            Suppress('"') + Word(alphas + + nums ' ') + Suppress('"'))
+            Suppress('"') + Word(alphas + nums + ' ') + Suppress('"'))
     text.setName('text')
 
     # TODO: abbreviation to any length...
@@ -749,6 +783,7 @@ class QueryParser:
             if name == 'term':
                 conj = [AndExpression()]
                 for i in q:
+                    # TODO
                     if i.getName() == 'logOp':
                         if i == 'or':
                             conj = [OrExpression(conj[-1]), AndExpression()]
@@ -757,7 +792,6 @@ class QueryParser:
 
         return x
 
-  
     def _or_expression(self):
         result = self._and_expression()
         if self._query:
