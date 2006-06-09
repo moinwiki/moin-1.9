@@ -485,6 +485,8 @@ class Index:
         pagename = page.page_name
         mtime = page.mtime_usecs()
         itemid = "%s:%s" % (wikiname, pagename)
+        updated = False
+
         if mode == 'update':
             # from #xapian: if you generate a special "unique id" term, you can just call database.replace_document(uid_term, doc)
             query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
@@ -627,10 +629,10 @@ class Index:
         read any page. Without this policy some pages will not render,
         which will create broken pagelinks index.        
         """
-        from MoinMoin.request import RequestCLI
-        from MoinMoin.security import Permissions        
-        request = RequestCLI(request.url)
-        class SecurityPolicy(Permissions):            
+        from MoinMoin.request.CLI import Request
+        from MoinMoin.security import Permissions
+        request = Request(request.url)
+        class SecurityPolicy(Permissions):
             def read(*args, **kw):
                 return True        
         request.user.may = SecurityPolicy(request.user)

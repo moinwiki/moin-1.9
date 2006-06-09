@@ -10,7 +10,6 @@
 """
 
 from MoinMoin.script import MoinScript
-from MoinMoin.Xapian import Index
 
 class IndexScript(MoinScript):
     """ Xapian general index script class """
@@ -39,6 +38,7 @@ class PluginScript(IndexScript):
     """ Xapian index build script class """
 
     def command(self):
+        from MoinMoin.Xapian import Index
         Index(self.request).indexPages(self.files, self.options.mode)
         #Index(self.request).test(self.request)
 
