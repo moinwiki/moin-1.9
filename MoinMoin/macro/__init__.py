@@ -464,7 +464,7 @@ class Macro:
         return self.formatter.anchordef(args or "anchor")
 
     def _macro_MailTo(self, args):
-        from MoinMoin.util.mail import decodeSpamSafeEmail
+        from MoinMoin.mail.sendmail import decodeSpamSafeEmail
 
         args = args or ''
         if args.find(',') == -1:

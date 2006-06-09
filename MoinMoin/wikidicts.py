@@ -21,9 +21,8 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
  
-from MoinMoin import config, caching, wikiutil, Page
+from MoinMoin import config, caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
-from MoinMoin.logfile import logfile
 
 # Version of the internal data structure which is pickled
 # Please increment if you have changed the structure

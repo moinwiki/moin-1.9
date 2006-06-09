@@ -10,7 +10,7 @@ include README MANIFEST.in setup.cfg moin.spec ChangeLog
 recursive-include docs *
 
 # include stuff for translators
-recursive-include   MoinMoin/i18n README Makefile *.txt *.py POTFILES.in *.po* *.mo
+recursive-include   MoinMoin/i18n *
 
 # contrib stuff
 recursive-include   contrib *

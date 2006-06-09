@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    MoinMoin - MoinMoin.util.mail Tests
+    MoinMoin - MoinMoin.mail.sendmail Tests
 
     @copyright: 2003-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
@@ -9,12 +9,12 @@
 import unittest
 from email.Charset import Charset, QP
 from email.Header import Header
-from MoinMoin.util import mail
+from MoinMoin.mail import sendmail
 from MoinMoin import config
 
 
 class decodeSpamSafeEmailTestCase(unittest.TestCase):
-    """util.mail: testing mail"""
+    """mail.sendmail: testing mail"""
     
     _tests = (
         ('', ''),
@@ -37,9 +37,9 @@ class decodeSpamSafeEmailTestCase(unittest.TestCase):
         )
 
     def testDecodeSpamSafeMail(self):
-        """util.mail: decoding spam safe mail"""
+        """mail.sendmail: decoding spam safe mail"""
         for coded, expected in self._tests:
-            result = mail.decodeSpamSafeEmail(coded)
+            result = sendmail.decodeSpamSafeEmail(coded)
             self.assertEqual(result, expected,
                              'Expected "%(expected)s" but got "%(result)s"' %
                              locals())
@@ -60,37 +60,37 @@ class EncodeAddressTests(unittest.TestCase):
     charset.body_encoding = QP
 
     def testSimpleAddress(self):
-        """ util.mail: encode simple address: local@domain """
+        """ mail.sendmail: encode simple address: local@domain """
         address = u'local@domain'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
 
     def testComposite(self):
-        """ util.mail: encode address: 'Phrase <local@domain>' """
+        """ mail.sendmail: encode address: 'Phrase <local@domain>' """
         address = u'Phrase <local@domain>'
         phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
         expected = phrase + '<local@domain>'
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
                              
     def testCompositeUnicode(self):
-        """ util.mail: encode Uncode address: 'ויקי <local@domain>' """
+        """ mail.sendmail: encode Uncode address: 'ויקי <local@domain>' """
         address = u'ויקי <local@domain>'
         phrase = str(Header(u'ויקי '.encode('utf-8'), self.charset))
         expected = phrase + '<local@domain>'
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
                              
     def testEmptyPhrase(self):
-        """ util.mail: encode address with empty phrase: '<local@domain>' """
+        """ mail.sendmail: encode address with empty phrase: '<local@domain>' """
         address = u'<local@domain>'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
                              
     def testEmptyAddress(self):
-        """ util.mail: encode address with empty address: 'Phrase <>' 
+        """ mail.sendmail: encode address with empty address: 'Phrase <>' 
         
         Let the smtp server handle this. We may raise error in such
         case, but we don't do error checking for mail addresses.
@@ -98,11 +98,11 @@ class EncodeAddressTests(unittest.TestCase):
         address = u'Phrase <>'
         phrase = str(Header(u'Phrase '.encode('utf-8'), self.charset))
         expected = phrase + '<>'
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
 
     def testInvalidAddress(self):
-        """ util.mail: encode invalid address 'Phrase <blah' 
+        """ mail.sendmail: encode invalid address 'Phrase <blah' 
         
         Assume that this is a simple address. This address will
         probably cause an error when trying to send mail. Junk in, junk
@@ -110,5 +110,5 @@ class EncodeAddressTests(unittest.TestCase):
         """
         address = u'Phrase <blah'
         expected = address.encode(config.charset)
-        self.failUnlessEqual(mail.encodeAddress(address, self.charset),
+        self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)

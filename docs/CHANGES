@@ -62,6 +62,8 @@ Version 1.6.current:
     get reverted.
 
   Developer notes (these should be moved to the end in the release):
+    * killed "processors" (finally), formatter method changed to:
+      formatter.parser(parsername, lines)
     * refactored some actions to use ActionBase base class
     * moved "test" action from wikiaction to MoinMoin/action/
       (and use ActionBase)
@@ -71,8 +73,7 @@ Version 1.6.current:
     * moved wikirpc.py stuff to MoinMoin/xmlrpc/__init__.py
     * moved wikitest.py stuff to action/test.py (only used from there)
     * moved formatter/base.py to formatter/__init__.py (FormatterBase)
-    * killed "processors" (finally), formatter method changed to:
-      formatter.parser(parsername, lines)
+    * moved util/ParserBase.py to parser/ParserBase.py
     * moved / splitted request.py into MoinMoin/request/*
       Most stuff will be broken, please help fixing it (usually some imports
       will be missing and the adaptor script will need a change maybe):
@@ -83,6 +84,15 @@ Version 1.6.current:
       WSGI not
       FCGI not
       TWISTED not
+    * moved util/antispam.py to security/antispam.py,
+      moved util/autoadmin.py to security/autoadmin.py,
+      moved security.py to security/__init__.py,
+      moved wikiacl.py to security/__init__.py.
+    * moved logfile/logfile.py to logfile/__init__.py
+    * moved mailimport.py to mail/mailimport.py,
+      moved util/mail.py to mail/sendmail.py
+    * moved auth.py to auth/__init__.py,
+      moved util/sessionParser.py to auth/_PHPsessionParser.py
     * added wikiutil.MimeType class (works internally with sanitized mime
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
@@ -120,6 +130,7 @@ Version 1.6.current:
     * allow "-" in usernames (fixes "Invalid user name" msg)
     * fixed smiley caching bug (smileys didn't change theme)
     * fixed backtrace when user removed css_url entry from user_form_fields
+    * Fixed the output of macro and "attachment:" usages of the rst parser.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
@@ -687,7 +698,7 @@ Version 1.5.0beta1:
        did not allow attachments, you now have to use:
        actions_excluded = ['AttachFile']
      * special users (All, Known, Trusted) in Groups are now supported
-     * MoinMoin.util.autoadmin SecurityPolicy added
+     * MoinMoin.security.autoadmin SecurityPolicy added
        When using this security policy, a user will get admin rights on his
        homepage (where pagename == username) and its sub pages. This is needed
        for the MyPages action, but can also get used for manual ACL changes.
@@ -1735,7 +1746,7 @@ Other changes:
       Nevertheless it is a very good idea to use a non-broken and more secure
       browser like Mozilla, Firefox or Opera!
 
-    * from MoinMoin.util.antispam import SecurityPolicy in your
+    * from MoinMoin.security.antispam import SecurityPolicy in your
       moin_config.py will protect your wiki from at least the known spammers.
       See MoinMoin:AntiSpamGlobalSolution for details.
 
