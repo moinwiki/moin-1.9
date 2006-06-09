@@ -173,7 +173,7 @@ class DefaultConfig:
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
-    auth = [authmodule.moin_cookie]
+    auth = [authmodule.moin_login, authmodule.moin_session,]
     
     backup_compression = 'gz'
     backup_users = []

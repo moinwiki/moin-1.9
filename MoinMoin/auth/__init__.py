@@ -36,11 +36,10 @@
     method that authentified the user.
 
     TODO: check against other cookie work (see wiki)  
-          kill unsecure MOIN_ID cookie?
           reduce amount of XXX
           
-    @copyright: 2005-2006 Bastian Blank, Florian Festi, Thomas Waldmann
-    @copyright: 2005-2006 MoinMoin:AlexanderSchremmer
+    @copyright: 2005-2006 Bastian Blank, Florian Festi, MoinMoin:ThomasWaldmann,
+                          MoinMoin:AlexanderSchremmer, Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -49,7 +48,6 @@ from MoinMoin import user
 
 # cookie names
 MOIN_SESSION = 'MOIN_SESSION'
-MOIN_ID = 'MOIN_ID'
 
 def log(request, **kw):
     """ just log the call, do nothing else """
@@ -81,7 +79,7 @@ def makeCookie(request, cookie_name, cookie_string, maxage, expires):
     c[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')        
     return c.output()
 
-def setCookie(request, u, cookie_name=MOIN_ID, cookie_string=None):
+def setCookie(request, u, cookie_name, cookie_string):
     """ Set cookie for the user obj u
     
     cfg.cookie_lifetime and the user 'remember_me' setting set the
@@ -93,10 +91,6 @@ def setCookie(request, u, cookie_name=MOIN_ID, cookie_string=None):
      > 0    n hours, or forever if user checked 'remember_me'
      < 0    -n hours, ignoring user 'remember_me' setting
     """
-    if cookie_string is None:
-        # For moin_cookie
-        cookie_string = u.id
-    
     # Calculate cookie maxage and expires
     lifetime = int(request.cfg.cookie_lifetime) * 3600 
     forever = 10 * 365 * 24 * 3600 # 10 years
@@ -119,20 +113,18 @@ def setCookie(request, u, cookie_name=MOIN_ID, cookie_string=None):
     request.disableHttpCaching()
 
 def setSessionCookie(request, u):
-    """ Set moin_session cookie for user obj u
-    """
+    """ Set moin_session cookie for user obj u """
     import base64, hmac
     cfg = request.cfg
-    cookie_name = MOIN_SESSION
     enc_username = base64.encodestring(u.auth_username)
     enc_id = base64.encodestring(u.id)
     # XXX - should include expiry!
     cookie_body = "username=%s:id=%s" % (enc_username, enc_id)
     cookie_hmac = hmac.new(cfg.cookie_secret, cookie_body).hexdigest()
     cookie_string = ':'.join([cookie_hmac, cookie_body])
-    setCookie(request, u, cookie_name, cookie_string)
+    setCookie(request, u, MOIN_SESSION, cookie_string)
 
-def deleteCookie(request, cookie_name=MOIN_ID):
+def deleteCookie(request, cookie_name):
     """ Delete the user cookie by sending expired cookie with null value
 
     According to http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.2
@@ -151,52 +143,30 @@ def deleteCookie(request, cookie_name=MOIN_ID):
     # IMPORTANT: Prevent caching of current page and cookie        
     request.disableHttpCaching()
 
-def moin_cookie(request, **kw):
-    """ authenticate via the MOIN_ID cookie """
+def moin_login(request, **kw):
+    """ handle login from moin login form, session has to be established later by moin_session """
     username = kw.get('name')
     password = kw.get('password')
     login = kw.get('login')
-    logout = kw.get('logout')
+    #logout = kw.get('logout')
     user_obj = kw.get('user_obj')
 
     cfg = request.cfg
     verbose = False
-    if hasattr(cfg, 'moin_cookie_verbose'):
-        verbose = cfg.moin_cookie_verbose
+    if hasattr(cfg, 'moin_login_verbose'):
+        verbose = cfg.moin_login_verbose
     
-    #request.log("auth.moin_cookie: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
+    #request.log("auth.moin_login: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
 
     if login:
-        if verbose: request.log("moin_cookie performing login action")
-        u = user.User(request, name=username, password=password,
-                      auth_method='login_userpassword')
+        if verbose: request.log("moin_login performing login action")
+        u = user.User(request, name=username, password=password, auth_method='moin_login')
         if u.valid:
-            if verbose: request.log("moin_cookie got valid user...")
-            setCookie(request, u)
-            return u, True # we make continuing possible, e.g. for smbmount
-        if verbose: request.log("moin_cookie not valid, previous valid=%d." % user_obj.valid)
-        return user_obj, True
+            if verbose: request.log("moin_login got valid user...")
+            user_obj = u
+        else:
+            if verbose: request.log("moin_login not valid, previous valid=%d." % user_obj.valid)
 
-    try:
-        cookie = Cookie.SimpleCookie(request.saved_cookie)
-    except Cookie.CookieError:
-        # ignore invalid cookies, else user can't relogin
-        cookie = None
-    if cookie and cookie.has_key(MOIN_ID):
-        u = user.User(request, id=cookie[MOIN_ID].value,
-                      auth_method='moin_cookie', auth_attribs=())
-
-        if logout:
-            u.valid = 0 # just make user invalid, but remember him
-
-        if u.valid:
-            setCookie(request, u) # refreshes cookie lifetime
-            return u, True # use True to get other methods called, too
-        else: # logout or invalid user
-            deleteCookie(request)
-            return u, True # we return a invalidated user object, so that
-                           # following auth methods can get the name of
-                           # the user who logged out
     return user_obj, True
 
 
@@ -562,7 +532,7 @@ def interwiki(request, **kw):
                                "enc_passwd"]:
                     setattr(u, key, value)
             u.save()
-            setCookie(request, u)
+            setSessionCookie(request, u)
             return u, True
         else:
             pass
