@@ -1,0 +1,33 @@
+Please use your CHANGES.$yourname for recording your changes you do while
+Google Summer of Code.
+
+Branch moin/1.6-sync-aschremmer
+===============================
+
+  Known main issues:
+    * ...
+
+  ToDo:
+    * ...
+
+  New Features:
+    * ...
+  
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * ...
+
+  Other Changes:
+    * ...
+  
+  Developer notes:
+    * ...
+
+
+Diary
+=====
+Please make at least one entry per day (and commit it) about what your work was about.
+
+2006-05-29 ...
+2006-05-30 ...
+2006-05-31 ...
+
