@@ -788,7 +788,7 @@ class MimeType(object):
     
     def parse_filename(self, filename):
         import mimetypes
-        mtype, encoding = mimetypes.guess_type()
+        mtype, encoding = mimetypes.guess_type(filename)
         if mtype is None:
             mtype = 'application/octet-stream'
         self.parse_mimetype(mtype)
