@@ -2,7 +2,8 @@
 """
     MoinMoin - xapian indexing search engine
 
-    @copyright: 2006 by Thomas Waldmann
+    @copyright: 2006 MoinMoin:ThomasWaldmann,
+                2006 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details.
 """
 debug = True
@@ -10,6 +11,7 @@ debug = True
 import sys, os, re, codecs, errno, time
 from pprint import pprint
 
+import xapian
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
@@ -17,6 +19,19 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
+
+
+class UnicodeQuery(xapian.Query):
+    def __init__(self, *args, **kwargs):
+        self.encoding = kwargs.get('encoding', config.charset)
+
+        nargs = []
+        for i in args:
+            if isinstance(i, unicode):
+                i = i.encode(self.encoding)
+            nargs.append(i)
+
+        xapian.Query.__init__(self, *nargs, **kwargs)
 
 
 ##############################################################################

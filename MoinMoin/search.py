@@ -15,7 +15,8 @@ from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
 import Xapian
-import xapian
+from xapian import Query
+from Xapian import UnicodeQuery
 
 #############################################################################
 ### query objects
@@ -186,9 +187,9 @@ class AndExpression(BaseExpression):
 
         # prepare query for not negated terms
         if len(terms) == 1:
-            t1 = xapian.Query(terms[0])
+            t1 = Query(terms[0])
         else:
-            t1 = xapian.Query(xapian.Query.OP_AND, terms)
+            t1 = Query(Query.OP_AND, terms)
 
         # negated terms?
         if not not_terms:
@@ -197,11 +198,11 @@ class AndExpression(BaseExpression):
         
         # yes, link not negated and negated terms' query with a AND_NOT query
         if len(not_terms) == 1:
-            t2 = xapian.Query(not_terms[0])
+            t2 = Query(not_terms[0])
         else:
-            t2 = xapian.Query(xapian.Query.OP_OR, not_terms)
+            t2 = Query(Query.OP_OR, not_terms)
 
-        return xapian.Query(xapian.Query.OP_AND_NOT, t1, t2)
+        return Query(Query.OP_AND_NOT, t1, t2)
 
 
 class OrExpression(AndExpression):
@@ -225,7 +226,7 @@ class OrExpression(AndExpression):
 
     def xapian_term(self):
         # XXX: negated terms managed by _moinSearch?
-        return xapian.Query(xapian.Query.OP_OR, [term.xapian_term() for term in self._subterms])
+        return Query(Query.OP_OR, [term.xapian_term() for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -297,16 +298,14 @@ class TextSearch(BaseExpression):
             for t in terms:
                 t = [i.encode(config.charset) for i in list(analyzer.tokenize(t))]
                 if len(t) < 2:
-                    queries.append(xapian.Query(t[0]))
+                    queries.append(UnicodeQuery(t[0]))
                 else:
-                    queries.append(xapian.Query(xapian.Query.OP_AND, t))
+                    queries.append(UnicodeQuery(Query.OP_AND, t))
 
             # titlesearch OR parsed wikiwords
-            term = xapian.Query(xapian.Query.OP_OR,
+            return Query(Query.OP_OR,
                     (self.titlesearch.xapian_term(),
-                        xapian.Query(xapian.Query.OP_AND, queries)))
-
-            return term
+                        Query(Query.OP_AND, queries)))
 
 
 class TitleSearch(BaseExpression):
@@ -374,16 +373,14 @@ class TitleSearch(BaseExpression):
             # all parsed wikiwords, AND'ed
             queries = []
             for t in terms:
-                t = ['%s%s' % (Xapian.Index.prefixMap['title'],
-                    i.encode(config.charset)) for i in list(analyzer.tokenize(t))]
+                t = ['%s%s' % (Xapian.Index.prefixMap['title'], i)
+                        for i in list(analyzer.tokenize(t))]
                 if len(t) < 2:
-                    queries.append(xapian.Query(t[0]))
+                    queries.append(UnicodeQuery(t[0]))
                 else:
-                    queries.append(xapian.Query(xapian.Query.OP_AND, t))
+                    queries.append(UnicodeQuery(Query.OP_AND, t))
 
-            term = xapian.Query(xapian.Query.OP_AND, queries)
-
-            return term
+            return Query(Query.OP_AND, queries)
 
 
 class LinkSearch(BaseExpression):
@@ -468,11 +465,8 @@ class LinkSearch(BaseExpression):
         if self.use_re:
             return None # xapian doesnt support regex search
         else:
-            term = xapian.Query(('%s%s%s' %
-                (Xapian.Index.prefixMap['linkto'],
-                    pattern[0] in string.uppercase and ':' or '',
-                    pattern)).encode(config.charset))
-            return term
+            return UnicodeQuery('%s:%s' %
+                    (Xapian.Index.prefixMap['linkto'], pattern))
 
 ############################################################################
 ### Results
