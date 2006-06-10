@@ -205,6 +205,41 @@ class UpdateQueue:
 
 
 class Index:
+    indexValueMap = {
+        # mapping the value names we can easily fetch from the index to
+        # integers required by xapian. 0 and 1 are reserved by xapwrap!
+        'pagename': 2,
+        'attachment': 3,
+        'mtime': 4,
+        'wikiname': 5,
+    }
+    prefixMap = {
+        # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
+        'author': 'A',
+        'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
+                       #G   newsGroup (or similar entity - e.g. a web forum name)
+        'hostname': 'H',
+        'keyword': 'K',
+        'lang': 'L',   # ISO Language code
+                       #M   Month (numeric format: YYYYMM)
+                       #N   ISO couNtry code (or domaiN name)
+                       #P   Pathname
+                       #Q   uniQue id
+                       #R   Raw (i.e. unstemmed) term
+        'title': 'S',  # Subject (or title)
+        'mimetype': 'T',
+        'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
+                       # characters, a hashing scheme is used to prevent overflowing
+                       # the Xapian term length limit (see omindex for how to do this).
+                       #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
+                       #  the D term, and changing the last digit to a '2' if it's a '3')
+                       #X   longer prefix for user-defined use
+        'linkto': 'XLINKTO', # this document links to that document
+                       #Y   year (four digits)
+    }
+
+
+
     class LockedException(Exception):
         pass
     
@@ -227,38 +262,6 @@ class Index:
         ## if not self.exists():
         ##    self.indexPagesInNewThread(request)
 
-        self.indexValueMap = {
-            # mapping the value names we can easily fetch from the index to
-            # integers required by xapian. 0 and 1 are reserved by xapwrap!
-            'pagename': 2,
-            'attachment': 3,
-            'mtime': 4,
-            'wikiname': 5,
-        }
-        self.prefixMap = { # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
-            'author': 'A',
-            'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
-                           #G   newsGroup (or similar entity - e.g. a web forum name)
-            'hostname': 'H',
-            'keyword': 'K',
-            'lang': 'L',   # ISO Language code
-                           #M   Month (numeric format: YYYYMM)
-                           #N   ISO couNtry code (or domaiN name)
-                           #P   Pathname
-                           #Q   uniQue id
-                           #R   Raw (i.e. unstemmed) term
-            'title': 'S',  # Subject (or title)
-            'mimetype': 'T',
-            'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
-                           # characters, a hashing scheme is used to prevent overflowing
-                           # the Xapian term length limit (see omindex for how to do this).
-                           #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
-                           #  the D term, and changing the last digit to a '2' if it's a '3')
-                           #X   longer prefix for user-defined use
-            'linkto': 'XLINKTO', # this document links to that document
-                           #Y   year (four digits)
-        }
-        
     def exists(self):
         """ Check if index exists """        
         return os.path.exists(self.sig_file)
