@@ -60,6 +60,12 @@ def format_page_edits(macro, lines, bookmark_usecs):
     if not page.exists():
         # indicate page was deleted
         html_link = request.theme.make_icon('deleted')
+    elif page.isConflict():
+        img = macro.formatter.smiley("/!\\")
+        #img = request.theme.make_icon('help')
+        html_link = wikiutil.link_tag(request,
+                                      wikiutil.quoteWikinameURL(pagename) + "?action=edit",
+                                      img, formatter=macro.formatter)
     elif is_new:
         # show "NEW" icon if page was created after the user's bookmark
         if hilite:

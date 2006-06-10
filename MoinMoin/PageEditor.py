@@ -2,7 +2,7 @@
 """
     MoinMoin - PageEditor class
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -109,6 +109,7 @@ class PageEditor(Page):
             self.set_raw_body(verynewtext)
             return True
 
+        # this should never happen, except for empty pages
         return False
 
     def sendconfirmleaving(self):
@@ -217,11 +218,7 @@ class PageEditor(Page):
                 conflict_msg = _('Someone else changed this page while you were editing!')
                 if self.mergeEditConflict(rev):
                     conflict_msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!
-Have a look at the diff of %(difflink)s to see what has been changed.""") % {
-                        'difflink': self.link_to(self.request,
-                                                 querystr='action=diff&rev=%d' % rev)
-                        }
+Please review the page and save then. Do not save this page as it is!""") 
                     rev = self.current_rev()
             if conflict_msg:
                 # We don't show preview when in conflict
@@ -923,17 +920,12 @@ Try a different name.""") % (newpagename,)
                 if newtext==saved_page.get_raw_body():
                     msg = _("You already saved this page!")
                     return msg
-                
-            msg = _("""Sorry, someone else saved the page while you edited it.
+                else:
+                    msg = _("You already edited this page! Please do not use the back button.")
+                    raise self.EditConflict, msg
 
-Please do the following: Use the back button of your browser, and cut&paste
-your changes from there. Then go forward to here, and click EditText again.
-Now re-add your changes to the current page contents.
-
-''Do not just replace
-the content editbox with your version of the page, because that would
-delete the changes of the other person, which is excessively rude!''
-""")
+                msg = _("""Someone else saved this page while you were editing!
+Please review the page and save then. Do not save this page as it is!""") 
 
             if backup_url:
                 msg += "<p>%s</p>" % _(
