@@ -436,12 +436,12 @@ class LinkSearch(BaseExpression):
         Found = True
         
         for link in page.getPageLinks(page.request):
-            if ((self.static and self.pattern == link) or
+            if ((self.static and self.pattern.lower() == link.lower()) or
                 (not self.static and self.search_re.match(link))):
                 break
         else:
             Found = False
-                
+
         if Found:
             # Search in page text
             results = self.textsearch.search(page)
