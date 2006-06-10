@@ -872,6 +872,9 @@ class ParsedQuery(Query):
 
 class RawQuery(Query):
     def __init__(self, queryString):
+        if isinstance(queryString, unicode):
+            queryString = queryString.encode('utf-8')
+
         assert isinstance(queryString, str)
         self.queryString = queryString
 

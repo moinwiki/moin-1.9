@@ -375,7 +375,7 @@ class TitleSearch(BaseExpression):
             queries = []
             for t in terms:
                 t = [i.encode('utf-8') for i in list(analyzer.tokenize(t))]
-                t = ['title:%s' % i for i in t]
+                t = ['%s%s' % (Xapian.Index.prefixMap['title'], i) for i in t]
                 if len(t) < 2:
                     queries.append(xapian.Query(t[0]))
                 else:
@@ -468,7 +468,7 @@ class LinkSearch(BaseExpression):
         if self.use_re:
             return None # xapian doesnt support regex search
         else:
-            term = xapian.Query(('linkto:%s' % pattern.lower()).encode('utf-8'))
+            term = xapian.Query(('%s%s' % (Xapian.Index.prefixMap['linkto'], pattern.lower())).encode('utf-8'))
             return term
 
 ############################################################################
