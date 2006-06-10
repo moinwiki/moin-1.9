@@ -107,6 +107,9 @@ Version 1.6.current:
       'item', it will use a cache directory per item (== per page).
       Creating a CacheEntry without explicit scope is DEPRECATED.
     * smileys moved from MoinMoin.config to MoinMoin.theme
+    * removed all _ magic in URLs and filenames
+      TODO: write mig script for data_dir
+      TODO: make blanks in interwiki pagelinks possible
 
   New Features:
 

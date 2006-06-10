@@ -38,10 +38,6 @@ class UserSettingsHandler:
 
         Each line is a page name, empty lines ignored.
 
-        Items can use '_' as spaces, needed by [name_with_spaces label]
-        format used in quicklinks. We do not touch those names here, the
-        underscores are handled later by the theme code.
-
         @param key: the form key to get
         @rtype: list of unicode strings
         @return: list of normalized names
@@ -53,10 +49,6 @@ class UserSettingsHandler:
             item = item.strip()
             if not item:
                 continue
-            # Normalize names - except [name_with_spaces label]
-            # Commented out to allow URLs
-            #if not (item.startswith('[') and item.endswith(']')):
-            #    item = self.request.normalizePagename(item)
             items.append(item)
         return items
 
@@ -408,7 +400,7 @@ class UserSettings:
         options = []
         users = user.getUserList(self.request)
         for uid in users:
-            name = user.User(self.request, id=uid).name # + '_' + uid # for debugging
+            name = user.User(self.request, id=uid).name # + '/' + uid # for debugging
             options.append((name, name))
         options.sort()
 

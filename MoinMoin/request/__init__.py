@@ -803,9 +803,6 @@ class RequestBase(object):
     def normalizePagename(self, name):
         """ Normalize page name 
 
-        Convert '_' to spaces - allows using nice URLs with spaces, with no
-        need to quote.
-
         Prevent creating page names with invisible characters or funny
         whitespace that might confuse the users or abuse the wiki, or
         just does not make sense.
@@ -816,9 +813,6 @@ class RequestBase(object):
         @rtype: unicode
         @return: decoded and sanitized page name
         """
-        # Replace underscores with spaces
-        name = name.replace(u'_', u' ')
-
         # Strip invalid characters
         name = config.page_invalid_chars_regex.sub(u'', name)
 

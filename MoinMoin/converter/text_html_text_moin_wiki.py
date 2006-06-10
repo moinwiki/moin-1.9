@@ -1122,7 +1122,7 @@ class convert_tree(visitor):
                     self.text.extend([self.white_space, title, self.white_space])
             # wiki link
             elif href.startswith(scriptname):
-                pagename = href[len(scriptname):].replace('_', ' ')
+                pagename = href[len(scriptname):]
                 pagename = pagename.lstrip('/')    # XXX temp fix for generated pagenames starting with /
                 if text == pagename:
                     self.text.append(wikiutil.pagelinkmarkup(pagename))
