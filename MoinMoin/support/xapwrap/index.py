@@ -489,16 +489,16 @@ class ReadOnlyIndex:
         if self.db is None:
             self._setupDB()
 
-            self.qp = xapian.QueryParser()
+            #self.qp = xapian.QueryParser()
             # this is vital: these options specify no language for
             # stemming (""), disable stemming (False), and specify an
             # empty stop word object (None). we need this because by
             # default, xapian's query parser does english stemming
-            s = xapian.Stem(self.STEMMING_LANGUAGE)
-            self.qp.set_stemmer(s)
+            #s = xapian.Stem(self.STEMMING_LANGUAGE)
+            #self.qp.set_stemmer(s)
 
             # we want query terms to be ANDed together by default
-            self.qp.set_default_op(self.DEFAULT_QUERY_COMBINER_OP)
+            #self.qp.set_default_op(self.DEFAULT_QUERY_COMBINER_OP)
             self._configure()
 
             log("Index %s contains %s documents" %
