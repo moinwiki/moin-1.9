@@ -1,6 +1,7 @@
 """
     xapwrap.document - Pythonic wrapper around Xapian's Document API
 """
+import string
 import datetime
 import re
 import cPickle
@@ -296,7 +297,7 @@ def makePairForWrite(prefix, token, prefixMap=None):
     else: # we have a map, so first translate it using the map (e.g. 'title' -> 'S')
         prefix = prefixMap.get(prefix, prefix.upper())
 
-    result = prefix + token
+    result = '%s%s%s' % (prefix, token[0] in string.uppercase and ':' or '', token)
     # since return value is going into the db, it must be encoded as UTF-8
     result = result.encode(UNICODE_ENCODING, UNICODE_ERROR_POLICY)
     return checkKeyLen(result)
