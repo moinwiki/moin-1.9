@@ -65,7 +65,9 @@ Version 1.6.current:
     * moved mailimport.py to mail/mailimport.py,
       moved util/mail.py to mail/sendmail.py
     * moved auth.py to auth/__init__.py,
-      moved util/sessionParser.py to auth/_PHPsessionParser.py
+      moved util/sessionParser.py to auth/_PHPsessionParser.py,
+      teared auth code into single modules under auth/* - moin_session handling
+      and the builting moin_login method are in auth/__init__.py.
     * added wikiutil.MimeType class (works internally with sanitized mime
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
