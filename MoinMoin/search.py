@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import re, time, sys, StringIO, operator
+import re, time, sys, StringIO, string
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
@@ -436,7 +436,7 @@ class LinkSearch(BaseExpression):
         Found = True
         
         for link in page.getPageLinks(page.request):
-            if ((self.static and self.pattern.lower() == link.lower()) or
+            if ((self.static and self.pattern == link) or
                 (not self.static and self.search_re.match(link))):
                 break
         else:
@@ -468,9 +468,10 @@ class LinkSearch(BaseExpression):
         if self.use_re:
             return None # xapian doesnt support regex search
         else:
-            term = xapian.Query(('%s%s' %
+            term = xapian.Query(('%s%s%s' %
                 (Xapian.Index.prefixMap['linkto'],
-                    pattern.lower())).encode(config.charset))
+                    pattern[0] in string.uppercase and ':' or '',
+                    pattern)).encode(config.charset))
             return term
 
 ############################################################################

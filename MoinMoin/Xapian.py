@@ -491,7 +491,9 @@ class Index:
         updated = False
 
         if mode == 'update':
-            # from #xapian: if you generate a special "unique id" term, you can just call database.replace_document(uid_term, doc)
+            # from #xapian: if you generate a special "unique id" term,
+            # you can just call database.replace_document(uid_term, doc)
+            # -> done in xapwrap.index.Index.index()
             query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
             docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
             if docs:
@@ -514,7 +516,7 @@ class Index:
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid)]
             for pagelink in page.getPageLinks(request):
-                xkeywords.append(xapdoc.Keyword('linkto', pagelink.lower()))
+                xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
