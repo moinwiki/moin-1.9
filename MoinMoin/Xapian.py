@@ -419,6 +419,7 @@ class Index:
         for modulename in mt.module_name():
             try:
                 execute = wikiutil.importPlugin(request.cfg, 'filter', modulename)
+                break
             except wikiutil.PluginMissingError:
                 pass
             #else:
