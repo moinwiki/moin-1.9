@@ -272,7 +272,7 @@ reStructuredText Quick Reference
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
-    lupy_search = False # disabled until lupy is finished
+    xapian_search = False # disabled until xapian is finished
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
@@ -520,8 +520,8 @@ reStructuredText Quick Reference
         self.navi_bar = [elem % self for elem in self.navi_bar]
         self.backup_exclude = [elem % self for elem in self.backup_exclude]
 
-        # list to cache lupy searcher objects
-        self.lupy_searchers = []
+        # list to cache xapian searcher objects
+        self.xapian_searchers = []
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from

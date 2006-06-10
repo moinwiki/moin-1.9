@@ -26,7 +26,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, mimetypes, time, zipfile
+import os, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys
@@ -163,15 +163,15 @@ def add_attachment(request, pagename, target, filecontent):
     target = wikiutil.taintfilename(target)
 
     # set mimetype from extension, or from given mimetype
-    #type, encoding = mimetypes.guess_type(target)
+    #type, encoding = wikiutil.guess_type(target)
     #if not type:
     #    ext = None
     #    if request.form.has_key('mime'):
-    #        ext = mimetypes.guess_extension(request.form['mime'][0])
+    #        ext = wikiutil.guess_extension(request.form['mime'][0])
     #    if not ext:
-    #        type, encoding = mimetypes.guess_type(filename)
+    #        type, encoding = wikiutil.guess_type(filename)
     #        if type:
-    #            ext = mimetypes.guess_extension(type)
+    #            ext = wikiutil.guess_extension(type)
     #        else:
     #            ext = ''
     #    target = target + ext
@@ -193,7 +193,8 @@ def add_attachment(request, pagename, target, filecontent):
         _addLogEntry(request, 'ATTNEW', pagename, target)
         
         return target
-    
+
+
 #############################################################################
 ### Internal helpers
 #############################################################################
@@ -645,16 +646,14 @@ def get_file(pagename, request):
     import shutil
 
     filename, fpath = _access_file(pagename, request)
-    if not filename: return # error msg already sent in _access_file
+    if not filename:
+        return # error msg already sent in _access_file
 
-    # get mimetype
-    type, enc = mimetypes.guess_type(filename)
-    if not type:
-        type = "application/octet-stream"
+    mt = wikiutil.MimeType(filename=filename)
 
     # send header
     request.http_headers([
-        "Content-Type: %s" % type,
+        "Content-Type: %s" % mt.content_type(),
         "Content-Length: %d" % os.path.getsize(fpath),
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
         # There is no solution that is compatible to IE except stripping non-ascii chars
@@ -778,24 +777,23 @@ def send_viewfile(pagename, request):
 
     request.write('<h2>' + _("Attachment '%(filename)s'") % {'filename': filename} + '</h2>')
 
-    type, enc = mimetypes.guess_type(filename)
-    if type:
-        if type[:5] == 'image':
-            timestamp = htdocs_access(request) and "?%s" % time.time() or ''
-            request.write('<img src="%s%s" alt="%s">' % (
-                getAttachUrl(pagename, filename, request, escaped=1), timestamp, wikiutil.escape(filename, 1)))
-            return
-        elif type[:4] == 'text':
-            # TODO: should use formatter here!
-            request.write("<pre>")
-            # Try to decode file contents. It may return junk, but we
-            # don't have enough information on attachments.
-            content = open(fpath, 'r').read()
-            content = wikiutil.decodeUnknownInput(content)
-            content = wikiutil.escape(content)
-            request.write(content)
-            request.write("</pre>")
-            return
+    mt = wikiutil.MimeType(filename=filename)
+    if mt.major == 'image':
+        timestamp = htdocs_access(request) and "?%s" % time.time() or ''
+        request.write('<img src="%s%s" alt="%s">' % (
+            getAttachUrl(pagename, filename, request, escaped=1), timestamp, wikiutil.escape(filename, 1)))
+        return
+    elif mt.major == 'text':
+        # TODO: should use formatter here!
+        request.write("<pre>")
+        # Try to decode file contents. It may return junk, but we
+        # don't have enough information on attachments.
+        content = open(fpath, 'r').read()
+        content = wikiutil.decodeUnknownInput(content)
+        content = wikiutil.escape(content)
+        request.write(content)
+        request.write("</pre>")
+        return
 
     package = packages.ZipPackage(request, fpath)
     if package.isPackage():

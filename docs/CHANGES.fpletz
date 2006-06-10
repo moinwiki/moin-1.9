@@ -1,6 +1,3 @@
-Please use your CHANGES.$yourname for recording your changes you do while
-Google Summer of Code.
-
 Branch moin/1.6-xapian-fpletz
 =============================
 
@@ -8,10 +5,12 @@ Branch moin/1.6-xapian-fpletz
     * ...
 
   ToDo:
-    * ...
+    * Manually parse prefixes (e.g. title:) in MoinMoin.Xapian.Index
+      right before searching
+    * Mockup the new search UI
 
   New Features:
-    * ...
+    * TBD
   
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
@@ -25,9 +24,12 @@ Branch moin/1.6-xapian-fpletz
 
 Diary
 =====
-Please make at least one entry per day (and commit it) about what your work was about.
 
-2006-05-29 ...
-2006-05-30 ...
-2006-05-31 ...
+2006-06-10 Changed xapian_term() functions to return xapian.Query objects
+but without touching the prefixes as we don't have a prefixMap yet. Will
+implement this in MoinMoin.Xapian.Index. AndExpression needed some more
+tweaking to use AND_NOT because Xapian doesn't provide a pure NOT. Should
+be no issue with OrExpression as _moinSearch handles this correctly.
+
+2006-06-11
 
