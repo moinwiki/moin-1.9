@@ -427,26 +427,19 @@ def do_edit(pagename, request):
     # Save new text
     else:
         try:
+            still_conflict = "/!\ '''Edit conflict" in savetext
+            pg.setConflict(still_conflict)
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
-        except pg.EditConflict, msg:
-            # Handle conflict and send editor
+        except pg.EditConflict, e:
+            msg = e.message
 
-            # TODO: conflict messages are duplicated from PageEditor,
-            # refactor to one place only.
-            conflict_msg = _('Someone else changed this page while you were editing!')
+            # Handle conflict and send editor
             pg.set_raw_body(savetext, modified=1)
-            if pg.mergeEditConflict(rev):
-                conflict_msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!
-Have a look at the diff of %(difflink)s to see what has been changed.""") % {
-                    'difflink': pg.link_to(pg.request,
-                                           querystr='action=diff&rev=%d' % rev)
-                    }
-                # We don't send preview when we do merge conflict
-                pg.sendEditor(msg=conflict_msg, comment=comment)
-                return
-            else:
-                savemsg = conflict_msg
+
+            pg.mergeEditConflict(rev)
+            # We don't send preview when we do merge conflict
+            pg.sendEditor(msg=msg, comment=comment)
+            return
         
         except pg.SaveError, msg:
             # msg contain a unicode string

@@ -2,7 +2,7 @@
 """
     MoinMoin - Page class
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -1680,4 +1680,23 @@ class Page:
         text = text.replace(u'\r', u'')
         return text
 
+    def isConflict(self):
+        """ Returns true if there is a known editing conflict for that page.
+        
+        @return: true if there is a known conflict.
+        """
 
+        cache = caching.CacheEntry(self.request, self, 'conflict', scope='item')
+        return cache.exists()
+    
+    def setConflict(self, state):
+        """ Sets the editing conflict flag.
+        
+        @param state: bool, true if there is a conflict.
+        """
+        
+        cache = caching.CacheEntry(self.request, self, 'conflict', scope='item')
+        if state:
+            cache.update("") # touch it!
+        else:
+            cache.remove()
