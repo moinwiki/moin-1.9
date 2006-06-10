@@ -208,7 +208,6 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    pagename = pagename.replace(u' ', u'_')
     pagename = pagename.encode(charset)
     return urllib.quote(pagename)
 
@@ -295,7 +294,6 @@ def quoteWikinameFS(wikiname, charset=config.charset):
     @rtype: string
     @return: quoted name, safe for any file system
     """
-    wikiname = wikiname.replace(u' ', u'_') # " " -> "_"
     filename = wikiname.encode(charset)
     
     quoted = []    
@@ -376,7 +374,6 @@ def unquoteWikiname(filename, charsets=[config.charset]):
     #    raise InvalidFileNameError(filename)
     
     wikiname = decodeUserInput(wikiname, charsets)
-    wikiname = wikiname.replace(u'_', u' ') # "_" -> " "
     return wikiname
 
 # time scaling

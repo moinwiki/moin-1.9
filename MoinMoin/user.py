@@ -136,9 +136,9 @@ def normalizeName(name):
     @rtype: unicode
     @return: user name that can be used in acl lines
     """
-    name = name.replace('_', ' ') # we treat _ as a blank
-    username_allowedchars = "'@.-" # ' for names like O'Brian or email addresses.
-                                   # "," and ":" must not be allowed (ACL delimiters).
+    username_allowedchars = "'@.-_" # ' for names like O'Brian or email addresses.
+                                    # "," and ":" must not be allowed (ACL delimiters).
+                                    # We also allow _ in usernames for nicer URLs.
     # Strip non alpha numeric characters (except username_allowedchars), keep white space
     name = ''.join([c for c in name if c.isalnum() or c.isspace() or c in username_allowedchars])
 
@@ -155,7 +155,6 @@ def isValidName(request, name):
     @param name: user name, unicode
     """
     normalized = normalizeName(name)
-    name = name.replace('_', ' ') # we treat _ as a blank
     return (name == normalized) and not wikiutil.isGroupPage(request, name)
 
 
@@ -812,8 +811,6 @@ class User:
         if not self._cfg.interwikiname:
             return None
             
-        # Interwiki links must use _ e.g Wiki:Main_Page
-        pagename = pagename.replace(" ", "_")
         return "%s:%s" % (self._cfg.interwikiname, pagename)
 
     # -----------------------------------------------------------------
@@ -936,7 +933,7 @@ class User:
             else:
                 markup = pagename
         else:
-            markup = '%s:%s' % (wikiname, pagename.replace(" ","_")) 
+            markup = '%s:%s' % (wikiname, pagename) 
         return markup
 
     def mailAccountData(self, cleartext_passwd=None):
