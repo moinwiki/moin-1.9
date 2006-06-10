@@ -199,7 +199,7 @@ class AndExpression(BaseExpression):
         if len(not_terms) == 1:
             t2 = xapian.Query(not_terms[0])
         else:
-            t2 = xapian.Query(xapian.Query.OP_AND, not_terms)
+            t2 = xapian.Query(xapian.Query.OP_OR, not_terms)
 
         return xapian.Query(xapian.Query.OP_AND_NOT, t1, t2)
 
