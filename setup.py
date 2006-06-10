@@ -137,6 +137,7 @@ class build_scripts_create(build_scripts):
                 'python': os.path.normpath(sys.executable),
                 'package': self.package_name,
                 'module': module,
+                'package_location': '/usr/lib/python/site-packages', # FIXME
             }
 
             self.announce("creating %s" % outfile)
@@ -149,9 +150,12 @@ class build_scripts_create(build_scripts):
                         'if     "%%_4ver%%" == "" %(python)s -c "from %(package)s.script.%(module)s import run; run()" %%*\n'
                         % script_vars)
                 else:
-                    file.write('#! %(python)s\n'
-                        'from %(package)s.script.%(module)s import run\n'
-                        'run()\n'
+                    file.write("#! %(python)s\n"
+                        "#Fix and uncomment those 2 lines if your moin command doesn't find the MoinMoin package:\n"
+                        "#import sys\n"
+                        "#sys.path.insert(0, '%(package_location)s')\n"
+                        "from %(package)s.script.%(module)s import run\n"
+                        "run()\n"
                         % script_vars)
             finally:
                 file.close()
