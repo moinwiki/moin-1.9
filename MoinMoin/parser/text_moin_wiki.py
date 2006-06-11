@@ -51,6 +51,9 @@ class Parser:
 
     ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
     dl_rule = ur"^\s+.*?::\s"
+    sq_string = ur"('.*?')" # single quoted string
+    dq_string = ur"(\".*?\")" # double quoted string
+    q_string = ur"(%s|%s)" % (sq_string, dq_string) # quoted string
 
     # the big, fat, ugly one ;)
     formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
@@ -78,7 +81,7 @@ class Parser:
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:[^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)
+(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
 (?P<word>%(word_rule)s)
 (?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
 (?P<url>%(url_rule)s)
@@ -87,11 +90,12 @@ class Parser:
 (?P<smileyA>^(%(smiley)s)(?=\s))
 (?P<ent_symbolic>&[a-zA-Z]+;)
 (?P<ent>[<>&])
-(?P<wikiname_bracket>\[".*?"\])
+(?P<wikiname_bracket>\[%(q_string)s.*?\])
 (?P<tt_bt>`.*?`)"""  % {
 
         'url': url_pattern,
         'punct': punct_pattern,
+        'q_string': q_string,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'url_rule': url_rule,
@@ -209,8 +213,8 @@ class Parser:
         else:
             url, text = url_and_text
 
-        inline = url[0] == 'i'
-        drawing = url[0] == 'd'
+        inline = url.starswith('inline')
+        drawing = url.startswith('drawing')
         url = url.split(":", 1)[1]
         url = wikiutil.url_unquote(url, want_unicode=True)
         text = text or url
@@ -367,7 +371,6 @@ class Parser:
         else:
             return self.interwiki(["wiki:" + word])
 
-
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
         scheme = word.split(":", 1)[0]
@@ -389,21 +392,32 @@ class Parser:
                     self.formatter.url(0))
 
 
-    def _wikiname_bracket_repl(self, word):
-        """Handle special-char wikinames."""
-        wikiname = word[2:-2]
-        if wikiname:
-            return self._word_repl(wikiname)
+    def _wikiname_bracket_repl(self, text):
+        """Handle special-char wikinames with link text, like:
+           ["Jim O'Brian" Jim's home page] or ['Hello "world"!' a page with doublequotes]i
+        """
+        word = text[1:-1] # strip brackets
+        first_char = word[0]
+        if first_char in "'\"": # this is quoted
+            # split on closing quote
+            target, linktext = word[1:].split(first_char, 1)
+        else: # not quoted
+            # split on whitespace
+            target, linktext = word.split(None, 1)
+        if target:
+            linktext = linktext.strip()
+            return self._word_repl(target, linktext)
         else:
-            return self.formatter.text(word)
+            return self.formatter.text(text)
 
 
     def _url_bracket_repl(self, word):
         """Handle bracketed URLs."""
-
+        word = word[1:-1] # strip brackets
+        
         # Local extended link?
-        if word[1] == ':':
-            words = word[2:-1].split(':', 1)
+        if word[0] == ':':
+            words = word[1:].split(':', 1)
             if len(words) == 1:
                 words = words * 2
             words[0] = 'wiki:Self:%s' % words[0]
@@ -411,7 +425,7 @@ class Parser:
             #return self._word_repl(words[0], words[1])
 
         # Traditional split on space
-        words = word[1:-1].split(None, 1)
+        words = word.split(None, 1)
         if len(words) == 1:
             words = words * 2
 
@@ -888,7 +902,7 @@ class Parser:
         """ Replace match using type name """
         result = []
         for type, hit in match.groupdict().items():
-            if hit is not None and type != "hmarker":
+            if hit is not None and not type in ["hmarker", ]:
                 
                 ###result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
                 if self.in_pre and type not in ['pre', 'ent']:
