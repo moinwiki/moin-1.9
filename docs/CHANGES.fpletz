@@ -1,0 +1,35 @@
+Branch moin/1.6-xapian-fpletz
+=============================
+
+  Known main issues:
+    * ...
+
+  ToDo:
+    * Manually parse prefixes (e.g. title:) in MoinMoin.Xapian.Index
+      right before searching
+    * Mockup the new search UI
+
+  New Features:
+    * TBD
+  
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * ...
+
+  Other Changes:
+    * ...
+  
+  Developer notes:
+    * ...
+
+
+Diary
+=====
+
+2006-06-10 Changed xapian_term() functions to return xapian.Query objects
+but without touching the prefixes as we don't have a prefixMap yet. Will
+implement this in MoinMoin.Xapian.Index. AndExpression needed some more
+tweaking to use AND_NOT because Xapian doesn't provide a pure NOT. Should
+be no issue with OrExpression as _moinSearch handles this correctly.
+
+2006-06-11
+
