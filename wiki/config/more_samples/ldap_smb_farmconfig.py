@@ -87,7 +87,8 @@ class FarmConfig(DefaultConfig):
     #ldap_bindpw = 'secret'
     
     #or we can use the username and password we got from the user:
-    ldap_binddn = '%(username)s@example.org' # DN we use for first bind
+    ldap_binddn = '%(username)s@example.org' # DN we use for first bind (AD)
+    #ldap_binddn = 'cn=admin,dc=example,dc=org' # DN we use for first bind (OpenLDAP)
     ldap_bindpw = '%(password)s' # password we use for first bind
     
     ldap_base = 'ou=SOMEUNIT,dc=example,dc=org' # base DN we use for searching
