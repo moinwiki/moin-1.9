@@ -399,19 +399,20 @@ class Parser:
             if len(words) == 1:
                 words = words * 2
 
-            if words[0][0] == '#':
-                # anchor link
+            if words[0].startswith('#'): # anchor link
                 return (self.formatter.url(1, words[0]) +
                         self.formatter.text(words[1]) +
                         self.formatter.url(0))
-            raise "what is triggering this?"
         else:
             scheme, rest = scheme_and_rest
-
-        if scheme == "wiki":
-            return self.interwiki(word, pretty_url=1)
-        if scheme in self.attachment_schemas:
-            return self.attachment(word, pretty_url=1)
+            if scheme == "wiki":
+                return self.interwiki(word, pretty_url=1)
+            if scheme in self.attachment_schemas:
+                return self.attachment(word, pretty_url=1)
+            
+            words = word.split(None, 1)
+            if len(words) == 1:
+                words = words * 2
 
         if wikiutil.isPicture(words[1]) and re.match(self.url_rule, words[1]):
             return (self.formatter.url(1, words[0], css='external', do_escape=0) +
