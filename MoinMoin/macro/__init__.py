@@ -335,13 +335,10 @@ class Macro:
         
     def _macro_InterWiki(self, args):
         from StringIO import StringIO
-
-        # load interwiki list
-        dummy = wikiutil.resolve_wiki(self.request, '')
-
+        interwiki_list = wikiutil.load_wikimap(self.request)
         buf = StringIO()
         buf.write('<dl>')
-        list = self.cfg._interwiki_list.items() # this is where we cached it
+        list = interwiki_list.items() # this is where we cached it
         list.sort()
         for tag, url in list:
             buf.write('<dt><tt><a href="%s">%s</a></tt></dt>' % (
@@ -351,7 +348,6 @@ class Macro:
             else:
                 buf.write('<dd><tt>%s</tt></dd>' % url)
         buf.write('</dl>')
-
         return self.formatter.rawHTML(buf.getvalue())
 
     def _macro_PageCount(self, args):
