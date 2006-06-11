@@ -478,6 +478,11 @@ class MetaDict(dict):
 #############################################################################
 ### InterWiki
 #############################################################################
+def strip_quotes(text):
+    """ strip ' or " quotes """
+    if text[0] in "'\"" and text[0] == text[-1]:
+        text = text[1:-1]
+    return text
 
 def split_wiki(wikiurl):
     """
@@ -489,12 +494,13 @@ def split_wiki(wikiurl):
     """
     # !!! use a regex here!
     try:
-        wikitag, tail = wikiurl.split(":", 1)
+        wikitag, tail = wikiurl.split(":", 1) # e.g. MoinMoin:FrontPage
     except ValueError:
         try:
-            wikitag, tail = wikiurl.split("/", 1)
+            wikitag, tail = wikiurl.split("/", 1) # for what is this used?
         except ValueError:
             wikitag, tail = 'Self', wikiurl
+    tail = strip_quotes(tail)
     return wikitag, tail
 
 
