@@ -761,25 +761,50 @@ def pagelinkmarkup(pagename):
     else:
         return u'["%s"]' % pagename
 
+#############################################################################
+### mimetype support
+#############################################################################
+import mimetypes
+
+MIMETYPES_MORE = {
+ # OpenOffice 2.x & other open document stuff
+ '.odt': 'application/vnd.oasis.opendocument.text',
+ '.ods': 'application/vnd.oasis.opendocument.spreadsheet',
+ '.odp': 'application/vnd.oasis.opendocument.presentation',
+ '.odg': 'application/vnd.oasis.opendocument.graphics',
+ '.odc': 'application/vnd.oasis.opendocument.chart',
+ '.odf': 'application/vnd.oasis.opendocument.formula',
+ '.odb': 'application/vnd.oasis.opendocument.database',
+ '.odi': 'application/vnd.oasis.opendocument.image',
+ '.odm': 'application/vnd.oasis.opendocument.text-master',
+ '.ott': 'application/vnd.oasis.opendocument.text-template',
+ '.ots': 'application/vnd.oasis.opendocument.spreadsheet-template',
+ '.otp': 'application/vnd.oasis.opendocument.presentation-template',
+ '.otg': 'application/vnd.oasis.opendocument.graphics-template',
+}
+[mimetypes.add_type(mimetype, ext, True) for ext, mimetype in MIMETYPES_MORE.items()]
+
+MIMETYPES_sanitize_mapping = {
+    # this stuff is text, but got application/* for unknown reasons
+    ('application', 'docbook+xml'): ('text', 'docbook'),
+    ('application', 'x-latex'): ('text', 'latex'),
+    ('application', 'x-tex'): ('text', 'tex'),
+    ('application', 'javascript'): ('text', 'javascript'),
+}
+
+MIMETYPES_spoil_mapping = {} # inverse mapping of above
+for key, value in MIMETYPES_sanitize_mapping.items():
+    MIMETYPES_spoil_mapping[value] = key
+
+
 # mimetype stuff ------------------------------------------------------------
 class MimeType(object):
     """ represents a mimetype like text/plain """
-    sanitize_mapping = {
-        # this stuff is text, but got application/* for unknown reasons
-        ('application', 'docbook+xml'): ('text', 'docbook'),
-        ('application', 'x-latex'): ('text', 'latex'),
-        ('application', 'x-tex'): ('text', 'tex'),
-        ('application', 'javascript'): ('text', 'javascript'),
-    }
-    spoil_mapping = {} # inverse mapping of above
     
     def __init__(self, mimestr=None, filename=None):
         self.major = self.minor = None # sanitized mime type and subtype
         self.params = {} # parameters like "charset" or others
         self.charset = None # this stays None until we know for sure!
-
-        for key, value in self.sanitize_mapping.items():
-            self.spoil_mapping[value] = key
 
         if mimestr:
             self.parse_mimetype(mimestr)
@@ -787,7 +812,6 @@ class MimeType(object):
             self.parse_filename(filename)
     
     def parse_filename(self, filename):
-        import mimetypes
         mtype, encoding = mimetypes.guess_type(filename)
         if mtype is None:
             mtype = 'application/octet-stream'
@@ -844,13 +868,13 @@ class MimeType(object):
             readable text, we will return some text/* mimetype, not application/*,
             because we need text/plain as fallback and not application/octet-stream.
         """
-        self.major, self.minor = self.sanitize_mapping.get((self.major, self.minor), (self.major, self.minor))
+        self.major, self.minor = MIMETYPES_sanitize_mapping.get((self.major, self.minor), (self.major, self.minor))
 
     def spoil(self):
         """ this returns something conformant to /etc/mime.type or IANA as a string,
             kind of inverse operation of sanitize(), but doesn't change self
         """
-        major, minor = self.spoil_mapping.get((self.major, self.minor), (self.major, self.minor))
+        major, minor = MIMETYPES_spoil_mapping.get((self.major, self.minor), (self.major, self.minor))
         return self.content_type(major, minor)
 
     def content_type(self, major=None, minor=None, charset=None, params=None):

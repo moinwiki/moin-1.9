@@ -112,7 +112,7 @@ def execute(Macro, args):
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
     
     state = (_('Disabled'), _('Enabled'))
-    row(_('Lupy search'), state[request.cfg.lupy_search])
+    row(_('Xapian search'), state[request.cfg.xapian_search])
     
     row(_('Active threads'), t_count or 'N/A')
     buf.write(u'</dl>')
