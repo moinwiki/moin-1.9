@@ -230,8 +230,8 @@ def link_dialog(request):
         page_list = ""
     
     # list of interwiki names
-    wikiutil.resolve_wiki(request, "Self:FrontPage")
-    interwiki = request.cfg._interwiki_list.keys()
+    interwiki_list = wikiutil.load_wikimap(request)
+    interwiki = interwiki_list.keys()
     interwiki.sort()
     iwpreferred = request.cfg.interwiki_preferred
     if not iwpreferred or iwpreferred and iwpreferred[-1] != None:

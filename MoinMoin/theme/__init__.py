@@ -347,10 +347,6 @@ class ThemeBase:
         except ValueError:
             pass
                   
-        # Normalize page names, replace '_' with ' '. Usually
-        # all names use spaces internally, but for
-        # [name_with_spaces label] we must save the underscores
-        # until this point.
         pagename = request.normalizePagename(pagename)
         link = Page(request, pagename).link_to(request, title)
 
@@ -555,9 +551,6 @@ class ThemeBase:
                 for pagename in trail:
                     try:
                         interwiki, page = pagename.split(":", 1)
-                        # Items in trail are saved as valid interwiki
-                        # links, using _ for spaces.
-                        page = page.replace('_', ' ')
                         if request.cfg.interwikiname != interwiki:
                             link = (self.request.formatter.interwikilink(True, interwiki, page) +
                                     self.shortenPagename(page) +

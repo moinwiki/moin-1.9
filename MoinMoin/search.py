@@ -393,7 +393,6 @@ class LinkSearch(BaseExpression):
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool 
         """
-        pattern = pattern.replace("_", " ")
         # used for search in links
         self._pattern = pattern
         # used for search in text

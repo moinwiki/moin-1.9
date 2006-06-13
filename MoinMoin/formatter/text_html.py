@@ -502,7 +502,7 @@ class Formatter(FormatterBase):
         """
         @keyword title: override using the interwiki wikiname as title
         """
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:%s' % (interwiki, pagename))
+        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
             if on:
@@ -626,6 +626,7 @@ class Formatter(FormatterBase):
     def attachment_link(self, url, text, **kw):
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
+        #self.request.log("attachment_link: url %s pagename %s filename %s" % (url, pagename, filename))
         fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
@@ -694,8 +695,7 @@ class Formatter(FormatterBase):
 
         # check for map file
         if os.path.exists(mappath):
-            # we have a image map. inline it and add a map ref
-            # to the img tag
+            # we have a image map. inline it and add a map ref to the img tag
             try:
                 map = file(mappath, 'r').read()
             except IOError:
