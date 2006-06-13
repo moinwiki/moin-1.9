@@ -107,8 +107,21 @@ Version 1.6.current:
       'item', it will use a cache directory per item (== per page).
       Creating a CacheEntry without explicit scope is DEPRECATED.
     * smileys moved from MoinMoin.config to MoinMoin.theme
+    * removed all _ magic in URLs and filenames
+      TODO: write mig script for data_dir
+      TODO: make blanks in interwiki pagelinks possible
 
   New Features:
+    * Removed "underscore in URL" == "blank in pagename magic" - it made more
+      trouble than it was worth. If you still want to have a _ in URL, just
+      put a _ into pagename.
+    * Introduced quoting for pagenames and new, easier link markup:
+      * ["Page with blanks" but different link text],
+        NOTE: using [:Page with blanks:but different link text] is DEPRECATED.
+      * ["/Sub Page" with different link text]
+      * MoinMoin:"Page with blanks"
+      * [wiki:MoinMoin:"Page with blanks" different link text]
+      * attachment:"blanks are evil.txt"
 
     * FeatureRequests/WikiEmailIntegration TODO:make some help page when stable
     * HTML parser (called "html") that allows you to use HTML on the page.

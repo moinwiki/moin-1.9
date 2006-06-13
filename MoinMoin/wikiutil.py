@@ -208,7 +208,6 @@ def quoteWikinameURL(pagename, charset=config.charset):
     @rtype: string
     @return: the quoted filename, all unsafe characters encoded
     """
-    pagename = pagename.replace(u' ', u'_')
     pagename = pagename.encode(charset)
     return urllib.quote(pagename)
 
@@ -295,7 +294,6 @@ def quoteWikinameFS(wikiname, charset=config.charset):
     @rtype: string
     @return: quoted name, safe for any file system
     """
-    wikiname = wikiname.replace(u' ', u'_') # " " -> "_"
     filename = wikiname.encode(charset)
     
     quoted = []    
@@ -376,7 +374,6 @@ def unquoteWikiname(filename, charsets=[config.charset]):
     #    raise InvalidFileNameError(filename)
     
     wikiname = decodeUserInput(wikiname, charsets)
-    wikiname = wikiname.replace(u'_', u' ') # "_" -> " "
     return wikiname
 
 # time scaling
@@ -481,51 +478,8 @@ class MetaDict(dict):
 #############################################################################
 ### InterWiki
 #############################################################################
-
-def split_wiki(wikiurl):
-    """
-    Split a wiki url.
-    
-    @param wikiurl: the url to split
-    @rtype: tuple
-    @return: (tag, tail)
-    """
-    # !!! use a regex here!
-    try:
-        wikitag, tail = wikiurl.split(":", 1)
-    except ValueError:
-        try:
-            wikitag, tail = wikiurl.split("/", 1)
-        except ValueError:
-            wikitag, tail = 'Self', wikiurl
-    return wikitag, tail
-
-
-def join_wiki(wikiurl, wikitail):
-    """
-    Add a page name to an interwiki url.
-    
-    @param wikiurl: wiki url, maybe including a $PAGE placeholder
-    @param wikitail: page name
-    @rtype: string
-    @return: generated URL of the page in the other wiki
-    """
-    if wikiurl.find('$PAGE') == -1:
-        return wikiurl + wikitail
-    else:
-        return wikiurl.replace('$PAGE', wikitail)
-
-
-def resolve_wiki(request, wikiurl):
-    """
-    Resolve an interwiki link.
-    
-    @param request: the request object
-    @param wikiurl: the InterWiki:PageName link
-    @rtype: tuple
-    @return: (wikitag, wikiurl, wikitail, err)
-    """
-    # load map (once, and only on demand)
+def load_wikimap(request):
+    """ load interwiki map (once, and only on demand) """
     try:
         _interwiki_list = request.cfg._interwiki_list
     except AttributeError:
@@ -565,15 +519,75 @@ def resolve_wiki(request, wikiurl):
 
         # save for later
         request.cfg._interwiki_list = _interwiki_list
+    
+    return _interwiki_list
+    
+def split_wiki(wikiurl):
+    """ Split a wiki url, e.g:
+    
+    'MoinMoin:FrontPage' -> "MoinMoin", "FrontPage", ""
+    'FrontPage' -> "Self", "FrontPage", ""
+    'MoinMoin:"Page with blanks" link title' -> "MoinMoin", "Page with blanks", "link title"
 
-    # split wiki url
-    wikitag, tail = split_wiki(wikiurl)
+    can also be used for:
 
-    # return resolved url
-    if _interwiki_list.has_key(wikitag):
-        return (wikitag, _interwiki_list[wikitag], tail, False)
+    'attachment:"filename with blanks.txt" other title' -> "attachment", "filename with blanks.txt", "other title"
+
+    @param wikiurl: the url to split
+    @rtype: tuple
+    @return: (wikiname, pagename, linktext)
+    """
+    try:
+        wikiname, rest = wikiurl.split(":", 1) # e.g. MoinMoin:FrontPage
+    except ValueError:
+        try:
+            wikiname, rest = wikiurl.split("/", 1) # for what is this used?
+        except ValueError:
+            wikiname, rest = 'Self', wikiurl
+    first_char = rest[0]
+    if first_char in "'\"": # quoted pagename
+        pagename_linktext = rest[1:].split(first_char, 1)
+    else: # not quoted, split on whitespace
+        pagename_linktext = rest.split(None, 1)
+    if len(pagename_linktext) == 1:
+        pagename, linktext = pagename_linktext[0], ""
     else:
-        return (wikitag, request.getScriptname(), "/InterWiki", True)
+        pagename, linktext = pagename_linktext
+    linktext = linktext.strip()
+    return wikiname, pagename, linktext
+
+def resolve_wiki(request, wikiurl):
+    """ Resolve an interwiki link.
+    
+    @param request: the request object
+    @param wikiurl: the InterWiki:PageName link
+    @rtype: tuple
+    @return: (wikitag, wikiurl, wikitail, err)
+    """
+    _interwiki_list = load_wikimap(request)
+    wikiname, pagename, linktext = split_wiki(wikiurl)
+    if _interwiki_list.has_key(wikiname):
+        return (wikiname, _interwiki_list[wikiname], pagename, False)
+    else:
+        return (wikiname, request.getScriptname(), "/InterWiki", True)
+
+def join_wiki(wikiurl, wikitail):
+    """
+    Add a (url_quoted) page name to an interwiki url.
+   
+    Note: We can't know what kind of URL quoting a remote wiki expects.
+          We just use a utf-8 encoded string with standard URL quoting.
+          
+    @param wikiurl: wiki url, maybe including a $PAGE placeholder
+    @param wikitail: page name
+    @rtype: string
+    @return: generated URL of the page in the other wiki
+    """
+    wikitail = url_quote(wikitail)
+    if '$PAGE' in wikiurl:
+        return wikiurl.replace('$PAGE', wikitail)
+    else:
+        return wikiurl + wikitail
 
 
 #############################################################################
