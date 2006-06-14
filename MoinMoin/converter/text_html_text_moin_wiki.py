@@ -1113,7 +1113,7 @@ class convert_tree(visitor):
                 self.text.append("%s" % interwikiname)
                 return
             elif title == 'Self':
-                self.text.append("[:%s:%s]" % (href, text))
+                self.text.append('["%s" %s]' % (href, text))
                 return
             elif interwikiname:
                 self.text.append("[wiki:%s %s]" % (interwikiname, text))
@@ -1129,9 +1129,9 @@ class convert_tree(visitor):
             if title and title.startswith("attachment:"):
                 url = wikiutil.url_unquote(title[len("attachment:"):])
                 if url != text:
-                    self.text.append("[%s %s]" % (title, text))
+                    self.text.append('[attachment:"%s" %s]' % (url, text))
                 else:
-                    self.text.extend([self.white_space, title, self.white_space])
+                    self.text.extend([self.white_space, 'attachment:"%s"' % url, self.white_space])
             # wiki link
             elif href.startswith(scriptname):
                 pagename = href[len(scriptname):]
@@ -1149,7 +1149,7 @@ class convert_tree(visitor):
                     self.text.append(wikiutil.pagelinkmarkup(text))
                 # labeled link
                 else:
-                    self.text.append("[:%s:%s]" % (pagename, text))
+                    self.text.append('["%s" %s]' % (pagename, text))
             # mailto link
             elif href.startswith("mailto:"):
                 if href[len("mailto:"):] == text:
