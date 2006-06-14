@@ -188,6 +188,8 @@ class Parser:
         _ = self._
         #self.request.log("attachment: target_and_text %s" % target_and_text)
         scheme, fname, text = wikiutil.split_wiki(target_and_text)
+        if not text:
+            text = fname
 
         if scheme == 'drawing':
             return self.formatter.attachment_drawing(fname, text)
