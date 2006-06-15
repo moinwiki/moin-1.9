@@ -140,6 +140,9 @@ Version 1.6.current:
       To use TLS/SSL support you must also install the TLSLite library
       (http://trevp.net/tlslite/). Version 0.3.8 was used for development and
       testing.
+    * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
+      if rev. dns lookups are broken in your network (leading to long delays
+      on page saves). With False, edit-log will only contain IP, not hostname.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

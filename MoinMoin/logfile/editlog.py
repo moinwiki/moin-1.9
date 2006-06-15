@@ -143,17 +143,19 @@ class EditLog(LogFile):
     
             If `host` is None, it's read from request vars.
             """
-            import socket
-            
             if host is None:
                 host = request.remote_addr
-                
-            try:
-                hostname = socket.gethostbyaddr(host)[0]
-                hostname = unicode(hostname, config.charset)
-            except (socket.error, UnicodeError), err:
-                hostname = host
 
+            if request.cfg.log_reverse_dns_lookups:
+                import socket
+                try:
+                    hostname = socket.gethostbyaddr(host)[0]
+                    hostname = unicode(hostname, config.charset)
+                except (socket.error, UnicodeError), err:
+                    hostname = host
+            else:
+                hostname = host
+            
             remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ',}
             comment = comment.translate(remap_chars)
             user_id = request.user.valid and request.user.id or ''
