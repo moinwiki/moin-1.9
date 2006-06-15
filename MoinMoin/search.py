@@ -404,7 +404,7 @@ class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
 
     def __init__(self, pattern, use_re=False, case=True):
-        """ Init a title search
+        """ Init a link search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
@@ -483,6 +483,56 @@ class LinkSearch(BaseExpression):
         else:
             return UnicodeQuery('%s:%s' %
                     (Xapian.Index.prefixMap['linkto'], pattern))
+
+
+class LanguageSearch(BaseExpression):
+    """ Search the pages written in a language """
+
+    def __init__(self, pattern, use_re=False, case=True):
+        """ Init a language search
+
+        @param pattern: pattern to search for, ascii string or unicode
+        @param use_re: treat pattern as re of plain text, bool
+        @param case: do case sensitive search, bool 
+        """
+        # used for search in languages, always lowercase
+        self._pattern = pattern.lower()
+        self.negated = 0
+        self.use_re = use_re
+        self.case = case
+        self.xapian_called = False
+        self._build_re(self._pattern, use_re=use_re, case=case)
+
+    def costs(self):
+        return 5000 # cheaper than a TextSearch
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
+
+    def highlight_re(self):
+        return ""
+
+    def search(self, page):
+        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
+        if not self.xapian_called:
+            return None
+        else:
+            # XXX why not return None or empty list?
+            return [Match()]
+
+    def xapian_wanted(self):
+        return not self.use_re
+
+    def xapian_term(self):
+        pattern = self.pattern
+        if self.use_re:
+            return None # xapian doesnt support regex search
+        else:
+            self.xapian_called = True
+            return UnicodeQuery('%s%s' %
+                    (Xapian.Index.prefixMap['lang'], pattern))
+
 
 ############################################################################
 ### Results
@@ -782,7 +832,8 @@ class QueryParser:
         title_search = self.titlesearch
         regex = self.regex
         case = self.case
-        linkto = 0
+        linkto = False
+        lang = False
 
         for m in modifiers:
             if "title".startswith(m):
@@ -793,8 +844,12 @@ class QueryParser:
                 case = True
             elif "linkto".startswith(m):
                 linkto = True
+            elif "lang".startswith(m):
+                lang = True
 
-        if linkto:
+        if lang:
+            obj = LanguageSearch(text, use_re=regex, case=False)
+        elif linkto:
             obj = LinkSearch(text, use_re=regex, case=case)
         elif title_search:
             obj = TitleSearch(text, use_re=regex, case=case)

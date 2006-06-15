@@ -264,6 +264,7 @@ class Index:
                        #  the D term, and changing the last digit to a '2' if it's a '3')
                        #X   longer prefix for user-defined use
         'linkto': 'XLINKTO', # this document links to that document
+        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in 
                        #Y   year (four digits)
     }
 
@@ -505,22 +506,31 @@ class Index:
         except (OSError, IOError), err:
             pass
 
-    def _get_language(self, page):
+    def _get_languages(self, page):
         body = page.get_raw_body()
+        default_lang = page.request.cfg.language_default
 
+        lang = ''
         for line in body.split('\n'):
             if line.startswith('#language'):
                 lang = line.split(' ')[1]
                 try:
                     getStemmer(lang)
                 except KeyError:
+                    # lang is not stemmable
                     break
                 else:
-                    return lang
+                    # lang is stemmable
+                    return (lang, lang)
             elif not line.startswith('#'):
                 break
+        
+        if not lang:
+            # no lang found at all.. fallback to default language
+            lang = default_lang
 
-        return page.request.cfg.language_default
+        # return actual lang and lang to stem in
+        return (lang, default_lang)
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
@@ -535,7 +545,8 @@ class Index:
         pagename = page.page_name
         mtime = page.mtime_usecs()
         itemid = "%s:%s" % (wikiname, pagename)
-        language = self._get_language(page)  # XXX: Hack until we get proper metadata
+        # XXX: Hack until we get proper metadata
+        language, stem_language = self._get_languages(page)
         updated = False
 
         if mode == 'update':
@@ -563,7 +574,8 @@ class Index:
             xmtime = xapdoc.SortKey('mtime', mtime)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid),
-                    xapdoc.Keyword('lang', language)]
+                    xapdoc.Keyword('lang', language),
+                    xapdoc.Keyword('stem_lang', stem_language)]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
