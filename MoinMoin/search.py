@@ -89,7 +89,8 @@ class BaseExpression:
                 self.pattern = pattern
         else:
             pattern = re.escape(pattern)
-            self.search_re = re.compile(pattern, flags)
+            self.search_re = re.compile(r'%s[%s]*' % (pattern,
+                config.chars_lower), flags)
             self.pattern = pattern
 
 
@@ -247,8 +248,18 @@ class TextSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = case
+        
+        if self.xapian_wanted() and Xapian.use_stemming:
+            terms = self._pattern.split(' ')
+            terms = Xapian.getStemmer().stemWords(terms)
+            self._pattern = ' '.join(terms)
+            stemmed = True
+        else:
+            stemmed = False
+        
         self._build_re(self._pattern, use_re=use_re, case=case)
-        self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
+        self.titlesearch = TitleSearch(self._pattern, use_re=use_re,
+                case=case, stemmed=stemmed)
         
     def costs(self):
         return 10000
@@ -292,7 +303,7 @@ class TextSearch(BaseExpression):
         else:
             analyzer = Xapian.WikiAnalyzer()
             terms = self._pattern.split()
-            
+
             # all parsed wikiwords, AND'ed
             queries = []
             for t in terms:
@@ -311,7 +322,7 @@ class TextSearch(BaseExpression):
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
-    def __init__(self, pattern, use_re=False, case=False):
+    def __init__(self, pattern, use_re=False, case=False, stemmed=False):
         """ Init a title search
 
         @param pattern: pattern to search for, ascii string or unicode
@@ -322,7 +333,13 @@ class TitleSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = case
-        self._build_re(unicode(pattern), use_re=use_re, case=case)
+
+        if not stemmed and self.xapian_wanted() and Xapian.use_stemming:
+            terms = self._pattern.split(' ')
+            terms = Xapian.getStemmer().stemWords(terms)
+            self._pattern = ' '.join(terms)
+
+        self._build_re(self._pattern, use_re=use_re, case=case)
         
     def costs(self):
         return 100
