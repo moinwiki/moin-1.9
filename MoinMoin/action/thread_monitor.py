@@ -8,10 +8,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from time import sleep
+from StringIO import StringIO
+
 from MoinMoin.wikiutil import escape
 from MoinMoin.util import thread_monitor
-from StringIO import StringIO
-from time import sleep
 
 def execute(pagename, request):
     request.http_headers()
@@ -30,3 +31,4 @@ def execute(pagename, request):
     request.write('</pre>')
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
+
