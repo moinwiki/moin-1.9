@@ -101,6 +101,7 @@ Version 1.6.current:
       parser.wiki -> parser.text_moin_wiki
     * Added thread_monitor. It can be activated using:
       from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
+      or by requesting URL ...?action=thread_monitor
     * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
       will cache into a common directory for all wikis in the same farm, if you
       specify 'wiki', it will use a cache directory per wiki and if you specify
