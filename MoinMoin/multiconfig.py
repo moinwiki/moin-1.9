@@ -272,6 +272,9 @@ reStructuredText Quick Reference
     language_ignore_browser = False # ignore browser settings, use language_default
                                     # or user prefs
 
+    log_reverse_dns_lookups = True  # if we do reverse dns lookups for logging hostnames
+                                    # instead of just IPs
+
     xapian_search = False # disabled until xapian is finished
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
