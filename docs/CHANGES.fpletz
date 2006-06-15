@@ -12,6 +12,7 @@ Branch moin/1.6-xapian-fpletz
   ToDo:
     * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
     * Mockup the new search UI
+    * Write/update documentation for all the new search stuff
 
   New Features:
     * Faster search thanks to Xapian

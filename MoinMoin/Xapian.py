@@ -631,11 +631,12 @@ class Index:
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
+                xlanguage = xapdoc.Keyword('lang', language)
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, ),
+                                      keywords=(xatt_itemid, xtitle, xlanguage),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
                 doc.analyzerFactory = WikiAnalyzer
