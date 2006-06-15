@@ -21,6 +21,7 @@ from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
 
 try:
+    # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
     from Stemmer import Stemmer
     def getStemmer(algorithm='english'):
         return Stemmer(algorithm)
