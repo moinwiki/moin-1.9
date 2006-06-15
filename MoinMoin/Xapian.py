@@ -23,8 +23,6 @@ from MoinMoin.util import filesys, lock
 try:
     # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
     from Stemmer import Stemmer
-    def getStemmer(algorithm='english'):
-        return Stemmer(algorithm)
     use_stemming = True
 except ImportError:
     use_stemming = False
@@ -37,6 +35,8 @@ class UnicodeQuery(xapian.Query):
         for term in args:
             if isinstance(term, unicode):
                 term = term.encode(self.encoding)
+            elif isinstance(term, list) or isinstance(term, tuple):
+                term = map(lambda t: t.encode(self.encoding), term)
             nargs.append(term)
 
         xapian.Query.__init__(self, *nargs, **kwargs)
@@ -45,6 +45,9 @@ class UnicodeQuery(xapian.Query):
 ##############################################################################
 ### Tokenizer
 ##############################################################################
+
+def getWikiAnalyzerFactory(language='en'):
+    return (lambda: WikiAnalyzer(language))
 
 class WikiAnalyzer:
     singleword = r"[%(u)s][%(l)s]+" % {
@@ -70,19 +73,16 @@ class WikiAnalyzer:
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
-    def __init__(self):
-        if use_stemming:
-            self.stemmer = getStemmer()
+    def __init__(self, language=None):
+        if use_stemming and language:
+            self.stemmer = Stemmer(language)
+        else:
+            self.stemmer = None
 
-    def tokenize(self, value):
-        """Yield a stream of lower cased words from a string.
-           value must be an UNICODE object or a list of unicode objects
-        """
+    def raw_tokenize(self, value):
         def enc(uc):
             """ 'encode' unicode results into whatever xapian / xapwrap wants """
             lower = uc.lower()
-            if use_stemming:
-                return self.stemmer.stemWord(lower)
             return lower
             
         if isinstance(value, list): # used for page links
@@ -112,6 +112,18 @@ class WikiAnalyzer:
                     if self.wikiword_re.match(word):
                         for sm in re.finditer(self.singleword_re, word):
                             yield enc(sm.group())
+
+    def tokenize(self, value, flat_stemming=True):
+        """Yield a stream of lower cased raw and stemmed (optional) words from a string.
+           value must be an UNICODE object or a list of unicode objects
+        """
+        for i in self.raw_tokenize(value):
+            if flat_stemming:
+                yield i # XXX: should we really use a prefix for that? Index.prefixMap['raw'] + i
+                if self.stemmer:
+                    yield self.stemmer.stemWord(i)
+            else:
+                yield (i, self.stemmer.stemWord(i))
 
 
 #############################################################################
@@ -254,7 +266,7 @@ class Index:
                        #N   ISO couNtry code (or domaiN name)
                        #P   Pathname
                        #Q   uniQue id
-                       #R   Raw (i.e. unstemmed) term
+        'raw':  'R',   # Raw (i.e. unstemmed) term
         'title': 'S',  # Subject (or title)
         'mimetype': 'T',
         'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
@@ -495,7 +507,7 @@ class Index:
                                       keywords=(xtitle, xitemid, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = WikiAnalyzer
+                doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (filename, uid))
                     doc.uid = uid
@@ -515,7 +527,7 @@ class Index:
             if line.startswith('#language'):
                 lang = line.split(' ')[1]
                 try:
-                    getStemmer(lang)
+                    Stemmer(lang)
                 except KeyError:
                     # lang is not stemmable
                     break
@@ -583,17 +595,8 @@ class Index:
                                   keywords=xkeywords,
                                   sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
-            doc.analyzerFactory = WikiAnalyzer
-            #search_db_language = "english"      # XXX: hardcoded
-            #stemmer = xapian.Stem(search_db_language)
-            #pagetext = page.get_raw_body().lower()
-            #words = re.finditer(r"\w+", pagetext)
-            #count = 0
-            #for wordmatch in words:
-            #    count += 1
-            #    word = wordmatch.group().encode(config.charset)
-            #    document.add_posting('R' + stemmer.stem_word(word), count) # count should be term position in document (starting at 1)
-            
+            doc.analyzerFactory = getWikiAnalyzerFactory()
+
             if mode == 'update':
                 if debug: request.log("%s (replace %r)" % (pagename, uid))
                 doc.uid = uid
@@ -636,10 +639,10 @@ class Index:
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, xlanguage),
+                                      keywords=(xatt_itemid, xtitle, xlanguage, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = WikiAnalyzer
+                doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid
