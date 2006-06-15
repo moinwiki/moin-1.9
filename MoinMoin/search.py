@@ -495,7 +495,7 @@ class LanguageSearch(BaseExpression):
         @param use_re: treat pattern as re of plain text, bool
         @param case: do case sensitive search, bool 
         """
-        # used for search in languages, always lowercase
+        # iso language code, always lowercase
         self._pattern = pattern.lower()
         self.negated = 0
         self.use_re = use_re
