@@ -372,7 +372,7 @@ class Index:
                     indexThread.join()
                 return func
 
-            self.request.finish = joinDecorator(self.request.finish)        
+            self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
             self.lock.release()
@@ -405,7 +405,7 @@ class Index:
                     indexThread.join()
                 return func
                 
-            self.request.finish = joinDecorator(self.request.finish)        
+            self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
             self.lock.release()
@@ -436,8 +436,8 @@ class Index:
                 break
             except wikiutil.PluginMissingError:
                 pass
-            #else:
-            #    raise "Cannot load filter for mimetype." + modulename  # XXX
+            else:
+                request.log("Cannot load filter for mimetype." + modulename)
         try:
             data = execute(self, filename)
             if debug:
@@ -505,6 +505,23 @@ class Index:
         except (OSError, IOError), err:
             pass
 
+    def _get_language(self, page):
+        body = page.get_raw_body()
+
+        for line in body.split('\n'):
+            if line.startswith('#language'):
+                lang = line.split(' ')[1]
+                try:
+                    getStemmer(lang)
+                except KeyError:
+                    break
+                else:
+                    return lang
+            elif not line.startswith('#'):
+                break
+
+        return page.request.cfg.language_default
+
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
@@ -518,6 +535,7 @@ class Index:
         pagename = page.page_name
         mtime = page.mtime_usecs()
         itemid = "%s:%s" % (wikiname, pagename)
+        language = self._get_language(page)  # XXX: Hack until we get proper metadata
         updated = False
 
         if mode == 'update':
@@ -544,7 +562,8 @@ class Index:
             xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
             xmtime = xapdoc.SortKey('mtime', mtime)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
-            xkeywords = [xapdoc.Keyword('itemid', itemid)]
+            xkeywords = [xapdoc.Keyword('itemid', itemid),
+                    xapdoc.Keyword('lang', language)]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
@@ -645,7 +664,7 @@ class Index:
                     fname = fname.strip()
                     self._index_file(request, writer, fname, mode)
             writer.close()
-            request.log("indexing completed successfully in %0.2f seconds." % 
+            request.log("indexing completed successfully in %0.2f seconds." %
                         (time.time() - start))
             self._sign()
         finally:
