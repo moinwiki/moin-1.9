@@ -20,16 +20,24 @@ from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
 
+try:
+    # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
+    from Stemmer import Stemmer
+    def getStemmer(algorithm='english'):
+        return Stemmer(algorithm)
+    use_stemming = True
+except ImportError:
+    use_stemming = False
 
 class UnicodeQuery(xapian.Query):
     def __init__(self, *args, **kwargs):
         self.encoding = kwargs.get('encoding', config.charset)
 
         nargs = []
-        for i in args:
-            if isinstance(i, unicode):
-                i = i.encode(self.encoding)
-            nargs.append(i)
+        for term in args:
+            if isinstance(term, unicode):
+                term = term.encode(self.encoding)
+            nargs.append(term)
 
         xapian.Query.__init__(self, *nargs, **kwargs)
 
@@ -62,6 +70,10 @@ class WikiAnalyzer:
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
+    def __init__(self):
+        if use_stemming:
+            self.stemmer = getStemmer()
+
     def tokenize(self, value):
         """Yield a stream of lower cased words from a string.
            value must be an UNICODE object or a list of unicode objects
@@ -69,6 +81,8 @@ class WikiAnalyzer:
         def enc(uc):
             """ 'encode' unicode results into whatever xapian / xapwrap wants """
             lower = uc.lower()
+            if use_stemming:
+                return self.stemmer.stemWord(lower)
             return lower
             
         if isinstance(value, list): # used for page links
@@ -93,7 +107,7 @@ class WikiAnalyzer:
                         yield enc(word)
                 elif m.group("word"):
                     word = m.group("word")
-                    yield  enc(word)
+                    yield enc(word)
                     # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
                     if self.wikiword_re.match(word):
                         for sm in re.finditer(self.singleword_re, word):
@@ -539,7 +553,7 @@ class Index:
                                   sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
             doc.analyzerFactory = WikiAnalyzer
-            #search_db_language = "english"
+            #search_db_language = "english"      # XXX: hardcoded
             #stemmer = xapian.Stem(search_db_language)
             #pagetext = page.get_raw_body().lower()
             #words = re.finditer(r"\w+", pagetext)
