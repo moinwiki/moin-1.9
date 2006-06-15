@@ -99,9 +99,14 @@ Version 1.6.current:
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
       parser.wiki -> parser.text_moin_wiki
-    * Added thread_monitor. It can be activated using:
+    * Added thread_monitor debugging aid. It can be activated using:
       from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
-      or by requesting URL ...?action=thread_monitor
+      and then triggered by requesting URL ...?action=thread_monitor - please
+      be aware that monitoring threads has a big performance impact on its own,
+      so you only want to temporarily enable this for debugging.
+      By default, it dumps its output to the data_dir as tm_<timestamp>.log,
+      you can change this at bottom of action/thread_monitor.py if you want to
+      see output in your browser.
     * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
       will cache into a common directory for all wikis in the same farm, if you
       specify 'wiki', it will use a cache directory per wiki and if you specify
