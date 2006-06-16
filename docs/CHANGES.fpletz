@@ -2,15 +2,32 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * ...
+    * Stemming in English only for now because we would have to stem
+      every word in a query for every language. Suggestions? ;-)
+    * Somethings' wrong with the matching of stemmed terms, i.e. matches
+      beyond single WikiWord borders although matching lower-case only
+      (see MoinMoin/search.py:92)
+    * Matching of stemmed terms is generally unreliable because the
+      matches (and consequently the count) are not obtained by Xapian
+      as _moinSearch is called with the Xapian results. Use the Xapian
+      matches?
+    * Regex searching with Xapian?
 
   ToDo:
-    * Manually parse prefixes (e.g. title:) in MoinMoin.Xapian.Index
-      right before searching
+    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper
+      metadata)
     * Mockup the new search UI
+    * Write/update documentation for all the new search stuff
+    * Wikifarms support (multiple indexes)
+    * Indexing and searching of Categories (new term prefix)
+    * Finish the stemming/matching stuff
+    * Test if indexing/searching works realiably without a stemmer
+      installed
 
   New Features:
-    * TBD
+    * Faster search thanks to Xapian
+    * Searching for languages with new prefix lang/language, i.e. lang:de
+      Note: Only available when Xapian is activated
   
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
@@ -31,5 +48,14 @@ implement this in MoinMoin.Xapian.Index. AndExpression needed some more
 tweaking to use AND_NOT because Xapian doesn't provide a pure NOT. Should
 be no issue with OrExpression as _moinSearch handles this correctly.
 
-2006-06-11
+2006-06-11 Now handling prefixes correctly (title -> S, XLINKTO always
+with ':')
+
+2006-06-15
+    * Integrated basic stemming, english only for now (see issues).
+    * Introduced LanguageSearch (new prefix lang/language)
+    * Searching now works with stemmed terms but matching is limited due
+      to usage of _moinSearch
+
+2006-06-16
 
