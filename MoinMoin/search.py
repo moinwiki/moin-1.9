@@ -10,7 +10,8 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import re, time, sys, StringIO, string
+import re, time, sys, StringIO, string, operator
+from sets import Set
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
@@ -89,7 +90,8 @@ class BaseExpression:
                 self.pattern = pattern
         else:
             pattern = re.escape(pattern)
-            self.search_re = re.compile(pattern, flags)
+            self.search_re = re.compile(r'%s[%s]*' % (pattern,
+                config.chars_lower), flags)
             self.pattern = pattern
 
 
@@ -175,15 +177,15 @@ class AndExpression(BaseExpression):
             wanted = wanted and term.xapian_wanted()
         return wanted
 
-    def xapian_term(self):
+    def xapian_term(self, request):
         # sort negated terms
         terms = []
         not_terms = []
         for term in self._subterms:
             if not term.negated:
-                terms.append(term.xapian_term())
+                terms.append(term.xapian_term(request))
             else:
-                not_terms.append(term.xapian_term())
+                not_terms.append(term.xapian_term(request))
 
         # prepare query for not negated terms
         if len(terms) == 1:
@@ -224,9 +226,9 @@ class OrExpression(AndExpression):
                 matches.extend(result)
         return matches
 
-    def xapian_term(self):
+    def xapian_term(self, request):
         # XXX: negated terms managed by _moinSearch?
-        return Query(Query.OP_OR, [term.xapian_term() for term in self._subterms])
+        return Query(Query.OP_OR, [term.xapian_term(request) for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -286,25 +288,37 @@ class TextSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self):
+    def xapian_term(self, request):
         if self.use_re:
             return None # xapian can't do regex search
         else:
-            analyzer = Xapian.WikiAnalyzer()
+            analyzer = Xapian.WikiAnalyzer(language=request.cfg.language_default)
             terms = self._pattern.split()
-            
+
             # all parsed wikiwords, AND'ed
             queries = []
+            stemmed = []
             for t in terms:
-                t = [i.encode(config.charset) for i in list(analyzer.tokenize(t))]
-                if len(t) < 2:
-                    queries.append(UnicodeQuery(t[0]))
+                if Xapian.use_stemming:
+                    # stemmed OR not stemmed
+                    tmp = []
+                    for i in analyzer.tokenize(t, flat_stemming=False):
+                        tmp.append(UnicodeQuery(Query.OP_OR, i))
+                        stemmed.append(i[1])
+                    t = tmp
                 else:
-                    queries.append(UnicodeQuery(Query.OP_AND, t))
+                    # just not stemmed
+                    t = [Query(i) for i in analyzer.tokenize(t)]
+                queries.append(Query(Query.OP_AND, t))
+
+            # TODO: hilight and sort stemmed words correctly (also in TitleSearch)
+            #if stemmed:
+            #    self._build_re(' '.join(stemmed), use_re=False,
+            #            case=self.case)
 
             # titlesearch OR parsed wikiwords
             return Query(Query.OP_OR,
-                    (self.titlesearch.xapian_term(),
+                    (self.titlesearch.xapian_term(request),
                         Query(Query.OP_AND, queries)))
 
 
@@ -322,7 +336,7 @@ class TitleSearch(BaseExpression):
         self.negated = 0
         self.use_re = use_re
         self.case = case
-        self._build_re(unicode(pattern), use_re=use_re, case=case)
+        self._build_re(self._pattern, use_re=use_re, case=case)
         
     def costs(self):
         return 100
@@ -362,23 +376,28 @@ class TitleSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self):
+    def xapian_term(self, request):
         if self.use_re:
             return None # xapian doesn't support regex search
         else:
-            analyzer = Xapian.WikiAnalyzer()
+            analyzer = Xapian.WikiAnalyzer(language=request.cfg.language_default)
             terms = self._pattern.split()
-            terms = [list(analyzer.tokenize(t)) for t in terms]
+            terms = [list(analyzer.raw_tokenize(t)) for t in terms]
 
             # all parsed wikiwords, AND'ed
             queries = []
             for t in terms:
-                t = ['%s%s' % (Xapian.Index.prefixMap['title'], i)
-                        for i in list(analyzer.tokenize(t))]
-                if len(t) < 2:
-                    queries.append(UnicodeQuery(t[0]))
+                if Xapian.use_stemming:
+                    # stemmed OR not stemmed
+                    t = [UnicodeQuery(Query.OP_OR, ['%s%s' %
+                        (Xapian.Index.prefixMap['title'], j) for j in i])
+                            for i in analyzer.tokenize(t, flat_stemming=False)]
                 else:
-                    queries.append(UnicodeQuery(Query.OP_AND, t))
+                    # just not stemmed
+                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], j))
+                        for i in analyzer.tokenize(t)]
+
+                queries.append(Query(Query.OP_AND, t))
 
             return Query(Query.OP_AND, queries)
 
@@ -387,7 +406,7 @@ class LinkSearch(BaseExpression):
     """ Search the term in the pagelinks """
 
     def __init__(self, pattern, use_re=False, case=True):
-        """ Init a title search
+        """ Init a link search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
@@ -459,13 +478,63 @@ class LinkSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self):
+    def xapian_term(self, request):
         pattern = self.pattern
         if self.use_re:
             return None # xapian doesnt support regex search
         else:
             return UnicodeQuery('%s:%s' %
                     (Xapian.Index.prefixMap['linkto'], pattern))
+
+
+class LanguageSearch(BaseExpression):
+    """ Search the pages written in a language """
+
+    def __init__(self, pattern, use_re=False, case=True):
+        """ Init a language search
+
+        @param pattern: pattern to search for, ascii string or unicode
+        @param use_re: treat pattern as re of plain text, bool
+        @param case: do case sensitive search, bool 
+        """
+        # iso language code, always lowercase
+        self._pattern = pattern.lower()
+        self.negated = 0
+        self.use_re = use_re
+        self.case = case
+        self.xapian_called = False
+        self._build_re(self._pattern, use_re=use_re, case=case)
+
+    def costs(self):
+        return 5000 # cheaper than a TextSearch
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
+
+    def highlight_re(self):
+        return ""
+
+    def search(self, page):
+        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
+        if not self.xapian_called:
+            return None
+        else:
+            # XXX why not return None or empty list?
+            return [Match()]
+
+    def xapian_wanted(self):
+        return not self.use_re
+
+    def xapian_term(self, request):
+        pattern = self.pattern
+        if self.use_re:
+            return None # xapian doesnt support regex search
+        else:
+            self.xapian_called = True
+            return UnicodeQuery('%s%s' %
+                    (Xapian.Index.prefixMap['lang'], pattern))
+
 
 ############################################################################
 ### Results
@@ -765,7 +834,8 @@ class QueryParser:
         title_search = self.titlesearch
         regex = self.regex
         case = self.case
-        linkto = 0
+        linkto = False
+        lang = False
 
         for m in modifiers:
             if "title".startswith(m):
@@ -776,8 +846,12 @@ class QueryParser:
                 case = True
             elif "linkto".startswith(m):
                 linkto = True
+            elif "language".startswith(m):
+                lang = True
 
-        if linkto:
+        if lang:
+            obj = LanguageSearch(text, use_re=regex, case=False)
+        elif linkto:
             obj = LinkSearch(text, use_re=regex, case=case)
         elif title_search:
             obj = TitleSearch(text, use_re=regex, case=case)
@@ -1258,7 +1332,7 @@ class Search:
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
-                query = self.query.xapian_term()
+                query = self.query.xapian_term(self.request)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
