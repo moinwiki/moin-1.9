@@ -20,16 +20,24 @@ from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
 from MoinMoin.util import filesys, lock
 
+try:
+    # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
+    from Stemmer import Stemmer
+    use_stemming = True
+except ImportError:
+    use_stemming = False
 
 class UnicodeQuery(xapian.Query):
     def __init__(self, *args, **kwargs):
         self.encoding = kwargs.get('encoding', config.charset)
 
         nargs = []
-        for i in args:
-            if isinstance(i, unicode):
-                i = i.encode(self.encoding)
-            nargs.append(i)
+        for term in args:
+            if isinstance(term, unicode):
+                term = term.encode(self.encoding)
+            elif isinstance(term, list) or isinstance(term, tuple):
+                term = [t.encode(self.encoding) for t in term]
+            nargs.append(term)
 
         xapian.Query.__init__(self, *nargs, **kwargs)
 
@@ -37,6 +45,9 @@ class UnicodeQuery(xapian.Query):
 ##############################################################################
 ### Tokenizer
 ##############################################################################
+
+def getWikiAnalyzerFactory(language='en'):
+    return (lambda: WikiAnalyzer(language))
 
 class WikiAnalyzer:
     singleword = r"[%(u)s][%(l)s]+" % {
@@ -62,10 +73,13 @@ class WikiAnalyzer:
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
-    def tokenize(self, value):
-        """Yield a stream of lower cased words from a string.
-           value must be an UNICODE object or a list of unicode objects
-        """
+    def __init__(self, language=None):
+        if use_stemming and language:
+            self.stemmer = Stemmer(language)
+        else:
+            self.stemmer = None
+
+    def raw_tokenize(self, value):
         def enc(uc):
             """ 'encode' unicode results into whatever xapian / xapwrap wants """
             lower = uc.lower()
@@ -93,11 +107,23 @@ class WikiAnalyzer:
                         yield enc(word)
                 elif m.group("word"):
                     word = m.group("word")
-                    yield  enc(word)
+                    yield enc(word)
                     # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
                     if self.wikiword_re.match(word):
                         for sm in re.finditer(self.singleword_re, word):
                             yield enc(sm.group())
+
+    def tokenize(self, value, flat_stemming=True):
+        """Yield a stream of lower cased raw and stemmed (optional) words from a string.
+           value must be an UNICODE object or a list of unicode objects
+        """
+        for i in self.raw_tokenize(value):
+            if flat_stemming:
+                yield i # XXX: should we really use a prefix for that? Index.prefixMap['raw'] + i
+                if self.stemmer:
+                    yield self.stemmer.stemWord(i)
+            else:
+                yield (i, self.stemmer.stemWord(i))
 
 
 #############################################################################
@@ -240,7 +266,7 @@ class Index:
                        #N   ISO couNtry code (or domaiN name)
                        #P   Pathname
                        #Q   uniQue id
-                       #R   Raw (i.e. unstemmed) term
+        'raw':  'R',   # Raw (i.e. unstemmed) term
         'title': 'S',  # Subject (or title)
         'mimetype': 'T',
         'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
@@ -250,6 +276,7 @@ class Index:
                        #  the D term, and changing the last digit to a '2' if it's a '3')
                        #X   longer prefix for user-defined use
         'linkto': 'XLINKTO', # this document links to that document
+        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in 
                        #Y   year (four digits)
     }
 
@@ -358,7 +385,7 @@ class Index:
                     indexThread.join()
                 return func
 
-            self.request.finish = joinDecorator(self.request.finish)        
+            self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
             self.lock.release()
@@ -391,7 +418,7 @@ class Index:
                     indexThread.join()
                 return func
                 
-            self.request.finish = joinDecorator(self.request.finish)        
+            self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
             self.lock.release()
@@ -422,8 +449,8 @@ class Index:
                 break
             except wikiutil.PluginMissingError:
                 pass
-            #else:
-            #    raise "Cannot load filter for mimetype." + modulename  # XXX
+            else:
+                request.log("Cannot load filter for mimetype." + modulename)
         try:
             data = execute(self, filename)
             if debug:
@@ -480,7 +507,7 @@ class Index:
                                       keywords=(xtitle, xitemid, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = WikiAnalyzer
+                doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (filename, uid))
                     doc.uid = uid
@@ -490,6 +517,34 @@ class Index:
                     id = writer.index(doc)
         except (OSError, IOError), err:
             pass
+
+    def _get_languages(self, page):
+        body = page.get_raw_body()
+        default_lang = page.request.cfg.language_default
+
+        lang = ''
+
+        if use_stemming:
+            for line in body.split('\n'):
+                if line.startswith('#language'):
+                    lang = line.split(' ')[1]
+                    try:
+                        Stemmer(lang)
+                    except KeyError:
+                        # lang is not stemmable
+                        break
+                    else:
+                        # lang is stemmable
+                        return (lang, lang)
+                elif not line.startswith('#'):
+                    break
+        
+        if not lang:
+            # no lang found at all.. fallback to default language
+            lang = default_lang
+
+        # return actual lang and lang to stem in
+        return (lang, default_lang)
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
@@ -504,6 +559,8 @@ class Index:
         pagename = page.page_name
         mtime = page.mtime_usecs()
         itemid = "%s:%s" % (wikiname, pagename)
+        # XXX: Hack until we get proper metadata
+        language, stem_language = self._get_languages(page)
         updated = False
 
         if mode == 'update':
@@ -530,7 +587,9 @@ class Index:
             xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
             xmtime = xapdoc.SortKey('mtime', mtime)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
-            xkeywords = [xapdoc.Keyword('itemid', itemid)]
+            xkeywords = [xapdoc.Keyword('itemid', itemid),
+                    xapdoc.Keyword('lang', language),
+                    xapdoc.Keyword('stem_lang', stem_language)]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
@@ -538,17 +597,8 @@ class Index:
                                   keywords=xkeywords,
                                   sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
-            doc.analyzerFactory = WikiAnalyzer
-            #search_db_language = "english"
-            #stemmer = xapian.Stem(search_db_language)
-            #pagetext = page.get_raw_body().lower()
-            #words = re.finditer(r"\w+", pagetext)
-            #count = 0
-            #for wordmatch in words:
-            #    count += 1
-            #    word = wordmatch.group().encode(config.charset)
-            #    document.add_posting('R' + stemmer.stem_word(word), count) # count should be term position in document (starting at 1)
-            
+            doc.analyzerFactory = getWikiAnalyzerFactory()
+
             if mode == 'update':
                 if debug: request.log("%s (replace %r)" % (pagename, uid))
                 doc.uid = uid
@@ -586,14 +636,15 @@ class Index:
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
+                xlanguage = xapdoc.Keyword('lang', language)
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, ),
+                                      keywords=(xatt_itemid, xtitle, xlanguage, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = WikiAnalyzer
+                doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid
@@ -631,7 +682,7 @@ class Index:
                     fname = fname.strip()
                     self._index_file(request, writer, fname, mode)
             writer.close()
-            request.log("indexing completed successfully in %0.2f seconds." % 
+            request.log("indexing completed successfully in %0.2f seconds." %
                         (time.time() - start))
             self._sign()
         finally:
