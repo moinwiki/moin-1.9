@@ -2,13 +2,12 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * Somethings' wrong with the matching of stemmed terms, i.e. matches
-      beyond single WikiWord borders although matching lower-case only
-      (see MoinMoin/search.py:92)
+    * _moinSearch matches all characters in words when stemming,
+      workaround uses too much CPU
     * Matching of stemmed terms is generally unreliable because the
       matches (and consequently the count) are not obtained by Xapian
       as _moinSearch is called with the Xapian results. Use the Xapian
-      matches?
+      matches somehow?
     * Regex searching with Xapian?
 
   ToDo:
@@ -58,4 +57,9 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       bugfixes)
 
 2006-06-17
+    * Tackled some of the issues with matching stemmed words. Need some
+      advice on how to detect and match them reliably using the current
+      framework
+
+2006-06-18
 
