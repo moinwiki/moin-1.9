@@ -36,7 +36,7 @@ class UnicodeQuery(xapian.Query):
             if isinstance(term, unicode):
                 term = term.encode(self.encoding)
             elif isinstance(term, list) or isinstance(term, tuple):
-                term = map(lambda t: t.encode(self.encoding), term)
+                term = [t.encode(self.encoding) for t in term]
             nargs.append(term)
 
         xapian.Query.__init__(self, *nargs, **kwargs)

@@ -76,7 +76,7 @@ class BaseExpression:
         """
         return ''
 
-    def _build_re(self, pattern, use_re=False, case=False):
+    def _build_re(self, pattern, use_re=False, case=False, stemmed=False):
         """ Make a regular expression out of a text pattern """
         flags = case and re.U or (re.I | re.U)
         if use_re:
@@ -90,8 +90,15 @@ class BaseExpression:
                 self.pattern = pattern
         else:
             pattern = re.escape(pattern)
-            self.search_re = re.compile(r'%s[%s]*' % (pattern,
-                config.chars_lower), flags)
+            if stemmed:
+                # XXX: works, but pretty CPU-intensive (obviously...)
+                self.search_re = re.compile(r'(?=^|[\s]+|[^%s]+)%s[%s]*' %
+                        (config.chars_lower, case and pattern or
+                            ''.join(['[%s%s]' % (ch.upper(), ch.lower())
+                                for ch in pattern]),
+                         config.chars_lower), re.U)
+            else:
+                self.search_re = re.compile(pattern, flags)
             self.pattern = pattern
 
 
@@ -311,10 +318,9 @@ class TextSearch(BaseExpression):
                     t = [UnicodeQuery(i) for i in analyzer.tokenize(t)]
                 queries.append(Query(Query.OP_AND, t))
 
-            # TODO: hilight and sort stemmed words correctly (also in TitleSearch)
-            #if stemmed:
-            #    self._build_re(' '.join(stemmed), use_re=False,
-            #            case=self.case)
+            if stemmed:
+                self._build_re(' '.join(stemmed), use_re=False,
+                        case=self.case, stemmed=True)
 
             # titlesearch OR parsed wikiwords
             return Query(Query.OP_OR,
@@ -386,18 +392,26 @@ class TitleSearch(BaseExpression):
 
             # all parsed wikiwords, AND'ed
             queries = []
+            stemmed = []
             for t in terms:
                 if Xapian.use_stemming:
                     # stemmed OR not stemmed
-                    t = [UnicodeQuery(Query.OP_OR, ['%s%s' %
-                        (Xapian.Index.prefixMap['title'], j) for j in i])
-                            for i in analyzer.tokenize(t, flat_stemming=False)]
+                    tmp = []
+                    for i in analyzer.tokenize(t, flat_stemming=False):
+                        tmp.append(UnicodeQuery(Query.OP_OR, ['%s%s' %
+                            (Xapian.Index.prefixMap['title'], j) for j in i]))
+                        stemmed.append(i[1])
+                    t = tmp
                 else:
                     # just not stemmed
                     t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], i))
                         for i in analyzer.tokenize(t)]
 
                 queries.append(Query(Query.OP_AND, t))
+
+            if stemmed:
+                self._build_re(' '.join(stemmed), use_re=False,
+                        case=self.case, stemmed=True)
 
             return Query(Query.OP_AND, queries)
 
