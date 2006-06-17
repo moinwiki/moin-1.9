@@ -308,7 +308,7 @@ class TextSearch(BaseExpression):
                     t = tmp
                 else:
                     # just not stemmed
-                    t = [Query(i) for i in analyzer.tokenize(t)]
+                    t = [UnicodeQuery(i) for i in analyzer.tokenize(t)]
                 queries.append(Query(Query.OP_AND, t))
 
             # TODO: hilight and sort stemmed words correctly (also in TitleSearch)
@@ -394,7 +394,7 @@ class TitleSearch(BaseExpression):
                             for i in analyzer.tokenize(t, flat_stemming=False)]
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], j))
+                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], i))
                         for i in analyzer.tokenize(t)]
 
                 queries.append(Query(Query.OP_AND, t))

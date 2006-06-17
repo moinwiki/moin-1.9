@@ -523,19 +523,21 @@ class Index:
         default_lang = page.request.cfg.language_default
 
         lang = ''
-        for line in body.split('\n'):
-            if line.startswith('#language'):
-                lang = line.split(' ')[1]
-                try:
-                    Stemmer(lang)
-                except KeyError:
-                    # lang is not stemmable
+
+        if use_stemming:
+            for line in body.split('\n'):
+                if line.startswith('#language'):
+                    lang = line.split(' ')[1]
+                    try:
+                        Stemmer(lang)
+                    except KeyError:
+                        # lang is not stemmable
+                        break
+                    else:
+                        # lang is stemmable
+                        return (lang, lang)
+                elif not line.startswith('#'):
                     break
-                else:
-                    # lang is stemmable
-                    return (lang, lang)
-            elif not line.startswith('#'):
-                break
         
         if not lang:
             # no lang found at all.. fallback to default language
