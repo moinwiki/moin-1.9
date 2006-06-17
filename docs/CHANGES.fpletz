@@ -2,8 +2,6 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * Stemming in English only for now because we would have to stem
-      every word in a query for every language. Suggestions? ;-)
     * Somethings' wrong with the matching of stemmed terms, i.e. matches
       beyond single WikiWord borders although matching lower-case only
       (see MoinMoin/search.py:92)
@@ -21,8 +19,6 @@ Branch moin/1.6-xapian-fpletz
     * Wikifarms support (multiple indexes)
     * Indexing and searching of Categories (new term prefix)
     * Finish the stemming/matching stuff
-    * Test if indexing/searching works realiably without a stemmer
-      installed
 
   New Features:
     * Faster search thanks to Xapian
@@ -48,8 +44,8 @@ implement this in MoinMoin.Xapian.Index. AndExpression needed some more
 tweaking to use AND_NOT because Xapian doesn't provide a pure NOT. Should
 be no issue with OrExpression as _moinSearch handles this correctly.
 
-2006-06-11 Now handling prefixes correctly (title -> S, XLINKTO always
-with ':')
+2006-06-11
+    * Now handling prefixes correctly (title -> S, XLINKTO always with ':')
 
 2006-06-15
     * Integrated basic stemming, english only for now (see issues).
@@ -58,4 +54,8 @@ with ':')
       to usage of _moinSearch
 
 2006-06-16
+    * Indexing & searching now works without a stemmer installed (small
+      bugfixes)
+
+2006-06-17
 
