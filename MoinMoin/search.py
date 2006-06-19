@@ -15,9 +15,12 @@ from sets import Set
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 
-import Xapian
-from xapian import Query
-from Xapian import UnicodeQuery
+try:
+    import Xapian
+    from Xapian import Query, UnicodeQuery
+    use_stemming = Xapian.use_stemming
+except ImportError:
+    use_stemming = False
 
 #############################################################################
 ### query objects
@@ -272,7 +275,7 @@ class TextSearch(BaseExpression):
         # Search in page body
         body = page.get_raw_body()
         for match in self.search_re.finditer(body):
-            if Xapian.use_stemming:
+            if use_stemming:
                 # somewhere in regular word
                 if body[match.start()] not in config.chars_upper and \
                         body[match.start()-1] in config.chars_lower:
@@ -314,7 +317,7 @@ class TextSearch(BaseExpression):
             queries = []
             stemmed = []
             for t in terms:
-                if Xapian.use_stemming:
+                if use_stemming:
                     # stemmed OR not stemmed
                     tmp = []
                     for i in analyzer.tokenize(t, flat_stemming=False):
@@ -376,7 +379,7 @@ class TitleSearch(BaseExpression):
         # Get matches in page name
         matches = []
         for match in self.search_re.finditer(page.page_name):
-            if Xapian.use_stemming:
+            if use_stemming:
                 # somewhere in regular word
                 if page.page_name[match.start()] not in config.chars_upper and \
                         page.page_name[match.start()-1] in config.chars_lower:
@@ -418,7 +421,7 @@ class TitleSearch(BaseExpression):
             queries = []
             stemmed = []
             for t in terms:
-                if Xapian.use_stemming:
+                if use_stemming:
                     # stemmed OR not stemmed
                     tmp = []
                     for i in analyzer.tokenize(t, flat_stemming=False):
