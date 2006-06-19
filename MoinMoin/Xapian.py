@@ -280,29 +280,34 @@ class Index:
                        #Y   year (four digits)
     }
 
-
-
     class LockedException(Exception):
         pass
     
     def __init__(self, request):
         self.request = request
         cache_dir = request.cfg.cache_dir
-        self.main_dir = os.path.join(cache_dir, 'xapian')
-        self.dir = os.path.join(self.main_dir, 'index')
+        main_dir = self._main_dir()
+        self.dir = os.path.join(main_dir, 'index')
         filesys.makeDirs(self.dir)
-        self.sig_file = os.path.join(self.main_dir, 'complete')
-        lock_dir = os.path.join(self.main_dir, 'index-lock')
+        self.sig_file = os.path.join(main_dir, 'complete')
+        lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
         self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(self.main_dir, "update-queue"),
-                                 os.path.join(self.main_dir, 'update-queue-lock'))
-        
+        self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
+                                 os.path.join(main_dir, 'update-queue-lock'))
+
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
         ## if not self.exists():
         ##    self.indexPagesInNewThread(request)
+
+    def _main_dir(self):
+        if self.request.cfg.xapian_index_dir:
+            return os.path.join(self.request.cfg.xapian_index_dir,
+                    self.request.cfg.siteid)
+        else:
+            return os.path.join(request.cfg.cache_dir, 'xapian')
 
     def exists(self):
         """ Check if index exists """        

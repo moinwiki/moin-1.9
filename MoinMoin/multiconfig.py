@@ -481,6 +481,11 @@ reStructuredText Quick Reference
             name = dirname + '_dir'
             if not getattr(self, name, None):
                 setattr(self, name, os.path.join(data_dir, dirname))
+
+        # common xapian index directory
+        if getattr(self, 'xapian_search', False):
+            name = 'xapian_index_dir'
+            setattr(self, name, getattr(self, name, None))
             
         # Try to decode certain names which allow unicode
         self._decode()
