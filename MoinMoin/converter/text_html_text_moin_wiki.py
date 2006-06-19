@@ -465,7 +465,7 @@ class strip_whitespace(visitor):
 class convert_tree(visitor):
     white_space = object()
     new_line = object()
-        
+
     def __init__(self, request, pagename):
         self.request = request
         self.pagename = pagename
@@ -802,7 +802,7 @@ class convert_tree(visitor):
     def process_div(self, node):
         # ignore div tags - just descend
         for i in node.childNodes:
-            self.visit_element(i)
+            self.visit(i)
 
     def process_tt(self, node):
         text = self.node_list_text_only(node.childNodes).replace("\n", " ")
