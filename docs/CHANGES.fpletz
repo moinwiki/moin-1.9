@@ -2,12 +2,6 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * _moinSearch matches all characters in words when stemming,
-      workaround uses too much CPU
-    * Matching of stemmed terms is generally unreliable because the
-      matches (and consequently the count) are not obtained by Xapian
-      as _moinSearch is called with the Xapian results. Use the Xapian
-      matches somehow?
     * Regex searching with Xapian?
 
   ToDo:
@@ -16,7 +10,6 @@ Branch moin/1.6-xapian-fpletz
     * Mockup the new search UI
     * Write/update documentation for all the new search stuff
     * Indexing and searching of categories (new term prefix)
-    * Finish the stemming/matching stuff
 
   New Features:
     * Faster search thanks to Xapian
@@ -83,4 +76,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
         Possible extension: Xapian can handle multiple databases, maybe
         allow searching across defined wikis on a wikifarm?
+    * All stemming/matching issues resolved (hopefully)
 
