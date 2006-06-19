@@ -157,6 +157,7 @@ Version 1.6.current:
     * Fixed the output of macro and "attachment:" usages of the rst parser.
     * Removed Twisted request object reverse DNS lookup
     * cfg.editor_quickhelp was not parsed with the wiki parser when customized
+    * fixed MoinMoin:MoinMoinBugs/GuiEditorDeletesNewBulletText
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
