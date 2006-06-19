@@ -1368,8 +1368,11 @@ class Search:
         return moin search in those pages.
         """
         pages = None
-        index = Xapian.Index(self.request)
-        if index.exists() and self.query.xapian_wanted():
+        try:
+            index = Xapian.Index(self.request)
+        except NameError:
+            index = None
+        if index and index.exists() and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
