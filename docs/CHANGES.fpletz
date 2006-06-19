@@ -1,0 +1,86 @@
+Branch moin/1.6-xapian-fpletz
+=============================
+
+  Known main issues:
+    * _moinSearch matches all characters in words when stemming,
+      workaround uses too much CPU
+    * Matching of stemmed terms is generally unreliable because the
+      matches (and consequently the count) are not obtained by Xapian
+      as _moinSearch is called with the Xapian results. Use the Xapian
+      matches somehow?
+    * Regex searching with Xapian?
+
+  ToDo:
+    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper
+      metadata)
+    * Mockup the new search UI
+    * Write/update documentation for all the new search stuff
+    * Indexing and searching of categories (new term prefix)
+    * Finish the stemming/matching stuff
+
+  New Features:
+    * Faster search thanks to Xapian
+    * Searching for languages with new prefix lang/language, i.e. lang:de
+      Note: Only available when Xapian is activated
+    * New config options:
+        xapian_search        (bool)     enables xapian-powered search
+        xapian_index_dir     (string)   directory for xapian indices 
+  
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * ...
+
+  Other Changes:
+    * ...
+  
+  Developer notes:
+    * ...
+
+
+Diary
+=====
+
+2006-06-10 Changed xapian_term() functions to return xapian.Query objects
+but without touching the prefixes as we don't have a prefixMap yet. Will
+implement this in MoinMoin.Xapian.Index. AndExpression needed some more
+tweaking to use AND_NOT because Xapian doesn't provide a pure NOT. Should
+be no issue with OrExpression as _moinSearch handles this correctly.
+
+2006-06-11
+    * Now handling prefixes correctly (title -> S, XLINKTO always with ':')
+
+2006-06-15
+    * Integrated basic stemming, english only for now (see issues).
+    * Introduced LanguageSearch (new prefix lang/language)
+    * Searching now works with stemmed terms but matching is limited due
+      to usage of _moinSearch
+
+2006-06-16
+    * Indexing & searching now works without a stemmer installed (small
+      bugfixes)
+
+2006-06-17
+    * Tackled some of the issues with matching stemmed words. Need some
+      advice on how to detect and match them reliably using the current
+      framework
+
+2006-06-19
+    * Introducing xapian_index_dir as a global directory for multiple
+      xapian indices i.e. for wikifarms.
+
+      Layout:
+            xapian_index_dir/
+                siteid1/
+                    complete
+                    index/
+                    index-lock/
+                    update-queue-lock/
+                siteid2/
+                    complete
+                    index/
+                    index-lock/
+                    update-queue-lock/
+                ...
+
+        Possible extension: Xapian can handle multiple databases, maybe
+        allow searching across defined wikis on a wikifarm?
+
