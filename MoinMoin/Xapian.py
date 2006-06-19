@@ -12,6 +12,7 @@ import sys, os, re, codecs, errno, time
 from pprint import pprint
 
 import xapian
+from xapian import Query
 from MoinMoin.support.xapwrap import document as xapdoc
 from MoinMoin.support.xapwrap import index as xapidx
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser

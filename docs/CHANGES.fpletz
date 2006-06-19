@@ -77,4 +77,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
         Possible extension: Xapian can handle multiple databases, maybe
         allow searching across defined wikis on a wikifarm?
     * All stemming/matching issues resolved (hopefully)
+    * Works now without xapian installed (enhance error reporting)
 
