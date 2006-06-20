@@ -23,7 +23,7 @@ minwordlen = 4
 
 blacklist = ('.iso', # CD/DVD images, TODO: add nero/... stuff
              '.zip', '.rar', '.lzh', '.lha',
-             '.tar', '.gz', '.tgz', '.bz2', '.tb2',
+             '.tar', '.gz', '.tgz', '.bz2', '.tb2', '.z',
              '.exe', '.com', '.dll', '.cab', '.msi', '.bin', # windows
              '.rpm', '.deb', # linux
              '.hqx', '.dmg', '.sit', # mac
