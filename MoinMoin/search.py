@@ -1052,6 +1052,9 @@ class SearchResults:
                         'do': 'get',
                         'target': page.attachment,
                     }
+                elif page.page_name.startswith('FS/'): # XXX FS hardcoded
+                    fmt_context = ""
+                    querydict = None
                 else:
                     fmt_context = self.formatContext(page, context, maxlines)
                     querydict = None
@@ -1416,7 +1419,7 @@ class Search:
                 page = Page(self.request, pagename)
                 if attachment:
                     if pagename == fs_rootpage: # not really an attachment
-                        page = Page(self.request, "%s%s" % (fs_rootpage, attachment))
+                        page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
                         hits.append((wikiname, page, None, None))
                     else:
                         hits.append((wikiname, page, attachment, None))
