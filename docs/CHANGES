@@ -158,6 +158,7 @@ Version 1.6.current:
     * Removed Twisted request object reverse DNS lookup
     * cfg.editor_quickhelp was not parsed with the wiki parser when customized
     * fixed MoinMoin:MoinMoinBugs/GuiEditorDeletesNewBulletText
+    * fixed MoinMoin:MoinMoinBugs/HtmlTextConvertTables
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses

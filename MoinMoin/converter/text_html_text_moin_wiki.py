@@ -972,7 +972,7 @@ class convert_tree(visitor):
             result.append('style="%s"' % node.getAttribute("style"))
                 
         if align:
-            result[0:0] = "%s" % align
+            result.insert(0, "%s" % align)
         result.append(rowspan)
         return " ".join(result).strip()
 
