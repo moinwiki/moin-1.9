@@ -47,7 +47,13 @@ def ldap_login(request, **kw):
         l.simple_bind_s(ldap_binddn.encode(coding), ldap_bindpw.encode(coding))
         if verbose: request.log("LDAP: Bound with binddn %s" % ldap_binddn)
 
-        filterstr = "(%s=%s)" % (cfg.ldap_name_attribute, username)
+        # normal usage: ldap_filter = "(%(ldap_name_attribute)s=%(username)s)"
+        # you can also do more complex filtering like:
+        # "(&(%(ldap_name_attribute)s=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))"
+        filterstr = cfg.ldap_filter % {
+            'ldap_name_attribute': cfg.ldap_name_attribute,
+            'username': username,
+        }
         if verbose: request.log("LDAP: Searching %s" % filterstr)
         lusers = l.search_st(cfg.ldap_base, cfg.ldap_scope,
                              filterstr.encode(coding), timeout=cfg.ldap_timeout)

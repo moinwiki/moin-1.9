@@ -93,6 +93,7 @@ class FarmConfig(DefaultConfig):
     
     ldap_base = 'ou=SOMEUNIT,dc=example,dc=org' # base DN we use for searching
     ldap_scope = ldap.SCOPE_SUBTREE # scope of the search we do
+    ldap_filter = "(%(ldap_name_attribute)s=%(username)s)" # available: ldap_name_attribute (see below) and username 
     ldap_name_attribute = 'sAMAccountName' # ldap attribute we get the user name from
     ldap_email_attribute = 'mail' # ldap attribute we get the email address from
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
