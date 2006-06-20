@@ -51,11 +51,10 @@ space between words. Group page name is not allowed.""") % name
             else:
                 password = form.get('password',[None])[0]
                 if not password:
-                    error = _("Missing password. Please enter user name and"
-                             " password.")
+                    error = _("Missing password. Please enter user name and password.")
                 else:
                     if not request.user.valid:
-                        error = _("Sorry, wrong password.")
+                        error = _("Sorry, login failed.")
 
             return self.page.send_page(request, msg=error)
         
