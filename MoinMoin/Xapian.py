@@ -308,7 +308,7 @@ class Index:
             return os.path.join(self.request.cfg.xapian_index_dir,
                     self.request.cfg.siteid)
         else:
-            return os.path.join(request.cfg.cache_dir, 'xapian')
+            return os.path.join(self.request.cfg.cache_dir, 'xapian')
 
     def exists(self):
         """ Check if index exists """        
