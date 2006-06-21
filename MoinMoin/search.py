@@ -18,9 +18,8 @@ from MoinMoin.Page import Page
 try:
     import Xapian
     from Xapian import Query, UnicodeQuery
-    use_stemming = Xapian.use_stemming
 except ImportError:
-    use_stemming = False
+    pass
 
 #############################################################################
 ### query objects
@@ -275,7 +274,7 @@ class TextSearch(BaseExpression):
         # Search in page body
         body = page.get_raw_body()
         for match in self.search_re.finditer(body):
-            if use_stemming:
+            if page.request.cfg.xapian_stemming:
                 # somewhere in regular word
                 if body[match.start()] not in config.chars_upper and \
                         body[match.start()-1] in config.chars_lower:
@@ -310,14 +309,15 @@ class TextSearch(BaseExpression):
         if self.use_re:
             return None # xapian can't do regex search
         else:
-            analyzer = Xapian.WikiAnalyzer(language=request.cfg.language_default)
+            analyzer = Xapian.WikiAnalyzer(request=request,
+                    language=request.cfg.language_default)
             terms = self._pattern.split()
 
             # all parsed wikiwords, AND'ed
             queries = []
             stemmed = []
             for t in terms:
-                if use_stemming:
+                if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
                     tmp = []
                     for i in analyzer.tokenize(t, flat_stemming=False):
@@ -379,7 +379,7 @@ class TitleSearch(BaseExpression):
         # Get matches in page name
         matches = []
         for match in self.search_re.finditer(page.page_name):
-            if use_stemming:
+            if page.request.cfg.xapian_stemming:
                 # somewhere in regular word
                 if page.page_name[match.start()] not in config.chars_upper and \
                         page.page_name[match.start()-1] in config.chars_lower:
@@ -413,7 +413,8 @@ class TitleSearch(BaseExpression):
         if self.use_re:
             return None # xapian doesn't support regex search
         else:
-            analyzer = Xapian.WikiAnalyzer(language=request.cfg.language_default)
+            analyzer = Xapian.WikiAnalyzer(request=request,
+                    language=request.cfg.language_default)
             terms = self._pattern.split()
             terms = [list(analyzer.raw_tokenize(t)) for t in terms]
 
@@ -421,7 +422,7 @@ class TitleSearch(BaseExpression):
             queries = []
             stemmed = []
             for t in terms:
-                if use_stemming:
+                if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
                     tmp = []
                     for i in analyzer.tokenize(t, flat_stemming=False):
