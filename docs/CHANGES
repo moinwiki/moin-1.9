@@ -164,6 +164,7 @@ Version 1.6.current:
     * cfg.editor_quickhelp was not parsed with the wiki parser when customized
     * fixed MoinMoin:MoinMoinBugs/GuiEditorDeletesNewBulletText
     * fixed MoinMoin:MoinMoinBugs/HtmlTextConvertTables
+    * updated ImageLink macro
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
