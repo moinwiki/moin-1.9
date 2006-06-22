@@ -24,9 +24,8 @@ from MoinMoin.util import filesys, lock
 try:
     # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
     from Stemmer import Stemmer
-    stemmer_available = True
 except ImportError:
-    stemmer_available = False
+    Stemmer = None
 
 class UnicodeQuery(xapian.Query):
     def __init__(self, *args, **kwargs):
@@ -304,7 +303,7 @@ class Index:
         ##    self.indexPagesInNewThread(request)
 
         # Check if we should and can stem words
-        if request.cfg.xapian_stemming and not stemmer_available:
+        if request.cfg.xapian_stemming and not Stemmer:
             request.cfg.xapian_stemming = False
 
     def _main_dir(self):
