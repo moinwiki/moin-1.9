@@ -124,7 +124,8 @@ def getIndicator(request, pagename):
     attach_icon = request.theme.make_icon('attach', vars={ 'attach_count': attach_count })
     attach_link = wikiutil.link_tag(request,
         "%s?action=AttachFile" % wikiutil.quoteWikinameURL(pagename),
-        attach_icon)
+        attach_icon,
+        request.formatter, rel='nofollow')
 
     return attach_link
 

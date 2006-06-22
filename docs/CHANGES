@@ -143,6 +143,9 @@ Version 1.6.current:
     * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
       if rev. dns lookups are broken in your network (leading to long delays
       on page saves). With False, edit-log will only contain IP, not hostname.
+    * We use rel="nofollow" for some action links in the hope that some search
+      engines don't fetch the targets (if they do, they will just get 403 and
+      cause unnecessary traffic).
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

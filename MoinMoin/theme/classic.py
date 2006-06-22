@@ -195,12 +195,12 @@ class Theme(ThemeBase):
                 # Use translated version if available
                 title = _(title, formatted=False)
                 params = '%s?action=%s' % (d['q_page_name'], action)
-                link = wikiutil.link_tag(request, params, title)
+                link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
                 html.append(link)
                 
         title = _("DeleteCache", formatted=False)
         params = '%s?action=%s' % (d['page_name'], 'refresh')
-        link = wikiutil.link_tag(request, params, title)
+        link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
         
         cache = caching.CacheEntry(request, page, page.getFormatterName(), scope='item')
         date = request.user.getFormattedDateTime(cache.mtime())

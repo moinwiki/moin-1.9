@@ -1263,7 +1263,7 @@ class Page:
                               " Check your underlay directory setting.")
                 url = '%s?action=edit' % wikiutil.quoteWikinameURL(self.page_name)
                 request.write(wikiutil.link_tag(self.request, url, text=_("Create New Page"),
-                                                formatter=self.formatter))
+                                                formatter=self.formatter, rel='nofollow'))
         elif not request.user.may.read(self.page_name):
             request.write("<strong>%s</strong><br>" % _("You are not allowed to view this page."))
         else:
