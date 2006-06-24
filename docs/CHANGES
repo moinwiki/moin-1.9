@@ -143,8 +143,15 @@ Version 1.6.current:
     * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
       if rev. dns lookups are broken in your network (leading to long delays
       on page saves). With False, edit-log will only contain IP, not hostname.
-    * ?action=sitemap emits a simple google sitemap (XML), listing all your
-      wiki pages and the wiki root URL.
+    * ?action=sitemap emits a google sitemap (XML), listing all your wiki pages
+      and the wiki root URL.
+      Page                      Priority / Frequency / Last modification
+      --------------------------------------------------------------------
+      /                         1.0 / hourly / <now>
+      cfg.page_front_page       1.0 / hourly / page last edit
+      TitleIndex,RecentChanges  0.9 / hourly / <now>
+      content pages             0.5 / daily / page last edit
+      system/help pages         0.1 / yearly / page last edit
     * We use rel="nofollow" for some action links in the hope that some search
       engines don't fetch the targets (if they do, they will just get 403 and
       cause unnecessary traffic).
