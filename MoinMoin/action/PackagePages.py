@@ -152,7 +152,7 @@ class PackagePages:
     <tr>
         <td class="label"><label>%(list_label)s</label></td>
         <td class="content">
-            <input type="text" name="pagelist" maxlength="80">
+            <input type="text" name="pagelist" maxlength="200">
         </td>
     </tr>
     <tr>

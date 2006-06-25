@@ -61,7 +61,7 @@ class DeletePage(ActionBase):
     <tr>
         <td class="label"><label>%(comment_label)s</label></td>
         <td class="content">
-            <input type="text" name="comment" maxlength="80">
+            <input type="text" name="comment" maxlength="200">
         </td>
     </tr>
     <tr>

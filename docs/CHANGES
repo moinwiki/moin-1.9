@@ -28,6 +28,9 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+Version 1.5.4-current:
+    * increased maxlength of some input fields from 80 to 200
+
 Branch moin-1.6-xapian:
   New Features:
     * Added Xapian (see http://xapian.org/) based indexed search code.
