@@ -12,6 +12,8 @@
 """
 
 import re
+
+from MoinMoin.support import difflib
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
 
@@ -81,7 +83,7 @@ def findMatches(pagename, request, s_re=None, e_re=None,):
     start, end, matches = wikiMatches(pagename, pages, start_re=s_re,
                                       end_re=e_re)
 
-    # Get the best 10 close matches using difflib
+    # Get the best 10 close matches
     close_matches = {}
     found = 0
     for name in closeMatches(pagename, pages):
@@ -167,7 +169,7 @@ def wikiMatches(pagename, pages, start_re=None, end_re=None):
 
 
 def closeMatches(pagename, pages):
-    """ Get close matches using difflib
+    """ Get close matches.
 
     Return all matching pages with rank above cutoff value.
 
@@ -176,8 +178,6 @@ def closeMatches(pagename, pages):
     @rtype: list
     @return: list of matching pages, sorted by rank
     """
-    import difflib
-    
     # Match using case insensitive matching
     # Make mapping from lowerpages to pages - pages might have same name
     # with different case (although its stupid).

@@ -172,6 +172,7 @@ Version 1.6.current:
     * fixed MoinMoin:MoinMoinBugs/GuiEditorDeletesNewBulletText
     * fixed MoinMoin:MoinMoinBugs/HtmlTextConvertTables
     * updated ImageLink macro
+    * Added a (less broken) MoinMoin.support.difflib, details see there.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
