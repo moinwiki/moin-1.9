@@ -52,14 +52,13 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
                 'of {{{"%s"}}}') % needle
         # send http headers
         request.http_headers()
-        Page(request, pagename).send_page(request, msg=err) 
+        Page(request, pagename).send_page(request, msg=err)
         return
 
     # search the pages
     from MoinMoin import search
-    query = search.QueryParser(case=case, regex=regex,
-                               titlesearch=titlesearch).parse_query(needle)
-    results = search.searchPages(request, query)
+    results = search.searchPages(request, needle, case=case,
+            regex=regex, titlesearch=titlesearch)
 
     # directly show a single hit
     # XXX won't work with attachment search
