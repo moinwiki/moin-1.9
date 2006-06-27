@@ -24,9 +24,8 @@ from MoinMoin.util import filesys, lock
 try:
     # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
     from Stemmer import Stemmer
-    use_stemming = True
 except ImportError:
-    use_stemming = False
+    Stemmer = None
 
 class UnicodeQuery(xapian.Query):
     def __init__(self, *args, **kwargs):
@@ -47,8 +46,8 @@ class UnicodeQuery(xapian.Query):
 ### Tokenizer
 ##############################################################################
 
-def getWikiAnalyzerFactory(language='en'):
-    return (lambda: WikiAnalyzer(language))
+def getWikiAnalyzerFactory(request=None, language='en'):
+    return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
     singleword = r"[%(u)s][%(l)s]+" % {
@@ -74,8 +73,8 @@ class WikiAnalyzer:
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
-    def __init__(self, language=None):
-        if use_stemming and language:
+    def __init__(self, request=None, language=None):
+        if request and request.cfg.xapian_stemming and language:
             self.stemmer = Stemmer(language)
         else:
             self.stemmer = None
@@ -302,6 +301,10 @@ class Index:
         # queue in small steps.
         ## if not self.exists():
         ##    self.indexPagesInNewThread(request)
+
+        # Check if we should and can stem words
+        if request.cfg.xapian_stemming and not Stemmer:
+            request.cfg.xapian_stemming = False
 
     def _main_dir(self):
         if self.request.cfg.xapian_index_dir:
@@ -530,7 +533,7 @@ class Index:
 
         lang = ''
 
-        if use_stemming:
+        if page.request.cfg.xapian_stemming:
             for line in body.split('\n'):
                 if line.startswith('#language'):
                     lang = line.split(' ')[1]
@@ -603,7 +606,8 @@ class Index:
                                   keywords=xkeywords,
                                   sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
-            doc.analyzerFactory = getWikiAnalyzerFactory()
+            doc.analyzerFactory = getWikiAnalyzerFactory(request,
+                    stem_language)
 
             if mode == 'update':
                 if debug: request.log("%s (replace %r)" % (pagename, uid))
@@ -643,14 +647,16 @@ class Index:
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 xlanguage = xapdoc.Keyword('lang', language)
+                xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, xlanguage, ),
+                                      keywords=(xatt_itemid, xtitle, xlanguage, xstem_language, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = getWikiAnalyzerFactory()
+                doc.analyzerFactory = getWikiAnalyzerFactory(request,
+                        stem_language)
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid
