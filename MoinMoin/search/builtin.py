@@ -13,7 +13,7 @@
 import time, sys
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
-from MoinMoin.search.results import FoundRemote, FoundPage, FoundAttachment, SearchResults
+from MoinMoin.search.results import getSearchResults
 
 try:
     from MoinMoin.search import Xapian
@@ -45,19 +45,9 @@ class Search:
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
+
+        return getSearchResults(self.request, self.query, hits, start)
         
-        result_hits = []
-        for wikiname, page, attachment, match in hits:
-            if wikiname in (self.request.cfg.interwikiname, 'Self'): # a local match
-                if attachment:
-                    result_hits.append(FoundAttachment(page.page_name, attachment))
-                else:
-                    result_hits.append(FoundPage(page.page_name, match))
-            else:
-                result_hits.append(FoundRemote(wikiname, page, attachment, match))
-        elapsed = time.time() - start
-        count = self.request.rootpage.getPageCount()
-        return SearchResults(self.query, result_hits, count, elapsed)
 
     # ----------------------------------------------------------------
     # Private!
