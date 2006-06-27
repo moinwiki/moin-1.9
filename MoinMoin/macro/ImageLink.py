@@ -79,6 +79,9 @@
 
       Thomas Waldmann
             2006-03-10 code refactored
+            
+      Reimar Bauer
+             2006-05-01 bug fix of image linked to attachment   
 
     @copyright: 2001 by Jeff Kunce,
                 2004 by Marcin Zalewski,
@@ -124,6 +127,9 @@ def execute(macro, args):
     image = args[0]
     if argc >= 2 and args[1]:
         target = args[1]
+    elif argc == 1:
+        pagename, attname = AttachFile.absoluteName(image, formatter.page.page_name)
+        target = AttachFile.getAttachUrl(pagename, image, request)
     else:
         target = None
         
@@ -153,6 +159,11 @@ def execute(macro, args):
 
     if target is None:
         target = kw['src']
+       
+    if argc == 1:
+        return "%s%s%s" % (formatter.url(1, kw['src']),
+                           formatter.image(**kw),
+                           formatter.url(0))    
 
     if _is_URL(target):
         return "%s%s%s" % (formatter.url(1, target),

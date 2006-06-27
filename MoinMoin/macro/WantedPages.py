@@ -75,7 +75,7 @@ def execute(macro, args):
         if macro.formatter.page.page_name in where:
             where.remove(macro.formatter.page.page_name)
         querystr='highlight=%s' % wikiutil.url_quote_plus(name)
-        wherelinks = [pages[pagename].link_to(request, querystr=querystr)
+        wherelinks = [pages[pagename].link_to(request, querystr=querystr, rel='nofollow')
                       for pagename in where]
         result.append(": " + ', '.join(wherelinks))
         result.append(macro.formatter.listitem(0))

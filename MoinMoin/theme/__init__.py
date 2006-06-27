@@ -222,7 +222,7 @@ class ThemeBase:
                 curpage += s
                 content.append("<li>%s</li>" % Page(self.request, curpage).link_to(self.request, s))
                 curpage += '/'
-            content.append(('<li><a class="backlink" title="%(title)s" href="%(href)s">%(text)s</a></li>') % {
+            content.append(('<li><a class="backlink" title="%(title)s" rel="nofollow" href="%(href)s">%(text)s</a></li>') % {
                 'title': _('Click to do a full-text search for this title'),
                 'href': d['title_link'],
                 'text': wikiutil.escape(segments[-1]),
@@ -264,15 +264,15 @@ class ThemeBase:
             userlinks.append(homelink)        
             # link to userprefs action
             userlinks.append(d['page'].link_to(request, text=_('Preferences'),
-                                               querystr={'action': 'userprefs'}, id="userprefs"))
+                                               querystr={'action': 'userprefs'}, id='userprefs', rel='nofollow'))
            
         if request.cfg.show_login:
             if request.user.valid:
                 userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
-                                                   querystr={'action': 'logout', 'logout': 'logout'}, id="logout"))
+                                                   querystr={'action': 'logout', 'logout': 'logout'}, id='logout', rel='nofollow'))
             else:
                 userlinks.append(d['page'].link_to(request, text=_("Login", formatted=False),
-                                                   querystr={'action': 'login'}, id="login"))
+                                                   querystr={'action': 'login'}, id='login', rel='nofollow'))
 
         userlinks = [u'<li>%s</li>' % link for link in userlinks]
         html = u'<ul id="username">%s</ul>' % ''.join(userlinks)
@@ -1124,16 +1124,16 @@ actionsMenuInit('%(label)s');
         if self.showBothEditLinks() and guiworks:
             text = _('Edit (Text)', formatted=False)
             params = params + 'text'
-            attrs = {'name': "texteditlink"}
+            attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
         else:
             text = _('Edit', formatted=False)
             if guiworks:
                 # 'textonly' will be upgraded dynamically to 'guipossible' by JS
                 params = params + 'textonly'
-                attrs = {'name': "editlink"}
+                attrs = {'name': 'editlink', 'rel': 'nofollow', }
             else:
                 params = params + 'text'
-                attrs = {'name': "texteditlink"}
+                attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
         
         return wikiutil.link_tag(self.request, params, text, **attrs)
 
@@ -1177,7 +1177,7 @@ var gui_editor_link_text = "%(text)s";
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Info', formatted=False), 
-                            querystr='action=info')
+                            querystr='action=info', rel='nofollow')
     
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
@@ -1194,7 +1194,7 @@ var gui_editor_link_text = "%(text)s";
         else:
             text = _("Subscribe", formatted=False)
         params = wikiutil.quoteWikinameURL(page.page_name) + '?action=subscribe'
-        return wikiutil.link_tag(self.request, params, text)
+        return wikiutil.link_tag(self.request, params, text, self.request.formatter, rel='nofollow')
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
@@ -1211,14 +1211,14 @@ var gui_editor_link_text = "%(text)s";
         else:
             text = _("Add Link", formatted=False)
         params = wikiutil.quoteWikinameURL(page.page_name) + '?action=quicklink'
-        return wikiutil.link_tag(self.request, params, text)
+        return wikiutil.link_tag(self.request, params, text, self.request.formatter, rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Attachments', formatted=False), 
-                            querystr='action=AttachFile')
+                            querystr='action=AttachFile', rel='nofollow')
 
     def startPage(self):
         """ Start page div with page language and direction
@@ -1362,7 +1362,8 @@ var gui_editor_link_text = "%(text)s";
                     days.append(
                         wikiutil.link_tag(self.request,
                             '%s?max_days=%d' % (d['q_page_name'], day),
-                            str(day)))
+                            str(day),
+                            self.request.formatter, rel='nofollow'))
             days = ' | '.join(days)
             html += (_("Show %s days.") % (days,))
         

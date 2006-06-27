@@ -594,7 +594,7 @@ def do_diff(pagename, request):
                 if rev2: qstr = '%s&rev2=%s' % (qstr, rev2)
                 request.write(Page(request, pagename).link_to(request,
                     text=_('Ignore changes in the amount of whitespace'),
-                    querystr=qstr) + '<p>')
+                    querystr=qstr, rel='nofollow') + '<p>')
 
             request.write('<pre>')
             for line in lines:
@@ -695,24 +695,24 @@ def do_info(pagename, request):
                         querystr=''))
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('raw'),
-                        querystr='action=raw'))
+                        querystr='action=raw', rel='nofollow'))
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('print'),
-                        querystr='action=print'))
+                        querystr='action=print', rel='nofollow'))
                 else:
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('view'),
-                        querystr='action=recall&rev=%d' % rev))
+                        querystr='action=recall&rev=%d' % rev, rel='nofollow'))
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('raw'),
-                        querystr='action=raw&rev=%d' % rev))
+                        querystr='action=raw&rev=%d' % rev, rel='nofollow'))
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('print'),
-                        querystr='action=print&rev=%d' % rev))
+                        querystr='action=print&rev=%d' % rev, rel='nofollow'))
                     if may_revert and size: # you can only revert to nonempty revisions
                         actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                             text=_('revert'),
-                            querystr='action=revert&rev=%d' % (rev,)))
+                            querystr='action=revert&rev=%d' % rev, rel='nofollow'))
                 if count == 0:
                     rchecked=' checked="checked"'
                     lchecked = ''
@@ -744,18 +744,18 @@ def do_info(pagename, request):
                     if line.action == 'ATTNEW':
                         actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                             text=_('view'),
-                            querystr='action=AttachFile&do=view&target=%s' % filename))
+                            querystr='action=AttachFile&do=view&target=%s' % filename, rel='nofollow'))
                     elif line.action == 'ATTDRW':
                         actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                             text=_('edit'),
-                            querystr='action=AttachFile&drawing=%s' % filename.replace(".draw","")))
+                            querystr='action=AttachFile&drawing=%s' % filename.replace(".draw",""), rel='nofollow'))
 
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('get'),
-                        querystr='action=AttachFile&do=get&target=%s' % filename))
+                        querystr='action=AttachFile&do=get&target=%s' % filename, rel='nofollow'))
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('del'),
-                        querystr='action=AttachFile&do=del&target=%s' % filename))
+                        querystr='action=AttachFile&do=del&target=%s' % filename, rel='nofollow'))
                     # XXX use?: wikiutil.escape(filename)
 
             history.addRow((
@@ -810,11 +810,11 @@ def do_info(pagename, request):
     request.theme.send_title(_('Info for "%s"') % (title,), pagename=pagename)
 
     historylink =  wikiutil.link_tag(request, '%s?action=info' % qpagename,
-        _('Show "%(title)s"') % {'title': _('Revision History')})
+        _('Show "%(title)s"') % {'title': _('Revision History')}, request.formatter, rel='nofollow')
     generallink =  wikiutil.link_tag(request, '%s?action=info&amp;general=1' % qpagename,
-        _('Show "%(title)s"') % {'title': _('General Page Infos')})
+        _('Show "%(title)s"') % {'title': _('General Page Infos')}, request.formatter, rel='nofollow')
     hitcountlink = wikiutil.link_tag(request, '%s?action=info&amp;hitcounts=1' % qpagename,
-        _('Show chart "%(title)s"') % {'title': _('Page hits and edits')})
+        _('Show chart "%(title)s"') % {'title': _('Page hits and edits')}, request.formatter, rel='nofollow')
     
     request.write('<div id="content">\n') # start content div
     request.write("<p>[%s]  [%s]  [%s]</p>" % (historylink, generallink, hitcountlink))
