@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import StringIO
+import StringIO, time
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
 
@@ -639,4 +639,18 @@ class SearchResults:
         _ = request.getText
         self.matchLabel = (_('match'), _('matches'))
 
+
+def getSearchResults(request, query, hits, start):
+    result_hits = []
+    for wikiname, page, attachment, match in hits:
+        if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
+            if attachment:
+                result_hits.append(FoundAttachment(page.page_name, attachment))
+            else:
+                result_hits.append(FoundPage(page.page_name, match))
+        else:
+            result_hits.append(FoundRemote(wikiname, page, attachment, match))
+    elapsed = time.time() - start
+    count = request.rootpage.getPageCount()
+    return SearchResults(query, result_hits, count, elapsed)
 
