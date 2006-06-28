@@ -2,6 +2,9 @@
 """
     MoinMoin - Fullsearch Index Script Package
 
+    TODO: rename this module back to xapian when script framework is
+    fixed to not confuse it with the xapian.org "xapian" module.
+
     @copyright: 2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """

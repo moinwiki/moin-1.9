@@ -31,7 +31,6 @@ class Request(RequestBase):
             self.is_ssl = self.twistd.isSecure()
             self.path_info = '/' + '/'.join([pagename] + self.twistd.postpath)
             self.request_method = self.twistd.method
-            self.remote_host = self.twistd.getClient()
             self.remote_addr = self.twistd.getClientIP()
             self.request_uri = self.twistd.uri
             self.script_name = "/" + '/'.join(self.twistd.prepath[:-1])

@@ -28,6 +28,33 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
+Branch moin-1.6-xapian:
+  New Features:
+    * Added Xapian (see http://xapian.org/) based indexed search code.
+      Our implementation is still buggy, only use it if you want to help
+      debugging it or to implement / test indexing filters (see
+      MoinMoin/filter/). To use this:
+      * Install xapian-core and xapian-bindings on your machine.
+        We used 0.9.4, but newer code should hopefully work, too.
+      * cfg.xapian_search = True
+      * Execute this to build the index:
+        $ moin ... index build   # indexes pages and attachments
+        $ moin ... index build --files=files.lst  # same plus a list of files
+        You should run those commands as the same user you use for your wiki,
+        usually this is the webserver userid, e.g.:
+        $ sudo -u www-data moin --config=... --wiki-url=wiki.example.org/ \
+               index build --files=files.lst
+  ToDo:
+    * fix/improve query parsing (xapian_term member functions)
+    * fix/improve evaluation of search result
+    * maybe add some "xapian native query" mode (can we make it working without
+      the _moinSearch post-processing (not possible as it uses the same query))
+
+  Other Changes:
+    * Removed Lupy based indexed search code. If you were brave enough to
+      use cfg.lupy_search, you maybe want to try cfg.xapian_search instead.
+
+
 Version 1.6.current:
     This is the active development branch. All changes get done here and
     critical stuff gets committed with -m "... (backport to 1.5)" and then
@@ -72,16 +99,35 @@ Version 1.6.current:
       types because the official ones suck)
     * renamed parsers to module names representing sane mimetypes, e.g.:
       parser.wiki -> parser.text_moin_wiki
-    * Added thread_monitor. It can be activated using:
+    * Added thread_monitor debugging aid. It can be activated using:
       from MoinMoin.util import thread_monitor; thread_monitor.activate_hook()
+      and then triggered by requesting URL ...?action=thread_monitor - please
+      be aware that monitoring threads has a big performance impact on its own,
+      so you only want to temporarily enable this for debugging.
+      By default, it dumps its output to the data_dir as tm_<timestamp>.log,
+      you can change this at bottom of action/thread_monitor.py if you want to
+      see output in your browser.
     * Introduced scope parameter to CacheEntry() - if you specify 'farm', it
       will cache into a common directory for all wikis in the same farm, if you
       specify 'wiki', it will use a cache directory per wiki and if you specify
       'item', it will use a cache directory per item (== per page).
       Creating a CacheEntry without explicit scope is DEPRECATED.
     * smileys moved from MoinMoin.config to MoinMoin.theme
+    * removed all _ magic in URLs and filenames
+      TODO: write mig script for data_dir
+      TODO: make blanks in interwiki pagelinks possible
 
   New Features:
+    * Removed "underscore in URL" == "blank in pagename magic" - it made more
+      trouble than it was worth. If you still want to have a _ in URL, just
+      put a _ into pagename.
+    * Introduced quoting for pagenames and new, easier link markup:
+      * ["Page with blanks" but different link text],
+        NOTE: using [:Page with blanks:but different link text] is DEPRECATED.
+      * ["/Sub Page" with different link text]
+      * MoinMoin:"Page with blanks"
+      * [wiki:MoinMoin:"Page with blanks" different link text]
+      * attachment:"blanks are evil.txt"
 
     * FeatureRequests/WikiEmailIntegration TODO:make some help page when stable
     * HTML parser (called "html") that allows you to use HTML on the page.
@@ -94,6 +140,9 @@ Version 1.6.current:
       To use TLS/SSL support you must also install the TLSLite library
       (http://trevp.net/tlslite/). Version 0.3.8 was used for development and
       testing.
+    * cfg.log_reverse_dns_lookups [default: True] - you can set this to False
+      if rev. dns lookups are broken in your network (leading to long delays
+      on page saves). With False, edit-log will only contain IP, not hostname.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -106,6 +155,8 @@ Version 1.6.current:
     * fixed smiley caching bug (smileys didn't change theme)
     * fixed backtrace when user removed css_url entry from user_form_fields
     * Fixed the output of macro and "attachment:" usages of the rst parser.
+    * Removed Twisted request object reverse DNS lookup
+    * cfg.editor_quickhelp was not parsed with the wiki parser when customized
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
