@@ -967,9 +967,9 @@ Please review the page and save then. Do not save this page as it is!""")
             if self.request.cfg.mail_enabled:
                 msg = msg + self._notifySubscribers(comment, trivial)
           
-            if self.request.cfg.lupy_search:
-                from MoinMoin import lupy
-                index = lupy.Index(self.request)
+            if self.request.cfg.xapian_search:
+                from MoinMoin import Xapian
+                index = Xapian.Index(self.request)
                 # When we have automatic index building, we can add to
                 # the queue even if the index is missing.
                 if index.exists():

@@ -224,11 +224,19 @@ def getText(original, request, lang, formatted=True):
                 if dicts.has_dict(dictpagename):
                     userdict = dicts.dict(dictpagename)
                     translated = userdict[original]
+                else:
+                    raise KeyError
+            else:
+                raise KeyError
         except KeyError:
-            # do not simply return trans with orig, but recursively call
-            # to get english translation, maybe formatted
+            # do not simply return trans with str, but recursively call
+            # to get english translation, maybe formatted.
+            # if we don't find an english "translation", we just format it
+            # on the fly (this is needed for cfg.editor_quickhelp).
             if lang != 'en':
                 translated = getText(original, request, 'en', formatted)
+            elif formatted:
+                translated = translations[lang].formatMarkup(request, original)
     return translated
 
 

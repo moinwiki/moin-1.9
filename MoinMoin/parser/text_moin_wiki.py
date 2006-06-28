@@ -30,8 +30,12 @@ class Parser:
 
     # some common strings
     PARENT_PREFIX = wikiutil.PARENT_PREFIX
+    sq_string = ur"('.*?')" # single quoted string
+    dq_string = ur"(\".*?\")" # double quoted string
+    q_string = ur"(%s|%s)" % (sq_string, dq_string) # quoted string
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
+    punct_no_quote_pattern = re.escape(u'''\}]|:,.)?!''')
     url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc|' +
             u'|'.join(attachment_schemas) + 
             (config.url_schemas and u'|' + u'|'.join(config.url_schemas) or ''))
@@ -43,10 +47,12 @@ class Parser:
         'subpages': wikiutil.CHILD_PREFIX + '?',
         'parent': ur'(?:%s)?' % re.escape(PARENT_PREFIX),
     }
-    url_rule = ur'%(url_guard)s(%(url)s)\:([^\s\<%(punct)s]|([%(punct)s][^\s\<%(punct)s]))+' % {
+    url_rule = ur'%(url_guard)s(%(url)s)\:(([^\s\<%(punct)s]|([%(punctnq)s][^\s\<%(punct)s]))+|%(q_string)s)' % {
         'url_guard': u'(^|(?<!\w))',
         'url': url_pattern,
         'punct': punct_pattern,
+        'punctnq': punct_no_quote_pattern,
+        'q_string': q_string,
     }
 
     ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
@@ -78,7 +84,7 @@ class Parser:
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:[^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)
+(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
 (?P<word>%(word_rule)s)
 (?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
 (?P<url>%(url_rule)s)
@@ -87,11 +93,12 @@ class Parser:
 (?P<smileyA>^(%(smiley)s)(?=\s))
 (?P<ent_symbolic>&[a-zA-Z]+;)
 (?P<ent>[<>&])
-(?P<wikiname_bracket>\[".*?"\])
+(?P<wikiname_bracket>\[%(q_string)s.*?\])
 (?P<tt_bt>`.*?`)"""  % {
 
         'url': url_pattern,
         'punct': punct_pattern,
+        'q_string': q_string,
         'ol_rule': ol_rule,
         'dl_rule': dl_rule,
         'url_rule': url_rule,
@@ -154,81 +161,48 @@ class Parser:
         #result.append("<!-- close item end -->\n")
 
 
-    def interwiki(self, url_and_text, **kw):
+    def interwiki(self, target_and_text, **kw):
         # TODO: maybe support [wiki:Page http://wherever/image.png] ?
-        if len(url_and_text) == 1:
-            url = url_and_text[0]
-            text = None
-        else:
-            url, text = url_and_text
+        scheme, rest = target_and_text.split(':', 1)
+        wikiname, pagename, text = wikiutil.split_wiki(rest)
+        if not text:
+            text = pagename
+        #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
 
-        # keep track of whether this is a self-reference, so links
-        # are always shown even the page doesn't exist.
-        is_self_reference = 0
-        url2 = url.lower()
-        if url2.startswith('wiki:self:'):
-            url = url[10:] # remove "wiki:self:"
-            is_self_reference = 1
-        elif url2.startswith('wiki:'):
-            url = url[5:] # remove "wiki:"
-           
-        tag, tail = wikiutil.split_wiki(url)
-        if text is None:
-            if tag:
-                text = tail
-            else:
-                text = url
-                url = ""
-        elif (url.startswith(wikiutil.CHILD_PREFIX) or # fancy link to subpage [wiki:/SubPage text]
-              is_self_reference or # [wiki:Self:LocalPage text] or [:LocalPage:text]
-              Page(self.request, url).exists()): # fancy link to local page [wiki:LocalPage text]
-            return self._word_repl(url, text)
-
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, url)
-        href = wikiutil.join_wiki(wikiurl, wikitail)
+        if wikiname.lower() == 'self': # [wiki:Self:LocalPage text] or [:LocalPage:text]
+            return self._word_repl(pagename, text)
 
         # check for image URL, and possibly return IMG tag
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(wikitail):
+        if not kw.get('pretty_url', 0) and wikiutil.isPicture(pagename):
+            dummy, wikiurl, dummy, wikitag_bad = wikiutil.resolve_wiki(self.request, rest)
+            href = wikiutil.join_wiki(wikiurl, pagename)
+            #self.request.log("interwiki: join_wiki -> %s.%s.%s" % (wikiurl,pagename,href))
             return self.formatter.image(src=href)
 
-        # link to self?
-        if wikitag is None:
-            return self._word_repl(wikitail)
-              
-        return (self.formatter.interwikilink(1, tag, tail) + 
+        return (self.formatter.interwikilink(1, wikiname, pagename) + 
                 self.formatter.text(text) +
-                self.formatter.interwikilink(0, tag, tail))
+                self.formatter.interwikilink(0, wikiname, pagename))
 
-    def attachment(self, url_and_text, **kw):
-        """ This gets called on attachment URLs.
-        """
+    def attachment(self, target_and_text, **kw):
+        """ This gets called on attachment URLs """
         _ = self._
-        if len(url_and_text) == 1:
-            url = url_and_text[0]
-            text = None
-        else:
-            url, text = url_and_text
+        #self.request.log("attachment: target_and_text %s" % target_and_text)
+        scheme, fname, text = wikiutil.split_wiki(target_and_text)
+        if not text:
+            text = fname
 
-        inline = url[0] == 'i'
-        drawing = url[0] == 'd'
-        url = url.split(":", 1)[1]
-        url = wikiutil.url_unquote(url, want_unicode=True)
-        text = text or url
+        if scheme == 'drawing':
+            return self.formatter.attachment_drawing(fname, text)
 
-        from MoinMoin.action import AttachFile
-        if drawing:
-            return self.formatter.attachment_drawing(url, text)
-
-        # check for image URL, and possibly return IMG tag
-        # (images are always inlined, just like for other URLs)
-        if not kw.get('pretty_url', 0) and wikiutil.isPicture(url):
-            return self.formatter.attachment_image(url)
+        # check for image, and possibly return IMG tag (images are always inlined)
+        if not kw.get('pretty_url', 0) and wikiutil.isPicture(fname):
+            return self.formatter.attachment_image(fname)
                 
         # inline the attachment
-        if inline:
-            return self.formatter.attachment_inlined(url, text)
+        if scheme == 'inline':
+            return self.formatter.attachment_inlined(fname, text)
 
-        return self.formatter.attachment_link(url, text)
+        return self.formatter.attachment_link(fname, text)
 
     def _u_repl(self, word):
         """Handle underline."""
@@ -365,17 +339,17 @@ class Parser:
         if wikitag_bad:
             return self.formatter.text(word)
         else:
-            return self.interwiki(["wiki:" + word])
-
+            return self.interwiki("wiki:" + word)
 
     def _url_repl(self, word):
         """Handle literal URLs including inline images."""
         scheme = word.split(":", 1)[0]
 
         if scheme == "wiki":
-            return self.interwiki([word])
+            return self.interwiki(word)
+
         if scheme in self.attachment_schemas:
-            return self.attachment([word])
+            return self.attachment(word)
 
         if wikiutil.isPicture(word):
             word = wikiutil.mapURL(self.request, word)
@@ -389,43 +363,58 @@ class Parser:
                     self.formatter.url(0))
 
 
-    def _wikiname_bracket_repl(self, word):
-        """Handle special-char wikinames."""
-        wikiname = word[2:-2]
-        if wikiname:
-            return self._word_repl(wikiname)
+    def _wikiname_bracket_repl(self, text):
+        """Handle special-char wikinames with link text, like:
+           ["Jim O'Brian" Jim's home page] or ['Hello "world"!' a page with doublequotes]i
+        """
+        word = text[1:-1] # strip brackets
+        first_char = word[0]
+        if first_char in "'\"": # this is quoted
+            # split on closing quote
+            target, linktext = word[1:].split(first_char, 1)
+        else: # not quoted
+            # split on whitespace
+            target, linktext = word.split(None, 1)
+        if target:
+            linktext = linktext.strip()
+            return self._word_repl(target, linktext)
         else:
-            return self.formatter.text(word)
+            return self.formatter.text(text)
 
 
     def _url_bracket_repl(self, word):
         """Handle bracketed URLs."""
-
-        # Local extended link?
-        if word[1] == ':':
-            words = word[2:-1].split(':', 1)
+        word = word[1:-1] # strip brackets
+        
+        # Local extended link? [:page name:link text] XXX DEPRECATED
+        if word[0] == ':':
+            words = word[1:].split(':', 1)
             if len(words) == 1:
                 words = words * 2
-            words[0] = 'wiki:Self:%s' % words[0]
-            return self.interwiki(words, pretty_url=1)
-            #return self._word_repl(words[0], words[1])
+            target_and_text = 'wiki:Self:"%s" %s' % tuple(words)
+            return self.interwiki(target_and_text, pretty_url=1)
 
-        # Traditional split on space
-        words = word[1:-1].split(None, 1)
-        if len(words) == 1:
-            words = words * 2
+        scheme_and_rest = word.split(":", 1)
+        if len(scheme_and_rest) == 1: # no scheme
+            # Traditional split on space
+            words = word.split(None, 1)
+            if len(words) == 1:
+                words = words * 2
 
-        if words[0][0] == '#':
-            # anchor link
-            return (self.formatter.url(1, words[0]) +
-                    self.formatter.text(words[1]) +
-                    self.formatter.url(0))
-
-        scheme = words[0].split(":", 1)[0]
-        if scheme == "wiki":
-            return self.interwiki(words, pretty_url=1)
-        if scheme in self.attachment_schemas:
-            return self.attachment(words, pretty_url=1)
+            if words[0].startswith('#'): # anchor link
+                return (self.formatter.url(1, words[0]) +
+                        self.formatter.text(words[1]) +
+                        self.formatter.url(0))
+        else:
+            scheme, rest = scheme_and_rest
+            if scheme == "wiki":
+                return self.interwiki(word, pretty_url=1)
+            if scheme in self.attachment_schemas:
+                return self.attachment(word, pretty_url=1)
+            
+            words = word.split(None, 1)
+            if len(words) == 1:
+                words = words * 2
 
         if wikiutil.isPicture(words[1]) and re.match(self.url_rule, words[1]):
             return (self.formatter.url(1, words[0], css='external', do_escape=0) +
@@ -888,7 +877,7 @@ class Parser:
         """ Replace match using type name """
         result = []
         for type, hit in match.groupdict().items():
-            if hit is not None and type != "hmarker":
+            if hit is not None and not type in ["hmarker", ]:
                 
                 ###result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
                 if self.in_pre and type not in ['pre', 'ent']:
