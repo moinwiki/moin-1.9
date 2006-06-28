@@ -56,9 +56,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         return
 
     # search the pages
-    from MoinMoin import search
-    results = search.searchPages(request, needle, case=case,
-            regex=regex, titlesearch=titlesearch)
+    from MoinMoin.search import searchPages, QueryParser
+    query = QueryParser(case=case, regex=regex,
+            titlesearch=titlesearch).parse_query(needle)
+    results = searchPages(request, query)
 
     # directly show a single hit
     # XXX won't work with attachment search

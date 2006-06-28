@@ -91,5 +91,12 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 2006-06-27
     * Splitting out MoinMoin/search.py to MoinMoin/search/*.py, no more
-      need to invoke QueryParser manually when using searchPages
+      need to invoke QueryParser manually when using searchPages, minor
+      refactoring
+
+2006-06-28
+    * Abstraction of a locked search engine index:
+      MoinMoin.search.builtin.BaseIndex, MoinMoin.search.Xapian.Index is
+      derived from this, cleanups in calling structure and function
+      prototypes to make it more extensible
 
