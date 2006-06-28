@@ -201,6 +201,7 @@ only requiring a Python installation.
     'packages': [
         'MoinMoin',
         'MoinMoin.action',
+        'MoinMoin.auth',
         'MoinMoin.converter',
         'MoinMoin.filter',
         'MoinMoin.formatter',
@@ -209,6 +210,7 @@ only requiring a Python installation.
         'MoinMoin.i18n.tools',
         'MoinMoin.logfile',
         'MoinMoin.macro',
+        'MoinMoin.mail',
         'MoinMoin.parser',
         'MoinMoin.request',
         'MoinMoin.script',
