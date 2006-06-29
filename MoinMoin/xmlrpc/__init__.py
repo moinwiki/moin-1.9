@@ -504,10 +504,18 @@ class XmlRpcBase:
     def xmlrpc_getAuthToken(self, username, password, *args):
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. """
-        return "foo"
+        u = user.User(request, name=username, password=password, auth_method='xmlrpc_gettoken')
+        if u.valid:
+            return u.id
+        else:
+            return None
     
     def xmlrpc_applyAuthToken(self, auth_token, method_name, *args):
-        # do something with token XXX
+        u = user.User(request, id=cookie[MOIN_ID].value, auth_method='xmlrpc_applytoken')
+        if u.valid:
+            self.request.user = u
+        else:
+            raise Exception("Invalid token.") # XXX make a distinct class
         return self.dispatch(method_name, args)
         
     # XXX BEGIN WARNING XXX
