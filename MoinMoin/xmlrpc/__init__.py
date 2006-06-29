@@ -503,20 +503,22 @@ class XmlRpcBase:
     
     def xmlrpc_getAuthToken(self, username, password, *args):
         """ Returns a token which can be used for authentication
-            in other XMLRPC calls. """
-        u = user.User(request, name=username, password=password, auth_method='xmlrpc_gettoken')
+            in other XMLRPC calls. If the token is empty, the username
+            or the password were wrong. """
+        u = user.User(self.request, name=username, password=password, auth_method='xmlrpc_gettoken')
         if u.valid:
             return u.id
         else:
-            return None
+            return ""
     
-    def xmlrpc_applyAuthToken(self, auth_token, method_name, *args):
-        u = user.User(request, id=cookie[MOIN_ID].value, auth_method='xmlrpc_applytoken')
+    def xmlrpc_applyAuthToken(self, auth_token):
+        """ Applies the auth token and thereby authenticates the user. """
+        u = user.User(self.request, id=auth_token, auth_method='xmlrpc_applytoken')
         if u.valid:
             self.request.user = u
+            return "SUCCESS"
         else:
             raise Exception("Invalid token.") # XXX make a distinct class
-        return self.dispatch(method_name, args)
         
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
