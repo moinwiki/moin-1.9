@@ -6,7 +6,8 @@ Branch moin/1.6-sync-aschremmer
 
   ToDo:
     * Implement actual syncronisation.
-    * Implement a cross-site authentication system.
+    * Implement a cross-site authentication system, i.e. mainly an
+      identity storage.
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -36,6 +37,8 @@ Week 22: Tax forms, Fulfilled transcription request,
          backported the client code from python 2.4
 Week 23: Initial thoughts about Mercurial as a base for syncronisation.
 Week 24: Evaluation of OpenID as a base for authentication
+Week 25: Conference in Chile.
+Week 26: Implementation of the XMLRPC authentication system.
 
 Time plan
 =========
