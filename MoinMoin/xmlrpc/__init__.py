@@ -493,18 +493,34 @@ class XmlRpcBase:
                 for hit in results.hits]
 
     def xmlrpc_getMoinVersion(self):
+        """ Returns a tuple of the MoinMoin version:
+            (project, release, revision)
+        """
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
-
+    # authorization methods
+    
+    def xmlrpc_getAuthToken(self, username, password, *args):
+        """ Returns a token which can be used for authentication
+            in other XMLRPC calls. """
+        return "foo"
+    
+    def xmlrpc_applyAuthToken(self, auth_token, method_name, *args):
+        # do something with token XXX
+        return self.dispatch(method_name, args)
+        
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
     # they are neither standard nor are they what we need when we have switched
     # attachments (1.5 style) to mimetype items (hopefully in 1.6).
-    # They are likely to get removed again when we remove AttachFile module.
-    # So use them on your own risk.
+    # They will be partly removed, esp. the semantics of the function "listAttachments"
+    # cannot be sensibly defined for items.
+    # If the first beta or more stable release of 1.6 will have new item semantics,
+    # we will remove the functions before it is released.
     def xmlrpc_listAttachments(self, pagename):
         """ Get all attachments associated with pagename
+        Deprecated.
         
         @param pagename: pagename (utf-8)
         @rtype: list
