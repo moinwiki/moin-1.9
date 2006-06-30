@@ -519,6 +519,9 @@ class XmlRpcBase:
             return "SUCCESS"
         else:
             raise Exception("Invalid token.") # XXX make a distinct class
+    
+    def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
+        return "NOT_IMPLEMENTED_YET"
         
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
