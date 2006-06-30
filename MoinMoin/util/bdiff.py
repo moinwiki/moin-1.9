@@ -19,9 +19,12 @@ def decompress(bin):
     return zlib.decompress(bin)
 
 def diff(a, b):
-    """ Generates a binary diff of the passed strings. """
+    """ Generates a binary diff of the passed strings.
+        Note that you can pass arrays of strings as well.
+        This might give you better results for text files. """
     if not a:
-        return b and (struct.pack(BDIFF_PATT, 0, 0, len(b)) + b)
+        s = "".join(b)
+        return s and (struct.pack(BDIFF_PATT, 0, 0, len(s)) + s)
 
     bin = []
     la = lb = 0
@@ -37,6 +40,10 @@ def diff(a, b):
         lb = bm + size
     
     return "".join(bin)
+
+def textdiff(a, b):
+    """ A diff function optimised for text files. Works with binary files as well. """
+    return diff(a.splitlines(1), b.splitlines(1))
 
 def patchtext(bin):
     """ Returns the new hunks that are contained in a binary diff."""
@@ -67,13 +74,18 @@ def patch(a, bin):
     return "".join(r)
 
 def test():
-    a = "föo" * 30
-    b = "bär" * 30
+    a = ("foo\n" * 30)
+    b = ("  fao" * 30)
+    
+    a = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.1").read()
+    b = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.2").read()
+    a = a.splitlines(1)
+    b = b.splitlines(1)
+    
     d = diff(a, b)
     z = compress(d)
     print `patchtext(d)`
-    #print `d`
-    print b == patch(a, d)
+    print `d`
+    print "".join(b) == patch("".join(a), d)
     print len(d), len(z)
 
-test()
