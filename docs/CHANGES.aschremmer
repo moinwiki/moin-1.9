@@ -13,6 +13,7 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC method to return the Moin version
     * XMLRPC multicall support
     * Conflict icon in RecentChanges
+    * XMLRPC Authentication System
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
@@ -23,6 +24,7 @@ Branch moin/1.6-sync-aschremmer
   Developer notes:
     * ...
 
+Do not forget to check the related wiki page: http://moinmoin.wikiwikiweb.de/WikiSyncronisation
 
 Diary
 =====
@@ -35,8 +37,8 @@ Week 22: Tax forms, Fulfilled transcription request,
          changed conflict icon,
          Added xmlrpc multicall support into the server and
          backported the client code from python 2.4
-Week 23: Initial thoughts about Mercurial as a base for syncronisation.
-Week 24: Evaluation of OpenID as a base for authentication
+Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as a base for syncronisation.
+Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts 
 Week 25: Conference in Chile.
 Week 26: Implementation of the XMLRPC authentication system.
 
