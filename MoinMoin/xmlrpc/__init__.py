@@ -493,18 +493,47 @@ class XmlRpcBase:
                 for hit in results.hits]
 
     def xmlrpc_getMoinVersion(self):
+        """ Returns a tuple of the MoinMoin version:
+            (project, release, revision)
+        """
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
-
+    # authorization methods
+    
+    def xmlrpc_getAuthToken(self, username, password, *args):
+        """ Returns a token which can be used for authentication
+            in other XMLRPC calls. If the token is empty, the username
+            or the password were wrong. """
+        u = user.User(self.request, name=username, password=password, auth_method='xmlrpc_gettoken')
+        if u.valid:
+            return u.id
+        else:
+            return ""
+    
+    def xmlrpc_applyAuthToken(self, auth_token):
+        """ Applies the auth token and thereby authenticates the user. """
+        u = user.User(self.request, id=auth_token, auth_method='xmlrpc_applytoken')
+        if u.valid:
+            self.request.user = u
+            return "SUCCESS"
+        else:
+            raise Exception("Invalid token.") # XXX make a distinct class
+    
+    def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
+        return "NOT_IMPLEMENTED_YET"
+        
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
     # they are neither standard nor are they what we need when we have switched
     # attachments (1.5 style) to mimetype items (hopefully in 1.6).
-    # They are likely to get removed again when we remove AttachFile module.
-    # So use them on your own risk.
+    # They will be partly removed, esp. the semantics of the function "listAttachments"
+    # cannot be sensibly defined for items.
+    # If the first beta or more stable release of 1.6 will have new item semantics,
+    # we will remove the functions before it is released.
     def xmlrpc_listAttachments(self, pagename):
         """ Get all attachments associated with pagename
+        Deprecated.
         
         @param pagename: pagename (utf-8)
         @rtype: list
