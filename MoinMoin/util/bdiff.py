@@ -11,6 +11,7 @@
 import zlib, difflib, struct
 
 BDIFF_PATT = ">lll"
+BDIFF_PATT_SIZE = struct.calcsize(">lll")
 
 def compress(text):
     return zlib.compress(text) # here we could tune the compression level
@@ -50,8 +51,8 @@ def patchtext(bin):
     pos = 0
     t = []
     while pos < len(bin):
-        p1, p2, l = struct.unpack(BDIFF_PATT, bin[pos:pos + 12])
-        pos += 12
+        p1, p2, l = struct.unpack(BDIFF_PATT, bin[pos:pos + BDIFF_PATT_SIZE])
+        pos += BDIFF_PATT_SIZE
         t.append(bin[pos:pos + l])
         pos += l
     return "".join(t)
@@ -62,8 +63,8 @@ def patch(a, bin):
     r = []
 
     while pos < len(bin):
-        p1, p2, l = struct.unpack(BDIFF_PATT, bin[pos:pos + 12])
-        pos += 12
+        p1, p2, l = struct.unpack(BDIFF_PATT, bin[pos:pos + BDIFF_PATT_SIZE])
+        pos += BDIFF_PATT_SIZE
         r.append(a[last:p1])
         r.append(bin[pos:pos + l])
         pos += l
