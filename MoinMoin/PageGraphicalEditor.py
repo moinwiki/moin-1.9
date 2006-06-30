@@ -295,7 +295,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 """)
         self.request.write("<p>")
         self.request.write(_("Comment:"),
-            ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="80">' % (
+            ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="200">' % (
                 wikiutil.escape(kw.get('comment', ''), 1), ))
         self.request.write("</p>")
 

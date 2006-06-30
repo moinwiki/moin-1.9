@@ -276,6 +276,7 @@ reStructuredText Quick Reference
                                     # instead of just IPs
 
     xapian_search = False # disabled until xapian is finished
+    xapian_index_dir = None
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
@@ -387,7 +388,7 @@ reStructuredText Quick Reference
     user_checkbox_fields = [
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
         ('edit_on_doubleclick', lambda _: _('Open editor on double click')),
-        ('remember_last_visit', lambda _: _('Jump to last visited page instead of frontpage')),
+        ('remember_last_visit', lambda _: _('After login, jump to last visited page')),
         ('show_nonexist_qm', lambda _: _('Show question mark for non-existing pagelinks')),
         ('show_page_trail', lambda _: _('Show page trail')),
         ('show_toolbar', lambda _: _('Show icon toolbar')),
@@ -481,7 +482,7 @@ reStructuredText Quick Reference
             name = dirname + '_dir'
             if not getattr(self, name, None):
                 setattr(self, name, os.path.join(data_dir, dirname))
-            
+
         # Try to decode certain names which allow unicode
         self._decode()
 

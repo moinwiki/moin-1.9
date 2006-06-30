@@ -6,9 +6,10 @@
     @license: GNU GPL, see COPYING for details.
 """
     
-import os, re, difflib, urllib, cgi
+import os, re, urllib, cgi
 import codecs, types
 
+from MoinMoin.support import difflib
 from MoinMoin import util, version, config
 from MoinMoin.util import pysupport, filesys
 

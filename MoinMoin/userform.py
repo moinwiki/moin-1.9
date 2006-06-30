@@ -637,7 +637,7 @@ class Login:
         sn = request.getScriptname()
         pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
-        userprefslink = wikiutil.getSysPage(request, "UserPreferences").link_to(request)
+        userprefslink = wikiutil.getSysPage(request, "UserPreferences").link_to(request, rel='nofollow')
         hint = _("To create an account or recover a lost password, see the %(userprefslink)s page.") % {
                'userprefslink': userprefslink}
         self._form = html.FORM(action=action)
@@ -714,7 +714,8 @@ def do_user_browser(request):
                                  querystr= {"action":"userform",
                                             "email": account.email,  
                                             "account_sendmail": "1",
-                                            "sysadm": "users",})
+                                            "sysadm": "users",},
+                                 rel='nofollow')
         ))
 
     if data:

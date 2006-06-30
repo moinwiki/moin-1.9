@@ -65,25 +65,25 @@ def format_page_edits(macro, lines, bookmark_usecs):
         #img = request.theme.make_icon('help')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(pagename) + "?action=edit",
-                                      img, formatter=macro.formatter)
+                                      img, formatter=macro.formatter, rel="nofollow")
     elif is_new:
         # show "NEW" icon if page was created after the user's bookmark
         if hilite:
             img = request.theme.make_icon('new')
             html_link = wikiutil.link_tag(request, wikiutil.quoteWikinameURL(pagename),
-                                          img, formatter=macro.formatter)
+                                          img, formatter=macro.formatter, rel="nofollow")
     elif hilite:
         # show "UPDATED" icon if page was edited after the user's bookmark
         img = request.theme.make_icon('updated')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(pagename) + "?action=diff&date=%d" % bookmark_usecs,
-                                      img, formatter=macro.formatter)
+                                      img, formatter=macro.formatter, rel="nofollow")
     else:
         # show "DIFF" icon else
         img = request.theme.make_icon('diffrc')
         html_link = wikiutil.link_tag(request,
                                       wikiutil.quoteWikinameURL(line.pagename) + "?action=diff",
-                                      img, formatter=macro.formatter)
+                                      img, formatter=macro.formatter, rel="nofollow")
 
     # print name of page, with a link to it
     force_split = len(page.page_name) > _MAX_PAGENAME_LENGTH
@@ -133,7 +133,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     img = request.theme.make_icon('info')
     info_html = wikiutil.link_tag(request,
                                   wikiutil.quoteWikinameURL(line.pagename) + "?action=info",
-                                  img, formatter=macro.formatter)
+                                  img, formatter=macro.formatter, rel="nofollow")
     d['info_html'] = info_html
     
     return request.theme.recentchanges_entry(d)
@@ -259,14 +259,14 @@ def execute(macro, args, **kw):
             
             url = wikiutil.quoteWikinameURL(pagename) + "?action=bookmark&time=del"
             deleteBookmark = wikiutil.link_tag(request, url, _("Delete Bookmark"),
-                                               formatter=macro.formatter)
+                                               formatter=macro.formatter, rel="nofollow")
             d['rc_curr_bookmark'] = currentBookmark + ' ' + deleteBookmark
 
         version = wikiutil.timestamp2version(tnow)
         url = wikiutil.quoteWikinameURL(pagename) + \
             "?action=bookmark&time=%d" % version
         d['rc_update_bookmark'] = wikiutil.link_tag(request, url, _("Set bookmark"),
-                                                    formatter=macro.formatter)
+                                                    formatter=macro.formatter, rel="nofollow")
     
     # set max size in days
     max_days = min(int(request.form.get('max_days', [0])[0]), _DAYS_SELECTION[-1])
@@ -314,7 +314,7 @@ def execute(macro, args, **kw):
                     wikiutil.quoteWikinameURL(
                         macro.formatter.page.page_name) + "?action=bookmark&time=%d" % (pages[0][0].ed_time_usecs,),
                         _("set bookmark"),
-                        formatter=macro.formatter)
+                        formatter=macro.formatter, rel="nofollow")
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
@@ -360,7 +360,7 @@ def execute(macro, args, **kw):
                     wikiutil.quoteWikinameURL(
                         macro.formatter.page.page_name) + "?action=bookmark&time=%d" % (pages[0][0].ed_time_usecs,),
                         _("Set bookmark"),
-                        formatter=macro.formatter)
+                        formatter=macro.formatter, rel="nofollow")
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))

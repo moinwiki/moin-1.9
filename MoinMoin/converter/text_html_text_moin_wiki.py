@@ -465,7 +465,7 @@ class strip_whitespace(visitor):
 class convert_tree(visitor):
     white_space = object()
     new_line = object()
-        
+
     def __init__(self, request, pagename):
         self.request = request
         self.pagename = pagename
@@ -616,7 +616,7 @@ class convert_tree(visitor):
                     self.text.append(text.replace("\n", " "))
                 elif name == 'dd':
                     self.text.append(markup)
-                    self.process_list_item(i, indent)
+                    self.process_list_item(i, indent) # XXX no dt -> indent is undefined!!!
                 else:
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
@@ -802,7 +802,7 @@ class convert_tree(visitor):
     def process_div(self, node):
         # ignore div tags - just descend
         for i in node.childNodes:
-            self.visit_element(i)
+            self.visit(i)
 
     def process_tt(self, node):
         text = self.node_list_text_only(node.childNodes).replace("\n", " ")
@@ -972,7 +972,7 @@ class convert_tree(visitor):
             result.append('style="%s"' % node.getAttribute("style"))
                 
         if align:
-            result[0:0] = "%s" % align
+            result.insert(0, "%s" % align)
         result.append(rowspan)
         return " ".join(result).strip()
 
