@@ -177,15 +177,15 @@ class AndExpression(BaseExpression):
             wanted = wanted and term.xapian_wanted()
         return wanted
 
-    def xapian_term(self, request):
+    def xapian_term(self, request, allterms):
         # sort negated terms
         terms = []
         not_terms = []
         for term in self._subterms:
             if not term.negated:
-                terms.append(term.xapian_term(request))
+                terms.append(term.xapian_term(request, allterms))
             else:
-                not_terms.append(term.xapian_term(request))
+                not_terms.append(term.xapian_term(request, allterms))
 
         # prepare query for not negated terms
         if len(terms) == 1:
@@ -226,9 +226,9 @@ class OrExpression(AndExpression):
                 matches.extend(result)
         return matches
 
-    def xapian_term(self, request):
+    def xapian_term(self, request, allterms):
         # XXX: negated terms managed by _moinSearch?
-        return Query(Query.OP_OR, [term.xapian_term(request) for term in self._subterms])
+        return Query(Query.OP_OR, [term.xapian_term(request, allterms) for term in self._subterms])
 
 
 class TextSearch(BaseExpression):
@@ -303,9 +303,14 @@ class TextSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self, request):
+    def xapian_term(self, request, allterms):
         if self.use_re:
-            return None # xapian can't do regex search
+            # basic regex matching per term
+            terms = [term for term in allterms() if
+                    self.search_re.match(term)]
+            if not terms:
+                return None
+            queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
                     language=request.cfg.language_default)
@@ -331,10 +336,10 @@ class TextSearch(BaseExpression):
                 self._build_re(' '.join(stemmed), use_re=False,
                         case=self.case, stemmed=True)
 
-            # titlesearch OR parsed wikiwords
-            return Query(Query.OP_OR,
-                    (self.titlesearch.xapian_term(request),
-                        Query(Query.OP_AND, queries)))
+        # titlesearch OR parsed wikiwords
+        return Query(Query.OP_OR,
+                (self.titlesearch.xapian_term(request, allterms),
+                    Query(Query.OP_AND, queries)))
 
 
 class TitleSearch(BaseExpression):
@@ -406,9 +411,14 @@ class TitleSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self, request):
+    def xapian_term(self, request, allterms):
         if self.use_re:
-            return None # xapian doesn't support regex search
+            # basic regex matching per term
+            terms = [term for term in allterms() if
+                    self.search_re.match(term)]
+            if not terms:
+                return None
+            queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
                     language=request.cfg.language_default)
@@ -438,7 +448,7 @@ class TitleSearch(BaseExpression):
                 self._build_re(' '.join(stemmed), use_re=False,
                         case=self.case, stemmed=True)
 
-            return Query(Query.OP_AND, queries)
+        return Query(Query.OP_AND, queries)
 
 
 class LinkSearch(BaseExpression):
@@ -464,12 +474,10 @@ class LinkSearch(BaseExpression):
     def _build_re(self, pattern, use_re=False, case=False):
         """ Make a regular expression out of a text pattern """
         flags = case and re.U or (re.I | re.U)
-        try:
-            if not use_re:
-                raise re.error
+        if use_re:
             self.search_re = re.compile(pattern, flags)
             self.static = False
-        except re.error:
+        else:
             self.pattern = pattern
             self.static = True
         
@@ -516,13 +524,26 @@ class LinkSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self, request):
-        pattern = self.pattern
+    def xapian_term(self, request, allterms):
+        prefix = Xapian.Index.prefixMap['linkto']
         if self.use_re:
-            return None # xapian doesnt support regex search
+            # basic regex matching per term
+            terms = []
+            found = None
+            n = len(prefix)
+            for term in allterms():
+                if prefix == term[:n]:
+                    found = True
+                    if self.search_re.match(term[n+1:]):
+                        terms.append(term)
+                elif found:
+                    continue
+
+            if not terms:
+                return None
+            return Query(Query.OP_OR, terms)
         else:
-            return UnicodeQuery('%s:%s' %
-                    (Xapian.Index.prefixMap['linkto'], pattern))
+            return UnicodeQuery('%s:%s' % (prefix, self.pattern))
 
 
 class LanguageSearch(BaseExpression):
@@ -563,14 +584,28 @@ class LanguageSearch(BaseExpression):
     def xapian_wanted(self):
         return not self.use_re
 
-    def xapian_term(self, request):
-        pattern = self.pattern
+    def xapian_term(self, request, allterms):
+        self.xapian_called = True
+        prefix = Xapian.Index.prefixMap['lang']
         if self.use_re:
-            return None # xapian doesnt support regex search
+            # basic regex matching per term
+            terms = []
+            found = None
+            n = len(prefix)
+            for term in allterms():
+                if prefix == term[:n]:
+                    found = True
+                    if self.search_re.match(term[n:]):
+                        terms.append(term)
+                elif found:
+                    continue
+
+            if not terms:
+                return None
+            return Query(Query.OP_OR, terms)
         else:
-            self.xapian_called = True
-            return UnicodeQuery('%s%s' %
-                    (Xapian.Index.prefixMap['lang'], pattern))
+            pattern = self.pattern
+            return UnicodeQuery('%s%s' % (prefix, pattern))
 
 
 ##############################################################################
