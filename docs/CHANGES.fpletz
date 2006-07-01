@@ -2,11 +2,12 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * Regex searching with Xapian?
+    * Only term-based regex searching possible, modifier or heuristic to
+      enable usage of _moinSearch for full compatibility?
     * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
 
   ToDo:
-    * Mockup the new search UI
+    * Implement the new search UI
     * Write/update documentation for all the new search stuff
     * Indexing and searching of categories (new term prefix)
     * Drop _moinSearch when using Xapian and use term positions provided
@@ -99,4 +100,10 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       MoinMoin.search.builtin.BaseIndex, MoinMoin.search.Xapian.Index is
       derived from this, cleanups in calling structure and function
       prototypes to make it more extensible
+
+2006-06-29
+    * Tested some ideas with regexp searching
+
+2006-07-01
+    * Fully implemented term-based regexp searching
 

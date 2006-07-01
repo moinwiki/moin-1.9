@@ -384,11 +384,12 @@ class Search:
             index = Index(self.request)
         except ImportError:
             index = None
-        if index and index.exists() and self.query.xapian_wanted():
+        if index and index.exists(): #and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
-                query = self.query.xapian_term(self.request)
+                query = self.query.xapian_term(self.request,
+                        index.allterms)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
@@ -403,6 +404,8 @@ class Search:
                 self.request.log("xapianSearch: finds pages: %r" % pages)
             except BaseIndex.LockedException:
                 pass
+            #except AttributeError:
+            #    pages = []
             self.request.clock.stop('_xapianSearch')
         return self._moinSearch(pages)
 

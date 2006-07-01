@@ -209,13 +209,12 @@ class Index(BaseIndex):
             self.queue.remove([name])
         writer.close()
 
-    # XXX: why?
-    #def test(self, request):
-    #   idx = xapidx.ReadOnlyIndex(self.dir)
-    #   idx.configure(self.prefixMap, self.indexValueMap)
-    #   print idx.search("is")
-    #   #for d in docs:
-    #   #    request.log("%r %r %r" % (d, d.get('attachment'), d.get('pagename')))
+    def allterms(self):
+        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
+        i = db.allterms_begin()
+        while i != db.allterms_end():
+            yield i.get_term()
+            i.next()
 
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
