@@ -616,7 +616,7 @@ class convert_tree(visitor):
                     self.text.append(text.replace("\n", " "))
                 elif name == 'dd':
                     self.text.append(markup)
-                    self.process_list_item(i, indent)
+                    self.process_list_item(i, indent) # XXX no dt -> indent is undefined!!!
                 else:
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
