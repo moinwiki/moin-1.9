@@ -1,0 +1,35 @@
+TWikiDraw is based on Erich Gamma's JHotDraw 5.1. (JHotDraw is copyright
+1996, 1997 by IFA Informatik and Erich Gamma,
+erich_gamma@acmSPAMBLOCK.org . It is hereby granted that this software
+can be used, copied, modified, and distributed without fee provided that
+this copyright notice appears in all copies. ) 
+
+TWikiDraw uses ACME Labs' GifEncoder to convert a drawing into a GIF
+file format. (GifEncoder is Copyright (C)1996,1998 by Jef Poskanzer,
+jef@acmeSPAMBLOCK.com . All rights reserved. THIS SOFTWARE IS PROVIDED
+BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN
+NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.) 
+
+TWikiDraw uses some ideas of KmWiki drawing applet. 
+
+TWikiDraw: Copyright 2000 by Peter Thoeny, Peter@ThoenySPAMBLOCK.com. It
+is hereby granted that this software can be used, copied, modified, and
+distributed without fee provided that this copyright notice appears in
+all copies. 
+
+Modifications Copyright (C) 2001 Motorola. All Rights Reserved. 
+
+PeterThoeny created TWikiDraw based on above software 
+
+CrawfordCurrie made a number of improvements. 
+
+
