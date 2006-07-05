@@ -323,13 +323,13 @@ class TextSearch(BaseExpression):
                 if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
                     tmp = []
-                    for i in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(UnicodeQuery(Query.OP_OR, i))
-                        stemmed.append(i[1])
+                    for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
+                        tmp.append(UnicodeQuery(Query.OP_OR, (w, s)))
+                        stemmed.append(w)
                     t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery(i) for i in analyzer.tokenize(t)]
+                    t = [UnicodeQuery(w) for w, pos in analyzer.tokenize(t)]
                 queries.append(Query(Query.OP_AND, t))
 
             if stemmed:
@@ -423,7 +423,7 @@ class TitleSearch(BaseExpression):
             analyzer = Xapian.WikiAnalyzer(request=request,
                     language=request.cfg.language_default)
             terms = self._pattern.split()
-            terms = [list(analyzer.raw_tokenize(t)) for t in terms]
+            terms = [[w for w, pos in analyzer.raw_tokenize(t)] for t in terms]
 
             # all parsed wikiwords, AND'ed
             queries = []
@@ -432,15 +432,16 @@ class TitleSearch(BaseExpression):
                 if request.cfg.xapian_stemming:
                     # stemmed OR not stemmed
                     tmp = []
-                    for i in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(UnicodeQuery(Query.OP_OR, ['%s%s' %
-                            (Xapian.Index.prefixMap['title'], j) for j in i]))
-                        stemmed.append(i[1])
+                    for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
+                        tmp.append(UnicodeQuery(Query.OP_OR,
+                            ['%s%s' % (Xapian.Index.prefixMap['title'], j)
+                                for j in (w, s)]))
+                        stemmed.append(w)
                     t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], i))
-                        for i in analyzer.tokenize(t)]
+                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], w))
+                        for w, pos in analyzer.tokenize(t)]
 
                 queries.append(Query(Query.OP_AND, t))
 
