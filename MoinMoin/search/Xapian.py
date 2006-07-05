@@ -92,38 +92,47 @@ class WikiAnalyzer:
             tokenstream = re.finditer(self.token_re, value)
             for m in tokenstream:
                 if m.group("acronym"):
-                    yield enc(m.group("acronym").replace('.', ''))
+                    yield (enc(m.group("acronym").replace('.', '')),
+                            m.start())
                 elif m.group("company"):
-                    yield enc(m.group("company"))
+                    yield (enc(m.group("company")), m.start())
                 elif m.group("email"):
+                    displ = 0
                     for word in self.mail_re.split(m.group("email")):
                         if word:
-                            yield enc(word)
+                            yield (enc(word), m.start() + displ)
+                            displ += len(word) + 1
                 elif m.group("hostname"):
+                    displ = 0
                     for word in self.dot_re.split(m.group("hostname")):
-                        yield enc(word)
+                        yield (enc(word), m.start() + displ)
+                        displ += len(word) + 1
                 elif m.group("num"):
+                    displ = 0
                     for word in self.dot_re.split(m.group("num")):
-                        yield enc(word)
+                        yield (enc(word), m.start() + displ)
+                        displ += len(word) + 1
                 elif m.group("word"):
                     word = m.group("word")
-                    yield enc(word)
+                    yield (enc(word), m.start())
                     # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
                     if self.wikiword_re.match(word):
                         for sm in re.finditer(self.singleword_re, word):
-                            yield enc(sm.group())
+                            yield (enc(sm.group()), m.start() + sm.start())
 
     def tokenize(self, value, flat_stemming=True):
         """Yield a stream of lower cased raw and stemmed (optional) words from a string.
            value must be an UNICODE object or a list of unicode objects
         """
-        for i in self.raw_tokenize(value):
+        for word, pos in self.raw_tokenize(value):
             if flat_stemming:
-                yield i # XXX: should we really use a prefix for that? Index.prefixMap['raw'] + i
+                # XXX: should we really use a prefix for that?
+                # Index.prefixMap['raw'] + i
+                yield (word, pos)
                 if self.stemmer:
-                    yield self.stemmer.stemWord(i)
+                    yield (self.stemmer.stemWord(word), pos)
             else:
-                yield (i, self.stemmer.stemWord(i))
+                yield (i, self.stemmer.stemWord(i), pos)
 
 
 #############################################################################
