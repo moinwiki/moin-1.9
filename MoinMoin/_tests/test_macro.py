@@ -21,7 +21,7 @@ class MacroTestCase(unittest.TestCase):
         expected = m.formatter.linebreak(0)
         result = m.execute("BR", "")
         self.assertEqual(result, expected,
-            'Expected "%(expected)s" but got "%(result)s"' % locals())        
+            'Expected "%(expected)s" but got "%(result)s"' % locals())
 
     def _make_macro(self):
         """Test helper"""
@@ -31,3 +31,4 @@ class MacroTestCase(unittest.TestCase):
         p.form = self.request.form
         m = macro.Macro(p)
         return m
+
