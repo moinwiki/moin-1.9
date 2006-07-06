@@ -97,7 +97,7 @@ class Translation(object):
     def __init__(self, language, domain='MoinMoin'):
         self.language = language
         self.domain = domain
-        
+
     def load_mo(self, filename):
         """ load the mo file, setup some attributes from metadata """
         # binary files have to be opened in the binary file mode!
@@ -108,7 +108,7 @@ class Translation(object):
         self.direction = info['x-direction']
         assert self.direction in ('ltr', 'rtl', )
         self.maintainer = info['last-translator']
-    
+
     def formatMarkup(self, request, text, currentStack=[]):
         """
         Formats the text passed according to wiki markup.
@@ -140,7 +140,7 @@ class Translation(object):
         formatter.setPage(p)
         parser.format(formatter)
         text = out.getvalue()
-        if reqformatter == None:
+        if reqformatter is None:
             del request.formatter
         else:
             request.formatter = reqformatter
@@ -186,10 +186,10 @@ class Translation(object):
             if debug:
                 request.log("i18n: dumping lang %s" % lang)
             cache.update(pickle.dumps((uc_texts, uc_unformatted), PICKLE_PROTOCOL))
-        
+
         self.formatted = uc_texts
         self.raw = uc_unformatted
-        
+
 
 def getDirection(lang):
     """ Return the text direction for a language, either 'ltr' or 'rtl'. """
@@ -273,7 +273,7 @@ def requestLanguage(request):
                 if request.http_accept_language:
                     request.setHttpHeader('Vary: Accept-Language')
                 return lang
-    
+
     # Or return the wiki default language...
     if request.cfg.language_default in available:
         lang = request.cfg.language_default

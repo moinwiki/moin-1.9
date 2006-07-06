@@ -27,20 +27,20 @@ class DeletePage(ActionBase):
     def is_allowed(self):
         may = self.request.user.may
         return may.write(self.pagename) and may.delete(self.pagename)
-    
+
     def check_condition(self):
         _ = self._
         if not self.page.exists():
             return _('This page is already deleted or was never created!')
         else:
             return None
-        
+
     def do_action(self):
         """ Delete pagename """
         form = self.form
         comment = form.get('comment', [u''])[0]
         comment = wikiutil.clean_comment(comment)
-        
+
         # Create a page editor that does not do editor backups, because
         # delete generates a "deleted" version of the page.
         self.page = PageEditor(self.request, self.pagename, do_editor_backup=0)
