@@ -8,18 +8,18 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest 
+import unittest
 from MoinMoin._tests import TestConfig
 from MoinMoin import config
 
 class NormalizePagenameTestCase(unittest.TestCase):
-            
+
     def testPageInvalidChars(self):
         """ request: normalize pagename: remove invalid unicode chars
 
         Assume the default setting
         """
-        test  = u'\u0000\u202a\u202b\u202c\u202d\u202e'
+        test = u'\u0000\u202a\u202b\u202c\u202d\u202e'
         expected = u''
         result = self.request.normalizePagename(test)
         self.assertEqual(result, expected,
@@ -27,7 +27,7 @@ class NormalizePagenameTestCase(unittest.TestCase):
 
     def testNormalizeSlashes(self):
         """ request: normalize pagename: normalize slashes """
-        cases  = (
+        cases = (
             (u'/////', u''),
             (u'/a', u'a'),
             (u'a/', u'a'),
@@ -42,7 +42,7 @@ class NormalizePagenameTestCase(unittest.TestCase):
 
     def testNormalizeWhitespace(self):
         """ request: normalize pagename: normalize whitespace """
-        cases  = (
+        cases = (
             (u'         ', u''),
             (u'    a', u'a'),
             (u'a    ', u'a'),
@@ -63,7 +63,7 @@ class NormalizePagenameTestCase(unittest.TestCase):
         Underscores should convert to spaces, then spaces should be
         normalized, order is important!
         """
-        cases  = (
+        cases = (
             (u'_________', u''),
             (u'__a', u'a'),
             (u'a__', u'a'),
@@ -81,7 +81,7 @@ class GroupPagesTestCase(unittest.TestCase):
 
    def setUp(self):
        self.config = TestConfig(self.request,
-                                page_group_regex = r'.+Group')              
+                                page_group_regex=r'.+Group')
 
    def tearDown(self):
        del self.config
@@ -92,8 +92,8 @@ class GroupPagesTestCase(unittest.TestCase):
        Spaces should normalize after invalid chars removed!
        """
        import re
-       group = re.compile(r'.+Group', re.UNICODE)       
-       cases  = (
+       group = re.compile(r'.+Group', re.UNICODE)
+       cases = (
            # current acl chars
            (u'Name,:Group', u'NameGroup'),
            # remove than normalize spaces
@@ -112,31 +112,31 @@ class HTTPDateTests(unittest.TestCase):
 
     def testRFC1123Date(self):
         """ request: httpDate default rfc1123 """
-        self.failUnlessEqual(self.request.httpDate(0), 
+        self.failUnlessEqual(self.request.httpDate(0),
                              'Thu, 01 Jan 1970 00:00:00 GMT',
                              'wrong date string')
 
     def testRFC850Date(self):
         """ request: httpDate rfc850 """
-        self.failUnlessEqual(self.request.httpDate(0, rfc='850'), 
+        self.failUnlessEqual(self.request.httpDate(0, rfc='850'),
                              'Thursday, 01-Jan-70 00:00:00 GMT',
                              'wrong date string')
-                             
+
 
 class GetPageNameFromQueryString(unittest.TestCase):
     """ Test urls like http://netloc/wiki?pagename """
 
     def setUp(self):
         self.savedQuery = self.request.query_string
-    
+
     def tearDown(self):
         self.request.query_string = self.savedQuery
-    
+
     def testAscii(self):
         """ request: getPageNameFromQueryString: ascii """
         name = expected = u'page name'
         self.runTest(name, expected)
-        
+
     def testNonAscii(self):
         """ request: getPageNameFromQueryString: non ascii """
         name = expected = u'דף עברי'
@@ -147,7 +147,7 @@ class GetPageNameFromQueryString(unittest.TestCase):
         name = u'page_name'
         expected = u'page name'
         self.runTest(name, expected)
-        
+
     def runTest(self, name, expected):
         import urllib
         # query as made by most browsers when you type the url into the
@@ -155,3 +155,4 @@ class GetPageNameFromQueryString(unittest.TestCase):
         query = urllib.quote(name.encode('utf-8'))
         self.request.query_string = query
         self.assertEqual(self.request.getPageNameFromQueryString(), expected)
+
