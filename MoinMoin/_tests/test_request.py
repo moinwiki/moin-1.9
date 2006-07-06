@@ -64,11 +64,11 @@ class NormalizePagenameTestCase(unittest.TestCase):
         normalized, order is important!
         """
         cases = (
-            (u'_________', u''),
-            (u'__a', u'a'),
-            (u'a__', u'a'),
-            (u'a__b__c', u'a b c'),
-            (u'a__b__/__c__d__/__e__f', u'a b/c d/e f'),
+            (u'         ', u''),
+            (u'  a', u'a'),
+            (u'a  ', u'a'),
+            (u'a  b  c', u'a b c'),
+            (u'a  b  /  c  d  /  e  f', u'a b/c d/e f'),
             )
         for test, expected in cases:
             result = self.request.normalizePagename(test)
@@ -140,12 +140,6 @@ class GetPageNameFromQueryString(unittest.TestCase):
     def testNonAscii(self):
         """ request: getPageNameFromQueryString: non ascii """
         name = expected = u'דף עברי'
-        self.runTest(name, expected)
-
-    def testUnderscore(self):
-        """ request: getPageNameFromQueryString: under_score """
-        name = u'page_name'
-        expected = u'page name'
         self.runTest(name, expected)
 
     def runTest(self, name, expected):
