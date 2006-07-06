@@ -629,6 +629,34 @@ Try a different name.""") % (newpagename,)
         # No mail sent, no message.
         return ''
 
+    def _get_local_timestamp(self):
+        """
+        Returns the string that can be used by the TIME substitution.
+
+        @return: str with a timestamp in it
+        """
+
+        now = time.time()
+        # default: UTC
+        zone = "Z"
+        user = self.request.user
+
+        # setup the timezone
+        if user.valid and user.tz_offset:
+            tz = user.tz_offset
+            # round to minutes
+            tz -= tz % 60
+            minutes = tz / 60
+            hours = minutes / 60
+            minutes -= hours * 60
+
+            # construct the offset
+            zone = "%+0.2d%02d" % (hours, minutes)
+            # correct the time by the offset we've found
+            now += tz
+
+        return time.strftime("%Y-%m-%dT%H:%M:%S", timefuncs.tmtuple(now)) + zone
+
     def _expand_variables(self, text):
         """
         Expand @VARIABLE@ in `text`and return the expanded text.
@@ -639,7 +667,7 @@ Try a different name.""") % (newpagename,)
         """
         # TODO: Allow addition of variables via wikiconfig or a global
         # wiki dict.
-        now = time.strftime("%Y-%m-%dT%H:%M:%SZ", timefuncs.tmtuple())
+        now = self._get_local_timestamp()
         user = self.request.user
         signature = user.signature()
         variables = {
