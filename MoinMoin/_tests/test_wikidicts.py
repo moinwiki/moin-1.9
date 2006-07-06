@@ -9,7 +9,7 @@
 import unittest
 import re
 
-from MoinMoin import wikidicts 
+from MoinMoin import wikidicts
 from MoinMoin import Page
 
 class GroupPageTestCase(unittest.TestCase):
@@ -61,12 +61,12 @@ Ignore previous line and this text.
  *   take this  
 """
         self.assertEqual(self.getMembers(text), ['take this'])
-        
+
     def getMembers(self, text):
         group = wikidicts.Group(self.request, '')
         group.initFromText(text)
         return group.members()
-        
+
 
 class DictPageTestCase(unittest.TestCase):
 
@@ -85,10 +85,10 @@ Next line has key with empty value
  Last:: last item
 '''
         d = wikidicts.Dict(self.request, '')
-        d.initFromText(text)        
+        d.initFromText(text)
         self.assertEqual(d['First'], 'first item')
         self.assertEqual(d['text with spaces'], 'second item')
-        self.assertEqual(d['Empty string'], '')        
+        self.assertEqual(d['Empty string'], '')
         self.assertEqual(d['Last'], 'last item')
 
 
@@ -106,4 +106,5 @@ class GroupDictTestCase(unittest.TestCase):
         systemPages = wikidicts.Group(self.request, 'SystemPagesGroup')
         for member in systemPages.members():
             self.assert_(self.request.dicts.has_member('SystemPagesGroup', member),
-                         '%s should be in request.dict' % member)    
+                         '%s should be in request.dict' % member)
+
