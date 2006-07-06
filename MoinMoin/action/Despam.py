@@ -17,8 +17,8 @@ from MoinMoin import wikiutil, Page, PageEditor
 from MoinMoin.macro import RecentChanges
 
 def show_editors(request, pagename, timestamp):
-    _ =  request.getText
-    
+    _ = request.getText
+
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     editors = {}
@@ -26,15 +26,15 @@ def show_editors(request, pagename, timestamp):
     for line in log.reverse():
         if line.ed_time_usecs < timestamp:
             break
-        
+
         if not request.user.may.read(line.pagename):
             continue
-        
+
         editor = line.getEditor(request)
         if not line.pagename in pages:
             pages[line.pagename] = 1
             editors[editor] = editors.get(editor, 0) + 1
-            
+
     editors = [(nr, editor) for editor, nr in editors.iteritems()]
     editors.sort()
 
@@ -46,7 +46,7 @@ def show_editors(request, pagename, timestamp):
                        Column('link', label='', align='left')]
     for nr, editor in editors:
         dataset.addRow((editor, unicode(nr), pg.link_to(request, text=_("Select Author"), querystr="action=Despam&editor=%s" % wikiutil.url_quote_plus(editor))))
-    
+
     table = DataBrowserWidget(request)
     table.setData(dataset)
     table.render()
@@ -55,8 +55,8 @@ class tmp:
     pass
 
 def show_pages(request, pagename, editor, timestamp):
-    _ =  request.getText
-    
+    _ = request.getText
+
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
     lines = []
@@ -70,7 +70,7 @@ def show_pages(request, pagename, editor, timestamp):
     for line in log.reverse():
         if line.ed_time_usecs < timestamp:
             break
-        
+
         if not request.user.may.read(line.pagename):
             continue
 
@@ -125,9 +125,9 @@ def revert_page(request, pagename, editor):
         except pg.SaveError, msg:
             savemsg = unicode(msg)
     return savemsg
-    
+
 def revert_pages(request, editor, timestamp):
-    _ =  request.getText
+    _ = request.getText
 
     editor = wikiutil.url_unquote(editor, want_unicode=False)
     timestamp = int(timestamp * 1000000)
@@ -162,7 +162,7 @@ def execute(pagename, request):
     if actname in request.cfg.actions_excluded or \
        not request.user.isSuperUser():
         return Page.Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to use this action.'))
+            msg=_('You are not allowed to use this action.'))
 
     editor = request.form.get('editor', [None])[0]
     timestamp = time.time() - 24 * 3600
@@ -170,10 +170,10 @@ def execute(pagename, request):
     ok = request.form.get('ok', [0])[0]
 
     request.http_headers()
-    request.theme.send_title("Despam", pagename=pagename)    
+    request.theme.send_title("Despam", pagename=pagename)
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
-    
+
     if ok:
         revert_pages(request, editor, timestamp)
     elif editor:

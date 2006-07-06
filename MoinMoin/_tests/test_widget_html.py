@@ -48,13 +48,13 @@ class HTMLWidgetsTestCase(unittest.TestCase):
 
         actions = (
             # action, data, expected
-            (element.append, 
+            (element.append,
              html.Text('Text & '),
              '<p>Text &amp; </p>'),
-            (element.append, 
+            (element.append,
              html.Text('more text. '),
              '<p>Text &amp; more text. </p>'),
-            (element.extend, 
+            (element.extend,
              (html.Text('And then '), html.Text('some.')),
              '<p>Text &amp; more text. And then some.</p>'),
             )
@@ -64,5 +64,4 @@ class HTMLWidgetsTestCase(unittest.TestCase):
             result = unicode(element)
             self.assertEqual(result, expected,
                              'Expected "%(expected)s" but got "%(result)s"' % locals())
-            
 

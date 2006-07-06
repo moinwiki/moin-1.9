@@ -34,8 +34,8 @@ class SimplestTestCase(unittest.TestCase):
         expected = 'expected value'
         self.assertEqual(result, expected,
                          ('Expected "%(expected)s" but got "%(result)s"') % locals())
-    
-    
+
+
 class ComplexTestCase(unittest.TestCase):
     """ Describe these tests here...
 
@@ -53,16 +53,16 @@ class ComplexTestCase(unittest.TestCase):
         Some test needs specific config values, or they will fail.
         """
         self.config = TestConfig(self.request,
-                                 defaults=['this option', 'that option'], 
+                                 defaults=['this option', 'that option'],
                                  another_option='non default value')
-    
+
     def tearDown(self):
         """ Stuff that should run after each test
 
         Delete TestConfig, if used.
-        """       
+        """
         del self.config
-    
+
     def testFunction(self):
         """ module_tested: function should... """
         for description, test, expected in self._tests:
@@ -80,5 +80,4 @@ class ComplexTestCase(unittest.TestCase):
         module_tested.do_that()
 
         return result
-
 
