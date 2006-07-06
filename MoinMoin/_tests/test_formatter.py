@@ -20,7 +20,6 @@ class FormatterTestCase(TestCase):
         for f_name in formatters:
             #if f_name in ('dom_xml', ):
             #    continue
-            
             try:
                 formatter = wikiutil.importPlugin(self.request.cfg, "formatter", f_name, "Formatter")
             except wikiutil.PluginAttributeError:
@@ -40,6 +39,6 @@ class FormatterTestCase(TestCase):
         self.request.formatter = page.formatter = formatter(self.request)
         #page.formatter.setPage(page)
         #page.hilite_re = None
-        
+
         return self.request.redirectedOutput(page.send_page, self.request)
 

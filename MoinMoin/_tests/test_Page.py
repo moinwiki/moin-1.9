@@ -11,7 +11,7 @@ from MoinMoin import Page
 
 class existsTestCase(unittest.TestCase):
     """Page: testing wiki page"""
-    
+
     def testExists(self):
         """ Page: page.exists() finds existing pages only """
         tests = (

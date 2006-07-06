@@ -21,7 +21,7 @@ class QuotingBugTests(unittest.TestCase):
 
     def setUp(self):
         self.parser = search.QueryParser()
-   
+
     def testIsQuoted(self):
         """ search: quoting bug - quoted terms """
         for case in ('"yes"', "'yes'"):
@@ -29,8 +29,8 @@ class QuotingBugTests(unittest.TestCase):
 
     def testIsNot(self):
         """ search: quoting bug - unquoted terms """
-        tests = ('', "'", '"', '""', "''", "'\"",'"no', 'no"', "'no", 
+        tests = ('', "'", '"', '""', "''", "'\"", '"no', 'no"', "'no",
                  "no'", '"no\'')
         for case in tests:
             self.assertEqual(self.parser.isQuoted(case), False)
-    
+

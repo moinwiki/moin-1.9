@@ -165,7 +165,6 @@ class RequestBase(object):
             self.logger = None
             self.pragma = {}
             self.mode_getpagelinks = 0
-            self.no_closing_html_code = 0
 
             self.lang = i18n.requestLanguage(self) 
             # Language for content. Page content should use the wiki default lang,

@@ -44,7 +44,7 @@ installplugin|foo|local|parser|testy
 
     def isPackage(self):
         return True
-    
+
 class UnsafePackageTestcase(TestCase):
     """ Tests various things in the packages package. Note that this package does
         not care to clean up and needs to run in a test wiki because of that. """
@@ -52,7 +52,7 @@ class UnsafePackageTestcase(TestCase):
     def setUp(self):
         if not getattr(self.request.cfg, 'is_test_wiki', False):
             raise TestSkipped('This test needs to be run using the test wiki.')
-   
+
     def testBasicPackageThings(self):
         myPackage = DebugPackage(self.request, 'test')
         myPackage.installPackage()
@@ -66,3 +66,4 @@ class QuotingTestCase(TestCase):
     def testQuoting(self):
         for line in ([':foo', 'is\\', 'ja|', u't|ü', u'baAzß'], [], ['', '']):
             self.assertEqual(line, unpackLine(packLine(line)))
+
