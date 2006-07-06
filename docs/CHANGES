@@ -156,6 +156,8 @@ Version 1.6.current:
       engines don't fetch the targets (if they do, they will just get 403 and
       cause unnecessary traffic).
     * Included EmbedObject macro for embedding shockwave flash, mp3, visio, ...
+    * @SIG@ etc. generate local time stamps now, no difference visible on page
+      view.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
