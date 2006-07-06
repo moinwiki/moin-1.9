@@ -9,6 +9,7 @@
     @copyright: 2004 Vito Miliano (vito_moinnewpagewithtemplate@perilith.com)
     @copyright: 2004 by Nir Soffer <nirs@freeshell.org>
     @copyright: 2004 Alexander Schremmer <alex AT alexanderweb DOT de>
+    @copyright: 2006 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -74,6 +75,9 @@ class NewPage:
         template = self.args.get('template') or ''
         label = self.args.get('buttonLabel')
         nametemplate = self.args.get('nameTemplate') or u'%s'
+        
+        if parent == '@ME' and self.request.user.valid:
+            parent = self.request.user.name
         
         requires_input = nametemplate.find('%s') != -1
         
