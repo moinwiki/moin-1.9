@@ -328,8 +328,9 @@ class Macro:
             return '<span class="error">%s</span>' % err
             
         # Return a title search for needle, sorted by name.
-        query = search.QueryParser(literal=literal, titlesearch=1, case=case).parse_query(needle)
-        results = search.searchPages(self.request, query)
+        # XXX: what's with literal?
+        results = search.searchPages(self.request, needle,
+                titlesearch=1, case=case)
         results.sortByPagename()
         return results.pageList(self.request, self.formatter)
         
