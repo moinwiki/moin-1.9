@@ -158,6 +158,7 @@ Version 1.6.current:
     * Included EmbedObject macro for embedding shockwave flash, mp3, visio, ...
     * @SIG@ etc. generate local time stamps now, no difference visible on page
       view.
+    * Speeded up linkto search by avoiding read locks on the pagelinks file.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
