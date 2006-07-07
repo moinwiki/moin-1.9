@@ -11,9 +11,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-15 21:13+0200\n"
+"POT-Creation-Date: 2006-07-07 12:38+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -62,6 +62,9 @@ msgstr "Neue Seite anlegen"
 msgid "You are not allowed to view this page."
 msgstr "Sie dürfen diese Seite nicht ansehen."
 
+msgid "Your changes are not saved!"
+msgstr "Ihre Änderungen sind nicht gesichert!"
+
 msgid "You are not allowed to edit this page."
 msgstr "Sie dürfen diese Seite nicht editieren."
 
@@ -75,6 +78,9 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Die von Ihnen gehaltene Sperre ist abgelaufen. Das Auftreten von "
 "Änderungskonflikten ist wahrscheinlich!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Seitenname ist zu lang, bitte kürzen."
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -102,17 +108,13 @@ msgstr "Ein anderer Benutzer hat diese Seite inzwischen gelöscht!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Ein anderer Benutzer hat diese Seite inzwischen geändert!"
 
-#, python-format
 msgid ""
 "Someone else saved this page while you were editing!\n"
-"Please review the page and save then. Do not save this page as it is!\n"
-"Have a look at the diff of %(difflink)s to see what has been changed."
+"Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Ein anderer Benutzer hat gespeichert, während Sie editiert haben!\n"
 "Bitte schauen Sie die Seite nochmal durch und speichern Sie dann. Speichern "
-"Sie die Seite nicht so, wie sie ist!\n"
-"Schauen Sie sich auch die Differenz von %(difflink)s an, um zu sehen, was "
-"geändert wurde."
+"Sie die Seite nicht so, wie sie ist!"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -154,8 +156,8 @@ msgstr ""
 msgid "Preview"
 msgstr "Vorschau anzeigen"
 
-msgid "Text mode"
-msgstr "Text-Modus"
+msgid "GUI Mode"
+msgstr "GUI-Modus"
 
 msgid "Comment:"
 msgstr "Kommentar:"
@@ -172,364 +174,6 @@ msgstr "Triviale Änderung"
 
 msgid "Remove trailing whitespace from each line"
 msgstr "Leerzeichen am Ende jeder Zeile entfernen"
-
-#, python-format
-msgid ""
-"Invalid user name {{{'%s'}}}.\n"
-"Name may contain any Unicode alpha numeric character, with optional one\n"
-"space between words. Group page name is not allowed."
-msgstr ""
-"Ungültiger Benutzername {{{'%s'}}}.\n"
-"Der Name darf beliebige alphanumerische Unicode-Zeichen enthalten, mit "
-"optional einem\n"
-"Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt."
-
-#, python-format
-msgid "You are not allowed to do %s on this page."
-msgstr "Sie dürfen die Aktion %s nicht ausführen auf dieser Seite."
-
-msgid "Login and try again."
-msgstr "Melden Sie sich an und probieren Sie es noch einmal."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f Sekunden"
-
-msgid "match"
-msgstr "Treffer"
-
-msgid "matches"
-msgstr "Treffer"
-
-msgid "<unknown>"
-msgstr "<unbekannt>"
-
-#, python-format
-msgid ""
-"Login Name: %s\n"
-"\n"
-"Login Password: %s\n"
-"\n"
-"Login URL: %s/%s?action=login\n"
-msgstr ""
-"Anmelde-Name: %s\n"
-"\n"
-"Anmelde-Passwort: %s\n"
-"\n"
-"Anmelde-URL: %s/%s?action=login\n"
-
-msgid ""
-"Somebody has requested to submit your account data to this email address.\n"
-"\n"
-"If you lost your password, please use the data below and just enter the\n"
-"password AS SHOWN into the wiki's password form field (use copy and paste\n"
-"for that).\n"
-"\n"
-"After successfully logging in, it is of course a good idea to set a new and "
-"known password.\n"
-msgstr ""
-"Jemand hat angefordert, Ihre Accountdaten an diese E-Mail-Adresse zu "
-"senden.\n"
-"\n"
-"Wenn Sie Ihr Passwort vergessen haben, benutzen Sie bitte die Daten unten "
-"und\n"
-"geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des "
-"Wikisein (benutzen Sie kopieren und einfügen dazu).\n"
-"\n"
-"Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort "
-"neu.\n"
-
-#, python-format
-msgid "[%(sitename)s] Your wiki account data"
-msgstr "[%(sitename)s] Ihre Wiki-Acount-Daten"
-
-msgid ""
-"This wiki is not enabled for mail processing.\n"
-"Contact the owner of the wiki, who can enable email."
-msgstr ""
-"In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.\n"
-"Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen "
-"einschalten kann."
-
-msgid "Please provide a valid email address!"
-msgstr "Bitte eine gültige E-Mail-Adresse angeben!"
-
-#, python-format
-msgid "Found no account matching the given email address '%(email)s'!"
-msgstr ""
-"Es wurde kein Benutzerkonto mit der E-Mail-Adresse '%(email)s' gefunden!"
-
-msgid "Use UserPreferences to change your settings or create an account."
-msgstr ""
-"Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein "
-"Konto zu erzeugen."
-
-msgid "Empty user name. Please enter a user name."
-msgstr "Leerer Benutzername, bitte geben Sie einen Benutzernamen ein."
-
-msgid "This user name already belongs to somebody else."
-msgstr "Dieser Benutzername gehört bereits jemand anderem."
-
-msgid "Passwords don't match!"
-msgstr "Die Passworte sind nicht gleich!"
-
-msgid "Please specify a password!"
-msgstr "Bitte geben Sie ein Passwort an!"
-
-msgid ""
-"Please provide your email address. If you lose your login information, you "
-"can get it by email."
-msgstr ""
-"Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen "
-"verlieren können Sie sie per E-Mail wieder bekommen."
-
-msgid "This email already belongs to somebody else."
-msgstr "Diese E-Mail-Adresse gehört bereits jemand anderem."
-
-msgid "User account created! You can use this account to login now..."
-msgstr ""
-"Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
-
-msgid "Use UserPreferences to change settings of the selected user account"
-msgstr ""
-"Benutzen Sie BenutzerEinstellungen, um die Einstellungen des ausgewählten "
-"Benutzers zu ändern."
-
-#, python-format
-msgid "The theme '%(theme_name)s' could not be loaded!"
-msgstr "Das Theme '%(theme_name)s' konnte nicht geladen werden!"
-
-msgid "User preferences saved!"
-msgstr "Persönliche Einstellungen gespeichert!"
-
-msgid "Default"
-msgstr "Standardeinstellung"
-
-msgid "<Browser setting>"
-msgstr "<Browsereinstellung>"
-
-msgid "the one preferred"
-msgstr "der Bevorzugte"
-
-msgid "free choice"
-msgstr "Freie Auswahl"
-
-msgid "Select User"
-msgstr "Benutzer auswählen"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Preferred theme"
-msgstr "Bevorzugter Stil"
-
-msgid "Editor Preference"
-msgstr "Bevorzugter Editor"
-
-msgid "Editor shown on UI"
-msgstr "Angezeigter Editor"
-
-msgid "Time zone"
-msgstr "Zeitzone"
-
-msgid "Your time is"
-msgstr "Die lokale Zeit ist"
-
-msgid "Server time is"
-msgstr "Die Zeit des Servers ist"
-
-msgid "Date format"
-msgstr "Datumsformat"
-
-msgid "Preferred language"
-msgstr "Bevorzugte Sprache"
-
-msgid "General options"
-msgstr "Allgemeine Optionen"
-
-msgid "Quick links"
-msgstr "Expressverweise"
-
-msgid "This list does not work, unless you have entered a valid email address!"
-msgstr ""
-"Änderungsnachrichten werden nur versandt, wenn eine gültige E-Mail-Adresse "
-"eingegeben wurde!"
-
-msgid "Subscribed wiki pages (one regex per line)"
-msgstr "Abonnierte Wiki-Seiten (ein regulärer Ausdruck pro Zeile)"
-
-msgid "Create Profile"
-msgstr "Benutzer anlegen"
-
-msgid "Mail me my account data"
-msgstr "E-Mail mit den Zugangsdaten senden"
-
-msgid "Email"
-msgstr "E-Mail"
-
-#, python-format
-msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
-msgstr ""
-"Siehe Seite %(userprefslink)s, um einen Account anzulegen oder ein "
-"verlorenes Passwort wieder zu erhalten."
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Password"
-msgstr "Passwort"
-
-msgid "Login"
-msgstr "Anmelden"
-
-msgid "Action"
-msgstr "Aktion"
-
-#, python-format
-msgid "Required attribute \"%(attrname)s\" missing"
-msgstr "Erforderliches Attribut \"%(attrname)s\" fehlt"
-
-msgid "Submitted form data:"
-msgstr "Übertragene Formular-Daten:"
-
-msgid "Search Titles"
-msgstr "Titel durchsuchen"
-
-msgid "Display context of search results"
-msgstr "Umgebung der Treffer anzeigen"
-
-msgid "Case-sensitive searching"
-msgstr "Groß-/Kleinschreibung beachten"
-
-msgid "Search Text"
-msgstr "Text durchsuchen"
-
-msgid "Go To Page"
-msgstr "Gehe zu Seite"
-
-msgid "Include system pages"
-msgstr "Systemseiten einschließen"
-
-msgid "Exclude system pages"
-msgstr "Systemseiten ausschließen"
-
-msgid "Plain title index"
-msgstr "Titelindex in Textform"
-
-msgid "XML title index"
-msgstr "Titelindex als XML"
-
-msgid "Python Version"
-msgstr "Python Version"
-
-msgid "MoinMoin Version"
-msgstr "MoinMoin Version"
-
-#, python-format
-msgid "Release %s [Revision %s]"
-msgstr "Version %s [Revision %s]"
-
-msgid "4Suite Version"
-msgstr "4Suite Version"
-
-msgid "Number of pages"
-msgstr "Seitenanzahl"
-
-msgid "Number of system pages"
-msgstr "Anzahl der Systemseiten"
-
-msgid "Accumulated page sizes"
-msgstr "Kumulierte Seitengrößen"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Plattenbelegung von %(data_dir)s/pages/"
-
-#, python-format
-msgid "Disk usage of %(data_dir)s/"
-msgstr "Plattenbelegung von %(data_dir)s/"
-
-msgid "Entries in edit log"
-msgstr "Einträge in der Änderungshistorie"
-
-msgid "NONE"
-msgstr "KEINE"
-
-msgid "Global extension macros"
-msgstr "Globale Erweiterungsmakros"
-
-msgid "Local extension macros"
-msgstr "Lokale Erweiterungsmakros"
-
-msgid "Global extension actions"
-msgstr "Globale Erweiterungsaktionen"
-
-msgid "Local extension actions"
-msgstr "Lokale Erweiterungsaktionen"
-
-msgid "Global parsers"
-msgstr "Globale Parser"
-
-msgid "Local extension parsers"
-msgstr "Lokale Erweiterungsparser"
-
-msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-msgstr ""
-"Installierte Prozessoren (veraltet) -- benutzen Sie stattdessen Parser)"
-
-msgid "Disabled"
-msgstr "Deaktiviert"
-
-msgid "Enabled"
-msgstr "Aktiviert"
-
-msgid "Lupy search"
-msgstr "Lupy-Suche"
-
-msgid "Active threads"
-msgstr "Aktive Threads"
-
-#, python-format
-msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
-msgstr ""
-"Bitte verwenden Sie einen selektiveren Suchbegriff anstatt {{{\"%s\"}}}"
-
-#, python-format
-msgid "ERROR in regex '%s'"
-msgstr "FEHLER in regulärem Ausdruck '%s'"
-
-#, python-format
-msgid "Bad timestamp '%s'"
-msgstr "Ungültige Zeitangabe '%s'"
-
-#, python-format
-msgid "Expected \"=\" to follow \"%(token)s\""
-msgstr "\"=\" fehlt hinter dem Attribut \"%(token)s\""
-
-#, python-format
-msgid "Expected a value for key \"%(token)s\""
-msgstr "Attribut \"%(token)s\" wurde kein Wert zugewiesen"
-
-msgid "Wiki Markup"
-msgstr "Wiki Quelltext"
-
-msgid "Print View"
-msgstr "Druckansicht"
-
-msgid "Your changes are not saved!"
-msgstr "Ihre Änderungen sind nicht gesichert!"
-
-msgid "Page name is too long, try shorter name."
-msgstr "Seitenname ist zu lang, bitte kürzen."
-
-msgid "GUI Mode"
-msgstr "GUI-Modus"
 
 msgid "Edit was cancelled."
 msgstr "Editierung wurde abgebrochen."
@@ -629,28 +273,8 @@ msgstr "Leere Seiten können nicht gespeichert werden!"
 msgid "You already saved this page!"
 msgstr "Sie haben diese Seite bereits gesichert!"
 
-msgid ""
-"Sorry, someone else saved the page while you edited it.\n"
-"\n"
-"Please do the following: Use the back button of your browser, and cut&paste\n"
-"your changes from there. Then go forward to here, and click EditText again.\n"
-"Now re-add your changes to the current page contents.\n"
-"\n"
-"''Do not just replace\n"
-"the content editbox with your version of the page, because that would\n"
-"delete the changes of the other person, which is excessively rude!''\n"
-msgstr ""
-"Unglücklicherweise hat bereits jemand diese Seite verändert.\n"
-"\n"
-"Bitte wie folgt vorgehen: Mit dem Knopf \"Zurück\" des Browsers zurück zum "
-"Editor gehen und die Änderungen in die Zwischenablage legen.\n"
-"Dann wieder auf diese Seite \"Vorwärts\" gehen und nochmals \"Editieren\" "
-"anklicken.\n"
-"\n"
-"Schließlich die Änderungen zum aktuellen Stand der Seite wieder hinzufügen.\n"
-"\n"
-"''Bitte nicht einfach die Änderungen des anderen Autoren durch Cut&Paste "
-"vollständig überschreiben, das ist sehr unhöflich!''\n"
+msgid "You already edited this page! Please do not use the back button."
+msgstr "Sie haben diese Seite bereits editiert! Bitte benutzen Sie nicht den Zurück-Button."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -715,43 +339,50 @@ msgstr ""
 "''nicht editieren'', um Konflikte auszuschließen.'''[[BR]]\n"
 "Benutzen Sie \"Abbrechen\" zum Verlassen des Editors."
 
+msgid "<unknown>"
+msgstr "<unbekannt>"
+
+msgid "Text mode"
+msgstr "Text-Modus"
+
 #, python-format
-msgid "The package needs a newer version of MoinMoin (at least %s)."
-msgstr "Das Paket erfordert eine neuere Version von MoinMoin (mindestens %s)."
-
-msgid "The theme name is not set."
-msgstr "Theme-Name ist nicht gesetzt."
-
-msgid "Installing theme files is only supported for standalone type servers."
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s?action=login\n"
 msgstr ""
-"Das Installieren von Theme-Dateien wird nur für Server-Typ standalone "
-"unterstützt."
+"Anmelde-Name: %s\n"
+"\n"
+"Anmelde-Passwort: %s\n"
+"\n"
+"Anmelde-URL: %s/%s?action=login\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Jemand hat angefordert, Ihre Accountdaten an diese E-Mail-Adresse zu "
+"senden.\n"
+"\n"
+"Wenn Sie Ihr Passwort vergessen haben, benutzen Sie bitte die Daten unten "
+"und\n"
+"geben Sie das Passwort GENAUSO WIE ANGEZEIGT in das Passwort-Feld des "
+"Wikisein (benutzen Sie kopieren und einfügen dazu).\n"
+"\n"
+"Nachdem Sie sich erfolgreich angemeldet haben, setzen Sie bitte Ihr Passwort "
+"neu.\n"
 
 #, python-format
-msgid "Installation of '%(filename)s' failed."
-msgstr "Installation von '%(filename)s' fehlgeschlagen."
-
-#, python-format
-msgid "The file %s is not a MoinMoin package file."
-msgstr "Die Datei %s ist keine MoinMoin-Paket-Datei."
-
-#, python-format
-msgid "The page %s does not exist."
-msgstr "Die Seite %s existiert nicht."
-
-msgid "Invalid package file header."
-msgstr "Ungültiger Paket-Datei-Header."
-
-msgid "Package file format unsupported."
-msgstr "Paket-Datei-Format nicht unterstützt."
-
-#, python-format
-msgid "Unknown function %(func)s in line %(lineno)i."
-msgstr "Unbekannte Funktion %(func)s in Zeile %(lineno)i."
-
-#, python-format
-msgid "The file %s was not found in the package."
-msgstr "Die Datei %s wurde im Paket nicht gefunden."
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Ihre Wiki-Acount-Daten"
 
 msgid ""
 " Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
@@ -867,8 +498,8 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr "Editor per Doppelklick öffnen"
 
-msgid "Jump to last visited page instead of frontpage"
-msgstr "Springe zur letztbesuchten Seite anstatt zur Startseite"
+msgid "After login, jump to last visited page"
+msgstr "Nach dem Anmelden zur zuletzt besuchten Seite springen"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Verweise auf unbekannte Seiten mit Fragezeichen markieren"
@@ -897,17 +528,26 @@ msgstr "Triviale Änderungen abonnieren"
 msgid "Disable this account forever"
 msgstr "Dieses Benutzerkonto für immer deaktivieren"
 
+msgid "Name"
+msgstr "Name"
+
 msgid "(Use Firstname''''''Lastname)"
 msgstr "(Vorname''''''Nachname verwenden)"
 
 msgid "Alias-Name"
 msgstr "Alias-Name"
 
+msgid "Password"
+msgstr "Passwort"
+
 msgid "Password repeat"
 msgstr "Passwort wiederholen"
 
-msgid "(Only when changing passwords)"
-msgstr "(Nur bei Passwort-Änderung)"
+msgid "(Only for password change or new account)"
+msgstr "(Nur für Passwort-Änderung oder neue Benutzerkonten)"
+
+msgid "Email"
+msgstr "E-Mail"
 
 msgid "User CSS URL"
 msgstr "Benutzer CSS URL"
@@ -918,459 +558,211 @@ msgstr "Leer lassen, um benutzerdefiniertes CSS auszuschalten)"
 msgid "Editor size"
 msgstr "Größe des Texteingabefelds"
 
-msgid "No older revisions available!"
-msgstr "Es sind keine älteren Versionen dieser Seite verfügbar!"
-
 #, python-format
-msgid "Diff for \"%s\""
-msgstr "Änderungen von \"%s\""
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Das Paket erfordert eine neuere Version von MoinMoin (mindestens %s)."
 
-#, python-format
-msgid "Differences between revisions %d and %d"
-msgstr "Unterschiede zwischen den Revisionen %d und %d"
+msgid "The theme name is not set."
+msgstr "Theme-Name ist nicht gesetzt."
 
-#, python-format
-msgid "(spanning %d versions)"
-msgstr "(über %d Versionen hinweg)"
-
-msgid "No differences found!"
-msgstr "Es wurden keine Änderungen gefunden!"
-
-#, python-format
-msgid "The page was saved %(count)d times, though!"
-msgstr "Die Seite wurde jedoch %(count)d mal gespeichert!"
-
-msgid "(ignoring whitespace)"
-msgstr "(ignoriere Leerraum)"
-
-msgid "Ignore changes in the amount of whitespace"
-msgstr "Ausschließlich Leerraum betreffende Änderungen ignorieren"
-
-msgid "General Information"
-msgstr "Allgemeine Informationen"
-
-#, python-format
-msgid "Page size: %d"
-msgstr "Seitengröße: %d"
-
-msgid "SHA digest of this page's content is:"
-msgstr "Signatur des Seiteninhalts nach dem SHA-Verfahren:"
-
-msgid "The following users subscribed to this page:"
-msgstr "Nachfolgende Benutzer haben diese Seite abonniert:"
-
-msgid "This page links to the following pages:"
-msgstr "Diese Seite verweist auf die folgenden Seiten:"
-
-msgid "Date"
-msgstr "Datum"
-
-msgid "Size"
-msgstr "Größe"
-
-msgid "Diff"
-msgstr "Differenz"
-
-msgid "Editor"
-msgstr "Autor"
-
-msgid "Comment"
-msgstr "Kommentar"
-
-msgid "view"
-msgstr "anzeigen"
-
-msgid "raw"
-msgstr "roh"
-
-msgid "print"
-msgstr "drucken"
-
-msgid "revert"
-msgstr "restaurieren"
-
-#, python-format
-msgid "Revert to revision %(rev)d."
-msgstr "Revision %(rev)d restauriert."
-
-msgid "edit"
-msgstr "ändern"
-
-msgid "get"
-msgstr "laden"
-
-msgid "del"
-msgstr "löschen"
-
-msgid "N/A"
-msgstr "k.A."
-
-msgid "Revision History"
-msgstr "Versionshistorie"
-
-msgid "No log entries found."
-msgstr "Keine Log-Einträge gefunden."
-
-#, python-format
-msgid "Info for \"%s\""
-msgstr "Info für \"%s\""
-
-#, python-format
-msgid "Show \"%(title)s\""
-msgstr "\"%(title)s\" anzeigen"
-
-msgid "General Page Infos"
-msgstr "Allgemeine Seiten-Informationen"
-
-#, python-format
-msgid "Show chart \"%(title)s\""
-msgstr "Diagramm \"%(title)s\" anzeigen"
-
-msgid "Page hits and edits"
-msgstr "Seitenzugriffe und Änderungen"
-
-msgid "You are not allowed to revert this page!"
-msgstr "Sie dürfen diese Seite nicht restaurieren!"
-
-msgid "You must login to add a quicklink."
-msgstr "Sie müssen sich anmelden, um einen Expressverweis hinzuzufügen."
-
-msgid "Your quicklink to this page has been removed."
-msgstr "Ihr Expressverweis für diese Seite wurde entfernt."
-
-msgid "A quicklink to this page has been added for you."
-msgstr "Ein Expressverweis für diese Seite wurde hinzugefügt."
-
-msgid "You are not allowed to subscribe to a page you can't read."
-msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
-
-msgid "This wiki is not enabled for mail processing."
-msgstr "In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet."
-
-msgid "You must log in to use subscribtions."
-msgstr "Sie müssen sich anmelden, um Abonnements verwenden zu können."
-
-msgid "Add your email address in your UserPreferences to use subscriptions."
+msgid "Installing theme files is only supported for standalone type servers."
 msgstr ""
-"Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, um "
-"Abonnements benutzen zu können."
+"Das Installieren von Theme-Dateien wird nur für Server-Typ standalone "
+"unterstützt."
 
-msgid "Your subscribtion to this page has been removed."
-msgstr "Ihr Abonnements für diese Seite wurde entfernt."
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Installation von '%(filename)s' fehlgeschlagen."
 
-msgid "Can't remove regular expression subscription!"
-msgstr "Kann nicht Abonnement mit regulärem Ausdruck entfernen."
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Die Datei %s ist keine MoinMoin-Paket-Datei."
 
-msgid "Edit the subscription regular expressions in your UserPreferences."
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Die Seite %s existiert nicht."
+
+msgid "Invalid package file header."
+msgstr "Ungültiger Paket-Datei-Header."
+
+msgid "Package file format unsupported."
+msgstr "Paket-Datei-Format nicht unterstützt."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Unbekannte Funktion %(func)s in Zeile %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Die Datei %s wurde im Paket nicht gefunden."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f Sekunden"
+
+msgid "match"
+msgstr "Treffer"
+
+msgid "matches"
+msgstr "Treffer"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
 msgstr ""
-"Editieren Sie die regulären Ausdrücke für Abonnements in Ihren "
-"BenutzerEinstellungen."
+"In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet.\n"
+"Bitte kontaktieren Sie den Eigentümer des Wiki, der die Mailfunktionen "
+"einschalten kann."
 
-msgid "You have been subscribed to this page."
-msgstr "Die Seite wurde zur Liste abonnierter Seiten hinzugefügt."
-
-msgid "Charts are not available!"
-msgstr "Die Diagrammoption ist nicht verfügbar!"
-
-msgid "You need to provide a chart type!"
-msgstr "Es muss ein Diagrammtyp angegeben werden!"
+msgid "Please provide a valid email address!"
+msgstr "Bitte eine gültige E-Mail-Adresse angeben!"
 
 #, python-format
-msgid "Bad chart type \"%s\"!"
-msgstr "Unbekannter Diagrammtyp \"%s\"!"
-
-msgid "This page is already deleted or was never created!"
-msgstr "Diese Seite wurde bereits gelöscht oder wurde bisher nicht angelegt!"
-
-#, python-format
-msgid "No pages like \"%s\"!"
-msgstr "Keine Seite ähnlich wie \"%s\"!"
-
-#, python-format
-msgid "Invalid filename \"%s\"!"
-msgstr "Ungültiger Dateiname \"%s\"!"
-
-#, python-format
-msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgid "Found no account matching the given email address '%(email)s'!"
 msgstr ""
-"Dateianhang '%(target)s' (ursprünglicher Name '%(filename)s') existiert "
-"bereits."
+"Es wurde kein Benutzerkonto mit der E-Mail-Adresse '%(email)s' gefunden!"
 
-#, python-format
-msgid "Created the package %s containing the pages %s."
-msgstr "Paket %s, das die Seiten %s enthält wurde erzeugt."
-
-msgid "Package pages"
-msgstr "Seiten paketieren"
-
-msgid "Package name"
-msgstr "Paketname"
-
-msgid "List of page names - separated by a comma"
-msgstr "Liste von Seitennamen - getrennt durch ein Komma"
-
-#, python-format
-msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgid "Use UserPreferences to change your settings or create an account."
 msgstr ""
-"Unbekannter Benutzername: {{{\"%s\"}}}. Bitte geben Sie Benutzername und "
-"Passwort ein."
+"Benutzen Sie BenutzerEinstellungen, um Ihre Einstellungen zu ändern oder ein "
+"Konto zu erzeugen."
 
-msgid "Missing password. Please enter user name and password."
-msgstr "Fehlendes Passwort. Bitte geben Sie Benutzername und Passwort ein."
-
-msgid "Sorry, wrong password."
-msgstr "Falsches Passwort."
-
-#, python-format
-msgid "Exactly one page like \"%s\" found, redirecting to page."
-msgstr "Genau eine Seite wie \"%s\" gefunden, leite dorthin weiter."
-
-#, python-format
-msgid "Pages like \"%s\""
-msgstr "Seiten ähnlich wie \"%s\""
-
-#, python-format
-msgid "%(matchcount)d %(matches)s for \"%(title)s\""
-msgstr "%(matchcount)d %(matches)s passen zu \"%(title)s\""
-
-#, python-format
-msgid "Local Site Map for \"%s\""
-msgstr "Lokale Seitenverweise für \"%s\""
-
-msgid "Please log in first."
-msgstr "Bitte melden Sie sich vorher an."
-
-msgid "Please first create a homepage before creating additional pages."
-msgstr ""
-"Bitte erzeugen Sie zuerst eine Homepage, bevor Sie weitere Seiten anlegen."
+msgid "Empty user name. Please enter a user name."
+msgstr "Leerer Benutzername, bitte geben Sie einen Benutzernamen ein."
 
 #, python-format
 msgid ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
-"\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
-"\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
-"\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
-"\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
-"[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s only||\n"
-"\n"
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
 msgstr ""
-"Hier können Sie zusätzliche Unterseiten zu Ihrer bereits existierenden "
-"Homepage hinzufügen.\n"
-"\n"
-"Sie können wählen, wie offen diese Seiten für andere Leser oder Autoren sein "
-"sollen,\n"
-"der Zugriff wird über Gruppenmitgliedschaft in der entsprechenden Gruppe "
-"kontrolliert.\n"
-"\n"
-"Geben Sie einfach den Namen der Unterseite ein und klicken Sie auf den "
-"Knopf, um eine neue Seite zu erzeugen.\n"
-"\n"
-"Bevor Sie zugriffsgeschützte Seiten erzeugen, stellen Sie sicher, dass die "
-"entsprechende Gruppenseite existiert und die richtigen Mitglieder hat. "
-"Benutzen Sie HomepageGroupsTemplate für das Erzeugen der Gruppenseiten.\n"
-"\n"
-"||'''Neue persönliche Seite hinzufügen:'''||'''Zugeordnete ACL-Gruppe:'''||\n"
-"||[[NewPage(HomepageReadWritePageTemplate,Seite (read/write),%(username)"
-"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
-"||[[NewPage(HomepageReadPageTemplate,Seite (read-only),%(username)s)]]||[\"%"
-"(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,Seite (privat),%(username)s)]]||nur %"
-"(username)s||\n"
-"\n"
+"Ungültiger Benutzername {{{'%s'}}}.\n"
+"Der Name darf beliebige alphanumerische Unicode-Zeichen enthalten, mit "
+"optional einem\n"
+"Leerzeichen zwischen den Worten. Gruppennamen sind nicht erlaubt."
 
-msgid "MyPages management"
-msgstr "Verwaltung meiner Seiten"
+msgid "This user name already belongs to somebody else."
+msgstr "Dieser Benutzername gehört bereits jemand anderem."
 
-msgid "Rename Page"
-msgstr "Seite umbenennen"
+msgid "Passwords don't match!"
+msgstr "Die Passworte sind nicht gleich!"
 
-msgid "New name"
-msgstr "Neuer Name"
+msgid "Please specify a password!"
+msgstr "Bitte geben Sie ein Passwort an!"
 
-msgid "Optional reason for the renaming"
-msgstr "Optionale Begründung für das Umbenennen"
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Bitte geben Sie Ihre E-Mail-Adresse an. Wenn Sie Ihre Login-Informationen "
+"verlieren können Sie sie per E-Mail wieder bekommen."
+
+msgid "This email already belongs to somebody else."
+msgstr "Diese E-Mail-Adresse gehört bereits jemand anderem."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Es wurde ein Benutzerkonto für Sie angelegt. Sie können sich nun anmelden..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Benutzen Sie BenutzerEinstellungen, um die Einstellungen des ausgewählten "
+"Benutzers zu ändern."
 
 #, python-format
-msgid "(including %(localwords)d %(pagelink)s)"
-msgstr "(inklusive %(localwords)d %(pagelink)s)"
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Das Theme '%(theme_name)s' konnte nicht geladen werden!"
+
+msgid "User preferences saved!"
+msgstr "Persönliche Einstellungen gespeichert!"
+
+msgid "Default"
+msgstr "Standardeinstellung"
+
+msgid "<Browser setting>"
+msgstr "<Browsereinstellung>"
+
+msgid "the one preferred"
+msgstr "der Bevorzugte"
+
+msgid "free choice"
+msgstr "Freie Auswahl"
+
+msgid "Select User"
+msgstr "Benutzer auswählen"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Preferred theme"
+msgstr "Bevorzugter Stil"
+
+msgid "Editor Preference"
+msgstr "Bevorzugter Editor"
+
+msgid "Editor shown on UI"
+msgstr "Angezeigter Editor"
+
+msgid "Time zone"
+msgstr "Zeitzone"
+
+msgid "Your time is"
+msgstr "Die lokale Zeit ist"
+
+msgid "Server time is"
+msgstr "Die Zeit des Servers ist"
+
+msgid "Date format"
+msgstr "Datumsformat"
+
+msgid "Preferred language"
+msgstr "Bevorzugte Sprache"
+
+msgid "General options"
+msgstr "Allgemeine Optionen"
+
+msgid "Quick links"
+msgstr "Expressverweise"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr ""
+"Änderungsnachrichten werden nur versandt, wenn eine gültige E-Mail-Adresse "
+"eingegeben wurde!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Abonnierte Wiki-Seiten (ein regulärer Ausdruck pro Zeile)"
+
+msgid "Create Profile"
+msgstr "Benutzer anlegen"
+
+msgid "Mail me my account data"
+msgstr "E-Mail mit den Zugangsdaten senden"
 
 #, python-format
 msgid ""
-"The following %(badwords)d words could not be found in the dictionary of %"
-"(totalwords)d words%(localwords)s and are highlighted below:"
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
 msgstr ""
-"Die nachfolgenden %(badwords)d Worte konnten nicht im Wörterbuch mit %"
-"(totalwords)d Worten%(localwords)s gefunden werden und sind im Text "
-"hervorgehoben:"
+"Siehe Seite %(userprefslink)s, um einen Account anzulegen oder ein "
+"verlorenes Passwort wieder zu erhalten."
 
-msgid "Add checked words to dictionary"
-msgstr "Markierte Wörter zum Wörterbuch hinzufügen"
+msgid "Login"
+msgstr "Anmelden"
 
-msgid "No spelling errors found!"
-msgstr "Keine Rechtschreibfehler gefunden!"
-
-msgid "You can't check spelling on a page you can't read."
-msgstr ""
-"Sie dürfen keine Seite auf Rechtschreibung prüfen, die Sie nicht lesen "
-"können."
-
-msgid "Do it."
-msgstr "Ausführen"
+msgid "Action"
+msgstr "Aktion"
 
 #, python-format
-msgid "Execute action %(actionname)s?"
-msgstr "Aktion %(actionname)s ausführen?"
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"=\" fehlt hinter dem Attribut \"%(token)s\""
 
 #, python-format
-msgid "Action %(actionname)s is excluded in this wiki!"
-msgstr "Aktion %(actionname)s ist ausgeschlossen in diesem Wiki!"
-
-#, python-format
-msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr "Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!"
-
-#, python-format
-msgid "Please use the interactive user interface to use action %(actionname)s!"
-msgstr ""
-"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
-
-#, python-format
-msgid "Title Search: \"%s\""
-msgstr "Titelsuche: \"%s\""
-
-#, python-format
-msgid "Full Text Search: \"%s\""
-msgstr "Volltextsuche: \"%s\""
-
-#, python-format
-msgid "Full Link List for \"%s\""
-msgstr "Liste aller Seitenverweise für \"%s\""
-
-msgid ""
-"Cannot create a new page without a page name.  Please specify a page name."
-msgstr ""
-"Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen "
-"Seitennamen an."
-
-msgid "Pages"
-msgstr "Seiten"
-
-msgid "Select Author"
-msgstr "Autor auswählen"
-
-msgid "Revert all!"
-msgstr "Alle restaurieren!"
-
-msgid "You are not allowed to use this action."
-msgstr "Sie dürfen diese Aktion nicht ausführen."
-
-#, python-format
-msgid "Subscribe users to the page %s"
-msgstr "Seite %s für Benutzer abonnieren"
-
-#, python-format
-msgid "Subscribed for %s:"
-msgstr "Abonnenten von %s:"
-
-msgid "Not a user:"
-msgstr "Kein Benutzer:"
-
-msgid "You are not allowed to perform this action."
-msgstr "Sie dürfen diese Aktion nicht ausführen."
-
-msgid "You are now logged out."
-msgstr "Sie sind nun abgemeldet."
-
-msgid "Delete"
-msgstr "Löschen"
-
-msgid "Optional reason for the deletion"
-msgstr "Optionale Begründung für die Löschung"
-
-msgid "Really delete this page?"
-msgstr "Diese Seite wirklich löschen?"
-
-#, python-format
-msgid ""
-"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
-"Files: %(filecount)d, Directories: %(dircount)d"
-msgstr ""
-"Wiederhergestelltes Backup: %(filename)s nach Zielverzeichnis: %(targetdir)"
-"s.\n"
-"Dateien: %(filecount)d, Verzeichnisse: %(dircount)d"
-
-#, python-format
-msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
-msgstr ""
-"Wiederherstellen von Backup %(filename)s in das Zielverzeichnis %(targetdir)"
-"s fehlgeschlagen."
-
-msgid "Wiki Backup / Restore"
-msgstr "Wiki Sicherung / Wiederherstellung"
-
-msgid ""
-"Some hints:\n"
-" * To restore a backup:\n"
-"  * Restoring a backup will overwrite existing data, so be careful.\n"
-"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
-"stuff).\n"
-"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
-"  * Hit the [[GetText(Restore)]] button below.\n"
-"\n"
-" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
-"file\n"
-"   you get to a secure place.\n"
-"\n"
-"Please make sure your wiki configuration backup_* values are correct and "
-"complete.\n"
-"\n"
-msgstr ""
-"Hinweise:\n"
-" * Um ein Backup wiederherzustellen:\n"
-"  * Das Wiederherstellen eines Backups wird bestehende Daten überschreiben, "
-"also seien Sie vorsichtig.\n"
-"  * Benennen Sie es auf <siteid>.tar.<compression> um (entfernen Sie --date--"
-"time--UTC).\n"
-"  * Legen Sie die Backupdatei in das backup_storage_dir (mit scp, "
-"ftp, ...).\n"
-"  * Drücken Sie unten auf [[GetText(Restore)]]-Knopf unten.\n"
-"\n"
-" * Um ein Backup zu erstellen, drücken Sie einfach auf den [[GetText"
-"(Backup)]]-Knopf und sichern Sie die Datei,\n"
-"   die Sie erhalten an eine sichere Stelle.\n"
-"\n"
-"Bitte stellen Sie sicher, dass die backup_* Werte in Ihrer Wiki-"
-"Konfiguration korrekt und vollständig sind.\n"
-
-msgid "Backup"
-msgstr "Datensicherung"
-
-msgid "Restore"
-msgstr "Datenwiederherstellung"
-
-msgid "You are not allowed to do remote backup."
-msgstr "Sie dürfen kein Remote-Backup ausführen."
-
-#, python-format
-msgid "Unknown backup subaction: %s."
-msgstr "Unbekannte backup Unteraktion: %s."
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Attribut \"%(token)s\" wurde kein Wert zugewiesen"
 
 #, python-format
 msgid "[%d attachments]"
@@ -1403,6 +795,18 @@ msgstr ""
 "Es sollte '''niemals''' die URL des Verweises (\"laden\") kopiert werden, \n"
 "da sich diese jederzeit ändern kann und damit der Verweis auf die Datei "
 "brechen würde."
+
+msgid "del"
+msgstr "löschen"
+
+msgid "get"
+msgstr "laden"
+
+msgid "edit"
+msgstr "ändern"
+
+msgid "view"
+msgstr "anzeigen"
 
 msgid "unzip"
 msgstr "auspacken"
@@ -1493,6 +897,12 @@ msgstr ""
 "Bytes gesichert."
 
 #, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+"Dateianhang '%(target)s' (ursprünglicher Name '%(filename)s') existiert "
+"bereits."
+
+#, python-format
 msgid "Attachment '%(filename)s' deleted."
 msgstr "Dateianhang '%(filename)s' wurde gelöscht."
 
@@ -1546,6 +956,9 @@ msgstr "Dateiname"
 msgid "Modified"
 msgstr "Modifiziert"
 
+msgid "Size"
+msgstr "Größe"
+
 msgid "Unknown file type, cannot display this attachment inline."
 msgstr ""
 "Dieser Anhang besitzt einen unbekannten Dateityp und kann deshalb nicht "
@@ -1554,6 +967,444 @@ msgstr ""
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
 msgstr "[[Verbatim(attachment:)]]%(filename)s für %(pagename)s"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Diese Seite wurde bereits gelöscht oder wurde bisher nicht angelegt!"
+
+msgid "Optional reason for the deletion"
+msgstr "Optionale Begründung für die Löschung"
+
+msgid "Really delete this page?"
+msgstr "Diese Seite wirklich löschen?"
+
+msgid "Editor"
+msgstr "Autor"
+
+msgid "Pages"
+msgstr "Seiten"
+
+msgid "Select Author"
+msgstr "Autor auswählen"
+
+msgid "Revert all!"
+msgstr "Alle restaurieren!"
+
+msgid "You are not allowed to use this action."
+msgstr "Sie dürfen diese Aktion nicht ausführen."
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Keine Seite ähnlich wie \"%s\"!"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Genau eine Seite wie \"%s\" gefunden, leite dorthin weiter."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Seiten ähnlich wie \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s passen zu \"%(title)s\""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Lokale Seitenverweise für \"%s\""
+
+msgid "Please log in first."
+msgstr "Bitte melden Sie sich vorher an."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+"Bitte erzeugen Sie zuerst eine Homepage, bevor Sie weitere Seiten anlegen."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Hier können Sie zusätzliche Unterseiten zu Ihrer bereits existierenden "
+"Homepage hinzufügen.\n"
+"\n"
+"Sie können wählen, wie offen diese Seiten für andere Leser oder Autoren sein "
+"sollen,\n"
+"der Zugriff wird über Gruppenmitgliedschaft in der entsprechenden Gruppe "
+"kontrolliert.\n"
+"\n"
+"Geben Sie einfach den Namen der Unterseite ein und klicken Sie auf den "
+"Knopf, um eine neue Seite zu erzeugen.\n"
+"\n"
+"Bevor Sie zugriffsgeschützte Seiten erzeugen, stellen Sie sicher, dass die "
+"entsprechende Gruppenseite existiert und die richtigen Mitglieder hat. "
+"Benutzen Sie HomepageGroupsTemplate für das Erzeugen der Gruppenseiten.\n"
+"\n"
+"||'''Neue persönliche Seite hinzufügen:'''||'''Zugeordnete ACL-Gruppe:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,Seite (read/write),%(username)"
+"s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,Seite (read-only),%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,Seite (privat),%(username)s)]]||nur %"
+"(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Verwaltung meiner Seiten"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Ungültiger Dateiname \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Paket %s, das die Seiten %s enthält wurde erzeugt."
+
+msgid "Package pages"
+msgstr "Seiten paketieren"
+
+msgid "Package name"
+msgstr "Paketname"
+
+msgid "List of page names - separated by a comma"
+msgstr "Liste von Seitennamen - getrennt durch ein Komma"
+
+msgid "Rename Page"
+msgstr "Seite umbenennen"
+
+msgid "New name"
+msgstr "Neuer Name"
+
+msgid "Optional reason for the renaming"
+msgstr "Optionale Begründung für das Umbenennen"
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(inklusive %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Die nachfolgenden %(badwords)d Worte konnten nicht im Wörterbuch mit %"
+"(totalwords)d Worten%(localwords)s gefunden werden und sind im Text "
+"hervorgehoben:"
+
+msgid "Add checked words to dictionary"
+msgstr "Markierte Wörter zum Wörterbuch hinzufügen"
+
+msgid "No spelling errors found!"
+msgstr "Keine Rechtschreibfehler gefunden!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"Sie dürfen keine Seite auf Rechtschreibung prüfen, die Sie nicht lesen "
+"können."
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Seite %s für Benutzer abonnieren"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "Abonnenten von %s:"
+
+msgid "Not a user:"
+msgstr "Kein Benutzer:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Sie dürfen diese Aktion nicht ausführen."
+
+msgid "Do it."
+msgstr "Ausführen"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Aktion %(actionname)s ausführen?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Aktion %(actionname)s ist ausgeschlossen in diesem Wiki!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sie dürfen die Aktion %(actionname)s auf dieser Seite nicht benutzen!"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr ""
+"Für die Aktion %(actionname)s bitte nur die vorgesehenen Webseiten benutzen!"
+
+msgid "You are not allowed to revert this page!"
+msgstr "Sie dürfen diese Seite nicht restaurieren!"
+
+msgid "No older revisions available!"
+msgstr "Es sind keine älteren Versionen dieser Seite verfügbar!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Änderungen von \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Unterschiede zwischen den Revisionen %d und %d"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(über %d Versionen hinweg)"
+
+msgid "No differences found!"
+msgstr "Es wurden keine Änderungen gefunden!"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Die Seite wurde jedoch %(count)d mal gespeichert!"
+
+msgid "(ignoring whitespace)"
+msgstr "(ignoriere Leerraum)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Ausschließlich Leerraum betreffende Änderungen ignorieren"
+
+msgid "General Information"
+msgstr "Allgemeine Informationen"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Seitengröße: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "Signatur des Seiteninhalts nach dem SHA-Verfahren:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Nachfolgende Benutzer haben diese Seite abonniert:"
+
+msgid "This page links to the following pages:"
+msgstr "Diese Seite verweist auf die folgenden Seiten:"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Diff"
+msgstr "Differenz"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "raw"
+msgstr "roh"
+
+msgid "print"
+msgstr "drucken"
+
+msgid "revert"
+msgstr "restaurieren"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Revision %(rev)d restauriert."
+
+msgid "N/A"
+msgstr "k.A."
+
+msgid "Revision History"
+msgstr "Versionshistorie"
+
+msgid "No log entries found."
+msgstr "Keine Log-Einträge gefunden."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Info für \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "\"%(title)s\" anzeigen"
+
+msgid "General Page Infos"
+msgstr "Allgemeine Seiten-Informationen"
+
+#, python-format
+msgid "Show chart \"%(title)s\""
+msgstr "Diagramm \"%(title)s\" anzeigen"
+
+msgid "Page hits and edits"
+msgstr "Seitenzugriffe und Änderungen"
+
+msgid "You must login to add a quicklink."
+msgstr "Sie müssen sich anmelden, um einen Expressverweis hinzuzufügen."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Ihr Expressverweis für diese Seite wurde entfernt."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Ein Expressverweis für diese Seite wurde hinzugefügt."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Sie dürfen keine Seiten abonnieren, die Sie nicht lesen dürfen."
+
+msgid "This wiki is not enabled for mail processing."
+msgstr "In diesem Wiki ist Mail-Verarbeitung nicht eingeschaltet."
+
+msgid "You must log in to use subscribtions."
+msgstr "Sie müssen sich anmelden, um Abonnements verwenden zu können."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
+"Fügen Sie Ihre E-Mail-Adresse in den BenutzerEinstellungen hinzu, um "
+"Abonnements benutzen zu können."
+
+msgid "Your subscribtion to this page has been removed."
+msgstr "Ihr Abonnements für diese Seite wurde entfernt."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Kann nicht Abonnement mit regulärem Ausdruck entfernen."
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+"Editieren Sie die regulären Ausdrücke für Abonnements in Ihren "
+"BenutzerEinstellungen."
+
+msgid "You have been subscribed to this page."
+msgstr "Die Seite wurde zur Liste abonnierter Seiten hinzugefügt."
+
+msgid "Charts are not available!"
+msgstr "Die Diagrammoption ist nicht verfügbar!"
+
+msgid "You need to provide a chart type!"
+msgstr "Es muss ein Diagrammtyp angegeben werden!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Unbekannter Diagrammtyp \"%s\"!"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Wiederhergestelltes Backup: %(filename)s nach Zielverzeichnis: %(targetdir)"
+"s.\n"
+"Dateien: %(filecount)d, Verzeichnisse: %(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Wiederherstellen von Backup %(filename)s in das Zielverzeichnis %(targetdir)"
+"s fehlgeschlagen."
+
+msgid "Wiki Backup / Restore"
+msgstr "Wiki Sicherung / Wiederherstellung"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Hinweise:\n"
+" * Um ein Backup wiederherzustellen:\n"
+"  * Das Wiederherstellen eines Backups wird bestehende Daten überschreiben, "
+"also seien Sie vorsichtig.\n"
+"  * Benennen Sie es auf <siteid>.tar.<compression> um (entfernen Sie --date--"
+"time--UTC).\n"
+"  * Legen Sie die Backupdatei in das backup_storage_dir (mit scp, "
+"ftp, ...).\n"
+"  * Drücken Sie unten auf [[GetText(Restore)]]-Knopf unten.\n"
+"\n"
+" * Um ein Backup zu erstellen, drücken Sie einfach auf den [[GetText"
+"(Backup)]]-Knopf und sichern Sie die Datei,\n"
+"   die Sie erhalten an eine sichere Stelle.\n"
+"\n"
+"Bitte stellen Sie sicher, dass die backup_* Werte in Ihrer Wiki-"
+"Konfiguration korrekt und vollständig sind.\n"
+
+msgid "Backup"
+msgstr "Datensicherung"
+
+msgid "Restore"
+msgstr "Datenwiederherstellung"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Sie dürfen kein Remote-Backup ausführen."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Unbekannte backup Unteraktion: %s."
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr ""
+"Bitte verwenden Sie einen selektiveren Suchbegriff anstatt {{{\"%s\"}}}"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Titelsuche: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Volltextsuche: \"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Liste aller Seitenverweise für \"%s\""
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr ""
+"Unbekannter Benutzername: {{{\"%s\"}}}. Bitte geben Sie Benutzername und "
+"Passwort ein."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Fehlendes Passwort. Bitte geben Sie Benutzername und Passwort ein."
+
+msgid "Sorry, login failed."
+msgstr "Login fehlgeschlagen."
+
+msgid "You are now logged out."
+msgstr "Sie sind nun abgemeldet."
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr ""
+"Kann keine neue Seite ohne Seitennamen anlegen - bitte geben Sie einen "
+"Seitennamen an."
 
 #, python-format
 msgid "Upload new attachment \"%(filename)s\""
@@ -1646,6 +1497,14 @@ msgid "SpellCheck"
 msgstr "RechtSchreibung"
 
 #, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Ungültige \"Include\"-Argumente: \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Textmarkierung \"%s\" nicht gefunden!"
+
+#, python-format
 msgid "Invalid MonthCalendar calparms \"%s\"!"
 msgstr "Ungültige MonthCalendaer calparms \"%s\"!"
 
@@ -1711,41 +1570,122 @@ msgstr "Lesezeichen setzen"
 msgid "[Bookmark reached]"
 msgstr "[Lesezeichen erreicht]"
 
-msgid "Contents"
-msgstr "Inhaltsverzeichnis"
-
-msgid "No wanted pages in this wiki."
-msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."
-
-#, python-format
-msgid "Invalid include arguments \"%s\"!"
-msgstr "Ungültige \"Include\"-Argumente: \"%s\"!"
-
-#, python-format
-msgid "Nothing found for \"%s\"!"
-msgstr "Textmarkierung \"%s\" nicht gefunden!"
-
 msgid "Markup"
 msgstr "Notation"
 
 msgid "Display"
 msgstr "Anzeige"
 
-msgid "Filename"
-msgstr "Dateiname"
+msgid "Python Version"
+msgstr "Python Version"
 
-msgid ""
-"Rendering of reStructured text is not possible, please install docutils."
-msgstr ""
-"Anzeigen von reStructured Text ist nicht möglich, bitte installieren Sie "
-"docutils."
-
-msgid "**Maximum number of allowed includes exceeded**"
-msgstr "**Maximale Anzahl erlaubter Includes überschritten**"
+msgid "MoinMoin Version"
+msgstr "MoinMoin Version"
 
 #, python-format
-msgid "**Could not find the referenced page: %s**"
-msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
+msgid "Release %s [Revision %s]"
+msgstr "Version %s [Revision %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite Version"
+
+msgid "Number of pages"
+msgstr "Seitenanzahl"
+
+msgid "Number of system pages"
+msgstr "Anzahl der Systemseiten"
+
+msgid "Accumulated page sizes"
+msgstr "Kumulierte Seitengrößen"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Plattenbelegung von %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Plattenbelegung von %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Einträge in der Änderungshistorie"
+
+msgid "NONE"
+msgstr "KEINE"
+
+msgid "Global extension macros"
+msgstr "Globale Erweiterungsmakros"
+
+msgid "Local extension macros"
+msgstr "Lokale Erweiterungsmakros"
+
+msgid "Global extension actions"
+msgstr "Globale Erweiterungsaktionen"
+
+msgid "Local extension actions"
+msgstr "Lokale Erweiterungsaktionen"
+
+msgid "Global parsers"
+msgstr "Globale Parser"
+
+msgid "Local extension parsers"
+msgstr "Lokale Erweiterungsparser"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Enabled"
+msgstr "Aktiviert"
+
+msgid "Xapian search"
+msgstr "Xapian-Suche"
+
+msgid "Active threads"
+msgstr "Aktive Threads"
+
+msgid "Contents"
+msgstr "Inhaltsverzeichnis"
+
+msgid "Include system pages"
+msgstr "Systemseiten einschließen"
+
+msgid "Exclude system pages"
+msgstr "Systemseiten ausschließen"
+
+msgid "No wanted pages in this wiki."
+msgstr "Es existieren keine gewünschten Seiten in diesem Wiki."
+
+msgid "Search Titles"
+msgstr "Titel durchsuchen"
+
+msgid "Display context of search results"
+msgstr "Umgebung der Treffer anzeigen"
+
+msgid "Case-sensitive searching"
+msgstr "Groß-/Kleinschreibung beachten"
+
+msgid "Search Text"
+msgstr "Text durchsuchen"
+
+msgid "Go To Page"
+msgstr "Gehe zu Seite"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "FEHLER in regulärem Ausdruck '%s'"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Ungültige Zeitangabe '%s'"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "Verbindung zum Mailserver '%(server)s' gestört: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "E-Mail wurde nicht versandt"
+
+msgid "Mail sent OK"
+msgstr "E-Mail wurde erfolgreich versandt"
 
 #, python-format
 msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
@@ -1763,6 +1703,19 @@ msgstr "Erwartete eine Ganzzahl \"%(arg)s\" nach \"%(key)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Erwartete einen Farbwert \"%(arg)s\" nach \"%(key)s\""
 
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Anzeigen von reStructured Text ist nicht möglich, bitte installieren Sie "
+"Docutils."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Maximale Anzahl erlaubter Includes überschritten**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Konnte die referenzierte Seite nicht finden: %s**"
+
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
 msgstr "XSLT-Option ist abgeschaltet, siehe HelpOnConfiguration."
 
@@ -1774,6 +1727,20 @@ msgstr ""
 #, python-format
 msgid "%(errortype)s processing error"
 msgstr "Verarbeitungsfehler vom Typ \"%(errortype)s\""
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "Sie dürfen die Aktion %s nicht ausführen auf dieser Seite."
+
+msgid "Login and try again."
+msgstr "Melden Sie sich an und probieren Sie es noch einmal."
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Kann die Seite nicht speichern, weil der Inhalt \"%(content)s\" in diesem "
+"Wiki nicht erlaubt ist."
 
 msgid "Views/day"
 msgstr "Lesezugriffe/Tag"
@@ -1884,6 +1851,9 @@ msgstr "------------"
 msgid "Raw Text"
 msgstr "Rohform"
 
+msgid "Print View"
+msgstr "Druckansicht"
+
 msgid "Delete Cache"
 msgstr "Cache löschen"
 
@@ -1936,6 +1906,9 @@ msgstr "Dateianhänge"
 msgid "Show %s days."
 msgstr "%s Tage anzeigen."
 
+msgid "Wiki Markup"
+msgstr "Wiki Quelltext"
+
 msgid "DeleteCache"
 msgstr "CacheLöschen"
 
@@ -1952,13 +1925,6 @@ msgstr "Seite"
 msgid "User"
 msgstr "Benutzer"
 
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-"Kann die Seite nicht speichern, weil der Inhalt \"%(content)s\" in diesem "
-"Wiki nicht erlaubt ist."
-
 msgid "Line"
 msgstr "Zeile"
 
@@ -1968,12 +1934,49 @@ msgstr "Gelöschter Text ist auf diese Art markiert."
 msgid "Additions are marked like this."
 msgstr "Hinzugefügter Text ist auf diese Art markiert."
 
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr "Verbindung zum Mailserver '%(server)s' gestört: %(reason)s"
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Erforderliches Attribut \"%(attrname)s\" fehlt"
 
-msgid "Mail not sent"
-msgstr "E-Mail wurde nicht versandt"
+#~ msgid "Submitted form data:"
+#~ msgstr "Übertragene Formular-Daten:"
 
-msgid "Mail sent OK"
-msgstr "E-Mail wurde erfolgreich versandt"
+#~ msgid "Plain title index"
+#~ msgstr "Titelindex in Textform"
+
+#~ msgid "XML title index"
+#~ msgstr "Titelindex als XML"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "Unglücklicherweise hat bereits jemand diese Seite verändert.\n"
+#~ "\n"
+#~ "Bitte wie folgt vorgehen: Mit dem Knopf \"Zurück\" des Browsers zurück "
+#~ "zum Editor gehen und die Änderungen in die Zwischenablage legen.\n"
+#~ "Dann wieder auf diese Seite \"Vorwärts\" gehen und nochmals \"Editieren\" "
+#~ "anklicken.\n"
+#~ "\n"
+#~ "Schließlich die Änderungen zum aktuellen Stand der Seite wieder "
+#~ "hinzufügen.\n"
+#~ "\n"
+#~ "''Bitte nicht einfach die Änderungen des anderen Autoren durch Cut&Paste "
+#~ "vollständig überschreiben, das ist sehr unhöflich!''\n"
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "Springe zur letztbesuchten Seite anstatt zur Startseite"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(Nur bei Passwort-Änderung)"
+
+#~ msgid "Filename"
+#~ msgstr "Dateiname"
