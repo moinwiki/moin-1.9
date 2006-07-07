@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-21 23:16+0200\n"
+"POT-Creation-Date: 2006-07-07 10:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,11 +85,9 @@ msgstr ""
 msgid "Someone else changed this page while you were editing!"
 msgstr ""
 
-#, python-format
 msgid ""
 "Someone else saved this page while you were editing!\n"
-"Please review the page and save then. Do not save this page as it is!\n"
-"Have a look at the diff of %(difflink)s to see what has been changed."
+"Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 
 #, python-format
@@ -424,16 +422,7 @@ msgstr ""
 msgid "You already saved this page!"
 msgstr ""
 
-msgid ""
-"Sorry, someone else saved the page while you edited it.\n"
-"\n"
-"Please do the following: Use the back button of your browser, and cut&paste\n"
-"your changes from there. Then go forward to here, and click EditText again.\n"
-"Now re-add your changes to the current page contents.\n"
-"\n"
-"''Do not just replace\n"
-"the content editbox with your version of the page, because that would\n"
-"delete the changes of the other person, which is excessively rude!''\n"
+msgid "You already edited this page! Please do not use the back button."
 msgstr ""
 
 #, python-format
@@ -595,7 +584,7 @@ msgstr ""
 msgid "Open editor on double click"
 msgstr ""
 
-msgid "Jump to last visited page instead of frontpage"
+msgid "After login, jump to last visited page"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -634,7 +623,7 @@ msgstr ""
 msgid "Password repeat"
 msgstr ""
 
-msgid "(Only when changing passwords)"
+msgid "(Only for password change or new account)"
 msgstr ""
 
 msgid "User CSS URL"
@@ -857,7 +846,7 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr ""
 
-msgid "Sorry, wrong password."
+msgid "Sorry, login failed."
 msgstr ""
 
 #, python-format
@@ -1310,12 +1299,6 @@ msgstr ""
 msgid "Exclude system pages"
 msgstr ""
 
-msgid "Plain title index"
-msgstr ""
-
-msgid "XML title index"
-msgstr ""
-
 #, python-format
 msgid "ERROR in regex '%s'"
 msgstr ""
@@ -1410,11 +1393,8 @@ msgstr ""
 msgid "Display"
 msgstr ""
 
-msgid "Filename"
-msgstr ""
-
 msgid ""
-"Rendering of reStructured text is not possible, please install docutils."
+"Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
 
 msgid "**Maximum number of allowed includes exceeded**"
@@ -1448,6 +1428,11 @@ msgstr ""
 
 #, python-format
 msgid "%(errortype)s processing error"
+msgstr ""
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
 msgstr ""
 
 msgid "Views/day"
@@ -1631,11 +1616,6 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#, python-format
-msgid ""
-"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
-msgstr ""
-
 msgid "Line"
 msgstr ""
 
@@ -1643,16 +1623,6 @@ msgid "Deletions are marked like this."
 msgstr ""
 
 msgid "Additions are marked like this."
-msgstr ""
-
-#, python-format
-msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
-msgstr ""
-
-msgid "Mail not sent"
-msgstr ""
-
-msgid "Mail sent OK"
 msgstr ""
 
 #, python-format
