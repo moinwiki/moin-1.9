@@ -87,7 +87,7 @@ class WikiAnalyzer:
             
         if isinstance(value, list): # used for page links
             for v in value:
-                yield enc(v)
+                yield (enc(v), 0)
         else:
             tokenstream = re.finditer(self.token_re, value)
             for m in tokenstream:
@@ -132,7 +132,7 @@ class WikiAnalyzer:
                 if self.stemmer:
                     yield (self.stemmer.stemWord(word), pos)
             else:
-                yield (i, self.stemmer.stemWord(i), pos)
+                yield (word, self.stemmer.stemWord(word), pos)
 
 
 #############################################################################
@@ -224,6 +224,13 @@ class Index(BaseIndex):
         while i != db.allterms_end():
             yield i.get_term()
             i.next()
+
+    def termpositions(self, uid, term):
+        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
+        pos = db.positionlist_begin(uid, term)
+        while pos != db.positionlist_end(uid, term):
+            yield pos.get_termpos()
+            pos.next()
 
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename

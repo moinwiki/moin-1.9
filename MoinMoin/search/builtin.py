@@ -15,6 +15,7 @@ from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, lock
 from MoinMoin.search.results import getSearchResults
+from MoinMoin.search.queryparser import TextMatch, TitleMatch
 
 ##############################################################################
 # Search Engine Abstraction
@@ -384,30 +385,47 @@ class Search:
             index = Index(self.request)
         except ImportError:
             index = None
+        
         if index and index.exists(): #and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
-                query = self.query.xapian_term(self.request,
-                        index.allterms)
+                query = self.query.xapian_term(self.request, index.allterms)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                hits = index.search(query)
+                enq, hits = index.search(query)
                 self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for k, v in d.items():
                         d[k] = d[k].decode(config.charset)
                     return d
-                pages = [dict_decode(hit['values']) for hit in hits]
+                pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
+                        for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
+                self._xapianEnquire = enq
+                self._xapianIndex = index
             except BaseIndex.LockedException:
                 pass
             #except AttributeError:
             #    pages = []
             self.request.clock.stop('_xapianSearch')
-        return self._moinSearch(pages)
+            return self._getHits(hits, self._xapianMatch)
+        else:
+            return self._moinSearch(pages)
+
+    def _xapianMatch(self, page, uid):
+        matches = []
+        term = self._xapianEnquire.get_matching_terms_begin(uid)
+        #print hit['uid']
+        while term != self._xapianEnquire.get_matching_terms_end(uid):
+            print term.get_term(), ':', list(self._xapianIndex.termpositions(uid, term.get_term()))
+            for pos in self._xapianIndex.termpositions(uid, term.get_term()):
+                matches.append(TextMatch(start=pos,
+                    end=pos+len(term.get_term())))
+            term.next()
+        return matches
 
     def _moinSearch(self, pages=None):
         """ Search pages using moin's built-in full text search 
@@ -421,9 +439,23 @@ class Search:
             # if we are not called from _xapianSearch, we make a full pagelist,
             # but don't search attachments (thus attachment name = '')
             pages = [{'pagename': p, 'attachment': '', 'wikiname': 'Self', } for p in self._getPageList()]
+        hits = self._getHits(pages, self._moinMatch)
+        self.request.clock.stop('_moinSearch')
+        return hits
+    
+    def _moinMatch(self, page, uid):
+        return self.query.search(page)
+
+    def _getHits(self, pages, matchSearchFunction):
         hits = []
         fs_rootpage = self.fs_rootpage
-        for valuedict in pages:
+        for hit in pages:
+            if 'values' in hit:
+                valuedict = hit['values']
+                uid = hit['uid']
+            else:
+                valuedict = hit
+
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
@@ -436,12 +468,11 @@ class Search:
                     else:
                         hits.append((wikiname, page, attachment, None))
                 else:
-                    match = self.query.search(page)
+                    match = matchSearchFunction(page, uid)
                     if match:
                         hits.append((wikiname, page, attachment, match))
             else: # other wiki
                 hits.append((wikiname, pagename, attachment, None))
-        self.request.clock.stop('_moinSearch')
         return hits
 
     def _getPageList(self):
