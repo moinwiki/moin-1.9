@@ -325,14 +325,6 @@ class FormatterBase:
         del p
         return ''
 
-    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
-                        returns_content=1):
-        content = parser[callback](*arg_list, **arg_dict)
-        if returns_content:
-            return content
-        else:
-            return ''
-
     # Other ##############################################################
     
     def div(self, on, **kw):
