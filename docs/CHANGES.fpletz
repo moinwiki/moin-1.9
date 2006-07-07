@@ -107,3 +107,18 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-01
     * Fully implemented term-based regexp searching
 
+2006-07-04
+    * Evaluating the current framework for the new UI (no new sane code to
+      commit)
+
+2006-07-05
+    * Indexing correct positions in xapwrap
+
+2006-07-06
+    * Played with Xapian to get correct positions and where to integrate
+      in MoinMoin
+
+2006-07-07
+    * Basic (quick and dirty, limitations and bugs included, but
+      commit-ready) implementation of getting matches out of the Xapian DB
+

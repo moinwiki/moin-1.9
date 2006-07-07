@@ -341,7 +341,6 @@ class TextSearch(BaseExpression):
                 (self.titlesearch.xapian_term(request, allterms),
                     Query(Query.OP_AND, queries)))
 
-
 class TitleSearch(BaseExpression):
     """ Term searches in pattern in page title only """
 
