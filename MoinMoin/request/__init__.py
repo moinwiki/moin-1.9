@@ -757,7 +757,7 @@ class RequestBase(object):
                     d = d.encode(config.charset, 'replace')
                 wd.append(d)
             except UnicodeError:
-                print >>sys.stderr, "Unicode error on: %s" % repr(d)
+                self.log("Unicode error on: %s" % repr(d))
         return ''.join(wd)
 
     def decodePagename(self, name):
