@@ -313,7 +313,7 @@ class FormatterBase:
             try:
                 parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
                 break
-            except PluginMissingError:
+            except wikiutil.PluginMissingError:
                 pass
         else:
             raise "Parser not found" # XXX what now?
