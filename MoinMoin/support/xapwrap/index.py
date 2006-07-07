@@ -635,7 +635,7 @@ class ReadOnlyIndex:
                         valRes[valName] = xapDoc.get_value(valueIndex)
                     thisResult['values'] = valRes
                 results.append(thisResult)
-            return results
+            return enq, results
         except:
             del enq, mset
             raise

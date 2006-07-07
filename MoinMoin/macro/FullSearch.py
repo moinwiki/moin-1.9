@@ -54,8 +54,7 @@ def execute(macro, needle):
     needle = needle.strip()
 
     # Search the pages and return the results
-    query = search.QueryParser().parse_query(needle)
-    results = search.searchPages(request, query)
+    results = search.searchPages(request, needle)
     results.sortByPagename()
 
     return results.pageList(request, macro.formatter)
