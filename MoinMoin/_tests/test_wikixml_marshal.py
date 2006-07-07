@@ -12,7 +12,7 @@ from MoinMoin.wikixml import marshal
 
 class MarshalTestCase(unittest.TestCase):
     """Testing Marshal used for ...XXX"""
-    
+
     class Data:
         cvar = 'Class Variable'
         def __init__(self, value):
@@ -28,22 +28,22 @@ class MarshalTestCase(unittest.TestCase):
         (1, '<data><prop>1</prop></data>'),
         (Data('value'), '<data><prop><data><ivar>value</ivar></data></prop></data>'),
         (array.array("i", [42]), "<data><prop>array('i', [42])</prop></data>"),
-        (buffer("0123456789", 2, 3),"<data><prop>234</prop></data>"),        
+        (buffer("0123456789", 2, 3), "<data><prop>234</prop></data>"),
         )
-        
+
     def setUp(self):
         self.obj = marshal.Marshal()
-        
+
     def testCreateMarshal(self):
         """wikixml.marshal: create new marshal"""
         self._checkData(self.obj, '<data></data>')
-        
+
     def testSetMarshalProperty(self):
         """wikixml.marshal: setting marshal property"""
         for value, xml in self.prop:
             self.obj.prop = value
             self._checkData(self.obj, xml)
-    
+
     def _canonize(self, xml):
         xml = xml.replace('\n', '')
         return xml
@@ -51,5 +51,6 @@ class MarshalTestCase(unittest.TestCase):
     def _checkData(self, obj, xml):
         objXML = self._canonize(obj.toXML())
         expected = self._canonize(xml)
-        self.assertEqual(objXML, expected, 
+        self.assertEqual(objXML, expected,
             'Expected "%(expected)s" but got "%(objXML)s"' % locals())
+

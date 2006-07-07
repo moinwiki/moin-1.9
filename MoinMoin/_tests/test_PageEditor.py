@@ -13,7 +13,7 @@ from MoinMoin._tests import TestConfig, TestSkiped
 
 
 class ExpandVarsTestCase(unittest.TestCase):
-    """PageEditor: testing page editor"""   
+    """PageEditor: testing page editor"""
 
     pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
 
@@ -33,7 +33,7 @@ class ExpandVarsTestCase(unittest.TestCase):
         for var, expected in self._tests:
             result = self.page._expand_variables(var)
             self.assertEqual(result, expected,
-                'Expected "%(expected)s" but got "%(result)s"' % locals())   
+                'Expected "%(expected)s" but got "%(result)s"' % locals())
 
 
 class ExpandUserNameTest(unittest.TestCase):
@@ -43,7 +43,7 @@ class ExpandUserNameTest(unittest.TestCase):
     """
     pagename = u'AutoCreatedMoinMoinTemporaryTestPage'
     variable = u'@USERNAME@'
-    
+
     def setUp(self):
         self.page = PageEditor(self.request, self.pagename)
         self.savedName = self.request.user.name
@@ -51,24 +51,24 @@ class ExpandUserNameTest(unittest.TestCase):
 
     def tearDown(self):
         self.request.user.name = self.savedName
-    
+
     def expand(self):
         return self.page._expand_variables(self.variable)
 
 
 class ExpandCamelCaseName(ExpandUserNameTest):
-    
+
     name = u'UserName'
-    
+
     def testExpandCamelCaseUserName(self):
         """ PageEditor: expand @USERNAME@ CamelCase """
         self.assertEqual(self.expand(), self.name)
 
 
 class ExpandExtendedName(ExpandUserNameTest):
-    
+
     name = u'user name'
-    
+
     def testExtendedNamesEnabled(self):
         """ PageEditor: expand @USERNAME@ extended name - enabled """
         try:
@@ -77,7 +77,7 @@ class ExpandExtendedName(ExpandUserNameTest):
         finally:
             del config
 
-        
+
 class ExpandMailto(ExpandUserNameTest):
 
     variable = u'@MAILTO@'
@@ -95,11 +95,11 @@ class ExpandMailto(ExpandUserNameTest):
         ExpandUserNameTest.tearDown(self)
         self.request.user.valid = self.savedValid
         self.request.user.email = self.savedEmail
-    
+
     def testMailto(self):
         """ PageEditor: expand @MAILTO@ """
         self.assertEqual(self.expand(), u'[[MailTo(%s)]]' % self.email)
-        
+
 
 class ExpandPrivateVariables(ExpandUserNameTest):
 
@@ -107,7 +107,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
     name = u'AutoCreatedMoinMoinTemporaryTestUser'
     dictPage = name + '/MyDict'
     shouldDeleteTestPage = True
-    
+
     def setUp(self):
         ExpandUserNameTest.setUp(self)
         self.savedValid = self.request.user.valid
@@ -121,7 +121,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
         self.deleteTestPage()
 
     def testPrivateVariables(self):
-        """ PageEditor: expand user variables """        
+        """ PageEditor: expand user variables """
         self.assertEqual(self.expand(), self.name)
 
     def createTestPage(self):
@@ -135,7 +135,7 @@ class ExpandPrivateVariables(ExpandUserNameTest):
         path = self.dictPagePath()
         if os.path.exists(path):
             self.shouldDeleteTestPage = False
-            raise TestSkiped("%s exists. Won't overwrite exiting page" % 
+            raise TestSkiped("%s exists. Won't overwrite exiting page" %
                              self.dictPage)
         try:
             os.mkdir(path)
@@ -157,14 +157,14 @@ class ExpandPrivateVariables(ExpandUserNameTest):
         if hasattr(self.request.cfg, 'DICTS_DATA'):
             del self.request.cfg.DICTS_DATA
         self.request.pages = {}
-        
+
     def deleteTestPage(self):
         """ Delete temporary page, bypass logs and notifications """
         if self.shouldDeleteTestPage:
             import shutil
             shutil.rmtree(self.dictPagePath(), True)
-        
+
     def dictPagePath(self):
         page = Page(self.request, self.dictPage)
         return page.getPagePath(use_underlay=0, check_create=0)
-        
+

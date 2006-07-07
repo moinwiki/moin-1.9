@@ -15,7 +15,7 @@ from MoinMoin import config
 
 class decodeSpamSafeEmailTestCase(unittest.TestCase):
     """mail.sendmail: testing mail"""
-    
+
     _tests = (
         ('', ''),
         ('AT', '@'),
@@ -54,7 +54,7 @@ class EncodeAddressTests(unittest.TestCase):
     mailbox     =   name-addr / addr-spec
     name-addr   =   [display-name] angle-addr
     angle-addr  =   [CFWS] "<" addr-spec ">" [CFWS] / obs-angle-addr
-    """    
+    """
     charset = Charset(config.charset)
     charset.header_encoding = QP
     charset.body_encoding = QP
@@ -73,7 +73,7 @@ class EncodeAddressTests(unittest.TestCase):
         expected = phrase + '<local@domain>'
         self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
-                             
+
     def testCompositeUnicode(self):
         """ mail.sendmail: encode Uncode address: 'ויקי <local@domain>' """
         address = u'ויקי <local@domain>'
@@ -81,14 +81,14 @@ class EncodeAddressTests(unittest.TestCase):
         expected = phrase + '<local@domain>'
         self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
-                             
+
     def testEmptyPhrase(self):
         """ mail.sendmail: encode address with empty phrase: '<local@domain>' """
         address = u'<local@domain>'
         expected = address.encode(config.charset)
         self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
-                             
+
     def testEmptyAddress(self):
         """ mail.sendmail: encode address with empty address: 'Phrase <>' 
         
@@ -112,3 +112,4 @@ class EncodeAddressTests(unittest.TestCase):
         expected = address.encode(config.charset)
         self.failUnlessEqual(sendmail.encodeAddress(address, self.charset),
                              expected)
+
