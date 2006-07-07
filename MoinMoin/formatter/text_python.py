@@ -191,7 +191,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             try:
                 Dependencies = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Dependencies")
                 break
-            except wikiutil.PluginAttributeError:
+            except (wikiutil.PluginMissingError, wikiutil.PluginAttributeError), err:
                 pass
         else:
             Dependencies = self.defaultDependencies
