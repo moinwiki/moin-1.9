@@ -1038,7 +1038,7 @@ class RequestBase(object):
         try:
             self.initTheme()
 
-            action_name = self.form.get('action', [None])[0]
+            action_name = self.form.get('action', ['show'])[0]
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
@@ -1059,7 +1059,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                 page.send_page(self, msg=msg)
 
             # 2. Or jump to page where user left off
-            elif not pagename and not action_name and self.user.remember_last_visit:
+            elif not pagename and self.user.remember_last_visit:
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
@@ -1076,8 +1076,6 @@ space between words. Group page name is not allowed.""") % self.user.name
 
             # 3. Or handle action
             else:
-                if action_name is None:
-                    action_name = 'show'
                 if not pagename and self.query_string:
                     pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
