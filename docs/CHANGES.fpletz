@@ -2,23 +2,27 @@ Branch moin/1.6-xapian-fpletz
 =============================
 
   Known main issues:
-    * Regex searching with Xapian?
+    * Only term-based regex searching possible, modifier or heuristic to
+      enable usage of _moinSearch for full compatibility?
+    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
 
   ToDo:
-    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper
-      metadata)
-    * Mockup the new search UI
+    * Implement the new search UI
     * Write/update documentation for all the new search stuff
     * Indexing and searching of categories (new term prefix)
-    * MoinMoin.Xapian.use_stemming -> request.cfg.xapian_use_stemming
+    * Drop _moinSearch when using Xapian and use term positions provided
+      by Xapian itself, needs some reworking of WikiAnalyzer/xapwrap to
+      get the position of stemmed words right
 
   New Features:
     * Faster search thanks to Xapian
     * Searching for languages with new prefix lang/language, i.e. lang:de
-      Note: Only available when Xapian is activated
+      Note: Currently only available when Xapian is used
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
+        xapian_stemming      True   Toggles usage of stemmer, fallback
+                                    to False if no stemmer installed
   
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
@@ -79,4 +83,42 @@ be no issue with OrExpression as _moinSearch handles this correctly.
         allow searching across defined wikis on a wikifarm
     * All stemming/matching issues resolved (hopefully)
     * Works now without xapian installed (enhance error reporting)
+
+2006-06-21
+    * Making stemming configurable (xapian_stemming) with fallback to
+      False if no stemmer available
+    * Xapian.use_stemming -> request.cfg.xapian_stemming
+    * Fixed bug in the selection of the stemming language
+
+2006-06-27
+    * Splitting out MoinMoin/search.py to MoinMoin/search/*.py, no more
+      need to invoke QueryParser manually when using searchPages, minor
+      refactoring
+
+2006-06-28
+    * Abstraction of a locked search engine index:
+      MoinMoin.search.builtin.BaseIndex, MoinMoin.search.Xapian.Index is
+      derived from this, cleanups in calling structure and function
+      prototypes to make it more extensible
+
+2006-06-29
+    * Tested some ideas with regexp searching
+
+2006-07-01
+    * Fully implemented term-based regexp searching
+
+2006-07-04
+    * Evaluating the current framework for the new UI (no new sane code to
+      commit)
+
+2006-07-05
+    * Indexing correct positions in xapwrap
+
+2006-07-06
+    * Played with Xapian to get correct positions and where to integrate
+      in MoinMoin
+
+2006-07-07
+    * Basic (quick and dirty, limitations and bugs included, but
+      commit-ready) implementation of getting matches out of the Xapian DB
 
