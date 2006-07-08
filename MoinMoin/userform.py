@@ -55,7 +55,7 @@ class UserSettingsHandler:
     def handleData(self):
         _ = self._
         form = self.request.form
-    
+
         if form.has_key('cancel'):
             return
 
@@ -67,7 +67,7 @@ Contact the owner of the wiki, who can enable email.""")
                 email = form['email'][0].lower()
             except KeyError:
                 return _("Please provide a valid email address!")
-    
+
             u = user.get_by_email_address(self.request, email)
             if u:
                 msg = u.mailAccountData()
@@ -85,7 +85,7 @@ Contact the owner of the wiki, who can enable email.""")
                 theuser = self.request.get_user_from_form()
             else:
                 theuser = user.User(self.request, auth_method="request:152")
-                
+
             # Require non-empty name
             try:
                 theuser.name = form['name'][0]
@@ -109,7 +109,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # try to get the password and pw repeat
             password = form.get('password', [''])[0]
-            password2 = form.get('password2',[''])[0]
+            password2 = form.get('password2', [''])[0]
 
             # Check if password is given and matches with password repeat
             if password != password2:
@@ -145,13 +145,13 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             theuser.save()
             if form.has_key('create_and_mail'):
                 theuser.mailAccountData()
-            
+
             result = _("User account created! You can use this account to login now...")
             if _debug:
                 result = result + util.dumpFormData(form)
             return result
-        
-        
+
+
         # Select user profile (su user) - only works with cookie auth active.
         if form.has_key('select_user'):
             if (wikiutil.checkTicket(self.request.form['ticket'][0]) and
@@ -173,7 +173,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             if self.request.request_method != 'POST':
                 return _("Use UserPreferences to change your settings or create an account.")
             theuser = self.request.get_user_from_form()
-                
+
             if not 'name' in theuser.auth_attribs:
                 # Require non-empty name
                 theuser.name = form.get('name', [theuser.name])[0]
@@ -198,7 +198,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             if not 'password' in theuser.auth_attribs:
                 # try to get the password and pw repeat
                 password = form.get('password', [''])[0]
-                password2 = form.get('password2',[''])[0]
+                password2 = form.get('password2', [''])[0]
 
                 # Check if password is given and matches with password repeat
                 if password != password2:
@@ -239,14 +239,14 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
             # editor size
             theuser.edit_rows = util.web.getIntegerInput(self.request, 'edit_rows', theuser.edit_rows, 10, 60)
-                
+
             # try to get the editor
             theuser.editor_default = form.get('editor_default', [self.cfg.editor_default])[0]
             theuser.editor_ui = form.get('editor_ui', [self.cfg.editor_ui])[0]
 
             # time zone
             theuser.tz_offset = util.web.getIntegerInput(self.request, 'tz_offset', theuser.tz_offset, -84600, 84600)
-    
+
             # datetime format
             try:
                 dt_d_combined = UserSettings._date_formats.get(form['datetime_fmt'][0], '')
@@ -254,7 +254,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
             except (KeyError, ValueError):
                 theuser.datetime_fmt = '' # default
                 theuser.date_fmt = '' # default
-    
+
             # try to get the (optional) theme
             theme_name = form.get('theme_name', [self.cfg.theme_default])[0]
             if theme_name != theuser.theme_name:
@@ -292,7 +292,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 default = self.cfg.user_form_defaults[key]
                 value = form.get(key, [default])[0]
                 setattr(theuser, key, value)
-            
+
             # checkbox options
             if not newuser:
                 for key, label in self.cfg.user_checkbox_fields:
@@ -304,15 +304,15 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                             pass
                         else:
                             setattr(theuser, key, value)
-    
+
             # quicklinks for navibar
-            theuser.quicklinks = self.decodePageList('quicklinks')            
-            
+            theuser.quicklinks = self.decodePageList('quicklinks')
+
             # subscription for page change notification
             theuser.subscribed_pages = self.decodePageList('subscribed_pages')
-                    
+
             # save data
-            theuser.save()            
+            theuser.save()
             self.request.user = theuser
 
             result = _("User preferences saved!")
@@ -329,10 +329,10 @@ class UserSettings:
     """ User login and settings management. """
 
     _date_formats = { # datetime_fmt & date_fmt
-        'iso':  '%Y-%m-%d %H:%M:%S & %Y-%m-%d',
-        'us':   '%m/%d/%Y %I:%M:%S %p & %m/%d/%Y',
+        'iso': '%Y-%m-%d %H:%M:%S & %Y-%m-%d',
+        'us': '%m/%d/%Y %I:%M:%S %p & %m/%d/%Y',
         'euro': '%d.%m.%Y %H:%M:%S & %d.%m.%Y',
-        'rfc':  '%a %b %d %H:%M:%S %Y & %a %b %d %Y',
+        'rfc': '%a %b %d %H:%M:%S %Y & %a %b %d %Y',
     }
 
     def __init__(self, request):
@@ -363,7 +363,7 @@ class UserSettings:
                     string.zfill("%d" % (abs(offset) % 3600 / 60), 2),
                 ),
             ))
- 
+
         return util.web.makeSelection('tz_offset', options, str(tz))
 
 
@@ -393,9 +393,9 @@ class UserSettings:
         for lang in langs:
             name = lang[1]['x-language']
             options.append((lang[0], name))
-                
+
         return util.web.makeSelection('language', options, cur_lang)
-  
+
     def _user_select(self):
         options = []
         users = user.getUserList(self.request)
@@ -404,24 +404,24 @@ class UserSettings:
             options.append((name, name))
         options.sort()
 
-        size = min(5, len(options))  
+        size = min(5, len(options))
         current_user = self.request.user.name
         return util.web.makeSelection('selected_user', options, current_user, size=size)
-            
+
     def _theme_select(self):
         """ Create theme selection. """
         cur_theme = self.request.user.valid and self.request.user.theme_name or self.cfg.theme_default
         options = [("<default>", "<%s>" % self._("Default"))]
         for theme in wikiutil.getPlugins('theme', self.request.cfg):
             options.append((theme, theme))
-                
+
         return util.web.makeSelection('theme_name', options, cur_theme)
-  
+
     def _editor_default_select(self):
         """ Create editor selection. """
         editor_default = self.request.user.valid and self.request.user.editor_default or self.cfg.editor_default
         options = [("<default>", "<%s>" % self._("Default"))]
-        for editor in ['text','gui',]:
+        for editor in ['text', 'gui', ]:
             options.append((editor, editor))
         return util.web.makeSelection('editor_default', options, editor_default)
 
@@ -433,7 +433,7 @@ class UserSettings:
                    ("freechoice", self._("free choice")),
                   ]
         return util.web.makeSelection('editor_ui', options, editor_ui)
-                
+
     def make_form(self):
         """ Create the FORM, and the TABLE with the input fields
         """
@@ -478,7 +478,7 @@ class UserSettings:
                      ' ',
                  ])
             self.make_row('', button_cell)
-            
+
         if self.request.user.valid and not create_only:
             buttons = [('save', _('Save')), ('cancel', _('Cancel')), ]
             uf_remove = self.cfg.user_form_remove
@@ -494,11 +494,11 @@ class UserSettings:
                 if not key in uf_remove:
                     if key in uf_disable:
                         self.make_row(_(label),
-                                  [ html.INPUT(type=type, size=length, name=key, disabled="disabled",
-                                    value=getattr(self.request.user, key)), ' ', _(textafter), ])
+                                  [html.INPUT(type=type, size=length, name=key, disabled="disabled",
+                                   value=getattr(self.request.user, key)), ' ', _(textafter), ])
                     else:
                         self.make_row(_(label),
-                                  [ html.INPUT(type=type, size=length, name=key, value=getattr(self.request.user, key)), ' ', _(textafter), ])
+                                  [html.INPUT(type=type, size=length, name=key, value=getattr(self.request.user, key)), ' ', _(textafter), ])
 
             if not self.cfg.theme_force and not "theme_name" in self.cfg.user_form_remove:
                 self.make_row(_('Preferred theme'), [self._theme_select()])
@@ -524,7 +524,7 @@ class UserSettings:
 
             if not "language" in self.cfg.user_form_remove:
                 self.make_row(_('Preferred language'), [self._lang_select()])
-            
+
             # boolean user options
             bool_options = []
             checkbox_fields = self.cfg.user_checkbox_fields
@@ -560,7 +560,7 @@ class UserSettings:
                             _("This list does not work, unless you have"
                               " entered a valid email address!")
                         )]
-                
+
                 self.make_row(
                     html.Raw(_('Subscribed wiki pages (one regex per line)')),
                     [html.TEXTAREA(name="subscribed_pages", rows="6", cols="50").append(
@@ -580,9 +580,9 @@ class UserSettings:
             for key, label, type, length, textafter in self.cfg.user_form_fields:
                 if key in ('name', 'password', 'password2', 'email'):
                     self.make_row(_(label),
-                              [ html.INPUT(type=type, size=length, name=key,
-                                           value=''),
-                                ' ', _(textafter), ])
+                              [html.INPUT(type=type, size=length, name=key,
+                                          value=''),
+                               ' ', _(textafter), ])
 
         if self.cfg.mail_enabled:
             buttons.append(("account_sendmail", _('Mail me my account data')))
@@ -711,10 +711,10 @@ def do_user_browser(request):
              request.formatter.text(account.email) +
              request.formatter.url(0)),
             request.page.link_to(request, text=_('Mail me my account data'),
-                                 querystr= {"action":"userform",
-                                            "email": account.email,  
-                                            "account_sendmail": "1",
-                                            "sysadm": "users",},
+                                 querystr={"action":"userform",
+                                           "email": account.email,
+                                           "account_sendmail": "1",
+                                           "sysadm": "users", },
                                  rel='nofollow')
         ))
 
