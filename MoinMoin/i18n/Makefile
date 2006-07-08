@@ -75,5 +75,5 @@ stats:
 	done
 
 clean:
-	rm -f POTFILES
+	rm -f POTFILES POTFILES.in
 
