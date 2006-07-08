@@ -15,6 +15,23 @@ from distutils.command.build_scripts import build_scripts
 
 from MoinMoin.version import release, revision
 
+# we need this for distutils from python 2.3 compatibility, python 2.4 has the
+# 'package_data' keyword to the 'setup' function to install data in packages 
+# see http://wiki.python.org/moin/DistutilsInstallDataScattered
+from distutils.command.install_data import install_data
+class smart_install_data(install_data):
+    def run(self):
+        i18n_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('MoinMoin/i18n')]
+        share_data_files = [(target, files) for (target, files) in self.data_files if target.startswith('share/moin')]
+        # first install the share/moin stuff:
+        self.data_files = share_data_files
+        install_data.run(self)
+        # now we need to install the *.po files to the package dir:
+        # need to change self.install_dir to the library dir
+        install_cmd = self.get_finalized_command('install')
+        self.install_dir = getattr(install_cmd, 'install_lib')
+        self.data_files = i18n_data_files
+        return install_data.run(self)
 
 #############################################################################
 ### Helpers
@@ -61,7 +78,7 @@ def makeDataFiles(prefix, dir):
     dir = dir.rstrip('/')
     strip = len(dir) + 1
     found = []
-    os.path.walk(dir, visit, (prefix, strip, found)) 
+    os.path.walk(dir, visit, (prefix, strip, found))
     return found
 
 def visit((prefix, strip, found), dirname, names):
@@ -86,7 +103,7 @@ def visit((prefix, strip, found), dirname, names):
             files.append(path)
     destination = os.path.join(prefix, dirname[strip:])
     found.append((destination, files))
-    
+
 
 #############################################################################
 ### Build script files
@@ -116,7 +133,7 @@ class build_scripts_create(build_scripts):
         if not self.package_name:
             raise Exception("You have to inherit build_scripts_create and"
                 " provide a package name")
-        
+
         to_module = string.maketrans('-/', '_.')
 
         self.mkpath(self.build_dir)
@@ -238,25 +255,25 @@ only requiring a Python installation.
         'MoinMoin._tests',
     ],
 
-    # TODO package_dir and package_data only works for python >= 2.4
-    # in case we don't require python >= 2.4 for 1.6 release, we need to find
-    # a solution for python 2.3.x
-    'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
-    'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
-                                        '*.po',
-                                        'tools/*',], },
+    # We can use package_* instead of the smart_install_data hack when we
+    # require Python 2.4.
+    #'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
+    #'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
+    #                                    '*.po',
+    #                                    'tools/*',], },
 
     # Override certain command classes with our own ones
     'cmdclass': {
         'build_scripts': build_scripts_moin,
+        'install_data': smart_install_data, # hack needed for 2.3
     },
 
     'scripts': moin_scripts,
 
-    # This copy the contents of wiki dir under sys.prefix/share/moin
+    # This copies the contents of wiki dir under sys.prefix/share/moin
     # Do not put files that should not be installed in the wiki dir, or
     # clean the dir before you make the distribution tarball.
-    'data_files': makeDataFiles('share/moin', 'wiki'),
+    'data_files': makeDataFiles('share/moin', 'wiki') + makeDataFiles('MoinMoin/i18n', 'MoinMoin/i18n')
 }
 
 if hasattr(distutils.dist.DistributionMetadata, 'get_keywords'):
@@ -271,7 +288,7 @@ try:
 except distutils.errors.DistutilsPlatformError, ex:
     print
     print str(ex)
-    
+
     print """
 POSSIBLE CAUSE
 
