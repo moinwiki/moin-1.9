@@ -31,12 +31,14 @@ def _importConfigModule(name):
     except ImportError:
         raise
     except IndentationError, err:
-        msg = 'IndentationError: %s\n' % str(err) + '''
+        msg = '''IndentationError: %(err)s
 
 The configuration files are python modules. Therefore, whitespace is
 important. Make sure that you use only spaces, no tabs are allowed here!
 You have to use four spaces at the beginning of the line mostly.
-'''
+''' % {
+    'err': err,
+}
         raise error.ConfigurationError(msg)
     except Exception, err:
         msg = '%s: %s' % (err.__class__.__name__, str(err))
@@ -95,7 +97,7 @@ def _makeConfig(name):
         cfg = configClass(name)
         cfg.cfg_mtime = max(mtime, _farmconfig_mtime)
     except ImportError, err:
-        msg = 'ImportError: %s\n' % str(err) + '''
+        msg = '''ImportError: %(err)s
 
 Check that the file is in the same directory as the server script. If
 it is not, you must add the path of the directory where the file is
@@ -105,17 +107,29 @@ the top of the server script.
 Check that the configuration file name is either "wikiconfig.py" or the
 module name specified in the wikis list in farmconfig.py. Note that the
 module name does not include the ".py" suffix.
-'''
+''' % {
+    'err': err,
+}
         raise error.ConfigurationError(msg)
-    except AttributeError:
-        msg = '''
-Could not find required "Config" class in "%(name)s.py". This might
-happen if you are trying to use a pre 1.3 configuration file, or made a
-syntax or spelling error.
+    except AttributeError, err:
+        msg = '''AttributeError: %(err)s
+
+Could not find required "Config" class in "%(name)s.py".
+
+This might happen if you are trying to use a pre 1.3 configuration file, or
+made a syntax or spelling error.
+
+Another reason for this could be a name clash. It is not possible to have
+config names like e.g. stats.py - because that colides with MoinMoin/stats/ -
+have a look into your MoinMoin code directory what other names are NOT
+possible.
 
 Please check your configuration file. As an example for correct syntax,
 use the wikiconfig.py file from the distribution.
-''' % {'name': name}
+''' % {
+    'name': name,
+    'err': err,
+}
         raise error.ConfigurationError(msg)
     return cfg
 
@@ -132,7 +146,9 @@ Could not find a match for url: "%(url)s".
 
 Check your URL regular expressions in the "wikis" list in
 "farmconfig.py". 
-''' % {'url': url}
+''' % {
+    'url': url,
+}
     raise error.ConfigurationError(msg)    
 
 
@@ -672,7 +688,10 @@ Could not import plugin package "%(path)s/plugin" because of ImportError:
 
 Make sure your data directory path is correct, check permissions, and
 that the data/plugin directory has an __init__.py file.
-''' % {'path': self.data_dir, 'err': str(err)}
+''' % {
+    'path': self.data_dir,
+    'err': str(err),
+}
             raise error.ConfigurationError(msg)
 
     def _fillDicts(self):
