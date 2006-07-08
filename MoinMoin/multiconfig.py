@@ -76,7 +76,7 @@ Missing required 'wikis' list in 'farmconfig.py'.
 If you run a single wiki you do not need farmconfig.py. Delete it and
 use wikiconfig.py.
 """
-                raise error.ConfigurationError(msg)    
+                raise error.ConfigurationError(msg)
     return _url_re_cache
 
 
@@ -149,7 +149,7 @@ Check your URL regular expressions in the "wikis" list in
 ''' % {
     'url': url,
 }
-    raise error.ConfigurationError(msg)    
+    raise error.ConfigurationError(msg)
 
 
 def getConfig(url):
@@ -179,18 +179,18 @@ def _(text): return text
 
 class DefaultConfig:
     """ default config values """
-    
+
     # All acl_rights_* lines must use unicode!
     acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
     acl_rights_before = u""
     acl_rights_after = u""
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
-    
+
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
     allow_xslt = 0
     attachments = None # {'dir': path, 'url': url-prefix}
-    auth = [authmodule.moin_login, authmodule.moin_session,]
-    
+    auth = [authmodule.moin_login, authmodule.moin_session, ]
+
     backup_compression = 'gz'
     backup_users = []
     backup_include = []
@@ -202,7 +202,7 @@ class DefaultConfig:
         ]
     backup_storage_dir = '/tmp'
     backup_restore_target_dir = '/tmp'
-    
+
     bang_meta = 1
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
@@ -212,27 +212,27 @@ class DefaultConfig:
     # if you have gdchart, add something like
     # chart_options = {'width = 720, 'height': 540}
     chart_options = None
-    
+
     config_check_enabled = 0
 
     cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
     cookie_lifetime = 12 # 12 hours from now
     cookie_secret = '1234' # secret value for crypting session cookie - you should change this :)
-    
+
     data_dir = './data/'
     data_underlay_dir = './underlay/'
-    
+
     date_fmt = '%Y-%m-%d'
     datetime_fmt = '%Y-%m-%d %H:%M:%S'
-    
+
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
-    
+
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
-    editor_quickhelp = { # editor markup hints quickhelp 
+    editor_quickhelp = {# editor markup hints quickhelp 
         'wiki': _("""\
  Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; [[Verbatim(----)]] horizontal rule.
  Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title 2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim(=====)]].
@@ -264,7 +264,7 @@ reStructuredText Quick Reference
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
     edit_rows = 20
-                
+
     hacks = {} # { 'feature1': value1, ... }
                # Configuration for features still in development.
                # For boolean stuff just use config like this:
@@ -274,7 +274,7 @@ reStructuredText Quick Reference
                # A non-existing hack key should ever mean False, None, "", [] or {}!
 
     hosts_deny = []
-    
+
     html_head = ''
     html_head_queries = '''<meta name="robots" content="noindex,nofollow">\n'''
     html_head_posts   = '''<meta name="robots" content="noindex,nofollow">\n'''
@@ -303,7 +303,7 @@ reStructuredText Quick Reference
     mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
     mail_import_wiki_address = None # the e-mail address for e-mails that should go into the wiki
     mail_import_secret = ""
-    
+
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = 0
 
@@ -317,7 +317,7 @@ reStructuredText Quick Reference
 
     page_header1 = ''
     page_header2 = ''
-    
+
     page_front_page = u'HelpOnLanguages' # this will make people choose a sane config
     page_local_spelling_words = u'LocalSpellingWords'
     page_category_regex = u'^Category[A-Z]'
@@ -331,7 +331,7 @@ reStructuredText Quick Reference
     # These icons will show in this order in the iconbar, unless they
     # are not relevant, e.g email icon when the wiki is not configured
     # for email.
-    page_iconbar = ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print",]
+    page_iconbar = ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ]
 
     # Standard buttons in the iconbar
     page_icons_table = {
@@ -349,7 +349,7 @@ reStructuredText Quick Reference
         'view':        ("%(q_page_name)s", _("View"), "view"),
         'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
         }
-    
+
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
@@ -363,8 +363,8 @@ reStructuredText Quick Reference
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
     superuser = [] # list of unicode user names that have super powers :)
-    
-    surge_action_limits = { # allow max. <count> <action> requests per <dt> secs
+
+    surge_action_limits = {# allow max. <count> <action> requests per <dt> secs
         # action: (count, dt)
         'all': (30, 30),
         'show': (30, 60),
@@ -378,13 +378,13 @@ reStructuredText Quick Reference
         'default': (30, 60),
     }
     surge_lockout_time = 3600 # secs you get locked out when you ignore warnings
-    
+
     theme_default = 'modern'
     theme_force = False
-    
+
     trail_size = 5
     tz_offset = 0.0 # default time zone offset in hours from UTC
-    
+
     user_autocreate = False # do we auto-create user profiles
     user_email_unique = True # do we check whether a user's email is unique?
 
@@ -399,7 +399,7 @@ reStructuredText Quick Reference
     url_prefix = '/wiki'
     logo_string = None
     interwikiname = None
-    
+
     url_mappings = {}
 
     user_checkbox_fields = [
@@ -414,13 +414,13 @@ reStructuredText Quick Reference
         ('wikiname_add_spaces', lambda _: _('Add spaces to displayed wiki names')),
         ('remember_me', lambda _: _('Remember login information')),
         ('want_trivial', lambda _: _('Subscribe to trivial changes')),
-        
+
         ('disabled', lambda _: _('Disable this account forever')),
         # if an account is disabled, it may be used for looking up
         # id -> username for page info and recent changes, but it
         # is not usable for the user any more:
     ]
-    
+
     user_checkbox_defaults = {'mailto_author':       0,
                               'edit_on_doubleclick': 0,
                               'remember_last_visit': 0,
@@ -433,16 +433,16 @@ reStructuredText Quick Reference
                               'remember_me':         1,
                               'want_trivial':        0,
                              }
-    
+
     # don't let the user change those
     # user_checkbox_disable = ['disabled', 'want_trivial']
     user_checkbox_disable = []
-    
+
     # remove those checkboxes:
     #user_checkbox_remove = ['edit_on_doubleclick', 'show_nonexist_qm', 'show_toolbar', 'show_topbottom',
     #                        'show_fancy_diff', 'wikiname_add_spaces', 'remember_me', 'disabled',]
     user_checkbox_remove = []
-    
+
     user_form_fields = [
         ('name', _('Name'), "text", "36", _("(Use Firstname''''''Lastname)")),
         ('aliasname', _('Alias-Name'), "text", "36", ''),
@@ -452,8 +452,8 @@ reStructuredText Quick Reference
         ('css_url', _('User CSS URL'), "text", "40", _('(Leave it empty for disabling user CSS)')),
         ('edit_rows', _('Editor size'), "text", "3", ''),
     ]
-    
-    user_form_defaults = { # key: default - do NOT remove keys from here!
+
+    user_form_defaults = {# key: default - do NOT remove keys from here!
         'name': '',
         'aliasname': '',
         'password': '',
@@ -462,17 +462,17 @@ reStructuredText Quick Reference
         'css_url': '',
         'edit_rows': "20",
     }
-    
+
     # don't let the user change those, but show them:
     #user_form_disable = ['name', 'aliasname', 'email',]
     user_form_disable = []
-    
+
     # remove those completely:
     #user_form_remove = ['password', 'password2', 'css_url', 'logout', 'create', 'account_sendmail',]
     user_form_remove = []
-    
+
     # attributes we do NOT save to the userpref file
-    user_transient_fields =  ['id', 'valid', 'may', 'auth_username', 'trusted', 'password', 'password2', 'auth_method', 'auth_attribs']
+    user_transient_fields = ['id', 'valid', 'may', 'auth_username', 'trusted', 'password', 'password2', 'auth_method', 'auth_attribs', ]
 
     user_homewiki = 'Self' # interwiki name for where user homepages are located
 
@@ -482,7 +482,7 @@ reStructuredText Quick Reference
 
     xmlrpc_putpage_enabled = 0 # if 0, putpage will write to a test page only
     xmlrpc_putpage_trusted_only = 1 # if 1, you will need to be http auth authenticated
-    
+
     SecurityPolicy = None
 
     def __init__(self, siteid):
@@ -510,12 +510,12 @@ reStructuredText Quick Reference
                      (e.g. ['Sample User', 'AnotherUser']).
                      Please change it in your wiki configuration and try again."""
             raise error.ConfigurationError(msg)
-        
+
         self._loadPluginModule()
 
         # Preparse user dicts
         self._fillDicts()
-        
+
         # Normalize values
         self.language_default = self.language_default.lower()
 
@@ -534,7 +534,7 @@ reStructuredText Quick Reference
                 import gdchart
             except ImportError:
                 self.chart_options = None
-        
+
         # post process
         # we replace any string placeholders with config values
         # e.g u'%(page_front_page)s' % self
@@ -555,9 +555,9 @@ reStructuredText Quick Reference
 
         This check is disabled by default, when enabled, it will show an
         error message with unknown names.
-        """       
+        """
         unknown = ['"%s"' % name for name in dir(self)
-                  if not name.startswith('_') and 
+                  if not name.startswith('_') and
                   not DefaultConfig.__dict__.has_key(name) and
                   not isinstance(getattr(self, name), (type(sys), type(DefaultConfig)))]
         if unknown:
@@ -591,22 +591,22 @@ unicode. Use %(name)s = u"value" syntax for unicode variables.
 Also check your "-*- coding -*-" line at the top of your configuration
 file. It should match the actual charset of the configuration file.
 '''
-        
+
         decode_names = (
             'sitename', 'logo_string', 'navi_bar', 'page_front_page',
-            'page_category_regex', 'page_dict_regex', 
+            'page_category_regex', 'page_dict_regex',
             'page_group_regex', 'page_template_regex', 'page_license_page',
             'page_local_spelling_words', 'acl_rights_default',
             'acl_rights_before', 'acl_rights_after', 'mail_from'
             )
-        
+
         for name in decode_names:
             attr = getattr(self, name, None)
             if attr:
                 # Try to decode strings
                 if isinstance(attr, str):
                     try:
-                        setattr(self, name, unicode(attr, charset)) 
+                        setattr(self, name, unicode(attr, charset))
                     except UnicodeError:
                         raise error.ConfigurationError(message %
                                                        {'name': name})
@@ -630,7 +630,7 @@ file. It should match the actual charset of the configuration file.
         mode = os.F_OK | os.R_OK | os.W_OK | os.X_OK
         for attr in ('data_dir', 'data_underlay_dir'):
             path = getattr(self, attr)
-            
+
             # allow an empty underlay path or None
             if attr == 'data_underlay_dir' and not path:
                 continue
@@ -647,7 +647,7 @@ and group.
 
 It is recommended to use absolute paths and not relative paths. Check
 also the spelling of the directory name.
-''' % {'attr': attr, 'path': path,}
+''' % {'attr': attr, 'path': path, }
                 raise error.ConfigurationError(msg)
 
     def _loadPluginModule(self):
@@ -709,7 +709,7 @@ that the data/plugin directory has an __init__.py file.
     def __getitem__(self, item):
         """ Make it possible to access a config object like a dict """
         return getattr(self, item)
-    
+
 # remove the gettext pseudo function 
 del _
 
