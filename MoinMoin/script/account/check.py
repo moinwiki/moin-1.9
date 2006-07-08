@@ -58,7 +58,7 @@
 # if a user subsribes to magicpages, it means that he wants to keep
 # exactly THIS account - this will avoid deleting it.
 magicpages = [
-    "ThisAccountIsCorrect", 
+    "ThisAccountIsCorrect",
     "DieserAccountIstRichtig",
 ]
 
@@ -111,28 +111,28 @@ class PluginScript(MoinScript):
         for uid in user.getUserList(request):
             u = user.User(request, uid)
             self.users[uid] = u
-    
+
             # collect name duplicates:
             if u.name in self.names:
                 self.names[u.name].append(uid)
             else:
                 self.names[u.name] = [uid]
-    
+
             # collect email duplicates:
             if u.email:
                 if u.email in self.emails:
                     self.emails[u.email].append(uid)
                 else:
                     self.emails[u.email] = [uid]
-    
+
             # collect account with no or invalid email address set:
             if not u.email or not re.match(".*@.*\..*", u.email):
                 self.uids_noemail[uid] = u.name
-    
+
     def hasmagicpage(self, uid):
         u = self.users[uid]
         return u.isSubscribedTo(magicpages)
-    
+
     def disableUser(self, uid):
         u = self.users[uid]
         print " %-20s %-30r %-35r" % (uid, u.name, u.email),
@@ -151,7 +151,7 @@ class PluginScript(MoinScript):
                 print "- disabled."
             else:
                 print "- would be disabled."
-    
+
     def getsortvalue(self, uid, user):
         t_ls = float(user.last_saved) # when user did last SAVE of his account data
         if self.options.lastsaved:
@@ -162,7 +162,7 @@ class PluginScript(MoinScript):
             except OSError:
                 t_lu = t_ls # better than having nothing
             return t_lu
-    
+
     def process(self, uidlist):
         sortlist = []
         for uid in uidlist:
@@ -177,17 +177,17 @@ class PluginScript(MoinScript):
         uid = sortlist[-1][1]
         u = self.users[uid]
         print " %-20s %-30r %-35r - keeping%s!" % (uid, u.name, u.email, self.hasmagicpage(uid) and " (magicpage)" or "")
-    
+
     def make_users_unique(self):
         for name, uids in self.names.items():
             if len(uids) > 1:
                 self.process(uids)
-    
+
     def make_emails_unique(self):
         for email, uids in self.emails.items():
             if len(uids) > 1:
                 self.process(uids)
-    
+
     def make_WikiNames(self):
         import string
         for uid, u in self.users.items():
@@ -223,8 +223,8 @@ class PluginScript(MoinScript):
             self.parser.error("incorrect number of arguments")
 
         # check for correct option combination
-        flags_given = (self.options.usersunique 
-                    or self.options.emailsunique 
+        flags_given = (self.options.usersunique
+                    or self.options.emailsunique
                     or self.options.wikinames
                     or self.options.removepasswords)
 
@@ -243,7 +243,7 @@ class PluginScript(MoinScript):
         self.collect_data()
         if self.options.usersunique:
             self.make_users_unique()
-        if self.options.emailsunique: 
+        if self.options.emailsunique:
             self.make_emails_unique()
         if self.options.wikinames:
             self.make_WikiNames()
