@@ -244,6 +244,9 @@ def clean_comment(comment):
     """ Clean comment - replace CR, LF, TAB by whitespace, delete control chars
         TODO: move this to config, create on first call then return cached.
     """
+    # we only have input fields with max 200 chars, but spammers send us more
+    if len(comment) > 201:
+        comment = u''
     remap_chars = {
         ord(u'\t'): u' ',
         ord(u'\r'): u' ',
