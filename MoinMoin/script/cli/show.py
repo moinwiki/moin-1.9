@@ -15,7 +15,7 @@ class PluginScript(MoinScript):
 
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
-    
+
     def mainloop(self):
         self.init_request()
         self.request.run()

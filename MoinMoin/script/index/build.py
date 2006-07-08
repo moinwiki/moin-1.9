@@ -24,7 +24,7 @@ class IndexScript(MoinScript):
             "--mode", metavar="MODE", dest="mode",
             help="either add (unconditionally add to index) or update (update an existing index)"
         )
-    
+
     def mainloop(self):
         self.init_request()
         # Do we have additional files to index?

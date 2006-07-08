@@ -31,7 +31,7 @@ class PluginScript(MoinScript):
             "--all", action="store_true", dest="all_wikis",
             help="when given, update all wikis that belong to this farm"
         )
-    
+
     def mainloop(self):
         self.init_request()
         request = self.request

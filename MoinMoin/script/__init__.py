@@ -70,12 +70,12 @@ class Script:
         if def_values:
             self.parser.set_defaults(**def_values.__dict__)
         self.parser.add_option(
-            "-q", "--quiet", 
+            "-q", "--quiet",
             action="store_true", dest="quiet",
             help="Be quiet (no informational messages)"
         )
         self.parser.add_option(
-            "--show-timing", 
+            "--show-timing",
             action="store_true", dest="show_timing", default=False,
             help="Show timing values [default: %default]"
         )
@@ -122,7 +122,7 @@ class MoinScript(Script):
             "--page", dest="page", default='',
             help="wiki page name [default: %default]"
         )
-    
+
     def init_request(self):
         """ create request """
         from MoinMoin.request import CLI
@@ -130,7 +130,7 @@ class MoinScript(Script):
             self.request = CLI.Request(self.options.wiki_url, self.options.page)
         else:
             self.request = CLI.Request(pagename=self.options.page)
-        
+
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir

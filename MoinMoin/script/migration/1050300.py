@@ -16,13 +16,13 @@ def execute(script, data_dir, rev):
         makedir(thisdir)
         fname = opj(thisdir, '__init__.py')
         f = open(fname, 'w')
-        f.write('''\
+        f.write("""\
 # -*- coding: iso-8859-1 -*-
 
 from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
-''')
+""")
         f.close()
-    return rev+1
+    return rev + 1
 
