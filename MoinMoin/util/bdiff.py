@@ -12,7 +12,7 @@
 import zlib, difflib, struct
 
 BDIFF_PATT = ">lll"
-BDIFF_PATT_SIZE = struct.calcsize(">lll")
+BDIFF_PATT_SIZE = struct.calcsize(BDIFF_PATT)
 
 def compress(text):
     return zlib.compress(text) # here we could tune the compression level
