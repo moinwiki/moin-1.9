@@ -518,7 +518,7 @@ class XmlRpcBase:
             self.request.user = u
             return "SUCCESS"
         else:
-            raise Exception("Invalid token.") # XXX make a distinct class
+            return xmlrpclib.Fault(1, "Invalid token.")
     
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         return "NOT_IMPLEMENTED_YET"
