@@ -64,7 +64,7 @@ class PackagePages:
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
             
-            
+            # ...
             self.sync(params)
         except ActionStatus, e:
             return self.page.send_page(self.request, msg=u'<p class="error">%s</p>\n' % (e.args[0], ))
