@@ -28,8 +28,8 @@ Dependencies = [] # this parser just depends on the raw text
 
 # --- make docutils safe by overriding all module-scoped names related to IO ---
 
-# TODO: Add an error message to dummyOpen so that the user knows what they did
-# requested an unsupported feature of docutils in MoinMoin.
+# TODO: Add an error message to dummyOpen so that the user knows that
+# they requested an unsupported feature of Docutils in MoinMoin.
 def dummyOpen(x, y=None, z=None): return
 
 class dummyIO(StringIO.StringIO):
@@ -70,7 +70,7 @@ except ImportError:
             _ = self.request.getText
             from MoinMoin.parser.text import Parser as TextParser
             self.request.write(formatter.sysmsg(1) +
-                               formatter.rawHTML(_('Rendering of reStructured text is not possible, ''please'' install docutils.')) +
+                               formatter.rawHTML(_('Rendering of reStructured text is not possible, please install Docutils.')) +
                                formatter.sysmsg(0))
             TextParser(self.raw, self.request).format(formatter)
     
@@ -165,7 +165,7 @@ class MoinWriter(html4css1.Writer):
                                  self)
         self.document.walkabout(visitor)
         self.visitor = visitor
-        # Docutils 0.5.0 and later require the writer to have the visitor 
+        # Docutils 0.5 and later require the writer to have the visitor 
         # attributes.
         if (hasattr(html4css1.Writer, 'visitor_attributes')):
             for attr in html4css1.Writer.visitor_attributes:
@@ -200,10 +200,12 @@ class Parser:
 
         html = []
         if parts['title']:
+            # Document title.
             html.append(formatter.rawHTML('<h1>%s</h1>' % parts['title']))
-        # If there is only one subtitle then it is held in parts['subtitle'].
-        # However, if there is more than one subtitle then this is empty and
-        # fragment contains all of the subtitles.
+        # If there is only one subtitle it is propagated by Docutils
+        # to a document subtitle and is held in parts['subtitle'].
+        # However, if there is more than one subtitle then this is
+        # empty and fragment contains all of the subtitles.
         if parts['subtitle']:
             html.append(formatter.rawHTML('<h2>%s</h2>' % parts['subtitle']))
         if parts['docinfo']:
@@ -379,7 +381,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['classes'].append(prefix)
             else:
                 # Default case - make a link to a wiki page.
-                page = MoinMoin.Page.Page(self.request, refuri)
+                page = Page(self.request, refuri)
                 node['refuri'] = page.url(self.request)
                 if not page.exists():
                     node['classes'].append('nonexistent')

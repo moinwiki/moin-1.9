@@ -15,12 +15,13 @@ if locking:
     from MoinMoin.util import lock
     
 class CacheEntry:
-    def __init__(self, request, arena, key, scope='page_or_wiki'):
+    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
         """ init a cache entry
             @param request: the request object
             @param arena: either a string or a page object, when we want to use
                           page local cache area
             @param key: under which key we access the cache content
+            @param lock: if there should be a lock, normally True
             @param scope: the scope where we are caching:
                           'item' - an item local cache
                           'wiki' - a wiki local cache
@@ -43,7 +44,8 @@ class CacheEntry:
             self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
             filesys.makeDirs(self.arena_dir)
         self.key = key
-        if locking:
+        self.locking = do_locking and locking
+        if self.locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.ReadLock(self.lock_dir, 60.0)
             self.wlock = lock.WriteLock(self.lock_dir, 60.0)
@@ -84,7 +86,7 @@ class CacheEntry:
 
     def copyto(self, filename):
         import shutil
-        if not locking or locking and self.wlock.acquire(1.0):
+        if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
                 shutil.copyfile(filename, self._filename())
                 try:
@@ -92,7 +94,7 @@ class CacheEntry:
                 except OSError:
                     pass
             finally:
-                if locking:
+                if self.locking:
                     self.wlock.release()
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
@@ -100,7 +102,7 @@ class CacheEntry:
     def update(self, content, encode=False):
         if encode:
             content = content.encode(config.charset)
-        if not locking or locking and self.wlock.acquire(1.0):
+        if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
                 f = open(self._filename(), 'wb')
                 f.write(content)
@@ -110,7 +112,7 @@ class CacheEntry:
                 except OSError:
                     pass
             finally:
-                if locking:
+                if self.locking:
                     self.wlock.release()
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
@@ -122,13 +124,13 @@ class CacheEntry:
             pass
 
     def content(self, decode=False):
-        if not locking or locking and self.rlock.acquire(1.0):
+        if not self.locking or self.locking and self.rlock.acquire(1.0):
             try:
                 f = open(self._filename(), 'rb')
                 data = f.read()
                 f.close()
             finally:
-                if locking:
+                if self.locking:
                     self.rlock.release()
         else:
             self.request.log("Can't acquire read lock in %s" % self.lock_dir)

@@ -206,7 +206,6 @@ only requiring a Python installation.
         'MoinMoin.filter',
         'MoinMoin.formatter',
         'MoinMoin.i18n',
-        'MoinMoin.i18n.mo',
         'MoinMoin.i18n.tools',
         'MoinMoin.logfile',
         'MoinMoin.macro',
@@ -245,7 +244,6 @@ only requiring a Python installation.
     'package_dir': { 'MoinMoin.i18n': 'MoinMoin/i18n', },
     'package_data': { 'MoinMoin.i18n': ['README', 'Makefile', 'MoinMoin.pot', 'POTFILES.in',
                                         '*.po',
-                                        'mo/*',
                                         'tools/*',], },
 
     # Override certain command classes with our own ones

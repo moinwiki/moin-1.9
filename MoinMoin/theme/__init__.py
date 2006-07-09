@@ -1690,14 +1690,13 @@ var gui_editor_link_text = "%(text)s";
         request.clock.stop('total')
 
         # Close html code
-        if not request.no_closing_html_code:
-            if (request.cfg.show_timings and
-                request.form.get('action', [None])[0] != 'print'):
-                request.write('<ul id="timings">\n')
-                for t in request.clock.dump():
-                    request.write('<li>%s</li>\n' % t)
-                request.write('</ul>\n')
-            #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
-            request.write('</body>\n</html>\n\n')
+        if (request.cfg.show_timings and
+            request.form.get('action', [None])[0] != 'print'):
+            request.write('<ul id="timings">\n')
+            for t in request.clock.dump():
+                request.write('<li>%s</li>\n' % t)
+            request.write('</ul>\n')
+        #request.write('<!-- auth_method == %s -->' % repr(request.user.auth_method))
+        request.write('</body>\n</html>\n\n')
 
 

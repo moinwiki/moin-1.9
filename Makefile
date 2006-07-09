@@ -78,6 +78,11 @@ test:
 	@python tests/maketestwiki.py
 	@python tests/runtests.py
 
+coverage:
+	@python tests/maketestwiki.py
+	@python -u -m trace --count --coverdir=cover --missing tests/runtests.py
+
+
 clean: clean-testwiki clean-pyc
 	rm -rf build
 

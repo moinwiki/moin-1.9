@@ -217,13 +217,6 @@ class Formatter(FormatterBase):
                 self.text('\n'.join(lines)) +
                 self._set_tag('parser', False))
 
-    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={}, returns_content=1):
-        content = parser[callback](*arg_list, **arg_dict)
-        if returns_content:
-            return content
-        else:
-            return ''
-
     def url(self, on, url='', css=None, **kw):
         kw['href'] = str(url)
         if css:

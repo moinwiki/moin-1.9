@@ -55,6 +55,14 @@ def mo_filename(request, language, domain):
     """
     return os.path.join(request.cfg.moinmoin_dir, 'i18n', 'mo', "%s.%s.mo" % (language, domain))
 
+def po_filename(request, language, domain):
+    """ we use MoinMoin/i18n/<language>[.<domain>].mo as filename for the PO file.
+    
+        TODO: later, when we have a farm scope plugin dir, we can also load
+              language data from there.
+    """
+    return os.path.join(request.cfg.moinmoin_dir, 'i18n', "%s.%s.po" % (language, domain))
+
 def i18n_init(request):
     """ this is called early from request initialization and makes sure we
         have metadata (like what languages are available, direction of language)
@@ -68,15 +76,17 @@ def i18n_init(request):
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n', 'mo')
         if meta_cache.needsUpdate(i18n_dir):
             _languages = {}
-            for mo_file in glob.glob(mo_filename(request, language='*', domain='MoinMoin')): # only MoinMoin domain for now XXX
-                language, domain, ext = os.path.basename(mo_file).split('.')
+            for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # only MoinMoin domain for now XXX
+                language, domain, ext = os.path.basename(lang_file).split('.')
                 t = Translation(language, domain)
-                t.load_mo(mo_file)
-                request.log("load translation %r" % language)
+                f = file(lang_file)
+                t.load_po(f)
+                f.close()
+                #request.log("load translation %r" % language)
                 encoding = 'utf-8'
                 _languages[language] = {}
                 for key, value in t.info.items():
-                    request.log("meta key %s value %r" % (key, value))
+                    #request.log("meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
             meta_cache.update(pickle.dumps(_languages))
 
@@ -97,18 +107,29 @@ class Translation(object):
     def __init__(self, language, domain='MoinMoin'):
         self.language = language
         self.domain = domain
-        
-    def load_mo(self, filename):
+
+    def load_po(self, f):
+        """ load the po file """
+        from StringIO import StringIO
+        from MoinMoin.i18n.msgfmt import MsgFmt
+        mf = MsgFmt()
+        mf.read_po(f.readlines())
+        mo_data = mf.generate_mo()
+        f = StringIO(mo_data)
+        self.load_mo(f)
+        f.close()
+
+    def load_mo(self, f):
         """ load the mo file, setup some attributes from metadata """
         # binary files have to be opened in the binary file mode!
-        self.translation = gettext.GNUTranslations(file(filename, "rb"))
+        self.translation = gettext.GNUTranslations(f)
         self.info = info = self.translation.info()
         self.name = info['x-language']
         self.ename = info['x-language-in-english']
         self.direction = info['x-direction']
         assert self.direction in ('ltr', 'rtl', )
         self.maintainer = info['last-translator']
-    
+
     def formatMarkup(self, request, text, currentStack=[]):
         """
         Formats the text passed according to wiki markup.
@@ -140,7 +161,7 @@ class Translation(object):
         formatter.setPage(p)
         parser.format(formatter)
         text = out.getvalue()
-        if reqformatter == None:
+        if reqformatter is None:
             del request.formatter
         else:
             request.formatter = reqformatter
@@ -151,7 +172,7 @@ class Translation(object):
 
     def loadLanguage(self, request):
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm')
-        langfilename = mo_filename(request, self.language, self.domain)
+        langfilename = po_filename(request, self.language, self.domain)
         needsupdate = cache.needsUpdate(langfilename)
         if debug:
             request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
@@ -164,7 +185,9 @@ class Translation(object):
                 needsupdate = 1
 
         if needsupdate:
-            self.load_mo(langfilename)
+            f = file(langfilename)
+            self.load_po(f)
+            f.close()
             trans = self.translation
             texts = trans._catalog
             has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
@@ -186,10 +209,10 @@ class Translation(object):
             if debug:
                 request.log("i18n: dumping lang %s" % lang)
             cache.update(pickle.dumps((uc_texts, uc_unformatted), PICKLE_PROTOCOL))
-        
+
         self.formatted = uc_texts
         self.raw = uc_unformatted
-        
+
 
 def getDirection(lang):
     """ Return the text direction for a language, either 'ltr' or 'rtl'. """
@@ -273,7 +296,7 @@ def requestLanguage(request):
                 if request.http_accept_language:
                     request.setHttpHeader('Vary: Accept-Language')
                 return lang
-    
+
     # Or return the wiki default language...
     if request.cfg.language_default in available:
         lang = request.cfg.language_default

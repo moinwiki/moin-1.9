@@ -21,25 +21,25 @@ class ImportNameFromMoinTestCase(unittest.TestCase):
     def testNonExistingModule(self):
         """ pysupport: import nonexistent module raises ImportError """
         self.assertRaises(ImportError, pysupport.importName,
-                          'MoinMoin.parser.abcdefghijkl','Parser')
+                          'MoinMoin.parser.abcdefghijkl', 'Parser')
 
     def testNonExistingAttribute(self):
         """ pysupport: import nonexistent attritbue raises AttributeError """
         self.assertRaises(AttributeError, pysupport.importName,
-                          'MoinMoin.parser.text_moin_wiki','NoSuchParser')
+                          'MoinMoin.parser.text_moin_wiki', 'NoSuchParser')
 
     def testExisting(self):
         """ pysupport: import name from existing module """
         from MoinMoin.parser import text_moin_wiki
         Parser = pysupport.importName('MoinMoin.parser.text_moin_wiki', 'Parser')
         self.failUnless(Parser is text_moin_wiki.Parser)
-   
+
 
 class ImportNameFromPlugin(unittest.TestCase):
     """ Base class for import plugin tests """
-    
+
     name = 'Parser'
-    
+
     def setUp(self):
         """ Check for valid plugin package """
         self.pluginDirectory = os.path.join(self.request.cfg.data_dir, 'plugin', 'parser')
@@ -60,7 +60,7 @@ class ImportNameFromPlugin(unittest.TestCase):
 
 
 class ImportNonExisiting(ImportNameFromPlugin):
-    
+
     plugin = 'NonExistingWikiPlugin'
 
     def testNonEsisting(self):
@@ -111,7 +111,7 @@ class Parser:
             file(self.pluginFilePath('.py'), 'w').write(data)
         except Exception, err:
             raise TestSkiped("Can't create test plugin: %s" % str(err))
-        
+
     def deleteTestPlugin(self):
         """ Delete plugin files ignoring missing files errors """
         if not self.shouldDeleteTestPlugin:
