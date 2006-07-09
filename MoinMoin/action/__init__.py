@@ -58,11 +58,11 @@ class ActionBase:
     def is_excluded(self):
         """ Return True if action is excluded """
         return self.actionname in self.cfg.actions_excluded
-    
+
     def is_allowed(self):
         """ Return True if action is allowed (by ACL) """
         return True
-    
+
     def check_condition(self):
         """ Check if some other condition is not allowing us to do that action,
             return error msg or None if there is no problem.
@@ -70,7 +70,7 @@ class ActionBase:
             You can use this to e.g. check if a page exists.
         """
         return None
-    
+
     def ticket_ok(self):
         """ Return True if we check for tickets and there is some valid ticket
             in the form data or if we don't check for tickets at all.
@@ -82,7 +82,7 @@ class ActionBase:
         # requiring two full HTTP transactions
         ticket = self.form.get('ticket', [''])[0]
         return wikiutil.checkTicket(ticket)
-    
+
     # UI ---------------------------------------------------------------------
     def get_form_html(self, buttons_html):
         """ Override this to assemble the inner part of the form,
@@ -117,12 +117,12 @@ class ActionBase:
         for button in buttons:
             buttons_html.append('<input type="submit" name="%s" value="%s">' % button)
         buttons_html = "".join(buttons_html)
-        
+
         if self.use_ticket:
             ticket_html = '<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket()
         else:
             ticket_html = ''
-            
+
         d = {
             'error_html': error_html,
             'actionname': self.actionname,
@@ -138,7 +138,7 @@ class ActionBase:
 %(ticket_html)s
 %(user_html)s
 </form>''' % d
-        
+
         return Dialog(self.request, content=form_html)
 
     def render_msg(self, msg):
@@ -152,7 +152,7 @@ class ActionBase:
     def render_cancel(self):
         """ Called when user has hit the cancel button """
         self.page.send_page(self.request) # we don't tell user he has hit cancel :)
-        
+
     def render(self):
         """ Render action - this is the main function called by action's
             execute() function.
@@ -161,7 +161,7 @@ class ActionBase:
         """
         _ = self._
         form = self.form
-        
+
         if form.has_key(self.form_cancel):
             self.render_cancel()
             return
@@ -286,7 +286,7 @@ def do_revert(pagename, request):
 
     if not request.user.may.revert(pagename):
         return Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to revert this page!'))
+            msg=_('You are not allowed to revert this page!'))
 
     rev = int(request.form['rev'][0])
     revstr = '%08d' % rev
@@ -309,16 +309,16 @@ def do_edit(pagename, request):
 
     if not request.user.may.write(pagename):
         Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to edit this page.'))
+            msg=_('You are not allowed to edit this page.'))
         return
 
-    valideditors = ['text', 'gui',]
+    valideditors = ['text', 'gui', ]
     editor = ''
     if request.user.valid:
         editor = request.user.editor_default
     if editor not in valideditors:
         editor = request.cfg.editor_default
-    
+
     editorparam = request.form.get('editor', [editor])[0]
     if editorparam == "guipossible":
         lasteditor = editor
@@ -333,7 +333,7 @@ def do_edit(pagename, request):
     # if it is still nothing valid, we just use the text editor
     if editor not in valideditors:
         editor = 'text'
-            
+
     savetext = request.form.get('savetext', [None])[0]
     rev = int(request.form.get('rev', ['0'])[0])
     comment = request.form.get('comment', [u''])[0]
@@ -359,7 +359,7 @@ def do_edit(pagename, request):
     if savetext is None:
         pg.sendEditor()
         return
-  
+
     # did user hit cancel button?
     cancelled = request.form.has_key('button_cancel')
 
@@ -368,7 +368,7 @@ def do_edit(pagename, request):
     try:
         if lasteditor == 'gui':
             savetext = convert(request, pagename, savetext)
-                
+
         # IMPORTANT: normalize text from the form. This should be done in
         # one place before we manipulate the text.
         savetext = pg.normalizeText(savetext, stripspaces=rstrip)
@@ -389,7 +389,7 @@ def do_edit(pagename, request):
     # things behind your back, and in general not needed. Either we have
     # a full interface for categories (add, delete) or just add them by
     # markup.
-    
+
     if category and category != _('<No addition>', formatted=False): # opera 8.5 needs this
         # strip trailing whitespace
         savetext = savetext.rstrip()
@@ -398,11 +398,11 @@ def do_edit(pagename, request):
         # non-categories.
         lines = filter(None, savetext.splitlines())
         if lines:
-            
+
             #TODO: this code is broken, will not work for extended links
             #categories, e.g ["category hebrew"]
             categories = lines[-1].split()
-            
+
             if categories:
                 confirmed = wikiutil.filterCategoryPages(request, categories)
                 if len(confirmed) < len(categories):
@@ -419,15 +419,15 @@ def do_edit(pagename, request):
         request.form.has_key('button_spellcheck') or
         request.form.has_key('button_newwords')):
         pg.sendEditor(preview=savetext, comment=comment)
-    
+
     # Preview with mode switch
     elif request.form.has_key('button_switch'):
         pg.sendEditor(preview=savetext, comment=comment, staytop=1)
-    
+
     # Save new text
     else:
         try:
-            still_conflict = "/!\ '''Edit conflict" in savetext
+            still_conflict = r"/!\ '''Edit conflict" in savetext
             pg.setConflict(still_conflict)
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:
@@ -440,7 +440,7 @@ def do_edit(pagename, request):
             # We don't send preview when we do merge conflict
             pg.sendEditor(msg=msg, comment=comment)
             return
-        
+
         except pg.SaveError, msg:
             # msg contain a unicode string
             savemsg = unicode(msg)
@@ -490,12 +490,12 @@ def do_diff(pagename, request):
             rev1 = int(request.form.get('rev', [-1])[0])
         except StandardError:
             rev1 = -1
- 
+
     # spacing flag?
     ignorews = int(request.form.get('ignorews', [0])[0])
 
     _ = request.getText
-    
+
     # get a list of old revisions, and back out if none are available
     currentpage = Page(request, pagename)
     revisions = currentpage.getRevList()
@@ -520,24 +520,24 @@ def do_diff(pagename, request):
 
     request.http_headers()
     request.theme.send_title(_('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
-  
+
     if rev1 > 0 and rev2 > 0 and rev1 > rev2 or rev1 == 0 and rev2 > 0:
         rev1, rev2 = rev2, rev1
-          
+
     oldrev1, oldcount1 = None, 0
     oldrev2, oldcount2 = None, 0
-    
+
     # get the filename of the version to compare to
     edit_count = 0
     for rev in revisions:
         edit_count += 1
-        if rev <= rev1: 
+        if rev <= rev1:
             oldrev1, oldcount1 = rev, edit_count
-        if rev2 and rev >= rev2: 
+        if rev2 and rev >= rev2:
             oldrev2, oldcount2 = rev, edit_count
         if oldrev1 and oldrev2 or oldrev1 and not rev2:
             break
-    
+
     if rev1 == -1:
         oldpage = Page(request, pagename, rev=revisions[1])
         oldcount1 -= 1
@@ -551,7 +551,7 @@ def do_diff(pagename, request):
             oldpage = Page(request, "$EmptyPage$") # hack
             oldpage.set_raw_body("")    # avoid loading from disk
             oldrev1 = 0 # XXX
-              
+
     if rev2 == 0:
         newpage = currentpage
         # oldcount2 is still on init value 0
@@ -562,7 +562,7 @@ def do_diff(pagename, request):
             newpage = Page(request, "$EmptyPage$") # hack
             newpage.set_raw_body("")    # avoid loading from disk
             oldrev2 = 0 # XXX
-    
+
     edit_count = abs(oldcount1 - oldcount2)
 
     # this should use the formatter, but there is none?
@@ -572,7 +572,7 @@ def do_diff(pagename, request):
     if edit_count > 1:
         request.write(' ' + _('(spanning %d versions)') % (edit_count,))
     request.write('</p>')
-  
+
     if request.user.show_fancy_diff:
         from MoinMoin.util.diff import diff
         request.write(diff(request, oldpage.get_raw_body(), newpage.get_raw_body()))
@@ -617,7 +617,7 @@ def do_info(pagename, request):
         _ = request.getText
 
         request.write('<h2>%s</h2>\n' % _('General Information'))
-        
+
         # show page size
         request.write(("<p>%s</p>" % _("Page size: %d")) % page.size())
 
@@ -635,7 +635,7 @@ def do_info(pagename, request):
             request.write(attachment_info(pagename, request))
 
         # show subscribers
-        subscribers = page.getSubscribers(request,  include_self=1, return_users=1)
+        subscribers = page.getSubscribers(request, include_self=1, return_users=1)
         if subscribers:
             request.write('<p>', _('The following users subscribed to this page:'))
             for lang in subscribers.keys():
@@ -668,7 +668,7 @@ def do_info(pagename, request):
         history.columns = [
             Column('rev', label='#', align='right'),
             Column('mtime', label=_('Date'), align='right'),
-            Column('size',  label=_('Size'), align='right'),
+            Column('size', label=_('Size'), align='right'),
             Column('diff', label='<input type="submit" value="%s">' % (_("Diff"))),
             Column('editor', label=_('Editor'), hidden=not request.cfg.show_names),
             Column('comment', label=_('Comment')),
@@ -680,14 +680,14 @@ def do_info(pagename, request):
         versions = len(revisions)
 
         may_revert = request.user.may.revert(pagename)
-        
+
         # read in the complete log of this page
         log = editlog.EditLog(request, rootpagename=pagename)
         count = 0
         for line in log.reverse():
             rev = int(line.rev)
             actions = ""
-            if line.action in ['SAVE','SAVENEW','SAVE/REVERT',]:
+            if line.action in ['SAVE', 'SAVENEW', 'SAVE/REVERT', ]:
                 size = page.size(rev=rev)
                 if count == 0: # latest page
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
@@ -714,21 +714,21 @@ def do_info(pagename, request):
                             text=_('revert'),
                             querystr='action=revert&rev=%d' % rev, rel='nofollow'))
                 if count == 0:
-                    rchecked=' checked="checked"'
+                    rchecked = ' checked="checked"'
                     lchecked = ''
                 elif count == 1:
-                    lchecked=' checked="checked"'
+                    lchecked = ' checked="checked"'
                     rchecked = ''
                 else:
                     lchecked = rchecked = ''
-                diff = '<input type="radio" name="rev1" value="%d"%s><input type="radio" name="rev2" value="%d"%s>' % (rev,lchecked,rev,rchecked)
+                diff = '<input type="radio" name="rev1" value="%d"%s><input type="radio" name="rev2" value="%d"%s>' % (rev, lchecked, rev, rchecked)
                 comment = line.comment
-                if not comment and line.action.find('/REVERT') != -1:
+                if not comment and '/REVERT' in line.action:
                         comment = _("Revert to revision %(rev)d.") % {'rev': int(line.extra)}
             else: # ATT*
                 rev = '-'
                 diff = '-'
-                
+
                 filename = wikiutil.url_unquote(line.extra)
                 comment = "%s: %s %s" % (line.action, filename, line.comment)
                 size = 0
@@ -748,7 +748,7 @@ def do_info(pagename, request):
                     elif line.action == 'ATTDRW':
                         actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                             text=_('edit'),
-                            querystr='action=AttachFile&drawing=%s' % filename.replace(".draw",""), rel='nofollow'))
+                            querystr='action=AttachFile&drawing=%s' % filename.replace(".draw", ""), rel='nofollow'))
 
                     actions = '%s&nbsp;%s' % (actions, page.link_to(request,
                         text=_('get'),
@@ -806,22 +806,22 @@ def do_info(pagename, request):
     # this will be automatically fixed.
     lang = page.language or request.cfg.language_default
     request.setContentLanguage(lang)
-    
+
     request.theme.send_title(_('Info for "%s"') % (title,), pagename=pagename)
 
-    historylink =  wikiutil.link_tag(request, '%s?action=info' % qpagename,
+    historylink = wikiutil.link_tag(request, '%s?action=info' % qpagename,
         _('Show "%(title)s"') % {'title': _('Revision History')}, request.formatter, rel='nofollow')
-    generallink =  wikiutil.link_tag(request, '%s?action=info&amp;general=1' % qpagename,
+    generallink = wikiutil.link_tag(request, '%s?action=info&amp;general=1' % qpagename,
         _('Show "%(title)s"') % {'title': _('General Page Infos')}, request.formatter, rel='nofollow')
     hitcountlink = wikiutil.link_tag(request, '%s?action=info&amp;hitcounts=1' % qpagename,
         _('Show chart "%(title)s"') % {'title': _('Page hits and edits')}, request.formatter, rel='nofollow')
-    
+
     request.write('<div id="content">\n') # start content div
     request.write("<p>[%s]  [%s]  [%s]</p>" % (historylink, generallink, hitcountlink))
 
     show_hitcounts = int(request.form.get('hitcounts', [0])[0]) != 0
     show_general = int(request.form.get('general', [0])[0]) != 0
-    
+
     if show_hitcounts:
         from MoinMoin.stats import hitcounts
         request.write(hitcounts.linkto(pagename, request, 'page=' + wikiutil.url_quote_plus(pagename)))
@@ -829,7 +829,7 @@ def do_info(pagename, request):
         general(page, pagename, request)
     else:
         history(page, pagename, request)
-        
+
     request.write('</div>\n') # end content div
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
@@ -843,10 +843,10 @@ def do_quicklink(pagename, request):
     msg = None
 
     if not request.user.valid:
-        msg = _("You must login to add a quicklink.")    
+        msg = _("You must login to add a quicklink.")
     elif request.user.isQuickLinkedTo([pagename]):
         if request.user.removeQuicklink(pagename):
-            msg = _('Your quicklink to this page has been removed.')            
+            msg = _('Your quicklink to this page has been removed.')
     else:
         if request.user.addQuicklink(pagename):
             msg = _('A quicklink to this page has been added for you.')
@@ -912,13 +912,13 @@ def do_bookmark(pagename, request):
                 tm = wikiutil.timestamp2version(time.time())
     else:
         tm = wikiutil.timestamp2version(time.time())
-  
+
     if tm is None:
         request.user.delBookmark()
     else:
         request.user.setBookmark(tm)
     Page(request, pagename).send_page(request)
-  
+
 
 #############################################################################
 ### Special Actions
@@ -930,22 +930,22 @@ def do_chart(pagename, request):
     if not request.user.may.read(pagename):
         msg = _("You are not allowed to view this page.")
         return request.page.send_page(request, msg=msg)
-    
+
     if not request.cfg.chart_options:
         msg = _("Charts are not available!")
         return request.page.send_page(request, msg=msg)
-    
+
     chart_type = request.form.get('type', [''])[0].strip()
     if not chart_type:
         msg = _('You need to provide a chart type!')
         return request.page.send_page(request, msg=msg)
-    
+
     try:
         func = pysupport.importName("MoinMoin.stats." + chart_type, 'draw')
     except (ImportError, AttributeError):
         msg = _('Bad chart type "%s"!') % chart_type
         return request.page.send_page(request, msg=msg)
-    
+
     func(pagename, request)
 
 def do_dumpform(pagename, request):
@@ -978,6 +978,6 @@ def getHandler(request, action, identifier="execute"):
         handler = wikiutil.importPlugin(request.cfg, "action", action, identifier)
     except wikiutil.PluginMissingError:
         handler = globals().get('do_' + action)
-        
+
     return handler
 

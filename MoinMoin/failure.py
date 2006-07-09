@@ -27,7 +27,7 @@ class View(cgitb.View):
     developers. This moin specific subclass is an example.
     """
     debugInfoID = 'debug-info'
-    
+
     def formatContent(self):
         content = (
             self.script(),
@@ -39,7 +39,7 @@ class View(cgitb.View):
             self.formatTextTraceback()
             )
         return ''.join(content)
-    
+
     def script(self):
         return '''
 <script type="text/javascript">
@@ -62,26 +62,26 @@ function toggleDebugInfo() {
         f = self.formatter
         text = [self.formatExceptionMessage(self.info),
                 f.paragraph("If you want to report a bug, please save "
-                            "this page and  attach it to your bug report."),]
+                            "this page and  attach it to your bug report."), ]
         return ''.join(text)
 
     def formatButtons(self):
         """ Add 'buttons' to the error dialog """
         f = self.formatter
-        buttons = [f.link('javascript:toggleDebugInfo()', 
+        buttons = [f.link('javascript:toggleDebugInfo()',
                           'Show debugging information'),
-                   f.link('http://moinmoin.wikiwikiweb.de/MoinMoinBugs', 
+                   f.link('http://moinmoin.wikiwikiweb.de/MoinMoinBugs',
                           'Report bug'),
-                   f.link('http://moinmoin.wikiwikiweb.de/FrontPage', 
-                          'Visit MoinMoin wiki'),]
+                   f.link('http://moinmoin.wikiwikiweb.de/FrontPage',
+                          'Visit MoinMoin wiki'), ]
         return f.list(buttons, {'class': 'buttons'})
-    
+
     def formatDebugInfo(self):
         """ Put debugging information in a hidden div """
         attributes = {'id': self.debugInfoID}
         info = [self.debugInfoHideScript(),
                 self.formatTraceback(),
-                self.formatSystemDetails(),]
+                self.formatSystemDetails(), ]
         return self.formatter.section(''.join(info), attributes)
 
     def debugInfoHideScript(self):
@@ -94,16 +94,16 @@ function toggleDebugInfo() {
 
     def formatTraceback(self):
         return self.formatAllTracebacks(self.formatOneTraceback)
-        
+
     def formatTextTraceback(self):
         template = self.textTracebackTemplate()
-        return template % self.formatAllTracebacks(self.formatOneTextTraceback)        
+        return template % self.formatAllTracebacks(self.formatOneTextTraceback)
 
     def formatAllTracebacks(self, formatFuction):
         """ Format multiple tracebacks using formatFunction """
         tracebacks = []
         for type, value, tb in self.exceptions():
-            if type is None: 
+            if type is None:
                 break
             tracebacks.append(formatFuction((type, value, tb)))
             del tb
@@ -145,10 +145,10 @@ def handle(request):
         request.write('<pre>\n')
         printTextException(request, savedError)
         request.write('\nAdditionally cgitb raised this exception:\n')
-        printTextException(request)        
+        printTextException(request)
         request.write('</pre>\n')
 
-        
+
 def printTextException(request, info=None):
     """ Simple text exception that should never fail
     

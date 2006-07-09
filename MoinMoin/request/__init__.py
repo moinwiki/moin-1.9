@@ -56,7 +56,7 @@ def cgiMetaVariable(header, scheme='http'):
     """
     var = '%s_%s' % (scheme, header)
     return var.upper().replace('-', '_')
-    
+
 
 # Request Base ----------------------------------------------------------
 
@@ -81,7 +81,7 @@ class RequestBase(object):
     # headers as lowercase.
     moin_location = 'x-moin-location'
     proxy_host = 'x-forwarded-host'
-    
+
     def __init__(self, properties={}):
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
@@ -92,13 +92,13 @@ class RequestBase(object):
 
         # Pages meta data that we collect in one request
         self.pages = {}
-              
+
         self.sent_headers = 0
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.page = None
         self._dicts = None
-        
+
         # Fix dircaching problems on Windows 9x
         if IsWin9x():
             import dircache
@@ -118,14 +118,14 @@ class RequestBase(object):
             # order is important here!
             self.__dict__.update(properties)
             self._load_multi_cfg()
-            
+
             self.isSpiderAgent = self.check_spider()
-        
+
             # Set decode charsets.  Input from the user is always in
             # config.charset, which is the page charsets. Except
             # path_info, which may use utf-8, and handled by decodePagename.
             self.decode_charsets = [config.charset]
-            
+
             # hierarchical wiki - set rootpage
             from MoinMoin.Page import Page
             #path = self.getPathinfo()
@@ -155,7 +155,7 @@ class RequestBase(object):
             i18n.i18n_init(self)
 
             self.user = self.get_user_from_form()
-            
+
             if not self.query_string.startswith('action=xmlrpc'):
                 if not self.forbidden and self.isForbidden():
                     self.makeForbidden403()
@@ -166,7 +166,7 @@ class RequestBase(object):
             self.pragma = {}
             self.mode_getpagelinks = 0
 
-            self.lang = i18n.requestLanguage(self) 
+            self.lang = i18n.requestLanguage(self)
             # Language for content. Page content should use the wiki default lang,
             # but generated content like search results should use the user language.
             self.content_lang = self.cfg.language_default
@@ -174,7 +174,7 @@ class RequestBase(object):
 
             self.opened_logs = 0
             self.reset()
-        
+
     def surge_protect(self):
         """ check if someone requesting too much from us """
         validuser = self.user.valid
@@ -182,14 +182,14 @@ class RequestBase(object):
         if not validuser and current_id.startswith('127.'): # localnet
             return False
         current_action = self.form.get('action', ['show'])[0]
-        
+
         limits = self.cfg.surge_action_limits
         default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
-        
+
         now = int(time.time())
         surgedict = {}
         surge_detected = False
-        
+
         try:
             # if we have common farm users, we could also use scope='farm':
             cache = caching.CacheEntry(self, 'surgeprotect', 'surge-log', scope='wiki')
@@ -207,7 +207,7 @@ class RequestBase(object):
                             timestamps.append((t, surge_indicator))
                     except StandardError, err:
                         pass
-                
+
             maxnum, dt = limits.get(current_action, default_limit)
             events = surgedict.setdefault(current_id, copy.copy({}))
             timestamps = events.setdefault(current_action, copy.copy([]))
@@ -218,20 +218,20 @@ class RequestBase(object):
             if surge_detected:
                 if len(timestamps) < maxnum * 2:
                     timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
-        
+
             if current_action != 'AttachFile': # don't add AttachFile accesses to all or picture galleries will trigger SP
                 current_action = 'all' # put a total limit on user's requests
                 maxnum, dt = limits.get(current_action, default_limit)
                 events = surgedict.setdefault(current_id, copy.copy({}))
                 timestamps = events.setdefault(current_action, copy.copy([]))
                 surge_detected = surge_detected or len(timestamps) > maxnum
-            
+
                 surge_indicator = surge_detected and "!" or ""
                 timestamps.append((now, surge_indicator))
                 if surge_detected:
                     if len(timestamps) < maxnum * 2:
                         timestamps.append((now + self.cfg.surge_lockout_time, surge_indicator)) # continue like that and get locked out
-        
+
             data = []
             for id, events in surgedict.items():
                 for action, timestamps in events.items():
@@ -242,8 +242,8 @@ class RequestBase(object):
         except StandardError, err:
             pass
 
-        return surge_detected   
-        
+        return surge_detected
+
     def getDicts(self):
         """ Lazy initialize the dicts on the first access """
         if self._dicts is None:
@@ -252,20 +252,20 @@ class RequestBase(object):
             dicts.scandicts()
             self._dicts = dicts
         return self._dicts
-        
+
     def delDicts(self):
         """ Delete the dicts, used by some tests """
         del self._dicts
         self._dicts = None
 
     dicts = property(getDicts, None, delDicts)
-  
+
     def _load_multi_cfg(self):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
             from MoinMoin import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
-            
+
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
 
@@ -276,7 +276,7 @@ class RequestBase(object):
         TODO: currently no code use this value.
 
         @param accept_charset: accept-charset header
-        """        
+        """
         charsets = []
         if accept_charset:
             accept_charset = accept_charset.lower()
@@ -293,13 +293,13 @@ class RequestBase(object):
                     qval = 1.0 - float(qval.split('=')[1])
                 else:
                     name, qval = item, 0
-                charsets.append((qval, name))                 
+                charsets.append((qval, name))
             charsets.sort()
             # Remove *, its not clear what we should do with it later
             charsets = [name for qval, name in charsets if name != '*']
 
         self.accepted_charsets = charsets
-          
+
     def _setup_vars_from_std_env(self, env):
         """ Set common request variables from CGI environment
         
@@ -324,14 +324,14 @@ class RequestBase(object):
 
         # REQUEST_URI is not part of CGI spec, but an addition of Apache.
         self.request_uri = env.get('REQUEST_URI', '')
-        
+
         # Values that need more work
         self.setHttpReferer(env.get('HTTP_REFERER'))
         self.setIsSSL(env)
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
         self.setURL(env)
-        
+
         ##self.debugEnvironment(env)
 
     def setHttpReferer(self, referer):
@@ -367,7 +367,7 @@ class RequestBase(object):
                 port = ':' + self.server_port
             host = self.server_name + port
         self.http_host = host
-        
+
     def fixURI(self, env):
         """ Fix problems with script_name and path_info
         
@@ -385,12 +385,12 @@ class RequestBase(object):
                                       - := Hopefully not.
 
         @param env: dict like object containing cgi meta variables
-        """ 
+        """
         # Fix the script_name when using Apache on Windows.
         server_software = env.get('SERVER_SOFTWARE', '')
         if os.name == 'nt' and server_software.find('Apache/') != -1:
             # Removes elements ending in '.' from the path.
-            self.script_name = '/'.join([x for x in self.script_name.split('/') 
+            self.script_name = '/'.join([x for x in self.script_name.split('/')
                                          if not x.endswith('.')])
 
         # Fix path_info
@@ -398,13 +398,13 @@ class RequestBase(object):
             # Try to recreate path_info from request_uri.
             import urlparse
             scriptAndPath = urlparse.urlparse(self.request_uri)[2]
-            path = scriptAndPath.replace(self.script_name, '', 1)            
+            path = scriptAndPath.replace(self.script_name, '', 1)
             self.path_info = wikiutil.url_unquote(path, want_unicode=False)
         elif os.name == 'nt':
             # Recode path_info to utf-8
             path = wikiutil.decodeWindowsPath(self.path_info)
             self.path_info = path.encode("utf-8")
-            
+
             # Fix bug in IIS/4.0 when path_info contain script_name
             if self.path_info.startswith(self.script_name):
                 self.path_info = self.path_info[len(self.script_name):]
@@ -421,7 +421,7 @@ class RequestBase(object):
         # Same for the wiki config - they must use the proxy url.
         self.rewriteHost(env)
         self.rewriteURI(env)
-        
+
         if not self.request_uri:
             self.request_uri = self.makeURI()
         self.url = self.http_host + self.request_uri
@@ -464,15 +464,15 @@ class RequestBase(object):
         
         @param env: dict like object containing cgi meta variables or http headers.
         """
-        location = (env.get(self.moin_location) or 
+        location = (env.get(self.moin_location) or
                     env.get(cgiMetaVariable(self.moin_location)))
         if location is None:
             return
-        
+
         scriptAndPath = self.script_name + self.path_info
         location = location.rstrip('/')
         self.script_name = location
-        
+
         # This may happen when using mod_python
         if scriptAndPath.startswith(location):
             self.path_info = scriptAndPath[len(location):]
@@ -497,7 +497,7 @@ class RequestBase(object):
             path, query = uri.split('?', 1)
         else:
             path, query = uri, ''
-        return wikiutil.url_unquote(path, want_unicode=False), query        
+        return wikiutil.url_unquote(path, want_unicode=False), query
 
     def get_user_from_form(self):
         """ read the maybe present UserPreferences form and call get_user with the values """
@@ -509,7 +509,7 @@ class RequestBase(object):
                                           login=login, logout=logout,
                                           user_obj=None)
         return u
-    
+
     def get_user_default_unknown(self, **kw):
         """ call do_auth and if it doesnt return a user object, make some "Unknown User" """
         user_obj = self.get_user_default_None(**kw)
@@ -530,7 +530,7 @@ class RequestBase(object):
             if not continue_flag:
                 break
         return user_obj
-        
+
     def reset(self):
         """ Reset request state.
 
@@ -569,7 +569,7 @@ class RequestBase(object):
         fallback = 0
         if theme_name == "<default>":
             theme_name = self.cfg.theme_default
-        
+
         try:
             Theme = wikiutil.importPlugin(self.cfg, 'theme', theme_name, 'Theme')
         except wikiutil.PluginMissingError:
@@ -579,7 +579,7 @@ class RequestBase(object):
             except wikiutil.PluginMissingError:
                 fallback = 2
                 from MoinMoin.theme.modern import Theme
-        
+
         self.theme = Theme(self)
         return fallback
 
@@ -628,7 +628,7 @@ class RequestBase(object):
         pagename = self.decodePagename(pagename)
         pagename = self.normalizePagename(pagename)
         return pagename
-    
+
     def getKnownActions(self):
         """ Create a dict of avaiable actions
 
@@ -649,14 +649,14 @@ class RequestBase(object):
             actions.extend(plugins)
 
             # Add extensions
-            actions.extend(action.extension_actions)           
-           
+            actions.extend(action.extension_actions)
+
             # TODO: Use set when we require Python 2.3
-            actions = dict(zip(actions, [''] * len(actions)))            
+            actions = dict(zip(actions, [''] * len(actions)))
             self.cfg._known_actions = actions
 
         # Return a copy, so clients will not change the dict.
-        return self.cfg._known_actions.copy()        
+        return self.cfg._known_actions.copy()
 
     def getAvailableActions(self, page):
         """ Get list of avaiable actions for this request
@@ -683,7 +683,7 @@ class RequestBase(object):
             # Filter wiki excluded actions
             for key in self.cfg.actions_excluded:
                 if key in actions:
-                    del actions[key]                
+                    del actions[key]
 
             # Filter actions by page type, acl and user state
             excluded = []
@@ -695,7 +695,7 @@ class RequestBase(object):
                 excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
             for key in excluded:
                 if key in actions:
-                    del actions[key]                
+                    del actions[key]
 
             self._available_actions = actions
 
@@ -711,7 +711,7 @@ class RequestBase(object):
         finally:
             self.redirect()
         text = buffer.getvalue()
-        buffer.close()        
+        buffer.close()
         return text
 
     def redirect(self, file=None):
@@ -740,7 +740,7 @@ class RequestBase(object):
         # Add time stamp
         msg = '[%s] %s\n' % (time.asctime(), msg)
         sys.stderr.write(msg)
-    
+
     def write(self, *data):
         """ Write to output stream. """
         raise NotImplementedError
@@ -754,12 +754,12 @@ class RequestBase(object):
             try:
                 if isinstance(d, unicode):
                     # if we are REALLY sure, we can use "strict"
-                    d = d.encode(config.charset, 'replace') 
+                    d = d.encode(config.charset, 'replace')
                 wd.append(d)
             except UnicodeError:
-                print >>sys.stderr, "Unicode error on: %s" % repr(d)
+                self.log("Unicode error on: %s" % repr(d))
         return ''.join(wd)
-    
+
     def decodePagename(self, name):
         """ Decode path, possibly using non ascii characters
 
@@ -790,7 +790,7 @@ class RequestBase(object):
                     page = page.encode(config.charset, 'replace')
                 except UnicodeError:
                     pass
-                
+
             # Decode from config.charset, replacing what can't be decoded.
             page = unicode(page, config.charset, 'replace')
             decoded.append(page)
@@ -818,7 +818,7 @@ class RequestBase(object):
         # Split to pages and normalize each one
         pages = name.split(u'/')
         normalized = []
-        for page in pages:            
+        for page in pages:
             # Ignore empty or whitespace only pages
             if not page or page.isspace():
                 continue
@@ -833,13 +833,13 @@ class RequestBase(object):
             # words separated with only one space. Split handle all
             # 30 unicode spaces (isspace() == True)
             page = u' '.join(page.split())
-            
-            normalized.append(page)            
-        
+
+            normalized.append(page)
+
         # Assemble components into full pagename
         name = u'/'.join(normalized)
         return name
-        
+
     def read(self, n):
         """ Read n bytes from input stream. """
         raise NotImplementedError
@@ -928,9 +928,9 @@ class RequestBase(object):
                 fixedResult.append(item.value)
                 if isinstance(item, cgi.FieldStorage) and item.filename:
                     # Save upload file name in a separate key
-                    args[key + '__filename__'] = item.filename            
+                    args[key + '__filename__'] = item.filename
             args[key] = fixedResult
-            
+
         return self.decodeArgs(args)
 
     def decodeArgs(self, args):
@@ -1008,7 +1008,7 @@ class RequestBase(object):
         else:
             theme_name = self.user.theme_name
         self.loadTheme(theme_name)
-        
+
     def run(self):
         # Exit now if __init__ failed or request is forbidden
         if self.failed or self.forbidden:
@@ -1028,7 +1028,7 @@ class RequestBase(object):
             from MoinMoin import xmlrpc
             xmlrpc.xmlrpc(self)
             return self.finish()
-        
+
         if self.query_string == 'action=xmlrpc2':
             from MoinMoin import xmlrpc
             xmlrpc.xmlrpc2(self)
@@ -1037,8 +1037,8 @@ class RequestBase(object):
         # parse request data
         try:
             self.initTheme()
-            
-            action_name = self.form.get('action', [None])[0]
+
+            action_name = self.form.get('action', ['show'])[0]
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
@@ -1048,7 +1048,6 @@ class RequestBase(object):
                 pagename = None
 
             # Handle request. We have these options:
-            
             # 1. If user has a bad user name, delete its bad cookie and
             # send him to UserPreferences to make a new account.
             if not user.isValidName(self, self.user.name):
@@ -1060,12 +1059,12 @@ space between words. Group page name is not allowed.""") % self.user.name
                 page.send_page(self, msg=msg)
 
             # 2. Or jump to page where user left off
-            elif not pagename and not action_name and self.user.remember_last_visit:
+            elif not pagename and self.user.remember_last_visit:
                 pagetrail = self.user.getTrail()
                 if pagetrail:
                     # Redirect to last page visited
                     if ":" in pagetrail[-1]:
-                        wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1]) 
+                        wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1])
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
                         url = Page(self, pagetrail[-1]).url(self)
@@ -1074,11 +1073,9 @@ space between words. Group page name is not allowed.""") % self.user.name
                     url = wikiutil.getFrontPage(self).url(self)
                 self.http_redirect(url)
                 return self.finish()
-            
+
             # 3. Or handle action
             else:
-                if action_name is None:
-                    action_name = 'show'
                 if not pagename and self.query_string:
                     pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
@@ -1146,9 +1143,9 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.failed = 1 # save state for self.run()            
         self.http_headers(['Status: 500 MoinMoin Internal Error'])
         self.setResponseCode(500)
-        self.log('%s: %s' % (err.__class__.__name__, str(err)))        
+        self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
-        failure.handle(self)             
+        failure.handle(self)
 
     def open_logs(self):
         pass
@@ -1206,10 +1203,10 @@ space between words. Group page name is not allowed.""") % self.user.name
             date = '%02d-%s-%s' % (now.tm_mday, month, str(now.tm_year)[-2:])
         else:
             raise ValueError("Invalid rfc value: %s" % rfc)
-        
+
         return '%s, %s %02d:%02d:%02d GMT' % (day, date, now.tm_hour,
                                               now.tm_min, now.tm_sec)
-    
+
     def disableHttpCaching(self):
         """ Prevent caching of pages that should not be cached
 
@@ -1227,7 +1224,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         # and http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.9
         self.setHttpHeader('Cache-Control: no-cache="set-cookie"')
         self.setHttpHeader('Cache-Control: private')
-        self.setHttpHeader('Cache-Control: max-age=0')       
+        self.setHttpHeader('Cache-Control: max-age=0')
 
         # Set Expires for http 1.0 caches (does not support Cache-Control)
         yearago = time.time() - (3600 * 24 * 365)
@@ -1276,18 +1273,18 @@ space between words. Group page name is not allowed.""") % self.user.name
         for name in names:
             attributes.append('  %s = %r\n' % (name, getattr(self, name, None)))
         attributes = ''.join(attributes)
-        
+
         environment = []
         names = env.keys()
         names.sort()
         for key in names:
             environment.append('  %s = %r\n' % (key, env[key]))
         environment = ''.join(environment)
-        
-        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)        
+
+        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)
         f = open('/tmp/env.log', 'a')
         try:
             f.write(data)
         finally:
             f.close()
-  
+

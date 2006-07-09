@@ -50,7 +50,7 @@ class PluginScript(MoinScript):
             "--file-dir", dest="file_dir", default='.',
             help="read files from DIRECTORY"
         )
-    
+
     def mainloop(self):
         self.init_request()
         request = self.request

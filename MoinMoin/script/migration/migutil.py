@@ -44,7 +44,7 @@ def backup(src, dst):
     except OSError:
         fatalError("can't create '%s'" % src)
 
-    
+
 def listdir(path):
     """ Return list of files in path, filtering certain files """
     names = [name for name in os.listdir(path)
@@ -76,8 +76,8 @@ def copy_file(fname_from, fname_to):
     try:
         data = open(fname_from).read()
         open(fname_to, "w").write(data)
-        st=os.stat(fname_from)
-        os.utime(fname_to, (st.st_atime,st.st_mtime))
+        st = os.stat(fname_from)
+        os.utime(fname_to, (st.st_atime, st.st_mtime))
     except:
         error("can't copy '%s' to '%s'" % (fname_from, fname_to))
 
@@ -109,3 +109,4 @@ def copy(items, srcdir, dstdir):
             copy_file(src, dst)
         else:
             error("can't find '%s'" % src)
+

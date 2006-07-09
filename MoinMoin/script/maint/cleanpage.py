@@ -15,7 +15,7 @@ from MoinMoin.script import MoinScript
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
-    
+
     def qualify(self, p):
         """ look at page directory p and return its state """
         dir = os.listdir(p)
@@ -32,7 +32,7 @@ class PluginScript(MoinScript):
 
         if not revs and not atts:
             return 'trash'
-        
+
         if 'current-locked' in dir:
             return 'current-locked'
         elif 'current' in dir:
@@ -56,9 +56,9 @@ class PluginScript(MoinScript):
             pagedir = os.path.join(pagesdir, p)
             status = self.qualify(pagedir)
             if status in ['trash', 'empty', ]:
-                print "mv '%s' trash # %s" % (pagedir,status)
+                print "mv '%s' trash # %s" % (pagedir, status)
             elif status in ['deleted', ]:
-                print "mv '%s' deleted # %s" % (pagedir,status)
+                print "mv '%s' deleted # %s" % (pagedir, status)
             else:
                 print "# %s: '%s'" % (status, pagedir)
 

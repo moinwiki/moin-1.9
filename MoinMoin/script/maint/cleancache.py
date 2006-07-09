@@ -25,7 +25,7 @@ from MoinMoin.script import MoinScript
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
-    
+
     def mainloop(self):
         self.init_request()
         base = self.request.cfg.data_dir

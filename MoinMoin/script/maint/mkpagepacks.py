@@ -54,13 +54,13 @@ class PluginScript(MoinScript):
         masterNonSystemPages = allPages - langPages - specialPages
 
         moinI18nPages = Set([x for x in masterNonSystemPages if x.startswith("MoinI18n")])
-        
+
         nodistPages = moinI18nPages | Set(["InterWikiMap", ])
 
         extraPages = masterNonSystemPages - nodistPages
 
         pageSets[ALL] = langPages
-        
+
         for name in pageSets.keys():
             if name not in (u"English"):
                 pageSets[name] -= pageSets[u"English"]
@@ -81,7 +81,7 @@ class PluginScript(MoinScript):
 
         cnt = 0
         script = [packLine(['MoinMoinPackage', '1']), ]
-                  
+
         for pagename in pagelist:
             pagename = pagename.strip()
             page = Page(request, pagename)
@@ -140,7 +140,7 @@ class PluginScript(MoinScript):
         if self.options.config_dir:
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki without any --config-dir!"
             return
-            
+
         self.init_request() # this request will work on a test wiki in testwiki/ directory
                             # we assume that there are current moinmaster pages there
         request = self.request
@@ -149,7 +149,7 @@ class PluginScript(MoinScript):
         if not ('testwiki' in request.cfg.data_dir and 'testwiki' in request.cfg.data_underlay_dir):
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki."
             return
-            
+
         self.gd = wikidicts.GroupDict(request)
         self.gd.reset()
 
@@ -161,10 +161,10 @@ class PluginScript(MoinScript):
 
         self.packageCompoundInstaller(pageSets, generate_filename(ALL))
 
-        [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay") 
+        [self.packagePages(list(pages), generate_filename(name), "ReplaceUnderlay")
             for name, pages in pageSets.items() if not name in (u'English', ALL, NODIST)]
 
-        [self.removePages(list(pages)) 
+        [self.removePages(list(pages))
             for name, pages in pageSets.items() if not name in (u'English', ALL)]
 
         print "Finished."

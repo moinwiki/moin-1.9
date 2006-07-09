@@ -1,27 +1,33 @@
 Translators and Developers,
 
-The data flow for i18n stuff has completely changed, so please read this.
-
 Translators need to deal with the *.po files ONLY - they should do this on
 http://moinmaster.wikiwikiweb.de/MoinI18n/<language-code>, please do not
 send po updates via email, the stuff from the moinmaster wiki gets processed
 automatically.
 
-In moin 1.3 we switched the i18n system to use wiki markup instead html - you
-should change the header of your *.po file after adapting to wiki markup,
-see de.po for a sample.
+The i18n system uses wiki markup in the msgid/msgstr strings, see also the
+the header of your *.po file (and see see de.po for a sample).
 
-Encoding: please use utf-8 ONLY for the po file you submit.
-
-If you don't like to edit using utf-8, see the section below about non-utf-8
-editing.
-
-For using the i18n build system, one needs to have "gettext" (e.g. from Debian
-unstable) installed. For simply translating text, you do not need it, you can
-use a text editor.
+Encoding is utf-8 ONLY for the po file (the wiki page automatically uses
+utf-8).
 
 Please search your translation for fuzzy and untranslated strings. If you
-have reviewed the fuzzy stuff, remove the "fuzzy" marker.
+have reviewed the fuzzy stuff, remove the "fuzzy" marker. If you do that
+online on the moinmaster wiki, here are some tips:
+
+ * If you look at MoinMaster:MoinI18n/cc (where cc is your language code),
+   you will see some statistics at the top, you should try to have no untrans-
+   lated strings and also no fuzzy strings.
+ * On normal page view of that page, untranslated stuff is marked with !!!
+   (3 exclamation marks, just use firefox Ctrl-f to find them). Just remember
+   the untranslated phrase (or at least some  non-common words in it).
+ * Now edit the page and use Ctrl-f again. Enter the words you remembered.
+   Then use the highlight function right of the search box to make those words
+   highlighted in yellow color and scroll through the text in the edit box to
+   find the yellow stuff (the search function without highlight won't help you).
+ * For finding fuzzy stuff, just use the same method with "fuzzy".
+
+For using the i18n build system, one needs to have "gettext" installed.
 
 In the source code, there is original english text marked with
 _("english string") - xgettext can extract these strings automatically from
@@ -38,13 +44,13 @@ Files
 
 Makefile: a GNU-Makefile
 
-POTFILES.in: a list of files with translatable strings
+POTFILES.in: a list of files with translatable strings (automatically created
+             by "make POTFILES"). POTFILES is about the same thing, just in a
+             format suitable for inclusion into the Makefile.
 
 MoinMoin.pot: Master translation file.
 
 *.po: Translations (utf-8 encoding)
-
-mo/*.mo: Binary output files of msgfmt (this is the stuff moin reads at runtime).
 
 
 New Translation (no .po file exists yet)
@@ -66,7 +72,6 @@ Update Translation
 - run "make <langcode>.po"
 - change the translation
 - update the PO-Revision-Date and Last-Translator entries
-- run "make <langcode>.mo"
 
 Change of translatable strings
 ==============================

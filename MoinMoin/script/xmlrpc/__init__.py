@@ -10,3 +10,4 @@ from MoinMoin.util import pysupport
 
 # create a list of extension scripts from the subpackage directory
 modules = pysupport.getPackageModules(__file__)
+
