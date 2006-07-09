@@ -996,8 +996,8 @@ Please review the page and save then. Do not save this page as it is!""")
                 msg = msg + self._notifySubscribers(comment, trivial)
           
             if self.request.cfg.xapian_search:
-                from MoinMoin import Xapian
-                index = Xapian.Index(self.request)
+                from MoinMoin.search.Xapian import Index
+                index = Index(self.request)
                 # When we have automatic index building, we can add to
                 # the queue even if the index is missing.
                 if index.exists():

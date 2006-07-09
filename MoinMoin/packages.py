@@ -91,7 +91,7 @@ class ScriptEngine:
         self.themename = None
         self.ignoreExceptions = False
         self.goto = 0
-        
+
         #Satisfy pylint
         self.msg = getattr(self, "msg", "")
         self.request = getattr(self, "request", None)
@@ -119,7 +119,7 @@ class ScriptEngine:
         @param lines: lines to ignore
         """
         _ = self.request.getText
-        
+
         from MoinMoin.version import release
         version_int = [int(x) for x in version.split(".")]
         release = [int(x) for x in release.split(".")]
@@ -204,7 +204,7 @@ class ScriptEngine:
 
         self.msg += package.msg
 
-    def do_addrevision(self, filename, pagename, author=u"Scripting Subsystem", comment=u"", trivial = u"No"):
+    def do_addrevision(self, filename, pagename, author=u"Scripting Subsystem", comment=u"", trivial=u"No"):
         """ Adds a revision to a page.
 
         @param filename: name of the file in this package
@@ -250,7 +250,7 @@ class ScriptEngine:
         pagedir = page.getPagePath(use_underlay=1, check_create=1)
 
         revdir = os.path.join(pagedir, 'revisions')
-        cfn = os.path.join(pagedir,'current')
+        cfn = os.path.join(pagedir, 'current')
 
         revstr = '%08d' % 1
         if not os.path.exists(revdir):
@@ -428,7 +428,7 @@ Example:
 
     # Setup MoinMoin environment
     from MoinMoin.request import CLI
-    request = CLI.Request(url = 'localhost/')
+    request = CLI.Request(url='localhost/')
     request.form = request.args = request.setup_args()
 
     package = ZipPackage(request, packagefile)
@@ -445,6 +445,7 @@ Example:
             print "Installation failed."
         if package.msg:
             print package.msg
-    
+
 if __name__ == '__main__':
     main()
+

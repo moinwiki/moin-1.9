@@ -159,6 +159,8 @@ Version 1.6.current:
     * @SIG@ etc. generate local time stamps now, no difference visible on page
       view.
     * Speeded up linkto search by avoiding read locks on the pagelinks file.
+    * The i18n system no loads *.po files directly (no *.py or *.mo any more)
+      and caches the results (farm wide cache/i18n/*).
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

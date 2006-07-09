@@ -2,7 +2,7 @@
 """
     MoinMoin - Dictionary / Group Functions
 
-    @copyright: 2003 by Thomas Waldmann, http://linuxwiki.de/ThomasWaldmann
+    @copyright: 2003-2006 by Thomas Waldmann, MoinMoin:ThomasWaldmann
     @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
     @license: GNU GPL, see COPYING for details.
 """
@@ -20,14 +20,14 @@ except ImportError:
 
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
- 
+
 from MoinMoin import config, caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
 
 # Version of the internal data structure which is pickled
 # Please increment if you have changed the structure
 DICTS_PICKLE_VERSION = 4
-    
+
 
 class DictBase:
     """ Base class for wiki dicts
@@ -36,7 +36,7 @@ class DictBase:
     """
     # Regular expression used to parse text - sub class should override this
     regex = ''
-    
+
     def __init__(self, request, name):
         """ Initialize, starting from <nothing>.
 
@@ -64,16 +64,16 @@ class DictBase:
         return self._dict.has_key(key)
 
     def get(self, key, default):
-        return self._dict.get(key,default)
+        return self._dict.get(key, default)
 
     def __getitem__(self, key):
         return self._dict[key]
-    
+
     def __repr__(self):
         return "<DictBase name=%r items=%r>" % (self.name, self._dict.items())
 
 class Dict(DictBase):
-    ''' Mapping of keys to values in a wiki page
+    """ Mapping of keys to values in a wiki page
 
        How a Dict definition page should look like:
 
@@ -84,7 +84,7 @@ class Dict(DictBase):
         ...
         keyn:: ....
        any text ignored      
-    '''
+    """
     # Key:: Value - ignore all but key:: value pairs, strip whitespace
     regex = r'^ (?P<key>.+?):: (?P<val>.*?) *$'
 
@@ -102,7 +102,7 @@ class Dict(DictBase):
         return "<Dict name=%r items=%r>" % (self.name, self._dict.items())
 
 class Group(DictBase):
-    ''' Group of users, of pages, of whatever
+    """ Group of users, of pages, of whatever
 
     How a Group definition page should look like:
 
@@ -116,7 +116,7 @@ class Group(DictBase):
 
     if there are any free links using ["free link"] notation, the markup
     is stripped from the member 
-    '''
+    """
     # * Member - ignore all but first level list items, strip whitespace
     # Strip free links markup if exists
     regex = r'^ \* +(?:\[\")?(?P<member>.+?)(?:\"\])? *$'
@@ -176,7 +176,7 @@ class Group(DictBase):
             # Add member and its children
             members[member] = 1
             if groupdict.hasgroup(member):
-                members.update(self._expandgroup(groupdict, member))            
+                members.update(self._expandgroup(groupdict, member))
         return members
 
     def expandgroups(self, groupdict):
@@ -283,7 +283,7 @@ class GroupDict(DictDict):
 
     def addgroup(self, request, groupname):
         """add a new group (will be read from the wiki page)"""
-        grp =  Group(request, groupname)
+        grp = Group(request, groupname)
         self.dictdict[groupname] = grp
         self.groupdict[groupname] = grp
 
@@ -320,7 +320,7 @@ class GroupDict(DictDict):
                 cache = caching.CacheEntry(request, arena, key, scope='wiki')
                 data = pickle.loads(cache.content())
                 self.__dict__.update(data)
-                
+
                 # invalidate the cache if the pickle version changed
                 if self.picklever != DICTS_PICKLE_VERSION:
                     self.reset()
@@ -382,7 +382,7 @@ class GroupDict(DictDict):
                         self.addgroup(request, pagename)
                     dump = 1
             self.pageupdate_timestamp = now
-            
+
             if not self.base_timestamp:
                 self.base_timestamp = int(time.time())
 
@@ -394,7 +394,7 @@ class GroupDict(DictDict):
             "groupdict": self.groupdict,
             "picklever": self.picklever
         }
-        
+
         if dump:
             # copy unexpanded groups to self.dictdict
             for name, grp in self.groupdict.items():
@@ -405,8 +405,7 @@ class GroupDict(DictDict):
 
             cache = caching.CacheEntry(request, arena, key, scope='wiki')
             cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
-            
+
         # remember it (persistent environments)
         self.cfg.DICTS_DATA = data
-
 

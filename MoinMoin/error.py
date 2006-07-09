@@ -43,7 +43,7 @@ class Error(Exception):
             return unicode(self.message, config.charset)
         else:
             return unicode(self.message)
-    
+
     def __str__(self):
         """ Return encoded message """
         if isinstance(self.message, unicode):
@@ -54,7 +54,7 @@ class Error(Exception):
     def __getitem__(self, item):
         """ Make it possible to access attributes like a dict """
         return getattr(self, item)
-    
+
 
 class CompositeError(Error):
     ''' Base class for exceptions containing an exception
@@ -82,7 +82,7 @@ class CompositeError(Error):
         """ Save system exception info before this exception is raised """
         Error.__init__(self, message)
         self.innerException = sys.exc_info()
-   
+
     def exceptions(self):
         """ Return a list of all inner exceptions """
         all = [self.innerException]
@@ -94,7 +94,6 @@ class CompositeError(Error):
                 break
         return all
 
-   
 class FatalError(CompositeError):
     """ Base class for fatal error we can't handle
 
@@ -106,3 +105,4 @@ class ConfigurationError(FatalError):
 
 class InternalError(FatalError):
     """ Raise when internal fatal error is found """
+
