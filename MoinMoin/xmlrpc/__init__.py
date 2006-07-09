@@ -518,10 +518,49 @@ class XmlRpcBase:
             self.request.user = u
             return "SUCCESS"
         else:
-            return xmlrpclib.Fault(1, "Invalid token.")
+            return xmlrpclib.Fault("INVALID", "Invalid token.")
     
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
-        return "NOT_IMPLEMENTED_YET"
+        from MoinMoin.util.bdiff import textdiff, compress
+        
+        pagename = self._instr(pagename)
+
+        # User may read page?
+        if not self.request.user.may.read(pagename):
+            return self.notAllowedFault()
+
+        def allowed_rev_type(data):
+            if data is None:
+                return true
+            return isinstance(data, int) and data > 0
+
+        if not allowed_rev_type(from_rev) or not allowed_rev_type(to_rev):
+            return xmlrpclib.Fault("FIXME", "Incorrect type for revision(s).") # XXX
+        
+        currentpage = Page(self.request, pagename)
+        revisions = currentpage.getRevList()
+        
+        if from_rev is not None and from_rev not in revisions:
+            return xmlrpclib.Fault("FIXME", "Unknown from_rev.") # XXX
+        if to_rev is not None and to_rev not in revisions:
+            return xmlrpclib.Fault("FIXME", "Unknown to_rev.") # XXX
+        
+        if from_rev is None:
+            oldcontents = ""
+        else:
+            oldpage = Page(request, pagename, rev=from_rev)
+            oldcontents = oldpage.get_raw_body()
+        
+        if to_rev is None:
+            newcontents = currentpage.get_raw_body()
+        else:
+            newpage = Page(request, pagename, rev=to_rev)
+            newcontents = newpage.get_raw_body()
+            newrev = newpage.get_real_rev()
+        
+        diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents, newcontents)))
+        
+        return # XXX
         
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
