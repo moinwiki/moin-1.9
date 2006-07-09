@@ -54,8 +54,9 @@ def execute(pagename, request):
     if interwiki[-1] != "/": interwiki = interwiki + "/"
 
     logo = re.search(r'src="([^"]*)"', cfg.logo_string)
-    if logo: logo = request.getQualifiedURL(logo.group(1))
-    
+    if logo:
+        logo = request.getQualifiedURL(logo.group(1))
+
     log = editlog.EditLog(request)
     logdata = []
     counter = 0
@@ -148,7 +149,7 @@ def execute(pagename, request):
             handler.simpleNode('link', link+"?action=diff")
         else:
             handler.simpleNode('link', link)
-            
+
         handler.simpleNode(('dc', 'date'), timefuncs.W3CDate(item.time))
 
         # description
@@ -183,10 +184,10 @@ def execute(pagename, request):
         else: # 'ip'
             edname = item.editor[1]
             ##edattr[(None, 'link')] = link + "?action=info"
-        
+
         # this edattr stuff, esp. None as first tuple element breaks things (tracebacks)
         # if you know how to do this right, please send us a patch
-        
+
         handler.startNode(('dc', 'contributor'))
         handler.startNode(('rdf', 'Description'), attr=edattr)
         handler.simpleNode(('rdf', 'value'), edname)
@@ -221,6 +222,4 @@ def execute(pagename, request):
     # send the generated XML document
     request.http_headers(httpheaders)
     request.write(out.getvalue())
-    request.finish()
-    request.no_closing_html_code = 1
 

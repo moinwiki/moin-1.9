@@ -74,7 +74,7 @@ class TestConfig:
             def testSomething(self):
                 # test that needs those defaults and custom values
     """
-    
+
     def __init__(self, request, defaults=(), **custom):
         """ Create temporary configuration for a test 
 
@@ -88,7 +88,7 @@ class TestConfig:
         self.new = []  # New added attributes
         self.setDefaults(defaults)
         self.setCustom(**custom)
-    
+
     def setDefaults(self, defaults=()):
         """ Set default values for keys in defaults list
         
@@ -97,20 +97,20 @@ class TestConfig:
         from MoinMoin.multiconfig import DefaultConfig
         for key in defaults:
             self._setattr(key, getattr(DefaultConfig, key))
-            
+
     def setCustom(self, **custom):
         """ Set custom values """
         for key, value in custom.items():
             self._setattr(key, value)
-    
+
     def _setattr(self, key, value):
         """ Set a new value for key saving new added keys """
         if hasattr(self.request.cfg, key):
             self.old[key] = getattr(self.request.cfg, key)
         else:
             self.new.append(key)
-        setattr(self.request.cfg, key, value)        
-       
+        setattr(self.request.cfg, key, value)
+
     def __del__(self):
         """ Restore previous request.cfg 
         
@@ -134,8 +134,8 @@ class MoinTestLoader(TestLoader):
 
     def loadTestsFromTestCase(self, testCaseClass):
         testCaseClass.request = self.request
-        return TestLoader.loadTestsFromTestCase(self, testCaseClass)        
-        
+        return TestLoader.loadTestsFromTestCase(self, testCaseClass)
+
     def loadTestsFromModuleNames(self, names):
         """ Load tests from qualified module names, eg. a.b.c
         
@@ -146,7 +146,7 @@ class MoinTestLoader(TestLoader):
         suites = []
         for name in names:
             module = __import__(name, globals(), {}, ['dummy'])
-            suites.append(self.loadTestsFromModule(module))    
+            suites.append(self.loadTestsFromModule(module))
         return self.suiteClass(suites)
 
 
@@ -165,7 +165,7 @@ def makeSuite(request, names=None):
         names = [name for name in names if name.startswith('test_')]
         caseInsensitiveCompare = lambda a, b: cmp(a.lower(), b.lower())
         names.sort(caseInsensitiveCompare)
-    
+
     return MoinTestLoader(request).loadTestsFromModuleNames(names)
 
 
@@ -179,12 +179,13 @@ def run(request=None, names=None):
     if request is None:
         from MoinMoin.request import CLI
         from MoinMoin.user import User
-        request = CLI.Request()   
+        request = CLI.Request()
         request.form = request.args = request.setup_args()
         request.user = User(request)
-        
+
     suite = makeSuite(request, names)
-    
+
     # do not redirect the stream to request here because request.write can
     # be invalid or broken because not all redirections of it use a finally: block
     TextTestRunner(stream=sys.stdout, verbosity=2).run(suite)
+

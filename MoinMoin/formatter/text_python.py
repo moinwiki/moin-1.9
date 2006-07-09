@@ -111,16 +111,6 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             self.__in_pre = self.formatter.in_pre        
         return result
     
-    def dynamic_content(self, parser, callback, arg_list=[], arg_dict={},
-                            returns_content=1):
-        adjust = self.__adjust_formatter_state()
-        if returns_content:
-            return self.__insert_code('%srequest.write(%s.%s(*%r,**%r))' %
-                        (adjust, self.__parser, callback, arg_list, arg_dict))
-        else:
-            return self.__insert_code('%s%s.%s(*%r,**%r)' %
-                        (adjust, self.__parser, callback, arg_list, arg_dict))
-
     # Public methods ---------------------------------------------------
         
     def pagelink(self, on, pagename='', page=None, **kw):

@@ -1535,7 +1535,7 @@ class Page:
         """
         if not self.exists():
             return []
-        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item')
+        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', do_locking=False)
         if cache.needsUpdate(self._text_filename()):
             links = self.parsePageLinks(request)
             cache.update('\n'.join(links) + '\n', True)

@@ -121,7 +121,7 @@ def getIndicator(request, pagename):
     if not files: return ''
 
     attach_count = _('[%d attachments]') % len(files)
-    attach_icon = request.theme.make_icon('attach', vars={ 'attach_count': attach_count })
+    attach_icon = request.theme.make_icon('attach', vars={'attach_count': attach_count})
     attach_link = wikiutil.link_tag(request,
         "%s?action=AttachFile" % wikiutil.quoteWikinameURL(pagename),
         attach_icon,
@@ -192,7 +192,7 @@ def add_attachment(request, pagename, target, filecontent):
         os.chmod(fpath, 0666 & config.umask)
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
-        
+
         return target
 
 
@@ -268,7 +268,7 @@ def _build_filelist(request, pagename, showheader, readonly):
         label_install = _("install")
 
         for file in files:
-            fsize = float(os.stat(os.path.join(attach_dir,file).encode(config.charset))[6]) # in byte
+            fsize = float(os.stat(os.path.join(attach_dir, file).encode(config.charset))[6]) # in byte
             fsize = "%.1f" % (fsize / 1024)
             baseurl = request.getScriptname()
             action = action_name
@@ -301,7 +301,7 @@ def _build_filelist(request, pagename, showheader, readonly):
             if (packages.ZipPackage(request, os.path.join(attach_dir, file).encode(config.charset)).isPackage() and
                 request.user.isSuperUser()):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=install&amp;target=%(urlfile)s">%(label_install)s</a>' % parmdict
-            elif (zipfile.is_zipfile(os.path.join(attach_dir,file).encode(config.charset)) and
+            elif (zipfile.is_zipfile(os.path.join(attach_dir, file).encode(config.charset)) and
                 request.user.may.read(pagename) and request.user.may.delete(pagename)
                 and request.user.may.write(pagename)):
                 viewlink += ' | <a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;do=unzip&amp;target=%(urlfile)s">%(label_unzip)s</a>' % parmdict
@@ -581,7 +581,7 @@ def do_upload(pagename, request):
         bsindex = target.rfind('\\')
         if bsindex >= 0:
             target = target[bsindex+1:]
-    
+
     # add the attachment
     try:
         add_attachment(request, pagename, target, filecontent)
@@ -613,10 +613,10 @@ def save_drawing(pagename, request):
 
     if ext == '.draw':
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
-        filecontent = filecontent.replace("\r","")
+        filecontent = filecontent.replace("\r", "")
 
     savepath = os.path.join(getAttachDir(request, pagename), basename + ext)
-    if ext == '.map' and filecontent.strip()=='':
+    if ext == '.map' and not filecontent.strip():
         # delete map file if it is empty
         os.unlink(savepath)
     else:
@@ -675,9 +675,9 @@ def install_package(pagename, request):
 
     if package.isPackage():
         if package.installPackage():
-            msg=_("Attachment '%(filename)s' installed.") % {'filename': wikiutil.escape(target)}
+            msg = _("Attachment '%(filename)s' installed.") % {'filename': wikiutil.escape(target)}
         else:
-            msg=_("Installation of '%(filename)s' failed.") % {'filename': wikiutil.escape(target)}
+            msg = _("Installation of '%(filename)s' failed.") % {'filename': wikiutil.escape(target)}
         if package.msg != "":
             msg += "<br><pre>" + wikiutil.escape(package.msg) + "</pre>"
     else:
@@ -710,7 +710,7 @@ def unzip_file(pagename, request):
 
         available_attachments_file_space = attachments_file_space - fsize
         available_attachments_file_count = attachments_file_count - fcount
-        
+
         if zipfile.is_zipfile(fpath):
             zf = zipfile.ZipFile(fpath)
             sum_size_over_all_valid_files = 0.0
@@ -727,19 +727,19 @@ def unzip_file(pagename, request):
                     count_valid_files += 1
 
             if sum_size_over_all_valid_files > available_attachments_file_space:
-                msg=_("Attachment '%(filename)s' could not be unzipped because"
-                      " the resulting files would be too large (%(space)d kB"
-                      " missing).") % {
-                        'filename': filename,
-                        'space': (sum_size_over_all_valid_files -
-                              available_attachments_file_space) / 1000 }
+                msg = _("Attachment '%(filename)s' could not be unzipped because"
+                        " the resulting files would be too large (%(space)d kB"
+                        " missing).") % {
+                            'filename': filename,
+                            'space': (sum_size_over_all_valid_files -
+                                available_attachments_file_space) / 1000 }
             elif count_valid_files > available_attachments_file_count:
-                msg=_("Attachment '%(filename)s' could not be unzipped because"
-                      " the resulting files would be too many (%(count)d "
-                      "missing).") % {
-                        'filename': filename,
-                        'count': (count_valid_files -
-                                  available_attachments_file_count) }
+                msg = _("Attachment '%(filename)s' could not be unzipped because"
+                        " the resulting files would be too many (%(count)d "
+                        "missing).") % {
+                            'filename': filename,
+                            'count': (count_valid_files -
+                                available_attachments_file_count) }
             else:
                 valid_name = False
                 for (origname, finalname) in namelist.iteritems():
@@ -760,11 +760,11 @@ def unzip_file(pagename, request):
                                     _addLogEntry(request, 'ATTNEW', pagename, finalname)
 
                 if valid_name:
-                    msg=_("Attachment '%(filename)s' unzipped.") % {'filename': filename}
+                    msg = _("Attachment '%(filename)s' unzipped.") % {'filename': filename}
                 else:
-                    msg=_("Attachment '%(filename)s' not unzipped because the "
-                          "files are too big, .zip files only, exist already or "
-                          "reside in folders.") % {'filename': filename}
+                    msg = _("Attachment '%(filename)s' not unzipped because the "
+                            "files are too big, .zip files only, exist already or "
+                            "reside in folders.") % {'filename': filename}
         else:
             msg = _('The file %(target)s is not a .zip file.' % target)
 
@@ -798,7 +798,7 @@ def send_viewfile(pagename, request):
 
     package = packages.ZipPackage(request, fpath)
     if package.isPackage():
-        request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"),wikiutil.escape(package.getScript())))
+        request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
         return
 
     import zipfile
@@ -854,7 +854,7 @@ def do_admin_browser(request):
     data.columns = [
         Column('page', label=('Page')),
         Column('file', label=('Filename')),
-        Column('size',  label=_('Size'), align='right'),
+        Column('size', label=_('Size'), align='right'),
         #Column('action', label=_('Action')),
     ]
 

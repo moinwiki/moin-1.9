@@ -28,9 +28,6 @@ Known main issues:
     and improving it and after having made a backup with some other, proven
     method. USE BOTH ON YOUR OWN RISK!
 
-Version 1.5.4-current:
-    * increased maxlength of some input fields from 80 to 200
-
 Branch moin-1.6-xapian:
   New Features:
     * Added Xapian (see http://xapian.org/) based indexed search code.
@@ -158,6 +155,10 @@ Version 1.6.current:
     * We use rel="nofollow" for some action links in the hope that some search
       engines don't fetch the targets (if they do, they will just get 403 and
       cause unnecessary traffic).
+    * Included EmbedObject macro for embedding shockwave flash, mp3, visio, ...
+    * @SIG@ etc. generate local time stamps now, no difference visible on page
+      view.
+    * Speeded up linkto search by avoiding read locks on the pagelinks file.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -182,6 +183,9 @@ Version 1.6.current:
       internally, too. So if GUI editor invocation is broken due to browser
       compatibility issues or a wrong browser version check, please file a bug
       at FCKeditor development or browser development.
+
+Version 1.5.4-current:
+    * increased maxlength of some input fields from 80 to 200
 
 Version 1.5.current:
   Developer notes:
