@@ -1,0 +1,57 @@
+.admonition_attention, .admonition_caution, .admonition_danger, .admonition_error, .admonition_hint, .admonition_important, .admonition_note, .admonition_tip, .admonition_warning {
+	border: 1pt solid #AEBDCC;
+	border-color: black;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+
+	padding-left: 50px;
+	margin: 30pt;
+	background-repeat: no-repeat;
+	background-position: 10pt 50% ;
+	background-image: url("/wiki/modern/img/attention.png");
+
+	
+	/* begin css 3 or browser specific rules - do not remove!
+	see: http://forums.techguy.org/archive/index.php/t-249849.html */
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	/* end css 3 or browser specific rules */
+
+}
+
+.admonition_warning, .admonition_error, .admonition_danger {
+	background-image: url("/wiki/modern/img/icon-error.png");
+	border-color: red;
+	background-color: #fcc;
+	border-width: 2px;
+}
+
+.admonition_tip, .admonition_hint {
+	background-image: url("/wiki/modern/img/idea.png");
+	border-color: orange;
+	background-color: lightyellow;
+}
+
+.admonition_note {
+	background-image: url("/wiki/modern/img/icon-info.png");
+	border-color: darkblue;
+}
+
+.admonition_attention, .admonition_caution {
+	background-image: url("/wiki/modern/img/alert.png");
+	border-color: red;
+	border-width: 2px;
+	background-color: #eee;
+	
+}
+
+
+
+
+
+
+
