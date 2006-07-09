@@ -2,4 +2,6 @@
 .*\.arch-ids/.*
 .*\.py[co]
 sa
+cover
+testwiki
 
