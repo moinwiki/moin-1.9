@@ -29,7 +29,7 @@ class RemoteWiki(object):
     def __repr__(self):
         return "<RemoteWiki wiki_url=%r valid=%r>" % (self.valid, self.wiki_url)
 
-class PackagePages:
+class ActionClass:
     def __init__(self, pagename, request):
         self.request = request
         self.pagename = pagename
@@ -72,5 +72,4 @@ class PackagePages:
         raise ActionStatus(_("Syncronisation finished."))
     
 def execute(pagename, request):
-    """ Glue code for actions """
-    PackagePages(pagename, request).render()
+    ActionClass(pagename, request).render()

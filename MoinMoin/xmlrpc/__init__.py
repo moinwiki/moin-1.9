@@ -521,6 +521,7 @@ class XmlRpcBase:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
     
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
+        """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
         from MoinMoin.util.bdiff import textdiff, compress
         
         pagename = self._instr(pagename)
@@ -531,36 +532,48 @@ class XmlRpcBase:
 
         def allowed_rev_type(data):
             if data is None:
-                return true
+                return True
             return isinstance(data, int) and data > 0
 
-        if not allowed_rev_type(from_rev) or not allowed_rev_type(to_rev):
-            return xmlrpclib.Fault("FIXME", "Incorrect type for revision(s).") # XXX
+        if not allowed_rev_type(from_rev):
+            return xmlrpclib.Fault("FROMREV_INVALID", "Incorrect type for from_rev.")
+        
+        if not allowed_rev_type(to_rev):
+            return xmlrpclib.Fault("TOREV_INVALID", "Incorrect type for to_rev.")
         
         currentpage = Page(self.request, pagename)
+        if not currentpage.exists():
+            return xmlrpclib.Fault("NOT_EXIST", "Page does not exist.")
+        
         revisions = currentpage.getRevList()
         
         if from_rev is not None and from_rev not in revisions:
-            return xmlrpclib.Fault("FIXME", "Unknown from_rev.") # XXX
+            return xmlrpclib.Fault("FROMREV_INVALID", "Unknown from_rev.")
         if to_rev is not None and to_rev not in revisions:
-            return xmlrpclib.Fault("FIXME", "Unknown to_rev.") # XXX
+            return xmlrpclib.Fault("TOREV_INVALID", "Unknown to_rev.")
         
+        # use lambda to defer execution in the next lines
         if from_rev is None:
-            oldcontents = ""
+            oldcontents = lambda: ""
         else:
             oldpage = Page(request, pagename, rev=from_rev)
-            oldcontents = oldpage.get_raw_body()
+            oldcontents = lambda: oldpage.get_raw_body()
         
         if to_rev is None:
-            newcontents = currentpage.get_raw_body()
+            newcontents = lambda: currentpage.get_raw_body()
         else:
             newpage = Page(request, pagename, rev=to_rev)
-            newcontents = newpage.get_raw_body()
+            newcontents = lambda: newpage.get_raw_body()
             newrev = newpage.get_real_rev()
         
-        diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents, newcontents)))
+        if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
+            return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
         
-        return # XXX
+        newcontents = newcontents().encode("utf-8")
+        conflict = wikiutil.containsConflictMarker(newcontents)
+        diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents().encode("utf-8"), newcontents)))
+        
+        return {"conflict": conflict, "diff": diffblob, "diffversion": 1, "current": currentpage.get_real_rev()}
         
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
