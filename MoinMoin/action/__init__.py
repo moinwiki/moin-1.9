@@ -427,7 +427,7 @@ def do_edit(pagename, request):
     # Save new text
     else:
         try:
-            still_conflict = "/!\ '''Edit conflict" in savetext
+            still_conflict = wikiutil.containsConflictMarker(savetext)
             pg.setConflict(still_conflict)
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:

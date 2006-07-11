@@ -1443,6 +1443,9 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     else:
         return "%s%s</a>" % (result, text)
 
+def containsConflictMarker(text):
+    """ Returns true if there is a conflict marker in the text. """
+    return "/!\ '''Edit conflict" in text
 
 def linediff(oldlines, newlines, **kw):
     """
