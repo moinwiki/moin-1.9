@@ -280,6 +280,11 @@ div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
 div.codearea pre span.Special    {color: #0000ff;}
 div.codearea pre span.Preprc     {color: #803999;}
 
+/* for diff parser */
+div.codearea pre span.DiffAdded   {color: #4876FF;}
+div.codearea pre span.DiffRemoved {color: #FF0000;}
+div.codearea pre span.DiffChanged {color: #FF7F50;}
+div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 /* MonthCalendar css */
 
