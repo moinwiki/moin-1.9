@@ -161,6 +161,8 @@ Version 1.6.current:
     * Speeded up linkto search by avoiding read locks on the pagelinks file.
     * The i18n system no loads *.po files directly (no *.py or *.mo any more)
       and caches the results (farm wide cache/i18n/*).
+    * added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
+      Ninoles and Jürgen Hermann.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
