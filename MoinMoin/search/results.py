@@ -494,7 +494,8 @@ class SearchResults:
         start = len(header)
         # Find first match after start
         for i in xrange(len(matches)):
-            if matches[i].start >= start:
+            if matches[i].start >= start and \
+                    isinstance(matches[i], TextMatch):
                 return i, start
         return 0, 0
 
