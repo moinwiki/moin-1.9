@@ -557,23 +557,75 @@ class XmlRpcBase:
             oldcontents = lambda: ""
         else:
             oldpage = Page(request, pagename, rev=from_rev)
-            oldcontents = lambda: oldpage.get_raw_body()
+            oldcontents = lambda: oldpage.get_raw_body_str()
         
         if to_rev is None:
             newcontents = lambda: currentpage.get_raw_body()
         else:
             newpage = Page(request, pagename, rev=to_rev)
-            newcontents = lambda: newpage.get_raw_body()
+            newcontents = lambda: newpage.get_raw_body_str()
             newrev = newpage.get_real_rev()
         
         if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
             return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
         
-        newcontents = newcontents().encode("utf-8")
+        newcontents = newcontents()
         conflict = wikiutil.containsConflictMarker(newcontents)
-        diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents().encode("utf-8"), newcontents)))
+        diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents(), newcontents)))
         
         return {"conflict": conflict, "diff": diffblob, "diffversion": 1, "current": currentpage.get_real_rev()}
+    
+    def xmlrpc_interwikiName(self):
+        """ Returns the interwiki name of the current wiki. """
+        name = self.request.cfg.interwikiname
+        if name is None:
+            return None
+        else:
+            return self._outstr(name)
+    
+    def xmlrpc_mergeChanges(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+        """ Merges a diff sent by the remote machine and returns the number of the new revision.
+            Additionally, this method tags the new revision.
+            
+            @param pagename: The pagename that is currently dealt with.
+            @param diff: The diff that can be applied to the version specified by delta_remote_rev.
+            @param local_rev: The revno of the page on the other wiki system, used for the tag.
+            @param delta_remote_rev: The revno that the diff is taken against.
+            @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
+            @param interwiki_name: Used to build the interwiki tag.
+        """
+        from MoinMoin.util.bdiff import decompress, patch
+        
+        pagename = self._instr(pagename)
+       
+        # User may read page?
+        if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
+            return self.notAllowedFault()
+
+        # XXX add locking here!
+        
+        # current version of the page
+        currentpage = Page(self.request, pagename)
+
+        if currentpage.get_real_rev() != last_remote_rev:
+            return xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
+        
+        if not currentpage.exists() and diff is None:
+            return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
+        
+        # base revision used for the diff
+        basepage = Page(self.request, pagename, rev=delta_remote_rev)
+        
+        # generate the new page revision by applying the diff
+        newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
+        
+        # write page
+        # XXX ...
+        
+        # XXX add a tag (interwiki_name, local_rev, current rev) to the page
+        # XXX return current rev
+        # XXX finished
+        
         
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -

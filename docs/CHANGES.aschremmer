@@ -8,6 +8,8 @@ Branch moin/1.6-sync-aschremmer
     * Implement actual syncronisation.
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage.
+    * Clean up trailing whitespace.
+    * Add page locking.
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -15,12 +17,15 @@ Branch moin/1.6-sync-aschremmer
     * Conflict icon in RecentChanges
     * XMLRPC Authentication System
     * Binary Diffing
+    * XMLRPC method to get binary diffs
+    * 
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
-    * ...
+    * Conflict resolution fixes.
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
+    * Enhanced API at some points.
 
   Developer notes:
     * ...
@@ -40,12 +45,15 @@ Week 22: Tax forms, Fulfilled transcription request,
          backported the client code from python 2.4
 Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as a base for syncronisation.
 Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
-Week 25: Conference in Chile.
+Week 25: Conference in Chile (FET 2006).
 Week 26: Implementation of the XMLRPC authentication system, added binary
          diffing (mainly taken from Mercurial, but had to merge 5 changesets,
          remove some mercurial dependencies and document it. Currently, Mercurial
          uses a module written in C to solve the problem, so the Python code
          was not cared for anymore.)
+Week 27: Europython, Geneva.
+Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added preliminary SyncPages action,
+         added interwikiName XMLRPC method, added mergeChanges XMLRPC method.
 
 Time plan
 =========
