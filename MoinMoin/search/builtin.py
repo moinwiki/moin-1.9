@@ -149,7 +149,7 @@ class BaseIndex:
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
-        self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
+        #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
         self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
                                  os.path.join(main_dir, 'update-queue-lock'))
 
@@ -172,12 +172,12 @@ class BaseIndex:
         raise NotImplemented
 
     def search(self, query):
-        if not self.read_lock.acquire(1.0):
-            raise self.LockedException
-        try:
-            hits = self._search(query)
-        finally:
-            self.read_lock.release()
+        #if not self.read_lock.acquire(1.0):
+        #    raise self.LockedException
+        #try:
+        hits = self._search(query)
+        #finally:
+        #    self.read_lock.release()
         return hits
 
     def update_page(self, page):

@@ -14,6 +14,9 @@ Branch moin/1.6-xapian-fpletz
     * Indexing and searching of categories (new term prefix)
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
       (i.e. ExceptionTranslator)
+    * Add stemming support for highlighting stuff:
+        1. regexp for whole word (all lowercase), or
+        2. just the root of the word
 
   New Features:
     * Faster search thanks to Xapian
@@ -143,4 +146,6 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-14
     * Minor bugfix for TitleMatch, now works correctly
     * First interesting match must be a TextMatch
+    * Comment read_lock code from BaseIndex (should not be needed)
+    * Support complete rebuild of the database (delete and add)
 
