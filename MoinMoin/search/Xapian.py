@@ -8,7 +8,7 @@
 """
 debug = True
 
-import sys, os, re, codecs, time
+import sys, os, re, codecs, time, os
 from pprint import pprint
 
 import xapian
@@ -237,6 +237,13 @@ class Index(BaseIndex):
             Assumes that the write lock is acquired
         """
         fs_rootpage = 'FS' # XXX FS hardcoded
+
+        # rebuilding the DB: delete it and add everything
+        if mode == 'rebuild':
+            for f in os.listdir(self.dir):
+                os.unlink(f)
+            mode = 'add'
+
         try:
             wikiname = request.cfg.interwikiname or 'Self'
             itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
