@@ -10,6 +10,7 @@
 
 import os
 import zipfile
+import xmlrpclib
 from datetime import datetime
 
 from MoinMoin import wikiutil, config, user
@@ -20,11 +21,30 @@ from MoinMoin.wikidicts import Dict
 class ActionStatus(Exception): pass
 
 class RemoteWiki(object):
+    """ This class should be the base for all implementations of remote wiki
+        classes. """
+    def getInterwikiName(self):
+        """ Returns the interwiki name of the other wiki. """
+        return NotImplemented
+    
+    def __repr__(self):
+        """ Returns a representation of the instance for debugging purposes. """
+        return NotImplemented
+
+class MoinWiki(RemoteWiki):
     def __init__(self, interwikiname):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
         self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"
+        self.connection = self.createConnection()
+
+    def createConnection(self):
+        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True)
+
+    # Methods implementing the RemoteWiki interface
+    def getInterwikiName(self):
+        return self.connection.interwikiName()
 
     def __repr__(self):
         return "<RemoteWiki wiki_url=%r valid=%r>" % (self.valid, self.wiki_url)
@@ -56,10 +76,13 @@ class ActionClass:
         params = self.parsePage()
         
         try:
+            if not self.request.cfg.interwikiname:
+                raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
+
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
             
-            remote = RemoteWiki(params["remoteWiki"])
+            remote = MoinWiki(params["remoteWiki"])
             
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
