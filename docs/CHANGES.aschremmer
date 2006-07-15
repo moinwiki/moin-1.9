@@ -10,6 +10,7 @@ Branch moin/1.6-sync-aschremmer
       identity storage.
     * Clean up trailing whitespace.
     * Add page locking.
+    * How about using unique IDs that just derive from the interwikiname?
 
   New Features:
     * XMLRPC method to return the Moin version
