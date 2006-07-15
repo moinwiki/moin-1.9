@@ -73,11 +73,11 @@ def _attachment(request, pagename, filename, outputdir):
         return dest_url
     else:
         return ""
-  
+
 
 class PluginScript(script.MoinScript):
     """ Dump script class """
-    
+
     def __init__(self, argv=None, def_values=None):
         script.MoinScript.__init__(self, argv, def_values)
         self.parser.add_option(
@@ -129,14 +129,14 @@ class PluginScript(script.MoinScript):
         page_front_page = wikiutil.getSysPage(request, request.cfg.page_front_page).page_name
         page_title_index = wikiutil.getSysPage(request, 'TitleIndex').page_name
         page_word_index = wikiutil.getSysPage(request, 'WordIndex').page_name
-        
+
         navibar_html = ''
         for p in [page_front_page, page_title_index, page_word_index]:
             navibar_html += '&nbsp;[<a href="%s">%s</a>]' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
 
         for pagename in pages:
             # we have the same name in URL and FS
-            file = wikiutil.quoteWikinameURL(pagename) 
+            file = wikiutil.quoteWikinameURL(pagename)
             script.log('Writing "%s"...' % file)
             try:
                 pagehtml = ''

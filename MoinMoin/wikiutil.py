@@ -2,10 +2,10 @@
 """
     MoinMoin - Wiki Utility Functions
 
-    @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000 - 2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-    
+
 import os, re, urllib, cgi
 import codecs, types
 
@@ -15,7 +15,7 @@ from MoinMoin.util import pysupport, filesys
 
 # Exceptions
 class InvalidFileNameError(Exception):
-    """ Called when we find an invalid file name """ 
+    """ Called when we find an invalid file name """
     pass
 
 # constants for page names
@@ -47,7 +47,7 @@ def decodeWindowsPath(text):
             return unicode(text, cur_charset, 'replace')
         except LookupError:
             return unicode(text, 'iso-8859-1', 'replace')
-    
+
 def decodeUnknownInput(text):
     """ Decode unknown input, like text attachments
 
@@ -66,7 +66,7 @@ def decodeUnknownInput(text):
     # Shortcut for unicode input
     if isinstance(text, unicode):
         return text
-    
+
     try:
         return unicode(text, 'utf-8')
     except UnicodeError:
@@ -76,7 +76,7 @@ def decodeUnknownInput(text):
             except UnicodeError:
                 pass
         return unicode(text, 'iso-8859-1', 'replace')
-        
+
 
 def decodeUserInput(s, charsets=[config.charset]):
     """
@@ -244,6 +244,9 @@ def clean_comment(comment):
     """ Clean comment - replace CR, LF, TAB by whitespace, delete control chars
         TODO: move this to config, create on first call then return cached.
     """
+    # we only have input fields with max 200 chars, but spammers send us more
+    if len(comment) > 201:
+        comment = u''
     remap_chars = {
         ord(u'\t'): u' ',
         ord(u'\r'): u' ',
@@ -296,21 +299,21 @@ def quoteWikinameFS(wikiname, charset=config.charset):
     @return: quoted name, safe for any file system
     """
     filename = wikiname.encode(charset)
-    
-    quoted = []    
+
+    quoted = []
     location = 0
     for needle in UNSAFE.finditer(filename):
         # append leading safe stuff
         quoted.append(filename[location:needle.start()])
-        location = needle.end()                    
+        location = needle.end()
         # Quote and append unsafe stuff           
         quoted.append('(')
         for character in needle.group():
             quoted.append('%02x' % ord(character))
         quoted.append(')')
-    
+
     # append rest of string
-    quoted.append(filename[location:])    
+    quoted.append(filename[location:])
     return ''.join(quoted)
 
 
@@ -339,18 +342,18 @@ def unquoteWikiname(filename, charsets=[config.charset]):
     if isinstance(filename, type(u'')):
         filename = filename.encode(config.charset)
     ### Temporary fix end ###
-        
-    parts = []    
+
+    parts = []
     start = 0
-    for needle in QUOTED.finditer(filename):  
+    for needle in QUOTED.finditer(filename):
         # append leading unquoted stuff
         parts.append(filename[start:needle.start()])
-        start = needle.end()            
+        start = needle.end()
         # Append quoted stuff
-        group =  needle.group(1)
+        group = needle.group(1)
         # Filter invalid filenames
         if (len(group) % 2 != 0):
-            raise InvalidFileNameError(filename) 
+            raise InvalidFileNameError(filename)
         try:
             for i in range(0, len(group), 2):
                 byte = group[i:i+2]
@@ -359,12 +362,12 @@ def unquoteWikiname(filename, charsets=[config.charset]):
         except ValueError:
             # byte not in hex, e.g 'xy'
             raise InvalidFileNameError(filename)
-    
+
     # append rest of string
     if start == 0:
         wikiname = filename
     else:
-        parts.append(filename[start:len(filename)])   
+        parts.append(filename[start:len(filename)])
         wikiname = ''.join(parts)
 
     # This looks wrong, because at this stage "()" can be both errors
@@ -373,7 +376,7 @@ def unquoteWikiname(filename, charsets=[config.charset]):
     # Filter invalid filenames. Any left (xx) must be invalid
     #if '(' in wikiname or ')' in wikiname:
     #    raise InvalidFileNameError(filename)
-    
+
     wikiname = decodeUserInput(wikiname, charsets)
     return wikiname
 
@@ -429,7 +432,7 @@ class MetaDict(dict):
                 value = int(value)
             dict.__setitem__(self, key, value)
         self.loaded = True
-    
+
     def _put_meta(self):
         """ put the meta dict into an arbitrary filename.
             does not keep or modify state, does uncached, direct disk access.
@@ -486,7 +489,7 @@ def load_wikimap(request):
     except AttributeError:
         _interwiki_list = {}
         lines = []
- 
+
         # order is important here, the local intermap file takes
         # precedence over the shared one, and is thus read AFTER
         # the shared one
@@ -504,7 +507,7 @@ def load_wikimap(request):
         for line in lines:
             if not line or line[0] == '#': continue
             try:
-                line = "%s %s/InterWiki" % (line, request.getScriptname()) 
+                line = "%s %s/InterWiki" % (line, request.getScriptname())
                 wikitag, urlprefix, trash = line.split(None, 2)
             except ValueError:
                 pass
@@ -520,9 +523,9 @@ def load_wikimap(request):
 
         # save for later
         request.cfg._interwiki_list = _interwiki_list
-    
+
     return _interwiki_list
-    
+
 def split_wiki(wikiurl):
     """ Split a wiki url, e.g:
     
@@ -696,7 +699,7 @@ def getFrontPage(request):
     @return localized page_front_page, if there is a translation
     """
     return getSysPage(request, request.cfg.page_front_page)
-    
+
 
 def getHomePage(request, username=None):
     """
@@ -815,7 +818,7 @@ for key, value in MIMETYPES_sanitize_mapping.items():
 # mimetype stuff ------------------------------------------------------------
 class MimeType(object):
     """ represents a mimetype like text/plain """
-    
+
     def __init__(self, mimestr=None, filename=None):
         self.major = self.minor = None # sanitized mime type and subtype
         self.params = {} # parameters like "charset" or others
@@ -825,13 +828,13 @@ class MimeType(object):
             self.parse_mimetype(mimestr)
         elif filename:
             self.parse_filename(filename)
-    
+
     def parse_filename(self, filename):
         mtype, encoding = mimetypes.guess_type(filename)
         if mtype is None:
             mtype = 'application/octet-stream'
         self.parse_mimetype(mtype)
-        
+
     def parse_mimetype(self, mimestr):
         """ take a string like used in content-type and parse it into components,
             alternatively it also can process some abbreviated string like "wiki"
@@ -854,7 +857,7 @@ class MimeType(object):
         if self.params.has_key('charset'):
             self.charset = self.params['charset'].lower()
         self.sanitize()
-            
+
     def parse_format(self, format):
         """ maps from what we currently use on-page in a #format xxx processing
             instruction to a sanitized mimetype major, minor tuple.
@@ -1038,7 +1041,7 @@ def getPlugins(kind, cfg):
     """
     # Copy names from builtin plugins - so we dont destroy the value
     all_plugins = builtinPlugins(kind)[:]
-    
+
     # Add extension plugins without duplicates
     for plugin in wikiPlugins(kind, cfg):
         if plugin not in all_plugins:
@@ -1080,7 +1083,7 @@ def getParserForExtension(cfg, extension):
                     etd = Parser
         cfg._EXT_TO_PARSER = etp
         cfg._EXT_TO_PARSER_DEFAULT = etd
-        
+
     return cfg._EXT_TO_PARSER.get(extension, cfg._EXT_TO_PARSER_DEFAULT)
 
 
@@ -1230,11 +1233,11 @@ class ParameterParser:
         parameter_list = [None] * len(self.param_list)
         parameter_dict = {}
         check_list = [0] * len(self.param_list)
-            
+
         i = 0
         start = 0
         named = False
-        while start<len(input):
+        while start < len(input):
             match = re.match(self.param_re, input[start:])
             if not match: raise ValueError, "Misformatted value"
             start += match.end()
@@ -1256,7 +1259,7 @@ class ParameterParser:
 
             parameter_list.append(value)
             if match.group("name"):
-                if not self.param_dict.has_key( match.group("name")):
+                if not self.param_dict.has_key(match.group("name")):
                     raise ValueError, "Unknown parameter name '%s'" % match.group("name")
                 nr = self.param_dict[match.group("name")]
                 if check_list[nr]:
@@ -1274,7 +1277,6 @@ class ParameterParser:
             # check type
             #if not type in self.param_list[nr]:
 
-                
             i += 1
         return parameter_list, parameter_dict
 
@@ -1282,9 +1284,9 @@ class ParameterParser:
     def _check_type(value, type, format):
         if type == 'n' and 's' in format: # n as s
             return value
-        
+
         if type in format: return value # x -> x
-        
+
         if type == 'i':
             if 'f' in format: return float(value) # i -> f
             elif 'b' in format: return value # i -> b
@@ -1296,7 +1298,7 @@ class ParameterParser:
 
 
         if 's' in format: # * -> s
-            return str(value) 
+            return str(value)
         else:
             pass # XXX error
 
@@ -1422,14 +1424,14 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
         text = params # default
     if formatter:
         url = "%s/%s" % (request.getScriptname(), params)
-        if on != None:
+        if on is not None:
             return formatter.url(on, url, css_class, **kw)
         return (formatter.url(1, url, css_class, **kw) +
                 formatter.rawHTML(text) +
                 formatter.url(0))
-    if on != None and not on:
+    if on is not None and not on:
         return '</a>'
-    
+
     attrs = ''
     if css_class:
         attrs += ' class="%s"' % css_class
@@ -1457,14 +1459,14 @@ def linediff(oldlines, newlines, **kw):
     @rtype: list
     @return: lines like diff tool does output.
     """
-    false = lambda s: None 
+    false = lambda s: None
     if kw.get('ignorews', 0):
         d = difflib.Differ(false)
     else:
         d = difflib.Differ(false, false)
 
-    lines = list(d.compare(oldlines,newlines))
- 
+    lines = list(d.compare(oldlines, newlines))
+
     # return empty list if there were no changes
     changed = 0
     for l in lines:
@@ -1475,7 +1477,7 @@ def linediff(oldlines, newlines, **kw):
 
     if not "we want the unchanged lines, too":
         if "no questionmark lines":
-            lines = filter(lambda line : line[0]!='?', lines)
+            lines = filter(lambda line: line[0] != '?', lines)
         return lines
 
 
@@ -1504,7 +1506,7 @@ def linediff(oldlines, newlines, **kw):
                 count = 0
             else:
                 count = 0
-                i = i + 1                            
+                i += 1
             if marker == '-': lcount_old = lcount_old + 1
             else: lcount_new = lcount_new + 1
         elif marker == '?':
@@ -1513,7 +1515,7 @@ def linediff(oldlines, newlines, **kw):
     # remove unchanged lines a the end
     if count > 3:
         lines[-count+3:] = []
-    
+
     return lines
 
 
@@ -1532,16 +1534,16 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     from MoinMoin.Page import Page
     lines1 = Page(request, pagename1, rev=rev1).getlines()
     lines2 = Page(request, pagename2, rev=rev2).getlines()
-    
+
     lines = linediff(lines1, lines2, **kw)
     return lines
- 
+
 
 ########################################################################
 ### Tickets - used by RenamePage and DeletePage
 ########################################################################
 
-def createTicket(tm = None):
+def createTicket(tm=None):
     """Create a ticket using a site-specific secret (the config)"""
     import sha, time, types
     ticket = tm or "%010x" % time.time()

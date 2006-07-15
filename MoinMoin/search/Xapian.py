@@ -8,7 +8,7 @@
 """
 debug = True
 
-import sys, os, re, codecs, errno, time
+import sys, os, re, codecs, time
 from pprint import pprint
 
 import xapian
@@ -19,14 +19,13 @@ from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 from MoinMoin.Page import Page
 from MoinMoin import config, wikiutil
-from MoinMoin.util import filesys, lock
+from MoinMoin.search.builtin import BaseIndex
 
 try:
     # PyStemmer, snowball python bindings from http://snowball.tartarus.org/
     from Stemmer import Stemmer
-    use_stemming = True
 except ImportError:
-    use_stemming = False
+    Stemmer = None
 
 class UnicodeQuery(xapian.Query):
     def __init__(self, *args, **kwargs):
@@ -47,8 +46,8 @@ class UnicodeQuery(xapian.Query):
 ### Tokenizer
 ##############################################################################
 
-def getWikiAnalyzerFactory(language='en'):
-    return (lambda: WikiAnalyzer(language))
+def getWikiAnalyzerFactory(request=None, language='en'):
+    return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
     singleword = r"[%(u)s][%(l)s]+" % {
@@ -74,8 +73,8 @@ class WikiAnalyzer:
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
-    def __init__(self, language=None):
-        if use_stemming and language:
+    def __init__(self, request=None, language=None):
+        if request and request.cfg.xapian_stemming and language:
             self.stemmer = Stemmer(language)
         else:
             self.stemmer = None
@@ -88,165 +87,59 @@ class WikiAnalyzer:
             
         if isinstance(value, list): # used for page links
             for v in value:
-                yield enc(v)
+                yield (enc(v), 0)
         else:
             tokenstream = re.finditer(self.token_re, value)
             for m in tokenstream:
                 if m.group("acronym"):
-                    yield enc(m.group("acronym").replace('.', ''))
+                    yield (enc(m.group("acronym").replace('.', '')),
+                            m.start())
                 elif m.group("company"):
-                    yield enc(m.group("company"))
+                    yield (enc(m.group("company")), m.start())
                 elif m.group("email"):
+                    displ = 0
                     for word in self.mail_re.split(m.group("email")):
                         if word:
-                            yield enc(word)
+                            yield (enc(word), m.start() + displ)
+                            displ += len(word) + 1
                 elif m.group("hostname"):
+                    displ = 0
                     for word in self.dot_re.split(m.group("hostname")):
-                        yield enc(word)
+                        yield (enc(word), m.start() + displ)
+                        displ += len(word) + 1
                 elif m.group("num"):
+                    displ = 0
                     for word in self.dot_re.split(m.group("num")):
-                        yield enc(word)
+                        yield (enc(word), m.start() + displ)
+                        displ += len(word) + 1
                 elif m.group("word"):
                     word = m.group("word")
-                    yield enc(word)
+                    yield (enc(word), m.start())
                     # if it is a CamelCaseWord, we additionally yield Camel, Case and Word
                     if self.wikiword_re.match(word):
                         for sm in re.finditer(self.singleword_re, word):
-                            yield enc(sm.group())
+                            yield (enc(sm.group()), m.start() + sm.start())
 
     def tokenize(self, value, flat_stemming=True):
         """Yield a stream of lower cased raw and stemmed (optional) words from a string.
            value must be an UNICODE object or a list of unicode objects
         """
-        for i in self.raw_tokenize(value):
+        for word, pos in self.raw_tokenize(value):
             if flat_stemming:
-                yield i # XXX: should we really use a prefix for that? Index.prefixMap['raw'] + i
+                # XXX: should we really use a prefix for that?
+                # Index.prefixMap['raw'] + i
+                yield (word, pos)
                 if self.stemmer:
-                    yield self.stemmer.stemWord(i)
+                    yield (self.stemmer.stemWord(word), pos)
             else:
-                yield (i, self.stemmer.stemWord(i))
+                yield (word, self.stemmer.stemWord(word), pos)
 
 
 #############################################################################
 ### Indexing
 #############################################################################
 
-class UpdateQueue:
-    def __init__(self, file, lock_dir):
-        self.file = file
-        self.writeLock = lock.WriteLock(lock_dir, timeout=10.0)
-        self.readLock = lock.ReadLock(lock_dir, timeout=10.0)
-
-    def exists(self):
-        return os.path.exists(self.file)
-
-    def append(self, pagename):
-        """ Append a page to queue """
-        if not self.writeLock.acquire(60.0):
-            request.log("can't add %r to xapian update queue: can't lock queue" %
-                        pagename)
-            return
-        try:
-            f = codecs.open(self.file, 'a', config.charset)
-            try:
-                f.write(pagename + "\n")
-            finally:
-                f.close()
-        finally:
-            self.writeLock.release()
-
-    def pages(self):
-        """ Return list of pages in the queue """
-        if self.readLock.acquire(1.0):
-            try:
-                return self._decode(self._read())
-            finally:
-                self.readLock.release()
-        return []
-
-    def remove(self, pages):
-        """ Remove pages from the queue
-        
-        When the queue is empty, the queue file is removed, so exists()
-        can tell if there is something waiting in the queue.
-        """
-        if self.writeLock.acquire(30.0):
-            try:
-                queue = self._decode(self._read())
-                for page in pages:
-                    try:
-                        queue.remove(page)
-                    except ValueError:
-                        pass
-                if queue:
-                    self._write(queue)
-                else:
-                    self._removeFile()
-                return True
-            finally:
-                self.writeLock.release()
-        return False
-
-    # Private -------------------------------------------------------
-
-    def _decode(self, data):
-        """ Decode queue data """
-        pages = data.splitlines()
-        return self._filterDuplicates(pages)
-
-    def _filterDuplicates(self, pages):
-        """ Filter duplicates in page list, keeping the order """
-        unique = []
-        seen = {}
-        for name in pages:
-            if not name in seen:
-                unique.append(name)
-                seen[name] = 1
-        return unique
-
-    def _read(self):
-        """ Read and return queue data
-        
-        This does not do anything with the data so we can release the
-        lock as soon as possible, enabling others to update the queue.
-        """
-        try:
-            f = codecs.open(self.file, 'r', config.charset)
-            try:
-                return f.read()
-            finally:
-                f.close()
-        except (OSError, IOError), err:
-            if err.errno != errno.ENOENT:
-                raise
-            return ''
-
-    def _write(self, pages):
-        """ Write pages to queue file
-        
-        Requires queue write locking.
-        """
-        # XXX use tmpfile/move for atomic replace on real operating systems
-        data = '\n'.join(pages) + '\n'
-        f = codecs.open(self.file, 'w', config.charset)
-        try:
-            f.write(data)
-        finally:
-            f.close()
-
-    def _removeFile(self):
-        """ Remove queue file 
-        
-        Requires queue write locking.
-        """
-        try:
-            os.remove(self.file)
-        except OSError, err:
-            if err.errno != errno.ENOENT:
-                raise
-
-
-class Index:
+class Index(BaseIndex):
     indexValueMap = {
         # mapping the value names we can easily fetch from the index to
         # integers required by xapian. 0 and 1 are reserved by xapwrap!
@@ -281,27 +174,12 @@ class Index:
                        #Y   year (four digits)
     }
 
-    class LockedException(Exception):
-        pass
-    
     def __init__(self, request):
-        self.request = request
-        cache_dir = request.cfg.cache_dir
-        main_dir = self._main_dir()
-        self.dir = os.path.join(main_dir, 'index')
-        filesys.makeDirs(self.dir)
-        self.sig_file = os.path.join(main_dir, 'complete')
-        lock_dir = os.path.join(main_dir, 'index-lock')
-        self.lock = lock.WriteLock(lock_dir,
-                                   timeout=3600.0, readlocktimeout=60.0)
-        self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
-                                 os.path.join(main_dir, 'update-queue-lock'))
+        BaseIndex.__init__(self, request)
 
-        # Disabled until we have a sane way to build the index with a
-        # queue in small steps.
-        ## if not self.exists():
-        ##    self.indexPagesInNewThread(request)
+        # Check if we should and can stem words
+        if request.cfg.xapian_stemming and not Stemmer:
+            request.cfg.xapian_stemming = False
 
     def _main_dir(self):
         if self.request.cfg.xapian_index_dir:
@@ -309,13 +187,6 @@ class Index:
                     self.request.cfg.siteid)
         else:
             return os.path.join(self.request.cfg.cache_dir, 'xapian')
-
-    def exists(self):
-        """ Check if index exists """        
-        return os.path.exists(self.sig_file)
-                
-    def mtime(self):
-        return os.path.getmtime(self.dir)
 
     def _search(self, query):
         """ read lock must be acquired """
@@ -336,142 +207,30 @@ class Index:
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
-    def search(self, query):
-        if not self.read_lock.acquire(1.0):
-            raise self.LockedException
-        try:
-            hits = self._search(query)
-        finally:
-            self.read_lock.release()
-        return hits
-
-    def update_page(self, page):
-        self.queue.append(page.page_name)
-        self._do_queued_updates_InNewThread()
-
-    def indexPages(self, files=None, mode='update'):
-        """ Index all pages (and files, if given)
-        
-        Can be called only from a script. To index pages during a user
-        request, use indexPagesInNewThread.
-        @arg files: iterator or list of files to index additionally
-        """
-        if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
-            return
-        try:
-            request = self._indexingRequest(self.request)
-            self._index_pages(request, None, files, mode)
-        finally:
-            self.lock.release()
-    
-    def indexPagesInNewThread(self, files=None, mode='update'):
-        """ Index all pages in a new thread
-        
-        Should be called from a user request. From a script, use indexPages.
-        """
-        if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
-            return
-        try:
-            # Prevent rebuilding the index just after it was finished
-            if self.exists():
-                self.lock.release()
-                return
-            from threading import Thread
-            indexThread = Thread(target=self._index_pages,
-                args=(self._indexingRequest(self.request), self.lock, files, mode))
-            indexThread.setDaemon(True)
-            
-            # Join the index thread after current request finish, prevent
-            # Apache CGI from killing the process.
-            def joinDecorator(finish):
-                def func():
-                    finish()
-                    indexThread.join()
-                return func
-
-            self.request.finish = joinDecorator(self.request.finish)
-            indexThread.start()
-        except:
-            self.lock.release()
-            raise
-
-    def optimize(self):
-        pass
-
-    # Private ----------------------------------------------------------------
-
-    def _do_queued_updates_InNewThread(self):
-        """ do queued index updates in a new thread
-        
-        Should be called from a user request. From a script, use indexPages.
-        """
-        if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
-            return
-        try:
-            from threading import Thread
-            indexThread = Thread(target=self._do_queued_updates,
-                args=(self._indexingRequest(self.request), self.lock))
-            indexThread.setDaemon(True)
-            
-            # Join the index thread after current request finish, prevent
-            # Apache CGI from killing the process.
-            def joinDecorator(finish):
-                def func():
-                    finish()
-                    indexThread.join()
-                return func
-                
-            self.request.finish = joinDecorator(self.request.finish)
-            indexThread.start()
-        except:
-            self.lock.release()
-            raise
-
-    def _do_queued_updates(self, request, lock=None, amount=5):
+    def _do_queued_updates(self, request, amount=5):
         """ Assumes that the write lock is acquired """
-        try:
-            writer = xapidx.Index(self.dir, True)
-            writer.configure(self.prefixMap, self.indexValueMap)
-            pages = self.queue.pages()[:amount]
-            for name in pages:
-                p = Page(request, name)
-                self._index_page(writer, p, mode='update')
-                self.queue.remove([name])
-        finally:
-            writer.close()
-            if lock:
-                lock.release()
+        writer = xapidx.Index(self.dir, True)
+        writer.configure(self.prefixMap, self.indexValueMap)
+        pages = self.queue.pages()[:amount]
+        for name in pages:
+            p = Page(request, name)
+            self._index_page(writer, p, mode='update')
+            self.queue.remove([name])
+        writer.close()
 
-    def contentfilter(self, filename):
-        """ Get a filter for content of filename and return unicode content. """
-        request = self.request
-        mt = wikiutil.MimeType(filename=filename)
-        for modulename in mt.module_name():
-            try:
-                execute = wikiutil.importPlugin(request.cfg, 'filter', modulename)
-                break
-            except wikiutil.PluginMissingError:
-                pass
-            else:
-                request.log("Cannot load filter for mimetype." + modulename)
-        try:
-            data = execute(self, filename)
-            if debug:
-                request.log("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
-        except (OSError, IOError), err:
-            data = ''
-            request.log("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
-        return mt.mime_type(), data
-   
-    def test(self, request):
-        idx = xapidx.ReadOnlyIndex(self.dir)
-        idx.configure(self.prefixMap, self.indexValueMap)
-        print idx.search("is")
-        #for d in docs:
-        #    request.log("%r %r %r" % (d, d.get('attachment'), d.get('pagename')))
+    def allterms(self):
+        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
+        i = db.allterms_begin()
+        while i != db.allterms_end():
+            yield i.get_term()
+            i.next()
+
+    def termpositions(self, uid, term):
+        db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
+        pos = db.positionlist_begin(uid, term)
+        while pos != db.positionlist_end(uid, term):
+            yield pos.get_termpos()
+            pos.next()
 
     def _index_file(self, request, writer, filename, mode='update'):
         """ index a file as it were a page named pagename
@@ -530,7 +289,7 @@ class Index:
 
         lang = ''
 
-        if use_stemming:
+        if page.request.cfg.xapian_stemming:
             for line in body.split('\n'):
                 if line.startswith('#language'):
                     lang = line.split(' ')[1]
@@ -603,7 +362,8 @@ class Index:
                                   keywords=xkeywords,
                                   sortFields=(xpname, xattachment, xmtime, xwname, ),
                                  )
-            doc.analyzerFactory = getWikiAnalyzerFactory()
+            doc.analyzerFactory = getWikiAnalyzerFactory(request,
+                    stem_language)
 
             if mode == 'update':
                 if debug: request.log("%s (replace %r)" % (pagename, uid))
@@ -643,14 +403,16 @@ class Index:
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 xlanguage = xapdoc.Keyword('lang', language)
+                xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', att_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, xlanguage, ),
+                                      keywords=(xatt_itemid, xtitle, xlanguage, xstem_language, ),
                                       sortFields=(xpname, xattachment, xmtime, xwname, ),
                                      )
-                doc.analyzerFactory = getWikiAnalyzerFactory()
+                doc.analyzerFactory = getWikiAnalyzerFactory(request,
+                        stem_language)
                 if mode == 'update':
                     if debug: request.log("%s (replace %r)" % (pagename, uid))
                     doc.uid = uid
@@ -659,9 +421,8 @@ class Index:
                     if debug: request.log("%s (add)" % (pagename,))
                     id = writer.index(doc)
         #writer.flush()
-        
 
-    def _index_pages(self, request, lock=None, files=None, mode='update'):
+    def _index_pages(self, request, files=None, mode='update'):
         """ Index all pages (and all given files)
         
         This should be called from indexPages or indexPagesInNewThread only!
@@ -673,8 +434,6 @@ class Index:
         and this method must release it when it finishes or fails.
         """
         try:
-            self._unsign()
-            start = time.time()
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)
@@ -688,50 +447,8 @@ class Index:
                     fname = fname.strip()
                     self._index_file(request, writer, fname, mode)
             writer.close()
-            request.log("indexing completed successfully in %0.2f seconds." %
-                        (time.time() - start))
-            self._sign()
         finally:
             writer.__del__()
-            if lock:
-                lock.release()
-
-    def _optimize(self, request):
-        """ Optimize the index """
-        pass
-
-    def _indexingRequest(self, request):
-        """ Return a new request that can be used for index building.
-        
-        This request uses a security policy that lets the current user
-        read any page. Without this policy some pages will not render,
-        which will create broken pagelinks index.        
-        """
-        from MoinMoin.request.CLI import Request
-        from MoinMoin.security import Permissions
-        request = Request(request.url)
-        class SecurityPolicy(Permissions):
-            def read(*args, **kw):
-                return True        
-        request.user.may = SecurityPolicy(request.user)
-        return request
-
-    def _unsign(self):
-        """ Remove sig file - assume write lock acquired """
-        try:
-            os.remove(self.sig_file)
-        except OSError, err:
-            if err.errno != errno.ENOENT:
-                raise
-
-    def _sign(self):
-        """ Add sig file - assume write lock acquired """
-        f = file(self.sig_file, 'w')
-        try:
-            f.write('')
-        finally:
-            f.close()
-
 
 def run_query(query, db):
     enquire = xapian.Enquire(db)

@@ -484,8 +484,7 @@ class XmlRpcBase:
 
     def xmlrpc_searchPages(self, query_string):
         from MoinMoin import search
-        query = search.QueryParser().parse_query(query_string)
-        results = search.searchPages(self.request, query)
+        results = search.searchPages(self.request, query_string)
         results.formatter = self.request.html_formatter
         results.request = self.request
         return [(self._outstr(hit.page_name),

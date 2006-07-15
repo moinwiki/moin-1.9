@@ -140,12 +140,16 @@ class Document:
 
     def toXapianDocument(self, indexValueMap, prefixMap=None):
         d = xapian.Document()
-        position = 1
+        position = 0
         analyzer = self.analyzerFactory()
 
         # add text fields
         for field in self.textFields:
             for token in analyzer.tokenize(field.text):
+                if isinstance(token, tuple):
+                    token, position = token
+                else:
+                    position += 1
                 # the xapian swig bindings don't like unicode objects, so we
                 # decode terms to UTF-8 before indexing. this is fine as
                 # long as all data that goes into the db (whether for
@@ -159,12 +163,13 @@ class Document:
                 # the process, the string length could expand, so we
                 # need to check here as well.
                 d.add_posting(checkKeyLen(token), position)
-                position += 1
             position += INTER_FIELD_POSITION_GAP
 
             if field.prefix:
                 prefix = field.name
                 for token in analyzer.tokenize(field.text):
+                    if isinstance(token, tuple):
+                        token = token[0]
                     # token is unicode, but gets converted to UTF-8
                     # by makePairForWrite:
                     term = makePairForWrite(prefix, token, prefixMap)

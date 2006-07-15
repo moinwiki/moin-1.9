@@ -44,18 +44,18 @@ class PluginScript(MoinScript):
         """ quick and dirty! """
         pagedir = os.path.join(rootdir, 'pages', wikiutil.quoteWikinameFS(pagename))
         os.makedirs(pagedir)
-        
+
         # write a "current" file with content "00000001"
         revstr = '%08d' % 1
         cf = os.path.join(pagedir, 'current')
         file(cf, 'w').write(revstr+'\n')
-        
+
         # create a single revision 00000001
         revdir = os.path.join(pagedir, 'revisions')
         os.makedirs(revdir)
         tf = os.path.join(revdir, revstr)
         p = Page(request, pagename)
-        text = p.get_raw_body().replace("\n","\r\n")
+        text = p.get_raw_body().replace("\n", "\r\n")
         codecs.open(tf, 'wb', config.charset).write(text)
 
         source_dir = AttachFile.getAttachDir(request, pagename)
@@ -75,5 +75,5 @@ class PluginScript(MoinScript):
         pagelist = list(request.rootpage.getPageList(user=''))
         for pagename in pagelist:
             self.copypage(request, destdir, pagename)
-        
+
 

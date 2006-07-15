@@ -18,9 +18,72 @@ import os, sys, time
 flag_quiet = 0
 script_module = '__main__'
 
-#############################################################################
-### Logging
-#############################################################################
+
+# ScriptRequest -----------------------------------------------------------
+
+class ScriptRequest(object):
+    """this is for scripts (MoinMoin/script/*) running from the commandline (CLI)
+       or from the xmlrpc server (triggered by a remote xmlrpc client).
+
+       Every script needs to do IO using this ScriptRequest class object -
+       IT IS DIFFERENT from the usual "request" you have in moin (easily to be seen
+       when you look at an xmlrpc script invocation: request.write will write to the
+       xmlrpc "channel", but scriptrequest.write needs to write to some buffer we
+       transmit later as an xmlrpc function return value.
+    """
+    def __init__(self, in, out, err):
+        self.in = in
+        self.out = out
+        self.err = err
+
+    def read(self, n=None):
+        if n is None:
+            data = self.in.read()
+        else:
+            data = self.in.read(n)
+        return data
+
+    def write(self, data):
+        self.out.write(data)
+
+    def write_err(self, data):
+        self.err.write(data)
+
+
+class ScriptRequestCLI(ScriptRequest):
+    """ When a script runs directly on the shell, we just use the CLI request
+        object (see MoinMoin.request.CLI) to do I/O (which will use stdin/out/err).
+    """
+    def __init__(self, request):
+        self.request = request
+
+    def read(self, n=None):
+        return self.request.read(n)
+
+    def write(self, data):
+        return self.request.write(n)
+
+    def write_err(self, data):
+        return self.request.write(n) # XXX use correct request method - log, error, whatever.
+
+class ScriptRequestStrings(ScriptRequest):
+    """ When a script gets run by our xmlrpc server, we have the input as a
+        string and we also need to catch the output / error output as strings.
+    """
+    def __init__(self, instr):
+        self.in = StringIO(instr)
+        self.out = StringIO()
+        self.err = StringIO()
+
+    def fetch_output(self):
+        outstr = self.out.get_value()
+        errstr = self.err.get_value()
+        self.out.close()
+        self.err.close()
+        return outstr, errstr
+
+
+# Logging -----------------------------------------------------------------
 
 def fatal(msgtext, **kw):
     """ Print error msg to stderr and exit. """
@@ -38,9 +101,7 @@ def log(msgtext):
         sys.stderr.write(msgtext + "\n")
 
 
-#############################################################################
-### Commandline Support
-#############################################################################
+# Commandline Support --------------------------------------------------------
 
 class Script:
     def __init__(self, script, usage, argv=None, def_values=None):
@@ -70,12 +131,12 @@ class Script:
         if def_values:
             self.parser.set_defaults(**def_values.__dict__)
         self.parser.add_option(
-            "-q", "--quiet", 
+            "-q", "--quiet",
             action="store_true", dest="quiet",
             help="Be quiet (no informational messages)"
         )
         self.parser.add_option(
-            "--show-timing", 
+            "--show-timing",
             action="store_true", dest="show_timing", default=False,
             help="Show timing values [default: %default]"
         )
@@ -122,7 +183,7 @@ class MoinScript(Script):
             "--page", dest="page", default='',
             help="wiki page name [default: %default]"
         )
-    
+
     def init_request(self):
         """ create request """
         from MoinMoin.request import CLI
@@ -130,7 +191,7 @@ class MoinScript(Script):
             self.request = CLI.Request(self.options.wiki_url, self.options.page)
         else:
             self.request = CLI.Request(pagename=self.options.page)
-        
+
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir

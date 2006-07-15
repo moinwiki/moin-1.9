@@ -50,4 +50,4 @@ class PluginScript(MoinScript):
             print "- disabled."
         else:
             print "- is already disabled."
-            
+

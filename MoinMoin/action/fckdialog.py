@@ -165,10 +165,7 @@ def page_list(request):
     from MoinMoin import search
     name = request.form.get("pagename",[""])[0]
     if name:
-        searchresult = search.searchPages(
-            request,
-            search.QueryParser().parse_query('t:"%s"' % name))
-        
+        searchresult = search.searchPages(request, 't:"%s"' % name)
         pages = [p.page_name for p in searchresult.hits]
     else:
         pages = [name]
@@ -209,9 +206,7 @@ def link_dialog(request):
     if name:
         from MoinMoin import search
         # XXX error handling!
-        searchresult = search.searchPages(
-            request,
-            search.QueryParser().parse_query('t:"%s"' % name))
+        searchresult = search.searchPages(request, 't:"%s"' % name)
         
         pages = [p.page_name for p in searchresult.hits]
         pages.sort()
@@ -378,9 +373,7 @@ def attachment_dialog(request):
     if name:
         from MoinMoin import search
         # XXX error handling!
-        searchresult = search.searchPages(
-            request,
-            search.QueryParser().parse_query('t:"%s"' % name))
+        searchresult = search.searchPages(request, 't:"%s"' % name)
         
         pages = [p.page_name for p in searchresult.hits]
         pages.sort()

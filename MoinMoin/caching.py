@@ -13,7 +13,7 @@ from MoinMoin.util import filesys
 locking = 1
 if locking:
     from MoinMoin.util import lock
-    
+
 class CacheEntry:
     def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
         """ init a cache entry
@@ -49,7 +49,7 @@ class CacheEntry:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.ReadLock(self.lock_dir, 60.0)
             self.wlock = lock.WriteLock(self.lock_dir, 60.0)
-        
+
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
 
@@ -73,7 +73,7 @@ class CacheEntry:
             return 1
 
         needsupdate = ftime > ctime
-        
+
         # if a page depends on the attachment dir, we check this, too:
         if not needsupdate and attachdir:
             try:
@@ -81,7 +81,7 @@ class CacheEntry:
             except os.error:
                 ftime2 = 0
             needsupdate = ftime2 > ctime
-                
+
         return needsupdate
 
     def copyto(self, filename):

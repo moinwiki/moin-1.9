@@ -20,7 +20,7 @@ class PluginScript(MoinScript):
 
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
-    
+
     def mainloop(self):
         try:
             import mailimportconf
@@ -29,10 +29,11 @@ class PluginScript(MoinScript):
 
         secret = mailimportconf.mailimport_secret
         url = mailimportconf.mailimport_url
-        
+
         s = xmlrpclib.ServerProxy(url)
 
         result = s.ProcessMail(secret, xmlrpclib.Binary(input.read()))
-        
+
         if result != "OK":
             print >>sys.stderr, result
+

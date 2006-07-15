@@ -17,9 +17,9 @@ from MoinMoin.script import MoinScript
 class PluginScript(MoinScript):
     def __init__(self, argv, def_values):
         MoinScript.__init__(self, argv, def_values)
-    
+
     def do_edit(self, pagename, origtext):
-        if pagename in ['LocalSpellingWords', 'LocalBadContent',] or pagename.endswith('Template'):
+        if pagename in ['LocalSpellingWords', 'LocalBadContent', ] or pagename.endswith('Template'):
             return origtext
         language_line = format_line = masterpage = None
         acl_lines = []
@@ -40,7 +40,7 @@ class PluginScript(MoinScript):
                 elif l.startswith('#format '):
                     format_line = l
                 elif l.startswith('##master-page:'):
-                    masterpage = l.split(':',1)[1].strip()
+                    masterpage = l.split(':', 1)[1].strip()
                     master_lines.append(l)
                 elif l.startswith('##master-date:'):
                     master_lines.append(l)
@@ -56,10 +56,10 @@ class PluginScript(MoinScript):
         if not format_line:
             format_line = '#format wiki'
         if not acl_lines and (
-            masterpage is None or masterpage not in ['FrontPage', 'WikiSandBox',] and not masterpage.endswith('Template')):
+            masterpage is None or masterpage not in ['FrontPage', 'WikiSandBox', ] and not masterpage.endswith('Template')):
             acl_lines = ['#acl MoinPagesEditorGroup:read,write,delete,revert All:read']
         if not master_lines:
-            master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date',]
+            master_lines = ['##master-page:Unknown-Page', '##master-date:Unknown-Date', ]
 
         c1old = "## Please edit (or translate) system/help pages on the moinmaster wiki ONLY."
         c2old = "## For more information, please see MoinMaster:MoinPagesEditorGroup."
@@ -68,16 +68,16 @@ class PluginScript(MoinScript):
         for c in (c1old, c2old, c1, c2):
             if c in comment_lines:
                 comment_lines.remove(c)
-            
+
         comment_lines = [c1, c2, ] + comment_lines
 
         if content_lines and content_lines[-1].strip(): # not an empty line at EOF
             content_lines.append('')
 
         if masterpage and masterpage.endswith('Template'):
-            changedtext = master_lines + [format_line, language_line,] + pragma_lines + content_lines
+            changedtext = master_lines + [format_line, language_line, ] + pragma_lines + content_lines
         else:
-            changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line,] + pragma_lines + content_lines
+            changedtext = comment_lines + master_lines + acl_lines + [format_line, language_line, ] + pragma_lines + content_lines
         changedtext = '\n'.join(changedtext)
         return changedtext
 
@@ -85,9 +85,9 @@ class PluginScript(MoinScript):
         if debug:
             import codecs
             origtext = codecs.open('origtext', 'r', 'utf-8').read()
-            origtext = origtext.replace('\r\n','\n')
+            origtext = origtext.replace('\r\n', '\n')
             changedtext = self.do_edit("", origtext)
-            changedtext = changedtext.replace('\n','\r\n')
+            changedtext = changedtext.replace('\n', '\r\n')
             f = codecs.open('changedtext', 'w', 'utf-8')
             f.write(changedtext)
             f.close()

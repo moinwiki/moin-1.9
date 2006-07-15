@@ -24,7 +24,7 @@ class IndexScript(MoinScript):
             "--mode", metavar="MODE", dest="mode",
             help="either add (unconditionally add to index) or update (update an existing index)"
         )
-    
+
     def mainloop(self):
         self.init_request()
         # Do we have additional files to index?
@@ -38,7 +38,7 @@ class PluginScript(IndexScript):
     """ Xapian index build script class """
 
     def command(self):
-        from MoinMoin.Xapian import Index
+        from MoinMoin.search.Xapian import Index
         Index(self.request).indexPages(self.files, self.options.mode)
         #Index(self.request).test(self.request)
 
