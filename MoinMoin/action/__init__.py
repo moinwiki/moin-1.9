@@ -20,7 +20,7 @@
     actions_excluded, making and checking tickets, rendering some form,
     displaying errors and doing stuff after an action.
     
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+    @copyright: 2000-2004 by Jrgen Hermann <jh@web.de>,
                 2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -427,7 +427,7 @@ def do_edit(pagename, request):
     # Save new text
     else:
         try:
-            still_conflict = r"/!\ '''Edit conflict" in savetext
+            still_conflict = wikiutil.containsConflictMarker(savetext)
             pg.setConflict(still_conflict)
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:

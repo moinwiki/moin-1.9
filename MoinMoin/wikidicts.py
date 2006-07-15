@@ -59,6 +59,9 @@ class DictBase:
 
     def values(self):
         return self._dict.values()
+    
+    def get_dict(self):
+        return self._dict
 
     def has_key(self, key):
         return self._dict.has_key(key)

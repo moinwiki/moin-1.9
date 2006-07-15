@@ -780,7 +780,7 @@ class Page:
     def get_raw_body(self):
         """ Load the raw markup from the page file.
 
-        @rtype: str
+        @rtype: unicode
         @return: raw page contents of this page
         """
         if self._raw_body is None:
@@ -806,7 +806,15 @@ class Page:
                 file.close()
 
         return self._raw_body
+    
+    def get_raw_body_str(self):
+        """ Returns the raw markup from the page file, as a string.
 
+        @rtype: str
+        @return: raw page contents of this page
+        """
+        return self.get_raw_body().encode("utf-8")
+    
     def set_raw_body(self, body, modified=0):
         """ Set the raw body text (prevents loading from disk).
 
