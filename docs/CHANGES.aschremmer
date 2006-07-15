@@ -43,7 +43,8 @@ Week 22: Tax forms, Fulfilled transcription request,
          changed conflict icon,
          Added xmlrpc multicall support into the server and
          backported the client code from python 2.4
-Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as a base for syncronisation.
+Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as
+         a base for syncronisation. (See wiki)
 Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
 Week 25: Conference in Chile (FET 2006).
 Week 26: Implementation of the XMLRPC authentication system, added binary
@@ -53,7 +54,8 @@ Week 26: Implementation of the XMLRPC authentication system, added binary
          was not cared for anymore.)
 Week 27: Europython, Geneva.
 Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added preliminary SyncPages action,
-         added interwikiName XMLRPC method, added mergeChanges XMLRPC method.
+         added interwikiName XMLRPC method, added mergeChanges XMLRPC method. Started analysis of the moinupdate
+         script written by Stefan Merten.
 
 Time plan
 =========
