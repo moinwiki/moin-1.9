@@ -958,13 +958,11 @@ class Page:
         request = self.request
         request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
         if self.exists():
-            if not request.cacheable:
-                request.http_headers(request.nocache)
-            else:
-                # use the correct last-modified value from the on-disk file
-                # to ensure cacheability where supported
-                request.http_headers(["Last-Modified: " +
-                     timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
+            # use the correct last-modified value from the on-disk file
+            # to ensure cacheability where supported. Because we are sending
+            # RAW (file) content, the file mtime is correct as Last-Modified header.
+            request.http_headers(["Last-Modified: " +
+                 timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
 
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
