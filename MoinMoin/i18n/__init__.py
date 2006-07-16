@@ -284,8 +284,6 @@ def requestLanguage(request):
     if not request.cfg.language_ignore_browser:
         for lang in browserLanguages(request):
             if lang in available:
-                if request.http_accept_language:
-                    request.setHttpHeader('Vary: Accept-Language')
                 return lang
 
     # Or return the wiki default language...
