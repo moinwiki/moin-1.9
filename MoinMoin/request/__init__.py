@@ -1133,7 +1133,11 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.http_headers(["Status: 302 Found", "Location: %s" % url])
 
     def setHttpHeader(self, header):
-        """ Save header for later send. """
+        """ Save header for later send.
+        
+            Attention: although we use a list here, some implementations use a dict,
+            thus multiple calls with the same header type do NOT work in the end!
+        """
         self.user_headers.append(header)
 
     def setResponseCode(self, code, message=None):
@@ -1231,9 +1235,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         # Set Cache control header for http 1.1 caches
         # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.3
         # and http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.9
-        self.setHttpHeader('Cache-Control: no-cache="set-cookie"')
-        self.setHttpHeader('Cache-Control: private')
-        self.setHttpHeader('Cache-Control: max-age=0')
+        self.setHttpHeader('Cache-Control: no-cache="set-cookie", private, max-age=0')
 
         # Set Expires for http 1.0 caches (does not support Cache-Control)
         yearago = time.time() - (3600 * 24 * 365)
