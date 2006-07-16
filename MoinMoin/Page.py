@@ -1174,6 +1174,9 @@ class Page:
                 else:
                     # use the correct last-modified value from the on-disk file
                     # to ensure cacheability where supported
+                    # TODO: for page likes RecentChanges (generally: ALL pages
+                    # with dynamically changing content), we MUST NOT use the
+                    # page src mtime as last-modified header. XXX
                     request.http_headers(["Last-Modified: " +
                          timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
 
