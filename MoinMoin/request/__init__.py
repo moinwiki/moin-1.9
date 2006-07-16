@@ -1047,6 +1047,15 @@ class RequestBase(object):
             else:
                 pagename = None
 
+            # need to inform caches that content changes based on:
+            # * cookie (even if we aren't sending one now)
+            # * User-Agent (because a bot might be denied and get no content)
+            # * Accept-Language (except if moin is told to ignore browser language)
+            if self.cfg.language_ignore_browser:
+                self.setHttpHeader("Vary: Cookie User-Agent")
+            else:
+                self.setHttpHeader("Vary: Cookie User-Agent Accept-Language")
+
             # Handle request. We have these options:
             # 1. If user has a bad user name, delete its bad cookie and
             # send him to UserPreferences to make a new account.

@@ -1158,12 +1158,6 @@ class Page:
         if not content_only:
             # send the document leader
 
-            # need to inform caches that content changes
-            # based on cookie (even if we aren't sending one now)
-            request.setHttpHeader("Vary: Cookie")
-            # we include User-Agent because a bot might be denied and get no content
-            request.setHttpHeader("Vary: User-Agent")
-
             # use "nocache" headers if we're using a method that
             # is not simply "display", or if a user is logged in
             # (which triggers personalisation features)
