@@ -31,15 +31,15 @@ class Request(RequestBase):
             # some mod_python 2.7.X has no get method for table objects,
             # so we make a real dict out of it first.
             if not hasattr(req.subprocess_env, 'get'):
-                env=dict(req.subprocess_env)
+                env = dict(req.subprocess_env)
             else:
-                env=req.subprocess_env
+                env = req.subprocess_env
             self._setup_vars_from_std_env(env)
             RequestBase.__init__(self)
 
         except Exception, err:
             self.fail(err)
-            
+
     def fixURI(self, env):
         """ Fix problems with script_name and path_info using
         PythonOption directive to rewrite URI.
@@ -71,7 +71,7 @@ class Request(RequestBase):
             import urlparse
             scriptAndPath = urlparse.urlparse(self.request_uri)[2]
             self.script_name = location.rstrip('/')
-            path = scriptAndPath.replace(self.script_name, '', 1)            
+            path = scriptAndPath.replace(self.script_name, '', 1)
             self.path_info = wikiutil.url_unquote(path, want_unicode=False)
 
         RequestBase.fixURI(self, env)
@@ -103,9 +103,9 @@ class Request(RequestBase):
                 # objects.
                 if hasattr(item, 'value'):
                     item = item.value
-                fixedResult.append(item)                
+                fixedResult.append(item)
             args[key] = fixedResult
-            
+
         return self.decodeArgs(args)
 
     def run(self, req):
@@ -131,7 +131,7 @@ class Request(RequestBase):
     def flush(self):
         """ We can't flush it, so do nothing. """
         pass
-        
+
     def finish(self):
         """ Just return apache.OK. Status is set in req.status. """
         RequestBase.finish(self)
@@ -168,7 +168,7 @@ class Request(RequestBase):
                 self._have_status = 1
         else:
             # this is a header we sent out
-            self.mpyreq.headers_out[key]=value
+            self.mpyreq.headers_out[key] = value
 
     def http_headers(self, more_headers=[]):
         """ Sends out headers and possibly sets default content-type

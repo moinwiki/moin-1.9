@@ -29,7 +29,7 @@ class Request(RequestBase):
         RequestBase.__init__(self, properties)
         self.cfg.caching_formats = [] # don't spoil the cache
         self.initTheme() # usually request.run() does this, but we don't use it
-  
+
     def read(self, n=None):
         """ Read from input stream. """
         if n is None:
@@ -43,7 +43,7 @@ class Request(RequestBase):
 
     def flush(self):
         sys.stdout.flush()
-        
+
     def finish(self):
         RequestBase.finish(self)
         # flush the output, ignore errors caused by the user closing the socket
