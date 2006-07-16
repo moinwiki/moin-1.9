@@ -1052,9 +1052,9 @@ class RequestBase(object):
             # * User-Agent (because a bot might be denied and get no content)
             # * Accept-Language (except if moin is told to ignore browser language)
             if self.cfg.language_ignore_browser:
-                self.setHttpHeader("Vary: Cookie User-Agent")
+                self.setHttpHeader("Vary: Cookie,User-Agent")
             else:
-                self.setHttpHeader("Vary: Cookie User-Agent Accept-Language")
+                self.setHttpHeader("Vary: Cookie,User-Agent,Accept-Language")
 
             # Handle request. We have these options:
             # 1. If user has a bad user name, delete its bad cookie and
