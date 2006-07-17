@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-06-16 09:30+0800\n"
+"PO-Revision-Date: 2006-07-07 23:00+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -106,13 +106,12 @@ msgstr "有人在你編輯的時候刪除本頁了！"
 msgid "Someone else changed this page while you were editing!"
 msgstr "有人在你編輯的時候修改了本頁！"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "有人在你編輯的時候按下「存檔」了。請勿直接儲存本頁！\n"
-"請先點進 %(difflink)s 看看哪裡修改過了，再決定要不要進一步編輯、儲存本頁。"
+"請先看看哪裡修改過了，再決定要不要進一步編輯、儲存本頁。"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -269,7 +268,7 @@ msgid "You already saved this page!"
 msgstr "你已經儲存本頁了！"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "你已經修改了此頁，請勿按瀏覽器的「上一頁」。"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -475,7 +474,7 @@ msgid "Open editor on double click"
 msgstr "點兩下就進入編輯模式"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "登入之後，跳到上次瀏覽的頁面"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "在不存在的頁面連結前打上問號"
@@ -520,7 +519,7 @@ msgid "Password repeat"
 msgstr "密碼(再一次)"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(更改密碼或新建帳號才需要)"
 
 msgid "Email"
 msgstr "Email"
@@ -1312,9 +1311,8 @@ msgstr "無此帳號：{{{\"%s\"}}}！請輸入正確的名稱及密碼。"
 msgid "Missing password. Please enter user name and password."
 msgstr "沒輸入密碼！請輸入名稱及密碼。"
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "密碼錯了！"
+msgstr "抱歉，登入失敗！"
 
 msgid "You are now logged out."
 msgstr "你已經登出了。"
@@ -1553,9 +1551,8 @@ msgstr "停用"
 msgid "Enabled"
 msgstr "可用"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Lupy 搜尋"
+msgstr "Xapian 搜尋"
 
 msgid "Active threads"
 msgstr "緒程數目"
@@ -1621,10 +1618,9 @@ msgstr "\"%(key)s\" 後面要接的是整數 \"%(arg)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\" 後面要接顏色值 \"%(arg)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
-msgstr "無法呈現 reStructured text，請安裝 docutils。"
+msgstr "無法呈現 reStructured text，請安裝 Docutils。"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**includes 數超過限制**"

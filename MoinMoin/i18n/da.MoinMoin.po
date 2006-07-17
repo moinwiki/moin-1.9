@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-06-25 17:59:07+0200\n"
+"PO-Revision-Date: 2006-07-07 14:16+0200\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -106,14 +106,12 @@ msgstr "Nogen slettede denne side mens du redigerede den!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Nogen ændrede denne side mens du redigerede den!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Nogen gemte denne side mens du redigerede den!\n"
-"Gennemgå venligst siden og gem derefter. Gem ikke denne side som den er!\n"
-"Kig på ændringerne pr. %(difflink)s for at se hvad der er blevet ændret."
+"Gennemgå venligst siden og gem derefter. Gem ikke denne side som den er!"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -273,7 +271,7 @@ msgid "You already saved this page!"
 msgstr "Du har allerede gemt denne side!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "Du har allerede redigeret denne side! Undgå at bruge tilbage-knappen."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -493,7 +491,7 @@ msgid "Open editor on double click"
 msgstr "Åbn redigeringsvindue ved dobbeltklik"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "Skift til senest besøgte side efter pålogning"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Vis spørgsmålstegn ved ikke-eksisterende sider"
@@ -538,7 +536,7 @@ msgid "Password repeat"
 msgstr "Adgangskode gentaget"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(Kun ved skift af adgangskode eller ny brugerprofil)"
 
 msgid "Email"
 msgstr "Email-adresse"
@@ -1366,9 +1364,8 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Manglende adgangskode. Angiv venligst brugernavn og adgangskode."
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "Desværre, forkert adgangskode."
+msgstr "Desværre, pålogning fejlede."
 
 msgid "You are now logged out."
 msgstr "Du er nu logget ud."
@@ -1608,9 +1605,8 @@ msgstr "Deaktiveret"
 msgid "Enabled"
 msgstr "Aktiveret"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Lupy søgning"
+msgstr "Xapian søgning"
 
 msgid "Active threads"
 msgstr "Aktive tråde"
@@ -1676,11 +1672,10 @@ msgstr "Forventede et heltal·\"%(arg)s\"·efter·\"%(key)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Forventede en farvekode·\"%(arg)s\"·efter·\"%(key)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
-"Dannelsen af reStructured text er ikke mulig - kræver docutils installeret."
+"Dannelsen af reStructured text er ikke mulig - installér venligst docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maks. antal tilladte inkluderinger overskredet**"
