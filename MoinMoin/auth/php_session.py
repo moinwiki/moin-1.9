@@ -24,7 +24,7 @@ class php_session:
             @param s_path: The path where the PHP sessions are stored.
             @param s_prefix: The prefix of the session files.
         """
-        
+
         self.s_path = s_path
         self.s_prefix = s_prefix
         self.apps = apps
@@ -34,18 +34,18 @@ class php_session:
             """ Extracts name, fullname and email from the session. """
             username = session['egw_session']['session_lid'].split("@", 1)[0]
             known_accounts = session['egw_info_cache']['accounts']['cache']['account_data']
-            
+
             # if the next line breaks, then the cache was not filled with the current
             # user information
             user_info = [value for key, value in known_accounts.items()
                          if value['account_lid'] == username][0]
             name = user_info.get('fullname', '')
             email = user_info.get('email', '')
-            
+
             dec = lambda x: x and x.decode("iso-8859-1")
-            
+
             return dec(username), dec(email), dec(name)
-        
+
         user_obj = kw.get('user_obj')
         try:
             cookie = Cookie.SimpleCookie(request.saved_cookie)
@@ -61,9 +61,9 @@ class php_session:
                         break
             else:
                 return user_obj, True
-            
+
             user = user.User(request, name=username, auth_username=username)
-            
+
             changed = False
             if name != user.aliasname:
                 user.aliasname = name
@@ -71,7 +71,7 @@ class php_session:
             if email != user.email:
                 user.email = email
                 changed = True
-            
+
             if user:
                 user.create_or_update(changed)
             if user and user.valid:
