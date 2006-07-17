@@ -188,6 +188,10 @@ class Index(BaseIndex):
         else:
             return os.path.join(self.request.cfg.cache_dir, 'xapian')
 
+    def exists(self):
+        """ Check if the Xapian index exists """
+        return BaseIndex.exists(self) and os.listdir(self.dir)
+
     def _search(self, query):
         """ read lock must be acquired """
         while True:
