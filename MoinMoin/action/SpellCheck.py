@@ -109,7 +109,7 @@ def _addLocalWords(request):
         # no new words checked
         return
     newwords = u' '.join(newwords)
-    
+
     # get the page contents
     lsw_page = PageEditor(request, request.cfg.page_local_spelling_words)
     words = lsw_page.get_raw_body()
@@ -168,7 +168,7 @@ def checkSpelling(page, request, own_form=1):
 
     if badwords:
         badwords = badwords.keys()
-        badwords.sort(lambda x,y: cmp(x.lower(), y.lower()))
+        badwords.sort(lambda x, y: cmp(x.lower(), y.lower()))
 
         # build regex recognizing the bad words
         badwords_re = r'(^|(?<!\w))(%s)(?!\w)'
@@ -192,10 +192,10 @@ def checkSpelling(page, request, own_form=1):
         if own_form:
             msg = msg + ('<form method="post" action="">\n'
                          '<input type="hidden" name="action" value="%s">\n') % action_name
-        
+
         checkbox = '<input type="checkbox" name="newwords" value="%(word)s">%(word)s&nbsp;&nbsp;'
         msg = msg + (
-            " ".join(map(lambda w, cb=checkbox: cb % {'word': wikiutil.escape(w),}, badwords)) +
+            " ".join(map(lambda w, cb=checkbox: cb % {'word': wikiutil.escape(w), }, badwords)) +
             '<p><input type="submit" name="button_newwords" value="%s"></p>' %
                 _('Add checked words to dictionary')
         )

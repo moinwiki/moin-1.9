@@ -11,14 +11,14 @@
 
 from MoinMoin.Page import Page
 
-def execute( pagename, request):
+def execute(pagename, request):
     return LogoutHandler(pagename, request).handle()
 
 class LogoutHandler:
     def __init__(self, pagename, request):
         self.request = request
         self._ = request.getText
-        self.page = Page(request,pagename)
+        self.page = Page(request, pagename)
 
     def handle(self):
         _ = self._

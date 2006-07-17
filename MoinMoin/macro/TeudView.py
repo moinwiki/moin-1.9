@@ -63,7 +63,7 @@ def execute(macro, args):
     processor.appendStylesheetFile(xslfile)
     try:
         result = processor.runString(xmlstr,
-            topLevelParams = {
+            topLevelParams={
                 'uri-prefix': pagename + "?module=",
                 'uri-suffix': "",
             }
@@ -73,3 +73,4 @@ def execute(macro, args):
         raise
 
     return navigation + result
+

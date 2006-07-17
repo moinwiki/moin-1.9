@@ -25,7 +25,7 @@ def make_url_xml(vars):
   <priority>%(priority)s</priority>
 </url>
 """ % vars
-    
+
 def sitemap_url(request, base, page):
     """ return a sitemap <url>..</url> fragment for page object <page> """
     url = page.url(request)
@@ -71,7 +71,7 @@ def execute(pagename, request):
 
     result = []
     result.append("""<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">\n""")
-    
+
     # we include the / url as an important and often changed URL
     result.append(make_url_xml({
         'base': base,

@@ -24,14 +24,14 @@ def interwiki(request, **kw):
 
         if err or wikitag not in request.cfg.trusted_wikis:
             return user_obj, True
-        
+
         if password:
             homewiki = xmlrpclib.Server(wikiurl + "?action=xmlrpc2")
             account_data = homewiki.getUser(wikitail, password)
             if isinstance(account_data, str):
                 # show error message
                 return user_obj, True
-            
+
             u = user.User(request, name=username)
             for key, value in account_data.iteritems():
                 if key not in ["may", "id", "valid", "trusted"
@@ -45,6 +45,6 @@ def interwiki(request, **kw):
         else:
             pass
             # XXX redirect to homewiki
-    
+
     return user_obj, True
 

@@ -87,10 +87,10 @@ def format_page_edits(macro, lines, bookmark_usecs):
 
     # print name of page, with a link to it
     force_split = len(page.page_name) > _MAX_PAGENAME_LENGTH
-    
+
     d['icon_html'] = html_link
     d['pagelink_html'] = page.link_to(request, text=page.split_title(request, force=force_split))
-    
+
     # print time of change
     d['time_html'] = None
     if request.cfg.changed_time_fmt:
@@ -100,7 +100,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
                 'mins': tdiff}
         else:
             d['time_html'] = time.strftime(request.cfg.changed_time_fmt, line.time_tuple)
-    
+
     # print editor name or IP
     d['editors'] = None
     if request.cfg.show_names:
@@ -111,7 +111,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
                 if not name in counters:
                     counters[name] = []
                 counters[name].append(idx+1)
-            poslist = map(None,  counters.values(), counters.keys())
+            poslist = map(None, counters.values(), counters.keys())
             poslist.sort()
             ##request.write(repr(counters.items()))
             d['editors'] = []
@@ -126,7 +126,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
         comment = format_comment(request, lines[idx])
         if comment:
             comments.append((idx+1, wikiutil.escape(comment)))
-    
+
     d['changecount'] = len(lines)
     d['comments'] = comments
 
@@ -135,9 +135,9 @@ def format_page_edits(macro, lines, bookmark_usecs):
                                   wikiutil.quoteWikinameURL(line.pagename) + "?action=info",
                                   img, formatter=macro.formatter, rel="nofollow")
     d['info_html'] = info_html
-    
+
     return request.theme.recentchanges_entry(d)
-    
+
 def cmp_lines(first, second):
     return cmp(first[0], second[0])
 
@@ -174,22 +174,22 @@ def print_abandoned(macro, args, **kw):
     if not max_days:
         max_days = _MAX_DAYS
     d['rc_max_days'] = max_days
-    
+
     # give known user the option to extend the normal display
     if request.user.valid:
         d['rc_days'] = _DAYS_SELECTION
     else:
         d['rc_days'] = None
-    
+
     d['rc_update_bookmark'] = None
     request.write(request.theme.recentchanges_header(d))
 
     length = len(last_edits)
-    
+
     index = 0
     last_index = 0
     day_count = 0
-    
+
     if length > 0:
         line = last_edits[index]
         line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
@@ -200,20 +200,20 @@ def print_abandoned(macro, args, **kw):
 
         index += 1
 
-        if (index>length):
-            break    
+        if index > length:
+            break
 
         if index < length:
             line = last_edits[index]
             line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
             day = line.time_tuple[0:3]
 
-        if (day != this_day) or (index==length):
+        if (day != this_day) or (index == length):
             d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(last_edits[last_index].ed_time_usecs))
             request.write(request.theme.recentchanges_daybreak(d))
             this_day = day
-            
+
             for page in last_edits[last_index:index]:
                 request.write(format_page_edits(macro, [page], None))
             last_index = index
@@ -223,7 +223,7 @@ def print_abandoned(macro, args, **kw):
 
     d['rc_msg'] = msg
     request.write(request.theme.recentchanges_footer(d))
-    
+
 def execute(macro, args, **kw):
     # handle abandoned keyword
     if kw.get('abandoned', 0):
@@ -235,7 +235,7 @@ def execute(macro, args, **kw):
     user = request.user
     page = macro.formatter.page
     pagename = page.page_name
-    
+
     d = {}
     d['q_page_name'] = wikiutil.quoteWikinameURL(pagename)
 
@@ -256,7 +256,7 @@ def execute(macro, args, **kw):
             currentBookmark = wikiutil.version2timestamp(bookmark_usecs)
             currentBookmark = user.getFormattedDateTime(currentBookmark)
             currentBookmark = _('(currently set to %s)') % currentBookmark
-            
+
             url = wikiutil.quoteWikinameURL(pagename) + "?action=bookmark&time=del"
             deleteBookmark = wikiutil.link_tag(request, url, _("Delete Bookmark"),
                                                formatter=macro.formatter, rel="nofollow")
@@ -267,14 +267,14 @@ def execute(macro, args, **kw):
             "?action=bookmark&time=%d" % version
         d['rc_update_bookmark'] = wikiutil.link_tag(request, url, _("Set bookmark"),
                                                     formatter=macro.formatter, rel="nofollow")
-    
+
     # set max size in days
     max_days = min(int(request.form.get('max_days', [0])[0]), _DAYS_SELECTION[-1])
     # default to _MAX_DAYS for useres without bookmark
     if not max_days and not bookmark_usecs:
         max_days = _MAX_DAYS
     d['rc_max_days'] = max_days
-    
+
     # give known user the option to extend the normal display
     if request.user.valid:
         d['rc_days'] = _DAYS_SELECTION
@@ -282,7 +282,7 @@ def execute(macro, args, **kw):
         d['rc_days'] = []
 
     request.write(request.theme.recentchanges_header(d))
-    
+
     pages = {}
     ignore_pages = {}
 
@@ -298,7 +298,7 @@ def execute(macro, args, **kw):
         line.time_tuple = request.user.getTime(wikiutil.version2timestamp(line.ed_time_usecs))
         day = line.time_tuple[0:3]
         hilite = line.ed_time_usecs > (bookmark_usecs or line.ed_time_usecs)
-        
+
         if ((this_day != day or (not hilite and not max_days))) and len(pages) > 0:
             # new day or bookmark reached: print out stuff 
             this_day = day
@@ -307,7 +307,7 @@ def execute(macro, args, **kw):
             pages = pages.values()
             pages.sort(cmp_lines)
             pages.reverse()
-            
+
             if request.user.valid:
                 d['bookmark_link_html'] = wikiutil.link_tag(
                     request,
@@ -319,7 +319,7 @@ def execute(macro, args, **kw):
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
             request.write(request.theme.recentchanges_daybreak(d))
-            
+
             for page in pages:
                 request.write(format_page_edits(macro, page, bookmark_usecs))
             pages = {}
@@ -333,7 +333,7 @@ def execute(macro, args, **kw):
 
         if line.pagename in ignore_pages:
             continue
-        
+
         # end listing by default if user has a bookmark and we reached it
         if not max_days and not hilite:
             msg = _('[Bookmark reached]')
@@ -353,7 +353,7 @@ def execute(macro, args, **kw):
             pages = pages.values()
             pages.sort(cmp_lines)
             pages.reverse()
-            
+
             if request.user.valid:
                 d['bookmark_link_html'] = wikiutil.link_tag(
                     request,
@@ -365,10 +365,10 @@ def execute(macro, args, **kw):
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
             request.write(request.theme.recentchanges_daybreak(d))
-            
+
             for page in pages:
                 request.write(format_page_edits(macro, page, bookmark_usecs))
-    
+
 
     d['rc_msg'] = msg
     request.write(request.theme.recentchanges_footer(d))

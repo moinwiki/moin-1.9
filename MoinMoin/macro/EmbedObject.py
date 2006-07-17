@@ -89,7 +89,7 @@ def execute(macro, args):
     kw["loop"] = "true"
     kw["quality"] = "high"
 
-    for arg in args :
+    for arg in args:
         if '=' in arg:
             kw_count += 1
             key, value = arg.split('=', 1)
@@ -139,7 +139,7 @@ PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
     "quality": kw["quality"],
     "file": url,
 }
-    elif mime_type == "image/svg+xml": 
+    elif mime_type == "image/svg+xml":
         return '''
 <OBJECT CLASSID="" 
 WIDTH="%(width)s"
@@ -188,7 +188,7 @@ ID="viewer1" WIDTH="%(width)s" HEIGHT="%(height)s"> <PARAM NAME="CurrentPageInde
 <PARAM NAME="Zoom" VALUE="-1"> <PARAM NAME = "SRC" 
 VALUE = "%(file)s">Your browser cannot display Visio</OBJECT>''' % {
     "width": kw['width'],
-    "height": kw['height'], 
+    "height": kw['height'],
     "file": url,
 }
     else:

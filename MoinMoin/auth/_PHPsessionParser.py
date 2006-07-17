@@ -43,12 +43,12 @@ def parseValue(string, start=0):
         first_data = string[start+2:header_end]
     else:
         first_data = None
-    
+
     #print "Saw type %r, first_data is %r." % (val_type, first_data)
     if val_type == 'a': # array (in Python rather a mixture of a list and a dict)
         i = 0
         items = []
-        
+
         current_pos = header_end+2
         data = string
         while i != (int(first_data) * 2):
@@ -56,7 +56,7 @@ def parseValue(string, start=0):
             items.append(item)
             i += 1
             current_pos += 1
-        
+
         t_list = list(transformList(items))
         try:
             result = dict(t_list) # note that dict does not retain the order
@@ -64,7 +64,7 @@ def parseValue(string, start=0):
             result = list(t_list)
             #print "Warning, could not convert to dict: %r" %  (result, )
         return result, current_pos
-    
+
     if val_type == 's': # string
         current_pos = header_end+2
         end = current_pos + int(first_data)
@@ -91,7 +91,7 @@ def parseValue(string, start=0):
 
     if val_type == "N": # Null, called None in Python
         return None, start+1
-        
+
     return UnknownObject(start), start+1
 
 def parseSession(boxed):
@@ -134,10 +134,11 @@ def listSessions(path=s_path, prefix=s_prefix):
 if __name__ == '__main__':
     # testing code
     import time
-    a=time.clock()
-    
+    a = time.clock()
+
     #print s
     p_s = loadSession("...")
     import pprint; pprint.pprint(p_s)
     print time.clock() - a
     print listSessions()
+

@@ -90,7 +90,7 @@ def runTest(request):
         # TODO: do we need to hide the error when _tests can't be
         # imported? It might make it hard to debug the tests package
         # itself.
-        try:    
+        try:
             from MoinMoin import _tests
         except ImportError:
             request.write("    *** The unit tests are not available ***")

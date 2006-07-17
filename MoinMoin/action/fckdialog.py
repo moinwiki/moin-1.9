@@ -136,7 +136,7 @@ function OnChange( sMacro )
 </body>
 </html>
 ''')
-        
+
 def macro_list(request):
     from MoinMoin import macro
     macros = macro.getNames(request.cfg)
@@ -150,7 +150,7 @@ def get_macro_help(request):
     macro_re = re.compile(
         r"\|\|(<.*?>)?\{\{\{\[\[" +
         r"(?P<prototype>(?P<macro>\w*).*)" +
-        r"\]\]\}\}\}\s*\|\|" + 
+        r"\]\]\}\}\}\s*\|\|" +
         r"\s*(?P<help>.*?)\s*\|\|\s*(?P<example>.*?)\s*\|\|$", re.U + re.M)
     help = {}
     for match in macro_re.finditer(content):
@@ -163,7 +163,7 @@ def get_macro_help(request):
 
 def page_list(request):
     from MoinMoin import search
-    name = request.form.get("pagename",[""])[0]
+    name = request.form.get("pagename", [""])[0]
     if name:
         searchresult = search.searchPages(request, 't:"%s"' % name)
         pages = [p.page_name for p in searchresult.hits]
@@ -207,7 +207,7 @@ def link_dialog(request):
         from MoinMoin import search
         # XXX error handling!
         searchresult = search.searchPages(request, 't:"%s"' % name)
-        
+
         pages = [p.page_name for p in searchresult.hits]
         pages.sort()
         pages[0:0] = [name]
@@ -223,13 +223,13 @@ def link_dialog(request):
                  for page in pages])
     else:
         page_list = ""
-    
+
     # list of interwiki names
     interwiki_list = wikiutil.load_wikimap(request)
     interwiki = interwiki_list.keys()
     interwiki.sort()
     iwpreferred = request.cfg.interwiki_preferred
-    if not iwpreferred or iwpreferred and iwpreferred[-1] != None:
+    if not iwpreferred or iwpreferred and iwpreferred[-1] is not None:
         resultlist = iwpreferred
         for iw in interwiki:
             if not iw in iwpreferred:
@@ -374,11 +374,11 @@ def attachment_dialog(request):
         from MoinMoin import search
         # XXX error handling!
         searchresult = search.searchPages(request, 't:"%s"' % name)
-        
+
         pages = [p.page_name for p in searchresult.hits]
         pages.sort()
         pages[0:0] = [name]
-        page_list ='''
+        page_list = '''
          <tr>
           <td colspan=2>
            <select id="sctPagename" size="1" onchange="OnChangePagename(this.value);">
@@ -390,7 +390,7 @@ def attachment_dialog(request):
                  for page in pages])
     else:
         page_list = ""
-    
+
     # wiki url
     url_prefix = request.cfg.url_prefix
     scriptname = request.getScriptname()

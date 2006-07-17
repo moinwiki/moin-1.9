@@ -30,7 +30,7 @@ class RenamePage(ActionBase):
     def is_allowed(self):
         may = self.request.user.may
         return may.write(self.pagename) and may.delete(self.pagename)
-    
+
     def check_condition(self):
         _ = self._
         if not self.page.exists():

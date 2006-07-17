@@ -28,7 +28,7 @@ class Request(RequestBase):
 
         except Exception, err:
             self.fail(err)
-            
+
     def open_logs(self):
         # create log file for catching stderr output
         if not self.opened_logs:
@@ -48,7 +48,7 @@ class Request(RequestBase):
 
     def flush(self):
         sys.stdout.flush()
-        
+
     def finish(self):
         RequestBase.finish(self)
         # flush the output, ignore errors caused by the user closing the socket
@@ -59,12 +59,12 @@ class Request(RequestBase):
             if ex.errno != errno.EPIPE: raise
 
     # Headers ----------------------------------------------------------
-    
+
     def http_headers(self, more_headers=[]):
         # Send only once
         if getattr(self, 'sent_headers', None):
             return
-        
+
         self.sent_headers = 1
         have_ct = 0
 

@@ -145,7 +145,7 @@ nonexisting day pages:
 [[MonthCalendar(,,,,,,MonthCalendarTemplate)]]
 """
 
-Dependencies = ['namespace','time']
+Dependencies = ['namespace', 'time', ]
 
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
@@ -158,13 +158,13 @@ import re, calendar, time
 # XXX change here ----------------vvvvvv
 calendar.setfirstweekday(calendar.MONDAY)
 
-def cliprgb(r,g,b): # don't use 255!
-    if r < 0:   r=0
-    if r > 254: r=254
-    if b < 0:   b=0
-    if b > 254: b=254
-    if g < 0:   g=0
-    if g > 254: g=254
+def cliprgb(r, g, b): # don't use 255!
+    if r < 0: r = 0
+    if r > 254: r = 254
+    if b < 0: b = 0
+    if b > 254: b = 254
+    if g < 0: g = 0
+    if g > 254: g = 254
     return r, g, b
 
 def yearmonthplusoffset(year, month, offset):
@@ -198,7 +198,7 @@ def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defhe
         parmmonth = int(strmonth)
     else:
         parmmonth = defmonth
-    
+
     stroffset = args.group('offset')
     if stroffset:
         parmoffset = int(stroffset)
@@ -229,7 +229,7 @@ def parseargs(args, defpagename, defyear, defmonth, defoffset, defoffset2, defhe
     else:
         parmtemplate = deftemplate
     return parmpagename, parmyear, parmmonth, parmoffset, parmoffset2, parmheight6, parmanniversary, parmtemplate
-        
+
 # FIXME:                          vvvvvv is there a better way for matching a pagename ?
 _arg_basepage = r'\s*(?P<basepage>[^, ]+)?\s*'
 _arg_year = r',\s*(?P<year>\d+)?\s*'
@@ -237,11 +237,11 @@ _arg_month = r',\s*(?P<month>\d+)?\s*'
 _arg_offset = r',\s*(?P<offset>[+-]?\d+)?\s*'
 _arg_offset2 = r',\s*(?P<offset2>[+-]?\d+)?\s*'
 _arg_height6 = r',\s*(?P<height6>[+-]?\d+)?\s*'
-_arg_anniversary =  r',\s*(?P<anniversary>[+-]?\d+)?\s*'
+_arg_anniversary = r',\s*(?P<anniversary>[+-]?\d+)?\s*'
 _arg_template = r',\s*(?P<template>[^, ]+)?\s*' # XXX see basepage comment
 _args_re_pattern = r'^(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?$' % \
-                     (_arg_basepage,_arg_year,_arg_month, \
-                      _arg_offset,_arg_offset2,_arg_height6,_arg_anniversary,_arg_template)
+                     (_arg_basepage, _arg_year, _arg_month, \
+                      _arg_offset, _arg_offset2, _arg_height6, _arg_anniversary, _arg_template)
 
 
 def execute(macro, text):
@@ -254,7 +254,7 @@ def execute(macro, text):
         return ''
 
     args_re = re.compile(_args_re_pattern)
-    
+
     currentyear, currentmonth, currentday, h, m, s, wd, yd, ds = request.user.getTime(time.time())
     thispage = formatter.page.page_name
     # does the url have calendar params (= somebody has clicked on prev/next links in calendar) ?
@@ -285,20 +285,20 @@ def execute(macro, text):
     # does url have calendar params and is THIS the right calendar to modify (we can have multiple
     # calendars on the same page)?
     #if has_calparms and (cparmpagename,cparmyear,cparmmonth,cparmoffset) == (parmpagename,parmyear,parmmonth,parmoffset):
-    
+
     # move all calendars when using the navigation:
     if has_calparms and cparmpagename == parmpagename:
-        year,month = yearmonthplusoffset(parmyear, parmmonth, parmoffset + cparmoffset2)
+        year, month = yearmonthplusoffset(parmyear, parmmonth, parmoffset + cparmoffset2)
         parmoffset2 = cparmoffset2
         parmtemplate = cparmtemplate
     else:
-        year,month = yearmonthplusoffset(parmyear, parmmonth, parmoffset)
+        year, month = yearmonthplusoffset(parmyear, parmmonth, parmoffset)
 
     # get the calendar
     monthcal = calendar.monthcalendar(year, month)
 
     # european / US differences
-    months = ('January','February','March','April','May','June','July','August','September','October','November','December')
+    months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     # Set things up for Monday or Sunday as the first day of the week
     if calendar.firstweekday() == calendar.MONDAY:
         wkend = (5, 6)
@@ -312,15 +312,15 @@ def execute(macro, text):
     qpagenames = '*'.join(map(wikiutil.quoteWikinameURL, parmpagename))
     qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
     querystr = "calparms=%%s,%d,%d,%d,%%d,%%s" % (parmyear, parmmonth, parmoffset)
-    prevlink  = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate), 0)
-    nextlink  = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), 0)
+    prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate), 0)
+    nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), 0)
     prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate), 0)
     nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate), 0)
     prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
     nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
-    prevyear  = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
-    nextyear  = formatter.url(1, nextylink, 'cal-link') + '&gt;&gt;' + formatter.url(0)
-    
+    prevyear = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
+    nextyear = formatter.url(1, nextylink, 'cal-link') + '&gt;&gt;' + formatter.url(0)
+
     if parmpagename != [thispage]:
         pagelinks = ''
         r, g, b = (255, 0, 0)
@@ -336,14 +336,14 @@ def execute(macro, text):
             r, g, b = cliprgb(r, g, b)
             pagelinks = pagelinks + '<a style="%s" href="%s">%s</a>' % \
                 ('background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % \
-                    (r,g,b), Page(request, parmpagename[0]).url(request), ch)
+                    (r, g, b), Page(request, parmpagename[0]).url(request), ch)
             r, g, b = (r, g+colorstep, b)
             st = st + chstep
         r, g, b = (255-colorstep, 255, 255-colorstep)
         for page in parmpagename[1:]:
             pagelinks = pagelinks + '*<a style="%s" href="%s">%s</a>' % \
                             ('background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % \
-                                (r,g,b), Page(request, page).url(request), page)
+                                (r, g, b), Page(request, page).url(request), page)
         showpagename = '   %s<BR>\n' % pagelinks
     else:
         showpagename = ''
@@ -369,10 +369,10 @@ def execute(macro, text):
             cssday = "cal-workday"
         restd2.append('  <td class="%s" width="14%%">%s</td>\n' % (cssday, wday))
     restr2 = ' <tr>\n%s </tr>\n' % "".join(restd2)
- 
+
     if parmheight6:
         while len(monthcal) < 6:
-            monthcal = monthcal + [[0,0,0,0,0,0,0]]
+            monthcal = monthcal + [[0, 0, 0, 0, 0, 0, 0]]
 
     maketip_js = []
     restrn = []
@@ -399,14 +399,14 @@ def execute(macro, text):
                     for match in header1_re.finditer(daycontent):
                         if match:
                             title = match.group(1)
-                            title = wikiutil.escape(title).replace("'","\\'")
+                            title = wikiutil.escape(title).replace("'", "\\'")
                             titletext.append(title)
                     tipname = link
                     tiptitle = link
                     tiptext = '<br>'.join(titletext)
                     maketip_js.append("maketip('%s','%s','%s');" % (tipname, tiptitle, tiptext))
                     onmouse = {'onMouseOver': "tip('%s')" % tipname,
-                               'onMouseOut':  "untip()"}
+                               'onMouseOut': "untip()"}
                 else:
                     csslink = "cal-emptyday"
                     if parmtemplate:

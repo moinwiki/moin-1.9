@@ -49,7 +49,7 @@ class NewPage:
         self.formatter = macro.formatter
         self.args = self.getArgs(args)
 
-    def getArgs(self, string):
+    def getArgs(self, argstr):
         """ Temporary function until Oliver Graf args parser is finished
 
         @param string: string from the wiki markup [[NewPage(string)]]
@@ -58,7 +58,7 @@ class NewPage:
         """
         if not string:
             return {}
-        args = [s.strip() for s in string.split(',')]
+        args = [s.strip() for s in argstr.split(',')]
         args = dict(zip(self.arguments, args))
         return args
 
@@ -75,28 +75,28 @@ class NewPage:
         template = self.args.get('template') or ''
         label = self.args.get('buttonLabel')
         nametemplate = self.args.get('nameTemplate') or u'%s'
-        
+
         if parent == '@ME' and self.request.user.valid:
             parent = self.request.user.name
-        
+
         requires_input = nametemplate.find('%s') != -1
-        
+
         if label:
             # Try to get a translation, this will probably not work in
             # most case, but better than nothing.
             label = _(label)
         else:
             label = _("Create New Page")
-        
+
         # TODO: better abstract this using the formatter
         html = [
             u'<form class="macro" method="get" action=""><div>',
             u'<input type="hidden" name="action" value="newpage">',
             u'<input type="hidden" name="parent" value="%s">' % wikiutil.escape(parent, 1),
             u'<input type="hidden" name="template" value="%s">' % wikiutil.escape(template, 1),
-            u'<input type="hidden" name="nametemplate" value="%s">' % wikiutil.escape(nametemplate,1),
+            u'<input type="hidden" name="nametemplate" value="%s">' % wikiutil.escape(nametemplate, 1),
         ]
-        
+
         if requires_input:
             html += [
                 u'<input type="text" name="pagename" size="30">',
@@ -106,7 +106,7 @@ class NewPage:
             u'</div></form>',
             ]
         return self.formatter.rawHTML('\n'.join(html))
-    
+
 def execute(macro, args):
     """ Temporary glue code to use with moin current macro system """
     return NewPage(macro, args).renderInPage()

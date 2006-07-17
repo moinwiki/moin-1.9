@@ -18,12 +18,12 @@ class Request(RequestBase):
         try:
             self.twistd = twistedRequest
             self.reactor = reactor
-            
+
             # Copy headers
             self.http_accept_language = self.twistd.getHeader('Accept-Language')
             self.saved_cookie = self.twistd.getHeader('Cookie')
             self.http_user_agent = self.twistd.getHeader('User-Agent')
-            
+
             # Copy values from twisted request
             self.server_protocol = self.twistd.clientproto
             self.server_name = self.twistd.getRequestHostname().split(':')[0]
@@ -42,7 +42,7 @@ class Request(RequestBase):
             self.setURL(self.twistd.getAllHeaders())
 
             ##self.debugEnvironment(twistedRequest.getAllHeaders())
-            
+
             RequestBase.__init__(self, properties)
 
         except MoinMoinFinish: # might be triggered by http_redirect
@@ -63,7 +63,7 @@ class Request(RequestBase):
             self.fail(self.delayedError)
             return self.finish()
         RequestBase.run(self)
-            
+
     def setup_args(self, form=None):
         """ Return args dict 
         
@@ -73,12 +73,12 @@ class Request(RequestBase):
         # TODO: check if for a POST this included query_string args (needed for
         # TwikiDraw's action=AttachFile&do=savedrawing)
         return self.decodeArgs(self.twistd.args)
-        
+
     def read(self, n=None):
         """ Read from input stream. """
         # XXX why is that wrong?:
         #rd = self.reactor.callFromThread(self.twistd.read)
-        
+
         # XXX do we need self.reactor.callFromThread with that?
         # XXX if yes, why doesn't it work?
         self.twistd.content.seek(0, 0)
@@ -88,7 +88,7 @@ class Request(RequestBase):
             rd = self.twistd.content.read(n)
         #print "request.RequestTwisted.read: data=\n" + str(rd)
         return rd
-    
+
     def write(self, *data):
         """ Write to output stream. """
         #print "request.RequestTwisted.write: data=\n" + wd
@@ -153,4 +153,4 @@ class Request(RequestBase):
 
     def setResponseCode(self, code, message=None):
         self.twistd.setResponseCode(code, message)
-        
+

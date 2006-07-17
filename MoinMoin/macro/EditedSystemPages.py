@@ -31,7 +31,7 @@ class EditedSystemPages:
         # Get page filtered page list. We don't need to filter by
         # exists, because our filter check this already.
         pages = self.request.rootpage.getPageList(filter=filter, exists=0)
-           
+
         # Format as numberd list, sorted by page name         
         pages.sort()
         result = []
@@ -44,7 +44,7 @@ class EditedSystemPages:
             result.append(f.pagelink(0, name))
             result.append(f.listitem(0))
         result.append(f.number_list(0))
-        
+ 
         return ''.join(result)
 
 

@@ -22,7 +22,7 @@ class IndexScript(MoinScript):
         )
         self.parser.add_option(
             "--mode", metavar="MODE", dest="mode",
-            help="either add (unconditionally add to index) or update (update an existing index)"
+            help="either add (unconditionally add to index), update (update an existing index) or rebuild (remove and add)"
         )
 
     def mainloop(self):
@@ -40,5 +40,4 @@ class PluginScript(IndexScript):
     def command(self):
         from MoinMoin.search.Xapian import Index
         Index(self.request).indexPages(self.files, self.options.mode)
-        #Index(self.request).test(self.request)
 

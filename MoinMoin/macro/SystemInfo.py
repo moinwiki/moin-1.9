@@ -45,7 +45,7 @@ def execute(Macro, args):
 
     _ = Macro._
     request = Macro.request
-    
+
     # check for 4XSLT
     try:
         import Ft
@@ -96,24 +96,24 @@ def execute(Macro, args):
     eventlogger = eventlog.EventLog(request)
     nonestr = _("NONE")
     row('Event log', _formatInReadableUnits(eventlogger.size()))
-    
+
     row(_('Global extension macros'), ', '.join(macro.extension_macros) or nonestr)
-    row(_('Local extension macros'), 
+    row(_('Local extension macros'),
         ', '.join(wikiutil.wikiPlugins('macro', Macro.cfg)) or nonestr)
-    
+
     ext_actions = [x for x in action.extension_actions
                    if not x in request.cfg.actions_excluded]
     row(_('Global extension actions'), ', '.join(ext_actions) or nonestr)
-    row(_('Local extension actions'), 
+    row(_('Local extension actions'),
         ', '.join(action.getPlugins(request)[1]) or nonestr)
-    
+
     row(_('Global parsers'), ', '.join(parser.modules) or nonestr)
-    row(_('Local extension parsers'), 
+    row(_('Local extension parsers'),
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
-    
+
     state = (_('Disabled'), _('Enabled'))
     row(_('Xapian search'), state[request.cfg.xapian_search])
-    
+
     row(_('Active threads'), t_count or 'N/A')
     buf.write(u'</dl>')
 

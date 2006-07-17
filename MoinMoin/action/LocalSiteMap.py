@@ -22,7 +22,7 @@
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
-    
+
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
@@ -101,10 +101,10 @@ class PageTreeBuilder:
     def new_kids(self, name):
         # does not recurse
         kids = []
-        for child in Page(self.request, name).getPageLinks(self.request):            
+        for child in Page(self.request, name).getPageLinks(self.request):
             if self.is_ok(child):
                 kids.append(child)
-        return kids        
+        return kids
 
     def new_node(self):
         self.numnodes = self.numnodes + 1
@@ -139,7 +139,7 @@ class Tree:
 
     def append(self, node):
         self.children.append(node)
- 
+
     def depth_first_visit(self, request, visitor, depth=0):
         visitor.visit(request, self.node, depth)
         for c in self.children:

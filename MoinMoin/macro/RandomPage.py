@@ -15,7 +15,7 @@ Dependencies = ["time"]
 
 def execute(macro, args):
     request = macro.request
-    
+
     # get number of wanted links        
     try:
         links = max(int(args), 1)
@@ -33,13 +33,13 @@ def execute(macro, args):
         # Take one random page from the list
         pagename = random.choice(all_pages)
         all_pages.remove(pagename)
-        
+
         # Filter out deleted pages or pages the user may not read.
         page = Page(request, pagename)
         if page.exists() and request.user.may.read(pagename):
             pages.append(pagename)
             found += 1
-            
+
     if not pages:
         return ''
 
