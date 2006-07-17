@@ -442,7 +442,7 @@ class Index(BaseIndex):
         # rebuilding the DB: delete it and add everything
         if mode == 'rebuild':
             for f in os.listdir(self.dir):
-                os.unlink(f)
+                os.unlink(os.path.join(self.dir, f))
             mode = 'add'
 
         try:
