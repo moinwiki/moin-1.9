@@ -5,14 +5,18 @@ Branch moin/1.6-xapian-fpletz
     * Only term-based regex searching possible, modifier or heuristic to
       enable usage of _moinSearch for full compatibility?
     * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
+    * Positions saved in Xapian aren't always correct, check. Code
+      generally needs some more love.
 
   ToDo:
     * Implement the new search UI
     * Write/update documentation for all the new search stuff
     * Indexing and searching of categories (new term prefix)
-    * Drop _moinSearch when using Xapian and use term positions provided
-      by Xapian itself, needs some reworking of WikiAnalyzer/xapwrap to
-      get the position of stemmed words right
+    * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
+      (i.e. ExceptionTranslator)
+    * Add stemming support for highlighting stuff:
+        1. regexp for whole word (all lowercase), or
+        2. just the root of the word
 
   New Features:
     * Faster search thanks to Xapian
@@ -121,4 +125,27 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-07
     * Basic (quick and dirty, limitations and bugs included, but
       commit-ready) implementation of getting matches out of the Xapian DB
+
+2006-07-08
+    * No work: daytrip to Munich
+
+2006-07-09
+    * Bugfix for _moinSearch (not using Xapian)
+
+2006-07-11
+    * Make matches which we get from Xapian more reliable
+    * Add TitleMatch support
+    * Xapwrap needed some tuning (aka hacking), think about dropping
+      and/or rewriting much of its code as it doesn't always fit (and
+      probably won't in the future)
+
+2006-07-12
+2006-07-13
+    * No work
+
+2006-07-14
+    * Minor bugfix for TitleMatch, now works correctly
+    * First interesting match must be a TextMatch
+    * Comment read_lock code from BaseIndex (should not be needed)
+    * Support complete rebuild of the database (delete and add)
 

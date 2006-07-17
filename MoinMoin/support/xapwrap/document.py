@@ -145,6 +145,9 @@ class Document:
 
         # add text fields
         for field in self.textFields:
+            # XXX: terms textFields won't get numbered
+            # after each other, needed for titles
+            position = 0
             for token in analyzer.tokenize(field.text):
                 if isinstance(token, tuple):
                     token, position = token
@@ -163,19 +166,20 @@ class Document:
                 # the process, the string length could expand, so we
                 # need to check here as well.
                 d.add_posting(checkKeyLen(token), position)
-            position += INTER_FIELD_POSITION_GAP
+            #position += INTER_FIELD_POSITION_GAP
 
             if field.prefix:
                 prefix = field.name
                 for token in analyzer.tokenize(field.text):
                     if isinstance(token, tuple):
-                        token = token[0]
+                        token, position = token
+                    else:
+                        position += 1
                     # token is unicode, but gets converted to UTF-8
                     # by makePairForWrite:
                     term = makePairForWrite(prefix, token, prefixMap)
                     d.add_posting(term, position)
-                    position += 1
-                position += INTER_FIELD_POSITION_GAP
+                #position += INTER_FIELD_POSITION_GAP
 
         # add keyword fields
         for field in self.keywords:

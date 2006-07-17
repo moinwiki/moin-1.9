@@ -149,7 +149,7 @@ class BaseIndex:
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
-        self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
+        #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
         self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
                                  os.path.join(main_dir, 'update-queue-lock'))
 
@@ -172,12 +172,12 @@ class BaseIndex:
         raise NotImplemented
 
     def search(self, query):
-        if not self.read_lock.acquire(1.0):
-            raise self.LockedException
-        try:
-            hits = self._search(query)
-        finally:
-            self.read_lock.release()
+        #if not self.read_lock.acquire(1.0):
+        #    raise self.LockedException
+        #try:
+        hits = self._search(query)
+        #finally:
+        #    self.read_lock.release()
         return hits
 
     def update_page(self, page):
@@ -415,17 +415,25 @@ class Search:
         else:
             return self._moinSearch(pages)
 
+    def _xapianMatchDecider(self, term, pos):
+        if term[0] == 'S':      # TitleMatch
+            return TitleMatch(start=pos, end=pos+len(term)-1)
+        else:                   # TextMatch (incl. headers)
+            return TextMatch(start=pos, end=pos+len(term))
+        
     def _xapianMatch(self, page, uid):
-        matches = []
+        """ Get all relevant Xapian matches per document id """
+        positions = {}
         term = self._xapianEnquire.get_matching_terms_begin(uid)
-        #print hit['uid']
         while term != self._xapianEnquire.get_matching_terms_end(uid):
-            print term.get_term(), ':', list(self._xapianIndex.termpositions(uid, term.get_term()))
-            for pos in self._xapianIndex.termpositions(uid, term.get_term()):
-                matches.append(TextMatch(start=pos,
-                    end=pos+len(term.get_term())))
+            term_name = term.get_term()
+            for pos in self._xapianIndex.termpositions(uid,term.get_term()):
+                if pos not in positions or \
+                        len(positions[pos]) < len(term_name):
+                    positions[pos] = term_name
             term.next()
-        return matches
+        return [self._xapianMatchDecider(term, pos) for pos, term
+            in positions.iteritems()]
 
     def _moinSearch(self, pages=None):
         """ Search pages using moin's built-in full text search 
@@ -444,9 +452,11 @@ class Search:
         return hits
     
     def _moinMatch(self, page, uid):
+        """ Just kick off regular moinSearch """
         return self.query.search(page)
 
     def _getHits(self, pages, matchSearchFunction):
+        """ Get the hit tuples in pages through matchSearchFunction """
         hits = []
         fs_rootpage = self.fs_rootpage
         for hit in pages:
@@ -455,6 +465,7 @@ class Search:
                 uid = hit['uid']
             else:
                 valuedict = hit
+                uid = None
 
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
@@ -468,9 +479,9 @@ class Search:
                     else:
                         hits.append((wikiname, page, attachment, None))
                 else:
-                    match = matchSearchFunction(page, uid)
-                    if match:
-                        hits.append((wikiname, page, attachment, match))
+                    matches = matchSearchFunction(page, uid)
+                    if matches:
+                        hits.append((wikiname, page, attachment, matches))
             else: # other wiki
                 hits.append((wikiname, pagename, attachment, None))
         return hits
