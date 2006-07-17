@@ -2,7 +2,7 @@
 """
     MoinMoin - Wiki Utility Functions
 
-    @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000 - 2004 by Jrgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -1445,6 +1445,9 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     else:
         return "%s%s</a>" % (result, text)
 
+def containsConflictMarker(text):
+    """ Returns true if there is a conflict marker in the text. """
+    return "/!\ '''Edit conflict" in text
 
 def linediff(oldlines, newlines, **kw):
     """
