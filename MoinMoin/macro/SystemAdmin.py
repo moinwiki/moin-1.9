@@ -18,7 +18,7 @@ Dependencies = ["time"]
 def execute(macro, args):
     _ = macro.request.getText
     request = macro.request
-    
+
     # do not show system admin to users not in superuser list
     if not request.user.isSuperUser():
         return ''

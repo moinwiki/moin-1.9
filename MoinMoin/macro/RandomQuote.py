@@ -39,12 +39,12 @@ def execute(macro, args):
     quotes = raw.splitlines()
     quotes = [quote.strip() for quote in quotes]
     quotes = [quote[2:] for quote in quotes if quote.startswith('* ')]
-    
+
     if not quotes:
         return (macro.formatter.highlight(1) +
                 _('No quotes on %(pagename)s.') % {'pagename': pagename} +
                 macro.formatter.highlight(0))
-                
+
     quote = random.choice(quotes)
     page.set_raw_body(quote, 1)
     quote = macro.request.redirectedOutput(page.send_page,

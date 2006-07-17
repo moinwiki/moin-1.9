@@ -13,7 +13,7 @@ def execute(macro, args):
 
     if macro.request.mode_getpagelinks: # prevent recursion
         return ''
-    
+
     # delete all linked pages from a dict of all pages
     pages = macro.request.rootpage.getPageDict()
     orphaned = {}
