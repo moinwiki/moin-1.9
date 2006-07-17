@@ -21,7 +21,7 @@ def smb_mount(request, **kw):
     cfg = request.cfg
     verbose = cfg.smb_verbose
     if verbose: request.log("got name=%s login=%r logout=%r" % (username, login, logout))
-    
+
     # we just intercept login to mount and logout to umount the smb share
     if login or logout:
         import os, pwd, subprocess
@@ -36,7 +36,7 @@ def smb_mount(request, **kw):
             cmd = u"sudo mount -t cifs -o user=%(user)s,domain=%(domain)s,uid=%(uid)d,dir_mode=%(dir_mode)s,file_mode=%(file_mode)s,iocharset=%(iocharset)s //%(server)s/%(share)s %(mountpoint)s >>%(log)s 2>&1"
         elif logout:
             cmd = u"sudo umount %(mountpoint)s >>%(log)s 2>&1"
-            
+
         cmd = cmd % {
             'user': username,
             'uid': web_uid,

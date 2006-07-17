@@ -2,8 +2,6 @@
 """
     MoinMoin - auth plugin doing a check against MySQL group db
 
-    ...
-
     @copyright: 2006 by Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
@@ -17,7 +15,7 @@ def mysql_group(request, **kw):
     We don't worry about the type of request (login, logout, neither).
     We just check user is part of authorized group.
     """
-    
+
     username = kw.get('name')
 #    login = kw.get('login')
 #    logout = kw.get('logout')
@@ -28,7 +26,7 @@ def mysql_group(request, **kw):
 
     if hasattr(cfg, 'mysql_group_verbose'):
         verbose = cfg.mysql_group_verbose
-    
+
     if verbose: request.log("auth.mysql_group: name=%s user_obj=%r" % (username, user_obj))
 
     # Has any other method successfully authenticated?
@@ -53,7 +51,7 @@ def mysql_group(request, **kw):
             request.log("mysql_group: authorization failed due to exception connecting to DB, traceback follows...")
             request.log(''.join(traceback.format_exception(*info)))
             return None, False
-        
+
         c = m.cursor()
         c.execute(cfg.mysql_group_query, user_obj.auth_username)
         results = c.fetchall()

@@ -80,7 +80,7 @@ def makeCookie(request, cookie_name, cookie_string, maxage, expires):
             path = '/'
         c[cookie_name]['path'] = path
     # Set expires for older clients
-    c[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')        
+    c[cookie_name]['expires'] = request.httpDate(when=expires, rfc='850')
     return c.output()
 
 def setCookie(request, u, cookie_name, cookie_string):
@@ -96,7 +96,7 @@ def setCookie(request, u, cookie_name, cookie_string):
      < 0    -n hours, ignoring user 'remember_me' setting
     """
     # Calculate cookie maxage and expires
-    lifetime = int(request.cfg.cookie_lifetime) * 3600 
+    lifetime = int(request.cfg.cookie_lifetime) * 3600
     forever = 10 * 365 * 24 * 3600 # 10 years
     now = time.time()
     if not lifetime:
@@ -109,7 +109,7 @@ def setCookie(request, u, cookie_name, cookie_string):
     elif lifetime < 0:
         maxage = (-lifetime)
     expires = now + maxage
-    
+
     cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
     request.setHttpHeader(cookie)
@@ -141,7 +141,7 @@ def deleteCookie(request, cookie_name):
     maxage = 0
     # Set expires to one year ago for older clients
     expires = time.time() - (3600 * 24 * 365) # 1 year ago
-    cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires) 
+    cookie = makeCookie(request, cookie_name, cookie_string, maxage, expires)
     # Set cookie
     request.setHttpHeader(cookie)
     # IMPORTANT: Prevent caching of current page and cookie        
@@ -159,7 +159,7 @@ def moin_login(request, **kw):
     verbose = False
     if hasattr(cfg, 'moin_login_verbose'):
         verbose = cfg.moin_login_verbose
-    
+
     #request.log("auth.moin_login: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
 
     if login:
@@ -180,7 +180,7 @@ def moin_session(request, **kw):
     ongoing sessions, and logout. Use another method for initial login.
     """
     import base64
-    
+
     username = kw.get('name')
     login = kw.get('login')
     logout = kw.get('logout')
@@ -192,7 +192,7 @@ def moin_session(request, **kw):
         verbose = cfg.moin_session_verbose
 
     cookie_name = MOIN_SESSION
-    
+
     if verbose: request.log("auth.moin_session: name=%s login=%r logout=%r user_obj=%r" % (username, login, logout, user_obj))
 
     if login:
@@ -223,14 +223,14 @@ def moin_session(request, **kw):
         # No valid cookie
         if verbose: request.log("either no cookie or no %s key" % cookie_name)
         return user_obj, True
-    
+
     try:
         cookie_hash, cookie_body = cookie[cookie_name].value.split(':', 1)
     except ValueError:
         # Invalid cookie
         if verbose: request.log("invalid cookie format: (%s)" % cookie[cookie_name].value)
         return user_obj, True
-    
+
     if cookie_hash != make_security_hash(request, cookie_body):
         # Invalid cookie
         # XXX Cookie clear here???
@@ -239,7 +239,7 @@ def moin_session(request, **kw):
 
     # We can trust the cookie
     if verbose: request.log("Cookie OK, authenticated.")
-    params = { 'username': '', 'id': '' }
+    params = {'username': '', 'id': '', }
     cookie_pairs = cookie_body.split(":")
     for key, value in [pair.split("=", 1) for pair in cookie_pairs]:
         params[key] = base64.decodestring(value) # assuming all values are base64 encoded
@@ -251,7 +251,7 @@ def moin_session(request, **kw):
                   auth_method='moin_session',
                   auth_attribs=(),
                   )
-        
+
     if logout:
         if verbose: request.log("Logout requested, setting u invalid and 'deleting' cookie")
         u.valid = 0 # just make user invalid, but remember him

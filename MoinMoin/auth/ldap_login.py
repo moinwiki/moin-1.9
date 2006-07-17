@@ -27,14 +27,14 @@ def ldap_login(request, **kw):
 
     cfg = request.cfg
     verbose = cfg.ldap_verbose
-    
+
     if verbose: request.log("got name=%s login=%r logout=%r" % (username, login, logout))
-    
+
     # we just intercept login and logout for ldap, other requests have to be
     # handled by another auth handler
     if not login and not logout:
         return user_obj, True
-    
+
     u = None
     coding = cfg.ldap_coding
     try:
@@ -68,14 +68,14 @@ def ldap_login(request, **kw):
         dn, ldap_dict = lusers[0]
         if verbose:
             request.log("LDAP: debug lusers = %r" % lusers)
-            for key,val in ldap_dict.items():
+            for key, val in ldap_dict.items():
                 request.log("LDAP: %s: %s" % (key, val))
 
         try:
             if verbose: request.log("LDAP: DN found is %s, trying to bind with pw" % dn)
             l.simple_bind_s(dn, password.encode(coding))
             if verbose: request.log("LDAP: Bound with dn %s (username: %s)" % (dn, username))
-            
+
             email = ldap_dict.get(cfg.ldap_email_attribute, [''])[0]
             email = email.decode(coding)
             sn, gn = ldap_dict.get('sn', [''])[0], ldap_dict.get('givenName', [''])[0]
@@ -85,14 +85,14 @@ def ldap_login(request, **kw):
             elif sn:
                 aliasname = sn
             aliasname = aliasname.decode(coding)
-            
+
             u = user.User(request, auth_username=username, password="{SHA}NotStored", auth_method='ldap', auth_attribs=('name', 'password', 'email', 'mailto_author',))
             u.name = username
             u.aliasname = aliasname
             u.email = email
             u.remember_me = 0 # 0 enforces cookie_lifetime config param
             if verbose: request.log("LDAP: creating userprefs with name %s email %s alias %s" % (username, email, aliasname))
-            
+
         except ldap.INVALID_CREDENTIALS, err:
             request.log("LDAP: invalid credentials (wrong password?) for dn %s (username: %s)" % (dn, username))
 
