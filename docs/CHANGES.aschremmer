@@ -1,0 +1,32 @@
+Branch moin/1.6-sync-aschremmer
+===============================
+
+  Known main issues:
+    * ...
+
+  ToDo:
+    * Implement actual syncronisation.
+    * Implement a cross-site authentication system.
+
+  New Features:
+    * XMLRPC method to return the Moin version
+    * XMLRPC multicall support
+    * Conflict icon in RecentChanges
+
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * ...
+
+  Other Changes:
+    * Refactored conflict resolution and XMLRPC code.
+
+  Developer notes:
+    * ...
+
+
+Diary
+=====
+
+Week 21: Basic Infrastructur setup (repos), initial talks to the mentor, started writing the design document, helped other students to get started, started evaluating Mercurial as a DVCS backend
+Week 22: Tax forms, Fulfilled transcription request, written conflict icon support, refactored conflict handling, changed conflict icon, Added xmlrpc multicall support into the server and backported the client code from python 2.4
+
+
