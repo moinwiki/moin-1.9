@@ -92,7 +92,7 @@ class ActionClass:
         except ActionStatus, e:
             return self.page.send_page(self.request, msg=u'<p class="error">%s</p>\n' % (e.args[0], ))
 
-        raise ActionStatus(_("Syncronisation finished."))
+        return self.page.send_page(self.request, msg=_("Syncronisation finished."))
     
 def execute(pagename, request):
     ActionClass(pagename, request).render()
