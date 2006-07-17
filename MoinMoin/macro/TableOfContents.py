@@ -39,12 +39,12 @@ class TableOfContents:
     def __init__(self, macro, args):
         self.macro = macro
         self._ = self.macro.request.getText
-        
+
         self.inc_re = re.compile(r"^\[\[Include\((.*)\)\]\]")
         self.arg_re = re.compile(_args_re_pattern)
         self.head_re = re.compile(_title_re) # single lines only
         self.pre_re = re.compile(r'\{\{\{.+?\}\}\}', re.S)
-        
+
         self.result = []
         self.baseindent = 0
         self.indent = 0
@@ -67,7 +67,7 @@ class TableOfContents:
         if self.include_macro is None:
             self.include_macro = wikiutil.importPlugin(self.macro.request.cfg,
                                                        'macro', "Include")
-        return self.pre_re.sub('',apply(self.include_macro, args, kwargs)).split('\n')
+        return self.pre_re.sub('', apply(self.include_macro, args, kwargs)).split('\n')
 
     def run(self):
         _ = self._
@@ -76,7 +76,7 @@ class TableOfContents:
         self.result.append(self.macro.formatter.escapedText(_('Contents')))
         self.result.append(self.macro.formatter.paragraph(0))
 
-        self.process_lines(self.pre_re.sub('',self.macro.parser.raw).split('\n'),
+        self.process_lines(self.pre_re.sub('', self.macro.parser.raw).split('\n'),
                            self.macro.formatter.page.page_name)
         # Close pending lists
         for i in range(self.baseindent, self.indent):
@@ -110,12 +110,12 @@ class TableOfContents:
                         level = int(tmp.group("level"))
                     else:
                         level = 1
-                    inc_page_lines = ["%s %s %s" %("=" * level, heading, "=" * level)]
+                    inc_page_lines = ["%s %s %s" % ("=" * level, heading, "=" * level)]
                 else:
                     inc_page_lines = []
 
                 inc_page_lines = inc_page_lines + self.IncludeMacro(self.macro, match.group(1), called_by_toc=1)
-                
+
                 self.process_lines(inc_page_lines, inc_pagename)
             else:
                 self.parse_line(line, pagename)
@@ -138,12 +138,12 @@ class TableOfContents:
             self.indent = self.baseindent
 
         # Close lists
-        for i in range(0,self.indent-newindent):
+        for i in range(0, self.indent-newindent):
             self.result.append(self.macro.formatter.listitem(0))
             self.result.append(self.macro.formatter.number_list(0))
 
         # Open Lists
-        for i in range(0,newindent-self.indent):
+        for i in range(0, newindent-self.indent):
             self.result.append(self.macro.formatter.number_list(1))
             self.result.append(self.macro.formatter.listitem(1))
 
@@ -155,7 +155,7 @@ class TableOfContents:
         # close last listitem if same level
         if self.indent == newindent:
             self.result.append(self.macro.formatter.listitem(0))
-            
+
         if self.indent >= newindent:
             self.result.append(self.macro.formatter.listitem(1))
         self.result.append(self.macro.formatter.anchorlink(1,
@@ -167,5 +167,6 @@ class TableOfContents:
         self.indent = newindent
 
 def execute(macro, args):
-    toc=TableOfContents(macro,args)
+    toc = TableOfContents(macro, args)
     return toc.run()
+

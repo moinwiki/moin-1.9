@@ -15,6 +15,6 @@ def execute(macro, args):
     pagename = macro.formatter.page.page_name
     if args:
         pagename = args
-    result = _build_filelist(macro.request, pagename, 0, 1);
+    result = _build_filelist(macro.request, pagename, 0, 1)
     return result
 

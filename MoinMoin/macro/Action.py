@@ -32,16 +32,16 @@ class ActionLink:
         self.request = macro.request
         self.args = self.getArgs(args)
 
-    def getArgs(self, string):
+    def getArgs(self, argstr):
         """ Temporary function until Oliver Graf args parser is finished
 
         @param string: string from the wiki markup [[NewPage(string)]]
         @rtype: dict
         @return: dictionary with macro options
         """
-        if not string:
+        if not argstr:
             return {}
-        args = [s.strip() for s in string.split(',')]
+        args = [s.strip() for s in argstr.split(',')]
         args = dict(zip(self.arguments, args))
         return args
 
@@ -56,10 +56,10 @@ class ActionLink:
         # Default to show page instead of an error message (too lazy to
         # do an error message now).
         action = self.args.get('action', 'show')
-        
+
         # Use translated text or action name
         text = self.args.get('text', action)
-        text = _(text, formatted=False)        
+        text = _(text, formatted=False)
 
         # Escape user input
         action = wikiutil.escape(action, 1)

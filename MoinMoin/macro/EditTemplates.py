@@ -32,5 +32,6 @@ def execute(self, args):
 
         result = result + self.formatter.bullet_list(0)
         return result
-    
+
     return ''
+

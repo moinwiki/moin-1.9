@@ -87,7 +87,7 @@ class Macro:
     # to have correct dir and lang html attributes
     for lang in i18n.wikiLanguages().keys():
         Dependencies[lang] = []
-    
+
 
     def __init__(self, parser):
         self.parser = parser
@@ -96,7 +96,7 @@ class Macro:
         self.formatter = self.request.formatter
         self._ = self.request.getText
         self.cfg = self.request.cfg
-        
+
         # Initialized on execute
         self.name = None
 
@@ -131,10 +131,10 @@ class Macro:
             return (self.formatter.lang(1, self.name) +
                     self.formatter.text(text) +
                     self.formatter.lang(0, self.name))
-        
+
         self.request.current_lang = self.name
         return ''
-  
+
     def get_dependencies(self, macro_name):
         if macro_name in self.Dependencies:
             return self.Dependencies[macro_name]
@@ -178,7 +178,7 @@ class Macro:
                 ]
             boxes = u'\n'.join(boxes)
             button = _("Search Text")
-            
+
         # Format
         type = (type == "titlesearch")
         html = [
@@ -190,11 +190,11 @@ class Macro:
             u'<input type="submit" value="%s">' % button,
             boxes,
             u'</div>',
-            u'</form>',    
+            u'</form>',
             ]
         html = u'\n'.join(html)
         return self.formatter.rawHTML(html)
-    
+
     def _macro_GoTo(self, args):
         """ Make a goto box
 
@@ -241,7 +241,7 @@ class Macro:
             def filter(name):
                 return not wikiutil.isSystemPage(self.request, name)
             pages = self.request.rootpage.getPageList(filter=filter)
-        
+
         word_re = re.compile(word_re, re.UNICODE)
         map = {}
         for name in pages:
@@ -275,7 +275,7 @@ class Macro:
                 html.append(self.formatter.strong(1))
                 html.append(word)
                 html.append(self.formatter.strong(0))
-            
+
             html.append(self.formatter.bullet_list(1))
             links.sort()
             last_page = None
@@ -286,7 +286,7 @@ class Macro:
                 html.append(Page(self.request, name).link_to(self.request, attachment_indicator=1))
                 html.append(self.formatter.listitem(0))
             html.append(self.formatter.bullet_list(0))
-        
+
         def _make_index_key(index_letters, additional_html=''):
             index_letters.sort()
             def letter_link(ch):
@@ -301,7 +301,7 @@ class Macro:
 """ % (qpagename, not allpages, allpages_txt) )
         # ?action=titleindex and ?action=titleindex&mimetype=text/xml removed
 
-        return u'%s%s' % (index, u''.join(html)) 
+        return u'%s%s' % (index, u''.join(html))
 
 
     def _macro_TitleIndex(self, args):
@@ -324,16 +324,16 @@ class Macro:
 
         # With whitespace argument, return same error message as FullSearch
         elif needle.isspace():
-            err = _('Please use a more selective search term instead of {{{"%s"}}}') %  needle
+            err = _('Please use a more selective search term instead of {{{"%s"}}}') % needle
             return '<span class="error">%s</span>' % err
-            
+
         # Return a title search for needle, sorted by name.
         # XXX: what's with literal?
         results = search.searchPages(self.request, needle,
                 titlesearch=1, case=case)
         results.sortByPagename()
         return results.pageList(self.request, self.formatter)
-        
+
     def _macro_InterWiki(self, args):
         from StringIO import StringIO
         interwiki_list = wikiutil.load_wikimap(self.request)
@@ -367,7 +367,7 @@ class Macro:
             return (self.formatter.span(1, css_class="error") +
                     'Wrong argument: %s' % arg +
                     self.formatter.span(0))
-        
+
         count = self.request.rootpage.getPageCount(exists=exists)
         return self.formatter.text("%d" % count)
 
@@ -386,7 +386,7 @@ class Macro:
         # Get page list readable by current user, filtered by needle
         hits = self.request.rootpage.getPageList(filter=needle_re.search)
         hits.sort()
-        
+
         result = []
         result.append(self.formatter.bullet_list(1))
         for pagename in hits:
@@ -408,8 +408,8 @@ class Macro:
             # we ignore any time zone offsets here, assume UTC,
             # and accept (and ignore) any trailing stuff
             try:
-                year, month, day = int(args[0:4]), int(args[5:7]), int(args[8:10]) 
-                hour, minute, second = int(args[11:13]), int(args[14:16]), int(args[17:19]) 
+                year, month, day = int(args[0:4]), int(args[5:7]), int(args[8:10])
+                hour, minute, second = int(args[11:13]), int(args[14:16]), int(args[17:19])
                 tz = args[19:] # +HHMM, -HHMM or Z or nothing (then we assume Z)
                 tzoffset = 0 # we assume UTC no matter if there is a Z
                 if tz:
@@ -451,7 +451,7 @@ class Macro:
         create_only = False
         if isinstance(args, unicode):
             args = args.strip(" '\"")
-            create_only = (args.lower()=="createonly")
+            create_only = (args.lower() == "createonly")
 
         return self.formatter.rawHTML(userform.getUserForm(
             self.request,
@@ -492,8 +492,8 @@ class Macro:
         return result
 
     def _macro_GetVal(self, args):
-        page,key = args.split(',')
+        page, key = args.split(',')
         d = self.request.dicts.dict(page)
-        result = d.get(key,'')
+        result = d.get(key, '')
         return self.formatter.text(result)
 

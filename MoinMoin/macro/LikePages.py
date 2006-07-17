@@ -13,7 +13,7 @@ from MoinMoin.action import LikePages
 def execute(macro, args):
     request = macro.request
     pagename = macro.formatter.page.page_name
-    
+
     # Get matches
     start, end, matches = LikePages.findMatches(pagename, request)
 
@@ -22,3 +22,4 @@ def execute(macro, args):
         return request.redirectedOutput(LikePages.showMatches, pagename, request, start, end, matches, False)
 
     return args
+

@@ -21,7 +21,7 @@ from MoinMoin.logfile import eventlog
 
 
 class PageHits:
-    
+
     def __init__(self, macro, args):
         self.macro = macro
         self.request = macro.request
@@ -36,10 +36,10 @@ class PageHits:
         hits.sort()
         hits.reverse()
         return self.format(hits)
-        
+
     def cachedHits(self):
         """ Return tuple (cache date, cached hits) for all pages """
-        date, hits = 0, {}        
+        date, hits = 0, {}
         if self.cache.exists():
             try:
                 date, hits = pickle.loads(self.cache.content())
@@ -54,7 +54,7 @@ class PageHits:
             logDate = event_log.date()
         except logfile.LogMissing:
             return
-            
+
         changed = False
         event_log.set_filter(['VIEWPAGE'])
         for event in event_log.reverse():
@@ -64,13 +64,13 @@ class PageHits:
             if page:
                 hits[page] = hits.get(page, 0) + 1
                 changed = True
-        
+
         if changed:
-            self.updateCache(logDate, hits) 
-        
+            self.updateCache(logDate, hits)
+
     def updateCache(self, date, hits):
         self.cache.update(pickle.dumps((date, hits), PICKLE_PROTOCOL))
-    
+
     def filterReadableHits(self, hits):
         """ Filter out hits the user many not see """
         userMayRead = self.request.user.may.read
@@ -96,9 +96,10 @@ class PageHits:
                 formatter.pagelink(0, pagename),
                 formatter.listitem(0),
             ])
-        result.append(formatter.number_list(0))    
+        result.append(formatter.number_list(0))
         return ''.join(result)
 
 
 def execute(macro, args):
     return PageHits(macro, args).execute()
+

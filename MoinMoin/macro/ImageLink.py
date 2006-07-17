@@ -113,7 +113,7 @@ def execute(macro, args):
     argc = len(args)
     kw_count = 0
     kw = {} # create a dictionary for the formatter.image call
-    for arg in args :
+    for arg in args:
         if '=' in arg:
             kw_count += 1
             key, value = arg.split('=', 1)
@@ -132,7 +132,7 @@ def execute(macro, args):
         target = AttachFile.getAttachUrl(pagename, image, request)
     else:
         target = None
-        
+
     if _is_URL(image):
         kw['src'] = image
     else:
@@ -159,11 +159,11 @@ def execute(macro, args):
 
     if target is None:
         target = kw['src']
-       
+
     if argc == 1:
         return "%s%s%s" % (formatter.url(1, kw['src']),
                            formatter.image(**kw),
-                           formatter.url(0))    
+                           formatter.url(0))
 
     if _is_URL(target):
         return "%s%s%s" % (formatter.url(1, target),
