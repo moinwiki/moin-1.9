@@ -242,12 +242,6 @@ class Index(BaseIndex):
         """
         fs_rootpage = 'FS' # XXX FS hardcoded
 
-        # rebuilding the DB: delete it and add everything
-        if mode == 'rebuild':
-            for f in os.listdir(self.dir):
-                os.unlink(f)
-            mode = 'add'
-
         try:
             wikiname = request.cfg.interwikiname or 'Self'
             itemid = "%s:%s" % (wikiname, os.path.join(fs_rootpage, filename))
@@ -444,6 +438,13 @@ class Index(BaseIndex):
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
         """
+
+        # rebuilding the DB: delete it and add everything
+        if mode == 'rebuild':
+            for f in os.listdir(self.dir):
+                os.unlink(f)
+            mode = 'add'
+
         try:
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)
