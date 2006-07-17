@@ -274,7 +274,9 @@ msgid "You already saved this page!"
 msgstr "Sie haben diese Seite bereits gesichert!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr "Sie haben diese Seite bereits editiert! Bitte benutzen Sie nicht den Zurück-Button."
+msgstr ""
+"Sie haben diese Seite bereits editiert! Bitte benutzen Sie nicht den Zurück-"
+"Button."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
