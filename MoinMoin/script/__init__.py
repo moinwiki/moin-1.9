@@ -31,23 +31,23 @@ class ScriptRequest(object):
        xmlrpc "channel", but scriptrequest.write needs to write to some buffer we
        transmit later as an xmlrpc function return value.
     """
-    def __init__(self, in, out, err):
-        self.in = in
-        self.out = out
-        self.err = err
+    def __init__(self, instream, outstream, errstream):
+        self.instream = instream
+        self.outstream = outstrem
+        self.errstream = errstream
 
     def read(self, n=None):
         if n is None:
-            data = self.in.read()
+            data = self.instream.read()
         else:
-            data = self.in.read(n)
+            data = self.instream.read(n)
         return data
 
     def write(self, data):
-        self.out.write(data)
+        self.outstream.write(data)
 
     def write_err(self, data):
-        self.err.write(data)
+        self.errstream.write(data)
 
 
 class ScriptRequestCLI(ScriptRequest):
@@ -71,15 +71,15 @@ class ScriptRequestStrings(ScriptRequest):
         string and we also need to catch the output / error output as strings.
     """
     def __init__(self, instr):
-        self.in = StringIO(instr)
-        self.out = StringIO()
-        self.err = StringIO()
+        self.instream = StringIO(instr)
+        self.outstream = StringIO()
+        self.errstream = StringIO()
 
     def fetch_output(self):
-        outstr = self.out.get_value()
-        errstr = self.err.get_value()
-        self.out.close()
-        self.err.close()
+        outstr = self.outstream.get_value()
+        errstr = self.errstream.get_value()
+        self.outstream.close()
+        self.errstream.close()
         return outstr, errstr
 
 
