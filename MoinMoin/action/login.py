@@ -49,7 +49,7 @@ space between words. Group page name is not allowed.""") % name
 
             # Require password
             else:
-                password = form.get('password',[None])[0]
+                password = form.get('password', [None])[0]
                 if not password:
                     error = _("Missing password. Please enter user name and password.")
                 else:
@@ -57,15 +57,15 @@ space between words. Group page name is not allowed.""") % name
                         error = _("Sorry, login failed.")
 
             return self.page.send_page(request, msg=error)
-        
+
         else: # show login form
             request.http_headers()
             request.theme.send_title(_("Login"), pagename=self.pagename)
             # Start content (important for RTL support)
             request.write(request.formatter.startContent("content"))
-            
+
             request.write(userform.getLogin(request))
-            
+
             request.write(request.formatter.endContent())
             request.theme.send_footer(self.pagename)
             request.theme.send_closing_html()

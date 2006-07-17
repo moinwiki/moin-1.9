@@ -38,7 +38,7 @@ def show_result(pagename, request):
 
     from MoinMoin.formatter.text_html import Formatter
     formatter = Formatter(request)
-    
+
     result = subscribe_users(request, request.form['users'][0].split(","), pagename, formatter)
     request.write(result)
 
@@ -82,7 +82,7 @@ def subscribe_users(request, usernamelist, pagename, formatter):
     result.extend([''.join([formatter.smiley('{X}'), formatter.text(" " + _("Not a user:") + " " + username), formatter.linebreak(preformatted=0)]) for username in usernamelist if username not in realusers])
 
     return ''.join(result)
-    
+
 def execute(pagename, request):
     _ = request.getText
     if not request.user.may.admin(pagename):
@@ -91,7 +91,7 @@ def execute(pagename, request):
     elif not request.form.has_key('users'):
         show_form(pagename, request)
     else:
-        show_result(pagename,request)
+        show_result(pagename, request)
 
 if __name__ == '__main__':
     args = sys.argv

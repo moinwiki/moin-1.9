@@ -12,7 +12,7 @@ def execute(pagename, request):
 
     _ = request.getText
     thispage = Page(request, pagename)
-    
+
     if request.user.valid:
         username = request.user.name
     else:
@@ -28,11 +28,11 @@ def execute(pagename, request):
         wikiurl = wikiutil.mapURL(request, wikiurl)
         homepageurl = wikiutil.join_wiki(wikiurl, wikitail)
         request.http_redirect('%s?action=MyPages' % homepageurl)
-        
+
     homepage = Page(request, username)
     if not homepage.exists():
         return homepage.send_page(request,
-            msg = _('Please first create a homepage before creating additional pages.'))
+            msg=_('Please first create a homepage before creating additional pages.'))
 
     pagecontent = _("""\
 You can add some additional sub pages to your already existing homepage here.
@@ -59,11 +59,11 @@ the group pages.
     from MoinMoin.Page import Page
     from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
     request.http_headers()
-    
+
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
     request.theme.send_title(_('MyPages management', formatted=False), page=homepage)
-        
+
     # Start content - IMPORTANT - without content div, there is no direction support!
     request.write(request.formatter.startContent("content"))
 
@@ -71,7 +71,7 @@ the group pages.
     p = Page(request, "$$$")
     request.formatter.setPage(p)
     parser.format(request.formatter)
-    
+
     request.write(request.formatter.endContent())
     request.theme.send_footer(homepage.page_name)
     request.theme.send_closing_html()

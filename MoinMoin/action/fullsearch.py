@@ -33,11 +33,11 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     titlesearch = isTitleSearch(request)
 
     # context is relevant only for full search
-    if titlesearch:        
-        context = 0      
+    if titlesearch:
+        context = 0
     else:
-        context = int(request.form.get('context', [0])[0])        
-    
+        context = int(request.form.get('context', [0])[0])
+
     # Get other form parameters
     needle = request.form.get(fieldname, [''])[0]
     case = int(request.form.get('case', [0])[0])
@@ -86,10 +86,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         results.sortByPagename()
     else:
         title = _('Full Text Search: "%s"')
-        results.sortByWeight() 
+        results.sortByWeight()
 
     request.theme.send_title(title % needle, form=request.form, pagename=pagename)
-    
+
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
@@ -102,7 +102,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         output = results.pageListWithContext(request, request.formatter, info=info,
                                              context=context)
     else:
-        output = results.pageList(request, request.formatter, info=info)        
+        output = results.pageList(request, request.formatter, info=info)
     request.write(output)
 
     request.write(request.formatter.endContent())

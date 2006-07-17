@@ -30,13 +30,13 @@ def execute(pagename, request):
     # No matches
     if not matches:
         Page(request, pagename).send_page(request,
-            msg = _('No pages like "%s"!') % (pagename,))
+             msg=_('No pages like "%s"!') % (pagename,))
         return
 
     # One match - display it
     if len(matches) == 1:
         Page(request, matches.keys()[0]).send_page(request,
-            msg = _('Exactly one page like "%s" found, redirecting to page.') % (
+             msg=_('Exactly one page like "%s" found, redirecting to page.') % (
             pagename,))
         return
 
@@ -47,7 +47,7 @@ def execute(pagename, request):
     request.setContentLanguage(request.lang)
 
     request.theme.send_title(_('Pages like "%s"') % (pagename), pagename=pagename)
-        
+
     # Start content - IMPORTANT - without content div, there is no
     # direction support!
     request.write(request.formatter.startContent("content"))
@@ -99,13 +99,13 @@ def findMatches(pagename, request, s_re=None, e_re=None,):
             # Stop after 10 matches
             if found == 10:
                 break
-    
+
     # Filter deleted pages or pages the user can't read from
     # matches. Order is important!
     for name in matches.keys():
         page = Page(request, name)
         if not (page.exists() and request.user.may.read(name)):
-            del matches[name]    
+            del matches[name]
 
     # Finally, merge both dicts
     matches.update(close_matches)
@@ -131,11 +131,11 @@ def wikiMatches(pagename, pages, start_re=None, end_re=None):
     @return: start, end, matches dict
     """
     if start_re is None:
-        start_re=re.compile('([%s][%s]+)' % (config.chars_upper,
-                                             config.chars_lower))
+        start_re = re.compile('([%s][%s]+)' % (config.chars_upper,
+                                               config.chars_lower))
     if end_re is None:
-        end_re=re.compile('([%s][%s]+)$' % (config.chars_upper,
-                                            config.chars_lower))
+        end_re = re.compile('([%s][%s]+)$' % (config.chars_upper,
+                                              config.chars_lower))
 
     # If we don't get results with wiki words matching, fall back to
     # simple first word and last word, using spaces.
@@ -144,14 +144,14 @@ def wikiMatches(pagename, pages, start_re=None, end_re=None):
     if match:
         start = match.group(1)
     else:
-       start = words[0] 
-        
+       start = words[0]
+
     match = end_re.search(pagename)
     if match:
         end = match.group(1)
     else:
-        end = words[-1] 
-    
+        end = words[-1]
+
     matches = {}
     subpage = pagename + '/'
 
@@ -201,7 +201,7 @@ def closeMatches(pagename, pages):
     return matches
 
 
-def showMatches(pagename, request, start, end, matches, show_count = True):
+def showMatches(pagename, request, start, end, matches, show_count=True):
     keys = matches.keys()
     keys.sort()
     _showMatchGroup(request, matches, keys, 8, pagename, show_count)
@@ -211,7 +211,7 @@ def showMatches(pagename, request, start, end, matches, show_count = True):
     _showMatchGroup(request, matches, keys, 2, "...%s" % (end,), show_count)
 
 
-def _showMatchGroup(request, matches, keys, match, title, show_count = True):
+def _showMatchGroup(request, matches, keys, match, title, show_count=True):
     _ = request.getText
     matchcount = matches.values().count(match)
 

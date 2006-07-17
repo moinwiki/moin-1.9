@@ -20,7 +20,7 @@ class NewPage:
         self.referrer = referrer # The page the user came from
         self.pagename = self.request.form.get('pagename', [None])[0]
         self.nametemplate = self.request.form.get('nametemplate', ['%s'])[0]
-        self.nametemplate = self.nametemplate.replace('\x00','')
+        self.nametemplate = self.nametemplate.replace('\x00', '')
 
     def checkAndCombineArguments(self):
         """ Check arguments in form, return error msg
@@ -33,13 +33,13 @@ class NewPage:
         if not self.pagename and need_replace:
             return _("Cannot create a new page without a page name."
                      "  Please specify a page name.")
-        if need_replace: 
-	    # generate a string that can be safely used as the pagename
-	    # template variable
+        if need_replace:
+        # generate a string that can be safely used as the pagename
+        # template variable
             repl = 'A@'
             i = 0
             while self.nametemplate.find(repl) != -1:
-                repl += ['#','&','$','x','X',':','@'][i]
+                repl += ['#', '&', '$', 'x', 'X', ':', '@'][i]
                 i += 1
                 i = i % 7
             template = self.nametemplate.replace('%s', repl)
@@ -53,7 +53,7 @@ class NewPage:
         else:
             self.pagename = template
         return ''
-        
+
     def checkPermissions(self):
         """ Check write permission in form, return error msg
 
@@ -69,7 +69,6 @@ class NewPage:
 
     def render(self):
         """ Redirect to the new page, using edit action and template """
-        
         error = self.checkAndCombineArguments() or self.checkPermissions()
         if error:
             # Send back to the page you came from, with an error msg

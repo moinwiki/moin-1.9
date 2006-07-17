@@ -9,10 +9,10 @@
 """
 import os, time
 from StringIO import StringIO
- 
+
 from MoinMoin import wikiutil
 from MoinMoin.util import thread_monitor
- 
+
 def execute_fs(pagename, request):
     if thread_monitor.hook_enabled:
         s = StringIO()
@@ -43,10 +43,10 @@ def execute_wiki(pagename, request):
         thread_monitor.trigger_dump(s)
         time.sleep(5) # allow for all threads to dump to request
         request.write(wikiutil.escape(s.getvalue()))
-        
+
     request.write('</pre>')
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
-  
+
 execute = execute_fs
 
