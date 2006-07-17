@@ -33,7 +33,7 @@ class PackagePages:
         may = self.request.user.may
         return (not self.__class__.__name__ in self.request.cfg.actions_excluded and
                 may.write(self.pagename))
-    
+
     def render(self):
         """ Render action
 
@@ -42,7 +42,7 @@ class PackagePages:
         """
         _ = self.request.getText
         form = self.request.form
-        
+
         if form.has_key('cancel'):
             # User canceled
             return self.page.send_page(self.request)
@@ -52,7 +52,7 @@ class PackagePages:
                 raise ActionError(_('You are not allowed to edit this page.'))
             elif not self.page.exists():
                 raise ActionError(_('This page is already deleted or was never created!'))
-    
+
             self.package()
         except ActionError, e:
             return self.page.send_page(self.request, msg=e.args[0])
@@ -62,11 +62,11 @@ class PackagePages:
         _ = self.request.getText
         form = self.request.form
         COMPRESSION_LEVEL = zipfile.ZIP_DEFLATED
-        
+
         # Get new name from form and normalize.
         pagelist = form.get('pagelist', [u''])[0]
         packagename = form.get('packagename', [u''])[0]
-        
+
         if not form.get('submit', [None])[0]:
             raise ActionError(self.makeform())
 
@@ -82,10 +82,10 @@ class PackagePages:
 
         pagelist = ', '.join([getattr(page, "page_name") for page in  pages])
         target = wikiutil.taintfilename(packagename)
-    
+
         if not target:
             raise ActionError(self.makeform(_('Invalid filename "%s"!') % wikiutil.escape(packagename)))
-        
+
         # get directory, and possibly create it
         attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
         fpath = os.path.join(attach_dir, target).encode(config.charset)
@@ -107,16 +107,16 @@ class PackagePages:
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
-    
+
         script += [packLine(['Print', 'Thank you for using PackagePages!'])]
-    
+
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
         zf.close()
 
         os.chmod(fpath, 0666 & config.umask)
 
         _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
-        
+
         raise ActionError(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))
 
     def makeform(self, error=""):
@@ -164,9 +164,10 @@ class PackagePages:
     </tr>
 </table>
 </form>''' % d
-        
-        return Dialog(self.request, content=form)        
-    
+
+        return Dialog(self.request, content=form)
+
 def execute(pagename, request):
     """ Glue code for actions """
     PackagePages(pagename, request).render()
+

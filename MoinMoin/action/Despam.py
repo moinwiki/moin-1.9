@@ -94,7 +94,7 @@ def show_pages(request, pagename, editor, timestamp):
 
 def revert_page(request, pagename, editor):
     if not request.user.may.revert(pagename):
-        return 
+        return
 
     log = editlog.EditLog(request, rootpagename=pagename)
 

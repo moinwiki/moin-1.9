@@ -25,13 +25,13 @@ def addFiles(path, tar, exclude):
             tar.add(path)
 
 def sendBackup(request):
-    """ Send compressed tar file """    
+    """ Send compressed tar file """
     dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
     filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, request.cfg.backup_compression)
     request.http_headers([
-        "Content-Type: application/octet-stream", 
-        "Content-Disposition: inline; filename=\"%s\"" % filename,])
-    
+        "Content-Type: application/octet-stream",
+        "Content-Disposition: inline; filename=\"%s\"" % filename, ])
+
     tar = tarfile.open(fileobj=request, mode="w|%s" % request.cfg.backup_compression)
     # allow GNU tar's longer file/pathnames 
     tar.posix = False
@@ -75,7 +75,7 @@ def sendBackupForm(request, pagename):
     title = _('Wiki Backup / Restore')
     request.theme.send_title(title, form=request.form, pagename=pagename)
     request.write(request.formatter.startContent("content"))
-    
+
     request.write(_("""Some hints:
  * To restore a backup:
   * Restoring a backup will overwrite existing data, so be careful.
@@ -108,14 +108,14 @@ Please make sure your wiki configuration backup_* values are correct and complet
     'backup_button': _('Backup'),
     'restore_button': _('Restore'),
 })
-    
+
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 
 def sendMsg(request, pagename, msg):
     from MoinMoin import Page
-    return Page.Page(request, pagename).send_page(request, msg=msg)    
+    return Page.Page(request, pagename).send_page(request, msg=msg)
 
 def backupAllowed(request):
     """ Return True if backup is allowed """
@@ -126,18 +126,18 @@ def backupAllowed(request):
 
 def execute(pagename, request):
     _ = request.getText
-    if not backupAllowed(request):        
-        return sendMsg(request, pagename, 
+    if not backupAllowed(request):
+        return sendMsg(request, pagename,
                        msg=_('You are not allowed to do remote backup.'))
-    
+
     dowhat = request.form.get('do', [None])[0]
     if dowhat == 'backup':
         sendBackup(request)
     elif dowhat == 'restore':
         restoreBackup(request, pagename)
-    elif dowhat == None:
+    elif dowhat is None:
         sendBackupForm(request, pagename)
     else:
-        return sendMsg(request, pagename, 
+        return sendMsg(request, pagename,
                        msg=_('Unknown backup subaction: %s.' % dowhat))
 
