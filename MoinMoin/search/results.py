@@ -642,7 +642,7 @@ class SearchResults:
         uri = re.sub(from_re, '', self.request.request_uri)
         from_uri = lambda n: '%s&from=%i' % (uri, n)
         l = []
-        if hitsFrom > 0:        # previous page available
+        if hitsFrom > 0:                        # previous page available
             n = hitsFrom - hitsPerPage
             if n < 0: n = 0
             l.append(''.join([
@@ -650,7 +650,7 @@ class SearchResults:
                 _('Previous Page'),
                 f.url(0)
             ]))
-        if hitsFrom < hitsNum:  # next page available
+        if hitsFrom + hitsPerPage < hitsNum:    # next page available
             n = hitsFrom + hitsPerPage
             if n >= hitsNum: n = hitsNum - 1
             l.append(''.join([
