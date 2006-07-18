@@ -2,7 +2,7 @@
 """
     MoinMoin - Wiki Utility Functions
 
-    @copyright: 2000 - 2004 by Jrgen Hermann <jh@web.de>
+    @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
 
