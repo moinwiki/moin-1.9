@@ -11,7 +11,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
@@ -105,15 +105,13 @@ msgstr "在您编辑此页时, 别的用户删除了此页!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "在您编辑此页时, 别的用户修改了此页!"
 
-#, fuzzy
+
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
-"在您编辑此页时, 有人修改保存了此页!\n"
-"请勿直接保存您的改动!\n"
-"请先比较一下(%(difflink)s), 看看哪里被别人修改过了, 再决定是否进一步编辑、保"
-"存此页."
+"在您编辑此页时, 别的用户修改保存了此页!\n"
+"情再次浏览以后再保存此页。不要直接保存！"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -270,7 +268,7 @@ msgid "You already saved this page!"
 msgstr "您已经保存了此页!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "您已经编辑了此页！请不要使用返回按钮。"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -478,7 +476,7 @@ msgid "Open editor on double click"
 msgstr "双击打开编辑器"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "登陆后，跳转之前访问页。"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "不存在的网页链接显示问号"
@@ -523,7 +521,7 @@ msgid "Password repeat"
 msgstr "重复密码"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(只限于更改密码或新帐户)"
 
 msgid "Email"
 msgstr "电子邮件"
@@ -1319,9 +1317,8 @@ msgstr "无效用户名: {{{\"%s\"}}}. 请输入用户名和密码."
 msgid "Missing password. Please enter user name and password."
 msgstr "需要密码, 请输入用户名和密码."
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "对不起, 无效密码."
+msgstr "对不起, 登陆失败."
 
 msgid "You are now logged out."
 msgstr "您已登出."
@@ -1560,9 +1557,8 @@ msgstr "不再有效"
 msgid "Enabled"
 msgstr "有效"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Lupy搜索"
+msgstr "Xapian搜索"
 
 msgid "Active threads"
 msgstr "活跃线程"
@@ -1631,7 +1627,7 @@ msgstr "\"%(key)s\"后面要接颜色值\"%(arg)s\""
 #, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
-msgstr "无法正确显示reStructured文本, 请安装docutils."
+msgstr "无法正确显示reStructured文本, 请安装Docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**太多的包含(include)**"

@@ -149,3 +149,7 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * Comment read_lock code from BaseIndex (should not be needed)
     * Support complete rebuild of the database (delete and add)
 
+2006-07-17
+    * SystemInfo macro now also shows if xapian is being used (index
+      available) and more graceful fallback to moinSearch
+
