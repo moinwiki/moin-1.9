@@ -112,9 +112,10 @@ def execute(Macro, args):
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
 
     state = (_('Disabled'), _('Enabled'))
+    idxState = (_('index available'), _('index unavailable'))
     from MoinMoin.search.builtin import Search
-    row(_('Xapian search'), '%s, %sactive' % (state[request.cfg.xapian_search],
-                not Search._xapianIndex(request) and 'not ' or ''))
+    row(_('Xapian search'), '%s, %s' % (state[request.cfg.xapian_search],
+                Search._xapianIndex(request) and idxState[0] or idxState[1]))
 
     row(_('Active threads'), t_count or 'N/A')
     buf.write(u'</dl>')

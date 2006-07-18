@@ -388,7 +388,7 @@ class Formatter(FormatterBase):
             if newline:
                 result.append(self._newline())
             result.append('</%s>' % (tag))
-            tagstr = ''.join(result)            
+            tagstr = ''.join(result)
         else:
             # Inline elements 
             # Pull from stack, ignore order, that is not our problem.
@@ -455,7 +455,7 @@ class Formatter(FormatterBase):
         result = []
         result.append(self.anchordef(aid))
         result.append(self._close('div', newline=newline))
-        return ''.join(result) 
+        return ''.join(result)
 
     def lang(self, on, lang_name):
         """ Insert text with specific lang and direction.
@@ -826,7 +826,7 @@ class Formatter(FormatterBase):
         """
         tag = 'tt'
         # Maybe we don't need this, because we have tt will be in inlineStack.
-        self._in_code = on        
+        self._in_code = on
         if on:
             return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
@@ -1303,7 +1303,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             result.append(self._close('table'))
             result.append(self._close('div'))
 
-        return ''.join(result)    
+        return ''.join(result)
     
     def table_row(self, on, attrs=None, **kw):
         tag = 'tr'
