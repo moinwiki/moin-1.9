@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-06-25 13:55+0200\n"
+"PO-Revision-Date: 2006-07-07 14:54+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -107,15 +107,12 @@ msgstr "Någon annan tog bort sidan medan du redigerade den!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Någon annan ändrade sidan medan du redigerade den!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Någon annan sparade den här sidan medan du redigerade den!\n"
-"Granska först sidan och spara den sedan. Spara inte sidan som den är!\n"
-"Ta en titt på skillnaderna gentemot %(difflink)s för att se vad som har "
-"ändrats."
+"Granska först sidan och spara den sedan. Spara inte sidan som den är!"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -276,7 +273,7 @@ msgid "You already saved this page!"
 msgstr "Du har redan sparat den här sidan!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "Du har redan redigerat den här sidan! Du bör inte använda bakåt-knappen."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -496,7 +493,7 @@ msgid "Open editor on double click"
 msgstr "Öppna editorn vid dubbelklick"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "Efter inloggning, hoppa till den senast besökta sidan"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Visa frågetecken för brutna sidlänkar"
@@ -541,7 +538,7 @@ msgid "Password repeat"
 msgstr "Upprepa lösenord"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(Bara för lösenordsändring eller nytt konto)"
 
 msgid "Email"
 msgstr "Epost"
@@ -1368,9 +1365,8 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Lösenord saknas. Var god ange användarnamn och lösenord."
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "Tyvärr, fel lösenord."
+msgstr "Tyvärr, inloggningen misslyckades."
 
 msgid "You are now logged out."
 msgstr "Du är nu utloggad."
@@ -1609,9 +1605,8 @@ msgstr "Avaktiverad"
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Lupy-sökning"
+msgstr "Xapian-sökning"
 
 msgid "Active threads"
 msgstr "Aktiva trådar"
@@ -1677,11 +1672,9 @@ msgstr "Förväntade ett värde \"%(arg)s\" efter \"%(key)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Förväntade ett färgvärde \"%(arg)s\" efter \"%(key)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
-msgstr ""
-"Rendering av reStructured-text är inte möjlig, installera docutils först."
+msgstr "Rendering av reStructured-text är inte möjlig, installera Docutils först."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"
@@ -1905,50 +1898,3 @@ msgstr "Raderingar markeras som den här."
 
 msgid "Additions are marked like this."
 msgstr "Bidrag är markerade som den här."
-
-#~ msgid "Required attribute \"%(attrname)s\" missing"
-#~ msgstr "Obligatoriskt attribut \"%(attrname)s\" saknas"
-
-#~ msgid "Submitted form data:"
-#~ msgstr "Inskickad formulärdata:"
-
-#~ msgid "Plain title index"
-#~ msgstr "Titelindex i textform"
-
-#~ msgid "XML title index"
-#~ msgstr "XML-titelindex"
-
-#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-#~ msgstr "Installerade processors (AVRÅDES - använd Parsers i stället)"
-
-#~ msgid ""
-#~ "Sorry, someone else saved the page while you edited it.\n"
-#~ "\n"
-#~ "Please do the following: Use the back button of your browser, and "
-#~ "cut&paste\n"
-#~ "your changes from there. Then go forward to here, and click EditText "
-#~ "again.\n"
-#~ "Now re-add your changes to the current page contents.\n"
-#~ "\n"
-#~ "''Do not just replace\n"
-#~ "the content editbox with your version of the page, because that would\n"
-#~ "delete the changes of the other person, which is excessively rude!''\n"
-#~ msgstr ""
-#~ "Tyvärr, någon annan sparade sidan medan du redigerade den.\n"
-#~ "\n"
-#~ "Var god gör följande: Använd \"tillbaka\"-knappen på din webbläsare och\n"
-#~ "klipp ut och klistra in dina ändringar därifrån. Gå sedan fram hit\n"
-#~ "igen och tryck på EditText igen. Lägg nu till dina ändringar igen till\n"
-#~ "sidans innehåll.\n"
-#~ "\n"
-#~ "Ersätt inte den nya texten med din text rakt av, då försvinner ju den\n"
-#~ "andre personens ändringar, vilket skulle vara mycket olämpligt!\n"
-
-#~ msgid "Jump to last visited page instead of frontpage"
-#~ msgstr "Hoppa till den senast besökta sidan i stället för startsidan"
-
-#~ msgid "(Only when changing passwords)"
-#~ msgstr "(Bara när du ändrar lösenord)"
-
-#~ msgid "Filename"
-#~ msgstr "Filnamn"

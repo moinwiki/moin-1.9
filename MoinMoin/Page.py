@@ -1172,14 +1172,12 @@ class Page:
                 if not request.cacheable or request.user.valid:
                     request.http_headers(request.nocache)
                 else:
-                    # use the correct last-modified value from the on-disk file
-                    # to ensure cacheability where supported
-                    # TODO: for page likes RecentChanges (generally: ALL pages
-                    # with dynamically changing content), we MUST NOT use the
-                    # page src mtime as last-modified header. XXX
-                    request.http_headers(["Last-Modified: " +
-                         timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
-
+                    # TODO: we need to know if a page generates dynamic content
+                    # if it does, we must not use the page file mtime as last modified value
+                    # XXX The following code is commented because it is incorrect for dynamic pages:
+                    #lastmod = os.path.getmtime(self._text_filename())
+                    #request.http_headers(["Last-Modified: %s" % timefuncs.formathttpdate(lastmod)])
+                    pass
             else:
                 request.http_headers(['Status: 404 NOTFOUND'])
                 request.setResponseCode(404)

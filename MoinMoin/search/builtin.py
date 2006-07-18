@@ -373,6 +373,18 @@ class Search:
     # ----------------------------------------------------------------
     # Private!
 
+    def _xapianIndex(request):
+        try:
+            from MoinMoin.search.Xapian import Index
+            index = Index(request)
+        except ImportError:
+            index = None
+
+        if index and index.exists():
+            return index
+
+    _xapianIndex = staticmethod(_xapianIndex)
+
     def _xapianSearch(self):
         """ Search using Xapian
         
@@ -380,13 +392,8 @@ class Search:
         return moin search in those pages.
         """
         pages = None
-        try:
-            from MoinMoin.search.Xapian import Index
-            index = Index(self.request)
-        except ImportError:
-            index = None
-        
-        if index and index.exists(): #and self.query.xapian_wanted():
+        index = self._xapianIndex(self.request)
+        if index: #and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap

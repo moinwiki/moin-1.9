@@ -984,12 +984,16 @@ class RequestBase(object):
             403: 'FORBIDDEN',
             503: 'Service unavailable',
         }
-        self.http_headers([
+        headers = [
             'Status: %d %s' % (resultcode, statusmsg[resultcode]),
             'Content-Type: text/plain'
-        ])
-        self.write(msg)
+        ]
+        # when surge protection triggered, tell bots to come back later...
+        if resultcode == 503:
+            headers.append('Retry-After: %d' % self.cfg.surge_lockout_time)
+        self.http_headers(headers)
         self.setResponseCode(resultcode)
+        self.write(msg)
         self.forbidden = True
 
     def makeForbidden403(self):
