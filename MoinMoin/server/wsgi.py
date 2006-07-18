@@ -12,3 +12,4 @@ def moinmoinApp(environ, start_response):
     request.run()
     start_response(request.status, request.headers)
     return [request.output()]
+
