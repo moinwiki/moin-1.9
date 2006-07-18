@@ -8,7 +8,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# Imports
 import os
 
 
@@ -46,13 +45,13 @@ class Config:
     This class does all error checking needed for config values, and will
     raise a RuntimeError on any fatal error.
     """
-        
+
     def __init__(self):
         """ Validate and post process configuration values
 
         Will raise RuntimeError for any wrong config value.
         """
-        
+
         # Check that docs path is accessible
         self.docs = os.path.normpath(os.path.abspath(self.docs))
         if not os.access(self.docs, os.F_OK | os.R_OK | os.X_OK):
@@ -63,7 +62,7 @@ class Config:
         if os.name == 'nt':
             self.uid = self.gid = 0
             return
-        
+
         # If serving privileged port, we must run as root to bind the port.
         # we will give up root privileges later
         if self.port < 1024 and os.getuid() != 0:
@@ -86,4 +85,4 @@ class Config:
             except KeyError:
                 raise RuntimeError("Unknown group: '%s', check group setting" %
                                    self.group)
-            
+
