@@ -1,0 +1,2111 @@
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language zh-tw
+
+#
+# MoinMoin zh-tw system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"PO-Revision-Date: 2006-07-07 23:00+0800\n"
+"Last-Translator: Rux Li <rux.li3@gmail.com>\n"
+"Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Thanks: (Translator 2005-12-19~) Rux Li <rux.li3@gmail.com>\n"
+"Thanks: (Translator ~2004-11-29) Lin Zhemin <ljm@ljm.idv.tw>\n"
+"X-Direction: ltr\n"
+"X-Language: 繁體中文\n"
+"X-Language-in-English: Chinese/Taiwan\n"
+"X-HasWikiMarkup: True\n"
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr "建議你不要使用本頁的備份內容，備份不會出現在搜尋結果中！"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "%(date)s 修訂第 %(rev)d 版"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "從頁面 \"%(page)s\" 轉向過來"
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "本頁轉向到 \"%(page)s\""
+
+#, python-format
+msgid ""
+"~-If you submit this form, the submitted values will be displayed.\n"
+"To use this form on other pages, insert a\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"macro call.-~\n"
+msgstr ""
+"~-如果你提交本表單，提交的值將會顯示出來。\n"
+"如果要在其他頁面使用本表單，請插入\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"巨集呼叫。-~\n"
+
+msgid "Create New Page"
+msgstr "建立新頁面"
+
+msgid "You are not allowed to view this page."
+msgstr "你無權瀏覽本頁。"
+
+msgid "Your changes are not saved!"
+msgstr "你的修改沒有儲存！"
+
+msgid "You are not allowed to edit this page."
+msgstr "你無權編輯本頁。"
+
+msgid "Page is immutable!"
+msgstr "本頁不能更動！"
+
+msgid "Cannot edit old revisions!"
+msgstr "不能編輯舊版頁面！"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr "你的編輯鎖定逾時，可能會有編輯衝突需要處理！"
+
+msgid "Page name is too long, try shorter name."
+msgstr "頁面的名稱太長，請改用短一點的。"
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "編輯 \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "預覽頁面 \"%(pagename)s\""
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定逾時了！"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定，還剩下 # 分鐘。"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr "你在頁面「%(lock_page)s」的編輯鎖定，只剩下 # 秒了！"
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "有人在你編輯的時候刪除本頁了！"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "有人在你編輯的時候修改了本頁！"
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"有人在你編輯的時候按下「存檔」了。請勿直接儲存本頁！\n"
+"請先看看哪裡修改過了，再決定要不要進一步編輯、儲存本頁。"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[從 %s 載入新頁面的內容]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[找不到模板 %s ]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[你不能閱讀 %s]"
+
+#, python-format
+msgid "Describe %s here."
+msgstr "在這裡編輯新頁面「%s」"
+
+msgid "Check Spelling"
+msgstr "拼字檢查"
+
+msgid "Save Changes"
+msgstr "存檔"
+
+msgid "Cancel"
+msgstr "取消"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"按下 '''%(save_button_text)s''' 表示你同意依照 %(license_link)s 宣告本次編輯"
+"的版權。\n"
+"如果你不同意的話，請按 '''%(cancel_button_text)s''' 以放棄本次編輯。"
+
+msgid "Preview"
+msgstr "預覽"
+
+msgid "GUI Mode"
+msgstr "GUI 模式"
+
+msgid "Comment:"
+msgstr "說明欄："
+
+msgid "<No addition>"
+msgstr "<不新增>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "新增至：%(category)s"
+
+msgid "Trivial change"
+msgstr "只有些微改變"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "去掉行尾空白"
+
+msgid "Edit was cancelled."
+msgstr "編輯已取消。"
+
+msgid "You can't rename to an empty pagename."
+msgstr "新的名稱不能是空的！"
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''已經有一個頁面叫做 \"{{{'%s'}}}\" 了！'''\n"
+"\n"
+"請用別的名字。"
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr "無法更改頁面名稱。原因為檔案系統錯誤：%s。"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "感謝你的細心修改。"
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "頁面 \"%s\" 已刪除！"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The following page has been changed by %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+msgstr ""
+"Wiki 使用者你好，\n"
+"\n"
+"你在 \"%(sitename)s\" 網站訂閱了 wiki 頁面或 wiki 類別的修訂通知服務。\n"
+"\n"
+"在此通知你以下頁面被 %(editor)s 編輯過了：\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"The comment on the change is:\n"
+"%(comment)s\n"
+"\n"
+msgstr ""
+"本次修訂的說明：\n"
+"%(comment)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "新的頁面：\n"
+
+msgid "No differences found!\n"
+msgstr "新舊版完全相同！\n"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr "[%(sitename)s] %(username)s %(trivial)s修訂頁面 \"%(pagename)s\""
+
+msgid "Trivial "
+msgstr "些微"
+
+msgid "Status of sending notification mails:"
+msgstr "發送修訂通知的狀況如下："
+
+#, python-format
+msgid "[%(lang)s] %(recipients)s: %(status)s"
+msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#, python-format
+msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+msgstr "## 頁面 \"%(pagename)s\" 已於 %(date)s 提交備份"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "無法鎖定頁面：不預期的錯誤 (errno=%d)。"
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "無法鎖定頁面：找不到 'current' 檔？"
+
+msgid "You are not allowed to edit this page!"
+msgstr "你無權編輯本頁！"
+
+msgid "You cannot save empty pages."
+msgstr "你不能儲存空白頁。"
+
+msgid "You already saved this page!"
+msgstr "你已經儲存本頁了！"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr "你已經修改了此頁，請勿按瀏覽器的「上一頁」。"
+
+#, python-format
+msgid "A backup of your changes is [%(backup_url)s here]."
+msgstr "你的修改備份在 [%(backup_url)s 這裡]。"
+
+msgid "You did not change the page content, not saved!"
+msgstr "本頁內容沒變，所以沒有存檔！"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr "你無權修改本頁的存取權限！"
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"%(owner)s 對本頁的編輯鎖定在 %(mins_ago)d 分鐘前已經失效了，你取得了本頁的編"
+"輯鎖定。"
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr "在 %(bumptime)s 之前，別人''不能''修改本頁。"
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr "在 %(bumptime)s 之前，系統會'''提示別人'''你在修改本頁。"
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "如果要延長鎖定期間，請按編輯框上面的「預覽」鍵。"
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"本頁目前''鎖定中''。%(owner)s 正在修改本頁，他可以修改到 %(timestamp)s 為止，"
+"也就是 %(mins_valid)d 分鐘後。"
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.[[BR]]\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''[[BR]]\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"%(owner)s 從 %(timestamp)s 開始編輯或預覽本頁。[[BR]]\n"
+"'''為了避免編輯衝突，請儘量不要在 %(mins_valid)d 分鐘內編輯本頁。'''[[BR]]\n"
+"按下「取消」鍵，便可離開編輯模式。"
+
+msgid "<unknown>"
+msgstr "<不明>"
+
+msgid "Text mode"
+msgstr "Text 模式"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s?action=login\n"
+msgstr ""
+"登入名稱：%s\n"
+"\n"
+"登入密碼：%s\n"
+"\n"
+"登入 URL：%s/%s?action=login\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"有人要求將你的帳號資料寄到這個信箱來。\n"
+"\n"
+"如果是你忘了密碼，請使用以下的資料登入。\n"
+"\n"
+"成功登入之後，請重新設定一次密碼！\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] 你的 wiki 帳號資料"
+
+msgid ""
+" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontal rule.\n"
+" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
+"(=====)]].\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+"double quotes\"])]]; url; [url]; [url label].\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+" 強調::  [[Verbatim('')]]''斜體 ''[[Verbatim('')]]； [[Verbatim(''')]]'''粗"
+"體'''[[Verbatim(''')]]； [[Verbatim(''''')]]'''''粗斜體 '''''[[Verbatim"
+"(''''')]]； [[Verbatim('')]]''混合 ''[[Verbatim(''')]]'''''粗體 '''[[Verbatim"
+"(''')]]斜體 ''[[Verbatim('')]]；[[Verbatim(----)]] 分隔線\n"
+" 標題::  [[Verbatim(=)]] 標題1 [[Verbatim(=)]]； [[Verbatim(==)]] 標題2 "
+"[[Verbatim(==)]]； [[Verbatim(===)]] 標題3 [[Verbatim(===)]]； [[Verbatim"
+"(====)]] 標題4 [[Verbatim(====)]]； [[Verbatim(=====)]] 標題5 [[Verbatim"
+"(=====)]]\n"
+" 條列::  空白再加下列符號之一： *、1.、a.、A.、i.、I.； 1.#n 從 n 開始編； 只"
+"有空白則代表縮排\n"
+" 連結::  [[Verbatim(JoinCapitalizedWords)]]； [[Verbatim([\"方括號加雙引號"
+"\"])]]； url； [url]； [url 連結文字]\n"
+" 表格::  || 儲存格內文 |||| 跨兩欄的儲存格 ||\n"
+"\n"
+"(!) 表格或標題尾端不可有空白[[BR]]\n"
+"(!) 更詳細的說明請參看 [\"說明/編輯頁面\"] 或 [\"語法參考\"]\n"
+
+msgid ""
+"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ---- \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) For more help, see the \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+msgstr ""
+"強調: <i>*斜體*</i> <b>**粗體**</b> ``打字機體``<br/>\n"
+"<br/><pre>\n"
+"標題: 標題1  標題2  標題3\n"
+"      =====  -----  ~~~~~\n"
+"\n"
+"分隔線: ----\n"
+"連結: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"條列: * 符號式; 1., a. 編號式.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) 更完整的說明在 \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText 快速參考\n"
+"</a>.\n"
+
+msgid "Diffs"
+msgstr "版本比較"
+
+msgid "Info"
+msgstr "關於"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "UnSubscribe"
+msgstr "取消訂閱"
+
+msgid "Subscribe"
+msgstr "訂閱"
+
+msgid "Raw"
+msgstr "原始形"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "列印形"
+
+msgid "View"
+msgstr "檢視"
+
+msgid "Up"
+msgstr "上層"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "以我的 Email 連結作者，而不是我的 Wiki 頁面"
+
+msgid "Open editor on double click"
+msgstr "點兩下就進入編輯模式"
+
+msgid "After login, jump to last visited page"
+msgstr "登入之後，跳到上次瀏覽的頁面"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "在不存在的頁面連結前打上問號"
+
+msgid "Show page trail"
+msgstr "顯示瀏覽足跡"
+
+msgid "Show icon toolbar"
+msgstr "顯示圖示工具列"
+
+msgid "Show top/bottom links in headings"
+msgstr "在標題上顯示頁首/頁尾連結"
+
+msgid "Show fancy diffs"
+msgstr "顯示易懂的版本比較"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "在顯示 wiki 名稱時加上空格"
+
+msgid "Remember login information"
+msgstr "記住登入資訊"
+
+msgid "Subscribe to trivial changes"
+msgstr "訂閱的頁面即使只有些微改變也要寄信通知"
+
+msgid "Disable this account forever"
+msgstr "永遠停用本帳號"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(請用 Firstname''''''Lastname 形式)"
+
+msgid "Alias-Name"
+msgstr "別名"
+
+msgid "Password"
+msgstr "密碼"
+
+msgid "Password repeat"
+msgstr "密碼(再一次)"
+
+msgid "(Only for password change or new account)"
+msgstr "(更改密碼或新建帳號才需要)"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "User CSS URL"
+msgstr "自訂 CSS 的 URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(空白表示不要自訂 CSS)"
+
+msgid "Editor size"
+msgstr "編輯框列數"
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "此包裹檔需要較新版的 MoinMoin (至少 %s)。"
+
+msgid "The theme name is not set."
+msgstr "佈景主題的名稱尚未設定。"
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr "只有獨立運作式 (standalone type) 的伺服器才能安裝佈景主題。"
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "安裝 '%(filename)s' 失敗！"
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "檔案 '%s' 不是 MoinMoin 的包裹檔！"
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "頁面 '%s' 不存在！"
+
+msgid "Invalid package file header."
+msgstr "包裹檔的檔頭錯誤。"
+
+msgid "Package file format unsupported."
+msgstr "不支援此包裹檔的格式。"
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "行號 %(lineno)i 有不明的操作 %(func)s。"
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "檔案 '%s' 不在此包裹檔內！"
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "在 %(pages)d 頁中找到 %(hits)d 筆。"
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f 秒"
+
+msgid "match"
+msgstr "筆"
+
+msgid "matches"
+msgstr "筆"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"本 wiki 不支援郵寄工作。\n"
+"請連絡管理員，看他要不要啟動郵寄功能。"
+
+msgid "Please provide a valid email address!"
+msgstr "請輸入合法的 email 地址！"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "找不到登記為 '%(email)s' 的帳號！"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr "請到 UserPreferences 改變設定或新建帳號"
+
+msgid "Empty user name. Please enter a user name."
+msgstr "請輸入使用者名稱！"
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"無效的使用者名稱：{{{'%s'}}}。\n"
+"名稱可以使用 Unicode 文數字，字跟字中間可以加進一個空白，\n"
+"但不能使用群組頁面的名字。"
+
+msgid "This user name already belongs to somebody else."
+msgstr "這個使用者名稱已經有人用了。"
+
+msgid "Passwords don't match!"
+msgstr "兩次輸入的密碼不符！"
+
+msgid "Please specify a password!"
+msgstr "請輸入密碼！"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr "請輸入 email 地址，不然你忘記名稱或密碼的時候，就不能用 email 取回了。"
+
+msgid "This email already belongs to somebody else."
+msgstr "這個 email 地址已經有人用了。"
+
+msgid "User account created! You can use this account to login now..."
+msgstr "使用者帳號已經建立！你可以用此帳號登入..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "請到 [\"使用者設定\"] 改變所選定使用者的帳號資料"
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "無法載入佈景主題 '%(theme_name)s'!"
+
+msgid "User preferences saved!"
+msgstr "使用者設定已儲存！"
+
+msgid "Default"
+msgstr "預設值"
+
+msgid "<Browser setting>"
+msgstr "<依瀏覽器而定>"
+
+msgid "the one preferred"
+msgstr "只有我偏好的"
+
+msgid "free choice"
+msgstr "列出所有選擇"
+
+msgid "Select User"
+msgstr "選擇使用者"
+
+msgid "Save"
+msgstr "存檔"
+
+msgid "Preferred theme"
+msgstr "佈景主題"
+
+msgid "Editor Preference"
+msgstr "偏好的編輯器"
+
+msgid "Editor shown on UI"
+msgstr "顯示的編輯器選項"
+
+msgid "Time zone"
+msgstr "時區"
+
+msgid "Your time is"
+msgstr "你當地的時間："
+
+msgid "Server time is"
+msgstr "伺服器的時間："
+
+msgid "Date format"
+msgstr "日期格式"
+
+msgid "Preferred language"
+msgstr "語言偏好"
+
+msgid "General options"
+msgstr "一般選項"
+
+msgid "Quick links"
+msgstr "自訂頁面捷徑"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "請提供正確的 email 地址，才收得到你訂閱的頁面！"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "訂閱的 wiki 頁面 (每行一個正規表示式)"
+
+msgid "Create Profile"
+msgstr "新使用者註冊"
+
+msgid "Mail me my account data"
+msgstr "把帳號資料寄給我"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr "要註冊新帳號或忘了密碼，請到 %(userprefslink)s。"
+
+msgid "Login"
+msgstr "登入"
+
+msgid "Action"
+msgstr "功能"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"%(token)s\" 後面應該有個 \"=\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "\"%(token)s\" 應該有對應的值"
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d 個附件]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr "本頁包含 <a href=\"%(link)s\">%(count)s 個附件</a>."
+
+msgid "Filename of attachment not specified!"
+msgstr "附件沒指定檔名！"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "附件 '%(filename)s' 不存在！"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"如果要在內文中引用附件，請輸入 '''{{{attachment:filename}}}'''\n"
+"這種格式 (最簡單的方法是從下表剪貼)。\n"
+"'''千萬不要'''用 {{{[下載]}}} 指向的 URL，\n"
+"因為那個位置可能會變，到時候就不能用了。"
+
+msgid "del"
+msgstr "刪除"
+
+msgid "get"
+msgstr "下載"
+
+msgid "edit"
+msgstr "編輯"
+
+msgid "view"
+msgstr "檢視"
+
+msgid "unzip"
+msgstr "解壓縮"
+
+msgid "install"
+msgstr "安裝"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "頁面 \"%(pagename)s\" 沒有附件"
+
+msgid "Edit drawing"
+msgstr "編輯圖片"
+
+msgid "Attached Files"
+msgstr "現有附件"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "你無權在本頁插入附件。"
+
+msgid "New Attachment"
+msgstr "新增附件"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"上傳絕對不會覆蓋現有附件。如果新增的附件檔名和現有的一樣的話，\n"
+"就一定要在「重新命名為」填上新的檔名。如果檔名不一樣，\n"
+"「重新命名為」可以不填，這樣就會採用原本的檔名。"
+
+msgid "File to upload"
+msgstr "要上傳的檔案"
+
+msgid "Rename to"
+msgstr "重新命名為"
+
+msgid "Upload"
+msgstr "上傳"
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "本 wiki 不開放使用附件！"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "你無權在本頁儲存圖片。"
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr "檔案沒有內容。請刪除檔名中的非 ASCII 字元後，再試試看。"
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "你無權刪除本頁附件。"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "你無權下載本頁附件。"
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "你無權解壓本頁附件。"
+
+msgid "You are not allowed to install files."
+msgstr "你無權安裝檔案。"
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "你無權檢視本頁附件。"
+
+#, python-format
+msgid "Unsupported upload action: %s"
+msgstr "未支援的上傳功能：%s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "\"%(pagename)s\" 的附件"
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"附件 '%(target)s' (遠端名稱 '%(filename)s') 儲存好了，共計 %(bytes)d 位元組。"
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr "附件 '%(target)s' 已經存在 (遠端名稱 '%(filename)s')"
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "附件 '%(filename)s' 已刪除。"
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "附件 '%(filename)s' 已安裝。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr "因結果檔案太大，附件 '%(filename)s' 無法解壓縮 (缺 %(space)d kB)。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr "因結果檔案太多，附件 '%(filename)s' 無法解壓縮 (多 %(count)d 個)。"
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "附件 '%(filename)s' 已解壓縮。"
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"附件 '%(filename)s' 無法解壓縮。可能原因為：檔案太大、不是 .zip 檔、檔案已存"
+"在、或在子目錄內。"
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "檔案 %(target)s 不是 .zip 檔。"
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "附件 '%(filename)s'"
+
+msgid "Package script:"
+msgstr "打包腳本："
+
+msgid "File Name"
+msgstr "檔名"
+
+msgid "Modified"
+msgstr "已更改"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "不明的檔案類型，不能內嵌在內文中。"
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "%(pagename)s 的附件 [[Verbatim(attachment:)]]%(filename)s"
+
+msgid "Delete"
+msgstr "刪除"
+
+msgid "This page is already deleted or was never created!"
+msgstr "本頁已經刪除或還沒建立！"
+
+msgid "Optional reason for the deletion"
+msgstr "刪除本頁的理由："
+
+msgid "Really delete this page?"
+msgstr "真的要刪除本頁？"
+
+msgid "Editor"
+msgstr "編輯者"
+
+msgid "Pages"
+msgstr "頁面"
+
+msgid "Select Author"
+msgstr "選擇作者"
+
+msgid "Revert all!"
+msgstr "全部回復"
+
+msgid "You are not allowed to use this action."
+msgstr "你無權使用本項操作。"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "沒有類似 \"%s\" 的頁面！"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "只有一頁類似 \"%s\"，轉向至該頁。"
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "類似 \"%s\" 的頁面："
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "共有 %(matchcount)d %(matches)s 連向 \"%(title)s\""
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "頁面 \"%s\" 的連結地圖"
+
+msgid "Please log in first."
+msgstr "請先登入。"
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "建立其他頁面之前，請先建立個人首頁。"
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"請在此為你建好的個人首頁增加子頁面。\n"
+"\n"
+"你可以選擇子頁面的存取權限，也可以編輯這些存取權限的授權名單。\n"
+"\n"
+"請在適當的位置輸入子頁面的名稱，然後按右邊的按鈕來建立新的子頁面。\n"
+"\n"
+"在建立有存取權限的頁面之前，請先確認相對應的授權名單已經存在且包含合適的成員"
+"在內。\n"
+"新建授權名單時，請選用 HomepageGroupsTemplate 模板。\n"
+"\n"
+"||'''新增個人子頁面'''||'''授權名單頁面'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,可讀寫頁面,%(username)s)]]||[\"%"
+"(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,唯讀頁面,%(username)s)]]||[\"%(username)"
+"s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,私人頁面,%(username)s)]]||%(username)"
+"s 自用||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "管理我的頁面"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "不合法的檔名 \"%s\"！"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "包裹檔 %s 已打包，包含頁面 %s。"
+
+msgid "Package pages"
+msgstr "打包頁面"
+
+msgid "Package name"
+msgstr "包裹名稱"
+
+msgid "List of page names - separated by a comma"
+msgstr "輸入頁面名稱 (以逗號分開)"
+
+msgid "Rename Page"
+msgstr "重新命名"
+
+msgid "New name"
+msgstr "新的名稱"
+
+msgid "Optional reason for the renaming"
+msgstr "重新命名的理由："
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(其中包含 %(localwords)d 個 %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"下列 %(badwords)d 個詞沒有收錄在總詞數 %(totalwords)d 個的詞典中%(localwords)"
+"s。未收錄的詞會在內文中特別標示："
+
+msgid "Add checked words to dictionary"
+msgstr "把勾選的詞加進詞典"
+
+msgid "No spelling errors found!"
+msgstr "沒有拼字錯誤！"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "不能檢查無權瀏覽的頁面。"
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "新增頁面 \"%s\" 的訂閱戶"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "已為 %s 訂閱"
+
+msgid "Not a user:"
+msgstr "不合法帳號:"
+
+msgid "You are not allowed to perform this action."
+msgstr "你無權執行本項操作。"
+
+msgid "Do it."
+msgstr "執行"
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "要執行「%(actionname)s」操作嗎？"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "本 Wiki 站不使用「%(actionname)s」操作！"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "你無權在本頁進行「%(actionname)s」操作。"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "請使用互動式介面進行「%(actionname)s」操作！"
+
+msgid "You are not allowed to revert this page!"
+msgstr "你無權回復本頁！"
+
+msgid "No older revisions available!"
+msgstr "沒有舊版！"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "\"%s\" 的版本比較"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "修訂版 %d 和 %d 的差異如下："
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(間隔 %d 版)"
+
+msgid "No differences found!"
+msgstr "完全相同！"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "可是本頁已存檔存了 %(count)d 次！"
+
+msgid "(ignoring whitespace)"
+msgstr "(忽略空白)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "忽略空白的改變"
+
+msgid "General Information"
+msgstr "一般資訊"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "頁面大小：%d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "本頁內文的 SHA 摘要碼："
+
+msgid "The following users subscribed to this page:"
+msgstr "訂閱本頁的使用者："
+
+msgid "This page links to the following pages:"
+msgstr "本頁連往以下頁面："
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Diff"
+msgstr "比較"
+
+msgid "Comment"
+msgstr "說明"
+
+msgid "raw"
+msgstr "原始形"
+
+msgid "print"
+msgstr "列印形"
+
+msgid "revert"
+msgstr "回復"
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "回復成第 %(rev)d 版。"
+
+msgid "N/A"
+msgstr "無"
+
+msgid "Revision History"
+msgstr "修訂記錄"
+
+msgid "No log entries found."
+msgstr "本頁面沒有修訂記錄。"
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "關於 \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "顯示 \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "一般資訊"
+
+#, python-format
+msgid "Show chart \"%(title)s\""
+msgstr "顯示 \"%(title)s\" 的圖表"
+
+msgid "Page hits and edits"
+msgstr "人氣和編輯次數"
+
+msgid "You must login to add a quicklink."
+msgstr "登入之後才能設定頁面捷徑。"
+
+msgid "Your quicklink to this page has been removed."
+msgstr "已取消本頁之捷徑。"
+
+msgid "A quicklink to this page has been added for you."
+msgstr "已設定本頁之捷徑。"
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "你不能訂閱無權瀏覽的頁面。"
+
+msgid "This wiki is not enabled for mail processing."
+msgstr "本 wiki 站不支援郵寄處理。"
+
+msgid "You must log in to use subscribtions."
+msgstr "登入之後才能訂閱"
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr "在 UserPreferences 設定 email 地址之後才能訂閱"
+
+msgid "Your subscribtion to this page has been removed."
+msgstr "本頁已取消訂閱。"
+
+msgid "Can't remove regular expression subscription!"
+msgstr "無法取消用正規表示式設定的訂閱！"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr "請在 UserPreferences 設定正規表示式訂閱。"
+
+msgid "You have been subscribed to this page."
+msgstr "訂閱好了。"
+
+msgid "Charts are not available!"
+msgstr "不能繪製圖表！"
+
+msgid "You need to provide a chart type!"
+msgstr "請指定圖表類型！"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "錯誤的圖表類型 \"%s\"！"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"復原備份：%(filename)s 至目的目錄：%(targetdir)s。\n"
+"檔案數：%(filecount)d，目錄數：%(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr "復原備份：%(filename)s 至目的目錄：%(targetdir)s 失敗！"
+
+msgid "Wiki Backup / Restore"
+msgstr "Wiki 備份 / 復原"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"提示：\n"
+" * 欲進行復原：\n"
+"  * 執行備份復原會覆蓋現有的資料，請小心操作。\n"
+"  * 請先將備份檔重新命名為 <siteid>.tar.<compression> (亦即刪除 --date--"
+"time--UTC 的部分)。\n"
+"  * 將備份檔放在 backup_storage_dir (可使用 scp、ftp、 ...)。\n"
+"  * 再按以下的「[[GetText(Restore)]]」按鈕\n"
+"\n"
+" * 欲進行備份，只要按「[[GetText(Backup)]]」然後儲存檔案\n"
+"   到安全的地方即可。\n"
+"\n"
+"請確定你的 Wiki 的 backup_* 設定值是正確且完整。\n"
+"\n"
+
+msgid "Backup"
+msgstr "備份"
+
+msgid "Restore"
+msgstr "復原"
+
+msgid "You are not allowed to do remote backup."
+msgstr "你無權進行遠端備份。"
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "不明的備份子操作：%s。"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "{{{\"%s\"}}} 找到太多資料，請輸入更精確的關鍵字！"
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "搜尋標題：\"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "全文檢索：\"%s\""
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "引用頁面 \"%s\" 的頁面列表"
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "無此帳號：{{{\"%s\"}}}！請輸入正確的名稱及密碼。"
+
+msgid "Missing password. Please enter user name and password."
+msgstr "沒輸入密碼！請輸入名稱及密碼。"
+
+msgid "Sorry, login failed."
+msgstr "抱歉，登入失敗！"
+
+msgid "You are now logged out."
+msgstr "你已經登出了。"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "必須有頁面名稱才能建立頁面。"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "上傳新附件 \"%(filename)s\""
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "建立新圖 \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "編輯圖片 \"%(filename)s\""
+
+msgid "Toggle line numbers"
+msgstr "切換行號"
+
+msgid "FrontPage"
+msgstr "首頁"
+
+msgid "RecentChanges"
+msgstr "最新更動"
+
+msgid "TitleIndex"
+msgstr "標題索引"
+
+msgid "WordIndex"
+msgstr "詞彙索引"
+
+msgid "FindPage"
+msgstr "尋找頁面"
+
+msgid "SiteNavigation"
+msgstr "本站導覽"
+
+msgid "HelpContents"
+msgstr "說明"
+
+msgid "HelpOnFormatting"
+msgstr "說明/排版"
+
+msgid "UserPreferences"
+msgstr "使用者設定"
+
+msgid "WikiLicense"
+msgstr "Wiki版權"
+
+msgid "MissingPage"
+msgstr "頁面不存在"
+
+msgid "MissingHomePage"
+msgstr "首頁不存在"
+
+msgid "Mon"
+msgstr "星期一"
+
+msgid "Tue"
+msgstr "星期二"
+
+msgid "Wed"
+msgstr "星期三"
+
+msgid "Thu"
+msgstr "星期四"
+
+msgid "Fri"
+msgstr "星期五"
+
+msgid "Sat"
+msgstr "星期六"
+
+msgid "Sun"
+msgstr "星期日"
+
+msgid "AttachFile"
+msgstr "附件"
+
+msgid "DeletePage"
+msgstr "刪除頁面"
+
+msgid "LikePages"
+msgstr "相似頁面"
+
+msgid "LocalSiteMap"
+msgstr "連結地圖"
+
+msgid "RenamePage"
+msgstr "重新命名"
+
+msgid "SpellCheck"
+msgstr "拼字檢查"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "錯誤的插入參數 \"%s\"！"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "找不到 \"%s\"！"
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "MonthCalendar 的 calparms 參數錯誤 \"%s\"！"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "MonthCalendar 的參數錯誤 \"%s\"！"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "不支援的導覽方案：'%(scheme)s'！"
+
+msgid "No parent page found!"
+msgstr "找不到上層頁面！"
+
+msgid "Wiki"
+msgstr "Wiki 模式"
+
+msgid "Slideshow"
+msgstr "簡報模式"
+
+msgid "Start"
+msgstr "開始"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "投影片 %(pos)d/%(size)d"
+
+msgid "No orphaned pages in this wiki."
+msgstr "本 wiki 沒有孤立頁面。"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "%(pagename)s 中沒有可引用的格言。"
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "上傳附件 '%(filename)s'。"
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "圖片 '%(filename)s' 已儲存。"
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)d 分前"
+
+msgid "(no bookmark set)"
+msgstr "(尚未放置)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(目前位置為 %s)"
+
+msgid "Delete Bookmark"
+msgstr "拿掉書籤"
+
+msgid "Set bookmark"
+msgstr "放置書籤"
+
+msgid "set bookmark"
+msgstr "放置書籤"
+
+msgid "[Bookmark reached]"
+msgstr "[目前書籤放置在此]"
+
+msgid "Markup"
+msgstr "標記"
+
+msgid "Display"
+msgstr "顯示"
+
+msgid "Python Version"
+msgstr "Python 版本"
+
+msgid "MoinMoin Version"
+msgstr "!MoinMoin 版本"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "%s 版 [%s 修訂]"
+
+msgid "4Suite Version"
+msgstr "4Suite 版本"
+
+msgid "Number of pages"
+msgstr "總頁面數"
+
+msgid "Number of system pages"
+msgstr "系統頁面數"
+
+msgid "Accumulated page sizes"
+msgstr "頁面大小總計"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "硬碟使用量 (目錄 %(data_dir)s/pages)"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "硬碟使用量 (目錄 %(data_dir)s)"
+
+msgid "Entries in edit log"
+msgstr "修訂記錄總計"
+
+msgid "NONE"
+msgstr "無"
+
+msgid "Global extension macros"
+msgstr "內建擴充巨集"
+
+msgid "Local extension macros"
+msgstr "外掛擴充巨集"
+
+msgid "Global extension actions"
+msgstr "內建擴充操作"
+
+msgid "Local extension actions"
+msgstr "外掛擴充操作"
+
+msgid "Global parsers"
+msgstr "內建解析器"
+
+msgid "Local extension parsers"
+msgstr "外掛解析器"
+
+msgid "Disabled"
+msgstr "停用"
+
+msgid "Enabled"
+msgstr "可用"
+
+msgid "Xapian search"
+msgstr "Xapian 搜尋"
+
+msgid "Active threads"
+msgstr "緒程數目"
+
+msgid "Contents"
+msgstr "目 錄"
+
+msgid "Include system pages"
+msgstr "包含系統頁面"
+
+msgid "Exclude system pages"
+msgstr "排除系統頁面"
+
+msgid "No wanted pages in this wiki."
+msgstr "本 wiki 沒有未定義的頁面。"
+
+msgid "Search Titles"
+msgstr "搜尋標題"
+
+msgid "Display context of search results"
+msgstr "顯示前後文"
+
+msgid "Case-sensitive searching"
+msgstr "區分大小寫"
+
+msgid "Search Text"
+msgstr "全文檢索"
+
+msgid "Go To Page"
+msgstr "跳至此頁"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "正規表示式 '%s' 錯誤"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "錯誤的時間戳記 '%s'"
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "無法連接郵件伺服器 '%(server)s': %(reason)s"
+
+msgid "Mail not sent"
+msgstr "郵件未送出"
+
+msgid "Mail sent OK"
+msgstr "郵件已送出"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "\"%(key)s\" 後面應該接 \"%(wanted)s\"，但卻接著 \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "\"%(token)s\" 前面要接的是整數 \"%(key)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\" 後面要接的是整數 \"%(arg)s\""
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\" 後面要接顏色值 \"%(arg)s\""
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr "無法呈現 reStructured text，請安裝 Docutils。"
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**includes 數超過限制**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**找不到引用的頁面：%s**"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT 選項停用，請參考 HelpOnConfiguration。"
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "沒有 XSLT 處理套件！請安裝 4Suite 1.x。"
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s 處理錯誤"
+
+#, python-format
+msgid "You are not allowed to do %s on this page."
+msgstr "你無權「%s」本頁。"
+
+msgid "Login and try again."
+msgstr "請先登入後再試一次。"
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr "抱歉，本站不允許 \"%(content)s\"，頁面無法儲存。"
+
+msgid "Views/day"
+msgstr "每日瀏覽"
+
+msgid "Edits/day"
+msgstr "每日編輯"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(filterpage)s 的 %(chart_title)s 圖"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"綠=人氣\n"
+"紅=編輯"
+
+msgid "date"
+msgstr "日期"
+
+msgid "# of hits"
+msgstr "人氣指數"
+
+msgid "Page Size Distribution"
+msgstr "頁面大小分佈"
+
+msgid "page size upper bound [bytes]"
+msgstr "頁面大小上限 [位元組]"
+
+msgid "# of pages of this size"
+msgstr "相同大小的頁面數"
+
+msgid "User agent"
+msgstr "瀏覽器類型"
+
+msgid "Others"
+msgstr "其他"
+
+msgid "Distribution of User-Agent Types"
+msgstr "瀏覽器類型分佈"
+
+msgid "Unsubscribe"
+msgstr "取消訂閱"
+
+msgid "Home"
+msgstr "首頁"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[刪除]"
+
+msgid "[UPDATED]"
+msgstr "[更新]"
+
+msgid "[NEW]"
+msgstr "[新增]"
+
+msgid "[DIFF]"
+msgstr "[比較]"
+
+msgid "[BOTTOM]"
+msgstr "[底部]"
+
+msgid "[TOP]"
+msgstr "[頂部]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面"
+
+msgid "Preferences"
+msgstr "使用者設定"
+
+msgid "Logout"
+msgstr "登出"
+
+msgid "Clear message"
+msgstr "關閉此訊息框"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "上次是 %(editor)s 在 %(time)s 編輯的"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "上次修改時間 %(time)s"
+
+msgid "Search:"
+msgstr "搜尋："
+
+msgid "Text"
+msgstr "內文"
+
+msgid "Titles"
+msgstr "標題"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "More Actions:"
+msgstr "更多功能"
+
+msgid "------------"
+msgstr "------------"
+
+msgid "Raw Text"
+msgstr "檢視原始形"
+
+msgid "Print View"
+msgstr "檢視列印形"
+
+msgid "Delete Cache"
+msgstr "刪除快取"
+
+msgid "Delete Page"
+msgstr "刪除本頁"
+
+msgid "Like Pages"
+msgstr "相似頁面"
+
+msgid "Local Site Map"
+msgstr "連結地圖"
+
+msgid "My Pages"
+msgstr "我的頁面"
+
+msgid "Subscribe User"
+msgstr "新增訂戶"
+
+msgid "Remove Spam"
+msgstr "移除垃圾"
+
+msgid "Package Pages"
+msgstr "打包頁面"
+
+msgid "Render as Docbook"
+msgstr "DocBook 形"
+
+msgid "Do"
+msgstr "執行"
+
+msgid "Edit (Text)"
+msgstr "編輯(Text)"
+
+msgid "Edit (GUI)"
+msgstr "編輯(GUI)"
+
+msgid "Immutable Page"
+msgstr "唯讀頁面"
+
+msgid "Remove Link"
+msgstr "取消捷徑"
+
+msgid "Add Link"
+msgstr "設為捷徑"
+
+msgid "Attachments"
+msgstr "附件"
+
+#, python-format
+msgid "Show %s days."
+msgstr "顯示 %s 天。"
+
+msgid "Wiki Markup"
+msgstr "Wiki 標記"
+
+msgid "DeleteCache"
+msgstr "刪除快取"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s 的快取)"
+
+msgid "Or try one of these actions:"
+msgstr "或使用下列功能："
+
+msgid "Page"
+msgstr "頁面"
+
+msgid "User"
+msgstr "使用者"
+
+msgid "Line"
+msgstr "行號"
+
+msgid "Deletions are marked like this."
+msgstr "這個顏色代表刪除的"
+
+msgid "Additions are marked like this."
+msgstr "這個顏色代表增加的"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "缺少必要的屬性 \"%(attrname)s\""
+
+#~ msgid "Submitted form data:"
+#~ msgstr "提交表單資料："
+
+#~ msgid "Plain title index"
+#~ msgstr "一般標題索引"
+
+#~ msgid "XML title index"
+#~ msgstr "XML 標題索引"
+
+#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+#~ msgstr "外掛處理器 (不建議使用 -- 請改用解析器)"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "很抱歉，有人在你編輯的時候儲存了本頁。\n"
+#~ "\n"
+#~ "請按如下步驟處理：先按瀏覽器的上一頁，從編輯框裡把你修改的內容剪貼到別"
+#~ "處；\n"
+#~ "再按下一頁，重新編輯本頁，並加入你改過的內容。\n"
+#~ "\n"
+#~ "''注意！不要把整個內容改成你剛剪貼下來的版本，\n"
+#~ "那樣的話會蓋掉別人改過的內容。這樣是很不禮貌的！''\n"
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "跳到我最後瀏覽的頁面而不是系統首頁"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(變更密碼才要重覆輸入)"
+
+#~ msgid "Filename"
+#~ msgstr "檔名"
+
+#~ msgid "You are not allowed to rename pages in this wiki!"
+#~ msgstr "你無權重新命名頁面！"
+
+#~ msgid "Please use the interactive user interface to rename pages!"
+#~ msgstr "請使用互動式介面為頁面重新命名！"
+
+#~ msgid "You are not allowed to delete this page."
+#~ msgstr "你無權刪除本頁。"
+
+#~ msgid "%(logcount)s (%(logsize)s bytes)"
+#~ msgstr "%(logcount)s 條 (計 %(logsize)s 位元組)"
+
+#~ msgid "User Preferences"
+#~ msgstr "使用者設定"
+
+#~ msgid "Download XML export of this wiki"
+#~ msgstr "以 XML 格式匯出本 wiki"
+
+#~ msgid "EditText"
+#~ msgstr "編輯本頁"
+
+#~ msgid "Immutable page"
+#~ msgstr "唯讀頁面"
+
+#~ msgid "Bad relogin URL."
+#~ msgstr "錯誤的重新登入 URL。"
+
+#~ msgid "Unknown user."
+#~ msgstr "不明的使用者名稱。"
+
+#~ msgid "Remember last page visited"
+#~ msgstr "記住上次看的最後一頁"
+
+#~ msgid "Parent Page"
+#~ msgstr "上層頁面"
+
+#~ msgid "Trail"
+#~ msgstr "瀏覽足跡"
+
+#~ msgid ""
+#~ "You didn't create a user profile yet. Select UserPreferences in the upper "
+#~ "right corner to create a profile."
+#~ msgstr "你還沒註冊。請點右上角的 \"使用者設定\" 並按下「新使用者註冊」。"
+
+#~ msgid ""
+#~ "This wiki is not enabled for mail processing. Contact the owner of the "
+#~ "wiki, who can either enable email, or remove the \"Subscribe\" icon."
+#~ msgstr ""
+#~ "本 wiki 不支援郵寄工作，請連絡管理員，以便他決定要啟動郵寄功能，或是乾脆去"
+#~ "掉「訂閱」圖示。"
+
+#~ msgid ""
+#~ "You didn't enter an email address in your profile. Select your name "
+#~ "(UserPreferences) in the upper right corner and enter a valid email "
+#~ "address."
+#~ msgstr ""
+#~ "你註冊的時候沒有提供 email 地址。請在右上角點一下你的名字(或是「使用者設"
+#~ "定」) 並提供合法的 email 地址。"
+
+#~ msgid ""
+#~ "To unsubscribe, go to your profile and delete the item matching this page "
+#~ "from the subscription list."
+#~ msgstr "如果要取消訂閱，請點右上角修改個人資料，並從訂閱清單中刪除本頁。"
+
+#~ msgid "Quicklink"
+#~ msgstr "頁面捷徑"
+
+#~ msgid "Show Print View"
+#~ msgstr "檢視列印形"
+
+#~ msgid "Attach File"
+#~ msgstr "附加檔案"
+
+#~ msgid "Show Like Pages"
+#~ msgstr "搜尋相似頁面"
+
+#~ msgid "Show Local Site Map"
+#~ msgstr "顯示連結地圖"
+
+#~ msgid "Infos"
+#~ msgstr "關於"
+
+#~ msgid "Can't work out query"
+#~ msgstr "無法查詢"
+
+#~ msgid "Add to Quicklinks"
+#~ msgstr "設為頁面捷徑"
+
+#~ msgid "Show Parent"
+#~ msgstr "顯示上一層"
+
+#~ msgid "Show Changes"
+#~ msgstr "顯示更動"
+
+#~ msgid "Get Info"
+#~ msgstr "關於本頁"
+
+#~ msgid "Skip to preview"
+#~ msgstr "跳至預覽"
+
+#~ msgid "[current page size '''%(size)d''' bytes]"
+#~ msgstr "[本頁目前大小 '''%(size)d''' 位元組]"
+
+#~ msgid "Optional comment about this change"
+#~ msgstr "本次編輯說明："
+
+#~ msgid "Make this page belong to category %(category)s"
+#~ msgstr "將本頁劃入類別 %(category)s"
+
+#~ msgid "Show fancy links"
+#~ msgstr "在連結前顯示小圖示"
+
+#~ msgid "Save as"
+#~ msgstr "另存新檔"
+
+#~ msgid "XSLT option disabled!"
+#~ msgstr "XSLT 功能停用！"
+
+#~ msgid "RefreshCache"
+#~ msgstr "刷新快取內容"
+
+#~ msgid "for this page (cached %(date)s)"
+#~ msgstr " (本頁快取時間: %(date)s)"
+
+#~ msgid "MIME Type (optional)"
+#~ msgstr "MIME 類型 (可選)"
+
+#~ msgid "Refresh"
+#~ msgstr "刷新快取內容"
+
+#~ msgid "[\"<html>\"]"
+#~ msgstr "[\"<html>\"]"
+
+#~ msgid "Needed %(timer).1f seconds."
+#~ msgstr "用了 %(timer).1f 秒。"
+
+#~ msgid "User name already exists!"
+#~ msgstr "你已經註冊過了！"
+
+#~ msgid "Go"
+#~ msgstr "Go!"
+
+#~ msgid "Send mail notification"
+#~ msgstr "發送編輯通知"
+
+#~ msgid "You will not be notified of your own changes!"
+#~ msgstr "因為你編輯了本頁，所以編輯通知不會再寄一份給你！"
+
+#~ msgid "Nobody subscribed to this page, no mail sent."
+#~ msgstr "沒人訂閱本頁，沒有送出通知。"
+
+#~ msgid "Exactly one matching page for \"%s\" found!"
+#~ msgstr "連結 \"%s\" 的剛好就這麼一頁！"
+
+#~ msgid "Multiple matches for \"%s...%s\""
+#~ msgstr "有很多連向 \"%s...%s\" 的頁面"
+
+#~ msgid "You cannot use LikePages on an extended pagename!"
+#~ msgstr "擴充頁名不能使用 LikePages 功能！"
+
+#~ msgid "Page \"%s\" was successfully renamed to \"%s\"!"
+#~ msgstr "\"%s\" 已經改名為 \"%s\" 了！"
+
+#~ msgid "Really delete bookmark?"
+#~ msgstr "真的要刪除書籤？"
+
+#~ msgid "Update my bookmark timestamp"
+#~ msgstr "把書籤設成現在"
+
+#~ msgid "of this page"
+#~ msgstr " "
+
+#~ msgid "or search titles %(titlesearch)s, full text %(textsearch)s or"
+#~ msgstr "，搜尋標題 %(titlesearch)s，全文檢索 %(textsearch)s 或"
+
+#~ msgid "Show all changes in the last %s days."
+#~ msgstr "顯示 %s 天以內的所有更動。"
+
+#~ msgid "Site"
+#~ msgstr "本站"
+
+#~ msgid "Title: %(titlesearch)s[[BR]]Text: %(textsearch)s"
+#~ msgstr "標題: %(titlesearch)s[[BR]]內文: %(textsearch)s"
+
+#~ msgid "No older revisions of the page stored, diff not available."
+#~ msgstr "本頁沒有儲存舊版內容，所以沒辦法做版本比較。"
+
+#~ msgid "The diff function returned with error code %(rc)s!"
+#~ msgstr "版本比較函式傳回錯誤代碼 %(rc)s！"
+
+#~ msgid "Show emoticons"
+#~ msgstr "顯示表情符號"
+
+#~ msgid "Please enter your name like that: FirstnameLastname"
+#~ msgstr "請輸入像這樣的名稱: XingMing"
+
+#~ msgid "Number of backup versions"
+#~ msgstr "備份版本數"
+
+#~ msgid "Reduce editor size"
+#~ msgstr "縮小編輯框"
+
+#~ msgid "An error occurred while reverting the page."
+#~ msgstr "恢復舊版時發生錯誤。"
+
+#~ msgid "Alternatively, use one of these templates:"
+#~ msgstr "或是用下面其中一個模板："
+
+#~ msgid ""
+#~ "To create your own templates, add a page with a name matching the regex "
+#~ "\"%(page_template_regex)s\"."
+#~ msgstr ""
+#~ "如果要建立新的模板，請新增一頁。名字必須符合正規表示式 \"%"
+#~ "(page_template_regex)s\"，如 MyNewTemplate。"
+
+#~ msgid "The following pages with similar names already exist..."
+#~ msgstr "下面幾頁的名字很接近本頁，提供你做個參考..."
+
+#~ msgid "Account"
+#~ msgstr "帳號"
