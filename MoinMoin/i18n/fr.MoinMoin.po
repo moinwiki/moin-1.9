@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-05-07 20:19+0200\n"
+"PO-Revision-Date: 2006-07-10 23:24+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -110,15 +110,13 @@ msgstr "Quelqu'un a effacé la page alors que vous l'éditiez !"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Quelqu'un a modifié la page alors que vous l'éditiez !"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Quelqu'un a enregistré cette page pendant que vous l'éditiez !\n"
 "Vérifiez d'abord la page puis enregistrez-la. N'enregistrez pas cette page "
-"telle quelle !\n"
-"Jetez un œil aux modifications de %(difflink)s pour voir ce qui a changé."
+"telle quelle !"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -281,7 +279,7 @@ msgid "You already saved this page!"
 msgstr "Vous avez déjà enregistré cette page !"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "Vous avez déjà modifié cette page ! Veuillez ne pas utiliser le bouton « Précédent »."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -509,7 +507,7 @@ msgid "Open editor on double click"
 msgstr "Double-cliquer pour ouvrir l'éditeur"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "À la connexion, démarrer à la dernière page visitée"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr ""
@@ -543,7 +541,7 @@ msgid "Name"
 msgstr "Nom"
 
 msgid "(Use Firstname''''''Lastname)"
-msgstr "(Utilisez Prénom''''''Nom)"
+msgstr "(utilisez Prénom''''''Nom)"
 
 msgid "Alias-Name"
 msgstr "Pseudonyme"
@@ -555,7 +553,7 @@ msgid "Password repeat"
 msgstr "Répétez le mot de passe"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(pour créer un compte ou changer de mot de passe)"
 
 msgid "Email"
 msgstr "Adresse électronique"
@@ -564,7 +562,7 @@ msgid "User CSS URL"
 msgstr "URL du style CSS personnel"
 
 msgid "(Leave it empty for disabling user CSS)"
-msgstr "(Laissez-la vide pour désactiver le style CSS personnel)"
+msgstr "(il sera désactivé si rien n'est indiqué)"
 
 msgid "Editor size"
 msgstr "Taille de l'éditeur"
@@ -1408,9 +1406,8 @@ msgstr ""
 "Mot de passe manquant. Veuillez indiquer un nom d'utilisateur et un mot de "
 "passe."
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "Désolé, mauvais mot de passe."
+msgstr "Désolé, la connexion a échoué."
 
 msgid "You are now logged out."
 msgstr "Vous êtes maintenant déconnecté."
@@ -1650,9 +1647,8 @@ msgstr "Désactivée"
 msgid "Enabled"
 msgstr "Activée"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Utilisation de Lupy pour les recherches"
+msgstr "Recherche Xapian"
 
 msgid "Active threads"
 msgstr "Fils actifs"
@@ -1721,7 +1717,6 @@ msgstr "Un entier « %(arg)s » était attendu après « %(key)s »"
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Une couleur « %(arg)s » était attendue après « %(key)s »"
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
@@ -1956,54 +1951,3 @@ msgstr "Texte supprimé."
 
 msgid "Additions are marked like this."
 msgstr "Texte ajouté."
-
-#~ msgid "Required attribute \"%(attrname)s\" missing"
-#~ msgstr "L'attribut « %(attrname)s » requis est manquant"
-
-#~ msgid "Submitted form data:"
-#~ msgstr "Données du formulaire envoyé :"
-
-#~ msgid "Plain title index"
-#~ msgstr "Index des titres en texte brut"
-
-#~ msgid "XML title index"
-#~ msgstr "Index des titres en format XML"
-
-#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
-#~ msgstr "Processeurs installés (OBSOLÈTES -- utilisez plutôt les analyseurs)"
-
-#~ msgid ""
-#~ "Sorry, someone else saved the page while you edited it.\n"
-#~ "\n"
-#~ "Please do the following: Use the back button of your browser, and "
-#~ "cut&paste\n"
-#~ "your changes from there. Then go forward to here, and click EditText "
-#~ "again.\n"
-#~ "Now re-add your changes to the current page contents.\n"
-#~ "\n"
-#~ "''Do not just replace\n"
-#~ "the content editbox with your version of the page, because that would\n"
-#~ "delete the changes of the other person, which is excessively rude!''\n"
-#~ msgstr ""
-#~ "Désolé, quelqu'un d'autre a enregistré cette page pendant que vous "
-#~ "l'éditiez.\n"
-#~ "\n"
-#~ "Veuillez suivre les instructions suivantes : utilisez le bouton « "
-#~ "Précédent » de votre navigateur\n"
-#~ "et faites un copier-coller de vos modifications depuis cet endroit. Puis "
-#~ "revenez ici et cliquez à nouveau sur ÉditionDuTexte.\n"
-#~ "Maintenant intégrez vos modifications au contenu actuel de la page.\n"
-#~ "\n"
-#~ "''Ne vous contentez pas de remplacer le texte actuel par votre version de "
-#~ "la page\n"
-#~ "car cela supprimerait les changements de l'autre personne, ce qui "
-#~ "particulièrement impoli !''\n"
-
-#~ msgid "Jump to last visited page instead of frontpage"
-#~ msgstr "Démarrer à la dernière page visitée au lieu d'à la page d'accueil"
-
-#~ msgid "(Only when changing passwords)"
-#~ msgstr "(Uniquement pour le modifier)"
-
-#~ msgid "Filename"
-#~ msgstr "Nom du fichier"

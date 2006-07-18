@@ -21,7 +21,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-# Twisted imports
 from twisted.application import internet, service
 from twisted.web import script, static, server, vhost, resource, util
 from twisted.internet import threads, reactor
@@ -47,18 +46,18 @@ del config
 # Server globals
 config = None
 
-    
+
 class WikiResource(resource.Resource):
     """ Wiki resource """
     isLeaf = 1
-    
+
     def render(self, request):
         return server.NOT_DONE_YET
 
 
 class WikiRoot(resource.Resource):
     """ Wiki root resource """
-    
+
     def getChild(self, name, request):
         # Serve images and css from '/wiki'
         if request.prepath == [] and name == 'wiki':
@@ -112,8 +111,8 @@ class MoinRequest(server.Request):
         filenames of file uploads ( FIELDNAME__filename__ ).
         """
         import cgi
-        
-        self.content.seek(0,0)
+
+        self.content.seek(0, 0)
         self.args = {}
         self.extended_args = {}
         self.stack = []
@@ -169,7 +168,7 @@ class MoinRequest(server.Request):
                         if i.filename:
                             args[key + '__filename__'] = i.filename
                 args[key] = fixedResult
-        
+
         self.process()
 
 
@@ -193,7 +192,7 @@ class MoinSite(server.Site):
         """ Cleaup before stoping """
         server.Site.stopFactory(self)
         if config.hotshotProfile:
-            config.hotshotProfile.close()        
+            config.hotshotProfile.close()
 
 
 class TwistedConfig(Config):
@@ -211,9 +210,9 @@ class TwistedConfig(Config):
     virtualHosts = None
     memoryProfile = None
     hotshotProfile = None
-    
+
     # sslcert = ('/whereever/cert/sitekey.pem', '/whereever/cert/sitecert.pem')
-    sslcert = None 
+    sslcert = None
 
     def __init__(self):
         Config.__init__(self)
@@ -235,10 +234,10 @@ def makeApp(ConfigClass):
     # Create config instance (raise RuntimeError if config invalid)
     global config
     config = ConfigClass()
-        
+
     # Set number of threads
     reactor.suggestThreadPoolSize(config.threads)
-    
+
     # The root of the HTTP hierarchy
     default = WikiRoot()
 
@@ -268,10 +267,10 @@ def makeApp(ConfigClass):
             interface, port = entry.split(':', 1)
         except ValueError:
             interface, port = entry, config.port
-            
+
         # Might raise ValueError if not integer.
         # TODO: check if we can use string port, like 'http'
-        port = int(port)                       
+        port = int(port)
 
         if port == 443 and ssl and ssl.supported and config.sslcert:
             sslContext = ssl.DefaultOpenSSLContextFactory(*config.sslcert)

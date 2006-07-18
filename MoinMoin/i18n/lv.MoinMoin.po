@@ -11,7 +11,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
@@ -111,15 +111,13 @@ msgstr "Kāds cits ir izdzēsis šo lapu, kamēr Jūs to labojāt!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "Kāds cits ir izmainījis šo lapu, kamēr Jūs to labojāt!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "Kāds cits ir saglabājis šo lapu, kamēr Jūs to labojāt!\n"
 "Lūdzu, pārskatiet izmaiņas lapā un saglabājiet to. Nesaglabājiet to šajā "
-"variantā!\n"
-"Caurskatiet atšķirības %(difflink)s, lai redzētu, kas ir mainīts."
+"variantā!"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -277,7 +275,7 @@ msgid "You already saved this page!"
 msgstr "Lapa jau ir saglabāta!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "Jūs jau izlabojāt šo lapu. Lūdzu, nelietojiet 'Atpakaļ' pogu!"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -1359,9 +1357,8 @@ msgstr ""
 msgid "Missing password. Please enter user name and password."
 msgstr "Trūkst paroles. Lūdzu, ievadiet vārdu un paroli."
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "Piedodiet, nepareiza parole."
+msgstr "Atvainojiet, neizdevās pieslēgties."
 
 msgid "You are now logged out."
 msgstr "Jūs esat atslēgts(-a)."
@@ -1607,9 +1604,8 @@ msgstr "Izslēgts"
 msgid "Enabled"
 msgstr "Ieslēgts"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Kopējā meklēšana"
+msgstr "''Xapian'' meklēšana"
 
 msgid "Active threads"
 msgstr "Aktīvie pavedieni"
@@ -1675,7 +1671,6 @@ msgstr "Nepieciešams skaitlis \"%(arg)s\" pēc \"%(key)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Nepieciešams krāsas kods \"%(arg)s\" pēc \"%(key)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
