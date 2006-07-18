@@ -42,6 +42,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     needle = request.form.get(fieldname, [''])[0]
     case = int(request.form.get('case', [0])[0])
     regex = int(request.form.get('regex', [0])[0]) # no interface currently
+    hitsFrom = int(request.form.get('from', [0])[0])
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
@@ -94,15 +95,16 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     request.write(request.formatter.startContent("content"))
 
     # First search stats
-    request.write(results.stats(request, request.formatter))
+    request.write(results.stats(request, request.formatter, hitsFrom))
 
     # Then search results
     info = not titlesearch
     if context:
         output = results.pageListWithContext(request, request.formatter, info=info,
-                                             context=context)
+                context=context, hitsFrom=hitsFrom)
     else:
-        output = results.pageList(request, request.formatter, info=info)
+        output = results.pageList(request, request.formatter, info=info,
+                hitsFrom=hitsFrom)
     request.write(output)
 
     request.write(request.formatter.endContent())
