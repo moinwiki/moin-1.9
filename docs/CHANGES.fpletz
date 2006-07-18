@@ -160,5 +160,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-18
     * Fixed some bugs, whitespaces at EOL, better i18n for SystemInfo
     * Implemented paging support for searches, needs some style
-      adjustments, breaks FullSearch macro for now
+      adjustments
 

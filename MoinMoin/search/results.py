@@ -289,13 +289,14 @@ class SearchResults:
         return ''.join(output)
 
     def pageList(self, request, formatter, info=0, numbered=1,
-            hitsFrom=0):
+            paging=True, hitsFrom=0):
         """ Format a list of found pages
 
         @param request: current request
         @param formatter: formatter to use
         @param info: show match info in title
         @param numbered: use numbered list for display
+        @param paging: toggle paging
         @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list
@@ -313,8 +314,13 @@ class SearchResults:
             write(list(1))
             
             # XXX: Do some xapian magic here
-            hitsTo = hitsFrom + request.cfg.search_results_per_page
-            for page in self.hits[hitsFrom:hitsTo]:
+            if paging:
+                hitsTo = hitsFrom + request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
+
+            for page in displayHits:
                 if page.attachment:
                     querydict = {
                         'action': 'AttachFile',
@@ -338,14 +344,15 @@ class SearchResults:
                     ]
                 write(''.join(item))
             write(list(0))
-            write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
-                hitsPerPage=request.cfg.search_results_per_page,
-                hitsNum=len(self.hits)))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
 
         return self.getvalue()
 
     def pageListWithContext(self, request, formatter, info=1, context=180,
-                            maxlines=1, hitsFrom=0):
+                            maxlines=1, paging=True, hitsFrom=0):
         """ Format a list of found pages with context
 
         The default parameter values will create Google-like search
@@ -358,6 +365,7 @@ class SearchResults:
         @param info: show match info near the page link
         @param context: how many characters to show around each match.
         @param maxlines: how many contexts lines to show.
+        @param paging: toggle paging
         @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list with context
@@ -371,8 +379,13 @@ class SearchResults:
             write(f.definition_list(1))
 
             # XXX: Do some xapian magic here
-            hitsTo = hitsFrom+request.cfg.search_results_per_page
-            for page in self.hits[hitsFrom:hitsTo]:
+            if paging:
+                hitsTo = hitsFrom+request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
+
+            for page in displayHits:
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -403,9 +416,10 @@ class SearchResults:
                     ]
                 write(''.join(item))
             write(f.definition_list(0))
-            write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
-                hitsPerPage=request.cfg.search_results_per_page,
-                hitsNum=len(self.hits)))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
         
         return self.getvalue()
 
