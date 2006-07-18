@@ -52,9 +52,9 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
     
     This server is good for personal wiki, or when lowest memory
     footprint is needed.
-    """    
+    """
     use_threads = False
-    
+
     def __init__(self, config):
         self.htdocs = config.docs
         self.request_queue_size = config.requestQueueSize
@@ -88,7 +88,7 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
             del req
         except socket.error, err:
             # Ignore certain errors
-            if err.args[0] not in [errno.EADDRNOTAVAIL,]:
+            if err.args[0] not in [errno.EADDRNOTAVAIL, ]:
                 raise
 
 
@@ -102,7 +102,7 @@ class ThreadingServer(SimpleServer):
     limit the load on the server.
     """
     use_threads = True
-    
+
     def __init__(self, config):
         self.thread_limit = config.threadLimit
         from threading import Condition
@@ -127,7 +127,7 @@ class ThreadingServer(SimpleServer):
             t.start()
         finally:
             self.lock.release()
-    
+
     def process_request_thread(self, request, client_address):
         """ Called for each request on a new thread 
         
@@ -162,7 +162,7 @@ class ThreadPoolServer(SimpleServer):
     remove the commented debug prints.
     """
     use_threads = True
-    
+
     def __init__(self, config):
         self.queue = []
         # The size of the queue need more testing
@@ -179,7 +179,7 @@ class ThreadPoolServer(SimpleServer):
             t = Thread(target=self.serve_forever_thread)
             t.start()
         SimpleServer.serve_forever(self)
-        
+
     def process_request(self, request, client_address):
         """ Called for each request 
         
@@ -196,7 +196,7 @@ class ThreadPoolServer(SimpleServer):
             self.queue.insert(0, (request, client_address))
             self.lock.notify()
         finally:
-            self.lock.release()       
+            self.lock.release()
 
     def serve_forever_thread(self):
         """ The main loop of request threads 
@@ -209,9 +209,9 @@ class ThreadPoolServer(SimpleServer):
                 self.finish_request(request, client_address)
             except:
                 self.handle_error(request, client_address)
-            self.close_request(request)            
+            self.close_request(request)
         # sys.stderr.write('thread exiting...\n')
-    
+
     def pop_request(self):
         """ Pop a request from the queue 
         
@@ -232,8 +232,8 @@ class ThreadPoolServer(SimpleServer):
         finally:
             self.lock.release()
         # sys.stderr.write('thread exiting...\n')
-        sys.exit()        
-        
+        sys.exit()
+
     def die(self):
         """ Wake all threads then invoke base class die
 
@@ -251,7 +251,7 @@ class ThreadPoolServer(SimpleServer):
             self.lock.notifyAll()
         finally:
             self.lock.release()
-   
+
 
 class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
     """ Serve each request in a new process 
@@ -262,23 +262,23 @@ class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
     The mixin has its own process limit.
     """
     max_children = 10
-    
-    
+
+
 class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     bufferSize = 8 * 1024 # used to serve static files
-    staticExpire =  7 * 24 * 3600 # 1 week expiry for static files
-    
+    staticExpire = 7 * 24 * 3600 # 1 week expiry for static files
+
     def __init__(self, request, client_address, server):
         self.server_version = "MoinMoin %s %s" % (version.revision,
                                                   server.__class__.__name__)
         self.expires = 0
-        SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request, 
+        SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request,
             client_address, server)
 
     # -------------------------------------------------------------------
     # do_METHOD dispatchers - called for each request
-    
+
     def do_DIE(self):
         if self.server._abort:
             self.log_error("Shutting down")
@@ -300,21 +300,21 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.serve_static_file()
         else:
             self.serve_moin()
-        
+
     do_POST = do_ALL
     do_GET = do_ALL
     do_HEAD = do_ALL
 
     # -------------------------------------------------------------------    
     # Serve methods
-    
+
     def serve_static_file(self):
         """ Serve files from the htdocs directory """
         self.expires = self.staticExpire
         path = self.path.split("?", 1)
         if len(path) > 1:
             self.path = path[0] # XXX ?params
-            
+
         try:
             fn = getattr(SimpleHTTPServer.SimpleHTTPRequestHandler, 'do_' + self.command)
             fn(self)
@@ -322,7 +322,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Ignore certain errors
             if err.args[0] not in [errno.EPIPE, errno.ECONNABORTED]:
                 raise
-    
+
     def serve_moin(self):
         """ Serve a request using moin """
         # don't make an Expires header for wiki pages
@@ -335,7 +335,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # Ignore certain errors
             if err.args[0] not in [errno.EPIPE, errno.ECONNABORTED]:
                 raise
-        
+
     def translate_path(self, uri):
         """ Translate a /-separated PATH to the local filename syntax.
 
@@ -361,7 +361,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         if bad_uri:
             self.log_error("Detected bad request URI '%s', translated to '%s'"
-                           % (uri, path,))    
+                           % (uri, path,))
         return path
 
     def end_headers(self):
@@ -371,7 +371,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             expires = now + self.expires
             self.send_header('Expires', timefuncs.formathttpdate(expires))
         SimpleHTTPServer.SimpleHTTPRequestHandler.end_headers(self)
-        
+
     def copyfile(self, source, outputfile):
         """Copy all data between two file objects.
         
@@ -399,10 +399,10 @@ else:
                 host = self.headers.get('Host', socket.gethostname())
                 path = self.path
             else:
-                host = '%s:%s' % (socket.gethostname(), 
+                host = '%s:%s' % (socket.gethostname(),
                         self.request.getsockname()[1])
                 path = '/'
-                
+
             self.requestline = 'ERROR: Redirecting to https://%s%s' % (host, path)
             self.request_version = 'HTTP/1.1'
             self.command = 'GET'
@@ -412,21 +412,21 @@ else:
             self.send_header('Connection', 'close')
             self.send_header('Content-Length', '0')
             self.wfile.write('\r\n')
-            
+
     class SecureThreadPoolServer(TLSSocketServerMixIn, ThreadPoolServer):
         def __init__(self, config):
             ThreadPoolServer.__init__(self, config)
-            
+
             cert = open(config.ssl_certificate).read()
             x509 = X509()
             x509.parse(cert)
             self.certChain = X509CertChain([x509])
-            
+
             priv = open(config.ssl_privkey).read()
             self.privateKey = parsePEMKey(priv, private=True)
-            
+
             self.sessionCache = SessionCache()
-            
+
         def finish_request(self, sock, client_address):
             # Peek into the packet, if it starts with GET or POS(T) then
             # redirect, otherwise let TLSLite handle the connection.
@@ -435,25 +435,25 @@ else:
                 SecureRequestRedirect(sock, client_address, self)
                 return
             tls_connection = TLSConnection(sock)
-            if self.handshake(tls_connection) == True:
+            if self.handshake(tls_connection):
                 self.RequestHandlerClass(tls_connection, client_address, self)
             else:
                 # This will probably fail because the TLSConnection has 
                 # already written SSL stuff to the socket. But not sure what
                 # else we should do.
                 SecureRequestRedirect(sock, client_address, self)
-                
+
         def handshake(self, tls_connection):
             try:
-                tls_connection.handshakeServer(certChain = self.certChain,
-                                               privateKey = self.privateKey,
-                                               sessionCache = self.sessionCache)
+                tls_connection.handshakeServer(certChain=self.certChain,
+                                               privateKey=self.privateKey,
+                                               sessionCache=self.sessionCache)
                 tls_connection.ignoreAbruptClose = True
                 return True
             except:
                 return False
 
-                
+
 def memoryProfileDecorator(func, profile):
     """ Return a profiled function """
     def profiledFunction(*args, **kw):
@@ -471,10 +471,10 @@ def hotshotProfileDecorator(func, profile):
             # Don't profile first request, its not interesting
             return func(*args, **kw)
         return profile.runcall(func, *args, **kw)
-    
+
     return profiledFunction
 
-        
+
 def quit(signo, stackframe):
     """ Signal handler for aborting signals """
     global httpd
@@ -508,14 +508,14 @@ def makeServer(config):
         except ImportError:
             serverClass = ForkingServer
     if serverClass is ForkingServer and not hasattr(os, "fork"):
-        serverClass = SimpleServer    
+        serverClass = SimpleServer
     if serverClass.__name__ != config.serverClass:
         sys.stderr.write('%s is not available on this platform, falling back '
                          'to %s\n' % (config.serverClass,
                                       serverClass.__name__))
-            
+
     from MoinMoin import config as _config
-    _config.use_threads = serverClass.use_threads    
+    _config.use_threads = serverClass.use_threads
     return serverClass(config)
 
 # ------------------------------------------------------------------------
@@ -532,7 +532,7 @@ class StandaloneConfig(Config):
     port = 8000
     interface = 'localhost'
     logPath = None
-    
+
     # Advanced options
     serverClass = 'ThreadPoolServer'
     threadLimit = 10
@@ -551,36 +551,36 @@ def run(configClass):
     See StandaloneConfig for available options
     
     @param configClass: config class
-    """    
+    """
     # Run only once!
     global httpd, config
     if httpd is not None:
         raise RuntimeError("You can run only one server per process!")
 
-    config = configClass()    
-     
+    config = configClass()
+
     # Install hotshot profiled serve_moin method. To compare with other
     # servers, we profile the part that create and run the request.
     if config.hotshotProfile:
         import hotshot
         config.hotshotProfile = hotshot.Profile(config.hotshotProfile)
-        MoinRequestHandler.serve_moin =  hotshotProfileDecorator(
+        MoinRequestHandler.serve_moin = hotshotProfileDecorator(
             MoinRequestHandler.serve_moin, config.hotshotProfile)
-    
+
     # Install a memory profiled serve_moin method
     if config.memoryProfile:
         config.memoryProfile.sample()
         MoinRequestHandler.serve_moin = memoryProfileDecorator(
             MoinRequestHandler.serve_moin, config.memoryProfile)
-    
+
     if config.logPath:
         sys.stderr = file(config.logPath, 'at')
     registerSignalHandlers(quit)
-    httpd = makeServer(config)    
-    
+    httpd = makeServer(config)
+
     # Run as a safe user (posix only)
     if os.name == 'posix' and os.getuid() == 0:
         switchUID(config.uid, config.gid)
-    
+
     httpd.serve_forever()
 

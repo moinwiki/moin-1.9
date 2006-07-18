@@ -58,9 +58,9 @@ class Daemon:
     
     Represent a background process, which may be running or not. The
     process can be started, stopped, restarted or killed.
-    """       
+    """
     commandPrefix = 'do_'
-    
+
     def __init__(self, name, function, *args, **kw):
         """ Create a daemon
         
@@ -75,7 +75,7 @@ class Daemon:
         self.args = args
         self.kw = kw
         self.pidFile = os.path.abspath(name + '.pid')
-    
+
     # --------------------------------------------------------------------
     # Commands
 
@@ -115,21 +115,21 @@ class Daemon:
         """
         running, pid = self.status()
         if not running:
-            return self.log("%s is not running" % self.name)            
+            return self.log("%s is not running" % self.name)
         os.kill(pid, signal.SIGKILL)
         self.removePID()
-                        
+
     def do_restart(self):
         """ stop, wait until pid file gone and start again """
         running, pid = self.status()
         if not running:
             self.log("%s is not running, trying to start" % self.name)
         else:
-            self.do_stop()            
+            self.do_stop()
         timeoutSeconds = 2.0
         start = time.time()
         while time.time() - start < timeoutSeconds:
-            running, pid =  self.status()
+            running, pid = self.status()
             if not running:
                 break
             time.sleep(0.1)
@@ -177,7 +177,7 @@ class Daemon:
             self.warn("removing corrupted pid file: %s" % self.pidFile)
             self.removePID()
         return pid
-    
+
     def daemonize(self):
         """ Make the current process a daemon
         
@@ -189,19 +189,19 @@ class Daemon:
         if os.fork():   # launch child and...
             os._exit(0) # kill off parent again.
         os.umask(077)
-        null=os.open('/dev/null', os.O_RDWR)
+        null = os.open('/dev/null', os.O_RDWR)
         for i in range(3):
             try:
                 os.dup2(null, i)
             except OSError, e:
                 if e.errno != errno.EBADF:
                     raise
-        os.close(null)    
+        os.close(null)
 
     def writePID(self):
         pid = str(os.getpid())
         open(self.pidFile, 'wb').write(pid)
-    
+
     def removePID(self):
         try:
             os.remove(self.pidFile)
@@ -229,7 +229,7 @@ class DaemonScript(Daemon):
         if args == 1:
             self.usage('nothing to do')
         elif args > 2:
-            self.usage("too many arguments")        
+            self.usage("too many arguments")
         try:
             command = sys.argv[1]
             func = getattr(self, self.commandPrefix + command)
@@ -237,7 +237,7 @@ class DaemonScript(Daemon):
         except AttributeError:
             self.usage('unknown command %r' % command)
         except Exception, why:
-            sys.exit("error: %s" % str(why))    
+            sys.exit("error: %s" % str(why))
 
     def usage(self, message):
         sys.stderr.write('error: %s\n' % message)
@@ -258,4 +258,7 @@ commands:
 
 @copyright: 2004-2005 Thomas Waldmann, Nir Soffer
 @license: GNU GPL, see COPYING for details.
-""" % {'name': self.name,}
+""" % {
+    'name': self.name,
+}
+

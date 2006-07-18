@@ -188,6 +188,10 @@ class Index(BaseIndex):
         else:
             return os.path.join(self.request.cfg.cache_dir, 'xapian')
 
+    def exists(self):
+        """ Check if the Xapian index exists """
+        return BaseIndex.exists(self) and os.listdir(self.dir)
+
     def _search(self, query):
         """ read lock must be acquired """
         while True:
@@ -237,12 +241,6 @@ class Index(BaseIndex):
             Assumes that the write lock is acquired
         """
         fs_rootpage = 'FS' # XXX FS hardcoded
-
-        # rebuilding the DB: delete it and add everything
-        if mode == 'rebuild':
-            for f in os.listdir(self.dir):
-                os.unlink(f)
-            mode = 'add'
 
         try:
             wikiname = request.cfg.interwikiname or 'Self'
@@ -440,6 +438,13 @@ class Index(BaseIndex):
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
         """
+
+        # rebuilding the DB: delete it and add everything
+        if mode == 'rebuild':
+            for f in os.listdir(self.dir):
+                os.unlink(os.path.join(self.dir, f))
+            mode = 'add'
+
         try:
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)

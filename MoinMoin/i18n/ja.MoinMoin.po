@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-06-16 19:40+0900\n"
+"PO-Revision-Date: 2006-07-09 23:32+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -108,14 +108,12 @@ msgstr "編集中に他のユーザがこのページを削除してしまいま
 msgid "Someone else changed this page while you were editing!"
 msgstr "編集中に他のユーザがこのページを変更しました。"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "編集中に他のユーザがこのページを変更しました。\n"
-"このページはこのままの状態では保存しないでください。\n"
-"%(difflink)sにて変更された内容を確認し、問題を解決してから保存してください。"
+"変更された内容を確認してから保存してください。決してこのままの状態では保存しないでください。"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -277,7 +275,7 @@ msgid "You already saved this page!"
 msgstr "既にこのページを保存済みです。"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "既にこのページを編集しています。ブラウザの「戻る」ボタンは使わないでください。"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -492,7 +490,7 @@ msgid "Open editor on double click"
 msgstr "ダブルクリックでエディタを開く"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "ログイン後、最後に訪れたページに行く"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "存在しないページへのリンクには\"?\"を表示する"
@@ -537,7 +535,7 @@ msgid "Password repeat"
 msgstr "パスワード(もう一度)"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(パスワード変更またはアカウント作成用)"
 
 msgid "Email"
 msgstr "メールアドレス"
@@ -1362,9 +1360,8 @@ msgid "Missing password. Please enter user name and password."
 msgstr ""
 "パスワードが入力されていません。ユーザ名とパスワードを入力してください。"
 
-#, fuzzy
 msgid "Sorry, login failed."
-msgstr "不正なパスワードです。"
+msgstr "ログインに失敗しました。"
 
 msgid "You are now logged out."
 msgstr "ログアウト完了です。"
@@ -1604,9 +1601,8 @@ msgstr "無効"
 msgid "Enabled"
 msgstr "有効"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Lupyによる検索"
+msgstr "Xapianによる検索"
 
 msgid "Active threads"
 msgstr "アクティブなスレッド"
@@ -1673,11 +1669,10 @@ msgstr "\"%(key)s\"の後には整数値\"%(arg)s\"が必要です。"
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\"の後には色の値\"%(arg)s\"が必要です。"
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
-"reStructured textを利用できません。docutilsをインストールしてください。"
+"reStructured textを利用できません。Docutilsをインストールしてください。"
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**インクルードの許容数を越えました**"

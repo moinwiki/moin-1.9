@@ -112,7 +112,9 @@ def execute(Macro, args):
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
 
     state = (_('Disabled'), _('Enabled'))
-    row(_('Xapian search'), state[request.cfg.xapian_search])
+    from MoinMoin.search.builtin import Search
+    row(_('Xapian search'), '%s, %sactive' % (state[request.cfg.xapian_search],
+                not Search._xapianIndex(request) and 'not ' or ''))
 
     row(_('Active threads'), t_count or 'N/A')
     buf.write(u'</dl>')
