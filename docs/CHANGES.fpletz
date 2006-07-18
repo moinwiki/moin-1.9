@@ -32,7 +32,7 @@ Branch moin/1.6-xapian-fpletz
     * ...
 
   Other Changes:
-    * ...
+    * Some whitespace fixes in miscellaneous code
   
   Developer notes:
     * ...
@@ -152,4 +152,9 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-17
     * SystemInfo macro now also shows if xapian is being used (index
       available) and more graceful fallback to moinSearch
+    * Explored and evaluated the current framework for macros,
+      formatters and stuff which we need to touch for the new search UI
+
+2006-07-18
+    * Fixed some bugs, whitespaces at EOL, better i18n for SystemInfo
 

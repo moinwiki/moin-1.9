@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import time, sys, os, errno
+import time, sys, os, errno, codecs
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, lock
@@ -251,7 +251,7 @@ class BaseIndex:
             self.request.log("can't index: can't acquire lock")
             return
         try:
-            def lockedDecorator(self, f):
+            def lockedDecorator(f):
                 def func(*args, **kwargs):
                     try:
                         return f(*args, **kwargs)
