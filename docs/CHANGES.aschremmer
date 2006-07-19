@@ -22,7 +22,7 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC method to get binary diffs
     * XMLRPC method to merge remote changes locally
     * XMLRPC method to get the interwiki name
-    * TagStore class
+    * TagStore/PickleTagStore class
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes.
@@ -60,8 +60,8 @@ Week 27: Europython, Geneva.
 Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added preliminary SyncPages action,
          added interwikiName XMLRPC method, added mergeChanges XMLRPC method. Started analysis of the moinupdate
          script written by Stefan Merten.
-Week 29: Finished first version of the mergeChanges method. Added preliminary
-         Tag and TagStore classes.
+Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
+         using pickle-based storage.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 
