@@ -63,6 +63,8 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
 Week 29: Finished first version of the mergeChanges method. Added preliminary
          Tag and TagStore classes.
 
+2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+
 Time plan
 =========
 In July and August, most parts of the implementation will be finished
