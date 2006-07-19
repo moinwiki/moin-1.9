@@ -498,6 +498,7 @@ class XmlRpcBase:
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
+
     # authorization methods
     
     def xmlrpc_getAuthToken(self, username, password, *args):
@@ -518,7 +519,10 @@ class XmlRpcBase:
             return "SUCCESS"
         else:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
-    
+
+
+    # methods for wiki synchronization
+
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
         from MoinMoin.util.bdiff import textdiff, compress
@@ -594,9 +598,13 @@ class XmlRpcBase:
             @param interwiki_name: Used to build the interwiki tag.
         """
         from MoinMoin.util.bdiff import decompress, patch
+        from MoinMoin.wikisync import TagStore
+        LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
         
         pagename = self._instr(pagename)
        
+        comment = u"Remote - %r" % interwiki_name
+        
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
             return self.notAllowedFault()
@@ -604,10 +612,10 @@ class XmlRpcBase:
         # XXX add locking here!
         
         # current version of the page
-        currentpage = Page(self.request, pagename)
+        currentpage = PageEditor(self.request, pagename, do_editor_backup=0)
 
         if currentpage.get_real_rev() != last_remote_rev:
-            return xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
+            return LASTREV_INVALID
         
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
@@ -619,13 +627,22 @@ class XmlRpcBase:
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
         
         # write page
-        # XXX ...
+        try:
+            currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
+            currentpage.clean_acl_cache()
+        except PageEditor.EditConflict:
+            return LASTREV_INVALID
+
+        current_rev = currentpage.get_real_rev()
         
-        # XXX add a tag (interwiki_name, local_rev, current rev) to the page
-        # XXX return current rev
-        # XXX finished
-        
-        
+        tags = TagStore(currentpage)
+        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev)
+
+        # XXX unlock page
+
+        return current_rev
+
+
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
     # they are neither standard nor are they what we need when we have switched
