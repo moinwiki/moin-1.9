@@ -1482,6 +1482,9 @@ var gui_editor_link_text = "%(text)s";
             user_head.append(request.cfg.html_head_queries)
         elif request.request_method == 'POST':
             user_head.append(request.cfg.html_head_posts)
+        # we don't want to have BadContent stuff indexed:
+        elif pagename in ['BadContent', 'LocalBadContent', ]:
+            user_head.append(request.cfg.html_head_posts)
         # if it is a special page, index it and follow the links - we do it
         # for the original, English pages as well as for (the possibly
         # modified) frontpage:
