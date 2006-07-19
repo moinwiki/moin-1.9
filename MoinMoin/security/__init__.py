@@ -55,7 +55,7 @@ class Permissions:
             return lambda pagename, Page=Page, request=request, attr=attr: Page(request, pagename).getACL(request).may(request, self.name, attr)
         else:
             raise AttributeError, attr
-        
+
 
 # make an alias for the default policy
 Default = Permissions
@@ -218,7 +218,7 @@ class AccessControlList:
             if entries == ['Default']:
                 self.addDefault(cfg)
                 continue
-            
+
             for entry in entries:
                 if group_re.search(entry):
                     self._is_group[entry] = 1
@@ -228,7 +228,7 @@ class AccessControlList:
                     # + add rights with value of 1
                     # - add right with value of 0
                     for right in rights:
-                        rightsdict[right] = (modifier == '+')    
+                        rightsdict[right] = (modifier == '+')
                 else:
                     # All rights from acl_rights_valid are added to the
                     # dict, user rights with value of 1, and other with
@@ -266,7 +266,7 @@ class AccessControlList:
 
     def getString(self, b='#acl ', e='\n'):
         """print the acl strings we were fed with"""
-        return ''.join(["%s%s%s" % (b,l,e) for l in self.acl_lines])
+        return ''.join(["%s%s%s" % (b, l, e) for l in self.acl_lines])
 
     def _special_All(self, request, name, dowhat, rightsdict):
         return rightsdict.get(dowhat)
@@ -306,7 +306,7 @@ class ACLStringIterator:
         for modifier, entries, rights in iter:
             # process data
     """
-    
+
     def __init__(self, rights, aclstring):
         """ Initialize acl iterator
 
@@ -320,7 +320,7 @@ class ACLStringIterator:
     def __iter__(self):
         """ Required by the Iterator protocol """
         return self
-    
+
     def next(self):
         """ Return the next values from the acl string
 
@@ -336,7 +336,7 @@ class ACLStringIterator:
             self.finished = 1
         if self.finished:
             raise StopIteration
-        
+
         # Get optional modifier [+|-]entries:rights
         modifier = ''
         if self.rest[0] in ('+', '-'):
@@ -344,9 +344,9 @@ class ACLStringIterator:
 
         # Handle the Default meta acl
         if self.rest.startswith('Default ') or self.rest == 'Default':
-            self.rest = self.rest[8:]           
+            self.rest = self.rest[8:]
             entries, rights = ['Default'], []
-            
+
         # Handle entries:rights pairs
         else:
             # Get entries
@@ -359,10 +359,10 @@ class ACLStringIterator:
                 entries = []
             else:
                 # TODO strip each entry from blanks?
-                entries = entries.split(',')            
+                entries = entries.split(',')
 
             # Get rights
-            try:         
+            try:
                 rights, self.rest = self.rest.split(' ', 1)
                 # Remove extra white space after rights fragment,
                 # allowing using multiple spaces between items.
