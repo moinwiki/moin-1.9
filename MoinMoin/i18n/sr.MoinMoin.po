@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2004-11-16 17:53+0200\n"
 "Last-Translator: Thomas W. Horna <obivatelj@gmail.com>\n"
 "Language-Team: Serbian <moin-devel@lists.sourceforge.net>\n"
@@ -546,20 +546,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d pogodaka u %(pages)d pretraženih stranica."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr ""
-
-msgid "match"
-msgstr "pronađen"
-
-msgid "matches"
-msgstr "pronađenih"
-
 #, fuzzy
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -938,6 +924,12 @@ msgstr "Veličina stranice: %d"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s odgovaraju \"%(title)s\""
+
+msgid "match"
+msgstr "pronađen"
+
+msgid "matches"
+msgstr "pronađenih"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1835,6 +1827,14 @@ msgstr "Izbrisani delovi su ovako markirani"
 
 msgid "Additions are marked like this."
 msgstr "Dodaci su ovako markirani."
+
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d pogodaka u %(pages)d pretraženih stranica."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr ""
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Potreban atribut \"%(attrname)s\" nedostaje"

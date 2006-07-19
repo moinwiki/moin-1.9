@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -567,20 +567,6 @@ msgstr "Ismeretlen függvény %(func)s a(z) %(lineno)i. sorban."
 msgid "The file %s was not found in the package."
 msgstr "A fájl %s nem található a csomagban."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(pages)d lapból %(hits)d találat"
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f s"
-
-msgid "match"
-msgstr "találat"
-
-msgid "matches"
-msgstr "találatok"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -972,6 +958,12 @@ msgstr "A(z) \"%s\" laphoz hasonlóak"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s a(z) \"%(title)s\" mintához"
+
+msgid "match"
+msgstr "találat"
+
+msgid "matches"
+msgstr "találatok"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1890,6 +1882,14 @@ msgstr "A törléseket így jelöljük."
 
 msgid "Additions are marked like this."
 msgstr "A kiegészítéseket így jelöljük."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(pages)d lapból %(hits)d találat"
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f s"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "A(z) \"%(attrname)s\" kötelező attribútum hiányzik"

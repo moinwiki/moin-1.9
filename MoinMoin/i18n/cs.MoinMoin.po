@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -587,20 +587,6 @@ msgstr "Neznámá funkce %(func)s na řádku %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Soubor %s nebyl v balíčku nalezen."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d nálezů na celkem %(pages)d stránkách."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekund"
-
-msgid "match"
-msgstr "nález"
-
-msgid "matches"
-msgstr "nálezů"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -977,6 +963,12 @@ msgstr "Stránky podobné \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s pro \"%(title)s\""
+
+msgid "match"
+msgstr "nález"
+
+msgid "matches"
+msgstr "nálezů"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1882,6 +1874,14 @@ msgstr "Smazané věci jsou označeny takto."
 
 msgid "Additions are marked like this."
 msgstr "Nové věci jsou označeny takto."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d nálezů na celkem %(pages)d stránkách."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekund"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Chybí požadovaný atribut \"%(attrname)s\""

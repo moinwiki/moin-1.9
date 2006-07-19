@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -104,7 +104,6 @@ msgstr "在您编辑此页时, 别的用户删除了此页!"
 
 msgid "Someone else changed this page while you were editing!"
 msgstr "在您编辑此页时, 别的用户修改了此页!"
-
 
 msgid ""
 "Someone else saved this page while you were editing!\n"
@@ -571,20 +570,6 @@ msgstr "%(lineno)i行存在未知函数%(func)s."
 msgid "The file %s was not found in the package."
 msgstr "文件 %s 不是MoinMoin包."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "在大约%(pages)d页中找到%(hits)d个结果."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f秒"
-
-msgid "match"
-msgstr "次匹配"
-
-msgid "matches"
-msgstr "次匹配"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -951,6 +936,12 @@ msgstr "\"%s\"的相似网页"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "共发现%(matchcount)d%(matches)s与\"%(title)s\"相似的页"
+
+msgid "match"
+msgstr "次匹配"
+
+msgid "matches"
+msgstr "次匹配"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1849,6 +1840,14 @@ msgstr "删除的内容标记成这样."
 
 msgid "Additions are marked like this."
 msgstr "加入的内容标记成这样."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "在大约%(pages)d页中找到%(hits)d个结果."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f秒"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "缺少需要的属性\"%(attrname)s\""

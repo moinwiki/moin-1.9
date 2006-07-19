@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5.0rc1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-12-21 12:55+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -579,20 +579,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr "El fitxer %s no és un fitxer de paquet MoinMoin."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultats d'alrededor de %(pages)d pàgines."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f segons"
-
-msgid "match"
-msgstr "coincidència"
-
-msgid "matches"
-msgstr "coincidències"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -988,6 +974,12 @@ msgstr "Pàgines semblants a «%s»"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s per a «%(title)s»"
+
+msgid "match"
+msgstr "coincidència"
+
+msgid "matches"
+msgstr "coincidències"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1863,6 +1855,14 @@ msgstr "Les supressions es marquen així."
 
 msgid "Additions are marked like this."
 msgstr "Els afegiments es marquen així."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultats d'alrededor de %(pages)d pàgines."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f segons"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Manca l'atribut requerit «%(attrname)s»"

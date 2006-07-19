@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -591,20 +591,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr "Plik %s nie jest pakietem MoinMoin."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekund"
-
-msgid "match"
-msgstr "porównanie"
-
-msgid "matches"
-msgstr "porównania"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -997,6 +983,12 @@ msgstr "Stron w rodzaju \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s dla \"%(title)s\""
+
+msgid "match"
+msgstr "porównanie"
+
+msgid "matches"
+msgstr "porównania"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1915,6 +1907,14 @@ msgstr "Usunięcia zostały oznaczone w ten sposób."
 
 msgid "Additions are marked like this."
 msgstr "Dodatki zostały oznaczone w ten sposób."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d rezultatów z liczby %(pages)d stron."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekund"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Brakuje niezbędnego atrybutu \"%(attrname)s\""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-02-15 22:09+0100\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Italian <moin-devel@lists.sourceforge.net>\n"
@@ -150,10 +150,10 @@ msgid ""
 "If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
 "changes."
 msgstr ""
-"Cliccando su '''%(save_button_text)s''' acconsentirai al rilascio delle tue modifiche "
-"sotto la %(license_link)s.\n"
-"Se non è quello che vuoi, clicca su '''%(cancel_button_text)s''' per annullare le tue "
-"modifiche."
+"Cliccando su '''%(save_button_text)s''' acconsentirai al rilascio delle tue "
+"modifiche sotto la %(license_link)s.\n"
+"Se non è quello che vuoi, clicca su '''%(cancel_button_text)s''' per "
+"annullare le tue modifiche."
 
 msgid "Preview"
 msgstr "Anteprima"
@@ -307,8 +307,8 @@ msgstr ""
 msgid ""
 "Other users will be ''blocked'' from editing this page until %(bumptime)s."
 msgstr ""
-"Gli altri utenti saranno ''bloccati'' nelle modifiche a questa pagina fino "
-"a %(bumptime)s."
+"Gli altri utenti saranno ''bloccati'' nelle modifiche a questa pagina fino a "
+"%(bumptime)s."
 
 #, python-format
 msgid ""
@@ -598,20 +598,6 @@ msgstr "Funzione sconosciuta %(func)s alla riga %(lineno)i."
 #, python-format
 msgid "The file %s was not found in the package."
 msgstr "Impossibile trovare il file %s nel pacchetto."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d risultati su circa %(pages)d pagine consultate."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f secondi"
-
-msgid "match"
-msgstr "corrispondenza"
-
-msgid "matches"
-msgstr "corrispondenze"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -1002,6 +988,12 @@ msgstr "Pagine simili a \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s per \"%(title)s\""
 
+msgid "match"
+msgstr "corrispondenza"
+
+msgid "matches"
+msgstr "corrispondenze"
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mappa del sito per \"%s\""
@@ -1143,8 +1135,7 @@ msgstr "L'azione %(actionname)s è stata disabilitata in questo wiki!"
 
 #, python-format
 msgid "You are not allowed to use action %(actionname)s on this page!"
-msgstr ""
-"Non ti è consentito di usare l'azione %(actionname)s su questa pagina!"
+msgstr "Non ti è consentito di usare l'azione %(actionname)s su questa pagina!"
 
 #, python-format
 msgid "Please use the interactive user interface to use action %(actionname)s!"
@@ -1334,8 +1325,8 @@ msgstr ""
 "  * Attenzione, il ripristino di un backup sovrascriverà i dati esistenti.\n"
 "  * Rinomina il backup in <siteid>.tar.<compression> (rimuovi tutto il --"
 "date--time--UTC)\n"
-"  * Metti il file di backup nella cartella_di_archiviazione_backup "
-"(usa scp, ftp, ...).\n"
+"  * Metti il file di backup nella cartella_di_archiviazione_backup (usa scp, "
+"ftp, ...).\n"
 "  * Clicca sul pulsante [[GetText(Restore)]] qui sotto.\n"
 "\n"
 " * Per fare una copia di salvataggio (backup), clicca sul pulsante [[GetText"
@@ -1920,3 +1911,11 @@ msgstr "Le cancellazioni sono marcate in questo modo."
 
 msgid "Additions are marked like this."
 msgstr "Le aggiunte sono marcate in questo modo."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d risultati su circa %(pages)d pagine consultate."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f secondi"

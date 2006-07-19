@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
-"PO-Revision-Date: 2006-07-09 23:32+0900\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
+"PO-Revision-Date: 2006-07-18 17:17+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,8 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "編集中に他のユーザがこのページを変更しました。\n"
-"変更された内容を確認してから保存してください。決してこのままの状態では保存しないでください。"
+"変更された内容を確認してから保存してください。決してこのままの状態では保存し"
+"ないでください。"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -275,7 +276,9 @@ msgid "You already saved this page!"
 msgstr "既にこのページを保存済みです。"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr "既にこのページを編集しています。ブラウザの「戻る」ボタンは使わないでください。"
+msgstr ""
+"既にこのページを編集しています。ブラウザの「戻る」ボタンは使わないでくださ"
+"い。"
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -585,20 +588,6 @@ msgstr "%(lineno)i行目に不明な関数 %(func)s があります。"
 #, python-format
 msgid "The file %s was not found in the package."
 msgstr "ファイル %s はパッケージ内に存在しません。"
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "約%(pages)dページ中%(hits)d箇所一致しました。"
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f秒"
-
-msgid "match"
-msgstr "箇所一致"
-
-msgid "matches"
-msgstr "箇所一致"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -986,6 +975,12 @@ msgstr "\"%s\"のようなページ"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "\"%(title)s\"において%(matchcount)d %(matches)s"
+
+msgid "match"
+msgstr "箇所一致"
+
+msgid "matches"
+msgstr "箇所一致"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1898,6 +1893,14 @@ msgstr "削除された箇所はこのように表示されます。"
 
 msgid "Additions are marked like this."
 msgstr "追加された箇所はこのように表示されます。"
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "約%(pages)dページ中%(hits)d箇所一致しました。"
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f秒"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "必須項目\"%(attrname)s\"を入力してください。"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-08-18 14:19+EET\n"
 "Last-Translator: Ovidiu Sabou <ovidiu.sabou@gmail.com>\n"
 "Language-Team: Romanian <ovidiu.sabou@gmail.com>\n"
@@ -580,20 +580,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr "Fişierul %s nu este un fişier pachet MoinMoin."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d rezultate din aproximativ %(pages)d pagini."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f secunde"
-
-msgid "match"
-msgstr "potrivire"
-
-msgid "matches"
-msgstr "potriviri"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -993,6 +979,12 @@ msgstr "Pagini de genul \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s pentru \"%(title)s\""
+
+msgid "match"
+msgstr "potrivire"
+
+msgid "matches"
+msgstr "potriviri"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1883,6 +1875,14 @@ msgstr "Ştergerile sunt marcate astfel."
 
 msgid "Additions are marked like this."
 msgstr "Adăugările sunt marcate astfel."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d rezultate din aproximativ %(pages)d pagini."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f secunde"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Parametrul necesar \"%(attrname)s\" lipseşte"

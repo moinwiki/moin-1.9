@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-04-22 17:39-0300\n"
-"Last-Translator: Ramiro Morales <cramm0@gmail.com>\n"
+"Last-Translator: Igor Tamara<igor@tamarapatino.org>\n"
 "Language-Team: Spanish <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -108,15 +108,13 @@ msgstr "¡Otra persona ha borrado esta página mientras la editabas!"
 msgid "Someone else changed this page while you were editing!"
 msgstr "¡Otra persona ha cambiado esta página mientras la editabas!"
 
-#, fuzzy
 msgid ""
 "Someone else saved this page while you were editing!\n"
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 "¡Otra persona ha guardado esta página mientras la editabas!\n"
 "Por favor, revisa la página y guárdala nuevamente. ¡No guardes la página "
-"como está!\n"
-"Revisa las diferencias de %(difflink)s para ver qué ha cambiado."
+"como está!"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -281,7 +279,7 @@ msgid "You already saved this page!"
 msgstr "¡Ya guardaste los cambios de esta página!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
+msgstr "¡Ya has editado esta página! Por favor no uses el botón regresar."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -503,7 +501,7 @@ msgid "Open editor on double click"
 msgstr "Abrir el editor con doble click"
 
 msgid "After login, jump to last visited page"
-msgstr ""
+msgstr "Después de autenticarte, ir a la última página visitada"
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostrar signo de interrogación en enlaces a páginas inexistentes"
@@ -555,7 +553,7 @@ msgid "Password repeat"
 msgstr "Repetir contraseña para validarla"
 
 msgid "(Only for password change or new account)"
-msgstr ""
+msgstr "(Solamente para cambiar clave o una cuenta nueva)"
 
 msgid "Email"
 msgstr "e-Mail"
@@ -608,20 +606,6 @@ msgstr "Función %(func)s desconocida en la línea %(lineno)i."
 #, python-format
 msgid "The file %s was not found in the package."
 msgstr "No se ha encontrado el archivo %s en el paquete."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultantes entre %(pages)d páginas revisadas."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f segundos"
-
-msgid "match"
-msgstr "coincidencia"
-
-msgid "matches"
-msgstr "coincidencias"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -1018,6 +1002,12 @@ msgstr "Páginas similares a \"%s\""
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s de \"%(title)s\""
 
+msgid "match"
+msgstr "coincidencia"
+
+msgid "matches"
+msgstr "coincidencias"
+
 #, python-format
 msgid "Local Site Map for \"%s\""
 msgstr "Mapa local del sitio \"%s\""
@@ -1407,7 +1397,6 @@ msgstr ""
 "Faltó ingresar la contraseña. Por favor, ingresa el nombre de usuario y "
 "contraseña"
 
-#, fuzzy
 msgid "Sorry, login failed."
 msgstr "Lo lamento, constraseña errónea"
 
@@ -1650,9 +1639,8 @@ msgstr "Desactivado"
 msgid "Enabled"
 msgstr "Activado"
 
-#, fuzzy
 msgid "Xapian search"
-msgstr "Búsqueda"
+msgstr "Búsqueda xapian"
 
 msgid "Active threads"
 msgstr "Hilos (conversaciones) activos"
@@ -1720,11 +1708,10 @@ msgstr "Esperaba un entero \"%(arg)s\" después de \"%(key)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "Esperaba un valor de color \"%(arg)s\" después de \"%(key)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr ""
-"No se pudo mostrar el texto reEstructurado, por favor instala docutils."
+"No se pudo mostrar el texto reEstructurado, por favor instala Docutils."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Se excedió el número máximo de 'includes' permitidos"
@@ -1949,6 +1936,14 @@ msgstr "Los textos eliminados se marcan así."
 
 msgid "Additions are marked like this."
 msgstr "Los textos añadidos se marcan así."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultantes entre %(pages)d páginas revisadas."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f segundos"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Falta el atributo requerido \"%(attrname)s\""
