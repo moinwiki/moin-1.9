@@ -26,14 +26,13 @@ def encodeAddress(address, charset):
     @type charset: email.Charset.Charset instance
     @rtype: string
     @return: encoded address
-    """   
-    composite = re.compile(r'(?P<phrase>.+)(?P<angle_addr>\<.*\>)', 
-                           re.UNICODE)
+    """
+    composite = re.compile(r'(?P<phrase>.+)(?P<angle_addr>\<.*\>)', re.UNICODE)
     match = composite.match(address)
     if match:
         phrase = match.group('phrase').encode(config.charset)
         phrase = str(Header(phrase, charset))
-        angle_addr = match.group('angle_addr').encode(config.charset)       
+        angle_addr = match.group('angle_addr').encode(config.charset)
         return phrase + angle_addr
     else:
         return address.encode(config.charset)
@@ -59,9 +58,9 @@ def sendmail(request, to, subject, text, **kw):
     from email.Utils import formatdate, make_msgid
 
     _ = request.getText
-    cfg = request.cfg    
+    cfg = request.cfg
     mail_from = kw.get('mail_from', '') or cfg.mail_from
-    subject = subject.encode(config.charset)    
+    subject = subject.encode(config.charset)
 
     # Create a text/plain body using CRLF (see RFC2822)
     text = text.replace(u'\n', u'\r\n')
@@ -74,19 +73,19 @@ def sendmail(request, to, subject, text, **kw):
     charset = Charset(config.charset)
     charset.header_encoding = QP
     charset.body_encoding = QP
-    msg.set_charset(charset)    
+    msg.set_charset(charset)
     msg.set_payload(charset.body_encode(text))
-    
+
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
     # use the same mail_from, e.g. u"Jürgen Wiki <noreply@mywiki.org>"
-    address = encodeAddress(mail_from, charset) 
+    address = encodeAddress(mail_from, charset)
     msg['From'] = address
     msg['To'] = address
     msg['Date'] = formatdate()
     msg['Message-ID'] = make_msgid()
     msg['Subject'] = Header(subject, charset)
-    
+
     if cfg.mail_sendmail:
         # Set the BCC.  This will be stripped later by sendmail.
         msg['BCC'] = ','.join(to)
@@ -121,12 +120,12 @@ def sendmail(request, to, subject, text, **kw):
             return (0, str(e))
         except (os.error, socket.error), e:
             return (0, _("Connection to mailserver '%(server)s' failed: %(reason)s") % {
-                'server': cfg.mail_smarthost, 
+                'server': cfg.mail_smarthost,
                 'reason': str(e)
             })
     else:
         try:
-            sendmailp = os.popen(cfg.mail_sendmail, "w") 
+            sendmailp = os.popen(cfg.mail_sendmail, "w")
             # msg contains everything we need, so this is a simple write
             sendmailp.write(msg.as_string())
             sendmail_status = sendmailp.close()
