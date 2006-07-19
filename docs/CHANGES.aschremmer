@@ -4,6 +4,7 @@ Branch moin/1.6-sync-aschremmer
   Known main issues:
     * How will we store tags?
     * How to handle renames/deletes?
+    * How to handle colliding/empty interwiki names?
 
   ToDo:
     * Implement actual syncronisation.
