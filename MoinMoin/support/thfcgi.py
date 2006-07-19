@@ -281,8 +281,13 @@ class Request:
         """Return a cgi FieldStorage constructed from the stdin and
         environ read from the server for this request."""
         self.stdin.reset()
-        return cgi.FieldStorage(fp=self.stdin, environ=self.env,
-                                keep_blank_values=1)
+        # cgi.FieldStorage will eat the input here...
+        r = cgi.FieldStorage(fp=self.stdin, environ=self.env,
+                             keep_blank_values=1)
+        # hence, we reset here so we can obtain
+        # the data again...
+        self.stdin.reset()
+        return r
 
     def _flush(self, stream):
         """Flush a stream of this request."""
@@ -478,6 +483,8 @@ class Request:
         
         if not rec.content:
             self.stdin_complete = 1
+            self.stdin.reset()
+            return
 
         self.stdin.write(rec.content)
 
