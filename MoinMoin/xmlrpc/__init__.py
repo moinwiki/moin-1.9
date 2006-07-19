@@ -628,12 +628,12 @@ class XmlRpcBase:
         
         # write page
         try:
-            page.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
-            page.clean_acl_cache()
+            currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
+            currentpage.clean_acl_cache()
         except PageEditor.EditConflict:
             return LASTREV_INVALID
 
-        current_rev = page.get_real_rev()
+        current_rev = currentpage.get_real_rev()
         
         tags = TagStore(currentpage)
         tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev)
