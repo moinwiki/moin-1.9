@@ -36,7 +36,7 @@ def linkto(pagename, request, params=''):
     querystr = wikiutil.escape(querystr)
     if params:
         querystr += '&amp;' + params
-    
+
     # TODO: remove escape=0 in 2.0
     data = {'url': page.url(request, querystr, escape=0)}
     data.update(request.cfg.chart_options)
@@ -47,13 +47,13 @@ def linkto(pagename, request, params=''):
 
 
 def get_data(pagename, request, filterpage=None):
-    
+
     # Get results from cache
     if filterpage:
         arena = Page(request, pagename)
     else:
         arena = 'charts'
-    
+
     cache_days, cache_views, cache_edits = [], [], []
     cache_date = 0
     cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki')
@@ -69,7 +69,7 @@ def get_data(pagename, request, filterpage=None):
         new_date = log.date()
     except logfile.LogMissing:
         new_date = None
-        
+
     # prepare data
     days = []
     views = []
@@ -80,11 +80,11 @@ def get_data(pagename, request, filterpage=None):
         log.set_filter(['VIEWPAGE', 'SAVEPAGE'])
         for event in log.reverse():
             #print ">>>", wikiutil.escape(repr(event)), "<br>"
-    
-            if event[0] <=  cache_date:
+
+            if event[0] <= cache_date:
                 break
             # XXX Bug: event[2].get('pagename') -> u'Aktuelle%C4nderungen' 8(
-            eventpage = event[2].get('pagename','')
+            eventpage = event[2].get('pagename', '')
             if filterpage and eventpage != filterpage:
                 continue
             time_tuple = request.user.getTime(wikiutil.version2timestamp(event[0]))
@@ -107,7 +107,7 @@ def get_data(pagename, request, filterpage=None):
                 views[-1] = views[-1] + 1
             elif event[1] == 'SAVEPAGE':
                 edits[-1] = edits[-1] + 1
-    
+
         days.reverse()
         views.reverse()
         edits.reverse()
@@ -123,7 +123,7 @@ def get_data(pagename, request, filterpage=None):
     cache_views.extend(views)
     cache_edits.extend(edits)
     if new_date is not None:
-        cache.update("(%r, %r, %r, %r)" % 
+        cache.update("(%r, %r, %r, %r)" %
                      (new_date, cache_days, cache_views, cache_edits))
 
     return cache_days, cache_views, cache_edits
@@ -137,9 +137,9 @@ def text(pagename, request, params=''):
     # check params
     filterpage = None
     if params.startswith('page='):
-        params = params[len('page='):]        
+        params = params[len('page='):]
         filterpage = wikiutil.decodeUserInput(params)
-    
+
     if request and request.form and request.form.has_key('page'):
         filterpage = request.form['page'][0]
 
@@ -147,8 +147,8 @@ def text(pagename, request, params=''):
 
     hits = TupleDataset()
     hits.columns = [Column('day', label=_("Date"), align='left'),
-                    Column('views', label=_("Views/day") , align='right'),
-                    Column('edits', label=_("Edits/day") , align='right')
+                    Column('views', label=_("Views/day"), align='right'),
+                    Column('edits', label=_("Edits/day"), align='right'),
                     ]
 
     maxentries = 30
@@ -157,14 +157,14 @@ def text(pagename, request, params=''):
         step = float(len(days))/ maxentries
     else:
         step = 1
-        
+
     sv = 0.0
     se = 0.0
     sd = 0.0
     cnt = 0
 
-    for i in xrange(len(days)-1,-1,-1):
-        d,v,e = days[i], views[i], edits[i]
+    for i in xrange(len(days)-1, -1, -1):
+        d, v, e = days[i], views[i], edits[i]
         # sum up views and edits to step days 
         sd += 1
         cnt += 1
@@ -196,7 +196,7 @@ def draw(pagename, request):
     days, views, edits = get_data(pagename, request, filterpage)
 
     import math
-    
+
     try:
         scalefactor = float(max(views))/max(edits)
     except (ZeroDivisionError, ValueError):
@@ -213,16 +213,20 @@ def draw(pagename, request):
     c.addData(ChartData(views, color='green'))
     c.addData(ChartData(edits, color='red'))
     chart_title = ''
-    if request.cfg.sitename: chart_title = "%s: " % request.cfg.sitename
+    if request.cfg.sitename:
+        chart_title = "%s: " % request.cfg.sitename
     chart_title = chart_title + _('Page hits and edits')
-    if filterpage: chart_title = _("%(chart_title)s for %(filterpage)s") % {
-        'chart_title': chart_title, 'filterpage': filterpage}
+    if filterpage:
+        chart_title = _("%(chart_title)s for %(filterpage)s") % {
+            'chart_title': chart_title,
+            'filterpage': filterpage,
+        }
     chart_title = "%s\n%sx%d" % (chart_title, _("green=view\nred=edit"), scalefactor)
     c.option(
-        title = chart_title.encode('iso-8859-1', 'replace'), # gdchart can't do utf-8
-        xtitle = (_('date') + ' (Server)').encode('iso-8859-1', 'replace'),
-        ytitle = _('# of hits').encode('iso-8859-1', 'replace'),
-        title_font = c.GDC_GIANT,
+        title=chart_title.encode('iso-8859-1', 'replace'), # gdchart can't do utf-8
+        xtitle=(_('date') + ' (Server)').encode('iso-8859-1', 'replace'),
+        ytitle=_('# of hits').encode('iso-8859-1', 'replace'),
+        title_font=c.GDC_GIANT,
         #thumblabel = 'THUMB', thumbnail = 1, thumbval = 10,
         #ytitle_color = Color('green'),
         #yaxis2 = 1,
@@ -230,9 +234,9 @@ def draw(pagename, request):
         #ytitle2_color = Color('red'),
         #ylabel2_color = Color('black'),
         #interpolations = 0,
-        threed_depth = 1.0,
-        requested_yinterval = 1.0,
-        stack_type = c.GDC_STACK_BESIDE
+        threed_depth=1.0,
+        requested_yinterval=1.0,
+        stack_type=c.GDC_STACK_BESIDE
     )
     c.draw(c.GDC_LINE,
         (request.cfg.chart_options['width'], request.cfg.chart_options['height']),

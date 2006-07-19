@@ -48,8 +48,8 @@ class Chart:
         self.datasets = []
 
         self.option(
-            bg_color = 0xffffff, 
-            line_color = 0x000000
+            bg_color=0xffffff,
+            line_color=0x000000,
         )
 
     def addData(self, data):
@@ -74,7 +74,7 @@ class Chart:
         if not labels: labels = map(str, range(1, len(args[0])+1))
 
         # set colors for the data sets
-        if colors: self.option(set_color = map(int, map(Color, colors)))
+        if colors: self.option(set_color=map(int, map(Color, colors)))
 
         # pass options to gdchart and render the chart
         gdchart.option(**self.options)
@@ -93,14 +93,14 @@ for key, val in vars(gdchart).items():
 if __name__ == "__main__":
     import os, sys, random
     c = Chart()
-    c.addData(ChartData([random.randrange(0,i+1) for i in range(20)], color='green'))
+    c.addData(ChartData([random.randrange(0, i+1) for i in range(20)], color='green'))
     c.addData(ChartData([random.gauss(30, 5.0) for i in range(20)], color='blue'))
     c.option(
-        title = 'gdchart Demo',
-        xtitle = 'X axis',
-        ytitle = 'random values'
+        title='gdchart Demo',
+        xtitle='X axis',
+        ytitle='random values',
     )
-    c.draw(Chart.GDC_LINE, (600,300), 'test.gif')
+    c.draw(Chart.GDC_LINE, (600, 300), 'test.gif')
     if sys.platform == "win32":
         os.system("explorer test.gif")
     else:

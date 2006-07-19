@@ -13,7 +13,7 @@
 
 _debug = 0
 
-from MoinMoin import wikiutil, caching, logfile 
+from MoinMoin import wikiutil, caching, logfile
 from MoinMoin.Page import Page
 from MoinMoin.logfile import eventlog
 
@@ -34,7 +34,7 @@ def linkto(pagename, request, params=''):
     querystr = wikiutil.escape(querystr)
     if params:
         querystr += '&amp;' + params
-    
+
     # TODO: remove escape=0 in 2.0
     data = {'url': page.url(request, querystr, escape=0)}
     data.update(request.cfg.chart_options)
@@ -53,13 +53,13 @@ def get_data(request):
             cache_date, data = eval(cache.content())
         except:
             cache.remove() # cache gone bad
-    
+
     log = eventlog.EventLog(request)
     try:
         new_date = log.date()
     except logfile.LogMissing:
         new_date = None
-    
+
     if new_date is not None:
         log.set_filter(['VIEWPAGE', 'SAVEPAGE'])
         for event in log.reverse():
@@ -74,10 +74,10 @@ def get_data(request):
                     ua = ua.split()[0]
                 #ua = ua.replace(';', '\n')
                 data[ua] = data.get(ua, 0) + 1
-    
+
         # write results to cache
         cache.update("(%r, %r)" % (new_date, data))
-            
+
     data = [(cnt, ua) for ua, cnt in data.items()]
     data.sort()
     data.reverse()
@@ -89,7 +89,7 @@ def text(pagename, request):
 
     fmt = request.formatter
     _ = request.getText
-    
+
     data = get_data(request)
 
     sum = 0.0
@@ -99,7 +99,7 @@ def text(pagename, request):
 
     agents = TupleDataset()
     agents.columns = [Column('agent', label=_("User agent"), align='left'),
-                      Column('value', label= '%', align='right')]
+                      Column('value', label='%', align='right')]
 
     cnt_printed = 0
     data = data[:10]
@@ -115,7 +115,7 @@ def text(pagename, request):
     table = DataBrowserWidget(request)
     table.setData(agents)
     return table.toHTML()
-    
+
 
 def draw(pagename, request):
     import shutil, cStringIO, operator
@@ -158,15 +158,15 @@ def draw(pagename, request):
     if request.cfg.sitename: title = "%s: " % request.cfg.sitename
     title = title + _('Distribution of User-Agent Types')
     c.option(
-        pie_color = colors,
-        label_font = Chart.GDC_SMALL,
-        label_line = 1,
-        label_dist = 20,
-        threed_depth = 20,
-        threed_angle = 225,
-        percent_labels = Chart.GDCPIE_PCT_RIGHT,
-        title_font = c.GDC_GIANT,
-        title = title.encode('iso-8859-1', 'replace')) # gdchart can't do utf-8
+        pie_color=colors,
+        label_font=Chart.GDC_SMALL,
+        label_line=1,
+        label_dist=20,
+        threed_depth=20,
+        threed_angle=225,
+        percent_labels=Chart.GDCPIE_PCT_RIGHT,
+        title_font=c.GDC_GIANT,
+        title=title.encode('iso-8859-1', 'replace')) # gdchart can't do utf-8
     labels = [label.encode('iso-8859-1', 'replace') for label in labels]
     c.draw(style,
         (request.cfg.chart_options['width'], request.cfg.chart_options['height']),
