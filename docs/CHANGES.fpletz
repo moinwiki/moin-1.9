@@ -17,6 +17,10 @@ Branch moin/1.6-xapian-fpletz
     * Add stemming support for highlighting stuff:
         1. regexp for whole word (all lowercase), or
         2. just the root of the word
+    * Subpages: Add positions for complete (!) pagenames into the index
+    * Case-sensitive searches / Regexp on multiple terms: Graceful
+      fallback to and/or merge with moinSearch based on nodes xapian can
+      handle in the search term tree
 
   New Features:
     * Faster search thanks to Xapian
