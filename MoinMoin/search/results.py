@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import StringIO, time
+import StringIO, time, re
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
 
@@ -266,31 +266,38 @@ class SearchResults:
         self.hits = [item[1] for item in tmp]
         self.sort = 'page_name'
         
-    def stats(self, request, formatter):
+    def stats(self, request, formatter, hitsFrom):
         """ Return search statistics, formatted with formatter
 
         @param request: current request
         @param formatter: formatter to use
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted statistics
         """
         _ = request.getText
         output = [
             formatter.paragraph(1),
-            formatter.text(_("%(hits)d results out of about %(pages)d pages.") %
-                   {'hits': len(self.hits), 'pages': self.pages}),
+            formatter.text(_("Hits %(hitsFrom)d to %(hitsTo)d "
+                "from %(hits)d results out of about %(pages)d pages.") %
+                   {'hits': len(self.hits), 'pages': self.pages,
+                       'hitsFrom': hitsFrom + 1,
+                       'hitsTo': hitsFrom + request.cfg.search_results_per_page}),
             u' (%s)' % formatter.text(_("%.2f seconds") % self.elapsed),
             formatter.paragraph(0),
             ]
         return ''.join(output)
 
-    def pageList(self, request, formatter, info=0, numbered=1):
+    def pageList(self, request, formatter, info=0, numbered=1,
+            paging=True, hitsFrom=0):
         """ Format a list of found pages
 
         @param request: current request
         @param formatter: formatter to use
         @param info: show match info in title
         @param numbered: use numbered list for display
+        @param paging: toggle paging
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list
         """
@@ -298,15 +305,22 @@ class SearchResults:
         f = formatter
         write = self.buffer.write
         if numbered:
-            list = f.number_list
+            list = lambda on: f.number_list(on, start=hitsFrom+1)
         else:
             list = f.bullet_list
 
         # Add pages formatted as list
         if self.hits:
             write(list(1))
+            
+            # XXX: Do some xapian magic here
+            if paging:
+                hitsTo = hitsFrom + request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
 
-            for page in self.hits:
+            for page in displayHits:
                 if page.attachment:
                     querydict = {
                         'action': 'AttachFile',
@@ -330,11 +344,15 @@ class SearchResults:
                     ]
                 write(''.join(item))
             write(list(0))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
 
         return self.getvalue()
 
     def pageListWithContext(self, request, formatter, info=1, context=180,
-                            maxlines=1):
+                            maxlines=1, paging=True, hitsFrom=0):
         """ Format a list of found pages with context
 
         The default parameter values will create Google-like search
@@ -345,8 +363,10 @@ class SearchResults:
         @param request: current request
         @param formatter: formatter to use
         @param info: show match info near the page link
-        @param context: how many characters to show around each match. 
-        @param maxlines: how many contexts lines to show. 
+        @param context: how many characters to show around each match.
+        @param maxlines: how many contexts lines to show.
+        @param paging: toggle paging
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list with context
         """
@@ -358,7 +378,14 @@ class SearchResults:
         if self.hits:
             write(f.definition_list(1))
 
-            for page in self.hits:
+            # XXX: Do some xapian magic here
+            if paging:
+                hitsTo = hitsFrom+request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
+
+            for page in displayHits:
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -389,6 +416,10 @@ class SearchResults:
                     ]
                 write(''.join(item))
             write(f.definition_list(0))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
         
         return self.getvalue()
 
@@ -595,6 +626,39 @@ class SearchResults:
                 ]
             return ''.join(output)
         return ''
+
+    def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
+        """ Format previous and next page links in page
+
+        @param hitsFrom: current position in the hits
+        @param hitsPerPage: number of hits per page
+        @param hitsNum: number of hits
+        @rtype: unicode
+        @return: links to previous and next pages (if exist)
+        """
+        _ = self.request.getText
+        f = self.formatter
+        from_re = r'\&from=[\d]+'
+        uri = re.sub(from_re, '', self.request.request_uri)
+        from_uri = lambda n: '%s&from=%i' % (uri, n)
+        l = []
+        if hitsFrom > 0:                        # previous page available
+            n = hitsFrom - hitsPerPage
+            if n < 0: n = 0
+            l.append(''.join([
+                f.url(1, href=from_uri(n)),
+                _('Previous Page'),
+                f.url(0)
+            ]))
+        if hitsFrom + hitsPerPage < hitsNum:    # next page available
+            n = hitsFrom + hitsPerPage
+            if n >= hitsNum: n = hitsNum - 1
+            l.append(''.join([
+                f.url(1, href=from_uri(n)),
+                _('Next Page'),
+                f.url(0)
+            ]))
+        return f.text(' | ').join(l)
 
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """

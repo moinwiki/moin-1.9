@@ -332,7 +332,7 @@ class Macro:
         results = search.searchPages(self.request, needle,
                 titlesearch=1, case=case)
         results.sortByPagename()
-        return results.pageList(self.request, self.formatter)
+        return results.pageList(self.request, self.formatter, paging=False)
 
     def _macro_InterWiki(self, args):
         from StringIO import StringIO
