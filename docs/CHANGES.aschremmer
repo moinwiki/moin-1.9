@@ -11,7 +11,7 @@ Branch moin/1.6-sync-aschremmer
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage.
     * Clean up trailing whitespace.
-    * Add page locking.
+    * Add page locking, i.e. use the one in the new storage layer.
     * How about using unique IDs that just derive from the interwikiname?
 
   New Features:
@@ -24,6 +24,8 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC method to merge remote changes locally
     * XMLRPC method to get the interwiki name
     * TagStore/PickleTagStore class
+    * XMLRPC method to get the pagelist in a special way (revnos,
+      no system pages etc.)
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes.
@@ -62,7 +64,7 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
          added interwikiName XMLRPC method, added mergeChanges XMLRPC method. Started analysis of the moinupdate
          script written by Stefan Merten.
 Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
-         using pickle-based storage.
+         using pickle-based storage. Added getAllPagesEx XMLRPC method.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 
