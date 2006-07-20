@@ -4,7 +4,8 @@ Branch moin/1.6-xapian-fpletz
   Known main issues:
     * Only term-based regex searching possible, modifier or heuristic to
       enable usage of _moinSearch for full compatibility?
-    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
+    * HACK: MoinMoin.search.Xapian.Index._get_languages (wait for proper
+      metadata)
     * Positions saved in Xapian aren't always correct, check. Code
       generally needs some more love.
 
@@ -170,5 +171,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * student didn't work on the project -- ThomasWaldmann
 
 2006-07-20
-    * ...
+    * Fixed some bugs found while testing regexp and case-sensitive searches
 
