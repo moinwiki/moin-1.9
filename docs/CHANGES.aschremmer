@@ -1,0 +1,73 @@
+Branch moin/1.6-sync-aschremmer
+===============================
+
+  Known main issues:
+    * How will we store tags?
+    * How to handle renames/deletes?
+    * How to handle colliding/empty interwiki names?
+
+  ToDo:
+    * Implement actual syncronisation.
+    * Implement a cross-site authentication system, i.e. mainly an
+      identity storage.
+    * Clean up trailing whitespace.
+    * Add page locking.
+    * How about using unique IDs that just derive from the interwikiname?
+
+  New Features:
+    * XMLRPC method to return the Moin version
+    * XMLRPC multicall support
+    * Conflict icon in RecentChanges
+    * XMLRPC Authentication System
+    * Binary Diffing
+    * XMLRPC method to get binary diffs
+    * XMLRPC method to merge remote changes locally
+    * XMLRPC method to get the interwiki name
+    * TagStore/PickleTagStore class
+
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * Conflict resolution fixes.
+
+  Other Changes:
+    * Refactored conflict resolution and XMLRPC code.
+    * Enhanced API at some points.
+
+  Developer notes:
+    * ...
+
+Do not forget to check the related wiki page: http://moinmoin.wikiwikiweb.de/WikiSyncronisation
+
+Diary
+=====
+
+Week 21: Basic Infrastructur setup (repos),
+         initial talks to the mentor, started writing the design document,
+         helped other students to get started
+Week 22: Tax forms, Fulfilled transcription request,
+         written conflict icon support, refactored conflict handling,
+         changed conflict icon,
+         Added xmlrpc multicall support into the server and
+         backported the client code from python 2.4
+Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as
+         a base for syncronisation. (See wiki)
+Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
+Week 25: Conference in Chile (FET 2006).
+Week 26: Implementation of the XMLRPC authentication system, added binary
+         diffing (mainly taken from Mercurial, but had to merge 5 changesets,
+         remove some mercurial dependencies and document it. Currently, Mercurial
+         uses a module written in C to solve the problem, so the Python code
+         was not cared for anymore.)
+Week 27: Europython, Geneva.
+Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added preliminary SyncPages action,
+         added interwikiName XMLRPC method, added mergeChanges XMLRPC method. Started analysis of the moinupdate
+         script written by Stefan Merten.
+Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
+         using pickle-based storage.
+
+2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+
+Time plan
+=========
+In July and August, most parts of the implementation will be finished
+from 07-10 to 07-14 and from 08-03 to 08-19. Between those time spans, there
+are exams.
