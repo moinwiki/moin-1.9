@@ -1177,7 +1177,7 @@ class Page:
                     # XXX The following code is commented because it is incorrect for dynamic pages:
                     #lastmod = os.path.getmtime(self._text_filename())
                     #request.http_headers(["Last-Modified: %s" % timefuncs.formathttpdate(lastmod)])
-                    pass
+                    request.http_headers()
             else:
                 request.http_headers(['Status: 404 NOTFOUND'])
                 request.setResponseCode(404)
