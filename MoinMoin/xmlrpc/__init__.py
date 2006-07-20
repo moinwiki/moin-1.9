@@ -219,10 +219,37 @@ class XmlRpcBase:
         """ Get all pages readable by current user
 
         @rtype: list
-        @return: a list of all pages. The result is a list of utf-8 strings.
+        @return: a list of all pages.
         """
-        pagelist = self.request.rootpage.getPageList()
-        return map(self._outstr, pagelist)
+
+        return [self._outstr(x) for x in self.request.rootpage.getPageList()]
+
+
+    def xmlrpc_getAllPagesEx(self, opts=None):
+        """ Get all pages readable by current user. Not an WikiRPC method.
+
+        @param opts: dictionary that can contain the following arguments:
+                include_system:: set it to false if you do not want to see system pages
+                include_revno:: set it to True if you want to have lists with [pagename, revno]
+                include_deleted:: set it to True if you want to include deleted pages
+        @rtype: list
+        @return: a list of all pages.
+        """
+        options = {"include_system": True, "include_revno": False, "include_deleted": False}
+        if opts is not None:
+            options.update(opts)
+
+        if options["include_system"]:
+            filter = lambda name: not wikiutil.isSystemPage(self.request, name)
+        else:
+            filter = lambda name: True
+
+        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
+        
+        if options['include_revno']:
+            return [[self._outstr(x), Page(self.request, x).get_real_rev()] for x in pagelist]
+        else:
+            return [self._outstr(x) for x in pagelist]
 
     def xmlrpc_getRecentChanges(self, date):
         """ Get RecentChanges since date
