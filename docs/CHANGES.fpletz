@@ -172,4 +172,7 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 2006-07-20
     * Fixed some bugs found while testing regexp and case-sensitive searches
+    * Conclusion after tinkering with the current code to allow
+      cooperation between moinSearch and Xapian for case-sensitive
+      searches (code buried): We probably need a rather big rewrite!
 
