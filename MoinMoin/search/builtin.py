@@ -15,7 +15,7 @@ from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, lock
 from MoinMoin.search.results import getSearchResults
-from MoinMoin.search.queryparser import TextMatch, TitleMatch
+from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 
 ##############################################################################
 # Search Engine Abstraction
@@ -439,8 +439,13 @@ class Search:
                         len(positions[pos]) < len(term_name):
                     positions[pos] = term_name
             term.next()
-        return [self._xapianMatchDecider(term, pos) for pos, term
+        matches = [self._xapianMatchDecider(term, pos) for pos, term
             in positions.iteritems()]
+
+        if not matches:
+            return [Match()]    # dummy for metadata, we got a match!
+
+        return matches
 
     def _moinSearch(self, pages=None):
         """ Search pages using moin's built-in full text search 

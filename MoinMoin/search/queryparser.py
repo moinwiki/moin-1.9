@@ -309,7 +309,7 @@ class TextSearch(BaseExpression):
             terms = [term for term in allterms() if
                     self.search_re.match(term)]
             if not terms:
-                return None
+                return Query()
             queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
@@ -414,9 +414,9 @@ class TitleSearch(BaseExpression):
         if self.use_re:
             # basic regex matching per term
             terms = [term for term in allterms() if
-                    self.search_re.match(term)]
+                    self.search_re.findall(term[1:]) and term[0] == 'S']
             if not terms:
-                return None
+                return Query()
             queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
@@ -540,7 +540,7 @@ class LinkSearch(BaseExpression):
                     continue
 
             if not terms:
-                return None
+                return Query()
             return Query(Query.OP_OR, terms)
         else:
             return UnicodeQuery('%s:%s' % (prefix, self.pattern))
@@ -601,7 +601,7 @@ class LanguageSearch(BaseExpression):
                     continue
 
             if not terms:
-                return None
+                return Query()
             return Query(Query.OP_OR, terms)
         else:
             pattern = self.pattern
