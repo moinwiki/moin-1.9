@@ -33,7 +33,7 @@ def linkto(pagename, request, params=''):
     querystr = wikiutil.escape(querystr)
     if params:
         querystr += '&amp;' + params
-    
+
     # TODO: remove escape=0 in 2.0
     data = {'url': page.url(request, querystr, escape=0)}
     data.update(request.cfg.chart_options)
@@ -45,7 +45,8 @@ def linkto(pagename, request, params=''):
 def _slice(data, lo, hi):
     data = data[:]
     if lo: data[:lo] = [None] * lo
-    if hi < len(data): data[hi:] =  [None] * (len(data)-hi)
+    if hi < len(data):
+        data[hi:] = [None] * (len(data)-hi)
     return data
 
 
@@ -60,7 +61,7 @@ def draw(pagename, request):
     pages = request.rootpage.getPageDict()
     sizes = []
     for name, page in pages.items():
-        sizes.append( (page.size(), name.encode('iso-8859-1', 'replace')) ) # gdchart does no utf-8
+        sizes.append((page.size(), name.encode('iso-8859-1', 'replace')) ) # gdchart does no utf-8
     sizes.sort()
 
     upper_bound = sizes[-1][0]
@@ -71,14 +72,14 @@ def draw(pagename, request):
         bounds.extend([s*8192 for s in range(2, 9)])
     if upper_bound >= 65536:
         bounds.extend([s*65536 for s in range(2, 9)])
-        
+
     data = [None] * len(bounds)
     for size, name in sizes:
         idx = bisect.bisect(bounds, size)
         ##idx = int((size / upper_bound) * classes)
         data[idx] = (data[idx] or 0) + 1
 
-    labels = ["%d" %b for b in bounds]
+    labels = ["%d" % b for b in bounds]
 
     # give us a chance to develop this
     if _debug:
@@ -100,14 +101,14 @@ def draw(pagename, request):
     if request.cfg.sitename: title = "%s: " % request.cfg.sitename
     title = title + _('Page Size Distribution')
     c.option(
-        annotation = (bisect.bisect(bounds, upper_bound), Color('black'), "%d %s" % sizes[-1]),
-        title = title.encode('iso-8859-1', 'replace'), # gdchart can't do utf-8
-        xtitle = _('page size upper bound [bytes]').encode('iso-8859-1', 'replace'),
-        ytitle = _('# of pages of this size').encode('iso-8859-1', 'replace'),
-        title_font = c.GDC_GIANT,
-        threed_depth = 2.0,
-        requested_yinterval = 1.0,
-        stack_type = c.GDC_STACK_LAYER
+        annotation=(bisect.bisect(bounds, upper_bound), Color('black'), "%d %s" % sizes[-1]),
+        title=title.encode('iso-8859-1', 'replace'), # gdchart can't do utf-8
+        xtitle=_('page size upper bound [bytes]').encode('iso-8859-1', 'replace'),
+        ytitle=_('# of pages of this size').encode('iso-8859-1', 'replace'),
+        title_font=c.GDC_GIANT,
+        threed_depth=2.0,
+        requested_yinterval=1.0,
+        stack_type=c.GDC_STACK_LAYER,
     )
     c.draw(style,
         (request.cfg.chart_options['width'], request.cfg.chart_options['height']),

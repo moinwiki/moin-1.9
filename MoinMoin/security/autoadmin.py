@@ -65,7 +65,7 @@ from MoinMoin.PageEditor import PageEditor
 
 class SecurityPolicy(Permissions):
     """ Extend the default security policy with autoadmin feature """
-    
+
     def admin(self, pagename):
         try:
             request = self.request

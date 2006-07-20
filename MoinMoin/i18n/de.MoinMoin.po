@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
@@ -598,20 +598,6 @@ msgstr "Unbekannte Funktion %(func)s in Zeile %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Die Datei %s wurde im Paket nicht gefunden."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f Sekunden"
-
-msgid "match"
-msgstr "Treffer"
-
-msgid "matches"
-msgstr "Treffer"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -1012,6 +998,12 @@ msgstr "Seiten ähnlich wie \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s passen zu \"%(title)s\""
+
+msgid "match"
+msgstr "Treffer"
+
+msgid "matches"
+msgstr "Treffer"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1935,6 +1927,14 @@ msgstr "Gelöschter Text ist auf diese Art markiert."
 
 msgid "Additions are marked like this."
 msgstr "Hinzugefügter Text ist auf diese Art markiert."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d Treffer in ungefähr %(pages)d durchsuchten Seiten."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f Sekunden"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Erforderliches Attribut \"%(attrname)s\" fehlt"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-07-07 14:54+0200\n"
 "Last-Translator: Per Olofsson <pelle@debian.org>\n"
 "Language-Team: Swedish <moin-devel@lists.sourceforge.net>\n"
@@ -273,7 +273,8 @@ msgid "You already saved this page!"
 msgstr "Du har redan sparat den här sidan!"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr "Du har redan redigerat den här sidan! Du bör inte använda bakåt-knappen."
+msgstr ""
+"Du har redan redigerat den här sidan! Du bör inte använda bakåt-knappen."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -587,20 +588,6 @@ msgstr "Okänd funktion %(func)s på rad %(lineno)i."
 #, python-format
 msgid "The file %s was not found in the package."
 msgstr "Filen %s hittades inte i paketet."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultat av ungefär %(pages)d sidor."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekunder"
-
-msgid "match"
-msgstr "träff"
-
-msgid "matches"
-msgstr "träffar"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -988,6 +975,12 @@ msgstr "Sidor som liknar \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s för \"%(title)s\""
+
+msgid "match"
+msgstr "träff"
+
+msgid "matches"
+msgstr "träffar"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1674,7 +1667,8 @@ msgstr "Förväntade ett färgvärde \"%(arg)s\" efter \"%(key)s\""
 
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
-msgstr "Rendering av reStructured-text är inte möjlig, installera Docutils först."
+msgstr ""
+"Rendering av reStructured-text är inte möjlig, installera Docutils först."
 
 msgid "**Maximum number of allowed includes exceeded**"
 msgstr "**Maximalt antal tillåtna inkluderingar har överskridits**"
@@ -1898,3 +1892,11 @@ msgstr "Raderingar markeras som den här."
 
 msgid "Additions are marked like this."
 msgstr "Bidrag är markerade som den här."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultat av ungefär %(pages)d sidor."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekunder"

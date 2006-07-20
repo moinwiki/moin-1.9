@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-07-10 23:24+0200\n"
 "Last-Translator: JPG <fevrier@tigreraye.org>\n"
 "Language-Team: \n"
@@ -279,7 +279,9 @@ msgid "You already saved this page!"
 msgstr "Vous avez déjà enregistré cette page !"
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr "Vous avez déjà modifié cette page ! Veuillez ne pas utiliser le bouton « Précédent »."
+msgstr ""
+"Vous avez déjà modifié cette page ! Veuillez ne pas utiliser le bouton "
+"« Précédent »."
 
 #, python-format
 msgid "A backup of your changes is [%(backup_url)s here]."
@@ -605,20 +607,6 @@ msgstr "Fonction %(func)s inconnue à la ligne %(lineno)i."
 #, python-format
 msgid "The file %s was not found in the package."
 msgstr "Le fichier %s n'est pas présent dans ce paquet."
-
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d pages trouvées parmi environ %(pages)d pages."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f secondes"
-
-msgid "match"
-msgstr "correspondance"
-
-msgid "matches"
-msgstr "correspondances"
 
 msgid ""
 "This wiki is not enabled for mail processing.\n"
@@ -1017,6 +1005,12 @@ msgstr "Pages similaires à « %s »"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s pour « %(title)s »"
+
+msgid "match"
+msgstr "correspondance"
+
+msgid "matches"
+msgstr "correspondances"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1951,3 +1945,11 @@ msgstr "Texte supprimé."
 
 msgid "Additions are marked like this."
 msgstr "Texte ajouté."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d pages trouvées parmi environ %(pages)d pages."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f secondes"

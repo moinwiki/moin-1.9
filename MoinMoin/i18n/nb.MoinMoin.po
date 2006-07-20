@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -559,20 +559,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultater ved søk i %(pages)d sider."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekunder"
-
-msgid "match"
-msgstr "resultat"
-
-msgid "matches"
-msgstr "resultater"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -950,6 +936,12 @@ msgstr "Sider som \"%s\"!"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
+
+msgid "match"
+msgstr "resultat"
+
+msgid "matches"
+msgstr "resultater"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1836,6 +1828,14 @@ msgstr "Slettet tekst er avmerket på denne måten."
 
 msgid "Additions are marked like this."
 msgstr "Tilføyelser er avmerket på denne måten."
+
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultater ved søk i %(pages)d sider."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekunder"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Obligatorisk attributt \"%(attrname)s\" mangler."

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-03-13 17:43+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -566,20 +566,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultaten in %(pages)d doorzochte pagina's ."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f seconden"
-
-msgid "match"
-msgstr " overeenkomst"
-
-msgid "matches"
-msgstr " overeenkomsten"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -962,6 +948,12 @@ msgstr "Pagina's zoals \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s op \"%(title)s\""
+
+msgid "match"
+msgstr " overeenkomst"
+
+msgid "matches"
+msgstr " overeenkomsten"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1842,6 +1834,14 @@ msgstr "Verwijderingen worden op deze manier gemarkeerd."
 
 msgid "Additions are marked like this."
 msgstr "Toevoegingen worden op deze manier gemarkeerd."
+
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultaten in %(pages)d doorzochte pagina's ."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f seconden"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Benodigd attribuut \"%(attrname)s\" ontbreekt"

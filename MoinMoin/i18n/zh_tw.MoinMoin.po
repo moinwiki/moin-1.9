@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-07-07 23:00+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
@@ -569,20 +569,6 @@ msgstr "行號 %(lineno)i 有不明的操作 %(func)s。"
 msgid "The file %s was not found in the package."
 msgstr "檔案 '%s' 不在此包裹檔內！"
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "在 %(pages)d 頁中找到 %(hits)d 筆。"
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f 秒"
-
-msgid "match"
-msgstr "筆"
-
-msgid "matches"
-msgstr "筆"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -950,6 +936,12 @@ msgstr "類似 \"%s\" 的頁面："
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "共有 %(matchcount)d %(matches)s 連向 \"%(title)s\""
+
+msgid "match"
+msgstr "筆"
+
+msgid "matches"
+msgstr "筆"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1842,6 +1834,14 @@ msgstr "這個顏色代表刪除的"
 
 msgid "Additions are marked like this."
 msgstr "這個顏色代表增加的"
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "在 %(pages)d 頁中找到 %(hits)d 筆。"
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f 秒"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "缺少必要的屬性 \"%(attrname)s\""

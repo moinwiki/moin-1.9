@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -586,20 +586,6 @@ msgstr "Неизвестная функция %(func)s в строке %(lineno)
 msgid "The file %s was not found in the package."
 msgstr "Файл %s не найден в пакете."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d результатов из %(pages)d просмотренных страниц."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f секунд"
-
-msgid "match"
-msgstr "совпадение"
-
-msgid "matches"
-msgstr "совпадений"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -980,6 +966,12 @@ msgstr "Страницы похожие на \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s для \"%(title)s\""
+
+msgid "match"
+msgstr "совпадение"
+
+msgid "matches"
+msgstr "совпадений"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1886,6 +1878,14 @@ msgstr "Удаления помечены так."
 
 msgid "Additions are marked like this."
 msgstr "Добавления помечены так."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d результатов из %(pages)d просмотренных страниц."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f секунд"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Пропущен необходимый аттрибут \"%(attrname)s\"."

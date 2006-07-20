@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-05-22 10:44 (UTC-4)\n"
 "Last-Translator: Leonardo Gregianin <leonardo@riseup.net>\n"
 "Language-Team: Português Brasileiro <moin-devel@lists.sourceforge.net\n"
@@ -577,20 +577,6 @@ msgstr "Função %(func)s não reconhecida na linha %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "O arquivo %s não foi encontrado no pacote do MoinMoin."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d páginas localizadas de %(pages)d páginas."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f segundos"
-
-msgid "match"
-msgstr "combina"
-
-msgid "matches"
-msgstr "combinam"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -983,6 +969,12 @@ msgstr "Páginas semelhantes \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s para \"%(title)s\""
+
+msgid "match"
+msgstr "combina"
+
+msgid "matches"
+msgstr "combinam"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1865,6 +1857,14 @@ msgstr "Deleções são marcadas assim."
 
 msgid "Additions are marked like this."
 msgstr "Adições são marcadas assim."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d páginas localizadas de %(pages)d páginas."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f segundos"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "O atributo necessário \"%(attrname)s\" está faltando."

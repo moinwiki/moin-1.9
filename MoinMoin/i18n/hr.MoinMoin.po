@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-04-22 16:50+0100\n"
 "Last-Translator: Jure Kodzoman <kodzoman@gmail.com>\n"
 "Language-Team: \n"
@@ -590,20 +590,6 @@ msgstr "Nepoznata funkcija %(func)s u redu %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Datoteka %s nije pronađena u paketu."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d pogodaka od približno %(pages)d pretraženih stranica."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekundi"
-
-msgid "match"
-msgstr "pogodak"
-
-msgid "matches"
-msgstr "pogodaka"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -993,6 +979,12 @@ msgstr "Slične stranice \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s za \"%(title)s\""
+
+msgid "match"
+msgstr "pogodak"
+
+msgid "matches"
+msgstr "pogodaka"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1908,6 +1900,14 @@ msgstr "Obrisano je označeno ovako."
 
 msgid "Additions are marked like this."
 msgstr "Dodano je označeno ovako."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d pogodaka od približno %(pages)d pretraženih stranica."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekundi"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Obvezna postavka \"%(attrname)s\" nedostaje"

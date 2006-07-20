@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-04-17 00:00+0100\n"
 "Last-Translator: Leonardo Gregianin <EMAIL IS MISSING>\n"
 "Language-Team: Portuguese <moin-devel@lists.sourceforge.net>\n"
@@ -568,20 +568,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d acertos de um total de %(pages)d páginas procuradas."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f segundos"
-
-msgid "match"
-msgstr "coincidência"
-
-msgid "matches"
-msgstr "coincidências"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -964,6 +950,12 @@ msgstr "Páginas similares a \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s de \"%(title)s\""
+
+msgid "match"
+msgstr "coincidência"
+
+msgid "matches"
+msgstr "coincidências"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1850,6 +1842,14 @@ msgstr "Eliminações são marcadas assim."
 
 msgid "Additions are marked like this."
 msgstr "Adições são marcadas assim."
+
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d acertos de um total de %(pages)d páginas procuradas."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f segundos"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Falta o atributo requerido \"%(attrname)s\""

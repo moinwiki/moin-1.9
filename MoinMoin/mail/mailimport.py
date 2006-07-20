@@ -33,7 +33,7 @@ class attachment(object):
         self.filename = filename
         self.mimetype = mimetype
         self.data = data
-    
+
     def __repr__(self):
         return "<attachment filename=%r mimetype=%r size=%i bytes>" % (
             self.filename, self.mimetype, len(self.data))
@@ -58,27 +58,27 @@ def process_message(message):
     attachments = []
     html_data = []
     text_data = []
-   
+
     to_addr = parseaddr(decode_2044(message['To']))
     from_addr = parseaddr(decode_2044(message['From']))
     cc_addr = parseaddr(decode_2044(message['Cc']))
     bcc_addr = parseaddr(decode_2044(message['Bcc']))
-    
+
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
-    
+
     log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addr, from_addr, subject))
-    
+
     for part in message.walk():
         log(" Part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
         ct = part.get_content_type()
         cs = part.get_content_charset() or "latin1"
         payload = part.get_payload(None, True)
-    
+
         fn = part.get_filename()
         if fn is not None and fn.startswith("=?"): # heuristics ...
             fn = decode_2044(fn)
-            
+
         if fn is None and part["Content-Disposition"] is not None and "attachment" in part["Content-Disposition"]:
             # this doesn't catch the case where there is no content-disposition but there is a file to offer to the user
             # i hope that this can be only found in mails that are older than 10 years,
@@ -107,7 +107,7 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
 
     generate_summary = False
     choose_html = True
-    
+
     pagename_tpl = ""
     for addr in ('to_addr', 'cc_addr', 'bcc_addr'):
         if msg[addr][1].strip().lower() == wiki_address:
@@ -121,7 +121,7 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
         # special fix for outlook users :-)
         if pagename_tpl[-1] == pagename_tpl[0] == "'":
             pagename_tpl = pagename_tpl[1:-1]
-    
+
     if pagename_tpl.endswith("/"):
         pagename_tpl += email_subpage_template
 
@@ -166,7 +166,7 @@ def import_mail_from_message(request, message):
     wiki_address = request.cfg.mail_import_wiki_address or request.cfg.mail_from
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
-    
+
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
@@ -175,14 +175,14 @@ def import_mail_from_message(request, message):
     generate_summary = d['generate_summary']
 
     comment = u"Mail: '%s'" % (msg['subject'], )
-    
+
     page = PageEditor(request, pagename, do_editor_backup=0)
-    
+
     if not request.user.may.save(page, "", 0):
         raise ProcessingError("Access denied for page %r" % pagename)
 
     attachments = []
-    
+
     for att in msg['attachments']:
         i = 0
         while 1:
@@ -221,11 +221,11 @@ def import_mail_from_message(request, message):
         page.saveText(new_content, 0, comment=comment)
     except page.AccessDenied:
         raise ProcessingError("Access denied for page %r" % pagename)
-    
+
     if generate_summary and "/" in pagename:
         parent_page = u"/".join(pagename.split("/")[:-1])
         old_content = Page(request, parent_page).get_raw_body().splitlines()
-        
+
         found_table = None
         table_ends = None
         for lineno, line in enumerate(old_content):
@@ -235,7 +235,7 @@ def import_mail_from_message(request, message):
                 table_ends = lineno + 1
             elif table_ends is not None and not line.startswith("||"):
                 break
-        
+
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
                         u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )

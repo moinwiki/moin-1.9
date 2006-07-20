@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-07-07 14:16+0200\n"
 "Last-Translator: Jonas Smedegaard <dr@jones.dk>\n"
 "Language-Team: Danish <moin-devel@lists.sourceforge.net>\n"
@@ -588,20 +588,6 @@ msgstr "Ukendt funktion %(func)s på linje %(lineno)i."
 msgid "The file %s was not found in the package."
 msgstr "Filen %s blev ikke fundet i pakken."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d resultater ud af cirka %(pages)d sider."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekunder"
-
-msgid "match"
-msgstr "resultat"
-
-msgid "matches"
-msgstr "resultater"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -989,6 +975,12 @@ msgstr "Sider der ligner \"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d·%(matches)s·for·\"%(title)s\""
+
+msgid "match"
+msgstr "resultat"
+
+msgid "matches"
+msgstr "resultater"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1899,6 +1891,14 @@ msgstr "Slettet tekst er markeret som her."
 
 msgid "Additions are marked like this."
 msgstr "Tilføjelser er markeret som her."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d resultater ud af cirka %(pages)d sider."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekunder"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Krævet atribut \"%(attrname)s\" mangler."

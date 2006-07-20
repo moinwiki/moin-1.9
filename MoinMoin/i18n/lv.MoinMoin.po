@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-09-07 20:50+0200\n"
 "Last-Translator: Radomirs Cirskis <nad2000@gmail.com>\n"
 "Language-Team: Latvian <r.cirskis@datapro.lv>\n"
@@ -591,20 +591,6 @@ msgstr "Rindā %(lineno)i nedefinēta funkcija %(func)s."
 msgid "The file %s was not found in the package."
 msgstr "Fails %s pakotnē netika atrasts."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f sekundes"
-
-msgid "match"
-msgstr "saskaņa"
-
-msgid "matches"
-msgstr "saskaņas"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -988,6 +974,12 @@ msgstr "\"%s\" līdzīgas lapas"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s for \"%(title)s\""
+
+msgid "match"
+msgstr "saskaņa"
+
+msgid "matches"
+msgstr "saskaņas"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1899,6 +1891,14 @@ msgstr "Dzēstie atzīmēti šādi."
 
 msgid "Additions are marked like this."
 msgstr "Pievienotie atzīmēti šādi"
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "Atrasti %(hits)d trāpījumi no apmēram %(pages)d lapām."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f sekundes"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Trūkst \"%(attrname)s\" atribūta"

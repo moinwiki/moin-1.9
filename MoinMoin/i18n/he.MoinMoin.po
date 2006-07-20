@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -549,20 +549,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr ""
 
-#, fuzzy, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(hits)d תוצאות מתוך בערך %(pages)d דפים."
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f שניות"
-
-msgid "match"
-msgstr "התאמה"
-
-msgid "matches"
-msgstr "התאמות"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -936,6 +922,12 @@ msgstr "דפים דומים ל–\"%s\""
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "%(matchcount)d %(matches)s ל-\"%(title)s\""
+
+msgid "match"
+msgstr "התאמה"
+
+msgid "matches"
+msgstr "התאמות"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1826,6 +1818,14 @@ msgstr "מחיקות מסומנות כך."
 
 msgid "Additions are marked like this."
 msgstr "הוספות מסומנות כך."
+
+#, fuzzy, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(hits)d תוצאות מתוך בערך %(pages)d דפים."
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f שניות"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "ערך חובה \"%(attrname)s\" חסר"

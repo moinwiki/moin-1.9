@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 12:38+0200\n"
+"POT-Creation-Date: 2006-07-17 12:27+0200\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -594,20 +594,6 @@ msgstr ""
 msgid "The file %s was not found in the package."
 msgstr "%s bir MoinMoin paket dosyası değil."
 
-#, python-format
-msgid "%(hits)d results out of about %(pages)d pages."
-msgstr "%(pages)d sayfa içinden %(hits)d sonuç bulundu"
-
-#, python-format
-msgid "%.2f seconds"
-msgstr "%.2f saniye"
-
-msgid "match"
-msgstr "eşle"
-
-msgid "matches"
-msgstr "eşleniyor"
-
 msgid ""
 "This wiki is not enabled for mail processing.\n"
 "Contact the owner of the wiki, who can enable email."
@@ -1002,6 +988,12 @@ msgstr "\"%s\" sayfasına benzer sayfalar"
 #, python-format
 msgid "%(matchcount)d %(matches)s for \"%(title)s\""
 msgstr "\"%(title)s\" için %(matchcount)d sonuç: %(matches)s"
+
+msgid "match"
+msgstr "eşle"
+
+msgid "matches"
+msgstr "eşleniyor"
 
 #, python-format
 msgid "Local Site Map for \"%s\""
@@ -1888,6 +1880,14 @@ msgstr "Silme işlemleri bu şekilde işaretleniyor."
 
 msgid "Additions are marked like this."
 msgstr "Eklemeler bu şekilde işaretleniyor."
+
+#, python-format
+msgid "%(hits)d results out of about %(pages)d pages."
+msgstr "%(pages)d sayfa içinden %(hits)d sonuç bulundu"
+
+#, python-format
+msgid "%.2f seconds"
+msgstr "%.2f saniye"
 
 #~ msgid "Required attribute \"%(attrname)s\" missing"
 #~ msgstr "Gerekli \"%(attrname)s\" niteleyicisi eksik"
