@@ -74,7 +74,13 @@ def sendmail(request, to, subject, text, **kw):
     charset.header_encoding = QP
     charset.body_encoding = QP
     msg.set_charset(charset)
-    msg.set_payload(charset.body_encode(text))
+
+    # work around a bug in python 2.4.3 and above:
+    msg.set_payload('=')
+    if msg.as_string().endswith('='):
+        text = charset.body_encode(text)
+
+    msg.set_payload(text)
 
     # Create message headers
     # Don't expose emails addreses of the other subscribers, instead we
