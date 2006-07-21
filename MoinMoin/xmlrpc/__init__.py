@@ -656,7 +656,6 @@ class XmlRpcBase:
         # write page
         try:
             currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
-            currentpage.clean_acl_cache()
         except PageEditor.EditConflict:
             return LASTREV_INVALID
 
