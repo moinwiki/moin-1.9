@@ -54,8 +54,9 @@ class Formatter:
         waspcode_timestamp = int(time.time())
         source = ["""
 moincode_timestamp = int(os.path.getmtime(os.path.dirname(__file__)))
-if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
-    raise "CacheNeedsUpdate"
+cfg_mtime = getattr(request.cfg, "cfg_mtime", None)
+if moincode_timestamp > %d or cfg_mtime is None or cfg_mtime > %d:
+    raise Exception("CacheNeedsUpdate")
 """ % (waspcode_timestamp, waspcode_timestamp)]
 
 
