@@ -593,7 +593,7 @@ class convert_tree(visitor):
             if class_ == "gap":
                 before = "\n"
             style = listitem.getAttribute("style")
-            if re.match(u"list-style-type:\s*none", style, re.I):
+            if re.match(ur"list-style-type:\s*none", style, re.I):
                 markup = ". "
             else:
                 markup = "* "
