@@ -22,12 +22,15 @@ class UnsafeSyncTestcase(TestCase):
     def setUp(self):
         if not getattr(self.request.cfg, 'is_test_wiki', False):
             raise TestSkipped('This test needs to be run using the test wiki.')
+        self.page = PageEditor(self.request, "FrontPage")
 
     def testBasicTagThings(self):
-        page = PageEditor(self.request, "FrontPage")
-        tags = TagStore(page)
+        tags = TagStore(self.page)
         self.assert_(not tags.get_all_tags())
         tags.add(remote_wiki="foo", remote_rev=1, current_rev=2)
-        tags = TagStore(page) # reload
+        tags = TagStore(self.page) # reload
         self.assert_(tags.get_all_tags()[0].remote_rev == 1)
-
+    
+    def tearDown(self):
+        tags = TagStore(self.page)
+        tags.clear()

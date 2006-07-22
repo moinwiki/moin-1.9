@@ -47,6 +47,10 @@ class AbstractTagStore(object):
     def get_all_tags(self):
         """ Returns a list of all Tag objects associated to this page. """
         return NotImplemented
+    
+    def clear(self):
+        """ Removes all tags. """
+        return NotImplemented
 
 
 class PickleTagStore(AbstractTagStore):
@@ -86,6 +90,9 @@ class PickleTagStore(AbstractTagStore):
     def get_all_tags(self):
         return self.tags
 
+    def clear(self):
+        self.tags = []
+        self.commit()
 
 # currently we just have one implementation, so we do not need
 # a factory method
