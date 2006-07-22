@@ -65,7 +65,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
 
     # prepare including page
     result = []
-    print_mode = macro.form.has_key('action') and macro.form['action'][0] in ("print", "format")
+    print_mode = request.action in ("print", "format")
     this_page = macro.formatter.page
     if not hasattr(this_page, '_macroInclude_pagelist'):
         this_page._macroInclude_pagelist = {}
