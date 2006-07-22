@@ -38,7 +38,7 @@ class RemotePage(object):
         self.revno = revno
 
     def __repr__(self):
-        return u"%s<%i>" % (self.name, self.revno)
+        return repr(u"%s<%i>" % (self.name, self.revno))
 
     def __lt__(self, other):
         return self.name < other.name
