@@ -34,8 +34,9 @@ class EditLogLine:
 
     def is_from_current_user(self, request):
         user = request.user
-        if user.id: return user.id==self.userid
-        return request.remote_addr==self.addr        
+        if user.id:
+            return user.id == self.userid
+        return request.remote_addr == self.addr
 
     def getEditorData(self, request):
         """ Return a tuple of type id and string or Page object
@@ -112,7 +113,7 @@ class EditLogLine:
                     request.formatter.url(0))
         elif kind == 'ip':
             idx = info.find('.')
-            if idx==-1:
+            if idx == -1:
                 idx = len(info)
             title = wikiutil.escape('???' + title)
             text = wikiutil.escape(info[:idx])
@@ -124,7 +125,7 @@ class EditLogLine:
 class EditLog(LogFile):
 
     def __init__(self, request, filename=None, buffer_size=65536, **kw):
-        if filename == None:
+        if filename is None:
             rootpagename = kw.get('rootpagename', None)
             if rootpagename:
                 filename = Page(request, rootpagename).getPagePath('edit-log', isfile=1)
@@ -133,7 +134,7 @@ class EditLog(LogFile):
         LogFile.__init__(self, filename, buffer_size)
         self._NUM_FIELDS = 9
         self._usercache = {}
-        
+
         # Used by antispam in order to show an internal name instead
         # of a confusing userid
         self.uid_override = kw.get('uid_override', None)
@@ -155,16 +156,16 @@ class EditLog(LogFile):
                     hostname = host
             else:
                 hostname = host
-            
-            remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ',}
+
+            remap_chars = {u'\t': u' ', u'\r': u' ', u'\n': u' ', }
             comment = comment.translate(remap_chars)
             user_id = request.user.valid and request.user.id or ''
 
-            if self.uid_override != None:
+            if self.uid_override is not None:
                 user_id = ''
                 hostname = self.uid_override
                 host = ''
-            
+
             line = u"\t".join((str(long(mtime)), # has to be long for py 2.2.x
                                "%08d" % rev,
                                action,
@@ -193,16 +194,16 @@ class EditLog(LogFile):
         result.pagename = wikiutil.unquoteWikiname(result.pagename.encode('ascii'))
         result.ed_time_usecs = long(result.ed_time_usecs or '0') # has to be long for py 2.2.x
         return result
-    
+
     def set_filter(self, **kw):
         expr = "1"
         for field in ['pagename', 'addr', 'hostname', 'userid']:
             if kw.has_key(field):
                 expr = "%s and x.%s == %s" % (expr, field, `kw[field]`)
-                
+
         if kw.has_key('ed_time_usecs'):
             expr = "%s and long(x.ed_time_usecs) == %s" % (expr, long(kw['ed_time_usecs'])) # must be long for py 2.2.x
 
         self.filter = eval("lambda x: " + expr)
-    
+
 
