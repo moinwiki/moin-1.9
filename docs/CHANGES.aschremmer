@@ -28,7 +28,9 @@ Branch moin/1.6-sync-aschremmer
       no system pages etc.)
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
-    * Conflict resolution fixes.
+    * Conflict resolution fixes. (merged into main)
+    * Python 2.5 compatibility fixes in the Page caching logic
+    * sre pickle issues in the wikidicts code
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
