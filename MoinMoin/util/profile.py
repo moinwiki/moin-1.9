@@ -64,7 +64,7 @@ class Profiler:
         self.count = 0 # count between somples
         self.requests = 0 # requests added
         self.data = {'collect': 'NA'} # Sample data
-        
+
     def addRequest(self):
         """ Add a request to the profile
 
@@ -76,12 +76,12 @@ class Profiler:
         Invoke sample when self.count reach self.requestsPerSample.
         """
         self.requests += 1
-        self.count += 1 
+        self.count += 1
         if self.count == self.requestsPerSample:
             # Time for a sample
             self.count = 0
             self.sample()
-    
+
     def sample(self):
         """ Make a sample of memory usage and log it
 
@@ -90,13 +90,13 @@ class Profiler:
         
         Invoke common methods for all profilers. Some profilers like
         TwistedProfiler override this method. 
-        """        
+        """
         self._setData()
         self._setMemory()
         self._log()
-    
+
     # Private methods ------------------------------------------------------
-    
+
     def _setData(self):
         """ Collect sample data into self.data
 
@@ -109,7 +109,7 @@ class Profiler:
             d['collect'] = str(gc.collect())
         d['objects'] = len(gc.get_objects())
         d['garbage'] = len(gc.garbage)
-                     
+
     def _setMemory(self):
         """ Get process memory usage
 
@@ -120,14 +120,14 @@ class Profiler:
         """
         lines = os.popen('/bin/ps -p %s -o rss' % self.pid).readlines()
         self.data['memory'] = lines[1].strip()
-    
+
     def _log(self):
         """ Format sample and write to log
 
         Private method used by profilers.
         """
         line = ('%(date)s req:%(requests)d mem:%(memory)sKB collect:%(collect)s '
-                'objects:%(objects)d garbage:%(garbage)d\n' % self.data) 
+                'objects:%(objects)d garbage:%(garbage)d\n' % self.data)
         self.logfile.write(line)
         self.logfile.flush()
 
@@ -145,10 +145,10 @@ class TwistedProfiler(Profiler):
         Invoke Profiler.__init__ and import getProcessOuput from
         twisted.
         """
-        Profiler.__init__(self, name, requestsPerSample, collect) 
+        Profiler.__init__(self, name, requestsPerSample, collect)
         from twisted.internet.utils import getProcessOutput
-        self._getProcessOutput = getProcessOutput        
-        
+        self._getProcessOutput = getProcessOutput
+
     def sample(self):
         """ Make a sample of memory usage and log it
         
@@ -161,23 +161,22 @@ class TwistedProfiler(Profiler):
         """
         self._setData()
         # Memory will be available little later
-        deferred = self._getProcessOutput('/bin/ps', 
+        deferred = self._getProcessOutput('/bin/ps',
                                           ('-p', str(self.pid), '-o', 'rss'))
         deferred.addCallback(self._callback)
 
     # Private methods ------------------------------------------------------
-    
-    def _callback(self, data):        
+
+    def _callback(self, data):
         """ Called from deferred when ps output is available
 
         Private method, don't call this.
         """
         self.data['memory'] = data.split('\n')[1].strip()
-        self._log()  
-    
-    
+        self._log()
+
+
 if __name__ == '__main__':
     # In case someone try to run as a script
     print __doc__
-    
 

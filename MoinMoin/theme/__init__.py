@@ -20,9 +20,9 @@ class ThemeBase:
     use without rewriting the same code. If you want to change certain 
     elements, override them. 
     """
-    
+
     name = 'base'
-    
+
     # fake _ function to get gettext recognize those texts:
     _ = lambda x: x
 
@@ -64,7 +64,7 @@ class ThemeBase:
         # search forms
         'searchbutton': ("[?]",                  "moin-search.png", 12, 12),
         'interwiki':  ("[%(wikitag)s]",          "moin-inter.png",  16, 16),
-    
+
         # smileys (this is CONTENT, but good looking smileys depend on looking
         # adapted to the theme background color and theme style in general)
         #vvv    ==      vvv  this must be the same for GUI editor converter
@@ -86,7 +86,7 @@ class ThemeBase:
         ':\\':        (":\\",                    'ohwell.png',      15, 15),
         '>:>':        (">:>",                    'devil.png',       15, 15),
         '|)':         ("|)",                     'tired.png',       15, 15),
-        
+
         # some folks use noses in their emoticons
         ':-(':        (":-(",                    'sad.png',         15, 15),
         ':-)':        (":-)",                    'smile.png',       15, 15),
@@ -94,7 +94,7 @@ class ThemeBase:
         ':-))':       (":-))",                   'smile3.png',      15, 15),
         ';-)':        (";-)",                    'smile4.png',      15, 15),
         '|-)':        ("|-)",                    'tired.png',       15, 15),
-        
+
         # version 1.0
         '(./)':       ("(./)",                   'checkmark.png',   20, 15),
         '{OK}':       ("{OK}",                   'thumbs-up.png',   14, 12),
@@ -135,7 +135,7 @@ class ThemeBase:
         # media         basename
         ('all',         'common'),
         ('all',         'projection'),
-       )   
+       )
 
     stylesheetsCharset = 'utf-8'
 
@@ -157,7 +157,7 @@ class ThemeBase:
         @return: the image href
         """
         return "%s/%s/img/%s" % (self.cfg.url_prefix, self.name, img)
-        
+
     def emit_custom_html(self, html):
         """
         generate custom HTML code in `html`
@@ -204,7 +204,7 @@ class ThemeBase:
             link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
             html = u'<div id="interwiki"><span>%s</span></div>' % link
         return html
-        
+
     def title(self, d):
         """ Assemble the title (now using breadcrumbs)
         
@@ -246,7 +246,7 @@ class ThemeBase:
         """
         request = self.request
         _ = request.getText
-        
+
         userlinks = []
         # Add username/homepage link for registered users. We don't care
         # if it exists, the user can create it.
@@ -261,11 +261,11 @@ class ThemeBase:
             homelink = (request.formatter.interwikilink(1, title=title, id="userhome", *interwiki) +
                         request.formatter.text(name) +
                         request.formatter.interwikilink(0, title=title, id="userhome", *interwiki))
-            userlinks.append(homelink)        
+            userlinks.append(homelink)
             # link to userprefs action
             userlinks.append(d['page'].link_to(request, text=_('Preferences'),
                                                querystr={'action': 'userprefs'}, id='userprefs', rel='nofollow'))
-           
+
         if request.cfg.show_login:
             if request.user.valid:
                 userlinks.append(d['page'].link_to(request, text=_('Logout', formatted=False),
@@ -295,7 +295,7 @@ class ThemeBase:
         @return: pagename or url, link to page or url
         """
         request = self.request
-        
+
         # Handle [pagename title] or [url title] formats
         if text.startswith('[') and text.endswith(']'):
             try:
@@ -343,10 +343,10 @@ class ThemeBase:
                         page +
                         self.request.formatter.interwikilink(False, interwiki, page)
                         )
-        
+
         except ValueError:
             pass
-                  
+
         pagename = request.normalizePagename(pagename)
         link = Page(request, pagename).link_to(request, title)
 
@@ -375,10 +375,10 @@ class ThemeBase:
                 half, left = divmod(maxLength - 3, 2)
                 name = u'%s...%s' % (name[:half + left], name[-half:])
         return name
-        
+
     def maxPagenameLength(self):
         """ Return maximum length for shortened page names """
-        return 25 
+        return 25
 
     def navibar(self, d):
         """ Assemble the navibar
@@ -461,9 +461,9 @@ class ThemeBase:
                 alt, icon, w, h = self.iconsByFile[icon]
             else:
                 alt, icon, w, h = '', icon, '', ''
-                
+
         return alt, self.img_url(icon), w, h
-   
+
     def make_icon(self, icon, vars=None):
         """
         This is the central routine for making <img> tags for icons!
@@ -527,13 +527,13 @@ class ThemeBase:
             close = d['page'].link_to(self.request,
                                       text=_('Clear message'),
                                       querystr={'action': 'show'})
-            html = u'<p>%s</p>\n<div class="buttons">%s</div>\n' % (msg, close) 
+            html = u'<p>%s</p>\n<div class="buttons">%s</div>\n' % (msg, close)
         else:
             # msg is a widget
             html = msg.render()
 
         return u'<div id="message">\n%s\n</div>\n' % html
-        
+
     def trail(self, d):
         """ Assemble page trail
         
@@ -559,7 +559,7 @@ class ThemeBase:
                             continue
                         else:
                             pagename = page
-                            
+
                     except ValueError:
                         pass
                     page = Page(request, pagename)
@@ -606,9 +606,10 @@ class ThemeBase:
         for media, csshref in self.request.cfg.stylesheets:
             html.append(link % (self.stylesheetsCharset, media, csshref))
 
-        
+
         # tribute to the most sucking browser...
-        if self.cfg.hacks.get('ie7', False):
+        if self.cfg.hacks.get('ie7', False) and self.request.action != 'edit':
+            # using FCKeditor and IE7 at the same time makes nices crashes in IE
             html.append("""
 <!-- compliance patch for microsoft browsers -->
 <!--[if lt IE 7]>
@@ -619,7 +620,7 @@ class ThemeBase:
         # Add user css url (assuming that user css uses same charset)
         if usercss and usercss.lower() != "none":
             html.append(link % (self.stylesheetsCharset, 'all', usercss))
-            
+
         return '\n'.join(html)
 
     def shouldShowPageinfo(self, page):
@@ -640,10 +641,9 @@ class ThemeBase:
             contentActions = [u'', u'show', u'refresh', u'preview', u'diff',
                               u'subscribe', u'RenamePage', u'DeletePage',
                               u'SpellCheck', u'print']
-            action = self.request.form.get('action', [''])[0]
-            return action in contentActions
+            return self.request.action in contentActions
         return False
-    
+
     def pageinfo(self, page):
         """ Return html fragment with page meta data
 
@@ -673,7 +673,7 @@ class ThemeBase:
                     'info': info
                     }
         return html
-    
+
     def searchform(self, d):
         """
         assemble HTML code for the search forms
@@ -685,10 +685,10 @@ class ThemeBase:
         _ = self.request.getText
         form = self.request.form
         updates = {
-            'search_label' : _('Search:'),
+            'search_label': _('Search:'),
             'search_value': wikiutil.escape(form.get('value', [''])[0], 1),
-            'search_full_label' : _('Text', formatted=False),
-            'search_title_label' : _('Titles', formatted=False),
+            'search_full_label': _('Text', formatted=False),
+            'search_title_label': _('Titles', formatted=False),
             }
         d.update(updates)
 
@@ -732,7 +732,7 @@ searchBlur(e);
             html = (u'<div id="version">MoinMoin Release %s [Revision %s], '
                      'Copyright 2000-2006 by Juergen Hermann</div>') % (version.release, version.revision, )
         return html
-    
+
     def headscript(self, d):
         """ Return html head script with common functions
 
@@ -747,9 +747,9 @@ searchBlur(e);
         @return: script for html head
         """
         # Don't add script for print view
-        if self.request.form.get('action', [''])[0] == 'print':
+        if self.request.action == 'print':
             return u''
-        
+
         _ = self.request.getText
         script = u"""
 <script type=\"text/javascript\">
@@ -820,10 +820,10 @@ function actionsMenuInit(title) {
 //-->
 </script>
 """ % {
-    'search_hint' : _('Search', formatted=False),
+    'search_hint': _('Search', formatted=False),
     }
         return script
-    
+
     def shouldUseRSS(self):
         """ Return True if rss feature is available, or False
 
@@ -837,16 +837,16 @@ function actionsMenuInit(title) {
         except ImportError:
             # This error reported on Python 2.2
             return False
-        
+
     def rsshref(self):
         """ Create rss href, used for rss button and head link
         
         @rtype: unicode
         @return: rss href
         """
-        return (u'%s/RecentChanges?action=rss_rc&amp;ddiffs=1&amp;unique=1' 
+        return (u'%s/RecentChanges?action=rss_rc&amp;ddiffs=1&amp;unique=1'
                 % self.request.getScriptname())
-                           
+
     def rsslink(self):
         """ Create rss link in head, used by FireFox
 
@@ -863,7 +863,7 @@ function actionsMenuInit(title) {
                         self.cfg.sitename,
                         self.rsshref() )
         return link
-       
+
     def html_head(self, d):
         """ Assemble html head
         
@@ -917,7 +917,7 @@ function actionsMenuInit(title) {
         """
         request = self.request
         _ = request.getText
-        
+
         menu = [
             'raw',
             'print',
@@ -964,7 +964,7 @@ function actionsMenuInit(title) {
         # "disabled", e.g IE, Safari
         # for XHTML: data['disabled'] = ' disabled="disabled"'
         disabled = ' disabled class="disabled"'
-        
+
         # Format standard actions
         available = request.getAvailableActions(page)
         for action in menu:
@@ -984,7 +984,7 @@ function actionsMenuInit(title) {
             # Actions which are not available for this wiki, user or page
             if (action == '__separator__' or
                 (action[0].isupper() and not action in available)):
-                data['disabled'] = disabled               
+                data['disabled'] = disabled
 
             options.append(option % data)
 
@@ -1034,9 +1034,9 @@ actionsMenuInit('%(label)s');
 </script>
 </form>
 ''' % data
-        
-        return html      
-        
+
+        return html
+
     def editbar(self, d):
         """ Assemble the page edit bar.
 
@@ -1057,7 +1057,7 @@ actionsMenuInit('%(label)s');
                              for item in self.editbarItems(page) if item])
             html = u'<ul class="editbar">%s</ul>\n' % items
             self._cache['editbar'] = html
-        
+
         return html
 
     def shouldShowEditbar(self, page):
@@ -1077,7 +1077,7 @@ actionsMenuInit('%(label)s');
         if (page.exists(includeDeleted=1) and
             self.request.user.may.read(page.page_name)):
             form = self.request.form
-            action = form.get('action', [''])[0]
+            action = self.request.action
             # Do not show editbar on edit but on save/cancel
             return not (action == 'edit' and
                         not form.has_key('button_save') and
@@ -1095,7 +1095,8 @@ actionsMenuInit('%(label)s');
                 self.subscribeLink(page),
                 self.quicklinkLink(page),
                 self.attachmentsLink(page),
-                self.actionsMenu(page),]
+                self.actionsMenu(page),
+               ]
 
     def guiworks(self, page):
         """ Return whether the gui editor / converter can work for that page.
@@ -1103,7 +1104,7 @@ actionsMenuInit('%(label)s');
             The GUI editor currently only works for wiki format.
         """
         return page.pi_format == 'wiki'
-        
+
     def editorLink(self, page):
         """ Return a link to the editor 
         
@@ -1115,11 +1116,11 @@ actionsMenuInit('%(label)s');
         if not (page.isWritable() and
                 self.request.user.may.write(page.page_name)):
             return self.disabledEdit()
-        
+
         _ = self.request.getText
         params = (wikiutil.quoteWikinameURL(page.page_name) +
                   '?action=edit&amp;editor=')
-        
+
         guiworks = self.guiworks(page)
         if self.showBothEditLinks() and guiworks:
             text = _('Edit (Text)', formatted=False)
@@ -1134,7 +1135,7 @@ actionsMenuInit('%(label)s');
             else:
                 params = params + 'text'
                 attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
-        
+
         return wikiutil.link_tag(self.request, params, text, **attrs)
 
     def showBothEditLinks(self):
@@ -1164,21 +1165,22 @@ var gui_editor_link_href = "%(url)s?action=edit&editor=gui";
 var gui_editor_link_text = "%(text)s";
 </script>        
 """ % {'url': page.url(self.request),
-       'text': _('Edit (GUI)', formatted=False),}
+       'text': _('Edit (GUI)', formatted=False),
+      }
 
     def disabledEdit(self):
         """ Return a disabled edit link """
         _ = self.request.getText
-        return ('<span class="disabled">%s</span>' 
+        return ('<span class="disabled">%s</span>'
                 % _('Immutable Page', formatted=False))
-        
+
     def infoLink(self, page):
         """ Return link to page information """
         _ = self.request.getText
         return page.link_to(self.request,
-                            text=_('Info', formatted=False), 
+                            text=_('Info', formatted=False),
                             querystr='action=info', rel='nofollow')
-    
+
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
         
@@ -1187,7 +1189,7 @@ var gui_editor_link_text = "%(text)s";
         """
         if not (self.cfg.mail_enabled and self.request.user.valid):
             return ''
-        
+
         _ = self.request.getText
         if self.request.user.isSubscribedTo([page.page_name]):
             text = _("Unsubscribe", formatted=False)
@@ -1204,7 +1206,7 @@ var gui_editor_link_text = "%(text)s";
         """
         if not self.request.user.valid:
             return ''
-        
+
         _ = self.request.getText
         if self.request.user.isQuickLinkedTo([page.page_name]):
             text = _("Remove Link", formatted=False)
@@ -1217,7 +1219,7 @@ var gui_editor_link_text = "%(text)s";
         """ Return link to page attachments """
         _ = self.request.getText
         return page.link_to(self.request,
-                            text=_('Attachments', formatted=False), 
+                            text=_('Attachments', formatted=False),
                             querystr='action=AttachFile', rel='nofollow')
 
     def startPage(self):
@@ -1227,15 +1229,15 @@ var gui_editor_link_text = "%(text)s";
         @return: page div with language and direction attribtues
         """
         return u'<div id="page"%s>\n' % self.content_lang_attr()
-            
+
     def endPage(self):
         """ End page div 
         
         Add an empty page bottom div to prevent floating elements to
         float out of the page bottom over the footer.
         """
-        return '<div id="pagebottom"></div>\n</div>\n'        
-    
+        return '<div id="pagebottom"></div>\n</div>\n'
+
     # Public functions #####################################################
 
     def header(self, d, **kw):
@@ -1249,9 +1251,9 @@ var gui_editor_link_text = "%(text)s";
         @return: page header html
         """
         return self.startPage()
-    
+
     editorheader = header
-        
+
     def footer(self, d, **keywords):
         """ Assemble page footer
         
@@ -1278,40 +1280,40 @@ var gui_editor_link_text = "%(text)s";
         _ = self.request.getText
         html = []
         html.append('<tr>\n')
-        
+
         html.append('<td class="rcicon1">%(icon_html)s</td>\n' % d)
-        
+
         html.append('<td class="rcpagelink">%(pagelink_html)s</td>\n' % d)
-        
+
         html.append('<td class="rctime">')
         if d['time_html']:
             html.append("%(time_html)s" % d)
         html.append('</td>\n')
 
         html.append('<td class="rcicon2">%(info_html)s</td>\n' % d)
-        
+
         html.append('<td class="rceditor">')
         if d['editors']:
             html.append('<br>'.join(d['editors']))
         html.append('</td>\n')
-            
+
         html.append('<td class="rccomment">')
         if d['comments']:
             if d['changecount'] > 1:
                 notfirst = 0
                 for comment in d['comments']:
                     html.append('%s<tt>#%02d</tt>&nbsp;%s' % (
-                        notfirst and '<br>' or '' , comment[0], comment[1]))
+                        notfirst and '<br>' or '', comment[0], comment[1]))
                     notfirst = 1
             else:
                 comment = d['comments'][0]
                 html.append('%s' % comment[1])
         html.append('</td>\n')
-           
+
         html.append('</tr>\n')
-        
+
         return ''.join(html)
-    
+
     def recentchanges_daybreak(self, d):
         """
         Assemble a rc daybreak indication (table row)
@@ -1338,7 +1340,7 @@ var gui_editor_link_text = "%(text)s";
         @return: recentchanges header html
         """
         _ = self.request.getText
-        
+
         # Should use user interface language and direction
         html = '<div class="recentchanges"%s>\n' % self.ui_lang_attr()
         html += '<div>\n'
@@ -1366,7 +1368,7 @@ var gui_editor_link_text = "%(text)s";
                             self.request.formatter, rel='nofollow'))
             days = ' | '.join(days)
             html += (_("Show %s days.") % (days,))
-        
+
         if d['rc_update_bookmark']:
             html += " %(rc_update_bookmark)s %(rc_curr_bookmark)s" % d
 
@@ -1392,7 +1394,7 @@ var gui_editor_link_text = "%(text)s";
         return html
 
     # Language stuff ####################################################
-    
+
     def ui_lang_attr(self):
         """Generate language attributes for user interface elements
 
@@ -1439,14 +1441,14 @@ var gui_editor_link_text = "%(text)s";
         """
         request = self.request
         _ = request.getText
-        
+
         if keywords.has_key('page'):
             page = keywords['page']
             pagename = page.page_name
         else:
             pagename = keywords.get('pagename', '')
             page = Page(request, pagename)
-        
+
         scriptname = request.getScriptname()
         pagename_quoted = wikiutil.quoteWikinameURL(pagename)
 
@@ -1461,7 +1463,7 @@ var gui_editor_link_text = "%(text)s";
         page_find_page = wikiutil.getSysPage(request, 'FindPage').page_name
         home_page = wikiutil.getInterwikiHomePage(request) # XXX sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
         page_parent_page = getattr(page.getParentPage(), 'page_name', None)
-        
+
         # Prepare the HTML <head> element
         user_head = [request.cfg.html_head]
 
@@ -1492,7 +1494,7 @@ var gui_editor_link_text = "%(text)s";
                           page_title_index, 'TitleIndex',
                           page_find_page, 'FindPage',
                           page_site_navigation, 'SiteNavigation',
-                          'RecentChanges',]:
+                          'RecentChanges', ]:
             user_head.append(request.cfg.html_head_index)
         # if it is a normal page, index it, but do not follow the links, because
         # there are a lot of illegal links (like actions) or duplicates:
@@ -1501,7 +1503,7 @@ var gui_editor_link_text = "%(text)s";
 
         if keywords.has_key('pi_refresh') and keywords['pi_refresh']:
             user_head.append('<meta http-equiv="refresh" content="%(delay)d;URL=%(url)s">' % keywords['pi_refresh'])
-        
+
         # output buffering increases latency but increases throughput as well
         output = []
         # later: <html xmlns=\"http://www.w3.org/1999/xhtml\">
@@ -1566,7 +1568,7 @@ var gui_editor_link_text = "%(text)s";
             '<link rel="Glossary" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_word_index)),
             '<link rel="Help" href="%s/%s">\n' % (scriptname, wikiutil.quoteWikinameURL(page_help_formatting)),
                       ])
-        
+
         output.append("</head>\n")
         request.write(''.join(output))
         output = []
@@ -1590,7 +1592,7 @@ var gui_editor_link_text = "%(text)s";
 
         # Set body to the user interface language and direction
         bodyattr.append(' %s' % self.ui_lang_attr())
-        
+
         body_onload = keywords.get('body_onload', '')
         if body_onload:
             bodyattr.append(''' onload="%s"''' % body_onload)
@@ -1600,11 +1602,11 @@ var gui_editor_link_text = "%(text)s";
 
         # If in print mode, start page div and emit the title
         if keywords.get('print_mode', 0):
-            d = {'title_text': text, 'title_link': None, 'page': page,}
+            d = {'title_text': text, 'title_link': None, 'page': page, }
             request.themedict = d
             output.append(self.startPage())
-            output.append(self.interwiki(d))      
-            output.append(self.title(d))      
+            output.append(self.interwiki(d))
+            output.append(self.title(d))
 
         # In standard mode, emit theme.header
         else:
@@ -1657,7 +1659,7 @@ var gui_editor_link_text = "%(text)s";
                 output.append(self.editorheader(d))
             else:
                 output.append(self.header(d))
-        
+
         # emit it
         request.write(''.join(output))
         output = []
@@ -1693,8 +1695,7 @@ var gui_editor_link_text = "%(text)s";
         request.clock.stop('total')
 
         # Close html code
-        if (request.cfg.show_timings and
-            request.form.get('action', [None])[0] != 'print'):
+        if request.cfg.show_timings and request.action != 'print':
             request.write('<ul id="timings">\n')
             for t in request.clock.dump():
                 request.write('<li>%s</li>\n' % t)

@@ -25,7 +25,7 @@ class Theme(ThemeBase):
             u'</div>',
             ]
         return u'\n'.join(html)
-    
+
     def pagepanel(self, d):
         """ Create page panel """
         _ = self.request.getText
@@ -37,15 +37,15 @@ class Theme(ThemeBase):
                 u'</div>',
                 ]
             return u'\n'.join(html)
-        return ''   
-        
+        return ''
+
     def userpanel(self, d):
         """ Create user panel """
         _ = self.request.getText
 
         html = [
             u'<div class="sidepanel">',
-            u'<h1>%s</h1>' %  _("User"),
+            u'<h1>%s</h1>' % _("User"),
             self.username(d),
             u'</div>'
             ]
@@ -75,7 +75,7 @@ class Theme(ThemeBase):
             u'</div>',
             self.trail(d),
             u'</div>',
-            
+
             # Custom html below header (not recomended!)
             self.emit_custom_html(self.cfg.page_header2),
 
@@ -87,12 +87,12 @@ class Theme(ThemeBase):
             u'</div>',
 
             self.msg(d),
-            
+
             # Page
             self.startPage(),
             ]
         return u'\n'.join(html)
-    
+
     def editorheader(self, d):
         """
         Assemble page header for editor
@@ -112,7 +112,7 @@ class Theme(ThemeBase):
             #self.searchform(d),
             #self.logo(),
             #u'</div>',
-            
+
             # Custom html below header (not recomended!)
             self.emit_custom_html(self.cfg.page_header2),
 
@@ -124,13 +124,13 @@ class Theme(ThemeBase):
             u'</div>',
 
             self.msg(d),
-            
+
             # Page
             self.startPage(),
             #self.title(d),
             ]
         return u'\n'.join(html)
-    
+
     def footer(self, d, **keywords):
         """ Assemble wiki footer
         
@@ -144,16 +144,16 @@ class Theme(ThemeBase):
             # End of page
             self.pageinfo(page),
             self.endPage(),
-            
+
             # Pre footer custom html (not recommended!)
             self.emit_custom_html(self.cfg.page_footer1),
-            
+
             # Footer
             u'<div id="footer">',
             self.credits(d),
             self.showversion(d, **keywords),
             u'</div>',
-            
+
             # Post footer custom html
             self.emit_custom_html(self.cfg.page_footer2),
             ]

@@ -12,7 +12,7 @@ from MoinMoin.util import pysupport
 filters = pysupport.getPackageModules(__file__)
 modules = filters
 
-standard_codings = ['utf-8', 'iso-8859-15', 'iso-8859-1',]
+standard_codings = ['utf-8', 'iso-8859-15', 'iso-8859-1', ]
 
 def execfilter(cmd, filename, codings=standard_codings):
     """ use cmd to get plaintext content of filename

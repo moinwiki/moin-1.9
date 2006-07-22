@@ -42,7 +42,7 @@ class Formatter(text_html.Formatter):
         """
         apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
         if page is None:
-            page = Page(self.request, pagename, formatter=self);
+            page = Page(self.request, pagename, formatter=self)
         return page.link_to(self.request, on=on, **kw)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
@@ -69,7 +69,7 @@ class Formatter(text_html.Formatter):
         return (self.url(1, target, title="attachment:%s" % wikiutil.quoteWikinameURL(url)) +
                 self.text(text) +
                 self.url(0))
-    
+
     def attachment_image(self, url, **kw):
         _ = self.request.getText
         pagename = self.page.page_name
@@ -91,10 +91,10 @@ class Formatter(text_html.Formatter):
         return '<span style="background-color:#ffff11">!</span>' + self.text(text)
 
     # Dynamic stuff / Plugins ############################################
-    
+
     def macro(self, macro_obj, name, args):
         if args is not None:
-            result =  "[[%s(%s)]]" % (name, args)    
+            result = "[[%s(%s)]]" % (name, args)
         else:
             result = "[[%s]]" % name
         return '<span style="background-color:#ffff11">%s</span>' % result
@@ -182,7 +182,7 @@ class Formatter(text_html.Formatter):
             # Close table then div
             result.append(self._close('table'))
 
-        return ''.join(result)    
+        return ''.join(result)
 
     def comment(self, text, **kw):
         text = text.rstrip() # workaround for growing amount of blanks at EOL
@@ -205,10 +205,10 @@ class Formatter(text_html.Formatter):
         if on:
             return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
-                    
+
     def line_anchordef(self, lineno):
         return '' # not needed for gui editor feeding
-        
+
     def line_anchorlink(self, on, lineno=0):
         return '' # not needed for gui editor feeding
 

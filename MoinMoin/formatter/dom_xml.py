@@ -57,7 +57,7 @@ class Formatter(FormatterBase):
         'ol': ['li'],
         'ul': ['li'],
         }
-    
+
     # FIXME - this overrides the values defined above - FIXME XXX
     close_on_open = {}
     close_on_close = {}
@@ -69,7 +69,7 @@ class Formatter(FormatterBase):
         self.document.documentElement = self.document.createElement('xml')
         self.position = self.document.documentElement
         self.tag_stack = [('xml', {})]
-        
+
     def setPage(self, page):
         self.page = page
 
@@ -110,7 +110,7 @@ class Formatter(FormatterBase):
         for name, value in attrs.items():
             if value:
                 node.setAttribute(name, str(value))
-        self.position.appendChild(node)                        
+        self.position.appendChild(node)
         return ''
 
     def _text(self, text):
@@ -195,13 +195,13 @@ class Formatter(FormatterBase):
         if not pagename and page is not None:
             pagename = page.page_name
         kw['pagename'] = pagename
-        return self._set_tag('pagelink', on,  **kw)
+        return self._set_tag('pagelink', on, **kw)
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         kw['wiki'] = interwiki
         kw['pagename'] = pagename
         return self._set_tag('interwiki', on, **kw)
-    
+
     def macro(self, macro_obj, name, args):
         # call the macro
         return self._add_tag('macro', name=name, args=(args or ''))
@@ -227,17 +227,17 @@ class Formatter(FormatterBase):
         kw['href'] = url
         kw['type'] = 'link'
         return self._set_tag('attachment', 1, **kw) + self.text(text) + self._set_tag('attachment', 0, **kw)
-    
+
     def attachment_image(self, url, **kw):
         kw['href'] = url
         kw['type'] = 'image'
         return self._add_tag('attachment', **kw)
-    
+
     def attachment_drawing(self, url, **kw):
         kw['href'] = url
         kw['type'] = 'drawing'
         return self._add_tag('attachment', **kw)
-    
+
     def attachment_inlined(self, url, **kw):
         kw['href'] = url
         kw['type'] = 'inline'
@@ -295,7 +295,7 @@ class Formatter(FormatterBase):
             return self.text('\n')
         else:
             return self._add_tag('br')
-                                  
+
     def heading(self, on, depth, **kw):
         return self._set_tag('h%d' %depth, on, **kw)
 
@@ -307,7 +307,7 @@ class Formatter(FormatterBase):
 
     def table(self, on, attrs={}, **kw):
         return self._set_tag('table', on, **self._check_attrs(attrs))
-        
+
     def table_row(self, on, attrs={}, **kw):
         return self._set_tag('tr', on, **self._check_attrs(attrs))
 
@@ -338,7 +338,7 @@ class Formatter(FormatterBase):
         if compact and on:
             return self._set_tag('dt compact', on)
         else:
-            return self._set_tag('dt', on)            
+            return self._set_tag('dt', on)
 
     def definition_desc(self, on, **kw):
         # self._langAttr() missing
