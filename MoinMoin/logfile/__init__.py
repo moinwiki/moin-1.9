@@ -67,7 +67,7 @@ class LineBuffer:
         while i < length:
             result = self.offsets[i-1] + tmp
             tmp = self.offsets[i]
-            self.offsets[i] =  result
+            self.offsets[i] = result
             i = i + 1
         self.offsets[0] = offset
 
@@ -79,7 +79,7 @@ class LogFile:
     Overwrite .parser() and .add() to customize this class to
     special log files
     """
-    
+
     def __init__(self, filename, buffer_size=65536):
         """
         @param filename: name of the log file
@@ -106,7 +106,7 @@ class LogFile:
             except StopIteration:
                 return
             yield result
-            
+
     def sanityCheck(self):
         """ Check for log file write access.
         
@@ -122,7 +122,7 @@ class LogFile:
         """
         generate some attributes when needed
         """
-        if name=="_LogFile__rel_index":
+        if name == "_LogFile__rel_index":
             # starting iteration from begin
             self.__buffer1 = LineBuffer(self._input, 0, self.buffer_size)
             self.__buffer2 = LineBuffer(self._input,
@@ -164,7 +164,7 @@ class LogFile:
             return os.path.getsize(self.__filename)
         except OSError, err:
             if err.errno == errno.ENOENT:
-                return 0            
+                return 0
             raise
 
     def lines(self):
@@ -194,7 +194,7 @@ class LogFile:
     def date(self):
         """ Return timestamp of log file in usecs """
         try:
-            mtime = os.path.getmtime(self.__filename)            
+            mtime = os.path.getmtime(self.__filename)
         except OSError, err:
             if err.errno == errno.ENOENT:
                 # This can happen on fresh wiki when building the index
@@ -237,7 +237,7 @@ class LogFile:
                     self.__rel_index = (self.__rel_index +
                                         self.__buffer1.len)
                     self.__buffer = self.__buffer1
-                
+
         while self.__rel_index >= self.__buffer.len:
             if self.__buffer == self.__buffer1:
                 # change to buffer 2
@@ -248,7 +248,7 @@ class LogFile:
                 tmpbuff = LineBuffer(self._input,
                                      self.__buffer1.offsets[-1],
                                      self.buffer_size)
-                if tmpbuff.len==0:
+                if tmpbuff.len == 0:
                     # end of file
                     if self.__lineno:
                         self.__lineno = (self.__lineno + lines -
@@ -258,7 +258,7 @@ class LogFile:
                     return True
                 # shift buffers
                 self.__buffer1 = self.__buffer2
-                self.__buffer2 = tmpbuff                
+                self.__buffer2 = tmpbuff
                 self.__rel_index = self.__rel_index - self.__buffer1.len
         if self.__lineno: self.__lineno += lines
         return False
@@ -278,15 +278,16 @@ class LogFile:
         XXX It does not raise anything!
         """
         result = None
-        while result == None:
-            while result == None:
+        while result is None:
+            while result is None:
                 result = self.__next()
             if self.filter and not self.filter(result):
                 result = None
         return result
-    
+
     def __previous(self):
-        if self.peek(-1): raise StopIteration
+        if self.peek(-1):
+            raise StopIteration
         return self.parser(self.__buffer.lines[self.__rel_index])
 
     def previous(self):
@@ -295,8 +296,8 @@ class LogFile:
         raises StopIteration at file begin
         """
         result = None
-        while result == None:
-            while result == None:
+        while result is None:
+            while result is None:
                 result = self.__previous()
             if self.filter and not self.filter(result):
                 result = None
@@ -319,16 +320,16 @@ class LogFile:
         """moves file position to the end"""
         self._input.seek(0, 2) # to end of file
         size = self._input.tell()
-        if (not self.__buffer2) or (size>self.__buffer2.offsets[-1]):
+        if (not self.__buffer2) or (size > self.__buffer2.offsets[-1]):
             self.__buffer2 = LineBuffer(self._input,
                                         size,
                                         self.buffer_size,
-                                        forward = False)
-            
+                                        forward=False)
+
             self.__buffer1 = LineBuffer(self._input,
                                         self.__buffer2.offsets[0],
                                         self.buffer_size,
-                                        forward = False)
+                                        forward=False)
         self.__buffer = self.__buffer2
         self.__rel_index = self.__buffer2.len
         self.__lineno = None
@@ -341,7 +342,7 @@ class LogFile:
         For this plain file implementation position is an Integer.
         """
         return self.__buffer.offsets[self.__rel_index]
-        
+
     def seek(self, position, line_no=None):
         """ moves file position to an value formerly gotten from .position().
         To enable line counting line_no must be provided.
@@ -362,7 +363,7 @@ class LogFile:
             self.__buffer1 = LineBuffer(self._input,
                                         position,
                                         self.buffer_size,
-                                        forward = False)
+                                        forward=False)
             self.__buffer2 = LineBuffer(self._input,
                                         position,
                                         self.buffer_size)
@@ -374,7 +375,7 @@ class LogFile:
     def line_no(self):
         """@return: the current line number or None if line number is unknown"""
         return self.__lineno
-    
+
     def calculate_line_no(self):
         """ Calculate the current line number from buffer offsets
         
@@ -404,14 +405,14 @@ class LogFile:
         """
         line = "\t".join(data)
         self._add(line)
-        
+
     def _add(self, line):
         """
         @param line: flat line
         @type line: String
         write on entry in the log file
         """
-        if line != None:
+        if line is not None:
             if line[-1] != '\n':
                 line += '\n'
             self._output.write(line)
