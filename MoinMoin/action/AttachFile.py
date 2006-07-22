@@ -620,11 +620,12 @@ def save_drawing(pagename, request):
         # delete map file if it is empty
         os.unlink(savepath)
     else:
-        file = open(savepath, 'wb')
+        stream = open(savepath, 'wb')
         try:
-            file.write(filecontent)
+            stream.write(filecontent)
         finally:
-            file.close()
+            stream.close()
+        os.chmod(savepath, 0666 & config.umask)
 
     # touch attachment directory to invalidate cache if new map is saved
     if ext == '.map':
