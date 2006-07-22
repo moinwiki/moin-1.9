@@ -109,7 +109,7 @@ def copytree(src, dst, symlinks=False):
     """
     names = os.listdir(src)
     os.mkdir(dst)
-    copystat(src,dst)
+    copystat(src, dst)
     errors = []
     for name in names:
         srcname = os.path.join(src, name)
@@ -167,3 +167,4 @@ else:
 
     def realPathCase(path):
         return None
+

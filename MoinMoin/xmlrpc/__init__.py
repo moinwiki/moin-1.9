@@ -59,7 +59,7 @@ class XmlRpcBase:
         @return: string in config.charset
         """
         raise "NotImplementedError"
-    
+
     def _outstr(self, text):
         """ Convert outbound string to utf-8.
 
@@ -68,7 +68,7 @@ class XmlRpcBase:
         @return: string in utf-8
         """
         raise "NotImplementedError"
-    
+
     def _inlob(self, text):
         """ Convert inbound base64-encoded utf-8 to Large OBject.
         
@@ -93,7 +93,7 @@ class XmlRpcBase:
             if config.charset != 'utf-8':
                 text = unicode(text, config.charset).encode('utf-8')
         return xmlrpclib.Binary(text)
-                    
+
     def _dump_exc(self):
         """ Convert an exception to a string.
         
@@ -113,13 +113,13 @@ class XmlRpcBase:
         try:
             data = self.request.read()
             params, method = xmlrpclib.loads(data)
-    
+
             if _debug:
                 sys.stderr.write('- XMLRPC ' + '-' * 70 + '\n')
                 sys.stderr.write('%s(%s)\n\n' % (method, repr(params)))
-            
+
             response = self.dispatch(method, params)
-            
+
         except:
             # report exception back to server
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
@@ -142,7 +142,7 @@ class XmlRpcBase:
 
     def dispatch(self, method, params):
         method = method.replace(".", "_")
-        
+
         try:
             fn = getattr(self, 'xmlrpc_' + method)
         except AttributeError:
@@ -156,16 +156,16 @@ class XmlRpcBase:
                 response = fn(self, *params)
         else:
             response = fn(*params)
-        
+
         return response
 
     # Common faults -----------------------------------------------------
-    
+
     def notAllowedFault(self):
         return xmlrpclib.Fault(1, "You are not allowed to read this page.")
 
     def noSuchPageFault(self):
-        return xmlrpclib.Fault(1, "No such page was found.")        
+        return xmlrpclib.Fault(1, "No such page was found.")
 
     #############################################################################
     ### System methods
@@ -193,13 +193,13 @@ class XmlRpcBase:
                 results.append([self.dispatch(method_name, params)])
             except xmlrpclib.Fault, fault:
                 results.append(
-                    {'faultCode' : fault.faultCode,
-                     'faultString' : fault.faultString}
+                    {'faultCode': fault.faultCode,
+                     'faultString': fault.faultString}
                     )
             except:
                 results.append(
-                    {'faultCode' : 1,
-                     'faultString' : "%s:%s" % (sys.exc_type, sys.exc_value)}
+                    {'faultCode': 1,
+                     'faultString': "%s:%s" % (sys.exc_type, sys.exc_value)}
                     )
         return results
 
@@ -240,9 +240,9 @@ class XmlRpcBase:
             * version (int) :
                 Current version.
         """
-        
+
         return_items = []
-        
+
         edit_log = editlog.EditLog(self.request)
         for log in edit_log.reverse():
             # get last-modified UTC (DateTime) from log
@@ -252,11 +252,11 @@ class XmlRpcBase:
             # skip if older than "date"
             if lastModified_date < date:
                 break
-            
+
             # skip if knowledge not permitted
             if not self.request.user.may.read(log.pagename):
                 continue
-            
+
             # get page name (str) from log
             pagename_str = self._outstr(log.pagename)
 
@@ -268,12 +268,12 @@ class XmlRpcBase:
                     author_str = userdata.name
             author_str = self._outstr(author_str)
 
-            return_item = { 'name':  pagename_str,
-                            'lastModified': lastModified_date,
-                            'author': author_str,
-                            'version': int(log.rev) }
+            return_item = {'name': pagename_str,
+                           'lastModified': lastModified_date,
+                           'author': author_str,
+                           'version': int(log.rev) }
             return_items.append(return_item)
-        
+
         return return_items
 
     def xmlrpc_getPageInfo(self, pagename):
@@ -299,7 +299,7 @@ class XmlRpcBase:
         if not self.request.user.may.read(pn):
             return self.notAllowedFault()
 
-        if rev != None:
+        if rev is not None:
             page = Page(self.request, pn, rev=rev)
         else:
             page = Page(self.request, pn)
@@ -310,10 +310,10 @@ class XmlRpcBase:
             return self.noSuchPageFault()
 
         # Get page info
-        last_edit = page.last_edit(self.request)           
+        last_edit = page.last_edit(self.request)
         mtime = wikiutil.version2timestamp(long(last_edit['timestamp'])) # must be long for py 2.2.x
         gmtuple = tuple(time.gmtime(mtime))
-        
+
         version = rev # our new rev numbers: 1,2,3,4,....
 
         #######################################################################
@@ -326,10 +326,10 @@ class XmlRpcBase:
         if self.request.cfg.sitename == 'MoinMaster' and pagename == 'BadContent':
             version = int(mtime)
         #######################################################################
-            
+
         return {
             'name': self._outstr(page.page_name),
-            'lastModified' : xmlrpclib.DateTime(gmtuple),
+            'lastModified': xmlrpclib.DateTime(gmtuple),
             'author': self._outstr(last_edit['editor']),
             'version': version,
             }
@@ -345,14 +345,14 @@ class XmlRpcBase:
         @param rev: revision number (int)
         @rtype: str
         @return: utf-8 encoded page data
-        """    
+        """
         pagename = self._instr(pagename)
 
         # User may read page?
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
 
-        if rev != None:
+        if rev is not None:
             page = Page(self.request, pagename, rev=rev)
         else:
             page = Page(self.request, pagename)
@@ -385,7 +385,7 @@ class XmlRpcBase:
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
 
-        if rev != None:
+        if rev is not None:
             page = Page(self.request, pagename, rev=rev)
         else:
             page = Page(self.request, pagename)
@@ -393,11 +393,11 @@ class XmlRpcBase:
         # Non existing page?
         if not page.exists():
             return self.noSuchPageFault()
-        
+
         # Render page into a buffer
         result = self.request.redirectedOutput(page.send_page, self.request,
                                                content_only=1)
-        
+
         # Return rendered page
         if self.version == 2:
             return self._outstr(result)
@@ -425,10 +425,10 @@ class XmlRpcBase:
         # Non existing page?
         if not page.exists():
             return self.noSuchPageFault()
-        
+
         links_out = []
         for link in page.getPageLinks(self.request):
-            links_out.append({ 'name': self._outstr(link), 'type': 0 })
+            links_out.append({'name': self._outstr(link), 'type': 0 })
         return links_out
 
     def xmlrpc_putPage(self, pagename, pagetext):
@@ -440,10 +440,10 @@ class XmlRpcBase:
         @return: true on success
         """
         # READ THIS OR IT WILL NOT WORK ===================================
-        
+
         # we use a test page instead of using the requested pagename, if
         # xmlrpc_putpage_enabled was not set in wikiconfig.
-        
+
         if self.request.cfg.xmlrpc_putpage_enabled:
             pagename = self._instr(pagename)
         else:
@@ -455,7 +455,7 @@ class XmlRpcBase:
         # change your wikiconfig to have xmlrpc_putpage_trusted_only = 0
         # and make very very sure that nobody untrusted can access your wiki
         # via network or somebody will raid your wiki some day!
-        
+
         if self.request.cfg.xmlrpc_putpage_trusted_only and not self.request.user.trusted:
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
@@ -499,7 +499,7 @@ class XmlRpcBase:
         return (version.project, version.release, version.revision)
 
     # authorization methods
-    
+
     def xmlrpc_getAuthToken(self, username, password, *args):
         """ Returns a token which can be used for authentication
             in other XMLRPC calls. If the token is empty, the username
@@ -509,7 +509,7 @@ class XmlRpcBase:
             return u.id
         else:
             return ""
-    
+
     def xmlrpc_applyAuthToken(self, auth_token):
         """ Applies the auth token and thereby authenticates the user. """
         u = user.User(self.request, id=auth_token, auth_method='xmlrpc_applytoken')
@@ -518,11 +518,11 @@ class XmlRpcBase:
             return "SUCCESS"
         else:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
-    
+
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
         from MoinMoin.util.bdiff import textdiff, compress
-        
+
         pagename = self._instr(pagename)
 
         # User may read page?
@@ -536,44 +536,44 @@ class XmlRpcBase:
 
         if not allowed_rev_type(from_rev):
             return xmlrpclib.Fault("FROMREV_INVALID", "Incorrect type for from_rev.")
-        
+
         if not allowed_rev_type(to_rev):
             return xmlrpclib.Fault("TOREV_INVALID", "Incorrect type for to_rev.")
-        
+
         currentpage = Page(self.request, pagename)
         if not currentpage.exists():
             return xmlrpclib.Fault("NOT_EXIST", "Page does not exist.")
-        
+
         revisions = currentpage.getRevList()
-        
+
         if from_rev is not None and from_rev not in revisions:
             return xmlrpclib.Fault("FROMREV_INVALID", "Unknown from_rev.")
         if to_rev is not None and to_rev not in revisions:
             return xmlrpclib.Fault("TOREV_INVALID", "Unknown to_rev.")
-        
+
         # use lambda to defer execution in the next lines
         if from_rev is None:
             oldcontents = lambda: ""
         else:
             oldpage = Page(request, pagename, rev=from_rev)
             oldcontents = lambda: oldpage.get_raw_body_str()
-        
+
         if to_rev is None:
             newcontents = lambda: currentpage.get_raw_body()
         else:
             newpage = Page(request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
             newrev = newpage.get_real_rev()
-        
+
         if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
             return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
-        
+
         newcontents = newcontents()
         conflict = wikiutil.containsConflictMarker(newcontents)
         diffblob = xmlrpclib.Binary(compress(textdiff(oldcontents(), newcontents)))
-        
+
         return {"conflict": conflict, "diff": diffblob, "diffversion": 1, "current": currentpage.get_real_rev()}
-    
+
     def xmlrpc_interwikiName(self):
         """ Returns the interwiki name of the current wiki. """
         name = self.request.cfg.interwikiname
@@ -581,7 +581,7 @@ class XmlRpcBase:
             return None
         else:
             return self._outstr(name)
-    
+
     def xmlrpc_mergeChanges(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
             Additionally, this method tags the new revision.
@@ -594,38 +594,38 @@ class XmlRpcBase:
             @param interwiki_name: Used to build the interwiki tag.
         """
         from MoinMoin.util.bdiff import decompress, patch
-        
+
         pagename = self._instr(pagename)
-       
+
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
             return self.notAllowedFault()
 
         # XXX add locking here!
-        
+
         # current version of the page
         currentpage = Page(self.request, pagename)
 
         if currentpage.get_real_rev() != last_remote_rev:
             return xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
-        
+
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
-        
+
         # base revision used for the diff
         basepage = Page(self.request, pagename, rev=delta_remote_rev)
-        
+
         # generate the new page revision by applying the diff
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
-        
+
         # write page
         # XXX ...
-        
+
         # XXX add a tag (interwiki_name, local_rev, current rev) to the page
         # XXX return current rev
         # XXX finished
-        
-        
+
+
     # XXX BEGIN WARNING XXX
     # All xmlrpc_*Attachment* functions have to be considered as UNSTABLE API -
     # they are neither standard nor are they what we need when we have switched
@@ -641,12 +641,12 @@ class XmlRpcBase:
         @param pagename: pagename (utf-8)
         @rtype: list
         @return: a list of utf-8 attachment names
-        """    
+        """
         pagename = self._instr(pagename)
         # User may read page?
         if not self.request.user.may.read(pagename):
             return self.notAllowedFault()
-        
+
         result = AttachFile._get_files(self.request, pagename)
         return result
 
@@ -690,7 +690,7 @@ class XmlRpcBase:
         # also check ACLs
         if not self.request.user.may.write(pagename):
             return xmlrpclib.Fault(1, "You are not allowed to edit this page")
-        
+
         attachname = wikiutil.taintfilename(attachname)
         filename = AttachFile.getFilename(self.request, pagename, attachname)
         if os.path.exists(filename) and not os.path.isfile(filename):
@@ -699,12 +699,12 @@ class XmlRpcBase:
         os.chmod(filename, 0666 & config.umask)
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
-    
+
     # XXX END WARNING XXX
 
 
 class XmlRpc1(XmlRpcBase):
-    
+
     def __init__(self, request):
         XmlRpcBase.__init__(self, request)
         self.version = 1
@@ -727,9 +727,9 @@ class XmlRpc1(XmlRpcBase):
         """
         return wikiutil.url_quote(text) # config.charset must be utf-8
 
-    
+
 class XmlRpc2(XmlRpcBase):
-    
+
     def __init__(self, request):
         XmlRpcBase.__init__(self, request)
         self.version = 2
@@ -753,9 +753,9 @@ class XmlRpc2(XmlRpcBase):
         @return: text encoded in utf-8
         """
         if isinstance(text, unicode):
-            text = text.encode('utf-8')           
-        elif config.charset != 'utf-8':        
-            text = unicode(text, config.charset).encode('utf-8')               
+            text = text.encode('utf-8')
+        elif config.charset != 'utf-8':
+            text = unicode(text, config.charset).encode('utf-8')
         return text
 
 

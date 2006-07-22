@@ -26,7 +26,7 @@ class Text:
     def __unicode__(self):
         return wikiutil.escape(self.text)
 
-        
+
 class Raw:
     """ Raw HTML code.
     """
@@ -36,7 +36,7 @@ class Raw:
     def __unicode__(self):
         return self.markup
 
-        
+
 class Element:
     """ Abstract base class for HTML elements.
     """
@@ -86,9 +86,9 @@ class Element:
         return ' '.join(result)
 
     def __unicode__(self):
-        raise NotImplementedError 
+        raise NotImplementedError
 
-        
+
 class EmptyElement(Element):
     """ HTML elements with an empty content model.
     """

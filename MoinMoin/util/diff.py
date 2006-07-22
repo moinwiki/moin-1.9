@@ -74,10 +74,10 @@ def diff(request, old, new):
 %s:
 </td>
 </tr>
-""" % ( request.formatter.line_anchorlink(1, llineno) + request.formatter.text(t_line % llineno) + request.formatter.line_anchorlink(0),
-        request.formatter.line_anchorlink(1, rlineno) + request.formatter.text(t_line % rlineno) + request.formatter.line_anchorlink(0))
+""" % (request.formatter.line_anchorlink(1, llineno) + request.formatter.text(t_line % llineno) + request.formatter.line_anchorlink(0),
+       request.formatter.line_anchorlink(1, rlineno) + request.formatter.text(t_line % rlineno) + request.formatter.line_anchorlink(0))
 
-        leftpane  = ''
+        leftpane = ''
         rightpane = ''
         linecount = max(match[0] - lastmatch[0], match[1] - lastmatch[1])
         for line in range(linecount):
@@ -90,7 +90,7 @@ def diff(request, old, new):
                     rightpane += '\n'
                 rightpane += seq2[lastmatch[1] + line]
 
-        charobj   = difflib.SequenceMatcher(None, leftpane, rightpane)
+        charobj = difflib.SequenceMatcher(None, leftpane, rightpane)
         charmatch = charobj.get_matching_blocks()
 
         if charobj.ratio() < 0.5:
@@ -108,7 +108,7 @@ def diff(request, old, new):
             # Some similarities; markup changes.
             charlast = (0, 0)
 
-            leftresult  = ''
+            leftresult = ''
             rightresult = ''
             for thismatch in charmatch:
                 if thismatch[0] - charlast[0] != 0:
@@ -121,7 +121,7 @@ def diff(request, old, new):
                 rightresult += escape(rightpane[thismatch[1]:thismatch[1] + thismatch[2]])
                 charlast = (thismatch[0] + thismatch[2], thismatch[1] + thismatch[2])
 
-        leftpane  = '<br>\n'.join(map(indent, leftresult.splitlines()))
+        leftpane = '<br>\n'.join(map(indent, leftresult.splitlines()))
         rightpane = '<br>\n'.join(map(indent, rightresult.splitlines()))
 
         # removed width="50%%"
