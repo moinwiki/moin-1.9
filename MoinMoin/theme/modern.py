@@ -22,7 +22,7 @@ class Theme(ThemeBase):
         html = [
             # Pre header custom html
             self.emit_custom_html(self.cfg.page_header1),
-            
+
             # Header
             u'<div id="header">',
             self.logo(),
@@ -39,10 +39,10 @@ class Theme(ThemeBase):
             self.msg(d),
             self.editbar(d),
             u'</div>',
-            
+
             # Post header custom html (not recommended)
             self.emit_custom_html(self.cfg.page_header2),
-            
+
             # Start of page
             self.startPage(),
         ]
@@ -58,16 +58,16 @@ class Theme(ThemeBase):
         html = [
             # Pre header custom html
             self.emit_custom_html(self.cfg.page_header1),
-            
+
             # Header
             u'<div id="header">',
             self.title(d),
             self.msg(d),
             u'</div>',
-            
+
             # Post header custom html (not recommended)
             self.emit_custom_html(self.cfg.page_header2),
-            
+
             # Start of page
             self.startPage(),
         ]
@@ -86,23 +86,23 @@ class Theme(ThemeBase):
             # End of page
             self.pageinfo(page),
             self.endPage(),
-            
+
             # Pre footer custom html (not recommended!)
             self.emit_custom_html(self.cfg.page_footer1),
-            
+
             # Footer
             u'<div id="footer">',
             self.editbar(d),
             self.credits(d),
             self.showversion(d, **keywords),
             u'</div>',
-            
+
             # Post footer custom html
             self.emit_custom_html(self.cfg.page_footer2),
             ]
         return u'\n'.join(html)
 
-        
+
 def execute(request):
     """
     Generate and return a theme object
