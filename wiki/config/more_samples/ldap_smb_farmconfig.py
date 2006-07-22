@@ -69,7 +69,7 @@ wikis = [
 # this is to get everything to sane defaults, so we need to change only what
 # we like to have different:
 
-from MoinMoin.multiconfig import DefaultConfig
+from MoinMoin.config.multiconfig import DefaultConfig
 
 # Now we subclass this DefaultConfig. This means that we inherit every setting
 # from the DefaultConfig, except those we explicitely define different.

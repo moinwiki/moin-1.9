@@ -16,6 +16,9 @@ use_threads = False
 # benefit for the user. IMPORTANT: use only lowercase 'utf-8'!
 charset = 'utf-8'
 
+# When creating files, we use e.g. 0666 & config.umask for the mode:
+umask = 0770
+
 # Invalid characters - invisible characters that should not be in page
 # names. Prevent user confusion and wiki abuse, e.g u'\u202aFrontPage'.
 page_invalid_chars_regex = re.compile(
@@ -33,7 +36,6 @@ page_invalid_chars_regex = re.compile(
     )
 
 # Other stuff
-umask = 0770
 url_schemas = []
 
 smileys = (r"X-( :D <:( :o :( :) B) :)) ;) /!\ <!> (!) :-? :\ >:> |) " +
