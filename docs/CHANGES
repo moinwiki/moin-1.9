@@ -67,6 +67,8 @@ Version 1.6.current:
     * refactored some actions to use ActionBase base class
     * moved "test" action from wikiaction to MoinMoin/action/
       (and use ActionBase)
+    * moved MoinMoin/config.py to MoinMoin/config/__init__.py
+    * moved MoinMoin/multiconfig.py to MoinMoin/config/multiconfig.py
     * moved "SystemInfo" macro from wikimacro to MoinMoin/macro/
     * moved wikiaction.py stuff to MoinMoin/action/__init__.py
     * moved wikimacro.py stuff to MoinMoin/macro/__init__.py
@@ -190,6 +192,9 @@ Version 1.6.current:
       internally, too. So if GUI editor invocation is broken due to browser
       compatibility issues or a wrong browser version check, please file a bug
       at FCKeditor development or browser development.
+    * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
+      need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
+      You need to change this in you wikiconfig.py or farmconfig.py file.
 
 Version 1.5.4-current:
     * increased maxlength of some input fields from 80 to 200

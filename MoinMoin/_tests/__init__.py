@@ -94,9 +94,9 @@ class TestConfig:
         
         Non existing default will raise an AttributeError.
         """
-        from MoinMoin.multiconfig import DefaultConfig
+        from MoinMoin.config import multiconfig
         for key in defaults:
-            self._setattr(key, getattr(DefaultConfig, key))
+            self._setattr(key, getattr(multiconfig.DefaultConfig, key))
 
     def setCustom(self, **custom):
         """ Set custom values """

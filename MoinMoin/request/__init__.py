@@ -265,7 +265,7 @@ class RequestBase(object):
     def _load_multi_cfg(self):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
-            from MoinMoin import multiconfig
+            from MoinMoin.config import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
 
     def setAcceptedCharsets(self, accept_charset):
