@@ -45,7 +45,7 @@ def extract_titles(body, title_re):
         h = title.strip()
         level = 1
         while h[level:level+1] == '=': level = level+1
-        depth = min(5,level)
+        depth = min(5, level)
         title_text = h[level:-level].strip()
         titles.append((title_text, level))
     return titles
@@ -177,7 +177,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
 
         if not hasattr(request, "_Include_backto"):
             request._Include_backto = this_page.page_name
-        
+
         # do headings
         level = None
         if args.group('heading') and args.group('hquote'):
