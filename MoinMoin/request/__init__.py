@@ -141,11 +141,13 @@ class RequestBase(object):
             #    # no extra path after script name
             #    rootname = u""
 
-            self.args = {}
-            self.form = {}
-
-            if not self.query_string.startswith('action=xmlrpc'):
+            if self.query_string.startswith('action=xmlrpc'):
+                self.args = {}
+                self.form = {}
+                self.action = 'xmlrpc'
+            else:
                 self.args = self.form = self.setup_args()
+                self.action = self.form.get('action', ['show'])[0]
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
@@ -156,7 +158,7 @@ class RequestBase(object):
 
             self.user = self.get_user_from_form()
 
-            if not self.query_string.startswith('action=xmlrpc'):
+            if self.action != 'xmlrpc':
                 if not self.forbidden and self.isForbidden():
                     self.makeForbidden403()
                 if not self.forbidden and self.surge_protect():
@@ -181,7 +183,7 @@ class RequestBase(object):
         current_id = validuser and self.user.name or self.remote_addr
         if not validuser and current_id.startswith('127.'): # localnet
             return False
-        current_action = self.form.get('action', ['show'])[0]
+        current_action = self.action
 
         limits = self.cfg.surge_action_limits
         default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
@@ -863,11 +865,12 @@ class RequestBase(object):
         forbidden = 0
         # we do not have a parsed query string here, so we can just do simple matching
         qs = self.query_string
+        action = self.action
         if ((qs != '' or self.request_method != 'GET') and
-            not 'action=rss_rc' in qs and
+            action != 'rss_rc' and
             # allow spiders to get attachments and do 'show'
-            not ('action=AttachFile' in qs and 'do=get' in qs) and
-            not 'action=show' in qs
+            not (action == 'AttachFile' and 'do=get' in qs) and
+            action != 'show'
             ):
             forbidden = self.isSpiderAgent
 
@@ -1028,21 +1031,18 @@ class RequestBase(object):
         self.html_formatter = Formatter(self)
         self.formatter = self.html_formatter
 
-        if self.query_string == 'action=xmlrpc':
+        action_name = self.action
+        if action_name == 'xmlrpc':
             from MoinMoin import xmlrpc
-            xmlrpc.xmlrpc(self)
-            return self.finish()
-
-        if self.query_string == 'action=xmlrpc2':
-            from MoinMoin import xmlrpc
-            xmlrpc.xmlrpc2(self)
+            if self.query_string == 'action=xmlrpc':
+                xmlrpc.xmlrpc(self)
+            elif self.query_string == 'action=xmlrpc2':
+                xmlrpc.xmlrpc2(self)
             return self.finish()
 
         # parse request data
         try:
             self.initTheme()
-
-            action_name = self.form.get('action', ['show'])[0]
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()

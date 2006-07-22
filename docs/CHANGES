@@ -116,6 +116,7 @@ Version 1.6.current:
     * removed all _ magic in URLs and filenames
       TODO: write mig script for data_dir
       TODO: make blanks in interwiki pagelinks possible
+    * request.action now has the action requested, default: 'show'.
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more
