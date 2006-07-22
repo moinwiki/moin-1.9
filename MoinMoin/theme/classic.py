@@ -22,7 +22,7 @@ class Theme(ThemeBase):
     """ here are the functions generating the html responsible for
         the look and feel of your wiki site
     """
-    
+
     name = "classic"
 
     def footer(self, d, **keywords):
@@ -45,9 +45,9 @@ class Theme(ThemeBase):
                  self.editbar(d, **keywords),
                  self.credits(d),
                  self.showversion(d, **keywords),
-                 
+
                  # Post footer custom html
-                 self.emit_custom_html(self.cfg.page_footer2),]
+                 self.emit_custom_html(self.cfg.page_footer2), ]
         return u'\n'.join(parts)
 
     def editbar(self, d, **keywords):
@@ -56,7 +56,7 @@ class Theme(ThemeBase):
         parts = [u'<div id="footer">',
                  self.edit_link(d, **keywords),
                  self.availableactions(d),
-                 u'</div>',]
+                 u'</div>', ]
         return ''.join(parts)
 
     def iconbar(self, d):
@@ -82,7 +82,7 @@ class Theme(ThemeBase):
                     iconbar.append('<li>%s</li>\n' % self.make_iconlink(icon, d))
             iconbar.append('</ul>\n')
         return ''.join(iconbar)
-    
+
     def header(self, d):
         """
         Assemble page header
@@ -95,10 +95,10 @@ class Theme(ThemeBase):
             'config_header1_html': self.emit_custom_html(self.cfg.page_header1),
             'config_header2_html': self.emit_custom_html(self.cfg.page_header2),
             'search_form_html': self.searchform(d),
-            'logo_html':  self.logo(),
-            'interwiki_html':  self.interwiki(d),
-            'title_html':  self.title(d),
-            'username_html':  self.username(d),
+            'logo_html': self.logo(),
+            'interwiki_html': self.interwiki(d),
+            'title_html': self.title(d),
+            'username_html': self.username(d),
             'navibar_html': self.navibar(d),
             'iconbar_html': self.iconbar(d),
             'msg_html': self.msg(d),
@@ -160,7 +160,7 @@ class Theme(ThemeBase):
         return html
 
     # Footer stuff #######################################################
-    
+
     def edit_link(self, d, **keywords):
         """
         Assemble EditText link (or indication that page cannot be edited)
@@ -172,7 +172,7 @@ class Theme(ThemeBase):
         page = d['page']
         return  u'<ul class="editbar"><li>%s</li></ul>' % self.editorLink(page)
 
-    def availableactions(self, d):    
+    def availableactions(self, d):
         """
         assemble HTML code for the available actions
         
@@ -197,11 +197,11 @@ class Theme(ThemeBase):
                 params = '%s?action=%s' % (d['q_page_name'], action)
                 link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
                 html.append(link)
-                
+
         title = _("DeleteCache", formatted=False)
         params = '%s?action=%s' % (d['page_name'], 'refresh')
         link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
-        
+
         cache = caching.CacheEntry(request, page, page.getFormatterName(), scope='item')
         date = request.user.getFormattedDateTime(cache.mtime())
         deletecache = u'<p>%s %s</p>' % (link, _('(cached %s)') % date)

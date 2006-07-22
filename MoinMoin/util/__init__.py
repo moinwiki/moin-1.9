@@ -31,7 +31,7 @@ def TranslateCDATA(text):
     """
     new_string, num_subst = re.subn(g_undoUtf8Pattern, lambda m: m.group(1), text)
     new_string, num_subst = re.subn(g_cdataCharPattern, lambda m, d=g_charToEntity: d[m.group()], new_string)
-    new_string, num_subst = re.subn(g_xmlIllegalCharPattern, lambda m: '&#x%02X;'%ord(m.group()), new_string)
+    new_string, num_subst = re.subn(g_xmlIllegalCharPattern, lambda m: '&#x%02X;' % ord(m.group()), new_string)
     return new_string
 
 def TranslateText(text):
@@ -41,7 +41,7 @@ def TranslateText(text):
     """
     new_string, num_subst = re.subn(g_undoUtf8Pattern, lambda m: m.group(1), text)
     new_string, num_subst = re.subn(g_textCharPattern, lambda m, d=g_charToEntity: d[m.group()], new_string)
-    new_string, num_subst = re.subn(g_xmlIllegalCharPattern, lambda m: '&#x%02X;'%ord(m.group()), new_string)
+    new_string, num_subst = re.subn(g_xmlIllegalCharPattern, lambda m: '&#x%02X;' % ord(m.group()), new_string)
     return new_string
 
 
@@ -79,7 +79,7 @@ def dumpFormData(form):
     result = '<dt><strong>Form entries</strong></dt>'
     for k in form.keys():
         v = form.get(k, ["<empty>"])
-        v = "|".join(v) 
+        v = "|".join(v)
         result = result + '<dd><em>%s</em>=%s</dd>' % (k, wikiutil.escape(v))
 
     return result
@@ -100,12 +100,12 @@ class simpleIO:
 
     def __init__(self):
         self.buffer = []
-        
+
     def write(self, foo):
         if not isinstance(foo, unicode):
             foo = foo.decode("iso-8859-1", "replace")
         self.buffer.append(foo)
-    
+
     def getvalue(self):
         return u''.join(self.buffer)
 

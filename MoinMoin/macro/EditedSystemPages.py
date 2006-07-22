@@ -44,7 +44,7 @@ class EditedSystemPages:
             result.append(f.pagelink(0, name))
             result.append(f.listitem(0))
         result.append(f.number_list(0))
- 
+
         return ''.join(result)
 
 

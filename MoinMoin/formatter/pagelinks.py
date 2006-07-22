@@ -9,19 +9,19 @@
 from MoinMoin.formatter import FormatterBase
 
 class Formatter(FormatterBase):
-    """ Collect pagelinks and format nothing :-) """        
-    
+    """ Collect pagelinks and format nothing :-) """
+
     def pagelink(self, on, pagename='', page=None, **kw):
         FormatterBase.pagelink(self, on, pagename, page, **kw)
         return self.null()
- 
+
     def null(self, *args, **kw):
         return ''
-    
+
     # All these must be overriden here because they raise
     # NotImplementedError!@#! or return html?! in the base class.
     set_highlight_re = rawHTML = url = image = smiley = text = null
-    strong = emphasis = underline =  highlight = sup = sub = strike = null
+    strong = emphasis = underline = highlight = sup = sub = strike = null
     code = preformatted = small = big = code_area = code_line = null
     code_token = linebreak = paragraph = rule = icon = null
     number_list = bullet_list = listitem = definition_list = null

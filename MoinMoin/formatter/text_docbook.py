@@ -30,15 +30,15 @@ class DocBookOutputFormatter:
     """
        Format docbook output
     """
-    
+
     def __init__(self, dommDoc):
         self.doc = dommDoc
         self.curNode = dommDoc.documentElement
-        
+
     def setHeading(self, headNode):
         self.domHeadNode = headNode
         return u""
-    
+
     def _printNode(self, node):
         """
             Function print a node
@@ -46,15 +46,15 @@ class DocBookOutputFormatter:
         from xml.dom.ext import Print
         import StringIO
         from xml.dom.ext import Printer
-        
+
         stream = StringIO.StringIO()
-        
+
         visitor = Printer.PrintVisitor(stream, 'UTF-8')
         Printer.PrintWalker(visitor, node).run()
         # get value from stream
         ret = stream.getvalue()
         stream.close()
-        
+
         return unicode(ret, 'utf-8')
 
     def getHeading(self):
@@ -63,7 +63,7 @@ class DocBookOutputFormatter:
         # print article info
         return '<?xml version="1.0"?><%s>%s' % (rootNode.nodeName,
                                                 self._printNode(self.domHeadNode))
-        
+
     def getBody(self):
         body = []
         # print all nodes inside dom behind heading
@@ -81,7 +81,7 @@ class DocBookOutputFormatter:
             ret.append("</%s>" % (self.curNode.nodeName, ))
             self.curNode = self.curNode.parentNode
         return ''.join(ret)
-        
+
     def getFooter(self):
         return "</%s>" % self.doc.documentElement.nodeName
 
@@ -93,7 +93,7 @@ class Formatter(FormatterBase):
     section_should_break = ['abstract', 'para', 'emphasis']
 
     def __init__(self, request, **kw):
-        '''We should use this for creating the doc'''
+        """We should use this for creating the doc"""
         FormatterBase.__init__(self, request, **kw)
 
         self.doc = dom.createDocument(None, "article", dom.createDocumentType(
@@ -113,7 +113,7 @@ class Formatter(FormatterBase):
         self.root.appendChild(info)
         # set heading node
         self.outputFormatter.setHeading(info)
-        
+
         return self.outputFormatter.getHeading()
 
     def startContent(self, content_id="content", **kw):
@@ -138,7 +138,7 @@ class Formatter(FormatterBase):
         else:
             srcText = text
         if self.cur.nodeName == "screen":
-            if self.cur.lastChild != None:
+            if self.cur.lastChild is not None:
                 from xml.dom.ext import Node
                 if self.cur.lastChild.nodeType == Node.CDATA_SECTION_NODE:
                     self.cur.lastChild.nodeValue = self.cur.lastChild.nodeValue + srcText
@@ -151,7 +151,7 @@ class Formatter(FormatterBase):
     def heading(self, on, depth, **kw):
         while self.cur.nodeName in self.section_should_break:
             self.cur = self.cur.parentNode
-               
+
         if on:
             # try to go to higher level if needed
             if depth <= self.curdepth:
@@ -165,7 +165,7 @@ class Formatter(FormatterBase):
 # I don't understand this code - looks like unnecessary -- maybe it is used to gain some vertical space for large headings?
 #                    if len(self.cur.childNodes) < 3:
 #                       self._addEmptyNode("para")
-                    
+
                     # check if not top-level
                     if self.cur.nodeName != "article":
                         self.cur = self.cur.parentNode
@@ -225,7 +225,7 @@ class Formatter(FormatterBase):
         cols = 1
         if attrs and attrs.has_key('colspan'):
             s1 = attrs['colspan']
-            s1 = str(s1).replace('"','')
+            s1 = str(s1).replace('"', '')
             cols = int(s1)
         return cols
 
@@ -270,16 +270,16 @@ class Formatter(FormatterBase):
         return self._handleNode(name, on, attributes)
 
     def strong(self, on, **kw):
-        return self._handleFormatting("emphasis", on, (('role','strong'), ))
+        return self._handleFormatting("emphasis", on, (('role', 'strong'), ))
 
     def emphasis(self, on, **kw):
         return self._handleFormatting("emphasis", on)
 
     def underline(self, on, **kw):
-        return self._handleFormatting("emphasis", on, (('role','underline'), ))
+        return self._handleFormatting("emphasis", on, (('role', 'underline'), ))
 
     def highlight(self, on, **kw):
-        return self._handleFormatting("emphasis", on, (('role','highlight'), ))
+        return self._handleFormatting("emphasis", on, (('role', 'highlight'), ))
 
     def sup(self, on, **kw):
         return self._handleFormatting("superscript", on)
@@ -291,7 +291,7 @@ class Formatter(FormatterBase):
         # does not yield <strike> using the HTML XSLT files here ...
         # but seems to be correct
         return self._handleFormatting("emphasis", on,
-                                      (('role','strikethrough'), ))
+                                      (('role', 'strikethrough'), ))
 
     def code(self, on, **kw):
         return self._handleFormatting("code", on)
@@ -303,8 +303,8 @@ class Formatter(FormatterBase):
 ### Lists ###########################################################
 
     def number_list(self, on, type=None, start=None, **kw):
-        docbook_ol_types = {'1': "arabic", 
-                            'a': "loweralpha", 
+        docbook_ol_types = {'1': "arabic",
+                            'a': "loweralpha",
                             'A': "upperalpha",
                             'i': "lowerroman",
                             'I': "upperroman"}
@@ -320,22 +320,22 @@ class Formatter(FormatterBase):
         return self._handleNode("itemizedlist", on)
 
     def definition_list(self, on, **kw):
-        return self._handleNode("glosslist", on)        
+        return self._handleNode("glosslist", on)
 
     def definition_term(self, on, compact=0, **kw):
        # When on is false, we back out just on level. This is
        # ok because we know definition_desc gets called, and we
        # back out two levels there.
         if on:
-            entry=self.doc.createElement('glossentry')
-            term=self.doc.createElement('glossterm')
+            entry = self.doc.createElement('glossentry')
+            term = self.doc.createElement('glossterm')
             entry.appendChild(term)
             self.cur.appendChild(entry)
             self.cur = term
         else:
             self.cur = self.cur.parentNode
         return ""
-   
+
     def definition_desc(self, on, **kw):
         # We backout two levels when 'on' is false, to leave the glossentry stuff
         if on:
@@ -365,14 +365,14 @@ class Formatter(FormatterBase):
     # FIXME: This is even more crappy
     def interwikilink(self, on, interwiki='', pagename='', **kw):
         if not on:
-            return self.url(on,kw)
+            return self.url(on, kw)
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         href = wikiutil.join_wiki(wikiurl, wikitail)
 
         return self.url(on, href)
-            
+
     def url(self, on, url=None, css=None, **kw):
         return self._handleNode("ulink", on, (('url', url), ))
 
@@ -382,11 +382,11 @@ class Formatter(FormatterBase):
         return ""
 
     def anchorlink(self, on, name='', **kw):
-        id = kw.get('id',None)
+        id = kw.get('id', None)
         attrs = []
         if name != '':
             attrs.append(('endterm', name))
-        if id != None:
+        if id is not None:
             attrs.append(('linkend', id))
         elif name != '':
             attrs.append(('linkend', name))
@@ -463,14 +463,14 @@ class Formatter(FormatterBase):
                 break
         if title:
             txtcontainer = self.doc.createElement('textobject')
-            media.appendChild(txtcontainer)        
+            media.appendChild(txtcontainer)
             txtphrase = self.doc.createElement('phrase')
             txtphrase.appendChild(self.doc.createTextNode(title))
-            txtcontainer.appendChild(txtphrase)        
-        
+            txtcontainer.appendChild(txtphrase)
+
         self.cur.appendChild(media)
-        return ""        
- 
+        return ""
+
     def smiley(self, text):
         return self.request.theme.make_icon(text)
 
@@ -492,7 +492,7 @@ class Formatter(FormatterBase):
         self._handleNode("tgroup", on)
         self._handleNode("tbody", on)
         return ""
-    
+
     def table_row(self, on, attrs=None, **kw):
         self.table_current_row_cells = 0
         sanitized_attrs = []
@@ -526,12 +526,12 @@ class Formatter(FormatterBase):
         show = show and 'numbered' or 'unnumbered'
         if start < 1:
             start = 1
-        
+
         attrs = (('id', code_id),
                 ('linenumbering', show),
                 ('startinglinenumber', str(start)),
                 ('language', code_type),
-                ('format','linespecific'),
+                ('format', 'linespecific'),
                 )
         return self._handleFormatting("screen", on, attrs)
 
@@ -578,7 +578,7 @@ class Formatter(FormatterBase):
 
 ### Not supported ###################################################
 
-    def rule(self, size = 0, **kw):
+    def rule(self, size=0, **kw):
         return ""
 
     def small(self, on, **kw):

@@ -407,7 +407,7 @@ def pagename_from_url(url_frag):
 class ConvertError(error.FatalError):
     """ Raise when html to wiki conversion fails """
     name = "MoinMoin Convert Error"
-    
+
 
 class visitor(object):
     def do(self, tree):
@@ -434,7 +434,7 @@ class visitor(object):
 
     def visit_attribute(self, node):
         pass
-	
+
     def visit_text(self, node):
         pass
 
@@ -469,7 +469,7 @@ class convert_tree(visitor):
     def __init__(self, request, pagename):
         self.request = request
         self.pagename = pagename
-    
+
     def do(self, tree):
         self.depth = 0
         self.text = []
@@ -520,7 +520,7 @@ class convert_tree(visitor):
         name = node.localName
         if name is None: # not sure this can happen here (DOM comment node), but just for the case
             return
-        func = getattr(self, "process_%s" % name,  None)
+        func = getattr(self, "process_%s" % name, None)
         if func:
             func(node)
         else:
@@ -565,7 +565,7 @@ class convert_tree(visitor):
             self.text.append(self.new_line)
             self.text.append("%s %s %s" % (hstr, text.replace("\n", " "), hstr))
             self.text.append(self.new_line)
-    
+
     process_h1 = process_heading
     process_h2 = process_heading
     process_h3 = process_heading
@@ -593,7 +593,7 @@ class convert_tree(visitor):
             if class_ == "gap":
                 before = "\n"
             style = listitem.getAttribute("style")
-            if re.match(u"list-style-type:\s*none", style, re.I):
+            if re.match(ur"list-style-type:\s*none", style, re.I):
                 markup = ". "
             else:
                 markup = "* "
@@ -666,7 +666,7 @@ class convert_tree(visitor):
             if name in ('p', 'pre', 'ol', 'ul', 'dl', 'table',) and pending:
                 self.empty_paragraph_queue(pending, indent, need_indent)
                 need_indent = True
-                
+
             if name == 'p':
                 if need_indent:
                     self.text.append(indent)
@@ -737,7 +737,7 @@ class convert_tree(visitor):
 
     def process_inline(self, node):
         if node.nodeType == Node.TEXT_NODE:
-            self.text.append(node.data.strip('\n').replace('\n',' '))
+            self.text.append(node.data.strip('\n').replace('\n', ' '))
             return
 
         name = node.localName # can be None for DOM Comment nodes
@@ -748,8 +748,8 @@ class convert_tree(visitor):
             text = self.node_list_text_only(node.childNodes).strip() # but can be inserted via the editor
             self.text.append(text)                          # so we just drop the header markup and keep the text
             return
-        
-        func = getattr(self, "process_%s" % name,  None)
+
+        func = getattr(self, "process_%s" % name, None)
         if func:
             func(node)
             return
@@ -778,13 +778,13 @@ class convert_tree(visitor):
             command = "" # just throw away font settings
         else:
             raise ConvertError("process_inline: Don't support %s element" % name)
-        
+
         self.text.append(command)
         for i in node.childNodes:
             if i.nodeType == Node.ELEMENT_NODE:
                 self.process_inline(i)
             elif i.nodeType == Node.TEXT_NODE:
-                self.text.append(i.data.strip('\n').replace('\n',' '))
+                self.text.append(i.data.strip('\n').replace('\n', ' '))
         if command_close:
             command = command_close
         self.text.append(command)
@@ -865,11 +865,11 @@ class convert_tree(visitor):
                     #print i.localName
             self.text.extend(["}}}", self.new_line])
 
-    _alignment = {"left" : "(",
-                  "center" : ":",
-                  "right" : ")",
-                  "top" : "^",
-                  "bottom" : "v"}
+    _alignment = {"left": "(",
+                  "center": ":",
+                  "right": ")",
+                  "top": "^",
+                  "bottom": "v"}
 
     def _check_length(self, value):
         try:
@@ -933,7 +933,7 @@ class convert_tree(visitor):
             colspan = 1
 
         spanning = rowspan or colspan > 1
-        
+
         align = ""
         result = []
         if  node.hasAttribute("bgcolor"):
@@ -970,7 +970,7 @@ class convert_tree(visitor):
             result.append('id="%s"' % node.getAttribute("id"))
         if node.hasAttribute("style"):
             result.append('style="%s"' % node.getAttribute("style"))
-                
+
         if align:
             result.insert(0, "%s" % align)
         result.append(rowspan)
@@ -1049,7 +1049,7 @@ class convert_tree(visitor):
                     self.process_inline(i)
                     found = True
                 elif i.nodeType == Node.TEXT_NODE:
-                    data = i.data.strip('\n').replace('\n',' ')
+                    data = i.data.strip('\n').replace('\n', ' ')
                     if data:
                         found = True
                         self.text.append(data)
@@ -1083,7 +1083,7 @@ class convert_tree(visitor):
         id = node.attributes.get("id", None)
         if id:
             id = id.nodeValue
-        
+
         if href:
             title = class_ = interwikiname = None
 
@@ -1102,14 +1102,14 @@ class convert_tree(visitor):
                 if not err and href.startswith(wikiurl):
                     pagename, qpagename = pagename_from_url(href[len(wikiurl):].lstrip('/'))
                     interwikiname = "%s:%s" % (wikitag, qpagename)
-                else: 
+                else:
                     raise ConvertError("Invalid InterWiki link: '%s'" % href)
             elif class_ == "badinterwiki" and title:
                 if href == "/": # we used this as replacement for empty href
                     href = ""
                 pagename, qpagename = pagename_from_url(href)
                 interwikiname = "%s:%s" % (title, qpagename)
-            if interwikiname and pagename == text: 
+            if interwikiname and pagename == text:
                 self.text.append("%s" % interwikiname)
                 return
             elif title == 'Self':
@@ -1118,7 +1118,7 @@ class convert_tree(visitor):
             elif interwikiname:
                 self.text.append("[wiki:%s %s]" % (interwikiname, text))
                 return
-            
+
             # fix links generated by a broken copy & paste of gecko based browsers
             brokenness = '../../../..'
             if href.startswith(brokenness):

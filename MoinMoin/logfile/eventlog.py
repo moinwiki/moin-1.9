@@ -10,9 +10,9 @@ from MoinMoin import util, config, wikiutil
 from MoinMoin.util import web
 
 class EventLog(LogFile):
-    
+
     def __init__(self, request, filename=None, buffer_size=65536, **kw):
-        if filename == None:
+        if filename is None:
             rootpagename = kw.get('rootpagename', None)
             if rootpagename:
                 from MoinMoin.Page import Page
@@ -28,7 +28,7 @@ class EventLog(LogFile):
         """
         if request.isSpiderAgent:
             return
-        
+
         if mtime_usecs is None:
             mtime_usecs = wikiutil.timestamp2version(time.time())
 
@@ -52,9 +52,9 @@ class EventLog(LogFile):
             # badly formatted line in file, skip it
             return None
         return long(time_usecs), eventtype, wikiutil.parseQueryString(kvpairs)
-                                                                        
-    def set_filter(self, event_types = None):
-        if event_types == None:
+
+    def set_filter(self, event_types=None):
+        if event_types is None:
             self.filter = None
         else:
             self.filter = lambda line: (line[1] in event_types)

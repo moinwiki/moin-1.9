@@ -74,8 +74,7 @@ class Navigation:
         self._ = self.macro.request.getText
 
         self.pagename = self.macro.formatter.page.page_name
-        self.print_mode = self.macro.request.form.has_key('action') \
-            and self.macro.request.form['action'][0] == 'print'
+        self.print_mode = self.macro.request.action == 'print'
         self.media = self.macro.request.form.get('media', [None])[0]
         self.querystr = self.print_mode and self.PROJECTION or ''
 

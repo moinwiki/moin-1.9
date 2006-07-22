@@ -23,7 +23,7 @@ class Timer:
     """
     defaultSleep = 0.25
     maxSleep = 0.25
-    
+
     def __init__(self, timeout):
         self.setTimeout(timeout)
         self._start = None
@@ -35,7 +35,7 @@ class Timer:
             self._sleep = self.defaultSleep
         else:
             self._sleep = min(timeout / 10.0, self.maxSleep)
-        
+
     def start(self):
         """ Start the countdown """
         if self.timeout is None:
@@ -53,7 +53,7 @@ class Timer:
     def sleep(self):
         """ Sleep without sleeping over timeout """
         if self._stop is not None:
-            timeLeft = max(self._stop - time.time(), 0)            
+            timeLeft = max(self._stop - time.time(), 0)
             sleep = min(self._sleep, timeLeft)
         else:
             sleep = self._sleep
@@ -62,7 +62,7 @@ class Timer:
     def elapsed(self):
         return time.time() - self._start
 
-    
+
 class ExclusiveLock:
     """ Exclusive lock
     
@@ -77,7 +77,7 @@ class ExclusiveLock:
     """
     fileName = '' # The directory is the lockDir
     timerClass = Timer
-    
+
     def __init__(self, dir, timeout=None):
         """ Init a write lock
         
@@ -96,7 +96,7 @@ class ExclusiveLock:
             self.lockDir = os.path.join(dir, self.fileName)
             self._makeDir()
         else:
-            self.lockDir = dir            
+            self.lockDir = dir
         self._locked = False
 
     def acquire(self, timeout=None):
@@ -165,7 +165,7 @@ class ExclusiveLock:
         return False
 
     # Private -------------------------------------------------------
-    
+
     def _makeDir(self):
         """ Make sure directory exists """
         try:
@@ -180,7 +180,7 @@ class ExclusiveLock:
         try:
             os.rmdir(self.lockDir)
         except OSError, err:
-            if err.errno != errno.ENOENT: 
+            if err.errno != errno.ENOENT:
                 raise
 
 
@@ -195,7 +195,7 @@ class WriteLock(ExclusiveLock):
     lock will try to expire all existing ReadLocks.
     """
     fileName = 'write_lock'
-    
+
     def __init__(self, dir, timeout=None, readlocktimeout=None):
         """ Init a write lock
         
@@ -211,7 +211,7 @@ class WriteLock(ExclusiveLock):
             self.readlocktimeout = timeout
         else:
             self.readlocktimeout = readlocktimeout
-    
+
     def acquire(self, timeout=None):
         """ Acquire an exclusive write lock
         
@@ -221,7 +221,7 @@ class WriteLock(ExclusiveLock):
         acquired.
         
         Return True if lock acquired, False otherwise.
-        """        
+        """
         if self._locked:
             raise RuntimeError("lock already locked")
         result = False
@@ -242,9 +242,9 @@ class WriteLock(ExclusiveLock):
                 else:
                     self.release()
         return False
-        
+
     # Private -------------------------------------------------------
-    
+
     def _expireReadLocks(self):
         """ Expire old read locks """
         readLockFileName = ReadLock.fileName
@@ -255,7 +255,7 @@ class WriteLock(ExclusiveLock):
             ExclusiveLock(LockDir, self.readlocktimeout).expire()
 
     def _haveReadLocks(self):
-        """ Return True if read locks exists; False otherwise """            
+        """ Return True if read locks exists; False otherwise """
         readLockFileName = ReadLock.fileName
         for name in os.listdir(self.dir):
             if name.startswith(readLockFileName):
@@ -273,7 +273,7 @@ class ReadLock(ExclusiveLock):
     Allows only one lock per instance.
     """
     fileName = 'read_lock_'
-            
+
     def __init__(self, dir, timeout=None):
         """ Init a read lock
         
@@ -302,6 +302,6 @@ class ReadLock(ExclusiveLock):
                 # log('acquired read lock: %s\n' % self.lockDir)
                 return True
             finally:
-                self.writeLock.release()       
+                self.writeLock.release()
         return False
 

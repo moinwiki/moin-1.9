@@ -60,7 +60,7 @@ class FormatterBase:
         return ""
 
     # Document Level #####################################################
-    
+
     def startDocument(self, pagename):
         return ""
 
@@ -74,13 +74,13 @@ class FormatterBase:
         return ""
 
     # Links ##############################################################
-    
+
     def pagelink(self, on, pagename='', page=None, **kw):
         """ make a link to page <pagename>. Instead of supplying a pagename,
             it is also possible to give a live Page object, then page.page_name
             will be used.
         """
-        if not self._store_pagelinks or not on or kw.get('generated'): 
+        if not self._store_pagelinks or not on or kw.get('generated'):
             return ''
         if not pagename and page:
             pagename = page.page_name
@@ -101,7 +101,7 @@ class FormatterBase:
                 wikitail = wikiutil.url_unquote(wikitail)
             return self.pagelink(on, wikitail, **kw)
         return ''
-            
+
     def url(self, on, url=None, css=None, **kw):
         raise NotImplementedError
 
@@ -171,11 +171,11 @@ class FormatterBase:
         return self.text(text)
 
     # Text and Text Attributes ########################################### 
-    
+
     def text(self, text, **kw):
         if not self._highlight_re:
             return self._text(text)
-            
+
         result = []
         lastpos = 0
         match = self._highlight_re.search(text)
@@ -278,7 +278,7 @@ class FormatterBase:
         raise NotImplementedError
 
     # Tables #############################################################
-    
+
     def table(self, on, attrs={}, **kw):
         raise NotImplementedError
 
@@ -289,10 +289,10 @@ class FormatterBase:
         raise NotImplementedError
 
     # Dynamic stuff / Plugins ############################################
-    
+
     def macro(self, macro_obj, name, args):
         # call the macro
-        return macro_obj.execute(name, args)    
+        return macro_obj.execute(name, args)
 
     def _get_bang_args(self, line):
         if line[:2] == '#!':
@@ -326,15 +326,15 @@ class FormatterBase:
         return ''
 
     # Other ##############################################################
-    
+
     def div(self, on, **kw):
         """ open/close a blocklevel division """
         return ""
-    
+
     def span(self, on, **kw):
         """ open/close a inline span """
         return ""
-    
+
     def rawHTML(self, markup):
         """ This allows emitting pre-formatted HTML markup, and should be
             used wisely (i.e. very seldom).

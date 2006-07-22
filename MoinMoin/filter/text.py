@@ -24,5 +24,4 @@ def execute(indexobj, filename):
     f.close()
     data = data.decode('ascii', 'replace')
     return data
-    
 

@@ -21,7 +21,7 @@ class Formatter:
     """
 
     defaultDependencies = ["time"]
-    
+
     def __init__(self, request, static=[], formatter=None, **kw):
         if formatter:
             self.formatter = formatter
@@ -70,7 +70,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             i += 1
         source.append(self.text_cmd_end)
         source.append(self.__adjust_formatter_state())
-        
+
         self.code_fragments = [] # clear code fragments to make
                                  # this object reusable
         return "".join(source)
@@ -98,7 +98,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
             self.__lang = self.request.current_lang
             return 'request.current_lang = %r\n' % self.__lang
         return ''
-        
+
     def __adjust_formatter_state(self):
         result = self.__adjust_language_state()
         if self.__in_p != self.formatter.in_p:
@@ -108,11 +108,11 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
         if self.__in_pre != self.formatter.in_pre:
             result = "%s%s.in_pre = %r\n" % (result, self.__formatter,
                                            self.formatter.in_pre)
-            self.__in_pre = self.formatter.in_pre        
+            self.__in_pre = self.formatter.in_pre
         return result
-    
+
     # Public methods ---------------------------------------------------
-        
+
     def pagelink(self, on, pagename='', page=None, **kw):
         if on:
             return self.__insert_code('page=Page(request, %r, formatter=%s);'
@@ -132,24 +132,24 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
         return self.__insert_code(
             'request.write(%s.attachment_image(%r, **%r))' %
             (self.__formatter, url, kw))
-    
+
     def attachment_drawing(self, url, text, **kw):
         return self.__insert_code(
             'request.write(%s.attachment_drawing(%r, %r, **%r))' %
             (self.__formatter, url, text, kw))
-    
+
     def attachment_inlined(self, url, text, **kw):
         return self.__insert_code(
             'request.write(%s.attachment_inlined(%r, %r, **%r))' %
             (self.__formatter, url, text, kw))
 
-    def heading(self, on, depth, **kw):        
+    def heading(self, on, depth, **kw):
         if on:
             code = [
                 self.__adjust_language_state(),
                 'request.write(%s.heading(%r, %r, **%r))' % (self.__formatter,
                                                              on, depth, kw),
-                ]     
+                ]
             return self.__insert_code(''.join(code))
         else:
             return self.formatter.heading(on, depth, **kw)
@@ -171,7 +171,7 @@ if moincode_timestamp > %d or request.cfg.cfg_mtime > %d:
                 '%srequest.write(%s.macro(macro_obj, %r, %r))' %
                 (self.__adjust_formatter_state(),
                  self.__formatter, name, args))
-            
+
     def parser(self, parser_name, lines):
         """ parser_name MUST be valid!
             prints out the result instead of returning it!

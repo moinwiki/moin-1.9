@@ -119,9 +119,9 @@ def rewrite_attribute_name(name, default_namespace='html'):
     if ns == 'html':
         # We have an HTML attribute, fix according to DTD
         if name == 'content_type': # MIME type such as in <a> and <link> elements
-            name =  'type'
+            name = 'type'
         elif name == 'content_id': # moin historical convention
-            name =  'id'
+            name = 'id'
         elif name in ('css_class', 'css'): # to avoid python word 'class'
             name = 'class'
         elif name.startswith('on'): # event handler hook
@@ -226,7 +226,7 @@ class Formatter(FormatterBase):
                 return {}
 
         #attr = {'xml:lang': lang, 'lang': lang, 'dir': i18n.getDirection(lang),}
-        attr = {'lang': lang, 'dir': i18n.getDirection(lang),}
+        attr = {'lang': lang, 'dir': i18n.getDirection(lang), }
         return attr
 
     def _formatAttributes(self, attr=None, allowed_attrs=None, **kw):
@@ -335,12 +335,12 @@ class Formatter(FormatterBase):
         if tag in _blocks:
             # Block elements
             result = []
-            
+
             # Add language attributes, but let caller overide the default
             attributes = self._langAttr()
             if attr:
                 attributes.update(attr)
-            
+
             # Format
             attributes = self._formatAttributes(attributes, allowed_attrs=allowed_attrs, **kw)
             result.append('<%s%s%s>' % (tag, attributes, is_self_closing))
@@ -433,7 +433,7 @@ class Formatter(FormatterBase):
         if newline:
             result.append('\n')
         return ''.join(result)
-        
+
     def endContent(self, newline=True):
         """ Close page content div.
 
@@ -472,10 +472,10 @@ class Formatter(FormatterBase):
             return self._close(tag)
 
         # Direction did not change, no need for span
-        return ''            
-                
+        return ''
+
     # Links ##############################################################
-    
+
     def pagelink(self, on, pagename='', page=None, **kw):
         """ Link to a page.
 
@@ -486,7 +486,7 @@ class Formatter(FormatterBase):
         """
         apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
         if page is None:
-            page = Page(self.request, pagename, formatter=self);
+            page = Page(self.request, pagename, formatter=self)
         if self.request.user.show_nonexist_qm and on and not page.exists():
             self.pagelink_preclosed = True
             return (page.link_to(self.request, on=1, **kw) +
@@ -565,7 +565,7 @@ class Formatter(FormatterBase):
 
             if css:
                 attrs['class'] = css
-            
+
             markup = self._open('a', attr=attrs, **kw)
         else:
             markup = self._close('a')
@@ -641,7 +641,7 @@ class Formatter(FormatterBase):
         return (self.url(1, target, css='attachment', title="attachment:%s" % url) +
                 self.text(text) +
                 self.url(0))
-    
+
     def attachment_image(self, url, **kw):
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
@@ -659,7 +659,7 @@ class Formatter(FormatterBase):
             title="attachment:%s" % url,
             src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1),
             css="attachment")
-    
+
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
@@ -724,10 +724,10 @@ class Formatter(FormatterBase):
                                      self.image(alt=url,
                                                 src=AttachFile.getAttachUrl(pagename, filename, self.request, addts=1), css="drawing"),
                                      title="%s" % (_('Edit drawing %(filename)s') % {'filename': self.text(fname)}))
-        
-    
+
+
     # Text ##############################################################
-    
+
     def _text(self, text):
         text = wikiutil.escape(text)
         if self._in_code:
@@ -735,7 +735,7 @@ class Formatter(FormatterBase):
         return text
 
     # Inline ###########################################################
-        
+
     def strong(self, on, **kw):
         """Creates an HTML <strong> element.
 
@@ -830,7 +830,7 @@ class Formatter(FormatterBase):
         if on:
             return self._open(tag, allowed_attrs=[], **kw)
         return self._close(tag)
-        
+
     def small(self, on, **kw):
         """Creates a <small> element for smaller font.
 
@@ -867,7 +867,7 @@ class Formatter(FormatterBase):
         if on:
             return self._open(tag, newline=1, **kw)
         return self._close(tag)
-                
+
     # Use by code area
     _toggleLineNumbersScript = """
 <script type="text/javascript">
@@ -920,7 +920,7 @@ function togglenumber(did, nstart, nstep) {
 }
 </script>
 """
-    
+
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         """Creates a formatted code region, with line numbering.
 
@@ -997,7 +997,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         return ['<span class="%s">' % tok_type, '</span>'][not on]
 
     # Paragraphs, Lines, Rules ###########################################
-    
+
     def _indent_spaces(self):
         """Returns space(s) for indenting the html source so list nesting is easy to read.
 
@@ -1023,7 +1023,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         if self._in_code_area:
             preformatted = 1
         return ['\n', '<br />\n'][not preformatted] + self._indent_spaces()
-        
+
     def paragraph(self, on, **kw):
         """Creates a paragraph with a <p> element.
         
@@ -1051,7 +1051,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             # Add hr class: hr1 - hr6
             return self._open('hr', newline=1, attr={'class': 'hr%d' % size}, **kw)
         return self._open('hr', newline=1, **kw)
-                
+
     def icon(self, type):
         return self.request.theme.make_icon(type)
 
@@ -1091,7 +1091,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         else:
             tagstr = self._close(tag, newline=1)
         return tagstr
-    
+
     def bullet_list(self, on, **kw):
         """Creates an HTML ordered list, <ul> element.
 
@@ -1117,7 +1117,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         """
         tag = 'li'
         if on:
-            tagstr =  self._open(tag, newline=1, **kw)
+            tagstr = self._open(tag, newline=1, **kw)
         else:
             tagstr = self._close(tag, newline=1)
         return tagstr
@@ -1185,7 +1185,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         # closing tag, with empty line after, to make source more readable
         if not on:
             return self._close('h%d' % heading_depth) + '\n'
-            
+
         # create section number
         number = ''
         if self._show_section_numbers:
@@ -1214,7 +1214,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                        self.url(0)))
         return "%s%s%s" % (result, kw.get('icons', ''), number)
 
-    
+
     # Tables #############################################################
 
     _allowed_table_attrs = {
@@ -1304,7 +1304,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             result.append(self._close('div'))
 
         return ''.join(result)
-    
+
     def table_row(self, on, attrs=None, **kw):
         tag = 'tr'
         if on:
@@ -1316,7 +1316,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                              allowed_attrs=self._allowed_table_attrs['row'],
                              **kw)
         return self._close(tag) + '\n'
-    
+
     def table_cell(self, on, attrs=None, **kw):
         tag = 'td'
         if on:
@@ -1349,7 +1349,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         if on:
             return self._open(tag, attr={'class': 'message'}, **kw)
         return self._close(tag)
-    
+
     def div(self, on, **kw):
         tag = 'div'
         if on:
@@ -1361,5 +1361,5 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         if on:
             return self._open(tag, **kw)
         return self._close(tag)
-    
+
 
