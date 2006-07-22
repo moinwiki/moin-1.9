@@ -393,7 +393,7 @@ class Search:
         """
         pages = None
         index = self._xapianIndex(self.request)
-        if index: #and self.query.xapian_wanted():
+        if index and self.query.xapian_wanted():
             self.request.clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
@@ -408,8 +408,9 @@ class Search:
                     for k, v in d.items():
                         d[k] = d[k].decode(config.charset)
                     return d
-                pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
-                        for hit in hits]
+                #pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
+                #        for hit in hits]
+                pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
                 self._xapianEnquire = enq
                 self._xapianIndex = index
@@ -418,9 +419,11 @@ class Search:
             #except AttributeError:
             #    pages = []
             self.request.clock.stop('_xapianSearch')
-            return self._getHits(hits, self._xapianMatch)
-        else:
-            return self._moinSearch(pages)
+
+            if not self.query.xapian_need_postproc():
+                return self._getHits(hits, self._xapianMatch)
+        
+        return self._moinSearch(pages)
 
     def _xapianMatchDecider(self, term, pos):
         if term[0] == 'S':      # TitleMatch
