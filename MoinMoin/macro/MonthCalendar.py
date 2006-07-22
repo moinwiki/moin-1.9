@@ -240,7 +240,7 @@ _arg_height6 = r',\s*(?P<height6>[+-]?\d+)?\s*'
 _arg_anniversary = r',\s*(?P<anniversary>[+-]?\d+)?\s*'
 _arg_template = r',\s*(?P<template>[^, ]+)?\s*' # XXX see basepage comment
 _args_re_pattern = r'^(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?(%s)?$' % \
-                     (_arg_basepage, _arg_year, _arg_month, \
+                     (_arg_basepage, _arg_year, _arg_month,
                       _arg_offset, _arg_offset2, _arg_height6, _arg_anniversary, _arg_template)
 
 

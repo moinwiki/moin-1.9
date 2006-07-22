@@ -66,20 +66,20 @@ class Macro:
     defaultDependency = ["time"]
 
     Dependencies = {
-        "TitleSearch" : ["namespace"],
-        "Goto"        : [],
-        "WordIndex"   : ["namespace"],
-        "TitleIndex"  : ["namespace"],
-        "InterWiki"   : ["pages"],  # if interwikimap is editable
-        "PageCount"   : ["namespace"],
-        "Icon"        : ["user"], # users have different themes and user prefs
-        "PageList"    : ["namespace"],
-        "Date"        : ["time"],
-        "DateTime"    : ["time"],
-        "UserPreferences" :["time"],
-        "Anchor"      : [],
-        "Mailto"      : ["user"],
-        "GetVal"      : ["pages"],
+        "TitleSearch": ["namespace"],
+        "Goto": [],
+        "WordIndex": ["namespace"],
+        "TitleIndex": ["namespace"],
+        "InterWiki": ["pages"],  # if interwikimap is editable
+        "PageCount": ["namespace"],
+        "Icon": ["user"], # users have different themes and user prefs
+        "PageList": ["namespace"],
+        "Date": ["time"],
+        "DateTime": ["time"],
+        "UserPreferences": ["time"],
+        "Anchor": [],
+        "Mailto": ["user"],
+        "GetVal": ["pages"],
         "TemplateList": ["namespace"],
         }
 
