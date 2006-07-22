@@ -19,9 +19,15 @@ Branch moin/1.6-xapian-fpletz
         1. regexp for whole word (all lowercase), or
         2. just the root of the word
     * Subpages: Add positions for complete (!) pagenames into the index
+    * Check if permissions/acls are always obeyed
+
+  ToDo (low priority):
     * Case-sensitive searches / Regexp on multiple terms: Graceful
       fallback to and/or merge with moinSearch based on nodes xapian can
       handle in the search term tree
+      * currently, xapian will fetch relevant pages and feed those into
+        _moinSearch for doing the real hard stuff it can't handle
+      -> need for a query optimizer, after SoC?
 
   New Features:
     * Faster search thanks to Xapian
@@ -175,4 +181,11 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * Conclusion after tinkering with the current code to allow
       cooperation between moinSearch and Xapian for case-sensitive
       searches (code buried): We probably need a rather big rewrite!
+
+2006-07-21
+2006-07-22
+    * Final thoughts: No query optimizer for now. Case-sensitive
+      sensitive search is done by querying Xapian with the lowercased
+      terms and run _moinSearch over the relevant pages with the same
+      query.
 
