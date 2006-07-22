@@ -608,7 +608,8 @@ class ThemeBase:
 
 
         # tribute to the most sucking browser...
-        if self.cfg.hacks.get('ie7', False):
+        if self.cfg.hacks.get('ie7', False) and self.request.action != 'edit':
+            # using FCKeditor and IE7 at the same time makes nices crashes in IE
             html.append("""
 <!-- compliance patch for microsoft browsers -->
 <!--[if lt IE 7]>
