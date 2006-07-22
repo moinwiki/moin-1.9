@@ -12,5 +12,5 @@ class Widget:
         self.request = request
 
     def render(self):
-        raise NotImplementedError 
+        raise NotImplementedError
 

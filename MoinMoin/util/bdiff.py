@@ -30,17 +30,17 @@ def diff(a, b):
 
     bin = []
     la = lb = 0
-    
+
     p = [0]
     for i in a: p.append(p[-1] + len(i))
-    
+
     for am, bm, size in difflib.SequenceMatcher(None, a, b).get_matching_blocks():
         s = "".join(b[lb:bm])
         if am > la or s:
             bin.append(struct.pack(BDIFF_PATT, p[la], p[am], len(s)) + s)
         la = am + size
         lb = bm + size
-    
+
     return "".join(bin)
 
 def textdiff(a, b):
@@ -78,12 +78,12 @@ def patch(a, bin):
 def test():
     a = ("foo\n" * 30)
     b = ("  fao" * 30)
-    
+
     a = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.1").read()
     b = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.2").read()
     a = a.splitlines(1)
     b = b.splitlines(1)
-    
+
     d = diff(a, b)
     z = compress(d)
     print `patchtext(d)`

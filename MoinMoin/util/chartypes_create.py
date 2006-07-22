@@ -10,7 +10,7 @@ uppercase = []
 lowercase = []
 digits = []
 space = []
-for code in range(1,65535):
+for code in range(1, 65535):
     c = unichr(code)
     str = "\\u%04x" % code
     if c.isupper():

@@ -34,7 +34,7 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     # change your wikiconfig to have xmlrpc_putpage_trusted_only = 0
     # and make very very sure that nobody untrusted can access your wiki
     # via network or somebody will raid your wiki some day!
-        
+
     if self.request.cfg.xmlrpc_putpage_trusted_only and not self.request.user.trusted:
         return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
@@ -45,7 +45,7 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     # check if groupname matches page_group_regex
     if not re.match(self.request.cfg.page_group_regex, groupname):
         return xmlrpclib.Fault(2, "The groupname %s does not match your page_group_regex (%s)" % (
-	                          groupname, self.request.cfg.page_group_regex))
+                               groupname, self.request.cfg.page_group_regex))
 
     newtext = """\
 #acl %(acl)s
@@ -56,7 +56,7 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
     'comment': groupcomment,
     'memberlist': "\n * ".join([''] + memberlist)
     }
-    
+
     page = PageEditor(self.request, pagename)
     try:
         msg = page.saveText(newtext, 0)

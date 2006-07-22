@@ -12,13 +12,13 @@ def execute(xmlrpcobj, secret, mail):
     request = xmlrpcobj.request
     secret = xmlrpcobj._instr(secret)
     mail = str(mail)
-    
+
     if not request.cfg.mail_import_secret:
         return u"No password set"
-    
+
     if request.cfg.mail_import_secret != secret:
         return u"Invalid password"
-    
+
     try:
         mailimport.import_mail_from_string(request, mail)
     except mailimport.ProcessingError, e:

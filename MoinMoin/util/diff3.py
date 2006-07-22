@@ -25,7 +25,7 @@ def merge(old, other, new, allow_conflicts=1,
     old_nr, other_nr, new_nr = 0, 0, 0
     old_len, other_len, new_len = len(old), len(other), len(new)
     result = []
-    while old_nr < old_len and other_nr < other_len  and new_nr < new_len:
+    while old_nr < old_len and other_nr < other_len and new_nr < new_len:
         # unchanged
         if old[old_nr] == other[other_nr] == new[new_nr]:
             result.append(old[old_nr])
@@ -82,7 +82,7 @@ def merge(old, other, new, allow_conflicts=1,
 
     # process tail
     # all finished
-    if old_nr == old_len and other_nr == other_len  and new_nr == new_len:
+    if old_nr == old_len and other_nr == other_len and new_nr == new_len:
         pass
     # new added lines
     elif old_nr == old_len and other_nr == other_len:
@@ -122,9 +122,9 @@ def tripple_match(old, other, new, other_match, new_match):
             if match_len == difference:
                 return (new_match[0], other_match[1]+difference, new_match[1])
             else:
-                other_match =  find_match(old, other,
-                                          other_match[0] + match_len,
-                                          other_match[1] + match_len)
+                other_match = find_match(old, other,
+                                         other_match[0] + match_len,
+                                         other_match[1] + match_len)
         # other changed more lines
         elif difference < 0:
             difference = -difference
@@ -134,14 +134,14 @@ def tripple_match(old, other, new, other_match, new_match):
                 return (other_match[0], other_match[1],
                         new_match[0] + difference)
             else:
-                new_match =  find_match(old, new,
-                                        new_match[0] + match_len,
-                                        new_match[1] + match_len)
+                new_match = find_match(old, new,
+                                       new_match[0] + match_len,
+                                       new_match[1] + match_len)
         # both conflicts change same number of lines
         # or no match till the end
         else:
             return (new_match[0], other_match[1], new_match[1])
-        
+
 def match(list1, list2, nr1, nr2, maxcount=3):
     """ return the number matching items after the given positions
         maximum maxcount lines are are processed 
@@ -176,10 +176,10 @@ def find_match(list1, list2, nr1, nr2, mincount=3):
                 hit1 = (i, idx2)
                 break
             i += 1
-            
+
         i = nr2
         while i < idx2:
-            hit_count = match(list1, list2, idx1, i, mincount) 
+            hit_count = match(list1, list2, idx1, i, mincount)
             if hit_count >= mincount:
                 hit2 = (idx1, i)
                 break

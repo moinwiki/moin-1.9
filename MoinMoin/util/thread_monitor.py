@@ -41,7 +41,7 @@ def dump(label):
 
 def dump_hook(a, b, c): # arguments are ignored
     global dumping
-    
+
     if dumping and sys.exc_info()[0] is None:
         thread = threading.currentThread()
         if thread in to_dump:
@@ -65,7 +65,7 @@ def activate_hook():
     """ Activates the thread monitor hook. Note that this interferes
     with any kind of profiler and some debugging extensions. """
     global hook_enabled
-    
+
     sys.setprofile(dump_hook)
     threading.setprofile(dump_hook)
     hook_enabled = True
@@ -78,6 +78,6 @@ def dump_regularly(seconds):
         while 1:
             sleep(seconds)
             trigger_dump()
-    
+
     threading.Thread(target=background_dumper, args=(seconds, )).start()
 

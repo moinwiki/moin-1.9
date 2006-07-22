@@ -34,7 +34,7 @@ class Marshal:
     # Container Tags
     ROOT_CONTAINER = "data"
     ITEM_CONTAINER = "item"
-    
+
     # List of private prefixes
     PRIVATE_PREFIXES = ['_']
 
@@ -42,7 +42,7 @@ class Marshal:
     TAG_MAP = {}
 
 
-    def __toXML(self, element, data): 
+    def __toXML(self, element, data):
         """ Recursive helper method that transforms an object to XML.
         
             Returns a list of strings, which constitute the XML document.

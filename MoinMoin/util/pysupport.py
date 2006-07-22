@@ -30,7 +30,7 @@ def getPackageModules(packagefile):
     import os, re
 
     packagedir = os.path.dirname(packagefile)
-    
+
     in_plugin_dir = lambda dir, ops=os.path.split: ops(ops(dir)[0])[1] == "plugin"
 
     moinmodule = __import__('MoinMoin')
@@ -85,12 +85,12 @@ def makeThreadSafe(function, lock=None):
     if lock is None:
         import threading
         lock = threading.Lock()
-    
+
     def decorated(*args, **kw):
         lock.acquire()
         try:
             return function(*args, **kw)
         finally:
             lock.release()
-            
+
     return decorated
