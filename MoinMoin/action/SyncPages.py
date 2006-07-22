@@ -41,7 +41,7 @@ class RemotePage(object):
         return u"%s<%i>" % (self.name, self.revno)
 
     def __lt__(self, other):
-        return self.name > other.name
+        return self.name < other.name
 
 
 class RemoteWiki(object):
