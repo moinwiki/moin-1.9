@@ -36,7 +36,7 @@ import os, string
 norm = string.maketrans('', '')
 
 # builds a list of all non-alphanumeric characters:
-non_alnum = string.translate(norm, norm, string.letters+string.digits) 
+non_alnum = string.translate(norm, norm, string.letters+string.digits)
 
 # translate table that replaces all non-alphanumeric by blanks:
 trans_nontext = string.maketrans(non_alnum, ' '*len(non_alnum))

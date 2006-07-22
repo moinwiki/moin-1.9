@@ -53,7 +53,7 @@ class Formatter(FormatterBase):
                 self._url = None
                 self._text = None
                 return u' [%s]' % (self._url)
-            
+
     def url(self, on, url='', css=None, **kw):
         if on:
             self._url = url
@@ -81,7 +81,7 @@ class Formatter(FormatterBase):
 
     def attachment_drawing(self, url, text, **kw):
         return "[drawing:%s]" % text
-    
+
     def text(self, text, **kw):
         self._did_para = 0
         if self._text is not None:
@@ -138,7 +138,7 @@ class Formatter(FormatterBase):
         else:
             self._did_para = 1
             return u'\n'
-        
+
     def sup(self, on, **kw):
         return u'^'
 
@@ -211,7 +211,7 @@ class Formatter(FormatterBase):
             self._text = []
             return '\n\n'
         else:
-            result =  u'\n%s\n\n' % (u'=' * len("".join(self._text)))
+            result = u'\n%s\n\n' % (u'=' * len("".join(self._text)))
             self._text = None
             return result
 

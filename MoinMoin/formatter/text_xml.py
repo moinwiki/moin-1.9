@@ -175,11 +175,11 @@ class Formatter(FormatterBase):
         return '<anchor id="%s"/>' % id
 
     def anchorlink(self, on, name='', **kw):
-        id = kw.get('id',None)
+        id = kw.get('id', None)
         extra = ''
         if id:
             extra = ' id="%s"' % id
-        return ('<link anchor="%s"%s>' % (name, extra) ,'</link>') [not on]
+        return ('<link anchor="%s"%s>' % (name, extra), '</link>') [not on]
 
     def underline(self, on, **kw):
         return self.strong(on) # no underline in StyleBook
