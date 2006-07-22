@@ -6,8 +6,6 @@ Branch moin/1.6-xapian-fpletz
       enable usage of _moinSearch for full compatibility?
     * HACK: MoinMoin.search.Xapian.Index._get_languages (wait for proper
       metadata)
-    * Positions saved in Xapian aren't always correct, check. Code
-      generally needs some more love.
 
   ToDo:
     * Implement the new search UI
@@ -19,7 +17,6 @@ Branch moin/1.6-xapian-fpletz
         1. regexp for whole word (all lowercase), or
         2. just the root of the word
     * Subpages: Add positions for complete (!) pagenames into the index
-    * Check if permissions/acls are always obeyed
 
   ToDo (low priority):
     * Case-sensitive searches / Regexp on multiple terms: Graceful
@@ -188,4 +185,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       sensitive search is done by querying Xapian with the lowercased
       terms and run _moinSearch over the relevant pages with the same
       query.
+    * Indexing of categories
 
