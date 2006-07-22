@@ -119,7 +119,7 @@ def encodePassword(pwd, charset='utf-8'):
     pwd = '{SHA}' + base64.encodestring(pwd).rstrip()
     return pwd
 
-    
+
 def normalizeName(name):
     """ Make normalized user name
 
@@ -148,7 +148,7 @@ def normalizeName(name):
 
     return name
 
-    
+
 def isValidName(request, name):
     """ Validate user name
 
@@ -173,7 +173,7 @@ def encodeList(items):
         if not item:
             continue
         line.append(item)
-        
+
     line = '\t'.join(line)
     return line
 
@@ -193,7 +193,7 @@ def decodeList(line):
         items.append(item)
     return items
 
-    
+
 class User:
     """A MoinMoin User"""
 
@@ -220,7 +220,7 @@ class User:
         self.auth_username = auth_username
         self.auth_method = kw.get('auth_method', 'internal')
         self.auth_attribs = kw.get('auth_attribs', ())
-                                       
+
         # create some vars automatically
         self.__dict__.update(self._cfg.user_form_defaults)
 
@@ -254,7 +254,7 @@ class User:
         self.editor_default = self._cfg.editor_default
         self.editor_ui = self._cfg.editor_ui
         self.last_saved = str(time.time())
-        
+
         # attrs not saved to profile
         self._request = request
         self._trail = []
@@ -284,7 +284,7 @@ class User:
         else:
             from security import Default
             self.may = Default(self)
-        
+
         if self.language and not self.language in i18n.wikiLanguages():
             self.language = 'en'
 
@@ -299,7 +299,7 @@ class User:
         # and some other things identifying remote users, then we could also
         # use it reliably in edit locking
         from random import randint
-        return "%s.%d" % (str(time.time()), randint(0,65535))
+        return "%s.%d" % (str(time.time()), randint(0, 65535))
 
     def create_or_update(self, changed=False):
         """ Create or update a user profile
@@ -309,7 +309,7 @@ class User:
         if self._cfg.user_autocreate:
             if not self.valid and not self.disabled or changed: # do we need to save/update?
                 self.save() # yes, create/update user profile
-                                
+
     def __filename(self):
         """ Get filename of the user's file on disk
         
@@ -373,7 +373,7 @@ class User:
                 return
             # Check for a valid password, possibly changing encoding
             valid, changed = self._validatePassword(user_data)
-            if not valid: 
+            if not valid:
                 return
             else:
                 self.trusted = 1
@@ -395,7 +395,7 @@ class User:
             if hasattr(self, attr):
                 delattr(self, attr)
                 changed = 1
-        
+
         # make sure checkboxes are boolean
         for key, label in self._cfg.user_checkbox_fields:
             try:
@@ -458,12 +458,12 @@ class User:
 
         # Get the clear text password from the form (require non empty
         # password)
-        password = self._request.form.get('password',[None])[0]
+        password = self._request.form.get('password', [None])[0]
         if not password:
-            return False, False 
-                
+            return False, False
+
         # First get all available pre13 charsets on this system
-        pre13 = ['iso-8859-1', 'iso-8859-2', 'euc-jp', 'gb2312', 'big5',]
+        pre13 = ['iso-8859-1', 'iso-8859-2', 'euc-jp', 'gb2312', 'big5', ]
         available = []
         for charset in pre13:
             try:
@@ -471,7 +471,7 @@ class User:
                 available.append(charset)
             except LookupError:
                 pass # missing on this system
-                
+
         # Now try to match the password
         for charset in available:
             # Try to encode, failure is expected
@@ -506,7 +506,7 @@ class User:
 
         # !!! should write to a temp file here to avoid race conditions,
         # or even better, use locking
-        
+
         data = codecs.open(self.__filename(), "w", config.charset)
         data.write("# Data saved '%s' for id '%s'\n" % (
             time.strftime(self._cfg.datetime_fmt, time.localtime(time.time())),
@@ -624,7 +624,7 @@ class User:
         @return: pages this user has subscribed to
         """
         return self.subscribed_pages
-        
+
     def isSubscribedTo(self, pagelist):
         """ Check if user subscription matches any page in pagelist.
         
@@ -640,15 +640,15 @@ class User:
         """
         if not self.valid:
             return False
-        
-        import re        
+
+        import re
         # Create a new list with both names and interwiki names.
         pages = pagelist[:]
         if self._cfg.interwikiname:
             pages += [self._interWikiName(pagename) for pagename in pagelist]
         # Create text for regular expression search
         text = '\n'.join(pages)
-        
+
         for pattern in self.getSubscriptionList():
             # Try simple match first
             if pattern in pages:
@@ -673,15 +673,15 @@ class User:
         @type pagename: unicode
         @rtype: bool
         @return: if page was subscribed
-        """        
+        """
         if self._cfg.interwikiname:
             pagename = self._interWikiName(pagename)
-        
+
         if pagename not in self.subscribed_pages:
             self.subscribed_pages.append(pagename)
             self.save()
             return True
-        
+
         return False
 
     def unsubscribe(self, pagename):
@@ -710,16 +710,16 @@ class User:
         if pagename in self.subscribed_pages:
             self.subscribed_pages.remove(pagename)
             changed = True
-        
-        interWikiName = self._interWikiName(pagename)        
+
+        interWikiName = self._interWikiName(pagename)
         if interWikiName and interWikiName in self.subscribed_pages:
             self.subscribed_pages.remove(interWikiName)
             changed = True
-    
+
         if changed:
             self.save()
         return not self.isSubscribedTo([pagename])
-        
+
     # -----------------------------------------------------------------
     # Quicklinks
 
@@ -740,14 +740,14 @@ class User:
         """
         if not self.valid:
             return False
-            
+
         for pagename in pagelist:
             if pagename in self.quicklinks:
                 return True
             interWikiName = self._interWikiName(pagename)
             if interWikiName and interWikiName in self.quicklinks:
                 return True
-        
+
         return False
 
     def addQuicklink(self, pagename):
@@ -796,8 +796,8 @@ class User:
             changed = True
         if pagename in self.quicklinks:
             self.quicklinks.remove(pagename)
-            changed = True        
-        
+            changed = True
+
         if changed:
             self.save()
         return changed
@@ -810,7 +810,7 @@ class User:
         """
         if not self._cfg.interwikiname:
             return None
-            
+
         return "%s:%s" % (self._cfg.interwikiname, pagename)
 
     # -----------------------------------------------------------------
@@ -826,7 +826,7 @@ class User:
 
         if self.valid and (self.show_page_trail or self.remember_last_visit):
             # load trail if not known
-            self.getTrail()      
+            self.getTrail()
 
             # Add only existing pages that the user may read
             if self._request:
@@ -851,7 +851,7 @@ class User:
             self.saveTrail()
 
         # TODO: release lock here
-            
+
     def saveTrail(self):
         """ Save trail file
 
@@ -924,7 +924,7 @@ class User:
         """
         if not self.name:
             return self.host()
-        
+
         wikiname, pagename = wikiutil.getInterwikiHomePage(self._request,
                                                            self.name)
         if wikiname == 'Self':
@@ -933,7 +933,7 @@ class User:
             else:
                 markup = pagename
         else:
-            markup = '%s:%s' % (wikiname, pagename) 
+            markup = '%s:%s' % (wikiname, pagename)
         return markup
 
     def mailAccountData(self, cleartext_passwd=None):
@@ -944,14 +944,14 @@ class User:
         if not self.enc_password: # generate pw if there is none yet
             from random import randint
             import base64
-    
+
             charset = 'utf-8'
             pwd = "%s%d" % (str(time.time()), randint(0, 65535))
             pwd = pwd.encode(charset)
 
             pwd = sha.new(pwd).digest()
             pwd = '{SHA}%s' % base64.encodestring(pwd).rstrip()
-    
+
             self.enc_password = pwd
             self.save()
 
