@@ -170,7 +170,8 @@ class Index(BaseIndex):
                        #  the D term, and changing the last digit to a '2' if it's a '3')
                        #X   longer prefix for user-defined use
         'linkto': 'XLINKTO', # this document links to that document
-        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in 
+        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
+        'category': 'XCAT', # category this document belongs to
                        #Y   year (four digits)
     }
 
@@ -316,6 +317,15 @@ class Index(BaseIndex):
         # return actual lang and lang to stem in
         return (lang, default_lang)
 
+    def _get_categories(self, page):
+        body = page.get_raw_body()
+
+        sep = re.search(r'----*\r?\n', body)
+        if not sep:
+            return []
+        
+        return re.findall('Category(.*)\r?\n', body[sep.end():])
+
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
@@ -331,6 +341,7 @@ class Index(BaseIndex):
         itemid = "%s:%s" % (wikiname, pagename)
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
+        categories = self._get_categories(page)
         updated = False
 
         if mode == 'update':
@@ -362,6 +373,8 @@ class Index(BaseIndex):
                     xapdoc.Keyword('stem_lang', stem_language)]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
+            for category in categories:
+                xkeywords.append(xapdoc.Keyword('category', category))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
