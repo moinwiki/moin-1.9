@@ -222,7 +222,9 @@ class XmlRpcBase:
         @return: a list of all pages.
         """
 
-        return [self._outstr(x) for x in self.request.rootpage.getPageList()]
+        # the official WikiRPC interface is implemented by the extended method
+        # as well
+        return self.xmlrpc_getAllPagesEx()
 
 
     def xmlrpc_getAllPagesEx(self, opts=None):
@@ -239,7 +241,7 @@ class XmlRpcBase:
         if opts is not None:
             options.update(opts)
 
-        if options["include_system"]:
+        if not options["include_system"]:
             filter = lambda name: not wikiutil.isSystemPage(self.request, name)
         else:
             filter = lambda name: True
