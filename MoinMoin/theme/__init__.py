@@ -640,8 +640,7 @@ class ThemeBase:
             contentActions = [u'', u'show', u'refresh', u'preview', u'diff',
                               u'subscribe', u'RenamePage', u'DeletePage',
                               u'SpellCheck', u'print']
-            action = self.request.form.get('action', [''])[0]
-            return action in contentActions
+            return self.request.action in contentActions
         return False
 
     def pageinfo(self, page):
@@ -747,7 +746,7 @@ searchBlur(e);
         @return: script for html head
         """
         # Don't add script for print view
-        if self.request.form.get('action', [''])[0] == 'print':
+        if self.request.action == 'print':
             return u''
 
         _ = self.request.getText
@@ -1077,7 +1076,7 @@ actionsMenuInit('%(label)s');
         if (page.exists(includeDeleted=1) and
             self.request.user.may.read(page.page_name)):
             form = self.request.form
-            action = form.get('action', [''])[0]
+            action = self.request.action
             # Do not show editbar on edit but on save/cancel
             return not (action == 'edit' and
                         not form.has_key('button_save') and
@@ -1695,8 +1694,7 @@ var gui_editor_link_text = "%(text)s";
         request.clock.stop('total')
 
         # Close html code
-        if (request.cfg.show_timings and
-            request.form.get('action', [None])[0] != 'print'):
+        if request.cfg.show_timings and request.action != 'print':
             request.write('<ul id="timings">\n')
             for t in request.clock.dump():
                 request.write('<li>%s</li>\n' % t)
