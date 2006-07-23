@@ -788,9 +788,10 @@ class QueryParser:
             if cat_match:
                 text = cat_match.groups()[0]
                 category = True
+                regex = False
 
         if category:
-            obj = CategorySearch(text, use_re=False, case=case)
+            obj = CategorySearch(text, use_re=regex, case=case)
         elif lang:
             obj = LanguageSearch(text, use_re=regex, case=False)
         elif linkto:
