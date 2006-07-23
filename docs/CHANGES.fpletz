@@ -10,13 +10,11 @@ Branch moin/1.6-xapian-fpletz
   ToDo:
     * Implement the new search UI
     * Write/update documentation for all the new search stuff
-    * Indexing and searching of categories (new term prefix)
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
       (i.e. ExceptionTranslator)
     * Add stemming support for highlighting stuff:
         1. regexp for whole word (all lowercase), or
         2. just the root of the word
-    * Subpages: Add positions for complete (!) pagenames into the index
 
   ToDo (low priority):
     * Case-sensitive searches / Regexp on multiple terms: Graceful
@@ -191,4 +189,9 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 2006-07-23
     * CategorySearch is live
+    * Subpage issue does not need changes: Can be done with regex magic
+      I.e.: - subpages of MyPage: re:^MyPage/
+            - subpages called SubPage: re:/SubPage
+            - subpages called Subpage (1st level): re:[^/]*/SubPage
+            - subpages called Subpage (last level): re:/Subpage$
 
