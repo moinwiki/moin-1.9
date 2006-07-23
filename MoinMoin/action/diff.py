@@ -7,6 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+from MoinMoin import wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.Page import Page
 
@@ -126,11 +127,12 @@ def execute(pagename, request):
     request.write('</p>')
 
     if request.user.show_fancy_diff:
-        from MoinMoin.util.diff import diff
-        request.write(diff(request, oldpage.get_raw_body(), newpage.get_raw_body()))
+        from MoinMoin.util import diff_html
+        request.write(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body()))
         newpage.send_page(request, count_hit=0, content_only=1, content_id="content-below-diff")
     else:
-        lines = wikiutil.linediff(oldpage.getlines(), newpage.getlines())
+        from MoinMoin.util import diff_text
+        lines = diff_text.diff(oldpage.getlines(), newpage.getlines())
         if not lines:
             msg = _("No differences found!")
             if edit_count > 1:
