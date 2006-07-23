@@ -20,8 +20,6 @@ try:
 except ImportError:
     pass
 
-CATEGORY_RE = re.compile('----\(-\*\)\(\\r\)\?\\n\)\(\.\*\)Category(.*)\\b', re.U)
-
 #############################################################################
 ### query objects
 #############################################################################
@@ -274,9 +272,10 @@ class TextSearch(BaseExpression):
         matches = []
 
         # Search in page name
-        results = self.titlesearch.search(page)
-        if results:
-            matches.extend(results)
+        if self.titlesearch:
+            results = self.titlesearch.search(page)
+            if results:
+                matches.extend(results)
 
         # Search in page body
         body = page.get_raw_body()
@@ -629,6 +628,57 @@ class LanguageSearch(BaseExpression):
             pattern = self.pattern
             return UnicodeQuery('%s%s' % (prefix, pattern))
 
+class CategorySearch(TextSearch):
+    """ Search the pages belonging to a category """
+
+    def __init__(self, *args, **kwargs):
+        TextSearch.__init__(self, *args, **kwargs)
+        self.titlesearch = None
+
+    def _build_re(self, pattern, **kwargs):
+        kwargs['use_re'] = True
+        TextSearch._build_re(self,
+                r'(----(-*)(\r)?\n)(.*)Category%s\b' % pattern, **kwargs)
+
+    def costs(self):
+        return 5000 # cheaper than a TextSearch
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
+
+    def highlight_re(self):
+        return ""
+
+    def xapian_wanted(self):
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return self.case
+
+    def xapian_term(self, request, allterms):
+        self.xapian_called = True
+        prefix = Xapian.Index.prefixMap['category']
+        if self.use_re:
+            # basic regex matching per term
+            terms = []
+            found = None
+            n = len(prefix)
+            for term in allterms():
+                if prefix == term[:n]:
+                    found = True
+                    if self.search_re.match(term[n+1:]):
+                        terms.append(term)
+                elif found:
+                    continue
+
+            if not terms:
+                return Query()
+            return Query(Query.OP_OR, terms)
+        else:
+            pattern = self._pattern.lower()
+            return UnicodeQuery('%s:%s' % (prefix, pattern))
+
 
 ##############################################################################
 ### Parse Query
@@ -715,6 +765,7 @@ class QueryParser:
         case = self.case
         linkto = False
         lang = False
+        category = False
 
         for m in modifiers:
             if "title".startswith(m):
@@ -727,8 +778,20 @@ class QueryParser:
                 linkto = True
             elif "language".startswith(m):
                 lang = True
+            elif "category".startswith(m):
+                category = True
 
-        if lang:
+        # oh, let's better call xapian if we encouter this nasty regexp ;)
+        if not category:
+            cat_re = re.compile(r'----\(-\*\)\(\\r\)\?\\n\)\(\.\*\)Category(.*)\\b', re.U)
+            cat_match = cat_re.search(text)
+            if cat_match:
+                text = cat_match.groups()[0]
+                category = True
+
+        if category:
+            obj = CategorySearch(text, use_re=False, case=case)
+        elif lang:
             obj = LanguageSearch(text, use_re=regex, case=False)
         elif linkto:
             obj = LinkSearch(text, use_re=regex, case=case)

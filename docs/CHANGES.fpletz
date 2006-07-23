@@ -30,6 +30,8 @@ Branch moin/1.6-xapian-fpletz
     * Faster search thanks to Xapian
     * Searching for languages with new prefix lang/language, i.e. lang:de
       Note: Currently only available when Xapian is used
+    * CategorySearch with prefix category or with the regexp previously
+      used (autodetected as CategorySearch)
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
@@ -186,4 +188,7 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       terms and run _moinSearch over the relevant pages with the same
       query.
     * Indexing of categories
+
+2006-07-23
+    * CategorySearch is live
 
