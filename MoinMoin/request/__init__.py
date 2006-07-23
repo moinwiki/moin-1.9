@@ -546,7 +546,6 @@ class RequestBase(object):
         # during the rendering of a page by lang macros
         self.current_lang = self.cfg.language_default
 
-        self._all_pages = None
         # caches unique ids
         self._page_ids = {}
         # keeps track of pagename/heading combinations
