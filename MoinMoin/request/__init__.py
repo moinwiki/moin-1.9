@@ -887,40 +887,33 @@ class RequestBase(object):
                     break
         return forbidden
 
-    def setup_args(self, form=None):
+    def setup_args(self):
         """ Return args dict 
         First, we parse the query string (usually this is used in GET methods,
         but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
         Second, we update what we got in first step by the stuff we get from
         the form (or by a POST). We invoke _setup_args_from_cgi_form to handle
         possible file uploads.
-        
-        Warning: calling with a form might fail, depending on the type of the
-        request! Only the request knows which kind of form it can handle.
-        
-        TODO: The form argument should be removed in 1.5.
         """
         args = cgi.parse_qs(self.query_string, keep_blank_values=1)
         args = self.decodeArgs(args)
-        # if we have form data (e.g. in a POST), those override the stuff we already have:
-        if form is not None or self.request_method == 'POST':
-            postargs = self._setup_args_from_cgi_form(form)
+        # if we have form data (in a POST), those override the stuff we already have:
+        if self.request_method == 'POST':
+            postargs = self._setup_args_from_cgi_form()
             args.update(postargs)
         return args
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
-        
-        Create the args from a standard cgi.FieldStorage or from given form.
-        Each key contain a list of values.
+
+        Create the args from a given form. Each key contain a list of values.
+        This method usually gets overridden in classes derived from this - it
+        is their task to call this method with an appropriate form parameter.
 
         @param form: a cgi.FieldStorage
         @rtype: dict
         @return: dict with form keys, each contains a list of values
         """
-        if form is None:
-            form = cgi.FieldStorage()
-
         args = {}
         for key in form:
             values = form[key]

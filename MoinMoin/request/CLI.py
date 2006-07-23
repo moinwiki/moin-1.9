@@ -30,6 +30,12 @@ class Request(RequestBase):
         self.cfg.caching_formats = [] # don't spoil the cache
         self.initTheme() # usually request.run() does this, but we don't use it
 
+    def _setup_args_from_cgi_form(self):
+        """ Override to create cli form """
+        #form = cgi.FieldStorage()
+        #return RequestBase._setup_args_from_cgi_form(self, form)
+        return {}
+
     def read(self, n=None):
         """ Read from input stream. """
         if n is None:

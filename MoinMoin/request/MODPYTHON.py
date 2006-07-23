@@ -76,15 +76,14 @@ class Request(RequestBase):
 
         RequestBase.fixURI(self, env)
 
-    def _setup_args_from_cgi_form(self, form=None):
+    def _setup_args_from_cgi_form(self):
         """ Override to use mod_python.util.FieldStorage 
         
-        Its little different from cgi.FieldStorage, so we need to
+        It's little different from cgi.FieldStorage, so we need to
         duplicate the conversion code.
         """
         from mod_python import util
-        if form is None:
-            form = util.FieldStorage(self.mpyreq)
+        form = util.FieldStorage(self.mpyreq)
 
         args = {}
         for key in form.keys():

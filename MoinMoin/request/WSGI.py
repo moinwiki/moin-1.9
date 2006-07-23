@@ -6,7 +6,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os
+import sys, os, cgi
 
 from MoinMoin import config
 from MoinMoin.request import RequestBase
@@ -30,12 +30,11 @@ class Request(RequestBase):
         except Exception, err:
             self.fail(err)
 
-    def setup_args(self, form=None):
+    def setup_args(self):
         # TODO: does this include query_string args for POST requests?
         # see also how CGI works now
-        if form is None:
-            form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
-        return self._setup_args_from_cgi_form(form)
+        form = cgi.FieldStorage(fp=self.stdin, environ=self.env, keep_blank_values=1)
+        return RequestBase._setup_args_from_cgi_form(self, form)
 
     def read(self, n=None):
         if n is None:

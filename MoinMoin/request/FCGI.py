@@ -32,11 +32,9 @@ class Request(RequestBase):
         except Exception, err:
             self.fail(err)
 
-    def _setup_args_from_cgi_form(self, form=None):
+    def _setup_args_from_cgi_form(self):
         """ Override to use FastCGI form """
-        if form is None:
-            form = self.fcgform
-        return RequestBase._setup_args_from_cgi_form(self, form)
+        return RequestBase._setup_args_from_cgi_form(self, self.fcgform)
 
     def read(self, n=None):
         """ Read from input stream. """
