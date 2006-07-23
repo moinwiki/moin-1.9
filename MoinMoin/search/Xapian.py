@@ -320,11 +320,17 @@ class Index(BaseIndex):
     def _get_categories(self, page):
         body = page.get_raw_body()
 
-        sep = re.search(r'----*\r?\n', body)
-        if not sep:
+        prev, next = (0, 1)
+        pos = 0
+        while next:
+            if next != 1:
+                pos += next.end()
+            prev, next = next, re.search(r'----*\r?\n', body[pos:])
+
+        if not prev or prev == 1:
             return []
-        
-        return re.findall('Category(.*)\r?\n', body[sep.end():])
+
+        return re.findall(r'Category([^\s]+)', body[pos:])
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
