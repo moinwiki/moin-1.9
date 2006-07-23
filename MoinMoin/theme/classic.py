@@ -8,7 +8,7 @@
     If you want modified behaviour, just override the stuff you
     want to change in the child class.
 
-    @copyright: 2003 by ThomasWaldmann (LinuxWiki:ThomasWaldmann)
+    @copyright: 2003-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -194,13 +194,11 @@ class Theme(ThemeBase):
                 title = Page(request, action).split_title(request, force=1)
                 # Use translated version if available
                 title = _(title, formatted=False)
-                params = '%s?action=%s' % (d['q_page_name'], action)
-                link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
+                link = page.link_to(request, text=title, querystr={'action': action}, rel='nofollow')
                 html.append(link)
 
         title = _("DeleteCache", formatted=False)
-        params = '%s?action=%s' % (d['page_name'], 'refresh')
-        link = wikiutil.link_tag(request, params, title, request.formatter, rel='nofollow')
+        link = page.link_to(request, text=title, querystr={'action': 'refresh'}, rel='nofollow')
 
         cache = caching.CacheEntry(request, page, page.getFormatterName(), scope='item')
         date = request.user.getFormattedDateTime(cache.mtime())
