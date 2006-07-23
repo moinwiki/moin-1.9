@@ -330,7 +330,8 @@ class Index(BaseIndex):
         if not prev or prev == 1:
             return []
 
-        return re.findall(r'Category([^\s]+)', body[pos:])
+        return [cat.lower()
+                for cat in re.findall(r'Category([^\s]+)', body[pos:])]
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
