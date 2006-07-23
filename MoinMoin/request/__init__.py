@@ -1091,18 +1091,21 @@ space between words. Group page name is not allowed.""") % self.user.name
                 else:
                     self.page = Page(self, pagename)
 
+                msg = None
                 # Complain about unknown actions
                 if not action_name in self.getKnownActions():
-                    self.http_headers()
-                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action_name))
+                    msg = _("Unknown action %(action_name)s.") % {
+                            'action_name': wikiutil.escape(action_name), }
 
                 # Disallow non available actions
                 elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
-                    # Send page with error
-                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action_name)
+                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                            'action_name': wikiutil.escape(action_name), }
                     if not self.user.valid:
                         # Suggest non valid user to login
                         msg += " " + _("Login and try again.", formatted=0)
+
+                if msg:
                     self.page.send_page(self, msg=msg)
 
                 # Try action
