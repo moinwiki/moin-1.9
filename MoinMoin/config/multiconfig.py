@@ -295,7 +295,6 @@ reStructuredText Quick Reference
     xapian_search = False # disabled until xapian is finished
     xapian_index_dir = None
     xapian_stemming = True
-    search_results_per_page = 10
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
@@ -494,7 +493,7 @@ reStructuredText Quick Reference
             self._config_check()
 
         # define directories
-        self.moinmoin_dir = os.path.abspath(os.path.dirname(__file__))
+        self.moinmoin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
         data_dir = os.path.normpath(self.data_dir)
         self.data_dir = data_dir
         for dirname in ('user', 'cache', 'plugin'):

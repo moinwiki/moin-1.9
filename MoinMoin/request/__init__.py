@@ -265,7 +265,7 @@ class RequestBase(object):
     def _load_multi_cfg(self):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
-            from MoinMoin import multiconfig
+            from MoinMoin.config import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
 
     def setAcceptedCharsets(self, accept_charset):
@@ -546,7 +546,6 @@ class RequestBase(object):
         # during the rendering of a page by lang macros
         self.current_lang = self.cfg.language_default
 
-        self._all_pages = None
         # caches unique ids
         self._page_ids = {}
         # keeps track of pagename/heading combinations
@@ -887,40 +886,33 @@ class RequestBase(object):
                     break
         return forbidden
 
-    def setup_args(self, form=None):
+    def setup_args(self):
         """ Return args dict 
         First, we parse the query string (usually this is used in GET methods,
         but TwikiDraw uses ?action=AttachFile&do=savedrawing plus posted stuff).
         Second, we update what we got in first step by the stuff we get from
         the form (or by a POST). We invoke _setup_args_from_cgi_form to handle
         possible file uploads.
-        
-        Warning: calling with a form might fail, depending on the type of the
-        request! Only the request knows which kind of form it can handle.
-        
-        TODO: The form argument should be removed in 1.5.
         """
         args = cgi.parse_qs(self.query_string, keep_blank_values=1)
         args = self.decodeArgs(args)
-        # if we have form data (e.g. in a POST), those override the stuff we already have:
-        if form is not None or self.request_method == 'POST':
-            postargs = self._setup_args_from_cgi_form(form)
+        # if we have form data (in a POST), those override the stuff we already have:
+        if self.request_method == 'POST':
+            postargs = self._setup_args_from_cgi_form()
             args.update(postargs)
         return args
 
     def _setup_args_from_cgi_form(self, form=None):
         """ Return args dict from a FieldStorage
-        
-        Create the args from a standard cgi.FieldStorage or from given form.
-        Each key contain a list of values.
+
+        Create the args from a given form. Each key contain a list of values.
+        This method usually gets overridden in classes derived from this - it
+        is their task to call this method with an appropriate form parameter.
 
         @param form: a cgi.FieldStorage
         @rtype: dict
         @return: dict with form keys, each contains a list of values
         """
-        if form is None:
-            form = cgi.FieldStorage()
-
         args = {}
         for key in form:
             values = form[key]
@@ -1098,18 +1090,21 @@ space between words. Group page name is not allowed.""") % self.user.name
                 else:
                     self.page = Page(self, pagename)
 
+                msg = None
                 # Complain about unknown actions
                 if not action_name in self.getKnownActions():
-                    self.http_headers()
-                    self.write(u'<html><body><h1>Unknown action %s</h1></body>' % wikiutil.escape(action_name))
+                    msg = _("Unknown action %(action_name)s.") % {
+                            'action_name': wikiutil.escape(action_name), }
 
                 # Disallow non available actions
                 elif action_name[0].isupper() and not action_name in self.getAvailableActions(self.page):
-                    # Send page with error
-                    msg = _("You are not allowed to do %s on this page.") % wikiutil.escape(action_name)
+                    msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                            'action_name': wikiutil.escape(action_name), }
                     if not self.user.valid:
                         # Suggest non valid user to login
                         msg += " " + _("Login and try again.", formatted=0)
+
+                if msg:
                     self.page.send_page(self, msg=msg)
 
                 # Try action

@@ -9,7 +9,6 @@
 import os, re, urllib, cgi
 import codecs, types
 
-from MoinMoin.support import difflib
 from MoinMoin import util, version, config
 from MoinMoin.util import pysupport, filesys
 
@@ -1449,76 +1448,6 @@ def containsConflictMarker(text):
     """ Returns true if there is a conflict marker in the text. """
     return "/!\ '''Edit conflict" in text
 
-def linediff(oldlines, newlines, **kw):
-    """
-    Find changes between oldlines and newlines.
-    
-    @param oldlines: list of old text lines
-    @param newlines: list of new text lines
-    @keyword ignorews: if 1: ignore whitespace
-    @rtype: list
-    @return: lines like diff tool does output.
-    """
-    false = lambda s: None
-    if kw.get('ignorews', 0):
-        d = difflib.Differ(false)
-    else:
-        d = difflib.Differ(false, false)
-
-    lines = list(d.compare(oldlines, newlines))
-
-    # return empty list if there were no changes
-    changed = 0
-    for l in lines:
-        if l[0] != ' ':
-            changed = 1
-            break
-    if not changed: return []
-
-    if not "we want the unchanged lines, too":
-        if "no questionmark lines":
-            lines = filter(lambda line: line[0] != '?', lines)
-        return lines
-
-
-    # calculate the hunks and remove the unchanged lines between them
-    i = 0              # actual index in lines
-    count = 0          # number of unchanged lines
-    lcount_old = 0     # line count old file
-    lcount_new = 0     # line count new file
-    while i < len(lines):
-        marker = lines[i][0]
-        if marker == ' ':
-            count = count + 1
-            i = i + 1
-            lcount_old = lcount_old + 1
-            lcount_new = lcount_new + 1
-        elif marker in ['-', '+']:
-            if (count == i) and count > 3:
-                lines[:i-3] = []
-                i = 4
-                count = 0
-            elif count > 6:
-                # remove lines and insert new hunk indicator
-                lines[i-count+3:i-3] = ['@@ -%i, +%i @@\n' %
-                                        (lcount_old, lcount_new)]
-                i = i - count + 8
-                count = 0
-            else:
-                count = 0
-                i += 1
-            if marker == '-': lcount_old = lcount_old + 1
-            else: lcount_new = lcount_new + 1
-        elif marker == '?':
-            lines[i:i+1] = []
-
-    # remove unchanged lines a the end
-    if count > 3:
-        lines[-count+3:] = []
-
-    return lines
-
-
 def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     """
     Calculate the "diff" between two page contents.
@@ -1532,10 +1461,11 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     @return: lines of diff output
     """
     from MoinMoin.Page import Page
+    from MoinMoin.util import diff_text
     lines1 = Page(request, pagename1, rev=rev1).getlines()
     lines2 = Page(request, pagename2, rev=rev2).getlines()
 
-    lines = linediff(lines1, lines2, **kw)
+    lines = diff_text.diff(lines1, lines2, **kw)
     return lines
 
 
