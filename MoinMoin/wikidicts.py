@@ -26,7 +26,7 @@ from MoinMoin.logfile.editlog import EditLog
 
 # Version of the internal data structure which is pickled
 # Please increment if you have changed the structure
-DICTS_PICKLE_VERSION = 4
+DICTS_PICKLE_VERSION = 5
 
 
 class DictBase:
@@ -44,12 +44,17 @@ class DictBase:
         """
         self.name = name
 
-        self.regex = re.compile(self.regex, re.MULTILINE | re.UNICODE)
+        self.initRegex()
 
         # Get text from page named 'name'
         p = Page.Page(request, name)
         text = p.get_raw_body()
         self.initFromText(text)
+
+    def initRegex(cls):
+        """ Make it a class attribute to avoid it being pickled. """
+        cls.regex = re.compile(cls.regex, re.MULTILINE | re.UNICODE)
+    initRegex = classmethod(initRegex)
 
     def initFromText(self, text):
         raise NotImplementedError('sub classes should override this')

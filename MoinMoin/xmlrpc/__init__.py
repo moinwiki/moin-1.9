@@ -219,10 +219,39 @@ class XmlRpcBase:
         """ Get all pages readable by current user
 
         @rtype: list
-        @return: a list of all pages. The result is a list of utf-8 strings.
+        @return: a list of all pages.
         """
-        pagelist = self.request.rootpage.getPageList()
-        return map(self._outstr, pagelist)
+
+        # the official WikiRPC interface is implemented by the extended method
+        # as well
+        return self.xmlrpc_getAllPagesEx()
+
+
+    def xmlrpc_getAllPagesEx(self, opts=None):
+        """ Get all pages readable by current user. Not an WikiRPC method.
+
+        @param opts: dictionary that can contain the following arguments:
+                include_system:: set it to false if you do not want to see system pages
+                include_revno:: set it to True if you want to have lists with [pagename, revno]
+                include_deleted:: set it to True if you want to include deleted pages
+        @rtype: list
+        @return: a list of all pages.
+        """
+        options = {"include_system": True, "include_revno": False, "include_deleted": False}
+        if opts is not None:
+            options.update(opts)
+
+        if not options["include_system"]:
+            filter = lambda name: not wikiutil.isSystemPage(self.request, name)
+        else:
+            filter = lambda name: True
+
+        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
+        
+        if options['include_revno']:
+            return [[self._outstr(x), Page(self.request, x).get_real_rev()] for x in pagelist]
+        else:
+            return [self._outstr(x) for x in pagelist]
 
     def xmlrpc_getRecentChanges(self, date):
         """ Get RecentChanges since date
@@ -498,6 +527,7 @@ class XmlRpcBase:
         from MoinMoin import version
         return (version.project, version.release, version.revision)
 
+
     # authorization methods
 
     def xmlrpc_getAuthToken(self, username, password, *args):
@@ -518,6 +548,9 @@ class XmlRpcBase:
             return "SUCCESS"
         else:
             return xmlrpclib.Fault("INVALID", "Invalid token.")
+
+
+    # methods for wiki synchronization
 
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
@@ -594,9 +627,13 @@ class XmlRpcBase:
             @param interwiki_name: Used to build the interwiki tag.
         """
         from MoinMoin.util.bdiff import decompress, patch
+        from MoinMoin.wikisync import TagStore
+        LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
 
         pagename = self._instr(pagename)
 
+        comment = u"Remote - %r" % interwiki_name
+        
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
             return self.notAllowedFault()
@@ -604,10 +641,10 @@ class XmlRpcBase:
         # XXX add locking here!
 
         # current version of the page
-        currentpage = Page(self.request, pagename)
+        currentpage = PageEditor(self.request, pagename, do_editor_backup=0)
 
         if currentpage.get_real_rev() != last_remote_rev:
-            return xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
+            return LASTREV_INVALID
 
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
@@ -619,11 +656,19 @@ class XmlRpcBase:
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
 
         # write page
-        # XXX ...
+        try:
+            currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
+        except PageEditor.EditConflict:
+            return LASTREV_INVALID
 
-        # XXX add a tag (interwiki_name, local_rev, current rev) to the page
-        # XXX return current rev
-        # XXX finished
+        current_rev = currentpage.get_real_rev()
+        
+        tags = TagStore(currentpage)
+        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev)
+
+        # XXX unlock page
+
+        return current_rev
 
 
     # XXX BEGIN WARNING XXX
