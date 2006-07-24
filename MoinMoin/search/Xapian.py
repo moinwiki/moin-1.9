@@ -214,6 +214,7 @@ class Index(BaseIndex):
     
     def _do_queued_updates(self, request, amount=5):
         """ Assumes that the write lock is acquired """
+        self.touch()
         writer = xapidx.Index(self.dir, True)
         writer.configure(self.prefixMap, self.indexValueMap)
         pages = self.queue.pages()[:amount]
@@ -466,6 +467,7 @@ class Index(BaseIndex):
             mode = 'add'
 
         try:
+            self.touch()
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)

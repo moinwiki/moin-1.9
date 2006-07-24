@@ -295,6 +295,7 @@ reStructuredText Quick Reference
     xapian_search = False # disabled until xapian is finished
     xapian_index_dir = None
     xapian_stemming = True
+    search_results_per_page = 10
 
     mail_login = None # or "user pwd" if you need to use SMTP AUTH
     mail_sendmail = None # "/usr/sbin/sendmail -t -i" to not use SMTP, but sendmail
