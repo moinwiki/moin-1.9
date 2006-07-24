@@ -57,6 +57,6 @@ def execute(macro, needle):
     results = search.searchPages(request, needle)
     results.sortByPagename()
 
-    return results.pageList(request, macro.formatter)
+    return results.pageList(request, macro.formatter, paging=False)
 
 

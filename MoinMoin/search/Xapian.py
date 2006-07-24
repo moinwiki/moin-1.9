@@ -170,7 +170,8 @@ class Index(BaseIndex):
                        #  the D term, and changing the last digit to a '2' if it's a '3')
                        #X   longer prefix for user-defined use
         'linkto': 'XLINKTO', # this document links to that document
-        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in 
+        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
+        'category': 'XCAT', # category this document belongs to
                        #Y   year (four digits)
     }
 
@@ -249,7 +250,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(mtime)
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+                enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
                 if docs:
                     doc = docs[0] # there should be only one
                     uid = doc['uid']
@@ -316,6 +317,22 @@ class Index(BaseIndex):
         # return actual lang and lang to stem in
         return (lang, default_lang)
 
+    def _get_categories(self, page):
+        body = page.get_raw_body()
+
+        prev, next = (0, 1)
+        pos = 0
+        while next:
+            if next != 1:
+                pos += next.end()
+            prev, next = next, re.search(r'----*\r?\n', body[pos:])
+
+        if not prev or prev == 1:
+            return []
+
+        return [cat.lower()
+                for cat in re.findall(r'Category([^\s]+)', body[pos:])]
+
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
@@ -331,6 +348,7 @@ class Index(BaseIndex):
         itemid = "%s:%s" % (wikiname, pagename)
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
+        categories = self._get_categories(page)
         updated = False
 
         if mode == 'update':
@@ -338,7 +356,7 @@ class Index(BaseIndex):
             # you can just call database.replace_document(uid_term, doc)
             # -> done in xapwrap.index.Index.index()
             query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-            docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+            enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
             if docs:
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
@@ -362,6 +380,8 @@ class Index(BaseIndex):
                     xapdoc.Keyword('stem_lang', stem_language)]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
+            for category in categories:
+                xkeywords.append(xapdoc.Keyword('category', category))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
@@ -387,7 +407,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
-                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
                 if debug: request.log("##%r %r" % (filename, docs))
                 if docs:
                     doc = docs[0] # there should be only one
