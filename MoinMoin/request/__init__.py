@@ -618,18 +618,6 @@ class RequestBase(object):
             return ''
         return self.script_name
 
-    def getPageNameFromQueryString(self):
-        """ Try to get pagename from the query string
-        
-        Support urls like http://netloc/script/?page_name. Allow
-        solving path_info encoding problems by calling with the page
-        name as a query.
-        """
-        pagename = wikiutil.url_unquote(self.query_string, want_unicode=False)
-        pagename = self.decodePagename(pagename)
-        pagename = self.normalizePagename(pagename)
-        return pagename
-
     def getKnownActions(self):
         """ Create a dict of avaiable actions
 
@@ -1081,8 +1069,6 @@ space between words. Group page name is not allowed.""") % self.user.name
 
             # 3. Or handle action
             else:
-                if not pagename and self.query_string:
-                    pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
                 # Use localized FrontPage if pagename is empty
                 if not pagename:
