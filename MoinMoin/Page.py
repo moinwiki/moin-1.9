@@ -1389,7 +1389,11 @@ class Page:
         import MoinMoin
         if hasattr(MoinMoin, '__loader__'):
             __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
-        exec code
+
+        try:
+            exec code
+        except "CacheNeedsUpdate": # convert the exception
+            raise Exception("CacheNeedsUpdate")
 
     def loadCache(self, request):
         """ Return page content cache or raises 'CacheNeedsUpdate' """
