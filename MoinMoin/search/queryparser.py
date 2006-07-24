@@ -428,8 +428,15 @@ class TitleSearch(BaseExpression):
     def xapian_term(self, request, allterms):
         if self.use_re:
             # basic regex matching per term
-            terms = [term for term in allterms() if
-                    self.search_re.findall(term[1:]) and term[0] == 'S']
+            terms = []
+            found = False
+            for term in allterms():
+                if term[:4] == 'XFT:':
+                    found = True
+                    if self.search_re.findall(term[4:]):
+                        terms.append(term)
+                elif found:
+                    break
             if not terms:
                 return Query()
             queries = [Query(Query.OP_OR, terms)]
