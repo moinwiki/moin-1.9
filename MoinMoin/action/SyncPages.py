@@ -80,7 +80,7 @@ class MoinRemoteWiki(RemoteWiki):
 
     # Methods implementing the RemoteWiki interface
     def getInterwikiName(self):
-        return self.connection.interwikiName()
+        return self.connection.interwikiName()[0]
 
     def getPages(self):
         pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})

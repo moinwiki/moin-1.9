@@ -20,7 +20,8 @@
     when really necessary (like for transferring binary files like
     attachments maybe).
 
-    @copyright: 2003-2005 by Thomas Waldmann
+    @copyright: 2003-2006 MoinMoin:ThomasWaldmann
+    @copyright: 2004-2006 MoinMoin:AlexanderSchremmer
     @license: GNU GPL, see COPYING for details
 """
 from MoinMoin.util import pysupport
@@ -608,12 +609,13 @@ class XmlRpcBase:
         return {"conflict": conflict, "diff": diffblob, "diffversion": 1, "current": currentpage.get_real_rev()}
 
     def xmlrpc_interwikiName(self):
-        """ Returns the interwiki name of the current wiki. """
+        """ Returns the interwiki name and the IWID of the current wiki. """
         name = self.request.cfg.interwikiname
+        iwid = self.request.cfg.iwid
         if name is None:
-            return None
+            return [None, iwid]
         else:
-            return self._outstr(name)
+            return [self._outstr(name), iwid]
 
     def xmlrpc_mergeChanges(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
