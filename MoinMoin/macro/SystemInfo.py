@@ -17,6 +17,7 @@ from MoinMoin import wikiutil, version
 from MoinMoin import action, macro, parser
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.Page import Page
+from MoinMoin.util import timefuncs
 
 def execute(Macro, args):
     """ show SystemInfo: wiki infos, wiki sw version, space usage infos """
@@ -111,11 +112,15 @@ def execute(Macro, args):
     row(_('Local extension parsers'),
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
 
-    state = (_('Disabled'), _('Enabled'))
-    idxState = (_('index available'), _('index unavailable'))
     from MoinMoin.search.builtin import Search
-    row(_('Xapian search'), '%s, %s' % (state[request.cfg.xapian_search],
-                Search._xapianIndex(request) and idxState[0] or idxState[1]))
+    xapState = (_('Disabled'), _('Enabled'))
+    idxState = (_('index available'), _('index unavailable'))
+    idx = Search._xapianIndex(request)
+    available = idx and idxState[0] or idxState[1]
+    mtime = _('last modified: %s') % (idx and
+            timefuncs.formathttpdate(idx.mtime()) or _('unavailable'))
+    row(_('Xapian search'), '%s, %s, %s'
+            % (xapState[request.cfg.xapian_search], available, mtime))
 
     row(_('Active threads'), t_count or 'N/A')
     buf.write(u'</dl>')
