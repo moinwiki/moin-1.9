@@ -172,6 +172,7 @@ class Index(BaseIndex):
         'linkto': 'XLINKTO', # this document links to that document
         'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
         'category': 'XCAT', # category this document belongs to
+        'full_title': 'XFT', # full title (for regex)
                        #Y   year (four digits)
     }
 
@@ -378,7 +379,8 @@ class Index(BaseIndex):
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
-                    xapdoc.Keyword('stem_lang', stem_language)]
+                    xapdoc.Keyword('stem_lang', stem_language),
+                    xapdoc.Keyword('full_title', pagename.lower())]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
