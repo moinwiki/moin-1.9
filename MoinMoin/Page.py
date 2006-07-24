@@ -1036,7 +1036,7 @@ class Page:
                 except wikiutil.PluginMissingError:
                     pass
             else:
-                raise "Plugin missing error!" # XXX what now?
+                raise NotImplementedError("Plugin missing error!") # XXX what now?
         request.formatter = self.formatter
         self.formatter.setPage(self)
         if self.hilite_re:
@@ -1247,7 +1247,7 @@ class Page:
             except wikiutil.PluginMissingError:
                 pass
         else:
-            raise "No matching parser" # XXX what do we use if nothing at all matches?
+            raise NotImplementedError("No matching parser") # XXX what do we use if nothing at all matches?
             
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1339,7 +1339,7 @@ class Page:
                     except wikiutil.PluginMissingError:
                         pass
                 else:
-                    raise "no matching parser" # XXX what now?
+                    raise NotImplementedError("no matching parser") # XXX what now?
             return getattr(parser, 'caching', False)
         return False
 
@@ -1362,11 +1362,15 @@ class Page:
             try:
                 code = self.loadCache(request)
                 self.execute(request, parser, code)
-            except 'CacheNeedsUpdate':
+            except Exception, (msg, ):
+                if msg != 'CacheNeedsUpdate':
+                    raise
                 try:
                     code = self.makeCache(request, parser)
                     self.execute(request, parser, code)
-                except 'CacheNeedsUpdate':
+                except Exception, (msg, ):
+                    if msg != 'CacheNeedsUpdate':
+                        raise
                     request.log('page cache failed after creation')
                     self.format(parser)
         
@@ -1392,19 +1396,21 @@ class Page:
         cache = caching.CacheEntry(request, self, self.getFormatterName(), scope='item')
         attachmentsPath = self.getPagePath('attachments', check_create=0)
         if cache.needsUpdate(self._text_filename(), attachmentsPath):
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
         
         import marshal
         try:
             return marshal.loads(cache.content())
+        except "CacheNeedsUpdate": # convert old exception into a new one
+            raise Exception('CacheNeedsUpdate')
         except (EOFError, ValueError, TypeError):
             # Bad marshal data, must update the cache.
             # See http://docs.python.org/lib/module-marshal.html
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
         except Exception, err:
             request.log('fail to load "%s" cache: %s' % 
                         (self.page_name, str(err)))
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
 
     def makeCache(self, request, parser):
         """ Format content into code, update cache and return code """
