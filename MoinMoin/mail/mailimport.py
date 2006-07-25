@@ -1,0 +1,270 @@
+"""
+    MoinMoin - E-Mail Import into wiki
+    
+    Just call this script with the URL of the wiki as a single argument
+    and feed the mail into stdin.
+
+    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @license: GNU GPL, see COPYING for details.
+"""
+
+import os, sys, re, time
+import email
+from email.Utils import parseaddr, parsedate_tz, mktime_tz
+
+from MoinMoin import user, wikiutil, config
+from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
+from MoinMoin.Page import Page
+from MoinMoin.PageEditor import PageEditor
+from MoinMoin.request.CLI import Request as RequestCLI
+# python, at least up to 2.4, ships a broken parser for headers
+from MoinMoin.support.HeaderFixed import decode_header
+
+input = sys.stdin
+
+debug = False
+
+re_subject = re.compile(r"\[([^\]]*)\]")
+re_sigstrip = re.compile("\r?\n-- \r?\n.*$", re.S)
+
+class attachment(object):
+    """ Represents an attachment of a mail. """
+    def __init__(self, filename, mimetype, data):
+        self.filename = filename
+        self.mimetype = mimetype
+        self.data = data
+
+    def __repr__(self):
+        return "<attachment filename=%r mimetype=%r size=%i bytes>" % (
+            self.filename, self.mimetype, len(self.data))
+
+class ProcessingError(Exception):
+    pass
+
+def log(text):
+    if debug:
+        print >>sys.stderr, text
+
+def decode_2044(header):
+    """ Decodes header field. See RFC 2044. """
+    chunks = decode_header(header)
+    chunks_decoded = []
+    for i in chunks:
+        chunks_decoded.append(i[0].decode(i[1] or 'ascii'))
+    return u''.join(chunks_decoded).strip()
+
+def process_message(message):
+    """ Processes the read message and decodes attachments. """
+    attachments = []
+    html_data = []
+    text_data = []
+
+    to_addr = parseaddr(decode_2044(message['To']))
+    from_addr = parseaddr(decode_2044(message['From']))
+    cc_addr = parseaddr(decode_2044(message['Cc']))
+    bcc_addr = parseaddr(decode_2044(message['Bcc']))
+
+    subject = decode_2044(message['Subject'])
+    date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
+
+    log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addr, from_addr, subject))
+
+    for part in message.walk():
+        log(" Part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
+        ct = part.get_content_type()
+        cs = part.get_content_charset() or "latin1"
+        payload = part.get_payload(None, True)
+
+        fn = part.get_filename()
+        if fn is not None and fn.startswith("=?"): # heuristics ...
+            fn = decode_2044(fn)
+
+        if fn is None and part["Content-Disposition"] is not None and "attachment" in part["Content-Disposition"]:
+            # this doesn't catch the case where there is no content-disposition but there is a file to offer to the user
+            # i hope that this can be only found in mails that are older than 10 years,
+            # so I won't care about it here
+            fn = part["Content-Description"] or "NoName"
+        if fn:
+            a = attachment(fn, ct, payload)
+            attachments.append(a)
+        else:
+            if ct == 'text/plain':
+                text_data.append(payload.decode(cs))
+                log(repr(payload.decode(cs)))
+            elif ct == 'text/html':
+                html_data.append(payload.decode(cs))
+            elif not part.is_multipart():
+                log("Unknown mail part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
+
+    return {'text': u"".join(text_data), 'html': u"".join(html_data),
+            'attachments': attachments,
+            'to_addr': to_addr, 'from_addr': from_addr, 'cc_addr': cc_addr, 'bcc_addr': bcc_addr,
+            'subject': subject, 'date': date}
+
+def get_pagename_content(msg, email_subpage_template, wiki_address):
+    """ Generates pagename and content according to the specification
+        that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
+
+    generate_summary = False
+    choose_html = True
+
+    pagename_tpl = ""
+    for addr in ('to_addr', 'cc_addr', 'bcc_addr'):
+        if msg[addr][1].strip().lower() == wiki_address:
+            pagename_tpl = msg[addr][0]
+
+    if not pagename_tpl:
+        m = re_subject.match(msg['subject'])
+        if m:
+            pagename_tpl = m.group(1)
+    else:
+        # special fix for outlook users :-)
+        if pagename_tpl[-1] == pagename_tpl[0] == "'":
+            pagename_tpl = pagename_tpl[1:-1]
+
+    if pagename_tpl.endswith("/"):
+        pagename_tpl += email_subpage_template
+
+    # last resort
+    if not pagename_tpl:
+        pagename_tpl = email_subpage_template
+
+    # rewrite using string.formatter when python 2.4 is mandatory
+    pagename = (pagename_tpl.replace("$from", msg['from_addr'][0]).
+                replace("$date", msg['date']).
+                replace("$subject", msg['subject']))
+
+    if pagename.startswith("+ ") and "/" in pagename:
+        generate_summary = True
+        pagename = pagename[1:].lstrip()
+
+    if choose_html and msg['html']:
+        content = "{{{#!html\n%s\n}}}" % msg['html'].replace("}}}", "} } }")
+    else:
+        # strip signatures ...
+        content = re_sigstrip.sub("", msg['text'])
+
+    return {'pagename': pagename, 'content': content, 'generate_summary': generate_summary}
+
+def import_mail_from_string(request, string):
+    """ Reads an RFC 822 compliant message from a string and imports it
+        to the wiki. """
+    return import_mail_from_message(request, email.message_from_string(string))
+
+def import_mail_from_file(request, input):
+    """ Reads an RFC 822 compliant message from the file `input` and imports it to
+        the wiki. """
+
+    return import_mail_from_message(request, email.message_from_file(input))
+
+def import_mail_from_message(request, message):
+    """ Reads a message generated by the email package and imports it
+        to the wiki. """
+    msg = process_message(message)
+
+    email_subpage_template = request.cfg.mail_import_subpage_template
+    wiki_address = request.cfg.mail_import_wiki_address or request.cfg.mail_from
+
+    request.user = user.get_by_email_address(request, msg['from_addr'][1])
+
+    if not request.user:
+        raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
+
+    d = get_pagename_content(msg, email_subpage_template, wiki_address)
+    pagename = d['pagename']
+    generate_summary = d['generate_summary']
+
+    comment = u"Mail: '%s'" % (msg['subject'], )
+
+    page = PageEditor(request, pagename, do_editor_backup=0)
+
+    if not request.user.may.save(page, "", 0):
+        raise ProcessingError("Access denied for page %r" % pagename)
+
+    attachments = []
+
+    for att in msg['attachments']:
+        i = 0
+        while 1:
+            if i == 0:
+                fname = att.filename
+            else:
+                components = att.filename.split(".")
+                new_suffix = "-" + str(i)
+                # add the counter before the file extension
+                if len(components) > 1:
+                    fname = u"%s%s.%s" % (u".".join(components[:-1]), new_suffix, components[-1])
+                else:
+                    fname = att.filename + new_suffix
+            try:
+                # get the fname again, it might have changed
+                fname = add_attachment(request, pagename, fname, att.data)
+                attachments.append(fname)
+            except AttachmentAlreadyExists:
+                i += 1
+            else:
+                break
+
+    # build an attachment link table for the page with the e-mail
+    escape_link = lambda x: x.replace(" ", "%20")
+    attachment_links = [""] + [u"[attachment:%s attachment:%s]" % tuple([escape_link(u"%s/%s" % (pagename, x))] * 2) for x in attachments]
+
+    # assemble old page content and new mail body together
+    old_content = Page(request, pagename).get_raw_body()
+    if old_content:
+        new_content = u"%s\n-----\n%s" % (old_content, d['content'], )
+    else:
+        new_content = d['content']
+    new_content += "\n" + u"\n * ".join(attachment_links)
+
+    try:
+        page.saveText(new_content, 0, comment=comment)
+    except page.AccessDenied:
+        raise ProcessingError("Access denied for page %r" % pagename)
+
+    if generate_summary and "/" in pagename:
+        parent_page = u"/".join(pagename.split("/")[:-1])
+        old_content = Page(request, parent_page).get_raw_body().splitlines()
+
+        found_table = None
+        table_ends = None
+        for lineno, line in enumerate(old_content):
+            if line.startswith("## mail_overview") and old_content[lineno+1].startswith("||"):
+                found_table = lineno
+            elif found_table is not None and line.startswith("||"):
+                table_ends = lineno + 1
+            elif table_ends is not None and not line.startswith("||"):
+                break
+
+        table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
+                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                       )
+        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || ["%s"] || %s ||' % (
+            msg['from_addr'][0] or msg['from_addr'][1],
+            msg['to_addr'][0] or msg['to_addr'][1],
+            msg['subject'],
+            msg['date'],
+            pagename,
+            " ".join(attachment_links),
+            )
+        if found_table is not None:
+            content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
+        else:
+            content = "\n".join(old_content) + table_header + new_line
+
+        page = PageEditor(request, parent_page, do_editor_backup=0)
+        page.saveText(content, 0, comment=comment)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+    else:
+        url = 'localhost/'
+
+    request = RequestCLI(url=url)
+
+    try:
+        import_mail_from_file(request, input)
+    except ProcessingError, e:
+        print >>sys.stderr, "An error occured while processing the message:", e.args
+
