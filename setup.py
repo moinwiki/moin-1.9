@@ -219,6 +219,7 @@ only requiring a Python installation.
         'MoinMoin',
         'MoinMoin.action',
         'MoinMoin.auth',
+        'MoinMoin.config',
         'MoinMoin.converter',
         'MoinMoin.filter',
         'MoinMoin.formatter',
