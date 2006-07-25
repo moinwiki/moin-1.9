@@ -14,7 +14,7 @@
 
     Note that there are more config options than you'll find in
     the version of this file that is installed by default; see
-    the module MoinMoin.multiconfig for a full list of names and their
+    the module MoinMoin.config.multiconfig for a full list of names and their
     default values.
 
     Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
@@ -42,10 +42,10 @@
 wikis = [
     # Standalone server needs the port e.g. localhost:8000
     # Twisted server can now use the port, too.
-    
+
     # wikiname,     url regular expression (no protocol)
     # ---------------------------------------------------------------
-    ("mywiki",  r".*"),   # this is ok for a single wiki
+    ("mywiki", r".*"),   # this is ok for a single wiki
 
     # for multiple wikis, do something like this:
     #("moinmoin",    r"^moinmoin.wikiwikiweb.de/.*$"),
@@ -65,7 +65,7 @@ wikis = [
 # this is to get everything to sane defaults, so we need to change only what
 # we like to have different:
 
-from MoinMoin.multiconfig import DefaultConfig
+from MoinMoin.config.multiconfig import DefaultConfig
 
 # Now we subclass this DefaultConfig. This means that we inherit every setting
 # from the DefaultConfig, except those we explicitely define different.

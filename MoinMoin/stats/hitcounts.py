@@ -47,16 +47,17 @@ def linkto(pagename, request, params=''):
 
 
 def get_data(pagename, request, filterpage=None):
+    cache_days, cache_views, cache_edits = [], [], []
+    cache_date = 0
 
     # Get results from cache
     if filterpage:
         arena = Page(request, pagename)
+        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='item')
     else:
         arena = 'charts'
+        cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki')
 
-    cache_days, cache_views, cache_edits = [], [], []
-    cache_date = 0
-    cache = caching.CacheEntry(request, arena, 'hitcounts', scope='wiki')
     if cache.exists():
         try:
             cache_date, cache_days, cache_views, cache_edits = eval(cache.content())

@@ -64,7 +64,7 @@ class Request(RequestBase):
             return self.finish()
         RequestBase.run(self)
 
-    def setup_args(self, form=None):
+    def setup_args(self):
         """ Return args dict 
         
         Twisted already parsed args, including __filename__ hacking,

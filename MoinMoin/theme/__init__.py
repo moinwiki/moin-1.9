@@ -196,13 +196,13 @@ class ThemeBase:
         @rtype: string
         @return: interwiki html
         """
-        html = u''
         if self.request.cfg.show_interwiki:
-            # Show our interwikiname or Self (and link to page_front_page)
-            pagename = wikiutil.getFrontPage(self.request).page_name
-            pagename = wikiutil.quoteWikinameURL(pagename)
-            link = wikiutil.link_tag(self.request, pagename, self.request.cfg.interwikiname or 'Self')
+            page = wikiutil.getFrontPage(self.request)
+            text = self.request.cfg.interwikiname or 'Self'
+            link = page.link_to(self.request, text=text, rel='nofollow')
             html = u'<div id="interwiki"><span>%s</span></div>' % link
+        else:
+            html = u''
         return html
 
     def title(self, d):
@@ -1118,25 +1118,24 @@ actionsMenuInit('%(label)s');
             return self.disabledEdit()
 
         _ = self.request.getText
-        params = (wikiutil.quoteWikinameURL(page.page_name) +
-                  '?action=edit&amp;editor=')
+        querystr = {'action': 'edit'}
 
         guiworks = self.guiworks(page)
         if self.showBothEditLinks() and guiworks:
             text = _('Edit (Text)', formatted=False)
-            params = params + 'text'
+            querystr['editor'] = 'text'
             attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
         else:
             text = _('Edit', formatted=False)
             if guiworks:
                 # 'textonly' will be upgraded dynamically to 'guipossible' by JS
-                params = params + 'textonly'
+                querystr['editor'] = 'textonly'
                 attrs = {'name': 'editlink', 'rel': 'nofollow', }
             else:
-                params = params + 'text'
+                querystr['editor'] = 'text'
                 attrs = {'name': 'texteditlink', 'rel': 'nofollow', }
 
-        return wikiutil.link_tag(self.request, params, text, **attrs)
+        return page.link_to(self.request, text=text, querystr=querystr, **attrs)
 
     def showBothEditLinks(self):
         """ Return True if both edit links should be displayed """
@@ -1179,7 +1178,7 @@ var gui_editor_link_text = "%(text)s";
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Info', formatted=False),
-                            querystr='action=info', rel='nofollow')
+                            querystr={'action': 'info'}, id='info', rel='nofollow')
 
     def subscribeLink(self, page):
         """ Return subscribe/unsubscribe link to valid users
@@ -1195,8 +1194,7 @@ var gui_editor_link_text = "%(text)s";
             text = _("Unsubscribe", formatted=False)
         else:
             text = _("Subscribe", formatted=False)
-        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=subscribe'
-        return wikiutil.link_tag(self.request, params, text, self.request.formatter, rel='nofollow')
+        return page.link_to(self.request, text=text, querystr={'action': 'subscribe'}, id='subscribe', rel='nofollow')
 
     def quicklinkLink(self, page):
         """ Return add/remove quicklink link
@@ -1212,15 +1210,14 @@ var gui_editor_link_text = "%(text)s";
             text = _("Remove Link", formatted=False)
         else:
             text = _("Add Link", formatted=False)
-        params = wikiutil.quoteWikinameURL(page.page_name) + '?action=quicklink'
-        return wikiutil.link_tag(self.request, params, text, self.request.formatter, rel='nofollow')
+        return page.link_to(self.request, text=text, querystr={'action': 'quicklink'}, id='quicklink', rel='nofollow')
 
     def attachmentsLink(self, page):
         """ Return link to page attachments """
         _ = self.request.getText
         return page.link_to(self.request,
                             text=_('Attachments', formatted=False),
-                            querystr='action=AttachFile', rel='nofollow')
+                            querystr={'action': 'AttachFile'}, id='attachments', rel='nofollow')
 
     def startPage(self):
         """ Start page div with page language and direction

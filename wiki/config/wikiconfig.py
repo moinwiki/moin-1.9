@@ -15,7 +15,7 @@
 
     Note that there are more config options than you'll find in
     the version of this file that is installed by default; see
-    the module MoinMoin.multiconfig for a full list of names and their
+    the module MoinMoin.config.multiconfig for a full list of names and their
     default values.
 
     Also, the URL http://moinmoin.wikiwikiweb.de/HelpOnConfiguration has
@@ -25,7 +25,7 @@
     from the wikifarm directory instead! **
 """
 
-from MoinMoin.multiconfig import DefaultConfig
+from MoinMoin.config.multiconfig import DefaultConfig
 
 
 class Config(DefaultConfig):
