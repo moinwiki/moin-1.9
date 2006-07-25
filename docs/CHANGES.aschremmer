@@ -30,8 +30,11 @@ Branch moin/1.6-sync-aschremmer
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
-    * Python 2.5 compatibility fixes in the Page caching logic
-    * sre pickle issues in the wikidicts code
+    * Python 2.5 compatibility fixes in the Page caching logic (merged)
+    * sre pickle issues in the wikidicts code (merged)
+    * cgitb can hide particular names, this avoids information leaks
+      if the user files cannot be parsed for example
+    * Fixed User.__repr__ - it is insane to put the ID in there
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.

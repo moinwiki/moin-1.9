@@ -6,6 +6,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+# add names here to hide them in the cgitb traceback
+unsafe_names = ("id", "key", "val", "user_data", "enc_password")
+
 import os, time, sha, codecs
 
 try:
@@ -289,9 +292,9 @@ class User:
             self.language = 'en'
 
     def __repr__(self):
-        return "<%s.%s at 0x%x name:%r id:%s valid:%r>" % (
+        return "<%s.%s at 0x%x name:%r valid:%r>" % (
             self.__class__.__module__, self.__class__.__name__,
-            id(self), self.name, self.id, self.valid)
+            id(self), self.name, self.valid)
 
     def make_id(self):
         """ make a new unique user id """
