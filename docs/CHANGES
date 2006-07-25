@@ -194,7 +194,8 @@ Version 1.6.current:
       at FCKeditor development or browser development.
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
-      You need to change this in you wikiconfig.py or farmconfig.py file.
+      You need to change this in your wikiconfig.py or farmconfig.py file.
+      See MoinMoin/multiconfig.py for an alternative way if you can't do that.
 
 Version 1.5.4-current:
     * increased maxlength of some input fields from 80 to 200
