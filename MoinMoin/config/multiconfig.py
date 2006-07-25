@@ -494,7 +494,7 @@ reStructuredText Quick Reference
             self._config_check()
 
         # define directories
-        self.moinmoin_dir = os.path.abspath(os.path.dirname(__file__))
+        self.moinmoin_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
         data_dir = os.path.normpath(self.data_dir)
         self.data_dir = data_dir
         for dirname in ('user', 'cache', 'plugin'):

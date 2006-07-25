@@ -167,6 +167,9 @@ class BaseIndex:
                 
     def mtime(self):
         return os.path.getmtime(self.dir)
+
+    def touch(self):
+        os.utime(self.dir, None)
     
     def _search(self, query):
         raise NotImplemented

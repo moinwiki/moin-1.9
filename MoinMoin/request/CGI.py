@@ -7,7 +7,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os
+import sys, os, cgi
 
 from MoinMoin import config
 from MoinMoin.request import RequestBase
@@ -28,6 +28,11 @@ class Request(RequestBase):
 
         except Exception, err:
             self.fail(err)
+
+    def _setup_args_from_cgi_form(self):
+        """ Override to create cgi form """
+        form = cgi.FieldStorage()
+        return RequestBase._setup_args_from_cgi_form(self, form)
 
     def open_logs(self):
         # create log file for catching stderr output

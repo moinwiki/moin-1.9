@@ -54,7 +54,7 @@ class Request(RequestBase):
         except Exception, err:
             self.fail(err)
 
-    def _setup_args_from_cgi_form(self, form=None):
+    def _setup_args_from_cgi_form(self):
         """ Override to create standalone form """
         form = cgi.FieldStorage(self.rfile, headers=self.headers, environ={'REQUEST_METHOD': 'POST'})
         return RequestBase._setup_args_from_cgi_form(self, form)

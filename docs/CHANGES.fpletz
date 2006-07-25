@@ -6,20 +6,15 @@ Branch moin/1.6-xapian-fpletz
       enable usage of _moinSearch for full compatibility?
     * HACK: MoinMoin.search.Xapian.Index._get_languages (wait for proper
       metadata)
-    * Positions saved in Xapian aren't always correct, check. Code
-      generally needs some more love.
 
   ToDo:
     * Implement the new search UI
     * Write/update documentation for all the new search stuff
-    * Indexing and searching of categories (new term prefix)
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
       (i.e. ExceptionTranslator)
     * Add stemming support for highlighting stuff:
         1. regexp for whole word (all lowercase), or
         2. just the root of the word
-    * Subpages: Add positions for complete (!) pagenames into the index
-    * Check if permissions/acls are always obeyed
 
   ToDo (low priority):
     * Case-sensitive searches / Regexp on multiple terms: Graceful
@@ -33,6 +28,8 @@ Branch moin/1.6-xapian-fpletz
     * Faster search thanks to Xapian
     * Searching for languages with new prefix lang/language, i.e. lang:de
       Note: Currently only available when Xapian is used
+    * CategorySearch with prefix category or with the regexp previously
+      used (autodetected as CategorySearch)
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
@@ -188,11 +185,17 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       sensitive search is done by querying Xapian with the lowercased
       terms and run _moinSearch over the relevant pages with the same
       query.
+    * Indexing of categories
 
 2006-07-23
-    * student didn't work on the project -- ThomasWaldmann
+    * CategorySearch is live
+    * Subpage issue does not need changes: Can be done with regex magic
+      I.e.: - subpages of MyPage: re:^MyPage/
+            - subpages called SubPage: re:/SubPage
+            - subpages called Subpage (1st level): re:[^/]*/SubPage
+            - subpages called Subpage (last level): re:/Subpage$
 
 2006-07-24
-    * the daily entry is missing here -- ThomasWaldmann
-
+    * SystemInfo macro update (mtime)
+    * nicer regexp support for TitleSearch
 
