@@ -381,8 +381,13 @@ class MoinTranslator(html4css1.HTMLTranslator):
                     node['classes'].append(prefix)
             else:
                 # Default case - make a link to a wiki page.
-                page = Page(self.request, refuri)
-                node['refuri'] = page.url(self.request)
+                pagename = refuri
+                anchor = ''
+                if refuri.find('#') != -1:
+                    pagename, anchor = refuri.split('#', 1)
+                    anchor = '#' + anchor
+                page = MoinMoin.Page.Page(self.request, pagename)
+                node['refuri'] = page.url(self.request) + anchor
                 if not page.exists():
                     node['classes'].append('nonexistent')
         html4css1.HTMLTranslator.visit_reference(self, node)
