@@ -98,6 +98,8 @@ class Request(RequestBase):
         status_code = int(status_code)
         self.sareq.send_response(status_code, status_msg)
         for header in other_headers:
-            self.write("%s\r\n" % header)
-        self.write("\r\n")
+            key, value = header.split(':', 1)
+            value = value.lstrip()
+            self.sareq.send_header(key, value)
+        self.sareq.end_headers()
 
