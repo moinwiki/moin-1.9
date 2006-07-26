@@ -28,7 +28,7 @@ def sendBackup(request):
     """ Send compressed tar file """
     dateStamp = time.strftime("%Y-%m-%d--%H-%M-%S-UTC", time.gmtime())
     filename = "%s-%s.tar.%s" % (request.cfg.siteid, dateStamp, request.cfg.backup_compression)
-    request.http_headers([
+    request.emit_http_headers([
         "Content-Type: application/octet-stream",
         "Content-Disposition: inline; filename=\"%s\"" % filename, ])
 
@@ -70,7 +70,7 @@ def restoreBackup(request, pagename):
 
 def sendBackupForm(request, pagename):
     _ = request.getText
-    request.http_headers()
+    request.emit_http_headers()
     request.setContentLanguage(request.lang)
     title = _('Wiki Backup / Restore')
     request.theme.send_title(title, form=request.form, pagename=pagename)

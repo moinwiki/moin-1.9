@@ -252,7 +252,7 @@ def do_format(pagename, request):
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
-    request.http_headers()
+    request.emit_http_headers()
     page = Page(request, pagename)
     request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
     page.send_page(request, count_hit=0, content_only=1)
@@ -426,7 +426,7 @@ def do_dumpform(pagename, request):
     """ dump the form data we received in this request for debugging """
     data = util.dumpFormData(request.form)
 
-    request.http_headers()
+    request.emit_http_headers()
     request.write("<html><body>%s</body></html>" % data)
 
 

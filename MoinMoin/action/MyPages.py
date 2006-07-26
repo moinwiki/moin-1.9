@@ -58,7 +58,7 @@ the group pages.
 
     from MoinMoin.Page import Page
     from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
-    request.http_headers()
+    request.emit_http_headers()
 
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
