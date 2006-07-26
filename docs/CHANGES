@@ -180,7 +180,7 @@ Version 1.6.current:
     * The i18n system no loads *.po files directly (no *.py or *.mo any more)
       and caches the results (farm wide cache/i18n/*).
     * added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
-      Ninoles and Jürgen Hermann.
+      Ninoles and Jrgen Hermann.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -201,6 +201,7 @@ Version 1.6.current:
     * Added a (less broken) MoinMoin.support.difflib, details see there.
     * BadContent and LocalBadContent now get noindex,nofollow robots header,
       same as POSTs.
+    * Fixed handling of anchors in wiki links for the Restructured text parser.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
@@ -875,7 +876,7 @@ Version 1.5.0beta1:
 
   International support:    
     * mail_from can be now a unicode name-address 
-      e.g u'Jürgen wiki <noreply@jhwiki.org>'
+      e.g u'Jrgen wiki <noreply@jhwiki.org>'
 
   Theme changes:
     * logo_string is now should be really only the logo (img).
@@ -2368,8 +2369,7 @@ New features:
         || {{{ ;)) }}} || ;)) || lol.gif    ||
     * AbandonedPages macro
     * Added definition list markup: {{{<whitespace>term:: definition}}}
-    * Added email notification features contributed by Daniel Saß
-    * SystemInfo: show "Entries in edit log"
+    * Added email notification features contributed by Daniel Saï¿½    * SystemInfo: show "Entries in edit log"
     * Added "RSS" icon to RecentChanges macro and code to generate a
       RecentChanges RSS channel, see
           http://www.usemod.com/cgi-bin/mb.pl?UnifiedRecentChanges
@@ -2642,7 +2642,7 @@ New features:
       there before a new version is written to disk
     * Removed the "Reset" button from EditPage
     * Added "Reduce editor size" link
-    * Added Latin-1 WikiNames (JürgenHermann ;)
+    * Added Latin-1 WikiNames (JrgenHermann ;)
     * Speeded up RecentChanges by looking up hostnames ONCE while saving
     * Show at most 14 (distinct) days in RecentChanges
     * Added icons for common functions, at the top of the page
@@ -2655,7 +2655,7 @@ New features:
     * Grey background for code sections
     * Added handling for numbered lists
     * the edit textarea now grows in width with the browser window
-      (thanks to Sebastian Dauß for that idea)
+      (thanks to Sebastian Dauï¿½for that idea)
     * Added page info (revision history) and viewing of old revisions
     * Added page diff, and diff links on page info
     * Added InterWiki support (use "wiki:WikiServer/theirlocalname"; the list
