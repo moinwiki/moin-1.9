@@ -8,6 +8,7 @@
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+import os
 
 from MoinMoin import config, wikiutil, action
 from MoinMoin.Page import Page
