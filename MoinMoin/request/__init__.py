@@ -93,7 +93,6 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
-        self.sent_headers = 0
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.page = None
@@ -974,7 +973,7 @@ class RequestBase(object):
         # when surge protection triggered, tell bots to come back later...
         if resultcode == 503:
             headers.append('Retry-After: %d' % self.cfg.surge_lockout_time)
-        self.http_headers(headers)
+        self.emit_http_headers(headers)
         self.setResponseCode(resultcode)
         self.write(msg)
         self.forbidden = True
@@ -1115,7 +1114,64 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
-        self.http_headers(["Status: 302 Found", "Location: %s" % url])
+        self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
+
+    def http_headers(self, more_headers=[]):
+        """ wrapper for old, deprecated http_headers call,
+            new code only calls emit_http_headers.
+            Remove in moin 1.7.
+        """
+        self.emit_http_headers(more_headers)
+
+    def emit_http_headers(self, more_headers=[]):
+        """ emit http headers after some preprocessing,
+            for emitting, it calls the server specific _emit_http_headers
+            method with a list of headers in this FIXED order:
+            1. status header (always present and valid, e.g. "200 OK")
+            2. content type header (always present)
+            3. other headers (optional)
+        """
+        # Send headers only once
+        if getattr(self, 'sent_headers', False):
+            return
+        self.sent_headers = True
+
+        content_type = None
+        status = None
+        headers = []
+        # assemble complete list of http headers
+        for header in more_headers + getattr(self, 'user_headers', []):
+            if isinstance(header, unicode):
+                header = header.encode('ascii')
+            key, value = header.split(':', 1)
+            lkey = key.lower()
+            value = value.lstrip()
+            if content_type is None and lkey == "content-type":
+                content_type = value
+            elif status is None and lkey == "status":
+                status = value
+            else:
+                headers.append(header)
+
+        if content_type is None:
+            content_type = "text/html; charset=%s" % config.charset
+        ct_header = "Content-type: %s" % content_type
+
+        if status is None:
+            status = "200 OK"
+        try:
+            int(status.split(" ", 1)[0])
+        except:
+            self.log("emit_http_headers called with invalid header Status: %s" % status)
+            status = "500 Server Error - invalid status header"
+        st_header = "Status: %s" % status
+
+        headers = [st_header, ct_header] + headers # do NOT change order!
+        self._emit_http_headers(headers)
+
+        #from pprint import pformat
+        #sys.stderr.write(pformat(headers))
+
 
     def setHttpHeader(self, header):
         """ Save header for later send.
@@ -1139,7 +1195,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param err: Exception instance or subclass.
         """
         self.failed = 1 # save state for self.run()            
-        self.http_headers(['Status: 500 MoinMoin Internal Error'])
+        self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
         self.setResponseCode(500)
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure

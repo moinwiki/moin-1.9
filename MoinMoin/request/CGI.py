@@ -63,33 +63,9 @@ class Request(RequestBase):
             import errno
             if ex.errno != errno.EPIPE: raise
 
-    # Headers ----------------------------------------------------------
-
-    def http_headers(self, more_headers=[]):
-        # Send only once
-        if getattr(self, 'sent_headers', None):
-            return
-
-        self.sent_headers = 1
-        have_ct = 0
-
-        # send http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-            if type(header) is unicode:
-                header = header.encode('ascii')
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
+        for header in headers:
             self.write("%s\r\n" % header)
-
-        if not have_ct:
-            self.write("Content-type: text/html;charset=%s\r\n" % config.charset)
-
-        self.write('\r\n')
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(more_headers))
-        #sys.stderr.write(pformat(self.user_headers))
-
+        self.write("\r\n")
 
