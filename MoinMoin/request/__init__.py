@@ -1124,12 +1124,17 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.emit_http_headers(more_headers)
 
     def emit_http_headers(self, more_headers=[]):
-        """ emit http headers after some preprocessing,
-            for emitting, it calls the server specific _emit_http_headers
-            method with a list of headers in this FIXED order:
-            1. status header (always present and valid, e.g. "200 OK")
-            2. content type header (always present)
-            3. other headers (optional)
+        """ emit http headers after some preprocessing / checking
+
+            Makes sure we only emit headers once.
+            Encodes to ASCII if it gets unicode headers.
+            Make sure we have exactly one Content-Type and one Status header.
+            Make sure Status header string begins with a integer number.
+        
+            For emitting, it calls the server specific _emit_http_headers
+            method.
+
+            @param more_headers: list of additional header strings
         """
         # Send headers only once
         if getattr(self, 'sent_headers', False):
@@ -1172,6 +1177,15 @@ space between words. Group page name is not allowed.""") % self.user.name
         #from pprint import pformat
         #sys.stderr.write(pformat(headers))
 
+    def _emit_http_headers(self, headers):
+        """ server specific method to emit http headers.
+        
+            @param headers: a list of http header strings in this FIXED order:
+                1. status header (always present and valid, e.g. "200 OK")
+                2. content type header (always present)
+                3. other headers (optional)
+        """
+        raise NotImplementedError
 
     def setHttpHeader(self, header):
         """ Save header for later send.
