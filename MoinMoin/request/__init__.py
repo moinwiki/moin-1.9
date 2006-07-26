@@ -968,13 +968,13 @@ class RequestBase(object):
         }
         headers = [
             'Status: %d %s' % (resultcode, statusmsg[resultcode]),
-            'Content-Type: text/plain'
+            'Content-Type: text/plain; charset=utf-8'
         ]
         # when surge protection triggered, tell bots to come back later...
         if resultcode == 503:
             headers.append('Retry-After: %d' % self.cfg.surge_lockout_time)
         self.emit_http_headers(headers)
-        self.setResponseCode(resultcode)
+        #self.setResponseCode(resultcode)
         self.write(msg)
         self.forbidden = True
 
@@ -1196,6 +1196,9 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.user_headers.append(header)
 
     def setResponseCode(self, code, message=None):
+        """ DEPRECATED, will vanish in moin 1.7,
+            just use a Status: <code> <message> header and emit_http_headers.
+        """
         pass
 
     def fail(self, err):
@@ -1210,7 +1213,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         """
         self.failed = 1 # save state for self.run()            
         self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        self.setResponseCode(500)
+        #self.setResponseCode(500)
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
         failure.handle(self)

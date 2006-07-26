@@ -134,6 +134,9 @@ Version 1.6.current:
       WSGI ?
       FCGI ?
       TWISTED ?
+    * setResponseCode request method DEPRECATED (it only worked for Twisted
+      anyway), just use emit_http_headers and include a Status: XXX header.
+      Method will vanish with moin 1.7. 
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more
