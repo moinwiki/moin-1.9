@@ -112,7 +112,11 @@ class Request(RequestBase):
 
     def _emit_http_headers(self, headers):
         """ private method to send out preprocessed list of HTTP headers """
-        for header in headers:
+        st_header, other_headers = headers[0], headers[1:]
+        status = st_header.split(':', 1)[1].lstrip()
+        status_code, status_msg = status.split(' ', 1)
+        self.twistd.setResponseCode(status_code, status_message)
+        for header in other_headers:
             key, value = header.split(':', 1)
             value = value.lstrip()
             if key.lower() == 'set-cookie':
@@ -133,6 +137,7 @@ class Request(RequestBase):
         #self.twistd.finish()
         raise MoinMoinFinish
 
-    def setResponseCode(self, code, message=None):
-        self.twistd.setResponseCode(code, message)
+    #done by _emit_http_headers now:
+    #def setResponseCode(self, code, message=None):
+    #    self.twistd.setResponseCode(code, message)
 
