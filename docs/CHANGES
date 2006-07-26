@@ -81,11 +81,11 @@ Version 1.6.current:
       will be missing and the adaptor script will need a change maybe):
       CGI works
       CLI works
-      STANDALONE not
-      MODPY not
-      WSGI not
-      FCGI not
-      TWISTED not
+      STANDALONE ?
+      MODPY ?
+      WSGI ?
+      FCGI ?
+      TWISTED ?
     * moved util/antispam.py to security/antispam.py,
       moved util/autoadmin.py to security/autoadmin.py,
       moved security.py to security/__init__.py,
@@ -119,6 +119,21 @@ Version 1.6.current:
       TODO: write mig script for data_dir
       TODO: make blanks in interwiki pagelinks possible
     * request.action now has the action requested, default: 'show'.
+    * Cleaned up duplicated http_headers code and DEPRECATED this function
+      call (it was sometimes confused with setHttpHeaders call) - it will
+      vanish with moin 1.7, so please fix your custom plugins!
+      The replacement is:
+          request.emit_http_headers(more_headers=[])
+      This call pre-processes the headers list (encoding from unicode, making
+      sure that there is exactly ONE content-type header, etc.) and then
+      calls a server specific helper _emit_http_headers to emit it.
+      CGI works
+      CLI ?
+      STANDALONE ?
+      MODPY ?
+      WSGI ?
+      FCGI ?
+      TWISTED ?
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more

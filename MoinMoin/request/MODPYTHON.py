@@ -138,51 +138,14 @@ class Request(RequestBase):
         from mod_python import apache
         return apache.OK
 
-    # Headers ----------------------------------------------------------
-
-    def setHttpHeader(self, header):
-        """ Filters out content-type and status to set them directly
-            in the mod_python request. Rest is put into the headers_out
-            member of the mod_python request.
-
-            @param header: string, containing valid HTTP header.
-        """
-        if type(header) is unicode:
-            header = header.encode('ascii')
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'content-type':
-            # save content-type for http_headers
-            if not self._have_ct:
-                # we only use the first content-type!
-                self.mpyreq.content_type = value
-                self._have_ct = 1
-        elif key.lower() == 'status':
-            # save status for finish
-            try:
-                self.mpyreq.status = int(value.split(' ', 1)[0])
-            except:
-                pass
-            else:
-                self._have_status = 1
-        else:
-            # this is a header we sent out
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
+        st_header, ct_header, other_headers = headers[0], headers[1], headers[2:]
+        status = st_header.split(':', 1)[1].lstrip()
+        self.mpyreq.status = int(status.split(' ', 1)[0])
+        self.mpyreq.content_type = ct_header.split(':', 1)[1].lstrip()
+        for header in other_headers:
             self.mpyreq.headers_out[key] = value
-
-    def http_headers(self, more_headers=[]):
-        """ Sends out headers and possibly sets default content-type
-            and status.
-
-            @param more_headers: list of strings, defaults to []
-        """
-        for header in more_headers + getattr(self, 'user_headers', []):
-            self.setHttpHeader(header)
-        # if we don't had an content-type header, set text/html
-        if self._have_ct == 0:
-            self.mpyreq.content_type = "text/html;charset=%s" % config.charset
-        # if we don't had a status header, set 200
-        if self._have_status == 0:
-            self.mpyreq.status = 200
         # this is for mod_python 2.7.X, for 3.X it's a NOP
         self.mpyreq.send_http_header()
 

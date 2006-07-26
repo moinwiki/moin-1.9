@@ -78,7 +78,8 @@ class Request(RequestBase):
     def setHttpHeader(self, header):
         pass
 
-    def http_headers(self, more_headers=[]):
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
         pass
 
     def http_redirect(self, url):

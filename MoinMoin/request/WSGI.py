@@ -21,6 +21,7 @@ class Request(RequestBase):
             self.stdin = env['wsgi.input']
             self.stdout = StringIO.StringIO()
 
+            # used by MoinMoin.server.wsgi:
             self.status = '200 OK'
             self.headers = []
 
@@ -48,33 +49,14 @@ class Request(RequestBase):
     def reset_output(self):
         self.stdout = StringIO.StringIO()
 
-    def setHttpHeader(self, header):
-        if type(header) is unicode:
-            header = header.encode('ascii')
-
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'content-type':
-            # save content-type for http_headers
-            if self.hasContentType:
-                # we only use the first content-type!
-                return
-            else:
-                self.hasContentType = True
-
-        elif key.lower() == 'status':
-            # save status for finish
-            self.status = value
-            return
-
-        self.headers.append((key, value))
-
-    def http_headers(self, more_headers=[]):
-        for header in more_headers:
-            self.setHttpHeader(header)
-
-        if not self.hasContentType:
-            self.headers.insert(0, ('Content-Type', 'text/html;charset=%s' % config.charset))
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
+        st_header, other_headers = headers[0], headers[1:]
+        self.status = st_header.split(':', 1)[1].lstrip()
+        for header in other_headers:
+            key, value = header.split(':', 1)
+            value = value.lstrip()
+            self.headers.append((key, value))
 
     def flush(self):
         pass
@@ -83,6 +65,7 @@ class Request(RequestBase):
         pass
 
     def output(self):
+        # called by MoinMoin.server.wsgi
         return self.stdout.getvalue()
 
 
