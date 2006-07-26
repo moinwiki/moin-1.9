@@ -206,7 +206,7 @@ def execute(pagename, request):
     qpagename = wikiutil.quoteWikinameURL(pagename)
     title = page.split_title(request)
 
-    request.http_headers()
+    request.emit_http_headers()
 
     # This action uses page or wiki language TODO: currently
     # page.language is broken and not available now, when we fix it,

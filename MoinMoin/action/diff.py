@@ -71,7 +71,7 @@ def execute(pagename, request):
     # This action generate content in the user language
     request.setContentLanguage(request.lang)
 
-    request.http_headers()
+    request.emit_http_headers()
     request.theme.send_title(_('Diff for "%s"') % (pagename,), pagename=pagename, allow_doubleclick=1)
 
     if rev1 > 0 and rev2 > 0 and rev1 > rev2 or rev1 == 0 and rev2 > 0:

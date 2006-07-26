@@ -131,8 +131,8 @@ class XmlRpcBase:
             # serialize it
             response = xmlrpclib.dumps(response, methodresponse=1)
 
-        self.request.http_headers([
-            "Content-Type: text/xml;charset=utf-8",
+        self.request.emit_http_headers([
+            "Content-Type: text/xml; charset=utf-8",
             "Content-Length: %d" % len(response),
         ])
         self.request.write(response)
