@@ -137,7 +137,6 @@ def execute(pagename, request):
         try:
             still_conflict = wikiutil.containsConflictMarker(savetext)
             pg.setConflict(still_conflict)
-            request.emit_http_headers() # XXX WHY? XXX
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:
             msg = e.message

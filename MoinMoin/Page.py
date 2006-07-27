@@ -989,7 +989,7 @@ class Page:
 
         @param request: the request object
         @param msg: if given, display message in header area
-        @keyword content_only: if 1, omit page header and footer
+        @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
         @keyword count_hit: if 1, add an event to the log
         @keyword send_missing_page: if 1, assume that page to be sent is MissingPage
@@ -1157,30 +1157,28 @@ class Page:
 
         # start document output
         doc_leader = self.formatter.startDocument(self.page_name)
-
-        request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
-
         page_exists = self.exists()
-        if page_exists:
-            request.setHttpHeader('Status: 200 OK')
-            if not request.cacheable or request.user.valid:
-                # use "nocache" headers if we're using a method that
-                # is not simply "display", or if a user is logged in
-                # (which triggers personalisation features)
-                for header in request.nocache:
-                    request.setHttpHeader(header)
-            else:
-                # TODO: we need to know if a page generates dynamic content
-                # if it does, we must not use the page file mtime as last modified value
-                # XXX The following code is commented because it is incorrect for dynamic pages:
-                #lastmod = os.path.getmtime(self._text_filename())
-                #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
-                pass
-        else:
-            request.setHttpHeader('Status: 404 NOTFOUND')
-
-        request.emit_http_headers()
         if not content_only:
+            request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
+            if page_exists:
+                request.setHttpHeader('Status: 200 OK')
+                if not request.cacheable or request.user.valid:
+                    # use "nocache" headers if we're using a method that
+                    # is not simply "display", or if a user is logged in
+                    # (which triggers personalisation features)
+                    for header in request.nocache:
+                        request.setHttpHeader(header)
+                else:
+                    # TODO: we need to know if a page generates dynamic content
+                    # if it does, we must not use the page file mtime as last modified value
+                    # XXX The following code is commented because it is incorrect for dynamic pages:
+                    #lastmod = os.path.getmtime(self._text_filename())
+                    #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
+                    pass
+            else:
+                request.setHttpHeader('Status: 404 NOTFOUND')
+            request.emit_http_headers()
+
             request.write(doc_leader)
 
             # send the page header
