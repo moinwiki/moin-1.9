@@ -137,7 +137,3 @@ class Request(RequestBase):
         #self.twistd.finish()
         raise MoinMoinFinish
 
-    #done by _emit_http_headers now:
-    #def setResponseCode(self, code, message=None):
-    #    self.twistd.setResponseCode(code, message)
-

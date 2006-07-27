@@ -9,7 +9,7 @@
 
 import os, re, time, sys, cgi, StringIO
 import copy
-from MoinMoin import config, wikiutil, user, caching
+from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.util import IsWin9x
 
 
@@ -974,7 +974,6 @@ class RequestBase(object):
         if resultcode == 503:
             headers.append('Retry-After: %d' % self.cfg.surge_lockout_time)
         self.emit_http_headers(headers)
-        #self.setResponseCode(resultcode)
         self.write(msg)
         self.forbidden = True
 
@@ -1136,21 +1135,22 @@ space between words. Group page name is not allowed.""") % self.user.name
 
             @param more_headers: list of additional header strings
         """
+        headers = more_headers + getattr(self, 'user_headers', [])
+        self.user_headers = []
+
         # Send headers only once
         sent_headers = getattr(self, 'sent_headers', 0)
         self.sent_headers = sent_headers + 1
         if sent_headers:
-            raise("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, more_headers))
-            self.log("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, more_headers))
-            return
-        else:
-            self.log("Notice: emit_http_headers called first time. Headers: %r" % more_headers)
+            raise error.InternalError("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, headers))
+        #else:
+        #    self.log("Notice: emit_http_headers called first time. Headers: %r" % headers)
 
         content_type = None
         status = None
         headers = []
         # assemble complete list of http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
+        for header in headers:
             if isinstance(header, unicode):
                 header = header.encode('ascii')
             key, value = header.split(':', 1)
