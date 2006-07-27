@@ -1137,9 +1137,14 @@ space between words. Group page name is not allowed.""") % self.user.name
             @param more_headers: list of additional header strings
         """
         # Send headers only once
-        if getattr(self, 'sent_headers', False):
+        sent_headers = getattr(self, 'sent_headers', 0)
+        self.sent_headers = sent_headers + 1
+        if sent_headers:
+            raise("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, more_headers))
+            self.log("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, more_headers))
             return
-        self.sent_headers = True
+        else:
+            self.log("Notice: emit_http_headers called first time. Headers: %r" % more_headers)
 
         content_type = None
         status = None
