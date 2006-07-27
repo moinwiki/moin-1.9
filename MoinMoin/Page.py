@@ -964,22 +964,21 @@ class Page:
     def send_raw(self):
         """ Output the raw page data (action=raw) """
         request = self.request
-        request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
+        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.http_headers(["Last-Modified: " +
-                 timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
-
+            request.setHttpHeader("Status: 200 OK")
+            request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
-            request.write(text)
         else:
-            request.http_headers(['Status: 404 NOTFOUND'])
-            request.setResponseCode(404)
-            request.write(u"Page %s not found." % self.page_name)
+            request.setHttpHeader('Status: 404 NOTFOUND')
+            text = u"Page %s not found." % self.page_name
 
+        request.emit_http_headers()
+        request.write(text)
 
     def send_page(self, request, msg=None, **keywords):
         """ Output the formatted page.
@@ -1042,8 +1041,6 @@ class Page:
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
         
-        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
-
         # default is wiki markup
         pi_format = self.cfg.default_markup or "wiki"
         pi_formatargs = ''
@@ -1160,27 +1157,30 @@ class Page:
 
         # start document output
         doc_leader = self.formatter.startDocument(self.page_name)
+
+        request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
+
         page_exists = self.exists()
-        if not content_only:
-            # send the document leader
-
-            # use "nocache" headers if we're using a method that
-            # is not simply "display", or if a user is logged in
-            # (which triggers personalisation features)
-
-            if page_exists:
-                if not request.cacheable or request.user.valid:
-                    request.http_headers(request.nocache)
-                else:
-                    # TODO: we need to know if a page generates dynamic content
-                    # if it does, we must not use the page file mtime as last modified value
-                    # XXX The following code is commented because it is incorrect for dynamic pages:
-                    #lastmod = os.path.getmtime(self._text_filename())
-                    #request.http_headers(["Last-Modified: %s" % timefuncs.formathttpdate(lastmod)])
-                    request.http_headers()
+        if page_exists:
+            request.setHttpHeader('Status: 200 OK')
+            if not request.cacheable or request.user.valid:
+                # use "nocache" headers if we're using a method that
+                # is not simply "display", or if a user is logged in
+                # (which triggers personalisation features)
+                for header in request.nocache:
+                    request.setHttpHeader(header)
             else:
-                request.http_headers(['Status: 404 NOTFOUND'])
-                request.setResponseCode(404)
+                # TODO: we need to know if a page generates dynamic content
+                # if it does, we must not use the page file mtime as last modified value
+                # XXX The following code is commented because it is incorrect for dynamic pages:
+                #lastmod = os.path.getmtime(self._text_filename())
+                #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
+                pass
+        else:
+            request.setHttpHeader('Status: 404 NOTFOUND')
+
+        request.emit_http_headers()
+        if not content_only:
             request.write(doc_leader)
 
             # send the page header
