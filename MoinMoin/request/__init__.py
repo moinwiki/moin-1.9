@@ -17,7 +17,11 @@ from MoinMoin.util import IsWin9x
 
 class MoinMoinFinish(Exception):
     """ Raised to jump directly to end of run() function, where finish is called """
-    pass
+
+
+class HeadersAlreadySentException(Exception):
+    """ Is raised if the headers were already sent when emit_http_headers is called."""
+
 
 # Timing ---------------------------------------------------------------
 
@@ -1142,7 +1146,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         sent_headers = getattr(self, 'sent_headers', 0)
         self.sent_headers = sent_headers + 1
         if sent_headers:
-            raise error.InternalError("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, headers))
+            raise HeadersAlreadySentException("emit_http_headers called multiple (%d) times! Headers: %r" % (sent_headers, headers))
         #else:
         #    self.log("Notice: emit_http_headers called first time. Headers: %r" % headers)
 
@@ -1216,8 +1220,10 @@ space between words. Group page name is not allowed.""") % self.user.name
 
         @param err: Exception instance or subclass.
         """
-        self.failed = 1 # save state for self.run()            
-        self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
+        self.failed = 1 # save state for self.run()
+        # we should not generate the headers two times
+        if not getattr(self, 'sent_headers', 0):
+            self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
         #self.setResponseCode(500)
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
