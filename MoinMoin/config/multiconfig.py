@@ -12,7 +12,7 @@ import os
 import sys
 import time
 
-from MoinMoin import error, util
+from MoinMoin import error, util, wikiutil
 import MoinMoin.auth as authmodule
 
 _url_re_cache = None
@@ -552,30 +552,24 @@ reStructuredText Quick Reference
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
         
+        self.meta_dict = wikiutil.MetaDict(os.path.join(data_dir, 'meta'))
+
         # interwiki ID processing
         self.load_IWID()
 
     def load_IWID(self):
         """ Loads the InterWikiID of this instance. It is used to identify the instance
             globally.
-            The data file can be found in data/IWID
             The IWID is available as cfg.iwid
             The full IWID containing the interwiki name is available as cfg.iwid_full
         """
-        iwid_path = os.path.join(self.data_dir, "IWID")
 
         try:
-            iwid_file = file(iwid_path, "rb")
-            iwid = iwid_file.readline().strip()
-            iwid_file.close()
-        except IOError:
-            iwid = None
-
-        if iwid is None:
+            iwid = self.meta_dict['IWID']
+        except KeyError:
             iwid = util.random_string(16).encode("hex") + "-" + str(int(time.time()))
-            iwid_file = file(iwid_path, "wb")
-            iwid_file.write(iwid)
-            iwid_file.close()
+            self.meta_dict['IWID'] = iwid
+            self.meta_dict.sync()
 
         self.iwid = iwid
         if self.interwikiname is not None:
