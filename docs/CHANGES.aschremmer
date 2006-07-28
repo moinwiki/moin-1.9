@@ -2,7 +2,7 @@ Branch moin/1.6-sync-aschremmer
 ===============================
 
   Known main issues:
-    * How will we store tags?
+    * How will we store tags? (Metadata support would be handy)
     * How to handle renames/deletes?
     * How to handle colliding/empty interwiki names?
 
@@ -38,6 +38,8 @@ Branch moin/1.6-sync-aschremmer
     * Fixed User.__repr__ - it is insane to put the ID in there
     * Worked around the FastCGI problem on Lighttpd: empty lines in the error log, thanks to Jay Soffian
     * Fixed the MetaDict code to use locks.
+    * Fixed bug in request.py that avoided showing a traceback if there was a fault
+      after the first headers were sent.
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
@@ -75,7 +77,7 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
 Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
          using pickle-based storage. Added getAllPagesEx XMLRPC method.
 Week 30: Implemented IWID support, added function to generate random strings. Added support
-         for editing the InterWikiMap in the wiki.
+         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and the MetaDict classes.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
