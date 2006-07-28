@@ -6,8 +6,13 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, urllib, cgi
-import codecs, types
+import cgi
+import codecs
+import os
+import re
+import time
+import types
+import urllib
 
 from MoinMoin import util, version, config
 from MoinMoin.util import pysupport, filesys, lock
@@ -497,8 +502,13 @@ class MetaDict(dict):
 #############################################################################
 def load_wikimap(request):
     """ load interwiki map (once, and only on demand) """
+    from MoinMoin.Page import Page
+
     try:
         _interwiki_list = request.cfg._interwiki_list
+        now = int(time.time())
+        if request.cfg._interwiki_ts + (3*60) < now: # 3 minutes caching time
+            raise AttributeError # refresh cache
     except AttributeError:
         _interwiki_list = {}
         lines = []
@@ -507,7 +517,7 @@ def load_wikimap(request):
         # precedence over the shared one, and is thus read AFTER
         # the shared one
         intermap_files = request.cfg.shared_intermap
-        if not isinstance(intermap_files, type([])):
+        if not isinstance(intermap_files, list):
             intermap_files = [intermap_files]
         intermap_files.append(os.path.join(request.cfg.data_dir, "intermap.txt"))
 
@@ -516,6 +526,9 @@ def load_wikimap(request):
                 f = open(filename, "r")
                 lines.extend(f.readlines())
                 f.close()
+
+        # add the contents of the InterWikiMap page
+        lines += Page(request, "InterWikiMap").get_raw_body().splitlines()
 
         for line in lines:
             if not line or line[0] == '#': continue
@@ -536,6 +549,7 @@ def load_wikimap(request):
 
         # save for later
         request.cfg._interwiki_list = _interwiki_list
+        request.cfg._interwiki_ts = now
 
     return _interwiki_list
 

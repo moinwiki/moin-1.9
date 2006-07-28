@@ -12,7 +12,7 @@ Branch moin/1.6-sync-aschremmer
       identity storage.
     * Clean up trailing whitespace.
     * Add page locking, i.e. use the one in the new storage layer.
-    * How about using unique IDs that just derive from the interwikiname?
+    * Check what needs to be documented on MoinMaster.
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -27,6 +27,7 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC method to get the pagelist in a special way (revnos,
       no system pages etc.)
     * IWID support - i.e. every instance has a unique ID
+    * InterWiki page editable in the wiki
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
@@ -73,14 +74,15 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
          script written by Stefan Merten.
 Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
          using pickle-based storage. Added getAllPagesEx XMLRPC method.
-Week 30: Implemented IWID support, added function to generate random strings.
+Week 30: Implemented IWID support, added function to generate random strings. Added support
+         for editing the InterWikiMap in the wiki.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-20: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-21: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-22: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
-2006-07-23: no work on SOC project
+2006-07-23: no work on SOC project -- a Sunday
 2006-07-24: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 
 Time plan
