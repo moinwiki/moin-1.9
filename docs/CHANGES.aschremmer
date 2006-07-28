@@ -36,6 +36,7 @@ Branch moin/1.6-sync-aschremmer
       if the user files cannot be parsed for example
     * Fixed User.__repr__ - it is insane to put the ID in there
     * Worked around the FastCGI problem on Lighttpd: empty lines in the error log, thanks to Jay Soffian
+    * Fixed the MetaDict code to use locks.
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
