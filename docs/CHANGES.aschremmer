@@ -30,8 +30,12 @@ Branch moin/1.6-sync-aschremmer
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
-    * Python 2.5 compatibility fixes in the Page caching logic
-    * sre pickle issues in the wikidicts code
+    * Python 2.5 compatibility fixes in the Page caching logic (merged)
+    * sre pickle issues in the wikidicts code (merged)
+    * cgitb can hide particular names, this avoids information leaks
+      if the user files cannot be parsed for example
+    * Fixed User.__repr__ - it is insane to put the ID in there
+    * Worked around the FastCGI problem on Lighttpd: empty lines in the error log, thanks to Jay Soffian
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
@@ -73,6 +77,10 @@ Week 30: Implemented IWID support, added function to generate random strings.
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-20: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-21: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-22: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-23: no work on SOC project
+2006-07-24: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 
 Time plan
 =========
