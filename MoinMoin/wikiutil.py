@@ -443,7 +443,7 @@ class MetaDict(dict):
             if key in INTEGER_METAS:
                 value = str(value)
             meta.append("%s: %s" % (key, value))
-        meta = '\n'.join(meta)
+        meta = '\r\n'.join(meta)
         # XXX what does happen if the metafile is being read or written to in another process?
         metafile = codecs.open(self.metafilename, "w", "utf-8")
         metafile.write(meta)
@@ -452,7 +452,7 @@ class MetaDict(dict):
         self.dirty = False
 
     def sync(self, mtime_usecs=None):
-        """ sync the in-memory dict to disk (if dirty) """
+        """ sync the in-memory dict to the persistent store (if dirty) """
         if self.dirty:
             if not mtime_usecs is None:
                 self.__setitem__('mtime', str(mtime_usecs))
@@ -469,6 +469,8 @@ class MetaDict(dict):
                 raise
 
     def __setitem__(self, key, value):
+        """ Sets a dictionary entry. You actually have to call sync to write it
+            to the persistent store. """
         try:
             oldvalue = dict.__getitem__(self, key)
         except KeyError:
