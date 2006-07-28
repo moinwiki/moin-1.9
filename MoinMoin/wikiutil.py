@@ -408,14 +408,16 @@ INTEGER_METAS = ['current', 'revision', # for page storage (moin 2.0)
                 ]
 
 class MetaDict(dict):
-    """ store meta informations as a dict """
+    """ store meta informations as a dict.
+    XXX It is not thread-safe, add locks!
+    """
     def __init__(self, metafilename):
         """ create a MetaDict from metafilename """
         dict.__init__(self)
         self.metafilename = metafilename
         self.dirty = False
         self.loaded = False
-        lock_dir = os.path.join(self.metafilename, '..', 'cache', '__metalock__')
+        lock_dir = os.path.join(metafilename, '..', 'cache', '__metalock__')
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
 
@@ -427,7 +429,8 @@ class MetaDict(dict):
         """
 
         try:
-            self.rlock.acquire(3.0)
+            if not self.rlock.acquire(3.0):
+                raise EnvironmentError("Could not lock in MetaDict")
             try:
                 metafile = codecs.open(self.metafilename, "r", "utf-8")
                 meta = metafile.read() # this is much faster than the file's line-by-line iterator
@@ -456,9 +459,9 @@ class MetaDict(dict):
                 value = str(value)
             meta.append("%s: %s" % (key, value))
         meta = '\r\n'.join(meta)
-        # XXX what does happen if the metafile is being read or written to in another process?
-        # XXX Then it is corrupted. We need locks.
-        self.wlock.aquire(5.0)
+
+        if not self.wlock.acquire(5.0):
+            raise EnvironmentError("Could not lock in MetaDict")
         try:
             metafile = codecs.open(self.metafilename, "w", "utf-8")
             metafile.write(meta)
@@ -502,14 +505,16 @@ class MetaDict(dict):
 #############################################################################
 def load_wikimap(request):
     """ load interwiki map (once, and only on demand) """
-    from MoinMoin.Page import Page
+
+    now = int(time.time())
 
     try:
         _interwiki_list = request.cfg._interwiki_list
-        now = int(time.time())
         if request.cfg._interwiki_ts + (3*60) < now: # 3 minutes caching time
             raise AttributeError # refresh cache
     except AttributeError:
+        from MoinMoin.Page import Page
+
         _interwiki_list = {}
         lines = []
 
