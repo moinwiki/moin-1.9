@@ -25,12 +25,12 @@ from MoinMoin import wikiutil, config, user
 from MoinMoin.packages import unpackLine
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin.wikidicts import Dict
+from MoinMoin.wikidicts import Dict, Group
 
 
 class ActionStatus(Exception): pass
 
-
+# Move these classes to MoinMoin.wikisync
 class RemotePage(object):
     """ This class represents a page in (another) wiki. """
     def __init__(self, name, revno):
@@ -38,10 +38,17 @@ class RemotePage(object):
         self.revno = revno
 
     def __repr__(self):
-        return repr(u"%s<%i>" % (self.name, self.revno))
+        return repr(unicode(self))
+
+    def __unicode__(self):
+        return u"%s<%i>" % (self.name, self.revno)
 
     def __lt__(self, other):
         return self.name < other.name
+
+    def filter(cls, rp_list, regex):
+        return [x for x in rp_list if regex.match(x.name)]
+    filter = classmethod(filter)
 
 
 class RemoteWiki(object):
@@ -74,7 +81,7 @@ class MoinRemoteWiki(RemoteWiki):
 
     def createConnection(self):
         if self.valid:
-            return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True)
+            return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
         else:
             return None
 
@@ -95,13 +102,21 @@ class MoinLocalWiki(RemoteWiki):
     def __init__(self, request):
         self.request = request
 
+    def getGroupItems(self, group_list):
+        pages = []
+        for group_pagename in group_list:
+            pages.extend(Group(self.request, group_pagename).members())
+        return [self.createRemotePage(x) for x in pages]
+
+    def createRemotePage(self, page_name):
+        return RemotePage(page_name, Page(self.request, page_name).get_real_rev())
+
     # Methods implementing the RemoteWiki interface
     def getInterwikiName(self):
         return self.request.cfg.interwikiname
 
     def getPages(self):
-        l_pages = [[x, Page(self.request, x).get_real_rev()] for x in self.request.rootpage.getPageList(exists=0)]
-        return [RemotePage(unicode(name), revno) for name, revno in l_pages]
+        return [self.createRemotePage(x) for x in self.request.rootpage.getPageList(exists=0)]
 
     def __repr__(self):
         return "<MoinLocalWiki>"
@@ -139,7 +154,8 @@ class ActionClass:
 
         # merge the pageList case into the remoteMatch case
         if params["pageList"] is not None:
-            params["remoteMatch"] = u'|'.join([r'^%s$' % re.escape(name) for name in params["pageList"]])
+            params["localMatch"] = params["remoteMatch"] = u'|'.join([r'^%s$' % re.escape(name)
+                                                                      for name in params["pageList"]])
 
         if params["localMatch"] is not None:
             params["localMatch"] = re.compile(params["localMatch"], re.U)
@@ -183,9 +199,23 @@ class ActionClass:
         
         r_pages = remote.getPages()
         l_pages = local.getPages()
+        print "Got %i local, %i remote pages" % (len(l_pages), len(r_pages))
+        if params["localMatch"]:
+            l_pages = RemotePage.filter(l_pages, params["localMatch"])
+        if params["remoteMatch"]:
+            print "Filtering remote pages using regex %r" % params["remoteMatch"].pattern
+            r_pages = RemotePage.filter(r_pages, params["remoteMatch"])
+        print "After filtering: Got %i local, %i remote pages" % (len(l_pages), len(r_pages))
+
+        if params["groupList"]:
+            pages_from_groupList = local.getGroupItems(params["groupList"])
+            if not params["localMatch"]:
+                l_pages = pages_from_groupList
+            else:
+                l_pages += pages_from_groupList
 
         # some initial test code
-        r_new_pages = u",".join(set([repr(x) for x in r_pages]) - set([repr(x) for x in l_pages]))
+        r_new_pages = u", ".join(set([unicode(x) for x in r_pages]) - set([unicode(x) for x in l_pages]))
         raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages)
 
 
