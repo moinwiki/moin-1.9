@@ -199,3 +199,6 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * SystemInfo macro update (mtime)
     * nicer regexp support for TitleSearch
 
+2006-07-25 .. 2006-07-29
+    * student did not work on project
+
