@@ -239,9 +239,17 @@ class ActionClass:
             else:
                 l_pages += pages_from_groupList
 
+        l_pages = set(l_pages)
+        r_pages = set(r_pages)
+        
+        # XXX this is not correct if matching is active
+        remote_but_not_local = r_pages - l_pages
+        local_but_not_remote = l_pages - r_pages
+        
         # some initial test code
-        r_new_pages = u", ".join([unicode(x) for x in (set(r_pages) - set(l_pages))])
-        raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages)
+        r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
+        l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
+        raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages + "<br>These pages are in the local wiki, but not in the remote one: " + l_new_pages)
 
 
 def execute(pagename, request):
