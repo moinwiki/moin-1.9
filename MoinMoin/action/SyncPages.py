@@ -40,13 +40,18 @@ class RemotePage(object):
         self.revno = revno
 
     def __repr__(self):
-        return repr(unicode(self))
+        return repr("<Remote Page %r>" % unicode(self))
 
     def __unicode__(self):
         return u"%s<%i>" % (self.name, self.revno)
 
     def __lt__(self, other):
         return self.name < other.name
+
+    def __eq__(self, other):
+        if not isinstance(other, RemotePage):
+            return false
+        return self.name == other.name
 
     def filter(cls, rp_list, regex):
         return [x for x in rp_list if regex.match(x.name)]
@@ -90,7 +95,9 @@ class MoinRemoteWiki(RemoteWiki):
         remote_iwid = self.connection.interwikiName()[1]
         self.is_anonymous = remote_interwikiname is None
         if not self.is_anonymous and interwikiname != remote_interwikiname:
-            raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name internally than you specified."))
+            raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name (%(remotename)s)"
+                                             " internally than you specified (%(localname)s).") % {
+                "remotename": remote_interwikiname, "localname": interwikiname})
 
         if self.is_anonymous:
             self.iwid_full = remote_iwid
@@ -200,8 +207,8 @@ class ActionClass:
             local = MoinLocalWiki(self.request)
             try:
                 remote = MoinRemoteWiki(self.request, params["remoteWiki"])
-            except UnsupportedWikiException, e:
-                raise ActionStatus(e.msg)
+            except UnsupportedWikiException, (msg, ):
+                raise ActionStatus(msg)
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
@@ -233,7 +240,7 @@ class ActionClass:
                 l_pages += pages_from_groupList
 
         # some initial test code
-        r_new_pages = u", ".join(set([unicode(x) for x in r_pages]) - set([unicode(x) for x in l_pages]))
+        r_new_pages = u", ".join([unicode(x) for x in (set(r_pages) - set(l_pages))])
         raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages)
 
 
