@@ -30,6 +30,8 @@ from MoinMoin.wikidicts import Dict, Group
 
 class ActionStatus(Exception): pass
 
+class UnsupportedWikiException(Exception): pass
+
 # Move these classes to MoinMoin.wikisync
 class RemotePage(object):
     """ This class represents a page in (another) wiki. """
@@ -72,18 +74,27 @@ class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
     def __init__(self, request, interwikiname):
         self.request = request
+        _ = self.request.getText
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
         self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"
+        if not self.valid:
+            self.connection = None
+            return
         self.connection = self.createConnection()
-        # XXX add version and interwiki name checking!
+        version = self.connection.getMoinVersion()
+        if not isinstance(version, (tuple, list)):
+            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+        remote_interwikiname = self.getInterwikiName()
+        remote_iwid = self.connection.interwikiName()[1]
+        self.is_anonymous = remote_interwikiname is None
+        
+        if not self.is_anonymous and interwikiname != remote_interwikiname:
+            raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name internally than you specified."))
 
     def createConnection(self):
-        if self.valid:
-            return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
-        else:
-            return None
+        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
     # Methods implementing the RemoteWiki interface
     def getInterwikiName(self):
@@ -182,8 +193,11 @@ class ActionClass:
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
-            remote = MoinRemoteWiki(self.request, params["remoteWiki"])
             local = MoinLocalWiki(self.request)
+            try:
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"])
+            except UnsupportedWikiException, e:
+                raise ActionStatus(e.msg)
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
