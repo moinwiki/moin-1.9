@@ -417,7 +417,7 @@ class MetaDict(dict):
         self.metafilename = metafilename
         self.dirty = False
         self.loaded = False
-        lock_dir = os.path.join(metafilename, '..', 'cache', '__metalock__')
+        lock_dir = os.path.normpath(os.path.join(metafilename, '..', 'cache', '__metalock__'))
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
 
