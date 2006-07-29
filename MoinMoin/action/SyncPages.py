@@ -22,7 +22,7 @@ except NameError:
 
 
 from MoinMoin import wikiutil, config, user
-from MoinMoin.packages import unpackLine
+from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
@@ -89,9 +89,13 @@ class MoinRemoteWiki(RemoteWiki):
         remote_interwikiname = self.getInterwikiName()
         remote_iwid = self.connection.interwikiName()[1]
         self.is_anonymous = remote_interwikiname is None
-        
         if not self.is_anonymous and interwikiname != remote_interwikiname:
             raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name internally than you specified."))
+
+        if self.is_anonymous:
+            self.iwid_full = remote_iwid
+        else:
+            self.iwid_full = packLine([remote_iwid, interwikiname])
 
     def createConnection(self):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)

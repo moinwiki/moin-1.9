@@ -14,6 +14,7 @@ import time
 
 from MoinMoin import error, util, wikiutil
 import MoinMoin.auth as authmodule
+from MoinMoin.packages import packLine
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -573,7 +574,7 @@ reStructuredText Quick Reference
 
         self.iwid = iwid
         if self.interwikiname is not None:
-            self.iwid_full = iwid + ":" + self.interwikiname
+            self.iwid_full = packLine([iwid, self.interwikiname])
         else:
             self.iwid_full = iwid
 
