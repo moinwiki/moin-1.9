@@ -6,10 +6,14 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import os
+
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
+
+from MoinMoin.util import lock
 
 
 class Tag(object):
@@ -64,23 +68,36 @@ class PickleTagStore(AbstractTagStore):
         
         self.page = page
         self.filename = page.getPagePath('synctags', use_underlay=0, check_create=1, isfile=1)
+        lock_dir = os.path.join(page.getPagePath('cache', use_underlay=0, check_create=1), '__taglock__')
+        self.rlock = lock.ReadLock(lock_dir, 60.0)
+        self.wlock = lock.WriteLock(lock_dir, 60.0)
         self.load()
 
     def load(self):
         """ Loads the tags from the data file. """
+        if not self.rlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
         try:
-            datafile = file(self.filename, "rb")
-        except IOError:
-            self.tags = []
-        else:
-            self.tags = pickle.load(datafile)
-            datafile.close()
+            try:
+                datafile = file(self.filename, "rb")
+            except IOError:
+                self.tags = []
+            else:
+                self.tags = pickle.load(datafile)
+                datafile.close()
+        finally:
+            self.rlock.release()
     
     def commit(self):
         """ Writes the memory contents to the data file. """
-        datafile = file(self.filename, "wb")
-        pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
-        datafile.close()
+        if not self.wlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
+        try:
+            datafile = file(self.filename, "wb")
+            pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
+            datafile.close()
+        finally:
+            self.wlock.release()
 
     # public methods ---------------------------------------------------
     def add(self, **kwargs):
