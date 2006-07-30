@@ -1122,10 +1122,14 @@ space between words. Group page name is not allowed.""") % self.user.name
         """
         self.emit_http_headers(more_headers)
 
-    def emit_http_headers(self, more_headers=[]):
+    def emit_http_headers(self, more_headers=[], dont_raise=False):
         """ emit http headers after some preprocessing / checking
 
-            Makes sure we only emit headers once.
+            Makes sure we only emit headers once. If dont_raise is True,
+            we will not raise an exception on a second call - this is used
+            by an exception error handler that can try to emit a 500 status
+            this way.
+            
             Encodes to ASCII if it gets unicode headers.
             Make sure we have exactly one Content-Type and one Status header.
             Make sure Status header string begins with a integer number.
@@ -1142,7 +1146,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         # Send headers only once
         sent_headers = getattr(self, 'sent_headers', 0)
         self.sent_headers = sent_headers + 1
-        if sent_headers:
+        if sent_headers and not dont_raise:
             raise error.InternalError("emit_http_headers called multiple times(%d)! Headers: %r" % (sent_headers, all_headers))
         #else:
         #    self.log("Notice: emit_http_headers called first time. Headers: %r" % all_headers)
@@ -1218,8 +1222,7 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param err: Exception instance or subclass.
         """
         self.failed = 1 # save state for self.run()            
-        self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        #self.setResponseCode(500)
+        self.emit_http_headers(['Status: 500 MoinMoin Internal Error'], dont_raise=True)
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
         failure.handle(self)
