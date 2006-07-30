@@ -327,17 +327,18 @@ class Request:
         self.have_finished = 1
 
         # stderr
-        self.err.reset()
-        rec = Record()
-        rec.rec_type = FCGI_STDERR
-        rec.req_id = self.req_id
-        data = self.err.read()
-        while data:
-            chunk, data = self.getNextChunk(data)
-            rec.content = chunk
-            rec.writeRecord(self.conn)
-        rec.content = ""
-        rec.writeRecord(self.conn)      # Terminate stream
+        if self.err.tell(): # just send err record if there is data on the err stream
+            self.err.reset()
+            rec = Record()
+            rec.rec_type = FCGI_STDERR
+            rec.req_id = self.req_id
+            data = self.err.read()
+            while data:
+                chunk, data = self.getNextChunk(data)
+                rec.content = chunk
+                rec.writeRecord(self.conn)
+            rec.content = ""
+            rec.writeRecord(self.conn)      # Terminate stream
 
         # stdout
         self.out.reset()

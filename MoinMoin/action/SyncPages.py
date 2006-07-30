@@ -22,15 +22,17 @@ except NameError:
 
 
 from MoinMoin import wikiutil, config, user
-from MoinMoin.packages import unpackLine
+from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
-from MoinMoin.wikidicts import Dict
+from MoinMoin.wikidicts import Dict, Group
 
 
 class ActionStatus(Exception): pass
 
+class UnsupportedWikiException(Exception): pass
 
+# Move these classes to MoinMoin.wikisync
 class RemotePage(object):
     """ This class represents a page in (another) wiki. """
     def __init__(self, name, revno):
@@ -38,10 +40,22 @@ class RemotePage(object):
         self.revno = revno
 
     def __repr__(self):
-        return repr(u"%s<%i>" % (self.name, self.revno))
+        return repr("<Remote Page %r>" % unicode(self))
+
+    def __unicode__(self):
+        return u"%s<%i>" % (self.name, self.revno)
 
     def __lt__(self, other):
         return self.name < other.name
+
+    def __eq__(self, other):
+        if not isinstance(other, RemotePage):
+            return false
+        return self.name == other.name
+
+    def filter(cls, rp_list, regex):
+        return [x for x in rp_list if regex.match(x.name)]
+    filter = classmethod(filter)
 
 
 class RemoteWiki(object):
@@ -65,18 +79,33 @@ class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
     def __init__(self, request, interwikiname):
         self.request = request
+        _ = self.request.getText
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
         self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"
+        if not self.valid:
+            self.connection = None
+            return
         self.connection = self.createConnection()
-        # XXX add version and interwiki name checking!
+        version = self.connection.getMoinVersion()
+        if not isinstance(version, (tuple, list)):
+            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+        remote_interwikiname = self.getInterwikiName()
+        remote_iwid = self.connection.interwikiName()[1]
+        self.is_anonymous = remote_interwikiname is None
+        if not self.is_anonymous and interwikiname != remote_interwikiname:
+            raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name (%(remotename)s)"
+                                             " internally than you specified (%(localname)s).") % {
+                "remotename": remote_interwikiname, "localname": interwikiname})
+
+        if self.is_anonymous:
+            self.iwid_full = packLine([remote_iwid])
+        else:
+            self.iwid_full = packLine([remote_iwid, interwikiname])
 
     def createConnection(self):
-        if self.valid:
-            return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True)
-        else:
-            return None
+        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
     # Methods implementing the RemoteWiki interface
     def getInterwikiName(self):
@@ -95,13 +124,21 @@ class MoinLocalWiki(RemoteWiki):
     def __init__(self, request):
         self.request = request
 
+    def getGroupItems(self, group_list):
+        pages = []
+        for group_pagename in group_list:
+            pages.extend(Group(self.request, group_pagename).members())
+        return [self.createRemotePage(x) for x in pages]
+
+    def createRemotePage(self, page_name):
+        return RemotePage(page_name, Page(self.request, page_name).get_real_rev())
+
     # Methods implementing the RemoteWiki interface
     def getInterwikiName(self):
         return self.request.cfg.interwikiname
 
     def getPages(self):
-        l_pages = [[x, Page(self.request, x).get_real_rev()] for x in self.request.rootpage.getPageList(exists=0)]
-        return [RemotePage(unicode(name), revno) for name, revno in l_pages]
+        return [self.createRemotePage(x) for x in self.request.rootpage.getPageList(exists=0)]
 
     def __repr__(self):
         return "<MoinLocalWiki>"
@@ -139,7 +176,8 @@ class ActionClass:
 
         # merge the pageList case into the remoteMatch case
         if params["pageList"] is not None:
-            params["remoteMatch"] = u'|'.join([r'^%s$' % re.escape(name) for name in params["pageList"]])
+            params["localMatch"] = params["remoteMatch"] = u'|'.join([r'^%s$' % re.escape(name)
+                                                                      for name in params["pageList"]])
 
         if params["localMatch"] is not None:
             params["localMatch"] = re.compile(params["localMatch"], re.U)
@@ -166,8 +204,11 @@ class ActionClass:
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
-            remote = MoinRemoteWiki(self.request, params["remoteWiki"])
             local = MoinLocalWiki(self.request)
+            try:
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"])
+            except UnsupportedWikiException, (msg, ):
+                raise ActionStatus(msg)
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
@@ -183,10 +224,32 @@ class ActionClass:
         
         r_pages = remote.getPages()
         l_pages = local.getPages()
+        print "Got %i local, %i remote pages" % (len(l_pages), len(r_pages))
+        if params["localMatch"]:
+            l_pages = RemotePage.filter(l_pages, params["localMatch"])
+        if params["remoteMatch"]:
+            print "Filtering remote pages using regex %r" % params["remoteMatch"].pattern
+            r_pages = RemotePage.filter(r_pages, params["remoteMatch"])
+        print "After filtering: Got %i local, %i remote pages" % (len(l_pages), len(r_pages))
 
+        if params["groupList"]:
+            pages_from_groupList = local.getGroupItems(params["groupList"])
+            if not params["localMatch"]:
+                l_pages = pages_from_groupList
+            else:
+                l_pages += pages_from_groupList
+
+        l_pages = set(l_pages)
+        r_pages = set(r_pages)
+        
+        # XXX this is not correct if matching is active
+        remote_but_not_local = r_pages - l_pages
+        local_but_not_remote = l_pages - r_pages
+        
         # some initial test code
-        r_new_pages = u",".join(set([repr(x) for x in r_pages]) - set([repr(x) for x in l_pages]))
-        raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages)
+        r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
+        l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
+        raise ActionStatus("These pages are in the remote wiki, but not local: " + r_new_pages + "<br>These pages are in the local wiki, but not in the remote one: " + l_new_pages)
 
 
 def execute(pagename, request):

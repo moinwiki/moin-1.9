@@ -70,6 +70,11 @@ Content-Type: text/html
 __UNDEF__ = [] # a special sentinel object
 
 
+class HiddenObject:
+    def __repr__(self):
+        return "<HIDDEN>"
+HiddenObject = HiddenObject()
+
 class HTMLFormatter:
     """ Minimal html formatter """
     
@@ -295,7 +300,10 @@ class Frame:
             if ttype == tokenize.NAME and token not in keyword.kwlist:
                 if lasttoken == '.':
                     if parent is not __UNDEF__:
-                        value = getattr(parent, token, __UNDEF__)
+                        if self.unsafe_name(token):
+                            value = HiddenObject
+                        else:
+                            value = getattr(parent, token, __UNDEF__)
                         vars.append((prefix + token, prefix, value))
                 else:
                     where, value = self.lookup(token)
@@ -324,8 +332,12 @@ class Frame:
                 value = builtins.get(name, __UNDEF__)
             else:
                 value = getattr(builtins, name, __UNDEF__)
+        if self.unsafe_name(name):
+            value = HiddenObject
         return scope, value
 
+    def unsafe_name(self, name):
+        return name in self.frame.f_globals.get("unsafe_names", ())
 
 class View:
     """ Traceback view """
