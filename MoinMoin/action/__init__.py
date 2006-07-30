@@ -284,25 +284,6 @@ def do_goto(pagename, request):
     target = request.form.get('target', [''])[0]
     request.http_redirect(Page(request, target).url(request))
 
-def do_quicklink(pagename, request):
-    """ Add the current wiki page to the user quicklinks 
-    
-    TODO: what if add or remove quicklink fail? display an error message?
-    """
-    _ = request.getText
-    msg = None
-
-    if not request.user.valid:
-        msg = _("You must login to add a quicklink.")
-    elif request.user.isQuickLinkedTo([pagename]):
-        if request.user.removeQuicklink(pagename):
-            msg = _('Your quicklink to this page has been removed.')
-    else:
-        if request.user.addQuicklink(pagename):
-            msg = _('A quicklink to this page has been added for you.')
-
-    Page(request, pagename).send_page(request, msg=msg)
-
 def do_userform(pagename, request):
     """ save data posted from UserPreferences """
     from MoinMoin import userform
