@@ -1129,11 +1129,7 @@ space between words. Group page name is not allowed.""") % self.user.name
     def emit_http_headers(self, more_headers=[]):
         """ emit http headers after some preprocessing / checking
 
-            Makes sure we only emit headers once. If dont_raise is True,
-            we will not raise an exception on a second call - this is used
-            by an exception error handler that can try to emit a 500 status
-            this way.
-            
+            Makes sure we only emit headers once.
             Encodes to ASCII if it gets unicode headers.
             Make sure we have exactly one Content-Type and one Status header.
             Make sure Status header string begins with a integer number.
