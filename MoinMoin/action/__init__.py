@@ -204,7 +204,7 @@ class ActionBase:
 # from wikiaction.py ---------------------------------------------------------
 
 import os, re, time
-from MoinMoin import config, util
+from MoinMoin import config
 from MoinMoin.logfile import editlog
 
 #############################################################################
@@ -309,18 +309,6 @@ def do_bookmark(pagename, request):
     else:
         request.user.setBookmark(tm)
     Page(request, pagename).send_page(request)
-
-
-#############################################################################
-### Special Actions
-#############################################################################
-
-def do_dumpform(pagename, request):
-    """ dump the form data we received in this request for debugging """
-    data = util.dumpFormData(request.form)
-
-    request.emit_http_headers()
-    request.write("<html><body>%s</body></html>" % data)
 
 
 #############################################################################
