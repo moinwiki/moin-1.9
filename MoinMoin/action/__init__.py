@@ -279,30 +279,6 @@ def do_refresh(pagename, request):
     caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
     do_show(pagename, request)
 
-def do_revert(pagename, request):
-    """ restore another revision of a page as a new current revision """
-    from MoinMoin.PageEditor import PageEditor
-    _ = request.getText
-
-    if not request.user.may.revert(pagename):
-        return Page(request, pagename).send_page(request,
-            msg=_('You are not allowed to revert this page!'))
-
-    rev = int(request.form['rev'][0])
-    revstr = '%08d' % rev
-    oldpg = Page(request, pagename, rev=rev)
-    pg = PageEditor(request, pagename)
-
-    try:
-        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=revstr,
-                              action="SAVE/REVERT")
-    except pg.SaveError, msg:
-        # msg contain a unicode string
-        savemsg = unicode(msg)
-    request.reset()
-    pg.send_page(request, msg=savemsg)
-    return None
-
 def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
