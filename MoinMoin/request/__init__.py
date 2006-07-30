@@ -1129,7 +1129,11 @@ space between words. Group page name is not allowed.""") % self.user.name
     def emit_http_headers(self, more_headers=[]):
         """ emit http headers after some preprocessing / checking
 
-            Makes sure we only emit headers once.
+            Makes sure we only emit headers once. If dont_raise is True,
+            we will not raise an exception on a second call - this is used
+            by an exception error handler that can try to emit a 500 status
+            this way.
+            
             Encodes to ASCII if it gets unicode headers.
             Make sure we have exactly one Content-Type and one Status header.
             Make sure Status header string begins with a integer number.
@@ -1221,11 +1225,10 @@ space between words. Group page name is not allowed.""") % self.user.name
 
         @param err: Exception instance or subclass.
         """
-        self.failed = 1 # save state for self.run()
+        self.failed = 1 # save state for self.run()            
         # we should not generate the headers two times
         if not getattr(self, 'sent_headers', 0):
             self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        #self.setResponseCode(500)
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
         failure.handle(self)
