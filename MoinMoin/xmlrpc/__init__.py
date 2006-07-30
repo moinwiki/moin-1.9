@@ -589,13 +589,13 @@ class XmlRpcBase:
         if from_rev is None:
             oldcontents = lambda: ""
         else:
-            oldpage = Page(request, pagename, rev=from_rev)
+            oldpage = Page(self.request, pagename, rev=from_rev)
             oldcontents = lambda: oldpage.get_raw_body_str()
 
         if to_rev is None:
             newcontents = lambda: currentpage.get_raw_body()
         else:
-            newpage = Page(request, pagename, rev=to_rev)
+            newpage = Page(self.request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
             newrev = newpage.get_real_rev()
 
