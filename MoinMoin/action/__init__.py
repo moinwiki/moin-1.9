@@ -290,27 +290,6 @@ def do_userform(pagename, request):
     savemsg = userform.savedata(request)
     Page(request, pagename).send_page(request, msg=savemsg)
 
-def do_bookmark(pagename, request):
-    """ set bookmarks (in time) for RecentChanges or delete them """
-    timestamp = request.form.get('time', [None])[0]
-    if timestamp is not None:
-        if timestamp == 'del':
-            tm = None
-        else:
-            try:
-                tm = int(timestamp)
-            except StandardError:
-                tm = wikiutil.timestamp2version(time.time())
-    else:
-        tm = wikiutil.timestamp2version(time.time())
-
-    if tm is None:
-        request.user.delBookmark()
-    else:
-        request.user.setBookmark(tm)
-    Page(request, pagename).send_page(request)
-
-
 #############################################################################
 ### Dispatching
 #############################################################################
