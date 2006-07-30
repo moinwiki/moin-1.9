@@ -6,6 +6,8 @@
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
+import time
+
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 

@@ -201,15 +201,8 @@ class ActionBase:
         else:
             self.render_msg(self.make_form()) # display the form again
 
-# from wikiaction.py ---------------------------------------------------------
 
-import os, re, time
-from MoinMoin import config
-from MoinMoin.logfile import editlog
-
-#############################################################################
-### Misc Actions
-#############################################################################
+# Builtin Actions ------------------------------------------------------------
 
 def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
@@ -290,9 +283,8 @@ def do_userform(pagename, request):
     savemsg = userform.savedata(request)
     Page(request, pagename).send_page(request, msg=savemsg)
 
-#############################################################################
-### Dispatching
-#############################################################################
+# Dispatching ----------------------------------------------------------------
+import os
 
 def getPlugins(request):
     """ return the path to the action plugin directory and a list of plugins there """
