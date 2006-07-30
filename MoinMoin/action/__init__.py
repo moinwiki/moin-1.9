@@ -315,30 +315,6 @@ def do_bookmark(pagename, request):
 ### Special Actions
 #############################################################################
 
-def do_chart(pagename, request):
-    """ Show page charts """
-    _ = request.getText
-    if not request.user.may.read(pagename):
-        msg = _("You are not allowed to view this page.")
-        return request.page.send_page(request, msg=msg)
-
-    if not request.cfg.chart_options:
-        msg = _("Charts are not available!")
-        return request.page.send_page(request, msg=msg)
-
-    chart_type = request.form.get('type', [''])[0].strip()
-    if not chart_type:
-        msg = _('You need to provide a chart type!')
-        return request.page.send_page(request, msg=msg)
-
-    try:
-        func = pysupport.importName("MoinMoin.stats." + chart_type, 'draw')
-    except (ImportError, AttributeError):
-        msg = _('Bad chart type "%s"!') % chart_type
-        return request.page.send_page(request, msg=msg)
-
-    func(pagename, request)
-
 def do_dumpform(pagename, request):
     """ dump the form data we received in this request for debugging """
     data = util.dumpFormData(request.form)
