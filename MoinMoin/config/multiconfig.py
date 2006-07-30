@@ -576,7 +576,7 @@ reStructuredText Quick Reference
         if self.interwikiname is not None:
             self.iwid_full = packLine([iwid, self.interwikiname])
         else:
-            self.iwid_full = iwid
+            self.iwid_full = packLine([iwid])
 
     def _config_check(self):
         """ Check namespace and warn about unknown names
