@@ -100,7 +100,7 @@ class MoinRemoteWiki(RemoteWiki):
                 "remotename": remote_interwikiname, "localname": interwikiname})
 
         if self.is_anonymous:
-            self.iwid_full = remote_iwid
+            self.iwid_full = packLine([remote_iwid])
         else:
             self.iwid_full = packLine([remote_iwid, interwikiname])
 
