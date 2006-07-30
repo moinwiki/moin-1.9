@@ -1,0 +1,9 @@
+Current keys and values of cfg.hacks dictionary - for developers' and brave
+users' use only. :)
+
+ie7: True means that ie7 hack (http://dean.edwards.info/ie7/) will be used.
+     False (default) means not using ie7 hack.
+
+Please keep in mind that these are HACKS and in flux, this is why it is called
+like that! So if something doesn't work, read the source or ask on #moin.
+
