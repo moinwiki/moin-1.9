@@ -493,7 +493,7 @@ def execute(pagename, request):
     elif request.form['do'][0] == 'savedrawing':
         if request.user.may.write(pagename):
             save_drawing(pagename, request)
-            request.http_headers()
+            request.emit_http_headers()
             request.write("OK")
         else:
             msg = _('You are not allowed to save a drawing on this page.')
@@ -541,7 +541,7 @@ def execute(pagename, request):
 def upload_form(pagename, request, msg=''):
     _ = request.getText
 
-    request.http_headers()
+    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
@@ -653,8 +653,7 @@ def get_file(pagename, request):
 
     mt = wikiutil.MimeType(filename=filename)
 
-    # send header
-    request.http_headers([
+    request.emit_http_headers([
         "Content-Type: %s" % mt.content_type(),
         "Content-Length: %d" % os.path.getsize(fpath),
         # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
@@ -824,7 +823,7 @@ def view_file(pagename, request):
     if not filename: return
 
     # send header & title
-    request.http_headers()
+    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     title = _('attachment:%(filename)s of %(pagename)s', formatted=True) % {

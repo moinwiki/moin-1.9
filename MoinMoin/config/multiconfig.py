@@ -7,9 +7,14 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, os, sys
-from MoinMoin import error
+import re
+import os
+import sys
+import time
+
+from MoinMoin import error, util, wikiutil
 import MoinMoin.auth as authmodule
+from MoinMoin.packages import packLine
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -548,6 +553,31 @@ reStructuredText Quick Reference
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
+        
+        self.meta_dict = wikiutil.MetaDict(os.path.join(data_dir, 'meta'), self.cache_dir)
+
+        # interwiki ID processing
+        self.load_IWID()
+
+    def load_IWID(self):
+        """ Loads the InterWikiID of this instance. It is used to identify the instance
+            globally.
+            The IWID is available as cfg.iwid
+            The full IWID containing the interwiki name is available as cfg.iwid_full
+        """
+
+        try:
+            iwid = self.meta_dict['IWID']
+        except KeyError:
+            iwid = util.random_string(16).encode("hex") + "-" + str(int(time.time()))
+            self.meta_dict['IWID'] = iwid
+            self.meta_dict.sync()
+
+        self.iwid = iwid
+        if self.interwikiname is not None:
+            self.iwid_full = packLine([iwid, self.interwikiname])
+        else:
+            self.iwid_full = packLine([iwid])
 
     def _config_check(self):
         """ Check namespace and warn about unknown names

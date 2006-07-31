@@ -123,30 +123,3 @@ class HTTPDateTests(unittest.TestCase):
                              'wrong date string')
 
 
-class GetPageNameFromQueryString(unittest.TestCase):
-    """ Test urls like http://netloc/wiki?pagename """
-
-    def setUp(self):
-        self.savedQuery = self.request.query_string
-
-    def tearDown(self):
-        self.request.query_string = self.savedQuery
-
-    def testAscii(self):
-        """ request: getPageNameFromQueryString: ascii """
-        name = expected = u'page name'
-        self.runTest(name, expected)
-
-    def testNonAscii(self):
-        """ request: getPageNameFromQueryString: non ascii """
-        name = expected = u'דף עברי'
-        self.runTest(name, expected)
-
-    def runTest(self, name, expected):
-        import urllib
-        # query as made by most browsers when you type the url into the
-        # location box.
-        query = urllib.quote(name.encode('utf-8'))
-        self.request.query_string = query
-        self.assertEqual(self.request.getPageNameFromQueryString(), expected)
-

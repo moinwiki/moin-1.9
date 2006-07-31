@@ -6,7 +6,7 @@ MoinMoin - test wiki configuration
 @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.multiconfig import DefaultConfig
+from MoinMoin.config.multiconfig import DefaultConfig
 
 
 class Config(DefaultConfig):

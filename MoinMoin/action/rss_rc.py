@@ -220,6 +220,6 @@ def execute(pagename, request):
         httpheaders.append("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
 
     # send the generated XML document
-    request.http_headers(httpheaders)
+    request.emit_http_headers(httpheaders)
     request.write(out.getvalue())
 

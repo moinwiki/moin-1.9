@@ -22,7 +22,7 @@ def execute(pagename, request):
     else:
         mimetype = "text/plain"
 
-    request.http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
+    request.emit_http_headers(["Content-Type: %s; charset=%s" % (mimetype, config.charset)])
 
     # Get list of user readable pages
     pages = request.rootpage.getPageList()

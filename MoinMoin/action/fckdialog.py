@@ -15,7 +15,7 @@ import re
 
 def macro_dialog(request):
     help = get_macro_help(request)
-    request.http_headers()
+    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -169,7 +169,7 @@ def page_list(request):
         pages = [p.page_name for p in searchresult.hits]
     else:
         pages = [name]
-    request.http_headers()
+    request.emit_http_headers()
     request.write(
         '''<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -200,7 +200,7 @@ def page_list(request):
 ''' % "".join(["<option>%s</option>\n" % p for p in pages]))
 
 def link_dialog(request):
-    request.http_headers()
+    request.emit_http_headers()
     # list of wiki pages
     name = request.form.get("pagename", [""])[0]
     if name:
@@ -246,7 +246,7 @@ def link_dialog(request):
         scriptname += "/"
     action = scriptname
     basepage = request.page.page_name.encode(config.charset)
-    request.http_headers()
+    request.emit_http_headers()
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -367,7 +367,7 @@ def link_dialog(request):
 ##############################################################################
 
 def attachment_dialog(request):
-    request.http_headers()
+    request.emit_http_headers()
     # list of wiki pages
     name = request.form.get("pagename", [""])[0]
     if name:
@@ -397,7 +397,7 @@ def attachment_dialog(request):
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
-    request.http_headers()
+    request.emit_http_headers()
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -462,7 +462,7 @@ def attachment_dialog(request):
 ##############################################################################
 
 def image_dialog(request):
-    request.http_headers()
+    request.emit_http_headers()
     url_prefix = request.cfg.url_prefix
     request.write('''
 <!--

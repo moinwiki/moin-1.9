@@ -51,8 +51,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     if len(striped) == 0:
         err = _('Please use a more selective search term instead '
                 'of {{{"%s"}}}') % needle
-        # send http headers
-        request.http_headers()
+        request.emit_http_headers()
         Page(request, pagename).send_page(request, msg=err)
         return
 
@@ -75,8 +74,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             request.http_redirect(url)
             return
 
-    # send http headers
-    request.http_headers()
+    request.emit_http_headers()
 
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
