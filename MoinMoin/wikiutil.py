@@ -411,13 +411,13 @@ class MetaDict(dict):
     """ store meta informations as a dict.
     XXX It is not thread-safe, add locks!
     """
-    def __init__(self, metafilename):
+    def __init__(self, metafilename, cache_directory):
         """ create a MetaDict from metafilename """
         dict.__init__(self)
         self.metafilename = metafilename
         self.dirty = False
         self.loaded = False
-        lock_dir = os.path.normpath(os.path.join(metafilename, '..', 'cache', '__metalock__'))
+        lock_dir = os.path.join(cache_directory, '__metalock__')
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
 
