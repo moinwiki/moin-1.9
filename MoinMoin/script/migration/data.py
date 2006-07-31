@@ -39,7 +39,7 @@ class PluginScript(MoinScript):
         meta_fname = os.path.join(data_dir, 'meta')
         while True:
             try:
-                meta = wikiutil.MetaDict(meta_fname)
+                meta = wikiutil.MetaDict(meta_fname, request.cfg.cache_dir)
                 try:
                     curr_rev = meta['data_format_revision']
                     mig_name = str(curr_rev)
