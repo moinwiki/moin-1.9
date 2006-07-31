@@ -553,7 +553,7 @@ reStructuredText Quick Reference
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
         
-        self.meta_dict = wikiutil.MetaDict(os.path.join(data_dir, 'meta'))
+        self.meta_dict = wikiutil.MetaDict(os.path.join(data_dir, 'meta'), self.cache_dir)
 
         # interwiki ID processing
         self.load_IWID()
