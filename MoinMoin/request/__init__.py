@@ -336,8 +336,8 @@ class RequestBase(object):
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
         self.setURL(env)
-
-        ##self.debugEnvironment(env)
+        self.getCachingHeaders(env)
+        #self.debugEnvironment(env)
 
     def setHttpReferer(self, referer):
         """ Set http_referer, making sure its ascii
@@ -430,6 +430,13 @@ class RequestBase(object):
         if not self.request_uri:
             self.request_uri = self.makeURI()
         self.url = self.http_host + self.request_uri
+
+    def getCachingHeaders(self, env):
+        self.if_modified_since = (env.get('If-modified-since') or
+                                  env.get(cgiMetaVariable('If-modified-since')))
+        self.if_none_match = (env.get('If-none-match') or
+                                  env.get(cgiMetaVariable('If-none-match')))
+        self.log("inm: %s ims: %s" % (self.if_none_match, self.if_modified_since))
 
     def rewriteHost(self, env):
         """ Rewrite http_host transparently
@@ -1361,7 +1368,7 @@ space between words. Group page name is not allowed.""") % self.user.name
             environment.append('  %s = %r\n' % (key, env[key]))
         environment = ''.join(environment)
 
-        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)
+        data = '\nRequest Attributes\n%s\nEnvironment\n%s' % (attributes, environment)
         f = open('/tmp/env.log', 'a')
         try:
             f.write(data)
