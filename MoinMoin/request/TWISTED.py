@@ -23,6 +23,8 @@ class Request(RequestBase):
             self.http_accept_language = self.twistd.getHeader('Accept-Language')
             self.saved_cookie = self.twistd.getHeader('Cookie')
             self.http_user_agent = self.twistd.getHeader('User-Agent')
+            self.if_modified_since = self.twistd.getHeader('If-Modified-Since')
+            self.if_none_match = self.twistd.getHeader('If-None-Match')
 
             # Copy values from twisted request
             self.server_protocol = self.twistd.clientproto
