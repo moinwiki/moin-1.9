@@ -315,8 +315,7 @@ class RequestBase(object):
         """
         # Values we can just copy
         self.env = env
-        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE',
-                                            self.http_accept_language)
+        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE', self.http_accept_language)
         self.server_name = env.get('SERVER_NAME', self.server_name)
         self.server_port = env.get('SERVER_PORT', self.server_port)
         self.saved_cookie = env.get('HTTP_COOKIE', '')
@@ -326,6 +325,8 @@ class RequestBase(object):
         self.request_method = env.get('REQUEST_METHOD', None)
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
+        self.if_modified_since = env.get('If-modified-since') or env.get(cgiMetaVariable('If-modified-since'))
+        self.if_none_match = env.get('If-none-match') or env.get(cgiMetaVariable('If-none-match'))
 
         # REQUEST_URI is not part of CGI spec, but an addition of Apache.
         self.request_uri = env.get('REQUEST_URI', '')
@@ -336,7 +337,6 @@ class RequestBase(object):
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
         self.setURL(env)
-        self.getCachingHeaders(env)
         #self.debugEnvironment(env)
 
     def setHttpReferer(self, referer):
@@ -430,13 +430,6 @@ class RequestBase(object):
         if not self.request_uri:
             self.request_uri = self.makeURI()
         self.url = self.http_host + self.request_uri
-
-    def getCachingHeaders(self, env):
-        self.if_modified_since = (env.get('If-modified-since') or
-                                  env.get(cgiMetaVariable('If-modified-since')))
-        self.if_none_match = (env.get('If-none-match') or
-                                  env.get(cgiMetaVariable('If-none-match')))
-        self.log("inm: %s ims: %s" % (self.if_none_match, self.if_modified_since))
 
     def rewriteHost(self, env):
         """ Rewrite http_host transparently
