@@ -315,8 +315,7 @@ class RequestBase(object):
         """
         # Values we can just copy
         self.env = env
-        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE',
-                                            self.http_accept_language)
+        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE', self.http_accept_language)
         self.server_name = env.get('SERVER_NAME', self.server_name)
         self.server_port = env.get('SERVER_PORT', self.server_port)
         self.saved_cookie = env.get('HTTP_COOKIE', '')
@@ -326,6 +325,8 @@ class RequestBase(object):
         self.request_method = env.get('REQUEST_METHOD', None)
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
+        self.if_modified_since = env.get('If-modified-since') or env.get(cgiMetaVariable('If-modified-since'))
+        self.if_none_match = env.get('If-none-match') or env.get(cgiMetaVariable('If-none-match'))
 
         # REQUEST_URI is not part of CGI spec, but an addition of Apache.
         self.request_uri = env.get('REQUEST_URI', '')
@@ -336,8 +337,7 @@ class RequestBase(object):
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
         self.setURL(env)
-
-        ##self.debugEnvironment(env)
+        #self.debugEnvironment(env)
 
     def setHttpReferer(self, referer):
         """ Set http_referer, making sure its ascii
@@ -1361,7 +1361,7 @@ space between words. Group page name is not allowed.""") % self.user.name
             environment.append('  %s = %r\n' % (key, env[key]))
         environment = ''.join(environment)
 
-        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)
+        data = '\nRequest Attributes\n%s\nEnvironment\n%s' % (attributes, environment)
         f = open('/tmp/env.log', 'a')
         try:
             f.write(data)

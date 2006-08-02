@@ -553,17 +553,33 @@ reStructuredText Quick Reference
 
         # check if mail is possible and set flag:
         self.mail_enabled = (self.mail_smarthost is not None or self.mail_sendmail is not None) and self.mail_from
-        
-        self.meta_dict = wikiutil.MetaDict(os.path.join(data_dir, 'meta'), self.cache_dir)
 
-        # interwiki ID processing
-        self.load_IWID()
+        # Cache variables for the properties below
+        self._iwid = self._iwid_full = self._meta_dict = None
+
+    def load_meta_dict(self):
+        """ The meta_dict contains meta data about the wiki instance. """
+        if getattr(self, "_meta_dict", None) is None:
+            self._meta_dict = wikiutil.MetaDict(os.path.join(self.data_dir, 'meta'), self.cache_dir)
+        return self._meta_dict
+    meta_dict = property(load_meta_dict)
+
+    # lazily load iwid(_full)
+    def make_iwid_property(attr):
+        def getter(self):
+            if getattr(self, attr, None) is None:
+                self.load_IWID()
+            return getattr(self, attr)
+        return property(getter)
+    iwid = make_iwid_property("_iwid")
+    iwid_full = make_iwid_property("_iwid_full")
 
     def load_IWID(self):
         """ Loads the InterWikiID of this instance. It is used to identify the instance
             globally.
             The IWID is available as cfg.iwid
             The full IWID containing the interwiki name is available as cfg.iwid_full
+            This method is called by the property.
         """
 
         try:
@@ -573,11 +589,11 @@ reStructuredText Quick Reference
             self.meta_dict['IWID'] = iwid
             self.meta_dict.sync()
 
-        self.iwid = iwid
+        self._iwid = iwid
         if self.interwikiname is not None:
-            self.iwid_full = packLine([iwid, self.interwikiname])
+            self._iwid_full = packLine([iwid, self.interwikiname])
         else:
-            self.iwid_full = packLine([iwid])
+            self._iwid_full = packLine([iwid])
 
     def _config_check(self):
         """ Check namespace and warn about unknown names

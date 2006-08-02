@@ -184,6 +184,8 @@ Version 1.6.current:
       and caches the results (farm wide cache/i18n/*).
     * added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
       Ninoles and Jrgen Hermann.
+    * Added support for "304 not modified" response header for AttachFile get
+      and rss_rc actions - faster, less traffic, less load.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -205,6 +207,7 @@ Version 1.6.current:
     * BadContent and LocalBadContent now get noindex,nofollow robots header,
       same as POSTs.
     * Fixed handling of anchors in wiki links for the Restructured text parser.
+    * Fixed http header output.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
