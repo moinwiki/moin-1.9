@@ -341,7 +341,14 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
     font-size: 0.85em;
 }
 
-
+p.searchstats {
+    font-size: 0.8em;
+    text-align: right;
+    width: 100%;
+    background-color: #E6EAF0;
+        border-top: 1px solid #9088DC;
+    padding: 2px;
+}
 
 /* MonthCalendar css */
 

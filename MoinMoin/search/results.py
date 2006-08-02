@@ -277,14 +277,18 @@ class SearchResults:
         """
         _ = request.getText
         output = [
-            formatter.paragraph(1),
-            formatter.text(_("Hits %(hitsFrom)d to %(hitsTo)d "
-                "from %(hits)d results out of about %(pages)d pages.") %
+            formatter.paragraph(1, attr={'class': 'searchstats'}),
+            _("Results %(bs)s%(hitsFrom)d -%(hitsTo)d%(be)s "
+                    "of about %(bs)s%(hits)d%(be)s results out of about "
+                    "%(pages)d pages.") %
                    {'hits': len(self.hits), 'pages': self.pages,
-                       'hitsFrom': hitsFrom + 1,
-                       'hitsTo': hitsFrom + request.cfg.search_results_per_page}),
-            formatter.text(u' (%s)' %
-                formatter.text(_("%.2f seconds") % self.elapsed)),
+                    'hitsFrom': hitsFrom + 1,
+                    'hitsTo': hitsFrom + request.cfg.search_results_per_page,
+                    'bs': formatter.strong(1), 'be': formatter.strong(0)},
+            u' (%s %s)' % (''.join([formatter.strong(1),
+                formatter.text("%.2f" % self.elapsed),
+                formatter.strong(0)]),
+                formatter.text(_("seconds"))),
             formatter.paragraph(0),
             ]
         return ''.join(output)
