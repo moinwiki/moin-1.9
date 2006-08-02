@@ -98,8 +98,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # Then search results
     info = not titlesearch
     if context:
-        output = results.pageListWithContext(request, request.formatter, info=info,
-                context=context, hitsFrom=hitsFrom)
+        output = results.pageListWithContext(request, request.formatter,
+                info=info, context=context, hitsFrom=hitsFrom)
     else:
         output = results.pageList(request, request.formatter, info=info,
                 hitsFrom=hitsFrom)
