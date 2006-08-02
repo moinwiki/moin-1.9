@@ -378,6 +378,7 @@ class SearchResults:
         self._reset(request, formatter)
         f = formatter
         write = self.buffer.write
+        _ = request.getText
         
         # Add pages formatted as definition list
         if self.hits:
@@ -417,6 +418,17 @@ class SearchResults:
                     f.definition_term(0),
                     f.definition_desc(1),
                     fmt_context,
+                    f.definition_desc(0),
+                    f.definition_desc(1, attr={'class': 'searchresinfobar'}),
+                    f.text('%.1fk - ' % (page.page.size()/1024.0)),
+                    f.text('rev: %d %s- ' % (page.page.get_real_rev(),
+                        not page.page.rev and '(%s) ' % _('current') or '')),
+                    f.text('last modified: %(time)s - ' % page.page.lastEditInfo()),
+                    # XXX: proper metadata
+                    #f.text('lang: %s - ' % page.page.language),
+                    f.url(1, href='#'),
+                    f.text(_('Similar pages')),
+                    f.url(0),
                     f.definition_desc(0),
                     ]
                 write(''.join(item))
@@ -652,7 +664,7 @@ class SearchResults:
             if n < 0: n = 0
             l.append(''.join([
                 f.url(1, href=from_uri(n)),
-                _('Previous Page'),
+                f.text(_('Previous Page')),
                 f.url(0)
             ]))
         if hitsFrom + hitsPerPage < hitsNum:    # next page available
@@ -660,7 +672,7 @@ class SearchResults:
             if n >= hitsNum: n = hitsNum - 1
             l.append(''.join([
                 f.url(1, href=from_uri(n)),
-                _('Next Page'),
+                f.text(_('Next Page')),
                 f.url(0)
             ]))
         return f.text(' | ').join(l)
