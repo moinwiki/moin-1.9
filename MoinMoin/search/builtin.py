@@ -159,7 +159,7 @@ class BaseIndex:
         ##    self.indexPagesInNewThread(request)
 
     def _main_dir(self):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def exists(self):
         """ Check if index exists """        
@@ -172,7 +172,7 @@ class BaseIndex:
         os.utime(self.dir, None)
     
     def _search(self, query):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def search(self, query):
         #if not self.read_lock.acquire(1.0):
@@ -243,7 +243,7 @@ class BaseIndex:
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
         """
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def _do_queued_updates_InNewThread(self):
         """ do queued index updates in a new thread
@@ -283,10 +283,10 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def optimize(self):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
@@ -311,7 +311,7 @@ class BaseIndex:
         return mt.mime_type(), data
 
     def test(self, request):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
