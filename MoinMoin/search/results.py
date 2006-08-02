@@ -283,7 +283,8 @@ class SearchResults:
                    {'hits': len(self.hits), 'pages': self.pages,
                        'hitsFrom': hitsFrom + 1,
                        'hitsTo': hitsFrom + request.cfg.search_results_per_page}),
-            u' (%s)' % formatter.text(_("%.2f seconds") % self.elapsed),
+            formatter.text(u' (%s)' %
+                formatter.text(_("%.2f seconds") % self.elapsed)),
             formatter.paragraph(0),
             ]
         return ''.join(output)

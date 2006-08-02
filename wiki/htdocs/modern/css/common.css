@@ -334,12 +334,14 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 .searchresults dt {
     margin-top: 1em;
-	font-weight: normal;
+    font-weight: normal;
 }
 
 .searchresults dd {
-	font-size: 0.85em;
+    font-size: 0.85em;
 }
+
+
 
 /* MonthCalendar css */
 
