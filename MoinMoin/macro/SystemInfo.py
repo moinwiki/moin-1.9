@@ -17,7 +17,6 @@ from MoinMoin import wikiutil, version
 from MoinMoin import action, macro, parser
 from MoinMoin.logfile import editlog, eventlog
 from MoinMoin.Page import Page
-from MoinMoin.util import timefuncs
 
 def execute(Macro, args):
     """ show SystemInfo: wiki infos, wiki sw version, space usage infos """
@@ -118,11 +117,13 @@ def execute(Macro, args):
     idx = Search._xapianIndex(request)
     available = idx and idxState[0] or idxState[1]
     mtime = _('last modified: %s') % (idx and
-            timefuncs.formathttpdate(idx.mtime()) or _('unavailable'))
+            request.user.getFormattedDateTime(
+                wikiutil.version2timestamp(idx.mtime())) or
+                _('N/A'))
     row(_('Xapian search'), '%s, %s, %s'
             % (xapState[request.cfg.xapian_search], available, mtime))
 
-    row(_('Active threads'), t_count or 'N/A')
+    row(_('Active threads'), t_count or _('N/A'))
     buf.write(u'</dl>')
 
     return Macro.formatter.rawHTML(buf.getvalue())

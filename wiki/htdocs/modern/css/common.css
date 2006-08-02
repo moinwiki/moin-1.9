@@ -341,6 +341,11 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
     font-size: 0.85em;
 }
 
+.searchresults dd.searchresinfobar {
+    color: #008000;
+    margin-left: 15px;
+}
+
 p.searchstats {
     font-size: 0.8em;
     text-align: right;
