@@ -1360,14 +1360,14 @@ class Page:
             try:
                 code = self.loadCache(request)
                 self.execute(request, parser, code)
-            except Exception, (msg, ):
-                if msg != 'CacheNeedsUpdate':
+            except Exception, e:
+                if getattr(e, "message", None) != 'CacheNeedsUpdate':
                     raise
                 try:
                     code = self.makeCache(request, parser)
                     self.execute(request, parser, code)
-                except Exception, (msg, ):
-                    if msg != 'CacheNeedsUpdate':
+                except Exception, e:
+                    if getattr(e, "message", None) != 'CacheNeedsUpdate':
                         raise
                     request.log('page cache failed after creation')
                     self.format(parser)
