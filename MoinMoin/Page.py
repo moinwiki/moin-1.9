@@ -12,6 +12,10 @@ from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
 from MoinMoin.util import filesys, timefuncs
 
+def is_cache_exception(e):
+    args = e.args
+    return not (len(args) != 1 or args[0] != 'CacheNeedsUpdate')
+
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
        To change a page's content, use the PageEditor class.
@@ -1361,13 +1365,13 @@ class Page:
                 code = self.loadCache(request)
                 self.execute(request, parser, code)
             except Exception, e:
-                if getattr(e, "message", None) != 'CacheNeedsUpdate':
+                if not is_cache_exception(e):
                     raise
                 try:
                     code = self.makeCache(request, parser)
                     self.execute(request, parser, code)
                 except Exception, e:
-                    if getattr(e, "message", None) != 'CacheNeedsUpdate':
+                    if not is_cache_exception(e):
                         raise
                     request.log('page cache failed after creation')
                     self.format(parser)
