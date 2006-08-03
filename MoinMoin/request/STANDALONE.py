@@ -33,10 +33,8 @@ class Request(RequestBase):
             self.http_user_agent = sa.headers.getheader('user-agent', '')
             co = filter(None, sa.headers.getheaders('cookie'))
             self.saved_cookie = ', '.join(co) or ''
-            self.if_modified_since = (sa.headers.getheader('if-modified-since')
-                                      or self.if_modified_since)
-            self.if_none_match = (sa.headers.getheader('if-none-match')
-                                  or self.if_none_match)
+            self.if_modified_since = sa.headers.getheader('if-modified-since')
+            self.if_none_match = sa.headers.getheader('if-none-match')
 
             # Copy rest from standalone request   
             self.server_name = sa.server.server_name
