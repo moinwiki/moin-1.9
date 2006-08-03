@@ -9,7 +9,7 @@
 import StringIO
 import keyword, token, tokenize, sha
 from MoinMoin import config, wikiutil
-from MoinMoin.parser.ParserBase import parse_start_step
+from MoinMoin.parser._ParserBase import parse_start_step
 
 _KEYWORD = token.NT_OFFSET + 1
 _TEXT    = token.NT_OFFSET + 2
