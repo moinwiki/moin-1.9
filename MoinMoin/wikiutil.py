@@ -503,37 +503,59 @@ class MetaDict(dict):
 #############################################################################
 ### InterWiki
 #############################################################################
+INTERWIKI_PAGE = "InterWikiMap"
+
+def generate_file_list(request):
+    """ generates a list of all files. for internal use. """
+
+    # order is important here, the local intermap file takes
+    # precedence over the shared one, and is thus read AFTER
+    # the shared one
+    intermap_files = request.cfg.shared_intermap
+    if not isinstance(intermap_files, list):
+        intermap_files = [intermap_files]
+    else:
+        intermap_files = intermap_files[:]
+    intermap_files.append(os.path.join(request.cfg.data_dir, "intermap.txt"))
+    request.cfg.shared_intermap_files = [filename for filename in intermap_files
+                                         if filename and os.path.isfile(filename)]
+
+
+def get_max_mtime(file_list, page):
+    """ Returns the highest modification time of the files in file_list and the
+    page page. """
+    return max([os.stat(filename).st_mtime for filename in file_list] +
+        [version2timestamp(page.mtime_usecs())])
+
+
 def load_wikimap(request):
     """ load interwiki map (once, and only on demand) """
+    from MoinMoin.Page import Page
 
     now = int(time.time())
+    if getattr(request.cfg, "shared_intermap_files", None) is None:
+        generate_file_list(request)
 
     try:
         _interwiki_list = request.cfg._interwiki_list
-        if request.cfg._interwiki_ts + (3*60) < now: # 3 minutes caching time
-            raise AttributeError # refresh cache
+        old_mtime = request.cfg._interwiki_mtime
+        if request.cfg._interwiki_ts + (1*60) < now: # 1 minutes caching time
+            max_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
+            if max_mtime > old_mtime:
+                raise AttributeError # refresh cache
+            else:
+                request.cfg._interwiki_ts = now
     except AttributeError:
-        from MoinMoin.Page import Page
-
         _interwiki_list = {}
         lines = []
 
-        # order is important here, the local intermap file takes
-        # precedence over the shared one, and is thus read AFTER
-        # the shared one
-        intermap_files = request.cfg.shared_intermap
-        if not isinstance(intermap_files, list):
-            intermap_files = [intermap_files]
-        intermap_files.append(os.path.join(request.cfg.data_dir, "intermap.txt"))
-
-        for filename in intermap_files:
-            if filename and os.path.isfile(filename):
-                f = open(filename, "r")
-                lines.extend(f.readlines())
-                f.close()
+        for filename in request.cfg.shared_intermap_files:
+            f = open(filename, "r")
+            lines.extend(f.readlines())
+            f.close()
 
         # add the contents of the InterWikiMap page
-        lines += Page(request, "InterWikiMap").get_raw_body().splitlines()
+        lines += Page(request, INTERWIKI_PAGE).get_raw_body().splitlines()
 
         for line in lines:
             if not line or line[0] == '#': continue
@@ -555,6 +577,7 @@ def load_wikimap(request):
         # save for later
         request.cfg._interwiki_list = _interwiki_list
         request.cfg._interwiki_ts = now
+        request.cfg._interwiki_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
 
     return _interwiki_list
 
