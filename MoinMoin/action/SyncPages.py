@@ -111,11 +111,11 @@ class RemoteWiki(object):
         """ Returns a representation of the instance for debugging purposes. """
         return NotImplemented
 
-    def getInterwikiName(self):
+    def get_interwiki_name(self):
         """ Returns the interwiki name of the other wiki. """
         return NotImplemented
 
-    def getPages(self):
+    def get_pages(self):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
@@ -136,7 +136,7 @@ class MoinRemoteWiki(RemoteWiki):
         version = self.connection.getMoinVersion()
         if not isinstance(version, (tuple, list)):
             raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
-        remote_interwikiname = self.getInterwikiName()
+        remote_interwikiname = self.get_interwiki_name()
         remote_iwid = self.connection.interwikiName()[1]
         self.is_anonymous = remote_interwikiname is None
         if not self.is_anonymous and interwikiname != remote_interwikiname:
@@ -153,10 +153,10 @@ class MoinRemoteWiki(RemoteWiki):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
     # Methods implementing the RemoteWiki interface
-    def getInterwikiName(self):
+    def get_interwiki_name(self):
         return self.connection.interwikiName()[0]
 
-    def getPages(self):
+    def get_pages(self):
         pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})
         return [SyncPage(unicode(name), remote_rev=revno) for name, revno in pages]
 
@@ -170,6 +170,7 @@ class MoinLocalWiki(RemoteWiki):
         self.request = request
 
     def getGroupItems(self, group_list):
+        """ Returns all page names that are listed on the page group_list. """
         pages = []
         for group_pagename in group_list:
             pages.extend(Group(self.request, group_pagename).members())
@@ -179,10 +180,10 @@ class MoinLocalWiki(RemoteWiki):
         return SyncPage(page_name, local_rev=Page(self.request, page_name).get_real_rev())
 
     # Methods implementing the RemoteWiki interface
-    def getInterwikiName(self):
+    def get_interwiki_name(self):
         return self.request.cfg.interwikiname
 
-    def getPages(self):
+    def get_pages(self):
         return [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)]
 
     def __repr__(self):
@@ -252,6 +253,7 @@ class ActionClass:
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
+            # XXX prefix handling
             local = MoinLocalWiki(self.request)
             try:
                 remote = MoinRemoteWiki(self.request, params["remoteWiki"])
@@ -270,8 +272,8 @@ class ActionClass:
     def sync(self, params, local, remote):
         """ This method does the syncronisation work. """
         
-        r_pages = remote.getPages()
-        l_pages = local.getPages()
+        r_pages = remote.get_pages()
+        l_pages = local.get_pages()
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
