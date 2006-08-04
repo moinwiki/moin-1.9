@@ -272,6 +272,7 @@ class DFN(CompositeElement):
 class DIV(CompositeElement):
     "generic language/style container"
     _ATTRS = {
+        'id': None,
         'class': None,
     }
 

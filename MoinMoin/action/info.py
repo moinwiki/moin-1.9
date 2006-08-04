@@ -13,6 +13,7 @@ import os
 from MoinMoin import config, wikiutil, action
 from MoinMoin.Page import Page
 from MoinMoin.logfile import editlog
+from MoinMoin.widget import html
 
 def execute(pagename, request):
     """ show misc. infos about a page """
@@ -88,38 +89,41 @@ def execute(pagename, request):
 
         may_revert = request.user.may.revert(pagename)
 
+        def render_action(text, query, **kw):
+            kw.update(rel='nofollow')
+            if 0: # diff button doesnt work XXX
+                params_html = []
+                for k, v in query.items():
+                    params_html.append('<input type="hidden" name="%s" value="%s">' % (k, v))
+                params_html = ''.join(params_html)
+                html = '''
+<form>
+<input type="submit" value="%s">
+%s
+</form>
+''' % (text, params_html)
+            else:
+                html = page.link_to(request, text, querystr=query, **kw)
+            return html
+
         # read in the complete log of this page
         log = editlog.EditLog(request, rootpagename=pagename)
         count = 0
         for line in log.reverse():
             rev = int(line.rev)
-            actions = ""
+            actions = []
             if line.action in ['SAVE', 'SAVENEW', 'SAVE/REVERT', ]:
                 size = page.size(rev=rev)
                 if count == 0: # latest page
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('view'),
-                        querystr=''))
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('raw'),
-                        querystr='action=raw', rel='nofollow'))
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('print'),
-                        querystr='action=print', rel='nofollow'))
+                    actions.append(render_action(_('view'), {'action': 'show'}))
+                    actions.append(render_action(_('raw'), {'action': 'raw'}))
+                    actions.append(render_action(_('print'), {'action': 'print'}))
                 else:
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('view'),
-                        querystr='action=recall&rev=%d' % rev, rel='nofollow'))
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('raw'),
-                        querystr='action=raw&rev=%d' % rev, rel='nofollow'))
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('print'),
-                        querystr='action=print&rev=%d' % rev, rel='nofollow'))
+                    actions.append(render_action(_('view'), {'action': 'recall', 'rev': '%d' % rev}))
+                    actions.append(render_action(_('raw'), {'action': 'raw', 'rev': '%d' % rev}))
+                    actions.append(render_action(_('print'), {'action': 'print', 'rev': '%d' % rev}))
                     if may_revert and size: # you can only revert to nonempty revisions
-                        actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                            text=_('revert'),
-                            querystr='action=revert&rev=%d' % rev, rel='nofollow'))
+                        actions.append(render_action(_('revert'), {'action': 'revert', 'rev': '%d' % rev}))
                 if count == 0:
                     rchecked = ' checked="checked"'
                     lchecked = ''
@@ -149,20 +153,12 @@ def execute(pagename, request):
                     except:
                         pass
                     if line.action == 'ATTNEW':
-                        actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                            text=_('view'),
-                            querystr='action=AttachFile&do=view&target=%s' % filename, rel='nofollow'))
+                        actions.append(render_action(_('view'), {'action': 'AttachFile', 'do': 'view', 'target': '%s' % filename}))
                     elif line.action == 'ATTDRW':
-                        actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                            text=_('edit'),
-                            querystr='action=AttachFile&drawing=%s' % filename.replace(".draw", ""), rel='nofollow'))
+                        actions.append(render_action(_('edit'), {'action': 'AttachFile', 'drawing': '%s' % filename.replace(".draw", "")}))
 
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('get'),
-                        querystr='action=AttachFile&do=get&target=%s' % filename, rel='nofollow'))
-                    actions = '%s&nbsp;%s' % (actions, page.link_to(request,
-                        text=_('del'),
-                        querystr='action=AttachFile&do=del&target=%s' % filename, rel='nofollow'))
+                    actions.append(render_action(_('get'), {'action': 'AttachFile', 'do': 'get', 'target': '%s' % filename}))
+                    actions.append(render_action(_('del'), {'action': 'AttachFile', 'do': 'del', 'target': '%s' % filename}))
                     # XXX use?: wikiutil.escape(filename)
 
             history.addRow((
@@ -172,7 +168,7 @@ def execute(pagename, request):
                 diff,
                 line.getEditor(request) or _("N/A"),
                 wikiutil.escape(comment) or '&nbsp;',
-                actions,
+                "&nbsp;".join(actions),
             ))
             count += 1
             if count >= 100:
@@ -181,24 +177,22 @@ def execute(pagename, request):
         # print version history
         from MoinMoin.widget.browser import DataBrowserWidget
 
-        request.write('<h2>%s</h2>\n' % _('Revision History'))
+        request.write(unicode(html.H2().append(_('Revision History'))))
 
         if not count: # there was no entry in logfile
             request.write(_('No log entries found.'))
             return
 
-        # TODO: this form activates revert, which should use POST, but
-        # other actions should use get. Maybe we should put the revert
-        # into the page view itself, and not in this form.
-        request.write('<form method="GET" action="">\n')
-        request.write('<div id="page-history">\n')
-        request.write('<input type="hidden" name="action" value="diff">\n')
-
         history_table = DataBrowserWidget(request)
         history_table.setData(history)
-        history_table.render()
-        request.write('</div>\n')
-        request.write('</form>\n')
+
+        div = html.DIV(id="page-history")
+        div.append(html.INPUT(type="hidden", name="action", value="diff"))
+        div.append(history_table.toHTML())
+
+        form = html.FORM(method="GET", action="")
+        form.append(div)
+        request.write(unicode(form))
 
     # main function
     _ = request.getText
