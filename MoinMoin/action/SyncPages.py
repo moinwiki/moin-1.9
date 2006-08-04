@@ -26,6 +26,8 @@ from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
+from MoinMoin.wikisync import TagStore
+from MoinMoin.util.bdiff import decompress, patch
 
 # directions
 UP, DOWN, BOTH = range(3)
@@ -46,7 +48,7 @@ class ActionStatus(Exception): pass
 
 class UnsupportedWikiException(Exception): pass
 
-# Move these classes to MoinMoin.wikisync
+# XXX Move these classes to MoinMoin.wikisync
 class SyncPage(object):
     """ This class represents a page in (another) wiki. """
     def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
@@ -171,6 +173,9 @@ class MoinRemoteWiki(RemoteWiki):
 
     def createConnection(self):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
+
+    def get_diff(self, pagename, from_rev, to_rev):
+        return str(self.connection.getDiff(pagename, from_rev, to_rev))
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
@@ -300,9 +305,9 @@ class ActionClass:
     
     def sync(self, params, local, remote):
         """ This method does the syncronisation work. """
-        
-        r_pages = remote.get_pages()
+
         l_pages = local.get_pages()
+        r_pages = remote.get_pages()
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
@@ -321,14 +326,39 @@ class ActionClass:
         remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
         local_but_not_remote = list(SyncPage.iter_local_only(m_pages))
         
-        # some initial test code
-        r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
-        l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
-        raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
+        # some initial test code (XXX remove)
+        #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
+        #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
+        #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
         #if params["direction"] in (DOWN, BOTH):
         #    for rp in remote_but_not_local:
-                # XXX add locking, acquire read-lock on rp
-                
+
+        # let's do the simple case first, can be refactored later to match all cases
+        for rp in on_both_sides:
+            # XXX add locking, acquire read-lock on rp
+
+            local_pagename = rp.local_pagename
+
+            tags = TagStore(Page(self.request, local_pagename))
+            matching_tags = tags.fetch(iwid_full=remote.iwid_full)
+            matching_tags.sort()
+
+            if not matching_tags:
+                remote_rev = None
+                local_rev = rp.local_rev # merge against the newest version
+                old_contents = ""
+            else:
+                newest_tag = matching_tags[-1]
+                local_rev = newest_tag.current_rev
+                remote_rev = newest_tag.remote_rev
+                old_contents = local_page.get_raw_body_str()
+
+            local_page = Page(self.request, local_pagename, rev=local_rev)
+
+            diff = remote.get_diff(rp.remote_pagename, remote_rev, None)
+            new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
+            # XXX this is not finished yet
+            
 
 
 def execute(pagename, request):
