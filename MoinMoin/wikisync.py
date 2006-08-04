@@ -14,6 +14,7 @@ except ImportError:
     import pickle
 
 from MoinMoin.util import lock
+from MoinMoin.packages import unpackLine
 
 
 class Tag(object):
@@ -32,6 +33,11 @@ class Tag(object):
 
     def __repr__(self):
         return u"<Tag remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.remote_wiki, self.remote_rev, self.current_rev)
+
+    def __cmp__(self, other):
+        if not isinstance(other, Tag):
+            return NotImplemented
+        return cmp(self.current_rev, other.current_rev)
 
 
 class AbstractTagStore(object):
@@ -54,6 +60,10 @@ class AbstractTagStore(object):
     
     def clear(self):
         """ Removes all tags. """
+        return NotImplemented
+
+    def fetch(self, iwid_full=None, iw_name=None):
+        """ Fetches tags by a special IWID or interwiki name. """
         return NotImplemented
 
 
@@ -110,6 +120,17 @@ class PickleTagStore(AbstractTagStore):
     def clear(self):
         self.tags = []
         self.commit()
+
+    def fetch(self, iwid_full=None, iw_name=None):
+        assert iwid_full ^ iw_name
+        if iwid_full:
+            iwid_full = unpackLine(iwid_full)
+            if len(iwid_full) == 1:
+                assert False, "This case is not supported yet" # XXX
+            iw_name = iwid_full[1]
+
+        return [t for t in self.tags if t.remote_wiki == iw_name]
+
 
 # currently we just have one implementation, so we do not need
 # a factory method
