@@ -31,6 +31,17 @@ from MoinMoin.wikidicts import Dict, Group
 UP, DOWN, BOTH = range(3)
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
 
+
+def normalise_pagename(page_name, prefix):
+    if prefix:
+        if not page_name.startswith(prefix):
+            return None
+        else:
+            return page_name[len(prefix):]
+    else:
+        return page_name
+
+
 class ActionStatus(Exception): pass
 
 class UnsupportedWikiException(Exception): pass
@@ -38,11 +49,14 @@ class UnsupportedWikiException(Exception): pass
 # Move these classes to MoinMoin.wikisync
 class SyncPage(object):
     """ This class represents a page in (another) wiki. """
-    def __init__(self, name, local_rev=None, remote_rev=None):
+    def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
         self.name = name
         self.local_rev = local_rev
         self.remote_rev = remote_rev
+        self.local_name = local_name
+        self.remote_name = remote_name
         assert local_rev or remote_rev
+        assert local_name or remote_name
 
     def __repr__(self):
         return repr("<Remote Page %r>" % unicode(self))
@@ -71,6 +85,7 @@ class SyncPage(object):
         for sp in remote_list:
             if sp in d:
                 d[sp].remote_rev = sp.remote_rev
+                d[sp].remote_name = sp.remote_name
             else:
                 d[sp] = sp
         return d.keys()
@@ -122,9 +137,11 @@ class RemoteWiki(object):
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname):
+    def __init__(self, request, interwikiname, prefix):
         self.request = request
+        self.prefix = prefix
         _ = self.request.getText
+
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
         self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
         self.valid = not wikitag_bad
@@ -132,10 +149,13 @@ class MoinRemoteWiki(RemoteWiki):
         if not self.valid:
             self.connection = None
             return
+
         self.connection = self.createConnection()
+
         version = self.connection.getMoinVersion()
         if not isinstance(version, (tuple, list)):
             raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+
         remote_interwikiname = self.get_interwiki_name()
         remote_iwid = self.connection.interwikiName()[1]
         self.is_anonymous = remote_interwikiname is None
@@ -158,7 +178,13 @@ class MoinRemoteWiki(RemoteWiki):
 
     def get_pages(self):
         pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})
-        return [SyncPage(unicode(name), remote_rev=revno) for name, revno in pages]
+        rpages = []
+        for name, revno in pages:
+            normalised_name = normalise_pagename(name, self.prefix)
+            if normalised_name is None:
+                continue
+            rpages.append(SyncPage(normalised_name, remote_rev=revno, remote_name=name))
+        return rpages
 
     def __repr__(self):
         return "<MoinRemoteWiki wiki_url=%r valid=%r>" % (self.wiki_url, self.valid)
@@ -166,8 +192,9 @@ class MoinRemoteWiki(RemoteWiki):
 
 class MoinLocalWiki(RemoteWiki):
     """ Used for the current MoinMoin wiki. """
-    def __init__(self, request):
+    def __init__(self, request, prefix):
         self.request = request
+        self.prefix = prefix
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
@@ -177,14 +204,17 @@ class MoinLocalWiki(RemoteWiki):
         return [self.createSyncPage(x) for x in pages]
 
     def createSyncPage(self, page_name):
-        return SyncPage(page_name, local_rev=Page(self.request, page_name).get_real_rev())
+        normalised_name = normalise_pagename(page_name, self.prefix)
+        if normalised_name is None:
+            return None
+        return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
         return self.request.cfg.interwikiname
 
     def get_pages(self):
-        return [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)]
+        return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)] if x]
 
     def __repr__(self):
         return "<MoinLocalWiki>"
@@ -253,10 +283,9 @@ class ActionClass:
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
-            # XXX prefix handling
-            local = MoinLocalWiki(self.request)
+            local = MoinLocalWiki(self.request, params["localPrefix"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"])
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"])
             except UnsupportedWikiException, (msg, ):
                 raise ActionStatus(msg)
 
