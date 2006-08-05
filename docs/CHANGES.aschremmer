@@ -27,7 +27,7 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC method to get the pagelist in a special way (revnos,
       no system pages etc.)
     * IWID support - i.e. every instance has a unique ID
-    * InterWiki page editable in the wiki
+    * InterWiki page editable in the wiki, modification detection based on mtimes
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
@@ -82,6 +82,7 @@ Week 30: Implemented IWID support, added function to generate random strings. Ad
 Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          fixed option handling again, refined semantics of options, introduced
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
+         Store mtime for InterWiki list updates and detect changes based on it.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress

@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.parser.ParserBase import ParserBase
+from MoinMoin.parser._ParserBase import ParserBase
 
 class Parser(ParserBase):
     parsername = "ColorizedDiff"
