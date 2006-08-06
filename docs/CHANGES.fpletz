@@ -211,4 +211,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-08-05 .. 2006-08-06
     * (finally :)) Google-like paging, using images from google.com until
       we get proper moin gfx
+    * index domains of a page (standard, underlay)
 
