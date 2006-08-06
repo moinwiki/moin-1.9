@@ -202,9 +202,13 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-25 .. 2006-07-30
     * student did not work on project
 
-2006-08-01 .. 2006-07-02
+2006-08-01 .. 2006-08-02
     * Reformatted search statistics to use CSS and be more google-like
       (only in modern theme for now)
     * Added "search result info bar", showing revision, size, mtime,
       links for further searches (-> ToDo) etc.
+
+2006-08-05 .. 2006-08-06
+    * (finally :)) Google-like paging, using images from google.com until
+      we get proper moin gfx
 

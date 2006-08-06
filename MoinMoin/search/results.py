@@ -278,7 +278,7 @@ class SearchResults:
         _ = request.getText
         output = [
             formatter.paragraph(1, attr={'class': 'searchstats'}),
-            _("Results %(bs)s%(hitsFrom)d -%(hitsTo)d%(be)s "
+            _("Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s "
                     "of about %(bs)s%(hits)d%(be)s results out of about "
                     "%(pages)d pages.") %
                    {'hits': len(self.hits), 'pages': self.pages,
@@ -644,6 +644,12 @@ class SearchResults:
             return ''.join(output)
         return ''
 
+    def _img_url(self, img):
+        cfg = self.request.cfg
+        # XXX: proper gfx
+        #return '%s/%s/img/%s' % (cfg.url_prefix, cfg.theme_default, img)
+        return 'http://www.google.com/intl/en/%s' % img
+
     def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
         """ Format previous and next page links in page
 
@@ -655,27 +661,86 @@ class SearchResults:
         """
         _ = self.request.getText
         f = self.formatter
+
+        # url magic
         from_re = r'\&from=[\d]+'
         uri = re.sub(from_re, '', self.request.request_uri)
-        from_uri = lambda n: '%s&from=%i' % (uri, n)
+        page_url = lambda n: '%s&from=%i' % (uri, n * hitsPerPage)
+        
+        pages = float(hitsNum) / hitsPerPage
+        if pages - int(pages) > 0.0:
+            pages = int(pages) + 2
+        cur_page = hitsFrom / hitsPerPage
         l = []
-        if hitsFrom > 0:                        # previous page available
-            n = hitsFrom - hitsPerPage
-            if n < 0: n = 0
+
+        # previous page available
+        if cur_page > 0:
             l.append(''.join([
-                f.url(1, href=from_uri(n)),
-                f.text(_('Previous Page')),
+                f.url(1, href=page_url(cur_page-1)),
+                f.text(_('Previous')),
                 f.url(0)
             ]))
-        if hitsFrom + hitsPerPage < hitsNum:    # next page available
-            n = hitsFrom + hitsPerPage
-            if n >= hitsNum: n = hitsNum - 1
+        else:
+            l.append('')
+
+        # list of pages to be shown
+        page_range = range(*(
+            cur_page - 4 < 0 and
+                (0, pages >= 10 and 10 or pages-1)
+                or
+                (cur_page - 4, cur_page + 5 > pages and
+                    cur_page + (pages - 1 - cur_page) or
+                    cur_page + 6)))
+        l.extend([''.join([
+                f.url(1, href=page_url(i)),
+                f.text(str(i+1)),
+                f.url(0),
+            ]) for i in page_range])
+
+        # next page available
+        if cur_page < pages:
             l.append(''.join([
-                f.url(1, href=from_uri(n)),
-                f.text(_('Next Page')),
+                f.url(1, href=page_url(cur_page+1)),
+                f.text(_('Next')),
                 f.url(0)
             ]))
-        return f.text(' | ').join(l)
+        else:
+            l.append('')
+
+        return ''.join([
+            f.table(1, attrs={'tableclass': 'searchpages'}),
+            f.table_row(1),
+                f.table_cell(1),
+                # first image, previous page
+                l[0] and
+                    f.image(self._img_url('nav_previous.gif')) or
+                    f.image(self._img_url('nav_first.gif')),
+                f.table_cell(0),
+                # images for ooos, highlighted current page
+                ''.join([
+                    ''.join([
+                        f.table_cell(1),
+                        f.url(1, href=page_url(i)),
+                        f.image(self._img_url(i == cur_page and
+                            'nav_current.gif' or 'nav_page.gif')),
+                        f.url(0),
+                        f.table_cell(0),
+                    ]) for i in page_range
+                ]),
+                f.table_cell(1),
+                # last image, next page
+                l[-1] and f.image(self._img_url('nav_next.gif')) or
+                    f.image(self._img_url('nav_last.gif')),
+                f.table_cell(0),
+            f.table_row(0),
+            f.table_row(1),
+                f.table_cell(1),
+                # textlinks
+                (f.table_cell(0) + f.table_cell(1)).join(l),
+                f.table_cell(0),
+            f.table_row(0),
+            f.table(0),
+        ])
 
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
