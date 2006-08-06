@@ -421,10 +421,12 @@ class Search:
                 pass
             #except AttributeError:
             #    pages = []
-            self.request.clock.stop('_xapianSearch')
 
-            if not self.query.xapian_need_postproc():
-                return self._getHits(hits, self._xapianMatch)
+            try:
+                if not self.query.xapian_need_postproc():
+                    return self._getHits(hits, self._xapianMatch)
+            finally:
+                self.request.clock.stop('_xapianSearch')
         
         return self._moinSearch(pages)
 
