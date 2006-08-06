@@ -31,21 +31,46 @@ class Clock:
     """
 
     def __init__(self):
-        self.timings = {'total': time.time()}
+        self.timings = {}
+        self.states = {}
 
     def start(self, timer):
-        self.timings[timer] = time.time() - self.timings.get(timer, 0)
+        state = self.states.setdefault(timer, 'new')
+        if state == 'new':
+            self.timings[timer] = time.time()
+            self.states[timer] = 'running'
+        elif state == 'running':
+            pass # this timer is already running, do nothing
+        elif state == 'stopped':
+            # if a timer is stopped, timings has the sum of all times it was running
+            self.timings[timer] = time.time() - self.timings[timer]
+            self.states[timer] = 'running'
 
     def stop(self, timer):
-        self.timings[timer] = time.time() - self.timings[timer]
+        state = self.states.setdefault(timer, 'neverstarted')
+        if state == 'running':
+            self.timings[timer] = time.time() - self.timings[timer]
+            self.states[timer] = 'stopped'
+        elif state == 'stopped':
+            pass # this timer already has been stopped, do nothing
+        elif state == 'neverstarted':
+            pass # this timer never has been started, do nothing
 
     def value(self, timer):
-        return "%.3f" % (self.timings[timer], )
+        state = self.states.setdefault(timer, 'nosuchtimer')
+        if state == 'stopped':
+            result = "%.3fs" % self.timings[timer]
+        elif state == 'running':
+            result = "%.3fs (still running)" % (time.time() - self.timings[timer])
+        else:
+            result = "- (%s)" % state
+        return result
 
     def dump(self):
         outlist = []
-        for timing in self.timings.items():
-            outlist.append("%s = %.3fs" % timing)
+        for timer in self.timings.keys():
+            value = self.value(timer)
+            outlist.append("%s = %s" % (timer, value))
         outlist.sort()
         return outlist
 
@@ -118,6 +143,8 @@ class RequestBase(object):
         else:
             self.writestack = []
             self.clock = Clock()
+            self.clock.start('total')
+            self.clock.start('base__init__')
             # order is important here!
             self.__dict__.update(properties)
             self._load_multi_cfg()
@@ -154,7 +181,7 @@ class RequestBase(object):
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
-
+            
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)
@@ -179,6 +206,7 @@ class RequestBase(object):
 
             self.opened_logs = 0
             self.reset()
+            self.clock.stop('base__init__')
 
     def surge_protect(self):
         """ check if someone requesting too much from us """
@@ -268,8 +296,10 @@ class RequestBase(object):
     def _load_multi_cfg(self):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
+            self.clock.start('load_multi_cfg')
             from MoinMoin.config import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
+            self.clock.stop('load_multi_cfg')
 
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
