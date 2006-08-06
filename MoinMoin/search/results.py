@@ -646,9 +646,7 @@ class SearchResults:
 
     def _img_url(self, img):
         cfg = self.request.cfg
-        # XXX: proper gfx
-        #return '%s/%s/img/%s' % (cfg.url_prefix, cfg.theme.name, img)
-        return 'http://www.google.com/intl/en/%s' % img
+        return '%s/%s/img/%s.png' % (cfg.url_prefix, self.request.theme.name, img)
 
     def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
         """ Format previous and next page links in page
@@ -696,7 +694,7 @@ class SearchResults:
             ]) for i in page_range])
 
         # next page available
-        if cur_page < pages:
+        if cur_page < pages-1:
             l.append(''.join([
                 f.url(1, href=page_url(cur_page+1)),
                 f.text(_('Next')),
@@ -713,10 +711,10 @@ class SearchResults:
                 l[0] and
                     ''.join([
                         f.url(1, href=page_url(cur_page-1)),
-                        f.image(self._img_url('nav_previous.gif')),
+                        f.image(self._img_url('nav_prev')),
                         f.url(0),
                     ]) or
-                    f.image(self._img_url('nav_first.gif')),
+                    f.image(self._img_url('nav_first')),
                 f.table_cell(0),
                 # images for ooos, highlighted current page
                 ''.join([
@@ -724,7 +722,7 @@ class SearchResults:
                         f.table_cell(1),
                         i != cur_page and f.url(1, href=page_url(i)) or '',
                         f.image(self._img_url(i == cur_page and
-                            'nav_current.gif' or 'nav_page.gif')),
+                            'nav_current' or 'nav_page')),
                         i != cur_page and f.url(0) or '',
                         f.table_cell(0),
                     ]) for i in page_range
@@ -734,10 +732,10 @@ class SearchResults:
                 l[-1] and
                     ''.join([
                         f.url(1, href=page_url(cur_page+1)),
-                        f.image(self._img_url('nav_next.gif')),
+                        f.image(self._img_url('nav_next')),
                         f.url(0),
                     ]) or
-                    f.image(self._img_url('nav_last.gif')),
+                    f.image(self._img_url('nav_last')),
                 f.table_cell(0),
             f.table_row(0),
             f.table_row(1),
