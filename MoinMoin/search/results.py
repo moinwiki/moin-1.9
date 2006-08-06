@@ -669,7 +669,7 @@ class SearchResults:
         
         pages = float(hitsNum) / hitsPerPage
         if pages - int(pages) > 0.0:
-            pages = int(pages) + 2
+            pages = int(pages) + 1
         cur_page = hitsFrom / hitsPerPage
         l = []
 
@@ -686,11 +686,9 @@ class SearchResults:
         # list of pages to be shown
         page_range = range(*(
             cur_page - 4 < 0 and
-                (0, pages >= 10 and 10 or pages)
-                or
-                (cur_page - 4, cur_page + 6 > pages and
-                    cur_page + (pages - 1 - cur_page) or
-                    cur_page + 6)))
+                (0, pages >= 10 and 10 or pages) or
+                (cur_page - 4, cur_page + 6 >= pages and
+                    pages or cur_page + 6)))
         l.extend([''.join([
                 i != cur_page and f.url(1, href=page_url(i)) or '',
                 f.text(str(i+1)),
