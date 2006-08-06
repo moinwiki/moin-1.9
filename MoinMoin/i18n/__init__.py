@@ -162,6 +162,7 @@ class Translation(object):
         return text
 
     def loadLanguage(self, request):
+        request.clock.start('loadLanguage')
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm')
         langfilename = po_filename(request, self.language, self.domain)
         needsupdate = cache.needsUpdate(langfilename)
@@ -203,6 +204,7 @@ class Translation(object):
 
         self.formatted = uc_texts
         self.raw = uc_unformatted
+        request.clock.stop('loadLanguage')
 
 
 def getDirection(lang):
