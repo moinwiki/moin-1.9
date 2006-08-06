@@ -97,11 +97,11 @@ def execute(Macro, args):
     nonestr = _("NONE")
     row('Event log', _formatInReadableUnits(eventlogger.size()))
 
-    row(_('Global extension macros'), ', '.join(macro.extension_macros) or nonestr)
+    row(_('Global extension macros'), ', '.join(macro.modules) or nonestr)
     row(_('Local extension macros'),
         ', '.join(wikiutil.wikiPlugins('macro', Macro.cfg)) or nonestr)
 
-    glob_actions = [x for x in action.extension_actions
+    glob_actions = [x for x in action.modules
                     if not x in request.cfg.actions_excluded]
     row(_('Global extension actions'), ', '.join(glob_actions) or nonestr)
     loc_actions = [x for x in wikiutil.wikiPlugins('action', Macro.cfg)
