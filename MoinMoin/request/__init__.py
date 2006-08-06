@@ -663,21 +663,9 @@ class RequestBase(object):
             self.cfg._known_actions # check
         except AttributeError:
             from MoinMoin import action
-            # Add built in actions
-            actions = [name[3:] for name in action.__dict__ if name.startswith('do_')]
+            self.cfg._known_actions = set(action.getNames(self.cfg))
 
-            # Add plugins           
-            dummy, plugins = action.getPlugins(self)
-            actions.extend(plugins)
-
-            # Add extensions
-            actions.extend(action.extension_actions)
-
-            # TODO: Use set when we require Python 2.3
-            actions = dict(zip(actions, [''] * len(actions)))
-            self.cfg._known_actions = actions
-
-        # Return a copy, so clients will not change the dict.
+        # Return a copy, so clients will not change the set.
         return self.cfg._known_actions.copy()
 
     def getAvailableActions(self, page):
@@ -698,14 +686,10 @@ class RequestBase(object):
 
             # Filter non ui actions (starts with lower case letter)
             actions = self.getKnownActions()
-            for key in actions.keys():
-                if key[0].islower():
-                    del actions[key]
+            actions = [action for action in actions if not action[0].islower()]
 
             # Filter wiki excluded actions
-            for key in self.cfg.actions_excluded:
-                if key in actions:
-                    del actions[key]
+            actions = [action for action in actions if not action in self.cfg.actions_excluded]
 
             # Filter actions by page type, acl and user state
             excluded = []
@@ -715,11 +699,9 @@ class RequestBase(object):
                 # Prevent modification of underlay only pages, or pages
                 # the user can't write and can't delete
                 excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-            for key in excluded:
-                if key in actions:
-                    del actions[key]
+            actions = [action for action in actions if not action in excluded]
 
-            self._available_actions = actions
+            self._available_actions = set(actions)
 
         # Return a copy, so clients will not change the dict.
         return self._available_actions.copy()

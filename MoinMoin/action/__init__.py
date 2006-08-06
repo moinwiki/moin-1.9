@@ -29,9 +29,12 @@ from MoinMoin.util import pysupport
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
-# create a list of extension actions from the subpackage directory
+# create a list of extension actions from the package directory
 extension_actions = pysupport.getPackageModules(__file__)
 modules = extension_actions
+
+# builtin-stuff (see do_<name> below):
+names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', 'userform', ]
 
 class ActionBase:
     """ action base class with some generic stuff to inherit
@@ -284,15 +287,14 @@ def do_userform(pagename, request):
     Page(request, pagename).send_page(request, msg=savemsg)
 
 # Dispatching ----------------------------------------------------------------
-import os
-
-def getPlugins(request):
-    """ return the path to the action plugin directory and a list of plugins there """
-    dir = os.path.join(request.cfg.plugin_dir, 'action')
-    plugins = []
-    if os.path.isdir(dir):
-        plugins = pysupport.getPackageModules(os.path.join(dir, 'dummy'))
-    return dir, plugins
+def getNames(cfg):
+    if hasattr(cfg, 'action_names'):
+        return cfg.action_names
+    else:
+        lnames = names[:]
+        lnames.extend(wikiutil.getPlugins('action', cfg))
+        cfg.action_names = lnames # remember it
+        return lnames
 
 def getHandler(request, action, identifier="execute"):
     """ return a handler function for a given action or None """

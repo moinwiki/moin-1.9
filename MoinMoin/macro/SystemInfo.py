@@ -101,11 +101,12 @@ def execute(Macro, args):
     row(_('Local extension macros'),
         ', '.join(wikiutil.wikiPlugins('macro', Macro.cfg)) or nonestr)
 
-    ext_actions = [x for x in action.extension_actions
+    glob_actions = [x for x in action.extension_actions
+                    if not x in request.cfg.actions_excluded]
+    row(_('Global extension actions'), ', '.join(glob_actions) or nonestr)
+    loc_actions = [x for x in wikiutil.wikiPlugins('action', Macro.cfg)
                    if not x in request.cfg.actions_excluded]
-    row(_('Global extension actions'), ', '.join(ext_actions) or nonestr)
-    row(_('Local extension actions'),
-        ', '.join(action.getPlugins(request)[1]) or nonestr)
+    row(_('Local extension actions'), ', '.join(loc_actions) or nonestr)
 
     row(_('Global parsers'), ', '.join(parser.modules) or nonestr)
     row(_('Local extension parsers'),
