@@ -30,8 +30,7 @@ from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
 # create a list of extension actions from the package directory
-extension_actions = pysupport.getPackageModules(__file__)
-modules = extension_actions
+modules = pysupport.getPackageModules(__file__)
 
 # builtin-stuff (see do_<name> below):
 names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', 'userform', ]

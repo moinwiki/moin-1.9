@@ -17,9 +17,7 @@
 """
 
 from MoinMoin.util import pysupport
-
-extension_macros = pysupport.getPackageModules(__file__)
-modules = extension_macros
+modules = pysupport.getPackageModules(__file__)
 
 import re, time, os
 from MoinMoin import action, config, util
