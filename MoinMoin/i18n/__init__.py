@@ -61,10 +61,11 @@ def i18n_init(request):
         The very first time, this will be slow as it will load all languages,
         but next time it will be fast due to caching.
     """
+    request.clock.start('i18n_init')
     global languages
     if languages is None:
         meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm')
-        i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n', 'mo')
+        i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
             _languages = {}
             for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # only MoinMoin domain for now XXX
@@ -85,6 +86,7 @@ def i18n_init(request):
         _languages = pickle.loads(meta_cache.content())
         if languages is None:
             languages = _languages
+    request.clock.stop('i18n_init')
 
 
 class Translation(object):
@@ -162,6 +164,7 @@ class Translation(object):
         return text
 
     def loadLanguage(self, request):
+        request.clock.start('loadLanguage')
         cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm')
         langfilename = po_filename(request, self.language, self.domain)
         needsupdate = cache.needsUpdate(langfilename)
@@ -203,6 +206,7 @@ class Translation(object):
 
         self.formatted = uc_texts
         self.raw = uc_unformatted
+        request.clock.stop('loadLanguage')
 
 
 def getDirection(lang):
