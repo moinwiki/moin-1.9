@@ -144,6 +144,7 @@ class RequestBase(object):
             self.writestack = []
             self.clock = Clock()
             self.clock.start('total')
+            self.clock.start('base__init__')
             # order is important here!
             self.__dict__.update(properties)
             self._load_multi_cfg()
@@ -180,7 +181,7 @@ class RequestBase(object):
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
-
+            
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)
@@ -205,6 +206,7 @@ class RequestBase(object):
 
             self.opened_logs = 0
             self.reset()
+            self.clock.stop('base__init__')
 
     def surge_protect(self):
         """ check if someone requesting too much from us """
