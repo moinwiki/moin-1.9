@@ -647,7 +647,7 @@ class SearchResults:
     def _img_url(self, img):
         cfg = self.request.cfg
         # XXX: proper gfx
-        #return '%s/%s/img/%s' % (cfg.url_prefix, cfg.theme_default, img)
+        #return '%s/%s/img/%s' % (cfg.url_prefix, cfg.theme.name, img)
         return 'http://www.google.com/intl/en/%s' % img
 
     def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
@@ -692,9 +692,9 @@ class SearchResults:
                     cur_page + (pages - 1 - cur_page) or
                     cur_page + 6)))
         l.extend([''.join([
-                f.url(1, href=page_url(i)),
+                i != cur_page and f.url(1, href=page_url(i)) or '',
                 f.text(str(i+1)),
-                f.url(0),
+                i != cur_page and f.url(0) or '',
             ]) for i in page_range])
 
         # next page available
@@ -720,10 +720,10 @@ class SearchResults:
                 ''.join([
                     ''.join([
                         f.table_cell(1),
-                        f.url(1, href=page_url(i)),
+                        i != cur_page and f.url(1, href=page_url(i)) or '',
                         f.image(self._img_url(i == cur_page and
                             'nav_current.gif' or 'nav_page.gif')),
-                        f.url(0),
+                        i != cur_page and f.url(0) or '',
                         f.table_cell(0),
                     ]) for i in page_range
                 ]),
