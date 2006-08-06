@@ -688,7 +688,7 @@ class SearchResults:
             cur_page - 4 < 0 and
                 (0, pages >= 10 and 10 or pages-1)
                 or
-                (cur_page - 4, cur_page + 5 > pages and
+                (cur_page - 4, cur_page + 6 > pages and
                     cur_page + (pages - 1 - cur_page) or
                     cur_page + 6)))
         l.extend([''.join([
@@ -713,7 +713,11 @@ class SearchResults:
                 f.table_cell(1),
                 # first image, previous page
                 l[0] and
-                    f.image(self._img_url('nav_previous.gif')) or
+                    ''.join([
+                        f.url(1, href=page_url(cur_page-1)),
+                        f.image(self._img_url('nav_previous.gif')),
+                        f.url(0),
+                    ]) or
                     f.image(self._img_url('nav_first.gif')),
                 f.table_cell(0),
                 # images for ooos, highlighted current page
@@ -729,7 +733,12 @@ class SearchResults:
                 ]),
                 f.table_cell(1),
                 # last image, next page
-                l[-1] and f.image(self._img_url('nav_next.gif')) or
+                l[-1] and
+                    ''.join([
+                        f.url(1, href=page_url(cur_page+1)),
+                        f.image(self._img_url('nav_next.gif')),
+                        f.url(0),
+                    ]) or
                     f.image(self._img_url('nav_last.gif')),
                 f.table_cell(0),
             f.table_row(0),
