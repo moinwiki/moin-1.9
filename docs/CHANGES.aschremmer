@@ -8,11 +8,13 @@ Branch moin/1.6-sync-aschremmer
 
   ToDo:
     * Implement actual syncronisation.
+      * Add correct IWID_full handling.
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage.
     * Clean up trailing whitespace.
     * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
+    * Search for XXX
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -83,6 +85,8 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          fixed option handling again, refined semantics of options, introduced
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
          Store mtime for InterWiki list updates and detect changes based on it.
+         Added support for localPrefix and remotePrefix.
+Week 32: Continued work on the merge logic, finished prefix handling.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
@@ -96,6 +100,14 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
 2006-07-27: student didnt work on project
 2006-07-28: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-29: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-30: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-31: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-01: student didn't work on project
+2006-08-02: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-03: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-04: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-05: student didn't work on project
+2006-08-06: student didn't work on project -- a Sunday
 
 Time plan
 =========
