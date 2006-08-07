@@ -23,11 +23,12 @@ except NameError:
 
 from MoinMoin import wikiutil, config, user
 from MoinMoin.packages import unpackLine, packLine
-from MoinMoin.PageEditor import PageEditor
+from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
 from MoinMoin.wikisync import TagStore
-from MoinMoin.util.bdiff import decompress, patch
+from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
+from MoinMoin.util import diff3
 
 # directions
 UP, DOWN, BOTH = range(3)
@@ -50,7 +51,7 @@ class UnsupportedWikiException(Exception): pass
 
 # XXX Move these classes to MoinMoin.wikisync
 class SyncPage(object):
-    """ This class represents a page in (another) wiki. """
+    """ This class represents a page in one or two wiki(s). """
     def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
         self.name = name
         self.local_rev = local_rev
@@ -76,6 +77,18 @@ class SyncPage(object):
         if not isinstance(other, SyncPage):
             return false
         return self.name == other.name
+
+    def add_missing_pagename(self, local, remote):
+        if self.local_name is None:
+            n_name = normalise_pagename(self.remote_name, remote.prefix)
+            assert n_name is not None
+            self.local_name = (local.prefix or "") + n_name
+        elif self.remote_name is None:
+            n_name = normalise_pagename(self.local_name, local.prefix)
+            assert n_name is not None
+            self.remote_name = (local.prefix or "") + n_name
+
+        return self # makes using list comps easier
 
     def filter(cls, sp_list, func):
         return [x for x in sp_list if func(x.name)]
@@ -132,6 +145,10 @@ class RemoteWiki(object):
         """ Returns the interwiki name of the other wiki. """
         return NotImplemented
 
+    def get_iwid(self):
+        """ Returns the InterWiki ID. """
+        return NotImplemented
+
     def get_pages(self):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
@@ -174,12 +191,16 @@ class MoinRemoteWiki(RemoteWiki):
     def createConnection(self):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
+    # Public methods
     def get_diff(self, pagename, from_rev, to_rev):
         return str(self.connection.getDiff(pagename, from_rev, to_rev))
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
         return self.connection.interwikiName()[0]
+
+    def get_iwid(self):
+        return self.connection.interwikiName()[1]
 
     def get_pages(self):
         pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})
@@ -214,9 +235,14 @@ class MoinLocalWiki(RemoteWiki):
             return None
         return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
 
+    # Public methods:
+
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
         return self.request.cfg.interwikiname
+
+    def get_iwid(self):
+        return self.request.cfg.iwid
 
     def get_pages(self):
         return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)] if x]
@@ -314,7 +340,7 @@ class ActionClass:
             r_pages = SyncPage.filter(r_pages, pages_from_groupList.__contains__)
             l_pages = SyncPage.filter(l_pages, pages_from_groupList.__contains__)
 
-        m_pages = SyncPage.merge(l_pages, r_pages)
+        m_pages = [elem.add_missing_pagename(local, remote) for elem in SyncPage.merge(l_pages, r_pages)]
 
         print "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages))
         
@@ -334,12 +360,15 @@ class ActionClass:
         #    for rp in remote_but_not_local:
 
         # let's do the simple case first, can be refactored later to match all cases
+        # XXX handle deleted pages
         for rp in on_both_sides:
             # XXX add locking, acquire read-lock on rp
 
+            current_page = Page(self.request, local_pagename)
+            current_rev = current_page.get_real_rev()
             local_pagename = rp.local_pagename
 
-            tags = TagStore(Page(self.request, local_pagename))
+            tags = TagStore(current_page)
             matching_tags = tags.fetch(iwid_full=remote.iwid_full)
             matching_tags.sort()
 
@@ -351,15 +380,38 @@ class ActionClass:
                 newest_tag = matching_tags[-1]
                 local_rev = newest_tag.current_rev
                 remote_rev = newest_tag.remote_rev
-                old_contents = local_page.get_raw_body_str()
+                if remote_rev == rp.remote_rev and local_rev == current_rev:
+                    continue # no changes done, next page
+                old_page = Page(self.request, local_pagename, rev=local_rev)
+                old_contents = old_page.get_raw_body_str()
 
-            local_page = Page(self.request, local_pagename, rev=local_rev)
+            diff_result = remote.get_diff(rp.remote_pagename, remote_rev, None)
+            is_remote_conflict = diff_result["conflict"]
+            assert diff_result["diffversion"] == 1
+            diff = diff_result["diff"]
+            current_remote_rev = diff_result["current"]
 
-            diff = remote.get_diff(rp.remote_pagename, remote_rev, None)
+            if remote_rev is None: # set the remote_rev for the case without any tags
+                remote_rev = current_remote_rev
+
             new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
-            # XXX this is not finished yet
-            
+            old_contents = old_contents.encode("utf-8")
 
+            # here, the actual merge happens
+            verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 1, *conflict_markers)
+
+            new_local_rev = current_rev + 1 # XXX commit first?
+            local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
+            remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
+            # XXX add remote conflict handling
+            very_current_remote_rev = remote.merge_diff(rp.remote_pagename, compress(textdiff(new_contents, verynewtext)), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
+            comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
+            try:
+                current_page.saveText(verynewtext, current_rev, comment=comment)
+            except PageEditor.EditConflict:
+                assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
+            # XXX untested
 
 def execute(pagename, request):
     ActionClass(pagename, request).render()
