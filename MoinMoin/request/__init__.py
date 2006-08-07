@@ -66,7 +66,7 @@ class Clock:
         elif state is None:
             result = "- (%s)" % state
         else:
-            print "Got state %r" % state
+            #print "Got state %r" % state
             result = "%.3fs (still running)" % (time.time() - self.timings[timer])
         return result
 
