@@ -1385,6 +1385,7 @@ class Page:
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """            
         formatter = self.formatter
+        request.clock.start("execute")
         from MoinMoin.macro import Macro
         macro_obj = Macro(parser)        
         # Fix __file__ when running from a zip package
@@ -1396,6 +1397,7 @@ class Page:
             exec code
         except "CacheNeedsUpdate": # convert the exception
             raise Exception("CacheNeedsUpdate")
+        request.clock.stop("execute")
 
     def loadCache(self, request):
         """ Return page content cache or raises 'CacheNeedsUpdate' """
@@ -1407,8 +1409,6 @@ class Page:
         import marshal
         try:
             return marshal.loads(cache.content())
-        except "CacheNeedsUpdate": # convert old exception into a new one
-            raise Exception('CacheNeedsUpdate')
         except (EOFError, ValueError, TypeError):
             # Bad marshal data, must update the cache.
             # See http://docs.python.org/lib/module-marshal.html
