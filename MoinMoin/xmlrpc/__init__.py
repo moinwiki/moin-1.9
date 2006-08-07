@@ -617,7 +617,7 @@ class XmlRpcBase:
         else:
             return [self._outstr(name), iwid]
 
-    def xmlrpc_mergeChanges(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+    def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
             Additionally, this method tags the new revision.
             
@@ -634,7 +634,7 @@ class XmlRpcBase:
 
         pagename = self._instr(pagename)
 
-        comment = u"Remote - %r" % interwiki_name
+        comment = u"Remote Merge - %r" % interwiki_name
         
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
