@@ -28,42 +28,46 @@ class HeadersAlreadySentException(Exception):
 class Clock:
     """ Helper class for code profiling
         we do not use time.clock() as this does not work across threads
+        This is not thread-safe when it comes to multiple starts for one timer.
+        It is possible to recursively call the start and stop methods, you
+        should just ensure that you call them often enough :)
     """
 
     def __init__(self):
         self.timings = {}
         self.states = {}
 
+    def _get_name(timer, generation):
+        if generation == 0:
+            return timer
+        else:
+            return "%s|%i" % (timer, generation)
+    _get_name = staticmethod(_get_name)
+
     def start(self, timer):
-        state = self.states.setdefault(timer, 'new')
-        if state == 'new':
-            self.timings[timer] = time.time()
-            self.states[timer] = 'running'
-        elif state == 'running':
-            pass # this timer is already running, do nothing
-        elif state == 'stopped':
-            # if a timer is stopped, timings has the sum of all times it was running
-            self.timings[timer] = time.time() - self.timings[timer]
-            self.states[timer] = 'running'
+        state = self.states.setdefault(timer, -1)
+        new_level = state + 1
+        name = Clock._get_name(timer, new_level)
+        self.timings[name] = time.time() - self.timings.get(name, 0)
+        self.states[timer] = new_level
 
     def stop(self, timer):
-        state = self.states.setdefault(timer, 'neverstarted')
-        if state == 'running':
-            self.timings[timer] = time.time() - self.timings[timer]
-            self.states[timer] = 'stopped'
-        elif state == 'stopped':
-            pass # this timer already has been stopped, do nothing
-        elif state == 'neverstarted':
-            pass # this timer never has been started, do nothing
+        state = self.states.setdefault(timer, -1)
+        if state >= 0: # timer is active
+            name = Clock._get_name(timer, state)
+            self.timings[name] = time.time() - self.timings[name]
+            self.states[timer] = state - 1
 
     def value(self, timer):
-        state = self.states.setdefault(timer, 'nosuchtimer')
-        if state == 'stopped':
+        base_timer = timer.split("|")[0]
+        state = self.states.get(base_timer, None)
+        if state == -1:
             result = "%.3fs" % self.timings[timer]
-        elif state == 'running':
-            result = "%.3fs (still running)" % (time.time() - self.timings[timer])
-        else:
+        elif state is None:
             result = "- (%s)" % state
+        else:
+            print "Got state %r" % state
+            result = "%.3fs (still running)" % (time.time() - self.timings[timer])
         return result
 
     def dump(self):
