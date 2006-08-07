@@ -86,7 +86,7 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
          Store mtime for InterWiki list updates and detect changes based on it.
          Added support for localPrefix and remotePrefix.
-Week 32: 
+Week 32: Continued work on the merge logic, finished prefix handling.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
@@ -107,7 +107,7 @@ Week 32:
 2006-08-03: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-08-04: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-08-05: student didn't work on project
-2006-08-06: student didn't work on project
+2006-08-06: student didn't work on project -- a Sunday
 
 Time plan
 =========
