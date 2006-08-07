@@ -1385,19 +1385,21 @@ class Page:
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """            
         formatter = self.formatter
-        request.clock.start("execute")
-        from MoinMoin.macro import Macro
-        macro_obj = Macro(parser)        
-        # Fix __file__ when running from a zip package
-        import MoinMoin
-        if hasattr(MoinMoin, '__loader__'):
-            __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
-
+        request.clock.start("Page.execute")
         try:
-            exec code
-        except "CacheNeedsUpdate": # convert the exception
-            raise Exception("CacheNeedsUpdate")
-        request.clock.stop("execute")
+            from MoinMoin.macro import Macro
+            macro_obj = Macro(parser)        
+            # Fix __file__ when running from a zip package
+            import MoinMoin
+            if hasattr(MoinMoin, '__loader__'):
+                __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
+    
+            try:
+                exec code
+            except "CacheNeedsUpdate": # convert the exception
+                raise Exception("CacheNeedsUpdate")
+        finally:
+            request.clock.stop("Page.execute")
 
     def loadCache(self, request):
         """ Return page content cache or raises 'CacheNeedsUpdate' """
