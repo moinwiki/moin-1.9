@@ -345,6 +345,7 @@ class SearchResults:
                     self.formatTitle(page),
                     f.pagelink(0, page.page_name),
                     matchInfo,
+                    self.formatHitInfoBar(page),
                     f.listitem(0),
                     ]
                 write(''.join(item))
@@ -419,17 +420,7 @@ class SearchResults:
                     f.definition_desc(1),
                     fmt_context,
                     f.definition_desc(0),
-                    f.definition_desc(1, attr={'class': 'searchresinfobar'}),
-                    f.text('%.1fk - ' % (page.page.size()/1024.0)),
-                    f.text('rev: %d %s- ' % (page.page.get_real_rev(),
-                        not page.page.rev and '(%s) ' % _('current') or '')),
-                    f.text('last modified: %(time)s - ' % page.page.lastEditInfo()),
-                    # XXX: proper metadata
-                    #f.text('lang: %s - ' % page.page.language),
-                    f.url(1, href='#'),
-                    f.text(_('Similar pages')),
-                    f.url(0),
-                    f.definition_desc(0),
+                    self.formatHitInfoBar(page),
                     ]
                 write(''.join(item))
             write(f.definition_list(0))
@@ -747,6 +738,24 @@ class SearchResults:
             f.table(0),
         ])
 
+    def formatHitInfoBar(self, page):
+        f = self.formatter
+        _ = self.request.getText
+        return ''.join([
+            f.paragraph(1, attr={'class': 'searchhitinfobar'}),
+            f.text('%.1fk - ' % (page.page.size()/1024.0)),
+            f.text('rev: %d %s- ' % (page.page.get_real_rev(),
+                not page.page.rev and '(%s) ' % _('current') or '')),
+            f.text('last modified: %(time)s' % page.page.lastEditInfo()),
+            # XXX: proper metadata
+            #f.text('lang: %s - ' % page.page.language),
+            #f.url(1, href='#'),
+            #f.text(_('Similar pages')),
+            #f.url(0),
+            f.paragraph(0),
+        ])
+
+
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
         if querydict is None:
@@ -797,11 +806,13 @@ def getSearchResults(request, query, hits, start):
     for wikiname, page, attachment, match in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
             if attachment:
-                result_hits.append(FoundAttachment(page.page_name, attachment))
+                result_hits.append(FoundAttachment(page.page_name,
+                    attachment, page=page))
             else:
-                result_hits.append(FoundPage(page.page_name, match))
+                result_hits.append(FoundPage(page.page_name, match, page))
         else:
-            result_hits.append(FoundRemote(wikiname, page, attachment, match))
+            result_hits.append(FoundRemote(wikiname, page.page_name,
+                attachment, match, page))
     elapsed = time.time() - start
     count = request.rootpage.getPageCount()
     return SearchResults(query, result_hits, count, elapsed)
