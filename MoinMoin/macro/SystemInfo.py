@@ -123,6 +123,7 @@ def execute(Macro, args):
                 _('N/A'))
     row(_('Xapian search'), '%s, %s, %s'
             % (xapState[request.cfg.xapian_search], available, mtime))
+    row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
 
     row(_('Active threads'), t_count or _('N/A'))
     buf.write(u'</dl>')

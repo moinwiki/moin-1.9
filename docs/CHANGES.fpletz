@@ -12,9 +12,6 @@ Branch moin/1.6-xapian-fpletz
     * Write/update documentation for all the new search stuff
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
       (i.e. ExceptionTranslator)
-    * Add stemming support for highlighting stuff:
-        1. regexp for whole word (all lowercase), or
-        2. just the root of the word
 
   ToDo (low priority):
     * Case-sensitive searches / Regexp on multiple terms: Graceful
@@ -223,4 +220,6 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 2006-08-08
     * added some more timers for regression testing
+    * improved highlighting code to work better with stemming and
+      special searches, extended SystemInfo macro
 
