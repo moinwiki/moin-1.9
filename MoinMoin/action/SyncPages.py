@@ -36,6 +36,9 @@ directions_map = {"up": UP, "down": DOWN, "both": BOTH}
 
 
 def normalise_pagename(page_name, prefix):
+    """ Checks if the page_name starts with the prefix.
+        Returns None if it does not, otherwise strips the prefix.
+    """
     if prefix:
         if not page_name.startswith(prefix):
             return None
@@ -53,6 +56,13 @@ class UnsupportedWikiException(Exception): pass
 class SyncPage(object):
     """ This class represents a page in one or two wiki(s). """
     def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
+        """ Creates a SyncPage instance.
+            @param name: The canonical name of the page, without prefixes.
+            @param local_rev: The revision of the page in the local wiki.
+            @param remote_rev: The revision of the page in the remote wiki.
+            @param local_name: The page name of the page in the local wiki.
+            @param remote_name: The page name of the page in the remote wiki.
+        """
         self.name = name
         self.local_rev = local_rev
         self.remote_rev = remote_rev
@@ -71,6 +81,7 @@ class SyncPage(object):
         return self.name < other.name
 
     def __hash__(self):
+        """ Ensures that the hash value of this page only depends on the canonical name. """
         return hash(self.name)
 
     def __eq__(self, other):
@@ -79,6 +90,9 @@ class SyncPage(object):
         return self.name == other.name
 
     def add_missing_pagename(self, local, remote):
+        """ Checks if the particular concrete page names are unknown and fills
+            them in.
+        """
         if self.local_name is None:
             n_name = normalise_pagename(self.remote_name, remote.prefix)
             assert n_name is not None
@@ -91,10 +105,14 @@ class SyncPage(object):
         return self # makes using list comps easier
 
     def filter(cls, sp_list, func):
+        """ Returns all pages in sp_list that let func return True
+            for the canonical page name.
+        """
         return [x for x in sp_list if func(x.name)]
     filter = classmethod(filter)
 
     def merge(cls, local_list, remote_list):
+        """ Merges two lists of SyncPages into one, migrating attributes like the names. """
         # map page names to SyncPage objects :-)
         d = dict(zip(local_list, local_list))
         for sp in remote_list:
@@ -107,27 +125,33 @@ class SyncPage(object):
     merge = classmethod(merge)
 
     def is_only_local(self):
+        """ Is true if the page is only in the local wiki. """
         return not self.remote_rev
 
     def is_only_remote(self):
+        """ Is true if the page is only in the remote wiki. """
         return not self.local_rev
 
     def is_local_and_remote(self):
+        """ Is true if the page is in both wikis. """
         return self.local_rev and self.remote_rev
 
     def iter_local_only(cls, sp_list):
+        """ Iterates over all pages that are local only. """
         for x in sp_list:
             if x.is_only_local():
                 yield x
     iter_local_only = classmethod(iter_local_only)
 
     def iter_remote_only(cls, sp_list):
+        """ Iterates over all pages that are remote only. """
         for x in sp_list:
             if x.is_only_remote():
                 yield x
     iter_remote_only = classmethod(iter_remote_only)
 
     def iter_local_and_remote(cls, sp_list):
+        """ Iterates over all pages that are local and remote. """
         for x in sp_list:
             if x.is_local_and_remote():
                 yield x
@@ -193,6 +217,8 @@ class MoinRemoteWiki(RemoteWiki):
 
     # Public methods
     def get_diff(self, pagename, from_rev, to_rev):
+        """ Returns the binary diff of the remote page named pagename, given
+            from_rev and to_rev. """
         return str(self.connection.getDiff(pagename, from_rev, to_rev))
 
     # Methods implementing the RemoteWiki interface
@@ -261,9 +287,11 @@ class ActionClass:
         self.status = []
 
     def log_status(self, level, message):
+        """ Appends the message with a given importance level to the internal log. """
         self.status.append((level, message))
 
     def parse_page(self):
+        """ Parses the parameter page and returns the read arguments. """
         options = {
             "remotePrefix": "",
             "localPrefix": "",
