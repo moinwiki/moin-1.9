@@ -336,7 +336,7 @@ class TextSearch(BaseExpression):
                     tmp = []
                     for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
                         tmp.append(UnicodeQuery(Query.OP_OR, (w, s)))
-                        stemmed.append(w)
+                        stemmed.append(s)
                     t = tmp
                 else:
                     # just not stemmed
@@ -344,8 +344,10 @@ class TextSearch(BaseExpression):
                 queries.append(Query(Query.OP_AND, t))
 
             if not self.case and stemmed:
-                self._build_re(' '.join(stemmed), use_re=False,
-                        case=self.case, stemmed=True)
+                new_pat = ' '.join(stemmed)
+                self._pattern = new_pat
+                self._build_re(new_pat, use_re=False, case=self.case,
+                        stemmed=True)
 
         # titlesearch OR parsed wikiwords
         return Query(Query.OP_OR,
@@ -457,7 +459,7 @@ class TitleSearch(BaseExpression):
                         tmp.append(UnicodeQuery(Query.OP_OR,
                             ['%s%s' % (Xapian.Index.prefixMap['title'], j)
                                 for j in (w, s)]))
-                        stemmed.append(w)
+                        stemmed.append(s)
                     t = tmp
                 else:
                     # just not stemmed
@@ -467,8 +469,10 @@ class TitleSearch(BaseExpression):
                 queries.append(Query(Query.OP_AND, t))
 
             if not self.case and stemmed:
-                self._build_re(' '.join(stemmed), use_re=False,
-                        case=self.case, stemmed=True)
+                new_pat = ' '.join(stemmed)
+                self._pattern = new_pat
+                self._build_re(new_pat, use_re=False, case=self.case,
+                        stemmed=True)
 
         return Query(Query.OP_AND, queries)
 
@@ -635,6 +639,7 @@ class LanguageSearch(BaseExpression):
             pattern = self.pattern
             return UnicodeQuery('%s%s' % (prefix, pattern))
 
+
 class CategorySearch(TextSearch):
     """ Search the pages belonging to a category """
 
@@ -655,7 +660,7 @@ class CategorySearch(TextSearch):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return ""
+        return u'(Category%s)' % self._pattern
 
     def xapian_wanted(self):
         return True             # only easy regexps possible
