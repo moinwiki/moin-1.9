@@ -918,6 +918,9 @@ Try a different name.""") % (newpagename,)
         backup_url = self._make_backup(newtext, **kw)
         action = kw.get('action', 'SAVE')
 
+        # remember conflict state
+        self.setConflict(wikiutil.containsConflictMarker(newtext))
+
         #!!! need to check if we still retain the lock here
         #!!! rev check is not enough since internal operations use "0"
 
