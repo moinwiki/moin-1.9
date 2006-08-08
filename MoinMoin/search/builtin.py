@@ -394,17 +394,20 @@ class Search:
         Get a list of pages using fast xapian search and
         return moin search in those pages.
         """
+        clock = self.request.clock
         pages = None
         index = self._xapianIndex(self.request)
         if index and self.query.xapian_wanted():
-            self.request.clock.start('_xapianSearch')
+            clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
+                clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
                 enq, hits = index.search(query)
+                clock.stop('_xapianQuery')
                 self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
@@ -424,9 +427,13 @@ class Search:
 
             try:
                 if not self.query.xapian_need_postproc():
-                    return self._getHits(hits, self._xapianMatch)
+                    clock.start('_xapianProcess')
+                    try:
+                        return self._getHits(hits, self._xapianMatch)
+                    finally:
+                        clock.stop('_xapianProcess')
             finally:
-                self.request.clock.stop('_xapianSearch')
+                clock.stop('_xapianSearch')
         
         return self._moinSearch(pages)
 
