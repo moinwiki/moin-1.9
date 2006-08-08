@@ -252,10 +252,16 @@ class MoinLocalWiki(RemoteWiki):
 
 
 class ActionClass:
+    INFO, WARNING, ERROR = range(3) # used for logging
+
     def __init__(self, pagename, request):
         self.request = request
         self.pagename = pagename
         self.page = Page(request, pagename)
+        self.status = []
+
+    def log_status(self, level, message):
+        self.status.append((level, message))
 
     def parse_page(self):
         options = {
@@ -325,9 +331,9 @@ class ActionClass:
 
             self.sync(params, local, remote)
         except ActionStatus, e:
-            return self.page.send_page(self.request, msg=u'<p class="error">%s</p>\n' % (e.args[0], ))
+            return self.page.send_page(self.request, msg=u'<p class="error">%s</p><p>%s</p>\n' % (e.args[0], repr(self.status)))
 
-        return self.page.send_page(self.request, msg=_("Syncronisation finished."))
+        return self.page.send_page(self.request, msg=u"%s<p>%s</p>" % (_("Syncronisation finished."), repr(self.status)))
     
     def sync(self, params, local, remote):
         """ This method does the syncronisation work. """
@@ -365,6 +371,9 @@ class ActionClass:
             # XXX add locking, acquire read-lock on rp
 
             current_page = Page(self.request, local_pagename)
+            if wikiutil.containsConflictMarker(current_page.get_raw_body()):
+                self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a local unresolved conflict.") % {"pagename": local_pagename})
+                continue
             current_rev = current_page.get_real_rev()
             local_pagename = rp.local_pagename
 
@@ -385,6 +394,8 @@ class ActionClass:
                 old_page = Page(self.request, local_pagename, rev=local_rev)
                 old_contents = old_page.get_raw_body_str()
 
+            self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_pagename})
+
             diff_result = remote.get_diff(rp.remote_pagename, remote_rev, None)
             is_remote_conflict = diff_result["conflict"]
             assert diff_result["diffversion"] == 1
@@ -392,6 +403,7 @@ class ActionClass:
             current_remote_rev = diff_result["current"]
 
             if remote_rev is None: # set the remote_rev for the case without any tags
+                self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
                 remote_rev = current_remote_rev
 
             new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
@@ -403,15 +415,26 @@ class ActionClass:
             new_local_rev = current_rev + 1 # XXX commit first?
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
             remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
-            # XXX add remote conflict handling
+
             very_current_remote_rev = remote.merge_diff(rp.remote_pagename, compress(textdiff(new_contents, verynewtext)), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
-            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
+
+            # XXX upgrade to write lock
             try:
                 current_page.saveText(verynewtext, current_rev, comment=comment)
             except PageEditor.EditConflict:
+                # XXX remote rollback needed
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
+
+            if not wikiutil.containsConflictMarker(verynewtext):
+                self.log_status(ActionClass.INFO, _("Page successfully merged."))
+            else:
+                self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
+
+            # XXX release lock
             # XXX untested
+
 
 def execute(pagename, request):
     ActionClass(pagename, request).render()
