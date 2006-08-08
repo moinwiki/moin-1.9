@@ -27,11 +27,11 @@ def execute_fs(pagename, request):
     else:
         dump_fname = "nowhere"
 
-    request.http_headers()
+    request.emit_http_headers()
     request.write('<html><body>A dump has been saved to %s.</body></html>' % dump_fname)
 
 def execute_wiki(pagename, request):
-    request.http_headers()
+    request.emit_http_headers()
 
     request.theme.send_title("Thread monitor")
     request.write('<pre>')

@@ -105,7 +105,7 @@ class test(ActionBase):
     def do_action(self):
         """ run tests """
         request = self.request
-        request.http_headers(["Content-type: text/plain; charset=%s" % config.charset])
+        request.emit_http_headers(["Content-type: text/plain; charset=%s" % config.charset])
         request.write('MoinMoin Diagnosis\n======================\n\n')
         runTest(request)
         return True, ""

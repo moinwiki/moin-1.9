@@ -7,12 +7,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.util import pysupport
-
-# create a list of extension scripts from the subpackage directory
-extension_scripts = pysupport.getPackageModules(__file__)
-modules = extension_scripts
-
 import os, sys, time
 
 flag_quiet = 0

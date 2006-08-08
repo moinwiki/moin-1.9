@@ -199,16 +199,20 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * SystemInfo macro update (mtime)
     * nicer regexp support for TitleSearch
 
-2006-07-25 .. 2006-07-29
+2006-07-25 .. 2006-08-01
     * student did not work on project
 
-2006-07-30 no work on project
-2006-07-31 no work on project
-2006-08-01 no work on project
-2006-08-02 entry missing
+2006-08-02
+    * Reformatted search statistics to use CSS and be more google-like
+      (only in modern theme for now)
+    * Added "search result info bar", showing revision, size, mtime,
+      links for further searches (-> ToDo) etc.
+
 2006-08-03 no work on project
 2006-08-04 no work on project
-2006-08-05 entry missing
-2006-08-06 entry missing
 
+2006-08-05 .. 2006-08-06
+    * (finally :)) Google-like paging, using images from google.com until
+      we get proper moin gfx
+    * index domains of a page (standard, underlay)
 

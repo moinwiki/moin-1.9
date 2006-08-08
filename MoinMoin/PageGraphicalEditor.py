@@ -54,7 +54,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         request = self.request
         form = self.request.form
         _ = self._
-        self.request.http_headers(self.request.nocache)
+        self.request.emit_http_headers(self.request.nocache)
 
         raw_body = ''
         msg = None

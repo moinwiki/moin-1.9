@@ -23,7 +23,7 @@ pre.cpparea span.Preprc   { color: #804000; }
 
 """
 
-from MoinMoin.parser.ParserBase import ParserBase
+from MoinMoin.parser._ParserBase import ParserBase
 
 Dependencies = []
 

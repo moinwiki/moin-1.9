@@ -33,6 +33,8 @@ class Request(RequestBase):
             self.http_user_agent = sa.headers.getheader('user-agent', '')
             co = filter(None, sa.headers.getheaders('cookie'))
             self.saved_cookie = ', '.join(co) or ''
+            self.if_modified_since = sa.headers.getheader('if-modified-since')
+            self.if_none_match = sa.headers.getheader('if-none-match')
 
             # Copy rest from standalone request   
             self.server_name = sa.server.server_name
@@ -90,44 +92,16 @@ class Request(RequestBase):
 
     # Headers ----------------------------------------------------------
 
-    def http_headers(self, more_headers=[]):
-        if getattr(self, 'sent_headers', None):
-            return
-
-        self.sent_headers = 1
-        user_headers = getattr(self, 'user_headers', [])
-
-        # check for status header and send it
-        our_status = 200
-        for header in more_headers + user_headers:
-            if header.lower().startswith("status:"):
-                try:
-                    our_status = int(header.split(':', 1)[1].strip().split(" ", 1)[0])
-                except:
-                    pass
-                # there should be only one!
-                break
-        # send response
-        self.sareq.send_response(our_status)
-
-        # send http headers
-        have_ct = 0
-        for header in more_headers + user_headers:
-            if type(header) is unicode:
-                header = header.encode('ascii')
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-
-            self.write("%s\r\n" % header)
-
-        if not have_ct:
-            self.write("Content-type: text/html;charset=%s\r\n" % config.charset)
-
-        self.write('\r\n')
-
-        #from pprint import pformat
-        #sys.stderr.write(pformat(more_headers))
-        #sys.stderr.write(pformat(self.user_headers))
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
+        st_header, other_headers = headers[0], headers[1:]
+        status = st_header.split(':', 1)[1].lstrip()
+        status_code, status_msg = status.split(' ', 1)
+        status_code = int(status_code)
+        self.sareq.send_response(status_code, status_msg)
+        for header in other_headers:
+            key, value = header.split(':', 1)
+            value = value.lstrip()
+            self.sareq.send_header(key, value)
+        self.sareq.end_headers()
 

@@ -18,6 +18,12 @@ import MoinMoin.util.web
 from MoinMoin.mail import sendmail
 
 
+# used for merging
+conflict_markers = ("\n---- /!\ '''Edit conflict - other version:''' ----\n",
+                    "\n---- /!\ '''Edit conflict - your version:''' ----\n",
+                    "\n---- /!\ '''End of edit conflict''' ----\n")
+
+
 #############################################################################
 ### Javascript code for editor page
 #############################################################################
@@ -101,10 +107,7 @@ class PageEditor(Page):
         
         # And try to merge all into one with edit conflict separators
         verynewtext = diff3.text_merge(original_text, saved_text, savetext,
-                                       allow_conflicts,
-                                       "\n---- /!\ '''Edit conflict - other version:''' ----\n",
-                                       "\n---- /!\ '''Edit conflict - your version:''' ----\n",
-                                       "\n---- /!\ '''End of edit conflict''' ----\n")
+                                       allow_conflicts, *conflict_markers)
         if verynewtext:
             self.set_raw_body(verynewtext)
             return True
@@ -141,7 +144,7 @@ class PageEditor(Page):
 
         form = self.request.form
         _ = self._
-        self.request.http_headers(self.request.nocache)
+        self.request.emit_http_headers(self.request.nocache)
 
         raw_body = ''
         msg = None

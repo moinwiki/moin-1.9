@@ -29,9 +29,11 @@ from MoinMoin.util import pysupport
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
-# create a list of extension actions from the subpackage directory
-extension_actions = pysupport.getPackageModules(__file__)
-modules = extension_actions
+# create a list of extension actions from the package directory
+modules = pysupport.getPackageModules(__file__)
+
+# builtin-stuff (see do_<name> below):
+names = ['show', 'recall', 'raw', 'format', 'content', 'print', 'refresh', 'goto', 'userform', ]
 
 class ActionBase:
     """ action base class with some generic stuff to inherit
@@ -201,15 +203,8 @@ class ActionBase:
         else:
             self.render_msg(self.make_form()) # display the form again
 
-# from wikiaction.py ---------------------------------------------------------
 
-import os, re, time
-from MoinMoin import config, util
-from MoinMoin.logfile import editlog
-
-#############################################################################
-### Misc Actions
-#############################################################################
+# Builtin Actions ------------------------------------------------------------
 
 def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
@@ -252,7 +247,7 @@ def do_format(pagename, request):
 
 def do_content(pagename, request):
     """ same as do_show, but we only show the content """
-    request.http_headers()
+    request.emit_http_headers()
     page = Page(request, pagename)
     request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
     page.send_page(request, count_hit=0, content_only=1)
@@ -279,93 +274,10 @@ def do_refresh(pagename, request):
     caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
     do_show(pagename, request)
 
-def do_revert(pagename, request):
-    """ restore another revision of a page as a new current revision """
-    from MoinMoin.PageEditor import PageEditor
-    _ = request.getText
-
-    if not request.user.may.revert(pagename):
-        return Page(request, pagename).send_page(request,
-            msg=_('You are not allowed to revert this page!'))
-
-    rev = int(request.form['rev'][0])
-    revstr = '%08d' % rev
-    oldpg = Page(request, pagename, rev=rev)
-    pg = PageEditor(request, pagename)
-
-    try:
-        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=revstr,
-                              action="SAVE/REVERT")
-    except pg.SaveError, msg:
-        # msg contain a unicode string
-        savemsg = unicode(msg)
-    request.reset()
-    pg.send_page(request, msg=savemsg)
-    return None
-
 def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
     request.http_redirect(Page(request, target).url(request))
-
-def do_quicklink(pagename, request):
-    """ Add the current wiki page to the user quicklinks 
-    
-    TODO: what if add or remove quicklink fail? display an error message?
-    """
-    _ = request.getText
-    msg = None
-
-    if not request.user.valid:
-        msg = _("You must login to add a quicklink.")
-    elif request.user.isQuickLinkedTo([pagename]):
-        if request.user.removeQuicklink(pagename):
-            msg = _('Your quicklink to this page has been removed.')
-    else:
-        if request.user.addQuicklink(pagename):
-            msg = _('A quicklink to this page has been added for you.')
-
-    Page(request, pagename).send_page(request, msg=msg)
-
-def do_subscribe(pagename, request):
-    """ Subscribe or unsubscribe the user to pagename
-    
-    TODO: what if subscribe failed? no message is displayed.
-    """
-    _ = request.getText
-    cfg = request.cfg
-    msg = None
-
-    if not request.user.may.read(pagename):
-        msg = _("You are not allowed to subscribe to a page you can't read.")
-
-    # Check if mail is enabled
-    elif not cfg.mail_enabled:
-        msg = _("This wiki is not enabled for mail processing.")
-
-    # Suggest visitors to login
-    elif not request.user.valid:
-        msg = _("You must log in to use subscribtions.")
-
-    # Suggest users without email to add their email address
-    elif not request.user.email:
-        msg = _("Add your email address in your UserPreferences to use subscriptions.")
-
-    elif request.user.isSubscribedTo([pagename]):
-        # Try to unsubscribe
-        if request.user.unsubscribe(pagename):
-            msg = _('Your subscribtion to this page has been removed.')
-        else:
-            msg = _("Can't remove regular expression subscription!") + u' ' + \
-                  _("Edit the subscription regular expressions in your "
-                    "UserPreferences.")
-
-    else:
-        # Try to subscribe
-        if request.user.subscribe(pagename):
-            msg = _('You have been subscribed to this page.')
-
-    Page(request, pagename).send_page(request, msg=msg)
 
 def do_userform(pagename, request):
     """ save data posted from UserPreferences """
@@ -373,74 +285,15 @@ def do_userform(pagename, request):
     savemsg = userform.savedata(request)
     Page(request, pagename).send_page(request, msg=savemsg)
 
-def do_bookmark(pagename, request):
-    """ set bookmarks (in time) for RecentChanges or delete them """
-    timestamp = request.form.get('time', [None])[0]
-    if timestamp is not None:
-        if timestamp == 'del':
-            tm = None
-        else:
-            try:
-                tm = int(timestamp)
-            except StandardError:
-                tm = wikiutil.timestamp2version(time.time())
+# Dispatching ----------------------------------------------------------------
+def getNames(cfg):
+    if hasattr(cfg, 'action_names'):
+        return cfg.action_names
     else:
-        tm = wikiutil.timestamp2version(time.time())
-
-    if tm is None:
-        request.user.delBookmark()
-    else:
-        request.user.setBookmark(tm)
-    Page(request, pagename).send_page(request)
-
-
-#############################################################################
-### Special Actions
-#############################################################################
-
-def do_chart(pagename, request):
-    """ Show page charts """
-    _ = request.getText
-    if not request.user.may.read(pagename):
-        msg = _("You are not allowed to view this page.")
-        return request.page.send_page(request, msg=msg)
-
-    if not request.cfg.chart_options:
-        msg = _("Charts are not available!")
-        return request.page.send_page(request, msg=msg)
-
-    chart_type = request.form.get('type', [''])[0].strip()
-    if not chart_type:
-        msg = _('You need to provide a chart type!')
-        return request.page.send_page(request, msg=msg)
-
-    try:
-        func = pysupport.importName("MoinMoin.stats." + chart_type, 'draw')
-    except (ImportError, AttributeError):
-        msg = _('Bad chart type "%s"!') % chart_type
-        return request.page.send_page(request, msg=msg)
-
-    func(pagename, request)
-
-def do_dumpform(pagename, request):
-    """ dump the form data we received in this request for debugging """
-    data = util.dumpFormData(request.form)
-
-    request.http_headers()
-    request.write("<html><body>%s</body></html>" % data)
-
-
-#############################################################################
-### Dispatching
-#############################################################################
-
-def getPlugins(request):
-    """ return the path to the action plugin directory and a list of plugins there """
-    dir = os.path.join(request.cfg.plugin_dir, 'action')
-    plugins = []
-    if os.path.isdir(dir):
-        plugins = pysupport.getPackageModules(os.path.join(dir, 'dummy'))
-    return dir, plugins
+        lnames = names[:]
+        lnames.extend(wikiutil.getPlugins('action', cfg))
+        cfg.action_names = lnames # remember it
+        return lnames
 
 def getHandler(request, action, identifier="execute"):
     """ return a handler function for a given action or None """

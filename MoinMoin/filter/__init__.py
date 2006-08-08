@@ -9,8 +9,7 @@
 import os
 from MoinMoin.util import pysupport
 
-filters = pysupport.getPackageModules(__file__)
-modules = filters
+modules = pysupport.getPackageModules(__file__)
 
 standard_codings = ['utf-8', 'iso-8859-15', 'iso-8859-1', ]
 

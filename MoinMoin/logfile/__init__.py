@@ -6,10 +6,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin.util import pysupport
-
-logfiles = pysupport.getPackageModules(__file__)
-
 import os, codecs, errno
 from MoinMoin import config, wikiutil
 

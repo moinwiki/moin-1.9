@@ -23,6 +23,8 @@ class Request(RequestBase):
             self.http_accept_language = self.twistd.getHeader('Accept-Language')
             self.saved_cookie = self.twistd.getHeader('Cookie')
             self.http_user_agent = self.twistd.getHeader('User-Agent')
+            self.if_modified_since = self.twistd.getHeader('If-Modified-Since')
+            self.if_none_match = self.twistd.getHeader('If-None-Match')
 
             # Copy values from twisted request
             self.server_protocol = self.twistd.clientproto
@@ -46,7 +48,7 @@ class Request(RequestBase):
             RequestBase.__init__(self, properties)
 
         except MoinMoinFinish: # might be triggered by http_redirect
-            self.http_headers() # send headers (important for sending MOIN_ID cookie)
+            self.emit_http_headers() # send headers (important for sending MOIN_ID cookie)
             self.finish()
 
         except Exception, err:
@@ -110,34 +112,20 @@ class Request(RequestBase):
 
     # Headers ----------------------------------------------------------
 
-    def __setHttpHeader(self, header):
-        if type(header) is unicode:
-            header = header.encode('ascii')
-        key, value = header.split(':', 1)
-        value = value.lstrip()
-        if key.lower() == 'set-cookie':
-            key, value = value.split('=', 1)
-            self.twistd.addCookie(key, value)
-        else:
-            self.twistd.setHeader(key, value)
-        #print "request.RequestTwisted.setHttpHeader: %s" % header
-
-    def http_headers(self, more_headers=[]):
-        if getattr(self, 'sent_headers', None):
-            return
-        self.sent_headers = 1
-        have_ct = 0
-
-        # set http headers
-        for header in more_headers + getattr(self, 'user_headers', []):
-            if header.lower().startswith("content-type:"):
-                # don't send content-type multiple times!
-                if have_ct: continue
-                have_ct = 1
-            self.__setHttpHeader(header)
-
-        if not have_ct:
-            self.__setHttpHeader("Content-type: text/html;charset=%s" % config.charset)
+    def _emit_http_headers(self, headers):
+        """ private method to send out preprocessed list of HTTP headers """
+        st_header, other_headers = headers[0], headers[1:]
+        status = st_header.split(':', 1)[1].lstrip()
+        status_code, status_msg = status.split(' ', 1)
+        self.twistd.setResponseCode(status_code, status_message)
+        for header in other_headers:
+            key, value = header.split(':', 1)
+            value = value.lstrip()
+            if key.lower() == 'set-cookie':
+                key, value = value.split('=', 1)
+                self.twistd.addCookie(key, value)
+            else:
+                self.twistd.setHeader(key, value)
 
     def http_redirect(self, url):
         """ Redirect to a fully qualified, or server-rooted URL 
@@ -150,7 +138,4 @@ class Request(RequestBase):
         # request. leave the finish call to run()
         #self.twistd.finish()
         raise MoinMoinFinish
-
-    def setResponseCode(self, code, message=None):
-        self.twistd.setResponseCode(code, message)
 

@@ -7,7 +7,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys, re
+import os, sys, re, random
 
 #############################################################################
 ### XML helper functions
@@ -112,3 +112,7 @@ class simpleIO:
     def close(self):
         self.buffer = None
 
+
+def random_string(length):
+    chars = ''.join([chr(random.randint(0, 255)) for x in xrange(length)])
+    return chars

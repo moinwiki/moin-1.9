@@ -17,9 +17,7 @@
 """
 
 from MoinMoin.util import pysupport
-
-extension_macros = pysupport.getPackageModules(__file__)
-modules = extension_macros
+modules = pysupport.getPackageModules(__file__)
 
 import re, time, os
 from MoinMoin import action, config, util
@@ -145,55 +143,8 @@ class Macro:
             return self.defaultDependency
 
     def _macro_TitleSearch(self, args):
-        return self._m_search("titlesearch")
-
-    def _m_search(self, type):
-        """ Make a search box
-
-        Make both Title Search and Full Search boxes, according to type.
-
-        @param type: search box type: 'titlesearch' or 'fullsearch'
-        @rtype: unicode
-        @return: search box html fragment
-        """
-        _ = self._
-        if self.form.has_key('value'):
-            default = wikiutil.escape(self.form["value"][0], quote=1)
-        else:
-            default = ''
-
-        # Title search settings
-        boxes = ''
-        button = _("Search Titles")
-
-        # Special code for fullsearch
-        if type == "fullsearch":
-            boxes = [
-                u'<br>',
-                u'<input type="checkbox" name="context" value="160" checked="checked">',
-                _('Display context of search results'),
-                u'<br>',
-                u'<input type="checkbox" name="case" value="1">',
-                _('Case-sensitive searching'),
-                ]
-            boxes = u'\n'.join(boxes)
-            button = _("Search Text")
-
-        # Format
-        type = (type == "titlesearch")
-        html = [
-            u'<form method="get" action="">',
-            u'<div>',
-            u'<input type="hidden" name="action" value="fullsearch">',
-            u'<input type="hidden" name="titlesearch" value="%i">' % type,
-            u'<input type="text" name="value" size="30" value="%s">' % default,
-            u'<input type="submit" value="%s">' % button,
-            boxes,
-            u'</div>',
-            u'</form>',
-            ]
-        html = u'\n'.join(html)
-        return self.formatter.rawHTML(html)
+        from FullSearch import search_box
+        return search_box("titlesearch", self)
 
     def _macro_GoTo(self, args):
         """ Make a goto box
