@@ -86,7 +86,9 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
          Store mtime for InterWiki list updates and detect changes based on it.
          Added support for localPrefix and remotePrefix.
-Week 32: Continued work on the merge logic, finished prefix handling.
+Week 32: Continued work on the merge logic, finished prefix handling. Added local conflict
+         detection in SyncPages. Added logging support to SyncPages. Refactored conflict flag
+         detection from the edit action into the PageEditor class.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
