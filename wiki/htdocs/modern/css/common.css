@@ -337,13 +337,14 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
     font-weight: normal;
 }
 
-.searchresults dd {
+.searchresults dd, .searchresults p {
     font-size: 0.85em;
 }
 
-.searchresults dd.searchresinfobar {
+.searchresults .searchhitinfobar {
     color: #008000;
     margin-left: 15px;
+    margin-top: 0;
 }
 
 p.searchstats {

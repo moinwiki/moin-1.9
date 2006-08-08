@@ -216,3 +216,8 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       we get proper moin gfx
     * index domains of a page (standard, underlay)
 
+2006-08-07
+     * info bar for titlesearches
+     * bugfix for results code: sometimes we never got a page instance
+       in Found{Page,Attachment,...} which yielded strange errors
+
