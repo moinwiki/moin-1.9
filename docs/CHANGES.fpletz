@@ -221,3 +221,6 @@ be no issue with OrExpression as _moinSearch handles this correctly.
      * bugfix for results code: sometimes we never got a page instance
        in Found{Page,Attachment,...} which yielded strange errors
 
+2006-08-08
+    * added some more timers for regression testing
+
