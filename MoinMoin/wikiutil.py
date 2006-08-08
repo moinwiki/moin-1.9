@@ -6,11 +6,16 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re, urllib, cgi
-import codecs, types
+import cgi
+import codecs
+import os
+import re
+import time
+import types
+import urllib
 
 from MoinMoin import util, version, config
-from MoinMoin.util import pysupport, filesys
+from MoinMoin.util import pysupport, filesys, lock
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -403,13 +408,18 @@ INTEGER_METAS = ['current', 'revision', # for page storage (moin 2.0)
                 ]
 
 class MetaDict(dict):
-    """ store meta informations as a dict """
-    def __init__(self, metafilename):
+    """ store meta informations as a dict.
+    XXX It is not thread-safe, add locks!
+    """
+    def __init__(self, metafilename, cache_directory):
         """ create a MetaDict from metafilename """
         dict.__init__(self)
         self.metafilename = metafilename
         self.dirty = False
         self.loaded = False
+        lock_dir = os.path.join(cache_directory, '__metalock__')
+        self.rlock = lock.ReadLock(lock_dir, 60.0)
+        self.wlock = lock.WriteLock(lock_dir, 60.0)
 
     def _get_meta(self):
         """ get the meta dict from an arbitrary filename.
@@ -417,11 +427,16 @@ class MetaDict(dict):
             @param metafilename: the name of the file to read
             @return: dict with all values or {} if empty or error
         """
-        # XXX what does happen if the metafile is being written to in another process?
+
         try:
-            metafile = codecs.open(self.metafilename, "r", "utf-8")
-            meta = metafile.read() # this is much faster than the file's line-by-line iterator
-            metafile.close()
+            if not self.rlock.acquire(3.0):
+                raise EnvironmentError("Could not lock in MetaDict")
+            try:
+                metafile = codecs.open(self.metafilename, "r", "utf-8")
+                meta = metafile.read() # this is much faster than the file's line-by-line iterator
+                metafile.close()
+            finally:
+                self.rlock.release()
         except IOError:
             meta = u''
         for line in meta.splitlines():
@@ -443,16 +458,21 @@ class MetaDict(dict):
             if key in INTEGER_METAS:
                 value = str(value)
             meta.append("%s: %s" % (key, value))
-        meta = '\n'.join(meta)
-        # XXX what does happen if the metafile is being read or written to in another process?
-        metafile = codecs.open(self.metafilename, "w", "utf-8")
-        metafile.write(meta)
-        metafile.close()
+        meta = '\r\n'.join(meta)
+
+        if not self.wlock.acquire(5.0):
+            raise EnvironmentError("Could not lock in MetaDict")
+        try:
+            metafile = codecs.open(self.metafilename, "w", "utf-8")
+            metafile.write(meta)
+            metafile.close()
+        finally:
+            self.wlock.release()
         filesys.chmod(self.metafilename, 0666 & config.umask)
         self.dirty = False
 
     def sync(self, mtime_usecs=None):
-        """ sync the in-memory dict to disk (if dirty) """
+        """ sync the in-memory dict to the persistent store (if dirty) """
         if self.dirty:
             if not mtime_usecs is None:
                 self.__setitem__('mtime', str(mtime_usecs))
@@ -469,6 +489,8 @@ class MetaDict(dict):
                 raise
 
     def __setitem__(self, key, value):
+        """ Sets a dictionary entry. You actually have to call sync to write it
+            to the persistent store. """
         try:
             oldvalue = dict.__getitem__(self, key)
         except KeyError:
@@ -481,27 +503,59 @@ class MetaDict(dict):
 #############################################################################
 ### InterWiki
 #############################################################################
+INTERWIKI_PAGE = "InterWikiMap"
+
+def generate_file_list(request):
+    """ generates a list of all files. for internal use. """
+
+    # order is important here, the local intermap file takes
+    # precedence over the shared one, and is thus read AFTER
+    # the shared one
+    intermap_files = request.cfg.shared_intermap
+    if not isinstance(intermap_files, list):
+        intermap_files = [intermap_files]
+    else:
+        intermap_files = intermap_files[:]
+    intermap_files.append(os.path.join(request.cfg.data_dir, "intermap.txt"))
+    request.cfg.shared_intermap_files = [filename for filename in intermap_files
+                                         if filename and os.path.isfile(filename)]
+
+
+def get_max_mtime(file_list, page):
+    """ Returns the highest modification time of the files in file_list and the
+    page page. """
+    return max([os.stat(filename).st_mtime for filename in file_list] +
+        [version2timestamp(page.mtime_usecs())])
+
+
 def load_wikimap(request):
     """ load interwiki map (once, and only on demand) """
+    from MoinMoin.Page import Page
+
+    now = int(time.time())
+    if getattr(request.cfg, "shared_intermap_files", None) is None:
+        generate_file_list(request)
+
     try:
         _interwiki_list = request.cfg._interwiki_list
+        old_mtime = request.cfg._interwiki_mtime
+        if request.cfg._interwiki_ts + (1*60) < now: # 1 minutes caching time
+            max_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
+            if max_mtime > old_mtime:
+                raise AttributeError # refresh cache
+            else:
+                request.cfg._interwiki_ts = now
     except AttributeError:
         _interwiki_list = {}
         lines = []
 
-        # order is important here, the local intermap file takes
-        # precedence over the shared one, and is thus read AFTER
-        # the shared one
-        intermap_files = request.cfg.shared_intermap
-        if not isinstance(intermap_files, type([])):
-            intermap_files = [intermap_files]
-        intermap_files.append(os.path.join(request.cfg.data_dir, "intermap.txt"))
+        for filename in request.cfg.shared_intermap_files:
+            f = open(filename, "r")
+            lines.extend(f.readlines())
+            f.close()
 
-        for filename in intermap_files:
-            if filename and os.path.isfile(filename):
-                f = open(filename, "r")
-                lines.extend(f.readlines())
-                f.close()
+        # add the contents of the InterWikiMap page
+        lines += Page(request, INTERWIKI_PAGE).get_raw_body().splitlines()
 
         for line in lines:
             if not line or line[0] == '#': continue
@@ -522,6 +576,8 @@ def load_wikimap(request):
 
         # save for later
         request.cfg._interwiki_list = _interwiki_list
+        request.cfg._interwiki_ts = now
+        request.cfg._interwiki_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
 
     return _interwiki_list
 

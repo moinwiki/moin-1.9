@@ -12,6 +12,10 @@ from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
 from MoinMoin.util import filesys, timefuncs
 
+def is_cache_exception(e):
+    args = e.args
+    return not (len(args) != 1 or args[0] != 'CacheNeedsUpdate')
+
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
        To change a page's content, use the PageEditor class.
@@ -964,22 +968,21 @@ class Page:
     def send_raw(self):
         """ Output the raw page data (action=raw) """
         request = self.request
-        request.http_headers(["Content-type: text/plain;charset=%s" % config.charset])
+        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
         if self.exists():
             # use the correct last-modified value from the on-disk file
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
-            request.http_headers(["Last-Modified: " +
-                 timefuncs.formathttpdate(os.path.getmtime(self._text_filename()))])
-
+            request.setHttpHeader("Status: 200 OK")
+            request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
-            request.write(text)
         else:
-            request.http_headers(['Status: 404 NOTFOUND'])
-            request.setResponseCode(404)
-            request.write(u"Page %s not found." % self.page_name)
+            request.setHttpHeader('Status: 404 NOTFOUND')
+            text = u"Page %s not found." % self.page_name
 
+        request.emit_http_headers()
+        request.write(text)
 
     def send_page(self, request, msg=None, **keywords):
         """ Output the formatted page.
@@ -990,7 +993,7 @@ class Page:
 
         @param request: the request object
         @param msg: if given, display message in header area
-        @keyword content_only: if 1, omit page header and footer
+        @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
         @keyword count_hit: if 1, add an event to the log
         @keyword send_missing_page: if 1, assume that page to be sent is MissingPage
@@ -1036,14 +1039,12 @@ class Page:
                 except wikiutil.PluginMissingError:
                     pass
             else:
-                raise "Plugin missing error!" # XXX what now?
+                raise NotImplementedError("Plugin missing error!") # XXX what now?
         request.formatter = self.formatter
         self.formatter.setPage(self)
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
         
-        request.http_headers(["Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset)])
-
         # default is wiki markup
         pi_format = self.cfg.default_markup or "wiki"
         pi_formatargs = ''
@@ -1162,25 +1163,26 @@ class Page:
         doc_leader = self.formatter.startDocument(self.page_name)
         page_exists = self.exists()
         if not content_only:
-            # send the document leader
-
-            # use "nocache" headers if we're using a method that
-            # is not simply "display", or if a user is logged in
-            # (which triggers personalisation features)
-
+            request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
             if page_exists:
+                request.setHttpHeader('Status: 200 OK')
                 if not request.cacheable or request.user.valid:
-                    request.http_headers(request.nocache)
+                    # use "nocache" headers if we're using a method that
+                    # is not simply "display", or if a user is logged in
+                    # (which triggers personalisation features)
+                    for header in request.nocache:
+                        request.setHttpHeader(header)
                 else:
                     # TODO: we need to know if a page generates dynamic content
                     # if it does, we must not use the page file mtime as last modified value
                     # XXX The following code is commented because it is incorrect for dynamic pages:
                     #lastmod = os.path.getmtime(self._text_filename())
-                    #request.http_headers(["Last-Modified: %s" % timefuncs.formathttpdate(lastmod)])
-                    request.http_headers()
+                    #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
+                    pass
             else:
-                request.http_headers(['Status: 404 NOTFOUND'])
-                request.setResponseCode(404)
+                request.setHttpHeader('Status: 404 NOTFOUND')
+            request.emit_http_headers()
+
             request.write(doc_leader)
 
             # send the page header
@@ -1247,7 +1249,7 @@ class Page:
             except wikiutil.PluginMissingError:
                 pass
         else:
-            raise "No matching parser" # XXX what do we use if nothing at all matches?
+            raise NotImplementedError("No matching parser") # XXX what do we use if nothing at all matches?
             
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1339,7 +1341,7 @@ class Page:
                     except wikiutil.PluginMissingError:
                         pass
                 else:
-                    raise "no matching parser" # XXX what now?
+                    raise NotImplementedError("no matching parser") # XXX what now?
             return getattr(parser, 'caching', False)
         return False
 
@@ -1362,11 +1364,15 @@ class Page:
             try:
                 code = self.loadCache(request)
                 self.execute(request, parser, code)
-            except 'CacheNeedsUpdate':
+            except Exception, e:
+                if not is_cache_exception(e):
+                    raise
                 try:
                     code = self.makeCache(request, parser)
                     self.execute(request, parser, code)
-                except 'CacheNeedsUpdate':
+                except Exception, e:
+                    if not is_cache_exception(e):
+                        raise
                     request.log('page cache failed after creation')
                     self.format(parser)
         
@@ -1379,20 +1385,28 @@ class Page:
     def execute(self, request, parser, code):
         """ Write page content by executing cache code """            
         formatter = self.formatter
-        from MoinMoin.macro import Macro
-        macro_obj = Macro(parser)        
-        # Fix __file__ when running from a zip package
-        import MoinMoin
-        if hasattr(MoinMoin, '__loader__'):
-            __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
-        exec code
+        request.clock.start("Page.execute")
+        try:
+            from MoinMoin.macro import Macro
+            macro_obj = Macro(parser)        
+            # Fix __file__ when running from a zip package
+            import MoinMoin
+            if hasattr(MoinMoin, '__loader__'):
+                __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
+    
+            try:
+                exec code
+            except "CacheNeedsUpdate": # convert the exception
+                raise Exception("CacheNeedsUpdate")
+        finally:
+            request.clock.stop("Page.execute")
 
     def loadCache(self, request):
         """ Return page content cache or raises 'CacheNeedsUpdate' """
         cache = caching.CacheEntry(request, self, self.getFormatterName(), scope='item')
         attachmentsPath = self.getPagePath('attachments', check_create=0)
         if cache.needsUpdate(self._text_filename(), attachmentsPath):
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
         
         import marshal
         try:
@@ -1400,11 +1414,11 @@ class Page:
         except (EOFError, ValueError, TypeError):
             # Bad marshal data, must update the cache.
             # See http://docs.python.org/lib/module-marshal.html
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
         except Exception, err:
             request.log('fail to load "%s" cache: %s' % 
                         (self.page_name, str(err)))
-            raise 'CacheNeedsUpdate'
+            raise Exception('CacheNeedsUpdate')
 
     def makeCache(self, request, parser):
         """ Format content into code, update cache and return code """

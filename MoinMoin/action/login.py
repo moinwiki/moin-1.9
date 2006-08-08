@@ -59,7 +59,7 @@ space between words. Group page name is not allowed.""") % name
             return self.page.send_page(request, msg=error)
 
         else: # show login form
-            request.http_headers()
+            request.emit_http_headers()
             request.theme.send_title(_("Login"), pagename=self.pagename)
             # Start content (important for RTL support)
             request.write(request.formatter.startContent("content"))

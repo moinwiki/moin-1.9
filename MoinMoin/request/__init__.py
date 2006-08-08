@@ -9,7 +9,7 @@
 
 import os, re, time, sys, cgi, StringIO
 import copy
-from MoinMoin import config, wikiutil, user, caching
+from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.util import IsWin9x
 
 
@@ -17,31 +17,64 @@ from MoinMoin.util import IsWin9x
 
 class MoinMoinFinish(Exception):
     """ Raised to jump directly to end of run() function, where finish is called """
-    pass
+
+
+class HeadersAlreadySentException(Exception):
+    """ Is raised if the headers were already sent when emit_http_headers is called."""
+
 
 # Timing ---------------------------------------------------------------
 
 class Clock:
     """ Helper class for code profiling
         we do not use time.clock() as this does not work across threads
+        This is not thread-safe when it comes to multiple starts for one timer.
+        It is possible to recursively call the start and stop methods, you
+        should just ensure that you call them often enough :)
     """
 
     def __init__(self):
-        self.timings = {'total': time.time()}
+        self.timings = {}
+        self.states = {}
+
+    def _get_name(timer, generation):
+        if generation == 0:
+            return timer
+        else:
+            return "%s|%i" % (timer, generation)
+    _get_name = staticmethod(_get_name)
 
     def start(self, timer):
-        self.timings[timer] = time.time() - self.timings.get(timer, 0)
+        state = self.states.setdefault(timer, -1)
+        new_level = state + 1
+        name = Clock._get_name(timer, new_level)
+        self.timings[name] = time.time() - self.timings.get(name, 0)
+        self.states[timer] = new_level
 
     def stop(self, timer):
-        self.timings[timer] = time.time() - self.timings[timer]
+        state = self.states.setdefault(timer, -1)
+        if state >= 0: # timer is active
+            name = Clock._get_name(timer, state)
+            self.timings[name] = time.time() - self.timings[name]
+            self.states[timer] = state - 1
 
     def value(self, timer):
-        return "%.3f" % (self.timings[timer], )
+        base_timer = timer.split("|")[0]
+        state = self.states.get(base_timer, None)
+        if state == -1:
+            result = "%.3fs" % self.timings[timer]
+        elif state is None:
+            result = "- (%s)" % state
+        else:
+            print "Got state %r" % state
+            result = "%.3fs (still running)" % (time.time() - self.timings[timer])
+        return result
 
     def dump(self):
         outlist = []
-        for timing in self.timings.items():
-            outlist.append("%s = %.3fs" % timing)
+        for timer in self.timings.keys():
+            value = self.value(timer)
+            outlist.append("%s = %s" % (timer, value))
         outlist.sort()
         return outlist
 
@@ -93,7 +126,6 @@ class RequestBase(object):
         # Pages meta data that we collect in one request
         self.pages = {}
 
-        self.sent_headers = 0
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
         self.page = None
@@ -115,6 +147,8 @@ class RequestBase(object):
         else:
             self.writestack = []
             self.clock = Clock()
+            self.clock.start('total')
+            self.clock.start('base__init__')
             # order is important here!
             self.__dict__.update(properties)
             self._load_multi_cfg()
@@ -151,7 +185,7 @@ class RequestBase(object):
 
             rootname = u''
             self.rootpage = Page(self, rootname, is_rootpage=1)
-
+            
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)
@@ -176,6 +210,7 @@ class RequestBase(object):
 
             self.opened_logs = 0
             self.reset()
+            self.clock.stop('base__init__')
 
     def surge_protect(self):
         """ check if someone requesting too much from us """
@@ -265,8 +300,10 @@ class RequestBase(object):
     def _load_multi_cfg(self):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
+            self.clock.start('load_multi_cfg')
             from MoinMoin.config import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
+            self.clock.stop('load_multi_cfg')
 
     def setAcceptedCharsets(self, accept_charset):
         """ Set accepted_charsets by parsing accept-charset header
@@ -312,8 +349,7 @@ class RequestBase(object):
         """
         # Values we can just copy
         self.env = env
-        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE',
-                                            self.http_accept_language)
+        self.http_accept_language = env.get('HTTP_ACCEPT_LANGUAGE', self.http_accept_language)
         self.server_name = env.get('SERVER_NAME', self.server_name)
         self.server_port = env.get('SERVER_PORT', self.server_port)
         self.saved_cookie = env.get('HTTP_COOKIE', '')
@@ -323,6 +359,8 @@ class RequestBase(object):
         self.request_method = env.get('REQUEST_METHOD', None)
         self.remote_addr = env.get('REMOTE_ADDR', '')
         self.http_user_agent = env.get('HTTP_USER_AGENT', '')
+        self.if_modified_since = env.get('If-modified-since') or env.get(cgiMetaVariable('If-modified-since'))
+        self.if_none_match = env.get('If-none-match') or env.get(cgiMetaVariable('If-none-match'))
 
         # REQUEST_URI is not part of CGI spec, but an addition of Apache.
         self.request_uri = env.get('REQUEST_URI', '')
@@ -333,8 +371,7 @@ class RequestBase(object):
         self.setHost(env.get('HTTP_HOST'))
         self.fixURI(env)
         self.setURL(env)
-
-        ##self.debugEnvironment(env)
+        #self.debugEnvironment(env)
 
     def setHttpReferer(self, referer):
         """ Set http_referer, making sure its ascii
@@ -618,18 +655,6 @@ class RequestBase(object):
             return ''
         return self.script_name
 
-    def getPageNameFromQueryString(self):
-        """ Try to get pagename from the query string
-        
-        Support urls like http://netloc/script/?page_name. Allow
-        solving path_info encoding problems by calling with the page
-        name as a query.
-        """
-        pagename = wikiutil.url_unquote(self.query_string, want_unicode=False)
-        pagename = self.decodePagename(pagename)
-        pagename = self.normalizePagename(pagename)
-        return pagename
-
     def getKnownActions(self):
         """ Create a dict of avaiable actions
 
@@ -642,21 +667,9 @@ class RequestBase(object):
             self.cfg._known_actions # check
         except AttributeError:
             from MoinMoin import action
-            # Add built in actions
-            actions = [name[3:] for name in action.__dict__ if name.startswith('do_')]
+            self.cfg._known_actions = set(action.getNames(self.cfg))
 
-            # Add plugins           
-            dummy, plugins = action.getPlugins(self)
-            actions.extend(plugins)
-
-            # Add extensions
-            actions.extend(action.extension_actions)
-
-            # TODO: Use set when we require Python 2.3
-            actions = dict(zip(actions, [''] * len(actions)))
-            self.cfg._known_actions = actions
-
-        # Return a copy, so clients will not change the dict.
+        # Return a copy, so clients will not change the set.
         return self.cfg._known_actions.copy()
 
     def getAvailableActions(self, page):
@@ -677,14 +690,10 @@ class RequestBase(object):
 
             # Filter non ui actions (starts with lower case letter)
             actions = self.getKnownActions()
-            for key in actions.keys():
-                if key[0].islower():
-                    del actions[key]
+            actions = [action for action in actions if not action[0].islower()]
 
             # Filter wiki excluded actions
-            for key in self.cfg.actions_excluded:
-                if key in actions:
-                    del actions[key]
+            actions = [action for action in actions if not action in self.cfg.actions_excluded]
 
             # Filter actions by page type, acl and user state
             excluded = []
@@ -694,11 +703,9 @@ class RequestBase(object):
                 # Prevent modification of underlay only pages, or pages
                 # the user can't write and can't delete
                 excluded = [u'RenamePage', u'DeletePage', ] # AttachFile must NOT be here!
-            for key in excluded:
-                if key in actions:
-                    del actions[key]
+            actions = [action for action in actions if not action in excluded]
 
-            self._available_actions = actions
+            self._available_actions = set(actions)
 
         # Return a copy, so clients will not change the dict.
         return self._available_actions.copy()
@@ -981,13 +988,12 @@ class RequestBase(object):
         }
         headers = [
             'Status: %d %s' % (resultcode, statusmsg[resultcode]),
-            'Content-Type: text/plain'
+            'Content-Type: text/plain; charset=utf-8'
         ]
         # when surge protection triggered, tell bots to come back later...
         if resultcode == 503:
             headers.append('Retry-After: %d' % self.cfg.surge_lockout_time)
-        self.http_headers(headers)
-        self.setResponseCode(resultcode)
+        self.emit_http_headers(headers)
         self.write(msg)
         self.forbidden = True
 
@@ -1081,8 +1087,6 @@ space between words. Group page name is not allowed.""") % self.user.name
 
             # 3. Or handle action
             else:
-                if not pagename and self.query_string:
-                    pagename = self.getPageNameFromQueryString()
                 # pagename could be empty after normalization e.g. '///' -> ''
                 # Use localized FrontPage if pagename is empty
                 if not pagename:
@@ -1129,7 +1133,85 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param url: relative or absolute url, ascii using url encoding.
         """
         url = self.getQualifiedURL(url)
-        self.http_headers(["Status: 302 Found", "Location: %s" % url])
+        self.emit_http_headers(["Status: 302 Found", "Location: %s" % url])
+
+    def http_headers(self, more_headers=[]):
+        """ wrapper for old, deprecated http_headers call,
+            new code only calls emit_http_headers.
+            Remove in moin 1.7.
+        """
+        self.emit_http_headers(more_headers)
+
+    def emit_http_headers(self, more_headers=[]):
+        """ emit http headers after some preprocessing / checking
+
+            Makes sure we only emit headers once.
+            Encodes to ASCII if it gets unicode headers.
+            Make sure we have exactly one Content-Type and one Status header.
+            Make sure Status header string begins with a integer number.
+        
+            For emitting, it calls the server specific _emit_http_headers
+            method.
+
+            @param more_headers: list of additional header strings
+        """
+        user_headers = getattr(self, 'user_headers', [])
+        self.user_headers = []
+        all_headers = more_headers + user_headers
+
+        # Send headers only once
+        sent_headers = getattr(self, 'sent_headers', 0)
+        self.sent_headers = sent_headers + 1
+        if sent_headers:
+            raise HeadersAlreadySentException("emit_http_headers called multiple (%d) times! Headers: %r" % (sent_headers, headers))
+        #else:
+        #    self.log("Notice: emit_http_headers called first time. Headers: %r" % all_headers)
+
+        content_type = None
+        status = None
+        headers = []
+        # assemble complete list of http headers
+        for header in all_headers:
+            if isinstance(header, unicode):
+                header = header.encode('ascii')
+            key, value = header.split(':', 1)
+            lkey = key.lower()
+            value = value.lstrip()
+            if content_type is None and lkey == "content-type":
+                content_type = value
+            elif status is None and lkey == "status":
+                status = value
+            else:
+                headers.append(header)
+
+        if content_type is None:
+            content_type = "text/html; charset=%s" % config.charset
+        ct_header = "Content-type: %s" % content_type
+
+        if status is None:
+            status = "200 OK"
+        try:
+            int(status.split(" ", 1)[0])
+        except:
+            self.log("emit_http_headers called with invalid header Status: %s" % status)
+            status = "500 Server Error - invalid status header"
+        st_header = "Status: %s" % status
+
+        headers = [st_header, ct_header] + headers # do NOT change order!
+        self._emit_http_headers(headers)
+
+        #from pprint import pformat
+        #sys.stderr.write(pformat(headers))
+
+    def _emit_http_headers(self, headers):
+        """ server specific method to emit http headers.
+        
+            @param headers: a list of http header strings in this FIXED order:
+                1. status header (always present and valid, e.g. "200 OK")
+                2. content type header (always present)
+                3. other headers (optional)
+        """
+        raise NotImplementedError
 
     def setHttpHeader(self, header):
         """ Save header for later send.
@@ -1140,6 +1222,9 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.user_headers.append(header)
 
     def setResponseCode(self, code, message=None):
+        """ DEPRECATED, will vanish in moin 1.7,
+            just use a Status: <code> <message> header and emit_http_headers.
+        """
         pass
 
     def fail(self, err):
@@ -1153,8 +1238,9 @@ space between words. Group page name is not allowed.""") % self.user.name
         @param err: Exception instance or subclass.
         """
         self.failed = 1 # save state for self.run()            
-        self.http_headers(['Status: 500 MoinMoin Internal Error'])
-        self.setResponseCode(500)
+        # we should not generate the headers two times
+        if not getattr(self, 'sent_headers', 0):
+            self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
         failure.handle(self)
@@ -1291,7 +1377,7 @@ space between words. Group page name is not allowed.""") % self.user.name
             environment.append('  %s = %r\n' % (key, env[key]))
         environment = ''.join(environment)
 
-        data = '\nRequest Attributes\n%s\nEnviroment\n%s' % (attributes, environment)
+        data = '\nRequest Attributes\n%s\nEnvironment\n%s' % (attributes, environment)
         f = open('/tmp/env.log', 'a')
         try:
             f.write(data)

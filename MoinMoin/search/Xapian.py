@@ -173,6 +173,7 @@ class Index(BaseIndex):
         'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
         'category': 'XCAT', # category this document belongs to
         'full_title': 'XFT', # full title (for regex)
+        'domain': 'XDOMAIN', # standard or underlay
                        #Y   year (four digits)
     }
 
@@ -335,6 +336,12 @@ class Index(BaseIndex):
         return [cat.lower()
                 for cat in re.findall(r'Category([^\s]+)', body[pos:])]
 
+    def _get_domains(self, page):
+        if page.isUnderlayPage():
+            yield 'underlay'
+        if page.isStandardPage():
+            yield 'standard'
+
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
@@ -351,6 +358,7 @@ class Index(BaseIndex):
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
         categories = self._get_categories(page)
+        domains = tuple(self._get_domains(page))
         updated = False
 
         if mode == 'update':
@@ -385,6 +393,8 @@ class Index(BaseIndex):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
                 xkeywords.append(xapdoc.Keyword('category', category))
+            for domain in domains:
+                xkeywords.append(xapdoc.Keyword('domain', domain))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,

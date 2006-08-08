@@ -29,7 +29,7 @@
 import os, time, zipfile
 from MoinMoin import config, user, util, wikiutil, packages
 from MoinMoin.Page import Page
-from MoinMoin.util import filesys
+from MoinMoin.util import filesys, timefuncs
 
 action_name = __name__.split('.')[-1]
 
@@ -493,7 +493,7 @@ def execute(pagename, request):
     elif request.form['do'][0] == 'savedrawing':
         if request.user.may.write(pagename):
             save_drawing(pagename, request)
-            request.http_headers()
+            request.emit_http_headers()
             request.write("OK")
         else:
             msg = _('You are not allowed to save a drawing on this page.')
@@ -541,7 +541,7 @@ def execute(pagename, request):
 def upload_form(pagename, request, msg=''):
     _ = request.getText
 
-    request.http_headers()
+    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     request.theme.send_title(_('Attachments for "%(pagename)s"') % {'pagename': pagename}, pagename=pagename, msg=msg)
@@ -651,19 +651,22 @@ def get_file(pagename, request):
     if not filename:
         return # error msg already sent in _access_file
 
-    mt = wikiutil.MimeType(filename=filename)
+    timestamp = timefuncs.formathttpdate(int(os.path.getmtime(fpath)))
+    if request.if_modified_since == timestamp:
+        request.emit_http_headers(["Status: 304 Not modified"])
+    else:
+        mt = wikiutil.MimeType(filename=filename)
+        request.emit_http_headers([
+            "Content-Type: %s" % mt.content_type(),
+            "Last-Modified: %s" % timestamp, # TODO maybe add a short Expires: header here?
+            "Content-Length: %d" % os.path.getsize(fpath),
+            # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
+            # There is no solution that is compatible to IE except stripping non-ascii chars
+            "Content-Disposition: attachment; filename=\"%s\"" % filename.encode(config.charset),
+        ])
 
-    # send header
-    request.http_headers([
-        "Content-Type: %s" % mt.content_type(),
-        "Content-Length: %d" % os.path.getsize(fpath),
-        # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
-        # There is no solution that is compatible to IE except stripping non-ascii chars
-        "Content-Disposition: attachment; filename=\"%s\"" % filename.encode(config.charset),
-    ])
-
-    # send data
-    shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
+        # send data
+        shutil.copyfileobj(open(fpath, 'rb'), request, 8192)
 
 def install_package(pagename, request):
     _ = request.getText
@@ -824,7 +827,7 @@ def view_file(pagename, request):
     if not filename: return
 
     # send header & title
-    request.http_headers()
+    request.emit_http_headers()
     # Use user interface language for this generated page
     request.setContentLanguage(request.lang)
     title = _('attachment:%(filename)s of %(pagename)s', formatted=True) % {

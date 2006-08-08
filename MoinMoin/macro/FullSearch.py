@@ -32,13 +32,63 @@ from MoinMoin import config, wikiutil, search
 
 Dependencies = ["pages"]
 
+
+def search_box(type, macro):
+    """ Make a search box
+
+    Make both Title Search and Full Search boxes, according to type.
+
+    @param type: search box type: 'titlesearch' or 'fullsearch'
+    @rtype: unicode
+    @return: search box html fragment
+    """
+    _ = macro._
+    if macro.form.has_key('value'):
+        default = wikiutil.escape(macro.form["value"][0], quote=1)
+    else:
+        default = ''
+
+    # Title search settings
+    boxes = ''
+    button = _("Search Titles")
+
+    # Special code for fullsearch
+    if type == "fullsearch":
+        boxes = [
+            u'<br>',
+            u'<input type="checkbox" name="context" value="160" checked="checked">',
+            _('Display context of search results'),
+            u'<br>',
+            u'<input type="checkbox" name="case" value="1">',
+            _('Case-sensitive searching'),
+            ]
+        boxes = u'\n'.join(boxes)
+        button = _("Search Text")
+
+    # Format
+    type = (type == "titlesearch")
+    html = [
+        u'<form method="get" action="">',
+        u'<div>',
+        u'<input type="hidden" name="action" value="fullsearch">',
+        u'<input type="hidden" name="titlesearch" value="%i">' % type,
+        u'<input type="text" name="value" size="30" value="%s">' % default,
+        u'<input type="submit" value="%s">' % button,
+        boxes,
+        u'</div>',
+        u'</form>',
+        ]
+    html = u'\n'.join(html)
+    return macro.formatter.rawHTML(html)
+
+
 def execute(macro, needle):
     request = macro.request
     _ = request.getText
 
     # if no args given, invoke "classic" behavior
     if needle is None:
-        return macro._m_search("fullsearch")
+        return search_box("fullsearch", macro)
 
     # With empty arguments, simulate title click (backlinks to page)
     elif needle == '':
