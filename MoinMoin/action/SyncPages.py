@@ -173,7 +173,7 @@ class RemoteWiki(object):
         """ Returns the InterWiki ID. """
         return NotImplemented
 
-    def get_pages(self):
+    def get_pages(self, **kwargs):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
@@ -195,12 +195,14 @@ class MoinRemoteWiki(RemoteWiki):
 
         self.connection = self.createConnection()
 
-        version = self.connection.getMoinVersion()
-        if not isinstance(version, (tuple, list)):
-            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+        iw_list = self.connection.interwikiName()
 
-        remote_interwikiname = self.get_interwiki_name()
-        remote_iwid = self.connection.interwikiName()[1]
+        #version = self.connection.getMoinVersion()
+        #if not isinstance(version, (tuple, list)):
+        #    raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+
+        self.remote_interwikiname = remote_interwikiname = iw_list[0]
+        self.remote_iwid = remote_iwid = iw_list[1]
         self.is_anonymous = remote_interwikiname is None
         if not self.is_anonymous and interwikiname != remote_interwikiname:
             raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name (%(remotename)s)"
@@ -230,14 +232,16 @@ class MoinRemoteWiki(RemoteWiki):
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
-        return self.connection.interwikiName()[0]
+        return self.remote_interwikiname
 
     def get_iwid(self):
-        return self.connection.interwikiName()[1]
+        return self.remote_iwid
 
-    def get_pages(self):
-        pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True,
-                                               "exclude_non_writable": True}) # XXX fix when all 3 directions are supported
+    def get_pages(self, **kwargs):
+        options = {"include_revno": True,
+                   "include_deleted": True,
+                   "exclude_non_writable": kwargs["exclude_non_writable"]}
+        pages = self.connection.getAllPagesEx(options)
         rpages = []
         for name, revno in pages:
             normalised_name = normalise_pagename(name, self.prefix)
@@ -278,7 +282,8 @@ class MoinLocalWiki(RemoteWiki):
     def get_iwid(self):
         return self.request.cfg.iwid
 
-    def get_pages(self):
+    def get_pages(self, **kwargs):
+        assert not kwargs
         return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)] if x]
 
     def __repr__(self):
@@ -379,7 +384,7 @@ class ActionClass:
         _ = self.request.getText
 
         l_pages = local.get_pages()
-        r_pages = remote.get_pages()
+        r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
@@ -402,8 +407,6 @@ class ActionClass:
         #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
         #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
         #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
-        #if params["direction"] in (DOWN, BOTH):
-        #    for rp in remote_but_not_local:
 
         # let's do the simple case first, can be refactored later to match all cases
         # XXX handle deleted pages
@@ -435,7 +438,7 @@ class ActionClass:
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
-            diff_result = remote.get_diff(rp.remote_name, remote_rev, None)
+            diff_result = remote.get_diff(rp.remote_name, remote_rev, None) # XXX might raise ALREADY_CURRENT
             is_remote_conflict = diff_result["conflict"]
             assert diff_result["diffversion"] == 1
             diff = diff_result["diff"]
@@ -480,7 +483,6 @@ class ActionClass:
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
 
             # XXX release lock
-            # XXX untested
 
 
 def execute(pagename, request):
