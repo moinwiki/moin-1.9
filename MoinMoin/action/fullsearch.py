@@ -55,11 +55,19 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         Page(request, pagename).send_page(request, msg=err)
         return
 
+    # Setup for type of search
+    if titlesearch:
+        title = _('Title Search: "%s"')
+        sort = 'page_name'
+    else:
+        title = _('Full Text Search: "%s"')
+        sort = 'weight'
+
     # search the pages
     from MoinMoin.search import searchPages, QueryParser
     query = QueryParser(case=case, regex=regex,
             titlesearch=titlesearch).parse_query(needle)
-    results = searchPages(request, query)
+    results = searchPages(request, query, sort)
 
     # directly show a single hit
     # XXX won't work with attachment search
@@ -78,14 +86,6 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
-
-    # Setup for type of search
-    if titlesearch:
-        title = _('Title Search: "%s"')
-        results.sortByPagename()
-    else:
-        title = _('Full Text Search: "%s"')
-        results.sortByWeight()
 
     request.theme.send_title(title % needle, form=request.form, pagename=pagename)
 

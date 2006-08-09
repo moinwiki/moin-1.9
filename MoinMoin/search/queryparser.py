@@ -436,7 +436,7 @@ class TitleSearch(BaseExpression):
                 if term[:4] == 'XFT:':
                     found = True
                     if self.search_re.findall(term[4:]):
-                        terms.append(term)
+                        terms.append(Query(term, 100))
                 elif found:
                     break
             if not terms:
@@ -456,15 +456,19 @@ class TitleSearch(BaseExpression):
                     # stemmed OR not stemmed
                     tmp = []
                     for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(UnicodeQuery(Query.OP_OR,
-                            ['%s%s' % (Xapian.Index.prefixMap['title'], j)
+                        tmp.append(Query(Query.OP_OR,
+                            [UnicodeQuery('%s%s' %
+                                    (Xapian.Index.prefixMap['title'], j),
+                                    100)
                                 for j in (w, s)]))
                         stemmed.append(s)
                     t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], w))
-                        for w, pos in analyzer.tokenize(t)]
+                    t = [UnicodeQuery(
+                                '%s%s' % (Xapian.Index.prefixMap['title'], w),
+                                100)
+                            for w, pos in analyzer.tokenize(t)]
 
                 queries.append(Query(Query.OP_AND, t))
 
