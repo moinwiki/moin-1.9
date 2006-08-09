@@ -9,6 +9,7 @@ Branch moin/1.6-sync-aschremmer
   ToDo:
     * Implement actual syncronisation.
       * Add correct IWID_full handling.
+    * Reduce round-trip times by caching queries and using MultiCall objects.
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage.
     * Clean up trailing whitespace.

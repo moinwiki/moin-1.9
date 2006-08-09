@@ -130,7 +130,7 @@ class PickleTagStore(AbstractTagStore):
                 assert False, "This case is not supported yet" # XXX
             iw_name = iwid_full[1]
 
-        return [t for t in self.tags if t.remote_wiki == iw_name]
+        return [t for t in self.tags if unpackLine(t.remote_wiki)[1] == iw_name]
 
 
 # currently we just have one implementation, so we do not need
