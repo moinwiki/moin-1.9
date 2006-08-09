@@ -31,6 +31,9 @@ Branch moin/1.6-sync-aschremmer
       no system pages etc.)
     * IWID support - i.e. every instance has a unique ID
     * InterWiki page editable in the wiki, modification detection based on mtimes
+    * SyncPages action
+    * XMLRPC functions may return Fault instances
+    * diff3 algorithm extenteded, a new mode should reduce the conflicts
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
@@ -90,7 +93,8 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
 Week 32: Continued work on the merge logic, finished prefix handling. Added local conflict
          detection in SyncPages. Added logging support to SyncPages. Refactored conflict flag
          detection from the edit action into the PageEditor class. Enhanced XMLRPC server in Moin to allow
-         XMLRPC functions to return Fault instances.
+         XMLRPC functions to return Fault instances. Introduced a new diff3 mode that should reduce the
+         conflicts.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress

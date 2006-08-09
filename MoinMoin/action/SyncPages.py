@@ -456,7 +456,7 @@ class ActionClass:
             old_contents = old_contents.encode("utf-8")
 
             # here, the actual merge happens
-            verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 1, *conflict_markers)
+            verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 2, *conflict_markers)
 
             new_local_rev = current_rev + 1 # XXX commit first?
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
