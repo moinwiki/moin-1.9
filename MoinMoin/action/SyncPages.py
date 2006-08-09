@@ -220,17 +220,12 @@ class MoinRemoteWiki(RemoteWiki):
         """ Returns the binary diff of the remote page named pagename, given
             from_rev and to_rev. """
         result = self.connection.getDiff(pagename, from_rev, to_rev)
-        if isinstance(result, xmlrpclib.Fault):
-            raise Exception(result)
         result["diff"] = str(result["diff"]) # unmarshal Binary object
         return result
 
     def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
         """ Merges the diff into the page on the remote side. """
         result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name)
-        print result
-        if isinstance(result, xmlrpclib.Fault):
-            raise Exception(result)
         return result
 
     # Methods implementing the RemoteWiki interface
@@ -418,14 +413,12 @@ class ActionClass:
 
             local_pagename = rp.local_name
             current_page = PageEditor(self.request, local_pagename)
-            if wikiutil.containsConflictMarker(current_page.get_raw_body()):
-                self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a local unresolved conflict.") % {"pagename": local_pagename})
-                continue
             current_rev = current_page.get_real_rev()
 
             tags = TagStore(current_page)
             matching_tags = tags.fetch(iwid_full=remote.iwid_full)
             matching_tags.sort()
+            #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
 
             if not matching_tags:
                 remote_rev = None
@@ -447,6 +440,13 @@ class ActionClass:
             assert diff_result["diffversion"] == 1
             diff = diff_result["diff"]
             current_remote_rev = diff_result["current"]
+
+            # do not sync if the conflict is remote and local, or if it is local
+            # and the page has never been syncronised
+            if (wikiutil.containsConflictMarker(current_page.get_raw_body())
+                and (remote_rev is None or is_remote_conflict)):
+                self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a locally or remotely unresolved conflict.") % {"pagename": local_pagename})
+                continue
 
             if remote_rev is None: # set the remote_rev for the case without any tags
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
