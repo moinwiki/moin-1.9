@@ -75,7 +75,7 @@ class SyncPage(object):
         return repr("<Remote Page %r>" % unicode(self))
 
     def __unicode__(self):
-        return u"%s<%r:%r>" % (self.name, self.local_rev, self.remote_rev)
+        return u"%s[%s|%s]<%r:%r>" % (self.name, self.local_name, self.remote_name, self.local_rev, self.remote_rev)
 
     def __lt__(self, other):
         return self.name < other.name
@@ -219,7 +219,19 @@ class MoinRemoteWiki(RemoteWiki):
     def get_diff(self, pagename, from_rev, to_rev):
         """ Returns the binary diff of the remote page named pagename, given
             from_rev and to_rev. """
-        return str(self.connection.getDiff(pagename, from_rev, to_rev))
+        result = self.connection.getDiff(pagename, from_rev, to_rev)
+        if isinstance(result, xmlrpclib.Fault):
+            raise Exception(result)
+        result["diff"] = str(result["diff"]) # unmarshal Binary object
+        return result
+
+    def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+        """ Merges the diff into the page on the remote side. """
+        result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name)
+        print result
+        if isinstance(result, xmlrpclib.Fault):
+            raise Exception(result)
+        return result
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
@@ -229,7 +241,8 @@ class MoinRemoteWiki(RemoteWiki):
         return self.connection.interwikiName()[1]
 
     def get_pages(self):
-        pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})
+        pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True,
+                                               "exclude_non_writable": True}) # XXX fix when all 3 directions are supported
         rpages = []
         for name, revno in pages:
             normalised_name = normalise_pagename(name, self.prefix)
@@ -278,7 +291,7 @@ class MoinLocalWiki(RemoteWiki):
 
 
 class ActionClass:
-    INFO, WARNING, ERROR = range(3) # used for logging
+    INFO, WARN, ERROR = range(3) # used for logging
 
     def __init__(self, pagename, request):
         self.request = request
@@ -359,12 +372,16 @@ class ActionClass:
 
             self.sync(params, local, remote)
         except ActionStatus, e:
-            return self.page.send_page(self.request, msg=u'<p class="error">%s</p><p>%s</p>\n' % (e.args[0], repr(self.status)))
+            msg = u'<p class="error">%s</p><p>%s</p>\n' % (e.args[0], repr(self.status))
+        else:
+            msg = u"%s<p>%s</p>" % (_("Syncronisation finished."), repr(self.status))
 
-        return self.page.send_page(self.request, msg=u"%s<p>%s</p>" % (_("Syncronisation finished."), repr(self.status)))
+        # XXX append self.status to the job page
+        return self.page.send_page(self.request, msg=msg)
     
     def sync(self, params, local, remote):
         """ This method does the syncronisation work. """
+        _ = self.request.getText
 
         l_pages = local.get_pages()
         r_pages = remote.get_pages()
@@ -397,13 +414,14 @@ class ActionClass:
         # XXX handle deleted pages
         for rp in on_both_sides:
             # XXX add locking, acquire read-lock on rp
+            print "Processing %r" % rp
 
-            current_page = Page(self.request, local_pagename)
+            local_pagename = rp.local_name
+            current_page = PageEditor(self.request, local_pagename)
             if wikiutil.containsConflictMarker(current_page.get_raw_body()):
                 self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a local unresolved conflict.") % {"pagename": local_pagename})
                 continue
             current_rev = current_page.get_real_rev()
-            local_pagename = rp.local_pagename
 
             tags = TagStore(current_page)
             matching_tags = tags.fetch(iwid_full=remote.iwid_full)
@@ -422,9 +440,9 @@ class ActionClass:
                 old_page = Page(self.request, local_pagename, rev=local_rev)
                 old_contents = old_page.get_raw_body_str()
 
-            self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_pagename})
+            self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
-            diff_result = remote.get_diff(rp.remote_pagename, remote_rev, None)
+            diff_result = remote.get_diff(rp.remote_name, remote_rev, None)
             is_remote_conflict = diff_result["conflict"]
             assert diff_result["diffversion"] == 1
             diff = diff_result["diff"]
@@ -444,7 +462,8 @@ class ActionClass:
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
             remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
-            very_current_remote_rev = remote.merge_diff(rp.remote_pagename, compress(textdiff(new_contents, verynewtext)), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
+            diff = textdiff(new_contents.encode("utf-8"), verynewtext.encode("utf-8"))
+            very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
             # XXX upgrade to write lock
