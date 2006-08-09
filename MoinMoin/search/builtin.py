@@ -174,11 +174,11 @@ class BaseIndex:
     def _search(self, query):
         raise NotImplemented('...')
 
-    def search(self, query):
+    def search(self, query, *args, **kw):
         #if not self.read_lock.acquire(1.0):
         #    raise self.LockedException
         #try:
-        hits = self._search(query)
+        hits = self._search(query, *args, **kw)
         #finally:
         #    self.read_lock.release()
         return hits
@@ -352,9 +352,10 @@ class BaseIndex:
 class Search:
     """ A search run """
     
-    def __init__(self, request, query):
+    def __init__(self, request, query, sort='weight'):
         self.request = request
         self.query = query
+        self.sort = sort
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -370,7 +371,12 @@ class Search:
         if not self.filtered:
             hits = self._filter(hits)
 
-        return getSearchResults(self.request, self.query, hits, start)
+        # when xapian was used, we won't need to sort manually
+        if self.request.cfg.xapian_search:
+            self.sort = None
+
+        return getSearchResults(self.request, self.query, hits, start,
+                self.sort)
         
 
     # ----------------------------------------------------------------
@@ -406,9 +412,9 @@ class Search:
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                enq, hits = index.search(query)
+                enq, hits = index.search(query, sort=self.sort)
                 clock.stop('_xapianQuery')
-                self.request.log("xapianSearch: finds: %r" % hits)
+                #self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for k, v in d.items():
@@ -434,6 +440,9 @@ class Search:
                         clock.stop('_xapianProcess')
             finally:
                 clock.stop('_xapianSearch')
+        else:
+            # we didn't use xapian in this request
+            self.request.cfg.xapian_search = 0
         
         return self._moinSearch(pages)
 

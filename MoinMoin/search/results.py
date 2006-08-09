@@ -244,27 +244,30 @@ class SearchResults:
     """
     # Public functions --------------------------------------------------
     
-    def __init__(self, query, hits, pages, elapsed):
+    def __init__(self, query, hits, pages, elapsed, sort=None):
         self.query = query # the query
         self.hits = hits # hits list
-        self.sort = None # hits are unsorted initially
         self.pages = pages # number of pages in the wiki
         self.elapsed = elapsed # search time
 
-    def sortByWeight(self):
+        if sort == 'weight':
+            self._sortByWeight()
+        elif sort == 'page_name':
+            self.sortByPagename()
+        self.sort = sort
+
+    def _sortByWeight(self):
         """ Sorts found pages by the weight of the matches """
         tmp = [(hit.weight(), hit.page_name, hit) for hit in self.hits]
         tmp.sort()
         tmp.reverse()
         self.hits = [item[2] for item in tmp]
-        self.sort = 'weight'
         
-    def sortByPagename(self):
+    def _sortByPagename(self):
         """ Sorts a list of found pages alphabetical by page name """
         tmp = [(hit.page_name, hit) for hit in self.hits]
         tmp.sort()
         self.hits = [item[1] for item in tmp]
-        self.sort = 'page_name'
         
     def stats(self, request, formatter, hitsFrom):
         """ Return search statistics, formatted with formatter
@@ -802,7 +805,7 @@ class SearchResults:
         self.matchLabel = (_('match'), _('matches'))
 
 
-def getSearchResults(request, query, hits, start):
+def getSearchResults(request, query, hits, start, sort=None):
     result_hits = []
     for wikiname, page, attachment, match in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
@@ -816,5 +819,5 @@ def getSearchResults(request, query, hits, start):
                 attachment, match, page))
     elapsed = time.time() - start
     count = request.rootpage.getPageCount()
-    return SearchResults(query, result_hits, count, elapsed)
+    return SearchResults(query, result_hits, count, elapsed, sort)
 

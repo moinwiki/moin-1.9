@@ -195,7 +195,7 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def _search(self, query):
+    def _search(self, query, sort=None):
         """ read lock must be acquired """
         while True:
             try:
@@ -210,7 +210,16 @@ class Index(BaseIndex):
                 timestamp = self.mtime()
                 break
         
-        hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname'])
+        kw = {}
+        if sort == 'weight':
+            # XXX: we need real weight here, like _moinSearch
+            # (TradWeight in xapian)
+            kw['sortByRelevence'] = True
+        if sort == 'page_name':
+            kw['sortKey'] = 'pagename'
+
+        hits = searcher.search(query, valuesWanted=['pagename',
+            'attachment', 'mtime', 'wikiname'], **kw)
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     

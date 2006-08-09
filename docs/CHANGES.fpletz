@@ -223,3 +223,7 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * improved highlighting code to work better with stemming and
       special searches, extended SystemInfo macro
 
+2006-08-09
+    * use xapian for sorting, first step not to fetch all results
+      -> still TODO: need real weight
+
