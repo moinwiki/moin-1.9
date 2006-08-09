@@ -9,6 +9,12 @@
 
 import os, re, time, sys, cgi, StringIO
 import copy
+
+try:
+    set
+except:
+    from sets import Set as set
+
 from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.util import IsWin9x
 
