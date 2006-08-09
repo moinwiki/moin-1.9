@@ -125,11 +125,14 @@ class XmlRpcBase:
             # report exception back to server
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
         else:
-            # wrap response in a singleton tuple
-            response = (response,)
-
-            # serialize it
-            response = xmlrpclib.dumps(response, methodresponse=1)
+            if isinstance(response, xmlrpclib.Fault):
+                response = xmlrpclib.dumps(response)
+            else:
+                # wrap response in a singleton tuple
+                response = (response,)
+    
+                # serialize it
+                response = xmlrpclib.dumps(response, methodresponse=1)
 
         self.request.emit_http_headers([
             "Content-Type: text/xml; charset=utf-8",
