@@ -206,7 +206,7 @@ def import_mail_from_message(request, message):
                 break
 
     # build an attachment link table for the page with the e-mail
-    attachment_links = [""] + [u'''[attachment:"%s" attachment:"%s"]''' % tuple([u"%s/%s" % (pagename, x)] * 2) for x in attachments]
+    attachment_links = [""] + [u'''[attachment:"%s/%s" %s]''' % (pagename, att, att) for att in attachments]
 
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
