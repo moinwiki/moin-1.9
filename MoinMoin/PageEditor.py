@@ -808,6 +808,9 @@ Try a different name.""") % (newpagename,)
 
         self.copypage()
 
+        # remember conflict state
+        self.setConflict(wikiutil.containsConflictMarker(text))
+
         # Write always on the standard directory, never change the
         # underlay directory copy!
         pagedir = self.getPagePath(use_underlay=0, check_create=0)
@@ -917,9 +920,6 @@ Try a different name.""") % (newpagename,)
         _ = self._
         backup_url = self._make_backup(newtext, **kw)
         action = kw.get('action', 'SAVE')
-
-        # remember conflict state
-        self.setConflict(wikiutil.containsConflictMarker(newtext))
 
         #!!! need to check if we still retain the lock here
         #!!! rev check is not enough since internal operations use "0"
