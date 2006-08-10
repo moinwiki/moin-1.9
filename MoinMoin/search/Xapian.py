@@ -262,7 +262,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(mtime)
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-                enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
                 if docs:
                     doc = docs[0] # there should be only one
                     uid = doc['uid']
@@ -375,7 +375,7 @@ class Index(BaseIndex):
             # you can just call database.replace_document(uid_term, doc)
             # -> done in xapwrap.index.Index.index()
             query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-            enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+            enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
             if docs:
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
@@ -429,7 +429,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
-                enq, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
                 if debug: request.log("##%r %r" % (filename, docs))
                 if docs:
                     doc = docs[0] # there should be only one

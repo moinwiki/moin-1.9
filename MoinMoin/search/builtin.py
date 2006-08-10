@@ -374,9 +374,17 @@ class Search:
         # when xapian was used, we won't need to sort manually
         if self.request.cfg.xapian_search:
             self.sort = None
+            mset = self._xapianMset
+            estimated_hits = (
+                (mset.get_matches_estimated() == mset.get_matches_upper_bound() and
+                    mset.get_matches_estimated() == mset.get_matches_lower_bound()) and
+                '' or 'about',
+                mset.get_matches_estimated())
+        else:
+            estimated_hits = None
 
         return getSearchResults(self.request, self.query, hits, start,
-                self.sort)
+                self.sort, estimated_hits)
         
 
     # ----------------------------------------------------------------
@@ -412,7 +420,7 @@ class Search:
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                enq, hits = index.search(query, sort=self.sort)
+                enq, mset, hits = index.search(query, sort=self.sort)
                 clock.stop('_xapianQuery')
                 #self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
@@ -425,6 +433,7 @@ class Search:
                 pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
                 self._xapianEnquire = enq
+                self._xapianMset = mset
                 self._xapianIndex = index
             except BaseIndex.LockedException:
                 pass

@@ -244,11 +244,12 @@ class SearchResults:
     """
     # Public functions --------------------------------------------------
     
-    def __init__(self, query, hits, pages, elapsed, sort=None):
+    def __init__(self, query, hits, pages, elapsed, sort, estimated_hits):
         self.query = query # the query
         self.hits = hits # hits list
         self.pages = pages # number of pages in the wiki
         self.elapsed = elapsed # search time
+        self.estimated_hits = estimated_hits # about how much hits?
 
         if sort == 'weight':
             self._sortByWeight()
@@ -279,12 +280,17 @@ class SearchResults:
         @return formatted statistics
         """
         _ = request.getText
+
+        if not self.estimated_hits:
+            self.estimated_hits = ('', len(self.hits))
+
         output = [
             formatter.paragraph(1, attr={'class': 'searchstats'}),
             _("Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s "
-                    "of about %(bs)s%(hits)d%(be)s results out of about "
-                    "%(pages)d pages.") %
-                   {'hits': len(self.hits), 'pages': self.pages,
+                    "of %(aboutHits)s %(bs)s%(hits)d%(be)s results out of"
+                    "about %(pages)d pages.") %
+                {'aboutHits': self.estimated_hits[0],
+                    'hits': self.estimated_hits[1], 'pages': self.pages,
                     'hitsFrom': hitsFrom + 1,
                     'hitsTo': hitsFrom + request.cfg.search_results_per_page,
                     'bs': formatter.strong(1), 'be': formatter.strong(0)},
@@ -811,7 +817,7 @@ class SearchResults:
         self.matchLabel = (_('match'), _('matches'))
 
 
-def getSearchResults(request, query, hits, start, sort=None):
+def getSearchResults(request, query, hits, start, sort, estimated_hits):
     result_hits = []
     for wikiname, page, attachment, match in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
@@ -825,5 +831,6 @@ def getSearchResults(request, query, hits, start, sort=None):
                 attachment, match, page))
     elapsed = time.time() - start
     count = request.rootpage.getPageCount()
-    return SearchResults(query, result_hits, count, elapsed, sort)
+    return SearchResults(query, result_hits, count, elapsed, sort,
+            estimated_hits)
 
