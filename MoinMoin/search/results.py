@@ -707,7 +707,7 @@ class SearchResults:
         return ''.join([
             f.table(1, attrs={'tableclass': 'searchpages'}),
             f.table_row(1),
-                f.table_cell(1),
+                f.table_cell(1, attrs={'class': 'prev'}),
                 # first image, previous page
                 l[0] and
                     ''.join([
@@ -728,7 +728,7 @@ class SearchResults:
                         f.table_cell(0),
                     ]) for i in page_range
                 ]),
-                f.table_cell(1),
+                f.table_cell(1, attrs={'class': 'next'}),
                 # last image, next page
                 l[-1] and
                     ''.join([
