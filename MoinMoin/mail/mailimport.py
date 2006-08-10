@@ -11,7 +11,7 @@
 
 import os, sys, re, time
 import email
-from email.Utils import parseaddr, parsedate_tz, mktime_tz
+from email.Utils import getaddresses, parseaddr, parsedate_tz, mktime_tz
 
 from MoinMoin import user, wikiutil, config
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
@@ -66,16 +66,22 @@ def email_to_markup(request, email):
         markup = realname or mailaddr
     return markup
 
+def get_addrs(message, header):
+    """ get a list of tuples (realname, mailaddr) from the specified header """
+    dec_hdr = [decode_2044(hdr) for hdr in message.get_all(header, [])]
+    return getaddresses(dec_hdr)
+
 def process_message(message):
     """ Processes the read message and decodes attachments. """
     attachments = []
     html_data = []
     text_data = []
 
-    to_addr = parseaddr(decode_2044(message['To']))
-    from_addr = parseaddr(decode_2044(message['From']))
-    cc_addr = parseaddr(decode_2044(message['Cc']))
-    bcc_addr = parseaddr(decode_2044(message['Bcc']))
+    to_addr = get_addrs(message, 'To')[0]
+    from_addr = get_addrs(message, 'From')[0]
+    cc_addrs = get_addrs(message, 'Cc')
+    bcc_addrs = get_addrs(message, 'Bcc')
+    target_addrs = [to_addr] + cc_addrs + bcc_addrs
 
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
@@ -111,7 +117,8 @@ def process_message(message):
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
             'attachments': attachments,
-            'to_addr': to_addr, 'from_addr': from_addr, 'cc_addr': cc_addr, 'bcc_addr': bcc_addr,
+            'target_addrs': target_addrs, 'to_addr': to_addr, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
+            'from_addr': from_addr,
             'subject': subject, 'date': date}
 
 def get_pagename_content(msg, email_subpage_template, wiki_address):
@@ -122,9 +129,10 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
     choose_html = True
 
     pagename_tpl = ""
-    for addr in ('to_addr', 'cc_addr', 'bcc_addr'):
-        if msg[addr][1].strip().lower() == wiki_address:
-            pagename_tpl = msg[addr][0]
+    for addr in msg['target_addrs']:
+        if addr[1].strip().lower() == wiki_address:
+            pagename_tpl = addr[0]
+            break
 
     if not pagename_tpl:
         subj = msg['subject'].strip()
@@ -256,7 +264,7 @@ def import_mail_from_message(request, message):
                        )
 
         from_col = email_to_markup(request, msg['from_addr'])
-        to_col = email_to_markup(request, msg['to_addr'])
+        to_col = ' '.join([email_to_markup(request, (realname, mailaddr)) for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
         subj_col = msg['subject']
         date_col = msg['date']
         page_col = pagename
