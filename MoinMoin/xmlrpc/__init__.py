@@ -602,7 +602,7 @@ class XmlRpcBase:
 
         if to_rev is None:
             newpage = currentpage
-            newcontents = lambda: currentpage.get_raw_body()
+            newcontents = lambda: currentpage.get_raw_body_str()
         else:
             newpage = Page(self.request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
