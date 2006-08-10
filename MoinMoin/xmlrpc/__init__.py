@@ -669,6 +669,8 @@ class XmlRpcBase:
         # write page
         try:
             currentpage.saveText(newcontents.decode("utf-8"), last_remote_rev, comment=comment)
+        except PageEditor.Unchanged: # could happen in case of both wiki's pages being equal
+            pass
         except PageEditor.EditConflict:
             return LASTREV_INVALID
 
