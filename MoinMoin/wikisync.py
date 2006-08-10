@@ -50,6 +50,10 @@ class AbstractTagStore(object):
         them having accept a page argument at least. """
         pass
 
+    def dump(self):
+        """ Returns all tags for a given item as a string. """
+        return repr(self.get_all_tags())
+
     def add(self, **kwargs):
         """ Adds a Tag object to the current TagStore. """
         print "Got tag for page %r: %r" % (self.page, kwargs)
