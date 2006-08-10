@@ -317,6 +317,9 @@ class SearchResults:
         else:
             list = f.bullet_list
 
+        if paging and len(self.hits) <= request.cfg.search_results_per_page:
+            paging = False
+
         # Add pages formatted as list
         if self.hits:
             write(list(1))
@@ -383,6 +386,9 @@ class SearchResults:
         f = formatter
         write = self.buffer.write
         _ = request.getText
+
+        if paging and len(self.hits) <= request.cfg.search_results_per_page:
+            paging = False
         
         # Add pages formatted as definition list
         if self.hits:
