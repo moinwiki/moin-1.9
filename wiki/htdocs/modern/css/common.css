@@ -334,11 +334,47 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 .searchresults dt {
     margin-top: 1em;
-	font-weight: normal;
+    font-weight: normal;
 }
 
-.searchresults dd {
-	font-size: 0.85em;
+.searchresults dd, .searchresults p {
+    font-size: 0.85em;
+}
+
+.searchresults .searchhitinfobar {
+    color: #008000;
+    margin-left: 15px;
+    margin-top: 0;
+}
+
+p.searchstats {
+    font-size: 0.8em;
+    text-align: right;
+    width: 100%;
+    background-color: #E6EAF0;
+    border-top: 1px solid #9088DC;
+    padding: 2px;
+}
+
+.searchpages {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchpages tr, .searchpages td {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    color: #a90a08;
+    font-weight: bold;
+}
+
+.searchpages td a, .searchpages td a:link {
+    color: #000000;
+    text-decoration: underline;
+    font-weight: normal;
 }
 
 /* MonthCalendar css */

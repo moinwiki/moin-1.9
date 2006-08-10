@@ -10,12 +10,12 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import time, sys, os, errno
+import time, sys, os, errno, codecs
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, lock
 from MoinMoin.search.results import getSearchResults
-from MoinMoin.search.queryparser import TextMatch, TitleMatch
+from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 
 ##############################################################################
 # Search Engine Abstraction
@@ -159,7 +159,7 @@ class BaseIndex:
         ##    self.indexPagesInNewThread(request)
 
     def _main_dir(self):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def exists(self):
         """ Check if index exists """        
@@ -167,15 +167,18 @@ class BaseIndex:
                 
     def mtime(self):
         return os.path.getmtime(self.dir)
+
+    def touch(self):
+        os.utime(self.dir, None)
     
     def _search(self, query):
-        raise NotImplemented
+        raise NotImplemented('...')
 
-    def search(self, query):
+    def search(self, query, *args, **kw):
         #if not self.read_lock.acquire(1.0):
         #    raise self.LockedException
         #try:
-        hits = self._search(query)
+        hits = self._search(query, *args, **kw)
         #finally:
         #    self.read_lock.release()
         return hits
@@ -240,7 +243,7 @@ class BaseIndex:
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
         """
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def _do_queued_updates_InNewThread(self):
         """ do queued index updates in a new thread
@@ -251,7 +254,7 @@ class BaseIndex:
             self.request.log("can't index: can't acquire lock")
             return
         try:
-            def lockedDecorator(self, f):
+            def lockedDecorator(f):
                 def func(*args, **kwargs):
                     try:
                         return f(*args, **kwargs)
@@ -280,10 +283,10 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def optimize(self):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def contentfilter(self, filename):
         """ Get a filter for content of filename and return unicode content. """
@@ -308,7 +311,7 @@ class BaseIndex:
         return mt.mime_type(), data
 
     def test(self, request):
-        raise NotImplemented
+        raise NotImplemented('...')
 
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
@@ -349,9 +352,10 @@ class BaseIndex:
 class Search:
     """ A search run """
     
-    def __init__(self, request, query):
+    def __init__(self, request, query, sort='weight'):
         self.request = request
         self.query = query
+        self.sort = sort
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -367,7 +371,12 @@ class Search:
         if not self.filtered:
             hits = self._filter(hits)
 
-        return getSearchResults(self.request, self.query, hits, start)
+        # when xapian was used, we won't need to sort manually
+        if self.request.cfg.xapian_search:
+            self.sort = None
+
+        return getSearchResults(self.request, self.query, hits, start,
+                self.sort)
         
 
     # ----------------------------------------------------------------
@@ -391,25 +400,29 @@ class Search:
         Get a list of pages using fast xapian search and
         return moin search in those pages.
         """
+        clock = self.request.clock
         pages = None
         index = self._xapianIndex(self.request)
-        if index: #and self.query.xapian_wanted():
-            self.request.clock.start('_xapianSearch')
+        if index and self.query.xapian_wanted():
+            clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
+                clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                enq, hits = index.search(query)
-                self.request.log("xapianSearch: finds: %r" % hits)
+                enq, hits = index.search(query, sort=self.sort)
+                clock.stop('_xapianQuery')
+                #self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for k, v in d.items():
                         d[k] = d[k].decode(config.charset)
                     return d
-                pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
-                        for hit in hits]
+                #pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
+                #        for hit in hits]
+                pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
                 self._xapianEnquire = enq
                 self._xapianIndex = index
@@ -417,10 +430,21 @@ class Search:
                 pass
             #except AttributeError:
             #    pages = []
-            self.request.clock.stop('_xapianSearch')
-            return self._getHits(hits, self._xapianMatch)
+
+            try:
+                if not self.query.xapian_need_postproc():
+                    clock.start('_xapianProcess')
+                    try:
+                        return self._getHits(hits, self._xapianMatch)
+                    finally:
+                        clock.stop('_xapianProcess')
+            finally:
+                clock.stop('_xapianSearch')
         else:
-            return self._moinSearch(pages)
+            # we didn't use xapian in this request
+            self.request.cfg.xapian_search = 0
+        
+        return self._moinSearch(pages)
 
     def _xapianMatchDecider(self, term, pos):
         if term[0] == 'S':      # TitleMatch
@@ -439,8 +463,13 @@ class Search:
                         len(positions[pos]) < len(term_name):
                     positions[pos] = term_name
             term.next()
-        return [self._xapianMatchDecider(term, pos) for pos, term
+        matches = [self._xapianMatchDecider(term, pos) for pos, term
             in positions.iteritems()]
+
+        if not matches:
+            return [Match()]    # dummy for metadata, we got a match!
+
+        return matches
 
     def _moinSearch(self, pages=None):
         """ Search pages using moin's built-in full text search 
