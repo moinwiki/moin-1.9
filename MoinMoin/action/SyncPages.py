@@ -284,7 +284,7 @@ class MoinLocalWiki(RemoteWiki):
 
     def get_pages(self, **kwargs):
         assert not kwargs
-        return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)] if x]
+        return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=1)] if x]
 
     def __repr__(self):
         return "<MoinLocalWiki>"
@@ -384,7 +384,7 @@ class ActionClass:
         _ = self.request.getText
 
         l_pages = local.get_pages()
-        r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
+        r_pages = remote.get_pages(exclude_non_writable=params["direction"] != DOWN)
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
@@ -438,11 +438,16 @@ class ActionClass:
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
-            diff_result = remote.get_diff(rp.remote_name, remote_rev, None) # XXX might raise ALREADY_CURRENT
-            is_remote_conflict = diff_result["conflict"]
-            assert diff_result["diffversion"] == 1
-            diff = diff_result["diff"]
-            current_remote_rev = diff_result["current"]
+            if remote_rev != rp.remote_rev:
+                diff_result = remote.get_diff(rp.remote_name, remote_rev, None) # XXX might raise ALREADY_CURRENT
+                is_remote_conflict = diff_result["conflict"]
+                assert diff_result["diffversion"] == 1
+                diff = diff_result["diff"]
+                current_remote_rev = diff_result["current"]
+            else:
+                current_remote_rev = remote_rev
+                is_remote_conflict = wikiutil.containsConflictMarker(old_contents.decode("utf-8"))
+                diff = None
 
             # do not sync if the conflict is remote and local, or if it is local
             # and the page has never been syncronised
@@ -455,27 +460,38 @@ class ActionClass:
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
                 remote_rev = current_remote_rev
 
-            new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
-            old_contents = old_contents.encode("utf-8")
+            old_contents_dec = old_contents.decode("utf-8")
+            if diff is None:
+                new_contents = old_contents_dec
+            else:
+                new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
+            old_contents = old_contents_dec
 
             # here, the actual merge happens
+            print "Merging %r, %r and %r" % (old_contents, new_contents, current_page.get_raw_body())
             verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 2, *conflict_markers)
 
-            new_local_rev = current_rev + 1 # XXX commit first?
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
             remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
             diff = textdiff(new_contents.encode("utf-8"), verynewtext.encode("utf-8"))
-            very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
             # XXX upgrade to write lock
             try:
                 current_page.saveText(verynewtext, current_rev, comment=comment)
+            except PageEditor.Unchanged:
+                pass
             except PageEditor.EditConflict:
                 # XXX remote rollback needed
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
-            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
+            new_local_rev = current_page.get_real_rev()
+            try:
+                very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
+            except Exception, e:
+                raise # XXX rollback
+            else:
+                tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
 
             if not wikiutil.containsConflictMarker(verynewtext):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))
