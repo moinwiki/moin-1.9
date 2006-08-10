@@ -4,7 +4,8 @@
     Just call this script with the URL of the wiki as a single argument
     and feed the mail into stdin.
 
-    @copyright: 2006 by MoinMoin:AlexanderSchremmer
+    @copyright: 2006 by MoinMoin:AlexanderSchremmer,
+                2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -52,6 +53,18 @@ def decode_2044(header):
     for i in chunks:
         chunks_decoded.append(i[0].decode(i[1] or 'ascii'))
     return u''.join(chunks_decoded).strip()
+
+def email_to_markup(request, email):
+    """ transform the (realname, mailaddr) tuple we get in email argument to
+        some string usable as wiki markup, that represents that person (either
+        HomePage link for a wiki user, or just the realname of the person). """
+    realname, mailaddr = email
+    u = user.get_by_email_address(request, mailaddr)
+    if u:
+        markup = u.wikiHomeLink()
+    else:
+        markup = realname or mailaddr
+    return markup
 
 def process_message(message):
     """ Processes the read message and decodes attachments. """
@@ -158,7 +171,6 @@ def import_mail_from_string(request, string):
 def import_mail_from_file(request, infile):
     """ Reads an RFC 822 compliant message from the file `infile` and imports it to
         the wiki. """
-
     return import_mail_from_message(request, email.message_from_file(infile))
 
 def import_mail_from_message(request, message):
@@ -242,8 +254,9 @@ def import_mail_from_message(request, message):
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
                         u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
-        from_col = msg['from_addr'][0] or msg['from_addr'][1]
-        to_col = msg['to_addr'][0] or msg['to_addr'][1]
+
+        from_col = email_to_markup(request, msg['from_addr'])
+        to_col = email_to_markup(request, msg['to_addr'])
         subj_col = msg['subject']
         date_col = msg['date']
         page_col = pagename
