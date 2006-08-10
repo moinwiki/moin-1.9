@@ -371,6 +371,14 @@ p.searchstats {
     font-weight: bold;
 }
 
+.searchpages td.prev {
+    text-align: right;
+}
+
+.searchpage td.next {
+    text-align: left;
+}
+
 .searchpages td a, .searchpages td a:link {
     color: #000000;
     text-decoration: underline;
