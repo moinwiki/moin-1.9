@@ -292,7 +292,9 @@ class SearchResults:
                 {'aboutHits': self.estimated_hits[0],
                     'hits': self.estimated_hits[1], 'pages': self.pages,
                     'hitsFrom': hitsFrom + 1,
-                    'hitsTo': hitsFrom + request.cfg.search_results_per_page,
+                    'hitsTo': hitsFrom +
+                            min(self.estimated_hits[1] - hitsFrom,
+                                request.cfg.search_results_per_page),
                     'bs': formatter.strong(1), 'be': formatter.strong(0)},
             u' (%s %s)' % (''.join([formatter.strong(1),
                 formatter.text("%.2f" % self.elapsed),
