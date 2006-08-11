@@ -665,6 +665,7 @@ class XmlRpcBase:
 
         # generate the new page revision by applying the diff
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
+        #print "Diff against %r" % basepage.get_raw_body_str()
 
         # write page
         try:

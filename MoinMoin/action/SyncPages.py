@@ -475,6 +475,8 @@ class ActionClass:
             remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
             diff = textdiff(new_contents.encode("utf-8"), verynewtext.encode("utf-8"))
+            #print "Diff against %r" % new_contents.encode("utf-8")
+
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
             # XXX upgrade to write lock
@@ -487,7 +489,7 @@ class ActionClass:
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
             new_local_rev = current_page.get_real_rev()
             try:
-                very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
+                very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid)
             except Exception, e:
                 raise # XXX rollback
             else:
