@@ -101,6 +101,9 @@ class ActionClass:
         params = self.fix_params(self.parse_page())
 
         try:
+            if params["direction"] == UP:
+                raise ActionStatus(_("The only supported directions are BOTH and DOWN."))
+
             if not self.request.cfg.interwikiname:
                 raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
 
