@@ -636,7 +636,7 @@ class Page:
 
         return count
 
-    def getPageList(self, user=None, exists=1, filter=None):
+    def getPageList(self, user=None, exists=1, filter=None, include_underlay=True):
         """ List user readable pages under current page
 
         Currently only request.rootpage is used to list pages, but if we
@@ -693,8 +693,14 @@ class Page:
                 if filter and not filter(name):
                     continue
 
+                page = Page(request, name)
+
+                # Filter underlay pages
+                if not include_underlay and page.getPageStatus()[0]: # is an underlay page
+                    continue
+
                 # Filter deleted pages
-                if exists and not Page(request, name).exists():
+                if exists and not page.exists():
                     continue
 
                 # Filter out page user may not read.

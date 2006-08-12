@@ -239,11 +239,13 @@ class XmlRpcBase:
                 include_revno:: set it to True if you want to have lists with [pagename, revno]
                 include_deleted:: set it to True if you want to include deleted pages
                 exclude_non_writable:: do not include pages that the current user may not write to
+                include_underlay:: return underlay pagenames as well
+                prefix:: the page name must begin with this prefix to be included
         @rtype: list
         @return: a list of all pages.
         """
         options = {"include_system": True, "include_revno": False, "include_deleted": False,
-                   "exclude_non_writable": False}
+                   "exclude_non_writable": False, "include_underlay": True, "prefix": ""}
         if opts is not None:
             options.update(opts)
 
@@ -255,7 +257,11 @@ class XmlRpcBase:
         if options["exclude_non_writable"]:
             filter = lambda name, filter=filter: filter(name) and self.request.user.may.write(name)
 
-        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
+        if options["prefix"]:
+            filter = lambda name, filter=filter, prefix=options["prefix"]: filter(name) and name.startswith(prefix)
+
+        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"],
+                                                     include_underlay=options["include_underlay"])
         
         if options['include_revno']:
             return [[self._outstr(x), Page(self.request, x).get_real_rev()] for x in pagelist]
@@ -601,7 +607,8 @@ class XmlRpcBase:
             oldcontents = lambda: oldpage.get_raw_body_str()
 
         if to_rev is None:
-            newcontents = lambda: currentpage.get_raw_body()
+            newpage = currentpage
+            newcontents = lambda: currentpage.get_raw_body_str()
         else:
             newpage = Page(self.request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
@@ -664,10 +671,13 @@ class XmlRpcBase:
 
         # generate the new page revision by applying the diff
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
+        #print "Diff against %r" % basepage.get_raw_body_str()
 
         # write page
         try:
-            currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
+            currentpage.saveText(newcontents.decode("utf-8"), last_remote_rev, comment=comment)
+        except PageEditor.Unchanged: # could happen in case of both wiki's pages being equal
+            pass
         except PageEditor.EditConflict:
             return LASTREV_INVALID
 
