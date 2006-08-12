@@ -2,20 +2,21 @@ Branch moin/1.6-sync-aschremmer
 ===============================
 
   Known main issues:
-    * How will we store tags? (Metadata support would be handy)
     * How to handle renames/deletes?
-    * How to handle colliding/empty interwiki names?
+    * How will we store tags? (Metadata support would be handy)
+      (currently done in Pickle files)
 
   ToDo:
-    * Implement actual syncronisation.
-      * Add correct IWID_full handling.
+    * Implement all syncronisation cases (all directions, all 3 page sets).
     * Reduce round-trip times by caching queries and using MultiCall objects.
+    * Attach the status information to the job page.
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage.
     * Clean up trailing whitespace.
     * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
     * Search for XXX
+    * Put author names into the comment field, transmit mimetypes.
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -94,7 +95,8 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          detection in SyncPages. Added logging support to SyncPages. Refactored conflict flag
          detection from the edit action into the PageEditor class. Enhanced XMLRPC server in Moin to allow
          XMLRPC functions to return Fault instances. Introduced a new diff3 mode that should reduce the
-         conflicts. Fixed hard to track down bugs in SyncPages.
+         conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
+         either of both components when searching for tags.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
