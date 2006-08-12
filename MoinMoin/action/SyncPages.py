@@ -28,6 +28,7 @@ from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, Moin
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
+
 # directions
 UP, DOWN, BOTH = range(3)
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
@@ -131,9 +132,10 @@ class ActionClass:
     def sync(self, params, local, remote):
         """ This method does the syncronisation work. """
         _ = self.request.getText
+        direction = params["direction"]
 
         l_pages = local.get_pages()
-        r_pages = remote.get_pages(exclude_non_writable=params["direction"] != DOWN)
+        r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
@@ -180,7 +182,7 @@ class ActionClass:
                 newest_tag = matching_tags[-1]
                 local_rev = newest_tag.current_rev
                 remote_rev = newest_tag.remote_rev
-                if remote_rev == rp.remote_rev and local_rev == current_rev:
+                if remote_rev == rp.remote_rev and (direction == DOWN or local_rev == current_rev):
                     continue # no changes done, next page
                 old_page = Page(self.request, local_pagename, rev=local_rev)
                 old_contents = old_page.get_raw_body_str()
