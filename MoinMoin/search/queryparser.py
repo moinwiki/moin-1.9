@@ -177,6 +177,12 @@ class AndExpression(BaseExpression):
             wanted = wanted and term.xapian_wanted()
         return wanted
 
+    def xapian_need_postproc(self):
+        for term in self._subterms:
+            if term.xapian_need_postproc():
+                return True
+        return False
+
     def xapian_term(self, request, allterms):
         # sort negated terms
         terms = []
@@ -266,9 +272,10 @@ class TextSearch(BaseExpression):
         matches = []
 
         # Search in page name
-        results = self.titlesearch.search(page)
-        if results:
-            matches.extend(results)
+        if self.titlesearch:
+            results = self.titlesearch.search(page)
+            if results:
+                matches.extend(results)
 
         # Search in page body
         body = page.get_raw_body()
@@ -301,7 +308,11 @@ class TextSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
+        # XXX: Add option for term-based matching
         return not self.use_re
+
+    def xapian_need_postproc(self):
+        return self.case
 
     def xapian_term(self, request, allterms):
         if self.use_re:
@@ -309,7 +320,7 @@ class TextSearch(BaseExpression):
             terms = [term for term in allterms() if
                     self.search_re.match(term)]
             if not terms:
-                return None
+                return Query()
             queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
@@ -325,16 +336,18 @@ class TextSearch(BaseExpression):
                     tmp = []
                     for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
                         tmp.append(UnicodeQuery(Query.OP_OR, (w, s)))
-                        stemmed.append(w)
+                        stemmed.append(s)
                     t = tmp
                 else:
                     # just not stemmed
                     t = [UnicodeQuery(w) for w, pos in analyzer.tokenize(t)]
                 queries.append(Query(Query.OP_AND, t))
 
-            if stemmed:
-                self._build_re(' '.join(stemmed), use_re=False,
-                        case=self.case, stemmed=True)
+            if not self.case and stemmed:
+                new_pat = ' '.join(stemmed)
+                self._pattern = new_pat
+                self._build_re(new_pat, use_re=False, case=self.case,
+                        stemmed=True)
 
         # titlesearch OR parsed wikiwords
         return Query(Query.OP_OR,
@@ -383,7 +396,8 @@ class TitleSearch(BaseExpression):
         for match in self.search_re.finditer(page.page_name):
             if page.request.cfg.xapian_stemming:
                 # somewhere in regular word
-                if page.page_name[match.start()] not in config.chars_upper and \
+                if not self.case and \
+                        page.page_name[match.start()] not in config.chars_upper and \
                         page.page_name[match.start()-1] in config.chars_lower:
                     continue
 
@@ -408,15 +422,25 @@ class TitleSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return not self.use_re
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return self.case
 
     def xapian_term(self, request, allterms):
         if self.use_re:
             # basic regex matching per term
-            terms = [term for term in allterms() if
-                    self.search_re.match(term)]
+            terms = []
+            found = False
+            for term in allterms():
+                if term[:4] == 'XFT:':
+                    found = True
+                    if self.search_re.findall(term[4:]):
+                        terms.append(Query(term, 100))
+                elif found:
+                    break
             if not terms:
-                return None
+                return Query()
             queries = [Query(Query.OP_OR, terms)]
         else:
             analyzer = Xapian.WikiAnalyzer(request=request,
@@ -432,21 +456,27 @@ class TitleSearch(BaseExpression):
                     # stemmed OR not stemmed
                     tmp = []
                     for w, s, pos in analyzer.tokenize(t, flat_stemming=False):
-                        tmp.append(UnicodeQuery(Query.OP_OR,
-                            ['%s%s' % (Xapian.Index.prefixMap['title'], j)
+                        tmp.append(Query(Query.OP_OR,
+                            [UnicodeQuery('%s%s' %
+                                    (Xapian.Index.prefixMap['title'], j),
+                                    100)
                                 for j in (w, s)]))
-                        stemmed.append(w)
+                        stemmed.append(s)
                     t = tmp
                 else:
                     # just not stemmed
-                    t = [UnicodeQuery('%s%s' % (Xapian.Index.prefixMap['title'], w))
-                        for w, pos in analyzer.tokenize(t)]
+                    t = [UnicodeQuery(
+                                '%s%s' % (Xapian.Index.prefixMap['title'], w),
+                                100)
+                            for w, pos in analyzer.tokenize(t)]
 
                 queries.append(Query(Query.OP_AND, t))
 
-            if stemmed:
-                self._build_re(' '.join(stemmed), use_re=False,
-                        case=self.case, stemmed=True)
+            if not self.case and stemmed:
+                new_pat = ' '.join(stemmed)
+                self._pattern = new_pat
+                self._build_re(new_pat, use_re=False, case=self.case,
+                        stemmed=True)
 
         return Query(Query.OP_AND, queries)
 
@@ -522,7 +552,10 @@ class LinkSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return not self.use_re
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return self.case
 
     def xapian_term(self, request, allterms):
         prefix = Xapian.Index.prefixMap['linkto']
@@ -540,7 +573,7 @@ class LinkSearch(BaseExpression):
                     continue
 
             if not terms:
-                return None
+                return Query()
             return Query(Query.OP_OR, terms)
         else:
             return UnicodeQuery('%s:%s' % (prefix, self.pattern))
@@ -560,7 +593,7 @@ class LanguageSearch(BaseExpression):
         self._pattern = pattern.lower()
         self.negated = 0
         self.use_re = use_re
-        self.case = case
+        self.case = False       # not case-sensitive!
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
@@ -582,7 +615,10 @@ class LanguageSearch(BaseExpression):
             return [Match()]
 
     def xapian_wanted(self):
-        return not self.use_re
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return False            # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
         self.xapian_called = True
@@ -601,11 +637,63 @@ class LanguageSearch(BaseExpression):
                     continue
 
             if not terms:
-                return None
+                return Query()
             return Query(Query.OP_OR, terms)
         else:
             pattern = self.pattern
             return UnicodeQuery('%s%s' % (prefix, pattern))
+
+
+class CategorySearch(TextSearch):
+    """ Search the pages belonging to a category """
+
+    def __init__(self, *args, **kwargs):
+        TextSearch.__init__(self, *args, **kwargs)
+        self.titlesearch = None
+
+    def _build_re(self, pattern, **kwargs):
+        kwargs['use_re'] = True
+        TextSearch._build_re(self,
+                r'(----(-*)(\r)?\n)(.*)Category%s\b' % pattern, **kwargs)
+
+    def costs(self):
+        return 5000 # cheaper than a TextSearch
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
+
+    def highlight_re(self):
+        return u'(Category%s)' % self._pattern
+
+    def xapian_wanted(self):
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return self.case
+
+    def xapian_term(self, request, allterms):
+        self.xapian_called = True
+        prefix = Xapian.Index.prefixMap['category']
+        if self.use_re:
+            # basic regex matching per term
+            terms = []
+            found = None
+            n = len(prefix)
+            for term in allterms():
+                if prefix == term[:n]:
+                    found = True
+                    if self.search_re.match(term[n+1:]):
+                        terms.append(term)
+                elif found:
+                    continue
+
+            if not terms:
+                return Query()
+            return Query(Query.OP_OR, terms)
+        else:
+            pattern = self._pattern.lower()
+            return UnicodeQuery('%s:%s' % (prefix, pattern))
 
 
 ##############################################################################
@@ -693,6 +781,7 @@ class QueryParser:
         case = self.case
         linkto = False
         lang = False
+        category = False
 
         for m in modifiers:
             if "title".startswith(m):
@@ -705,8 +794,21 @@ class QueryParser:
                 linkto = True
             elif "language".startswith(m):
                 lang = True
+            elif "category".startswith(m):
+                category = True
 
-        if lang:
+        # oh, let's better call xapian if we encouter this nasty regexp ;)
+        if not category:
+            cat_re = re.compile(r'----\(-\*\)\(\\r\)\?\\n\)\(\.\*\)Category(.*)\\b', re.U)
+            cat_match = cat_re.search(text)
+            if cat_match:
+                text = cat_match.groups()[0]
+                category = True
+                regex = False
+
+        if category:
+            obj = CategorySearch(text, use_re=regex, case=case)
+        elif lang:
             obj = LanguageSearch(text, use_re=regex, case=False)
         elif linkto:
             obj = LinkSearch(text, use_re=regex, case=case)
