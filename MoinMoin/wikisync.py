@@ -27,6 +27,7 @@ class Tag(object):
         @param remote_rev: The revision number on the remote end.
         @param current_rev: The related local revision.
         """
+        assert isinstance(remote_wiki, str) and isinstance(remote_rev, int) and isinstance(current_rev, int)
         self.remote_wiki = remote_wiki
         self.remote_rev = remote_rev
         self.current_rev = current_rev
@@ -122,7 +123,7 @@ class PickleTagStore(AbstractTagStore):
         self.commit()
 
     def fetch(self, iwid_full=None, iw_name=None):
-        assert iwid_full ^ iw_name
+        assert bool(iwid_full) ^ bool(iw_name)
         if iwid_full:
             iwid_full = unpackLine(iwid_full)
             if len(iwid_full) == 1:

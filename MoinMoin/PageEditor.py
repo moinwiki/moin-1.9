@@ -808,6 +808,9 @@ Try a different name.""") % (newpagename,)
 
         self.copypage()
 
+        # remember conflict state
+        self.setConflict(wikiutil.containsConflictMarker(text))
+
         # Write always on the standard directory, never change the
         # underlay directory copy!
         pagedir = self.getPagePath(use_underlay=0, check_create=0)
