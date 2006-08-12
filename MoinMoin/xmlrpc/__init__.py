@@ -239,11 +239,13 @@ class XmlRpcBase:
                 include_revno:: set it to True if you want to have lists with [pagename, revno]
                 include_deleted:: set it to True if you want to include deleted pages
                 exclude_non_writable:: do not include pages that the current user may not write to
+                include_underlay:: return underlay pagenames as well
+                prefix:: the page name must begin with this prefix to be included
         @rtype: list
         @return: a list of all pages.
         """
         options = {"include_system": True, "include_revno": False, "include_deleted": False,
-                   "exclude_non_writable": False}
+                   "exclude_non_writable": False, "include_underlay": True, "prefix": ""}
         if opts is not None:
             options.update(opts)
 
@@ -255,7 +257,11 @@ class XmlRpcBase:
         if options["exclude_non_writable"]:
             filter = lambda name, filter=filter: filter(name) and self.request.user.may.write(name)
 
-        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
+        if options["prefix"]:
+            filter = lambda name, filter=filter, prefix=options["prefix"]: filter(name) and name.startswith(prefix)
+
+        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"],
+                                                     include_underlay=options["include_underlay"])
         
         if options['include_revno']:
             return [[self._outstr(x), Page(self.request, x).get_real_rev()] for x in pagelist]

@@ -139,11 +139,11 @@ class ActionClass:
 
         m_pages = [elem.add_missing_pagename(local, remote) for elem in SyncPage.merge(l_pages, r_pages)]
 
-        print "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages))
-        
+        print "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages)) # XXX remove
+
         if params["pageMatch"]:
             m_pages = SyncPage.filter(m_pages, params["pageMatch"].match)
-        print "After filtering: Got %i merges pages" % (len(m_pages), )
+        print "After filtering: Got %i merges pages" % (len(m_pages), ) # XXX remove
 
         on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
         remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
