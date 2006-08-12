@@ -223,7 +223,9 @@ class MoinRemoteWiki(RemoteWiki):
     def get_pages(self, **kwargs):
         options = {"include_revno": True,
                    "include_deleted": True,
-                   "exclude_non_writable": kwargs["exclude_non_writable"]}
+                   "exclude_non_writable": kwargs["exclude_non_writable"],
+                   "include_underlay": False,
+                   "prefix": self.prefix}
         pages = self.connection.getAllPagesEx(options)
         rpages = []
         for name, revno in pages:
@@ -267,10 +269,22 @@ class MoinLocalWiki(RemoteWiki):
 
     def get_pages(self, **kwargs):
         assert not kwargs
-        return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=1)] if x]
+        if self.prefix:
+            page_filter = lambda name,prefix=self.prefix: name.startswith(prefix)
+        else:
+            page_filter = lambda x: True
+        pages = []
+        for x in self.request.rootpage.getPageList(exists=1, include_underlay=False, filter=page_filter):
+            sp = self.createSyncPage(x)
+            if sp:
+                pages.append(sp)
+        return pages
 
     def __repr__(self):
         return "<MoinLocalWiki>"
+
+
+# ------------------ Tags ------------------ 
 
 
 class Tag(object):
