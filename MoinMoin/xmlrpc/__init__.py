@@ -580,6 +580,7 @@ class XmlRpcBase:
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
         from MoinMoin.util.bdiff import textdiff, compress
+        from MoinMoin.wikisync import BOTH
 
         pagename = self._instr(pagename)
 
@@ -694,7 +695,7 @@ class XmlRpcBase:
         current_rev = currentpage.get_real_rev()
         
         tags = TagStore(currentpage)
-        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev)
+        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev, direction=BOTH)
 
         # XXX unlock page
 

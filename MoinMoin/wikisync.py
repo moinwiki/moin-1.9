@@ -21,6 +21,10 @@ from MoinMoin.Page import Page
 from MoinMoin.packages import unpackLine, packLine
 
 
+# sync directions
+UP, DOWN, BOTH = range(3)
+
+
 def normalise_pagename(page_name, prefix):
     """ Checks if the page_name starts with the prefix.
         Returns None if it does not, otherwise strips the prefix.
@@ -299,17 +303,19 @@ class MoinLocalWiki(RemoteWiki):
 class Tag(object):
     """ This class is used to store information about merging state. """
     
-    def __init__(self, remote_wiki, remote_rev, current_rev):
+    def __init__(self, remote_wiki, remote_rev, current_rev, direction):
         """ Creates a new Tag.
         
         @param remote_wiki: The identifier of the remote wiki.
         @param remote_rev: The revision number on the remote end.
         @param current_rev: The related local revision.
+        @param direction: The direction of the sync, encoded as an integer.
         """
         assert isinstance(remote_wiki, str) and isinstance(remote_rev, int) and isinstance(current_rev, int)
         self.remote_wiki = remote_wiki
         self.remote_rev = remote_rev
         self.current_rev = current_rev
+        self.direction = direction
 
     def __repr__(self):
         return u"<Tag remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.remote_wiki, self.remote_rev, self.current_rev)
@@ -405,13 +411,14 @@ class PickleTagStore(AbstractTagStore):
         self.tags = []
         self.commit()
 
-    def fetch(self, iwid_full):
+    def fetch(self, iwid_full, direction=None):
         iwid_full = unpackLine(iwid_full)
         matching_tags = []
         for t in self.tags:
             t_iwid_full = unpackLine(t.remote_wiki)
             if ((t_iwid_full[0] == iwid_full[0]) # either match IWID or IW name
-                or (len(t_iwid_full) == 2 and len(iwid_full) == 2 and t_iwid_full[1] == iwid_full[1])):
+                or (len(t_iwid_full) == 2 and len(iwid_full) == 2 and t_iwid_full[1] == iwid_full[1])
+                ) and (direction is None or t.direction == direction):
                 matching_tags.append(t)
         return matching_tags
 
