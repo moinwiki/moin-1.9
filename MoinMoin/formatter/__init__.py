@@ -7,12 +7,13 @@
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
+import re
+
 from MoinMoin.util import pysupport
+from MoinMoin import wikiutil
 
 modules = pysupport.getPackageModules(__file__)
 
-from MoinMoin import wikiutil
-import re, types
 
 class FormatterBase:
     """ This defines the output interface used all over the rest of the code.
@@ -37,7 +38,7 @@ class FormatterBase:
         self._base_depth = 0
 
     def set_highlight_re(self, hi_re=None):
-        if type(hi_re) in [types.StringType, types.UnicodeType]:
+        if isinstance(hi_re, (str, unicode)):
             try:
                 self._highlight_re = re.compile(hi_re, re.U + re.IGNORECASE)
             except re.error:

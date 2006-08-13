@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re, types
+import re
 from MoinMoin import config
 
 def getIntegerInput(request, fieldname, default=None, minval=None, maxval=None):
@@ -224,11 +224,11 @@ class Color:
             another Color instance, a tuple containing 3 color values, 
             a Netscape color name or a HTML color ("#RRGGBB").
         """
-        if isinstance(color, types.TupleType) and len(color) == 3:
+        if isinstance(color, tuple) and len(color) == 3:
             self.r, self.g, self.b = map(int, color)
         elif isinstance(color, Color):
             self.r, self.g, self.b = color.r, color.g, color.b
-        elif not isinstance(color, types.StringType):
+        elif not isinstance(color, str):
             raise TypeError("Color() expects a Color instance, a RGB triple or a color string")
         elif color[0] == '#':
             color = long(color[1:], 16)
