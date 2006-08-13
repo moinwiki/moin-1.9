@@ -9,8 +9,9 @@
     Added "external application" support, refactored code
         by Alexander Schremmer <alex AT alexanderweb DOT de>
 
-    Cleanup, fixed typos, PEP-8, ...
-        by Thomas Waldmann <tw AT waldmann-edv DOT de>
+    Cleanup, fixed typos, PEP-8, support for limiting creation of threads,
+    limited number of requests lifetime, configurable backlog for socket
+    .listen() by Thomas Waldmann <tw AT waldmann-edv DOT de>
 
     For code base see:
     http://cvs.lysator.liu.se/viewcvs/viewcvs.cgi/webkom/thfcgi.py?cvsroot=webkom
