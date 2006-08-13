@@ -13,12 +13,13 @@ Branch moin/1.6-sync-aschremmer
     * Attach the status information to the job page.
     * Show tags in an action=info view?
     * Implement a cross-site authentication system, i.e. mainly an
-      identity storage.
+      identity storage. (does OpenID make sense?)
     * Clean up trailing whitespace.
     * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
     * Search for XXX
     * Maybe refactor YYY into MoinLocalWiki
+    * Remove amount of "very" in the code
     * Put author names into the comment field, transmit mimetypes.
 
   New Features:
