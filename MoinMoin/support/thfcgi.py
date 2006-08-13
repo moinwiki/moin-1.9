@@ -35,7 +35,6 @@
 import os
 import sys
 import select
-import string
 import socket
 import errno
 import cgi
@@ -557,13 +556,13 @@ class FCGIbase:
         """Check if request is done from the right server."""
         # Apaches mod_fastcgi seems not to use FCGI_WEB_SERVER_ADDRS. 
         if os.environ.has_key('FCGI_WEB_SERVER_ADDRS'):
-            good_addrs = string.split(os.environ['FCGI_WEB_SERVER_ADDRS'], ',')
-            good_addrs = map(string.strip, good_addrs) # Remove whitespace
+            good_addrs = os.environ['FCGI_WEB_SERVER_ADDRS'].split(',')
+            good_addrs = [addr.strip() for addr in good_addrs] # Remove whitespace
         else:
             good_addrs = None
 
         # Check if the connection is from a legal address
-        if good_addrs != None and addr not in good_addrs:
+        if good_addrs is not None and addr not in good_addrs:
             raise RuntimeError("Connection from invalid server!")
 
 class THFCGI(FCGIbase):
