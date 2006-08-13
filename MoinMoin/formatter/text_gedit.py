@@ -40,7 +40,7 @@ class Formatter(text_html.Formatter):
 
             See wikiutil.link_tag() for possible keyword parameters.
         """
-        apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
+        FormatterBase.pagelink(self, on, pagename, page, **kw)
         if page is None:
             page = Page(self.request, pagename, formatter=self)
         return page.link_to(self.request, on=on, **kw)
