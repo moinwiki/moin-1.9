@@ -4,7 +4,7 @@
 # See the XXX places for customizing it to your needs. You need to put this
 # code into your farmconfig.py or wikiconfig.py.
 
-# ...
+# HINT: this code is slightly outdated, if you fix it to work with 1.6, please send us a copy.
 
 class FarmConfig(DefaultConfig):
     def external_cookie(request, **kw):
@@ -13,7 +13,7 @@ class FarmConfig(DefaultConfig):
         user = None
         try_next = True # if True, moin tries the next auth method
         cookiename = "whatever" # XXX external cookie name you want to use
-        
+
         try:
             cookie = Cookie.SimpleCookie(request.saved_cookie)
         except Cookie.CookieError:
@@ -27,7 +27,7 @@ class FarmConfig(DefaultConfig):
             cookievalue = urllib.unquote(cookievalue) # cookie value is urlencoded, decode it
             cookievalue = cookievalue.decode('iso-8859-1') # decode cookie charset to unicode
             cookievalue = cookievalue.split('#') # cookie has format loginname#firstname#lastname#email
-            
+
             auth_username = cookievalue[0] # having this cookie means user auth has already been done!
             aliasname = email = ''
             try:
@@ -44,13 +44,13 @@ class FarmConfig(DefaultConfig):
             from MoinMoin.user import User
             # giving auth_username to User constructor means that authentication has already been done.
             user = User(request, name=auth_username, auth_username=auth_username)
-            
+
             changed = False
             if aliasname != user.aliasname: # was the aliasname externally updated?
                 user.aliasname = aliasname ; changed = True # yes -> update user profile
             if email != user.email: # was the email addr externally updated?
                 user.email = email ; changed = True # yes -> update user profile
-            
+
             if user:
                 user.create_or_update(changed)
             if user and user.valid: # did we succeed making up a valid user?
