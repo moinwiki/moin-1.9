@@ -580,7 +580,6 @@ class XmlRpcBase:
     def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
         """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
         from MoinMoin.util.bdiff import textdiff, compress
-        from MoinMoin.wikisync import BOTH
 
         pagename = self._instr(pagename)
 
@@ -655,7 +654,7 @@ class XmlRpcBase:
             @param interwiki_name: Used to build the interwiki tag.
         """
         from MoinMoin.util.bdiff import decompress, patch
-        from MoinMoin.wikisync import TagStore
+        from MoinMoin.wikisync import TagStore, BOTH
         LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
 
         pagename = self._instr(pagename)
