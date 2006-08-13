@@ -99,7 +99,6 @@ def _loadDict(request):
 
 
 def _addLocalWords(request):
-    import types
     from MoinMoin.PageEditor import PageEditor
 
     # get the new words as a string (if any are marked at all)

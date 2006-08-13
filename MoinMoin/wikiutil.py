@@ -11,7 +11,6 @@ import codecs
 import os
 import re
 import time
-import types
 import urllib
 
 from MoinMoin import util, version, config
@@ -1131,7 +1130,7 @@ def getParserForExtension(cfg, extension):
                 continue
             if hasattr(Parser, 'extensions'):
                 exts = Parser.extensions
-                if type(exts) == types.ListType:
+                if isinstance(exts, list):
                     for ext in Parser.extensions:
                         etp[ext] = Parser
                 elif str(exts) == '*':
@@ -1531,14 +1530,14 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def createTicket(tm=None):
     """Create a ticket using a site-specific secret (the config)"""
-    import sha, time, types
+    import sha
     ticket = tm or "%010x" % time.time()
     digest = sha.new()
     digest.update(ticket)
 
     cfgvars = vars(config)
     for var in cfgvars.values():
-        if type(var) is types.StringType:
+        if isinstance(var, str):
             digest.update(repr(var))
 
     return "%s.%s" % (ticket, digest.hexdigest())
