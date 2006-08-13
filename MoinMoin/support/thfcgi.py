@@ -245,11 +245,11 @@ class Request:
     """A request, corresponding to an accept():ed connection and
     a FCGI request."""
 
-    def __init__(self, conn, req_handler, multi=1):
+    def __init__(self, conn, req_handler, inthread=False):
         """Initialize Request container."""
         self.conn = conn
         self.req_handler = req_handler
-        self.multi = multi
+        self.inthread = inthread
 
         self.keep_conn = 0
         self.req_id = None
@@ -371,7 +371,7 @@ class Request:
         rec.writeRecord(self.conn)
         if not self.keep_conn:
             self.conn.close()
-            if self.multi:
+            if self.inthread:
                 raise SystemExit
 
     #
@@ -515,10 +515,10 @@ class Request:
         data = data[8192:]
         return chunk, data
 
-class FCGIbase:
-    """Base class for FCGI requests."""
+class FCGI:
+    """FCGI requests"""
 
-    def __init__(self, req_handler, fd, port, requests_left, backlog):
+    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5, max_threads=5):
         """Initialize main loop and set request_handler."""
         self.req_handler = req_handler
         self.fd = fd
@@ -526,16 +526,16 @@ class FCGIbase:
         self._make_socket()
         # how many requests we have left before terminating this process, -1 means infinite lifetime:
         self.requests_left = requests_left
+        # for socket.listen(backlog):
         self.backlog = backlog
+        # how many threads we have at maximum (including the main program = 1. thread)
+        self.max_threads = max_threads
 
-    def run(self):
-        raise NotImplementedError
-
-    def accept_handler(self, conn, addr):
+    def accept_handler(self, conn, addr, inthread=False):
         """Construct Request and run() it."""
         self._check_good_addrs(addr)
         try:
-            req = Request(conn, self.req_handler, self.multi)
+            req = Request(conn, self.req_handler, inthread)
             req.run()
         except SocketErrorOnWrite:
             raise SystemExit
@@ -574,16 +574,8 @@ class FCGIbase:
         if good_addrs is not None and addr not in good_addrs:
             raise RuntimeError("Connection from invalid server!")
 
-class THFCGI(FCGIbase):
-    """Multi-threaded main loop to handle FastCGI Requests."""
-
-    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5):
-        """Initialize main loop and set request_handler."""
-        self.multi = 1
-        FCGIbase.__init__(self, req_handler, fd, port, requests_left, backlog)
-
     def run(self):
-        """Wait & serve. Calls request_handler in new thread on every request."""
+        """Wait & serve. Calls request_handler on every request."""
         self.sock.listen(self.backlog)
         log("Starting Process")
         running = True
@@ -594,31 +586,15 @@ class THFCGI(FCGIbase):
             elif self.requests_left > 0:
                 self.requests_left -= 1
                 conn, addr = self.sock.accept()
-                log("Accepted connection, starting thread....")
-                t = _threading.Thread(target=self.accept_handler, args=(conn, addr))
-                t.start()
+                threadcount = _threading.activeCount()
+                if threadcount < self.max_threads:
+                    log("Accepted connection, starting thread...")
+                    t = _threading.Thread(target=self.accept_handler, args=(conn, addr, True))
+                    t.start()
+                else:
+                    log("Accepted connection, running in main-thread...")
+                    self.accept_handler(conn, addr, False)
                 log("Active Threads: %d" % _threading.activeCount())
         self.sock.close()
         log("Ending Process")
-
-class unTHFCGI(FCGIbase):
-    """Single-threaded main loop to handle FastCGI Requests."""
-
-    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5):
-        """Initialize main loop and set request_handler."""
-        self.multi = 0
-        FCGIbase.__init__(self, req_handler, fd, port, requests_left, backlog)
-
-    def run(self):
-        """Wait & serve. Calls request handler for every request (blocking)."""
-        self.sock.listen(self.backlog)
-        running = True
-        while running:
-            if not self.requests_left:
-                running = False
-            elif self.requests_left > 0:
-                self.requests_left -= 1
-                conn, addr = self.sock.accept()
-                self.accept_handler(conn, addr)
-        self.sock.close()
 
