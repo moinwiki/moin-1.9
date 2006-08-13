@@ -38,7 +38,7 @@ def format_comment(request, line):
         elif line.action == 'ATTDRW':
             comment = _("Drawing '%(filename)s' saved.") % {
                 'filename': filename}
-    elif line.action.find('/REVERT') != -1:
+    elif '/REVERT' in line.action:
         rev = int(line.extra)
         comment = _("Revert to revision %(rev)d.") % {'rev': rev}
 

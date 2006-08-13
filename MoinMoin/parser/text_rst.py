@@ -382,7 +382,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 # Default case - make a link to a wiki page.
                 pagename = refuri
                 anchor = ''
-                if refuri.find('#') != -1:
+                if '#' in refuri:
                     pagename, anchor = refuri.split('#', 1)
                     anchor = '#' + anchor
                 page = Page(self.request, pagename)

@@ -79,7 +79,7 @@ class NewPage:
         if parent == '@ME' and self.request.user.valid:
             parent = self.request.user.name
 
-        requires_input = nametemplate.find('%s') != -1
+        requires_input = '%s' in nametemplate
 
         if label:
             # Try to get a translation, this will probably not work in
