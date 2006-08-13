@@ -585,6 +585,7 @@ class FCGI:
                 running = False
             elif self.requests_left > 0:
                 self.requests_left -= 1
+            if running:
                 conn, addr = self.sock.accept()
                 threadcount = _threading.activeCount()
                 if threadcount < self.max_threads:
