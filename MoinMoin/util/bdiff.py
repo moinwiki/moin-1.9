@@ -79,8 +79,8 @@ def test():
     a = ("foo\n" * 30)
     b = ("  fao" * 30)
 
-    a = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.1").read()
-    b = file(r"C:\Dokumente und Einstellungen\Administrator\Eigene Dateien\Progra\Python\MoinMoin\moin-1.6-sync\MoinMoin\util\test.2").read()
+    a = file(r"test.1").read()
+    b = file(r"test.2").read()
     a = a.splitlines(1)
     b = b.splitlines(1)
 
