@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import re, string
+import re
 from MoinMoin import config
 from MoinMoin.search.results import Match, TitleMatch, TextMatch
 

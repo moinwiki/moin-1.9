@@ -1,7 +1,6 @@
 """
     xapwrap.document - Pythonic wrapper around Xapian's Document API
 """
-import string
 import datetime
 import re
 import cPickle
