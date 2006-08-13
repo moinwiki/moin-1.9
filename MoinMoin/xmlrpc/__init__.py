@@ -244,23 +244,33 @@ class XmlRpcBase:
         @rtype: list
         @return: a list of all pages.
         """
+        from MoinMoin.wikisync import normalise_pagename
         options = {"include_system": True, "include_revno": False, "include_deleted": False,
-                   "exclude_non_writable": False, "include_underlay": True, "prefix": ""}
+                   "exclude_non_writable": False, "include_underlay": True, "prefix": "",
+                   "pagelist": None}
         if opts is not None:
             options.update(opts)
 
         if not options["include_system"]:
-            filter = lambda name: not wikiutil.isSystemPage(self.request, name)
+            p_filter = lambda name: not wikiutil.isSystemPage(self.request, name)
         else:
-            filter = lambda name: True
+            p_filter = lambda name: True
 
         if options["exclude_non_writable"]:
-            filter = lambda name, filter=filter: filter(name) and self.request.user.may.write(name)
+            p_filter = lambda name, p_filter=p_filter: p_filter(name) and self.request.user.may.write(name)
 
-        if options["prefix"]:
-            filter = lambda name, filter=filter, prefix=options["prefix"]: filter(name) and name.startswith(prefix)
+        if options["prefix"] or options["pagelist"]:
+            def p_filter(name, p_filter=p_filter, prefix=(options["prefix"] or ""), pagelist=options["pagelist"]):
+                if not p_filter(name):
+                    return False
+                n_name = normalise_pagename(name, prefix)
+                if not n_name:
+                    return False
+                if not pagelist:
+                    return True
+                return n_name in pagelist
 
-        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"],
+        pagelist = self.request.rootpage.getPageList(filter=p_filter, exists=not options["include_deleted"],
                                                      include_underlay=options["include_underlay"])
         
         if options['include_revno']:
