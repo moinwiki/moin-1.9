@@ -55,6 +55,6 @@ def handle_request(req, env, form):
     request.run()
 
 if __name__ == '__main__':
-    fcg = thfcgi.FCGI(handle_request, requests_left=max_requests, backlog=backlog, max_threads=max_threads)
+    fcg = thfcgi.FCGI(handle_request, max_requests=max_requests, backlog=backlog, max_threads=max_threads)
     fcg.run()
 
