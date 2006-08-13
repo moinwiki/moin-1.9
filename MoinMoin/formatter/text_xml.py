@@ -19,7 +19,7 @@ class Formatter(FormatterBase):
     hardspace = '&nbsp;'
 
     def __init__(self, request, **kw):
-        apply(FormatterBase.__init__, (self, request), kw)
+        FormatterBase.__init__(self, request, **kw)
         self._current_depth = 1
         self._base_depth = 0
         self.in_pre = 0
@@ -49,7 +49,7 @@ class Formatter(FormatterBase):
         return '<![CDATA[' + markup.replace(']]>', ']]>]]&gt;<![CDATA[') + ']]>'
 
     def pagelink(self, on, pagename='', page=None, **kw):
-        apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
+        FormatterBase.pagelink(self, on, pagename, page, **kw)
         if page is None:
             page = Page(self.request, pagename, formatter=self)
         return page.link_to(self.request, on=on, **kw)
@@ -202,7 +202,7 @@ class Formatter(FormatterBase):
         for key, value in kw.items():
             if key in valid_attrs:
                 attrs[key] = value
-        return apply(FormatterBase.image, (self,), attrs) + '</img>'
+        return FormatterBase.image(self, **attrs) + '</img>'
 
     def code_area(self, on, code_id, code_type='code', show=0, start=-1, step=-1):
         return ('<codearea id="%s">' % code_id, '</codearea')[not on]

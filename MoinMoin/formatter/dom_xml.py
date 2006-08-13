@@ -191,7 +191,7 @@ class Formatter(FormatterBase):
         return self._set_tag('lang', on, value=lang_name)
 
     def pagelink(self, on, pagename='', page=None, **kw):
-        apply(FormatterBase.pagelink, (self, pagename, page), kw)
+        FormatterBase.pagelink(self, pagename, page, **kw)
         if not pagename and page is not None:
             pagename = page.page_name
         kw['pagename'] = pagename
