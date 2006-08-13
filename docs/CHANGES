@@ -219,6 +219,16 @@ Version 1.6.current:
       You need to change this in your wikiconfig.py or farmconfig.py file.
       See MoinMoin/multiconfig.py for an alternative way if you can't do that.
 
+Version 1.5-current:
+   * moin.fcg improved - if you use FastCGI, you must use the new file:
+     * can self-terminate after some number of requests (default: -1, this means
+       "unlimited lifetime")
+     * the count of created threads is limited now (default: 5), you can use 1
+       to use non-threaded operation.
+     * configurable socket.listen() backlog (default: 5)
+  
+Version 1.5.4:
+    HINT: read docs/README.migration.
 Version 1.5.4-current:
     * increased maxlength of some input fields from 80 to 200
 

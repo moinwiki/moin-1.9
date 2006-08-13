@@ -26,8 +26,9 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-# how many requests shall be handled by a moin fcgi process before it dies:
-max_requests = 1000
+# how many requests shall be handled by a moin fcgi process before it dies,
+# -1 mean "unlimited lifetime":
+max_requests = -1
 
 # how many threads to use (1 means use only main program, non-threaded)
 max_threads = 5
