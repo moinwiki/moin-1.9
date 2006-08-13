@@ -81,7 +81,6 @@ class ActionClass:
         if params["pageList"] is not None:
             params["pageMatch"] = u'|'.join([r'^%s$' % re.escape(name)
                                              for name in params["pageList"]])
-            del params["pageList"]
 
         if params["pageMatch"] is not None:
             params["pageMatch"] = re.compile(params["pageMatch"], re.U)
@@ -89,6 +88,7 @@ class ActionClass:
         # we do not support matching or listing pages if there is a group of pages
         if params["groupList"]:
             params["pageMatch"] = None
+            params["pageList"] = None
 
         return params
 
@@ -111,9 +111,9 @@ class ActionClass:
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
-            local = MoinLocalWiki(self.request, params["localPrefix"])
+            local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"])
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"])
             except UnsupportedWikiException, (msg, ):
                 raise ActionStatus(msg)
 
@@ -166,7 +166,7 @@ class ActionClass:
             print "Processing %r" % rp
 
             local_pagename = rp.local_name
-            current_page = PageEditor(self.request, local_pagename)
+            current_page = PageEditor(self.request, local_pagename) # YYY direct access
             current_rev = current_page.get_real_rev()
 
             tags = TagStore(current_page)
@@ -184,8 +184,7 @@ class ActionClass:
                 remote_rev = newest_tag.remote_rev
                 if remote_rev == rp.remote_rev and (direction == DOWN or local_rev == current_rev):
                     continue # no changes done, next page
-                old_page = Page(self.request, local_pagename, rev=local_rev)
-                old_contents = old_page.get_raw_body_str()
+                old_contents = Page(self.request, local_pagename, rev=local_rev).get_raw_body_str() # YYY direct access
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
@@ -232,7 +231,7 @@ class ActionClass:
 
             # XXX upgrade to write lock
             try:
-                current_page.saveText(verynewtext, current_rev, comment=comment)
+                current_page.saveText(verynewtext, current_rev, comment=comment) # YYY direct access
             except PageEditor.Unchanged:
                 pass
             except PageEditor.EditConflict:

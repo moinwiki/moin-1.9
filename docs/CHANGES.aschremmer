@@ -17,6 +17,7 @@ Branch moin/1.6-sync-aschremmer
     * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
     * Search for XXX
+    * Maybe refactor YYY into MoinLocalWiki
     * Put author names into the comment field, transmit mimetypes.
 
   New Features:
@@ -98,7 +99,7 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          XMLRPC functions to return Fault instances. Introduced a new diff3 mode that should reduce the
          conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
          either of both components when searching for tags. Ignore underlay pages. Filter the remote page list by
-         the prefix on the remote side.
+         the prefix and the pageList on the remote side.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress

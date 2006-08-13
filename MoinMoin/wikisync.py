@@ -164,9 +164,10 @@ class RemoteWiki(object):
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname, prefix):
+    def __init__(self, request, interwikiname, prefix, pagelist):
         self.request = request
         self.prefix = prefix
+        self.pagelist = pagelist
         _ = self.request.getText
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
@@ -225,7 +226,8 @@ class MoinRemoteWiki(RemoteWiki):
                    "include_deleted": True,
                    "exclude_non_writable": kwargs["exclude_non_writable"],
                    "include_underlay": False,
-                   "prefix": self.prefix}
+                   "prefix": self.prefix,
+                   "pagelist": self.pagelist}
         pages = self.connection.getAllPagesEx(options)
         rpages = []
         for name, revno in pages:
@@ -241,9 +243,10 @@ class MoinRemoteWiki(RemoteWiki):
 
 class MoinLocalWiki(RemoteWiki):
     """ Used for the current MoinMoin wiki. """
-    def __init__(self, request, prefix):
+    def __init__(self, request, prefix, pagelist):
         self.request = request
         self.prefix = prefix
+        self.pagelist = pagelist
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
@@ -269,8 +272,14 @@ class MoinLocalWiki(RemoteWiki):
 
     def get_pages(self, **kwargs):
         assert not kwargs
-        if self.prefix:
-            page_filter = lambda name,prefix=self.prefix: name.startswith(prefix)
+        if self.prefix or self.pagelist:
+            def page_filter(name, prefix=(self.prefix or ""), pagelist=self.pagelist):
+                n_name = normalise_pagename(name, prefix)
+                if not n_name:
+                    return False
+                if not pagelist:
+                    return True
+                return n_name in pagelist
         else:
             page_filter = lambda x: True
         pages = []
