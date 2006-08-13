@@ -24,13 +24,13 @@ from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
-from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, MoinLocalWiki, MoinRemoteWiki
+from MoinMoin.wikisync import (TagStore, UnsupportedWikiException, SyncPage,
+                               MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH)
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
 
-# directions
-UP, DOWN, BOTH = range(3)
+# map sync directions
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
 
 
@@ -45,6 +45,7 @@ class ActionClass:
         self.pagename = pagename
         self.page = Page(request, pagename)
         self.status = []
+        request.flush()
 
     def log_status(self, level, message):
         """ Appends the message with a given importance level to the internal log. """
@@ -70,7 +71,7 @@ class ActionClass:
         if options["groupList"] is not None:
             options["groupList"] = unpackLine(options["groupList"], ",")
 
-        options["direction"] = directions_map.get(options["direction"], BOTH)
+        options["direction"] = directions_map.get(options["direction"].lower(), BOTH)
 
         return options
 
@@ -170,7 +171,11 @@ class ActionClass:
             current_rev = current_page.get_real_rev()
 
             tags = TagStore(current_page)
-            matching_tags = tags.fetch(iwid_full=remote.iwid_full)
+            if direction == BOTH:
+                match_direction = direction
+            else:
+                match_direction = None
+            matching_tags = tags.fetch(iwid_full=remote.iwid_full,direction=match_direction)
             matching_tags.sort()
             #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
 
@@ -187,6 +192,12 @@ class ActionClass:
                 old_contents = Page(self.request, local_pagename, rev=local_rev).get_raw_body_str() # YYY direct access
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
+
+            if direction == DOWN:
+                remote_rev = None # always fetch the full page, ignore remote conflict check
+                patch_base_contents = ""
+            else:
+                patch_base_contents = old_contents
 
             if remote_rev != rp.remote_rev:
                 diff_result = remote.get_diff(rp.remote_name, remote_rev, None) # XXX might raise ALREADY_CURRENT
@@ -206,20 +217,17 @@ class ActionClass:
                 self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a locally or remotely unresolved conflict.") % {"pagename": local_pagename})
                 continue
 
-            if remote_rev is None: # set the remote_rev for the case without any tags
+            if remote_rev is None and direction == BOTH:
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
-                remote_rev = current_remote_rev
 
-            old_contents_dec = old_contents.decode("utf-8")
             if diff is None:
-                new_contents = old_contents_dec
+                new_contents = old_contents.decode("utf-8")
             else:
-                new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
-            old_contents = old_contents_dec
+                new_contents = patch(patch_base_contents, decompress(diff)).decode("utf-8")
 
             # here, the actual merge happens
-            print "Merging %r, %r and %r" % (old_contents, new_contents, current_page.get_raw_body())
-            verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 2, *conflict_markers)
+            print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+            verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents, current_page.get_raw_body(), 2, *conflict_markers)
 
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
             remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
@@ -239,12 +247,15 @@ class ActionClass:
 
             new_local_rev = current_page.get_real_rev()
 
-            try:
-                very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid)
-            except Exception, e:
-                raise # XXX rollback locally
+            if direction == BOTH:
+                try:
+                    very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid)
+                except Exception, e:
+                    raise # XXX rollback locally and do not tag locally
             else:
-                tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
+                very_current_remote_rev = current_remote_rev
+
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction)
 
             if not wikiutil.containsConflictMarker(verynewtext):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))
