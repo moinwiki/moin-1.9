@@ -14,9 +14,9 @@ import os, sys, re, random
 #############################################################################
 
 g_xmlIllegalCharPattern = re.compile('[\x01-\x08\x0B-\x0D\x0E-\x1F\x80-\xFF]')
-g_undoUtf8Pattern       = re.compile('\xC2([^\xC2])')
-g_cdataCharPattern      = re.compile('[&<\'\"]')
-g_textCharPattern       = re.compile('[&<]')
+g_undoUtf8Pattern = re.compile('\xC2([^\xC2])')
+g_cdataCharPattern = re.compile('[&<\'\"]')
+g_textCharPattern = re.compile('[&<]')
 g_charToEntity = {
     '&': '&amp;',
     '<': '&lt;',
@@ -60,11 +60,11 @@ def rangelist(numbers):
     for i in range(len(numbers)-1):
         if pattern[-1] == ',':
             pattern = pattern + str(numbers[i])
-            if numbers[i]+1 == numbers[i+1]:
+            if numbers[i] + 1 == numbers[i+1]:
                 pattern = pattern + '-'
             else:
                 pattern = pattern + ','
-        elif numbers[i]+1 != numbers[i+1]:
+        elif numbers[i] + 1 != numbers[i+1]:
             pattern = pattern + str(numbers[i]) + ','
 
     if pattern[-1] in ',-':
@@ -116,3 +116,4 @@ class simpleIO:
 def random_string(length):
     chars = ''.join([chr(random.randint(0, 255)) for x in xrange(length)])
     return chars
+
