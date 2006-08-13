@@ -1,13 +1,13 @@
 # taken from Amos' XML-RPC HowTo:
 
-import string, xmlrpclib, httplib
+import xmlrpclib, httplib
 from base64 import encodestring
 
 class BasicAuthTransport(xmlrpclib.Transport):
     def __init__(self, username=None, password=None):
-        self.username=username
-        self.password=password
-        self.verbose=0
+        self.username = username
+        self.password = password
+        self.verbose = 0
 
     def request(self, host, handler, request_body, **kw):
         # issue XML-RPC request
@@ -21,13 +21,10 @@ class BasicAuthTransport(xmlrpclib.Transport):
         h.putheader("User-Agent", self.user_agent)
         h.putheader("Content-Type", "text/xml")
         h.putheader("Content-Length", str(len(request_body)))
-        #h.putheader("Connection", "close") # TW XXX just trying if that cures twisted ...
 
         # basic auth
         if self.username is not None and self.password is not None:
-            authhdr = "Basic %s" % string.replace(
-                    encodestring("%s:%s" % (self.username, self.password)),
-                    "\012", "")
+            authhdr = "Basic %s" % encodestring("%s:%s" % (self.username, self.password)).replace("\012", "")
             h.putheader("Authorization", authhdr)
         h.endheaders()
 
@@ -43,5 +40,5 @@ class BasicAuthTransport(xmlrpclib.Transport):
                 headers
                 )
 
-        return self.parse_response(h.getfile()) 
+        return self.parse_response(h.getfile())
 
