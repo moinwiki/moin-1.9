@@ -49,9 +49,9 @@ def handle_request(req, env, form):
 
 if __name__ == '__main__':
     if use_threads:
-        fcg = thfcgi.THFCGI(handle_request)
+        fcg = thfcgi.THFCGI(handle_request, requests_left=20, backlog=5)
     else:
-        fcg = thfcgi.unTHFCGI(handle_request)    
+        fcg = thfcgi.unTHFCGI(handle_request, requests_left=20, backlog=5)
 
     fcg.run()
 

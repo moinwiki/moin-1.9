@@ -35,6 +35,8 @@
 # CONTENT_LENGTH and abort the update if the two numbers are not equal.
 #
 
+debug = False
+
 import os
 import sys
 import select
@@ -43,6 +45,11 @@ import errno
 import cgi
 from cStringIO import StringIO
 import struct
+
+try:
+    import threading as _threading
+except ImportError:
+    import dummy_threading as _threading
 
 # Maximum number of requests that can be handled
 FCGI_MAX_REQS = 50
@@ -90,6 +97,13 @@ FCGI_BeginRequestBody = "!HB5x"
 FCGI_Record_header = "!BBHHBx"
 FCGI_UnknownTypeBody = "!B7x"
 FCGI_EndRequestBody = "!IB3x"
+
+LOGFILE = sys.stderr
+
+def log(s):
+    if debug:
+        LOGFILE.write(s)
+        LOGFILE.write('\n')
 
 class SocketErrorOnWrite:
     """Is raised if a write fails in the socket code."""
@@ -358,8 +372,7 @@ class Request:
         if not self.keep_conn:
             self.conn.close()
             if self.multi:
-                import thread
-                thread.exit()
+                raise SystemExit
 
     #
     # Record handlers
@@ -411,7 +424,7 @@ class Request:
             self._handle_begin_request(rec)
             return
         elif rec.req_id != self.req_id:
-            #print >> sys.stderr, "Received unknown request ID", rec.req_id
+            log("Received unknown request ID %r" % rec.req_id)
             # Ignore requests that aren't active
             return
         if rec.rec_type == FCGI_ABORT_REQUEST:
@@ -432,7 +445,7 @@ class Request:
             self._handle_data(rec)
         else:
             # Should never happen. 
-            #print >> sys.stderr, "Received unknown FCGI record type", rec.rec_type
+            log("Received unknown FCGI record type %r" % rec.rec_type)
             pass
 
         if self.env_complete and self.stdin_complete:
@@ -461,7 +474,7 @@ class Request:
         """Handle environment."""
         if self.env_complete:
             # Should not happen
-            #print >> sys.stderr, "Received FCGI_PARAMS more than once"
+            log("Received FCGI_PARAMS more than once")
             return
 
         if not rec.content:
@@ -474,7 +487,7 @@ class Request:
         """Handle stdin."""
         if self.stdin_complete:
             # Should not happen
-            #print >> sys.stderr, "Received FCGI_STDIN more than once"
+            log("Received FCGI_STDIN more than once")
             return
 
         if not rec.content:
@@ -488,7 +501,7 @@ class Request:
         """Handle data."""
         if self.data_complete:
             # Should not happen
-            #print >> sys.stderr, "Received FCGI_DATA more than once"
+            log("Received FCGI_DATA more than once")
             return
 
         if not rec.content:
@@ -505,12 +518,15 @@ class Request:
 class FCGIbase:
     """Base class for FCGI requests."""
 
-    def __init__(self, req_handler, fd, port):
+    def __init__(self, req_handler, fd, port, requests_left, backlog):
         """Initialize main loop and set request_handler."""
         self.req_handler = req_handler
         self.fd = fd
         self.__port = port
         self._make_socket()
+        # how many requests we have left before terminating this process, -1 means infinite lifetime:
+        self.requests_left = requests_left
+        self.backlog = backlog
 
     def run(self):
         raise NotImplementedError
@@ -522,11 +538,7 @@ class FCGIbase:
             req = Request(conn, self.req_handler, self.multi)
             req.run()
         except SocketErrorOnWrite:
-            if self.multi:
-                import thread
-                thread.exit()
-            #else:
-            #    raise SystemExit
+            raise SystemExit
 
     def _make_socket(self):
         """Create socket and verify FCGI environment."""
@@ -565,34 +577,48 @@ class FCGIbase:
 class THFCGI(FCGIbase):
     """Multi-threaded main loop to handle FastCGI Requests."""
 
-    def __init__(self, req_handler, fd=sys.stdin, port=None):
+    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5):
         """Initialize main loop and set request_handler."""
         self.multi = 1
-        FCGIbase.__init__(self, req_handler, fd, port)
+        FCGIbase.__init__(self, req_handler, fd, port, requests_left, backlog)
 
     def run(self):
-        """Wait & serve. Calls request_handler in new
-        thread on every request."""
-        import thread
-        self.sock.listen(50)
-
-        while 1:
-            conn, addr = self.sock.accept()
-            thread.start_new_thread(self.accept_handler, (conn, addr))
+        """Wait & serve. Calls request_handler in new thread on every request."""
+        self.sock.listen(self.backlog)
+        log("Starting Process")
+        running = True
+        while running:
+            if not self.requests_left:
+                # self.sock.shutdown(RDWR) here does NOT help with backlog
+                running = False
+            elif self.requests_left > 0:
+                self.requests_left -= 1
+                conn, addr = self.sock.accept()
+                log("Accepted connection, starting thread....")
+                t = _threading.Thread(target=self.accept_handler, args=(conn, addr))
+                t.start()
+                log("Active Threads: %d" % _threading.activeCount())
+        self.sock.close()
+        log("Ending Process")
 
 class unTHFCGI(FCGIbase):
     """Single-threaded main loop to handle FastCGI Requests."""
 
-    def __init__(self, req_handler, fd=sys.stdin, port=None):
+    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5):
         """Initialize main loop and set request_handler."""
         self.multi = 0
-        FCGIbase.__init__(self, req_handler, fd, port)
+        FCGIbase.__init__(self, req_handler, fd, port, requests_left, backlog)
 
     def run(self):
         """Wait & serve. Calls request handler for every request (blocking)."""
-        self.sock.listen(50)
-
-        while 1:
-            conn, addr = self.sock.accept()
-            self.accept_handler(conn, addr)
+        self.sock.listen(self.backlog)
+        running = True
+        while running:
+            if not self.requests_left:
+                running = False
+            elif self.requests_left > 0:
+                self.requests_left -= 1
+                conn, addr = self.sock.accept()
+                self.accept_handler(conn, addr)
+        self.sock.close()
 
