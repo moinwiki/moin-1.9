@@ -518,14 +518,14 @@ class Request:
 class FCGI:
     """FCGI requests"""
 
-    def __init__(self, req_handler, fd=sys.stdin, port=None, requests_left=-1, backlog=5, max_threads=5):
+    def __init__(self, req_handler, fd=sys.stdin, port=None, max_requests=-1, backlog=5, max_threads=5):
         """Initialize main loop and set request_handler."""
         self.req_handler = req_handler
         self.fd = fd
         self.__port = port
         self._make_socket()
         # how many requests we have left before terminating this process, -1 means infinite lifetime:
-        self.requests_left = requests_left
+        self.requests_left = max_requests
         # for socket.listen(backlog):
         self.backlog = backlog
         # how many threads we have at maximum (including the main program = 1. thread)
