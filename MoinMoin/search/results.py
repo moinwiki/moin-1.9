@@ -254,7 +254,7 @@ class SearchResults:
         if sort == 'weight':
             self._sortByWeight()
         elif sort == 'page_name':
-            self.sortByPagename()
+            self._sortByPagename()
         self.sort = sort
 
     def _sortByWeight(self):
