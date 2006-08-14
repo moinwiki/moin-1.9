@@ -296,7 +296,7 @@ class FormatterBase:
         return macro_obj.execute(name, args)
 
     def _get_bang_args(self, line):
-        if line[:2] == '#!':
+        if line.startswith('#!'):
             try:
                 name, args = line[2:].split(None, 1)
             except ValueError:
