@@ -758,7 +758,7 @@ class Parser:
     
     def _parser_repl(self, word):
         """Handle parsed code displays."""
-        if word[:3] == '{{{':
+        if word.startswith('{{{'):
             word = word[3:]
 
         self.parser = None
@@ -770,7 +770,7 @@ class Parser:
             word = ''
             self.in_pre = 3
             return self._closeP() + self.formatter.preformatted(1)
-        elif s_word[:2] == '#!':
+        elif s_word.startswith('#!'):
             # First try to find a parser for this (will go away in 2.0)
             parser_name = s_word[2:].split()[0]
             self.setParser(parser_name)
@@ -972,7 +972,7 @@ class Parser:
                 if self.in_pre == 1:
                     self.parser = None
                     parser_name = ''
-                    if (line.strip()[:2] == "#!"):
+                    if line.strip().startswith("#!"):
                         parser_name = line.strip()[2:].split()[0]
                         self.setParser(parser_name)
 
@@ -1054,7 +1054,7 @@ class Parser:
                 # Table mode
                 # TODO: move into function?                
                 if (not self.in_table and line[indlen:indlen + 2] == "||"
-                    and line[-3:] == "|| " and len(line) >= 5 + indlen):
+                    and line.endswith("|| ") and len(line) >= 5 + indlen):
                     # Start table
                     if self.list_types and not self.in_li:
                         self.request.write(self.formatter.listitem(1, style="list-style-type:none"))
@@ -1071,9 +1071,9 @@ class Parser:
                     self.in_table = True # self.lineno
                 elif (self.in_table and not
                       # intra-table comments should not break a table
-                      (line[:2] == "##" or  
+                      (line.startswith("##") or
                        line[indlen:indlen + 2] == "||" and
-                       line[-3:] == "|| " and
+                       line.endswith("|| ") and
                        len(line) >= 5 + indlen)):
                     
                     # Close table

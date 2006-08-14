@@ -3,11 +3,12 @@
 """
     MoinMoin installer
 
-    @copyright: 2001-2005 by Jürgen Hermann <jh@web.de>
+    @copyright: 2001-2005 by Jürgen Hermann <jh@web.de>,
+                2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
-import glob, os, string, sys
+import os, sys, glob
 
 import distutils
 from distutils.core import setup
@@ -134,8 +135,6 @@ class build_scripts_create(build_scripts):
             raise Exception("You have to inherit build_scripts_create and"
                 " provide a package name")
 
-        to_module = string.maketrans('-/', '_.')
-
         self.mkpath(self.build_dir)
         for script in self.scripts:
             outfile = os.path.join(self.build_dir, os.path.basename(script))
@@ -149,7 +148,7 @@ class build_scripts_create(build_scripts):
                 continue
 
             module = os.path.splitext(os.path.basename(script))[0]
-            module = string.translate(module, to_module)
+            module = module.replace('-', '_').replace('/', '.')
             script_vars = {
                 'python': os.path.normpath(sys.executable),
                 'package': self.package_name,
@@ -188,7 +187,7 @@ def scriptname(path):
         module files.
     """
     script = os.path.splitext(os.path.basename(path))[0]
-    script = string.replace(script, '_', '-')
+    script = script.replace('_', '-')
     if sys.platform == "win32":
         script = script + ".bat"
     return script
@@ -241,6 +240,8 @@ only requiring a Python installation.
         'MoinMoin.script.old',
         'MoinMoin.script.old.migration',
         'MoinMoin.script.old.xmlrpc-tools',
+        'MoinMoin.script.xmlrpc',
+        'MoinMoin.search',
         'MoinMoin.security',
         'MoinMoin.server',
         'MoinMoin.stats',

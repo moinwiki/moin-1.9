@@ -16,7 +16,7 @@ at the top of your script.  The optional arguments to enable() are:
 
 By default, tracebacks are displayed but not saved, the context is 5 lines
 and the output format is 'html' (for backwards compatibility with the
-original use of this module)
+original use of this module).
 
 Alternatively, if you have caught an exception and want cgitb to display it
 for you, call cgitb.handler().  The optional argument to handler() is a
@@ -30,19 +30,19 @@ Rewrite:
  - Refactor html and text functions to View class, HTMLFormatter and
    TextFormatter. No more duplicate formating code.
  - Layout is done with minimal html and css, in a way it can't be
-   effected by souranding code.
- - Built to be easy to subclass and modify without duplicating code
+   affected by surrounding code.
+ - Built to be easy to subclass and modify without duplicating code.
  - Change layout, important details come first.
- - Factor frame analaizing and formatting into separate class
+ - Factor frame analyzing and formatting into separate class.
  - Add debug argument, can be used to change error display e.g. user
-   error view, developer error view
- - Add viewClass argument, make it easy to customize the traceback view
- - Easy to customize system details and application details
+   error view, developer error view.
+ - Add viewClass argument, make it easy to customize the traceback view.
+ - Easy to customize system details and application details.
 
 The main goal of this rewrite was to have a traceback that can render
-few tracebacks combined. Its needed when you wrap an expection and want
+few tracebacks combined. It's needed when you wrap an expection and want
 to print both the traceback up to the wrapper exception, and the
-original traceback. There is no code to support this here, but its easy
+original traceback. There is no code to support this here, but it's easy
 to add by using your own View sub class.
 """
 
@@ -58,14 +58,14 @@ def reset():
     Return a string that resets the CGI and browser to a known state.
     TODO: probably some of this is not needed any more.
     """
-    return '''<!--: spam
+    return """<!--: spam
 Content-Type: text/html
 
 <body><font style="color: white; font-size: 1px"> -->
 <body><font style="color: white; font-size: 1px"> --> -->
 </font> </font> </font> </script> </object> </blockquote> </pre>
 </table> </table> </table> </table> </table> </font> </font> </font>
-'''
+"""
 
 __UNDEF__ = [] # a special sentinel object
 
@@ -77,17 +77,16 @@ HiddenObject = HiddenObject()
 
 class HTMLFormatter:
     """ Minimal html formatter """
-    
+
     def attributes(self, attributes=None):
         if attributes:
-            result = [' %s="%s"' % (k, v) for k, v in attributes.items()]           
+            result = [' %s="%s"' % (k, v) for k, v in attributes.items()]
             return ''.join(result)
         return ''
-    
+
     def tag(self, name, text, attributes=None):
-        return '<%s%s>%s</%s>\n' % (name, self.attributes(attributes), 
-                                    text, name)
-    
+        return '<%s%s>%s</%s>\n' % (name, self.attributes(attributes), text, name)
+
     def section(self, text, attributes=None):
         return self.tag('div', text, attributes)
 
@@ -114,9 +113,9 @@ class HTMLFormatter:
         if isinstance(items, (list, tuple)):
             items = '\n' + ''.join([self.listItem(i) for i in items])
         return self.tag(name, items, attributes)
-    
+
     def listItem(self, text, attributes=None):
-        return self.tag('li', text, attributes)        
+        return self.tag('li', text, attributes)
 
     def link(self, href, text, attributes=None):
         if attributes is None:
@@ -125,14 +124,14 @@ class HTMLFormatter:
         return self.tag('a', text, attributes)
 
     def strong(self, text, attributes=None):
-        return self.tag('strong', text, attributes)        
+        return self.tag('strong', text, attributes)
 
     def em(self, text, attributes=None):
-        return self.tag('em', text, attributes)        
+        return self.tag('em', text, attributes)
 
     def repr(self, object):
         return pydoc.html.repr(object)
-        
+
 
 class TextFormatter:
     """ Plain text formatter """
@@ -170,20 +169,20 @@ class TextFormatter:
         return items
 
     def listItem(self, text, attributes=None):
-        return ' * %s\n' % text       
+        return ' * %s\n' % text
 
     def link(self, href, text, attributes=None):
         return '[[%s]]' % text
 
     def strong(self, text, attributes=None):
         return text
-   
+
     def em(self, text, attributes=None):
         return text
-   
+
     def repr(self, object):
         return repr(object)
-        
+
 
 class Frame:
     """ Analyze and format single frame in a traceback """
@@ -207,19 +206,19 @@ class Frame:
 
     # -----------------------------------------------------------------
     # Private - formatting
-        
+
     def formatCall(self):
         call = '%s in %s%s' % (self.formatFile(),
                                self.formatter.strong(self.func),
                                self.formatArguments(),)
         return self.formatter.paragraph(call, {'class': 'call'})
-    
+
     def formatFile(self):
         """ Return formatted file link """
         if not self.file:
             return '?'
         file = pydoc.html.escape(os.path.abspath(self.file))
-        return self.formatter.link('file://' + file, file)        
+        return self.formatter.link('file://' + file, file)
 
     def formatArguments(self):
         """ Return formated arguments list """
@@ -250,11 +249,11 @@ class Frame:
         return self.formatter.orderedList(context, {'class': 'context'})
 
     def formatVariables(self, vars):
-        """ Return formatted variables """ 
+        """ Return formatted variables """
         done = {}
         dump = []
         for name, where, value in vars:
-            if name in done: 
+            if name in done:
                 continue
             done[name] = 1
             if value is __UNDEF__:
@@ -280,12 +279,12 @@ class Frame:
     def scan(self):
         """ Scan frame for vars while setting highlight line """
         highlight = {}
-        
+
         def reader(lnum=[self.lnum]):
             highlight[lnum[0]] = 1
-            try: 
+            try:
                 return linecache.getline(self.file, lnum[0])
-            finally: 
+            finally:
                 lnum[0] += 1
 
         vars = self.scanVariables(reader)
@@ -295,7 +294,7 @@ class Frame:
         """ Lookup variables in one logical Python line """
         vars, lasttoken, parent, prefix, value = [], None, None, '', __UNDEF__
         for ttype, token, start, end, line in tokenize.generate_tokens(reader):
-            if ttype == tokenize.NEWLINE: 
+            if ttype == tokenize.NEWLINE:
                 break
             if ttype == tokenize.NAME and token not in keyword.kwlist:
                 if lasttoken == '.':
@@ -341,14 +340,14 @@ class Frame:
 
 class View:
     """ Traceback view """
-    
+
     frameClass = Frame # analyze and format a frame
-    
+
     def __init__(self, info=None, debug=0):
         """ Save starting info or current exception info """
         self.info = info or sys.exc_info()
         self.debug = debug
-        
+
     def format(self, formatter, context=5):
         self.formatter = formatter
         self.context = context
@@ -411,20 +410,20 @@ class View:
 
     # -----------------------------------------------------------------
     # Head
-    
+
     def formatTitle(self):
         return self.formatter.title(self.exceptionTitle(self.info))
-        
+
     def formatMessage(self):
         return self.formatter.paragraph(self.exceptionMessage(self.info))
-        
+
     # -----------------------------------------------------------------
     # Traceback
 
     def formatTraceback(self):
         """ Return formatted traceback """
         return self.formatOneTraceback(self.info)
-    
+
     def formatOneTraceback(self, info):
         """ Format one traceback
         
@@ -435,7 +434,7 @@ class View:
                   self.formatter.orderedList(self.tracebackFrames(info),
                                             {'class': 'frames'}),
                   self.formatter.section(self.formatException(info),
-                                         {'class': 'exception'}),]
+                                         {'class': 'exception'}), ]
         return self.formatter.section(''.join(output), {'class': 'traceback'})
 
     def tracebackFrames(self, info):
@@ -458,12 +457,12 @@ class View:
     def formatException(self, info):
         items = [self.formatExceptionTitle(info),
                  self.formatExceptionMessage(info),
-                 self.formatExceptionAttributes(info),]
+                 self.formatExceptionAttributes(info), ]
         return ''.join(items)
 
     def formatExceptionTitle(self, info):
         return self.formatter.subSubTitle(self.exceptionTitle(info))
-        
+
     def formatExceptionMessage(self, info):
         return self.formatter.paragraph(self.exceptionMessage(info))
 
@@ -471,7 +470,7 @@ class View:
         attribtues = []
         for name, value in self.exceptionAttributes(info):
             value = self.formatter.repr(value)
-            attribtues.append('%s = %s' % (name, value))           
+            attribtues.append('%s = %s' % (name, value))
         return self.formatter.list(attribtues)
 
     def exceptionAttributes(self, info):
@@ -488,7 +487,7 @@ class View:
     def exceptionTitle(self, info):
         type = info[0]
         return getattr(type, '__name__', str(type))
-        
+
     def exceptionMessage(self, info):
         instance = info[1]
         return pydoc.html.escape(str(instance))
@@ -500,15 +499,14 @@ class View:
     def formatSystemDetails(self):
         details = ['Date: %s' % self.date(),
                    'Platform: %s' % self.platform(),
-                   'Python: %s' % self.python(),]
+                   'Python: %s' % self.python(), ]
         details += self.applicationDetails()
         return (self.formatter.subTitle('System Details') +
                 self.formatter.list(details, {'class': 'system'}))
 
     def date(self):
         import time
-        rfc2822Date = time.strftime("%a, %d %b %Y %H:%M:%S +0000",
-                                    time.gmtime())
+        rfc2822Date = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
         return rfc2822Date
 
     def platform(self):
@@ -535,7 +533,7 @@ class View:
         """ Separate to enable formatting multiple tracebacks. """
         import traceback
         return ''.join(traceback.format_exception(*info))
-    
+
     def textTracebackTemplate(self):
         return '''
     
@@ -593,7 +591,7 @@ class Hook:
 
         if self.logdir is not None:
             import os, tempfile
-            suffix = ['.txt', '.html'][self.format=="html"]
+            suffix = ['.txt', '.html'][self.format == "html"]
             (fd, path) = tempfile.mkstemp(suffix=suffix, dir=self.logdir)
             try:
                 file = os.fdopen(fd, 'w')
@@ -610,8 +608,7 @@ class Hook:
 
 handler = Hook().handle
 
-def enable(display=1, logdir=None, context=5, format="html",
-           viewClass=View, debug=0):
+def enable(display=1, logdir=None, context=5, format="html", viewClass=View, debug=0):
     """Install an exception handler that formats tracebacks as HTML.
 
     The optional argument 'display' can be set to 0 to suppress sending the
@@ -619,3 +616,4 @@ def enable(display=1, logdir=None, context=5, format="html",
     tracebacks to be written to files there."""
     sys.excepthook = Hook(display=display, logdir=logdir, context=context,
                           format=format, viewClass=viewClass, debug=debug)
+

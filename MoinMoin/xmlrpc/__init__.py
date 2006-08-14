@@ -125,11 +125,14 @@ class XmlRpcBase:
             # report exception back to server
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
         else:
-            # wrap response in a singleton tuple
-            response = (response,)
-
-            # serialize it
-            response = xmlrpclib.dumps(response, methodresponse=1)
+            if isinstance(response, xmlrpclib.Fault):
+                response = xmlrpclib.dumps(response)
+            else:
+                # wrap response in a singleton tuple
+                response = (response,)
+    
+                # serialize it
+                response = xmlrpclib.dumps(response, methodresponse=1)
 
         self.request.emit_http_headers([
             "Content-Type: text/xml; charset=utf-8",
@@ -235,10 +238,12 @@ class XmlRpcBase:
                 include_system:: set it to false if you do not want to see system pages
                 include_revno:: set it to True if you want to have lists with [pagename, revno]
                 include_deleted:: set it to True if you want to include deleted pages
+                exclude_non_writable:: do not include pages that the current user may not write to
         @rtype: list
         @return: a list of all pages.
         """
-        options = {"include_system": True, "include_revno": False, "include_deleted": False}
+        options = {"include_system": True, "include_revno": False, "include_deleted": False,
+                   "exclude_non_writable": False}
         if opts is not None:
             options.update(opts)
 
@@ -246,6 +251,9 @@ class XmlRpcBase:
             filter = lambda name: not wikiutil.isSystemPage(self.request, name)
         else:
             filter = lambda name: True
+
+        if options["exclude_non_writable"]:
+            filter = lambda name, filter=filter: filter(name) and self.request.user.may.write(name)
 
         pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
         

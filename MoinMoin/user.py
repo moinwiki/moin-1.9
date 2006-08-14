@@ -914,30 +914,34 @@ class User:
         host = self.isCurrentUser() and self._cfg.show_hosts and self._request.remote_addr
         return host or _("<unknown>")
 
+    def wikiHomeLink(self):
+        """ return wiki markup usable as a link to the user homepage,
+            it doesn't matter whether it already exists or not.
+        """
+        wikiname, pagename = wikiutil.getInterwikiHomePage(self._request, self.name)
+        if wikiname == 'Self':
+            if wikiutil.isStrictWikiname(self.name):
+                markup = pagename
+            else:
+                markup = '["%s"]' % pagename
+        else:
+            markup = '%s:%s' % (wikiname, pagename) # TODO: support spaces in pagename
+        return markup
+
     def signature(self):
-        """ Return user signature using markup
+        """ Return user signature using wiki markup
         
-        Users sign with a link to their homepage, or with text if they
-        don't have one. The text may be parsed as a link if it's using
-        CamelCase. Visitors return their host address.
+        Users sign with a link to their homepage.
+        Visitors return their host address.
         
         TODO: The signature use wiki format only, for example, it will
         not create a link when using rst format. It will also break if
         we change wiki syntax.
         """
-        if not self.name:
-            return self.host()
-
-        wikiname, pagename = wikiutil.getInterwikiHomePage(self._request,
-                                                           self.name)
-        if wikiname == 'Self':
-            if not wikiutil.isStrictWikiname(self.name):
-                markup = '["%s"]' % pagename
-            else:
-                markup = pagename
+        if self.name:
+            return self.wikiHomeLink()
         else:
-            markup = '%s:%s' % (wikiname, pagename)
-        return markup
+            return self.host()
 
     def mailAccountData(self, cleartext_passwd=None):
         from MoinMoin.mail import sendmail

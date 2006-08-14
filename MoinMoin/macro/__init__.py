@@ -295,7 +295,7 @@ class Macro:
         for tag, url in list:
             buf.write('<dt><tt><a href="%s">%s</a></tt></dt>' % (
                 wikiutil.join_wiki(url, 'RecentChanges'), tag))
-            if url.find('$PAGE') == -1:
+            if '$PAGE' not in url:
                 buf.write('<dd><tt><a href="%s">%s</a></tt></dd>' % (url, url))
             else:
                 buf.write('<dd><tt>%s</tt></dd>' % url)
@@ -415,7 +415,7 @@ class Macro:
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
 
         args = args or ''
-        if args.find(',') == -1:
+        if ',' not in args:
             email = args
             text = ''
         else:
