@@ -29,7 +29,7 @@ class NewPage:
         @return: error message
         """
         _ = self.request.getText
-        need_replace = self.nametemplate.find('%s') != -1
+        need_replace = '%s' in self.nametemplate
         if not self.pagename and need_replace:
             return _("Cannot create a new page without a page name."
                      "  Please specify a page name.")
@@ -38,7 +38,7 @@ class NewPage:
         # template variable
             repl = 'A@'
             i = 0
-            while self.nametemplate.find(repl) != -1:
+            while repl in self.nametemplate:
                 repl += ['#', '&', '$', 'x', 'X', ':', '@'][i]
                 i += 1
                 i = i % 7

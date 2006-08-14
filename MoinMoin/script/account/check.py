@@ -189,12 +189,11 @@ class PluginScript(MoinScript):
                 self.process(uids)
 
     def make_WikiNames(self):
-        import string
         for uid, u in self.users.items():
             if u.disabled:
                 continue
             if not wikiutil.isStrictWikiname(u.name):
-                newname = string.capwords(u.name).replace(" ", "").replace("-", "")
+                newname = u.name.capwords().replace(" ", "").replace("-", "")
                 if not wikiutil.isStrictWikiname(newname):
                     print " %-20s %-30r - no WikiName, giving up" % (uid, u.name)
                 else:

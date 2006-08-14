@@ -42,6 +42,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     needle = request.form.get(fieldname, [''])[0]
     case = int(request.form.get('case', [0])[0])
     regex = int(request.form.get('regex', [0])[0]) # no interface currently
+    hitsFrom = int(request.form.get('from', [0])[0])
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
@@ -54,11 +55,19 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         Page(request, pagename).send_page(request, msg=err)
         return
 
+    # Setup for type of search
+    if titlesearch:
+        title = _('Title Search: "%s"')
+        sort = 'page_name'
+    else:
+        title = _('Full Text Search: "%s"')
+        sort = 'weight'
+
     # search the pages
     from MoinMoin.search import searchPages, QueryParser
     query = QueryParser(case=case, regex=regex,
             titlesearch=titlesearch).parse_query(needle)
-    results = searchPages(request, query)
+    results = searchPages(request, query, sort)
 
     # directly show a single hit
     # XXX won't work with attachment search
@@ -78,29 +87,22 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
 
-    # Setup for type of search
-    if titlesearch:
-        title = _('Title Search: "%s"')
-        results.sortByPagename()
-    else:
-        title = _('Full Text Search: "%s"')
-        results.sortByWeight()
-
     request.theme.send_title(title % needle, form=request.form, pagename=pagename)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
     # First search stats
-    request.write(results.stats(request, request.formatter))
+    request.write(results.stats(request, request.formatter, hitsFrom))
 
     # Then search results
     info = not titlesearch
     if context:
-        output = results.pageListWithContext(request, request.formatter, info=info,
-                                             context=context)
+        output = results.pageListWithContext(request, request.formatter,
+                info=info, context=context, hitsFrom=hitsFrom)
     else:
-        output = results.pageList(request, request.formatter, info=info)
+        output = results.pageList(request, request.formatter, info=info,
+                hitsFrom=hitsFrom)
     request.write(output)
 
     request.write(request.formatter.endContent())

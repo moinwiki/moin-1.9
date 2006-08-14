@@ -170,7 +170,10 @@ class Index(BaseIndex):
                        #  the D term, and changing the last digit to a '2' if it's a '3')
                        #X   longer prefix for user-defined use
         'linkto': 'XLINKTO', # this document links to that document
-        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in 
+        'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
+        'category': 'XCAT', # category this document belongs to
+        'full_title': 'XFT', # full title (for regex)
+        'domain': 'XDOMAIN', # standard or underlay
                        #Y   year (four digits)
     }
 
@@ -192,7 +195,7 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def _search(self, query):
+    def _search(self, query, sort=None):
         """ read lock must be acquired """
         while True:
             try:
@@ -207,12 +210,22 @@ class Index(BaseIndex):
                 timestamp = self.mtime()
                 break
         
-        hits = searcher.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname'])
+        kw = {}
+        if sort == 'weight':
+            # XXX: we need real weight here, like _moinSearch
+            # (TradWeight in xapian)
+            kw['sortByRelevence'] = True
+        if sort == 'page_name':
+            kw['sortKey'] = 'pagename'
+
+        hits = searcher.search(query, valuesWanted=['pagename',
+            'attachment', 'mtime', 'wikiname'], **kw)
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
     def _do_queued_updates(self, request, amount=5):
         """ Assumes that the write lock is acquired """
+        self.touch()
         writer = xapidx.Index(self.dir, True)
         writer.configure(self.prefixMap, self.indexValueMap)
         pages = self.queue.pages()[:amount]
@@ -249,7 +262,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(mtime)
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
                 if docs:
                     doc = docs[0] # there should be only one
                     uid = doc['uid']
@@ -316,6 +329,28 @@ class Index(BaseIndex):
         # return actual lang and lang to stem in
         return (lang, default_lang)
 
+    def _get_categories(self, page):
+        body = page.get_raw_body()
+
+        prev, next = (0, 1)
+        pos = 0
+        while next:
+            if next != 1:
+                pos += next.end()
+            prev, next = next, re.search(r'----*\r?\n', body[pos:])
+
+        if not prev or prev == 1:
+            return []
+
+        return [cat.lower()
+                for cat in re.findall(r'Category([^\s]+)', body[pos:])]
+
+    def _get_domains(self, page):
+        if page.isUnderlayPage():
+            yield 'underlay'
+        if page.isStandardPage():
+            yield 'standard'
+
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
             @arg writer: the index writer object
@@ -331,6 +366,8 @@ class Index(BaseIndex):
         itemid = "%s:%s" % (wikiname, pagename)
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
+        categories = self._get_categories(page)
+        domains = tuple(self._get_domains(page))
         updated = False
 
         if mode == 'update':
@@ -338,7 +375,7 @@ class Index(BaseIndex):
             # you can just call database.replace_document(uid_term, doc)
             # -> done in xapwrap.index.Index.index()
             query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', itemid))
-            docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
+            enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', 'wikiname', ])
             if docs:
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
@@ -359,9 +396,14 @@ class Index(BaseIndex):
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
-                    xapdoc.Keyword('stem_lang', stem_language)]
+                    xapdoc.Keyword('stem_lang', stem_language),
+                    xapdoc.Keyword('full_title', pagename.lower())]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
+            for category in categories:
+                xkeywords.append(xapdoc.Keyword('category', category))
+            for domain in domains:
+                xkeywords.append(xapdoc.Keyword('domain', domain))
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
@@ -387,7 +429,7 @@ class Index(BaseIndex):
             mtime = wikiutil.timestamp2version(os.path.getmtime(filename))
             if mode == 'update':
                 query = xapidx.RawQuery(xapdoc.makePairForWrite('itemid', att_itemid))
-                docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
+                enq, mset, docs = writer.search(query, valuesWanted=['pagename', 'attachment', 'mtime', ])
                 if debug: request.log("##%r %r" % (filename, docs))
                 if docs:
                     doc = docs[0] # there should be only one
@@ -446,6 +488,7 @@ class Index(BaseIndex):
             mode = 'add'
 
         try:
+            self.touch()
             writer = xapidx.Index(self.dir, True)
             writer.configure(self.prefixMap, self.indexValueMap)
             pages = request.rootpage.getPageList(user='', exists=1)

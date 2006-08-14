@@ -15,7 +15,6 @@ import StringIO
 import __builtin__
 import sys
 
-import types
 import os
 
 # docutils imports are below
@@ -227,7 +226,7 @@ class RawHTMLList(list):
     def append(self, text):
         f = sys._getframe()
         if f.f_back.f_code.co_filename.endswith('html4css1.py'):
-            if isinstance(text, types.StringType) or isinstance(text, types.UnicodeType):
+            if isinstance(text, (str, unicode)):
                 text = self.formatter.rawHTML(text)
         list.append(self, text)
 
@@ -256,7 +255,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
         # Make all internal lists RawHTMLLists, see RawHTMLList class
         # comment for more information.
         for i in self.__dict__:
-            if isinstance(getattr(self, i), types.ListType):
+            if isinstance(getattr(self, i), list):
                 setattr(self, i, RawHTMLList(formatter))
 
     def depart_docinfo(self, node):
@@ -383,7 +382,7 @@ class MoinTranslator(html4css1.HTMLTranslator):
                 # Default case - make a link to a wiki page.
                 pagename = refuri
                 anchor = ''
-                if refuri.find('#') != -1:
+                if '#' in refuri:
                     pagename, anchor = refuri.split('#', 1)
                     anchor = '#' + anchor
                 page = Page(self.request, pagename)

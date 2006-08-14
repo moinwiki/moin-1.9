@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import StringIO, time
+import StringIO, time, re
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page
 
@@ -244,53 +244,76 @@ class SearchResults:
     """
     # Public functions --------------------------------------------------
     
-    def __init__(self, query, hits, pages, elapsed):
+    def __init__(self, query, hits, pages, elapsed, sort, estimated_hits):
         self.query = query # the query
         self.hits = hits # hits list
-        self.sort = None # hits are unsorted initially
         self.pages = pages # number of pages in the wiki
         self.elapsed = elapsed # search time
+        self.estimated_hits = estimated_hits # about how much hits?
 
-    def sortByWeight(self):
+        if sort == 'weight':
+            self._sortByWeight()
+        elif sort == 'page_name':
+            self._sortByPagename()
+        self.sort = sort
+
+    def _sortByWeight(self):
         """ Sorts found pages by the weight of the matches """
         tmp = [(hit.weight(), hit.page_name, hit) for hit in self.hits]
         tmp.sort()
         tmp.reverse()
         self.hits = [item[2] for item in tmp]
-        self.sort = 'weight'
         
-    def sortByPagename(self):
+    def _sortByPagename(self):
         """ Sorts a list of found pages alphabetical by page name """
         tmp = [(hit.page_name, hit) for hit in self.hits]
         tmp.sort()
         self.hits = [item[1] for item in tmp]
-        self.sort = 'page_name'
         
-    def stats(self, request, formatter):
+    def stats(self, request, formatter, hitsFrom):
         """ Return search statistics, formatted with formatter
 
         @param request: current request
         @param formatter: formatter to use
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted statistics
         """
         _ = request.getText
+
+        if not self.estimated_hits:
+            self.estimated_hits = ('', len(self.hits))
+
         output = [
-            formatter.paragraph(1),
-            formatter.text(_("%(hits)d results out of about %(pages)d pages.") %
-                   {'hits': len(self.hits), 'pages': self.pages}),
-            u' (%s)' % formatter.text(_("%.2f seconds") % self.elapsed),
+            formatter.paragraph(1, attr={'class': 'searchstats'}),
+            _("Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s "
+                    "of %(aboutHits)s %(bs)s%(hits)d%(be)s results out of"
+                    "about %(pages)d pages.") %
+                {'aboutHits': self.estimated_hits[0],
+                    'hits': self.estimated_hits[1], 'pages': self.pages,
+                    'hitsFrom': hitsFrom + 1,
+                    'hitsTo': hitsFrom +
+                            min(self.estimated_hits[1] - hitsFrom,
+                                request.cfg.search_results_per_page),
+                    'bs': formatter.strong(1), 'be': formatter.strong(0)},
+            u' (%s %s)' % (''.join([formatter.strong(1),
+                formatter.text("%.2f" % self.elapsed),
+                formatter.strong(0)]),
+                formatter.text(_("seconds"))),
             formatter.paragraph(0),
             ]
         return ''.join(output)
 
-    def pageList(self, request, formatter, info=0, numbered=1):
+    def pageList(self, request, formatter, info=0, numbered=1,
+            paging=True, hitsFrom=0):
         """ Format a list of found pages
 
         @param request: current request
         @param formatter: formatter to use
         @param info: show match info in title
         @param numbered: use numbered list for display
+        @param paging: toggle paging
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list
         """
@@ -298,15 +321,25 @@ class SearchResults:
         f = formatter
         write = self.buffer.write
         if numbered:
-            list = f.number_list
+            list = lambda on: f.number_list(on, start=hitsFrom+1)
         else:
             list = f.bullet_list
+
+        if paging and len(self.hits) <= request.cfg.search_results_per_page:
+            paging = False
 
         # Add pages formatted as list
         if self.hits:
             write(list(1))
+            
+            # XXX: Do some xapian magic here
+            if paging:
+                hitsTo = hitsFrom + request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
 
-            for page in self.hits:
+            for page in displayHits:
                 if page.attachment:
                     querydict = {
                         'action': 'AttachFile',
@@ -326,15 +359,20 @@ class SearchResults:
                     self.formatTitle(page),
                     f.pagelink(0, page.page_name),
                     matchInfo,
+                    self.formatHitInfoBar(page),
                     f.listitem(0),
                     ]
                 write(''.join(item))
             write(list(0))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
 
         return self.getvalue()
 
     def pageListWithContext(self, request, formatter, info=1, context=180,
-                            maxlines=1):
+                            maxlines=1, paging=True, hitsFrom=0):
         """ Format a list of found pages with context
 
         The default parameter values will create Google-like search
@@ -345,20 +383,33 @@ class SearchResults:
         @param request: current request
         @param formatter: formatter to use
         @param info: show match info near the page link
-        @param context: how many characters to show around each match. 
-        @param maxlines: how many contexts lines to show. 
+        @param context: how many characters to show around each match.
+        @param maxlines: how many contexts lines to show.
+        @param paging: toggle paging
+        @param hitsFrom: current position in the hits
         @rtype: unicode
         @return formatted page list with context
         """
         self._reset(request, formatter)
         f = formatter
         write = self.buffer.write
+        _ = request.getText
+
+        if paging and len(self.hits) <= request.cfg.search_results_per_page:
+            paging = False
         
         # Add pages formatted as definition list
         if self.hits:
             write(f.definition_list(1))
 
-            for page in self.hits:
+            # XXX: Do some xapian magic here
+            if paging:
+                hitsTo = hitsFrom+request.cfg.search_results_per_page
+                displayHits = self.hits[hitsFrom:hitsTo]
+            else:
+                displayHits = self.hits
+
+            for page in displayHits:
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -386,9 +437,14 @@ class SearchResults:
                     f.definition_desc(1),
                     fmt_context,
                     f.definition_desc(0),
+                    self.formatHitInfoBar(page),
                     ]
                 write(''.join(item))
             write(f.definition_list(0))
+            if paging:
+                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                    hitsPerPage=request.cfg.search_results_per_page,
+                    hitsNum=len(self.hits)))
         
         return self.getvalue()
 
@@ -596,6 +652,127 @@ class SearchResults:
             return ''.join(output)
         return ''
 
+    def _img_url(self, img):
+        cfg = self.request.cfg
+        return '%s/%s/img/%s.png' % (cfg.url_prefix, self.request.theme.name, img)
+
+    def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
+        """ Format previous and next page links in page
+
+        @param hitsFrom: current position in the hits
+        @param hitsPerPage: number of hits per page
+        @param hitsNum: number of hits
+        @rtype: unicode
+        @return: links to previous and next pages (if exist)
+        """
+        _ = self.request.getText
+        f = self.formatter
+
+        querydict = wikiutil.parseQueryString(self.request.query_string)
+        def page_url(n):
+            querydict.update({'from': n * hitsPerPage})
+            return self.request.page.url(self.request, querydict, escape=0)
+        
+        pages = float(hitsNum) / hitsPerPage
+        if pages - int(pages) > 0.0:
+            pages = int(pages) + 1
+        cur_page = hitsFrom / hitsPerPage
+        l = []
+
+        # previous page available
+        if cur_page > 0:
+            l.append(''.join([
+                f.url(1, href=page_url(cur_page-1)),
+                f.text(_('Previous')),
+                f.url(0)
+            ]))
+        else:
+            l.append('')
+
+        # list of pages to be shown
+        page_range = range(*(
+            cur_page - 4 < 0 and
+                (0, pages >= 10 and 10 or pages) or
+                (cur_page - 4, cur_page + 6 >= pages and
+                    pages or cur_page + 6)))
+        l.extend([''.join([
+                i != cur_page and f.url(1, href=page_url(i)) or '',
+                f.text(str(i+1)),
+                i != cur_page and f.url(0) or '',
+            ]) for i in page_range])
+
+        # next page available
+        if cur_page < pages-1:
+            l.append(''.join([
+                f.url(1, href=page_url(cur_page+1)),
+                f.text(_('Next')),
+                f.url(0)
+            ]))
+        else:
+            l.append('')
+
+        return ''.join([
+            f.table(1, attrs={'tableclass': 'searchpages'}),
+            f.table_row(1),
+                f.table_cell(1, attrs={'class': 'prev'}),
+                # first image, previous page
+                l[0] and
+                    ''.join([
+                        f.url(1, href=page_url(cur_page-1)),
+                        f.image(self._img_url('nav_prev')),
+                        f.url(0),
+                    ]) or
+                    f.image(self._img_url('nav_first')),
+                f.table_cell(0),
+                # images for ooos, highlighted current page
+                ''.join([
+                    ''.join([
+                        f.table_cell(1),
+                        i != cur_page and f.url(1, href=page_url(i)) or '',
+                        f.image(self._img_url(i == cur_page and
+                            'nav_current' or 'nav_page')),
+                        i != cur_page and f.url(0) or '',
+                        f.table_cell(0),
+                    ]) for i in page_range
+                ]),
+                f.table_cell(1, attrs={'class': 'next'}),
+                # last image, next page
+                l[-1] and
+                    ''.join([
+                        f.url(1, href=page_url(cur_page+1)),
+                        f.image(self._img_url('nav_next')),
+                        f.url(0),
+                    ]) or
+                    f.image(self._img_url('nav_last')),
+                f.table_cell(0),
+            f.table_row(0),
+            f.table_row(1),
+                f.table_cell(1),
+                # textlinks
+                (f.table_cell(0) + f.table_cell(1)).join(l),
+                f.table_cell(0),
+            f.table_row(0),
+            f.table(0),
+        ])
+
+    def formatHitInfoBar(self, page):
+        f = self.formatter
+        _ = self.request.getText
+        return ''.join([
+            f.paragraph(1, attr={'class': 'searchhitinfobar'}),
+            f.text('%.1fk - ' % (page.page.size()/1024.0)),
+            f.text('rev: %d %s- ' % (page.page.get_real_rev(),
+                not page.page.rev and '(%s) ' % _('current') or '')),
+            f.text('last modified: %(time)s' % page.page.lastEditInfo()),
+            # XXX: proper metadata
+            #f.text('lang: %s - ' % page.page.language),
+            #f.url(1, href='#'),
+            #f.text(_('Similar pages')),
+            #f.url(0),
+            f.paragraph(0),
+        ])
+
+
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
         if querydict is None:
@@ -641,17 +818,20 @@ class SearchResults:
         self.matchLabel = (_('match'), _('matches'))
 
 
-def getSearchResults(request, query, hits, start):
+def getSearchResults(request, query, hits, start, sort, estimated_hits):
     result_hits = []
     for wikiname, page, attachment, match in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
             if attachment:
-                result_hits.append(FoundAttachment(page.page_name, attachment))
+                result_hits.append(FoundAttachment(page.page_name,
+                    attachment, page=page))
             else:
-                result_hits.append(FoundPage(page.page_name, match))
+                result_hits.append(FoundPage(page.page_name, match, page))
         else:
-            result_hits.append(FoundRemote(wikiname, page, attachment, match))
+            result_hits.append(FoundRemote(wikiname, page.page_name,
+                attachment, match, page))
     elapsed = time.time() - start
     count = request.rootpage.getPageCount()
-    return SearchResults(query, result_hits, count, elapsed)
+    return SearchResults(query, result_hits, count, elapsed, sort,
+            estimated_hits)
 

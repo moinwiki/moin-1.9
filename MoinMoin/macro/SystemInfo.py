@@ -112,12 +112,20 @@ def execute(Macro, args):
     row(_('Local extension parsers'),
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
 
-    state = (_('Disabled'), _('Enabled'))
     from MoinMoin.search.builtin import Search
-    row(_('Xapian search'), '%s, %sactive' % (state[request.cfg.xapian_search],
-                not Search._xapianIndex(request) and 'not ' or ''))
+    xapState = (_('Disabled'), _('Enabled'))
+    idxState = (_('index available'), _('index unavailable'))
+    idx = Search._xapianIndex(request)
+    available = idx and idxState[0] or idxState[1]
+    mtime = _('last modified: %s') % (idx and
+            request.user.getFormattedDateTime(
+                wikiutil.version2timestamp(idx.mtime())) or
+                _('N/A'))
+    row(_('Xapian search'), '%s, %s, %s'
+            % (xapState[request.cfg.xapian_search], available, mtime))
+    row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
 
-    row(_('Active threads'), t_count or 'N/A')
+    row(_('Active threads'), t_count or _('N/A'))
     buf.write(u'</dl>')
 
     return Macro.formatter.rawHTML(buf.getvalue())
