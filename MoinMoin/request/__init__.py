@@ -220,13 +220,16 @@ class RequestBase(object):
 
     def surge_protect(self):
         """ check if someone requesting too much from us """
+        limits = self.cfg.surge_action_limits
+        if not limits:
+            return False
+                                    
         validuser = self.user.valid
         current_id = validuser and self.user.name or self.remote_addr
         if not validuser and current_id.startswith('127.'): # localnet
             return False
         current_action = self.action
 
-        limits = self.cfg.surge_action_limits
         default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
 
         now = int(time.time())
