@@ -11,7 +11,7 @@ from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin._tests import TestConfig, TestSkipped
 
-from MoinMoin.wikisync import TagStore
+from MoinMoin.wikisync import TagStore, BOTH
 
 
 class UnsafeSyncTestcase(TestCase):
@@ -27,7 +27,7 @@ class UnsafeSyncTestcase(TestCase):
     def testBasicTagThings(self):
         tags = TagStore(self.page)
         self.assert_(not tags.get_all_tags())
-        tags.add(remote_wiki="foo", remote_rev=1, current_rev=2)
+        tags.add(remote_wiki="foo", remote_rev=1, current_rev=2, direction=BOTH, normalised_name="FrontPage")
         tags = TagStore(self.page) # reload
         self.assert_(tags.get_all_tags()[0].remote_rev == 1)
     

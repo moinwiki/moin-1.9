@@ -2,19 +2,28 @@ Branch moin/1.6-sync-aschremmer
 ===============================
 
   Known main issues:
-    * How will we store tags? (Metadata support would be handy)
     * How to handle renames/deletes?
-    * How to handle colliding/empty interwiki names?
+    * How will we store tags? (Metadata support would be handy)
+      (currently done in Pickle files)
 
   ToDo:
-    * Implement actual syncronisation.
-      * Add correct IWID_full handling.
+    * Tags should store the page name to recognise renaming scenarios.
+    * Implement all syncronisation cases (all 3 page sets).
+    * Test with prefixes
+    * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
+    * Attach the status information to the job page.
+    * Show tags in an action=info view?
     * Implement a cross-site authentication system, i.e. mainly an
-      identity storage.
+      identity storage. (does OpenID make sense?)
     * Clean up trailing whitespace.
     * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
     * Search for XXX
+    * Maybe refactor YYY into MoinLocalWiki
+    * Remove amount of "very" in the code
+    * Do older tags of one wiki site have to be stored as well? Why don't we
+      keep just one tag?
+    * Put author names into the comment field, transmit mimetypes.
 
   New Features:
     * XMLRPC method to return the Moin version
@@ -30,6 +39,9 @@ Branch moin/1.6-sync-aschremmer
       no system pages etc.)
     * IWID support - i.e. every instance has a unique ID
     * InterWiki page editable in the wiki, modification detection based on mtimes
+    * SyncPages action
+    * XMLRPC functions may return Fault instances
+    * diff3 algorithm extended, a new mode should reduce the conflicts
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
@@ -89,7 +101,12 @@ Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
 Week 32: Continued work on the merge logic, finished prefix handling. Added local conflict
          detection in SyncPages. Added logging support to SyncPages. Refactored conflict flag
          detection from the edit action into the PageEditor class. Enhanced XMLRPC server in Moin to allow
-         XMLRPC functions to return Fault instances.
+         XMLRPC functions to return Fault instances. Introduced a new diff3 mode that should reduce the
+         conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
+         either of both components when searching for tags. Ignore underlay pages. Filter the remote page list by
+         the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
+         Started designing the solutions for the other sync cases. Store and transmit the
+         normalised name.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
@@ -111,6 +128,13 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
 2006-08-04: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-08-05: student didn't work on project
 2006-08-06: student didn't work on project -- a Sunday
+2006-08-07: entry missing
+2006-08-08: entry missing
+2006-08-09: entry missing
+2006-08-10: entry missing
+2006-08-11: entry missing
+2006-08-12: entry missing
+2006-08-13: entry missing
 
 Time plan
 =========

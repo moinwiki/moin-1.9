@@ -6,25 +6,28 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-def text_merge(old, other, new, allow_conflicts=1,
-               marker1='<<<<<<<<<<<<<<<<<<<<<<<<<\n',
-               marker2='=========================\n',
-               marker3='>>>>>>>>>>>>>>>>>>>>>>>>>\n'):
+default_markers = ('<<<<<<<<<<<<<<<<<<<<<<<<<\n',
+                   '=========================\n',
+                   '>>>>>>>>>>>>>>>>>>>>>>>>>\n')
+
+def text_merge(old, other, new, allow_conflicts=1, *markers):
     """ do line by line diff3 merge with three strings """
     result = merge(old.splitlines(1), other.splitlines(1), new.splitlines(1),
-                   allow_conflicts, marker1, marker2, marker3)
+                   allow_conflicts, *markers)
     return ''.join(result)
 
-def merge(old, other, new, allow_conflicts=1,
-          marker1='<<<<<<<<<<<<<<<<<<<<<<<<<\n',
-          marker2='=========================\n',
-          marker3='>>>>>>>>>>>>>>>>>>>>>>>>>\n'):
+def merge(old, other, new, allow_conflicts=1, *markers):
     """ do line by line diff3 merge
         input must be lists containing single lines   
     """
+    if not markers:
+        markers = default_markers
+    marker1, marker2, marker3 = markers
+
     old_nr, other_nr, new_nr = 0, 0, 0
     old_len, other_len, new_len = len(old), len(other), len(new)
     result = []
+
     while old_nr < old_len and other_nr < other_len and new_nr < new_len:
         # unchanged
         if old[old_nr] == other[other_nr] == new[new_nr]:
@@ -33,6 +36,12 @@ def merge(old, other, new, allow_conflicts=1,
             other_nr += 1
             new_nr += 1
         else:
+            if allow_conflicts == 2: # experimental addition to the algorithm
+                if other[other_nr] == new[new_nr]:
+                    result.append(new[new_nr])
+                    other_nr += 1
+                    new_nr += 1
+                    continue
             new_match = find_match(old, new, old_nr, new_nr)
             other_match = find_match(old, other, old_nr, other_nr)
             # new is changed
@@ -100,13 +109,16 @@ def merge(old, other, new, allow_conflicts=1,
         pass
     # conflict
     else:
-        if not allow_conflicts:
-            return None
-        result.append(marker1)
-        result.extend(other[other_nr:])
-        result.append(marker2)
-        result.extend(new[new_nr:])
-        result.append(marker3)
+        if new == other:
+            result.extend(new[new_nr:])
+        else:
+            if not allow_conflicts:
+                return None
+            result.append(marker1)
+            result.extend(other[other_nr:])
+            result.append(marker2)
+            result.extend(new[new_nr:])
+            result.append(marker3)
     return result
 
 def tripple_match(old, other, new, other_match, new_match):
@@ -255,4 +267,3 @@ AAA 014
 
 if __name__ == '__main__':
     main()
-
