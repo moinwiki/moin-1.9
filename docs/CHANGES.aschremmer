@@ -21,6 +21,8 @@ Branch moin/1.6-sync-aschremmer
     * Search for XXX
     * Maybe refactor YYY into MoinLocalWiki
     * Remove amount of "very" in the code
+    * Do older tags of one wiki site have to be stored as well? Why don't we
+      keep just one tag?
     * Put author names into the comment field, transmit mimetypes.
 
   New Features:
@@ -103,7 +105,8 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
          either of both components when searching for tags. Ignore underlay pages. Filter the remote page list by
          the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
-         Started designing the solutions for the other sync cases.
+         Started designing the solutions for the other sync cases. Store and transmit the
+         normalised name.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
