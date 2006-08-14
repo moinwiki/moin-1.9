@@ -669,10 +669,9 @@ class SearchResults:
         f = self.formatter
 
         querydict = wikiutil.parseQueryString(self.request.query_string)
-        uri_prefix = self.request.splitURI(self.request.request_uri)[0]
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
-            return uri_prefix + '?' + wikiutil.makeQueryString(querydict)
+            return self.request.page.url(self.request, querydict, escape=0)
         
         pages = float(hitsNum) / hitsPerPage
         if pages - int(pages) > 0.0:
