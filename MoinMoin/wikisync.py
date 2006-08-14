@@ -368,51 +368,58 @@ class PickleTagStore(AbstractTagStore):
         
         @param page: a Page object where the tags should be related to
         """
-        
+
         self.page = page
         self.filename = page.getPagePath('synctags', use_underlay=0, check_create=1, isfile=1)
         lock_dir = os.path.join(page.getPagePath('cache', use_underlay=0, check_create=1), '__taglock__')
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
-        self.load()
 
-    def load(self):
-        """ Loads the tags from the data file. """
         if not self.rlock.acquire(3.0):
             raise EnvironmentError("Could not lock in PickleTagStore")
         try:
-            try:
-                datafile = file(self.filename, "rb")
-            except IOError:
-                self.tags = []
-            else:
-                self.tags = pickle.load(datafile)
-                datafile.close()
+            self.load()
         finally:
             self.rlock.release()
+
+    def load(self):
+        """ Loads the tags from the data file. """
+        try:
+            datafile = file(self.filename, "rb")
+        except IOError:
+            self.tags = []
+        else:
+            self.tags = pickle.load(datafile)
+            datafile.close()
     
     def commit(self):
         """ Writes the memory contents to the data file. """
-        if not self.wlock.acquire(3.0):
-            raise EnvironmentError("Could not lock in PickleTagStore")
-        try:
-            datafile = file(self.filename, "wb")
-            pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
-            datafile.close()
-        finally:
-            self.wlock.release()
+        datafile = file(self.filename, "wb")
+        pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
+        datafile.close()
 
     # public methods ---------------------------------------------------
     def add(self, **kwargs):
-        self.tags.append(Tag(**kwargs))
-        self.commit()
-    
+        if not self.wlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
+        try:
+            self.load()
+            self.tags.append(Tag(**kwargs))
+            self.commit()
+        finally:
+            self.wlock.release()
+
     def get_all_tags(self):
         return self.tags
 
     def clear(self):
         self.tags = []
-        self.commit()
+        if not self.wlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
+        try:
+            self.commit()
+        finally:
+            self.wlock.release()
 
     def fetch(self, iwid_full, direction=None):
         iwid_full = unpackLine(iwid_full)
