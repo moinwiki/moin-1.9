@@ -4,35 +4,42 @@ Branch moin/1.6-xapian-fpletz
   Known main issues:
     * Only term-based regex searching possible, modifier or heuristic to
       enable usage of _moinSearch for full compatibility?
-    * HACK: MoinMoin.Xapian.Index._get_languages (wait for proper metadata)
-    * Positions saved in Xapian aren't always correct, check. Code
-      generally needs some more love.
+    * HACK: MoinMoin.search.Xapian.Index._get_languages (wait for proper
+      metadata)
 
   ToDo:
     * Implement the new search UI
     * Write/update documentation for all the new search stuff
-    * Indexing and searching of categories (new term prefix)
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
       (i.e. ExceptionTranslator)
-    * Add stemming support for highlighting stuff:
-        1. regexp for whole word (all lowercase), or
-        2. just the root of the word
+
+  ToDo (low priority):
+    * Case-sensitive searches / Regexp on multiple terms: Graceful
+      fallback to and/or merge with moinSearch based on nodes xapian can
+      handle in the search term tree
+      * currently, xapian will fetch relevant pages and feed those into
+        _moinSearch for doing the real hard stuff it can't handle
+      -> need for a query optimizer, after SoC?
 
   New Features:
     * Faster search thanks to Xapian
     * Searching for languages with new prefix lang/language, i.e. lang:de
       Note: Currently only available when Xapian is used
+    * CategorySearch with prefix category or with the regexp previously
+      used (autodetected as CategorySearch)
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
-        xapian_stemming      True   Toggles usage of stemmer, fallback
+        xapian_stemming      True   toggles usage of stemmer, fallback
                                     to False if no stemmer installed
+        search_results_per_page 10  determines how many hits should be
+                                    shown on a fullsearch action
   
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
 
   Other Changes:
-    * ...
+    * Some whitespace fixes in miscellaneous code
   
   Developer notes:
     * ...
@@ -152,4 +159,76 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-07-17
     * SystemInfo macro now also shows if xapian is being used (index
       available) and more graceful fallback to moinSearch
+    * Explored and evaluated the current framework for macros,
+      formatters and stuff which we need to touch for the new search UI
+
+2006-07-18
+    * Fixed some bugs, whitespaces at EOL, better i18n for SystemInfo
+    * Implemented paging support for searches, needs some style
+      adjustments
+
+2006-07-19
+    * student didn't work on the project -- ThomasWaldmann
+
+2006-07-20
+    * Fixed some bugs found while testing regexp and case-sensitive searches
+    * Conclusion after tinkering with the current code to allow
+      cooperation between moinSearch and Xapian for case-sensitive
+      searches (code buried): We probably need a rather big rewrite!
+
+2006-07-21
+2006-07-22
+    * Final thoughts: No query optimizer for now. Case-sensitive
+      sensitive search is done by querying Xapian with the lowercased
+      terms and run _moinSearch over the relevant pages with the same
+      query.
+    * Indexing of categories
+
+2006-07-23
+    * CategorySearch is live
+    * Subpage issue does not need changes: Can be done with regex magic
+      I.e.: - subpages of MyPage: re:^MyPage/
+            - subpages called SubPage: re:/SubPage
+            - subpages called Subpage (1st level): re:[^/]*/SubPage
+            - subpages called Subpage (last level): re:/Subpage$
+
+2006-07-24
+    * SystemInfo macro update (mtime)
+    * nicer regexp support for TitleSearch
+
+2006-07-25 .. 2006-08-01
+    * student did not work on project
+
+2006-08-02
+    * Reformatted search statistics to use CSS and be more google-like
+      (only in modern theme for now)
+    * Added "search result info bar", showing revision, size, mtime,
+      links for further searches (-> ToDo) etc.
+
+2006-08-03 no work on project
+2006-08-04 no work on project
+
+2006-08-05 .. 2006-08-06
+    * (finally :)) Google-like paging, using images from google.com until
+      we get proper moin gfx
+    * index domains of a page (standard, underlay)
+
+2006-08-07
+     * info bar for titlesearches
+     * bugfix for results code: sometimes we never got a page instance
+       in Found{Page,Attachment,...} which yielded strange errors
+
+2006-08-08
+    * added some more timers for regression testing
+    * improved highlighting code to work better with stemming and
+      special searches, extended SystemInfo macro
+
+2006-08-09
+    * use xapian for sorting, first step not to fetch all results
+      -> still TODO: need real weight
+
+2006-08-10
+    * entry missing
+
+2006-08-10 .. 13 no work on project
 
