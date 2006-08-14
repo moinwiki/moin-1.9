@@ -115,14 +115,18 @@ def execute(Macro, args):
     from MoinMoin.search.builtin import Search
     xapState = (_('Disabled'), _('Enabled'))
     idxState = (_('index available'), _('index unavailable'))
-    idx = Search._xapianIndex(request)
-    available = idx and idxState[0] or idxState[1]
-    mtime = _('last modified: %s') % (idx and
-            request.user.getFormattedDateTime(
-                wikiutil.version2timestamp(idx.mtime())) or
-                _('N/A'))
-    row(_('Xapian search'), '%s, %s, %s'
-            % (xapState[request.cfg.xapian_search], available, mtime))
+    out = xapState[request.cfg.xapian_search]
+
+    if request.cfg.xapian_search:
+        idx = Search._xapianIndex(request)
+        available = idx and idxState[0] or idxState[1]
+        mtime = _('last modified: %s') % (idx and
+                request.user.getFormattedDateTime(
+                    wikiutil.version2timestamp(idx.mtime())) or
+                    _('N/A'))
+        out += ', %s, %s' % (available, mtime)
+
+    row(_('Xapian search'), out)
     row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
 
     row(_('Active threads'), t_count or _('N/A'))
