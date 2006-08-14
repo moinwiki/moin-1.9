@@ -135,8 +135,6 @@ def execute(pagename, request):
     # Save new text
     else:
         try:
-            still_conflict = wikiutil.containsConflictMarker(savetext)
-            pg.setConflict(still_conflict)
             savemsg = pg.saveText(savetext, rev, trivial=trivial, comment=comment)
         except pg.EditConflict, e:
             msg = e.message

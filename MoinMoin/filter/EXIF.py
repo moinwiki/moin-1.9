@@ -1004,7 +1004,7 @@ class EXIF_header:
             return
 
         # Olympus
-        if make[:7] == 'OLYMPUS':
+        if make.startswith('OLYMPUS'):
             self.dump_IFD(note.field_offset+8, 'MakerNote',
                           dict=MAKERNOTE_OLYMPUS_TAGS)
             return

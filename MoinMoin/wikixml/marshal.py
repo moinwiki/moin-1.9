@@ -6,9 +6,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import types
-
-
 class Marshal:
     """ Serialize Python data structures to XML.
 
@@ -64,16 +61,16 @@ class Marshal:
         if data is None:
             content = "<none/>"
 
-        elif isinstance(data, types.StringType):
+        elif isinstance(data, str):
             content = (data.replace("&", "&amp;") # Must be done first!
                            .replace("<", "&lt;")
                            .replace(">", "&gt;"))
 
-        elif isinstance(data, types.DictionaryType):
+        elif isinstance(data, dict):
             for key, value in data.items():
                 add_content(self.__toXML(key, value))
 
-        elif isinstance(data, types.ListType) or isinstance(data, types.TupleType):
+        elif isinstance(data, (list, tuple)):
             for item in data:
                 add_content(self.__toXML(self.ITEM_CONTAINER, item))
 
@@ -89,7 +86,7 @@ class Marshal:
                                 .replace(">", "&gt;"))
 
         # Close container element
-        if isinstance(content, types.StringType):
+        if isinstance(content, str):
             # No Whitespace
             if element:
                 content = ['<%s>%s</%s>' % (element, content, element)]

@@ -16,7 +16,7 @@ class Formatter(FormatterBase):
     hardspace = u' '
 
     def __init__(self, request, **kw):
-        apply(FormatterBase.__init__, (self, request), kw)
+        FormatterBase.__init__(self, request, **kw)
         self._in_code_area = 0
         self._in_code_line = 0
         self._code_area_state = [0, -1, -1, 0]
@@ -36,7 +36,7 @@ class Formatter(FormatterBase):
         return (u'\n\n*** ', u' ***\n\n')[not on]
 
     def pagelink(self, on, pagename='', page=None, **kw):
-        apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
+        FormatterBase.pagelink(self, on, pagename, page, **kw)
         return (u">>", u"<<") [not on]
 
     def interwikilink(self, on, interwiki='', pagename='', **kw):

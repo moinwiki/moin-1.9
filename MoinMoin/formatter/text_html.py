@@ -173,7 +173,7 @@ class Formatter(FormatterBase):
     indentspace = ' '
 
     def __init__(self, request, **kw):
-        apply(FormatterBase.__init__, (self, request), kw)
+        FormatterBase.__init__(self, request, **kw)
 
         # inline tags stack. When an inline tag is called, it goes into
         # the stack. When a block element starts, all inline tags in
@@ -484,7 +484,7 @@ class Formatter(FormatterBase):
 
             See wikiutil.link_tag() for possible keyword parameters.
         """
-        apply(FormatterBase.pagelink, (self, on, pagename, page), kw)
+        FormatterBase.pagelink(self, on, pagename, page, **kw)
         if page is None:
             page = Page(self.request, pagename, formatter=self)
         if self.request.user.show_nonexist_qm and on and not page.exists():
@@ -506,13 +506,13 @@ class Formatter(FormatterBase):
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
             if on:
-                if wikitail.find('#') > -1:
+                if '#' in wikitail:
                     wikitail, kw['anchor'] = wikitail.split('#', 1)
                 wikitail = wikiutil.url_unquote(wikitail)
                 try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
-                    return apply(self.pagelink, (on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)), kw)
+                    return self.pagelink(on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail), **kw)
                 except:
-                    return apply(self.pagelink, (on, wikitail), kw)
+                    return self.pagelink(on, wikitail, **kw)
             else:
                 return self.pagelink(0)
         else: # return InterWiki hyperlink
