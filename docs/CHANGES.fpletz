@@ -227,3 +227,8 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * use xapian for sorting, first step not to fetch all results
       -> still TODO: need real weight
 
+2006-08-10
+    * entry missing
+
+2006-08-10 .. 13 no work on project
+
