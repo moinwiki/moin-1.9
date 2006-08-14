@@ -141,6 +141,8 @@ class ActionClass:
                           |          | Wiki A, there is a merge with a conflict.
                           |          | Otherwise (no changes past last merge),
                           |          | the page is deleted in Wiki A.
+                          |          | This needs static info that could be
+                          |          | transferred with the pagelist.
                 ----------+----------+-------------------------------
                 exists    | non-     | Now the wiki knows that the page was renamed.
                 with tags | existant | There should be an RPC method that asks
@@ -148,8 +150,14 @@ class ActionClass:
                           |          | on page rename). Then the page is
                           |          | renamed in Wiki A as well and the sync
                           |          | is done normally.
+                          |          | Every wiki retains a dict that maps
+                          |          | (IWID, oldname) => newname and that is
+                          |          | updated on every rename. oldname refers
+                          |          | to the pagename known by the old wiki (can be
+                          |          | gathered from tags).
                 ----------+----------+-------------------------------
-                exists    | any case | Do a sync without considering tags
+                exists    | any case | Try a rename search first, then
+                          |          | do a sync without considering tags
                 with tags | with non | to ensure data integrity.
                           | matching |
                           | tags     |
@@ -272,13 +280,13 @@ class ActionClass:
 
             if direction == BOTH:
                 try:
-                    very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid)
+                    very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, rp.name)
                 except Exception, e:
                     raise # XXX rollback locally and do not tag locally
             else:
                 very_current_remote_rev = current_remote_rev
 
-            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction)
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=rp.name)
 
             if not wikiutil.containsConflictMarker(verynewtext):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))

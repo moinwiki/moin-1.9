@@ -213,9 +213,9 @@ class MoinRemoteWiki(RemoteWiki):
         result["diff"] = str(result["diff"]) # unmarshal Binary object
         return result
 
-    def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+    def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name):
         """ Merges the diff into the page on the remote side. """
-        result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name)
+        result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
         return result
 
     # Methods implementing the RemoteWiki interface
@@ -303,7 +303,7 @@ class MoinLocalWiki(RemoteWiki):
 class Tag(object):
     """ This class is used to store information about merging state. """
     
-    def __init__(self, remote_wiki, remote_rev, current_rev, direction):
+    def __init__(self, remote_wiki, remote_rev, current_rev, direction, normalised_name):
         """ Creates a new Tag.
         
         @param remote_wiki: The identifier of the remote wiki.
@@ -311,14 +311,17 @@ class Tag(object):
         @param current_rev: The related local revision.
         @param direction: The direction of the sync, encoded as an integer.
         """
-        assert isinstance(remote_wiki, str) and isinstance(remote_rev, int) and isinstance(current_rev, int)
+        assert (isinstance(remote_wiki, basestring) and isinstance(remote_rev, int)
+                and isinstance(current_rev, int) and isinstance(direction, int)
+                and isinstance(normalised_name, basestring))
         self.remote_wiki = remote_wiki
         self.remote_rev = remote_rev
         self.current_rev = current_rev
         self.direction = direction
+        self.normalised_name = normalised_name
 
     def __repr__(self):
-        return u"<Tag remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.remote_wiki, self.remote_rev, self.current_rev)
+        return u"<Tag normalised_pagename=%r remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.normalised_name, self.remote_wiki, self.remote_rev, self.current_rev)
 
     def __cmp__(self, other):
         if not isinstance(other, Tag):

@@ -642,7 +642,7 @@ class XmlRpcBase:
         else:
             return [self._outstr(name), iwid]
 
-    def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+    def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, normalised_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
             Additionally, this method tags the new revision.
             
@@ -652,6 +652,7 @@ class XmlRpcBase:
             @param delta_remote_rev: The revno that the diff is taken against.
             @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
             @param interwiki_name: Used to build the interwiki tag.
+            @param normalised_name: The normalised pagename that is common to both wikis.
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
@@ -694,7 +695,7 @@ class XmlRpcBase:
         current_rev = currentpage.get_real_rev()
         
         tags = TagStore(currentpage)
-        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev, direction=BOTH)
+        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev, direction=BOTH, normalised_name=normalised_name)
 
         # XXX unlock page
 
