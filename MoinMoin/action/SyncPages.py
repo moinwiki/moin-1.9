@@ -131,7 +131,30 @@ class ActionClass:
         return self.page.send_page(self.request, msg=msg)
     
     def sync(self, params, local, remote):
-        """ This method does the syncronisation work. """
+        """ This method does the syncronisation work.
+            Currently, it handles the case where the pages exist on both sides.
+            Now there are a few other cases left that have to be implemented:
+                Wiki A    | Wiki B   | Remark
+                ----------+----------+------------------------------
+                exists    | deleted  | In this case, we do a normal merge if there
+                          |          | are no tags. If there were changes in
+                          |          | Wiki A, there is a merge with a conflict.
+                          |          | Otherwise (no changes past last merge),
+                          |          | the page is deleted in Wiki A.
+                ----------+----------+-------------------------------
+                exists    | non-     | Now the wiki knows that the page was renamed.
+                with tags | existant | There should be an RPC method that asks
+                          |          | for the new name (which could be recorded
+                          |          | on page rename). Then the page is
+                          |          | renamed in Wiki A as well and the sync
+                          |          | is done normally.
+                ----------+----------+-------------------------------
+                exists    | any case | Do a sync without considering tags
+                with tags | with non | to ensure data integrity.
+                          | matching |
+                          | tags     |
+                ----------+----------+-------------------------------
+        """
         _ = self.request.getText
         direction = params["direction"]
 
