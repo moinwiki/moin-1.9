@@ -1655,7 +1655,7 @@ class Page:
         try:
             lastRevision = self.getRevList()[0]
         except IndexError:
-            return security.AccessControlList(self.request)
+            return security.AccessControlList(self.request.cfg)
         body = Page(self.request, self.page_name,
                     rev=lastRevision).get_raw_body()
         return security.parseACL(self.request, body)

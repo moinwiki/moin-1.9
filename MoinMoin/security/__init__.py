@@ -169,38 +169,23 @@ class AccessControlList:
 
     special_users = ["All", "Known", "Trusted"] # order is important
 
-    def __init__(self, request, lines=[]):
+    def __init__(self, cfg, lines=[]):
         """Initialize an ACL, starting from <nothing>.
         """
-        self.setLines(request.cfg, lines)
-
-    def setLines(self, cfg, lines=[]):
-        self.clean()
-        self.addBefore(cfg)
-        if not lines:
-            self.addDefault(cfg)
-        else:
-            for line in lines:
-                self.addLine(cfg, line)
-        self.addAfter(cfg)
-
-    def clean(self):
-        self.acl = [] # [ ('User', {"read": 0, ...}), ... ]
-        self.acl_lines = []
         self._is_group = {}
+        if lines:
+            self.acl = [] # [ ('User', {"read": 0, ...}), ... ]
+            self.acl_lines = []
+            for line in lines:
+                self._addLine(cfg, line)
+        else:
+            self.acl = None
+            self.acl_lines = None
 
-    def addBefore(self, cfg):
-        self.addLine(cfg, cfg.acl_rights_before, remember=0)
-    def addDefault(self, cfg):
-        self.addLine(cfg, cfg.acl_rights_default, remember=0)
-    def addAfter(self, cfg):
-        self.addLine(cfg, cfg.acl_rights_after, remember=0)
-
-    def addLine(self, cfg, aclstring, remember=1):
+    def _addLine(self, cfg, aclstring, remember=1):
         """ Add another ACL line
 
-        This can be used in multiple subsequent calls to process longer
-        lists.
+        This can be used in multiple subsequent calls to process longer lists.
 
         @param cfg: current config
         @param aclstring: acl string from page or cfg
@@ -216,26 +201,25 @@ class AccessControlList:
         acliter = ACLStringIterator(cfg.acl_rights_valid, aclstring)
         for modifier, entries, rights in acliter:
             if entries == ['Default']:
-                self.addDefault(cfg)
-                continue
-
-            for entry in entries:
-                if group_re.search(entry):
-                    self._is_group[entry] = 1
-                rightsdict = {}
-                if modifier:
-                    # Only user rights are added to the right dict.
-                    # + add rights with value of 1
-                    # - add right with value of 0
-                    for right in rights:
-                        rightsdict[right] = (modifier == '+')
-                else:
-                    # All rights from acl_rights_valid are added to the
-                    # dict, user rights with value of 1, and other with
-                    # value of 0
-                    for right in cfg.acl_rights_valid:
-                        rightsdict[right] = (right in rights)
-                self.acl.append((entry, rightsdict))
+                self._addLine(cfg, cfg.acl_rights_default, remember=0)
+            else:
+                for entry in entries:
+                    if group_re.search(entry):
+                        self._is_group[entry] = 1
+                    rightsdict = {}
+                    if modifier:
+                        # Only user rights are added to the right dict.
+                        # + add rights with value of 1
+                        # - add right with value of 0
+                        for right in rights:
+                            rightsdict[right] = (modifier == '+')
+                    else:
+                        # All rights from acl_rights_valid are added to the
+                        # dict, user rights with value of 1, and other with
+                        # value of 0
+                        for right in cfg.acl_rights_valid:
+                            rightsdict[right] = (right in rights)
+                    self.acl.append((entry, rightsdict))
 
     def may(self, request, name, dowhat):
         """May <name> <dowhat>?
@@ -243,8 +227,10 @@ class AccessControlList:
         """
         is_group_member = request.dicts.has_member
 
+        acl_page = self.acl or request.cfg._acl_rights_default.acl
+        acl = request.cfg._acl_rights_before.acl + acl_page + request.cfg._acl_rights_after.acl
         allowed = None
-        for entry, rightsdict in self.acl:
+        for entry, rightsdict in acl:
             if entry in self.special_users:
                 handler = getattr(self, "_special_"+entry, None)
                 allowed = handler(request, name, dowhat, rightsdict)
@@ -266,7 +252,11 @@ class AccessControlList:
 
     def getString(self, b='#acl ', e='\n'):
         """print the acl strings we were fed with"""
-        return ''.join(["%s%s%s" % (b, l, e) for l in self.acl_lines])
+        if self.acl_lines:
+            acl_lines = ''.join(["%s%s%s" % (b, l, e) for l in self.acl_lines])
+        else:
+            acl_lines = ''
+        return acl_lines
 
     def _special_All(self, request, name, dowhat, rightsdict):
         return rightsdict.get(dowhat)
@@ -291,6 +281,7 @@ class AccessControlList:
 
     def __eq__(self, other):
         return self.acl_lines == other.acl_lines
+
     def __ne__(self, other):
         return self.acl_lines != other.acl_lines
 
@@ -403,5 +394,5 @@ def parseACL(request, body):
             else:
                 args = ""
             acl_lines.append(args)
-    return AccessControlList(request, acl_lines)
+    return AccessControlList(request.cfg, acl_lines)
 
