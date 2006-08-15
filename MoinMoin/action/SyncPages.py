@@ -24,8 +24,8 @@ from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
-from MoinMoin.wikisync import (TagStore, UnsupportedWikiException, SyncPage,
-                               MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH)
+from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage
+from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
