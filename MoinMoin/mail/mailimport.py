@@ -4,9 +4,6 @@
     Just call this script with the URL of the wiki as a single argument
     and feed the mail into stdin.
 
-    TODO:
-     * add from/to/subj infos when attaching to main page (without +)
-
     @copyright: 2006 by MoinMoin:AlexanderSchremmer,
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -243,9 +240,14 @@ def import_mail_from_message(request, message):
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
     if old_content:
-        new_content = u"%s\n-----\n%s" % (old_content, d['content'], )
+        new_content = u"%s\n-----\n" % old_content
     else:
-        new_content = d['content']
+        new_content = ''
+
+    if not (generate_summary and "/" in pagename):
+        new_content += u"'''Mail: %s (%s, [[DateTime(%s)]])'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
+
+    new_content += d['content']
     new_content += "\n" + u"\n * ".join(attachment_links)
 
     try:
