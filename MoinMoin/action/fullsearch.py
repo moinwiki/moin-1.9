@@ -92,18 +92,27 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
-    # First search stats
-    request.write(results.stats(request, request.formatter, hitsFrom))
+    # Did we get any hits?
+    if results.hits:
+        # First search stats
+        request.write(results.stats(request, request.formatter, hitsFrom))
 
-    # Then search results
-    info = not titlesearch
-    if context:
-        output = results.pageListWithContext(request, request.formatter,
-                info=info, context=context, hitsFrom=hitsFrom)
+        # Then search results
+        info = not titlesearch
+        if context:
+            output = results.pageListWithContext(request, request.formatter,
+                    info=info, context=context, hitsFrom=hitsFrom)
+        else:
+            output = results.pageList(request, request.formatter, info=info,
+                    hitsFrom=hitsFrom)
+        request.write(output)
     else:
-        output = results.pageList(request, request.formatter, info=info,
-                hitsFrom=hitsFrom)
-    request.write(output)
+        f = request.formatter
+        request.write(''.join([
+            f.heading(1, 3),
+            f.text(_('Your search query didn\'t return any results.')),
+            f.heading(0, 3),
+        ]))
 
     request.write(request.formatter.endContent())
     request.theme.send_footer(pagename)
