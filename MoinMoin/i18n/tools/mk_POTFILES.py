@@ -30,17 +30,14 @@ def get_files((files, prefix, blacklist), d, names):
             path = os.path.join(d, name)
 
             # Strip the prefix.
-
             if path.startswith(prefix):
                 path = path[len(prefix):]
 
             # Test for exact blacklist matches.
-
             if path in blacklist:
                 continue
 
             # Test for directory blacklist matches.
-
             found = 0
             for blackitem in blacklist:
                 if path.startswith(blackitem):
@@ -51,11 +48,9 @@ def get_files((files, prefix, blacklist), d, names):
                 files.append(path)
 
 def find_files(startdir, blacklist):
-
     "Find files under 'startdir' excluding those in the 'blacklist'."
 
     # Calculate the prefix from the start directory.
-
     prefix = os.path.join(startdir, "")
 
     # Start with an empty list of files.
@@ -67,11 +62,9 @@ def find_files(startdir, blacklist):
 if __name__ == "__main__":
 
     # Find those files using the module defaults.
-
     files = find_files(startdir, blacklist)
 
     # Write the names out.
-
     outfile = open(outname_in, "w")
     try:
         for file in files:
@@ -80,7 +73,6 @@ if __name__ == "__main__":
         outfile.close()
 
     # Write the processed list out, ready for other purposes.
-
     outfile = open(outname_final, "w")
     outfile.write("POTFILES = \\\n")
     try:

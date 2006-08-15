@@ -1506,7 +1506,7 @@ msgstr "Versão MoinMoin"
 
 #, python-format
 msgid "Release %s [Revision %s]"
-msgstr "Liberar %s [Revisão %s]"
+msgstr "Versão %s [Revisão %s]"
 
 msgid "4Suite Version"
 msgstr "Versão 4Suite"
