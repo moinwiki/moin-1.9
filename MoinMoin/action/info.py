@@ -90,7 +90,7 @@ def execute(pagename, request):
         may_revert = request.user.may.revert(pagename)
 
         def render_action(text, query, **kw):
-            kw.update(rel='nofollow')
+            kw.update(dict(rel='nofollow'))
             if 0: # diff button doesnt work XXX
                 params_html = []
                 for k, v in query.items():
