@@ -5,9 +5,7 @@
     and feed the mail into stdin.
 
     TODO:
-     * sanitize pagename in the same way as when we get it from url
      * add from/to/subj infos when attaching to main page (without +)
-     * check + usage when not using subpages
 
     @copyright: 2006 by MoinMoin:AlexanderSchremmer,
                 2006 by MoinMoin:ThomasWaldmann
@@ -126,10 +124,9 @@ def process_message(message):
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(msg, email_subpage_template, wiki_address):
+def get_pagename_content(request, msg, email_subpage_template, wiki_address):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
-
     generate_summary = False
     choose_html = True
 
@@ -152,6 +149,9 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
         if pagename_tpl[-1] == pagename_tpl[0] == "'":
             pagename_tpl = pagename_tpl[1:-1]
 
+    if not msg['subject'].strip():
+        msg['subject'] = '(...)' # we need non-empty subject
+
     pagename_tpl = pagename_tpl.strip()
     if pagename_tpl.endswith("/"):
         pagename_tpl += email_subpage_template
@@ -168,6 +168,8 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
     if pagename.startswith("+ ") and "/" in pagename:
         generate_summary = True
         pagename = pagename[1:].lstrip()
+
+    pagename = request.normalizePagename(pagename)
 
     if choose_html and msg['html']:
         content = "{{{#!html\n%s\n}}}" % msg['html'].replace("}}}", "} } }")
@@ -200,7 +202,7 @@ def import_mail_from_message(request, message):
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(msg, email_subpage_template, wiki_address)
+    d = get_pagename_content(request, msg, email_subpage_template, wiki_address)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
@@ -272,7 +274,7 @@ def import_mail_from_message(request, message):
         from_col = email_to_markup(request, msg['from_addr'])
         to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
                            for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
-        subj_col = '["%s" %s]' % (pagename, msg['subject'] or '(...)')
+        subj_col = '["%s" %s]' % (pagename, msg['subject'])
         date_col = msg['date']
         attach_col = " ".join(attachment_links)
         new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || %s ||' % (from_col, to_col, subj_col, date_col, attach_col)
