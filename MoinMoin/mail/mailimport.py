@@ -272,7 +272,7 @@ def import_mail_from_message(request, message):
         from_col = email_to_markup(request, msg['from_addr'])
         to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
                            for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
-        subj_col = '["%s" %s]' % (pagename, msg['subject'])
+        subj_col = '["%s" %s]' % (pagename, msg['subject'] or '(...)')
         date_col = msg['date']
         attach_col = " ".join(attachment_links)
         new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || %s ||' % (from_col, to_col, subj_col, date_col, attach_col)
