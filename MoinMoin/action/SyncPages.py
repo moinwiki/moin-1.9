@@ -176,11 +176,11 @@ class ActionClass:
 
         m_pages = [elem.add_missing_pagename(local, remote) for elem in SyncPage.merge(l_pages, r_pages)]
 
-        print "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages)) # XXX remove
+        self.log_status(INFO, "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages))) # XXX remove?
 
         if params["pageMatch"]:
             m_pages = SyncPage.filter(m_pages, params["pageMatch"].match)
-        print "After filtering: Got %i merges pages" % (len(m_pages), ) # XXX remove
+        self.log_status(INFO, "After filtering: Got %i merges pages" % (len(m_pages), )) # XXX remove
 
         on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
         remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
@@ -195,7 +195,7 @@ class ActionClass:
         # XXX handle deleted pages
         for rp in on_both_sides:
             # XXX add locking, acquire read-lock on rp
-            print "Processing %r" % rp
+            #print "Processing %r" % rp
 
             local_pagename = rp.local_name
             current_page = PageEditor(self.request, local_pagename) # YYY direct access
@@ -216,6 +216,7 @@ class ActionClass:
                 old_contents = ""
             else:
                 newest_tag = matching_tags[-1]
+                # XXX check the tag.normalised_name here
                 local_rev = newest_tag.current_rev
                 remote_rev = newest_tag.remote_rev
                 if remote_rev == rp.remote_rev and (direction == DOWN or local_rev == current_rev):
@@ -257,7 +258,7 @@ class ActionClass:
                 new_contents = patch(patch_base_contents, decompress(diff)).decode("utf-8")
 
             # here, the actual merge happens
-            print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+            # XXX print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
             verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents, current_page.get_raw_body(), 2, *conflict_markers)
 
             local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
