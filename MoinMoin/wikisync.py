@@ -261,6 +261,8 @@ class MoinLocalWiki(RemoteWiki):
 
     def createSyncPage(self, page_name):
         normalised_name = normalise_pagename(page_name, self.prefix)
+        if not self.request.user.may.write(normalised_name):
+            return None
         if normalised_name is None:
             return None
         return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
