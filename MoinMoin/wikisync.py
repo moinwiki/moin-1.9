@@ -397,7 +397,7 @@ class PickleTagStore(AbstractTagStore):
     def commit(self):
         """ Writes the memory contents to the data file. """
         datafile = file(self.filename, "wb")
-        pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(self.tags, datafile, pickle.HIGHEST_PROTOCOL)
         datafile.close()
 
     # public methods ---------------------------------------------------
