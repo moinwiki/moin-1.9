@@ -4,6 +4,11 @@
     Just call this script with the URL of the wiki as a single argument
     and feed the mail into stdin.
 
+    TODO:
+     * sanitize pagename in the same way as when we get it from url
+     * add from/to/subj infos when attaching to main page (without +)
+     * check + usage when not using subpages
+
     @copyright: 2006 by MoinMoin:AlexanderSchremmer,
                 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
@@ -147,6 +152,7 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
         if pagename_tpl[-1] == pagename_tpl[0] == "'":
             pagename_tpl = pagename_tpl[1:-1]
 
+    pagename_tpl = pagename_tpl.strip()
     if pagename_tpl.endswith("/"):
         pagename_tpl += email_subpage_template
 
