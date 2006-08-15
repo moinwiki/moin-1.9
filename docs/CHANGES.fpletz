@@ -228,7 +228,14 @@ be no issue with OrExpression as _moinSearch handles this correctly.
       -> still TODO: need real weight
 
 2006-08-10
-    * entry missing
+    * corrected range and count of results (estimated by xapian)
+    * pagelinks only there are enough results
 
 2006-08-10 .. 13 no work on project
+
+2006-08-14
+    * fixed some remaining issues with the ui
+
+2006-08-15
+    * removed Moooin gfx as requested by Google
 
