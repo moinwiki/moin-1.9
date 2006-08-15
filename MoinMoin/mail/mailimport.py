@@ -77,16 +77,16 @@ def process_message(message):
     html_data = []
     text_data = []
 
-    to_addr = get_addrs(message, 'To')[0]
     from_addr = get_addrs(message, 'From')[0]
+    to_addrs = get_addrs(message, 'To')
     cc_addrs = get_addrs(message, 'Cc')
     bcc_addrs = get_addrs(message, 'Bcc')
-    target_addrs = [to_addr] + cc_addrs + bcc_addrs
+    target_addrs = to_addrs + cc_addrs + bcc_addrs
 
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
 
-    log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addr, from_addr, subject))
+    log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addrs[0], from_addr, subject))
 
     for part in message.walk():
         log(" Part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
@@ -117,7 +117,7 @@ def process_message(message):
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
             'attachments': attachments,
-            'target_addrs': target_addrs, 'to_addr': to_addr, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
+            'target_addrs': target_addrs, 'to_addrs': to_addrs, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
@@ -260,17 +260,16 @@ def import_mail_from_message(request, message):
                 break
 
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
-                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Content)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
 
         from_col = email_to_markup(request, msg['from_addr'])
-        to_col = ' '.join([email_to_markup(request, (realname, mailaddr)) for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
-        subj_col = msg['subject']
+        to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
+                           for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
+        subj_col = '["%s" %s]' % (pagename, msg['subject'])
         date_col = msg['date']
-        page_col = pagename
         attach_col = " ".join(attachment_links)
-        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || ["%s"] || %s ||' % (
-                    from_col, to_col, subj_col, date_col, page_col, attach_col)
+        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || %s ||' % (from_col, to_col, subj_col, date_col, attach_col)
         if found_table is not None:
             content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
         else:
