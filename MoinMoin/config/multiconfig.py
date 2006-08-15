@@ -15,6 +15,7 @@ import time
 from MoinMoin import error, util, wikiutil
 import MoinMoin.auth as authmodule
 from MoinMoin.packages import packLine
+from MoinMoin.security import AccessControlList
 
 _url_re_cache = None
 _farmconfig_mtime = None
@@ -556,6 +557,10 @@ reStructuredText Quick Reference
 
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
+
+        self._acl_rights_before = AccessControlList(self, [self.acl_rights_before])
+        self._acl_rights_default = AccessControlList(self, [self.acl_rights_default])
+        self._acl_rights_after = AccessControlList(self, [self.acl_rights_after])
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """
