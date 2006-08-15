@@ -388,10 +388,10 @@ class PickleTagStore(AbstractTagStore):
         """ Loads the tags from the data file. """
         try:
             datafile = file(self.filename, "rb")
+            self.tags = pickle.load(datafile)
         except IOError:
             self.tags = []
         else:
-            self.tags = pickle.load(datafile)
             datafile.close()
     
     def commit(self):
