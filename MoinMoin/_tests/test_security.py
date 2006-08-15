@@ -204,7 +204,7 @@ class AclTestCase(unittest.TestCase):
             "BadGuy:  "
             "All:read  "
             ]
-        acl = security.AccessControlList(self.request, acl_rights)
+        acl = security.AccessControlList(self.request.cfg, acl_rights)
 
         # Should apply these rights:
         users = (
