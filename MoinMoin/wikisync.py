@@ -389,7 +389,7 @@ class PickleTagStore(AbstractTagStore):
         try:
             datafile = file(self.filename, "rb")
             self.tags = pickle.load(datafile)
-        except IOError:
+        except (IOError, EOFError):
             self.tags = []
         else:
             datafile.close()
