@@ -133,6 +133,7 @@ class ActionClass:
     def sync(self, params, local, remote):
         """ This method does the syncronisation work.
             Currently, it handles the case where the pages exist on both sides.
+            One of the major missing parts is rename handling.
             Now there are a few other cases left that have to be implemented:
                 Wiki A    | Wiki B   | Remark
                 ----------+----------+------------------------------
@@ -159,8 +160,8 @@ class ActionClass:
                 exists    | any case | Try a rename search first, then
                           |          | do a sync without considering tags
                 with tags | with non | to ensure data integrity.
-                          | matching |
-                          | tags     |
+                          | matching | Hmm, how do we detect this
+                          | tags     | case if the unmatching tags are only on the remote side?
                 ----------+----------+-------------------------------
                 exists    | exists   | already handled.
         """
@@ -213,24 +214,31 @@ class ActionClass:
             matching_tags.sort()
             #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
 
-            if not matching_tags:
-                remote_rev = None
-                local_rev = rp.local_rev # merge against the newest version
-                old_contents = ""
-            else:
+            # some default values for non matching tags
+            normalised_name = None
+            remote_rev = None
+            local_rev = rp.local_rev # merge against the newest version
+            old_contents = ""
+
+            if matching_tags:
                 newest_tag = matching_tags[-1]
-                # XXX check the tag.normalised_name here
-                local_rev = newest_tag.current_rev
-                remote_rev = newest_tag.remote_rev
-                if remote_rev == rp.remote_rev and (direction == DOWN or local_rev == current_rev):
+                
+                # handle some cases where we cannot continue for this page
+                if newest_tag.remote_rev == rp.remote_rev and (direction == DOWN or newest_tag.current_rev == current_rev):
                     continue # no changes done, next page
-                if rp.local_mime_type != MIMETYPE_MOIN and not (remote_rev == rp.remote_rev ^ local_rev == current_rev):
+                if rp.local_mime_type != MIMETYPE_MOIN and not (newest_tag.remote_rev == rp.remote_rev ^ newest_tag.current_rev == current_rev):
                     self.log_status(ActionClass.WARN, _("The item %(pagename)s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again.") % {"pagename": rp.name})
                     continue
                 if rp.local_mime_type != rp.remote_mime_type:
                     self.log_status(ActionClass.WARN, _("The item %(pagename)s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again.") % {"pagename": rp.name})
                     continue
-                old_contents = Page(self.request, local_pagename, rev=local_rev).get_raw_body_str() # YYY direct access
+                if newest_tag.normalised_name != rp.name:
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s was renamed locally. This is not implemented yet. Therefore all syncronisation history is lost for this page.") % {"pagename": rp.name}) # XXX implement renames
+                else:
+                    normalised_name = newest_tag.normalised_name
+                    local_rev = newest_tag.current_rev
+                    remote_rev = newest_tag.remote_rev
+                    old_contents = Page(self.request, local_pagename, rev=newest_tag.current_rev).get_raw_body_str() # YYY direct access
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
@@ -241,7 +249,10 @@ class ActionClass:
                 patch_base_contents = old_contents
 
             if remote_rev != rp.remote_rev:
-                diff_result = remote.get_diff(rp.remote_name, remote_rev, None) # XXX might raise ALREADY_CURRENT
+                diff_result = remote.get_diff(rp.remote_name, remote_rev, None, normalised_name)
+                if diff_result is None:
+                    self.log_status(ActionClass.ERROR, _("The page %(pagename)s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced.") % {"pagename": rp.remote_name})
+                    continue
                 is_remote_conflict = diff_result["conflict"]
                 assert diff_result["diffversion"] == 1
                 diff = diff_result["diff"]
