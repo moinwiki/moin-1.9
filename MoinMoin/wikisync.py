@@ -21,6 +21,7 @@ from MoinMoin.Page import Page
 from MoinMoin.packages import unpackLine, packLine
 
 
+MIMETYPE_MOIN = "text/wiki"
 # sync directions
 UP, DOWN, BOTH = range(3)
 
@@ -58,6 +59,8 @@ class SyncPage(object):
         self.remote_name = remote_name
         assert local_rev or remote_rev
         assert local_name or remote_name
+        self.local_mime_type = MIMETYPE_MOIN   # XXX no usable storage API yet
+        self.remote_mime_type = MIMETYPE_MOIN
 
     def __repr__(self):
         return repr("<Remote Page %r>" % unicode(self))
@@ -107,6 +110,7 @@ class SyncPage(object):
             if sp in d:
                 d[sp].remote_rev = sp.remote_rev
                 d[sp].remote_name = sp.remote_name
+                # XXX merge mime type here
             else:
                 d[sp] = sp
         return d.keys()
