@@ -7,7 +7,6 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo:
-    * Tags should store the page name to recognise renaming scenarios.
     * Implement all syncronisation cases (all 3 page sets).
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Attach the status information to the job page.
@@ -95,8 +94,9 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
 Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
          using pickle-based storage. Added getAllPagesEx XMLRPC method.
 Week 30: Implemented IWID support, added function to generate random strings. Added support
-         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and the MetaDict classes. Added handling of
-         various options and detection of anonymous wikis to the SyncPages action.
+         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and
+         the MetaDict classes. Added handling of various options and detection of anonymous
+         wikis to the SyncPages action.
 Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          fixed option handling again, refined semantics of options, introduced
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
