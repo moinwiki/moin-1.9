@@ -25,7 +25,7 @@ from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
 from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage
-from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH
+from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
@@ -162,9 +162,12 @@ class ActionClass:
                           | matching |
                           | tags     |
                 ----------+----------+-------------------------------
+                exists    | exists   | already handled.
         """
         _ = self.request.getText
         direction = params["direction"]
+        local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
+        remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
         l_pages = local.get_pages()
         r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
@@ -221,6 +224,12 @@ class ActionClass:
                 remote_rev = newest_tag.remote_rev
                 if remote_rev == rp.remote_rev and (direction == DOWN or local_rev == current_rev):
                     continue # no changes done, next page
+                if rp.local_mime_type != MIMETYPE_MOIN and not (remote_rev == rp.remote_rev ^ local_rev == current_rev):
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again.") % {"pagename": rp.name})
+                    continue
+                if rp.local_mime_type != rp.remote_mime_type:
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again.") % {"pagename": rp.name})
+                    continue
                 old_contents = Page(self.request, local_pagename, rev=local_rev).get_raw_body_str() # YYY direct access
 
             self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
@@ -239,12 +248,15 @@ class ActionClass:
                 current_remote_rev = diff_result["current"]
             else:
                 current_remote_rev = remote_rev
-                is_remote_conflict = wikiutil.containsConflictMarker(old_contents.decode("utf-8"))
+                if rp.local_mime_type == MIMETYPE_MOIN:
+                    is_remote_conflict = wikiutil.containsConflictMarker(old_contents.decode("utf-8"))
+                else:
+                    is_remote_conflict = NotImplemented
                 diff = None
 
             # do not sync if the conflict is remote and local, or if it is local
             # and the page has never been syncronised
-            if (wikiutil.containsConflictMarker(current_page.get_raw_body())
+            if (rp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body())
                 and (remote_rev is None or is_remote_conflict)):
                 self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a locally or remotely unresolved conflict.") % {"pagename": local_pagename})
                 continue
@@ -253,18 +265,23 @@ class ActionClass:
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
 
             if diff is None:
-                new_contents = old_contents.decode("utf-8")
+                new_contents = old_contents
             else:
-                new_contents = patch(patch_base_contents, decompress(diff)).decode("utf-8")
+                new_contents = patch(patch_base_contents, decompress(diff))
 
-            # here, the actual merge happens
-            # XXX print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
-            verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents, current_page.get_raw_body(), 2, *conflict_markers)
+            if rp.local_mime_type == MIMETYPE_MOIN:
+                new_contents_unicode = new_contents.decode("utf-8")
+                # here, the actual merge happens
+                # XXX print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+                verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
+                verynewtext_raw = verynewtext.encode("utf-8")
+            else:
+                if diff is None:
+                    verynewtext_raw = new_contents
+                else:
+                    verynewtext_raw = current_page.get_raw_body_str()
 
-            local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
-            remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
-
-            diff = textdiff(new_contents.encode("utf-8"), verynewtext.encode("utf-8"))
+            diff = textdiff(new_contents, verynewtext_raw)
             #print "Diff against %r" % new_contents.encode("utf-8")
 
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
@@ -289,7 +306,7 @@ class ActionClass:
 
             tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=rp.name)
 
-            if not wikiutil.containsConflictMarker(verynewtext):
+            if rp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(verynewtext):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))
             else:
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
