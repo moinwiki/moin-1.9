@@ -210,10 +210,15 @@ class MoinRemoteWiki(RemoteWiki):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
     # Public methods
-    def get_diff(self, pagename, from_rev, to_rev):
+    def get_diff(self, pagename, from_rev, to_rev, n_name=None):
         """ Returns the binary diff of the remote page named pagename, given
             from_rev and to_rev. """
-        result = self.connection.getDiff(pagename, from_rev, to_rev)
+        try:
+            result = self.connection.getDiff(pagename, from_rev, to_rev, n_name)
+        except xmlrpclib.Fault, e:
+            if e.faultCode == "INVALID_TAG":
+                return None
+            raise
         result["diff"] = str(result["diff"]) # unmarshal Binary object
         return result
 
@@ -356,7 +361,11 @@ class AbstractTagStore(object):
     def get_all_tags(self):
         """ Returns a list of all Tag objects associated to this page. """
         return NotImplemented
-    
+
+    def get_last_tag(self):
+        """ Returns the newest tag. """
+        return NotImplemented
+
     def clear(self):
         """ Removes all tags. """
         return NotImplemented
@@ -416,7 +425,14 @@ class PickleTagStore(AbstractTagStore):
             self.wlock.release()
 
     def get_all_tags(self):
-        return self.tags
+        return self.tags[:]
+
+    def get_last_tag(self):
+        temp = self.tags[:]
+        temp.sort()
+        if not temp:
+            return None
+        return temp[-1]
 
     def clear(self):
         self.tags = []
