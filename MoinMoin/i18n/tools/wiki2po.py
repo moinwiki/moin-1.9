@@ -8,7 +8,7 @@ def run():
     import sys, xmlrpclib
     sys.path.insert(0, '../../..')
 
-    excluded = ["en",] # languages managed in repository, not in wiki
+    excluded = ["en", ] # languages managed in repository, not in wiki
 
     langfname = sys.argv[1]
     lang = langfname.replace('_', '-') # module names use _ instead of -
@@ -18,7 +18,7 @@ def run():
 
         pagename = "MoinI18n/%s" % lang
         print pagename
-        pagedata = wiki.getPage(pagename).encode('utf-8').replace("\n","\r\n")
+        pagedata = wiki.getPage(pagename).encode('utf-8').replace("\n", "\r\n")
 
         f = open("%s.%s.po" % (langfname, DOMAIN), "w")
         f.write(pagedata)

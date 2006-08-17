@@ -208,6 +208,8 @@ Version 1.6.current:
       same as POSTs.
     * Fixed handling of anchors in wiki links for the Restructured text parser.
     * Fixed http header output.
+    * Fixed request.cfg corruption in the fckdialog code that could lead
+      to e.g. stalled servers (thanks to David Linke)
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses

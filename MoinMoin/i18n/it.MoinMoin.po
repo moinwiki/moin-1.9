@@ -583,7 +583,7 @@ msgstr "Il file %s non è un pacchetto di MoinMoin."
 
 #, python-format
 msgid "The page %s does not exist."
-msgstr "La pagina %s risulta inesistente."
+msgstr "La pagina %s non esiste."
 
 msgid "Invalid package file header."
 msgstr "Intestazione del pacchetto invalida."
@@ -1155,7 +1155,7 @@ msgstr "Differenze per \"%s\""
 
 #, python-format
 msgid "Differences between revisions %d and %d"
-msgstr "Differenze tra le versioni del %d e del %d"
+msgstr "Differenze tra le versioni %d e %d"
 
 #, python-format
 msgid "(spanning %d versions)"
@@ -1169,7 +1169,7 @@ msgid "The page was saved %(count)d times, though!"
 msgstr "La pagina è stata comunque salvata %(count)d volte!"
 
 msgid "(ignoring whitespace)"
-msgstr "(ignorando gli spazi vuoti)"
+msgstr "(ignorando la spaziatura)"
 
 msgid "Ignore changes in the amount of whitespace"
 msgstr "Ignora differenze nella spaziatura"
@@ -1582,11 +1582,11 @@ msgstr "Dimensione complessiva delle pagine"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/pages/"
-msgstr "Uso della memoria di %(data_dir)s/pages/"
+msgstr "Occupazione disco di %(data_dir)s/pages/"
 
 #, python-format
 msgid "Disk usage of %(data_dir)s/"
-msgstr "Uso della memoria disco di %(data_dir)s/"
+msgstr "Occupazione disco di %(data_dir)s/"
 
 msgid "Entries in edit log"
 msgstr "Voci nel registro delle modifiche"
@@ -1675,11 +1675,11 @@ msgstr "Atteso \"%(wanted)s\" dopo \"%(key)s\", trovato \"%(token)s\""
 
 #, python-format
 msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
-msgstr "Atteso un intero \"%(key)s\" prima di \"%(token)s\""
+msgstr "Atteso un numero intero \"%(key)s\" prima di \"%(token)s\""
 
 #, python-format
 msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
-msgstr "Atteso un intero \"%(arg)s\" dopo di \"%(key)s\""
+msgstr "Atteso un numero intero \"%(arg)s\" dopo di \"%(key)s\""
 
 #, python-format
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
@@ -1821,7 +1821,7 @@ msgid "Search"
 msgstr "Cerca"
 
 msgid "More Actions:"
-msgstr "Altre Azioni:"
+msgstr "Altre azioni:"
 
 msgid "------------"
 msgstr "------------"
