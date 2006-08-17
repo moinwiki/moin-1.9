@@ -30,8 +30,11 @@ class Parser:
 
     # some common strings
     PARENT_PREFIX = wikiutil.PARENT_PREFIX
-    sq_string = ur"('.*?')" # single quoted string
-    dq_string = ur"(\".*?\")" # double quoted string
+    # quoted strings (we require that there is at least one char (that is not the quoting char)
+    # inside to not confuse stuff like '''Contact:''' (just a bold Contact:) with interwiki markup
+    # OtherWiki:'Page with blanks'
+    sq_string = ur"('[^']+?')" # single quoted string
+    dq_string = ur"(\"[^\"]+?\")" # double quoted string
     q_string = ur"(%s|%s)" % (sq_string, dq_string) # quoted string
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
