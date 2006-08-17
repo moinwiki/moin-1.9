@@ -114,6 +114,7 @@ Week 33: Started designing the solutions for the other sync cases. Store and tra
          normalised name. Implemented preliminary mime type support, only transmission of the mime type
          and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
          Added infrastructure support for detecting deleted pages (not used in the merging logic yet).
+         Reworked i18n and logging support.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress

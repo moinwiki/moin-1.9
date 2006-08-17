@@ -269,6 +269,10 @@ def import_mail_from_message(request, message):
             elif table_ends is not None and not line.startswith("||"):
                 break
 
+        # in order to let the gettext system recognise the [[GetText]] calls used below,
+        # we must repeat them here:
+        [_("From"), _("To"), _("Content"), _("Date"), _("Attachments")]
+
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
                         u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Content)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
