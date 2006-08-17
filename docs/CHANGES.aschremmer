@@ -112,6 +112,7 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
 Week 33: Started designing the solutions for the other sync cases. Store and transmit the
          normalised name. Implemented preliminary mime type support, only transmission of the mime type
          and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
+         Added infrastructure support for detecting deleted pages (not used in the merging logic yet).
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
@@ -144,9 +145,3 @@ Week 33: Started designing the solutions for the other sync cases. Store and tra
 2006-08-15: entry missing
 2006-08-16: entry missing
 2006-08-17: entry missing
-
-Time plan
-=========
-In July and August, most parts of the implementation will be finished
-from 07-10 to 07-14 and from 08-03 to 08-19. Between those time spans, there
-are exams.
