@@ -577,11 +577,46 @@ class XmlRpcBase:
 
     # methods for wiki synchronization
 
-    def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
-        """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
+    def xmlrpc_getDiff(self, pagename, from_rev, to_rev, n_name=None):
+        """ Gets the binary difference between two page revisions.
+
+            @param pagename: unicode string qualifying the page name
+
+            @param fromRev: integer specifying the source revision. May be None to
+            refer to a virtual empty revision which leads to a diff
+            containing the whole page.
+
+            @param toRev: integer specifying the target revision. May be None to
+            refer to the current revision. If the current revision is the same
+            as fromRev, there will be a special error condition "ALREADY_CURRENT"
+
+            @param n_name: do a tag check verifying that n_name was the normalised
+            name of the last tag
+
+            If both fromRev and toRev are None, this function acts similar to getPage, i.e. it will diff("",currentRev).
+
+            @return Returns a dict:
+            * status (not a field, implicit, returned as Fault if not SUCCESS):
+             * "SUCCESS" - if the diff could be retrieved successfully
+             * "NOT_EXIST" - item does not exist
+             * "FROMREV_INVALID" - the source revision is invalid
+             * "TOREV_INVALID" - the target revision is invalid
+             * "INTERNAL_ERROR" - there was an internal error
+             * "INVALID_TAG" - the last tag does not match the supplied normalised name
+             * "ALREADY_CURRENT" - this not merely an error condition. It rather means that
+             there is no new revision to diff against which is a good thing while
+             synchronisation.
+            * current: the revision number of the current revision (not the one which was diff'ed against)
+            * diff: Binary object that transports a zlib-compressed binary diff (see bdiff.py, taken from Mercurial)
+            * conflict: if there is a conflict on the page currently
+
+        """
         from MoinMoin.util.bdiff import textdiff, compress
+        from MoinMoin.wikisync import TagStore
 
         pagename = self._instr(pagename)
+        if n_name is not None:
+            n_name = self._instr(n_name)
 
         # User may read page?
         if not self.request.user.may.read(pagename):
@@ -626,6 +661,12 @@ class XmlRpcBase:
 
         if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
             return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
+
+        if n_name is not None:
+            tags = TagStore(newpage)
+            last_tag = tags.get_last_tag()
+            if last_tag is not None and last_tag.normalised_name != n_name:
+                return xmlrpclib.Fault("INVALID_TAG", "The used tag is incorrect because the normalised name does not match.")
 
         newcontents = newcontents()
         conflict = wikiutil.containsConflictMarker(newcontents)
