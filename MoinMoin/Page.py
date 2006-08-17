@@ -636,7 +636,8 @@ class Page:
 
         return count
 
-    def getPageList(self, user=None, exists=1, filter=None, include_underlay=True):
+    def getPageList(self, user=None, exists=1, filter=None, include_underlay=True,
+                    return_objects=False):
         """ List user readable pages under current page
 
         Currently only request.rootpage is used to list pages, but if we
@@ -662,6 +663,9 @@ class Page:
         @param user: the user requesting the pages (MoinMoin.user.User)
         @param filter: filter function
         @param exists: filter existing pages
+        @param include_underlay: determines if underlay pages are returned as well
+        @param return_objects: lets it return a list of Page objects instead of
+            names
         @rtype: list of unicode strings
         @return: user readable wiki page names
         """
@@ -684,7 +688,7 @@ class Page:
 
                 cache[pagename] = None
 
-        if user or exists or filter:
+        if user or exists or filter or not include_underlay or return_objects:
             # Filter names
             pages = []
             for name in cache:
@@ -707,7 +711,10 @@ class Page:
                 if user and not user.may.read(name):
                     continue
 
-                pages.append(name)
+                if return_objects:
+                    pages.append(page)
+                else:
+                    pages.append(name)
         else:
             pages = cache.keys()
 
