@@ -43,8 +43,8 @@ class CacheEntry:
             filesys.makeDirs(self.arena_dir)
         if self.locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
-            self.rlock = lock.ReadLock(self.lock_dir, 60.0)
-            self.wlock = lock.WriteLock(self.lock_dir, 60.0)
+            self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
+            self.wlock = lock.LazyWriteLock(self.lock_dir, 60.0)
 
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
