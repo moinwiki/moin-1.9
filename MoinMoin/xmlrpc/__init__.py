@@ -706,11 +706,12 @@ class XmlRpcBase:
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
+        from MoinMoin.packages import unpackLine
         LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
 
         pagename = self._instr(pagename)
 
-        comment = u"Remote Merge - %r" % interwiki_name
+        comment = u"Remote Merge - %r" % unpackLine(interwiki_name)[-1]
         
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
