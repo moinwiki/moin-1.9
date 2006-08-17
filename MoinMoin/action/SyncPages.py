@@ -137,13 +137,13 @@ class ActionClass(object):
 
             self.sync(params, local, remote)
         except ActionStatus, e:
-            msg = u'<p class="error">%s</p><p>%s</p>\n' % (e.args[0], repr(self.status)) # XXX remove self.status
+            msg = u'<p class="error">%s</p>\n' % (e.args[0], )
         else:
-            msg = u"%s<p>%s</p>" % (_("Syncronisation finished."), repr(self.status)) # XXX remove self.status
+            msg = u"%s" % (_("Syncronisation finished."), )
 
         self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
-
         # XXX release readlock on self.page
+
         return self.page.send_page(self.request, msg=msg)
     
     def sync(self, params, local, remote):
