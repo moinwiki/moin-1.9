@@ -9,7 +9,6 @@ Branch moin/1.6-sync-aschremmer
   ToDo:
     * Implement all syncronisation cases (all 3 page sets).
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
-    * Attach the status information to the job page.
     * Check what needs to be documented on MoinMaster.
 
     * Show tags in an action=info view?
