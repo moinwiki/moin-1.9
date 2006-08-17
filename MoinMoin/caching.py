@@ -8,11 +8,7 @@
 
 import os
 from MoinMoin import config
-from MoinMoin.util import filesys
-
-locking = 1
-if locking:
-    from MoinMoin.util import lock
+from MoinMoin.util import filesys, lock
 
 class CacheEntry:
     def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
@@ -28,6 +24,8 @@ class CacheEntry:
                           'farm' - a cache for the whole farm
         """
         self.request = request
+        self.key = key
+        self.locking = do_locking
         if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
             if isinstance(arena, str):
                 self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
@@ -43,8 +41,6 @@ class CacheEntry:
         elif scope == 'farm':
             self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
             filesys.makeDirs(self.arena_dir)
-        self.key = key
-        self.locking = do_locking and locking
         if self.locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.ReadLock(self.lock_dir, 60.0)
@@ -52,6 +48,9 @@ class CacheEntry:
 
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
+
+    def _tmpfilename(self):
+        return os.tempnam(self.arena_dir, self.key)
 
     def exists(self):
         return os.path.exists(self._filename())
@@ -85,10 +84,15 @@ class CacheEntry:
         return needsupdate
 
     def copyto(self, filename):
+        # currently unused function
         import shutil
+        tmpfname = self._tmpfilename()
+        fname = self._filename()
         if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
-                shutil.copyfile(filename, self._filename())
+                shutil.copyfile(filename, tmpfname)
+                # this is either atomic or happening with real locks set:
+                filesys.rename(tmpfname, fname)
                 try:
                     os.chmod(self._filename(), 0666 & config.umask)
                 except OSError:
@@ -100,15 +104,22 @@ class CacheEntry:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def update(self, content, encode=False):
+        tmpfname = self._tmpfilename()
+        fname = self._filename()
         if encode:
             content = content.encode(config.charset)
         if not self.locking or self.locking and self.wlock.acquire(1.0):
             try:
-                f = open(self._filename(), 'wb')
+                # we do not write content to old inode, but to a new file
+                # se we don't need to lock when we just want to read the file
+                # (at least on POSIX, this works)
+                f = open(tmpfname, 'wb')
                 f.write(content)
                 f.close()
+                # this is either atomic or happening with real locks set:
+                filesys.rename(tmpfname, fname)
                 try:
-                    os.chmod(self._filename(), 0666 & config.umask)
+                    os.chmod(fname, 0666 & config.umask)
                 except OSError:
                     pass
             finally:
@@ -118,10 +129,17 @@ class CacheEntry:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def remove(self):
-        try:
-            os.remove(self._filename())
-        except OSError:
-            pass
+        if not self.locking or self.locking and self.wlock.acquire(1.0):
+            try:
+                try:
+                    os.remove(self._filename())
+                except OSError:
+                    pass
+            finally:
+                if self.locking:
+                    self.wlock.release()
+        else:
+            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
     def content(self, decode=False):
         if not self.locking or self.locking and self.rlock.acquire(1.0):
