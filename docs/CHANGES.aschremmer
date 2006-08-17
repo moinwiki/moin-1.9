@@ -57,6 +57,7 @@ Branch moin/1.6-sync-aschremmer
     * Fixed bug in request.py that avoided showing a traceback if there was a fault
       after the first headers were sent.
     * Fixed severe race conditions in the meta dict and the sync tags code.
+    * Mute the tempnam warning in the caching module.
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.

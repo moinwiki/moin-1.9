@@ -7,8 +7,14 @@
 """
 
 import os
+import warnings
+
 from MoinMoin import config
 from MoinMoin.util import filesys, lock
+
+# filter the tempname warning because we create the tempfile only in directories
+# where only we should have write access initially
+warnings.filterwarnings("ignore", "tempnam.*security", RuntimeWarning, "MoinMoin.caching")
 
 class CacheEntry:
     def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
