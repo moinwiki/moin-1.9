@@ -21,6 +21,7 @@ from MoinMoin.Page import Page
 from MoinMoin.packages import unpackLine, packLine
 
 
+MIMETYPE_MOIN = "text/wiki"
 # sync directions
 UP, DOWN, BOTH = range(3)
 
@@ -58,6 +59,8 @@ class SyncPage(object):
         self.remote_name = remote_name
         assert local_rev or remote_rev
         assert local_name or remote_name
+        self.local_mime_type = MIMETYPE_MOIN   # XXX no usable storage API yet
+        self.remote_mime_type = MIMETYPE_MOIN
 
     def __repr__(self):
         return repr("<Remote Page %r>" % unicode(self))
@@ -107,6 +110,7 @@ class SyncPage(object):
             if sp in d:
                 d[sp].remote_rev = sp.remote_rev
                 d[sp].remote_name = sp.remote_name
+                # XXX merge mime type here
             else:
                 d[sp] = sp
         return d.keys()
@@ -206,10 +210,15 @@ class MoinRemoteWiki(RemoteWiki):
         return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
 
     # Public methods
-    def get_diff(self, pagename, from_rev, to_rev):
+    def get_diff(self, pagename, from_rev, to_rev, n_name=None):
         """ Returns the binary diff of the remote page named pagename, given
             from_rev and to_rev. """
-        result = self.connection.getDiff(pagename, from_rev, to_rev)
+        try:
+            result = self.connection.getDiff(pagename, from_rev, to_rev, n_name)
+        except xmlrpclib.Fault, e:
+            if e.faultCode == "INVALID_TAG":
+                return None
+            raise
         result["diff"] = str(result["diff"]) # unmarshal Binary object
         return result
 
@@ -261,6 +270,8 @@ class MoinLocalWiki(RemoteWiki):
 
     def createSyncPage(self, page_name):
         normalised_name = normalise_pagename(page_name, self.prefix)
+        if not self.request.user.may.write(normalised_name):
+            return None
         if normalised_name is None:
             return None
         return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
@@ -350,7 +361,11 @@ class AbstractTagStore(object):
     def get_all_tags(self):
         """ Returns a list of all Tag objects associated to this page. """
         return NotImplemented
-    
+
+    def get_last_tag(self):
+        """ Returns the newest tag. """
+        return NotImplemented
+
     def clear(self):
         """ Removes all tags. """
         return NotImplemented
@@ -368,51 +383,65 @@ class PickleTagStore(AbstractTagStore):
         
         @param page: a Page object where the tags should be related to
         """
-        
+
         self.page = page
         self.filename = page.getPagePath('synctags', use_underlay=0, check_create=1, isfile=1)
         lock_dir = os.path.join(page.getPagePath('cache', use_underlay=0, check_create=1), '__taglock__')
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
-        self.load()
 
-    def load(self):
-        """ Loads the tags from the data file. """
         if not self.rlock.acquire(3.0):
             raise EnvironmentError("Could not lock in PickleTagStore")
         try:
-            try:
-                datafile = file(self.filename, "rb")
-            except IOError:
-                self.tags = []
-            else:
-                self.tags = pickle.load(datafile)
-                datafile.close()
+            self.load()
         finally:
             self.rlock.release()
+
+    def load(self):
+        """ Loads the tags from the data file. """
+        try:
+            datafile = file(self.filename, "rb")
+            self.tags = pickle.load(datafile)
+        except (IOError, EOFError):
+            self.tags = []
+        else:
+            datafile.close()
     
     def commit(self):
         """ Writes the memory contents to the data file. """
-        if not self.wlock.acquire(3.0):
-            raise EnvironmentError("Could not lock in PickleTagStore")
-        try:
-            datafile = file(self.filename, "wb")
-            pickle.dump(self.tags, datafile, protocol=pickle.HIGHEST_PROTOCOL)
-            datafile.close()
-        finally:
-            self.wlock.release()
+        datafile = file(self.filename, "wb")
+        pickle.dump(self.tags, datafile, pickle.HIGHEST_PROTOCOL)
+        datafile.close()
 
     # public methods ---------------------------------------------------
     def add(self, **kwargs):
-        self.tags.append(Tag(**kwargs))
-        self.commit()
-    
+        if not self.wlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
+        try:
+            self.load()
+            self.tags.append(Tag(**kwargs))
+            self.commit()
+        finally:
+            self.wlock.release()
+
     def get_all_tags(self):
-        return self.tags
+        return self.tags[:]
+
+    def get_last_tag(self):
+        temp = self.tags[:]
+        temp.sort()
+        if not temp:
+            return None
+        return temp[-1]
 
     def clear(self):
         self.tags = []
-        self.commit()
+        if not self.wlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in PickleTagStore")
+        try:
+            self.commit()
+        finally:
+            self.wlock.release()
 
     def fetch(self, iwid_full, direction=None):
         iwid_full = unpackLine(iwid_full)
