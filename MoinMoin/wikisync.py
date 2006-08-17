@@ -44,7 +44,8 @@ class UnsupportedWikiException(Exception): pass
 
 class SyncPage(object):
     """ This class represents a page in one or two wiki(s). """
-    def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
+    def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None,
+                 local_deleted=False, remote_deleted=False):
         """ Creates a SyncPage instance.
             @param name: The canonical name of the page, without prefixes.
             @param local_rev: The revision of the page in the local wiki.
@@ -59,6 +60,8 @@ class SyncPage(object):
         self.remote_name = remote_name
         assert local_rev or remote_rev
         assert local_name or remote_name
+        self.local_deleted = local_deleted
+        self.remote_deleted = remote_deleted
         self.local_mime_type = MIMETYPE_MOIN   # XXX no usable storage API yet
         self.remote_mime_type = MIMETYPE_MOIN
 
@@ -110,6 +113,7 @@ class SyncPage(object):
             if sp in d:
                 d[sp].remote_rev = sp.remote_rev
                 d[sp].remote_name = sp.remote_name
+                d[sp].remote_deleted = sp.remote_deleted
                 # XXX merge mime type here
             else:
                 d[sp] = sp
@@ -240,14 +244,15 @@ class MoinRemoteWiki(RemoteWiki):
                    "exclude_non_writable": kwargs["exclude_non_writable"],
                    "include_underlay": False,
                    "prefix": self.prefix,
-                   "pagelist": self.pagelist}
+                   "pagelist": self.pagelist,
+                   "mark_deleted": True}
         pages = self.connection.getAllPagesEx(options)
         rpages = []
         for name, revno in pages:
             normalised_name = normalise_pagename(name, self.prefix)
             if normalised_name is None:
                 continue
-            rpages.append(SyncPage(normalised_name, remote_rev=revno, remote_name=name))
+            rpages.append(SyncPage(normalised_name, remote_rev=abs(revno), remote_name=name, remote_deleted=revno < 0))
         return rpages
 
     def __repr__(self):
@@ -274,7 +279,8 @@ class MoinLocalWiki(RemoteWiki):
             return None
         if normalised_name is None:
             return None
-        return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
+        page = Page(self.request, page_name)
+        return SyncPage(normalised_name, local_rev=page.get_real_rev(), local_name=page_name, local_deleted=not page.exists())
 
     # Public methods:
 
@@ -298,7 +304,7 @@ class MoinLocalWiki(RemoteWiki):
         else:
             page_filter = lambda x: True
         pages = []
-        for x in self.request.rootpage.getPageList(exists=1, include_underlay=False, filter=page_filter):
+        for x in self.request.rootpage.getPageList(exists=False, include_underlay=False, filter=page_filter):
             sp = self.createSyncPage(x)
             if sp:
                 pages.append(sp)
