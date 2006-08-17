@@ -21,14 +21,18 @@ def rename(oldname, newname):
 
     Move to MoinMoin.util.filesys when done.
 
-    TODO: Implement for win32 using win32file.MoveFileEx("old.txt", "new.txt" , win32file.MOVEFILE_REPLACE_EXISTING)
-          BTW: If the new filename is None, it deletes the file (needs very recent pywin32 binding).
-          
-    Windows 95 does not implement MoveFileEx() (MSDN).
-    Windows 98 also does not implement MoveFileEx() (http://mail.python.org/pipermail/spambayes/2003-March/003866.html).
-    Windows ME maybe also does not.
-    Maybe just drop support for non-NT based windows?
-    I guess this depends on pywin32 for doing that call?
+    TODO:
+    Test/Fix win32 stuff.
+    
+    Check: MoveFileEx: If the new filename is None, it deletes the file (needs very recent pywin32 binding).
+           This is documented for the "on reboot" stuff, does this also work when not doing it on next reboot?
+           Maybe we can use this at another place.
+           
+    API doc: http://msdn.microsoft.com/library/default.asp?url=/library/en-us/fileio/fs/movefileex.asp
+    
+    Windows 95/98/ME do not implement MoveFileEx().
+    Either have some other working code or document we drop support for less-than-NT.
+    Document pywin32 extension dependency.
 
     """
     # this nt specific code should be replaced by better stuff
@@ -37,11 +41,13 @@ def rename(oldname, newname):
         # there seems to be also stuff in win32api.MoveFileEx and win32con.MOVEFILE_REPLACE_EXISTING
         # what's the difference to them in win32file?
         from win32file import MoveFileEx, MOVEFILE_REPLACE_EXISTING
-        # add error handling, check code calling us
-        MoveFileEx(oldname, newname, MOVEFILE_REPLACE_EXISTING)
-        return whatever # XXX
+        ret = MoveFileEx(oldname, newname, MOVEFILE_REPLACE_EXISTING)
+        # If the function succeeds, the return value is nonzero.
+        # If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError.
+        if ret == 0:
+            raise OSError # emulate os.rename behaviour
     else:
-        return os.rename(oldname, newname)
+        os.rename(oldname, newname) # rename has no return value, but raises OSError in case of failure
 
 
 class NewLockTests(unittest.TestCase):
