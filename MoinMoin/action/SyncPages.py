@@ -184,6 +184,11 @@ class ActionClass(object):
         _ = lambda x: x # we will translate it later
 
         direction = params["direction"]
+        if direction == BOTH:
+            match_direction = direction
+        else:
+            match_direction = None
+
         local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
         remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
@@ -209,7 +214,7 @@ class ActionClass(object):
         on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
         remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
         local_but_not_remote = list(SyncPage.iter_local_only(m_pages))
-        
+
         # some initial test code (XXX remove)
         #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
         #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
@@ -226,11 +231,8 @@ class ActionClass(object):
             current_rev = current_page.get_real_rev()
 
             tags = TagStore(current_page)
-            if direction == BOTH:
-                match_direction = direction
-            else:
-                match_direction = None
-            matching_tags = tags.fetch(iwid_full=remote.iwid_full,direction=match_direction)
+
+            matching_tags = tags.fetch(iwid_full=remote.iwid_full, direction=match_direction)
             matching_tags.sort()
             #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
 
@@ -250,7 +252,7 @@ class ActionClass(object):
                     self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (rp.name, ))
                     continue
                 if rp.local_mime_type != rp.remote_mime_type:
-                    self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."),(rp.name, ))
+                    self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (rp.name, ))
                     continue
                 if newest_tag.normalised_name != rp.name:
                     self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore all syncronisation history is lost for this page."), (rp.name, )) # XXX implement renames
