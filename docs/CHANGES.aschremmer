@@ -7,20 +7,22 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo:
-    * Tags should store the page name to recognise renaming scenarios.
     * Implement all syncronisation cases (all 3 page sets).
-    * Test with prefixes
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Attach the status information to the job page.
-    * Show tags in an action=info view?
-    * Implement a cross-site authentication system, i.e. mainly an
-      identity storage. (does OpenID make sense?)
-    * Clean up trailing whitespace.
-    * Add page locking, i.e. use the one in the new storage layer.
     * Check what needs to be documented on MoinMaster.
+
+    * Show tags in an action=info view?
+
+    * Test with prefixes
     * Search for XXX
     * Maybe refactor YYY into MoinLocalWiki
     * Remove amount of "very" in the code
+    * Clean up trailing whitespace.
+
+    * Implement a cross-site authentication system, i.e. mainly an
+      identity storage. (does OpenID make sense?)
+    * Add page locking, i.e. use the one in the new storage layer.
     * Do older tags of one wiki site have to be stored as well? Why don't we
       keep just one tag?
     * Put author names into the comment field, transmit mimetypes.
@@ -54,6 +56,7 @@ Branch moin/1.6-sync-aschremmer
     * Fixed the MetaDict code to use locks.
     * Fixed bug in request.py that avoided showing a traceback if there was a fault
       after the first headers were sent.
+    * Fixed severe race conditions in the meta dict and the sync tags code.
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
@@ -91,8 +94,9 @@ Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added pre
 Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
          using pickle-based storage. Added getAllPagesEx XMLRPC method.
 Week 30: Implemented IWID support, added function to generate random strings. Added support
-         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and the MetaDict classes. Added handling of
-         various options and detection of anonymous wikis to the SyncPages action.
+         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and
+         the MetaDict classes. Added handling of various options and detection of anonymous
+         wikis to the SyncPages action.
 Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
          fixed option handling again, refined semantics of options, introduced
          direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
@@ -105,8 +109,9 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
          either of both components when searching for tags. Ignore underlay pages. Filter the remote page list by
          the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
-         Started designing the solutions for the other sync cases. Store and transmit the
-         normalised name.
+Week 33: Started designing the solutions for the other sync cases. Store and transmit the
+         normalised name. Implemented preliminary mime type support, only transmission of the mime type
+         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
