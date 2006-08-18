@@ -11,6 +11,7 @@
 '''
 
 from MoinMoin import config, wikiutil, search
+from MoinMoin.i18n import languages
 
 Dependencies = ['pages']
 
@@ -43,21 +44,30 @@ def advanced_ui(macro):
         )
     ])
 
+    langs = dict([(lang, lmeta['x-language-in-english'])
+        for lang, lmeta in languages.iteritems()])
+    lang_dropdown = ''.join([
+        u'<select name="language" size="1">',
+        ''.join(['<option value="%s">%s</option>' % i for i in
+            langs.items()]),
+        u'</select>',
+    ])
+
     search_options = ''.join([
         ''.join([
             f.table_row(1),
             f.table_cell(1, colspan=2),
-            f.text(_(txt)),
+            txt,
             f.table_cell(0),
             f.table_row(0),
-        ]) for txt in ('Language', 'xxxx')
+            ]) for txt in ('Language:' + lang_dropdown, 'xxxx')
     ])
     
     html = [
         u'<form method="get" action="">',
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
-        u'<input type="hidden" name="titlesearch" value="%i">' % 0,
+        u'<input type="hidden" name="titlesearch" value="0">',
         f.table(1),
         search_boxes,
         search_options,
