@@ -822,7 +822,6 @@ class XmlRpcBase:
         if os.path.exists(filename) and not os.path.isfile(filename):
             return self.noSuchPageFault()
         open(filename, 'wb+').write(data.data)
-        os.chmod(filename, 0666 & config.umask)
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
 

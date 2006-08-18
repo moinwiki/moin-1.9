@@ -461,7 +461,6 @@ class MetaDict(dict):
         metafile = codecs.open(self.metafilename, "w", "utf-8")
         metafile.write(meta)
         metafile.close()
-        filesys.chmod(self.metafilename, 0666 & config.umask)
         self.dirty = False
 
     def sync(self, mtime_usecs=None):

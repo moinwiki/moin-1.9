@@ -99,10 +99,6 @@ class CacheEntry:
                 shutil.copyfile(filename, tmpfname)
                 # this is either atomic or happening with real locks set:
                 filesys.rename(tmpfname, fname)
-                try:
-                    os.chmod(self._filename(), 0666 & config.umask)
-                except OSError:
-                    pass
             finally:
                 if self.locking:
                     self.wlock.release()
@@ -124,10 +120,6 @@ class CacheEntry:
                 f.close()
                 # this is either atomic or happening with real locks set:
                 filesys.rename(tmpfname, fname)
-                try:
-                    os.chmod(fname, 0666 & config.umask)
-                except OSError:
-                    pass
             finally:
                 if self.locking:
                     self.wlock.release()

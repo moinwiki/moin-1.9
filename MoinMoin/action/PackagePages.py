@@ -113,8 +113,6 @@ class PackagePages:
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
         zf.close()
 
-        os.chmod(fpath, 0666 & config.umask)
-
         _addLogEntry(self.request, 'ATTNEW', self.pagename, target)
 
         raise ActionError(_("Created the package %s containing the pages %s.") % (wikiutil.escape(target), wikiutil.escape(pagelist)))

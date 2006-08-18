@@ -228,6 +228,9 @@ Version 1.5-current:
      * the count of created threads is limited now (default: 5), you can use 1
        to use non-threaded operation.
      * configurable socket.listen() backlog (default: 5)
+  * tuning:
+    * more efficient locking code on POSIX platforms, we do much less I/O there now
+    * removed most chmod calls in favour of a single os.umask call
   
 Version 1.5.4:
     HINT: read docs/README.migration.
