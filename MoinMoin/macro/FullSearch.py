@@ -23,7 +23,8 @@
     context argument, or make another macro that use context, which may
     be easier to use.
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+                2005 MoinMoin:FranzPletz
     @license: GNU GPL, see COPYING for details.
 """
 
