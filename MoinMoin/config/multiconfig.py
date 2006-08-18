@@ -404,7 +404,25 @@ reStructuredText Quick Reference
 
     # Wiki identity
     sitename = u'Untitled Wiki'
-    url_prefix = '/wiki'
+
+    # url_prefix is DEPRECATED and not used any more by the code.
+    # it confused many people by its name and default value of '/wiki' to the
+    # wrong conclusion that it is the url of the wiki (the dynamic) stuff,
+    # but it was used to address the static stuff (images, css, js).
+    # Thus we use the more clear url_prefix_static ['/staticXXX'] setting now.
+    # For a limited time, we still look at url_prefix - if it is not None, we
+    # copy the value to url_prefix_static to ease transition.
+    url_prefix = None
+
+    # include the moin version number, so we can have a unlimited cache lifetime
+    # for the static stuff. if stuff changes on version upgrade, url will change
+    # immediately and we have no problem with stale caches.
+    url_prefix_static = '/moin_static160'
+
+    # we need to prefix actions to be able to exclude them by robots.txt:
+    # TODO:
+    # url_prefix_action = '/action'
+
     logo_string = None
     interwikiname = None
 
@@ -561,6 +579,9 @@ reStructuredText Quick Reference
         self._acl_rights_before = AccessControlList(self, [self.acl_rights_before])
         self._acl_rights_default = AccessControlList(self, [self.acl_rights_default])
         self._acl_rights_after = AccessControlList(self, [self.acl_rights_after])
+
+        if self.url_prefix is not None: # remove this code when url_prefix setting is removed
+            self.url_prefix_static = self.url_prefix
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """

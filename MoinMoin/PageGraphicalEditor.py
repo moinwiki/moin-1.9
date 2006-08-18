@@ -249,13 +249,13 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         lang = self.language or self.request.cfg.language_default
         contentlangdirection = i18n.getDirection(lang) # 'ltr' or 'rtl'
         uilanguage = self.request.lang
-        url_prefix = self.request.cfg.url_prefix
+        url_prefix_static = self.request.cfg.url_prefix_static
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
-        fckbasepath = url_prefix + '/applets/FCKeditor'
+        fckbasepath = url_prefix_static + '/applets/FCKeditor'
         wikiurl = request.getScriptname()
         if not wikiurl or wikiurl[-1] != '/':
             wikiurl += '/'
-        themepath = '%s/%s' % (url_prefix, self.request.theme.name)
+        themepath = '%s/%s' % (url_prefix_static, self.request.theme.name)
         smileypath = themepath + '/img'
         # auto-generating a list for SmileyImages does NOT work from here!
         editor_size = int(request.user.edit_rows) * 22 # 22 height_pixels/line
@@ -269,8 +269,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     oFCKeditor.BasePath= '%(fckbasepath)s/' ;
     oFCKeditor.Config['WikiBasePath'] = '%(wikiurl)s' ;
     oFCKeditor.Config['WikiPage'] = '%(wikipage)s' ;
-    oFCKeditor.Config['PluginsPath'] = '%(url_prefix)s/applets/moinFCKplugins/' ;
-    oFCKeditor.Config['CustomConfigurationsPath'] = '%(url_prefix)s/applets/moinfckconfig.js'  ;
+    oFCKeditor.Config['PluginsPath'] = '%(url_prefix_static)s/applets/moinFCKplugins/' ;
+    oFCKeditor.Config['CustomConfigurationsPath'] = '%(url_prefix_static)s/applets/moinfckconfig.js'  ;
     oFCKeditor.Config['WordRule'] = %(word_rule)s ;
     oFCKeditor.Config['SmileyPath'] = '%(smileypath)s/' ;
     oFCKeditor.Config['EditorAreaCSS'] = '%(themepath)s/css/common.css' ;

@@ -449,7 +449,7 @@ def execute(macro, text):
 // -->
 </script>
 %s
-""" % (request.cfg.url_prefix, "\n".join(maketip_js), restable)
+""" % (request.cfg.url_prefix_static, "\n".join(maketip_js), restable)
     return formatter.rawHTML(result)
 
 # EOF
