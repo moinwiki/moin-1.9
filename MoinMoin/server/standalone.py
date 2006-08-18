@@ -287,11 +287,11 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """ Handle requests (request type GET/HEAD/POST is in self.command)
 
         Separate between wiki pages and css and image url by similar
-        system as cgi and twisted, the '/wiki/' url prefix.
+        system as cgi and twisted, the '/staticXXX/' url prefix.
 
-        TODO: should use url_prefix - and not a constant but
+        TODO: should use url_prefix_static - and not a constant but
         request is not available at this time.  Should be fixed by
-        having url_prefix in a server config.
+        having url_prefix_static in a server config.
         """
         if self.path.startswith('/wiki/'):
             self.path = self.path[5:]

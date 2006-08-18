@@ -156,7 +156,7 @@ class ThemeBase:
         @rtype: string
         @return: the image href
         """
-        return "%s/%s/img/%s" % (self.cfg.url_prefix, self.name, img)
+        return "%s/%s/img/%s" % (self.cfg.url_prefix_static, self.name, img)
 
     def emit_custom_html(self, html):
         """
@@ -592,7 +592,7 @@ class ThemeBase:
 
         # Create stylesheets links
         html = []
-        prefix = self.cfg.url_prefix
+        prefix = self.cfg.url_prefix_static
         csshref = '%s/%s/css' % (prefix, self.name)
         for media, basename in stylesheets:
             href = '%s/%s.css' % (csshref, basename)
@@ -883,7 +883,7 @@ function actionsMenuInit(title) {
 
     def externalScript(self, name):
         """ Format external script html """
-        src = '%s/common/js/%s.js' % (self.request.cfg.url_prefix, name)
+        src = '%s/common/js/%s.js' % (self.request.cfg.url_prefix_static, name)
         return '<script type="text/javascript" src="%s"></script>' % src
 
     def credits(self, d, **keywords):

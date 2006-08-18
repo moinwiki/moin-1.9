@@ -379,7 +379,7 @@ def send_hotdraw(pagename, request):
     _ = request.getText
 
     now = time.time()
-    pubpath = request.cfg.url_prefix + "/applets/TWikiDrawPlugin"
+    pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
     basename = request.form['drawing'][0]
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)

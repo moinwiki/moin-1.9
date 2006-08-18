@@ -654,7 +654,7 @@ class SearchResults:
 
     def _img_url(self, img):
         cfg = self.request.cfg
-        return '%s/%s/img/%s.png' % (cfg.url_prefix, self.request.theme.name, img)
+        return '%s/%s/img/%s.png' % (cfg.url_prefix_static, self.request.theme.name, img)
 
     def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
         """ Format previous and next page links in page
