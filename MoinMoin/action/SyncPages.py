@@ -346,7 +346,7 @@ class ActionClass(object):
         #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
         #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
 
-        for rp in on_both_sides:
+        for rp in m_pages: #on_both_sides:
             handle_page(rp)
 
 
