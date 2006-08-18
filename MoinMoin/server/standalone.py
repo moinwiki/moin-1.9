@@ -267,7 +267,7 @@ class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
 class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     bufferSize = 8 * 1024 # used to serve static files
-    staticExpire = 7 * 24 * 3600 # 1 week expiry for static files
+    staticExpire = 365 * 24 * 3600 # 1 year expiry for static files
 
     def __init__(self, request, client_address, server):
         self.server_version = "MoinMoin %s %s" % (version.revision,
@@ -293,7 +293,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         request is not available at this time.  Should be fixed by
         having url_prefix_static in a server config.
         """
-        if self.path.startswith('/wiki/'):
+        if self.path.startswith('/moin_static160/'): # XXX
             self.path = self.path[5:]
             self.serve_static_file()
         elif self.path in ['/favicon.ico', '/robots.txt']:
