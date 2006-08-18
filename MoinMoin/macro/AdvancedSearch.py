@@ -15,6 +15,14 @@ from MoinMoin.i18n import languages
 
 Dependencies = ['pages']
 
+try:
+    sorted
+except NameError:
+    def sorted(l, *args, **kw):
+        l = l[:]
+        l.sort(*args, *kw)
+        return l
+
 def advanced_ui(macro):
     _ = macro._
     f = macro.formatter
