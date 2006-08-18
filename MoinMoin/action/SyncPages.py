@@ -211,18 +211,9 @@ class ActionClass(object):
             m_pages = SyncPage.filter(m_pages, params["pageMatch"].match)
             self.log_status(self.INFO, _("After filtering: %s pages"), (str(len(m_pages)), ))
 
-        on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
-        remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
-        local_but_not_remote = list(SyncPage.iter_local_only(m_pages))
-
-        # some initial test code (XXX remove)
-        #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
-        #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
-        #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
-
-        # let's do the simple case first, can be refactored later to match all cases
-        # XXX handle deleted pages
-        for rp in on_both_sides:
+        def handle_page(rp):
+            # let's do the simple case first, can be refactored later to match all cases
+            # XXX handle deleted pages
             # XXX add locking, acquire read-lock on rp
             # XXX print "Processing %r" % rp
 
@@ -247,13 +238,13 @@ class ActionClass(object):
                 
                 # handle some cases where we cannot continue for this page
                 if newest_tag.remote_rev == rp.remote_rev and (direction == DOWN or newest_tag.current_rev == current_rev):
-                    continue # no changes done, next page
+                    return # no changes done, next page
                 if rp.local_mime_type != MIMETYPE_MOIN and not (newest_tag.remote_rev == rp.remote_rev ^ newest_tag.current_rev == current_rev):
                     self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (rp.name, ))
-                    continue
+                    return
                 if rp.local_mime_type != rp.remote_mime_type:
                     self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (rp.name, ))
-                    continue
+                    return
                 if newest_tag.normalised_name != rp.name:
                     self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore all syncronisation history is lost for this page."), (rp.name, )) # XXX implement renames
                 else:
@@ -274,7 +265,7 @@ class ActionClass(object):
                 diff_result = remote.get_diff(rp.remote_name, remote_rev, None, normalised_name)
                 if diff_result is None:
                     self.log_status(ActionClass.ERROR, _("The page %s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced."), (rp.remote_name, ))
-                    continue
+                    return
                 is_remote_conflict = diff_result["conflict"]
                 assert diff_result["diffversion"] == 1
                 diff = diff_result["diff"]
@@ -292,7 +283,7 @@ class ActionClass(object):
             if (rp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body())
                 and (remote_rev is None or is_remote_conflict)):
                 self.log_status(ActionClass.WARN, _("Skipped page %s because of a locally or remotely unresolved conflict."), (local_pagename, ))
-                continue
+                return
 
             if remote_rev is None and direction == BOTH:
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
@@ -345,6 +336,19 @@ class ActionClass(object):
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
 
             # XXX release lock
+
+        on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
+        remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
+        local_but_not_remote = list(SyncPage.iter_local_only(m_pages))
+
+        # some initial test code (XXX remove)
+        #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
+        #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
+        #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
+
+        for rp in on_both_sides:
+            handle_page(rp)
+
 
 
 def execute(pagename, request):
