@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, tempfile, time, errno
+import os, sys, tempfile, time, errno
 
 
 # Temporary debugging aid, to be replaced with system wide debuging
@@ -262,7 +262,6 @@ class WriteLock(ExclusiveLock):
                 return True
         return False
 
-
 class ReadLock(ExclusiveLock):
     """ Read lock
     
@@ -304,4 +303,102 @@ class ReadLock(ExclusiveLock):
             finally:
                 self.writeLock.release()
         return False
+
+
+class LazyReadLock(ReadLock):
+    """ Lazy Read lock
+    
+    See ReadLock, but we do an optimization here:
+    If (and ONLY if) the resource protected by this lock is updated in a POSIX
+    style "write new content to tmpfile, rename tmpfile -> origfile", then reading
+    from an open origfile handle will give either the old content (when opened
+    before the rename happens) or the new content (when opened after the rename
+    happened), but never cause any trouble. This means that we don't have to lock
+    at all in that case.
+
+    Of course this doesn't work for us on the win32 platform:
+    * using MoveFileEx requires opening the file with some FILE_SHARE_DELETE
+      mode - we currently don't do that
+    * Win 95/98/ME do not have MoveFileEx
+    We currently solve by using the non-lazy locking code in ReadLock class.
+    """
+    def __init__(self, dir, timeout=None):
+        if sys.platform == 'win32':
+            ReadLock.__init__(self, dir, timeout)
+        else: # POSIX
+            self._locked = False
+
+    def acquire(self, timeout=None):
+        if sys.platform == 'win32':
+            return ReadLock.acquire(self, timeout)
+        else: # POSIX
+            self._locked = True
+            return True
+
+    def release(self):
+        if sys.platform == 'win32':
+            return ReadLock.release(self)
+        else:  # POSIX
+            self._locked = False
+
+    def exists(self):
+        if sys.platform == 'win32':
+            return ReadLock.exists(self)
+        else: # POSIX
+            return True
+
+    def isExpired(self):
+        if sys.platform == 'win32':
+            return ReadLock.isExpired(self)
+        else: # POSIX
+            return True
+
+    def expire(self):
+        if sys.platform == 'win32':
+            return ReadLock.expire(self)
+        else: # POSIX
+            return True
+
+class LazyWriteLock(WriteLock):
+    """ Lazy Write lock
+    
+    See WriteLock and LazyReadLock docs.
+    """
+    def __init__(self, dir, timeout=None):
+        if sys.platform == 'win32':
+            WriteLock.__init__(self, dir, timeout)
+        else: # POSIX
+            self._locked = False
+
+    def acquire(self, timeout=None):
+        if sys.platform == 'win32':
+            return WriteLock.acquire(self, timeout)
+        else: # POSIX
+            self._locked = True
+            return True
+
+    def release(self):
+        if sys.platform == 'win32':
+            return WriteLock.release(self)
+        else:  # POSIX
+            self._locked = False
+
+    def exists(self):
+        if sys.platform == 'win32':
+            return WriteLock.exists(self)
+        else: # POSIX
+            return True
+
+    def isExpired(self):
+        if sys.platform == 'win32':
+            return WriteLock.isExpired(self)
+        else: # POSIX
+            return True
+
+    def expire(self):
+        if sys.platform == 'win32':
+            return WriteLock.expire(self)
+        else: # POSIX
+            return True
+
 

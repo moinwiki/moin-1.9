@@ -40,7 +40,7 @@ Local:
 
 See docs/CHANGES                 for a version history. READ THIS!
 See docs/INSTALL.html            for installation instructions.
-See docs/UPDATE.html             for updating instructions.
+See docs/README.migration        for data conversion instructions.
 
 Note that the code base contains some experimental or unfinished features.
 Use them at your own risk. Official features are described on the set of

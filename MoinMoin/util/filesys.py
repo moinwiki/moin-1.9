@@ -52,7 +52,7 @@ makeDirs = makedirs
 
 
 def rename(oldname, newname):
-    ''' Multiplatform rename
+    """ Multiplatform rename
 
     Needed because win32 rename is not POSIX compliant, and does not
     remove target file if it exists.
@@ -62,14 +62,14 @@ def rename(oldname, newname):
     FIXME: What about rename locking? we can have a lock file in the
     page directory, named: PageName.lock, and lock this file before we
     rename, then unlock when finished.
-    '''
+    """
     if os.name == 'nt':
         if os.path.isfile(newname):
             try:
                 os.remove(newname)
             except OSError, er:
                 pass # let os.rename give us the error (if any)
-    return os.rename(oldname, newname)
+    os.rename(oldname, newname)
 
 
 def copystat(src, dst):

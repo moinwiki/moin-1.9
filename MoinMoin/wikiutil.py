@@ -11,7 +11,6 @@ import codecs
 import os
 import re
 import time
-import types
 import urllib
 
 from MoinMoin import util, version, config
@@ -409,17 +408,22 @@ INTEGER_METAS = ['current', 'revision', # for page storage (moin 2.0)
 
 class MetaDict(dict):
     """ store meta informations as a dict.
-    XXX It is not thread-safe, add locks!
     """
     def __init__(self, metafilename, cache_directory):
         """ create a MetaDict from metafilename """
         dict.__init__(self)
         self.metafilename = metafilename
         self.dirty = False
-        self.loaded = False
         lock_dir = os.path.join(cache_directory, '__metalock__')
         self.rlock = lock.ReadLock(lock_dir, 60.0)
         self.wlock = lock.WriteLock(lock_dir, 60.0)
+
+        if not self.rlock.acquire(3.0):
+            raise EnvironmentError("Could not lock in MetaDict")
+        try:
+            self._get_meta()
+        finally:
+            self.rlock.release()
 
     def _get_meta(self):
         """ get the meta dict from an arbitrary filename.
@@ -429,14 +433,9 @@ class MetaDict(dict):
         """
 
         try:
-            if not self.rlock.acquire(3.0):
-                raise EnvironmentError("Could not lock in MetaDict")
-            try:
-                metafile = codecs.open(self.metafilename, "r", "utf-8")
-                meta = metafile.read() # this is much faster than the file's line-by-line iterator
-                metafile.close()
-            finally:
-                self.rlock.release()
+            metafile = codecs.open(self.metafilename, "r", "utf-8")
+            meta = metafile.read() # this is much faster than the file's line-by-line iterator
+            metafile.close()
         except IOError:
             meta = u''
         for line in meta.splitlines():
@@ -445,7 +444,6 @@ class MetaDict(dict):
             if key in INTEGER_METAS:
                 value = int(value)
             dict.__setitem__(self, key, value)
-        self.loaded = True
 
     def _put_meta(self):
         """ put the meta dict into an arbitrary filename.
@@ -460,44 +458,37 @@ class MetaDict(dict):
             meta.append("%s: %s" % (key, value))
         meta = '\r\n'.join(meta)
 
-        if not self.wlock.acquire(5.0):
-            raise EnvironmentError("Could not lock in MetaDict")
-        try:
-            metafile = codecs.open(self.metafilename, "w", "utf-8")
-            metafile.write(meta)
-            metafile.close()
-        finally:
-            self.wlock.release()
+        metafile = codecs.open(self.metafilename, "w", "utf-8")
+        metafile.write(meta)
+        metafile.close()
         filesys.chmod(self.metafilename, 0666 & config.umask)
         self.dirty = False
 
     def sync(self, mtime_usecs=None):
-        """ sync the in-memory dict to the persistent store (if dirty) """
-        if self.dirty:
-            if not mtime_usecs is None:
-                self.__setitem__('mtime', str(mtime_usecs))
-            self._put_meta()
+        """ No-Op except for that parameter """
+        if not mtime_usecs is None:
+            self.__setitem__('mtime', str(mtime_usecs))
+        # otherwise no-op
 
     def __getitem__(self, key):
-        try:
-            return dict.__getitem__(self, key)
-        except KeyError:
-            if not self.loaded:
-                self._get_meta() # lazy loading of metadata
-                return dict.__getitem__(self, key)
-            else:
-                raise
+        """ We don't care for cache coherency here. """
+        return dict.__getitem__(self, key)
 
     def __setitem__(self, key, value):
-        """ Sets a dictionary entry. You actually have to call sync to write it
-            to the persistent store. """
+        """ Sets a dictionary entry. """
+        if not self.wlock.acquire(5.0):
+            raise EnvironmentError("Could not lock in MetaDict")
         try:
-            oldvalue = dict.__getitem__(self, key)
-        except KeyError:
-            oldvalue = None
-        if value != oldvalue:
-            dict.__setitem__(self, key, value)
-            self.dirty = True
+            self._get_meta() # refresh cache
+            try:
+                oldvalue = dict.__getitem__(self, key)
+            except KeyError:
+                oldvalue = None
+            if value != oldvalue:
+                dict.__setitem__(self, key, value)
+                self._put_meta() # sync cache
+        finally:
+            self.wlock.release()
 
 
 #############################################################################
@@ -1131,7 +1122,7 @@ def getParserForExtension(cfg, extension):
                 continue
             if hasattr(Parser, 'extensions'):
                 exts = Parser.extensions
-                if type(exts) == types.ListType:
+                if isinstance(exts, list):
                     for ext in Parser.extensions:
                         etp[ext] = Parser
                 elif str(exts) == '*':
@@ -1531,14 +1522,14 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 
 def createTicket(tm=None):
     """Create a ticket using a site-specific secret (the config)"""
-    import sha, time, types
+    import sha
     ticket = tm or "%010x" % time.time()
     digest = sha.new()
     digest.update(ticket)
 
     cfgvars = vars(config)
     for var in cfgvars.values():
-        if type(var) is types.StringType:
+        if isinstance(var, str):
             digest.update(repr(var))
 
     return "%s.%s" % (ticket, digest.hexdigest())

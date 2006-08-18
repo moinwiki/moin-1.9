@@ -77,16 +77,16 @@ def process_message(message):
     html_data = []
     text_data = []
 
-    to_addr = get_addrs(message, 'To')[0]
     from_addr = get_addrs(message, 'From')[0]
+    to_addrs = get_addrs(message, 'To')
     cc_addrs = get_addrs(message, 'Cc')
     bcc_addrs = get_addrs(message, 'Bcc')
-    target_addrs = [to_addr] + cc_addrs + bcc_addrs
+    target_addrs = to_addrs + cc_addrs + bcc_addrs
 
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
 
-    log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addr, from_addr, subject))
+    log("Processing mail:\n To: %r\n From: %r\n Subject: %r" % (to_addrs[0], from_addr, subject))
 
     for part in message.walk():
         log(" Part " + repr((part.get_charsets(), part.get_content_charset(), part.get_content_type(), part.is_multipart(), )))
@@ -117,14 +117,13 @@ def process_message(message):
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
             'attachments': attachments,
-            'target_addrs': target_addrs, 'to_addr': to_addr, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
+            'target_addrs': target_addrs, 'to_addrs': to_addrs, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(msg, email_subpage_template, wiki_address):
+def get_pagename_content(request, msg, email_subpage_template, wiki_address):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
-
     generate_summary = False
     choose_html = True
 
@@ -147,6 +146,10 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
         if pagename_tpl[-1] == pagename_tpl[0] == "'":
             pagename_tpl = pagename_tpl[1:-1]
 
+    if not msg['subject'].strip():
+        msg['subject'] = '(...)' # we need non-empty subject
+
+    pagename_tpl = pagename_tpl.strip()
     if pagename_tpl.endswith("/"):
         pagename_tpl += email_subpage_template
 
@@ -162,6 +165,8 @@ def get_pagename_content(msg, email_subpage_template, wiki_address):
     if pagename.startswith("+ ") and "/" in pagename:
         generate_summary = True
         pagename = pagename[1:].lstrip()
+
+    pagename = request.normalizePagename(pagename)
 
     if choose_html and msg['html']:
         content = "{{{#!html\n%s\n}}}" % msg['html'].replace("}}}", "} } }")
@@ -194,7 +199,7 @@ def import_mail_from_message(request, message):
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(msg, email_subpage_template, wiki_address)
+    d = get_pagename_content(request, msg, email_subpage_template, wiki_address)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
@@ -235,9 +240,14 @@ def import_mail_from_message(request, message):
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
     if old_content:
-        new_content = u"%s\n-----\n%s" % (old_content, d['content'], )
+        new_content = u"%s\n-----\n" % old_content
     else:
-        new_content = d['content']
+        new_content = ''
+
+    if not (generate_summary and "/" in pagename):
+        new_content += u"'''Mail: %s (%s, [[DateTime(%s)]])'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
+
+    new_content += d['content']
     new_content += "\n" + u"\n * ".join(attachment_links)
 
     try:
@@ -260,17 +270,16 @@ def import_mail_from_message(request, message):
                 break
 
         table_header = (u"\n\n## mail_overview (don't delete this line)\n" +
-                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Subject)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Link)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
+                        u"|| '''[[GetText(From)]] ''' || '''[[GetText(To)]] ''' || '''[[GetText(Content)]] ''' || '''[[GetText(Date)]] ''' || '''[[GetText(Attachments)]] ''' ||\n"
                        )
 
         from_col = email_to_markup(request, msg['from_addr'])
-        to_col = ' '.join([email_to_markup(request, (realname, mailaddr)) for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
-        subj_col = msg['subject']
+        to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
+                           for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
+        subj_col = '["%s" %s]' % (pagename, msg['subject'])
         date_col = msg['date']
-        page_col = pagename
         attach_col = " ".join(attachment_links)
-        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || ["%s"] || %s ||' % (
-                    from_col, to_col, subj_col, date_col, page_col, attach_col)
+        new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || %s ||' % (from_col, to_col, subj_col, date_col, attach_col)
         if found_table is not None:
             content = "\n".join(old_content[:table_ends] + [new_line] + old_content[table_ends:])
         else:

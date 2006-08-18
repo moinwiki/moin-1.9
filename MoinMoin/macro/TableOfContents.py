@@ -67,7 +67,7 @@ class TableOfContents:
         if self.include_macro is None:
             self.include_macro = wikiutil.importPlugin(self.macro.request.cfg,
                                                        'macro', "Include")
-        return self.pre_re.sub('', apply(self.include_macro, args, kwargs)).split('\n')
+        return self.pre_re.sub('', self.include_macro(*args, **kwargs)).split('\n')
 
     def run(self):
         _ = self._

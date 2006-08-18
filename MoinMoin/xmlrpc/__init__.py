@@ -125,11 +125,14 @@ class XmlRpcBase:
             # report exception back to server
             response = xmlrpclib.dumps(xmlrpclib.Fault(1, self._dump_exc()))
         else:
-            # wrap response in a singleton tuple
-            response = (response,)
-
-            # serialize it
-            response = xmlrpclib.dumps(response, methodresponse=1)
+            if isinstance(response, xmlrpclib.Fault):
+                response = xmlrpclib.dumps(response)
+            else:
+                # wrap response in a singleton tuple
+                response = (response,)
+    
+                # serialize it
+                response = xmlrpclib.dumps(response, methodresponse=1)
 
         self.request.emit_http_headers([
             "Content-Type: text/xml; charset=utf-8",
@@ -235,22 +238,52 @@ class XmlRpcBase:
                 include_system:: set it to false if you do not want to see system pages
                 include_revno:: set it to True if you want to have lists with [pagename, revno]
                 include_deleted:: set it to True if you want to include deleted pages
+                exclude_non_writable:: do not include pages that the current user may not write to
+                include_underlay:: return underlay pagenames as well
+                prefix:: the page name must begin with this prefix to be included
+                mark_deleted:: returns the revision number -rev_no if the page was deleted.
+                    Makes only sense if you enable include_revno and include_deleted.
         @rtype: list
         @return: a list of all pages.
         """
-        options = {"include_system": True, "include_revno": False, "include_deleted": False}
+        from MoinMoin.wikisync import normalise_pagename
+        options = {"include_system": True, "include_revno": False, "include_deleted": False,
+                   "exclude_non_writable": False, "include_underlay": True, "prefix": "",
+                   "pagelist": None, "mark_deleted": False}
         if opts is not None:
             options.update(opts)
 
         if not options["include_system"]:
-            filter = lambda name: not wikiutil.isSystemPage(self.request, name)
+            p_filter = lambda name: not wikiutil.isSystemPage(self.request, name)
         else:
-            filter = lambda name: True
+            p_filter = lambda name: True
 
-        pagelist = self.request.rootpage.getPageList(filter=filter, exists=not options["include_deleted"])
+        if options["exclude_non_writable"]:
+            p_filter = lambda name, p_filter=p_filter: p_filter(name) and self.request.user.may.write(name)
+
+        if options["prefix"] or options["pagelist"]:
+            def p_filter(name, p_filter=p_filter, prefix=(options["prefix"] or ""), pagelist=options["pagelist"]):
+                if not p_filter(name):
+                    return False
+                n_name = normalise_pagename(name, prefix)
+                if not n_name:
+                    return False
+                if not pagelist:
+                    return True
+                return n_name in pagelist
+
+        pagelist = self.request.rootpage.getPageList(filter=p_filter, exists=not options["include_deleted"],
+                                                     include_underlay=options["include_underlay"],
+                                                     return_objects=options["include_revno"])
         
         if options['include_revno']:
-            return [[self._outstr(x), Page(self.request, x).get_real_rev()] for x in pagelist]
+            pages = []
+            for x in pagelist:
+                revno = x.get_real_rev()
+                if options["mark_deleted"] and not x.exists():
+                    revno = -revno
+                pages.append([self._outstr(x.page_name), revno])
+            return pages
         else:
             return [self._outstr(x) for x in pagelist]
 
@@ -553,11 +586,46 @@ class XmlRpcBase:
 
     # methods for wiki synchronization
 
-    def xmlrpc_getDiff(self, pagename, from_rev, to_rev):
-        """ Gets the binary difference between two page revisions. See MoinMoin:WikiSyncronisation. """
+    def xmlrpc_getDiff(self, pagename, from_rev, to_rev, n_name=None):
+        """ Gets the binary difference between two page revisions.
+
+            @param pagename: unicode string qualifying the page name
+
+            @param fromRev: integer specifying the source revision. May be None to
+            refer to a virtual empty revision which leads to a diff
+            containing the whole page.
+
+            @param toRev: integer specifying the target revision. May be None to
+            refer to the current revision. If the current revision is the same
+            as fromRev, there will be a special error condition "ALREADY_CURRENT"
+
+            @param n_name: do a tag check verifying that n_name was the normalised
+            name of the last tag
+
+            If both fromRev and toRev are None, this function acts similar to getPage, i.e. it will diff("",currentRev).
+
+            @return Returns a dict:
+            * status (not a field, implicit, returned as Fault if not SUCCESS):
+             * "SUCCESS" - if the diff could be retrieved successfully
+             * "NOT_EXIST" - item does not exist
+             * "FROMREV_INVALID" - the source revision is invalid
+             * "TOREV_INVALID" - the target revision is invalid
+             * "INTERNAL_ERROR" - there was an internal error
+             * "INVALID_TAG" - the last tag does not match the supplied normalised name
+             * "ALREADY_CURRENT" - this not merely an error condition. It rather means that
+             there is no new revision to diff against which is a good thing while
+             synchronisation.
+            * current: the revision number of the current revision (not the one which was diff'ed against)
+            * diff: Binary object that transports a zlib-compressed binary diff (see bdiff.py, taken from Mercurial)
+            * conflict: if there is a conflict on the page currently
+
+        """
         from MoinMoin.util.bdiff import textdiff, compress
+        from MoinMoin.wikisync import TagStore
 
         pagename = self._instr(pagename)
+        if n_name is not None:
+            n_name = self._instr(n_name)
 
         # User may read page?
         if not self.request.user.may.read(pagename):
@@ -593,7 +661,8 @@ class XmlRpcBase:
             oldcontents = lambda: oldpage.get_raw_body_str()
 
         if to_rev is None:
-            newcontents = lambda: currentpage.get_raw_body()
+            newpage = currentpage
+            newcontents = lambda: currentpage.get_raw_body_str()
         else:
             newpage = Page(self.request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
@@ -601,6 +670,12 @@ class XmlRpcBase:
 
         if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
             return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
+
+        if n_name is not None:
+            tags = TagStore(newpage)
+            last_tag = tags.get_last_tag()
+            if last_tag is not None and last_tag.normalised_name != n_name:
+                return xmlrpclib.Fault("INVALID_TAG", "The used tag is incorrect because the normalised name does not match.")
 
         newcontents = newcontents()
         conflict = wikiutil.containsConflictMarker(newcontents)
@@ -617,7 +692,7 @@ class XmlRpcBase:
         else:
             return [self._outstr(name), iwid]
 
-    def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name):
+    def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, normalised_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
             Additionally, this method tags the new revision.
             
@@ -627,9 +702,10 @@ class XmlRpcBase:
             @param delta_remote_rev: The revno that the diff is taken against.
             @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
             @param interwiki_name: Used to build the interwiki tag.
+            @param normalised_name: The normalised pagename that is common to both wikis.
         """
         from MoinMoin.util.bdiff import decompress, patch
-        from MoinMoin.wikisync import TagStore
+        from MoinMoin.wikisync import TagStore, BOTH
         LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
 
         pagename = self._instr(pagename)
@@ -656,17 +732,20 @@ class XmlRpcBase:
 
         # generate the new page revision by applying the diff
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
+        #print "Diff against %r" % basepage.get_raw_body_str()
 
         # write page
         try:
-            currentpage.saveText(newcontents.encode("utf-8"), last_remote_rev, comment=comment)
+            currentpage.saveText(newcontents.decode("utf-8"), last_remote_rev, comment=comment)
+        except PageEditor.Unchanged: # could happen in case of both wiki's pages being equal
+            pass
         except PageEditor.EditConflict:
             return LASTREV_INVALID
 
         current_rev = currentpage.get_real_rev()
         
         tags = TagStore(currentpage)
-        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev)
+        tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev, direction=BOTH, normalised_name=normalised_name)
 
         # XXX unlock page
 

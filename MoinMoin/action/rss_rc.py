@@ -54,7 +54,7 @@ def execute(pagename, request):
     for line in log.reverse():
         if not request.user.may.read(line.pagename):
             continue
-        if ((line.action[:4] != 'SAVE') or
+        if (not line.action.startswith('SAVE') or
             ((line.pagename in pages) and unique)): continue
         #if log.dayChanged() and log.daycount > _MAX_DAYS: break
         line.editor = line.getInterwikiEditorData(request)

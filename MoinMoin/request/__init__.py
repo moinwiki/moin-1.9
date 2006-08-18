@@ -220,13 +220,16 @@ class RequestBase(object):
 
     def surge_protect(self):
         """ check if someone requesting too much from us """
+        limits = self.cfg.surge_action_limits
+        if not limits:
+            return False
+                                    
         validuser = self.user.valid
         current_id = validuser and self.user.name or self.remote_addr
         if not validuser and current_id.startswith('127.'): # localnet
             return False
         current_action = self.action
 
-        limits = self.cfg.surge_action_limits
         default_limit = self.cfg.surge_action_limits.get('default', (30, 60))
 
         now = int(time.time())
@@ -327,7 +330,7 @@ class RequestBase(object):
             accept_charset = accept_charset.lower()
             # Add iso-8859-1 if needed
             if (not '*' in accept_charset and
-                accept_charset.find('iso-8859-1') < 0):
+                'iso-8859-1' not in accept_charset):
                 accept_charset += ',iso-8859-1'
 
             # Make a list, sorted by quality value, using Schwartzian Transform
@@ -433,7 +436,7 @@ class RequestBase(object):
         """
         # Fix the script_name when using Apache on Windows.
         server_software = env.get('SERVER_SOFTWARE', '')
-        if os.name == 'nt' and server_software.find('Apache/') != -1:
+        if os.name == 'nt' and 'Apache/' in server_software:
             # Removes elements ending in '.' from the path.
             self.script_name = '/'.join([x for x in self.script_name.split('/')
                                          if not x.endswith('.')])

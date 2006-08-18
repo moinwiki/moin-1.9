@@ -10,9 +10,7 @@
 
 import os
 import re
-import zipfile
 import xmlrpclib
-from datetime import datetime
 
 # Compatiblity to Python 2.3
 try:
@@ -26,238 +24,35 @@ from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
-from MoinMoin.wikisync import TagStore
+from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage
+from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
-# directions
-UP, DOWN, BOTH = range(3)
+
+# map sync directions
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
-
-
-def normalise_pagename(page_name, prefix):
-    if prefix:
-        if not page_name.startswith(prefix):
-            return None
-        else:
-            return page_name[len(prefix):]
-    else:
-        return page_name
 
 
 class ActionStatus(Exception): pass
 
-class UnsupportedWikiException(Exception): pass
-
-# XXX Move these classes to MoinMoin.wikisync
-class SyncPage(object):
-    """ This class represents a page in one or two wiki(s). """
-    def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None):
-        self.name = name
-        self.local_rev = local_rev
-        self.remote_rev = remote_rev
-        self.local_name = local_name
-        self.remote_name = remote_name
-        assert local_rev or remote_rev
-        assert local_name or remote_name
-
-    def __repr__(self):
-        return repr("<Remote Page %r>" % unicode(self))
-
-    def __unicode__(self):
-        return u"%s<%r:%r>" % (self.name, self.local_rev, self.remote_rev)
-
-    def __lt__(self, other):
-        return self.name < other.name
-
-    def __hash__(self):
-        return hash(self.name)
-
-    def __eq__(self, other):
-        if not isinstance(other, SyncPage):
-            return false
-        return self.name == other.name
-
-    def add_missing_pagename(self, local, remote):
-        if self.local_name is None:
-            n_name = normalise_pagename(self.remote_name, remote.prefix)
-            assert n_name is not None
-            self.local_name = (local.prefix or "") + n_name
-        elif self.remote_name is None:
-            n_name = normalise_pagename(self.local_name, local.prefix)
-            assert n_name is not None
-            self.remote_name = (local.prefix or "") + n_name
-
-        return self # makes using list comps easier
-
-    def filter(cls, sp_list, func):
-        return [x for x in sp_list if func(x.name)]
-    filter = classmethod(filter)
-
-    def merge(cls, local_list, remote_list):
-        # map page names to SyncPage objects :-)
-        d = dict(zip(local_list, local_list))
-        for sp in remote_list:
-            if sp in d:
-                d[sp].remote_rev = sp.remote_rev
-                d[sp].remote_name = sp.remote_name
-            else:
-                d[sp] = sp
-        return d.keys()
-    merge = classmethod(merge)
-
-    def is_only_local(self):
-        return not self.remote_rev
-
-    def is_only_remote(self):
-        return not self.local_rev
-
-    def is_local_and_remote(self):
-        return self.local_rev and self.remote_rev
-
-    def iter_local_only(cls, sp_list):
-        for x in sp_list:
-            if x.is_only_local():
-                yield x
-    iter_local_only = classmethod(iter_local_only)
-
-    def iter_remote_only(cls, sp_list):
-        for x in sp_list:
-            if x.is_only_remote():
-                yield x
-    iter_remote_only = classmethod(iter_remote_only)
-
-    def iter_local_and_remote(cls, sp_list):
-        for x in sp_list:
-            if x.is_local_and_remote():
-                yield x
-    iter_local_and_remote = classmethod(iter_local_and_remote)
-
-class RemoteWiki(object):
-    """ This class should be the base for all implementations of remote wiki
-        classes. """
-
-    def __repr__(self):
-        """ Returns a representation of the instance for debugging purposes. """
-        return NotImplemented
-
-    def get_interwiki_name(self):
-        """ Returns the interwiki name of the other wiki. """
-        return NotImplemented
-
-    def get_iwid(self):
-        """ Returns the InterWiki ID. """
-        return NotImplemented
-
-    def get_pages(self):
-        """ Returns a list of SyncPage instances. """
-        return NotImplemented
-
-
-class MoinRemoteWiki(RemoteWiki):
-    """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname, prefix):
-        self.request = request
-        self.prefix = prefix
-        _ = self.request.getText
-
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
-        self.wiki_url = wikiutil.mapURL(self.request, wikiurl)
-        self.valid = not wikitag_bad
-        self.xmlrpc_url = self.wiki_url + "?action=xmlrpc2"
-        if not self.valid:
-            self.connection = None
-            return
-
-        self.connection = self.createConnection()
-
-        version = self.connection.getMoinVersion()
-        if not isinstance(version, (tuple, list)):
-            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
-
-        remote_interwikiname = self.get_interwiki_name()
-        remote_iwid = self.connection.interwikiName()[1]
-        self.is_anonymous = remote_interwikiname is None
-        if not self.is_anonymous and interwikiname != remote_interwikiname:
-            raise UnsupportedWikiException(_("The remote wiki uses a different InterWiki name (%(remotename)s)"
-                                             " internally than you specified (%(localname)s).") % {
-                "remotename": wikiutil.escape(remote_interwikiname), "localname": wikiutil.escape(interwikiname)})
-
-        if self.is_anonymous:
-            self.iwid_full = packLine([remote_iwid])
-        else:
-            self.iwid_full = packLine([remote_iwid, interwikiname])
-
-    def createConnection(self):
-        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
-
-    # Public methods
-    def get_diff(self, pagename, from_rev, to_rev):
-        return str(self.connection.getDiff(pagename, from_rev, to_rev))
-
-    # Methods implementing the RemoteWiki interface
-    def get_interwiki_name(self):
-        return self.connection.interwikiName()[0]
-
-    def get_iwid(self):
-        return self.connection.interwikiName()[1]
-
-    def get_pages(self):
-        pages = self.connection.getAllPagesEx({"include_revno": True, "include_deleted": True})
-        rpages = []
-        for name, revno in pages:
-            normalised_name = normalise_pagename(name, self.prefix)
-            if normalised_name is None:
-                continue
-            rpages.append(SyncPage(normalised_name, remote_rev=revno, remote_name=name))
-        return rpages
-
-    def __repr__(self):
-        return "<MoinRemoteWiki wiki_url=%r valid=%r>" % (self.wiki_url, self.valid)
-
-
-class MoinLocalWiki(RemoteWiki):
-    """ Used for the current MoinMoin wiki. """
-    def __init__(self, request, prefix):
-        self.request = request
-        self.prefix = prefix
-
-    def getGroupItems(self, group_list):
-        """ Returns all page names that are listed on the page group_list. """
-        pages = []
-        for group_pagename in group_list:
-            pages.extend(Group(self.request, group_pagename).members())
-        return [self.createSyncPage(x) for x in pages]
-
-    def createSyncPage(self, page_name):
-        normalised_name = normalise_pagename(page_name, self.prefix)
-        if normalised_name is None:
-            return None
-        return SyncPage(normalised_name, local_rev=Page(self.request, page_name).get_real_rev(), local_name=page_name)
-
-    # Public methods:
-
-    # Methods implementing the RemoteWiki interface
-    def get_interwiki_name(self):
-        return self.request.cfg.interwikiname
-
-    def get_iwid(self):
-        return self.request.cfg.iwid
-
-    def get_pages(self):
-        return [x for x in [self.createSyncPage(x) for x in self.request.rootpage.getPageList(exists=0)] if x]
-
-    def __repr__(self):
-        return "<MoinLocalWiki>"
-
 
 class ActionClass:
+    INFO, WARN, ERROR = range(3) # used for logging
+
     def __init__(self, pagename, request):
         self.request = request
         self.pagename = pagename
         self.page = Page(request, pagename)
+        self.status = []
+        request.flush()
+
+    def log_status(self, level, message):
+        """ Appends the message with a given importance level to the internal log. """
+        self.status.append((level, message))
 
     def parse_page(self):
+        """ Parses the parameter page and returns the read arguments. """
         options = {
             "remotePrefix": "",
             "localPrefix": "",
@@ -276,7 +71,7 @@ class ActionClass:
         if options["groupList"] is not None:
             options["groupList"] = unpackLine(options["groupList"], ",")
 
-        options["direction"] = directions_map.get(options["direction"], BOTH)
+        options["direction"] = directions_map.get(options["direction"].lower(), BOTH)
 
         return options
 
@@ -287,7 +82,6 @@ class ActionClass:
         if params["pageList"] is not None:
             params["pageMatch"] = u'|'.join([r'^%s$' % re.escape(name)
                                              for name in params["pageList"]])
-            del params["pageList"]
 
         if params["pageMatch"] is not None:
             params["pageMatch"] = re.compile(params["pageMatch"], re.U)
@@ -295,6 +89,7 @@ class ActionClass:
         # we do not support matching or listing pages if there is a group of pages
         if params["groupList"]:
             params["pageMatch"] = None
+            params["pageList"] = None
 
         return params
 
@@ -308,15 +103,18 @@ class ActionClass:
         params = self.fix_params(self.parse_page())
 
         try:
+            if params["direction"] == UP:
+                raise ActionStatus(_("The only supported directions are BOTH and DOWN."))
+
             if not self.request.cfg.interwikiname:
                 raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
 
             if not params["remoteWiki"]:
                 raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
 
-            local = MoinLocalWiki(self.request, params["localPrefix"])
+            local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"])
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"])
             except UnsupportedWikiException, (msg, ):
                 raise ActionStatus(msg)
 
@@ -325,15 +123,55 @@ class ActionClass:
 
             self.sync(params, local, remote)
         except ActionStatus, e:
-            return self.page.send_page(self.request, msg=u'<p class="error">%s</p>\n' % (e.args[0], ))
+            msg = u'<p class="error">%s</p><p>%s</p>\n' % (e.args[0], repr(self.status))
+        else:
+            msg = u"%s<p>%s</p>" % (_("Syncronisation finished."), repr(self.status))
 
-        return self.page.send_page(self.request, msg=_("Syncronisation finished."))
+        # XXX append self.status to the job page
+        return self.page.send_page(self.request, msg=msg)
     
     def sync(self, params, local, remote):
-        """ This method does the syncronisation work. """
+        """ This method does the syncronisation work.
+            Currently, it handles the case where the pages exist on both sides.
+            One of the major missing parts is rename handling.
+            Now there are a few other cases left that have to be implemented:
+                Wiki A    | Wiki B   | Remark
+                ----------+----------+------------------------------
+                exists    | deleted  | In this case, we do a normal merge if there
+                          |          | are no tags. If there were changes in
+                          |          | Wiki A, there is a merge with a conflict.
+                          |          | Otherwise (no changes past last merge),
+                          |          | the page is deleted in Wiki A.
+                          |          | This needs static info that could be
+                          |          | transferred with the pagelist.
+                ----------+----------+-------------------------------
+                exists    | non-     | Now the wiki knows that the page was renamed.
+                with tags | existant | There should be an RPC method that asks
+                          |          | for the new name (which could be recorded
+                          |          | on page rename). Then the page is
+                          |          | renamed in Wiki A as well and the sync
+                          |          | is done normally.
+                          |          | Every wiki retains a dict that maps
+                          |          | (IWID, oldname) => newname and that is
+                          |          | updated on every rename. oldname refers
+                          |          | to the pagename known by the old wiki (can be
+                          |          | gathered from tags).
+                ----------+----------+-------------------------------
+                exists    | any case | Try a rename search first, then
+                          |          | do a sync without considering tags
+                with tags | with non | to ensure data integrity.
+                          | matching | Hmm, how do we detect this
+                          | tags     | case if the unmatching tags are only on the remote side?
+                ----------+----------+-------------------------------
+                exists    | exists   | already handled.
+        """
+        _ = self.request.getText
+        direction = params["direction"]
+        local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
+        remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
         l_pages = local.get_pages()
-        r_pages = remote.get_pages()
+        r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
 
         if params["groupList"]:
             pages_from_groupList = set(local.getGroupItems(params["groupList"]))
@@ -342,11 +180,11 @@ class ActionClass:
 
         m_pages = [elem.add_missing_pagename(local, remote) for elem in SyncPage.merge(l_pages, r_pages)]
 
-        print "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages))
-        
+        self.log_status(self.INFO, "Got %i local, %i remote pages, %i merged pages" % (len(l_pages), len(r_pages), len(m_pages))) # XXX remove?
+
         if params["pageMatch"]:
             m_pages = SyncPage.filter(m_pages, params["pageMatch"].match)
-        print "After filtering: Got %i merges pages" % (len(m_pages), )
+        self.log_status(self.INFO, "After filtering: Got %i merges pages" % (len(m_pages), )) # XXX remove
 
         on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
         remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
@@ -356,62 +194,136 @@ class ActionClass:
         #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
         #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
         #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
-        #if params["direction"] in (DOWN, BOTH):
-        #    for rp in remote_but_not_local:
 
         # let's do the simple case first, can be refactored later to match all cases
         # XXX handle deleted pages
         for rp in on_both_sides:
             # XXX add locking, acquire read-lock on rp
+            #print "Processing %r" % rp
 
-            current_page = Page(self.request, local_pagename)
+            local_pagename = rp.local_name
+            current_page = PageEditor(self.request, local_pagename) # YYY direct access
             current_rev = current_page.get_real_rev()
-            local_pagename = rp.local_pagename
 
             tags = TagStore(current_page)
-            matching_tags = tags.fetch(iwid_full=remote.iwid_full)
-            matching_tags.sort()
-
-            if not matching_tags:
-                remote_rev = None
-                local_rev = rp.local_rev # merge against the newest version
-                old_contents = ""
+            if direction == BOTH:
+                match_direction = direction
             else:
+                match_direction = None
+            matching_tags = tags.fetch(iwid_full=remote.iwid_full,direction=match_direction)
+            matching_tags.sort()
+            #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
+
+            # some default values for non matching tags
+            normalised_name = None
+            remote_rev = None
+            local_rev = rp.local_rev # merge against the newest version
+            old_contents = ""
+
+            if matching_tags:
                 newest_tag = matching_tags[-1]
-                local_rev = newest_tag.current_rev
-                remote_rev = newest_tag.remote_rev
-                if remote_rev == rp.remote_rev and local_rev == current_rev:
+                
+                # handle some cases where we cannot continue for this page
+                if newest_tag.remote_rev == rp.remote_rev and (direction == DOWN or newest_tag.current_rev == current_rev):
                     continue # no changes done, next page
-                old_page = Page(self.request, local_pagename, rev=local_rev)
-                old_contents = old_page.get_raw_body_str()
+                if rp.local_mime_type != MIMETYPE_MOIN and not (newest_tag.remote_rev == rp.remote_rev ^ newest_tag.current_rev == current_rev):
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again.") % {"pagename": rp.name})
+                    continue
+                if rp.local_mime_type != rp.remote_mime_type:
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again.") % {"pagename": rp.name})
+                    continue
+                if newest_tag.normalised_name != rp.name:
+                    self.log_status(ActionClass.WARN, _("The item %(pagename)s was renamed locally. This is not implemented yet. Therefore all syncronisation history is lost for this page.") % {"pagename": rp.name}) # XXX implement renames
+                else:
+                    normalised_name = newest_tag.normalised_name
+                    local_rev = newest_tag.current_rev
+                    remote_rev = newest_tag.remote_rev
+                    old_contents = Page(self.request, local_pagename, rev=newest_tag.current_rev).get_raw_body_str() # YYY direct access
 
-            diff_result = remote.get_diff(rp.remote_pagename, remote_rev, None)
-            is_remote_conflict = diff_result["conflict"]
-            assert diff_result["diffversion"] == 1
-            diff = diff_result["diff"]
-            current_remote_rev = diff_result["current"]
+            self.log_status(ActionClass.INFO, _("Synchronising page %(pagename)s with remote page %(remotepagename)s ...") % {"pagename": local_pagename, "remotepagename": rp.remote_name})
 
-            if remote_rev is None: # set the remote_rev for the case without any tags
-                remote_rev = current_remote_rev
+            if direction == DOWN:
+                remote_rev = None # always fetch the full page, ignore remote conflict check
+                patch_base_contents = ""
+            else:
+                patch_base_contents = old_contents
 
-            new_contents = patch(old_contents, decompress(diff)).decode("utf-8")
-            old_contents = old_contents.encode("utf-8")
+            if remote_rev != rp.remote_rev:
+                diff_result = remote.get_diff(rp.remote_name, remote_rev, None, normalised_name)
+                if diff_result is None:
+                    self.log_status(ActionClass.ERROR, _("The page %(pagename)s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced.") % {"pagename": rp.remote_name})
+                    continue
+                is_remote_conflict = diff_result["conflict"]
+                assert diff_result["diffversion"] == 1
+                diff = diff_result["diff"]
+                current_remote_rev = diff_result["current"]
+            else:
+                current_remote_rev = remote_rev
+                if rp.local_mime_type == MIMETYPE_MOIN:
+                    is_remote_conflict = wikiutil.containsConflictMarker(old_contents.decode("utf-8"))
+                else:
+                    is_remote_conflict = NotImplemented
+                diff = None
 
-            # here, the actual merge happens
-            verynewtext = diff3.text_merge(old_contents, new_contents, current_page.get_raw_body(), 1, *conflict_markers)
+            # do not sync if the conflict is remote and local, or if it is local
+            # and the page has never been syncronised
+            if (rp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body())
+                and (remote_rev is None or is_remote_conflict)):
+                self.log_status(ActionClass.WARN, _("Skipped page %(pagename)s because of a locally or remotely unresolved conflict.") % {"pagename": local_pagename})
+                continue
 
-            new_local_rev = current_rev + 1 # XXX commit first?
-            local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
-            remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
-            # XXX add remote conflict handling
-            very_current_remote_rev = remote.merge_diff(rp.remote_pagename, compress(textdiff(new_contents, verynewtext)), new_local_rev, remote_rev, current_remote_rev, local_full_iwid)
-            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev)
+            if remote_rev is None and direction == BOTH:
+                self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
+
+            if diff is None:
+                new_contents = old_contents
+            else:
+                new_contents = patch(patch_base_contents, decompress(diff))
+
+            if rp.local_mime_type == MIMETYPE_MOIN:
+                new_contents_unicode = new_contents.decode("utf-8")
+                # here, the actual merge happens
+                # XXX print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+                verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
+                verynewtext_raw = verynewtext.encode("utf-8")
+            else:
+                if diff is None:
+                    verynewtext_raw = new_contents
+                else:
+                    verynewtext_raw = current_page.get_raw_body_str()
+
+            diff = textdiff(new_contents, verynewtext_raw)
+            #print "Diff against %r" % new_contents.encode("utf-8")
+
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
+
+            # XXX upgrade to write lock
             try:
-                current_page.saveText(verynewtext, current_rev, comment=comment)
+                current_page.saveText(verynewtext, current_rev, comment=comment) # YYY direct access
+            except PageEditor.Unchanged:
+                pass
             except PageEditor.EditConflict:
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
-            # XXX untested
+
+            new_local_rev = current_page.get_real_rev()
+
+            if direction == BOTH:
+                try:
+                    very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, rp.name)
+                except Exception, e:
+                    raise # XXX rollback locally and do not tag locally
+            else:
+                very_current_remote_rev = current_remote_rev
+
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=rp.name)
+
+            if rp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(verynewtext):
+                self.log_status(ActionClass.INFO, _("Page successfully merged."))
+            else:
+                self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
+
+            # XXX release lock
+
 
 def execute(pagename, request):
     ActionClass(pagename, request).render()

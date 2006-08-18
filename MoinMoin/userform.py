@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import string, time, re
+import time, re
 from MoinMoin import user, util, wikiutil
 from MoinMoin.util import web, timefuncs
 from MoinMoin.widget import html
@@ -359,8 +359,8 @@ class UserSettings:
                 '%s [%s%s:%s]' % (
                     time.strftime(self.cfg.datetime_fmt, timefuncs.tmtuple(t)),
                     "+-"[offset < 0],
-                    string.zfill("%d" % (abs(offset) / 3600), 2),
-                    string.zfill("%d" % (abs(offset) % 3600 / 60), 2),
+                    "%02d" % (abs(offset) / 3600),
+                    "%02d" % (abs(offset) % 3600 / 60),
                 ),
             ))
 

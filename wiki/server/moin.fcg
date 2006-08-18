@@ -26,8 +26,15 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-# Use threaded version or non-threaded version (default 1)?
-use_threads = 1
+# how many requests shall be handled by a moin fcgi process before it dies,
+# -1 mean "unlimited lifetime":
+max_requests = -1
+
+# how many threads to use (1 means use only main program, non-threaded)
+max_threads = 5
+
+# backlog, use in socket.listen(backlog) call
+backlog = 5
 
 
 # Code ------------------------------------------------------------------
@@ -37,7 +44,7 @@ use_threads = 1
 
 # Set threads flag, so other code can use proper locking
 from MoinMoin import config
-config.use_threads = use_threads
+config.use_threads = max_threads > 1
 del config
 
 from MoinMoin.request import FCGI
@@ -48,10 +55,6 @@ def handle_request(req, env, form):
     request.run()
 
 if __name__ == '__main__':
-    if use_threads:
-        fcg = thfcgi.THFCGI(handle_request)
-    else:
-        fcg = thfcgi.unTHFCGI(handle_request)    
-
+    fcg = thfcgi.FCGI(handle_request, max_requests=max_requests, backlog=backlog, max_threads=max_threads)
     fcg.run()
 
