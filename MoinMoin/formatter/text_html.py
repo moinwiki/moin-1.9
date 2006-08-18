@@ -6,7 +6,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 import os.path, re
-from sets import Set # TODO: when we require Python 2.4+ use the builtin 'set' type
+
+try:
+    set
+except:
+    from sets import Set as set
+
 from MoinMoin.formatter import FormatterBase
 from MoinMoin import wikiutil, i18n, config
 from MoinMoin.Page import Page
@@ -16,7 +21,7 @@ line_anchors = True
 prettyprint = False
 
 # These are the HTML elements that we treat as block elements.
-_blocks = Set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+_blocks = set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
                'hr', 'li', 'ol', 'p', 'pre', 'table', 'tbody', 'td', 'tfoot', 'th',
                'thead', 'tr', 'ul', 'blockquote', ])
 
@@ -26,30 +31,30 @@ _blocks = Set(['dd', 'div', 'dl', 'dt', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h
 # content, and also IE has a parsing bug with those two elements (only)
 # when they don't have a closing tag even if valid XHTML.
 
-_self_closing_tags = Set(['area', 'base', 'br', 'col', 'frame', 'hr', 'img', 'input',
-                          'isindex', 'link', 'meta', 'param'])
+_self_closing_tags = set(['area', 'base', 'br', 'col', 'frame', 'hr', 'img',
+                          'input', 'isindex', 'link', 'meta', 'param'])
 
 # We only open those tags and let the browser auto-close them:
-_auto_closing_tags = Set(['p'])
+_auto_closing_tags = set(['p'])
 
 # These are the elements which generally should cause an increase in the
 # indention level in the html souce code.
-_indenting_tags = Set(['ol', 'ul', 'dl', 'li', 'dt', 'dd', 'tr', 'td'])
+_indenting_tags = set(['ol', 'ul', 'dl', 'li', 'dt', 'dd', 'tr', 'td'])
 
 # These are the elements that discard any whitespace they contain as
 # immediate child nodes.
-_space_eating_tags = Set(['colgroup', 'dl', 'frameset', 'head', 'map' 'menu',
+_space_eating_tags = set(['colgroup', 'dl', 'frameset', 'head', 'map' 'menu',
                           'ol', 'optgroup', 'select', 'table', 'tbody', 'tfoot',
                           'thead', 'tr', 'ul'])
 
 # These are standard HTML attributes which are typically used without any
 # value; e.g., as boolean flags indicated by their presence.
-_html_attribute_boolflags = Set(['compact', 'disabled', 'ismap', 'nohref',
+_html_attribute_boolflags = set(['compact', 'disabled', 'ismap', 'nohref',
                                  'noresize', 'noshade', 'nowrap', 'readonly',
                                  'selected', 'wrap'])
 
 # These are all the standard HTML attributes that are allowed on any element.
-_common_attributes = Set(['accesskey', 'class', 'dir', 'disabled', 'id', 'lang',
+_common_attributes = set(['accesskey', 'class', 'dir', 'disabled', 'id', 'lang',
                           'style', 'tabindex', 'title'])
 
 
