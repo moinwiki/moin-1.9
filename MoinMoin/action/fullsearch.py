@@ -23,14 +23,20 @@ def isTitleSearch(request):
     try:
         return int(request.form['titlesearch'][0])
     except ValueError:
-        return True
+        return not isAdvancedSearch(request)
     except KeyError:
         return 'fullsearch' not in request.form
 
+def isAdvancedSearch(request):
+    try:
+        return int(request.form['advancedsearch'][0])
+    except ValueError:
+        return False
 
 def execute(pagename, request, fieldname='value', titlesearch=0):
     _ = request.getText
     titlesearch = isTitleSearch(request)
+    advancedsearch = isAdvancedSearch(request)
 
     # context is relevant only for full search
     if titlesearch:

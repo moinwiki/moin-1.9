@@ -331,6 +331,35 @@ div.codearea pre span.DiffChanged {color: #FF7F50;}
 div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 /* Search results */
+.advancedsearch {
+    border: 1pt solid #ADB9CC;
+}
+
+.advancedsearch td {
+    vertical-align: top;
+    background-color: #E7E7E7;    
+    border: 0px;
+}
+
+.advancedsearch td.searchfor {
+    font-weight: bold;
+}
+.advancedsearch input {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+.advancedsearch td.submit {
+    border-top: 1px solid #ADB9CC;
+    background-color: #fff;
+    text-align: right;
+}
+
+.advancedsearch optioni, select {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
 
 .searchresults dt {
     margin-top: 1em;
