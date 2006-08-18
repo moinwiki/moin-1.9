@@ -225,11 +225,16 @@ Version 1.6.current:
       1. The setting is now called url_prefix_static (to make it more clear
          that we mean the static stuff, not the wiki script url).
       2. The strongly recommended (and default) value of it is '/moin_static160'
-         for moin version 1.6.0 (and will be ...161 for moin 1.6.1). We use a
-         very long cache lifetime for static stuff now, so it is required to
-         change the URL of static stuff when the static stuff changes (e.g. on
-         a version upgrade of moin) to avoid problems with stale cache content.
+         for moin version 1.6.0 (and will be ...161 for moin 1.6.1). It is
+         possible and recommended to use a very long cache lifetime for static
+         stuff now (Expires: access plus 1 year), because we require to change
+         the URL of static stuff when the static stuff changes (e.g. on a
+         version upgrade of moin) to avoid problems with stale cache content.
          Your moin will be faster with lower load and traffic because of this.
+         For standalone server, we use 1 year expiry for static stuff now.
+         For Apache, Lighttpd and other "external" servers, you have to care
+         for configuring them to use a long expiry and change url_prefix_static
+         related configuration on upgrade.
 
 Version 1.5-current:
    * moin.fcg improved - if you use FastCGI, you must use the new file:
