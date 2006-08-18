@@ -8,6 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
+import re
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 
@@ -23,14 +24,15 @@ def isTitleSearch(request):
     try:
         return int(request.form['titlesearch'][0])
     except ValueError:
-        return not isAdvancedSearch(request)
+        return True
     except KeyError:
-        return 'fullsearch' not in request.form
+        return 'fullsearch' not in request.form and \
+                not isAdvancedSearch(request)
 
 def isAdvancedSearch(request):
     try:
         return int(request.form['advancedsearch'][0])
-    except ValueError:
+    except KeyError:
         return False
 
 def execute(pagename, request, fieldname='value', titlesearch=0):
@@ -41,6 +43,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # context is relevant only for full search
     if titlesearch:
         context = 0
+    elif advancedsearch:
+        # XXX: hardcoded
+        context = 180
     else:
         context = int(request.form.get('context', [0])[0])
 
@@ -52,6 +57,30 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
+    if advancedsearch:
+        and_terms = request.form.get('and_terms', [''])[0].strip()
+        or_terms = request.form.get('or_terms', [''])[0].strip()
+        not_terms = request.form.get('not_terms', [''])[0].strip()
+        #xor_terms = request.form.get('xor_terms', [''])[0].strip()
+        categories = request.form.get('categories', [''])[0].strip()
+        timeframe = request.form.get('time', [''])[0].strip()
+        language = request.form.get('language',
+                [request.cfg.language_default])[0]
+        
+        word_re = re.compile(r'(\"[\w\s]+"|\w+)')
+        needle = ''
+        if language:
+            needle += 'language:%s ' % language
+        if categories:
+            needle += '(%s) ' % ' or '.join(['category:%s' % cat
+                for cat in word_re.findall(categories)])
+        if and_terms:
+            needle += '(%s) ' % and_terms
+        if not_terms:
+            needle += '(%s) ' % ' '.join(['-%s' % t for t in word_re.findall(not_terms)])
+        if or_terms:
+            needle += '(%s) ' % ' or '.join(word_re.findall(or_terms))
+
     # check for sensible search term
     striped = needle.strip()
     if len(striped) == 0:
@@ -60,6 +89,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         request.emit_http_headers()
         Page(request, pagename).send_page(request, msg=err)
         return
+    needle = striped
 
     # Setup for type of search
     if titlesearch:
