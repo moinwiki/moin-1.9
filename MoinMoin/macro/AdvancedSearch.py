@@ -35,7 +35,7 @@ def advanced_ui(macro):
         ''.join([''.join([
             f.table_row(1),
             f.table_cell(1),
-            f.text('%s:' % _(txt)),
+            f.text(_(txt)),
             f.table_cell(0),
             f.table_cell(1),
             f.rawHTML(input_field),
@@ -80,17 +80,20 @@ def advanced_ui(macro):
     search_options = ''.join([
         ''.join([
             f.table_row(1),
-            f.table_cell(1, colspan=3),
-            txt,
+            f.table_cell(1, attrs={'class': 'searchfor'}),
+            txt[0],
+            f.table_cell(0),
+            f.table_cell(1, colspan=2),
+            txt[1],
             f.table_cell(0),
             f.table_row(0),
             ]) for txt in (
-                'Language: ' + lang_dropdown,
-                'File Type: ' + ft_dropdown,
-                '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
-                _('Search only in titles'),
-                '<input type="checkbox" name="case" value="1">%s</input>' %
-                _('Case-sensitive search'))
+                ('Language', lang_dropdown),
+                ('File Type', ft_dropdown),
+                ('', '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
+                _('Search only in titles')),
+                ('', '<input type="checkbox" name="case" value="1">%s</input>' %
+                _('Case-sensitive search')))
     ])
     
     html = [
