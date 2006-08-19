@@ -67,6 +67,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         language = request.form.get('language',
                 [request.cfg.language_default])[0]
         mimetype = request.form.get('mimetype', [0])[0]
+        underlay = request.form.get('underlay', [0])[0]
         
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
@@ -74,6 +75,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             needle += 'language:%s ' % language
         if mimetype:
             needle += 'mimetype:%s ' % mimetype
+        if underlay:
+            needle += 'domain:underlay '
         if categories:
             needle += '(%s) ' % ' or '.join(['category:%s' % cat
                 for cat in word_re.findall(categories)])
