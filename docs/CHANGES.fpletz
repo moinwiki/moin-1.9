@@ -28,6 +28,7 @@ Branch moin/1.6-xapian-fpletz
         - LanguageSearch: language:de
         - CategorySearch: category:Homepage
         - MimetypeSearch: mimetype:image/png (for attachments/files)
+        - DomainSearch: domain:underlay
       Note: Currently only available when Xapian is used
     * New config options:
         xapian_search        0      enables xapian-powered search
@@ -254,4 +255,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 2006-08-19
     * mimetype search works (more or less)
     * minor bugfixes (i18n etc.)
+    * domain-specific search (underlay -> system pages)
 

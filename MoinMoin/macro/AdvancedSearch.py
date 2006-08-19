@@ -94,7 +94,10 @@ def advanced_ui(macro):
                 ('', '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
                 _('Search only in titles')),
                 ('', '<input type="checkbox" name="case" value="1">%s</input>' %
-                _('Case-sensitive search')))
+                _('Case-sensitive search')),
+                ('', '<input type="checkbox" name="underlay" value="1">%s'
+                    '</input>' % _('Only system pages')),
+            )
     ])
     
     html = [
