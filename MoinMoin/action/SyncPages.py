@@ -172,7 +172,8 @@ class ActionClass(object):
                           |          | do a sync without considering tags
                 with tags | with non | to ensure data integrity.
                           | matching | Hmm, how do we detect this
-                          | tags     | case if the unmatching tags are only on the remote side?
+                          | tags     | case if the unmatching tags are only
+                          |          | on the remote side?
                 ----------+----------+-------------------------------
         """
         _ = lambda x: x # we will translate it later
@@ -357,16 +358,6 @@ class ActionClass(object):
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
 
             # XXX release lock
-
-        # XXX remove?
-        #on_both_sides = SyncPage.iter_local_and_remote(m_pages)
-        #remote_but_not_local = SyncPage.iter_remote_only(m_pages)
-        #local_but_not_remote = SyncPage.iter_local_only(m_pages)
-
-        # some initial test code (XXX remove)
-        #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
-        #l_new_pages = u", ".join([unicode(x) for x in local_but_not_remote])
-        #raise ActionStatus("These pages are in the remote wiki, but not local: " + wikiutil.escape(r_new_pages) + "<br>These pages are in the local wiki, but not in the remote one: " + wikiutil.escape(l_new_pages))
 
         for rp in m_pages:
             handle_page(rp)

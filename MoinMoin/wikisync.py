@@ -134,26 +134,6 @@ class SyncPage(object):
         """ Is true if the page is in both wikis. """
         return self.local_rev and self.remote_rev
 
-    def iter_local_only(cls, sp_list):
-        """ Iterates over all pages that are local only. """
-        for x in sp_list:
-            if x.is_only_local():
-                yield x
-    iter_local_only = classmethod(iter_local_only)
-
-    def iter_remote_only(cls, sp_list):
-        """ Iterates over all pages that are remote only. """
-        for x in sp_list:
-            if x.is_only_remote():
-                yield x
-    iter_remote_only = classmethod(iter_remote_only)
-
-    def iter_local_and_remote(cls, sp_list):
-        """ Iterates over all pages that are local and remote. """
-        for x in sp_list:
-            if x.is_local_and_remote():
-                yield x
-    iter_local_and_remote = classmethod(iter_local_and_remote)
 
 class RemoteWiki(object):
     """ This class should be the base for all implementations of remote wiki
