@@ -30,6 +30,8 @@ from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
 
+debug = True
+
 # map sync directions
 directions_map = {"up": UP, "down": DOWN, "both": BOTH}
 
@@ -128,7 +130,7 @@ class ActionClass(object):
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"])
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], verbose=debug)
             except UnsupportedWikiException, (msg, ):
                 raise ActionStatus(msg)
 
@@ -215,7 +217,8 @@ class ActionClass(object):
             # let's do the simple case first, can be refactored later to match all cases
             # XXX handle deleted pages
             # XXX add locking, acquire read-lock on rp
-            # XXX print "Processing %r" % rp
+            if debug:
+                self.log_status(ActionClass.INFO, "Processing %r" % rp)
 
             local_pagename = rp.local_name
             current_page = PageEditor(self.request, local_pagename) # YYY direct access
@@ -225,7 +228,8 @@ class ActionClass(object):
 
             matching_tags = tags.fetch(iwid_full=remote.iwid_full, direction=match_direction)
             matching_tags.sort()
-            # print "------ TAGS: " + repr(matching_tags) + repr(tags.tags) XXX
+            if debug:
+                self.log_status(ActionClass.INFO, "Tags: %r [[BR]] All: %r" % (matching_tags, tags.tags))
 
             # some default values for non matching tags
             normalised_name = None
@@ -296,8 +300,8 @@ class ActionClass(object):
             if rp.local_mime_type == MIMETYPE_MOIN:
                 new_contents_unicode = new_contents.decode("utf-8")
                 # here, the actual merge happens
-                # XXX
-                # print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+                if debug:
+                    self.log_status(ActionClass.INFO, "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body()))
                 verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
                 verynewtext_raw = verynewtext.encode("utf-8")
             else:
@@ -307,7 +311,8 @@ class ActionClass(object):
                     verynewtext_raw = current_page.get_raw_body_str()
 
             diff = textdiff(new_contents, verynewtext_raw)
-            # print "Diff against %r" % new_contents.encode("utf-8") # XXX
+            if debug:
+                self.log_status(ActionClass.INFO, "Diff against %r" % new_contents.encode("utf-8"))
 
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
@@ -338,9 +343,10 @@ class ActionClass(object):
 
             # XXX release lock
 
-        on_both_sides = list(SyncPage.iter_local_and_remote(m_pages))
-        remote_but_not_local = list(SyncPage.iter_remote_only(m_pages))
-        local_but_not_remote = list(SyncPage.iter_local_only(m_pages))
+        # XXX remove?
+        #on_both_sides = SyncPage.iter_local_and_remote(m_pages)
+        #remote_but_not_local = SyncPage.iter_remote_only(m_pages)
+        #local_but_not_remote = SyncPage.iter_local_only(m_pages)
 
         # some initial test code (XXX remove)
         #r_new_pages = u", ".join([unicode(x) for x in remote_but_not_local])
