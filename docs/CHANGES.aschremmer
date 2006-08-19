@@ -15,6 +15,7 @@ Branch moin/1.6-sync-aschremmer
 
     * Test with prefixes
     * Search for XXX
+    * Delete iters?
     * Maybe refactor YYY into MoinLocalWiki
     * Remove amount of "very" in the code
     * Clean up trailing whitespace.
