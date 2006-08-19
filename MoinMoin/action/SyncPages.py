@@ -350,6 +350,5 @@ class ActionClass(object):
             handle_page(rp)
 
 
-
 def execute(pagename, request):
     ActionClass(pagename, request).render()

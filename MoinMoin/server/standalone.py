@@ -293,8 +293,9 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         request is not available at this time.  Should be fixed by
         having url_prefix_static in a server config.
         """
-        if self.path.startswith('/moin_static160/'): # XXX
-            self.path = self.path[5:]
+        PREFIX = '/moin_static160/'
+        if self.path.startswith(PREFIX): # XXX
+            self.path = self.path[len(PREFIX)-1:]
             self.serve_static_file()
         elif self.path in ['/favicon.ico', '/robots.txt']:
             self.serve_static_file()
