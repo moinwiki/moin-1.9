@@ -18,6 +18,7 @@ except ImportError:
 from MoinMoin import wikiutil
 from MoinMoin.util import lock
 from MoinMoin.Page import Page
+from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import unpackLine, packLine
 
 
@@ -67,7 +68,7 @@ class SyncPage(object):
         assert remote_rev != 99999999
 
     def __repr__(self):
-        return repr("<Remote Page %r>" % unicode(self))
+        return repr("<Sync Page %r>" % unicode(self))
 
     def __unicode__(self):
         return u"%s[%s|%s]<%r:%r>" % (self.name, self.local_name, self.remote_name, self.local_rev, self.remote_rev)
@@ -174,6 +175,10 @@ class RemoteWiki(object):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
+    def delete_page(self, pagename):
+        """ Deletes the page called pagename. """
+        return NotImplemented
+
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
@@ -232,6 +237,9 @@ class MoinRemoteWiki(RemoteWiki):
         """ Merges the diff into the page on the remote side. """
         result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
         return result
+
+    def delete_page(self, pagename):
+        return # XXX not implemented yet
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
@@ -293,6 +301,14 @@ class MoinLocalWiki(RemoteWiki):
     # Public methods:
 
     # Methods implementing the RemoteWiki interface
+    def delete_page(self, page_name, comment):
+        page = PageEditor(self.request, page_name)
+        try:
+            page.deletePage(comment)
+        except PageEditor.AccessDenied, (msg, ):
+            return msg
+        return ""
+
     def get_interwiki_name(self):
         return self.request.cfg.interwikiname
 
