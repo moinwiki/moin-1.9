@@ -351,6 +351,8 @@ class Index(BaseIndex):
             yield 'underlay'
         if page.isStandardPage():
             yield 'standard'
+        if wikiutil.isSystemPage(self.request, page.page_name):
+            yield 'system'
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
@@ -402,7 +404,8 @@ class Index(BaseIndex):
                     xapdoc.Keyword('stem_lang', stem_language),
                     xapdoc.Keyword('full_title', pagename.lower()),
                     xapdoc.Keyword('revision', revision),
-                    xapdoc.Keyword('author', author)]
+                    xapdoc.Keyword('author', author),
+                )]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
@@ -462,7 +465,7 @@ class Index(BaseIndex):
                 doc = xapdoc.Document(textFields=(xcontent, ),
                                       keywords=(xatt_itemid, xtitle,
                                           xlanguage, xstem_language,
-                                          xmimetype),
+                                          xmimetype, ),
                                       sortFields=(xpname, xattachment, xmtime,
                                           xwname, ),
                                      )
