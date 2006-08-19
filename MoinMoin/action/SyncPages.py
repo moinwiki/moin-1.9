@@ -212,6 +212,7 @@ class ActionClass(object):
 
             local_pagename = rp.local_name
             current_page = PageEditor(self.request, local_pagename) # YYY direct access
+            comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
             tags = TagStore(current_page)
 
@@ -238,12 +239,18 @@ class ActionClass(object):
                 if rp.local_deleted and rp.remote_deleted:
                     return
                 if rp.remote_deleted and not local_change:
-                    self.log_status(ActionClass.ERROR, "Nothing done, I should have deleted %r locally" % rp)
-                    # XXX delete rp locally
+                    msg = local.delete_page(rp.local_name, comment)
+                    if not msg:
+                        self.log_status(ActionClass.INFO, _("Deleted page %s locally."), (rp.name, ))
+                    else:
+                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s locally:"), (rp.name, ), msg)
                     return
                 if rp.local_deleted and not remote_change:
-                    self.log_status(ActionClass.ERROR, "Nothing done, I should have deleted %r remotely" % rp)
-                    # XXX delete rp remotely
+                    if direction == DOWN:
+                        return
+                    self.log_status(ActionClass.ERROR, "Nothing done, I should have deleted %r remotely" % rp) # XXX add
+                    msg = remote.delete_page(rp.remote_name)
+                    self.log_status(ActionClass.INFO, _("Deleted page %s remotely."), (rp.name, ))
                     return
                 if rp.local_mime_type != MIMETYPE_MOIN and not (local_change ^ remote_change):
                     self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (rp.name, ))
@@ -323,8 +330,6 @@ class ActionClass(object):
             diff = textdiff(new_contents, verynewtext_raw)
             if debug:
                 self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % new_contents)
-
-            comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
             # XXX upgrade to write lock
             try:

@@ -2,11 +2,13 @@ Branch moin/1.6-sync-aschremmer
 ===============================
 
   Known main issues:
+    * Do I need to tag delete operations?
     * How to handle renames?
     * How will we store tags? (Metadata support would be handy)
       (currently done in Pickle files)
 
   ToDo:
+    * Delete remote pages.
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Check what needs to be documented on MoinMaster.
 
