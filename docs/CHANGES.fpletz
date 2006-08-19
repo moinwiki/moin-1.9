@@ -8,12 +8,13 @@ Branch moin/1.6-xapian-fpletz
       metadata)
 
   ToDo:
-    * Implement the new search UI
     * Write/update documentation for all the new search stuff
-    * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
-      (i.e. ExceptionTranslator)
+    * Search based on mtime
+    * Index all revisions and let users search in them (rev, mtime)
 
   ToDo (low priority):
+    * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
+      (i.e. ExceptionTranslator)
     * Case-sensitive searches / Regexp on multiple terms: Graceful
       fallback to and/or merge with moinSearch based on nodes xapian can
       handle in the search term tree
@@ -23,10 +24,11 @@ Branch moin/1.6-xapian-fpletz
 
   New Features:
     * Faster search thanks to Xapian
-    * Searching for languages with new prefix lang/language, i.e. lang:de
+    * New searches:
+        - LanguageSearch: language:de
+        - CategorySearch: category:Homepage
+        - MimetypeSearch: mimetype:image/png (for attachments/files)
       Note: Currently only available when Xapian is used
-    * CategorySearch with prefix category or with the regexp previously
-      used (autodetected as CategorySearch)
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
@@ -241,4 +243,15 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 2006-08-16 no work on project
 
+2006-08-17
+    * started advanced gui, new macro: AdvancedSearch
+
+2006-08-18
+    * eye-candy for advanced gui
+    * reworked fullsearch action to work with AdvancedSearch and most of
+      the 
+
+2006-08-19
+    * mimetype search works (more or less)
+    * minor bugfixes (i18n etc.)
 
