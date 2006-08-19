@@ -457,11 +457,14 @@ class Index(BaseIndex):
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
-                xmimetype = xapdoc.TextField('mimetype', mimetype, True)
+                xmimetype = xapdoc.Keyword('mimetype', mimetype)
                 xcontent = xapdoc.TextField('content', att_content)
-                doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, xlanguage, xstem_language, ),
-                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
+                doc = xapdoc.Document(textFields=(xcontent, ),
+                                      keywords=(xatt_itemid, xtitle,
+                                          xlanguage, xstem_language,
+                                          xmimetype),
+                                      sortFields=(xpname, xattachment, xmtime,
+                                          xwname, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory(request,
                         stem_language)
