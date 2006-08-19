@@ -177,10 +177,11 @@ class RemoteWiki(object):
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname, prefix, pagelist):
+    def __init__(self, request, interwikiname, prefix, pagelist, verbose=False):
         self.request = request
         self.prefix = prefix
         self.pagelist = pagelist
+        self.verbose = verbose
         _ = self.request.getText
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
@@ -212,7 +213,7 @@ class MoinRemoteWiki(RemoteWiki):
             self.iwid_full = packLine([remote_iwid, interwikiname])
 
     def createConnection(self):
-        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
+        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=self.verbose)
 
     # Public methods
     def get_diff(self, pagename, from_rev, to_rev, n_name=None):
