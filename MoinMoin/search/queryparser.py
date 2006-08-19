@@ -764,7 +764,7 @@ class DomainSearch(BaseExpression):
     """ Search for pages belonging to a specific domain """
 
     def __init__(self, pattern, use_re=False, case=True):
-        """ Init a mimetype search
+        """ Init a domain search
 
         @param pattern: pattern to search for, ascii string or unicode
         @param use_re: treat pattern as re of plain text, bool
@@ -822,8 +822,6 @@ class DomainSearch(BaseExpression):
         else:
             pattern = self._pattern
             return UnicodeQuery('%s:%s' % (prefix, pattern))
-
-
 
 
 ##############################################################################

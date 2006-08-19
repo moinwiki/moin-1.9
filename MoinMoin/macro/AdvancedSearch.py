@@ -55,8 +55,8 @@ def advanced_ui(macro):
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
                 '<input type="text" name="categories" size="30">'),
-            (_('edited in the the following timeframe (XXX)'),
-                '<input type="text" name="time" size="30" value="until now">'),
+            (_('last modified since (XXX)'),
+                '<input type="text" name="mtime" size="30" value="">'),
         )])
     ])
 
@@ -95,7 +95,9 @@ def advanced_ui(macro):
                 _('Search only in titles')),
                 ('', '<input type="checkbox" name="case" value="1">%s</input>' %
                 _('Case-sensitive search')),
-                ('', '<input type="checkbox" name="underlay" value="1">%s'
+                ('', '<input type="checkbox" name="includeunderlay" value="1" checked>%s'
+                    '</input>' % _('Include underlay')),
+                ('', '<input type="checkbox" name="onlysystempages" value="1">%s'
                     '</input>' % _('Only system pages')),
             )
     ])

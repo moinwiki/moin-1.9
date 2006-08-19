@@ -67,7 +67,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         language = request.form.get('language',
                 [request.cfg.language_default])[0]
         mimetype = request.form.get('mimetype', [0])[0]
-        underlay = request.form.get('underlay', [0])[0]
+        includeunderlay = request.form.get('includeunderlay', [0])[0]
+        onlysystempages = request.form.get('onlysystempages', [0])[0]
+        mtime = request.form.get('mtime', [''])[0]
         
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
@@ -75,8 +77,12 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             needle += 'language:%s ' % language
         if mimetype:
             needle += 'mimetype:%s ' % mimetype
-        if underlay:
-            needle += 'domain:underlay '
+        if not includeunderlay:
+            needle += '-domain:underlay '
+        if onlysystempages:
+            needle += 'domain:system '
+        if mtime:
+            needle += 'lastmodifiedsince:%s ' % mtime
         if categories:
             needle += '(%s) ' % ' or '.join(['category:%s' % cat
                 for cat in word_re.findall(categories)])
