@@ -225,7 +225,7 @@ class ActionClass(object):
 
             matching_tags = tags.fetch(iwid_full=remote.iwid_full, direction=match_direction)
             matching_tags.sort()
-            #print "------ TAGS: " + repr(matching_tags) + repr(tags.tags)
+            # print "------ TAGS: " + repr(matching_tags) + repr(tags.tags) XXX
 
             # some default values for non matching tags
             normalised_name = None
@@ -296,7 +296,8 @@ class ActionClass(object):
             if rp.local_mime_type == MIMETYPE_MOIN:
                 new_contents_unicode = new_contents.decode("utf-8")
                 # here, the actual merge happens
-                # XXX print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
+                # XXX
+                # print "Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents, current_page.get_raw_body())
                 verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
                 verynewtext_raw = verynewtext.encode("utf-8")
             else:
@@ -306,7 +307,7 @@ class ActionClass(object):
                     verynewtext_raw = current_page.get_raw_body_str()
 
             diff = textdiff(new_contents, verynewtext_raw)
-            # XXX print "Diff against %r" % new_contents.encode("utf-8")
+            # print "Diff against %r" % new_contents.encode("utf-8") # XXX
 
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 

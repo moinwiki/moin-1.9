@@ -279,14 +279,14 @@ class MoinLocalWiki(RemoteWiki):
 
     def createSyncPage(self, page_name):
         normalised_name = normalise_pagename(page_name, self.prefix)
-        if not self.request.user.may.write(normalised_name):
-            return None
         if normalised_name is None:
+            return None
+        if not self.request.user.may.write(normalised_name):
             return None
         page = Page(self.request, page_name)
         revno = page.get_real_rev()
         if revno == 99999999: # I love sane in-band signalling
-            revno = None
+            return None
         return SyncPage(normalised_name, local_rev=revno, local_name=page_name, local_deleted=not page.exists())
 
     # Public methods:
@@ -345,7 +345,7 @@ class Tag(object):
         self.normalised_name = normalised_name
 
     def __repr__(self):
-        return u"<Tag normalised_pagename=%r remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.normalised_name, self.remote_wiki, self.remote_rev, self.current_rev)
+        return u"<Tag normalised_pagename=%r remote_wiki=%r remote_rev=%r current_rev=%r>" % (getattr(self, "normalised_name", "UNDEF"), self.remote_wiki, self.remote_rev, self.current_rev)
 
     def __cmp__(self, other):
         if not isinstance(other, Tag):
