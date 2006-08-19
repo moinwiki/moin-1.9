@@ -22,7 +22,10 @@ def execute(macro, args):
     """
     sep = args[0]
     args = unpackLine(args[1:], sep)
-    translation = macro.request.getText(args[0], formatted=False)
+    if args:
+        translation = macro.request.getText(args[0], formatted=False)
+    else:
+        translation = u""
     message = translation % tuple(args[1:])
 
     return macro.formatter.text(message)
