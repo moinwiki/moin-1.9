@@ -66,11 +66,14 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         timeframe = request.form.get('time', [''])[0].strip()
         language = request.form.get('language',
                 [request.cfg.language_default])[0]
+        mimetype = request.form.get('mimetype', [0])[0]
         
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
         if language:
             needle += 'language:%s ' % language
+        if mimetype:
+            needle += 'mimetype:%s ' % mimetype
         if categories:
             needle += '(%s) ' % ' or '.join(['category:%s' % cat
                 for cat in word_re.findall(categories)])

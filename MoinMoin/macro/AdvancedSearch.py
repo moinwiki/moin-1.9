@@ -13,6 +13,8 @@
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
 
+import mimetypes
+
 Dependencies = ['pages']
 
 try:
@@ -42,18 +44,18 @@ def advanced_ui(macro):
             f.table_cell(0),
             f.table_row(0),
         ]) for txt, input_field in (
-            ('containing all the following terms',
+            (_('containing all the following terms'),
                 '<input type="text" name="and_terms" size="30">'),
-            ('containing one or more of the following '
-                'terms', '<input type="text" name="or_terms" size="30">'),
-            ('not containing the following terms',
+            (_('containing one or more of the following terms'),
+                '<input type="text" name="or_terms" size="30">'),
+            (_('not containing the following terms'),
                 '<input type="text" name="not_terms" size="30">'),
             #('containing only one of the following terms',
             #    '<input type="text" name="xor_terms" size="30">'),
             # TODO: dropdown-box?
-            ('belonging to one of the following categories',
+            (_('belonging to one of the following categories'),
                 '<input type="text" name="categories" size="30">'),
-            ('edited in the the following timeframe (XXX)',
+            (_('edited in the the following timeframe (XXX)'),
                 '<input type="text" name="time" size="30" value="until now">'),
         )])
     ])
@@ -68,7 +70,6 @@ def advanced_ui(macro):
         u'</select>',
     ])
 
-    import mimetypes
     ft_dropdown = ''.join([
         u'<select name="mimetype" size="1">',
         u'<option value="" selected>%s</option>' % _('any type'),
@@ -88,8 +89,8 @@ def advanced_ui(macro):
             f.table_cell(0),
             f.table_row(0),
             ]) for txt in (
-                ('Language', lang_dropdown),
-                ('File Type (XXX)', ft_dropdown),
+                (_('Language'), lang_dropdown),
+                (_('File Type'), ft_dropdown),
                 ('', '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
                 _('Search only in titles')),
                 ('', '<input type="checkbox" name="case" value="1">%s</input>' %

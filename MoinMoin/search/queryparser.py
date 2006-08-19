@@ -696,6 +696,70 @@ class CategorySearch(TextSearch):
             return UnicodeQuery('%s:%s' % (prefix, pattern))
 
 
+class MimetypeSearch(BaseExpression):
+    """ Search for files beloging to a specific mimetype """
+
+    def __init__(self, pattern, use_re=False, case=True):
+        """ Init a mimetype search
+
+        @param pattern: pattern to search for, ascii string or unicode
+        @param use_re: treat pattern as re of plain text, bool
+        @param case: do case sensitive search, bool 
+        """
+        self._pattern = pattern.lower()
+        self.negated = 0
+        self.use_re = use_re
+        self.case = False       # not case-sensitive!
+        self.xapian_called = False
+        self._build_re(self._pattern, use_re=use_re, case=case)
+
+    def costs(self):
+        return 5000 # cheaper than a TextSearch
+
+    def __unicode__(self):
+        neg = self.negated and '-' or ''
+        return u'%s!"%s"' % (neg, unicode(self._pattern))
+
+    def highlight_re(self):
+        return ""
+
+    def search(self, page):
+        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
+        if not self.xapian_called:
+            return []
+        else:
+            return [Match()]
+
+    def xapian_wanted(self):
+        return True             # only easy regexps possible
+
+    def xapian_need_postproc(self):
+        return False            # case-sensitivity would make no sense
+
+    def xapian_term(self, request, allterms):
+        self.xapian_called = True
+        prefix = Xapian.Index.prefixMap['mimetype']
+        if self.use_re:
+            # basic regex matching per term
+            terms = []
+            found = None
+            n = len(prefix)
+            for term in allterms():
+                if prefix == term[:n]:
+                    found = True
+                    if self.search_re.match(term[n:]):
+                        terms.append(term)
+                elif found:
+                    continue
+
+            if not terms:
+                return Query()
+            return Query(Query.OP_OR, terms)
+        else:
+            pattern = self._pattern
+            return UnicodeQuery('%s%s' % (prefix, pattern))
+
+
 ##############################################################################
 ### Parse Query
 ##############################################################################
@@ -782,6 +846,7 @@ class QueryParser:
         linkto = False
         lang = False
         category = False
+        mimetype = False
 
         for m in modifiers:
             if "title".startswith(m):
@@ -796,6 +861,8 @@ class QueryParser:
                 lang = True
             elif "category".startswith(m):
                 category = True
+            elif "mimetype".startswith(m):
+                mimetype = True
 
         # oh, let's better call xapian if we encouter this nasty regexp ;)
         if not category:
@@ -808,6 +875,8 @@ class QueryParser:
 
         if category:
             obj = CategorySearch(text, use_re=regex, case=case)
+        elif mimetype:
+            obj = MimetypeSearch(text, use_re=regex, case=False)
         elif lang:
             obj = LanguageSearch(text, use_re=regex, case=False)
         elif linkto:
