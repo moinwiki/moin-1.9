@@ -343,7 +343,7 @@ class ActionClass(object):
             # XXX upgrade to write lock
             try:
                 local_change_done = True
-                current_page.saveText(merged_text, sp.local_rev, comment=comment) # YYY direct access
+                current_page.saveText(merged_text, sp.local_rev or 0, comment=comment) # YYY direct access
             except PageEditor.Unchanged:
                 local_change_done = False
             except PageEditor.EditConflict:
