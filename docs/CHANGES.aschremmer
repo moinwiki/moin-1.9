@@ -17,7 +17,6 @@ Branch moin/1.6-sync-aschremmer
     * Search for XXX
     * Maybe refactor YYY into MoinLocalWiki
     * Remove amount of "very" in the code, rename rp into sp
-    * Clean up trailing whitespace.
 
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage. (does OpenID make sense?)
