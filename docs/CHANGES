@@ -138,6 +138,9 @@ Version 1.6.current:
       anyway), just use emit_http_headers and include a Status: XXX header.
       Method will vanish with moin 1.7. 
     * cfg.url_prefix is DEPRECATED, please use cfg.url_prefix_static.
+    * d['title_link'] is not supported any more. You can easily make that link
+      on your own in your theme, see example in MoinMoin/theme/__init__.py,
+      function "title".
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more

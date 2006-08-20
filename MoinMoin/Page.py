@@ -872,9 +872,9 @@ class Page:
             # New code should call with escape=0 to prevent the warning.
             if escape:
                 import warnings
-                warnings.warn("In moin 2.0 query string in url will not be"
-                              " escaped. See"
-                              " http://moinmoin.wikiwikiweb.de/ApiChanges")
+                warnings.warn("In moin 2.0 query string in url will not be escaped. "
+                              "See http://moinmoin.wikiwikiweb.de/ApiChanges. "
+                              "%s" % querystr)
                 querystr = wikiutil.escape(querystr)
 
             # make action URLs denyable by robots.txt:
@@ -1209,14 +1209,6 @@ class Page:
 
             # send the page header
             if self.default_formatter:
-                querydict = {
-                    'action': 'fullsearch',
-                    'value': 'linkto:"%s"' % self.page_name,
-                    'context' : '180',
-                }
-                link = self.url(request, querydict)
-
-                title = self.split_title(request)
                 if self.rev:
                     msg = "<strong>%s</strong><br>%s" % (
                         _('Revision %(rev)d as of %(date)s') % {
@@ -1243,7 +1235,9 @@ class Page:
                     request.user.addTrail(self.page_name)
                     trail = request.user.getTrail()
 
-                request.theme.send_title(title,  page=self, link=link, msg=msg,
+                title = self.split_title(request)
+
+                request.theme.send_title(title,  page=self, msg=msg,
                                     pagename=self.page_name, print_mode=print_mode,
                                     media=media, pi_refresh=pi_refresh,
                                     allow_doubleclick=1, trail=trail,
