@@ -54,7 +54,7 @@ class RenamePage(ActionBase):
 
     def do_action_finish(self, success):
         if success:
-            url = Page(self.request, self.newpagename).url(self.request)
+            url = Page(self.request, self.newpagename).url(self.request, escape=0, relative=False)
             self.request.http_redirect(url)
             self.request.finish()
         else:
