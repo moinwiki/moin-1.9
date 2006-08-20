@@ -147,12 +147,12 @@ class ActionClass(object):
         # XXX release readlock on self.page
 
         self.page.send_page(self.request, msg=msg)
-    
+
     def sync(self, params, local, remote):
         """ This method does the syncronisation work.
-            Currently, it handles the case where the pages exist on both sides.
-            One of the major missing parts is rename handling.
-            Now there are a few other cases left that have to be implemented:
+            Currently, it handles nearly all cases.
+            The major missing part is rename handling.
+            There are a few other cases left that have to be implemented:
                 Wiki A    | Wiki B   | Remark
                 ----------+----------+------------------------------
                 exists    | non-     | Now the wiki knows that the page was renamed.
@@ -366,3 +366,4 @@ class ActionClass(object):
 
 def execute(pagename, request):
     ActionClass(pagename, request).render()
+
