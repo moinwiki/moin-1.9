@@ -511,22 +511,22 @@ class Parser:
 
     def _indent_to(self, new_level, list_type, numtype, numstart):
         """Close and open lists."""
-        open = []   # don't make one out of these two statements!
-        close = []
+        openlist = []   # don't make one out of these two statements!
+        closelist = []
 
         if self._indent_level() != new_level and self.in_table:
-            close.append(self.formatter.table(0))
+            closelist.append(self.formatter.table(0))
             self.in_table = 0
 
         while self._indent_level() > new_level:
-            self._close_item(close)
+            self._close_item(closelist)
             if self.list_types[-1] == 'ol':
                 tag = self.formatter.number_list(0)
             elif self.list_types[-1] == 'dl':
                 tag = self.formatter.definition_list(0)
             else:
                 tag = self.formatter.bullet_list(0)
-            close.append(tag)
+            closelist.append(tag)
 
             del self.list_indents[-1]
             del self.list_types[-1]
@@ -543,7 +543,7 @@ class Parser:
             self.list_types.append(list_type)
 
             if self.formatter.in_p:
-                close.append(self.formatter.paragraph(0))
+                closelist.append(self.formatter.paragraph(0))
 
             if list_type == 'ol':
                 tag = self.formatter.number_list(1, numtype, numstart)
@@ -551,19 +551,19 @@ class Parser:
                 tag = self.formatter.definition_list(1)
             else:
                 tag = self.formatter.bullet_list(1)
-            open.append(tag)
+            openlist.append(tag)
 
             self.first_list_item = 1
             self.in_li = 0
             self.in_dd = 0
 
         # If list level changes, close an open table
-        if self.in_table and (open or close):
-            close[0:0] = [self.formatter.table(0)]
+        if self.in_table and (openlist or closelist):
+            closelist[0:0] = [self.formatter.table(0)]
             self.in_table = 0
 
         self.in_list = self.list_types != []
-        return ''.join(close) + ''.join(open)
+        return ''.join(closelist) + ''.join(openlist)
 
 
     def _undent(self):
