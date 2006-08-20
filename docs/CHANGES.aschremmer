@@ -15,11 +15,10 @@ Branch moin/1.6-sync-aschremmer
 
     * Test with prefixes
     * Search for XXX
-    * Maybe refactor YYY into MoinLocalWiki
-    * Remove amount of "very" in the code
 
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage. (does OpenID make sense?)
+    * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer.
     * Do older tags of one wiki site have to be stored as well? Why don't we
       keep just one tag?

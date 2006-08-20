@@ -301,7 +301,7 @@ class ActionClass(object):
 
             # do not sync if the conflict is remote and local, or if it is local
             # and the page has never been syncronised
-            if (sp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body())
+            if (sp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body()) # YYY direct access
                 and (remote_rev is None or is_remote_conflict)):
                 self.log_status(ActionClass.WARN, _("Skipped page %s because of a locally or remotely unresolved conflict."), (local_pagename, ))
                 return
@@ -310,38 +310,38 @@ class ActionClass(object):
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
 
             if sp.remote_deleted:
-                new_contents = ""
+                remote_contents = ""
             elif diff is None:
-                new_contents = old_contents
+                remote_contents = old_contents
             else:
-                new_contents = patch(patch_base_contents, decompress(diff))
+                remote_contents = patch(patch_base_contents, decompress(diff))
 
             if sp.local_mime_type == MIMETYPE_MOIN:
-                new_contents_unicode = new_contents.decode("utf-8")
+                remote_contents_unicode = remote_contents.decode("utf-8")
                 # here, the actual 3-way merge happens
                 if debug:
-                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body()))
-                verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
-                verynewtext_raw = verynewtext.encode("utf-8")
+                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r" % (old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body()))
+                merged_text = diff3.text_merge(old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers) # YYY direct access
+                merged_text_raw = merged_text.encode("utf-8")
             else:
                 if diff is None:
-                    verynewtext_raw = new_contents
+                    merged_text_raw = remote_contents
                 else:
-                    verynewtext_raw = current_page.get_raw_body_str()
+                    merged_text_raw = current_page.get_raw_body_str() # YYY direct access
 
-            diff = textdiff(new_contents, verynewtext_raw)
+            diff = textdiff(remote_contents, merged_text_raw)
             if debug:
-                self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % new_contents)
+                self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % remote_contents)
 
             # XXX upgrade to write lock
             try:
-                current_page.saveText(verynewtext, sp.local_rev, comment=comment) # YYY direct access
+                current_page.saveText(merged_text, sp.local_rev, comment=comment) # YYY direct access
             except PageEditor.Unchanged:
                 pass
             except PageEditor.EditConflict:
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
 
-            new_local_rev = current_page.get_real_rev()
+            new_local_rev = current_page.get_real_rev() # YYY direct access
 
             if direction == BOTH:
                 try:
@@ -353,7 +353,7 @@ class ActionClass(object):
 
             tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
 
-            if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(verynewtext):
+            if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(merged_text):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))
             else:
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
