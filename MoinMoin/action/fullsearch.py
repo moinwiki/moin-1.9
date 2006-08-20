@@ -77,8 +77,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         if not page.attachment: # we did not find an attachment
             page = Page(request, page.page_name)
             # TODO: remove escape=0 in 2.0
-            url = page.url(request, querystr={'highlight': query.highlight_re()},
-                           escape=0)
+            url = page.url(request, querystr={'highlight': query.highlight_re()}, escape=0)
             request.http_redirect(url)
             return
 

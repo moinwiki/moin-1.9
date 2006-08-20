@@ -74,7 +74,7 @@ def subscribe_users(request, usernamelist, pagename, formatter):
             else:
                 result.append(formatter.smiley('{X}'))
                 result.append(formatter.text(" "))
-            result.append(formatter.url(1, Page(request, userobj.name).url(request)))
+            result.append(formatter.url(1, Page(request, userobj.name).url(request, escape=0)))
             result.append(formatter.text(userobj.name))
             result.append(formatter.url(0))
             result.append(formatter.linebreak(preformatted=0))
