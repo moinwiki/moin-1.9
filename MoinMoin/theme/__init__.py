@@ -183,9 +183,8 @@ class ThemeBase:
         """
         html = u''
         if self.cfg.logo_string:
-            pagename = wikiutil.getFrontPage(self.request).page_name
-            pagename = wikiutil.quoteWikinameURL(pagename)
-            logo = wikiutil.link_tag(self.request, pagename, self.cfg.logo_string)
+            page = wikiutil.getFrontPage(self.request)
+            logo = page.link_to_raw(self.request, self.cfg.logo_string)
             html = u'''<div id="logo">%s</div>''' % logo
         return html
 
