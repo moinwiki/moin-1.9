@@ -524,9 +524,7 @@ class ThemeBase:
 
         if isinstance(msg, (str, unicode)):
             # Render simple strings with a close link
-            close = d['page'].link_to(self.request,
-                                      text=_('Clear message'),
-                                      querystr={'action': 'show'})
+            close = d['page'].link_to(self.request, text=_('Clear message'))
             html = u'<p>%s</p>\n<div class="buttons">%s</div>\n' % (msg, close)
         else:
             # msg is a widget

@@ -225,11 +225,33 @@ Version 1.6.current:
       1. The setting is now called url_prefix_static (to make it more clear
          that we mean the static stuff, not the wiki script url).
       2. The strongly recommended (and default) value of it is '/moin_static160'
-         for moin version 1.6.0 (and will be ...161 for moin 1.6.1). We use a
-         very long cache lifetime for static stuff now, so it is required to
-         change the URL of static stuff when the static stuff changes (e.g. on
-         a version upgrade of moin) to avoid problems with stale cache content.
+         for moin version 1.6.0 (and will be ...161 for moin 1.6.1). It is
+         possible and recommended to use a very long cache lifetime for static
+         stuff now (Expires: access plus 1 year), because we require to change
+         the URL of static stuff when the static stuff changes (e.g. on a
+         version upgrade of moin) to avoid problems with stale cache content.
          Your moin will be faster with lower load and traffic because of this.
+         For standalone server, we use 1 year expiry for static stuff now.
+         For Apache, Lighttpd and other "external" servers, you have to care
+         for configuring them to use a long expiry and change url_prefix_static
+         related configuration on upgrade.
+    * url_prefix_action ['action'] was introduced for lowering load and traffic
+      caused by searchengine crawlers. Up to now, crawlers where causing a high
+      load in internet moin wikis because they tried to get about everything,
+      including all actions linked from the user interface.
+      Known crawlers only get 403 for most actions, but nevertheless they first
+      tried. There was no means keeping them away from actions due to the rather
+      braindead robots.txt standard. You can only disallow pathes there, but
+      moin's actions were querystring based, not path based (this would need
+      regex support in robots.txt, but there is no such thing).
+      This changed now. Moin will now generate action URLs you can handle in
+      robots.txt, like /action/info/PageName?action=info. So if you don't want
+      bots triggering actions, just disallow /action/ there. Keep in mind that
+      attachments are handled by /action/AttachFile, so if you want attached
+      files and pictures indexed by search engine, don't disallow
+      /action/AttachFile/ in your robots.txt.
+    * We don't use ...?action=show any more for the "Clear message" links shown
+      in the message boxes, but directly link to the page.
 
 Version 1.5-current:
    * moin.fcg improved - if you use FastCGI, you must use the new file:
