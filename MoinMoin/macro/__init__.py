@@ -245,11 +245,10 @@ class Macro:
             links = [letter_link(letter) for letter in index_letters]
             return "<p>%s%s</p>" % (' | '.join(links), additional_html)
 
-        qpagename = wikiutil.quoteWikinameURL(self.formatter.page.page_name)
+        page = self.formatter.page
         allpages_txt = (_('Include system pages'), _('Exclude system pages'))[allpages]
-        index = _make_index_key(index_letters, u"""<br>
-<a href="%s?allpages=%d">%s</a>
-""" % (qpagename, not allpages, allpages_txt) )
+        allpages_link = page.link_to(self.request, allpages_txt, querystr={'allpages': allpages and '0' or '1'})
+        index = _make_index_key(index_letters, u'<br>%s' % allpages_link)
         # ?action=titleindex and ?action=titleindex&mimetype=text/xml removed
 
         return u'%s%s' % (index, u''.join(html))
