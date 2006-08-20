@@ -61,7 +61,7 @@ class ActionClass(object):
         for line in self.status:
             macro_args = [line[1]] + list(line[2])
             table.append(table_line % {"smiley": line[0][1], "message":
-                macro_args and u"[[GetText2(|%s)]]" % (packLine(macro_args), ),
+                line[1] and (u"[[GetText2(|%s)]]" % (packLine(macro_args), )),
                 "raw_suffix": line[3]})
 
         return "\n".join(table)
@@ -141,7 +141,7 @@ class ActionClass(object):
         except ActionStatus, e:
             msg = u'<p class="error">%s</p>\n' % (e.args[0], )
         else:
-            msg = u"%s" % (_("Syncronisation finished."), )
+            msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
 
         self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
         # XXX release readlock on self.page
@@ -205,12 +205,12 @@ class ActionClass(object):
             m_pages = SyncPage.filter(m_pages, params["pageMatch"].match)
             self.log_status(self.INFO, _("After filtering: %s pages"), (str(len(m_pages)), ))
 
-        def handle_page(rp):
-            # XXX add locking, acquire read-lock on rp
+        def handle_page(sp):
+            # XXX add locking, acquire read-lock on sp
             if debug:
-                self.log_status(ActionClass.INFO, raw_suffix="Processing %r" % rp)
+                self.log_status(ActionClass.INFO, raw_suffix="Processing %r" % sp)
 
-            local_pagename = rp.local_name
+            local_pagename = sp.local_name
             current_page = PageEditor(self.request, local_pagename) # YYY direct access
             comment = u"Local Merge - %r" % (remote.get_interwiki_name() or remote.get_iwid())
 
@@ -224,51 +224,51 @@ class ActionClass(object):
             # some default values for non matching tags
             normalised_name = None
             remote_rev = None
-            local_rev = rp.local_rev # merge against the newest version
+            local_rev = sp.local_rev # merge against the newest version
             old_contents = ""
 
             if matching_tags:
                 newest_tag = matching_tags[-1]
 
-                local_change = newest_tag.current_rev != rp.local_rev
-                remote_change = newest_tag.remote_rev != rp.remote_rev
+                local_change = newest_tag.current_rev != sp.local_rev
+                remote_change = newest_tag.remote_rev != sp.remote_rev
 
                 # handle some cases where we cannot continue for this page
                 if not remote_change and (direction == DOWN or not local_change):
                     return # no changes done, next page
-                if rp.local_deleted and rp.remote_deleted:
+                if sp.local_deleted and sp.remote_deleted:
                     return
-                if rp.remote_deleted and not local_change:
-                    msg = local.delete_page(rp.local_name, comment)
+                if sp.remote_deleted and not local_change:
+                    msg = local.delete_page(sp.local_name, comment)
                     if not msg:
-                        self.log_status(ActionClass.INFO, _("Deleted page %s locally."), (rp.name, ))
+                        self.log_status(ActionClass.INFO, _("Deleted page %s locally."), (sp.name, ))
                     else:
-                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s locally:"), (rp.name, ), msg)
+                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s locally:"), (sp.name, ), msg)
                     return
-                if rp.local_deleted and not remote_change:
+                if sp.local_deleted and not remote_change:
                     if direction == DOWN:
                         return
-                    msg = remote.delete_page(rp.remote_name, rp.remote_rev, local_full_iwid)
+                    msg = remote.delete_page(sp.remote_name, sp.remote_rev, local_full_iwid)
                     if not msg:
-                        self.log_status(ActionClass.INFO, _("Deleted page %s remotely."), (rp.name, ))
+                        self.log_status(ActionClass.INFO, _("Deleted page %s remotely."), (sp.name, ))
                     else:
-                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s remotely:"), (rp.name, ), msg)
+                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s remotely:"), (sp.name, ), msg)
                     return
-                if rp.local_mime_type != MIMETYPE_MOIN and not (local_change ^ remote_change):
-                    self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (rp.name, ))
+                if sp.local_mime_type != MIMETYPE_MOIN and not (local_change ^ remote_change):
+                    self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (sp.name, ))
                     return
-                if rp.local_mime_type != rp.remote_mime_type:
-                    self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (rp.name, ))
+                if sp.local_mime_type != sp.remote_mime_type:
+                    self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (sp.name, ))
                     return
-                if newest_tag.normalised_name != rp.name:
-                    self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore the full syncronisation history is lost for this page."), (rp.name, )) # XXX implement renames
+                if newest_tag.normalised_name != sp.name:
+                    self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore the full syncronisation history is lost for this page."), (sp.name, )) # XXX implement renames
                 else:
                     normalised_name = newest_tag.normalised_name
                     local_rev = newest_tag.current_rev
                     remote_rev = newest_tag.remote_rev
                     old_contents = Page(self.request, local_pagename, rev=newest_tag.current_rev).get_raw_body_str() # YYY direct access
 
-            self.log_status(ActionClass.INFO, _("Synchronising page %s with remote page %s ..."), (local_pagename, rp.remote_name))
+            self.log_status(ActionClass.INFO, _("Synchronising page %s with remote page %s ..."), (local_pagename, sp.remote_name))
 
             if direction == DOWN:
                 remote_rev = None # always fetch the full page, ignore remote conflict check
@@ -276,16 +276,16 @@ class ActionClass(object):
             else:
                 patch_base_contents = old_contents
 
-            if remote_rev != rp.remote_rev:
-                if rp.remote_deleted: # ignore remote changes
-                    current_remote_rev = rp.remote_rev
+            if remote_rev != sp.remote_rev:
+                if sp.remote_deleted: # ignore remote changes
+                    current_remote_rev = sp.remote_rev
                     is_remote_conflict = False
                     diff = None
-                    self.log_status(ActionClass.WARN, _("The page %s was deleted remotely but changed locally."), (rp.name, ))
+                    self.log_status(ActionClass.WARN, _("The page %s was deleted remotely but changed locally."), (sp.name, ))
                 else:
-                    diff_result = remote.get_diff(rp.remote_name, remote_rev, None, normalised_name)
+                    diff_result = remote.get_diff(sp.remote_name, remote_rev, None, normalised_name)
                     if diff_result is None:
-                        self.log_status(ActionClass.ERROR, _("The page %s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced."), (rp.remote_name, ))
+                        self.log_status(ActionClass.ERROR, _("The page %s could not be synced. The remote page was renamed. This is not supported yet. You may want to delete one of the pages to get it synced."), (sp.remote_name, ))
                         return
                     is_remote_conflict = diff_result["conflict"]
                     assert diff_result["diffversion"] == 1
@@ -293,7 +293,7 @@ class ActionClass(object):
                     current_remote_rev = diff_result["current"]
             else:
                 current_remote_rev = remote_rev
-                if rp.local_mime_type == MIMETYPE_MOIN:
+                if sp.local_mime_type == MIMETYPE_MOIN:
                     is_remote_conflict = wikiutil.containsConflictMarker(old_contents.decode("utf-8"))
                 else:
                     is_remote_conflict = NotImplemented
@@ -301,7 +301,7 @@ class ActionClass(object):
 
             # do not sync if the conflict is remote and local, or if it is local
             # and the page has never been syncronised
-            if (rp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body())
+            if (sp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body()) # YYY direct access
                 and (remote_rev is None or is_remote_conflict)):
                 self.log_status(ActionClass.WARN, _("Skipped page %s because of a locally or remotely unresolved conflict."), (local_pagename, ))
                 return
@@ -309,59 +309,59 @@ class ActionClass(object):
             if remote_rev is None and direction == BOTH:
                 self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
 
-            if rp.remote_deleted:
-                new_contents = ""
+            if sp.remote_deleted:
+                remote_contents = ""
             elif diff is None:
-                new_contents = old_contents
+                remote_contents = old_contents
             else:
-                new_contents = patch(patch_base_contents, decompress(diff))
+                remote_contents = patch(patch_base_contents, decompress(diff))
 
-            if rp.local_mime_type == MIMETYPE_MOIN:
-                new_contents_unicode = new_contents.decode("utf-8")
+            if sp.local_mime_type == MIMETYPE_MOIN:
+                remote_contents_unicode = remote_contents.decode("utf-8")
                 # here, the actual 3-way merge happens
                 if debug:
-                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r" % (old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body()))
-                verynewtext = diff3.text_merge(old_contents.decode("utf-8"), new_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers)
-                verynewtext_raw = verynewtext.encode("utf-8")
+                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r" % (old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body()))
+                merged_text = diff3.text_merge(old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers) # YYY direct access
+                merged_text_raw = merged_text.encode("utf-8")
             else:
                 if diff is None:
-                    verynewtext_raw = new_contents
+                    merged_text_raw = remote_contents
                 else:
-                    verynewtext_raw = current_page.get_raw_body_str()
+                    merged_text_raw = current_page.get_raw_body_str() # YYY direct access
 
-            diff = textdiff(new_contents, verynewtext_raw)
+            diff = textdiff(remote_contents, merged_text_raw)
             if debug:
-                self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % new_contents)
+                self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % remote_contents)
 
             # XXX upgrade to write lock
             try:
-                current_page.saveText(verynewtext, rp.local_rev, comment=comment) # YYY direct access
+                current_page.saveText(merged_text, sp.local_rev, comment=comment) # YYY direct access
             except PageEditor.Unchanged:
                 pass
             except PageEditor.EditConflict:
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
 
-            new_local_rev = current_page.get_real_rev()
+            new_local_rev = current_page.get_real_rev() # YYY direct access
 
             if direction == BOTH:
                 try:
-                    very_current_remote_rev = remote.merge_diff(rp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, rp.name)
+                    very_current_remote_rev = remote.merge_diff(sp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, sp.name)
                 except Exception, e:
                     raise # XXX rollback locally and do not tag locally
             else:
                 very_current_remote_rev = current_remote_rev
 
-            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=rp.name)
+            tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
 
-            if rp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(verynewtext):
+            if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(merged_text):
                 self.log_status(ActionClass.INFO, _("Page successfully merged."))
             else:
                 self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
 
             # XXX release lock
 
-        for rp in m_pages:
-            handle_page(rp)
+        for sp in m_pages:
+            handle_page(sp)
 
 
 def execute(pagename, request):
