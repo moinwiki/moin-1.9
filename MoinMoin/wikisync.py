@@ -20,6 +20,7 @@ from MoinMoin.util import lock
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import unpackLine, packLine
+from MoinMoin.support.multicall import MultiCall
 
 
 MIMETYPE_MOIN = "text/wiki"
@@ -161,7 +162,7 @@ class RemoteWiki(object):
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname, prefix, pagelist, verbose=False):
+    def __init__(self, request, interwikiname, prefix, pagelist, user, password, verbose=False):
         self.request = request
         self.prefix = prefix
         self.pagelist = pagelist
@@ -181,7 +182,16 @@ class MoinRemoteWiki(RemoteWiki):
         try:
             iw_list = self.connection.interwikiName()
         except xmlrpclib.Fault, e:
-            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, the version 1.6 is required at least."))
+            raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, version 1.6 is required at least."))
+
+        if user and password:
+            token = self.connection.getAuthToken(user, password)
+            if token:
+                self.token = token
+            else:
+                raise NotAllowedException(_("Invalid username or password."))
+        else:
+            self.token = None
 
         self.remote_interwikiname = remote_interwikiname = iw_list[0]
         self.remote_iwid = remote_iwid = iw_list[1]
@@ -247,7 +257,13 @@ class MoinRemoteWiki(RemoteWiki):
                    "prefix": self.prefix,
                    "pagelist": self.pagelist,
                    "mark_deleted": True}
-        pages = self.connection.getAllPagesEx(options)
+        if self.token:
+            m = MultiCall(self.connection)
+            m.applyAuthToken(self.token)
+            m.getAllPagesEx(options)
+            tokres, pages = m()
+        else:
+            pages = self.connection.getAllPagesEx(options)
         rpages = []
         for name, revno in pages:
             normalised_name = normalise_pagename(name, self.prefix)
