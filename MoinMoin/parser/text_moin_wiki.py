@@ -372,7 +372,7 @@ class Parser:
         """
         word = text[1:-1] # strip brackets
         first_char = word[0]
-        if first_char in "'\"": # this is quoted
+        if first_char in wikiutil.QUOTE_CHARS:
             # split on closing quote
             target, linktext = word[1:].split(first_char, 1)
         else: # not quoted
@@ -394,7 +394,7 @@ class Parser:
             words = word[1:].split(':', 1)
             if len(words) == 1:
                 words = words * 2
-            target_and_text = 'wiki:Self:"%s" %s' % tuple(words)
+            target_and_text = 'wiki:Self:%s %s' % (wikiutil.quoteName(words[0]), words[1])
             return self.interwiki(target_and_text, pretty_url=1)
 
         scheme_and_rest = word.split(":", 1)

@@ -490,6 +490,26 @@ class MetaDict(dict):
             self.wlock.release()
 
 
+# Quoting of wiki names, file names, etc. (in the wiki markup) -----------------------------------
+
+QUOTE_CHARS = u"'\""
+
+def quoteName(name):
+    """ put quotes around a given name """
+    for quote_char in QUOTE_CHARS:
+        if quote_char not in name:
+            return u"%s%s%s" % (quote_char, name, quote_char)
+    else:
+        return name # XXX we need to be able to escape the quote char for worst case
+
+def unquoteName(name):
+    """ if there are quotes around the name, strip them """
+    for quote_char in QUOTE_CHARS:
+        if quote_char == name[0] == name[-1]:
+            return name[1:-1]
+    else:
+        return name
+
 #############################################################################
 ### InterWiki
 #############################################################################
@@ -594,7 +614,7 @@ def split_wiki(wikiurl):
         except ValueError:
             wikiname, rest = 'Self', wikiurl
     first_char = rest[0]
-    if first_char in "'\"": # quoted pagename
+    if first_char in QUOTE_CHARS: # quoted pagename
         pagename_linktext = rest[1:].split(first_char, 1)
     else: # not quoted, split on whitespace
         pagename_linktext = rest.split(None, 1)
@@ -822,7 +842,7 @@ def pagelinkmarkup(pagename):
     if re.match(Parser.word_rule + "$", pagename):
         return pagename
     else:
-        return u'["%s"]' % pagename
+        return u'["%s"]' % pagename # XXX use quoteName(pagename) later
 
 #############################################################################
 ### mimetype support
@@ -860,7 +880,6 @@ for key, value in MIMETYPES_sanitize_mapping.items():
     MIMETYPES_spoil_mapping[value] = key
 
 
-# mimetype stuff ------------------------------------------------------------
 class MimeType(object):
     """ represents a mimetype like text/plain """
 
