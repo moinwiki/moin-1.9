@@ -420,8 +420,7 @@ reStructuredText Quick Reference
     url_prefix_static = '/moin_static160'
 
     # we need to prefix actions to be able to exclude them by robots.txt:
-    # TODO:
-    # url_prefix_action = '/action'
+    url_prefix_action = 'action' # no leading or trailing '/'
 
     logo_string = None
     interwikiname = None
@@ -582,6 +581,10 @@ reStructuredText Quick Reference
 
         if self.url_prefix is not None: # remove this code when url_prefix setting is removed
             self.url_prefix_static = self.url_prefix
+
+        action_prefix = self.url_prefix_action
+        if action_prefix is not None and action_prefix.endswith('/'): # make sure there is no trailing '/'
+            self.url_prefix_action = action_prefix[:-1]
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """

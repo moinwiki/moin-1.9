@@ -845,7 +845,7 @@ class Page:
         self._raw_body = body
         self._raw_body_modified = modified
 
-    def url(self, request, querystr=None, escape=1):
+    def url(self, request, querystr=None, escape=1, anchor=None, relative=True):
         """ Return complete URL for this page, including scriptname
 
         @param request: the request object
@@ -853,13 +853,18 @@ class Page:
             (str or dict, see wikiutil.makeQueryString)
         @param escape: escape url for html, to be backward compatible
             with old code (bool)
+        @param anchor: if specified, make a link to this anchor
         @rtype: str
         @return: complete url of this page, including scriptname
         """
-        url = '%s/%s' % (request.getScriptname(),
-                     wikiutil.quoteWikinameURL(self.page_name))
-
+        # Create url, excluding scriptname
+        url = wikiutil.quoteWikinameURL(self.page_name)
         if querystr:
+            if isinstance(querystr, dict):
+                action = querystr.get('action', None)
+            else:
+                action = None # XXX we don't support getting the action out of a str
+
             querystr = wikiutil.makeQueryString(querystr)
 
             # TODO: remove in 2.0
@@ -872,9 +877,26 @@ class Page:
                               " http://moinmoin.wikiwikiweb.de/ApiChanges")
                 querystr = wikiutil.escape(querystr)
 
+            # make action URLs denyable by robots.txt:
+            if action is not None and request.cfg.url_prefix_action is not None:
+                url = "%s/%s/%s" % (request.cfg.url_prefix_action, action, url)
             url = '%s?%s' % (url, querystr)
 
+        # Add anchor
+        if anchor:
+            url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
+
+        if not relative:
+            url = '%s/%s' % (request.getScriptname(), url)
         return url
+
+    def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
+        """ core functionality of link_to, without the magic """
+        url = self.url(request, querystr, escape=0, anchor=anchor)
+        # escaping is done by link_tag -> formatter.url -> ._open()
+        link = wikiutil.link_tag(request, url, text,
+                                 formatter=getattr(self, 'formatter', None), **kw)
+        return link
 
     def link_to(self, request, text=None, querystr=None, anchor=None, **kw):
         """ Return HTML markup that links to this page.
@@ -893,27 +915,14 @@ class Page:
         """
         if not text:
             text = self.split_title(request)
-
-        # Create url, excluding scriptname
-        url = wikiutil.quoteWikinameURL(self.page_name)
-        if querystr:
-            if not isinstance(querystr, type({})):
-                # makeQueryString does not escape strings any more
-                querystr = wikiutil.escape(querystr)
-                
-            querystr = wikiutil.makeQueryString(querystr)
-            url = "%s?%s" % (url, querystr)
-
-        # Add anchor
-        if anchor:
-            url = "%s#%s" % (url, wikiutil.url_quote_plus(anchor))
+        text = wikiutil.escape(text)
 
         # Add css class for non existing page
         if not self.exists():
             kw['css_class'] = 'nonexistent'
 
-        link = wikiutil.link_tag(request, url, wikiutil.escape(text),
-                                 formatter=getattr(self, 'formatter', None), **kw)
+        link = self.link_to_raw(request, text, querystr, anchor, **kw)
+
         # Create a link to attachments if any exist
         if kw.get('attachment_indicator', 0):
             from MoinMoin.action import AttachFile
@@ -1200,11 +1209,12 @@ class Page:
 
             # send the page header
             if self.default_formatter:
-                full_text_query = 'linkto:"%s"' % self.page_name
-                link = '%s/%s?action=fullsearch&amp;value=%s&amp;context=180' % (
-                    request.getScriptname(),
-                    wikiutil.quoteWikinameURL(self.page_name),
-                    wikiutil.url_quote_plus(full_text_query))
+                querydict = {
+                    'action': 'fullsearch',
+                    'value': 'linkto:"%s"' % self.page_name,
+                    'context' : '180',
+                }
+                link = self.url(request, querydict)
 
                 title = self.split_title(request)
                 if self.rev:

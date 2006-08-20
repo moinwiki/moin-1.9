@@ -524,9 +524,7 @@ class ThemeBase:
 
         if isinstance(msg, (str, unicode)):
             # Render simple strings with a close link
-            close = d['page'].link_to(self.request,
-                                      text=_('Clear message'),
-                                      querystr={'action': 'show'})
+            close = d['page'].link_to(self.request, text=_('Clear message'))
             html = u'<p>%s</p>\n<div class="buttons">%s</div>\n' % (msg, close)
         else:
             # msg is a widget
@@ -1160,10 +1158,10 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         return """\
 <script type="text/javascript">
-var gui_editor_link_href = "%(url)s?action=edit&editor=gui";
+var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 </script>        
-""" % {'url': page.url(self.request),
+""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0),
        'text': _('Edit (GUI)', formatted=False),
       }
 

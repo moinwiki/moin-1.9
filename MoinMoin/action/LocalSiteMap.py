@@ -64,12 +64,14 @@ class LocalSiteMap:
     def visit(self, request, name, depth):
         """ Visit a page, i.e. create a link.
         """
-        if not name: return
-        self.append('&nbsp;' * (5*depth))
-        self.append('&nbsp;' + wikiutil.link_tag(request, '%s?action=%s' %
-            (wikiutil.quoteWikinameURL(name), __name__.split('.')[-1]), name))
+        if not name:
+            return
+        pg = Page(request, name)
+        action = __name__.split('.')[-1]
+        self.append('&nbsp;' * (5*depth+1))
+        self.append(pg.link_to(request, name, querystr={'action': action}))
         self.append("&nbsp;<small>[")
-        self.append(Page(request, name).link_to(request, 'view'))
+        self.append(pg.link_to(request, 'view'))
         self.append("</small>]<br>")
 
     def append(self, text):

@@ -2,5 +2,8 @@
 
 User-agent: *
 Crawl-delay: 20
-Disallow:
+# This has to match script url + cfg.url_prefix_action - it
+# saves lots of search engine load and traffic by disallowing crawlers
+# to request action related URLs:
+Disallow: /action/
 
