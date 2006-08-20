@@ -152,7 +152,7 @@ class Index(BaseIndex):
         # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
         'author': 'A',
         'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
-                       #G   newsGroup (or sim2006-08-17 05:11:53ilar entity - e.g. a web forum name)
+                       #G   newsGroup (or similar entity - e.g. a web forum name)
         'hostname': 'H',
         'keyword': 'K',
         'lang': 'L',   # ISO Language code
@@ -405,7 +405,7 @@ class Index(BaseIndex):
                     xapdoc.Keyword('full_title', pagename.lower()),
                     xapdoc.Keyword('revision', revision),
                     xapdoc.Keyword('author', author),
-                )]
+                ]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
