@@ -334,16 +334,16 @@ def execute(macro, text):
         while st < l:
             ch = parmpagename[0][st:st+chstep]
             r, g, b = cliprgb(r, g, b)
-            pagelinks = pagelinks + '<a style="%s" href="%s">%s</a>' % \
-                ('background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % \
-                    (r, g, b), Page(request, parmpagename[0]).url(request), ch)
+            link = Page(request, parmpagename[0]).link_to(request, ch,
+                        style='background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % (r, g, b))
+            pagelinks = pagelinks + link
             r, g, b = (r, g+colorstep, b)
             st = st + chstep
         r, g, b = (255-colorstep, 255, 255-colorstep)
         for page in parmpagename[1:]:
-            pagelinks = pagelinks + '*<a style="%s" href="%s">%s</a>' % \
-                            ('background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % \
-                                (r, g, b), Page(request, page).url(request), page)
+            link = Page(request, page).link_to(request, page,
+                        style='background-color:#%02x%02x%02x;color:#000000;text-decoration:none' % (r, g, b))
+            pagelinks = pagelinks + '*' + link
         showpagename = '   %s<BR>\n' % pagelinks
     else:
         showpagename = ''

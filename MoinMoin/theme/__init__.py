@@ -326,7 +326,9 @@ class ThemeBase:
         for scheme in self.linkSchemas:
             if pagename.startswith(scheme):
                 title = wikiutil.escape(title)
-                link = '<a href="%s">%s</a>' % (pagename, title)
+                link = self.request.formatter.url(1, pagename) + \
+                       self.request.formatter.text(title) +\
+                       self.request.formatter.url(0)
                 return pagename, link
 
         # remove wiki: url prefix
@@ -845,8 +847,10 @@ function actionsMenuInit(title) {
         @rtype: unicode
         @return: rss href
         """
-        return (u'%s/RecentChanges?action=rss_rc&amp;ddiffs=1&amp;unique=1'
-                % self.request.getScriptname())
+        request = self.request
+        url = Page(request, 'RecentChanges').url(request, querystr={
+                'action':'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
+        return url
 
     def rsslink(self):
         """ Create rss link in head, used by FireFox
@@ -1345,9 +1349,9 @@ var gui_editor_link_text = "%(text)s";
         if self.shouldUseRSS():
             link = [
                 u'<div class="rcrss">',
-                u'<a href="%s">' % self.rsshref(),
-                self.make_icon("rss"),
-                u'</a>',
+                self.request.formatter.url(1, self.rsshref()),
+                self.request.formatter.rawHTML(self.make_icon("rss")),
+                self.request.formatter.url(0),
                 u'</div>',
                 ]
             html += ''.join(link)
