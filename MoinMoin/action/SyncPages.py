@@ -61,7 +61,7 @@ class ActionClass(object):
         for line in self.status:
             macro_args = [line[1]] + list(line[2])
             table.append(table_line % {"smiley": line[0][1], "message":
-                macro_args and u"[[GetText2(|%s)]]" % (packLine(macro_args), ),
+                line[1] and (u"[[GetText2(|%s)]]" % (packLine(macro_args), )),
                 "raw_suffix": line[3]})
 
         return "\n".join(table)
@@ -141,7 +141,7 @@ class ActionClass(object):
         except ActionStatus, e:
             msg = u'<p class="error">%s</p>\n' % (e.args[0], )
         else:
-            msg = u"%s" % (_("Syncronisation finished."), )
+            msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
 
         self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
         # XXX release readlock on self.page
