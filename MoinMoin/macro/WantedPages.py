@@ -23,13 +23,9 @@ def execute(macro, args):
 
     # Control bar - filter the list of pages
     # TODO: we should make this a widget and use on all page listing pages
-    controlbar = '''<div class="controlbar">
-<a href="%(qpagename)s?allpages=%(allpages)d">%(label)s</a>
-</div>''' % {
-        'qpagename': wikiutil.quoteWikinameURL(macro.formatter.page.page_name),
-        'allpages': not allpages,
-        'label': (_('Include system pages'), _('Exclude system pages'))[allpages],
-    }
+    label = (_('Include system pages'), _('Exclude system pages'))[allpages]
+    page = macro.formatter.page
+    controlbar = '<div class="controlbar">%s</div>' % page.link_to(request, label, querystr={'allpages': '%d' % allpages and '0' or '1'})
 
     # Get page dict readable by current user
     pages = request.rootpage.getPageDict()
