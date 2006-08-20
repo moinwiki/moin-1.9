@@ -4,22 +4,19 @@ Branch moin/1.6-sync-aschremmer
   Known main issues:
     * Do I need to tag delete operations?
     * How to handle renames?
-    * How will we store tags? (Metadata support would be handy)
+    * How should we store tags? (Metadata support would be handy)
       (currently done in Pickle files)
 
   ToDo:
+    * Implement rollback
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Check what needs to be documented on MoinMaster.
-
-    * Show tags in an action=info view?
-
     * Test with prefixes
     * Search for XXX
-    * Maybe refactor YYY into MoinLocalWiki
-    * Remove amount of "very" in the code, rename rp into sp
-
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage. (does OpenID make sense?)
+
+    * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer.
     * Do older tags of one wiki site have to be stored as well? Why don't we
       keep just one tag?
@@ -44,6 +41,7 @@ Branch moin/1.6-sync-aschremmer
     * XMLRPC functions may return Fault instances
     * diff3 algorithm extended, a new mode should reduce the conflicts
     * GetText2 macro
+    * showtags action
 
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * Conflict resolution fixes. (merged into main)
