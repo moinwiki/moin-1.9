@@ -39,9 +39,9 @@ class Parser:
     q_string = ur"(%s|%s)" % (sq_string, dq_string) # quoted string
     attachment_schemas = ["attachment", "inline", "drawing"]
     punct_pattern = re.escape(u'''"\'}]|:,.)?!''')
-    punct_no_quote_pattern = re.escape(u'''\}]|:,.)?!''')
+    punct_no_quote_pattern = re.escape(u'''}]|:,.)?!''')
     url_pattern = (u'http|https|ftp|nntp|news|mailto|telnet|wiki|file|irc|' +
-            u'|'.join(attachment_schemas) + 
+            u'|'.join(attachment_schemas) +
             (config.url_schemas and u'|' + u'|'.join(config.url_schemas) or ''))
 
     # some common rules
@@ -52,7 +52,7 @@ class Parser:
         'parent': ur'(?:%s)?' % re.escape(PARENT_PREFIX),
     }
     url_rule = ur'%(url_guard)s(%(url)s)\:(([^\s\<%(punct)s]|([%(punctnq)s][^\s\<%(punct)s]))+|%(q_string)s)' % {
-        'url_guard': u'(^|(?<!\w))',
+        'url_guard': ur'(^|(?<!\w))',
         'url': url_pattern,
         'punct': punct_pattern,
         'punctnq': punct_no_quote_pattern,
@@ -930,7 +930,7 @@ class Parser:
         scan_re = re.compile(rules, re.UNICODE)
         number_re = re.compile(self.ol_rule, re.UNICODE)
         term_re = re.compile(self.dl_rule, re.UNICODE)
-        indent_re = re.compile("^\s*", re.UNICODE)
+        indent_re = re.compile(ur"^\s*", re.UNICODE)
         eol_re = re.compile(r'\r?\n', re.UNICODE)
         self.request.clock.stop('compile_huge_and_ugly')
 
