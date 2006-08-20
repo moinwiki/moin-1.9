@@ -66,11 +66,8 @@ class ActionLink:
         text = wikiutil.escape(text, 1)
 
         # Create link
-        formatter = self.macro.formatter
-        page = wikiutil.quoteWikinameURL(formatter.page.page_name)
-        url = '%s?action=%s' % (page, action)
-        link = wikiutil.link_tag(self.request, url, text=text,
-                                 formatter=formatter)
+        page = self.macro.formatter.page
+        link = page.link_to(self.request, text, querystr='action=%s' % action)
         return link
 
 

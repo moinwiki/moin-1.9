@@ -45,7 +45,12 @@ def show_editors(request, pagename, timestamp):
                        Column('pages', label=_("Pages"), align='right'),
                        Column('link', label='', align='left')]
     for nr, editor in editors:
-        dataset.addRow((editor, unicode(nr), pg.link_to(request, text=_("Select Author"), querystr="action=Despam&editor=%s" % wikiutil.url_quote_plus(editor))))
+        dataset.addRow((editor, unicode(nr),
+            pg.link_to(request, text=_("Select Author"),
+                querystr={
+                    'action': 'Despam',
+                    'editor': editor, # was: url_quote_plus()
+                })))
 
     table = DataBrowserWidget(request)
     table.setData(dataset)

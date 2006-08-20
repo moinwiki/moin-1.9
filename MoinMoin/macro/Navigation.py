@@ -64,7 +64,7 @@ class Navigation:
     """
 
     # querystring for slideshow links
-    PROJECTION = 'action=print&media=projection'
+    PROJECTION = {'action': 'print', 'media': 'projection', }
 
     def __init__(self, macro, args):
         """ Prepare common values used during processing.
@@ -76,7 +76,7 @@ class Navigation:
         self.pagename = self.macro.formatter.page.page_name
         self.print_mode = self.macro.request.action == 'print'
         self.media = self.macro.request.form.get('media', [None])[0]
-        self.querystr = self.print_mode and self.PROJECTION or ''
+        self.querystr = self.print_mode and self.PROJECTION or {}
 
 
     def dispatch(self):
@@ -113,6 +113,7 @@ class Navigation:
         """ Navigate from a subpage to its siblings.
         """
         _ = self._
+        request = self.macro.request
         # get parent page name
         parent = root or _getParent(self.pagename)
         if not parent:
@@ -127,7 +128,7 @@ class Navigation:
 
         # iterate over children, adding links to all of them
         result = []
-        children = _getPages(self.macro.request, '^%s/' % parent)
+        children = _getPages(request, '^%s/' % parent)
         for child in children:
             # display short page name, leaving out the parent path
             # (and make sure the name doesn't get wrapped)
@@ -142,7 +143,7 @@ class Navigation:
                 result.append(self.macro.formatter.text(shortname))
             else:
                 # link to sibling / child
-                result.append(Page(self.macro.request, child).link_to(self.macro.request, text=shortname, querystr=self.querystr))
+                result.append(Page(request, child).link_to(request, text=shortname, querystr=self.querystr))
             result.append(' &nbsp; ')
 
         return ''.join(result)
@@ -157,12 +158,13 @@ class Navigation:
         _ = self._
         curpage = focus or self.pagename
         result = []
-
+        request = self.macro.request
+        pg = Page(request, curpage)
         if self.print_mode:
             # projection mode
             label = _('Wiki')
-            toggle = ''
-            result.append(Page(self.macro.request, curpage).link_to(self.macro.request, text=_('Edit'), querystr='action=edit'))
+            toggle = {}
+            result.append(pg.link_to(request, text=_('Edit'), querystr={'action': 'edit'}))
             result.append(' &nbsp; ')
         else:
             # wiki mode
@@ -170,15 +172,15 @@ class Navigation:
             toggle = self.PROJECTION
 
         # add mode toggle link
-        result.append(Page(self.macro.request, curpage).link_to(self.macro.request, text=label, querystr=toggle))
+        result.append(pg.link_to(request, text=label, querystr=toggle))
 
         # leave out the following on slide pages
         if focus is None:
-            children = _getPages(self.macro.request, '^%s/' % self.pagename)
+            children = _getPages(request, '^%s/' % self.pagename)
             if children:
                 # add link to first child if one exists
                 result.append(' &nbsp; ')
-                result.append(Page(self.macro.request, children[0]).link_to(self.macro.request, text=_('Start'), querystr=self.querystr))
+                result.append(Page(request, children[0]).link_to(request, text=_('Start'), querystr=self.querystr))
 
         return ''.join(result)
 
@@ -187,6 +189,7 @@ class Navigation:
         """ Navigate within a slide show.
         """
         _ = self._
+        request = self.macro.request
         parent = root or _getParent(self.pagename)
         if not parent:
             return (self.macro.formatter.sysmsg(1) +
@@ -197,7 +200,7 @@ class Navigation:
         result = []
         labels = ['^', '|<', '<<', '>>', '>|']
         filter_regex = '^%s/' % re.escape(parent)
-        pos, size, links = _getLinks(self.macro.request, self.pagename, filter_regex)
+        pos, size, links = _getLinks(request, self.pagename, filter_regex)
         pos += 1
         links = zip(labels, (parent,) + links)
 
@@ -206,7 +209,7 @@ class Navigation:
             result.append(' ')
             if name:
                 # active link
-                result.append(Page(self.macro.request, name).link_to(self.macro.request, text=label, querystr=self.querystr))
+                result.append(Page(request, name).link_to(request, text=label, querystr=self.querystr))
             else:
                 # ghosted link
                 result.append(self.macro.formatter.text(label))

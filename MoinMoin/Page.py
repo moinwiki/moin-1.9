@@ -890,6 +890,14 @@ class Page:
             url = '%s/%s' % (request.getScriptname(), url)
         return url
 
+    def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
+        """ core functionality of link_to, without the magic """
+        url = self.url(request, querystr, escape=0, anchor=anchor)
+        # escaping is done by link_tag -> formatter.url -> ._open()
+        link = wikiutil.link_tag(request, url, text,
+                                 formatter=getattr(self, 'formatter', None), **kw)
+        return link
+
     def link_to(self, request, text=None, querystr=None, anchor=None, **kw):
         """ Return HTML markup that links to this page.
 
@@ -907,16 +915,14 @@ class Page:
         """
         if not text:
             text = self.split_title(request)
-
-        url = self.url(request, querystr, escape=0, anchor=anchor)
-        # escaping is done by link_tag -> formatter.url -> ._open()
+        text = wikiutil.escape(text)
 
         # Add css class for non existing page
         if not self.exists():
             kw['css_class'] = 'nonexistent'
 
-        link = wikiutil.link_tag(request, url, wikiutil.escape(text),
-                                 formatter=getattr(self, 'formatter', None), **kw)
+        link = self.link_to_raw(request, text, querystr, anchor, **kw)
+
         # Create a link to attachments if any exist
         if kw.get('attachment_indicator', 0):
             from MoinMoin.action import AttachFile

@@ -15,23 +15,16 @@ def execute(self, args):
     # Get list of template pages readable by current user
     filter = re.compile(self.request.cfg.page_template_regex, re.UNICODE).search
     templates = self.request.rootpage.getPageList(filter=filter)
-
+    result = []
     if templates:
         templates.sort()
-
+        page = self.formatter.page
         # send list of template pages
-        result = self.formatter.bullet_list(1)
-        for page in templates:
-            result = result +\
-                     self.formatter.listitem(1) +\
-                     wikiutil.link_tag(self.request, "%s?action=edit&amp;template=%s" % (
-                        wikiutil.quoteWikinameURL(self.formatter.page.page_name),
-                        wikiutil.quoteWikinameURL(page)), page
-                     ) + \
-                     self.formatter.listitem(0)
-
-        result = result + self.formatter.bullet_list(0)
-        return result
-
-    return ''
+        result.append(self.formatter.bullet_list(1))
+        for template in templates:
+            result.append(self.formatter.listitem(1))
+            result.append(page.link_to(self.request, template, querystr={'action': 'edit', 'template': template}))
+            result.append(self.formatter.listitem(0))
+        result.append(self.formatter.bullet_list(0))
+    return ''.join(result)
 
