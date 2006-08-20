@@ -8,7 +8,6 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo:
-    * Delete remote pages.
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Check what needs to be documented on MoinMaster.
 
@@ -16,9 +15,8 @@ Branch moin/1.6-sync-aschremmer
 
     * Test with prefixes
     * Search for XXX
-    * Delete iters?
     * Maybe refactor YYY into MoinLocalWiki
-    * Remove amount of "very" in the code
+    * Remove amount of "very" in the code, rename rp into sp
     * Clean up trailing whitespace.
 
     * Implement a cross-site authentication system, i.e. mainly an
