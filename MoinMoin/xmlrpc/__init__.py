@@ -698,11 +698,19 @@ class XmlRpcBase:
             
             @param pagename: The pagename that is currently dealt with.
             @param diff: The diff that can be applied to the version specified by delta_remote_rev.
+                If it is None, the page is deleted.
             @param local_rev: The revno of the page on the other wiki system, used for the tag.
             @param delta_remote_rev: The revno that the diff is taken against.
             @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
             @param interwiki_name: Used to build the interwiki tag.
             @param normalised_name: The normalised pagename that is common to both wikis.
+            
+            @return Returns the current revision number after the merge was done. Or one of the following errors:
+                * "SUCCESS" - the page could be merged and tagged successfully.
+                * "NOT_EXIST" - item does not exist and there was not any content supplied.
+                * "LASTREV_INVALID" - the page was changed and the revision got invalid
+                * "INTERNAL_ERROR" - there was an internal error
+                * "NOT_ALLOWED" - you are not allowed to do the merge operation on the page
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
@@ -727,6 +735,13 @@ class XmlRpcBase:
 
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
+
+        if diff is None: # delete the page
+            try:
+                currentpage.deletePage(comment)
+            except PageEditor.AccessDenied, (msg, ):
+                return xmlrpclib.Fault("NOT_ALLOWED", msg)
+            return currentpage.get_real_rev()
 
         # base revision used for the diff
         basepage = Page(self.request, pagename, rev=(delta_remote_rev or 0))

@@ -48,7 +48,6 @@ class ActionClass(object):
         self.pagename = pagename
         self.page = PageEditor(request, pagename)
         self.status = []
-        request.flush()
 
     def log_status(self, level, message="", substitutions=(), raw_suffix=""):
         """ Appends the message with a given importance level to the internal log. """
@@ -147,7 +146,7 @@ class ActionClass(object):
         self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
         # XXX release readlock on self.page
 
-        return self.page.send_page(self.request, msg=msg)
+        self.page.send_page(self.request, msg=msg)
     
     def sync(self, params, local, remote):
         """ This method does the syncronisation work.
@@ -249,9 +248,11 @@ class ActionClass(object):
                 if rp.local_deleted and not remote_change:
                     if direction == DOWN:
                         return
-                    self.log_status(ActionClass.ERROR, "Nothing done, I should have deleted %r remotely" % rp) # XXX add
-                    msg = remote.delete_page(rp.remote_name)
-                    self.log_status(ActionClass.INFO, _("Deleted page %s remotely."), (rp.name, ))
+                    msg = remote.delete_page(rp.remote_name, rp.remote_rev, local_full_iwid)
+                    if not msg:
+                        self.log_status(ActionClass.INFO, _("Deleted page %s remotely."), (rp.name, ))
+                    else:
+                        self.log_status(ActionClass.ERROR, _("Error while deleting page %s remotely:"), (rp.name, ), msg)
                     return
                 if rp.local_mime_type != MIMETYPE_MOIN and not (local_change ^ remote_change):
                     self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (rp.name, ))
