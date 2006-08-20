@@ -277,7 +277,7 @@ def do_refresh(pagename, request):
 def do_goto(pagename, request):
     """ redirect to another page """
     target = request.form.get('target', [''])[0]
-    request.http_redirect(Page(request, target).url(request, escape=0))
+    request.http_redirect(Page(request, target).url(request, escape=0, relative=False))
 
 def do_userform(pagename, request):
     """ save data posted from UserPreferences """
