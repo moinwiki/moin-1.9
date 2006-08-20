@@ -1,0 +1,153 @@
+Branch moin/1.6-sync-aschremmer
+===============================
+
+  Known main issues:
+    * Do I need to tag delete operations?
+    * How to handle renames?
+    * How will we store tags? (Metadata support would be handy)
+      (currently done in Pickle files)
+
+  ToDo:
+    * Delete remote pages.
+    * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
+    * Check what needs to be documented on MoinMaster.
+
+    * Show tags in an action=info view?
+
+    * Test with prefixes
+    * Search for XXX
+    * Delete iters?
+    * Maybe refactor YYY into MoinLocalWiki
+    * Remove amount of "very" in the code
+    * Clean up trailing whitespace.
+
+    * Implement a cross-site authentication system, i.e. mainly an
+      identity storage. (does OpenID make sense?)
+    * Add page locking, i.e. use the one in the new storage layer.
+    * Do older tags of one wiki site have to be stored as well? Why don't we
+      keep just one tag?
+    * Put author names into the comment field, transmit mimetypes.
+    * Implement renamed pages.
+
+  New Features:
+    * XMLRPC method to return the Moin version
+    * XMLRPC multicall support
+    * Conflict icon in RecentChanges
+    * XMLRPC Authentication System
+    * Binary Diffing
+    * XMLRPC method to get binary diffs
+    * XMLRPC method to merge remote changes locally
+    * XMLRPC method to get the interwiki name
+    * TagStore/PickleTagStore class
+    * XMLRPC method to get the pagelist in a special way (revnos,
+      no system pages etc.)
+    * IWID support - i.e. every instance has a unique ID
+    * InterWiki page editable in the wiki, modification detection based on mtimes
+    * SyncPages action
+    * XMLRPC functions may return Fault instances
+    * diff3 algorithm extended, a new mode should reduce the conflicts
+    * GetText2 macro
+
+  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+    * Conflict resolution fixes. (merged into main)
+    * Python 2.5 compatibility fixes in the Page caching logic (merged)
+    * sre pickle issues in the wikidicts code (merged)
+    * cgitb can hide particular names, this avoids information leaks
+      if the user files cannot be parsed for example
+    * Fixed User.__repr__ - it is insane to put the ID in there
+    * Worked around the FastCGI problem on Lighttpd: empty lines in the error log, thanks to Jay Soffian
+    * Fixed the MetaDict code to use locks.
+    * Fixed bug in request.py that avoided showing a traceback if there was a fault
+      after the first headers were sent.
+    * Fixed severe race conditions in the meta dict and the sync tags code.
+    * Mute the tempnam warning in the caching module.
+
+  Other Changes:
+    * Refactored conflict resolution and XMLRPC code.
+    * Enhanced API at some points.
+
+  Developer notes:
+    * ...
+
+Do not forget to check the related wiki page: http://moinmoin.wikiwikiweb.de/WikiSyncronisation
+
+Diary
+=====
+
+Week 21: Basic Infrastructur setup (repos),
+         initial talks to the mentor, started writing the design document,
+         helped other students to get started
+Week 22: Tax forms, Fulfilled transcription request,
+         written conflict icon support, refactored conflict handling,
+         changed conflict icon,
+         Added xmlrpc multicall support into the server and
+         backported the client code from python 2.4
+Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as
+         a base for syncronisation. (See wiki)
+Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
+Week 25: Conference in Chile (FET 2006).
+Week 26: Implementation of the XMLRPC authentication system, added binary
+         diffing (mainly taken from Mercurial, but had to merge 5 changesets,
+         remove some mercurial dependencies and document it. Currently, Mercurial
+         uses a module written in C to solve the problem, so the Python code
+         was not cared for anymore.)
+Week 27: Europython, Geneva.
+Week 28: Debian-Edu Developer Camp. Implemented getDiff XMLRPC method, added preliminary SyncPages action,
+         added interwikiName XMLRPC method, added mergeChanges XMLRPC method. Started analysis of the moinupdate
+         script written by Stefan Merten.
+Week 29: Finished first version of the mergeChanges method. Added Tag and TagStore classes which are currently
+         using pickle-based storage. Added getAllPagesEx XMLRPC method.
+Week 30: Implemented IWID support, added function to generate random strings. Added support
+         for editing the InterWikiMap in the wiki. Added locking to the PickleTagStore and
+         the MetaDict classes. Added handling of various options and detection of anonymous
+         wikis to the SyncPages action.
+Week 31: Load the IWID and the meta dict lazily. Reworked RemotePage/SyncPage,
+         fixed option handling again, refined semantics of options, introduced
+         direction option, replaced "localMatch"/"remoteMatch" by "pageMatch".
+         Store mtime for InterWiki list updates and detect changes based on it.
+         Added support for localPrefix and remotePrefix.
+Week 32: Continued work on the merge logic, finished prefix handling. Added local conflict
+         detection in SyncPages. Added logging support to SyncPages. Refactored conflict flag
+         detection from the edit action into the PageEditor class. Enhanced XMLRPC server in Moin to allow
+         XMLRPC functions to return Fault instances. Introduced a new diff3 mode that should reduce the
+         conflicts. Fixed hard to track down bugs in SyncPages. Store full IWIDs and match by
+         either of both components when searching for tags. Ignore underlay pages. Filter the remote page list by
+         the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
+Week 33: Started designing the solutions for the other sync cases. Store and transmit the
+         normalised name. Implemented preliminary mime type support, only transmission of the mime type
+         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
+         Added infrastructure support for detecting deleted pages (not used in the merging logic yet).
+         Reworked i18n and logging support. Added GetText2 macro. Getting syncing of pages
+         working that are just available on one side. Working synchronisation of deleted pages.
+
+2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-20: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-21: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-22: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-23: no work on SOC project -- a Sunday
+2006-07-24: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-25: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-26: student didnt work on project
+2006-07-27: student didnt work on project
+2006-07-28: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-29: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-30: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-07-31: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-01: student didn't work on project
+2006-08-02: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-03: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-04: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
+2006-08-05: student didn't work on project
+2006-08-06: student didn't work on project -- a Sunday
+2006-08-07: entry missing
+2006-08-08: entry missing
+2006-08-09: entry missing
+2006-08-10: entry missing
+2006-08-11: entry missing
+2006-08-12: entry missing
+2006-08-13: entry missing
+2006-08-14: entry missing
+2006-08-15: entry missing
+2006-08-16: entry missing
+2006-08-17: entry missing
