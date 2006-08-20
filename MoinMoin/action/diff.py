@@ -143,9 +143,11 @@ def execute(pagename, request):
             if ignorews:
                 request.write(_('(ignoring whitespace)') + '<br>')
             else:
-                qstr = 'action=diff&ignorews=1'
-                if rev1: qstr = '%s&rev1=%s' % (qstr, rev1)
-                if rev2: qstr = '%s&rev2=%s' % (qstr, rev2)
+                qstr = {'action': 'diff', 'ignorews': '1', }
+                if rev1:
+                    qstr['rev1'] = str(rev1)
+                if rev2:
+                    qstr['rev2'] = str(rev2)
                 request.write(Page(request, pagename).link_to(request,
                     text=_('Ignore changes in the amount of whitespace'),
                     querystr=qstr, rel='nofollow') + '<p>')

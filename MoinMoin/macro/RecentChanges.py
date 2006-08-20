@@ -54,36 +54,29 @@ def format_page_edits(macro, lines, bookmark_usecs):
     is_new = lines[-1].action == 'SAVENEW'
     # check whether this page is newer than the user's bookmark
     hilite = line.ed_time_usecs > (bookmark_usecs or line.ed_time_usecs)
-    page = Page(request, line.pagename)
+    page = Page(request, pagename)
 
     html_link = ''
     if not page.exists():
         # indicate page was deleted
-        html_link = request.theme.make_icon('deleted')
+        html_link = request.theme.make_icon('deleted') # TODO: we could link to the last existing rev here
     elif page.isConflict():
         img = macro.formatter.smiley("/!\\")
         #img = request.theme.make_icon('help')
-        html_link = wikiutil.link_tag(request,
-                                      wikiutil.quoteWikinameURL(pagename) + "?action=edit",
-                                      img, formatter=macro.formatter, rel="nofollow")
+        html_link = page.link_to_raw(request, img, querystr={'action': 'edit'}, rel='nofollow')
     elif is_new:
         # show "NEW" icon if page was created after the user's bookmark
         if hilite:
             img = request.theme.make_icon('new')
-            html_link = wikiutil.link_tag(request, wikiutil.quoteWikinameURL(pagename),
-                                          img, formatter=macro.formatter, rel="nofollow")
+            html_link = page.link_to_raw(request, img, rel='nofollow')
     elif hilite:
         # show "UPDATED" icon if page was edited after the user's bookmark
         img = request.theme.make_icon('updated')
-        html_link = wikiutil.link_tag(request,
-                                      wikiutil.quoteWikinameURL(pagename) + "?action=diff&date=%d" % bookmark_usecs,
-                                      img, formatter=macro.formatter, rel="nofollow")
+        html_link = page.link_to_raw(request, img, querystr={'action': 'diff', 'date': '%d' % bookmark_usecs}, rel='nofollow')
     else:
         # show "DIFF" icon else
         img = request.theme.make_icon('diffrc')
-        html_link = wikiutil.link_tag(request,
-                                      wikiutil.quoteWikinameURL(line.pagename) + "?action=diff",
-                                      img, formatter=macro.formatter, rel="nofollow")
+        html_link = page.link_to_raw(request, img, querystr={'action': 'diff'}, rel='nofollow')
 
     # print name of page, with a link to it
     force_split = len(page.page_name) > _MAX_PAGENAME_LENGTH
@@ -131,10 +124,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     d['comments'] = comments
 
     img = request.theme.make_icon('info')
-    info_html = wikiutil.link_tag(request,
-                                  wikiutil.quoteWikinameURL(line.pagename) + "?action=info",
-                                  img, formatter=macro.formatter, rel="nofollow")
-    d['info_html'] = info_html
+    d['info_html'] = page.link_to_raw(request, img, querystr={'action': 'info'}, rel='nofollow')
 
     return request.theme.recentchanges_entry(d)
 
@@ -256,17 +246,11 @@ def execute(macro, args, **kw):
             currentBookmark = wikiutil.version2timestamp(bookmark_usecs)
             currentBookmark = user.getFormattedDateTime(currentBookmark)
             currentBookmark = _('(currently set to %s)') % currentBookmark
-
-            url = wikiutil.quoteWikinameURL(pagename) + "?action=bookmark&time=del"
-            deleteBookmark = wikiutil.link_tag(request, url, _("Delete Bookmark"),
-                                               formatter=macro.formatter, rel="nofollow")
+            deleteBookmark = page.link_to(request, _("Delete bookmark"), querystr={'action': 'bookmark', 'time': 'del'}, rel='nofollow')
             d['rc_curr_bookmark'] = currentBookmark + ' ' + deleteBookmark
 
         version = wikiutil.timestamp2version(tnow)
-        url = wikiutil.quoteWikinameURL(pagename) + \
-            "?action=bookmark&time=%d" % version
-        d['rc_update_bookmark'] = wikiutil.link_tag(request, url, _("Set bookmark"),
-                                                    formatter=macro.formatter, rel="nofollow")
+        d['rc_update_bookmark'] = page.link_to(request, _("Set bookmark"), querystr={'action': 'bookmark', 'time': '%d' % version}, rel='nofollow')
 
     # set max size in days
     max_days = min(int(request.form.get('max_days', [0])[0]), _DAYS_SELECTION[-1])
@@ -302,26 +286,22 @@ def execute(macro, args, **kw):
         if ((this_day != day or (not hilite and not max_days))) and len(pages) > 0:
             # new day or bookmark reached: print out stuff 
             this_day = day
-            for page in pages:
-                ignore_pages[page] = None
+            for p in pages:
+                ignore_pages[p] = None
             pages = pages.values()
             pages.sort(cmp_lines)
             pages.reverse()
 
             if request.user.valid:
-                d['bookmark_link_html'] = wikiutil.link_tag(
-                    request,
-                    wikiutil.quoteWikinameURL(
-                        macro.formatter.page.page_name) + "?action=bookmark&time=%d" % (pages[0][0].ed_time_usecs,),
-                        _("set bookmark"),
-                        formatter=macro.formatter, rel="nofollow")
+                bmtime = pages[0][0].ed_time_usecs
+                d['bookmark_link_html'] = page.link_to(request, _("Set bookmark"), querystr={'action': 'bookmark', 'time': '%d' % bmtime}, rel='nofollow')
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
             request.write(request.theme.recentchanges_daybreak(d))
 
-            for page in pages:
-                request.write(format_page_edits(macro, page, bookmark_usecs))
+            for p in pages:
+                request.write(format_page_edits(macro, p, bookmark_usecs))
             pages = {}
             day_count += 1
             if max_days and (day_count >= max_days):
@@ -348,26 +328,22 @@ def execute(macro, args, **kw):
             # end of loop reached: print out stuff 
             # XXX duplicated code from above
             # but above does not trigger if we have the first day in wiki history
-            for page in pages:
-                ignore_pages[page] = None
+            for p in pages:
+                ignore_pages[p] = None
             pages = pages.values()
             pages.sort(cmp_lines)
             pages.reverse()
 
             if request.user.valid:
-                d['bookmark_link_html'] = wikiutil.link_tag(
-                    request,
-                    wikiutil.quoteWikinameURL(
-                        macro.formatter.page.page_name) + "?action=bookmark&time=%d" % (pages[0][0].ed_time_usecs,),
-                        _("Set bookmark"),
-                        formatter=macro.formatter, rel="nofollow")
+                bmtime = pages[0][0].ed_time_usecs
+                d['bookmark_link_html'] = page.link_to(request, _("Set bookmark"), querystr={'action': 'bookmark', 'time': '%d' % bmtime}, rel='nofollow')
             else:
                 d['bookmark_link_html'] = None
             d['date'] = request.user.getFormattedDate(wikiutil.version2timestamp(pages[0][0].ed_time_usecs))
             request.write(request.theme.recentchanges_daybreak(d))
 
-            for page in pages:
-                request.write(format_page_edits(macro, page, bookmark_usecs))
+            for p in pages:
+                request.write(format_page_edits(macro, p, bookmark_usecs))
 
 
     d['rc_msg'] = msg

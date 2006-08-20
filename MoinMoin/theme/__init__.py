@@ -1158,10 +1158,10 @@ actionsMenuInit('%(label)s');
         _ = self.request.getText
         return """\
 <script type="text/javascript">
-var gui_editor_link_href = "%(url)s?action=edit&editor=gui";
+var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 </script>        
-""" % {'url': page.url(self.request),
+""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0),
        'text': _('Edit (GUI)', formatted=False),
       }
 
