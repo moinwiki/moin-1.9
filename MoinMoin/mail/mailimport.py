@@ -235,7 +235,7 @@ def import_mail_from_message(request, message):
                 break
 
     # build an attachment link table for the page with the e-mail
-    attachment_links = [""] + [u'''[attachment:"%s/%s" %s]''' % (pagename, att, att) for att in attachments]
+    attachment_links = [""] + [u'''[attachment:%s %s]''' % (wikiutil.quoteName("%s/%s" % (pagename, att)), att) for att in attachments]
 
     # assemble old page content and new mail body together
     old_content = Page(request, pagename).get_raw_body()
@@ -280,7 +280,7 @@ def import_mail_from_message(request, message):
         from_col = email_to_markup(request, msg['from_addr'])
         to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
                            for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
-        subj_col = '["%s" %s]' % (pagename, msg['subject'])
+        subj_col = '[%s %s]' % (wikiutil.quoteName(pagename), msg['subject'])
         date_col = msg['date']
         attach_col = " ".join(attachment_links)
         new_line = u'|| %s || %s || %s || [[DateTime(%s)]] || %s ||' % (from_col, to_col, subj_col, date_col, attach_col)
