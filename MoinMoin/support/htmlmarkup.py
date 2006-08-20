@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# copied from trac.util.markup, revision 3446, merged on 2006-06-30
+# copied from trac.util.html, revision 3609, merged on 2006-08-20
 #
 # Copyright (C) 2003-2006 Edgewall Software
+# Copyright 2006 MoinMoin:AlexanderSchremmer
 # All rights reserved.
 #
 # This software is licensed as described in the file COPYING, which
@@ -318,8 +319,11 @@ class Fragment(object):
             else:
                 yield escape(child, quotes=False)
 
+    def __unicode__(self):
+        return u''.join(self.serialize())
+
     def __str__(self):
-        return Markup(''.join(self.serialize()))
+        return ''.join(self.serialize())
 
     def __add__(self, other):
         return Fragment()(self, other)

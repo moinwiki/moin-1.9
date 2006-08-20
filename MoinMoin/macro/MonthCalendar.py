@@ -312,10 +312,10 @@ def execute(macro, text):
     qpagenames = '*'.join(map(wikiutil.quoteWikinameURL, parmpagename))
     qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
     querystr = "calparms=%%s,%d,%d,%d,%%d,%%s" % (parmyear, parmmonth, parmoffset)
-    prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate), 0)
-    nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), 0)
-    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate), 0)
-    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate), 0)
+    prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate), escape=0)
+    nextlink = p.url(request, querystr % (qpagenames, parmoffset2 + 1, qtemplate), escape=0)
+    prevylink = p.url(request, querystr % (qpagenames, parmoffset2 - 12, qtemplate), escape=0)
+    nextylink = p.url(request, querystr % (qpagenames, parmoffset2 + 12, qtemplate), escape=0)
     prevmonth = formatter.url(1, prevlink, 'cal-link') + '&lt;' + formatter.url(0)
     nextmonth = formatter.url(1, nextlink, 'cal-link') + '&gt;' + formatter.url(0)
     prevyear = formatter.url(1, prevylink, 'cal-link') + '&lt;&lt;' + formatter.url(0)
@@ -428,7 +428,7 @@ def execute(macro, text):
                             r, g, b = (r, g+colorstep, b)
                 r, g, b = cliprgb(r, g, b)
                 style = 'background-color:#%02x%02x%02x' % (r, g, b)
-                fmtlink = formatter.url(1, daypage.url(request, query), csslink, **onmouse) + str(day) + formatter.url(0)
+                fmtlink = formatter.url(1, daypage.url(request, query, escape=0), csslink, **onmouse) + str(day) + formatter.url(0)
                 if day == currentday and month == currentmonth and year == currentyear:
                     cssday = "cal-today"
                     fmtlink = "<b>%s</b>" % fmtlink # for browser with CSS probs

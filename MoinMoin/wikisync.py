@@ -155,10 +155,6 @@ class RemoteWiki(object):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
-    def delete_page(self, pagename):
-        """ Deletes the page called pagename. """
-        return NotImplemented
-
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
@@ -218,10 +214,17 @@ class MoinRemoteWiki(RemoteWiki):
         result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
         return result
 
-    def delete_page(self, pagename):
-        return # XXX not implemented yet
+    def delete_page(self, pagename, last_remote_rev, interwiki_name):
+        try:
+            result = self.connection.mergeDiff(pagename, None, None, None, last_remote_rev, interwiki_name, None)
+        except xmlrpclib.Fault, e:
+            if e.faultCode == "NOT_ALLOWED":
+                return e.faultString
+            raise
+        return ""
 
     # Methods implementing the RemoteWiki interface
+
     def get_interwiki_name(self):
         return self.remote_interwikiname
 
@@ -281,7 +284,7 @@ class MoinLocalWiki(RemoteWiki):
     # Public methods:
 
     # Methods implementing the RemoteWiki interface
-    def delete_page(self, page_name, comment):
+    def delete_page(self, pagename, comment):
         page = PageEditor(self.request, page_name)
         try:
             page.deletePage(comment)
@@ -318,15 +321,15 @@ class MoinLocalWiki(RemoteWiki):
         return "<MoinLocalWiki>"
 
 
-# ------------------ Tags ------------------ 
+# ------------------ Tags ------------------
 
 
 class Tag(object):
     """ This class is used to store information about merging state. """
-    
+
     def __init__(self, remote_wiki, remote_rev, current_rev, direction, normalised_name):
         """ Creates a new Tag.
-        
+
         @param remote_wiki: The identifier of the remote wiki.
         @param remote_rev: The revision number on the remote end.
         @param current_rev: The related local revision.
@@ -390,7 +393,7 @@ class PickleTagStore(AbstractTagStore):
 
     def __init__(self, page):
         """ Creates a new TagStore that uses pickle files.
-        
+
         @param page: a Page object where the tags should be related to
         """
 
@@ -416,7 +419,7 @@ class PickleTagStore(AbstractTagStore):
             self.tags = []
         else:
             datafile.close()
-    
+
     def commit(self):
         """ Writes the memory contents to the data file. """
         datafile = file(self.filename, "wb")
@@ -468,3 +471,4 @@ class PickleTagStore(AbstractTagStore):
 # currently we just have one implementation, so we do not need
 # a factory method
 TagStore = PickleTagStore
+

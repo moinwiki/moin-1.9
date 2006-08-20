@@ -197,7 +197,6 @@ def execute(pagename, request):
     # main function
     _ = request.getText
     page = Page(request, pagename)
-    qpagename = wikiutil.quoteWikinameURL(pagename)
     title = page.split_title(request)
 
     request.emit_http_headers()

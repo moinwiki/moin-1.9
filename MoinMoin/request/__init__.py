@@ -1060,6 +1060,18 @@ class RequestBase(object):
 
             # The last component in path_info is the page name, if any
             path = self.getPathinfo()
+
+            # we can have all action URLs like this: /action/ActionName/PageName?action=ActionName&...
+            # this is just for robots.txt being able to forbid them for crawlers
+            prefix = self.cfg.url_prefix_action
+            if prefix is not None:
+                prefix = '/%s/' % prefix # e.g. '/action/'
+                if path.startswith(prefix):
+                    # remove prefix and action name
+                    path = path[len(prefix):]
+                    action, path = path.split('/', 1)
+                    path = '/' + path
+
             if path.startswith('/'):
                 pagename = self.normalizePagename(path)
             else:
@@ -1094,10 +1106,10 @@ space between words. Group page name is not allowed.""") % self.user.name
                         wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1])
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
-                        url = Page(self, pagetrail[-1]).url(self)
+                        url = Page(self, pagetrail[-1]).url(self, escape=0)
                 else:
                     # Or to localized FrontPage
-                    url = wikiutil.getFrontPage(self).url(self)
+                    url = wikiutil.getFrontPage(self).url(self, escape=0)
                 self.http_redirect(url)
                 return self.finish()
 

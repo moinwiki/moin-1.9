@@ -5,7 +5,7 @@
     If you want to use wikirpc function "putPage", read the comments in
     xmlrpc_putPage or it won't work!
     
-    Parts of this code are based on Jrgen Hermann's wikirpc.py,
+    Parts of this code are based on Jürgen Hermann's wikirpc.py,
     Les Orchard's "xmlrpc.cgi" and further work by Gustavo Niemeyer.
 
     See http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=WikiRPCInterface
@@ -130,7 +130,7 @@ class XmlRpcBase:
             else:
                 # wrap response in a singleton tuple
                 response = (response,)
-    
+
                 # serialize it
                 response = xmlrpclib.dumps(response, methodresponse=1)
 
@@ -182,7 +182,7 @@ class XmlRpcBase:
         request.
 
         See http://www.xmlrpc.com/discuss/msgReader$1208
-        
+
         Copied from SimpleXMLRPCServer.py
         """
 
@@ -275,7 +275,7 @@ class XmlRpcBase:
         pagelist = self.request.rootpage.getPageList(filter=p_filter, exists=not options["include_deleted"],
                                                      include_underlay=options["include_underlay"],
                                                      return_objects=options["include_revno"])
-        
+
         if options['include_revno']:
             pages = []
             for x in pagelist:
@@ -289,7 +289,7 @@ class XmlRpcBase:
 
     def xmlrpc_getRecentChanges(self, date):
         """ Get RecentChanges since date
-        
+
         @param date: date since when rc will be listed
         @rtype: list
         @return: a list of changed pages since date, which should be in
@@ -695,14 +695,22 @@ class XmlRpcBase:
     def xmlrpc_mergeDiff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, normalised_name):
         """ Merges a diff sent by the remote machine and returns the number of the new revision.
             Additionally, this method tags the new revision.
-            
+
             @param pagename: The pagename that is currently dealt with.
             @param diff: The diff that can be applied to the version specified by delta_remote_rev.
+                If it is None, the page is deleted.
             @param local_rev: The revno of the page on the other wiki system, used for the tag.
             @param delta_remote_rev: The revno that the diff is taken against.
             @param last_remote_rev: The last revno of the page `pagename` that is known by the other wiki site.
             @param interwiki_name: Used to build the interwiki tag.
             @param normalised_name: The normalised pagename that is common to both wikis.
+
+            @return Returns the current revision number after the merge was done. Or one of the following errors:
+                * "SUCCESS" - the page could be merged and tagged successfully.
+                * "NOT_EXIST" - item does not exist and there was not any content supplied.
+                * "LASTREV_INVALID" - the page was changed and the revision got invalid
+                * "INTERNAL_ERROR" - there was an internal error
+                * "NOT_ALLOWED" - you are not allowed to do the merge operation on the page
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
@@ -712,7 +720,7 @@ class XmlRpcBase:
         pagename = self._instr(pagename)
 
         comment = u"Remote Merge - %r" % unpackLine(interwiki_name)[-1]
-        
+
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
             return self.notAllowedFault()
@@ -727,6 +735,13 @@ class XmlRpcBase:
 
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
+
+        if diff is None: # delete the page
+            try:
+                currentpage.deletePage(comment)
+            except PageEditor.AccessDenied, (msg, ):
+                return xmlrpclib.Fault("NOT_ALLOWED", msg)
+            return currentpage.get_real_rev()
 
         # base revision used for the diff
         basepage = Page(self.request, pagename, rev=(delta_remote_rev or 0))
@@ -744,7 +759,7 @@ class XmlRpcBase:
             return LASTREV_INVALID
 
         current_rev = currentpage.get_real_rev()
-        
+
         tags = TagStore(currentpage)
         tags.add(remote_wiki=interwiki_name, remote_rev=local_rev, current_rev=current_rev, direction=BOTH, normalised_name=normalised_name)
 

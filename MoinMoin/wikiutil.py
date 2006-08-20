@@ -191,7 +191,7 @@ def makeQueryString(qstr=None, want_unicode=False, **kw):
     """
     if qstr is None:
         qstr = {}
-    if isinstance(qstr, type({})):
+    if isinstance(qstr, dict):
         qstr.update(kw)
         items = ['%s=%s' % (url_quote_plus(key, want_unicode=want_unicode), url_quote_plus(value, want_unicode=want_unicode)) for key, value in qstr.items()]
         qstr = '&'.join(items)
@@ -490,6 +490,26 @@ class MetaDict(dict):
             self.wlock.release()
 
 
+# Quoting of wiki names, file names, etc. (in the wiki markup) -----------------------------------
+
+QUOTE_CHARS = u"'\""
+
+def quoteName(name):
+    """ put quotes around a given name """
+    for quote_char in QUOTE_CHARS:
+        if quote_char not in name:
+            return u"%s%s%s" % (quote_char, name, quote_char)
+    else:
+        return name # XXX we need to be able to escape the quote char for worst case
+
+def unquoteName(name):
+    """ if there are quotes around the name, strip them """
+    for quote_char in QUOTE_CHARS:
+        if quote_char == name[0] == name[-1]:
+            return name[1:-1]
+    else:
+        return name
+
 #############################################################################
 ### InterWiki
 #############################################################################
@@ -594,7 +614,7 @@ def split_wiki(wikiurl):
         except ValueError:
             wikiname, rest = 'Self', wikiurl
     first_char = rest[0]
-    if first_char in "'\"": # quoted pagename
+    if first_char in QUOTE_CHARS: # quoted pagename
         pagename_linktext = rest[1:].split(first_char, 1)
     else: # not quoted, split on whitespace
         pagename_linktext = rest.split(None, 1)
@@ -822,7 +842,7 @@ def pagelinkmarkup(pagename):
     if re.match(Parser.word_rule + "$", pagename):
         return pagename
     else:
-        return u'["%s"]' % pagename
+        return u'["%s"]' % pagename # XXX use quoteName(pagename) later
 
 #############################################################################
 ### mimetype support
@@ -860,7 +880,6 @@ for key, value in MIMETYPES_sanitize_mapping.items():
     MIMETYPES_spoil_mapping[value] = key
 
 
-# mimetype stuff ------------------------------------------------------------
 class MimeType(object):
     """ represents a mimetype like text/plain """
 
@@ -1458,6 +1477,8 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
     @rtype: string
     @return: formatted link tag
     """
+    if formatter is None:
+        formatter = request.html_formatter
     if kw.has_key('css_class'):
         css_class = kw['css_class']
         del kw['css_class'] # one time is enough
@@ -1469,26 +1490,29 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
         text = params # default
     if formatter:
         url = "%s/%s" % (request.getScriptname(), params)
+        # formatter.url will escape the url part
         if on is not None:
-            return formatter.url(on, url, css_class, **kw)
-        return (formatter.url(1, url, css_class, **kw) +
+            tag = formatter.url(on, url, css_class, **kw)
+        else:
+            tag = (formatter.url(1, url, css_class, **kw) +
                 formatter.rawHTML(text) +
                 formatter.url(0))
-    if on is not None and not on:
-        return '</a>'
-
-    attrs = ''
-    if css_class:
-        attrs += ' class="%s"' % css_class
-    if id:
-        attrs += ' id="%s"' % id
-    if name:
-        attrs += ' name="%s"' % name
-    result = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
-    if on:
-        return result
-    else:
-        return "%s%s</a>" % (result, text)
+    else: # this shouldn't be used any more:
+        if on is not None and not on:
+            tag = '</a>'
+        else:
+            attrs = ''
+            if css_class:
+                attrs += ' class="%s"' % css_class
+            if id:
+                attrs += ' id="%s"' % id
+            if name:
+                attrs += ' name="%s"' % name
+            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params) # XXX wikiutil.escape(params) !?
+            if not on:
+                tag = "%s%s</a>" % (tag, text)
+        request.log("Warning: wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))
+    return tag
 
 def containsConflictMarker(text):
     """ Returns true if there is a conflict marker in the text. """
