@@ -43,6 +43,9 @@ def normalise_pagename(page_name, prefix):
 class UnsupportedWikiException(Exception): pass
 
 
+class NotAllowedException(Exception): pass
+
+
 class SyncPage(object):
     """ This class represents a page in one or two wiki(s). """
     def __init__(self, name, local_rev=None, remote_rev=None, local_name=None, remote_name=None,
@@ -211,7 +214,12 @@ class MoinRemoteWiki(RemoteWiki):
 
     def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name):
         """ Merges the diff into the page on the remote side. """
-        result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
+        try:
+            result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
+        except xmlrpclib.Fault, e:
+            if e.faultCode == "NOT_ALLOWED":
+                raise NotAllowedException
+            raise
         return result
 
     def delete_page(self, pagename, last_remote_rev, interwiki_name):

@@ -723,7 +723,7 @@ class XmlRpcBase:
 
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
-            return self.notAllowedFault()
+            return xmlrpclib.Fault("NOT_ALLOWED", "You are not allowed to write to this page.")
 
         # XXX add locking here!
 

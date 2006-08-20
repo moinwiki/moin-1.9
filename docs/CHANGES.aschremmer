@@ -8,7 +8,6 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo:
-    * Implement rollback
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Check what needs to be documented on MoinMaster.
     * Test with prefixes
@@ -114,6 +113,7 @@ Week 33: Started designing the solutions for the other sync cases. Store and tra
          Added infrastructure support for detecting deleted pages (not used in the merging logic yet).
          Reworked i18n and logging support. Added GetText2 macro. Getting syncing of pages
          working that are just available on one side. Working synchronisation of deleted pages.
+         Implemented rollback in case of remote problems and exception logging.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
