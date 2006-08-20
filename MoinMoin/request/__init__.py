@@ -18,6 +18,13 @@ except:
 from MoinMoin import config, wikiutil, user, caching, error
 from MoinMoin.util import IsWin9x
 
+# umask setting --------------------------------------------------------
+# We do this once per Python process, when request is imported:
+try:
+    # we need to use a bitwise inverted value of config.umask
+    os.umask(0777 ^ config.umask)
+except: # we are on win32
+    pass
 
 # Exceptions -----------------------------------------------------------
 

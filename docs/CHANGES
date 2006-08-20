@@ -137,6 +137,7 @@ Version 1.6.current:
     * setResponseCode request method DEPRECATED (it only worked for Twisted
       anyway), just use emit_http_headers and include a Status: XXX header.
       Method will vanish with moin 1.7. 
+    * cfg.url_prefix is DEPRECATED, please use cfg.url_prefix_static.
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more
@@ -220,6 +221,15 @@ Version 1.6.current:
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
       You need to change this in your wikiconfig.py or farmconfig.py file.
       See MoinMoin/multiconfig.py for an alternative way if you can't do that.
+    * HINT: you need to change your url_prefix setting in 2 ways:
+      1. The setting is now called url_prefix_static (to make it more clear
+         that we mean the static stuff, not the wiki script url).
+      2. The strongly recommended (and default) value of it is '/moin_static160'
+         for moin version 1.6.0 (and will be ...161 for moin 1.6.1). We use a
+         very long cache lifetime for static stuff now, so it is required to
+         change the URL of static stuff when the static stuff changes (e.g. on
+         a version upgrade of moin) to avoid problems with stale cache content.
+         Your moin will be faster with lower load and traffic because of this.
 
 Version 1.5-current:
    * moin.fcg improved - if you use FastCGI, you must use the new file:
@@ -228,6 +238,9 @@ Version 1.5-current:
      * the count of created threads is limited now (default: 5), you can use 1
        to use non-threaded operation.
      * configurable socket.listen() backlog (default: 5)
+  * tuning:
+    * more efficient locking code on POSIX platforms, we do much less I/O there now
+    * removed most chmod calls in favour of a single os.umask call
   
 Version 1.5.4:
     HINT: read docs/README.migration.

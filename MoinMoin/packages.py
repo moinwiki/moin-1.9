@@ -255,16 +255,13 @@ class ScriptEngine:
         revstr = '%08d' % 1
         if not os.path.exists(revdir):
             os.mkdir(revdir)
-            os.chmod(revdir, 0777 & config.umask)
 
         currentf = open(cfn, 'w')
         currentf.write(revstr + "\n")
         currentf.close()
-        os.chmod(cfn, 0666 & config.umask)
 
         pagefile = os.path.join(revdir, revstr)
         self._extractToFile(filename, pagefile)
-        os.chmod(pagefile, 0666 & config.umask)
 
         # Clear caches
         try:

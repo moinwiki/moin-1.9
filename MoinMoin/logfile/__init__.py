@@ -139,11 +139,6 @@ class LogFile:
             return self._input
         elif name == "_output":
             self._output = codecs.open(self.__filename, 'a', config.charset)
-            try:
-                os.chmod(self.__filename, 0666 & config.umask)
-            except OSError:
-                # TODO: should not ignore errors like this!
-                pass
             return self._output
         else:
             raise AttributeError(name)

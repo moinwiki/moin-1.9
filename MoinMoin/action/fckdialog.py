@@ -87,7 +87,7 @@ function OnChange( sMacro )
        <td valign="top">
        <span fckLang="MacroDlgName">Macro Name</span><br>
        <select id="txtName" size="10" onchange="OnChange(this.value);">
-''' % request.cfg.url_prefix)
+''' % request.cfg.url_prefix_static)
 
     macros = []
     for macro in macro_list(request):
@@ -240,7 +240,7 @@ def link_dialog(request):
         ['<option value="%s">%s</option>' % (key, key) for key in resultlist])
 
     # wiki url
-    url_prefix = request.cfg.url_prefix
+    url_prefix_static = request.cfg.url_prefix_static
     scriptname = request.getScriptname()
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
@@ -275,9 +275,9 @@ def link_dialog(request):
   <title>Link Properties</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="noindex,nofollow" />
-  <script src="%(url_prefix)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinlink/fck_link.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinlink/fck_link.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
  </head>
  <body scroll="no" style="OVERFLOW: hidden">
   <div id="divInfo" style="DISPLAY: none">
@@ -392,7 +392,7 @@ def attachment_dialog(request):
         page_list = ""
 
     # wiki url
-    url_prefix = request.cfg.url_prefix
+    url_prefix_static = request.cfg.url_prefix_static
     scriptname = request.getScriptname()
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
@@ -426,9 +426,9 @@ def attachment_dialog(request):
   <title>Attachment Properties</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="noindex,nofollow" />
-  <script src="%(url_prefix)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinattachment/fck_attachment.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinattachment/fck_attachment.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
  </head>
  <body scroll="no" style="OVERFLOW: hidden">
   <div id="divInfo">
@@ -463,7 +463,7 @@ def attachment_dialog(request):
 
 def image_dialog(request):
     request.emit_http_headers()
-    url_prefix = request.cfg.url_prefix
+    url_prefix_static = request.cfg.url_prefix_static
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -485,9 +485,9 @@ def image_dialog(request):
   <title>Link Properties</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="robots" content="noindex,nofollow" />
-  <script src="%(url_prefix)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinimage/fck_image.js" type="text/javascript"></script>
-  <script src="%(url_prefix)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/FCKeditor/editor/dialog/common/fck_dialog_common.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinimage/fck_image.js" type="text/javascript"></script>
+  <script src="%(url_prefix_static)s/applets/moinFCKplugins/moinurllib.js" type="text/javascript"></script>
  </head>
  <body scroll="no" style="OVERFLOW: hidden">
     <table cellspacing="0" cellpadding="0" width="100%%" border="0">

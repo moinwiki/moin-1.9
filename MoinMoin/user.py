@@ -525,11 +525,6 @@ class User:
                 data.write(line)
         data.close()
 
-        try:
-            os.chmod(self.__filename(), 0666 & config.umask)
-        except OSError:
-            pass
-
         if not self.disabled:
             self.valid = 1
 
@@ -580,10 +575,6 @@ class User:
             bmfile = open(bm_fn, "w")
             bmfile.write(str(tm)+"\n")
             bmfile.close()
-            try:
-                os.chmod(bm_fn, 0666 & config.umask)
-            except OSError:
-                pass
 
     def getBookmark(self):
         """ Get bookmark timestamp.
@@ -869,12 +860,6 @@ class User:
                 file.write(data)
             finally:
                 file.close()
-
-            try:
-                os.chmod(path, 0666 & config.umask)
-            except OSError, err:
-                self._request.log("Can't change mode of trail file: %s" %
-                                  str(err))
         except (IOError, OSError), err:
             self._request.log("Can't save trail file: %s" % str(err))
 

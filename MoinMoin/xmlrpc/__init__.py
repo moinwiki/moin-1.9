@@ -706,11 +706,12 @@ class XmlRpcBase:
         """
         from MoinMoin.util.bdiff import decompress, patch
         from MoinMoin.wikisync import TagStore, BOTH
+        from MoinMoin.packages import unpackLine
         LASTREV_INVALID = xmlrpclib.Fault("LASTREV_INVALID", "The page was changed")
 
         pagename = self._instr(pagename)
 
-        comment = u"Remote Merge - %r" % interwiki_name
+        comment = u"Remote Merge - %r" % unpackLine(interwiki_name)[-1]
         
         # User may read page?
         if not self.request.user.may.read(pagename) or not self.request.user.may.write(pagename):
@@ -721,14 +722,14 @@ class XmlRpcBase:
         # current version of the page
         currentpage = PageEditor(self.request, pagename, do_editor_backup=0)
 
-        if currentpage.get_real_rev() != last_remote_rev:
+        if last_remote_rev is not None and currentpage.get_real_rev() != last_remote_rev:
             return LASTREV_INVALID
 
         if not currentpage.exists() and diff is None:
             return xmlrpclib.Fault("NOT_EXIST", "The page does not exist and no diff was supplied.")
 
         # base revision used for the diff
-        basepage = Page(self.request, pagename, rev=delta_remote_rev)
+        basepage = Page(self.request, pagename, rev=(delta_remote_rev or 0))
 
         # generate the new page revision by applying the diff
         newcontents = patch(basepage.get_raw_body_str(), decompress(str(diff)))
@@ -736,7 +737,7 @@ class XmlRpcBase:
 
         # write page
         try:
-            currentpage.saveText(newcontents.decode("utf-8"), last_remote_rev, comment=comment)
+            currentpage.saveText(newcontents.decode("utf-8"), last_remote_rev or 0, comment=comment)
         except PageEditor.Unchanged: # could happen in case of both wiki's pages being equal
             pass
         except PageEditor.EditConflict:
@@ -822,7 +823,6 @@ class XmlRpcBase:
         if os.path.exists(filename) and not os.path.isfile(filename):
             return self.noSuchPageFault()
         open(filename, 'wb+').write(data.data)
-        os.chmod(filename, 0666 & config.umask)
         AttachFile._addLogEntry(self.request, 'ATTNEW', pagename, filename)
         return xmlrpclib.Boolean(1)
 

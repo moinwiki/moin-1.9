@@ -29,6 +29,7 @@ class UnsafeSyncTestcase(TestCase):
         self.assert_(not tags.get_all_tags())
         tags.add(remote_wiki="foo", remote_rev=1, current_rev=2, direction=BOTH, normalised_name="FrontPage")
         tags = TagStore(self.page) # reload
+        dummy = repr(tags.get_all_tags()) # this should not raise
         self.assert_(tags.get_all_tags()[0].remote_rev == 1)
     
     def tearDown(self):
