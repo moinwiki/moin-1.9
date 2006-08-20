@@ -321,15 +321,15 @@ class MoinLocalWiki(RemoteWiki):
         return "<MoinLocalWiki>"
 
 
-# ------------------ Tags ------------------ 
+# ------------------ Tags ------------------
 
 
 class Tag(object):
     """ This class is used to store information about merging state. """
-    
+
     def __init__(self, remote_wiki, remote_rev, current_rev, direction, normalised_name):
         """ Creates a new Tag.
-        
+
         @param remote_wiki: The identifier of the remote wiki.
         @param remote_rev: The revision number on the remote end.
         @param current_rev: The related local revision.
@@ -393,7 +393,7 @@ class PickleTagStore(AbstractTagStore):
 
     def __init__(self, page):
         """ Creates a new TagStore that uses pickle files.
-        
+
         @param page: a Page object where the tags should be related to
         """
 
@@ -419,7 +419,7 @@ class PickleTagStore(AbstractTagStore):
             self.tags = []
         else:
             datafile.close()
-    
+
     def commit(self):
         """ Writes the memory contents to the data file. """
         datafile = file(self.filename, "wb")
@@ -471,3 +471,4 @@ class PickleTagStore(AbstractTagStore):
 # currently we just have one implementation, so we do not need
 # a factory method
 TagStore = PickleTagStore
+
