@@ -152,7 +152,7 @@ class Index(BaseIndex):
         # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
         'author': 'A',
         'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
-                       #G   newsGroup (or similar entity - e.g. a web forum name)
+                       #G   newsGroup (or sim2006-08-17 05:11:53ilar entity - e.g. a web forum name)
         'hostname': 'H',
         'keyword': 'K',
         'lang': 'L',   # ISO Language code
@@ -174,6 +174,7 @@ class Index(BaseIndex):
         'category': 'XCAT', # category this document belongs to
         'full_title': 'XFT', # full title (for regex)
         'domain': 'XDOMAIN', # standard or underlay
+        'revision': 'XREV', # revision of page
                        #Y   year (four digits)
     }
 
@@ -350,6 +351,8 @@ class Index(BaseIndex):
             yield 'underlay'
         if page.isStandardPage():
             yield 'standard'
+        if wikiutil.isSystemPage(self.request, page.page_name):
+            yield 'system'
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
@@ -364,6 +367,8 @@ class Index(BaseIndex):
         pagename = page.page_name
         mtime = page.mtime_usecs()
         itemid = "%s:%s" % (wikiname, pagename)
+        revision = str(page.get_real_rev())
+        author = page.last_edit(request)['editor']
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
         categories = self._get_categories(page)
@@ -397,7 +402,10 @@ class Index(BaseIndex):
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
                     xapdoc.Keyword('stem_lang', stem_language),
-                    xapdoc.Keyword('full_title', pagename.lower())]
+                    xapdoc.Keyword('full_title', pagename.lower()),
+                    xapdoc.Keyword('revision', revision),
+                    xapdoc.Keyword('author', author),
+                )]
             for pagelink in page.getPageLinks(request):
                 xkeywords.append(xapdoc.Keyword('linkto', pagelink))
             for category in categories:
@@ -452,11 +460,14 @@ class Index(BaseIndex):
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
-                xmimetype = xapdoc.TextField('mimetype', mimetype, True)
+                xmimetype = xapdoc.Keyword('mimetype', mimetype)
                 xcontent = xapdoc.TextField('content', att_content)
-                doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
-                                      keywords=(xatt_itemid, xtitle, xlanguage, xstem_language, ),
-                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
+                doc = xapdoc.Document(textFields=(xcontent, ),
+                                      keywords=(xatt_itemid, xtitle,
+                                          xlanguage, xstem_language,
+                                          xmimetype, ),
+                                      sortFields=(xpname, xattachment, xmtime,
+                                          xwname, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory(request,
                         stem_language)

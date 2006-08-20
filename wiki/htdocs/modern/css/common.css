@@ -331,6 +331,35 @@ div.codearea pre span.DiffChanged {color: #FF7F50;}
 div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
 /* Search results */
+.advancedsearch {
+    border: 1pt solid #ADB9CC;
+}
+
+.advancedsearch td {
+    vertical-align: top;
+    background-color: #E7E7E7;    
+    border: 0px;
+}
+
+.advancedsearch td.searchfor {
+    font-weight: bold;
+}
+.advancedsearch input {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
+.advancedsearch td.submit {
+    border-top: 1px solid #ADB9CC;
+    background-color: #fff;
+    text-align: right;
+}
+
+.advancedsearch optioni, select {
+    border: 1px solid #ADB9CC;
+    background-color: #fff;
+}
+
 
 .searchresults dt {
     margin-top: 1em;
@@ -363,26 +392,17 @@ p.searchstats {
 
 .searchpages tr, .searchpages td {
     border: 0;
-    padding: 0;
+    padding: 5px;
     margin: 0;
     text-align: center;
     vertical-align: middle;
-    color: #a90a08;
+    color: #b93a58;
     font-weight: bold;
-}
-
-.searchpages td.prev {
-    text-align: right;
-}
-
-.searchpage td.next {
-    text-align: left;
+    font-size: 1.05em;
 }
 
 .searchpages td a, .searchpages td a:link {
-    color: #000000;
     text-decoration: underline;
-    font-weight: normal;
 }
 
 /* MonthCalendar css */

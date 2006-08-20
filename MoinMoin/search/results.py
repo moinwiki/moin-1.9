@@ -287,7 +287,7 @@ class SearchResults:
         output = [
             formatter.paragraph(1, attr={'class': 'searchstats'}),
             _("Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s "
-                    "of %(aboutHits)s %(bs)s%(hits)d%(be)s results out of"
+                    "of %(aboutHits)s %(bs)s%(hits)d%(be)s results out of "
                     "about %(pages)d pages.") %
                 {'aboutHits': self.estimated_hits[0],
                     'hits': self.estimated_hits[1], 'pages': self.pages,
@@ -652,10 +652,6 @@ class SearchResults:
             return ''.join(output)
         return ''
 
-    def _img_url(self, img):
-        cfg = self.request.cfg
-        return '%s/%s/img/%s.png' % (cfg.url_prefix_static, self.request.theme.name, img)
-
     def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
         """ Format previous and next page links in page
 
@@ -714,39 +710,6 @@ class SearchResults:
         return ''.join([
             f.table(1, attrs={'tableclass': 'searchpages'}),
             f.table_row(1),
-                f.table_cell(1, attrs={'class': 'prev'}),
-                # first image, previous page
-                l[0] and
-                    ''.join([
-                        f.url(1, href=page_url(cur_page-1)),
-                        f.image(self._img_url('nav_prev')),
-                        f.url(0),
-                    ]) or
-                    f.image(self._img_url('nav_first')),
-                f.table_cell(0),
-                # images for ooos, highlighted current page
-                ''.join([
-                    ''.join([
-                        f.table_cell(1),
-                        i != cur_page and f.url(1, href=page_url(i)) or '',
-                        f.image(self._img_url(i == cur_page and
-                            'nav_current' or 'nav_page')),
-                        i != cur_page and f.url(0) or '',
-                        f.table_cell(0),
-                    ]) for i in page_range
-                ]),
-                f.table_cell(1, attrs={'class': 'next'}),
-                # last image, next page
-                l[-1] and
-                    ''.join([
-                        f.url(1, href=page_url(cur_page+1)),
-                        f.image(self._img_url('nav_next')),
-                        f.url(0),
-                    ]) or
-                    f.image(self._img_url('nav_last')),
-                f.table_cell(0),
-            f.table_row(0),
-            f.table_row(1),
                 f.table_cell(1),
                 # textlinks
                 (f.table_cell(0) + f.table_cell(1)).join(l),
@@ -771,7 +734,6 @@ class SearchResults:
             #f.url(0),
             f.paragraph(0),
         ])
-
 
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
