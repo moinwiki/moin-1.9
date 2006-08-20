@@ -17,7 +17,7 @@ from MoinMoin import config, wikiutil, Page
 from MoinMoin import script
 from MoinMoin.action import AttachFile
 
-url_prefix = "."
+url_prefix_static = "."
 logo_html = '<img src="logo.png">'
 HTML_SUFFIX = ".html"
 
@@ -108,8 +108,8 @@ class PluginScript(script.MoinScript):
         self.init_request()
         request = self.request
 
-        # fix url_prefix so we get relative paths in output html
-        request.cfg.url_prefix = url_prefix
+        # fix url_prefix_static so we get relative paths in output html
+        request.cfg.url_prefix_static = url_prefix_static
 
         if self.options.page:
             pages = [self.options.page]

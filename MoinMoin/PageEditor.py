@@ -509,6 +509,11 @@ Try a different name.""") % (newpagename,)
         """
         _ = self._
         success = True
+        if not (self.request.user.may.write(self.page_name)
+                and self.request.user.may.delete(self.page_name)):
+            msg = _('You are not allowed to delete this page!')
+            raise self.AccessDenied, msg
+
         try:
             # First save a final backup copy of the current page
             # (recreating the page allows access to the backups again)
@@ -831,14 +836,11 @@ Try a different name.""") % (newpagename,)
         
         if not os.path.exists(pagedir): # new page, create and init pagedir
             os.mkdir(pagedir)
-            os.chmod(pagedir, 0777 & config.umask)
         if not os.path.exists(revdir):        
             os.mkdir(revdir)
-            os.chmod(revdir, 0777 & config.umask)
             f = open(cfn, 'w')
             f.write('%08d\n' % 0)
             f.close()
-            os.chmod(cfn, 0666 & config.umask)
             
         got_lock = False
         retry = 0
@@ -878,7 +880,6 @@ Try a different name.""") % (newpagename,)
                 # Write the file using text/* mime type
                 f.write(self.encodeTextMimeType(text))
                 f.close()
-                os.chmod(pagefile, 0666 & config.umask)
                 mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
                 # set in-memory content
                 self.set_raw_body(text)

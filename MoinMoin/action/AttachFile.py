@@ -189,7 +189,6 @@ def add_attachment(request, pagename, target, filecontent):
             stream.write(filecontent)
         finally:
             stream.close()
-        os.chmod(fpath, 0666 & config.umask)
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
 
@@ -380,7 +379,7 @@ def send_hotdraw(pagename, request):
     _ = request.getText
 
     now = time.time()
-    pubpath = request.cfg.url_prefix + "/applets/TWikiDrawPlugin"
+    pubpath = request.cfg.url_prefix_static + "/applets/TWikiDrawPlugin"
     basename = request.form['drawing'][0]
     drawpath = getAttachUrl(pagename, basename + '.draw', request, escaped=1)
     pngpath = getAttachUrl(pagename, basename + '.png', request, escaped=1)
@@ -625,7 +624,6 @@ def save_drawing(pagename, request):
             stream.write(filecontent)
         finally:
             stream.close()
-        os.chmod(savepath, 0666 & config.umask)
 
     # touch attachment directory to invalidate cache if new map is saved
     if ext == '.map':
@@ -760,7 +758,6 @@ def unzip_file(pagename, request):
                                     os.unlink(new_file)
                                 else:
                                     valid_name = True
-                                    os.chmod(new_file, 0666 & config.umask)
                                     _addLogEntry(request, 'ATTNEW', pagename, finalname)
 
                 if valid_name:

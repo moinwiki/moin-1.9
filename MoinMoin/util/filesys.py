@@ -15,8 +15,12 @@ from MoinMoin import config
 #############################################################################
 
 def chmod(name, mode, catchexception=True):
+    """ change mode of some file/dir on platforms that support it.
+        usually you don't need this because we use os.umask() when importing
+        request.py
+    """
     try:
-        return os.chmod(name, mode)
+        os.chmod(name, mode)
     except OSError:
         if not catchexception:
             raise
@@ -31,6 +35,10 @@ def makedirs(name, mode=0777):
     This is modified version of the os.makedirs from Python 2.4. We add
     explicit chmod call after the mkdir call. Fixes some practical
     permission problems on Linux.
+
+    TODO: we use os.umask() now so we usually don't need explicit chmod any
+          more. Check all callers os makedirs/makeDirs and also py2.3+
+          stdlib implementation and maybe remove this function here.
     """
     head, tail = os.path.split(name)
     if not tail:
@@ -86,7 +94,7 @@ def copystat(src, dst):
             st = os.stat(src)
             mode = S_IMODE(st[ST_MODE])
             if hasattr(os, 'chmod'):
-                os.chmod(dst, mode)
+                os.chmod(dst, mode) # KEEP THIS ONE!
         #else: pass # we are on Win9x,ME - no chmod here
     else:
         shutil.copystat(src, dst)

@@ -267,7 +267,7 @@ class ForkingServer(SocketServer.ForkingMixIn, SimpleServer):
 class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     bufferSize = 8 * 1024 # used to serve static files
-    staticExpire = 7 * 24 * 3600 # 1 week expiry for static files
+    staticExpire = 365 * 24 * 3600 # 1 year expiry for static files
 
     def __init__(self, request, client_address, server):
         self.server_version = "MoinMoin %s %s" % (version.revision,
@@ -287,14 +287,15 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """ Handle requests (request type GET/HEAD/POST is in self.command)
 
         Separate between wiki pages and css and image url by similar
-        system as cgi and twisted, the '/wiki/' url prefix.
+        system as cgi and twisted, the '/staticXXX/' url prefix.
 
-        TODO: should use url_prefix - and not a constant but
+        TODO: should use url_prefix_static - and not a constant but
         request is not available at this time.  Should be fixed by
-        having url_prefix in a server config.
+        having url_prefix_static in a server config.
         """
-        if self.path.startswith('/wiki/'):
-            self.path = self.path[5:]
+        PREFIX = '/moin_static160/'
+        if self.path.startswith(PREFIX): # XXX
+            self.path = self.path[len(PREFIX)-1:]
             self.serve_static_file()
         elif self.path in ['/favicon.ico', '/robots.txt']:
             self.serve_static_file()
