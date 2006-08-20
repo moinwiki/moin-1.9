@@ -18,6 +18,7 @@ except ImportError:
 from MoinMoin import wikiutil
 from MoinMoin.util import lock
 from MoinMoin.Page import Page
+from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import unpackLine, packLine
 
 
@@ -64,9 +65,10 @@ class SyncPage(object):
         self.remote_deleted = remote_deleted
         self.local_mime_type = MIMETYPE_MOIN   # XXX no usable storage API yet
         self.remote_mime_type = MIMETYPE_MOIN
+        assert remote_rev != 99999999
 
     def __repr__(self):
-        return repr("<Remote Page %r>" % unicode(self))
+        return repr("<Sync Page %r>" % unicode(self))
 
     def __unicode__(self):
         return u"%s[%s|%s]<%r:%r>" % (self.name, self.local_name, self.remote_name, self.local_rev, self.remote_rev)
@@ -94,7 +96,7 @@ class SyncPage(object):
         elif self.remote_name is None:
             n_name = normalise_pagename(self.local_name, local.prefix)
             assert n_name is not None
-            self.remote_name = (local.prefix or "") + n_name
+            self.remote_name = (remote.prefix or "") + n_name
 
         return self # makes using list comps easier
 
@@ -132,26 +134,6 @@ class SyncPage(object):
         """ Is true if the page is in both wikis. """
         return self.local_rev and self.remote_rev
 
-    def iter_local_only(cls, sp_list):
-        """ Iterates over all pages that are local only. """
-        for x in sp_list:
-            if x.is_only_local():
-                yield x
-    iter_local_only = classmethod(iter_local_only)
-
-    def iter_remote_only(cls, sp_list):
-        """ Iterates over all pages that are remote only. """
-        for x in sp_list:
-            if x.is_only_remote():
-                yield x
-    iter_remote_only = classmethod(iter_remote_only)
-
-    def iter_local_and_remote(cls, sp_list):
-        """ Iterates over all pages that are local and remote. """
-        for x in sp_list:
-            if x.is_local_and_remote():
-                yield x
-    iter_local_and_remote = classmethod(iter_local_and_remote)
 
 class RemoteWiki(object):
     """ This class should be the base for all implementations of remote wiki
@@ -173,13 +155,18 @@ class RemoteWiki(object):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
+    def delete_page(self, pagename):
+        """ Deletes the page called pagename. """
+        return NotImplemented
+
 
 class MoinRemoteWiki(RemoteWiki):
     """ Used for MoinMoin wikis reachable via XMLRPC. """
-    def __init__(self, request, interwikiname, prefix, pagelist):
+    def __init__(self, request, interwikiname, prefix, pagelist, verbose=False):
         self.request = request
         self.prefix = prefix
         self.pagelist = pagelist
+        self.verbose = verbose
         _ = self.request.getText
 
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:""' % (interwikiname, ))
@@ -211,7 +198,7 @@ class MoinRemoteWiki(RemoteWiki):
             self.iwid_full = packLine([remote_iwid, interwikiname])
 
     def createConnection(self):
-        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=True)
+        return xmlrpclib.ServerProxy(self.xmlrpc_url, allow_none=True, verbose=self.verbose)
 
     # Public methods
     def get_diff(self, pagename, from_rev, to_rev, n_name=None):
@@ -230,6 +217,9 @@ class MoinRemoteWiki(RemoteWiki):
         """ Merges the diff into the page on the remote side. """
         result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
         return result
+
+    def delete_page(self, pagename):
+        return # XXX not implemented yet
 
     # Methods implementing the RemoteWiki interface
     def get_interwiki_name(self):
@@ -252,7 +242,10 @@ class MoinRemoteWiki(RemoteWiki):
             normalised_name = normalise_pagename(name, self.prefix)
             if normalised_name is None:
                 continue
-            rpages.append(SyncPage(normalised_name, remote_rev=abs(revno), remote_name=name, remote_deleted=revno < 0))
+            if abs(revno) != 99999999: # I love sane in-band signalling
+                remote_rev = abs(revno)
+                remote_deleted = revno < 0
+                rpages.append(SyncPage(normalised_name, remote_rev=remote_rev, remote_name=name, remote_deleted=remote_deleted))
         return rpages
 
     def __repr__(self):
@@ -275,16 +268,27 @@ class MoinLocalWiki(RemoteWiki):
 
     def createSyncPage(self, page_name):
         normalised_name = normalise_pagename(page_name, self.prefix)
-        if not self.request.user.may.write(normalised_name):
-            return None
         if normalised_name is None:
             return None
+        if not self.request.user.may.write(normalised_name):
+            return None
         page = Page(self.request, page_name)
-        return SyncPage(normalised_name, local_rev=page.get_real_rev(), local_name=page_name, local_deleted=not page.exists())
+        revno = page.get_real_rev()
+        if revno == 99999999: # I love sane in-band signalling
+            return None
+        return SyncPage(normalised_name, local_rev=revno, local_name=page_name, local_deleted=not page.exists())
 
     # Public methods:
 
     # Methods implementing the RemoteWiki interface
+    def delete_page(self, page_name, comment):
+        page = PageEditor(self.request, page_name)
+        try:
+            page.deletePage(comment)
+        except PageEditor.AccessDenied, (msg, ):
+            return msg
+        return ""
+
     def get_interwiki_name(self):
         return self.request.cfg.interwikiname
 
@@ -338,7 +342,7 @@ class Tag(object):
         self.normalised_name = normalised_name
 
     def __repr__(self):
-        return u"<Tag normalised_pagename=%r remote_wiki=%r remote_rev=%r current_rev=%r>" % (self.normalised_name, self.remote_wiki, self.remote_rev, self.current_rev)
+        return u"<Tag normalised_pagename=%r remote_wiki=%r remote_rev=%r current_rev=%r>" % (getattr(self, "normalised_name", "UNDEF"), self.remote_wiki, self.remote_rev, self.current_rev)
 
     def __cmp__(self, other):
         if not isinstance(other, Tag):

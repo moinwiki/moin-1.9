@@ -25,6 +25,8 @@ class DeletePage(ActionBase):
         self.form_trigger_label = _('Delete')
 
     def is_allowed(self):
+        # this is not strictly necessary because the underlying storage code checks
+        # as well
         may = self.request.user.may
         return may.write(self.pagename) and may.delete(self.pagename)
 

@@ -21,13 +21,11 @@ class DebugPackage(Package, ScriptEngine):
         self.script = script or u"""moinmoinpackage|1
 print|foo
 ReplaceUnderlay|testdatei|TestSeite2
-DeletePage|TestSeite2|Test ...
 IgnoreExceptions|True
 DeletePage|TestSeiteDoesNotExist|Test ...
 IgnoreExceptions|False
 AddRevision|foofile|FooPage
 AddRevision|foofile|FooPage
-DeletePage|FooPage|Test ...
 setthemename|foo
 #foobar
 installplugin|foo|local|parser|testy
@@ -60,7 +58,6 @@ class UnsafePackageTestcase(TestCase):
         testseite2 = Page(self.request, 'TestSeite2')
         self.assertEqual(testseite2.getPageText(), "Hello world, I am the file testdatei")
         self.assert_(testseite2.isUnderlayPage())
-        self.assert_(not Page(self.request, 'FooPage').exists())
 
 class QuotingTestCase(TestCase):
     def testQuoting(self):

@@ -509,6 +509,11 @@ Try a different name.""") % (newpagename,)
         """
         _ = self._
         success = True
+        if not (self.request.user.may.write(self.page_name)
+                and self.request.user.may.delete(self.page_name)):
+            msg = _('You are not allowed to delete this page!')
+            raise self.AccessDenied, msg
+
         try:
             # First save a final backup copy of the current page
             # (recreating the page allows access to the backups again)
