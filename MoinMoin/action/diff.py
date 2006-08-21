@@ -117,49 +117,48 @@ def execute(pagename, request):
             oldrev2 = 0 # XXX
 
     edit_count = abs(oldcount1 - oldcount2)
-
-    # this should use the formatter, but there is none?
-    request.write('<div id="content">\n') # start content div
-    request.write('<p class="diff-header">')
-    request.write(_('Differences between revisions %d and %d') % (oldpage.get_real_rev(), newpage.get_real_rev()))
+    f = request.formatter
+    request.write(f.div(1, id="content"))
+    request.write(f.paragraph(1, css_class="diff-header"))
+    request.write(f.text(_('Differences between revisions %d and %d') % (oldpage.get_real_rev(), newpage.get_real_rev())))
     if edit_count > 1:
-        request.write(' ' + _('(spanning %d versions)') % (edit_count,))
-    request.write('</p>')
+        request.write(f.text(' ' + _('(spanning %d versions)') % (edit_count,)))
+    request.write(f.paragraph(0))
 
     if request.user.show_fancy_diff:
         from MoinMoin.util import diff_html
-        request.write(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body()))
+        request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body())))
         newpage.send_page(request, count_hit=0, content_only=1, content_id="content-below-diff")
     else:
         from MoinMoin.util import diff_text
         lines = diff_text.diff(oldpage.getlines(), newpage.getlines())
         if not lines:
-            msg = _("No differences found!")
+            msg = f.text(_("No differences found!"))
             if edit_count > 1:
-                msg = msg + '<p>' + _('The page was saved %(count)d times, though!') % {
-                    'count': edit_count}
+                msg = msg + f.paragraph(1) + f.text(_('The page was saved %(count)d times, though!') % {
+                    'count': edit_count}) + f.paragraph(0)
             request.write(msg)
         else:
             if ignorews:
-                request.write(_('(ignoring whitespace)') + '<br>')
+                request.write(f.text(_('(ignoring whitespace)')), f.linebreak())
             else:
                 qstr = {'action': 'diff', 'ignorews': '1', }
                 if rev1:
                     qstr['rev1'] = str(rev1)
                 if rev2:
                     qstr['rev2'] = str(rev2)
-                request.write(Page(request, pagename).link_to(request,
+                request.write(f.paragraph(1), Page(request, pagename).link_to(request,
                     text=_('Ignore changes in the amount of whitespace'),
-                    querystr=qstr, rel='nofollow') + '<p>')
+                    querystr=qstr, rel='nofollow'), f.paragraph(0))
 
-            request.write('<pre>')
+            request.write(f.preformatted(1))
             for line in lines:
                 if line[0] == "@":
-                    request.write('<hr>')
-                request.write(wikiutil.escape(line)+'\n')
-            request.write('</pre>')
+                    request.write(f.rule(1))
+                request.write(f.text(wikiutil.escape(line)+'\n'))
+            request.write(f.preformatted(0))
 
-    request.write('</div>\n') # end content div
+    request.write(f.div(0)) # end content div
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 

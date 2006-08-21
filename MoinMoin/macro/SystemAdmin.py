@@ -23,7 +23,6 @@ def execute(macro, args):
     if not request.user.isSuperUser():
         return ''
 
-    result = []
     _MENU = {
         'attachments': (("File attachment browser"), do_admin_browser),
         'users': (("User account browser"), do_user_browser),
@@ -31,21 +30,24 @@ def execute(macro, args):
     choice = request.form.get('sysadm', [None])[0]
 
     # create menu
-    menuitems = [(label, id) for id, (label, handler) in _MENU.items()]
+    menuitems = [(label, fnid) for fnid, (label, handler) in _MENU.items()]
     menuitems.sort()
-    for label, id in menuitems:
-        if id == choice:
-            result.append(macro.formatter.strong(1))
-            result.append(macro.formatter.text(label))
-            result.append(macro.formatter.strong(0))
+    result = []
+    f = macro.formatter
+    for label, fnid in menuitems:
+        if fnid == choice:
+            result.append(f.strong(1))
+            result.append(f.text(label))
+            result.append(f.strong(0))
         else:
-            result.append(wikiutil.link_tag(request, "%s?sysadm=%s" % (macro.formatter.page.page_name, id), label))
-        result.append('<br>')
-    result.append('<br>')
+            #result.append(wikiutil.link_tag(request, "%s?sysadm=%s" % (macro.formatter.page.page_name, id), label))
+            result.append(f.page.link_to(request, label, querystr={'sysadm': fnid}))
+        result.append(f.linebreak())
+    result.append(f.linebreak())
 
     # add chosen content
     if _MENU.has_key(choice):
-        result.append(_MENU[choice][1](request))
+        result.append(f.rawHTML(_MENU[choice][1](request)))
 
-    return macro.formatter.rawHTML(''.join(result))
+    return ''.join(result)
 
