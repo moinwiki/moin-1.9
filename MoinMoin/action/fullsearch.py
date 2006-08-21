@@ -113,7 +113,6 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     if len(stripped) == 0:
         err = _('Please use a more selective search term instead '
                 'of {{{"%s"}}}') % needle
-        request.emit_http_headers()
         Page(request, pagename).send_page(request, msg=err)
         return
     needle = stripped
