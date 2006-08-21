@@ -56,6 +56,8 @@ Branch moin/1.6-sync-aschremmer
     * Fixed severe race conditions in the meta dict and the sync tags code.
     * Mute the tempnam warning in the caching module.
     * diff3 algorithm extended, a new mode should reduce the conflicts
+    * Standalone opens it logfile unbuffered from now on, thanks to
+      Carsten Grohmann
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
