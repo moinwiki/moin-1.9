@@ -8,7 +8,7 @@ Branch moin/1.6-xapian-fpletz
       metadata)
 
   ToDo:
-    * Write/update documentation for all the new search stuff
+    * none
 
   ToDo (low priority):
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
@@ -27,12 +27,12 @@ Branch moin/1.6-xapian-fpletz
         - CategorySearch: category:Homepage
         - MimetypeSearch: mimetype:image/png (for attachments/files)
         - DomainSearch: domain:underlay
-        - History Search: available in adanved ui
+        - History Search: available in advanced ui
       Note: Some currently only available when Xapian is used
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
-        xapian_stemming      True   toggles usage of stemmer, fallback
+        xapian_stemming      1      toggles usage of stemmer, fallback
                                     to False if no stemmer installed
         search_results_per_page 10  determines how many hits should be
                                     shown on a fullsearch action
