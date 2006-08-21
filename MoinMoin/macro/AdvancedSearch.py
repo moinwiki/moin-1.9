@@ -96,6 +96,11 @@ def advanced_ui(macro):
                     '</input>' % _('Include underlay')),
                 ('', '<input type="checkbox" name="onlysystempages" value="1">%s'
                     '</input>' % _('Only system pages')),
+                ('', '<input type="checkbox" name="historysearch"value="1"%s>%s'
+                    '</input>' %
+                    (not macro.request.cfg.xapian_index_history and
+                        ' disabled="disabled"' or '',
+                     _('Search in all page revisions')))
             )
     ])
     

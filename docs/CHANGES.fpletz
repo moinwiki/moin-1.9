@@ -9,8 +9,6 @@ Branch moin/1.6-xapian-fpletz
 
   ToDo:
     * Write/update documentation for all the new search stuff
-    * Search based on mtime
-    * Index all revisions and let users search in them (rev, mtime)
 
   ToDo (low priority):
     * Reevaluate Xapwrap, possibly drop it and rip out usable stuff
@@ -29,7 +27,8 @@ Branch moin/1.6-xapian-fpletz
         - CategorySearch: category:Homepage
         - MimetypeSearch: mimetype:image/png (for attachments/files)
         - DomainSearch: domain:underlay
-      Note: Currently only available when Xapian is used
+        - History Search: available in adanved ui
+      Note: Some currently only available when Xapian is used
     * New config options:
         xapian_search        0      enables xapian-powered search
         xapian_index_dir     None   directory for xapian indices
@@ -37,6 +36,8 @@ Branch moin/1.6-xapian-fpletz
                                     to False if no stemmer installed
         search_results_per_page 10  determines how many hits should be
                                     shown on a fullsearch action
+        xapian_index_history True   indexes all revisions of pages to
+                                    allow searching in their history
   
   Bugfixes (only stuff that is buggy in moin/1.6 main branch):
     * ...
@@ -256,4 +257,13 @@ be no issue with OrExpression as _moinSearch handles this correctly.
     * mimetype search works (more or less)
     * minor bugfixes (i18n etc.)
     * domain-specific search (underlay -> system pages)
+
+2006-08-20
+    * major fixes mimetype & mtime search and language sorting (neither
+      really worked)
+
+2006-08-21
+    * indexing the history of pages (all revisions) if requested:
+        xapian_index_history
+    * implemented optional history search in advanced ui, defaults to off
 
