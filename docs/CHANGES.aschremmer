@@ -11,6 +11,7 @@ Branch moin/1.6-sync-aschremmer
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
     * Implement a password agent. (does OpenID make sense?)
 
+  Longterm ToDo:
     * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer (see XXX).
     * Do older tags of one wiki site have to be stored as well? Why don't we
@@ -18,6 +19,7 @@ Branch moin/1.6-sync-aschremmer
     * Put author names into the comment field
     * Transmit mimetypes (see XXX). Needs new storage system.
     * Implement renamed pages.
+    * Cache the result of remote.get_pages locally to reduce the load.
 
   New Features:
     * Conflict icon in RecentChanges
@@ -37,7 +39,7 @@ Branch moin/1.6-sync-aschremmer
     * GetText2 macro that allows to translate messages that contain data
     * showtags action that lists all tags related to a page
 
-  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
+  Bugfixes:
     * Conflict resolution fixes.
     * Python 2.5 compatibility fixes in the Page caching logic
     * sre pickle issues in the wikidicts code
