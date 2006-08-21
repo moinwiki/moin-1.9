@@ -326,9 +326,9 @@ class ActionClass(object):
             if sp.local_mime_type == MIMETYPE_MOIN:
                 remote_contents_unicode = remote_contents.decode("utf-8")
                 # here, the actual 3-way merge happens
+                merged_text = diff3.text_merge(old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), 1, *conflict_markers) # YYY direct access
                 if debug:
-                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r" % (old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body()))
-                merged_text = diff3.text_merge(old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), 2, *conflict_markers) # YYY direct access
+                    self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r into %r" % (old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), merged_text))
                 merged_text_raw = merged_text.encode("utf-8")
             else:
                 if diff is None:
