@@ -18,9 +18,8 @@ except NameError:
         l = l[:]
         # py2.3 is a bit different
         if 'cmp' in kw:
-            kw['cmpfunc'] = kw['cmp']
-            del kw['cmp']
+            args = (kw['cmp'], )
 
-        l.sort(*args, **kw)
+        l.sort(*args)
         return l
 
