@@ -352,10 +352,11 @@ class BaseIndex:
 class Search:
     """ A search run """
     
-    def __init__(self, request, query, sort='weight'):
+    def __init__(self, request, query, sort='weight', mtime=None):
         self.request = request
         self.query = query
         self.sort = sort
+        self.mtime = mtime
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -552,9 +553,12 @@ class Search:
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
         thiswiki = (self.request.cfg.interwikiname, 'Self')
-        filtered = [(wikiname, page, attachment, match) for wikiname, page, attachment, match in hits
-                    if not wikiname in thiswiki or
+        filtered = [(wikiname, page, attachment, match)
+                for wikiname, page, attachment, match in hits
+                    if (not wikiname in thiswiki or
                        page.exists() and userMayRead(page.page_name) or
-                       page.page_name.startswith(fs_rootpage)]
+                       page.page_name.startswith(fs_rootpage)) and
+                       (not self.mtime or 
+                           self.mtime <= page.mtime_usecs()/1000000)]
         return filtered
 

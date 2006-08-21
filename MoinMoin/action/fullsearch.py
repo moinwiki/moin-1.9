@@ -8,9 +8,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
+import re, time
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
+from MoinMoin.support.parsedatetime.parsedatetime import Calendar
 
 
 def isTitleSearch(request):
@@ -54,6 +55,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     case = int(request.form.get('case', [0])[0])
     regex = int(request.form.get('regex', [0])[0]) # no interface currently
     hitsFrom = int(request.form.get('from', [0])[0])
+    mtime = None
+    msg = ''
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
@@ -69,7 +72,19 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         mimetype = request.form.get('mimetype', [0])[0]
         includeunderlay = request.form.get('includeunderlay', [0])[0]
         onlysystempages = request.form.get('onlysystempages', [0])[0]
+
         mtime = request.form.get('mtime', [''])[0]
+        if mtime:
+            cal = Calendar()
+            mtime_parsed = cal.parse(mtime)
+
+            if mtime_parsed[1] == 0 and mtime_parsed[0] <= time.localtime():
+                mtime = time.mktime(mtime_parsed[0])
+            else:
+                msg = _('The modification date you entered was not recognized '
+                        'and is therefore not considered for the search '
+                        'results!')
+                mtime = None
         
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
@@ -81,8 +96,6 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             needle += '-domain:underlay '
         if onlysystempages:
             needle += 'domain:system '
-        if mtime:
-            needle += 'lastmodifiedsince:%s ' % mtime
         if categories:
             needle += '(%s) ' % ' or '.join(['category:%s' % cat
                 for cat in word_re.findall(categories)])
@@ -94,14 +107,14 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             needle += '(%s) ' % ' or '.join(word_re.findall(or_terms))
 
     # check for sensible search term
-    striped = needle.strip()
-    if len(striped) == 0:
+    stripped = needle.strip()
+    if len(stripped) == 0:
         err = _('Please use a more selective search term instead '
                 'of {{{"%s"}}}') % needle
         request.emit_http_headers()
         Page(request, pagename).send_page(request, msg=err)
         return
-    needle = striped
+    needle = stripped
 
     # Setup for type of search
     if titlesearch:
@@ -115,7 +128,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     from MoinMoin.search import searchPages, QueryParser
     query = QueryParser(case=case, regex=regex,
             titlesearch=titlesearch).parse_query(needle)
-    results = searchPages(request, query, sort)
+    results = searchPages(request, query, sort, mtime)
 
     # directly show a single hit
     # XXX won't work with attachment search
@@ -133,7 +146,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # This action generate data using the user language
     request.setContentLanguage(request.lang)
 
-    request.theme.send_title(title % needle, form=request.form, pagename=pagename)
+    request.theme.send_title(title % needle, form=request.form,
+            pagename=pagename, msg=msg)
 
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
