@@ -16,6 +16,11 @@ try:
 except NameError:
     def sorted(l, *args, **kw):
         l = l[:]
+        # py2.3 is a bit different
+        if 'cmp' in kw:
+            kw['cmpfunc'] = kw['cmp']
+            del kw['cmp']
+
         l.sort(*args, **kw)
         return l
 
