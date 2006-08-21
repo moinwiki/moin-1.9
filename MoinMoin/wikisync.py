@@ -214,7 +214,13 @@ class MoinRemoteWiki(RemoteWiki):
         """ Returns the binary diff of the remote page named pagename, given
             from_rev and to_rev. """
         try:
-            result = self.connection.getDiff(pagename, from_rev, to_rev, n_name)
+            if self.token:
+                m = MultiCall(self.connection)
+                m.applyAuthToken(self.token)
+                m.getDiff(pagename, from_rev, to_rev, n_name)
+                tokres, result = m()
+            else:
+                result = self.connection.getDiff(pagename, from_rev, to_rev, n_name)
         except xmlrpclib.Fault, e:
             if e.faultCode == "INVALID_TAG":
                 return None
@@ -225,7 +231,13 @@ class MoinRemoteWiki(RemoteWiki):
     def merge_diff(self, pagename, diff, local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name):
         """ Merges the diff into the page on the remote side. """
         try:
-            result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
+            if self.token:
+                m = MultiCall(self.connection)
+                m.applyAuthToken(self.token)
+                m.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
+                tokres, result = m()
+            else:
+                result = self.connection.mergeDiff(pagename, xmlrpclib.Binary(diff), local_rev, delta_remote_rev, last_remote_rev, interwiki_name, n_name)
         except xmlrpclib.Fault, e:
             if e.faultCode == "NOT_ALLOWED":
                 raise NotAllowedException
@@ -234,7 +246,13 @@ class MoinRemoteWiki(RemoteWiki):
 
     def delete_page(self, pagename, last_remote_rev, interwiki_name):
         try:
-            result = self.connection.mergeDiff(pagename, None, None, None, last_remote_rev, interwiki_name, None)
+            if self.token:
+                m = MultiCall(self.connection)
+                m.applyAuthToken(self.token)
+                m.mergeDiff(pagename, None, None, None, last_remote_rev, interwiki_name, None)
+                tokres, result = m()
+            else:
+                result = self.connection.mergeDiff(pagename, None, None, None, last_remote_rev, interwiki_name, None)
         except xmlrpclib.Fault, e:
             if e.faultCode == "NOT_ALLOWED":
                 return e.faultString

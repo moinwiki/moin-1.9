@@ -8,11 +8,9 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo: (this should not go into CHANGES)
-    * Add authentication to the MoinRemoteWiki methods that are left.
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
-      
-    * Implement a cross-site authentication system, i.e. mainly an
-      identity storage. (does OpenID make sense?)
+    * Implement a password agent. (does OpenID make sense?)
+
     * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer (see XXX).
     * Do older tags of one wiki site have to be stored as well? Why don't we
@@ -123,7 +121,7 @@ Week 33: Started designing the solutions for the other sync cases. Store and tra
          Reworked i18n and logging support. Added GetText2 macro. Getting syncing of pages
          working that are just available on one side. Working synchronisation of deleted pages.
          Implemented rollback in case of remote problems and exception logging.
-         Documented this system on MoinMaster.
+         Documented this system on MoinMaster. Added authentication support.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
