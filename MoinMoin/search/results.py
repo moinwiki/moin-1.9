@@ -721,10 +721,15 @@ class SearchResults:
     def formatHitInfoBar(self, page):
         f = self.formatter
         _ = self.request.getText
+
+        rev = page.page.get_real_rev()
+        if rev is None:
+            rev = 0
+
         return ''.join([
             f.paragraph(1, attr={'class': 'searchhitinfobar'}),
             f.text('%.1fk - ' % (page.page.size()/1024.0)),
-            f.text('rev: %d %s- ' % (int(page.page.get_real_rev()),
+            f.text('rev: %d %s- ' % (rev,
                 not page.page.rev and '(%s) ' % _('current') or '')),
             f.text('last modified: %(time)s' % page.page.lastEditInfo()),
             # XXX: proper metadata

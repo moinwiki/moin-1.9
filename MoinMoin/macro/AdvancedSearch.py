@@ -56,8 +56,7 @@ def advanced_ui(macro):
 
     langs = dict([(lang, lmeta['x-language-in-english'])
         for lang, lmeta in languages.items()])
-    userlang = macro.request.user.language or \
-            macro.request.cfg.language_default
+    userlang = macro.request.lang
     lang_dropdown = ''.join([
         u'<select name="language" size="1">',
         u'<option value="" selected>%s</option>' % _('any language'),
