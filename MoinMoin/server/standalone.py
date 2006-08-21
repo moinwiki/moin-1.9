@@ -575,7 +575,7 @@ def run(configClass):
             MoinRequestHandler.serve_moin, config.memoryProfile)
 
     if config.logPath:
-        sys.stderr = file(config.logPath, 'at')
+        sys.stderr = file(config.logPath, 'at', 0)
     registerSignalHandlers(quit)
     httpd = makeServer(config)
 
