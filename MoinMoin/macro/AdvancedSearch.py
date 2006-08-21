@@ -63,7 +63,7 @@ def advanced_ui(macro):
         u'<option value="" selected>%s</option>' % _('any language'),
         ''.join(['<option value="%s">%s</option>' % lt for lt in
             [(userlang, langs[userlang])] + sorted(langs.items(),
-                key=lambda i: i[1])]),
+                cmp=lambda i,j : cmp(i[1], j[1]))]),
         u'</select>',
     ])
 
