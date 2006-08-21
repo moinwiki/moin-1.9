@@ -75,7 +75,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         nosystempages = request.form.get('nosystempages', [0])[0]
         historysearch = request.form.get('historysearch', [0])[0]
 
-        mtime = request.form.get('mtime', [''])[0]
+        mtime = request.form.get('mtime', [None])[0]
         if mtime:
             cal = Calendar()
             mtime_parsed = cal.parse(mtime)
