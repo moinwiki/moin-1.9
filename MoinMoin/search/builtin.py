@@ -519,7 +519,7 @@ class Search:
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
 
-            if 'revision' in valuedict and valuedict['valuedict']:
+            if 'revision' in valuedict and valuedict['revision']:
                 revision = int(valuedict['revision'])
             else:
                 revision = None
