@@ -7,76 +7,83 @@ Branch moin/1.6-sync-aschremmer
     * How should we store tags? (Metadata support would be handy)
       (currently done in Pickle files)
 
-  ToDo:
-    * Implement rollback
+  ToDo: (this should not go into CHANGES)
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
-    * Check what needs to be documented on MoinMaster.
-    * Test with prefixes
-    * Search for XXX
-    * Implement a cross-site authentication system, i.e. mainly an
-      identity storage. (does OpenID make sense?)
+    * Implement a password agent. (does OpenID make sense?)
 
+  Longterm ToDo:
     * Maybe refactor YYY into MoinLocalWiki
-    * Add page locking, i.e. use the one in the new storage layer.
+    * Add page locking, i.e. use the one in the new storage layer (see XXX).
     * Do older tags of one wiki site have to be stored as well? Why don't we
       keep just one tag?
-    * Put author names into the comment field, transmit mimetypes.
+    * Put author names into the comment field
+    * Transmit mimetypes (see XXX). Needs new storage system.
     * Implement renamed pages.
+    * Cache the result of remote.get_pages locally to reduce the load.
 
   New Features:
-    * XMLRPC method to return the Moin version
-    * XMLRPC multicall support
     * Conflict icon in RecentChanges
-    * XMLRPC Authentication System
-    * Binary Diffing
-    * XMLRPC method to get binary diffs
-    * XMLRPC method to merge remote changes locally
-    * XMLRPC method to get the interwiki name
-    * TagStore/PickleTagStore class
-    * XMLRPC method to get the pagelist in a special way (revnos,
-      no system pages etc.)
-    * IWID support - i.e. every instance has a unique ID
-    * InterWiki page editable in the wiki, modification detection based on mtimes
-    * SyncPages action
-    * XMLRPC functions may return Fault instances
-    * diff3 algorithm extended, a new mode should reduce the conflicts
-    * GetText2 macro
-    * showtags action
+    * New XMLRPC methods (see doc strings for details):
+      * getMoinVersion
+      * system.multicall -- multicall support
+      * Authentication System: getAuthToken/appyAuthToken
+      * getDiff -- method to get binary diffs
+      * mergeDiff -- method to local changes remotely
+      * interwikiName -- method to get the IWID and the interwiki moniker
+      * getAllPagesEx -- method to get the pagelist in a special way (revnos,
+        no system pages etc.)
+    * IWID support - i.e. every wiki instance has a unique ID
+    * The list of InterWiki sites is editable in the wiki (page InterWikiMap),
+      it is getting reloaded every minute
+    * Syncronisation of wikis using the SyncPages action
+    * GetText2 macro that allows to translate messages that contain data
+    * showtags action that lists all tags related to a page
 
-  Bugfixes (only stuff that is buggy in moin/1.6 main branch):
-    * Conflict resolution fixes. (merged into main)
-    * Python 2.5 compatibility fixes in the Page caching logic (merged)
-    * sre pickle issues in the wikidicts code (merged)
+  Bugfixes:
+    * Conflict resolution fixes.
+    * Python 2.5 compatibility fixes in the Page caching logic
+    * sre pickle issues in the wikidicts code
     * cgitb can hide particular names, this avoids information leaks
       if the user files cannot be parsed for example
     * Fixed User.__repr__ - it is insane to put the ID in there
-    * Worked around the FastCGI problem on Lighttpd: empty lines in the error log, thanks to Jay Soffian
+    * Worked around the FastCGI problem on Lighttpd: empty lines in the error
+      log, thanks to Jay Soffian
     * Fixed the MetaDict code to use locks.
     * Fixed bug in request.py that avoided showing a traceback if there was a fault
       after the first headers were sent.
     * Fixed severe race conditions in the meta dict and the sync tags code.
     * Mute the tempnam warning in the caching module.
+    * diff3 algorithm extended, a new mode should reduce the conflicts,
+      fixed a bug that silently truncated pages if there was content added
+      on one side at the end
+    * Standalone opens it logfile unbuffered from now on, thanks to
+      Carsten Grohmann
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
-    * Enhanced API at some points.
+    * Added a module for binary diffs
 
   Developer notes:
-    * ...
+    * There is a new Page method called Page.get_raw_body_str that returns
+      the encoded page body. This is useful if you just deal with byte data
+      (e.g. while generating binary diffs).
+    * The TagStore/PickleTagStore system is used to store the syncronisation tags.
+    * XMLRPC functions may return Fault instances
+    * Moin got multicall support, including a module that makes it usable on the
+      client-side without requiring Python 2.4
 
 Do not forget to check the related wiki page: http://moinmoin.wikiwikiweb.de/WikiSyncronisation
 
 Diary
 =====
 
-Week 21: Basic Infrastructur setup (repos),
+Week 21: Basic infrastructure setup (repos),
          initial talks to the mentor, started writing the design document,
          helped other students to get started
-Week 22: Tax forms, Fulfilled transcription request,
+Week 22: Tax forms, fulfilled transcription request,
          written conflict icon support, refactored conflict handling,
-         changed conflict icon,
-         Added xmlrpc multicall support into the server and
-         backported the client code from python 2.4
+         changed conflict icon, added xmlrpc multicall support into the server
+         and backported the client code from Python 2.4
 Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as
          a base for syncronisation. (See wiki)
 Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
@@ -110,10 +117,13 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
 Week 33: Started designing the solutions for the other sync cases. Store and transmit the
          normalised name. Implemented preliminary mime type support, only transmission of the mime type
-         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
-         Added infrastructure support for detecting deleted pages (not used in the merging logic yet).
+         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and inform
+         the user about the missing support for them).
+         Added infrastructure support for detecting deleted pages.
          Reworked i18n and logging support. Added GetText2 macro. Getting syncing of pages
          working that are just available on one side. Working synchronisation of deleted pages.
+         Implemented rollback in case of remote problems and exception logging.
+         Documented this system on MoinMaster. Added authentication support.
 
 2006-07-18: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
 2006-07-19: the requested daily entry is missing here, see http://moinmoin.wikiwikiweb.de/GoogleSoc2006/BetterProgress
