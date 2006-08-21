@@ -62,6 +62,9 @@ class Parser:
     ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
     dl_rule = ur"^\s+.*?::\s"
 
+    # this is used inside <pre> / parser sections (we just want to know when it's over):
+    pre_formatting_rules = ur"""(?P<pre>(\}\}\}))"""
+
     # the big, fat, ugly one ;)
     formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
 (?:(?P<emph_ibb>'''''(?=[^']+'''))
@@ -890,19 +893,16 @@ class Parser:
         for type, hit in match.groupdict().items():
             if hit is not None and not type in ["hmarker", ]:
 
-                ###result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
-                if self.in_pre and type not in ['pre', 'ent']:
-                    return self.formatter.text(hit)
-                else:
-                    # Open p for certain types
-                    if not (self.inhibit_p or self.formatter.in_p
-                            or self.in_pre or (type in self.no_new_p_before)):
-                        result.append(self.formatter.paragraph(1, css_class="line891"))
+                ##result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
+                # Open p for certain types
+                if not (self.inhibit_p or self.formatter.in_p
+                        or self.in_pre or (type in self.no_new_p_before)):
+                    result.append(self.formatter.paragraph(1, css_class="line891"))
 
-                    # Get replace method and replace hit
-                    replace = getattr(self, '_' + type + '_repl')
-                    result.append(replace(hit))
-                    return ''.join(result)
+                # Get replace method and replace hit
+                replace = getattr(self, '_' + type + '_repl')
+                result.append(replace(hit))
+                return ''.join(result)
         else:
             # We should never get here
             import pprint
@@ -933,8 +933,10 @@ class Parser:
                 'word_rule': self.word_rule,
                 'rules': rules,
             }
+        pre_rules = self.pre_formatting_rules.replace('\n', '|')
         self.request.clock.start('compile_huge_and_ugly')
         scan_re = re.compile(rules, re.UNICODE)
+        pre_scan_re = re.compile(pre_rules, re.UNICODE)
         number_re = re.compile(self.ol_rule, re.UNICODE)
         term_re = re.compile(self.dl_rule, re.UNICODE)
         indent_re = re.compile(ur"^\s*", re.UNICODE)
@@ -1092,9 +1094,9 @@ class Parser:
                     self.in_table = 0
 
             # Scan line, format and write
-            formatted_line = self.scan(scan_re, line)
+            scanning_re = self.in_pre and pre_scan_re or scan_re
+            formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line)
-
             if self.in_pre == 'no_parser':
                 self.request.write(self.formatter.linebreak())
 
