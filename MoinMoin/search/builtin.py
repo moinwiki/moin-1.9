@@ -352,11 +352,13 @@ class BaseIndex:
 class Search:
     """ A search run """
     
-    def __init__(self, request, query, sort='weight', mtime=None):
+    def __init__(self, request, query, sort='weight', mtime=None,
+            historysearch=0):
         self.request = request
         self.query = query
         self.sort = sort
         self.mtime = mtime
+        self.historysearch = historysearch
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -516,8 +518,17 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
+
+            if 'revision' in valuedict:
+                revision = int(valuedict['revision'])
+            else:
+                revision = None
+
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
-                page = Page(self.request, pagename)
+                page = Page(self.request, pagename, rev=revision)
+                if not self.historysearch and revision and \
+                        page.getRevList()[0] != revision:
+                    continue
                 if attachment:
                     if pagename == fs_rootpage: # not really an attachment
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))

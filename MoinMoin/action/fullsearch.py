@@ -57,6 +57,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     hitsFrom = int(request.form.get('from', [0])[0])
     mtime = None
     msg = ''
+    historysearch = 0
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
@@ -72,6 +73,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         mimetype = request.form.get('mimetype', [0])[0]
         includeunderlay = request.form.get('includeunderlay', [0])[0]
         onlysystempages = request.form.get('onlysystempages', [0])[0]
+        historysearch = request.form.get('historysearch', [0])[0]
 
         mtime = request.form.get('mtime', [''])[0]
         if mtime:
@@ -128,7 +130,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     from MoinMoin.search import searchPages, QueryParser
     query = QueryParser(case=case, regex=regex,
             titlesearch=titlesearch).parse_query(needle)
-    results = searchPages(request, query, sort, mtime)
+    results = searchPages(request, query, sort, mtime, historysearch)
 
     # directly show a single hit
     # XXX won't work with attachment search
