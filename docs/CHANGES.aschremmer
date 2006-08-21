@@ -8,11 +8,11 @@ Branch moin/1.6-sync-aschremmer
       (currently done in Pickle files)
 
   ToDo: (this should not go into CHANGES)
+    * Add authentication to the MoinRemoteWiki methods that are left.
     * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
-    * Check what needs to be documented on MoinMaster.
+      
     * Implement a cross-site authentication system, i.e. mainly an
       identity storage. (does OpenID make sense?)
-
     * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer (see XXX).
     * Do older tags of one wiki site have to be stored as well? Why don't we
@@ -23,7 +23,6 @@ Branch moin/1.6-sync-aschremmer
 
   New Features:
     * Conflict icon in RecentChanges
-    * Binary Diffing
     * New XMLRPC methods (see doc strings for details):
       * getMoinVersion
       * system.multicall -- multicall support
@@ -62,6 +61,7 @@ Branch moin/1.6-sync-aschremmer
 
   Other Changes:
     * Refactored conflict resolution and XMLRPC code.
+    * Added a module for binary diffs
 
   Developer notes:
     * There is a new Page method called Page.get_raw_body_str that returns
@@ -69,20 +69,21 @@ Branch moin/1.6-sync-aschremmer
       (e.g. while generating binary diffs).
     * The TagStore/PickleTagStore system is used to store the syncronisation tags.
     * XMLRPC functions may return Fault instances
+    * Moin got multicall support, including a module that makes it usable on the
+      client-side without requiring Python 2.4
 
 Do not forget to check the related wiki page: http://moinmoin.wikiwikiweb.de/WikiSyncronisation
 
 Diary
 =====
 
-Week 21: Basic Infrastructur setup (repos),
+Week 21: Basic infrastructure setup (repos),
          initial talks to the mentor, started writing the design document,
          helped other students to get started
-Week 22: Tax forms, Fulfilled transcription request,
+Week 22: Tax forms, fulfilled transcription request,
          written conflict icon support, refactored conflict handling,
-         changed conflict icon,
-         Added xmlrpc multicall support into the server and
-         backported the client code from python 2.4
+         changed conflict icon, added xmlrpc multicall support into the server
+         and backported the client code from Python 2.4
 Week 23: Debian-Sprint in Extremadura, Spain. Initial thoughts about Mercurial as
          a base for syncronisation. (See wiki)
 Week 24: Evaluation of OpenID as a base for authentication, written local testing scripts
@@ -116,7 +117,8 @@ Week 32: Continued work on the merge logic, finished prefix handling. Added loca
          the prefix and the pageList on the remote side. Finished the direction==DOWN mode.
 Week 33: Started designing the solutions for the other sync cases. Store and transmit the
          normalised name. Implemented preliminary mime type support, only transmission of the mime type
-         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and choke :).
+         and the new storage API is missing. Changed getDiff interface. Detect renamed pages (and inform
+         the user about the missing support for them).
          Added infrastructure support for detecting deleted pages.
          Reworked i18n and logging support. Added GetText2 macro. Getting syncing of pages
          working that are just available on one side. Working synchronisation of deleted pages.

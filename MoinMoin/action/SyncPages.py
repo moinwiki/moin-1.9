@@ -30,7 +30,7 @@ from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
 
 
-debug = True
+debug = False
 
 
 # map sync directions
@@ -59,10 +59,17 @@ class ActionClass(object):
         table = []
 
         for line in self.status:
-            macro_args = [line[1]] + list(line[2])
-            table.append(table_line % {"smiley": line[0][1], "message":
-                line[1] and (u"[[GetText2(|%s)]]" % (packLine(macro_args), )),
-                "raw_suffix": line[3]})
+            if line[1]:
+                if line[2]:
+                    macro_args = [line[1]] + list(line[2])
+                    message = u"[[GetText2(|%s)]]" % (packLine(macro_args), )
+                else:
+                    message = u"[[GetText(%s)]]" % (line[1], )
+            else:
+                message = u""
+            table.append(table_line % {"smiley": line[0][1],
+                                       "message": message,
+                                       "raw_suffix": line[3]})
 
         return "\n".join(table)
 
