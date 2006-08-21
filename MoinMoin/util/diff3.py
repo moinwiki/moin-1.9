@@ -98,7 +98,7 @@ def merge(old, other, new, allow_conflicts=1, *markers):
         result.extend(new[new_nr:])
     # other added lines
     elif old_nr == old_len and new_nr == new_len:
-        result.extend(other[other_nr])
+        result.extend(other[other_nr:])
     # new deleted lines
     elif (new_nr == new_len and (old_len - old_nr == other_len - other_nr) and
           match(old, other, old_nr, other_nr, old_len-old_nr) == old_len - old_nr):
