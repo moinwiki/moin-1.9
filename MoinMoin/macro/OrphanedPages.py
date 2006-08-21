@@ -24,23 +24,26 @@ def execute(macro, args):
             if link in orphaned:
                 del orphaned[link]
 
-    # check for the extreme case
-    if not orphaned:
-        return "<p>%s</p>" % _("No orphaned pages in this wiki.")
-
-    # return a list of page links
-    orphanednames = orphaned.keys()
-    orphanednames.sort()
     result = []
-    result.append(macro.formatter.number_list(1))
-    for name in orphanednames:
-        if not name: continue
-        result.append(macro.formatter.listitem(1))
-        result.append(macro.formatter.pagelink(1, name, generated=1))
-        result.append(macro.formatter.text(name))
-        result.append(macro.formatter.pagelink(0, name))
-        result.append(macro.formatter.listitem(0))
-    result.append(macro.formatter.number_list(0))
+    f = macro.formatter
+    if not orphaned:
+        result.append(f.paragraph(1))
+        result.append(f.text(_("No orphaned pages in this wiki.")))
+        result.append(f.paragraph(0))
+    else:
+        # return a list of page links
+        orphanednames = orphaned.keys()
+        orphanednames.sort()
+        result.append(f.number_list(1))
+        for name in orphanednames:
+            if not name:
+                continue
+            result.append(f.listitem(1))
+            result.append(f.pagelink(1, name, generated=1))
+            result.append(f.text(name))
+            result.append(f.pagelink(0, name))
+            result.append(f.listitem(0))
+        result.append(f.number_list(0))
 
     return ''.join(result)
 

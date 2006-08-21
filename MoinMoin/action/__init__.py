@@ -91,8 +91,9 @@ class ActionBase:
             for convenience we give him some pre-assembled html for the buttons.
         """
         _ = self._
+        f = self.request.formatter
         prompt = _("Execute action %(actionname)s?") % {'actionname': self.actionname}
-        return "<p>%s</p>%s" % (prompt, buttons_html)
+        return f.paragraph(1) + f.text(prompt) + f.paragraph(0) + f.rawHTML(buttons_html)
 
     def make_buttons(self):
         """ return a list of form buttons for the action form """
