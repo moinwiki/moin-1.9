@@ -31,7 +31,7 @@ def advanced_ui(macro):
         ''.join([''.join([
             f.table_row(1),
             f.table_cell(1),
-            f.text(_(txt)),
+            f.text(txt),
             f.table_cell(0),
             f.table_cell(1),
             f.rawHTML(input_field),
@@ -49,7 +49,7 @@ def advanced_ui(macro):
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
                 '<input type="text" name="categories" size="30">'),
-            (_('last modified since'),
+            (_('last modified since (e.g. last 2 weeks)'),
                 '<input type="text" name="mtime" size="30" value="">'),
         )])
     ])
