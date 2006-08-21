@@ -128,9 +128,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # search the pages
     from MoinMoin.search import searchPages, QueryParser
     try:
-    query = QueryParser(case=case, regex=regex,
+        query = QueryParser(case=case, regex=regex,
                 titlesearch=titlesearch).parse_query(needle)
-    results = searchPages(request, query, sort, mtime, historysearch)
+        results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError:
         err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
                 'HelpOnSearching for more information.') % needle
