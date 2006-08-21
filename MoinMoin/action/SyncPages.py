@@ -24,7 +24,7 @@ from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page
 from MoinMoin.wikidicts import Dict, Group
-from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage
+from MoinMoin.wikisync import TagStore, UnsupportedWikiException, SyncPage, NotAllowedException
 from MoinMoin.wikisync import MoinLocalWiki, MoinRemoteWiki, UP, DOWN, BOTH, MIMETYPE_MOIN
 from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3
@@ -76,6 +76,8 @@ class ActionClass(object):
             "pageList": None,
             "groupList": None,
             "direction": "foo", # is defaulted below
+            "user": None,     # this should be refactored into a password agent
+            "password": None, # or OpenID like solution (XXX)
         }
 
         options.update(Dict(self.request, self.pagename).get_dict())
@@ -117,7 +119,6 @@ class ActionClass(object):
 
         params = self.fix_params(self.parse_page())
 
-        # XXX aquire readlock on self.page
         try:
             if params["direction"] == UP:
                 raise ActionStatus(_("The only supported directions are BOTH and DOWN."))
@@ -130,21 +131,27 @@ class ActionClass(object):
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
-                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], verbose=debug)
-            except UnsupportedWikiException, (msg, ):
+                remote = MoinRemoteWiki(self.request, params["remoteWiki"], params["remotePrefix"], params["pageList"], params["user"], params["password"], verbose=debug)
+            except (UnsupportedWikiException, NotAllowedException), (msg, ):
                 raise ActionStatus(msg)
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
-
-            self.sync(params, local, remote)
         except ActionStatus, e:
             msg = u'<p class="error">%s</p>\n' % (e.args[0], )
-        else:
-            msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
 
-        self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
-        # XXX release readlock on self.page
+        try:
+            try:
+                self.sync(params, local, remote)
+            except Exception, e:
+                self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=repr(e))
+                raise
+            else:
+                msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
+        finally:
+            # XXX aquire readlock on self.page
+            self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
+            # XXX release readlock on self.page
 
         self.page.send_page(self.request, msg=msg)
 
@@ -307,7 +314,7 @@ class ActionClass(object):
                 return
 
             if remote_rev is None and direction == BOTH:
-                self.log_status(ActionClass.INFO, _("This is the first synchronisation between this page and the remote wiki."))
+                self.log_status(ActionClass.INFO, _("This is the first synchronisation between the local and the remote wiki for the page %s."), (sp.name, ))
 
             if sp.remote_deleted:
                 remote_contents = ""
@@ -335,28 +342,44 @@ class ActionClass(object):
 
             # XXX upgrade to write lock
             try:
-                current_page.saveText(merged_text, sp.local_rev, comment=comment) # YYY direct access
+                local_change_done = True
+                current_page.saveText(merged_text, sp.local_rev or 0, comment=comment) # YYY direct access
             except PageEditor.Unchanged:
-                pass
+                local_change_done = False
             except PageEditor.EditConflict:
+                local_change_done = False
                 assert False, "You stumbled on a problem with the current storage system - I cannot lock pages"
 
             new_local_rev = current_page.get_real_rev() # YYY direct access
 
-            if direction == BOTH:
-                try:
-                    very_current_remote_rev = remote.merge_diff(sp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, sp.name)
-                except Exception, e:
-                    raise # XXX rollback locally and do not tag locally
-            else:
-                very_current_remote_rev = current_remote_rev
+            def rollback_local_change(): # YYY direct local access
+                rev = new_local_rev - 1
+                revstr = '%08d' % rev
+                oldpg = Page(self.request, sp.local_name, rev=rev)
+                pg = PageEditor(self.request, sp.local_name)
+                savemsg = pg.saveText(oldpg.get_raw_body(), 0, comment=u"Wikisync rollback", extra=revstr, action="SAVE/REVERT")
+
+            try:
+                if direction == BOTH:
+                    try:
+                        very_current_remote_rev = remote.merge_diff(sp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, sp.name)
+                    except NotAllowedException:
+                        self.log_status(ActionClass.ERROR, _("The page %s could not be merged because you are not allowed to modify the page in the remote wiki."), (sp.name, ))
+                        return
+                else:
+                    very_current_remote_rev = current_remote_rev
+
+                local_change_done = False # changes are committed remotely, all is fine
+            finally:
+                if local_change_done:
+                    rollback_local_change()
 
             tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
 
             if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(merged_text):
-                self.log_status(ActionClass.INFO, _("Page successfully merged."))
+                self.log_status(ActionClass.INFO, _("Page %s successfully merged."), (sp.name, ))
             else:
-                self.log_status(ActionClass.WARN, _("Page merged with conflicts."))
+                self.log_status(ActionClass.WARN, _("Page %s merged with conflicts."), (sp.name, ))
 
             # XXX release lock
 
