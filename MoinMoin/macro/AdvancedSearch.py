@@ -94,8 +94,8 @@ def advanced_ui(macro):
                 _('Case-sensitive search')),
                 ('', '<input type="checkbox" name="includeunderlay" value="1" checked>%s'
                     '</input>' % _('Include underlay')),
-                ('', '<input type="checkbox" name="onlysystempages" value="1">%s'
-                    '</input>' % _('Only system pages')),
+                ('', '<input type="checkbox" name="nosystempages" value="1">%s'
+                    '</input>' % _('No system pages')),
                 ('', '<input type="checkbox" name="historysearch"value="1"%s>%s'
                     '</input>' %
                     (not macro.request.cfg.xapian_index_history and
