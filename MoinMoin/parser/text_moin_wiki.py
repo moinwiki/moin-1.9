@@ -804,7 +804,7 @@ class Parser:
         word = word.strip()
         if word == '{{{' and not self.in_pre:
             self.in_pre = 'no_parser'
-            return self._closeP() + self.formatter.preformatted(0)
+            return self._closeP() + self.formatter.preformatted(1)
         elif word == '}}}' and self.in_pre:
             self.in_pre = None
             self.inhibit_p = 0
