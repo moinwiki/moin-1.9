@@ -133,7 +133,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         results = searchPages(request, query, sort, mtime, historysearch)
     except ValueError:
         err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
-                'HelpOnSearch for more information.') % needle
+                'HelpOnSearching for more information.') % needle
         Page(request, pagename).send_page(request, msg=err)
         return
 
