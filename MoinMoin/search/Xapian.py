@@ -516,33 +516,3 @@ class Index(BaseIndex):
         finally:
             writer.__del__()
 
-def run_query(query, db):
-    enquire = xapian.Enquire(db)
-    parser = xapian.QueryParser()
-    query = parser.parse_query(query, xapian.QueryParser.FLAG_WILDCARD)
-    print query.get_description()
-    enquire.set_query(query)
-    return enquire.get_mset(0, 10)
-
-def run(request):
-    pass
-    #print "Begin"
-    #db = xapian.WritableDatabase(xapian.open('test.db',
-    #                                         xapian.DB_CREATE_OR_OPEN))
-    #
-    # index_data(db) ???
-    #del db
-    #mset = run_query(sys.argv[1], db)
-    #print mset.get_matches_estimated()
-    #iterator = mset.begin()
-    #while iterator != mset.end():
-    #    print iterator.get_document().get_data()
-    #    iterator.next()
-    #for i in xrange(1,170):
-    #    doc = db.get_document(i)
-    #    print doc.get_data()
-
-if __name__ == '__main__':
-    run()
-
-
