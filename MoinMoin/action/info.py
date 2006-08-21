@@ -23,19 +23,23 @@ def execute(pagename, request):
 
     def general(page, pagename, request):
         _ = request.getText
+        f = request.formatter
 
-        request.write('<h2>%s</h2>\n' % _('General Information'))
+        request.write(f.heading(1, 1),
+                      f.text(_('General Information')),
+                      f.heading(0, 1))
 
-        # show page size
-        request.write(("<p>%s</p>" % _("Page size: %d")) % page.size())
+        request.write(f.paragraph(1),
+                      f.text(_("Page size: %d") % page.size()),
+                      f.paragraph(0))
 
-        # show SHA digest fingerprint
         import sha
         digest = sha.new(page.get_raw_body().encode(config.charset)).hexdigest().upper()
-        request.write('<p>%(label)s <tt>%(value)s</tt></p>' % {
-            'label': _("SHA digest of this page's content is:"),
-            'value': digest,
-            })
+        request.write(f.paragraph(1),
+                      f.rawHTML('%(label)s <tt>%(value)s</tt>' % {
+                          'label': _("SHA digest of this page's content is:"),
+                          'value': digest, }),
+                      f.paragraph(0))
 
         # show attachments (if allowed)
         attachment_info = action.getHandler(request, 'AttachFile', 'info')
@@ -45,25 +49,28 @@ def execute(pagename, request):
         # show subscribers
         subscribers = page.getSubscribers(request, include_self=1, return_users=1)
         if subscribers:
-            request.write('<p>', _('The following users subscribed to this page:'))
+            request.write(f.paragraph(1))
+            request.write(f.text(_('The following users subscribed to this page:')))
             for lang in subscribers.keys():
-                request.write('<br>[%s] ' % lang)
+                request.write(f.linebreak(), f.text('[%s] ' % lang))
                 for user in subscribers[lang]:
                     # do NOT disclose email addr, only WikiName
                     userhomepage = Page(request, user.name)
                     if userhomepage.exists():
-                        request.write(userhomepage.link_to(request) + ' ')
+                        request.write(f.rawHTML(userhomepage.link_to(request) + ' '))
                     else:
-                        request.write(user.name + ' ')
-            request.write('</p>')
+                        request.write(f.text(user.name + ' '))
+            request.write(f.paragraph(0))
 
         # show links
         links = page.getPageLinks(request)
         if links:
-            request.write('<p>', _('This page links to the following pages:'), '<br>')
+            request.write(f.paragraph(1))
+            request.write(f.text(_('This page links to the following pages:')))
+            request.write(f.linebreak())
             for linkedpage in links:
-                request.write("%s%s " % (Page(request, linkedpage).link_to(request), ",."[linkedpage == links[-1]]))
-            request.write("</p>")
+                request.write(f.rawHTML("%s%s " % (Page(request, linkedpage).link_to(request), ",."[linkedpage == links[-1]])))
+            request.write(f.paragraph(0))
 
     def history(page, pagename, request):
         # show history as default
@@ -206,6 +213,7 @@ def execute(pagename, request):
     # this will be automatically fixed.
     lang = page.language or request.cfg.language_default
     request.setContentLanguage(lang)
+    f = request.formatter
 
     request.theme.send_title(_('Info for "%s"') % (title,), pagename=pagename)
     menu_items = [
@@ -216,11 +224,11 @@ def execute(pagename, request):
         (_('Show "%(title)s"') % {'title': _('Page hits and edits')},
          {'action': 'info', 'hitcounts': '1'}),
     ]
-    request.write('<div id="content">\n') # start content div
-    request.write("<p>")
+    request.write(f.div(1, id="content")) # start content div
+    request.write(f.paragraph(1))
     for text, querystr in menu_items:
         request.write("[%s] " % page.link_to(request, text=text, querystr=querystr, rel='nofollow'))
-    request.write("</p>")
+    request.write(f.paragraph(0))
 
     show_hitcounts = int(request.form.get('hitcounts', [0])[0]) != 0
     show_general = int(request.form.get('general', [0])[0]) != 0
@@ -233,7 +241,7 @@ def execute(pagename, request):
     else:
         history(page, pagename, request)
 
-    request.write('</div>\n') # end content div
+    request.write(f.div(0)) # end content div
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
 

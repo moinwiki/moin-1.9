@@ -25,7 +25,9 @@ def execute(macro, args):
     # TODO: we should make this a widget and use on all page listing pages
     label = (_('Include system pages'), _('Exclude system pages'))[allpages]
     page = macro.formatter.page
-    controlbar = '<div class="controlbar">%s</div>' % page.link_to(request, label, querystr={'allpages': '%d' % allpages and '0' or '1'})
+    controlbar = macro.formatter.div(1, css_class="controlbar") + \
+                 page.link_to(request, label, querystr={'allpages': '%d' % allpages and '0' or '1'}) + \
+                 macro.formatter.div(0)
 
     # Get page dict readable by current user
     pages = request.rootpage.getPageDict()
