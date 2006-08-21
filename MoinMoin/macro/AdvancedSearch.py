@@ -12,18 +12,12 @@
 
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
+from MoinMoin.support import sorted
 
 import mimetypes
 
 Dependencies = ['pages']
 
-try:
-    sorted
-except NameError:
-    def sorted(l, *args, **kw):
-        l = l[:]
-        l.sort(*args, **kw)
-        return l
 
 def advanced_ui(macro):
     _ = macro._
@@ -55,7 +49,7 @@ def advanced_ui(macro):
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
                 '<input type="text" name="categories" size="30">'),
-            (_('last modified since (XXX)'),
+            (_('last modified since'),
                 '<input type="text" name="mtime" size="30" value="">'),
         )])
     ])

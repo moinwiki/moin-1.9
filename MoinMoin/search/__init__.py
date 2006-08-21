@@ -13,7 +13,7 @@
 from MoinMoin.search.queryparser import QueryParser
 from MoinMoin.search.builtin import Search
 
-def searchPages(request, query, sort='weight', **kw):
+def searchPages(request, query, sort='weight', mtime=None, **kw):
     """ Search the text of all pages for query.
     
     @param request: current request
@@ -23,5 +23,5 @@ def searchPages(request, query, sort='weight', **kw):
     """
     if isinstance(query, str) or isinstance(query, unicode):
         query = QueryParser(**kw).parse_query(query)
-    return Search(request, query, sort).run()
+    return Search(request, query, sort, mtime=mtime).run()
 

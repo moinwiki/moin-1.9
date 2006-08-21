@@ -10,3 +10,12 @@
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
+
+try:
+    sorted = sorted
+except NameError:
+    def sorted(l, *args, **kw):
+        l = l[:]
+        l.sort(*args, **kw)
+        return l
+
