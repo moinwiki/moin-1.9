@@ -94,6 +94,9 @@ class BaseExpression:
             self.search_re = re.compile(pattern, flags)
             self.pattern = pattern
 
+    def xapian_wanted(self):
+        return False
+
 
 class AndExpression(BaseExpression):
     """ A term connecting several sub terms with a logical AND """

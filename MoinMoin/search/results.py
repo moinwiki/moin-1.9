@@ -724,7 +724,7 @@ class SearchResults:
         return ''.join([
             f.paragraph(1, attr={'class': 'searchhitinfobar'}),
             f.text('%.1fk - ' % (page.page.size()/1024.0)),
-            f.text('rev: %d %s- ' % (page.page.get_real_rev(),
+            f.text('rev: %d %s- ' % (int(page.page.get_real_rev()),
                 not page.page.rev and '(%s) ' % _('current') or '')),
             f.text('last modified: %(time)s' % page.page.lastEditInfo()),
             # XXX: proper metadata
