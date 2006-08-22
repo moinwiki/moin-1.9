@@ -352,10 +352,13 @@ class BaseIndex:
 class Search:
     """ A search run """
     
-    def __init__(self, request, query, sort='weight'):
+    def __init__(self, request, query, sort='weight', mtime=None,
+            historysearch=0):
         self.request = request
         self.query = query
         self.sort = sort
+        self.mtime = mtime
+        self.historysearch = historysearch
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -515,8 +518,17 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
+
+            if 'revision' in valuedict and valuedict['revision']:
+                revision = int(valuedict['revision'])
+            else:
+                revision = None
+
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
-                page = Page(self.request, pagename)
+                page = Page(self.request, pagename, rev=revision)
+                if not self.historysearch and revision and \
+                        page.getRevList()[0] != revision:
+                    continue
                 if attachment:
                     if pagename == fs_rootpage: # not really an attachment
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
@@ -552,9 +564,12 @@ class Search:
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
         thiswiki = (self.request.cfg.interwikiname, 'Self')
-        filtered = [(wikiname, page, attachment, match) for wikiname, page, attachment, match in hits
-                    if not wikiname in thiswiki or
+        filtered = [(wikiname, page, attachment, match)
+                for wikiname, page, attachment, match in hits
+                    if (not wikiname in thiswiki or
                        page.exists() and userMayRead(page.page_name) or
-                       page.page_name.startswith(fs_rootpage)]
+                       page.page_name.startswith(fs_rootpage)) and
+                       (not self.mtime or 
+                           self.mtime <= page.mtime_usecs()/1000000)]
         return filtered
 
