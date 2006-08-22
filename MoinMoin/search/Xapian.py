@@ -147,6 +147,7 @@ class Index(BaseIndex):
         'attachment': 3,
         'mtime': 4,
         'wikiname': 5,
+        'revision': 6,
     }
     prefixMap = {
         # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
@@ -220,7 +221,7 @@ class Index(BaseIndex):
             kw['sortKey'] = 'pagename'
 
         hits = searcher.search(query, valuesWanted=['pagename',
-            'attachment', 'mtime', 'wikiname'], **kw)
+            'attachment', 'mtime', 'wikiname', 'revision'], **kw)
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
@@ -283,13 +284,15 @@ class Index(BaseIndex):
                 xpname = xapdoc.SortKey('pagename', fs_rootpage)
                 xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
                 xmtime = xapdoc.SortKey('mtime', mtime)
+                xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', file_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
                                       keywords=(xtitle, xitemid, ),
-                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
+                                      sortFields=(xpname, xattachment,
+                                          xmtime, xwname, xrev, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
@@ -366,8 +369,8 @@ class Index(BaseIndex):
         wikiname = request.cfg.interwikiname or "Self"
         pagename = page.page_name
         mtime = page.mtime_usecs()
-        itemid = "%s:%s" % (wikiname, pagename)
         revision = str(page.get_real_rev())
+        itemid = "%s:%s:%s" % (wikiname, pagename, revision)
         author = page.last_edit(request)['editor']
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
@@ -397,7 +400,8 @@ class Index(BaseIndex):
             xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
             xpname = xapdoc.SortKey('pagename', pagename)
             xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
-            xmtime = xapdoc.SortKey('mtime', mtime)
+            xmtime = xapdoc.SortKey('mtime', str(mtime))
+            xrev = xapdoc.SortKey('revision', revision)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
@@ -415,7 +419,8 @@ class Index(BaseIndex):
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
-                                  sortFields=(xpname, xattachment, xmtime, xwname, ),
+                                  sortFields=(xpname, xattachment,
+                                      xmtime, xwname, xrev),
                                  )
             doc.analyzerFactory = getWikiAnalyzerFactory(request,
                     stem_language)
@@ -456,6 +461,7 @@ class Index(BaseIndex):
                 xpname = xapdoc.SortKey('pagename', pagename)
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
+                xrev = xapdoc.SortKey('revision', '0')
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
@@ -467,7 +473,7 @@ class Index(BaseIndex):
                                           xlanguage, xstem_language,
                                           xmimetype, ),
                                       sortFields=(xpname, xattachment, xmtime,
-                                          xwname, ),
+                                          xwname, xrev, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory(request,
                         stem_language)
@@ -506,7 +512,11 @@ class Index(BaseIndex):
             request.log("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 p = Page(request, pagename)
-                self._index_page(writer, p, mode)
+                if request.cfg.xapian_index_history:
+                    for rev in p.getRevList():
+                        self._index_page(writer,
+                                Page(request, pagename, rev=rev),
+                                mode)
             if files:
                 request.log("indexing all files...")
                 for fname in files:
@@ -515,34 +525,4 @@ class Index(BaseIndex):
             writer.close()
         finally:
             writer.__del__()
-
-def run_query(query, db):
-    enquire = xapian.Enquire(db)
-    parser = xapian.QueryParser()
-    query = parser.parse_query(query, xapian.QueryParser.FLAG_WILDCARD)
-    print query.get_description()
-    enquire.set_query(query)
-    return enquire.get_mset(0, 10)
-
-def run(request):
-    pass
-    #print "Begin"
-    #db = xapian.WritableDatabase(xapian.open('test.db',
-    #                                         xapian.DB_CREATE_OR_OPEN))
-    #
-    # index_data(db) ???
-    #del db
-    #mset = run_query(sys.argv[1], db)
-    #print mset.get_matches_estimated()
-    #iterator = mset.begin()
-    #while iterator != mset.end():
-    #    print iterator.get_document().get_data()
-    #    iterator.next()
-    #for i in xrange(1,170):
-    #    doc = db.get_document(i)
-    #    print doc.get_data()
-
-if __name__ == '__main__':
-    run()
-
 
