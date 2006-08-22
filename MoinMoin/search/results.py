@@ -742,7 +742,7 @@ class SearchResults:
             f.paragraph(1, attr={'class': 'searchhitinfobar'}),
             f.text('%.1fk - ' % (page.page.size()/1024.0)),
             f.text('rev: %d %s- ' % (rev,
-                page.page.rev and rev == page.page.getRevList()[0] and 
+                rev == page.page.getRevList()[0] and 
                 '(%s) ' % _('current') or '')),
             f.text('last modified: %(time)s' % page.page.lastEditInfo()),
             # XXX: proper metadata
