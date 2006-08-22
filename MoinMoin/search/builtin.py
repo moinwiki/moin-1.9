@@ -374,7 +374,7 @@ class Search:
         if not self.filtered:
             hits = self._filter(hits)
 
-        # when xapian was used, we won't need to sort manually
+        # when xapian was used, we can estimate the numer of matches
         if self.request.cfg.xapian_search:
             self.sort = None
             mset = self._xapianMset
@@ -522,7 +522,7 @@ class Search:
             if 'revision' in valuedict and valuedict['revision']:
                 revision = int(valuedict['revision'])
             else:
-                revision = None
+                revision = 0
 
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
                 page = Page(self.request, pagename, rev=revision)
@@ -540,7 +540,7 @@ class Search:
                     if matches:
                         hits.append((wikiname, page, attachment, matches))
             else: # other wiki
-                hits.append((wikiname, pagename, attachment, None))
+                hits.append((wikiname, pagename, attachment, None, revision))
         return hits
 
     def _getPageList(self):

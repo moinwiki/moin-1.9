@@ -346,6 +346,11 @@ class SearchResults:
                         'do': 'get',
                         'target': page.attachment,
                     }
+                elif page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                    querydict = {
+                        'action': 'recall',
+                        'rev': page.page.rev,
+                    }
                 else:
                     querydict = None
                 querystr = self.querystring(querydict)
@@ -425,7 +430,13 @@ class SearchResults:
                     querydict = None
                 else:
                     fmt_context = self.formatContext(page, context, maxlines)
-                    querydict = None
+                    if page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                        querydict = {
+                            'action': 'recall',
+                            'rev': page.page.rev,
+                        }
+                    else:
+                        querydict = None
                 querystr = self.querystring(querydict)
                 item = [
                     f.definition_term(1),
@@ -667,7 +678,8 @@ class SearchResults:
         querydict = wikiutil.parseQueryString(self.request.query_string)
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
-            return self.request.page.url(self.request, querydict, escape=0)
+            return self.request.page.url(self.request, querydict,
+                    escape=0, relative=False)
         
         pages = float(hitsNum) / hitsPerPage
         if pages - int(pages) > 0.0:
