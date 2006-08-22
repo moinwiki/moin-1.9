@@ -71,8 +71,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         language = request.form.get('language',
                 [request.cfg.language_default])[0]
         mimetype = request.form.get('mimetype', [0])[0]
-        includeunderlay = request.form.get('includeunderlay', [0])[0]
-        nosystempages = request.form.get('nosystempages', [0])[0]
+        excludeunderlay = request.form.get('excludeunderlay', [0])[0]
+        nosystemitems = request.form.get('nosystemitems', [0])[0]
         historysearch = request.form.get('historysearch', [0])[0]
 
         mtime = request.form.get('mtime', [None])[0]
@@ -94,9 +94,9 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             needle += 'language:%s ' % language
         if mimetype:
             needle += 'mimetype:%s ' % mimetype
-        if not includeunderlay:
+        if excludeunderlay:
             needle += '-domain:underlay '
-        if nosystempages:
+        if nosystemitems:
             needle += '-domain:system '
         if categories:
             needle += '(%s) ' % ' or '.join(['category:%s' % cat
