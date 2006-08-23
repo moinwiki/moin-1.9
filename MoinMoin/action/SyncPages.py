@@ -146,19 +146,19 @@ class ActionClass(object):
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
         except ActionStatus, e:
             msg = u'<p class="error">%s</p>\n' % (e.args[0], )
-
-        try:
+        else:
             try:
-                self.sync(params, local, remote)
-            except Exception, e:
-                self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=repr(e))
-                raise
-            else:
-                msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
-        finally:
-            # XXX aquire readlock on self.page
-            self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
-            # XXX release readlock on self.page
+                try:
+                    self.sync(params, local, remote)
+                except Exception, e:
+                    self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=repr(e))
+                    raise
+                else:
+                    msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
+            finally:
+                # XXX aquire readlock on self.page
+                self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
+                # XXX release readlock on self.page
 
         self.page.send_page(self.request, msg=msg)
 
@@ -170,7 +170,7 @@ class ActionClass(object):
                 Wiki A    | Wiki B   | Remark
                 ----------+----------+------------------------------
                 exists    | non-     | Now the wiki knows that the page was renamed.
-                with tags | existant | There should be an RPC method that asks
+                with tags | existing | There should be an RPC method that asks
                           |          | for the new name (which could be recorded
                           |          | on page rename). Then the page is
                           |          | renamed in Wiki A as well and the sync
@@ -399,7 +399,7 @@ class ActionClass(object):
 
                 # XXX release lock
 
-        rpc_aggregator.scheduler(remote.create_multicall_object, handle_page, m_pages, 8)
+        rpc_aggregator.scheduler(remote.create_multicall_object, handle_page, m_pages, 8, remote.prepare_multicall)
 
 
 def execute(pagename, request):
