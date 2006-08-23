@@ -136,10 +136,15 @@ class UpdateQueue:
                 raise
 
 class BaseIndex:
+    """ Represents a search engine index """
+
     class LockedException(Exception):
         pass
 
     def __init__(self, request):
+        """
+        @param request: current request
+        """
         self.request = request
         cache_dir = request.cfg.cache_dir
         main_dir = self._main_dir()
@@ -166,24 +171,34 @@ class BaseIndex:
         return os.path.exists(self.sig_file)
                 
     def mtime(self):
+        """ Modification time of the index """
         return os.path.getmtime(self.dir)
 
     def touch(self):
+        """ Touch the index """
         os.utime(self.dir, None)
     
     def _search(self, query):
         raise NotImplemented('...')
 
-    def search(self, query, *args, **kw):
+    def search(self, query, **kw):
+        """ Search for items in the index
+        
+        @param query: the query to pass to the index
+        """
         #if not self.read_lock.acquire(1.0):
         #    raise self.LockedException
         #try:
-        hits = self._search(query, *args, **kw)
+        hits = self._search(query, **kw)
         #finally:
         #    self.read_lock.release()
         return hits
 
     def update_page(self, page):
+        """ Update a single page in the index
+
+        @param page: the page object to update
+        """
         self.queue.append(page.page_name)
         self._do_queued_updates_InNewThread()
 
@@ -193,6 +208,7 @@ class BaseIndex:
         Can be called only from a script. To index pages during a user
         request, use indexPagesInNewThread.
         @arg files: iterator or list of files to index additionally
+        @keyword mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
         """
         if not self.lock.acquire(1.0):
             self.request.log("can't index: can't acquire lock")
