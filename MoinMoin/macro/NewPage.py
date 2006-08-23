@@ -52,11 +52,11 @@ class NewPage:
     def getArgs(self, argstr):
         """ Temporary function until Oliver Graf args parser is finished
 
-        @param string: string from the wiki markup [[NewPage(string)]]
+        @param argstr: string from the wiki markup [[NewPage(string)]]
         @rtype: dict
         @return: dictionary with macro options
         """
-        if not string:
+        if not argstr:
             return {}
         args = [s.strip() for s in argstr.split(',')]
         args = dict(zip(self.arguments, args))
