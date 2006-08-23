@@ -267,3 +267,5 @@ be no issue with OrExpression as _moinSearch handles this correctly.
         xapian_index_history
     * implemented optional history search in advanced ui, defaults to off
 
+SOC END
+
