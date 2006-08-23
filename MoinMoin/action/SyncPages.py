@@ -11,6 +11,9 @@
 import os
 import re
 import xmlrpclib
+import traceback
+import StringIO # not relevant for speed, so we do not need cStringIO
+
 
 # Compatiblity to Python 2.3
 try:
@@ -30,7 +33,7 @@ from MoinMoin.util.bdiff import decompress, patch, compress, textdiff
 from MoinMoin.util import diff3, rpc_aggregator
 
 
-debug = True
+debug = False
 
 
 # map sync directions
@@ -48,10 +51,29 @@ class ActionClass(object):
         self.pagename = pagename
         self.page = PageEditor(request, pagename)
         self.status = []
+        self.rollback = set()
 
     def log_status(self, level, message="", substitutions=(), raw_suffix=""):
         """ Appends the message with a given importance level to the internal log. """
         self.status.append((level, message, substitutions, raw_suffix))
+
+    def register_rollback(self, func):
+        self.rollback.add(func)
+
+    def remove_rollback(self, func):
+        self.rollback.remove(func)
+
+    def call_rollback_funcs(self):
+        _ = lambda x: x
+
+        for func in self.rollback:
+            try:
+                page_name = func()
+                self.log_status(self.INFO, _("Rolled back changes to the page %s."), (page_name, ))
+            except Exception, e:
+                temp_file = StringIO.StringIO()
+                traceback.print_exc(file=temp_file)
+                self.log_status(self.ERROR, _("Exception while calling rollback function:"), raw_suffix=temp_file.getvalue())
 
     def generate_log_table(self):
         """ Transforms self.status into a user readable table. """
@@ -69,7 +91,7 @@ class ActionClass(object):
                 message = u""
             table.append(table_line % {"smiley": line[0][1],
                                        "message": message,
-                                       "raw_suffix": line[3]})
+                                       "raw_suffix": line[3].replace("\n", "[[BR]]")})
 
         return "\n".join(table)
 
@@ -151,12 +173,15 @@ class ActionClass(object):
                 try:
                     self.sync(params, local, remote)
                 except Exception, e:
-                    self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=repr(e))
+                    temp_file = StringIO.StringIO()
+                    traceback.print_exc(file=temp_file)
+                    self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=temp_file.getvalue())
                     raise
                 else:
                     msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
             finally:
                 # XXX aquire readlock on self.page
+                self.call_rollback_funcs()
                 self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
                 # XXX release readlock on self.page
 
@@ -375,25 +400,30 @@ class ActionClass(object):
                         savemsg = pg.saveText(oldpg.get_raw_body(), 0, comment=u"Wikisync rollback", extra=revstr, action="SAVE/REVERT")
                     except PageEditor.Unchanged:
                         pass
+                    return sp.local_name
+
+                if local_change_done:
+                    self.register_rollback(rollback_local_change)
 
                 if direction == BOTH:
                     yield remote.merge_diff_pre(sp.remote_name, compress(diff), new_local_rev, current_remote_rev, current_remote_rev, local_full_iwid, sp.name)
                     try:
-                        try:
-                            very_current_remote_rev = remote.merge_diff_post(yielder.fetch_result())
-                        except NotAllowedException:
-                            self.log_status(ActionClass.ERROR, _("The page %s could not be merged because you are not allowed to modify the page in the remote wiki."), (sp.name, ))
-                            return
-                    finally:
-                        if local_change_done:
-                            rollback_local_change()
+                        very_current_remote_rev = remote.merge_diff_post(yielder.fetch_result())
+                    except NotAllowedException:
+                        self.log_status(ActionClass.ERROR, _("The page %s could not be merged because you are not allowed to modify the page in the remote wiki."), (sp.name, ))
+                        return
                 else:
                     very_current_remote_rev = current_remote_rev
+
+                if local_change_done:
+                    self.remove_rollback(rollback_local_change)
 
                 tags.add(remote_wiki=remote_full_iwid, remote_rev=very_current_remote_rev, current_rev=new_local_rev, direction=direction, normalised_name=sp.name)
 
                 if sp.local_mime_type != MIMETYPE_MOIN or not wikiutil.containsConflictMarker(merged_text):
                     self.log_status(ActionClass.INFO, _("Page %s successfully merged."), (sp.name, ))
+                elif is_remote_conflict:
+                    self.log_status(ActionClass.WARN, _("Page %s contains conflicts that were introduced on the remote side."), (sp.name, ))
                 else:
                     self.log_status(ActionClass.WARN, _("Page %s merged with conflicts."), (sp.name, ))
 
