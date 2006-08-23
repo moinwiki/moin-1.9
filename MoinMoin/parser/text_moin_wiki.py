@@ -62,6 +62,9 @@ class Parser:
     ol_rule = ur"^\s+(?:[0-9]+|[aAiI])\.(?:#\d+)?\s"
     dl_rule = ur"^\s+.*?::\s"
 
+    # this is used inside <pre> / parser sections (we just want to know when it's over):
+    pre_formatting_rules = ur"""(?P<pre>(\}\}\}))"""
+
     # the big, fat, ugly one ;)
     formatting_rules = ur"""(?P<ent_numeric>&#(\d{1,5}|x[0-9a-fA-F]+);)
 (?:(?P<emph_ibb>'''''(?=[^']+'''))
@@ -134,7 +137,14 @@ class Parser:
         self.in_list = 0 # between <ul/ol/dl> and </ul/ol/dl>
         self.in_li = 0 # between <li> and </li>
         self.in_dd = 0 # between <dd> and </dd>
-        self.in_pre = 0
+
+        # states of the parser concerning being inside/outside of some "pre" section:
+        # None == we are not in any kind of pre section (was: 0)
+        # 'search_parser' == we didn't get a parser yet, still searching for it (was: 1)
+        # 'found_parser' == we found a valid parser (was: 2)
+        # 'no_parser' == we have no (valid) parser, use a normal <pre>...</pre> (was: 3)
+        self.in_pre = None
+
         self.in_table = 0
         self.is_big = False
         self.is_small = False
@@ -772,7 +782,7 @@ class Parser:
             # empty bang paths lead to a normal code display
             # can be used to escape real, non-empty bang paths
             word = ''
-            self.in_pre = 3
+            self.in_pre = 'no_parser'
             return self._closeP() + self.formatter.preformatted(1)
         elif s_word.startswith('#!'):
             # First try to find a parser for this (will go away in 2.0)
@@ -781,27 +791,27 @@ class Parser:
 
         if self.parser:
             self.parser_name = parser_name
-            self.in_pre = 2
+            self.in_pre = 'found_parser'
             self.parser_lines = [word]
             return ''
         elif s_word:
-            self.in_pre = 3
+            self.in_pre = 'no_parser'
             return self._closeP() + self.formatter.preformatted(1) + \
                    self.formatter.text(s_word + ' (-)')
         else:
-            self.in_pre = 1
+            self.in_pre = 'search_parser'
             return ''
 
     def _pre_repl(self, word):
         """Handle code displays."""
         word = word.strip()
         if word == '{{{' and not self.in_pre:
-            self.in_pre = 3
-            return self._closeP() + self.formatter.preformatted(self.in_pre)
+            self.in_pre = 'no_parser'
+            return self._closeP() + self.formatter.preformatted(1)
         elif word == '}}}' and self.in_pre:
-            self.in_pre = 0
+            self.in_pre = None
             self.inhibit_p = 0
-            return self.formatter.preformatted(self.in_pre)
+            return self.formatter.preformatted(0)
         return self.formatter.text(word)
 
 
@@ -883,19 +893,16 @@ class Parser:
         for type, hit in match.groupdict().items():
             if hit is not None and not type in ["hmarker", ]:
 
-                ###result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
-                if self.in_pre and type not in ['pre', 'ent']:
-                    return self.formatter.text(hit)
-                else:
-                    # Open p for certain types
-                    if not (self.inhibit_p or self.formatter.in_p
-                            or self.in_pre or (type in self.no_new_p_before)):
-                        result.append(self.formatter.paragraph(1, css_class="line891"))
+                ##result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
+                # Open p for certain types
+                if not (self.inhibit_p or self.formatter.in_p
+                        or self.in_pre or (type in self.no_new_p_before)):
+                    result.append(self.formatter.paragraph(1, css_class="line891"))
 
-                    # Get replace method and replace hit
-                    replace = getattr(self, '_' + type + '_repl')
-                    result.append(replace(hit))
-                    return ''.join(result)
+                # Get replace method and replace hit
+                replace = getattr(self, '_' + type + '_repl')
+                result.append(replace(hit))
+                return ''.join(result)
         else:
             # We should never get here
             import pprint
@@ -926,8 +933,10 @@ class Parser:
                 'word_rule': self.word_rule,
                 'rules': rules,
             }
+        pre_rules = self.pre_formatting_rules.replace('\n', '|')
         self.request.clock.start('compile_huge_and_ugly')
         scan_re = re.compile(rules, re.UNICODE)
+        pre_scan_re = re.compile(pre_rules, re.UNICODE)
         number_re = re.compile(self.ol_rule, re.UNICODE)
         term_re = re.compile(self.dl_rule, re.UNICODE)
         indent_re = re.compile(ur"^\s*", re.UNICODE)
@@ -972,8 +981,7 @@ class Parser:
             if self.in_pre:
                 # TODO: move this into function
                 # still looking for processing instructions
-                # TODO: use strings for pre state, not numbers
-                if self.in_pre == 1:
+                if self.in_pre == 'search_parser':
                     self.parser = None
                     parser_name = ''
                     if line.strip().startswith("#!"):
@@ -981,15 +989,15 @@ class Parser:
                         self.setParser(parser_name)
 
                     if self.parser:
-                        self.in_pre = 2
+                        self.in_pre = 'found_parser'
                         self.parser_lines = [line]
                         self.parser_name = parser_name
                         continue
                     else:
                         self.request.write(self._closeP() +
                                            self.formatter.preformatted(1))
-                        self.in_pre = 3
-                if self.in_pre == 2:
+                        self.in_pre = 'no_parser'
+                if self.in_pre == 'found_parser':
                     # processing mode
                     endpos = line.find("}}}")
                     if endpos == -1:
@@ -1004,7 +1012,7 @@ class Parser:
                     res = self.formatter.parser(self.parser_name, self.parser_lines)
                     self.request.write(res)
                     del self.parser_lines
-                    self.in_pre = 0
+                    self.in_pre = None
                     self.parser = None
 
                     # send rest of line through regex machinery
@@ -1086,10 +1094,10 @@ class Parser:
                     self.in_table = 0
 
             # Scan line, format and write
-            formatted_line = self.scan(scan_re, line)
+            scanning_re = self.in_pre and pre_scan_re or scan_re
+            formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line)
-
-            if self.in_pre == 3:
+            if self.in_pre == 'no_parser':
                 self.request.write(self.formatter.linebreak())
 
         # Close code displays, paragraphs, tables and open lists

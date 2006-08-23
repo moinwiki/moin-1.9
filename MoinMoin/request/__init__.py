@@ -779,6 +779,8 @@ class RequestBase(object):
                 if isinstance(d, unicode):
                     # if we are REALLY sure, we can use "strict"
                     d = d.encode(config.charset, 'replace')
+                elif d is None:
+                    continue
                 wd.append(d)
             except UnicodeError:
                 self.log("Unicode error on: %s" % repr(d))

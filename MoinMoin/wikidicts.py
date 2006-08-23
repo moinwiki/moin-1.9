@@ -296,7 +296,7 @@ class GroupDict(DictDict):
         self.groupdict[groupname] = grp
 
     def hasgroup(self, groupname):
-        return self.dictdict.has_key(groupname)
+        return self.groupdict.has_key(groupname)
 
     def membergroups(self, member):
         """list all groups where member is a member of"""

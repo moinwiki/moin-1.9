@@ -266,6 +266,8 @@ Version 1.5-current:
   * tuning:
     * more efficient locking code on POSIX platforms, we do much less I/O there now
     * removed most chmod calls in favour of a single os.umask call
+  * fixed a bad crash that happens (on ANY page!) when you put a *Dict page's
+    name as a member into a *Group page
   
 Version 1.5.4:
     HINT: read docs/README.migration.
