@@ -19,6 +19,12 @@ def searchPages(request, query, sort='weight', mtime=None,
     
     @param request: current request
     @param query: the expression (string or query objects) we want to search for
+    @keyword sort: sorting of the search results, either 'weight' or 'page_name'
+    @keyword mtime: only items modified since mtime
+    @keyword historysearch: include older revisions of items in search
+    @keyword titlesearch: treat all terms as title searches (passed to qp)
+    @keyword case: do case sensitive search (passed to qp)
+    @keyword regex: treat all terms as regular expression (passed to qp)
     @rtype: SearchResults instance
     @return: search results
     """
