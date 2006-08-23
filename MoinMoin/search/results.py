@@ -348,7 +348,6 @@ class SearchResults:
                     }
                 elif page.page.rev and page.page.rev != page.page.getRevList()[0]:
                     querydict = {
-                        'action': 'recall',
                         'rev': page.page.rev,
                     }
                 else:
@@ -432,7 +431,6 @@ class SearchResults:
                     fmt_context = self.formatContext(page, context, maxlines)
                     if page.page.rev and page.page.rev != page.page.getRevList()[0]:
                         querydict = {
-                            'action': 'recall',
                             'rev': page.page.rev,
                         }
                     else:
@@ -757,7 +755,9 @@ class SearchResults:
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
         if querydict is None:
-            querydict = {'highlight': self.query.highlight_re()}
+            querydict = {}
+        if 'action' not in querydict or querydict['action'] == 'AttachFile':
+            querydict.update({'highlight': self.query.highlight_re()})
         querystr = wikiutil.makeQueryString(querydict)
         #querystr = wikiutil.escape(querystr)
         return querystr
