@@ -269,7 +269,10 @@ class TextSearch(BaseExpression):
         return u'%s"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._pattern
+        # XXX Why can there be a )?
+        pattern = self._pattern[-1] != ')' and self.pattern or \
+                self._pattern[:-1]
+        return u"(%s)" % pattern
 
     def search(self, page):
         matches = []
@@ -381,7 +384,10 @@ class TitleSearch(BaseExpression):
         return u'%s!"%s"' % (neg, unicode(self._pattern))
 
     def highlight_re(self):
-        return u"(%s)" % self._pattern
+        # XXX Why can there be a )?
+        pattern = self._pattern[-1] != ')' and self.pattern or \
+                self._pattern[:-1]
+        return u"(%s)" % pattern
 
     def pageFilter(self):
         """ Page filter function for single title search """
