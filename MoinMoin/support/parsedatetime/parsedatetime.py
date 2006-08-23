@@ -186,7 +186,7 @@ class Calendar:
         """
           # if a constants reference is not included, use default
         if constants is None:
-            self.ptc = parsedatetime_consts.CalendarConstants()
+            self.ptc = parsedatetime_consts.Constants()
         else:
             self.ptc = constants
 
@@ -206,18 +206,31 @@ class Calendar:
         self.CRE_TIME      = re.compile(self.ptc.RE_TIME,      re.IGNORECASE)
         self.CRE_REMAINING = re.compile(self.ptc.RE_REMAINING, re.IGNORECASE)
 
-        self.invalidFlag   = 0  # Is set if the datetime string entered cannot be parsed at all
-        self.weekdyFlag    = 0  # monday/tuesday/...
-        self.dateStdFlag   = 0  # 07/21/06
-        self.dateStrFlag   = 0  # July 21st, 2006
-        self.timeFlag      = 0  # 5:50 
-        self.meridianFlag  = 0  # am/pm
-        self.dayStrFlag    = 0  # tomorrow/yesterday/today/..
-        self.timeStrFlag   = 0  # lunch/noon/breakfast/...
-        self.modifierFlag  = 0  # after/before/prev/next/..
-        self.modifier2Flag = 0  # after/before/prev/next/..
-        self.unitsFlag     = 0  # hrs/weeks/yrs/min/..
-        self.qunitsFlag    = 0  # h/m/t/d..
+        #regex for date/time ranges
+        self.CRE_RTIMEHMS  = re.compile(self.ptc.RE_RTIMEHMS,  re.IGNORECASE)
+        self.CRE_RTIMEHMS2 = re.compile(self.ptc.RE_RTIMEHMS2, re.IGNORECASE)
+        self.CRE_RDATE     = re.compile(self.ptc.RE_RDATE,     re.IGNORECASE)
+        self.CRE_RDATE3    = re.compile(self.ptc.RE_RDATE3,    re.IGNORECASE)
+
+        self.CRE_TIMERNG1  = re.compile(self.ptc.TIMERNG1, re.IGNORECASE)
+        self.CRE_TIMERNG2  = re.compile(self.ptc.TIMERNG2, re.IGNORECASE)
+        self.CRE_TIMERNG3  = re.compile(self.ptc.TIMERNG3, re.IGNORECASE)
+        self.CRE_DATERNG1  = re.compile(self.ptc.DATERNG1, re.IGNORECASE)
+        self.CRE_DATERNG2  = re.compile(self.ptc.DATERNG2, re.IGNORECASE)
+        self.CRE_DATERNG3  = re.compile(self.ptc.DATERNG3, re.IGNORECASE)
+
+        self.invalidFlag   = False  # Is set if the datetime string entered cannot be parsed at all
+        self.weekdyFlag    = False  # monday/tuesday/...
+        self.dateStdFlag   = False  # 07/21/06
+        self.dateStrFlag   = False  # July 21st, 2006
+        self.timeFlag      = False  # 5:50 
+        self.meridianFlag  = False  # am/pm
+        self.dayStrFlag    = False  # tomorrow/yesterday/today/..
+        self.timeStrFlag   = False  # lunch/noon/breakfast/...
+        self.modifierFlag  = False  # after/before/prev/next/..
+        self.modifier2Flag = False  # after/before/prev/next/..
+        self.unitsFlag     = False  # hrs/weeks/yrs/min/..
+        self.qunitsFlag    = False  # h/m/t/d..
 
 
     def _convertUnitAsWords(self, unitText):
@@ -284,11 +297,6 @@ class Calendar:
 
         # plurals are handled by regex's (could be a bug tho)
 
-        if units in self.ptc.Units:
-            u = self.ptc.Units[units]
-        else:
-            u = 1
-
         (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = source
 
         start  = datetime.datetime(yr, mth, dy, hr, mn, sec)
@@ -311,7 +319,7 @@ class Calendar:
                 target = start + datetime.timedelta(weeks=qty)
 
         if target != start:
-            self.invalidFlag = 0
+            self.invalidFlag = False
 
         return target.timetuple()
 
@@ -327,9 +335,6 @@ class Calendar:
         @return: calculated datetime value of dateString
         """
         yr, mth, dy, hr, mn, sec, wd, yd, isdst = time.localtime()
-
-        # XXX: Quick fix to ignore 'the'
-        dateString = dateString.replace('the', '')
 
         s = dateString
         m = self.CRE_DATE2.search(s)
@@ -349,10 +354,10 @@ class Calendar:
         else:
             dy = int(string.strip(s))
 
-        if mth <= 12 and dy <= self.ptc.DaysInMonthList[mth - 1]:
+        if (mth > 0 and mth <= 12) and (dy > 0 and dy <= self.ptc.DaysInMonthList[mth - 1]):
             sourceTime = (yr, mth, dy, hr, mn, sec, wd, yd, isdst)
         else:
-            self.invalidFlag = 1
+            self.invalidFlag = True
             sourceTime       = time.localtime() #return current time if date string is invalid
 
         return sourceTime
@@ -376,7 +381,7 @@ class Calendar:
         s   = dateString.lower()
         m   = self.CRE_DATE3.search(s)
         mth = m.group('mthname')
-        mth = int(self.ptc.MthNames[mth])
+        mth = self.ptc.MonthOffsets[mth]
 
         if m.group('day') !=  None:
             dy = int(m.group('day'))
@@ -390,14 +395,179 @@ class Calendar:
             # then increment the year by 1
             yr += 1
 
-        if dy <= self.ptc.DaysInMonthList[mth - 1]:
+        if dy > 0 and dy <= self.ptc.DaysInMonthList[mth - 1]:
             sourceTime = (yr, mth, dy, 9, 0, 0, wd, yd, isdst)
         else:
               # Return current time if date string is invalid
-            self.invalidFlag = 1
+            self.invalidFlag = True
             sourceTime       = time.localtime()
 
         return sourceTime
+
+
+    def evalRanges(self, datetimeString, sourceTime=None):
+        """
+        Evaluates the strings with time or date ranges
+
+        @type  datetimeString: string
+        @param datetimeString: datetime text to evaluate
+        @type  sourceTime:     datetime
+        @param sourceTime:     datetime value to use as the base
+
+        @rtype:  tuple
+        @return: tuple of the start datetime, end datetime and the invalid flag
+        """
+        startTime = ''
+        endTime   = ''
+        startDate = ''
+        endDate   = ''
+        rangeFlag = 0
+
+        s = string.strip(datetimeString.lower())
+
+        m = self.CRE_TIMERNG1.search(s)
+        if m is not None:
+            rangeFlag = 1
+        else:
+            m = self.CRE_TIMERNG2.search(s)
+            if m is not None:
+                rangeFlag = 2
+            else:
+                m = self.CRE_TIMERNG3.search(s)
+                if m is not None:
+                    rangeFlag = 3
+                else:
+                    m = self.CRE_DATERNG1.search(s)
+                    if m is not None:
+                        rangeFlag = 4
+                    else:
+                        m = self.CRE_DATERNG2.search(s)
+                        if m is not None:
+                            rangeFlag = 5
+                        else:
+                            m = self.CRE_DATERNG3.search(s)
+                            if m is not None:
+                                rangeFlag = 6
+
+        if _debug:
+            print 'evalRanges: rangeFlag =', rangeFlag, '[%s]' % s
+
+        if m is not None:
+            if (m.group() != s):
+                # capture remaining string
+                parseStr = m.group()
+                chunk1   = s[:m.start()]
+                chunk2   = s[m.end():]
+                s        = '%s %s' % (chunk1, chunk2)
+                flag     = 1
+
+                sourceTime, flag = self.parse(s, sourceTime)
+
+                if flag == True:
+                    sourceTime = None
+            else:
+                parseStr = s
+
+        if rangeFlag == 1:
+            # FIXME hardcoded seperator
+            m                = re.search('-', parseStr)
+            startTime, sflag = self.parse((parseStr[:m.start()]),       sourceTime)
+            endTime, eflag   = self.parse((parseStr[(m.start() + 1):]), sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startTime, endTime, False)
+
+        elif rangeFlag == 2:
+            # FIXME hardcoded seperator
+            m                = re.search('-', parseStr)
+            startTime, sflag = self.parse((parseStr[:m.start()]), sourceTime)
+            endTime, eflag   = self.parse((parseStr[(m.start() + 1):]), sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startTime, endTime, False)
+
+        elif rangeFlag == 3:
+            # FIXME hardcoded seperator
+            m = re.search('-', parseStr)
+
+            # capturing the meridian from the end time
+            # FIXME hardcoded meridian
+            if self.ptc.usesMeridian:
+                ampm = re.search('a', parseStr)
+
+                # appending the meridian to the start time
+                if ampm is not None:
+                    startTime, sflag = self.parse((parseStr[:m.start()] + self.ptc.meridian[0]), sourceTime)
+                else:
+                    startTime, sflag = self.parse((parseStr[:m.start()] + self.ptc.meridian[1]), sourceTime)
+            else:
+                startTime, sflag = self.parse((parseStr[:m.start()]), sourceTime)
+
+            endTime, eflag = self.parse(parseStr[(m.start() + 1):], sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startTime, endTime, False)
+
+        elif rangeFlag == 4:
+            # FIXME hardcoded seperator
+            m                = re.search('-', parseStr)
+            startDate, sflag = self.parse((parseStr[:m.start()]),       sourceTime)
+            endDate, eflag   = self.parse((parseStr[(m.start() + 1):]), sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startDate, endDate, False)
+
+        elif rangeFlag == 5:
+            # FIXME hardcoded seperator
+            m       = re.search('-', parseStr)
+            endDate = parseStr[(m.start() + 1):]
+
+            # capturing the year from the end date
+            date    = self.CRE_DATE3.search(endDate)
+            endYear = date.group('year')
+
+            # appending the year to the start date if the start date
+            # does not have year information and the end date does.
+            # eg : "Aug 21 - Sep 4, 2007"
+            if endYear is not None:
+                startDate = parseStr[:m.start()]
+                date      = self.CRE_DATE3.search(startDate)
+                startYear = date.group('year')
+
+                if startYear is None:
+                    startDate += endYear
+            else:
+                startDate = parseStr[:m.start()]
+
+            startDate, sflag = self.parse(startDate, sourceTime)
+            endDate, eflag   = self.parse(endDate, sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startDate, endDate, False)
+
+        elif rangeFlag == 6:
+            # FIXME hardcoded seperator
+            m = re.search('-', parseStr)
+
+            startDate = parseStr[:m.start()]
+
+            # capturing the month from the start date
+            mth = self.CRE_DATE3.search(startDate)
+            mth = mth.group('mthname')
+
+            # appending the month name to the end date
+            endDate = mth + parseStr[(m.start() + 1):]
+
+            startDate, sflag = self.parse(startDate, sourceTime)
+            endDate, eflag   = self.parse(endDate, sourceTime)
+
+            if eflag is False and sflag is False:
+                return (startDate, endDate, False)
+        else:
+            # if range is not found
+            sourceTime = time.localtime()
+
+            return (sourceTime, sourceTime, True)
 
 
     def _evalModifier(self, modifier, chunk1, chunk2, sourceTime):
@@ -406,12 +576,12 @@ class Calendar:
         as chunk1 and chunk2) and if they match any known modifiers
         calculate the delta and apply it to sourceTime
 
-        @type  modifier: string
-        @param modifier: modifier text to apply to sourceTime
-        @type  chunk1:   string
-        @param chunk1:   first text chunk that followed modifier (if any)
-        @type  chunk2:   string
-        @param chunk2:   second text chunk that followed modifier (if any)
+        @type  modifier:   string
+        @param modifier:   modifier text to apply to sourceTime
+        @type  chunk1:     string
+        @param chunk1:     first text chunk that followed modifier (if any)
+        @type  chunk2:     string
+        @param chunk2:     second text chunk that followed modifier (if any)
         @type  sourceTime: datetime
         @param sourceTime: datetime value to use as the base
 
@@ -435,12 +605,12 @@ class Calendar:
             unit   = chunk2
             chunk2 = ''
 
-        flag = 0
+        flag = False
 
-        if unit == self.ptc.Target_Text['month'] or \
-           unit == self.ptc.Target_Text['mth']:
+        if unit == 'month' or \
+           unit == 'mth':
             if offset == 0:
-                dy        = self.ptc.DaysInMonthList[mth - 1]
+                dy         = self.ptc.DaysInMonthList[mth - 1]
                 sourceTime = (yr, mth, dy, 9, 0, 0, wd, yd, isdst)
             elif offset == 2:
                 # if day is the last day of the month, calculate the last day of the next month
@@ -455,11 +625,11 @@ class Calendar:
                 target     = self.inc(start, month=offset)
                 sourceTime = target.timetuple()
 
-            flag = 1
+            flag = True
 
-        if unit == self.ptc.Target_Text['week'] or \
-             unit == self.ptc.Target_Text['wk'] or \
-             unit == self.ptc.Target_Text['w']:
+        if unit == 'week' or \
+             unit == 'wk' or \
+             unit == 'w':
             if offset == 0:
                 start      = datetime.datetime(yr, mth, dy, 17, 0, 0)
                 target     = start + datetime.timedelta(days=(4 - wd))
@@ -471,11 +641,11 @@ class Calendar:
             else:
                 return self._evalModifier(modifier, chunk1, "monday " + chunk2, sourceTime)
 
-            flag = 1
+            flag = True
 
-        if unit == self.ptc.Target_Text['day'] or \
-            unit == self.ptc.Target_Text['dy'] or \
-            unit == self.ptc.Target_Text['d']:
+        if unit == 'day' or \
+            unit == 'dy' or \
+            unit == 'd':
             if offset == 0:
                 sourceTime = (yr, mth, dy, 17, 0, 0, wd, yd, isdst)
             elif offset == 2:
@@ -487,10 +657,10 @@ class Calendar:
                 target     = start + datetime.timedelta(days=offset)
                 sourceTime = target.timetuple()
 
-            flag = 1
+            flag = True
 
-        if unit == self.ptc.Target_Text['hour'] or \
-           unit == self.ptc.Target_Text['hr']:
+        if unit == 'hour' or \
+           unit == 'hr':
             if offset == 0:
                 sourceTime = (yr, mth, dy, hr, 0, 0, wd, yd, isdst)
             else:
@@ -498,11 +668,11 @@ class Calendar:
                 target     = start + datetime.timedelta(hours=offset)
                 sourceTime = target.timetuple()
 
-            flag = 1
+            flag = True
 
-        if unit == self.ptc.Target_Text['year'] or \
-             unit == self.ptc.Target_Text['yr'] or \
-             unit == self.ptc.Target_Text['y']:
+        if unit == 'year' or \
+             unit == 'yr' or \
+             unit == 'y':
             if offset == 0:
                 sourceTime = (yr, 12, 31, hr, mn, sec, wd, yd, isdst)
             elif offset == 2:
@@ -510,13 +680,13 @@ class Calendar:
             else:
                 sourceTime = (yr + offset, 1, 1, 9, 0, 0, wd, yd, isdst)
 
-            flag = 1
+            flag = True
 
-        if flag == 0:
+        if flag == False:
             m = self.CRE_WEEKDAY.match(unit)
             if m is not None:
                 wkdy = m.group()
-                wkdy = self.ptc.WeekDays[wkdy]
+                wkdy = self.ptc.WeekdayOffsets[wkdy]
 
                 if offset == 0:
                     diff       = wkdy - wd
@@ -529,9 +699,9 @@ class Calendar:
                     target     = start + datetime.timedelta(days=diff + 7 * offset)
                     sourceTime = target.timetuple()
 
-                flag = 1
+                flag = True
 
-        if flag == 0:
+        if not flag:
             m = self.CRE_TIME.match(unit)
             if m is not None:
                 (yr, mth, dy, hr, mn, sec, wd, yd, isdst), self.invalidFlag = self.parse(unit)
@@ -539,20 +709,20 @@ class Calendar:
                 target     = start + datetime.timedelta(days=offset)
                 sourceTime = target.timetuple()
 
-                flag              = 1
-                self.modifierFlag = 0
+                flag              = True
+                self.modifierFlag = False
 
         # if the word after next is a number, the string is likely
         # to be something like "next 4 hrs" for which we have to
         # combine the units with the rest of the string
-        if flag == 0:
+        if not flag:
             if offset < 0:
                 # if offset is negative, the unit has to be made negative
                 unit = '-%s' % unit
 
             chunk2 = '%s %s' % (unit, chunk2)
 
-        self.modifierFlag = 0
+        self.modifierFlag = False
 
         return '%s %s' % (chunk1, chunk2), sourceTime
 
@@ -583,7 +753,7 @@ class Calendar:
         else:
             (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = time.localtime()
 
-        self.modifier2Flag = 0
+        self.modifier2Flag = False
 
         # If the string after the negative modifier starts with
         # digits, then it is likely that the string is similar to
@@ -634,7 +804,8 @@ class Calendar:
         @rtype:  datetime
         @return: calculated datetime value or current datetime if not parsed
         """
-        s = string.strip(datetimeString)
+        s   = string.strip(datetimeString)
+        now = time.localtime()
 
           # Given string date is a RFC822 date
         if sourceTime is None:
@@ -648,9 +819,9 @@ class Calendar:
             s = s.lower()
 
           # Given string is in the format HH:MM(:SS)(am/pm)
-        if self.meridianFlag == 1:
+        if self.meridianFlag:
             if sourceTime is None:
-                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = time.localtime()
+                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = now
             else:
                 (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = sourceTime
 
@@ -668,24 +839,27 @@ class Calendar:
                     hr = 0
 
                 sourceTime = (yr, mth, dy, hr, mn, sec, wd, yd, isdst)
-                meridian   = m.group('meridian')
+                meridian   = m.group('meridian').lower()
 
-                if (re.compile("a").search(meridian)) and hr == 12:
+                  # if 'am' found and hour is 12 - force hour to 0 (midnight)
+                if (meridian in self.ptc.am) and hr == 12:
                     sourceTime = (yr, mth, dy, 0, mn, sec, wd, yd, isdst)
-                if (re.compile("p").search(meridian)) and hr < 12:
-                    sourceTime = (yr, mth, dy, hr+12, mn, sec, wd, yd, isdst)
+
+                  # if 'pm' found and hour < 12, add 12 to shift to evening
+                if (meridian in self.ptc.pm) and hr < 12:
+                    sourceTime = (yr, mth, dy, hr + 12, mn, sec, wd, yd, isdst)
 
               # invalid time
             if hr > 24 or mn > 59 or sec > 59:
-                sourceTime       = time.localtime()
-                self.invalidFlag = 1
+                sourceTime       = now
+                self.invalidFlag = True
 
-            self.meridianFlag = 0
+            self.meridianFlag = False
 
           # Given string is in the format HH:MM(:SS)
-        if self.timeFlag == 1:
+        if self.timeFlag:
             if sourceTime is None:
-                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = time.localtime()
+                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = now
             else:
                 (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = sourceTime
 
@@ -697,28 +871,29 @@ class Calendar:
 
             if hr > 24 or mn > 59 or sec > 59:
                 # invalid time
-                sourceTime = time.localtime()
-                self.invalidFlag = 1
+                sourceTime       = now
+                self.invalidFlag = True
             else:
                 sourceTime = (yr, mth, dy, hr, mn, sec, wd, yd, isdst)
 
-            self.timeFlag = 0
+            self.timeFlag = False
 
           # Given string is in the format 07/21/2006
-        if self.dateStdFlag == 1:
+        if self.dateStdFlag:
             sourceTime       = self.parseDate(s)
-            self.dateStdFlag = 0
+            self.dateStdFlag = False
 
           # Given string is in the format  "May 23rd, 2005"
-        if self.dateStrFlag == 1:
+        if self.dateStrFlag:
             sourceTime       = self.parseDateText(s)
-            self.dateStrFlag = 0
+            self.dateStrFlag = False
 
           # Given string is a weekday
-        if self.weekdyFlag == 1:
-            yr, mth, dy, hr, mn, sec, wd, yd, isdst = time.localtime()
+        if self.weekdyFlag:
+            (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = now
+
             start = datetime.datetime(yr, mth, dy, hr, mn, sec)
-            wkDy  = self.ptc.WeekDays[s]
+            wkDy  = self.ptc.WeekdayOffsets[s]
 
             if wkDy > wd:
                 qty    = wkDy - wd
@@ -730,59 +905,47 @@ class Calendar:
                 wd     = wkDy
 
             sourceTime      = target.timetuple()
-            self.weekdyFlag = 0
+            self.weekdyFlag = False
 
           # Given string is a natural language time string like lunch, midnight, etc
-        if self.timeStrFlag == 1:
-            if sourceTime is None:
-                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = time.localtime()
+        if self.timeStrFlag:
+            if s in self.ptc.re_values['now']:
+                sourceTime = now
             else:
-                (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = sourceTime
+                sources = self.ptc.buildSources(now)
 
-            sources = { 'now':       (yr, mth, dy, hr, mn, sec, wd, yd, isdst),
-                        'noon':      (yr, mth, dy, 12,  0,   0, wd, yd, isdst),
-                        'lunch':     (yr, mth, dy, 12,  0,   0, wd, yd, isdst),
-                        'morning':   (yr, mth, dy,  6,  0,   0, wd, yd, isdst),
-                        'breakfast': (yr, mth, dy,  8,  0,   0, wd, yd, isdst),
-                        'dinner':    (yr, mth, dy, 19,  0,   0, wd, yd, isdst),
-                        'evening':   (yr, mth, dy, 18,  0,   0, wd, yd, isdst),
-                        'midnight':  (yr, mth, dy,  0,  0,   0, wd, yd, isdst),
-                        'night':     (yr, mth, dy, 21,  0,   0, wd, yd, isdst),
-                        'tonight':   (yr, mth, dy, 21,  0,   0, wd, yd, isdst),
-                      }
+                if s in sources:
+                    sourceTime = sources[s]
+                else:
+                    sourceTime       = now
+                    self.invalidFlag = True
 
-            if s in sources:
-                sourceTime = sources[s]
-            else:
-                sourceTime       = time.localtime()
-                self.invalidFlag = 1
-
-            self.timeStrFlag = 0
+            self.timeStrFlag = False
 
            # Given string is a natural language date string like today, tomorrow..
-        if self.dayStrFlag == 1:
+        if self.dayStrFlag:
             if sourceTime is None:
-                sourceTime = time.localtime()
+                sourceTime = now
 
             (yr, mth, dy, hr, mn, sec, wd, yd, isdst) = sourceTime
 
-            sources = { 'tomorrow':   1,
-                        'today':      0,
-                        'yesterday': -1,
-                       }
+            if s in self.ptc.dayOffsets:
+                offset = self.ptc.dayOffsets[s]
+            else:
+                offset = 0
 
             start      = datetime.datetime(yr, mth, dy, 9, 0, 0)
-            target     = start + datetime.timedelta(days=sources[s])
+            target     = start + datetime.timedelta(days=offset)
             sourceTime = target.timetuple()
 
-            self.dayStrFlag = 0
+            self.dayStrFlag = False
 
           # Given string is a time string with units like "5 hrs 30 min"
-        if self.unitsFlag == 1:
+        if self.unitsFlag:
             modifier = ''  # TODO
 
             if sourceTime is None:
-                sourceTime = time.localtime()
+                sourceTime = now
 
             m = self.CRE_UNITS.search(s)
             if m is not None:
@@ -790,14 +953,14 @@ class Calendar:
                 quantity = s[:m.start('units')]
 
             sourceTime     = self._buildTime(sourceTime, quantity, modifier, units)
-            self.unitsFlag = 0
+            self.unitsFlag = False
 
           # Given string is a time string with single char units like "5 h 30 m"
-        if self.qunitsFlag == 1:
+        if self.qunitsFlag:
             modifier = ''  # TODO
 
             if sourceTime is None:
-                sourceTime = time.localtime()
+                sourceTime = now
 
             m = self.CRE_QUNITS.search(s)
             if m is not None:
@@ -805,12 +968,12 @@ class Calendar:
                 quantity = s[:m.start('qunits')]
 
             sourceTime      = self._buildTime(sourceTime, quantity, modifier, units)
-            self.qunitsFlag = 0
+            self.qunitsFlag = False
 
           # Given string does not match anything
         if sourceTime is None:
-            sourceTime       = time.localtime()
-            self.invalidFlag = 1
+            sourceTime       = now
+            self.invalidFlag = True
 
         return sourceTime
 
@@ -836,16 +999,16 @@ class Calendar:
         parseStr  = ''
         totalTime = sourceTime
 
-        self.invalidFlag = 0
+        self.invalidFlag = False
 
         if s == '' :
             if sourceTime is not None:
-                return (sourceTime, 0)
+                return (sourceTime, False)
             else:
-                return (time.localtime(), 1)
+                return (time.localtime(), True)
 
         while len(s) > 0:
-            flag   = 0
+            flag   = False
             chunk1 = ''
             chunk2 = ''
 
@@ -856,13 +1019,13 @@ class Calendar:
                 # Modifier like next\prev..
                 m = self.CRE_MODIFIER.search(s)
                 if m is not None:
-                    self.modifierFlag = 1
+                    self.modifierFlag = True
                     if (m.group('modifier') != s):
                         # capture remaining string
                         parseStr = m.group('modifier')
                         chunk1   = string.strip(s[:m.start('modifier')])
                         chunk2   = string.strip(s[m.end('modifier'):])
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -870,13 +1033,13 @@ class Calendar:
                 # Modifier like from\after\prior..
                 m = self.CRE_MODIFIER2.search(s)
                 if m is not None:
-                    self.modifier2Flag = 1
+                    self.modifier2Flag = True
                     if (m.group('modifier') != s):
                         # capture remaining string
                         parseStr = m.group('modifier')
                         chunk1   = string.strip(s[:m.start('modifier')])
                         chunk2   = string.strip(s[m.end('modifier'):])
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -884,14 +1047,14 @@ class Calendar:
                 # String date format
                 m = self.CRE_DATE3.search(s)
                 if m is not None:
-                    self.dateStrFlag = 1
+                    self.dateStrFlag = True
                     if (m.group('date') != s):
                         # capture remaining string
                         parseStr = m.group('date')
                         chunk1   = s[:m.start('date')]
                         chunk2   = s[m.end('date'):]
                         s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -899,14 +1062,14 @@ class Calendar:
                 # Standard date format
                 m = self.CRE_DATE.search(s)
                 if m is not None:
-                    self.dateStdFlag = 1
+                    self.dateStdFlag = True
                     if (m.group('date') != s):
                         # capture remaining string
                         parseStr = m.group('date')
                         chunk1   = s[:m.start('date')]
                         chunk2   = s[m.end('date'):]
                         s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -914,14 +1077,14 @@ class Calendar:
                 # Natural language day strings
                 m = self.CRE_DAY.search(s)
                 if m is not None:
-                    self.dayStrFlag = 1
+                    self.dayStrFlag = True
                     if (m.group('day') != s):
                         # capture remaining string
                         parseStr = m.group('day')
                         chunk1   = s[:m.start('day')]
                         chunk2   = s[m.end('day'):]
                         s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -929,14 +1092,19 @@ class Calendar:
                 # Quantity + Units
                 m = self.CRE_UNITS.search(s)
                 if m is not None:
-                    self.unitsFlag = 1
+                    self.unitsFlag = True
                     if (m.group('qty') != s):
                         # capture remaining string
                         parseStr = m.group('qty')
-                        chunk1   = s[:m.start('qty')]
-                        chunk2   = s[m.end('qty'):]
-                        s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        chunk1   = s[:m.start('qty')].strip()
+                        chunk2   = s[m.end('qty'):].strip()
+
+                        if chunk1[-1:] == '-':
+                            parseStr = '-%s' % parseStr
+                            chunk1   = chunk1[:-1]
+
+                        s    = '%s %s' % (chunk1, chunk2)
+                        flag = True
                     else:
                         parseStr = s
 
@@ -944,14 +1112,19 @@ class Calendar:
                 # Quantity + Units
                 m = self.CRE_QUNITS.search(s)
                 if m is not None:
-                    self.qunitsFlag = 1
+                    self.qunitsFlag = True
                     if (m.group('qty') != s):
                         # capture remaining string
                         parseStr = m.group('qty')
-                        chunk1   = s[:m.start('qty')]
-                        chunk2   = s[m.end('qty'):]
-                        s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        chunk1   = s[:m.start('qty')].strip()
+                        chunk2   = s[m.end('qty'):].strip()
+
+                        if chunk1[-1:] == '-':
+                            parseStr = '-%s' % parseStr
+                            chunk1   = chunk1[:-1]
+
+                        s    = '%s %s' % (chunk1, chunk2)
+                        flag = True
                     else:
                         parseStr = s 
 
@@ -959,14 +1132,14 @@ class Calendar:
                 # Weekday
                 m = self.CRE_WEEKDAY.search(s)
                 if m is not None:
-                    self.weekdyFlag = 1
+                    self.weekdyFlag = True
                     if (m.group('weekday') != s):
                         # capture remaining string
                         parseStr = m.group()
                         chunk1   = s[:m.start('weekday')]
                         chunk2   = s[m.end('weekday'):]
                         s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -974,14 +1147,14 @@ class Calendar:
                 # Natural language time strings
                 m = self.CRE_TIME.search(s)
                 if m is not None:
-                    self.timeStrFlag = 1
+                    self.timeStrFlag = True
                     if (m.group('time') != s):
                         # capture remaining string
                         parseStr = m.group('time')
                         chunk1   = s[:m.start('time')]
                         chunk2   = s[m.end('time'):]
                         s        = '%s %s' % (chunk1, chunk2)
-                        flag     = 1
+                        flag     = True
                     else:
                         parseStr = s
 
@@ -989,7 +1162,7 @@ class Calendar:
                 # HH:MM(:SS) am/pm time strings
                 m = self.CRE_TIMEHMS2.search(s)
                 if m is not None:
-                    self.meridianFlag = 1
+                    self.meridianFlag = True
                     if m.group('minutes') is not None:
                         if m.group('seconds') is not None:
                             parseStr = '%s:%s:%s %s' % (m.group('hours'), m.group('minutes'), m.group('seconds'), m.group('meridian'))
@@ -1002,13 +1175,13 @@ class Calendar:
                     chunk2 = s[m.end('meridian'):]
 
                     s    = '%s %s' % (chunk1, chunk2)
-                    flag = 1
+                    flag = True
 
             if parseStr == '':
                 # HH:MM(:SS) time strings
                 m = self.CRE_TIMEHMS.search(s)
                 if m is not None:
-                    self.timeFlag = 1
+                    self.timeFlag = True
                     if m.group('seconds') is not None:
                         parseStr = '%s:%s:%s' % (m.group('hours'), m.group('minutes'), m.group('seconds'))
                         chunk1   = s[:m.start('hours')]
@@ -1019,27 +1192,27 @@ class Calendar:
                         chunk2   = s[m.end('minutes'):]
 
                     s    = '%s %s' % (chunk1, chunk2)
-                    flag = 1
+                    flag = True
 
             # if string does not match any regex, empty string to come out of the while loop
-            if flag is 0:
+            if not flag:
                 s = ''
 
             if _debug:
                 print 'parse (bottom) [%s][%s][%s][%s]' % (s, parseStr, chunk1, chunk2)
-                print 'invalid [%d] weekday [%d] dateStd [%d] dateStr [%d] time [%d] timeStr [%d] meridian [%d]' % \
+                print 'invalid %s, weekday %s, dateStd %s, dateStr %s, time %s, timeStr %s, meridian %s' % \
                        (self.invalidFlag, self.weekdyFlag, self.dateStdFlag, self.dateStrFlag, self.timeFlag, self.timeStrFlag, self.meridianFlag)
-                print 'dayStr [%d] modifier [%d] modifier2 [%d] units [%d] qunits[%d]' % \
+                print 'dayStr %s, modifier %s, modifier2 %s, units %s, qunits %s' % \
                        (self.dayStrFlag, self.modifierFlag, self.modifier2Flag, self.unitsFlag, self.qunitsFlag)
 
             # evaluate the matched string
             if parseStr != '':
-                if self.modifierFlag == 1:
+                if self.modifierFlag == True:
                     t, totalTime = self._evalModifier(parseStr, chunk1, chunk2, totalTime)
 
                     return self.parse(t, totalTime)
 
-                elif self.modifier2Flag == 1:
+                elif self.modifier2Flag == True:
                     s, totalTime = self._evalModifier2(parseStr, chunk1, chunk2, totalTime)
                 else:
                     totalTime = self._evalString(parseStr, totalTime)
@@ -1048,7 +1221,7 @@ class Calendar:
         # String is not parsed at all
         if totalTime is None or totalTime == sourceTime:
             totalTime        = time.localtime()
-            self.invalidFlag = 1
+            self.invalidFlag = True
 
         return (totalTime, self.invalidFlag)
 
