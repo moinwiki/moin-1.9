@@ -86,7 +86,7 @@ class SyncPage(object):
 
     def __eq__(self, other):
         if not isinstance(other, SyncPage):
-            return false
+            return False
         return self.name == other.name
 
     def add_missing_pagename(self, local, remote):
@@ -251,6 +251,14 @@ class MoinRemoteWiki(RemoteWiki):
     def create_multicall_object(self):
         """ Generates an object that can be used like a MultiCall instance. """
         return MultiCall(self.connection)
+
+    def prepare_multicall(self):
+        """ Can be used to return initial calls that e.g. authenticate the user.
+            @return: [(funcname, (arg,+)*]
+        """
+        if self.token:
+            return [("applyAuthToken", (self.token, ))]
+        return []
 
     # Methods implementing the RemoteWiki interface
 
