@@ -79,7 +79,6 @@ def scheduler(multicall_func, handler, args, max_calls=10, prepare_multicall_fun
                 pre_calls = [(RPCYielder(0), x) for x in prepare_multicall_func()]
                 call_list = pre_calls + call_list
 
-            #print "doing multicall with %r" % call_list
             m = multicall_func()
             gens_result = [] # generators that will get a result
             for gen, (func, args) in call_list:
