@@ -423,7 +423,8 @@ class Search:
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                enq, mset, hits = index.search(query, sort=self.sort)
+                enq, mset, hits = index.search(query, sort=self.sort,
+                        historysearch=self.historysearch)
                 clock.stop('_xapianQuery')
                 #self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
@@ -506,6 +507,7 @@ class Search:
     def _getHits(self, pages, matchSearchFunction):
         """ Get the hit tuples in pages through matchSearchFunction """
         hits = []
+        revisionCache = {}
         fs_rootpage = self.fs_rootpage
         for hit in pages:
             if 'values' in hit:
@@ -538,7 +540,13 @@ class Search:
                 else:
                     matches = matchSearchFunction(page, uid)
                     if matches:
+                        if not self.historysearch and \
+                                pagename in revisionCache and \
+                                revisionCache[pagename][0] < revision:
+                            hits.remove(revisionCache[pagename][1])
+                            del revisionCache[pagename]
                         hits.append((wikiname, page, attachment, matches))
+                        revisionCache[pagename] = (revision, hits[-1])
             else: # other wiki
                 hits.append((wikiname, pagename, attachment, None, revision))
         return hits

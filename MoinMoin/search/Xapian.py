@@ -197,7 +197,7 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def _search(self, query, sort=None):
+    def _search(self, query, sort=None, historysearch=0):
         """ read lock must be acquired """
         while True:
             try:
@@ -217,6 +217,7 @@ class Index(BaseIndex):
             # XXX: we need real weight here, like _moinSearch
             # (TradWeight in xapian)
             kw['sortByRelevence'] = True
+            kw['sortKey'] = 'revision'
         if sort == 'page_name':
             kw['sortKey'] = 'pagename'
 
@@ -468,10 +469,12 @@ class Index(BaseIndex):
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.Keyword('mimetype', mimetype)
                 xcontent = xapdoc.TextField('content', att_content)
+                xdomains = [xapdoc.Keyword('domain', domain)
+                        for domain in domains]
                 doc = xapdoc.Document(textFields=(xcontent, ),
-                                      keywords=(xatt_itemid, xtitle,
-                                          xlanguage, xstem_language,
-                                          xmimetype, ),
+                                      keywords=xdomains + [xatt_itemid,
+                                          xtitle, xlanguage, xstem_language,
+                                          xmimetype, ],
                                       sortFields=(xpname, xattachment, xmtime,
                                           xwname, xrev, ),
                                      )
