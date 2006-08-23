@@ -27,6 +27,7 @@ try:
 except ImportError:
     Stemmer = None
 
+
 class UnicodeQuery(xapian.Query):
     """ Xapian query object which automatically encodes unicode strings """
     def __init__(self, *args, **kwargs):
@@ -196,11 +197,25 @@ class Index(BaseIndex):
     }
 
     def __init__(self, request):
+        self._check_version()
         BaseIndex.__init__(self, request)
 
         # Check if we should and can stem words
         if request.cfg.xapian_stemming and not Stemmer:
             request.cfg.xapian_stemming = False
+
+    def _check_version(self):
+        """ Checks if the correct version of Xapian is installed """
+        if xapian.xapian_major_version() == 0 and \
+                xapian.xapian_minor_version() == 9 \
+                and xapian.xapian_revision() >= 6:
+            return
+        
+        from MoinMoin.error import ConfigurationError
+        raise ConfigurationError('MoinMoin needs at least Xapian version '
+                '0.9.6 to work correctly. Either disable Xapian '
+                'completetly in your wikiconfig or upgrade your Xapian '
+                'installation!')
 
     def _main_dir(self):
         """ Get the directory of the xapian index """
