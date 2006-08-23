@@ -187,9 +187,10 @@ Version 1.6.current:
     * The i18n system no loads *.po files directly (no *.py or *.mo any more)
       and caches the results (farm wide cache/i18n/*).
     * added the diff parser from ParserMarket, thanks to Emilio Lopes, Fabien
-      Ninoles and Jrgen Hermann.
+      Ninoles and Jürgen Hermann.
     * Added support for "304 not modified" response header for AttachFile get
       and rss_rc actions - faster, less traffic, less load.
+    * Added support for @SELF to the NewPage macro.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -214,6 +215,7 @@ Version 1.6.current:
     * Fixed http header output.
     * Fixed request.cfg corruption in the fckdialog code that could lead
       to e.g. stalled servers (thanks to David Linke)
+    * Fixed typo in NewPage that lead to a NameError.
 
   Other changes:
     * we use (again) the same browser compatibility check as FCKeditor uses
@@ -934,7 +936,7 @@ Version 1.5.0beta1:
 
   International support:    
     * mail_from can be now a unicode name-address 
-      e.g u'Jrgen wiki <noreply@jhwiki.org>'
+      e.g u'Jürgen wiki <noreply@jhwiki.org>'
 
   Theme changes:
     * logo_string is now should be really only the logo (img).
@@ -2700,7 +2702,7 @@ New features:
       there before a new version is written to disk
     * Removed the "Reset" button from EditPage
     * Added "Reduce editor size" link
-    * Added Latin-1 WikiNames (JrgenHermann ;)
+    * Added Latin-1 WikiNames (JürgenHermann ;)
     * Speeded up RecentChanges by looking up hostnames ONCE while saving
     * Show at most 14 (distinct) days in RecentChanges
     * Added icons for common functions, at the top of the page

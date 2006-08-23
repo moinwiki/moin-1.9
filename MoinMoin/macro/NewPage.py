@@ -78,6 +78,8 @@ class NewPage:
 
         if parent == '@ME' and self.request.user.valid:
             parent = self.request.user.name
+        if parent == '@SELF':
+            parent = f.page.page_name
 
         requires_input = '%s' in nametemplate
 
