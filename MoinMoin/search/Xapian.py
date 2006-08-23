@@ -28,6 +28,7 @@ except ImportError:
     Stemmer = None
 
 class UnicodeQuery(xapian.Query):
+    """ Xapian query object which automatically encodes unicode strings """
     def __init__(self, *args, **kwargs):
         self.encoding = kwargs.get('encoding', config.charset)
 
@@ -47,6 +48,11 @@ class UnicodeQuery(xapian.Query):
 ##############################################################################
 
 def getWikiAnalyzerFactory(request=None, language='en'):
+    """ Returns a WikiAnalyer instance
+
+    @keyword request: current request object
+    @keyword language: stemming language iso code, defaults to 'en'
+    """
     return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
@@ -80,8 +86,13 @@ class WikiAnalyzer:
             self.stemmer = None
 
     def raw_tokenize(self, value):
+        """ Yield a stream of lower cased raw and stemmed words from a string.
+
+        @param value: string to split, must be an unicode object or a list of
+                      unicode objects
+        """
         def enc(uc):
-            """ 'encode' unicode results into whatever xapian / xapwrap wants """
+            """ 'encode' unicode results into whatever xapian wants """
             lower = uc.lower()
             return lower
             
@@ -121,13 +132,17 @@ class WikiAnalyzer:
                             yield (enc(sm.group()), m.start() + sm.start())
 
     def tokenize(self, value, flat_stemming=True):
-        """Yield a stream of lower cased raw and stemmed (optional) words from a string.
-           value must be an UNICODE object or a list of unicode objects
+        """ Yield a stream of lower cased raw and stemmed words from a string.
+
+        @param value: string to split, must be an unicode object or a list of
+                      unicode objects
+        @keyword flat_stemming: whether to yield stemmed terms
+                                automatically with the natural forms
+                                (True) or yield both at once as a tuple
+                                (False)
         """
         for word, pos in self.raw_tokenize(value):
             if flat_stemming:
-                # XXX: should we really use a prefix for that?
-                # Index.prefixMap['raw'] + i
                 yield (word, pos)
                 if self.stemmer:
                     yield (self.stemmer.stemWord(word), pos)
@@ -140,6 +155,7 @@ class WikiAnalyzer:
 #############################################################################
 
 class Index(BaseIndex):
+    """ A Xapian index """
     indexValueMap = {
         # mapping the value names we can easily fetch from the index to
         # integers required by xapian. 0 and 1 are reserved by xapwrap!
@@ -187,6 +203,7 @@ class Index(BaseIndex):
             request.cfg.xapian_stemming = False
 
     def _main_dir(self):
+        """ Get the directory of the xapian index """
         if self.request.cfg.xapian_index_dir:
             return os.path.join(self.request.cfg.xapian_index_dir,
                     self.request.cfg.siteid)
@@ -198,7 +215,6 @@ class Index(BaseIndex):
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
     def _search(self, query, sort=None, historysearch=0):
-        """ read lock must be acquired """
         while True:
             try:
                 searcher, timestamp = self.request.cfg.xapian_searchers.pop()
@@ -239,6 +255,7 @@ class Index(BaseIndex):
         writer.close()
 
     def allterms(self):
+        """ Fetches all terms in the Xapian index """
         db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
         i = db.allterms_begin()
         while i != db.allterms_end():
@@ -246,6 +263,11 @@ class Index(BaseIndex):
             i.next()
 
     def termpositions(self, uid, term):
+        """ Fetches all positions of a term in a document
+        
+        @param uid: document id of the item in the xapian index
+        @param term: the term as a string
+        """
         db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
         pos = db.positionlist_begin(uid, term)
         while pos != db.positionlist_end(uid, term):
@@ -389,7 +411,7 @@ class Index(BaseIndex):
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
                 docmtime = long(doc['values']['mtime'])
-                updated = mtime > docmtime
+                updated = True # XXX: forcing, mtime > docmtime
                 if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
             else:
                 uid = None

@@ -195,12 +195,12 @@ class BaseIndex:
         #    self.read_lock.release()
         return hits
 
-    def update_page(self, page):
+    def update_page(self, pagename):
         """ Update a single page in the index
 
-        @param page: the page object to update
+        @param pagename: the name of the page to update
         """
-        self.queue.append(page.page_name)
+        self.queue.append(pagename)
         self._do_queued_updates_InNewThread()
 
     def indexPages(self, files=None, mode='update'):
