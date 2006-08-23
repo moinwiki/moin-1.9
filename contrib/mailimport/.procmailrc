@@ -1,0 +1,8 @@
+# Add this to your .procmailrc rules:
+
+# Pipe all mails directed to the wiki mail address to the wikimailimport script.
+# Make sure wikimailimport script is in your PATH.
+:0 w:
+* ^(To|Cc):.*wiki@example.org
+| wikimailimport
+
