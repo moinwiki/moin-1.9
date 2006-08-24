@@ -12,18 +12,12 @@
 
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
+from MoinMoin.support import sorted
 
 import mimetypes
 
 Dependencies = ['pages']
 
-try:
-    sorted
-except NameError:
-    def sorted(l, *args, **kw):
-        l = l[:]
-        l.sort(*args, **kw)
-        return l
 
 def advanced_ui(macro):
     _ = macro._
@@ -32,12 +26,12 @@ def advanced_ui(macro):
     search_boxes = ''.join([
         f.table_row(1),
         f.table_cell(1, attrs={'rowspan': '6', 'class': 'searchfor'}),
-        f.text(_('Search for pages')),
+        f.text(_('Search for items')),
         f.table_cell(0),
         ''.join([''.join([
             f.table_row(1),
             f.table_cell(1),
-            f.text(_(txt)),
+            f.text(txt),
             f.table_cell(0),
             f.table_cell(1),
             f.rawHTML(input_field),
@@ -55,18 +49,20 @@ def advanced_ui(macro):
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
                 '<input type="text" name="categories" size="30">'),
-            (_('last modified since (XXX)'),
+            (_('last modified since (e.g. last 2 weeks)'),
                 '<input type="text" name="mtime" size="30" value="">'),
         )])
     ])
 
     langs = dict([(lang, lmeta['x-language-in-english'])
-        for lang, lmeta in sorted(languages.items())])
+        for lang, lmeta in languages.items()])
+    userlang = macro.request.lang
     lang_dropdown = ''.join([
         u'<select name="language" size="1">',
         u'<option value="" selected>%s</option>' % _('any language'),
         ''.join(['<option value="%s">%s</option>' % lt for lt in
-            langs.items()]),
+            [(userlang, langs[userlang])] + sorted(langs.items(),
+                key=lambda i: i[1])]),
         u'</select>',
     ])
 
@@ -95,10 +91,15 @@ def advanced_ui(macro):
                 _('Search only in titles')),
                 ('', '<input type="checkbox" name="case" value="1">%s</input>' %
                 _('Case-sensitive search')),
-                ('', '<input type="checkbox" name="includeunderlay" value="1" checked>%s'
-                    '</input>' % _('Include underlay')),
-                ('', '<input type="checkbox" name="onlysystempages" value="1">%s'
-                    '</input>' % _('Only system pages')),
+                ('', '<input type="checkbox" name="excludeunderlay" value="1">%s'
+                    '</input>' % _('Exclude underlay')),
+                ('', '<input type="checkbox" name="nosystemitems" value="1">%s'
+                    '</input>' % _('No system items')),
+                ('', '<input type="checkbox" name="historysearch"value="1"%s>%s'
+                    '</input>' %
+                    (not macro.request.cfg.xapian_index_history and
+                        ' disabled="disabled"' or '',
+                     _('Search in all page revisions')))
             )
     ])
     

@@ -562,7 +562,8 @@ class ReadOnlyIndex:
                batchSize = MAX_DOCS_TO_RETURN,
                sortIndex = None, sortAscending = True,
                sortByRelevence = False,
-               valuesWanted = None):
+               valuesWanted = None,
+               collapseKey = None):
         """
         Search an index.
 
@@ -586,6 +587,8 @@ class ReadOnlyIndex:
         # the only thing we use sortKey for is to set sort index
         if sortKey is not None:
             sortIndex = self.indexValueMap[sortKey]
+        if collapseKey is not None:
+            collapseKey = self.indexValueMap[collapseKey]
 
         # once you call set_sorting on an Enquire instance, there is no
         # way to resort it by relevence, so we have to open a new
@@ -612,10 +615,15 @@ class ReadOnlyIndex:
                     del self._searchSessions[qString]
                     self._searchSessions[qString] = (self.enquire(q), None)
                     enq, lastIndexSortedBy = self._searchSessions[qString]
-            if sortIndex is not None:
+            if sortByRelevence is not None and sortIndex is not None:
+                enq.set_sort_by_relevance_then_value(sortIndex, not sortAscending)
+            elif sortIndex is not None:
                 # It seems that we have the opposite definition of sort ascending
                 # than Xapian so we invert the ascending flag!
                 enq.set_sort_by_value(sortIndex, not sortAscending)
+
+            if collapseKey is not None:
+                enq.set_collapse_key(collapseKey)
 
             self._searchSessions[qString] = (enq, sortIndex)
 

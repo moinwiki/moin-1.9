@@ -346,6 +346,10 @@ class SearchResults:
                         'do': 'get',
                         'target': page.attachment,
                     }
+                elif page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                    querydict = {
+                        'rev': page.page.rev,
+                    }
                 else:
                     querydict = None
                 querystr = self.querystring(querydict)
@@ -425,7 +429,12 @@ class SearchResults:
                     querydict = None
                 else:
                     fmt_context = self.formatContext(page, context, maxlines)
-                    querydict = None
+                    if page.page.rev and page.page.rev != page.page.getRevList()[0]:
+                        querydict = {
+                            'rev': page.page.rev,
+                        }
+                    else:
+                        querydict = None
                 querystr = self.querystring(querydict)
                 item = [
                     f.definition_term(1),
@@ -667,7 +676,8 @@ class SearchResults:
         querydict = wikiutil.parseQueryString(self.request.query_string)
         def page_url(n):
             querydict.update({'from': n * hitsPerPage})
-            return self.request.page.url(self.request, querydict, escape=0)
+            return self.request.page.url(self.request, querydict,
+                    escape=0, relative=False)
         
         pages = float(hitsNum) / hitsPerPage
         if pages - int(pages) > 0.0:
@@ -721,12 +731,19 @@ class SearchResults:
     def formatHitInfoBar(self, page):
         f = self.formatter
         _ = self.request.getText
+        request = self.request
+
+        rev = page.page.get_real_rev()
+        if rev is None:
+            rev = 0
+
         return ''.join([
             f.paragraph(1, attr={'class': 'searchhitinfobar'}),
             f.text('%.1fk - ' % (page.page.size()/1024.0)),
-            f.text('rev: %d %s- ' % (page.page.get_real_rev(),
-                not page.page.rev and '(%s) ' % _('current') or '')),
-            f.text('last modified: %(time)s' % page.page.lastEditInfo()),
+            f.text('rev: %d %s- ' % (rev,
+                rev == page.page.getRevList()[0] and 
+                '(%s) ' % _('current') or '')),
+            f.text('last modified: %s' % page.page.mtime_printable(request)),
             # XXX: proper metadata
             #f.text('lang: %s - ' % page.page.language),
             #f.url(1, href='#'),
@@ -738,7 +755,9 @@ class SearchResults:
     def querystring(self, querydict=None):
         """ Return query string, used in the page link """
         if querydict is None:
-            querydict = {'highlight': self.query.highlight_re()}
+            querydict = {}
+        if 'action' not in querydict or querydict['action'] == 'AttachFile':
+            querydict.update({'highlight': self.query.highlight_re()})
         querystr = wikiutil.makeQueryString(querydict)
         #querystr = wikiutil.escape(querystr)
         return querystr
