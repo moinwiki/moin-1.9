@@ -156,8 +156,10 @@ class BaseIndex:
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
         #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
-                                 os.path.join(main_dir, 'update-queue-lock'))
+        self.update_queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
+                                os.path.join(main_dir, 'update-queue-lock'))
+        self.remove_queue = UpdateQueue(os.path.join(main_dir, 'remove-queue'),
+                                os.path.join(main_dir, 'remove-queue-lock'))
 
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
@@ -195,13 +197,26 @@ class BaseIndex:
         #    self.read_lock.release()
         return hits
 
-    def update_page(self, pagename):
+    def update_page(self, pagename, now=1):
         """ Update a single page in the index
 
         @param pagename: the name of the page to update
+        @keyword now: do all updates now (default: 1)
         """
-        self.queue.append(pagename)
-        self._do_queued_updates_InNewThread()
+        self.update_queue.append(pagename)
+        if now:
+           self._do_queued_updates_InNewThread()
+
+    def remove_item(self, pagename, attachment=None, now=1):
+        """ Removes a page and all its revisions or a single attachment
+
+        @param pagename: name of the page to be removed
+        @keyword attachment: optional, only remove this attachment of the page
+        @keyword now: do all updates now (default: 1)
+        """
+        self.remove_queue.append('%s//%s' % (pagename, attachment or ''))
+        if now:
+            self._do_queued_updates_InNewThread()
 
     def indexPages(self, files=None, mode='update'):
         """ Index all pages (and files, if given)
@@ -264,6 +279,15 @@ class BaseIndex:
         @keyword files: iterator or list of files to index additionally
         @keyword mode: set the mode of indexing the pages, either 'update',
         'add' or 'rebuild'
+        """
+        raise NotImplemented('...')
+
+    def _remove_item(self, writer, page, attachment=None):
+        """ Remove a page and all its revisions from the index or just
+            an attachment of that page
+
+        @param pagename: name of the page to remove
+        @keyword attachment: optionally, just remove this attachment
         """
         raise NotImplemented('...')
 
@@ -397,13 +421,16 @@ class Search:
             hits = self._filter(hits)
 
         # when xapian was used, we can estimate the numer of matches
-        if self.request.cfg.xapian_search:
+        # XXX: hits can't be estimated by xapian with historysearch enabled
+        if not self.cfg.xapian_index_history and \
+                self.request.cfg.xapian_search:
             self.sort = None
             mset = self._xapianMset
             estimated_hits = (
-                (mset.get_matches_estimated() == mset.get_matches_upper_bound() and
-                    mset.get_matches_estimated() == mset.get_matches_lower_bound()) and
-                '' or 'about',
+                (mset.get_matches_estimated() == mset.get_matches_upper_bound() 
+                    and
+                 mset.get_matches_estimated() == mset.get_matches_lower_bound())
+                and '' or 'about',
                 mset.get_matches_estimated())
         else:
             estimated_hits = None

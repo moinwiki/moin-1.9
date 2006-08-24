@@ -488,7 +488,15 @@ Try a different name.""") % (newpagename,)
             self.error = None
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
-            newpage.saveText(savetext, 0, comment=comment)
+            newpage.saveText(savetext, 0, comment=comment, index=0)
+
+            if self.request.cfg.xapian_search:
+                from MoinMoin.search.Xapian import Index
+                index = Index(self.request)
+                if index.exists():
+                    index.remove_item(self.page_name, now=0)
+                    index.update_page(newpagename)
+
             return True, None
         except OSError, err:
             # Try to understand what happened. Maybe its better to check
@@ -517,10 +525,18 @@ Try a different name.""") % (newpagename,)
         try:
             # First save a final backup copy of the current page
             # (recreating the page allows access to the backups again)
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'')
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'',
+                    index=0)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
+            
+            if self.request.cfg.xapian_search:
+                from MoinMoin.search.Xapian import Index
+                index = Index(self.request)
+                if index.exists():
+                    index.remove_item(self.page_name)
+
             # Then really delete it
             try:
                 os.remove(self._text_filename())
@@ -915,6 +931,7 @@ Try a different name.""") % (newpagename,)
         @keyword extra: extra info field (e.g. for SAVE/REVERT with revno)
         @keyword comment: comment field (when preview is true)
         @keyword action: action for editlog (default: SAVE)
+        @keyword index: needs indexing, not already handled (default: 1)
         @rtype: unicode
         @return: error msg
         """
@@ -981,7 +998,7 @@ Please review the page and save then. Do not save this page as it is!""")
                 action != "SAVE/REVERT"):
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
                 raise self.NoAdmin, msg
-            
+        
         # save only if no error occurred (msg is empty)
         if not msg:
             # set success msg
@@ -1002,11 +1019,9 @@ Please review the page and save then. Do not save this page as it is!""")
             if self.request.cfg.mail_enabled:
                 msg = msg + self._notifySubscribers(comment, trivial)
           
-            if self.request.cfg.xapian_search:
+            if kw.get('index', 1) and self.request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
                 index = Index(self.request)
-                # When we have automatic index building, we can add to
-                # the queue even if the index is missing.
                 if index.exists():
                     index.update_page(self.page_name)
 
