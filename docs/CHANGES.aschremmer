@@ -7,10 +7,6 @@ Branch moin/1.6-sync-aschremmer
     * How should we store tags? (Metadata support would be handy)
       (currently done in Pickle files)
 
-  ToDo: (this should not go into CHANGES)
-    * Reduce round-trip times by caching queries and using MultiCall objects (coroutines?)
-    * Implement a password agent. (does OpenID make sense?)
-
   Longterm ToDo:
     * Maybe refactor YYY into MoinLocalWiki
     * Add page locking, i.e. use the one in the new storage layer (see XXX).
@@ -68,7 +64,7 @@ Branch moin/1.6-sync-aschremmer
       the encoded page body. This is useful if you just deal with byte data
       (e.g. while generating binary diffs).
     * The TagStore/PickleTagStore system is used to store the syncronisation tags.
-    * XMLRPC functions may return Fault instances
+    * XMLRPC functions may return Fault instances from now on
     * Moin got multicall support, including a module that makes it usable on the
       client-side without requiring Python 2.4
 
