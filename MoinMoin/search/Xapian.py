@@ -573,7 +573,7 @@ class Index(BaseIndex):
         else:
             # Only remove a single attachment
             query = xapidx.RawQuery(xapidx.makePairForWrite('itemid',
-                "%s:%s//%s" % (wikiname, pagename, att)))
+                "%s:%s//%s" % (wikiname, pagename, attachment)))
             enq, mset, docs = writer.search(query, valuesWanted=['pagename',
                 'attachment', ])
             if docs:
