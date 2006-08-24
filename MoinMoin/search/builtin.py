@@ -422,7 +422,7 @@ class Search:
 
         # when xapian was used, we can estimate the numer of matches
         # XXX: hits can't be estimated by xapian with historysearch enabled
-        if not self.cfg.xapian_index_history and \
+        if not self.request.cfg.xapian_index_history and \
                 self.request.cfg.xapian_search:
             self.sort = None
             mset = self._xapianMset
