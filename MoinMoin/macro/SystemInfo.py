@@ -113,6 +113,7 @@ def execute(Macro, args):
         ', '.join(wikiutil.wikiPlugins('parser', Macro.cfg)) or nonestr)
 
     from MoinMoin.search.builtin import Search
+    import xapian
     xapState = (_('Disabled'), _('Enabled'))
     idxState = (_('index available'), _('index unavailable'))
     xapRow = xapState[request.cfg.xapian_search]
@@ -127,6 +128,7 @@ def execute(Macro, args):
         xapRow += ', %s, %s' % (available, mtime)
 
     row(_('Xapian search'), xapRow)
+    row(_('Xapian Version'), xapian.xapian_version_string())
     row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
 
     row(_('Active threads'), t_count or _('N/A'))
