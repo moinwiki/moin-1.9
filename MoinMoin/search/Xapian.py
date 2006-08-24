@@ -344,11 +344,17 @@ class Index(BaseIndex):
             pass
 
     def _get_languages(self, page):
+        """ Get language of a page and the language to stem it in
+
+        @param page: the page instance
+        """
         body = page.get_raw_body()
         default_lang = page.request.cfg.language_default
 
         lang = ''
 
+        # if we should stem, we check if we have stemmer for the
+        # language available
         if page.request.cfg.xapian_stemming:
             for line in body.split('\n'):
                 if line.startswith('#language'):
@@ -372,6 +378,11 @@ class Index(BaseIndex):
         return (lang, default_lang)
 
     def _get_categories(self, page):
+        """ Get all categories the page belongs to through the old
+            regular expression
+
+        @param page: the page instance
+        """
         body = page.get_raw_body()
 
         prev, next = (0, 1)
@@ -388,6 +399,10 @@ class Index(BaseIndex):
                 for cat in re.findall(r'Category([^\s]+)', body[pos:])]
 
     def _get_domains(self, page):
+        """ Returns a generator with all the domains the page belongs to
+
+        @param page: page
+        """
         if page.isUnderlayPage():
             yield 'underlay'
         if page.isStandardPage():
@@ -536,6 +551,11 @@ class Index(BaseIndex):
 
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
+
+        @param request: the current request
+        @keyword files: an optional list of files to index
+        @keyword mode: how to index the files, either 'add', 'update' or
+                       'rebuild'
         """
 
         # rebuilding the DB: delete it and add everything
