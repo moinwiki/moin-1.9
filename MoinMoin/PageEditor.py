@@ -494,7 +494,7 @@ Try a different name.""") % (newpagename,)
                 from MoinMoin.search.Xapian import Index
                 index = Index(self.request)
                 if index.exists():
-                    index.remove_item(self.page_name)
+                    index.remove_item(self.page_name, now=0)
                     index.update_page(newpagename)
 
             return True, None
