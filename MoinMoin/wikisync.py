@@ -7,6 +7,7 @@
 """
 
 import os
+import socket
 import xmlrpclib
 
 try:
@@ -181,6 +182,8 @@ class MoinRemoteWiki(RemoteWiki):
 
         try:
             iw_list = self.connection.interwikiName()
+        except socket.error, e:
+            raise UnsupportedWikiException(_("The wiki is currently not reachable."))
         except xmlrpclib.Fault, e:
             raise UnsupportedWikiException(_("The remote version of MoinMoin is too old, version 1.6 is required at least."))
 

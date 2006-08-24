@@ -123,6 +123,9 @@ class ActionClass(object):
 
     def fix_params(self, params):
         """ Does some fixup on the parameters. """
+        # Load the password
+        if "password" in self.request.form:
+            params["password"] = self.request.form["password"][0]
 
         # merge the pageList case into the pageMatch case
         if params["pageList"] is not None:
@@ -139,6 +142,33 @@ class ActionClass(object):
 
         return params
 
+    def show_password_form(self):
+        _ = self.request.getText
+        d = {"message": _(r"Please enter your password of the remote wiki below. /!\ You should trust this local wiki because the password could be read by the administrator."),
+             "passwordlabel": _("Password"),
+             "submit": _("Login"),
+             "cancel": _("Cancel"),
+        }
+        html_form = """
+%(message)s
+<form method="post">
+<div>
+<input type="hidden" name="action" value="SyncPages">
+<label for="iPassword" style="font-weight: bold;">%(passwordlabel)s:</label>
+<input type="text" name="password" id="iPassword" size="20">
+</div>
+<div style="margin-top:1em; margin-bottom:1em;">
+<div style="float:left">
+<input type="submit" value="%(submit)s">
+</div>
+<div style="margin-left: 10em; margin-right: 10em;">
+<input type="submit" value="%(cancel)s" name="cancel">
+</div>
+</div>
+</form>
+""" % d
+        self.page.send_page(self.request, msg=html_form)
+
     def render(self):
         """ Render action
 
@@ -149,6 +179,9 @@ class ActionClass(object):
         params = self.fix_params(self.parse_page())
 
         try:
+            if "cancel" in self.request.form:
+                raise ActionStatus(_("Operation was canceled."))
+
             if params["direction"] == UP:
                 raise ActionStatus(_("The only supported directions are BOTH and DOWN."))
 
@@ -166,6 +199,9 @@ class ActionClass(object):
 
             if not remote.valid:
                 raise ActionStatus(_("The ''remoteWiki'' is unknown."))
+            # if only the username is supplied, we ask for the password
+            if params["user"] and not params["password"]:
+                return self.show_password_form()
         except ActionStatus, e:
             msg = u'<p class="error">%s</p>\n' % (e.args[0], )
         else:
@@ -180,12 +216,12 @@ class ActionClass(object):
                 else:
                     msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
             finally:
-                # XXX aquire readlock on self.page
                 self.call_rollback_funcs()
+                # XXX aquire readlock on self.page
                 self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
                 # XXX release readlock on self.page
 
-        self.page.send_page(self.request, msg=msg)
+        return self.page.send_page(self.request, msg=msg)
 
     def sync(self, params, local, remote):
         """ This method does the syncronisation work.
