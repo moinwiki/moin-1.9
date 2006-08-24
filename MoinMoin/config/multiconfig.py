@@ -419,8 +419,9 @@ reStructuredText Quick Reference
     # immediately and we have no problem with stale caches.
     url_prefix_static = '/moin_static160'
 
-    # we need to prefix actions to be able to exclude them by robots.txt:
-    url_prefix_action = 'action' # no leading or trailing '/'
+    # we could prefix actions to be able to exclude them by robots.txt:
+    #url_prefix_action = 'action' # no leading or trailing '/'
+    url_prefix_action = None # compatiblity
 
     logo_string = None
     interwikiname = None
