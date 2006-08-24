@@ -280,8 +280,7 @@ class Macro:
         # Return a title search for needle, sorted by name.
         # XXX: what's with literal?
         results = search.searchPages(self.request, needle,
-                titlesearch=1, case=case)
-        results.sortByPagename()
+                titlesearch=1, case=case, sort='page_name')
         return results.pageList(self.request, self.formatter, paging=False)
 
     def _macro_InterWiki(self, args):

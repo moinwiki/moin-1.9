@@ -28,6 +28,7 @@ except ImportError:
     Stemmer = None
 
 class UnicodeQuery(xapian.Query):
+    """ Xapian query object which automatically encodes unicode strings """
     def __init__(self, *args, **kwargs):
         self.encoding = kwargs.get('encoding', config.charset)
 
@@ -47,6 +48,11 @@ class UnicodeQuery(xapian.Query):
 ##############################################################################
 
 def getWikiAnalyzerFactory(request=None, language='en'):
+    """ Returns a WikiAnalyer instance
+
+    @keyword request: current request object
+    @keyword language: stemming language iso code, defaults to 'en'
+    """
     return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
@@ -80,8 +86,13 @@ class WikiAnalyzer:
             self.stemmer = None
 
     def raw_tokenize(self, value):
+        """ Yield a stream of lower cased raw and stemmed words from a string.
+
+        @param value: string to split, must be an unicode object or a list of
+                      unicode objects
+        """
         def enc(uc):
-            """ 'encode' unicode results into whatever xapian / xapwrap wants """
+            """ 'encode' unicode results into whatever xapian wants """
             lower = uc.lower()
             return lower
             
@@ -121,13 +132,17 @@ class WikiAnalyzer:
                             yield (enc(sm.group()), m.start() + sm.start())
 
     def tokenize(self, value, flat_stemming=True):
-        """Yield a stream of lower cased raw and stemmed (optional) words from a string.
-           value must be an UNICODE object or a list of unicode objects
+        """ Yield a stream of lower cased raw and stemmed words from a string.
+
+        @param value: string to split, must be an unicode object or a list of
+                      unicode objects
+        @keyword flat_stemming: whether to yield stemmed terms
+                                automatically with the natural forms
+                                (True) or yield both at once as a tuple
+                                (False)
         """
         for word, pos in self.raw_tokenize(value):
             if flat_stemming:
-                # XXX: should we really use a prefix for that?
-                # Index.prefixMap['raw'] + i
                 yield (word, pos)
                 if self.stemmer:
                     yield (self.stemmer.stemWord(word), pos)
@@ -140,6 +155,7 @@ class WikiAnalyzer:
 #############################################################################
 
 class Index(BaseIndex):
+    """ A Xapian index """
     indexValueMap = {
         # mapping the value names we can easily fetch from the index to
         # integers required by xapian. 0 and 1 are reserved by xapwrap!
@@ -147,6 +163,7 @@ class Index(BaseIndex):
         'attachment': 3,
         'mtime': 4,
         'wikiname': 5,
+        'revision': 6,
     }
     prefixMap = {
         # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
@@ -186,6 +203,7 @@ class Index(BaseIndex):
             request.cfg.xapian_stemming = False
 
     def _main_dir(self):
+        """ Get the directory of the xapian index """
         if self.request.cfg.xapian_index_dir:
             return os.path.join(self.request.cfg.xapian_index_dir,
                     self.request.cfg.siteid)
@@ -196,8 +214,7 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def _search(self, query, sort=None):
-        """ read lock must be acquired """
+    def _search(self, query, sort=None, historysearch=0):
         while True:
             try:
                 searcher, timestamp = self.request.cfg.xapian_searchers.pop()
@@ -216,11 +233,12 @@ class Index(BaseIndex):
             # XXX: we need real weight here, like _moinSearch
             # (TradWeight in xapian)
             kw['sortByRelevence'] = True
+            kw['sortKey'] = 'revision'
         if sort == 'page_name':
             kw['sortKey'] = 'pagename'
 
         hits = searcher.search(query, valuesWanted=['pagename',
-            'attachment', 'mtime', 'wikiname'], **kw)
+            'attachment', 'mtime', 'wikiname', 'revision'], **kw)
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
     
@@ -237,6 +255,7 @@ class Index(BaseIndex):
         writer.close()
 
     def allterms(self):
+        """ Fetches all terms in the Xapian index """
         db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
         i = db.allterms_begin()
         while i != db.allterms_end():
@@ -244,6 +263,11 @@ class Index(BaseIndex):
             i.next()
 
     def termpositions(self, uid, term):
+        """ Fetches all positions of a term in a document
+        
+        @param uid: document id of the item in the xapian index
+        @param term: the term as a string
+        """
         db = xapidx.ExceptionTranslater.openIndex(True, self.dir)
         pos = db.positionlist_begin(uid, term)
         while pos != db.positionlist_end(uid, term):
@@ -283,13 +307,15 @@ class Index(BaseIndex):
                 xpname = xapdoc.SortKey('pagename', fs_rootpage)
                 xattachment = xapdoc.SortKey('attachment', filename) # XXX we should treat files like real pages, not attachments
                 xmtime = xapdoc.SortKey('mtime', mtime)
+                xrev = xapdoc.SortKey('revision', '0')
                 title = " ".join(os.path.join(fs_rootpage, filename).split("/"))
                 xtitle = xapdoc.Keyword('title', title)
                 xmimetype = xapdoc.TextField('mimetype', mimetype, True)
                 xcontent = xapdoc.TextField('content', file_content)
                 doc = xapdoc.Document(textFields=(xcontent, xmimetype, ),
                                       keywords=(xtitle, xitemid, ),
-                                      sortFields=(xpname, xattachment, xmtime, xwname, ),
+                                      sortFields=(xpname, xattachment,
+                                          xmtime, xwname, xrev, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory()
                 if mode == 'update':
@@ -366,8 +392,8 @@ class Index(BaseIndex):
         wikiname = request.cfg.interwikiname or "Self"
         pagename = page.page_name
         mtime = page.mtime_usecs()
-        itemid = "%s:%s" % (wikiname, pagename)
         revision = str(page.get_real_rev())
+        itemid = "%s:%s:%s" % (wikiname, pagename, revision)
         author = page.last_edit(request)['editor']
         # XXX: Hack until we get proper metadata
         language, stem_language = self._get_languages(page)
@@ -385,7 +411,7 @@ class Index(BaseIndex):
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
                 docmtime = long(doc['values']['mtime'])
-                updated = mtime > docmtime
+                updated = True # XXX: forcing, mtime > docmtime
                 if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
             else:
                 uid = None
@@ -397,7 +423,8 @@ class Index(BaseIndex):
             xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
             xpname = xapdoc.SortKey('pagename', pagename)
             xattachment = xapdoc.SortKey('attachment', '') # this is a real page, not an attachment
-            xmtime = xapdoc.SortKey('mtime', mtime)
+            xmtime = xapdoc.SortKey('mtime', str(mtime))
+            xrev = xapdoc.SortKey('revision', revision)
             xtitle = xapdoc.TextField('title', pagename, True) # prefixed
             xkeywords = [xapdoc.Keyword('itemid', itemid),
                     xapdoc.Keyword('lang', language),
@@ -415,7 +442,8 @@ class Index(BaseIndex):
             xcontent = xapdoc.TextField('content', page.get_raw_body())
             doc = xapdoc.Document(textFields=(xcontent, xtitle),
                                   keywords=xkeywords,
-                                  sortFields=(xpname, xattachment, xmtime, xwname, ),
+                                  sortFields=(xpname, xattachment,
+                                      xmtime, xwname, xrev),
                                  )
             doc.analyzerFactory = getWikiAnalyzerFactory(request,
                     stem_language)
@@ -456,18 +484,21 @@ class Index(BaseIndex):
                 xpname = xapdoc.SortKey('pagename', pagename)
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
+                xrev = xapdoc.SortKey('revision', '0')
                 xtitle = xapdoc.Keyword('title', '%s/%s' % (pagename, att))
                 xlanguage = xapdoc.Keyword('lang', language)
                 xstem_language = xapdoc.Keyword('stem_lang', stem_language)
                 mimetype, att_content = self.contentfilter(filename)
                 xmimetype = xapdoc.Keyword('mimetype', mimetype)
                 xcontent = xapdoc.TextField('content', att_content)
+                xdomains = [xapdoc.Keyword('domain', domain)
+                        for domain in domains]
                 doc = xapdoc.Document(textFields=(xcontent, ),
-                                      keywords=(xatt_itemid, xtitle,
-                                          xlanguage, xstem_language,
-                                          xmimetype, ),
+                                      keywords=xdomains + [xatt_itemid,
+                                          xtitle, xlanguage, xstem_language,
+                                          xmimetype, ],
                                       sortFields=(xpname, xattachment, xmtime,
-                                          xwname, ),
+                                          xwname, xrev, ),
                                      )
                 doc.analyzerFactory = getWikiAnalyzerFactory(request,
                         stem_language)
@@ -506,7 +537,11 @@ class Index(BaseIndex):
             request.log("indexing all (%d) pages..." % len(pages))
             for pagename in pages:
                 p = Page(request, pagename)
-                self._index_page(writer, p, mode)
+                if request.cfg.xapian_index_history:
+                    for rev in p.getRevList():
+                        self._index_page(writer,
+                                Page(request, pagename, rev=rev),
+                                mode)
             if files:
                 request.log("indexing all files...")
                 for fname in files:
@@ -515,34 +550,4 @@ class Index(BaseIndex):
             writer.close()
         finally:
             writer.__del__()
-
-def run_query(query, db):
-    enquire = xapian.Enquire(db)
-    parser = xapian.QueryParser()
-    query = parser.parse_query(query, xapian.QueryParser.FLAG_WILDCARD)
-    print query.get_description()
-    enquire.set_query(query)
-    return enquire.get_mset(0, 10)
-
-def run(request):
-    pass
-    #print "Begin"
-    #db = xapian.WritableDatabase(xapian.open('test.db',
-    #                                         xapian.DB_CREATE_OR_OPEN))
-    #
-    # index_data(db) ???
-    #del db
-    #mset = run_query(sys.argv[1], db)
-    #print mset.get_matches_estimated()
-    #iterator = mset.begin()
-    #while iterator != mset.end():
-    #    print iterator.get_document().get_data()
-    #    iterator.next()
-    #for i in xrange(1,170):
-    #    doc = db.get_document(i)
-    #    print doc.get_data()
-
-if __name__ == '__main__':
-    run()
-
 

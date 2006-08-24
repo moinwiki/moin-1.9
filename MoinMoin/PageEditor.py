@@ -1008,7 +1008,7 @@ Please review the page and save then. Do not save this page as it is!""")
                 # When we have automatic index building, we can add to
                 # the queue even if the index is missing.
                 if index.exists():
-                    index.update_page(self)
+                    index.update_page(self.page_name)
 
         # remove lock (forcibly if we were allowed to break it by the UI)
         # !!! this is a little fishy, since the lock owner might not notice
