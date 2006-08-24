@@ -269,3 +269,15 @@ be no issue with OrExpression as _moinSearch handles this correctly.
 
 SOC END
 
+2006-08-22
+    ...
+
+2006-08-23 
+    ...
+
+2006-08-24 (on train from Hannover to Passau)
+    * finish some code docs
+    * added support for renaming, deleting pages (I somehow forgot :()
+    * handle deleting of attachments correctly
+    * testing of all this new stuff
+
