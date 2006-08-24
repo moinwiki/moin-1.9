@@ -267,7 +267,12 @@ class Index(BaseIndex):
         pages = self.update_queue.pages()[:amount]
         for name in pages:
             p = Page(request, name)
-            self._index_page(writer, p, mode='update')
+            if request.cfg.xapian_index_history:
+                for rev in p.getRevList():
+                    self._index_page(writer, Page(request, name, rev=rev),
+                            mode='update')
+            else:
+                self._index_page(writer, p, mode='update')
             self.update_queue.remove([name])
 
         # do page/attachment removals
@@ -618,6 +623,8 @@ class Index(BaseIndex):
                         self._index_page(writer,
                                 Page(request, pagename, rev=rev),
                                 mode)
+                else:
+                    self._index_page(writer, p, mode)
             if files:
                 request.log("indexing all files...")
                 for fname in files:

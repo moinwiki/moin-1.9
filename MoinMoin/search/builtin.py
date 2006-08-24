@@ -197,22 +197,26 @@ class BaseIndex:
         #    self.read_lock.release()
         return hits
 
-    def update_page(self, pagename):
+    def update_page(self, pagename, now=1):
         """ Update a single page in the index
 
         @param pagename: the name of the page to update
+        @keyword now: do all updates now (default: 1)
         """
         self.update_queue.append(pagename)
-        self._do_queued_updates_InNewThread()
+        if now:
+           self._do_queued_updates_InNewThread()
 
-    def remove_item(self, pagename, attachment=None):
+    def remove_item(self, pagename, attachment=None, now=1):
         """ Removes a page and all its revisions or a single attachment
 
         @param pagename: name of the page to be removed
-        @param attachment: optional, only remove this attachment of the page
+        @keyword attachment: optional, only remove this attachment of the page
+        @keyword now: do all updates now (default: 1)
         """
         self.remove_queue.append('%s//%s' % (pagename, attachment or ''))
-        self._do_queued_updates_InNewThread()
+        if now:
+            self._do_queued_updates_InNewThread()
 
     def indexPages(self, files=None, mode='update'):
         """ Index all pages (and files, if given)
