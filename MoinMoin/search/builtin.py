@@ -156,8 +156,10 @@ class BaseIndex:
         self.lock = lock.WriteLock(lock_dir,
                                    timeout=3600.0, readlocktimeout=60.0)
         #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
-                                 os.path.join(main_dir, 'update-queue-lock'))
+        self.update_queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
+                                os.path.join(main_dir, 'update-queue-lock'))
+        self.remove_queue = UpdateQueue(os.path.join(main_dir, 'remove-queue'),
+                                os.path.join(main_dir, 'remove-queue-lock'))
 
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
@@ -200,7 +202,16 @@ class BaseIndex:
 
         @param pagename: the name of the page to update
         """
-        self.queue.append(pagename)
+        self.update_queue.append(pagename)
+        self._do_queued_updates_InNewThread()
+
+    def remove_item(self, pagename, attachment=None):
+        """ Removes a page and all its revisions or a single attachment
+
+        @param pagename: name of the page to be removed
+        @param attachment: optional, only remove this attachment of the page
+        """
+        self.remove_queue.append('%s//%s' % (pagename, attachment or ''))
         self._do_queued_updates_InNewThread()
 
     def indexPages(self, files=None, mode='update'):
@@ -264,6 +275,15 @@ class BaseIndex:
         @keyword files: iterator or list of files to index additionally
         @keyword mode: set the mode of indexing the pages, either 'update',
         'add' or 'rebuild'
+        """
+        raise NotImplemented('...')
+
+    def _remove_item(self, writer, page, attachment=None):
+        """ Remove a page and all its revisions from the index or just
+            an attachment of that page
+
+        @param pagename: name of the page to remove
+        @keyword attachment: optionally, just remove this attachment
         """
         raise NotImplemented('...')
 
