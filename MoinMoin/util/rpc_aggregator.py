@@ -58,7 +58,7 @@ def scheduler(multicall_func, handler, args, max_calls=10, prepare_multicall_fun
     gens = []
     # those instances that have to be queried in the next step again
     gens_todo = []
-    # pending calls, stored as tuples: (generator, (funcname, arg))
+    # pending calls, stored as tuples: (generator, (funcname, (args,*)))
     call_list = []
 
     # instantiate generators
