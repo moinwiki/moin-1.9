@@ -68,8 +68,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         #xor_terms = request.form.get('xor_terms', [''])[0].strip()
         categories = request.form.get('categories', [''])[0].strip()
         timeframe = request.form.get('time', [''])[0].strip()
-        language = request.form.get('language',
-                [request.cfg.language_default])[0]
+        language = request.form.get('language', [''])[0]
         mimetype = request.form.get('mimetype', [0])[0]
         excludeunderlay = request.form.get('excludeunderlay', [0])[0]
         nosystemitems = request.form.get('nosystemitems', [0])[0]
