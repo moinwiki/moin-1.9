@@ -629,11 +629,11 @@ class Search:
         will happen later on the hits, which is faster with current
         slow storage.
         """
-        filter = self.query.pageFilter()
-        if filter:
+        filter_ = self.query.pageFilter()
+        if filter_:
             # There is no need to filter the results again.
             self.filtered = True
-            return self.request.rootpage.getPageList(filter=filter)
+            return self.request.rootpage.getPageList(filter=filter_)
         else:
             return self.request.rootpage.getPageList(user='', exists=0)
         

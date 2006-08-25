@@ -11,7 +11,7 @@
 """
 
 import re
-from MoinMoin import config
+from MoinMoin import config, wikiutil
 from MoinMoin.search.results import Match, TitleMatch, TextMatch
 
 try:
@@ -618,7 +618,7 @@ class LanguageSearch(BaseExpression):
             match = True
 
         # Decide what to do with the results.
-            if self.negated and match:
+        if self.negated and match:
             return None
         elif match or (self.negated and not match):
             return [Match()]
@@ -735,10 +735,7 @@ class MimetypeSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        if not self.xapian_called:
-            return []
-        else:
-            return [Match()]
+        return None
 
     def xapian_wanted(self):
         return True             # only easy regexps possible
@@ -798,10 +795,23 @@ class DomainSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        if not self.xapian_called:
-            return []
-        else:
+        checks = {'underlay': page.isUnderlayPage,
+                  'standard': page.isStandardPage,
+                  'system': wikiutil.isSystemPage(page.request, page.page_name),
+                 }
+
+        try:
+            match = checks[self.pattern]()
+        except KeyError:
+            match = False
+
+        # Decide what to do with the results.
+        if self.negated and match:
+            return None
+        elif match or (self.negated and not match):
             return [Match()]
+        else:
+            return []
 
     def xapian_wanted(self):
         return True             # only easy regexps possible
