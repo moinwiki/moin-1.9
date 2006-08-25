@@ -344,9 +344,14 @@ div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 .advancedsearch td.searchfor {
     font-weight: bold;
 }
+
 .advancedsearch input {
     border: 1px solid #ADB9CC;
     background-color: #fff;
+}
+
+.advancedsearch input[disabled] {
+    background-color: #eee;
 }
 
 .advancedsearch td.submit {

@@ -27,6 +27,9 @@ def advanced_ui(macro):
     f = macro.formatter
     request = macro.request
 
+    disabledIfMoinSearch = not request.cfg.xapian_search and \
+            ' disabled="disabled"' or ''
+
     search_boxes = ''.join([
         f.table_row(1),
         f.table_cell(1, attrs={'rowspan': '6', 'class': 'searchfor'}),
@@ -56,8 +59,8 @@ def advanced_ui(macro):
             #    % form_get(request, 'xor_terms')),
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
-                '<input type="text" name="categories" size="30" value="%s">'
-                % form_get(request, 'categories')),
+                '<input type="text" name="categories" size="30" value="%s"%s>'
+                % (form_get(request, 'categories'), disabledIfMoinSearch)),
             (_('last modified since (e.g. last 2 weeks)'),
                 '<input type="text" name="mtime" size="30" value="%s">'
                 % form_get(request, 'mtime')),
@@ -69,7 +72,7 @@ def advanced_ui(macro):
         for lang, lmeta in languages.items()])
     userlang = macro.request.lang
     lang_dropdown = ''.join([
-        u'<select name="language" size="1">',
+        u'<select name="language" size="1"%s>' % disabledIfMoinSearch,
         u'<option value=""%s>%s</option>' %
             (not searchedlang and ' selected' or '', _('any language')),
         ''.join(['<option value="%s"%s>%s</option>' %
@@ -81,7 +84,7 @@ def advanced_ui(macro):
 
     mimetype = form_get(request, 'mimetype')
     ft_dropdown = ''.join([
-        u'<select name="mimetype" size="1">',
+        u'<select name="mimetype" size="1"%s>' % disabledIfMoinSearch,
         u'<option value=""%s>%s</option>' %
             (not mimetype and ' selected' or '', _('any type')),
         ''.join(['<option value="%s"%s>%s</option>' %
@@ -112,17 +115,20 @@ def advanced_ui(macro):
                 (form_get(request, 'case') and ' checked' or '',
                     _('Case-sensitive search'))),
                 ('', '<input type="checkbox" name="excludeunderlay" '
-                    'value="1"%s>%s</input>' %
+                    'value="1"%s%s>%s</input>' %
                 (form_get(request, 'excludeunderlay') and ' checked' or '',
+                    disabledIfMoinSearch,
                     _('Exclude underlay'))),
                 ('', '<input type="checkbox" name="nosystemitems" '
-                    'value="1"%s>%s</input>' %
+                    'value="1"%s%s>%s</input>' %
                 (form_get(request, 'nosystemitems') and ' checked' or '',
+                    disabledIfMoinSearch,
                     _('No system items'))),
                 ('', '<input type="checkbox" name="historysearch" '
                     'value="1"%s%s>%s</input>' %
                 (form_get(request, 'historysearch') and ' checked' or '',
-                    not macro.request.cfg.xapian_index_history and
+                    not request.cfg.xapian_search or
+                    not request.cfg.xapian_index_history and
                         ' disabled="disabled"' or '',
                      _('Search in all page revisions')))
             )
