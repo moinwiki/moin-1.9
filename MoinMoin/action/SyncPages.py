@@ -155,7 +155,7 @@ class ActionClass(object):
 <div>
 <input type="hidden" name="action" value="SyncPages">
 <label for="iPassword" style="font-weight: bold;">%(passwordlabel)s:</label>
-<input type="text" name="password" id="iPassword" size="20">
+<input type="password" name="password" id="iPassword" size="20">
 </div>
 <div style="margin-top:1em; margin-bottom:1em;">
 <div style="float:left">
