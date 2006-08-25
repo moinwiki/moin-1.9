@@ -154,7 +154,6 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         Page(request, pagename).send_page(request, msg=err)
         return
 
-
     request.emit_http_headers()
 
     # This action generate data using the user language
@@ -166,7 +165,27 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
-    # First search stats
+    # Hint if using titlesearch
+    f = request.formatter
+    if titlesearch:
+        querydict = wikiutil.parseQueryString(request.query_string)
+        querydict.update({'titlesearch': 0})
+
+        request.write(''.join([
+            f.paragraph(1, attr={'class': 'searchhint'}),
+            _('(!) You\'re conducting a title search so your search '
+                'results might not contain all information available for '
+                'your search query in this wiki.'),
+            ' ',
+            f.url(1, href=request.page.url(request, querydict, escape=0,
+                relative=False)),
+            f.text(_('Click here to perform a full-text search with your '
+                'search terms!')),
+            f.url(0),
+            f.paragraph(0)
+        ]))
+
+    # Search stats
     request.write(results.stats(request, request.formatter, hitsFrom))
 
     # Then search results
