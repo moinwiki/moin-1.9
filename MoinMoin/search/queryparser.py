@@ -611,10 +611,19 @@ class LanguageSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        if not self.xapian_called:
-            return []
-        else:
+        match = False
+        body = page.getPageHeader()
+        
+        if re.findall('#language %s' % self.pattern, body):
+            match = True
+
+        # Decide what to do with the results.
+            if self.negated and match:
+            return None
+        elif match or (self.negated and not match):
             return [Match()]
+        else:
+            return []
 
     def xapian_wanted(self):
         return True             # only easy regexps possible

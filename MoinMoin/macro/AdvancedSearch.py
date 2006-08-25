@@ -72,7 +72,7 @@ def advanced_ui(macro):
         for lang, lmeta in languages.items()])
     userlang = macro.request.lang
     lang_dropdown = ''.join([
-        u'<select name="language" size="1"%s>' % disabledIfMoinSearch,
+        u'<select name="language" size="1">',
         u'<option value=""%s>%s</option>' %
             (not searchedlang and ' selected' or '', _('any language')),
         ''.join(['<option value="%s"%s>%s</option>' %
