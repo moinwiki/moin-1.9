@@ -19,9 +19,13 @@ import mimetypes
 Dependencies = ['pages']
 
 
+def form_get(request, name, default=''):
+    return request.form.get(name, [default])[0]
+
 def advanced_ui(macro):
     _ = macro._
     f = macro.formatter
+    request = macro.request
 
     search_boxes = ''.join([
         f.table_row(1),
@@ -39,37 +43,49 @@ def advanced_ui(macro):
             f.table_row(0),
         ]) for txt, input_field in (
             (_('containing all the following terms'),
-                '<input type="text" name="and_terms" size="30">'),
+                '<input type="text" name="and_terms" size="30" value="%s">'
+                % form_get(request, 'and_terms')),
             (_('containing one or more of the following terms'),
-                '<input type="text" name="or_terms" size="30">'),
+                '<input type="text" name="or_terms" size="30" value="%s">'
+                % form_get(request, 'or_terms')),
             (_('not containing the following terms'),
-                '<input type="text" name="not_terms" size="30">'),
+                '<input type="text" name="not_terms" size="30" value="%s">'
+                % form_get(request, 'not_terms')),
             #('containing only one of the following terms',
-            #    '<input type="text" name="xor_terms" size="30">'),
+            #    '<input type="text" name="xor_terms" size="30" value="%s">'
+            #    % form_get(request, 'xor_terms')),
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
-                '<input type="text" name="categories" size="30">'),
+                '<input type="text" name="categories" size="30" value="%s">'
+                % form_get(request, 'categories')),
             (_('last modified since (e.g. last 2 weeks)'),
-                '<input type="text" name="mtime" size="30" value="">'),
+                '<input type="text" name="mtime" size="30" value="%s">'
+                % form_get(request, 'mtime')),
         )])
     ])
 
+    searchedlang = form_get(request, 'language')
     langs = dict([(lang, lmeta['x-language-in-english'])
         for lang, lmeta in languages.items()])
     userlang = macro.request.lang
     lang_dropdown = ''.join([
         u'<select name="language" size="1">',
-        u'<option value="" selected>%s</option>' % _('any language'),
-        ''.join(['<option value="%s">%s</option>' % lt for lt in
-            [(userlang, langs[userlang])] + sorted(langs.items(),
+        u'<option value=""%s>%s</option>' %
+            (not searchedlang and ' selected' or '', _('any language')),
+        ''.join(['<option value="%s"%s>%s</option>' %
+                (lt[0], lt[0] == searchedlang and ' selected' or '', lt[1])
+            for lt in [(userlang, langs[userlang])] + sorted(langs.items(),
                 key=lambda i: i[1])]),
         u'</select>',
     ])
 
+    mimetype = form_get(request, 'mimetype')
     ft_dropdown = ''.join([
         u'<select name="mimetype" size="1">',
-        u'<option value="" selected>%s</option>' % _('any type'),
-        ''.join(['<option value="%s">%s</option>' % (m[1], '*%s - %s' % m)
+        u'<option value=""%s>%s</option>' %
+            (not mimetype and ' selected' or '', _('any type')),
+        ''.join(['<option value="%s"%s>%s</option>' %
+                (m[1], mimetype == m[1] and ' selected' or '', '*%s - %s' % m)
             for m in sorted(mimetypes.types_map.items())]),
         u'</select>',
     ])
@@ -87,17 +103,26 @@ def advanced_ui(macro):
             ]) for txt in (
                 (_('Language'), lang_dropdown),
                 (_('File Type'), ft_dropdown),
-                ('', '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
-                _('Search only in titles')),
-                ('', '<input type="checkbox" name="case" value="1">%s</input>' %
-                _('Case-sensitive search')),
-                ('', '<input type="checkbox" name="excludeunderlay" value="1">%s'
-                    '</input>' % _('Exclude underlay')),
-                ('', '<input type="checkbox" name="nosystemitems" value="1">%s'
-                    '</input>' % _('No system items')),
-                ('', '<input type="checkbox" name="historysearch"value="1"%s>%s'
-                    '</input>' %
-                    (not macro.request.cfg.xapian_index_history and
+                ('', '<input type="checkbox" name="titlesearch" '
+                    'value="1"%s>%s</input>' %
+                (form_get(request, 'titlesearch') and ' checked' or '',
+                    _('Search only in titles'))),
+                ('', '<input type="checkbox" name="case" '
+                    'value="1"%s>%s</input>' %
+                (form_get(request, 'case') and ' checked' or '',
+                    _('Case-sensitive search'))),
+                ('', '<input type="checkbox" name="excludeunderlay" '
+                    'value="1"%s>%s</input>' %
+                (form_get(request, 'excludeunderlay') and ' checked' or '',
+                    _('Exclude underlay'))),
+                ('', '<input type="checkbox" name="nosystemitems" '
+                    'value="1"%s>%s</input>' %
+                (form_get(request, 'nosystemitems') and ' checked' or '',
+                    _('No system items'))),
+                ('', '<input type="checkbox" name="historysearch" '
+                    'value="1"%s%s>%s</input>' %
+                (form_get(request, 'historysearch') and ' checked' or '',
+                    not macro.request.cfg.xapian_index_history and
                         ' disabled="disabled"' or '',
                      _('Search in all page revisions')))
             )
