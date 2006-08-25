@@ -148,9 +148,21 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             return
     # no hits?
     elif not results.hits:
+        f = request.formatter
+        querydict = wikiutil.parseQueryString(request.query_string)
+        querydict.update({'titlesearch': 0})
+
         err = _('Your search query {{{"%s"}}} didn\'t return any results. '
                 'Please change some terms and refer to HelpOnSearching for '
-                'more information.') % needle
+                'more information.%s') % (needle,
+                    titlesearch and ''.join([
+                        '<br>',
+                        _('(!) Consider performing a'), ' ',
+                        f.url(1, href=request.page.url(request, querydict,
+                            escape=0, relative=False)),
+                        _('full-text search with your search terms'),
+                        f.url(0), '.',
+                    ]) or '')
         Page(request, pagename).send_page(request, msg=err)
         return
 
