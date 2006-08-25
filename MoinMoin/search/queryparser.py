@@ -611,7 +611,6 @@ class LanguageSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
         if not self.xapian_called:
             return []
         else:
@@ -727,7 +726,6 @@ class MimetypeSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
         if not self.xapian_called:
             return []
         else:
@@ -791,7 +789,6 @@ class DomainSearch(BaseExpression):
         return ""
 
     def search(self, page):
-        # We just use (and trust ;)) xapian for this.. deactivated for _moinSearch
         if not self.xapian_called:
             return []
         else:

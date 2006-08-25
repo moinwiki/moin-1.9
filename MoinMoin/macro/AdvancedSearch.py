@@ -59,8 +59,8 @@ def advanced_ui(macro):
             #    % form_get(request, 'xor_terms')),
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
-                '<input type="text" name="categories" size="30" value="%s"%s>'
-                % (form_get(request, 'categories'), disabledIfMoinSearch)),
+                '<input type="text" name="categories" size="30" value="%s">'
+                % form_get(request, 'categories')),
             (_('last modified since (e.g. last 2 weeks)'),
                 '<input type="text" name="mtime" size="30" value="%s">'
                 % form_get(request, 'mtime')),
