@@ -903,7 +903,7 @@ class QueryParser:
                  r'(?P<OPS>\(|\)|(or\b(?!$)))|' +  # or, (, )
                  r'(?P<MOD>(\w+:)*)' +
                  r'(?P<TERM>("[^"]+")|' +
-                 r"('[^']+')|(\S+)))")             # search word itself
+                 r"('[^']+')|([^\s\)]+)))")             # search word itself
         self._query = self._query.strip()
         match = re.match(regex, self._query, re.U)
         if not match:
