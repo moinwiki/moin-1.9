@@ -115,14 +115,12 @@ def advanced_ui(macro):
                 (form_get(request, 'case') and ' checked' or '',
                     _('Case-sensitive search'))),
                 ('', '<input type="checkbox" name="excludeunderlay" '
-                    'value="1"%s%s>%s</input>' %
+                    'value="1"%s>%s</input>' %
                 (form_get(request, 'excludeunderlay') and ' checked' or '',
-                    disabledIfMoinSearch,
                     _('Exclude underlay'))),
                 ('', '<input type="checkbox" name="nosystemitems" '
-                    'value="1"%s%s>%s</input>' %
+                    'value="1"%s>%s</input>' %
                 (form_get(request, 'nosystemitems') and ' checked' or '',
-                    disabledIfMoinSearch,
                     _('No system items'))),
                 ('', '<input type="checkbox" name="historysearch" '
                     'value="1"%s%s>%s</input>' %
