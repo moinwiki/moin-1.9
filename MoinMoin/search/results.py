@@ -369,7 +369,7 @@ class SearchResults:
                 write(''.join(item))
             write(list(0))
             if paging:
-                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                write(self.formatPageLinks(hitsFrom=hitsFrom,
                     hitsPerPage=request.cfg.search_results_per_page,
                     hitsNum=len(self.hits)))
 
@@ -451,7 +451,7 @@ class SearchResults:
                 write(''.join(item))
             write(f.definition_list(0))
             if paging:
-                write(self.formatPrevNextPageLinks(hitsFrom=hitsFrom,
+                write(self.formatPageLinks(hitsFrom=hitsFrom,
                     hitsPerPage=request.cfg.search_results_per_page,
                     hitsNum=len(self.hits)))
         
@@ -661,7 +661,7 @@ class SearchResults:
             return ''.join(output)
         return ''
 
-    def formatPrevNextPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
+    def formatPageLinks(self, hitsFrom, hitsPerPage, hitsNum):
         """ Format previous and next page links in page
 
         @param hitsFrom: current position in the hits
@@ -697,9 +697,9 @@ class SearchResults:
 
         # list of pages to be shown
         page_range = range(*(
-            cur_page - 4 < 0 and
-                (0, pages >= 10 and 10 or pages) or
-                (cur_page - 4, cur_page + 6 >= pages and
+            cur_page - 5 < 0 and
+                (0, pages > 10 and 10 or pages) or
+                (cur_page - 5, cur_page + 6 > pages and
                     pages or cur_page + 6)))
         l.extend([''.join([
                 i != cur_page and f.url(1, href=page_url(i)) or '',
