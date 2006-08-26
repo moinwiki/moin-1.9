@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - xapian indexing search engine
+    MoinMoin - xapian search engine
 
     @copyright: 2006 MoinMoin:ThomasWaldmann,
                 2006 MoinMoin:FranzPletz
@@ -57,7 +57,13 @@ def getWikiAnalyzerFactory(request=None, language='en'):
     return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
-    # TODO docstring
+    """ A text analyzer for wiki syntax
+    
+    The purpose of this class is to anaylze texts/pages in wiki syntax
+    and yield yielding single terms for xapwrap to feed into the xapian
+    database.
+    """
+
     singleword = r"[%(u)s][%(l)s]+" % {
                      'u': config.chars_upper,
                      'l': config.chars_lower,
@@ -231,7 +237,7 @@ class Index(BaseIndex):
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
     def _search(self, query, sort=None, historysearch=0):
-        ### XXX docstring
+        """ Perform the search using xapian (read-lock acquired) """
         while True:
             try:
                 searcher, timestamp = self.request.cfg.xapian_searchers.pop()

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - search engine query parser
+    MoinMoin - search query parser
     
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
@@ -57,7 +57,6 @@ class BaseExpression:
         This Base class returns True (Match()) if not negated.
         """
         if self.negated:
-            # XXX why?
             return [Match()]
         else:
             return None
@@ -523,7 +522,6 @@ class LinkSearch(BaseExpression):
     def search(self, page):
         # Get matches in page name
         matches = []
-
         Found = True
 
         for link in page.getPageLinks(page.request):
@@ -538,7 +536,7 @@ class LinkSearch(BaseExpression):
             results = self.textsearch.search(page)
             if results:
                 matches.extend(results)
-            else: #This happens e.g. for pages that use navigation macros
+            else: # This happens e.g. for pages that use navigation macros
                 matches.append(TextMatch(0, 0))
 
         # Decide what to do with the results.

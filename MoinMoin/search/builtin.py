@@ -1,7 +1,6 @@
 # -*- coding: iso-8859-1 -*-
-# XXX docstring incorrect
 """
-    MoinMoin - search engine
+    MoinMoin - search engine internals
     
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
@@ -23,7 +22,8 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 ##############################################################################
 
 class UpdateQueue:
-    # XXX docstring
+    """ Represents a locked Page queue on the disk """
+
     def __init__(self, file, lock_dir):
         self.file = file
         self.writeLock = lock.WriteLock(lock_dir, timeout=10.0)
@@ -183,7 +183,7 @@ class BaseIndex:
         os.utime(self.dir, None)
 
     def _search(self, query):
-        # XXX docstring
+        """ Actually perfom the search (read-lock acquired) """
         raise NotImplemented('...')
 
     def search(self, query, **kw):
@@ -331,7 +331,7 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
-        # XXX docstring
+        """ Perform updates in the queues (read-lock acquired) """
         raise NotImplemented('...')
 
     def optimize(self):
@@ -425,7 +425,7 @@ class Search:
             hits = self._filter(hits)
 
         # when xapian was used, we can estimate the numer of matches
-        # XXX: hits can't be estimated by xapian with historysearch enabled
+        # Note: hits can't be estimated by xapian with historysearch enabled
         if not self.request.cfg.xapian_index_history and \
                 self.request.cfg.xapian_search:
             self.sort = None
