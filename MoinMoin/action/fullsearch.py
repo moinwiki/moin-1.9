@@ -237,7 +237,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             f.url(0),
         ]))
 
-    if mtime_msg:
+    if advancedsearch and mtime_msg:
         hints.append(mtime_msg)
 
     if hints:
