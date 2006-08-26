@@ -144,7 +144,7 @@ class ActionClass(object):
 
     def show_password_form(self):
         _ = self.request.getText
-        d = {"message": _(r"Please enter your password of the remote wiki below. /!\ You should trust this local wiki because the password could be read by the administrator."),
+        d = {"message": _(r"Please enter your password of your account at the remote wiki below. /!\ You should trust this local wiki because the password could be read by the administrator."),
              "passwordlabel": _("Password"),
              "submit": _("Login"),
              "cancel": _("Cancel"),
@@ -155,7 +155,7 @@ class ActionClass(object):
 <div>
 <input type="hidden" name="action" value="SyncPages">
 <label for="iPassword" style="font-weight: bold;">%(passwordlabel)s:</label>
-<input type="text" name="password" id="iPassword" size="20">
+<input type="password" name="password" id="iPassword" size="20">
 </div>
 <div style="margin-top:1em; margin-bottom:1em;">
 <div style="float:left">
@@ -189,7 +189,7 @@ class ActionClass(object):
                 raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
 
             if not params["remoteWiki"]:
-                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."))
+                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSyncronisation for help."))
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
