@@ -16,10 +16,20 @@ Dependencies = ['pages']
 
 
 def form_get(request, name, default=''):
+    """ Fetches a form field
+    
+    @param request: current request
+    @param name: name of the field
+    @keyword default: value if not present (default: '')
+    """
     return request.form.get(name, [default])[0]
 
 
 def advanced_ui(macro):
+    """ Returns the code for the advanced search user interface
+
+    @param macro: current macro instance
+    """
     _ = macro._
     f = macro.formatter
     request = macro.request
@@ -44,7 +54,7 @@ def advanced_ui(macro):
         ]) for txt, input_field in (
             (_('containing all the following terms'),
                 '<input type="text" name="and_terms" size="30" value="%s">'
-                % form_get(request, 'and_terms')),
+                % (form_get(request, 'and_terms') or form_get(request, 'value'))),
             (_('containing one or more of the following terms'),
                 '<input type="text" name="or_terms" size="30" value="%s">'
                 % form_get(request, 'or_terms')),
