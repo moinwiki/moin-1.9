@@ -125,8 +125,8 @@ def advanced_ui(macro):
                 ('', '<input type="checkbox" name="historysearch" '
                     'value="1"%s%s>%s</input>' %
                 (form_get(request, 'historysearch') and ' checked' or '',
-                    not request.cfg.xapian_search or
-                    not request.cfg.xapian_index_history and
+                    (not request.cfg.xapian_search or
+                     not request.cfg.xapian_index_history) and
                         ' disabled="disabled"' or '',
                      _('Search in all page revisions')))
             )
