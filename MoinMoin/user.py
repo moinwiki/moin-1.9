@@ -503,7 +503,7 @@ class User:
             return
 
         user_dir = self._cfg.user_dir
-        filesys.makeDirs(user_dir)
+        os.makedirs(user_dir)
 
         self.last_saved = str(time.time())
 

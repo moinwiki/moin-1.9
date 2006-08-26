@@ -348,7 +348,7 @@ class Page:
             else:
                 dirname = fullpath
             if not os.path.exists(dirname):
-                filesys.makeDirs(dirname)
+                os.makedirs(dirname)
         return underlay, fullpath
 
     def getPagePath(self, *args, **kw):
