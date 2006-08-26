@@ -61,7 +61,7 @@ def getAttachDir(request, pagename, create=0):
         pagename = wikiutil.quoteWikinameFS(pagename)
         attach_dir = os.path.join(request.cfg.attachments['dir'], pagename, "attachments")
         if create and not os.path.isdir(attach_dir):
-            filesys.makeDirs(attach_dir)
+            os.makedirs(attach_dir)
     else:
         # send file via CGI, from page storage area
         attach_dir = Page(request, pagename).getPagePath("attachments", check_create=create)

@@ -144,7 +144,7 @@ class BaseIndex:
         cache_dir = request.cfg.cache_dir
         main_dir = self._main_dir()
         self.dir = os.path.join(main_dir, 'index')
-        filesys.makeDirs(self.dir)
+        os.makedirs(self.dir)
         self.sig_file = os.path.join(main_dir, 'complete')
         lock_dir = os.path.join(main_dir, 'index-lock')
         self.lock = lock.WriteLock(lock_dir,

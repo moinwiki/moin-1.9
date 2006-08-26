@@ -25,39 +25,6 @@ def chmod(name, mode, catchexception=True):
         if not catchexception:
             raise
 
-def makedirs(name, mode=0777):
-    """ Super-mkdir; create a leaf directory and all intermediate ones.
-    
-    Works like mkdir, except that any intermediate path segment (not
-    just the rightmost) will be created if it does not exist.  This is
-    recursive.
-
-    This is modified version of the os.makedirs from Python 2.4. We add
-    explicit chmod call after the mkdir call. Fixes some practical
-    permission problems on Linux.
-
-    TODO: we use os.umask() now so we usually don't need explicit chmod any
-          more. Check all callers os makedirs/makeDirs and also py2.3+
-          stdlib implementation and maybe remove this function here.
-    """
-    head, tail = os.path.split(name)
-    if not tail:
-        head, tail = os.path.split(head)
-    if head and tail and not os.path.exists(head):
-        makedirs(head, mode)
-        if tail == os.curdir: # xxx/newdir/. exists if xxx/newdir exists
-            return
-    try:
-        os.mkdir(name, mode & config.umask)
-    except OSError, err:
-        if err.errno != errno.EEXIST:
-            raise
-    else:
-        os.chmod(name, mode & config.umask)
-
-# The original function name is used because it's a modified function
-makeDirs = makedirs
-
 
 def rename(oldname, newname):
     """ Multiplatform rename

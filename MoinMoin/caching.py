@@ -35,7 +35,7 @@ class CacheEntry:
         if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
             if isinstance(arena, str):
                 self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
-                filesys.makeDirs(self.arena_dir)
+                os.makedirs(self.arena_dir)
             else: # arena is in fact a page object
                 self.arena_dir = arena.getPagePath('cache', check_create=1)
         elif scope == 'item': # arena is a Page instance
@@ -43,10 +43,10 @@ class CacheEntry:
             self.arena_dir = arena.getPagePath('cache', check_create=1)
         elif scope == 'wiki':
             self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
-            filesys.makeDirs(self.arena_dir)
+            os.makedirs(self.arena_dir)
         elif scope == 'farm':
             self.arena_dir = os.path.join(request.cfg.cache_dir, '__common__', arena)
-            filesys.makeDirs(self.arena_dir)
+            os.makedirs(self.arena_dir)
         if self.locking:
             self.lock_dir = os.path.join(self.arena_dir, '__lock__')
             self.rlock = lock.LazyReadLock(self.lock_dir, 60.0)
