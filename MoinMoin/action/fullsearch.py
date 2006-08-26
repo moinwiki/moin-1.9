@@ -20,7 +20,7 @@ def isTitleSearch(request):
     When used in FullSearch macro, we have 'titlesearch' parameter with
     '0' or '1'. In standard search, we have either 'titlesearch' or
     'fullsearch' with localized string. If both missing, default to
-    True (might happen with Safari).
+    True (might happen with Safari) if this isn't an advanced search.
     """
     try:
         return int(request.form['titlesearch'][0])
@@ -30,11 +30,14 @@ def isTitleSearch(request):
         return 'fullsearch' not in request.form and \
                 not isAdvancedSearch(request)
 
+
 def isAdvancedSearch(request):
+    """ Return True if advanced search is requested """
     try:
         return int(request.form['advancedsearch'][0])
     except KeyError:
         return False
+
 
 def execute(pagename, request, fieldname='value', titlesearch=0):
     _ = request.getText
@@ -61,6 +64,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
     max_context = 1 # only show first `max_context` contexts XXX still unused
 
+    # if advanced search is enabled we construct our own search query
     if advancedsearch:
         and_terms = request.form.get('and_terms', [''])[0].strip()
         or_terms = request.form.get('or_terms', [''])[0].strip()
@@ -86,7 +90,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
                         'and is therefore not considered for the search '
                         'results!')
                 mtime = None
-        
+
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
         if language:
@@ -121,7 +125,10 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         title = _('Title Search: "%s"')
         sort = 'page_name'
     else:
-        title = _('Full Text Search: "%s"')
+        if advancedsearch:
+            title = _('Adanced Search: "%s"')
+        else:
+            title = _('Full Text Search: "%s"')
         sort = 'weight'
 
     # search the pages
@@ -130,14 +137,14 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         query = QueryParser(case=case, regex=regex,
                 titlesearch=titlesearch).parse_query(needle)
         results = searchPages(request, query, sort, mtime, historysearch)
-    except ValueError:
+    except ValueError: # catch errors in the search query
         err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
                 'HelpOnSearching for more information.') % needle
         Page(request, pagename).send_page(request, msg=err)
         return
 
     # directly show a single hit
-    # XXX won't work with attachment search
+    # Note: can't work with attachment search
     # improve if we have one...
     if len(results.hits) == 1:
         page = results.hits[0]
@@ -146,8 +153,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             url = page.url(request, querystr={'highlight': query.highlight_re()}, escape=0, relative=False)
             request.http_redirect(url)
             return
-    # no hits?
-    elif not results.hits:
+    elif not results.hits: # no hits?
         f = request.formatter
         querydict = wikiutil.parseQueryString(request.query_string)
         querydict.update({'titlesearch': 0})

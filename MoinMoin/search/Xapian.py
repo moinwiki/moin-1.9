@@ -31,6 +31,9 @@ except ImportError:
 class UnicodeQuery(xapian.Query):
     """ Xapian query object which automatically encodes unicode strings """
     def __init__(self, *args, **kwargs):
+        """
+        @keyword encoding: specifiy the encoding manually (default: value of config.charset)
+        """
         self.encoding = kwargs.get('encoding', config.charset)
 
         nargs = []
@@ -88,6 +91,10 @@ class WikiAnalyzer:
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
     def __init__(self, request=None, language=None):
+        """
+        @param request: current request
+        @param language: if given, the language in which to stem words
+        """
         if request and request.cfg.xapian_stemming and language:
             self.stemmer = Stemmer(language)
         else:
@@ -212,10 +219,9 @@ class Index(BaseIndex):
 
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
-        # XXX this check cries for troubles in future!
-        if xapian.xapian_major_version() == 0 and \
-                xapian.xapian_minor_version() == 9 \
-                and xapian.xapian_revision() >= 6:
+        # every version greater than or equal to 0.9.6 is allowed for now
+        # Note: fails if crossing the 10.x barrier
+        if xapian.xapian_version_string() >= '0.9.6':
             return
 
         from MoinMoin.error import ConfigurationError
@@ -236,8 +242,13 @@ class Index(BaseIndex):
         """ Check if the Xapian index exists """
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
-    def _search(self, query, sort=None, historysearch=0):
-        """ Perform the search using xapian (read-lock acquired) """
+    def _search(self, query, sort='weight', historysearch=0):
+        """ Perform the search using xapian (read-lock acquired)
+        
+        @param query: the search query objects
+        @keyword sort: the sorting of the results (default: 'weight')
+        @keyword historysearch: whether to search in all page revisions (default: 0)
+        """
         while True:
             try:
                 searcher, timestamp = self.request.cfg.xapian_searchers.pop()
@@ -435,11 +446,11 @@ class Index(BaseIndex):
 
     def _index_page(self, writer, page, mode='update'):
         """ Index a page - assumes that the write lock is acquired
-            @arg writer: the index writer object
-            @arg page: a page object
-            @arg mode: 'add' = just add, no checks
-                       'update' = check if already in index and update if needed (mtime)
-            
+
+        @arg writer: the index writer object
+        @arg page: a page object
+        @arg mode: 'add' = just add, no checks
+                   'update' = check if already in index and update if needed (mtime)
         """
         request = page.request
         wikiname = request.cfg.interwikiname or "Self"
@@ -464,7 +475,7 @@ class Index(BaseIndex):
                 doc = docs[0] # there should be only one
                 uid = doc['uid']
                 docmtime = long(doc['values']['mtime'])
-                updated = True # XXX: forcing, mtime > docmtime
+                updated = mtime > docmtime
                 if debug: request.log("uid %r: mtime %r > docmtime %r == updated %r" % (uid, mtime, docmtime, updated))
             else:
                 uid = None

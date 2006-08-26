@@ -22,10 +22,14 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 ##############################################################################
 
 class UpdateQueue:
-    """ Represents a locked Page queue on the disk """
+    """ Represents a locked page queue on the disk """
 
-    def __init__(self, file, lock_dir):
-        self.file = file
+    def __init__(self, f, lock_dir):
+        """
+        @param f: file to write to
+        @param lock_dir: directory to save the lock files
+        """
+        self.file = f
         self.writeLock = lock.WriteLock(lock_dir, timeout=10.0)
         self.readLock = lock.ReadLock(lock_dir, timeout=10.0)
 
@@ -34,7 +38,10 @@ class UpdateQueue:
         return os.path.exists(self.file)
 
     def append(self, pagename):
-        """ Append a page to queue """
+        """ Append a page to queue
+        
+        @param pagename: string to save
+        """
         if not self.writeLock.acquire(60.0):
             request.log("can't add %r to xapian update queue: can't lock queue" %
                         pagename)
@@ -62,6 +69,8 @@ class UpdateQueue:
         
         When the queue is empty, the queue file is removed, so exists()
         can tell if there is something waiting in the queue.
+
+        @param pages: list of pagenames to remove
         """
         if self.writeLock.acquire(30.0):
             try:
@@ -83,12 +92,18 @@ class UpdateQueue:
     # Private -------------------------------------------------------
 
     def _decode(self, data):
-        """ Decode queue data """
+        """ Decode queue data
+        
+        @param data: the data to decode
+        """
         pages = data.splitlines()
         return self._filterDuplicates(pages)
 
     def _filterDuplicates(self, pages):
-        """ Filter duplicates in page list, keeping the order """
+        """ Filter duplicates in page list, keeping the order
+        
+        @param pages: list of pages to filter
+        """
         unique = []
         seen = {}
         for name in pages:
@@ -118,6 +133,8 @@ class UpdateQueue:
         """ Write pages to queue file
         
         Requires queue write locking.
+
+        @param pages: list of pages to write
         """
         # XXX use tmpfile/move for atomic replace on real operating systems
         data = '\n'.join(pages) + '\n'
@@ -137,6 +154,7 @@ class UpdateQueue:
         except OSError, err:
             if err.errno != errno.ENOENT:
                 raise
+
 
 class BaseIndex:
     """ Represents a search engine index """
@@ -183,13 +201,16 @@ class BaseIndex:
         os.utime(self.dir, None)
 
     def _search(self, query):
-        """ Actually perfom the search (read-lock acquired) """
+        """ Actually perfom the search (read-lock acquired)
+        
+        @param query: the search query objects tree
+        """
         raise NotImplemented('...')
 
     def search(self, query, **kw):
         """ Search for items in the index
         
-        @param query: the query to pass to the index
+        @param query: the search query objects to pass to the index
         """
         #if not self.read_lock.acquire(1.0):
         #    raise self.LockedException
@@ -331,7 +352,11 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
-        """ Perform updates in the queues (read-lock acquired) """
+        """ Perform updates in the queues (read-lock acquired)
+        
+        @param request: the current request
+        @keyword amount: how many updates to perform at once (default: 5)
+        """
         raise NotImplemented('...')
 
     def optimize(self):
@@ -339,7 +364,10 @@ class BaseIndex:
         raise NotImplemented('...')
 
     def contentfilter(self, filename):
-        """ Get a filter for content of filename and return unicode content. """
+        """ Get a filter for content of filename and return unicode content.
+        
+        @param filename: name of the file
+        """
         request = self.request
         mt = wikiutil.MimeType(filename=filename)
         for modulename in mt.module_name():
@@ -404,6 +432,13 @@ class Search:
 
     def __init__(self, request, query, sort='weight', mtime=None,
             historysearch=0):
+        """
+        @param request: current request
+        @param query: search query objects tree
+        @keyword sort: the sorting of the results (default: 'weight')
+        @keyword mtime: only show items newer than this timestamp (default: None)
+        @keyword historysearch: whether to show old revisions of a page (default: 0)
+        """
         self.request = request
         self.query = query
         self.sort = sort
