@@ -26,7 +26,7 @@ except ImportError:
 
 class BaseExpression:
     """ Base class for all search terms """
-    
+
     def __init__(self):
         self.negated = 0
 
@@ -35,7 +35,7 @@ class BaseExpression:
 
     def negate(self):
         """ Negate the result of this term """
-        self.negated = 1 
+        self.negated = 1
 
     def pageFilter(self):
         """ Return a page filtering function
@@ -61,13 +61,13 @@ class BaseExpression:
             return [Match()]
         else:
             return None
-    
+
     def costs(self):
         """ Return estimated time to calculate this term
         
         Number is relative to other terms and has no real unit.
         It allows to do the fast searches first.
-        """ 
+        """
         return 0
 
     def highlight_re(self):
@@ -117,7 +117,7 @@ class AndExpression(BaseExpression):
 
     def subterms(self):
         return self._subterms
-    
+
     def costs(self):
         return self._costs
 
@@ -147,7 +147,7 @@ class AndExpression(BaseExpression):
                         return False
                 return True
             return filter
-        
+
         return None
 
     def sortByCost(self):
@@ -171,7 +171,7 @@ class AndExpression(BaseExpression):
         for s in self._subterms:
             highlight_re = s.highlight_re()
             if highlight_re: result.append(highlight_re)
-            
+
         return '|'.join(result)
 
     def xapian_wanted(self):
@@ -206,7 +206,7 @@ class AndExpression(BaseExpression):
         if not not_terms:
             # no, just return query for not negated terms
             return t1
-        
+
         # yes, link not negated and negated terms' query with a AND_NOT query
         if len(not_terms) == 1:
             t2 = Query(not_terms[0])
@@ -218,7 +218,7 @@ class AndExpression(BaseExpression):
 
 class OrExpression(AndExpression):
     """ A term connecting several sub terms with a logical OR """
-    
+
     operator = ' or '
 
     def search(self, page):
@@ -246,7 +246,7 @@ class TextSearch(BaseExpression):
     Both page content and the page title are searched, using an
     additional TitleSearch term.
     """
-    
+
     def __init__(self, pattern, use_re=False, case=False):
         """ Init a text search
 
@@ -260,10 +260,10 @@ class TextSearch(BaseExpression):
         self.case = case
         self._build_re(self._pattern, use_re=use_re, case=case)
         self.titlesearch = TitleSearch(self._pattern, use_re=use_re, case=case)
-        
+
     def costs(self):
         return 10000
-    
+
     def __unicode__(self):
         neg = self.negated and '-' or ''
         return u'%s"%s"' % (neg, unicode(self._pattern))
@@ -320,14 +320,12 @@ class TextSearch(BaseExpression):
     def xapian_term(self, request, allterms):
         if self.use_re:
             # basic regex matching per term
-            terms = [term for term in allterms() if
-                    self.search_re.match(term)]
+            terms = [term for term in allterms() if self.search_re.match(term)]
             if not terms:
                 return Query()
             queries = [Query(Query.OP_OR, terms)]
         else:
-            analyzer = Xapian.WikiAnalyzer(request=request,
-                    language=request.cfg.language_default)
+            analyzer = Xapian.WikiAnalyzer(request=request, language=request.cfg.language_default)
             terms = self._pattern.split()
 
             # all parsed wikiwords, AND'ed
@@ -349,8 +347,7 @@ class TextSearch(BaseExpression):
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)
                 self._pattern = new_pat
-                self._build_re(new_pat, use_re=False, case=self.case,
-                        stemmed=True)
+                self._build_re(new_pat, use_re=False, case=self.case, stemmed=True)
 
         # titlesearch OR parsed wikiwords
         return Query(Query.OP_OR,
@@ -372,7 +369,7 @@ class TitleSearch(BaseExpression):
         self.use_re = use_re
         self.case = case
         self._build_re(self._pattern, use_re=use_re, case=case)
-        
+
     def costs(self):
         return 100
 
@@ -392,7 +389,7 @@ class TitleSearch(BaseExpression):
                 return False
             return True
         return filter
-            
+
     def search(self, page):
         # Get matches in page name
         matches = []
@@ -415,7 +412,7 @@ class TitleSearch(BaseExpression):
                         end=match.end()+post))
             else:
                 matches.append(TitleMatch(re_match=match))
-        
+
         if ((self.negated and matches) or
             (not self.negated and not matches)):
             return None
@@ -425,7 +422,7 @@ class TitleSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
         return self.case
@@ -451,7 +448,7 @@ class TitleSearch(BaseExpression):
             terms = self._pattern.split()
             terms = [[w for w, pos in analyzer.raw_tokenize(t)] for t in terms]
 
-            # all parsed wikiwords, AND'ed
+            # all parsed wikiwords, ANDed
             queries = []
             stemmed = []
             for t in terms:
@@ -478,8 +475,7 @@ class TitleSearch(BaseExpression):
             if not self.case and stemmed:
                 new_pat = ' '.join(stemmed)
                 self._pattern = new_pat
-                self._build_re(new_pat, use_re=False, case=self.case,
-                        stemmed=True)
+                self._build_re(new_pat, use_re=False, case=self.case, stemmed=True)
 
         return Query(Query.OP_AND, queries)
 
@@ -513,7 +509,7 @@ class LinkSearch(BaseExpression):
         else:
             self.pattern = pattern
             self.static = True
-        
+
     def costs(self):
         return 5000 # cheaper than a TextSearch
 
@@ -529,7 +525,7 @@ class LinkSearch(BaseExpression):
         matches = []
 
         Found = True
-        
+
         for link in page.getPageLinks(page.request):
             if ((self.static and self.pattern == link) or
                 (not self.static and self.search_re.match(link))):
@@ -555,7 +551,7 @@ class LinkSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
         return self.case
@@ -613,7 +609,7 @@ class LanguageSearch(BaseExpression):
     def search(self, page):
         match = False
         body = page.getPageHeader()
-        
+
         if re.findall('#language %s' % self.pattern, body):
             match = True
 
@@ -626,10 +622,10 @@ class LanguageSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
-        return False            # case-sensitivity would make no sense
+        return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
         self.xapian_called = True
@@ -678,7 +674,7 @@ class CategorySearch(TextSearch):
         return u'(Category%s)' % self._pattern
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
         return self.case
@@ -720,7 +716,7 @@ class MimetypeSearch(BaseExpression):
         self._pattern = pattern.lower()
         self.negated = 0
         self.use_re = use_re
-        self.case = False       # not case-sensitive!
+        self.case = False # not case-sensitive!
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
@@ -738,10 +734,10 @@ class MimetypeSearch(BaseExpression):
         return None
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
-        return False            # case-sensitivity would make no sense
+        return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
         self.xapian_called = True
@@ -780,7 +776,7 @@ class DomainSearch(BaseExpression):
         self._pattern = pattern.lower()
         self.negated = 0
         self.use_re = use_re
-        self.case = False       # not case-sensitive!
+        self.case = False # not case-sensitive!
         self.xapian_called = False
         self._build_re(self._pattern, use_re=use_re, case=case)
 
@@ -814,10 +810,10 @@ class DomainSearch(BaseExpression):
             return []
 
     def xapian_wanted(self):
-        return True             # only easy regexps possible
+        return True # only easy regexps possible
 
     def xapian_need_postproc(self):
-        return False            # case-sensitivity would make no sense
+        return False # case-sensitivity would make no sense
 
     def xapian_term(self, request, allterms):
         self.xapian_called = True
@@ -882,7 +878,7 @@ class QueryParser:
             if q:
                 result.append(q)
         return result
-            
+
     def _and_expression(self):
         result = None
         while not result and self._query:
@@ -897,13 +893,13 @@ class QueryParser:
             result.append(term)
             term = self._single_term()
         return result
-                                
+
     def _single_term(self):
         regex = (r'(?P<NEG>-?)\s*(' +              # leading '-'
                  r'(?P<OPS>\(|\)|(or\b(?!$)))|' +  # or, (, )
                  r'(?P<MOD>(\w+:)*)' +
                  r'(?P<TERM>("[^"]+")|' +
-                 r"('[^']+')|([^\s\)]+)))")             # search word itself
+                 r"('[^']+')|([^\s\)]+)))")        # search word itself
         self._query = self._query.strip()
         match = re.match(regex, self._query, re.U)
         if not match:
@@ -950,7 +946,7 @@ class QueryParser:
             elif "domain".startswith(m):
                 domain = True
 
-        # oh, let's better call xapian if we encouter this nasty regexp ;)
+        # oh, let's better call xapian if we encounter this nasty regexp ;)
         if not category:
             cat_re = re.compile(r'----\(-\*\)\(\\r\)\?\\n\)\(\.\*\)Category(.*)\\b', re.U)
             cat_match = cat_re.search(text)
@@ -984,6 +980,5 @@ class QueryParser:
             return False
         return (text.startswith('"') and text.endswith('"') or
                 text.startswith("'") and text.endswith("'"))
-
 
 

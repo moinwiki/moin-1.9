@@ -1,4 +1,5 @@
 # -*- coding: iso-8859-1 -*-
+# XXX docstring incorrect
 """
     MoinMoin - search engine
     
@@ -22,6 +23,7 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 ##############################################################################
 
 class UpdateQueue:
+    # XXX docstring
     def __init__(self, file, lock_dir):
         self.file = file
         self.writeLock = lock.WriteLock(lock_dir, timeout=10.0)
@@ -153,8 +155,7 @@ class BaseIndex:
         filesys.makeDirs(self.dir)
         self.sig_file = os.path.join(main_dir, 'complete')
         lock_dir = os.path.join(main_dir, 'index-lock')
-        self.lock = lock.WriteLock(lock_dir,
-                                   timeout=3600.0, readlocktimeout=60.0)
+        self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
         #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
         self.update_queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
                                 os.path.join(main_dir, 'update-queue-lock'))
@@ -170,9 +171,9 @@ class BaseIndex:
         raise NotImplemented('...')
 
     def exists(self):
-        """ Check if index exists """        
+        """ Check if index exists """
         return os.path.exists(self.sig_file)
-                
+
     def mtime(self):
         """ Modification time of the index """
         return os.path.getmtime(self.dir)
@@ -180,8 +181,9 @@ class BaseIndex:
     def touch(self):
         """ Touch the index """
         os.utime(self.dir, None)
-    
+
     def _search(self, query):
+        # XXX docstring
         raise NotImplemented('...')
 
     def search(self, query, **kw):
@@ -252,7 +254,7 @@ class BaseIndex:
         from threading import Thread
         indexThread = Thread(target=self._index_pages, args=(files, mode))
         indexThread.setDaemon(True)
-        
+
         # Join the index thread after current request finish, prevent
         # Apache CGI from killing the process.
         def joinDecorator(finish):
@@ -313,7 +315,7 @@ class BaseIndex:
                     target=lockedDecorator(self._do_queued_updates),
                     args=(self._indexingRequest(self.request),))
             indexThread.setDaemon(True)
-            
+
             # Join the index thread after current request finish, prevent
             # Apache CGI from killing the process.
             def joinDecorator(finish):
@@ -321,7 +323,7 @@ class BaseIndex:
                     finish()
                     indexThread.join()
                 return func
-                
+
             self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
@@ -329,10 +331,11 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
+        # XXX docstring
         raise NotImplemented('...')
 
     def optimize(self):
-        """ Optimize the the index if possible """
+        """ Optimize the index if possible """
         raise NotImplemented('...')
 
     def contentfilter(self, filename):
@@ -371,7 +374,7 @@ class BaseIndex:
         request = Request(request.url)
         class SecurityPolicy(Permissions):
             def read(*args, **kw):
-                return True        
+                return True
         request.user.may = SecurityPolicy(request.user)
         return request
 
@@ -391,13 +394,14 @@ class BaseIndex:
         finally:
             f.close()
 
+
 ##############################################################################
 ### Searching
 ##############################################################################
 
 class Search:
     """ A search run """
-    
+
     def __init__(self, request, query, sort='weight', mtime=None,
             historysearch=0):
         self.request = request
@@ -415,7 +419,7 @@ class Search:
             hits = self._xapianSearch()
         else:
             hits = self._moinSearch()
-            
+
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
@@ -427,7 +431,7 @@ class Search:
             self.sort = None
             mset = self._xapianMset
             estimated_hits = (
-                (mset.get_matches_estimated() == mset.get_matches_upper_bound() 
+                (mset.get_matches_estimated() == mset.get_matches_upper_bound()
                     and
                  mset.get_matches_estimated() == mset.get_matches_lower_bound())
                 and '' or 'about',
@@ -437,7 +441,6 @@ class Search:
 
         return getSearchResults(self.request, self.query, hits, start,
                 self.sort, estimated_hits)
-        
 
     # ----------------------------------------------------------------
     # Private!
@@ -490,7 +493,7 @@ class Search:
                     return d
                 pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
-                
+
                 self._xapianEnquire = enq
                 self._xapianMset = mset
                 self._xapianIndex = index
@@ -512,7 +515,7 @@ class Search:
         else:
             # we didn't use xapian in this request
             self.request.cfg.xapian_search = 0
-        
+
         # some postprocessing by _moinSearch is required
         return self._moinSearch(pages)
 
@@ -522,11 +525,11 @@ class Search:
         @param term: the term as string
         @param pos: starting position of the match
         """
-        if term[0] == 'S':      # TitleMatch
+        if term[0] == 'S': # TitleMatch
             return TitleMatch(start=pos, end=pos+len(term)-1)
-        else:                   # TextMatch (incl. headers)
+        else: # TextMatch (incl. headers)
             return TextMatch(start=pos, end=pos+len(term))
-        
+
     def _xapianMatch(self, uid, page=None):
         """ Get all relevant Xapian matches per document id
         
@@ -545,7 +548,7 @@ class Search:
             in positions.iteritems()]
 
         if not matches:
-            return [Match()]    # dummy for metadata, we got a match!
+            return [Match()] # dummy for metadata, we got a match!
 
         return matches
 
@@ -566,7 +569,7 @@ class Search:
         hits = self._getHits(pages, self._moinMatch)
         self.request.clock.stop('_moinSearch')
         return hits
-    
+
     def _moinMatch(self, page, uid=None):
         """ Get all matches from regular moinSearch
         
@@ -636,7 +639,7 @@ class Search:
             return self.request.rootpage.getPageList(filter=filter_)
         else:
             return self.request.rootpage.getPageList(user='', exists=0)
-        
+
     def _filter(self, hits):
         """ Filter out deleted or acl protected pages
         
@@ -650,7 +653,6 @@ class Search:
                     if (not wikiname in thiswiki or
                        page.exists() and userMayRead(page.page_name) or
                        page.page_name.startswith(fs_rootpage)) and
-                       (not self.mtime or 
-                           self.mtime <= page.mtime_usecs()/1000000)]
+                       (not self.mtime or self.mtime <= page.mtime_usecs()/1000000)]
         return filtered
 

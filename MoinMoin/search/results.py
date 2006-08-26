@@ -25,7 +25,7 @@ class Match(object):
     """
     # Default match weight
     _weight = 1.0
-    
+
     def __init__(self, start=0, end=0, re_match=None):
         self.re_match = re_match
         if not re_match:
@@ -42,7 +42,7 @@ class Match(object):
                  self.start == other.start and
                  self.end == other.end)
         return equal
-        
+
     def __ne__(self, other):
         return not self.__eq__(other)
 
@@ -64,7 +64,7 @@ class Match(object):
 
     # object properties
     start = property(_get_start)
-    end   = property(_get_end)
+    end = property(_get_end)
 
 
 class TextMatch(Match):
@@ -75,7 +75,7 @@ class TextMatch(Match):
 class TitleMatch(Match):
     """ Represents a match in the page title
     
-    Has more weight as a match in the page content.
+    Has more weight than a match in the page content.
     """
     # Matches in titles are much more important in wikis. This setting
     # seems to make all pages that have matches in the title to appear
@@ -139,19 +139,16 @@ class FoundPage:
         else:
             matches = self._matches
 
-        # Filter by type and sort by sort using fast schwartzian
-        # transform.
+        # Filter by type and sort by sort using fast schwartzian transform.
         if sort == 'start':
-            tmp = [(match.start, match) for match in matches
-                   if instance(match, type)]
+            tmp = [(match.start, match) for match in matches if instance(match, type)]
         else:
-            tmp = [(match.weight(), match) for match in matches
-                   if instance(match, type)]
+            tmp = [(match.weight(), match) for match in matches if instance(match, type)]
         tmp.sort()
         if sort == 'weight':
             tmp.reverse()
         matches = [item[1] for item in tmp]
-        
+
         return matches
 
     def _unique_matches(self, type=Match):
@@ -164,10 +161,8 @@ class FoundPage:
         @rtype: list
         @return: list of matches of type, sorted by match.start
         """
-        # Filter by type and sort by match.start using fast schwartzian
-        # transform.
-        tmp = [(match.start, match) for match in self._matches
-               if isinstance(match, type)]
+        # Filter by type and sort by match.start using fast schwartzian transform.
+        tmp = [(match.start, match) for match in self._matches if isinstance(match, type)]
         tmp.sort()
 
         if not len(tmp):
@@ -183,11 +178,11 @@ class FoundPage:
             matches.append(item[1])
 
         return matches
-    
+
 
 class FoundAttachment(FoundPage):
-    """ Represent an attachment in search results """
-    
+    """ Represents an attachment in search results """
+
     def __init__(self, page_name, attachment, matches=None, page=None):
         self.page_name = page_name
         self.attachment = attachment
@@ -207,8 +202,8 @@ class FoundAttachment(FoundPage):
 
 
 class FoundRemote(FoundPage):
-    """ Represent an attachment in search results """
-    
+    """ Represents an attachment in search results """
+
     def __init__(self, wikiname, page_name, attachment, matches=None, page=None):
         self.wikiname = wikiname
         self.page_name = page_name
@@ -243,7 +238,7 @@ class SearchResults:
     by name and then by rank.
     """
     # Public functions --------------------------------------------------
-    
+
     def __init__(self, query, hits, pages, elapsed, sort, estimated_hits):
         self.query = query # the query
         self.hits = hits # hits list
@@ -263,13 +258,13 @@ class SearchResults:
         tmp.sort()
         tmp.reverse()
         self.hits = [item[2] for item in tmp]
-        
+
     def _sortByPagename(self):
         """ Sorts a list of found pages alphabetical by page name """
         tmp = [(hit.page_name, hit) for hit in self.hits]
         tmp.sort()
         self.hits = [item[1] for item in tmp]
-        
+
     def stats(self, request, formatter, hitsFrom):
         """ Return search statistics, formatted with formatter
 
@@ -331,7 +326,7 @@ class SearchResults:
         # Add pages formatted as list
         if self.hits:
             write(list(1))
-            
+
             # XXX: Do some xapian magic here
             if paging:
                 hitsTo = hitsFrom + request.cfg.search_results_per_page
@@ -353,7 +348,7 @@ class SearchResults:
                 else:
                     querydict = None
                 querystr = self.querystring(querydict)
-            
+
                 matchInfo = ''
                 if info:
                     matchInfo = self.formatInfo(f, page)
@@ -401,7 +396,7 @@ class SearchResults:
 
         if paging and len(self.hits) <= request.cfg.search_results_per_page:
             paging = False
-        
+
         # Add pages formatted as definition list
         if self.hits:
             write(f.definition_list(1))
@@ -454,14 +449,14 @@ class SearchResults:
                 write(self.formatPageLinks(hitsFrom=hitsFrom,
                     hitsPerPage=request.cfg.search_results_per_page,
                     hitsNum=len(self.hits)))
-        
+
         return self.getvalue()
 
     # Private -----------------------------------------------------------
 
     # This methods are not meant to be used by clients and may change
     # without notice.
-    
+
     def formatContext(self, page, context, maxlines):
         """ Format search context for each matched page
 
@@ -474,7 +469,7 @@ class SearchResults:
         last = len(body) - 1
         lineCount = 0
         output = []
-        
+
         # Get unique text matches sorted by match.start, try to ignore
         # matches in page header, and show the first maxlines matches.
         # TODO: when we implement weight algorithm for text matches, we
@@ -486,7 +481,7 @@ class SearchResults:
         # Format context
         while i < len(matches) and lineCount < maxlines:
             match = matches[i]
-            
+
             # Get context range for this match
             start, end = self.contextRange(context, match, start, last)
 
@@ -496,7 +491,7 @@ class SearchResults:
             # same match again on a separate line.
 
             output.append(f.text(u'...'))
-            
+
             # Get the index of the first match completely within the
             # context.
             for j in xrange(0, len(matches)):
@@ -540,9 +535,9 @@ class SearchResults:
                 # This is a page with no text, only header, for example,
                 # a redirect page.
                 output = f.text(page.page.getPageHeader(length=context))
-        
+
         return output
-        
+
     def firstInterestingMatch(self, page, matches):
         """ Return the first interesting match
 
@@ -587,7 +582,7 @@ class SearchResults:
         if cstart < start:
             cend += start - cstart
             cstart = start
-            
+
         # But if end if after last, give back context to start
         if cend > last:
             cstart -= cend - last
@@ -609,7 +604,7 @@ class SearchResults:
         """
         # Get unique title matches sorted by match.start
         matches = page.get_matches(unique=1, sort='start', type=TitleMatch)
-        
+
         # Format
         pagename = page.page_name
         f = self.formatter
@@ -627,7 +622,7 @@ class SearchResults:
         # Add text after match
         if start < len(pagename):
             output.append(f.text(pagename[start:]))
-        
+
         if page.attachment: # show the attachment that matched
             output.extend([
                     " ",
@@ -649,7 +644,7 @@ class SearchResults:
         @param location: current location in text
         @rtype: unicode
         @return: formatted match or empty string
-        """        
+        """
         start = max(location, match.start)
         if start < match.end:
             f = self.formatter
@@ -678,12 +673,12 @@ class SearchResults:
             querydict.update({'from': n * hitsPerPage})
             return self.request.page.url(self.request, querydict,
                     escape=0, relative=False)
-        
+
         pages = float(hitsNum) / hitsPerPage
         if pages - int(pages) > 0.0:
             pages = int(pages) + 1
         cur_page = hitsFrom / hitsPerPage
-        l = []
+        l = [] # XXX do not use single letter names, esp. not "l"
 
         # previous page available
         if cur_page > 0:
@@ -741,7 +736,7 @@ class SearchResults:
             f.paragraph(1, attr={'class': 'searchhitinfobar'}),
             f.text('%.1fk - ' % (page.page.size()/1024.0)),
             f.text('rev: %d %s- ' % (rev,
-                rev == page.page.getRevList()[0] and 
+                rev == page.page.getRevList()[0] and
                 '(%s) ' % _('current') or '')),
             f.text('last modified: %s' % page.page.mtime_printable(request)),
             # XXX: proper metadata

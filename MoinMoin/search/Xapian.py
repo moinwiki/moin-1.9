@@ -49,7 +49,7 @@ class UnicodeQuery(xapian.Query):
 ##############################################################################
 
 def getWikiAnalyzerFactory(request=None, language='en'):
-    """ Returns a WikiAnalyer instance
+    """ Returns a WikiAnalyzer instance
 
     @keyword request: current request object
     @keyword language: stemming language iso code, defaults to 'en'
@@ -57,6 +57,7 @@ def getWikiAnalyzerFactory(request=None, language='en'):
     return (lambda: WikiAnalyzer(request, language))
 
 class WikiAnalyzer:
+    # TODO docstring
     singleword = r"[%(u)s][%(l)s]+" % {
                      'u': config.chars_upper,
                      'l': config.chars_lower,
@@ -76,7 +77,7 @@ class WikiAnalyzer:
 
     dot_re = re.compile(r"[-_/,.]")
     mail_re = re.compile(r"[-_/,.]|(@)")
-    
+
     # XXX limit stuff above to xapdoc.MAX_KEY_LEN
     # WORD_RE = re.compile('\\w{1,%i}' % MAX_KEY_LEN, re.U)
 
@@ -96,7 +97,7 @@ class WikiAnalyzer:
             """ 'encode' unicode results into whatever xapian wants """
             lower = uc.lower()
             return lower
-            
+
         if isinstance(value, list): # used for page links
             for v in value:
                 yield (enc(v), 0)
@@ -137,10 +138,9 @@ class WikiAnalyzer:
 
         @param value: string to split, must be an unicode object or a list of
                       unicode objects
-        @keyword flat_stemming: whether to yield stemmed terms
-                                automatically with the natural forms
-                                (True) or yield both at once as a tuple
-                                (False)
+        @keyword flat_stemming: whether to yield stemmed terms automatically
+                                with the natural forms (True) or
+                                yield both at once as a tuple (False)
         """
         for word, pos in self.raw_tokenize(value):
             if flat_stemming:
@@ -169,31 +169,31 @@ class Index(BaseIndex):
     prefixMap = {
         # http://svn.xapian.org/*checkout*/trunk/xapian-applications/omega/docs/termprefixes.txt
         'author': 'A',
-        'date':   'D', # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
-                       #G   newsGroup (or similar entity - e.g. a web forum name)
+        'date': 'D',              # numeric format: YYYYMMDD or "latest" - e.g. D20050224 or Dlatest
+                                  #G   newsGroup (or similar entity - e.g. a web forum name)
         'hostname': 'H',
         'keyword': 'K',
-        'lang': 'L',   # ISO Language code
-                       #M   Month (numeric format: YYYYMM)
-                       #N   ISO couNtry code (or domaiN name)
-                       #P   Pathname
-                       #Q   uniQue id
-        'raw':  'R',   # Raw (i.e. unstemmed) term
-        'title': 'S',  # Subject (or title)
+        'lang': 'L',              # ISO Language code
+                                  #M   Month (numeric format: YYYYMM)
+                                  #N   ISO couNtry code (or domaiN name)
+                                  #P   Pathname
+                                  #Q   uniQue id
+        'raw': 'R',               # Raw (i.e. unstemmed) term
+        'title': 'S',             # Subject (or title)
         'mimetype': 'T',
-        'url': 'U',    # full URL of indexed document - if the resulting term would be > 240
-                       # characters, a hashing scheme is used to prevent overflowing
-                       # the Xapian term length limit (see omindex for how to do this).
-                       #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
-                       #  the D term, and changing the last digit to a '2' if it's a '3')
-                       #X   longer prefix for user-defined use
-        'linkto': 'XLINKTO', # this document links to that document
+        'url': 'U',               # full URL of indexed document - if the resulting term would be > 240
+                                  # characters, a hashing scheme is used to prevent overflowing
+                                  # the Xapian term length limit (see omindex for how to do this).
+                                  #W   "weak" (approximately 10 day intervals, taken as YYYYMMD from
+                                  #  the D term, and changing the last digit to a '2' if it's a '3')
+                                  #X   longer prefix for user-defined use
+        'linkto': 'XLINKTO',      # this document links to that document
         'stem_lang': 'XSTEMLANG', # ISO Language code this document was stemmed in
-        'category': 'XCAT', # category this document belongs to
-        'fulltitle': 'XFT', # full title
-        'domain': 'XDOMAIN', # standard or underlay
-        'revision': 'XREV', # revision of page
-                       #Y   year (four digits)
+        'category': 'XCAT',       # category this document belongs to
+        'fulltitle': 'XFT',       # full title
+        'domain': 'XDOMAIN',      # standard or underlay
+        'revision': 'XREV',       # revision of page
+                                  #Y   year (four digits)
     }
 
     def __init__(self, request):
@@ -206,11 +206,12 @@ class Index(BaseIndex):
 
     def _check_version(self):
         """ Checks if the correct version of Xapian is installed """
+        # XXX this check cries for troubles in future!
         if xapian.xapian_major_version() == 0 and \
                 xapian.xapian_minor_version() == 9 \
                 and xapian.xapian_revision() >= 6:
             return
-        
+
         from MoinMoin.error import ConfigurationError
         raise ConfigurationError('MoinMoin needs at least Xapian version '
                 '0.9.6 to work correctly. Either disable Xapian '
@@ -230,6 +231,7 @@ class Index(BaseIndex):
         return BaseIndex.exists(self) and os.listdir(self.dir)
 
     def _search(self, query, sort=None, historysearch=0):
+        ### XXX docstring
         while True:
             try:
                 searcher, timestamp = self.request.cfg.xapian_searchers.pop()
@@ -242,7 +244,7 @@ class Index(BaseIndex):
                 searcher.configure(self.prefixMap, self.indexValueMap)
                 timestamp = self.mtime()
                 break
-        
+
         kw = {}
         if sort == 'weight':
             # XXX: we need real weight here, like _moinSearch
@@ -256,7 +258,7 @@ class Index(BaseIndex):
             'attachment', 'mtime', 'wikiname', 'revision'], **kw)
         self.request.cfg.xapian_searchers.append((searcher, timestamp))
         return hits
-    
+
     def _do_queued_updates(self, request, amount=5):
         """ Assumes that the write lock is acquired """
         self.touch()
@@ -269,8 +271,7 @@ class Index(BaseIndex):
             p = Page(request, name)
             if request.cfg.xapian_index_history:
                 for rev in p.getRevList():
-                    self._index_page(writer, Page(request, name, rev=rev),
-                            mode='update')
+                    self._index_page(writer, Page(request, name, rev=rev), mode='update')
             else:
                 self._index_page(writer, p, mode='update')
             self.update_queue.remove([name])
@@ -385,7 +386,7 @@ class Index(BaseIndex):
                         return (lang, lang)
                 elif not line.startswith('#'):
                     break
-        
+
         if not lang:
             # no lang found at all.. fallback to default language
             lang = default_lang
@@ -582,7 +583,7 @@ class Index(BaseIndex):
             enq, mset, docs = writer.search(query, valuesWanted=['pagename',
                 'attachment', ])
             if docs:
-                doc = docs[0]   # there should be only one
+                doc = docs[0] # there should be only one
                 writer.delete_document(doc['uid'])
                 request.log('attachment %s from %s removed from index' %
                     (doc['values']['attachment'], doc['values']['pagename']))
