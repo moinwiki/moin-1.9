@@ -35,13 +35,14 @@ def transformList(items):
 
 def parseValue(string, start=0):
     """ Parses the inner structure. """
+    # TODO: replace "string" by something else
     #print "Parsing %r" % (string[start:], )
 
     val_type = string[start]
-    header_end = string.find(':', 3+start)
-    if header_end != -1:
+    try:
+        header_end = string.index(':', 3+start)
         first_data = string[start+2:header_end]
-    else:
+    except ValueError:
         first_data = None
 
     #print "Saw type %r, first_data is %r." % (val_type, first_data)
@@ -99,7 +100,7 @@ def parseSession(boxed):
     current_pos = 0
     session_dict = {}
     while current_pos < len(boxed):
-        name_end = boxed.find("|", current_pos)
+        name_end = boxed.find("|", current_pos) # TODO: replace by .index()?
         name = boxed[current_pos:name_end]
         current_pos = name_end+1
         data, current_pos = parseValue(boxed, current_pos)

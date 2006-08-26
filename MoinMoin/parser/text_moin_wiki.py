@@ -999,8 +999,9 @@ class Parser:
                         self.in_pre = 'no_parser'
                 if self.in_pre == 'found_parser':
                     # processing mode
-                    endpos = line.find("}}}")
-                    if endpos == -1:
+                    try:
+                        endpos = line.index("}}}")
+                    except ValueError:
                         self.parser_lines.append(line)
                         continue
                     if line[:endpos]:

@@ -51,8 +51,10 @@ class Parser:
         self.lines = [0, 0]
         pos = 0
         while 1:
-            pos = self.raw.find('\n', pos) + 1
-            if not pos: break
+            try:
+                pos = self.raw.index('\n', pos) + 1
+            except ValueError:
+                break
             self.lines.append(pos)
         self.lines.append(len(self.raw))
 

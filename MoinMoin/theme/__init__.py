@@ -836,7 +836,7 @@ function actionsMenuInit(title) {
         # Stolen from wikitest.py
         try:
             import xml
-            return xml.__file__.find('_xmlplus') != -1
+            return '_xmlplus' in xml.__file__
         except ImportError:
             # This error reported on Python 2.2
             return False

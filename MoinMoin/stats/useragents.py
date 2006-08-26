@@ -67,10 +67,10 @@ def get_data(request):
                 break
             ua = event[2].get('HTTP_USER_AGENT')
             if ua:
-                pos = ua.find(" (compatible; ")
-                if pos >= 0:
+                try:
+                    pos = ua.index(" (compatible; ")
                     ua = ua[pos:].split(';')[1].strip()
-                else:
+                except ValueError:
                     ua = ua.split()[0]
                 #ua = ua.replace(';', '\n')
                 data[ua] = data.get(ua, 0) + 1
