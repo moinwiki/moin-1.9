@@ -126,7 +126,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         sort = 'page_name'
     else:
         if advancedsearch:
-            title = _('Adanced Search: "%s"')
+            title = _('Advanced Search: "%s"')
         else:
             title = _('Full Text Search: "%s"')
         sort = 'weight'
