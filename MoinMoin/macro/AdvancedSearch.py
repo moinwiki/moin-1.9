@@ -9,6 +9,8 @@
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
 from MoinMoin.support import sorted
+from MoinMoin.widget import html
+from MoinMoin.util.web import makeSelection
 
 import mimetypes
 
@@ -79,28 +81,17 @@ def advanced_ui(macro):
     langs = dict([(lang, lmeta['x-language-in-english'])
         for lang, lmeta in languages.items()])
     userlang = macro.request.lang
-    lang_dropdown = ''.join([
-        u'<select name="language" size="1">',
-        u'<option value=""%s>%s</option>' %
-            (not searchedlang and ' selected' or '', _('any language')),
-        ''.join(['<option value="%s"%s>%s</option>' %
-                (lt[0], lt[0] == searchedlang and ' selected' or '', lt[1])
-            for lt in [(userlang, langs[userlang])] + sorted(langs.items(),
-                key=lambda i: i[1])]),
-        u'</select>',
-    ])
+    lang_select = makeSelection('language',
+            [('', _('any language')), (userlang, langs[userlang])] +
+                sorted(langs.items(), key=lambda i: i[1]),
+            searchedlang)
 
     # mimetype selection
     mimetype = form_get(request, 'mimetype')
-    ft_dropdown = ''.join([
-        u'<select name="mimetype" size="1"%s>' % disabledIfMoinSearch,
-        u'<option value=""%s>%s</option>' %
-            (not mimetype and ' selected' or '', _('any type')),
-        ''.join(['<option value="%s"%s>%s</option>' %
-                (m[1], mimetype == m[1] and ' selected' or '', '*%s - %s' % m)
-            for m in sorted(mimetypes.types_map.items())]),
-        u'</select>',
-    ])
+    mt_select = makeSelection('mimetype',
+            [(m[1], '*%s - %s' % m) for m in sorted(mimetypes.types_map.items())],
+            mimetype)
+
 
     # misc search options (checkboxes)
     search_options = ''.join([
@@ -110,40 +101,39 @@ def advanced_ui(macro):
             txt[0],
             f.table_cell(0),
             f.table_cell(1, colspan=2),
-            txt[1],
+            unicode(txt[1]),
+            txt[2],
             f.table_cell(0),
             f.table_row(0),
             ]) for txt in (
-                (_('Language'), lang_dropdown),
-                (_('File Type'), ft_dropdown),
-                ('', '<input type="checkbox" name="titlesearch" '
-                    'value="1"%s>%s</input>' %
-                (form_get(request, 'titlesearch') and ' checked' or '',
-                    _('Search only in titles'))),
-                ('', '<input type="checkbox" name="case" '
-                    'value="1"%s>%s</input>' %
-                (form_get(request, 'case') and ' checked' or '',
-                    _('Case-sensitive search'))),
-                ('', '<input type="checkbox" name="excludeunderlay" '
-                    'value="1"%s>%s</input>' %
-                (form_get(request, 'excludeunderlay') and ' checked' or '',
-                    _('Exclude underlay'))),
-                ('', '<input type="checkbox" name="nosystemitems" '
-                    'value="1"%s>%s</input>' %
-                (form_get(request, 'nosystemitems') and ' checked' or '',
-                    _('No system items'))),
-                ('', '<input type="checkbox" name="historysearch" '
-                    'value="1"%s%s>%s</input>' %
-                (form_get(request, 'historysearch') and ' checked' or '',
-                    (not request.cfg.xapian_search or
-                     not request.cfg.xapian_index_history) and
-                        ' disabled="disabled"' or '',
-                     _('Search in all page revisions')))
+                (_('Language'), unicode(lang_select), ''),
+                (_('File Type'), unicode(mt_select), ''),
+                ('', html.INPUT(type='checkbox', name='titlesearch',
+                    value='1', checked=form_get(request, 'titlesearch'),
+                    id='titlesearch'),
+                    '<label for="titlesearch">%s</label>' % _('Search only in titles')),
+                ('', html.INPUT(type='checkbox', name='case', value='1',
+                    checked=form_get(request, 'case'), id='case'),
+                    '<label for="case">%s</label>' % _('Case-sensitive search')),
+                ('', html.INPUT(type='checkbox', name='excludeunderlay',
+                    value='1', checked=form_get(request, 'excludeunderlay'),
+                    id='excludeunderlay'),
+                    '<label for="excludeunderlay">%s</label>' % _('Exclude underlay')),
+                ('', html.INPUT(type='checkbox', name='nosystemitems',
+                    value='1', checked=form_get(request, 'nosystemitems'),
+                    id='nosystempages'),
+                    '<label for="nosystempages">%s</label>' % _('No system items')),
+                ('', html.INPUT(type='checkbox', name='historysearch',
+                    value='1', checked=form_get(request, 'historysearch'),
+                    disabled=(not request.cfg.xapian_search or
+                        not request.cfg.xapian_index_history),
+                    id='historysearch'),
+                    '<label for="historysearch">%s</label>' % _('Search in all page revisions'))
             )
     ])
 
     # the dialogue
-    html = [
+    return f.rawHTML('\n'.join([
         u'<form method="get" action="">',
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
@@ -159,9 +149,7 @@ def advanced_ui(macro):
         f.table(0),
         u'</div>',
         u'</form>',
-    ]
-
-    return f.rawHTML('\n'.join(html))
+    ]))
 
 
 def execute(macro, needle):
