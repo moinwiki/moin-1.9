@@ -14,18 +14,6 @@ from MoinMoin import config
 ### Misc Helpers
 #############################################################################
 
-def chmod(name, mode, catchexception=True):
-    """ change mode of some file/dir on platforms that support it.
-        usually you don't need this because we use os.umask() when importing
-        request.py
-    """
-    try:
-        os.chmod(name, mode)
-    except OSError:
-        if not catchexception:
-            raise
-
-
 def rename(oldname, newname):
     """ Multiplatform rename
 
