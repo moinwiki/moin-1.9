@@ -39,6 +39,19 @@ def isAdvancedSearch(request):
         return False
 
 
+def searchHints(f, hints):
+    """ Return a paragraph showing hints for a search
+
+    @param f: the formatter to use
+    @param hints: list of hints (as strings) to show
+    """
+    return ''.join([
+        f.paragraph(1, attr={'class': 'searchhint'}),
+        '<br>'.join(hints),
+        f.paragraph(0),
+    ])
+
+
 def execute(pagename, request, fieldname='value', titlesearch=0):
     _ = request.getText
     titlesearch = isTitleSearch(request)
@@ -62,8 +75,6 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     msg = ''
     historysearch = 0
 
-    max_context = 1 # only show first `max_context` contexts XXX still unused
-
     # if advanced search is enabled we construct our own search query
     if advancedsearch:
         and_terms = request.form.get('and_terms', [''])[0].strip()
@@ -85,13 +96,15 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
             if mtime_parsed[1] == 0 and mtime_parsed[0] <= time.localtime():
                 mtime = time.mktime(mtime_parsed[0])
-                msg = _("(!) Only pages changed since '''%s''' are being "
+                mtime_msg = _("(!) Only pages changed since '''%s''' are being "
                         "displayed!") % request.user.getFormattedDateTime(mtime)
             else:
-                msg = _('/!\\ The modification date you entered was not '
+                mtime_msg = _('/!\\ The modification date you entered was not '
                         'recognized and is therefore not considered for the '
                         'search results!')
                 mtime = None
+        else:
+            mtime_msg = None
 
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
         needle = ''
@@ -185,14 +198,15 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     # Start content (important for RTL support)
     request.write(request.formatter.startContent("content"))
 
-    # Hint if using titlesearch
+    # Hints
     f = request.formatter
+    hints = []
+
     if titlesearch:
         querydict = wikiutil.parseQueryString(request.query_string)
         querydict.update({'titlesearch': 0})
 
-        request.write(''.join([
-            f.paragraph(1, attr={'class': 'searchhint'}),
+        hints.append(''.join([
             _('(!) You\'re conducting a title search so your search '
                 'results might not contain all information available for '
                 'your search query in this wiki.'),
@@ -202,8 +216,13 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
             f.text(_('Click here to perform a full-text search with your '
                 'search terms!')),
             f.url(0),
-            f.paragraph(0)
         ]))
+
+    if mtime_msg:
+        hints.append(mtime_msg)
+
+    if hints:
+        request.write(searchHints(f, hints))
 
     # Search stats
     request.write(results.stats(request, request.formatter, hitsFrom))
