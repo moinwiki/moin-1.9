@@ -89,20 +89,39 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         nosystemitems = request.form.get('nosystemitems', [0])[0]
         historysearch = request.form.get('historysearch', [0])[0]
 
-        mtime = request.form.get('mtime', [None])[0]
+        mtime = request.form.get('mtime', [''])[0]
         if mtime:
-            cal = Calendar()
-            mtime_parsed = cal.parse(mtime)
+            mtime_parsed = None
 
-            if mtime_parsed[1] == 0 and mtime_parsed[0] <= time.localtime():
-                mtime = time.mktime(mtime_parsed[0])
+            # get mtime from known date/time formats
+            for fmt in (request.user.datetime_fmt,
+                    request.cfg.datetime_fmt, request.user.date_fmt,
+                    request.cfg.date_fmt):
+                try:
+                    mtime_parsed = time.strptime(mtime, fmt)
+                except ValueError:
+                    continue
+                else:
+                    break
+
+            if mtime_parsed:
+                mtime = time.mktime(mtime_parsed)
+            else:
+                # didn't work, let's try parsedatetime
+                cal = Calendar()
+                mtime_parsed = cal.parse(mtime)
+
+                if mtime_parsed[1] == 0 and mtime_parsed[0] <= time.localtime():
+                    mtime = time.mktime(mtime_parsed[0])
+
+            # show info
+            if mtime_parsed:
                 mtime_msg = _("(!) Only pages changed since '''%s''' are being "
                         "displayed!") % request.user.getFormattedDateTime(mtime)
             else:
                 mtime_msg = _('/!\\ The modification date you entered was not '
                         'recognized and is therefore not considered for the '
                         'search results!')
-                mtime = None
         else:
             mtime_msg = None
 
