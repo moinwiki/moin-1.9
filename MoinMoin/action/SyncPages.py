@@ -189,7 +189,7 @@ class ActionClass(object):
                 raise ActionStatus(_("Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to be able to use this action."))
 
             if not params["remoteWiki"]:
-                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSyncronisation for help."))
+                raise ActionStatus(_("Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. Refer to HelpOnSynchronisation for help."))
 
             local = MoinLocalWiki(self.request, params["localPrefix"], params["pageList"])
             try:
@@ -214,7 +214,7 @@ class ActionClass(object):
                     self.log_status(self.ERROR, _("A severe error occured:"), raw_suffix=temp_file.getvalue())
                     raise
                 else:
-                    msg = u"%s" % (_("Syncronisation finished. Look below for the status messages."), )
+                    msg = u"%s" % (_("Synchronisation finished. Look below for the status messages."), )
             finally:
                 self.call_rollback_funcs()
                 # XXX aquire readlock on self.page
@@ -224,7 +224,7 @@ class ActionClass(object):
         return self.page.send_page(self.request, msg=msg)
 
     def sync(self, params, local, remote):
-        """ This method does the syncronisation work.
+        """ This method does the synchronisation work.
             Currently, it handles nearly all cases.
             The major missing part is rename handling.
             There are a few other cases left that have to be implemented:
@@ -261,7 +261,7 @@ class ActionClass(object):
         local_full_iwid = packLine([local.get_iwid(), local.get_interwiki_name()])
         remote_full_iwid = packLine([remote.get_iwid(), remote.get_interwiki_name()])
 
-        self.log_status(self.INFO, _("Syncronisation started -"), raw_suffix=" [[DateTime(%s)]]" % self.page._get_local_timestamp())
+        self.log_status(self.INFO, _("Synchronisation started -"), raw_suffix=" [[DateTime(%s)]]" % self.page._get_local_timestamp())
 
         l_pages = local.get_pages()
         r_pages = remote.get_pages(exclude_non_writable=direction != DOWN)
@@ -338,7 +338,7 @@ class ActionClass(object):
                         self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (sp.name, ))
                         return
                     if newest_tag.normalised_name != sp.name:
-                        self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore the full syncronisation history is lost for this page."), (sp.name, )) # XXX implement renames
+                        self.log_status(ActionClass.WARN, _("The item %s was renamed locally. This is not implemented yet. Therefore the full synchronisation history is lost for this page."), (sp.name, )) # XXX implement renames
                     else:
                         normalised_name = newest_tag.normalised_name
                         local_rev = newest_tag.current_rev
@@ -382,7 +382,7 @@ class ActionClass(object):
                     diff = None
 
                 # do not sync if the conflict is remote and local, or if it is local
-                # and the page has never been syncronised
+                # and the page has never been synchronised
                 if (sp.local_mime_type == MIMETYPE_MOIN and wikiutil.containsConflictMarker(current_page.get_raw_body()) # YYY direct access
                     and (remote_rev is None or is_remote_conflict)):
                     self.log_status(ActionClass.WARN, _("Skipped page %s because of a locally or remotely unresolved conflict."), (local_pagename, ))
