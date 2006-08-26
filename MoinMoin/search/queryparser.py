@@ -291,11 +291,12 @@ class TextSearch(BaseExpression):
                     continue
 
                 post = 0
-                for c in body[match.end():]:
-                    if c in config.chars_lower:
-                        post += 1
-                    else:
-                        break
+                # XXX only do this for stemmd words. how?
+                #for c in body[match.end():]:
+                #    if c in config.chars_lower:
+                #        post += 1
+                #    else:
+                #        break
 
                 matches.append(TextMatch(start=match.start(),
                         end=match.end()+post))
@@ -403,11 +404,12 @@ class TitleSearch(BaseExpression):
                     continue
 
                 post = 0
-                for c in page.page_name[match.end():]:
-                    if c in config.chars_lower:
-                        post += 1
-                    else:
-                        break
+                # XXX only do this for stemmd words. how?
+                #for c in page.page_name[match.end():]:
+                #    if c in config.chars_lower:
+                #        post += 1
+                #    else:
+                #        break
 
                 matches.append(TitleMatch(start=match.start(),
                         end=match.end()+post))
