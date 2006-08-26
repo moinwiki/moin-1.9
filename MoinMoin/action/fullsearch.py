@@ -9,6 +9,7 @@
 """
 
 import re, time
+from email.Utils import formatdate
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 from MoinMoin.support.parsedatetime.parsedatetime import Calendar
@@ -85,10 +86,12 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
 
             if mtime_parsed[1] == 0 and mtime_parsed[0] <= time.localtime():
                 mtime = time.mktime(mtime_parsed[0])
+                msg = _("(!) Only pages changed since '''%s''' are being "
+                        "displayed!") % formatdate(mtime, False)
             else:
-                msg = _('The modification date you entered was not recognized '
-                        'and is therefore not considered for the search '
-                        'results!')
+                msg = _('/!\\ The modification date you entered was not '
+                        'recognized and is therefore not considered for the '
+                        'search results!')
                 mtime = None
 
         word_re = re.compile(r'(\"[\w\s]+"|\w+)')
