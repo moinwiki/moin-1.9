@@ -156,7 +156,7 @@ class ScriptEngine:
                                   wikiutil.taintfilename(target))
         theme_dir = os.path.dirname(theme_file)
         if not os.path.exists(theme_dir):
-            os.makedirs(theme_dir, 0777 & config.umask)
+            os.makedirs(theme_dir)
         self._extractToFile(filename, theme_file)
 
     def do_installplugin(self, filename, visibility, ptype, target):
