@@ -489,9 +489,9 @@ class Search:
             from MoinMoin.search.Xapian import Index
             index = Index(request)
         except ImportError:
-            index = None
+            return None
 
-        if index and index.exists():
+        if index.exists():
             return index
 
     _xapianIndex = staticmethod(_xapianIndex)
