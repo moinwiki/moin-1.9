@@ -12,7 +12,7 @@ import re, time
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 from MoinMoin.support.parsedatetime.parsedatetime import Calendar
-
+from MoinMoin.widget import html
 
 def isTitleSearch(request):
     """ Return True for title search, False for full text search 
@@ -47,7 +47,7 @@ def searchHints(f, hints):
     """
     return ''.join([
         f.paragraph(1, attr={'class': 'searchhint'}),
-        '<br>'.join(hints),
+        html.BR().join(hints),
         f.paragraph(0),
     ])
 
