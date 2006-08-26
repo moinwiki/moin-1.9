@@ -327,7 +327,6 @@ class SearchResults:
         if self.hits:
             write(list(1))
 
-            # XXX: Do some xapian magic here
             if paging:
                 hitsTo = hitsFrom + request.cfg.search_results_per_page
                 displayHits = self.hits[hitsFrom:hitsTo]
@@ -401,7 +400,6 @@ class SearchResults:
         if self.hits:
             write(f.definition_list(1))
 
-            # XXX: Do some xapian magic here
             if paging:
                 hitsTo = hitsFrom+request.cfg.search_results_per_page
                 displayHits = self.hits[hitsFrom:hitsTo]
@@ -678,17 +676,18 @@ class SearchResults:
         if pages - int(pages) > 0.0:
             pages = int(pages) + 1
         cur_page = hitsFrom / hitsPerPage
-        l = [] # XXX do not use single letter names, esp. not "l"
+
+        textlinks = []
 
         # previous page available
         if cur_page > 0:
-            l.append(''.join([
+            textlinks.append(''.join([
                 f.url(1, href=page_url(cur_page-1)),
                 f.text(_('Previous')),
                 f.url(0)
             ]))
         else:
-            l.append('')
+            textlinks.append('')
 
         # list of pages to be shown
         page_range = range(*(
@@ -696,7 +695,7 @@ class SearchResults:
                 (0, pages > 10 and 10 or pages) or
                 (cur_page - 5, cur_page + 6 > pages and
                     pages or cur_page + 6)))
-        l.extend([''.join([
+        textlinks.extend([''.join([
                 i != cur_page and f.url(1, href=page_url(i)) or '',
                 f.text(str(i+1)),
                 i != cur_page and f.url(0) or '',
@@ -704,26 +703,30 @@ class SearchResults:
 
         # next page available
         if cur_page < pages-1:
-            l.append(''.join([
+            textlinks.append(''.join([
                 f.url(1, href=page_url(cur_page+1)),
                 f.text(_('Next')),
                 f.url(0)
             ]))
         else:
-            l.append('')
+            textlinks.append('')
 
         return ''.join([
             f.table(1, attrs={'tableclass': 'searchpages'}),
             f.table_row(1),
                 f.table_cell(1),
                 # textlinks
-                (f.table_cell(0) + f.table_cell(1)).join(l),
+                (f.table_cell(0) + f.table_cell(1)).join(textlinks),
                 f.table_cell(0),
             f.table_row(0),
             f.table(0),
         ])
 
     def formatHitInfoBar(self, page):
+        """ Returns the code for the information below a search hit
+
+        @param page: the page instance
+        """
         f = self.formatter
         _ = self.request.getText
         request = self.request
@@ -748,17 +751,23 @@ class SearchResults:
         ])
 
     def querystring(self, querydict=None):
-        """ Return query string, used in the page link """
+        """ Return query string, used in the page link
+        
+        @keyword querydict: use these parameters (default: None)
+        """
         if querydict is None:
             querydict = {}
         if 'action' not in querydict or querydict['action'] == 'AttachFile':
             querydict.update({'highlight': self.query.highlight_re()})
         querystr = wikiutil.makeQueryString(querydict)
-        #querystr = wikiutil.escape(querystr)
         return querystr
 
     def formatInfo(self, formatter, page):
-        """ Return formatted match info """
+        """ Return formatted match info
+        
+        @param formatter: the formatter instance to use
+        @param page: the current page instance
+        """
         template = u' . . . %s %s'
         template = u"%s%s%s" % (formatter.span(1, css_class="info"),
                                 template,
@@ -785,6 +794,9 @@ class SearchResults:
 
         Each request might need different translations or other user
         preferences.
+
+        @param request: current request
+        @param formatter: the formatter instance to use
         """
         self.buffer = StringIO.StringIO()
         self.formatter = formatter
@@ -795,6 +807,15 @@ class SearchResults:
 
 
 def getSearchResults(request, query, hits, start, sort, estimated_hits):
+    """ Return a SearchResults object with the specified properties
+
+    @param request: current request
+    @param query: the search query object tree
+    @param hits: list of hits
+    @param start: position to start showing the hits
+    @param sort: sorting of the results, either 'weight' or 'page_name'
+    @param estimated_hits: if true, use this estimated hit count
+    """
     result_hits = []
     for wikiname, page, attachment, match in hits:
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match

@@ -221,12 +221,14 @@ class OrExpression(AndExpression):
     operator = ' or '
 
     def search(self, page):
-        """ Search page with terms, cheap terms first
-
-        XXX Do we have any reason to sort here? we are not breaking out
-        of the search in any case.
+        """ Search page with terms
+        
+        @param page: the page instance
         """
-        self.sortByCost()
+
+        # XXX Do we have any reason to sort here? we are not breaking out
+        # of the search in any case.
+        #self.sortByCost()
         matches = []
         for term in self._subterms:
             result = term.search(page)

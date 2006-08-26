@@ -1,14 +1,10 @@
 # -*- coding: iso-8859-1 -*-
-'''
+"""
     MoinMoin - AdvancedSearch Macro
 
     [[AdvancedSearch]]
         displays advanced search dialog.
-
-    MAYBE:
-    [[AdvancedSearch(Help)]]
-        embed results of an advanced search (use more parameters...)
-'''
+"""
 
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
@@ -21,6 +17,7 @@ Dependencies = ['pages']
 
 def form_get(request, name, default=''):
     return request.form.get(name, [default])[0]
+
 
 def advanced_ui(macro):
     _ = macro._
@@ -67,6 +64,7 @@ def advanced_ui(macro):
         )])
     ])
 
+    # language selection
     searchedlang = form_get(request, 'language')
     langs = dict([(lang, lmeta['x-language-in-english'])
         for lang, lmeta in languages.items()])
@@ -82,6 +80,7 @@ def advanced_ui(macro):
         u'</select>',
     ])
 
+    # mimetype selection
     mimetype = form_get(request, 'mimetype')
     ft_dropdown = ''.join([
         u'<select name="mimetype" size="1"%s>' % disabledIfMoinSearch,
@@ -93,6 +92,7 @@ def advanced_ui(macro):
         u'</select>',
     ])
 
+    # misc search options (checkboxes)
     search_options = ''.join([
         ''.join([
             f.table_row(1),
@@ -131,7 +131,8 @@ def advanced_ui(macro):
                      _('Search in all page revisions')))
             )
     ])
-    
+
+    # the dialogue
     html = [
         u'<form method="get" action="">',
         u'<div>',
@@ -154,13 +155,6 @@ def advanced_ui(macro):
 
 
 def execute(macro, needle):
-    request = macro.request
-    _ = request.getText
-
-    # no args given
-    if needle is None:
-        return advanced_ui(macro)
-
-    return macro.formatter.rawHTML('wooza!')
-        
+    # for now, just show the advanced ui
+    return advanced_ui(macro)
 
