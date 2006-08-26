@@ -689,7 +689,7 @@ def install_package(pagename, request):
 
 def unzip_file(pagename, request):
     _ = request.getText
-    valid_pathname = lambda name: (name.find('/') == -1) and (name.find('\\') == -1)
+    valid_pathname = lambda name: ('/' not in name) and ('\\' not in name)
 
     filename, fpath = _access_file(pagename, request)
     if not filename:

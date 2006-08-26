@@ -29,7 +29,7 @@ def runTest(request):
     # Try xml
     try:
         import xml
-        request.write('PyXML is %sinstalled\n' % ('NOT ', '')[xml.__file__.find('_xmlplus') != -1])
+        request.write('PyXML is %sinstalled\n' % ('NOT ', '')['_xmlplus' in xml.__file__])
     except ImportError:
         request.write('PyXML is missing\n')
 

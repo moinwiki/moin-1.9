@@ -1121,7 +1121,7 @@ class Page:
                             target = args[1]
                         else:
                             target = self.page_name
-                        if target.find('://') >= 0:
+                        if '://' in target:
                             if targetallowed == 'internal':
                                 raise ValueError
                             elif targetallowed == 'external':
