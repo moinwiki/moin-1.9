@@ -397,6 +397,7 @@ class INPUT(EmptyElement):
         'checked': None,
         'class': None,
         'disabled': None,
+        'id': None,
         'ismap': None,
         'maxlength': None,
         'name': None,

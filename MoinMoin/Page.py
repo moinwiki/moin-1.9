@@ -348,7 +348,7 @@ class Page:
             else:
                 dirname = fullpath
             if not os.path.exists(dirname):
-                filesys.makeDirs(dirname)
+                os.makedirs(dirname)
         return underlay, fullpath
 
     def getPagePath(self, *args, **kw):
@@ -1121,7 +1121,7 @@ class Page:
                             target = args[1]
                         else:
                             target = self.page_name
-                        if target.find('://') >= 0:
+                        if '://' in target:
                             if targetallowed == 'internal':
                                 raise ValueError
                             elif targetallowed == 'external':

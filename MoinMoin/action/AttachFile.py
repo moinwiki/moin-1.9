@@ -61,7 +61,7 @@ def getAttachDir(request, pagename, create=0):
         pagename = wikiutil.quoteWikinameFS(pagename)
         attach_dir = os.path.join(request.cfg.attachments['dir'], pagename, "attachments")
         if create and not os.path.isdir(attach_dir):
-            filesys.makeDirs(attach_dir)
+            os.makedirs(attach_dir)
     else:
         # send file via CGI, from page storage area
         attach_dir = Page(request, pagename).getPagePath("attachments", check_create=create)
@@ -191,6 +191,12 @@ def add_attachment(request, pagename, target, filecontent):
             stream.close()
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
+
+        if request.cfg.xapian_search:
+            from MoinMoin.search.Xapian import Index
+            index = Index(request)
+            if index.exists():
+                index.update_page(pagename)
 
         return target
 
@@ -639,6 +645,12 @@ def del_file(pagename, request):
     os.remove(fpath)
     _addLogEntry(request, 'ATTDEL', pagename, filename)
 
+    if request.cfg.xapian_search:
+        from MoinMoin.search.Xapian import Index
+        index = Index(request)
+        if index.exists:
+            index.remove_item(pagename, filename)
+
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
 
 
@@ -689,7 +701,7 @@ def install_package(pagename, request):
 
 def unzip_file(pagename, request):
     _ = request.getText
-    valid_pathname = lambda name: (name.find('/') == -1) and (name.find('\\') == -1)
+    valid_pathname = lambda name: ('/' not in name) and ('\\' not in name)
 
     filename, fpath = _access_file(pagename, request)
     if not filename:
