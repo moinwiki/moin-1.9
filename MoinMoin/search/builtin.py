@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - search engine
+    MoinMoin - search engine internals
     
     @copyright: 2005 MoinMoin:FlorianFesti,
                 2005 MoinMoin:NirSoffer,
@@ -22,16 +22,26 @@ from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 ##############################################################################
 
 class UpdateQueue:
-    def __init__(self, file, lock_dir):
-        self.file = file
+    """ Represents a locked page queue on the disk """
+
+    def __init__(self, f, lock_dir):
+        """
+        @param f: file to write to
+        @param lock_dir: directory to save the lock files
+        """
+        self.file = f
         self.writeLock = lock.WriteLock(lock_dir, timeout=10.0)
         self.readLock = lock.ReadLock(lock_dir, timeout=10.0)
 
     def exists(self):
+        """ Checks if the queue exists on the filesystem """
         return os.path.exists(self.file)
 
     def append(self, pagename):
-        """ Append a page to queue """
+        """ Append a page to queue
+        
+        @param pagename: string to save
+        """
         if not self.writeLock.acquire(60.0):
             request.log("can't add %r to xapian update queue: can't lock queue" %
                         pagename)
@@ -59,6 +69,8 @@ class UpdateQueue:
         
         When the queue is empty, the queue file is removed, so exists()
         can tell if there is something waiting in the queue.
+
+        @param pages: list of pagenames to remove
         """
         if self.writeLock.acquire(30.0):
             try:
@@ -80,12 +92,18 @@ class UpdateQueue:
     # Private -------------------------------------------------------
 
     def _decode(self, data):
-        """ Decode queue data """
+        """ Decode queue data
+        
+        @param data: the data to decode
+        """
         pages = data.splitlines()
         return self._filterDuplicates(pages)
 
     def _filterDuplicates(self, pages):
-        """ Filter duplicates in page list, keeping the order """
+        """ Filter duplicates in page list, keeping the order
+        
+        @param pages: list of pages to filter
+        """
         unique = []
         seen = {}
         for name in pages:
@@ -115,6 +133,8 @@ class UpdateQueue:
         """ Write pages to queue file
         
         Requires queue write locking.
+
+        @param pages: list of pages to write
         """
         # XXX use tmpfile/move for atomic replace on real operating systems
         data = '\n'.join(pages) + '\n'
@@ -135,11 +155,17 @@ class UpdateQueue:
             if err.errno != errno.ENOENT:
                 raise
 
+
 class BaseIndex:
+    """ Represents a search engine index """
+
     class LockedException(Exception):
         pass
 
     def __init__(self, request):
+        """
+        @param request: current request
+        """
         self.request = request
         cache_dir = request.cfg.cache_dir
         main_dir = self._main_dir()
@@ -148,11 +174,12 @@ class BaseIndex:
             os.makedirs(self.dir)
         self.sig_file = os.path.join(main_dir, 'complete')
         lock_dir = os.path.join(main_dir, 'index-lock')
-        self.lock = lock.WriteLock(lock_dir,
-                                   timeout=3600.0, readlocktimeout=60.0)
+        self.lock = lock.WriteLock(lock_dir, timeout=3600.0, readlocktimeout=60.0)
         #self.read_lock = lock.ReadLock(lock_dir, timeout=3600.0)
-        self.queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
-                                 os.path.join(main_dir, 'update-queue-lock'))
+        self.update_queue = UpdateQueue(os.path.join(main_dir, 'update-queue'),
+                                os.path.join(main_dir, 'update-queue-lock'))
+        self.remove_queue = UpdateQueue(os.path.join(main_dir, 'remove-queue'),
+                                os.path.join(main_dir, 'remove-queue-lock'))
 
         # Disabled until we have a sane way to build the index with a
         # queue in small steps.
@@ -163,37 +190,65 @@ class BaseIndex:
         raise NotImplemented('...')
 
     def exists(self):
-        """ Check if index exists """        
+        """ Check if index exists """
         return os.path.exists(self.sig_file)
-                
+
     def mtime(self):
+        """ Modification time of the index """
         return os.path.getmtime(self.dir)
 
     def touch(self):
+        """ Touch the index """
         os.utime(self.dir, None)
-    
+
     def _search(self, query):
+        """ Actually perfom the search (read-lock acquired)
+        
+        @param query: the search query objects tree
+        """
         raise NotImplemented('...')
 
-    def search(self, query, *args, **kw):
+    def search(self, query, **kw):
+        """ Search for items in the index
+        
+        @param query: the search query objects to pass to the index
+        """
         #if not self.read_lock.acquire(1.0):
         #    raise self.LockedException
         #try:
-        hits = self._search(query, *args, **kw)
+        hits = self._search(query, **kw)
         #finally:
         #    self.read_lock.release()
         return hits
 
-    def update_page(self, page):
-        self.queue.append(page.page_name)
-        self._do_queued_updates_InNewThread()
+    def update_page(self, pagename, now=1):
+        """ Update a single page in the index
+
+        @param pagename: the name of the page to update
+        @keyword now: do all updates now (default: 1)
+        """
+        self.update_queue.append(pagename)
+        if now:
+           self._do_queued_updates_InNewThread()
+
+    def remove_item(self, pagename, attachment=None, now=1):
+        """ Removes a page and all its revisions or a single attachment
+
+        @param pagename: name of the page to be removed
+        @keyword attachment: optional, only remove this attachment of the page
+        @keyword now: do all updates now (default: 1)
+        """
+        self.remove_queue.append('%s//%s' % (pagename, attachment or ''))
+        if now:
+            self._do_queued_updates_InNewThread()
 
     def indexPages(self, files=None, mode='update'):
         """ Index all pages (and files, if given)
         
         Can be called only from a script. To index pages during a user
         request, use indexPagesInNewThread.
-        @arg files: iterator or list of files to index additionally
+        @keyword files: iterator or list of files to index additionally
+        @keyword mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
         """
         if not self.lock.acquire(1.0):
             self.request.log("can't index: can't acquire lock")
@@ -221,7 +276,7 @@ class BaseIndex:
         from threading import Thread
         indexThread = Thread(target=self._index_pages, args=(files, mode))
         indexThread.setDaemon(True)
-        
+
         # Join the index thread after current request finish, prevent
         # Apache CGI from killing the process.
         def joinDecorator(finish):
@@ -243,6 +298,20 @@ class BaseIndex:
 
         When called in a new thread, lock is acquired before the call,
         and this method must release it when it finishes or fails.
+
+        @param request: current request
+        @keyword files: iterator or list of files to index additionally
+        @keyword mode: set the mode of indexing the pages, either 'update',
+        'add' or 'rebuild'
+        """
+        raise NotImplemented('...')
+
+    def _remove_item(self, writer, page, attachment=None):
+        """ Remove a page and all its revisions from the index or just
+            an attachment of that page
+
+        @param pagename: name of the page to remove
+        @keyword attachment: optionally, just remove this attachment
         """
         raise NotImplemented('...')
 
@@ -268,7 +337,7 @@ class BaseIndex:
                     target=lockedDecorator(self._do_queued_updates),
                     args=(self._indexingRequest(self.request),))
             indexThread.setDaemon(True)
-            
+
             # Join the index thread after current request finish, prevent
             # Apache CGI from killing the process.
             def joinDecorator(finish):
@@ -276,7 +345,7 @@ class BaseIndex:
                     finish()
                     indexThread.join()
                 return func
-                
+
             self.request.finish = joinDecorator(self.request.finish)
             indexThread.start()
         except:
@@ -284,13 +353,22 @@ class BaseIndex:
             raise
 
     def _do_queued_updates(self, request, amount=5):
+        """ Perform updates in the queues (read-lock acquired)
+        
+        @param request: the current request
+        @keyword amount: how many updates to perform at once (default: 5)
+        """
         raise NotImplemented('...')
 
     def optimize(self):
+        """ Optimize the index if possible """
         raise NotImplemented('...')
 
     def contentfilter(self, filename):
-        """ Get a filter for content of filename and return unicode content. """
+        """ Get a filter for content of filename and return unicode content.
+        
+        @param filename: name of the file
+        """
         request = self.request
         mt = wikiutil.MimeType(filename=filename)
         for modulename in mt.module_name():
@@ -311,22 +389,21 @@ class BaseIndex:
             request.log("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
         return mt.mime_type(), data
 
-    def test(self, request):
-        raise NotImplemented('...')
-
     def _indexingRequest(self, request):
         """ Return a new request that can be used for index building.
         
         This request uses a security policy that lets the current user
         read any page. Without this policy some pages will not render,
-        which will create broken pagelinks index.        
+        which will create broken pagelinks index.
+
+        @param request: current request
         """
         from MoinMoin.request.CLI import Request
         from MoinMoin.security import Permissions
         request = Request(request.url)
         class SecurityPolicy(Permissions):
             def read(*args, **kw):
-                return True        
+                return True
         request.user.may = SecurityPolicy(request.user)
         return request
 
@@ -346,17 +423,28 @@ class BaseIndex:
         finally:
             f.close()
 
+
 ##############################################################################
 ### Searching
 ##############################################################################
 
 class Search:
     """ A search run """
-    
-    def __init__(self, request, query, sort='weight'):
+
+    def __init__(self, request, query, sort='weight', mtime=None,
+            historysearch=0):
+        """
+        @param request: current request
+        @param query: search query objects tree
+        @keyword sort: the sorting of the results (default: 'weight')
+        @keyword mtime: only show items newer than this timestamp (default: None)
+        @keyword historysearch: whether to show old revisions of a page (default: 0)
+        """
         self.request = request
         self.query = query
         self.sort = sort
+        self.mtime = mtime
+        self.historysearch = historysearch
         self.filtered = False
         self.fs_rootpage = "FS" # XXX FS hardcoded
 
@@ -367,38 +455,44 @@ class Search:
             hits = self._xapianSearch()
         else:
             hits = self._moinSearch()
-            
+
         # important - filter deleted pages or pages the user may not read!
         if not self.filtered:
             hits = self._filter(hits)
 
-        # when xapian was used, we won't need to sort manually
-        if self.request.cfg.xapian_search:
+        # when xapian was used, we can estimate the numer of matches
+        # Note: hits can't be estimated by xapian with historysearch enabled
+        if not self.request.cfg.xapian_index_history and \
+                self.request.cfg.xapian_search:
             self.sort = None
             mset = self._xapianMset
             estimated_hits = (
-                (mset.get_matches_estimated() == mset.get_matches_upper_bound() and
-                    mset.get_matches_estimated() == mset.get_matches_lower_bound()) and
-                '' or 'about',
+                (mset.get_matches_estimated() == mset.get_matches_upper_bound()
+                    and
+                 mset.get_matches_estimated() == mset.get_matches_lower_bound())
+                and '' or 'about',
                 mset.get_matches_estimated())
         else:
             estimated_hits = None
 
         return getSearchResults(self.request, self.query, hits, start,
                 self.sort, estimated_hits)
-        
 
     # ----------------------------------------------------------------
     # Private!
 
     def _xapianIndex(request):
+        """ Get the xapian index if possible
+
+        @param request: current request
+        """
         try:
             from MoinMoin.search.Xapian import Index
             index = Index(request)
         except ImportError:
-            index = None
+            return None
 
-        if index and index.exists():
+        if index.exists():
             return index
 
     _xapianIndex = staticmethod(_xapianIndex)
@@ -407,32 +501,35 @@ class Search:
         """ Search using Xapian
         
         Get a list of pages using fast xapian search and
-        return moin search in those pages.
+        return moin search in those pages if needed.
         """
         clock = self.request.clock
         pages = None
         index = self._xapianIndex(self.request)
+
         if index and self.query.xapian_wanted():
             clock.start('_xapianSearch')
             try:
                 from MoinMoin.support import xapwrap
+
                 clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
                 self.request.log("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
-                enq, mset, hits = index.search(query, sort=self.sort)
+                enq, mset, hits = index.search(query, sort=self.sort,
+                        historysearch=self.historysearch)
                 clock.stop('_xapianQuery')
+
                 #self.request.log("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for k, v in d.items():
                         d[k] = d[k].decode(config.charset)
                     return d
-                #pages = [{'uid': hit['uid'], 'values': dict_decode(hit['values'])}
-                #        for hit in hits]
                 pages = [dict_decode(hit['values']) for hit in hits]
                 self.request.log("xapianSearch: finds pages: %r" % pages)
+
                 self._xapianEnquire = enq
                 self._xapianMset = mset
                 self._xapianIndex = index
@@ -442,6 +539,7 @@ class Search:
             #    pages = []
 
             try:
+                # xapian handled the full query
                 if not self.query.xapian_need_postproc():
                     clock.start('_xapianProcess')
                     try:
@@ -453,22 +551,31 @@ class Search:
         else:
             # we didn't use xapian in this request
             self.request.cfg.xapian_search = 0
-        
+
+        # some postprocessing by _moinSearch is required
         return self._moinSearch(pages)
 
     def _xapianMatchDecider(self, term, pos):
-        if term[0] == 'S':      # TitleMatch
-            return TitleMatch(start=pos, end=pos+len(term)-1)
-        else:                   # TextMatch (incl. headers)
-            return TextMatch(start=pos, end=pos+len(term))
+        """ Returns correct Match object for a Xapian match
         
-    def _xapianMatch(self, page, uid):
-        """ Get all relevant Xapian matches per document id """
+        @param term: the term as string
+        @param pos: starting position of the match
+        """
+        if term[0] == 'S': # TitleMatch
+            return TitleMatch(start=pos, end=pos+len(term)-1)
+        else: # TextMatch (incl. headers)
+            return TextMatch(start=pos, end=pos+len(term))
+
+    def _xapianMatch(self, uid, page=None):
+        """ Get all relevant Xapian matches per document id
+        
+        @param uid: the id of the document in the xapian index
+        """
         positions = {}
         term = self._xapianEnquire.get_matching_terms_begin(uid)
         while term != self._xapianEnquire.get_matching_terms_end(uid):
             term_name = term.get_term()
-            for pos in self._xapianIndex.termpositions(uid,term.get_term()):
+            for pos in self._xapianIndex.termpositions(uid, term.get_term()):
                 if pos not in positions or \
                         len(positions[pos]) < len(term_name):
                     positions[pos] = term_name
@@ -477,7 +584,7 @@ class Search:
             in positions.iteritems()]
 
         if not matches:
-            return [Match()]    # dummy for metadata, we got a match!
+            return [Match()] # dummy for metadata, we got a match!
 
         return matches
 
@@ -486,6 +593,8 @@ class Search:
         
         Return list of tuples (page, match). The list may contain
         deleted pages or pages the user may not read.
+
+        @keyword pages: optional list of pages to search in
         """
         self.request.clock.start('_moinSearch')
         from MoinMoin.Page import Page
@@ -496,14 +605,18 @@ class Search:
         hits = self._getHits(pages, self._moinMatch)
         self.request.clock.stop('_moinSearch')
         return hits
-    
-    def _moinMatch(self, page, uid):
-        """ Just kick off regular moinSearch """
+
+    def _moinMatch(self, page, uid=None):
+        """ Get all matches from regular moinSearch
+        
+        @param page: the current page instance
+        """
         return self.query.search(page)
 
     def _getHits(self, pages, matchSearchFunction):
         """ Get the hit tuples in pages through matchSearchFunction """
         hits = []
+        revisionCache = {}
         fs_rootpage = self.fs_rootpage
         for hit in pages:
             if 'values' in hit:
@@ -516,8 +629,17 @@ class Search:
             wikiname = valuedict['wikiname']
             pagename = valuedict['pagename']
             attachment = valuedict['attachment']
+
+            if 'revision' in valuedict and valuedict['revision']:
+                revision = int(valuedict['revision'])
+            else:
+                revision = 0
+
             if wikiname in (self.request.cfg.interwikiname, 'Self'): # THIS wiki
-                page = Page(self.request, pagename)
+                page = Page(self.request, pagename, rev=revision)
+                if not self.historysearch and revision and \
+                        page.getRevList()[0] != revision:
+                    continue
                 if attachment:
                     if pagename == fs_rootpage: # not really an attachment
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
@@ -525,11 +647,17 @@ class Search:
                     else:
                         hits.append((wikiname, page, attachment, None))
                 else:
-                    matches = matchSearchFunction(page, uid)
+                    matches = matchSearchFunction(page=page, uid=uid)
                     if matches:
+                        if not self.historysearch and \
+                                pagename in revisionCache and \
+                                revisionCache[pagename][0] < revision:
+                            hits.remove(revisionCache[pagename][1])
+                            del revisionCache[pagename]
                         hits.append((wikiname, page, attachment, matches))
+                        revisionCache[pagename] = (revision, hits[-1])
             else: # other wiki
-                hits.append((wikiname, pagename, attachment, None))
+                hits.append((wikiname, pagename, attachment, None, revision))
         return hits
 
     def _getPageList(self):
@@ -540,22 +668,27 @@ class Search:
         will happen later on the hits, which is faster with current
         slow storage.
         """
-        filter = self.query.pageFilter()
-        if filter:
+        filter_ = self.query.pageFilter()
+        if filter_:
             # There is no need to filter the results again.
             self.filtered = True
-            return self.request.rootpage.getPageList(filter=filter)
+            return self.request.rootpage.getPageList(filter=filter_)
         else:
             return self.request.rootpage.getPageList(user='', exists=0)
-        
+
     def _filter(self, hits):
-        """ Filter out deleted or acl protected pages """
+        """ Filter out deleted or acl protected pages
+        
+        @param hits: list of hits
+        """
         userMayRead = self.request.user.may.read
         fs_rootpage = self.fs_rootpage + "/"
         thiswiki = (self.request.cfg.interwikiname, 'Self')
-        filtered = [(wikiname, page, attachment, match) for wikiname, page, attachment, match in hits
-                    if not wikiname in thiswiki or
+        filtered = [(wikiname, page, attachment, match)
+                for wikiname, page, attachment, match in hits
+                    if (not wikiname in thiswiki or
                        page.exists() and userMayRead(page.page_name) or
-                       page.page_name.startswith(fs_rootpage)]
+                       page.page_name.startswith(fs_rootpage)) and
+                       (not self.mtime or self.mtime <= page.mtime_usecs()/1000000)]
         return filtered
 

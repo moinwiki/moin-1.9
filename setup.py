@@ -247,6 +247,7 @@ only requiring a Python installation.
         'MoinMoin.stats',
         'MoinMoin.support',
         'MoinMoin.support.xapwrap',
+        'MoinMoin.support.parsedatetime',
         'MoinMoin.theme',
         'MoinMoin.util',
         'MoinMoin.widget',
