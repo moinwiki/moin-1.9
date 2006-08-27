@@ -112,8 +112,9 @@ class EditLogLine:
                     request.formatter.text(name) +
                     request.formatter.url(0))
         elif kind == 'ip':
-            idx = info.find('.')
-            if idx == -1:
+            try:
+                idx = info.index('.')
+            except ValueError:
                 idx = len(info)
             title = wikiutil.escape('???' + title)
             text = wikiutil.escape(info[:idx])

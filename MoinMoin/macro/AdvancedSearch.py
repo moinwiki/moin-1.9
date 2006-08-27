@@ -1,43 +1,53 @@
 # -*- coding: iso-8859-1 -*-
-'''
+"""
     MoinMoin - AdvancedSearch Macro
 
     [[AdvancedSearch]]
         displays advanced search dialog.
-
-    MAYBE:
-    [[AdvancedSearch(Help)]]
-        embed results of an advanced search (use more parameters...)
-'''
+"""
 
 from MoinMoin import config, wikiutil, search
 from MoinMoin.i18n import languages
+from MoinMoin.support import sorted
+from MoinMoin.widget import html
+from MoinMoin.util.web import makeSelection
 
 import mimetypes
 
 Dependencies = ['pages']
 
-try:
-    sorted
-except NameError:
-    def sorted(l, *args, **kw):
-        l = l[:]
-        l.sort(*args, **kw)
-        return l
+
+def form_get(request, name, default=''):
+    """ Fetches a form field
+    
+    @param request: current request
+    @param name: name of the field
+    @keyword default: value if not present (default: '')
+    """
+    return request.form.get(name, [default])[0]
+
 
 def advanced_ui(macro):
+    """ Returns the code for the advanced search user interface
+
+    @param macro: current macro instance
+    """
     _ = macro._
     f = macro.formatter
+    request = macro.request
+
+    disabledIfMoinSearch = not request.cfg.xapian_search and \
+            ' disabled="disabled"' or ''
 
     search_boxes = ''.join([
         f.table_row(1),
         f.table_cell(1, attrs={'rowspan': '6', 'class': 'searchfor'}),
-        f.text(_('Search for pages')),
+        f.text(_('Search for items')),
         f.table_cell(0),
         ''.join([''.join([
             f.table_row(1),
             f.table_cell(1),
-            f.text(_(txt)),
+            f.text(txt),
             f.table_cell(0),
             f.table_cell(1),
             f.rawHTML(input_field),
@@ -45,39 +55,45 @@ def advanced_ui(macro):
             f.table_row(0),
         ]) for txt, input_field in (
             (_('containing all the following terms'),
-                '<input type="text" name="and_terms" size="30">'),
+                '<input type="text" name="and_terms" size="30" value="%s">'
+                % (form_get(request, 'and_terms') or form_get(request, 'value'))),
             (_('containing one or more of the following terms'),
-                '<input type="text" name="or_terms" size="30">'),
+                '<input type="text" name="or_terms" size="30" value="%s">'
+                % form_get(request, 'or_terms')),
             (_('not containing the following terms'),
-                '<input type="text" name="not_terms" size="30">'),
+                '<input type="text" name="not_terms" size="30" value="%s">'
+                % form_get(request, 'not_terms')),
             #('containing only one of the following terms',
-            #    '<input type="text" name="xor_terms" size="30">'),
+            #    '<input type="text" name="xor_terms" size="30" value="%s">'
+            #    % form_get(request, 'xor_terms')),
             # TODO: dropdown-box?
             (_('belonging to one of the following categories'),
-                '<input type="text" name="categories" size="30">'),
-            (_('last modified since (XXX)'),
-                '<input type="text" name="mtime" size="30" value="">'),
+                '<input type="text" name="categories" size="30" value="%s">'
+                % form_get(request, 'categories')),
+            (_('last modified since (e.g. last 2 weeks)'),
+                '<input type="text" name="mtime" size="30" value="%s">'
+                % form_get(request, 'mtime')),
         )])
     ])
 
+    # language selection
+    searchedlang = form_get(request, 'language')
     langs = dict([(lang, lmeta['x-language-in-english'])
-        for lang, lmeta in sorted(languages.items())])
-    lang_dropdown = ''.join([
-        u'<select name="language" size="1">',
-        u'<option value="" selected>%s</option>' % _('any language'),
-        ''.join(['<option value="%s">%s</option>' % lt for lt in
-            langs.items()]),
-        u'</select>',
-    ])
+        for lang, lmeta in languages.items()])
+    userlang = macro.request.lang
+    lang_select = makeSelection('language',
+            [('', _('any language')), (userlang, langs[userlang])] +
+                sorted(langs.items(), key=lambda i: i[1]),
+            searchedlang)
 
-    ft_dropdown = ''.join([
-        u'<select name="mimetype" size="1">',
-        u'<option value="" selected>%s</option>' % _('any type'),
-        ''.join(['<option value="%s">%s</option>' % (m[1], '*%s - %s' % m)
-            for m in sorted(mimetypes.types_map.items())]),
-        u'</select>',
-    ])
+    # mimetype selection
+    mimetype = form_get(request, 'mimetype')
+    mt_select = makeSelection('mimetype',
+            [(m[1], '*%s - %s' % m) for m in sorted(mimetypes.types_map.items())],
+            mimetype)
 
+
+    # misc search options (checkboxes)
     search_options = ''.join([
         ''.join([
             f.table_row(1),
@@ -85,24 +101,39 @@ def advanced_ui(macro):
             txt[0],
             f.table_cell(0),
             f.table_cell(1, colspan=2),
-            txt[1],
+            unicode(txt[1]),
+            txt[2],
             f.table_cell(0),
             f.table_row(0),
             ]) for txt in (
-                (_('Language'), lang_dropdown),
-                (_('File Type'), ft_dropdown),
-                ('', '<input type="checkbox" name="titlesearch" value="1">%s</input>' %
-                _('Search only in titles')),
-                ('', '<input type="checkbox" name="case" value="1">%s</input>' %
-                _('Case-sensitive search')),
-                ('', '<input type="checkbox" name="includeunderlay" value="1" checked>%s'
-                    '</input>' % _('Include underlay')),
-                ('', '<input type="checkbox" name="onlysystempages" value="1">%s'
-                    '</input>' % _('Only system pages')),
+                (_('Language'), unicode(lang_select), ''),
+                (_('File Type'), unicode(mt_select), ''),
+                ('', html.INPUT(type='checkbox', name='titlesearch',
+                    value='1', checked=form_get(request, 'titlesearch'),
+                    id='titlesearch'),
+                    '<label for="titlesearch">%s</label>' % _('Search only in titles')),
+                ('', html.INPUT(type='checkbox', name='case', value='1',
+                    checked=form_get(request, 'case'), id='case'),
+                    '<label for="case">%s</label>' % _('Case-sensitive search')),
+                ('', html.INPUT(type='checkbox', name='excludeunderlay',
+                    value='1', checked=form_get(request, 'excludeunderlay'),
+                    id='excludeunderlay'),
+                    '<label for="excludeunderlay">%s</label>' % _('Exclude underlay')),
+                ('', html.INPUT(type='checkbox', name='nosystemitems',
+                    value='1', checked=form_get(request, 'nosystemitems'),
+                    id='nosystempages'),
+                    '<label for="nosystempages">%s</label>' % _('No system items')),
+                ('', html.INPUT(type='checkbox', name='historysearch',
+                    value='1', checked=form_get(request, 'historysearch'),
+                    disabled=(not request.cfg.xapian_search or
+                        not request.cfg.xapian_index_history),
+                    id='historysearch'),
+                    '<label for="historysearch">%s</label>' % _('Search in all page revisions'))
             )
     ])
-    
-    html = [
+
+    # the dialogue
+    return f.rawHTML('\n'.join([
         u'<form method="get" action="">',
         u'<div>',
         u'<input type="hidden" name="action" value="fullsearch">',
@@ -118,19 +149,10 @@ def advanced_ui(macro):
         f.table(0),
         u'</div>',
         u'</form>',
-    ]
-
-    return f.rawHTML('\n'.join(html))
+    ]))
 
 
 def execute(macro, needle):
-    request = macro.request
-    _ = request.getText
-
-    # no args given
-    if needle is None:
-        return advanced_ui(macro)
-
-    return macro.formatter.rawHTML('wooza!')
-        
+    # for now, just show the advanced ui
+    return advanced_ui(macro)
 

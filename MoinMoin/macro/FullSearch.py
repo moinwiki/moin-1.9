@@ -105,8 +105,7 @@ def execute(macro, needle):
     needle = needle.strip()
 
     # Search the pages and return the results
-    results = search.searchPages(request, needle)
-    results.sortByPagename()
+    results = search.searchPages(request, needle, sort='page_name')
 
     return results.pageList(request, macro.formatter, paging=False)
 

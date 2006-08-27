@@ -85,7 +85,7 @@ def _loadDict(request):
     else:
         wordsfiles = _getWordsFiles(request)
         if dbhash:
-            wordsdict = dbhash.open(cachename, 'n', 0666 & config.umask)
+            wordsdict = dbhash.open(cachename, 'n')
         else:
             wordsdict = {}
 

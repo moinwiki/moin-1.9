@@ -73,7 +73,7 @@ def sendmail(mfrom, mto, subject, text):
 def notify_maintainer(lang, mail_text):
     mailaddr = languages[lang][4]
     rc = None
-    if mailaddr and mailaddr.find('***vacant***') < 0:
+    if mailaddr and '***vacant***' not in mailaddr:
         text = mail_text % locals()
         rc = sendmail(mail_from, [mailaddr], mail_subject, text)
     return rc
