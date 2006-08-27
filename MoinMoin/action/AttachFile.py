@@ -192,6 +192,12 @@ def add_attachment(request, pagename, target, filecontent):
 
         _addLogEntry(request, 'ATTNEW', pagename, target)
 
+        if request.cfg.xapian_search:
+            from MoinMoin.search.Xapian import Index
+            index = Index(request)
+            if index.exists():
+                index.update_page(pagename)
+
         return target
 
 
@@ -638,6 +644,12 @@ def del_file(pagename, request):
     # delete file
     os.remove(fpath)
     _addLogEntry(request, 'ATTDEL', pagename, filename)
+
+    if request.cfg.xapian_search:
+        from MoinMoin.search.Xapian import Index
+        index = Index(request)
+        if index.exists:
+            index.remove_item(pagename, filename)
 
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
 

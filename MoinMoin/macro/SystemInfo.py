@@ -126,7 +126,13 @@ def execute(Macro, args):
                     _('N/A'))
         xapRow += ', %s, %s' % (available, mtime)
 
+        import xapian
+        xapVersion = xapian.xapian_version_string()
+    else:
+        xapVersion = _('not installed')
+
     row(_('Xapian search'), xapRow)
+    row(_('Xapian Version'), xapVersion)
     row(_('Xapian stemming'), xapState[request.cfg.xapian_stemming])
 
     row(_('Active threads'), t_count or _('N/A'))
