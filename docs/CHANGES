@@ -218,14 +218,15 @@ Version 1.6.current:
     * Fixed typo in NewPage that lead to a NameError.
 
   Other changes:
-    * we use (again) the same browser compatibility check as FCKeditor uses
-      internally, too. So if GUI editor invocation is broken due to browser
-      compatibility issues or a wrong browser version check, please file a bug
-      at FCKeditor development or browser development.
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
       You need to change this in your wikiconfig.py or farmconfig.py file.
       See MoinMoin/multiconfig.py for an alternative way if you can't do that.
+    * HINT: you need to change your auth stuff, the new way is:
+      from MoinMoin.auth import moin_login, moin_session
+      from MoinMoin.auth.http import http
+      auth = [http, moin_login, moin_session]
+      Do it in a similar way for other auth methods.
     * HINT: you need to change your url_prefix setting in 2 ways:
       1. The setting is now called url_prefix_static (to make it more clear
          that we mean the static stuff, not the wiki script url).
@@ -258,6 +259,10 @@ Version 1.6.current:
       set url_prefix_action in your wikiconfig to e.g. "action".
     * We don't use ...?action=show any more for the "Clear message" links shown
       in the message boxes, but directly link to the page.
+    * we use (again) the same browser compatibility check as FCKeditor uses
+      internally, too. So if GUI editor invocation is broken due to browser
+      compatibility issues or a wrong browser version check, please file a bug
+      at FCKeditor development or browser development.
 
 Version 1.5-current:
    * moin.fcg improved - if you use FastCGI, you must use the new file:
