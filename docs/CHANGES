@@ -1595,6 +1595,27 @@ Version 1.3.0 (2004-12-06, Revision moin--main--1.3--patch-400)
        See the EditedSystemPages page for a list of pages that exist in both
        data and underlay directory (use this page as admin!).
 
+       When updating from 1.2 or lower to 1.3 or higher, you will want to
+       clean out the copies of the system pages in your {{{wiki/data}}}
+       directory. All of these pages will now reside in the underlay
+       directory. If you have system pages from 1.2 or lower in your
+       wiki/data/ directory, they will overshadow the more up-to-date
+       documentation. This can be done using the following manual procedure:
+       1. You have just converted from 1.2 or lower to post-1.3.
+       2. Go to your wiki's EditedSystemPages.
+       3. Find all the pages that are MoinMoin system or help pages. You will
+          know if it is one of those pages because it is not your page.
+       4. Check if it is okay to delete by either:
+          1. Using the this page "info" link and check the Revision History to
+             see if it is greater than 1. If so, there are modifications, so do
+             not delete the page and evaluate the modifications to see if they
+             are necessary.
+          2. Using your file browser (Windows Explorer, etc) to go to your
+             wiki/data/<<systemPage>>/revisions/ directory and to see if there
+             are no modifications. If there are, do not delete the page and
+             evaluate the modifications to see if they are necessary.
+       5. Delete that wiki/data/<<systemPage>> using your file browser.
+
     Multiple languages
 
       * New file name quoting method allow 50% longer page names in languages
@@ -2072,9 +2093,8 @@ Other changes:
 Version 1.2 (2004-02-20, Revision 1.183)
 
 New features:
-    * MoinMoin now requires Python >=2.2.2.
-      You get even better results with Python2.3 (20-30% more speed,
-      sometimes even much more).
+    * MoinMoin now requires Python >=2.2.2., we recommend to use Python >=2.3.2
+      (with 2.3.x, MoinMoin runs about 20-30% faster).
     * by refactoring request processing, we made it possible to run moin under
       persistent environments:
         * twisted-web (http://twistedmatrix.com)
@@ -2152,7 +2172,19 @@ Fixes:
     * removed target attribute from links, also [^NewWindow] markup - this
       is a HTML 3.2 feature and not valid in HTML 4.01
     * updated TWikiDrawPlugin to 20021003 version, with further modifications
-      including source. It can draw imagemaps now!
+      including source. It can draw imagemaps now and saves PNG. On display a
+      GIF will be searched if no PNG is found. We recommend changing all GIFs
+      to indexed PNGs cause this fallback might disappear in later versions.
+
+      Sample code using bash and ImageMagick (be sure you know what you do):
+      for draw in `find /path/to/wiki/data -name \*.draw`; do
+        file=`dirname $draw`/`basename $draw .draw`
+        if [ -e "${file}.gif" ]; then
+          echo "Converting ${file}.gif to ${file}.png"
+          convert "${file}.gif" "${file}.png"
+        fi
+      done
+
     * fixed email headers and encoding
     * Changed moin-usercheck to adhere to scripting standards; no
       proprietary config changes needed any more (added --config);
@@ -2160,9 +2192,39 @@ Fixes:
     * config.umask now defaults to 0770 - if you give world r/w access, ACLs
       could be rather pointless...
 
+Removed config variables:
+    * external_diff (not needed any more, we have internal diff now)
+    * shared_metadb (wasn't implemented for long - we will re-add it, when it is)
+    * title1/2 (please use page_header1/2)
+    * page_icons_up
+
+Changed config variables:
+    * changed_time_fmt (removed some html and brackets around time from default)
+    * html_head (default is empty string now)
+    * page_footer1/2 (default is empty string now)
+    * page_icons (is now a list of icon names, not html any more)
+    * umask (default is 0770 now, not world r/w any more == more secure)
+
+New config variables (see MoinMaster:HelpOnConfiguration):
+    * cookie_lifetime
+    * mail_login
+    * page_credits
+    * page_dict_regex
+    * page_group_regex
+    * page_header1/2
+    * page_iconbar 
+    * page_icons_table
+    * page_license_enabled
+    * page_license_page
+    * theme_default
+    * theme_force
+    * tz_offset 
+
 Other:
     * lots of internal code refactoring and optimization
     * began moving src code documentation to epydoc, see "make epydoc"
+    * the URL for the RecentChanges RSS feed changed. It now only works with
+      ...?action=rss_rc.
 
 Known problems:
     * theme support is neither complete (although covering most important
@@ -2179,8 +2241,40 @@ Known problems:
       caching speedup, you can also switch off caching (see docs on
       caching_formats).
 
+Themeing and HTML/CSS cleanup:
+    * Browsers with completely broken CSS support (like e.g. Netscape 4.x) are
+      no longer supported. If you still need to support them, do not upgrade to
+      moin 1.2. If you still use these browsers, we recommend that you upgrade
+      your browser first (Mozilla 1.5 has nice and standards compliant HTML and
+      CSS support and is available as Free Software for Windows, Linux and Mac).
+    * If you changed any html in code or by config you will have to check if it
+      still works. For the usual stuff, look into `MoinMoin/theme/classic.py`
+      and `classic/css/screen.css`. For config defaults of the html fragments,
+      read `MoinMoin/config.py`. If you want to modify a theme, don't simply
+      change classic, but copy or subclass it under a new theme name.
+    * because of the new theme support the layout of the `htdocs` directory
+      changed:
+      * Instead of using icons under `img/` and css under `css/`, there will
+        be an additional `themename/` directory in between, e.g. `classic/img/`
+        and `classic/css/`. If you added own icons, you may have to copy them
+        to the themes directory.
+      * The filename of the CSS file has changed to the media type, so the
+        normal one used for screen output has changed name from `moinmoin.css`
+        to `screen.css`. There also were quite some changes and enhancements to
+        the CSS files, so better use the new ones.
+    * config.css_url was removed
+
+Plugins:
+  * we use a new plugin loader that requires a correct `__init__.py` file in
+    the plugin directories. See the directory `wiki/data/plugin/` in the
+    distribution archive and just copy it over to your wiki's plugin directory.
+
 
 Version 1.1 (2003-11-29, Revision 1.178)
+
+Version 1.1 requires Python 2.0 or higher, we recommend to use Python 2.2
+(version 2.2.2 if that is available on your host) or even better >= 2.3.2
+(with 2.3.x, MoinMoin runs about 20-30% faster).
 
 New features:
   Configuration:
@@ -2189,7 +2283,7 @@ New features:
     * "config.page_category_regex" defines what pages are categories
     * replaced `config.page_template_ending` by a more flexible setting
       named `config.page_template_regex`
-    * the same with config.page_form_regex
+    * the same with config.page_form_regex (was: page_form_ending)
     * "config.page_group_regex" defines what pages are group definitions
       Currently groups are used for "user groups" (see ACLs) and "page
       groups" (see AllSystemPagesGroup).
@@ -2207,10 +2301,12 @@ New features:
       entries of the form "[url linktext]" just like in wiki pages
     * if a quick link starts with '^', it opens in a new window; help
       now opens in a new window also
-    * `config.smileys` for user-defined smileys
+    * `config.smileys` for user-defined smileys (default: `{}`) - a dict
+      with the markup as the key and a tuple of width, height, border, image
+      name as the value).
     * `config.hosts_deny` to forbid access based on IP address
-    * `config.mail_login` can be set to "user pwd", if you need to
-      use SMTP AUTH
+    * `config.mail_login` can be set to username and password separated by
+      a space, e.g. "username userpass", if you need to use SMTP AUTH
     * `config.edit_locking` can be set to None (old behaviour, no
       locking), 'warn <timeout mins>' (warn about concurrent edits, but
       do not enforce anything), or 'lock <timeout mins>' (strict locking)
@@ -2223,6 +2319,8 @@ New features:
       override them in moin_config.py, if needed.
     * `config.shared_intermap` can be a list of filenames (instead of a
       single string)
+    * If you have added your own `SecurityPolicy`, the class interface for
+      that has changed (see `security.py`).
 
   Authenticaton / Authorization:
     * added ACL support, written by Gustavo Niemeyer of Conectiva and
@@ -2347,6 +2445,8 @@ Version 1.0 (2002-05-10, Revision 1.159)
 
 THIS IS THE LAST RELEASE WITH PYTHON 1.5.2 SUPPORT! If severe bugs
 should occur, a maintenance release will fix them.
+
+Some optional features (like statistics) already require Python 2.0.
 
 New features:
     * security fix: "allow_xslt" has to be set to 1 in order to enable
