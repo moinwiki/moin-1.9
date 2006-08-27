@@ -194,7 +194,7 @@ class DefaultConfig:
     acl_rights_valid = ['read', 'write', 'delete', 'revert', 'admin']
 
     actions_excluded = [] # ['DeletePage', 'AttachFile', 'RenamePage', 'test', ]
-    allow_xslt = 0
+    allow_xslt = False
     attachments = None # {'dir': path, 'url': url-prefix}
     auth = [authmodule.moin_login, authmodule.moin_session, ]
 
@@ -210,7 +210,7 @@ class DefaultConfig:
     backup_storage_dir = '/tmp'
     backup_restore_target_dir = '/tmp'
 
-    bang_meta = 1
+    bang_meta = True
     caching_formats = ['text_html']
     changed_time_fmt = '%H:%M'
 
@@ -220,7 +220,7 @@ class DefaultConfig:
     # chart_options = {'width = 720, 'height': 540}
     chart_options = None
 
-    config_check_enabled = 0
+    config_check_enabled = False
 
     cookie_domain = None # use '.domain.tld" for a farm with hosts in that domain
     cookie_path = None   # use '/wikifarm" for a farm with pathes below that path
@@ -314,7 +314,7 @@ reStructuredText Quick Reference
     mail_import_secret = ""
 
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
-    nonexist_qm = 0
+    nonexist_qm = False
 
     page_credits = [
         '<a href="http://moinmoin.wikiwikiweb.de/">MoinMoin Powered</a>',
@@ -334,7 +334,7 @@ reStructuredText Quick Reference
     page_group_regex = u'[a-z0-9]Group$'
     page_template_regex = u'[a-z0-9]Template$'
 
-    page_license_enabled = 0
+    page_license_enabled = False
     page_license_page = u'WikiLicense'
 
     # These icons will show in this order in the iconbar, unless they
@@ -362,13 +362,13 @@ reStructuredText Quick Reference
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
-    show_hosts = 1
-    show_interwiki = 0
-    show_login = 1
+    show_hosts = True
+    show_interwiki = False
+    show_login = True
     show_names = True
     show_section_numbers = 0
-    show_timings = 0
-    show_version = 0
+    show_timings = False
+    show_version = False
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
     superuser = [] # list of unicode user names that have super powers :)
@@ -507,8 +507,8 @@ reStructuredText Quick Reference
     unzip_attachments_space = 200.0 * 1000**2
     unzip_attachments_count = 51 # 1 zip file + 50 files contained in it
 
-    xmlrpc_putpage_enabled = 0 # if 0, putpage will write to a test page only
-    xmlrpc_putpage_trusted_only = 1 # if 1, you will need to be http auth authenticated
+    xmlrpc_putpage_enabled = False # if False, putpage will write to a test page only
+    xmlrpc_putpage_trusted_only = True # if True, you will need to be http auth authenticated
 
     SecurityPolicy = None
 
