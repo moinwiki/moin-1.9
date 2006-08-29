@@ -806,7 +806,7 @@ class convert_tree(visitor):
 
     def process_tt(self, node):
         text = self.node_list_text_only(node.childNodes).replace("\n", " ")
-        if node.getAttribute("css") == "backtick":
+        if node.getAttribute("class") == "backtick":
             self.text.append("`%s`" % text)
         else:
             self.text.append("{{{%s}}}" % text)
