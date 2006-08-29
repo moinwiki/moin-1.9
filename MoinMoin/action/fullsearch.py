@@ -47,7 +47,7 @@ def searchHints(f, hints):
     """
     return ''.join([
         f.paragraph(1, attr={'class': 'searchhint'}),
-        html.BR().join(hints),
+        unicode(html.BR()).join(hints),
         f.paragraph(0),
     ])
 
