@@ -195,7 +195,7 @@ class Translation(object):
                 if has_wikimarkup:
                     # use the wiki parser now to replace some wiki markup with html
                     try:
-                        uc_texts[ukey] = self.formatMarkup(request, utext)
+                        uc_texts[ukey] = self.formatMarkup(request, utext) # XXX RECURSION!!! Calls gettext via markup
                     except: # infinite recursion or crash
                         if debug:
                             request.log("i18n: crashes in language %s on string: %s" % (lang, text))
