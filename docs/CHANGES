@@ -216,6 +216,7 @@ Version 1.6.current:
     * Fixed request.cfg corruption in the fckdialog code that could lead
       to e.g. stalled servers (thanks to David Linke)
     * Fixed typo in NewPage that lead to a NameError.
+    * Fixed standalone server failing to shutdown if interface == "".
 
   Other changes:
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you

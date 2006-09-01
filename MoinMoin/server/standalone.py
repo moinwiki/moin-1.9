@@ -81,7 +81,10 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
         self._abort = 1
         try:
             import httplib
-            req = httplib.HTTP('%s:%d' % self.server_address)
+            addr = self.server_address
+            if not addr[0]:
+                addr = ("localhost", addr[1])
+            req = httplib.HTTP('%s:%d' % addr)
             req.connect()
             req.putrequest('DIE', '/')
             req.endheaders()
