@@ -1052,16 +1052,8 @@ class Page:
             from MoinMoin.formatter.text_html import Formatter
             self.formatter = Formatter(request, store_pagelinks=1)
         elif not self.formatter:
-            omt = wikiutil.MimeType(self.output_mimetype)
-            for module_name in omt.module_name():
-                try:
-                    Formatter = wikiutil.importPlugin(request.cfg, "formatter", module_name, "Formatter")
-                    self.formatter = Formatter(request)
-                    break
-                except wikiutil.PluginMissingError:
-                    pass
-            else:
-                raise NotImplementedError("Plugin missing error!") # XXX what now?
+            Formatter = wikiutil.searchAndImportPlugin(request.cfg, "formatter", self.output_mimetype)
+            self.formatter = Formatter(request)
         request.formatter = self.formatter
         self.formatter.setPage(self)
         if self.hilite_re:
@@ -1258,15 +1250,7 @@ class Page:
                     request.write(''.join(pi_formtext))
 
         # Load the parser
-        mt = wikiutil.MimeType(self.pi_format)
-        for module_name in mt.module_name():
-            try:
-                Parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
-                break
-            except wikiutil.PluginMissingError:
-                pass
-        else:
-            raise NotImplementedError("No matching parser") # XXX what do we use if nothing at all matches?
+        Parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi_format)
             
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1350,15 +1334,7 @@ class Page:
             self.getFormatterName() in self.cfg.caching_formats):
             # Everything is fine, now check the parser:
             if parser is None:
-                mt = wikiutil.MimeType(self.pi_format)
-                for module_name in mt.module_name():
-                    try:
-                        parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
-                        break
-                    except wikiutil.PluginMissingError:
-                        pass
-                else:
-                    raise NotImplementedError("no matching parser") # XXX what now?
+                parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi_format)
             return getattr(parser, 'caching', False)
         return False
 

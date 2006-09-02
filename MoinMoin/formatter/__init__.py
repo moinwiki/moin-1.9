@@ -309,15 +309,8 @@ class FormatterBase:
         """ parser_name MUST be valid!
             writes out the result instead of returning it!
         """
-        mt = wikiutil.MimeType(parser_name)
-        for module_name in mt.module_name():
-            try:
-                parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
-                break
-            except wikiutil.PluginMissingError:
-                pass
-        else:
-            raise "Parser not found" # XXX what now?
+        parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", parser_name)
+
         args = self._get_bang_args(lines[0])
         if args is not None:
             lines = lines[1:]
