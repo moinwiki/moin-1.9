@@ -12,7 +12,6 @@ import re, time
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 from MoinMoin.support.parsedatetime.parsedatetime import Calendar
-from MoinMoin.widget import html
 
 def isTitleSearch(request):
     """ Return True for title search, False for full text search 
@@ -47,7 +46,8 @@ def searchHints(f, hints):
     """
     return ''.join([
         f.paragraph(1, attr={'class': 'searchhint'}),
-        html.BR().join(hints),
+        # this is illegal formatter usage anyway, so we can directly use a literal
+        "<br>".join(hints),
         f.paragraph(0),
     ])
 
@@ -226,9 +226,8 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
         querydict.update({'titlesearch': 0})
 
         hints.append(''.join([
-            _('(!) You\'re conducting a title search so your search '
-                'results might not contain all information available for '
-                'your search query in this wiki.'),
+            _("(!) You're performing a title search that might not include"
+                ' all related results of your search query in this wiki. [[BR]]'),
             ' ',
             f.url(1, href=request.page.url(request, querydict, escape=0,
                 relative=False)),
