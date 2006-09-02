@@ -1114,6 +1114,25 @@ def getPlugins(kind, cfg):
     return all_plugins
 
 
+def searchAndImportPlugin(cfg, type, name, what=None):
+    type2classname = {"parser": "Parser",
+                      "formatter": "Formatter",
+    }
+    if what is None:
+        what = type2classname[type]
+    mt = MimeType(name)
+    plugin = None
+    for module_name in mt.module_name():
+        try:
+            plugin = importPlugin(cfg, type, module_name, what)
+            break
+        except PluginMissingError:
+            pass
+    else:
+        raise PluginMissingError("Plugin not found!")
+    return plugin
+
+
 #############################################################################
 ### Parsers
 #############################################################################

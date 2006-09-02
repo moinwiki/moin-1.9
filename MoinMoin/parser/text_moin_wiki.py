@@ -785,7 +785,7 @@ class Parser:
             self.in_pre = 'no_parser'
             return self._closeP() + self.formatter.preformatted(1)
         elif s_word.startswith('#!'):
-            # First try to find a parser for this (will go away in 2.0)
+            # First try to find a parser for this
             parser_name = s_word[2:].split()[0]
             self.setParser(parser_name)
 
@@ -1111,14 +1111,8 @@ class Parser:
 
     def setParser(self, name):
         """ Set parser to parser named 'name' """
-        mt = wikiutil.MimeType(name)
-        self.parser = None
-        for module_name in mt.module_name():
-            try:
-                self.parser = wikiutil.importPlugin(self.request.cfg, "parser", module_name, "Parser")
-                break
-            except wikiutil.PluginMissingError:
-                pass
-        else:
-            raise "Parser not found!" # XXX what now?
-
+        # XXX this is done by the formatter as well
+        try:
+            self.parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", name)
+        except wikiutil.PluginMissingError:
+            self.parser = None
