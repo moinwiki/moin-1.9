@@ -144,7 +144,7 @@ class ActionClass(object):
 
     def show_password_form(self):
         _ = self.request.getText
-        d = {"message": _(r"Please enter your password of your account at the remote wiki below. /!\ You should trust this local wiki because the password could be read by the administrator."),
+        d = {"message": _(r"Please enter your password of your account at the remote wiki below. [[BR]] /!\ You should trust both wikis because the password could be read by the particular administrators."),
              "passwordlabel": _("Password"),
              "submit": _("Login"),
              "cancel": _("Cancel"),
@@ -332,7 +332,7 @@ class ActionClass(object):
                             self.log_status(ActionClass.ERROR, _("Error while deleting page %s remotely:"), (sp.name, ), msg)
                         return
                     if sp.local_mime_type != MIMETYPE_MOIN and not (local_change ^ remote_change):
-                        self.log_status(ActionClass.WARN, _("The item %s cannot be merged but was changed in both wikis. Please delete it in one of both wikis and try again."), (sp.name, ))
+                        self.log_status(ActionClass.WARN, _("The item %s cannot be merged automatically but was changed in both wikis. Please delete it in one of both wikis and try again."), (sp.name, ))
                         return
                     if sp.local_mime_type != sp.remote_mime_type:
                         self.log_status(ActionClass.WARN, _("The item %s has different mime types in both wikis and cannot be merged. Please delete it in one of both wikis or unify the mime type, and try again."), (sp.name, ))
@@ -357,6 +357,7 @@ class ActionClass(object):
                 else:
                     patch_base_contents = old_contents
 
+                # retrieve remote contents diff
                 if remote_rev != sp.remote_rev:
                     if sp.remote_deleted: # ignore remote changes
                         current_remote_rev = sp.remote_rev
@@ -391,6 +392,7 @@ class ActionClass(object):
                 if remote_rev is None and direction == BOTH:
                     self.log_status(ActionClass.INFO, _("This is the first synchronisation between the local and the remote wiki for the page %s."), (sp.name, ))
 
+                # calculate remote page contents from diff
                 if sp.remote_deleted:
                     remote_contents = ""
                 elif diff is None:
@@ -398,19 +400,29 @@ class ActionClass(object):
                 else:
                     remote_contents = patch(patch_base_contents, decompress(diff))
 
-                if sp.local_mime_type == MIMETYPE_MOIN:
+                if diff is None: # only a local change
+                    if debug:
+                        self.log_status(ActionClass.INFO, raw_suffix="Only local changes for %r" % sp.name)
+                    merged_text_raw = current_page.get_raw_body_str()
+                    if sp.local_mime_type == MIMETYPE_MOIN:
+                        merged_text = merged_text_raw.decode("utf-8")
+                elif local_rev == sp.local_rev:
+                    if debug:
+                        self.log_status(ActionClass.INFO, raw_suffix="Only remote changes for %r" % sp.name)
+                    merged_text_raw = remote_contents
+                    if sp.local_mime_type == MIMETYPE_MOIN:
+                        merged_text = merged_text_raw.decode("utf-8")
+                else:
+                    # this is guaranteed by a check above
+                    assert sp.local_mime_type == MIMETYPE_MOIN
                     remote_contents_unicode = remote_contents.decode("utf-8")
                     # here, the actual 3-way merge happens
                     merged_text = diff3.text_merge(old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), 1, *conflict_markers) # YYY direct access
                     if debug:
                         self.log_status(ActionClass.INFO, raw_suffix="Merging %r, %r and %r into %r" % (old_contents.decode("utf-8"), remote_contents_unicode, current_page.get_raw_body(), merged_text))
                     merged_text_raw = merged_text.encode("utf-8")
-                else:
-                    if diff is None:
-                        merged_text_raw = remote_contents
-                    else:
-                        merged_text_raw = current_page.get_raw_body_str() # YYY direct access
 
+                # generate binary diff
                 diff = textdiff(remote_contents, merged_text_raw)
                 if debug:
                     self.log_status(ActionClass.INFO, raw_suffix="Diff against %r" % remote_contents)
