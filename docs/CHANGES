@@ -136,7 +136,7 @@ Version 1.6.current:
       TWISTED ?
     * setResponseCode request method DEPRECATED (it only worked for Twisted
       anyway), just use emit_http_headers and include a Status: XXX header.
-      Method will vanish with moin 1.7. 
+      Method will vanish with moin 1.7.
     * cfg.url_prefix is DEPRECATED, please use cfg.url_prefix_static.
     * d['title_link'] is not supported any more. You can easily make that link
       on your own in your theme, see example in MoinMoin/theme/__init__.py,
@@ -264,6 +264,8 @@ Version 1.6.current:
       internally, too. So if GUI editor invocation is broken due to browser
       compatibility issues or a wrong browser version check, please file a bug
       at FCKeditor development or browser development.
+    * Mail notifications contain a link to the diff action so the user
+      can see the coloured difference more easily. Thanks to Tobias Polzin.
 
 Version 1.5-current:
    * moin.fcg improved - if you use FastCGI, you must use the new file:
