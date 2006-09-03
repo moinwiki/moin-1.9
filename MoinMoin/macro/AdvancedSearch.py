@@ -89,7 +89,7 @@ def advanced_ui(macro):
     # mimetype selection
     mimetype = form_get(request, 'mimetype')
     mt_select = makeSelection('mimetype',
-            [(m[1], '*%s - %s' % m) for m in sorted(mimetypes.types_map.items())],
+            [('', 'any mimetype')] + [(m[1], '*%s - %s' % m) for m in sorted(mimetypes.types_map.items())],
             mimetype)
 
 
