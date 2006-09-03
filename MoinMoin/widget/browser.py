@@ -22,7 +22,7 @@ class DataBrowserWidget(base.Widget):
         """
         self.data = dataset
 
-    def toHTML(self):
+    def format(self):
         fmt = self.request.formatter
 
         result = []
@@ -45,7 +45,8 @@ class DataBrowserWidget(base.Widget):
         while row:
             result.append(fmt.table_row(1))
             for idx in range(len(row)):
-                if self.data.columns[idx].hidden: continue
+                if self.data.columns[idx].hidden:
+                    continue
                 result.append(fmt.table_cell(1))
                 result.append(unicode(row[idx]))
                 result.append(fmt.table_cell(0))
@@ -55,7 +56,8 @@ class DataBrowserWidget(base.Widget):
         result.append(fmt.table(0))
         return ''.join(result)
 
+    toHTML = format # old name of "format" function DEPRECATED, will be removed in 1.7
 
     def render(self):
-        self.request.write(self.toHTML())
+        self.request.write(self.format())
 
