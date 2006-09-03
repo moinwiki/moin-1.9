@@ -584,12 +584,17 @@ Try a different name.""") % (newpagename,)
         """
         _ = lambda s, formatted=True, r=self.request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
 
+        pagelink = self.request.getQualifiedURL(self.url(self.request))
+        if len(revisions) >= 2:
+            pagelink += "?action=diff&rev2=%i&rev1=%i" % tuple(revisions[-2:])
+
+
         mailBody = _("Dear Wiki user,\n\n"
             'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
             "The following page has been changed by %(editor)s:\n"
             "%(pagelink)s\n\n", formatted=False) % {
                 'editor': self.uid_override or user.getUserIdentification(self.request),
-                'pagelink': self.request.getQualifiedURL(self.url(self.request)),
+                'pagelink': pagelink,
                 'sitename': self.cfg.sitename or self.request.getBaseURL(),
         }
 
