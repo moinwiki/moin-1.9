@@ -611,7 +611,8 @@ class Search:
         
         @param page: the current page instance
         """
-        return self.query.search(page)
+        if page:
+            return self.query.search(page)
 
     def _getHits(self, pages, matchSearchFunction):
         """ Get the hit tuples in pages through matchSearchFunction """
@@ -645,7 +646,8 @@ class Search:
                         page = Page(self.request, "%s/%s" % (fs_rootpage, attachment))
                         hits.append((wikiname, page, None, None))
                     else:
-                        hits.append((wikiname, page, attachment, None))
+                        matches = matchSearchFunction(page=None, uid=uid)
+                        hits.append((wikiname, page, attachment, matches))
                 else:
                     matches = matchSearchFunction(page=page, uid=uid)
                     if matches:

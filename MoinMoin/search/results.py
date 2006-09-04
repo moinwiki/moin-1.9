@@ -194,12 +194,6 @@ class FoundAttachment(FoundPage):
     def weight(self, unique=1):
         return 1
 
-    def get_matches(self, unique=1, sort='start', type=Match):
-        return []
-
-    def _unique_matches(self, type=Match):
-        return []
-
 
 class FoundRemote(FoundPage):
     """ Represents an attachment in search results """
@@ -821,7 +815,7 @@ def getSearchResults(request, query, hits, start, sort, estimated_hits):
         if wikiname in (request.cfg.interwikiname, 'Self'): # a local match
             if attachment:
                 result_hits.append(FoundAttachment(page.page_name,
-                    attachment, page=page))
+                    attachment, page=page, matches=match))
             else:
                 result_hits.append(FoundPage(page.page_name, match, page))
         else:

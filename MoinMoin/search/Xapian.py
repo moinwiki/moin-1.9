@@ -546,6 +546,7 @@ class Index(BaseIndex):
             if updated:
                 xatt_itemid = xapdoc.Keyword('itemid', att_itemid)
                 xpname = xapdoc.SortKey('pagename', pagename)
+                xwname = xapdoc.SortKey('wikiname', request.cfg.interwikiname or "Self")
                 xattachment = xapdoc.SortKey('attachment', att) # this is an attachment, store its filename
                 xmtime = xapdoc.SortKey('mtime', mtime)
                 xrev = xapdoc.SortKey('revision', '0')
