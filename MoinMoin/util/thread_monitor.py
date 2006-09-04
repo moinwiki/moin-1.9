@@ -6,9 +6,16 @@ Just call activate_hook() as early as possible in program execution.
 Then you can trigger the output of tracebacks of all threads
 by calling trigger_dump().
 
+Usage of Python 2.5 is recommended because it allows for a much safer
+and faster frame extraction.
+
 @copyright: 2006 Alexander Schremmer <alex AT alexanderweb DOT de>
 @license: GNU GPL Version 2
 """
+
+
+__all__ = "activate_hook trigger_dump dump_regularly".split()
+
 
 import sys
 import threading
@@ -21,54 +28,92 @@ try:
 except:
     from sets import Set as set
 
-# global state
-dumping = False
-dump_file = None
-dumped = set()
-to_dump = set()
-hook_enabled = False
+class AbstractMonitor(object):
+    def activate_hook(self):
+        """ Activates the thread monitor hook. Note that this might interfere
+        with any kind of profiler and some debugging extensions. """
+        raise NotImplementedError
 
-def dump(label):
-    df = dump_file or sys.stderr
-    s = StringIO()
-    print >>s, "\nDumping thread %s:" % (label, )
-    try:
-        raise ZeroDivisionError
-    except ZeroDivisionError:
-        f = sys.exc_info()[2].tb_frame.f_back.f_back
-    traceback.print_list(traceback.extract_stack(f, None), s)
-    df.write(s.getvalue())
+    def trigger_dump(self, dumpfile=None):
+        """ Triggers the dump of the tracebacks of all threads.
+            If dumpfile is specified, it is used as the output file. """
+        raise NotImplementedError
 
-def dump_hook(a, b, c): # arguments are ignored
-    global dumping
+    def hook_enabled(self):
+        """ Returns true if the thread_monitor hook is enabled. """
+        raise NotImplementedError
 
-    if dumping and sys.exc_info()[0] is None:
-        thread = threading.currentThread()
-        if thread in to_dump:
-            dump(repr(thread))
-            to_dump.discard(thread)
-            dumped.add(thread)
-            if not to_dump:
-                dumping = False
+class LegacyMonitor(AbstractMonitor):
+    # global state
+    dumping = False
+    dump_file = None
+    dumped = set()
+    to_dump = set()
+    hook_enabled = False
+    
+    def dump(cls, label):
+        df = cls.dump_file or sys.stderr
+        s = StringIO()
+        print >>s, "\nDumping thread %s:" % (label, )
+        try:
+            raise ZeroDivisionError
+        except ZeroDivisionError:
+            f = sys.exc_info()[2].tb_frame.f_back.f_back
+        traceback.print_list(traceback.extract_stack(f, None), s)
+        df.write(s.getvalue())
+    dump = classmethod(dump)
 
-def trigger_dump(dumpfile=None):
-    """ Triggers the dump of the tracebacks of all threads.
-        If dumpfile is specified, it is used as the output file. """
-    global dumping, dump_file, to_dump
+    def dump_hook(cls, a, b, c): # arguments are ignored
+        if cls.dumping and sys.exc_info()[0] is None:
+            thread = threading.currentThread()
+            if thread in cls.to_dump:
+                cls.dump(repr(thread))
+                cls.to_dump.discard(thread)
+                cls.dumped.add(thread)
+                if not cls.to_dump:
+                    cls.dumping = False
+    dump_hook = classmethod(dump_hook)
 
-    to_dump = set(threading.enumerate())
-    if dumpfile is not None:
-        dump_file = dumpfile
-    dumping = True
+    def trigger_dump(cls, dumpfile=None):
+        cls.to_dump = set(threading.enumerate())
+        if dumpfile is not None:
+            cls.dump_file = dumpfile
+        cls.dumping = True
+    trigger_dump = classmethod(trigger_dump)
+    
+    def activate_hook(cls):
+        sys.setprofile(cls.dump_hook)
+        threading.setprofile(cls.dump_hook)
+        cls.hook_enabled = True
+    activate_hook = classmethod(activate_hook)
 
-def activate_hook():
-    """ Activates the thread monitor hook. Note that this interferes
-    with any kind of profiler and some debugging extensions. """
-    global hook_enabled
+    def hook_enabled(cls):
+        return cls.hook_enabled
+    hook_enabled = classmethod(hook_enabled)
 
-    sys.setprofile(dump_hook)
-    threading.setprofile(dump_hook)
-    hook_enabled = True
+
+class DirectMonitor(AbstractMonitor):
+    def __init__(self):
+        self.enabled = False
+        assert hasattr(sys, "_current_frames")
+
+    def activate_hook(self):
+        self.enabled = True
+
+    def trigger_dump(self, dumpfile=None):
+        if not self.enabled:
+            return
+        dumpfile = dumpfile or sys.stderr
+        cur_frames = sys._current_frames()
+        for i in cur_frames.keys():
+            s = StringIO()
+            print >>s, "\nDumping thread (id %s):" % (i, )
+            traceback.print_stack(cur_frames[i], file=s)
+            dumpfile.write(s.getvalue())
+
+    def hook_enabled(self):
+        return self.enabled
+
 
 def dump_regularly(seconds):
     """ Dumps the tracebacks every 'seconds' seconds. """
@@ -81,3 +126,13 @@ def dump_regularly(seconds):
 
     threading.Thread(target=background_dumper, args=(seconds, )).start()
 
+
+# Python 2.5 provides an optimised version
+if hasattr(sys, "_current_frames"):
+    mon = DirectMonitor()
+else:
+    mon = LegacyMonitor()
+
+activate_hook = mon.activate_hook
+trigger_dump = mon.trigger_dump
+hook_enabled = mon.hook_enabled

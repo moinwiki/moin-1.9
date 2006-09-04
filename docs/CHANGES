@@ -313,6 +313,8 @@ Version 1.6.current:
       can see the coloured difference more easily. Thanks to Tobias Polzin.
     * Refactored conflict resolution and XMLRPC code.
     * Added a module for binary diffs
+    * The thread monitor supports the Python 2.5 feature of directly grabbing
+      the current stack frames of all threads now so it has become much faster.
 
 
 Version 1.5-current:
