@@ -98,7 +98,7 @@ class EditLogLine:
             if not aliasname:
                 aliasname = name
             title = wikiutil.escape(aliasname + title)
-            text = (request.formatter.interwikilink(1, title=title, *info) +
+            text = (request.formatter.interwikilink(1, title=title, generated=True, *info) +
                     request.formatter.text(name) +
                     request.formatter.interwikilink(0, title=title, *info))
         elif kind == 'email':
