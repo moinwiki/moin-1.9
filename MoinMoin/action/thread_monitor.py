@@ -14,7 +14,7 @@ from MoinMoin import wikiutil
 from MoinMoin.util import thread_monitor
 
 def execute_fs(pagename, request):
-    if thread_monitor.hook_enabled:
+    if thread_monitor.hook_enabled():
         s = StringIO()
         thread_monitor.trigger_dump(s)
         time.sleep(5) # allow for all threads to dump to request
@@ -36,7 +36,7 @@ def execute_wiki(pagename, request):
     request.theme.send_title("Thread monitor")
     request.write('<pre>')
 
-    if not thread_monitor.hook_enabled:
+    if not thread_monitor.hook_enabled():
         request.write("Hook is not enabled.")
     else:
         s = StringIO()
