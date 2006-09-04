@@ -262,6 +262,8 @@ Version 1.6.current:
       on one side at the end
     * Standalone opens it logfile unbuffered from now on, thanks to
       Carsten Grohmann
+    * Now MoinMoin does not anymore think that every page links to various user
+      homepages anymore.
 
   Other changes:
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
