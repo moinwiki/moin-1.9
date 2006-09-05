@@ -126,10 +126,11 @@ def execute(Macro, args):
                     _('N/A'))
         xapRow += ', %s, %s' % (available, mtime)
 
+    try:
         import xapian
         xapVersion = xapian.xapian_version_string()
-    else:
-        xapVersion = _('not installed')
+    except ImportError:
+        xapVersion = _('Xapian and/or Python Xapian bindings not installed')
 
     row(_('Xapian search'), xapRow)
     row(_('Xapian Version'), xapVersion)
