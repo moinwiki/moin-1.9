@@ -773,7 +773,6 @@ class SearchResults:
 
     def getvalue(self):
         """ Return output in div with CSS class """
-        write = self.request.write
         value = [
             self.formatter.div(1, css_class='searchresults'),
             self.buffer.getvalue(),
