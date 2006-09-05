@@ -264,6 +264,8 @@ Version 1.6.current:
       Carsten Grohmann
     * Now MoinMoin does not anymore think that every page links to various user
       homepages anymore.
+    * Now multiple formatters can be used per request, the send_page code was
+      not reentrant to this regard. Fixes "empty" search results.
 
   Other changes:
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
