@@ -1054,7 +1054,12 @@ class Page:
         elif not self.formatter:
             Formatter = wikiutil.searchAndImportPlugin(request.cfg, "formatter", self.output_mimetype)
             self.formatter = Formatter(request)
+
+        # save formatter
+        no_formatter = object()
+        old_formatter = getattr(request, "formatter", no_formatter)
         request.formatter = self.formatter
+
         self.formatter.setPage(self)
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
@@ -1304,6 +1309,14 @@ class Page:
         request.clock.stop('send_page')
         if not content_only and self.default_formatter:
             request.theme.send_closing_html()
+
+        # restore old formatter (hopefully we dont throw any exception
+        # that is catched again)
+        if old_formatter == no_formatter:
+            del request.formatter
+        else:
+            request.formatter = old_formatter
+
 
     def getFormatterName(self):
         """ Return a formatter name as used in the caching system
