@@ -1537,7 +1537,11 @@ var gui_editor_link_text = "%(text)s";
 
         # If in print mode, start page div and emit the title
         if keywords.get('print_mode', 0):
-            d = {'title_text': text, 'page': page, }
+            d = {
+                'title_text': text,
+                'page': page,
+                'page_name': pagename or '',
+            }
             request.themedict = d
             output.append(self.startPage())
             output.append(self.interwiki(d))
