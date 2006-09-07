@@ -151,6 +151,7 @@ Version 1.6.current:
     * XMLRPC functions may return Fault instances from now on
     * Moin got multicall support, including a module that makes it usable on the
       client-side without requiring Python 2.4
+    * Added no_magic to text_html formatter to disable tag autoclosing.
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more

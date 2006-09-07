@@ -201,6 +201,7 @@ class Formatter(FormatterBase):
         self._is_included = kw.get('is_included', False)
         self.request = request
         self.cfg = request.cfg
+        self.no_magic = kw.get('no_magic', False) # disabled tag auto closing
 
         if not hasattr(request, '_fmt_hd_counters'):
             request._fmt_hd_counters = []
@@ -377,7 +378,7 @@ class Formatter(FormatterBase):
         @rtype: string
         @return: closing tag as a string
         """
-        if tag in _self_closing_tags or tag in _auto_closing_tags:
+        if tag in _self_closing_tags or (tag in _auto_closing_tags and not self.no_magic):
             # This tag was already closed
             tagstr = ''
         elif tag in _blocks:
