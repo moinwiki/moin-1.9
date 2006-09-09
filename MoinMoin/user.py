@@ -285,7 +285,7 @@ class User:
         if self._cfg.SecurityPolicy:
             self.may = self._cfg.SecurityPolicy(self)
         else:
-            from security import Default
+            from MoinMoin.security import Default
             self.may = Default(self)
 
         if self.language and not self.language in i18n.wikiLanguages():
