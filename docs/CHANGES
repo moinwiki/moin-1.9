@@ -84,11 +84,11 @@ Version 1.6.current:
       will be missing and the adaptor script will need a change maybe):
       CGI works
       CLI works
-      STANDALONE ?
+      STANDALONE works
+      FCGI works
+      TWISTED works
       MODPY ?
       WSGI ?
-      FCGI ?
-      TWISTED ?
     * moved util/antispam.py to security/antispam.py,
       moved util/autoadmin.py to security/autoadmin.py,
       moved security.py to security/__init__.py,
@@ -131,12 +131,12 @@ Version 1.6.current:
       sure that there is exactly ONE content-type header, etc.) and then
       calls a server specific helper _emit_http_headers to emit it.
       CGI works
+      STANDALONE works
+      FCGI works
+      TWISTED works
       CLI ?
-      STANDALONE ?
       MODPY ?
       WSGI ?
-      FCGI ?
-      TWISTED ?
     * setResponseCode request method DEPRECATED (it only worked for Twisted
       anyway), just use emit_http_headers and include a Status: XXX header.
       Method will vanish with moin 1.7.
