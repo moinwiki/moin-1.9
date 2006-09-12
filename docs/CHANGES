@@ -293,6 +293,7 @@ Version 1.6.current:
          for configuring them to use a long expiry and change url_prefix_static
          related configuration on upgrade.
       HINT: if you run standalone server you MUST use /moin_static160.
+      HINT: if you run Twisted server you MUST use /moin_static160.
     * url_prefix_action ['action'] was introduced for lowering load and traffic
       caused by searchengine crawlers. Up to now, crawlers where causing a high
       load in internet moin wikis because they tried to get about everything,
