@@ -1145,7 +1145,15 @@ space between words. Group page name is not allowed.""") % self.user.name
                 else:
                     from MoinMoin import action
                     handler = action.getHandler(self, action_name)
-                    handler(self.page.page_name, self)
+                    if handler is None:
+                        msg = _("You are not allowed to do %(action_name)s on this page.") % {
+                                'action_name': wikiutil.escape(action_name), }
+                        if not self.user.valid:
+                            # Suggest non valid user to login
+                            msg += " " + _("Login and try again.", formatted=0)
+                        self.page.send_page(self, msg=msg)
+                    else:
+                        handler(self.page.page_name, self)
 
             # every action that didn't use to raise MoinMoinNoFooter must call this now:
             # self.theme.send_closing_html()
