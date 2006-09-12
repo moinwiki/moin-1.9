@@ -117,7 +117,7 @@ class Request(RequestBase):
         st_header, other_headers = headers[0], headers[1:]
         status = st_header.split(':', 1)[1].lstrip()
         status_code, status_msg = status.split(' ', 1)
-        self.twistd.setResponseCode(status_code, status_msg)
+        self.twistd.setResponseCode(int(status_code), status_msg)
         for header in other_headers:
             key, value = header.split(':', 1)
             value = value.lstrip()
