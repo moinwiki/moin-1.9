@@ -1520,7 +1520,7 @@ var gui_editor_link_text = "%(text)s";
             not keywords.get('print_mode', 0) and
             request.user.edit_on_doubleclick):
             if request.user.may.write(pagename): # separating this gains speed
-                querystr = wikiutil.escape(makeQueryString({'action': 'edit'}))
+                querystr = wikiutil.escape(wikiutil.makeQueryString({'action': 'edit'}))
                 # TODO: remove escape=0 in 2.0
                 url = page.url(request, querystr, escape=0)
                 bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
