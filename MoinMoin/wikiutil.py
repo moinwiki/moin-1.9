@@ -547,14 +547,14 @@ def load_wikimap(request):
         generate_file_list(request)
 
     try:
-        _interwiki_list = request.cfg._interwiki_list
-        old_mtime = request.cfg._interwiki_mtime
-        if request.cfg._interwiki_ts + (1*60) < now: # 1 minutes caching time
+        _interwiki_list = request.cfg.cache.interwiki_list
+        old_mtime = request.cfg.cache.interwiki_mtime
+        if request.cfg.cache.interwiki_ts + (1*60) < now: # 1 minutes caching time
             max_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
             if max_mtime > old_mtime:
                 raise AttributeError # refresh cache
             else:
-                request.cfg._interwiki_ts = now
+                request.cfg.cache.interwiki_ts = now
     except AttributeError:
         _interwiki_list = {}
         lines = []
@@ -585,9 +585,9 @@ def load_wikimap(request):
             _interwiki_list[request.cfg.interwikiname] = request.getScriptname() + '/'
 
         # save for later
-        request.cfg._interwiki_list = _interwiki_list
-        request.cfg._interwiki_ts = now
-        request.cfg._interwiki_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
+        request.cfg.cache.interwiki_list = _interwiki_list
+        request.cfg.cache.interwiki_ts = now
+        request.cfg.cache.interwiki_mtime = get_max_mtime(request.cfg.shared_intermap_files, Page(request, INTERWIKI_PAGE))
 
     return _interwiki_list
 
