@@ -599,9 +599,9 @@ reStructuredText Quick Reference
         # Cache variables for the properties below
         self._iwid = self._iwid_full = self._meta_dict = None
 
-        self._acl_rights_before = AccessControlList(self, [self.acl_rights_before])
-        self._acl_rights_default = AccessControlList(self, [self.acl_rights_default])
-        self._acl_rights_after = AccessControlList(self, [self.acl_rights_after])
+        self.cache.acl_rights_before = AccessControlList(self, [self.acl_rights_before])
+        self.cache.acl_rights_default = AccessControlList(self, [self.acl_rights_default])
+        self.cache.acl_rights_after = AccessControlList(self, [self.acl_rights_after])
 
         if self.url_prefix is not None: # remove this code when url_prefix setting is removed
             self.url_prefix_static = self.url_prefix
