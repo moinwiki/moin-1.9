@@ -172,7 +172,7 @@ class AccessControlList:
     def __init__(self, cfg, lines=[]):
         """Initialize an ACL, starting from <nothing>.
         """
-        self._is_group = {}
+        self._group_re = re.compile(cfg.page_group_regex, re.UNICODE)
         if lines:
             self.acl = [] # [ ('User', {"read": 0, ...}), ... ]
             self.acl_lines = []
@@ -191,7 +191,6 @@ class AccessControlList:
         @param aclstring: acl string from page or cfg
         @param remember: should add the line to self.acl_lines
         """
-        group_re = re.compile(cfg.page_group_regex)
 
         # Remember lines
         if remember:
@@ -204,8 +203,6 @@ class AccessControlList:
                 self._addLine(cfg, cfg.acl_rights_default, remember=0)
             else:
                 for entry in entries:
-                    if group_re.search(entry):
-                        self._is_group[entry] = 1
                     rightsdict = {}
                     if modifier:
                         # Only user rights are added to the right dict.
@@ -234,7 +231,7 @@ class AccessControlList:
             if entry in self.special_users:
                 handler = getattr(self, "_special_"+entry, None)
                 allowed = handler(request, name, dowhat, rightsdict)
-            elif self._is_group.get(entry):
+            elif self._group_re.search(entry):
                 if is_group_member(entry, name):
                     allowed = rightsdict.get(dowhat)
                 else:
