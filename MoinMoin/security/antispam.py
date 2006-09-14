@@ -162,7 +162,7 @@ class SecurityPolicy(Permissions):
             request.clock.start('antispam')
 
             blacklist = []
-            invalidate_cache = not getattr(request.cfg, "_mmblcache", None)
+            invalidate_cache = not getattr(request.cfg.cache, "antispam_blacklist", None)
             for pn in BLACKLISTPAGES:
                 do_update = (pn != "LocalBadContent")
                 invalidate_cache_necessary, blacklist_entries = getblacklist(request, pn, do_update)
@@ -178,7 +178,7 @@ class SecurityPolicy(Permissions):
                         except re.error, err:
                             dprint("Error in regex '%s': %s. Please check the pages %s." % (blacklist_re, str(err), ', '.join(BLACKLISTPAGES)))
                             continue
-                    request.cfg._mmblcache = mmblcache
+                    request.cfg.cache.antispam_blacklist = mmblcache
 
                 from MoinMoin.Page import Page
 
@@ -192,7 +192,7 @@ class SecurityPolicy(Permissions):
                 difference = newset.difference(oldset)
                 addedtext = ''.join(difference)
 
-                for blacklist_re in request.cfg._mmblcache:
+                for blacklist_re in request.cfg.cache.antispam_blacklist:
                     match = blacklist_re.search(addedtext)
                     if match:
                         # Log error and raise SaveError, PageEditor

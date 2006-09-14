@@ -1633,13 +1633,13 @@ class Page:
         currentRevision = self.current_rev()
         key = self.page_name
         try:
-            aclRevision, acl = request.cfg._acl_cache.get(key, (None, None))
+            aclRevision, acl = request.cfg.cache.acl.get(key, (None, None))
         except AttributeError:
-            request.cfg._acl_cache = {}
+            request.cfg.cache.acl = {}
             aclRevision, acl = None, None
         if aclRevision != currentRevision:
             acl = self.parseACL()
-            request.cfg._acl_cache[key] = (currentRevision, acl)
+            request.cfg.cache.acl[key] = (currentRevision, acl)
         request.clock.stop('getACL')
         return acl
 
@@ -1667,11 +1667,11 @@ class Page:
         request = self.request
         key = self.page_name
         try:
-            del request.cfg._acl_cache[key]
+            del request.cfg.cache.acl[key]
         except KeyError:
             pass
         except AttributeError:
-            request.cfg._acl_cache = {}
+            request.cfg.cache.acl = {}
 
     # Text format -------------------------------------------------------
 

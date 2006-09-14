@@ -288,13 +288,11 @@ def do_userform(pagename, request):
 
 # Dispatching ----------------------------------------------------------------
 def getNames(cfg):
-    if hasattr(cfg, 'action_names'):
-        return cfg.action_names
-    else:
+    if not hasattr(cfg.cache, 'action_names'):
         lnames = names[:]
         lnames.extend(wikiutil.getPlugins('action', cfg))
-        cfg.action_names = lnames # remember it
-        return lnames
+        cfg.cache.action_names = lnames # remember it
+    return cfg.cache.action_names
 
 def getHandler(request, action, identifier="execute"):
     """ return a handler function for a given action or None """

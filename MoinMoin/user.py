@@ -56,7 +56,7 @@ def getUserId(request, searchName):
         return None
     cfg = request.cfg
     try:
-        _name2id = cfg._name2id
+        _name2id = cfg.cache.name2id
     except AttributeError:
         arena = 'user'
         key = 'name2id'
@@ -65,13 +65,13 @@ def getUserId(request, searchName):
             _name2id = pickle.loads(cache.content())
         except (pickle.UnpicklingError, IOError, EOFError, ValueError):
             _name2id = {}
-        cfg._name2id = _name2id
+        cfg.cache.name2id = _name2id
     id = _name2id.get(searchName, None)
     if id is None:
         for userid in getUserList(request):
             name = User(request, id=userid).name
             _name2id[name] = userid
-        cfg._name2id = _name2id
+        cfg.cache.name2id = _name2id
         arena = 'user'
         key = 'name2id'
         cache = caching.CacheEntry(request, arena, key, scope='wiki')

@@ -37,14 +37,12 @@ names = ["TitleSearch", "WordIndex", "TitleIndex",
 #############################################################################
 
 def getNames(cfg):
-    if hasattr(cfg, 'macro_names'):
-        return cfg.macro_names
-    else:
+    if not hasattr(cfg.cache, 'macro_names'):
         lnames = names[:]
         lnames.extend(i18n.wikiLanguages().keys())
         lnames.extend(wikiutil.getPlugins('macro', cfg))
-        cfg.macro_names = lnames # remember it
-        return lnames
+        cfg.cache.macro_names = lnames # remember it
+    return cfg.cache.macro_names
 
 
 #############################################################################

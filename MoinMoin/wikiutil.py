@@ -1148,7 +1148,7 @@ def getParserForExtension(cfg, extension):
     @rtype: class, None
     @returns: the parser class or None
     """
-    if not hasattr(cfg, '_EXT_TO_PARSER'):
+    if not hasattr(cfg.cache, 'EXT_TO_PARSER'):
         etp, etd = {}, None
         for pname in getPlugins('parser', cfg):
             try:
@@ -1162,10 +1162,10 @@ def getParserForExtension(cfg, extension):
                         etp[ext] = Parser
                 elif str(exts) == '*':
                     etd = Parser
-        cfg._EXT_TO_PARSER = etp
-        cfg._EXT_TO_PARSER_DEFAULT = etd
+        cfg.cache.EXT_TO_PARSER = etp
+        cfg.cache.EXT_TO_PARSER_DEFAULT = etd
 
-    return cfg._EXT_TO_PARSER.get(extension, cfg._EXT_TO_PARSER_DEFAULT)
+    return cfg.cache.EXT_TO_PARSER.get(extension, cfg.cache.EXT_TO_PARSER_DEFAULT)
 
 
 #############################################################################
