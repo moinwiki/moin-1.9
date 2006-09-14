@@ -313,6 +313,14 @@ reStructuredText Quick Reference
     mail_import_wiki_address = None # the e-mail address for e-mails that should go into the wiki
     mail_import_secret = ""
 
+    # some dangerous mimetypes (we don't use "content-disposition: inline" for them when a user
+    # downloads such attachments, because the browser might execute e.g. Javascript contained
+    # in the HTML and steal your moin cookie or do other nasty stuff) 
+    mimetypes_xss_protect = [
+        'text/html',
+        'application/x-shockwave-flash',
+    ]
+
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]
     nonexist_qm = False
 

@@ -271,6 +271,17 @@ Version 1.6.current:
       homepages anymore.
     * Now multiple formatters can be used per request, the send_page code was
       not reentrant to this regard. Fixes "empty" search results.
+    * Not a moin bug, but it severely annoyed IE users and also was less
+      comfortable for users of other browser: since about 1.5.4, we served
+      attachments with Content-Disposition: attachment - so that the user has
+      to save them to disk. This was to fix a possible XSS attack using attached
+      HTML files with Javascript inside for stealing your moin cookie or doing
+      other nasty things. We improved this by using different behaviour depending
+      on the potential danger the attached file has when served inline:
+      mimetypes_xss_protect = ['text/html', 'application/x-shockwave-flash', ]
+      This is the default value. If you know more dangerous stuff, please just
+      add the mimetypes there to protect your users and file a bug report
+      telling us what we missed.
 
   Other changes:
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
