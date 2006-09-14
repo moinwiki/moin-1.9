@@ -13,7 +13,7 @@ from MoinMoin import wikiutil
 
 def execute(self, args):
     # Get list of template pages readable by current user
-    filter = re.compile(self.request.cfg.page_template_regex, re.UNICODE).search
+    filter = self.request.cfg.cache.page_template_regex.search
     templates = self.request.rootpage.getPageList(filter=filter)
     result = []
     if templates:

@@ -682,8 +682,7 @@ def isTemplatePage(request, pagename):
     @rtype: bool
     @return: true if page is a template page
     """
-    filter = re.compile(request.cfg.page_template_regex, re.UNICODE)
-    return filter.search(pagename) is not None
+    return request.cfg.cache.page_template_regex.search(pagename) is not None
 
 
 def isGroupPage(request, pagename):
@@ -693,8 +692,7 @@ def isGroupPage(request, pagename):
     @rtype: bool
     @return: true if page is a form page
     """
-    filter = re.compile(request.cfg.page_group_regex, re.UNICODE)
-    return filter.search(pagename) is not None
+    return request.cfg.cache.page_group_regex.search(pagename) is not None
 
 
 def filterCategoryPages(request, pagelist):
@@ -711,7 +709,7 @@ def filterCategoryPages(request, pagelist):
     @rtype: list
     @return: only the category pages of pagelist
     """
-    func = re.compile(request.cfg.page_category_regex, re.UNICODE).search
+    func = request.cfg.cache.page_category_regex.search
     return filter(func, pagelist)
 
 

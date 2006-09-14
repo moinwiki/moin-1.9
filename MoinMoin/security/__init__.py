@@ -172,7 +172,6 @@ class AccessControlList:
     def __init__(self, cfg, lines=[]):
         """Initialize an ACL, starting from <nothing>.
         """
-        self._group_re = re.compile(cfg.page_group_regex, re.UNICODE)
         if lines:
             self.acl = [] # [ ('User', {"read": 0, ...}), ... ]
             self.acl_lines = []
@@ -222,19 +221,19 @@ class AccessControlList:
         """May <name> <dowhat>?
            Returns boolean answer.
         """
-        is_group_member = request.dicts.has_member
-
         if self.acl is None: # no #acl used on Page
             acl_page = request.cfg._acl_rights_default.acl
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl_page = self.acl
         acl = request.cfg._acl_rights_before.acl + acl_page + request.cfg._acl_rights_after.acl
+        is_group_member = request.dicts.has_member
+        group_re = request.cfg.cache.page_group_regex
         allowed = None
         for entry, rightsdict in acl:
             if entry in self.special_users:
                 handler = getattr(self, "_special_"+entry, None)
                 allowed = handler(request, name, dowhat, rightsdict)
-            elif self._group_re.search(entry):
+            elif group_re.search(entry):
                 if is_group_member(entry, name):
                     allowed = rightsdict.get(dowhat)
                 else:

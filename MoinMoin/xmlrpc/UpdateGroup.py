@@ -43,7 +43,7 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
         return xmlrpclib.Fault(1, "You are not allowed to edit this page")
 
     # check if groupname matches page_group_regex
-    if not re.match(self.request.cfg.page_group_regex, groupname):
+    if not self.request.cfg.cache.page_group_regex.match(groupname):
         return xmlrpclib.Fault(2, "The groupname %s does not match your page_group_regex (%s)" % (
                                groupname, self.request.cfg.page_group_regex))
 
