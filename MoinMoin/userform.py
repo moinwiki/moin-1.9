@@ -163,7 +163,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
                 theuser.disabled = None
                 theuser.save()
                 from MoinMoin import auth
-                auth.setCookie(self.request, theuser)
+                auth.setSessionCookie(self.request, theuser)
                 self.request.user = theuser
                 return  _("Use UserPreferences to change settings of the selected user account")
             else:
