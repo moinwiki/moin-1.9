@@ -338,8 +338,8 @@ class GroupDict(DictDict):
                 dump = 1
 
         if lastchange >= self.namespace_timestamp or dump:
-            isdict = re.compile(self.cfg.page_dict_regex, re.UNICODE).search
-            isgroup = re.compile(self.cfg.page_group_regex, re.UNICODE).search
+            isdict = self.cfg.cache.page_dict_regex.search
+            isgroup = self.cfg.cache.page_group_regex.search
 
             # check for new groups / dicts from time to time...
             if now - self.namespace_timestamp >= wikiutil.timestamp2version(60): # 60s

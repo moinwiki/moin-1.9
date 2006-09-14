@@ -372,7 +372,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.request.write("</p>")
 
         # Category selection
-        filter = re.compile(self.cfg.page_category_regex, re.UNICODE).search
+        filter = self.cfg.cache.page_category_regex.search
         cat_pages = self.request.rootpage.getPageList(filter=filter)
         cat_pages.sort()
         cat_pages = [wikiutil.pagelinkmarkup(p) for p in cat_pages]

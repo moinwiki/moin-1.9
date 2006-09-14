@@ -184,6 +184,11 @@ def getConfig(url):
 def _(text): return text
 
 
+class CacheClass:
+    """ just a container for stuff we cache """
+    pass
+
+
 class DefaultConfig:
     """ default config values """
 
@@ -523,6 +528,8 @@ reStructuredText Quick Reference
     def __init__(self, siteid):
         """ Init Config instance """
         self.siteid = siteid
+        self.cache = CacheClass()
+
         if self.config_check_enabled:
             self._config_check()
 
@@ -537,6 +544,13 @@ reStructuredText Quick Reference
 
         # Try to decode certain names which allow unicode
         self._decode()
+
+        # After that, pre-compile some regexes
+        self.cache.page_category_regex = re.compile(self.page_category_regex, re.UNICODE)
+        self.cache.page_dict_regex = re.compile(self.page_dict_regex, re.UNICODE)
+        self.cache.page_group_regex = re.compile(self.page_group_regex, re.UNICODE)
+        self.cache.page_template_regex = re.compile(self.page_template_regex, re.UNICODE)
+        self.cache.ua_spiders = re.compile(self.ua_spiders, re.I)
 
         self._check_directories()
 

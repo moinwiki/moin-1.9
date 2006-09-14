@@ -877,11 +877,9 @@ class RequestBase(object):
     def check_spider(self):
         """ check if the user agent for current request is a spider/bot """
         isSpider = False
-        spiders = self.cfg.ua_spiders
-        if spiders:
-            ua = self.getUserAgent()
-            if ua:
-                isSpider = re.search(spiders, ua, re.I) is not None
+        ua = self.getUserAgent()
+        if ua:
+            isSpider = self.cfg.cache.ua_spiders.search(ua) is not None
         return isSpider
 
     def isForbidden(self):
