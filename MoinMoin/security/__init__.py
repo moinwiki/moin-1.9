@@ -222,10 +222,10 @@ class AccessControlList:
            Returns boolean answer.
         """
         if self.acl is None: # no #acl used on Page
-            acl_page = request.cfg._acl_rights_default.acl
+            acl_page = request.cfg.cache.acl_rights_default.acl
         else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
             acl_page = self.acl
-        acl = request.cfg._acl_rights_before.acl + acl_page + request.cfg._acl_rights_after.acl
+        acl = request.cfg.cache.acl_rights_before.acl + acl_page + request.cfg.cache.acl_rights_after.acl
         is_group_member = request.dicts.has_member
         group_re = request.cfg.cache.page_group_regex
         allowed = None
