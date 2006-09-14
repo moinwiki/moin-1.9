@@ -322,7 +322,7 @@ class GroupDict(DictDict):
         arena = 'wikidicts'
         key = 'dicts_groups'
         try:
-            self.__dict__.update(self.cfg.DICTS_DATA)
+            self.__dict__.update(self.cfg.cache.DICTS_DATA)
         except AttributeError:
             try:
                 cache = caching.CacheEntry(request, arena, key, scope='wiki')
@@ -350,7 +350,7 @@ class GroupDict(DictDict):
 
                 # remove old entries when dict or group page have been deleted,
                 # add entries when pages have been added
-                # use copies because the dicts are shared via cfg.DICTS_DATA
+                # use copies because the dicts are shared via cfg.cache.DICTS_DATA
                 #  and must not be modified
                 olddictdict = self.dictdict.copy()
                 oldgroupdict = self.groupdict.copy()
@@ -415,5 +415,5 @@ class GroupDict(DictDict):
             cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
 
         # remember it (persistent environments)
-        self.cfg.DICTS_DATA = data
+        self.cfg.cache.DICTS_DATA = data
 

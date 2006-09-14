@@ -680,13 +680,13 @@ class RequestBase(object):
         @return: dict of all known actions
         """
         try:
-            self.cfg._known_actions # check
+            self.cfg.cache.known_actions # check
         except AttributeError:
             from MoinMoin import action
-            self.cfg._known_actions = set(action.getNames(self.cfg))
+            self.cfg.cache.known_actions = set(action.getNames(self.cfg))
 
         # Return a copy, so clients will not change the set.
-        return self.cfg._known_actions.copy()
+        return self.cfg.cache.known_actions.copy()
 
     def getAvailableActions(self, page):
         """ Get list of avaiable actions for this request
