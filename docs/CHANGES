@@ -218,6 +218,10 @@ Version 1.6.current:
     * Syncronisation of wikis using the SyncPages action
     * GetText2 macro that allows to translate messages that contain data
     * showtags action that lists all tags related to a page
+    * if you have "#acl" (without the quotes) on a page, this means now:
+      "this page has own (empty) ACLs, so do not use acl_rights_default here"
+      Please note that this is COMPLETELY DIFFERENT from having no ACL line at
+      all on the page (acl_rights_default is used in that case).
 
 
   Bugfixes:

@@ -224,7 +224,10 @@ class AccessControlList:
         """
         is_group_member = request.dicts.has_member
 
-        acl_page = self.acl or request.cfg._acl_rights_default.acl
+        if self.acl is None: # no #acl used on Page
+            acl_page = request.cfg._acl_rights_default.acl
+        else: # we have a #acl on the page (self.acl can be [] if #acl is empty!)
+            acl_page = self.acl
         acl = request.cfg._acl_rights_before.acl + acl_page + request.cfg._acl_rights_after.acl
         allowed = None
         for entry, rightsdict in acl:
