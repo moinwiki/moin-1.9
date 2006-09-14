@@ -666,13 +666,24 @@ def get_file(pagename, request):
         request.emit_http_headers(["Status: 304 Not modified"])
     else:
         mt = wikiutil.MimeType(filename=filename)
+        content_type = mt.content_type()
+        mime_type = mt.mime_type()
+
+        # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
+        # There is no solution that is compatible to IE except stripping non-ascii chars
+        filename_enc = filename.encode(config.charset)
+
+        # for dangerous files (like .html), when we are in danger of cross-site-scripting attacks,
+        # we just let the user store them to disk ('attachment').
+        # For safe files, we directly show them inline (this also works better for IE).
+        dangerous = mime_type in request.cfg.mimetypes_xss_protect
+        content_dispo = dangerous and 'attachment' or 'inline'
+
         request.emit_http_headers([
-            "Content-Type: %s" % mt.content_type(),
-            "Last-Modified: %s" % timestamp, # TODO maybe add a short Expires: header here?
-            "Content-Length: %d" % os.path.getsize(fpath),
-            # TODO: fix the encoding here, plain 8 bit is not allowed according to the RFCs
-            # There is no solution that is compatible to IE except stripping non-ascii chars
-            "Content-Disposition: attachment; filename=\"%s\"" % filename.encode(config.charset),
+            'Content-Type: %s' % content_type,
+            'Last-Modified: %s' % timestamp, # TODO maybe add a short Expires: header here?
+            'Content-Length: %d' % os.path.getsize(fpath),
+            'Content-Disposition: %s; filename="%s"' % (content_dispo, filename_enc),
         ])
 
         # send data
