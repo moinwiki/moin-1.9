@@ -225,8 +225,10 @@ class RequestBase(object):
             self.reset()
             self.clock.stop('base__init__')
 
-    def surge_protect(self):
-        """ check if someone requesting too much from us """
+    def surge_protect(self, kick_him=False):
+        """ check if someone requesting too much from us,
+            if kick_him is True, we unconditionally blacklist the current user/ip
+        """
         limits = self.cfg.surge_action_limits
         if not limits:
             return False
@@ -277,6 +279,10 @@ class RequestBase(object):
                 maxnum, dt = limits.get(current_action, default_limit)
                 events = surgedict.setdefault(current_id, copy.copy({}))
                 timestamps = events.setdefault(current_action, copy.copy([]))
+
+                if kick_him: # ban this guy, NOW
+                    timestamps.extend([(now + self.cfg.surge_lockout_time, "!")] * (2*maxnum))
+
                 surge_detected = surge_detected or len(timestamps) > maxnum
 
                 surge_indicator = surge_detected and "!" or ""
