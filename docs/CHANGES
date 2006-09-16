@@ -337,6 +337,7 @@ Version 1.6.current:
     * Added a module for binary diffs
     * The thread monitor supports the Python 2.5 feature of directly grabbing
       the current stack frames of all threads now so it has become much faster.
+    * Made the irssi parser more tolerant (Thanks to "TheAnarcat").
 
 
 Version 1.5-current:

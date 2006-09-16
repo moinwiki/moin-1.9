@@ -29,10 +29,10 @@ class Parser:
         lines = self.raw.split('\n')
         # TODO: Add support for displaying things like join and part messages.
         pattern = re.compile(r"""
-            ((\[|\()?                      # Opening bracket for the timestamp (if it exists)
+            ((\[|\()?                      # Opening bracket or paren for the timestamp (if it exists)
                 (?P<time>([\d]?\d[:.]?)+)  # Timestamp as one or more :/.-separated groups of 1 or 2 digits (if it exists)
-            (\]|\))?\s+)?                  # Closing bracket for the timestamp (if it exists) plus whitespace
-            <\s*?(?P<nick>.*?)\s*?>        # Nick
+            (\]|\))?\s+)?                  # Closing bracket or paren for the timestamp (if it exists) plus whitespace
+            \s*<\s*?(?P<nick>.*?)\s*?>     # Nick, maybe preceeded by whitespace, which will apply only if no timestamp
             \s+                            # Space between the nick and message
             (?P<msg>.*)                    # Message
         """, re.VERBOSE + re.UNICODE)
