@@ -584,7 +584,7 @@ Try a different name.""") % (newpagename,)
         """
         _ = lambda s, formatted=True, r=self.request, l=email_lang: r.getText(s, formatted=formatted, lang=l)
 
-        pagelink = self.request.getQualifiedURL(self.url(self.request))
+        pagelink = self.request.getQualifiedURL(self.url(self.request, relative=False))
         if len(revisions) >= 2:
             pagelink += "?action=diff&rev2=%i&rev1=%i" % tuple(revisions[-2:])
 
