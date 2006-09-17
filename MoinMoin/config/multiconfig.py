@@ -324,6 +324,7 @@ reStructuredText Quick Reference
     mimetypes_xss_protect = [
         'text/html',
         'application/x-shockwave-flash',
+        'application/xhtml+xml',
     ]
 
     navi_bar = [u'RecentChanges', u'FindPage', u'HelpContents', ]

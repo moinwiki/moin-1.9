@@ -278,8 +278,8 @@ Version 1.6.current:
       HTML files with Javascript inside for stealing your moin cookie or doing
       other nasty things. We improved this by using different behaviour depending
       on the potential danger the attached file has when served inline:
-      mimetypes_xss_protect = ['text/html', 'application/x-shockwave-flash', ]
-      This is the default value. If you know more dangerous stuff, please just
+      The config option contains a few mimetypes that are known to be inherently
+      unsafe to this regard. If you know more dangerous stuff, please just
       add the mimetypes there to protect your users and file a bug report
       telling us what we missed.
 
