@@ -884,7 +884,7 @@ class RequestBase(object):
         """ check if the user agent for current request is a spider/bot """
         isSpider = False
         ua = self.getUserAgent()
-        if ua:
+        if ua and self.cfg.cache.ua_spiders:
             isSpider = self.cfg.cache.ua_spiders.search(ua) is not None
         return isSpider
 
