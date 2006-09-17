@@ -551,7 +551,7 @@ reStructuredText Quick Reference
         self.cache.page_dict_regex = re.compile(self.page_dict_regex, re.UNICODE)
         self.cache.page_group_regex = re.compile(self.page_group_regex, re.UNICODE)
         self.cache.page_template_regex = re.compile(self.page_template_regex, re.UNICODE)
-        self.cache.ua_spiders = re.compile(self.ua_spiders, re.I)
+        self.cache.ua_spiders = self.ua_spiders and re.compile(self.ua_spiders, re.I)
 
         self._check_directories()
 
