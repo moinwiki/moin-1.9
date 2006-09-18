@@ -13,22 +13,26 @@ from MoinMoin.Page import Page
 from MoinMoin import wikiutil
 from MoinMoin.support.parsedatetime.parsedatetime import Calendar
 
-def isTitleSearch(request):
-    """ Return True for title search, False for full text search 
+def checkTitleSearch(request):
+    """ Return 1 for title search, 0 for full text search, -1 for idiot spammer
+        who tries to press all buttons at once.
     
     When used in FullSearch macro, we have 'titlesearch' parameter with
     '0' or '1'. In standard search, we have either 'titlesearch' or
     'fullsearch' with localized string. If both missing, default to
     True (might happen with Safari) if this isn't an advanced search.
-    """
-    try:
-        return int(request.form['titlesearch'][0])
-    except ValueError:
-        return True
-    except KeyError:
-        return 'fullsearch' not in request.form and \
-                not isAdvancedSearch(request)
-
+"""
+    form = request.form
+    if form.has_key('titlesearch') and form.has_key('fullsearch'):
+        ret = -1 # spammer / bot
+    else:
+        try:
+            ret = int(form['titlesearch'][0])
+        except ValueError:
+            ret = 1
+        except KeyError:
+            ret = ('fullsearch' not in form and not isAdvancedSearch(request)) and 1 or 0
+    return ret
 
 def isAdvancedSearch(request):
     """ Return True if advanced search is requested """
@@ -54,7 +58,12 @@ def searchHints(f, hints):
 
 def execute(pagename, request, fieldname='value', titlesearch=0):
     _ = request.getText
-    titlesearch = isTitleSearch(request)
+    titlesearch = checkTitleSearch(request)
+    if titlesearch < 0:
+        request.makeForbidden403()
+        request.log("LOL, some spammer pressed multiple buttons at once ...")
+        return
+
     advancedsearch = isAdvancedSearch(request)
 
     # context is relevant only for full search

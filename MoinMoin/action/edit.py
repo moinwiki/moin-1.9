@@ -15,6 +15,12 @@ def execute(pagename, request):
     """ edit a page """
     _ = request.getText
 
+    if request.form.has_key('button_preview') and request.form.has_key('button_spellcheck'):
+        # multiple buttons pressed at once? must be some spammer/bot
+        request.makeForbidden403()
+        request.log("LOL, some spammer pressed multiple buttons at once ...")
+        return
+
     if not request.user.may.write(pagename):
         Page(request, pagename).send_page(request,
             msg=_('You are not allowed to edit this page.'))
