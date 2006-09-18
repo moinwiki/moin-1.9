@@ -61,6 +61,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     titlesearch = checkTitleSearch(request)
     if titlesearch < 0:
         request.makeForbidden403()
+        request.surge_protect(kick_him=True) # get rid of spammer
         request.log("LOL, some spammer pressed multiple buttons at once ...")
         return
 

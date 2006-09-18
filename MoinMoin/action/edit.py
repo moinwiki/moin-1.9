@@ -18,6 +18,7 @@ def execute(pagename, request):
     if request.form.has_key('button_preview') and request.form.has_key('button_spellcheck'):
         # multiple buttons pressed at once? must be some spammer/bot
         request.makeForbidden403()
+        request.surge_protect(kick_him=True) # get rid of him
         request.log("LOL, some spammer pressed multiple buttons at once ...")
         return
 
