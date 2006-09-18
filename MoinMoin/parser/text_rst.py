@@ -582,7 +582,10 @@ class MoinDirectives:
             state_machine.insert_input(lines, 'MoinDirectives')
         return
 
-    include.content = True
+    include.has_content = include.content = True
+    include.option_spec = {}
+    include.required_arguments = 1
+    include.optional_arguments = 0
 
     # Add additional macro directive.
     # This allows MoinMoin macros to be used either by using the directive
@@ -604,7 +607,10 @@ class MoinDirectives:
             return [ref]
         return
 
-    macro.content = True
+    macro.has_content = macro.content = True
+    macro.option_spec = {}
+    macro.required_arguments = 1
+    macro.optional_arguments = 0
 
 if ErrorParser: # fixup in case of missing docutils
     Parser = ErrorParser
