@@ -147,16 +147,7 @@ def _getConfigName(url):
         match = regex.match(url)
         if match:
             return name
-    # nothing matched
-    msg = '''
-Could not find a match for url: "%(url)s".
-
-Check your URL regular expressions in the "wikis" list in
-"farmconfig.py". 
-''' % {
-    'url': url,
-}
-    raise error.ConfigurationError(msg)
+    raise error.NoConfigMatchedError
 
 
 def getConfig(url):
