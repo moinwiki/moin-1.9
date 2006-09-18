@@ -965,13 +965,14 @@ Try a different name.""") % (newpagename,)
             # check if we already saved that page
             other = False
             pagelog = self.getPagePath('edit-log', use_underlay=0, isfile=1)
+            next_line = None
             for line in editlog.EditLog(self.request, pagelog).reverse():
                 if int(line.rev)==int(rev):
                     break
                 if not line.is_from_current_user(self.request):
                     other = True
                 next_line = line
-            if next_line.is_from_current_user(self.request):
+            if next_line and next_line.is_from_current_user(self.request):
                 saved_page = Page(self.request, self.page_name,
                                   rev=int(next_line.rev))
                 if newtext==saved_page.get_raw_body():
