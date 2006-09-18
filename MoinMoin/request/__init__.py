@@ -16,6 +16,7 @@ except:
     from sets import Set as set
 
 from MoinMoin import config, wikiutil, user, caching, error
+from MoinMoin.config import multiconfig
 from MoinMoin.util import IsWin9x
 
 # umask setting --------------------------------------------------------
@@ -164,7 +165,11 @@ class RequestBase(object):
             self.clock.start('base__init__')
             # order is important here!
             self.__dict__.update(properties)
-            self._load_multi_cfg()
+            try:
+                self._load_multi_cfg()
+            except error.NoConfigMatchedError:
+                self.makeForbidden(404, 'No wiki configuration matching the URL found!\r\n')
+                return
 
             self.isSpiderAgent = self.check_spider()
 
@@ -323,7 +328,6 @@ class RequestBase(object):
         # protect against calling multiple times
         if not hasattr(self, 'cfg'):
             self.clock.start('load_multi_cfg')
-            from MoinMoin.config import multiconfig
             self.cfg = multiconfig.getConfig(self.url)
             self.clock.stop('load_multi_cfg')
 
@@ -1006,6 +1010,7 @@ class RequestBase(object):
     def makeForbidden(self, resultcode, msg):
         statusmsg = {
             403: 'FORBIDDEN',
+            404: 'Not found',
             503: 'Service unavailable',
         }
         headers = [
