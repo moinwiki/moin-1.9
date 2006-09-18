@@ -1522,7 +1522,7 @@ var gui_editor_link_text = "%(text)s";
             if request.user.may.write(pagename): # separating this gains speed
                 querystr = wikiutil.escape(wikiutil.makeQueryString({'action': 'edit'}))
                 # TODO: remove escape=0 in 2.0
-                url = page.url(request, querystr, escape=0)
+                url = page.url(request, querystr, escape=0, relative=False)
                 bodyattr.append(''' ondblclick="location.href='%s'" ''' % url)
 
         # Set body to the user interface language and direction
