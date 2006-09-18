@@ -19,9 +19,9 @@ from MoinMoin.mail import sendmail
 
 
 # used for merging
-conflict_markers = ("\n---- /!\ '''Edit conflict - other version:''' ----\n",
-                    "\n---- /!\ '''Edit conflict - your version:''' ----\n",
-                    "\n---- /!\ '''End of edit conflict''' ----\n")
+conflict_markers = ("\n---- /!\\ '''Edit conflict - other version:''' ----\n",
+                    "\n---- /!\\ '''Edit conflict - your version:''' ----\n",
+                    "\n---- /!\\ '''End of edit conflict''' ----\n")
 
 
 #############################################################################
@@ -77,7 +77,6 @@ class PageEditor(Page):
         @keyword uid_override: override user id and name (default None)
         """
         Page.__init__(self, request, page_name, **keywords)
-        
         self._ = request.getText
 
         self.do_revision_backup = keywords.get('do_revision_backup', 1)
@@ -98,13 +97,13 @@ class PageEditor(Page):
 
         # Get current editor text
         savetext = self.get_raw_body()
-        
+
         # The original text from the revision the user was editing
         original_text = Page(self.request, self.page_name, rev=origrev).get_raw_body()
-        
+
         # The current revision someone else saved
         saved_text = Page(self.request, self.page_name).get_raw_body()
-        
+
         # And try to merge all into one with edit conflict separators
         verynewtext = diff3.text_merge(original_text, saved_text, savetext,
                                        allow_conflicts, *conflict_markers)
@@ -127,7 +126,7 @@ class PageEditor(Page):
     }
 </script>
 ''' % _("Your changes are not saved!"))
-        
+
     def sendEditor(self, **kw):
         """
         Send the editor form page.
@@ -199,7 +198,7 @@ class PageEditor(Page):
         lock_expire = _("Your edit lock on %(lock_page)s has expired!") % {'lock_page': lock_page}
         lock_mins = _("Your edit lock on %(lock_page)s will expire in # minutes.") % {'lock_page': lock_page}
         lock_secs = _("Your edit lock on %(lock_page)s will expire in # seconds.") % {'lock_page': lock_page}
-                
+
         # get request parameters
         try:
             text_rows = int(form['rows'][0])
@@ -211,7 +210,7 @@ class PageEditor(Page):
         if preview is not None:
             # Propagate original revision
             rev = int(form['rev'][0])
-            
+
             # Check for editing conflicts
             if not self.exists():
                 # page does not exist, are we creating it?
@@ -221,12 +220,12 @@ class PageEditor(Page):
                 conflict_msg = _('Someone else changed this page while you were editing!')
                 if self.mergeEditConflict(rev):
                     conflict_msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!""") 
+Please review the page and save then. Do not save this page as it is!""")
                     rev = self.current_rev()
             if conflict_msg:
                 # We don't show preview when in conflict
                 preview = None
-                
+
         elif self.exists():
             # revision of existing page
             rev = self.current_rev()
@@ -242,9 +241,9 @@ Please review the page and save then. Do not save this page as it is!""")
         status = [msg for msg in status if msg]
         status = ' '.join(status)
         status = Status(self.request, content=status)
-        
+
         self.request.theme.send_title(
-            title % {'pagename': self.split_title(self.request),},
+            title % {'pagename': self.split_title(self.request), },
             page=self,
             pagename=self.page_name, msg=status,
             html_head=self.lock.locktype and (
@@ -257,7 +256,7 @@ Please review the page and save then. Do not save this page as it is!""")
                     }) or '',
             editor_mode=1,
         )
-        
+
         self.request.write(self.request.formatter.startContent("content"))
 
         # Get the text body for the editor field.
@@ -298,7 +297,7 @@ Please review the page and save then. Do not save this page as it is!""")
         # editor area to the right after you begin to type...). IE sucks...
         # http://fplanque.net/2003/Articles/iecsstextarea/
         self.request.write('<fieldset style="border:none;padding:0;">')
-        
+
         self.request.write(unicode(html.INPUT(type="hidden", name="action", value="edit")))
 
         # Send revision of the page our edit is based on
@@ -319,7 +318,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         save_button_text = _('Save Changes')
         cancel_button_text = _('Cancel')
-        
+
         if self.cfg.page_license_enabled:
             self.request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
@@ -339,7 +338,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             self.request.write('''
 <input id="switch2gui" style="display: none;" class="button" type="submit" name="button_switch" value="%s">
 ''' % (_('GUI Mode'),))
-            
+
         self.request.write('''
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
@@ -360,7 +359,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <textarea id="editor-textarea" name="savetext" lang="%(lang)s" dir="%(dir)s" rows="%(rows)d"
           onChange="flgChange = true;" onKeyPress="flgChange = true;">\
 %(text)s\
-</textarea>''' %   {
+</textarea>''' % {
             'lang': lang,
             'dir': i18n.getDirection(lang),
             'rows': text_rows,
@@ -390,7 +389,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>
 <label for="chktrivial">%(label)s</label> ''' % {
-                'checked': ('', 'checked')[form.get('trivial',['0'])[0] == '1'],
+                'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
                 'label': _("Trivial change"),
                 })
 
@@ -399,7 +398,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="checkbox" name="rstrip" id="chkrstrip" value="1" %(checked)s>
 <label for="chkrstrip">%(label)s</label>
 ''' % {
-            'checked': ('', 'checked')[form.get('rstrip',['0'])[0] == '1'],
+            'checked': ('', 'checked')[form.get('rstrip', ['0'])[0] == '1'],
             'label': _('Remove trailing whitespace from each line')
             })
         self.request.write("</p>")
@@ -413,7 +412,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                 self.request.write("<p>%s</p>" % msg)
         self.request.write('</fieldset>')
         self.request.write("</form>")
-        
+
         # QuickHelp originally by Georg Mischler <schorsch@lightingwiki.com>
         markup = self.pi_format or self.request.cfg.default_markup
         quickhelp = self.request.cfg.editor_quickhelp.get(markup, "")
@@ -472,7 +471,7 @@ Try a different name.""") % (newpagename,)
         # Check whether a page with the new name already exists
         if newpage.exists(includeDeleted=1):
             return False, pageexists_error
-        
+
         # Get old page text
         savetext = self.get_raw_body()
 
@@ -533,7 +532,7 @@ Try a different name.""") % (newpagename,)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
-            
+
             if self.request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
                 index = Index(self.request)
@@ -550,10 +549,10 @@ Try a different name.""") % (newpagename,)
             # XXX Error handling
             success = False
             msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
-        
+
         # reset page object
         self.reset()
-        
+
         # delete pagelinks
         arena = self
         key = 'pagelinks'
@@ -562,7 +561,7 @@ Try a different name.""") % (newpagename,)
 
         # forget in-memory page text
         self.set_raw_body(None)
-        
+
         # clean the in memory acl cache
         self.clean_acl_cache()
 
@@ -613,15 +612,14 @@ Try a different name.""") % (newpagename,)
         else:
             lines = wikiutil.pagediff(self.request, self.page_name, revisions[1],
                                       self.page_name, revisions[0])
-            
             if lines:
                 mailBody = mailBody + "%s\n%s\n" % (("-" * 78), '\n'.join(lines))
             else:
                 mailBody = mailBody + _("No differences found!\n", formatted=False)
-        
+
         return sendmail.sendmail(self.request, emails,
             _('[%(sitename)s] %(trivial)sUpdate of "%(pagename)s" by %(username)s', formatted=False) % {
-                'trivial' : (trivial and _("Trivial ", formatted=False)) or "",
+                'trivial': (trivial and _("Trivial ", formatted=False)) or "",
                 'sitename': self.cfg.sitename or "Wiki",
                 'pagename': self.page_name,
                 'username': self.uid_override or user.getUserIdentification(self.request),
@@ -648,7 +646,7 @@ Try a different name.""") % (newpagename,)
             results = [_('Status of sending notification mails:')]
             for lang in subscribers.keys():
                 emails = map(lambda u: u.email, subscribers[lang])
-                names  = map(lambda u: u.name,  subscribers[lang])
+                names = map(lambda u: u.name, subscribers[lang])
                 mailok, status = self._sendNotification(comment, emails, lang, revisions, trivial)
                 recipients = ", ".join(names)
                 results.append(_('[%(lang)s] %(recipients)s: %(status)s') % {
@@ -656,7 +654,7 @@ Try a different name.""") % (newpagename,)
 
             # Return mail sent results. Ignore trivial - we don't have
             # to lie. If mail was sent, just tell about it.
-            return '<p>\n%s\n</p> ' % '<br>'.join(results) 
+            return '<p>\n%s\n</p> ' % '<br>'.join(results)
 
         # No mail sent, no message.
         return ''
@@ -711,7 +709,7 @@ Try a different name.""") % (newpagename,)
             'USER': "-- %s" % signature,
             'SIG': "-- %s [[DateTime(%s)]]" % (signature, now),
         }
-  
+
         if user.valid and user.name:
             if user.email:
                 variables['MAILTO'] = "[[MailTo(%s)]]" % user.email
@@ -720,12 +718,12 @@ Try a different name.""") % (newpagename,)
             userDictPage = user.name + "/MyDict"
             if self.request.dicts.has_dict(userDictPage):
                 variables.update(self.request.dicts.dict(userDictPage))
-                      
+
         # TODO: Use a more stream-lined re.sub algorithm
         for name in variables:
             text = text.replace('@%s@' % name, variables[name])
         return text
-  
+
     def normalizeText(self, text, **kw):
         """ Normalize text
 
@@ -740,9 +738,9 @@ Try a different name.""") % (newpagename,)
         @keyword stripspaces: if 1, strip spaces from text
         @rtype: unicode
         @return: normalized text
-        """     
+        """
         if text:
-            lines = text.splitlines()            
+            lines = text.splitlines()
             # Strip trailing spaces if needed
             if kw.get('stripspaces', 0):
                 lines = [line.rstrip() for line in lines]
@@ -785,9 +783,9 @@ Try a different name.""") % (newpagename,)
         pagename = self.page_name
         date = self.request.user.getFormattedDateTime(time.time())
         intro += _('## backup of page "%(pagename)s" submitted %(date)s') % {
-            'pagename': pagename, 'date': date,} + u'\n'
+            'pagename': pagename, 'date': date, } + u'\n'
         backuppage._write_file(intro + newtext)
-        
+
         return backuppage.url(self.request)
 
     def _get_pragmas(self, text):
@@ -796,14 +794,14 @@ Try a different name.""") % (newpagename,)
             if not line or line[0] != '#':
                 # end of pragmas
                 break
-            
+
             if len(line) > 1 and line[1] == '#':
                 # a comment within pragmas
                 continue
-            
+
             verb, args = (line[1:]+' ').split(' ', 1)
             pragmas[verb.lower()] = args.strip()
-            
+
         return pragmas
 
     def copypage(self):
@@ -845,9 +843,9 @@ Try a different name.""") % (newpagename,)
         pagedir = self.getPagePath(use_underlay=0, check_create=0)
 
         revdir = os.path.join(pagedir, 'revisions')
-        cfn = os.path.join(pagedir,'current')
-        clfn = os.path.join(pagedir,'current-locked')
-        
+        cfn = os.path.join(pagedir, 'current')
+        clfn = os.path.join(pagedir, 'current-locked')
+
         # !!! these log objects MUST be created outside the locked area !!!
 
         # The local log should be the standard edit log, not the
@@ -857,15 +855,15 @@ Try a different name.""") % (newpagename,)
                                uid_override=self.uid_override)
         # Open the global log
         glog = editlog.EditLog(self.request, uid_override=self.uid_override)
-        
+
         if not os.path.exists(pagedir): # new page, create and init pagedir
             os.mkdir(pagedir)
-        if not os.path.exists(revdir):        
+        if not os.path.exists(revdir):
             os.mkdir(revdir)
             f = open(cfn, 'w')
             f.write('%08d\n' % 0)
             f.close()
-            
+
         got_lock = False
         retry = 0
 
@@ -881,10 +879,10 @@ Try a different name.""") % (newpagename,)
                             time.sleep(0.1)
                         else:
                             raise self.CouldNotLock, _("Page could not get locked. Unexpected error (errno=%d).") % err.errno
-                
+
                 if not got_lock:
                     raise self.CouldNotLock, _("Page could not get locked. Missing 'current' file?")
-                
+
                 # increment rev number of current(-locked) page
                 f = open(clfn)
                 revstr = f.read()
@@ -897,7 +895,7 @@ Try a different name.""") % (newpagename,)
                 f = open(clfn, 'w')
                 f.write(revstr+'\n')
                 f.close()
-                
+
                 # save to page file
                 pagefile = os.path.join(revdir, revstr)
                 f = codecs.open(pagefile, 'wb', config.charset)
@@ -907,10 +905,10 @@ Try a different name.""") % (newpagename,)
                 mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
                 # set in-memory content
                 self.set_raw_body(text)
-                
+
                 # reset page object
                 self.reset()
-                
+
                 # write the editlog entry
                 # for now simply make 2 logs, better would be some multilog stuff maybe
                 if self.do_revision_backup:
@@ -951,7 +949,7 @@ Try a different name.""") % (newpagename,)
         #!!! rev check is not enough since internal operations use "0"
 
         # expand variables, unless it's a template or form page
-        if not wikiutil.isTemplatePage(self.request, self.page_name): 
+        if not wikiutil.isTemplatePage(self.request, self.page_name):
             newtext = self._expand_variables(newtext)
 
         msg = ""
@@ -970,7 +968,7 @@ Try a different name.""") % (newpagename,)
             pagelog = self.getPagePath('edit-log', use_underlay=0, isfile=1)
             next_line = None
             for line in editlog.EditLog(self.request, pagelog).reverse():
-                if int(line.rev)==int(rev):
+                if int(line.rev) == int(rev):
                     break
                 if not line.is_from_current_user(self.request):
                     other = True
@@ -978,7 +976,7 @@ Try a different name.""") % (newpagename,)
             if next_line and next_line.is_from_current_user(self.request):
                 saved_page = Page(self.request, self.page_name,
                                   rev=int(next_line.rev))
-                if newtext==saved_page.get_raw_body():
+                if newtext == saved_page.get_raw_body():
                     msg = _("You already saved this page!")
                     return msg
                 else:
@@ -986,7 +984,7 @@ Try a different name.""") % (newpagename,)
                     raise self.EditConflict, msg
 
                 msg = _("""Someone else saved this page while you were editing!
-Please review the page and save then. Do not save this page as it is!""") 
+Please review the page and save then. Do not save this page as it is!""")
 
             if backup_url:
                 msg += "<p>%s</p>" % _(
@@ -1007,27 +1005,27 @@ Please review the page and save then. Do not save this page as it is!""")
                 action != "SAVE/REVERT"):
                 msg = _("You can't change ACLs on this page since you have no admin rights on it!")
                 raise self.NoAdmin, msg
-        
+
         # save only if no error occurred (msg is empty)
         if not msg:
             # set success msg
             msg = _("Thank you for your changes. Your attention to detail is appreciated.")
-            
+
             # determine action for edit log 
             if action == 'SAVE' and not self.exists():
                 action = 'SAVENEW'
             comment = kw.get('comment', u'')
             extra = kw.get('extra', u'')
             trivial = kw.get('trivial', 0)
-            
+
             # write the page file
             mtime_usecs, rev = self._write_file(newtext, action, comment, extra)
             self.clean_acl_cache()
-  
+
             # send notification mails
             if self.request.cfg.mail_enabled:
                 msg = msg + self._notifySubscribers(comment, trivial)
-          
+
             if kw.get('index', 1) and self.request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
                 index = Index(self.request)
@@ -1038,10 +1036,10 @@ Please review the page and save then. Do not save this page as it is!""")
         # !!! this is a little fishy, since the lock owner might not notice
         # we broke his lock ==> but revision checking during preview will
         self.lock.release(force=not msg) # XXX does "not msg" make any sense?
-  
+
         return msg
-            
-            
+
+
 class PageLock:
     """
     PageLock - Lock pages
@@ -1174,7 +1172,7 @@ To leave the editor, press the Cancel button.""") % {
                 entry = editlog.EditLog(self.request, filename=self._filename()).next()
             except StopIteration:
                 entry = None
-                                                    
+
             if entry:
                 self.owner = entry.userid or entry.addr
                 self.owner_html = entry.getEditor(self.request)

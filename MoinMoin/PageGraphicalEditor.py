@@ -23,8 +23,7 @@ from StringIO import StringIO
 def execute(pagename, request):
     if not request.user.may.write(pagename):
         _ = request.getText
-        Page(request, pagename).send_page(request,
-            msg = _('You are not allowed to edit this page.'))
+        Page(request, pagename).send_page(request, msg=_('You are not allowed to edit this page.'))
         return
 
     PageGraphicalEditor(request, pagename).sendEditor()
@@ -101,7 +100,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         lock_expire = _("Your edit lock on %(lock_page)s has expired!") % {'lock_page': lock_page}
         lock_mins = _("Your edit lock on %(lock_page)s will expire in # minutes.") % {'lock_page': lock_page}
         lock_secs = _("Your edit lock on %(lock_page)s will expire in # seconds.") % {'lock_page': lock_page}
-                
+
         # get request parameters
         try:
             text_rows = int(form['rows'][0])
@@ -113,7 +112,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         if preview is not None:
             # Propagate original revision
             rev = int(form['rev'][0])
-            
+
             # Check for editing conflicts
             if not self.exists():
                 # page does not exist, are we creating it?
@@ -128,7 +127,7 @@ Please review the page and save then. Do not save this page as it is!""")
             if conflict_msg:
                 # We don't show preview when in conflict
                 preview = None
-                
+
         elif self.exists():
             # revision of existing page
             rev = self.current_rev()
@@ -137,7 +136,7 @@ Please review the page and save then. Do not save this page as it is!""")
             rev = 0
 
         self.setConflict(bool(conflict_msg))
-        
+
         # Page editing is done using user language
         self.request.setContentLanguage(self.request.lang)
 
@@ -146,9 +145,9 @@ Please review the page and save then. Do not save this page as it is!""")
         status = [msg for msg in status if msg]
         status = ' '.join(status)
         status = Status(self.request, content=status)
-        
+
         self.request.theme.send_title(
-            title % {'pagename': self.split_title(self.request),},
+            title % {'pagename': self.split_title(self.request), },
             page=self,
             pagename=self.page_name, msg=status,
             html_head=self.lock.locktype and (
@@ -161,7 +160,7 @@ Please review the page and save then. Do not save this page as it is!""")
                     }) or '',
             editor_mode=1,
         )
-        
+
         self.request.write(self.request.formatter.startContent("content"))
 
         # Get the text body for the editor field.
@@ -202,7 +201,7 @@ Please review the page and save then. Do not save this page as it is!""")
         # editor area to the right after you begin to type...). IE sucks...
         # http://fplanque.net/2003/Articles/iecsstextarea/
         self.request.write('<fieldset style="border:none;padding:0;">')
-        
+
         self.request.write(unicode(html.INPUT(type="hidden", name="action", value="edit")))
 
         # Send revision of the page our edit is based on
@@ -223,7 +222,7 @@ Please review the page and save then. Do not save this page as it is!""")
 
         save_button_text = _('Save Changes')
         cancel_button_text = _('Cancel')
-        
+
         if self.cfg.page_license_enabled:
             self.request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
@@ -262,7 +261,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         smileypath = themepath + '/img'
         # auto-generating a list for SmileyImages does NOT work from here!
         editor_size = int(request.user.edit_rows) * 22 # 22 height_pixels/line
-        word_rule = self.word_rule() 
+        word_rule = self.word_rule()
 
         self.request.write("""
 <script type="text/javascript" src="%(fckbasepath)s/fckeditor.js"></script>
@@ -317,7 +316,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>
 <label for="chktrivial">%(label)s</label> ''' % {
-                'checked': ('', 'checked')[form.get('trivial',['0'])[0] == '1'],
+                'checked': ('', 'checked')[form.get('trivial', ['0'])[0] == '1'],
                 'label': _("Trivial change"),
                 })
 
@@ -326,7 +325,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input type="checkbox" name="rstrip" id="chkrstrip" value="1" %(checked)s>
 <label for="chkrstrip">%(label)s</label>
 </p> ''' % {
-            'checked': ('', 'checked')[form.get('rstrip',['0'])[0] == '1'],
+            'checked': ('', 'checked')[form.get('rstrip', ['0'])[0] == '1'],
             'label': _('Remove trailing whitespace from each line')
             })
 
@@ -341,7 +340,6 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                 self.request.write("<p>%s</p>" % msg)
         self.request.write('</fieldset>')
         self.request.write("</form>")
-        
 
         if preview is not None:
             if staytop:
@@ -354,3 +352,4 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         self.request.write(self.request.formatter.endContent()) # end content div
         self.request.theme.send_footer(self.page_name)
         self.request.theme.send_closing_html()
+
