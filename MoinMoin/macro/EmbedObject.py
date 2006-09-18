@@ -191,6 +191,45 @@ VALUE = "%(file)s">Your browser cannot display Visio</OBJECT>''' % {
     "height": kw['height'],
     "file": url,
 }
+    elif mime_type == "audio/midi":
+        return '''
+<OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+WIDTH="%(width)s"
+HEIGHT="%(height)s"
+<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
+TYPE="audio/midi">
+</EMBED>
+</OBJECT>''' % {
+    "width": kw["width"],
+    "height": kw["height"],
+    "file": url,
+}
+    elif mime_type == "video/mpeg":
+        return '''
+<OBJECT CLASSID="CLSID:05589FA1-C356-11CE-BF01-00AA0055595A"
+WIDTH="%(width)s"
+HEIGHT="%(height)s"
+<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
+TYPE="application/x-mplayer2">
+</EMBED>
+</OBJECT>''' % {
+   "width": kw["width"],
+   "height": kw["height"],
+   "file": url,
+}
+    elif mime_type == "video/quicktime":
+        return '''
+<OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+WIDTH="%(width)s"
+HEIGHT="%(height)s"
+<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
+TYPE="video/quicktime">
+</EMBED>
+</OBJECT>''' % {
+   "width": kw["width"],
+   "height": kw["height"],
+   "file": url,
+}
     else:
         msg = 'Not supported mimetype %(mimetype)s ' % {"mimetype": mime_type}
         return "%s%s%s" % (macro.formatter.sysmsg(1),
