@@ -104,7 +104,7 @@ class TextFinder:
 
         # Get the current line number. Since not all nodes have a line number
         # we save the last line number - it should be close to the gettext call
-        if node.lineno != None:
+        if node.lineno is not None:
             self._lineno = node.lineno
 
         if node.__class__ == CallFunc and node.args: 
