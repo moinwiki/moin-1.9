@@ -10,7 +10,6 @@
 import os, sys, time
 
 flag_quiet = 0
-script_module = '__main__'
 
 
 # ScriptRequest -----------------------------------------------------------
@@ -82,10 +81,6 @@ class ScriptRequestStrings(ScriptRequest):
 def fatal(msgtext, **kw):
     """ Print error msg to stderr and exit. """
     sys.stderr.write("\n\nFATAL ERROR: " + msgtext + "\n")
-    if kw.get('usage', 0):
-        maindict = vars(sys.modules[script_module])
-        if maindict.has_key('usage'):
-            maindict['usage']()
     sys.exit(1)
 
 
@@ -98,14 +93,13 @@ def log(msgtext):
 # Commandline Support --------------------------------------------------------
 
 class Script:
-    def __init__(self, script, usage, argv=None, def_values=None):
+    def __init__(self, cmd, usage, argv=None, def_values=None):
         #print "argv:", argv, "def_values:", repr(def_values)
         if argv is None:
             self.argv = sys.argv[1:]
         else:
             self.argv = argv
         self.def_values = def_values
-        self.script_module = sys.modules[script]
 
         global _start_time
         _start_time = time.clock()
@@ -113,10 +107,8 @@ class Script:
         import optparse
         from MoinMoin import version
 
-        # what does this code do? at least it does not work.
-        cmd = self.script_module.__name__.split('.')[-1].replace('_', '-')
         rev = "%s %s [%s]" % (version.project, version.release, version.revision)
-        #sys.argv[0] = cmd
+        sys.argv[0] = cmd
 
         self.parser = optparse.OptionParser(
             usage="%(cmd)s [command] %(usage)s" % {'cmd': os.path.basename(sys.argv[0]), 'usage': usage, },
@@ -132,7 +124,7 @@ class Script:
         self.parser.add_option(
             "--show-timing",
             action="store_true", dest="show_timing", default=False,
-            help="Show timing values [default: %default]"
+            help="Show timing values [default: False]"
         )
 
     def run(self, showtime=1):
@@ -162,7 +154,7 @@ class MoinScript(Script):
     """ Moin main script class """
 
     def __init__(self, argv=None, def_values=None):
-        Script.__init__(self, __name__, "[options]", argv, def_values)
+        Script.__init__(self, "moin", "[general options] command subcommand [specific options]", argv, def_values)
         # those are options potentially useful for all sub-commands:
         self.parser.add_option(
             "--config-dir", metavar="DIR", dest="config_dir",
@@ -175,7 +167,7 @@ class MoinScript(Script):
         )
         self.parser.add_option(
             "--page", dest="page", default='',
-            help="wiki page name [default: %default]"
+            help="wiki page name [default: all pages]"
         )
 
     def init_request(self):
@@ -196,7 +188,50 @@ class MoinScript(Script):
         args = self.args
         if len(args) < 2:
             self.parser.print_help()
-            fatal("You must specify a command module and name.")
+            fatal("""You must specify a command module and name:
+            
+moin ... account check ...
+moin ... account create ...
+moin ... account disable ...
+
+moin ... cli show ...
+
+moin ... export dump ...
+
+moin ... import irclog ...
+
+moin ... index build ...
+
+moin ... maint cleancache ...
+moin ... maint cleanpage ...
+moin ... maint globaledit ...
+moin ... maint mkpagepacks ...
+moin ... maint reducewiki ...
+
+moin ... migration data ...
+
+moin ... xmlrpc mailimport ...
+moin ... xmlrpc remote ...
+
+General options:
+    Most commands need some general parameters before command subcommand:
+    --config-dir=/config/directory
+        Mandatory for most commands and specifies the directory that contains
+        your wikiconfig.py (or farmconfig.py).
+
+    --wiki-url=wiki.example.org/
+        Mandatory for most commands and specifies the url of the wiki you like
+        to operate on.
+        
+Specific options:
+    Most commands need additional parameters after command subcommand.
+
+    Sorry, but there is not much docs about that stuff yet, you can check
+    docs/CHANGES and the MoinMoin wiki site for more infos (or just try to
+    invoke some command/subcommand to see if it emits more help).
+    The code you invoke is contained in MoinMoin/script/command/subcommand.py,
+    so just reading the comments / source there might help you, too.
+""")
 
         cmd_module, cmd_name = args[:2]
         from MoinMoin import wikiutil
