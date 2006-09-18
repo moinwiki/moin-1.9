@@ -338,6 +338,8 @@ Version 1.6.current:
     * The thread monitor supports the Python 2.5 feature of directly grabbing
       the current stack frames of all threads now so it has become much faster.
     * Made the irssi parser more tolerant (Thanks to "TheAnarcat").
+    * Changed the rst parser to be compatible to the new docutils interface
+      for directives.
 
 
 Version 1.5-current:
