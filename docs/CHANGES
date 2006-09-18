@@ -342,19 +342,113 @@ Version 1.6.current:
       for directives.
 
 
-Version 1.5-current:
-   * moin.fcg improved - if you use FastCGI, you must use the new file:
-     * can self-terminate after some number of requests (default: -1, this means
-       "unlimited lifetime")
-     * the count of created threads is limited now (default: 5), you can use 1
-       to use non-threaded operation.
-     * configurable socket.listen() backlog (default: 5)
-  * tuning:
-    * more efficient locking code on POSIX platforms, we do much less I/O there now
-    * removed most chmod calls in favour of a single os.umask call
-  * fixed a bad crash that happens (on ANY page!) when you put a *Dict page's
-    name as a member into a *Group page
-  
+
+
+
+Version 1.5.5a:
+  Bugfixes:
+    * fixed ticket creation to only use constant values
+
+Version 1.5.5:
+  HINT: read docs/README.migration.
+  HINT: there was NO change in the underlay/ pages since 1.5.4.
+  HINT: If you experience problems with the reStructured Text (rst) parser,
+        please downgrade docutils to "0.4" because there were major interface
+        breaking API refactorings on the docutils trunk.
+
+  Bugfixes:
+    * GUI editor fixes:
+      * Fixed MoinMoinBugs/GuiEditorModifiesInterwikiPreferred.
+      * Fixed MoinMoinBugs/TableAlignmentProbsWithGUI.
+    * Not a moin bug, but it severely annoyed IE users and also was less
+      comfortable for users of other browser: since about 1.5.4, we served
+      attachments with Content-Disposition: attachment - so that the user has
+      to save them to disk. This was to fix a possible XSS attack using attached
+      HTML files with Javascript inside for stealing your moin cookie or doing
+      other nasty things. We improved this by using different behaviour depending
+      on the potential danger the attached file has when served inline:
+      mimetypes_xss_protect = ['text/html', 'application/x-shockwave-flash', ]
+      This is the default value. If you know more dangerous stuff, please just
+      add the mimetypes there to protect your users and file a bug report
+      telling us what we missed.
+    * Fixed MoinMoinBugs/ReStructuredTextRelativeLinksBroken, thanks to Stefan
+      Merten.
+    * Make tickets used for some actions more safe.
+
+  New features:
+    * edit_ticketing [True] - we protect page save by a ticket (same stuff we
+      already use for DeletePage and RenamePage action).
+      NOTE: If you don't use your browser for editing, but some tool like
+            "editmoin" or "MoinMoin plugin for jEdit", you'll need an update
+            of them supporting the ticket.
+            Alternatively, you can use edit_ticketing = False setting - this
+            is not recommended for internet wikis as it will make spamming them
+            easier.
+    * If we detect some spammer, we kick him out by triggering surge protection
+      (if surge protection is not disabled).
+
+Version 1.5.5rc1:
+  Bugfixes:
+    * Fixed MoinMoinBugs/XmlRpcBrokenForFastCgi - thanks to Johannes Berg.
+    * Fixed gui editor converter confusing of `` and {{{}}} markup.
+    * Fixed emission of HTTP headers (esp. Vary: Cache-Control:).
+    * Fixed a bad crash that happens (on ANY page!) when you put a *Dict
+      page's name as a member into a *Group page.
+    * Fix MyPages action title to use an unformatted string.
+    * Fix double quoted-printable encoding in generated emails (note: this is
+      not a moin bug - this just works around bugs in python stdlib).
+    * Fix mode of drawing files (use config.umask).
+    * Fix trouble with /?action= urls by dropping getPageNameFromQueryString
+      code. 
+    * Fixed sre unpickle issues seen on some machines by avoiding to pickle
+      the regex.
+    * Fix Clock code, add more timers.
+    * Worked around FastCGI problem on Lighttpd: empty lines in the error log.
+    * Fix (add) locking for caching's .remove() call, small fixes to lock code.
+    * Print error message when --target-dir=path is missing from moin export
+      dump command.
+
+  New features:
+    * Added support for "304 not modified" response header for AttachFile get
+      and rss_rc actions - faster, less traffic, less load.
+    * Limit rss with full diffs to 5 items.
+    * Allow surge_action_limits = None to disable surge protection.
+    * moin.fcg improved - if you use FastCGI, you must use the new file:
+      * can self-terminate after some number of requests (default: -1, this
+        means "unlimited lifetime")
+      * the count of created threads is limited now (default: 5), you can use
+        1 to use non-threaded operation.
+      * configurable socket.listen() backlog (default: 5)
+    * Added indonesian i18n (id).
+    * Some measures against spammers trying to brute force their spam into moin.
+    * EmbedObject macro: added mov, mpg and midi support
+    * moin ... export dump --target-dir=PATH --page=PAGENAME_REGEX
+      You must specify --target-dir (where dump will write the html files to)
+      and you may specify --page and either a page name or a regex used to
+      match all pages you want to export. Default is to export all pages.
+
+  Other changes:
+    * Tuning:
+      * more efficient locking code on POSIX platforms, we do much less I/O
+        for locking now
+      * removed most chmod calls in favour of a single os.umask call
+    * Improved Python 2.5 compatibility. Note: if you think that MoinMoin
+      is using too much RAM, you might want to look at Python 2.5 because
+      of its improved memory management.
+    * Throw away SAVE comments longer than 200 chars (you can't enter those by
+      the user interface, so only spammer using automatic POSTs do them).
+    * Updated spider user agent list.
+    * BadContent and LocalBadContent now get noindex,nofollow robots header,
+      same as POSTs.
+    * Standalone opens it logfile unbuffered from now on, thanks to
+      Carsten Grohmann.
+    * Avoid trouble when request.write() data contains None, just skip it -
+      thanks to Juergen Hermann.
+    * Instead of showing a ConfigurationError, moin now emits "404 Not found"
+      http headers and a hint about what could be wrong. This won't fill up
+      your logs just because of typos and spiders still trying old URLs.
+
+ 
 Version 1.5.4:
     HINT: read docs/README.migration.
 Version 1.5.4-current:
