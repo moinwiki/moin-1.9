@@ -730,7 +730,9 @@ class Parser:
 
             # check for adjacent cell markers
             if word.count("|") > 2:
-                if not attrs.has_key('align'):
+                if not attrs.has_key('align') and \
+                   not (attrs.has_key('style') and 'text-align' in attrs['style'].lower()):
+                    # add center alignment if we don't have some alignment already
                     attrs['align'] = '"center"'
                 if not attrs.has_key('colspan'):
                     attrs['colspan'] = '"%d"' % (word.count("|")/2)
