@@ -83,7 +83,7 @@ class ActionBase:
         # Require a valid ticket. Make outside attacks harder by
         # requiring two full HTTP transactions
         ticket = self.form.get('ticket', [''])[0]
-        return wikiutil.checkTicket(ticket)
+        return wikiutil.checkTicket(self.request, ticket)
 
     # UI ---------------------------------------------------------------------
     def get_form_html(self, buttons_html):
@@ -122,7 +122,7 @@ class ActionBase:
         buttons_html = "".join(buttons_html)
 
         if self.use_ticket:
-            ticket_html = '<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket()
+            ticket_html = '<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(self.request)
         else:
             ticket_html = ''
 

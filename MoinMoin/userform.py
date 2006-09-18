@@ -154,7 +154,7 @@ space between words. Group page name is not allowed.""") % wikiutil.escape(theus
 
         # Select user profile (su user) - only works with cookie auth active.
         if form.has_key('select_user'):
-            if (wikiutil.checkTicket(self.request.form['ticket'][0]) and
+            if (wikiutil.checkTicket(self.request, self.request.form['ticket'][0]) and
                 self.request.request_method == 'POST' and
                 self.request.user.isSuperUser()):
                 su_user = form.get('selected_user', [''])[0]
@@ -467,7 +467,7 @@ class UserSettings:
         self.make_form()
 
         if self.request.user.isSuperUser():
-            ticket = wikiutil.createTicket()
+            ticket = wikiutil.createTicket(self.request)
             self.make_row(_('Select User'), [self._user_select()])
             self._form.append(html.INPUT(type="hidden", name="ticket", value="%s" % ticket))
             buttons = [("select_user", _('Select User'))]

@@ -1560,25 +1560,38 @@ def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
 ### Tickets - used by RenamePage and DeletePage
 ########################################################################
 
-def createTicket(tm=None):
+def createTicket(request, tm=None):
     """Create a ticket using a site-specific secret (the config)"""
     import sha
     ticket = tm or "%010x" % time.time()
     digest = sha.new()
     digest.update(ticket)
 
-    cfgvars = vars(config)
-    for var in cfgvars.values():
-        if isinstance(var, str):
+    varnames = ['data_dir', 'data_underlay_dir', 'language_default',
+                'mail_smarthost', 'mail_from', 'page_front_page',
+                'theme_default', 'sitename', 'logo_string',
+                'interwikiname', 'user_homewiki', 'acl_rights_before', ]
+    for varname in varnames:
+        var = getattr(request.cfg, varname, None)
+        if isinstance(var, (str, unicode)):
             digest.update(repr(var))
 
     return "%s.%s" % (ticket, digest.hexdigest())
 
 
-def checkTicket(ticket):
+def checkTicket(request, ticket):
     """Check validity of a previously created ticket"""
-    timestamp = ticket.split('.')[0]
-    ourticket = createTicket(timestamp)
+    try:
+        timestamp_str = ticket.split('.')[0]
+        timestamp = int(timestamp_str, 16)
+    except ValueError:
+        # invalid or empty ticket
+        return False
+    now = time.time()
+    if timestamp < now - 10*3600:
+        # we don't accept tickets older than 10h
+        return False
+    ourticket = createTicket(request, timestamp_str)
     return ticket == ourticket
 
 
