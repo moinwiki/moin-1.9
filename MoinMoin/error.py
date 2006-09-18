@@ -9,7 +9,6 @@ Supply Error class and sub classes used to raise various errors
 import sys
 from MoinMoin import config
 
-
 class Error(Exception):
     """ Base class for moin moin errors
 
@@ -105,4 +104,8 @@ class ConfigurationError(FatalError):
 
 class InternalError(FatalError):
     """ Raise when internal fatal error is found """
+
+class NoConfigMatchedError(Exception):
+    """ we didn't find a configuration for this URL """
+    pass
 
