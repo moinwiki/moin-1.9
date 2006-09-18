@@ -208,6 +208,9 @@ Please review the page and save then. Do not save this page as it is!""")
         # Send revision of the page our edit is based on
         self.request.write('<input type="hidden" name="rev" value="%d">' % (rev,))
 
+        # Create and send a ticket, so we can check the POST
+        self.request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(self.request))
+
         # Save backto in a hidden input
         backto = form.get('backto', [None])[0]
         if backto:

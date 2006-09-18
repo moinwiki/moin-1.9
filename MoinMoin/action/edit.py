@@ -78,6 +78,13 @@ def execute(pagename, request):
     # did user hit cancel button?
     cancelled = request.form.has_key('button_cancel')
 
+    if request.cfg.edit_ticketing:
+        ticket = request.form.get('ticket', [''])[0]
+        if not wikiutil.checkTicket(request, ticket):
+            msg = _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }
+            pg.send_page(request, msg=msg)
+            return
+
     # convert input from Graphical editor
     from MoinMoin.converter.text_html_text_moin_wiki import convert, ConvertError
     try:

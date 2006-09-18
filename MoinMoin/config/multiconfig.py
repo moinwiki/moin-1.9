@@ -275,6 +275,7 @@ reStructuredText Quick Reference
 """),
     }
     edit_locking = 'warn 10' # None, 'warn <timeout mins>', 'lock <timeout mins>'
+    edit_ticketing = True
     edit_rows = 20
 
     hacks = {} # { 'feature1': value1, ... }
