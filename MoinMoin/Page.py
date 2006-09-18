@@ -66,7 +66,7 @@ class Page:
             self.output_mimetype = "text/html"
 
         self.output_charset = config.charset # correct for wiki pages
-        
+
         self._raw_body = None
         self._raw_body_modified = 0
         self.hilite_re = None
@@ -398,7 +398,7 @@ class Page:
         @rtype: string
         @return: temporary filename (complete path + filename)
         """
-        rnd = random.randint(0,1000000000)
+        rnd = random.randint(0, 1000000000)
         tmpname = os.path.join(self.cfg.data_dir, '#%s.%d#' % (self.page_name_fs, rnd))
         return tmpname
 
@@ -823,7 +823,7 @@ class Page:
                 file.close()
 
         return self._raw_body
-    
+
     def get_raw_body_str(self):
         """ Returns the raw markup from the page file, as a string.
 
@@ -831,7 +831,7 @@ class Page:
         @return: raw page contents of this page
         """
         return self.get_raw_body().encode("utf-8")
-    
+
     def set_raw_body(self, body, modified=0):
         """ Set the raw body text (prevents loading from disk).
 
@@ -1063,7 +1063,7 @@ class Page:
         self.formatter.setPage(self)
         if self.hilite_re:
             self.formatter.set_highlight_re(self.hilite_re)
-        
+
         # default is wiki markup
         pi_format = self.cfg.default_markup or "wiki"
         pi_formatargs = ''
@@ -1080,7 +1080,7 @@ class Page:
         # check processing instructions
         while body and body[0] == '#':
             pi_lines += 1
-            
+
             # extract first line
             try:
                 line, body = body.split('\n', 1)
@@ -1104,7 +1104,7 @@ class Page:
             # check the PIs
             if verb == "format":
                 # markup format
-                pi_format, pi_formatargs = (args+' ').split(' ',1)
+                pi_format, pi_formatargs = (args+' ').split(' ', 1)
                 pi_format = pi_format.lower()
                 pi_formatargs = pi_formatargs.strip()
             elif verb == "refresh":
@@ -1234,7 +1234,7 @@ class Page:
 
                 title = self.split_title(request)
 
-                request.theme.send_title(title,  page=self, msg=msg,
+                request.theme.send_title(title, page=self, msg=msg,
                                     pagename=self.page_name, print_mode=print_mode,
                                     media=media, pi_refresh=pi_refresh,
                                     allow_doubleclick=1, trail=trail,
@@ -1256,7 +1256,7 @@ class Page:
 
         # Load the parser
         Parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi_format)
-            
+
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
 
@@ -1381,7 +1381,7 @@ class Page:
                         raise
                     request.log('page cache failed after creation')
                     self.format(parser)
-        
+
         request.clock.stop('send_page_content')
 
     def format(self, parser):
@@ -1389,17 +1389,17 @@ class Page:
         parser.format(self.formatter)
 
     def execute(self, request, parser, code):
-        """ Write page content by executing cache code """            
+        """ Write page content by executing cache code """
         formatter = self.formatter
         request.clock.start("Page.execute")
         try:
             from MoinMoin.macro import Macro
-            macro_obj = Macro(parser)        
+            macro_obj = Macro(parser)
             # Fix __file__ when running from a zip package
             import MoinMoin
             if hasattr(MoinMoin, '__loader__'):
                 __file__ = os.path.join(MoinMoin.__loader__.archive, 'dummy')
-    
+
             try:
                 exec code
             except "CacheNeedsUpdate": # convert the exception
@@ -1413,7 +1413,7 @@ class Page:
         attachmentsPath = self.getPagePath('attachments', check_create=0)
         if cache.needsUpdate(self._text_filename(), attachmentsPath):
             raise Exception('CacheNeedsUpdate')
-        
+
         import marshal
         try:
             return marshal.loads(cache.content())
@@ -1422,23 +1422,23 @@ class Page:
             # See http://docs.python.org/lib/module-marshal.html
             raise Exception('CacheNeedsUpdate')
         except Exception, err:
-            request.log('fail to load "%s" cache: %s' % 
+            request.log('fail to load "%s" cache: %s' %
                         (self.page_name, str(err)))
             raise Exception('CacheNeedsUpdate')
 
     def makeCache(self, request, parser):
         """ Format content into code, update cache and return code """
-        import marshal        
+        import marshal
         from MoinMoin.formatter.text_python import Formatter
         formatter = Formatter(request, ["page"], self.formatter)
-        
+
         # Save request state while formatting page
         saved_current_lang = request.current_lang
         try:
             text = request.redirectedOutput(parser.format, formatter)
         finally:
             request.current_lang = saved_current_lang
-        
+
         src = formatter.assemble_code(text)
         code = compile(src.encode(config.charset),
                        self.page_name.encode(config.charset), 'exec')
@@ -1710,15 +1710,15 @@ class Page:
 
         cache = caching.CacheEntry(self.request, self, 'conflict', scope='item')
         return cache.exists()
-    
+
     def setConflict(self, state):
         """ Sets the editing conflict flag.
         
         @param state: bool, true if there is a conflict.
         """
-        
         cache = caching.CacheEntry(self.request, self, 'conflict', scope='item')
         if state:
             cache.update("") # touch it!
         else:
             cache.remove()
+

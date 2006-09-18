@@ -1533,7 +1533,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
 
 def containsConflictMarker(text):
     """ Returns true if there is a conflict marker in the text. """
-    return "/!\ '''Edit conflict" in text
+    return "/!\\ '''Edit conflict" in text
 
 def pagediff(request, pagename1, rev1, pagename2, rev2, **kw):
     """
@@ -1593,5 +1593,4 @@ def checkTicket(request, ticket):
         return False
     ourticket = createTicket(request, timestamp_str)
     return ticket == ourticket
-
 
