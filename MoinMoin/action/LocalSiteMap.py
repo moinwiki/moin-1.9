@@ -26,6 +26,9 @@
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
+class MaxNodesReachedException(Exception):
+    pass
+
 def execute(pagename, request):
     _ = request.getText
     request.emit_http_headers()
@@ -111,14 +114,14 @@ class PageTreeBuilder:
     def new_node(self):
         self.numnodes = self.numnodes + 1
         if self.numnodes == self.maxnodes:
-            raise "max nodes reached"
+            raise MaxNodesReachedException
 
     def build_tree(self, name):
         self.mark_child(name)
         tree = Tree(name)
         try:
             self.recurse_build([tree], 1)
-        except:
+        except MaxNodesReachedException:
             pass
         return tree
 
