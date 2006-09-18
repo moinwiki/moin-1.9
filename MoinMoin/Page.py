@@ -812,7 +812,7 @@ class Page:
                     # safe when passed to a function expecting a string)
                     return ""
                 else:
-                    raise er
+                    raise
 
             # read file content and make sure it is closed properly
             try:
