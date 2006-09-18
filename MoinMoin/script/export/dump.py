@@ -6,7 +6,7 @@
     web server user.
 
     @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>,
-                2005-2006 by Thomas Waldmann
+                2005-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 
 """
@@ -89,6 +89,8 @@ class PluginScript(script.MoinScript):
         """ moin-dump's main code. """
 
         # Prepare output directory
+        if not self.options.target_dir:
+            _util.fatal("you must use --target-dir=/your/output/path to specify the directory we write the html files to")
         outputdir = os.path.abspath(self.options.target_dir)
         try:
             os.mkdir(outputdir)
@@ -111,12 +113,16 @@ class PluginScript(script.MoinScript):
         # fix url_prefix_static so we get relative paths in output html
         request.cfg.url_prefix_static = url_prefix_static
 
-        if self.options.page:
-            pages = [self.options.page]
-        else:
-            # Get all existing pages in the wiki
-            pages = request.rootpage.getPageList(user='')
-            pages.sort()
+        pages = request.rootpage.getPageList(user='') # get list of all pages in wiki
+        pages.sort()
+        if self.options.page: # did user request a particular page or group of pages?
+            try:
+                namematch = re.compile(self.options.page)
+                pages = [page for page in pages if namematch.match(page)]
+                if not pages:
+                    pages = [self.options.page]
+            except:
+                pages = [self.options.page]
 
         wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
 
@@ -134,12 +140,14 @@ class PluginScript(script.MoinScript):
         for p in [page_front_page, page_title_index, page_word_index]:
             navibar_html += '&nbsp;[<a href="%s">%s</a>]' % (wikiutil.quoteWikinameURL(p), wikiutil.escape(p))
 
+        urlbase = request.url # save wiki base url
         for pagename in pages:
             # we have the same name in URL and FS
             file = wikiutil.quoteWikinameURL(pagename)
             script.log('Writing "%s"...' % file)
             try:
                 pagehtml = ''
+                request.url = urlbase + pagename # add current pagename to url base 
                 page = Page.Page(request, pagename)
                 request.page = page
                 try:
@@ -170,7 +178,7 @@ class PluginScript(script.MoinScript):
         # copy FrontPage to "index.html"
         indexpage = page_front_page
         if self.options.page:
-            indexpage = self.options.page
+            indexpage = pages[0] # index page has limited use when dumping specific pages, but create one anyway
         shutil.copyfile(
             os.path.join(outputdir, wikiutil.quoteWikinameFS(indexpage) + HTML_SUFFIX),
             os.path.join(outputdir, 'index' + HTML_SUFFIX)
