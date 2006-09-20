@@ -1185,12 +1185,12 @@ class Page:
             request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
             if page_exists:
                 request.setHttpHeader('Status: 200 OK')
-                if not request.cacheable or request.user.valid:
-                    # use "nocache" headers if we're using a method that
-                    # is not simply "display", or if a user is logged in
-                    # (which triggers personalisation features)
-                    for header in request.nocache:
-                        request.setHttpHeader(header)
+                if not request.cacheable:
+                    # use "nocache" headers if we're using a method that is not simply "display"
+                    request.disableHttpCaching(level=2)
+                elif request.user.valid:
+                    # use nocache headers if a user is logged in (which triggers personalisation features)
+                    request.disableHttpCaching(level=1)
                 else:
                     # TODO: we need to know if a page generates dynamic content
                     # if it does, we must not use the page file mtime as last modified value
