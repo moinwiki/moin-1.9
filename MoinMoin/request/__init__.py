@@ -110,15 +110,6 @@ def cgiMetaVariable(header, scheme='http'):
 class RequestBase(object):
     """ A collection for all data associated with ONE request. """
 
-    # Header set to force misbehaved proxies and browsers to keep their
-    # hands off a page
-    # Details: http://support.microsoft.com/support/kb/articles/Q234/0/67.ASP
-    nocache = [
-        "Pragma: no-cache",
-        "Cache-Control: no-cache",
-        "Expires: -1",
-    ]
-
     # Defaults (used by sub classes)
     http_accept_language = 'en'
     server_name = 'localhost'
@@ -142,6 +133,7 @@ class RequestBase(object):
 
         self.user_headers = []
         self.cacheable = 0 # may this output get cached by http proxies/caches?
+        self.http_caching_disabled = 0 # see disableHttpCaching()
         self.page = None
         self._dicts = None
 
@@ -1352,30 +1344,43 @@ space between words. Group page name is not allowed.""") % self.user.name
         return '%s, %s %02d:%02d:%02d GMT' % (day, date, now.tm_hour,
                                               now.tm_min, now.tm_sec)
 
-    def disableHttpCaching(self):
-        """ Prevent caching of pages that should not be cached
+    def disableHttpCaching(self, level=1):
+        """ Prevent caching of pages that should not be cached.
+
+        level == 1 means disabling caching when we have a cookie set
+        level == 2 means completely disabling caching (used by Page*Editor)
 
         This is important to prevent caches break acl by providing one
         user pages meant to be seen only by another user, when both users
         share the same caching proxy.
-        """
-        # Run only once
-        if hasattr(self, 'http_caching_disabled'):
-            return
-        self.http_caching_disabled = 1
 
-        # Set Cache control header for http 1.1 caches
-        # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.3
-        # and http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.9
-        self.setHttpHeader('Cache-Control: no-cache="set-cookie", private, max-age=0')
+        AVOID using no-cache and no-store for attachments as it is completely broken on IE!
+        
+        Details: http://support.microsoft.com/support/kb/articles/Q234/0/67.ASP
+        """
+        if level <= self.http_caching_disabled:
+            return # only make caching stricter
+
+        if level == 1:
+            # Set Cache control header for http 1.1 caches
+            # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2109.html#sec-4.2.3
+            # and http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.9
+            #self.setHttpHeader('Cache-Control: no-cache="set-cookie", private, max-age=0')
+            self.setHttpHeader('Cache-Control: private, must-revalidate, max-age=10')
+        elif level == 2:
+            self.setHttpHeader('Cache-Control: no-cache')
 
         # Set Expires for http 1.0 caches (does not support Cache-Control)
-        yearago = time.time() - (3600 * 24 * 365)
-        self.setHttpHeader('Expires: %s' % self.httpDate(when=yearago))
+        when = time.time() - (3600 * 24 * 365)
+        self.setHttpHeader('Expires: %s' % self.httpDate(when=when))
 
         # Set Pragma for http 1.0 caches
         # See http://www.cse.ohio-state.edu/cgi-bin/rfc/rfc2068.html#sec-14.32
-        self.setHttpHeader('Pragma: no-cache')
+        # DISABLED for level == 1 to fix IE https file attachment downloading trouble.
+        if level == 2:
+            self.setHttpHeader('Pragma: no-cache')
+
+        self.http_caching_disabled = level
 
     def finish(self):
         """ General cleanup on end of request

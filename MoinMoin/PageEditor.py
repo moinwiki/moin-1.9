@@ -143,7 +143,8 @@ class PageEditor(Page):
 
         form = self.request.form
         _ = self._
-        self.request.emit_http_headers(self.request.nocache)
+        self.request.disableHttpCaching(level=2)
+        self.request.emit_http_headers()
 
         raw_body = ''
         msg = None
