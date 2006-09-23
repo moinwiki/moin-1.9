@@ -580,7 +580,7 @@ Try a different name.""") % (newpagename,)
         @param comment: editor's comment given when saving the page
         @param emails: list of email addresses
         @param email_lang: language of emails
-        @param revisions: revisions of this page
+        @param revisions: revisions of this page (newest first!)
         @param trivial: the change is marked as trivial
         @rtype: int
         @return: sendmail result
@@ -589,7 +589,7 @@ Try a different name.""") % (newpagename,)
 
         pagelink = self.request.getQualifiedURL(self.url(self.request, relative=False))
         if len(revisions) >= 2:
-            pagelink += "?action=diff&rev2=%i&rev1=%i" % tuple(revisions[-2:])
+            pagelink += "?action=diff&rev2=%i&rev1=%i" % tuple(revisions[:2])
 
 
         mailBody = _("Dear Wiki user,\n\n"
