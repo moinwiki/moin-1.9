@@ -1275,9 +1275,8 @@ space between words. Group page name is not allowed.""") % self.user.name
         # we should not generate the headers two times
         if not getattr(self, 'sent_headers', 0):
             self.emit_http_headers(['Status: 500 MoinMoin Internal Error'])
-        self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
-        failure.handle(self)
+        failure.handle(self, err)
 
     def makeUniqueID(self, base):
         """
