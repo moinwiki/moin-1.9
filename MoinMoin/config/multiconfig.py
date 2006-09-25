@@ -12,7 +12,7 @@ import os
 import sys
 import time
 
-from MoinMoin import error, util, wikiutil
+from MoinMoin import config, error, util, wikiutil
 import MoinMoin.auth as authmodule
 from MoinMoin.packages import packLine
 from MoinMoin.security import AccessControlList
@@ -161,13 +161,13 @@ def getConfig(url):
     @rtype: DefaultConfig subclass instance
     @return: config object for specific wiki
     """
-    configName = _getConfigName(url)
+    cfgName = _getConfigName(url)
     try:
-        config = _config_cache[configName]
+        cfg = _config_cache[cfgName]
     except KeyError:
-        config = _makeConfig(configName)
-        config = _config_cache.setdefault(configName, config)
-    return config
+        cfg = _makeConfig(cfgName)
+        cfg = _config_cache.setdefault(cfgName, cfg)
+    return cfg
 
 
 # This is a way to mark some text for the gettext tools so that they don't
@@ -421,10 +421,10 @@ reStructuredText Quick Reference
     # copy the value to url_prefix_static to ease transition.
     url_prefix = None
 
-    # include the moin version number, so we can have a unlimited cache lifetime
+    # includes the moin version number, so we can have a unlimited cache lifetime
     # for the static stuff. if stuff changes on version upgrade, url will change
     # immediately and we have no problem with stale caches.
-    url_prefix_static = '/moin_static160'
+    url_prefix_static = config.url_prefix_static
 
     # we could prefix actions to be able to exclude them by robots.txt:
     #url_prefix_action = 'action' # no leading or trailing '/'

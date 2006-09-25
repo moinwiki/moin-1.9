@@ -39,6 +39,11 @@ class Config(TwistedConfig):
     # Path to moin shared files (default '/usr/share/moin/wiki/htdocs')
     docs = '/usr/share/moin/htdocs'
 
+    # URL prefix for the static stuff (used to access stuff in docs) - you
+    # usually should not need to change this because Twisted moin uses
+    # matching defaults for here and for wikiconfig.py:
+    #url_prefix_static = '/moin_static160'
+
     # The server will run with as this user and group (default 'www-data')
     user = 'www-data'
     group = 'www-data'
@@ -73,7 +78,7 @@ class Config(TwistedConfig):
     ## memoryProfile = TwistedProfiler('mointwisted',
     ##                            requestsPerSample=100,
     ##                            collect=0)
-    
+
     # Hotshot profile (default commented)
     # Not compatible with threads.
     ## hotshotProfile = name + '.prof'

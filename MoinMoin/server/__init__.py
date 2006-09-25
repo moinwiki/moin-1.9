@@ -9,7 +9,7 @@
 """
 
 import os
-
+from MoinMoin import config
 
 def switchUID(uid, gid):
     """ Switch identity to safe user and group
@@ -45,6 +45,8 @@ class Config:
     This class does all error checking needed for config values, and will
     raise a RuntimeError on any fatal error.
     """
+    # some defaults that should be common for all servers:
+    url_prefix_static = config.url_prefix_static
 
     def __init__(self):
         """ Validate and post process configuration values

@@ -46,7 +46,6 @@ del config
 # Server globals
 config = None
 
-url_prefix_static = 'moin_static160'
 
 class WikiResource(resource.Resource):
     """ Wiki resource """
@@ -61,12 +60,12 @@ class WikiRoot(resource.Resource):
 
     def getChild(self, name, request):
         # Serve images and css from url_prefix_static
-        if request.prepath == [] and name == url_prefix_static:
+        if request.prepath == [] and name == config.url_prefix_static[1:]:
             return resource.Resource.getChild(self, name, request)
 
         # Serve special 'root' files from url_prefix_static
         elif name in ['favicon.ico', 'robots.txt'] and request.postpath == []:
-            return self.children[url_prefix_static].getChild(name, request)
+            return self.children[config.url_prefix_static[1:]].getChild(name, request)
 
         # All other through moin
 
@@ -243,7 +242,7 @@ def makeApp(ConfigClass):
     default = WikiRoot()
 
     # Here is where img and css and some special files come from
-    default.putChild(url_prefix_static, static.File(config.docs))
+    default.putChild(config.url_prefix_static[1:], static.File(config.docs))
 
     # Generate the Site factory
     # TODO: Maybe we can use WikiRoot instead of this

@@ -6,6 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 import re
+from MoinMoin import version
 
 # Threads flag - if you write a moin server that use threads, import
 # config in the server and set this flag to True.
@@ -18,6 +19,14 @@ charset = 'utf-8'
 
 # When creating files, we use e.g. 0666 & config.umask for the mode:
 umask = 0770
+
+# Default value for the static stuff URL prefix (css, img, js).
+# Caution:
+# * do NOT use this directly, it is only the DEFAULT value to be used by
+#   server Config classes and by multiconfig.py for request.cfg.
+# * must NOT end with '/'!
+# * some servers expect '/' at beginning and only 1 level deep.
+url_prefix_static = '/moin_static' + version.release_short
 
 # Invalid characters - invisible characters that should not be in page
 # names. Prevent user confusion and wiki abuse, e.g u'\u202aFrontPage'.

@@ -307,8 +307,10 @@ Version 1.6.current:
          For Apache, Lighttpd and other "external" servers, you have to care
          for configuring them to use a long expiry and change url_prefix_static
          related configuration on upgrade.
-      HINT: if you run standalone server you MUST use /moin_static160.
-      HINT: if you run Twisted server you MUST use /moin_static160.
+      HINT: if you run standalone or Twisted server, the easiest way to get a
+            working configuration (with server configuration matching wiki
+            configuration) is to NOT set url_prefix_static at all. Moin will
+            use matching configuration defaults in this case.
     * url_prefix_action ['action'] was introduced for lowering load and traffic
       caused by searchengine crawlers. Up to now, crawlers where causing a high
       load in internet moin wikis because they tried to get about everything,

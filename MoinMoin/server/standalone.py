@@ -290,15 +290,11 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """ Handle requests (request type GET/HEAD/POST is in self.command)
 
         Separate between wiki pages and css and image url by similar
-        system as cgi and twisted, the '/staticXXX/' url prefix.
-
-        TODO: should use url_prefix_static - and not a constant but
-        request is not available at this time.  Should be fixed by
-        having url_prefix_static in a server config.
+        system as cgi and twisted, the url_prefix_static prefix.
         """
-        PREFIX = '/moin_static160/'
-        if self.path.startswith(PREFIX): # XXX
-            self.path = self.path[len(PREFIX)-1:]
+        prefix = config.url_prefix_static
+        if self.path.startswith(prefix + '/'):
+            self.path = self.path[len(prefix):]
             self.serve_static_file()
         elif self.path in ['/favicon.ico', '/robots.txt']:
             self.serve_static_file()
