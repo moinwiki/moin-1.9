@@ -206,7 +206,8 @@ class TwistedConfig(Config):
     port = 8080
     interfaces = ['']
     threads = 10
-    logPath = None
+    logPath = None # moin log file
+    logPath_twisted = None # Twisted log file
     virtualHosts = None
     memoryProfile = None
     hotshotProfile = None
@@ -250,7 +251,7 @@ def makeApp(ConfigClass):
     root = vhost.NameVirtualHost()
     root.default = default
     # ----------------------------------------------
-    site = MoinSite(root, logPath=config.logPath, timeout=2*60) # 2 minutes timeout
+    site = MoinSite(root, logPath=config.logPath_twisted, timeout=2*60) # 2 minutes timeout
 
     # Make application
     application = service.Application("web", uid=config.uid, gid=config.gid)

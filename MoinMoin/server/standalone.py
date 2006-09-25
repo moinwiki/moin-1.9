@@ -34,7 +34,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys, time, socket, errno, shutil
+import os, sys, time, socket, errno, shutil, logging
 import BaseHTTPServer, SimpleHTTPServer, SocketServer
 
 from MoinMoin import version, wikiutil
@@ -64,7 +64,7 @@ class SimpleServer(BaseHTTPServer.HTTPServer):
 
     def server_activate(self):
         BaseHTTPServer.HTTPServer.server_activate(self)
-        sys.stderr.write("Serving on %s:%d\n" % self.server_address)
+        logging.info("Serving on %s:%d" % self.server_address)
 
     def serve_forever(self):
         """Handle one request at a time until we die """
@@ -279,6 +279,9 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request,
             client_address, server)
 
+    def log_message(self, format, *args):
+        logging.info("%s %s" % (self.address_string(), format % args))
+
     # -------------------------------------------------------------------
     # do_METHOD dispatchers - called for each request
 
@@ -478,7 +481,7 @@ def hotshotProfileDecorator(func, profile):
 def quit(signo, stackframe):
     """ Signal handler for aborting signals """
     global httpd
-    print "\nThanks for using MoinMoin!"
+    logging.info("Thanks for using MoinMoin!")
     if httpd:
         httpd.die()
 
@@ -510,9 +513,8 @@ def makeServer(config):
     if serverClass is ForkingServer and not hasattr(os, "fork"):
         serverClass = SimpleServer
     if serverClass.__name__ != config.serverClass:
-        sys.stderr.write('%s is not available on this platform, falling back '
-                         'to %s\n' % (config.serverClass,
-                                      serverClass.__name__))
+        logging.error('%s is not available on this platform, falling back '
+                      'to %s\n' % (config.serverClass, serverClass.__name__))
 
     from MoinMoin import config as _config
     _config.use_threads = serverClass.use_threads
@@ -573,8 +575,6 @@ def run(configClass):
         MoinRequestHandler.serve_moin = memoryProfileDecorator(
             MoinRequestHandler.serve_moin, config.memoryProfile)
 
-    if config.logPath:
-        sys.stderr = file(config.logPath, 'at', 0)
     registerSignalHandlers(quit)
     httpd = makeServer(config)
 

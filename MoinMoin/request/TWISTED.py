@@ -103,13 +103,6 @@ class Request(RequestBase):
         RequestBase.finish(self)
         self.reactor.callFromThread(self.twistd.finish)
 
-    def open_logs(self):
-        return
-        # create log file for catching stderr output
-        if not self.opened_logs:
-            sys.stderr = open(os.path.join(self.cfg.data_dir, 'error.log'), 'at')
-            self.opened_logs = 1
-
     # Headers ----------------------------------------------------------
 
     def _emit_http_headers(self, headers):

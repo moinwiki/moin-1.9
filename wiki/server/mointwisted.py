@@ -70,7 +70,10 @@ class Config(TwistedConfig):
     # Leaving this as None will have no Apache compatible log file. Apache
     # compatible logfiles are useful because there are quite a few programs
     # which analyze them and display statistics.
-    ## logPath = 'mointwisted.log'
+    ## logPath_twisted = 'mointwisted.log'
+
+    # moin log file
+    ## logPath = 'moin.log'
 
     # Memory profile (default commented)
     # Useful only if you are a developer or interested in moin memory usage

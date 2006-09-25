@@ -34,12 +34,6 @@ class Request(RequestBase):
         form = cgi.FieldStorage()
         return RequestBase._setup_args_from_cgi_form(self, form)
 
-    def open_logs(self):
-        # create log file for catching stderr output
-        if not self.opened_logs:
-            sys.stderr = open(os.path.join(self.cfg.data_dir, 'error.log'), 'at')
-            self.opened_logs = 1
-
     def read(self, n=None):
         """ Read from input stream. """
         if n is None:
