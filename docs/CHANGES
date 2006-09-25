@@ -284,6 +284,9 @@ Version 1.6.current:
       telling us what we missed.
 
   Other changes:
+    * HINT: if you run standard CGI, copy and edit the new moin.cgi from
+      wiki/server/moin.cgi (we made it more similar to how standalone or
+      Twisted start script works)
     * HINT: instead of "from MoinMoin.multiconfig import DefaultConfig" you
       need to use "from MoinMoin.config.multiconfig import DefaultConfig" now.
       You need to change this in your wikiconfig.py or farmconfig.py file.

@@ -26,20 +26,23 @@ sys.path.insert(0, '/path/to/wikiconfig')
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-# This is used to profile MoinMoin (default disabled)
-hotshotProfiler = 0
+from MoinMoin.server.cgi import CgiConfig, run
 
-# ---------------------------------------------------------------------
+class Config(CgiConfig):
+    # Server name
+    # Used to create .log and .prof files
+    name = 'moin'
 
-if hotshotProfiler:
-    import hotshot
-    prof = hotshot.Profile("moin.prof")
-    prof.start()
+    ## logPath = name + '.log'
 
-from MoinMoin.request import CGI
-request = CGI.Request()
-request.run()
+    # Properties
+    # Allow overriding any request property by the value defined in
+    # this dict e.g properties = {'script_name': '/mywiki'}.
+    ## properties = {}
 
-if hotshotProfiler:
-    prof.close()
+    # Hotshot profile (default commented)
+    ## hotshotProfile = name + '.prof'
+
+
+run(Config)
 
