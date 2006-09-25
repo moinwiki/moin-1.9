@@ -6,7 +6,8 @@ Handle fatal errors by showing a message and debugging information.
 @copyright: 2004, 2005 by Nir Soffer <nirs@freeshell.org>
 @license: GNU GPL, see COPYING for details.
 """
-import sys, os
+import sys, os, logging
+
 from MoinMoin.support import cgitb
 
 
@@ -130,12 +131,13 @@ function toggleDebugInfo() {
         return text
 
 
-def handle(request):
+def handle(request, err):
     """ Handle failures
     
     Display fancy error view, or fallback to simple text traceback
     """
     savedError = sys.exc_info()
+    logging.error('%s: %s' % (err.__class__.__name__, str(err)), exc_info=savedError)
     try:
         debug = ('debug' in getattr(request, 'form', {}) or
                  'MOIN_DEBUG' in os.environ)
