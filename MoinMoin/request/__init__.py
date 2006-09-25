@@ -208,7 +208,6 @@ class RequestBase(object):
                 if not self.forbidden and self.surge_protect():
                     self.makeUnavailable503()
 
-            self.logger = None
             self.pragma = {}
             self.mode_getpagelinks = 0
 
@@ -218,7 +217,6 @@ class RequestBase(object):
             self.content_lang = self.cfg.language_default
             self.getText = lambda text, i18n=self.i18n, request=self, lang=self.lang, **kv: i18n.getText(text, request, lang, kv.get('formatted', True))
 
-            self.opened_logs = 0
             self.reset()
             self.clock.stop('base__init__')
 
@@ -758,14 +756,12 @@ class RequestBase(object):
             self.writestack = []
 
     def log(self, msg):
-        """ Log to stderr, which may be error.log """
+        """ Log msg to logging framework """
         msg = msg.strip()
         # Encode unicode msg
         if isinstance(msg, unicode):
             msg = msg.encode(config.charset)
-        # Add time stamp
-        msg = '[%s] %s\n' % (time.asctime(), msg)
-        sys.stderr.write(msg)
+        logging.info(msg)
 
     def write(self, *data):
         """ Write to output stream. """
@@ -1039,7 +1035,6 @@ class RequestBase(object):
             # Don't sleep() here, it binds too much of our resources!
             return self.finish()
 
-        self.open_logs()
         _ = self.getText
         self.clock.start('run')
 
@@ -1283,9 +1278,6 @@ space between words. Group page name is not allowed.""") % self.user.name
         self.log('%s: %s' % (err.__class__.__name__, str(err)))
         from MoinMoin import failure
         failure.handle(self)
-
-    def open_logs(self):
-        pass
 
     def makeUniqueID(self, base):
         """

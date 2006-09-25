@@ -59,9 +59,6 @@ def run(configClass):
         config.hotshotProfile = hotshot.Profile(config.hotshotProfile)
         config.hotshotProfile.start()
 
-    if config.logPath:
-        sys.stderr = file(config.logPath, 'at', 0)
-
     from MoinMoin.request import CGI
     request = CGI.Request(properties=config.properties)
     request.run()

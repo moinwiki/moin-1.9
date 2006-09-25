@@ -152,6 +152,14 @@ Version 1.6.current:
     * Moin got multicall support, including a module that makes it usable on the
       client-side without requiring Python 2.4
     * Added no_magic to text_html formatter to disable tag autoclosing.
+    * Added logging framework, using stdlib's "logging" module. Just do
+      import logging ; logging.debug("your text"). Depending on configuration
+      in the server Config class, your stuff will be written to screen (stderr),
+      to a moin logfile, to apache's error.log, etc.:
+      logPath = None # 'moin.log'
+      loglevel_file = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
+      loglevel_stderr = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
+      NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more

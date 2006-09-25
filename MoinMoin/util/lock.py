@@ -9,13 +9,6 @@
 import os, sys, tempfile, time, errno
 
 
-# Temporary debugging aid, to be replaced with system wide debuging
-# in release 3000.
-#import sys
-#def log(msg):
-#    sys.stderr.write('[%s] lock: %s' % (time.asctime(), msg))
-
-
 class Timer:
     """ Simple count down timer
     
