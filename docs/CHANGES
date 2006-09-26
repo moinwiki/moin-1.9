@@ -160,6 +160,9 @@ Version 1.6.current:
       loglevel_file = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
       loglevel_stderr = None # logging.DEBUG/INFO/WARNING/ERROR/CRITICAL
       NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
+    * MOIN_DEBUG can be set in the environment to let MoinMoin ignore exceptions
+      that would lead to a traceback in the browser. Thanks to Raphael Bossek.
+    
 
   New Features:
     * Removed "underscore in URL" == "blank in pagename magic" - it made more
