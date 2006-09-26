@@ -1,12 +1,14 @@
 # -*- coding: iso-8859-1 -*-
 """ MoinMoin errors
 
-Supply Error class and sub classes used to raise various errors
+    Supply Error class and sub classes used to raise various errors
 
-@copyright: 2004, 2005 by Nir Soffer <nirs@freeshell.org>
-@license: GNU GPL, see COPYING for details.
+    @copyright: 2004, 2005 by Nir Soffer <nirs@freeshell.org>
+    @license: GNU GPL, see COPYING for details.
 """
+
 import sys
+
 from MoinMoin import config
 
 class Error(Exception):
@@ -56,7 +58,7 @@ class Error(Exception):
 
 
 class CompositeError(Error):
-    ''' Base class for exceptions containing an exception
+    """ Base class for exceptions containing an exception
 
     Do not use this class but its more specific sub classes.
 
@@ -66,7 +68,7 @@ class CompositeError(Error):
     Example::
 
         class InternalError(CompositeError):
-            """ Raise for internal errors """
+            ''' Raise for internal errors '''
         
         try:
             # code that might fail...
@@ -75,7 +77,7 @@ class CompositeError(Error):
             
     When showing a traceback, both InternalError traceback and
     HairyLowLevelError traceback are available.
-    '''
+    """
 
     def __init__(self, message):
         """ Save system exception info before this exception is raised """
