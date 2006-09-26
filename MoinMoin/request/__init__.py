@@ -8,6 +8,7 @@
 """
 
 import os, re, time, sys, cgi, StringIO
+import logging
 import copy
 
 try:
