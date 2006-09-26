@@ -80,8 +80,9 @@ def process_message(message):
     from_addr = get_addrs(message, 'From')[0]
     to_addrs = get_addrs(message, 'To')
     cc_addrs = get_addrs(message, 'Cc')
-    bcc_addrs = get_addrs(message, 'Bcc')
-    target_addrs = to_addrs + cc_addrs + bcc_addrs
+    bcc_addrs = get_addrs(message, 'Bcc') # depending on sending MTA, this can be present or not
+    envelope_to_addrs = get_addrs(message, 'X-Original-To') + get_addrs(message, 'X-Envelope-To') # Postfix / Sendmail does this
+    target_addrs = to_addrs + cc_addrs + bcc_addrs + envelope_to_addrs
 
     subject = decode_2044(message['Subject'])
     date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(mktime_tz(parsedate_tz(message['Date']))))
@@ -117,7 +118,8 @@ def process_message(message):
 
     return {'text': u"".join(text_data), 'html': u"".join(html_data),
             'attachments': attachments,
-            'target_addrs': target_addrs, 'to_addrs': to_addrs, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs,
+            'target_addrs': target_addrs,
+            'to_addrs': to_addrs, 'cc_addrs': cc_addrs, 'bcc_addrs': bcc_addrs, 'envelope_to_addrs': envelope_to_addrs,
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
