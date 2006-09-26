@@ -136,6 +136,9 @@ def handle(request, err):
     
     Display fancy error view, or fallback to simple text traceback
     """
+    if 'MOIN_DEBUG' in os.environ:
+        raise err
+
     savedError = sys.exc_info()
     logging.error('%s: %s' % (err.__class__.__name__, str(err)), exc_info=savedError)
     try:
