@@ -142,8 +142,7 @@ def handle(request, err):
     savedError = sys.exc_info()
     logging.error('%s: %s' % (err.__class__.__name__, str(err)), exc_info=savedError)
     try:
-        debug = ('debug' in getattr(request, 'form', {}) or
-                 'MOIN_DEBUG' in os.environ)
+        debug = 'debug' in getattr(request, 'form', {})
         handler = cgitb.Hook(file=request, viewClass=View, debug=debug)
         handler.handle()
     except:
