@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import StringIO, os, re, random, codecs
+import StringIO, os, re, random, codecs, logging
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
@@ -1574,26 +1574,40 @@ class Page:
         More efficient now by using special pagelinks formatter and
         redirecting possible output into null file.
         """
-        request.clock.start('parsePagelinks')
+        pagename = self.page_name
+        if request.parsePageLinks_running.get(pagename, False):
+            #logging.debug("avoid recursion for page %r" % pagename)
+            return [] # avoid recursion
+
+        #logging.debug("running parsePageLinks for page %r" % pagename)
+        # remember we are already running this function for this page:
+        request.parsePageLinks_running[pagename] = True
+
+        request.clock.start('parsePageLinks')
+
         class Null:
-            def write(self, str): pass
+            def write(self, data):
+                pass
+
         request.redirect(Null())
-        request.mode_getpagelinks = 1
+        request.mode_getpagelinks += 1
+        #logging.debug("mode_getpagelinks == %r" % request.mode_getpagelinks)
         try:
             try:
                 from MoinMoin.formatter.pagelinks import Formatter
                 formatter = Formatter(request, store_pagelinks=1)
-                page = Page(request, self.page_name, formatter=formatter)
+                page = Page(request, pagename, formatter=formatter)
                 page.send_page(request, content_only=1)
             except:
                 import traceback
-                traceback.print_exc()
+                traceback.print_exc(200)
         finally:
-            request.mode_getpagelinks = 0
+            request.mode_getpagelinks -= 1
+            #logging.debug("mode_getpagelinks == %r" % request.mode_getpagelinks)
             request.redirect()
             if hasattr(request, '_fmt_hd_counters'):
                 del request._fmt_hd_counters
-            request.clock.stop('parsePagelinks')
+            request.clock.stop('parsePageLinks')
         return formatter.pagelinks
 
     def getCategories(self, request):

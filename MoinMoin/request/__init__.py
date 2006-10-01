@@ -210,7 +210,8 @@ class RequestBase(object):
                     self.makeUnavailable503()
 
             self.pragma = {}
-            self.mode_getpagelinks = 0
+            self.mode_getpagelinks = 0 # is > 0 as long as we are in a getPageLinks call
+            self.parsePageLinks_running = {} # avoid infinite recursion by remembering what we are already running
 
             self.lang = i18n.requestLanguage(self)
             # Language for content. Page content should use the wiki default lang,
