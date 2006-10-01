@@ -293,6 +293,7 @@ Version 1.6.current:
       unsafe to this regard. If you know more dangerous stuff, please just
       add the mimetypes there to protect your users and file a bug report
       telling us what we missed.
+    * Avoid infinite recursion in Page.parsePageLinks.
 
   Other changes:
     * HINT: if you run standard CGI, copy and edit the new moin.cgi from
