@@ -3,9 +3,9 @@
 #
 
 # location for the wikiconfig.py we use for testing:
-export PYTHONPATH=`pwd`/tests
+export PYTHONPATH=$(PWD)/tests:$(PWD)
 
-testwiki := ./testwiki
+testwiki := ./tests/wiki
 share := ./wiki
 
 all:
@@ -51,7 +51,7 @@ underlay:
 
 pagepacks:
 	@python tests/maketestwiki.py
-	@MoinMoin/script/moin.py maint mkpagepacks # must NOT use --config-dir or --wiki-url here!
+	@MoinMoin/script/moin.py --config-dir=$(testwiki)/.. maint mkpagepacks
 	cd $(share) ; rm -rf underlay
 	cp -a $(testwiki)/underlay $(share)/
 	

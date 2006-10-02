@@ -3,6 +3,6 @@
 .*\.py[co]
 sa
 cover
-testwiki
+tests/wiki
 wiki/underlay
 

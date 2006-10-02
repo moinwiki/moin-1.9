@@ -15,7 +15,7 @@ import os, sys, shutil, errno, tarfile
 moinpath = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
 sys.path.insert(0, os.path.abspath(moinpath))
 
-WIKI = os.path.abspath('testwiki')
+WIKI = os.path.abspath(os.path.join('tests', 'wiki'))
 SHARE = os.path.abspath('wiki')
 
 def removeTestWiki():

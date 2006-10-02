@@ -181,9 +181,11 @@ class MoinScript(Script):
     def mainloop(self):
         # Insert config dir or the current directory to the start of the path.
         config_dir = self.options.config_dir
-        if config_dir and not os.path.isdir(config_dir):
-            fatal("bad path given to --config-dir option")
-        sys.path.insert(0, os.path.abspath(config_dir or os.curdir))
+        if config_dir:
+            if os.path.isdir(config_dir):
+                sys.path.insert(0, os.path.abspath(config_dir))
+            else:
+                fatal("bad path given to --config-dir option")
 
         args = self.args
         if len(args) < 2:

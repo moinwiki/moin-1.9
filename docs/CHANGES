@@ -65,6 +65,8 @@ Version 1.6.current:
     get reverted.
 
   Developer notes (these should be moved to the end in the release):
+    * the testing wikiconfig moved to tests/wikiconfig.py, the testing wiki
+      is now created in tests/wiki/...
     * killed "processors" (finally), formatter method changed to:
       formatter.parser(parsername, lines)
     * refactored some actions to use ActionBase base class
@@ -165,6 +167,12 @@ Version 1.6.current:
     
 
   New Features:
+    * The standalone server script moved to the toplevel directory. This makes
+      it possible to directly start moin.py without additional configuration
+      to run a MoinMoin DesktopEdition like wiki setup.
+      Be careful: DesktopEdition uses relaxed security settings only suitable
+      for personal and local use.
+    * Added the MMDE scripts to contrib/DesktopEdition.
     * Removed "underscore in URL" == "blank in pagename magic" - it made more
       trouble than it was worth. If you still want to have a _ in URL, just
       put a _ into pagename.

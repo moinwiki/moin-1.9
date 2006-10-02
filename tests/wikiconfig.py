@@ -12,8 +12,8 @@ from MoinMoin.config.multiconfig import DefaultConfig
 class Config(DefaultConfig):
     sitename = u'Developer Test Wiki'
     logo_string = sitename
-    data_dir = './testwiki/data/'
-    data_underlay_dir = './testwiki/underlay/'
+    data_dir = './tests/wiki/data/'
+    data_underlay_dir = './tests/wiki/underlay/'
     show_hosts = 1                  
     # used to check if it is really a wiki we may modify 
     is_test_wiki = True
