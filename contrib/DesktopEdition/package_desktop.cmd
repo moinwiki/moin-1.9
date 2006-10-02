@@ -38,7 +38,6 @@ if exist %build% (
 	xcopy /I /Q "%build%\README" "moin-desktop\docs\"
 	copy _resources\moin.py moin-desktop\	>NUL
 	copy _resources\wikiconfig.py moin-desktop\	>NUL
-	copy _resources\ImageLink.py moin-desktop\wiki\data\plugin\macro\ >NUL
 	copy "_resources\MoinMoin DesktopEdition.url" moin-desktop\	>NUL
 	del /Q /F /S moin-desktop\.cvsignore>NUL
 	del /Q /F /S moin-desktop\CVS>NUL
@@ -66,26 +65,12 @@ if exist %build% (
 	echo See http://moinmoin.wikiwikiweb.de/DesktopEdition for current information.>> moin-desktop\readme_desktop.txt
 	echo.>> moin-desktop\readme_desktop.txt
 	echo MoinMoin needs Python in order to run. You can download it here: http://www.python.org/download/>> moin-desktop\readme_desktop.txt
-	echo Python 2.4.2 is recommended, Python 2.3 is required. Nothing else is needed.>> moin-desktop\readme_desktop.txt
+	echo Python 2.4.3 is recommended, Python 2.3 is required. Nothing else is needed.>> moin-desktop\readme_desktop.txt
 	echo.>> moin-desktop\readme_desktop.txt
 	echo In order to start MoinMoin DesktopEdition, just run moin.py>> moin-desktop\readme_desktop.txt
 	echo and point your web browser to http://localhost:8080/>> moin-desktop\readme_desktop.txt
 
 	echo.>> moin-desktop\readme_desktop.txt
-	echo This build includes the following patches against the official release/tree:>> moin-desktop\readme_desktop.txt
-	echo.>> moin-desktop\readme_desktop.txt
-	echo patchlevel += "; DesktopEdition %version%">>moin-desktop\MoinMoin\patchlevel.py
-
-	for %%i in (_patches\*.patch) do (
-		cd moin-desktop
-		echo Applying %%i ...
-		patch -ENp 1 < ..\%%i
-		sed q < ..\%%i >> readme_desktop.txt
-		cd ..
-	)
-	if not exist _patches\*.patch echo * None>>moin-desktop\readme_desktop.txt
-	del /Q /F /S moin-desktop\*.orig>NUL 2>NUL
-
 
 	del /Q /F /S moin-desktop\*.pyc>NUL 2>NUL
 
