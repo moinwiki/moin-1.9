@@ -5,6 +5,7 @@
 
 # additional files not known by setup.py
 include README MANIFEST.in setup.cfg moin.spec ChangeLog
+include moin.py wikiconfig.py
 
 # documentation and licenses
 recursive-include docs *

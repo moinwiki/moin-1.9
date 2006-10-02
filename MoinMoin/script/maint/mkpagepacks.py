@@ -137,16 +137,15 @@ class PluginScript(MoinScript):
         if self.options.wiki_url and '.' in self.options.wiki_url:
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki."
             return
-        if self.options.config_dir:
-            print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki without any --config-dir!"
-            return
 
-        self.init_request() # this request will work on a test wiki in testwiki/ directory
+        self.init_request() # this request will work on a test wiki in tests/wiki/ directory
                             # we assume that there are current moinmaster pages there
         request = self.request
         request.form = request.args = request.setup_args()
 
-        if not ('testwiki' in request.cfg.data_dir and 'testwiki' in request.cfg.data_underlay_dir):
+        if not ('tests/wiki' in request.cfg.data_dir and 'tests/wiki' in request.cfg.data_underlay_dir):
+            import sys
+            print sys.path
             print "NEVER EVER RUN THIS ON A REAL WIKI!!! This must be run on a local testwiki."
             return
 
@@ -157,7 +156,7 @@ class PluginScript(MoinScript):
         pageSets = self.buildPageSets()
 
         print "Creating packages ..."
-        generate_filename = lambda name: os.path.join('testwiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
+        generate_filename = lambda name: os.path.join('tests', 'wiki', 'underlay', 'pages', 'SystemPagesSetup', 'attachments', '%s.zip' % name)
 
         self.packageCompoundInstaller(pageSets, generate_filename(ALL))
 

@@ -14,14 +14,12 @@ Without arguments run all the tests in the _tests package.
 
 import os, sys
 
-moinpath = os.path.join(os.path.dirname(sys.argv[0]), os.pardir)
-sys.path.insert(0, os.path.abspath(moinpath))
-
 from MoinMoin import _tests
 
-def run():   
+def run():
     _tests.run(names=sys.argv[1:])
 
 
 if __name__ == '__main__':
     run()
+
