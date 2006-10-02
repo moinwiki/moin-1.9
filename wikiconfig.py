@@ -5,8 +5,8 @@ ONLY to be used for MMDE - if you run a personal wiki on your notebook or PC.
 
 This is NOT intended for internet or server or multiuser use due to relaxed security settings!
 """
-
-from MoinMoin.multiconfig import DefaultConfig
+import sys, os
+from MoinMoin.config.multiconfig import DefaultConfig
 
 class Config(DefaultConfig):
     # vvv DON'T TOUCH THIS EXCEPT IF YOU KNOW WHAT YOU DO vvv
