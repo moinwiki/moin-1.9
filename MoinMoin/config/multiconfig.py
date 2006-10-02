@@ -183,6 +183,9 @@ class CacheClass:
 class DefaultConfig:
     """ default config values """
 
+    # setting DesktopEdition = True gives all local users special powers - ONLY use for MMDE style usage!
+    DesktopEdition = False
+
     # All acl_rights_* lines must use unicode!
     acl_rights_default = u"Trusted:read,write,delete,revert Known:read,write,delete,revert All:read,write"
     acl_rights_before = u""

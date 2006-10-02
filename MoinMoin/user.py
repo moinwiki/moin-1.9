@@ -890,7 +890,11 @@ class User:
         return self._request.user.name == self.name
 
     def isSuperUser(self):
-        superusers = self._request.cfg.superuser
+        request = self._request
+        if request.cfg.DesktopEdition and request.remote_addr == '127.0.0.1':
+            # the DesktopEdition gives any local user superuser powers
+            return True
+        superusers = request.cfg.superuser
         assert isinstance(superusers, (list, tuple))
         return self.valid and self.name and self.name in superusers
 
