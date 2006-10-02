@@ -54,7 +54,7 @@ if os.name == 'nt':
 print
 
 
-class Config(StandaloneConfig):
+class DefaultConfig(StandaloneConfig):
 
     # Server name
     # Used to create .log, .pid and .prof files
