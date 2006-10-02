@@ -2,6 +2,9 @@
 # Makefile for MoinMoin
 #
 
+# location for the wikiconfig.py we use for testing:
+export PYTHONPATH=`pwd`/tests
+
 testwiki := ./testwiki
 share := ./wiki
 
