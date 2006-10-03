@@ -885,6 +885,7 @@ class MimeType(object):
         self.major = self.minor = None # sanitized mime type and subtype
         self.params = {} # parameters like "charset" or others
         self.charset = None # this stays None until we know for sure!
+        self.raw_mimestr = mimestr
 
         if mimestr:
             self.parse_mimetype(mimestr)
@@ -988,8 +989,10 @@ class MimeType(object):
         mimetype = self.mime_type()
         modname = mimetype.replace("/", "_").replace("-", "_").replace(".", "_")
         fragments = modname.split('_')
-        for length in range(len(fragments), 0, -1):
+        for length in range(len(fragments), 1, -1):
             yield "_".join(fragments[:length])
+        yield self.raw_mimestr
+        yield fragments[0]
         yield "application_octet_stream"
 
 
