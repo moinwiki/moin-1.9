@@ -682,15 +682,11 @@ def del_file(pagename, request):
 def move_file(request, pagename, new_pagename, attachment, new_attachment):
     _ = request.getText
 
-    from MoinMoin.PageEditor import PageEditor
-    newpage = PageEditor(request, new_pagename)
-
+    newpage = Page(request, new_pagename)
     if newpage.exists(includeDeleted=1) and request.user.may.write(new_pagename) and request.user.may.delete(pagename):
-        from MoinMoin.util import filesys
-        from MoinMoin.action import AttachFile
-        new_attachment_path = os.path.join(AttachFile.getAttachDir(request, new_pagename,
+        new_attachment_path = os.path.join(getAttachDir(request, new_pagename,
                               create=1), new_attachment).encode(config.charset)
-        attachment_path = os.path.join(AttachFile.getAttachDir(request, pagename),
+        attachment_path = os.path.join(getAttachDir(request, pagename),
                           attachment).encode(config.charset)
 
         if os.path.exists(new_attachment_path):
