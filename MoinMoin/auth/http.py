@@ -9,7 +9,7 @@
     @copyright: 2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-from MoinMoin import user
+from MoinMoin import config, user
 from MoinMoin.request import TWISTED, CLI
 
 def http(request, **kw):
@@ -18,8 +18,8 @@ def http(request, **kw):
     u = None
     # check if we are running Twisted
     if isinstance(request, TWISTED.Request):
-        username = request.twistd.getUser()
-        password = request.twistd.getPassword()
+        username = request.twistd.getUser().decode(config.charset)
+        password = request.twistd.getPassword().decode(config.charset)
         # when using Twisted http auth, we use username and password from
         # the moin user profile, so both can be changed by user.
         u = user.User(request, auth_username=username, password=password,
@@ -29,7 +29,7 @@ def http(request, **kw):
         env = request.env
         auth_type = env.get('AUTH_TYPE', '')
         if auth_type in ['Basic', 'Digest', 'NTLM', 'Negotiate', ]:
-            username = env.get('REMOTE_USER', '')
+            username = env.get('REMOTE_USER', '').decode(config.charset)
             if auth_type in ('NTLM', 'Negotiate',):
                 # converting to standard case so the user can even enter wrong case
                 # (added since windows does not distinguish between e.g.
