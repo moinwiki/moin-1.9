@@ -535,7 +535,7 @@ def execute(pagename, request):
             msg = _('Move aborted!')
             error_msg(pagename, request, msg)
             return
-        if not wikiutil.checkTicket(request.form['ticket'][0]):
+        if not wikiutil.checkTicket(request, request.form['ticket'][0]):
             msg = _('Please use the interactive user interface to move attachments!')
             error_msg(pagename, request, msg)
             return
@@ -735,7 +735,7 @@ def send_moveform(pagename, request):
     # move file
     d = {'action': 'AttachFile',
          'do': 'attachment_move',
-         'ticket': wikiutil.createTicket(),
+         'ticket': wikiutil.createTicket(request),
          'pagename': pagename,
          'attachment_name': filename,
          'move': _('Move'),
