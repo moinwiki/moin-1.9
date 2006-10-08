@@ -137,7 +137,7 @@ def execute(macro, args):
                 target = (target.split('attachment:'))[1]
                 pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
                 target = AttachFile.getAttachUrl(pagename, target, request)
-            if target.startswith('inline:'):
+            elif target.startswith('inline:'):
                 target = (target.split('inline:'))[1]
                 pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
                 target = AttachFile.getAttachUrl(pagename, target, request, do='view')
