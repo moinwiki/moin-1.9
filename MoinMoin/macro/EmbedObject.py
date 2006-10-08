@@ -10,25 +10,60 @@
     CALLING SEQUENCE:
         [[EmbedObject(attachment[,width=width][,height=height])]]
 
-    SUPPORTED MIMETYPES:
-         application/x-shockwave-flash 
-         image/svg+xml
+    SUPPORTED MIMETYPES:  
+         application/x-shockwave-flash
+         application/x-dvi
+         application/postscript
          application/pdf
-         audio/mpeg
+         application/ogg
          application/vnd.visio
+         
+         image/x-ms-bmp
+         image/svg+xml
+         image/tiff
+         image/x-photoshop
 
+         audio/mpeg
+         audio/midi
+         audio/x-wav
+                         
+         video/fli
+         video/mpeg
+         video/quicktime
+         video/x-msvideo
+                         
+         chemical/x-pdb
+
+         x-world/x-vrml  
+           
     INPUTS:
         attachment: name of attachment
 
     KEYWORD PARAMETERS:
-        width: width of the embedded object, default is 100% of window
-        height: height of the embedded object, default is 100% of window
+        
+        Dependent on the mimetype class a different set of keywords is used from the defaults
 
-        application/x-shockwave-flash:
-          play: true is default
-          loop: true is default
-          quality: high is default (medium,low)
+           width = ""
+           height = ""
+           type = mime_type
+           play = false
+           loop = false
+           quality = high
+           op = true
+           repeat = false
+           autostart = false
+           menu = true
+      
 
+        All do use width, height, mime_type   
+        
+        in addition:
+           'video' do use  repeat, autostart, menu, op
+           'audio' do use   play, repeat, autostart, op, hidden
+                   the default width is 60 and default height is 20
+           'application' do use play, menu, autostart
+        
+    
     EXAMPLE:
         [[EmbedObject]]
         [[EmbedObject(example.swf)]]
@@ -39,9 +74,9 @@
          
         [[EmbedObject(example.swf,width=637,height=392)]]
         [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=false)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=false,loop=false)]]
-        [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=false,loop=low)]]
+        [[EmbedObject(SlideShow/example.swf,width=637,height=392)]]
+        [[EmbedObject(SlideShow/example.swf,width=637,height=392,play=true,loop=false)]]
+        [[EmbedObject(SlideShow/example.swf,width=637,height=392,quality=low)]]
 
  
     PROCEDURE:
@@ -53,6 +88,9 @@
         I haven't added it by now.
 
         Please add needed mimetypes as objects.
+    
+    RESTRICTIONS:
+        some mimetypes do ignore all used keywords. May be they do use different names.        
 
 
     MODIFICATION HISTORY:
@@ -64,175 +102,173 @@
         2006-05-09 RB code refactored, fixed a taintfilename bug
         2006-06-29 visio from OwenJones added but not tested,
                    RB code reviewed, taintfile removed
+        2006-10-01 RB code refactored
+        2006-10-05 RB bug fixed closing " at height added
+        2006-10-08 RB type is needed on some platforms, some more keywords added
 """
 import os, mimetypes
 
 from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile
 
+class EmbedObject:
+
+    def __init__(self, macro, args):
+        self.macro = macro
+        self.request = macro.request
+        self.formatter = macro.formatter
+        self.args = args
+
+        self.width = ""
+        self.height = ""
+        self.play = "false"
+        self.loop = "false"
+        self.quality = "high"
+        self.op = "true"
+        self.repeat = "false"
+        self.autostart = "false"
+        self.align = "center"
+        self.hidden = "false"
+        self.menu = "true"
+
+        if args:
+            args = args.split(',')
+            args = [arg.strip() for arg in args]
+        else:
+            args = []
+
+        kw_count = 0
+        argc = len(args)
+        for arg in self.args.split(','):
+            if arg.find('=') > -1:
+                kw_count += 1
+                key, value = arg.split('=')
+                setattr(self, key, wikiutil.escape(value.strip(), quote=1))
+
+        argc -= kw_count
+
+        if not argc:
+           msg = 'Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=heigt])]]'
+           return "%s%s%s" % (formatter.sysmsg(1), formatter.text(msg), formatter.sysmsg(0))
+        else:
+            self.target = args[0]
+
+    def embed(self, mime_type, file):
+        mtype = mime_type.split('/')
+
+        if mtype[0] == 'video':
+            return '''
+<OBJECT>
+<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" MENU="%(menu)s" TYPE="%(type)s"></EMBED>
+</OBJECT>''' % {
+    "width": self.width,
+    "height": self.height,
+    "file": file,
+    "repeat": self.repeat,
+    "autostart": self.autostart,
+    "op": self.op,
+    "type": mime_type,
+    "menu": self.menu,
+}
+
+        if mtype[0] in ['image', 'chemical', 'x-world']:
+            return '''
+<OBJECT>
+<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" TYPE="%(type)s"></EMBED>
+</OBJECT>''' % {
+    "width": self.width,
+    "height": self.height,
+    "file": file,
+    "type": mime_type,
+}
+
+        if mtype[0] == 'audio':
+            if self.width == "":
+                self.width = "60"
+            if self.height == "":
+                self.height = "20"
+            return '''
+<OBJECT>
+<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" REPEAT="%(repeat)s" AUTOSTART="%(autostart)s" OP="%(op)s" PLAY="%(play)s" HIDDEN="%(hidden)s" TYPE="%(type)s"></EMBED>
+</OBJECT>''' % {
+   "width": self.width,
+   "height": self.height,
+   "file": file,
+   "play": self.play,
+   "repeat": self.repeat,
+   "autostart": self.autostart,
+   "op": self.op,
+   "hidden": self.hidden,
+   "type": mime_type,
+}
+
+        if mtype[0] == 'application':
+            return '''
+<OBJECT>
+<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s" AUTOSTART="%(autostart)s" PLAY="%(play)s" LOOP="%(loop)s" MENU="%(menu)s" TYPE="%(type)s"> </EMBED>
+</OBJECT>''' % {
+    "width": self.width,
+    "height": self.height,
+    "file": file,
+    "autostart": self.autostart,
+    "play": self.play,
+    "loop": self.loop,
+    "type": mime_type,
+    "menu": self.menu,
+}
+
+    def render(self):
+        _ = self.request.getText
+
+        pagename, attname = AttachFile.absoluteName(self.target, self.formatter.page.page_name)
+        attachment_fname = AttachFile.getFilename(self.request, pagename, attname)
+
+        if not os.path.exists(attachment_fname):
+            linktext = _('Upload new attachment "%(filename)s"')
+            return wikiutil.link_tag(self.request,
+                ('%s?action=AttachFile&rename=%s' % (
+                wikiutil.quoteWikinameURL(pagename),
+                wikiutil.url_quote_plus(attname))),
+                linktext % {'filename': attname})
+
+        url = AttachFile.getAttachUrl(pagename, attname, self.request)
+        mime_type, enc = mimetypes.guess_type(attname)
+
+        if mime_type in ["application/x-shockwave-flash",
+                         "application/x-dvi",
+                         "application/postscript",
+                         "application/pdf",
+                         "application/ogg",
+                         "application/vnd.visio",
+
+                         "image/x-ms-bmp",
+                         "image/svg+xml",
+                         "image/tiff",
+                         "image/x-photoshop",
+
+                         "audio/mpeg",
+                         "audio/midi",
+                         "audio/x-wav",
+
+                         "video/fli",
+                         "video/mpeg",
+                         "video/quicktime",
+                         "video/x-msvideo",
+
+                         "chemical/x-pdb",
+
+                         "x-world/x-vrml",
+                       ]:
+
+            return self.embed(mime_type, url)
+
+        else:
+            msg = 'Not supported mimetype %(mimetype)s ' % {"mimetype": mime_type}
+            return "%s%s%s" % (self.macro.formatter.sysmsg(1),
+                       self.macro.formatter.text(msg),
+                       self.macro.formatter.sysmsg(0))
+
+
 def execute(macro, args):
-    request = macro.request
-    _ = request.getText
-    formatter = macro.formatter
-    if args:
-        args = args.split(',')
-        args = [arg.strip() for arg in args]
-    else:
-        args = []
-
-    argc = len(args)
-    kw_count = 0
-    kw = {}
-    kw["width"] = "100%"
-    kw["height"] = "100%"
-    kw["play"] = "true"
-    kw["loop"] = "true"
-    kw["quality"] = "high"
-
-    for arg in args:
-        if '=' in arg:
-            kw_count += 1
-            key, value = arg.split('=', 1)
-            kw[str(key)] = wikiutil.escape(value, quote=1)
-    argc -= kw_count
-
-    if not argc:
-       msg = 'Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=heigt])]]'
-       return "%s%s%s" % (formatter.sysmsg(1), formatter.text(msg), formatter.sysmsg(0))
-    else:
-        target = args[0]
-
-    #target = wikiutil.taintfilename(target)
-    pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
-    attachment_fname = AttachFile.getFilename(request, pagename, attname)
-
-    if not os.path.exists(attachment_fname):
-        linktext = _('Upload new attachment "%(filename)s"')
-        return wikiutil.link_tag(request,
-            ('%s?action=AttachFile&rename=%s' % (
-            wikiutil.quoteWikinameURL(pagename),
-            wikiutil.url_quote_plus(attname))),
-            linktext % {'filename': attname})
-
-    url = AttachFile.getAttachUrl(pagename, attname, request)
-    mime_type, enc = mimetypes.guess_type(attname)
-    if mime_type == "application/x-shockwave-flash":
-        return '''
-<OBJECT CLASSID="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" 
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-CODEBASE="http://active.macromedia.com/flash5/cabs/swflash.cab#version=6,0,23,0">
-<PARAM NAME="MOVIE" VALUE="%(file)s">
-<PARAM NAME="PLAY" VALUE="%(play)s">
-<PARAM NAME="LOOP" VALUE="%(loop)s">
-<PARAM NAME="QUALITY" VALUE="%(quality)s">
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s"
-PLAY="%(play)s" ALIGN="" LOOP="%(loop)s" QUALITY="%(quality)s"
-TYPE="application/x-shockwave-flash"
-PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer">
-</EMBED>
-</OBJECT>''' % {
-    "width": kw["width"],
-    "height": kw["height"],
-    "play": kw["play"],
-    "loop": kw["loop"],
-    "quality": kw["quality"],
-    "file": url,
-}
-    elif mime_type == "image/svg+xml":
-        return '''
-<OBJECT CLASSID="" 
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-CODEBASE="http://purl.org/dc/dcmitype/StillImage">
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s"
-TYPE="image/svg+xml">
-</EMBED>
-</OBJECT>''' % {
-    "width": kw["width"],
-    "height": kw["height"],
-    "file": url,
-}
-    elif mime_type == "application/pdf":
-        return '''
-<OBJECT CLASSID=""
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-CODEBASE="http://www.adobe.com">
-<EMBED SRC="%(file)s" WIDTH="%(width)s" HEIGHT="%(height)s"
-TYPE="application/pdf">
-</EMBED>
-</OBJECT>''' % {
-    "width": kw["width"],
-    "height": kw["height"],
-    "file": url,
-}
-    elif mime_type == "audio/mpeg":
-        return '''
-<OBJECT CLASSID=""
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
-TYPE="audio/mpeg">
-</EMBED>
-</OBJECT>''' % {
-    "width": kw["width"],
-    "height": kw["height"],
-    "file": url,
-}
-    elif mime_type == "application/vnd.visio":
-        return  '''
-<OBJECT CLASSID="CLSID:279D6C9A-652E-4833-BEFC-312CA8887857" 
-CODEBASE="http://www.microsoft.com/technet/prodtechnol/office/visio2003/depvisvw.mspx"
-ID="viewer1" WIDTH="%(width)s" HEIGHT="%(height)s"> <PARAM NAME="CurrentPageIndex" VALUE="0"> 
-<PARAM NAME="Zoom" VALUE="-1"> <PARAM NAME = "SRC" 
-VALUE = "%(file)s">Your browser cannot display Visio</OBJECT>''' % {
-    "width": kw['width'],
-    "height": kw['height'],
-    "file": url,
-}
-    elif mime_type == "audio/midi":
-        return '''
-<OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
-TYPE="audio/midi">
-</EMBED>
-</OBJECT>''' % {
-    "width": kw["width"],
-    "height": kw["height"],
-    "file": url,
-}
-    elif mime_type == "video/mpeg":
-        return '''
-<OBJECT CLASSID="CLSID:05589FA1-C356-11CE-BF01-00AA0055595A"
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
-TYPE="application/x-mplayer2">
-</EMBED>
-</OBJECT>''' % {
-   "width": kw["width"],
-   "height": kw["height"],
-   "file": url,
-}
-    elif mime_type == "video/quicktime":
-        return '''
-<OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
-WIDTH="%(width)s"
-HEIGHT="%(height)s"
-<EMBED SRC="%(file)s" HEIGHT="0" REPEAT="TRUE" AUTOSTART="TRUE" WIDTH="0" OP="TRUE"
-TYPE="video/quicktime">
-</EMBED>
-</OBJECT>''' % {
-   "width": kw["width"],
-   "height": kw["height"],
-   "file": url,
-}
-    else:
-        msg = 'Not supported mimetype %(mimetype)s ' % {"mimetype": mime_type}
-        return "%s%s%s" % (macro.formatter.sysmsg(1),
-                   macro.formatter.text(msg),
-                   macro.formatter.sysmsg(0))
+    return EmbedObject(macro, args).render()
 
