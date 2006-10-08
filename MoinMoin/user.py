@@ -206,9 +206,9 @@ class User:
         @param request: the request object
         @param id: (optional) user ID
         @param name: (optional) user name
-        @param password: (optional) user password
+        @param password: (optional) user password (unicode)
         @param auth_username: (optional) already authenticated user name
-                              (e.g. when using http basic auth)
+                              (e.g. when using http basic auth) (unicode)
         @keyword auth_method: method that was used for authentication,
                               default: 'internal'
         @keyword auth_attribs: tuple of user object attribute names that are

@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user
+from MoinMoin import config, user
 from MoinMoin.request import TWISTED
 
 def sslclientcert(request, **kw):
@@ -30,9 +30,9 @@ def sslclientcert(request, **kw):
         if env.get('SSL_CLIENT_VERIFY', 'FAILURE') == 'SUCCESS':
             # if we only want to accept some specific CA, do a check like:
             # if env.get('SSL_CLIENT_I_DN_OU') == "http://www.cacert.org"
-            email = env.get('SSL_CLIENT_S_DN_Email', '')
+            email = env.get('SSL_CLIENT_S_DN_Email', '').decode(config.charset)
             email_lower = email.lower()
-            commonname = env.get('SSL_CLIENT_S_DN_CN', '')
+            commonname = env.get('SSL_CLIENT_S_DN_CN', '').decode(config.charset)
             commonname_lower = commonname.lower()
             if email_lower or commonname_lower:
                 for uid in user.getUserList(request):
