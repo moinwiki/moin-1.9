@@ -82,7 +82,7 @@ def absoluteName(url, pagename):
     else:
         return u"/".join(pieces[:-1]), pieces[-1]
 
-def getAttachUrl(pagename, filename, request, addts=0, escaped=0):
+def getAttachUrl(pagename, filename, request, addts=0, escaped=0, do='get'):
     """ Get URL that points to attachment `filename` of page `pagename`.
 
         If 'addts' is true, a timestamp with the file's modification time
@@ -103,9 +103,12 @@ def getAttachUrl(pagename, filename, request, addts=0, escaped=0):
             wikiutil.url_quote(filename), timestamp)
     else:
         # send file via CGI
-        url = "%s/%s?action=%s&do=get&target=%s" % (
+        if do not in ['get', 'view']:
+            do = 'get'
+
+        url = "%s/%s?action=%s&do=%s&target=%s" % (
             request.getScriptname(), wikiutil.quoteWikinameURL(pagename),
-            action_name, wikiutil.url_quote_plus(filename))
+            action_name, do, wikiutil.url_quote_plus(filename))
     if escaped:
         url = wikiutil.escape(url)
     return url
