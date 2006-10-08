@@ -81,7 +81,8 @@
             2006-03-10 code refactored
             
       Reimar Bauer
-             2006-05-01 bug fix of image linked to attachment   
+             2006-09-22 bug fix of image linked to attachment and inline
+             2006-10-08 patch of DavidLinke added and keys now only lowercase used
 
     @copyright: 2001 by Jeff Kunce,
                 2004 by Marcin Zalewski,
@@ -93,6 +94,8 @@
 import os
 from MoinMoin import wikiutil, config
 from MoinMoin.action import AttachFile
+
+kwAllowed = ['width', 'height', 'alt']
 
 def _is_URL(text):
     """ Answer true if text is an URL.
@@ -115,9 +118,11 @@ def execute(macro, args):
     kw = {} # create a dictionary for the formatter.image call
     for arg in args:
         if '=' in arg:
-            kw_count += 1
             key, value = arg.split('=', 1)
-            kw[str(key)] = wikiutil.escape(value, quote=1)
+            # avoid that urls with "=" are interpreted as keyword
+            if key.lower() not in kwAllowed: continue
+            kw_count += 1
+            kw[str(key.lower())] = wikiutil.escape(value, quote=1)
 
     argc -= kw_count
     if not argc or argc and not args[0]:
@@ -127,6 +132,27 @@ def execute(macro, args):
     image = args[0]
     if argc >= 2 and args[1]:
         target = args[1]
+        if target.startswith('attachment:') or target.startswith('inline:'):
+            if target.startswith('attachment:'):
+                target = (target.split('attachment:'))[1]
+                pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
+                target = AttachFile.getAttachUrl(pagename, target, request)
+            if target.startswith('inline:'):
+                target = (target.split('inline:'))[1]
+                pagename, attname = AttachFile.absoluteName(target, formatter.page.page_name)
+                target = AttachFile.getAttachUrl(pagename, target, request, do='view')
+
+            attachment_fname = AttachFile.getFilename(request, pagename, attname)
+            if not os.path.exists(attachment_fname):
+                linktext = _('Upload new attachment "%(filename)s"')
+                return wikiutil.link_tag(request,
+                                         ('%s?action=AttachFile&rename=%s' % (
+                                         wikiutil.quoteWikinameURL(pagename),
+                                         wikiutil.url_quote_plus(attname))),
+                                         linktext % {'filename': attname})
+
+            kw['src'] = AttachFile.getAttachUrl(pagename, image, request)
+
     elif argc == 1:
         pagename, attname = AttachFile.absoluteName(image, formatter.page.page_name)
         target = AttachFile.getAttachUrl(pagename, image, request)
@@ -145,7 +171,7 @@ def execute(macro, args):
                                      ('%s?action=AttachFile&rename=%s' % (
                                          wikiutil.quoteWikinameURL(pagename),
                                          wikiutil.url_quote_plus(attname))),
-                                     linktext % {'filename': attname})
+                                         linktext % {'filename': attname})
 
     if not kw.has_key('alt'):
         if target is None or _is_URL(target):
@@ -165,7 +191,7 @@ def execute(macro, args):
                            formatter.image(**kw),
                            formatter.url(0))
 
-    if _is_URL(target):
+    if _is_URL(target) or 'action=AttachFile&do=get&target=' in target or 'action=AttachFile&do=view&target=' in target:
         return "%s%s%s" % (formatter.url(1, target),
                            formatter.image(**kw),
                            formatter.url(0))
