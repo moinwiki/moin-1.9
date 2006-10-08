@@ -1312,7 +1312,7 @@ class Page:
 
         # restore old formatter (hopefully we dont throw any exception
         # that is catched again)
-        if old_formatter == no_formatter:
+        if old_formatter is no_formatter:
             del request.formatter
         else:
             request.formatter = old_formatter
