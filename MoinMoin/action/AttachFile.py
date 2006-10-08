@@ -20,9 +20,10 @@
 
     @copyright: 2001 by Ken Sugino (sugino@mediaone.net)
     @copyright: 2001-2004 by Jürgen Hermann <jh@web.de>
-    @copyright: 2005 R. Bauer
+    @copyright: 2005 MoinMoin:ReimarBauer
     @copyright: 2005 MoinMoin:AlexanderSchremmer
     @copyright: 2005 DiegoOngaro at ETSZONE (diego@etszone.com)
+    @copyright: 2006 MoinMoin:ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -266,6 +267,7 @@ def _build_filelist(request, pagename, showheader, readonly):
         str = str + "<ul>"
 
         label_del = _("del")
+        label_move = _("move")
         label_get = _("get")
         label_edit = _("edit")
         label_view = _("view")
@@ -284,6 +286,7 @@ def _build_filelist(request, pagename, showheader, readonly):
             get_url = getAttachUrl(pagename, file, request, escaped=1)
             parmdict = {'baseurl': baseurl, 'urlpagename': urlpagename, 'action': action,
                         'urlfile': urlfile, 'label_del': label_del,
+                        'label_move': label_move,
                         'base': base, 'label_edit': label_edit,
                         'label_view': label_view,
                         'label_unzip': label_unzip,
@@ -297,7 +300,11 @@ def _build_filelist(request, pagename, showheader, readonly):
             if request.user.may.delete(pagename) and not readonly:
                 del_link = '<a href="%(baseurl)s/%(urlpagename)s' \
                     '?action=%(action)s&amp;do=del&amp;target=%(urlfile)s">%(label_del)s</a>&nbsp;| ' % parmdict
-
+            if request.user.may.delete(pagename) and not readonly:
+                move_link = '<a href="%(baseurl)s/%(urlpagename)s' \
+                    '?action=%(action)s&amp;do=move&amp;target=%(urlfile)s">%(label_move)s</a>&nbsp;| ' % parmdict
+            else:
+                move_link = ''
             if ext == '.draw':
                 viewlink = '<a href="%(baseurl)s/%(urlpagename)s?action=%(action)s&amp;drawing=%(base)s">%(label_edit)s</a>' % parmdict
             else:
@@ -314,7 +321,8 @@ def _build_filelist(request, pagename, showheader, readonly):
 
             parmdict['viewlink'] = viewlink
             parmdict['del_link'] = del_link
-            str = str + ('<li>[%(del_link)s'
+            parmdict['move_link'] = move_link
+            str = str + ('<li>[%(del_link)s%(move_link)s'
                 '<a href="%(get_url)s">%(label_get)s</a>&nbsp;| %(viewlink)s]'
                 ' (%(fsize)s KB) attachment:<strong>%(file)s</strong></li>') % parmdict
         str = str + "</ul>"
@@ -517,6 +525,24 @@ def execute(pagename, request):
             del_file(pagename, request)
         else:
             msg = _('You are not allowed to delete attachments on this page.')
+    elif request.form['do'][0] == 'move':
+        if request.user.may.delete(pagename):
+            send_moveform(pagename, request)
+        else:
+            msg = _('You are not allowed to move attachments from this page.')
+    elif request.form['do'][0] == 'attachment_move':
+        if request.form.has_key('cancel'):
+            msg = _('Move aborted!')
+            error_msg(pagename, request, msg)
+            return
+        if not wikiutil.checkTicket(request.form['ticket'][0]):
+            msg = _('Please use the interactive user interface to move attachments!')
+            error_msg(pagename, request, msg)
+            return
+        if request.user.may.delete(pagename):
+            attachment_move(pagename, request)
+        else:
+            msg = _('You are not allowed to move attachments from this page.')
     elif request.form['do'][0] == 'get':
         if request.user.may.read(pagename):
             get_file(pagename, request)
@@ -653,6 +679,104 @@ def del_file(pagename, request):
 
     upload_form(pagename, request, msg=_("Attachment '%(filename)s' deleted.") % {'filename': filename})
 
+def move_file(request, pagename, new_pagename, attachment, new_attachment):
+    _ = request.getText
+
+    from MoinMoin.PageEditor import PageEditor
+    newpage = PageEditor(request, new_pagename)
+
+    if newpage.exists(includeDeleted=1) and request.user.may.write(new_pagename) and request.user.may.delete(pagename):
+        from MoinMoin.util import filesys
+        from MoinMoin.action import AttachFile
+        new_attachment_path = os.path.join(AttachFile.getAttachDir(request, new_pagename,
+                              create=1), new_attachment).encode(config.charset)
+        attachment_path = os.path.join(AttachFile.getAttachDir(request, pagename),
+                          attachment).encode(config.charset)
+
+        if os.path.exists(new_attachment_path):
+            upload_form(pagename, request, msg=_("Attachment '%(filename)s' already exists.") % {
+                                   'filename': new_attachment})
+            return
+
+        if new_attachment_path != attachment_path:
+        # move file  
+            filesys.rename(attachment_path, new_attachment_path)
+            _addLogEntry(request, 'ATTDEL', pagename, attachment)
+            _addLogEntry(request, 'ATTNEW', new_pagename, new_attachment)
+            upload_form(pagename, request, msg=_("Attachment '%(filename)s' moved to %(page)s.") % {
+                                                 'filename': new_attachment,
+                                                 'page': new_pagename})
+        else:
+            upload_form(pagename, request, msg=_("Nothing changed"))
+    else:
+         upload_form(pagename, request, msg=_("Page %(newpagename)s does not exists or you don't have enough rights.") % {
+             'newpagename': new_pagename})
+
+def attachment_move(pagename, request):
+    _ = request.getText
+    if request.form.has_key('newpagename'):
+        new_pagename = request.form.get('newpagename')[0]
+    else:
+        upload_form(pagename, request, msg=_("Move aborted because empty page name"))
+    if request.form.has_key('newattachmentname'):
+        new_attachment = request.form.get('newattachmentname')[0]
+        if new_attachment != wikiutil.taintfilename(new_attachment):
+            upload_form(pagename, request, msg=_("Please use proper signs in attachment '%(filename)s'.") % {
+                                  'filename': new_attachment})
+            return
+    else:
+        upload_form(pagename, request, msg=_("Move aborted because empty attachment name"))
+
+    attachment = request.form.get('oldattachmentname')[0]
+    move_file(request, pagename, new_pagename, attachment, new_attachment)
+
+def send_moveform(pagename, request):
+    _ = request.getText
+
+    filename, fpath = _access_file(pagename, request)
+    if not filename: return # error msg already sent in _access_file
+
+    # move file
+    d = {'action': 'AttachFile',
+         'do': 'attachment_move',
+         'ticket': wikiutil.createTicket(),
+         'pagename': pagename,
+         'attachment_name': filename,
+         'move': _('Move'),
+         'cancel': _('Cancel'),
+         'newname_label': _("New page name"),
+         'attachment_label': _("New attachment name"),
+        }
+    formhtml = '''
+<form method="post" action="">
+<input type="hidden" name="action" value="%(action)s">
+<input type="hidden" name="do" value="%(do)s">
+<input type="hidden" name="ticket" value="%(ticket)s">
+<table>
+    <tr>
+        <td class="label"><label>%(newname_label)s</label></td>
+        <td class="content">
+            <input type="text" name="newpagename" value="%(pagename)s">
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label>%(attachment_label)s</label></td>
+        <td class="content">
+            <input type="text" name="newattachmentname" value="%(attachment_name)s">
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="buttons">
+            <input type="hidden" name="oldattachmentname" value="%(attachment_name)s">
+            <input type="submit" name="move" value="%(move)s">
+            <input type="submit" name="cancel" value="%(cancel)s">
+        </td>
+    </tr>
+</table>
+</form>''' % d
+    thispage = Page(request, pagename)
+    return thispage.send_page(request, msg=formhtml)
 
 def get_file(pagename, request):
     import shutil
