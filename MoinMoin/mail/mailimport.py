@@ -247,8 +247,9 @@ def import_mail_from_message(request, message):
     else:
         new_content = ''
 
-    if not (generate_summary and "/" in pagename):
-        new_content += u"'''Mail: %s (%s, [[DateTime(%s)]])'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
+    #if not (generate_summary and "/" in pagename):
+    #generate header in any case:
+    new_content += u"'''Mail: %s (%s, [[DateTime(%s)]])'''\n\n" % (msg['subject'], email_to_markup(request, msg['from_addr']), msg['date'])
 
     new_content += d['content']
     new_content += "\n" + u"\n * ".join(attachment_links)
