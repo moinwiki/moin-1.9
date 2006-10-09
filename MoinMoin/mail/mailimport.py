@@ -123,7 +123,7 @@ def process_message(message):
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(request, msg, email_subpage_template, wiki_address):
+def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_address):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
     generate_summary = False
@@ -152,12 +152,17 @@ def get_pagename_content(request, msg, email_subpage_template, wiki_address):
         msg['subject'] = '(...)' # we need non-empty subject
 
     pagename_tpl = pagename_tpl.strip()
-    if pagename_tpl.endswith("/"):
-        pagename_tpl += email_subpage_template
-
     # last resort
     if not pagename_tpl:
         pagename_tpl = email_subpage_template
+
+    # for normal use, email_pagename_envelope is just u"%s" - so nothing changes.
+    # for special use, you can use u"+ %s/" - so you don't need to enter "+"
+    # and "/" in every email, but you get the result as if you did.
+    pagename_tpl = email_pagename_envelope % pagename_tpl
+
+    if pagename_tpl.endswith("/"):
+        pagename_tpl += email_subpage_template
 
     # rewrite using string.formatter when python 2.4 is mandatory
     pagename = (pagename_tpl.replace("$from", msg['from_addr'][0]).
@@ -195,6 +200,7 @@ def import_mail_from_message(request, message):
     msg = process_message(message)
 
     email_subpage_template = request.cfg.mail_import_subpage_template
+    email_pagename_envelope = request.cfg.mail_import_pagename_envelope
     wiki_address = request.cfg.mail_import_wiki_address or request.cfg.mail_from
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
@@ -202,7 +208,7 @@ def import_mail_from_message(request, message):
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(request, msg, email_subpage_template, wiki_address)
+    d = get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_address)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
