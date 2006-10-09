@@ -164,10 +164,12 @@ def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_te
     if pagename_tpl.endswith("/"):
         pagename_tpl += email_subpage_template
 
+    subject = msg['subject'].replace('/', '\\') # we can't use / in pagenames
+
     # rewrite using string.formatter when python 2.4 is mandatory
     pagename = (pagename_tpl.replace("$from", msg['from_addr'][0]).
                 replace("$date", msg['date']).
-                replace("$subject", msg['subject']))
+                replace("$subject", subject))
 
     if pagename.startswith("+ ") and "/" in pagename:
         generate_summary = True
