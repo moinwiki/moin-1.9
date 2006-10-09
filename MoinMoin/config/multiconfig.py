@@ -310,6 +310,7 @@ reStructuredText Quick Reference
     mail_from = None # u'Juergen Wiki <noreply@jhwiki.org>'
 
     mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
+    mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
     mail_import_wiki_address = None # the e-mail address for e-mails that should go into the wiki
     mail_import_secret = ""
 
