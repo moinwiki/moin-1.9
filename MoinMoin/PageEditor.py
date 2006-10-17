@@ -3,6 +3,7 @@
     MoinMoin - PageEditor class
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+                2005-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -528,8 +529,7 @@ Try a different name.""") % (newpagename,)
         try:
             # First save a final backup copy of the current page
             # (recreating the page allows access to the backups again)
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'',
-                    index=0)
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=0)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
@@ -861,7 +861,7 @@ Try a different name.""") % (newpagename,)
             os.mkdir(pagedir)
         if not os.path.exists(revdir):
             os.mkdir(revdir)
-            f = open(cfn, 'w')
+            f = file(cfn, 'w')
             f.write('%08d\n' % 0)
             f.close()
 
@@ -869,56 +869,56 @@ Try a different name.""") % (newpagename,)
         retry = 0
 
         try:
-                while not got_lock and retry < 100:
-                    retry += 1
-                    try:
-                        filesys.rename(cfn, clfn)
-                        got_lock = True
-                    except OSError, err:
-                        got_lock = False
-                        if err.errno == 2: # there was no 'current' file
-                            time.sleep(0.1)
-                        else:
-                            raise self.CouldNotLock, _("Page could not get locked. Unexpected error (errno=%d).") % err.errno
+            while not got_lock and retry < 100:
+                retry += 1
+                try:
+                    filesys.rename(cfn, clfn)
+                    got_lock = True
+                except OSError, err:
+                    got_lock = False
+                    if err.errno == 2: # there was no 'current' file
+                        time.sleep(0.1)
+                    else:
+                        raise self.CouldNotLock, _("Page could not get locked. Unexpected error (errno=%d).") % err.errno
 
-                if not got_lock:
-                    raise self.CouldNotLock, _("Page could not get locked. Missing 'current' file?")
+            if not got_lock:
+                raise self.CouldNotLock, _("Page could not get locked. Missing 'current' file?")
 
-                # increment rev number of current(-locked) page
-                f = open(clfn)
-                revstr = f.read()
-                f.close()
-                rev = int(revstr)
-                if not was_deprecated:
-                    if self.do_revision_backup or rev == 0:
-                        rev += 1
-                revstr = '%08d' % rev
-                f = open(clfn, 'w')
-                f.write(revstr+'\n')
-                f.close()
+            # increment rev number of current(-locked) page
+            f = file(clfn)
+            revstr = f.read()
+            f.close()
+            rev = int(revstr)
+            if not was_deprecated:
+                if self.do_revision_backup or rev == 0:
+                    rev += 1
+            revstr = '%08d' % rev
+            f = file(clfn, 'w')
+            f.write(revstr+'\n')
+            f.close()
 
-                # save to page file
-                pagefile = os.path.join(revdir, revstr)
-                f = codecs.open(pagefile, 'wb', config.charset)
-                # Write the file using text/* mime type
-                f.write(self.encodeTextMimeType(text))
-                f.close()
-                mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
-                # set in-memory content
-                self.set_raw_body(text)
+            # save to page file
+            pagefile = os.path.join(revdir, revstr)
+            f = codecs.open(pagefile, 'wb', config.charset)
+            # Write the file using text/* mime type
+            f.write(self.encodeTextMimeType(text))
+            f.close()
+            mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
+            # set in-memory content
+            self.set_raw_body(text)
 
-                # reset page object
-                self.reset()
+            # reset page object
+            self.reset()
 
-                # write the editlog entry
-                # for now simply make 2 logs, better would be some multilog stuff maybe
-                if self.do_revision_backup:
-                    # do not globally log edits with no revision backup (like /MoinEditorBackup pages)
-                    # if somebody edits a deprecated page, log it in global log, but not local log
-                    glog.add(self.request, mtime_usecs, rev, action, self.page_name, None, extra, comment)
-                if not was_deprecated and self.do_revision_backup:
-                    # if we did not create a new revision number, do not locally log it
-                    llog.add(self.request, mtime_usecs, rev, action, self.page_name, None, extra, comment)
+            # write the editlog entry
+            # for now simply make 2 logs, better would be some multilog stuff maybe
+            if self.do_revision_backup:
+                # do not globally log edits with no revision backup (like /MoinEditorBackup pages)
+                # if somebody edits a deprecated page, log it in global log, but not local log
+                glog.add(self.request, mtime_usecs, rev, action, self.page_name, None, extra, comment)
+            if not was_deprecated and self.do_revision_backup:
+                # if we did not create a new revision number, do not locally log it
+                llog.add(self.request, mtime_usecs, rev, action, self.page_name, None, extra, comment)
         finally:
             if got_lock:
                 filesys.rename(clfn, cfn)
@@ -975,8 +975,7 @@ Try a different name.""") % (newpagename,)
                     other = True
                 next_line = line
             if next_line and next_line.is_from_current_user(self.request):
-                saved_page = Page(self.request, self.page_name,
-                                  rev=int(next_line.rev))
+                saved_page = Page(self.request, self.page_name, rev=int(next_line.rev))
                 if newtext == saved_page.get_raw_body():
                     msg = _("You already saved this page!")
                     return msg

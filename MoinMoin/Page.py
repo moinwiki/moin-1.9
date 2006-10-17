@@ -2,7 +2,8 @@
 """
     MoinMoin - Page class
 
-    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
+                2005-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -119,7 +120,7 @@ class Page:
         """
         revfilename = os.path.join(pagedir, 'current')
         try:
-            revfile = open(revfilename)
+            revfile = file(revfilename)
             revstr = revfile.read().strip()
             revfile.close()
             rev = int(revstr)
@@ -155,11 +156,11 @@ class Page:
         
         On case insensitive file system, "pagename" exists even if the
         real page name is "PageName" or "PAGENAME". This leads to
-        consufion in urls, links and logs.
+        confusion in urls, links and logs.
         See MoinMoinBugs/MacHfsPlusCaseInsensitive
         
         Correct the case of the page name. Elements created from the
-        page name in reset() are not updated because its too messy, and
+        page name in reset() are not updated because it's too messy, and
         this fix seems to be enough for 1.3.
         
         Problems to fix later:
@@ -170,10 +171,9 @@ class Page:
         @param pagedir: the storage path to the page directory
         """
         realPath = filesys.realPathCase(pagedir)
-        if realPath is None:
-            return
-        realPath = wikiutil.unquoteWikiname(realPath)
-        self.page_name = realPath[-len(self.page_name):]
+        if not realPath is None:
+            realPath = wikiutil.unquoteWikiname(realPath)
+            self.page_name = realPath[-len(self.page_name):]
 
     def get_rev(self, use_underlay=-1, rev=0):
         """Get information about a revision.
@@ -587,7 +587,7 @@ class Page:
         if self._raw_body is None:
             # try to open file
             try:
-                file = codecs.open(self._text_filename(), 'rb', config.charset)
+                f = codecs.open(self._text_filename(), 'rb', config.charset)
             except IOError, er:
                 import errno
                 if er.errno == errno.ENOENT:
@@ -600,11 +600,11 @@ class Page:
 
             # read file content and make sure it is closed properly
             try:
-                text = file.read()
+                text = f.read()
                 text = self.decodeTextMimeType(text)
                 self.set_raw_body(text)
             finally:
-                file.close()
+                f.close()
 
         return self._raw_body
 
