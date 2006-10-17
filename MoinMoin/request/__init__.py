@@ -171,21 +171,6 @@ class RequestBase(object):
             # path_info, which may use utf-8, and handled by decodePagename.
             self.decode_charsets = [config.charset]
 
-            # hierarchical wiki - set rootpage
-            from MoinMoin.Page import Page
-            #path = self.getPathinfo()
-            #if path.startswith('/'):
-            #    pages = path[1:].split('/')
-            #    if 0: # len(path) > 1:
-            #        ## breaks MainPage/SubPage on flat storage
-            #        rootname = u'/'.join(pages[:-1])
-            #    else:
-            #        # this is the usual case, as it ever was...
-            #        rootname = u""
-            #else:
-            #    # no extra path after script name
-            #    rootname = u""
-
             if self.query_string.startswith('action=xmlrpc'):
                 self.args = {}
                 self.form = {}
@@ -194,9 +179,9 @@ class RequestBase(object):
                 self.args = self.form = self.setup_args()
                 self.action = self.form.get('action', ['show'])[0]
 
-            rootname = u''
-            self.rootpage = Page(self, rootname, is_rootpage=1)
-            
+            from MoinMoin.Page import RootPage
+            self.rootpage = RootPage(self)
+
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)

@@ -16,6 +16,7 @@ def is_cache_exception(e):
     args = e.args
     return not (len(args) != 1 or args[0] != 'CacheNeedsUpdate')
 
+
 class Page:
     """Page - Manage an (immutable) page associated with a WikiName.
        To change a page's content, use the PageEditor class.
@@ -42,7 +43,6 @@ class Page:
         self.cfg = request.cfg
         self.page_name = page_name
         self.rev = kw.get('rev', 0) # revision of this page
-        self.is_rootpage = kw.get('is_rootpage', 0) # is this __init__ of rootpage?
         self.include_self = kw.get('include_self', 0)
 
         # XXX uncomment to see how many pages we create....
@@ -85,19 +85,11 @@ class Page:
         self.page_name_fs = qpagename
 
         # the normal and the underlay path used for this page
+        normalpath = os.path.join(self.cfg.data_dir, "pages", qpagename)
         if not self.cfg.data_underlay_dir is None:
             underlaypath = os.path.join(self.cfg.data_underlay_dir, "pages", qpagename)
         else:
             underlaypath = None
-        if self.is_rootpage: # we have no request.rootpage yet!
-            if not page_name:
-                normalpath = self.cfg.data_dir
-            else:
-                raise NotImplementedError(
-                    "TODO: handle other values of rootpage (not used yet)")
-        else:
-            normalpath = self.request.rootpage.getPagePath("pages", qpagename,
-                                                           check_create=0, use_underlay=0)
 
         # TUNING - remember some essential values
 
@@ -270,52 +262,20 @@ class Page:
         if underlaypath is None:
             use_underlay = 0
 
-        # self is a NORMAL page
-        if not self is self.request.rootpage:
-            if use_underlay == -1: # automatic
-                if self._underlay is None:
-                    underlay, path = 0, standardpath
-                    pagefile, rev, exists = self.get_rev(use_underlay=0)
-                    if not exists:
-                        pagefile, rev, exists = self.get_rev(use_underlay=1)
-                        if exists:
-                            underlay, path = 1, underlaypath
-                    self._underlay = underlay # XXX XXX
-                else:
-                    underlay = self._underlay
-                    path = self._pagepath[underlay]
-            else: # normal or underlay
-                underlay, path = use_underlay, self._pagepath[use_underlay]
-
-        # self is rootpage
-        else:
-            # our current rootpage is not a toplevel, but under another page
-            if self.page_name:
-                # this assumes flat storage of pages and sub pages on same level
-                if use_underlay == -1: # automatic
-                    if self._underlay is None:
-                        underlay, path = 0, standardpath
-                        pagefile, rev, exists = self.get_rev(use_underlay=0)
-                        if not exists:
-                            pagefile, rev, exists = self.get_rev(use_underlay=1)
-                            if exists:
-                                underlay, path = 1, underlaypath
-                        self._underlay = underlay # XXX XXX
-                    else:
-                        underlay = self._underlay
-                        path = self._pagepath[underlay]
-                else: # normal or underlay
-                    underlay, path = use_underlay, self._pagepath[use_underlay]
-
-            # our current rootpage is THE virtual rootpage, really at top of all
+        if use_underlay == -1: # automatic
+            if self._underlay is None:
+                underlay, path = 0, standardpath
+                pagefile, rev, exists = self.get_rev(use_underlay=0)
+                if not exists:
+                    pagefile, rev, exists = self.get_rev(use_underlay=1)
+                    if exists:
+                        underlay, path = 1, underlaypath
+                self._underlay = underlay
             else:
-                # 'auto' doesn't make sense here. maybe not even 'underlay':
-                if use_underlay == 1:
-                    underlay, path = 1, self.cfg.data_underlay_dir
-                # no need to check 'standard' case, we just use path in that case!
-                else:
-                    # this is the location of the virtual root page
-                    underlay, path = 0, self.cfg.data_dir
+                underlay = self._underlay
+                path = self._pagepath[underlay]
+        else: # normal or underlay
+            underlay, path = use_underlay, self._pagepath[use_underlay]
 
         return underlay, path
 
@@ -609,182 +569,6 @@ class Page:
             result = request.user.getFormattedDateTime(
                 wikiutil.version2timestamp(t))
         return result
-
-    def getPageCount(self, exists=0):
-        """ Return page count
-
-        The default value does the fastest listing, and return count of
-        all pages, including deleted pages, ignoring acl rights.
-
-        If you want to get a more accurate number, call with
-        exists=1. This will be about 100 times slower though.
-
-        @param exists: filter existing pages
-        @rtype: int
-        @return: number of pages
-        """
-        self.request.clock.start('getPageCount')
-        if exists:
-            # WARNING: SLOW
-            pages = self.getPageList(user='')
-        else:
-            pages = self.request.pages
-            if not pages:
-                pages = self._listPages()
-        count = len(pages)
-        self.request.clock.stop('getPageCount')
-
-        return count
-
-    def getPageList(self, user=None, exists=1, filter=None, include_underlay=True,
-                    return_objects=False):
-        """ List user readable pages under current page
-
-        Currently only request.rootpage is used to list pages, but if we
-        have true sub pages, any page can list its sub pages.
-
-        The default behavior is listing all the pages readable by the
-        current user. If you want to get a page list for another user,
-        specify the user name.
-
-        If you want to get the full page list, without user filtering,
-        call with user="". Use this only if really needed, and do not
-        display pages the user can not read.
-
-        filter is usually compiled re match or search method, but can be
-        any method that get a unicode argument and return bool. If you
-        want to filter the page list, do it with this filter function,
-        and NOT on the output of this function. page.exists() and
-        user.may.read are very expensive, and should be done on the
-        smallest data set.
-
-        Filter those annoying /MoinEditorBackup pages.
-
-        @param user: the user requesting the pages (MoinMoin.user.User)
-        @param filter: filter function
-        @param exists: filter existing pages
-        @param include_underlay: determines if underlay pages are returned as well
-        @param return_objects: lets it return a list of Page objects instead of
-            names
-        @rtype: list of unicode strings
-        @return: user readable wiki page names
-        """
-        request = self.request
-        request.clock.start('getPageList')
-        # Check input
-        if user is None:
-            user = request.user
-
-        # Get pages cache or create it
-        cache = request.pages
-        if not cache:
-            for name in self._listPages():
-                # Unquote file system names
-                pagename = wikiutil.unquoteWikiname(name)
-
-                # Filter those annoying editor backups
-                if pagename.endswith(u'/MoinEditorBackup'):
-                    continue
-
-                cache[pagename] = None
-
-        if user or exists or filter or not include_underlay or return_objects:
-            # Filter names
-            pages = []
-            for name in cache:
-                # First, custom filter - exists and acl check are very
-                # expensive!
-                if filter and not filter(name):
-                    continue
-
-                page = Page(request, name)
-
-                # Filter underlay pages
-                if not include_underlay and page.getPageStatus()[0]: # is an underlay page
-                    continue
-
-                # Filter deleted pages
-                if exists and not page.exists():
-                    continue
-
-                # Filter out page user may not read.
-                if user and not user.may.read(name):
-                    continue
-
-                if return_objects:
-                    pages.append(page)
-                else:
-                    pages.append(name)
-        else:
-            pages = cache.keys()
-
-        request.clock.stop('getPageList')
-        return pages
-
-    def getPageDict(self, user=None, exists=1, filter=None):
-        """ Return a dictionary of filtered page objects readable by user
-
-        Invoke getPageList then create a dict from the page list. See
-        getPageList docstring for more details.
-
-        @param user: the user requesting the pages
-        @param filter: filter function
-        @param exists: only existing pages
-        @rtype: dict {unicode: Page}
-        @return: user readable pages
-        """
-        pages = {}
-        for name in self.getPageList(user=user, exists=exists, filter=filter):
-            pages[name] = Page(self.request, name)
-        return pages
-
-    def _listPages(self):
-        """ Return a list of file system page names
-
-        This is the lowest level disk access, don't use it unless you
-        really need it.
-
-        NOTE: names are returned in file system encoding, not in unicode!
-
-        @rtype: dict
-        @return: dict of page names using file system encoding
-        """
-        # Get pages in standard dir
-        path = self.getPagePath('pages')
-        pages = self._listPageInPath(path)
-
-        if self.cfg.data_underlay_dir is not None:
-            # Merge with pages from underlay
-            path = self.getPagePath('pages', use_underlay=1)
-            underlay = self._listPageInPath(path)
-            pages.update(underlay)
-
-        return pages
-
-    def _listPageInPath(self, path):
-        """ List page names in domain, using path
-
-        This is the lowest level disk access, don't use it unless you
-        really need it.
-
-        NOTE: names are returned in file system encoding, not in unicode!
-
-        @param path: directory to list (string)
-        @rtype: dict
-        @return: dict of page names using file system encoding
-        """
-        import dircache
-
-        pages = {}
-        for name in dircache.listdir(path):
-            # Filter non-pages in quoted wiki names
-            # List all pages in pages directory - assume flat namespace
-            if name.startswith('.') or name.startswith('#') or name == 'CVS':
-                continue
-
-            pages[name] = None
-
-        return pages
 
     def getlines(self):
         """ Return a list of all lines in body.
@@ -1735,4 +1519,216 @@ class Page:
             cache.update("") # touch it!
         else:
             cache.remove()
+
+
+class RootPage(Page):
+    """ These functions were removed from the Page class to remove hierarchical
+        page storage support until after we have a storage api (and really need it).
+        Currently, there is only 1 instance of this class: request.rootpage
+    """
+    def __init__(self, request):
+        page_name = u''
+        Page.__init__(self, request, page_name)
+
+    def getPageBasePath(self, use_underlay):
+        """
+        Get full path to a page-specific storage area. `args` can
+        contain additional path components that are added to the base path.
+
+        @param use_underlay: force using a specific pagedir, default '-1'
+                                '-1' = automatically choose page dir
+                                '1' = use underlay page dir
+                                '0' = use standard page dir
+        @rtype: string
+        @return: int underlay,
+                 str the full path to the storage area
+        """
+        if self.cfg.data_underlay_dir is None:
+            use_underlay = 0
+
+        # 'auto' doesn't make sense here. maybe not even 'underlay':
+        if use_underlay == 1:
+            underlay, path = 1, self.cfg.data_underlay_dir
+        # no need to check 'standard' case, we just use path in that case!
+        else:
+            # this is the location of the virtual root page
+            underlay, path = 0, self.cfg.data_dir
+
+        return underlay, path
+
+    def getPageList(self, user=None, exists=1, filter=None, include_underlay=True, return_objects=False):
+        """ List user readable pages under current page
+
+        Currently only request.rootpage is used to list pages, but if we
+        have true sub pages, any page can list its sub pages.
+
+        The default behavior is listing all the pages readable by the
+        current user. If you want to get a page list for another user,
+        specify the user name.
+
+        If you want to get the full page list, without user filtering,
+        call with user="". Use this only if really needed, and do not
+        display pages the user can not read.
+
+        filter is usually compiled re match or search method, but can be
+        any method that get a unicode argument and return bool. If you
+        want to filter the page list, do it with this filter function,
+        and NOT on the output of this function. page.exists() and
+        user.may.read are very expensive, and should be done on the
+        smallest data set.
+
+        Filter those annoying /MoinEditorBackup pages.
+
+        @param user: the user requesting the pages (MoinMoin.user.User)
+        @param filter: filter function
+        @param exists: filter existing pages
+        @param include_underlay: determines if underlay pages are returned as well
+        @param return_objects: lets it return a list of Page objects instead of
+            names
+        @rtype: list of unicode strings
+        @return: user readable wiki page names
+        """
+        request = self.request
+        request.clock.start('getPageList')
+        # Check input
+        if user is None:
+            user = request.user
+
+        # Get pages cache or create it
+        cache = request.pages
+        if not cache:
+            for name in self._listPages():
+                # Unquote file system names
+                pagename = wikiutil.unquoteWikiname(name)
+
+                # Filter those annoying editor backups
+                if pagename.endswith(u'/MoinEditorBackup'):
+                    continue
+
+                cache[pagename] = None
+
+        if user or exists or filter or not include_underlay or return_objects:
+            # Filter names
+            pages = []
+            for name in cache:
+                # First, custom filter - exists and acl check are very
+                # expensive!
+                if filter and not filter(name):
+                    continue
+
+                page = Page(request, name)
+
+                # Filter underlay pages
+                if not include_underlay and page.getPageStatus()[0]: # is an underlay page
+                    continue
+
+                # Filter deleted pages
+                if exists and not page.exists():
+                    continue
+
+                # Filter out page user may not read.
+                if user and not user.may.read(name):
+                    continue
+
+                if return_objects:
+                    pages.append(page)
+                else:
+                    pages.append(name)
+        else:
+            pages = cache.keys()
+
+        request.clock.stop('getPageList')
+        return pages
+
+    def getPageDict(self, user=None, exists=1, filter=None):
+        """ Return a dictionary of filtered page objects readable by user
+
+        Invoke getPageList then create a dict from the page list. See
+        getPageList docstring for more details.
+
+        @param user: the user requesting the pages
+        @param filter: filter function
+        @param exists: only existing pages
+        @rtype: dict {unicode: Page}
+        @return: user readable pages
+        """
+        pages = {}
+        for name in self.getPageList(user=user, exists=exists, filter=filter):
+            pages[name] = Page(self.request, name)
+        return pages
+
+    def _listPages(self):
+        """ Return a list of file system page names
+
+        This is the lowest level disk access, don't use it unless you
+        really need it.
+
+        NOTE: names are returned in file system encoding, not in unicode!
+
+        @rtype: dict
+        @return: dict of page names using file system encoding
+        """
+        # Get pages in standard dir
+        path = self.getPagePath('pages')
+        pages = self._listPageInPath(path)
+
+        if self.cfg.data_underlay_dir is not None:
+            # Merge with pages from underlay
+            path = self.getPagePath('pages', use_underlay=1)
+            underlay = self._listPageInPath(path)
+            pages.update(underlay)
+
+        return pages
+
+    def _listPageInPath(self, path):
+        """ List page names in domain, using path
+
+        This is the lowest level disk access, don't use it unless you
+        really need it.
+
+        NOTE: names are returned in file system encoding, not in unicode!
+
+        @param path: directory to list (string)
+        @rtype: dict
+        @return: dict of page names using file system encoding
+        """
+        import dircache
+
+        pages = {}
+        for name in dircache.listdir(path):
+            # Filter non-pages in quoted wiki names
+            # List all pages in pages directory - assume flat namespace
+            if name.startswith('.') or name.startswith('#') or name == 'CVS':
+                continue
+
+            pages[name] = None
+
+        return pages
+
+    def getPageCount(self, exists=0):
+        """ Return page count
+
+        The default value does the fastest listing, and return count of
+        all pages, including deleted pages, ignoring acl rights.
+
+        If you want to get a more accurate number, call with
+        exists=1. This will be about 100 times slower though.
+
+        @param exists: filter existing pages
+        @rtype: int
+        @return: number of pages
+        """
+        self.request.clock.start('getPageCount')
+        if exists:
+            # WARNING: SLOW
+            pages = self.getPageList(user='')
+        else:
+            pages = self.request.pages
+            if not pages:
+                pages = self._listPages()
+        count = len(pages)
+        self.request.clock.stop('getPageCount')
+
+        return count
+
 
