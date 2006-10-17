@@ -3,7 +3,8 @@
     MoinMoin - Page class
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
-                2005-2006 by MoinMoin:ThomasWaldmann
+                2005-2006 by MoinMoin:ThomasWaldmann,
+                2006 by MoinMoin:FlorianFesti.
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -16,6 +17,60 @@ from MoinMoin.util import filesys, timefuncs
 def is_cache_exception(e):
     args = e.args
     return not (len(args) != 1 or args[0] != 'CacheNeedsUpdate')
+
+
+class ItemMetaDataCache:
+    """ Cache some page item's meta data
+
+        We only cache this to RAM in request.cfg (this is the only kind of
+        server object we have), because it might be too big for pickling it
+        in and out.
+
+        Todo: add acl / and other item meta data like mimetype
+    """
+    def __init__(self):
+        self.cache = {}
+        self.timestamp = None
+        self.requests = 0
+        self.hits = 0
+
+    def putItem(self, request, key, data):
+        """ Remembers some data under a key. request currently unused. """
+        self.cache[key] = data
+
+    def getItem(self, request, key):
+        """ Returns some item stored under key or None, if there is no such key. """
+        self.refresh(request)
+        data = self.cache.get(key)
+        self.requests += 1
+        if data is not None:
+            self.hits += 1
+        logging.debug("cache hits: %d/%d (%2.1f%%)" % (
+            self.hits, self.requests,
+            float(self.hits*100)/self.requests))
+        return data
+
+    def refresh(self, request):
+        """ Refresh the cache - if anything has changed in the wiki,
+            we see it in the edit-log.
+        """
+        from MoinMoin.logfile import editlog
+        elog = editlog.EditLog(request)
+        timestamp = elog.date()
+        if self.timestamp is None:
+            self.timestamp = timestamp
+        elif self.timestamp != timestamp:
+            self.timestamp = timestamp
+            for line in elog.reverse():
+                if line.ed_time_usecs < self.timestamp: # XXX t1 <= t2 ???
+                    break
+                logging.debug("cache: removing %r" % line.pagename)
+                for underlay in (-1, 0, 1):
+                    key = (line.pagename, underlay)
+                    try:
+                        del self.cache[key]
+                    except:
+                        pass
 
 
 class Page:
@@ -95,22 +150,11 @@ class Page:
         # TUNING - remember some essential values
 
         # does the page come from normal page storage (0) or from
-        # underlay dir (1) (can be used as index into following lists)
+        # underlay dir (1) (can be used as index into following list)
         self._underlay = None
 
         # path to normal / underlay page dir
         self._pagepath = [normalpath, underlaypath]
-
-        # path to normal / underlay page file
-        self._pagefile = [normalpath, underlaypath]
-
-        # *latest* revision of this page XXX needs to be reset to None
-        # when current rev changes
-        self._current_rev = [None, None]
-
-        # does a page in _pagepath (current revision) exist?  XXX needs
-        # to be reset when rev is created/deleted
-        self._exists = [None, None]
 
     def get_current_from_pagedir(self, pagedir):
         """ get the current revision number from an arbitrary pagedir.
@@ -187,42 +231,31 @@ class Page:
                   int realrevint,
                   bool exists)
         """
+        request = self.request
+        cache_key = (self.page_name, use_underlay)
+        cache_data = request.cfg.cache.meta.getItem(request, cache_key)
+        if cache_data and (rev == 0 or rev == cache_data[1]):
+            # we got the correct rev data from the cache
+            return cache_data
+
         # Figure out if we should use underlay or not, if needed.
         if use_underlay == -1:
-            if self._underlay is not None and self._pagepath[self._underlay] is not None:
-                underlay = self._underlay
-                pagedir = self._pagepath[underlay]
-            else:
-                underlay, pagedir = self.getPageStatus(check_create=0)
+            underlay, pagedir = self.getPageStatus(check_create=0)
         else:
             underlay, pagedir = use_underlay, self._pagepath[use_underlay]
 
         # Find current revision, if automatic selection is requested.
         if rev == 0:
-            if self._current_rev[underlay] is None:
-                realrev = self.get_current_from_pagedir(pagedir)
-                self._current_rev[underlay] = realrev # XXX XXX
-            else:
-                realrev = self._current_rev[underlay]
-
-            # This restores from cache.  If they are None (uncached),
-            # they will be generated at the very end.
-            _exists = self._exists[underlay]
-            _realrev = self._current_rev[underlay]
-            _pagefile = self._pagefile[underlay]
-            if _pagefile is not None and \
-               _realrev is not None and _exists is not None:
-                return _pagefile, _realrev, _exists
+            realrev = self.get_current_from_pagedir(pagedir)
         else:
             realrev = rev
 
-        pagefile, realrev, exists = self.get_rev_dir(pagedir, realrev)
+        data = self.get_rev_dir(pagedir, realrev)
         if rev == 0:
-            self._exists[underlay] = exists # XXX XXX
-            self._current_rev[underlay] = realrev # XXX XXX
-            self._pagefile[underlay] = pagefile # XXX XXX
+            # we only save the current rev to the cache
+            request.cfg.cache.meta.putItem(request, cache_key, data)
 
-        return pagefile, realrev, exists
+        return data
 
     def current_rev(self):
         """Return number of current revision.
