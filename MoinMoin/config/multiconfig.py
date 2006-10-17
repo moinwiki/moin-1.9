@@ -527,6 +527,9 @@ reStructuredText Quick Reference
         self.siteid = siteid
         self.cache = CacheClass()
 
+        from MoinMoin.Page import ItemMetaDataCache
+        self.cache.meta = ItemMetaDataCache()
+
         if self.config_check_enabled:
             self._config_check()
 
