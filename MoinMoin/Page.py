@@ -34,14 +34,22 @@ class ItemMetaDataCache:
         self.requests = 0
         self.hits = 0
 
-    def putItem(self, request, key, data):
-        """ Remembers some data under a key. request currently unused. """
-        self.cache[key] = data
+    def putItem(self, request, name, key, data):
+        """ Remembers some data for item name under a key.
+            request currently unused.
+        """
+        d = self.cache.setdefault(name, {})
+        d[key] = data
 
-    def getItem(self, request, key):
-        """ Returns some item stored under key or None, if there is no such key. """
+    def getItem(self, request, name, key):
+        """ Returns some item stored for item name under key.
+            Returns None, if there is no such item or key.
+        """
         self.refresh(request)
-        data = self.cache.get(key)
+        try:
+            data = self.cache[name][key]
+        except KeyError:
+            data = None
         self.requests += 1
         if data is not None:
             self.hits += 1
@@ -65,12 +73,10 @@ class ItemMetaDataCache:
                 if line.ed_time_usecs < self.timestamp: # XXX t1 <= t2 ???
                     break
                 logging.debug("cache: removing %r" % line.pagename)
-                for underlay in (-1, 0, 1):
-                    key = (line.pagename, underlay)
-                    try:
-                        del self.cache[key]
-                    except:
-                        pass
+                try:
+                    del self.cache[line.pagename]
+                except:
+                    pass
 
 
 class Page:
@@ -231,9 +237,18 @@ class Page:
                   int realrevint,
                   bool exists)
         """
+        def layername(underlay):
+            if underlay == -1:
+                return 'layer_auto'
+            elif underlay == 0:
+                return 'layer_normal'
+            else: # 1
+                return 'layer_underlay'
+
         request = self.request
-        cache_key = (self.page_name, use_underlay)
-        cache_data = request.cfg.cache.meta.getItem(request, cache_key)
+        cache_name = self.page_name
+        cache_key = layername(use_underlay)
+        cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
         if cache_data and (rev == 0 or rev == cache_data[1]):
             # we got the correct rev data from the cache
             return cache_data
@@ -253,7 +268,7 @@ class Page:
         data = self.get_rev_dir(pagedir, realrev)
         if rev == 0:
             # we only save the current rev to the cache
-            request.cfg.cache.meta.putItem(request, cache_key, data)
+            request.cfg.cache.meta.putItem(request, cache_name, cache_key, data)
 
         return data
 
