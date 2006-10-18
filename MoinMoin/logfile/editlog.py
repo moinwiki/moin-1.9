@@ -208,3 +208,16 @@ class EditLog(LogFile):
         self.filter = eval("lambda x: " + expr)
 
 
+    def news(self, oldtimestamp):
+        """ What has changed in the edit-log since <timestamp>?
+            Returns edit-log timestamp and list of changed item names.
+        """
+        newtimestamp = self.date()
+        items = []
+        if oldtimestamp is not None and oldtimestamp != newtimestamp:
+            for line in self.reverse():
+                if line.ed_time_usecs < oldtimestamp: # XXX t1 <= t2 ???
+                    break
+                items.append(line.pagename)
+        return newtimestamp, items
+
