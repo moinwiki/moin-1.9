@@ -25,8 +25,6 @@ class ItemMetaDataCache:
         We only cache this to RAM in request.cfg (this is the only kind of
         server object we have), because it might be too big for pickling it
         in and out.
-
-        Todo: add acl / and other item meta data like mimetype
     """
     def __init__(self):
         self.cache = {}
@@ -70,19 +68,13 @@ class ItemMetaDataCache:
         """
         from MoinMoin.logfile import editlog
         elog = editlog.EditLog(request)
-        timestamp = elog.date()
-        if self.timestamp is None:
-            self.timestamp = timestamp
-        elif self.timestamp != timestamp:
-            self.timestamp = timestamp
-            for line in elog.reverse():
-                if line.ed_time_usecs < self.timestamp: # XXX t1 <= t2 ???
-                    break
-                logging.debug("cache: removing %r" % line.pagename)
-                try:
-                    del self.cache[line.pagename]
-                except:
-                    pass
+        self.timestamp, items = elog.news(self.timestamp)
+        for item in items:
+            logging.debug("cache: removing %r" % item)
+            try:
+                del self.cache[item]
+            except:
+                pass
 
 
 class Page:
