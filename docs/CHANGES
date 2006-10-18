@@ -164,7 +164,7 @@ Version 1.6.current:
       NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
     * MOIN_DEBUG can be set in the environment to let MoinMoin ignore exceptions
       that would lead to a traceback in the browser. Thanks to Raphael Bossek.
-    
+
 
   New Features:
     * The standalone server script moved to the toplevel directory. This makes
@@ -241,6 +241,7 @@ Version 1.6.current:
       "this page has own (empty) ACLs, so do not use acl_rights_default here"
       Please note that this is COMPLETELY DIFFERENT from having no ACL line at
       all on the page (acl_rights_default is used in that case).
+    * Added support for actions in the irssi parser. Thanks to Georg Brandl.
 
 
   Bugfixes:
