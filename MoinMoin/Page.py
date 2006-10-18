@@ -53,9 +53,15 @@ class ItemMetaDataCache:
         self.requests += 1
         if data is not None:
             self.hits += 1
-        logging.debug("cache hits: %d/%d (%2.1f%%)" % (
-            self.hits, self.requests,
-            float(self.hits*100)/self.requests))
+            hit_str = 'hit'
+        else:
+            hit_str = 'miss'
+        logging.debug("cache %s (hit ratio %2.1f%%) for %r %r" % (
+            hit_str,
+            float(self.hits*100)/self.requests,
+            name,
+            key,
+        ))
         return data
 
     def refresh(self, request):
@@ -1477,15 +1483,17 @@ class Page:
         request.clock.start('getACL')
         # Try the cache or parse acl and update the cache
         currentRevision = self.current_rev()
-        key = self.page_name
-        try:
-            aclRevision, acl = request.cfg.cache.acl.get(key, (None, None))
-        except AttributeError:
-            request.cfg.cache.acl = {}
+        cache_name = self.page_name
+        cache_key = 'acl'
+        cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
+        if cache_data is None:
             aclRevision, acl = None, None
+        else:
+            aclRevision, acl = cache_data
         if aclRevision != currentRevision:
             acl = self.parseACL()
-            request.cfg.cache.acl[key] = (currentRevision, acl)
+            cache_data = (currentRevision, acl)
+            request.cfg.cache.meta.putItem(request, cache_name, cache_key, cache_data)
         request.clock.stop('getACL')
         return acl
 
@@ -1510,14 +1518,7 @@ class Page:
         """
         Clean ACL cache entry of this page (used by PageEditor on save)
         """
-        request = self.request
-        key = self.page_name
-        try:
-            del request.cfg.cache.acl[key]
-        except KeyError:
-            pass
-        except AttributeError:
-            request.cfg.cache.acl = {}
+        pass # should not be necessary any more as the new cache watches edit-log for changes
 
     # Text format -------------------------------------------------------
 
