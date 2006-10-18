@@ -19,14 +19,15 @@ def is_cache_exception(e):
     return not (len(args) != 1 or args[0] != 'CacheNeedsUpdate')
 
 
-class ItemMetaDataCache:
-    """ Cache some page item's meta data
+class ItemCache:
+    """ Cache some page item related data, as meta data or pagelist
 
         We only cache this to RAM in request.cfg (this is the only kind of
         server object we have), because it might be too big for pickling it
         in and out.
     """
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.cache = {}
         self.timestamp = None
         self.requests = 0
@@ -54,7 +55,8 @@ class ItemMetaDataCache:
             hit_str = 'hit'
         else:
             hit_str = 'miss'
-        logging.debug("cache %s (hit ratio %2.1f%%) for %r %r" % (
+        logging.debug("%s cache %s (h/r %2.1f%%) for %r %r" % (
+            self.name,
             hit_str,
             float(self.hits*100)/self.requests,
             name,
@@ -69,12 +71,16 @@ class ItemMetaDataCache:
         from MoinMoin.logfile import editlog
         elog = editlog.EditLog(request)
         self.timestamp, items = elog.news(self.timestamp)
-        for item in items:
-            logging.debug("cache: removing %r" % item)
-            try:
-                del self.cache[item]
-            except:
-                pass
+        if items:
+            if self.name == 'meta':
+                for item in items:
+                    logging.debug("cache: removing %r" % item)
+                    try:
+                        del self.cache[item]
+                    except:
+                        pass
+            elif self.name == 'pagelists':
+                self.cache = {}
 
 
 class Page:
@@ -1636,8 +1642,9 @@ class RootPage(Page):
             user = request.user
 
         # Get pages cache or create it
-        cache = request.pages
-        if not cache:
+        cachedlist = request.cfg.cache.pagelists.getItem(request, 'all', None)
+        if cachedlist is None:
+            cachedlist = {}
             for name in self._listPages():
                 # Unquote file system names
                 pagename = wikiutil.unquoteWikiname(name)
@@ -1646,12 +1653,13 @@ class RootPage(Page):
                 if pagename.endswith(u'/MoinEditorBackup'):
                     continue
 
-                cache[pagename] = None
+                cachedlist[pagename] = None
+            request.cfg.cache.pagelists.putItem(request, 'all', None, cachedlist)
 
         if user or exists or filter or not include_underlay or return_objects:
             # Filter names
             pages = []
-            for name in cache:
+            for name in cachedlist:
                 # First, custom filter - exists and acl check are very
                 # expensive!
                 if filter and not filter(name):
@@ -1676,7 +1684,7 @@ class RootPage(Page):
                 else:
                     pages.append(name)
         else:
-            pages = cache.keys()
+            pages = cachedlist.keys()
 
         request.clock.stop('getPageList')
         return pages
