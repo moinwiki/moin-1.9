@@ -134,6 +134,7 @@ class Page:
 
         self._raw_body = None
         self._raw_body_modified = 0
+        self._text_filename_force = None
         self.hilite_re = None
         self.language = None
         self.pi_format = None
@@ -251,10 +252,11 @@ class Page:
         request = self.request
         cache_name = self.page_name
         cache_key = layername(use_underlay)
-        cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
-        if cache_data and (rev == 0 or rev == cache_data[1]):
-            # we got the correct rev data from the cache
-            return cache_data
+        if self._text_filename_force is None:
+            cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
+            if cache_data and (rev == 0 or rev == cache_data[1]):
+                # we got the correct rev data from the cache
+                return cache_data
 
         # Figure out if we should use underlay or not, if needed.
         if use_underlay == -1:
@@ -269,7 +271,7 @@ class Page:
             realrev = rev
 
         data = self.get_rev_dir(pagedir, realrev)
-        if rev == 0:
+        if rev == 0 and self._text_filename_force is None:
             # we only save the current rev to the cache
             request.cfg.cache.meta.putItem(request, cache_name, cache_key, data)
 
@@ -394,7 +396,7 @@ class Page:
         @rtype: string
         @return: complete filename (including path) to this page
         """
-        if hasattr(self, '_text_filename_force'):
+        if self._text_filename_force is not None:
             return self._text_filename_force
         rev = kw.get('rev', 0)
         if not rev and self.rev:
