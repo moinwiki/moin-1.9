@@ -216,7 +216,7 @@ class EditLog(LogFile):
         items = []
         if oldtimestamp is not None and oldtimestamp != newtimestamp:
             for line in self.reverse():
-                if line.ed_time_usecs < oldtimestamp: # XXX t1 <= t2 ???
+                if line.ed_time_usecs <= oldtimestamp:
                     break
                 items.append(line.pagename)
         return newtimestamp, items
