@@ -47,14 +47,12 @@ class ItemCache:
         self.refresh(request)
         try:
             data = self.cache[name][key]
-        except KeyError:
-            data = None
-        self.requests += 1
-        if data is not None:
             self.hits += 1
             hit_str = 'hit'
-        else:
+        except KeyError:
+            data = None
             hit_str = 'miss'
+        self.requests += 1
         logging.debug("%s cache %s (h/r %2.1f%%) for %r %r" % (
             self.name,
             hit_str,
@@ -80,6 +78,7 @@ class ItemCache:
                     except:
                         pass
             elif self.name == 'pagelists':
+                logging.debug("cache: clearing pagelist cache")
                 self.cache = {}
 
 
@@ -526,7 +525,7 @@ class Page:
         """ Does this page exist?
 
         This is the lower level method for checking page existence. Use
-        the higher level methods isUnderlayPagea and isStandardPage for
+        the higher level methods isUnderlayPage and isStandardPage for
         cleaner code.
 
         @param rev: revision to look for. Default check current
