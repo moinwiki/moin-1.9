@@ -511,16 +511,14 @@ class Formatter(FormatterBase):
         wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, '%s:"%s"' % (interwiki, pagename))
         wikiurl = wikiutil.mapURL(self.request, wikiurl)
         if wikitag == 'Self': # for own wiki, do simple links
-            if on:
-                if '#' in wikitail:
-                    wikitail, kw['anchor'] = wikitail.split('#', 1)
-                wikitail = wikiutil.url_unquote(wikitail)
-                try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
-                    return self.pagelink(on, wikiutil.AbsPageName(self.request, self.page.page_name, wikitail), **kw)
-                except:
-                    return self.pagelink(on, wikitail, **kw)
-            else:
-                return self.pagelink(0)
+            if '#' in wikitail:
+                wikitail, kw['anchor'] = wikitail.split('#', 1)
+            wikitail = wikiutil.url_unquote(wikitail)
+            try: # XXX this is the only place where we access self.page - do we need it? Crashes silently on actions!
+                pagename = wikiutil.AbsPageName(self.request, self.page.page_name, wikitail)
+            except:
+                pagename = wikitail
+            return self.pagelink(on, pagename, **kw)
         else: # return InterWiki hyperlink
             if on:
                 href = wikiutil.join_wiki(wikiurl, wikitail)
