@@ -234,16 +234,12 @@ def getText(original, request, lang, formatted=True):
         translated = trans_table[original]
     except KeyError:
         try:
-            from MoinMoin.Page import Page
             language = languages[lang]['x-language-in-english']
             dictpagename = "%sDict" % language
-            if Page(request, dictpagename).exists():
-                dicts = request.dicts
-                if dicts.has_dict(dictpagename):
-                    userdict = dicts.dict(dictpagename)
-                    translated = userdict[original]
-                else:
-                    raise KeyError
+            dicts = request.dicts
+            if dicts.has_dict(dictpagename):
+                userdict = dicts.dict(dictpagename)
+                translated = userdict[original]
             else:
                 raise KeyError
         except KeyError:
