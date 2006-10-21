@@ -164,7 +164,9 @@ Version 1.6.current:
       NOTE: this is NOT in wikiconfig, but e.g. in moin.cgi or moin.py or ...
     * MOIN_DEBUG can be set in the environment to let MoinMoin ignore exceptions
       that would lead to a traceback in the browser. Thanks to Raphael Bossek.
-    
+    * There is a new MoinMoin.Page.ItemCache class now with automatic cache
+      invalidation based on global edit-log. We currently use it to cache page
+      acls, speedup Page.get_rev and reading the page local edit-log.
 
   New Features:
     * The standalone server script moved to the toplevel directory. This makes

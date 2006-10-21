@@ -27,6 +27,10 @@ class ItemCache:
         in and out.
     """
     def __init__(self, name):
+        """ Initialize ItemCache object.
+            @param name: name of the object, used for display in logging and
+                         influences behaviour of refresh().
+        """
         self.name = name
         self.cache = {}
         self.timestamp = None
@@ -35,14 +39,20 @@ class ItemCache:
 
     def putItem(self, request, name, key, data):
         """ Remembers some data for item name under a key.
-            request currently unused.
+            @param request: currently unused
+            @param name: name of the item (page), unicode
+            @param key: used as secondary access key after name
+            @param data: the data item that should be remembered
         """
         d = self.cache.setdefault(name, {})
         d[key] = data
 
     def getItem(self, request, name, key):
         """ Returns some item stored for item name under key.
-            Returns None, if there is no such item or key.
+            @param request: the request object
+            @param name: name of the item (page), unicode
+            @param key: used as secondary access key after name
+            @return: the data or None, if there is no such name or key.
         """
         self.refresh(request)
         try:
@@ -56,16 +66,17 @@ class ItemCache:
         logging.debug("%s cache %s (h/r %2.1f%%) for %r %r" % (
             self.name,
             hit_str,
-            float(self.hits*100)/self.requests,
+            float(self.hits * 100) / self.requests,
             name,
             key,
         ))
-        #if name == u"GermanDict": raise "DeBugging"
         return data
 
     def refresh(self, request):
-        """ Refresh the cache - if anything has changed in the wiki,
-            we see it in the edit-log.
+        """ Refresh the cache - if anything has changed in the wiki, we see it
+            in the edit-log and either delete cached data for the changed items
+            (for 'meta') or the complete cache ('pagelists').
+            @param request: the request object
         """
         from MoinMoin.logfile import editlog
         elog = editlog.EditLog(request)
