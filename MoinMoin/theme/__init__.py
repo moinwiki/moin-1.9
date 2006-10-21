@@ -293,6 +293,13 @@ class ThemeBase:
         use localization, and the links goes to page or to the url, not
         the localized version of page.
 
+        TODO: refactor/cleanup!
+              * the ItemCache is seeing 3 requests for a normal navi_bar entry
+              * for user quicklinks stuff, ItemCache is seeing a 1st request for
+                WikiName:PageName, then a 2nd (correct) one for PageName
+              * page object gets recreated at the end, although we already have
+                one for some cases
+
         @param text: the text used in config or user preferences
         @rtype: tuple
         @return: pagename or url, link to page or url
