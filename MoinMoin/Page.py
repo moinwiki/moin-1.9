@@ -60,6 +60,7 @@ class ItemCache:
             name,
             key,
         ))
+        #if name == u"GermanDict": raise "DeBugging"
         return data
 
     def refresh(self, request):
