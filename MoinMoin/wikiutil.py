@@ -534,8 +534,11 @@ def generate_file_list(request):
 def get_max_mtime(file_list, page):
     """ Returns the highest modification time of the files in file_list and the
     page page. """
-    return max([os.stat(filename).st_mtime for filename in file_list] +
-        [version2timestamp(page.mtime_usecs())])
+    timestamps = [os.stat(filename).st_mtime for filename in file_list]
+    if page.exists():
+        # exists() is cached and thus cheaper than mtime_usecs()
+        timestamps.append(version2timestamp(page.mtime_usecs()))
+    return max(timestamps)
 
 
 def load_wikimap(request):

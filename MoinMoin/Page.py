@@ -419,13 +419,21 @@ class Page:
     # XXX TODO clean up the mess, rewrite _last_edited, last_edit, lastEditInfo for new logs,
     # XXX TODO do not use mtime() calls any more
     def _last_edited(self, request):
-        from MoinMoin.logfile import editlog
-        try:
-            logfile = editlog.EditLog(request, self.getPagePath('edit-log', check_create=0, isfile=1))
-            logfile.to_end()
-            log = logfile.previous()
-        except StopIteration:
-            log = None
+        # as it is implemented now, this is rather a _last_changed as it just uses
+        # the last log entry, which could be not only from an edit, but also from 
+        # an attachment operation. See different semantics in .mtime().
+        cache_name = self.page_name
+        cache_key = 'lastlog'
+        log = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
+        if log is None:
+            from MoinMoin.logfile import editlog
+            try:
+                logfile = editlog.EditLog(request, rootpage=self.page_name)
+                logfile.to_end()
+                log = logfile.previous()
+            except StopIteration:
+                log = () # don't use None!
+            request.cfg.cache.meta.putItem(request, cache_name, cache_key, log)
         return log
 
     def last_edit(self, request):
@@ -589,22 +597,25 @@ class Page:
         @rtype: long
         @return: mtime of page (or 0 if page does not exist)
         """
-
-        from MoinMoin.logfile import editlog
-
-        mtime = 0L
-
+        request = self.request
+        cache_name = self.page_name
+        cache_key = 'lastpagechange'
+        mtime = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
         current_wanted = (self.rev == 0) # True if we search for the current revision
-        wanted_rev = "%08d" % self.rev
-
-        try:
-            logfile = editlog.EditLog(self.request, rootpagename=self.page_name)
-            for line in logfile.reverse():
-                if (current_wanted and line.rev != 99999999) or line.rev == wanted_rev:
-                    mtime = line.ed_time_usecs
-                    break
-        except StopIteration:
-            logfile = None
+        if mtime is None or not current_wanted:
+            from MoinMoin.logfile import editlog
+            wanted_rev = "%08d" % self.rev
+            mtime = 0L
+            try:
+                logfile = editlog.EditLog(self.request, rootpagename=self.page_name)
+                for line in logfile.reverse():
+                    if (current_wanted and line.rev != 99999999) or line.rev == wanted_rev:
+                        mtime = line.ed_time_usecs
+                        break
+            except StopIteration:
+                pass
+            if current_wanted:
+                request.cfg.cache.meta.putItem(request, cache_name, cache_key, mtime)
 
         return mtime
 
