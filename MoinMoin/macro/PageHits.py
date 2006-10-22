@@ -7,14 +7,6 @@
 
 """
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-# Set pickle protocol, see http://docs.python.org/lib/node64.html
-PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
-
 from MoinMoin import caching, config, logfile
 from MoinMoin.Page import Page
 from MoinMoin.logfile import eventlog
@@ -42,8 +34,8 @@ class PageHits:
         date, hits = 0, {}
         if self.cache.exists():
             try:
-                date, hits = pickle.loads(self.cache.content())
-            except (pickle.UnpicklingError, IOError, EOFError, ValueError):
+                date, hits = self.cache.content(use_pickle=True)
+            except caching.CacheError:
                 self.cache.remove()
         return date, hits
 
@@ -69,7 +61,10 @@ class PageHits:
             self.updateCache(logDate, hits)
 
     def updateCache(self, date, hits):
-        self.cache.update(pickle.dumps((date, hits), PICKLE_PROTOCOL))
+        try:
+            self.cache.update((date, hits), use_pickle=True)
+        except caching.CacheError:
+            pass
 
     def filterReadableHits(self, hits):
         """ Filter out hits the user many not see """
