@@ -448,22 +448,17 @@ def send_uploadform(pagename, request):
         request.write('<p>%s</p>' % _('You are not allowed to view this page.'))
         return
 
-    request.write('<h2>' + _("Attached Files") + '</h2>')
-    request.write(_get_filelist(request, pagename))
+    writeable = request.user.may.write(pagename)
 
-    if not request.user.may.write(pagename):
-        request.write('<p>%s</p>' % _('You are not allowed to attach a file to this page.'))
-        return
-
-    if request.form.get('drawing', [None])[0]:
-        send_hotdraw(pagename, request)
-        return
-
-    request.write('<h2>' + _("New Attachment") + '</h2><p>' +
+    # First send out the upload new attachment form on top of everything else.
+    # This avoids usability issues if you have to scroll down a lot to upload
+    # a new file when the page already has lots of attachments:
+    if writeable:
+        request.write('<h2>' + _("New Attachment") + '</h2><p>' +
 _("""An upload will never overwrite an existing file. If there is a name
 conflict, you have to rename the file that you want to upload.
 Otherwise, if "Rename to" is left blank, the original filename will be used.""") + '</p>')
-    request.write("""
+        request.write("""
 <form action="%(baseurl)s/%(pagename)s" method="POST" enctype="multipart/form-data">
 <dl>
 <dt>%(upload_label_file)s</dt>
@@ -490,6 +485,15 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.""")
 #<dt>%(upload_label_mime)s</dt>
 #<dd><input type="text" name="mime" size="50"></dd>
 #    'upload_label_mime': _('MIME Type (optional)'),
+
+    request.write('<h2>' + _("Attached Files") + '</h2>')
+    request.write(_get_filelist(request, pagename))
+
+    if not writeable:
+        request.write('<p>%s</p>' % _('You are not allowed to attach a file to this page.'))
+
+    if writeable and request.form.get('drawing', [None])[0]:
+        send_hotdraw(pagename, request)
 
 
 #############################################################################

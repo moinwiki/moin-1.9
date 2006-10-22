@@ -374,7 +374,9 @@ Version 1.6.current:
       version). The file has some standard css inside (evaluated on all MSIE
       versions) and some * html hacks that only IE < 7 will read.
       HINT: if you use custom themes, you want to update them in the same way.
-
+    * AttachFile displays the upload dialogue now at top, this avoids lots of
+      scrolling if you attach some new files to a page that already has lots of
+      files attached.
 
 
 
