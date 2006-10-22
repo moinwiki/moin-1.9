@@ -54,10 +54,10 @@ def i18n_init(request):
         The very first time, this will be slow as it will load all languages,
         but next time it will be fast due to caching.
     """
-    request.clock.start('i18n_init')
     global languages
+    request.clock.start('i18n_init')
     if languages is None:
-        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm')
+        meta_cache = caching.CacheEntry(request, 'i18n', 'meta', scope='farm', use_pickle=True)
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
             _languages = {}
@@ -74,17 +74,17 @@ def i18n_init(request):
                     #request.log("meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
             try:
-                meta_cache.update(_languages, use_pickle=True)
+                meta_cache.update(_languages)
             except caching.CacheError:
                 pass
 
-    if languages is None: # another thread maybe has done it before us
-        try:
-            _languages = meta_cache.content(use_pickle=True)
-            if languages is None:
-                languages = _languages
-        except caching.CacheError:
-            pass
+        if languages is None: # another thread maybe has done it before us
+            try:
+                _languages = meta_cache.content()
+                if languages is None:
+                    languages = _languages
+            except caching.CacheError:
+                pass
     request.clock.stop('i18n_init')
 
 
@@ -164,14 +164,14 @@ class Translation(object):
 
     def loadLanguage(self, request):
         request.clock.start('loadLanguage')
-        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm')
+        cache = caching.CacheEntry(request, arena='i18n', key=self.language, scope='farm', use_pickle=True)
         langfilename = po_filename(request, self.language, self.domain)
         needsupdate = cache.needsUpdate(langfilename)
         if debug:
             request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
         if not needsupdate:
             try:
-                uc_texts, uc_unformatted = cache.content(use_pickle=True)
+                uc_texts, uc_unformatted = cache.content()
             except caching.CacheError:
                 if debug:
                     request.log("i18n: pickle %s load failed" % lang)
@@ -202,7 +202,7 @@ class Translation(object):
             if debug:
                 request.log("i18n: dumping lang %s" % lang)
             try:
-                cache.update((uc_texts, uc_unformatted), use_pickle=True)
+                cache.update((uc_texts, uc_unformatted))
             except caching.CacheError:
                 pass
 

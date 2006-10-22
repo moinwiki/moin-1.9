@@ -52,9 +52,9 @@ def getUserId(request, searchName):
     except AttributeError:
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key, scope='wiki')
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
         try:
-            _name2id = cache.content(use_pickle=True)
+            _name2id = cache.content()
         except caching.CacheError:
             _name2id = {}
         cfg.cache.name2id = _name2id
@@ -66,9 +66,9 @@ def getUserId(request, searchName):
         cfg.cache.name2id = _name2id
         arena = 'user'
         key = 'name2id'
-        cache = caching.CacheEntry(request, arena, key, scope='wiki')
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
         try:
-            cache.update(_name2id, use_pickle=True)
+            cache.update(_name2id)
         except caching.CacheError:
             pass
         id = _name2id.get(searchName, None)
