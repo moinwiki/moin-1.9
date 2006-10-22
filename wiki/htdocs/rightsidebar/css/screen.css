@@ -216,11 +216,6 @@ span.sep {
     content: "";
 }
 
-* html #pagetrail li, * html #pagelocation li { /* for broken IE */
-    border-left: 1px solid #AAA;
-    padding: 0 0.3em;
-}
-
 #pagelocation li:after {
     content: "/ ";
 }
@@ -351,17 +346,4 @@ form.dialog {
 .searchresult dd span {
 	font-weight: bold;
 }
-
-/* Spans for line-anchors - uses * html hack so that the rule only applies to
- * IE (where omitting the "display: none" triggers rendering bugs).
- */
-* html span.anchor { display: none; }
-
-/* IE6 has a bug with rendering of float elements. We workaround this bug by
- * assigning those elements a height attribute because we currently don't know
- * a better solution. This results in IE calculating the correct height of the
- * characters and displaying them correctly. We don't know any negative side
- * effects of this workaround:
- */
-* html div#page, * html div#header { height: 0.001%; }
 

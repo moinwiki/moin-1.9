@@ -36,41 +36,6 @@ a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
 a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 
-/* IE sucks */
-* html a.www { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.http { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.https { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.file { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
-* html a.ftp { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
-* html a.nntp { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
-* html a.news { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
-* html a.telnet { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
-* html a.irc { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
-* html a.mailto { padding-left: 14px; background: url(../img/moin-email.png) left center no-repeat; }
-* html a.attachment { padding-left: 14px; background: url(../img/moin-attach.png) left center no-repeat; }
-* html a.badinterwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
-* html a.interwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
-
-/*
-This could maybe avoid screen jumping in IE with IE7 hack.
-
-It works (or rather: should work) like this:
-First, IE sees the a.interwiki definition only as it doesn't understand neither
-* > a.interwiki, nor a.interwiki:before. We use a.interwiki to reserve some
-space for the icon inserted later.
-Later, the IE7 hack kicks in and then IE also understands those 2 other css lines.
-The * > a.interwiki line now removes the space we previously reserved and the
-:before inserts the icon.
-
-a.interwiki {margin-left: 25px; padding-top: 25px; padding-bottom: 25px;}
-* > a.interwiki {margin-left: 0px; padding-top: 25px; padding-bottom: 25px;}
-a.interwiki:before {content: url(../img/moin-inter.png);}
-
-Problem:
-While margin-left seems to work, margin-/padding-top/bottom doesnt.
-After getting it to work, this has to be fine-tuned to avoid screen jumping.
-*/
-
 li p {
 	margin: .25em 0;
 }

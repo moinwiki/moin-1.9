@@ -24,21 +24,6 @@ a.attachment:before {content: url(../img/moin-attach.png); margin: 0 0.2em;}
 a.badinterwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 a.interwiki:before {content: url(../img/moin-inter.png); margin: 0 0.2em;}
 
-/* IE sucks */
-* html a.www { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.http { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.https { padding-left: 14px; background: url(../img/moin-www.png) left center no-repeat; }
-* html a.file { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
-* html a.ftp { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-repeat; }
-* html a.nntp { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
-* html a.news { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
-* html a.telnet { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
-* html a.irc { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
-* html a.mailto { padding-left: 14px; background: url(../img/moin-email.png) left center no-repeat; }
-* html a.attachment { padding-left: 14px; background: url(../img/moin-attach.png) left center no-repeat; }
-* html a.badinterwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
-* html a.interwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
-
 /* Headings */
 
 h1, h2, h3, h4, h5, h6
