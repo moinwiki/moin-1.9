@@ -31,7 +31,7 @@ class CacheError(Exception):
     pass
 
 class CacheEntry:
-    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
+    def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True, use_pickle=False):
         """ init a cache entry
             @param request: the request object
             @param arena: either a string or a page object, when we want to use
@@ -46,6 +46,7 @@ class CacheEntry:
         self.request = request
         self.key = key
         self.locking = do_locking
+        self.use_pickle = use_pickle
         if scope == 'page_or_wiki': # XXX DEPRECATED, remove later
             if isinstance(arena, str):
                 self.arena_dir = os.path.join(request.cfg.cache_dir, request.cfg.siteid, arena)
@@ -118,13 +119,11 @@ class CacheEntry:
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
-    def update(self, content, encode=False, use_pickle=False):
+    def update(self, content):
         try:
             tmpfname = self._tmpfilename()
             fname = self._filename()
-            if encode:
-                content = content.encode(config.charset)
-            elif use_pickle:
+            if self.use_pickle:
                 content = pickle.dumps(content, PICKLE_PROTOCOL)
             if not self.locking or self.locking and self.wlock.acquire(1.0):
                 try:
@@ -157,7 +156,7 @@ class CacheEntry:
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
-    def content(self, decode=False, use_pickle=False):
+    def content(self):
         try:
             if not self.locking or self.locking and self.rlock.acquire(1.0):
                 try:
@@ -169,9 +168,7 @@ class CacheEntry:
                         self.rlock.release()
             else:
                 self.request.log("Can't acquire read lock in %s" % self.lock_dir)
-            if decode:
-                data = data.decode(config.charset)
-            elif use_pickle:
+            if self.use_pickle:
                 data = pickle.loads(data)
             return data
         except (pickle.UnpicklingError, IOError, EOFError, ValueError), err:

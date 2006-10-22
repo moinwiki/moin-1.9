@@ -17,7 +17,7 @@ class PageHits:
     def __init__(self, macro, args):
         self.macro = macro
         self.request = macro.request
-        self.cache = cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki')
+        self.cache = cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
 
     def execute(self):
         """ Execute the macro and return output """
@@ -34,7 +34,7 @@ class PageHits:
         date, hits = 0, {}
         if self.cache.exists():
             try:
-                date, hits = self.cache.content(use_pickle=True)
+                date, hits = self.cache.content()
             except caching.CacheError:
                 self.cache.remove()
         return date, hits
@@ -62,7 +62,7 @@ class PageHits:
 
     def updateCache(self, date, hits):
         try:
-            self.cache.update((date, hits), use_pickle=True)
+            self.cache.update((date, hits))
         except caching.CacheError:
             pass
 
