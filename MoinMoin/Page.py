@@ -1166,10 +1166,10 @@ class Page:
 
         # cache the pagelinks
         if do_cache and self.default_formatter and page_exists:
-            cache = caching.CacheEntry(request, self, 'pagelinks', scope='item')
+            cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', use_pickle=True)
             if cache.needsUpdate(self._text_filename()):
                 links = self.formatter.pagelinks
-                cache.update('\n'.join(links) + '\n', True)
+                cache.update(links)
 
         request.clock.stop('send_page')
         if not content_only and self.default_formatter:
@@ -1421,13 +1421,18 @@ class Page:
         """
         if not self.exists():
             return []
-        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', do_locking=False)
+        cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', do_locking=False, use_pickle=True)
         if cache.needsUpdate(self._text_filename()):
             links = self.parsePageLinks(request)
-            cache.update('\n'.join(links) + '\n', True)
+            cache.update(links)
             return links
-        links = cache.content(True).split('\n')
-        return [link for link in links if link]
+        try:
+            links = cache.content()
+            return links
+        except caching.CacheError:
+            links = self.parsePageLinks(request)
+            cache.update(links)
+            return links
 
     def parsePageLinks(self, request):
         """ Parse page links by formatting with a pagelinks formatter 
