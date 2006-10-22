@@ -368,6 +368,12 @@ Version 1.6.current:
     * Made the irssi parser more tolerant (Thanks to "TheAnarcat").
     * Changed the rst parser to be compatible to the new docutils interface
       for directives.
+    * We moved the IE hacks to theme/css/msie.css that gets included after all
+      other css files (but before the user css file) using a conditional
+      comment with "if IE", so it gets only loaded for MSIE (no matter which
+      version). The file has some standard css inside (evaluated on all MSIE
+      versions) and some * html hacks that only IE < 7 will read.
+      HINT: if you use custom themes, you want to update them in the same way.
 
 
 

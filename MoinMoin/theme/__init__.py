@@ -617,7 +617,7 @@ class ThemeBase:
             html.append(link % (self.stylesheetsCharset, media, csshref))
 
 
-        # tribute to the most sucking browser...
+        # tribute to the most sucking browser: MS IE6
         if self.cfg.hacks.get('ie7', False) and self.request.action != 'edit':
             # using FCKeditor and IE7 at the same time makes nices crashes in IE
             html.append("""
@@ -626,6 +626,14 @@ class ThemeBase:
    <script src="%s/common/ie7/ie7-standard-p.js" type="text/javascript"></script>
 <![endif]-->
 """ % prefix)
+
+        csshref = '%s/%s/css/msie.css' % (prefix, self.name)
+        html.append("""
+<!-- css only for MSIE browsers -->
+<!--[if IE]>
+   %s
+<![endif]-->
+""" % link % (self.stylesheetsCharset, 'all', csshref))
 
         # Add user css url (assuming that user css uses same charset)
         if usercss and usercss.lower() != "none":
