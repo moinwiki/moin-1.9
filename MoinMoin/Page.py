@@ -44,8 +44,13 @@ class ItemCache:
             @param key: used as secondary access key after name
             @param data: the data item that should be remembered
         """
-        d = self.cache.setdefault(name, {})
-        d[key] = data
+        if not name.endswith(u'/MoinEditorBackup'):
+            # never cache */MoinEditorBackup related data as we won't get a
+            # global edit-log entry when those pages change!
+            # TODO: we maybe better should not use those pages, but rather
+            # store that stuff into some cache or into the user profile.
+            d = self.cache.setdefault(name, {})
+            d[key] = data
 
     def getItem(self, request, name, key):
         """ Returns some item stored for item name under key.
