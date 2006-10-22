@@ -11,16 +11,6 @@ import re, time, os
 #import copy #broken, see comments at top of this file:
 from MoinMoin.support import copy
 
-# cPickle can encode normal and Unicode strings
-# see http://docs.python.org/lib/node66.html
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-# Set pickle protocol, see http://docs.python.org/lib/node64.html
-PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
-
 from MoinMoin import config, caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
 
@@ -326,7 +316,7 @@ class GroupDict(DictDict):
         except AttributeError:
             try:
                 cache = caching.CacheEntry(request, arena, key, scope='wiki')
-                data = pickle.loads(cache.content())
+                data = cache.content(use_pickle=True)
                 self.__dict__.update(data)
 
                 # invalidate the cache if the pickle version changed
@@ -412,7 +402,7 @@ class GroupDict(DictDict):
                 self.dictdict[name].expandgroups(self)
 
             cache = caching.CacheEntry(request, arena, key, scope='wiki')
-            cache.update(pickle.dumps(data, PICKLE_PROTOCOL))
+            cache.update(data, use_pickle=True)
 
         # remember it (persistent environments)
         self.cfg.cache.DICTS_DATA = data

@@ -28,13 +28,6 @@ debug = 0
 
 import os, gettext, glob
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-# Set pickle protocol, see http://docs.python.org/lib/node64.html
-PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
-
 from MoinMoin import caching
 
 # This is a global for a reason: in persistent environments all languages in
@@ -80,12 +73,18 @@ def i18n_init(request):
                 for key, value in t.info.items():
                     #request.log("meta key %s value %r" % (key, value))
                     _languages[language][key] = value.decode(encoding)
-            meta_cache.update(pickle.dumps(_languages))
+            try:
+                meta_cache.update(_languages, use_pickle=True)
+            except caching.CacheError:
+                pass
 
-    if languages is None: # another tread maybe has done it before us
-        _languages = pickle.loads(meta_cache.content())
-        if languages is None:
-            languages = _languages
+    if languages is None: # another thread maybe has done it before us
+        try:
+            _languages = meta_cache.content(use_pickle=True)
+            if languages is None:
+                languages = _languages
+        except caching.CacheError:
+            pass
     request.clock.stop('i18n_init')
 
 
@@ -172,8 +171,8 @@ class Translation(object):
             request.log("i18n: langfilename %s needsupdate %d" % (langfilename, needsupdate))
         if not needsupdate:
             try:
-                uc_texts, uc_unformatted = pickle.loads(cache.content())
-            except (IOError, ValueError, pickle.UnpicklingError): # bad pickle data, no pickle
+                uc_texts, uc_unformatted = cache.content(use_pickle=True)
+            except caching.CacheError:
                 if debug:
                     request.log("i18n: pickle %s load failed" % lang)
                 needsupdate = 1
@@ -202,7 +201,10 @@ class Translation(object):
                         uc_texts[ukey] = u"%s*" % utext
             if debug:
                 request.log("i18n: dumping lang %s" % lang)
-            cache.update(pickle.dumps((uc_texts, uc_unformatted), PICKLE_PROTOCOL))
+            try:
+                cache.update((uc_texts, uc_unformatted), use_pickle=True)
+            except caching.CacheError:
+                pass
 
         self.formatted = uc_texts
         self.raw = uc_unformatted

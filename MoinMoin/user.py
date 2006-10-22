@@ -11,14 +11,6 @@ unsafe_names = ("id", "key", "val", "user_data", "enc_password")
 
 import os, time, sha, codecs
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-# Set pickle protocol, see http://docs.python.org/lib/node64.html
-PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
-
 from MoinMoin import config, caching, wikiutil, i18n
 from MoinMoin.util import filesys, timefuncs
 
@@ -62,8 +54,8 @@ def getUserId(request, searchName):
         key = 'name2id'
         cache = caching.CacheEntry(request, arena, key, scope='wiki')
         try:
-            _name2id = pickle.loads(cache.content())
-        except (pickle.UnpicklingError, IOError, EOFError, ValueError):
+            _name2id = cache.content(use_pickle=True)
+        except caching.CacheError:
             _name2id = {}
         cfg.cache.name2id = _name2id
     id = _name2id.get(searchName, None)
@@ -75,7 +67,10 @@ def getUserId(request, searchName):
         arena = 'user'
         key = 'name2id'
         cache = caching.CacheEntry(request, arena, key, scope='wiki')
-        cache.update(pickle.dumps(_name2id, PICKLE_PROTOCOL))
+        try:
+            cache.update(_name2id, use_pickle=True)
+        except caching.CacheError:
+            pass
         id = _name2id.get(searchName, None)
     return id
 

@@ -9,12 +9,26 @@
 import os
 import warnings
 
+# cPickle can encode normal and Unicode strings
+# see http://docs.python.org/lib/node66.html
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
+
+# Set pickle protocol, see http://docs.python.org/lib/node64.html
+PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
+
 from MoinMoin import config
 from MoinMoin.util import filesys, lock
 
 # filter the tempname warning because we create the tempfile only in directories
 # where only we should have write access initially
 warnings.filterwarnings("ignore", "tempnam.*security", RuntimeWarning, "MoinMoin.caching")
+
+class CacheError(Exception):
+    """ raised if we have trouble reading or writing to the cache """
+    pass
 
 class CacheEntry:
     def __init__(self, request, arena, key, scope='page_or_wiki', do_locking=True):
@@ -104,26 +118,31 @@ class CacheEntry:
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
-    def update(self, content, encode=False):
-        tmpfname = self._tmpfilename()
-        fname = self._filename()
-        if encode:
-            content = content.encode(config.charset)
-        if not self.locking or self.locking and self.wlock.acquire(1.0):
-            try:
-                # we do not write content to old inode, but to a new file
-                # se we don't need to lock when we just want to read the file
-                # (at least on POSIX, this works)
-                f = open(tmpfname, 'wb')
-                f.write(content)
-                f.close()
-                # this is either atomic or happening with real locks set:
-                filesys.rename(tmpfname, fname)
-            finally:
-                if self.locking:
-                    self.wlock.release()
-        else:
-            self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+    def update(self, content, encode=False, use_pickle=False):
+        try:
+            tmpfname = self._tmpfilename()
+            fname = self._filename()
+            if encode:
+                content = content.encode(config.charset)
+            elif use_pickle:
+                content = pickle.dumps(content, PICKLE_PROTOCOL)
+            if not self.locking or self.locking and self.wlock.acquire(1.0):
+                try:
+                    # we do not write content to old inode, but to a new file
+                    # se we don't need to lock when we just want to read the file
+                    # (at least on POSIX, this works)
+                    f = open(tmpfname, 'wb')
+                    f.write(content)
+                    f.close()
+                    # this is either atomic or happening with real locks set:
+                    filesys.rename(tmpfname, fname)
+                finally:
+                    if self.locking:
+                        self.wlock.release()
+            else:
+                self.request.log("Can't acquire write lock in %s" % self.lock_dir)
+        except (pickle.PicklingError, IOError, ValueError), err:
+            raise CacheError(str(err))
 
     def remove(self):
         if not self.locking or self.locking and self.wlock.acquire(1.0):
@@ -138,18 +157,23 @@ class CacheEntry:
         else:
             self.request.log("Can't acquire write lock in %s" % self.lock_dir)
 
-    def content(self, decode=False):
-        if not self.locking or self.locking and self.rlock.acquire(1.0):
-            try:
-                f = open(self._filename(), 'rb')
-                data = f.read()
-                f.close()
-            finally:
-                if self.locking:
-                    self.rlock.release()
-        else:
-            self.request.log("Can't acquire read lock in %s" % self.lock_dir)
-        if decode:
-            data = data.decode(config.charset)
-        return data
+    def content(self, decode=False, use_pickle=False):
+        try:
+            if not self.locking or self.locking and self.rlock.acquire(1.0):
+                try:
+                    f = open(self._filename(), 'rb')
+                    data = f.read()
+                    f.close()
+                finally:
+                    if self.locking:
+                        self.rlock.release()
+            else:
+                self.request.log("Can't acquire read lock in %s" % self.lock_dir)
+            if decode:
+                data = data.decode(config.charset)
+            elif use_pickle:
+                data = pickle.loads(data)
+            return data
+        except (pickle.UnpicklingError, IOError, EOFError, ValueError), err:
+            raise CacheError(str(err))
 
