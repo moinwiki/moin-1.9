@@ -88,11 +88,30 @@ class PageGraphicalEditor(PageEditor.PageEditor):
             self.send_page(self.request, msg=msg)
             return
 
-        # Check for preview submit
-        if preview is None:
+        # check if we want to load a draft
+        use_draft = None
+        if form.has_key('button_load_draft'):
+            wanted_draft_timestamp = int(form.get('draft_ts', ['0'])[0])
+            if wanted_draft_timestamp:
+                draft = self._load_draft()
+                if draft is not None:
+                    draft_timestamp, draft_rev, draft_text = draft
+                    if draft_timestamp == wanted_draft_timestamp:
+                        use_draft = draft_text
+
+        # Check for draft / normal / preview submit
+        if use_draft is not None:
+            title = _('Draft of "%(pagename)s"')
+            # Propagate original revision
+            rev = int(form['draft_rev'][0])
+            self.set_raw_body(use_draft, modified=1)
+            preview = use_draft
+        elif preview is None:
             title = _('Edit "%(pagename)s"')
         else:
             title = _('Preview of "%(pagename)s"')
+            # Propagate original revision
+            rev = int(form['rev'][0])
             self.set_raw_body(preview, modified=1)
 
         # send header stuff
@@ -111,9 +130,6 @@ class PageGraphicalEditor(PageEditor.PageEditor):
                 text_rows = int(self.request.user.edit_rows)
 
         if preview is not None:
-            # Propagate original revision
-            rev = int(form['rev'][0])
-
             # Check for editing conflicts
             if not self.exists():
                 # page does not exist, are we creating it?
@@ -141,8 +157,46 @@ Please review the page and save then. Do not save this page as it is!""")
         # Page editing is done using user language
         self.request.setContentLanguage(self.request.lang)
 
+        # Get the text body for the editor field.
+        # TODO: what about deleted pages? show the text of the last revision or use the template?
+        if preview is not None:
+            raw_body = self.get_raw_body()
+            if use_draft:
+                self.request.write(_("[Content loaded from draft]"), '<br>')
+        elif self.exists():
+            # If the page exists, we get the text from the page.
+            # TODO: maybe warn if template argument was ignored because the page exists?
+            raw_body = self.get_raw_body()
+        elif form.has_key('template'):
+            # If the page does not exists, we try to get the content from the template parameter.
+            template_page = wikiutil.unquoteWikiname(form['template'][0])
+            if self.request.user.may.read(template_page):
+                raw_body = Page(self.request, template_page).get_raw_body()
+                if raw_body:
+                    self.request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
+                else:
+                    self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
+            else:
+                self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
+
+        # Make backup on previews - but not for new empty pages
+        if not use_draft and preview and raw_body:
+            self._save_draft(raw_body, rev)
+
+        draft_message = None
+        loadable_draft = False
+        if preview is None:
+            draft = self._load_draft()
+            if draft is not None:
+                draft_timestamp, draft_rev, draft_text = draft
+                if draft_text != raw_body:
+                    loadable_draft = True
+                    page_rev = rev
+                    draft_timestamp_str = self.request.user.getFormattedDateTime(draft_timestamp)
+                    draft_message = _(u"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
+
         # Setup status message
-        status = [kw.get('msg', ''), conflict_msg, edit_lock_message]
+        status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
         status = [msg for msg in status if msg]
         status = ' '.join(status)
         status = Status(self.request, content=status)
@@ -163,30 +217,6 @@ Please review the page and save then. Do not save this page as it is!""")
         )
 
         self.request.write(self.request.formatter.startContent("content"))
-
-        # Get the text body for the editor field.
-        # TODO: what about deleted pages? show the text of the last revision or use the template?
-        if preview is not None:
-            raw_body = self.get_raw_body()
-        elif self.exists():
-            # If the page exists, we get the text from the page.
-            # TODO: maybe warn if template argument was ignored because the page exists?
-            raw_body = self.get_raw_body()
-        elif form.has_key('template'):
-            # If the page does not exists, we try to get the content from the template parameter.
-            template_page = wikiutil.unquoteWikiname(form['template'][0])
-            if self.request.user.may.read(template_page):
-                raw_body = Page(self.request, template_page).get_raw_body()
-                if raw_body:
-                    self.request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
-                else:
-                    self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
-            else:
-                self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
-
-        # Make backup on previews - but not for new empty pages
-        if preview and raw_body:
-            self._make_backup(raw_body)
 
         # Generate default content for new pages
         if not raw_body:
@@ -237,10 +267,20 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input class="button" type="submit" name="button_save" value="%s">
 <input class="button" type="submit" name="button_preview" value="%s">
 <input class="button" type="submit" name="button_switch" value="%s">
+''' % (save_button_text, _('Preview'), _('Text mode'),))
+
+        if loadable_draft:
+            self.request.write('''
+<input class="button" type="submit" name="button_load_draft" value="%s" onClick="flgChange = false;">
+<input type="hidden" name="draft_ts" value="%d">
+<input type="hidden" name="draft_rev" value="%d">
+''' % (_('Load Draft'), draft_timestamp, draft_rev))
+
+        self.request.write('''
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="gui">
-''' % (save_button_text, _('Preview'), _('Text mode'), button_spellcheck, cancel_button_text,))
+''' % (button_spellcheck, cancel_button_text,))
 
         self.sendconfirmleaving() # TODO update state of flgChange to make this work, see PageEditor
 

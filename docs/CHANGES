@@ -244,7 +244,19 @@ Version 1.6.current:
       Please note that this is COMPLETELY DIFFERENT from having no ACL line at
       all on the page (acl_rights_default is used in that case).
     * Added support for actions in the irssi parser. Thanks to Georg Brandl.
-
+    * */MoinEditorBackup pages are not created any more (TODO: write mig script
+      that removes existing ones from data/pages). We now have a drafts
+      functionality as follows:
+      * if you edit a page and cancel the edit, use preview or save, a draft
+        copy gets saved for you to a internal cache area (data/cache/drafts/).
+      * if it is a save what you did and it succeeds, the draft copy gets
+        killed right afterwards.
+      * if you accidentally used cancel or your browser or machine crashes
+        after you used preview, then just visit that page again and edit it.
+        the editor will notify you that there is a draft of this page and you
+        will see a "Load draft" button. Click on it to load the draft into the
+        editor and save the page.
+      * The draft storage is per user and per page, but only one draft per page.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

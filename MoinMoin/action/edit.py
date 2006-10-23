@@ -71,7 +71,7 @@ def execute(pagename, request):
         pg = PageEditor(request, pagename)
 
     # is invoked without savetext start editing
-    if savetext is None:
+    if savetext is None or request.form.has_key('button_load_draft'):
         pg.sendEditor()
         return
 

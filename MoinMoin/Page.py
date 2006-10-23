@@ -44,13 +44,8 @@ class ItemCache:
             @param key: used as secondary access key after name
             @param data: the data item that should be remembered
         """
-        if not name.endswith(u'/MoinEditorBackup'):
-            # never cache */MoinEditorBackup related data as we won't get a
-            # global edit-log entry when those pages change!
-            # TODO: we maybe better should not use those pages, but rather
-            # store that stuff into some cache or into the user profile.
-            d = self.cache.setdefault(name, {})
-            d[key] = data
+        d = self.cache.setdefault(name, {})
+        d[key] = data
 
     def getItem(self, request, name, key):
         """ Returns some item stored for item name under key.
@@ -1658,8 +1653,6 @@ class RootPage(Page):
         user.may.read are very expensive, and should be done on the
         smallest data set.
 
-        Filter those annoying /MoinEditorBackup pages.
-
         @param user: the user requesting the pages (MoinMoin.user.User)
         @param filter: filter function
         @param exists: filter existing pages
@@ -1683,7 +1676,9 @@ class RootPage(Page):
                 # Unquote file system names
                 pagename = wikiutil.unquoteWikiname(name)
 
-                # Filter those annoying editor backups
+                # Filter those annoying editor backups - current moin does not create
+                # those pages any more, but users have them already in data/pages
+                # until we remove them by a mig script...
                 if pagename.endswith(u'/MoinEditorBackup'):
                     continue
 

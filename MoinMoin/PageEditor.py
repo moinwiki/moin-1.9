@@ -74,7 +74,7 @@ class PageEditor(Page):
         @param page_name: name of the page
         @param request: the request object
         @keyword do_revision_backup: if 0, suppress making a page backup per revision
-        @keyword do_editor_backup: if 0, suppress making of HomePage/MoinEditorBackup per edit
+        @keyword do_editor_backup: if 0, suppress saving of draft copies
         @keyword uid_override: override user id and name (default None)
         """
         Page.__init__(self, request, page_name, **keywords)
@@ -187,11 +187,30 @@ class PageEditor(Page):
             self.send_page(self.request, msg=msg)
             return
 
-        # Check for preview submit
-        if preview is None:
+        # check if we want to load a draft
+        use_draft = None
+        if form.has_key('button_load_draft'):
+            wanted_draft_timestamp = int(form.get('draft_ts', ['0'])[0])
+            if wanted_draft_timestamp:
+                draft = self._load_draft()
+                if draft is not None:
+                    draft_timestamp, draft_rev, draft_text = draft
+                    if draft_timestamp == wanted_draft_timestamp:
+                        use_draft = draft_text
+
+        # Check for draft / normal / preview submit
+        if use_draft is not None:
+            title = _('Draft of "%(pagename)s"')
+            # Propagate original revision
+            rev = int(form['draft_rev'][0])
+            self.set_raw_body(use_draft, modified=1)
+            preview = use_draft
+        elif preview is None:
             title = _('Edit "%(pagename)s"')
         else:
             title = _('Preview of "%(pagename)s"')
+            # Propagate original revision
+            rev = int(form['rev'][0])
             self.set_raw_body(preview, modified=1)
 
         # send header stuff
@@ -210,9 +229,6 @@ class PageEditor(Page):
                 text_rows = int(self.request.user.edit_rows)
 
         if preview is not None:
-            # Propagate original revision
-            rev = int(form['rev'][0])
-
             # Check for editing conflicts
             if not self.exists():
                 # page does not exist, are we creating it?
@@ -238,8 +254,46 @@ Please review the page and save then. Do not save this page as it is!""")
         # Page editing is done using user language
         self.request.setContentLanguage(self.request.lang)
 
+        # Get the text body for the editor field.
+        # TODO: what about deleted pages? show the text of the last revision or use the template?
+        if preview is not None:
+            raw_body = self.get_raw_body()
+            if use_draft:
+                self.request.write(_("[Content loaded from draft]"), '<br>')
+        elif self.exists():
+            # If the page exists, we get the text from the page.
+            # TODO: maybe warn if template argument was ignored because the page exists?
+            raw_body = self.get_raw_body()
+        elif form.has_key('template'):
+            # If the page does not exists, we try to get the content from the template parameter.
+            template_page = wikiutil.unquoteWikiname(form['template'][0])
+            if self.request.user.may.read(template_page):
+                raw_body = Page(self.request, template_page).get_raw_body()
+                if raw_body:
+                    self.request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
+                else:
+                    self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
+            else:
+                self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
+
+        # Make backup on previews - but not for new empty pages
+        if not use_draft and preview and raw_body:
+            self._save_draft(raw_body, rev)
+
+        draft_message = None
+        loadable_draft = False
+        if preview is None:
+            draft = self._load_draft()
+            if draft is not None:
+                draft_timestamp, draft_rev, draft_text = draft
+                if draft_text != raw_body:
+                    loadable_draft = True
+                    page_rev = rev
+                    draft_timestamp_str = self.request.user.getFormattedDateTime(draft_timestamp)
+                    draft_message = _(u"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
+
         # Setup status message
-        status = [kw.get('msg', ''), conflict_msg, edit_lock_message]
+        status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
         status = [msg for msg in status if msg]
         status = ' '.join(status)
         status = Status(self.request, content=status)
@@ -260,30 +314,6 @@ Please review the page and save then. Do not save this page as it is!""")
         )
 
         self.request.write(self.request.formatter.startContent("content"))
-
-        # Get the text body for the editor field.
-        # TODO: what about deleted pages? show the text of the last revision or use the template?
-        if preview is not None:
-            raw_body = self.get_raw_body()
-        elif self.exists():
-            # If the page exists, we get the text from the page.
-            # TODO: maybe warn if template argument was ignored because the page exists?
-            raw_body = self.get_raw_body()
-        elif form.has_key('template'):
-            # If the page does not exists, we try to get the content from the template parameter.
-            template_page = wikiutil.unquoteWikiname(form['template'][0])
-            if self.request.user.may.read(template_page):
-                raw_body = Page(self.request, template_page).get_raw_body()
-                if raw_body:
-                    self.request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
-                else:
-                    self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
-            else:
-                self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
-
-        # Make backup on previews - but not for new empty pages
-        if preview and raw_body:
-            self._make_backup(raw_body)
 
         # Generate default content for new pages
         if not raw_body:
@@ -335,11 +365,18 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 <input class="button" type="submit" name="button_save" value="%s" onClick="flgChange = false;">
 <input class="button" type="submit" name="button_preview" value="%s" onClick="flgChange = false;">
 ''' % (save_button_text, _('Preview'),))
-        
+
         if not (self.request.cfg.editor_force and self.request.cfg.editor_default == 'text'):
             self.request.write('''
 <input id="switch2gui" style="display: none;" class="button" type="submit" name="button_switch" value="%s">
 ''' % (_('GUI Mode'),))
+
+        if loadable_draft:
+            self.request.write('''
+<input class="button" type="submit" name="button_load_draft" value="%s" onClick="flgChange = false;">
+<input type="hidden" name="draft_ts" value="%d">
+<input type="hidden" name="draft_rev" value="%d">
+''' % (_('Load Draft'), draft_timestamp, draft_rev))
 
         self.request.write('''
 %s
@@ -444,7 +481,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         @param rev: not used!?
         """
         _ = self._
-        self._make_backup(newtext)
+        self._save_draft(newtext, rev) # shall we really save a draft on CANCEL?
         self.lock.release()
 
         backto = self.request.form.get('backto', [None])[0]
@@ -756,38 +793,55 @@ Try a different name.""") % (newpagename,)
             text = u'\n'.join(lines)
         return text
 
-    def _make_backup(self, newtext, **kw):
-        """ Make editor backup on user homepage
+    def _save_draft(self, text, rev, **kw):
+        """ Save an editor backup to the drafts cache arena.
 
-        Replace text of the user UserName/MoinEditorBackup with newtext.
-
-        @param newtext: new text of the page
+        @param text: draft text of the page
+                     (if None, the draft gets removed from the cache)
+        @param rev: the revision of the page this draft is based on
         @param kw: no keyword args used currently
-        @rtype: unicode
-        @return: url of page backup or None
         """
-        # Backup only if set to backup and user has a home page.
-        homepage = wikiutil.getInterwikiHomePage(self.request)
-        if homepage is None or not self.do_editor_backup:
-            return None
-        if homepage[0] != 'Self': # user has a remote homepage
+        request = self.request
+        if not request.user.valid or not self.do_editor_backup:
             return None
 
-        _ = self._
-        backuppage = PageEditor(self.request,
-                                homepage[1] + "/MoinEditorBackup",
-                                do_revision_backup=0)
-        # We need All: at the end to prevent that the original page ACLs
-        # make it possible to see preview saves (that maybe were never
-        # really saved by the author).
-        intro = u"#acl %s:read,write,delete All:\n" % self.request.user.name
+        arena = 'drafts'
+        key = request.user.id
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
+        if cache.exists():
+            cache_data = cache.content()
+        else:
+            cache_data = {}
+        if text is None:
+            try:
+                del cache_data[pagename]
+            except:
+                pass
+        else:
+            pagename = self.page_name
+            timestamp = int(time.time())
+            cache_data[pagename] = (timestamp, rev, text)
+        cache.update(cache_data)
+
+    def _load_draft(self):
+        """ Get a draft from the drafts cache arena.
+
+        @rtype: unicode
+        @return: draft text or None
+        """
+        request = self.request
+        if not request.user.valid:
+            return None
+
+        arena = 'drafts'
+        key = request.user.id
+        cache = caching.CacheEntry(request, arena, key, scope='wiki', use_pickle=True)
         pagename = self.page_name
-        date = self.request.user.getFormattedDateTime(time.time())
-        intro += _('## backup of page "%(pagename)s" submitted %(date)s') % {
-            'pagename': pagename, 'date': date, } + u'\n'
-        backuppage._write_file(intro + newtext)
-
-        return backuppage.url(self.request)
+        try:
+            cache_data = cache.content()
+            return cache_data.get(pagename)
+        except caching.CacheError:
+            return None
 
     def _get_pragmas(self, text):
         pragmas = {}
@@ -913,7 +967,7 @@ Try a different name.""") % (newpagename,)
             # write the editlog entry
             # for now simply make 2 logs, better would be some multilog stuff maybe
             if self.do_revision_backup:
-                # do not globally log edits with no revision backup (like /MoinEditorBackup pages)
+                # do not globally log edits with no revision backup
                 # if somebody edits a deprecated page, log it in global log, but not local log
                 glog.add(self.request, mtime_usecs, rev, action, self.page_name, None, extra, comment)
             if not was_deprecated and self.do_revision_backup:
@@ -943,7 +997,7 @@ Try a different name.""") % (newpagename,)
         @return: error msg
         """
         _ = self._
-        backup_url = self._make_backup(newtext, **kw)
+        self._save_draft(newtext, rev, **kw)
         action = kw.get('action', 'SAVE')
 
         #!!! need to check if we still retain the lock here
@@ -986,9 +1040,6 @@ Try a different name.""") % (newpagename,)
                 msg = _("""Someone else saved this page while you were editing!
 Please review the page and save then. Do not save this page as it is!""")
 
-            if backup_url:
-                msg += "<p>%s</p>" % _(
-                    'A backup of your changes is [%(backup_url)s here].') % {'backup_url': backup_url}
             raise self.EditConflict, msg
         elif newtext == self.get_raw_body():
             msg = _('You did not change the page content, not saved!')
@@ -1021,6 +1072,7 @@ Please review the page and save then. Do not save this page as it is!""")
             # write the page file
             mtime_usecs, rev = self._write_file(newtext, action, comment, extra)
             self.clean_acl_cache()
+            self._save_draft(None, None) # everything fine, kill the draft for this page
 
             # send notification mails
             if self.request.cfg.mail_enabled:
