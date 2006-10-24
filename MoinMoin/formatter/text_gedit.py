@@ -186,7 +186,7 @@ class Formatter(text_html.Formatter):
 
     def comment(self, text, **kw):
         text = text.rstrip() # workaround for growing amount of blanks at EOL
-        return self.preformatted(1, css_class='comment') + text + self.preformatted(0)
+        return self.preformatted(1, css_class='comment') + self.text(text) + self.preformatted(0)
 
     def strong(self, on, **kw):
         tag = 'b'
