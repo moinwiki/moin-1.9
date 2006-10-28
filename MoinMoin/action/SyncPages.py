@@ -440,14 +440,18 @@ class ActionClass(object):
                 new_local_rev = current_page.get_real_rev() # YYY direct access
 
                 def rollback_local_change(): # YYY direct local access
+                    comment = u"Wikisync rollback"
                     rev = new_local_rev - 1
                     revstr = '%08d' % rev
                     oldpg = Page(self.request, sp.local_name, rev=rev)
                     pg = PageEditor(self.request, sp.local_name)
-                    try:
-                        savemsg = pg.saveText(oldpg.get_raw_body(), 0, comment=u"Wikisync rollback", extra=revstr, action="SAVE/REVERT")
-                    except PageEditor.Unchanged:
-                        pass
+                    if not oldpg.exists():
+                        pg.deletePage(comment)
+                    else:
+                        try:
+                            savemsg = pg.saveText(oldpg.get_raw_body(), 0, comment=comment, extra=revstr, action="SAVE/REVERT")
+                        except PageEditor.Unchanged:
+                            pass
                     return sp.local_name
 
                 if local_change_done:
