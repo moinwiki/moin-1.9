@@ -59,7 +59,7 @@ class Parser(ParserBase):
                            'dllimport','dllexport','namespace','using',
                            'template','typename','goto']
 
-        special_words = ['std','string','vector','map','set','cout','cin','cerr']
+        special_words = ['std','string','vector','map','set','cout','cin','cerr', 'endl']
         constant_words = ['true','false','NULL']
 
         self.addReserved(reserved_words)
