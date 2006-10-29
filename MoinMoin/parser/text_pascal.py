@@ -41,7 +41,7 @@ class Parser(ParserBase):
                           'if','else','while','for','do','case','default',
                           'try','except','finally','raise','continue','break',
                           'begin','end','type','class','implementation',
-                          'procedure','function','constructor','destructor']
+                          'procedure','function','constructor','destructor', 'program']
         
         self.addReserved(reserved_words)
         
