@@ -429,6 +429,8 @@ reStructuredText Quick Reference
     # for the static stuff. if stuff changes on version upgrade, url will change
     # immediately and we have no problem with stale caches.
     url_prefix_static = config.url_prefix_static
+    url_prefix_local = None # if None, use same value as url_prefix_static.
+                            # must be same site as wiki engine (for e.g. JS permissions)
 
     # we could prefix actions to be able to exclude them by robots.txt:
     #url_prefix_action = 'action' # no leading or trailing '/'
@@ -610,6 +612,10 @@ reStructuredText Quick Reference
         action_prefix = self.url_prefix_action
         if action_prefix is not None and action_prefix.endswith('/'): # make sure there is no trailing '/'
             self.url_prefix_action = action_prefix[:-1]
+
+        if self.url_prefix_local is None:
+            self.url_prefix_local = self.url_prefix_static
+
 
     def load_meta_dict(self):
         """ The meta_dict contains meta data about the wiki instance. """

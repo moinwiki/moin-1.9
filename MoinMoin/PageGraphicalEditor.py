@@ -292,9 +292,9 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         lang = self.language or self.request.cfg.language_default
         contentlangdirection = i18n.getDirection(lang) # 'ltr' or 'rtl'
         uilanguage = self.request.lang
-        url_prefix_static = self.request.cfg.url_prefix_static
+        url_prefix_local = self.request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
-        fckbasepath = url_prefix_static + '/applets/FCKeditor'
+        fckbasepath = url_prefix_local + '/applets/FCKeditor'
         wikiurl = request.getScriptname()
         if not wikiurl or wikiurl[-1] != '/':
             wikiurl += '/'
@@ -312,8 +312,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
     oFCKeditor.BasePath= '%(fckbasepath)s/' ;
     oFCKeditor.Config['WikiBasePath'] = '%(wikiurl)s' ;
     oFCKeditor.Config['WikiPage'] = '%(wikipage)s' ;
-    oFCKeditor.Config['PluginsPath'] = '%(url_prefix_static)s/applets/moinFCKplugins/' ;
-    oFCKeditor.Config['CustomConfigurationsPath'] = '%(url_prefix_static)s/applets/moinfckconfig.js'  ;
+    oFCKeditor.Config['PluginsPath'] = '%(url_prefix_local)s/applets/moinFCKplugins/' ;
+    oFCKeditor.Config['CustomConfigurationsPath'] = '%(url_prefix_local)s/applets/moinfckconfig.js'  ;
     oFCKeditor.Config['WordRule'] = %(word_rule)s ;
     oFCKeditor.Config['SmileyPath'] = '%(smileypath)s/' ;
     oFCKeditor.Config['EditorAreaCSS'] = '%(themepath)s/css/common.css' ;
