@@ -292,6 +292,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         lang = self.language or self.request.cfg.language_default
         contentlangdirection = i18n.getDirection(lang) # 'ltr' or 'rtl'
         uilanguage = self.request.lang
+        url_prefix_static = self.request.cfg.url_prefix_static
         url_prefix_local = self.request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
         fckbasepath = url_prefix_local + '/applets/FCKeditor'
