@@ -2,7 +2,7 @@
 """
     MoinMoin - LogFile package
 
-    @copyright: 2005 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2005-2006 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -52,7 +52,9 @@ class LineBuffer:
         self.len = len(self.lines)
 
     def __calculate_offsets(self, offset):
-        """
+        """ Calculate the file offsets of all read lines and also the offset of
+            the position after the last read line (stored into self.offsets[-1])
+        
         @param offset: offset of the first line
         """
         self.offsets = map(lambda x:len(x), self.lines)
@@ -207,7 +209,7 @@ class LogFile:
         """
         self.__rel_index = self.__rel_index + lines
         while self.__rel_index < 0:
-            if self.__buffer == self.__buffer2:
+            if self.__buffer is self.__buffer2:
                 # change to buffer 1
                 self.__buffer = self.__buffer1
                 self.__rel_index = self.__rel_index + self.__buffer.len
@@ -230,7 +232,7 @@ class LogFile:
                     self.__buffer = self.__buffer1
 
         while self.__rel_index >= self.__buffer.len:
-            if self.__buffer == self.__buffer1:
+            if self.__buffer is self.__buffer1:
                 # change to buffer 2
                 self.__rel_index = self.__rel_index - self.__buffer.len
                 self.__buffer = self.__buffer2
@@ -245,7 +247,8 @@ class LogFile:
                         self.__lineno = (self.__lineno + lines -
                                          (self.__rel_index -
                                           len(self.__buffer.offsets)))
-                    self.__rel_index = len(self.__buffer.offsets)
+                    self.__rel_index = self.__buffer.len # point to after last read line
+                    # was (wrong): ... = len(self.__buffer.offsets)
                     return True
                 # shift buffers
                 self.__buffer1 = self.__buffer2
@@ -340,12 +343,11 @@ class LogFile:
         .seek is much more efficient for moving long distances than .peek.
         raises ValueError if position is invalid
         """
-        if self.__buffer1.offsets[0] <= position < self.__buffer1.offsets[-1]:
+        if self.__buffer1 and self.__buffer1.offsets[0] <= position < self.__buffer1.offsets[-1]:
             # position is in .__buffer1 
             self.__rel_index = self.__buffer1.offsets.index(position)
             self.__buffer = self.__buffer1
-        elif (self.__buffer2.offsets[0] <= position <
-              self.__buffer2.offsets[-1]):
+        elif self.__buffer2 and self.__buffer2.offsets[0] <= position < self.__buffer2.offsets[-1]:
             # position is in .__buffer2
             self.__rel_index = self.__buffer2.offsets.index(position)
             self.__buffer = self.__buffer2

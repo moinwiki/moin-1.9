@@ -33,7 +33,7 @@ class ItemCache:
         """
         self.name = name
         self.cache = {}
-        self.timestamp = None
+        self.log_pos = None
         self.requests = 0
         self.hits = 0
 
@@ -80,7 +80,7 @@ class ItemCache:
         """
         from MoinMoin.logfile import editlog
         elog = editlog.EditLog(request)
-        self.timestamp, items = elog.news(self.timestamp)
+        self.log_pos, items = elog.news(self.log_pos)
         if items:
             if self.name == 'meta':
                 for item in items:
