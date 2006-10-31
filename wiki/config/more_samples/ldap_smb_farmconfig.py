@@ -49,11 +49,11 @@
 wikis = [
     # Standalone server needs the port e.g. localhost:8000
     # Twisted server can now use the port, too.
-    
+
     # wikiname,     url regular expression (no protocol)
     # ---------------------------------------------------------------
-    ("info1",  r"^info1.example.org/.*$"),
-    ("info2",  r"^info2.example.org/.*$"),
+    ("info1", r"^info1.example.org/.*$"),
+    ("info2", r"^info2.example.org/.*$"),
 ]
 
 
@@ -78,19 +78,21 @@ class FarmConfig(DefaultConfig):
 
     from MoinMoin import auth
     auth = [auth.ldap_login, auth.smb_mount, auth.moin_cookie]
-    
+
     import ldap
     ldap_uri = 'ldap://ad.example.org' # ldap / active directory server URI
-    
-    #we can either use some fixed user and password for binding to LDAP
+
+    # We can either use some fixed user and password for binding to LDAP.
+    # Be careful if you need a % char in those strings - as they are used as
+    # a format string, you have to write %% to get a single % in the end.
     #ldap_binddn = 'binduser@example.org'
     #ldap_bindpw = 'secret'
-    
+
     #or we can use the username and password we got from the user:
     ldap_binddn = '%(username)s@example.org' # DN we use for first bind (AD)
     #ldap_binddn = 'cn=admin,dc=example,dc=org' # DN we use for first bind (OpenLDAP)
     ldap_bindpw = '%(password)s' # password we use for first bind
-    
+
     ldap_base = 'ou=SOMEUNIT,dc=example,dc=org' # base DN we use for searching
     ldap_scope = ldap.SCOPE_SUBTREE # scope of the search we do
     ldap_filter = "(%(ldap_name_attribute)s=%(username)s)" # available: ldap_name_attribute (see below) and username 
@@ -132,7 +134,8 @@ class FarmConfig(DefaultConfig):
                               'remember_me':         0,
                               'want_trivial':        0,
                              }
-    user_form_defaults = { # key: default
+    user_form_defaults = {
+        # key: default
         'name': '',
         'aliasname': '',
         'password': '',
@@ -141,8 +144,8 @@ class FarmConfig(DefaultConfig):
         'css_url': '',
         'edit_rows': "20",
     }
-    user_form_disable = ['name', 'aliasname', 'email',]
-    user_form_remove = ['password', 'password2', 'css_url', 'logout', 'create', 'account_sendmail',]
+    user_form_disable = ['name', 'aliasname', 'email', ]
+    user_form_remove = ['password', 'password2', 'css_url', 'logout', 'create', 'account_sendmail', ]
 
     # Critical setup  ---------------------------------------------------
 
@@ -178,7 +181,7 @@ class FarmConfig(DefaultConfig):
     # your user name. See HelpOnAccessControlLists for more help.
     # All acl_rights_xxx options must use unicode [Unicode]
     acl_rights_before = u"AdminGroup:admin,read,write,delete,revert"
-    acl_rights_default=u"EditorGroup:read,write.delete,revert ViewerGroup:read All:"
+    acl_rights_default = u"EditorGroup:read,write.delete,revert ViewerGroup:read All:"
 
     # Link spam protection for public wikis (uncomment to enable).
     # Needs a reliable internet connection.
