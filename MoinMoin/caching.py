@@ -7,7 +7,7 @@
 """
 
 import os
-import warnings
+import tempfile
 
 # cPickle can encode normal and Unicode strings
 # see http://docs.python.org/lib/node66.html
@@ -22,9 +22,6 @@ PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 from MoinMoin import config
 from MoinMoin.util import filesys, lock
 
-# filter the tempname warning because we create the tempfile only in directories
-# where only we should have write access initially
-warnings.filterwarnings("ignore", "tempnam.*security", RuntimeWarning, "MoinMoin.caching")
 
 class CacheError(Exception):
     """ raised if we have trouble reading or writing to the cache """
@@ -68,9 +65,6 @@ class CacheEntry:
 
     def _filename(self):
         return os.path.join(self.arena_dir, self.key)
-
-    def _tmpfilename(self):
-        return os.tempnam(self.arena_dir, self.key)
 
     def exists(self):
         return os.path.exists(self._filename())
@@ -121,7 +115,6 @@ class CacheEntry:
 
     def update(self, content):
         try:
-            tmpfname = self._tmpfilename()
             fname = self._filename()
             if self.use_pickle:
                 content = pickle.dumps(content, PICKLE_PROTOCOL)
@@ -130,11 +123,11 @@ class CacheEntry:
                     # we do not write content to old inode, but to a new file
                     # se we don't need to lock when we just want to read the file
                     # (at least on POSIX, this works)
-                    f = open(tmpfname, 'wb')
-                    f.write(content)
-                    f.close()
+                    tmp_handle, tmp_fname = tempfile.mkstemp('.tmp', self.key, self.arena_dir)
+                    os.write(tmp_handle, content)
+                    os.close(tmp_handle)
                     # this is either atomic or happening with real locks set:
-                    filesys.rename(tmpfname, fname)
+                    filesys.rename(tmp_fname, fname)
                 finally:
                     if self.locking:
                         self.wlock.release()
