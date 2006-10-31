@@ -4,7 +4,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os.path
+import os.path, logging
 from MoinMoin.logfile import LogFile
 from MoinMoin import wikiutil, user, config
 from MoinMoin.Page import Page
@@ -208,16 +208,20 @@ class EditLog(LogFile):
         self.filter = eval("lambda x: " + expr)
 
 
-    def news(self, oldtimestamp):
-        """ What has changed in the edit-log since <timestamp>?
-            Returns edit-log timestamp and list of changed item names.
+    def news(self, oldposition):
+        """ What has changed in the edit-log since <oldposition>?
+            Returns edit-log final position() and list of changed item names.
         """
-        newtimestamp = self.date()
+        if oldposition is None:
+            self.to_end()
+        else:
+            self.seek(oldposition)
         items = []
-        if oldtimestamp is not None and oldtimestamp != newtimestamp:
-            for line in self.reverse():
-                if line.ed_time_usecs <= oldtimestamp:
-                    break
-                items.append(line.pagename)
-        return newtimestamp, items
+        for line in self:
+            items.append(line.pagename)
+
+        newposition = self.position()
+        logging.debug("editlog.news: new pos: %r new items: %r", newposition, items)
+        # FIXME if 1 item is changed, items is [oneitem, oneitem, oneitem]!
+        return newposition, items
 
