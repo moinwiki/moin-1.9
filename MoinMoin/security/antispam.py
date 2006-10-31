@@ -76,7 +76,7 @@ def getblacklist(request, pagename, do_update):
     p = PageEditor(request, pagename, uid_override="Antispam subsystem")
     invalidate_cache = False
     if do_update:
-        tooold = time.time() - 3600
+        tooold = time.time() - 1800
         mymtime = wikiutil.version2timestamp(p.mtime_usecs())
         failure = caching.CacheEntry(request, "antispam", "failure", scope='wiki')
         fail_time = failure.mtime() # only update if no failure in last hour
@@ -127,6 +127,10 @@ def getblacklist(request, pagename, do_update):
                         raise WikirpcError("failed to get BadContent data",
                                            response)
                     p._write_file(response)
+                else:
+                    failure.update("") # we didn't get a modified version, this avoids
+                                       # permanent polling for every save when there
+                                       # is no updated master page
 
                 invalidate_cache = True
 
