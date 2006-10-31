@@ -545,10 +545,19 @@ class FCGI:
         """Create socket and verify FCGI environment."""
         try:
             if self.__port:
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-                # bind to the localhost
-                s.bind(('127.0.0.1', self.__port))
+                if isinstance(self.__port, str):
+                    try:
+                        os.unlink(self.__port)
+                    except:
+                        pass
+                    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                    s.bind(self.__port)
+                    # os.chmod(self.__port, 0660)
+                else:
+                    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                    # bind to the localhost
+                    s.bind(('127.0.0.1', self.__port))
                 s.listen(1)
             else:
                 if hasattr(socket, 'fromfd'):
