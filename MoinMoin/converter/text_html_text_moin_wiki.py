@@ -919,6 +919,8 @@ class convert_tree(visitor):
                 result.append('rowbgcolor="%s"' % value)
         if node.hasAttribute("style"):
             result.append('rowstyle="%s"' % node.getAttribute("style"))
+        if node.hasAttribute("class"):
+            result.append('rowclass="%s"' % node.getAttribute("class"))
         return " ".join(result).strip()
 
     def _cell_style(self, node):
