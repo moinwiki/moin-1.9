@@ -392,6 +392,65 @@ Version 1.6.current:
 
 
 
+Version 1.5.current:
+  New features:
+    * added url_prefix_local which is used for stuff that must be loaded from
+      same site as the wiki engine (e.g. FCKeditor GUI editor applet), while
+      url_prefix can be a remote server serving the static files (css/img).
+      If not set (or set to None), url_prefix_local will default to the value
+      of url_prefix.
+
+Version 1.5.6:
+  A general security notice:
+      Check your Python version, there was a buffer overflow issue in Python
+      recently! Details: http://moinmoin.wikiwikiweb.de/PythonUnicodeEscapeBug
+
+  Bugfixes:
+    * Fix AttributeError traceback with Standalone server (if_modified_since)
+    * Fix AttachFile "304 not modified" and redirect status code for Twisted
+    * http auth: we now decode username and password to unicode (using
+      config.charset == utf-8). Same for SSL client cert auth and CN.
+    * Avoid infinite recursion in Page.parsePageLinks.
+    * Fixed standalone server failing to shutdown if interface == "".
+    * Now MoinMoin does not think anymore that every page links to various user
+      homepages.
+    * Made the irssi parser more tolerant (Thanks to "TheAnarcat").
+    * Now multiple formatters can be used per request, the send_page code was
+      not reentrant to this regard. Fixes "empty" search results.
+    * Fixed problem with "=" in ImageLink macro links.
+    * Not a moin bug, but a silly stdlib os.tempnam function made trouble to
+      some people because it lets you override the path given in the code
+      by setting the environment variable TMP(DIR). We now use a different
+      function to avoid renaming trouble when TMP(DIR) points to a different
+      file system.
+    * Fixed antispam update on every save (Thanks to "TheAnarcat").
+    * GUI converter: don't throw away rowclass for tables.
+    * GUI editor formatter: allow height for table cells.
+    * GUI editor formatter: comment texts are output using the formatter now. 
+
+  New features:
+    * Mail notifications contain a link to the diff action so the user
+      can see the coloured difference more easily. Thanks to Tobias Polzin.
+    * FeatureRequests/MoveAttachments - you can move attachments from one
+      page to another (and also rename the attachment at the same time).
+      Thanks to Reimar Bauer.
+    * Added support for linking to attachment: and inline: URLs with ImageLink.
+    * Added UNIX socket support for FastCGI, just set the port to some (socket)
+      filename. Details see: MoinMoin:FeatureRequests/FastCgiUnixSocket
+    * [[Attachlist(pagename,mimetype)]] lists attachments of pagename (default:
+      current page) with optional mimetype restriction (default: all).
+      Thanks to Reimar Bauer.
+
+  Other changes:
+    * Minor performance improvements (might be noticeable if you have many
+      custom navi_bar entries and high server load).
+    * Avoid usage of no-cache because it breaks attachment download on IE6.
+      This is a IE bug, not a moin bug.
+    * Added XHTML to the unsafe list.
+    * Changed the rst parser to be compatible to the new docutils interface
+      for directives.
+    * Updated EmbedObject macro.
+
 
 Version 1.5.5a:
   Bugfixes:
