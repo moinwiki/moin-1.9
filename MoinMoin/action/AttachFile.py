@@ -251,12 +251,15 @@ def _access_file(pagename, request):
     return (None, None)
 
 
-def _build_filelist(request, pagename, showheader, readonly):
+def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
     _ = request.getText
 
     # access directory
     attach_dir = getAttachDir(request, pagename)
     files = _get_files(request, pagename)
+
+    if mime_type != '*':
+        files = [fname for fname in files if mime_type == mimetypes.guess_type(fname)[0]]
 
     str = ""
     if files:
