@@ -727,7 +727,7 @@ def attachment_move(pagename, request):
     if request.form.has_key('newattachmentname'):
         new_attachment = request.form.get('newattachmentname')[0]
         if new_attachment != wikiutil.taintfilename(new_attachment):
-            upload_form(pagename, request, msg=_("Please use proper signs in attachment '%(filename)s'.") % {
+            upload_form(pagename, request, msg=_("Please use a valid filename for attachment '%(filename)s'.") % {
                                   'filename': new_attachment})
             return
     else:

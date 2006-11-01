@@ -16,7 +16,7 @@ def run():
     data = sys.stdin.read()
 
     if lang in excluded:
-        f = open("%s.po" % lang, "w")
+        f = open("%s.MoinMoin.po" % lang, "w")
         f.write(data)
         f.close()
         sys.exit(0)
