@@ -8,7 +8,7 @@
 
     Minimal usage:
 
-        from MoinMoin.server.cgi import CgiConfig, run
+        from MoinMoin.server.CGI import CgiConfig, run
         
         class Config(CgiConfig):
             pass
