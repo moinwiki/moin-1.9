@@ -1091,10 +1091,10 @@ space between words. Group page name is not allowed.""") % self.user.name
                         wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(self, pagetrail[-1])
                         url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
                     else:
-                        url = Page(self, pagetrail[-1]).url(self, escape=0)
+                        url = Page(self, pagetrail[-1]).url(self, escape=0, relative=False)
                 else:
                     # Or to localized FrontPage
-                    url = wikiutil.getFrontPage(self).url(self, escape=0)
+                    url = wikiutil.getFrontPage(self).url(self, escape=0, relative=False)
                 self.http_redirect(url)
                 return self.finish()
 
