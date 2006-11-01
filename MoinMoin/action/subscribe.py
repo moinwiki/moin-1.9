@@ -26,7 +26,7 @@ def execute(pagename, request):
 
     # Suggest visitors to login
     elif not request.user.valid:
-        msg = _("You must log in to use subscribtions.")
+        msg = _("You must log in to use subscriptions.")
 
     # Suggest users without email to add their email address
     elif not request.user.email:
@@ -35,7 +35,7 @@ def execute(pagename, request):
     elif request.user.isSubscribedTo([pagename]):
         # Try to unsubscribe
         if request.user.unsubscribe(pagename):
-            msg = _('Your subscribtion to this page has been removed.')
+            msg = _('Your subscription to this page has been removed.')
         else:
             msg = _("Can't remove regular expression subscription!") + u' ' + \
                   _("Edit the subscription regular expressions in your "
