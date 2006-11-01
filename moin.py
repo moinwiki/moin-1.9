@@ -43,7 +43,7 @@ sys.path.insert(0, moinpath)
 ## import os
 ## os.environ['MOIN_DEBUG'] = '1'
 
-from MoinMoin.server.standalone import StandaloneConfig, run
+from MoinMoin.server.STANDALONE import StandaloneConfig, run
 from MoinMoin.version import project, release, revision
 
 print "%s - %s [%s]" % (project, release, revision)

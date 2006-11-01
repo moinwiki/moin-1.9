@@ -6,7 +6,7 @@
 
     Minimal usage:
 
-        from MoinMoin.server.twistedmoin import TwistedConfig, makeApp
+        from MoinMoin.server.TWISTED import TwistedConfig, makeApp
         
         class Config(TwistedConfig):
             docs = '/usr/share/moin/wiki/htdocs'

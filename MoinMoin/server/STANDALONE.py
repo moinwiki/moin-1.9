@@ -11,7 +11,7 @@
         
     Minimal usage:
 
-        from MoinMoin.server.standalone import StandaloneConfig, run
+        from MoinMoin.server.STANDALONE import StandaloneConfig, run
         
         class Config(StandaloneConfig):
             docs = '/usr/share/moin/wiki/htdocs'
