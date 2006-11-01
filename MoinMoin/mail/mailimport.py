@@ -123,7 +123,7 @@ def process_message(message):
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_address):
+def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_addrs):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
     generate_summary = False
@@ -131,7 +131,7 @@ def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_te
 
     pagename_tpl = ""
     for addr in msg['target_addrs']:
-        if addr[1].strip().lower() == wiki_address:
+        if addr[1].strip().lower() in wiki_addrs:
             pagename_tpl = addr[0]
             break
 
@@ -203,14 +203,14 @@ def import_mail_from_message(request, message):
 
     email_subpage_template = request.cfg.mail_import_subpage_template
     email_pagename_envelope = request.cfg.mail_import_pagename_envelope
-    wiki_address = request.cfg.mail_import_wiki_address or request.cfg.mail_from
+    wiki_addrs = request.cfg.mail_import_wiki_addrs
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
 
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_address)
+    d = get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_addrs)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
@@ -291,7 +291,7 @@ def import_mail_from_message(request, message):
 
         from_col = email_to_markup(request, msg['from_addr'])
         to_col = ' '.join([email_to_markup(request, (realname, mailaddr))
-                           for realname, mailaddr in msg['target_addrs'] if mailaddr != wiki_address])
+                           for realname, mailaddr in msg['target_addrs'] if not mailaddr in wiki_addrs])
         subj_col = '[%s %s]' % (wikiutil.quoteName(pagename), msg['subject'])
         date_col = msg['date']
         attach_col = " ".join(attachment_links)
