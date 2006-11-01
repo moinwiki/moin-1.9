@@ -6,7 +6,7 @@ DOMAIN = "MoinMoin"
 
 def run():
     import sys, xmlrpclib
-    sys.path.insert(0, '../../..')
+    sys.path.insert(0, '../..')
 
     excluded = ["en", ] # languages managed in repository, not in wiki
 

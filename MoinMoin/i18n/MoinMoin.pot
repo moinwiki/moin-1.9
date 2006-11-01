@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-15 20:45+0200\n"
+"POT-Creation-Date: 2006-11-01 23:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,6 +176,10 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 
 #, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr ""
+
+#, python-format
 msgid "Edit \"%(pagename)s\""
 msgstr ""
 
@@ -206,6 +210,9 @@ msgid ""
 "Please review the page and save then. Do not save this page as it is!"
 msgstr ""
 
+msgid "[Content loaded from draft]"
+msgstr ""
+
 #, python-format
 msgid "[Content of new page loaded from %s]"
 msgstr ""
@@ -216,6 +223,15 @@ msgstr ""
 
 #, python-format
 msgid "[You may not read %s]"
+msgstr ""
+
+#, python-format
+msgid ""
+"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"(draft_timestamp_str)s) can be loaded instead of the current revision %"
+"(page_rev)d by using the load draft button - in case you lost your last edit "
+"somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
 msgstr ""
 
 #, python-format
@@ -242,6 +258,9 @@ msgstr ""
 msgid "Text mode"
 msgstr ""
 
+msgid "Load Draft"
+msgstr ""
+
 msgid "Comment:"
 msgstr ""
 
@@ -258,9 +277,14 @@ msgstr ""
 msgid "Remove trailing whitespace from each line"
 msgstr ""
 
+msgid "The wiki is currently not reachable."
+msgstr ""
+
 msgid ""
-"The remote version of MoinMoin is too old, the version 1.6 is required at "
-"least."
+"The remote version of MoinMoin is too old, version 1.6 is required at least."
+msgstr ""
+
+msgid "Invalid username or password."
 msgstr ""
 
 #, python-format
@@ -331,6 +355,9 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr ""
 
+msgid "You are not allowed to delete this page!"
+msgstr ""
+
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr ""
 
@@ -378,10 +405,6 @@ msgid "[%(lang)s] %(recipients)s: %(status)s"
 msgstr ""
 
 #, python-format
-msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
-msgstr ""
-
-#, python-format
 msgid "Page could not get locked. Unexpected error (errno=%d)."
 msgstr ""
 
@@ -398,10 +421,6 @@ msgid "You already saved this page!"
 msgstr ""
 
 msgid "You already edited this page! Please do not use the back button."
-msgstr ""
-
-#, python-format
-msgid "A backup of your changes is [%(backup_url)s here]."
 msgstr ""
 
 msgid "You did not change the page content, not saved!"
@@ -508,7 +527,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
-"%(be)s results out ofabout %(pages)d pages."
+"%(be)s results out of about %(pages)d pages."
 msgstr ""
 
 msgid "seconds"
@@ -673,7 +692,13 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
 msgid "Xapian search"
+msgstr ""
+
+msgid "Xapian Version"
 msgstr ""
 
 msgid "Xapian stemming"
@@ -713,13 +738,10 @@ msgstr ""
 msgid "(currently set to %s)"
 msgstr ""
 
-msgid "Delete Bookmark"
+msgid "Delete bookmark"
 msgstr ""
 
 msgid "Set bookmark"
-msgstr ""
-
-msgid "set bookmark"
 msgstr ""
 
 msgid "[Bookmark reached]"
@@ -746,6 +768,51 @@ msgstr ""
 msgid "Bad chart type \"%s\"!"
 msgstr ""
 
+msgid "Search for items"
+msgstr ""
+
+msgid "containing all the following terms"
+msgstr ""
+
+msgid "containing one or more of the following terms"
+msgstr ""
+
+msgid "not containing the following terms"
+msgstr ""
+
+msgid "belonging to one of the following categories"
+msgstr ""
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+msgid "any language"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "File Type"
+msgstr ""
+
+msgid "Search only in titles"
+msgstr ""
+
+msgid "Case-sensitive search"
+msgstr ""
+
+msgid "Exclude underlay"
+msgstr ""
+
+msgid "No system items"
+msgstr ""
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
 msgid "Markup"
 msgstr ""
 
@@ -763,6 +830,21 @@ msgid "Mail not sent"
 msgstr ""
 
 msgid "Mail sent OK"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Attachments"
 msgstr ""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
@@ -979,9 +1061,6 @@ msgstr ""
 msgid "Add Link"
 msgstr ""
 
-msgid "Attachments"
-msgstr ""
-
 #, python-format
 msgid "Show %s days."
 msgstr ""
@@ -1104,9 +1183,6 @@ msgid "Others"
 msgstr ""
 
 msgid "Distribution of User-Agent Types"
-msgstr ""
-
-msgid "Date"
 msgstr ""
 
 msgid "Views/day"
@@ -1298,6 +1374,9 @@ msgstr ""
 msgid "del"
 msgstr ""
 
+msgid "move"
+msgstr ""
+
 msgid "get"
 msgstr ""
 
@@ -1315,12 +1394,6 @@ msgid "No attachments stored for %(pagename)s"
 msgstr ""
 
 msgid "Edit drawing"
-msgstr ""
-
-msgid "Attached Files"
-msgstr ""
-
-msgid "You are not allowed to attach a file to this page."
 msgstr ""
 
 msgid "New Attachment"
@@ -1342,6 +1415,12 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
+msgid "Attached Files"
+msgstr ""
+
+msgid "You are not allowed to attach a file to this page."
+msgstr ""
+
 msgid "File attachments are not allowed in this wiki!"
 msgstr ""
 
@@ -1354,6 +1433,15 @@ msgid ""
 msgstr ""
 
 msgid "You are not allowed to delete attachments on this page."
+msgstr ""
+
+msgid "You are not allowed to move attachments from this page."
+msgstr ""
+
+msgid "Move aborted!"
+msgstr ""
+
+msgid "Please use the interactive user interface to move attachments!"
 msgstr ""
 
 msgid "You are not allowed to get attachments from this page."
@@ -1384,6 +1472,40 @@ msgstr ""
 
 #, python-format
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' already exists."
+msgstr ""
+
+#, python-format
+msgid "Attachment '%(filename)s' moved to %(page)s."
+msgstr ""
+
+msgid "Nothing changed"
+msgstr ""
+
+#, python-format
+msgid "Page %(newpagename)s does not exists or you don't have enough rights."
+msgstr ""
+
+msgid "Move aborted because empty page name"
+msgstr ""
+
+#, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr ""
+
+msgid "Move aborted because empty attachment name"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "New page name"
+msgstr ""
+
+msgid "New attachment name"
 msgstr ""
 
 #, python-format
@@ -1467,6 +1589,22 @@ msgstr ""
 msgid "You are not allowed to use this action."
 msgstr ""
 
+#, python-format
+msgid "Rolled back changes to the page %s."
+msgstr ""
+
+msgid "Exception while calling rollback function:"
+msgstr ""
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+
+msgid "Operation was canceled."
+msgstr ""
+
 msgid "The only supported directions are BOTH and DOWN."
 msgstr ""
 
@@ -1476,33 +1614,106 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter."
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
 msgstr ""
 
 msgid "The ''remoteWiki'' is unknown."
 msgstr ""
 
-msgid "Syncronisation finished."
+msgid "A severe error occured:"
 msgstr ""
 
-#, python-format
-msgid "Synchronising page %(pagename)s with remote page %(remotepagename)s ..."
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr ""
+
+msgid "Synchronisation started -"
 msgstr ""
 
 #, python-format
 msgid ""
-"Skipped page %(pagename)s because of a locally or remotely unresolved "
-"conflict."
+"Got a list of %s local and %s remote pages. This results in %s different "
+"pages over-all."
 msgstr ""
 
+#, python-format
+msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr ""
+
+#, python-format
 msgid ""
-"This is the first synchronisation between this page and the remote wiki."
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
 msgstr ""
 
-msgid "Page successfully merged."
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
 
-msgid "Page merged with conflicts."
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr ""
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+
+#, python-format
+msgid "Page %s successfully merged."
+msgstr ""
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr ""
+
+#, python-format
+msgid "Page %s merged with conflicts."
 msgstr ""
 
 #, python-format
@@ -1533,13 +1744,13 @@ msgstr ""
 msgid "This wiki is not enabled for mail processing."
 msgstr ""
 
-msgid "You must log in to use subscribtions."
+msgid "You must log in to use subscriptions."
 msgstr ""
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
 
-msgid "Your subscribtion to this page has been removed."
+msgid "Your subscription to this page has been removed."
 msgstr ""
 
 msgid "Can't remove regular expression subscription!"
@@ -1651,14 +1862,50 @@ msgid "You are not allowed to perform this action."
 msgstr ""
 
 #, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
 msgid "Title Search: \"%s\""
+msgstr ""
+
+#, python-format
+msgid "Advanced Search: \"%s\""
 msgstr ""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
 msgstr ""
 
-msgid "Your search query didn't return any results."
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. [[BR]]"
+msgstr ""
+
+msgid "Click here to perform a full-text search with your search terms!"
 msgstr ""
 
 #, python-format
