@@ -28,7 +28,7 @@ def make_url_xml(vars):
 
 def sitemap_url(request, base, page):
     """ return a sitemap <url>..</url> fragment for page object <page> """
-    url = page.url(request)
+    url = page.url(request, relative=False)
     pagename = page.page_name
     lastmod = page.mtime_printable(request)
     if lastmod == "0": # can happen in case of errors
