@@ -877,7 +877,8 @@ class RequestBase(object):
             action != 'rss_rc' and
             # allow spiders to get attachments and do 'show'
             not (action == 'AttachFile' and 'do=get' in qs) and
-            action != 'show'
+            action != 'show' and
+            action != 'sitemap'
             ):
             forbidden = self.isSpiderAgent
 
