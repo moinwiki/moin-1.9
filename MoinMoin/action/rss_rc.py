@@ -14,6 +14,9 @@ from MoinMoin.util import timefuncs
 from MoinMoin.Page import Page
 from MoinMoin.wikixml.util import RssGenerator
 
+def full_url(request, page, querystr=None, anchor=None):
+    return request.getQualifiedURL(page.url(request, relative=False, anchor=anchor, querystr=querystr))
+
 def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
@@ -100,9 +103,9 @@ def execute(pagename, request):
         # send the generated XML document
         request.emit_http_headers(httpheaders)
 
-        interwiki = request.getBaseURL()
-        if interwiki[-1] != "/":
-            interwiki = interwiki + "/"
+        baseurl = request.getBaseURL()
+        if not baseurl.endswith('/'):
+            baseurl += '/'
 
         logo = re.search(r'src="([^"]*)"', cfg.logo_string)
         if logo:
@@ -134,7 +137,8 @@ def execute(pagename, request):
             (handler.xmlns['rdf'], 'about'): request.getBaseURL(),
             })
         handler.simpleNode('title', cfg.sitename)
-        handler.simpleNode('link', interwiki + wikiutil.quoteWikinameURL(pagename))
+        page = Page(request, pagename)
+        handler.simpleNode('link', full_url(request, page))
         handler.simpleNode('description', 'RecentChanges at %s' % cfg.sitename)
         if logo:
             handler.simpleNode('image', None, {
@@ -146,11 +150,10 @@ def execute(pagename, request):
         handler.startNode('items')
         handler.startNode(('rdf', 'Seq'))
         for item in logdata:
-            link = "%s%s#%04d%02d%02d%02d%02d%02d" % ((interwiki,
-                    wikiutil.quoteWikinameURL(item.pagename),) + item.time[:6])
-            handler.simpleNode(('rdf', 'li'), None, attr={
-                (handler.xmlns['rdf'], 'resource'): link,
-            })
+            anchor = "%04d%02d%02d%02d%02d%02d" % item.time[:6]
+            page = Page(request, item.pagename)
+            link = full_url(request, page, anchor=anchor)
+            handler.simpleNode(('rdf', 'li'), None, attr={(handler.xmlns['rdf'], 'resource'): link, })
         handler.endNode(('rdf', 'Seq'))
         handler.endNode('items')
         handler.endNode('channel')
@@ -161,25 +164,23 @@ def execute(pagename, request):
                 (handler.xmlns['rdf'], 'about'): logo,
                 })
             handler.simpleNode('title', cfg.sitename)
-            handler.simpleNode('link', interwiki)
+            handler.simpleNode('link', baseurl)
             handler.simpleNode('url', logo)
             handler.endNode('image')
 
         # emit items
         for item in logdata:
             page = Page(request, item.pagename)
-            link = interwiki + wikiutil.quoteWikinameURL(item.pagename)
-            rdflink = "%s#%04d%02d%02d%02d%02d%02d" % ((link,) + item.time[:6])
-            handler.startNode('item', attr={
-                (handler.xmlns['rdf'], 'about'): rdflink,
-            })
+            anchor = "%04d%02d%02d%02d%02d%02d" % item.time[:6]
+            rdflink = full_url(request, page, anchor=anchor)
+            handler.startNode('item', attr={(handler.xmlns['rdf'], 'about'): rdflink, })
 
             # general attributes
             handler.simpleNode('title', item.pagename)
             if ddiffs:
-                handler.simpleNode('link', link+"?action=diff")
+                handler.simpleNode('link', full_url(request, page, querystr={'action': 'diff'}))
             else:
-                handler.simpleNode('link', link)
+                handler.simpleNode('link', full_url(request, page))
 
             handler.simpleNode(('dc', 'date'), timefuncs.W3CDate(item.time))
 
@@ -211,7 +212,7 @@ def execute(pagename, request):
                 edattr[(handler.xmlns['wiki'], 'host')] = item.hostname
             if item.editor[0] == 'interwiki':
                 edname = "%s:%s" % item.editor[1]
-                ##edattr[(None, 'link')] = interwiki + wikiutil.quoteWikiname(edname)
+                ##edattr[(None, 'link')] = baseurl + wikiutil.quoteWikiname(edname)
             else: # 'ip'
                 edname = item.editor[1]
                 ##edattr[(None, 'link')] = link + "?action=info"
@@ -228,8 +229,8 @@ def execute(pagename, request):
             # wiki extensions
             handler.simpleNode(('wiki', 'version'), "%i" % (item.ed_time_usecs))
             handler.simpleNode(('wiki', 'status'), ('deleted', 'updated')[page.exists()])
-            handler.simpleNode(('wiki', 'diff'), link + "?action=diff")
-            handler.simpleNode(('wiki', 'history'), link + "?action=info")
+            handler.simpleNode(('wiki', 'diff'), full_url(request, page, querystr={'action': 'diff'}))
+            handler.simpleNode(('wiki', 'history'), full_url(request, page, querystr={'action': 'info'}))
             # handler.simpleNode(('wiki', 'importance'), ) # ( major | minor ) 
             # handler.simpleNode(('wiki', 'version'), ) # ( #PCDATA ) 
 
