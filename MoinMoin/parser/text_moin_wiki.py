@@ -7,10 +7,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, re
+import re
 from MoinMoin import config, wikiutil, macro
-from MoinMoin.Page import Page
-from MoinMoin.util import web
 
 Dependencies = []
 
@@ -122,17 +120,19 @@ class Parser:
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
-        self.form = request.form
         self._ = request.getText
         self.cfg = request.cfg
         self.line_anchors = kw.get('line_anchors', True)
         self.macro = None
         self.start_line = kw.get('start_line', 0)
 
-        self.is_em = 0
-        self.is_b = 0
-        self.is_u = 0
-        self.is_strike = 0
+        self.is_em = 0 # must be int
+        self.is_b = 0 # must be int
+        self.is_u = False
+        self.is_strike = False
+        self.is_big = False
+        self.is_small = False
+
         self.lineno = 0
         self.in_list = 0 # between <ul/ol/dl> and </ul/ol/dl>
         self.in_li = 0 # between <li> and </li>
@@ -146,8 +146,6 @@ class Parser:
         self.in_pre = None
 
         self.in_table = 0
-        self.is_big = False
-        self.is_small = False
         self.inhibit_p = 0 # if set, do not auto-create a <p>aragraph
         self.titles = request._page_headings
 
