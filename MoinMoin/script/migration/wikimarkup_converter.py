@@ -260,7 +260,6 @@ class Parser:
         if s_word == '#!':
             # empty bang paths lead to a normal code display
             # can be used to escape real, non-empty bang paths
-            word = ''
             self.in_pre = 'no_parser'
             return "{{{#!"
         elif s_word.startswith('#!'):
@@ -268,7 +267,7 @@ class Parser:
             parser_name = s_word[2:].split()[0]  # XXX loses args
             self.parser_name = parser_name
             self.in_pre = 'found_parser'
-            self.parser_lines = [word]
+            self.parser_lines = []
             return "{{{%s" % s_word
         elif s_word:
             self.in_pre = 'no_parser'
@@ -450,16 +449,17 @@ class Parser:
     def _li_none_repl(self, match):
         """Handle type=none (" .") lists."""
         self.in_li = 1
-        return " . "
+        return match
 
     def _li_repl(self, match):
         """Handle bullet (" *") lists."""
         self.in_li = 1
-        return ' * '
+        return match
 
     def _ol_repl(self, match):
         """Handle numbered lists."""
-        return self._li_repl(match)
+        self.in_li = 1
+        return match
 
     def _dl_repl(self, match):
         """Handle definition lists."""
@@ -467,11 +467,9 @@ class Parser:
         # match[1:-3].lstrip(' ')
         return match
 
-
     def _indent_level(self):
         """Return current char-wise indent level."""
         return len(self.list_indents) and self.list_indents[-1]
-
 
     def _indent_to(self, new_level, list_type, numtype, numstart):
         """Close and open lists."""
@@ -701,7 +699,7 @@ class Parser:
                 for pi in ("##", "#format", "#refresh", "#redirect", "#deprecated",
                            "#pragma", "#form", "#acl", "#language"):
                     if line.lower().startswith(pi):
-                        self.request.write(line + '\n')
+                        self.request.write(line + '\r\n')
                         found = True
                         break
                 if not found:
@@ -715,9 +713,6 @@ class Parser:
                     parser_name = ''
                     if line.strip().startswith("#!"):
                         parser_name = line.strip()[2:].split()[0]
-                        self.setParser(parser_name)
-
-                    if self.parser:
                         self.in_pre = 'found_parser'
                         self.parser_lines = [line]
                         self.parser_name = parser_name
@@ -729,13 +724,14 @@ class Parser:
                     try:
                         endpos = line.index("}}}")
                     except ValueError:
-                        self.parser_lines.append(line)
+                        self.parser_lines.append(line+'\r\n')
                         continue
                     if line[:endpos]:
                         self.parser_lines.append(line[:endpos])
 
-                    res = '\n'.join(self.parser_lines) # dont call parser, emit as is
+                    res = ''.join(self.parser_lines) # dont call parser, emit as is
                     self.request.write(res)
+                    self.request.write('}}}')
                     del self.parser_lines
                     self.in_pre = None
                     self.parser = None
@@ -750,7 +746,7 @@ class Parser:
                     if self.in_table:
                         self.in_table = 0
                     self.line_is_empty = 1
-                    self.request.write(line + '\n')
+                    self.request.write(line + '\r\n')
                     continue
 
                 # Check indent level
@@ -806,7 +802,7 @@ class Parser:
             scanning_re = self.in_pre and pre_scan_re or scan_re
             formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line)
-            self.request.write("\n")
+            self.request.write("\r\n")
 
         # Close code displays, paragraphs, tables and open lists
         self.request.write(self._undent())
@@ -817,6 +813,8 @@ class Parser:
 def convert(intext, pagemap, filemap):
     import StringIO
     request = StringIO.StringIO()
+    if not intext.endswith('\r\n'):
+        intext += '\r\n'
     p = Parser("TestPage", intext, request)
     p.convert()
     return request.getvalue()
