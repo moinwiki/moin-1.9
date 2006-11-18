@@ -3,7 +3,7 @@
 import sys
 sys.path.insert(0, '../../..')
 
-import re
+import re, codecs
 from MoinMoin import config, wikiutil
 
 class Parser:
@@ -262,29 +262,27 @@ class Parser:
             # can be used to escape real, non-empty bang paths
             word = ''
             self.in_pre = 'no_parser'
-            return "{{{"
+            return "{{{#!"
         elif s_word.startswith('#!'):
             # First try to find a parser for this
             parser_name = s_word[2:].split()[0]  # XXX loses args
-            self.setParser(parser_name)
-
-        if self.parser:
             self.parser_name = parser_name
             self.in_pre = 'found_parser'
             self.parser_lines = [word]
-            return ''
+            return "{{{%s" % s_word
         elif s_word:
             self.in_pre = 'no_parser'
             return "{{{%s" % s_word
         else:
             self.in_pre = 'search_parser'
-            return ''
+            return '{{{'
 
     def _heading_repl(self, word):
         h = word.strip() # XXX loses indentation
         level = 1
         while h[level:level+1] == '=':
             level += 1
+        title_text = h[level:-level].strip()
         depth = min(5, level)
         h = "=" * depth
         return "%s %s %s" % (h, title_text, h)
@@ -339,7 +337,7 @@ class Parser:
 
     def _interwiki_repl(self, word):
         """Handle InterWiki links."""
-        wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
+        #wikitag, wikiurl, wikitail, wikitag_bad = wikiutil.resolve_wiki(self.request, word)
         return word
 
     def _url_repl(self, word):
@@ -353,7 +351,6 @@ class Parser:
             return self.attachment(word)
 
         if wikiutil.isPicture(word):
-            word = wikiutil.mapURL(self.request, word)
             # Get image name http://here.com/dir/image.gif -> image
             name = word.split('/')[-1]
             name = ''.join(name.split('.')[:-1])
@@ -446,15 +443,9 @@ class Parser:
 
     def _indent_repl(self, match):
         """Handle pure indentation (no - * 1. markup)."""
-        result = []
         if not (self.in_li or self.in_dd):
-            self._close_item(result)
             self.in_li = 1
-            css_class = None
-            if self.line_was_empty and not self.first_list_item:
-                css_class = 'gap'
-            result.append(self.formatter.listitem(1, css_class=css_class, style="list-style-type:none"))
-        return ''.join(result)
+        return match
 
     def _li_none_repl(self, match):
         """Handle type=none (" .") lists."""
@@ -472,16 +463,9 @@ class Parser:
 
     def _dl_repl(self, match):
         """Handle definition lists."""
-        result = []
-        self._close_item(result)
         self.in_dd = 1
-        result.extend([
-            self.formatter.definition_term(1),
-            self.formatter.text(match[1:-3].lstrip(' ')),
-            self.formatter.definition_term(0),
-            self.formatter.definition_desc(1),
-        ])
-        return ''.join(result)
+        # match[1:-3].lstrip(' ')
+        return match
 
 
     def _indent_level(self):
@@ -624,47 +608,13 @@ class Parser:
         return attr, msg
 
     def _tableZ_repl(self, word):
-        """Handle table row end."""
-        if self.in_table:
-            result = ''
-            result += self.formatter.table_cell(0) + self.formatter.table_row(0)
-            return result
-        else:
-            return self.formatter.text(word)
+        return word
 
     def _table_repl(self, word):
-        """Handle table cell separator."""
-        if self.in_table:
-            result = []
-            # check for attributes
-            attrs, attrerr = self._getTableAttrs(word)
-
-            # start the table row?
-            if self.table_rowstart:
-                self.table_rowstart = 0
-                result.append(self.formatter.table_row(1, attrs))
-            else:
-                # Close table cell, first closing open p
-                result.append(self.formatter.table_cell(0))
-
-            # check for adjacent cell markers
-            if word.count("|") > 2:
-                if not attrs.has_key('align') and \
-                   not (attrs.has_key('style') and 'text-align' in attrs['style'].lower()):
-                    # add center alignment if we don't have some alignment already
-                    attrs['align'] = '"center"'
-                if not attrs.has_key('colspan'):
-                    attrs['colspan'] = '"%d"' % (word.count("|")/2)
-
-            # return the complete cell markup
-            result.append(self.formatter.table_cell(1, attrs) + attrerr)
-            return ''.join(result)
-        else:
-            return self.formatter.text(word)
+        return word
 
 
     def _close_item(self, result):
-        #result.append("<!-- close item begin -->\n")
         if self.in_table:
             self.in_table = 0
         if self.in_li:
@@ -751,7 +701,7 @@ class Parser:
                 for pi in ("##", "#format", "#refresh", "#redirect", "#deprecated",
                            "#pragma", "#form", "#acl", "#language"):
                     if line.lower().startswith(pi):
-                        self.request.write(line)
+                        self.request.write(line + '\n')
                         found = True
                         break
                 if not found:
@@ -773,7 +723,6 @@ class Parser:
                         self.parser_name = parser_name
                         continue
                     else:
-                        self.request.write(self.formatter.preformatted(1))
                         self.in_pre = 'no_parser'
                 if self.in_pre == 'found_parser':
                     # processing mode
@@ -785,9 +734,7 @@ class Parser:
                     if line[:endpos]:
                         self.parser_lines.append(line[:endpos])
 
-                    # Close p before calling parser
-                    # TODO: do we really need this?
-                    res = self.formatter.parser(self.parser_name, self.parser_lines)
+                    res = '\n'.join(self.parser_lines) # dont call parser, emit as is
                     self.request.write(res)
                     del self.parser_lines
                     self.in_pre = None
@@ -860,47 +807,25 @@ class Parser:
             formatted_line = self.scan(scanning_re, line)
             self.request.write(formatted_line)
             self.request.write("\n")
-            if self.in_pre == 'no_parser':
-                self.request.write(self.formatter.linebreak())
 
         # Close code displays, paragraphs, tables and open lists
         self.request.write(self._undent())
-        if self.in_pre: self.request.write(self.formatter.preformatted(0))
         if self.in_table: self.request.write(self.formatter.table(0))
 
 
 
 def convert(intext, pagemap, filemap):
-    request = sys.stdout
+    import StringIO
+    request = StringIO.StringIO()
     p = Parser("TestPage", intext, request)
     p.convert()
+    return request.getvalue()
 
 if __name__ == '__main__':
-    intext = """
-A link using _ instead of blank: ["Other_Page"]
-
-##A normal CamelCase link and a interwiki MoinMoin:WhatEver link.
-
-attachment:file%20with%20blanks.txt
-
- . asdadasd
- . asadads
-  . asdads
-  . asdads
- . asdads
-
-Testing:
- * asda
-  * asdads
-
-Another:
- 1. asdasd
- 1. asdad
-  1. asada
-
-
-"""
+    intext = codecs.open("in.txt", "r", "utf-8").read()
     pagemap = {'Other_Page': 'Other Page', }
     filemap = {'file with blanks.txt': True}
-    print convert(intext, pagemap, filemap)
-
+    data = convert(intext, pagemap, filemap)
+    f = codecs.open("out.txt", "w", "utf-8")
+    f.write(data)
+    f.close()
