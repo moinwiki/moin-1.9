@@ -120,6 +120,7 @@ class Parser:
     def __init__(self, raw, request, **kw):
         self.raw = raw
         self.request = request
+        self.form = request.form # Macro object uses this
         self._ = request.getText
         self.cfg = request.cfg
         self.line_anchors = kw.get('line_anchors', True)
