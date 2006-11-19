@@ -514,11 +514,16 @@ class ThemeBase:
         @rtype: string
         @return: html link tag
         """
-        page_params, title, icon = self.cfg.page_icons_table[which]
+        querystr, title, icon = self.cfg.page_icons_table[which]
         d['title'] = title % d
         d['i18ntitle'] = self.request.getText(d['title'], formatted=False)
         img_src = self.make_icon(icon, d)
-        return wikiutil.link_tag(self.request, page_params % d, img_src, title="%(i18ntitle)s" % d)
+        rev = d['rev']
+        if rev and which in ['raw', 'print', ]:
+            querystr['rev'] = str(rev)
+        attrs = {'rel': 'nofollow', 'title': d['i18ntitle'], }
+        page = d['page']
+        return page.link_to_raw(self.request, text=img_src, querystr=querystr, **attrs)
 
     def msg(self, d):
         """ Assemble the msg display
@@ -1395,6 +1400,7 @@ var gui_editor_link_text = "%(text)s";
         """
         request = self.request
         _ = request.getText
+        rev = request.rev
 
         if keywords.has_key('page'):
             page = keywords['page']
@@ -1560,6 +1566,7 @@ var gui_editor_link_text = "%(text)s";
                 'title_text': text,
                 'page': page,
                 'page_name': pagename or '',
+                'rev': rev,
             }
             request.themedict = d
             output.append(self.startPage())
@@ -1576,6 +1583,7 @@ var gui_editor_link_text = "%(text)s";
                 'logo_string': request.cfg.logo_string,
                 'site_name': request.cfg.sitename,
                 'page': page,
+                'rev': rev,
                 'pagesize': pagename and page.size() or 0,
                 'last_edit_info': pagename and page.lastEditInfo() or '',
                 'page_name': pagename or '',

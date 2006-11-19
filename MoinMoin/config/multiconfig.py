@@ -350,23 +350,20 @@ reStructuredText Quick Reference
     # These icons will show in this order in the iconbar, unless they
     # are not relevant, e.g email icon when the wiki is not configured
     # for email.
-    page_iconbar = ["up", "edit", "view", "diff", "info", "subscribe", "raw", "print", ]
+    page_iconbar = ["edit", "view", "diff", "info", "subscribe", "raw", "print", ]
 
     # Standard buttons in the iconbar
     page_icons_table = {
-        # key           last part of url, title, icon-key
-        'help':        ("%(q_page_help_contents)s", "%(page_help_contents)s", "help"),
-        'find':        ("%(q_page_find_page)s?value=%(q_page_name)s", "%(page_find_page)s", "find"),
-        'diff':        ("%(q_page_name)s?action=diff", _("Diffs"), "diff"),
-        'info':        ("%(q_page_name)s?action=info", _("Info"), "info"),
-        'edit':        ("%(q_page_name)s?action=edit", _("Edit"), "edit"),
-        'unsubscribe': ("%(q_page_name)s?action=subscribe", _("UnSubscribe"), "unsubscribe"),
-        'subscribe':   ("%(q_page_name)s?action=subscribe", _("Subscribe"), "subscribe"),
-        'raw':         ("%(q_page_name)s?action=raw", _("Raw"), "raw"),
-        'xml':         ("%(q_page_name)s?action=show&amp;mimetype=text/xml", _("XML"), "xml"),
-        'print':       ("%(q_page_name)s?action=print", _("Print"), "print"),
-        'view':        ("%(q_page_name)s", _("View"), "view"),
-        'up':          ("%(q_page_parent_page)s", _("Up"), "up"),
+        # key           querystr dict, title, icon-key
+        'diff':        ({'action': 'diff'}, _("Diffs"), "diff"),
+        'info':        ({'action': 'info'}, _("Info"), "info"),
+        'edit':        ({'action': 'edit'}, _("Edit"), "edit"),
+        'unsubscribe': ({'action': 'subscribe'}, _("UnSubscribe"), "unsubscribe"),
+        'subscribe':   ({'action': 'subscribe'}, _("Subscribe"), "subscribe"),
+        'raw':         ({'action': 'raw'}, _("Raw"), "raw"),
+        'xml':         ({'action': 'show', 'mimetype': 'text/xml'}, _("XML"), "xml"),
+        'print':       ({'action': 'print'}, _("Print"), "print"),
+        'view':        ({}, _("View"), "view"),
         }
 
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
