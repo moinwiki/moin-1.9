@@ -212,9 +212,12 @@ class Page:
 
         revstr = '%08d' % rev
         pagefile = os.path.join(pagedir, 'revisions', revstr)
-        exists = os.path.exists(pagefile)
-        if exists:
-            self._setRealPageName(pagedir)
+        if rev != 99999999:
+            exists = os.path.exists(pagefile)
+            if exists:
+                self._setRealPageName(pagedir)
+        else:
+            exists = False
         return pagefile, rev, exists
 
     def _setRealPageName(self, pagedir):
