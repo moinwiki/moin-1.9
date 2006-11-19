@@ -384,6 +384,10 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """
         shutil.copyfileobj(source, outputfile, length=self.bufferSize)
 
+    def address_string(self):
+        """We don't want to do reverse DNS lookups, just return IP address."""
+        return self.client_address[0]
+
 
 try:
     from tlslite.api import TLSSocketServerMixIn, X509, X509CertChain, SessionCache, parsePEMKey, TLSError
