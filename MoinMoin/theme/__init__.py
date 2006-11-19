@@ -2,7 +2,7 @@
 """
     MoinMoin - Theme Package
 
-    @copyright: 2003-2005 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
+    @copyright: 2003-2006 by MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -869,6 +869,7 @@ var search_hint = "%(search_hint)s";
         """
         request = self.request
         _ = request.getText
+        rev = request.rev
 
         menu = [
             'raw',
@@ -887,6 +888,7 @@ var search_hint = "%(search_hint)s";
             'SubscribeUser',
             '__separator__',
             'Despam',
+            'revert',
             'PackagePages',
             ]
 
@@ -906,6 +908,7 @@ var search_hint = "%(search_hint)s";
             'MyPages': _('My Pages', formatted=False),
             'SubscribeUser': _('Subscribe User', formatted=False),
             'Despam': _('Remove Spam', formatted=False),
+            'revert': _('Revert to this revision', formatted=False),
             'PackagePages': _('Package Pages', formatted=False),
             'RenderAsDocbook': _('Render as Docbook', formatted=False),
             }
@@ -962,9 +965,9 @@ var search_hint = "%(search_hint)s";
         data = {
             'label': titles['__title__'],
             'options': '\n'.join(options),
+            'rev_field': rev and '<input type="hidden" name="rev" value="%d">' % rev or '',
             'do_button': _("Do")
             }
-
         html = '''
 <form class="actionsmenu" method="get" action="">
 <div>
@@ -978,6 +981,7 @@ var search_hint = "%(search_hint)s";
         %(options)s
     </select>
     <input type="submit" value="%(do_button)s">
+    %(rev_field)s
 </div>
 <script type="text/javascript">
 <!--// Init menu
