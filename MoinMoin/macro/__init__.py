@@ -409,7 +409,7 @@ class Macro:
 
     def _macro_MailTo(self, args):
         from MoinMoin.mail.sendmail import decodeSpamSafeEmail
-
+        result=''
         args = args or ''
         if ',' not in args:
             email = args
@@ -428,13 +428,13 @@ class Macro:
         else:
             # unknown user, maybe even a spambot, so
             # just return text as given in macro args
-            email = self.formatter.code(1) + \
+            
+            if text:
+                result = self.formatter.text(text+" ")
+            
+            result += self.formatter.code(1) + \
                 self.formatter.text("<%s>" % email) + \
                 self.formatter.code(0)
-            if text:
-                result = self.formatter.text(text) + " " + email
-            else:
-                result = email
 
         return result
 
