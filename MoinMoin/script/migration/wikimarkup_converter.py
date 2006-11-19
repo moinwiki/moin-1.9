@@ -267,7 +267,6 @@ class Parser:
             parser_name = s_word[2:].split()[0]  # XXX loses args
             self.parser_name = parser_name
             self.in_pre = 'found_parser'
-            self.parser_lines = []
             return "{{{%s" % s_word
         elif s_word:
             self.in_pre = 'no_parser'
@@ -714,32 +713,11 @@ class Parser:
                     if line.strip().startswith("#!"):
                         parser_name = line.strip()[2:].split()[0]
                         self.in_pre = 'found_parser'
-                        self.parser_lines = [line]
                         self.parser_name = parser_name
+                        self.request.write(line + '\r\n')
                         continue
                     else:
                         self.in_pre = 'no_parser'
-                if self.in_pre == 'found_parser':
-                    # processing mode
-                    try:
-                        endpos = line.index("}}}")
-                    except ValueError:
-                        self.parser_lines.append(line+'\r\n')
-                        continue
-                    if line[:endpos]:
-                        self.parser_lines.append(line[:endpos])
-
-                    res = ''.join(self.parser_lines) # dont call parser, emit as is
-                    self.request.write(res)
-                    self.request.write('}}}')
-                    del self.parser_lines
-                    self.in_pre = None
-                    self.parser = None
-
-                    # send rest of line through regex machinery
-                    line = line[endpos+3:]
-                    if not line.strip(): # just in the case "}}} " when we only have blanks left...
-                        continue
             else:
                 # Paragraph break on empty lines
                 if not line.strip():
@@ -806,8 +784,6 @@ class Parser:
 
         # Close code displays, paragraphs, tables and open lists
         self.request.write(self._undent())
-        if self.in_table: self.request.write(self.formatter.table(0))
-
 
 
 def convert(intext, pagemap, filemap):
