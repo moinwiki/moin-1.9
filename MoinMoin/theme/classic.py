@@ -182,11 +182,12 @@ class Theme(ThemeBase):
         """
         request = self.request
         _ = request.getText
+        rev = d['rev']
         html = []
         page = d['page']
         available = request.getAvailableActions(page)
         if available:
-            available = available.keys()
+            available = list(available)
             available.sort()
             for action in available:
                 # Always add spaces: AttachFile -> Attach File 
@@ -194,7 +195,10 @@ class Theme(ThemeBase):
                 title = Page(request, action).split_title(request, force=1)
                 # Use translated version if available
                 title = _(title, formatted=False)
-                link = page.link_to(request, text=title, querystr={'action': action}, rel='nofollow')
+                querystr = {'action': action}
+                if rev:
+                    querystr['rev'] = str(rev)
+                link = page.link_to(request, text=title, querystr=querystr, rel='nofollow')
                 html.append(link)
 
         title = _("DeleteCache", formatted=False)
