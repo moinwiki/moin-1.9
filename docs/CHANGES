@@ -399,6 +399,10 @@ Version 1.5.current:
       url_prefix can be a remote server serving the static files (css/img).
       If not set (or set to None), url_prefix_local will default to the value
       of url_prefix.
+    * We save some CPU and disk I/O by having EditTemplates and LikePages macro
+      (both used on MissingPage) check whether the requesting entity was
+      identified as a spider (e.g. search engine bot) and do nothing in that
+      case. Normal users won't see any difference.
 
 Version 1.5.6:
   A general security notice:
