@@ -17,7 +17,7 @@ def execute(pagename, request):
         return Page(request, pagename).send_page(request,
             msg=_('You are not allowed to revert this page!'))
 
-    rev = int(request.form['rev'][0])
+    rev = request.rev
     revstr = '%08d' % rev
     oldpg = Page(request, pagename, rev=rev)
     pg = PageEditor(request, pagename)

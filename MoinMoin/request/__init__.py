@@ -175,9 +175,14 @@ class RequestBase(object):
                 self.args = {}
                 self.form = {}
                 self.action = 'xmlrpc'
+                self.rev = None
             else:
                 self.args = self.form = self.setup_args()
                 self.action = self.form.get('action', ['show'])[0]
+                try:
+                    self.rev = int(self.form['rev'][0])
+                except:
+                    self.rev = None
 
             from MoinMoin.Page import RootPage
             self.rootpage = RootPage(self)

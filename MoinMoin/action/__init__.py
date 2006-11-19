@@ -212,10 +212,7 @@ def do_raw(pagename, request):
     if not request.user.may.read(pagename):
         Page(request, pagename).send_page(request)
     else:
-        try:
-            rev = int(request.form.get('rev', [0])[0])
-        except StandardError:
-            rev = 0
+        rev = request.rev or 0
         Page(request, pagename, rev=rev).send_raw()
 
 def do_show(pagename, request, count_hit=1, cacheable=1):
@@ -227,10 +224,7 @@ def do_show(pagename, request, count_hit=1, cacheable=1):
         Page(request, pagename).send_page(request)
     else:
         mimetype = request.form.get('mimetype', [u"text/html"])[0]
-        try:
-            rev = int(request.form.get('rev', [0])[0])
-        except StandardError:
-            rev = 0
+        rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
         Page(request, pagename, rev=rev, formatter=mimetype).send_page(request, count_hit=count_hit)
