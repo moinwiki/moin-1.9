@@ -43,7 +43,7 @@ def execute(macro, args):
         # Add links to pages which does not exists in pages dict
         links = page.getPageLinks(request)
         for link in links:
-            if not link in pages:
+            if not link in pages and request.user.may.read(link):
                 if link in wanted:
                     wanted[link][name] = 1
                 else:
