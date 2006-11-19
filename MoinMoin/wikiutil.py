@@ -1257,10 +1257,10 @@ def parseAttributes(request, attrstring, endtoken=None, extension=None):
 class ParameterParser:
     """ MoinMoin macro parameter parser
 
-        parses a given parameter string and seperates
-        the single parameters and detects their type
+        Parses a given parameter string, separates the individual parameters
+        and detects their type.
 
-        Possible parameterstypes are:
+        Possible parameter types are:
 
         Name      | short  | example
         ----------------------------
@@ -1270,7 +1270,29 @@ class ParameterParser:
          Boolean  | b      | 0 1 True false
          Name     |        | case_sensitive | converted to string
         
-        @copyright: 2004 by Florian Festi
+        So say you want to parse three things, name, age and if the 
+        person is male or not:
+        
+        The pattern will be: %(name)s%(age)i%(male)b
+        
+        As a result, the returned dict will put the first value into
+        male, second into age etc. If some argument is missing, it will
+        get None as its value. This also means that all the identifiers 
+        in the pattern will exist in the dict, they will just have the
+        value None if they were not specified by the caller.
+        
+        So if we call it with the parameters as follows:
+            ("John Smith", 18)
+        this will result in the following dict:
+            {"name": "John Smith", "age": 18, "male": None}
+        
+        Another way of calling would be:
+            ("John Smith", male=True)
+        this will result in the following dict:
+            {"name": "John Smith", "age": None, "male": True}
+        
+        @copyright: 2004 by Florian Festi,
+                    2006 by Mikko Virkkilä
         @license: GNU GPL, see COPYING for details.
     """
 
@@ -1278,27 +1300,30 @@ class ParameterParser:
         #parameter_re = "([^\"',]*(\"[^\"]*\"|'[^']*')?[^\"',]*)[,)]"
         name = "(?P<%s>[a-zA-Z_][a-zA-Z0-9_]*)"
         int_re = r"(?P<int>-?\d+)"
+        bool_re = r"(?P<bool>(([10])|([Tt]rue)|([Ff]alse)))"
         float_re = r"(?P<float>-?\d+\.\d+([eE][+-]?\d+)?)"
         string_re = (r"(?P<string>('([^']|(\'))*?')|" +
                                 r'("([^"]|(\"))*?"))')
         name_re = name % "name"
         name_param_re = name % "name_param"
 
-        param_re = r"\s*(\s*%s\s*=\s*)?(%s|%s|%s|%s)\s*(,|$)" % (
-                   name_re, float_re, int_re, string_re, name_param_re)
+        param_re = r"\s*(\s*%s\s*=\s*)?(%s|%s|%s|%s|%s)\s*(,|$)" % (
+                   name_re, float_re, int_re, bool_re, string_re, name_param_re)
         self.param_re = re.compile(param_re, re.U)
         self._parse_pattern(pattern)
 
     def _parse_pattern(self, pattern):
-        param_re = r"(%(?P<name>\(.*?\))?(?P<type>[ifs]{1,3}))|\|"
+        param_re = r"(%(?P<name>\(.*?\))?(?P<type>[ibfs]{1,3}))|\|"
         i = 0
-        self.optional = -1
+        #TODO: Optionals aren't checked
+        self.optional = []
         named = False
         self.param_list = []
         self.param_dict = {}
+
         for match in re.finditer(param_re, pattern):
             if match.group() == "|":
-                self.optional = i
+                self.optional.append(i)
                 continue
             self.param_list.append(match.group('type'))
             if match.group('name'):
@@ -1316,7 +1341,7 @@ class ParameterParser:
         """
         (4, 2)
         """
-
+        #Default list to "None"s
         parameter_list = [None] * len(self.param_list)
         parameter_dict = {}
         check_list = [0] * len(self.param_list)
@@ -1326,12 +1351,16 @@ class ParameterParser:
         named = False
         while start < len(input):
             match = re.match(self.param_re, input[start:])
-            if not match: raise ValueError, "Misformatted value"
+            if not match:
+                raise ValueError, "Misformatted value"
             start += match.end()
             value = None
             if match.group("int"):
                 value = int(match.group("int"))
                 type = 'i'
+            elif match.group("bool"):
+                value = (match.group("bool") == "1") or (match.group("bool") == "True") or (match.group("bool") == "true")
+                type = 'b'
             elif match.group("float"):
                 value = float(match.group("float"))
                 type = 'f'
@@ -1350,7 +1379,9 @@ class ParameterParser:
                     raise ValueError, "Unknown parameter name '%s'" % match.group("name")
                 nr = self.param_dict[match.group("name")]
                 if check_list[nr]:
-                    raise ValueError, "Parameter specified twice"
+                    #raise ValueError, "Parameter specified twice"
+                    #TODO: Something saner that raising an exception. This is pretty good, since it ignores it.
+                    pass
                 else:
                     check_list[nr] = 1
                 parameter_dict[match.group("name")] = value
@@ -1361,24 +1392,33 @@ class ParameterParser:
             else:
                 nr = i
                 parameter_list[nr] = value
-            # check type
-            #if not type in self.param_list[nr]:
+
+            #Let's populate and map our dictionary to what's been found
+            for name in self.param_dict.keys():
+                tmp = self.param_dict[name]
+                parameter_dict[name]=parameter_list[tmp]
 
             i += 1
+
         return parameter_list, parameter_dict
 
 
     def _check_type(value, type, format):
+        """Never used!"""
         if type == 'n' and 's' in format: # n as s
             return value
 
-        if type in format: return value # x -> x
+        if type in format:
+            return value # x -> x
 
         if type == 'i':
-            if 'f' in format: return float(value) # i -> f
-            elif 'b' in format: return value # i -> b
+            if 'f' in format:
+                return float(value) # i -> f
+            elif 'b' in format:
+                return value # i -> b
         elif type == 'f':
-            if 'b' in format: return value  # f -> b
+            if 'b' in format:
+                return value  # f -> b
         elif type == 's':
             if 'b' in format:
                 return value.lower() != 'false' # s-> b
