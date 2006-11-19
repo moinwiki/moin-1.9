@@ -76,8 +76,9 @@ class CacheEntry:
             return 0
 
     def needsUpdate(self, filename, attachdir=None):
-        if not self.exists():
-            return 1
+        # following code is not necessary. will trigger exception and give same result
+        #if not self.exists():
+        #    return 1
 
         try:
             ctime = os.path.getmtime(self._filename())
