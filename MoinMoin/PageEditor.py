@@ -210,7 +210,7 @@ class PageEditor(Page):
         else:
             title = _('Preview of "%(pagename)s"')
             # Propagate original revision
-            rev = int(form['rev'][0])
+            rev = request.rev
             self.set_raw_body(preview, modified=1)
 
         # send header stuff

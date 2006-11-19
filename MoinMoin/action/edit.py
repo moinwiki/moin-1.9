@@ -49,8 +49,8 @@ def execute(pagename, request):
     if editor not in valideditors:
         editor = 'text'
 
+    rev = request.rev or 0
     savetext = request.form.get('savetext', [None])[0]
-    rev = int(request.form.get('rev', ['0'])[0])
     comment = request.form.get('comment', [u''])[0]
     category = request.form.get('category', [None])[0]
     rstrip = int(request.form.get('rstrip', ['0'])[0])

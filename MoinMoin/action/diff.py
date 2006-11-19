@@ -39,9 +39,8 @@ def execute(pagename, request):
         rev1 = 0
 
     if rev1 == -1 and rev2 == 0:
-        try:
-            rev1 = int(request.form.get('rev', [-1])[0])
-        except StandardError:
+        rev1 = request.rev
+        if rev1 is None:
             rev1 = -1
 
     # spacing flag?
