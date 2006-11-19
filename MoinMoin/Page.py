@@ -884,7 +884,7 @@ class Page:
         from MoinMoin import i18n
         request.clock.start('send_page')
         _ = request.getText
-
+        emit_headers = keywords.get('emit_headers', 1)
         # determine modes
         print_mode = request.form.has_key('action') and request.form['action'][0] == 'print'
         if print_mode:
@@ -1039,30 +1039,31 @@ class Page:
         self.pi_format = pi_format
 
         # start document output
-        doc_leader = self.formatter.startDocument(self.page_name)
+        
         page_exists = self.exists()
         if not content_only:
-            request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
-            if page_exists:
-                request.setHttpHeader('Status: 200 OK')
-                if not request.cacheable:
-                    # use "nocache" headers if we're using a method that is not simply "display"
-                    request.disableHttpCaching(level=2)
-                elif request.user.valid:
-                    # use nocache headers if a user is logged in (which triggers personalisation features)
-                    request.disableHttpCaching(level=1)
+            if emit_headers:
+                request.setHttpHeader("Content-Type: %s; charset=%s" % (self.output_mimetype, self.output_charset))
+                if page_exists:
+                    request.setHttpHeader('Status: 200 OK')
+                    if not request.cacheable:
+                        # use "nocache" headers if we're using a method that is not simply "display"
+                        request.disableHttpCaching(level=2)
+                    elif request.user.valid:
+                        # use nocache headers if a user is logged in (which triggers personalisation features)
+                        request.disableHttpCaching(level=1)
+                    else:
+                        # TODO: we need to know if a page generates dynamic content
+                        # if it does, we must not use the page file mtime as last modified value
+                        # XXX The following code is commented because it is incorrect for dynamic pages:
+                        #lastmod = os.path.getmtime(self._text_filename())
+                        #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
+                        pass
                 else:
-                    # TODO: we need to know if a page generates dynamic content
-                    # if it does, we must not use the page file mtime as last modified value
-                    # XXX The following code is commented because it is incorrect for dynamic pages:
-                    #lastmod = os.path.getmtime(self._text_filename())
-                    #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
-                    pass
-            else:
-                request.setHttpHeader('Status: 404 NOTFOUND')
-            request.emit_http_headers()
+                    request.setHttpHeader('Status: 404 NOTFOUND')
+                request.emit_http_headers()
 
-            request.write(doc_leader)
+            request.write(self.formatter.startDocument(self.page_name))
 
             # send the page header
             if self.default_formatter:
@@ -1151,13 +1152,12 @@ class Page:
         request.write(self.formatter.endContent())
 
         # end document output
-        doc_trailer = self.formatter.endDocument()
         if not content_only:
             # send the page footer
             if self.default_formatter:
                 request.theme.send_footer(self.page_name, print_mode=print_mode)
 
-            request.write(doc_trailer)
+            request.write(self.formatter.endDocument())
 
         # cache the pagelinks
         if do_cache and self.default_formatter and page_exists:
