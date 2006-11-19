@@ -12,14 +12,17 @@ from MoinMoin.action import LikePages
 
 def execute(macro, args):
     request = macro.request
-    pagename = macro.formatter.page.page_name
+    # we don't want to spend much CPU for spiders requesting nonexisting pages
+    if not request.isSpiderAgent:
+        pagename = macro.formatter.page.page_name
 
-    # Get matches
-    start, end, matches = LikePages.findMatches(pagename, request)
+        # Get matches
+        start, end, matches = LikePages.findMatches(pagename, request)
 
-    # Render matches
-    if matches and not isinstance(matches, (str, unicode)):
-        return request.redirectedOutput(LikePages.showMatches, pagename, request, start, end, matches, False)
+        # Render matches
+        if matches and not isinstance(matches, (str, unicode)):
+            return request.redirectedOutput(LikePages.showMatches, pagename, request, start, end, matches, False)
 
-    return args
+        return args
+    return ''
 
