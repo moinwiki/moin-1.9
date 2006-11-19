@@ -123,14 +123,8 @@ def execute(pagename, request):
                 size = page.size(rev=rev)
                 if count == 0: # latest page
                     actions.append(render_action(_('view'), {'action': 'show'}))
-                    actions.append(render_action(_('raw'), {'action': 'raw'}))
-                    actions.append(render_action(_('print'), {'action': 'print'}))
                 else:
                     actions.append(render_action(_('view'), {'action': 'recall', 'rev': '%d' % rev}))
-                    actions.append(render_action(_('raw'), {'action': 'raw', 'rev': '%d' % rev}))
-                    actions.append(render_action(_('print'), {'action': 'print', 'rev': '%d' % rev}))
-                    if may_revert and size: # you can only revert to nonempty revisions
-                        actions.append(render_action(_('revert'), {'action': 'revert', 'rev': '%d' % rev}))
                 if count == 0:
                     rchecked = ' checked="checked"'
                     lchecked = ''

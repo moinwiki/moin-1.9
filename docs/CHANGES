@@ -169,6 +169,18 @@ Version 1.6.current:
       acls, speedup Page.get_rev and reading the page local edit-log.
 
   New Features:
+    * The action menu now calls the actions for the revision of the page you
+      are currently viewing. If you are viewing the current page revision, you
+      get the same behaviour as in moin 1.5, but if you are viewing an old
+      page revision, action "raw" will now show you the raw text of this OLD
+      revision (not of the current revision as moin 1.5 did it).
+      Note that not every action does evaluate the rev=XX parameter it gets.
+      Also please note that the edit, info, ... links in the editbar do NOT
+      use the rev parameter, but operate on the latest page revision (as
+      they did in moin 1.5).
+    * Info action lost the links for "raw", "print" and "revert" actions,
+      because you can now just view an old revision and select those actions
+      from the menu there.
     * The standalone server script moved to the toplevel directory. This makes
       it possible to directly start moin.py without additional configuration
       to run a MoinMoin DesktopEdition like wiki setup.
