@@ -101,7 +101,7 @@ class TableOfContents:
                 else:
                     # no pagename?  ignore it
                     continue
-                if tmp.group("heading"):
+                if tmp.group("heading") and tmp.group("hquote"):
                     if tmp.group("htext"):
                         heading = tmp.group("htext")
                     else:
