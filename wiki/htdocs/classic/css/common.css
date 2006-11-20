@@ -264,3 +264,6 @@ div.codearea pre span.DiffRemoved {color: #FF0000;}
 div.codearea pre span.DiffChanged {color: #FF7F50;}
 div.codearea pre span.DiffSeparator {color: #228B22; font-weight: bold}
 
+
+span.anchor { display: none; }
+
