@@ -133,33 +133,36 @@ def get_pagename_content(request, msg):
     email_subpage_template = cfg.mail_import_subpage_template
     email_pagename_envelope = cfg.mail_import_pagename_envelope
     wiki_addrs = cfg.mail_import_wiki_addrs
+    search_list = cfg.mail_import_pagename_search
 
+    subj = msg['subject'].strip()
     pagename_tpl = ""
-    for addr in msg['target_addrs']:
-        if addr[1].strip().lower() in wiki_addrs:
-            pagename_tpl = addr[0]
+    for method in search_list:
+        if method == 'to':
+            for addr in msg['target_addrs']:
+                if addr[1].strip().lower() in wiki_addrs:
+                    pagename_tpl = addr[0]
+                    # special fix for outlook users :-)
+                    if pagename_tpl[-1] == pagename_tpl[0] == "'":
+                        pagename_tpl = pagename_tpl[1:-1]
+                    break
+        elif method == 'subj':
+            m = re_subject.search(subj)
+            if m:
+                pagename_tpl = m.group(1)
+                # remove the pagename template from the subject:
+                subj = re_subject.sub('', subj, 1).strip()
+        if pagename_tpl:
             break
-
-    if not pagename_tpl:
-        subj = msg['subject'].strip()
-        m = re_subject.search(subj)
-        if m:
-            pagename_tpl = m.group(1)
-            # remove the pagename template from the subject:
-            subj = re_subject.sub('', subj, 1).strip()
-        msg['subject'] = subj
-    else:
-        # special fix for outlook users :-)
-        if pagename_tpl[-1] == pagename_tpl[0] == "'":
-            pagename_tpl = pagename_tpl[1:-1]
-
-    if not msg['subject'].strip():
-        msg['subject'] = '(...)' # we need non-empty subject
 
     pagename_tpl = pagename_tpl.strip()
     # last resort
     if not pagename_tpl:
         pagename_tpl = email_subpage_template
+
+    if not subj:
+        subj = '(...)' # we need non-empty subject
+    msg['subject'] = subj
 
     # for normal use, email_pagename_envelope is just u"%s" - so nothing changes.
     # for special use, you can use u"+ %s/" - so you don't need to enter "+"
