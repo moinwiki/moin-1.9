@@ -25,7 +25,6 @@ infile = sys.stdin
 
 debug = False
 
-re_subject = re.compile(r"\[([^\]]*)\]")
 re_sigstrip = re.compile("\r?\n-- \r?\n.*$", re.S)
 
 class attachment(object):
@@ -134,6 +133,7 @@ def get_pagename_content(request, msg):
     email_pagename_envelope = cfg.mail_import_pagename_envelope
     wiki_addrs = cfg.mail_import_wiki_addrs
     search_list = cfg.mail_import_pagename_search
+    re_subject = re.compile(cfg.mail_import_pagename_regex)
 
     subj = msg['subject'].strip()
     pagename_tpl = ""
