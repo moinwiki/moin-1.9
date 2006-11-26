@@ -368,6 +368,7 @@ reStructuredText Quick Reference
         'view':        ({}, _("View"), "view"),
         }
 
+    quicklinks_default = [] # preload user quicklinks with this page list
     refresh = None # (minimum_delay, type), e.g.: (2, 'internal')
     rss_cache = 60 # suggested caching time for RecentChanges RSS, in seconds
     shared_intermap = None # can be string or list of strings (filenames)
@@ -380,6 +381,7 @@ reStructuredText Quick Reference
     show_version = False
     siteid = 'default'
     stylesheets = [] # list of tuples (media, csshref) to insert after theme css, before user css
+    subscribed_pages_default = [] # preload user subscribed pages with this page list
     superuser = [] # list of unicode user names that have super powers :)
 
     surge_action_limits = {# allow max. <count> <action> requests per <dt> secs
