@@ -246,8 +246,8 @@ class User:
         self.language = ""
         self.date_fmt = ""
         self.datetime_fmt = ""
-        self.quicklinks = []
-        self.subscribed_pages = []
+        self.quicklinks = self._cfg.quicklinks_default
+        self.subscribed_pages = self._cfg.subscribed_pages_default
         self.theme_name = self._cfg.theme_default
         self.editor_default = self._cfg.editor_default
         self.editor_ui = self._cfg.editor_ui

@@ -269,6 +269,8 @@ Version 1.6.current:
         will see a "Load draft" button. Click on it to load the draft into the
         editor and save the page.
       * The draft storage is per user and per page, but only one draft per page.
+    * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
+      preload new user profiles with configurable values.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
