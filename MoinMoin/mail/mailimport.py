@@ -123,11 +123,16 @@ def process_message(message):
             'from_addr': from_addr,
             'subject': subject, 'date': date}
 
-def get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_addrs):
+def get_pagename_content(request, msg):
     """ Generates pagename and content according to the specification
         that can be found on MoinMoin:FeatureRequests/WikiEmailintegration """
     generate_summary = False
     choose_html = True
+
+    cfg = request.cfg
+    email_subpage_template = cfg.mail_import_subpage_template
+    email_pagename_envelope = cfg.mail_import_pagename_envelope
+    wiki_addrs = cfg.mail_import_wiki_addrs
 
     pagename_tpl = ""
     for addr in msg['target_addrs']:
@@ -201,8 +206,6 @@ def import_mail_from_message(request, message):
     _ = request.getText
     msg = process_message(message)
 
-    email_subpage_template = request.cfg.mail_import_subpage_template
-    email_pagename_envelope = request.cfg.mail_import_pagename_envelope
     wiki_addrs = request.cfg.mail_import_wiki_addrs
 
     request.user = user.get_by_email_address(request, msg['from_addr'][1])
@@ -210,7 +213,7 @@ def import_mail_from_message(request, message):
     if not request.user:
         raise ProcessingError("No suitable user found for mail address %r" % (msg['from_addr'][1], ))
 
-    d = get_pagename_content(request, msg, email_pagename_envelope, email_subpage_template, wiki_addrs)
+    d = get_pagename_content(request, msg)
     pagename = d['pagename']
     generate_summary = d['generate_summary']
 
