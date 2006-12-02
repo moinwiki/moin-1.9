@@ -198,7 +198,7 @@ Version 1.6.current:
       * [wiki:MoinMoin:"Page with blanks" different link text]
       * attachment:"blanks are evil.txt"
 
-    * FeatureRequests/WikiEmailIntegration TODO:make some help page when stable
+    * FeatureRequests/WikiEmailIntegration, HelpOnConfiguration/EmailSupport
     * HTML parser (called "html") that allows you to use HTML on the page.
       Thanks to the trac team for the nice code.
     * You can have a common cache_dir for your farm (will save a bit space
