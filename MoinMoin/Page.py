@@ -8,7 +8,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import StringIO, os, re, random, codecs, logging
+import StringIO, os, re, codecs, logging
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
@@ -418,17 +418,6 @@ class Page:
             rev = self.rev
         fname, rev, exists = self.get_rev(-1, rev)
         return fname
-
-    def _tmp_filename(self):
-        """
-        The name of the temporary file used while saving.
-
-        @rtype: string
-        @return: temporary filename (complete path + filename)
-        """
-        rnd = random.randint(0, 1000000000)
-        tmpname = os.path.join(self.cfg.data_dir, '#%s.%d#' % (self.page_name_fs, rnd))
-        return tmpname
 
     # XXX TODO clean up the mess, rewrite _last_edited, last_edit, lastEditInfo for new logs,
     # XXX TODO do not use mtime() calls any more
@@ -1778,12 +1767,18 @@ class RootPage(Page):
         pages = {}
         for name in dircache.listdir(path):
             # Filter non-pages in quoted wiki names
-            # List all pages in pages directory - assume flat namespace
-            if name.startswith('.') or name.startswith('#') or name == 'CVS':
-                continue
+            # List all pages in pages directory - assume flat namespace.
+            # We exclude everything starting with '.' to get rid of . and ..
+            # directory entries. If we ever create pagedirs starting with '.'
+            # it will be with the intention to have them not show up in page
+            # list (like .name won't show up for ls command under UNIX).
+            # Note that a . within a wiki page name will be quoted to (2e).
+            if not name.startswith('.'):
+                pages[name] = None
 
-            pages[name] = None
-
+        if 'CVS' in pages:
+            del pages['CVS'] # XXX DEPRECATED: remove this directory name just in
+                             # case someone has the pages dir under CVS control.
         return pages
 
     def getPageCount(self, exists=0):
