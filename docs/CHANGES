@@ -271,6 +271,7 @@ Version 1.6.current:
       * The draft storage is per user and per page, but only one draft per page.
     * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
       preload new user profiles with configurable values.
+    * added support for ircs: URLs (secure IRC)
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
