@@ -312,7 +312,7 @@ reStructuredText Quick Reference
     mail_import_subpage_template = u"$from-$date-$subject" # used for mail import
     mail_import_pagename_search = ['subject', 'to', ] # where to look for target pagename (and in which order)
     mail_import_pagename_envelope = u"%s" # use u"+ %s/" to add "+ " and "/" automatically
-    mail_import_pagename_regex = r"\[([^\]]*)\]" # how to find/extract the pagename from the subject
+    mail_import_pagename_regex = r'\["([^"]*)"\]' # how to find/extract the pagename from the subject
     mail_import_wiki_addrs = [] # the e-mail addresses for e-mails that should go into the wiki
     mail_import_secret = ""
 

@@ -25,7 +25,7 @@ class PluginScript(MoinScript):
         try:
             import mailimportconf
         except ImportError:
-            fatal("Could not find the file mailimportconf.py. Maybe you want to use the config param?")
+            fatal("Could not find the file mailimportconf.py. Maybe you want to use the --config-dir=... option?")
 
         secret = mailimportconf.mail_import_secret
         url = mailimportconf.mail_import_url
