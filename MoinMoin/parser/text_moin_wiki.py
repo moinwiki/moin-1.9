@@ -89,7 +89,7 @@ class Parser:
 (?P<tableZ>\|\| $)
 (?P<table>(?:\|\|)+(?:<[^>]*?>)?(?!\|? $))
 (?P<heading>^\s*(?P<hmarker>=+)\s.*\s(?P=hmarker) $)
-(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+)))
+(?P<interwiki>[A-Z][a-zA-Z]+\:(%(q_string)s|([^\s'\"\:\<\|]([^\s%(punct)s]|([%(punct)s][^\s%(punct)s]))+))?)
 (?P<word>%(word_rule)s)
 (?P<url_bracket>\[((%(url)s)\:|#|\:)[^\s\]]+(\s[^\]]+)?\])
 (?P<url>%(url_rule)s)
@@ -178,6 +178,8 @@ class Parser:
         # TODO: maybe support [wiki:Page http://wherever/image.png] ?
         scheme, rest = target_and_text.split(':', 1)
         wikiname, pagename, text = wikiutil.split_wiki(rest)
+        if not pagename:
+            pagename = self.formatter.page.page_name
         if not text:
             text = pagename
         #self.request.log("interwiki: split_wiki -> %s.%s.%s" % (wikiname,pagename,text))
