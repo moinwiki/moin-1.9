@@ -122,7 +122,6 @@ Version 1.6.current:
     * smileys moved from MoinMoin.config to MoinMoin.theme
     * removed all _ magic in URLs and filenames
       TODO: write mig script for data_dir
-      TODO: make blanks in interwiki pagelinks possible
     * request.action now has the action requested, default: 'show'.
     * Cleaned up duplicated http_headers code and DEPRECATED this function
       call (it was sometimes confused with setHttpHeaders call) - it will
@@ -272,6 +271,10 @@ Version 1.6.current:
     * cfg.quicklinks_default and cfg.subscribed_pages_default can be used to
       preload new user profiles with configurable values.
     * added support for ircs: URLs (secure IRC)
+    * it is allowed now to use interwiki links with empty pagename, like
+      MoinMoin: (no page name after the colon). MoinMoin then uses the current
+      page name as the default. This is a useful abbreviation for TwinPages in
+      other wikis.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page

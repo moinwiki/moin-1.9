@@ -616,11 +616,14 @@ def split_wiki(wikiurl):
             wikiname, rest = wikiurl.split("/", 1) # for what is this used?
         except ValueError:
             wikiname, rest = 'Self', wikiurl
-    first_char = rest[0]
-    if first_char in QUOTE_CHARS: # quoted pagename
-        pagename_linktext = rest[1:].split(first_char, 1)
-    else: # not quoted, split on whitespace
-        pagename_linktext = rest.split(None, 1)
+    if rest:
+        first_char = rest[0]
+        if first_char in QUOTE_CHARS: # quoted pagename
+            pagename_linktext = rest[1:].split(first_char, 1)
+        else: # not quoted, split on whitespace
+            pagename_linktext = rest.split(None, 1)
+    else:
+        pagename_linktext = "", ""
     if len(pagename_linktext) == 1:
         pagename, linktext = pagename_linktext[0], ""
     else:
