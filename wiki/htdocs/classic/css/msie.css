@@ -9,7 +9,7 @@ a.ftp { padding-left: 14px; background: url(../img/moin-ftp.png) left center no-
 a.nntp { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
 a.news { padding-left: 14px; background: url(../img/moin-news.png) left center no-repeat; }
 a.telnet { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
-a.irc { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
+a.irc,a.ircs { padding-left: 14px; background: url(../img/moin-telnet.png) left center no-repeat; }
 a.mailto { padding-left: 14px; background: url(../img/moin-email.png) left center no-repeat; }
 a.attachment { padding-left: 14px; background: url(../img/moin-attach.png) left center no-repeat; }
 a.badinterwiki { padding-left: 14px; background: url(../img/moin-inter.png) left center no-repeat; }
