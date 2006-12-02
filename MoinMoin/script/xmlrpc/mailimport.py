@@ -27,8 +27,8 @@ class PluginScript(MoinScript):
         except ImportError:
             fatal("Could not find the file mailimportconf.py. Maybe you want to use the config param?")
 
-        secret = mailimportconf.mailimport_secret
-        url = mailimportconf.mailimport_url
+        secret = mailimportconf.mail_import_secret
+        url = mailimportconf.mail_import_url
 
         s = xmlrpclib.ServerProxy(url)
 
