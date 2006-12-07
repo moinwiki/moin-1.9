@@ -143,9 +143,10 @@ def get_pagename_content(request, msg):
                 if addr[1].strip().lower() in wiki_addrs:
                     pagename_tpl = addr[0]
                     # special fix for outlook users :-)
-                    if pagename_tpl[-1] == pagename_tpl[0] == "'":
+                    if pagename_tpl and pagename_tpl[-1] == pagename_tpl[0] == "'":
                         pagename_tpl = pagename_tpl[1:-1]
-                    break
+                    if pagename_tpl:
+                        break
         elif method == 'subj':
             m = re_subject.search(subj)
             if m:
