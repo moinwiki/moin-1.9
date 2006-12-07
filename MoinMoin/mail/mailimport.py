@@ -147,7 +147,7 @@ def get_pagename_content(request, msg):
                         pagename_tpl = pagename_tpl[1:-1]
                     if pagename_tpl:
                         break
-        elif method == 'subj':
+        elif method == 'subject':
             m = re_subject.search(subj)
             if m:
                 pagename_tpl = m.group(1)
