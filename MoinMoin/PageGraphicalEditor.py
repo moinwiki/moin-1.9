@@ -51,10 +51,10 @@ class PageGraphicalEditor(PageEditor.PageEditor):
             SpellCheck = None
 
         request = self.request
-        form = self.request.form
+        form = request.form
         _ = self._
-        self.request.disableHttpCaching(level=2)
-        self.request.emit_http_headers()
+        request.disableHttpCaching(level=2)
+        request.emit_http_headers()
 
         raw_body = ''
         msg = None
@@ -64,7 +64,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
         staytop = kw.get('staytop', 0)
 
         # check edit permissions
-        if not self.request.user.may.write(self.page_name):
+        if not request.user.may.write(self.page_name):
             msg = _('You are not allowed to edit this page.')
         elif not self.isWritable():
             msg = _('Page is immutable!')
@@ -85,7 +85,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
         # Did one of the prechecks fail?
         if msg:
-            self.send_page(self.request, msg=msg)
+            self.send_page(request, msg=msg)
             return
 
         # check if we want to load a draft
@@ -126,8 +126,8 @@ class PageGraphicalEditor(PageEditor.PageEditor):
             text_rows = int(form['rows'][0])
         except StandardError:
             text_rows = self.cfg.edit_rows
-            if self.request.user.valid:
-                text_rows = int(self.request.user.edit_rows)
+            if request.user.valid:
+                text_rows = int(request.user.edit_rows)
 
         if preview is not None:
             # Check for editing conflicts
@@ -155,14 +155,14 @@ Please review the page and save then. Do not save this page as it is!""")
         self.setConflict(bool(conflict_msg))
 
         # Page editing is done using user language
-        self.request.setContentLanguage(self.request.lang)
+        request.setContentLanguage(request.lang)
 
         # Get the text body for the editor field.
         # TODO: what about deleted pages? show the text of the last revision or use the template?
         if preview is not None:
             raw_body = self.get_raw_body()
             if use_draft:
-                self.request.write(_("[Content loaded from draft]"), '<br>')
+                request.write(_("[Content loaded from draft]"), '<br>')
         elif self.exists():
             # If the page exists, we get the text from the page.
             # TODO: maybe warn if template argument was ignored because the page exists?
@@ -170,14 +170,14 @@ Please review the page and save then. Do not save this page as it is!""")
         elif form.has_key('template'):
             # If the page does not exists, we try to get the content from the template parameter.
             template_page = wikiutil.unquoteWikiname(form['template'][0])
-            if self.request.user.may.read(template_page):
-                raw_body = Page(self.request, template_page).get_raw_body()
+            if request.user.may.read(template_page):
+                raw_body = Page(request, template_page).get_raw_body()
                 if raw_body:
-                    self.request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
+                    request.write(_("[Content of new page loaded from %s]") % (template_page,), '<br>')
                 else:
-                    self.request.write(_("[Template %s not found]") % (template_page,), '<br>')
+                    request.write(_("[Template %s not found]") % (template_page,), '<br>')
             else:
-                self.request.write(_("[You may not read %s]") % (template_page,), '<br>')
+                request.write(_("[You may not read %s]") % (template_page,), '<br>')
 
         # Make backup on previews - but not for new empty pages
         if not use_draft and preview and raw_body:
@@ -192,22 +192,22 @@ Please review the page and save then. Do not save this page as it is!""")
                 if draft_text != raw_body:
                     loadable_draft = True
                     page_rev = rev
-                    draft_timestamp_str = self.request.user.getFormattedDateTime(draft_timestamp)
+                    draft_timestamp_str = request.user.getFormattedDateTime(draft_timestamp)
                     draft_message = _(u"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %(draft_timestamp_str)s) can be loaded instead of the current revision %(page_rev)d by using the load draft button - in case you lost your last edit somehow without saving it.''' A draft gets saved for you when you do a preview, cancel an edit or unsuccessfully save.") % locals()
 
         # Setup status message
         status = [kw.get('msg', ''), conflict_msg, edit_lock_message, draft_message]
         status = [msg for msg in status if msg]
         status = ' '.join(status)
-        status = Status(self.request, content=status)
+        status = Status(request, content=status)
 
-        self.request.theme.send_title(
-            title % {'pagename': self.split_title(self.request), },
+        request.theme.send_title(
+            title % {'pagename': self.split_title(request), },
             page=self,
             pagename=self.page_name, msg=status,
             html_head=self.lock.locktype and (
                 PageEditor._countdown_js % {
-                     'countdown_script': self.request.theme.externalScript('countdown'),
+                     'countdown_script': request.theme.externalScript('countdown'),
                      'lock_timeout': lock_timeout,
                      'lock_expire': lock_expire,
                      'lock_mins': lock_mins,
@@ -216,35 +216,35 @@ Please review the page and save then. Do not save this page as it is!""")
             editor_mode=1,
         )
 
-        self.request.write(self.request.formatter.startContent("content"))
+        request.write(request.formatter.startContent("content"))
 
         # Generate default content for new pages
         if not raw_body:
             raw_body = _('Describe %s here.') % (self.page_name,)
 
         # send form
-        self.request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
-            self.request.getScriptname(),
+        request.write('<form id="editor" method="post" action="%s/%s#preview">' % (
+            request.getScriptname(),
             wikiutil.quoteWikinameURL(self.page_name),
             ))
 
         # yet another weird workaround for broken IE6 (it expands the text
         # editor area to the right after you begin to type...). IE sucks...
         # http://fplanque.net/2003/Articles/iecsstextarea/
-        self.request.write('<fieldset style="border:none;padding:0;">')
+        request.write('<fieldset style="border:none;padding:0;">')
 
-        self.request.write(unicode(html.INPUT(type="hidden", name="action", value="edit")))
+        request.write(unicode(html.INPUT(type="hidden", name="action", value="edit")))
 
         # Send revision of the page our edit is based on
-        self.request.write('<input type="hidden" name="rev" value="%d">' % (rev,))
+        request.write('<input type="hidden" name="rev" value="%d">' % (rev,))
 
         # Create and send a ticket, so we can check the POST
-        self.request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(self.request))
+        request.write('<input type="hidden" name="ticket" value="%s">' % wikiutil.createTicket(request))
 
         # Save backto in a hidden input
         backto = form.get('backto', [None])[0]
         if backto:
-            self.request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
+            request.write(unicode(html.INPUT(type="hidden", name="backto", value=backto)))
 
         # button bar
         button_spellcheck = (SpellCheck and
@@ -255,28 +255,28 @@ Please review the page and save then. Do not save this page as it is!""")
         cancel_button_text = _('Cancel')
 
         if self.cfg.page_license_enabled:
-            self.request.write('<p><em>', _(
+            request.write('<p><em>', _(
 """By hitting '''%(save_button_text)s''' you put your changes under the %(license_link)s.
 If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""") % {
                 'save_button_text': save_button_text,
                 'cancel_button_text': cancel_button_text,
-                'license_link': wikiutil.getSysPage(self.request, self.cfg.page_license_page).link_to(self.request),
+                'license_link': wikiutil.getSysPage(request, self.cfg.page_license_page).link_to(request),
             }, '</em></p>')
 
-        self.request.write('''
+        request.write('''
 <input class="button" type="submit" name="button_save" value="%s">
 <input class="button" type="submit" name="button_preview" value="%s">
 <input class="button" type="submit" name="button_switch" value="%s">
 ''' % (save_button_text, _('Preview'), _('Text mode'),))
 
         if loadable_draft:
-            self.request.write('''
+            request.write('''
 <input class="button" type="submit" name="button_load_draft" value="%s" onClick="flgChange = false;">
 <input type="hidden" name="draft_ts" value="%d">
 <input type="hidden" name="draft_rev" value="%d">
 ''' % (_('Load Draft'), draft_timestamp, draft_rev))
 
-        self.request.write('''
+        request.write('''
 %s
 <input class="button" type="submit" name="button_cancel" value="%s">
 <input type="hidden" name="editor" value="gui">
@@ -289,23 +289,23 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         # TODO: currently self.language is None at this point. We have
         # to do processing instructions parsing earlier, or move page
         # language into meta file.
-        lang = self.language or self.request.cfg.language_default
+        lang = self.language or request.cfg.language_default
         contentlangdirection = i18n.getDirection(lang) # 'ltr' or 'rtl'
-        uilanguage = self.request.lang
-        url_prefix_static = self.request.cfg.url_prefix_static
-        url_prefix_local = self.request.cfg.url_prefix_local
+        uilanguage = request.lang
+        url_prefix_static = request.cfg.url_prefix_static
+        url_prefix_local = request.cfg.url_prefix_local
         wikipage = wikiutil.quoteWikinameURL(self.page_name)
         fckbasepath = url_prefix_local + '/applets/FCKeditor'
         wikiurl = request.getScriptname()
         if not wikiurl or wikiurl[-1] != '/':
             wikiurl += '/'
-        themepath = '%s/%s' % (url_prefix_static, self.request.theme.name)
+        themepath = '%s/%s' % (url_prefix_static, request.theme.name)
         smileypath = themepath + '/img'
         # auto-generating a list for SmileyImages does NOT work from here!
         editor_size = int(request.user.edit_rows) * 22 # 22 height_pixels/line
         word_rule = self.word_rule()
 
-        self.request.write("""
+        request.write("""
 <script type="text/javascript" src="%(fckbasepath)s/fckeditor.js"></script>
 <script type="text/javascript">
 <!--
@@ -332,29 +332,29 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         if output[0] == 'u':
             output = output[1:]
         request.write(output)
-        self.request.write(""" ;
+        request.write(""" ;
     oFCKeditor.Create() ;
 //-->
 </script>
 """)
-        self.request.write("<p>")
-        self.request.write(_("Comment:"),
+        request.write("<p>")
+        request.write(_("Comment:"),
             ' <input id="editor-comment" type="text" name="comment" value="%s" maxlength="200">' % (
                 wikiutil.escape(kw.get('comment', ''), 1), ))
-        self.request.write("</p>")
+        request.write("</p>")
 
         # Category selection
         filter = self.cfg.cache.page_category_regex.search
-        cat_pages = self.request.rootpage.getPageList(filter=filter)
+        cat_pages = request.rootpage.getPageList(filter=filter)
         cat_pages.sort()
         cat_pages = [wikiutil.pagelinkmarkup(p) for p in cat_pages]
         cat_pages.insert(0, ('', _('<No addition>', formatted=False)))
-        self.request.write("<p>")
-        self.request.write(_('Add to: %(category)s') % {
+        request.write("<p>")
+        request.write(_('Add to: %(category)s') % {
             'category': unicode(util.web.makeSelection('category', cat_pages)),
         })
         if self.cfg.mail_enabled:
-            self.request.write('''
+            request.write('''
 &nbsp;
 <input type="checkbox" name="trivial" id="chktrivial" value="1" %(checked)s>
 <label for="chktrivial">%(label)s</label> ''' % {
@@ -362,7 +362,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                 'label': _("Trivial change"),
                 })
 
-        self.request.write('''
+        request.write('''
 &nbsp;
 <input type="checkbox" name="rstrip" id="chkrstrip" value="1" %(checked)s>
 <label for="chkrstrip">%(label)s</label>
@@ -371,27 +371,27 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
             'label': _('Remove trailing whitespace from each line')
             })
 
-        self.request.write("</p>")
+        request.write("</p>")
 
         badwords_re = None
         if preview is not None:
             if SpellCheck and (
                     form.has_key('button_spellcheck') or
                     form.has_key('button_newwords')):
-                badwords, badwords_re, msg = SpellCheck.checkSpelling(self, self.request, own_form=0)
-                self.request.write("<p>%s</p>" % msg)
-        self.request.write('</fieldset>')
-        self.request.write("</form>")
+                badwords, badwords_re, msg = SpellCheck.checkSpelling(self, request, own_form=0)
+                request.write("<p>%s</p>" % msg)
+        request.write('</fieldset>')
+        request.write("</form>")
 
         if preview is not None:
             if staytop:
                 content_id = 'previewbelow'
             else:
                 content_id = 'preview'
-            self.send_page(self.request, content_id=content_id, content_only=1,
+            self.send_page(request, content_id=content_id, content_only=1,
                            hilite_re=badwords_re)
 
-        self.request.write(self.request.formatter.endContent()) # end content div
-        self.request.theme.send_footer(self.page_name)
-        self.request.theme.send_closing_html()
+        request.write(request.formatter.endContent()) # end content div
+        request.theme.send_footer(self.page_name)
+        request.theme.send_closing_html()
 
