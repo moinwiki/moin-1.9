@@ -313,15 +313,15 @@ class Page:
             return self.current_rev()
         return self.rev
 
-    def getPageBasePath(self, use_underlay):
+    def getPageBasePath(self, use_underlay=-1):
         """
         Get full path to a page-specific storage area. `args` can
         contain additional path components that are added to the base path.
 
-        @param use_underlay: force using a specific pagedir, default '-1'
-                                '-1' = automatically choose page dir
-                                '1' = use underlay page dir
-                                '0' = use standard page dir
+        @param use_underlay: force using a specific pagedir, default -1
+                                -1 = automatically choose page dir
+                                1 = use underlay page dir
+                                0 = use standard page dir
         @rtype: string
         @return: int underlay,
                  str the full path to the storage area
@@ -1598,15 +1598,16 @@ class RootPage(Page):
         page_name = u''
         Page.__init__(self, request, page_name)
 
-    def getPageBasePath(self, use_underlay):
+    def getPageBasePath(self, use_underlay=0):
         """
         Get full path to a page-specific storage area. `args` can
         contain additional path components that are added to the base path.
 
-        @param use_underlay: force using a specific pagedir, default '-1'
-                                '-1' = automatically choose page dir
-                                '1' = use underlay page dir
-                                '0' = use standard page dir
+        @param use_underlay: force using a specific pagedir, default 0:
+                                1 = use underlay page dir
+                                0 = use standard page dir
+                                Note: we do NOT have special support for -1
+                                      here, that will just behave as 0!
         @rtype: string
         @return: int underlay,
                  str the full path to the storage area
