@@ -1188,9 +1188,10 @@ space between words. Group page name is not allowed.""") % self.user.name
 
         # Send headers only once
         sent_headers = getattr(self, 'sent_headers', 0)
-        self.sent_headers = sent_headers + 1
-        if sent_headers:
-            raise HeadersAlreadySentException("emit_http_headers called multiple (%d) times! Headers: %r" % (sent_headers, headers))
+        sent_headers += 1
+        self.sent_headers = sent_headers
+        if sent_headers > 1:
+            raise HeadersAlreadySentException("emit_http_headers called multiple (%d) times! Headers: %r" % (sent_headers, all_headers))
         #else:
         #    self.log("Notice: emit_http_headers called first time. Headers: %r" % all_headers)
 

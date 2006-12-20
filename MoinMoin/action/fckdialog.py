@@ -246,7 +246,6 @@ def link_dialog(request):
         scriptname += "/"
     action = scriptname
     basepage = request.page.page_name.encode(config.charset)
-    request.emit_http_headers()
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
@@ -397,7 +396,6 @@ def attachment_dialog(request):
     if not scriptname or scriptname[-1] != "/":
         scriptname += "/"
     action = scriptname
-    request.emit_http_headers()
     request.write('''
 <!--
  * FCKeditor - The text editor for internet
