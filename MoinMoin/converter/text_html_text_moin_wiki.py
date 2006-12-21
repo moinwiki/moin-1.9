@@ -554,8 +554,8 @@ class convert_tree(visitor):
             #    self.text.append("\n")
 
     def process_br(self, node):
-            self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
-                                            # when it gets merged to float text, like word word wordword word word
+        self.text.append(self.new_line) # without this, std multi-line text below some heading misses a whitespace
+                                        # when it gets merged to float text, like word word wordword word word
 
     def process_heading(self, node):
         text = self.node_list_text_only(node.childNodes).strip()
@@ -740,6 +740,7 @@ class convert_tree(visitor):
             self.text.append(node.data.strip('\n').replace('\n', ' '))
             return
 
+        # do we need to check for Node.ELEMENT_NODE and return (do nothing)?
         name = node.localName # can be None for DOM Comment nodes
         if name is None:
             return
@@ -781,10 +782,7 @@ class convert_tree(visitor):
 
         self.text.append(command)
         for i in node.childNodes:
-            if i.nodeType == Node.ELEMENT_NODE:
-                self.process_inline(i)
-            elif i.nodeType == Node.TEXT_NODE:
-                self.text.append(i.data.strip('\n').replace('\n', ' '))
+            self.process_inline(i)
         if command_close:
             command = command_close
         self.text.append(command)
@@ -1097,7 +1095,7 @@ class convert_tree(visitor):
             text = self.node_list_text_only(node.childNodes)
             text = text.replace("\n", " ").lstrip()
 
-             # interwiki link
+            # interwiki link
             if class_ == "interwiki":
                 wikitag, wikiurl, wikitail, err = wikiutil.resolve_wiki(
                     self.request, title + ":")
