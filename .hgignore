@@ -1,0 +1,8 @@
+\{arch\}
+.*\.arch-ids/.*
+.*\.py[co]
+sa
+cover
+tests/wiki
+wiki/underlay
+
