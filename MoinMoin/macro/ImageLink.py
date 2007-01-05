@@ -83,10 +83,11 @@
       Reimar Bauer
              2006-09-22 bug fix of image linked to attachment and inline
              2006-10-08 patch of DavidLinke added and keys now only lowercase used
+             2006-12-16 interwikilink for pages added
 
     @copyright: 2001 by Jeff Kunce,
                 2004 by Marcin Zalewski,
-                2004-2006 by Reimar Bauer (R.Bauer@fz-juelich.de),
+                2004-2006 by Reimar Bauer,
                 2006 by Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
@@ -196,7 +197,16 @@ def execute(macro, args):
                            formatter.image(**kw),
                            formatter.url(0))
     else:
-        return "%s%s%s" % (formatter.pagelink(1, target),
-                           formatter.image(**kw),
-                           formatter.pagelink(0))
+        if ":" in target:
+            if target.startswith('wiki:'):
+                target = target[5:]
+            wikitag, wikiurl, wikitail, error = wikiutil.resolve_wiki(request, target)
+            url = wikiurl + wikiutil.quoteWikinameURL(wikitail)
+            return "%s%s%s" % (formatter.url(1, url),
+                               formatter.image(**kw),
+                               formatter.url(0))
+        else:
+            return "%s%s%s" % (formatter.pagelink(1, target),
+                               formatter.image(**kw),
+                               formatter.pagelink(0))
 
