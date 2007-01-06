@@ -638,8 +638,10 @@ class Login:
         pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
         userprefslink = wikiutil.getSysPage(request, "UserPreferences").link_to(request, rel='nofollow')
-        hint = _("To create an account or recover a lost password, see the %(userprefslink)s page.") % {
-               'userprefslink': userprefslink}
+        sendmypasswordlink = wikiutil.getSysPage(request, "SendMyPassword").link_to(request, rel='nofollow')
+        hint = _("To create an account, see the %(userprefslink)s page. To recover a lost password, go to %(sendmypasswordlink)s.") % {
+                 'userprefslink': userprefslink,
+                 'sendmypasswordlink': sendmypasswordlink}
         self._form = html.FORM(action=action)
         self._table = html.TABLE(border="0")
 
