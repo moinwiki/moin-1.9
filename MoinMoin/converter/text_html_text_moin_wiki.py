@@ -1,7 +1,7 @@
 """
     MoinMoin - convert from html to wiki markup
 
-    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
+    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann, Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -1179,13 +1179,60 @@ class convert_tree(visitor):
         alt = None
         if node.attributes.has_key("alt"):
             alt = node.attributes.get("alt").nodeValue
+        width = None
+        if node.attributes.has_key("width"):
+            width = node.attributes.get("width").nodeValue
+        height = None
+        if node.attributes.has_key("height"):
+            height = node.attributes.get("height").nodeValue
+        target = None
+        if node.attributes.has_key("target"):
+            target = node.attributes.get("target").nodeValue
 
         # Attachment image
         if (title and title.startswith("attachment:") and
             wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))):
-            self.text.extend([self.white_space,
-                              wikiutil.url_unquote(title),
-                              self.white_space])
+            if height == None and width == None:
+                self.text.extend([self.white_space,
+                                  wikiutil.url_unquote(title),
+                                  self.white_space])
+            else:
+            #use ImageLink for resized images
+                if target == None:
+                    if alt == None or alt == '':
+                        self.text.extend([self.white_space,
+                                  "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s)]]" % {
+                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
+                                    "width": width,
+                                    "height": height, },
+                                  self.white_space])
+                    else:
+                        self.text.extend([self.white_space,
+                                  "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
+                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
+                                    "width": width,
+                                    "height": height,
+                                    "alt": alt, },
+                                  self.white_space])
+                else:
+                    if alt == None or alt == '':
+                        self.text.extend([self.white_space,
+                                  "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s)]]" % {
+                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
+                                    "target": target,
+                                    "width": width,
+                                    "height": height, },
+                                  self.white_space])
+                    else:
+                          self.text.extend([self.white_space,
+                                  "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
+                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
+                                    "target": target,
+                                    "width": width,
+                                    "height": height,
+                                    "alt": alt, },
+                                  self.white_space])
+
         # Drawing image
         elif title and title.startswith("drawing:"):
             self.text.extend([self.white_space,
