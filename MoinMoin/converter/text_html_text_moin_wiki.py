@@ -1197,35 +1197,14 @@ class convert_tree(visitor):
                                   wikiutil.url_unquote(title),
                                   self.white_space])
             else:
-                #use ImageLink for resized images
-                if target is None:
-                    if not alt:
-                        cmd = "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s)]]" % {
-                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
-                                    "width": width,
-                                    "height": height, }
-                    else:
-                        cmd = "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
-                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
-                                    "width": width,
-                                    "height": height,
-                                    "alt": alt, }
-                else:
-                    if not alt:
-                        cmd = "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s)]]" % {
-                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
-                                    "target": target,
-                                    "width": width,
-                                    "height": height, }
-                    else:
-                        cmd = "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
-                                    "file": wikiutil.url_unquote(title[len("attachment:"):]),
-                                    "target": target,
-                                    "width": width,
-                                    "height": height,
-                                    "alt": alt, }
-
-                self.text.extend([self.white_space, cmd, self.white_space])
+                # use ImageLink for resized images
+                il_parms = "%s" % wikiutil.url_unquote(title[len("attachment:"):])
+                if target is not None:
+                    il_parms += ",%s" % target
+                il_kws = "width=%s,height=%s" % (width, height)
+                if alt:
+                    il_kws += ",alt=%s" % alt
+                self.text.extend([self.white_space, "[[ImageLink(%s,%s)]]" % (il_parms, il_kws), self.white_space])
 
         # Drawing image
         elif title and title.startswith("drawing:"):
