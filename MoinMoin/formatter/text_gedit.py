@@ -2,7 +2,7 @@
 """
     MoinMoin - "text/html+css" Formatter for feeding the GUI editor
 
-    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
+    @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann, Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -93,7 +93,38 @@ class Formatter(text_html.Formatter):
     # Dynamic stuff / Plugins ############################################
 
     def macro(self, macro_obj, name, args):
-        if args is not None:
+        #use ImageLink for resized images
+        if name == "ImageLink" and args is not None:
+            pagename = self.page.page_name
+            if args:
+                args = args.split(',')
+                args = [arg.strip() for arg in args]
+            else:
+                args = []
+            argc = len(args)
+            url = args[0]
+            keywords = {}
+            width = None
+            height = None
+            alt = None
+            for arg in args:
+                if arg.find('=') > -1:
+                    key, value = arg.split('=')
+                    if key == 'width':
+                        width = value
+                    if key == 'height':
+                        height = value
+                    if key == 'alt':
+                        alt = value
+            target = None
+            if argc >= 2 and args[1]:
+                target = args[1]
+
+            return self.image(
+                    title="attachment:%s" % wikiutil.quoteWikinameURL(url),
+                    src=AttachFile.getAttachUrl(pagename, url, self.request, addts=1), width=width, height=height, alt=alt, target=target)
+
+        elif args is not None:
             result = "[[%s(%s)]]" % (name, args)
         else:
             result = "[[%s]]" % name
