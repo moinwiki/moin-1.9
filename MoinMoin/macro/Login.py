@@ -3,7 +3,7 @@
     MoinMoin - login and sendmail form
 
     @copyright: 2005-2006 by Radomirs Cirskis <nad2000@gmail.com>
-    @copyright: 2006 Reimar Bauer, Oliver Siemoneit
+    @copyright: 2007 Reimar Bauer, Oliver Siemoneit
     @license: GNU GPL, see COPYING for details.
 """
 from MoinMoin.widget import html
@@ -29,6 +29,7 @@ def execute(macro, args):
         else:
             data = userform.getLogin(request)
         return data
+
     elif args == "sendmail":
         sn = request.getScriptname()
         pi = request.getPathinfo()
@@ -70,4 +71,4 @@ def execute(macro, args):
 
             return unicode(form)
     else:
-        return 
+        return _("Check your argument %s" % (args))
