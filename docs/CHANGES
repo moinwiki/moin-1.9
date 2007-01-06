@@ -275,6 +275,7 @@ Version 1.6.current:
       MoinMoin: (no page name after the colon). MoinMoin then uses the current
       page name as the default. This is a useful abbreviation for TwinPages in
       other wikis.
+    * it is now supported to resize an image from within the gui editor 
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
@@ -335,6 +336,7 @@ Version 1.6.current:
       add the mimetypes there to protect your users and file a bug report
       telling us what we missed.
     * Avoid infinite recursion in Page.parsePageLinks.
+    * Now ImageLink could be used with InterwikiLinks for pages
 
   Other changes:
     * HINT: if you run standard CGI, copy and edit the new moin.cgi from
