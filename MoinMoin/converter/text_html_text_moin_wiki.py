@@ -1192,46 +1192,40 @@ class convert_tree(visitor):
         # Attachment image
         if (title and title.startswith("attachment:") and
             wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))):
-            if height == None and width == None:
+            if height is None and width is None:
                 self.text.extend([self.white_space,
                                   wikiutil.url_unquote(title),
                                   self.white_space])
             else:
-            #use ImageLink for resized images
-                if target == None:
-                    if alt == None or alt == '':
-                        self.text.extend([self.white_space,
-                                  "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s)]]" % {
+                #use ImageLink for resized images
+                if target is None:
+                    if not alt:
+                        cmd = "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s)]]" % {
                                     "file": wikiutil.url_unquote(title[len("attachment:"):]),
                                     "width": width,
-                                    "height": height, },
-                                  self.white_space])
+                                    "height": height, }
                     else:
-                        self.text.extend([self.white_space,
-                                  "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
+                        cmd = "[[ImageLink(%(file)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
                                     "file": wikiutil.url_unquote(title[len("attachment:"):]),
                                     "width": width,
                                     "height": height,
-                                    "alt": alt, },
-                                  self.white_space])
+                                    "alt": alt, }
                 else:
-                    if alt == None or alt == '':
-                        self.text.extend([self.white_space,
-                                  "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s)]]" % {
+                    if not alt:
+                        cmd = "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s)]]" % {
                                     "file": wikiutil.url_unquote(title[len("attachment:"):]),
                                     "target": target,
                                     "width": width,
-                                    "height": height, },
-                                  self.white_space])
+                                    "height": height, }
                     else:
-                          self.text.extend([self.white_space,
-                                  "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
+                        cmd = "[[ImageLink(%(file)s,%(target)s,width=%(width)s,height=%(height)s,alt=%(alt)s)]]" % {
                                     "file": wikiutil.url_unquote(title[len("attachment:"):]),
                                     "target": target,
                                     "width": width,
                                     "height": height,
-                                    "alt": alt, },
-                                  self.white_space])
+                                    "alt": alt, }
+
+                self.text.extend([self.white_space, cmd, self.white_space])
 
         # Drawing image
         elif title and title.startswith("drawing:"):
