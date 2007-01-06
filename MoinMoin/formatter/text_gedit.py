@@ -112,9 +112,9 @@ class Formatter(text_html.Formatter):
                     key, value = arg.split('=')
                     if key == 'width':
                         width = value
-                    if key == 'height':
+                    elif key == 'height':
                         height = value
-                    if key == 'alt':
+                    elif key == 'alt':
                         alt = value
             target = None
             if argc >= 2 and args[1]:
