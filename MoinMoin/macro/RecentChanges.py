@@ -73,18 +73,17 @@ def format_page_edits(macro, lines, bookmark_usecs):
             # just indicate page was deleted
             html_link = img
     elif page.isConflict():
-        img = macro.formatter.smiley("/!\\")
-        #img = request.theme.make_icon('help')
+        img = request.theme.make_icon('conflict')
         html_link = page.link_to_raw(request, img, querystr={'action': 'edit'}, rel='nofollow')
     elif hilite:
         # show special icons if change was after the user's bookmark
         if is_new:
-            img = request.theme.make_icon('new')
-            #html_link = page.link_to_raw(request, img, rel='nofollow') # XXX better use same code as for "renamed"?
+            img = 'new'
         elif is_renamed:
-            img = request.theme.make_icon('renamed')
+            img = 'renamed'
         else:
-            img = request.theme.make_icon('updated')
+            img = 'updated'
+        img = request.theme.make_icon(img)
         html_link = page.link_to_raw(request, img, querystr={'action': 'diff', 'date': '%d' % bookmark_usecs}, rel='nofollow')
     else:
         # show "DIFF" icon else
