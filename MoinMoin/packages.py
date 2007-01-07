@@ -6,16 +6,19 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
+import os, codecs
 import sys
 import zipfile
 
-from MoinMoin import config, wikiutil, caching
+from MoinMoin import config, wikiutil, caching, user
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
+from MoinMoin.util import filesys
+from MoinMoin.logfile import editlog, eventlog
 
 MOIN_PACKAGE_FILE = 'MOIN_PACKAGE'
 MAX_VERSION = 1
+
 
 # Exceptions
 class PackageException(Exception):
@@ -37,6 +40,26 @@ class RuntimeScriptException(ScriptException):
 
 class ScriptExit(Exception):
     """ Raised by the script commands when the script should quit. """
+
+def event_logfile(self, pagename, pagefile):
+    # add event log entry
+    filename = self.request.rootpage.getPagePath('event-log', isfile=1)
+    eventtype = 'SAVENEW'
+    mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
+    elog = eventlog.EventLog(self.request)
+    elog.add(self.request, eventtype, {'pagename': pagename}, 1, mtime_usecs)
+
+def edit_logfile_append(self, pagename, pagefile, rev, action, logname='edit-log', comment=u'', author=u"Scripting Subsystem"):
+    glog = editlog.EditLog(self.request, uid_override=author)
+    pagelog = Page(self.request, pagename).getPagePath(logname, use_underlay=0, isfile=1)
+    llog = editlog.EditLog(self.request, filename=pagelog,
+                               uid_override=author)
+    mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
+    host = '::1'
+    extra = u''
+    glog.add(self.request, mtime_usecs, rev, action, pagename, host, comment)
+    llog.add(self.request, mtime_usecs, rev, action, pagename, host, extra, comment)
+    event_logfile(self, pagename, pagefile)
 
 # Parsing and (un)quoting for script files
 def packLine(list, separator="|"):
@@ -95,6 +118,55 @@ class ScriptEngine:
         #Satisfy pylint
         self.msg = getattr(self, "msg", "")
         self.request = getattr(self, "request", None)
+    def do_addattachment(self, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+        """
+        Installs an attachment
+
+        @param pagename: Page where the file is attached. Or in 2.0, the file itself.
+        @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
+        """
+        _ = self.request.getText
+
+        attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
+        filename = wikiutil.taintfilename(filename)
+        target = os.path.join(attachments, filename)
+        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+        rev = page.current_rev()
+        path = page.getPagePath(check_create=0)
+        if not os.path.exists(target):
+           self._extractToFile(filename, target)
+           if os.path.exists(target):
+              os.chmod(target, config.umask )
+              action = 'ATTNEW'
+              edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
+                      comment=u'%(filename)s' % {"filename":filename}, author=author)
+              self.msg += u"%(filename)s attached \n" % {"filename": filename}
+        else:
+           self.msg += u"%(filename)s not attached \n" % {"filename":filename}
+
+    def do_delattachment(self, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+        """
+        Removes an attachment
+
+        @param pagename: Page where the file is attached. Or in 2.0, the file itself.
+        @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
+        """
+        _ = self.request.getText
+
+        attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
+        filename = wikiutil.taintfilename(filename)
+        target = os.path.join(attachments, filename)
+        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+        rev = page.current_rev()
+        path = page.getPagePath(check_create=0)
+        if os.path.exists(target):
+              os.remove(target)
+              action = 'ATTDEL'
+              edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
+                      comment=u'%(filename)s' % {"filename":filename}, author=author)
+              self.msg += u"%(filename)s removed \n" % {"filename":filename}
+        else:
+           self.msg += u"%(filename)s not exists \n" % {"filename":filename}
 
     def do_print(self, *param):
         """ Prints the parameters into output of the script. """
@@ -215,14 +287,34 @@ class ScriptEngine:
         """
         _ = self.request.getText
         trivial = str2boolean(trivial)
-
+        uid = user.getUserId(self.request, author)
+        theuser = user.User(self.request, uid)
+        self.request.user = theuser
         page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
         try:
             page.saveText(self.extract_file(filename).decode("utf-8"), 0, trivial=trivial, comment=comment)
+            self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
         except PageEditor.Unchanged:
             pass
-
         page.clean_acl_cache()
+
+    def do_renamepage(self, pagename, newpagename, author=u"Scripting Subsystem", comment=u"Renamed by the scripting subsystem."):
+        """ Renames a page.
+
+        @param pagename: name of the target page
+        @param newpagename: name of the new page
+        @param author:   user name of the editor (optional)
+        @param comment:  comment related to this revision (optional)
+        """
+        _ = self.request.getText
+        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+        if not page.exists():
+            raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
+        newpage = PageEditor(self.request, newpagename)
+        page.renamePage(newpage.page_name, comment=u"Renamed from '%s'" % (pagename))
+        self.msg += u'%(pagename)s renamed to %(newpagename)s\n' % {
+                    "pagename": pagename,
+                    "newpagename": newpagename}
 
     def do_deletepage(self, pagename, comment="Deleted by the scripting subsystem."):
         """ Marks a page as deleted (like the DeletePage action).
@@ -298,7 +390,7 @@ class ScriptEngine:
                 self.goto -= 1
                 continue
 
-            if line.startswith("#"):
+            if line.startswith("#") or len(line) == 0:
                 continue
             elements = unpackLine(line)
             fnname = elements[0].strip().lower()
@@ -445,4 +537,3 @@ Example:
 
 if __name__ == '__main__':
     main()
-

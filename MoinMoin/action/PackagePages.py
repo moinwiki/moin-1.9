@@ -19,6 +19,8 @@ from MoinMoin.PageEditor import PageEditor
 from MoinMoin.Page import Page
 from MoinMoin.action.AttachFile import _addLogEntry
 from MoinMoin.packages import MOIN_PACKAGE_FILE, packLine, unpackLine
+from MoinMoin.action import AttachFile
+from MoinMoin.action.AttachFile import _get_files
 
 class ActionError(Exception): pass
 
@@ -89,7 +91,6 @@ class PackagePages:
         # get directory, and possibly create it
         attach_dir = Page(self.request, self.page.page_name).getPagePath("attachments", check_create=1)
         fpath = os.path.join(attach_dir, target).encode(config.charset)
-        #print fpath
         if os.path.exists(fpath):
             raise ActionError(_("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
                 'target': wikiutil.escape(target), 'filename': wikiutil.escape(target)})
@@ -102,11 +103,18 @@ class PackagePages:
 
         for page in pages:
             cnt += 1
+            files = _get_files(self.request, page.page_name)
             script.append(packLine(["AddRevision", str(cnt), page.page_name, user.getUserIdentification(self.request), "Created by the PackagePages action."]))
+
             timestamp = wikiutil.version2timestamp(page.mtime_usecs())
             zi = zipfile.ZipInfo(filename=str(cnt), date_time=datetime.fromtimestamp(timestamp).timetuple()[:6])
             zi.compress_type = COMPRESSION_LEVEL
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
+            for attname in files:
+                if attname != packagename:
+                    script.append(packLine(["AddAttachment", attname, page.page_name, user.getUserIdentification(self.request), "Created by the PackagePages action."]))
+                    filename =  AttachFile.getFilename(self.request, page.page_name, attname)
+                    zf.write(filename.encode("cp437"), attname.encode("cp437"))
 
         script += [packLine(['Print', 'Thank you for using PackagePages!'])]
 
@@ -150,7 +158,7 @@ class PackagePages:
     <tr>
         <td class="label"><label>%(list_label)s</label></td>
         <td class="content">
-            <input type="text" name="pagelist" maxlength="200">
+            <input type="text" name="pagelist" maxlength="200" value=%(pagename)s>
         </td>
     </tr>
     <tr>
