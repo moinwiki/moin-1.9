@@ -275,7 +275,10 @@ Version 1.6.current:
       MoinMoin: (no page name after the colon). MoinMoin then uses the current
       page name as the default. This is a useful abbreviation for TwinPages in
       other wikis.
-    * it is now supported to resize an image from within the gui editor 
+    * it is now supported to resize an image from within the gui editor
+    * the login page gives now the possibility to recover a lost password, thanks to 
+      Oliver Siemoneit. This is especially useful for wikis where acess to user 
+      preferences is restricted by acl.     
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
