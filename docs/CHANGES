@@ -275,10 +275,21 @@ Version 1.6.current:
       MoinMoin: (no page name after the colon). MoinMoin then uses the current
       page name as the default. This is a useful abbreviation for TwinPages in
       other wikis.
-    * it is now supported to resize an image from within the gui editor
+    * it is now supported to resize an image from within the gui editor 
+    * we now log a rename action as SAVE/RENAME in edit-log and display
+      appropriate comments if the user did not supply an own comment.
+      We also use a different icon to display the rename action on RecentChanges.
+      TODO: add a different icon for "renamed", we currently just use the same
+            as for "updated" with different alt text, see theme/__init__.py.
+    * RecentChanges:
+      * if a change has happened after your bookmark, the updated/new/renamed
+        icon links to the bookmark diff.
+      * if a page does not exist any more (because it was deleted or renamed),
+        we link the deleted icon to the diff showing what was deleted (for the
+        delete action). For the rename action, we just show the deleted icon.
     * the login page gives now the possibility to recover a lost password, thanks to 
-      Oliver Siemoneit. This is especially useful for wikis where acess to user 
-      preferences is restricted by acl.     
+      Oliver Siemoneit. This is especially useful for wikis where access to user 
+      preferences is restricted by acl.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
