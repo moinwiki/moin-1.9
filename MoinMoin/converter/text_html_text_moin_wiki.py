@@ -1192,7 +1192,7 @@ class convert_tree(visitor):
         # Attachment image
         if (title and title.startswith("attachment:") and
             wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))):
-            if height is None and width is None:
+            if height is None and width is None and target is None:
                 self.text.extend([self.white_space,
                                   wikiutil.url_unquote(title),
                                   self.white_space])
@@ -1205,7 +1205,7 @@ class convert_tree(visitor):
                     il_parms += ",width=%s" % width
                 if height is not None:
                     il_parms += ",height=%s" % height
-                if alt is not None:
+                if alt:
                     il_parms += ",alt=%s" % alt
                 self.text.extend([self.white_space, "[[ImageLink(%s)]]" % il_parms, self.white_space])
 

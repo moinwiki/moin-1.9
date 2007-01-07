@@ -97,32 +97,30 @@ class Formatter(text_html.Formatter):
         if name == "ImageLink" and args is not None:
             pagename = self.page.page_name
             if args:
-                args = args.split(',')
-                args = [arg.strip() for arg in args]
+                args = [arg.strip() for arg in args.split(',')]
             else:
                 args = []
-            argc = len(args)
-            url = args[0]
-            keywords = {}
-            width = None
-            height = None
-            alt = None
+            url = None
+            kw = {}
+            pos = 0
             for arg in args:
-                if arg.find('=') > -1:
+                if '=' in arg:
                     key, value = arg.split('=')
-                    if key == 'width':
-                        width = value
-                    elif key == 'height':
-                        height = value
-                    elif key == 'alt':
-                        alt = value
-            target = None
-            if argc >= 2 and args[1]:
-                target = args[1]
-
-            return self.image(
-                    title="attachment:%s" % wikiutil.quoteWikinameURL(url),
-                    src=AttachFile.getAttachUrl(pagename, url, self.request, addts=1), width=width, height=height, alt=alt, target=target)
+                    if key == 'width' and value:
+                        kw['width'] = value
+                    elif key == 'height' and value:
+                        kw['height'] = value
+                    elif key == 'alt' and value:
+                        kw['alt'] = value
+                else:
+                    if pos == 0 and arg:
+                        url = arg
+                        kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
+                    elif pos == 1 and arg:
+                        kw['target'] = arg
+                    pos += 1
+            kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)              
+            return self.image(**kw)
 
         elif args is not None:
             result = "[[%s(%s)]]" % (name, args)
