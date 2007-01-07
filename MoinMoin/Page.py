@@ -271,6 +271,7 @@ class Page:
             cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
             if cache_data and (rev == 0 or rev == cache_data[1]):
                 # we got the correct rev data from the cache
+                #logging.debug("got data from cache: %r %r %r" % cache_data)
                 return cache_data
 
         # Figure out if we should use underlay or not, if needed.
