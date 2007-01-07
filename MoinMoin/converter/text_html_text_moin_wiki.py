@@ -1201,10 +1201,13 @@ class convert_tree(visitor):
                 il_parms = "%s" % wikiutil.url_unquote(title[len("attachment:"):])
                 if target is not None:
                     il_parms += ",%s" % target
-                il_kws = "width=%s,height=%s" % (width, height)
-                if alt:
-                    il_kws += ",alt=%s" % alt
-                self.text.extend([self.white_space, "[[ImageLink(%s,%s)]]" % (il_parms, il_kws), self.white_space])
+                if width is not None:
+                    il_parms += ",width=%s" % width
+                if height is not None:
+                    il_parms += ",height=%s" % height
+                if alt is not None:
+                    il_parms += ",alt=%s" % alt
+                self.text.extend([self.white_space, "[[ImageLink(%s)]]" % il_parms, self.white_space])
 
         # Drawing image
         elif title and title.startswith("drawing:"):
