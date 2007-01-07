@@ -567,44 +567,21 @@ Try a different name.""") % (newpagename,)
             raise self.AccessDenied, msg
 
         try:
-            # First save a final backup copy of the current page
-            # (recreating the page allows access to the backups again)
-            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=0)
+            msg = self.saveText(u"deleted\n", 0, comment=comment or u'', index=1, deleted=True)
             msg = msg.replace(
                 _("Thank you for your changes. Your attention to detail is appreciated."),
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
 
-            if request.cfg.xapian_search:
-                from MoinMoin.search.Xapian import Index
-                index = Index(request)
-                if index.exists():
-                    index.remove_item(self.page_name)
-
-            # Then really delete it
-            try:
-                os.remove(self._text_filename())
-            except OSError, err:
-                if err.errno != errno.ENOENT:
-                    raise err
         except self.SaveError, message:
             # XXX Error handling
             success = False
             msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
-
-        # reset page object
-        self.reset()
 
         # delete pagelinks
         arena = self
         key = 'pagelinks'
         cache = caching.CacheEntry(request, arena, key, scope='item')
         cache.remove()
-
-        # forget in-memory page text
-        self.set_raw_body(None)
-
-        # clean the in memory acl cache
-        self.clean_acl_cache()
 
         # clean the cache
         for formatter_name in self.cfg.caching_formats:
@@ -882,10 +859,11 @@ Try a different name.""") % (newpagename,)
                 filesys.copytree(src, dst)
                 self.reset() # reinit stuff
 
-    def _write_file(self, text, action='SAVE', comment=u'', extra=u''):
+    def _write_file(self, text, action='SAVE', comment=u'', extra=u'', deleted=False):
         """ Write the text to the page file (and make a backup of old page).
         
         @param text: text to save for this page
+        @param deleted: if True, then don't write page content (used by deletePage)
         @rtype: int
         @return: mtime_usec of new page
         """
@@ -957,15 +935,20 @@ Try a different name.""") % (newpagename,)
             f.write(revstr+'\n')
             f.close()
 
-            # save to page file
-            pagefile = os.path.join(revdir, revstr)
-            f = codecs.open(pagefile, 'wb', config.charset)
-            # Write the file using text/* mime type
-            f.write(self.encodeTextMimeType(text))
-            f.close()
-            mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
-            # set in-memory content
-            self.set_raw_body(text)
+            if not deleted:
+                # save to page file
+                pagefile = os.path.join(revdir, revstr)
+                f = codecs.open(pagefile, 'wb', config.charset)
+                # Write the file using text/* mime type
+                f.write(self.encodeTextMimeType(text))
+                f.close()
+                mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
+                # set in-memory content
+                self.set_raw_body(text)
+            else:
+                mtime_usecs = wikiutil.timestamp2version(time.time())
+                # set in-memory content
+                self.set_raw_body(None)
 
             # reset page object
             self.reset()
@@ -999,6 +982,7 @@ Try a different name.""") % (newpagename,)
         @keyword comment: comment field (when preview is true)
         @keyword action: action for editlog (default: SAVE)
         @keyword index: needs indexing, not already handled (default: 1)
+        @keyword deleted: if True, then don't save page content (used by DeletePage, default: False)
         @rtype: unicode
         @return: error msg
         """
@@ -1006,6 +990,7 @@ Try a different name.""") % (newpagename,)
         _ = self._
         self._save_draft(newtext, rev, **kw)
         action = kw.get('action', 'SAVE')
+        deleted = kw.get('deleted', False)
 
         #!!! need to check if we still retain the lock here
         #!!! rev check is not enough since internal operations use "0"
@@ -1077,7 +1062,7 @@ Please review the page and save then. Do not save this page as it is!""")
             trivial = kw.get('trivial', 0)
 
             # write the page file
-            mtime_usecs, rev = self._write_file(newtext, action, comment, extra)
+            mtime_usecs, rev = self._write_file(newtext, action, comment, extra, deleted=deleted)
             self.clean_acl_cache()
             self._save_draft(None, None) # everything fine, kill the draft for this page
 
@@ -1089,7 +1074,10 @@ Please review the page and save then. Do not save this page as it is!""")
                 from MoinMoin.search.Xapian import Index
                 index = Index(request)
                 if index.exists():
-                    index.update_page(self.page_name)
+                    if deleted:
+                        index.remove_item(self.page_name)
+                    else:
+                        index.update_page(self.page_name)
 
         # remove lock (forcibly if we were allowed to break it by the UI)
         # !!! this is a little fishy, since the lock owner might not notice
