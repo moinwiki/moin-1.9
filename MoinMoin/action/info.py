@@ -119,7 +119,7 @@ def execute(pagename, request):
         for line in log.reverse():
             rev = int(line.rev)
             actions = []
-            if line.action in ['SAVE', 'SAVENEW', 'SAVE/REVERT', ]:
+            if line.action in ('SAVE', 'SAVENEW', 'SAVE/REVERT', 'SAVE/RENAME', ):
                 size = page.size(rev=rev)
                 if count == 0: # latest page
                     actions.append(render_action(_('view'), {'action': 'show'}))
@@ -135,8 +135,11 @@ def execute(pagename, request):
                     lchecked = rchecked = ''
                 diff = '<input type="radio" name="rev1" value="%d"%s><input type="radio" name="rev2" value="%d"%s>' % (rev, lchecked, rev, rchecked)
                 comment = line.comment
-                if not comment and '/REVERT' in line.action:
+                if not comment:
+                    if '/REVERT' in line.action:
                         comment = _("Revert to revision %(rev)d.") % {'rev': int(line.extra)}
+                    elif '/RENAME' in line.action:
+                        comment = _("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}
             else: # ATT*
                 rev = '-'
                 diff = '-'

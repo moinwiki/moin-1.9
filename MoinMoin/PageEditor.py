@@ -531,7 +531,7 @@ Try a different name.""") % (newpagename,)
             self.error = None
             # Save page text with a comment about the old name
             savetext = u"## page was renamed from %s\n%s" % (self.page_name, savetext)
-            newpage.saveText(savetext, 0, comment=comment, index=0)
+            newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE/RENAME')
 
             if request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index

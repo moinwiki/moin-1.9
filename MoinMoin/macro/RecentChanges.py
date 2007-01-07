@@ -26,21 +26,25 @@ Dependencies = ["time"] # ["user", "pages", "pageparams", "bookmark"]
 
 def format_comment(request, line):
     comment = line.comment
+    action = line.action
     _ = request.getText
-    if line.action.startswith('ATT'):
+    if action.startswith('ATT'):
         filename = wikiutil.url_unquote(line.extra)
-        if line.action == 'ATTNEW':
+        if action == 'ATTNEW':
             comment = _("Upload of attachment '%(filename)s'.") % {
                 'filename': filename}
-        elif line.action == 'ATTDEL':
+        elif action == 'ATTDEL':
             comment = _("Attachment '%(filename)s' deleted.") % {
                 'filename': filename}
-        elif line.action == 'ATTDRW':
+        elif action == 'ATTDRW':
             comment = _("Drawing '%(filename)s' saved.") % {
                 'filename': filename}
-    elif '/REVERT' in line.action:
-        rev = int(line.extra)
-        comment = _("Revert to revision %(rev)d.") % {'rev': rev}
+    elif not comment:
+        if '/REVERT' in action:
+            rev = int(line.extra)
+            comment = _("Revert to revision %(rev)d.") % {'rev': rev}
+        elif '/RENAME' in action:
+            comment = _("Renamed from '%(oldpagename)s'.") % {'oldpagename': line.extra}
 
     return wikiutil.make_breakable(comment, _MAX_COMMENT_LENGTH)
 
@@ -50,28 +54,37 @@ def format_page_edits(macro, lines, bookmark_usecs):
     d = {} # dict for passing stuff to theme
     line = lines[0]
     pagename = line.pagename
+    rev = int(line.rev)
     tnow = time.time()
     is_new = lines[-1].action == 'SAVENEW'
+    is_renamed = lines[-1].action == 'SAVE/RENAME'
     # check whether this page is newer than the user's bookmark
     hilite = line.ed_time_usecs > (bookmark_usecs or line.ed_time_usecs)
     page = Page(request, pagename)
 
     html_link = ''
     if not page.exists():
-        # indicate page was deleted
-        html_link = request.theme.make_icon('deleted') # TODO: we could link to the last existing rev here
+        img = request.theme.make_icon('deleted')
+        revbefore = rev - 1
+        if revbefore and page.exists(rev=revbefore, domain='standard'):
+            # indicate page was deleted and show diff to last existing revision of it
+            html_link = page.link_to_raw(request, img, querystr={'action': 'diff'}, rel='nofollow')
+        else:
+            # just indicate page was deleted
+            html_link = img
     elif page.isConflict():
         img = macro.formatter.smiley("/!\\")
         #img = request.theme.make_icon('help')
         html_link = page.link_to_raw(request, img, querystr={'action': 'edit'}, rel='nofollow')
-    elif is_new:
-        # show "NEW" icon if page was created after the user's bookmark
-        if hilite:
-            img = request.theme.make_icon('new')
-            html_link = page.link_to_raw(request, img, rel='nofollow')
     elif hilite:
-        # show "UPDATED" icon if page was edited after the user's bookmark
-        img = request.theme.make_icon('updated')
+        # show special icons if change was after the user's bookmark
+        if is_new:
+            img = request.theme.make_icon('new')
+            #html_link = page.link_to_raw(request, img, rel='nofollow') # XXX better use same code as for "renamed"?
+        elif is_renamed:
+            img = request.theme.make_icon('renamed')
+        else:
+            img = request.theme.make_icon('updated')
         html_link = page.link_to_raw(request, img, querystr={'action': 'diff', 'date': '%d' % bookmark_usecs}, rel='nofollow')
     else:
         # show "DIFF" icon else
