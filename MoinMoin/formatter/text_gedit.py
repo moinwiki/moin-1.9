@@ -102,6 +102,7 @@ class Formatter(text_html.Formatter):
                 args = []
             url = None
             kw = {}
+            kw['src'] = None
             pos = 0
             for arg in args:
                 if '=' in arg:
@@ -115,11 +116,18 @@ class Formatter(text_html.Formatter):
                 else:
                     if pos == 0 and arg:
                         url = arg
-                        kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
+                        if url.startswith('http'):
+                            kw['src'] = url
+                        else:
+                            if '/' in arg:
+                                pagename, arg = arg.split('/')
+                                url = arg
+                            kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
                     elif pos == 1 and arg:
                         kw['target'] = arg
                     pos += 1
-            kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)              
+            if not kw['src']:
+               kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
             return self.image(**kw)
 
         elif args is not None:
