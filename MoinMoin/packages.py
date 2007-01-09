@@ -118,7 +118,7 @@ class ScriptEngine:
         #Satisfy pylint
         self.msg = getattr(self, "msg", "")
         self.request = getattr(self, "request", None)
-    def do_addattachment(self, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+    def do_addattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
         """
         Installs an attachment
 
@@ -129,12 +129,13 @@ class ScriptEngine:
 
         attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
         filename = wikiutil.taintfilename(filename)
+        zipname = wikiutil.taintfilename(zipname)
         target = os.path.join(attachments, filename)
         page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
         rev = page.current_rev()
         path = page.getPagePath(check_create=0)
         if not os.path.exists(target):
-           self._extractToFile(filename, target)
+           self._extractToFile(zipname, target)
            if os.path.exists(target):
               os.chmod(target, config.umask )
               action = 'ATTNEW'
