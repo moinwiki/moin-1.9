@@ -112,10 +112,11 @@ class PackagePages:
             zf.writestr(zi, page.get_raw_body().encode("utf-8"))
             for attname in files:
                 if attname != packagename:
-                    script.append(packLine(["AddAttachment", attname, page.page_name, user.getUserIdentification(self.request), "Created by the PackagePages action."]))
-                    filename =  AttachFile.getFilename(self.request, page.page_name, attname)
-                    zf.write(filename.encode("cp437"), attname.encode("cp437"))
-
+                    cnt += 1
+                    zipname = "%s_attachment" % str(cnt)
+                    script.append(packLine(["AddAttachment", zipname, attname, page.page_name, user.getUserIdentification(self.request), "Created by the PackagePages action."]))
+                    filename = AttachFile.getFilename(self.request, page.page_name, attname)
+                    zf.write(filename.encode("cp437"), zipname)
         script += [packLine(['Print', 'Thank you for using PackagePages!'])]
 
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))
