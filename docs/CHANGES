@@ -290,6 +290,9 @@ Version 1.6.current:
     * the login page gives now the possibility to recover a lost password, thanks to 
       Oliver Siemoneit. This is especially useful for wikis where access to user 
       preferences is restricted by acl.
+    * we now have the possibility to add a Discussion page 
+      (FeatureRequests/DiscussionAndOrCommentPages) 
+    * Package Pages does now support attachments
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
