@@ -1192,7 +1192,7 @@ class convert_tree(visitor):
         # Attachment image
         if (title and title.startswith("attachment:") and
             wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))) or title is None or src.startswith('http'):
-            if height is None and width is None and target is None and alt is None:
+            if height is None and width is None and target is None and (alt is None or alt is ''):
                 self.text.extend([self.white_space,
                                   wikiutil.url_unquote(title),
                                   self.white_space])
