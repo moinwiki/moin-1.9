@@ -121,18 +121,17 @@ class Formatter(text_html.Formatter):
                 else:
                     if pos == 0 and arg:
                         url = arg
-                        if url.startswith('http'):
+                        if url.startswith('http:'):
                             kw['src'] = url
                         else:
                             kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
                     elif pos == 1 and arg:
                         kw['target'] = arg
                     pos += 1
-            if not kw['src']:
+            if kw['src'] is None:
                 if '/' in url:
                     pagename, target = AttachFile.absoluteName(url, pagename)
-                    url = url.split('/')
-                    url = url[len(url)-1]
+                    url = url.split('/')[-1]
                 kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
             return self.image(**kw)
 
