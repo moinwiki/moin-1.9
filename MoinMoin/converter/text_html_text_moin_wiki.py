@@ -1194,9 +1194,9 @@ class convert_tree(visitor):
             target = node.attributes.get("target").nodeValue
 
         # Attachment image
-        if (title and title.startswith("attachment:") and
-            wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))) or title is None or src.startswith('http'):
-            if height is None and width is None and target is None and (alt is None or alt is ''):
+        if (title and title.startswith("attachment:") and wikiutil.isPicture(wikiutil.url_unquote(title[len("attachment:"):]))
+           ) or title is None or src.startswith('http:'):
+            if height is None and width is None and target is None and not alt:
                 self.text.extend([self.white_space,
                                   wikiutil.url_unquote(title),
                                   self.white_space])
@@ -1205,7 +1205,7 @@ class convert_tree(visitor):
                 if title is None:
                     il_parms = "%s" % wikiutil.url_unquote(src)
                 else:
-                    if src.startswith('http'):
+                    if src.startswith('http:'):
                         il_parms = "%s" % wikiutil.url_unquote(src)
                     else:
                         il_parms = "%s" % wikiutil.url_unquote(title[len("attachment:"):])
