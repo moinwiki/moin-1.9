@@ -1,8 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Action for supplementation pages
-
-    This Action is used to create a supplementation subpage e.g. a Discussion page below a comon page
+    MoinMoin -  This Action is used to create a supplementation subpage e.g. a Discussion page below a comon page
         
     Note:
     derived from the newpage macro by Vito Miliano (vito_moinnewpagewithtemplate@perilith.com) et al
@@ -30,7 +28,6 @@ def execute(pagename, request):
         if test.exists(): # page is defined -> redirect
             request.http_redirect(url)
         else:  # page will be created from template
-            query = {'action': 'edit', 'backto': newpagename}
-            query['template'] = quoteWikinameURL(sub_page_template)
+            query = {'action': 'edit', 'backto': newpagename, 'template': quoteWikinameURL(sub_page_template)}
             url = Page(request, newpagename).url(request, query, escape=0, relative=False)
             request.http_redirect(url)
