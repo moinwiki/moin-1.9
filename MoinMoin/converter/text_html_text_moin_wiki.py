@@ -465,6 +465,7 @@ class strip_whitespace(visitor):
 class convert_tree(visitor):
     white_space = object()
     new_line = object()
+    new_line_dont_remove = object()
 
     def __init__(self, request, pagename):
         self.request = request
@@ -510,6 +511,9 @@ class convert_tree(visitor):
                 else:
                     text[i] = "\n"
                     i += 1
+            elif text[i] is self.new_line_dont_remove:
+                text[i] = "\n"
+                i += 1
             else:
                 i += 1
 
@@ -582,7 +586,7 @@ class convert_tree(visitor):
         if name == 'ol':
             class_ = listitem.getAttribute("class")
             if class_ == "gap":
-                before = "\n"
+                before = self.new_line_dont_remove
             if list.hasAttribute("type"):
                 type = list.getAttribute("type")
             else:
@@ -591,7 +595,7 @@ class convert_tree(visitor):
         elif name == 'ul':
             class_ = listitem.getAttribute("class")
             if class_ == "gap":
-                before = "\n"
+                before = self.new_line_dont_remove
             style = listitem.getAttribute("style")
             if re.match(ur"list-style-type:\s*none", style, re.I):
                 markup = ". "
@@ -611,7 +615,7 @@ class convert_tree(visitor):
                 name = i.localName
                 if name == 'dt':
                     before, indent, markup = self._get_list_item_markup(node, i)
-                    self.text.append(before+indent)
+                    self.text.extend([before, indent])
                     text = self.node_list_text_only(i.childNodes)
                     self.text.append(text.replace("\n", " "))
                 elif name == 'dd':
@@ -621,7 +625,7 @@ class convert_tree(visitor):
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
         if self.depth == 0:
-            self.text.append(self.new_line)
+            self.text.append(self.new_line_dont_remove)
 
     def process_list(self, node):
         self.depth += 1
@@ -630,7 +634,7 @@ class convert_tree(visitor):
                 name = i.localName
                 if name == 'li':
                     before, indent, markup = self._get_list_item_markup(node, i)
-                    self.text.append(before+indent+markup)
+                    self.text.extend([before, indent, markup])
                     self.process_list_item(i, indent)
                 elif name in ('ol', 'ul',):
                     self.process_list(i)
@@ -640,7 +644,7 @@ class convert_tree(visitor):
                     raise ConvertError("Illegal list element %s" % i.localName)
         self.depth -= 1
         if self.depth == 0:
-            self.text.append(self.new_line)
+            self.text.append(self.new_line_dont_remove)
 
     process_ul = process_list
     process_ol = process_list
@@ -857,7 +861,7 @@ class convert_tree(visitor):
                     self.text.append(i.data)
                     #print "'%s'" % i.data
                 elif i.localName == 'br':
-                    self.text.append(self.new_line)
+                    self.text.append(self.new_line_dont_remove)
                 else:
                     pass
                     #print i.localName
@@ -995,7 +999,7 @@ class convert_tree(visitor):
                     raise ConvertError("process_table: Don't support %s element" % name)
             #else:
             #    raise ConvertError("Unexpected node: %r" % i)
-        self.text.append(self.new_line)
+        self.text.append(self.new_line_dont_remove)
 
     def process_caption(self, table, node, style=""):
         # get first row
@@ -1023,7 +1027,7 @@ class convert_tree(visitor):
             colspan = 1
         text = self.node_list_text_only(node.childNodes).replace('\n', ' ').strip()
         if text:
-            self.text.extend(["%s'''%s%s'''||" % ('||' * colspan, style, text), self.new_line])
+            self.text.extend(["%s'''%s%s'''||" % ('||' * colspan, style, text), self.new_line_dont_remove])
 
     def process_table_data(self, node, style=""):
         if node.hasAttribute("colspan"):
@@ -1070,7 +1074,7 @@ class convert_tree(visitor):
                     style = ""
                 else:
                     raise ConvertError("process_table_record: Don't support %s element" % name)
-        self.text.extend(["||", self.new_line])
+        self.text.extend(["||", self.new_line_dont_remove])
 
     def process_a(self, node):
         scriptname = self.request.getScriptname()
