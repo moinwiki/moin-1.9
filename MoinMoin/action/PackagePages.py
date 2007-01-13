@@ -113,7 +113,7 @@ class PackagePages:
             for attname in files:
                 if attname != packagename:
                     cnt += 1
-                    zipname = "%s_attachment" % str(cnt)
+                    zipname = "%d_attachment" % cnt
                     script.append(packLine(["AddAttachment", zipname, attname, page.page_name, user.getUserIdentification(self.request), "Created by the PackagePages action."]))
                     filename = AttachFile.getFilename(self.request, page.page_name, attname)
                     zf.write(filename.encode("cp437"), zipname)
