@@ -1053,13 +1053,40 @@ actionsMenuInit('%(label)s');
         This is separate method to make it easy to customize the
         edtibar in sub classes.
         """
-        return [self.editorLink(page),
-                self.infoLink(page),
-                self.subscribeLink(page),
-                self.quicklinkLink(page),
-                self.attachmentsLink(page),
-                self.actionsMenu(page),
-               ]
+
+        editbar_items = {'Edit': self.editorLink(page),
+                          self.request.cfg.supplementation_page_name:
+                          self.supplementation_page_nameLink(page),
+                          'Info': self.infoLink(page),
+                          'Subscribe': self.subscribeLink(page),
+                          'Quicklink': self.quicklinkLink(page),
+                          'Attachments': self.attachmentsLink(page),
+                          'ActionsMenu': self.actionsMenu(page)
+                          }
+        edit_bar = [u'Edit', u'Info', u'Subscribe', u'Quicklink', u'Attachments', u'ActionsMenu', ]
+        if self.request.cfg.supplementation_page is True:
+            if self.request.getPragma('supplementation-page', 1) == 'off':
+                edit_bar = edit_bar
+            else:
+                edit_bar.insert(1, self.request.cfg.supplementation_page_name)
+        else:
+            if self.request.getPragma('supplementation-page', 1) == 'on':
+                edit_bar.insert(1, self.request.cfg.supplementation_page_name)
+            else:
+                edit_bar = edit_bar
+
+
+        allowed_action = []
+        for action in edit_bar:
+            allowed_action.append(editbar_items[action])
+        return allowed_action
+
+    def supplementation_page_nameLink(self, page):
+        """  discussion for page """
+        _ = self.request.getText
+        return page.link_to(self.request,
+                            text=_(self.request.cfg.supplementation_page_name, formatted=False),
+                            querystr={'action': 'supplementation'}, id='supplementation', rel='nofollow')
 
     def guiworks(self, page):
         """ Return whether the gui editor / converter can work for that page.
@@ -1128,7 +1155,7 @@ var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 //-->
 </script>        
-""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0),
+""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0, relative=False),
        'text': _('Edit (GUI)', formatted=False),
       }
 

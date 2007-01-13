@@ -118,31 +118,36 @@ class ScriptEngine:
         #Satisfy pylint
         self.msg = getattr(self, "msg", "")
         self.request = getattr(self, "request", None)
-    def do_addattachment(self, filename, pagename, author=u"Scripting Subsystem", comment=u""):
+    def do_addattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
         """
         Installs an attachment
 
         @param pagename: Page where the file is attached. Or in 2.0, the file itself.
+        @param zipname: Filename of the attachment from the zip file
         @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
         """
-        _ = self.request.getText
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
 
-        attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
-        filename = wikiutil.taintfilename(filename)
-        target = os.path.join(attachments, filename)
-        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
-        rev = page.current_rev()
-        path = page.getPagePath(check_create=0)
-        if not os.path.exists(target):
-           self._extractToFile(filename, target)
-           if os.path.exists(target):
-              os.chmod(target, config.umask )
-              action = 'ATTNEW'
-              edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
-                      comment=u'%(filename)s' % {"filename":filename}, author=author)
-              self.msg += u"%(filename)s attached \n" % {"filename": filename}
+            attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
+            filename = wikiutil.taintfilename(filename)
+            zipname = wikiutil.taintfilename(zipname)
+            target = os.path.join(attachments, filename)
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            rev = page.current_rev()
+            path = page.getPagePath(check_create=0)
+            if not os.path.exists(target):
+                self._extractToFile(zipname, target)
+                if os.path.exists(target):
+                    os.chmod(target, config.umask )
+                    action = 'ATTNEW'
+                    edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
+                                       comment=u'%(filename)s' % {"filename":filename}, author=author)
+                self.msg += u"%(filename)s attached \n" % {"filename": filename}
+            else:
+                self.msg += u"%(filename)s not attached \n" % {"filename":filename}
         else:
-           self.msg += u"%(filename)s not attached \n" % {"filename":filename}
+            self.msg += u"action add attachment: not enough rights - nothing done \n"
 
     def do_delattachment(self, filename, pagename, author=u"Scripting Subsystem", comment=u""):
         """
@@ -151,22 +156,25 @@ class ScriptEngine:
         @param pagename: Page where the file is attached. Or in 2.0, the file itself.
         @param filename: Filename of the attachment (just applicable for MoinMoin < 2.0)
         """
-        _ = self.request.getText
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
 
-        attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
-        filename = wikiutil.taintfilename(filename)
-        target = os.path.join(attachments, filename)
-        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
-        rev = page.current_rev()
-        path = page.getPagePath(check_create=0)
-        if os.path.exists(target):
-              os.remove(target)
-              action = 'ATTDEL'
-              edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
-                      comment=u'%(filename)s' % {"filename":filename}, author=author)
-              self.msg += u"%(filename)s removed \n" % {"filename":filename}
+            attachments = Page(self.request, pagename).getPagePath("attachments", check_create=1)
+            filename = wikiutil.taintfilename(filename)
+            target = os.path.join(attachments, filename)
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            rev = page.current_rev()
+            path = page.getPagePath(check_create=0)
+            if os.path.exists(target):
+                os.remove(target)
+                action = 'ATTDEL'
+                edit_logfile_append(self, pagename, path, rev, action, logname='edit-log',
+                                    comment=u'%(filename)s' % {"filename":filename}, author=author)
+                self.msg += u"%(filename)s removed \n" % {"filename":filename}
+            else:
+                self.msg += u"%(filename)s not exists \n" % {"filename":filename}
         else:
-           self.msg += u"%(filename)s not exists \n" % {"filename":filename}
+            self.msg += u"action delete attachment: not enough rights - nothing done \n"
 
     def do_print(self, *param):
         """ Prints the parameters into output of the script. """
@@ -285,18 +293,21 @@ class ScriptEngine:
         @param comment:  comment related to this revision (optional)
         @param trivial:  boolean, if it is a trivial edit
         """
-        _ = self.request.getText
-        trivial = str2boolean(trivial)
-        uid = user.getUserId(self.request, author)
-        theuser = user.User(self.request, uid)
-        self.request.user = theuser
-        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
-        try:
-            page.saveText(self.extract_file(filename).decode("utf-8"), 0, trivial=trivial, comment=comment)
-            self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
-        except PageEditor.Unchanged:
-            pass
-        page.clean_acl_cache()
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            trivial = str2boolean(trivial)
+            uid = user.getUserId(self.request, author)
+            theuser = user.User(self.request, uid)
+            self.request.user = theuser
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            try:
+                page.saveText(self.extract_file(filename).decode("utf-8"), 0, trivial=trivial, comment=comment)
+                self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
+            except PageEditor.Unchanged:
+                pass
+            page.clean_acl_cache()
+        else:
+            self.msg += u"action add revision: not enough rights - nothing done \n"
 
     def do_renamepage(self, pagename, newpagename, author=u"Scripting Subsystem", comment=u"Renamed by the scripting subsystem."):
         """ Renames a page.
@@ -306,15 +317,18 @@ class ScriptEngine:
         @param author:   user name of the editor (optional)
         @param comment:  comment related to this revision (optional)
         """
-        _ = self.request.getText
-        page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
-        if not page.exists():
-            raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
-        newpage = PageEditor(self.request, newpagename)
-        page.renamePage(newpage.page_name, comment=u"Renamed from '%s'" % (pagename))
-        self.msg += u'%(pagename)s renamed to %(newpagename)s\n' % {
-                    "pagename": pagename,
-                    "newpagename": newpagename}
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
+            if not page.exists():
+                raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
+            newpage = PageEditor(self.request, newpagename)
+            page.renamePage(newpage.page_name, comment=u"Renamed from '%s'" % (pagename))
+            self.msg += u'%(pagename)s renamed to %(newpagename)s\n' % {
+                            "pagename": pagename,
+                            "newpagename": newpagename}
+        else:
+            self.msg += u"action rename page: not enough rights - nothing done \n"
 
     def do_deletepage(self, pagename, comment="Deleted by the scripting subsystem."):
         """ Marks a page as deleted (like the DeletePage action).
@@ -322,12 +336,14 @@ class ScriptEngine:
         @param pagename: page to delete
         @param comment:  the related comment (optional)
         """
-        _ = self.request.getText
-        page = PageEditor(self.request, pagename, do_editor_backup=0)
-        if not page.exists():
-            raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
-
-        page.deletePage(comment)
+        if self.request.user.may.write(pagename):
+            _ = self.request.getText
+            page = PageEditor(self.request, pagename, do_editor_backup=0)
+            if not page.exists():
+                raise RuntimeScriptException(_("The page %s does not exist.") % pagename)
+            page.deletePage(comment)
+        else:
+            self.msg += u"action delete page: not enough rights - nothing done \n"
 
     def do_replaceunderlay(self, filename, pagename):
         """
