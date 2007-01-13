@@ -77,8 +77,7 @@ class Formatter(text_html.Formatter):
         kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
         if '/' in url:
             pagename, target = AttachFile.absoluteName(url, pagename)
-            url = url.split('/')
-            url = url[len(url)-1]
+            url = url.split('/')[-1]
         kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
         return self.image(**kw)
 
