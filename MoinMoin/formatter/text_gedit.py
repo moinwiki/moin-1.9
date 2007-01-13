@@ -73,9 +73,14 @@ class Formatter(text_html.Formatter):
     def attachment_image(self, url, **kw):
         _ = self.request.getText
         pagename = self.page.page_name
-        return self.image(
-            title="attachment:%s" % wikiutil.quoteWikinameURL(url),
-            src=AttachFile.getAttachUrl(pagename, url, self.request, addts=1))
+        kw = {}
+        kw['title'] = "attachment:%s" % wikiutil.quoteWikinameURL(url)
+        if '/' in url:
+            pagename, target = AttachFile.absoluteName(url, pagename)
+            url = url.split('/')
+            url = url[len(url)-1]
+        kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
+        return self.image(**kw)
 
     def attachment_drawing(self, url, text, **kw):
         _ = self.request.getText
@@ -124,6 +129,10 @@ class Formatter(text_html.Formatter):
                         kw['target'] = arg
                     pos += 1
             if not kw['src']:
+                if '/' in url:
+                    pagename, target = AttachFile.absoluteName(url, pagename)
+                    url = url.split('/')
+                    url = url[len(url)-1]
                 kw['src'] = AttachFile.getAttachUrl(pagename, url, self.request, addts=1)
             return self.image(**kw)
 
