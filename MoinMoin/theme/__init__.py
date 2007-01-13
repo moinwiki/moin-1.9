@@ -1155,7 +1155,7 @@ var gui_editor_link_href = "%(url)s";
 var gui_editor_link_text = "%(text)s";
 //-->
 </script>        
-""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0),
+""" % {'url': page.url(self.request, querystr={'action': 'edit', 'editor': 'gui', }, escape=0, relative=False),
        'text': _('Edit (GUI)', formatted=False),
       }
 
