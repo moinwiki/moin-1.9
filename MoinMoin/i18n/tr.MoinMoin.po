@@ -1,0 +1,2306 @@
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language tr
+
+#
+# MoinMoin tr system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"PO-Revision-Date: 2006-01-07 23:45+0200\n"
+"Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Language: Türkçe\n"
+"X-Language-in-English: Turkish\n"
+"X-HasWikiMarkup: True\n"
+"X-Direction: ltr\n"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Bu wiki e-posta işlemleri için yapılandırılmadı.\n"
+"Lütfen bunun ile ilgili olarak wiki yöneticisi ile temas kurunuz."
+
+msgid "Please provide a valid email address!"
+msgstr "Lütfen geçerli bir e-posta adresi giriniz!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "'%(email)s' e-posta adresine sahip bir kullanıcı hesabı bulunamadı!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
+"Hesap değişikliğinde bulunmak ya da yeni bir hesap oluşturmak için "
+"KullanıcıÖzellikleri sayfasını kullanabilirsiniz."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Boş kullanıcı adı. Lütfen bir kullanıcı adı seçiniz."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"Geçersiz kullanıcı adı: {{{'%s'}}}.\n"
+"Kullanıcı adı alfabetik karakter ve sayı içerebileceği gibi isteğe bağlı "
+"olarak iki kelime arasında bir tek boşluk da bırakılabilir. Grupların sayfa "
+"isimlerinin kullanımına izin verilmemektedir."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Bu kullanıcı adı başka bir kullanıcı tarafından alınmıştır."
+
+msgid "Passwords don't match!"
+msgstr "Girilen parolalar örtüşmüyor!"
+
+msgid "Please specify a password!"
+msgstr "Lütfen bir parola giriniz!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Lütfen e-posta adresinizi belirtiniz. Giriş bilgilerinizin kaybolması "
+"durumunda, bunları tekrar e-posta yoluyla alabilirsiniz."
+
+msgid "This email already belongs to somebody else."
+msgstr "Bu e-posta adresi başka bir hesap tarafından kullanılmakta."
+
+msgid "User account created! You can use this account to login now..."
+msgstr ""
+"Kullanıcı hesabı oluşturuldu! Bu hesabı kullanarak giriş yapabilirsiniz "
+"artık."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr ""
+"Seçilen kullanıcı hesabı üzerinde değişiklik yapmak için "
+"KullanıcıÖzellikleri bağlantısını kullanınız."
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "'%(theme_name)s' teması yüklenemiyor!"
+
+msgid "User preferences saved!"
+msgstr "Kullanıcı özellikleri kaydedildi!"
+
+msgid "Default"
+msgstr "Öntanımlı"
+
+msgid "<Browser setting>"
+msgstr "<Tarayıcı ayarları>"
+
+msgid "the one preferred"
+msgstr "Tercih edilen"
+
+msgid "free choice"
+msgstr "İsteğe bağlı seçim"
+
+msgid "Select User"
+msgstr "Kullanıcı Seç"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Preferred theme"
+msgstr "Tercih edilen tema"
+
+msgid "Editor Preference"
+msgstr "Metin Düzenleyicisi Özellikleri"
+
+msgid "Editor shown on UI"
+msgstr "Metin düzenleyicisinin görüntüleneceği arabirim"
+
+msgid "Time zone"
+msgstr "Zaman dilimi"
+
+msgid "Your time is"
+msgstr "Şu an saatiniz"
+
+msgid "Server time is"
+msgstr "Sunucu saati"
+
+msgid "Date format"
+msgstr "Tarih biçimi"
+
+msgid "Preferred language"
+msgstr "Tercih edilen dil"
+
+msgid "General options"
+msgstr "Genel seçenekler"
+
+msgid "Quick links"
+msgstr "Hızlı erişim bağlantıları"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr ""
+"Geçerli bir e-posta adresi belirtmediğiniz sürece bu liste çalışmayacaktır!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Kayıt olunan wiki sayfaları (satır başına tek bir düzenli ifade)"
+
+msgid "Create Profile"
+msgstr "Profil Oluştur"
+
+msgid "Mail me my account data"
+msgstr "Hesap bilgilerimi e-posta ile gönder"
+
+msgid "Email"
+msgstr "E-Posta"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+
+msgid "Name"
+msgstr "İsim"
+
+msgid "Password"
+msgstr "Parola"
+
+msgid "Login"
+msgstr "Giriş"
+
+msgid "Action"
+msgstr "İşlev"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "\"%(token)s\" tümcesi için \"=\" karakteri girilmeliydi."
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "\"%(token)s\" anahtarı için yanlış değer"
+
+msgid "You are not allowed to edit this page."
+msgstr ""
+"Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
+
+msgid "Page is immutable!"
+msgstr "Sayfa değiştirilemez!"
+
+msgid "Cannot edit old revisions!"
+msgstr "Eski revizyonlar üzerinde değişiklik yapılamıyor!"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
+"Tarafınızca tutulan sayfa kilidi zaman aşımına uğradı. Düzenleme çakışmaları "
+"yaşanabilir!"
+
+#, fuzzy, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "\"%(pagename)s\" için Önizleme"
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "%(pagename)s Sayfasını Düzelt"
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "\"%(pagename)s\" için Önizleme"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "%(lock_page)s üzerindeki düzenleme kilitiniz zaman aşımına uğradı!"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr ""
+"%(lock_page)s üzerindeki düzenleme kilitiniz bir kaç dakika sonra zaman "
+"aşımına uğrayacak."
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr ""
+"%(lock_page)s üzerindeki düzenleme kilitiniz bir kaç saniye sonra zaman "
+"aşımına uğrayacak."
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr ""
+"Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından silindi!"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr ""
+"Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından "
+"değiştirildi!"
+
+#, fuzzy
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"Üzerinde düzenleme yapmakta olduğunuz sayfa başka biri tarafından "
+"değiştirildi!\n"
+"Lütfen sayfanın yeni halini önizleme ile görüntüledikten sonra kendi "
+"değişikliklerinizi kaydedin.\n"
+"Yapılan düzenlemeleri görmek için %(difflink)s listesine bakabilirsiniz."
+
+#, fuzzy
+msgid "[Content loaded from draft]"
+msgstr "[İçerik %s sayfasından yüklendi.]"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[İçerik %s sayfasından yüklendi.]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[%s şablonu bulunamadı.]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[%s sayfasını okuyamazsınız.]"
+
+#, python-format
+msgid ""
+"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"(draft_timestamp_str)s) can be loaded instead of the current revision %"
+"(page_rev)d by using the load draft button - in case you lost your last edit "
+"somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+
+#, python-format
+msgid "Describe %s here."
+msgstr "Kullanılan %s değerini tanımlayınız."
+
+msgid "Check Spelling"
+msgstr "İmla Denetimi"
+
+msgid "Save Changes"
+msgstr "Değişiklikleri Kaydet"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"'''%(save_button_text)s''' düğmesine basarak, deüzenlemelerinizi %"
+"(license_link)s altına koymuş olursunuz.\n"
+"Eğer bunun olmasını istemiyorsanız, '''%(cancel_button_text)s''' düğmesine "
+"basarak değişikliklerinizi iptal edebilirsiniz."
+
+msgid "Preview"
+msgstr "Önizleme"
+
+msgid "Text mode"
+msgstr ""
+
+msgid "Load Draft"
+msgstr ""
+
+msgid "Comment:"
+msgstr "Yorum:"
+
+msgid "<No addition>"
+msgstr "<Ekleme yok>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "%(category)s katagorisine ekle"
+
+msgid "Trivial change"
+msgstr "Küçük değişiklik"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "İşe yaramayan boşluk karakterlerini temizle"
+
+msgid "The wiki is currently not reachable."
+msgstr ""
+
+msgid ""
+"The remote version of MoinMoin is too old, version 1.6 is required at least."
+msgstr ""
+
+msgid "Invalid username or password."
+msgstr ""
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr ""
+
+msgid "The theme name is not set."
+msgstr ""
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "'%(filename)s' dosyası yüklenemedi."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "%s bir MoinMoin paket dosyası değil."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr ""
+
+msgid "Invalid package file header."
+msgstr ""
+
+msgid "Package file format unsupported."
+msgstr ""
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "The file %s was not found in the package."
+msgstr "%s bir MoinMoin paket dosyası değil."
+
+msgid "Your changes are not saved!"
+msgstr "Düzenlemeleriniz kaydedilmedi!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Sayfa adı çok uzun, kısa bir ad girmeyi deneyin."
+
+msgid "GUI Mode"
+msgstr "Grafiksel Kullanıcı Arayüzü Kipi"
+
+msgid "Edit was cancelled."
+msgstr "Düzenleme iptal edildi."
+
+#, fuzzy
+msgid "You can't rename to an empty pagename."
+msgstr "Boş sayfalar kaydedilemez."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''{{{'%s'}}} adından bir sayfa zaten mevcut.'''\n"
+"\n"
+"Başka bir ad deneyiniz."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"İlgili dosya sistemi hatası sebebiyle sayfa adlandırımı başarısız oldu! "
+"Hata: %s"
+
+#, fuzzy
+msgid "You are not allowed to delete this page!"
+msgstr "Bu sayfayı geri almak için yeterli izne sahip değilsiniz!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Yaptığınız düzenlemeler için teşekkür ederiz."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "\"%s\" sayfası başarı ile silindi!"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The following page has been changed by %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+msgstr ""
+"Sayın Wiki kullanıcısı,\n"
+"\n"
+"%(sitename)s sitesinde yer alan bir wiki sayfa ya da katagorisine, "
+"düzenlemelerden haberdar olmak için üye olmuşsunuz.\n"
+"\n"
+"İlişikteki sayfa %(editor)s tarafından düzenlendi.\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"The comment on the change is:\n"
+"%(comment)s\n"
+"\n"
+msgstr ""
+"Değişiklik hakkındaki yorum:\n"
+"%(comment)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Yeni sayfa:\n"
+
+msgid "No differences found!\n"
+msgstr "Fark bulunamadı!\n"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)s\"%(pagename)s\" sayfası %(username)s tarafından "
+"değiştirildi"
+
+msgid "Trivial "
+msgstr "Küçük "
+
+msgid "Status of sending notification mails:"
+msgstr "Gönderilen uyarı mesajlarının durumu:"
+
+#, python-format
+msgid "[%(lang)s] %(recipients)s: %(status)s"
+msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "Sayfa kilitlenemiyor. Beklenmeyen hata. (errno=%d)"
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "Sayfa kilitlenemiyor. Kayıp 'current' dosyası?"
+
+msgid "You are not allowed to edit this page!"
+msgstr ""
+"Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz!"
+
+msgid "You cannot save empty pages."
+msgstr "Boş sayfalar kaydedilemez."
+
+msgid "You already saved this page!"
+msgstr "Bu sayfayı zaten kaydettiniz!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr ""
+
+msgid "You did not change the page content, not saved!"
+msgstr ""
+"Sayfa içeriğinde herhangi bir değişiklikte bulunmadığınızdan kayıt işlemi "
+"gerçekleşmedi!"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr ""
+"Yönetici haklarına sahip olmadığınız bir sayfanın ACL değerlerinde "
+"değişiklik yapamazsınız."
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"%(owner)s kullanıcısının sayfa üzerindeki kilidi %(mins_ago)d dakika önce "
+"zaman aşımına uğradı. Bu sebeple sayfayı kilitleme hakkına sahip kılındınız."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr ""
+"Diğer kullanıcıların sayfa üzerinde değişiklik yapmaları %(bumptime)s "
+"süresince bloke edilmiş durumda."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"Sayfa üzerinde değişiklik yaparken, diğer kullanıcılar bundan %(bumptime)s "
+"süresince haberdar tutulacaktır."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr ""
+"Önizleme yaparak sayfa üzerinde tuttuğunuz kilitin sürecini uzatabilirsiniz."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"Bu sayfa %(owner)s kullanıcısı tarafından %(timestamp)starihine kadar "
+"kilitlenmiştir. (%(mins_valid)d dakika)"
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.[[BR]]\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''[[BR]]\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"Bu sayfa %(owner)s kullancısı tarafından üzerinde değişiklik yapılmak üzere\n"
+"açılmış ya da en son %(timestamp)s tarihinde önizleme yapılmıştır.[[BR]]\n"
+"'''Herhangi bir düzenleme çakışmasından kaçınmanız açısından sayfa üzerinde\n"
+"%(mins_valid)d dakikalığına değişiklik yapmamanız önerilir.'''[[BR]]\n"
+"Metin düzenleyicisinden çıkmak için İptal seçeneğini kullanabilirsiniz."
+
+msgid "<unknown>"
+msgstr "<bilinmiyor>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s?action=login\n"
+msgstr ""
+"Kullanıcı Adı: %s\n"
+"\n"
+"Giriş Parolası: %s\n"
+"\n"
+"Giriş için URL: %s/%s?action=login\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Hesap bilgilerinizin bu e-posta adresine gönderilmesi istemi alındı.\n"
+"\n"
+"Eğer parolanızı kaybettiyseniz, aşağıdaki bilgileri kullanarak belirtilen "
+"parolayı wiki'nin ilgili form alanına olduğu gibi giriniz. (Bunun için "
+"kopyala/yapıştır kullanabilirsiniz.)\n"
+"\n"
+"Başarılı bir şekilde giriş yaptıktan sonra, isteğe bağlı olarak hatırlamanız "
+"daha kolay olabilecek yeni bir parola girebilirsiniz.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Wiki hesap bilgileriniz"
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+"Sayfanın yedeklenmiş içeriği eski olduğundan arama sonuçlarında "
+"listelenmeyecektir!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "%(date)s tarihine ait %(rev)d revizyonu"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "%(page)s sayfasından yönlendirildi."
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Bu sayfa sizi \"%(page)s\" sayfasına yönlendirecektir."
+
+#, python-format
+msgid ""
+"~-If you submit this form, the submitted values will be displayed.\n"
+"To use this form on other pages, insert a\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"macro call.-~\n"
+msgstr ""
+"~-Formu gönderdiğiniz taktirde girilen değerler görüntülenecektir.\n"
+"Bu formu diğer sayfalarda da kullanmak için\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"makro çağrısını kullanabilirsiniz.-~\n"
+
+msgid "Create New Page"
+msgstr "Yeni Sayfa Oluştur"
+
+msgid "You are not allowed to view this page."
+msgstr "Sayfanın görüntülenmesi için yeterli izne sahip değilsiniz."
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+#, fuzzy
+msgid "seconds"
+msgstr "%.2f saniye"
+
+#, fuzzy
+msgid "Previous"
+msgstr "Önizleme"
+
+#, fuzzy
+msgid "Next"
+msgstr "Metin"
+
+msgid "current"
+msgstr ""
+
+msgid "match"
+msgstr "eşle"
+
+msgid "matches"
+msgstr "eşleniyor"
+
+msgid "Go To Page"
+msgstr "Sayfaya Git"
+
+msgid "Include system pages"
+msgstr "Sistem sayfalarını içer"
+
+msgid "Exclude system pages"
+msgstr "Sistem sayfalarını çıkar"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "{{{\"%s\"}}} yerine daha seçici bir arama tümcesi kullanınız."
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "'%s' metninde düzenli ifade regex hatası"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Yanlış tarih bilgisi '%s'"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Desteklenmeyen tarama şeması: '%(scheme)s'"
+
+msgid "No parent page found!"
+msgstr "Komşu sayfa bulunamadı!"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Slideshow"
+msgstr "Slayt Gösterimi"
+
+msgid "Start"
+msgstr "Başlat"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Slayt %(pos)d/%(size)d"
+
+msgid "Search Titles"
+msgstr "Başlıkları Ara"
+
+msgid "Display context of search results"
+msgstr "Arama sonuçlarının içerik gösterimi"
+
+msgid "Case-sensitive searching"
+msgstr "Büyük-küçük harf duyarlı arama"
+
+msgid "Search Text"
+msgstr "Metin Arama"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Yeni ek dosya gönder \"%(filename)s\""
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr ""
+
+msgid "No orphaned pages in this wiki."
+msgstr "Wiki üzerinde yetim sayfa bulunmamakta."
+
+msgid "Python Version"
+msgstr "Python Sürümü"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin Sürümü"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Sürüm %s [Revizyon %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite Sürümü"
+
+msgid "Number of pages"
+msgstr "Sayfa sayısı"
+
+msgid "Number of system pages"
+msgstr "Sistem sayfası sayısı"
+
+msgid "Accumulated page sizes"
+msgstr "Toplanan sayfa sayısı"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr ""
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr ""
+
+msgid "Entries in edit log"
+msgstr "Düzenleme kayıtlarındaki girdiler"
+
+msgid "NONE"
+msgstr "YOK"
+
+msgid "Global extension macros"
+msgstr "Genel geliştirilmiş makrolar"
+
+msgid "Local extension macros"
+msgstr "Yerel geliştirilmiş makrolar"
+
+msgid "Global extension actions"
+msgstr "Genel geliştirilmiş işlemler"
+
+msgid "Local extension actions"
+msgstr "Yerel geliştirilmiş işlemler"
+
+msgid "Global parsers"
+msgstr "Genel ayrıştırıcılar"
+
+msgid "Local extension parsers"
+msgstr "Yerel geliştirilmiş makrolar"
+
+msgid "Disabled"
+msgstr "Etkisiz"
+
+msgid "Enabled"
+msgstr "Etkin"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "En son %(time)s tarihinde düzenlendi."
+
+msgid "N/A"
+msgstr "Bilinmiyor"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
+#, fuzzy
+msgid "Xapian search"
+msgstr "Lupy arama"
+
+#, fuzzy
+msgid "Xapian Version"
+msgstr "Lupy arama"
+
+#, fuzzy
+msgid "Xapian stemming"
+msgstr "Lupy arama"
+
+msgid "Active threads"
+msgstr "Etkin yivler"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "%(pagename)s sayfasında alıntı bulunmamakta."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "'%(filename)s' ekinin gönderimi."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "'%(filename)s' eki silindi."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "'%(filename)s' çizimi kaydedildi."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "%(rev)d revizyonuna geri al."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm önce"
+
+msgid "(no bookmark set)"
+msgstr "(imleyici atanmamış)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(şuanki değeri %s)"
+
+#, fuzzy
+msgid "Delete bookmark"
+msgstr "İmleyici Sil"
+
+msgid "Set bookmark"
+msgstr "İmleyici Ata"
+
+msgid "[Bookmark reached]"
+msgstr "[İmleyiciye ulaşıldı]"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Geçersiniz {{{include}}} argümanları: \"%s\""
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "\"%s\" için sonuç bulunamadı."
+
+msgid "edit"
+msgstr "düzenle"
+
+#, fuzzy
+msgid "Contents"
+msgstr "YardimKonuları"
+
+msgid "You need to provide a chart type!"
+msgstr "Bir çizelge tipi belirtmek zorundasınız!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Geçersiz çizelge tipi: \"%s\""
+
+#, fuzzy
+msgid "Search for items"
+msgstr "Başlıkları Ara"
+
+msgid "containing all the following terms"
+msgstr ""
+
+msgid "containing one or more of the following terms"
+msgstr ""
+
+msgid "not containing the following terms"
+msgstr ""
+
+#, fuzzy
+msgid "belonging to one of the following categories"
+msgstr "Bu sayfa şu sayfalara bağlantı göstermekte:"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+#, fuzzy
+msgid "any language"
+msgstr "Tercih edilen dil"
+
+msgid "Language"
+msgstr ""
+
+#, fuzzy
+msgid "File Type"
+msgstr "Dosya Adı"
+
+#, fuzzy
+msgid "Search only in titles"
+msgstr "Başlıkları Ara"
+
+#, fuzzy
+msgid "Case-sensitive search"
+msgstr "Büyük-küçük harf duyarlı arama"
+
+msgid "Exclude underlay"
+msgstr ""
+
+#, fuzzy
+msgid "No system items"
+msgstr "Sistem sayfası sayısı"
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
+msgid "Markup"
+msgstr "İm"
+
+msgid "Display"
+msgstr "Göster"
+
+msgid "No wanted pages in this wiki."
+msgstr "Wiki üzerinde aranan bir sayfa yer almamakta."
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr "'%(server)s' e-posta sunucusuna bağlanılamadı: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "E-posta gönderilemedi."
+
+msgid "Mail sent OK"
+msgstr "E-posta gönderildi."
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+#, fuzzy
+msgid "Content"
+msgstr "YardimKonuları"
+
+msgid "Attachments"
+msgstr "Ekler"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT seçeneği etkisiz halde."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr ""
+"XSLT işlemcisi henüz desteklenmiyor, lütfen 4suite 1.x sürümünü yükleyiniz."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "%(errortype)s işlem hatası"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr ""
+"\"%(key)s\" ardından \"%(wanted)s\" beklenmekte. Onun yerine \"%(token)s\" "
+"bulundu."
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "\"%(token)s\" öncesi \"%(key)s\" tamsayısı beklenmekte."
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\" öncesi \"%(arg)s\" tamsayısı beklenmekte."
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "\"%(key)s\" öncesi \"%(arg)s\" renk değeri beklenmekte."
+
+#, fuzzy
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Tekrar yapılandırılan metnin çevrisi gerçekleştirilemiyor. Lütfen "
+"{{{docutils}}} paketini yükleyin."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**En fazla {{{include}}} ifadesi kullanım sayısı aşıldı**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Referans gösterilen %s sayfası bulunamadı**"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Yeni çizim oluştur: \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "%(filename)s çizimini düzenle"
+
+msgid "Toggle line numbers"
+msgstr ""
+
+msgid "Line"
+msgstr "Satır"
+
+msgid "No differences found!"
+msgstr "Fark bulunamadı!"
+
+msgid "Deletions are marked like this."
+msgstr "Silme işlemleri bu şekilde işaretleniyor."
+
+msgid "Additions are marked like this."
+msgstr "Eklemeler bu şekilde işaretleniyor."
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Üzgünüz! \"%(content)s\" içeriğine izin verilmediğinden dolayı sayfa "
+"kaydedilemiyor."
+
+msgid "Page"
+msgstr "Sayfa"
+
+msgid "User"
+msgstr "Kullanıcı"
+
+msgid "Diffs"
+msgstr "Farklar"
+
+msgid "Info"
+msgstr "Bilgi"
+
+msgid "Unsubscribe"
+msgstr "Üyelik İptali"
+
+msgid "Subscribe"
+msgstr "ÜyeOl"
+
+msgid "Raw"
+msgstr "Ham"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Çıktı Al"
+
+msgid "View"
+msgstr "Görüntüle"
+
+msgid "Home"
+msgstr "Ev"
+
+msgid "Up"
+msgstr "Yukarı"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[SİLİNDİ]"
+
+msgid "[UPDATED]"
+msgstr "[YENİLENDİ]"
+
+msgid "[NEW]"
+msgstr "[YENİ]"
+
+msgid "[DIFF]"
+msgstr "[FARK]"
+
+msgid "[BOTTOM]"
+msgstr "[ALT]"
+
+msgid "[TOP]"
+msgstr "[ÜST]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Bu başlık için tam metin araması gerçekleştirmek için tıklayınız"
+
+#, fuzzy
+msgid "Preferences"
+msgstr "KullanıcıÖzellikleri"
+
+msgid "Logout"
+msgstr "Çıkış"
+
+msgid "Clear message"
+msgstr "Mesajı temizle"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "En son %(time)s tarihinde %(editor)s tarafından düzenlendi."
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "En son %(time)s tarihinde düzenlendi."
+
+msgid "Search:"
+msgstr "Arama: "
+
+msgid "Text"
+msgstr "Metin"
+
+msgid "Titles"
+msgstr "Başlıklar"
+
+msgid "Search"
+msgstr "Arama"
+
+msgid "More Actions:"
+msgstr "Diğer İşlevler:"
+
+msgid "------------"
+msgstr "------------"
+
+msgid "Raw Text"
+msgstr "Ham Metin Gösterimi"
+
+msgid "Print View"
+msgstr "Yazıcı Çıktısı Görünümü"
+
+msgid "Delete Cache"
+msgstr "Önbelleği Temizle"
+
+msgid "Rename Page"
+msgstr "Sayfayı Yeniden Adlandır"
+
+msgid "Delete Page"
+msgstr "Sayfayı Sil"
+
+msgid "Like Pages"
+msgstr "Benzer Sayfalar"
+
+msgid "Local Site Map"
+msgstr "Yerel Site Haritası"
+
+#, fuzzy
+msgid "My Pages"
+msgstr "Sayfa"
+
+#, fuzzy
+msgid "Subscribe User"
+msgstr "ÜyeOl"
+
+#, fuzzy
+msgid "Remove Spam"
+msgstr "Bağlantı Sil"
+
+#, fuzzy
+msgid "Package Pages"
+msgstr "Benzer Sayfalar"
+
+msgid "Render as Docbook"
+msgstr ""
+
+msgid "Do"
+msgstr "Gerçekleştir"
+
+msgid "Edit (Text)"
+msgstr "Düzenle (Metin)"
+
+msgid "Edit (GUI)"
+msgstr "Düzenle (Arayüz)"
+
+msgid "Immutable Page"
+msgstr "Değiştirilemez Sayfa"
+
+msgid "Remove Link"
+msgstr "Bağlantı Sil"
+
+msgid "Add Link"
+msgstr "Bağlantı Ekle"
+
+#, python-format
+msgid "Show %s days."
+msgstr "%s günlük göster."
+
+msgid "Wiki Markup"
+msgstr "Wiki İmleme"
+
+msgid "DeleteCache"
+msgstr "ÖnbelleğiTemizle"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s önbelleğe aktarıldı)"
+
+msgid "Or try one of these actions:"
+msgstr "Ya da bu işlevlerden birini deneyin:"
+
+msgid "FrontPage"
+msgstr "AnaSayfa"
+
+msgid "RecentChanges"
+msgstr "Düzenlemeler"
+
+msgid "TitleIndex"
+msgstr "Başlıkİndeksi"
+
+msgid "WordIndex"
+msgstr "Kelimeİndeksi"
+
+msgid "FindPage"
+msgstr "SayfaBul"
+
+msgid "SiteNavigation"
+msgstr "SiteGezinimi"
+
+msgid "HelpContents"
+msgstr "YardimKonuları"
+
+msgid "HelpOnFormatting"
+msgstr "YardımBiçimHakkında"
+
+msgid "UserPreferences"
+msgstr "KullanıcıÖzellikleri"
+
+msgid "WikiLicense"
+msgstr "WikiLisansı"
+
+msgid "MissingPage"
+msgstr "KayıpSayfa"
+
+msgid "MissingHomePage"
+msgstr "KayıpKişiselSayfa"
+
+msgid "Mon"
+msgstr "Pzt"
+
+msgid "Tue"
+msgstr "Sal"
+
+msgid "Wed"
+msgstr "Çrş"
+
+msgid "Thu"
+msgstr "Prş"
+
+msgid "Fri"
+msgstr "Cum"
+
+msgid "Sat"
+msgstr "Cts"
+
+msgid "Sun"
+msgstr "Paz"
+
+msgid "AttachFile"
+msgstr "DosyaEkle"
+
+msgid "DeletePage"
+msgstr "SayfaSil"
+
+msgid "LikePages"
+msgstr "BenzerSayfalar"
+
+msgid "LocalSiteMap"
+msgstr "YerelSiteHaritası"
+
+msgid "RenamePage"
+msgstr "SayfaAdlandır"
+
+msgid "SpellCheck"
+msgstr "İmlaDenetimi"
+
+#, python-format
+msgid "Unknown action %(action_name)s."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+#, fuzzy
+msgid "Login and try again."
+msgstr "%s ve tekrar deneyin."
+
+msgid "Charts are not available!"
+msgstr "Çizelgeler etkisiz halde!"
+
+msgid "Page Size Distribution"
+msgstr "Sayfa Boyutu Dağılımı"
+
+msgid "page size upper bound [bytes]"
+msgstr "Sayfa boyutu üst sınırı [bayt]"
+
+msgid "# of pages of this size"
+msgstr "Belirtilen boyuttaki sayfa sayısı"
+
+msgid "User agent"
+msgstr "İstemci aracı"
+
+msgid "Others"
+msgstr "Diğer"
+
+msgid "Distribution of User-Agent Types"
+msgstr "Kullanıcı İstemci Araçlarının Dağılımı"
+
+msgid "Views/day"
+msgstr "Gösterim Sayısı/Gün"
+
+msgid "Edits/day"
+msgstr "Düzenleme Sayısı/Gün"
+
+msgid "Page hits and edits"
+msgstr "Sayfa ziyaret ve düzenlemeleri"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(filterpage)s için %(chart_title)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"yeşil=gösterim\n"
+"red=düzenleme"
+
+msgid "date"
+msgstr "tarih"
+
+msgid "# of hits"
+msgstr "Ziyaret sayısı"
+
+msgid ""
+" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontal rule.\n"
+" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
+"(=====)]].\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+"double quotes\"])]]; url; [url]; [url label].\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+" Vurgulama:: [[Verbatim('')]]''italik''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''kalın'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''kalın "
+"italik'''''[[Verbatim(''''')]]; [[Verbatim('')]]''karışık ''[[Verbatim"
+"(''')]]'''''kalın'''[[Verbatim(''')]] ve italik''[[Verbatim('')]]; [[Verbatim"
+"(----)]] yatay çizgi.\n"
+" Başlıklar:: [[Verbatim(=)]] Başlık 1 [[Verbatim(=)]]; [[Verbatim(==)]] "
+"Başlık 2 [[Verbatim(==)]]; [[Verbatim(===)]] Başlık 3 [[Verbatim(===)]];   "
+"[[Verbatim(====)]] Başlık 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Başlık 5 "
+"[[Verbatim(=====)]].\n"
+" Listeler:: boşluk bıraktıktan sonra şu karakterlerden birini kullanınız: * "
+"imleçler; 1., a., A., i., I. numaralandırılmış imleçler; 1.#n "
+"numaralandırmaya n sayısından başla; sadece hizala.\n"
+" Bağlantılar:: [[Verbatim(BasHarfiBuyukKelimleriBirlestirin)]]; [[Verbatim"
+"([\"köşeli parantez ve çift tırnak\"])]]; url; [url]; [url başlık].\n"
+" Tablolar:: || hücre içeriği |||| 2 sütuna taşan hücre içeriği ||;    tablo "
+"ve başlıklardan sonra boşluk karakteri kullanılamaz.\n"
+"\n"
+"(!) Yardım için YardımBiçimHakkında veya SözdizimKılavuzu "
+"sayfalarınabakabilirsiniz.\n"
+
+msgid ""
+"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ---- \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) For more help, see the \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+msgstr ""
+
+msgid "UnSubscribe"
+msgstr "ÜyeliktenÇık"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr ""
+"E-posta adresimi (wiki ev sayfasını değil) kullanıcı bilgileri ile yayınla"
+
+msgid "Open editor on double click"
+msgstr "Çift tıklayınca metin düzenleyicisini aç"
+
+msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Henüz var olamayan sayfaların bağlantıları için soru işareti kullan"
+
+msgid "Show page trail"
+msgstr "Sayfa sonunu göster"
+
+msgid "Show icon toolbar"
+msgstr "Simgeli araç çubuğunu göster"
+
+msgid "Show top/bottom links in headings"
+msgstr "Başlıklarda aşağı/yukarı bağlantılarını göster"
+
+msgid "Show fancy diffs"
+msgstr "Farkları süslü göster"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Görüntülenen wiki sayfa adalarına boşluk karakteri ekle"
+
+msgid "Remember login information"
+msgstr "Giriş bilgilerini hatırla"
+
+msgid "Subscribe to trivial changes"
+msgstr "Küçük değişikliklerden haberdar ol"
+
+msgid "Disable this account forever"
+msgstr "Hesabı sonsuza dek etkisiz hale getir"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(AdSoyad kullanınız)"
+
+msgid "Alias-Name"
+msgstr "Takma İsim"
+
+msgid "Password repeat"
+msgstr "Parola (Tekrar)"
+
+msgid "(Only for password change or new account)"
+msgstr ""
+
+msgid "User CSS URL"
+msgstr "Kullanıcı CSS şablonu için URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(Kullanıcı CSS seçeneğini etkisiz hale getirmek için boş bırakınız)"
+
+msgid "Editor size"
+msgstr "Metin düzenleyicisi boyutu"
+
+msgid "Do it."
+msgstr ""
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr ""
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+#, fuzzy, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız."
+
+msgid "You must login to add a quicklink."
+msgstr "Hızlı erişim bağlantısı eklemek için giriş yapmalısınız."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Sayfa için sahip olduğunuz hızlı erişim bağlantısı kaldırıldı."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Sayfaya hızlı erişim için bağlantı eklendi."
+
+#, fuzzy, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "Boş kullanıcı adı. Lütfen bir kullanıcı adı seçiniz."
+
+msgid "Missing password. Please enter user name and password."
+msgstr ""
+
+msgid "Sorry, login failed."
+msgstr ""
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[%d tane ek]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr "Sayfa için <a href=\"%(link)s\">%(count)s tane ek</a> yer almakta."
+
+msgid "Filename of attachment not specified!"
+msgstr "Ek için dosya adı belirtilmedi!"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "'%(filename)s' eki bulunmamakta!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Sayfada yer alan eklere referans göstermek için '''{{{attachment:dosya}}}''' "
+"ifadesini kullanabilirsiniz. (Aşağıdaki örnekte gösterildiği gibi.)\n"
+"Kesinlikle URL ile birlikte gelen {{{[get]}}} değerini bağlantıda "
+"kullanmayın. Bu değişken rahatlıkla ayarlanabilir olduğundan ekin gösterdiği "
+"dosya yolunun kırılmasına neden olabilir."
+
+msgid "del"
+msgstr "sil"
+
+msgid "move"
+msgstr ""
+
+msgid "get"
+msgstr "getir"
+
+msgid "view"
+msgstr "görüntüle"
+
+msgid "unzip"
+msgstr "aç"
+
+msgid "install"
+msgstr "yükle"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "%(pagename)s sayfası için ek bulunmamakta."
+
+msgid "Edit drawing"
+msgstr "Çizimi düzenle"
+
+msgid "New Attachment"
+msgstr "Yeni Ek"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"Dosya gönderimi, asla yer alan bir dosyanın üzerine yazılmasına olanak\n"
+"tanımayacaktır. Dosya adlarının örtüşmesi durumunda, göndermek\n"
+"istediğiniz dosya adını değiştirmelisiniz. Aksi halde \"Yeniden Adlandır\"\n"
+"alanının boş bırakılması durumunda gönderilmek istenen dosyanın gerçek\n"
+"adı kullanılacaktır."
+
+msgid "File to upload"
+msgstr "Gönderilecek Dosya"
+
+msgid "Rename to"
+msgstr "Yeniden Adlandır"
+
+msgid "Upload"
+msgstr "Gönder"
+
+msgid "Attached Files"
+msgstr "Ekli Dosyalar"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Bu sayfaya ekte bulunmak için yeterli izne sahip değilsiniz."
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "Dosya ekleri bu wiki tarafından desteklenmemektedir."
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sayfa üzerinde çizim kaydetmek için yeterli izne sahip değilsiniz."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Dosya içeriği boş. Dosya adında yer alan ASCII olmayan karakterleri silerek "
+"tekrar deneyiniz."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Sayfa üzerindeki ekleri silmek için yeterli izne sahip değilsiniz."
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "Sayfa üzerindeki eklere ulaşmak için yeterli izne sahip değilsiniz."
+
+msgid "Move aborted!"
+msgstr ""
+
+#, fuzzy
+msgid "Please use the interactive user interface to move attachments!"
+msgstr "Lütfen sayfa silmek için etkileşimli kullanıcı arayüzünü kullanınız."
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Sayfa üzerindeki eklere ulaşmak için yeterli izne sahip değilsiniz."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
+
+msgid "You are not allowed to install files."
+msgstr "Bu sayfadan yükleme yapmak için yeterli izne sahip değilsiniz."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Sayfa üzerindeki ekleri listelemek için yeterli izne sahip değilsiniz."
+
+#, python-format
+msgid "Unsupported upload action: %s"
+msgstr "Desteklenmeyen dosya gönderim işlevi: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "\"%(pagename)s\" için Ekler"
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"'%(target)s' eki (%(bytes)d bayt) kaydedildi. (Dosyanın karşı taraftaki adı: "
+"'%(filename)s')"
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+"'%(target)s' adlı dosya eki zaten mevcut. (Dosyanın karşı taraftaki adı: '%"
+"(filename)s')"
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' already exists."
+msgstr "'%(filename)s' eki yüklendi."
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' moved to %(page)s."
+msgstr "'%(filename)s' eki bulunmamakta!"
+
+msgid "Nothing changed"
+msgstr ""
+
+#, python-format
+msgid "Page %(newpagename)s does not exists or you don't have enough rights."
+msgstr ""
+
+#, fuzzy
+msgid "Move aborted because empty page name"
+msgstr "Boş sayfalar kaydedilemez."
+
+#, fuzzy, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "'%(filename)s' ekinin gönderimi."
+
+msgid "Move aborted because empty attachment name"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+#, fuzzy
+msgid "New page name"
+msgstr "Yeni ad"
+
+#, fuzzy
+msgid "New attachment name"
+msgstr "Yeni Ek"
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "'%(filename)s' eki yüklendi."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Oluşacak dosyalar çok büyük (%(space)d kB fazla) olduğundan dolayı '%"
+"(filename)s' eki açılamıyor."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+".zip dosyası biçimindeki '%(filename)s' eki, oluşacak dosya sayısı çok fazla "
+"olduğundan açılmadı. (%(count)d adet fazla)"
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "'%(filename)s eki açıldı."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Oluşacak dosyalar çok büyük, zaten sistemde mevcut, diğer dizinlere taşıyor "
+"ya da kendi içinde .zip dosyası içerdiğinden dolayı '%(filename)s' eki "
+"açılmadı."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "%(target)s dosyası .zip biçiminde değil."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Ek '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Paket betiği: "
+
+msgid "File Name"
+msgstr "Dosya Adı"
+
+msgid "Modified"
+msgstr "Değiştirildi"
+
+msgid "Size"
+msgstr "Boyut"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Bilinmeyen dosya tipi. Ek doğrudan gösterilemiyor."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Bu sayfa daha önceden silindi ya da hiçbir zaman yaratılmadı!"
+
+msgid "New name"
+msgstr "Yeni ad"
+
+msgid "Optional reason for the renaming"
+msgstr "İsteğe bağlı yeniden adlandırma için yorum"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "\"%s\" için Bağlantı Listesi"
+
+msgid "Editor"
+msgstr "Düzenleyici"
+
+#, fuzzy
+msgid "Pages"
+msgstr "Sayfa"
+
+#, fuzzy
+msgid "Select Author"
+msgstr "Kullanıcı Seç"
+
+msgid "Revert all!"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to use this action."
+msgstr ""
+"Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
+
+#, fuzzy, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "Küçük değişikliklerden haberdar ol"
+
+msgid "Exception while calling rollback function:"
+msgstr ""
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+
+#, fuzzy
+msgid "Operation was canceled."
+msgstr "Düzenleme iptal edildi."
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr ""
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr ""
+
+msgid "A severe error occured:"
+msgstr ""
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr ""
+
+msgid "Synchronisation started -"
+msgstr ""
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s different "
+"pages over-all."
+msgstr ""
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr ""
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Page %s successfully merged."
+msgstr "\"%s\" sayfası başarı ile silindi!"
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr ""
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr ""
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(içerilen %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"İlgili %(badwords)d·kelime sözlükteki %(totalwords)d·tane %(localwords)"
+"skelime\n"
+"arasından bulunamayıp aşağıda işaretlenmiştir."
+
+msgid "Add checked words to dictionary"
+msgstr "İşaretli kelimeleri sözlüğe ekle"
+
+msgid "No spelling errors found!"
+msgstr "İmla hatası bulunmadı!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr ""
+"Okuma iznine sahip olmadığınız bir sayfa için imla denetimi "
+"gerçekleştiremezsiniz."
+
+#, fuzzy
+msgid "You are now logged out."
+msgstr "Bu sayfadan yükleme yapmak için yeterli izne sahip değilsiniz."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Okuma iznine sahip olmadığınız bir sayfaya kayıt olamazsınız."
+
+msgid "This wiki is not enabled for mail processing."
+msgstr "Bu wiki e-posta işlemleri için yapılandırılmadı."
+
+#, fuzzy
+msgid "You must log in to use subscriptions."
+msgstr "Sayfa üyeliği özelliğinden yararlanabilmek için giriş yapmalısınız."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
+"Sayfa üyeliği özelliğinden yararlanabilmek için KullanıcıÖzellikleri "
+"içerisinde e-posta adresinizi belirtiniz."
+
+#, fuzzy
+msgid "Your subscription to this page has been removed."
+msgstr "Sayfa üyeliğiniz silinmiştir."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Düzenli ifade kullanılarak girilen kayıtlar kaldırılamıyor!"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+"KullanıcıÖzellikleri içinde yer alan kayıtlı olunan sayfaların düzenli "
+"ifadelerini düzenle."
+
+msgid "You have been subscribed to this page."
+msgstr "Bu sayfaya üye oldunuz."
+
+msgid "General Information"
+msgstr "Genel Bilgi"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Sayfa boyutu: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "Sayfa içeriğinin SHA özeti:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Listelenen kullanıcılar bu sayfaya kayıt olmuş:"
+
+msgid "This page links to the following pages:"
+msgstr "Bu sayfa şu sayfalara bağlantı göstermekte:"
+
+msgid "Diff"
+msgstr "Fark"
+
+msgid "Comment"
+msgstr "Yorum"
+
+msgid "raw"
+msgstr "ham"
+
+msgid "print"
+msgstr "çıktı"
+
+msgid "revert"
+msgstr "geri al"
+
+msgid "Revision History"
+msgstr "Revizyon Geçmişi"
+
+msgid "No log entries found."
+msgstr "Kayıt girdisi bulunamadı."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "\"%s\" hakkında bilgi"
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "\"%(title)s\" başlığını göster"
+
+msgid "General Page Infos"
+msgstr "Genel Sayfa Bilgileri"
+
+msgid "Please log in first."
+msgstr ""
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+
+msgid "MyPages management"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Küçük değişikliklerden haberdar ol"
+
+#, fuzzy, python-format
+msgid "Subscribed for %s:"
+msgstr "ÜyeOl"
+
+msgid "Not a user:"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to perform this action."
+msgstr ""
+"Bu sayfa üzerinde değişiklik yapmak için yeterli izne sahip değilsiniz."
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Başlık Arama: \"%s\""
+
+#, fuzzy, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Başlık Arama: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Metin Arama: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. [[BR]]"
+msgstr ""
+
+#, fuzzy
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr "Bu başlık için tam metin araması gerçekleştirmek için tıklayınız"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+
+msgid "Wiki Backup / Restore"
+msgstr ""
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+#, fuzzy
+msgid "You are not allowed to do remote backup."
+msgstr "Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr ""
+
+msgid "You are not allowed to revert this page!"
+msgstr "Bu sayfayı geri almak için yeterli izne sahip değilsiniz!"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "\"%s\" için Yerel Site Haritası"
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "\"%s\" adında bir sayfa yok!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr ""
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr ""
+
+msgid "Package pages"
+msgstr ""
+
+msgid "Package name"
+msgstr ""
+
+msgid "List of page names - separated by a comma"
+msgstr ""
+
+msgid "No older revisions available!"
+msgstr "Eski revizyon bulunmamakta!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "\"%s\" farkı"
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "%d ve %d revizyonları arasındaki farklar"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(%d versiyon karşılaştırılıyor)"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Sayfa zaten %(count)d kere kaydedilmiş!"
+
+msgid "(ignoring whitespace)"
+msgstr "(boşluk karakterleri gözardı ediliyor)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Boşluk karakteri miktarındaki değişiklikleri gözardı et"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "\"%s\" adına benzer tek bir sayfa bulundu; oraya yönlendiriliyorsunuz."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "\"%s\" sayfasına benzer sayfalar"
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "\"%(title)s\" için %(matchcount)d sonuç: %(matches)s"
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Yeni sayfa yaratmak için bir sayfa adı belirtmeniz gerekmekte."
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Optional reason for the deletion"
+msgstr "İsteğe bağlı silinme nedeni"
+
+msgid "Really delete this page?"
+msgstr "Bu sayfayı silmek istediğinize emin misiniz?"
+
+#~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+#~ msgstr "## \"%(pagename)s\" sayfasının yedeği %(date)s tarihinde alındı."
+
+#~ msgid "A backup of your changes is [%(backup_url)s here]."
+#~ msgstr ""
+#~ "Yaptığınız değişikliklerin yedeğine %(backup_url)s sayfasından "
+#~ "ulaşabilirsiniz."
+
+#~ msgid "Show chart \"%(title)s\""
+#~ msgstr "\"%(title)s\" çizelgesini göster"
+
+#~ msgid "set bookmark"
+#~ msgstr "imleyici ata"
+
+#~ msgid "You are not allowed to do %s on this page."
+#~ msgstr "Sayfa üzerinde %s işlemi yapmak için yeterli izne sahip değilsiniz."
+
+#~ msgid "%(hits)d results out of about %(pages)d pages."
+#~ msgstr "%(pages)d sayfa içinden %(hits)d sonuç bulundu"
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Gerekli \"%(attrname)s\" niteleyicisi eksik"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Girilen form verisi: "
+
+#~ msgid "Plain title index"
+#~ msgstr "Düz başlık indeksi"
+
+#~ msgid "XML title index"
+#~ msgstr "XML başlık indeksi"
+
+#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+#~ msgstr "Ayrıştırıcılar"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "Sayfa, üzerinde düzenleme yaptığınız esnada başka bir kullanıcı "
+#~ "tarafından değiştirildi.\n"
+#~ "\n"
+#~ "Lütfen şu adımları takip ediniz: Tarayıcınızın geri butonunu kullanarak "
+#~ "bir önceki sayfaya gidip oradan gerçekleştirmiş olduğunuz düzenlemeleri "
+#~ "kopyalayınız. Tekrar bu sayfaya gelerek MetniDüzenle seçeneğini seçiniz.\n"
+#~ "Ardından kopyalmış olduğunuz düzenlemeleri tekrar ekleyip kaydediniz.\n"
+#~ "\n"
+#~ "''Kopyaladığınız eski düzenlemeleri hemen tekrar kaydetmeden önce, "
+#~ "lütfensizden önce değişiklikte bulunmuş kişinin düzeltmelerini de göz "
+#~ "önünde bulundurunuz.\n"
+#~ "Aksi halde onun değişiklikleri göz ardı edilip silineceğinden, bu oldukça "
+#~ "kaba bir davranış olacaktır!''\n"
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "Ana sayfa yerine, son ziyaret edilen sayfayı görüntüle"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(Sadece parola değiştirirken)"
+
+#~ msgid "Filename"
+#~ msgstr "Dosya Adı"
