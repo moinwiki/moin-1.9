@@ -235,6 +235,7 @@ class DefaultConfig:
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
 
+    edit_bar = ['Edit', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'] 
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
