@@ -1053,33 +1053,28 @@ actionsMenuInit('%(label)s');
         This is separate method to make it easy to customize the
         edtibar in sub classes.
         """
-
-        editbar_items = {'Edit': self.editorLink(page),
-                          self.request.cfg.supplementation_page_name:
-                          self.supplementation_page_nameLink(page),
-                          'Info': self.infoLink(page),
-                          'Subscribe': self.subscribeLink(page),
-                          'Quicklink': self.quicklinkLink(page),
-                          'Attachments': self.attachmentsLink(page),
-                          'ActionsMenu': self.actionsMenu(page)
-                          }
-        edit_bar = [u'Edit', u'Info', u'Subscribe', u'Quicklink', u'Attachments', u'ActionsMenu', ]
-        if self.request.cfg.supplementation_page is True:
-            if self.request.getPragma('supplementation-page', 1) == 'off':
-                edit_bar = edit_bar
-            else:
-                edit_bar.insert(1, self.request.cfg.supplementation_page_name)
-        else:
-            if self.request.getPragma('supplementation-page', 1) == 'on':
-                edit_bar.insert(1, self.request.cfg.supplementation_page_name)
-            else:
-                edit_bar = edit_bar
-
-
-        allowed_action = []
-        for action in edit_bar:
-            allowed_action.append(editbar_items[action])
-        return allowed_action
+        editbar_actions = []
+        for editbar_item in self.request.cfg.edit_bar:
+             if editbar_item == 'Discussion':
+                 if self.request.cfg.supplementation_page is False:
+                     if self.request.getPragma('supplementation-page', 1) in ['on', '1']:
+                         editbar_actions.append(self.supplementation_page_nameLink(page))
+                 elif self.request.cfg.supplementation_page is True:
+                     if not self.request.getPragma('supplementation-page', 1) in ['off', '0']:
+                         editbar_actions.append(self.supplementation_page_nameLink(page))
+             elif editbar_item == 'Edit':
+                  editbar_actions.append(self.editorLink(page))
+             elif editbar_item == 'Info':
+                  editbar_actions.append(self.infoLink(page))
+             elif editbar_item == 'Subscribe':
+                  editbar_actions.append(self.subscribeLink(page))
+             elif editbar_item == 'Quicklink':
+                  editbar_actions.append(self.quicklinkLink(page))
+             elif editbar_item == 'Attachments':
+                  editbar_actions.append(self.attachmentsLink(page))
+             elif editbar_item == 'ActionsMenu':
+                 editbar_actions.append(self.actionsMenu(page))
+        return editbar_actions
 
     def supplementation_page_nameLink(self, page):
         """  discussion for page """
