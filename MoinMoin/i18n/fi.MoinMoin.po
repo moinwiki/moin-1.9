@@ -1,0 +1,2306 @@
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language fi
+
+#
+# MoinMoin fi system text translation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MoinMoin 1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"PO-Revision-Date: 2006-10-15 03:25+0300\n"
+"Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
+"Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Direction: ltr\n"
+"X-Language: Suomi\n"
+"X-Language-in-English: Finnish\n"
+"X-HasWikiMarkup: True\n"
+
+msgid ""
+"This wiki is not enabled for mail processing.\n"
+"Contact the owner of the wiki, who can enable email."
+msgstr ""
+"Sähköpostia ei ole otettu käyttöön tässä wikissä.\n"
+"Ota yhteyttä wikin omistajaan, joka voi tehdä sen."
+
+msgid "Please provide a valid email address!"
+msgstr "Anna kelvollinen sähköpostiosoite!"
+
+#, python-format
+msgid "Found no account matching the given email address '%(email)s'!"
+msgstr "Sähköpostiosoitetta '%(email)s' vastaavaa käyttäjää ei löytynyt!"
+
+msgid "Use UserPreferences to change your settings or create an account."
+msgstr ""
+"Käytä sivua KäyttäjäAsetukset asetusten vaihtamiseen ja tunnuksen luomiseen."
+
+msgid "Empty user name. Please enter a user name."
+msgstr "Tyhjä käyttäjänimi. Anna käyttäjänimi."
+
+#, python-format
+msgid ""
+"Invalid user name {{{'%s'}}}.\n"
+"Name may contain any Unicode alpha numeric character, with optional one\n"
+"space between words. Group page name is not allowed."
+msgstr ""
+"{{{'%s'}}} on kelvoton käyttäjänimi.\n"
+"Nimi voi muodostua mistä tahansa Unicoden kirjain- ja numeromerkeistä, ja \n"
+"sanojen välissä voi olla yksi välilyönti. Ryhmäsivun nimeä ei sallita."
+
+msgid "This user name already belongs to somebody else."
+msgstr "Tämä käyttäjänimi kuuluu jo jollekin toiselle."
+
+msgid "Passwords don't match!"
+msgstr "Salasanat eivät vastaa!"
+
+msgid "Please specify a password!"
+msgstr "Mainitse salasana!"
+
+msgid ""
+"Please provide your email address. If you lose your login information, you "
+"can get it by email."
+msgstr ""
+"Anna sähköpostiosoitteesi. Jos hukkaat kirjautumistietosi, voit saada ne "
+"sähköpostitse."
+
+msgid "This email already belongs to somebody else."
+msgstr "Tämä sähköposti kuuluu jo jollekin toiselle."
+
+msgid "User account created! You can use this account to login now..."
+msgstr "Käyttäjätili luotu! Nyt voit käyttää sitä kirjautumiseen..."
+
+msgid "Use UserPreferences to change settings of the selected user account"
+msgstr "Käytä sivua KäyttäjäAsetukset valitun käyttäjän asetusten vaihtamiseen"
+
+#, python-format
+msgid "The theme '%(theme_name)s' could not be loaded!"
+msgstr "Teemaa '%(theme_name)s' ei voida ladata!"
+
+msgid "User preferences saved!"
+msgstr "Käyttäjäasetukset tallennettu!"
+
+msgid "Default"
+msgstr "oletusarvo"
+
+msgid "<Browser setting>"
+msgstr "<selaimen asetus>"
+
+msgid "the one preferred"
+msgstr "suosikki"
+
+msgid "free choice"
+msgstr "valittavissa"
+
+msgid "Select User"
+msgstr "Valitse käyttäjä"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Preferred theme"
+msgstr "Suosikkiulkoasu"
+
+msgid "Editor Preference"
+msgstr "Suosikkimuokkaustapa"
+
+msgid "Editor shown on UI"
+msgstr "Käytettävä muokkaustapa"
+
+msgid "Time zone"
+msgstr "Aikavyöhyke"
+
+msgid "Your time is"
+msgstr "Aikasi on"
+
+msgid "Server time is"
+msgstr "Palvelimen aika on"
+
+msgid "Date format"
+msgstr "Päivämäärän muoto"
+
+msgid "Preferred language"
+msgstr "Suosikkikieli"
+
+msgid "General options"
+msgstr "Yleiset asetukset"
+
+msgid "Quick links"
+msgstr "Pikalinkit"
+
+msgid "This list does not work, unless you have entered a valid email address!"
+msgstr "Tämä lista ei toimi, ellet ole antanut kelpoa sähköpostiosoitetta!"
+
+msgid "Subscribed wiki pages (one regex per line)"
+msgstr "Tilatut wikisivut (yksi regex per rivi)"
+
+msgid "Create Profile"
+msgstr "Luo profiili"
+
+msgid "Mail me my account data"
+msgstr "Sähköpostita minulle käyttäjätietoni"
+
+msgid "Email"
+msgstr "Sähköpostiosoite"
+
+#, python-format
+msgid ""
+"To create an account or recover a lost password, see the %(userprefslink)s "
+"page."
+msgstr ""
+"Luodaksesi tunnuksen tai selvittääksesi kadonneen salasanan, käytä sivua %"
+"(userprefslink)s."
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "Password"
+msgstr "Salasana"
+
+msgid "Login"
+msgstr "Kirjaudu sisään"
+
+msgid "Action"
+msgstr "Toiminto"
+
+#, python-format
+msgid "Expected \"=\" to follow \"%(token)s\""
+msgstr "Odototettiin =-merkin seuraavan sanasta \"%(token)s\""
+
+#, python-format
+msgid "Expected a value for key \"%(token)s\""
+msgstr "Odotettiin arvoa avaimelle \"%(token)s\""
+
+msgid "You are not allowed to edit this page."
+msgstr "Sinulla ei ole oikeutta muokata tätä sivua."
+
+msgid "Page is immutable!"
+msgstr "Sivu on suojattu!"
+
+msgid "Cannot edit old revisions!"
+msgstr "Vanhoja versioita ei voi muokata!"
+
+msgid "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr "Lukkosi sivuun vanheni. Varaudu päällekkäisiin muokkauksiin!"
+
+#, fuzzy, python-format
+msgid "Draft of \"%(pagename)s\""
+msgstr "Sivun \"%(pagename)s\" esikatselu"
+
+#, python-format
+msgid "Edit \"%(pagename)s\""
+msgstr "Muokkaa \"%(pagename)s\""
+
+#, python-format
+msgid "Preview of \"%(pagename)s\""
+msgstr "Sivun \"%(pagename)s\" esikatselu"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s has expired!"
+msgstr "Muokkauslukkosi sivulle %(lock_page)s on vanhentunut!"
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # minutes."
+msgstr "Muokkauslukkosi sivulle %(lock_page)s vanhenee # minuutissa."
+
+#, python-format
+msgid "Your edit lock on %(lock_page)s will expire in # seconds."
+msgstr "Muokkauslukkosi sivulle %(lock_page)s vanhenee # sekunnissa."
+
+msgid "Someone else deleted this page while you were editing!"
+msgstr "Joku muu poisti tämän sivun sillä aikaa kun muokkasit!"
+
+msgid "Someone else changed this page while you were editing!"
+msgstr "Joku muu muutti tätä sivua sillä aikaa kun muokkasit!"
+
+msgid ""
+"Someone else saved this page while you were editing!\n"
+"Please review the page and save then. Do not save this page as it is!"
+msgstr ""
+"Joku muu tallensi tämän sivun sillä aikaa kun muokkasit!\n"
+"Tarkasta sivu ja tallenna vasta sitten. Älä tallenna sivua tällaisenaan!"
+
+#, fuzzy
+msgid "[Content loaded from draft]"
+msgstr "[Sisältö uudelle sivulle ladattu sivulta %s]"
+
+#, python-format
+msgid "[Content of new page loaded from %s]"
+msgstr "[Sisältö uudelle sivulle ladattu sivulta %s]"
+
+#, python-format
+msgid "[Template %s not found]"
+msgstr "[Templaattia %s ei löytynyt]"
+
+#, python-format
+msgid "[You may not read %s]"
+msgstr "[Et saa lukea sivua %s]"
+
+#, python-format
+msgid ""
+"'''[[BR]]Your draft based on revision %(draft_rev)d (saved %"
+"(draft_timestamp_str)s) can be loaded instead of the current revision %"
+"(page_rev)d by using the load draft button - in case you lost your last edit "
+"somehow without saving it.''' A draft gets saved for you when you do a "
+"preview, cancel an edit or unsuccessfully save."
+msgstr ""
+
+#, python-format
+msgid "Describe %s here."
+msgstr "Kuvaile %s tässä."
+
+msgid "Check Spelling"
+msgstr "Oikolue"
+
+msgid "Save Changes"
+msgstr "Tallenna muutokset"
+
+#, python-format
+msgid ""
+"By hitting '''%(save_button_text)s''' you put your changes under the %"
+"(license_link)s.\n"
+"If you don't want that, hit '''%(cancel_button_text)s''' to cancel your "
+"changes."
+msgstr ""
+"Napsauttamalla '''%(save_button_text)s''' annat muutoksesi %(license_link)"
+"sllä.\n"
+"Jos et halua tätä, napsauta '''%(cancel_button_text)s''' peruaksesi "
+"muutoksesi."
+
+msgid "Preview"
+msgstr "Esikatsele"
+
+msgid "Text mode"
+msgstr "Tekstitila"
+
+msgid "Load Draft"
+msgstr ""
+
+msgid "Comment:"
+msgstr "Kommentti:"
+
+msgid "<No addition>"
+msgstr "<ei lisäystä>"
+
+#, python-format
+msgid "Add to: %(category)s"
+msgstr "Lisää kategoriaan: %(category)s"
+
+msgid "Trivial change"
+msgstr "Vähäinen muutos"
+
+msgid "Remove trailing whitespace from each line"
+msgstr "Poista rivien lopusta tyhjämerkit"
+
+msgid "The wiki is currently not reachable."
+msgstr ""
+
+msgid ""
+"The remote version of MoinMoin is too old, version 1.6 is required at least."
+msgstr ""
+
+msgid "Invalid username or password."
+msgstr ""
+
+#, python-format
+msgid ""
+"The remote wiki uses a different InterWiki name (%(remotename)s) internally "
+"than you specified (%(localname)s)."
+msgstr ""
+
+#, python-format
+msgid "The package needs a newer version of MoinMoin (at least %s)."
+msgstr "Paketti tarvitsee uudemman version MoinMoinista (vähintään %s)."
+
+msgid "The theme name is not set."
+msgstr "Teeman nimeä ei ole asetettu."
+
+msgid "Installing theme files is only supported for standalone type servers."
+msgstr ""
+"Teematiedostojen asennusta tuetaan vain erillistyyppisillä palvelimilla."
+
+#, python-format
+msgid "Installation of '%(filename)s' failed."
+msgstr "Tiedoston '%(filename)s' asennus ei onnistunut."
+
+#, python-format
+msgid "The file %s is not a MoinMoin package file."
+msgstr "Tiedosto %s ei ole MoinMoinin pakettitiedosto."
+
+#, python-format
+msgid "The page %s does not exist."
+msgstr "Sivua %s ei ole."
+
+msgid "Invalid package file header."
+msgstr "Kelvoton pakettitiedoston otsake."
+
+msgid "Package file format unsupported."
+msgstr "Paketin tiedostomuoto ei ole tuettu."
+
+#, python-format
+msgid "Unknown function %(func)s in line %(lineno)i."
+msgstr "Tuntematon funktio %(func)s rivillä %(lineno)i."
+
+#, python-format
+msgid "The file %s was not found in the package."
+msgstr "Tiedostoa %s ei ollut paketissa."
+
+msgid "Your changes are not saved!"
+msgstr "Muutoksiasi ei ole tallennettu!"
+
+msgid "Page name is too long, try shorter name."
+msgstr "Sivun nimi on liian pitkä, kokeile lyhyempää nimeä."
+
+msgid "GUI Mode"
+msgstr "GUI-tila"
+
+msgid "Edit was cancelled."
+msgstr "Muokkaus peruttu."
+
+msgid "You can't rename to an empty pagename."
+msgstr "Et voi vaihtaa nimeä tyhjäksi."
+
+#, python-format
+msgid ""
+"'''A page with the name {{{'%s'}}} already exists.'''\n"
+"\n"
+"Try a different name."
+msgstr ""
+"'''Nimellä {{{'%s'}}} on jo sivu.'''\n"
+"\n"
+"Kokeile eri nimeä."
+
+#, python-format
+msgid "Could not rename page because of file system error: %s."
+msgstr ""
+"Sivun uudelleennimeäminen ei onnistunut tiedostojärjestelmävirheen vuoksi: %"
+"s."
+
+#, fuzzy
+msgid "You are not allowed to delete this page!"
+msgstr "Sinulla ei ole oikeutta palauttaa tätä sivua!"
+
+msgid "Thank you for your changes. Your attention to detail is appreciated."
+msgstr "Kiitos tekemistäsi muutoksista. Huolellisuuttasi arvostetaan."
+
+#, python-format
+msgid "Page \"%s\" was successfully deleted!"
+msgstr "Sivu \"%s\" poistettiin onnistuneesti!"
+
+#, python-format
+msgid ""
+"Dear Wiki user,\n"
+"\n"
+"You have subscribed to a wiki page or wiki category on \"%(sitename)s\" for "
+"change notification.\n"
+"\n"
+"The following page has been changed by %(editor)s:\n"
+"%(pagelink)s\n"
+"\n"
+msgstr ""
+"Hyvä Wiki-käyttäjä,\n"
+"\n"
+"Olet tilannut wikin \"%(sitename)s\" sivun tai kategorian "
+"muutosilmoitukset.\n"
+"\n"
+"%(editor)s on muuttanut seuraavaa sivua:\n"
+"%(pagelink)s\n"
+"\n"
+
+#, python-format
+msgid ""
+"The comment on the change is:\n"
+"%(comment)s\n"
+"\n"
+msgstr ""
+"Muutoksen kommenttina on:\n"
+"%(comment)s\n"
+"\n"
+
+msgid "New page:\n"
+msgstr "Uusi sivu:\n"
+
+msgid "No differences found!\n"
+msgstr "Ei löytynyt eroja!\n"
+
+#, python-format
+msgid "[%(sitename)s] %(trivial)sUpdate of \"%(pagename)s\" by %(username)s"
+msgstr ""
+"[%(sitename)s] %(trivial)späivitys sivulle \"%(pagename)s\", muokkaaja %"
+"(username)s"
+
+msgid "Trivial "
+msgstr "vähäinen "
+
+msgid "Status of sending notification mails:"
+msgstr "Ilmoitusviestien lähetyksen tila:"
+
+#, python-format
+msgid "[%(lang)s] %(recipients)s: %(status)s"
+msgstr "[%(lang)s] %(recipients)s: %(status)s"
+
+#, python-format
+msgid "Page could not get locked. Unexpected error (errno=%d)."
+msgstr "Sivua ei saatu lukittua. Odottamaton virhe (errno=%d)."
+
+msgid "Page could not get locked. Missing 'current' file?"
+msgstr "Sivua ei saatu lukittua. Puuttuisiko 'current'-tiedosto?"
+
+msgid "You are not allowed to edit this page!"
+msgstr "Sinulla ei ole oikeutta muokata tätä sivua!"
+
+msgid "You cannot save empty pages."
+msgstr "Tyhjää sivua ei voi tallentaa."
+
+msgid "You already saved this page!"
+msgstr "Tallensit tämän sivun jo!"
+
+msgid "You already edited this page! Please do not use the back button."
+msgstr "Muokkasit tätä sivua jo! Älä käytä Takaisin-nappia."
+
+msgid "You did not change the page content, not saved!"
+msgstr "Et muuttanut sisältöä, joten sivua ei tallennettu!"
+
+msgid ""
+"You can't change ACLs on this page since you have no admin rights on it!"
+msgstr ""
+"Et voi muuttaa [[Verbatim(ACL:)]]iä tällä sivulla, koska sinulla ei ole "
+"ylläpito-oikeutta sille!"
+
+#, python-format
+msgid ""
+"The lock of %(owner)s timed out %(mins_ago)d minute(s) ago, and you were "
+"granted the lock for this page."
+msgstr ""
+"%(owner)s menetti lukon %(mins_ago)d minuuttia sitten, ja saat lukon tälle "
+"sivulle."
+
+#, python-format
+msgid ""
+"Other users will be ''blocked'' from editing this page until %(bumptime)s."
+msgstr ""
+"Muita käyttäjiä ''estetään'' muokkaamasta tätä sivua ennen kuin %(bumptime)s."
+
+#, python-format
+msgid ""
+"Other users will be ''warned'' until %(bumptime)s that you are editing this "
+"page."
+msgstr ""
+"Muita käyttäjiä ''varoitetaan'' %(bumptime)s saakka, että muokkaat tätä "
+"sivua."
+
+msgid "Use the Preview button to extend the locking period."
+msgstr "Lisää lukitusaikaa saat Esikatsele-napilla."
+
+#, python-format
+msgid ""
+"This page is currently ''locked'' for editing by %(owner)s until %(timestamp)"
+"s, i.e. for %(mins_valid)d minute(s)."
+msgstr ""
+"Tämä sivu on parhaillaan ''lukittu'' käyttäjän %(owner)s muokattavaksi %"
+"(timestamp)s saakka, eli %(mins_valid)d minuutiksi."
+
+#, python-format
+msgid ""
+"This page was opened for editing or last previewed at %(timestamp)s by %"
+"(owner)s.[[BR]]\n"
+"'''You should ''refrain from editing'' this page for at least another %"
+"(mins_valid)d minute(s),\n"
+"to avoid editing conflicts.'''[[BR]]\n"
+"To leave the editor, press the Cancel button."
+msgstr ""
+"Tämän sivun avasi muokattavaksi tai viimeksi esikatseli %(owner)s %"
+"(timestamp)s.[[BR]]\n"
+"'''Sinun pitäisi ''pidättyä muokkaamasta'' tätä sivua ainakin seuraavat %"
+"(mins_valid)d minuuttia,\n"
+"välttääksesi muokkausristiriidat.'''[[BR]]\n"
+"Jättääksesi muokkauksen, paina Peruuta-nappia."
+
+msgid "<unknown>"
+msgstr "<tuntematon>"
+
+#, python-format
+msgid ""
+"Login Name: %s\n"
+"\n"
+"Login Password: %s\n"
+"\n"
+"Login URL: %s/%s?action=login\n"
+msgstr ""
+"Kirjautumisnimi: %s\n"
+"\n"
+"Kirjautumissalasana: %s\n"
+"\n"
+"Kirjautumisosoite: %s/%s?action=login\n"
+
+msgid ""
+"Somebody has requested to submit your account data to this email address.\n"
+"\n"
+"If you lost your password, please use the data below and just enter the\n"
+"password AS SHOWN into the wiki's password form field (use copy and paste\n"
+"for that).\n"
+"\n"
+"After successfully logging in, it is of course a good idea to set a new and "
+"known password.\n"
+msgstr ""
+"Joku on pyytänyt lähettämään tunnustietosi tähän sähköpostiosoitteeseen.\n"
+"\n"
+"Jos kadotit salasanasi, käytä alla olevia tietoja ja kirjoita annettu\n"
+"salasana ANNETUSSA MUODOSSA wikin lomakkeen salasanakenttään (käytä \n"
+"leikkausta ja liimausta).\n"
+"\n"
+"Onnistuneen kirjautumisen jälkeen on tietenkin hyvä vaihtaa uusi ja muistuva "
+"salasana.\n"
+
+#, python-format
+msgid "[%(sitename)s] Your wiki account data"
+msgstr "[%(sitename)s] Wikitunnuksesi tiedot"
+
+msgid ""
+"The backed up content of this page is deprecated and will not be included in "
+"search results!"
+msgstr ""
+"Tämän sivun varmuuskopioitu sisältö on vanhentunut eikä sitä sisällytetä "
+"hakutuloksiin!"
+
+#, python-format
+msgid "Revision %(rev)d as of %(date)s"
+msgstr "Versio %(rev)d päivätty %(date)s"
+
+#, python-format
+msgid "Redirected from page \"%(page)s\""
+msgstr "Edelleenohjattu sivulta \"%(page)s\""
+
+#, python-format
+msgid "This page redirects to page \"%(page)s\""
+msgstr "Tämä sivu edelleenohjaa sivulle \"%(page)s\""
+
+#, python-format
+msgid ""
+"~-If you submit this form, the submitted values will be displayed.\n"
+"To use this form on other pages, insert a\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"macro call.-~\n"
+msgstr ""
+"~-Jos lähetät tämän lomakkeen, näytetään lähetetyt arvot.\n"
+"Käyttääksesi tätä lomaketta muilla sivuilla, lisää\n"
+"[[BR]][[BR]]'''{{{    [[Form(\"%(pagename)s\")]]}}}'''[[BR]][[BR]]\n"
+"makrokutsu.-~\n"
+
+msgid "Create New Page"
+msgstr "Luo uusi sivu"
+
+msgid "You are not allowed to view this page."
+msgstr "Sinulla ei ole oikeutta katsoa tätä sivua."
+
+#, python-format
+msgid ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
+msgstr ""
+
+#, fuzzy
+msgid "seconds"
+msgstr "%.2f sekuntia"
+
+#, fuzzy
+msgid "Previous"
+msgstr "Esikatsele"
+
+#, fuzzy
+msgid "Next"
+msgstr "Teksteistä"
+
+msgid "current"
+msgstr ""
+
+msgid "match"
+msgstr "osuma"
+
+msgid "matches"
+msgstr "osumaa"
+
+msgid "Go To Page"
+msgstr "Mene sivulle"
+
+msgid "Include system pages"
+msgstr "Sisällytä järjestelmäsivut"
+
+msgid "Exclude system pages"
+msgstr "Ohita järjestelmäsivut"
+
+#, python-format
+msgid "Please use a more selective search term instead of {{{\"%s\"}}}"
+msgstr "käytä tarkempaa hakuehtoa kuin {{{\"%s\"}}}"
+
+#, python-format
+msgid "ERROR in regex '%s'"
+msgstr "Virhe regexissä '%s'"
+
+#, python-format
+msgid "Bad timestamp '%s'"
+msgstr "Kelvoton aikaleima '%s'"
+
+#, python-format
+msgid "Unsupported navigation scheme '%(scheme)s'!"
+msgstr "Selausmenetelmä '%(scheme)s ei ole tuettu!"
+
+msgid "No parent page found!"
+msgstr "Yläsivua ei löytynyt!"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Edit"
+msgstr "Muokkaa"
+
+msgid "Slideshow"
+msgstr "Diaesitys"
+
+msgid "Start"
+msgstr "Aloita"
+
+#, python-format
+msgid "Slide %(pos)d of %(size)d"
+msgstr "Dia %(pos)d / %(size)d"
+
+msgid "Search Titles"
+msgstr "Etsi nimistä"
+
+msgid "Display context of search results"
+msgstr "Näytä hakutulosten ympäristö"
+
+msgid "Case-sensitive searching"
+msgstr "Aakkoslajit erottava haku"
+
+msgid "Search Text"
+msgstr "Etsi teksteistä"
+
+#, python-format
+msgid "Upload new attachment \"%(filename)s\""
+msgstr "Lähetä uusi liitetiedosto \"%(filename)s\""
+
+#, python-format
+msgid "Invalid MonthCalendar calparms \"%s\"!"
+msgstr "Kelvoton parametri calparms MonthCalendar-makrolle: \"%s\"!"
+
+#, python-format
+msgid "Invalid MonthCalendar arguments \"%s\"!"
+msgstr "Kelvottomat MonthCalendar-makron argumentit: \"%s\"!"
+
+msgid "No orphaned pages in this wiki."
+msgstr "Tässä wikissä ei ole orvoksi jätettyjä sivuja."
+
+msgid "Python Version"
+msgstr "Python versio"
+
+msgid "MoinMoin Version"
+msgstr "MoinMoin versio"
+
+#, python-format
+msgid "Release %s [Revision %s]"
+msgstr "Julkaisu %s [versio %s]"
+
+msgid "4Suite Version"
+msgstr "4Suite versio"
+
+msgid "Number of pages"
+msgstr "Sivujen lukumäärä"
+
+msgid "Number of system pages"
+msgstr "Järjestelmäsivujen lukumäärä"
+
+msgid "Accumulated page sizes"
+msgstr "Sivujen koko yhteensä"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/pages/"
+msgstr "Käytetty levytila hakemistossa %(data_dir)s/pages/"
+
+#, python-format
+msgid "Disk usage of %(data_dir)s/"
+msgstr "Käytetty levytila hakemistossa %(data_dir)s/"
+
+msgid "Entries in edit log"
+msgstr "Merkintöjä muutoslokissa"
+
+msgid "NONE"
+msgstr "EI"
+
+msgid "Global extension macros"
+msgstr "Yleisiä laajennusmakroja"
+
+msgid "Local extension macros"
+msgstr "Paikallisia laajennusmakroja"
+
+msgid "Global extension actions"
+msgstr "Yleisiä laajennustoimintoja"
+
+msgid "Local extension actions"
+msgstr "Paikallisia laajennustoimintoja"
+
+msgid "Global parsers"
+msgstr "Yleiset jäsentimet"
+
+msgid "Local extension parsers"
+msgstr "Paikalliset laajennusjäsentimet"
+
+msgid "Disabled"
+msgstr "Poissa"
+
+msgid "Enabled"
+msgstr "Käytössä"
+
+msgid "index available"
+msgstr ""
+
+msgid "index unavailable"
+msgstr ""
+
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "viimeksi muokattu %(time)s"
+
+msgid "N/A"
+msgstr "ei ole"
+
+msgid "Xapian and/or Python Xapian bindings not installed"
+msgstr ""
+
+msgid "Xapian search"
+msgstr "Xapian-haku"
+
+#, fuzzy
+msgid "Xapian Version"
+msgstr "Xapian-haku"
+
+#, fuzzy
+msgid "Xapian stemming"
+msgstr "Xapian-haku"
+
+msgid "Active threads"
+msgstr "Aktiiviset säikeet"
+
+#, python-format
+msgid "No quotes on %(pagename)s."
+msgstr "Ei lainauksia sivulla %(pagename)s."
+
+#, python-format
+msgid "Upload of attachment '%(filename)s'."
+msgstr "Liitetiedoston '%(filename)s' lähetys."
+
+#, python-format
+msgid "Attachment '%(filename)s' deleted."
+msgstr "Liitetiedosto '%(filename)s' poistettu."
+
+#, python-format
+msgid "Drawing '%(filename)s' saved."
+msgstr "Piirros '%(filename)s' tallennettu."
+
+#, python-format
+msgid "Revert to revision %(rev)d."
+msgstr "Palauta versio %(rev)d."
+
+#, python-format
+msgid "%(mins)dm ago"
+msgstr "%(mins)dm sitten"
+
+msgid "(no bookmark set)"
+msgstr "(ei kirjanmerkkiä asetettu)"
+
+#, python-format
+msgid "(currently set to %s)"
+msgstr "(tällä hetkellä asetettu %s)"
+
+#, fuzzy
+msgid "Delete bookmark"
+msgstr "Poista kirjanmerkki"
+
+msgid "Set bookmark"
+msgstr "Aseta kirjanmerkki"
+
+msgid "[Bookmark reached]"
+msgstr "[Kirjanmerkki saavutettu]"
+
+#, python-format
+msgid "Invalid include arguments \"%s\"!"
+msgstr "Kelvottomat sisällytysargumentit \"%s\"!"
+
+#, python-format
+msgid "Nothing found for \"%s\"!"
+msgstr "Ei löytynyt mitään haulle \"%s\"!"
+
+msgid "edit"
+msgstr "muokkaa"
+
+msgid "Contents"
+msgstr "Sisällys"
+
+msgid "You need to provide a chart type!"
+msgstr "Sinun täytyy antaa kaavion tyyppi!"
+
+#, python-format
+msgid "Bad chart type \"%s\"!"
+msgstr "Kelvoton kaavion tyyppi \"%s\"!"
+
+#, fuzzy
+msgid "Search for items"
+msgstr "Etsi nimistä"
+
+msgid "containing all the following terms"
+msgstr ""
+
+msgid "containing one or more of the following terms"
+msgstr ""
+
+msgid "not containing the following terms"
+msgstr ""
+
+#, fuzzy
+msgid "belonging to one of the following categories"
+msgstr "Tältä sivulta on linkit seuraaville sivuille:"
+
+msgid "last modified since (e.g. last 2 weeks)"
+msgstr ""
+
+#, fuzzy
+msgid "any language"
+msgstr "Suosikkikieli"
+
+msgid "Language"
+msgstr ""
+
+#, fuzzy
+msgid "File Type"
+msgstr "Tiedoston nimi"
+
+#, fuzzy
+msgid "Search only in titles"
+msgstr "Etsi nimistä"
+
+#, fuzzy
+msgid "Case-sensitive search"
+msgstr "Aakkoslajit erottava haku"
+
+msgid "Exclude underlay"
+msgstr ""
+
+#, fuzzy
+msgid "No system items"
+msgstr "Järjestelmäsivujen lukumäärä"
+
+msgid "Search in all page revisions"
+msgstr ""
+
+msgid "Go get it!"
+msgstr ""
+
+msgid "Markup"
+msgstr "Merkkaa"
+
+msgid "Display"
+msgstr "Näytä"
+
+msgid "No wanted pages in this wiki."
+msgstr "Tässä wikissä ei ole toivottu sivuja."
+
+#, python-format
+msgid "Connection to mailserver '%(server)s' failed: %(reason)s"
+msgstr ""
+"Yhteydenotto sähköpostipalvelimeen '%(server)s' ei onnistunut: %(reason)s"
+
+msgid "Mail not sent"
+msgstr "Ei lähetetty sähköpostia"
+
+msgid "Mail sent OK"
+msgstr "Sähköposti lähetetty onnistuneesti"
+
+msgid "Date"
+msgstr "Päivämäärä"
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+#, fuzzy
+msgid "Content"
+msgstr "Sisällys"
+
+msgid "Attachments"
+msgstr "Liitetiedostot"
+
+msgid "XSLT option disabled, please look at HelpOnConfiguration."
+msgstr "XSLT-vaihtoehto pois, katso sivua HelpOnConfiguration."
+
+msgid "XSLT processing is not available, please install 4suite 1.x."
+msgstr "XSLT-käsittely ei ole käytettävissä, asenna 4suite 1.x."
+
+#, python-format
+msgid "%(errortype)s processing error"
+msgstr "Käsittelyvirhe %(errortype)s"
+
+#, python-format
+msgid "Expected \"%(wanted)s\" after \"%(key)s\", got \"%(token)s\""
+msgstr "Odotettiin \"%(wanted)s\" \"%(key)s\":n jälkeen, saatiin \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(key)s\" before \"%(token)s\""
+msgstr "Odotettiin kokonaislukua \"%(key)s\" ennen sanasta \"%(token)s\""
+
+#, python-format
+msgid "Expected an integer \"%(arg)s\" after \"%(key)s\""
+msgstr "Odotettiin kokonaislukua \"%(arg)s\" \"%(key)s\":n jälkeen"
+
+#, python-format
+msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
+msgstr "Odotettiin väriarvoa \"%(arg)s\" \"%(key)s\":n jälkeen"
+
+msgid ""
+"Rendering of reStructured text is not possible, please install Docutils."
+msgstr ""
+"Ei voida näyttää reStructured-tekstiä, koska Docutils ei ole asennettuna."
+
+msgid "**Maximum number of allowed includes exceeded**"
+msgstr "**Sisällytysten maksimimäärä ylitetty**"
+
+#, python-format
+msgid "**Could not find the referenced page: %s**"
+msgstr "**Viitattua sivua ei löydy: %s**"
+
+#, python-format
+msgid "Create new drawing \"%(filename)s\""
+msgstr "Luo uusi piirros \"%(filename)s\""
+
+#, python-format
+msgid "Edit drawing %(filename)s"
+msgstr "Muokkaa piirrosta %(filename)s"
+
+msgid "Toggle line numbers"
+msgstr "Rivinumerot päälle/pois"
+
+msgid "Line"
+msgstr "Rivi"
+
+msgid "No differences found!"
+msgstr "Ei löytynyt eroja!"
+
+msgid "Deletions are marked like this."
+msgstr "Poistot on merkattu näin."
+
+msgid "Additions are marked like this."
+msgstr "Lisäykset on merkattu näin."
+
+#, python-format
+msgid ""
+"Sorry, can not save page because \"%(content)s\" is not allowed in this wiki."
+msgstr ""
+"Valitettavasti sivua ei voida tallentaa sillä \"%(content)s\" ei ole "
+"sallittu tässä wikissä."
+
+msgid "Page"
+msgstr "Sivu"
+
+msgid "User"
+msgstr "Käyttäjä"
+
+msgid "Diffs"
+msgstr "Erot"
+
+msgid "Info"
+msgstr "Tiedot"
+
+msgid "Unsubscribe"
+msgstr "Poista tilaus"
+
+msgid "Subscribe"
+msgstr "Tilaa"
+
+msgid "Raw"
+msgstr "Muotoilematon"
+
+msgid "XML"
+msgstr "XML"
+
+msgid "Print"
+msgstr "Tulosta"
+
+msgid "View"
+msgstr "Näytä"
+
+msgid "Home"
+msgstr "Koti"
+
+msgid "Up"
+msgstr "Ylös"
+
+msgid "[RSS]"
+msgstr "[RSS]"
+
+msgid "[DELETED]"
+msgstr "[POISTETTU]"
+
+msgid "[UPDATED]"
+msgstr "[PÄIVITETTY]"
+
+msgid "[NEW]"
+msgstr "[UUSI]"
+
+msgid "[DIFF]"
+msgstr "[EROT]"
+
+msgid "[BOTTOM]"
+msgstr "[LOPPUUN]"
+
+msgid "[TOP]"
+msgstr "[ALKUUN]"
+
+msgid "Click to do a full-text search for this title"
+msgstr "Napsauta tehdäksesi tekstihaun tälle nimelle"
+
+msgid "Preferences"
+msgstr "Asetukset"
+
+msgid "Logout"
+msgstr "Kirjaudu ulos "
+
+msgid "Clear message"
+msgstr "Sulje viesti"
+
+#, python-format
+msgid "last edited %(time)s by %(editor)s"
+msgstr "viimeksi muuttanut %(editor)s %(time)s"
+
+#, python-format
+msgid "last modified %(time)s"
+msgstr "viimeksi muokattu %(time)s"
+
+msgid "Search:"
+msgstr "Etsi:"
+
+msgid "Text"
+msgstr "Teksteistä"
+
+msgid "Titles"
+msgstr "Nimistä"
+
+msgid "Search"
+msgstr "Etsi"
+
+msgid "More Actions:"
+msgstr "Lisää toimintoja:"
+
+msgid "------------"
+msgstr "------------"
+
+msgid "Raw Text"
+msgstr "Muotoilematon teksti"
+
+msgid "Print View"
+msgstr "Tulostettavana"
+
+msgid "Delete Cache"
+msgstr "Poista välimuistista"
+
+msgid "Rename Page"
+msgstr "Nimeä sivu uudelleen"
+
+msgid "Delete Page"
+msgstr "Poista sivu"
+
+msgid "Like Pages"
+msgstr "Samankaltaisia sivuja"
+
+msgid "Local Site Map"
+msgstr "Paikallinen sivukartta"
+
+msgid "My Pages"
+msgstr "Omat sivut"
+
+msgid "Subscribe User"
+msgstr "Tilaa käyttäjälle"
+
+msgid "Remove Spam"
+msgstr "Poista roskaviestejä"
+
+msgid "Package Pages"
+msgstr "Paketoi sivuja"
+
+msgid "Render as Docbook"
+msgstr "Esitä Docbookina"
+
+msgid "Do"
+msgstr "Tee"
+
+msgid "Edit (Text)"
+msgstr "Muokkaa (tekstinä)"
+
+msgid "Edit (GUI)"
+msgstr "Muokkaa (GUI)"
+
+msgid "Immutable Page"
+msgstr "Suojattu sivu"
+
+msgid "Remove Link"
+msgstr "Poista linkki"
+
+msgid "Add Link"
+msgstr "Lisää linkki"
+
+#, python-format
+msgid "Show %s days."
+msgstr "Näytä %s päivää."
+
+msgid "Wiki Markup"
+msgstr "Wiki-merkintä"
+
+msgid "DeleteCache"
+msgstr "PoistaVälimuistista"
+
+#, python-format
+msgid "(cached %s)"
+msgstr "(%s välimuistissa)"
+
+msgid "Or try one of these actions:"
+msgstr "Tai koita jotakin näistä toiminnoista:"
+
+msgid "FrontPage"
+msgstr "EtuSivu"
+
+msgid "RecentChanges"
+msgstr "UusimmatMuutokset"
+
+msgid "TitleIndex"
+msgstr "SivuHakemisto"
+
+msgid "WordIndex"
+msgstr "SanaHakemisto"
+
+msgid "FindPage"
+msgstr "EtsiSivu"
+
+msgid "SiteNavigation"
+msgstr "TienViittoja"
+
+msgid "HelpContents"
+msgstr "OhjeSisällys"
+
+msgid "HelpOnFormatting"
+msgstr "ApuaMuotoiluun"
+
+msgid "UserPreferences"
+msgstr "KäyttäjäAsetukset"
+
+msgid "WikiLicense"
+msgstr "WikiLisenssi"
+
+msgid "MissingPage"
+msgstr "PuuttuvaSivu"
+
+msgid "MissingHomePage"
+msgstr "PuuttuvaKotisivu"
+
+msgid "Mon"
+msgstr "ma"
+
+msgid "Tue"
+msgstr "ti"
+
+msgid "Wed"
+msgstr "ke"
+
+msgid "Thu"
+msgstr "to"
+
+msgid "Fri"
+msgstr "pe"
+
+msgid "Sat"
+msgstr "la"
+
+msgid "Sun"
+msgstr "su"
+
+msgid "AttachFile"
+msgstr "LiitäTiedostot"
+
+msgid "DeletePage"
+msgstr "PoistaSivu"
+
+msgid "LikePages"
+msgstr "SamankaltaisiaSivuja"
+
+msgid "LocalSiteMap"
+msgstr "PaikallinenSivukartta"
+
+msgid "RenamePage"
+msgstr "UudelleennimeäSivu"
+
+msgid "SpellCheck"
+msgstr "OikoLue"
+
+#, fuzzy, python-format
+msgid "Unknown action %(action_name)s."
+msgstr "Suorita toiminto %(actionname)s?"
+
+#, fuzzy, python-format
+msgid "You are not allowed to do %(action_name)s on this page."
+msgstr "Sinun ei ole sallittu käyttää toimintoa %(actionname)s tällä sivulla!"
+
+msgid "Login and try again."
+msgstr " Kirjaudu ja yritä uudelleen."
+
+msgid "Charts are not available!"
+msgstr "Kaaviot eivät ole käytettävissä!"
+
+msgid "Page Size Distribution"
+msgstr "Sivukoon jakauma"
+
+msgid "page size upper bound [bytes]"
+msgstr "sivukoon yläraja [tavuja]"
+
+msgid "# of pages of this size"
+msgstr "tämänkokoisten sivujen lukumäärä"
+
+msgid "User agent"
+msgstr "User agent"
+
+msgid "Others"
+msgstr "Muut"
+
+msgid "Distribution of User-Agent Types"
+msgstr "User agent -tyyppien jakauma"
+
+msgid "Views/day"
+msgstr "Katseluita/päivä"
+
+msgid "Edits/day"
+msgstr "Muokkauksia/päivä"
+
+msgid "Page hits and edits"
+msgstr "Sivun katselut ja muokkaukset"
+
+#, python-format
+msgid "%(chart_title)s for %(filterpage)s"
+msgstr "%(chart_title)s sivulle %(filterpage)s"
+
+msgid ""
+"green=view\n"
+"red=edit"
+msgstr ""
+"green=view\n"
+"red=edit"
+
+msgid "date"
+msgstr "päivämäärä"
+
+msgid "# of hits"
+msgstr "katseluiden lukumäärä"
+
+msgid ""
+" Emphasis:: [[Verbatim('')]]''italics''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''bold'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''bold "
+"italics'''''[[Verbatim(''''')]]; [[Verbatim('')]]''mixed ''[[Verbatim"
+"(''')]]'''''bold'''[[Verbatim(''')]] and italics''[[Verbatim('')]]; "
+"[[Verbatim(----)]] horizontal rule.\n"
+" Headings:: [[Verbatim(=)]] Title 1 [[Verbatim(=)]]; [[Verbatim(==)]] Title "
+"2 [[Verbatim(==)]]; [[Verbatim(===)]] Title 3 [[Verbatim(===)]];   [[Verbatim"
+"(====)]] Title 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Title 5 [[Verbatim"
+"(=====)]].\n"
+" Lists:: space and one of: * bullets; 1., a., A., i., I. numbered items; 1."
+"#n start numbering at n; space alone indents.\n"
+" Links:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"brackets and "
+"double quotes\"])]]; url; [url]; [url label].\n"
+" Tables:: || cell text |||| cell text spanning 2 columns ||;    no trailing "
+"white space allowed after tables or titles.\n"
+"\n"
+"(!) For more help, see HelpOnEditing or SyntaxReference.\n"
+msgstr ""
+" Korostus:: [[Verbatim('')]]''kursiivi''[[Verbatim('')]]; [[Verbatim"
+"(''')]]'''lihavoitu'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''lihavoitu "
+"kursiivi'''''[[Verbatim(''''')]]; [[Verbatim('')]]''sekä ''[[Verbatim"
+"(''')]]'''''lihavoitua'''[[Verbatim(''')]] että kursiivia''[[Verbatim('')]]; "
+"[[Verbatim(----)]] vaakaviiva.\n"
+" Otsikot:: [[Verbatim(=)]] Otsikko 1 [[Verbatim(=)]]; [[Verbatim(==)]] "
+"Otsikko 2 [[Verbatim(==)]]; [[Verbatim(===)]] Otsikko 3 [[Verbatim(===)]]; "
+"[[Verbatim(====)]] Otsikko 4 [[Verbatim(====)]]; [[Verbatim(=====)]] Otsikko "
+"5 [[Verbatim(=====)]].\n"
+" Luettelot:: väli ja jokin näistä: * numeroimaton kohta; 1., a., A., i., I. "
+"numeroitu kohta; 1.#n aloita numerointi n:stä; pelkkä väli sisentää.\n"
+" Linkit:: [[Verbatim(YhteenIsollaKirjoitetut)]]; [[Verbatim([\"hakasulkeissa "
+"ja lainausmerkeissä\"])]]; url; [url]; [url nimi].\n"
+" Taulukot:: || solun teksti |||| kahden sarakkeen solun teksti ||; "
+"tyhjämerkit eivät ole sallittuja taulukoiden tai otsikoiden jälkeen.\n"
+"\n"
+"(!) Lisää apua sivuilla HelpOnEditing ja SyntaxReference.\n"
+
+msgid ""
+"Emphasis: <i>*italic*</i> <b>**bold**</b> ``monospace``<br/>\n"
+"<br/><pre>\n"
+"Headings: Heading 1  Heading 2  Heading 3\n"
+"          =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Horizontal rule: ---- \n"
+"Links: TrailingUnderscore_ `multi word with backticks`_ external_ \n"
+"\n"
+".. _external: http://external-site.net/foo/\n"
+"\n"
+"Lists: * bullets; 1., a. numbered items.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) For more help, see the \n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+msgstr ""
+"Korostus: <i>*kursiivi*</i> <b>**lihavoitu**</b> ``tasalevyinen``<br/>\n"
+"<br/><pre>\n"
+"Otsikot: Otsikko 1  Otsikko 2  Otsikko 3\n"
+"         =========  ---------  ~~~~~~~~~\n"
+"\n"
+"Vaakaviiva: ---- \n"
+"Linkit: AlaviivaPerässä_ `monta sanaa takahipsuissa`_ ulkoinen_ \n"
+"\n"
+".. ulkoinen: http://ulkoinen-sivusto.net/foo/\n"
+"\n"
+"Luettelot: * numeroimaton kohta; 1., a. numeroitu kohta.\n"
+"</pre>\n"
+"<br/>\n"
+"(!) Lisää apua saat sivulta\n"
+"<a href=\"http://docutils.sourceforge.net/docs/user/rst/quickref.html\">\n"
+"reStructuredText Quick Reference\n"
+"</a>.\n"
+
+msgid "UnSubscribe"
+msgstr "Poista tilaus"
+
+msgid "Publish my email (not my wiki homepage) in author info"
+msgstr "Julkista kirjoittajatiedoissa sähköpostiosoitteeni (wikisivuni sijaan)"
+
+msgid "Open editor on double click"
+msgstr "Siirry muokkaukseen kaksoisnapsautuksella"
+
+msgid "After login, jump to last visited page"
+msgstr "Kirjauduttuani siirry viimekertaiselle sivulle"
+
+msgid "Show question mark for non-existing pagelinks"
+msgstr "Näytä kysymysmerkki puuttuvien sivujen linkeissä"
+
+msgid "Show page trail"
+msgstr "Näytä sivupolku"
+
+msgid "Show icon toolbar"
+msgstr "Näytä kuvakepalkki"
+
+msgid "Show top/bottom links in headings"
+msgstr "Näytä Alkuun- ja Loppuun-linkit otsikoissa"
+
+msgid "Show fancy diffs"
+msgstr "Näytä erot hienosti"
+
+msgid "Add spaces to displayed wiki names"
+msgstr "Lisää välilyönnit wikinimiin näytettäessä"
+
+msgid "Remember login information"
+msgstr "Muista kirjautumistiedot"
+
+msgid "Subscribe to trivial changes"
+msgstr "Tilaa vähäisetkin muutokset"
+
+msgid "Disable this account forever"
+msgstr "Sulje tämä käyttäjätunnus pysyvästi"
+
+msgid "(Use Firstname''''''Lastname)"
+msgstr "(muodossa Etunimi''''''Sukunimi)"
+
+msgid "Alias-Name"
+msgstr "Peitenimi"
+
+msgid "Password repeat"
+msgstr "Salasana uudestaan"
+
+msgid "(Only for password change or new account)"
+msgstr "(vain salasanaa vaihdettaessa tai tiliä luotaessa)"
+
+msgid "User CSS URL"
+msgstr "Käyttäjän CSS:n URL"
+
+msgid "(Leave it empty for disabling user CSS)"
+msgstr "(jätä tyhjäksi poistaaksesi käytöstä)"
+
+msgid "Editor size"
+msgstr "Muokkauskentässä rivejä"
+
+msgid "Do it."
+msgstr "Toteuta."
+
+#, python-format
+msgid "Execute action %(actionname)s?"
+msgstr "Suorita toiminto %(actionname)s?"
+
+#, python-format
+msgid "Action %(actionname)s is excluded in this wiki!"
+msgstr "Toiminto %(actionname)s on suljettu pois tässä wikissä!"
+
+#, python-format
+msgid "You are not allowed to use action %(actionname)s on this page!"
+msgstr "Sinun ei ole sallittu käyttää toimintoa %(actionname)s tällä sivulla!"
+
+#, python-format
+msgid "Please use the interactive user interface to use action %(actionname)s!"
+msgstr "Käytä toimintoa %(actionname)s vuorovaikutteisessa käyttöliittymässä!"
+
+msgid "You must login to add a quicklink."
+msgstr "Sinun täytyy kirjautua lisätäksesi pikalinkin."
+
+msgid "Your quicklink to this page has been removed."
+msgstr "Pikalinkkisi tälle sivulle on poistettu."
+
+msgid "A quicklink to this page has been added for you."
+msgstr "Sinulle on lisätty pikalinkki tälle sivulle."
+
+#, python-format
+msgid "Unknown user name: {{{\"%s\"}}}. Please enter user name and password."
+msgstr "Tuntematon käyttäjänimi: {{{\"%s\"}}}. Anna käyttäjänimi ja salasana."
+
+msgid "Missing password. Please enter user name and password."
+msgstr "Salasana puuttuu. Anna käyttäjänimi ja salasana."
+
+msgid "Sorry, login failed."
+msgstr "Valitettavasti kirjautuminen ei onnistunut."
+
+#, python-format
+msgid "[%d attachments]"
+msgstr "[liitetiedostoja %d]"
+
+#, python-format
+msgid ""
+"There are <a href=\"%(link)s\">%(count)s attachment(s)</a> stored for this "
+"page."
+msgstr ""
+"Tälle sivulle on tallennettu <a href=\"%(link)s\">liitetiedostoja %(count)s</"
+"a>."
+
+msgid "Filename of attachment not specified!"
+msgstr "Liitteen tiedostonimeä ei annettu!"
+
+#, python-format
+msgid "Attachment '%(filename)s' does not exist!"
+msgstr "Liitetiedostoa '%(filename)s' ei ole!"
+
+msgid ""
+"To refer to attachments on a page, use '''{{{attachment:filename}}}''', \n"
+"as shown below in the list of files. \n"
+"Do '''NOT''' use the URL of the {{{[get]}}} link, \n"
+"since this is subject to change and can break easily."
+msgstr ""
+"Viitataksesi sivun liitetiedostoihin, käytä merkintää '''{{{attachment:"
+"tiedostonimi}}}''' allaolevan tiedostoluettelon mukaisesti. \n"
+"'''ÄLÄ''' käytä {{{[hae]}}}-linkin [[Verbatim(URL:)]]ää, \n"
+"sillä se voi muuttua, jolloin viittaus ei enää toimisi."
+
+msgid "del"
+msgstr "poista"
+
+msgid "move"
+msgstr ""
+
+msgid "get"
+msgstr "hae"
+
+msgid "view"
+msgstr "näytä"
+
+msgid "unzip"
+msgstr "pura"
+
+msgid "install"
+msgstr "asenna"
+
+#, python-format
+msgid "No attachments stored for %(pagename)s"
+msgstr "Sivulla %(pagename)s ei ole liitteitä"
+
+msgid "Edit drawing"
+msgstr "Muokkaa piirrosta"
+
+msgid "New Attachment"
+msgstr "Uusi liitetiedosto"
+
+msgid ""
+"An upload will never overwrite an existing file. If there is a name\n"
+"conflict, you have to rename the file that you want to upload.\n"
+"Otherwise, if \"Rename to\" is left blank, the original filename will be "
+"used."
+msgstr ""
+"Tiedoston lähetys ei koskaan ylikirjoita aikaisempaa tiedostoa. Jos nimet\n"
+"törmäävät, sinun täytyy antaa uusi nimi tiedostoa lähettäessäsi.\n"
+"Muutoin, jos \"Tallenna nimellä\" on tyhjä, tiedosto lähetetään "
+"alkuperäisellä nimellään."
+
+msgid "File to upload"
+msgstr "Lähetettävä tiedosto"
+
+msgid "Rename to"
+msgstr "Uudelleennimeä"
+
+msgid "Upload"
+msgstr "Lähetä"
+
+msgid "Attached Files"
+msgstr "Liitetiedostot"
+
+msgid "You are not allowed to attach a file to this page."
+msgstr "Sinulla ei ole oikeutta liittää tiedostoa tälle sivulle."
+
+msgid "File attachments are not allowed in this wiki!"
+msgstr "Liitetiedostoja ei ole sallittu tässä wikissä!"
+
+msgid "You are not allowed to save a drawing on this page."
+msgstr "Sinulla ei ole oikeutta tallentaa piirrosta tälle sivulle."
+
+msgid ""
+"No file content. Delete non ASCII characters from the file name and try "
+"again."
+msgstr ""
+"Ei tiedostosisältöä. Poista muut kuin ASCII-merkit nimestä ja yritä "
+"uudestaan."
+
+msgid "You are not allowed to delete attachments on this page."
+msgstr "Sinulla ei ole oikeutta poistaa liitetiedostoja tältä sivulta."
+
+#, fuzzy
+msgid "You are not allowed to move attachments from this page."
+msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
+
+msgid "Move aborted!"
+msgstr ""
+
+#, fuzzy
+msgid "Please use the interactive user interface to move attachments!"
+msgstr "Käytä toimintoa %(actionname)s vuorovaikutteisessa käyttöliittymässä!"
+
+msgid "You are not allowed to get attachments from this page."
+msgstr "Sinulla ei ole oikeutta hakea liitetiedostoja tältä sivulta."
+
+msgid "You are not allowed to unzip attachments of this page."
+msgstr "Sinulla ei ole oikeutta purkaa tämän sivun liitetiedostoja."
+
+msgid "You are not allowed to install files."
+msgstr "Sinulla ei ole oikeutta asentaa tiedostoja."
+
+msgid "You are not allowed to view attachments of this page."
+msgstr "Sinulla ei ole oikeutta katsoa tämän sivun liitetiedostoja."
+
+#, python-format
+msgid "Unsupported upload action: %s"
+msgstr "Tiedostonlähetystoiminto ei ole tuettu: %s"
+
+#, python-format
+msgid "Attachments for \"%(pagename)s\""
+msgstr "Liitetiedostot sivulla %(pagename)s"
+
+#, python-format
+msgid ""
+"Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes "
+"saved."
+msgstr ""
+"Liitetiedosto '%(target)s' (alkuperäinen nimi '%(filename)s'), %(bytes)d "
+"tavua tallennettu."
+
+#, python-format
+msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
+msgstr ""
+"Liitetiedosto '%(target)s' (alkuperäinen nimi '%(filename)s') oli jo "
+"olemassa."
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' already exists."
+msgstr "Liitetiedosto '%(filename)s' asennettu."
+
+#, fuzzy, python-format
+msgid "Attachment '%(filename)s' moved to %(page)s."
+msgstr "Liitetiedostoa '%(filename)s' ei ole!"
+
+msgid "Nothing changed"
+msgstr ""
+
+#, python-format
+msgid "Page %(newpagename)s does not exists or you don't have enough rights."
+msgstr ""
+
+#, fuzzy
+msgid "Move aborted because empty page name"
+msgstr "Et voi vaihtaa nimeä tyhjäksi."
+
+#, fuzzy, python-format
+msgid "Please use a valid filename for attachment '%(filename)s'."
+msgstr "Liitetiedoston '%(filename)s' lähetys."
+
+msgid "Move aborted because empty attachment name"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+#, fuzzy
+msgid "New page name"
+msgstr "Uusi nimi"
+
+#, fuzzy
+msgid "New attachment name"
+msgstr "Uusi liitetiedosto"
+
+#, python-format
+msgid "Attachment '%(filename)s' installed."
+msgstr "Liitetiedosto '%(filename)s' asennettu."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too large (%(space)d kB missing)."
+msgstr ""
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostot olisivat "
+"liian suuret (%(space)d kt liikaa)."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' could not be unzipped because the resulting files "
+"would be too many (%(count)d missing)."
+msgstr ""
+"Liitetiedostoa '%(filename)s' ei voitu purkaa koska tulostiedostoja olisi "
+"liian monta (%(count)d liikaa)."
+
+#, python-format
+msgid "Attachment '%(filename)s' unzipped."
+msgstr "Liitetiedosto '%(filename)s' purettu."
+
+#, python-format
+msgid ""
+"Attachment '%(filename)s' not unzipped because the files are too big, .zip "
+"files only, exist already or reside in folders."
+msgstr ""
+"Liitettä '%(filename)s' ei purettu, koska sen tiedostot ovat liian suuria, ."
+"zip-tiedostoja, alihakemistoissa tai jo olemassa."
+
+#, python-format
+msgid "The file %(target)s is not a .zip file."
+msgstr "Tiedosto %(target)s ei ole .zip-tiedosto."
+
+#, python-format
+msgid "Attachment '%(filename)s'"
+msgstr "Liitetiedosto '%(filename)s'"
+
+msgid "Package script:"
+msgstr "Pakettijuonto:"
+
+msgid "File Name"
+msgstr "Tiedoston nimi"
+
+msgid "Modified"
+msgstr "Muokattu"
+
+msgid "Size"
+msgstr "Koko"
+
+msgid "Unknown file type, cannot display this attachment inline."
+msgstr "Tuntematon tiedostotyyppi, liitettä ei voida näyttää sivulla."
+
+#, python-format
+msgid "attachment:%(filename)s of %(pagename)s"
+msgstr "[[Verbatim(attachment:)]]%(filename)s / %(pagename)s"
+
+msgid "This page is already deleted or was never created!"
+msgstr "Tämä sivu on jo poistettu tai sitä ei ollutkaan!"
+
+msgid "New name"
+msgstr "Uusi nimi"
+
+msgid "Optional reason for the renaming"
+msgstr "Vapaaehtoinen uudelleennimeämisen syy"
+
+#, python-format
+msgid "Full Link List for \"%s\""
+msgstr "Täysi linkkilista haulle \"%s\""
+
+msgid "Editor"
+msgstr "Muokkaaja"
+
+msgid "Pages"
+msgstr "Sivut"
+
+msgid "Select Author"
+msgstr "Valitse kirjoittaja"
+
+msgid "Revert all!"
+msgstr "Palauta kaikki!"
+
+msgid "You are not allowed to use this action."
+msgstr "Sinun ei ole sallittu käyttää tätä toimintoa."
+
+#, fuzzy, python-format
+msgid "Rolled back changes to the page %s."
+msgstr "Tilaa sivua %s käyttäjille"
+
+msgid "Exception while calling rollback function:"
+msgstr ""
+
+msgid ""
+"Please enter your password of your account at the remote wiki below. "
+"[[BR]] /!\\ You should trust both wikis because the password could be read "
+"by the particular administrators."
+msgstr ""
+
+#, fuzzy
+msgid "Operation was canceled."
+msgstr "Muokkaus peruttu."
+
+msgid "The only supported directions are BOTH and DOWN."
+msgstr ""
+
+msgid ""
+"Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
+"be able to use this action."
+msgstr ""
+
+msgid ""
+"Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
+"Refer to HelpOnSynchronisation for help."
+msgstr ""
+
+msgid "The ''remoteWiki'' is unknown."
+msgstr ""
+
+msgid "A severe error occured:"
+msgstr ""
+
+msgid "Synchronisation finished. Look below for the status messages."
+msgstr ""
+
+msgid "Synchronisation started -"
+msgstr ""
+
+#, python-format
+msgid ""
+"Got a list of %s local and %s remote pages. This results in %s different "
+"pages over-all."
+msgstr ""
+
+#, python-format
+msgid "After filtering: %s pages"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s locally."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s locally:"
+msgstr ""
+
+#, python-format
+msgid "Deleted page %s remotely."
+msgstr ""
+
+#, python-format
+msgid "Error while deleting page %s remotely:"
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s cannot be merged automatically but was changed in both wikis. "
+"Please delete it in one of both wikis and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s has different mime types in both wikis and cannot be merged. "
+"Please delete it in one of both wikis or unify the mime type, and try again."
+msgstr ""
+
+#, python-format
+msgid ""
+"The item %s was renamed locally. This is not implemented yet. Therefore the "
+"full synchronisation history is lost for this page."
+msgstr ""
+
+#, python-format
+msgid "Synchronising page %s with remote page %s ..."
+msgstr ""
+
+#, python-format
+msgid "The page %s was deleted remotely but changed locally."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be synced. The remote page was renamed. This is not "
+"supported yet. You may want to delete one of the pages to get it synced."
+msgstr ""
+
+#, python-format
+msgid "Skipped page %s because of a locally or remotely unresolved conflict."
+msgstr ""
+
+#, python-format
+msgid ""
+"This is the first synchronisation between the local and the remote wiki for "
+"the page %s."
+msgstr ""
+
+#, python-format
+msgid ""
+"The page %s could not be merged because you are not allowed to modify the "
+"page in the remote wiki."
+msgstr ""
+
+#, fuzzy, python-format
+msgid "Page %s successfully merged."
+msgstr "Sivu \"%s\" poistettiin onnistuneesti!"
+
+#, python-format
+msgid "Page %s contains conflicts that were introduced on the remote side."
+msgstr ""
+
+#, python-format
+msgid "Page %s merged with conflicts."
+msgstr ""
+
+#, python-format
+msgid "(including %(localwords)d %(pagelink)s)"
+msgstr "(sisältää %(localwords)d %(pagelink)s)"
+
+#, python-format
+msgid ""
+"The following %(badwords)d words could not be found in the dictionary of %"
+"(totalwords)d words%(localwords)s and are highlighted below:"
+msgstr ""
+"Seuraavia %(badwords)d sanaa ei löytynyt %(totalwords)d sanan%(localwords)s "
+"ja ne on korostettu alla:"
+
+msgid "Add checked words to dictionary"
+msgstr "Lisää merkityt sanat sanakirjaan"
+
+msgid "No spelling errors found!"
+msgstr "Ei löytynyt kirjoitusvirheitä!"
+
+msgid "You can't check spelling on a page you can't read."
+msgstr "Et voi oikolukea sivua jota et voi lukea."
+
+msgid "You are now logged out."
+msgstr "Olet nyt kirjautunut ulos."
+
+msgid "You are not allowed to subscribe to a page you can't read."
+msgstr "Sinulla ei ole oikeutta tilata sivua jota et voi lukea."
+
+msgid "This wiki is not enabled for mail processing."
+msgstr "Sähköpostia ei ole otettu käyttöön tässä wikissä."
+
+#, fuzzy
+msgid "You must log in to use subscriptions."
+msgstr "Sinun täytyy kirjautua käyttääksesi tilauksia."
+
+msgid "Add your email address in your UserPreferences to use subscriptions."
+msgstr ""
+"Lisää sähköpostiosoitteesi sivullasi KäyttäjäAsetukset tilauksia varten."
+
+#, fuzzy
+msgid "Your subscription to this page has been removed."
+msgstr "Tilauksesi tälle sivulle on poistettu."
+
+msgid "Can't remove regular expression subscription!"
+msgstr "Säännöllisen lausekkeen tilausta ei voida poistaa!"
+
+msgid "Edit the subscription regular expressions in your UserPreferences."
+msgstr ""
+"Muokkaa tilauksien säännöllisiä lausekkeita sivullasi KäyttäjäAsetukset."
+
+msgid "You have been subscribed to this page."
+msgstr "Sinulle on lisätty tilaus tälle sivulle."
+
+msgid "General Information"
+msgstr "Yleiset tiedot"
+
+#, python-format
+msgid "Page size: %d"
+msgstr "Sivun koko: %d"
+
+msgid "SHA digest of this page's content is:"
+msgstr "SHA-tiiviste tämän sivun sisällölle on:"
+
+msgid "The following users subscribed to this page:"
+msgstr "Seuraavat käyttäjät ovat tilanneet tämän sivun:"
+
+msgid "This page links to the following pages:"
+msgstr "Tältä sivulta on linkit seuraaville sivuille:"
+
+msgid "Diff"
+msgstr "Erot"
+
+msgid "Comment"
+msgstr "Kuvaus"
+
+msgid "raw"
+msgstr "muotoilematon"
+
+msgid "print"
+msgstr "tulosta"
+
+msgid "revert"
+msgstr "palauta"
+
+msgid "Revision History"
+msgstr "Versiohistoria"
+
+msgid "No log entries found."
+msgstr "Ei löytynyt lokimerkintöjä."
+
+#, python-format
+msgid "Info for \"%s\""
+msgstr "Tiedot: \"%s\""
+
+#, python-format
+msgid "Show \"%(title)s\""
+msgstr "Näytä \"%(title)s\""
+
+msgid "General Page Infos"
+msgstr "Yleiset sivutiedot"
+
+msgid "Please log in first."
+msgstr "Kirjaudu ensin sisään."
+
+msgid "Please first create a homepage before creating additional pages."
+msgstr "Luo kotisivu ennen kuin luot muita sivuja."
+
+#, python-format
+msgid ""
+"You can add some additional sub pages to your already existing homepage "
+"here.\n"
+"\n"
+"You can choose how open to other readers or writers those pages shall be,\n"
+"access is controlled by group membership of the corresponding group page.\n"
+"\n"
+"Just enter the sub page's name and click on the button to create a new "
+"page.\n"
+"\n"
+"Before creating access protected pages, make sure the corresponding group "
+"page\n"
+"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
+"creating\n"
+"the group pages.\n"
+"\n"
+"||'''Add a new personal page:'''||'''Related access control list "
+"group:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
+"[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
+"(username)s only||\n"
+"\n"
+msgstr ""
+"Täällä voit lisätä olemassaolevalle omalle sivullesi alasivuja.\n"
+"\n"
+"Voit valita kuinka avoimia sivuja haluat muiden lukijoiden ja\n"
+"kirjoittajien suhteen. Pääsy riippuu kuulumisesta vastaavalle ryhmäsivulle.\n"
+"\n"
+"Kirjoita vain alasivun nimi ja napsauta nappia luodaksesi sivun.\n"
+"\n"
+"Ennen kuin teet pääsyltään rajoitettuja sivuja, katso että vastaava\n"
+"ryhmäsivu on olemassa ja sillä on oikeat henkilöt. Käytä ryhmäsivujen\n"
+"luonnissa mallinetta HomepageGroupsTemplate.\n"
+"\n"
+"||'''Lisää uusi oma sivu:'''||'''Vastaava pääsyrajoituksen ryhmä:'''||\n"
+"||[[NewPage(HomepageReadWritePageTemplate,luettavissa ja kirjoitettavissa,%"
+"(username)s)]]||[\"%(username)s/ReadWriteGroup\"]||\n"
+"||[[NewPage(HomepageReadPageTemplate,vain luettavissa,%(username)s)]]||[\"%"
+"(username)s/ReadGroup\"]||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,yksityinen,%(username)s)]]||"
+"Ainoastaan %(username)s||\n"
+"\n"
+
+msgid "MyPages management"
+msgstr "Omien sivujen hallinta"
+
+#, python-format
+msgid "Subscribe users to the page %s"
+msgstr "Tilaa sivua %s käyttäjille"
+
+#, python-format
+msgid "Subscribed for %s:"
+msgstr "%s tilattuna käyttäjille:"
+
+msgid "Not a user:"
+msgstr "Ei käyttäjä:"
+
+msgid "You are not allowed to perform this action."
+msgstr "Sinun ei ole sallittu suorittaa tätä toimintoa."
+
+#, python-format
+msgid "(!) Only pages changed since '''%s''' are being displayed!"
+msgstr ""
+
+msgid ""
+"/!\\ The modification date you entered was not recognized and is therefore "
+"not considered for the search results!"
+msgstr ""
+
+#, python-format
+msgid "Title Search: \"%s\""
+msgstr "Nimihaku: \"%s\""
+
+#, fuzzy, python-format
+msgid "Advanced Search: \"%s\""
+msgstr "Nimihaku: \"%s\""
+
+#, python-format
+msgid "Full Text Search: \"%s\""
+msgstr "Tekstihaku: \"%s\""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
+"for more information."
+msgstr ""
+
+#, python-format
+msgid ""
+"Your search query {{{\"%s\"}}} didn't return any results. Please change some "
+"terms and refer to HelpOnSearching for more information.%s"
+msgstr ""
+
+msgid "(!) Consider performing a"
+msgstr ""
+
+msgid "full-text search with your search terms"
+msgstr ""
+
+msgid ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. [[BR]]"
+msgstr ""
+
+#, fuzzy
+msgid "Click here to perform a full-text search with your search terms!"
+msgstr "Napsauta tehdäksesi tekstihaun tälle nimelle"
+
+#, python-format
+msgid ""
+"Restored Backup: %(filename)s to target dir: %(targetdir)s.\n"
+"Files: %(filecount)d, Directories: %(dircount)d"
+msgstr ""
+"Palautettu varmuuskopio: %(filename)s kohdehakemistoon: %(targetdir)s.\n"
+"Tiedostoja: %(filecount)d, hakemistoja: %(dircount)d"
+
+#, python-format
+msgid "Restoring backup: %(filename)s to target dir: %(targetdir)s failed."
+msgstr ""
+"Varmuuskopion palauttaminen ei onnistunut: %(filename)s kohdehakemistoon: %"
+"(targetdir)s."
+
+msgid "Wiki Backup / Restore"
+msgstr "Wikin varmuuskopiointi / palautus"
+
+msgid ""
+"Some hints:\n"
+" * To restore a backup:\n"
+"  * Restoring a backup will overwrite existing data, so be careful.\n"
+"  * Rename it to <siteid>.tar.<compression> (remove the --date--time--UTC "
+"stuff).\n"
+"  * Put the backup file into the backup_storage_dir (use scp, ftp, ...).\n"
+"  * Hit the [[GetText(Restore)]] button below.\n"
+"\n"
+" * To make a backup, just hit the [[GetText(Backup)]] button and save the "
+"file\n"
+"   you get to a secure place.\n"
+"\n"
+"Please make sure your wiki configuration backup_* values are correct and "
+"complete.\n"
+"\n"
+msgstr ""
+"Muutama vihje:\n"
+" * Varmuuskopion palauttaminen:\n"
+"  * Varmuuskopion palauttaminen ylikirjoittaa senhetkiset tiedot, joten ole "
+"varovainen.\n"
+"  * Vaihda varmuuskopion nimeksi <sivusto>.tar.<pakkaus> (poista --päiväys--"
+"aika--UTC -osuus).\n"
+"  * Laita varmuuskopio hakemistoon backup_storage_dir (scp:llä, ftp:"
+"llä, ...).\n"
+"  * Paina nappia [[GetText(Restore)]] alapuolella.\n"
+"\n"
+" * Varmuuskopion luodaksesi paina vain nappia [[GetText(Backup)]] ja "
+"tallenna \n"
+"   saamasi tiedosto varmaan paikkaan.\n"
+"\n"
+"Kannattaa varmistaa että wikin asetusten arvot backup_* ovat oikeat ja "
+"kattavat.\n"
+"\n"
+
+msgid "Backup"
+msgstr "Varmuuskopio"
+
+msgid "Restore"
+msgstr "Palauta kopio"
+
+msgid "You are not allowed to do remote backup."
+msgstr "Sinun ei ole sallittu ottaa etävarmuuskopioita."
+
+#, python-format
+msgid "Unknown backup subaction: %s."
+msgstr "Tuntematon varmistuksen osatoiminto: %s."
+
+msgid "You are not allowed to revert this page!"
+msgstr "Sinulla ei ole oikeutta palauttaa tätä sivua!"
+
+#, python-format
+msgid "Local Site Map for \"%s\""
+msgstr "Paikallinen sivukartta sivulta \"%s\""
+
+#, python-format
+msgid "No pages like \"%s\"!"
+msgstr "Ei sivuja kuten \"%s\"!"
+
+#, python-format
+msgid "Invalid filename \"%s\"!"
+msgstr "Kelvoton tiedostonimi \"%s\"!"
+
+#, python-format
+msgid "Created the package %s containing the pages %s."
+msgstr "Luotu paketti %s sivuista %s."
+
+msgid "Package pages"
+msgstr "Paketoi sivuja"
+
+msgid "Package name"
+msgstr "Paketin nimi"
+
+msgid "List of page names - separated by a comma"
+msgstr "Luettelo sivuista - pilkuilla erotettuina"
+
+msgid "No older revisions available!"
+msgstr "Ei vanhempia versioita saatavilla!"
+
+#, python-format
+msgid "Diff for \"%s\""
+msgstr "Erot sivulle \"%s\""
+
+#, python-format
+msgid "Differences between revisions %d and %d"
+msgstr "Erot versioiden %d ja %d välillä"
+
+#, python-format
+msgid "(spanning %d versions)"
+msgstr "(kattaa %d versiota)"
+
+#, python-format
+msgid "The page was saved %(count)d times, though!"
+msgstr "Sivu oli kuitenkin tallennettu %(count)d kertaa!"
+
+msgid "(ignoring whitespace)"
+msgstr "(tyhjätilamerkkejä ei huomioida)"
+
+msgid "Ignore changes in the amount of whitespace"
+msgstr "Sivuuta muutokset tyhjätilamerkkien määrässä"
+
+#, python-format
+msgid "Exactly one page like \"%s\" found, redirecting to page."
+msgstr "Täsmälleen yksi sivu kuten \"%s\" löytyi, edelleenohjataan sivulle."
+
+#, python-format
+msgid "Pages like \"%s\""
+msgstr "Sivut kuten \"%s\""
+
+#, python-format
+msgid "%(matchcount)d %(matches)s for \"%(title)s\""
+msgstr "%(matchcount)d %(matches)s nimelle \"%(title)s\""
+
+msgid ""
+"Cannot create a new page without a page name.  Please specify a page name."
+msgstr "Uutta sivua ei voi luoda ilman sivun nimeä. Anna sivulle nimi."
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Optional reason for the deletion"
+msgstr "Vapaaehtoinen poiston syy"
+
+msgid "Really delete this page?"
+msgstr "Haluatko varmasti poistaa tämän sivun?"
+
+#~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
+#~ msgstr "## varmuuskopio sivusta \"%(pagename)s\" lähetetty %(date)s"
+
+#~ msgid "A backup of your changes is [%(backup_url)s here]."
+#~ msgstr "Varmuuskopio muutoksistasi on [%(backup_url)s täällä]."
+
+#~ msgid "Show chart \"%(title)s\""
+#~ msgstr "Näytä kaavio \"%(title)s\""
+
+#~ msgid "set bookmark"
+#~ msgstr "aseta kirjanmerkki"
+
+#~ msgid "You are not allowed to do %s on this page."
+#~ msgstr "Sinulla ei ole oikeutta toimintoon %s tälle sivulle."
+
+#~ msgid "%(hits)d results out of about %(pages)d pages."
+#~ msgstr "%(hits)d tulosta noin %(pages)d sivusta."
+
+#~ msgid "Required attribute \"%(attrname)s\" missing"
+#~ msgstr "Vaadittu tieto \"%(attrname)s\" puuttuu"
+
+#~ msgid "Submitted form data:"
+#~ msgstr "Lomakkeella lähetettiin tiedot:"
+
+#~ msgid "Plain title index"
+#~ msgstr "Paljas sivuhakemisto"
+
+#~ msgid "XML title index"
+#~ msgstr "XML-sivuhakemisto"
+
+#~ msgid "Installed processors (DEPRECATED -- use Parsers instead)"
+#~ msgstr "Asennetut käsittelimet (VANHENTUNEET - käytä jäsentimiä)"
+
+#~ msgid ""
+#~ "Sorry, someone else saved the page while you edited it.\n"
+#~ "\n"
+#~ "Please do the following: Use the back button of your browser, and "
+#~ "cut&paste\n"
+#~ "your changes from there. Then go forward to here, and click EditText "
+#~ "again.\n"
+#~ "Now re-add your changes to the current page contents.\n"
+#~ "\n"
+#~ "''Do not just replace\n"
+#~ "the content editbox with your version of the page, because that would\n"
+#~ "delete the changes of the other person, which is excessively rude!''\n"
+#~ msgstr ""
+#~ "Valitettavasti joku muu tallensi sivun sillä aikaa kun muokkasit sitä.\n"
+#~ "\n"
+#~ "Ystävällisesti toimi seuraavasti: Käytä selaimesi Takaisin-nappia ja "
+#~ "kopioi\n"
+#~ "muutoksesi leikepöydälle. Eteenpäin-napilla pääset takaisin tähän, \n"
+#~ "ja napsauta uudelleen MuokkaaTekstiä. Nyt voit lisätä muutoksesi sivun \n"
+#~ "nykyiseen sisältöön.\n"
+#~ "\n"
+#~ "''Älä pelkästään korvaa sivun sisältöä omalla versiollasi, sillä toisen \n"
+#~ "henkilön muutokset ohittuisivat kokonaan, mikä olisi erittäin tylyä!''\n"
+
+#~ msgid "Jump to last visited page instead of frontpage"
+#~ msgstr "Hyppää viimeksi vieraillulle sivulle etusivun sijaan"
+
+#~ msgid "(Only when changing passwords)"
+#~ msgstr "(varmistukseksi salasanaa valittaessa)"
+
+#~ msgid "Filename"
+#~ msgstr "Tiedostonimi"
