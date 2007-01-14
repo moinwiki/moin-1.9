@@ -1056,12 +1056,10 @@ actionsMenuInit('%(label)s');
         editbar_actions = []
         for editbar_item in self.request.cfg.edit_bar:
              if editbar_item == 'Discussion':
-                 if self.request.cfg.supplementation_page is False:
-                     if self.request.getPragma('supplementation-page', 1) in ['on', '1']:
-                         editbar_actions.append(self.supplementation_page_nameLink(page))
-                 elif self.request.cfg.supplementation_page is True:
-                     if not self.request.getPragma('supplementation-page', 1) in ['off', '0']:
-                         editbar_actions.append(self.supplementation_page_nameLink(page))
+                 if not self.request.cfg.supplementation_page and self.request.getPragma('supplementation-page', 1) in ('on', '1'):
+                     editbar_actions.append(self.supplementation_page_nameLink(page))
+                 elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
+                     editbar_actions.append(self.supplementation_page_nameLink(page))
              elif editbar_item == 'Edit':
                   editbar_actions.append(self.editorLink(page))
              elif editbar_item == 'Info':
