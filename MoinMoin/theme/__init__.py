@@ -50,8 +50,8 @@ class ThemeBase:
         'rss':        (_("[RSS]"),               "moin-rss.png",    36, 14),
         'deleted':    (_("[DELETED]"),           "moin-deleted.png",60, 12),
         'updated':    (_("[UPDATED]"),           "moin-updated.png",60, 12),
-        'renamed':    (_("[RENAMED]"),           "moin-updated.png",60, 12), # XXX need new icon
-        'conflict':   (_("[CONFLICT]"),          "alert.png", 15, 15),       # XXX need new icon
+        'renamed':    (_("[RENAMED]"),           "moin-renamed.png",60, 12),
+        'conflict':   (_("[CONFLICT]"),          "moin-conflict.png", 60, 12),
         'new':        (_("[NEW]"),               "moin-new.png",    31, 12),
         'diffrc':     (_("[DIFF]"),              "moin-diff.png",   15, 11),
         # General
