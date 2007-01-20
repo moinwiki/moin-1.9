@@ -3,6 +3,7 @@
     MoinMoin - Wiki Utility Functions
 
     @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
+    @copyright: 2007 Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -1642,4 +1643,16 @@ def checkTicket(request, ticket):
         return False
     ourticket = createTicket(request, timestamp_str)
     return ticket == ourticket
+
+def executeText(request, Parser, text, line_anchors=False):
+    '''render text with Parser execute each page element'''
+    import StringIO
+    out = StringIO.StringIO()
+    request.redirect(out)
+    wikiizer = Parser(text, request, line_anchors=line_anchors)
+    wikiizer.format(request.formatter)
+    result = out.getvalue()
+    request.redirect()
+    del out
+    return result
 
