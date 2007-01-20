@@ -6,11 +6,12 @@
     text cannot contain wiki markup.
 
     @copyright: 2002 by Jürgen Hermann <jh@web.de>
+                2007 Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 
-import sha, StringIO
-from MoinMoin import config
+import sha
+from MoinMoin import config, wikiutil
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 
 Dependencies = ["time"] # footnote macro cannot be cached
@@ -58,16 +59,7 @@ def emit_footnotes(request, formatter):
             result.append(formatter.text(str(idx + 1)))
             result.append(formatter.anchorlink(0))
             result.append(formatter.text(" "))
-
-            out = StringIO.StringIO()
-            request.redirect(out)
-            parser = WikiParser(request.footnotes[idx][0], request,
-                               line_anchors=False)
-            parser.format(formatter)
-            result.append(out.getvalue())
-            request.redirect()
-            del out
-            # [1] paragraph is automagically closed by wiki parser! 
+            result.append(wikiutil.executeText(request, WikiParser, request.footnotes[idx][0]))
             result.append(formatter.listitem(0))
 
         result.append(formatter.bullet_list(0))
