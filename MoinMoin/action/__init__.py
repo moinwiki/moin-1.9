@@ -126,7 +126,17 @@ class ActionBase:
         else:
             ticket_html = ''
 
+        method = 'GET'
+        if self.method:
+            method = self.method
+
+        enctype = 'multipart/form-data'
+        if self.enctype:
+            enctype = self.enctype
+
         d = {
+            'method': method,
+            'enctype': enctype,
             'error_html': error_html,
             'actionname': self.actionname,
             'pagename': self.pagename,
@@ -136,7 +146,7 @@ class ActionBase:
 
         form_html = '''
 %(error_html)s
-<form method="post" action="">
+<form method="post" action="" method="%(method)s" enctype="%(enctype)s">
 <input type="hidden" name="action" value="%(actionname)s">
 %(ticket_html)s
 %(user_html)s
