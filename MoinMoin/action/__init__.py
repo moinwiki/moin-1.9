@@ -55,6 +55,8 @@ class ActionBase:
         self.form_trigger_label = _("Do it.") # label for the trigger button
         self.page = Page(request, pagename)
         self.error = ''
+        self.method = 'GET'
+        self.enctype = 'multipart/form-data'
 
     # CHECKS -----------------------------------------------------------------
     def is_excluded(self):
@@ -126,17 +128,9 @@ class ActionBase:
         else:
             ticket_html = ''
 
-        method = 'GET'
-        if self.method:
-            method = self.method
-
-        enctype = 'multipart/form-data'
-        if self.enctype:
-            enctype = self.enctype
-
         d = {
-            'method': method,
-            'enctype': enctype,
+            'method': self.method,
+            'enctype': self.enctype,
             'error_html': error_html,
             'actionname': self.actionname,
             'pagename': self.pagename,
