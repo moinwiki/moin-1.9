@@ -235,7 +235,7 @@ class DefaultConfig:
     default_markup = 'wiki'
     docbook_html_dir = r"/usr/share/xml/docbook/stylesheet/nwalsh/html/" # correct for debian sarge
 
-    edit_bar = ['Edit', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'] 
+    edit_bar = ['Edit', 'Comments', 'Discussion', 'Info', 'Subscribe', 'Quicklink', 'Attachments', 'ActionsMenu'] 
     editor_default = 'text' # which editor is called when nothing is specified
     editor_ui = 'freechoice' # which editor links are shown on user interface
     editor_force = False
@@ -449,6 +449,7 @@ reStructuredText Quick Reference
         ('mailto_author', lambda _: _('Publish my email (not my wiki homepage) in author info')),
         ('edit_on_doubleclick', lambda _: _('Open editor on double click')),
         ('remember_last_visit', lambda _: _('After login, jump to last visited page')),
+        ('show_comments', lambda _: _('Show comment sections')),
         ('show_nonexist_qm', lambda _: _('Show question mark for non-existing pagelinks')),
         ('show_page_trail', lambda _: _('Show page trail')),
         ('show_toolbar', lambda _: _('Show icon toolbar')),
@@ -467,6 +468,7 @@ reStructuredText Quick Reference
     user_checkbox_defaults = {'mailto_author':       0,
                               'edit_on_doubleclick': 0,
                               'remember_last_visit': 0,
+                              'show_comments': 0,
                               'show_nonexist_qm':    nonexist_qm,
                               'show_page_trail':     1,
                               'show_toolbar':        1,

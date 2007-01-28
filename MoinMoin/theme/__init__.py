@@ -1053,6 +1053,7 @@ actionsMenuInit('%(label)s');
         This is separate method to make it easy to customize the
         edtibar in sub classes.
         """
+        _ = self.request.getText
         editbar_actions = []
         for editbar_item in self.request.cfg.edit_bar:
              if editbar_item == 'Discussion':
@@ -1060,16 +1061,19 @@ actionsMenuInit('%(label)s');
                      editbar_actions.append(self.supplementation_page_nameLink(page))
                  elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
                      editbar_actions.append(self.supplementation_page_nameLink(page))
+             elif editbar_item == 'Comments':
+                 # we just use <a> to get same style as other links: 
+                 editbar_actions.append('<a id="toggleCommentsButton" onClick="toggleComments();">%s</a>' % _('Comments'))
              elif editbar_item == 'Edit':
-                  editbar_actions.append(self.editorLink(page))
+                 editbar_actions.append(self.editorLink(page))
              elif editbar_item == 'Info':
-                  editbar_actions.append(self.infoLink(page))
+                 editbar_actions.append(self.infoLink(page))
              elif editbar_item == 'Subscribe':
-                  editbar_actions.append(self.subscribeLink(page))
+                 editbar_actions.append(self.subscribeLink(page))
              elif editbar_item == 'Quicklink':
-                  editbar_actions.append(self.quicklinkLink(page))
+                 editbar_actions.append(self.quicklinkLink(page))
              elif editbar_item == 'Attachments':
-                  editbar_actions.append(self.attachmentsLink(page))
+                 editbar_actions.append(self.attachmentsLink(page))
              elif editbar_item == 'ActionsMenu':
                  editbar_actions.append(self.actionsMenu(page))
         return editbar_actions

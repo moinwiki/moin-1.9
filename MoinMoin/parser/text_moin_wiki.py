@@ -127,6 +127,11 @@ class Parser:
         self.macro = None
         self.start_line = kw.get('start_line', 0)
 
+        # currently, there is only a single, optional argument to this parser and
+        # (when given), it is used as class(es) for a div wrapping the formatter output
+        # either use a single class like "comment" or multiple like "comment/red/dotted"
+        self.wrapping_div_class = kw.get('format_args', '').strip().replace('/', ' ')
+
         self.is_em = 0 # must be int
         self.is_b = 0 # must be int
         self.is_u = False
@@ -956,6 +961,13 @@ class Parser:
 
         self.in_processing_instructions = 1
 
+        if self.wrapping_div_class:
+            div_kw = {'css_class': self.wrapping_div_class, }
+            if 'comment' in self.wrapping_div_class.split():
+                # show comment divs depending on user profile (and wiki configuration)
+                div_kw['style'] = self.request.user.show_comments and "display:''" or "display:none"
+            self.request.write(self.formatter.div(1, **div_kw))
+
         # Main loop
         for line in self.lines:
             self.lineno += 1
@@ -1109,6 +1121,9 @@ class Parser:
         if self.in_pre: self.request.write(self.formatter.preformatted(0))
         if self.formatter.in_p: self.request.write(self.formatter.paragraph(0))
         if self.in_table: self.request.write(self.formatter.table(0))
+
+        if self.wrapping_div_class:
+            self.request.write(self.formatter.div(0))
 
     # Private helpers ------------------------------------------------------------
 
