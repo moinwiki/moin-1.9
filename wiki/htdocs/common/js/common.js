@@ -168,6 +168,20 @@ function show_switch2gui() {
     }
 }
 
+function toggleComments() {
+    // Toggle visibility of every div with class == *comment*
+    var all = document.getElementsByTagName('div');
+    for (i = 0; i < all.length; i++){
+        el = all[i];
+        if ( el.className.indexOf('comment') >= 0 ){
+            if ( el.style.display != 'none' ) {
+                el.style.display = 'none';
+            } else {
+                el.style.display = '';
+            }
+        }
+    }
+}
 
 function load() {
     // Do not name this "onload", it does not work with IE :-)
