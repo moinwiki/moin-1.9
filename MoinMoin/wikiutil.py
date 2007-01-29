@@ -1644,6 +1644,7 @@ def checkTicket(request, ticket):
     ourticket = createTicket(request, timestamp_str)
     return ticket == ourticket
 
+
 def executeText(request, Parser, text, line_anchors=False):
     """executes raw wiki markup with all page elements"""
     import StringIO
@@ -1656,32 +1657,29 @@ def executeText(request, Parser, text, line_anchors=False):
     del out
     return result
 
+
 def getProcessingInstructions(text):
     """creates dict of processing instructions from raw wiki markup"""
-    lines = text.split('\n')
     kw = {}
-    kw["processing_instructions"] = False
-    for line in lines:
+    for line in text.split('\n'):
         if line.startswith('#'):
             for pi in ("format", "refresh", "redirect", "deprecated", "pragma", "form", "acl", "language"):
                 if line[1:].lower().startswith(pi):
-                    kw[str(pi)] = ((line.split(pi))[1]).strip()
-                    kw["processing_instructions"] = True
+                    kw[pi] = line[len(pi)+1:].strip()
                     break
     return kw
 
+
 def getParser(request, text):
     """gets the parser from raw wiki murkup"""
-    pi = getProcessingInstructions(text)
-    pi_format = request.cfg.default_markup or "wiki"
-
     # check for XML content
     if text and text[:5] == '<?xml':
         pi_format = "xslt"
-
-    # check processing instructions
-    if pi.has_key('format'):
-        pi_format = (pi["format"]).lower()
+    else:
+        # check processing instructions
+        pi = getProcessingInstructions(text)
+        pi_format = pi.get("format", request.cfg.default_markup or "wiki").lower()
 
     Parser = searchAndImportPlugin(request.cfg, "parser", pi_format)
     return Parser
+
