@@ -459,6 +459,8 @@ Version 1.5.current:
       (both used on MissingPage) check whether the requesting entity was
       identified as a spider (e.g. search engine bot) and do nothing in that
       case. Normal users won't see any difference.
+    * For AttachFile, you can now choose to overwrite existing files of same
+      name (nice for updating files).
 
 Version 1.5.6:
   A general security notice:

@@ -185,9 +185,16 @@ def add_attachment(request, pagename, target, filecontent):
     attach_dir = getAttachDir(request, pagename, create=1)
     # save file
     fpath = os.path.join(attach_dir, target).encode(config.charset)
-    if os.path.exists(fpath):
-        raise AttachmentAlreadyExists
+    exists = os.path.exists(fpath)
+    if exists and not overwrite:
+        msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
+            'target': target, 'filename': filename}
     else:
+        if exists:
+            try:
+                os.remove(fpath)
+            except:
+                pass
         stream = open(fpath, 'wb')
         try:
             stream.write(filecontent)
@@ -468,6 +475,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.""")
 <dd><input type="file" name="file" size="50"></dd>
 <dt>%(upload_label_rename)s</dt>
 <dd><input type="text" name="rename" size="50" value="%(rename)s"></dd>
+<dt>%(upload_label_overwrite)s</dt>
+<dd><input type="checkbox" name="overwrite" value="1" %(overwrite_checked)s></dd>
 </dl>
 <p>
 <input type="hidden" name="action" value="%(action_name)s">
@@ -482,6 +491,8 @@ Otherwise, if "Rename to" is left blank, the original filename will be used.""")
     'upload_label_file': _('File to upload'),
     'upload_label_rename': _('Rename to'),
     'rename': request.form.get('rename', [''])[0],
+    'upload_label_overwrite': _('Overwrite existing attachment of same name'),
+    'overwrite_checked': ('', 'checked')[request.form.get('overwrite', ['0'])[0] == '1'],
     'upload_button': _('Upload'),
 })
 
@@ -602,6 +613,12 @@ def do_upload(pagename, request):
     rename = None
     if request.form.has_key('rename'):
         rename = request.form['rename'][0].strip()
+    overwrite = 0
+    if request.form.has_key('overwrite'):
+        try:
+            overwrite = int(request.form['overwrite'][0])
+        except:
+            pass
 
     # if we use twisted, "rename" field is NOT optional, because we
     # can't access the client filename
