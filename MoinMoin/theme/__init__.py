@@ -12,6 +12,11 @@ from MoinMoin.util import pysupport
 
 modules = pysupport.getPackageModules(__file__)
 
+# Check whether we can emit a RSS feed (code stolen from wikitest.py).
+# Currently RSS is broken on plain Python, and works only when installing PyXML.
+import xml
+rss_supported = '_xmlplus' in xml.__file__
+
 
 class ThemeBase:
     """ Base class for themes 
@@ -781,21 +786,19 @@ var search_hint = "%(search_hint)s";
     }
         return script
 
-    def shouldUseRSS(self):
-        """ Return True if rss feature is available, or False
+    def shouldUseRSS(self, page):
+        """ Return True if RSS feature is available and we are on the
+            RecentChanges page, or False.
 
-        Currently rss is broken on plain Python, and works only when
-        installing PyXML. Return true if PyXML is installed.
+            Currently rss is broken on plain Python, and works only when
+            installing PyXML. Return true if PyXML is installed.
         """
-        # Stolen from wikitest.py
-        try:
-            import xml
-            return '_xmlplus' in xml.__file__
-        except ImportError:
-            # This error reported on Python 2.2
+        if not rss_supported:
             return False
+        return page.page_name == u'RecentChanges' or \
+           page.page_name == self.request.getText(u'RecentChanges', formatted=False)
 
-    def rsshref(self):
+    def rsshref(self, page):
         """ Create rss href, used for rss button and head link
         
         @rtype: unicode
@@ -806,7 +809,7 @@ var search_hint = "%(search_hint)s";
                 'action':'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
         return url
 
-    def rsslink(self):
+    def rsslink(self, d):
         """ Create rss link in head, used by FireFox
 
         RSS link for FireFox. This shows an rss link in the bottom of
@@ -816,11 +819,12 @@ var search_hint = "%(search_hint)s";
         @return: html head
         """
         link = u''
-        if self.shouldUseRSS():
+        page = d['page']
+        if self.shouldUseRSS(page):
             link = (u'<link rel="alternate" title="%s Recent Changes" '
                     u'href="%s" type="application/rss+xml">') % (
                         self.cfg.sitename,
-                        self.rsshref() )
+                        self.rsshref(page) )
         return link
 
     def html_head(self, d):
@@ -836,7 +840,7 @@ var search_hint = "%(search_hint)s";
             self.headscript(d), # Should move to separate .js file
             self.guiEditorScript(d),
             self.html_stylesheets(d),
-            self.rsslink(),
+            self.rsslink(d),
             ]
         return '\n'.join(html)
 
@@ -1330,10 +1334,11 @@ var gui_editor_link_text = "%(text)s";
         # Should use user interface language and direction
         html = '<div class="recentchanges"%s>\n' % self.ui_lang_attr()
         html += '<div>\n'
-        if self.shouldUseRSS():
+        page = d['page']
+        if self.shouldUseRSS(page):
             link = [
                 u'<div class="rcrss">',
-                self.request.formatter.url(1, self.rsshref()),
+                self.request.formatter.url(1, self.rsshref(page)),
                 self.request.formatter.rawHTML(self.make_icon("rss")),
                 self.request.formatter.url(0),
                 u'</div>',
