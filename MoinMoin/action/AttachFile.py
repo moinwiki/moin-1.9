@@ -341,7 +341,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         str = str + "</ul>"
     else:
         if showheader:
-            str = '%s<p>%s</p>' % (str, _("No attachments stored for %(pagename)s") % {'pagename': pagename})
+            str = '%s<p>%s</p>' % (str, _("No attachments stored for %(pagename)s") % {'pagename': wikiutil.escape(pagename)})
 
     return str
 

@@ -697,7 +697,7 @@ class ThemeBase:
                 pagename = page.page_name
                 if self.request.cfg.show_interwiki:
                     pagename = "%s: %s" % (self.request.cfg.interwikiname, pagename)
-                info = "%s  (%s)" % (pagename, info)
+                info = "%s  (%s)" % (wikiutil.escape(pagename), info)
                 html = '<p id="pageinfo" class="info"%(lang)s>%(info)s</p>\n' % {
                     'lang': self.ui_lang_attr(),
                     'info': info
