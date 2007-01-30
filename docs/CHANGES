@@ -462,6 +462,82 @@ Version 1.5.current:
     * For AttachFile, you can now choose to overwrite existing files of same
       name (nice for updating files).
 
+  Bugfixes:
+    * XSS Fixes:
+      * fixed unescaped page info display.
+      * fixed unescaped page name display in AttachFile, RenamePage and
+        LocalSiteMap actions
+    * WantedPages listed existing pages that are not readable for the user,
+      but are linked from pages that ARE readable for the user (so this is NOT
+      a privacy/security issue). We now don't list those pages any more as it
+      is pointless/confusing, the user can't read or edit there anyway.
+    * MoinMoin:MoinMoinBugs/TableOfContentsUsesNonExistingIncludeLinks
+    * MoinMoin:MoinMoinBugs/ActionsExcludedTriggerError
+    * GUI editor/converter:
+      * ignore <col>/<colgroup>/<meta> elements
+      * support <a> within blockquote
+    * Remove generated=... attribute from pagelink html output (this attr is
+      for internal use only). w3c validator is now happier again.
+    * Fixed css class "userpref" (not: "userprefs") of the Login form.
+    * Fixed the version number check in the xslt parser for 4suite >= 1.0.
+    * We reset the umask to the wanted value every request. This should fix
+      wrong file modes when used with Twisted (twistd uses a hardcoded 0077
+      umask in daemonize()).
+    * Avoid trouble when saving pages with antispam function when MoinMaster
+      wiki is having troubles (catch xmlrpc Fault).
+
+  Other changes:
+    * Standalone server does not do reverse DNS lookups any more (this is a
+      standard feature of BaseHTTPServer stdlib module, but we override this
+      now and just print the IP).
+    * We moved the IE hacks to theme/css/msie.css that gets included after all
+      other css files (but before the user css file) using a conditional
+      comment with "if IE", so it gets only loaded for MSIE (no matter which
+      version). The file has some standard css inside (evaluated on all MSIE
+      versions) and some * html hacks that only IE < 7 will read.
+      HINT: if you use custom themes, you want to update them in the same way.
+    * Improved ldap auth:
+      * cfg.ldap_name_attribute was removed because of new cfg.ldap_filter.
+        If you had ldap_name_attribute = 'sAMAccountName' before, just use
+        ldap_filter = '(sAMAccountName=%(username)s)' now.
+      * New cfg.ldap_filter used for the ldap filter string used in the ldap
+        search instead of the rather limited, partly hardcoded filter we used
+        before. This is much more flexible:
+        ldap_filter = '(sAMAccountName=%(username)s)'
+        You can also do more complex filtering expressions like:
+        '(&(cn=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))'
+      * Added some processing to filter out result entries with dn == None.
+      * We set REFERRALS option to 0 before initializing the ldap server
+        connection (this seems to be needed for Active Directory servers).
+      * We support self-signed ssl certs for ldaps - completely untested.
+      * New cfg.ldap_surname_attribute (usually 'sn'), was hardcoded before.
+      * New cfg.ldap_givenname_attribute (usually 'givenName'), hardcoded before.
+      * New cfg.ldap_aliasname_attribute (usually 'displayName').
+      * For setting up moin's aliasname, we first try the ldap_aliasname_attribute
+        and in case that fails, we use givenname and surname to make it up.
+      * We only request the attributes we need from ldap (was: all attrs).
+      * We deny user login (and break out of auth chain) for the following cases:
+        * if a user is not found by ldap lookup
+        * if we find more than one matching entry
+        * if the password is empty or incorrect
+        * if some exception happens
+      * Please note that there is an updated ldap sample config in directory
+        wiki/config/more_samples/.
+    * Work around a IE7 rendering problem with long pages getting more and
+      more narrow. We just applied the same "fix" as we used for IE6, using
+      "display: none" for span.anchor for IE browsers.
+    * RSS feed related:
+      * We used to emit a <link> tag for the action=rss_rc RSS feed on any
+        page. This was changed, we now emit that link only on RecentChanges and
+        the current user's language translation of RecentChanges.
+        This was changed because Google Toolbar requests the RSS feed linked
+        by such a link tag every time it sees one. Thus, if you used the wiki
+        normally, it requested the RSS feed every few seconds and caused
+        problems due to surge protection kicking in because of that.
+      * HINT for custom theme users: if your theme code calls
+        rsslink(), then you need to change that to rsslink(d) for 1.5.7+.
+
+
 Version 1.5.6:
   A general security notice:
       Check your Python version, there was a buffer overflow issue in Python
