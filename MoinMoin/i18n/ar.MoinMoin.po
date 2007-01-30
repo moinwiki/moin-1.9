@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date:  2006-05-21 23:16+0200\n"
 "Last-Translator: Alexander Stein <ajs67@georgetown.edu>\n"
 "Language-Team: \n"
@@ -148,8 +148,8 @@ msgstr "بريد الكتروني"
 
 #, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -554,6 +554,10 @@ msgstr "النص"
 msgid "current"
 msgstr ""
 
+#, python-format
+msgid "last modified: %s"
+msgstr ""
+
 msgid "match"
 msgstr ""
 
@@ -697,10 +701,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, python-format
-msgid "last modified: %s"
-msgstr ""
-
 msgid "N/A"
 msgstr ""
 
@@ -737,6 +737,10 @@ msgstr ""
 
 #, python-format
 msgid "Revert to revision %(rev)d."
+msgstr ""
+
+#, python-format
+msgid "Renamed from '%(oldpagename)s'."
 msgstr ""
 
 #, python-format
@@ -824,6 +828,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -971,6 +979,12 @@ msgstr ""
 msgid "[UPDATED]"
 msgstr ""
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr ""
 
@@ -1051,6 +1065,9 @@ msgstr ""
 msgid "Remove Spam"
 msgstr ""
 
+msgid "Revert to this revision"
+msgstr ""
+
 msgid "Package Pages"
 msgstr ""
 
@@ -1059,6 +1076,10 @@ msgstr ""
 
 msgid "Do"
 msgstr ""
+
+#, fuzzy
+msgid "Comments"
+msgstr "تصريح"
 
 msgid "Edit (Text)"
 msgstr "تحرير(نصي)"
@@ -1274,6 +1295,9 @@ msgid "Open editor on double click"
 msgstr "افتح المحرر عند النقر المزدوج"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1800,15 +1824,6 @@ msgid "Diff"
 msgstr ""
 
 msgid "Comment"
-msgstr ""
-
-msgid "raw"
-msgstr ""
-
-msgid "print"
-msgstr ""
-
-msgid "revert"
 msgstr ""
 
 msgid "Revision History"

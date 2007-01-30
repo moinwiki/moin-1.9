@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-10-15 03:25+0300\n"
 "Last-Translator: Tuukka Hastrup <Tuukka.Hastrup@iki.fi>\n"
 "Language-Team: Finnish <moin-devel@lists.sourceforge.net>\n"
@@ -154,10 +154,10 @@ msgstr "Sähköpostita minulle käyttäjätietoni"
 msgid "Email"
 msgstr "Sähköpostiosoite"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Luodaksesi tunnuksen tai selvittääksesi kadonneen salasanan, käytä sivua %"
 "(userprefslink)s."
@@ -625,6 +625,10 @@ msgstr "Teksteistä"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "viimeksi muokattu %(time)s"
+
 msgid "match"
 msgstr "osuma"
 
@@ -768,10 +772,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "viimeksi muokattu %(time)s"
-
 msgid "N/A"
 msgstr "ei ole"
 
@@ -811,6 +811,10 @@ msgstr "Piirros '%(filename)s' tallennettu."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Palauta versio %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Liitetiedostot sivulla %(pagename)s"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -904,6 +908,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1055,6 +1063,12 @@ msgstr "[POISTETTU]"
 msgid "[UPDATED]"
 msgstr "[PÄIVITETTY]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[UUSI]"
 
@@ -1135,6 +1149,10 @@ msgstr "Tilaa käyttäjälle"
 msgid "Remove Spam"
 msgstr "Poista roskaviestejä"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Palauta versio %(rev)d."
+
 msgid "Package Pages"
 msgstr "Paketoi sivuja"
 
@@ -1143,6 +1161,10 @@ msgstr "Esitä Docbookina"
 
 msgid "Do"
 msgstr "Tee"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Kuvaus"
 
 msgid "Edit (Text)"
 msgstr "Muokkaa (tekstinä)"
@@ -1394,6 +1416,9 @@ msgstr "Siirry muokkaukseen kaksoisnapsautuksella"
 
 msgid "After login, jump to last visited page"
 msgstr "Kirjauduttuani siirry viimekertaiselle sivulle"
+
+msgid "Show comment sections"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Näytä kysymysmerkki puuttuvien sivujen linkeissä"
@@ -1952,15 +1977,6 @@ msgstr "Erot"
 msgid "Comment"
 msgstr "Kuvaus"
 
-msgid "raw"
-msgstr "muotoilematon"
-
-msgid "print"
-msgstr "tulosta"
-
-msgid "revert"
-msgstr "palauta"
-
 msgid "Revision History"
 msgstr "Versiohistoria"
 
@@ -2238,6 +2254,15 @@ msgstr "Vapaaehtoinen poiston syy"
 
 msgid "Really delete this page?"
 msgstr "Haluatko varmasti poistaa tämän sivun?"
+
+#~ msgid "raw"
+#~ msgstr "muotoilematon"
+
+#~ msgid "print"
+#~ msgstr "tulosta"
+
+#~ msgid "revert"
+#~ msgstr "palauta"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## varmuuskopio sivusta \"%(pagename)s\" lähetetty %(date)s"

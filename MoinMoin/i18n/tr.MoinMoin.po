@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-01-07 23:45+0200\n"
 "Last-Translator: Volkan Y. <yazicivo@ttnet.net.tr>\n"
 "Language-Team: \n"
@@ -163,8 +163,8 @@ msgstr "E-Posta"
 
 #, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -648,6 +648,10 @@ msgstr "Metin"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "En son %(time)s tarihinde düzenlendi."
+
 msgid "match"
 msgstr "eşle"
 
@@ -791,10 +795,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "En son %(time)s tarihinde düzenlendi."
-
 msgid "N/A"
 msgstr "Bilinmiyor"
 
@@ -835,6 +835,10 @@ msgstr "'%(filename)s' çizimi kaydedildi."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "%(rev)d revizyonuna geri al."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "\"%(pagename)s\" için Ekler"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -929,6 +933,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1084,6 +1092,12 @@ msgstr "[SİLİNDİ]"
 msgid "[UPDATED]"
 msgstr "[YENİLENDİ]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[YENİ]"
 
@@ -1169,6 +1183,10 @@ msgid "Remove Spam"
 msgstr "Bağlantı Sil"
 
 #, fuzzy
+msgid "Revert to this revision"
+msgstr "%(rev)d revizyonuna geri al."
+
+#, fuzzy
 msgid "Package Pages"
 msgstr "Benzer Sayfalar"
 
@@ -1177,6 +1195,10 @@ msgstr ""
 
 msgid "Do"
 msgstr "Gerçekleştir"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Yorum"
 
 msgid "Edit (Text)"
 msgstr "Düzenle (Metin)"
@@ -1414,6 +1436,9 @@ msgid "Open editor on double click"
 msgstr "Çift tıklayınca metin düzenleyicisini aç"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1984,15 +2009,6 @@ msgstr "Fark"
 msgid "Comment"
 msgstr "Yorum"
 
-msgid "raw"
-msgstr "ham"
-
-msgid "print"
-msgstr "çıktı"
-
-msgid "revert"
-msgstr "geri al"
-
 msgid "Revision History"
 msgstr "Revizyon Geçmişi"
 
@@ -2233,6 +2249,15 @@ msgstr "İsteğe bağlı silinme nedeni"
 
 msgid "Really delete this page?"
 msgstr "Bu sayfayı silmek istediğinize emin misiniz?"
+
+#~ msgid "raw"
+#~ msgstr "ham"
+
+#~ msgid "print"
+#~ msgstr "çıktı"
+
+#~ msgid "revert"
+#~ msgstr "geri al"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## \"%(pagename)s\" sayfasının yedeği %(date)s tarihinde alındı."

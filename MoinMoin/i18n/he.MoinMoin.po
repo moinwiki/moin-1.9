@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2005-07-31 00:00+0200\n"
 "Last-Translator: ***vacant***\n"
 "Language-Team: Hebrew <moin-devel@lists.sourceforge.net>\n"
@@ -156,8 +156,8 @@ msgstr "דואר אלקטרוני"
 
 #, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -601,6 +601,10 @@ msgstr "מלל"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "השתנה לאחרונה ב–%(time)s"
+
 msgid "match"
 msgstr "התאמה"
 
@@ -746,10 +750,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "השתנה לאחרונה ב–%(time)s"
-
 msgid "N/A"
 msgstr "לא זמין"
 
@@ -790,6 +790,10 @@ msgstr "איור \"%(filename)s\" נשמר."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "שחזר לגרסה %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "קבצים מצורפים ל–\"%(pagename)s\""
 
 #, fuzzy, python-format
 msgid "%(mins)dm ago"
@@ -884,6 +888,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1033,6 +1041,12 @@ msgstr "נמחק"
 msgid "[UPDATED]"
 msgstr "עודכן"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "חדש"
 
@@ -1122,6 +1136,10 @@ msgid "Remove Spam"
 msgstr "סימניות"
 
 #, fuzzy
+msgid "Revert to this revision"
+msgstr "שחזר לגרסה %(rev)d."
+
+#, fuzzy
 msgid "Package Pages"
 msgstr "דפים דומים"
 
@@ -1130,6 +1148,10 @@ msgstr ""
 
 msgid "Do"
 msgstr "בצע"
+
+#, fuzzy
+msgid "Comments"
+msgstr "הערה"
 
 #, fuzzy
 msgid "Edit (Text)"
@@ -1365,6 +1387,9 @@ msgid "Open editor on double click"
 msgstr "ערוך דף בלחיצה כפולה"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1922,15 +1947,6 @@ msgstr "הבדלים"
 msgid "Comment"
 msgstr "הערה"
 
-msgid "raw"
-msgstr "מלל"
-
-msgid "print"
-msgstr "הדפסה"
-
-msgid "revert"
-msgstr "שחזר"
-
 msgid "Revision History"
 msgstr "הסטוריה של שינויים"
 
@@ -2173,6 +2189,15 @@ msgstr "סיבה למחיקה"
 
 msgid "Really delete this page?"
 msgstr "באמת למחוק את הדף?"
+
+#~ msgid "raw"
+#~ msgstr "מלל"
+
+#~ msgid "print"
+#~ msgstr "הדפסה"
+
+#~ msgid "revert"
+#~ msgstr "שחזר"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## גיבוי של דף \"%(pagename)s\" מתאריך %(date)s"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-08-17 20:50+0100\n"
 "Last-Translator: Jure Kodzoman <kodzoman@gmail.com>\n"
 "Language-Team: \n"
@@ -161,10 +161,10 @@ msgstr "Pošalji podatke o korisničkom računu"
 msgid "Email"
 msgstr "Adresa elektroničke pošte"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Kako bi kreirali korisnički račun ili dobili izgubljenu lozinku, pogledajte %"
 "(userprefslink)s stranicu."
@@ -631,6 +631,10 @@ msgstr "po tekstu"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "zadnje izmjene: %(time)s"
+
 msgid "match"
 msgstr "pogodak"
 
@@ -774,10 +778,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "zadnje izmjene: %(time)s"
-
 msgid "N/A"
 msgstr "-"
 
@@ -817,6 +817,10 @@ msgstr "Crtež '%(filename)s' je spremljen."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Vrati u stanje inačice %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Privitci na stranici \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -910,6 +914,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1062,6 +1070,12 @@ msgstr "[IZBRISANO]"
 msgid "[UPDATED]"
 msgstr "[AŽURIRANO]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[NOVO]"
 
@@ -1142,6 +1156,10 @@ msgstr "Pretplati se"
 msgid "Remove Spam"
 msgstr "Ukloni Spam"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Vrati u stanje inačice %(rev)d."
+
 msgid "Package Pages"
 msgstr "Zapakiraj stranice"
 
@@ -1150,6 +1168,10 @@ msgstr "Prikaži kao Docbook"
 
 msgid "Do"
 msgstr "Izvedi!"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Napomena"
 
 msgid "Edit (Text)"
 msgstr "Izmijeni"
@@ -1403,6 +1425,9 @@ msgstr "Pokreni uređivanje dvoklikom"
 
 msgid "After login, jump to last visited page"
 msgstr "Nakon prijave, idi na zadnju posjećenu stranicu"
+
+msgid "Show comment sections"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Nepostojeće poveznice označi upitnikom"
@@ -1963,15 +1988,6 @@ msgstr "Razlike"
 msgid "Comment"
 msgstr "Napomena"
 
-msgid "raw"
-msgstr "izvorno"
-
-msgid "print"
-msgstr "za tisak"
-
-msgid "revert"
-msgstr "prijašnje"
-
 msgid "Revision History"
 msgstr "Pregled izmjena"
 
@@ -2251,6 +2267,15 @@ msgstr "Razlog za brisanje (neobvezno)"
 
 msgid "Really delete this page?"
 msgstr "Zaista želite obrisati ovu stranicu?"
+
+#~ msgid "raw"
+#~ msgstr "izvorno"
+
+#~ msgid "print"
+#~ msgstr "za tisak"
+
+#~ msgid "revert"
+#~ msgstr "prijašnje"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## sigurnosna kopija stranice \"%(pagename)s\" od dana %(date)s"

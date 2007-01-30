@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jan Blaha <Jan.Blaha@unet.cz>\n"
 "Language-Team: Czech <moin@lists.sourceforge.net>\n"
@@ -155,10 +155,10 @@ msgstr "Zašli mi má data k účtu"
 msgid "Email"
 msgstr "Email"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr "Vytvořit účet nebo zjistit zapomenuté heslo lze v %(userprefslink)s."
 
 msgid "Name"
@@ -620,6 +620,10 @@ msgstr "Text"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "naposledy upravováno %(time)s"
+
 msgid "match"
 msgstr "nález"
 
@@ -763,10 +767,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "naposledy upravováno %(time)s"
-
 msgid "N/A"
 msgstr "nedostupný"
 
@@ -806,6 +806,10 @@ msgstr "Obrázek '%(filename)s' uložen."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Vrátit se k verzi %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Přílohy k  \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -899,6 +903,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1049,6 +1057,12 @@ msgstr "[SMAZÁNO]"
 msgid "[UPDATED]"
 msgstr "[AKTUALIZOVÁNO]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[NOVÝ]"
 
@@ -1129,6 +1143,10 @@ msgstr "Přihlásit uživatele k odběru"
 msgid "Remove Spam"
 msgstr "Odstranit Spam"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Vrátit se k verzi %(rev)d."
+
 msgid "Package Pages"
 msgstr "Vytvořit balík stránek"
 
@@ -1137,6 +1155,10 @@ msgstr "Zobrazit jako Docbook"
 
 msgid "Do"
 msgstr "Proveď!"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Komentář"
 
 msgid "Edit (Text)"
 msgstr "Editace (Text)"
@@ -1388,6 +1410,9 @@ msgid "Open editor on double click"
 msgstr "Otevřít editor dvojklikem"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1941,15 +1966,6 @@ msgstr "Rozdíl"
 msgid "Comment"
 msgstr "Komentář"
 
-msgid "raw"
-msgstr "zdroj"
-
-msgid "print"
-msgstr "tisk"
-
-msgid "revert"
-msgstr "vrátit"
-
 msgid "Revision History"
 msgstr "Historie verzí"
 
@@ -2225,6 +2241,15 @@ msgstr "Nepovinné důvody pro mazání"
 
 msgid "Really delete this page?"
 msgstr "Akutečně smazat tuto stránku?"
+
+#~ msgid "raw"
+#~ msgstr "zdroj"
+
+#~ msgid "print"
+#~ msgstr "tisk"
+
+#~ msgid "revert"
+#~ msgstr "vrátit"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## záloha stránky \"%(pagename)s\" od %(date)s"
