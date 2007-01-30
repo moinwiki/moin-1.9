@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-09-13 09:30+0200\n"
-"Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT com>\n"
-"Language-Team: Latvian <nad2000 AT gmail DOT com>\n"
+"Last-Translator: Radomirs Cirskis <nad2000 AT gmail DOT NO SPAM com>\n"
+"Language-Team: Latvian <nad2000 AT gmail DOT NO SPAM com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -159,10 +159,10 @@ msgstr "Atsūtīt mana sistēmas konta datus"
 msgid "Email"
 msgstr "E-pasts"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Lai izveidotu sev lietotāja kontu vai atjaunotu nozaudēto paroli, atveriet %"
 "(userprefslink)s"
@@ -200,9 +200,9 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "Lapas slēgšanas laika kvota ir izsmelta. Iespējams labošanas konflikts!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "\"%(pagename)s\" pirmskats"
+msgstr "\"%(pagename)s\" melnraksts"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -242,9 +242,8 @@ msgstr ""
 "Lūdzu, pārskatiet izmaiņas lapā un saglabājiet to. Nesaglabājiet to šajā "
 "variantā!"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[Jaunās lapas saturs ielādēts no %s]"
+msgstr "[Ielādēts melnraksta saturs]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -296,7 +295,7 @@ msgid "Text mode"
 msgstr "Teksta režīms"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "Ielādēt melnrakstu"
 
 msgid "Comment:"
 msgstr "Komentārs:"
@@ -315,20 +314,22 @@ msgid "Remove trailing whitespace from each line"
 msgstr "Dzēst tukšumus rindu beigās"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "Pašlaik viki nav sasniedzams"
 
 msgid ""
 "The remote version of MoinMoin is too old, version 1.6 is required at least."
-msgstr ""
+msgstr "Attālā viki versija ir parāk veca, nepieciešama vismaz versija 1.6."
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "Nepareizs lietotāja vārds vai vai parole"
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"Attālais viki izmanot atšķirīgu InterViki vārdus (%(remotename)s), kuru Jūs "
+"specificējā (%(localname)s)."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -397,9 +398,8 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr "Sistēmas kļūdas: %s dēļ lapas nosaukums netika nomainīts."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr "Jūs nedrīkstat atjaunot no arhīva šo lapu!"
+msgstr "Jūs nav tiesību dzēst šo lapu!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "Paldies par veiktajām izmaiņām. Jūsu vērība tiek augstu vērtēta."
@@ -616,20 +616,21 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f sekundes"
+msgstr "sekundes"
 
-#, fuzzy
 msgid "Previous"
-msgstr "Pirmskats"
+msgstr "Iepriekšējais"
 
-#, fuzzy
 msgid "Next"
-msgstr "Tekstā"
+msgstr "Nākamais"
 
 msgid "current"
-msgstr ""
+msgstr "tekošais"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "pēdējā modifikācija %s"
 
 msgid "match"
 msgstr "saskaņa"
@@ -769,14 +770,10 @@ msgid "Enabled"
 msgstr "Ieslēgts"
 
 msgid "index available"
-msgstr ""
+msgstr "indekss pieejams"
 
 msgid "index unavailable"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "pēdējā modifikācija %(time)s"
+msgstr "indekss nav pieejams"
 
 msgid "N/A"
 msgstr "Nav pieejams"
@@ -787,13 +784,11 @@ msgstr ""
 msgid "Xapian search"
 msgstr "''Xapian'' meklēšana"
 
-#, fuzzy
 msgid "Xapian Version"
-msgstr "''Xapian'' meklēšana"
+msgstr "''Xapian'' versija"
 
-#, fuzzy
 msgid "Xapian stemming"
-msgstr "''Xapian'' meklēšana"
+msgstr "''Xapian'' celms"
 
 msgid "Active threads"
 msgstr "Aktīvie pavedieni"
@@ -818,6 +813,10 @@ msgstr "Attēls '%(filename)s' saglabāts."
 msgid "Revert to revision %(rev)d."
 msgstr "Versijas %(rev)d atgriešana."
 
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Lapas \"%(pagename)s\" piesaistes"
+
 #, python-format
 msgid "%(mins)dm ago"
 msgstr "Pirms %(mins)d min"
@@ -829,7 +828,6 @@ msgstr "(nav grāmatzīmes)"
 msgid "(currently set to %s)"
 msgstr "(pašlaik %s)"
 
-#, fuzzy
 msgid "Delete bookmark"
 msgstr "Dzēst grāmatzīmi"
 
@@ -860,56 +858,53 @@ msgstr "Norādiet diagrammas tipu!"
 msgid "Bad chart type \"%s\"!"
 msgstr "Slikts diagrammas tips \"%s\"!"
 
-#, fuzzy
 msgid "Search for items"
-msgstr "Meklēt virsrakstus"
+msgstr "Meklēt vienības"
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "saturošs visus sekojošos terminus"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "saturošs vienu vai vairākus no sekojošajiem terminiem"
 
 msgid "not containing the following terms"
-msgstr ""
+msgstr "nesaturošu sekojošus terminus"
 
-#, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "Šajā lapā ir saites uz sekojošām lapām:"
+msgstr "piederošu kādai no sekojošām kategorijām"
 
 msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
+msgstr "pēdējo reizi modificēta kopš (piemēram, pēdējās 2 nedēļās)"
 
-#, fuzzy
 msgid "any language"
-msgstr "Vēlamā valoda"
+msgstr "jebjura valoda"
 
 msgid "Language"
-msgstr ""
+msgstr "Valoda"
 
-#, fuzzy
 msgid "File Type"
-msgstr "Faila nosaukums"
+msgstr "Faila veids"
 
-#, fuzzy
 msgid "Search only in titles"
-msgstr "Meklēt virsrakstus"
+msgstr "Meklēt tikai virsrakstus"
 
-#, fuzzy
 msgid "Case-sensitive search"
 msgstr "Rakstzīmju jūtīga meklēšana"
 
 msgid "Exclude underlay"
 msgstr ""
 
-#, fuzzy
 msgid "No system items"
-msgstr "Sistēmas lapu skaits"
+msgstr "Nevienas sistēmas lapas"
 
 msgid "Search in all page revisions"
-msgstr ""
+msgstr "Meklēt visās lapas versijās"
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -935,14 +930,13 @@ msgid "Date"
 msgstr "Datums"
 
 msgid "From"
-msgstr ""
+msgstr "No:"
 
 msgid "To"
-msgstr ""
+msgstr "Kam:"
 
-#, fuzzy
 msgid "Content"
-msgstr "Satura rādītājs"
+msgstr "Saturs"
 
 msgid "Attachments"
 msgstr "Piesaistes"
@@ -1061,6 +1055,12 @@ msgstr "[DZĒSTS]"
 msgid "[UPDATED]"
 msgstr "[ATJAUNINĀTS]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[JAUNS]"
 
@@ -1141,6 +1141,10 @@ msgstr "Parakstīt Lietotāju"
 msgid "Remove Spam"
 msgstr "Atsārņot"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Versijas %(rev)d atgriešana."
+
 msgid "Package Pages"
 msgstr "Iesaiņot Lapas"
 
@@ -1149,6 +1153,10 @@ msgstr "Sniegt Docbook formātā"
 
 msgid "Do"
 msgstr "Veikt"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Komentārs"
 
 msgid "Edit (Text)"
 msgstr "Labot tekstu"
@@ -1264,13 +1272,13 @@ msgstr "PārdēvētLapu"
 msgid "SpellCheck"
 msgstr "Pareizrakstība"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown action %(action_name)s."
-msgstr "Vai veikt darbību %(actionname)s?"
+msgstr "Nezināma darbība %(action_name)s."
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "Jums nav tiesību izmantot darbību %(actionname)s šajā lapā."
+msgstr "Jums nav tiesību veikt darbību %(action_name)s šajā lapā."
 
 msgid "Login and try again."
 msgstr "Pieslēdzieties un mēģiniet vēlreiz."
@@ -1341,7 +1349,7 @@ msgid ""
 "\n"
 "(!) For more help, see HelpOnEditing or SyntaxReference.\n"
 msgstr ""
-" Uzvērt:: [[Verbatim('')]]''kursīvā''[[Verbatim('')]]; [[Verbatim"
+" Uzsvērt:: [[Verbatim('')]]''kursīvā''[[Verbatim('')]]; [[Verbatim"
 "(''')]]'''treknrakstā'''[[Verbatim(''')]]; [[Verbatim(''''')]]'''''treknā "
 "kursīvā'''''[[Verbatim(''''')]]; [[Verbatim('')]]''jaukti ''[[Verbatim"
 "(''')]]'''''treknrakstā'''[[Verbatim(''')]] un kursīvā''[[Verbatim('')]]; "
@@ -1353,11 +1361,11 @@ msgstr ""
 "[[Verbatim(=====)]].\n"
 " Saraksti:: tukšums un kāds no: * atzīmes simboli; 1., a., A., i., I. "
 "numurēti elementi; 1.#n sākot no n; viens tukšums  - atkāpes.\n"
-" Saites:: [[Verbatim(JoinCapitalizedWords)]]; [[Verbatim([\"kvadrātiekavas "
-"un pēdiņas\"])]]; URL; [URL]; [URL etiķete].\n"
+" Saites:: [[Verbatim(SavienotiVārdiArLieliemBurtiem)]]; [[Verbatim"
+"([\"kvadrātiekavas un pēdiņas\"])]]; URL; [URL]; [URL etiķete].\n"
 " Tabulas:: || šūnas teksts |||| 2 ailēs izvērsts šūnas teksts ||;      Pēc "
 "tabulām un virsrakstiem nedrīkst sekot atstarpes.\n"
-"(!) Padziļinātai izpratnei atveriet RediģēšanasPalīdzība vai "
+"(!) Izvērstākai pamācībai atveriet RediģēšanasPalīdzība vai "
 "SintaksesIzziņa.\n"
 
 msgid ""
@@ -1410,6 +1418,9 @@ msgstr "Labot ar dubultklikšķi"
 msgid "After login, jump to last visited page"
 msgstr "Pēc pieslēgšanās pāriet uz pēdējo apmeklēto lapu"
 
+msgid "Show comment sections"
+msgstr ""
+
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Rādīt jautājuma zīmi neeksistējošu lapu saitēm"
 
@@ -1459,7 +1470,7 @@ msgid "Editor size"
 msgstr "Labošanas loga izmērs"
 
 msgid "Do it."
-msgstr "Dari to"
+msgstr "Dari to."
 
 #, python-format
 msgid "Execute action %(actionname)s?"
@@ -1530,7 +1541,7 @@ msgid "del"
 msgstr "dzēst"
 
 msgid "move"
-msgstr ""
+msgstr "pārvietot"
 
 msgid "get"
 msgstr "dabūt"
@@ -1593,28 +1604,28 @@ msgstr ""
 msgid "You are not allowed to delete attachments on this page."
 msgstr "Jūs nedrīkstat dzēst šīs lapas piesaistes."
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "Jūs nedrīkstat ņemt šīs lapas piesaistes."
+msgstr "Jūs nav tiesību pārvietot piesaistes no šīs lapas."
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "Pārvietošana pārtraukta!"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr "Darbību %(actionname)s, lūdzu, izmantojiet interaktīvi!"
+msgstr ""
+"Lūdzu, piesaistīto datņu pārvietošanai izmantojiet interaktīvo lietotāja "
+"saskarni!"
 
 msgid "You are not allowed to get attachments from this page."
-msgstr "Jūs nedrīkstat ņemt šīs lapas piesaistes."
+msgstr "Jums nav tiesību saņemt šīs lapas piesaistes."
 
 msgid "You are not allowed to unzip attachments of this page."
-msgstr "Jūs nav tiesību atspiest šīs lapas piesaistes."
+msgstr "Jums nav tiesību atspiest šīs lapas piesaistes."
 
 msgid "You are not allowed to install files."
 msgstr "Jums nav tiesību instalēt failus."
 
 msgid "You are not allowed to view attachments of this page."
-msgstr "Jūs nedrīkstat skatīties šīs lapas piesaistes."
+msgstr "Jums nav tiesību skatīt šīs lapas piesaistes."
 
 #, python-format
 msgid "Unsupported upload action: %s"
@@ -1636,42 +1647,39 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "Piesaite '%(target)s' (veidota no faila '%(filename)s') jau eksistē."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "Piesaiste '%(filename)s' ir uzinstalēta."
+msgstr "Piesaiste '%(filename)s' jau eksistē."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "Piesaiste '%(filename)s' neeksistē!"
+msgstr "Piesaiste '%(filename)s' pārvietota uz %(page)s."
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "Bez izmaiņām"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
+msgstr "Lapa %(newpagename)s neeksistē vai arī Jums nav tiesību."
 
-#, fuzzy
 msgid "Move aborted because empty page name"
-msgstr "Lapas nosaukums nedrīkst būt tukšs."
+msgstr "Pārvietošana pārtraukta dēl tukšā lapas nosaukuma"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "Piesaistes '%(filename)s' augšupielāde."
+msgstr "Lūdzu, piesaistei izmantojiet pieļaujamu nosaukumu: '%(filename)s'."
 
 msgid "Move aborted because empty attachment name"
-msgstr ""
+msgstr "Piesaistes vārds ir tukšs - pārvietošana pārtraukta"
 
 msgid "Move"
-msgstr ""
+msgstr "Pārvietot"
 
-#, fuzzy
 msgid "New page name"
-msgstr "Jauns nosaukums"
+msgstr "Jauns lapas nosaukums"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "Jauna Piesaiste"
+msgstr "Jauna piesaistes nosaukums"
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
@@ -1760,12 +1768,12 @@ msgstr "Atgriezt visu!"
 msgid "You are not allowed to use this action."
 msgstr "Jums nav tiesību lietot šo darbību."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "Parakstīt lietotājus lapas %s izmaiņām"
+msgstr "Atrite maina uz lapu %s."
 
 msgid "Exception while calling rollback function:"
-msgstr ""
+msgstr "Kļūda veicot atrites funkciju:"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
@@ -1773,12 +1781,11 @@ msgid ""
 "by the particular administrators."
 msgstr ""
 
-#, fuzzy
 msgid "Operation was canceled."
-msgstr "Labošana tika atsaukta."
+msgstr "Operācija tika atsaukta."
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr ""
+msgstr "Iespējami tikai virzieni: ABOS un LEJUP"
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
@@ -1794,13 +1801,13 @@ msgid "The ''remoteWiki'' is unknown."
 msgstr ""
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "Notikusi servera kļūda:"
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "Sinhronizēšana pabeigta. Statusa ziņojumi redzami zemāk."
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "Sinhronizēšana sākusies -"
 
 #, python-format
 msgid ""
@@ -1810,23 +1817,23 @@ msgstr ""
 
 #, python-format
 msgid "After filtering: %s pages"
-msgstr ""
+msgstr "Pēc filtrēšanas: %s lapas"
 
 #, python-format
 msgid "Deleted page %s locally."
-msgstr ""
+msgstr "Lapa %s dezēsta lokāli."
 
 #, python-format
 msgid "Error while deleting page %s locally:"
-msgstr ""
+msgstr "Kļūda dzēšot lapu %s lokāli:"
 
 #, python-format
 msgid "Deleted page %s remotely."
-msgstr ""
+msgstr "Lapa %s dzēsta attāli."
 
 #, python-format
 msgid "Error while deleting page %s remotely:"
-msgstr ""
+msgstr "Kļūda dzēšat lapu %s attāli:"
 
 #, python-format
 msgid ""
@@ -1848,11 +1855,11 @@ msgstr ""
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr ""
+msgstr "Lapas %s sinhronizēšana ar attālu lapu %s ..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
-msgstr ""
+msgstr "Lapa %s attāli ir izdzēsta bet mainīta lokāli."
 
 #, python-format
 msgid ""
@@ -1876,9 +1883,9 @@ msgid ""
 "page in the remote wiki."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page %s successfully merged."
-msgstr "Lapa \"%s\" veiksmīgi dzēsta!"
+msgstr "Lapa %s veiksmīgi sapludināta."
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
@@ -1918,16 +1925,14 @@ msgstr "Jūs nedrīkstat parakstīties uz lapu, kuru Jums nav tiesību lasīt."
 msgid "This wiki is not enabled for mail processing."
 msgstr "Šajā viki pasta sūtīšana nav iespējota."
 
-#, fuzzy
 msgid "You must log in to use subscriptions."
-msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas"
+msgstr "Lai izmanototu parasktīšanos, Jums jāpieslēdzas."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr ""
 "Lai izmantotu parakstīšanos, uzrādiet savu e-pasta adresi "
 "LietotājaIestatījumos."
 
-#, fuzzy
 msgid "Your subscription to this page has been removed."
 msgstr "Jūs vairs neesat parakstījies(-usies) uz šo lapu."
 
@@ -1961,15 +1966,6 @@ msgstr "Atšķirība"
 
 msgid "Comment"
 msgstr "Komentārs"
-
-msgid "raw"
-msgstr "jēlteksts"
-
-msgid "print"
-msgstr "izdruka"
-
-msgid "revert"
-msgstr "atgriezt"
 
 msgid "Revision History"
 msgstr "Versiju vēsture"
@@ -2061,7 +2057,7 @@ msgstr "Jums nav tiesību veikt šo darbību."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
+msgstr "(!) Tiek rādītas tikai tās lapas, kas mainītas kopš '''%s''' !"
 
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
@@ -2072,13 +2068,13 @@ msgstr ""
 msgid "Title Search: \"%s\""
 msgstr "Meklēt virsrakstus: \"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Advanced Search: \"%s\""
-msgstr "Meklēt virsrakstus: \"%s\""
+msgstr "Izvērsta meklēšana: \"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
-msgstr "Visa teksta meklēšana: \"%s\""
+msgstr "Pilnteksta meklēšana: \"%s\""
 
 #, python-format
 msgid ""
@@ -2093,19 +2089,19 @@ msgid ""
 msgstr ""
 
 msgid "(!) Consider performing a"
-msgstr ""
+msgstr "(!) Apsveriet "
 
 msgid "full-text search with your search terms"
-msgstr ""
+msgstr "pilna teksta meklēšana pēc Jūsu parametriem"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. [[BR]]"
 msgstr ""
 
-#, fuzzy
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "Nospiediet šeit, lai sāktu šī virsraksta meklēšanu visā tekstā"
+msgstr ""
+"Nospiediet šeit, lai sāktu pilnteksta meklēšanu ar norādītajiem terminiem!"
 
 #, python-format
 msgid ""
@@ -2246,6 +2242,15 @@ msgstr "Ja vēlaties, norādiet lapas dzēšanas iemeslu"
 
 msgid "Really delete this page?"
 msgstr "Jūs tiešām vēlaties dzēst šo lapu?"
+
+#~ msgid "raw"
+#~ msgstr "jēlteksts"
+
+#~ msgid "print"
+#~ msgstr "izdruka"
+
+#~ msgid "revert"
+#~ msgstr "atgriezt"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## lapas dublējums \"%(pagename)s\" arhivēts %(date)s"

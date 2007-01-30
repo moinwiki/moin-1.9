@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-06-26 21:43-0800\n"
 "Last-Translator: Mike Rovner <mrovner@hotmail.com>\n"
 "Language-Team: Russian <moin-devel@lists.sourceforge.net>\n"
@@ -153,10 +153,10 @@ msgstr "Отправить мне настройки почтой"
 msgid "Email"
 msgstr "Почтовый адрес"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Чтобы создать пользователя или восстановить пароль служит страница %"
 "(userprefslink)s."
@@ -619,6 +619,10 @@ msgstr "По тексту"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "последнее изменение %(time)s"
+
 msgid "match"
 msgstr "совпадение"
 
@@ -762,10 +766,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "последнее изменение %(time)s"
-
 msgid "N/A"
 msgstr "нет"
 
@@ -806,6 +806,10 @@ msgstr "Рисунок '%(filename)s' записан."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Возвращена версия %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Приложения к \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -899,6 +903,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1051,6 +1059,12 @@ msgstr "[УДАЛЕНА]"
 msgid "[UPDATED]"
 msgstr "[ОБНОВЛЕНА]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[НОВАЯ]"
 
@@ -1131,6 +1145,10 @@ msgstr "Подписка"
 msgid "Remove Spam"
 msgstr "Убрать мусор"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Возвращена версия %(rev)d."
+
 msgid "Package Pages"
 msgstr "Страницы пакета"
 
@@ -1139,6 +1157,10 @@ msgstr "Сформатировать как Docbook"
 
 msgid "Do"
 msgstr "Выполняй!"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Комментарий"
 
 msgid "Edit (Text)"
 msgstr "Исправить (Текст)"
@@ -1392,6 +1414,9 @@ msgid "Open editor on double click"
 msgstr "Открывать редактор по двойному клику"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1949,15 +1974,6 @@ msgstr "Сравнить"
 msgid "Comment"
 msgstr "Комментарий"
 
-msgid "raw"
-msgstr "разметка"
-
-msgid "print"
-msgstr "печатать"
-
-msgid "revert"
-msgstr "восстановить"
-
 msgid "Revision History"
 msgstr "История изменений"
 
@@ -2233,6 +2249,15 @@ msgstr "Можете указать причину для удаления"
 
 msgid "Really delete this page?"
 msgstr "Точно стереть эту страницу?"
+
+#~ msgid "raw"
+#~ msgstr "разметка"
+
+#~ msgid "print"
+#~ msgstr "печатать"
+
+#~ msgid "revert"
+#~ msgstr "восстановить"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## Страница \"%(pagename)s\" архивирована %(date)s"

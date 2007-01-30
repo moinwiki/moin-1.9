@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2005-11-06 17:11+0330\n"
 "Last-Translator: Mehdi Hassanpour <h.mehdi@gmail.com>\n"
 "Language-Team: Persian <h.mehdi@gmail.com>\n"
@@ -162,10 +162,10 @@ msgstr "اطلاعات حساب من را ایمیل کن"
 msgid "Email"
 msgstr "آدرس ایمیل"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "جهت ایجاد حساب کاربری جدید و یا بازیافت کلمه رمز خود صفحه %(userprefslink)s "
 "را ببینید."
@@ -628,6 +628,10 @@ msgstr "متن"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "آخرین تغییرات %(time)s"
+
 msgid "match"
 msgstr "نتیجه"
 
@@ -771,10 +775,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "آخرین تغییرات %(time)s"
-
 msgid "N/A"
 msgstr "N/A"
 
@@ -814,6 +814,10 @@ msgstr "ترسیم '%(filename)s' ذخیره شد."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "نسخه %(rev)d بازیابی شد"
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "ضمیمه های صفحه \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -907,6 +911,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1061,6 +1069,12 @@ msgstr "[حذف شده]"
 msgid "[UPDATED]"
 msgstr "[به روزآوری شده]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[جدید]"
 
@@ -1141,6 +1155,10 @@ msgstr "عضویت کاربران در این صفحه"
 msgid "Remove Spam"
 msgstr "حذف هرزصفحه"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "نسخه %(rev)d بازیابی شد"
+
 msgid "Package Pages"
 msgstr "تهیه بسته صفحات"
 
@@ -1149,6 +1167,10 @@ msgstr "نمایش با ساختار XML"
 
 msgid "Do"
 msgstr "انجام بده"
+
+#, fuzzy
+msgid "Comments"
+msgstr "توضیحات"
 
 msgid "Edit (Text)"
 msgstr "ویرایش (متنی)"
@@ -1400,6 +1422,9 @@ msgid "Open editor on double click"
 msgstr "ویرایشگر با دوبار کلیک باز شود"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1960,15 +1985,6 @@ msgstr "تغییرات"
 msgid "Comment"
 msgstr "توضیحات"
 
-msgid "raw"
-msgstr "نسخه خام"
-
-msgid "print"
-msgstr "چاپ"
-
-msgid "revert"
-msgstr "بازیابی این نسخه"
-
 msgid "Revision History"
 msgstr "تاریخچه ویرایش"
 
@@ -2248,6 +2264,15 @@ msgstr "توضیحات دلخواه برای این حذف"
 
 msgid "Really delete this page?"
 msgstr "اطمینان دارید که این صفحه می بایست حذف شود؟"
+
+#~ msgid "raw"
+#~ msgstr "نسخه خام"
+
+#~ msgid "print"
+#~ msgstr "چاپ"
+
+#~ msgid "revert"
+#~ msgstr "بازیابی این نسخه"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## نسخه پشتیبان صفحه \"%(pagename)s\" در تاریخ %(date)s ثبت شد"

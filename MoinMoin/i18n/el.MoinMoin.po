@@ -1,25 +1,27 @@
-# # Please edit system and help pages ONLY in the moinmaster wiki! For more
-# # information, please see MoinMaster:MoinPagesEditorGroup.
-# #master-page:None
-# #master-date:None
-# acl MoinPagesEditorGroup:read,write,delete,revert All:read
-# format gettext
-# language en
-# MoinMoin translation
+## Please edit system and help pages ONLY in the moinmaster wiki! For more
+## information, please see MoinMaster:MoinPagesEditorGroup.
+##master-page:None
+##master-date:None
+#acl MoinPagesEditorGroup:read,write,delete,revert All:read
+#format gettext
+#language el
+
+#
+# MoinMoin el system text translation
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MoinMoin 1.5\n"
+"Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-29 23:46+0100\n"
-"PO-Revision-Date: 2005-01-8 00:00+0100\n"
+"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"PO-Revision-Date: 2005-09-21 00:00+0100\n"
 "Last-Translator: Thomas Waldmann <tw-public@gmx.de>\n"
 "Language-Team: German <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Language: English\n"
-"X-Language-in-English: English\n"
+"X-Language: Deutsch\n"
+"X-Language-in-English: German\n"
 "X-HasWikiMarkup: True\n"
 "X-Direction: ltr\n"
 
@@ -179,9 +181,8 @@ msgstr ""
 msgid "Cannot edit old revisions!"
 msgstr ""
 
-#, fuzzy
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
-msgstr "The lock you held timed out. Be prepared for editing conflicts!"
+msgstr ""
 
 #, python-format
 msgid "Draft of \"%(pagename)s\""
@@ -860,9 +861,8 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#, fuzzy
 msgid "Attachments"
-msgstr "Attachments"
+msgstr ""
 
 msgid "XSLT option disabled, please look at HelpOnConfiguration."
 msgstr ""
@@ -1165,7 +1165,7 @@ msgid "Sun"
 msgstr ""
 
 msgid "AttachFile"
-msgstr "Attachments"
+msgstr ""
 
 msgid "DeletePage"
 msgstr ""
@@ -1506,13 +1506,13 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 msgid "Nothing changed"
 msgstr ""
@@ -1537,13 +1537,12 @@ msgstr ""
 msgid "New page name"
 msgstr ""
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "Attachments"
+msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1557,9 +1556,9 @@ msgid ""
 "would be too many (%(count)d missing)."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' unzipped."
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -1592,7 +1591,7 @@ msgstr ""
 
 #, python-format
 msgid "attachment:%(filename)s of %(pagename)s"
-msgstr "[[Verbatim(attachment:)]]%(filename)s of %(pagename)s"
+msgstr ""
 
 msgid "This page is already deleted or was never created!"
 msgstr ""
@@ -2053,10 +2052,3 @@ msgstr ""
 
 msgid "Really delete this page?"
 msgstr ""
-
-#, fuzzy
-#~ msgid "%(hits)d results out of about %(pages)d pages."
-#~ msgstr "%(hits)d results of about %(pages)d pages."
-
-#~ msgid "Attach File"
-#~ msgstr "Attachments"

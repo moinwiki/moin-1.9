@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-06-15 15:55+0200\n"
 "Last-Translator: jmarton@omikk.bme.hu, arostas@omikk.bme.hu\n"
 "Language-Team: Hungarian <HU@li.org>\n"
@@ -160,10 +160,10 @@ msgstr "Kérem a felhasználói adataim elküldését levélben"
 msgid "Email"
 msgstr "E-levél"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Felhasználói fiók létrehozásához, vagy egy elveszett jelszó "
 "helyreállításához lásd a(z) %(userprefslink)s oldalt."
@@ -623,6 +623,10 @@ msgstr "Szöveg"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "Utoljára módosítva: %(time)s"
+
 msgid "match"
 msgstr "találat"
 
@@ -766,10 +770,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "Utoljára módosítva: %(time)s"
-
 msgid "N/A"
 msgstr "Nincs adat"
 
@@ -810,6 +810,10 @@ msgstr "A(z) '%(filename)s' rajz elmentve."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "A(z) %(rev)d. módosításra való visszaállás."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "A(z) \"%(pagename)s\" lap mellékletei"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -903,6 +907,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1057,6 +1065,12 @@ msgstr "[TÖRÖLT]"
 msgid "[UPDATED]"
 msgstr "[FRISSÍTETT]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[ÚJ]"
 
@@ -1137,6 +1151,10 @@ msgstr "Előfizetés (csoportos)"
 msgid "Remove Spam"
 msgstr ""
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "A(z) %(rev)d. módosításra való visszaállás."
+
 msgid "Package Pages"
 msgstr "Oldalak csomagolása"
 
@@ -1145,6 +1163,10 @@ msgstr "Docbook nézet (XML)"
 
 msgid "Do"
 msgstr "Végrehajtás"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Megjegyzés"
 
 msgid "Edit (Text)"
 msgstr "Szerkesztés (szöveges módban)"
@@ -1382,6 +1404,9 @@ msgid "Open editor on double click"
 msgstr "Kettős kattintásra nyíljon meg a szerkesztő"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1954,15 +1979,6 @@ msgstr "Különbségek"
 msgid "Comment"
 msgstr "Megjegyzés"
 
-msgid "raw"
-msgstr "nyers"
-
-msgid "print"
-msgstr "nyomtatás"
-
-msgid "revert"
-msgstr "visszaállás"
-
 msgid "Revision History"
 msgstr "Módosítások története"
 
@@ -2239,6 +2255,15 @@ msgstr "A törlés indoka (nem kötelező kitölteni)"
 
 msgid "Really delete this page?"
 msgstr "Biztosan törölni kívánja ezt a lapot?"
+
+#~ msgid "raw"
+#~ msgstr "nyers"
+
+#~ msgid "print"
+#~ msgstr "nyomtatás"
+
+#~ msgid "revert"
+#~ msgstr "visszaállás"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## a(z) \"%(pagename)s\" lap mentése elküldve, dátum: %(date)s"

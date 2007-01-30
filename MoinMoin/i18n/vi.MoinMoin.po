@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2004-11-19 21:03+0800\n"
 "Last-Translator: Nam T. Nguyen <nnt@nntsoft.com>\n"
 "Language-Team: Vietnamese <moin-devel@lists.sourceforge.net>\n"
@@ -158,8 +158,8 @@ msgstr "Thư điện tử"
 
 #, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -614,6 +614,10 @@ msgstr "Nội dung"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "thay đổi cuối lúc %(time)s"
+
 msgid "match"
 msgstr "phù hợp"
 
@@ -759,10 +763,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "thay đổi cuối lúc %(time)s"
-
 msgid "N/A"
 msgstr "không rõ"
 
@@ -801,6 +801,10 @@ msgstr "Bản vẽ '%(filename)s' đã được lưu."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Hoàn nguyên phiên bản %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "File gửi kèm trong trang \"%(pagename)s\""
 
 #, fuzzy, python-format
 msgid "%(mins)dm ago"
@@ -895,6 +899,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1045,6 +1053,12 @@ msgstr ""
 msgid "[UPDATED]"
 msgstr ""
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr ""
 
@@ -1131,6 +1145,10 @@ msgstr "Đăng ký"
 msgid "Remove Spam"
 msgstr "Các liên kết thường dùng"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Hoàn nguyên phiên bản %(rev)d."
+
 msgid "Package Pages"
 msgstr ""
 
@@ -1139,6 +1157,10 @@ msgstr ""
 
 msgid "Do"
 msgstr "Làm"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Chú thích"
 
 msgid "Edit (Text)"
 msgstr ""
@@ -1376,6 +1398,9 @@ msgid "Open editor on double click"
 msgstr "Mở khung soạn thảo khi nhấp chuột 2 lần"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1937,15 +1962,6 @@ msgstr "diff"
 msgid "Comment"
 msgstr "Chú thích"
 
-msgid "raw"
-msgstr "thô"
-
-msgid "print"
-msgstr "in"
-
-msgid "revert"
-msgstr "hoàn nguyên"
-
 msgid "Revision History"
 msgstr "Danh sách các thay đổi"
 
@@ -2185,6 +2201,15 @@ msgstr "Lý do xoá trang (nếu có)"
 
 msgid "Really delete this page?"
 msgstr "Thật sự xoá trang này?"
+
+#~ msgid "raw"
+#~ msgstr "thô"
+
+#~ msgid "print"
+#~ msgstr "in"
+
+#~ msgid "revert"
+#~ msgstr "hoàn nguyên"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr ""

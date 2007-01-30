@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2004-12-05 22:41+0100\n"
 "Last-Translator: Jun Hu <j.hu@tue.nl>\n"
 "Language-Team: Chinese <moin-devel@lists.sourceforge.net>\n"
@@ -151,10 +151,10 @@ msgstr "把帐号资料寄给我"
 msgid "Email"
 msgstr "电子邮件"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr "如要创建帐号或者找回丢失的密码, 请看%(userprefslink)s页面."
 
 msgid "Name"
@@ -189,9 +189,9 @@ msgstr "不能编辑旧版网页!"
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "你的编辑锁定超时. 可能会发生编辑冲突!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "\"%(pagename)s\"预览"
+msgstr "\"%(pagename)s\"草稿"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -226,9 +226,8 @@ msgstr ""
 "在您编辑此页时, 别的用户修改保存了此页!\n"
 "情再次浏览以后再保存此页。不要直接保存！"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[新页的内容由 %s 载入]"
+msgstr "[新页的内容由草稿载入]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -278,7 +277,7 @@ msgid "Text mode"
 msgstr "文本模式"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "载入草稿"
 
 msgid "Comment:"
 msgstr "备注:"
@@ -297,20 +296,22 @@ msgid "Remove trailing whitespace from each line"
 msgstr "去掉每行尾部空白"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "本维基目前不可访问"
 
 msgid ""
 "The remote version of MoinMoin is too old, version 1.6 is required at least."
-msgstr ""
+msgstr "远程MoinMoin版本太低, 要求至少为1.6版."
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "用户名或密码错误."
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"远程维基所使用的内部InterWiki名(%(remotename)s)与您指定的(%(localname)s)不相"
+"符."
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -377,7 +378,6 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr "网页改名失败, 文件系统异常: %s."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
 msgstr "您不能删除此页!"
 
@@ -586,20 +586,21 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f秒"
+msgstr "秒"
 
-#, fuzzy
 msgid "Previous"
-msgstr "预览"
+msgstr "向前"
 
-#, fuzzy
 msgid "Next"
-msgstr "正文"
+msgstr "向后"
 
 msgid "current"
-msgstr ""
+msgstr "当前"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "最后修改时间: %s"
 
 msgid "match"
 msgstr "次匹配"
@@ -739,31 +740,26 @@ msgid "Enabled"
 msgstr "有效"
 
 msgid "index available"
-msgstr ""
+msgstr "索引可用"
 
 msgid "index unavailable"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "最后修改时间: %(time)s"
+msgstr "索引不可用"
 
 msgid "N/A"
 msgstr "无"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
+msgstr "Xapian和/或其Python绑定未安装"
 
 msgid "Xapian search"
 msgstr "Xapian搜索"
 
-#, fuzzy
 msgid "Xapian Version"
-msgstr "Xapian搜索"
+msgstr "Xapian版本"
 
 #, fuzzy
 msgid "Xapian stemming"
-msgstr "Xapian搜索"
+msgstr "Xapian stemming"
 
 msgid "Active threads"
 msgstr "活跃线程"
@@ -788,6 +784,10 @@ msgstr "图片'%(filename)s'已保存"
 msgid "Revert to revision %(rev)d."
 msgstr "恢复成版本%(rev)d."
 
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "网页\"%(pagename)s\"的附件"
+
 #, python-format
 msgid "%(mins)dm ago"
 msgstr "%(mins)d分钟前"
@@ -799,7 +799,6 @@ msgstr "(未设置书签)"
 msgid "(currently set to %s)"
 msgstr "(目前设为%s)"
 
-#, fuzzy
 msgid "Delete bookmark"
 msgstr "删除书签"
 
@@ -830,56 +829,54 @@ msgstr "请指定图表类型!"
 msgid "Bad chart type \"%s\"!"
 msgstr "错误的图表类型\"%s\"!"
 
-#, fuzzy
 msgid "Search for items"
-msgstr "标题搜索"
+msgstr "条目搜索"
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "包含以下所有条目"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "包含以下一个或多个条目"
 
 msgid "not containing the following terms"
-msgstr ""
+msgstr "未包含以下条目"
 
 #, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "此页连到以下网页:"
+msgstr "属于以下某一类别"
 
 msgid "last modified since (e.g. last 2 weeks)"
 msgstr ""
 
-#, fuzzy
 msgid "any language"
-msgstr "界面语言"
-
-msgid "Language"
 msgstr ""
 
-#, fuzzy
-msgid "File Type"
-msgstr "文件名"
+msgid "Language"
+msgstr "语言"
 
-#, fuzzy
+msgid "File Type"
+msgstr "文件类型"
+
 msgid "Search only in titles"
 msgstr "标题搜索"
 
-#, fuzzy
 msgid "Case-sensitive search"
 msgstr "大小写敏感搜索"
 
 msgid "Exclude underlay"
-msgstr ""
+msgstr "排除系统文档"
 
-#, fuzzy
 msgid "No system items"
-msgstr "系统网页数"
+msgstr "无系统内容"
 
 msgid "Search in all page revisions"
-msgstr ""
+msgstr "在所有修订版中搜索"
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -905,12 +902,11 @@ msgid "Date"
 msgstr "日期"
 
 msgid "From"
-msgstr ""
+msgstr "寄件人"
 
 msgid "To"
-msgstr ""
+msgstr "收件人"
 
-#, fuzzy
 msgid "Content"
 msgstr "目录"
 
@@ -943,7 +939,6 @@ msgstr "\"%(key)s\"后面要的是整数\"%(arg)s\""
 msgid "Expected a color value \"%(arg)s\" after \"%(key)s\""
 msgstr "\"%(key)s\"后面要接颜色值\"%(arg)s\""
 
-#, fuzzy
 msgid ""
 "Rendering of reStructured text is not possible, please install Docutils."
 msgstr "无法正确显示reStructured文本, 请安装Docutils."
@@ -1028,6 +1023,12 @@ msgstr "[已删除]"
 msgid "[UPDATED]"
 msgstr "[已更新]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[新建]"
 
@@ -1108,6 +1109,10 @@ msgstr "订阅"
 msgid "Remove Spam"
 msgstr "删除垃圾广告"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "恢复成版本%(rev)d."
+
 msgid "Package Pages"
 msgstr "网页打包"
 
@@ -1116,6 +1121,10 @@ msgstr "输出Docbook格式"
 
 msgid "Do"
 msgstr "执行"
+
+#, fuzzy
+msgid "Comments"
+msgstr "备注"
 
 msgid "Edit (Text)"
 msgstr "编辑(文本方式)"
@@ -1224,13 +1233,13 @@ msgstr "改名"
 msgid "SpellCheck"
 msgstr "拼写检查"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown action %(action_name)s."
-msgstr "要执行%(actionname)s操作吗?"
+msgstr "未知操作%(action_name)s."
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "您无权对此网页进行%(actionname)s操作!"
+msgstr "您无权对此网页进行%(action_name)s操作."
 
 msgid "Login and try again."
 msgstr "请登录后再试."
@@ -1368,6 +1377,9 @@ msgstr "双击打开编辑器"
 msgid "After login, jump to last visited page"
 msgstr "登陆后，跳转之前访问页。"
 
+msgid "Show comment sections"
+msgstr ""
+
 msgid "Show question mark for non-existing pagelinks"
 msgstr "不存在的网页链接显示问号"
 
@@ -1485,7 +1497,7 @@ msgid "del"
 msgstr "删除"
 
 msgid "move"
-msgstr ""
+msgstr "移动"
 
 msgid "get"
 msgstr "下载"
@@ -1548,16 +1560,14 @@ msgstr "无文件内容. 从文件名中删除非ASCII字符后再试."
 msgid "You are not allowed to delete attachments on this page."
 msgstr "您无权删除此页的附件."
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "您无权下载此页附件"
+msgstr "您无权移动此页附件."
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "取消移动!"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr "请使用用户界面交互地为网页改名!"
+msgstr "请使用用户界面交互地移动附件!"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "您无权下载此页附件"
@@ -1589,42 +1599,39 @@ msgstr "附件'%(target)s'(远端名称'%(filename)s')已上载, 共计%(bytes)d
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "附件'%(target)s'已经存在(远端名称 '%(filename)s')."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "附件'%(filename)s'已安装."
+msgstr "附件'%(filename)s'已存在."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "附件'%(filename)s'不存在!"
+msgstr "附件'%(filename)s'已移动到网页%(page)s.!"
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "未改动"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
+msgstr "网页%(newpagename)s不存在或您没有足够权限."
 
-#, fuzzy
 msgid "Move aborted because empty page name"
-msgstr "不能保存空白网页."
+msgstr "不能移动到空白网页."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "上载附件'%(filename)s'."
+msgstr "请使用合理的文件名上载附件'%(filename)s'."
 
 msgid "Move aborted because empty attachment name"
-msgstr ""
+msgstr "附件名为空不能上载"
 
 msgid "Move"
-msgstr ""
+msgstr "移动"
 
-#, fuzzy
 msgid "New page name"
-msgstr "新名称"
+msgstr "新网页名称"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "上载附件"
+msgstr "新附件名称"
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
@@ -1711,12 +1718,12 @@ msgstr "全部恢复!"
 msgid "You are not allowed to use this action."
 msgstr "您无权进行此项操作."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "订阅网页%s"
+msgstr "恢复网页%s改动"
 
 msgid "Exception while calling rollback function:"
-msgstr ""
+msgstr "调用恢复函数时发生错误:"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
@@ -1724,120 +1731,126 @@ msgid ""
 "by the particular administrators."
 msgstr ""
 
-#, fuzzy
 msgid "Operation was canceled."
-msgstr "编辑取消了."
+msgstr "操作取消了."
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr ""
+msgstr "可支持的方向为BOTH和DOWN."
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
+"要使用此操作, 请在您的wikiconfig文件中设置interwikiname (参见[:帮助-系统设"
+"置])."
 
 msgid ""
 "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
 "Refer to HelpOnSynchronisation for help."
-msgstr ""
+msgstr "参数错误. 请至少提供''remoteWiki''参数.参见[:帮助-同步]."
 
 msgid "The ''remoteWiki'' is unknown."
-msgstr ""
+msgstr "未知的''remoteWiki''."
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "严重错误:"
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "同步已完成. 以下为状态信息."
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "同步开始 -"
 
 #, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s different "
 "pages over-all."
-msgstr ""
+msgstr "已获取%s个当地网页和%s个远程网页. 共有%s个网页不同."
 
 #, python-format
 msgid "After filtering: %s pages"
-msgstr ""
+msgstr "过滤后: %s个网页"
 
 #, python-format
 msgid "Deleted page %s locally."
-msgstr ""
+msgstr "删除当地网页%s"
 
 #, python-format
 msgid "Error while deleting page %s locally:"
-msgstr ""
+msgstr "删除当地网页%s时发生错误:"
 
 #, python-format
 msgid "Deleted page %s remotely."
-msgstr ""
+msgstr "删除远程网页%s"
 
 #, python-format
 msgid "Error while deleting page %s remotely:"
-msgstr ""
+msgstr "删除远程网页%s时发生错误:"
 
 #, python-format
 msgid ""
 "The item %s cannot be merged automatically but was changed in both wikis. "
 "Please delete it in one of both wikis and try again."
 msgstr ""
+"%s不能自动合并, 在两个维基上都已作改动.请删除其中一个维基上的内容然后再试."
 
 #, python-format
 msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
+"%s在两个维基上具有不同的mime类型, 无法合并. 请删除其中一个维基上的内容或统一"
+"其mime类型, 然后再试."
 
 #, python-format
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
-msgstr ""
+msgstr "%s在当地已重命名. 该功能尚未实现. 因此该网页完整的同步历史将丢失."
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr ""
+msgstr "网页%s与远程网页%s正在同步 ..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
-msgstr ""
+msgstr "网页%s在远程维基上已删除, 而在本地维基上有改动."
 
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
+"网页%s无法同步. 远程网页已经被重命名. 该功能尚不支持.您可以删除本地或远程网页"
+"之一以便同步继续."
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr ""
+msgstr "由于本地或远程未解决的冲突, 跳过网页%s."
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr ""
+msgstr "这是网页%s在本地和远程维基的第一次同步."
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
-msgstr ""
+msgstr "您无权修改远程维基网页%s, 合并无法继续."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page %s successfully merged."
-msgstr "网页\"%s\"被已被删除!"
+msgstr "网页\"%s\"已成功合并."
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr ""
+msgstr "远程网页%s中含有冲突内容."
 
 #, python-format
 msgid "Page %s merged with conflicts."
-msgstr ""
+msgstr "冲突网页%s已合并."
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1869,14 +1882,12 @@ msgstr "您不能订阅无权阅读的网页!"
 msgid "This wiki is not enabled for mail processing."
 msgstr "本维基不支持邮件处理."
 
-#, fuzzy
 msgid "You must log in to use subscriptions."
 msgstr "您必须首先登录才能订阅."
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr "在用户设置中设定您的电子邮件地址后才能订阅."
 
-#, fuzzy
 msgid "Your subscription to this page has been removed."
 msgstr "您终止了订阅此页."
 
@@ -1910,15 +1921,6 @@ msgstr "比较"
 
 msgid "Comment"
 msgstr "备注"
-
-msgid "raw"
-msgstr "源码"
-
-msgid "print"
-msgstr "打印"
-
-msgid "revert"
-msgstr "恢复旧版"
 
 msgid "Revision History"
 msgstr "修订历史"
@@ -1970,29 +1972,24 @@ msgid ""
 "(username)s only||\n"
 "\n"
 msgstr ""
-"You can add some additional sub pages to your already existing homepage "
-"here.\n"
+"您可以在这里为您的个人网页增加子网页.\n"
 "\n"
-"You can choose how open to other readers or writers those pages shall be,\n"
-"access is controlled by group membership of the corresponding group page.\n"
+"您可以自助决定其他用户对这些网页的访问权限,\n"
+"通过相应群组网页(group page)中的群组用户身份来控制.\n"
 "\n"
-"Just enter the sub page's name and click on the button to create a new "
-"page.\n"
+"输入子网页名并点击按钮来创建新网页.\n"
 "\n"
-"Before creating access protected pages, make sure the corresponding group "
-"page\n"
-"exists and has the appropriate members in it. Use HomepageGroupsTemplate for "
-"creating\n"
-"the group pages.\n"
+"在创建受权限保护的网页之前，请确认相应群组网页\n"
+"已存在并有相应成员在其中. 可以使用 HomepageGroupsTemplate 来 创建\n"
+"群组网页.\n"
 "\n"
-"||'''Add a new personal page:'''||'''Related access control list "
-"group:'''||\n"
+"||'''增加个人网页:'''||'''相应权限控制组:'''||\n"
 "||[[NewPage(HomepageReadWritePageTemplate,read-write page,%(username)s)]]||"
 "[\"%(username)s/ReadWriteGroup\"]||\n"
 "||[[NewPage(HomepageReadPageTemplate,read-only page,%(username)s)]]||[\"%"
 "(username)s/ReadGroup\"]||\n"
-"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||%"
-"(username)s only||\n"
+"||[[NewPage(HomepagePrivatePageTemplate,private page,%(username)s)]]||仅%"
+"(username)s ||\n"
 "\n"
 
 msgid "MyPages management"
@@ -2014,20 +2011,20 @@ msgstr "您无权进行此项操作."
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
+msgstr "(!) 仅显示'''%s'''后发生改动的网页!"
 
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr ""
+msgstr "/!\\ 您输入的日期无法识别，因此所搜索条目未包含日期!"
 
 #, python-format
 msgid "Title Search: \"%s\""
 msgstr "标题搜索：\"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Advanced Search: \"%s\""
-msgstr "标题搜索：\"%s\""
+msgstr "高级搜索：\"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
@@ -2056,9 +2053,8 @@ msgid ""
 "results of your search query in this wiki. [[BR]]"
 msgstr ""
 
-#, fuzzy
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "点击对这个标题进行全文检索"
+msgstr "点击对这个标题进行全文检索!"
 
 #, python-format
 msgid ""
@@ -2195,6 +2191,15 @@ msgstr "删除此页的理由(可选)"
 
 msgid "Really delete this page?"
 msgstr "真的要删除此页?"
+
+#~ msgid "raw"
+#~ msgstr "源码"
+
+#~ msgid "print"
+#~ msgstr "打印"
+
+#~ msgid "revert"
+#~ msgstr "恢复旧版"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## 此页\"%(pagename)s\"已经在%(date)s备份好了"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: moin 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-09-11 17:32+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -161,10 +161,10 @@ msgstr "Envia'm les dades del meu compte"
 msgid "Email"
 msgstr "Correu electrònic"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Per a crear un compte o recuperar una contrasenya perduda, vegeu la pàgina %"
 "(userprefslink)s."
@@ -637,6 +637,10 @@ msgstr "Text"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "modificat per última vegada el %(time)s"
+
 msgid "match"
 msgstr "coincidència"
 
@@ -780,10 +784,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "modificat per última vegada el %(time)s"
-
 msgid "N/A"
 msgstr "N/D"
 
@@ -823,6 +823,10 @@ msgstr "S'ha desat el dibuix «%(filename)s»."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Torna a la revisió %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Adjuncions per a «%(pagename)s»"
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -916,6 +920,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1065,6 +1073,12 @@ msgstr "[SUPRIMIDA]"
 msgid "[UPDATED]"
 msgstr "[ACTUALITZADA]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[NOVA]"
 
@@ -1145,6 +1159,10 @@ msgstr "Subscriu l'usuari"
 msgid "Remove Spam"
 msgstr "Suprimeix el spam"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "Torna a la revisió %(rev)d."
+
 msgid "Package Pages"
 msgstr "Pàgines de paquets"
 
@@ -1153,6 +1171,10 @@ msgstr "Renderitza com a Docbook"
 
 msgid "Do"
 msgstr "Fes"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Comentari"
 
 msgid "Edit (Text)"
 msgstr "Edita (text)"
@@ -1407,6 +1429,9 @@ msgstr "Obre l'editor en fer doble clic"
 
 msgid "After login, jump to last visited page"
 msgstr "Després d'entrar, salta a l'última pàgina visitada"
+
+msgid "Show comment sections"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "Mostra un signe d'interrogació per a enllaços a pàgines no existents"
@@ -1970,15 +1995,6 @@ msgstr "Diferències"
 msgid "Comment"
 msgstr "Comentari"
 
-msgid "raw"
-msgstr "cru"
-
-msgid "print"
-msgstr "imprimeix"
-
-msgid "revert"
-msgstr "torna enrere"
-
 msgid "Revision History"
 msgstr "Historial de revisions"
 
@@ -2218,6 +2234,15 @@ msgstr "Raó opcional per a la supressió"
 
 msgid "Really delete this page?"
 msgstr "Esteu segur de voler suprimir aquesta pàgina?"
+
+#~ msgid "raw"
+#~ msgstr "cru"
+
+#~ msgid "print"
+#~ msgstr "imprimeix"
+
+#~ msgid "revert"
+#~ msgstr "torna enrere"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr ""

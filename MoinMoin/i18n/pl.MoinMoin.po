@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2006-02-09 11:25+0100\n"
 "Last-Translator: Wojciech Palacz <wojtek@virgo.ii.uj.edu.pl>\n"
 "Language-Team: Polish <sergiusz-keyword-moinmoin.69c762@pawlowicz.name>\n"
@@ -160,10 +160,10 @@ msgstr "Prześlij do mnie moje dane"
 msgid "Email"
 msgstr "E-mail"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "Aby utworzyć konto lub odzyskać zapomniane hasło, zobacz %(userprefslink)s "
 
@@ -630,6 +630,10 @@ msgstr "Tekst"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "ostatnio modyfikowane %(time)s"
+
 msgid "match"
 msgstr "porównanie"
 
@@ -773,10 +777,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "ostatnio modyfikowane %(time)s"
-
 msgid "N/A"
 msgstr "n/d"
 
@@ -817,6 +817,10 @@ msgstr "Rysunek '%(filename)s' zachowany."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Przywrócono wersję %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Załączniki do \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -911,6 +915,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1067,6 +1075,12 @@ msgstr "[SKASOWANA]"
 msgid "[UPDATED]"
 msgstr "[UAKTUALNIONA]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[NOWA]"
 
@@ -1152,6 +1166,10 @@ msgid "Remove Spam"
 msgstr "Usuń skrót"
 
 #, fuzzy
+msgid "Revert to this revision"
+msgstr "Przywrócono wersję %(rev)d."
+
+#, fuzzy
 msgid "Package Pages"
 msgstr "Podobne strony"
 
@@ -1160,6 +1178,10 @@ msgstr ""
 
 msgid "Do"
 msgstr "Wykonaj"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Komentarz"
 
 msgid "Edit (Text)"
 msgstr "Edytuj (tekstowo)"
@@ -1412,6 +1434,9 @@ msgid "Open editor on double click"
 msgstr "Otwórz edytor podwójnym kliknięciem"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1980,15 +2005,6 @@ msgstr "Różnice"
 msgid "Comment"
 msgstr "Komentarz"
 
-msgid "raw"
-msgstr "surowy"
-
-msgid "print"
-msgstr "drukuj"
-
-msgid "revert"
-msgstr "przywróć"
-
 msgid "Revision History"
 msgstr "Histora zmian"
 
@@ -2262,6 +2278,15 @@ msgstr "Opcjonalna przyczyna usunięcia"
 
 msgid "Really delete this page?"
 msgstr "Czy na pewno usunąć niniejszą stronę?"
+
+#~ msgid "raw"
+#~ msgstr "surowy"
+
+#~ msgid "print"
+#~ msgstr "drukuj"
+
+#~ msgid "revert"
+#~ msgstr "przywróć"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## kopia zapasowa strony \"%(pagename)s\" wprowadzona %(date)s"

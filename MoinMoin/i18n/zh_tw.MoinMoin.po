@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
-"PO-Revision-Date: 2006-07-07 23:00+0800\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"PO-Revision-Date: 2006-11-07 00:00+0800\n"
 "Last-Translator: Rux Li <rux.li3@gmail.com>\n"
 "Language-Team: Chinese/Taiwan <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -153,10 +153,10 @@ msgstr "把帳號資料寄給我"
 msgid "Email"
 msgstr "Email"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr "要註冊新帳號或忘了密碼，請到 %(userprefslink)s。"
 
 msgid "Name"
@@ -191,9 +191,9 @@ msgstr "不能編輯舊版頁面！"
 msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr "你的編輯鎖定逾時，可能會有編輯衝突需要處理！"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "預覽頁面 \"%(pagename)s\""
+msgstr "頁面 \"%(pagename)s\" 的草稿"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -228,9 +228,8 @@ msgstr ""
 "有人在你編輯的時候按下「存檔」了。請勿直接儲存本頁！\n"
 "請先看看哪裡修改過了，再決定要不要進一步編輯、儲存本頁。"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[從 %s 載入新頁面的內容]"
+msgstr "[從草稿區載入頁面的內容]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -252,6 +251,10 @@ msgid ""
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
+"'''[[BR]]你可以按「載入草稿」來載入修訂版號為 %(draft_rev)d (儲存於 %"
+"(draft_timestamp_str)s) 的草稿來取代目前的修訂版本 %(page_rev)d - 萬一你忘了"
+"儲存編輯的話。''' 當你執行下列動作時，系統會自動幫你保留一分草稿：預覽、取消"
+"編輯或存檔失敗。"
 
 #, python-format
 msgid "Describe %s here."
@@ -281,7 +284,7 @@ msgid "Text mode"
 msgstr "Text 模式"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "載入草稿"
 
 msgid "Comment:"
 msgstr "說明欄："
@@ -300,20 +303,21 @@ msgid "Remove trailing whitespace from each line"
 msgstr "去掉行尾空白"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "此 wiki 目前無法顯示"
 
 msgid ""
 "The remote version of MoinMoin is too old, version 1.6 is required at least."
-msgstr ""
+msgstr "遠端的 MoinMoin 版本太舊，至少需要 1.6 版以上。"
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "不合法的使用者名稱或密碼"
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"Wiki 站際名稱不符：遠端的名稱為 %(remotename)s，而本地名稱為 %(localname)s。"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -380,7 +384,6 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr "無法更改頁面名稱。原因為檔案系統錯誤：%s。"
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
 msgstr "你無權刪除本頁。"
 
@@ -586,21 +589,24 @@ msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f 秒"
+msgstr "秒"
 
-#, fuzzy
 msgid "Previous"
-msgstr "預覽"
+msgstr "上一筆"
 
-#, fuzzy
 msgid "Next"
-msgstr "內文"
+msgstr "下一筆"
 
 msgid "current"
-msgstr ""
+msgstr "目前"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "上次修改時間：%s"
 
 msgid "match"
 msgstr "筆"
@@ -740,31 +746,25 @@ msgid "Enabled"
 msgstr "可用"
 
 msgid "index available"
-msgstr ""
+msgstr "有索引"
 
 msgid "index unavailable"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "上次修改時間 %(time)s"
+msgstr "無索引"
 
 msgid "N/A"
 msgstr "無"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
+msgstr "未安裝 Xapian 及/或 Python Xapian bindings"
 
 msgid "Xapian search"
 msgstr "Xapian 搜尋"
 
-#, fuzzy
 msgid "Xapian Version"
-msgstr "Xapian 搜尋"
+msgstr "Xapian 版本"
 
-#, fuzzy
 msgid "Xapian stemming"
-msgstr "Xapian 搜尋"
+msgstr "Xapian 詞幹"
 
 msgid "Active threads"
 msgstr "緒程數目"
@@ -789,6 +789,10 @@ msgstr "圖片 '%(filename)s' 已儲存。"
 msgid "Revert to revision %(rev)d."
 msgstr "回復成第 %(rev)d 版。"
 
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "\"%(pagename)s\" 的附件"
+
 #, python-format
 msgid "%(mins)dm ago"
 msgstr "%(mins)d 分前"
@@ -800,7 +804,6 @@ msgstr "(尚未放置)"
 msgid "(currently set to %s)"
 msgstr "(目前位置為 %s)"
 
-#, fuzzy
 msgid "Delete bookmark"
 msgstr "拿掉書籤"
 
@@ -831,56 +834,53 @@ msgstr "請指定圖表類型！"
 msgid "Bad chart type \"%s\"!"
 msgstr "錯誤的圖表類型 \"%s\"！"
 
-#, fuzzy
 msgid "Search for items"
-msgstr "搜尋標題"
+msgstr "搜尋項目"
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "包含以下所有項目"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "包含以下一或多個項目"
 
 msgid "not containing the following terms"
-msgstr ""
+msgstr "不包含以下項目"
 
-#, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "本頁連往以下頁面："
+msgstr "屬於以下類別之一"
 
 msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
+msgstr "最後一次修改在 (如：兩週前)"
 
-#, fuzzy
 msgid "any language"
-msgstr "語言偏好"
+msgstr "任何語言"
 
 msgid "Language"
-msgstr ""
+msgstr "語言"
 
-#, fuzzy
 msgid "File Type"
-msgstr "檔名"
+msgstr "檔案型態"
 
-#, fuzzy
 msgid "Search only in titles"
-msgstr "搜尋標題"
+msgstr "只搜尋標題"
 
-#, fuzzy
 msgid "Case-sensitive search"
-msgstr "區分大小寫"
+msgstr "區分大小寫搜尋"
 
 msgid "Exclude underlay"
-msgstr ""
+msgstr "不含系統頁面"
 
-#, fuzzy
 msgid "No system items"
-msgstr "系統頁面數"
+msgstr "無系統項目"
 
 msgid "Search in all page revisions"
-msgstr ""
+msgstr "搜尋所有頁面的所有版本"
 
 msgid "Go get it!"
+msgstr "下載去"
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -906,12 +906,11 @@ msgid "Date"
 msgstr "日期"
 
 msgid "From"
-msgstr ""
+msgstr "從"
 
 msgid "To"
-msgstr ""
+msgstr "至"
 
-#, fuzzy
 msgid "Content"
 msgstr "目 錄"
 
@@ -1028,6 +1027,12 @@ msgstr "[刪除]"
 msgid "[UPDATED]"
 msgstr "[更新]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[新增]"
 
@@ -1108,6 +1113,10 @@ msgstr "新增訂戶"
 msgid "Remove Spam"
 msgstr "移除垃圾"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "回復成第 %(rev)d 版。"
+
 msgid "Package Pages"
 msgstr "打包頁面"
 
@@ -1116,6 +1125,10 @@ msgstr "DocBook 形"
 
 msgid "Do"
 msgstr "執行"
+
+#, fuzzy
+msgid "Comments"
+msgstr "說明"
 
 msgid "Edit (Text)"
 msgstr "編輯(Text)"
@@ -1224,13 +1237,13 @@ msgstr "重新命名"
 msgid "SpellCheck"
 msgstr "拼字檢查"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown action %(action_name)s."
-msgstr "要執行「%(actionname)s」操作嗎？"
+msgstr "不明的操作 %(action_name)s。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "你無權在本頁進行「%(actionname)s」操作。"
+msgstr "你無權在本頁進行「%(action_name)s」操作。"
 
 msgid "Login and try again."
 msgstr "請先登入後再試一次。"
@@ -1367,6 +1380,10 @@ msgstr "點兩下就進入編輯模式"
 msgid "After login, jump to last visited page"
 msgstr "登入之後，跳到上次瀏覽的頁面"
 
+#, fuzzy
+msgid "Show comment sections"
+msgstr "顯示表情符號"
+
 msgid "Show question mark for non-existing pagelinks"
 msgstr "在不存在的頁面連結前打上問號"
 
@@ -1485,7 +1502,7 @@ msgid "del"
 msgstr "刪除"
 
 msgid "move"
-msgstr ""
+msgstr "搬移"
 
 msgid "get"
 msgstr "下載"
@@ -1548,16 +1565,14 @@ msgstr "檔案沒有內容。請刪除檔名中的非 ASCII 字元後，再試�
 msgid "You are not allowed to delete attachments on this page."
 msgstr "你無權刪除本頁附件。"
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "你無權下載本頁附件。"
+msgstr "你無權搬移本頁附件。"
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "放棄搬移"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr "請使用互動式介面為頁面重新命名！"
+msgstr "請使用互動式介面來搬移頁面附件！"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "你無權下載本頁附件。"
@@ -1590,42 +1605,39 @@ msgstr ""
 msgid "Attachment '%(target)s' (remote name '%(filename)s') already exists."
 msgstr "附件 '%(target)s' 已經存在 (遠端名稱 '%(filename)s')"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
 msgstr "附件 '%(filename)s' 已安裝。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "附件 '%(filename)s' 不存在！"
+msgstr "附件 '%(filename)s' 已搬移至 %(page)s！"
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "沒有任何改變"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
+msgstr "頁面 %(newpagename)s 不存在或你沒有足夠的權限。"
 
-#, fuzzy
 msgid "Move aborted because empty page name"
-msgstr "新的名稱不能是空的！"
+msgstr "因為空的頁面名稱而放棄搬移"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "上傳附件 '%(filename)s'。"
+msgstr "請替附件 '%(filename)s' 取個合法的檔名。"
 
 msgid "Move aborted because empty attachment name"
-msgstr ""
+msgstr "因為空的附件名稱而放棄搬移"
 
 msgid "Move"
-msgstr ""
+msgstr "搬移"
 
-#, fuzzy
 msgid "New page name"
-msgstr "新的名稱"
+msgstr "新的頁面名稱"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "新增附件"
+msgstr "新的附件名稱"
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
@@ -1710,133 +1722,146 @@ msgstr "全部回復"
 msgid "You are not allowed to use this action."
 msgstr "你無權使用本項操作。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "新增頁面 \"%s\" 的訂閱戶"
+msgstr "轉回改變到頁面 %s。"
 
 msgid "Exception while calling rollback function:"
-msgstr ""
+msgstr "執行轉回功能時發生異常"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
 "[[BR]] /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
+"請在下面輸入你在遠端 Wiki 帳號的密碼。[[BR]] /!\\ 你必須相信兩邊的 Wiki 站，"
+"因為特定的管理者可以讀取你的密碼。"
 
-#, fuzzy
 msgid "Operation was canceled."
-msgstr "編輯已取消。"
+msgstr "動作已取消。"
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr ""
+msgstr "只支援 BOTH 和 DOWN 指令"
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
+"請在 wikiconfig 設定 Wiki 站際的名稱 (參見 HelpOnConfiguration) 才能使用本項"
+"操作。"
 
 msgid ""
 "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
 "Refer to HelpOnSynchronisation for help."
 msgstr ""
+"參數不正確。請至少指定 ''remoteWiki'' 參數。詳情請參見 "
+"HelpOnSynchronisation。"
 
 msgid "The ''remoteWiki'' is unknown."
-msgstr ""
+msgstr "''remoteWiki'' 不明。"
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "發生嚴重的錯誤："
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "同步完成。請參考以下的狀態訊息。"
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "同步作業開始 --"
 
 #, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s different "
 "pages over-all."
-msgstr ""
+msgstr "收到 %s 個本地及 %s 個遠端頁面。總共有 %s 個不同的頁面。"
 
 #, python-format
 msgid "After filtering: %s pages"
-msgstr ""
+msgstr "過濾之後，還有 %s 頁"
 
 #, python-format
 msgid "Deleted page %s locally."
-msgstr ""
+msgstr "刪除本地頁面 %s"
 
 #, python-format
 msgid "Error while deleting page %s locally:"
-msgstr ""
+msgstr "在刪除本地頁面 %s 時發生錯誤"
 
 #, python-format
 msgid "Deleted page %s remotely."
-msgstr ""
+msgstr "刪除遠端頁面 %s"
 
 #, python-format
 msgid "Error while deleting page %s remotely:"
-msgstr ""
+msgstr "在刪除遠端頁面 %s 時發生錯誤"
 
 #, python-format
 msgid ""
 "The item %s cannot be merged automatically but was changed in both wikis. "
 "Please delete it in one of both wikis and try again."
 msgstr ""
+"項目 %s 在兩端的 wiki 都有更動，而且無法自動合併。請刪除其中之一，然後再試一"
+"次。"
 
 #, python-format
 msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
+"項目 %s 在兩端的 MIME 型態不符無法合併。請刪除其中之一或讓兩邊的 MIME 型態相"
+"符，然後再試一次。"
 
 #, python-format
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
 msgstr ""
+"項目 %s 在本地以重新命名過。但本項功能尚未完成，因此本頁無法保留完整的同步歷"
+"史。"
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr ""
+msgstr "同步本地頁面 %s 和遠端頁面 %s ..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
-msgstr ""
+msgstr "頁面 %s 在遠端已刪除，但在本地卻有修改過。"
 
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
+"頁面 %s 無法同步。遠端頁面已經重新命名過，而目前還不支援此種操作。你必須刪除"
+"其中之一才能完成同步作業。"
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
-msgstr ""
+msgstr "跳過頁面 %s，因為無法解決兩邊的編輯衝突。"
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr ""
+msgstr "這是第一次在本地和遠端同步頁面 %s。"
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
-msgstr ""
+msgstr "頁面 %s 無法合併，因為你無權修改遠端的頁面。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page %s successfully merged."
-msgstr "頁面 \"%s\" 已刪除！"
+msgstr "頁面 \"%s\" 已成功合併！"
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr ""
+msgstr "頁面 %s 包含來自遠端的編輯衝突。"
 
 #, python-format
 msgid "Page %s merged with conflicts."
-msgstr ""
+msgstr "頁面 %s 已合併，但仍有編輯衝突。"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1868,14 +1893,12 @@ msgstr "你不能訂閱無權瀏覽的頁面。"
 msgid "This wiki is not enabled for mail processing."
 msgstr "本 wiki 站不支援郵寄處理。"
 
-#, fuzzy
 msgid "You must log in to use subscriptions."
 msgstr "登入之後才能訂閱"
 
 msgid "Add your email address in your UserPreferences to use subscriptions."
 msgstr "在 UserPreferences 設定 email 地址之後才能訂閱"
 
-#, fuzzy
 msgid "Your subscription to this page has been removed."
 msgstr "本頁已取消訂閱。"
 
@@ -1909,15 +1932,6 @@ msgstr "比較"
 
 msgid "Comment"
 msgstr "說明"
-
-msgid "raw"
-msgstr "原始形"
-
-msgid "print"
-msgstr "列印形"
-
-msgid "revert"
-msgstr "回復"
 
 msgid "Revision History"
 msgstr "修訂記錄"
@@ -2007,20 +2021,20 @@ msgstr "你無權執行本項操作。"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
+msgstr "(!) 自 '''%s''' 以後改變的頁面才會顯示！"
 
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
-msgstr ""
+msgstr "/!\\ 你輸入的修改時間無法辨認，因此不會納入搜尋之條件！"
 
 #, python-format
 msgid "Title Search: \"%s\""
 msgstr "搜尋標題：\"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Advanced Search: \"%s\""
-msgstr "搜尋標題：\"%s\""
+msgstr "進階搜尋：\"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
@@ -2030,28 +2044,29 @@ msgstr "全文檢索：\"%s\""
 msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
-msgstr ""
+msgstr "你個查詢 {{{\"%s\"}}} 並不合法。詳情請參見 HelpOnSearching。"
 
 #, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
+"你的查詢 {{{\"%s\"}}} 沒有任何符合結果，請修改查詢條件。詳情請參見 "
+"HelpOnSearching。%s"
 
 msgid "(!) Consider performing a"
-msgstr ""
+msgstr "(!) 考慮執行"
 
 msgid "full-text search with your search terms"
-msgstr ""
+msgstr "全文檢索來找搜尋項目"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. [[BR]]"
-msgstr ""
+msgstr "(!) 你執行的是標題檢索，本 Wiki 站相關的內文並不會被查詢到。[[BR]]"
 
-#, fuzzy
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "點一下，對本頁標題做全文檢索，以便找出引用本頁的頁面"
+msgstr "點一下這裡，以便對搜尋項目做全文檢索！"
 
 #, python-format
 msgid ""
@@ -2189,6 +2204,15 @@ msgstr "刪除本頁的理由："
 
 msgid "Really delete this page?"
 msgstr "真的要刪除本頁？"
+
+#~ msgid "raw"
+#~ msgstr "原始形"
+
+#~ msgid "print"
+#~ msgstr "列印形"
+
+#~ msgid "revert"
+#~ msgstr "回復"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## 頁面 \"%(pagename)s\" 已於 %(date)s 提交備份"
@@ -2437,9 +2461,6 @@ msgstr "真的要刪除本頁？"
 
 #~ msgid "The diff function returned with error code %(rc)s!"
 #~ msgstr "版本比較函式傳回錯誤代碼 %(rc)s！"
-
-#~ msgid "Show emoticons"
-#~ msgstr "顯示表情符號"
 
 #~ msgid "Please enter your name like that: FirstnameLastname"
 #~ msgstr "請輸入像這樣的名稱: XingMing"

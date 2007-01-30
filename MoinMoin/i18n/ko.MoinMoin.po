@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
-"PO-Revision-Date: 2006-07-24 20:20+0900\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"PO-Revision-Date: 2007-01-14 17:53+0900\n"
 "Last-Translator: Seungik Lee <seungiklee@gmail.com>\n"
 "Language-Team: Korean <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -156,10 +156,10 @@ msgstr "계정 정보를 메일로 발송"
 msgid "Email"
 msgstr "Email"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "계정을 새로 만들거나 잊어버린 암호를 전송받으려면 %(userprefslink)s 문서를 보"
 "세요."
@@ -197,9 +197,9 @@ msgid "The lock you held timed out. Be prepared for editing conflicts!"
 msgstr ""
 "문서 잠금이 풀렸습니다. 다른 사람의 변경사항과 충돌될 경우를 대비하세요!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "\"%(pagename)s\"의 미리보기"
+msgstr "\"%(pagename)s\"의 초안"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -234,9 +234,8 @@ msgstr ""
 "이 문서를 수정하는 동안에 다른 사람이 먼저 이 문서를 저장했습니다!\n"
 "문서 내용을 다시 검토한 뒤에 저장하시고, 절대로 지금 그대로 저장하지 마세요!"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[%s에서 옮겨온 새 문서 내용]"
+msgstr "[초안 문서 내용]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -388,9 +387,8 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr "다음 파일 시스템 에러로 인해 문서 이름을 바꿀 수 없었습니다: %s."
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
-msgstr "이 문서를 되돌릴 수 있는 권한이 없습니다!"
+msgstr "이 문서를 삭제할 수 있는 권한이 없습니다!"
 
 msgid "Thank you for your changes. Your attention to detail is appreciated."
 msgstr "문서가 저장되었습니다."
@@ -606,20 +604,21 @@ msgid ""
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f 초"
+msgstr "초"
 
-#, fuzzy
 msgid "Previous"
-msgstr "미리보기"
+msgstr "이전"
 
-#, fuzzy
 msgid "Next"
-msgstr "내용"
+msgstr "다음"
 
 msgid "current"
-msgstr ""
+msgstr "현재"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "마지막 수정: %s"
 
 msgid "match"
 msgstr "개 포함"
@@ -764,26 +763,20 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "%(time)s에 마지막으로 수정"
-
 msgid "N/A"
 msgstr "없음"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
+msgstr "Xapian 이나 Python Xapian bindings 가 설치되지 않았습니다"
 
 msgid "Xapian search"
 msgstr "Xapian 검색"
 
-#, fuzzy
 msgid "Xapian Version"
-msgstr "Xapian 검색"
+msgstr "Xapian 버젼"
 
-#, fuzzy
 msgid "Xapian stemming"
-msgstr "Xapian 검색"
+msgstr "Xapian stemming"
 
 msgid "Active threads"
 msgstr "사용 중인 쓰레드 개수"
@@ -808,6 +801,10 @@ msgstr "그림 '%(filename)s'가(이) 저장되었습니다."
 msgid "Revert to revision %(rev)d."
 msgstr "%(rev)d번째 판으로 돌아감."
 
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "\"%(pagename)s\"의 첨부파일들"
+
 #, python-format
 msgid "%(mins)dm ago"
 msgstr "%(mins)02d분 전"
@@ -819,7 +816,6 @@ msgstr "(책갈피가 없음)"
 msgid "(currently set to %s)"
 msgstr "(현재값은 %s)"
 
-#, fuzzy
 msgid "Delete bookmark"
 msgstr "책갈피 제거"
 
@@ -850,56 +846,53 @@ msgstr "차트 타입을 지정하여야 합니다!"
 msgid "Bad chart type \"%s\"!"
 msgstr "잘못된 차트 종류 입니다: \"%s\""
 
-#, fuzzy
 msgid "Search for items"
-msgstr "제목에서 찾기"
+msgstr "항목 검색"
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "다음 단어를 포함하는"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "다음 단어를 하나 이상 포함하는"
 
 msgid "not containing the following terms"
-msgstr ""
+msgstr "다음 단어를 포함하지 않는"
 
-#, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "이 문서는 다음 링크들을 포함하고 있습니다:"
+msgstr "다음 분류에 하나 이상 속하는"
 
 msgid "last modified since (e.g. last 2 weeks)"
 msgstr ""
 
-#, fuzzy
 msgid "any language"
-msgstr "선호하는 언어"
+msgstr "아무 언어"
 
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
-#, fuzzy
 msgid "File Type"
-msgstr "파일이름"
+msgstr "파일형식"
 
-#, fuzzy
 msgid "Search only in titles"
-msgstr "제목에서 찾기"
+msgstr "제목에서만 찾기"
 
-#, fuzzy
 msgid "Case-sensitive search"
-msgstr "대소문자 구별"
+msgstr "대소문자 구별 검색"
 
 msgid "Exclude underlay"
-msgstr ""
+msgstr "시스템 페이지 제외"
 
-#, fuzzy
 msgid "No system items"
-msgstr "시스템 문서 개수"
+msgstr "시스템 아이템이 없음"
 
 msgid "Search in all page revisions"
-msgstr ""
+msgstr "모든 버젼의 문서에서 검색"
 
 msgid "Go get it!"
+msgstr "검색!"
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -926,14 +919,13 @@ msgid "Date"
 msgstr "날짜"
 
 msgid "From"
-msgstr ""
+msgstr "발신"
 
 msgid "To"
-msgstr ""
+msgstr "수신"
 
-#, fuzzy
 msgid "Content"
-msgstr "차례"
+msgstr "내용"
 
 msgid "Attachments"
 msgstr "첨부"
@@ -1052,6 +1044,12 @@ msgstr "[삭제됨]"
 msgid "[UPDATED]"
 msgstr "[변경됨]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[새 문서]"
 
@@ -1132,6 +1130,10 @@ msgstr "구독 중인 사용자"
 msgid "Remove Spam"
 msgstr "스팸 제거"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "%(rev)d번째 판으로 돌아감."
+
 msgid "Package Pages"
 msgstr "문서 묶기"
 
@@ -1140,6 +1142,10 @@ msgstr "Dockbook 보기"
 
 msgid "Do"
 msgstr "확인"
+
+#, fuzzy
+msgid "Comments"
+msgstr "설명"
 
 msgid "Edit (Text)"
 msgstr "수정 (Text)"
@@ -1248,13 +1254,13 @@ msgstr "이름 변경"
 msgid "SpellCheck"
 msgstr "철자 검사"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown action %(action_name)s."
-msgstr "%(actionname)s 액션을 수행할까요?"
+msgstr "알 수 없는 액션: %(action_name)s."
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "이 문서에 %(actionname)s 작업을 수행할 수 있는 권한이 없습니다!"
+msgstr "이 문서에 %(action_name)s 작업을 수행할 수 있는 권한이 없습니다!"
 
 msgid "Login and try again."
 msgstr "로그인 후 다시 시도하세요."
@@ -1394,6 +1400,9 @@ msgstr "더블 클릭해서 문서를 수정함"
 
 msgid "After login, jump to last visited page"
 msgstr "로그인 후 마지막으로 방문한 문서로 바로 가기"
+
+msgid "Show comment sections"
+msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
 msgstr "존재하지 않는 문서 링크 옆에 물음표 표시"
@@ -1580,17 +1589,14 @@ msgstr ""
 msgid "You are not allowed to delete attachments on this page."
 msgstr "이 문서의 첨부 파일을 지울 수 있는 권한이 없습니다."
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "이 문서의 첨부 파일을 받을 수 있는 권한이 없습니다."
+msgstr "이 문서의 첨부 파일을 옮길 수 있는 권한이 없습니다."
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "파일 이동이 취소되었습니다!"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr ""
-"%(actionname)s 작업을 수행하기 위해서는 명령행 프로그램을 사용해 주세요!"
+msgstr "첨부 파일을 옮기기 위해서는 명령행 프로그램을 사용해 주세요!"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "이 문서의 첨부 파일을 받을 수 있는 권한이 없습니다."
@@ -1626,46 +1632,43 @@ msgstr ""
 "첨부 파일 '%(target)s' (하드디스크에서의 이름 '%(filename)s') 가(이) 이미 있"
 "습니다."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "첨부 파일 '%(filename)s'를(을) 설치함"
+msgstr "첨부 파일 '%(filename)s'이(가) 이미 존재함."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "첨부 파일 '%(filename)s'가 존재하지 않습니다!"
+msgstr "첨부 파일 '%(filename)s'이(가) %(page)s (으)로 옮겨졌습니다."
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "변경사항 없음"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
+msgstr "문서 %(newpagename)s 가 존재하지 않거나 권한이 없습니다."
 
-#, fuzzy
 msgid "Move aborted because empty page name"
-msgstr "문서 이름을 지정하셔야 합니다."
+msgstr "문서 이름이 없어서 파일 이동이 취소되었습니다."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "첨부 '%(filename)s'를(을) 업로드"
+msgstr "첨부 '%(filename)s'에 대한 유효한 파일 이름을 사용해주세요."
 
 msgid "Move aborted because empty attachment name"
-msgstr ""
+msgstr "파일 이름이 없어서 파일 이동이 취소되었습니다."
 
 msgid "Move"
-msgstr ""
+msgstr "이동"
 
-#, fuzzy
 msgid "New page name"
-msgstr "새 이름"
+msgstr "새 문서 이름"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "새 첨부"
+msgstr "새 첨부 이름"
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
-msgstr "첨부 파일 '%(filename)s'를(을) 설치함"
+msgstr "첨부 파일 '%(filename)s'(이)가 설치되었음"
 
 #, python-format
 msgid ""
@@ -1751,30 +1754,33 @@ msgstr "모두 되돌리기!"
 msgid "You are not allowed to use this action."
 msgstr "이 작업을 수행할 수 있는 권한이 없습니다."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "문서 %s 를(을) 구독하는 사용자"
+msgstr "문서 %s 의 변경 사항이 취소되었습니다."
 
 msgid "Exception while calling rollback function:"
-msgstr ""
+msgstr "Rollback 함수를 호출할 때 에러가 발생했습니다."
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
 "[[BR]] /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
+"원격 위키의 계정에 대한 암호를 입력해주세요. [[BR]] /!\\ 해당 암호는 특정 관"
+"리자에게 알려질 수 있으므로 양쪽 위키는 서로 신뢰 관계에 있어야 합니다."
 
-#, fuzzy
 msgid "Operation was canceled."
-msgstr "문서 수정을 취소했습니다."
+msgstr "작업이 취소되었습니다."
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr ""
+msgstr "허용된 방향은 BOTH와 DOWN입니다."
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
+"해당 액션을 사용하기 위해서는 wikiconfig에 인터위키 이름을 지정해주세요. (설"
+"정과 관련한 자세한 사항은 HelpOnConfiguration 를 참고하세요.)"
 
 msgid ""
 "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
@@ -1782,16 +1788,16 @@ msgid ""
 msgstr ""
 
 msgid "The ''remoteWiki'' is unknown."
-msgstr ""
+msgstr "알 수 없는 ''원격위키''"
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "중대한 에러 발생:"
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "동기화에 실패했습니다. 아래의 상태 메시지를 확인하십시오."
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "동기화 시작 -"
 
 #, python-format
 msgid ""
@@ -1867,9 +1873,9 @@ msgid ""
 "page in the remote wiki."
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page %s successfully merged."
-msgstr "문서 \"%s\"가(이) 지워졌습니다!"
+msgstr "문서 %s가(이) 성공적으로 통합되었습니다."
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
@@ -1909,7 +1915,6 @@ msgstr "문서의 변경 사항을 구독하기 위해서는 읽기 권한이 �
 msgid "This wiki is not enabled for mail processing."
 msgstr "이 위키는 메일 처리를 할 수 없도록 설정되어 있습니다."
 
-#, fuzzy
 msgid "You must log in to use subscriptions."
 msgstr "문서의 변경 사항을 구독하기 위해서는 로그인을 하셔야 합니다."
 
@@ -1918,9 +1923,8 @@ msgstr ""
 "문서의 변경 사항을 구독하기 위해서는 UserPreferences에 이메일 주소를 입력하세"
 "요."
 
-#, fuzzy
 msgid "Your subscription to this page has been removed."
-msgstr "이 문서를 더 이상 구독하지 않습니다."
+msgstr "이 문서의 변경 사항을 더 이상 구독하지 않습니다."
 
 msgid "Can't remove regular expression subscription!"
 msgstr "정규표현식으로 된 구독 목록은 지울 수 없습니다!"
@@ -1952,15 +1956,6 @@ msgstr "차이점 비교"
 
 msgid "Comment"
 msgstr "설명"
-
-msgid "raw"
-msgstr "원문"
-
-msgid "print"
-msgstr "인쇄"
-
-msgid "revert"
-msgstr "되돌림"
 
 msgid "Revision History"
 msgstr "수정 기록"
@@ -2041,15 +2036,15 @@ msgstr ""
 
 #, python-format
 msgid "Title Search: \"%s\""
-msgstr "제목 \"%s\" 찾기"
+msgstr "제목에서 검색: \"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Advanced Search: \"%s\""
-msgstr "제목 \"%s\" 찾기"
+msgstr "고급 검색: \"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
-msgstr "내용 전체에서 찾음 : \"%s\""
+msgstr "내용 전체에서 검색: \"%s\""
 
 #, python-format
 msgid ""
@@ -2074,9 +2069,8 @@ msgid ""
 "results of your search query in this wiki. [[BR]]"
 msgstr ""
 
-#, fuzzy
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "이 문서 제목이 포함된 다른 문서를 찾으시려면 여기를 누르세요"
+msgstr "검색 단어로 문서의 내용을 검색하시려면 여기를 누르세요!"
 
 #, python-format
 msgid ""
@@ -2220,6 +2214,15 @@ msgstr "삭제하는 이유"
 
 msgid "Really delete this page?"
 msgstr "정말로 이 문서를 지우시겠습니까?"
+
+#~ msgid "raw"
+#~ msgstr "원문"
+
+#~ msgid "print"
+#~ msgstr "인쇄"
+
+#~ msgid "revert"
+#~ msgstr "되돌림"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## %(date)s에 만들어진 문서 \"%(pagename)s\"의 백업"

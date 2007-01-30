@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
 "PO-Revision-Date: 2004-12-01 21:30+0200\n"
 "Last-Translator: Joerg Cassens <jmt@cassens.org>\n"
 "Language-Team: Norwegian <moinmoin-nb@cassens.org>\n"
@@ -157,8 +157,8 @@ msgstr "E-postadresse"
 
 #, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 
 msgid "Name"
@@ -613,6 +613,10 @@ msgstr "Tekst"
 msgid "current"
 msgstr ""
 
+#, fuzzy, python-format
+msgid "last modified: %s"
+msgstr "sist endret %(time)s"
+
 msgid "match"
 msgstr "resultat"
 
@@ -758,10 +762,6 @@ msgstr ""
 msgid "index unavailable"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "sist endret %(time)s"
-
 msgid "N/A"
 msgstr "Ikke tilgjengelig"
 
@@ -800,6 +800,10 @@ msgstr "Tegningen '%(filename)s' er lagret."
 #, python-format
 msgid "Revert to revision %(rev)d."
 msgstr "Tilbakestill til versjon %(rev)d."
+
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "Vedlegg for \"%(pagename)s\""
 
 #, python-format
 msgid "%(mins)dm ago"
@@ -894,6 +898,10 @@ msgid "Search in all page revisions"
 msgstr ""
 
 msgid "Go get it!"
+msgstr ""
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -1045,6 +1053,12 @@ msgstr ""
 msgid "[UPDATED]"
 msgstr ""
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr ""
 
@@ -1133,6 +1147,10 @@ msgid "Remove Spam"
 msgstr ""
 
 #, fuzzy
+msgid "Revert to this revision"
+msgstr "Tilbakestill til versjon %(rev)d."
+
+#, fuzzy
 msgid "Package Pages"
 msgstr "LignendeSider"
 
@@ -1141,6 +1159,10 @@ msgstr ""
 
 msgid "Do"
 msgstr "Utfør"
+
+#, fuzzy
+msgid "Comments"
+msgstr "Kommentar"
 
 msgid "Edit (Text)"
 msgstr ""
@@ -1380,6 +1402,9 @@ msgid "Open editor on double click"
 msgstr "Dobbeltklikk åpner redigeringsvindu"
 
 msgid "After login, jump to last visited page"
+msgstr ""
+
+msgid "Show comment sections"
 msgstr ""
 
 msgid "Show question mark for non-existing pagelinks"
@@ -1934,15 +1959,6 @@ msgstr "Endringer"
 msgid "Comment"
 msgstr "Kommentar"
 
-msgid "raw"
-msgstr "kilde"
-
-msgid "print"
-msgstr "skriv ut"
-
-msgid "revert"
-msgstr "tilbakestill"
-
 msgid "Revision History"
 msgstr "Endringshistorikk"
 
@@ -2181,6 +2197,15 @@ msgstr "Årsak til slettingen (valgfri)"
 
 msgid "Really delete this page?"
 msgstr "Er du sikker på at denne siden skal slettes?"
+
+#~ msgid "raw"
+#~ msgstr "kilde"
+
+#~ msgid "print"
+#~ msgstr "skriv ut"
+
+#~ msgid "revert"
+#~ msgstr "tilbakestill"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "## sikkerhetskopi av siden \"%(pagename)s\" sendt %(date)s"

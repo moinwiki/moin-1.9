@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MoinMoin 1.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 23:44+0100\n"
-"PO-Revision-Date: 2006-07-18 17:17+0900\n"
+"POT-Creation-Date: 2007-01-29 23:46+0100\n"
+"PO-Revision-Date: 2006-11-05 01:24+0900\n"
 "Last-Translator: Fujio Nobori <toh@fuji-climb.org>\n"
 "Language-Team: Japanese <moin-devel@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -159,10 +159,10 @@ msgstr "アカウント情報をメールする"
 msgid "Email"
 msgstr "メールアドレス"
 
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"To create an account or recover a lost password, see the %(userprefslink)s "
-"page."
+"To create an account, see the %(userprefslink)s page. To recover a lost "
+"password, go to %(sendmypasswordlink)s."
 msgstr ""
 "アカウントを作成したり、忘れてしまったパスワードを復活する際には %"
 "(userprefslink)s を参照してください。"
@@ -201,9 +201,9 @@ msgstr ""
 "ページのロックが期限切れになりました。他のユーザが行う編集と衝突する可能性が"
 "あります。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Draft of \"%(pagename)s\""
-msgstr "\"%(pagename)s\"のプレビュー"
+msgstr "\"%(pagename)s\"のドラフト"
 
 #, python-format
 msgid "Edit \"%(pagename)s\""
@@ -239,9 +239,8 @@ msgstr ""
 "変更された内容を確認してから保存してください。決してこのままの状態では保存し"
 "ないでください。"
 
-#, fuzzy
 msgid "[Content loaded from draft]"
-msgstr "[新しいページの内容が%sからロードされました]"
+msgstr "[内容はドラフトからロードされました]"
 
 #, python-format
 msgid "[Content of new page loaded from %s]"
@@ -263,6 +262,10 @@ msgid ""
 "somehow without saving it.''' A draft gets saved for you when you do a "
 "preview, cancel an edit or unsuccessfully save."
 msgstr ""
+"'''[[BR]]\"ドラフトをロード\"ボタンによって、現在のリビジョン %(page_rev)dで"
+"はなく、リビジョン %(draft_rev)d (%(draft_timestamp_str)sに保存)を基にしたド"
+"ラフトをロードすることができます。'''ドラフトはプレビューや編集のキャンセル、"
+"保存失敗時に作成されます。"
 
 #, python-format
 msgid "Describe %s here."
@@ -293,7 +296,7 @@ msgid "Text mode"
 msgstr "テキストモード"
 
 msgid "Load Draft"
-msgstr ""
+msgstr "ドラフトをロード"
 
 msgid "Comment:"
 msgstr "コメント:"
@@ -312,20 +315,22 @@ msgid "Remove trailing whitespace from each line"
 msgstr "行末の空白を削除"
 
 msgid "The wiki is currently not reachable."
-msgstr ""
+msgstr "現在そのwikiは利用できません。"
 
 msgid ""
 "The remote version of MoinMoin is too old, version 1.6 is required at least."
-msgstr ""
+msgstr "リモートのMoinMoinのバージョンが古いです。1.6以上が必要です。"
 
 msgid "Invalid username or password."
-msgstr ""
+msgstr "ユーザ名またはパスワードが不正です。"
 
 #, python-format
 msgid ""
 "The remote wiki uses a different InterWiki name (%(remotename)s) internally "
 "than you specified (%(localname)s)."
 msgstr ""
+"リモートのwikiは異なるInterWiki名を利用しています。リモート: %(remotename)s、"
+"ローカル: %(localname)s。"
 
 #, python-format
 msgid "The package needs a newer version of MoinMoin (at least %s)."
@@ -392,7 +397,6 @@ msgstr ""
 msgid "Could not rename page because of file system error: %s."
 msgstr "ファイルシステムエラー(%s)により、ページ名を変更できませんでした。"
 
-#, fuzzy
 msgid "You are not allowed to delete this page!"
 msgstr "このページを削除する権限がありません。"
 
@@ -614,21 +618,24 @@ msgid ""
 "Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
 "%(be)s results out of about %(pages)d pages."
 msgstr ""
+"Results %(bs)s%(hitsFrom)d - %(hitsTo)d%(be)s of %(aboutHits)s %(bs)s%(hits)d"
+"%(be)s results out of about %(pages)d pages."
 
-#, fuzzy
 msgid "seconds"
-msgstr "%.2f秒"
+msgstr "秒"
 
-#, fuzzy
 msgid "Previous"
-msgstr "プレビュー"
+msgstr "前"
 
-#, fuzzy
 msgid "Next"
-msgstr "テキスト"
+msgstr "次"
 
 msgid "current"
-msgstr ""
+msgstr "現在"
+
+#, python-format
+msgid "last modified: %s"
+msgstr "最終更新日時: %s"
 
 msgid "match"
 msgstr "箇所一致"
@@ -770,31 +777,25 @@ msgid "Enabled"
 msgstr "有効"
 
 msgid "index available"
-msgstr ""
+msgstr "index有効"
 
 msgid "index unavailable"
-msgstr ""
-
-#, fuzzy, python-format
-msgid "last modified: %s"
-msgstr "最終更新日時 %(time)s"
+msgstr "index無効"
 
 msgid "N/A"
 msgstr "該当せず"
 
 msgid "Xapian and/or Python Xapian bindings not installed"
-msgstr ""
+msgstr "XapianまたはPython Xapianバインディングがインストールされていません。"
 
 msgid "Xapian search"
 msgstr "Xapianによる検索"
 
-#, fuzzy
 msgid "Xapian Version"
-msgstr "Xapianによる検索"
+msgstr "Xapianバージョン"
 
-#, fuzzy
 msgid "Xapian stemming"
-msgstr "Xapianによる検索"
+msgstr "Xapian stemming"
 
 msgid "Active threads"
 msgstr "アクティブなスレッド"
@@ -819,6 +820,10 @@ msgstr "drawing '%(filename)s'を保存しました。"
 msgid "Revert to revision %(rev)d."
 msgstr "%(rev)dのリビジョンに戻す"
 
+#, fuzzy, python-format
+msgid "Renamed from '%(oldpagename)s'."
+msgstr "\"%(pagename)s の添付ファイル\""
+
 #, python-format
 msgid "%(mins)dm ago"
 msgstr "%(mins)d分前"
@@ -830,7 +835,6 @@ msgstr "(ブックマーク未設定)"
 msgid "(currently set to %s)"
 msgstr "(現在%sにセットされています)"
 
-#, fuzzy
 msgid "Delete bookmark"
 msgstr "ブックマークを削除"
 
@@ -861,56 +865,53 @@ msgstr "チャートタイプを指定してください。"
 msgid "Bad chart type \"%s\"!"
 msgstr "チャートタイプ\"%s\"が不正です。"
 
-#, fuzzy
 msgid "Search for items"
-msgstr "タイトル検索"
+msgstr "アイテムの検索"
 
 msgid "containing all the following terms"
-msgstr ""
+msgstr "以下のすべての言葉を含む"
 
 msgid "containing one or more of the following terms"
-msgstr ""
+msgstr "以下のひとつ以上の言葉を含む"
 
 msgid "not containing the following terms"
-msgstr ""
+msgstr "以下の言葉を含まない"
 
-#, fuzzy
 msgid "belonging to one of the following categories"
-msgstr "このページは以下のページへリンクしています:"
+msgstr "以下のカテゴリーのいずれかに属す"
 
 msgid "last modified since (e.g. last 2 weeks)"
-msgstr ""
+msgstr "最終更新日 (例: last 2 weeks)"
 
-#, fuzzy
 msgid "any language"
-msgstr "言語"
+msgstr "すべての言語"
 
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
-#, fuzzy
 msgid "File Type"
-msgstr "ファイル名"
+msgstr "ファイルタイプ"
 
-#, fuzzy
 msgid "Search only in titles"
-msgstr "タイトル検索"
+msgstr "タイトル内のみ検索"
 
-#, fuzzy
 msgid "Case-sensitive search"
 msgstr "大文字/小文字を区別して検索"
 
 msgid "Exclude underlay"
-msgstr ""
+msgstr "underlayを除外"
 
-#, fuzzy
 msgid "No system items"
-msgstr "システムページ数"
+msgstr "システムアイテムを除外"
 
 msgid "Search in all page revisions"
-msgstr ""
+msgstr "すべてのページリビジョンも検索"
 
 msgid "Go get it!"
+msgstr "開始！"
+
+#, python-format
+msgid "Check your argument %s"
 msgstr ""
 
 msgid "Markup"
@@ -936,12 +937,11 @@ msgid "Date"
 msgstr "日付"
 
 msgid "From"
-msgstr ""
+msgstr "From"
 
 msgid "To"
-msgstr ""
+msgstr "To"
 
-#, fuzzy
 msgid "Content"
 msgstr "目次"
 
@@ -1064,6 +1064,12 @@ msgstr "[DELETED]"
 msgid "[UPDATED]"
 msgstr "[UPDATED]"
 
+msgid "[RENAMED]"
+msgstr ""
+
+msgid "[CONFLICT]"
+msgstr ""
+
 msgid "[NEW]"
 msgstr "[NEW]"
 
@@ -1144,6 +1150,10 @@ msgstr "購読ユーザの追加"
 msgid "Remove Spam"
 msgstr "スパムの削除"
 
+#, fuzzy
+msgid "Revert to this revision"
+msgstr "%(rev)dのリビジョンに戻す"
+
 msgid "Package Pages"
 msgstr "ページのパッケージ化"
 
@@ -1152,6 +1162,10 @@ msgstr "Docbookとして描画"
 
 msgid "Do"
 msgstr "実行"
+
+#, fuzzy
+msgid "Comments"
+msgstr "コメント"
 
 msgid "Edit (Text)"
 msgstr "編集(テキストモード)"
@@ -1260,13 +1274,13 @@ msgstr "ページ名変更"
 msgid "SpellCheck"
 msgstr "スペルチェック"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Unknown action %(action_name)s."
-msgstr "アクション %(actionname)s を実行しますか？"
+msgstr "不明なアクション %(action_name)s。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "You are not allowed to do %(action_name)s on this page."
-msgstr "このページでアクション %(actionname)s を使用する権限がありません。"
+msgstr "このページでアクション %(action_name)s を使用する権限がありません。"
 
 msgid "Login and try again."
 msgstr "ログインして、もう一度試してみてください。"
@@ -1405,6 +1419,10 @@ msgstr "ダブルクリックでエディタを開く"
 msgid "After login, jump to last visited page"
 msgstr "ログイン後、最後に訪れたページに行く"
 
+#, fuzzy
+msgid "Show comment sections"
+msgstr "emoticonを表示する"
+
 msgid "Show question mark for non-existing pagelinks"
 msgstr "存在しないページへのリンクには\"?\"を表示する"
 
@@ -1526,7 +1544,7 @@ msgid "del"
 msgstr "削除"
 
 msgid "move"
-msgstr ""
+msgstr "移動"
 
 msgid "get"
 msgstr "ダウンロード"
@@ -1591,16 +1609,14 @@ msgstr ""
 msgid "You are not allowed to delete attachments on this page."
 msgstr "このページの添付ファイルを削除する権限がありません。"
 
-#, fuzzy
 msgid "You are not allowed to move attachments from this page."
-msgstr "このページの添付ファイルをダウンロードする権限がありません。"
+msgstr "このページから添付ファイルを移動する権限がありません。"
 
 msgid "Move aborted!"
-msgstr ""
+msgstr "移動は中断されました。"
 
-#, fuzzy
 msgid "Please use the interactive user interface to move attachments!"
-msgstr "対話的なユーザインターフェースからページ名を変更してください。"
+msgstr "対話的なユーザインターフェースから添付ファイルを移動してください。"
 
 msgid "You are not allowed to get attachments from this page."
 msgstr "このページの添付ファイルをダウンロードする権限がありません。"
@@ -1636,42 +1652,39 @@ msgstr ""
 "添付ファイル'%(target)s'(サーバでのファイル名'%(filename)s')はすでに存在しま"
 "す。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' already exists."
-msgstr "添付ファイル'%(filename)s'をインストールしました。"
+msgstr "添付ファイル'%(filename)s'はすでに存在します。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Attachment '%(filename)s' moved to %(page)s."
-msgstr "添付するファイル'%(filename)s'は存在しません。"
+msgstr "添付ファイル'%(filename)s'は%(page)sに移動されました。"
 
 msgid "Nothing changed"
-msgstr ""
+msgstr "何も変更されませんでした。"
 
 #, python-format
 msgid "Page %(newpagename)s does not exists or you don't have enough rights."
-msgstr ""
+msgstr "ページ %(newpagename)s が存在しないか、必要な権限がありません。"
 
-#, fuzzy
 msgid "Move aborted because empty page name"
-msgstr "変更後のページ名が指定されていません。"
+msgstr "ページ名が空であるため、移動は中断されました。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Please use a valid filename for attachment '%(filename)s'."
-msgstr "添付ファイル'%(filename)s'をアップロードしました。"
+msgstr "添付ファイル'%(filename)s'に有効なファイル名を指定してください。"
 
 msgid "Move aborted because empty attachment name"
-msgstr ""
+msgstr "添付ファイル名が空であるため、移動は中断されました。"
 
 msgid "Move"
-msgstr ""
+msgstr "移動"
 
-#, fuzzy
 msgid "New page name"
-msgstr "新しい名前"
+msgstr "新しいページ名"
 
-#, fuzzy
 msgid "New attachment name"
-msgstr "ファイルの新規添付"
+msgstr "新しい添付ファイル名"
 
 #, python-format
 msgid "Attachment '%(filename)s' installed."
@@ -1760,133 +1773,155 @@ msgstr "すべて前のバージョンに戻す"
 msgid "You are not allowed to use this action."
 msgstr "このアクションを行う権限がありません。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Rolled back changes to the page %s."
-msgstr "ユーザをページ\"%s\"の購読者に追加"
+msgstr "ページ %s に対する変更は戻されました。"
 
 msgid "Exception while calling rollback function:"
-msgstr ""
+msgstr "変更を戻す際に、例外が発生しました。"
 
 msgid ""
 "Please enter your password of your account at the remote wiki below. "
 "[[BR]] /!\\ You should trust both wikis because the password could be read "
 "by the particular administrators."
 msgstr ""
+"リモートwikiのアカウントに対するパスワードを入力してください。[[BR]] /!\\ た"
+"だし、双方のwiki管理者にパスワードを見られる可能性があります。"
 
-#, fuzzy
 msgid "Operation was canceled."
-msgstr "編集はキャンセルされました。"
+msgstr "操作はキャンセルされました。"
 
 msgid "The only supported directions are BOTH and DOWN."
-msgstr ""
+msgstr "サポートされている方向は、BOTHとDOWNのみです。"
 
 msgid ""
 "Please set an interwikiname in your wikiconfig (see HelpOnConfiguration) to "
 "be able to use this action."
 msgstr ""
+"このアクションを利用可能にするためには、wikiconfigにおいてinterwikinameを設定"
+"してください(詳しくは HelpOnConfiguration を参照)。"
 
 msgid ""
 "Incorrect parameters. Please supply at least the ''remoteWiki'' parameter. "
 "Refer to HelpOnSynchronisation for help."
 msgstr ""
+"不正なパラメータです。少なくとも''remoteWiki''パラメータを指定する必要があり"
+"ます。 詳しくは HelpOnSynchronisation を参照しください。"
 
 msgid "The ''remoteWiki'' is unknown."
-msgstr ""
+msgstr "''remoteWiki''は不明です。"
 
 msgid "A severe error occured:"
-msgstr ""
+msgstr "サーバエラーが発生しました。"
 
 msgid "Synchronisation finished. Look below for the status messages."
-msgstr ""
+msgstr "同期が完了しました。以下のステータスメッセージを確認してください。"
 
 msgid "Synchronisation started -"
-msgstr ""
+msgstr "同期開始 -"
 
 #, python-format
 msgid ""
 "Got a list of %s local and %s remote pages. This results in %s different "
 "pages over-all."
 msgstr ""
+"ローカル: %sページ、リモート: %sページ。%s個の異なるページが見つかりました。"
 
 #, python-format
 msgid "After filtering: %s pages"
-msgstr ""
+msgstr "フィルター後: %sページ"
 
 #, python-format
 msgid "Deleted page %s locally."
-msgstr ""
+msgstr "ローカルの%sページを削除しました。"
 
 #, python-format
 msgid "Error while deleting page %s locally:"
-msgstr ""
+msgstr "ローカルのページ %s を削除する際にエラーが発生しました。"
 
 #, python-format
 msgid "Deleted page %s remotely."
-msgstr ""
+msgstr "リモートの%sページを削除しました。"
 
 #, python-format
 msgid "Error while deleting page %s remotely:"
-msgstr ""
+msgstr "リモートのページ %s を削除する際にエラーが発生しました。"
 
 #, python-format
 msgid ""
 "The item %s cannot be merged automatically but was changed in both wikis. "
 "Please delete it in one of both wikis and try again."
 msgstr ""
+"アイテム %s は双方のwikiにおいて編集されているため、自動的にマージすることは"
+"できませんでした。どちらかのwikiにおいてこのアイテムを削除して、再実行してく"
+"ださい。"
 
 #, python-format
 msgid ""
 "The item %s has different mime types in both wikis and cannot be merged. "
 "Please delete it in one of both wikis or unify the mime type, and try again."
 msgstr ""
+"アイテム %s は双方のwikiにおいて異なるmime typeが指定されているため、マージす"
+"ることはできませんでした。どちらかのwikiにおいてアイテムを削除するか、mime "
+"typeを統一し、再実行してください。"
 
 #, python-format
 msgid ""
 "The item %s was renamed locally. This is not implemented yet. Therefore the "
 "full synchronisation history is lost for this page."
 msgstr ""
+"アイテム %s はローカルでの名前が変更されています。現在の実装ではこれをサポー"
+"トすることができないため、このページの同期履歴は削除されました。"
 
 #, python-format
 msgid "Synchronising page %s with remote page %s ..."
-msgstr ""
+msgstr "ページ %s をリモートのページ %s と同期中..."
 
 #, python-format
 msgid "The page %s was deleted remotely but changed locally."
 msgstr ""
+"ページ %s はリモートでは削除されていますが、ローカルでは変更されています。"
 
 #, python-format
 msgid ""
 "The page %s could not be synced. The remote page was renamed. This is not "
 "supported yet. You may want to delete one of the pages to get it synced."
 msgstr ""
+"ページ %s はリモートで名前が変更されているため、同期に失敗しました。この機能"
+"はまだサポートされていません。同期行うためには、どちらかのページを削除してく"
+"ださい。"
 
 #, python-format
 msgid "Skipped page %s because of a locally or remotely unresolved conflict."
 msgstr ""
+"ローカルまたはリモートにおいてコンフリクト(衝突)が解決されていないため、ペー"
+"ジ %s の同期をスキップしました。"
 
 #, python-format
 msgid ""
 "This is the first synchronisation between the local and the remote wiki for "
 "the page %s."
-msgstr ""
+msgstr "ページ %s に対する初めての同期です。"
 
 #, python-format
 msgid ""
 "The page %s could not be merged because you are not allowed to modify the "
 "page in the remote wiki."
 msgstr ""
+"リモートのwikiを変更する権限がないため、ページ %s をマージすることができませ"
+"んでした。"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Page %s successfully merged."
-msgstr "ページ\"%s\"を削除しました。"
+msgstr "ページ %s は同期されました。"
 
 #, python-format
 msgid "Page %s contains conflicts that were introduced on the remote side."
-msgstr ""
+msgstr "ページ %s はリモートにおいてコンフリクト(衝突)を含んでいます。"
 
 #, python-format
 msgid "Page %s merged with conflicts."
-msgstr ""
+msgstr "ページ %s はコンフリクト(衝突)を含んだままマージされました。"
 
 #, python-format
 msgid "(including %(localwords)d %(pagelink)s)"
@@ -1918,7 +1953,6 @@ msgstr "読む権限がないページを購読することはできません。
 msgid "This wiki is not enabled for mail processing."
 msgstr "このwikiではメールを利用できません。"
 
-#, fuzzy
 msgid "You must log in to use subscriptions."
 msgstr "購読を利用するには、ログインしてください。"
 
@@ -1927,7 +1961,6 @@ msgstr ""
 "購読を利用するには、[\"ユーザプレファレンス\"]にてメールアドレスを登録してく"
 "ださい。"
 
-#, fuzzy
 msgid "Your subscription to this page has been removed."
 msgstr "このページの購読を停止しました。"
 
@@ -1961,15 +1994,6 @@ msgstr "差分"
 
 msgid "Comment"
 msgstr "コメント"
-
-msgid "raw"
-msgstr "Wikiテキスト"
-
-msgid "print"
-msgstr "印刷"
-
-msgid "revert"
-msgstr "前のバージョンに戻す"
 
 msgid "Revision History"
 msgstr "更新履歴"
@@ -2061,20 +2085,22 @@ msgstr "このアクションを行う権限がありません。"
 
 #, python-format
 msgid "(!) Only pages changed since '''%s''' are being displayed!"
-msgstr ""
+msgstr "(!) '''%s''' 以降に変更されたページのみが表示されています。"
 
 msgid ""
 "/!\\ The modification date you entered was not recognized and is therefore "
 "not considered for the search results!"
 msgstr ""
+"/!\\ 入力された変更日時は正しく認識されませんでした。そのため、検索結果には反"
+"映されていません。"
 
 #, python-format
 msgid "Title Search: \"%s\""
 msgstr "タイトル検索: \"%s\""
 
-#, fuzzy, python-format
+#, python-format
 msgid "Advanced Search: \"%s\""
-msgstr "タイトル検索: \"%s\""
+msgstr "高機能検索: \"%s\""
 
 #, python-format
 msgid "Full Text Search: \"%s\""
@@ -2085,27 +2111,32 @@ msgid ""
 "Your search query {{{\"%s\"}}} is invalid. Please refer to HelpOnSearching "
 "for more information."
 msgstr ""
+"検索条件 {{{\"%s\"}}} が不適切です。詳細は HelpOnSearching を参照してくださ"
+"い。"
 
 #, python-format
 msgid ""
 "Your search query {{{\"%s\"}}} didn't return any results. Please change some "
 "terms and refer to HelpOnSearching for more information.%s"
 msgstr ""
+"検索条件 {{{\"%s\"}}} に対して、結果は0件でした。条件を変更するか、 "
+"HelpOnSearching を参照してください。%s"
 
 msgid "(!) Consider performing a"
-msgstr ""
+msgstr "(!) Consider performing a"
 
 msgid "full-text search with your search terms"
-msgstr ""
+msgstr "full-text search with your search terms"
 
 msgid ""
 "(!) You're performing a title search that might not include all related "
 "results of your search query in this wiki. [[BR]]"
 msgstr ""
+"(!) You're performing a title search that might not include all related "
+"results of your search query in this wiki. [[BR]]"
 
-#, fuzzy
 msgid "Click here to perform a full-text search with your search terms!"
-msgstr "このタイトルでテキスト検索するには、ここをクリックしてください"
+msgstr "この言葉でテキスト検索するには、ここをクリックしてください"
 
 #, python-format
 msgid ""
@@ -2248,6 +2279,15 @@ msgstr "削除についてのコメント(省略可)"
 
 msgid "Really delete this page?"
 msgstr "このページを本当に削除しますか？"
+
+#~ msgid "raw"
+#~ msgstr "Wikiテキスト"
+
+#~ msgid "print"
+#~ msgstr "印刷"
+
+#~ msgid "revert"
+#~ msgstr "前のバージョンに戻す"
 
 #~ msgid "## backup of page \"%(pagename)s\" submitted %(date)s"
 #~ msgstr "\"%(pagename)s\"のバックアップが%(date)sに作成されました。"
@@ -2519,9 +2559,6 @@ msgstr "このページを本当に削除しますか？"
 
 #~ msgid "The diff function returned with error code %(rc)s!"
 #~ msgstr "diffが異常終了しました。エラーコード: %(rc)s"
-
-#~ msgid "Show emoticons"
-#~ msgstr "emoticonを表示する"
 
 #~ msgid "Please enter your name like that: FirstnameLastname"
 #~ msgstr "名前は\"FirstnameLastname\"のように入力してください。"
