@@ -21,12 +21,21 @@ from MoinMoin.config import multiconfig
 from MoinMoin.util import IsWin9x
 
 # umask setting --------------------------------------------------------
-# We do this once per Python process, when request is imported:
-try:
-    # we need to use a bitwise inverted value of config.umask
-    os.umask(0777 ^ config.umask)
-except: # we are on win32
-    pass
+def set_umask(new_mask=0777^config.umask):
+    """ Set the OS umask value (and ignore potential failures on OSes where
+        this is not supported).
+        Default: the bitwise inverted value of config.umask
+    """
+    try:
+        old_mask = os.umask(new_mask)
+    except:
+        # maybe we are on win32?
+        pass
+
+# We do this at least once per Python process, when request is imported.
+# If other software parts (like twistd's daemonize() function) set an
+# unwanted umask, we have to call this again to set the correct one:
+set_umask()
 
 # Exceptions -----------------------------------------------------------
 
@@ -122,6 +131,11 @@ class RequestBase(object):
     proxy_host = 'x-forwarded-host'
 
     def __init__(self, properties={}):
+
+        # twistd's daemonize() overrides our umask, so we reset it here every
+        # request. we do it for all request types to avoid similar problems.
+        set_umask()
+
         # Decode values collected by sub classes
         self.path_info = self.decodePagename(self.path_info)
 
