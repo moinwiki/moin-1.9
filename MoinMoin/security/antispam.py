@@ -142,6 +142,13 @@ def getblacklist(request, pagename, do_update):
                 # update cache to wait before the next try
                 failure.update("")
 
+            except (xmlrpclib.Fault, ), err:
+                # Log the error
+                # TODO: check if this does not fill the logs!
+                dprint('Fault on moinmaster: %s' % str(err))
+                # update cache to wait before the next try
+                failure.update("")
+
             except Error, err:
                 # In case of Error, we log the error and use the local
                 # BadContent copy.
