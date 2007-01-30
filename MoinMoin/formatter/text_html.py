@@ -491,6 +491,8 @@ class Formatter(FormatterBase):
             See wikiutil.link_tag() for possible keyword parameters.
         """
         FormatterBase.pagelink(self, on, pagename, page, **kw)
+        if 'generated' in kw:
+            del kw['generated']
         if page is None:
             page = Page(self.request, pagename, formatter=self)
         if self.request.user.show_nonexist_qm and on and not page.exists():
