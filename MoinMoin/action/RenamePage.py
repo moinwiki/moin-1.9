@@ -63,7 +63,7 @@ class RenamePage(ActionBase):
     def get_form_html(self, buttons_html):
         _ = self._
         d = {
-            'pagename': self.pagename,
+            'pagename': wikiutil.escape(self.pagename),
             'newname_label': _("New name"),
             'comment_label': _("Optional reason for the renaming"),
             'buttons_html': buttons_html,
