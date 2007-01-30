@@ -647,7 +647,7 @@ class Login:
 
         # Use the user interface language and direction
         lang_attr = request.theme.ui_lang_attr()
-        self._form.append(html.Raw('<div class="userprefs"%s>' % lang_attr))
+        self._form.append(html.Raw('<div class="userpref"%s>' % lang_attr))
 
         self._form.append(html.INPUT(type="hidden", name="action", value="login"))
         self._form.append(self._table)
