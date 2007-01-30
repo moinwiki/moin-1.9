@@ -5,6 +5,7 @@
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
                 2005-2006 by MoinMoin:ThomasWaldmann,
                 2006 by MoinMoin:FlorianFesti.
+                2007 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -858,6 +859,30 @@ class Page:
 
         request.emit_http_headers()
         request.write(text)
+
+
+    def save_raw(self):
+        """ Output the raw page data to a file  """
+        request = self.request
+        request.setHttpHeader("Content-type: text/plain; charset=%s" % config.charset)
+        if self.exists() and request.user.may.read(self.page_name):
+            # use the correct last-modified value from the on-disk file
+            # to ensure cacheability where supported. Because we are sending
+            # RAW (file) content, the file mtime is correct as Last-Modified header.
+            request.setHttpHeader("Status: 200 OK")
+            request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
+            file_name = "%s.txt" % self.page_name
+            text = self.get_raw_body()
+            text = self.encodeTextMimeType(text)
+            request.setHttpHeader("Content-Length: %d" % len(text))
+            request.setHttpHeader('Content-Disposition: %s; filename="%s"' % ('attachment', file_name))
+        else:
+            request.setHttpHeader('Status: 404 NOTFOUND')
+            text = u"Page %s not found." % self.page_name
+
+        request.emit_http_headers()
+        request.write(text)
+
 
     def send_page(self, request, msg=None, **keywords):
         """ Output the formatted page.
