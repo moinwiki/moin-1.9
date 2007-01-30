@@ -725,6 +725,8 @@ class convert_tree(visitor):
                     self.process_list(i)
                 elif name == 'dl':
                     self.process_dl(i)
+                elif name == 'a':
+                    self.process_a(i)
                 elif name == 'img':
                     self.process_img(i)
                 elif name == 'div':
@@ -779,8 +781,8 @@ class convert_tree(visitor):
             command = ",,"
         elif name == 'sup':
             command = "^"
-        elif name == 'font':
-            command = "" # just throw away font settings
+        elif name in ('font', 'meta', ):
+            command = "" # just throw away unsupported elements
         else:
             raise ConvertError("process_inline: Don't support %s element" % name)
 
@@ -995,6 +997,8 @@ class convert_tree(visitor):
                 elif name == 'caption':
                     self.process_caption(node, i, style)
                     style = ''
+                elif name  in ('col', 'colgroup', ):
+                    pass # we don't support these, but we just ignore them
                 else:
                     raise ConvertError("process_table: Don't support %s element" % name)
             #else:
