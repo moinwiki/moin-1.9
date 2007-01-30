@@ -95,8 +95,12 @@ class FarmConfig(DefaultConfig):
 
     ldap_base = 'ou=SOMEUNIT,dc=example,dc=org' # base DN we use for searching
     ldap_scope = ldap.SCOPE_SUBTREE # scope of the search we do
-    ldap_filter = "(%(ldap_name_attribute)s=%(username)s)" # available: ldap_name_attribute (see below) and username 
-    ldap_name_attribute = 'sAMAccountName' # ldap attribute we get the user name from
+    ldap_filter = '(sAMAccountName=%(username)s)' # ldap filter used for searching
+    # you can also do more complex filtering like:
+    # "(&(cn=%(username)s)(memberOf=CN=WikiUsers,OU=Groups,DC=example,DC=org))"
+    ldap_givenname_attribute = 'givenName' # ldap attribute we get the first name from
+    ldap_surname_attribute = 'sn' # ldap attribute we get the family name from
+    ldap_aliasname_attribute = 'displayName' # ldap attribute we get the aliasname from
     ldap_email_attribute = 'mail' # ldap attribute we get the email address from
     ldap_coding = 'utf-8' # coding used for ldap queries and result values
     ldap_timeout = 10 # how long we wait for the ldap server [s]
