@@ -3,7 +3,7 @@
     MoinMoin - Wiki Utility Functions
 
     @copyright: 2000 - 2004 by Jürgen Hermann <jh@web.de>
-    @copyright: 2007 Reimar Bauer
+                2007 by Reimar Bauer
     @license: GNU GPL, see COPYING for details.
 """
 
