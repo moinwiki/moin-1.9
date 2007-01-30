@@ -147,7 +147,9 @@ def print_abandoned(macro, args, **kw):
     request = macro.request
     _ = request.getText
     d = {}
-    pagename = macro.formatter.page.page_name
+    page = macro.formatter.page
+    pagename = page.page_name
+    d['page'] = page
     d['q_page_name'] = wikiutil.quoteWikinameURL(pagename)
     msg = None
 
@@ -239,6 +241,7 @@ def execute(macro, args, **kw):
     pagename = page.page_name
 
     d = {}
+    d['page'] = page
     d['q_page_name'] = wikiutil.quoteWikinameURL(pagename)
 
     log = editlog.EditLog(request)
