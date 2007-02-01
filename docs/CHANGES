@@ -166,9 +166,9 @@ Version 1.6.current:
     * There is a new MoinMoin.Page.ItemCache class now with automatic cache
       invalidation based on global edit-log. We currently use it to cache page
       acls, speedup Page.get_rev and reading the page local edit-log.
-    * Added wikiutil.executeText executes raw wiki markup with all page elements
+    * Added wikiutil.renderText parse and format raw wiki markup with all page elements
     * Added wikiutil.getProcessingInstructions creates dict of processing instructions from raw wiki markup
-    * Added wikiutil.getParser gets the parser from raw wiki murkup
+    * Added wikiutil.getParser gets the parser from raw wiki markup
 
   New Features:
     * The action menu now calls the actions for the revision of the page you
