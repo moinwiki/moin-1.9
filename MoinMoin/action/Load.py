@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 """
-    MoinMoin - Action macro for page creation from an ascii file or to attach as file 
+    MoinMoin - Action macro for page creation from file or attach file to current page
 
     MODIFICATION HISTORY:
         @copyright: 2007 by Reimar Bauer 
@@ -55,19 +55,16 @@ class Load(ActionBase):
         filecontent = form['file'][0]
         bytes = len(filecontent)
 
-        # find if attachment is necessary
-        ascii = True
-        for char in filecontent[:-1]:
-            if not ord(char) < 128:
-                ascii = False
-                break
+        # if possible do decode
+        try:
+            filecontent = unicode(filecontent, config.charset)
+            is_decoded = True
+        except:
+            is_decoded = False
 
-        overwrite = 0
+        overwrite = False
         if form.has_key('overwrite'):
-            try:
-                overwrite = int(request.form['overwrite'][0])
-            except:
-                pass
+            overwrite = True
 
         target = filename
         if rename:
@@ -80,8 +77,8 @@ class Load(ActionBase):
             if bsindex >= 0:
                 target = target[bsindex+1:]
 
-        msg = ''
-        if self.request.form.has_key('attachment') or not ascii:
+        msg = _('Please enable the attachment checkbox')
+        if self.request.form.has_key('attachment'):
             attach_dir = AttachFile.getAttachDir(self.request, self.pagename, create=1)
             fpath = os.path.join(attach_dir, target).encode(config.charset)
             exists = os.path.exists(fpath)
@@ -89,6 +86,8 @@ class Load(ActionBase):
             if exists and not overwrite:
                 msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
                          'target': target, 'filename': filename}
+                return status, msg
+
             if exists:
                 try:
                     os.remove(fpath)
@@ -100,7 +99,9 @@ class Load(ActionBase):
             msg = _("Attachment '%(target)s' (remote name '%(filename)s') with %(bytes)d bytes saved.") % {
                    'target': target, 'filename': filename, 'bytes': bytes}
             status = True
-        else:
+
+        elif is_decoded:
+            target = wikiutil.escape(target)
             page = PageEditor(self.request, target, do_editor_backup=0, uid_override=author)
             try:
                 page.saveText(filecontent, 0)
@@ -110,6 +111,7 @@ class Load(ActionBase):
             except PageEditor.Unchanged:
                 pass
             page.clean_acl_cache()
+
         return status, msg
 
     def do_action_finish(self, success):
