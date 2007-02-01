@@ -59,7 +59,7 @@ def emit_footnotes(request, formatter):
             result.append(formatter.text(str(idx + 1)))
             result.append(formatter.anchorlink(0))
             result.append(formatter.text(" "))
-            result.append(wikiutil.executeText(request, WikiParser, request.footnotes[idx][0]))
+            result.append(wikiutil.renderText(request, WikiParser, request.footnotes[idx][0]))
             result.append(formatter.listitem(0))
 
         result.append(formatter.bullet_list(0))
