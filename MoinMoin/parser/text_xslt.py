@@ -70,7 +70,6 @@ class Parser:
 
             try:
                 # location of SchemeRegisteryResolver has changed since 1.0a4
-                if ft_version >= "1.0a4":
                 if ft_version >= "1.0a4" or ft_version == "1.0" or ("1.0.1" <= ft_version <= "1.0.9"):
                     # such version numbers suck!
                     import Ft.Lib.Resolvers # Do not remove! it looks unused, but breaks when removed!!!
