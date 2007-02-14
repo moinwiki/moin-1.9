@@ -344,7 +344,7 @@ reStructuredText Quick Reference
     page_local_spelling_words = u'LocalSpellingWords'
     page_category_regex = u'^Category[A-Z]'
     page_dict_regex = u'[a-z0-9]Dict$'
-    page_group_regex = u'[a-z0-9,A-Z]Group$'
+    page_group_regex = u'[a-z0-9]Group$'
     page_template_regex = u'[a-z0-9]Template$'
 
     page_license_enabled = False
