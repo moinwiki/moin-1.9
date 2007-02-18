@@ -199,15 +199,13 @@ def makeQueryString(qstr=None, want_unicode=False, **kw):
     return qstr
 
 
-# FIXME: better name would be quoteURL, as this is useful for any
-# string, not only wiki names.
 def quoteWikinameURL(pagename, charset=config.charset):
     """ Return a url encoding of filename in plain ascii
 
     Use urllib.quote to quote any character that is not always safe. 
 
     @param pagename: the original pagename (unicode)
-    @param charset: url text encoding, 'utf-8' recommended. Other charsert
+    @param charset: url text encoding, 'utf-8' recommended. Other charset
                     might not be able to encode the page name and raise
                     UnicodeError. (default config.charset ('utf-8')).
     @rtype: string
@@ -223,12 +221,10 @@ def escape(s, quote=0):
     Replace special characters '&', '<' and '>' by SGML entities.
     (taken from cgi.escape so we don't have to include that, even if we
     don't use cgi at all)
-
-    FIXME: should return string or unicode?
     
     @param s: (unicode) string to escape
     @param quote: bool, should transform '\"' to '&quot;'
-    @rtype: (unicode) string
+    @rtype: when called with a unicode object, return unicode object - otherwise return string object
     @return: escaped version of s
     """
     if not isinstance(s, (str, unicode)):
@@ -281,15 +277,11 @@ def make_breakable(text, maxlen):
 ### Storage
 ########################################################################
 
-# FIXME: These functions might be moved to storage module, when we have
-# one. Then they will be called transparently whenever a page is saved.
-
 # Precompiled patterns for file name [un]quoting
 UNSAFE = re.compile(r'[^a-zA-Z0-9_]+')
 QUOTED = re.compile(r'\(([a-fA-F0-9]+)\)')
 
 
-# FIXME: better name would be quoteWikiname
 def quoteWikinameFS(wikiname, charset=config.charset):
     """ Return file system representation of a Unicode WikiName.
             
@@ -321,7 +313,6 @@ def quoteWikinameFS(wikiname, charset=config.charset):
     return ''.join(quoted)
 
 
-# FIXME: better name would be unquoteFilename
 def unquoteWikiname(filename, charsets=[config.charset]):
     """ Return Unicode WikiName from quoted file name.
     
