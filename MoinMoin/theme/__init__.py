@@ -331,7 +331,7 @@ class ThemeBase:
             else:
                 page = Page(request, text)
             pagename = page.page_name
-            title = page.split_title(request)
+            title = page.split_title()
             title = self.shortenPagename(title)
             link = page.link_to(request, title)
 
@@ -438,7 +438,7 @@ class ThemeBase:
 
         # Add current page at end
         if not current in found:
-            title = d['page'].split_title(request)
+            title = d['page'].split_title()
             title = self.shortenPagename(title)
             link = d['page'].link_to(request, title)
             cls = 'current'
@@ -585,7 +585,7 @@ class ThemeBase:
                     except ValueError:
                         pass
                     page = Page(request, pagename)
-                    title = page.split_title(request)
+                    title = page.split_title()
                     title = self.shortenPagename(title)
                     link = page.link_to(request, title)
                     items.append('<li>%s</li>' % link)
@@ -968,7 +968,7 @@ var search_hint = "%(search_hint)s";
                 data = {'action': action, 'disabled': ''}
                 # Always add spaces: AttachFile -> Attach File 
                 # XXX TODO do not create page just for using split_title
-                title = Page(request, action).split_title(request, force=1)
+                title = Page(request, action).split_title(force=1)
                 # Use translated version if available
                 data['title'] = _(title, formatted=False)
                 options.append(option % data)
