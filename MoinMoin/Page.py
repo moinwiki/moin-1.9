@@ -885,14 +885,13 @@ class Page:
         request.write(text)
 
 
-    def send_page(self, request, msg=None, **keywords):
+    def send_page(self, msg=None, **keywords):
         """ Output the formatted page.
 
         TODO: remove request argument - page is created with a request
         instance. Enable removing request argument recursively from all
         functions called from here.
 
-        @param request: the request object
         @param msg: if given, display message in header area
         @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
@@ -900,6 +899,7 @@ class Page:
         @keyword send_missing_page: if 1, assume that page to be sent is MissingPage
         @keyword omit_footnotes: if True, do not send footnotes (used by include macro)
         """
+        request = self.request
         from MoinMoin import i18n
         request.clock.start('send_page')
         _ = request.getText
@@ -1339,7 +1339,7 @@ class Page:
         missingpagefn = missingpage._text_filename()
         missingpage.page_name = self.page_name
         missingpage._text_filename_force = missingpagefn
-        missingpage.send_page(request, content_only=1, send_missing_page=1)
+        missingpage.send_page(content_only=1, send_missing_page=1)
 
 
     def getRevList(self):
@@ -1481,7 +1481,7 @@ class Page:
                 from MoinMoin.formatter.pagelinks import Formatter
                 formatter = Formatter(request, store_pagelinks=1)
                 page = Page(request, pagename, formatter=formatter)
-                page.send_page(request, content_only=1)
+                page.send_page(content_only=1)
             except:
                 import traceback
                 traceback.print_exc(200)

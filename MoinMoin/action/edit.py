@@ -23,7 +23,7 @@ def execute(pagename, request):
         return
 
     if not request.user.may.write(pagename):
-        Page(request, pagename).send_page(request,
+        Page(request, pagename).send_page(
             msg=_('You are not allowed to edit this page.'))
         return
 
@@ -82,7 +82,7 @@ def execute(pagename, request):
         ticket = request.form.get('ticket', [''])[0]
         if not wikiutil.checkTicket(request, ticket):
             msg = _('Please use the interactive user interface to use action %(actionname)s!') % {'actionname': 'edit' }
-            pg.send_page(request, msg=msg)
+            pg.send_page(msg=msg)
             return
 
     # convert input from Graphical editor
@@ -171,5 +171,5 @@ def execute(pagename, request):
         if backto:
             pg = Page(request, backto)
 
-        pg.send_page(request, msg=savemsg)
+        pg.send_page(msg=savemsg)
 

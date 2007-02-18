@@ -152,7 +152,7 @@ class PluginScript(script.MoinScript):
                 request.page = page
                 try:
                     request.reset()
-                    pagehtml = request.redirectedOutput(page.send_page, request, count_hit=0, content_only=1)
+                    pagehtml = request.redirectedOutput(page.send_page, count_hit=0, content_only=1)
                 except:
                     errcnt = errcnt + 1
                     print >>sys.stderr, "*** Caught exception while writing page!"

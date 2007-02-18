@@ -18,7 +18,7 @@ from MoinMoin.widget import html
 def execute(pagename, request):
     """ show misc. infos about a page """
     if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
+        Page(request, pagename).send_page()
         return
 
     def general(page, pagename, request):

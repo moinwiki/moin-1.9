@@ -539,5 +539,5 @@ def execute(pagename, request):
         image_dialog(request)
     else:
         from MoinMoin.Page import Page
-        Page(request, pagename).send_page(request, msg="Dialog unknown!")
+        Page(request, pagename).send_page(msg="Dialog unknown!")
 

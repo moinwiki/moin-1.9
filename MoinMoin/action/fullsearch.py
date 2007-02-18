@@ -160,7 +160,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     if len(stripped) == 0:
         err = _('Please use a more selective search term instead '
                 'of {{{"%s"}}}') % needle
-        Page(request, pagename).send_page(request, msg=err)
+        Page(request, pagename).send_page(msg=err)
         return
     needle = stripped
 
@@ -184,7 +184,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     except ValueError: # catch errors in the search query
         err = _('Your search query {{{"%s"}}} is invalid. Please refer to '
                 'HelpOnSearching for more information.') % needle
-        Page(request, pagename).send_page(request, msg=err)
+        Page(request, pagename).send_page(msg=err)
         return
 
     # directly show a single hit
@@ -213,7 +213,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
                         _('full-text search with your search terms'),
                         f.url(0), '.',
                     ]) or '')
-        Page(request, pagename).send_page(request, msg=err)
+        Page(request, pagename).send_page(msg=err)
         return
 
     request.emit_http_headers()

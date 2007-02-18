@@ -219,7 +219,7 @@ def execute(pagename, request):
         msg = _("You can't check spelling on a page you can't read.")
 
     if badwords:
-        page.send_page(request, msg=msg, hilite_re=badwords_re)
+        page.send_page(msg=msg, hilite_re=badwords_re)
     else:
-        page.send_page(request, msg=msg)
+        page.send_page(msg=msg)
 

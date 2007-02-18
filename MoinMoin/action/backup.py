@@ -115,7 +115,7 @@ Please make sure your wiki configuration backup_* values are correct and complet
 
 def sendMsg(request, pagename, msg):
     from MoinMoin import Page
-    return Page.Page(request, pagename).send_page(request, msg=msg)
+    return Page.Page(request, pagename).send_page(msg=msg)
 
 def backupAllowed(request):
     """ Return True if backup is allowed """

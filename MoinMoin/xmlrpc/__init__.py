@@ -458,8 +458,7 @@ class XmlRpcBase:
             return self.noSuchPageFault()
 
         # Render page into a buffer
-        result = self.request.redirectedOutput(page.send_page, self.request,
-                                               content_only=1)
+        result = self.request.redirectedOutput(page.send_page, content_only=1)
 
         # Return rendered page
         if self.version == 2:

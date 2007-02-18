@@ -47,7 +47,7 @@ class PackagePages:
 
         if form.has_key('cancel'):
             # User canceled
-            return self.page.send_page(self.request)
+            return self.page.send_page()
 
         try:
             if not self.allowed():
@@ -57,7 +57,7 @@ class PackagePages:
 
             self.package()
         except ActionError, e:
-            return self.page.send_page(self.request, msg=e.args[0])
+            return self.page.send_page(msg=e.args[0])
 
     def package(self):
         """ Packages pages. """

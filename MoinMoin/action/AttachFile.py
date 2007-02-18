@@ -380,7 +380,7 @@ def _subdir_exception(zf):
     return names #Returns dict of {origname: safename}
 
 def error_msg(pagename, request, msg):
-    Page(request, pagename).send_page(request, msg=msg)
+    Page(request, pagename).send_page(msg=msg)
 
 
 #############################################################################
@@ -799,7 +799,7 @@ def send_moveform(pagename, request):
 </table>
 </form>''' % d
     thispage = Page(request, pagename)
-    return thispage.send_page(request, msg=formhtml)
+    return thispage.send_page(msg=formhtml)
 
 def get_file(pagename, request):
     import shutil
