@@ -212,7 +212,7 @@ def execute(pagename, request):
     request.setContentLanguage(lang)
     f = request.formatter
 
-    request.theme.send_title(_('Info for "%s"') % (title,), pagename=pagename)
+    request.theme.send_title(_('Info for "%s"') % (title,), page=page)
     menu_items = [
         (_('Show "%(title)s"') % {'title': _('Revision History')},
          {'action': 'info'}),

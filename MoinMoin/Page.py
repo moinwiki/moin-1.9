@@ -1109,7 +1109,7 @@ class Page:
                 title = self.split_title()
 
                 request.theme.send_title(title, page=self, msg=msg,
-                                    pagename=self.page_name, print_mode=print_mode,
+                                    print_mode=print_mode,
                                     media=media, pi_refresh=pi_refresh,
                                     allow_doubleclick=1, trail=trail,
                                     )
