@@ -1414,13 +1414,10 @@ var gui_editor_link_text = "%(text)s";
         """
         Output the page header (and title).
 
-        TODO: check all code that call us and add page keyword for the
-        current page being rendered.
-        
         @param text: the title text
         @keyword msg: additional message (after saving)
+        @keyword page: the page instance that called us - using this is more efficient than using pagename..
         @keyword pagename: 'PageName'
-        @keyword page: the page instance that called us.
         @keyword print_mode: 1 (or 0)
         @keyword editor_mode: 1 (or 0)
         @keyword media: css media type, defaults to 'screen'
