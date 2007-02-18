@@ -260,7 +260,7 @@ Please review the page and save then. Do not save this page as it is!""")
 If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.""") % {
                 'save_button_text': save_button_text,
                 'cancel_button_text': cancel_button_text,
-                'license_link': wikiutil.getSysPage(request, self.cfg.page_license_page).link_to(request),
+                'license_link': wikiutil.getLocalizedPage(request, self.cfg.page_license_page).link_to(request),
             }, '</em></p>')
 
         request.write('''

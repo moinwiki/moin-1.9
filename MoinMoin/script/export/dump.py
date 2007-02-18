@@ -132,9 +132,9 @@ class PluginScript(script.MoinScript):
         errlog = open(errfile, 'w')
         errcnt = 0
 
-        page_front_page = wikiutil.getSysPage(request, request.cfg.page_front_page).page_name
-        page_title_index = wikiutil.getSysPage(request, 'TitleIndex').page_name
-        page_word_index = wikiutil.getSysPage(request, 'WordIndex').page_name
+        page_front_page = wikiutil.getLocalizedPage(request, request.cfg.page_front_page).page_name
+        page_title_index = wikiutil.getLocalizedPage(request, 'TitleIndex').page_name
+        page_word_index = wikiutil.getLocalizedPage(request, 'WordIndex').page_name
 
         navibar_html = ''
         for p in [page_front_page, page_title_index, page_word_index]:

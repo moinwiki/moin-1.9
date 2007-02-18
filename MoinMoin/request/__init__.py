@@ -1099,7 +1099,7 @@ class RequestBase(object):
 Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % self.user.name
                 self.user = self.get_user_default_unknown(name=self.user.name, logout=True)
-                page = wikiutil.getSysPage(self, 'UserPreferences')
+                page = wikiutil.getLocalizedPage(self, 'UserPreferences')
                 page.send_page(self, msg=msg)
 
             # 2. Or jump to page where user left off

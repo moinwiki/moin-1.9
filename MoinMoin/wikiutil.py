@@ -711,9 +711,7 @@ def filterCategoryPages(request, pagelist):
     return filter(func, pagelist)
 
 
-# TODO: we may rename this to getLocalizedPage because it returns page
-# that have translations.
-def getSysPage(request, pagename):
+def getLocalizedPage(request, pagename): # was: getSysPage
     """ Get a system page according to user settings and available translations.
     
     We include some special treatment for the case that <pagename> is the
@@ -759,7 +757,7 @@ def getFrontPage(request):
     @rtype: Page object
     @return localized page_front_page, if there is a translation
     """
-    return getSysPage(request, request.cfg.page_front_page)
+    return getLocalizedPage(request, request.cfg.page_front_page)
 
 
 def getHomePage(request, username=None):

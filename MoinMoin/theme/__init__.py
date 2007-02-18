@@ -327,7 +327,7 @@ class ThemeBase:
         else:
             # Use localized pages for the current user
             if localize:
-                page = wikiutil.getSysPage(request, text)
+                page = wikiutil.getLocalizedPage(request, text)
             else:
                 page = Page(request, text)
             pagename = page.page_name
@@ -1442,13 +1442,13 @@ var gui_editor_link_text = "%(text)s";
 
         # get name of system pages
         page_front_page = wikiutil.getFrontPage(request).page_name
-        page_help_contents = wikiutil.getSysPage(request, 'HelpContents').page_name
-        page_title_index = wikiutil.getSysPage(request, 'TitleIndex').page_name
-        page_site_navigation = wikiutil.getSysPage(request, 'SiteNavigation').page_name
-        page_word_index = wikiutil.getSysPage(request, 'WordIndex').page_name
-        page_user_prefs = wikiutil.getSysPage(request, 'UserPreferences').page_name
-        page_help_formatting = wikiutil.getSysPage(request, 'HelpOnFormatting').page_name
-        page_find_page = wikiutil.getSysPage(request, 'FindPage').page_name
+        page_help_contents = wikiutil.getLocalizedPage(request, 'HelpContents').page_name
+        page_title_index = wikiutil.getLocalizedPage(request, 'TitleIndex').page_name
+        page_site_navigation = wikiutil.getLocalizedPage(request, 'SiteNavigation').page_name
+        page_word_index = wikiutil.getLocalizedPage(request, 'WordIndex').page_name
+        page_user_prefs = wikiutil.getLocalizedPage(request, 'UserPreferences').page_name
+        page_help_formatting = wikiutil.getLocalizedPage(request, 'HelpOnFormatting').page_name
+        page_find_page = wikiutil.getLocalizedPage(request, 'FindPage').page_name
         home_page = wikiutil.getInterwikiHomePage(request) # XXX sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
         page_parent_page = getattr(page.getParentPage(), 'page_name', None)
 
