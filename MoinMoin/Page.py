@@ -3,7 +3,7 @@
     MoinMoin - Page class
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
-                2005-2006 by MoinMoin:ThomasWaldmann,
+                2005-2007 by MoinMoin:ThomasWaldmann,
                 2006 by MoinMoin:FlorianFesti.
                 2007 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
@@ -388,10 +388,8 @@ class Page:
 
     def split_title(self, force=0):
         """
-        Return a string with the page name split by spaces, if
-        the user wants that.
+        Return a string with the page name split by spaces, if the user wants that.
 
-        @param request: the request object
         @param force: if != 0, then force splitting the page_name
         @rtype: unicode
         @return: pagename of this page, splitted into space separated words
@@ -888,10 +886,6 @@ class Page:
     def send_page(self, msg=None, **keywords):
         """ Output the formatted page.
 
-        TODO: remove request argument - page is created with a request
-        instance. Enable removing request argument recursively from all
-        functions called from here.
-
         @param msg: if given, display message in header area
         @keyword content_only: if 1, omit http headers, page header and footer
         @keyword content_id: set the id of the enclosing div
@@ -1135,7 +1129,7 @@ class Page:
                     request.write(''.join(pi_formtext))
 
         # Load the parser
-        Parser = wikiutil.searchAndImportPlugin(self.request.cfg, "parser", self.pi_format)
+        Parser = wikiutil.searchAndImportPlugin(request.cfg, "parser", self.pi_format)
 
         # start wiki content div
         request.write(self.formatter.startContent(content_id))
@@ -1151,7 +1145,7 @@ class Page:
                 warnings.warn("Error - The page MissingPage or MissingHomePage could not be found."
                               " Check your underlay directory setting.")
                 url = '%s?action=edit' % wikiutil.quoteWikinameURL(self.page_name)
-                request.write(wikiutil.link_tag(self.request, url, text=_("Create New Page"),
+                request.write(wikiutil.link_tag(request, url, text=_("Create New Page"),
                                                 formatter=self.formatter, rel='nofollow'))
         elif not request.user.may.read(self.page_name):
             request.write("<strong>%s</strong><br>" % _("You are not allowed to view this page."))
