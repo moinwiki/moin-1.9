@@ -181,7 +181,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         # do headings
         level = None
         if args.group('heading') and args.group('hquote'):
-            heading = args.group('htext') or inc_page.split_title(request)
+            heading = args.group('htext') or inc_page.split_title()
             level = 1
             if args.group('level'):
                 level = int(args.group('level'))

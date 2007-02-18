@@ -299,7 +299,7 @@ Please review the page and save then. Do not save this page as it is!""")
         status = Status(request, content=status)
 
         request.theme.send_title(
-            title % {'pagename': self.split_title(request), },
+            title % {'pagename': self.split_title(), },
             page=self,
             pagename=self.page_name, msg=status,
             html_head=self.lock.locktype and (

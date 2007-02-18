@@ -201,7 +201,7 @@ def execute(pagename, request):
     # main function
     _ = request.getText
     page = Page(request, pagename)
-    title = page.split_title(request)
+    title = page.split_title()
 
     request.emit_http_headers()
 

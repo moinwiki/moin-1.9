@@ -386,7 +386,7 @@ class Page:
 
         return self.getPageStatus(*args, **kw)[1]
 
-    def split_title(self, request, force=0):
+    def split_title(self, force=0):
         """
         Return a string with the page name split by spaces, if
         the user wants that.
@@ -396,6 +396,7 @@ class Page:
         @rtype: unicode
         @return: pagename of this page, splitted into space separated words
         """
+        request = self.request
         if not force and not request.user.wikiname_add_spaces:
             return self.page_name
 
@@ -768,7 +769,7 @@ class Page:
         @return: formatted link
         """
         if not text:
-            text = self.split_title(request)
+            text = self.split_title()
         text = wikiutil.escape(text)
 
         # Add css class for non existing page
@@ -1111,7 +1112,7 @@ class Page:
                     request.user.addTrail(self.page_name)
                     trail = request.user.getTrail()
 
-                title = self.split_title(request)
+                title = self.split_title()
 
                 request.theme.send_title(title, page=self, msg=msg,
                                     pagename=self.page_name, print_mode=print_mode,

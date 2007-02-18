@@ -192,7 +192,7 @@ class Theme(ThemeBase):
             for action in available:
                 # Always add spaces: AttachFile -> Attach File 
                 # XXX TODO do not make a page object just for split_title
-                title = Page(request, action).split_title(request, force=1)
+                title = Page(request, action).split_title(force=1)
                 # Use translated version if available
                 title = _(title, formatted=False)
                 querystr = {'action': action}
