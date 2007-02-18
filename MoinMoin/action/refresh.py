@@ -20,5 +20,5 @@ def execute(pagename, request):
     from MoinMoin import caching
     caching.CacheEntry(request, arena, key, scope='item').remove()
     caching.CacheEntry(request, arena, "pagelinks", scope='item').remove()
-    request.page.send_page(request)
+    request.page.send_page()
 

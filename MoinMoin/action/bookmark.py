@@ -29,5 +29,5 @@ def execute(pagename, request):
         request.user.delBookmark()
     else:
         request.user.setBookmark(tm)
-    request.page.send_page(request)
+    request.page.send_page()
 

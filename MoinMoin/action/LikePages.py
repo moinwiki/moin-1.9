@@ -24,18 +24,18 @@ def execute(pagename, request):
 
     # Error?
     if isinstance(matches, (str, unicode)):
-        Page(request, pagename).send_page(request, msg=matches)
+        Page(request, pagename).send_page(msg=matches)
         return
 
     # No matches
     if not matches:
-        Page(request, pagename).send_page(request,
+        Page(request, pagename).send_page(
              msg=_('No pages like "%s"!') % (pagename,))
         return
 
     # One match - display it
     if len(matches) == 1:
-        Page(request, matches.keys()[0]).send_page(request,
+        Page(request, matches.keys()[0]).send_page(
              msg=_('Exactly one page like "%s" found, redirecting to page.') % (
             pagename,))
         return

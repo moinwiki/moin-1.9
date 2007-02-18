@@ -218,7 +218,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         request.redirect(strfile)
         try:
             cid = request.makeUniqueID("Include_%s" % wikiutil.quoteWikinameURL(inc_page.page_name))
-            inc_page.send_page(request, content_only=1, content_id=cid,
+            inc_page.send_page(content_only=1, content_id=cid,
                                omit_footnotes=True)
             result.append(strfile.getvalue())
         finally:

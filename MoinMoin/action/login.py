@@ -56,7 +56,7 @@ space between words. Group page name is not allowed.""") % name
                     if not request.user.valid:
                         error = _("Sorry, login failed.")
 
-            return self.page.send_page(request, msg=error)
+            return self.page.send_page(msg=error)
 
         else: # show login form
             request.emit_http_headers()

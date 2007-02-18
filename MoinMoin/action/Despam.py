@@ -166,7 +166,7 @@ def execute(pagename, request):
     actname = __name__.split('.')[-1]
     if actname in request.cfg.actions_excluded or \
        not request.user.isSuperUser():
-        return Page.Page(request, pagename).send_page(request,
+        return Page.Page(request, pagename).send_page(
             msg=_('You are not allowed to use this action.'))
 
     editor = request.form.get('editor', [None])[0]

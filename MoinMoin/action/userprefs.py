@@ -19,5 +19,5 @@ from MoinMoin import wikiutil
 
 def execute(pagename, request):
     page = wikiutil.getSysPage(request, 'UserPreferences')
-    page.send_page(request)
+    page.send_page()
 

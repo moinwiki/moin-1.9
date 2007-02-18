@@ -23,7 +23,7 @@ from StringIO import StringIO
 def execute(pagename, request):
     if not request.user.may.write(pagename):
         _ = request.getText
-        Page(request, pagename).send_page(request, msg=_('You are not allowed to edit this page.'))
+        Page(request, pagename).send_page(msg=_('You are not allowed to edit this page.'))
         return
 
     PageGraphicalEditor(request, pagename).sendEditor()
@@ -85,7 +85,7 @@ class PageGraphicalEditor(PageEditor.PageEditor):
 
         # Did one of the prechecks fail?
         if msg:
-            self.send_page(request, msg=msg)
+            self.send_page(msg=msg)
             return
 
         # check if we want to load a draft
@@ -388,8 +388,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
                 content_id = 'previewbelow'
             else:
                 content_id = 'preview'
-            self.send_page(request, content_id=content_id, content_only=1,
-                           hilite_re=badwords_re)
+            self.send_page(content_id=content_id, content_only=1, hilite_re=badwords_re)
 
         request.write(request.formatter.endContent()) # end content div
         request.theme.send_footer(self.page_name)

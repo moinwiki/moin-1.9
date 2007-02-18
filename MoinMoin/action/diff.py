@@ -17,7 +17,7 @@ def execute(pagename, request):
         or rev1 and rev2 parameters
     """
     if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
+        Page(request, pagename).send_page()
         return
 
     try:
@@ -52,7 +52,7 @@ def execute(pagename, request):
     currentpage = Page(request, pagename)
     revisions = currentpage.getRevList()
     if len(revisions) < 2:
-        currentpage.send_page(request, msg=_("No older revisions available!"))
+        currentpage.send_page(msg=_("No older revisions available!"))
         return
 
     if date: # this is how we get called from RecentChanges
@@ -127,7 +127,7 @@ def execute(pagename, request):
     if request.user.show_fancy_diff:
         from MoinMoin.util import diff_html
         request.write(f.rawHTML(diff_html.diff(request, oldpage.get_raw_body(), newpage.get_raw_body())))
-        newpage.send_page(request, count_hit=0, content_only=1, content_id="content-below-diff")
+        newpage.send_page(count_hit=0, content_only=1, content_id="content-below-diff")
     else:
         from MoinMoin.util import diff_text
         lines = diff_text.diff(oldpage.getlines(), newpage.getlines())

@@ -23,5 +23,5 @@ class LogoutHandler:
     def handle(self):
         _ = self._
         message = _("You are now logged out.")
-        return self.page.send_page(self.request, msg=message)
+        return self.page.send_page(msg=message)
 

@@ -46,5 +46,5 @@ def execute(pagename, request):
         if request.user.subscribe(pagename):
             msg = _('You have been subscribed to this page.')
 
-    Page(request, pagename).send_page(request, msg=msg)
+    Page(request, pagename).send_page(msg=msg)
 

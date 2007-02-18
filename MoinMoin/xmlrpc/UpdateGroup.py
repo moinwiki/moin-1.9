@@ -67,7 +67,7 @@ def execute(self, groupname, groupcomment, memberlist, pageacls=u"All:read"):
 
     #we need this to update pagelinks cache:
     self.request.args = self.request.form = self.request.setup_args({})
-    self.request.redirectedOutput(page.send_page, self.request, content_only=1)
+    self.request.redirectedOutput(page.send_page, content_only=1)
 
     return xmlrpclib.Boolean(1)
 

@@ -14,7 +14,7 @@ def execute(pagename, request):
     _ = request.getText
 
     if not request.user.may.revert(pagename):
-        return Page(request, pagename).send_page(request,
+        return Page(request, pagename).send_page(
             msg=_('You are not allowed to revert this page!'))
 
     rev = request.rev
@@ -29,5 +29,5 @@ def execute(pagename, request):
         # msg contain a unicode string
         savemsg = unicode(msg)
     request.reset()
-    pg.send_page(request, msg=savemsg)
+    pg.send_page(msg=savemsg)
 

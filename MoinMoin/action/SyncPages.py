@@ -167,7 +167,7 @@ class ActionClass(object):
 </div>
 </form>
 """ % d
-        self.page.send_page(self.request, msg=html_form)
+        self.page.send_page(msg=html_form)
 
     def render(self):
         """ Render action
@@ -221,7 +221,7 @@ class ActionClass(object):
                 self.page.saveText(self.page.get_raw_body() + "\n\n" + self.generate_log_table(), 0)
                 # XXX release readlock on self.page
 
-        return self.page.send_page(self.request, msg=msg)
+        return self.page.send_page(msg=msg)
 
     def sync(self, params, local, remote):
         """ This method does the synchronisation work.

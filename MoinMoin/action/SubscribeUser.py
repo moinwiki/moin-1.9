@@ -87,7 +87,7 @@ def execute(pagename, request):
     _ = request.getText
     if not request.user.may.admin(pagename):
         thispage = Page(request, pagename)
-        return thispage.send_page(request, msg=_("You are not allowed to perform this action."))
+        return thispage.send_page(msg=_("You are not allowed to perform this action."))
     elif not request.form.has_key('users'):
         show_form(pagename, request)
     else:

@@ -25,5 +25,5 @@ def execute(pagename, request):
         if request.user.addQuicklink(pagename):
             msg = _('A quicklink to this page has been added for you.')
 
-    Page(request, pagename).send_page(request, msg=msg)
+    Page(request, pagename).send_page(msg=msg)
 
