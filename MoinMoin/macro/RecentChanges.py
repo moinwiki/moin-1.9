@@ -94,7 +94,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
     force_split = len(page.page_name) > _MAX_PAGENAME_LENGTH
 
     d['icon_html'] = html_link
-    d['pagelink_html'] = page.link_to(request, text=page.split_title(request, force=force_split))
+    d['pagelink_html'] = page.link_to(request, text=page.split_title(force=force_split))
 
     # print time of change
     d['time_html'] = None
