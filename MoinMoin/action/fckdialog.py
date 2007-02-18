@@ -145,7 +145,7 @@ def macro_list(request):
 
 def get_macro_help(request):
     """ Read help texts from SystemPage('HelpOnMacros')"""
-    helppage = wikiutil.getSysPage(request, "HelpOnMacros")
+    helppage = wikiutil.getLocalizedPage(request, "HelpOnMacros")
     content = helppage.get_raw_body()
     macro_re = re.compile(
         r"\|\|(<.*?>)?\{\{\{\[\[" +

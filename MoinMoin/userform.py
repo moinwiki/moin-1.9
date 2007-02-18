@@ -637,8 +637,8 @@ class Login:
         sn = request.getScriptname()
         pi = request.getPathinfo()
         action = u"%s%s" % (sn, pi)
-        userprefslink = wikiutil.getSysPage(request, "UserPreferences").link_to(request, rel='nofollow')
-        sendmypasswordlink = wikiutil.getSysPage(request, "SendMyPassword").link_to(request, rel='nofollow')
+        userprefslink = wikiutil.getLocalizedPage(request, "UserPreferences").link_to(request, rel='nofollow')
+        sendmypasswordlink = wikiutil.getLocalizedPage(request, "SendMyPassword").link_to(request, rel='nofollow')
         hint = _("To create an account, see the %(userprefslink)s page. To recover a lost password, go to %(sendmypasswordlink)s.") % {
                  'userprefslink': userprefslink,
                  'sendmypasswordlink': sendmypasswordlink}

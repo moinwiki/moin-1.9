@@ -930,7 +930,7 @@ class User:
 
     def mailAccountData(self, cleartext_passwd=None):
         from MoinMoin.mail import sendmail
-        from MoinMoin.wikiutil import getSysPage
+        from MoinMoin.wikiutil import getLocalizedPage
         _ = self._request.getText
 
         if not self.enc_password: # generate pw if there is none yet
@@ -954,7 +954,7 @@ Login Password: %s
 
 Login URL: %s/%s?action=login
 """, formatted=False) % (
-                        self.name, self.enc_password, self._request.getBaseURL(), getSysPage(self._request, 'UserPreferences').page_name)
+                        self.name, self.enc_password, self._request.getBaseURL(), getLocalizedPage(self._request, 'UserPreferences').page_name)
 
         text = _("""\
 Somebody has requested to submit your account data to this email address.

@@ -18,6 +18,6 @@
 from MoinMoin import wikiutil
 
 def execute(pagename, request):
-    page = wikiutil.getSysPage(request, 'UserPreferences')
+    page = wikiutil.getLocalizedPage(request, 'UserPreferences')
     page.send_page()
 

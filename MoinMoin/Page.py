@@ -1327,9 +1327,9 @@ class Page:
         @param request: the request object
         """
         if request.user.valid and request.user.name == self.page_name:
-            missingpage = wikiutil.getSysPage(request, 'MissingHomePage')
+            missingpage = wikiutil.getLocalizedPage(request, 'MissingHomePage')
         else:
-            missingpage = wikiutil.getSysPage(request, 'MissingPage')
+            missingpage = wikiutil.getLocalizedPage(request, 'MissingPage')
         missingpagefn = missingpage._text_filename()
         missingpage.page_name = self.page_name
         missingpage._text_filename_force = missingpagefn
