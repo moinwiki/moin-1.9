@@ -150,15 +150,15 @@ class ActionBase:
 
     def render_msg(self, msg):
         """ Called to display some message (can also be the action form) """
-        self.page.send_page(self.request, msg=msg)
+        self.page.send_page(msg=msg)
 
     def render_success(self, msg):
         """ Called to display some message when the action succeeded """
-        self.page.send_page(self.request, msg=msg)
+        self.page.send_page(msg=msg)
 
     def render_cancel(self):
         """ Called when user has hit the cancel button """
-        self.page.send_page(self.request) # we don't tell user he has hit cancel :)
+        self.page.send_page() # we don't tell user he has hit cancel :)
 
     def render(self):
         """ Render action - this is the main function called by action's
@@ -214,7 +214,7 @@ class ActionBase:
 def do_raw(pagename, request):
     """ send raw content of a page (e.g. wiki markup) """
     if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
+        Page(request, pagename).send_page()
     else:
         rev = request.rev or 0
         Page(request, pagename, rev=rev).send_raw()
@@ -225,13 +225,13 @@ def do_show(pagename, request, count_hit=1, cacheable=1):
     """
     # We must check if the current page has different ACLs.
     if not request.user.may.read(pagename):
-        Page(request, pagename).send_page(request)
+        Page(request, pagename).send_page()
     else:
         mimetype = request.form.get('mimetype', [u"text/html"])[0]
         rev = request.rev or 0
         if rev == 0:
             request.cacheable = cacheable
-        Page(request, pagename, rev=rev, formatter=mimetype).send_page(request, count_hit=count_hit)
+        Page(request, pagename, rev=rev, formatter=mimetype).send_page(count_hit=count_hit)
 
 def do_format(pagename, request):
     """ send a page using a specific formatter given by mimetype form key.
@@ -249,7 +249,7 @@ def do_content(pagename, request):
     request.emit_http_headers()
     page = Page(request, pagename)
     request.write('<!-- Transclusion of %s -->' % request.getQualifiedURL(page.url(request)))
-    page.send_page(request, count_hit=0, content_only=1)
+    page.send_page(count_hit=0, content_only=1)
 
 def do_print(pagename, request):
     """ same as do_show, but send_page will notice the print mode """
@@ -282,7 +282,7 @@ def do_userform(pagename, request):
     """ save data posted from UserPreferences """
     from MoinMoin import userform
     savemsg = userform.savedata(request)
-    Page(request, pagename).send_page(request, msg=savemsg)
+    Page(request, pagename).send_page(msg=savemsg)
 
 # Dispatching ----------------------------------------------------------------
 def getNames(cfg):
