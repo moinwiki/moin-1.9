@@ -176,20 +176,18 @@ class Macro:
                   special than WordIndex and TitleIndex.
                   It should be able to filter for specific mimetypes, maybe match
                   pagenames by regex (replace PageList?), etc.
-
-                  it should use the formatter asap
         """
         _ = self._
+        request = self.request
+        fmt = self.formatter
         allpages = int(self.form.get('allpages', [0])[0]) != 0
-        # Get page list readable by current user
-        # Filter by isSystemPage if needed
+        # Get page list readable by current user, filter by isSystemPage if needed
         if allpages:
-            # TODO: make this fast by caching full page list
-            pages = self.request.rootpage.getPageList()
+            pages = request.rootpage.getPageList()
         else:
             def filter(name):
-                return not wikiutil.isSystemPage(self.request, name)
-            pages = self.request.rootpage.getPageList(filter=filter)
+                return not wikiutil.isSystemPage(request, name)
+            pages = request.rootpage.getPageList(filter=filter)
 
         word_re = re.compile(word_re, re.UNICODE)
         map = {}
@@ -209,47 +207,49 @@ class Macro:
 
         index_letters = []
         current_letter = None
-        html = []
+        output = []
         for word in all_words:
             letter = wikiutil.getUnicodeIndexGroup(word)
             if letter != current_letter:
-                #html.append(self.formatter.anchordef()) # XXX no text param available!
-                html.append(u'<a name="%s"><h2>%s</h2></a>' % (
-                    wikiutil.quoteWikinameURL(letter), letter.replace('~', 'Others')))
+                cssid = wikiutil.quoteWikinameURL(letter).replace('%','')
+                output.append(fmt.heading(1, 2, id=cssid)) # fmt.anchordef didn't work
+                output.append(fmt.text(letter.replace('~', 'Others')))
+                output.append(fmt.heading(0, 2))
                 current_letter = letter
             if letter not in index_letters:
                 index_letters.append(letter)
             links = map[word]
             if len(links) and links[0] != word: # show word fragment as on WordIndex
-                html.append(self.formatter.strong(1))
-                html.append(word)
-                html.append(self.formatter.strong(0))
+                output.append(fmt.strong(1))
+                output.append(word)
+                output.append(fmt.strong(0))
 
-            html.append(self.formatter.bullet_list(1))
+            output.append(fmt.bullet_list(1))
             links.sort()
             last_page = None
             for name in links:
                 if name == last_page:
                     continue
-                html.append(self.formatter.listitem(1))
-                html.append(Page(self.request, name).link_to(self.request, attachment_indicator=1))
-                html.append(self.formatter.listitem(0))
-            html.append(self.formatter.bullet_list(0))
+                output.append(fmt.listitem(1))
+                output.append(Page(request, name).link_to(request, attachment_indicator=1))
+                output.append(fmt.listitem(0))
+            output.append(fmt.bullet_list(0))
 
-        def _make_index_key(index_letters, additional_html=''):
+        def _make_index_key(index_letters):
             index_letters.sort()
             def letter_link(ch):
-                return '<a href="#%s">%s</a>' % (wikiutil.quoteWikinameURL(ch), ch.replace('~', 'Others'))
+                cssid = wikiutil.quoteWikinameURL(ch).replace('%','')
+                return fmt.anchorlink(1, cssid) + fmt.text(ch.replace('~', 'Others')) + fmt.anchorlink(0)
             links = [letter_link(letter) for letter in index_letters]
-            return "<p>%s%s</p>" % (' | '.join(links), additional_html)
+            return ' | '.join(links)
 
-        page = self.formatter.page
+        page = fmt.page
         allpages_txt = (_('Include system pages'), _('Exclude system pages'))[allpages]
-        allpages_link = page.link_to(self.request, allpages_txt, querystr={'allpages': allpages and '0' or '1'})
-        index = _make_index_key(index_letters, u'<br>%s' % allpages_link)
-        # ?action=titleindex and ?action=titleindex&mimetype=text/xml removed
+        allpages_url = page.url(request, querystr={'allpages': allpages and '0' or '1'})
 
-        return u'%s%s' % (index, u''.join(html))
+        output = [fmt.paragraph(1), _make_index_key(index_letters), fmt.linebreak(0),
+                  fmt.url(1, allpages_url), fmt.text(allpages_txt), fmt.url(0), fmt.paragraph(0)] + output
+        return u''.join(output)
 
 
     def _macro_TitleIndex(self, args):
