@@ -78,6 +78,7 @@ class Parser:
 (?P<small>(\~- ?|-\~))
 (?P<big>(\~\+ ?|\+\~))
 (?P<strike>(--\(|\)--))
+(?P<remark>(/\* ?| ?\*/))
 (?P<rule>-{4,})
 (?P<comment>^\#\#.*$)
 (?P<macro>\[\[(%%(macronames)s)(?:\(.*?\))?\]\]))
@@ -138,6 +139,7 @@ class Parser:
         self.is_strike = False
         self.is_big = False
         self.is_small = False
+        self.is_remark = False
 
         self.lineno = 0
         self.in_list = 0 # between <ul/ol/dl> and </ul/ol/dl>
@@ -234,6 +236,16 @@ class Parser:
         # XXX we don't really enforce the correct sequence --( ... )-- here
         self.is_strike = not self.is_strike
         return self.formatter.strike(self.is_strike)
+
+    def _remark_repl(self, word):
+        """Handle remarks."""
+        # XXX we don't really enforce the correct sequence /* ... */ here
+        self.is_remark = not self.is_remark
+        span_kw = {
+            'style': self.request.user.show_comments and "display:''" or "display:none",
+            'class': "comment",
+        }
+        return self.formatter.span(self.is_remark, **span_kw)
 
     def _small_repl(self, word):
         """Handle small."""

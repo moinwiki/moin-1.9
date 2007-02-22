@@ -308,10 +308,11 @@ Version 1.6.current:
       The same thing will work for any other css classes you have.
       If the css classes contain the word "comment", they will trigger some
       special feature, see next item:
+    * New wiki markup for /* inline comments */ - they get rendered as a span
+      with class="comment", see next item:
     * There is a new item in the edit bar: "Comments". If you click it, the
-      visibility of the comment sections will be toggled. A comment section is
-      any div of class "comment". There is a user preferences item
-      "show_comments" to set if the default view shows them or not.
+      visibility of all class "comment" tags will be toggled. There is a user
+      preferences item "show_comments" to set if the default view shows them or not.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
