@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import i18n, wikiutil, config, version
+from MoinMoin import i18n, wikiutil, config, version, caching
 from MoinMoin.Page import Page
 from MoinMoin.util import pysupport
 
@@ -436,13 +436,32 @@ class ThemeBase:
                 items.append(item % (cls, link))
                 found[pagename] = 1
 
-        # Add current page at end
+        # Add current page at end of local pages
         if not current in found:
             title = d['page'].split_title()
             title = self.shortenPagename(title)
             link = d['page'].link_to(request, title)
             cls = 'current'
             items.append(item % (cls, link))
+
+        # Add sister pages.
+        for sistername in request.cfg.sistersites: # TODO: sort?
+            if sistername == request.cfg.interwikiname: # it is THIS wiki
+                cls = 'sisterwiki current'
+                items.append(item % (cls, sistername))
+            else:
+                # TODO optimize performance
+                cache = caching.CacheEntry(request, 'sisters', sistername, 'farm', use_pickle=True)
+                if cache.exists():
+                    data = cache.content()
+                    sisterpages = data['sisterpages']
+                    if current in sisterpages:
+                        cls = 'sisterwiki'
+                        url = sisterpages[current]
+                        link = request.formatter.url(1, url) + \
+                               request.formatter.text(sistername) +\
+                               request.formatter.url(0)
+                        items.append(item % (cls, link))
 
         # Assemble html
         items = u''.join(items)
