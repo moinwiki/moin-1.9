@@ -62,5 +62,5 @@ def execute(pagename, request):
         pages.sort()
         for pn in pages:
             p = Page(request, pn)
-            entry = u"%s%s %s\r\n" % (baseurl, p.url(request, relative=False), p.page_name)
+            entry = u"%s %s\r\n" % (request.getQualifiedURL(p.url(request, relative=False)), p.page_name)
             request.write(entry.encode('utf-8'))
