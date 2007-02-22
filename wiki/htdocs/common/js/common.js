@@ -169,8 +169,8 @@ function show_switch2gui() {
 }
 
 function toggleComments() {
-    // Toggle visibility of every div with class == *comment*
-    var all = document.getElementsByTagName('div');
+    // Toggle visibility of every tag with class == *comment*
+    var all = document.getElementsByTagName('*');
     for (i = 0; i < all.length; i++){
         el = all[i];
         if ( el.className.indexOf('comment') >= 0 ){
