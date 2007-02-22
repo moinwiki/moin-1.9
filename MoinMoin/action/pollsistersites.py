@@ -49,7 +49,9 @@ def execute(pagename, request):
             data['sisterpages'] = sisterpages
             cache.update(data)
             status.append(u"Site: %s Status: Updated. Pages: %d" % (sistername, len(sisterpages)))
-        except IOError, (title, code, msg, headers):
+        except IOError, (title, code, msg, headers): # code e.g. 304
+            status.append(u"Site: %s Status: Not updated." % sistername)
+        except TypeError: # catch bug in python 2.5: "EnvironmentError expected at most 3 arguments, got 4"
             status.append(u"Site: %s Status: Not updated." % sistername)
 
     request.emit_http_headers(["Content-Type: text/plain; charset=UTF-8"])
