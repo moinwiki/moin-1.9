@@ -1100,7 +1100,7 @@ Name may contain any Unicode alpha numeric character, with optional one
 space between words. Group page name is not allowed.""") % self.user.name
                 self.user = self.get_user_default_unknown(name=self.user.name, logout=True)
                 page = wikiutil.getLocalizedPage(self, 'UserPreferences')
-                page.send_page(self, msg=msg)
+                page.send_page(msg=msg)
 
             # 2. Or jump to page where user left off
             elif not pagename and self.user.remember_last_visit:
@@ -1142,7 +1142,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                         msg += " " + _("Login and try again.", formatted=0)
 
                 if msg:
-                    self.page.send_page(self, msg=msg)
+                    self.page.send_page(msg=msg)
 
                 # Try action
                 else:
@@ -1154,7 +1154,7 @@ space between words. Group page name is not allowed.""") % self.user.name
                         if not self.user.valid:
                             # Suggest non valid user to login
                             msg += " " + _("Login and try again.", formatted=0)
-                        self.page.send_page(self, msg=msg)
+                        self.page.send_page(msg=msg)
                     else:
                         handler(self.page.page_name, self)
 
