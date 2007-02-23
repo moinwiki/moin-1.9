@@ -6,11 +6,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, os, dircache
+import unittest, os
 
 from MoinMoin._tests import TestConfig, TestSkipped
 from MoinMoin import user, caching
-
+from MoinMoin.util import filesys
 
 class EncodePasswordTestCase(unittest.TestCase):
     """user: encode passwords tests"""
@@ -47,12 +47,8 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         self.request.saved_cookie = ''
         self.request.user = user.User(self.request)
 
-        # Prevent user list caching - we create and delete users too
-        # fast for that.
-        try:
-            del dircache.cache[self.request.cfg.user_dir]
-        except KeyError:
-            pass
+        # Prevent user list caching - we create and delete users too fast for that.
+        filesys.dcdisable()
 
     def tearDown(self):
         """ Run after each test
@@ -76,12 +72,8 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         caching.CacheEntry(self.request, 'user', 'name2id', scope='wiki').remove()
         del self.request.cfg.cache.name2id
 
-        # Prevent user list caching - we create and delete users too
-        # fast for that.
-        try:
-            del dircache.cache[self.request.cfg.user_dir]
-        except KeyError:
-            pass
+        # Prevent user list caching - we create and delete users too fast for that.
+        filesys.dcdisable()
 
     def testAsciiPassword(self):
         """ user: login with ascii password """

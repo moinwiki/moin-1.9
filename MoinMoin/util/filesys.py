@@ -130,3 +130,22 @@ else:
     def realPathCase(path):
         return None
 
+# dircache stuff seems to be broken on win32 (at least for FAT32, maybe NTFS)
+DCENABLED = 1 # set to 0 to disable dirchache usage
+def dcdisable():
+    global DCENABLED
+    DCENABLED = 0
+
+import dircache
+
+def dclistdir(path):
+    if sys.platform == 'win32' or not DCENABLED:
+        return os.listdir(path)
+    else:
+        return dircache.listdir(path)
+        
+def dcreset():
+    if sys.platform == 'win32' or not DCENABLED:
+        return
+    else:
+        return dircache.reset()

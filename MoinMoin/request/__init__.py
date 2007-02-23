@@ -152,11 +152,6 @@ class RequestBase(object):
         self.page = None
         self._dicts = None
 
-        # Fix dircaching problems on Windows 9x
-        if IsWin9x():
-            import dircache
-            dircache.reset()
-
         # Check for dumb proxy requests
         # TODO relying on request_uri will not work on all servers, especially
         # not on external non-Apache servers

@@ -12,7 +12,7 @@ unsafe_names = ("id", "key", "val", "user_data", "enc_password")
 import os, time, sha, codecs
 
 from MoinMoin import config, caching, wikiutil, i18n
-from MoinMoin.util import timefuncs
+from MoinMoin.util import timefuncs, filesys
 
 
 def getUserList(request):
@@ -22,9 +22,9 @@ def getUserList(request):
     @rtype: list
     @return: all user IDs
     """
-    import re, dircache
+    import re
     user_re = re.compile(r'^\d+\.\d+(\.\d+)?$')
-    files = dircache.listdir(request.cfg.user_dir)
+    files = filesys.dclistdir(request.cfg.user_dir)
     userlist = [f for f in files if user_re.match(f)]
     return userlist
 
