@@ -8,14 +8,8 @@
 import re
 from MoinMoin import version
 
-# Threads flag - if you write a moin server that use threads, import
-# config in the server and set this flag to True.
-use_threads = False
-
-# Charset - we support only 'utf-8'. While older encodings might work,
-# we don't have the resources to test them, and there is no real
-# benefit for the user. IMPORTANT: use only lowercase 'utf-8'!
-charset = 'utf-8'
+# unicode: set the char types (upper, lower, digits, spaces)
+from MoinMoin.util.chartypes import *
 
 # When creating files, we use e.g. 0666 & config.umask for the mode:
 umask = 0770
@@ -27,6 +21,15 @@ umask = 0770
 # * must NOT end with '/'!
 # * some servers expect '/' at beginning and only 1 level deep.
 url_prefix_static = '/moin_static' + version.release_short
+
+# Threads flag - if you write a moin server that use threads, import
+# config in the server and set this flag to True.
+use_threads = False
+
+# Charset - we support only 'utf-8'. While older encodings might work,
+# we don't have the resources to test them, and there is no real
+# benefit for the user. IMPORTANT: use only lowercase 'utf-8'!
+charset = 'utf-8'
 
 # Invalid characters - invisible characters that should not be in page
 # names. Prevent user confusion and wiki abuse, e.g u'\u202aFrontPage'.
@@ -49,11 +52,3 @@ url_schemas = []
 
 smileys = (r"X-( :D <:( :o :( :) B) :)) ;) /!\ <!> (!) :-? :\ >:> |) " +
            r":-( :-) B-) :-)) ;-) |-) (./) {OK} {X} {i} {1} {2} {3} {*} {o}").split()
-
-# unicode: set the char types (upper, lower, digits, spaces)
-from MoinMoin.util.chartypes import _chartypes
-for key, val in _chartypes.items():
-    if not vars().has_key(key):
-        vars()[key] = val
-
-
