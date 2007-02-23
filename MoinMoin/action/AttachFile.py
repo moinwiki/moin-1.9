@@ -165,6 +165,9 @@ def info(pagename, request):
 
 def add_attachment(request, pagename, target, filecontent, overwrite=0):
     # replace illegal chars
+
+    _ = request.getText
+
     target = wikiutil.taintfilename(target)
 
     # set mimetype from extension, or from given mimetype
@@ -828,7 +831,7 @@ def get_file(pagename, request):
 
         request.emit_http_headers([
             'Content-Type: %s' % content_type,
-            'Last-Modified: %s' % timestamp,
+            'Last-Modified: %s' % timestamp, # TODO maybe add a short Expires: header here?
             'Content-Length: %d' % os.path.getsize(fpath),
             'Content-Disposition: %s; filename="%s"' % (content_dispo, filename_enc),
         ])

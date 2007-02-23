@@ -27,19 +27,6 @@ class Load(ActionBase):
         self.method = 'POST'
         self.enctype = 'multipart/form-data'
 
-    def is_allowed(self):
-        # this is not strictly necessary because the underlying storage code checks
-        # as well
-        may = self.request.user.may
-        return may.write(self.pagename) and may.delete(self.pagename)
-
-    def check_condition(self):
-        _ = self._
-        if not self.page.exists():
-            return _("You are not allowed to change this page.")
-        else:
-            return None
-
     def do_action(self):
         """ Load """
         status = False
@@ -48,19 +35,13 @@ class Load(ActionBase):
         author = self.request.user.name
 
         rename = form.get('rename', [u''])[0]
+
         filename = None
         if form.has_key('file__filename__'):
             filename = form['file__filename__']
 
         filecontent = form['file'][0]
         bytes = len(filecontent)
-
-        # if possible do decode
-        try:
-            filecontent = unicode(filecontent, config.charset)
-            is_decoded = True
-        except:
-            is_decoded = False
 
         overwrite = False
         if form.has_key('overwrite'):
@@ -77,22 +58,23 @@ class Load(ActionBase):
             if bsindex >= 0:
                 target = target[bsindex+1:]
 
-        msg = _('Please enable the attachment checkbox')
-        if self.request.form.has_key('attachment'):
+        if self.request.form.has_key('attachment') and self.request.user.may.write(self.pagename):
             attach_dir = AttachFile.getAttachDir(self.request, self.pagename, create=1)
             fpath = os.path.join(attach_dir, target).encode(config.charset)
             exists = os.path.exists(fpath)
-
             if exists and not overwrite:
                 msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
                          'target': target, 'filename': filename}
                 return status, msg
 
-            if exists:
+            if exists and self.request.user.may.delete(self.pagename):
                 try:
                     os.remove(fpath)
                 except:
                     pass
+            else:
+                msg = _("You are not allowed to delete attachments on this page.")
+                return status, msg
 
             AttachFile.add_attachment(self.request, self.pagename, target, filecontent)
             bytes = len(filecontent)
@@ -100,17 +82,20 @@ class Load(ActionBase):
                    'target': target, 'filename': filename, 'bytes': bytes}
             status = True
 
-        elif is_decoded:
-            target = wikiutil.escape(target)
-            page = PageEditor(self.request, target, do_editor_backup=0, uid_override=author)
+        else:
+            filecontent = unicode(filecontent, config.charset)
+            self.pagename = wikiutil.escape(target)
+            page = Page(self.request, self.pagename)
+            pagedir = page.getPagePath("", check_create=0)
+            rev = Page.get_current_from_pagedir(page, pagedir)
+            pg = PageEditor(self.request, self.pagename, do_editor_backup=0, uid_override=author)
             try:
-                page.saveText(filecontent, 0)
-                msg = _("%(pagename)s added") % {"pagename": self.pagename}
+                msg = pg.saveText(filecontent, rev)
                 status = True
-                self.pagename = target
-            except PageEditor.Unchanged:
-                pass
-            page.clean_acl_cache()
+            except pg.EditConflict, e:
+                msg = e.message
+            except pg.SaveError, msg:
+                msg = unicode(msg)
 
         return status, msg
 
