@@ -8,7 +8,7 @@
 
 import unittest
 from MoinMoin._tests import TestConfig
-from MoinMoin import config, security, _tests
+from MoinMoin import security, _tests
 
 acliter = security.ACLStringIterator
 
@@ -58,6 +58,13 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         self.assertEqual(entries, ['UserOne', 'UserTwo'])
         self.assertEqual(rights, ['read', 'write'])
 
+    def testMultipleWikiNameAndRightsSpaces(self):
+        """ security: multiple names with spaces """
+        iter = acliter(self.request.cfg.acl_rights_valid, 'user one,user two:read')
+        mod, entries, rights = iter.next()
+        self.assertEqual(entries, ['user one', 'user two'])
+        self.assertEqual(rights, ['read'])
+
     def testMultipleEntries(self):
         """ security: multiple entries """
         iter = acliter(self.request.cfg.acl_rights_valid, 'UserOne:read,write UserTwo:read All:')
@@ -76,13 +83,6 @@ class ACLStringIteratorTestCase(unittest.TestCase):
         iter = acliter(self.request.cfg.acl_rights_valid, 'user one:read')
         mod, entries, rights = iter.next()
         self.assertEqual(entries, ['user one'])
-        self.assertEqual(rights, ['read'])
-
-    def testMultipleWikiNameAndRights(self):
-        """ security: multiple names with spaces """
-        iter = acliter(self.request.cfg.acl_rights_valid, 'user one,user two:read')
-        mod, entries, rights = iter.next()
-        self.assertEqual(entries, ['user one', 'user two'])
         self.assertEqual(rights, ['read'])
 
     def testMultipleEntriesWithSpaces(self):

@@ -7,7 +7,7 @@ MoinMoin - MoinMoin.wikisync tests
 """
 
 from unittest import TestCase
-from MoinMoin.Page import Page
+
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin._tests import TestConfig, TestSkipped
 

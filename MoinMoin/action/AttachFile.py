@@ -28,7 +28,7 @@
 """
 
 import os, time, zipfile
-from MoinMoin import config, user, util, wikiutil, packages
+from MoinMoin import config, wikiutil, packages
 from MoinMoin.Page import Page
 from MoinMoin.util import filesys, timefuncs
 
@@ -163,7 +163,7 @@ def info(pagename, request):
         }
     return "\n<p>\n%s\n</p>\n" % attach_info
 
-def add_attachment(request, pagename, target, filecontent):
+def add_attachment(request, pagename, target, filecontent, overwrite=0):
     # replace illegal chars
     target = wikiutil.taintfilename(target)
 
@@ -187,8 +187,7 @@ def add_attachment(request, pagename, target, filecontent):
     fpath = os.path.join(attach_dir, target).encode(config.charset)
     exists = os.path.exists(fpath)
     if exists and not overwrite:
-        msg = _("Attachment '%(target)s' (remote name '%(filename)s') already exists.") % {
-            'target': target, 'filename': filename}
+        msg = _("Attachment '%(target)s' already exists.") % { 'target': target, }
     else:
         if exists:
             try:
@@ -259,6 +258,7 @@ def _access_file(pagename, request):
 
 
 def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
+    import mimetypes
     _ = request.getText
 
     # access directory
@@ -642,7 +642,7 @@ def do_upload(pagename, request):
 
     # add the attachment
     try:
-        add_attachment(request, pagename, target, filecontent)
+        add_attachment(request, pagename, target, filecontent, overwrite=overwrite)
 
         bytes = len(filecontent)
         msg = _("Attachment '%(target)s' (remote name '%(filename)s')"
@@ -937,7 +937,7 @@ def unzip_file(pagename, request):
                             "files are too big, .zip files only, exist already or "
                             "reside in folders.") % {'filename': filename}
         else:
-            msg = _('The file %(target)s is not a .zip file.' % target)
+            msg = _('The file %(filename)s is not a .zip file.' % {'filename': filename})
 
     upload_form(pagename, request, msg=wikiutil.escape(msg))
 
@@ -972,7 +972,6 @@ def send_viewfile(pagename, request):
         request.write("<pre><b>%s</b>\n%s</pre>" % (_("Package script:"), wikiutil.escape(package.getScript())))
         return
 
-    import zipfile
     if zipfile.is_zipfile(fpath):
         zf = zipfile.ZipFile(fpath, mode='r')
         request.write("<pre>%-46s %19s %12s\n" % (_("File Name"), _("Modified")+" "*5, _("Size")))

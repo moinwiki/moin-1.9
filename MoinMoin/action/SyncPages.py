@@ -8,12 +8,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os
 import re
 import xmlrpclib
 import traceback
 import StringIO # not relevant for speed, so we do not need cStringIO
-
 
 # Compatiblity to Python 2.3
 try:
@@ -22,7 +20,7 @@ except NameError:
     from sets import Set as set
 
 
-from MoinMoin import wikiutil, config, user
+from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine, packLine
 from MoinMoin.PageEditor import PageEditor, conflict_markers
 from MoinMoin.Page import Page

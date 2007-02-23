@@ -110,7 +110,7 @@ if wikipath:
         sys.path.append(wikipath)
 
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.request import RequestCLI
+from MoinMoin.request.CLI import Request
 
 # the block parser deals with the whole text to be converted
 #
@@ -358,7 +358,7 @@ cursor.execute(stmt)
 result = cursor.fetchall()
 for pagename,content,versiondata in result:
         utf8pagename = unicode(pagename, 'latin-1')
-        request = RequestCLI(utf8pagename)
+        request = Request(utf8pagename)
         page = PageEditor(utf8pagename, request)
         print pagename,
         # overwriting pages if selecting only some

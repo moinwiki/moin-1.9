@@ -14,8 +14,7 @@ from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
 from MoinMoin.logfile import editlog, eventlog
-from MoinMoin.util import filesys, timefuncs
-import MoinMoin.util.web
+from MoinMoin.util import filesys, timefuncs, web
 from MoinMoin.mail import sendmail
 
 
@@ -420,7 +419,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         cat_pages.insert(0, ('', _('<No addition>', formatted=False)))
         request.write("<p>")
         request.write(_('Add to: %(category)s') % {
-            'category': unicode(util.web.makeSelection('category', cat_pages)),
+            'category': unicode(web.makeSelection('category', cat_pages)),
         })
 
         if self.cfg.mail_enabled:
@@ -793,13 +792,13 @@ Try a different name.""") % (newpagename,)
             cache_data = cache.content()
         else:
             cache_data = {}
+        pagename = self.page_name
         if text is None:
             try:
                 del cache_data[pagename]
             except:
                 pass
         else:
-            pagename = self.page_name
             timestamp = int(time.time())
             cache_data[pagename] = (timestamp, rev, text)
         cache.update(cache_data)

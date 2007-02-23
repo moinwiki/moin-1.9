@@ -6,12 +6,12 @@
     @copyright: 2003 by Gustavo Niemeyer, http://moin.conectiva.com.br/GustavoNiemeyer
     @license: GNU GPL, see COPYING for details.
 """
-import re, time, os
+import re, time
 
 #import copy #broken, see comments at top of this file:
 from MoinMoin.support import copy
 
-from MoinMoin import config, caching, wikiutil, Page, logfile
+from MoinMoin import caching, wikiutil, Page, logfile
 from MoinMoin.logfile.editlog import EditLog
 
 # Version of the internal data structure which is pickled

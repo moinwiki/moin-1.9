@@ -19,7 +19,6 @@ except ImportError:
 # Set pickle protocol, see http://docs.python.org/lib/node64.html
 PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
-from MoinMoin import config
 from MoinMoin.util import filesys, lock
 
 

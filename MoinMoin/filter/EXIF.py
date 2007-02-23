@@ -1133,7 +1133,7 @@ def process_file(file, name='UNDEF', debug=0):
                     print ' EXIF Interoperability SubSubIFD at offset %d:' \
                           % intr_off.values[0]
                 hdr.dump_IFD(intr_off.values[0], 'EXIF Interoperability',
-                             dict=INTR_TAGSi, name=name)
+                             dict=INTR_TAGS, name=name)
         # GPS IFD
         gps_off = hdr.tags.get(IFD_name+' GPSInfo')
         if gps_off:

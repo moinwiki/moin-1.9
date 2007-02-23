@@ -6,7 +6,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
 from MoinMoin.filter.text_xml import execute as xmlfilter
 
 def execute(indexobj, filename):

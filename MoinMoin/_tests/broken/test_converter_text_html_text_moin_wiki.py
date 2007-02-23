@@ -1098,12 +1098,12 @@ class StripWhitespaceTests(StripTests):
         output = ur"""<t><z>test</z></t>"""
         self.do(test, output)
 
-    def test3(self):
+    def test4(self):
         test = ur"""<p>&nbsp;</p>"""
         output = ur""""""
         self.do(test, output)
 
-    def test4(self):
+    def test5(self):
         test = ur"""<p>test </p>"""
         output = ur"""<p>test</p>"""
         self.do(test, output)

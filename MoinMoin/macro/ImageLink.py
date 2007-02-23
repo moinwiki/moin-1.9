@@ -93,7 +93,7 @@
 """
 
 import os
-from MoinMoin import wikiutil, config
+from MoinMoin import wikiutil
 from MoinMoin.action import AttachFile
 
 kwAllowed = ['width', 'height', 'alt']

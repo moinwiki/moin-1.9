@@ -19,7 +19,6 @@ Dependencies = ["time"] # works around MoinMoinBugs/TableOfContentsLacksLinks
 import re, StringIO
 from MoinMoin import wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.util import web
 
 _sysmsg = '<p><strong class="%s">%s</strong></p>'
 

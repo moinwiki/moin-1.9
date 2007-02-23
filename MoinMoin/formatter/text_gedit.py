@@ -7,7 +7,7 @@
 """
 
 from MoinMoin.formatter import FormatterBase, text_html
-from MoinMoin import wikiutil, config
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 

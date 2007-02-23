@@ -10,10 +10,10 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import time, sys, os, errno, codecs
+import time, os, errno, codecs
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
-from MoinMoin.util import filesys, lock
+from MoinMoin.util import lock
 from MoinMoin.search.results import getSearchResults
 from MoinMoin.search.queryparser import Match, TextMatch, TitleMatch
 
@@ -402,7 +402,7 @@ class BaseIndex:
         from MoinMoin.security import Permissions
         request = Request(request.url)
         class SecurityPolicy(Permissions):
-            def read(*args, **kw):
+            def read(self, *args, **kw):
                 return True
         request.user.may = SecurityPolicy(request.user)
         return request
@@ -597,7 +597,6 @@ class Search:
         @keyword pages: optional list of pages to search in
         """
         self.request.clock.start('_moinSearch')
-        from MoinMoin.Page import Page
         if pages is None:
             # if we are not called from _xapianSearch, we make a full pagelist,
             # but don't search attachments (thus attachment name = '')

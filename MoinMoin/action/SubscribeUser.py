@@ -11,7 +11,6 @@
 import sys, os
 #sys.path.append("YOUR CONFIG DIRECTORY HERE")
 
-from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin import user
 

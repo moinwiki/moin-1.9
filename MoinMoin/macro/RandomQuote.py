@@ -19,7 +19,8 @@
     Gustavo Niemeyer added wiki markup parsing of the quotes.
 """
 
-import random, StringIO
+import random
+
 from MoinMoin.Page import Page, wikiutil
 
 Dependencies = ["time"]

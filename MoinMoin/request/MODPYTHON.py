@@ -6,9 +6,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os
-
-from MoinMoin import config
+from MoinMoin import wikiutil
 from MoinMoin.request import RequestBase
 
 class Request(RequestBase):
@@ -145,6 +143,8 @@ class Request(RequestBase):
         self.mpyreq.status = int(status.split(' ', 1)[0])
         self.mpyreq.content_type = ct_header.split(':', 1)[1].lstrip()
         for header in other_headers:
+            key, value = header.split(':', 1)
+            value = value.lstrip()
             self.mpyreq.headers_out[key] = value
         # this is for mod_python 2.7.X, for 3.X it's a NOP
         self.mpyreq.send_http_header()

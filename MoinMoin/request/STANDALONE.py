@@ -6,9 +6,8 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os, cgi
+import cgi
 
-from MoinMoin import config
 from MoinMoin.request import RequestBase
 
 class Request(RequestBase):

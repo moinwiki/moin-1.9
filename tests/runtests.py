@@ -12,7 +12,7 @@ Without arguments run all the tests in the _tests package.
 @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys
+import sys
 
 from MoinMoin import _tests
 

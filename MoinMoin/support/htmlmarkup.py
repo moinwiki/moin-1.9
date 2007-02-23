@@ -21,7 +21,6 @@ try:
 except NameError:
     from sets import ImmutableSet as frozenset
 from StringIO import StringIO
-import sys
 
 __all__ = ['escape', 'unescape', 'html']
 

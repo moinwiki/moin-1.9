@@ -9,6 +9,7 @@
 line_anchors = True
 
 from xml.dom import minidom
+from MoinMoin import wikiutil
 from MoinMoin.formatter import FormatterBase
 
 #def print_dom(element, indent=''):

@@ -23,7 +23,6 @@ import re, time, os
 from MoinMoin import action, config, util
 from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
-from MoinMoin.util import pysupport
 
 names = ["TitleSearch", "WordIndex", "TitleIndex",
          "GoTo", "InterWiki", "PageCount", "UserPreferences",

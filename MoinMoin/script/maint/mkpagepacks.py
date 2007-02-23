@@ -14,8 +14,7 @@ from datetime import datetime
 
 from MoinMoin import wikidicts, wikiutil
 from MoinMoin.Page import Page
-from MoinMoin.PageEditor import PageEditor
-from MoinMoin.packages import packLine, unpackLine, MOIN_PACKAGE_FILE
+from MoinMoin.packages import packLine, MOIN_PACKAGE_FILE
 from MoinMoin.script import MoinScript
 
 EXTRA = u'extra'

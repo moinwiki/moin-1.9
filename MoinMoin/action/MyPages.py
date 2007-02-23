@@ -56,7 +56,6 @@ the group pages.
 
     pagecontent = pagecontent.replace('\n', '\r\n')
 
-    from MoinMoin.Page import Page
     from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
     request.emit_http_headers()
 

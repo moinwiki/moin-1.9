@@ -74,7 +74,7 @@ class ComplexTestCase(unittest.TestCase):
     def _helper_fuction(self, test):
         """ Some tests needs extra  work to run
 
-        Keep the test non interesting deatils out of the way.
+        Keep the test non interesting details out of the way.
         """
         module_tested.do_this(self.request)
         module_tested.do_that()

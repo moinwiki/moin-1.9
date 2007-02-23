@@ -4,7 +4,7 @@
 # Author: Ben Gertzfield, Barry Warsaw
 # Contact: email-sig@python.org
 
-import sys
+import sys, binascii
 
 from email.Header import ecre
 
@@ -12,6 +12,8 @@ import email.quopriMIME
 import email.base64MIME
 from email.Errors import HeaderParseError
 from email.Charset import Charset
+
+SPACE = ' '
 
 if sys.version_info[:3] < (2, 9, 0): # insert the version number
                                      # of a fixed python here

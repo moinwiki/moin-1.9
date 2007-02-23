@@ -174,7 +174,7 @@ class Translation(object):
                 uc_texts, uc_unformatted = cache.content()
             except caching.CacheError:
                 if debug:
-                    request.log("i18n: pickle %s load failed" % lang)
+                    request.log("i18n: pickle %s load failed" % self.language)
                 needsupdate = 1
 
         if needsupdate:
@@ -186,7 +186,7 @@ class Translation(object):
             has_wikimarkup = self.info.get('x-haswikimarkup', 'False') == 'True'
             # convert to unicode
             if debug:
-                request.log("i18n: processing unformatted texts of lang %s" % lang)
+                request.log("i18n: processing unformatted texts of lang %s" % self.language)
             uc_unformatted = {}
             uc_texts = {}
             for ukey, utext in texts.items():
@@ -197,10 +197,10 @@ class Translation(object):
                         uc_texts[ukey] = self.formatMarkup(request, utext) # XXX RECURSION!!! Calls gettext via markup
                     except: # infinite recursion or crash
                         if debug:
-                            request.log("i18n: crashes in language %s on string: %s" % (lang, text))
+                            request.log("i18n: crashes in language %s on string: %s" % (self.language, utext))
                         uc_texts[ukey] = u"%s*" % utext
             if debug:
-                request.log("i18n: dumping lang %s" % lang)
+                request.log("i18n: dumping lang %s" % self.language)
             try:
                 cache.update((uc_texts, uc_unformatted))
             except caching.CacheError:

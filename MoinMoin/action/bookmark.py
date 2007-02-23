@@ -9,7 +9,7 @@
 import time
 
 from MoinMoin import wikiutil
-from MoinMoin.Page import Page
+
 
 def execute(pagename, request):
     """ set bookmarks (in time) for RecentChanges or delete them """
@@ -30,4 +30,3 @@ def execute(pagename, request):
     else:
         request.user.setBookmark(tm)
     request.page.send_page()
-

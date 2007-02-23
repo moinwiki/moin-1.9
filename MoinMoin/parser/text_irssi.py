@@ -8,7 +8,6 @@
 """
 
 import re
-from MoinMoin import wikiutil
 
 Dependencies = []
 

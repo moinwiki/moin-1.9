@@ -331,7 +331,7 @@ class MoinLocalWiki(RemoteWiki):
 
     # Methods implementing the RemoteWiki interface
     def delete_page(self, pagename, comment):
-        page = PageEditor(self.request, page_name)
+        page = PageEditor(self.request, pagename)
         try:
             page.deletePage(comment)
         except PageEditor.AccessDenied, (msg, ):

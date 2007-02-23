@@ -4,10 +4,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os.path, time
+import time
+
 from MoinMoin.logfile import LogFile
-from MoinMoin import util, config, wikiutil
-from MoinMoin.util import web
+from MoinMoin import wikiutil
 
 class EventLog(LogFile):
 
