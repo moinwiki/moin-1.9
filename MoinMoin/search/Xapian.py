@@ -246,7 +246,7 @@ class Index(BaseIndex):
         
         @param query: the search query objects
         @keyword sort: the sorting of the results (default: 'weight')
-        @keyword historysearch: whether to search in all page revisions (default: 0)
+        @keyword historysearch: whether to search in all page revisions (default: 0) TODO: use/implement this
         """
         while True:
             try:
