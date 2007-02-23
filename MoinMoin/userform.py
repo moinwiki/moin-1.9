@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import time, re
+import time
 from MoinMoin import user, util, wikiutil
 from MoinMoin.widget import html
 

@@ -9,7 +9,6 @@
 """
 
 import re
-import xmlrpclib
 import traceback
 import StringIO # not relevant for speed, so we do not need cStringIO
 

@@ -5,6 +5,7 @@
 # code into your farmconfig.py or wikiconfig.py.
 
 # HINT: this code is slightly outdated, if you fix it to work with 1.6, please send us a copy.
+from MoinMoin.config.multiconfig import DefaultConfig
 
 class FarmConfig(DefaultConfig):
     def external_cookie(request, **kw):
@@ -57,9 +58,10 @@ class FarmConfig(DefaultConfig):
                 try_next = False # stop processing auth method list
         return user, try_next
 
-    from MoinMoin.auth import moin_cookie, http
+    from MoinMoin.auth import moin_login, moin_session
+    from MoinMoin.auth.http import http
     # first try the external_cookie, then http basic auth, then the usual moin_cookie
-    auth = [external_cookie, http, moin_cookie]
+    auth = [external_cookie, http, moin_login, moin_session]
 
     # ... (rest of your config follows here) ...
 

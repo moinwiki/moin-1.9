@@ -8,8 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import filter
+from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
-    return filter.execfilter("catdoc %s", filename)
+    return execfilter("catdoc %s", filename)
 

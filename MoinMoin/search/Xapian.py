@@ -9,7 +9,6 @@
 debug = True
 
 import os, re
-from pprint import pprint
 
 import xapian
 from xapian import Query

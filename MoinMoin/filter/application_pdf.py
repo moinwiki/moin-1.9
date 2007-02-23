@@ -8,8 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import filter
+from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
-    return filter.execfilter("pdftotext -enc UTF-8 '%s' -", filename)
+    return execfilter("pdftotext -enc UTF-8 '%s' -", filename)
 

@@ -324,7 +324,7 @@ class Parser:
 
         # check for image, and possibly return IMG tag (images are always inlined)
         if not kw.get('pretty_url', 0) and wikiutil.isPicture(fname):
-            return target_and_test # self.formatter.attachment_image(fname)
+            return target_and_text # self.formatter.attachment_image(fname)
 
         # inline the attachment
         if scheme == 'inline':

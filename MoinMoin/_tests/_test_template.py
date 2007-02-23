@@ -78,6 +78,6 @@ class ComplexTestCase(unittest.TestCase):
         """
         module_tested.do_this(self.request)
         module_tested.do_that()
-
+        result = None
         return result
 
