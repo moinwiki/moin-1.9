@@ -162,7 +162,7 @@ class DateTimeMacroTestCase(ParserTestCase):
    machine? - can we fix this?
    """
    
-   text = 'XXX %s XXX'
+   text = 'AAA %s AAA'
    needle = re.compile(text %  r'(.+)')
    _tests = (
        # test                                   expected
@@ -200,7 +200,7 @@ class DateTimeMacroTestCase(ParserTestCase):
 class TextFormatingTestCase(ParserTestCase):
     """ Test wiki markup """
     
-    text = 'XXX %s XXX'
+    text = 'AAA %s AAA'
     needle = re.compile(text %  r'(.+)')
     _tests = (
         # test,                     expected
@@ -416,12 +416,12 @@ class BlockTestCase(ParserTestCase):
 
     def testParagraphBeforeBlock(self):
         """ parser.wiki: paragraph closed before block element """
-        text = """XXX
+        text = """AAA
 %s
 """
         for test, blockstart in self.cases:
             # We dont test here formatter white space generation
-            expected = r'<p>XXX\s*</p>\n+%s' % blockstart
+            expected = r'<p>AAA\s*</p>\n+%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
             match = needle.search(result)
@@ -437,12 +437,12 @@ class BlockTestCase(ParserTestCase):
         Currently an empty paragraph is created, which make no sense but
         no real harm.
         """
-        text = """XXX
+        text = """AAA
 
 %s
 """
         for test, blockstart in self.cases:
-            expected = r'<p>XXX\s*</p>\n+%s' % blockstart
+            expected = r'<p>AAA\s*</p>\n+%s' % blockstart
             needle = re.compile(expected, re.MULTILINE)
             result = self.parse(text % test)
             match = needle.search(result)

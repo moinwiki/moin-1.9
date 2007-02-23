@@ -347,8 +347,8 @@ class XmlRpcBase:
         """ Return page information for specific revision
         
         @param pagename: the name of the page (utf-8)
-        @param rev: revision to get info about (XXX int?)
-        @rtype: dict XXX ??
+        @param rev: revision to get info about (int)
+        @rtype: dict
         @return: page information
             * name (string): the canonical page name, UTF-8.
             * lastModified (date): Last modification date, UTC.

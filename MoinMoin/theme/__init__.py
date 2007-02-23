@@ -1466,7 +1466,7 @@ var gui_editor_link_text = "%(text)s";
         page_user_prefs = wikiutil.getLocalizedPage(request, 'UserPreferences').page_name
         page_help_formatting = wikiutil.getLocalizedPage(request, 'HelpOnFormatting').page_name
         page_find_page = wikiutil.getLocalizedPage(request, 'FindPage').page_name
-        home_page = wikiutil.getInterwikiHomePage(request) # XXX sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
+        home_page = wikiutil.getInterwikiHomePage(request) # sorry theme API change!!! Either None or tuple (wikiname,pagename) now.
         page_parent_page = getattr(page.getParentPage(), 'page_name', None)
 
         # Prepare the HTML <head> element
