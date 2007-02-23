@@ -1186,7 +1186,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
                 # explicit base level for section number display
                 self._show_section_numbers = int(numbering)
 
-        heading_depth = depth # + 1
+        heading_depth = depth
 
         # closing tag, with empty line after, to make source more readable
         if not on:
@@ -1206,19 +1206,12 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
         # Add space before heading, easier to check source code
         result = '\n' + self._open('h%d' % heading_depth, **kw)
 
-        # TODO: convert this to readable code
         if self.request.user.show_topbottom:
-            # TODO change top/bottom refs to content-specific top/bottom refs?
-            result = ("%s%s%s%s%s%s%s%s" %
-                      (result,
-                       kw.get('icons', ''),
-                       self.url(1, "#bottom", do_escape=0),
-                       self.icon('bottom'),
-                       self.url(0),
-                       self.url(1, "#top", do_escape=0),
-                       self.icon('top'),
-                       self.url(0)))
-        return "%s%s%s" % (result, kw.get('icons', ''), number)
+            result += "%s%s%s%s%s%s" % (
+                       self.url(1, "#bottom", do_escape=0), self.icon('bottom'), self.url(0),
+                       self.url(1, "#top", do_escape=0), self.icon('top'), self.url(0))
+
+        return "%s%s" % (result, number)
 
 
     # Tables #############################################################

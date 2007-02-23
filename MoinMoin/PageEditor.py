@@ -712,8 +712,7 @@ Try a different name.""") % (newpagename,)
         @rtype: string
         @return: new text of wikipage, variables replaced
         """
-        # TODO: Allow addition of variables via wikiconfig or a global
-        # wiki dict.
+        # TODO: Allow addition of variables via wikiconfig or a global wiki dict.
         request = self.request
         now = self._get_local_timestamp()
         user = request.user
@@ -737,7 +736,6 @@ Try a different name.""") % (newpagename,)
             if request.dicts.has_dict(userDictPage):
                 variables.update(request.dicts.dict(userDictPage))
 
-        # TODO: Use a more stream-lined re.sub algorithm
         for name in variables:
             text = text.replace('@%s@' % name, variables[name])
         return text

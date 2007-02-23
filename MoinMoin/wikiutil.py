@@ -365,9 +365,8 @@ def unquoteWikiname(filename, charsets=[config.charset]):
         parts.append(filename[start:len(filename)])
         wikiname = ''.join(parts)
 
-    # This looks wrong, because at this stage "()" can be both errors
-    # like open "(" without close ")", or unquoted valid characters in
-    # the file name. FIXME: check this.
+    # FIXME: This looks wrong, because at this stage "()" can be both errors
+    # like open "(" without close ")", or unquoted valid characters in the file name.
     # Filter invalid filenames. Any left (xx) must be invalid
     #if '(' in wikiname or ')' in wikiname:
     #    raise InvalidFileNameError(filename)
