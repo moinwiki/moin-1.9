@@ -262,7 +262,6 @@ class Macro:
     def _macro_PageList(self, needle):
         from MoinMoin import search
         _ = self._
-        literal = 0
         case = 0
 
         # If called with empty or no argument, default to regex search for .+, the full page list.
@@ -275,7 +274,6 @@ class Macro:
             return '<span class="error">%s</span>' % err
 
         # Return a title search for needle, sorted by name.
-        # XXX: what's with literal?
         results = search.searchPages(self.request, needle,
                 titlesearch=1, case=case, sort='page_name')
         return results.pageList(self.request, self.formatter, paging=False)

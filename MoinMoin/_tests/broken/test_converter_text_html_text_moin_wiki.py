@@ -1065,10 +1065,6 @@ class StripTests(unittest.TestCase):
         xml.dom.ext.Print(tree, out)
         self.failUnlessEqual("<?xml version='1.0' encoding='UTF-8'?>%s" % output, out.getvalue().decode("utf-8"))
 
-class StripBreakTests(StripTests):
-    def do(self, text, output):
-        super(StripBreakTests, self).do(converter.strip_break, text, output)
-
 class StripWhitespaceTests(StripTests):
     def do(self, text, output):
         super(StripWhitespaceTests, self).do(converter.strip_whitespace, text, output)
