@@ -28,12 +28,14 @@ chars_digits = u''.join(digits)
 chars_spaces = u''.join(space)
 
 print """
-_chartypes = {
-    'chars_upper': u"%(chars_upper)s",
-    'chars_lower': u"%(chars_lower)s",
-    'chars_digits': u"%(chars_digits)s",
-    'chars_spaces': u"%(chars_spaces)s",
-}
+chars_upper = u"%(chars_upper)s"
+
+chars_lower = u"%(chars_lower)s"
+
+chars_digits = u"%(chars_digits)s"
+
+chars_spaces = u"%(chars_spaces)s"
+
 
 """ % globals()
 
