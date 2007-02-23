@@ -9,7 +9,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
 from MoinMoin.packages import unpackLine
 
 Dependencies = ["language"]

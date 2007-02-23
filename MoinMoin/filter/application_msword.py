@@ -8,8 +8,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import filter
+from MoinMoin.filter import execfilter
 
 def execute(indexobj, filename):
-    return filter.execfilter("HOME=/tmp antiword '%s'", filename) # no HOME makes antiword complain
+    return execfilter("HOME=/tmp antiword '%s'", filename) # no HOME makes antiword complain
 

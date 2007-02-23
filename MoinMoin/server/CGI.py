@@ -21,9 +21,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys, time, socket, errno, shutil
-
-from MoinMoin import version, wikiutil
 from MoinMoin.server import Config
 from MoinMoin.request import CGI
 
@@ -59,7 +56,6 @@ def run(configClass):
         config.hotshotProfile = hotshot.Profile(config.hotshotProfile)
         config.hotshotProfile.start()
 
-    from MoinMoin.request import CGI
     request = CGI.Request(properties=config.properties)
     request.run()
 

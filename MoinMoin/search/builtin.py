@@ -10,7 +10,8 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import time, os, errno, codecs
+import time, os, errno, codecs, logging
+
 from MoinMoin import wikiutil, config
 from MoinMoin.Page import Page
 from MoinMoin.util import lock
@@ -43,8 +44,7 @@ class UpdateQueue:
         @param pagename: string to save
         """
         if not self.writeLock.acquire(60.0):
-            request.log("can't add %r to xapian update queue: can't lock queue" %
-                        pagename)
+            logging.warning("can't add %r to xapian update queue: can't lock queue" % pagename)
             return
         try:
             f = codecs.open(self.file, 'a', config.charset)
@@ -251,14 +251,14 @@ class BaseIndex:
         @keyword mode: set the mode of indexing the pages, either 'update', 'add' or 'rebuild'
         """
         if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
+            logging.warning("can't index: can't acquire lock")
             return
         try:
             self._unsign()
             start = time.time()
             request = self._indexingRequest(self.request)
             self._index_pages(request, files, mode)
-            request.log("indexing completed successfully in %0.2f seconds." %
+            logging.info("indexing completed successfully in %0.2f seconds." %
                         (time.time() - start))
             self._sign()
         finally:
@@ -321,7 +321,7 @@ class BaseIndex:
         Should be called from a user request. From a script, use indexPages.
         """
         if not self.lock.acquire(1.0):
-            self.request.log("can't index: can't acquire lock")
+            logging.warning("can't index: can't acquire lock")
             return
         try:
             def lockedDecorator(f):
@@ -378,15 +378,15 @@ class BaseIndex:
             except wikiutil.PluginMissingError:
                 pass
             else:
-                request.log("Cannot load filter for mimetype." + modulename)
+                logging.info("Cannot load filter for mimetype." + modulename)
         try:
             data = execute(self, filename)
             # XXX: proper debugging?
             #if debug:
-            #    request.log("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
+            #    logging.info("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
         except (OSError, IOError), err:
             data = ''
-            request.log("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
+            logging.warning("Filter %s threw error '%s' for file %s" % (modulename, str(err), filename))
         return mt.mime_type(), data
 
     def _indexingRequest(self, request):
@@ -514,21 +514,21 @@ class Search:
 
                 clock.start('_xapianQuery')
                 query = self.query.xapian_term(self.request, index.allterms)
-                self.request.log("xapianSearch: query = %r" %
+                logging.info("xapianSearch: query = %r" %
                         query.get_description())
                 query = xapwrap.index.QObjQuery(query)
                 enq, mset, hits = index.search(query, sort=self.sort,
                         historysearch=self.historysearch)
                 clock.stop('_xapianQuery')
 
-                #self.request.log("xapianSearch: finds: %r" % hits)
+                #logging.info("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
                     for k, v in d.items():
                         d[k] = d[k].decode(config.charset)
                     return d
                 pages = [dict_decode(hit['values']) for hit in hits]
-                self.request.log("xapianSearch: finds pages: %r" % pages)
+                logging.info("xapianSearch: finds pages: %r" % pages)
 
                 self._xapianEnquire = enq
                 self._xapianMset = mset

@@ -14,7 +14,7 @@ import re
 from StringIO import StringIO
 from MoinMoin._tests import TestConfig
 from MoinMoin.Page import Page
-from MoinMoin.parser.wiki import Parser
+from MoinMoin.parser.text_moin_wiki import Parser
 
 
 class ParserTestCase(unittest.TestCase):

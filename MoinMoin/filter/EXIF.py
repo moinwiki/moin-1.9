@@ -1185,7 +1185,7 @@ if __name__ == '__main__':
             continue
         print filename+':'
         # data=process_file(file, 1) # with debug info
-        data = process_file(file, name, 0)
+        data = process_file(file, name, 0) # XXX undefined variable "name"
         if not data:
             print 'No EXIF information found'
             continue

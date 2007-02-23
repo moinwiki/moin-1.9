@@ -11,8 +11,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
-
 Dependencies = ["language"]
 
 def execute(macro, args):

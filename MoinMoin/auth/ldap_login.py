@@ -8,7 +8,7 @@
     @copyright: 2006 by MoinMoin:ThomasWaldmann, Nick Phillips
     @license: GNU GPL, see COPYING for details.
 """
-import sys, re
+import sys
 import ldap
 
 from MoinMoin import user

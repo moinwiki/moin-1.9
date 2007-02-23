@@ -8,7 +8,6 @@
 
 import unittest
 from MoinMoin.widget import html
-from MoinMoin import wikiutil
 
 class HTMLWidgetsTestCase(unittest.TestCase):
     """widget.html: testing html widgets"""

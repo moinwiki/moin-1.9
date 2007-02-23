@@ -310,6 +310,7 @@ class MoinLocalWiki(RemoteWiki):
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
+        from MoinMoin.wikidict import Group
         pages = []
         for group_pagename in group_list:
             pages.extend(Group(self.request, group_pagename).members())

@@ -61,6 +61,7 @@ class MsgFmt(object):
         section = None
         fuzzy = False
         line_no = 0
+        msgid = msgstr = ''
         # Parse the catalog
         for line in lines:
             line_no += 1

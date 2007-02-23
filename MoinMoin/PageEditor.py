@@ -7,9 +7,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, time, codecs, re, errno
+import os, time, codecs, errno
 
-from MoinMoin import caching, config, user, util, wikiutil, error
+from MoinMoin import caching, config, user, wikiutil, error
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
