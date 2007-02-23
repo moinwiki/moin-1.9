@@ -178,7 +178,7 @@ class ThreadPoolServer(SimpleServer):
     def serve_forever(self):
         """ Create a thread pool then invoke base class method """
         from threading import Thread
-        for i in range(self.poolSize):
+        for dummy in range(self.poolSize):
             t = Thread(target=self.serve_forever_thread)
             t.start()
         SimpleServer.serve_forever(self)
@@ -390,7 +390,7 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 
 try:
-    from tlslite.api import TLSSocketServerMixIn, X509, X509CertChain, SessionCache, parsePEMKey, TLSError
+    from tlslite.api import TLSSocketServerMixIn, X509, X509CertChain, SessionCache, parsePEMKey
     from tlslite.TLSConnection import TLSConnection
 except ImportError:
     pass

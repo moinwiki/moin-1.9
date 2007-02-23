@@ -21,20 +21,13 @@ GPL software, 2003-08-10 Thomas Waldmann
 def run():
     import xmlrpclib
     from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
+    from MoinMoin.util import pickle, PICKLE_PROTOCOL
 
     #user = "username"
     #password = "xxxxxxxx"
     #srctrans = BasicAuthTransport(user,password)
     #srcwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=srctrans)
     srcwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
-
-    try:
-        import cPickle as pickle
-    except ImportError:
-        import pickle
-
-    # Set pickle protocol, see http://docs.python.org/lib/node64.html
-    PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
 
     backup={}
     allpages = srcwiki.getAllPages()

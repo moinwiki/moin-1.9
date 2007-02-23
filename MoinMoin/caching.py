@@ -9,17 +9,7 @@
 import os
 import tempfile
 
-# cPickle can encode normal and Unicode strings
-# see http://docs.python.org/lib/node66.html
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-# Set pickle protocol, see http://docs.python.org/lib/node64.html
-PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
-
-from MoinMoin.util import filesys, lock
+from MoinMoin.util import filesys, lock, pickle, PICKLE_PROTOCOL
 
 
 class CacheError(Exception):

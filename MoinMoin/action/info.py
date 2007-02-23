@@ -91,10 +91,6 @@ def execute(pagename, request):
             ]
 
         # generate history list
-        revisions = page.getRevList()
-        versions = len(revisions)
-
-        may_revert = request.user.may.revert(pagename)
 
         def render_action(text, query, **kw):
             kw.update(dict(rel='nofollow'))

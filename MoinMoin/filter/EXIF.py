@@ -798,7 +798,7 @@ class EXIF_header:
     # convert offset to string
     def n2s(self, offset, length):
         s = ''
-        for i in range(length):
+        for dummy in range(length):
             if self.endian == 'I':
                 s = s + chr(offset & 0xFF)
             else:
@@ -871,14 +871,14 @@ class EXIF_header:
             else:
                 values = []
                 signed = (field_type in [6, 8, 9, 10])
-                for j in range(count):
+                for dummy in range(count):
                     if field_type in (5, 10):
                         # a ratio
-                        value_j = Ratio(self.s2n(offset, 4, signed),
+                        value = Ratio(self.s2n(offset, 4, signed),
                                       self.s2n(offset+4, 4, signed))
                     else:
-                        value_j = self.s2n(offset, typelen, signed)
-                    values.append(value_j)
+                        value = self.s2n(offset, typelen, signed)
+                    values.append(value)
                     offset = offset+typelen
             # now "values" is either a string or an array
             if count == 1 and field_type != 2:

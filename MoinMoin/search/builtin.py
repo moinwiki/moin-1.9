@@ -167,7 +167,6 @@ class BaseIndex:
         @param request: current request
         """
         self.request = request
-        cache_dir = request.cfg.cache_dir
         main_dir = self._main_dir()
         self.dir = os.path.join(main_dir, 'index')
         if not os.path.exists(self.dir):
@@ -524,8 +523,8 @@ class Search:
                 #logging.info("xapianSearch: finds: %r" % hits)
                 def dict_decode(d):
                     """ decode dict values to unicode """
-                    for k, v in d.items():
-                        d[k] = d[k].decode(config.charset)
+                    for key in d:
+                        d[key] = d[key].decode(config.charset)
                     return d
                 pages = [dict_decode(hit['values']) for hit in hits]
                 logging.info("xapianSearch: finds pages: %r" % pages)

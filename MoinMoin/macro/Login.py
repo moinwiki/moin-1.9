@@ -22,7 +22,6 @@ def execute(macro, args):
     """ Show the login form (but only when not logged in) """
     request = macro.request
     _ = request.getText
-    formatter = macro.formatter
     if not args:
         if request.user.valid:
             data = u''

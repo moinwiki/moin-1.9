@@ -79,7 +79,7 @@ class TableOfContents:
         self.process_lines(self.pre_re.sub('', self.macro.parser.raw).split('\n'),
                            self.macro.formatter.page.page_name)
         # Close pending lists
-        for i in range(self.baseindent, self.indent):
+        for dummy in range(self.baseindent, self.indent):
             self.result.append(self.macro.formatter.listitem(0))
             self.result.append(self.macro.formatter.number_list(0))
         self.result.append(self.macro.formatter.div(0))
@@ -138,12 +138,12 @@ class TableOfContents:
             self.indent = self.baseindent
 
         # Close lists
-        for i in range(0, self.indent-newindent):
+        for dummy in range(0, self.indent-newindent):
             self.result.append(self.macro.formatter.listitem(0))
             self.result.append(self.macro.formatter.number_list(0))
 
         # Open Lists
-        for i in range(0, newindent-self.indent):
+        for dummy in range(0, newindent-self.indent):
             self.result.append(self.macro.formatter.number_list(1))
             self.result.append(self.macro.formatter.listitem(1))
 

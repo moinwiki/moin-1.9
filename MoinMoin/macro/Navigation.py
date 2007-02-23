@@ -36,7 +36,7 @@ def _getPages(request, filter_regex=None):
 def _getLinks(request, pagename, filter_regex=None):
     """ Return pagename for up, first, prev, next, last; each can be None.
     """
-    pos, size, first, prev, next, last = 0, 0, None, None, None, None
+    pos, first, prev, next, last = 0, None, None, None, None
 
     all_pages = _getPages(request, filter_regex)
     size = len(all_pages)

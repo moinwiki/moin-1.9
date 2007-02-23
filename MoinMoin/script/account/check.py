@@ -171,7 +171,7 @@ class PluginScript(MoinScript):
         sortlist.sort()
         #print sortlist
         # disable all, but the last/latest one
-        for t, uid in sortlist[:-1]:
+        for dummy, uid in sortlist[:-1]:
             self.disableUser(uid)
         # show what will be kept
         uid = sortlist[-1][1]

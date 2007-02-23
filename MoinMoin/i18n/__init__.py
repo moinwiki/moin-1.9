@@ -140,7 +140,6 @@ class Translation(object):
         from MoinMoin.formatter.text_html import Formatter
         import StringIO
 
-        origtext = text
         out = StringIO.StringIO()
         request.redirect(out)
         parser = WikiParser(text, request, line_anchors=False)

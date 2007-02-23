@@ -9,6 +9,18 @@
 
 import os, sys, re, random
 
+# do the pickle magic once here, so we can just import from here:
+# cPickle can encode normal and Unicode strings
+# see http://docs.python.org/lib/node66.html
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
+
+# Set pickle protocol, see http://docs.python.org/lib/node64.html
+PICKLE_PROTOCOL = pickle.HIGHEST_PROTOCOL
+
+
 #############################################################################
 ### XML helper functions
 #############################################################################
@@ -114,6 +126,6 @@ class simpleIO:
 
 
 def random_string(length):
-    chars = ''.join([chr(random.randint(0, 255)) for x in xrange(length)])
+    chars = ''.join([chr(random.randint(0, 255)) for dummy in xrange(length)])
     return chars
 

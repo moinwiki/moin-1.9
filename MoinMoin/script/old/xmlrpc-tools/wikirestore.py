@@ -22,17 +22,13 @@ GPL software, 2003-10-24 Thomas Waldmann
 def run():
     import xmlrpclib
     from MoinMoin.support.BasicAuthTransport import BasicAuthTransport
+    from MoinMoin.util import pickle
 
     user = "ThomasWaldmann"
     password = "xxxxxxxxxxxx"
     dsttrans = BasicAuthTransport(user,password)
     dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/__xmlrpc/?action=xmlrpc2", transport=dsttrans)
     #dstwiki = xmlrpclib.ServerProxy("http://devel.linuxwiki.org/moin--cvs/?action=xmlrpc2")
-
-    try:
-        import cPickle as pickle
-    except ImportError:
-        import pickle
 
     backupfile = open("wikibackup.pickle","r")
     backup = pickle.load(backupfile)
@@ -46,4 +42,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-

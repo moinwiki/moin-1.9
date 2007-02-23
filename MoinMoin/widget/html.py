@@ -7,7 +7,6 @@
 """
 
 from MoinMoin import wikiutil
-from MoinMoin.widget.base import Widget
 
 # sort attributes or not? (set to 1 by unit tests)
 _SORT_ATTRS = 0
@@ -666,6 +665,7 @@ class VAR(CompositeElement):
 ### Widgets
 #############################################################################
 
+#from MoinMoin.widget.base import Widget
 #class FormWidget(Widget):
 #    """ Widget to display data as an HTML form.
 #

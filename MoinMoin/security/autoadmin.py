@@ -84,7 +84,6 @@ class SecurityPolicy(Permissions):
 
     def save(self, editor, newtext, rev, **kw):
         request = self.request
-        has_member = request.dicts.has_member
         username = request.user.name
         pagename = editor.page_name
 
@@ -103,7 +102,7 @@ class SecurityPolicy(Permissions):
 
         parts = pagename.split('/')
         if len(parts) == 2:
-            mainpage, subpage = parts
+            subpage = parts[1]
             if subpage in grouppages and not self.admin(pagename):
                 return False
 
