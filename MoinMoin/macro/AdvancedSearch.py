@@ -6,7 +6,7 @@
         displays advanced search dialog.
 """
 
-from MoinMoin import config, wikiutil, search
+from MoinMoin import search
 from MoinMoin.i18n import languages
 from MoinMoin.support import sorted
 from MoinMoin.widget import html

@@ -22,7 +22,7 @@ pre.codearea span.ConsWord { color: #008080; font-weight: bold; }
 
 """
 
-import re, sys, sha
+import re, sha
 from MoinMoin import config, wikiutil
 
 def parse_start_step(request, args):

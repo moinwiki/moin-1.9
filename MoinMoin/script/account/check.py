@@ -64,7 +64,7 @@ magicpages = [
 
 # ----------------------------------------------------------------------------
 
-import os
+import os, sys
 
 from MoinMoin.script import MoinScript
 from MoinMoin import user, wikiutil
@@ -206,7 +206,7 @@ class PluginScript(MoinScript):
         for uid, u in self.users.items():
             # user.User already clears the old cleartext passwords on loading,
             # so nothing to do here!
-            if save:
+            if self.options.save:
                 # we can't encrypt the cleartext password as it is cleared
                 # already. and we would not trust it anyway, so we don't WANT
                 # to do that either!
@@ -215,8 +215,6 @@ class PluginScript(MoinScript):
                 u.save()
 
     def mainloop(self):
-        import os, sys
-
         # we don't expect non-option arguments
         if len(self.args) != 0:
             self.parser.error("incorrect number of arguments")

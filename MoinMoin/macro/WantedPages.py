@@ -6,7 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import config, wikiutil
+from MoinMoin import wikiutil
 
 Dependencies = ["pages"]
 

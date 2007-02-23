@@ -5,20 +5,15 @@
     @copyright: (c) Bastian Blank, Florian Festi, Thomas Waldmann
     @license: GNU GPL, see COPYING for details.
 """
+import re
 
 from MoinMoin import PageEditor
-import os, time, codecs, re
-
-from MoinMoin import caching, config, user, util, wikiutil, error
+from MoinMoin import util, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status
-from MoinMoin.logfile import editlog, eventlog
-from MoinMoin.util import filesys
-import MoinMoin.util.web
+from MoinMoin.util import web
 from MoinMoin.parser.text_moin_wiki import Parser
-
-from StringIO import StringIO
 
 def execute(pagename, request):
     if not request.user.may.write(pagename):
@@ -351,7 +346,7 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         cat_pages.insert(0, ('', _('<No addition>', formatted=False)))
         request.write("<p>")
         request.write(_('Add to: %(category)s') % {
-            'category': unicode(util.web.makeSelection('category', cat_pages)),
+            'category': unicode(web.makeSelection('category', cat_pages)),
         })
         if self.cfg.mail_enabled:
             request.write('''

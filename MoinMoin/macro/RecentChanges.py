@@ -7,9 +7,9 @@
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.
 """
+import time
 
-import re, time
-from MoinMoin import util, wikiutil, config
+from MoinMoin import util, wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.logfile import editlog
 

@@ -335,8 +335,6 @@ class ThemeBase:
             title = self.shortenPagename(title)
             link = page.link_to(request, title)
 
-
-        from MoinMoin import config
         for scheme in self.linkSchemas:
             if pagename.startswith(scheme):
                 title = wikiutil.escape(title)
@@ -1481,9 +1479,9 @@ var gui_editor_link_text = "%(text)s";
         meta_keywords = request.getPragma('keywords')
         meta_desc = request.getPragma('description')
         if meta_keywords:
-            user_head.append('<meta name="keywords" content="%s">\n' % escape(meta_keywords, 1))
+            user_head.append('<meta name="keywords" content="%s">\n' % wikiutil.escape(meta_keywords, 1))
         if meta_desc:
-            user_head.append('<meta name="description" content="%s">\n' % escape(meta_desc, 1))
+            user_head.append('<meta name="description" content="%s">\n' % wikiutil.escape(meta_desc, 1))
 
         # search engine precautions / optimization:
         # if it is an action or edit/search, send query headers (noindex,nofollow):

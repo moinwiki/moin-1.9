@@ -8,7 +8,7 @@
 """
 debug = True
 
-import sys, os, re, codecs, time, os
+import os, re
 from pprint import pprint
 
 import xapian

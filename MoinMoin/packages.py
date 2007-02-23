@@ -6,14 +6,12 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, codecs
-import sys
+import os, sys
 import zipfile
 
 from MoinMoin import config, wikiutil, caching, user
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
-from MoinMoin.util import filesys
 from MoinMoin.logfile import editlog, eventlog
 
 MOIN_PACKAGE_FILE = 'MOIN_PACKAGE'
@@ -469,7 +467,7 @@ class Package:
 
     def isPackage(self):
         """ Returns true if this package is recognised. """
-        raise NotImplementedException
+        raise NotImplementedError
 
 class ZipPackage(Package, ScriptEngine):
     """ A package that reads its files from a .zip file. """

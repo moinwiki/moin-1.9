@@ -6,7 +6,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os
+import sys
 
 from MoinMoin.request import RequestBase
 

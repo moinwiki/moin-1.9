@@ -9,11 +9,11 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os, sys, re, time
+import sys, re, time
 import email
-from email.Utils import getaddresses, parseaddr, parsedate_tz, mktime_tz
+from email.Utils import getaddresses, parsedate_tz, mktime_tz
 
-from MoinMoin import user, wikiutil, config
+from MoinMoin import user, wikiutil
 from MoinMoin.action.AttachFile import add_attachment, AttachmentAlreadyExists
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor

@@ -212,10 +212,3 @@ class Formatter(FormatterBase):
 
     def code_token(self, on, tok_type):
         return ('<codetoken type="%s">' % tok_type, '</codetoken')[not on]
-
-    def code_line(self, on):
-        return ('<codeline>', '</codeline')[not on]
-
-    def code_token(self, on, tok_type):
-        return ('<codetoken type="%s">' % tok_type, '</codetoken')[not on]
-

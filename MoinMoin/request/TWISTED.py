@@ -6,9 +6,7 @@
                 2003-2006 MoinMoin:ThomasWaldmann
     @license: GNU GPL, see COPYING for details.
 """
-import sys, os
 
-from MoinMoin import config
 from MoinMoin.request import RequestBase, MoinMoinFinish
 
 class Request(RequestBase):

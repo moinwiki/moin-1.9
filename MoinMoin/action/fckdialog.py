@@ -528,7 +528,7 @@ def execute(pagename, request):
     if dialog == "macro":
         macro_dialog(request)
     elif dialog == "macrolist":
-        macrolist(request)
+        macro_list(request)
     elif dialog == "pagelist":
         page_list(request)
     elif dialog == "link":

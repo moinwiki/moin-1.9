@@ -30,12 +30,11 @@
     http://uche.ogbuji.net/tech/akara/nodes/2003-01-01/domlettes
 """
 
-import StringIO
 import os.path
 import cPickle
 import re
 
-from MoinMoin import caching, config, wikiutil, Page
+from MoinMoin import  Page
 from MoinMoin.parser.text_xslt import Parser as XsltParser
 from MoinMoin.parser.text_moin_wiki import Parser as WikiParser
 

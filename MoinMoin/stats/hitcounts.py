@@ -14,7 +14,7 @@
 
 _debug = 0
 
-from MoinMoin import caching, config, wikiutil, logfile
+from MoinMoin import caching, wikiutil, logfile
 from MoinMoin.Page import Page
 from MoinMoin.logfile import eventlog
 

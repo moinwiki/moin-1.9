@@ -13,7 +13,7 @@ except:
     from sets import Set as set
 
 from MoinMoin.formatter import FormatterBase
-from MoinMoin import wikiutil, i18n, config
+from MoinMoin import wikiutil, i18n
 from MoinMoin.Page import Page
 from MoinMoin.action import AttachFile
 

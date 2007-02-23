@@ -7,9 +7,9 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import unittest, os
+import unittest
 
-from MoinMoin import macro, wikiutil
+from MoinMoin import macro
 from MoinMoin.parser.text import Parser
 from MoinMoin.formatter.text_html import Formatter
 

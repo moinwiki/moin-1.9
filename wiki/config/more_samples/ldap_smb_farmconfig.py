@@ -76,8 +76,8 @@ from MoinMoin.config.multiconfig import DefaultConfig
 
 class FarmConfig(DefaultConfig):
 
-    from MoinMoin import auth
-    auth = [auth.ldap_login, auth.smb_mount, auth.moin_cookie]
+    from MoinMoin import auth as authmod
+    auth = [authmod.ldap_login, authmod.smb_mount, authmod.moin_session]
 
     import ldap
     ldap_uri = 'ldap://ad.example.org' # ldap / active directory server URI

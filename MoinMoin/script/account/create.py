@@ -42,7 +42,7 @@ class PluginScript(MoinScript):
         self.init_request()
         request = self.request
 
-        from MoinMoin import user, wikiutil
+        from MoinMoin import user
         u = user.User(request, None, self.options.uname, password=self.options.password)
         u.email = self.options.email
         u.aliasname = self.options.ualiasname or ''

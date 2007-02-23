@@ -6,9 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, os, shutil, errno
+import sys, os, shutil
 from stat import S_ISDIR, ST_MODE, S_IMODE
-from MoinMoin import config
 
 #############################################################################
 ### Misc Helpers

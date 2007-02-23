@@ -10,9 +10,6 @@
 ### Module import / Plugins
 #############################################################################
 
-import sys
-
-
 def isImportable(module):
     """ Check whether a certain module is available.
     """

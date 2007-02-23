@@ -9,10 +9,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, traceback, os
+import os
 
 from MoinMoin.formatter import FormatterBase
-from MoinMoin import wikiutil, config
+from MoinMoin import wikiutil
 from MoinMoin.error import CompositeError
 from MoinMoin.action import AttachFile
 
@@ -428,6 +428,7 @@ class Formatter(FormatterBase):
         drawing = fname
         fname = fname + ".png"
         filename = filename + ".png"
+        fpath = AttachFile.getFilename(self.request, pagename, fname)
         if not os.path.exists(fpath):
             return self.text("[drawing:%s]" % url)
         else:

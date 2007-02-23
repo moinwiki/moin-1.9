@@ -8,8 +8,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil
-from MoinMoin.util import pysupport
 from MoinMoin.userform import do_user_browser
 from MoinMoin.action.AttachFile import do_admin_browser
 

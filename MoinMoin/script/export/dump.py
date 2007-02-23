@@ -11,7 +11,7 @@
 
 """
 
-import sys, os, time, StringIO, codecs, shutil, re, errno
+import sys, os, time, codecs, shutil, re, errno
 
 from MoinMoin import config, wikiutil, Page
 from MoinMoin import script
@@ -90,7 +90,7 @@ class PluginScript(script.MoinScript):
 
         # Prepare output directory
         if not self.options.target_dir:
-            _util.fatal("you must use --target-dir=/your/output/path to specify the directory we write the html files to")
+            script.fatal("you must use --target-dir=/your/output/path to specify the directory we write the html files to")
         outputdir = os.path.abspath(self.options.target_dir)
         try:
             os.mkdir(outputdir)

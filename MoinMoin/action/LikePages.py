@@ -13,8 +13,8 @@
 
 import re
 
-from MoinMoin.support import difflib
 from MoinMoin import config, wikiutil
+from MoinMoin.support import difflib
 from MoinMoin.Page import Page
 
 

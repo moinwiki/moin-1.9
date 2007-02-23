@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import config, util, wikiutil
+from MoinMoin import config, util
 
 
 def execute(pagename, request):

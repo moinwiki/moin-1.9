@@ -12,7 +12,7 @@ unsafe_names = ("id", "key", "val", "user_data", "enc_password")
 import os, time, sha, codecs
 
 from MoinMoin import config, caching, wikiutil, i18n
-from MoinMoin.util import filesys, timefuncs
+from MoinMoin.util import timefuncs
 
 
 def getUserList(request):

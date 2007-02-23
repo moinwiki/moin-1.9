@@ -6,9 +6,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import sys, xmlrpclib, re
+import sys, xmlrpclib
 
-from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 
 _debug = 0

@@ -149,7 +149,7 @@ class EmbedObject:
 
         if not argc:
            msg = 'Not enough arguments to EmbedObject macro! Try [[EmbedObject(attachment [,width=width] [,height=heigt])]]'
-           return "%s%s%s" % (formatter.sysmsg(1), formatter.text(msg), formatter.sysmsg(0))
+           return "%s%s%s" % (self.formatter.sysmsg(1), self.formatter.text(msg), self.formatter.sysmsg(0))
         else:
             self.target = args[0]
 

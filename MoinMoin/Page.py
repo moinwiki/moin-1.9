@@ -9,11 +9,10 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import StringIO, os, re, codecs, logging
+import os, re, codecs, logging
 
 from MoinMoin import config, caching, user, util, wikiutil
 from MoinMoin.logfile import eventlog
-from MoinMoin.util import filesys, timefuncs
 
 def is_cache_exception(e):
     args = e.args
@@ -240,7 +239,7 @@ class Page:
         
         @param pagedir: the storage path to the page directory
         """
-        realPath = filesys.realPathCase(pagedir)
+        realPath = util.filesys.realPathCase(pagedir)
         if not realPath is None:
             realPath = wikiutil.unquoteWikiname(realPath)
             self.page_name = realPath[-len(self.page_name):]
@@ -849,7 +848,7 @@ class Page:
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
             request.setHttpHeader("Status: 200 OK")
-            request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
+            request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
         else:
@@ -869,7 +868,7 @@ class Page:
             # to ensure cacheability where supported. Because we are sending
             # RAW (file) content, the file mtime is correct as Last-Modified header.
             request.setHttpHeader("Status: 200 OK")
-            request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
+            request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(os.path.getmtime(self._text_filename())))
             file_name = "%s.txt" % self.page_name
             text = self.get_raw_body()
             text = self.encodeTextMimeType(text)
@@ -1070,7 +1069,7 @@ class Page:
                         # if it does, we must not use the page file mtime as last modified value
                         # XXX The following code is commented because it is incorrect for dynamic pages:
                         #lastmod = os.path.getmtime(self._text_filename())
-                        #request.setHttpHeader("Last-Modified: %s" % timefuncs.formathttpdate(lastmod))
+                        #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
                         pass
                 else:
                     request.setHttpHeader('Status: 404 NOTFOUND')

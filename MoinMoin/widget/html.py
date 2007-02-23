@@ -666,19 +666,19 @@ class VAR(CompositeElement):
 ### Widgets
 #############################################################################
 
-class FormWidget(Widget):
-    """ Widget to display data as an HTML form.
-
-        TODO: write code to combine the labels, data and HTML DOM to a complete form.
-
-        INCOMPLETE!!!
-    """
-
-    def __init__(self, request, **kw):
-        Widget.__init__(self, request)
-        # FIXME     vvvv
-        self.form = form(**kw)
-
-    def render(self):
-        self.request.write(str(self.form))
+#class FormWidget(Widget):
+#    """ Widget to display data as an HTML form.
+#
+#        TODO: write code to combine the labels, data and HTML DOM to a complete form.
+#
+#        INCOMPLETE!!!
+#    """
+#
+#    def __init__(self, request, **kw):
+#        Widget.__init__(self, request)
+#        # FIXME     vvvv
+#        self.form = form(**kw)
+#
+#    def render(self):
+#        self.request.write(str(self.form))
 

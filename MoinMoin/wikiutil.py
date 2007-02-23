@@ -14,8 +14,8 @@ import re
 import time
 import urllib
 
-from MoinMoin import util, version, config
-from MoinMoin.util import pysupport, filesys, lock
+from MoinMoin import config
+from MoinMoin.util import pysupport, lock
 
 # Exceptions
 class InvalidFileNameError(Exception):
@@ -1396,8 +1396,8 @@ class ParameterParser:
         return parameter_list, parameter_dict
 
 
+""" never used:
     def _check_type(value, type, format):
-        """Never used!"""
         if type == 'n' and 's' in format: # n as s
             return value
 
@@ -1416,13 +1416,11 @@ class ParameterParser:
             if 'b' in format:
                 return value.lower() != 'false' # s-> b
 
-
         if 's' in format: # * -> s
             return str(value)
         else:
             pass # XXX error
 
-"""
 def main():
     pattern = "%i%sf%s%ifs%(a)s|%(b)s"
     param = ' 4,"DI\'NG", b=retry, a="DING"'

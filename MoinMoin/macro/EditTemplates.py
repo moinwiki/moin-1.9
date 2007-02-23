@@ -6,10 +6,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import re
-
 Dependencies = ["language"]
-from MoinMoin import wikiutil
 
 def execute(self, args):
     result = ''

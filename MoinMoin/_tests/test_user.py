@@ -8,9 +8,8 @@
 
 import unittest, os, dircache
 
-from MoinMoin._tests import TestConfig, TestSkiped
+from MoinMoin._tests import TestConfig, TestSkipped
 from MoinMoin import user, caching
-
 
 
 class EncodePasswordTestCase(unittest.TestCase):
@@ -162,7 +161,7 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         # Validate that we are not modifying existing user data file!
         if self.user.exists():
             self.user = None
-            raise TestsSkiped("Test user exists, will not override existing"
+            raise TestSkipped("Test user exists, will not override existing"
                               " user data file!")
 
         # Save test user
@@ -171,7 +170,7 @@ class LoginWithPasswordTestCase(unittest.TestCase):
         # Validate user creation
         if not self.user.exists():
             self.user = None
-            raise TestsSkiped("Can't create test user")
+            raise TestSkipped("Can't create test user")
 
 
 class GroupNameTestCase(unittest.TestCase):

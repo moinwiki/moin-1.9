@@ -8,9 +8,9 @@
 """
 
 import os, sys, time
+from StringIO import StringIO
 
 flag_quiet = 0
-
 
 # ScriptRequest -----------------------------------------------------------
 
@@ -26,7 +26,7 @@ class ScriptRequest(object):
     """
     def __init__(self, instream, outstream, errstream):
         self.instream = instream
-        self.outstream = outstrem
+        self.outstream = outstream
         self.errstream = errstream
 
     def read(self, n=None):
@@ -54,10 +54,10 @@ class ScriptRequestCLI(ScriptRequest):
         return self.request.read(n)
 
     def write(self, data):
-        return self.request.write(n)
+        return self.request.write(data)
 
     def write_err(self, data):
-        return self.request.write(n) # XXX use correct request method - log, error, whatever.
+        return self.request.write(data) # XXX use correct request method - log, error, whatever.
 
 class ScriptRequestStrings(ScriptRequest):
     """ When a script gets run by our xmlrpc server, we have the input as a

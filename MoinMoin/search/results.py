@@ -10,8 +10,9 @@
     @license: GNU GPL, see COPYING for details
 """
 
-import StringIO, time, re
-from MoinMoin import config, wikiutil
+import StringIO, time
+
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 
 ############################################################################
@@ -141,9 +142,9 @@ class FoundPage:
 
         # Filter by type and sort by sort using fast schwartzian transform.
         if sort == 'start':
-            tmp = [(match.start, match) for match in matches if instance(match, type)]
+            tmp = [(match.start, match) for match in matches if isinstance(match, type)]
         else:
-            tmp = [(match.weight(), match) for match in matches if instance(match, type)]
+            tmp = [(match.weight(), match) for match in matches if isinstance(match, type)]
         tmp.sort()
         if sort == 'weight':
             tmp.reverse()

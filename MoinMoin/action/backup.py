@@ -11,7 +11,7 @@
 """
 
 import os, re, time, tarfile
-import cStringIO
+
 from MoinMoin import wikiutil
 
 def addFiles(path, tar, exclude):

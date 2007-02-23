@@ -24,7 +24,7 @@
     @license: GPL, see COPYING for details
 """
 
-import os, sys, shutil, codecs
+import os, shutil, codecs
 
 from MoinMoin import config, wikiutil
 from MoinMoin.Page import Page

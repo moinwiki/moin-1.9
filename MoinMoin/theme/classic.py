@@ -12,7 +12,6 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import wikiutil, version
 from MoinMoin import caching
 from MoinMoin.theme import ThemeBase
 from MoinMoin.Page import Page

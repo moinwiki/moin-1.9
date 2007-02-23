@@ -34,7 +34,7 @@ class PluginScript(MoinScript):
         self.init_request()
         request = self.request
 
-        from MoinMoin import user, wikiutil
+        from MoinMoin import user
         if self.options.uid:
             u = user.User(request, self.options.uid)
         elif self.options.uname:

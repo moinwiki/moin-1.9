@@ -7,7 +7,7 @@
 
     @license: GNU GPL, see COPYING for details.
 """
-import StringIO, re, os, time
+import StringIO, re, time
 from MoinMoin import wikixml, config, wikiutil
 from MoinMoin.logfile import editlog
 from MoinMoin.util import timefuncs

@@ -10,7 +10,7 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-from MoinMoin import user, wikiutil, userform
+from MoinMoin import user, userform
 from MoinMoin.Page import Page
 
 def execute(pagename, request):

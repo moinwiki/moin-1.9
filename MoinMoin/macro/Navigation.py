@@ -7,7 +7,6 @@
 """
 
 import re
-from MoinMoin import config
 from MoinMoin.Page import Page
 
 Dependencies = ["namespace"]

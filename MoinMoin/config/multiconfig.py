@@ -779,7 +779,7 @@ also the spelling of the directory name.
         Since each wiki has unique plugins, we load the plugin package
         under the wiki configuration module, named self.siteid.
         """
-        import sys, imp
+        import imp
 
         name = self.siteid + '.plugin'
         try:

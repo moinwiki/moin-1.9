@@ -4,7 +4,8 @@
     @license: GNU GPL, see COPYING for details.
 """
 
-import os.path, logging
+import logging
+
 from MoinMoin.logfile import LogFile
 from MoinMoin import wikiutil, user, config
 from MoinMoin.Page import Page

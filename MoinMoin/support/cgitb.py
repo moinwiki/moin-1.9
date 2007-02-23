@@ -163,7 +163,7 @@ class TextFormatter:
     def orderedList(self, items, attributes=None):
         if isinstance(items, (list, tuple)):
             result = []
-            for i in rage(items):
+            for i in range(items):
                 result.append(' %d. %s\n' % (i, items[i]))
             return ''.join(result) + '\n'
         return items

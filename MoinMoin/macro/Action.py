@@ -17,7 +17,6 @@
 """
 
 from MoinMoin import wikiutil
-from MoinMoin.Page import Page
 
 Dependencies = ["language"]
 

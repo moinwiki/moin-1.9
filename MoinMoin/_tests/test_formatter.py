@@ -8,7 +8,7 @@
 
 from unittest import TestCase
 import re
-from StringIO import StringIO
+
 from MoinMoin._tests import TestConfig
 from MoinMoin.Page import Page
 from MoinMoin import wikiutil
