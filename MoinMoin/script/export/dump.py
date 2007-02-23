@@ -126,7 +126,7 @@ class PluginScript(script.MoinScript):
 
         wikiutil.quoteWikinameURL = lambda pagename, qfn=wikiutil.quoteWikinameFS: (qfn(pagename) + HTML_SUFFIX)
 
-        AttachFile.getAttachUrl = lambda pagename, filename, request, addts=0, escaped=0: (_attachment(request, pagename, filename, outputdir))
+        AttachFile.getAttachUrl = lambda pagename, filename, request: (_attachment(request, pagename, filename, outputdir))
 
         errfile = os.path.join(outputdir, 'error.log')
         errlog = open(errfile, 'w')

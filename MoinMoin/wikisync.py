@@ -10,14 +10,8 @@ import os
 import socket
 import xmlrpclib
 
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-
 from MoinMoin import wikiutil
-from MoinMoin.util import lock
+from MoinMoin.util import lock, pickle
 from MoinMoin.Page import Page
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.packages import unpackLine, packLine
@@ -156,7 +150,7 @@ class RemoteWiki(object):
         """ Returns the InterWiki ID. """
         return NotImplemented
 
-    def get_pages(self, **kwargs):
+    def get_pages(self, **kw):
         """ Returns a list of SyncPage instances. """
         return NotImplemented
 
@@ -310,7 +304,7 @@ class MoinLocalWiki(RemoteWiki):
 
     def getGroupItems(self, group_list):
         """ Returns all page names that are listed on the page group_list. """
-        from MoinMoin.wikidict import Group
+        from MoinMoin.wikidicts import Group
         pages = []
         for group_pagename in group_list:
             pages.extend(Group(self.request, group_pagename).members())

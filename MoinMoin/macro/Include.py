@@ -43,8 +43,8 @@ def extract_titles(body, title_re):
     for title, _ in title_re.findall(body):
         h = title.strip()
         level = 1
-        while h[level:level+1] == '=': level = level+1
-        depth = min(5, level)
+        while h[level:level+1] == '=':
+            level += 1
         title_text = h[level:-level].strip()
         titles.append((title_text, level))
     return titles
@@ -140,7 +140,6 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
                 result.append(_sysmsg % ('warning', 'Include: ' + _('Nothing found for "%s"!')) % to_re)
 
         if titlesonly:
-            newbody = []
             levelstack = []
             for title, level in extract_titles(body[from_pos:to_pos], title_re):
                 if levelstack:

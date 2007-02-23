@@ -673,7 +673,7 @@ def save_drawing(pagename, request):
         _addLogEntry(request, 'ATTDRW', pagename, basename + ext)
         filecontent = filecontent.replace("\r", "")
 
-    savepath = os.path.join(getAttachDir(request, pagename), basename + ext)
+    savepath = os.path.join(attach_dir, basename + ext)
     if ext == '.map' and not filecontent.strip():
         # delete map file if it is empty
         os.unlink(savepath)

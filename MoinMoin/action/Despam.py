@@ -64,7 +64,6 @@ def show_pages(request, pagename, editor, timestamp):
 
     timestamp = int(timestamp * 1000000)
     log = editlog.EditLog(request)
-    lines = []
     pages = {}
     #  mimic macro object for use of RecentChanges subfunctions
     macro = tmp()

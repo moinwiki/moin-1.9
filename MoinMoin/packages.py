@@ -41,7 +41,6 @@ class ScriptExit(Exception):
 
 def event_logfile(self, pagename, pagefile):
     # add event log entry
-    filename = self.request.rootpage.getPagePath('event-log', isfile=1)
     eventtype = 'SAVENEW'
     mtime_usecs = wikiutil.timestamp2version(os.path.getmtime(pagefile))
     elog = eventlog.EventLog(self.request)
@@ -116,6 +115,7 @@ class ScriptEngine:
         #Satisfy pylint
         self.msg = getattr(self, "msg", "")
         self.request = getattr(self, "request", None)
+
     def do_addattachment(self, zipname, filename, pagename, author=u"Scripting Subsystem", comment=u""):
         """
         Installs an attachment

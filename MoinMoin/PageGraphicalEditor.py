@@ -8,7 +8,7 @@
 import re
 
 from MoinMoin import PageEditor
-from MoinMoin import util, wikiutil
+from MoinMoin import wikiutil
 from MoinMoin.Page import Page
 from MoinMoin.widget import html
 from MoinMoin.widget.dialog import Status

@@ -157,7 +157,7 @@ class Formatter(FormatterBase):
             if depth <= self.curdepth:
                 # number of levels we want to go higher
                 numberOfLevels = self.curdepth-depth + 1
-                for i in range(numberOfLevels):
+                for dummy in range(numberOfLevels):
                     #find first non section node
                     while (self.cur.nodeName != "section" and self.cur.nodeName != "article"):
                         self.cur = self.cur.parentNode

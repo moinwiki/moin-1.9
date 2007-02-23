@@ -17,7 +17,7 @@ class PageHits:
     def __init__(self, macro, args):
         self.macro = macro
         self.request = macro.request
-        self.cache = cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
+        self.cache = caching.CacheEntry(self.request, 'charts', 'pagehits', scope='wiki', use_pickle=True)
 
     def execute(self):
         """ Execute the macro and return output """

@@ -15,7 +15,7 @@ mail_smarthost = 'localhost'
 mail_login = None
 charset = 'iso-8859-1'
 
-from meta import languages
+from MoinMoin.i18n.meta import languages
 
 def sendmail(mfrom, mto, subject, text):
     """
