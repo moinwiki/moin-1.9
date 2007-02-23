@@ -773,8 +773,7 @@ class Parser:
             level += 1
         depth = min(5, level)
 
-        # this is needed for Included pages
-        # TODO but it might still result in unpredictable results
+        # FIXME: needed for Included pages but might still result in unpredictable results
         # when included the same page multiple times
         title_text = h[level:-level].strip()
         pntt = self.formatter.page.page_name + title_text

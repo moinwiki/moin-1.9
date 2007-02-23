@@ -122,11 +122,6 @@ class Page:
         self.rev = kw.get('rev', 0) # revision of this page
         self.include_self = kw.get('include_self', 0)
 
-        # XXX uncomment to see how many pages we create....
-        #import sys, traceback
-        #print >>sys.stderr, "page %s" % repr(page_name)
-        #traceback.print_stack(limit=4, file=sys.stderr)
-
         formatter = kw.get('formatter', None)
         if isinstance(formatter, (str, unicode)): # mimetype given
             mimetype = str(formatter)
@@ -191,7 +186,7 @@ class Page:
             revfile.close()
             rev = int(revstr)
         except:
-            rev = 99999999 # XXX
+            rev = 99999999 # XXX do some better error handling
         return rev
 
     def get_rev_dir(self, pagedir, rev=0):
@@ -715,7 +710,7 @@ class Page:
             if isinstance(querystr, dict):
                 action = querystr.get('action', None)
             else:
-                action = None # XXX we don't support getting the action out of a str
+                action = None # we don't support getting the action out of a str
 
             querystr = wikiutil.makeQueryString(querystr)
 
@@ -1065,9 +1060,9 @@ class Page:
                         # use nocache headers if a user is logged in (which triggers personalisation features)
                         request.disableHttpCaching(level=1)
                     else:
-                        # TODO: we need to know if a page generates dynamic content
+                        # TODO: we need to know if a page generates dynamic content -
                         # if it does, we must not use the page file mtime as last modified value
-                        # XXX The following code is commented because it is incorrect for dynamic pages:
+                        # The following code is commented because it is incorrect for dynamic pages:
                         #lastmod = os.path.getmtime(self._text_filename())
                         #request.setHttpHeader("Last-Modified: %s" % util.timefuncs.formathttpdate(lastmod))
                         pass

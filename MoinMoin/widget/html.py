@@ -676,7 +676,6 @@ class VAR(CompositeElement):
 #
 #    def __init__(self, request, **kw):
 #        Widget.__init__(self, request)
-#        # FIXME     vvvv
 #        self.form = form(**kw)
 #
 #    def render(self):
