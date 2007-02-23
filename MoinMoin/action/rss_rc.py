@@ -21,8 +21,10 @@ def execute(pagename, request):
     """ Send recent changes as an RSS document
     """
     if not wikixml.ok:
-        #XXX send error message
-        pass
+        httpheaders = ["Content-Type: text/plain; charset=%s" % config.charset]
+        request.emit_http_headers(httpheaders)
+        request.write("rss_rc action is not supported because of missing pyxml module.")
+        return
 
     cfg = request.cfg
 

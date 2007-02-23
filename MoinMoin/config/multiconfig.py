@@ -429,7 +429,7 @@ reStructuredText Quick Reference
     # it confused many people by its name and default value of '/wiki' to the
     # wrong conclusion that it is the url of the wiki (the dynamic) stuff,
     # but it was used to address the static stuff (images, css, js).
-    # Thus we use the more clear url_prefix_static ['/staticXXX'] setting now.
+    # Thus we use the more clear url_prefix_static ['/moin_staticVVV'] setting now.
     # For a limited time, we still look at url_prefix - if it is not None, we
     # copy the value to url_prefix_static to ease transition.
     url_prefix = None
