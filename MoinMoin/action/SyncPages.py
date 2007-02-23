@@ -102,8 +102,8 @@ class ActionClass(object):
             "pageList": None,
             "groupList": None,
             "direction": "foo", # is defaulted below
-            "user": None,     # this should be refactored into a password agent
-            "password": None, # or OpenID like solution (XXX)
+            "user": None, # XXX should be refactored into a password agent or OpenID like solution
+            "password": None,
         }
 
         options.update(Dict(self.request, self.pagename).get_dict())
