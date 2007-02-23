@@ -460,7 +460,11 @@ Version 1.6.current:
     * AttachFile displays the upload dialogue now at top, this avoids lots of
       scrolling if you attach some new files to a page that already has lots of
       files attached.
-
+    * Removed "IE7 Hack" of Dean Edwards (has nothing to do with MS IE7).
+      It was not enabled by default, just by a cfg.hacks mechanism.
+      Reasons: it had trouble with FCKEditor and was not updated since a longer
+               time. OTOH, Microsoft released IE7. And there are lots of
+               other and better browsers anyway.
 
 
 Version 1.5.current:
