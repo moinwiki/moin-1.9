@@ -831,7 +831,7 @@ def get_file(pagename, request):
 
         request.emit_http_headers([
             'Content-Type: %s' % content_type,
-            'Last-Modified: %s' % timestamp, # TODO maybe add a short Expires: header here?
+            'Last-Modified: %s' % timestamp,
             'Content-Length: %d' % os.path.getsize(fpath),
             'Content-Disposition: %s; filename="%s"' % (content_dispo, filename_enc),
         ])
