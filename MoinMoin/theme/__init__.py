@@ -907,13 +907,14 @@ var search_hint = "%(search_hint)s";
             'Despam',
             'revert',
             'PackagePages',
+            'SyncPages',
             ]
 
         titles = {
             # action: menu title
             '__title__': _("More Actions:", formatted=False),
             # Translation may need longer or shorter separator
-            '__separator__': _('------------', formatted=False),
+            '__separator__': _('------------------------', formatted=False),
             'raw': _('Raw Text', formatted=False),
             'print': _('Print View', formatted=False),
             'refresh': _('Delete Cache', formatted=False),
@@ -928,6 +929,7 @@ var search_hint = "%(search_hint)s";
             'revert': _('Revert to this revision', formatted=False),
             'PackagePages': _('Package Pages', formatted=False),
             'RenderAsDocbook': _('Render as Docbook', formatted=False),
+            'SyncPages': _('Sync Pages', formatted=False),
             }
 
         options = []
@@ -973,8 +975,10 @@ var search_hint = "%(search_hint)s";
             for action in more:
                 data = {'action': action, 'disabled': ''}
                 # Always add spaces: AttachFile -> Attach File 
-                # XXX TODO do not create page just for using split_title
-                title = Page(request, action).split_title(force=1)
+                # XXX do not create page just for using split_title -
+                # creating pages for non-existant does 2 storage lookups 
+                #title = Page(request, action).split_title(force=1)
+                title = action
                 # Use translated version if available
                 data['title'] = _(title, formatted=False)
                 options.append(option % data)
