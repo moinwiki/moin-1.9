@@ -65,7 +65,11 @@ def getAttachDir(request, pagename, create=0):
             os.makedirs(attach_dir)
     else:
         # send file via CGI, from page storage area
-        attach_dir = Page(request, pagename).getPagePath("attachments", check_create=create)
+        if pagename == request.page.page_name:
+            page  = request.page # reusing existing page obj is faster
+        else:
+            page = Page(request, pagename)
+        attach_dir = page.getPagePath("attachments", check_create=create)
 
     return attach_dir
 
