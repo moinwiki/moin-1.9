@@ -811,7 +811,7 @@ var search_hint = "%(search_hint)s";
         @return: rss href
         """
         request = self.request
-        url = Page(request, 'RecentChanges').url(request, querystr={
+        url = page.url(request, querystr={
                 'action':'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
         return url
 
@@ -830,7 +830,7 @@ var search_hint = "%(search_hint)s";
             link = (u'<link rel="alternate" title="%s Recent Changes" '
                     u'href="%s" type="application/rss+xml">') % (
                         self.cfg.sitename,
-                        self.rsshref(page) )
+                        wikiutil.escape(self.rsshref(page)) )
         return link
 
     def html_head(self, d):
