@@ -811,7 +811,7 @@ var search_hint = "%(search_hint)s";
         @return: rss href
         """
         request = self.request
-        url = Page(request, 'RecentChanges').url(request, querystr={
+        url = page.url(request, querystr={
                 'action':'rss_rc', 'ddiffs': '1', 'unique': '1', }, escape=0, relative=False)
         return url
 
