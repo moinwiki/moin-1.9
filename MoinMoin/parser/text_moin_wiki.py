@@ -870,9 +870,8 @@ class Parser:
             self.macro = macro.Macro(self)
         return self.formatter.macro(self.macro, macro_name, args)
 
-    def scan(self, scan_re, line):
+    def scan(self, scan_re, line, inhibit_p=False):
         """ Scans one line
-        
         Append text before match, invoke replace() with match, and add text after match.
         """
         result = []
@@ -886,27 +885,27 @@ class Parser:
 
                 ###result.append(u'<span class="info">[add text before match: <tt>"%s"</tt>]</span>' % line[lastpos:match.start()])
 
-                if not (self.inhibit_p or self.in_pre or self.formatter.in_p):
+                if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p):
                     result.append(self.formatter.paragraph(1, css_class="line862"))
                 result.append(self.formatter.text(line[lastpos:match.start()]))
 
             # Replace match with markup
-            if not (self.inhibit_p or self.in_pre or self.formatter.in_p or
+            if not (inhibit_p or self.inhibit_p or self.in_pre or self.formatter.in_p or
                     self.in_table or self.in_list):
                 result.append(self.formatter.paragraph(1, css_class="line867"))
-            result.append(self.replace(match))
+            result.append(self.replace(match, inhibit_p))
             lastpos = match.end()
 
         ###result.append('<span class="info">[no match, add rest: <tt>"%s"<tt>]</span>' % line[lastpos:])
 
         # Add paragraph with the remainder of the line
-        if not (self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
+        if not (inhibit_p or self.in_pre or self.in_li or self.in_dd or self.inhibit_p or
                 self.formatter.in_p) and lastpos < len(line):
             result.append(self.formatter.paragraph(1, css_class="line874"))
         result.append(self.formatter.text(line[lastpos:]))
         return u''.join(result)
 
-    def replace(self, match):
+    def replace(self, match, inhibit_p=False):
         """ Replace match using type name """
         result = []
         for type, hit in match.groupdict().items():
@@ -914,7 +913,7 @@ class Parser:
 
                 ##result.append(u'<span class="info">[replace: %s: "%s"]</span>' % (type, hit))
                 # Open p for certain types
-                if not (self.inhibit_p or self.formatter.in_p
+                if not (inhibit_p or self.inhibit_p or self.formatter.in_p
                         or self.in_pre or (type in self.no_new_p_before)):
                     result.append(self.formatter.paragraph(1, css_class="line891"))
 
@@ -938,7 +937,7 @@ class Parser:
         else:
             return ''
 
-    def format(self, formatter):
+    def format(self, formatter, inhibit_p=False):
         """ For each line, scan through looking for magic
             strings, outputting verbatim any intervening text.
         """
@@ -1122,7 +1121,7 @@ class Parser:
 
             # Scan line, format and write
             scanning_re = self.in_pre and pre_scan_re or scan_re
-            formatted_line = self.scan(scanning_re, line)
+            formatted_line = self.scan(scanning_re, line, inhibit_p=inhibit_p)
             self.request.write(formatted_line)
             if self.in_pre == 'no_parser':
                 self.request.write(self.formatter.linebreak())

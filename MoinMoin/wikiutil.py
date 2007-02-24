@@ -1636,8 +1636,8 @@ def renderText(request, Parser, text, line_anchors=False):
     import StringIO
     out = StringIO.StringIO()
     request.redirect(out)
-    wikiizer = Parser(text, request, line_anchors=line_anchors)
-    wikiizer.format(request.formatter)
+    wikiizer = Parser(text, request)
+    wikiizer.format(request.formatter,inhibit_p=True)
     result = out.getvalue()
     request.redirect()
     del out
