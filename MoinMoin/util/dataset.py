@@ -18,6 +18,7 @@ class Column:
         ('sortable', 0),
         ('hidden', 0),
         ('align', ''),
+        ('autofilter', 0),
         ]
 
     def __init__(self, name, **kw):
@@ -42,10 +43,11 @@ class Dataset:
     Note: Dataset rows and column must contain only ascii or Unicode values!  
     """
 
-    def __init__(self):
+    def __init__(self, data_id=None):
         self.columns = []
         self.data = []
         self._pos = 0
+        self.data_id = data_id
 
     def __len__(self):
         return len(self.data)
