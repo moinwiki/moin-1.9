@@ -1167,16 +1167,16 @@ class Page:
 
             request.write(self.formatter.endDocument())
 
+        request.clock.stop('send_page')
+        if not content_only and self.default_formatter:
+            request.theme.send_closing_html()
+
         # cache the pagelinks
         if do_cache and self.default_formatter and page_exists:
             cache = caching.CacheEntry(request, self, 'pagelinks', scope='item', use_pickle=True)
             if cache.needsUpdate(self._text_filename()):
                 links = self.formatter.pagelinks
                 cache.update(links)
-
-        request.clock.stop('send_page')
-        if not content_only and self.default_formatter:
-            request.theme.send_closing_html()
 
         # restore old formatter (hopefully we dont throw any exception
         # that is catched again)
