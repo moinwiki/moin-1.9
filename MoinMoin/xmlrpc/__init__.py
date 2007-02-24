@@ -665,7 +665,6 @@ class XmlRpcBase:
         else:
             newpage = Page(self.request, pagename, rev=to_rev)
             newcontents = lambda: newpage.get_raw_body_str()
-            newrev = newpage.get_real_rev() # XXX newrev unused
 
         if oldcontents() and oldpage.get_real_rev() == newpage.get_real_rev():
             return xmlrpclib.Fault("ALREADY_CURRENT", "There are no changes.")
