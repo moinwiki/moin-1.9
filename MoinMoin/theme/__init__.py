@@ -830,7 +830,7 @@ var search_hint = "%(search_hint)s";
             link = (u'<link rel="alternate" title="%s Recent Changes" '
                     u'href="%s" type="application/rss+xml">') % (
                         self.cfg.sitename,
-                        self.rsshref(page) )
+                        wikiutil.escape(self.rsshref(page)) )
         return link
 
     def html_head(self, d):
