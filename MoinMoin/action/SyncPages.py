@@ -67,7 +67,7 @@ class ActionClass(object):
             try:
                 page_name = func()
                 self.log_status(self.INFO, _("Rolled back changes to the page %s."), (page_name, ))
-            except Exception, e:
+            except Exception:
                 temp_file = StringIO.StringIO()
                 traceback.print_exc(file=temp_file)
                 self.log_status(self.ERROR, _("Exception while calling rollback function:"), raw_suffix=temp_file.getvalue())

@@ -37,9 +37,9 @@ def execute(Macro, args):
     def _getDirectorySize(path):
         try:
             dirsize = 0
-            for root, dirs, files in os.walk(path):
+            for root, dummy, files in os.walk(path):
                 dirsize += sum([os.path.getsize(os.path.join(root, name)) for name in files])
-        except EnvironmentError, e:
+        except EnvironmentError:
             dirsize = -1
         return dirsize
 

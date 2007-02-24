@@ -373,7 +373,7 @@ class Index(BaseIndex):
                 elif mode == 'add':
                     if debug: request.log("%s (add)" % (filename,))
                     id = writer.index(doc)
-        except (OSError, IOError), err:
+        except (OSError, IOError):
             pass
 
     def _get_languages(self, page):

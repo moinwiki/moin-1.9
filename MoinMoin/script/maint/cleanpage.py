@@ -38,7 +38,7 @@ class PluginScript(MoinScript):
         elif 'current' in dir:
             try:
                 current = open(os.path.join(p, 'current')).read().strip()
-                curr = int(current)
+                int(current)
             except:
                 return 'current damaged'
             if current not in revs:

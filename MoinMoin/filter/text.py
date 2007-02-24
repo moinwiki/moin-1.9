@@ -17,7 +17,7 @@ def execute(indexobj, filename):
             data = f.read()
             f.close()
             return data
-        except UnicodeError, err:
+        except UnicodeError:
             pass
     f = file(filename, "r")
     data = f.read()

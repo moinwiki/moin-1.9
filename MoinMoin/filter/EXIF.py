@@ -986,7 +986,7 @@ class EXIF_header:
     def decode_maker_note(self):
         note = self.tags['EXIF MakerNote']
         make = self.tags['Image Make'].printable
-        model = self.tags['Image Model'].printable
+        #model = self.tags['Image Model'].printable # unused
 
         # Nikon
         # The maker note usually starts with the word Nikon, followed by the

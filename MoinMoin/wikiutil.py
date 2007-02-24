@@ -565,7 +565,7 @@ def load_wikimap(request):
             if not line or line[0] == '#': continue
             try:
                 line = "%s %s/InterWiki" % (line, request.getScriptname())
-                wikitag, urlprefix, trash = line.split(None, 2)
+                wikitag, urlprefix, dummy = line.split(None, 2)
             except ValueError:
                 pass
             else:

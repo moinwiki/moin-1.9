@@ -121,7 +121,7 @@ def execute(macro, text, args_re=re.compile(_args_re_pattern), title_re=re.compi
         if from_re:
             try:
                 from_match = re.compile(from_re, re.M).search(body)
-            except re.error, e:
+            except re.error:
                 ##result.append("*** fe=%s ***" % e)
                 from_match = re.compile(re.escape(from_re), re.M).search(body)
             if from_match:

@@ -122,7 +122,7 @@ class FormatterBase:
         pagename, filename = AttachFile.absoluteName(url, self.page.page_name)
         fname = wikiutil.taintfilename(filename)
         fpath = AttachFile.getFilename(self.request, pagename, fname)
-        base, ext = os.path.splitext(filename)
+        ext = os.path.splitext(filename)[1]
         Parser = wikiutil.getParserForExtension(self.request.cfg, ext)
         if Parser is not None:
             try:

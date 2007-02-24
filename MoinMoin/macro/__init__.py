@@ -371,7 +371,7 @@ class Macro:
             # we adjust by our local timezone's offset
             try:
                 tm = time.mktime(tm) - time.timezone - tzoffset
-            except (OverflowError, ValueError), err:
+            except (OverflowError, ValueError):
                 tm = 0 # incorrect, but we avoid an ugly backtrace
         else:
             # try raw seconds since epoch in UTC

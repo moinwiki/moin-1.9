@@ -54,7 +54,7 @@ def smb_mount(request, **kw):
             try:
                 if not os.path.exists(mountpoint):
                     os.makedirs(mountpoint) # the dir containing the mountpoint must be writeable for us!
-            except OSError, err:
+            except OSError:
                 pass
             env['PASSWD'] = password.encode(cfg.smb_coding)
         subprocess.call(cmd.encode(cfg.smb_coding), env=env, shell=True)

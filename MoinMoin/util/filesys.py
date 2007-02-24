@@ -29,7 +29,7 @@ def rename(oldname, newname):
         if os.path.isfile(newname):
             try:
                 os.remove(newname)
-            except OSError, er:
+            except OSError:
                 pass # let os.rename give us the error (if any)
     os.rename(oldname, newname)
 

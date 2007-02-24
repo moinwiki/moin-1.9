@@ -26,7 +26,7 @@ def execute(pagename, request):
 
     try:
         func = pysupport.importName("MoinMoin.stats.%s" % chart_type, 'draw')
-    except (ImportError, AttributeError), err:
+    except (ImportError, AttributeError):
         msg = _('Bad chart type "%s"!') % chart_type
         return request.page.send_page(msg=msg)
 

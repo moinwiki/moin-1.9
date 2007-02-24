@@ -154,7 +154,7 @@ class EditLog(LogFile):
                 try:
                     hostname = socket.gethostbyaddr(host)[0]
                     hostname = unicode(hostname, config.charset)
-                except (socket.error, UnicodeError), err:
+                except (socket.error, UnicodeError):
                     hostname = host
             else:
                 hostname = host
