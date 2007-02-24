@@ -69,7 +69,7 @@ def emit_footnotes(request, formatter):
         result.append(formatter.div(1, css_class='footnotes'))
 
         # Add footnotes list
-        result.append(formatter.bullet_list(1))
+        result.append(formatter.number_list(1))
 
         for ctr in range(request.footnote_ctr):
             fn_txt = request.footnotes[ctr]
@@ -83,8 +83,6 @@ def emit_footnotes(request, formatter):
             result.append(formatter.paragraph(1))
             result.append(formatter.anchorlink(1, None, id=fwdlink_id))
             result.append(formatter.anchorlink(0))
-            result.append(formatter.text(str(showidx+1)))
-            result.append(formatter.text(" "))
             result.append(wikiutil.renderText(request, WikiParser, fn_txt))
 
             items = []
@@ -104,7 +102,7 @@ def emit_footnotes(request, formatter):
             result.append(formatter.paragraph(0))
             result.append(formatter.listitem(0))
 
-        result.append(formatter.bullet_list(0))
+        result.append(formatter.number_list(0))
 
         # Finish div
         result.append(formatter.div(0))
