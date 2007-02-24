@@ -327,6 +327,9 @@ Version 1.6.current:
             add sistersites_force with sister sites we link to even if they do not
             have the page yet (will work only for moin as we don't know
             pagename>url transformation of other wikis)
+    * Make the FootNote macro filter duplicates and display a list of numbers
+      instead of a list of identical footnotes. Thanks to Johannes Berg for the
+      patch.
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
