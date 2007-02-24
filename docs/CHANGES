@@ -330,6 +330,8 @@ Version 1.6.current:
     * Make the FootNote macro filter duplicates and display a list of numbers
       instead of a list of identical footnotes. Thanks to Johannes Berg for the
       patch.
+    * autofilters for databrowser widget. Thanks to Johannes Berg for the patch.
+
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
