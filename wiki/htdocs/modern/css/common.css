@@ -137,10 +137,9 @@ td p {
 	border-top: 1pt solid gray;
 }
 
-.footnotes ul {
+.footnotes ol {
 	padding: 0 2em;
 	margin: 0 0 1em;
-	list-style: none;
 }
 
 .footnotes li {
