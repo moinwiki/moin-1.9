@@ -5,9 +5,10 @@
     This action allows you to delete a page.
 
     @copyright: 2006 MoinMoin:ThomasWaldmann
+                2007 ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
-
+import re
 from MoinMoin import wikiutil
 from MoinMoin.PageEditor import PageEditor
 from MoinMoin.action import ActionBase
@@ -23,13 +24,13 @@ class DeletePage(ActionBase):
         _ = self._
         self.form_trigger = 'delete'
         self.form_trigger_label = _('Delete')
-        pages = request.rootpage.getPageList(user='', exists='')
+        filterfn = re.compile(pagename).match
+        pages = request.rootpage.getPageList(user='', exists=1, filter=filterfn)
         self.subpages = []
         subpage = pagename + '/'
         for name in pages:
             if name.startswith(subpage) and self.request.user.may.delete(name):
                 self.subpages.append(name)
-                
 
     def is_allowed(self):
         # this is not strictly necessary because the underlying storage code checks
@@ -66,7 +67,7 @@ class DeletePage(ActionBase):
             for name in self.subpages:
                 self.page = PageEditor(self.request, name, do_editor_backup=0)
                 success_i, msg = self.page.deletePage(comment)
-                msgs += "%s " %msg
+                msgs += "%s " % msg
 
         return success, msgs
 
