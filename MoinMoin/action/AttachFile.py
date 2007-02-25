@@ -961,15 +961,14 @@ def send_viewfile(pagename, request):
             getAttachUrl(pagename, filename, request, escaped=1), timestamp, wikiutil.escape(filename, 1)))
         return
     elif mt.major == 'text':
-        # TODO: should use formatter here!
-        request.write("<pre>")
+        request.write(request.formatter.preformatted(1))
         # Try to decode file contents. It may return junk, but we
         # don't have enough information on attachments.
         content = open(fpath, 'r').read()
         content = wikiutil.decodeUnknownInput(content)
         content = wikiutil.escape(content)
-        request.write(content)
-        request.write("</pre>")
+        request.write(request.formatter.text(content))
+        request.write(request.formatter.preformatted(0))
         return
 
     package = packages.ZipPackage(request, fpath)
@@ -1006,11 +1005,10 @@ def view_file(pagename, request):
     request.theme.send_title(title, pagename=pagename)
 
     # send body
-    # TODO: use formatter startContent?
-    request.write('<div id="content">\n') # start content div
+    request.write(request.formatter.startContent())
     send_viewfile(pagename, request)
     send_uploadform(pagename, request)
-    request.write('</div>\n') # end content div
+    request.write(request.formatter.endContent())
 
     request.theme.send_footer(pagename)
     request.theme.send_closing_html()
