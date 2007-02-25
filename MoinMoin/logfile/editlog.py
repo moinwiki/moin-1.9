@@ -223,6 +223,5 @@ class EditLog(LogFile):
 
         newposition = self.position()
         logging.debug("editlog.news: new pos: %r new items: %r", newposition, items)
-        # FIXME if 1 item is changed, items is [oneitem, oneitem, oneitem]!
         return newposition, items
 
