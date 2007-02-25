@@ -146,9 +146,8 @@ def execute(pagename, request):
                 if line.action != 'ATTDEL':
                     from MoinMoin.action import AttachFile
                     page_dir = AttachFile.getAttachDir(request, pagename)
-                    filepath = os.path.join(page_dir, filename)
+                    filepath = os.path.join(page_dir, filename.encode(config.charset))
                     try:
-                        # FIXME, wrong path on non-std names
                         size = os.path.getsize(filepath)
                     except:
                         pass

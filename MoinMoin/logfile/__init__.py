@@ -120,7 +120,16 @@ class LogFile:
         """
         generate some attributes when needed
         """
-        if name == "_input":
+        if name == "_LogFile__rel_index": # Python black magic: this is the real name of the __rel_index attribute
+            # starting iteration from begin
+            self.__buffer1 = LineBuffer(self._input, 0, self.buffer_size)
+            self.__buffer2 = LineBuffer(self._input,
+                                        self.__buffer1.offsets[-1],
+                                        self.buffer_size)
+            self.__buffer = self.__buffer1
+            self.__rel_index = 0
+            return 0
+        elif name == "_input":
             try:
                 # Open the file (NOT using codecs.open, it breaks our offset calculation. We decode it later.).
                 # Use binary mode in order to retain \r - otherwise the offset calculation would fail.
