@@ -120,16 +120,7 @@ class LogFile:
         """
         generate some attributes when needed
         """
-        if name == "_LogFile__rel_index": # XXX where is this used?
-            # starting iteration from begin
-            self.__buffer1 = LineBuffer(self._input, 0, self.buffer_size)
-            self.__buffer2 = LineBuffer(self._input,
-                                        self.__buffer1.offsets[-1],
-                                        self.buffer_size)
-            self.__buffer = self.__buffer1
-            self.__rel_index = 0
-            return 0
-        elif name == "_input":
+        if name == "_input":
             try:
                 # Open the file (NOT using codecs.open, it breaks our offset calculation. We decode it later.).
                 # Use binary mode in order to retain \r - otherwise the offset calculation would fail.
@@ -296,7 +287,7 @@ class LogFile:
 
     def to_begin(self):
         """moves file position to the begin"""
-        if self.__buffer1.offsets[0] != 0:
+        if self.__buffer1 is None or self.__buffer1.offsets[0] != 0:
             self.__buffer1 = LineBuffer(self._input,
                                         0,
                                         self.buffer_size)
@@ -311,7 +302,7 @@ class LogFile:
         """moves file position to the end"""
         self._input.seek(0, 2) # to end of file
         size = self._input.tell()
-        if (not self.__buffer2) or (size > self.__buffer2.offsets[-1]):
+        if self.__buffer2 is None or size > self.__buffer2.offsets[-1]:
             self.__buffer2 = LineBuffer(self._input,
                                         size,
                                         self.buffer_size,
