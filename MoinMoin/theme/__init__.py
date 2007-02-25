@@ -299,48 +299,41 @@ class ThemeBase:
         the [page title] or [url title] syntax. In this case, we don't
         use localization, and the links goes to page or to the url, not
         the localized version of page.
-
-        TODO: refactor/cleanup!
-              * the ItemCache is seeing 3 requests for a normal navi_bar entry
-              * for user quicklinks stuff, ItemCache is seeing a 1st request for
-                WikiName:PageName, then a 2nd (correct) one for PageName
-              * page object gets recreated at the end, although we already have
-                one for some cases
+        
+        Supported syntax:
+            * PageName
+            * WikiName:PageName
+            * wiki:WikiName:PageName
+            * url
+            * all targets as seen above with title: [target title]
 
         @param text: the text used in config or user preferences
         @rtype: tuple
         @return: pagename or url, link to page or url
         """
         request = self.request
-
+        fmt = request.formatter
+        title = None
+        
         # Handle [pagename title] or [url title] formats
         if text.startswith('[') and text.endswith(']'):
+            text = text[1:-1].strip()
             try:
-                pagename, title = text[1:-1].strip().split(' ', 1)
-                title = title.strip()
+                pagename, title = text.split(' ', 1)
+                title = title.lstrip()
                 localize = 0
             except (ValueError, TypeError):
                 # Just use the text as is.
-                pagename = title = text
-
-        # Handle regular pagename like "FrontPage"
+                pagename = text
         else:
-            # Use localized pages for the current user
-            if localize:
-                page = wikiutil.getLocalizedPage(request, text)
-            else:
-                page = Page(request, text)
-            pagename = page.page_name
-            title = page.split_title()
-            title = self.shortenPagename(title)
-            link = page.link_to(request, title)
+            pagename = text
 
         for scheme in self.linkSchemas:
             if pagename.startswith(scheme):
+                if not title:
+                    title = pagename
                 title = wikiutil.escape(title)
-                link = self.request.formatter.url(1, pagename) + \
-                       self.request.formatter.text(title) +\
-                       self.request.formatter.url(0)
+                link = fmt.url(1, pagename) + fmt.text(title) + fmt.url(0)
                 return pagename, link
 
         # remove wiki: url prefix
@@ -353,19 +346,29 @@ class ThemeBase:
             thiswiki = request.cfg.interwikiname
             if interwiki == thiswiki:
                 pagename = page
-                title = page
             else:
-                return (pagename,
-                        self.request.formatter.interwikilink(True, interwiki, page) +
-                        page +
-                        self.request.formatter.interwikilink(False, interwiki, page)
-                        )
-
+                if not title:
+                    title = page
+                title = wikiutil.escape(title)
+                link = fmt.interwikilink(True, interwiki, page) + fmt.text(title) + fmt.interwikilink(False, interwiki, page)
+                return pagename, link
         except ValueError:
             pass
 
+        # Handle regular pagename like "FrontPage"
         pagename = request.normalizePagename(pagename)
-        link = Page(request, pagename).link_to(request, title)
+
+        # Use localized pages for the current user
+        if localize:
+            page = wikiutil.getLocalizedPage(request, pagename)
+        else:
+            page = Page(request, pagename)
+            
+        if not title:
+            title = page.split_title()
+            title = self.shortenPagename(title)
+
+        link = page.link_to(request, title)
 
         return pagename, link
 
