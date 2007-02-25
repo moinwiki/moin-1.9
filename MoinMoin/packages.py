@@ -3,6 +3,7 @@
     MoinMoin - Package Installer
 
     @copyright: 2005 by MoinMoin:AlexanderSchremmer
+                2007 by ReimarBauer
     @license: GNU GPL, see COPYING for details.
 """
 
@@ -296,6 +297,7 @@ class ScriptEngine:
             trivial = str2boolean(trivial)
             uid = user.getUserId(self.request, author)
             theuser = user.User(self.request, uid)
+            save_user = self.request.user
             self.request.user = theuser
             page = PageEditor(self.request, pagename, do_editor_backup=0, uid_override=author)
             try:
@@ -303,6 +305,7 @@ class ScriptEngine:
                 self.msg += u"%(pagename)s added \n" % {"pagename": pagename}
             except PageEditor.Unchanged:
                 pass
+            self.request.user = save_user
             page.clean_acl_cache()
         else:
             self.msg += u"action add revision: not enough rights - nothing done \n"
