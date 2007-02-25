@@ -4,9 +4,9 @@
 
     This macro creates a hitcount chart from the data in "event.log".
 
-    TODO: refactor to use a class, this code is ugly. A lot of code
-    here is duplicated in stats.useragents. Maybe both can use same
-    base class, maybe some parts are useful to other code.
+    TODO: refactor to use a class, this code is ugly.
+          A lot of code here is duplicated in stats.useragents.
+          Maybe both can use same base class, maybe some parts are useful to other code.
 
     @copyright: 2002-2004 by Jürgen Hermann <jh@web.de>
     @license: GNU GPL, see COPYING for details.

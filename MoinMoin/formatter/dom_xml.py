@@ -31,7 +31,7 @@ class Formatter(FormatterBase):
 
     # those tags want a <p> around them:
     need_p = [] # format_tags[:]
-    need_p.extend(['ol', 'a', 'pagelink', 'interwiki', 'macro']) # XXX add more
+    need_p.extend(['ol', 'a', 'pagelink', 'interwiki', 'macro']) # XXX add more tags
 
     # those tags inhibit auto-generation of a <p> after them:
     no_p_after = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul', 'pre',
@@ -53,13 +53,13 @@ class Formatter(FormatterBase):
     # if key tag is closed, auto-close all tags in value list if they are open
     close_on_close = {
         'table': ['td', 'tr'],
-        'td': ['tr'], # XXX WTF?
+        'td': ['tr'], # XXX WTF? this doesn't look correct.
         'tr': ['td'],
         'ol': ['li'],
         'ul': ['li'],
         }
 
-    # FIXME - this overrides the values defined above - FIXME XXX
+    # FIXME - this overrides the values defined above
     close_on_open = {}
     close_on_close = {}
 

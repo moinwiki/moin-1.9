@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # This is some sample code you might find useful when you want to use some
 # external cookie (made by some other program, not moin) with moin.
-# See the XXX places for customizing it to your needs. You need to put this
+# See the +++ places for customizing it to your needs. You need to put this
 # code into your farmconfig.py or wikiconfig.py.
 
 # HINT: this code is slightly outdated, if you fix it to work with 1.6, please send us a copy.
@@ -13,7 +13,7 @@ class FarmConfig(DefaultConfig):
         import Cookie
         user = None
         try_next = True # if True, moin tries the next auth method
-        cookiename = "whatever" # XXX external cookie name you want to use
+        cookiename = "whatever" # +++ external cookie name you want to use
 
         try:
             cookie = Cookie.SimpleCookie(request.saved_cookie)
@@ -23,7 +23,7 @@ class FarmConfig(DefaultConfig):
         if cookie and cookie.has_key(cookiename):
             import urllib
             cookievalue = cookie[cookiename].value
-            # XXX now we decode and parse the cookie value - edit this to fit your needs.
+            # +++ now we decode and parse the cookie value - edit this to fit your needs.
             # the minimum we need to get is auth_username. aliasname and email is optional.
             cookievalue = urllib.unquote(cookievalue) # cookie value is urlencoded, decode it
             cookievalue = cookievalue.decode('iso-8859-1') # decode cookie charset to unicode
@@ -34,7 +34,7 @@ class FarmConfig(DefaultConfig):
             try:
                 aliasname = "%s %s" % (cookievalue[1], cookievalue[2]) # aliasname is for cosmetical stuff only
                 email = cookievalue[3]
-            except IndexError: # XXX this is for debugging it, in case it does not work
+            except IndexError: # +++ this is for debugging it, in case it does not work
                 if 0:
                     f = open("cookie.log", "w")
                     f.write(repr(cookie))

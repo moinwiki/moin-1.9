@@ -153,7 +153,7 @@ class build_scripts_create(build_scripts):
                 'python': os.path.normpath(sys.executable),
                 'package': self.package_name,
                 'module': module,
-                'package_location': '/usr/lib/python/site-packages', # FIXME
+                'package_location': '/usr/lib/python/site-packages', # FIXME: we need to know the correct path
             }
 
             self.announce("creating %s" % outfile)

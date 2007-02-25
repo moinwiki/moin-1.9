@@ -22,7 +22,7 @@ class Request(RequestBase):
         self.http_user_agent = 'CLI/Script'
         self.url = url
         self.request_method = 'GET'
-        self.request_uri = '/' + pagename # TODO check
+        self.request_uri = '/' + pagename # TODO check if /pagename works as URI for CLI usage
         self.http_host = 'localhost'
         self.http_referer = ''
         self.script_name = '.'

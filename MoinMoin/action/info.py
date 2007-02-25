@@ -94,7 +94,7 @@ def execute(pagename, request):
 
         def render_action(text, query, **kw):
             kw.update(dict(rel='nofollow'))
-            if 0: # diff button doesnt work XXX
+            if 0: # XXX diff button doesnt work
                 params_html = []
                 for k, v in query.items():
                     params_html.append('<input type="hidden" name="%s" value="%s">' % (k, v))
@@ -200,9 +200,8 @@ def execute(pagename, request):
 
     request.emit_http_headers()
 
-    # This action uses page or wiki language TODO: currently
-    # page.language is broken and not available now, when we fix it,
-    # this will be automatically fixed.
+    # This action uses page or wiki language
+    # TODO: currently page.language is broken and not available now.
     lang = page.language or request.cfg.language_default
     request.setContentLanguage(lang)
     f = request.formatter

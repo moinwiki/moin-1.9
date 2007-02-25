@@ -36,7 +36,6 @@
     method that authentified the user.
 
     TODO: check against other cookie work (see wiki)  
-          reduce amount of XXX
           
     @copyright: 2005-2006 Bastian Blank, Florian Festi, MoinMoin:ThomasWaldmann,
                           MoinMoin:AlexanderSchremmer, Nick Phillips,

@@ -171,10 +171,8 @@ class Macro:
             the whole page name, so we only get one fragment that is the same
             as the pagename.
 
-            TODO: later this can get a macro on its own, more powerful and less
-                  special than WordIndex and TitleIndex.
-                  It should be able to filter for specific mimetypes, maybe match
-                  pagenames by regex (replace PageList?), etc.
+            TODO: _make_index could get a macro on its own, more powerful / less special than WordIndex and TitleIndex.
+                  It should be able to filter for specific mimetypes, maybe match pagenames by regex (replace PageList?), etc.
         """
         _ = self._
         request = self.request

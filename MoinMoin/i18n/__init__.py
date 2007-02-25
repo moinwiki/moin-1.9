@@ -61,7 +61,7 @@ def i18n_init(request):
         i18n_dir = os.path.join(request.cfg.moinmoin_dir, 'i18n')
         if meta_cache.needsUpdate(i18n_dir):
             _languages = {}
-            for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # only MoinMoin domain for now XXX
+            for lang_file in glob.glob(po_filename(request, language='*', domain='MoinMoin')): # XXX only MoinMoin domain for now
                 language, domain, ext = os.path.basename(lang_file).split('.')
                 t = Translation(language, domain)
                 f = file(lang_file)

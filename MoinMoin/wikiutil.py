@@ -1307,7 +1307,7 @@ class ParameterParser:
     def _parse_pattern(self, pattern):
         param_re = r"(%(?P<name>\(.*?\))?(?P<type>[ibfs]{1,3}))|\|"
         i = 0
-        #TODO: Optionals aren't checked
+        # TODO: Optionals aren't checked.
         self.optional = []
         named = False
         self.param_list = []
@@ -1561,7 +1561,7 @@ def link_tag(request, params, text=None, formatter=None, on=None, **kw):
                 attrs += ' id="%s"' % id
             if name:
                 attrs += ' name="%s"' % name
-            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params) # XXX wikiutil.escape(params) !?
+            tag = '<a%s href="%s/%s">' % (attrs, request.getScriptname(), params)
             if not on:
                 tag = "%s%s</a>" % (tag, text)
         request.log("Warning: wikiutil.link_tag called without formatter and without request.html_formatter. tag=%r" % (tag, ))

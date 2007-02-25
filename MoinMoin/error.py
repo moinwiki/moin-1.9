@@ -26,8 +26,6 @@ class Error(Exception):
     to unicode or the unicode to string, using config.charset.
             
     When you want to render an error, use unicode() or str() as needed.
-    
-    TODO: translate strings?
     """
 
     def __init__(self, message):

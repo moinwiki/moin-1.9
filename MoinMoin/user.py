@@ -687,9 +687,6 @@ class User:
         must check if the user is still subscribed to the page after we
         try to remove names from the list.
 
-        TODO: should we remove non-interwiki subscription? what if the
-        user want to subscribe to the same page in multiple wikis?
-
         @param pagename: name of the page to subscribe
         @type pagename: unicode
         @rtype: bool

@@ -12,7 +12,6 @@ import xmlrpclib
 from MoinMoin import auth, wikiutil, user
 
 def interwiki(request, **kw):
-    # TODO use auth_method and auth_attribs for User object
     username = kw.get('name')
     password = kw.get('password')
     login = kw.get('login')
@@ -32,6 +31,7 @@ def interwiki(request, **kw):
                 # show error message
                 return user_obj, True
 
+            # TODO: use auth_method and auth_attribs for User object
             u = user.User(request, name=username)
             for key, value in account_data.iteritems():
                 if key not in ["may", "id", "valid", "trusted"
@@ -44,7 +44,7 @@ def interwiki(request, **kw):
             return u, True
         else:
             pass
-            # XXX redirect to homewiki
+            # TODO: redirect to homewiki
 
     return user_obj, True
 

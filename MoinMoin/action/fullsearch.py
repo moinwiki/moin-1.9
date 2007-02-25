@@ -71,8 +71,7 @@ def execute(pagename, request, fieldname='value', titlesearch=0):
     if titlesearch:
         context = 0
     elif advancedsearch:
-        # XXX: hardcoded
-        context = 180
+        context = 180 # XXX: hardcoded context count for advancedsearch
     else:
         context = int(request.form.get('context', [0])[0])
 
