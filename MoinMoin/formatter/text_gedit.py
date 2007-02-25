@@ -54,7 +54,7 @@ class Formatter(text_html.Formatter):
         html_class = 'badinterwiki' # we use badinterwiki in any case to simplify reverse conversion
         href = wikiutil.quoteWikinameURL(pagename) or "/" # FCKeditor behaves strange on empty href
         title = kw.get('title', interwiki)
-        return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with pages with umlauts
+        return self.url(1, href, title=title, css=html_class) # interwiki links with pages with umlauts
 
     def attachment_inlined(self, url, text, **kw):
         if url == text:

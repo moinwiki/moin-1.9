@@ -693,18 +693,19 @@ class Page:
         self._raw_body = body
         self._raw_body_modified = modified
 
-    def url(self, request, querystr=None, escape=1, anchor=None, relative=True):
-        """ Return complete URL for this page, including scriptname
+    def url(self, request, querystr=None, anchor=None, relative=True, **kw):
+        """ Return complete URL for this page, including scriptname.
+            The URL is NOT escaped, if you write it to HTML, use wikiutil.escape
+            (at least if you have a querystr, to escape the & chars).
 
         @param request: the request object
         @param querystr: the query string to add after a "?" after the url
             (str or dict, see wikiutil.makeQueryString)
-        @param escape: escape url for html, to be backward compatible
-            with old code (bool)
         @param anchor: if specified, make a link to this anchor
         @rtype: str
         @return: complete url of this page, including scriptname
         """
+        assert(isinstance(anchor, (type(None), str, unicode)))
         # Create url, excluding scriptname
         url = wikiutil.quoteWikinameURL(self.page_name)
         if querystr:
@@ -714,16 +715,6 @@ class Page:
                 action = None # we don't support getting the action out of a str
 
             querystr = wikiutil.makeQueryString(querystr)
-
-            # TODO: remove in 2.0
-            # Escape query string to be compatible with old 3rd party code
-            # New code should call with escape=0 to prevent the warning.
-            if escape:
-                import warnings
-                warnings.warn("In moin 2.0 query string in url will not be escaped. "
-                              "See http://moinmoin.wikiwikiweb.de/ApiChanges. "
-                              "%s" % querystr)
-                querystr = wikiutil.escape(querystr)
 
             # make action URLs denyable by robots.txt:
             if action is not None and request.cfg.url_prefix_action is not None:
@@ -740,7 +731,7 @@ class Page:
 
     def link_to_raw(self, request, text, querystr=None, anchor=None, **kw):
         """ core functionality of link_to, without the magic """
-        url = self.url(request, querystr, escape=0, anchor=anchor)
+        url = self.url(request, querystr, anchor=anchor)
         # escaping is done by link_tag -> formatter.url -> ._open()
         link = wikiutil.link_tag(request, url, text,
                                  formatter=getattr(self, 'formatter', None), **kw)

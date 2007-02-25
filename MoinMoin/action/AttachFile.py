@@ -159,8 +159,7 @@ def info(pagename, request):
     if os.path.isdir(attach_dir):
         files = os.listdir(attach_dir)
     page = Page(request, pagename)
-    # TODO: remove escape=0 in 2.0
-    link = page.url(request, {'action': 'AttachFile'}, escape=0)
+    link = page.url(request, {'action': 'AttachFile'})
     attach_info = _('There are <a href="%(link)s">%(count)s attachment(s)</a> stored for this page.', formatted=False) % {
         'count': len(files),
         'link': wikiutil.escape(link)

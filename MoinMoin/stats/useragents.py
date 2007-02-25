@@ -35,8 +35,7 @@ def linkto(pagename, request, params=''):
     if params:
         querystr += '&amp;' + params
 
-    # TODO: remove escape=0 in 2.0
-    data = {'url': page.url(request, querystr, escape=0)}
+    data = {'url': page.url(request, querystr)}
     data.update(request.cfg.chart_options)
     result = ('<img src="%(url)s" width="%(width)d" height="%(height)d"'
               ' alt="useragents chart">') % data
