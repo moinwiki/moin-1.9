@@ -333,7 +333,7 @@ Version 1.6.current:
       instead of a list of identical footnotes. Thanks to Johannes Berg for the
       patch.
     * autofilters for databrowser widget. Thanks to Johannes Berg for the patch.
-
+    * action DeletePage and RenamePage could now be used for subpages of a page too
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
