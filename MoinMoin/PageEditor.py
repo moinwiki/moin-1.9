@@ -386,9 +386,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
 
         # Add textarea with page text
 
-        # TODO: currently self.language is None at this point. We have
-        # to do processing instructions parsing earlier, or move page
-        # language into meta file.
+        # TODO: currently self.language is None at this point.
+        # We have to do processing instructions parsing earlier, or move page language into meta file.
         lang = self.language or request.cfg.language_default
 
         self.sendconfirmleaving()

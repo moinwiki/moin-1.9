@@ -446,7 +446,7 @@ class ThemeBase:
             items.append(item % (cls, link))
 
         # Add sister pages.
-        for sistername in request.cfg.sistersites: # TODO: sort?
+        for sistername in request.cfg.sistersites: # TODO: sort sistersites?
             if sistername == request.cfg.interwikiname: # it is THIS wiki
                 cls = 'sisterwiki current'
                 items.append(item % (cls, sistername))
@@ -674,9 +674,8 @@ class ThemeBase:
         """
         if page.exists() and self.request.user.may.read(page.page_name):
             # These  actions show the  page content.
-            # TODO: on new action, page info will not show. A better
-            # solution will be if the action itself answer the question:
-            # showPageInfo().
+            # TODO: on new action, page info will not show.
+            # A better solution will be if the action itself answer the question: showPageInfo().
             contentActions = [u'', u'show', u'refresh', u'preview', u'diff',
                               u'subscribe', u'RenamePage', u'DeletePage',
                               u'SpellCheck', u'print']
@@ -879,9 +878,8 @@ var search_hint = "%(search_hint)s";
         enabled browsers, and acceptable behavior for those who prefer
         not to use Javascript.
 
-        TODO: Move actionsMenuInit() into body onload. This require
-        that the theme will render body, its currently done on
-        wikiutil/page.
+        TODO: Move actionsMenuInit() into body onload - requires that the theme will render body,
+              it is currently done in wikiutil/page.
         
         @param page: current page, Page object
         @rtype: unicode

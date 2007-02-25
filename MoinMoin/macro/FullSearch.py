@@ -19,9 +19,8 @@
     interactive search, and this kind of search is used usually for
     Category pages, where we don't care about the context.
 
-    TODO: If we need to have context for some cases, either we add a
-    context argument, or make another macro that use context, which may
-    be easier to use.
+    TODO: If we need to have context for some cases, either we add a context argument,
+          or make another macro that uses context, which may be easier to use.
 
     @copyright: 2000-2004 by Jürgen Hermann <jh@web.de>,
                 2005 MoinMoin:FranzPletz

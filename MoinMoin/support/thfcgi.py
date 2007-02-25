@@ -30,11 +30,8 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 """
 
-# TODO:
-#
-# Compare compare the number of bytes received on FCGI_STDIN with
-# CONTENT_LENGTH and abort the update if the two numbers are not equal.
-#
+# TODO: Compare compare the number of bytes received on FCGI_STDIN with
+#       CONTENT_LENGTH and abort the update if the two numbers are not equal.
 
 debug = False
 

@@ -380,7 +380,6 @@ class BaseIndex:
                 logging.info("Cannot load filter for mimetype." + modulename)
         try:
             data = execute(self, filename)
-            # XXX: proper debugging?
             #if debug:
             #    logging.info("Filter %s returned %d characters for file %s" % (modulename, len(data), filename))
         except (OSError, IOError), err:
