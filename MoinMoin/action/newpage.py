@@ -89,7 +89,7 @@ class NewPage:
             if parent:
                 pagename = "%s/%s" % (parent, pagename)
 
-            url = Page(self.request, pagename).url(self.request, query, escape=0, relative=False)
+            url = Page(self.request, pagename).url(self.request, query, relative=False)
             self.request.http_redirect(url)
 
         return ''

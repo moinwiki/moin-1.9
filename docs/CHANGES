@@ -65,6 +65,8 @@ Version 1.6.current:
     get reverted.
 
   Developer notes (these should be moved to the end in the release):
+    * Page.url() does not escape any more. You have to use wikiutil.escape()
+      yourself if you want to write the URL to HTML and it contains e.g. &.
     * the testing wikiconfig moved to tests/wikiconfig.py, the testing wiki
       is now created in tests/wiki/...
     * killed "processors" (finally), formatter method changed to:

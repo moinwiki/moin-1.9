@@ -529,7 +529,7 @@ class Formatter(FormatterBase):
                 else:
                     html_class = 'interwiki'
                 title = kw.get('title', wikitag)
-                return self.url(1, href, title=title, do_escape=1, css=html_class) # interwiki links with umlauts
+                return self.url(1, href, title=title, css=html_class) # interwiki links with umlauts
             else:
                 return self.url(0)
 
@@ -540,7 +540,7 @@ class Formatter(FormatterBase):
         Call once with on=1 to start the link, and again with on=0
         to end it (no other arguments are needed when on==0).
 
-        do_escape: XXX doesn't work yet
+        do_escape: filters url through wikiutil.escape
 
         Keyword params:
             url - the URL to link to; will go through Wiki URL mapping.
@@ -564,9 +564,8 @@ class Formatter(FormatterBase):
                 del kw['href']
             if url is not None:
                 url = wikiutil.mapURL(self.request, url)
-                # TODO just calling url_quote does not work, as it will also quote "http:" to "http%xx" X)
-                if 0: # do_escape: # protocol and server part must not get quoted, path should get quoted
-                    url = wikiutil.url_quote(url)
+                if do_escape:
+                    url = wikiutil.escape(url)
                 attrs['href'] = url
 
             if css:

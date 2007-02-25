@@ -15,7 +15,9 @@ from MoinMoin.Page import Page
 from MoinMoin.wikixml.util import RssGenerator
 
 def full_url(request, page, querystr=None, anchor=None):
-    return request.getQualifiedURL(page.url(request, relative=False, anchor=anchor, querystr=querystr))
+    url = page.url(request, relative=False, anchor=anchor, querystr=querystr)
+    url = wikiutil.escape(url)
+    return request.getQualifiedURL(url)
 
 def execute(pagename, request):
     """ Send recent changes as an RSS document
