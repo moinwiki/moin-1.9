@@ -1505,22 +1505,29 @@ class Page:
         @rtype: MoinMoin.security.AccessControlList
         @return: ACL of this page
         """
-        request.clock.start('getACL')
-        # Try the cache or parse acl and update the cache
-        currentRevision = self.current_rev()
-        cache_name = self.page_name
-        cache_key = 'acl'
-        cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
-        if cache_data is None:
-            aclRevision, acl = None, None
-        else:
-            aclRevision, acl = cache_data
-        if aclRevision != currentRevision:
-            acl = self.parseACL()
-            cache_data = (currentRevision, acl)
-            request.cfg.cache.meta.putItem(request, cache_name, cache_key, cache_data)
-        request.clock.stop('getACL')
-        return acl
+        try:
+            return self.__acl # for request.page, this is n-1 times used
+        except AttributeError:
+            # the caching here is still useful for pages != request.page,
+            # when we have multiple page objects for the same page name.
+            request.clock.start('getACL')
+            # Try the cache or parse acl and update the cache
+            currentRevision = self.current_rev()
+            cache_name = self.page_name
+            cache_key = 'acl'
+            cache_data = request.cfg.cache.meta.getItem(request, cache_name, cache_key)
+            if cache_data is None:
+                aclRevision, acl = None, None
+            else:
+                aclRevision, acl = cache_data
+            logging.debug("currrev: %r, cachedaclrev: %r" % (currentRevision, aclRevision))
+            if aclRevision != currentRevision:
+                acl = self.parseACL()
+                cache_data = (currentRevision, acl)
+                request.cfg.cache.meta.putItem(request, cache_name, cache_key, cache_data)
+            self.__acl = acl
+            request.clock.stop('getACL')
+            return acl
 
     def parseACL(self):
         """ Return ACLs parsed from the last available revision 
