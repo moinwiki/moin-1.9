@@ -21,7 +21,7 @@
 maxread = 10000
 minwordlen = 4
 
-blacklist = ('.iso', # CD/DVD images, TODO: add nero/... stuff
+blacklist = ('.iso', '.nrg', # CD/DVD images
              '.zip', '.rar', '.lzh', '.lha',
              '.tar', '.gz', '.tgz', '.bz2', '.tb2', '.z',
              '.exe', '.com', '.dll', '.cab', '.msi', '.bin', # windows
