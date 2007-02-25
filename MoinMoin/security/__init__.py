@@ -16,6 +16,7 @@
 
 import re
 from MoinMoin import user
+from MoinMoin.Page import Page
 
 #############################################################################
 ### Basic Permissions Interface -- most features enabled by default
@@ -32,8 +33,6 @@ class Permissions:
     def __init__(self, user):
         """ Calculate the permissons `user` has.
         """
-        from MoinMoin.Page import Page
-        self.Page = Page
         self.name = user.name
         self.request = user._request
 
@@ -50,9 +49,16 @@ class Permissions:
             checking function for it. Else raise an error.
         """
         request = self.request
-        Page = self.Page
         if attr in request.cfg.acl_rights_valid:
-            return lambda pagename, Page=Page, request=request, attr=attr: Page(request, pagename).getACL(request).may(request, self.name, attr)
+            def check(request, pagename, user, right):
+                if pagename == request.page.page_name:
+                    p = request.page # reuse is good
+                else:
+                    p = Page(request, pagename)
+                acl = p.getACL(request) # this will be fast in a reused page obj
+                return acl.may(request, user, right)
+            return lambda pagename: check(self.request, pagename, self.name, attr)
+            ##return lambda pagename, Page=Page, request=request, attr=attr: Page(request, pagename).getACL(request).may(request, self.name, attr)
         else:
             raise AttributeError, attr
 
