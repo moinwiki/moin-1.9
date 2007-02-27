@@ -188,6 +188,11 @@ function load() {
     // TODO: create separate onload for each type of view and set the
     // correct function name in the html. 
     // e.g <body onlod='editor_onload()'>
+
+    // login focus
+    if (document.forms['loginform']) {
+    	document.forms['loginform'].elements['name'].focus();
+    }
     
     // Page view stuff
     update_edit_links();
