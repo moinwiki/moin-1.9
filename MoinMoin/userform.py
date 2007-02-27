@@ -641,7 +641,7 @@ class Login:
         hint = _("To create an account, see the %(userprefslink)s page. To recover a lost password, go to %(sendmypasswordlink)s.") % {
                  'userprefslink': userprefslink,
                  'sendmypasswordlink': sendmypasswordlink}
-        self._form = html.FORM(action=action)
+        self._form = html.FORM(action=action, name="loginform")
         self._table = html.TABLE(border="0")
 
         # Use the user interface language and direction
