@@ -81,33 +81,43 @@ class SystemInfo:
         buf.write(u'<dl>')
         row(_('Python Version'), sys.version)
         row(_('MoinMoin Version'), _('Release %s [Revision %s]') % (version.release, version.revision))
-        if ftversion:
-            row(_('4Suite Version'), ftversion)
+        if not request.user.valid:
+            # for an anonymous user it ends here.
+            buf.write(u'</dl>')
+            return buf.getvalue()
 
-        pagelist = request.rootpage.getPageList(user='')
-        systemPages = [page for page in pagelist
-                   if wikiutil.isSystemPage(request, page)]
-        row(_('Number of pages'), str(len(pagelist)-len(systemPages)))
-        row(_('Number of system pages'), str(len(systemPages)))
+        if request.user.isSuperUser():
+            # superuser gets all page dependent stuff only
+            if ftversion:
+                row(_('4Suite Version'), ftversion)
 
-        totalsize = reduce(operator.add, [Page(request, name).size()
-                                          for name in pagelist])
+            pagelist = request.rootpage.getPageList(user='')
+            systemPages = []
+            totalsize = 0
+            for page in pagelist:
+                if wikiutil.isSystemPage(request, page):
+                    systemPages.append(page)
+                totalsize += Page(request, page).size()
 
-        row(_('Accumulated page sizes'), self.formatInReadableUnits(totalsize))
-        data_dir = request.cfg.data_dir
-        row(_('Disk usage of %(data_dir)s/pages/') % {'data_dir': data_dir},
-            self.formatInReadableUnits(self.getDirectorySize(os.path.join(data_dir, 'pages'))))
-        row(_('Disk usage of %(data_dir)s/') % {'data_dir': data_dir},
+            row(_('Number of pages'), str(len(pagelist)-len(systemPages)))
+            row(_('Number of system pages'), str(len(systemPages)))
+
+            row(_('Accumulated page sizes'), self.formatInReadableUnits(totalsize))
+            data_dir = request.cfg.data_dir
+            row(_('Disk usage of %(data_dir)s/pages/') % {'data_dir': data_dir},
+                self.formatInReadableUnits(self.getDirectorySize(os.path.join(data_dir, 'pages'))))
+            row(_('Disk usage of %(data_dir)s/') % {'data_dir': data_dir},
             self.formatInReadableUnits(self.getDirectorySize(data_dir)))
 
-        edlog = editlog.EditLog(request)
-        row(_('Entries in edit log'), "%s (%s)" % (edlog.lines(), self.formatInReadableUnits(edlog.size())))
+            edlog = editlog.EditLog(request)
+            row(_('Entries in edit log'), "%s (%s)" % (edlog.lines(), self.formatInReadableUnits(edlog.size())))
 
         # This puts a heavy load on the server when the log is large
-        eventlogger = eventlog.EventLog(request)
-        nonestr = _("NONE")
-        row('Event log', self.formatInReadableUnits(eventlogger.size()))
+            eventlogger = eventlog.EventLog(request)
+            nonestr = _("NONE")
+            row('Event log', self.formatInReadableUnits(eventlogger.size()))
 
+        # a valid user gets info about all installed extensions
         row(_('Global extension macros'), ', '.join(macro.modules) or nonestr)
         row(_('Local extension macros'),
             ', '.join(wikiutil.wikiPlugins('macro', self.macro.cfg)) or nonestr)
