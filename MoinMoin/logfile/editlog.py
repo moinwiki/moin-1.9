@@ -126,7 +126,7 @@ class EditLogLine:
 
 class EditLog(LogFile):
 
-    def __init__(self, request, filename=None, buffer_size=65536, **kw):
+    def __init__(self, request, filename=None, buffer_size=4096, **kw):
         if filename is None:
             rootpagename = kw.get('rootpagename', None)
             if rootpagename:
