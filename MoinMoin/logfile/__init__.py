@@ -78,7 +78,7 @@ class LogFile:
     Overwrite .parser() and .add() to customize this class to special log files
     """
 
-    def __init__(self, filename, buffer_size=65536):
+    def __init__(self, filename, buffer_size=4096):
         """
         @param filename: name of the log file
         @param buffer_size: approx. size of one buffer in bytes

@@ -34,7 +34,8 @@ class ItemCache:
         """
         self.name = name
         self.cache = {}
-        self.log_pos = None
+        self.log_pos = None # TODO: initialize this to EOF pos of log
+                            # to avoid reading in the whole log on first request
         self.requests = 0
         self.hits = 0
 
@@ -81,7 +82,8 @@ class ItemCache:
         """
         from MoinMoin.logfile import editlog
         elog = editlog.EditLog(request)
-        self.log_pos, items = elog.news(self.log_pos)
+        old_pos = self.log_pos
+        new_pos, items = elog.news(old_pos)
         if items:
             if self.name == 'meta':
                 for item in items:
@@ -93,6 +95,8 @@ class ItemCache:
             elif self.name == 'pagelists':
                 logging.debug("cache: clearing pagelist cache")
                 self.cache = {}
+        self.log_pos = new_pos # important to do this at the end -
+                               # avoids threading race conditions
 
 
 class Page:
