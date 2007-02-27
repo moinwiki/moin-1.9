@@ -85,8 +85,8 @@ class NewPage:
 
         if label:
             # Try to get a translation, this will probably not work in
-            # most case, but better than nothing.
-            label = _(label)
+            # most cases, but better than nothing.
+            label = self.request.getText(label, formatted=False)
         else:
             label = _("Create New Page")
 
