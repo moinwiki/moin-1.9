@@ -1077,8 +1077,10 @@ actionsMenuInit('%(label)s');
                  elif self.request.cfg.supplementation_page and not self.request.getPragma('supplementation-page', 1) in ('off', '0'):
                      editbar_actions.append(self.supplementation_page_nameLink(page))
              elif editbar_item == 'Comments':
-                 # we just use <a> to get same style as other links: 
-                 editbar_actions.append('<a id="toggleCommentsButton" onClick="toggleComments();">%s</a>' % _('Comments'))
+                 # we just use <a> to get same style as other links, but we add some dummy
+                 # link target to get correct mouseover pointer appearance. return false
+                 # keeps the browser away from jumping to the link target:: 
+                 editbar_actions.append('<a href="#" id="toggleCommentsButton" onClick="toggleComments();return false;">%s</a>' % _('Comments'))
              elif editbar_item == 'Edit':
                  editbar_actions.append(self.editorLink(page))
              elif editbar_item == 'Info':
