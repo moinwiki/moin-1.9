@@ -583,7 +583,8 @@ Try a different name.""") % (newpagename,)
                 _('Page "%s" was successfully deleted!') % (self.page_name,))
 
         except self.SaveError, message:
-            # XXX Error handling
+            # XXX do not only catch base class SaveError here, but
+            # also the derived classes, so we can give better err msgs
             success = False
             msg = "SaveError has occured in PageEditor.deletePage. We need locking there."
 
