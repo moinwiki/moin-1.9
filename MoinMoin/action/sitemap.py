@@ -82,7 +82,11 @@ def execute(pagename, request):
     }))
 
     # Get page dict readable by current user
-    pages = request.rootpage.getPageDict()
+    try:
+        underlay = int(form.get('underlay', [1])[0])
+    except ValueError:
+        underlay = 1
+    pages = request.rootpage.getPageDict(include_underlay=underlay)
     pagelist = pages.keys()
     pagelist.sort()
     for name in pagelist:
