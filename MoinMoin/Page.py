@@ -1728,7 +1728,7 @@ class RootPage(Page):
         request.clock.stop('getPageList')
         return pages
 
-    def getPageDict(self, user=None, exists=1, filter=None):
+    def getPageDict(self, user=None, exists=1, filter=None, include_underlay=True):
         """ Return a dictionary of filtered page objects readable by user
 
         Invoke getPageList then create a dict from the page list. See
@@ -1741,7 +1741,7 @@ class RootPage(Page):
         @return: user readable pages
         """
         pages = {}
-        for name in self.getPageList(user=user, exists=exists, filter=filter):
+        for name in self.getPageList(user=user, exists=exists, filter=filter, include_underlay=include_underlay):
             pages[name] = Page(self.request, name)
         return pages
 
