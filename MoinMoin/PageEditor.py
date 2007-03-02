@@ -499,8 +499,8 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         request = self.request
         _ = self._
 
-        if not (request.user.may.delete(self.page_name)
-                and request.user.may.write(newpagename)):
+        if not request.user.may.delete(self.page_name)
+                or not request.user.may.write(newpagename):
             msg = _('You are not allowed to rename this page!')
             raise self.AccessDenied, msg
 
