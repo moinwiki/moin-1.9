@@ -70,7 +70,7 @@ def execute(pagename, request):
     request.write("""<?xml version="1.0" encoding="UTF-8"?>\r\n""")
 
     result = []
-    result.append("""<urlset xmlns="http://www.google.com/schemas/sitemap/0.84">\n""")
+    result.append("""<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n""")
 
     # we include the / url as an important and often changed URL
     result.append(make_url_xml({
