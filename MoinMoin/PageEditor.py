@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 """
     MoinMoin - PageEditor class
 
@@ -487,6 +486,64 @@ If you don't want that, hit '''%(cancel_button_text)s''' to cancel your changes.
         page = backto and Page(request, backto) or self
         page.send_page(msg=_('Edit was cancelled.'))
 
+    def copyPage(self, newpagename, comment=None):
+        """
+        Copy the current version of the page (keeping the backups, logs and attachments).
+        
+        @param comment: Comment given by user
+        @rtype: unicode
+        @return: success flag, error message
+        """
+        request = self.request
+        _ = self._
+
+        if not newpagename:
+            return False, _("You can't copy to an empty pagename.")
+
+        newpage = PageEditor(request, newpagename)
+
+        pageexists_error = _("""'''A page with the name {{{'%s'}}} already exists.'''
+Try a different name.""") % (newpagename,)
+
+        # Check whether a page with the new name already exists
+        if newpage.exists(includeDeleted=1):
+            return False, pageexists_error
+
+        # Get old page text
+        savetext = self.get_raw_body()
+
+        oldpath = self.getPagePath(check_create=0)
+        newpath = newpage.getPagePath(check_create=0)
+
+        # Copy page
+        # NOTE: might fail if another process created newpagename just
+        try:
+            filesys.copytree(oldpath, newpath)
+            self.error = None
+
+            if request.user.may.write(newpagename):
+                # If current user has write access
+                # Save page text with a comment about the old name
+                #
+                # TODO: acl read protected pages are copied too but they will be not shown
+                #       in RecentChanges, because current user is not able to write a comment
+                savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
+                newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
+
+            if request.cfg.xapian_search:
+                from MoinMoin.search.Xapian import Index
+                index = Index(request)
+                if index.exists():
+                    index.update_page(newpagename)
+            return True, None
+        except OSError, err:
+            # Try to understand what happened. Maybe its better to check
+            # the error code, but I just reused the available code above...
+            if newpage.exists(includeDeleted=1):
+                return False, pageexists_error
+            else:
+                return False, _('Could not copy page because of file system error: %s.') % unicode(err)
+
     def renamePage(self, newpagename, comment=None):
         """
         Rename the current version of the page (making a backup before deletion
@@ -629,7 +686,7 @@ Try a different name.""") % (newpagename,)
         else:
             querystr = {}
         pagelink = request.getQualifiedURL(self.url(request, querystr, relative=False))
- 
+
         mailBody = _("Dear Wiki user,\n\n"
             'You have subscribed to a wiki page or wiki category on "%(sitename)s" for change notification.\n\n'
             "The following page has been changed by %(editor)s:\n"
@@ -859,7 +916,8 @@ Try a different name.""") % (newpagename,)
 
         return pragmas
 
-    def copypage(self):
+    def copy_underlay_page(self):
+        # renamed from copypage to avoid conflicts with copyPage
         """
         Copy a page from underlay directory to page directory
         """
@@ -890,7 +948,7 @@ Try a different name.""") % (newpagename,)
         #is_deprecated = self._get_pragmas(text).has_key("deprecated")
         was_deprecated = self._get_pragmas(self.get_raw_body()).has_key("deprecated")
 
-        self.copypage()
+        self.copy_underlay_page()
 
         # remember conflict state
         self.setConflict(wikiutil.containsConflictMarker(text))

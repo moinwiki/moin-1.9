@@ -314,7 +314,7 @@ class ThemeBase:
         request = self.request
         fmt = request.formatter
         title = None
-        
+
         # Handle [pagename title] or [url title] formats
         if text.startswith('[') and text.endswith(']'):
             text = text[1:-1].strip()
@@ -363,7 +363,7 @@ class ThemeBase:
             page = wikiutil.getLocalizedPage(request, pagename)
         else:
             page = Page(request, pagename)
-            
+
         if not title:
             title = page.split_title()
             title = self.shortenPagename(title)
@@ -900,6 +900,7 @@ var search_hint = "%(search_hint)s";
             'LocalSiteMap',
             '__separator__',
             'RenamePage',
+            'CopyPage',
             'DeletePage',
             '__separator__',
             'MyPages',
@@ -921,6 +922,7 @@ var search_hint = "%(search_hint)s";
             'refresh': _('Delete Cache', formatted=False),
             'SpellCheck': _('Check Spelling', formatted=False), # rename action!
             'RenamePage': _('Rename Page', formatted=False),
+            'CopyPage': _('Copy Page', formatted=False),
             'DeletePage': _('Delete Page', formatted=False),
             'LikePages': _('Like Pages', formatted=False),
             'LocalSiteMap': _('Local Site Map', formatted=False),

@@ -334,6 +334,8 @@ Version 1.6.current:
       patch.
     * autofilters for databrowser widget. Thanks to Johannes Berg for the patch.
     * action DeletePage and RenamePage could now be used for subpages of a page too
+    * Added Action CopyPage so you can use now an existing page or page hierarchy as template for a new page, see FeatureRequests/CloneOrCopyPages
+      TODO: we need a copy icon in RC
 
   Bugfixes:
     * on action "info" page, "revert" link will not be displayed for empty page
