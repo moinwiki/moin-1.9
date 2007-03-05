@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1 -*-
 """
     MoinMoin - PageEditor class
 
@@ -520,15 +521,19 @@ Try a different name.""") % (newpagename,)
         try:
             filesys.copytree(oldpath, newpath)
             self.error = None
-
+            if not comment:
+                comment = u"## page was copied from %s" % self.page_name
             if request.user.may.write(newpagename):
                 # If current user has write access
                 # Save page text with a comment about the old name
-                #
-                # TODO: acl read protected pages are copied too but they will be not shown
-                #       in RecentChanges, because current user is not able to write a comment
                 savetext = u"## page was copied from %s\n%s" % (self.page_name, savetext)
                 newpage.saveText(savetext, 0, comment=comment, index=0, extra=self.page_name, action='SAVE')
+            else:
+                # if user is  not able to write to the page itselfs we set a log entry only
+                from MoinMoin import packages
+                rev = newpage.current_rev()
+                packages.edit_logfile_append(self, newpagename, newpath, rev, 'SAVENEW', logname='edit-log',
+                                       comment=comment, author=u"CopyPage action")
 
             if request.cfg.xapian_search:
                 from MoinMoin.search.Xapian import Index
