@@ -273,8 +273,9 @@ class MoinRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     staticExpire = 365 * 24 * 3600 # 1 year expiry for static files
 
     def __init__(self, request, client_address, server):
-        self.server_version = "MoinMoin %s %s" % (version.revision,
-                                                  server.__class__.__name__)
+        self.server_version = "MoinMoin %s %s %s" % (version.release,
+                                                     version.revision,
+                                                     server.__class__.__name__)
         self.expires = 0
         SimpleHTTPServer.SimpleHTTPRequestHandler.__init__(self, request,
             client_address, server)
