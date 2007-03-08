@@ -1133,6 +1133,7 @@ Please review the page and save then. Do not save this page as it is!""")
         # save only if no error occurred (msg is empty)
         if not msg:
             # set success msg
+            request.rev += 1
             msg = _("Thank you for your changes. Your attention to detail is appreciated.")
 
             # determine action for edit log 
