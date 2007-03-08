@@ -215,9 +215,15 @@ class LogFile:
         self.__rel_index += lines
         while self.__rel_index < 0:
             if self.__buffer is self.__buffer2:
-                # change to buffer 1
-                self.__buffer = self.__buffer1
-                self.__rel_index += self.__buffer.len
+                if self.__buffer.offsets[0] == 0:
+                    # already at the beginning of the file
+                    self.__rel_index = 0
+                    self.__lineno = 0
+                    return True
+                else:
+                    # change to buffer 1
+                    self.__buffer = self.__buffer1
+                    self.__rel_index += self.__buffer.len
             else: # self.__buffer is self.__buffer1
                 if self.__buffer.offsets[0] == 0:
                     # already at the beginning of the file
@@ -363,6 +369,21 @@ class LogFile:
             # position is in .__buffer2
             self.__rel_index = self.__buffer2.offsets.index(position)
             self.__buffer = self.__buffer2
+        elif self.__buffer1 and self.__buffer1.offsets[-1] == position:
+            # we already have one buffer directly before where we want to go
+            self.__buffer2 = LineBuffer(self._input,
+                                        position,
+                                        self.buffer_size)            
+            self.__buffer = self.__buffer2
+            self.__rel_index = 0
+        elif self.__buffer2 and self.__buffer2.offsets[-1] == position:
+            # we already have one buffer directly before where we want to go
+            self.__buffer1 = self.__buffer2
+            self.__buffer2 = LineBuffer(self._input,
+                                        position,
+                                        self.buffer_size)            
+            self.__buffer = self.__buffer2
+            self.__rel_index = 0
         else:
             # load buffers around position
             self.__buffer1 = LineBuffer(self._input,
