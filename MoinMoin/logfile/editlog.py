@@ -222,6 +222,6 @@ class EditLog(LogFile):
             items.append(line.pagename)
 
         newposition = self.position()
-        logging.debug("editlog.news: new pos: %r new items: %r", newposition, items)
+        logging.log(logging.NOTSET, "editlog.news: new pos: %r new items: %r", newposition, items)
         return newposition, items
 

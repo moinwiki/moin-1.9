@@ -22,6 +22,14 @@ from MoinMoin.Page import Page
 ### Basic Permissions Interface -- most features enabled by default
 #############################################################################
 
+def _check(request, pagename, user, right):
+    if pagename == request.page.page_name:
+        p = request.page # reuse is good
+    else:
+        p = Page(request, pagename)
+    acl = p.getACL(request) # this will be fast in a reused page obj
+    return acl.may(request, user, right)
+
 
 class Permissions:
     """ Basic interface for user permissions and system policy.
@@ -50,14 +58,7 @@ class Permissions:
         """
         request = self.request
         if attr in request.cfg.acl_rights_valid:
-            def check(request, pagename, user, right):
-                if pagename == request.page.page_name:
-                    p = request.page # reuse is good
-                else:
-                    p = Page(request, pagename)
-                acl = p.getACL(request) # this will be fast in a reused page obj
-                return acl.may(request, user, right)
-            return lambda pagename: check(self.request, pagename, self.name, attr)
+            return lambda pagename: _check(self.request, pagename, self.name, attr)
             ##return lambda pagename, Page=Page, request=request, attr=attr: Page(request, pagename).getACL(request).may(request, self.name, attr)
         else:
             raise AttributeError, attr
