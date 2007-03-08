@@ -293,8 +293,9 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
         label_install = _("install")
 
         for file in files:
-            fsize = float(os.stat(os.path.join(attach_dir, file).encode(config.charset))[6]) # in byte
-            fsize = "%.1f" % (fsize / 1024)
+            st = os.stat(os.path.join(attach_dir, file).encode(config.charset))
+            fsize = "%.1f" % (float(st.st_size) / 1024)
+            fmtime = request.user.getFormattedDateTime(st.st_mtime)
             baseurl = request.getScriptname()
             action = action_name
             urlpagename = wikiutil.quoteWikinameURL(pagename)
@@ -312,6 +313,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
                         'get_url': get_url, 'label_get': label_get,
                         'file': wikiutil.escape(file).replace(' ', '%20'),
                         'fsize': fsize,
+                        'fmtime': fmtime,
                         'pagename': pagename}
 
             del_link = ''
@@ -342,7 +344,7 @@ def _build_filelist(request, pagename, showheader, readonly, mime_type='*'):
             parmdict['move_link'] = move_link
             str = str + ('<li>[%(del_link)s%(move_link)s'
                 '<a href="%(get_url)s">%(label_get)s</a>&nbsp;| %(viewlink)s]'
-                ' (%(fsize)s KB) attachment:<strong>%(file)s</strong></li>') % parmdict
+                ' (%(fmtime)s, %(fsize)s KB) attachment:<strong>%(file)s</strong></li>') % parmdict
         str = str + "</ul>"
     else:
         if showheader:
