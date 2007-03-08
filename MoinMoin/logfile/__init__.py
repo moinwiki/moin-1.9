@@ -7,6 +7,7 @@
     @copyright: 2005-2007 by Thomas Waldmann (MoinMoin:ThomasWaldmann)
     @license: GNU GPL, see COPYING for details.
 """
+import logging
 
 import os, codecs, errno
 from MoinMoin import config, wikiutil
@@ -34,8 +35,10 @@ class LineBuffer:
         @param forward : read from offset on or from offset-size to offset
         @type forward: boolean
         """
+        self.loglevel = logging.NOTSET
         if forward:
             begin = offset
+            logging.log(self.loglevel, "LineBuffer.init: forward seek %d read %d" % (begin, size))
             file.seek(begin)
             lines = file.readlines(size)
         else:
@@ -44,6 +47,7 @@ class LineBuffer:
                 size = offset
             else:
                 begin = offset - size
+            logging.log(self.loglevel, "LineBuffer.init: backward seek %d read %d" % (begin, size))
             file.seek(begin)
             lines = file.read(size).splitlines(True)
             if begin != 0:
@@ -83,6 +87,7 @@ class LogFile:
         @param filename: name of the log file
         @param buffer_size: approx. size of one buffer in bytes
         """
+        self.loglevel = logging.NOTSET
         self.__filename = filename
         self.__buffer = None # currently used buffer, points to one of the following:
         self.__buffer1 = None
@@ -102,6 +107,7 @@ class LogFile:
         self.to_end()
         while 1:
             try:
+                logging.log(self.loglevel, "LogFile.reverse %s" % self.__filename)
                 result = self.previous()
             except StopIteration:
                 return
@@ -205,12 +211,19 @@ class LogFile:
         @return: True if moving more than to the beginning and moving
                  to the end or beyond
         """
+        logging.log(self.loglevel, "LogFile.peek %s" % self.__filename)
         self.__rel_index += lines
         while self.__rel_index < 0:
             if self.__buffer is self.__buffer2:
-                # change to buffer 1
-                self.__buffer = self.__buffer1
-                self.__rel_index += self.__buffer.len
+                if self.__buffer.offsets[0] == 0:
+                    # already at the beginning of the file
+                    self.__rel_index = 0
+                    self.__lineno = 0
+                    return True
+                else:
+                    # change to buffer 1
+                    self.__buffer = self.__buffer1
+                    self.__rel_index += self.__buffer.len
             else: # self.__buffer is self.__buffer1
                 if self.__buffer.offsets[0] == 0:
                     # already at the beginning of the file
@@ -270,6 +283,7 @@ class LogFile:
         result = None
         while result is None:
             while result is None:
+                logging.log(self.loglevel, "LogFile.next %s" % self.__filename)
                 result = self.__next()
             if self.filter and not self.filter(result):
                 result = None
@@ -289,6 +303,7 @@ class LogFile:
         result = None
         while result is None:
             while result is None:
+                logging.log(self.loglevel, "LogFile.previous %s" % self.__filename)
                 result = self.__previous()
             if self.filter and not self.filter(result):
                 result = None
@@ -296,6 +311,7 @@ class LogFile:
 
     def to_begin(self):
         """moves file position to the begin"""
+        logging.log(self.loglevel, "LogFile.to_begin %s" % self.__filename)
         if self.__buffer1 is None or self.__buffer1.offsets[0] != 0:
             self.__buffer1 = LineBuffer(self._input,
                                         0,
@@ -309,6 +325,7 @@ class LogFile:
 
     def to_end(self):
         """moves file position to the end"""
+        logging.log(self.loglevel, "LogFile.to_end %s" % self.__filename)
         self._input.seek(0, 2) # to end of file
         size = self._input.tell()
         if self.__buffer2 is None or size > self.__buffer2.offsets[-1]:
@@ -339,6 +356,11 @@ class LogFile:
         .seek is much more efficient for moving long distances than .peek.
         raises ValueError if position is invalid
         """
+        logging.log(self.loglevel, "LogFile.seek %s pos %d" % (self.__filename, position))
+        if self.__buffer1:
+            logging.log(self.loglevel, "b1 %r %r" % (self.__buffer1.offsets[0], self.__buffer1.offsets[-1]))
+        if self.__buffer2:
+            logging.log(self.loglevel, "b2 %r %r" % (self.__buffer2.offsets[0], self.__buffer2.offsets[-1]))
         if self.__buffer1 and self.__buffer1.offsets[0] <= position < self.__buffer1.offsets[-1]:
             # position is in .__buffer1 
             self.__rel_index = self.__buffer1.offsets.index(position)
@@ -347,6 +369,21 @@ class LogFile:
             # position is in .__buffer2
             self.__rel_index = self.__buffer2.offsets.index(position)
             self.__buffer = self.__buffer2
+        elif self.__buffer1 and self.__buffer1.offsets[-1] == position:
+            # we already have one buffer directly before where we want to go
+            self.__buffer2 = LineBuffer(self._input,
+                                        position,
+                                        self.buffer_size)            
+            self.__buffer = self.__buffer2
+            self.__rel_index = 0
+        elif self.__buffer2 and self.__buffer2.offsets[-1] == position:
+            # we already have one buffer directly before where we want to go
+            self.__buffer1 = self.__buffer2
+            self.__buffer2 = LineBuffer(self._input,
+                                        position,
+                                        self.buffer_size)            
+            self.__buffer = self.__buffer2
+            self.__rel_index = 0
         else:
             # load buffers around position
             self.__buffer1 = LineBuffer(self._input,

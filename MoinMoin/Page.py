@@ -38,6 +38,7 @@ class ItemCache:
                             # to avoid reading in the whole log on first request
         self.requests = 0
         self.hits = 0
+        self.loglevel = logging.NOTSET
 
     def putItem(self, request, name, key, data):
         """ Remembers some data for item name under a key.
@@ -65,7 +66,7 @@ class ItemCache:
             data = None
             hit_str = 'miss'
         self.requests += 1
-        logging.debug("%s cache %s (h/r %2.1f%%) for %r %r" % (
+        logging.log(self.loglevel, "%s cache %s (h/r %2.1f%%) for %r %r" % (
             self.name,
             hit_str,
             float(self.hits * 100) / self.requests,
@@ -80,20 +81,19 @@ class ItemCache:
             (for 'meta') or the complete cache ('pagelists').
             @param request: the request object
         """
-        from MoinMoin.logfile import editlog
-        elog = editlog.EditLog(request)
+        elog = request.editlog
         old_pos = self.log_pos
         new_pos, items = elog.news(old_pos)
         if items:
             if self.name == 'meta':
                 for item in items:
-                    logging.debug("cache: removing %r" % item)
+                    logging.log(self.loglevel, "cache: removing %r" % item)
                     try:
                         del self.cache[item]
                     except:
                         pass
             elif self.name == 'pagelists':
-                logging.debug("cache: clearing pagelist cache")
+                logging.log(self.loglevel, "cache: clearing pagelist cache")
                 self.cache = {}
         self.log_pos = new_pos # important to do this at the end -
                                # avoids threading race conditions
@@ -1524,7 +1524,7 @@ class Page:
                 aclRevision, acl = None, None
             else:
                 aclRevision, acl = cache_data
-            logging.debug("currrev: %r, cachedaclrev: %r" % (currentRevision, aclRevision))
+            #logging.debug("currrev: %r, cachedaclrev: %r" % (currentRevision, aclRevision))
             if aclRevision != currentRevision:
                 acl = self.parseACL()
                 cache_data = (currentRevision, acl)

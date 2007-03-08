@@ -196,6 +196,9 @@ class RequestBase(object):
             from MoinMoin.Page import RootPage
             self.rootpage = RootPage(self)
 
+            from MoinMoin.logfile import editlog
+            self.editlog = editlog.EditLog(self)
+
             from MoinMoin import i18n
             self.i18n = i18n
             i18n.i18n_init(self)
