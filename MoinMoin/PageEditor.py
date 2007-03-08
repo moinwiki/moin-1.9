@@ -1016,9 +1016,11 @@ Try a different name.""") % (newpagename,)
             f.write(revstr+'\n')
             f.close()
 
-            # we need to actualize the request.rev number here to get the right revision used for
-            # actions on newly saved pages (#preview)
-            request.rev = rev
+            # we need to update request.rev here to get the right revision used for
+            # action links rendered by the final send_page() call (#preview display)
+            # XXX this is not the right place to do this as you could use this function
+            # to save any other page than the currently displayed one
+            #request.rev = rev
 
             if not deleted:
                 # save to page file
