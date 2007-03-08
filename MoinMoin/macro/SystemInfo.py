@@ -114,9 +114,9 @@ class SystemInfo:
 
         # This puts a heavy load on the server when the log is large
             eventlogger = eventlog.EventLog(request)
-            nonestr = _("NONE")
             row('Event log', self.formatInReadableUnits(eventlogger.size()))
 
+        nonestr = _("NONE")
         # a valid user gets info about all installed extensions
         row(_('Global extension macros'), ', '.join(macro.modules) or nonestr)
         row(_('Local extension macros'),
