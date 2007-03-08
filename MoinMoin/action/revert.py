@@ -12,22 +12,24 @@ def execute(pagename, request):
     """ restore another revision of a page as a new current revision """
     from MoinMoin.PageEditor import PageEditor
     _ = request.getText
+    msg = None
+    rev = request.rev
+    pg = Page(request, pagename, rev=rev)
 
     if not request.user.may.revert(pagename):
-        return Page(request, pagename).send_page(
-            msg=_('You are not allowed to revert this page!'))
-
-    rev = request.rev
-    revstr = '%08d' % rev
-    oldpg = Page(request, pagename, rev=rev)
-    pg = PageEditor(request, pagename)
-
-    try:
-        savemsg = pg.saveText(oldpg.get_raw_body(), 0, extra=revstr,
-                              action="SAVE/REVERT")
-    except pg.SaveError, msg:
-        # msg contain a unicode string
-        savemsg = unicode(msg)
-    request.reset()
-    pg.send_page(msg=savemsg)
-
+        msg = _('You are not allowed to revert this page!')
+    elif rev is None:
+        msg = _('You were viewing the current revision of this page when you called the revert action. '
+                'If you want to revert to an older revision, first view that older revision and '
+                'then call revert to this (older) revision again.')
+    else:
+        newpg = PageEditor(request, pagename)
+    
+        revstr = '%08d' % rev
+        try:
+            msg = newpg.saveText(pg.get_raw_body(), 0, extra=revstr, action="SAVE/REVERT")
+            pg = newpg
+        except newpg.SaveError, msg:
+            msg = unicode(msg)
+        request.reset()
+    pg.send_page(msg=msg)
