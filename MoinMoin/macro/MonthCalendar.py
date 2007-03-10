@@ -258,7 +258,7 @@ def execute(macro, text):
     currentyear, currentmonth, currentday, h, m, s, wd, yd, ds = request.user.getTime(time.time())
     thispage = formatter.page.page_name
     # does the url have calendar params (= somebody has clicked on prev/next links in calendar) ?
-    if macro.form.has_key('calparms'):
+    if 'calparms' in macro.form:
         text2 = macro.form['calparms'][0]
         args2 = args_re.match(text2)
         if not args2:

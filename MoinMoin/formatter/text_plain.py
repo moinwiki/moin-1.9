@@ -75,7 +75,7 @@ class Formatter(FormatterBase):
     def attachment_image(self, url, **kw):
         title = ''
         for a in (u'title', u'html__title', u'alt', u'html_alt'):
-            if kw.has_key(a):
+            if a in kw:
                 title = ':' + kw[a]
         return "[image:%s%s]" % (url, title)
 
@@ -243,7 +243,7 @@ class Formatter(FormatterBase):
 
     def image(self, src=None, **kw):
         for a in (u'title', u'html__title', u'alt', u'html_alt'):
-            if kw.has_key(a):
+            if a in kw:
                 return kw[a]
         return u''
 

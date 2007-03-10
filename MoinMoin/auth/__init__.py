@@ -218,7 +218,7 @@ def moin_session(request, **kw):
         if verbose: request.log("caught Cookie.CookieError")
         cookie = None
 
-    if not (cookie is not None and cookie.has_key(cookie_name)):
+    if not (cookie is not None and cookie_name in cookie):
         # No valid cookie
         if verbose: request.log("either no cookie or no %s key" % cookie_name)
         return user_obj, True

@@ -177,7 +177,7 @@ def add_attachment(request, pagename, target, filecontent, overwrite=0):
     #type, encoding = wikiutil.guess_type(target)
     #if not type:
     #    ext = None
-    #    if request.form.has_key('mime'):
+    #    if 'mime' in request.form:
     #        ext = wikiutil.guess_extension(request.form['mime'][0])
     #    if not ext:
     #        type, encoding = wikiutil.guess_type(filename)
@@ -529,7 +529,7 @@ def execute(pagename, request):
     msg = None
     if action_name in request.cfg.actions_excluded:
         msg = _('File attachments are not allowed in this wiki!')
-    elif not request.form.has_key('do'):
+    elif 'do' not in request.form:
         upload_form(pagename, request)
     elif request.form['do'][0] == 'savedrawing':
         if request.user.may.write(pagename):
@@ -540,7 +540,7 @@ def execute(pagename, request):
             msg = _('You are not allowed to save a drawing on this page.')
     elif request.form['do'][0] == 'upload':
         if request.user.may.write(pagename):
-            if request.form.has_key('file'):
+            if 'file' in request.form:
                 do_upload(pagename, request)
             else:
                 # This might happen when trying to upload file names
@@ -559,7 +559,7 @@ def execute(pagename, request):
         else:
             msg = _('You are not allowed to move attachments from this page.')
     elif request.form['do'][0] == 'attachment_move':
-        if request.form.has_key('cancel'):
+        if 'cancel' in request.form:
             msg = _('Move aborted!')
             error_msg(pagename, request, msg)
             return
@@ -615,13 +615,13 @@ def do_upload(pagename, request):
 
     # make filename
     filename = None
-    if request.form.has_key('file__filename__'):
+    if 'file__filename__' in request.form:
         filename = request.form['file__filename__']
     rename = None
-    if request.form.has_key('rename'):
+    if 'rename' in request.form:
         rename = request.form['rename'][0].strip()
     overwrite = 0
-    if request.form.has_key('overwrite'):
+    if 'overwrite' in request.form:
         try:
             overwrite = int(request.form['overwrite'][0])
         except:
@@ -744,11 +744,11 @@ def move_file(request, pagename, new_pagename, attachment, new_attachment):
 
 def attachment_move(pagename, request):
     _ = request.getText
-    if request.form.has_key('newpagename'):
+    if 'newpagename' in request.form:
         new_pagename = request.form.get('newpagename')[0]
     else:
         upload_form(pagename, request, msg=_("Move aborted because empty page name"))
-    if request.form.has_key('newattachmentname'):
+    if 'newattachmentname' in request.form:
         new_attachment = request.form.get('newattachmentname')[0]
         if new_attachment != wikiutil.taintfilename(new_attachment):
             upload_form(pagename, request, msg=_("Please use a valid filename for attachment '%(filename)s'.") % {

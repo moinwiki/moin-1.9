@@ -51,7 +51,7 @@ class EditLogLine:
         """
         result = 'ip', request.cfg.show_hosts and self.hostname or ''
         if self.userid:
-            if not self._usercache.has_key(self.userid):
+            if self.userid not in self._usercache:
                 self._usercache[self.userid] = user.User(request, self.userid, auth_method="editlog:53")
             userdata = self._usercache[self.userid]
             if userdata.name:
@@ -73,7 +73,7 @@ class EditLogLine:
         """
         result = 'ip', request.cfg.show_hosts and self.hostname or ''
         if self.userid:
-            if not self._usercache.has_key(self.userid):
+            if self.userid not in self._usercache:
                 self._usercache[self.userid] = user.User(request, self.userid, auth_method="editlog:75")
             userdata = self._usercache[self.userid]
             if userdata.mailto_author and userdata.email:
@@ -200,10 +200,10 @@ class EditLog(LogFile):
     def set_filter(self, **kw):
         expr = "1"
         for field in ['pagename', 'addr', 'hostname', 'userid']:
-            if kw.has_key(field):
+            if field in kw:
                 expr = "%s and x.%s == %s" % (expr, field, repr(kw[field]))
 
-        if kw.has_key('ed_time_usecs'):
+        if 'ed_time_usecs' in kw:
             expr = "%s and long(x.ed_time_usecs) == %s" % (expr, long(kw['ed_time_usecs'])) # must be long for py 2.2.x
 
         self.filter = eval("lambda x: " + expr)

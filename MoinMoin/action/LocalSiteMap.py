@@ -92,7 +92,7 @@ class PageTreeBuilder:
         self.children[name] = 1
 
     def child_marked(self, name):
-        return self.children.has_key(name)
+        return name in self.children
 
     def is_ok(self, child):
         if not self.child_marked(child):

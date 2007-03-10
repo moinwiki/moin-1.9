@@ -677,7 +677,7 @@ reStructuredText Quick Reference
         """
         unknown = ['"%s"' % name for name in dir(self)
                   if not name.startswith('_') and
-                  not DefaultConfig.__dict__.has_key(name) and
+                  name not in DefaultConfig.__dict__ and
                   not isinstance(getattr(self, name), (type(sys), type(DefaultConfig)))]
         if unknown:
             msg = """
@@ -822,7 +822,7 @@ that the data/plugin directory has an __init__.py file.
         """
         # user checkbox defaults
         for key, value in DefaultConfig.user_checkbox_defaults.items():
-            if not self.user_checkbox_defaults.has_key(key):
+            if key not in self.user_checkbox_defaults:
                 self.user_checkbox_defaults[key] = value
 
     def __getitem__(self, item):

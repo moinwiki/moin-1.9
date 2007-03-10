@@ -158,7 +158,7 @@ class FormatterBase:
         """
         title = src
         for titleattr in ('title', 'html__title', 'alt', 'html__alt'):
-            if kw.has_key(titleattr):
+            if titleattr in kw:
                 title = kw[titleattr]
                 break
         if title:

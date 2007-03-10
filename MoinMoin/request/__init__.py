@@ -562,8 +562,8 @@ class RequestBase(object):
         """ read the maybe present UserPreferences form and call get_user with the values """
         name = self.form.get('name', [None])[0]
         password = self.form.get('password', [None])[0]
-        login = self.form.has_key('login')
-        logout = self.form.has_key('logout')
+        login = 'login' in self.form
+        logout = 'logout' in self.form
         u = self.get_user_default_unknown(name=name, password=password,
                                           login=login, logout=logout,
                                           user_obj=None)

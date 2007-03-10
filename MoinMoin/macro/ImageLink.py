@@ -174,7 +174,7 @@ def execute(macro, args):
                                          wikiutil.url_quote_plus(attname))),
                                          linktext % {'filename': attname})
 
-    if not kw.has_key('alt'):
+    if 'alt' not in kw:
         if target is None or _is_URL(target):
             if _is_URL(image):
                 # Get image name http://here.com/dir/image.png -> image.png

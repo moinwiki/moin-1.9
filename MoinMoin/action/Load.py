@@ -37,14 +37,14 @@ class Load(ActionBase):
         rename = form.get('rename', [u''])[0]
 
         filename = None
-        if form.has_key('file__filename__'):
+        if 'file__filename__' in form:
             filename = form['file__filename__']
 
         filecontent = form['file'][0]
         bytes = len(filecontent)
 
         overwrite = False
-        if form.has_key('overwrite'):
+        if 'overwrite' in form:
             overwrite = True
 
         target = filename
@@ -58,7 +58,7 @@ class Load(ActionBase):
             if bsindex >= 0:
                 target = target[bsindex+1:]
 
-        if self.request.form.has_key('attachment') and self.request.user.may.write(self.pagename):
+        if 'attachment' in self.request.form and self.request.user.may.write(self.pagename):
             attach_dir = AttachFile.getAttachDir(self.request, self.pagename, create=1)
             fpath = os.path.join(attach_dir, target).encode(config.charset)
             exists = os.path.exists(fpath)

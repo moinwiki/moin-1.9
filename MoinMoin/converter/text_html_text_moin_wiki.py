@@ -1095,9 +1095,9 @@ class convert_tree(visitor):
         if href:
             title = class_ = interwikiname = None
 
-            if node.attributes.has_key("title"):
+            if "title" in node.attributes:
                 title = node.attributes.get("title").nodeValue
-            if node.attributes.has_key("class"):
+            if "class" in node.attributes:
                 class_ = node.attributes.get("class").nodeValue
 
             text = self.node_list_text_only(node.childNodes)
@@ -1179,22 +1179,22 @@ class convert_tree(visitor):
 
     def process_img(self, node):
         src = None
-        if node.attributes.has_key("src"):
+        if "src" in node.attributes:
             src = wikiutil.url_unquote(node.attributes.get("src").nodeValue)
         title = None
-        if node.attributes.has_key("title"):
+        if "title" in node.attributes:
             title = node.attributes.get("title").nodeValue
         alt = None
-        if node.attributes.has_key("alt"):
+        if "alt" in node.attributes:
             alt = node.attributes.get("alt").nodeValue
         width = None
-        if node.attributes.has_key("width"):
+        if "width" in node.attributes:
             width = node.attributes.get("width").nodeValue
         height = None
-        if node.attributes.has_key("height"):
+        if "height" in node.attributes:
             height = node.attributes.get("height").nodeValue
         target = None
-        if node.attributes.has_key("target"):
+        if "target" in node.attributes:
             target = node.attributes.get("target").nodeValue
 
         # Attachment image

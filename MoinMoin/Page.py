@@ -889,9 +889,9 @@ class Page:
         _ = request.getText
         emit_headers = keywords.get('emit_headers', 1)
         # determine modes
-        print_mode = request.form.has_key('action') and request.form['action'][0] == 'print'
+        print_mode = 'action' in request.form and request.form['action'][0] == 'print'
         if print_mode:
-            media = request.form.has_key('media') and request.form['media'][0] or 'print'
+            media = 'media' in request.form and request.form['media'][0] or 'print'
         else:
             media = 'screen'
         content_only = keywords.get('content_only', 0)
@@ -997,7 +997,8 @@ class Page:
                 # endless looping (see code in "request") or any
                 # cascaded redirection
                 pi_redirect = args
-                if request.form.has_key('action') or request.form.has_key('redirect') or content_only: continue
+                if 'action' in request.form or 'redirect' in request.form or content_only:
+                    continue
 
                 request.http_redirect('%s/%s?action=show&redirect=%s' % (
                     request.getScriptname(),
@@ -1079,7 +1080,7 @@ class Page:
 
                 # This redirect message is very annoying.
                 # Less annoying now without the warning sign.
-                if request.form.has_key('redirect'):
+                if 'redirect' in request.form:
                     redir = request.form['redirect'][0]
                     msg = '<strong>%s</strong><br>%s' % (
                         _('Redirected from page "%(page)s"') % {'page':
