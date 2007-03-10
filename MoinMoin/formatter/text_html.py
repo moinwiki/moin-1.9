@@ -1199,7 +1199,7 @@ document.write('<a href="#" onclick="return togglenumber(\'%s\', %d, %d);" \
             while len(self.request._fmt_hd_counters) < count_depth:
                 self.request._fmt_hd_counters.append(0)
             self.request._fmt_hd_counters[-1] = self.request._fmt_hd_counters[-1] + 1
-            number = '.'.join(map(str, self.request._fmt_hd_counters[self._show_section_numbers-1:]))
+            number = '.'.join([str(x) for x in self.request._fmt_hd_counters[self._show_section_numbers-1:]])
             if number: number += ". "
 
         # Add space before heading, easier to check source code

@@ -71,10 +71,12 @@ class Chart:
                 colors.append('black')
 
         # Default for X axis labels (numbered 1..n)
-        if not labels: labels = map(str, range(1, len(args[0])+1))
+        if not labels:
+            labels = [str(i) for i in range(1, len(args[0])+1)]
 
         # set colors for the data sets
-        if colors: self.option(set_color=map(int, map(Color, colors)))
+        if colors:
+            self.option(set_color=[int(Color(c)) for c in colors])
 
         # pass options to gdchart and render the chart
         gdchart.option(**self.options)

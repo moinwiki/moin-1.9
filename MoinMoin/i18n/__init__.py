@@ -317,7 +317,7 @@ def browserLanguages(request):
     if accepted:
         # Extract the languages names from the string
         accepted = accepted.split(',')
-        accepted = map(lambda x: x.split(';')[0], accepted)
+        accepted = [lang.split(';')[0] for lang in accepted]
         # Add base language for each sub language. If the user specified
         # a sub language like "en-us", we will try to to provide it or
         # a least the base language "en" in this case.

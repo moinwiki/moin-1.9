@@ -222,7 +222,7 @@ class Color:
             a Netscape color name or a HTML color ("#RRGGBB").
         """
         if isinstance(color, tuple) and len(color) == 3:
-            self.r, self.g, self.b = map(int, color)
+            self.r, self.g, self.b = int(color[0]), int(color[1]), int(color[2])
         elif isinstance(color, Color):
             self.r, self.g, self.b = color.r, color.g, color.b
         elif not isinstance(color, str):

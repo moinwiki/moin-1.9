@@ -118,7 +118,7 @@ def execute(pagename, request):
 
         # Add category separator if last non-empty line contains
         # non-categories.
-        lines = filter(None, savetext.splitlines())
+        lines = [line for line in savetext.splitlines() if line]
         if lines:
 
             #TODO: this code is broken, will not work for extended links

@@ -309,7 +309,7 @@ def execute(macro, text):
 
     colorstep = 85
     p = Page(request, thispage)
-    qpagenames = '*'.join(map(wikiutil.quoteWikinameURL, parmpagename))
+    qpagenames = '*'.join([wikiutil.quoteWikinameURL(pn) for pn in parmpagename])
     qtemplate = wikiutil.quoteWikinameURL(parmtemplate)
     querystr = "calparms=%%s,%d,%d,%d,%%d,%%s" % (parmyear, parmmonth, parmoffset)
     prevlink = p.url(request, querystr % (qpagenames, parmoffset2 - 1, qtemplate))

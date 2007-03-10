@@ -33,10 +33,10 @@ def diff(oldlines, newlines, **kw):
             break
     if not changed: return []
 
-    if not "we want the unchanged lines, too":
-        if "no questionmark lines":
-            lines = filter(lambda line: line[0] != '?', lines)
-        return lines
+#    if not "we want the unchanged lines, too":
+#        if "no questionmark lines":
+#            lines = [line for line in lines if line[0] != '?']
+#        return lines
 
 
     # calculate the hunks and remove the unchanged lines between them

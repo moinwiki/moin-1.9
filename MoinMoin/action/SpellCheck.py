@@ -33,8 +33,8 @@ def _getWordsFiles(request):
     for basedir in (request.cfg.moinmoin_dir, request.cfg.data_dir):
         localdict = os.path.join(basedir, 'dict')
         if os.path.isdir(localdict):
-            candidates.extend(map(
-                lambda f, d=localdict: os.path.join(d, f), os.listdir(localdict)))
+            candidates.extend(
+                [os.path.join(localdict, fn) for fn in os.listdir(localdict)])
 
     # validate candidate list (leave out directories!)
     wordsfiles = []
@@ -171,7 +171,7 @@ def checkSpelling(page, request, own_form=1):
 
         # build regex recognizing the bad words
         badwords_re = r'(^|(?<!\w))(%s)(?!\w)'
-        badwords_re = badwords_re % ("|".join(map(re.escape, badwords)),)
+        badwords_re = badwords_re % ("|".join([re.escape(bw) for bw in badwords]),)
         badwords_re = re.compile(badwords_re, re.UNICODE)
 
         lsw_msg = ''
@@ -194,7 +194,7 @@ def checkSpelling(page, request, own_form=1):
 
         checkbox = '<input type="checkbox" name="newwords" value="%(word)s">%(word)s&nbsp;&nbsp;'
         msg = msg + (
-            " ".join(map(lambda w, cb=checkbox: cb % {'word': wikiutil.escape(w), }, badwords)) +
+            " ".join([checkbox % { 'word': wikiutil.escape(w), } for w in badwords]) +
             '<p><input type="submit" name="button_newwords" value="%s"></p>' %
                 _('Add checked words to dictionary')
         )

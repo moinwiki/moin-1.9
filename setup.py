@@ -193,7 +193,7 @@ def scriptname(path):
     return script
 
 # build list of scripts from their implementation modules
-moin_scripts = map(scriptname, glob.glob('MoinMoin/script/[!_]*.py'))
+moin_scripts = [scriptname(fn) for fn in glob.glob('MoinMoin/script/[!_]*.py')]
 
 
 #############################################################################

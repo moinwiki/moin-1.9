@@ -81,7 +81,7 @@ class Parser:
         'dl_rule': dl_rule,
         'url_rule': url_rule,
         'word_rule': word_rule,
-        'smiley': u'|'.join(map(re.escape, config.smileys))}
+        'smiley': u'|'.join([re.escape(s) for s in config.smileys])}
 
     def __init__(self, pagename, raw, request, **kw):
         self.raw = raw
@@ -365,7 +365,7 @@ class Parser:
         if word.startswith(wikiutil.PARENT_PREFIX):
             if not text:
                 text = word
-            word = '/'.join(filter(None, self.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]]))
+            word = '/'.join([x for x in self.page_name.split('/')[:-1] + [word[wikiutil.PARENT_PREFIX_LEN:]] if x])
 
         if not text:
             text = word

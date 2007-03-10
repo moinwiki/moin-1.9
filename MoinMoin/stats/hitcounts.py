@@ -204,8 +204,8 @@ def draw(pagename, request):
     else:
         scalefactor = int(10 ** math.floor(math.log10(scalefactor)))
 
-    #scale edits up
-    edits = map(lambda x: x*scalefactor, edits)
+    # scale edits up
+    edits = [x * scalefactor for x in edits]
 
     # create image
     image = cStringIO.StringIO()

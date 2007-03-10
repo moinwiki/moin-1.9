@@ -116,7 +116,7 @@ def format_page_edits(macro, lines, bookmark_usecs):
                 if not name in counters:
                     counters[name] = []
                 counters[name].append(idx+1)
-            poslist = map(None, counters.values(), counters.keys())
+            poslist = [(v, k) for k, v in counters.items()]
             poslist.sort()
             ##request.write(repr(counters.items()))
             d['editors'] = []
