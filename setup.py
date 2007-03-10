@@ -287,7 +287,7 @@ if hasattr(distutils.dist.DistributionMetadata, 'get_platforms'):
 
 
 try:
-    apply(setup, (), setup_args)
+    setup(**setup_args)
 except distutils.errors.DistutilsPlatformError, ex:
     print
     print str(ex)
