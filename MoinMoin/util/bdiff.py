@@ -86,8 +86,8 @@ def test():
 
     d = diff(a, b)
     z = compress(d)
-    print `patchtext(d)`
-    print `d`
+    print repr(patchtext(d))
+    print repr(d)
     print "".join(b) == patch("".join(a), d)
     print len(d), len(z)
 

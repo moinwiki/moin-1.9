@@ -652,9 +652,11 @@ class Parser:
         else:
             # We should never get here
             import pprint
-            raise Exception("Can't handle match " + `match`
-                + "\n" + pprint.pformat(match.groupdict())
-                + "\n" + pprint.pformat(match.groups()) )
+            raise Exception("Can't handle match %r\n%s\n%s" % (
+                match,
+                pprint.pformat(match.groupdict()),
+                pprint.pformat(match.groups()),
+            ))
 
         return ""
 
