@@ -140,7 +140,7 @@ class EmbedObject:
         kw_count = 0
         argc = len(args)
         for arg in self.args.split(','):
-            if arg.find('=') > -1:
+            if '=' in arg:
                 kw_count += 1
                 key, value = arg.split('=')
                 setattr(self, key, wikiutil.escape(value.strip(), quote=1))
