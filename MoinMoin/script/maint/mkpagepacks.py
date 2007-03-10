@@ -60,7 +60,7 @@ class PluginScript(MoinScript):
 
         pageSets[ALL] = langPages
 
-        for name in pageSets.keys():
+        for name in pageSets:
             if name not in (u"English"):
                 pageSets[name] -= pageSets[u"English"]
                 pageSets[name] -= nodistPages
@@ -125,7 +125,7 @@ class PluginScript(MoinScript):
         script = [packLine(['MoinMoinPackage', '1']), ]
 
         script += [packLine(["InstallPackage", "SystemPagesSetup", name + ".zip"])
-                   for name in bundledict.keys() if name not in (NODIST, EXTRA, ALL, u"English")]
+                   for name in bundledict if name not in (NODIST, EXTRA, ALL, u"English")]
         script += [packLine(['Print', 'Installed all MoinMaster page bundles.'])]
 
         zf.writestr(MOIN_PACKAGE_FILE, u"\n".join(script).encode("utf-8"))

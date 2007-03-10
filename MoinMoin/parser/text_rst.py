@@ -87,7 +87,7 @@ def safe_import(name, globals = None, locals = None, fromlist = None):
 # Go through and change all docutils modules to use a dummyOpen and dummyUrllib2
 # module. Also make sure that any docutils imported modules also get the dummy
 # implementations.
-for i in sys.modules.keys():
+for i in sys.modules:
     if i.startswith('docutils') and sys.modules[i]:
         sys.modules[i].open = dummyOpen
         sys.modules[i].urllib2 = dummyUrllib2

@@ -288,7 +288,7 @@ class Formatter(FormatterBase):
         # Check all the HTML attributes to see if they are known and
         # allowed.  Ignore attributes if in non-HTML namespaces.
         if allowed_attrs:
-            for name in [key[1] for key in attributes.keys() if key[0] == 'html']:
+            for name in [key[1] for key in attributes if key[0] == 'html']:
                 if name in _common_attributes or name in allowed_attrs:
                     pass
                 elif name.startswith('on'):

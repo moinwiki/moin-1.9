@@ -34,8 +34,7 @@ def run():
     backup = pickle.load(backupfile)
     backupfile.close()
 
-    allpages = backup.keys()
-    for pagename in allpages:
+    for pagename in backup:
         pagedata = backup[pagename]
         dstwiki.putPage(pagename, pagedata) # TODO: add error check
         print "Put %s." % pagename

@@ -51,7 +51,7 @@ def execute(pagename, request):
         if subscribers:
             request.write(f.paragraph(1))
             request.write(f.text(_('The following users subscribed to this page:')))
-            for lang in subscribers.keys():
+            for lang in subscribers:
                 request.write(f.linebreak(), f.text('[%s] ' % lang))
                 for user in subscribers[lang]:
                     # do NOT disclose email addr, only WikiName

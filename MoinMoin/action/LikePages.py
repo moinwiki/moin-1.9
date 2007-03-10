@@ -102,7 +102,7 @@ def findMatches(pagename, request, s_re=None, e_re=None,):
 
     # Filter deleted pages or pages the user can't read from
     # matches. Order is important!
-    for name in matches.keys():
+    for name in matches:
         page = Page(request, name)
         if not (page.exists() and request.user.may.read(name)):
             del matches[name]
