@@ -60,7 +60,7 @@ class PluginScript(MoinScript):
 
         pageSets[ALL] = langPages
 
-        for name in pageSets:
+        for name in pageSets.keys():
             if name not in (u"English"):
                 pageSets[name] -= pageSets[u"English"]
                 pageSets[name] -= nodistPages
